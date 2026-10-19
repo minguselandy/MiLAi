@@ -8,8 +8,13 @@ M4:216actualstates/204devlabels,742candidate matches, trainfileEMPTY;10uncertain
 5extra operations in4messages (4READ/1REFRESH); separate original corroboration from old-answer
 reads. Operationwall7.61s plus followingdecision67.85s are observed costs, not netcounterfactual savings.
 5emptyhandoffs allolddev with8steps/availableacquisition:4unfulfilled/1length.3failuresbeforecontroller.
-Auditcompute remains pending whileV10live. Prefix72baseline exports prepared from4closedfamilies;
-semantic baseline review NOT started. Revalidate driver rather than using historical progress count.
+Auditcompute remains pending whileV10live. Prefix72baseline task review complete onA19/A32/B30/C03:
+fixed17C/5W/1length/1qualified; rules16C/1W/4qualified/1length/2incomplete;
+generative5C/15unfulfilled/2length/1qualified/1W. Each24positions, not full8family selection.
+Gen tokens262454/419270/356207; messagewall991.24/1102.21/1013.97s, unknown0.
+All72no semantic/revocation/business effects or businessqueries; rules22delivered/23refresh,
+generative6delivered/7refresh. Baseline viewsemantic audit stillpending. Last92/144closed;
+revalidate live driver rather than using historical progress count. Prefix72-results-v1 is authoritative.
 
 Only live coordinator PID1651723/exec59686; active child2234237 memops-dev-baselines-v1.
 Revalidate reviewed-followups-dispatch-v10.json and actual/proc commands. Never restart live queues.

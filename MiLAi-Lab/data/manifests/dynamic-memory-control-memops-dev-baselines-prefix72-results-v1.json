@@ -1,0 +1,2417 @@
+{
+  "status": "FIRST4_FAMILIES_ALL3_BASELINES_REVIEWED_REMAINDER_PENDING",
+  "reviewer": "Codex author, exposed development, same registered source-faithfulness criteria across all methods; not blinded or independent.",
+  "records": [
+    {
+      "family": "memops_A19",
+      "policy": "fixed_context",
+      "step": "stage-0",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied.",
+      "answer": "According to the conversation history provided, your current primary emergency contact for both **work** and **CoreFit** is your sister, **Karen Liu**.\n\n*   **Work:** You reported switching your contact from your mother (Diane Liu) to Karen Liu approximately a week after the initial March submission, stating that you went back to HR to update it.\n*   **CoreFit:** You listed Karen Liu as your emergency contact when you signed up for CoreFit in mid-March.\n*   **Phone Number:** No phone number has been supplied for Karen Liu. You mentioned in the latest report that you would give it to you \"in a bit,\" but it has not been provided yet.\n\n**Distinguished Reports:**\n*   **Diane Liu:** Former primary contact for work (Phone: 520-334-7190). This was replaced by Karen.\n*   **Karen Liu:** Current primary contact for work and CoreFit. Phone number is pending.",
+      "control_path": [
+        "search",
+        "context_0",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 7470,
+          "charged_tokens": 7470,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 29.56949737481773,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/fixed_context/banks/77afd419-2161-43cb-bbd8-02a2e8fff7ce/5b76caa2-ed32-4178-8935-26f397923ff6-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/fixed_context/banks/77afd419-2161-43cb-bbd8-02a2e8fff7ce/5b76caa2-ed32-4178-8935-26f397923ff6-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A19",
+      "policy": "fixed_context",
+      "step": "stage-0-repeat",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied.",
+      "answer": "Based on your latest confirmed reports:\n\n• **Current Primary Emergency Contact (Work & CoreFit):** Karen Liu.\n  - *Completed Changes:* You formally updated your work contact back in HR around mid-March, switching it from your mother (Diane Liu) to Karen. You also listed Karen as your contact when you signed up for CoreFit in mid-March.\n• **Phone Number Actually Supplied:** None.\n  - While Diane Liu's landline (520-334-7190) was provided for the original work form, no phone number has been supplied for Karen Liu. You noted in your most recent message that you would provide her number \"in a bit,\" but it remains pending.",
+      "control_path": [
+        "search",
+        "context_1",
+        "read_0",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 7264,
+          "charged_tokens": 7264,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 25.261839381419122,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/fixed_context/banks/77afd419-2161-43cb-bbd8-02a2e8fff7ce/27c544a2-f446-43df-ae54-b84063b95125-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/fixed_context/banks/77afd419-2161-43cb-bbd8-02a2e8fff7ce/27c544a2-f446-43df-ae54-b84063b95125-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A19",
+      "policy": "fixed_context",
+      "step": "stage-1",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied.",
+      "answer": "Based on your latest confirmed reports, your current primary emergency contact for both work and CoreFit is **Priya Nair**.\n\nYou stated that you updated this contact at both HR and the gym last week when you switched from Karen Liu because Karen was leaving for a medical mission trip.\n\n**Supplied Phone Number:**\n*   **Priya Nair:** 503-772-4415\n\n**Distinguished Changes (Completed vs. Proposed/Former):**\n*   **Priya Nair (Current, Completed):** Primary contact for work and CoreFit as of last week. (Phone: 503-772-4415)\n*   **Karen Liu (Former, Completed):** Primary contact for work and CoreFit from mid-March until last week. (Phone: 503-461-2283)\n*   **Diane Liu (Former, Completed):** Initial contact for work in early March before the switch to Karen. (Phone: 520-334-7190)\n*   **Marcus Webb (Former, Removed):** You noted having an ex-boyfriend listed at a dentist office two years ago and having him removed immediately. He is not a current contact.",
+      "control_path": [
+        "search",
+        "context_1",
+        "context_2",
+        "context_5",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 9520,
+          "charged_tokens": 9520,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 29.50369542557746,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/fixed_context/banks/77afd419-2161-43cb-bbd8-02a2e8fff7ce/864fba46-e46b-48b7-af79-65253f4b43d1-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/fixed_context/banks/77afd419-2161-43cb-bbd8-02a2e8fff7ce/864fba46-e46b-48b7-af79-65253f4b43d1-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A19",
+      "policy": "fixed_context",
+      "step": "stage-1-repeat",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied.",
+      "answer": "Based on your latest confirmed reports, your current primary emergency contact for both work and CoreFit is your coworker, **Priya Nair**.\n\n* **Phone Number Actually Supplied:** 503-772-4415\n\n**Distinguished Changes (Completed vs. Former/Proposed):**\n* **Priya Nair (Current, Completed Primary):** You updated this contact at both HR and the gym last week. This change was made because Karen Liu was leaving for a two-week medical mission trip overseas. Priya has confirmed she is reliable and will keep her phone on loud.\n* **Karen Liu (Former Primary, Completed):** Your sister (Phone: 503-461-2283) served as your primary contact for work and CoreFit from mid-March until last week.\n* **Diane Liu (Former Primary, Completed):** Your mother (Phone: 520-334-7190) was the initial contact listed in early March before you switched to Karen.\n* **Marcus Webb (Removed/Not Current):** You mentioned having an ex-boyfriend listed at a dentist office from years ago, but you had him removed immediately. He is not a current contact.",
+      "control_path": [
+        "search",
+        "context_2",
+        "context_3",
+        "context_4",
+        "read_1",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 12229,
+          "charged_tokens": 12229,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 44.51819384843111,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/fixed_context/banks/77afd419-2161-43cb-bbd8-02a2e8fff7ce/8e0712a7-78f2-464a-8606-ba20ca6291c3-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/fixed_context/banks/77afd419-2161-43cb-bbd8-02a2e8fff7ce/8e0712a7-78f2-464a-8606-ba20ca6291c3-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A19",
+      "policy": "fixed_context",
+      "step": "stage-2",
+      "label": "wrong",
+      "full_task_success": false,
+      "note": "Retains Priya as current primary after the completed switch back to Karen; also denies pending secondary/proposed changes.",
+      "answer": "According to your latest confirmed reports, your current primary emergency contact for both work and CoreFit is **Priya Nair**.\n\n**Supplied Phone Number:**\n*   **Priya Nair:** 503-772-4415\n\n**Distinguished Completed Changes:**\n*   **Priya Nair (Current Primary):** Updated last week at both HR and CoreFit to serve as your temporary primary contact while Karen is overseas on a medical mission. (Phone: 503-772-4415)\n*   **Karen Liu (Former Primary):** Updated around mid-March at both HR and CoreFit after you switched from your mother. (Phone: 503-461-2283)\n*   **Diane Liu (Initial Primary):** Listed in early March before the switch to Karen. (Phone: 520-334-7190)\n\nNo proposed or pending contacts were mentioned; all listed changes to date have been completed across your active forms.",
+      "control_path": [
+        "search",
+        "context_1",
+        "context_2",
+        "context_4",
+        "context_5",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 9651,
+          "charged_tokens": 9651,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 24.459171133115888,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/fixed_context/banks/77afd419-2161-43cb-bbd8-02a2e8fff7ce/b6cc88fa-84e9-4285-91fe-fdf2f446f4f4-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/fixed_context/banks/77afd419-2161-43cb-bbd8-02a2e8fff7ce/b6cc88fa-84e9-4285-91fe-fdf2f446f4f4-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A19",
+      "policy": "fixed_context",
+      "step": "stage-2-repeat",
+      "label": "wrong",
+      "full_task_success": false,
+      "note": "Retains Priya as current primary after the completed switch back to Karen; also denies pending secondary/proposed changes.",
+      "answer": "Based on your latest confirmed reports, your current primary emergency contact for both work and CoreFit is your coworker, **Priya Nair**.\n\n**Phone Number Actually Supplied:**\n* **Priya Nair:** 503-772-4415\n\n**Distinguished Completed Changes & Contacts:**\n* **Priya Nair (Current, Completed Primary):** Updated last week at both HR and CoreFit to serve as your primary contact while Karen is overseas on a medical mission. (Phone: 503-772-4415)\n* **Karen Liu (Former Primary, Completed):** Your sister served as your primary contact for work and CoreFit from mid-March until last week. (Phone: 503-461-2283)\n* **Diane Liu (Initial Primary, Completed):** Your mother was the initial contact listed in early March. (Phone: 520-334-7190)\n* **Marcus Webb (Removed):** You noted having an ex-boyfriend listed at a dentist office from years ago, but you had that record removed immediately. He is not a current contact.\n\nNo proposed, pending, or secondary contacts were mentioned in your latest reports; all listed changes have been completed across your active forms.",
+      "control_path": [
+        "search",
+        "context_0",
+        "context_2",
+        "context_5",
+        "context_6",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 16866,
+          "charged_tokens": 16866,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 66.68129349686205,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/fixed_context/banks/77afd419-2161-43cb-bbd8-02a2e8fff7ce/9e00d750-9f98-4baa-bd9d-9e3d6502d04c-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/fixed_context/banks/77afd419-2161-43cb-bbd8-02a2e8fff7ce/9e00d750-9f98-4baa-bd9d-9e3d6502d04c-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A19",
+      "policy": "rules",
+      "step": "stage-0",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied.",
+      "answer": "Based on your latest reports, your current primary emergency contact for both work and CoreFit is your older sister, **Karen Liu**.\n\n**Completed Changes vs. Initial/Proposed Contacts:**\n* **Initial Contact (Work):** You initially listed your mom, **Diane Liu**, on your emergency contact form in early March (around March 4th or 5th) during the HR system migration.\n* **Completed Update (Work):** About a week after that initial submission, you formally updated your work emergency contact from Diane Liu to Karen Liu because Karen lives in Portland, is reliable, and actually answers her phone.\n* **CoreFit Contact:** When you signed up for CoreFit in mid-March, you listed **Karen Liu** as your emergency contact to maintain consistency with your work records. \n\n**Supplied Phone Number:**\n* **Karen Liu:** No phone number has been supplied for Karen in these reports. You indicated you would provide her number \"in a bit.\"\n* **Diane Liu:** The only phone number explicitly provided in your reports belongs to your superseded contact, Diane Liu, whose Tucson landline was listed as **520-334-7190** on the original form.",
+      "control_path": [
+        "search",
+        "context_0",
+        "refresh_view",
+        "handoff"
+      ],
+      "handoff_reason": "no_available_operation",
+      "cost": {
+        "generation": {
+          "known_tokens": 9440,
+          "charged_tokens": 9440,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 25.133611848577857,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/rules/banks/e7328efe-4d58-4225-9a00-94e4e5575c05/ed764bac-52dc-4127-af0b-624aa534da79-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/rules/banks/e7328efe-4d58-4225-9a00-94e4e5575c05/ed764bac-52dc-4127-af0b-624aa534da79-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A19",
+      "policy": "rules",
+      "step": "stage-0-repeat",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied.",
+      "answer": "Based on your latest confirmed reports, your current primary emergency contact for both work and CoreFit is your older sister, **Karen Liu**.\n\n**Completed Changes vs. Initial/Proposed Contacts:**\n* **Work:** You initially listed your mom, Diane Liu, in early March during the HR system migration. About a week later, you completed a formal update switching your primary emergency contact to Karen Liu because she lives in Portland and is more reliable for emergencies.\n* **CoreFit:** You listed Karen Liu as your emergency contact during your mid-March sign-up to maintain consistency with your updated work information.\n* **Proposed/Secondary Contacts:** No other primary or secondary contacts have been formally listed or proposed in these reports beyond the initial Diane Liu submission and the subsequent completed update to Karen Liu.\n\n**Supplied Phone Number:**\n* **Karen Liu:** No phone number has been supplied for Karen in the confirmed reports. You indicated you would provide it at a later time, so it remains unprovided/unknown.\n* **Diane Liu:** The only phone number explicitly supplied in your records belongs to your previous contact (520-334-7190), but this reflects the superseded initial form and does not apply to your current primary contact.",
+      "control_path": [
+        "search",
+        "context_1",
+        "read_0",
+        "refresh_view",
+        "handoff"
+      ],
+      "handoff_reason": "no_available_operation",
+      "cost": {
+        "generation": {
+          "known_tokens": 15900,
+          "charged_tokens": 15900,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 56.976819342933595,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/rules/banks/e7328efe-4d58-4225-9a00-94e4e5575c05/3675cb55-d5d2-4630-a7c0-22c84e7349fa-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/rules/banks/e7328efe-4d58-4225-9a00-94e4e5575c05/3675cb55-d5d2-4630-a7c0-22c84e7349fa-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A19",
+      "policy": "rules",
+      "step": "stage-1",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied.",
+      "answer": "Based on your latest confirmed reports, your current primary emergency contact for both work and CoreFit is your coworker, **Priya Nair**.\n\n**Phone Number:**\n* **Priya Nair:** 503-772-4415\n\n**Distinguishing Completed Changes:**\n* **Current Status:** You recently completed a change to list **Priya Nair** as your primary contact for both work and CoreFit, as your previous contact (Karen Liu) was leaving for a two-week medical mission.\n* **Previous Contact (Work & CoreFit):** **Karen Liu** was the primary contact before Priya. She lives in Portland and is generally reliable. Her supplied phone number is 503-461-2283.\n* **Initial Contact (Work):** **Diane Liu** (your mother) was the very first contact listed during the HR system migration in early March. Her supplied phone number was 520-334-7190. This was superseded by the update to Karen Liu.\n* **Removed Contact:** **Marcus Webb** (your ex-boyfriend) was found on a dental record and was explicitly removed on April 20th; he is not listed as a current or proposed contact.",
+      "control_path": [
+        "search",
+        "context_1",
+        "context_2",
+        "context_5",
+        "refresh_view",
+        "handoff"
+      ],
+      "handoff_reason": "no_available_operation",
+      "cost": {
+        "generation": {
+          "known_tokens": 15942,
+          "charged_tokens": 15942,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 29.98250162322074,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/rules/banks/e7328efe-4d58-4225-9a00-94e4e5575c05/9348d02b-4f84-4855-b587-b0b374ec0595-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/rules/banks/e7328efe-4d58-4225-9a00-94e4e5575c05/9348d02b-4f84-4855-b587-b0b374ec0595-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A19",
+      "policy": "rules",
+      "step": "stage-1-repeat",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied.",
+      "answer": "Based on your latest confirmed reports, your current primary emergency contact for both work and CoreFit is your coworker, **Priya Nair**. Her supplied phone number is **503-772-4415**.\n\nHere is the breakdown of your completed changes versus previous records:\n\n* **Completed Update (Current):** You updated your primary emergency contact to **Priya Nair** last week for both your workplace HR system and your CoreFit gym membership. This was done because Karen was going on a two-week medical mission trip. Priya's number is **503-772-4415**.\n* **Superseded Update (Previous):** **Karen Liu** was your primary contact for both work and CoreFit prior to last week. Her supplied number is **503-461-2283**.\n* **Initial Submission (Work):** **Diane Liu** was your initial emergency contact listed in early March during an HR system migration. Her supplied landline was **520-334-7190**, but this was formally superseded by the update to Karen Liu about a week later.\n* **Removed Records:** **Marcus Webb** (an ex-boyfriend) was found on dental records on April 20th and was immediately removed. He is not a current or proposed contact.\n\nThere are no outstanding proposed primary or secondary contacts in your active records.",
+      "control_path": [
+        "search",
+        "context_2",
+        "context_3",
+        "context_4",
+        "read_1",
+        "refresh_view",
+        "handoff"
+      ],
+      "handoff_reason": "no_available_operation",
+      "cost": {
+        "generation": {
+          "known_tokens": 16904,
+          "charged_tokens": 16904,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 31.602305478416383,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/rules/banks/e7328efe-4d58-4225-9a00-94e4e5575c05/42869f93-836a-411a-b24e-2490b4f78b40-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/rules/banks/e7328efe-4d58-4225-9a00-94e4e5575c05/42869f93-836a-411a-b24e-2490b4f78b40-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A19",
+      "policy": "rules",
+      "step": "stage-2",
+      "label": "wrong",
+      "full_task_success": false,
+      "note": "Retains Priya as current primary after the completed switch back to Karen; also denies pending secondary/proposed changes.",
+      "answer": "Based on your latest confirmed reports, your current primary emergency contact for both work and CoreFit is your coworker, **Priya Nair**. Her supplied phone number is **503-772-4415**.\n\n**Distinguishing Completed Changes:**\n* **Current Status (Completed Update):** You updated both your workplace HR system and your CoreFit gym membership to list **Priya Nair** as your primary contact last week because Karen was leaving for a two-week medical mission trip overseas.\n* **Previous Primary (Superseded Update):** **Karen Liu** was your primary contact for both work and CoreFit prior to last week. Her supplied phone number is **503-461-2283**.\n* **Initial Submission (Superseded):** **Diane Liu** (your mother) was the very first contact listed in early March during the HR system migration. Her supplied landline was **520-334-7190**, but this was formally superseded by the update to Karen Liu about a week later.\n* **Removed Contact:** **Marcus Webb** (an ex-boyfriend) was found on dental records on April 20th and was immediately removed. He is not a current or proposed contact.\n\nThere are no outstanding proposed primary or secondary contacts in your active records.",
+      "control_path": [
+        "search",
+        "context_1",
+        "context_2",
+        "context_4",
+        "context_5",
+        "refresh_view"
+      ],
+      "handoff_reason": "operation_outcome_unknown",
+      "cost": {
+        "generation": {
+          "known_tokens": 20260,
+          "charged_tokens": 20260,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 42.72729699499905,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/rules/banks/e7328efe-4d58-4225-9a00-94e4e5575c05/740b67ce-8bd0-4795-924e-f8d2e17b7ace-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/rules/banks/e7328efe-4d58-4225-9a00-94e4e5575c05/740b67ce-8bd0-4795-924e-f8d2e17b7ace-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A19",
+      "policy": "rules",
+      "step": "stage-2-repeat",
+      "label": "qualified",
+      "full_task_success": false,
+      "note": "Current Karen/phone, aborted Tom and unsubmitted secondary are correct, but claims Priya served for a two-week period. The source only planned two weeks and explicitly reports Karen returned early; completed duration is unsupported.",
+      "answer": "Based on your latest confirmed reports, your current primary emergency contact for both work and CoreFit is your older sister, **Karen Liu**. The phone number you have actually supplied and verified for her is **503-461-2283**.\n\n**Distinguishing Completed Changes & Other Contacts:**\n* **Completed Update (Current):** You recently completed a change to list **Karen Liu** as your primary contact for both work and CoreFit after she returned early from her medical mission trip, superseding the temporary switch.\n* **Superseded Temporary Contact:** **Priya Nair** (supplied phone: **503-772-4415**) served as your primary contact for a two-week period while Karen was on her mission.\n* **Proposed Contact:** **Tom Brennan** (supplied phone: **503-889-3102**) was proposed as a primary contact by you, but the switch was never completed.\n* **Potential Secondary Contact:** **Priya Nair** was considered as a candidate for a secondary emergency contact at work, but this has not been formally submitted to HR.\n* **Historical & Removed Records:** **Diane Liu** (supplied phone: **520-334-7190**) was your initial contact from early March, formally superseded by the update to Karen. Additionally, **Marcus Webb** was discovered on a dentist record on April 20th and was immediately removed from your records.",
+      "control_path": [
+        "search",
+        "context_1",
+        "context_2",
+        "context_5",
+        "context_6",
+        "refresh_view",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 21950,
+          "charged_tokens": 21950,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 39.74738834332675,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/rules/banks/e7328efe-4d58-4225-9a00-94e4e5575c05/32718260-f0b6-47e7-9cd7-ace95036392c-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/rules/banks/e7328efe-4d58-4225-9a00-94e4e5575c05/32718260-f0b6-47e7-9cd7-ace95036392c-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A19",
+      "policy": "generative",
+      "step": "stage-0",
+      "label": "unfulfilled",
+      "full_task_success": false,
+      "note": "Does not answer the source-contained question, instead reports absent/empty records. System failure regardless of whether the local delivery was empty.",
+      "answer": "Based on the current delivered evidence, there are no identified primary emergency contacts or phone numbers for work and CoreFit. No completed changes, proposed primary contacts, or secondary contacts were found in the available records.",
+      "control_path": [
+        "search",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 11048,
+          "charged_tokens": 11048,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 41.98282468877733,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/generative/banks/3b78c17f-70a6-421f-af0e-48976c2bbbe3/7db0fc79-be8f-4f30-92df-222356f62bd8-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/generative/banks/3b78c17f-70a6-421f-af0e-48976c2bbbe3/7db0fc79-be8f-4f30-92df-222356f62bd8-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A19",
+      "policy": "generative",
+      "step": "stage-0-repeat",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied.",
+      "answer": "Based on the confirmed reports, your current primary emergency contact for both work and CoreFit is Karen Liu (your older sister).\n\n- **Completed Changes:** The change from your mother, Diane Liu, to Karen Liu was a completed and updated change for work, processed by HR approximately one week after the initial March submission. Karen was also listed as the contact for CoreFit around mid-March. There are no reported proposed or secondary contacts in the available records.\n\n- **Phone Number Supplied:** No phone number has been supplied for Karen Liu in the provided reports. The only phone number explicitly recorded in your history is Diane Liu's Tucson landline (520-334-7190), which was associated with the original contact before the change was finalized.",
+      "control_path": [
+        "refresh_view",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 16406,
+          "charged_tokens": 16406,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 35.49438050482422,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/generative/banks/3b78c17f-70a6-421f-af0e-48976c2bbbe3/153e7eae-968a-4511-ae12-91203ab7020c-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/generative/banks/3b78c17f-70a6-421f-af0e-48976c2bbbe3/153e7eae-968a-4511-ae12-91203ab7020c-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A19",
+      "policy": "generative",
+      "step": "stage-1",
+      "label": "unfulfilled",
+      "full_task_success": false,
+      "note": "Does not answer the source-contained question, instead reports absent/empty records. System failure regardless of whether the local delivery was empty.",
+      "answer": "Based on the delivered evidence, there is no record of a primary emergency contact or phone number for work and CoreFit. No contacts (primary, secondary, or proposed) or phone numbers are currently available.",
+      "control_path": [
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 18986,
+          "charged_tokens": 18986,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 86.4676650557667,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/generative/banks/3b78c17f-70a6-421f-af0e-48976c2bbbe3/eaafc106-631e-49e2-8aad-3514e8317742-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/generative/banks/3b78c17f-70a6-421f-af0e-48976c2bbbe3/eaafc106-631e-49e2-8aad-3514e8317742-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A19",
+      "policy": "generative",
+      "step": "stage-1-repeat",
+      "label": "unfulfilled",
+      "full_task_success": false,
+      "note": "Does not answer the source-contained question, instead reports absent/empty records. System failure regardless of whether the local delivery was empty.",
+      "answer": "Based on the current system records, there is no primary emergency contact or phone number confirmed for work or CoreFit. The available evidence indicates no completed changes, proposals, or secondary contacts are currently on file.",
+      "control_path": [
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 12516,
+          "charged_tokens": 12516,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 44.69279838819057,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/generative/banks/3b78c17f-70a6-421f-af0e-48976c2bbbe3/5d43aa36-9ab7-409d-95c7-40b9611afcf4-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/generative/banks/3b78c17f-70a6-421f-af0e-48976c2bbbe3/5d43aa36-9ab7-409d-95c7-40b9611afcf4-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A19",
+      "policy": "generative",
+      "step": "stage-2",
+      "label": "unfulfilled",
+      "full_task_success": false,
+      "note": "Does not answer the source-contained question, instead reports absent/empty records. System failure regardless of whether the local delivery was empty.",
+      "answer": "Based on the current available records and confirmed reports, there is no primary emergency contact or phone number currently on file or saved in memory for you or CoreFit. The maintenance receipts indicate no committed semantic saves or mutation effects regarding emergency contacts, meaning there are no completed changes or active arrangements to report. Any proposed, historical, or unconfirmed contact information is currently unknown or not retained in the confirmed reports.",
+      "control_path": [
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 11244,
+          "charged_tokens": 11244,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 22.129997204057872,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/generative/banks/3b78c17f-70a6-421f-af0e-48976c2bbbe3/cdcb19a6-142b-475a-b757-4aa49d8edc74-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/generative/banks/3b78c17f-70a6-421f-af0e-48976c2bbbe3/cdcb19a6-142b-475a-b757-4aa49d8edc74-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A19",
+      "policy": "generative",
+      "step": "stage-2-repeat",
+      "label": "unfulfilled",
+      "full_task_success": false,
+      "note": "Does not answer the source-contained question, instead reports absent/empty records. System failure regardless of whether the local delivery was empty.",
+      "answer": "Based on the available evidence and receipts, no current primary emergency contact or phone number for work or CoreFit has been identified. The evidence queries returned no results, and no semantic records are visible to distinguish between completed, proposed, or secondary contacts.",
+      "control_path": [
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 13877,
+          "charged_tokens": 13877,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 35.815014366060495,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/generative/banks/3b78c17f-70a6-421f-af0e-48976c2bbbe3/8331a761-8020-417d-9baa-5422a8e127b3-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/generative/banks/3b78c17f-70a6-421f-af0e-48976c2bbbe3/8331a761-8020-417d-9baa-5422a8e127b3-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A32",
+      "policy": "fixed_context",
+      "step": "stage-0",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied.",
+      "answer": "Based on your messages, the choices you've made reflect a pattern of centralization, orderliness, and reactive security. You prefer maintaining a single, deeply integrated email address for all personal and financial activities, while placing a high value on digital tidiness and visual organization.\n\n**Completed changes:**\n* **Inbox cleanup (March 16):** You successfully unsubscribed from promotional emails and reduced your unread count from approximately 4,000 to around 200.\n* **Security escalation (April 2):** After a suspicious login lockout, you immediately reset your password.\n* **Two-Factor Authentication:** You enabled 2FA for your account afterward, linking it to a recovery phone number ending in 4738.\n\n**Primary provider:**\nYour primary email provider remains **Gmail** (`marcus.t.holloway@gmail.com`). While we discussed using labels and color-coding for organization, and I offered suggestions for filter rules or migration strategies, no migration or provider change has actually occurred.",
+      "control_path": [
+        "search",
+        "context_0",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 9008,
+          "charged_tokens": 9008,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 40.17362770345062,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/fixed_context/banks/88ed45e8-0042-418a-a674-0485b5903275/89793e8b-6cfd-41df-a3a9-160364a5c14c-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/fixed_context/banks/88ed45e8-0042-418a-a674-0485b5903275/89793e8b-6cfd-41df-a3a9-160364a5c14c-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A32",
+      "policy": "fixed_context",
+      "step": "stage-0-repeat",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied.",
+      "answer": "Based on your reports, the patterns, completed changes, and primary provider are as follows:\n\n**Pattern Supported**\nYour email-related choices reflect a pattern of **centralization**, **orderliness**, and **reactive security**. You prefer keeping a single, deeply integrated email address for all activities while placing a high value on digital tidiness and visual organization.\n\n**Completed Changes**\nYou have actually completed the following actions:\n*   **Inbox Cleanup (March 16):** You spent a Saturday unsubscribing from promotional emails, reducing your unread count from approximately 4,000 to 200.\n*   **Password Change (April 2):** Following a suspicious login attempt, you immediately changed your password upon regaining access.\n*   **Two-Factor Authentication (Post-April 2):** You enabled 2FA and linked it to your recovery phone number (ending in 4738). (Note: You mentioned this was something you \"should've set up years ago,\" but the enabling itself is a reported action that has occurred.)\n\n**Primary Provider**\nYour primary email provider remains **Gmail** (`marcus.t.holloway@gmail.com`). While I previously suggested strategies for filters or migration, no such migration has taken place; you are still using the same Gmail account.",
+      "control_path": [
+        "search",
+        "context_1",
+        "read_0",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 11396,
+          "charged_tokens": 11396,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 52.675779829733074,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/fixed_context/banks/88ed45e8-0042-418a-a674-0485b5903275/c225533b-7498-4f5d-84d7-64d1aecfb044-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/fixed_context/banks/88ed45e8-0042-418a-a674-0485b5903275/c225533b-7498-4f5d-84d7-64d1aecfb044-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A32",
+      "policy": "fixed_context",
+      "step": "stage-1",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied.",
+      "answer": "Based on your provided history, here is the breakdown of your email-related choices, strictly separating completed actions from intentions and external proposals:\n\n**Pattern Supported**\nYour choices support a pattern of **centralization**, **orderliness**, and **reactive security**:\n*   *Centralization:* You prefer maintaining a single, highly integrated email address for all aspects of your digital life to avoid the hassle of managing multiple accounts.\n*   *Orderliness:* You place a high value on digital tidiness and visual organization (e.g., using labels and color-coding).\n*   *Reactive Security:* You tend to implement stricter security protocols only after experiencing a direct breach or lockout, rather than enacting them preemptively.\n\n**Actually Completed Changes**\n1.  **Inbox Cleanup (March 16):** You dedicated a Saturday to unsubscribing from promotional emails, reducing your unread inbox from approximately 4,000 to about 200.\n2.  **Password Reset (April 2):** Following a six-hour account lockout caused by a suspicious login attempt from Southeast Asia, you immediately changed your password upon regaining access.\n3.  **Two-Factor Authentication (Post-April 2):** You enabled 2FA for your account and linked it to your current mobile phone number ending in 4738.\n\n**Primary Provider**\nYour primary provider remains **Gmail** (`marcus.t.holloway@gmail.com`). Although your friend Danielle has been persistently proposing you switch to ProtonMail for privacy reasons, you have explicitly decided against it because the migration workload—updating banking, medical, and subscription services—is too overwhelming.\n\n**Intended or Pending Actions (Not Yet Completed)**\n*   **Auditing Connected Apps:** Prompted by your brother Kevin's recent Yahoo phishing scare, you recognized the need to review the connected apps list on your Gmail, but you have not done this yet.\n*   **Setting Up Alerts:** You have expressed an intention to set up alerts for suspicious activity, but this remains a future plan.",
+      "control_path": [
+        "search",
+        "context_1",
+        "context_2",
+        "context_4",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 9919,
+          "charged_tokens": 9919,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 33.10661142319441,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/fixed_context/banks/88ed45e8-0042-418a-a674-0485b5903275/3d62e54f-bb59-44b5-aeb6-f64e493d7524-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/fixed_context/banks/88ed45e8-0042-418a-a674-0485b5903275/3d62e54f-bb59-44b5-aeb6-f64e493d7524-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A32",
+      "policy": "fixed_context",
+      "step": "stage-1-repeat",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied.",
+      "answer": "Based on your email history, your choices, completed changes, and primary provider are as follows:\n\n**Pattern Supported**\nYour email-related choices reflect a pattern of **centralization**, **orderliness**, and **reactive security**:\n*   **Centralization:** You prefer maintaining a single, deeply integrated email address for all personal, financial, and social activities to avoid the hassle of managing multiple accounts.\n*   **Orderliness:** You place a high value on digital tidiness and visual organization, finding satisfaction in a structured inbox (e.g., using labels and color-coding).\n*   **Reactive Security:** You tend to implement stricter security protocols only after experiencing a direct breach or lockout, rather than enacting them preemptively.\n\n**Actually Completed Changes**\nYou have actually completed the following actions:\n*   **Inbox Cleanup (March 16):** You dedicated a Saturday to unsubscribing from promotional emails, successfully reducing your unread inbox from approximately 4,000 to about 200.\n*   **Password Reset (April 2):** Following a six-hour account lockout caused by a suspicious login attempt from Southeast Asia, you immediately changed your password upon regaining access.\n*   **Two-Factor Authentication (Post-April 2):** You enabled 2FA for your account and linked it to your current mobile phone number (ending in 4738).\n\n**Primary Provider**\nYour primary provider remains **Gmail** (`marcus.t.holloway@gmail.com`). You have been using it since 2014 and remain heavily committed to it because of the thousands of linked accounts (banking, insurance, subscriptions, etc.). \n\n**Note on Pending/Rejected Actions**\n*   **Migration:** Despite your friend Danielle's persistent advocacy to switch to ProtonMail for better privacy, you have decided against it due to the overwhelming workload of migrating your current accounts. No migration has taken place.\n*   **Intended Audits:** Prompted by your brother's recent phishing scare, you have expressed an intention to review your Gmail's connected apps list and set up alerts for suspicious activity, but these remain future plans and have not yet been completed.",
+      "control_path": [
+        "search",
+        "context_1",
+        "context_3",
+        "context_4",
+        "read_2",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 9327,
+          "charged_tokens": 9327,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 24.51247413083911,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/fixed_context/banks/88ed45e8-0042-418a-a674-0485b5903275/d173492c-e4b1-4495-84f6-73ec5c1f3945-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/fixed_context/banks/88ed45e8-0042-418a-a674-0485b5903275/d173492c-e4b1-4495-84f6-73ec5c1f3945-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A32",
+      "policy": "fixed_context",
+      "step": "stage-2",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied.",
+      "answer": "Based on your records, here is the breakdown of your email-related choices, strictly separating completed actions from intentions and external proposals:\n\n**Pattern Supported**\nYour choices support a pattern of **centralization**, **orderliness**, and **reactive security**:\n* *Centralization:* You prefer maintaining a single, highly integrated email address for all aspects of your digital life to avoid the hassle of managing multiple accounts.\n* *Orderliness:* You place a high value on digital tidiness and visual organization (e.g., using labels and color-coding).\n* *Reactive Security:* You tend to implement stricter security protocols only after experiencing a direct breach, lockout, or hearing about a family member's incident, rather than enacting them preemptively.\n\n**Actually Completed Changes**\nYou have actually completed the following actions:\n1. *Inbox Cleanup (March 16):* You dedicated a Saturday to unsubscribing from promotional emails, reducing your unread inbox from approximately 4,000 to about 200.\n2. *Password Reset (April 2):* Following a six-hour account lockout caused by a suspicious login attempt from Southeast Asia, you immediately changed your password upon regaining access.\n3. *Two-Factor Authentication (Post-April 2):* You enabled 2FA for your account and linked it to your current mobile phone number ending in 4738.\n4. *Connected Apps Audit (Most Recent):* You completed a review of your connected apps and revoked access for about eight old services, including a game from 2017.\n\n**Primary Provider**\nYour primary provider remains **Gmail** (`marcus.t.holloway@gmail.com`). You have been using it as your central hub and explicitly prefer not to deal with the overwhelming workload of migrating banking, medical, and subscription accounts.\n\n**Distinguished Intentions & External Proposals (Not Yet Completed)**\n* *ProtonMail Proposal:* Your friend Danielle has been advocating for you to switch and has already set up a ProtonMail address (`marcus.t.holloway@proton.me`) for you. However, you have explicitly stated you are not agreeing to use it as your primary provider. It remains an unadopted, experimental setup.\n* *Security Alerts:* Prompted by your brother Kevin's recent phishing scare, you recognized the need to set up alerts for suspicious activity. While you finished the connected apps audit, setting up these alerts remains a future plan and has not been completed yet.",
+      "control_path": [
+        "search",
+        "context_1",
+        "context_2",
+        "context_4",
+        "context_5",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 14756,
+          "charged_tokens": 14756,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 55.862819659523666,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/fixed_context/banks/88ed45e8-0042-418a-a674-0485b5903275/30ae64dd-86b6-43f6-b673-69649343e4a3-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/fixed_context/banks/88ed45e8-0042-418a-a674-0485b5903275/30ae64dd-86b6-43f6-b673-69649343e4a3-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A32",
+      "policy": "fixed_context",
+      "step": "stage-2-repeat",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied.",
+      "answer": "Based on your records, here is the breakdown strictly separating completed actions from intentions and proposals:\n\n**Pattern Supported**\nYour email-related choices reflect a pattern of **centralization**, **orderliness**, and **reactive security**:\n* **Centralization:** You prefer maintaining a single, highly integrated email address for all personal, financial, and social activities to avoid the hassle of managing multiple accounts.\n* **Orderliness:** You place a high value on digital tidiness and visual organization, finding satisfaction in a structured inbox using Gmail's labels and color-coding.\n* **Reactive Security:** You tend to implement stricter security protocols only after experiencing a direct breach, lockout, or hearing about a family member's incident, rather than enacting them preemptively.\n\n**Actually Completed Changes**\nYou have successfully completed the following actions:\n1. **Inbox Cleanup (March 16):** Dedicated a Saturday to unsubscribing from promotional emails, reducing your unread count from approximately 4,000 to ~200.\n2. **Password Reset (April 2):** Immediately changed your password following a six-hour account lockout caused by a suspicious login attempt from Southeast Asia.\n3. **Two-Factor Authentication (Post-April 2):** Enabled 2FA and linked it to your current mobile phone number ending in 4738.\n4. **Connected Apps Audit (Most Recent):** Completed a full review of connected applications and revoked access for about eight old services, including a game from 2017.\n\n**Primary Provider**\nYour primary provider remains **Gmail** (`marcus.t.holloway@gmail.com`). You have used this account since 2014 and explicitly prefer not to deal with the overwhelming workload of migrating thousands of linked banking, medical, and subscription accounts.\n\n**Distinguished Intentions & External Proposals (Not Yet Completed)**\n* **ProtonMail Proposal:** Your friend Danielle has already set up an account for you (`marcus.t.holloway@proton.me`) and advocates for a switch. However, you have explicitly stated you are not agreeing to use it as your primary provider. It remains an unadopted, experimental setup.\n* **Security Alerts:** You expressed an intention to set up alerts for suspicious activity, but this remains a future plan and has not been completed yet.\n* **Migration:** Despite suggestions to move away from Gmail, no migration has taken place.",
+      "control_path": [
+        "search",
+        "context_1",
+        "context_2",
+        "context_5",
+        "context_6",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 14409,
+          "charged_tokens": 14409,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 48.548938882537186,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/fixed_context/banks/88ed45e8-0042-418a-a674-0485b5903275/a69fd908-5721-48fc-8cfd-3495f6a1701e-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/fixed_context/banks/88ed45e8-0042-418a-a674-0485b5903275/a69fd908-5721-48fc-8cfd-3495f6a1701e-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A32",
+      "policy": "rules",
+      "step": "stage-0",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied.",
+      "answer": "Based on your history, your choices support a clear pattern of prioritizing **security and organization within a centralized digital hub**. You prefer maintaining a single, well-managed account for all personal and financial needs, and you keep your workflow tidy through systematic cleanup and visual categorization.\n\n**Actually Completed Changes:**\n• **Inbox Cleanup:** Performed on March 16 by unsubscribing from promotional emails, successfully reducing your unread count from ~4,000 to ~200.\n• **Password Reset:** Immediately changed your password after regaining access following the April 2 lockout caused by a suspicious login.\n• **2FA Enabled:** Activated two-factor authentication following the April 2 security incident.\n• **Recovery Contact:** Linked your current cell number (ending in 4738) as the primary recovery phone for the account.\n\n**Primary Provider:**\n• **Gmail** remains your primary provider. You continue to use marcus.t.holloway@gmail.com (in use since 2014) and have not migrated to another service.\n\n**Reported Actions vs. Proposals/Intentions:**\n• The assistant's offer to help draft *filter rules* or create a *label taxonomy* was a proactive suggestion, not an action you completed.\n• Your comment that you \"should've set up 2FA years ago\" is a retrospective acknowledgment of a past security gap, not a future plan or migration intent.\n• No migration has been proposed or executed; your focus remains strictly on securing and organizing your existing Gmail account.",
+      "control_path": [
+        "search",
+        "context_0",
+        "refresh_view",
+        "handoff"
+      ],
+      "handoff_reason": "no_available_operation",
+      "cost": {
+        "generation": {
+          "known_tokens": 12079,
+          "charged_tokens": 12079,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 42.78691003937274,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/rules/banks/aa4e76c9-edd3-4a8f-a429-80b610e3652e/1955019f-be7f-4f58-8895-ea84d18f86b3-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/rules/banks/aa4e76c9-edd3-4a8f-a429-80b610e3652e/1955019f-be7f-4f58-8895-ea84d18f86b3-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A32",
+      "policy": "rules",
+      "step": "stage-0-repeat",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied.",
+      "answer": "Based on your history, your email-related choices support a clear pattern of prioritizing **security and organization within a centralized digital hub**. You prefer maintaining a single, well-managed account for all personal and financial needs, and you keep your workflow tidy through systematic cleanup and visual categorization.\n\n**Actually Completed Changes:**\n• **Inbox Cleanup (March 16):** Unsubscribed from promotional emails, successfully reducing your unread count from roughly 4,000 to around 200.\n• **Password Reset:** Immediately changed your password after regaining access following the April 2 account lockout.\n• **2FA Enabled:** Activated two-factor authentication following the April 2 security incident.\n• **Recovery Contact Linked:** Updated the recovery phone number to your current cell number (ending in 4738).\n\n**Primary Provider:**\n• **Gmail** remains your primary provider. You continue to use `marcus.t.holloway@gmail.com` (in use since 2014) and have not migrated to another service.\n\n**Distinguishing Actions from Proposals/Intentions:**\n• The assistant's offer to help draft *filter rules* or create a *label taxonomy* was a proactive suggestion, not an action you completed.\n• Your comment that you \"should've set up 2FA years ago\" is a retrospective acknowledgment of a past security gap, not a future plan or migration intent.\n• No migration has been proposed or executed; your focus remains strictly on securing and organizing your existing Gmail account.",
+      "control_path": [
+        "search",
+        "context_1",
+        "read_0",
+        "refresh_view",
+        "handoff"
+      ],
+      "handoff_reason": "no_available_operation",
+      "cost": {
+        "generation": {
+          "known_tokens": 12561,
+          "charged_tokens": 12561,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 35.395308687351644,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/rules/banks/aa4e76c9-edd3-4a8f-a429-80b610e3652e/d22bd002-b13a-4cc9-8ca0-e4bf7f8578ba-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/rules/banks/aa4e76c9-edd3-4a8f-a429-80b610e3652e/d22bd002-b13a-4cc9-8ca0-e4bf7f8578ba-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A32",
+      "policy": "rules",
+      "step": "stage-1",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied.",
+      "answer": "Your email-related choices support a clear pattern of prioritizing **security and organization within a centralized digital hub**. You prefer maintaining a single, well-managed account for all personal and financial needs, keeping your workflow tidy through systematic cleanup and visual categorization (labels and color coding).\n\n**Actually Completed Changes:**\n• **Inbox Cleanup (March 16):** Unsubscribed from promotional emails, reducing your unread count from roughly 4,000 to around 200.\n• **Password Reset (April 2):** Changed your password immediately after regaining access following a suspicious login lockout.\n• **2FA Enabled:** Activated two-factor authentication following the April 2 security incident.\n• **Recovery Contact Linked:** Updated the recovery phone number to your current cell number (ending in 4738).\n\n**Primary Provider:**\n• **Gmail** remains your primary provider. You continue to use `marcus.t.holloway@gmail.com` (in use since 2014) and have not migrated to another service.\n\n**Distinguishing Actions from Proposals/Intentions:**\n• **Future Intentions:** You mentioned a plan to review your connected apps and set up activity alerts, but this has not been completed yet.\n• **External Pressure:** Your friend Danielle's push to switch to ProtonMail is external advocacy; you have explicitly decided against migrating due to the complexity of updating all your banking and service accounts.\n• **Assistant Suggestions:** Offers made to help draft filter rules or create a label taxonomy are proactive suggestions, not actions you have taken.",
+      "control_path": [
+        "search",
+        "context_1",
+        "context_2",
+        "context_4",
+        "refresh_view",
+        "handoff"
+      ],
+      "handoff_reason": "no_available_operation",
+      "cost": {
+        "generation": {
+          "known_tokens": 20030,
+          "charged_tokens": 20030,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 57.466986529529095,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/rules/banks/aa4e76c9-edd3-4a8f-a429-80b610e3652e/9be8d437-ce6c-4f0e-be15-42fa48ab011e-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/rules/banks/aa4e76c9-edd3-4a8f-a429-80b610e3652e/9be8d437-ce6c-4f0e-be15-42fa48ab011e-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A32",
+      "policy": "rules",
+      "step": "stage-1-repeat",
+      "label": "length_failure",
+      "full_task_success": false,
+      "note": "First response failed with VLLM_CHAT_TRUNCATED; receipt fallback does not fulfill the question.",
+      "answer": "回答协议失败, 执行已停止; 以下是已确认的操作状态。未列出的请求完成情况仍未确认。\n\n本轮业务结果: 未执行新的业务操作。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。\n\n本轮未取得新的业务回执。\n\n本轮语义记忆: 未提交。这里只报告列出的回执, 不确认全部请求或语义覆盖。\n\n本轮原始消息已记录。原始消息记录与语义记忆提交分别计数。",
+      "control_path": [],
+      "handoff_reason": null,
+      "cost": {
+        "generation": {
+          "known_tokens": 9270,
+          "charged_tokens": 9270,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 55.46665574796498,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/rules/banks/aa4e76c9-edd3-4a8f-a429-80b610e3652e/25e71f41-b454-4f5d-a173-14d64f0d81aa-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/rules/banks/aa4e76c9-edd3-4a8f-a429-80b610e3652e/25e71f41-b454-4f5d-a173-14d64f0d81aa-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A32",
+      "policy": "rules",
+      "step": "stage-2",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied.",
+      "answer": "**Pattern Supported:** Your email-related choices consistently support a pattern of prioritizing **security and organization within a centralized digital hub**. You prefer maintaining a single, well-managed account for all personal and financial needs, and you keep your workflow tidy through systematic cleanup and categorization.\n\n**Actually Completed Changes:**\n• **Inbox Cleanup (March 16):** Unsubscribed from promotional emails, successfully reducing your unread count from ~4,000 to ~200.\n• **Password Reset (April 2):** Immediately changed your password after regaining access following a suspicious login lockout.\n• **2FA Enabled:** Activated two-factor authentication following the April 2 security incident.\n• **Recovery Contact Linked:** Updated the recovery phone number to your current cell number (ending in 4738).\n• **Connected Apps Audit:** Completed the review of connected applications, revoking access for approximately eight old services (including a game from 2017).\n\n**Primary Provider:**\n• **Gmail** remains your primary provider. You continue to use `marcus.t.holloway@gmail.com` (in use since 2014) and have not migrated to another service.\n\n**Distinctions (Actions vs. Intentions vs. Proposals):**\n• **Reported Actions:** The five items listed above under \"Actually Completed Changes\" are concrete actions you have already executed.\n• **Intentions & Plans:** Setting up activity alerts for suspicious logins was mentioned as a future plan to implement, not as a completed task.\n• **Other People’s Proposals:** Your friend Danielle's advocacy to switch to ProtonMail—and her action of setting up the `marcus.t.holloway@proton.me` account—are external proposals. You have explicitly declined to adopt it as your primary provider due to the overwhelming effort required to update linked banking and service accounts. No migration has occurred.\n• **Assistant Suggestions:** Offers to help draft filter rules or create a label taxonomy were proactive suggestions from the assistant, not actions you took.",
+      "control_path": [
+        "search",
+        "context_0",
+        "context_2",
+        "context_4",
+        "context_5",
+        "refresh_view",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 20702,
+          "charged_tokens": 20702,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 48.965957461856306,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/rules/banks/aa4e76c9-edd3-4a8f-a429-80b610e3652e/aa7f11d8-dc5b-4246-a3bf-136006d252f9-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/rules/banks/aa4e76c9-edd3-4a8f-a429-80b610e3652e/aa7f11d8-dc5b-4246-a3bf-136006d252f9-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A32",
+      "policy": "rules",
+      "step": "stage-2-repeat",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied.",
+      "answer": "**Pattern Supported:** Your email-related choices consistently support a pattern of prioritizing **security and organization within a centralized digital hub**. You prefer maintaining a single, well-managed account for all personal and financial needs, and you keep your workflow tidy through systematic cleanup and categorization.\n\n**Actually Completed Changes:**\n• **Inbox Cleanup (March 16):** Unsubscribed from promotional emails, successfully reducing your unread count from ~4,000 to ~200.\n• **Password Reset (April 2):** Immediately changed your password after regaining access following a suspicious login lockout.\n• **2FA Enabled:** Activated two-factor authentication following the security incident.\n• **Recovery Contact Linked:** Updated the recovery phone number to your current cell number (ending in 4738).\n• **Connected Apps Audit:** Completed the review of connected applications, revoking access for approximately eight old services.\n\n**Primary Provider:**\n• **Gmail** remains your primary provider. You continue to use `marcus.t.holloway@gmail.com` (in use since 2014) and have not migrated to another service.\n\n**Distinctions (Actions vs. Intentions vs. Proposals):**\n• **Reported Actions:** The five items listed above under \"Actually Completed Changes\" are concrete actions you have already executed.\n• **Intentions & Plans:** Setting up activity alerts for suspicious logins was mentioned as a future plan to implement, not as a completed task.\n• **Other People’s Proposals:** Your friend Danielle's advocacy to switch to ProtonMail—and her action of setting up the `marcus.t.holloway@proton.me` account—are external proposals. You have explicitly declined to adopt it as your primary provider. No migration has occurred.\n• **Assistant Suggestions:** Offers to help draft filter rules or create a label taxonomy were proactive suggestions from the assistant, not actions you took.",
+      "control_path": [
+        "search",
+        "context_0",
+        "context_3",
+        "context_5",
+        "context_6",
+        "refresh_view",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 23825,
+          "charged_tokens": 23825,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 55.04158907290548,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/rules/banks/aa4e76c9-edd3-4a8f-a429-80b610e3652e/ecb5d3fd-a51b-4e42-9e60-143f35974880-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/rules/banks/aa4e76c9-edd3-4a8f-a429-80b610e3652e/ecb5d3fd-a51b-4e42-9e60-143f35974880-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A32",
+      "policy": "generative",
+      "step": "stage-0",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied.",
+      "answer": "Your email-related choices reflect a pattern of maintaining a highly organized, security-conscious, and long-term established Gmail account. \n\nBased on your reported actions, the specific changes you have actually completed are:\n- **Inbox Maintenance (March 16):** You dedicated a Saturday to unsubscribing from promotional emails, successfully reducing your unread count from approximately 4,000 to roughly 200.\n- **Password Reset (April 2):** Immediately upon regaining access to your account following a suspicious login attempt, you changed your password.\n- **Security Enhancement (After April 2):** You enabled two-factor authentication (2FA) for your Gmail account.\n\n**Primary Provider:** Your primary email provider is still **Gmail** (marcus.t.holloway@gmail.com). There is no report of a migration to another provider; rather, you continue to rely on Gmail's specific labeling and color-coding systems to structure your inbox.",
+      "control_path": [
+        "refresh_view",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 14449,
+          "charged_tokens": 14449,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 39.822018013335764,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/generative/banks/276d8fcc-7925-497d-b3e3-a17dad7dd826/6c1689fa-3acf-4d3a-8ec4-767af7c0850e-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/generative/banks/276d8fcc-7925-497d-b3e3-a17dad7dd826/6c1689fa-3acf-4d3a-8ec4-767af7c0850e-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A32",
+      "policy": "generative",
+      "step": "stage-0-repeat",
+      "label": "unfulfilled",
+      "full_task_success": false,
+      "note": "Does not answer the source-contained question, instead reports absent/empty records. System failure regardless of whether the local delivery was empty.",
+      "answer": "Based on the available evidence and receipts, I cannot identify an email-related pattern, any completed changes, or a primary provider. The shared maintenance recipe shows no mutation receipts or semantic commits, confirming no changes were saved. The delivered question evidence is empty, and there are no current execution capabilities (tools) to read 'saved_history' or source material. Consequently, there are no reported actions, intentions, or proposals present to distinguish.",
+      "control_path": [
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 13204,
+          "charged_tokens": 13204,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 61.852456093765795,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/generative/banks/276d8fcc-7925-497d-b3e3-a17dad7dd826/586391ea-2735-4c0b-8abc-41f5ef5d2e78-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/generative/banks/276d8fcc-7925-497d-b3e3-a17dad7dd826/586391ea-2735-4c0b-8abc-41f5ef5d2e78-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A32",
+      "policy": "generative",
+      "step": "stage-1",
+      "label": "length_failure",
+      "full_task_success": false,
+      "note": "First response failed with VLLM_CHAT_TRUNCATED; receipt fallback does not fulfill the question.",
+      "answer": "回答协议失败, 执行已停止; 以下是已确认的操作状态。未列出的请求完成情况仍未确认。\n\n本轮业务结果: 未执行新的业务操作。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。\n\n本轮未取得新的业务回执。\n\n本轮语义记忆: 未提交。这里只报告列出的回执, 不确认全部请求或语义覆盖。\n\n本轮保存许可: 当前未获允许。\n\n本轮原始消息已记录。原始消息记录与语义记忆提交分别计数。",
+      "control_path": [
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 16132,
+          "charged_tokens": 16132,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 67.1577329300344,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/generative/banks/276d8fcc-7925-497d-b3e3-a17dad7dd826/a061671a-db0c-439f-bda8-188243d101a0-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/generative/banks/276d8fcc-7925-497d-b3e3-a17dad7dd826/a061671a-db0c-439f-bda8-188243d101a0-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A32",
+      "policy": "generative",
+      "step": "stage-1-repeat",
+      "label": "unfulfilled",
+      "full_task_success": false,
+      "note": "Does not answer the source-contained question, instead reports absent/empty records. System failure regardless of whether the local delivery was empty.",
+      "answer": "The delivered memory evidence is empty. No information is available to determine the pattern of email-related choices, completed changes, or the primary provider. No reported actions, intentions, or proposals can be distinguished.",
+      "control_path": [
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 13523,
+          "charged_tokens": 13523,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 47.66593667957932,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/generative/banks/276d8fcc-7925-497d-b3e3-a17dad7dd826/48e3dfad-1046-428d-be1e-2673148a8fd1-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/generative/banks/276d8fcc-7925-497d-b3e3-a17dad7dd826/48e3dfad-1046-428d-be1e-2673148a8fd1-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A32",
+      "policy": "generative",
+      "step": "stage-2",
+      "label": "unfulfilled",
+      "full_task_success": false,
+      "note": "Does not answer the source-contained question, instead reports absent/empty records. System failure regardless of whether the local delivery was empty.",
+      "answer": "Based on the available records, there is no evidence of any email-related choices, patterns, completed changes, or statements regarding a primary provider. The source data contains no reports of your actions, intentions, or proposals from others. Consequently, the supported pattern, any completed changes, and the current primary email provider are all unknown, and no suggested migration or other action can be inferred as having occurred.",
+      "control_path": [
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 13160,
+          "charged_tokens": 13160,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 32.15233727544546,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/generative/banks/276d8fcc-7925-497d-b3e3-a17dad7dd826/5ddd5ab4-d239-4977-9d19-8b3976ba4c10-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/generative/banks/276d8fcc-7925-497d-b3e3-a17dad7dd826/5ddd5ab4-d239-4977-9d19-8b3976ba4c10-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A32",
+      "policy": "generative",
+      "step": "stage-2-repeat",
+      "label": "unfulfilled",
+      "full_task_success": false,
+      "note": "Does not answer the source-contained question, instead reports absent/empty records. System failure regardless of whether the local delivery was empty.",
+      "answer": "Based on the current records and evidence, no email-related choices, completed changes, or established primary providers are documented. The available semantic memory contains no evidence of past actions, intentions, or proposals.",
+      "control_path": [
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 11531,
+          "charged_tokens": 11531,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 18.951018968597054,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/generative/banks/276d8fcc-7925-497d-b3e3-a17dad7dd826/ec5efa01-726e-4fba-8804-112ff3d9a9ce-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/generative/banks/276d8fcc-7925-497d-b3e3-a17dad7dd826/ec5efa01-726e-4fba-8804-112ff3d9a9ce-trace-0.jsonl"
+    },
+    {
+      "family": "memops_B30",
+      "policy": "fixed_context",
+      "step": "stage-0",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied; bounded current answer accepted without requiring every historical detail.",
+      "answer": "For a professional introduction, you should use **Marc** and **Chen Wei**.\n\nYour former roommate Chen Wei's naming preference was reported on **May 2nd**.\n\nHere is the requested breakdown:\n- **Confirmed Personal Preferences:** Marc, Chen Wei\n- **Historical Nicknames:** Marcus, Wei\n- **Future Corporate Branding:** None",
+      "control_path": [
+        "search",
+        "context_0",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 13636,
+          "charged_tokens": 13636,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 71.05486143752933,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/fixed_context/banks/c011d6d9-0fc2-4fab-841d-08e48356b481/5f22900a-a2b3-47f0-95df-dcea1bab7549-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/fixed_context/banks/c011d6d9-0fc2-4fab-841d-08e48356b481/5f22900a-a2b3-47f0-95df-dcea1bab7549-trace-0.jsonl"
+    },
+    {
+      "family": "memops_B30",
+      "policy": "fixed_context",
+      "step": "stage-0-repeat",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied; bounded current answer accepted without requiring every historical detail.",
+      "answer": "For a professional introduction, you should use **Marc** and **Chen Wei**.\n\nYour former roommate Chen Wei's naming preference was reported on **May 2nd**.\n\nHere is the requested breakdown:\n- **Confirmed Personal Preferences:** Marc, Chen Wei\n- **Historical Nicknames:** Marcus, Wei\n- **Future Corporate Branding:** None",
+      "control_path": [
+        "search",
+        "context_1",
+        "read_0",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 7923,
+          "charged_tokens": 7923,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 30.936554914340377,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/fixed_context/banks/c011d6d9-0fc2-4fab-841d-08e48356b481/070b5703-1623-4825-ac98-1d5975566ec8-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/fixed_context/banks/c011d6d9-0fc2-4fab-841d-08e48356b481/070b5703-1623-4825-ac98-1d5975566ec8-trace-0.jsonl"
+    },
+    {
+      "family": "memops_B30",
+      "policy": "fixed_context",
+      "step": "stage-1",
+      "label": "length_failure",
+      "full_task_success": false,
+      "note": "First response failed with VLLM_CHAT_TRUNCATED; receipt fallback does not fulfill the question.",
+      "answer": "回答协议失败, 执行已停止; 以下是已确认的操作状态。未列出的请求完成情况仍未确认。\n\n本轮业务结果: 未执行新的业务操作。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。\n\n本轮未取得新的业务回执。\n\n本轮语义记忆: 未提交。这里只报告列出的回执, 不确认全部请求或语义覆盖。\n\n本轮原始消息已记录。原始消息记录与语义记忆提交分别计数。",
+      "control_path": [],
+      "handoff_reason": null,
+      "cost": {
+        "generation": {
+          "known_tokens": 9265,
+          "charged_tokens": 9265,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 56.94947726558894,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/fixed_context/banks/c011d6d9-0fc2-4fab-841d-08e48356b481/54e53ef9-a935-483f-baf1-62e69fa22744-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/fixed_context/banks/c011d6d9-0fc2-4fab-841d-08e48356b481/54e53ef9-a935-483f-baf1-62e69fa22744-trace-0.jsonl"
+    },
+    {
+      "family": "memops_B30",
+      "policy": "fixed_context",
+      "step": "stage-1-repeat",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied; bounded current answer accepted without requiring every historical detail.",
+      "answer": "Based on the conversation history provided:\n\n- **Confirmed Personal Preferences (for professional introduction):** **Marcus** (college friend) and **Chen Wei** (former roommate).\n- **Historical Nicknames:** Marc (college friend), Wei (former roommate).\n- **Future Corporate Branding:** None.\n- **When the roommate’s naming preference was reported:** May 2nd.",
+      "control_path": [
+        "search",
+        "context_1",
+        "context_3",
+        "context_4",
+        "read_2",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 13082,
+          "charged_tokens": 13082,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 51.91536924801767,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/fixed_context/banks/c011d6d9-0fc2-4fab-841d-08e48356b481/29a4c033-e49b-4ef0-aeb3-3d024367a86c-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/fixed_context/banks/c011d6d9-0fc2-4fab-841d-08e48356b481/29a4c033-e49b-4ef0-aeb3-3d024367a86c-trace-0.jsonl"
+    },
+    {
+      "family": "memops_B30",
+      "policy": "fixed_context",
+      "step": "stage-2",
+      "label": "wrong",
+      "full_task_success": false,
+      "note": "Correct current personal names but explicitly denies future corporate branding despite the reported Marc website plan.",
+      "answer": "For a professional introduction:\n\n- **Confirmed Personal Preferences:** Marcus (college friend), Chen Wei (former roommate)\n- **Historical Nicknames:** Marc (college friend), Wei (former roommate)\n- **Future Corporate Branding:** None\n\nYour former roommate Chen Wei's naming preference was reported on **May 2nd**.",
+      "control_path": [
+        "search",
+        "context_2",
+        "context_3",
+        "context_4",
+        "context_5",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 10872,
+          "charged_tokens": 10872,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 35.43258671928197,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/fixed_context/banks/c011d6d9-0fc2-4fab-841d-08e48356b481/60d5da12-10b2-4d70-9ba4-0665a445dc7e-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/fixed_context/banks/c011d6d9-0fc2-4fab-841d-08e48356b481/60d5da12-10b2-4d70-9ba4-0665a445dc7e-trace-0.jsonl"
+    },
+    {
+      "family": "memops_B30",
+      "policy": "fixed_context",
+      "step": "stage-2-repeat",
+      "label": "wrong",
+      "full_task_success": false,
+      "note": "Uses Marc now for professional introduction, overriding the confirmed personal preference for Marcus with next-week corporate materials. The personal-versus-corporate distinction is wrong.",
+      "answer": "**Names to Use in a Professional Introduction:**\n- **College Friend:** Marc\n- **Former Roommate:** Chen Wei\n\n**Confirmed Personal Preferences:**\n- **College Friend:** \"Marc\" for professional settings; \"Marcus\" for personal/college contexts.\n- **Former Roommate:** \"Chen Wei\" (full name); explicitly prefers not to be shortened to just \"Wei\".\n\n**Historical Nicknames:**\n- **College Friend:** \"Marcus\" (original name), \"M.J.\" (college-era nickname derived from his middle name, James).\n- **Former Roommate:** \"Wei\".\n\n**Future Corporate Branding:**\n- **College Friend:** \"Marc\" will be officially listed as a shortened first name on his firm's website and client-facing materials starting next week, per a new branding consultant's recommendation.\n\n**When the Roommate's Naming Preference Was Reported:**\n- May 2nd (shared during a phone catch-up).",
+      "control_path": [
+        "search",
+        "context_0",
+        "context_2",
+        "context_5",
+        "context_6",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 10177,
+          "charged_tokens": 10177,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 30.6820280989632,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/fixed_context/banks/c011d6d9-0fc2-4fab-841d-08e48356b481/01c67c3f-ae63-4d1c-af89-f1d8792aa102-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/fixed_context/banks/c011d6d9-0fc2-4fab-841d-08e48356b481/01c67c3f-ae63-4d1c-af89-f1d8792aa102-trace-0.jsonl"
+    },
+    {
+      "family": "memops_B30",
+      "policy": "rules",
+      "step": "stage-0",
+      "label": "qualified",
+      "full_task_success": false,
+      "note": "Correct requested names, mapping and May 2 report; adds an unsupported assertion that Marcus is his birth name. Original/current name does not establish birth registration.",
+      "answer": "**Names for Professional Introduction:**\n\n- **Your College Friend:** Use **\"Marc\"**. Although his birth name is Marcus, he prefers \"Marc\" in professional settings and consulting contexts.\n- **Your Former Roommate:** Use **\"Chen Wei\"**. He explicitly prefers his full name rather than just \"Wei\" to avoid being shortened by colleagues.\n\n**Roommate’s Naming Preference Report:**\n\n- **Reported On:** **May 2nd**.\n- **Context:** This preference was communicated during a phone catch-up, as his colleagues in Toronto were shortening his name to \"Wei,\" which he dislikes.",
+      "control_path": [
+        "search",
+        "context_0",
+        "refresh_view",
+        "handoff"
+      ],
+      "handoff_reason": "no_available_operation",
+      "cost": {
+        "generation": {
+          "known_tokens": 9248,
+          "charged_tokens": 9248,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 25.230145908892155,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/rules/banks/88837f92-a24d-4b79-82f0-95bab6296eec/ded88dd8-f27e-4a04-af76-474c8bb277cc-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/rules/banks/88837f92-a24d-4b79-82f0-95bab6296eec/ded88dd8-f27e-4a04-af76-474c8bb277cc-trace-0.jsonl"
+    },
+    {
+      "family": "memops_B30",
+      "policy": "rules",
+      "step": "stage-0-repeat",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied; bounded current answer accepted without requiring every historical detail.",
+      "answer": "• Confirmed Professional Preferences:\n  - College Friend: \"Marc\"\n  - Former Roommate: \"Chen Wei\"\n• Historical Nicknames/Original Names:\n  - College Friend: \"Marcus\"\n• Future Corporate Branding:\n  - None mentioned.\n• Roommate’s Naming Preference Reported:\n  - May 2nd (communicated during a phone catch-up).",
+      "control_path": [
+        "search",
+        "context_1",
+        "read_0",
+        "refresh_view",
+        "handoff"
+      ],
+      "handoff_reason": "no_available_operation",
+      "cost": {
+        "generation": {
+          "known_tokens": 11491,
+          "charged_tokens": 11491,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 32.89013868570328,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/rules/banks/88837f92-a24d-4b79-82f0-95bab6296eec/f5d5dbcb-a057-49a9-8636-7bfd93366e80-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/rules/banks/88837f92-a24d-4b79-82f0-95bab6296eec/f5d5dbcb-a057-49a9-8636-7bfd93366e80-trace-0.jsonl"
+    },
+    {
+      "family": "memops_B30",
+      "policy": "rules",
+      "step": "stage-1",
+      "label": "qualified",
+      "full_task_success": false,
+      "note": "Current names, mapping and May 2 are correct, but lists existing employers as future corporate branding. These are current affiliations, not future name plans.",
+      "answer": "**Names for Professional Introduction:**\n\n- **College Friend:** Use **\"Marcus\"**.\n- **Former Roommate:** Use **\"Chen Wei\"**.\n\n**Roommate’s Naming Preference Reported:**\n- **Reported On:** **May 2nd** (communicated during a phone catch-up).\n\n**Detailed Breakdown:**\n\n• **Confirmed Personal Preferences:**\n  - College Friend: \"Marcus\" (Recently switched back to his original full name for all settings, including work).\n  - Former Roommate: \"Chen Wei\" (Explicitly prefers his full name rather than just \"Wei\").\n\n• **Historical Nicknames/Previous Preferences:**\n  - College Friend: \"Marc\" (Preferred this short form professionally from January until recently, when it was abandoned for feeling \"forced\").\n\n• **Future Corporate Branding:**\n  - College Friend: Works at **Whitfield & Associates** (Healthcare consulting).\n  - Former Roommate: Works at **Meridian Labs** (Fintech startup in Toronto).",
+      "control_path": [
+        "search",
+        "context_1",
+        "context_2",
+        "context_3",
+        "refresh_view",
+        "handoff"
+      ],
+      "handoff_reason": "no_available_operation",
+      "cost": {
+        "generation": {
+          "known_tokens": 14926,
+          "charged_tokens": 14926,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 30.101351813413203,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/rules/banks/88837f92-a24d-4b79-82f0-95bab6296eec/d8668ff1-479b-4c2a-8ea4-397308406898-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/rules/banks/88837f92-a24d-4b79-82f0-95bab6296eec/d8668ff1-479b-4c2a-8ea4-397308406898-trace-0.jsonl"
+    },
+    {
+      "family": "memops_B30",
+      "policy": "rules",
+      "step": "stage-1-repeat",
+      "label": "qualified",
+      "full_task_success": false,
+      "note": "Current names, mapping and May 2 are correct, but lists existing employers as future corporate branding. These are current affiliations, not future name plans.",
+      "answer": "**Names for Professional Introduction:**\n\n- **College Friend:** Use **\"Marcus\"**.\n- **Former Roommate:** Use **\"Chen Wei\"**.\n\n**Roommate’s Naming Preference Reported:**\n\n- **Reported On:** **May 2nd** (communicated during a phone catch-up).\n\n**Detailed Breakdown:**\n\n• **Confirmed Personal Preferences:**\n  - College Friend: \"Marcus\" (Recently switched back to his original full name for all settings, including work).\n  - Former Roommate: \"Chen Wei\" (Explicitly prefers his full name rather than just \"Wei\").\n\n• **Historical Nicknames/Previous Preferences:**\n  - College Friend: \"Marc\" (Preferred this short form professionally from January until recently, when it was abandoned for feeling \"forced\").\n\n• **Future Corporate Branding:**\n  - College Friend: Works at **Whitfield & Associates** (Healthcare consulting).\n  - Former Roommate: Works at **Meridian Labs** (Fintech startup in Toronto).",
+      "control_path": [
+        "search",
+        "context_2",
+        "context_3",
+        "context_4",
+        "read_1",
+        "refresh_view",
+        "handoff"
+      ],
+      "handoff_reason": "no_available_operation",
+      "cost": {
+        "generation": {
+          "known_tokens": 18922,
+          "charged_tokens": 18922,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 47.534365431405604,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/rules/banks/88837f92-a24d-4b79-82f0-95bab6296eec/b59edbc8-3210-4140-9c17-5344e063adeb-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/rules/banks/88837f92-a24d-4b79-82f0-95bab6296eec/b59edbc8-3210-4140-9c17-5344e063adeb-trace-0.jsonl"
+    },
+    {
+      "family": "memops_B30",
+      "policy": "rules",
+      "step": "stage-2",
+      "label": "incomplete",
+      "full_task_success": false,
+      "note": "Retains correct current personal names and May 2, but omits the newly reported next-week Marc website plan and old M.J. nickname; current employers do not answer the requested future-branding distinction.",
+      "answer": "Names for Professional Introduction:\n- College Friend: Use \"Marcus\".\n- Former Roommate: Use \"Chen Wei\".\n\nRoommate’s Naming Preference Reported:\n- Reported On: May 2nd (communicated during a phone catch-up).\n\nDetailed Breakdown:\n• Confirmed Personal Preferences:\n  - College Friend: \"Marcus\" (Recently switched back to his original full name for all settings, including work).\n  - Former Roommate: \"Chen Wei\" (Explicitly prefers his full name rather than just \"Wei\").\n• Historical Nicknames/Previous Preferences:\n  - College Friend: \"Marc\" (Preferred this short form professionally from January until recently, when it was abandoned for feeling \"forced\").\n• Future Corporate Branding:\n  - College Friend: Works at Whitfield & Associates (Healthcare consulting).\n  - Former Roommate: Works at Meridian Labs (Fintech startup in Toronto).",
+      "control_path": [
+        "search",
+        "context_2",
+        "context_3",
+        "context_4",
+        "context_5",
+        "refresh_view",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 25017,
+          "charged_tokens": 25017,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 68.67003002855927,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/rules/banks/88837f92-a24d-4b79-82f0-95bab6296eec/12960ef7-a0f8-4600-8a86-6081cba313fc-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/rules/banks/88837f92-a24d-4b79-82f0-95bab6296eec/12960ef7-a0f8-4600-8a86-6081cba313fc-trace-0.jsonl"
+    },
+    {
+      "family": "memops_B30",
+      "policy": "rules",
+      "step": "stage-2-repeat",
+      "label": "incomplete",
+      "full_task_success": false,
+      "note": "Adds old M.J. nickname but still omits the next-week Marc website plan, listing current employers under future branding instead.",
+      "answer": "**Names for Professional Introduction:**\n\n- **College Friend:** Use **\"Marcus\"**.\n- **Former Roommate:** Use **\"Chen Wei\"**.\n\n**Roommate’s Naming Preference Reported:**\n- **Reported On:** **May 2nd** (communicated during a phone catch-up).\n\n**Confirmed Personal Preferences:**\n  - College Friend: \"Marcus\" (Recently switched back to his original full name for all settings, including work).\n  - Former Roommate: \"Chen Wei\" (Explicitly prefers his full name rather than just \"Wei\").\n\n**Historical Nicknames/Previous Preferences:**\n  - College Friend: \"Marc\" (Preferred this short form professionally from January until recently, when it was abandoned for feeling \"forced\"). \"M.J.\" (A college-era nickname derived from his middle name James, which faded out years ago).\n\n**Future Corporate Branding:**\n  - College Friend: Works at **Whitfield & Associates** (Healthcare consulting).\n  - Former Roommate: Works at **Meridian Labs** (Fintech startup in Toronto).",
+      "control_path": [
+        "search",
+        "context_1",
+        "context_4",
+        "context_5",
+        "context_6",
+        "refresh_view",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 22659,
+          "charged_tokens": 22659,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 65.23831800650805,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/rules/banks/88837f92-a24d-4b79-82f0-95bab6296eec/18ef4cef-8584-44d8-80f3-7422c4d3a152-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/rules/banks/88837f92-a24d-4b79-82f0-95bab6296eec/18ef4cef-8584-44d8-80f3-7422c4d3a152-trace-0.jsonl"
+    },
+    {
+      "family": "memops_B30",
+      "policy": "generative",
+      "step": "stage-0",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied; bounded current answer accepted without requiring every historical detail.",
+      "answer": "For your college friend, use the professional name 'Marc' (preference effective January, replacing the original name 'Marcus'). For your former roommate, use 'Chen Wei' (his preference to be addressed by his full name rather than just 'Wei' was reported on May 2nd). Historical nicknames like 'Marcus' and 'Wei' are noted but should be avoided in professional settings, and no future corporate branding preferences were documented.",
+      "control_path": [
+        "refresh_view",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 17604,
+          "charged_tokens": 17604,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 54.104218512773514,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/generative/banks/a50c5321-640a-4f04-8d32-c21b84f16f72/cd0516c5-8475-48a9-af45-9bcea28379c2-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/generative/banks/a50c5321-640a-4f04-8d32-c21b84f16f72/cd0516c5-8475-48a9-af45-9bcea28379c2-trace-0.jsonl"
+    },
+    {
+      "family": "memops_B30",
+      "policy": "generative",
+      "step": "stage-0-repeat",
+      "label": "qualified",
+      "full_task_success": false,
+      "note": "Correct names and May 2 value, but explicitly says college-friend/former-roommate mapping is unidentified despite the original source identifying both.",
+      "answer": "Based on the memory evidence regarding your college friend and former roommate:\n\n**Current Professional Names to Use:**\n* **Marc** (instead of Marcus).\n* **Chen Wei** (instead of Wei).\n\n**When the Roommate's Naming Preference was Reported:**\nThe available evidence does not identify which individual is the 'college friend' or the 'former roommate.' However, the specific timestamps for their preferences are:\n* **Marc:** The preference for 'Marc' is effective **January** (year unspecified).\n* **Chen Wei:** The preference for 'Chen Wei' was reported on **May 2nd** (year unspecified).\n\n**Categorized Information:**\n* **Confirmed Personal Preferences:** Marc, Chen Wei.\n* **Historical Nicknames:** Marcus, Wei.\n* **Future Corporate Branding:** No future corporate branding information is found in the current evidence.",
+      "control_path": [
+        "use_view",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 11793,
+          "charged_tokens": 11793,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 39.78941225446761,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/generative/banks/a50c5321-640a-4f04-8d32-c21b84f16f72/fe0eb99f-aae3-43d1-b253-b088ec4b09ba-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/generative/banks/a50c5321-640a-4f04-8d32-c21b84f16f72/fe0eb99f-aae3-43d1-b253-b088ec4b09ba-trace-0.jsonl"
+    },
+    {
+      "family": "memops_B30",
+      "policy": "generative",
+      "step": "stage-1",
+      "label": "wrong",
+      "full_task_success": false,
+      "note": "Reverses college-friend/former-roommate identities and gives last weekend for the roommate report instead of May 2.",
+      "answer": "You should currently use the name **Marcus** for your former roommate and **Chen Wei** for your college friend.\n\nThe former roommate's current naming preference (reverting to 'Marcus' after previously preferring 'Marc') was reported as **last weekend**.\n\n**Breakdown by Category:**\n\n*   **Confirmed Personal Preferences:**\n    *   Former Roommate: **Marcus** (original/full name).\n    *   College Friend: **Chen Wei** (full name, preferred over the shortened 'Wei').\n\n*   **Historical Nicknames/Former Preferences:**\n    *   Former Roommate: **Marc** (was the preferred professional name starting in January).\n    *   College Friend: **Wei** (the shortened nickname he prefers to avoid).\n\n*   **Future Corporate Branding:**\n    *   No specific information was available regarding future corporate branding or name changes linked to their current employers (Meridian Labs or Whitfield & Associates).",
+      "control_path": [
+        "refresh_view",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 22247,
+          "charged_tokens": 22247,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 38.50341441947967,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/generative/banks/a50c5321-640a-4f04-8d32-c21b84f16f72/fd0f54fc-31ae-47ca-b9d2-71c2fa8f5d5a-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/generative/banks/a50c5321-640a-4f04-8d32-c21b84f16f72/fd0f54fc-31ae-47ca-b9d2-71c2fa8f5d5a-trace-0.jsonl"
+    },
+    {
+      "family": "memops_B30",
+      "policy": "generative",
+      "step": "stage-1-repeat",
+      "label": "unfulfilled",
+      "full_task_success": false,
+      "note": "Does not answer the available source-contained question; reports unavailable or empty evidence instead.",
+      "answer": "I cannot provide the professional naming recommendations or the date the roommate's naming preference was reported because the necessary source evidence and memory history are not available in the current context. No tools are permitted to retrieve missing material.",
+      "control_path": [
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 8189,
+          "charged_tokens": 8189,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 24.814828217960894,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/generative/banks/a50c5321-640a-4f04-8d32-c21b84f16f72/064f1e95-20d9-4cb3-8bad-f40478ba25e0-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/generative/banks/a50c5321-640a-4f04-8d32-c21b84f16f72/064f1e95-20d9-4cb3-8bad-f40478ba25e0-trace-0.jsonl"
+    },
+    {
+      "family": "memops_B30",
+      "policy": "generative",
+      "step": "stage-2",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied; bounded current answer accepted without requiring every historical detail.",
+      "answer": "Based on the current evidence, here is how to address them and when the preferences were noted:\n\n- **Names to use now:** Marcus (college friend) and Chen Wei (former roommate).\n- **Roommate's preference reported:** May 2nd (year unspecified).\n\nTo keep the categories separate as requested:\n- **Confirmed Personal Preferences:** Marcus and Chen Wei.\n- **Historical Nicknames:** M.J. (used in college for your college friend, no longer in use).\n- **Future Corporate Branding:** A corporate mandate is scheduled to require 'Marc' for your college friend starting next week. This is distinct from his confirmed personal preference for 'Marcus'.",
+      "control_path": [
+        "refresh_view",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 29009,
+          "charged_tokens": 29009,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 46.75338634941727,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/generative/banks/a50c5321-640a-4f04-8d32-c21b84f16f72/a6d37097-ea50-400b-ab14-17446195c8b1-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/generative/banks/a50c5321-640a-4f04-8d32-c21b84f16f72/a6d37097-ea50-400b-ab14-17446195c8b1-trace-0.jsonl"
+    },
+    {
+      "family": "memops_B30",
+      "policy": "generative",
+      "step": "stage-2-repeat",
+      "label": "unfulfilled",
+      "full_task_success": false,
+      "note": "Does not answer the available source-contained question; reports unavailable or empty evidence instead.",
+      "answer": "No records or evidence are currently available regarding your college friend and former roommate. As a result, I cannot determine the appropriate names for a professional introduction, distinguish historical nicknames from future corporate branding, or provide the timestamp when a naming preference was reported. Please supply the specific details or grant access to the relevant memory sources to retrieve this information.",
+      "control_path": [
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 10036,
+          "charged_tokens": 10036,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 32.29746541939676,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/generative/banks/a50c5321-640a-4f04-8d32-c21b84f16f72/a19757ef-012a-4394-9745-39f8b7f3cc76-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/generative/banks/a50c5321-640a-4f04-8d32-c21b84f16f72/a19757ef-012a-4394-9745-39f8b7f3cc76-trace-0.jsonl"
+    },
+    {
+      "family": "memops_C03",
+      "policy": "fixed_context",
+      "step": "stage-0",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied; bounded current answer accepted without requiring every historical detail.",
+      "answer": "Based on the provided records, your latest confirmed follow-up is with Dr. Liang at Riverside General on May 14th at 9:30 AM. There are no suggested time changes awaiting your response. To maintain clear separation as requested, this follow-up is tracked independently from your mother’s cardiology check-up at St. Luke’s on May 6th at 11:00 AM, and there is currently no recorded appointment or time change proposal on file for Kevin.",
+      "control_path": [
+        "search",
+        "context_0",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 6718,
+          "charged_tokens": 6718,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 25.59901001676917,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/fixed_context/banks/007415c2-41b1-4ec7-b603-f24358255039/51a28207-ffe8-4e36-adcb-2a4098a9e3a1-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/fixed_context/banks/007415c2-41b1-4ec7-b603-f24358255039/51a28207-ffe8-4e36-adcb-2a4098a9e3a1-trace-0.jsonl"
+    },
+    {
+      "family": "memops_C03",
+      "policy": "fixed_context",
+      "step": "stage-0-repeat",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied; bounded current answer accepted without requiring every historical detail.",
+      "answer": "Your latest confirmed follow-up appointment is with Dr. Liang at Riverside General on May 14th at 9:30 AM. There are no suggested time changes awaiting your response. To maintain clear separation as requested, this follow-up is tracked independently from your mother’s cardiology check-up at St. Luke’s on May 6th at 11:00 AM, and there is currently no recorded appointment or time change proposal on file for Kevin.",
+      "control_path": [
+        "search",
+        "context_1",
+        "read_0",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 7108,
+          "charged_tokens": 7108,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 25.315264987759292,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/fixed_context/banks/007415c2-41b1-4ec7-b603-f24358255039/3637cc99-274c-45d0-b111-16d2cccfa986-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/fixed_context/banks/007415c2-41b1-4ec7-b603-f24358255039/3637cc99-274c-45d0-b111-16d2cccfa986-trace-0.jsonl"
+    },
+    {
+      "family": "memops_C03",
+      "policy": "fixed_context",
+      "step": "stage-1",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied; bounded current answer accepted without requiring every historical detail.",
+      "answer": "Your latest confirmed follow-up appointment is with Dr. Liang at Riverside General on May 14th at 9:45 AM. Dr. Liang's office has proposed moving the appointment to 10:15 AM on the same day due to a scheduling conflict, but this is only a pending proposal awaiting your phone confirmation. As requested, your confirmed May 14th appointment is kept strictly separate from your mother's cardiology check-up at St. Luke's on May 6th and Kevin's unrelated visits.",
+      "control_path": [
+        "search",
+        "context_1",
+        "context_2",
+        "context_4",
+        "context_5",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 11640,
+          "charged_tokens": 11640,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 39.20902238134295,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/fixed_context/banks/007415c2-41b1-4ec7-b603-f24358255039/ab3147f7-b34a-4db6-a128-d1a24a0d5906-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/fixed_context/banks/007415c2-41b1-4ec7-b603-f24358255039/ab3147f7-b34a-4db6-a128-d1a24a0d5906-trace-0.jsonl"
+    },
+    {
+      "family": "memops_C03",
+      "policy": "fixed_context",
+      "step": "stage-1-repeat",
+      "label": "qualified",
+      "full_task_success": false,
+      "note": "Correct personal appointment and pending proposal, but denies confirmed appointments in Kevin records despite his separate completed PT visit.",
+      "answer": "Based on your records, your latest confirmed follow-up is with Dr. Liang at Riverside General on May 14th at 9:45 AM. There is a suggested time change awaiting your response: Dr. Liang's office proposed moving the appointment to 10:15 AM on May 14th due to an internal scheduling conflict, and they are waiting for you to call back to confirm or decline. This remains a pending proposal and has not replaced the confirmed 9:45 AM slot. Your appointment is tracked independently from your mother's cardiology check-up at St. Luke's (May 6th at 11:00 AM) and Kevin's records (which contain no confirmed appointments or proposals for you to track.)",
+      "control_path": [
+        "search",
+        "context_1",
+        "context_3",
+        "context_4",
+        "context_6",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 13064,
+          "charged_tokens": 13064,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 47.924204513430595,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/fixed_context/banks/007415c2-41b1-4ec7-b603-f24358255039/29ea5d2c-8766-4526-b864-4a803df70419-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/fixed_context/banks/007415c2-41b1-4ec7-b603-f24358255039/29ea5d2c-8766-4526-b864-4a803df70419-trace-0.jsonl"
+    },
+    {
+      "family": "memops_C03",
+      "policy": "fixed_context",
+      "step": "stage-2",
+      "label": "wrong",
+      "full_task_success": false,
+      "note": "Keeps the 10:15 proposal pending after the user already declined and reconfirmed 9:45.",
+      "answer": "Based on your records, your latest confirmed follow-up appointment is with Dr. Liang at Riverside General on May 14th at 9:45 AM.\n\nThere is a suggested time change awaiting your response: Dr. Liang's office proposed moving the appointment to 10:15 AM on May 14th due to an internal scheduling conflict. This remains a pending proposal awaiting your phone confirmation and has not replaced the confirmed 9:45 AM slot.\n\nAs requested, your appointment is tracked strictly independently from your mother's cardiology check-up at St. Luke's on May 6th and Kevin's records.",
+      "control_path": [
+        "search",
+        "context_1",
+        "context_2",
+        "context_4",
+        "context_5",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 11531,
+          "charged_tokens": 11531,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 38.17841892130673,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/fixed_context/banks/007415c2-41b1-4ec7-b603-f24358255039/ac3495dd-d68a-455c-a2d4-770ae98442fd-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/fixed_context/banks/007415c2-41b1-4ec7-b603-f24358255039/ac3495dd-d68a-455c-a2d4-770ae98442fd-trace-0.jsonl"
+    },
+    {
+      "family": "memops_C03",
+      "policy": "fixed_context",
+      "step": "stage-2-repeat",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied; bounded current answer accepted without requiring every historical detail.",
+      "answer": "Your latest confirmed follow-up is on May 14th at 9:45 AM with Dr. Liang at Riverside General. Dr. Liang's office had proposed moving your appointment to 10:15 AM on the same day, but since you declined the shift, the proposal has been resolved and there are no suggested time changes currently awaiting your response. Your appointment is tracked independently from your mother’s cardiology check-up at St. Luke’s on May 6th at 11:00 AM and Kevin’s PT visits at Greenfield Rehab, with the 10:15 AM adjustment remaining a rejected proposal rather than a confirmed change.",
+      "control_path": [
+        "search",
+        "context_1",
+        "context_2",
+        "context_5",
+        "context_6",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 15623,
+          "charged_tokens": 15623,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 63.169832073152065,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/fixed_context/banks/007415c2-41b1-4ec7-b603-f24358255039/9a965a03-a4ca-49e1-9bc4-25b1cc68376f-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/fixed_context/banks/007415c2-41b1-4ec7-b603-f24358255039/9a965a03-a4ca-49e1-9bc4-25b1cc68376f-trace-0.jsonl"
+    },
+    {
+      "family": "memops_C03",
+      "policy": "rules",
+      "step": "stage-0",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied; bounded current answer accepted without requiring every historical detail.",
+      "answer": "Your latest confirmed follow-up appointment is on May 14th at 9:30 AM with Dr. Liang at Riverside General. There are no suggested time changes or proposals awaiting your response; all dates and times provided are confirmed bookings or established routines.",
+      "control_path": [
+        "search",
+        "context_0",
+        "refresh_view",
+        "handoff"
+      ],
+      "handoff_reason": "no_available_operation",
+      "cost": {
+        "generation": {
+          "known_tokens": 8336,
+          "charged_tokens": 8336,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 19.117355813272297,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/rules/banks/b90bc5b5-2a4f-4775-b66c-9f9df6fd337a/b32be819-8e46-4f93-816f-a73ba1b6bba6-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/rules/banks/b90bc5b5-2a4f-4775-b66c-9f9df6fd337a/b32be819-8e46-4f93-816f-a73ba1b6bba6-trace-0.jsonl"
+    },
+    {
+      "family": "memops_C03",
+      "policy": "rules",
+      "step": "stage-0-repeat",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied; bounded current answer accepted without requiring every historical detail.",
+      "answer": "Your latest confirmed follow-up appointment is on May 14th at 9:30 AM with Dr. Liang at Riverside General. This is distinct from your mother’s cardiology check-up on May 6th at St. Luke's. There are no suggested time changes or proposals awaiting your response; all dates and times provided are confirmed bookings or established routines.",
+      "control_path": [
+        "search",
+        "context_1",
+        "read_0",
+        "refresh_view",
+        "handoff"
+      ],
+      "handoff_reason": "no_available_operation",
+      "cost": {
+        "generation": {
+          "known_tokens": 11144,
+          "charged_tokens": 11144,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 29.6164941880852,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/rules/banks/b90bc5b5-2a4f-4775-b66c-9f9df6fd337a/61cbf7d6-4638-4192-a870-030f76b06614-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/rules/banks/b90bc5b5-2a4f-4775-b66c-9f9df6fd337a/61cbf7d6-4638-4192-a870-030f76b06614-trace-0.jsonl"
+    },
+    {
+      "family": "memops_C03",
+      "policy": "rules",
+      "step": "stage-1",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied; bounded current answer accepted without requiring every historical detail.",
+      "answer": "Based on your records, your latest confirmed follow-up appointment is on **May 14th at 9:45 AM** with **Dr. Liang** at **Riverside General**. \n\nRegarding a time change: There is a **pending proposal** awaiting your response. Dr. Liang's office requested to move your appointment to **10:15 AM on May 14th** due to a scheduling conflict, but this is only a suggestion. You have not yet called back to confirm or decline it, so your officially confirmed time remains 9:45 AM.",
+      "control_path": [
+        "search",
+        "context_0",
+        "context_2",
+        "context_4",
+        "context_5",
+        "refresh_view",
+        "handoff"
+      ],
+      "handoff_reason": "no_available_operation",
+      "cost": {
+        "generation": {
+          "known_tokens": 21974,
+          "charged_tokens": 21974,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 64.70872966013849,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/rules/banks/b90bc5b5-2a4f-4775-b66c-9f9df6fd337a/19fa1e73-2a26-43b0-901a-68ac0513cdba-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/rules/banks/b90bc5b5-2a4f-4775-b66c-9f9df6fd337a/19fa1e73-2a26-43b0-901a-68ac0513cdba-trace-0.jsonl"
+    },
+    {
+      "family": "memops_C03",
+      "policy": "rules",
+      "step": "stage-1-repeat",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied; bounded current answer accepted without requiring every historical detail.",
+      "answer": "Your latest confirmed follow-up is on **May 14th at 9:45 AM** with **Dr. Liang** at **Riverside General**. \n\nThere is a suggested time change currently awaiting your response: Dr. Liang's office left a voicemail proposing to move your appointment to **10:15 AM** on the same day due to a scheduling conflict. This is strictly a proposal and has not been confirmed; they are waiting for you to call back to accept or decline it. \n\n*(Note: This is kept entirely separate from your mother's cardiology check-up on May 6th at St. Luke's and any unrelated appointments for Kevin.)*",
+      "control_path": [
+        "search",
+        "context_0",
+        "context_3",
+        "context_4",
+        "context_6",
+        "refresh_view",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 21654,
+          "charged_tokens": 21654,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 58.69903897307813,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/rules/banks/b90bc5b5-2a4f-4775-b66c-9f9df6fd337a/c37312e5-0722-4dfa-9675-52285e7465c3-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/rules/banks/b90bc5b5-2a4f-4775-b66c-9f9df6fd337a/c37312e5-0722-4dfa-9675-52285e7465c3-trace-0.jsonl"
+    },
+    {
+      "family": "memops_C03",
+      "policy": "rules",
+      "step": "stage-2",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied; bounded current answer accepted without requiring every historical detail.",
+      "answer": "Based on your latest update after calling the clinic, your confirmed follow-up appointment is on **May 14th at 9:45 AM** with **Dr. Liang** at **Riverside General**. \n\n**Regarding a suggested time change:** There are no pending proposals awaiting your response. Your originally booked 9:30 AM slot was a tentative hold that was reassigned, and the clinic receptionist officially corrected and confirmed your time to 9:45 AM. This is now the final confirmed booking. \n\n*(This is kept strictly separate from your mother’s cardiology check-up on May 6th at 11:00 AM at St. Luke's and any other appointments.)*",
+      "control_path": [
+        "search",
+        "context_0",
+        "context_3",
+        "context_4",
+        "context_5",
+        "refresh_view",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 20108,
+          "charged_tokens": 20108,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 51.48383605107665,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/rules/banks/b90bc5b5-2a4f-4775-b66c-9f9df6fd337a/70144f92-c9b7-43a4-b8a6-d15398c94a49-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/rules/banks/b90bc5b5-2a4f-4775-b66c-9f9df6fd337a/70144f92-c9b7-43a4-b8a6-d15398c94a49-trace-0.jsonl"
+    },
+    {
+      "family": "memops_C03",
+      "policy": "rules",
+      "step": "stage-2-repeat",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied; bounded current answer accepted without requiring every historical detail.",
+      "answer": "Your latest confirmed follow-up appointment is on **May 14th at 9:45 AM** with **Dr. Liang** at **Riverside General**. \n\nRegarding a suggested time change: There are **no pending proposals** awaiting your response. Although Dr. Liang's office previously proposed moving your appointment to 10:15 AM due to a scheduling conflict, you declined the change upon calling back, and the clinic confirmed that your time remains at 9:45 AM. This is now the final confirmed booking. \n\n*(Note: This is kept entirely separate from your mother’s cardiology check-up on May 6th at St. Luke's and any unrelated appointments for Kevin.)*",
+      "control_path": [
+        "search",
+        "context_0",
+        "context_2",
+        "context_5",
+        "context_6",
+        "refresh_view",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 34928,
+          "charged_tokens": 34928,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 87.63083676621318,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/rules/banks/b90bc5b5-2a4f-4775-b66c-9f9df6fd337a/96ca00da-1980-4636-a018-b0a63723fad5-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/rules/banks/b90bc5b5-2a4f-4775-b66c-9f9df6fd337a/96ca00da-1980-4636-a018-b0a63723fad5-trace-0.jsonl"
+    },
+    {
+      "family": "memops_C03",
+      "policy": "generative",
+      "step": "stage-0",
+      "label": "unfulfilled",
+      "full_task_success": false,
+      "note": "Does not answer the available source-contained question; reports unavailable or empty evidence instead.",
+      "answer": "I currently lack access to appointment records or available tools to retrieve your latest confirmed follow-up details (date, time, clinician, location) or check for pending time change proposals. Consequently, I cannot separate your appointment from your mother's or Kevin's, nor verify the status of any proposed changes. Please provide the specific scheduling information directly.",
+      "control_path": [
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 12646,
+          "charged_tokens": 12646,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 57.05614537280053,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/generative/banks/7470891f-7b7f-4ba7-b27f-9bbdc4303229/163d71c7-3f48-43e9-bcdc-20c42d1f0261-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/generative/banks/7470891f-7b7f-4ba7-b27f-9bbdc4303229/163d71c7-3f48-43e9-bcdc-20c42d1f0261-trace-0.jsonl"
+    },
+    {
+      "family": "memops_C03",
+      "policy": "generative",
+      "step": "stage-0-repeat",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied; bounded current answer accepted without requiring every historical detail.",
+      "answer": "Your latest confirmed follow-up appointment is scheduled for May 14th at 9:30 AM with Dr. Liang at Riverside General. Regarding any suggested time changes, no information is currently available in your records to indicate a proposal is awaiting your response.",
+      "control_path": [
+        "refresh_view",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 15129,
+          "charged_tokens": 15129,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 28.024318609386683,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/generative/banks/7470891f-7b7f-4ba7-b27f-9bbdc4303229/4a8dc488-dae9-4208-b8be-093c168fb7e7-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/generative/banks/7470891f-7b7f-4ba7-b27f-9bbdc4303229/4a8dc488-dae9-4208-b8be-093c168fb7e7-trace-0.jsonl"
+    },
+    {
+      "family": "memops_C03",
+      "policy": "generative",
+      "step": "stage-1",
+      "label": "unfulfilled",
+      "full_task_success": false,
+      "note": "Does not answer the available source-contained question; reports unavailable or empty evidence instead.",
+      "answer": "I do not have access to your appointment records or current correspondence in this context to retrieve your latest confirmed follow-up details (date, time, clinician, location) or to check for any pending time change responses awaiting your reply.",
+      "control_path": [
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 10481,
+          "charged_tokens": 10481,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 25.31428125500679,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/generative/banks/7470891f-7b7f-4ba7-b27f-9bbdc4303229/5f181ca9-9578-43aa-beee-0f4d2c35b034-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/generative/banks/7470891f-7b7f-4ba7-b27f-9bbdc4303229/5f181ca9-9578-43aa-beee-0f4d2c35b034-trace-0.jsonl"
+    },
+    {
+      "family": "memops_C03",
+      "policy": "generative",
+      "step": "stage-1-repeat",
+      "label": "length_failure",
+      "full_task_success": false,
+      "note": "First response failed with VLLM_CHAT_TRUNCATED; receipt fallback does not fulfill the question.",
+      "answer": "回答协议失败, 执行已停止; 以下是已确认的操作状态。未列出的请求完成情况仍未确认。\n\n本轮业务结果: 未执行新的业务操作。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。\n\n本轮未取得新的业务回执。\n\n本轮语义记忆: 未提交。这里只报告列出的回执, 不确认全部请求或语义覆盖。\n\n本轮原始消息已记录。原始消息记录与语义记忆提交分别计数。",
+      "control_path": [],
+      "handoff_reason": null,
+      "cost": {
+        "generation": {
+          "known_tokens": 9269,
+          "charged_tokens": 9269,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 55.66320912074298,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/generative/banks/7470891f-7b7f-4ba7-b27f-9bbdc4303229/589f8863-3b16-47c0-b237-058c2f0b8c3a-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/generative/banks/7470891f-7b7f-4ba7-b27f-9bbdc4303229/589f8863-3b16-47c0-b237-058c2f0b8c3a-trace-0.jsonl"
+    },
+    {
+      "family": "memops_C03",
+      "policy": "generative",
+      "step": "stage-2",
+      "label": "unfulfilled",
+      "full_task_success": false,
+      "note": "Does not answer the available source-contained question; reports unavailable or empty evidence instead.",
+      "answer": "I cannot retrieve your latest confirmed follow-up appointment details (date, time, clinician, location) or determine if a time change is pending. No records containing your, your mother's, or Kevin's appointment history or current scheduling requests are available in the current context.",
+      "control_path": [
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 11992,
+          "charged_tokens": 11992,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 26.40469537395984,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/generative/banks/7470891f-7b7f-4ba7-b27f-9bbdc4303229/164822dc-a65c-49e9-bcf4-82ab71e162a6-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/generative/banks/7470891f-7b7f-4ba7-b27f-9bbdc4303229/164822dc-a65c-49e9-bcf4-82ab71e162a6-trace-0.jsonl"
+    },
+    {
+      "family": "memops_C03",
+      "policy": "generative",
+      "step": "stage-2-repeat",
+      "label": "unfulfilled",
+      "full_task_success": false,
+      "note": "Does not answer the available source-contained question; reports unavailable or empty evidence instead.",
+      "answer": "Based on the current session's available evidence and tools, I cannot provide your latest confirmed follow-up details (date, time, clinician, and location), nor can I confirm if a time change proposal is awaiting your response. No appointment records were delivered that distinguish your details from your mother's or Kevin's, or separate a confirmed change from a pending proposal.",
+      "control_path": [
+        "refresh_view",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 31736,
+          "charged_tokens": 31736,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 51.06276358664036,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/generative/banks/7470891f-7b7f-4ba7-b27f-9bbdc4303229/c141df54-ae78-4592-a223-4f420c97c7f3-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/generative/banks/7470891f-7b7f-4ba7-b27f-9bbdc4303229/c141df54-ae78-4592-a223-4f420c97c7f3-trace-0.jsonl"
+    }
+  ],
+  "remaining_families": [
+    "memops_D25",
+    "memops_E08",
+    "memops_E15",
+    "memops_F01"
+  ],
+  "model_calls": 0,
+  "version": "dynamic-memory-control-memops-dev-baselines-prefix72-results-v1",
+  "reviewed_positions": 72,
+  "planned_positions": 144,
+  "policies": {
+    "fixed_context": {
+      "positions": 24,
+      "counts": {
+        "correct": 17,
+        "wrong": 5,
+        "length_failure": 1,
+        "qualified": 1
+      },
+      "per_family": {
+        "memops_A19": {
+          "correct": 4,
+          "wrong": 2
+        },
+        "memops_A32": {
+          "correct": 6
+        },
+        "memops_B30": {
+          "correct": 3,
+          "length_failure": 1,
+          "wrong": 2
+        },
+        "memops_C03": {
+          "correct": 4,
+          "qualified": 1,
+          "wrong": 1
+        }
+      },
+      "generation_tokens": 262454,
+      "new_unknown_usage": 0,
+      "message_wall_seconds": 991.2405728669837
+    },
+    "rules": {
+      "positions": 24,
+      "counts": {
+        "correct": 16,
+        "wrong": 1,
+        "qualified": 4,
+        "length_failure": 1,
+        "incomplete": 2
+      },
+      "per_family": {
+        "memops_A19": {
+          "correct": 4,
+          "wrong": 1,
+          "qualified": 1
+        },
+        "memops_A32": {
+          "correct": 5,
+          "length_failure": 1
+        },
+        "memops_B30": {
+          "qualified": 3,
+          "correct": 1,
+          "incomplete": 2
+        },
+        "memops_C03": {
+          "correct": 6
+        }
+      },
+      "generation_tokens": 419270,
+      "new_unknown_usage": 0,
+      "message_wall_seconds": 1102.2139724968001
+    },
+    "generative": {
+      "positions": 24,
+      "counts": {
+        "unfulfilled": 15,
+        "correct": 5,
+        "length_failure": 2,
+        "qualified": 1,
+        "wrong": 1
+      },
+      "per_family": {
+        "memops_A19": {
+          "unfulfilled": 5,
+          "correct": 1
+        },
+        "memops_A32": {
+          "correct": 1,
+          "unfulfilled": 4,
+          "length_failure": 1
+        },
+        "memops_B30": {
+          "correct": 2,
+          "qualified": 1,
+          "wrong": 1,
+          "unfulfilled": 2
+        },
+        "memops_C03": {
+          "unfulfilled": 4,
+          "correct": 1,
+          "length_failure": 1
+        }
+      },
+      "generation_tokens": 356207,
+      "new_unknown_usage": 0,
+      "message_wall_seconds": 1013.9723186604679
+    }
+  },
+  "method_source": "0acc4b9a",
+  "dispatcher": "17d6f621",
+  "scope": "First four of eight predeclared external-development families. Partial quality/cost audit, not a full comparison or recipe selection. Saved/committed absence does not establish source-report absence. Original first failures preserved. State/view audit separate."
+}
