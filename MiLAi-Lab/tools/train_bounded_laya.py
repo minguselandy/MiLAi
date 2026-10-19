@@ -19,7 +19,7 @@ from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any
 
-from evaluate_bounded_laya import score_predictions
+from evaluate_bounded_laya import score_applicability_predictions, score_predictions
 from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.harness.contextual_artifacts import RunBudget, RunLimits
 from milai_lab.providers.laya_local import NativeDecision
@@ -134,7 +134,8 @@ def main() -> None:
     parser.add_argument("--head-max-len", type=int, default=384)
     parser.add_argument("--backend", choices=("native", "linear"), default="native")
     parser.add_argument("--objective", choices=("soft-ce", "set"), default="soft-ce")
-    parser.add_argument("--task", choices=("bounded_reader", "memory_operation"),
+    parser.add_argument("--task", choices=("bounded_reader", "memory_operation",
+                                           "instruction_applicability"),
                         default="bounded_reader", help="Use task-specific offline decision metrics")
     parser.add_argument("--operation-state", choices=("full", "mechanical", "shared"),
                         default="full",
@@ -270,6 +271,8 @@ def main() -> None:
                 from milai_lab.methods.memory_control_learning import score_operation_predictions
 
                 result = score_operation_predictions(rows, predictions)
+            elif args.task == "instruction_applicability":
+                result = score_applicability_predictions(rows, predictions)
             else:
                 result = score_predictions(rows, predictions)
             write_json(args.output / split / str(epoch) / "summary.json", result)
@@ -374,10 +377,12 @@ def main() -> None:
         with args.budget.with_name("budget.json.http-owner.lock").open("a+b") as lease:
             fcntl.flock(lease, fcntl.LOCK_EX)
             budget = RunBudget(RunLimits(**read_json(args.budget)["limits"]), args.budget)
-            phase = args.compute_phase or (
-                f"{'laya' if args.backend == 'native' else 'linear'}_memory_operation_ce"
-                if args.task == "memory_operation" else
-                "laya_reader_ce" if args.backend == "native" else "linear_reader_ce")
+            backend = "laya" if args.backend == "native" else "linear"
+            phase = args.compute_phase or {
+                "memory_operation": f"{backend}_memory_operation_ce",
+                "instruction_applicability": f"{backend}_instruction_applicability_ce",
+                "bounded_reader": f"{backend}_reader_ce",
+            }[args.task]
             budget.record_compute(phase, measures)
         write_json(args.output / "run.json", run)
 

@@ -97,8 +97,39 @@
   },
   "snapshot_note": "Read from live run.json; revalidate process and current file before any dispatch.",
   "final_diagnostic_snapshot": {
-    "dev_predictions": 105,
-    "train_predictions": 0,
+    "dev_predictions": 456,
+    "train_predictions": 564,
     "final_checkpoint_written": false
+  },
+  "final_dev": {
+    "counts": {
+      "labelled": 353,
+      "accepted": 255,
+      "masked": 103,
+      "handoff_outside_reviewed_preference": 9
+    },
+    "strata": {
+      "source_reviewed_preference": {
+        "labelled": 353,
+        "accepted": 255
+      }
+    },
+    "selected_operations": {
+      "SEARCH": {
+        "selected": 62,
+        "accepted": 62
+      },
+      "READ": {
+        "selected": 231,
+        "accepted": 142
+      },
+      "HANDOFF": {
+        "selected": 60,
+        "accepted": 51
+      }
+    },
+    "families": 16,
+    "family_macro_acceptance": 0.746664859985231,
+    "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
   }
 }

@@ -36,7 +36,8 @@ class NativeDecision:
         )
 
         started, cpu = time.perf_counter(), time.process_time()
-        question = to_internal("next", payload["questions"]["next"])
+        ((question_id, schema),) = payload["questions"].items()
+        question = to_internal(question_id, schema)
         state_ids = encode_text(self.tokenizer, serialize_state(payload["state"]).replace(
             self.tokenizer.mask_token, " "), add_special_tokens=False)["input_ids"]
         self.counters["state_tokenizations"] += 1

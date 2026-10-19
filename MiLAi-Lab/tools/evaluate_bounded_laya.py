@@ -22,7 +22,37 @@ from milai_lab.harness.contextual_artifacts import RunBudget, RunLimits
 from milai_lab.providers.laya_local import NativeDecision
 
 
-def score_predictions(rows: list[dict[str, Any]], predictions: list[dict[str, Any]]) -> dict:
+def score_applicability_predictions(
+    rows: list[dict[str, Any]], predictions: list[dict[str, Any]],
+) -> dict[str, Any]:
+    """Published candidate labels measure applicability, not operation sufficiency."""
+    counts: Counter[str] = Counter()
+    confusion: Counter[tuple[str, str]] = Counter()
+    families: dict[str, list[int]] = {}
+    for row, predicted in zip(rows, predictions, strict=True):
+        target = row["gold"].get("applicability", {}).get("probabilities", {})
+        if not target:
+            counts["masked"] += 1
+            continue
+        expected = max(target, key=target.__getitem__)
+        choice = predicted["choice"]
+        correct = int(expected == choice)
+        confusion[expected, choice] += 1
+        counts["labelled"] += 1
+        counts["correct"] += correct
+        families.setdefault(row["metadata"]["family"], []).append(correct)
+    return {"counts": dict(counts), "families": len(families),
+            "family_macro_accuracy": (sum(sum(v) / len(v) for v in families.values())
+                                      / len(families) if families else None),
+            "confusion": [{"expected": e, "predicted": p, "count": n}
+                          for (e, p), n in sorted(confusion.items())],
+            "scope": "Published candidate applicability labels; not factuality, calibrated "
+                     "confidence, operation preference or Host task success"}
+
+
+def score_predictions(
+    rows: list[dict[str, Any]], predictions: list[dict[str, Any]],
+) -> dict[str, Any]:
     counts: Counter[str] = Counter()
     constant_stops: Counter[str] = Counter()
     strata: dict[str, Counter[str]] = {}
@@ -66,9 +96,12 @@ def main() -> None:
     parser.add_argument("checkpoint", type=Path)
     parser.add_argument("output", type=Path)
     parser.add_argument("--budget", type=Path, required=True)
+    parser.add_argument("--compute-phase", help="Distinct phase in the original shared ledger")
     parser.add_argument("--threads", type=int, default=4)
     parser.add_argument("--max-len", type=int, default=4096)
     parser.add_argument("--head-max-len", type=int, default=384)
+    parser.add_argument("--task", choices=("bounded_reader", "instruction_applicability"),
+                        default="bounded_reader")
     args = parser.parse_args()
     import torch
 
@@ -80,7 +113,7 @@ def main() -> None:
            "checkpoint": str(args.checkpoint.resolve()), "device": "cpu",
            "threads": args.threads, "max_len": args.max_len,
            "head_max_len": args.head_max_len, "completed_states": 0, "planned_states": len(rows),
-           "calibrated": False, "http_requests": 0}
+           "task": args.task, "calibrated": False, "http_requests": 0}
     write_json(args.output / "run.json", run)
     started, cpu = time.perf_counter(), time.process_time()
     predictions = []
@@ -97,7 +130,9 @@ def main() -> None:
             write_json(args.output / "run.json", run)
             print(json.dumps({"completed": len(predictions), "planned": len(rows),
                               "input_tokens": prediction["input_tokens"]}), flush=True)
-        write_json(args.output / "results.json", score_predictions(rows, predictions))
+        scorer = (score_applicability_predictions if args.task == "instruction_applicability"
+                  else score_predictions)
+        write_json(args.output / "results.json", scorer(rows, predictions))
         run["status"] = "COMPLETED"
     except BaseException as error:
         run.update(status="FAILED", error_type=type(error).__name__, error=str(error))
@@ -112,7 +147,10 @@ def main() -> None:
         with args.budget.with_name("budget.json.http-owner.lock").open("a+b") as lease:
             fcntl.flock(lease, fcntl.LOCK_EX)
             budget = RunBudget(RunLimits(**read_json(args.budget)["limits"]), args.budget)
-            budget.record_compute("laya_reader_prefix", measures)
+            phase = args.compute_phase or (
+                "laya_candidate_applicability" if args.task == "instruction_applicability"
+                else "laya_reader_prefix")
+            budget.record_compute(phase, measures)
         write_json(args.output / "run.json", run)
 
 

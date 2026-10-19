@@ -3,6 +3,8 @@
 ACTIVE model job PID509200 / exec65861, frozen training source c0770e49,
 artifacts/host-intent-retrieval-v3/fitting/t0-native-shared-seed0-v1/run.json.
 Snapshot 207/207 updates, 3312 train rows, 16457101 inputtokens; process RUNNING.
+Final dev456 predictions closed:255/353 accepted,macro0.746665,9HANDOFF outside preference.
+Train1649 final diagnostic still running; verify exact counts before dispatch.
 Initial dev456 predictions closed:152/353 reviewed preferences accepted,103masked;
 family-macro0.435331,15HANDOFF outside reviewed preference. This is NOT task accuracy or final gain.
 Revalidate actual PID/driver and pollsamehandle. Never restart from observation timeout.
@@ -57,7 +59,10 @@ Historical notes below superseded.
 
 FollowIR auxiliary prepared in data/followir-applicability-v1:1427train/349dev,965/241groups;
 max747/644 tokens,all literal inputs unchanged,no truncation,0modelcalls.3puretests/static/boundariesPASS.
-NOT mixed/fitted: NativeDecision currently expects next; task-aware auxiliary inference/scoring remains.
+Working head now supports single actual question IDs and --task instruction_applicability in
+train/eval with distinct candidate metrics/ledger phase.6puretests+2SDKpreparation(stubforward)PASS,
+Ruff,mypy and package/tools boundariesPASS. No actual auxiliary model run or mixedT1 yet.
+Frozen c0770e49 training and63603feb tool evaluation remain unchanged.
 Author spot review8randomgroups/11rows done:9topically supported (2explicit factuality-unverified),
 2qualified relevance boundaries; labelsunchanged, not independent or exhaustive. Sampleartifact underauxdir.
 8measured offlinephases now pending-v6 (14.655381CPU); failed tokenizer-root diagnostic wall5.83700721

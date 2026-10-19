@@ -78,10 +78,9 @@
     "tools_boundary": "passed"
   },
   "remaining": [
-    "Independent source/label spot review before claiming annotation quality.",
-    "Task-aware native prediction and per-task scoring; current NativeDecision expects next question.",
-    "Registered T1 source expansion, mixture/sampling and matched update budgets.",
-    "No current operation state, frozen T0 inputs, or running trainer modified."
+    "Source/label review remains exploratory and partial; no independent validity claim.",
+    "T1 source expansion, declared mixture/sampling and matched update budgets.",
+    "Actual auxiliary model prediction and mixed-task fitting/evaluation still not run."
   ],
   "first_preparation_diagnostic_failure": "artifacts/host-intent-retrieval-v3/data/followir-applicability-v1/input-audit-first-failure.json",
   "failure_qualification": "Wrong tokenizer root rejected before tokenization; corrected to existing tokenizer subdirectory without model loads/forwards. Tool wall5.83700721s known, processCPU unmeasured.",
@@ -98,5 +97,18 @@
     "published_labels_changed": false,
     "scope": "Candidate topical/instruction applicability, not factuality, clinical efficacy, confidence calibration or operation sufficiency.",
     "independent": false
+  },
+  "native_task_support": {
+    "status": "IMPLEMENTED_OFFLINE_TESTED_NOT_MODEL_EVALUATED",
+    "provider": "src/milai_lab/providers/laya_local.py",
+    "selection": "One actual question ID, including unchanged legacy next and auxiliary applicability.",
+    "entrypoints": [
+      "tools/train_bounded_laya.py --task instruction_applicability",
+      "tools/evaluate_bounded_laya.py --task instruction_applicability"
+    ],
+    "metrics": "Published-label confusion counts and source-group macro accuracy; separate from operation preference or task success.",
+    "accounting": "Distinct original-ledger phase; no separate ledger.",
+    "tests": "6 pure grouping/metrics tests and2 real SDK preparation tests with stubbed forward; no model loaded.",
+    "static": "Ruff passed; tools mypy in CUDAenv with SDK import-untyped exclusion, provider mypy in HTTPenv preserving existing optional-import annotations."
   }
 }
