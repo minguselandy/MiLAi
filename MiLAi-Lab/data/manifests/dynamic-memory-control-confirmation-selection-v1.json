@@ -30,9 +30,25 @@
       "reuse/refresh correctness",
       "full disaggregated method computation including load/recovery",
       "all first failures, unknown usage and partial effects"
-    ]
+    ],
+    "allocated_track_counts_from_metadata": {
+      "source_task": 7,
+      "explicit_lifecycle": 3
+    },
+    "analysis": {
+      "quality": "Report source-faithful complete-task macro success by source family and separately by lifecycle family. Required lifecycle receipts, target unavailability and non-target preservation are additional explicit state outcomes; do not pool these tracks into an inflated source count.",
+      "seeds": "Report each selected learned seed 0/1/2 and their equal-weight mean. Seeds, prefixes and repeated questions remain inside their originating source-family cluster, never independent samples.",
+      "paired_intervals": "Use 20000 paired family bootstrap resamples, analysis RNG seed 0, within each track. Carry every stage, repeat and declared seed together when a family is selected. Report sparse per-family outcomes and wide intervals; no equivalence claim from an interval crossing zero.",
+      "cost_claim": "No accepted quality loss is registered for an efficiency-superiority claim (margin 0). Report observed quality-cost tradeoffs descriptively. Claim cost improvement with preserved quality only if the paired quality evidence excludes degradation and the separately reported costs support improvement; otherwise retain uncertainty.",
+      "cost_components": "Report generation/embedding known and unknown usage, native forwards/input tokens/CPU/wall, loads/recovery, actual read/refresh operation time and whole-message wall. Whole-message timer wraps message(), including source imports. Whole-dispatch wall and preparation overhead remain separate; nested clocks are not added twice.",
+      "research_cost": "Training, label preparation, probes and author annotation are separate research costs. CPU serialization timers do not measure semantic author work.",
+      "source_exposure": "Seven source-task and three explicit-lifecycle backgrounds are provisionally reserved by existing metadata. Prior preparation scanned/indexed files without model calls; they are not byte-sealed unread blobs or guaranteed pretraining-unseen. Preserve any later discovered prior evaluated exposure as regression, with no favorable replacement.",
+      "lifecycle_admission": "After recipe/data/runtime freeze, inspect the three reserved lifecycle sources under the existing separation rule. Current normal Host commands must execute save/update/forget and subsequent queries; historical quoted requests and conversation claims alone are not actual lifecycle effects."
+    }
   },
   "conditional_work": "No automatic RL, value-model or encoder-cache platform. Additional mechanisms require evidence of the corresponding bottleneck and a separate matched comparison.",
-  "remaining": "Wider source review/collection/fitting, current development outcomes, protected task/source preparation and seed1/2fits are unfinished. This protocol is not completion evidence.",
-  "model_calls": 0
+  "remaining": "V10 baselines/own trajectories, expanded81 fit/evaluation, registered development selection, all-seed fitting and protected source/lifecycle preparation remain unfinished. Metadata-only analysis registration does not admit protected bodies or establish completion.",
+  "model_calls": 0,
+  "analysis_registration_revision": 2,
+  "analysis_registration_timing": "Detailed aggregation/cost criteria added after partial external-development reviews but before any protected semantic inspection, selected recipe/runtime freeze or confirmation generation. Original recipe-selection rule unchanged."
 }

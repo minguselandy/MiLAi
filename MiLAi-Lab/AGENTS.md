@@ -1,5 +1,17 @@
 # LIVE V10: 2026-10-19
 
+E08/E15baseline tasks+views complete. E08fixed6qualified;rules1C/5qualified;
+generative1C/3unfulfilled/1incomplete/1qualified.8views49nodes/24rules,1stalereuse.
+E15fixed3C/3qualified;rules4C/2qualified;generative3W/3unfulfilled.8views42nodes/7rules,
+1invalidreuse. Reports in memops-dev-baselines-{e08,e15}-results-v1. No model replay/score repair.
+Baselinefirst126readiness inputs prepared53opened-view contexts, F01pending; no full baseline
+label compilation yet. F01fixed6 labels saved in review-memops-dev-baselines-f01-v1:
+4C/1length/1W (omits175). Rules/generative remain unreviewed. Last133/144, rulesF01active.
+Confirmation analysis registration revision2 beforeprotectedsemanticinspection: actualreserved
+metadata7source_task+3explicit_lifecycle, not9+1 or48. Separate tracks; all3seeds retained within
+family clusters;20kpaired bootstrap analysisseed0; margin0for efficiency-quality-preservation claim.
+Original recipe-selection rule unchanged; source/runtime freeze and protected body admission stillfuture.
+
 Development query-structure projection now retains Source session and presents bodies in capture
 order AFTER stable alias allocation. Originalbody/role/reportdates/calendar/scope/bindings/schema
 unchanged; capture clocks still not event clocks. No new gate or case branch.50relatedtests,
