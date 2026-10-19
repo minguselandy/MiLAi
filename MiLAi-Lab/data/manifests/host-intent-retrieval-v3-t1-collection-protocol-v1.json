@@ -1,0 +1,39 @@
+{
+  "status": "REGISTERED_BEFORE_NEW_T1_COLLECTION",
+  "source_version": "c6b1f3bd",
+  "configuration": "configs/host-intent-retrieval-v3-selected-fixed-context.json",
+  "configuration_version": "host-intent-retrieval-v3-selected-fixed-context-v2",
+  "source_input": "artifacts/host-intent-retrieval-v3/data/t1-sources-v1/new-histories.json",
+  "allocation": "data/manifests/host-intent-retrieval-v3-t1-allocation.json",
+  "counts": {
+    "train": {
+      "new_groups": 64,
+      "positions": 228
+    },
+    "dev": {
+      "new_groups": 16,
+      "positions": 52
+    }
+  },
+  "collector_policy": "fixed_context",
+  "policy_choice": "Selected stronger simple C0 on closed T0 development panel (46 full-correct versus rules 38). Collect new observable states; executed teacher decisions are not labels.",
+  "interfaces": [
+    "query_only",
+    "rich"
+  ],
+  "transport": "json_action",
+  "native_E0": false,
+  "sequence": [
+    "t1-new-train-fixed-context-v1",
+    "t1-new-dev-fixed-context-v1"
+  ],
+  "start_condition": "Mixed one-update fit and exported dev6 validation terminal, original ledger reconciled, no other actual model job. Train first; dev only after train terminal and first-failure review.",
+  "retained_existing_data": "Reuse old T0 operation trajectories and reviewed labels unchanged; no replay of old positions. Existing rules/generative diversity remains, later T2 adds current-policy trajectories.",
+  "supervision": "Review actual source pools and actual Host requests; source-bound witnesses label short-range operation preferences, not native-answer imitation. Ambiguous preferences masked.",
+  "limits": "Existing Host/model/prompt/request and return budgets; same actual Store, independent banks per interface. No model service change.",
+  "failure_policy": "First failures and costs retained. Known response length/format failures with no unknown-usage increase advance only to untouched next positions; unexpected failure stops for inspection. No automatic replay.",
+  "accounting": "Original continuous ledger only; no second model job or offline settlement while model job active.",
+  "constraint": "Current retrieval schema feedback disables SHA fingerprints; no checksum or replacement fingerprints. Historical receipts retained.",
+  "training_status": "New T1 not labelled/fitted. Final mixture and equal-update comparison budget frozen after actual usable label counts.",
+  "interpretation": "Mixed-source, mixed-collector development expansion, not an isolated collector effect, holdout result or native-tool validation."
+}

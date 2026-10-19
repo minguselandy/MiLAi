@@ -1,4 +1,23 @@
-# CURRENT 2026-10-20: one-update mixed pipeline probe RUNNING
+# CURRENT 2026-10-20: mixed diagnostic CLOSED; new T1 collection registered
+
+Both mixed diagnostic jobs CLOSED: fit PID1380577 and exported dev6 PID1391476 absent,
+authoritative runs COMPLETED. Export exec53815 no longer available; no restart.
+All6 public inputs equal, choices6/6 unchanged, task/component metrics equal; maxlogitdelta.082847.
+Fit1update/16draws/93595tokens; export6forwards/13819tokens. All compute matched originalledger;
+new read-only comparison .013133CPU settled once under host_intent_mixed_probe_export_comparison_v1.
+Throwaway diagnostic weights, NOT mainT1 or efficacy evidence.
+
+New T1 protocol registered in host-intent-retrieval-v3-t1-collection-protocol-v1.json:
+frozen-c6b1f3bd with fingerprint-free retrieval feedback; selected fixed_context C0,
+query_only+rich, JSON-action. NEW train64groups/228positions then NEW dev16groups/52positions,
+using t1-sources-v1/new-histories.json only. No oldT0 replay; old rules/generative data retained.
+Actual new source pools/requests need review; teacher decisions/native gold are not operation labels.
+No new T1 fitting until actual labels and matched update budget frozen. Source reviews may proceed
+while sole collection runs; no second actual model job or offline settlement while active.
+Originalledger only; pending native-service permission still unanswered, no service change.
+Remaining scope and historical results below still apply; current model dispatch must be revalidated.
+
+# PREVIOUS 2026-10-20: one-update mixed pipeline probe RUNNING
 
 ACTIVE MODEL JOB PID1380577 / exec48123 / frozen-c6b1f3bd,
 fitting/mixed-pipeline-probe-v1/run.json.6train/6dev selected actual examples,1update,

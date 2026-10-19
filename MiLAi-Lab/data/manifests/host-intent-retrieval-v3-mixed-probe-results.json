@@ -1,0 +1,200 @@
+{
+  "status": "MIXED_PIPELINE_DIAGNOSTIC_COMPLETE",
+  "source_version": "c6b1f3bd",
+  "fit": "artifacts/host-intent-retrieval-v3/fitting/mixed-pipeline-probe-v1",
+  "persisted_evaluation": "artifacts/host-intent-retrieval-v3/evaluations/mixed-pipeline-probe-export-v1",
+  "fit_process_absent": 1380577,
+  "evaluation_process_absent": 1391476,
+  "evaluation_exec_observation": "Original handle no longer available; actual run COMPLETED and PID absent, no restart.",
+  "train_states": 6,
+  "dev_states": 6,
+  "optimizer_updates": 1,
+  "public_inputs_equal": 6,
+  "choice_agreement": 6,
+  "truncated": 0,
+  "nonfinite_logits": 0,
+  "max_abs_logit_delta": 0.08284711837768555,
+  "rows": [
+    {
+      "row": 0,
+      "task": "memory_operation",
+      "in_memory_choice": "search_0_8",
+      "persisted_choice": "search_0_8",
+      "max_abs_logit_delta": 0.08284711837768555,
+      "input_tokens": 1961
+    },
+    {
+      "row": 1,
+      "task": "memory_operation",
+      "in_memory_choice": "search_0_16",
+      "persisted_choice": "search_0_16",
+      "max_abs_logit_delta": 0.06854867935180664,
+      "input_tokens": 2448
+    },
+    {
+      "row": 2,
+      "task": "memory_operation",
+      "in_memory_choice": "handoff",
+      "persisted_choice": "handoff",
+      "max_abs_logit_delta": 0.05716109275817871,
+      "input_tokens": 3948
+    },
+    {
+      "row": 3,
+      "task": "memory_operation",
+      "in_memory_choice": "search_0_16",
+      "persisted_choice": "search_0_16",
+      "max_abs_logit_delta": 0.06695346534252167,
+      "input_tokens": 4656
+    },
+    {
+      "row": 4,
+      "task": "instruction_applicability",
+      "in_memory_choice": "satisfies",
+      "persisted_choice": "satisfies",
+      "max_abs_logit_delta": 0.012950420379638672,
+      "input_tokens": 408
+    },
+    {
+      "row": 5,
+      "task": "instruction_applicability",
+      "in_memory_choice": "satisfies",
+      "persisted_choice": "satisfies",
+      "max_abs_logit_delta": 0.01847207546234131,
+      "input_tokens": 398
+    }
+  ],
+  "task_metrics_equal": true,
+  "results": {
+    "by_task": {
+      "memory_operation": {
+        "counts": {
+          "labelled": 4,
+          "accepted": 1,
+          "handoff_outside_reviewed_preference": 1
+        },
+        "strata": {
+          "source_reviewed_preference": {
+            "labelled": 4,
+            "accepted": 1
+          }
+        },
+        "selected_operations": {
+          "SEARCH": {
+            "selected": 3,
+            "accepted": 1
+          },
+          "HANDOFF": {
+            "selected": 1,
+            "accepted": 0
+          }
+        },
+        "families": 2,
+        "family_macro_acceptance": 0.25,
+        "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+      },
+      "instruction_applicability": {
+        "counts": {
+          "labelled": 2,
+          "correct": 1
+        },
+        "families": 1,
+        "family_macro_accuracy": 0.5,
+        "confusion": [
+          {
+            "expected": "does_not_satisfy",
+            "predicted": "satisfies",
+            "count": 1
+          },
+          {
+            "expected": "satisfies",
+            "predicted": "satisfies",
+            "count": 1
+          }
+        ],
+        "scope": "Published candidate applicability labels; not factuality, calibrated confidence, operation preference or Host task success"
+      }
+    },
+    "by_component": {
+      "operation_history": {
+        "counts": {
+          "labelled": 2,
+          "accepted": 1
+        },
+        "strata": {
+          "source_reviewed_preference": {
+            "labelled": 2,
+            "accepted": 1
+          }
+        },
+        "selected_operations": {
+          "SEARCH": {
+            "selected": 2,
+            "accepted": 1
+          }
+        },
+        "families": 1,
+        "family_macro_acceptance": 0.5,
+        "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+      },
+      "complementary_evidence": {
+        "counts": {
+          "labelled": 2,
+          "accepted": 0,
+          "handoff_outside_reviewed_preference": 1
+        },
+        "strata": {
+          "source_reviewed_preference": {
+            "labelled": 2,
+            "accepted": 0
+          }
+        },
+        "selected_operations": {
+          "HANDOFF": {
+            "selected": 1,
+            "accepted": 0
+          },
+          "SEARCH": {
+            "selected": 1,
+            "accepted": 0
+          }
+        },
+        "families": 1,
+        "family_macro_acceptance": 0.0,
+        "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+      },
+      "instruction_applicability": {
+        "counts": {
+          "labelled": 2,
+          "correct": 1
+        },
+        "families": 1,
+        "family_macro_accuracy": 0.5,
+        "confusion": [
+          {
+            "expected": "does_not_satisfy",
+            "predicted": "satisfies",
+            "count": 1
+          },
+          {
+            "expected": "satisfies",
+            "predicted": "satisfies",
+            "count": 1
+          }
+        ],
+        "scope": "Published candidate applicability labels; not factuality, calibrated confidence, operation preference or Host task success"
+      }
+    },
+    "scope": "Task-specific native diagnostics; no combined memory score or Host success"
+  },
+  "ledger_phases_match": true,
+  "comparison_compute": {
+    "phase": "host_intent_mixed_probe_export_comparison_v1",
+    "wall_seconds": 0.013133454136550426,
+    "cpu_seconds": 0.013132849000000002,
+    "model_calls": 0,
+    "ledger_recorded": true
+  },
+  "precision": "Standard SDK saves FP16 and reloads float32. Logit differences are observed, not attributed solely to precision.",
+  "scope": "Forward/backward, counters, task-specific scoring and serialization diagnostic only; throwaway weights, not expanded T1 or efficacy evidence."
+}
