@@ -1,11 +1,16 @@
 {
   "schema": "host_intent_retrieval_v3_data",
   "plan": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/docs/MILAI_HOST_INTENT_RETRIEVAL_DEVELOPMENT_EXPERIMENT_PLAN_20261019_v3.md",
-  "current_stage": "M1 development; one of six authored histories prepared",
+  "current_stage": "M1 development: six authored histories prepared; native protocol not yet available",
   "splits": {
     "dev": {
       "source_groups": [
-        "authored-language-preference-v3"
+        "authored-language-preference-v3",
+        "authored-effective-threshold-v3",
+        "authored-stored-vs-original-v3",
+        "authored-partial-evidence-v3",
+        "authored-same-name-scope-v3",
+        "authored-changed-view-missing-detail-v3"
       ],
       "fixture": "data/fixtures/host-intent-retrieval-v3-e0.json",
       "training_allowed": false
@@ -26,13 +31,7 @@
     ],
     "external_tool_calls": 24
   },
-  "e0_pending_coverage": [
-    "effective_time_before_after",
-    "original_wording_vs_actual_stored_revision",
-    "partial_evidence_already_delivered",
-    "same_name_subjects_and_scope",
-    "missing_evidence_or_outdated_view"
-  ],
+  "e0_pending_coverage": [],
   "training_targets": {
     "T0_train_groups": 64,
     "T0_dev_groups": 16,
@@ -58,5 +57,15 @@
     "LongMemEval_V2_Small": 451,
     "Mem2Act_GivenTool_small": 400
   },
-  "hash_verification": false
+  "hash_verification": false,
+  "e0_coverage_prepared": [
+    "simple_fact_and_same_query_different_purpose",
+    "same_pool_before_and_after_effective_time",
+    "original_statement_vs_actual_saved_revision",
+    "same_task_and_sources_with_actual_prior_evidence",
+    "same_name_subjects_target_scope_and_shared_context",
+    "actual_own_view_followed_by_relevant_arrival_and_missing_evidence"
+  ],
+  "e0_native_status": "0/24; shared service approval pending",
+  "fixture_setup": "Original Store save/update receipts for actual stored history; actual Fixed read receipt for prior-evidence context; costs separated; no ideal generated view inserted."
 }

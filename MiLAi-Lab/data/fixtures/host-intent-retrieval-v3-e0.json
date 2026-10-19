@@ -27,6 +27,228 @@
         }
       ],
       "review_basis": "Morning check-ins Spanish; written weekly summary English; both purposes use the identical pre-query source pool."
+    },
+    {
+      "id": "effective_threshold",
+      "source_group": "authored-effective-threshold-v3",
+      "coverage": "same_pool_before_and_after_effective_time",
+      "sources": [
+        {
+          "original_event_id": "policy",
+          "event_key": "policy",
+          "session_id": "travel-policy",
+          "role": "user",
+          "content": "For project Orion travel expenses, approval is required above 600 credits. The threshold is 900 credits for project Vega.",
+          "occurred_at": "2026-10-01T09:00:00+08:00",
+          "calendar_context": "Asia/Shanghai"
+        },
+        {
+          "original_event_id": "future-change",
+          "event_key": "future-change",
+          "session_id": "travel-policy",
+          "role": "user",
+          "content": "From November 1, 2026, the Orion travel threshold becomes 1200 credits. This change is not retroactive. Vega is unchanged.",
+          "occurred_at": "2026-10-12T10:00:00+08:00",
+          "calendar_context": "Asia/Shanghai"
+        }
+      ],
+      "requests": [
+        {
+          "id": "before",
+          "content": "For Orion travel expenses on October 31, 2026, what approval threshold applies? Retrieve the relevant policy evidence and distinguish the other project."
+        },
+        {
+          "id": "after",
+          "content": "For Orion travel expenses on November 2, 2026, what approval threshold applies? Retrieve the relevant policy evidence and distinguish the other project."
+        }
+      ],
+      "review_basis": "Same two sources initially available to both goals; Orion600 before Nov1 and1200 after, Vega900 unchanged. Capture date is not effective date."
+    },
+    {
+      "id": "stored_vs_original",
+      "source_group": "authored-stored-vs-original-v3",
+      "coverage": "original_statement_vs_actual_saved_revision",
+      "sources": [
+        {
+          "original_event_id": "original-report",
+          "event_key": "original-report",
+          "session_id": "handover",
+          "role": "user",
+          "content": "The Atlas handover begins on April 3, 2027.",
+          "occurred_at": "2026-10-01T09:00:00+08:00",
+          "calendar_context": "Asia/Shanghai"
+        },
+        {
+          "original_event_id": "correction",
+          "event_key": "correction",
+          "session_id": "handover",
+          "role": "user",
+          "content": "Correct the Atlas handover date to April 6, 2027.",
+          "occurred_at": "2026-10-02T09:00:00+08:00",
+          "calendar_context": "Asia/Shanghai"
+        }
+      ],
+      "stored_revisions": [
+        {
+          "record": "handover",
+          "source_event_id": "original-report",
+          "text": "The Atlas handover begins on April 8, 2027."
+        },
+        {
+          "record": "handover",
+          "source_event_id": "correction",
+          "text": "The Atlas handover begins on April 6, 2027."
+        }
+      ],
+      "setup_qualification": "Declared scripted Writer error in revision1, followed by a real API correction to revision2. This is a controlled Store fixture, not an observed model Writer error or a repaired evaluation state.",
+      "requests": [
+        {
+          "id": "spoken",
+          "content": "What date did I originally say for the Atlas handover, before my correction? Retrieve the original statement, not the later interpretation."
+        },
+        {
+          "id": "stored",
+          "content": "What date did the system actually save in the first revision of the Atlas handover record, before the correction? Retrieve that stored revision; do not substitute what I originally said."
+        }
+      ],
+      "review_basis": "Original user statement April3; actual committed revision1 deliberately April8; actual revision2 April6. Every date is verified against its own source or stored version, not inferred from another representation."
+    },
+    {
+      "id": "partial_evidence",
+      "source_group": "authored-partial-evidence-v3",
+      "coverage": "same_task_and_sources_with_actual_prior_evidence",
+      "sources": [
+        {
+          "original_event_id": "room",
+          "event_key": "room",
+          "session_id": "room-location",
+          "role": "user",
+          "content": "The Cedar workshop is in room N-214 on the second floor.",
+          "occurred_at": "2026-10-01T09:00:00+08:00",
+          "calendar_context": "Asia/Shanghai"
+        },
+        {
+          "original_event_id": "entry",
+          "event_key": "entry",
+          "session_id": "entry-instructions",
+          "role": "user",
+          "content": "For the Cedar workshop, enter through the east door using access code 7316. The west door is exit-only.",
+          "occurred_at": "2026-10-01T09:00:00+08:00",
+          "calendar_context": "Asia/Shanghai"
+        },
+        {
+          "original_event_id": "equipment",
+          "event_key": "equipment",
+          "session_id": "equipment",
+          "role": "user",
+          "content": "The spare projector belongs to room S-108 and is available after 15:00.",
+          "occurred_at": "2026-10-01T09:00:00+08:00",
+          "calendar_context": "Asia/Shanghai"
+        }
+      ],
+      "prefetch": {
+        "query": "Cedar workshop room location",
+        "limits": {
+          "max_control_steps": 3
+        }
+      },
+      "requests": [
+        {
+          "id": "from_scratch",
+          "content": "Retrieve the room location and entry instructions for the Cedar workshop, then tell me how to get there."
+        },
+        {
+          "id": "with_prior",
+          "content": "Retrieve the room location and entry instructions for the Cedar workshop, then tell me how to get there. Reuse the evidence already delivered below and obtain what remains missing.",
+          "provide_prefetch": true
+        }
+      ],
+      "setup_qualification": "Both banks execute the same Fixed(reads1), three-step source retrieval. Only the with_prior Host is shown its own actual tool receipt. Setup reads and their CPU/time are separate, not counted as Host evaluation calls. No gold evidence IDs enter the request.",
+      "review_basis": "N-214, second floor; east door code7316, west exit-only. Verify prefetch actually contains only room evidence before claiming partial-evidence coverage."
+    },
+    {
+      "id": "same_name_scope",
+      "source_group": "authored-same-name-scope-v3",
+      "coverage": "same_name_subjects_target_scope_and_shared_context",
+      "sources": [
+        {
+          "original_event_id": "design-alex",
+          "event_key": "design-alex",
+          "session_id": "design",
+          "role": "user",
+          "content": "Alex Chen on the North design team wants expense updates by email.",
+          "occurred_at": "2026-10-01T09:00:00+08:00",
+          "calendar_context": "Asia/Shanghai"
+        },
+        {
+          "original_event_id": "audit-alex",
+          "event_key": "audit-alex",
+          "session_id": "audit",
+          "role": "user",
+          "content": "Alex Chen on the South audit team wants expense updates by SMS.",
+          "occurred_at": "2026-10-01T09:00:00+08:00",
+          "calendar_context": "Asia/Shanghai"
+        },
+        {
+          "original_event_id": "shared-rule",
+          "event_key": "shared-rule",
+          "session_id": "finance",
+          "role": "user",
+          "content": "All teams must submit expense claims above 700 credits through the finance portal. Message preferences do not replace this shared submission rule.",
+          "occurred_at": "2026-10-01T09:00:00+08:00",
+          "calendar_context": "Asia/Shanghai"
+        }
+      ],
+      "requests": [
+        {
+          "id": "north",
+          "content": "How should I send expense updates to Alex Chen on the North design team, and how must a 900-credit expense claim be submitted? Retrieve the person-specific preference and the applicable shared rule."
+        },
+        {
+          "id": "south",
+          "content": "How should I send expense updates to Alex Chen on the South audit team, and how must a 900-credit expense claim be submitted? Retrieve the person-specific preference and the applicable shared rule."
+        }
+      ],
+      "review_basis": "North design email; South audit SMS; both use finance portal for900>700. target_scope must not suppress the shared rule."
+    },
+    {
+      "id": "changed_view_missing_detail",
+      "source_group": "authored-changed-view-missing-detail-v3",
+      "coverage": "actual_own_view_followed_by_relevant_arrival_and_missing_evidence",
+      "continuous": true,
+      "sources": [
+        {
+          "original_event_id": "initial-rule",
+          "event_key": "initial-rule",
+          "session_id": "approval",
+          "role": "user",
+          "content": "For the Harbor project, expenses above 500 credits need approval. This note does not name the approver.",
+          "occurred_at": "2026-10-01T09:00:00+08:00",
+          "calendar_context": "Asia/Shanghai"
+        }
+      ],
+      "requests": [
+        {
+          "id": "initial",
+          "content": "For the Harbor project on October 31, 2026, retrieve the approval threshold and who approves expenses. Distinguish supported information from details the sources leave unspecified."
+        },
+        {
+          "id": "after_change",
+          "content": "For the Harbor project on November 2, 2026, retrieve the approval threshold and who approves expenses. Distinguish supported information from details the sources leave unspecified.",
+          "incoming_sources": [
+            {
+              "original_event_id": "changed-rule",
+              "event_key": "changed-rule",
+              "session_id": "approval",
+              "role": "user",
+              "content": "Starting November 1, 2026, the Harbor project approval threshold is 800 credits. The previous threshold no longer applies after that date. No approver name is provided here.",
+              "occurred_at": "2026-11-01T08:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ]
+        }
+      ],
+      "review_basis": "Initial500, later800 after effective update; approver unknown throughout. Each policy keeps its own actually generated view. A policy that never creates a view cannot count as stale-view reuse evidence."
     }
   ]
 }

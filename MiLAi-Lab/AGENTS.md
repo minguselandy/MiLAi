@@ -1,3 +1,15 @@
+# CURRENT: all six development histories prepared; second diagnostic next
+
+New generic evaluator-side runners/retrieval_histories.py uses original Store APIs for
+scripted declared save/update versions and actual Fixed prefetch receipts; no fake history,
+no ideal generated views. Two direct SQLite regressions and all6real-config offline bank
+preparations pass,0modelcalls. OriginalspokenApril3/rev1April8/rev2April6 staydistinct;
+partialprefix actuallyN-214only, no7316code. Bothpartialconditions have samepreparedStore,
+only oneHostsees its ownactualreceipt. Five new histories×2goals×2policies=20JSON positions
+next, preserving first-history original outcomes. Changed-view history continuesownbank.
+Native0/24 and sharedserviceapproval stillpending; no service changes without answer.
+Fullscope unchanged; data all devonly. Setup costs/receipts separate fromHost outcomes.
+
 # LATEST: first JSON diagnostic CLOSED; goal ACTIVE
 
 First-history-json-v3 (frozenec9d4ef7, exec96061, PID3171944) COMPLETED4/4 final tasks;

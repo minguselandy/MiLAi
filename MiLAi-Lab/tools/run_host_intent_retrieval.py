@@ -36,6 +36,7 @@ def main() -> None:
     from langchain_core.messages import ToolMessage
 
     from milai_lab.runners.functional import message, prepare
+    from milai_lab.runners.retrieval_histories import host_task_content, prepare_history_bank
 
     def native_probe(messages: list[Any]) -> Any:
         if any(isinstance(row, ToolMessage) and row.name == "milai_retrieve" for row in messages):
@@ -64,6 +65,7 @@ def main() -> None:
     write_json(args.output / "driver.json", driver)
     write_json(args.output / "budget-before.json", read_json(budget_path))
     models: dict[tuple[Any, ...], Any] = {}
+    setups: dict[tuple[str, str], dict[str, Any]] = {}
     started = time.perf_counter()
     try:
         for policy in args.policies:
@@ -80,12 +82,18 @@ def main() -> None:
                     driver["active"] = {"history": history["id"], "policy": policy,
                                         "request": request["id"]}
                     write_json(args.output / "driver.json", driver)
-                    # Distinct banks retain identical pre-query sources across the paired goals.
-                    # Review annotations and the other requests never enter Host input.
+                    bank = (history["id"] if history.get("continuous") else
+                            history["id"] + "-" + request["id"])
+                    if (policy, bank) not in setups:
+                        setups[policy, bank] = prepare_history_bank(args.output / policy,
+                            bank=bank, owner="development-user", history=history)
+                    # Independent goals share the declared initial source pool. Continuous
+                    # histories keep their own policy's actual view and subsequent arrivals.
                     result = message(args.output / policy,
-                        bank=history["id"] + "-" + request["id"], owner="development-user",
-                        session="host", message_id="request", content=request["content"],
-                        incoming_sources=copy.deepcopy(history["sources"]),
+                        bank=bank, owner="development-user",
+                        session="host", message_id=request["id"],
+                        content=host_task_content(request, setups[policy, bank]),
+                        incoming_sources=copy.deepcopy(request.get("incoming_sources", [])),
                         control_models=models,
                         model_tool_choice=native_probe if args.native_probe else None)
                     row = {**driver["active"], "status": result["status"],

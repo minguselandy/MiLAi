@@ -43,7 +43,7 @@ COMPLETED_WITH_FAILURES 72/72。没有重启或改动其冻结源码、结果与
 
 | 要求 | 需要的实际证据 | 当前状态 |
 |---|---|---|
-| M1/D1/E0：6 历史×2目的×规则/Laya=24 次原生外部调用 | 原 Host 请求、内部 trace、返回、答案、首次失败和成本 | 只准备第一历史 4 个位置，未运行 |
+| M1/D1/E0：6 历史×2目的×规则/Laya=24 次原生外部调用 | 原 Host 请求、内部 trace、返回、答案、首次失败和成本 | 六历史均已准备；首历史JSON诊断完成，原生0/24 |
 | query-only、丰富请求、跨调用引用和模型反馈 | 接口测试＋实际轨迹 | 机械通过；语义未验证 |
 | 六种条件配对＋D2 参数化补搜/范围 | 同池目的、时间、已读、相关/无关更新、排除范围、预算两侧效果 | 未完成；参数化 SEARCH 已接入，但六类语义配对未验证 |
 | FollowIR / 合法 MemOps train / MuSiQue-Full TRAIN | 来源/许可版本、主题背景共享种子分组、实际 Store 状态与偏好 | 未导入；既有 dev 不转 train |
@@ -165,3 +165,28 @@ QA配置明确将业务工具目录设为空；实际Host曾因无关的预约�
 缺失证据/旧视图。真实存储历史要通过原save/update操作形成，不能写伪历史JSON冒充版本。
 需要部分证据的任务必须使用实际前次返回的引用；任何额外调用和setup成本单列。
 原生服务变更仍等待用户答复，原生E0为0/24。M1–M6、训练和外部矩阵都未完成，目标保持active。
+
+## 六历史准备与第二批诊断
+
+`data/fixtures/host-intent-retrieval-v3-e0.json` 现包含完整六个作者开发背景，每个两种请求。
+第一历史的旧 JSON 首次结果不重跑；第二批只运行新增五历史×2请求×2策略=20个任务位置。
+所有背景仍为 dev，不进入训练或未见确认。
+
+`runners/retrieval_histories.py` 仅作评测侧准备：复用原 seed_sources、MemoryService、
+FunctionalEditMemory.save_edit/update_edit 和 IntentRetrievalMemory.retrieve，不写伪版本JSON。
+保存历史用例明确是人为声明的 Writer 错误夹具：原话April3，真实提交rev1=April8，
+真实修订rev2=April6。不是新模型产生的Writer错误，也不是把某次评价状态改成理想结果。
+
+部分证据用例的两条件都执行相同的 Fixed(reads=1)、3步预读，形成真实快照引用。
+只给 with_prior 条件展示自己的实际回执。该回执经真实 tokenizer/Store 检查仅含N-214房间，
+不含7316门禁码；两个条件的初始来源和预读Store状态一致。脚本预读不计入Host评价调用，
+但原始回执、步骤和CPU/时间单列保留。不存在跨策略赠送优质视图。
+
+变更视图用例让同一策略的两次请求使用同一bank；第二次才捕获生效变更。
+只观察各策略实际形成的视图，未形成视图的轨迹不能宣称检验了过期复用。
+其他目的配对各用独立bank，初始原来源相同。评测侧review_basis和另一请求不进入Host输入。
+
+六历史使用主配置完成实际离线准备，0模型调用，见
+`artifacts/host-intent-retrieval-v3/six-history-preflight-v1/summary.json`。
+两项真实SQLite准备回归通过；正常工具回归一起10项通过后才冻结运行。
+原生服务授权仍待答复；第二批明确为JSON-action开发诊断，不冒充24次原生验收。
