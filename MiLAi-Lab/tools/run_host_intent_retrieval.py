@@ -66,7 +66,7 @@ def main() -> None:
     write_json(args.output / "budget-before.json", read_json(budget_path))
     models: dict[tuple[Any, ...], Any] = {}
     setups: dict[tuple[str, str], dict[str, Any]] = {}
-    started = time.perf_counter()
+    started, cpu = time.perf_counter(), time.process_time()
     try:
         for policy in args.policies:
             recipe = copy.deepcopy(config)
@@ -89,6 +89,7 @@ def main() -> None:
                             bank=bank, owner="development-user", history=history)
                     # Independent goals share the declared initial source pool. Continuous
                     # histories keep their own policy's actual view and subsequent arrivals.
+                    message_started, message_cpu = time.perf_counter(), time.process_time()
                     result = message(args.output / policy,
                         bank=bank, owner="development-user",
                         session="host", message_id=request["id"],
@@ -97,7 +98,9 @@ def main() -> None:
                         control_models=models,
                         model_tool_choice=native_probe if args.native_probe else None)
                     row = {**driver["active"], "status": result["status"],
-                           "answer": result.get("final_answer"), "error": result.get("error")}
+                           "answer": result.get("final_answer"), "error": result.get("error"),
+                           "wall_seconds": time.perf_counter() - message_started,
+                           "cpu_seconds": time.process_time() - message_cpu}
                     driver["completed"].append(row)
                     write_json(args.output / "driver.json", driver)
                     print(json.dumps(row, ensure_ascii=False), flush=True)
@@ -109,7 +112,8 @@ def main() -> None:
         driver.update(status="FAILED", error_type=type(error).__name__, error=str(error))
         raise
     finally:
-        driver.update(wall_seconds=time.perf_counter() - started, finished_epoch=time.time())
+        driver.update(wall_seconds=time.perf_counter() - started,
+                      cpu_seconds=time.process_time() - cpu, finished_epoch=time.time())
         write_json(args.output / "driver.json", driver)
         write_json(args.output / "budget-after.json", read_json(budget_path))
 

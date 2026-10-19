@@ -13,6 +13,9 @@ class RequestFields(BaseModel):
 class StructuredReadGoal(RequestFields):
     """Semantic requirements, never a sufficiency verdict or an operation program."""
 
+    # Additional semantic requirements stay literal for the policy. They do not
+    # become identities, resource limits or runtime permissions.
+    model_config = ConfigDict(extra="allow", strict=True)
     purpose: str | None = None
     evidence: list[Literal[
         "current_interpretation", "saved_history", "original_source", "live_business"
@@ -29,6 +32,9 @@ class MaterialReference(RequestFields):
 
 
 class RetrievalContext(RequestFields):
+    """Caller-visible semantic context; references still use their bound read path."""
+
+    model_config = ConfigDict(extra="allow", strict=True)
     as_of: str | None = None
     target_scope: str | dict[str, Any] | None = None
     known_evidence_refs: list[MaterialReference] = Field(default_factory=list)

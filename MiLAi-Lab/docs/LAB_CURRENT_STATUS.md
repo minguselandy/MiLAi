@@ -1,3 +1,13 @@
+# 2026-10-19 — six-history JSON development evidence and T0 source allocation
+
+Current v3 progress: [execution record](HOST_INTENT_RETRIEVAL_EXECUTION.md).
+New five histories: rules9/10complete, oldLaya4/10complete, with all original semantic and
+protocol failures retained.54HTTP/134912tokens/newunknown0. Ten views have explicit qualifications;
+no USE_VIEW occurred. This is development evidence, not native24 or a learned-v3 result.
+FollowIR1776rows grouped1206components; primary T0 sources allocated64train/16dev, no fitting.
+Shared7860native-parser restart approval remains pending; no service change performed.
+Full training/factor/external/cost/additionalHost obligations remain incomplete.
+
 # Host intent retrieval v3 development — 2026-10-19
 
 This isolated branch implements the active full Host intent retrieval v3 plan.

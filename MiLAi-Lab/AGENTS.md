@@ -1,3 +1,24 @@
+# LATEST: remaining20 JSON positions CLOSED; v3 fitting NOT_STARTED
+
+Methodc2fc3928: mainremaining14closed thenlengthfailure, scope-Laya2closed thenformatfailure,
+changed-view4closed. Allprocesses terminal; no closedposition retried. Rules9C/1length;
+Laya4C/4unfulfilled/1wrong-evidence-kind/1schema.26toolattempts/22executed/7emptyreturns.
+54HTTP/134912known&charged/newunknown0/embedding0;29nativeforwards/41797tokens/3loads.
+Queries0semanticwrites/revocations/businessops;8scriptedsetupwrites and4prefetchreads separate.
+10views38nodes0rules reviewedwithqualifications;actualUSE_VIEW0. Originalfacts retainedall20.
+Author/task/state/cost manifests in data/manifests/host-intent-retrieval-v3-remaining-*.
+First4oldversionJSON not merged into a sameversion claim. NativeE0still0/24 and shared7860
+reconfigurationapproval remainsPENDING; do not treat continuation/elapsedtime as approval.
+
+New semantic containers preserve extra fields literally instead of rejecting misplaced purpose/
+scope; no aliases/domainrules, identity/reference/limit paths unchanged.11regressionsPASS;
+frozen c2extra-field failure reproduced. Newinterface not real-model-replayed.
+FollowIR1776rows imported/grouped1206components;965train1427rows/241dev349rows,seed0.
+T0metadataallocated64train(57MemOps+7admittedMuSiQue)/16dev(8MemOps+6authored+2MuSiQue).
+No v3trajectories/labels/fitting yet; source-only old labels not a substitute. FollowIR relevance
+is auxiliary applicability, never automaticHANDOFF. Group/split/primarysource manifests saved.
+FullM1–M6/E0–E5/T0–T2 remainsactive. Next actualsource review and collection onregisteredtrain.
+
 # CURRENT: all six development histories prepared; second diagnostic next
 
 New generic evaluator-side runners/retrieval_histories.py uses original Store APIs for

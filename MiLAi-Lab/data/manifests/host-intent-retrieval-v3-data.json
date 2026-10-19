@@ -1,7 +1,7 @@
 {
   "schema": "host_intent_retrieval_v3_data",
   "plan": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/docs/MILAI_HOST_INTENT_RETRIEVAL_DEVELOPMENT_EXPERIMENT_PLAN_20261019_v3.md",
-  "current_stage": "M1 development: six authored histories prepared; native protocol not yet available",
+  "current_stage": "Six-history JSON-action diagnostic closed; native E0still0/24; T0 sources allocated and FollowIR grouped, no v3 fitting",
   "splits": {
     "dev": {
       "source_groups": [
@@ -16,7 +16,8 @@
       "training_allowed": false
     },
     "train": {
-      "status": "not_compiled"
+      "status": "64primarysourcegroupsmetadataallocated; actualv3trajectorylabelsnotcompiled",
+      "allocation": "data/manifests/host-intent-retrieval-v3-t0-allocation.json"
     },
     "confirmation": {
       "status": "not_registered"
@@ -67,5 +68,18 @@
     "actual_own_view_followed_by_relevant_arrival_and_missing_evidence"
   ],
   "e0_native_status": "0/24; shared service approval pending",
-  "fixture_setup": "Original Store save/update receipts for actual stored history; actual Fixed read receipt for prior-evidence context; costs separated; no ideal generated view inserted."
+  "fixture_setup": "Original Store save/update receipts for actual stored history; actual Fixed read receipt for prior-evidence context; costs separated; no ideal generated view inserted.",
+  "followir_auxiliary": {
+    "intake": "data/manifests/host-intent-retrieval-v3-followir-intake.json",
+    "source_rows": 1776,
+    "groups": 1206,
+    "train_groups": 965,
+    "dev_groups": 241,
+    "training_status": "not_operation_labels_or_fitting"
+  },
+  "development_results": [
+    "data/manifests/host-intent-retrieval-v3-first-history-results.json",
+    "data/manifests/host-intent-retrieval-v3-remaining-results.json",
+    "data/manifests/host-intent-retrieval-v3-remaining-state-review.json"
+  ]
 }

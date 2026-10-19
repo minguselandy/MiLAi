@@ -44,9 +44,9 @@ COMPLETED_WITH_FAILURES 72/72。没有重启或改动其冻结源码、结果与
 | 要求 | 需要的实际证据 | 当前状态 |
 |---|---|---|
 | M1/D1/E0：6 历史×2目的×规则/Laya=24 次原生外部调用 | 原 Host 请求、内部 trace、返回、答案、首次失败和成本 | 六历史均已准备；首历史JSON诊断完成，原生0/24 |
-| query-only、丰富请求、跨调用引用和模型反馈 | 接口测试＋实际轨迹 | 机械通过；语义未验证 |
+| query-only、丰富请求、跨调用引用和模型反馈 | 接口测试＋实际轨迹 | 机械通过；已有JSON开发轨迹，未完成全量语义验收 |
 | 六种条件配对＋D2 参数化补搜/范围 | 同池目的、时间、已读、相关/无关更新、排除范围、预算两侧效果 | 未完成；参数化 SEARCH 已接入，但六类语义配对未验证 |
-| FollowIR / 合法 MemOps train / MuSiQue-Full TRAIN | 来源/许可版本、主题背景共享种子分组、实际 Store 状态与偏好 | 未导入；既有 dev 不转 train |
+| FollowIR / 合法 MemOps train / MuSiQue-Full TRAIN | 来源/许可版本、主题背景共享种子分组、实际 Store 状态与偏好 | FollowIR已导入分组；T0的64train/16dev只完成来源登记，轨迹标签未编译 |
 | T0 / T1 / T2＋continued-CE、原生/实际工具评测 | 数据版本、最终权重、tokens、分组结果、0/1/2种子 | 未训练 |
 | E1 Host×控制2×2，16组128开发任务及新保留组 | 全部位置和配对区间，允许无调用失败 | 未运行 |
 | E2 同请求同before 固定/规则、Jev、生成式 | 原请求冻结、各臂独立后续轨迹、下游结果 | 未运行 |
@@ -190,3 +190,79 @@ FunctionalEditMemory.save_edit/update_edit 和 IntentRetrievalMemory.retrieve，
 `artifacts/host-intent-retrieval-v3/six-history-preflight-v1/summary.json`。
 两项真实SQLite准备回归通过；正常工具回归一起10项通过后才冻结运行。
 原生服务授权仍待答复；第二批明确为JSON-action开发诊断，不冒充24次原生验收。
+
+## 新增五历史的20个首次位置全部关闭
+
+方法冻结 `c2fc3928`。主进程在第14位置（规则/South）发生已知长度失败并退出；
+确认进程消失、响应finish_reason=length、未知用量未增加后，仅继续六个未启动位置。
+两个后续运行分别关闭2个同名作用域Laya位置、4个连续变更位置。没有重跑任一闭合位置。
+三个驱动的原terminal状态分别FAILED/FAILED/COMPLETED，不能因为合并审阅而改写成全成功。
+
+| 策略 | 完整正确 | 未完成取证 | 证据类别错误 | 长度失败 | schema失败 |
+|---|---:|---:|---:|---:|---:|
+| rules | 9 | 0 | 0 | 1 | 0 |
+| 旧Laya warm-start | 4 | 4 | 1 | 0 | 1 |
+
+以上每法10位置、5个开发背景。规则真实读取了数据库revision1的April8，区别于原话April3；
+Laya在“实际首次保存”任务中读取原文上下文后回答April3，是证据类别错误。
+另外四个Laya任务未取回库内存在的必要材料；这不表示删除成功或原事实丢失。
+所有20份实际Source清单都保留了声明的初始正文及适用的新到来源，已逐项比对正文。
+规则South的9464已知tokens长度失败发生于第一次Host生成，尚无工具调用；
+LayaSouth在一条Host响应里提出两个read_goal带额外语义字段的调用，两者被拒绝后耗尽原格式额度。
+
+实际工具尝试rules11/Laya15，执行10/12，空返回1/6；一例规则空返回由Host请求仅2步造成，
+随后Host在共享额度内继续。Laya既有搜索前空返回，也有1–3个可读候选仍空返回。
+部分证据两臂均实际传递已发出的known_evidence_refs：规则普通READ从4变3但增加1次引用重开，
+不能据此宣称净成本节省；Laya从直接生成视图变为SEARCH+两次READ，两个最终回答都正确。
+
+20个查询均无语义写入、遗忘或业务操作；真实保存夹具在查询前独立执行8次脚本save/update。
+四个实际prefetch准备读取也单列，不冒充Host评价调用。计时和原始回执保留在各bank的
+retrieval-setup.json，研究侧预备工作不写成免费。
+
+三个关闭账本增量共54次生成HTTP、134912 known/charged tokens、新增unknown=0、embedding=0。
+阶段tokens：Host请求50323、视图18144、完成回答56981、未完成Host响应9464，和账本完全一致。
+Laya29次前向、41797输入tokens、66.481秒，因分成三个进程实际加载3次、15.962秒。
+三段端到端时钟分别311.778/70.394/70.072秒；不要把内嵌HTTP/前向/工具wall再加到端到端上。
+规则生成73964 tokens，Laya60948，但后者只完成4/10；较少用量不是质量保持的效率优势。
+
+10个实际交付视图共38节点、0规则，逐视图审阅保存在
+`data/manifests/host-intent-retrieval-v3-remaining-state-review.json`。
+原文事实通常有依据，但保存历史视图并不包含真实rev1；部分视图还保留预读问题作为reported节点，
+连续变更视图保留旧500及派生assistant复述，不能把这些图一概认证为当前真相。
+本批实际USE_VIEW=0；规则在新到800来源后刷新自己的revision2，Laya没有先前视图可供复用。
+因此仍没有“所有策略正确处理旧视图复用”的证据。
+
+首历史4位置来自较早ec9d4ef7配置；可以登记六历史共24个JSON诊断位置已关闭，
+但不能把混合版本结果当作完整同冻结版本实验，更不是24次原生外部调用验收。
+结果与独立于程序的作者审阅分别为
+`host-intent-retrieval-v3-remaining-results.json`、`host-intent-retrieval-v3-remaining-author-review.json`。
+
+## 下一版本接口简化与训练来源进展
+
+实际格式失败显示，Host会把范围放在read_goal，或把目的/要点放在task_context。
+这类语义信息现在原样保留，不新增域词典、别名路由或逐个错误特判。
+read_goal/task_context允许额外语义字段，既有引用结构、资源上限、身份和权限路径未改变；
+未知evidence类别仍不伪装成已实现的读取能力。冻结c2fc3928对同一增强测试重现extra_forbidden，
+当前实现通过。11项工具/真实准备/分组回归通过，静态检查与依赖边界继续验证。
+该修订尚未用于重跑旧位置，不能把机械通过记成新模型质量改善。
+
+已从[官方FollowIR-train](https://huggingface.co/datasets/jhu-clsp/FollowIR-train)下载原train.jsonl，
+实际1776行、878true/898false、1277原TREC id、1209原query字符串。
+按原id、忽略大小写/空白差异的重复query及完全相同document形成连通分组，得到1206组；
+seed0的80/20分配为train965组1427行、dev241组349行，没有跨组展开后再拆分。
+492组兼有两类标签，356组仅true、358组仅false，不能假设每组都有正负对。
+分组不使用label决定分配，也没有SHA/替代内容指纹。
+[官方数据卡](https://huggingface.co/datasets/jhu-clsp/FollowIR-train/raw/main/README.md)声明Apache-2.0，
+说明document为合成后筛选材料；教师score不是真实正确概率。这里只完成来源/分组，不是操作轨迹或训练。
+精简来源记录在 `host-intent-retrieval-v3-followir-intake.json`，大文件保持ignored。
+
+T0来源登记已固定64train/16dev：57个既有合法MemOps source_task训练背景＋7个既有已准入MuSiQue训练组；
+开发为8个MemOps、6个本轮作者历史、2个MuSiQue组。继承最保护的划分，排除原冲突背景和MuSiQue
+reference-boundary冲突，不读新保留集正文。MuSiQue7组按既有metadata选择2个三跳、5个两跳，
+未按当前模型结果换题；已有共享背景限制保留，不宣称彻底的预训练/全文隔离。
+登记文件 `host-intent-retrieval-v3-t0-allocation.json`，目前没有v3训练权重。
+
+下一项是从这些合法train来源生成实际Host请求与工具状态，覆盖query-only/丰富请求、
+互补读取、真实保存版本、视图与变化条件，再进行来源审阅和普通CE。
+旧的source-only偏好不能直接冒充本版监督；FollowIR适用性也不能直接变成HANDOFF标签。
+完整native E0、M2六类配对、T0/T1/T2、多种子、因素消融及三类外部评价仍未完成。

@@ -46,8 +46,10 @@ def test_native_tool_call_query_only_and_rich_feedback(tmp_path):
         assert inputs == [] and "evidence" not in memory.model_material(cfg)
         tool = next(t for t in memory.tools() if t.name == "milai_retrieve")
         request = {"query": "What is the travel approval threshold?",
-            "read_goal": {"required_points": ["effective date"], "purpose": "cite the report"},
-            "task_context": {"as_of": "2026-04-30", "target_scope": {"project": "A"}}}
+            "read_goal": {"required_points": ["effective date"], "purpose": "cite the report",
+                          "target_scope": "A travel", "audience": {"team": "finance"}},
+            "task_context": {"as_of": "2026-04-30", "target_scope": {"project": "A"},
+                             "current_goal": "prepare the report"}}
         response = tool.invoke({"type": "tool_call", "name": "milai_retrieve",
                                 "id": "rich", "args": request}, config=cfg)
         packet = json.loads(response.content)

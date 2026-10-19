@@ -1,0 +1,187 @@
+{
+  "schema": "host_intent_author_review_v1",
+  "scope": "All20first positions on5newauthoreddevelopmenthistories; no returned output or score repaired",
+  "method_source": "c2fc3928",
+  "reviews": [
+    {
+      "history": "effective_threshold",
+      "policy": "rules",
+      "request": "before",
+      "grade": "correct",
+      "note": "Final answer satisfies the stated task against the actual authored sources and/or committed versions.",
+      "source_basis": "Same two sources initially available to both goals; Orion600 before Nov1 and1200 after, Vega900 unchanged. Capture date is not effective date.",
+      "reviewer": "assistant author; no independent judge"
+    },
+    {
+      "history": "effective_threshold",
+      "policy": "rules",
+      "request": "after",
+      "grade": "correct",
+      "note": "Final answer satisfies the stated task against the actual authored sources and/or committed versions.",
+      "source_basis": "Same two sources initially available to both goals; Orion600 before Nov1 and1200 after, Vega900 unchanged. Capture date is not effective date.",
+      "reviewer": "assistant author; no independent judge"
+    },
+    {
+      "history": "effective_threshold",
+      "policy": "laya",
+      "request": "before",
+      "grade": "correct",
+      "note": "Final answer satisfies the stated task against the actual authored sources and/or committed versions.",
+      "source_basis": "Same two sources initially available to both goals; Orion600 before Nov1 and1200 after, Vega900 unchanged. Capture date is not effective date.",
+      "reviewer": "assistant author; no independent judge"
+    },
+    {
+      "history": "effective_threshold",
+      "policy": "laya",
+      "request": "after",
+      "grade": "unfulfilled",
+      "note": "One readable policy pool was found, but the policy handed off empty. Final answer denies having the requested threshold; actual policy explicitly supports1200 effectiveNov1.",
+      "source_basis": "Same two sources initially available to both goals; Orion600 before Nov1 and1200 after, Vega900 unchanged. Capture date is not effective date.",
+      "reviewer": "assistant author; no independent judge"
+    },
+    {
+      "history": "stored_vs_original",
+      "policy": "rules",
+      "request": "spoken",
+      "grade": "correct",
+      "note": "Final answer satisfies the stated task against the actual authored sources and/or committed versions.",
+      "source_basis": "Original user statement April3; actual committed revision1 deliberately April8; actual revision2 April6. Every date is verified against its own source or stored version, not inferred from another representation.",
+      "reviewer": "assistant author; no independent judge"
+    },
+    {
+      "history": "stored_vs_original",
+      "policy": "rules",
+      "request": "stored",
+      "grade": "correct",
+      "note": "Final answer satisfies the stated task against the actual authored sources and/or committed versions.",
+      "source_basis": "Original user statement April3; actual committed revision1 deliberately April8; actual revision2 April6. Every date is verified against its own source or stored version, not inferred from another representation.",
+      "reviewer": "assistant author; no independent judge"
+    },
+    {
+      "history": "stored_vs_original",
+      "policy": "laya",
+      "request": "spoken",
+      "grade": "unfulfilled",
+      "note": "The current correction April6 was opened; original April3 was not delivered. The final answer reports only the correction and fails the original-statement goal.",
+      "source_basis": "Original user statement April3; actual committed revision1 deliberately April8; actual revision2 April6. Every date is verified against its own source or stored version, not inferred from another representation.",
+      "reviewer": "assistant author; no independent judge"
+    },
+    {
+      "history": "stored_vs_original",
+      "policy": "laya",
+      "request": "stored",
+      "grade": "wrong_evidence_kind",
+      "note": "The final April3 is the original user statement, not actual stored revision1 April8. Controller expanded original context and never opened the stored-version directory.",
+      "source_basis": "Original user statement April3; actual committed revision1 deliberately April8; actual revision2 April6. Every date is verified against its own source or stored version, not inferred from another representation.",
+      "reviewer": "assistant author; no independent judge"
+    },
+    {
+      "history": "partial_evidence",
+      "policy": "rules",
+      "request": "from_scratch",
+      "grade": "correct",
+      "note": "Final answer satisfies the stated task against the actual authored sources and/or committed versions.",
+      "source_basis": "N-214, second floor; east door code7316, west exit-only. Verify prefetch actually contains only room evidence before claiming partial-evidence coverage.",
+      "reviewer": "assistant author; no independent judge"
+    },
+    {
+      "history": "partial_evidence",
+      "policy": "rules",
+      "request": "with_prior",
+      "grade": "correct",
+      "note": "Final answer satisfies the stated task against the actual authored sources and/or committed versions.",
+      "source_basis": "N-214, second floor; east door code7316, west exit-only. Verify prefetch actually contains only room evidence before claiming partial-evidence coverage.",
+      "reviewer": "assistant author; no independent judge"
+    },
+    {
+      "history": "partial_evidence",
+      "policy": "laya",
+      "request": "from_scratch",
+      "grade": "correct",
+      "note": "Final answer satisfies the stated task against the actual authored sources and/or committed versions.",
+      "source_basis": "N-214, second floor; east door code7316, west exit-only. Verify prefetch actually contains only room evidence before claiming partial-evidence coverage.",
+      "reviewer": "assistant author; no independent judge"
+    },
+    {
+      "history": "partial_evidence",
+      "policy": "laya",
+      "request": "with_prior",
+      "grade": "correct",
+      "note": "Final answer satisfies the stated task against the actual authored sources and/or committed versions.",
+      "source_basis": "N-214, second floor; east door code7316, west exit-only. Verify prefetch actually contains only room evidence before claiming partial-evidence coverage.",
+      "reviewer": "assistant author; no independent judge"
+    },
+    {
+      "history": "same_name_scope",
+      "policy": "rules",
+      "request": "north",
+      "grade": "correct",
+      "note": "Final answer satisfies the stated task against the actual authored sources and/or committed versions.",
+      "source_basis": "North design email; South audit SMS; both use finance portal for900>700. target_scope must not suppress the shared rule.",
+      "reviewer": "assistant author; no independent judge"
+    },
+    {
+      "history": "same_name_scope",
+      "policy": "rules",
+      "request": "south",
+      "grade": "length_failure",
+      "note": "Initial Host generation ended length before any retrieval.9464known tokens, no newunknown, no semantic/business effect; no task retry.",
+      "source_basis": "North design email; South audit SMS; both use finance portal for900>700. target_scope must not suppress the shared rule.",
+      "reviewer": "assistant author; no independent judge"
+    },
+    {
+      "history": "same_name_scope",
+      "policy": "laya",
+      "request": "north",
+      "grade": "unfulfilled",
+      "note": "Two empty handoffs; second state had three readable candidates. Final answer fails to supply email and finance-portal rule although both are in the actual source pool.",
+      "source_basis": "North design email; South audit SMS; both use finance portal for900>700. target_scope must not suppress the shared rule.",
+      "reviewer": "assistant author; no independent judge"
+    },
+    {
+      "history": "same_name_scope",
+      "policy": "laya",
+      "request": "south",
+      "grade": "schema_failure",
+      "note": "One Host response emitted two tool calls with target_scope inside the strict read_goal object. Both were rejected and the existing format allowance ended execution; no retrieval occurred.",
+      "source_basis": "North design email; South audit SMS; both use finance portal for900>700. target_scope must not suppress the shared rule.",
+      "reviewer": "assistant author; no independent judge"
+    },
+    {
+      "history": "changed_view_missing_detail",
+      "policy": "rules",
+      "request": "initial",
+      "grade": "correct",
+      "note": "Final answer satisfies the stated task against the actual authored sources and/or committed versions.",
+      "source_basis": "Initial500, later800 after effective update; approver unknown throughout. Each policy keeps its own actually generated view. A policy that never creates a view cannot count as stale-view reuse evidence.",
+      "reviewer": "assistant author; no independent judge"
+    },
+    {
+      "history": "changed_view_missing_detail",
+      "policy": "rules",
+      "request": "after_change",
+      "grade": "correct",
+      "note": "Final answer satisfies the stated task against the actual authored sources and/or committed versions.",
+      "source_basis": "Initial500, later800 after effective update; approver unknown throughout. Each policy keeps its own actually generated view. A policy that never creates a view cannot count as stale-view reuse evidence.",
+      "reviewer": "assistant author; no independent judge"
+    },
+    {
+      "history": "changed_view_missing_detail",
+      "policy": "laya",
+      "request": "initial",
+      "grade": "correct",
+      "note": "Final answer satisfies the stated task against the actual authored sources and/or committed versions.",
+      "source_basis": "Initial500, later800 after effective update; approver unknown throughout. Each policy keeps its own actually generated view. A policy that never creates a view cannot count as stale-view reuse evidence.",
+      "reviewer": "assistant author; no independent judge"
+    },
+    {
+      "history": "changed_view_missing_detail",
+      "policy": "laya",
+      "request": "after_change",
+      "grade": "unfulfilled",
+      "note": "Policy handed off empty with three pending candidates after the actual new source arrived. Final answer omits the available800threshold. The approver is correctly unspecified but does not fulfill the threshold goal.",
+      "source_basis": "Initial500, later800 after effective update; approver unknown throughout. Each policy keeps its own actually generated view. A policy that never creates a view cannot count as stale-view reuse evidence.",
+      "reviewer": "assistant author; no independent judge"
+    }
+  ]
+}

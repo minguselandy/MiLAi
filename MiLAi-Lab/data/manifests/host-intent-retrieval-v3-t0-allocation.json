@@ -1,0 +1,644 @@
+{
+  "status": "METADATA_ALLOCATED_BEFORE_NEW_TOOL_TRAJECTORY_COLLECTION",
+  "selection_seed": 0,
+  "source_selection": "Keep all57jointly assigned non-lifecycle MemOps train backgrounds and8dev; add7previously admitted MuSiQue train groups (2three-hop,5two-hop),2admitted MuSiQue dev groups (1each); six authored E0 histories remaindev. No current policy outcomes determine selection.",
+  "train": {
+    "memops": [
+      {
+        "family": "A01",
+        "split": "train",
+        "file": "A01_update.json",
+        "operation_type": "Update",
+        "track": "source_task"
+      },
+      {
+        "family": "A02",
+        "split": "train",
+        "file": "A02_update.json",
+        "operation_type": "Update",
+        "track": "source_task"
+      },
+      {
+        "family": "A04",
+        "split": "train",
+        "file": "A04_remember.json",
+        "operation_type": "Remember",
+        "track": "source_task"
+      },
+      {
+        "family": "A05",
+        "split": "train",
+        "file": "A05_trajectory_ops.json",
+        "operation_type": "TrajectoryOps",
+        "track": "source_task"
+      },
+      {
+        "family": "A07",
+        "split": "train",
+        "file": "A07_reflect.json",
+        "operation_type": "Reflect",
+        "track": "source_task"
+      },
+      {
+        "family": "A13",
+        "split": "train",
+        "file": "A13_reflect.json",
+        "operation_type": "Reflect",
+        "track": "source_task"
+      },
+      {
+        "family": "A14",
+        "split": "train",
+        "file": "A14_trajectory_ops.json",
+        "operation_type": "TrajectoryOps",
+        "track": "source_task"
+      },
+      {
+        "family": "A16",
+        "split": "train",
+        "file": "A16_trajectory_ops.json",
+        "operation_type": "TrajectoryOps",
+        "track": "source_task"
+      },
+      {
+        "family": "A20",
+        "split": "train",
+        "file": "A20_reflect.json",
+        "operation_type": "Reflect",
+        "track": "source_task"
+      },
+      {
+        "family": "A22",
+        "split": "train",
+        "file": "A22_reflect.json",
+        "operation_type": "Reflect",
+        "track": "source_task"
+      },
+      {
+        "family": "A27",
+        "split": "train",
+        "file": "A27_reflect.json",
+        "operation_type": "Reflect",
+        "track": "source_task"
+      },
+      {
+        "family": "A28",
+        "split": "train",
+        "file": "A28_remember.json",
+        "operation_type": "Remember",
+        "track": "source_task"
+      },
+      {
+        "family": "A29",
+        "split": "train",
+        "file": "A29_trajectory_ops.json",
+        "operation_type": "TrajectoryOps",
+        "track": "source_task"
+      },
+      {
+        "family": "A33",
+        "split": "train",
+        "file": "A33_update.json",
+        "operation_type": "Update",
+        "track": "source_task"
+      },
+      {
+        "family": "B01",
+        "split": "train",
+        "file": "B01_reflect.json",
+        "operation_type": "Reflect",
+        "track": "source_task"
+      },
+      {
+        "family": "B02",
+        "split": "train",
+        "file": "B02_remember.json",
+        "operation_type": "Remember",
+        "track": "source_task"
+      },
+      {
+        "family": "B03",
+        "split": "train",
+        "file": "B03_trajectory_ops.json",
+        "operation_type": "TrajectoryOps",
+        "track": "source_task"
+      },
+      {
+        "family": "B05",
+        "split": "train",
+        "file": "B05_update.json",
+        "operation_type": "Update",
+        "track": "source_task"
+      },
+      {
+        "family": "B06",
+        "split": "train",
+        "file": "B06_reflect.json",
+        "operation_type": "Reflect",
+        "track": "source_task"
+      },
+      {
+        "family": "B10",
+        "split": "train",
+        "file": "B10_remember.json",
+        "operation_type": "Remember",
+        "track": "source_task"
+      },
+      {
+        "family": "B12",
+        "split": "train",
+        "file": "B12_update.json",
+        "operation_type": "Update",
+        "track": "source_task"
+      },
+      {
+        "family": "B21",
+        "split": "train",
+        "file": "B21_update.json",
+        "operation_type": "Update",
+        "track": "source_task"
+      },
+      {
+        "family": "B22",
+        "split": "train",
+        "file": "B22_reflect.json",
+        "operation_type": "Reflect",
+        "track": "source_task"
+      },
+      {
+        "family": "B25",
+        "split": "train",
+        "file": "B25_trajectory_ops.json",
+        "operation_type": "TrajectoryOps",
+        "track": "source_task"
+      },
+      {
+        "family": "B26",
+        "split": "train",
+        "file": "B26_trajectory_ops.json",
+        "operation_type": "TrajectoryOps",
+        "track": "source_task"
+      },
+      {
+        "family": "C01",
+        "split": "train",
+        "file": "C01_update.json",
+        "operation_type": "Update",
+        "track": "source_task"
+      },
+      {
+        "family": "C02",
+        "split": "train",
+        "file": "C02_trajectory_ops.json",
+        "operation_type": "TrajectoryOps",
+        "track": "source_task"
+      },
+      {
+        "family": "C04",
+        "split": "train",
+        "file": "C04_trajectory_ops.json",
+        "operation_type": "TrajectoryOps",
+        "track": "source_task"
+      },
+      {
+        "family": "C05",
+        "split": "train",
+        "file": "C05_trajectory_ops.json",
+        "operation_type": "TrajectoryOps",
+        "track": "source_task"
+      },
+      {
+        "family": "C07",
+        "split": "train",
+        "file": "C07_update.json",
+        "operation_type": "Update",
+        "track": "source_task"
+      },
+      {
+        "family": "C10",
+        "split": "train",
+        "file": "C10_update.json",
+        "operation_type": "Update",
+        "track": "source_task"
+      },
+      {
+        "family": "C11",
+        "split": "train",
+        "file": "C11_reflect.json",
+        "operation_type": "Reflect",
+        "track": "source_task"
+      },
+      {
+        "family": "C23",
+        "split": "train",
+        "file": "C23_trajectory_ops.json",
+        "operation_type": "TrajectoryOps",
+        "track": "source_task"
+      },
+      {
+        "family": "C26",
+        "split": "train",
+        "file": "C26_update.json",
+        "operation_type": "Update",
+        "track": "source_task"
+      },
+      {
+        "family": "C27",
+        "split": "train",
+        "file": "C27_reflect.json",
+        "operation_type": "Reflect",
+        "track": "source_task"
+      },
+      {
+        "family": "C28",
+        "split": "train",
+        "file": "C28_remember.json",
+        "operation_type": "Remember",
+        "track": "source_task"
+      },
+      {
+        "family": "C29",
+        "split": "train",
+        "file": "C29_trajectory_ops.json",
+        "operation_type": "TrajectoryOps",
+        "track": "source_task"
+      },
+      {
+        "family": "D02",
+        "split": "train",
+        "file": "D02_update.json",
+        "operation_type": "Update",
+        "track": "source_task"
+      },
+      {
+        "family": "D11",
+        "split": "train",
+        "file": "D11_reflect.json",
+        "operation_type": "Reflect",
+        "track": "source_task"
+      },
+      {
+        "family": "D14",
+        "split": "train",
+        "file": "D14_remember.json",
+        "operation_type": "Remember",
+        "track": "source_task"
+      },
+      {
+        "family": "D17",
+        "split": "train",
+        "file": "D17_trajectory_ops.json",
+        "operation_type": "TrajectoryOps",
+        "track": "source_task"
+      },
+      {
+        "family": "D18",
+        "split": "train",
+        "file": "D18_update.json",
+        "operation_type": "Update",
+        "track": "source_task"
+      },
+      {
+        "family": "D19",
+        "split": "train",
+        "file": "D19_update.json",
+        "operation_type": "Update",
+        "track": "source_task"
+      },
+      {
+        "family": "D20",
+        "split": "train",
+        "file": "D20_reflect.json",
+        "operation_type": "Reflect",
+        "track": "source_task"
+      },
+      {
+        "family": "D21",
+        "split": "train",
+        "file": "D21_trajectory_ops.json",
+        "operation_type": "TrajectoryOps",
+        "track": "source_task"
+      },
+      {
+        "family": "D23",
+        "split": "train",
+        "file": "D23_trajectory_ops.json",
+        "operation_type": "TrajectoryOps",
+        "track": "source_task"
+      },
+      {
+        "family": "E01",
+        "split": "train",
+        "file": "E01_remember.json",
+        "operation_type": "Remember",
+        "track": "source_task"
+      },
+      {
+        "family": "E07",
+        "split": "train",
+        "file": "E07_reflect.json",
+        "operation_type": "Reflect",
+        "track": "source_task"
+      },
+      {
+        "family": "E10",
+        "split": "train",
+        "file": "E10_remember.json",
+        "operation_type": "Remember",
+        "track": "source_task"
+      },
+      {
+        "family": "E11",
+        "split": "train",
+        "file": "E11_trajectory_ops.json",
+        "operation_type": "TrajectoryOps",
+        "track": "source_task"
+      },
+      {
+        "family": "E14",
+        "split": "train",
+        "file": "E14_reflect.json",
+        "operation_type": "Reflect",
+        "track": "source_task"
+      },
+      {
+        "family": "F06",
+        "split": "train",
+        "file": "F06_reflect.json",
+        "operation_type": "Reflect",
+        "track": "source_task"
+      },
+      {
+        "family": "F07",
+        "split": "train",
+        "file": "F07_reflect.json",
+        "operation_type": "Reflect",
+        "track": "source_task"
+      },
+      {
+        "family": "F08",
+        "split": "train",
+        "file": "F08_trajectory_ops.json",
+        "operation_type": "TrajectoryOps",
+        "track": "source_task"
+      },
+      {
+        "family": "F12",
+        "split": "train",
+        "file": "F12_update.json",
+        "operation_type": "Update",
+        "track": "source_task"
+      },
+      {
+        "family": "F13",
+        "split": "train",
+        "file": "F13_reflect.json",
+        "operation_type": "Reflect",
+        "track": "source_task"
+      },
+      {
+        "family": "F14",
+        "split": "train",
+        "file": "F14_trajectory_ops.json",
+        "operation_type": "TrajectoryOps",
+        "track": "source_task"
+      }
+    ],
+    "musique": [
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000856",
+        "question_id": "3hop1__66960_300878_161879",
+        "source_rows": [
+          2427,
+          10869
+        ],
+        "native_max_decomposition_steps": 3,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000404",
+        "question_id": "3hop1__150120_301867_127418",
+        "source_rows": [
+          3991,
+          23786
+        ],
+        "native_max_decomposition_steps": 3,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000710",
+        "question_id": "2hop__569859_733106",
+        "source_rows": [
+          2817,
+          12620
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000552",
+        "question_id": "2hop__806210_51671",
+        "source_rows": [
+          202,
+          6272
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000766",
+        "question_id": "2hop__73552_439537",
+        "source_rows": [
+          18441,
+          33114
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "family": "musique-family-000104",
+        "question_id": "2hop__121170_720425",
+        "source_rows": [
+          4099,
+          14364
+        ],
+        "native_max_decomposition_steps": 2,
+        "split": "train",
+        "from_first_draw": false
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "family": "musique-family-000664",
+        "question_id": "2hop__90091_83984",
+        "source_rows": [
+          31689,
+          34915
+        ],
+        "native_max_decomposition_steps": 2,
+        "split": "train",
+        "from_first_draw": false
+      }
+    ]
+  },
+  "dev": {
+    "memops": [
+      {
+        "family": "A19",
+        "split": "dev",
+        "file": "A19_update.json",
+        "operation_type": "Update",
+        "track": "source_task"
+      },
+      {
+        "family": "A32",
+        "split": "dev",
+        "file": "A32_reflect.json",
+        "operation_type": "Reflect",
+        "track": "source_task"
+      },
+      {
+        "family": "B30",
+        "split": "dev",
+        "file": "B30_trajectory_ops.json",
+        "operation_type": "TrajectoryOps",
+        "track": "source_task"
+      },
+      {
+        "family": "C03",
+        "split": "dev",
+        "file": "C03_trajectory_ops.json",
+        "operation_type": "TrajectoryOps",
+        "track": "source_task"
+      },
+      {
+        "family": "D25",
+        "split": "dev",
+        "file": "D25_reflect.json",
+        "operation_type": "Reflect",
+        "track": "source_task"
+      },
+      {
+        "family": "E08",
+        "split": "dev",
+        "file": "E08_reflect.json",
+        "operation_type": "Reflect",
+        "track": "source_task"
+      },
+      {
+        "family": "E15",
+        "split": "dev",
+        "file": "E15_remember.json",
+        "operation_type": "Remember",
+        "track": "source_task"
+      },
+      {
+        "family": "F01",
+        "split": "dev",
+        "file": "F01_trajectory_ops.json",
+        "operation_type": "TrajectoryOps",
+        "track": "source_task"
+      }
+    ],
+    "musique": [
+      {
+        "dataset": "musique_train_mirror",
+        "split": "dev",
+        "family": "musique-family-000879",
+        "question_id": "3hop1__537710_837052_487197",
+        "source_rows": [
+          39623,
+          39805
+        ],
+        "native_max_decomposition_steps": 3,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "family": "musique-family-000752",
+        "question_id": "2hop__79419_476825",
+        "source_rows": [
+          5087,
+          9233
+        ],
+        "native_max_decomposition_steps": 2,
+        "split": "dev",
+        "from_first_draw": false
+      }
+    ],
+    "authored": [
+      "authored-language-preference-v3",
+      "authored-effective-threshold-v3",
+      "authored-stored-vs-original-v3",
+      "authored-partial-evidence-v3",
+      "authored-same-name-scope-v3",
+      "authored-changed-view-missing-detail-v3"
+    ]
+  },
+  "train_groups": 64,
+  "dev_groups": 16,
+  "musique_source_file": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/data/musique_full_v1.0_train.jsonl",
+  "memops_snapshot_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/external-data/MemOps-main",
+  "inherited_split_sources": [
+    "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/data/manifests/dynamic-memory-control-memops-source-cohort-v1.json",
+    "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/data/manifests/milai-source-selection-v2-admission.json",
+    "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/data/manifests/milai-source-selection-v2-reference-boundary.json"
+  ],
+  "exclusions": {
+    "memops_split_conflicts": [
+      {
+        "family": "D16",
+        "local": "dev",
+        "peer": "calibration",
+        "decision": "exclude from this cohort, preserve the more protected identity"
+      },
+      {
+        "family": "D22",
+        "local": "calibration",
+        "peer": "test",
+        "decision": "exclude from this cohort, preserve the more protected identity"
+      },
+      {
+        "family": "C06",
+        "local": "calibration",
+        "peer": "test",
+        "decision": "exclude from this cohort, preserve the more protected identity"
+      }
+    ],
+    "musique_reference_boundary": [
+      "musique-family-000503"
+    ],
+    "memops_forget_track": "separate lifecycle; no new deletion from retrieved history"
+  },
+  "limitations": [
+    "Custom derived splits; no new independent backgrounds claimed by reusing old train/dev.",
+    "Inherited MuSiQue boundary is native-target/title and shared-seed family qualified; it is not complete background/pretraining isolation.",
+    "No new MuSiQue bodies or answers inspected in this allocation.",
+    "Source semantics, actual Host requests, actual operations and label reviews still required.",
+    "FollowIR is a separately grouped auxiliary source, not part of the64primaryoperation groups."
+  ],
+  "sha_verification": false,
+  "model_calls": 0,
+  "request_forms": [
+    "query_only",
+    "rich"
+  ],
+  "collection_requirements": [
+    "Actual Host requests, not idealized requests reconstructed from labels.",
+    "Retain inherited train/dev assignment for every variant/prefix.",
+    "Include actual opened-prefix, generated-view, stored-version and relevant/unrelated-change conditions; a source-only export cannot substitute for these.",
+    "FollowIR relevance labels provide candidate applicability only, never automatic HANDOFF labels.",
+    "Primary operation payload must be exported by the live projection function; metadata/gold remain outside state.",
+    "Ordinary softCE; final budgetU=ceil(2*N/16) after labelledNis measured; sameUfor matched arms; seeds0then0/1/2maincomparison."
+  ]
+}
