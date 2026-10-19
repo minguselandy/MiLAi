@@ -1,5 +1,5 @@
 {
-  "status": "DEV_COLLECTION_RUNNING_MAIN_TRAIN_CLOSED",
+  "status": "PRIMARY_TRAIN_DEV_AND_GENERATIVE_COLLECTIONS_CLOSED",
   "source_data": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/data/t0-sources-v3/histories.json",
   "offline_reference_data": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/data/t0-sources-v3/offline-references.jsonl",
   "allocation": "data/manifests/host-intent-retrieval-v3-t0-allocation.json",
@@ -43,7 +43,10 @@
     ],
     "positions": 48,
     "selection": "Four controlled-storage training groups plus firsttwo selectedMuSiQue groups perhopstratum; no devsampling for training.",
-    "status": "NOT_STARTED"
+    "status": "ALL48_REGISTERED_GENERATIVE_POSITIONS_CLOSED_WITH_FAILURES",
+    "progress": "data/manifests/host-intent-retrieval-v3-t0-generative-collection-progress.json",
+    "closed_positions": 48,
+    "program_failed": 11
   },
   "controlled_storage": {
     "families": [
@@ -87,9 +90,11 @@
     "run": "artifacts/host-intent-retrieval-v3/runs/t0-main-dev-v2",
     "pid": 60366,
     "exec_session": 8258,
-    "status": "RUNNING",
+    "status": "COMPLETED_WITH_FAILURES",
     "positions": 64,
-    "observed_closed": 7,
-    "source_version": "8f7f2a18"
+    "observed_closed": 64,
+    "source_version": "8f7f2a18",
+    "failures": 6,
+    "results": "data/manifests/host-intent-retrieval-v3-t0-dev-collection-results.json"
   }
 }

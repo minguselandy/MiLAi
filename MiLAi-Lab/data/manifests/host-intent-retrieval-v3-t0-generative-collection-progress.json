@@ -1,0 +1,97 @@
+{
+  "status": "ALL48_REGISTERED_GENERATIVE_POSITIONS_CLOSED_WITH_FAILURES",
+  "positions": 48,
+  "program_completed": 37,
+  "program_failed": 11,
+  "source_version": "8f7f2a18",
+  "runs": [
+    {
+      "root": "artifacts/host-intent-retrieval-v3/runs/t0-generative-train-v2",
+      "status": "FAILED",
+      "source_version": "8f7f2a18",
+      "closed": 36,
+      "transport": "json_action",
+      "wall_seconds": 984.5559492157772,
+      "generation": {
+        "charged_tokens": 1124549,
+        "known_tokens": 1124549,
+        "unknown_usage": 0
+      },
+      "generation_requests": 227
+    },
+    {
+      "root": "artifacts/host-intent-retrieval-v3/runs/t0-generative-train-v2-remaining",
+      "status": "COMPLETED_WITH_FAILURES",
+      "source_version": "8f7f2a18",
+      "closed": 12,
+      "transport": "json_action",
+      "wall_seconds": 626.566914819181,
+      "generation": {
+        "charged_tokens": 487171,
+        "known_tokens": 487171,
+        "unknown_usage": 0
+      },
+      "generation_requests": 93
+    }
+  ],
+  "generation_requests": 320,
+  "known_tokens": 1611720,
+  "new_unknown_usage": 0,
+  "stages": {
+    "host_request": {
+      "requests": 59,
+      "tokens": 97594,
+      "http_wall_seconds": 177.98789220955223
+    },
+    "control_generation": {
+      "requests": 197,
+      "tokens": 1206129,
+      "http_wall_seconds": 172.0976659981534
+    },
+    "view_generation": {
+      "requests": 16,
+      "tokens": 67591,
+      "http_wall_seconds": 80.93257319834083
+    },
+    "host_completion": {
+      "requests": 38,
+      "tokens": 144762,
+      "http_wall_seconds": 450.7589019658044
+    },
+    "unparsed_host_response": {
+      "requests": 1,
+      "tokens": 8118,
+      "http_wall_seconds": 46.77775857876986
+    },
+    "host_incomplete": {
+      "requests": 9,
+      "tokens": 87526,
+      "http_wall_seconds": 479.53468279447407
+    }
+  },
+  "tool_counts": {
+    "tool_attempts": 63,
+    "tool_rejections": 0,
+    "executed_retrievals": 63,
+    "empty_returns": 27,
+    "semantic_mutation_receipts": 0
+  },
+  "raw_summary": "artifacts/host-intent-retrieval-v3/generative48-collection-cost-summary-v1.json",
+  "raw_state_export": "artifacts/host-intent-retrieval-v3/data/t0-gen-all-closed-v1",
+  "states": 197,
+  "families": 8,
+  "annotation": "Pending complete generative review;9explicit view-state preferences already saved separately.",
+  "position_policy": "Exactly48unique registered positions across first36 and untouched remaining12. First run remains FAILED; every failure/output/cost retained, no replay.",
+  "stage_note": "host_completion includes final-answer action attempts, including one rejected... placeholder; it is not task correctness.",
+  "input_audit": {
+    "rows": 197,
+    "max_len": 12288,
+    "head_max_len": 2048,
+    "oversized": 0,
+    "max_sequence_tokens": 9723,
+    "max_state_dropped": 0,
+    "max_head_dropped": 0,
+    "model_forwards": 0
+  },
+  "cost_settlement": "artifacts/host-intent-retrieval-v3/offline-review-settlement-v4.json"
+}

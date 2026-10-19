@@ -1,0 +1,59 @@
+{
+  "status": "COMPLETED_WITH_FAILURES",
+  "positions": 64,
+  "program_completed": 58,
+  "program_failed": 6,
+  "runs": [
+    {
+      "root": "artifacts/host-intent-retrieval-v3/runs/t0-main-dev-v2",
+      "status": "COMPLETED_WITH_FAILURES",
+      "source_version": "8f7f2a18",
+      "closed": 64,
+      "transport": "json_action",
+      "wall_seconds": 1382.1171315601096,
+      "generation": {
+        "charged_tokens": 515477,
+        "known_tokens": 515477,
+        "unknown_usage": 0
+      },
+      "generation_requests": 182
+    }
+  ],
+  "stages": {
+    "host_request": {
+      "requests": 68,
+      "tokens": 116899,
+      "http_wall_seconds": 286.5065561514348
+    },
+    "view_generation": {
+      "requests": 50,
+      "tokens": 129642,
+      "http_wall_seconds": 188.70780353993177
+    },
+    "host_completion": {
+      "requests": 58,
+      "tokens": 212657,
+      "http_wall_seconds": 439.07638621143997
+    },
+    "host_incomplete": {
+      "requests": 5,
+      "tokens": 51966,
+      "http_wall_seconds": 267.7558770002797
+    },
+    "unparsed_host_response": {
+      "requests": 1,
+      "tokens": 4313,
+      "http_wall_seconds": 10.544059660285711
+    }
+  },
+  "tool_counts": {
+    "tool_attempts": 71,
+    "tool_rejections": 0,
+    "executed_retrievals": 71,
+    "empty_returns": 8,
+    "semantic_mutation_receipts": 0
+  },
+  "raw_summary": "artifacts/host-intent-retrieval-v3/runs/t0-main-dev-v2/collection-cost-summary-v1.json",
+  "semantic_evaluation": "Not yet fully scored; program completion is not correctness.",
+  "cost_settlement": "artifacts/host-intent-retrieval-v3/offline-review-settlement-v2.json"
+}

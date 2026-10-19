@@ -1,0 +1,27 @@
+{
+  "states_reviewed": 9,
+  "labelled": 9,
+  "warm_reuse_packet_max_tokens": 559,
+  "warm_reuse_limit": 2048,
+  "model_calls": 0,
+  "bank_writes": 0,
+  "qualified_or_unapproved_views": [
+    {
+      "event": "generative-query_only/memops_A01/stage-2/chatcmpl-bce74eb86fa99577:tool:0/0",
+      "status": "STALE_FOR_CURRENT_REQUEST",
+      "basis": "View1 still calls DataAnalyst current and leaves salary unknown after Senior/74500/pendingLead reports. No USE_VIEW/HANDOFF positive."
+    },
+    {
+      "event": "generative-rich/memops_A01/stage-2/chatcmpl-b3253192348a963d:tool:0/0",
+      "status": "RULE_SEMANTICS_REQUIRE_REVIEW",
+      "basis": "Fact nodes include Senior/74500/Lead plan, but rule g1 conditions title on manager/project nodes; no full-graph validity or positive preference assigned here."
+    }
+  ],
+  "data": "artifacts/host-intent-retrieval-v3/data/t0-gen-closed-prefix-v1/gen-view-action-reviews-v1.json",
+  "action_preferences": {
+    "refresh_view": 2,
+    "handoff": 6,
+    "use_view": 1
+  },
+  "scope": "Nine explicit early A01 view-state preferences only, not a complete generative review. Warm USE_VIEW is grounded in an actual previous view with same query and no new/pending sources;559-token packet fit checked without model or bank writes."
+}

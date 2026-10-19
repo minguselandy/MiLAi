@@ -1,71 +1,121 @@
 {
-  "states": 1862,
-  "labelled": 1444,
+  "states": 2079,
+  "labelled": 1564,
   "status_counts": {
-    "source_reviewed_preference": 1444,
+    "source_reviewed_preference": 1564,
     "forced_single_action_masked": 105,
-    "reviewed_ambiguous_masked": 282,
+    "reviewed_ambiguous_masked": 379,
     "unreviewed_masked": 31
   },
-  "states_source": "artifacts/host-intent-retrieval-v3/data/t0-main-closed-prefix-v10/train.jsonl",
-  "reviews": "artifacts/host-intent-retrieval-v3/data/t0-main-closed-prefix-v10/combined-reviews-v5.json",
+  "states_source": "artifacts/host-intent-retrieval-v3/data/t0-main-closed-v1/train.jsonl",
+  "reviews": "artifacts/host-intent-retrieval-v3/data/t0-main-closed-v1/combined-reviews-v6.json",
   "input_changes": 0,
   "teacher_actions_copied": false,
-  "scope": "All57 registered MemOps backgrounds have source preparation; actual reviewed prefix includes58 groups and first MuSiQue subquestions. Remaining MuSiQue request-level review, dev and generative collection still pending.",
-  "status": "PARTIAL_COHORT_REVIEW_NOT_FIT_READY",
-  "source_groups": 58,
-  "actual_source_requests_reviewed": 233,
+  "scope": "All2079 actual primary train states retained.1564 source-reviewed preferences; partial/no-proof/forced/held rows masked. This is not the final T0 fitting dataset until generative supplement is reviewed.",
+  "status": "PRIMARY_RULES_LABELS_COMPLETE_GENERATIVE_SUPPLEMENT_PENDING",
+  "source_groups": 64,
+  "actual_source_requests_reviewed": 275,
   "saved_version_requests_reviewed": 16,
-  "partial_or_no_proof_requests": 5,
-  "source_preference_reasons": {
-    "reviewed_missing_original_progress": 1209,
-    "reviewed_originals_sufficient": 132,
-    "forced_single_action_masked": 105,
-    "no_reviewed_progress_masked": 245,
-    "reviewed_partial_evidence_only_masked": 3,
-    "no_reviewed_source_proof_masked": 9
-  },
-  "held_request_count": 5,
   "held_requests": [
     {
       "event_prefix": "rules-query_only/memops_A27/stage-2/chatcmpl-8e0945b185633c26:tool:0",
+      "request": {
+        "query": "User's workplace choices, preferences, locations worked, and badge status. Also include examples of coworkers' workplace choices for distinction."
+      },
       "reason": "Hostaddsworklocations/remote-in-office/schedule requirements absent fromthe reviewed preference task; retainunreviewed ratherthan silentlymapparentproofs."
     },
     {
       "event_prefix": "rules-rich/memops_A27/stage-0/chatcmpl-8879886bdd0f03e4:tool:0",
+      "request": {
+        "query": "What are the user's recurring workplace preferences and reported examples of these choices? Distinguish the user's actual choices from coworkers' choices and anticipated badge changes. Identify the user's current credential/badge status.",
+        "read_goal": {
+          "purpose": "To identify recurring workplace preferences and examples, while distinguishing the user's choices from coworkers' and badge changes.",
+          "evidence": [
+            "current_interpretation",
+            "saved_history",
+            "original_source",
+            "live_business"
+          ],
+          "required_points": [
+            "User's workplace choices (e.g., remote, in-office, schedule)",
+            "Examples of these choices",
+            "Coworkers' choices",
+            "Anticipated badge changes",
+            "User's current credential status"
+          ]
+        }
+      },
       "reason": "Hostaddsworklocations/remote-in-office/schedule requirements absent fromthe reviewed preference task; retainunreviewed ratherthan silentlymapparentproofs."
     },
     {
       "event_prefix": "rules-rich/memops_C04/stage-0/chatcmpl-96b55373d55b8c79:tool:0",
+      "request": {
+        "query": "Retrieve details from my medical reports regarding: 1. Scheduled follow-ups: specifically the clinician, department, hospital, and time for each current appointment. 2. The exact wording of the diagnosis I reported. 3. Identify any proposals to reschedule that have not yet been made or confirmed. 4. Note any conditional ENT follow-ups. 5. Identify any appointments belonging to my friend. 6. Ensure room information is not inferred from different procedures.",
+        "read_goal": {
+          "purpose": "Extract specific details about scheduled follow-ups, diagnosis, and separate special cases like rescheduling, ENT, and friend's appointments.",
+          "evidence": [
+            "saved_history",
+            "original_source"
+          ],
+          "required_points": [
+            "current_follow_up_details",
+            "diagnosis_wording",
+            "unmade_rescheduling_proposal",
+            "conditional_ENT_followup",
+            "friend_appointments",
+            "room_inference_check"
+          ]
+        },
+        "task_context": {
+          "target_scope": "current_public_message"
+        }
+      },
       "reason": "Actual target_scope=current_public_message conflicts with history-wide request and reviewed source-session proof. Do not silently broaden that scope or declare those originals sufficient."
     },
     {
       "event_prefix": "rules-rich/memops_E10/stage-2/chatcmpl-a533e2ece327ed5c:tool:0",
+      "request": {
+        "query": "What gym membership and assessment timing have I reported? Include any notice deadline implied by the stated interval. What are my coffee, contact, and birthday-gift preferences? Also, are there any preferences or plans for other people mentioned? Keep different people's plans separate and explicitly note any unstated dates or intervals.",
+        "read_goal": {
+          "purpose": "Gather user's gym membership details, assessment timing, notice deadline, and preferences for coffee, contact, and birthday gifts. Separate other people's plans and flag unstated dates.",
+          "required_points": [
+            "gym_membership_details",
+            "assessment_timing",
+            "notice_deadline",
+            "coffee_preference",
+            "contact_preference",
+            "birthday_gift_preference",
+            "other_people_preferences"
+          ],
+          "target_scope": "current_public_message"
+        }
+      },
       "reason": "Actual read_goal.target_scope=current_public_message conflicts with requested historical gym/preferences evidence. Preserve field literally rather than silently broadening its scope."
     },
     {
       "event_prefix": "rules-rich/memops_E14/stage-0/chatcmpl-886c198a818e1e8e:tool:0",
+      "request": {
+        "query": "Retrieve specific details about 'work meeting' changes, 'sister's' schedules, and any mentions of 'universal rules' or 'preferences'. Also look for any other commitment patterns or frequency issues beyond the book club, rent, and vitamins."
+      },
       "reason": "Actual follow-up asks for additional facts beyond already named book-club/rent/vitamin routines at the early cut. No reviewed new fact witness; do not reward rereading excluded known routines or infer global absence from no new evidence."
     }
   ],
-  "reviewer": "assistant author, not independent judgment",
-  "original_inputs_equal": true,
-  "prior_full_row_equality": {
-    "prior_full_rows_compared": 1713,
-    "prior_full_rows_identical": 1713
+  "source_preference_reasons": {
+    "reviewed_missing_original_progress": 1293,
+    "reviewed_originals_sufficient": 168,
+    "forced_single_action_masked": 105,
+    "no_reviewed_progress_masked": 254,
+    "reviewed_partial_evidence_only_masked": 23,
+    "no_reviewed_source_proof_masked": 74,
+    "nonoriginal_opened_material_requires_review": 3
   },
-  "actual_delivery_audit": {
-    "closed_trace_files": 244,
-    "actual_tool_deliveries": 258,
-    "matching_visible_and_returned_labels": 258,
-    "mismatches": []
-  },
-  "read_preference": "Adds missing request-reviewed evidence or the exact requested saved revision and fits the complete live return packet.",
-  "search_preference": "Observed search adds needed reviewed evidence; no universal positive for availability.",
-  "sufficiency_rule": "Explicit proof_complete=false allows progress labels toward known premises but cannot label HANDOFF after those premises are covered. No automatic flag from native dataset answerability.",
-  "view_preference": "No automatic USE_VIEW/REFRESH positive. Actual semantic value requires review beyond availability and source bindings.",
-  "length_audit": {
-    "rows": 1862,
+  "complete_audit": {
+    "states": 2079,
+    "input_equality": true,
+    "all_closed_positions": 272,
+    "actual_tool_deliveries": 302,
+    "matching_visible_and_returned_labels": 302,
+    "delivery_mismatches": [],
     "max_len": 12288,
     "head_max_len": 2048,
     "oversized": 0,
@@ -75,50 +125,8 @@
     "state_projection": "shared",
     "model_forwards": 0
   },
-  "model_calls": 0,
-  "measured_offline_work": "artifacts/host-intent-retrieval-v3/data/pending-offline-review-v4.json",
-  "unmeasured_research_cost": "Author semantic review, tests and untimed analysis remain unmeasured, not zero. No offline settlement while model collection lives.",
-  "data_path": "artifacts/host-intent-retrieval-v3/data/t0-reviewed-prefix-v13",
-  "musique_review": "data/manifests/host-intent-retrieval-v3-t0-musique-source-review-v1.json",
-  "earlier_refresh_cost_audit": {
-    "source_prefix": "artifacts/host-intent-retrieval-v3/data/t0-main-closed-prefix-v6",
-    "states": 1259,
-    "report": {
-      "by_before_source_proof": {
-        "reviewed_originals_sufficient": {
-          "refresh_operations": 68,
-          "observed_http_responses": 68,
-          "known_tokens": 208428,
-          "http_wall_seconds": 331.02464010193944
-        },
-        "reviewed_missing_original_progress": {
-          "refresh_operations": 4,
-          "observed_http_responses": 4,
-          "known_tokens": 22282,
-          "http_wall_seconds": 20.392155218869448
-        },
-        "request_unreviewed": {
-          "refresh_operations": 5,
-          "observed_http_responses": 5,
-          "known_tokens": 16688,
-          "http_wall_seconds": 28.107208319939673
-        },
-        "no_reviewed_progress_masked": {
-          "refresh_operations": 25,
-          "observed_http_responses": 25,
-          "known_tokens": 170174,
-          "http_wall_seconds": 179.20501328539103
-        }
-      },
-      "scope": "Closed-position HTTP receipts only; ongoing-run ledger not settled/reconciled. Source proof is request-specific author judgment. Counts describe generation after already sufficient raw evidence, not net counterfactual savings or final answer correctness."
-    }
-  },
-  "accounting_status": "MEASURED_PHASES_SETTLED_AT_VERIFIED_MAIN_DEV_GAP",
-  "cost_settlement": "artifacts/host-intent-retrieval-v3/offline-review-settlement-v1.json",
-  "whole_main_export": {
-    "states": 2079,
-    "families": 64,
-    "data": "artifacts/host-intent-retrieval-v3/data/t0-main-closed-v1",
-    "labels": "All empty in raw export; reviewed subset is separate."
-  }
+  "data_path": "artifacts/host-intent-retrieval-v3/data/t0-reviewed-primary-v14",
+  "reviewer": "assistant author, not independent judgment",
+  "cost_settlement": "artifacts/host-intent-retrieval-v3/offline-review-settlement-v2.json",
+  "native_data_changed": false
 }

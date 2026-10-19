@@ -1,0 +1,30 @@
+{
+  "status": "PARTIAL_AUTHOR_TASK_REVIEW",
+  "reviewed_positions": 76,
+  "total_positions": 272,
+  "unreviewed_positions": 196,
+  "reviewed_counts": {
+    "FAILED": 22,
+    "WRONG": 20,
+    "CORRECT": 26,
+    "QUALIFIED": 8
+  },
+  "saved_version_subset": {
+    "positions": 16,
+    "counts": {
+      "FAILED": 2,
+      "WRONG": 8,
+      "CORRECT": 6
+    },
+    "source_groups": 4
+  },
+  "data": "artifacts/host-intent-retrieval-v3/data/t0-main-task-reviews-v1.json",
+  "rubric": {
+    "CORRECT": "Requested source facts and material status distinctions correct; permitted unknowns preserved.",
+    "WRONG": "Material false claim, wrong object/version, or missed critical update.",
+    "QUALIFIED": "Main requested state is largely right but a secondary detail/inventory item is missing, ambiguous or unsupported; kept separate from full success.",
+    "UNFULFILLED": "Accepted final response does not provide the requested answer despite task scope.",
+    "FAILED": "No accepted final answer; first failure receipt retained."
+  },
+  "scope": "Selected reviewed subset includes all22 process failures; its proportions are NOT an estimate of full-cohort accuracy. Four controlled-storage families are not a generalization result. Source facts and exact versions, not substring presence alone, determine author grades."
+}

@@ -14,6 +14,8 @@ def generation_stage(event: dict[str, Any]) -> str:
     schema = event["request"].get("response_format", {}).get("json_schema", {}).get("schema", {})
     if "nodes" in schema.get("properties", {}):
         return "view_generation"
+    if "choice" in schema.get("properties", {}):
+        return "control_generation"
     choice = event["receipt"]["choices"][0]
     if choice["finish_reason"] == "length":
         return "host_incomplete"

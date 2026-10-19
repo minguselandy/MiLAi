@@ -1,0 +1,42 @@
+{
+  "states": 456,
+  "labelled": 353,
+  "status_counts": {
+    "source_reviewed_preference": 353,
+    "forced_single_action_masked": 36,
+    "reviewed_ambiguous_masked": 67
+  },
+  "states_source": "artifacts/host-intent-retrieval-v3/data/t0-dev-closed-v1/dev.jsonl",
+  "reviews": "artifacts/host-intent-retrieval-v3/data/t0-dev-closed-v1/combined-dev-reviews-v1.json",
+  "input_changes": 0,
+  "teacher_actions_copied": false,
+  "scope": "Dev only; no dev rows included in training. Partial proofs and stored/original distinctions reviewed independently.",
+  "status": "DEV_PRIMARY_LABELS_COMPLETE",
+  "families": 16,
+  "data_path": "artifacts/host-intent-retrieval-v3/data/t0-reviewed-dev-v3",
+  "audit": {
+    "states": 456,
+    "input_equality": true,
+    "all_closed_positions": 64,
+    "actual_tool_deliveries": 71,
+    "matching_visible_and_returned_labels": 71,
+    "max_len": 12288,
+    "head_max_len": 2048,
+    "oversized": 0,
+    "max_sequence_tokens": 8378,
+    "max_state_dropped": 0,
+    "max_head_dropped": 0,
+    "state_projection": "shared",
+    "model_forwards": 0
+  },
+  "source_requests_reviewed": 68,
+  "saved_version_requests_reviewed": 2,
+  "qualifications": [
+    "French film production does not prove Jane Birkin spoken language.",
+    "Vince Guaraldi label association is historically supported by1968 WarnerBros album, not a timeless exclusive contract.",
+    "Stored Atlas revision1 is April8; source statement April3; current revision2 April6. Actual read-only Store checked.",
+    "with_prior requests forwarded no explicit known_evidence_refs; rich request narrowed to entry instructions, which is not proof of reference forwarding."
+  ],
+  "reviewer": "assistant author, not independent judgment",
+  "cost_settlement": "artifacts/host-intent-retrieval-v3/offline-review-settlement-v3.json"
+}

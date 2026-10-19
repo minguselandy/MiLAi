@@ -1,28 +1,43 @@
-# LIVE UPDATE 2026-10-20: main272 CLOSED; dev64 RUNNING
+# CURRENT UPDATE 2026-10-20: all collectors CLOSED; finish generative labels then T0 fit
 
-ACTIVE model job: PID60366 / exec8258 / frozen8f7f2a18, runs/t0-main-dev-v2, 7/64 closed.
-Revalidate driver/proc; never duplicate/restart on observation timeout. NO offline settlement while dev lives.
-Main PID3815344/exec24523 is terminal, COMPLETED_WITH_FAILURES272:250 program completed/22 failed
-(21 length,1 JSON malformed).740HTTP/2516826 known=charged tokens/newunknown0/embedding0.
-Main302 executed retrievals/30 empty/303 attempts/1 tool rejection/0 query semantic mutations.
-These are process/cost counts, not full semantic correctness. Full closed export2079states/64groups,
-all raw gold empty, at data/t0-main-closed-v1. Remaining MuSiQue actual requests still need review.
-Latest reviewed subset: data/t0-reviewed-prefix-v13,1862states/58groups,1444labels;105 forced/282 ambiguous/
-31 held masks.233 source requests plus16 saved-version requests. Five scope requests held.
-Source preparation for all57 MemOps backgrounds is saved in data/source-notes-remaining-memops-v1.json.
-14 registered MuSiQue variants reviewed offline; new manifest records wrong entity/year/event/answer
-joins and historical-label ambiguity. Native question/gold unchanged; each tool subquestion reviewed.
-New offline proof_complete=false allows source progress but masks HANDOFF when only a partial proof
-is covered.3 actual states masked that way,9 have no reviewed proof. Six tests/Ruff/mypy/boundaries pass.
-All1862 inputs unchanged; prior1713 full rows equal;258 actual deliveries match final visible labels.
-Actual tokenizer audit: max8807 under12288/head2048,zero truncation/forwards. No v3 weights trained.
-Pending review-cost v2/v3/v4 phases SETTLED ONCE at verified main/dev idle, plus main driver CPU,
-closed cost audit and final export:23phases/1282.966784 CPU seconds. Settlement manifest authoritative;
-raw measurement files may retain initial ledger_recorded=false. Do NOT settle them again.
-Native E0 still0/24; existing7860 parser-change permission PENDING. Generative train48 NOT_STARTED,
-prepared next-collections-v1.json; launch only after dev terminal. No SHA/subagents/new services/second
-ledger/old-position retries or repair. Full M1–M6/T0–T2 goal ACTIVE. Historical notes below superseded.
-All artifact data paths above are under artifacts/host-intent-retrieval-v3/.
+No active experiment model process. MainPID3815344/exec24523,devPID60366/exec8258,
+genPID178302/exec87225,remainingPID289896/exec73747 all terminal. Revalidate before new jobs;
+never restart closed positions or infer restart permission from lost handles.
+Main272=250programcomplete/22fail,740HTTP/2516826tokens. Dev64=58/6,182HTTP/515477tokens.
+Generative48=37/11,320HTTP/1611720tokens,197states/8trainfamilies; all newunknown0.
+Gen first36 remainFAILED after literal... FinalAnswerUnavailable/no_answer_text; untouched next12
+were separately dispatched under same frozen8f7f2a18 and closed. Original outcomes/costs unchanged.
+Combined gen:197controlHTTP/1206129tokens,16viewHTTP/67591tokens;63tools/27empty/0semanticwrites.
+Process counts are not semantic success; host_completion includes a rejected final placeholder.
+
+Primary labels: data/t0-reviewed-primary-v14,2079states/64groups,1564labels;105forced/379ambiguous/
+31held. All inputs unchanged;302/302deliveries;max8807,no truncation. Dev:data/t0-reviewed-dev-v3,
+456states/16groups,353labels,36forced/67ambiguous;71/71deliveries;max8378,no truncation.
+Raw full gen:data/t0-gen-all-closed-v1,197states ALLgoldEMPTY. Only9 explicit view preferences
+compiled separately at data/t0-gen-view-labels-v1 (2REFRESH/1USE_VIEW/6HANDOFF). Finish ALL gen
+request/source/view/storage review, then combine same-group data and prepare ordinaryCE T0/seeds.
+Do not fit a partial subset or copy teacher choices. No v3 weights trained yet.
+Gen view annotation source:data/t0-gen-closed-prefix-v1/gen-view-action-reviews-v1.json.
+Actual same-query warm view reuse preference fits559tokens; staleA01late cache is not positive;
+late rule semantics still need review. Many literal-storage generative requests use wrong view kinds.
+Source original vs actual stored distinction: dev Atlas spokenApril3,storedrev1April8,currentrev2April6;
+read-only actual Store history checked, no original-text-equals-stored-text assumption.
+Main task review:data/t0-main-task-reviews-v1.json,76/272 reviewed includingall22failures;
+26C/20W/8qualified/22failed. Selected subset is not full accuracy. Stored16=6C/8W/2F.
+
+Gen raw longest9723tokens triggered tokenizer8192 warning. Actual longest-row NativeDecision probe
+COMPLETED once on physicalGPU2, float32/SDPA, reference_compileFalse, NO capacity parameter change,
+9723tokens/no truncation/finite outputs. Peak allocated19618862080bytes,reserved21103640576.
+Installed ModernBERT has dynamic position-id RoPE, no fixed learned position table. This verifies
+one eval forward, not long-context quality or backward-pass memory. ProbePID383065/exec37910 gone.
+Probe artifact capacity-probe-v1/run.json; two compute phases ALREADY RECORDED in original ledger.
+
+Settlements offline-review-settlement-v1/v2/v3/v4 ALREADY RECORDED. Never settle snapshot falseflags
+again. v4=5phases/35.033654CPU at actual idle; author/tests/untimed work unmeasured,notzero.
+Cost helper now separates controller schema choice as control_generation. Producer regression,
+Ruff/mypy/tools boundary pass; no runtime method change. No SHA/subagents/newservices/secondledger/
+remote publication. NativeE0 still0/24; shared7860 parser permission PENDING. Full goal ACTIVE.
+All data/run paths above are under artifacts/host-intent-retrieval-v3/; historical notes below superseded.
 
 # LIVE UPDATE 2026-10-20: source review started; samemainjobrunning
 

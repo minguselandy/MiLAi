@@ -78,9 +78,10 @@
     "annotation": "No teacher action, operation availability or final answer becomes gold."
   },
   "latest_reviewed_subset": {
-    "data": "artifacts/host-intent-retrieval-v3/data/t0-reviewed-prefix-v13",
-    "states": 1862,
-    "labelled": 1444
+    "data": "artifacts/host-intent-retrieval-v3/data/t0-reviewed-primary-v14",
+    "states": 2079,
+    "labelled": 1564,
+    "scope": "Full primary rules trajectory export; generative supplement still separate."
   },
   "accounting": {
     "status": "SETTLED_ONCE_AT_VERIFIED_IDLE",
@@ -93,9 +94,9 @@
     "run": "artifacts/host-intent-retrieval-v3/runs/t0-main-dev-v2",
     "pid": 60366,
     "exec_session": 8258,
-    "status": "RUNNING",
+    "status": "COMPLETED_WITH_FAILURES",
     "positions": 64,
-    "observed_closed": 7
+    "observed_closed": 64
   },
-  "generative_collection": "NOT_STARTED;48registered train positions follow dev serially"
+  "generative_collection": "First36 closed with4 failures; remaining12 independent positions dispatched separately without retry."
 }
