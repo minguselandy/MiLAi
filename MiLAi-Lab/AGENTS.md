@@ -1,3 +1,16 @@
+# V5 TERMINAL FAILURE REVIEW: 2026-10-19
+
+V5 PID893293/exec69065 and child893299 are terminal/absent (exec exit1), not live dependencies.
+Four-slot run closed23/36: rules12; Laya11including c-return input-capacity failure at decision4.
+That first failed task spent6046generationtokens, newunknown0; prior view refresh persists.
+Do not retry it. Remaining1Laya+12generative positions and common-before are unstarted.
+Driver now permits proceeding after known native input-capacity refusal with unchanged unknown
+counters, retaining failures/effects.5dispatch tests cover known/uncertain/unexpected failure paths.
+Continue only under the same frozen5052477f method and original banks, with a new dispatch record.
+Next serial queue may then run frozen8eb07410common-before and prepared T1 admission/fits.
+No model job currently lives; verify again before settling pending offline costs or starting work.
+Uncommitted Host parameter-evidence fix is independent; never use it in frozen comparison jobs.
+
 # REVIEW / NEXT INPUTS: 2026-10-19
 
 V5 remains the only live queue; revalidate PID893293/exec69065 and child before any model work.

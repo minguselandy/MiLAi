@@ -3,6 +3,8 @@ import json
 import sys
 from pathlib import Path
 
+import pytest
+
 from milai_lab.runners import functional
 
 
@@ -27,7 +29,15 @@ def test_projection_preserves_source_sessions_roles_and_unknown_dates():
     assert "OFFLINE_ONLY" not in json.dumps(projected)
 
 
-def test_continuation_preserves_failed_prefix_and_runs_only_new_messages(tmp_path, monkeypatch):
+@pytest.mark.parametrize("failure,unknown,continues", [
+    ("VLLM_CHAT_TRUNCATED", 0, True),
+    ("Finite decision input exceeds declared complete-input capacity", 0, True),
+    ("Finite decision input exceeds declared complete-input capacity", 1, False),
+    ("Unexpected execution failure", 0, False),
+])
+def test_continuation_preserves_failed_prefix_and_runs_only_new_messages(
+    tmp_path, monkeypatch, failure, unknown, continues,
+):
     spec = importlib.util.spec_from_file_location("dynamic_dispatch", Path(__file__).parents[2]
         / "tools/run_dynamic_memory_histories.py")
     module = importlib.util.module_from_spec(spec)
@@ -57,16 +67,21 @@ def test_continuation_preserves_failed_prefix_and_runs_only_new_messages(tmp_pat
         called.append(kwargs["message_id"])
         usage = {k: {"unknown_usage": 0} for k in ("generation", "embedding")}
         return {"status": "FAILED" if kwargs["message_id"] == "q2" else "COMPLETED",
-                "error": "VLLM_CHAT_TRUNCATED" if kwargs["message_id"] == "q2" else None,
-                "budget_before": usage, "budget_after": usage}
+                "error": failure if kwargs["message_id"] == "q2" else None,
+                "budget_before": usage,
+                "budget_after": {k: {"unknown_usage": unknown} for k in usage}}
 
     monkeypatch.setattr(functional, "message", message)
     monkeypatch.setattr(sys, "argv", ["dispatch", str(config), str(fixture_path), str(new),
         "--source-version", "same-runtime", "--policies", "fixed", "--continue-from", str(old)])
-    module.main()
-    assert called == ["q2", "q3"]
+    if continues:
+        module.main()
+    else:
+        with pytest.raises(RuntimeError, match="First Host failure retained"):
+            module.main()
+    assert called == (["q2", "q3"] if continues else ["q2"])
     assert json.loads((old / "driver.json").read_text()) == prior
     result = json.loads((new / "driver.json").read_text())
-    assert result["status"] == "COMPLETED_WITH_FAILURES"
+    assert result["status"] == ("COMPLETED_WITH_FAILURES" if continues else "FAILED")
     assert result["inherited_positions"] == 1
     assert result["completed"][0] == prior["completed"][0]

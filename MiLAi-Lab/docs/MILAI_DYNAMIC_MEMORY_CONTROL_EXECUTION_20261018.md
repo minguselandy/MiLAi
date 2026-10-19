@@ -755,3 +755,8 @@ Laya另有73前向、243325输入tokens、783.04秒本地推理和54.18秒加载
 
 资料：dynamic-memory-control-memops-intake-results-v1.json、dynamic-memory-control-t1-shared-pilot-protocol-v1.json；
 下一批具体命令保存在artifacts/dynamic-memory-control/prepared-after-v5-v1/jobs.json，尚未启动。
+
+四槽V5在第23位置因Laya完整输入超过8192退出；原进程/子进程均不存在。c-return的第4决策
+之前已打开两视图、刷新slot1并检索，当前/slot1版本1/2保留。该位置6046生成tokens、unknown新增0，
+不调大原容量、不截断、不重试。通用driver现将这类已知容量拒绝作为失败位置保留后继续下一个输入，
+与已知输出长度失败同口径；新增unknown或其他错误仍停止。5项调度测试通过。后续仅13个未开始位置。

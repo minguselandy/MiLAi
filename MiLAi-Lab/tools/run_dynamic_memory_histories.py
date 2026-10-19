@@ -103,7 +103,9 @@ def main() -> None:
                     run["completed"].append(row)
                     write_json(args.output / "driver.json", run)
                     print(json.dumps(row, ensure_ascii=False), flush=True)
-                    known_length_failure = (result.get("error") == "VLLM_CHAT_TRUNCATED"
+                    known_length_failure = (result.get("error") in {
+                            "VLLM_CHAT_TRUNCATED",
+                            "Finite decision input exceeds declared complete-input capacity"}
                         and all(result["budget_after"][kind]["unknown_usage"]
                                 == result["budget_before"][kind]["unknown_usage"]
                                 for kind in ("generation", "embedding")))

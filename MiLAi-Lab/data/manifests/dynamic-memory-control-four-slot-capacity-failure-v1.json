@@ -1,0 +1,38 @@
+{
+  "version": "dynamic-memory-control-four-slot-first-capacity-failure-v1",
+  "status": "FIRST_FAILURE_REVIEWED_NO_RETRY",
+  "runtime": "5052477f",
+  "dispatcher_v5_status": "FAILED",
+  "original_closed_positions": 23,
+  "unstarted_positions": 13,
+  "failed_position": {
+    "policy": "laya",
+    "history": "multitopic_switching",
+    "step": "c-return",
+    "decision_step": 4
+  },
+  "result": "artifacts/dynamic-memory-control/multitopic-four-slots-v1/laya/banks/1a575398-6152-40ca-bd9b-b7d34b73b917/bfb7cade-ecc1-460c-a137-9dbac07885ce-result.json",
+  "trace": "artifacts/dynamic-memory-control/multitopic-four-slots-v1/laya/banks/1a575398-6152-40ca-bd9b-b7d34b73b917/bfb7cade-ecc1-460c-a137-9dbac07885ce-trace-0.jsonl",
+  "before": "artifacts/dynamic-memory-control/four-slot-capacity-failure-review-v1/before.json",
+  "generation_known_tokens": 6046,
+  "new_unknown_usage": 0,
+  "prior_actions": [
+    "use_view_slot1",
+    "use_view_current",
+    "refresh_view_slot1",
+    "search"
+  ],
+  "persisted_before_views": [
+    {
+      "slot": "current",
+      "revision": 1
+    },
+    {
+      "slot": "slot1",
+      "revision": 2
+    }
+  ],
+  "continuation": "New dispatch may use the same frozen5052477f Host and existing banks only for13unstarted positions. This capacity failure remains a failed task. Do not increase its capacity, truncate input, retry or repair its stored views.",
+  "driver_change": "Known complete-input capacity refusal, like known output-length failure, may close the position and proceed to the next different input only when generation/embedding unknown counters did not increase. Unexpected failures still stop.",
+  "tests": "5dispatch tests, including both known capacity failures and uncertain/unexpected failure stop paths; first failed prefix remains unchanged."
+}
