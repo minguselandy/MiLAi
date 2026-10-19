@@ -3996,6 +3996,7 @@ def message(
                 business_call_wrapper=dispatch,
                 model_tool_choice=choice_selector,
                 model_tools_provider=tools_provider,
+                schema_feedback_fingerprints=not bool(settings.get("retrieval_tool")),
             )
 
             def invoke_execution(value: Any) -> list[Any]:
@@ -4219,7 +4220,8 @@ def message(
                     memory_tools=selected_memory, system_prompt=settings["system_prompt"],
                     benchmark_view_hook=context_hook, tool_schema_communication="shape_feedback_v1",
                     business_call_wrapper=dispatch, model_tool_choice=choice_selector,
-                    model_tools_provider=tools_provider)
+                    model_tools_provider=tools_provider,
+                    schema_feedback_fingerprints=not bool(settings.get("retrieval_tool")))
                 trace({"event": "functional_completion_feedback", **completion,
                        "candidate_answer_delivered": False})
                 expected = ("The current continuation includes prior explicit memory work"

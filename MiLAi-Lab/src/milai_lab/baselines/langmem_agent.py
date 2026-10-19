@@ -154,6 +154,7 @@ def build_agent(
     tool_save_communication: str | None = None,
     model_tool_choice: Callable[[list[BaseMessage]], Literal["auto", "required"]] | None = None,
     model_tools_provider: Callable[[RunnableConfig], Sequence[BaseTool]] | None = None,
+    schema_feedback_fingerprints: bool = True,
 ) -> Any:
     """Select the native or strict memory mutation contract for Host tools."""
     selected_save = read_profile("tool_save_communication", model.tool_save_communication)
@@ -316,7 +317,8 @@ def build_agent(
                 except ValidationError as error:
                     return ToolMessage(
                         content=(
-                            feedback_text(jsonschema_feedback(error, schema))
+                            feedback_text(jsonschema_feedback(
+                                error, schema, fingerprints=schema_feedback_fingerprints))
                             if selected_communication != "legacy"
                             else f"Tool input validation error: {error.message}"
                         ),

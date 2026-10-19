@@ -223,22 +223,23 @@ def check_frozen(frozen: dict[str, Any]) -> Profile:
     return selected
 
 
-def _bounded(value: Any) -> Any:
+def _bounded(value: Any, *, fingerprints: bool = True) -> Any:
     raw = _json(value).encode()
     if len(raw) > 512:
-        return {"omitted": True, "utf8_bytes": len(raw), "sha256": hashlib.sha256(raw).hexdigest()}
+        return {"omitted": True, "utf8_bytes": len(raw),
+                **({"sha256": hashlib.sha256(raw).hexdigest()} if fingerprints else {})}
     return value
 
 
-def _path(path: Any) -> dict[str, Any]:
+def _path(path: Any, *, fingerprints: bool = True) -> dict[str, Any]:
     values = list(path)
     segments = []
     for value in values[:16]:
-        segments.append(_bounded(value))
+        segments.append(_bounded(value, fingerprints=fingerprints))
     return {
         "segments": segments,
         "omitted_segments": max(0, len(values) - 16),
-        "sha256": _sha(values),
+        **({"sha256": _sha(values)} if fingerprints else {}),
     }
 
 
@@ -256,12 +257,12 @@ def _contains(public: Any, subschema: Any) -> bool:
     return False
 
 
-def _fit_feedback(value: dict[str, Any]) -> dict[str, Any]:
+def _fit_feedback(value: dict[str, Any], *, fingerprints: bool = True) -> dict[str, Any]:
     """One aggregate byte cap; omissions are presentation, never validation changes.
 
     Remove trailing displayed path segments by encoded cost, original-order ties;
     then expected displays, then last displayed error children. Original identity
-    hashes and immediate parent/child omission counts remain intact.
+    omission counts remain intact. Identity hashes are optional presentation data.
     """
     value["feedback_utf8_limit"] = FEEDBACK_UTF8_LIMIT
 
@@ -283,7 +284,9 @@ def _fit_feedback(value: dict[str, Any]) -> dict[str, Any]:
         expectations = [node for node in nodes if "expected" in node]
         if expectations:
             node = max(expectations, key=lambda row: len(_json(row["expected"]).encode()))
-            node["expected_display_sha256"] = _sha(node.pop("expected"))
+            expected = node.pop("expected")
+            if fingerprints:
+                node["expected_display_sha256"] = _sha(expected)
             node["expected_omitted"] = "aggregate_feedback_utf8_budget"
             continue
         parents = [node for node in nodes if node.get("context")]
@@ -300,7 +303,9 @@ def _fit_feedback(value: dict[str, Any]) -> dict[str, Any]:
     return value
 
 
-def jsonschema_feedback(error: Any, public_schema: dict[str, Any]) -> dict[str, Any]:
+def jsonschema_feedback(
+    error: Any, public_schema: dict[str, Any], *, fingerprints: bool = True,
+) -> dict[str, Any]:
     """Project original errors only; never run a validator or infer a correct branch."""
     available = [8]
 
@@ -308,9 +313,9 @@ def jsonschema_feedback(error: Any, public_schema: dict[str, Any]) -> dict[str, 
         available[0] -= 1
         keyword = current.validator
         result = {
-            "path": _path(current.absolute_path),
-            "schema_path": _path(current.absolute_schema_path),
-            "keyword": _bounded(keyword),
+            "path": _path(current.absolute_path, fingerprints=fingerprints),
+            "schema_path": _path(current.absolute_schema_path, fingerprints=fingerprints),
+            "keyword": _bounded(keyword, fingerprints=fingerprints),
         }
         if (
             keyword in _EXPECTED
@@ -318,7 +323,7 @@ def jsonschema_feedback(error: Any, public_schema: dict[str, Any]) -> dict[str, 
             and _same_json(current.schema.get(keyword), current.validator_value)
             and _contains(public_schema, current.schema)
         ):
-            result["expected"] = _bounded(current.validator_value)
+            result["expected"] = _bounded(current.validator_value, fingerprints=fingerprints)
         else:
             result["expected_omitted"] = "not_a_bounded_public_schema_constraint"
         children = list(current.context)
@@ -330,12 +335,11 @@ def jsonschema_feedback(error: Any, public_schema: dict[str, Any]) -> dict[str, 
         if children:
             result["context"] = shown
             result["omitted_context_children"] = len(children) - len(shown)
-            result["context_identity_sha256"] = _sha(
-                [
-                    [list(child.absolute_path), list(child.absolute_schema_path), child.validator]
-                    for child in children
-                ]
-            )
+            if fingerprints:
+                result["context_identity_sha256"] = _sha(
+                    [[list(child.absolute_path), list(child.absolute_schema_path), child.validator]
+                     for child in children]
+                )
         return result
 
     return _fit_feedback(
@@ -344,23 +348,25 @@ def jsonschema_feedback(error: Any, public_schema: dict[str, Any]) -> dict[str, 
             "status": "error",
             "tool_executed": False,
             "instance_root": "tool_arguments",
-            "public_schema_sha256": _sha(public_schema),
+            **({"public_schema_sha256": _sha(public_schema)} if fingerprints else {}),
             "error": project(error, 0),
-        }
+        }, fingerprints=fingerprints,
     )
 
 
-def pydantic_feedback(error: Any) -> dict[str, Any]:
+def pydantic_feedback(error: Any, *, fingerprints: bool = True) -> dict[str, Any]:
     rows = error.errors(include_url=False, include_context=False, include_input=False)
-    errors = [{"loc": _path(row["loc"]), "type": _bounded(row["type"])} for row in rows[:8]]
+    errors = [{"loc": _path(row["loc"], fingerprints=fingerprints),
+               "type": _bounded(row["type"], fingerprints=fingerprints)} for row in rows[:8]]
     return _fit_feedback(
         {
             "origin": "pydantic",
             "status": "error",
             "errors": errors,
             "omitted_errors": max(0, len(rows) - 8),
-            "error_identity_sha256": _sha([[list(row["loc"]), row["type"]] for row in rows]),
-        }
+            **({"error_identity_sha256": _sha([[list(row["loc"]), row["type"]] for row in rows])}
+               if fingerprints else {}),
+        }, fingerprints=fingerprints,
     )
 
 
