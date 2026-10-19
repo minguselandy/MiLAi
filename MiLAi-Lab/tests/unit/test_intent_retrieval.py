@@ -274,3 +274,49 @@ def test_supplementary_search_executes_a_different_requested_target(tmp_path):
         assert "Tuesday" in json.dumps(state.visible_evidence)
         assert state.task["request"] == "dispatch codeword"
         assert not any(a.kind == "SEARCH" for a in ops.actions(state))
+
+
+def test_opened_evidence_is_not_evicted_when_return_references_are_added(tmp_path):
+    from milai_lab.memory.functional_state import canonical
+
+    with SqliteStore.from_conn_string(str(tmp_path / "db")) as store:
+        service = MemoryService(store, ("intent-test", "alice"), "alice", tmp_path / "lock",
+                                functional_contract="functional_v1")
+        service.capture_user("a", "1", "Report A: " + "a" * 400)
+        service.capture_user("b", "1", "Report B: " + "b" * 400)
+        cfg = context(service)
+        traces = []
+        memory = memory_at(service, control_steps=5, control_record=traces.append)
+        memory.control_policy = FixedMemoryPolicy(reads=2)
+        full = memory.retrieve(cfg, "full", RetrievalRequest(query="reports"))
+        assert len(full["evidence"]) == 2
+        limit = len(canonical(full)) - 30
+        traces.clear()
+        bounded = memory.retrieve(cfg, "less", RetrievalRequest.model_validate({
+            "query": "reports", "limits": {"max_return_tokens": limit}}))
+        assert len(canonical(bounded)) <= limit
+        final = next(t for t in traces if t.get("event") == "milai_retrieve_result")
+        assert len(final["control"]["state"]["visible_evidence"]) == len(bounded["evidence"]) == 1
+        assert any(t.get("result", {}).get("status") == "material_budget_exhausted"
+                   for t in final["control"]["trace"])
+        assert bounded["evidence"][0]["ref"]["item_index"] == 0
+        assert bounded["usage"]["material_budget_rejections"] == 1
+
+
+def test_return_keeps_candidate_labels_while_refs_resolve_snapshot_positions(tmp_path):
+    with SqliteStore.from_conn_string(str(tmp_path / "db")) as store:
+        service = MemoryService(store, ("intent-test", "alice"), "alice", tmp_path / "lock",
+                                functional_contract="functional_v1")
+        service.capture_user("a", "1", "Report A contains the first value.")
+        service.capture_user("b", "1", "Report B contains the second value.")
+        cfg = context(service)
+        choices = iter(["search_0_8", "read_1", "read_0", "handoff"])
+        memory = memory_at(service)
+        memory.control_policy = LayaMemoryPolicy(lambda _: {"choice": next(choices)})
+        packet = memory.retrieve(cfg, "reverse", RetrievalRequest(query="report"))
+        assert [e["label"] for e in packet["evidence"]] == ["e1", "e0"]
+        assert [e["ref"]["item_index"] for e in packet["evidence"]] == [0, 1]
+        known = memory._known_materials(RetrievalRequest.model_validate({"query": "compare",
+            "task_context": {"known_evidence_refs": [e["ref"] for e in packet["evidence"]]}}))
+        for item, evidence in zip(known, packet["evidence"], strict=True):
+            assert json.loads(item["text"])[0]["content"] == evidence["evidence"][0]["content"]

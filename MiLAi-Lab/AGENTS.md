@@ -1,3 +1,20 @@
+# LATEST: pilot20CLOSED; full-return-budget fix checked; main272trainnext
+
+Pilot frozen cd1c1291 / exec33206 / PID3609459 closedCOMPLETED_WITH_FAILURES20;
+19programcomplete/1length;65HTTP/215008known&charged/newunknown0.157actualtrainstates exported
+ALLgoldEMPTY,78query-only/79rich; actualtokenizerauditmax8141 under12288/head2048,0over/0forwards.
+Five post-returndrops observed (four4->3,one5->4); readonlybackups prove fullpackets2054–2144>2048.
+New singlepacket renderer checksrefs+usage atREADadmission; no laterpop, no largerbudget.
+Candidate labels staypoolindices; references maptosnapshotpositions. Timingsremaintrace/snapshot;
+usage addsactualmaterialbudgetrejections. OldSQLite regressionfailsbefore andpassesafter;
+35affectedtestspass plus reversed-index reference test. Originalpilotoutputsunchanged.
+Source review: A01Leadtitle remainsplanned; A02rebrandcancelled, omittedbyfixedreads.
+MuSiQue10869Americanfilm!=director citizenship;2817MadisonWI!=MadisonMD nativecounty.
+Nativegold unchanged, sourcequalifiedlabels/separate metrics needed. Do notblindlycompilegold.
+Protocol now mainnewmethod all64train272positions then16dev64;8traingenerative48stillregistered.
+Oldpilot isdiagnostic only/allmasked, notrewrittenasnewmethod. No newweights yet.
+NativeE0still0/24/sharedserviceapprovalPENDING; no service changes, SHA, subagents or newledger.
+
 # LATEST: T0actualcollection prepared, pilot20next
 
 T0sourcev3actual inputs64train/16dev: MemOpsfirst/lastarrival cuts keepallinterveningoriginals;

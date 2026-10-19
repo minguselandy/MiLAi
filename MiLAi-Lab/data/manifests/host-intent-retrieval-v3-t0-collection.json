@@ -1,5 +1,5 @@
 {
-  "status": "REGISTERED_BEFORE_COLLECTION",
+  "status": "PILOT_CLOSED_MAIN_COLLECTION_AFTER_DELIVERY_FIX",
   "source_data": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/data/t0-sources-v3/histories.json",
   "offline_reference_data": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/data/t0-sources-v3/offline-references.jsonl",
   "allocation": "data/manifests/host-intent-retrieval-v3-t0-allocation.json",
@@ -59,6 +59,17 @@
   "labels": "Do not copy rule/generative actions as gold. Review actual request intent, supports, current observations and views; ambiguous labels masked. No blanket SEARCH/USE_VIEW/REFRESH positives.",
   "native_e0_status": "0/24; thiscollection does not substitute for native E0. Sharedservice restart approval pending.",
   "budget": "original continuous ledger; every first failure and its cost retained",
-  "model_calls_so_far": 0,
-  "sha_verification": false
+  "model_calls_so_far": 65,
+  "sha_verification": false,
+  "pilot_run": "artifacts/host-intent-retrieval-v3/runs/t0-pilot-v1",
+  "pilot_result": "data/manifests/host-intent-retrieval-v3-t0-pilot-review.json",
+  "pilot_training_use": "Diagnostic only;157statesallmasked. No teacher actions or native references silently promoted.",
+  "main_collection": {
+    "train_positions": 272,
+    "dev_positions": 64,
+    "method_change": "Fullpacket-aware read admission, stablecandidate labels/physicalreference slots, timingoutsideboundedtoolpacket.",
+    "version_policy": "New frozen method and new banks for all64train/16dev; originalpilotpositions/answers/costs unchanged. Not selective successful reruns or source replacement.",
+    "data": "artifacts/host-intent-retrieval-v3/data/t0-sources-v3/histories.json"
+  },
+  "pilot_positions_closed": 20
 }

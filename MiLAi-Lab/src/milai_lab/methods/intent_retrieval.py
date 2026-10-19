@@ -60,6 +60,19 @@ def material_binding(item: dict[str, Any]) -> dict[str, Any]:
     return result
 
 
+def retrieval_packet(
+    key: str, items: list[dict[str, Any]], indices: list[int], positions: list[int],
+    reason: str, usage: dict[str, Any], *, ok: bool = True,
+) -> dict[str, Any]:
+    """One full return representation for read admission and final delivery."""
+    evidence = project_packs(items, indices)
+    references = dict(zip(indices, positions, strict=True))
+    for row in evidence:
+        row["ref"] = material_ref(key, references[int(row["label"][1:])])
+    return {"ok": ok, "schema": "milai_retrieval_result_v1", "evidence": evidence,
+            "termination_reason": reason, "usage": usage}
+
+
 class IntentRetrievalMemory(FunctionalEditMemory):
     """Opt-in adapter: the Host calls retrieval instead of receiving automatic retrieval."""
 
@@ -174,7 +187,8 @@ class IntentRetrievalMemory(FunctionalEditMemory):
             if not receipt["ok"]:
                 saved.update(status="completed", ok=False, reason=receipt["status"], materials=[],
                     delivered_indices=[], usage={"control_steps": 0,
-                        "wall_seconds": time.perf_counter() - started})
+                        "known_reference_reads": 0, "operations": 0, "read_operations": 0},
+                    wall_seconds=time.perf_counter() - started)
                 self.service.store.put(namespace(self.service), key, saved, index=False)
                 return self._retrieval_result(key, saved)
             known = receipt["materials"]
@@ -202,12 +216,26 @@ class IntentRetrievalMemory(FunctionalEditMemory):
             assert self.dependency_read_call is not None
             return self.dependency_read_call("query_structure", messages, schema)
 
+        def fits_delivery(items: dict[int, dict[str, Any]]) -> bool:
+            # Counts are bounded by this call's declared decision budget. Timing
+            # stays in the trace, so elapsed-time digits cannot displace evidence.
+            usage = {"control_steps": steps, "known_reference_reads": len(known),
+                     "operations": steps, "read_operations": steps,
+                     "material_budget_rejections": steps}
+            return all(self.token_count(canonical(retrieval_packet(
+                key, list(items.values()), list(items), list(range(len(items))), reason, usage,
+                ok=False)))
+                <= return_limit for reason in (
+                    "policy_handoff", "budget_exhausted", "no_available_operation",
+                    "operation_outcome_unknown"))
+
         operations = EvidenceOperations(self.service, state,
             load_pool=lambda: search_pool(request.query, self.source_top_k),
             search_pool=search_pool,
             search_batch_sizes=tuple(dict.fromkeys(min(n, self.source_top_k) for n in (8, 16))),
             refresh_call=refresh,
             fits=lambda items: self.token_count(canonical(items)) <= return_limit,
+            fits_materials=fits_delivery,
             excluded_source_refs=(bound["source_ref"],),
             known_materials=known,
             view_capacity=self.control_view_capacity, view_policy=self.control_view_policy)
@@ -247,11 +275,13 @@ class IntentRetrievalMemory(FunctionalEditMemory):
                 and bool(self.read_allowance(config)["reads_remaining"]))
         trace = result["trace"]
         saved.update(status="completed", reason=result["reason"],
-            materials=list(operations.opened.values()),
+            materials=list(operations.opened.values()), indices=list(operations.opened),
+            wall_seconds=time.perf_counter() - started,
             usage={"control_steps": len(trace),
                    "known_reference_reads": len(known),
                    "operations": sum("result" in event for event in trace),
-                   "wall_seconds": time.perf_counter() - started})
+                   "material_budget_rejections": sum(event.get("result", {}).get("status")
+                       == "material_budget_exhausted" for event in trace)})
         saved["usage"]["read_operations"] = sum(
             any(a["id"] == event["selected"] and a["kind"] == "READ" for a in event["actions"])
             for event in trace)
@@ -263,21 +293,17 @@ class IntentRetrievalMemory(FunctionalEditMemory):
             note_exposure(self.service, bound["source_ref"], list(operations.source_refs()))
         self.control_record({"event": "milai_retrieve_result", "call_id": call_id,
                              "request": request.project(), "result": packet,
+                             "retrieval_wall_seconds": saved["wall_seconds"],
                              "control": result})
         return packet
 
     def _retrieval_result(self, key: str, saved: dict[str, Any]) -> dict[str, Any]:
-        indices = saved.get("delivered_indices", list(range(len(saved["materials"]))))
-        actual = open_evidence_packs(self.service, [saved["materials"][i] for i in indices])
-        evidence = project_packs(actual, indices)
-        for row in evidence:
-            row["ref"] = material_ref(key, int(row["label"][1:]))
-        packet = {"ok": saved.get("ok", saved["reason"] != "operation_outcome_unknown"),
-                  "schema": "milai_retrieval_result_v1", "evidence": evidence,
-                  "termination_reason": saved["reason"], "usage": saved["usage"]}
-        while evidence and self.token_count(canonical(packet)) > saved["return_limit"]:
-            evidence.pop()
-            packet["termination_reason"] = "budget_exhausted"
+        positions = saved.get("delivered_indices", list(range(len(saved["materials"]))))
+        labels = saved.get("indices", list(range(len(saved["materials"]))))
+        actual = open_evidence_packs(self.service, [saved["materials"][i] for i in positions])
+        packet = retrieval_packet(key, actual, [labels[i] for i in positions], positions,
+            saved["reason"], saved["usage"],
+            ok=saved.get("ok", saved["reason"] != "operation_outcome_unknown"))
         if self.token_count(canonical(packet)) > saved["return_limit"]:
             raise FunctionalRejection("RETRIEVAL_RETURN_ENVELOPE_EXCEEDS_LIMIT")
         return packet

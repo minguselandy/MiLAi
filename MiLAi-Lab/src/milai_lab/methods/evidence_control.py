@@ -51,6 +51,7 @@ class EvidenceOperations:
         search_pool: Callable[[str, int], list[dict[str, Any]]] | None = None,
         search_batch_sizes: tuple[int, ...] = (8, 16),
         max_searches: int = 2,
+        fits_materials: Callable[[dict[int, dict[str, Any]]], bool] | None = None,
     ) -> None:
         self.service, self.load_pool, self.refresh_call, self.fits = (
             service, load_pool, refresh_call, fits)
@@ -61,6 +62,7 @@ class EvidenceOperations:
         self.search_batch_sizes = search_batch_sizes
         self.max_searches = max_searches
         self.search_attempts: set[tuple[str, int]] = set()
+        self.fits_materials = fits_materials
         self.attempted: set[tuple[int, bool]] = set()
         self.searched = False
         self.view_capacity = view_capacity
@@ -271,6 +273,11 @@ class EvidenceOperations:
     def _deliver(self, state: MemoryControlState) -> None:
         state.visible_evidence = project_packs(list(self.opened.values()), list(self.opened))
 
+    def fits_delivery(self, items: dict[int, dict[str, Any]]) -> bool:
+        if self.fits_materials is not None:
+            return self.fits_materials(items)
+        return self.fits(project_packs(list(items.values()), list(items)))
+
     @staticmethod
     def candidate(item: dict[str, Any], index: int) -> dict[str, Any]:
         return {**pack_candidate(item, index), **{
@@ -333,7 +340,7 @@ class EvidenceOperations:
             item = open_evidence_packs(self.service, [self.materials[i]],
                                       expand_context=expand, refresh_current=True)[0]
             trial = {**self.opened, i: item}
-            if not self.fits(project_packs(list(trial.values()), list(trial))):
+            if not self.fits_delivery(trial):
                 return {"ok": False, "status": "material_budget_exhausted", "index": i}
             self.opened = trial
             known = {source["event_id"] for source in self.events}
@@ -381,7 +388,7 @@ class EvidenceOperations:
         item["query_time"] = state.task["query_time"]
         view_index = -1 - structure_slots(self.view_capacity).index(slot)
         trial = {**self.opened, view_index: item}
-        delivered = self.fits(project_packs(list(trial.values()), list(trial)))
+        delivered = self.fits_delivery(trial)
         if delivered:
             self.opened = trial
             self._deliver(state)

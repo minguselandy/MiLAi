@@ -1,0 +1,45 @@
+{
+  "status": "PILOT_CLOSED_DIAGNOSTIC_NOT_FITTED",
+  "source_version": "cd1c1291",
+  "driver": "artifacts/host-intent-retrieval-v3/runs/t0-pilot-v1/driver.json",
+  "positions": 20,
+  "source_groups": 4,
+  "runtime_status_counts": {
+    "COMPLETED": 19,
+    "FAILED": 1
+  },
+  "generation_requests": 65,
+  "generation_delta": {
+    "charged_tokens": 215008,
+    "known_tokens": 215008,
+    "unknown_usage": 0
+  },
+  "wall_seconds": 542.5572725040838,
+  "cpu_seconds": 36.888235704,
+  "actual_states": 157,
+  "labelled_states": 0,
+  "input_capacity": {
+    "max_len": 12288,
+    "head_max_len": 2048,
+    "max_actual_sequence": 8141,
+    "oversized": 0,
+    "model_forwards": 0
+  },
+  "delivery_issue": {
+    "post_return_eviction_calls": 5,
+    "evidence": "Five actualcalls lost oneopeneditem atreturn: four4-to3 andone5-to4. Fullquote/ref/usage wrapper wasnotcounted duringREAD admission.",
+    "raw_outcomes_unchanged": true,
+    "corrective_action": "One completepacket renderer forreadadmission andreturn; retainpoollabels andphysicalrefpositions; timingtrace-only. No silentposthoc evidencepop."
+  },
+  "source_reviews": {
+    "memops_A01": "All originalturns reviewed. EarlyDataAnalyst/Diane/salaryunknown. LateSeniorDataAnalyst/$74500/Diane; LeadDataAnalyst isstillonlyplanned. Bothlatetrajectoriesfailthatplannedchange requirement; oldanswer/earlierfacts crowdedoutthe relevant newsource.",
+    "memops_A02": "All originalturns reviewed. StrategicAnalytics/Rachel; later AppliedStrategy&Analytics proposalwasexplicitlycancelled. Latequery_only deniespriorproposal/cancellation; richreportsitstillplanned. Necessarycancellation source wasnotreturned.",
+    "musique_000856_2427": "All20paragraphs reviewed; noSallyCarsactressidentity. Abstention justified, nativeanswerabilityfalse preserved.",
+    "musique_000856_10869": "All20paragraphs reviewed. Cars sources identifyBonnieHunt andUNEPparagraphgivesUS$40million, butReturntoMe calls thefilmAmerican, notthe directorcitizenship. No suppliedparagraphestablishesHuntcitizenship. NativeanswerableTrue/reference40million retained separately; do nottrainfull-supportHANDOFFfromthese nativeflags.",
+    "musique_000710_2817": "Biography explicitly places death inMadison,Wisconsin. NativeDorchesterCounty joinsa differentMadison,Maryland paragraph. Wisconsin is a source-supported administrative-entityalternative; preserveofficialreference/score andreportgranularityqualification.",
+    "musique_000710_12620": "All20paragraphs reviewed; theMoorebiography absent. No supplieddeathlocation proof; abstention justified."
+  },
+  "annotation_policy": "Source-qualified preferences, no nativeanswerrepair or outcome-basedreplacement. Originalstatesremainallmasked. Maincollectionafterbudgetfix uses a separately declared sourceversion, notsuccess retries or upgradedoldoutcomes.",
+  "native_e0": "still0/24; approvalpending",
+  "reviewer": "assistant author; notindependentjudgment"
+}
