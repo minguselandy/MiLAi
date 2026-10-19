@@ -60,5 +60,23 @@
   "pid": 817340,
   "exec_session": 7553,
   "source_version": "63603feb",
-  "exported_checkpoint_validation": "data/manifests/host-intent-retrieval-v3-t0-export-validation-results.json"
+  "exported_checkpoint_validation": "data/manifests/host-intent-retrieval-v3-t0-export-validation-results.json",
+  "progress_snapshot": {
+    "closed_positions": 19,
+    "program_statuses": {
+      "COMPLETED": 18,
+      "FAILED": 1
+    },
+    "active": {
+      "history": "memops_D25",
+      "policy": "laya",
+      "interface": "rich",
+      "profile": "laya-rich",
+      "request": "stage-2"
+    },
+    "observed_epoch": 1792444427.7867644,
+    "semantic_reviews": 8,
+    "semantic_review_artifact": "artifacts/host-intent-retrieval-v3/data/t0-laya-dev-seed0-task-reviews-v1.json",
+    "scope": "Prefix only; no fullcohort or efficacy conclusion."
+  }
 }

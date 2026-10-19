@@ -14,7 +14,9 @@ originalledger phasehost_intent_t0_seed0_exported_dev_v1 matches. ComparisonCPU1
 ACTIVE MODEL JOB: PID817340 / exec7553 / frozen63603feb; normalHost JSON-action, notnativeE0.
 runs/t0-laya-dev-seed0-v1/driver.json,64dev positions, laya query_only+rich ownactualbanks.
 Dispatch t0-tool-eval-dispatch-v1.json; finalcheckpoint fromfitting/t0-native-shared-seed0-v1/checkpoint.
-First3closed successful; this is NOT fullcohortquality. RevalidateactualPID/driver andpollsamehandle.
+Snapshot 19/64 closed, program statuses {'COMPLETED': 18, 'FAILED': 1}; NOT fullcohortquality.
+8answers reviewed in data/t0-laya-dev-seed0-task-reviews-v1.json (A19/A32); nofullscore.
+RevalidateactualPID/driver andpollsamehandle.
 No second model task or offline costsettlement whilethisjoblives. Preserve firstfailures; no retries.
 
 Originalbudget /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json ONLY.
