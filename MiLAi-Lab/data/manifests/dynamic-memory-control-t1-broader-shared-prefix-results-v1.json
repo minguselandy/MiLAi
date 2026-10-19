@@ -1,0 +1,2835 @@
+{
+  "version": "dynamic-memory-control-t1-broader-shared-prefix-results-v1",
+  "status": "CLOSED_OLD32_AND_EXTERNAL30_REVIEWED_REMAINDER_PENDING",
+  "method_source": "0acc4b9a",
+  "trained_backgrounds": 36,
+  "updates": 96,
+  "reviewer": "Codex author; same registered source-faithfulness criteria, no independent Judge",
+  "original_development_counts": {
+    "unfulfilled": 5,
+    "correct": 18,
+    "length_failure": 5,
+    "wrong": 4
+  },
+  "external_prefix_counts": {
+    "correct": 14,
+    "operation_failure": 1,
+    "incomplete": 1,
+    "wrong": 7,
+    "qualified": 4,
+    "length_failure": 2,
+    "unfulfilled": 1
+  },
+  "reviewed_positions": 62,
+  "planned_positions": 80,
+  "remaining_external_families": [
+    "memops_E08",
+    "memops_E15",
+    "memops_F01"
+  ],
+  "records": [
+    {
+      "family": "quota_reallocation",
+      "step": "cold",
+      "label": "unfulfilled",
+      "full_task_success": false,
+      "note": "Required facts were not answered; inspect actual delivered material to distinguish empty evidence from an old refusal.",
+      "expected": "竹组3张，梅组3张。",
+      "answer": "根据当前已提供的记录和记忆证据，未发现竹组与梅组的发票记录或转移记录数据，因此无法计算剩余可发票数。",
+      "control_path": [
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 6236,
+          "charged_tokens": 6236,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 4.081110681996506,
+            "forwards": 1,
+            "input_tokens": 891,
+            "sequence_rows": 1,
+            "state_tokenizations": 1,
+            "state_tokens": 711,
+            "wall_seconds": 1.0592993311583996
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 6.590717718000178,
+            "loads": 1,
+            "wall_seconds": 5.010159458965063
+          }
+        }
+      },
+      "wall_seconds": 35.26372314803302,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/7cc74249-77cd-4653-9ab8-2ea2a43ad79c/31c6282a-328d-4d80-9a31-ebc2e4ea750b-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/7cc74249-77cd-4653-9ab8-2ea2a43ad79c/31c6282a-328d-4d80-9a31-ebc2e4ea750b-trace-0.jsonl"
+    },
+    {
+      "family": "quota_reallocation",
+      "step": "repeat",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied; representative preference examples accepted.",
+      "expected": "竹组3张，梅组3张。",
+      "answer": "竹组原剩余5张，转出2张，剩余3张；梅组原剩余1张，转入2张，剩余3张。",
+      "control_path": [
+        "search",
+        "context_1",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 7798,
+          "charged_tokens": 7798,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 23.439529274997767,
+            "forwards": 3,
+            "input_tokens": 4315,
+            "sequence_rows": 3,
+            "state_tokenizations": 3,
+            "state_tokens": 3656,
+            "wall_seconds": 6.267758745700121
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 2.83046322600012,
+            "loads": 1,
+            "wall_seconds": 1.9061214746907353
+          }
+        }
+      },
+      "wall_seconds": 44.8900767788291,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/7cc74249-77cd-4653-9ab8-2ea2a43ad79c/e1d1906e-f890-4c81-bec5-a9e10c9b52d6-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/7cc74249-77cd-4653-9ab8-2ea2a43ad79c/e1d1906e-f890-4c81-bec5-a9e10c9b52d6-trace-0.jsonl"
+    },
+    {
+      "family": "quota_reallocation",
+      "step": "unrelated",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied; representative preference examples accepted.",
+      "expected": "竹组3张，梅组3张。",
+      "answer": "根据最新实际转移记录，竹组原剩余5张，转出2张，剩余3张；梅组原剩余1张，转入2张，剩余3张。",
+      "control_path": [
+        "search",
+        "read_1",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 9051,
+          "charged_tokens": 9051,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 39.36864389499533,
+            "forwards": 3,
+            "input_tokens": 5936,
+            "sequence_rows": 3,
+            "state_tokenizations": 3,
+            "state_tokens": 5081,
+            "wall_seconds": 10.742288504727185
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 2.697596543000145,
+            "loads": 1,
+            "wall_seconds": 1.8736559264361858
+          }
+        }
+      },
+      "wall_seconds": 56.80445789825171,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/7cc74249-77cd-4653-9ab8-2ea2a43ad79c/106de7ca-f055-432d-8e95-5c3993d9182e-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/7cc74249-77cd-4653-9ab8-2ea2a43ad79c/106de7ca-f055-432d-8e95-5c3993d9182e-trace-0.jsonl"
+    },
+    {
+      "family": "quota_reallocation",
+      "step": "changed",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied; representative preference examples accepted.",
+      "expected": "竹组4张，梅组2张。",
+      "answer": "竹组还可发4张票，梅组还可发2张票。",
+      "control_path": [
+        "search",
+        "context_7",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 5325,
+          "charged_tokens": 5325,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 52.18819435699697,
+            "forwards": 3,
+            "input_tokens": 7193,
+            "sequence_rows": 3,
+            "state_tokenizations": 3,
+            "state_tokens": 6366,
+            "wall_seconds": 14.2324603125453
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 2.6945445350002046,
+            "loads": 1,
+            "wall_seconds": 1.8464074674993753
+          }
+        }
+      },
+      "wall_seconds": 35.690882430411875,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/7cc74249-77cd-4653-9ab8-2ea2a43ad79c/74a5cb54-de1e-474c-ad0e-7f6dad73d0d6-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/7cc74249-77cd-4653-9ab8-2ea2a43ad79c/74a5cb54-de1e-474c-ad0e-7f6dad73d0d6-trace-0.jsonl"
+    },
+    {
+      "family": "ordered_precedence",
+      "step": "cold",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied; representative preference examples accepted.",
+      "expected": "硬壳盒。",
+      "answer": "根据已提供的记录，紫沙样品当前应使用**硬壳盒**。理由是专项指令明确规定要求硬壳盒，且规则确认专项指令的优先级高于通用指南（通用指南要求纸盒）。",
+      "control_path": [
+        "search",
+        "read_1",
+        "read_0",
+        "read_2",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 5470,
+          "charged_tokens": 5470,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 27.102692448999733,
+            "forwards": 5,
+            "input_tokens": 5752,
+            "sequence_rows": 5,
+            "state_tokenizations": 5,
+            "state_tokens": 4607,
+            "wall_seconds": 7.142602573148906
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 2.588246795000032,
+            "loads": 1,
+            "wall_seconds": 1.7962861135601997
+          }
+        }
+      },
+      "wall_seconds": 30.181031480431557,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/f65d3b6d-fc53-4b2f-ada8-f8c7357bd80a/4d38739c-bc6a-47ff-8d0b-12eebd1c7066-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/f65d3b6d-fc53-4b2f-ada8-f8c7357bd80a/4d38739c-bc6a-47ff-8d0b-12eebd1c7066-trace-0.jsonl"
+    },
+    {
+      "family": "ordered_precedence",
+      "step": "repeat",
+      "label": "length_failure",
+      "full_task_success": false,
+      "note": "First output-length failure retained; no task credit.",
+      "expected": "硬壳盒。",
+      "answer": "回答协议失败, 执行已停止; 以下是已确认的操作状态。未列出的请求完成情况仍未确认。\n\n本轮业务结果: 未执行新的业务操作。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。\n\n本轮未取得新的业务回执。\n\n本轮语义记忆: 未提交。这里只报告列出的回执, 不确认全部请求或语义覆盖。\n\n本轮保存许可: 当前未获允许。\n\n本轮原始消息已记录。原始消息记录与语义记忆提交分别计数。",
+      "control_path": [
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 11941,
+          "charged_tokens": 11941,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 5.236427525996987,
+            "forwards": 1,
+            "input_tokens": 1147,
+            "sequence_rows": 1,
+            "state_tokenizations": 1,
+            "state_tokens": 967,
+            "wall_seconds": 1.3682601228356361
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 2.593628811000144,
+            "loads": 1,
+            "wall_seconds": 1.7991028167307377
+          }
+        }
+      },
+      "wall_seconds": 72.20082962140441,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/f65d3b6d-fc53-4b2f-ada8-f8c7357bd80a/daa4903a-2594-4190-bc07-960e2b2c2bd4-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/f65d3b6d-fc53-4b2f-ada8-f8c7357bd80a/daa4903a-2594-4190-bc07-960e2b2c2bd4-trace-0.jsonl"
+    },
+    {
+      "family": "ordered_precedence",
+      "step": "changed",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied; representative preference examples accepted.",
+      "expected": "纸盒，回到通用指南。",
+      "answer": "根据当前提供的记录，紫沙样品的专项包装指令已撤销（证据 s6），且无替代指令。此时应执行通用指南，即使用**纸盒**。",
+      "control_path": [
+        "search",
+        "read_5",
+        "read_1",
+        "read_2",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 6759,
+          "charged_tokens": 6759,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 77.8322193349959,
+            "forwards": 5,
+            "input_tokens": 11351,
+            "sequence_rows": 5,
+            "state_tokenizations": 5,
+            "state_tokens": 9877,
+            "wall_seconds": 21.20415327232331
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.043419010999969,
+            "loads": 1,
+            "wall_seconds": 2.2292417446151376
+          }
+        }
+      },
+      "wall_seconds": 50.48371782619506,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/f65d3b6d-fc53-4b2f-ada8-f8c7357bd80a/5bf03405-f64e-44df-9c9d-1ac10d2f76ac-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/f65d3b6d-fc53-4b2f-ada8-f8c7357bd80a/5bf03405-f64e-44df-9c9d-1ac10d2f76ac-trace-0.jsonl"
+    },
+    {
+      "family": "ordered_precedence",
+      "step": "unrelated",
+      "label": "wrong",
+      "full_task_success": false,
+      "note": "Reverts to hardcase despite actual withdrawal of special instruction.",
+      "expected": "纸盒，回到通用指南。",
+      "answer": "根据当前已提供的记录，紫沙样品应使用**硬壳盒**包装。记录中明确指出“紫沙样品专项指令要求硬壳盒”，且规则确认专项指令优先于通用指南。",
+      "control_path": [
+        "search",
+        "read_1",
+        "read_7",
+        "read_2",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 5786,
+          "charged_tokens": 5786,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 127.92378974200255,
+            "forwards": 5,
+            "input_tokens": 13385,
+            "sequence_rows": 5,
+            "state_tokenizations": 5,
+            "state_tokens": 11666,
+            "wall_seconds": 34.403488150797784
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 2.730884549000166,
+            "loads": 1,
+            "wall_seconds": 2.0338723408058286
+          }
+        }
+      },
+      "wall_seconds": 58.644614811986685,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/f65d3b6d-fc53-4b2f-ada8-f8c7357bd80a/7922474f-dcba-4e5c-a13c-f95c4480dc25-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/f65d3b6d-fc53-4b2f-ada8-f8c7357bd80a/7922474f-dcba-4e5c-a13c-f95c4480dc25-trace-0.jsonl"
+    },
+    {
+      "family": "fraction_scope",
+      "step": "cold",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied; representative preference examples accepted.",
+      "expected": "不能推断，全天一半不代表上午一半。",
+      "answer": "根据现有记录，无法确定上午收到的箱子是否一定有一半贴了蓝标。虽然记录指出“青湾组全天收到的箱子中有一半贴了蓝标”且“全天收货分上午和下午两个批次”，但这仅代表全天的总体统计结果。由于未提供关于上午或下午批次中蓝标具体数量的信息，上午的比例可能与下午不同（只要两者综合平均为50%即可），因此不能推断出上午这一特定批次的蓝标比例。",
+      "control_path": [
+        "search",
+        "read_2",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 6594,
+          "charged_tokens": 6594,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 17.45642144199519,
+            "forwards": 3,
+            "input_tokens": 3316,
+            "sequence_rows": 3,
+            "state_tokenizations": 3,
+            "state_tokens": 2608,
+            "wall_seconds": 4.59252006188035
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.1247236740000517,
+            "loads": 1,
+            "wall_seconds": 2.2619503308087587
+          }
+        }
+      },
+      "wall_seconds": 37.33432428073138,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/100a483d-b33a-4dd7-8d5c-174fd8b3de8a/e6e3f941-8ea3-4800-9f74-16fe9c66e9d4-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/100a483d-b33a-4dd7-8d5c-174fd8b3de8a/e6e3f941-8ea3-4800-9f74-16fe9c66e9d4-trace-0.jsonl"
+    },
+    {
+      "family": "fraction_scope",
+      "step": "unrelated",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied; representative preference examples accepted.",
+      "expected": "不能推断，全天一半不代表上午一半。",
+      "answer": "不一定。根据记录，虽然青湾组全天收到的箱子中有一半贴了蓝标，但由于未提供上午和下午的具体数量或分布细节，无法确定上午批次的情况。",
+      "control_path": [
+        "refresh_view",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 13390,
+          "charged_tokens": 13390,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 26.223074784997152,
+            "forwards": 2,
+            "input_tokens": 3933,
+            "sequence_rows": 2,
+            "state_tokenizations": 2,
+            "state_tokens": 3622,
+            "wall_seconds": 7.151308671571314
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.4975240779999694,
+            "loads": 1,
+            "wall_seconds": 2.5992506416514516
+          }
+        }
+      },
+      "wall_seconds": 71.45653009507805,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/100a483d-b33a-4dd7-8d5c-174fd8b3de8a/5256f88a-184d-47b6-85e9-afb910441416-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/100a483d-b33a-4dd7-8d5c-174fd8b3de8a/5256f88a-184d-47b6-85e9-afb910441416-trace-0.jsonl"
+    },
+    {
+      "family": "fraction_scope",
+      "step": "repeat",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied; representative preference examples accepted.",
+      "expected": "不能推断，全天一半不代表上午一半。",
+      "answer": "根据当前记录，青湾组全天收到的箱子中有一半贴了蓝标，且全天收货分为上午和下午两个批次。但由于记录未提供各批次的具体数量或蓝标分布细节，无法确定上午批次的蓝标比例。因此，不能确定上午收到的箱子是否一定有一半贴了蓝标。",
+      "control_path": [
+        "use_view",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 8326,
+          "charged_tokens": 8326,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 18.5808137310014,
+            "forwards": 2,
+            "input_tokens": 3255,
+            "sequence_rows": 2,
+            "state_tokenizations": 2,
+            "state_tokens": 2877,
+            "wall_seconds": 5.0083457781001925
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.321265938000124,
+            "loads": 1,
+            "wall_seconds": 2.629005971364677
+          }
+        }
+      },
+      "wall_seconds": 48.41492073703557,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/100a483d-b33a-4dd7-8d5c-174fd8b3de8a/d6dd4f37-696b-4a5a-80e8-f2d7c1249d74-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/100a483d-b33a-4dd7-8d5c-174fd8b3de8a/d6dd4f37-696b-4a5a-80e8-f2d7c1249d74-trace-0.jsonl"
+    },
+    {
+      "family": "fraction_scope",
+      "step": "changed",
+      "label": "wrong",
+      "full_task_success": false,
+      "note": "Misses the new morning10/2measurement and keeps prior unknown-ratio conclusion.",
+      "expected": "不是，上午2/10为五分之一。",
+      "answer": "根据记录，无法确定。虽然记录显示青湾组全天收到的一半箱子贴了蓝标，且全天收货分为上午和下午两个批次，但记录未提供各批次的蓝标比例或具体分布情况，因此无法确定上午收到的箱子是否也一定有一半贴了蓝标。",
+      "control_path": [
+        "use_view",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 5592,
+          "charged_tokens": 5592,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 28.708418051995977,
+            "forwards": 2,
+            "input_tokens": 4347,
+            "sequence_rows": 2,
+            "state_tokenizations": 2,
+            "state_tokens": 3969,
+            "wall_seconds": 7.81394156627357
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.810151227999995,
+            "loads": 1,
+            "wall_seconds": 2.9783033840358257
+          }
+        }
+      },
+      "wall_seconds": 35.38003160338849,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/100a483d-b33a-4dd7-8d5c-174fd8b3de8a/584b23cc-c454-4152-848d-eb3789f01291-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/100a483d-b33a-4dd7-8d5c-174fd8b3de8a/584b23cc-c454-4152-848d-eb3789f01291-trace-0.jsonl"
+    },
+    {
+      "family": "nonunique_identity",
+      "step": "cold",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied; representative preference examples accepted.",
+      "expected": "不能唯一确定，需要区分光帆与影帆的阿林。",
+      "answer": "根据当前提供的记录，无法确定具体应通知哪个项目。已知“光帆项目”（s0）和“影帆项目”（s1）均有一位不同的联络员昵称均为“阿林”，而当前通知单（s2）仅写有“阿林”且明确缺失项目或身份字段，导致该记录存在歧义，无法指向特定的项目。",
+      "control_path": [
+        "search",
+        "read_2",
+        "context_1",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 11308,
+          "charged_tokens": 11308,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 22.929903140000533,
+            "forwards": 4,
+            "input_tokens": 4581,
+            "sequence_rows": 4,
+            "state_tokenizations": 4,
+            "state_tokens": 3700,
+            "wall_seconds": 6.072663614526391
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.5855532119999225,
+            "loads": 1,
+            "wall_seconds": 2.5930260634049773
+          }
+        }
+      },
+      "wall_seconds": 69.21791166532785,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/a4879801-cea5-46b7-aa4f-60f396d78de8/1d36e660-48f6-4caa-a991-ce9a353ca921-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/a4879801-cea5-46b7-aa4f-60f396d78de8/1d36e660-48f6-4caa-a991-ce9a353ca921-trace-0.jsonl"
+    },
+    {
+      "family": "nonunique_identity",
+      "step": "unrelated",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied; representative preference examples accepted.",
+      "expected": "不能唯一确定，需要区分光帆与影帆的阿林。",
+      "answer": "根据当前提供的记录，无法确定具体应通知哪个项目。由于“光帆项目”（s0）和“影帆项目”（s1）均分别有一名联络员昵称同为“阿林”，且当前记录中（s2）缺少能够区分具体指代哪一位“阿林”的项目或身份信息，导致该记录存在歧义，无法指向特定的项目。",
+      "control_path": [
+        "search",
+        "read_4",
+        "read_0",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 5913,
+          "charged_tokens": 5913,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 41.80765062500723,
+            "forwards": 4,
+            "input_tokens": 7032,
+            "sequence_rows": 4,
+            "state_tokenizations": 4,
+            "state_tokens": 5941,
+            "wall_seconds": 11.267421322874725
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.38135823399989,
+            "loads": 1,
+            "wall_seconds": 2.411849347874522
+          }
+        }
+      },
+      "wall_seconds": 37.872183619998395,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/a4879801-cea5-46b7-aa4f-60f396d78de8/63e2d4bb-18ce-4c67-b32b-11770ba41117-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/a4879801-cea5-46b7-aa4f-60f396d78de8/63e2d4bb-18ce-4c67-b32b-11770ba41117-trace-0.jsonl"
+    },
+    {
+      "family": "nonunique_identity",
+      "step": "changed",
+      "label": "length_failure",
+      "full_task_success": false,
+      "note": "First output-length failure retained; no task credit.",
+      "expected": "光帆项目。",
+      "answer": "回答协议失败, 执行已停止; 以下是已确认的操作状态。未列出的请求完成情况仍未确认。\n\n本轮业务结果: 未执行新的业务操作。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。\n\n本轮未取得新的业务回执。\n\n本轮语义记忆: 未提交。这里只报告列出的回执, 不确认全部请求或语义覆盖。\n\n本轮保存许可: 当前未获允许。\n\n本轮原始消息已记录。原始消息记录与语义记忆提交分别计数。",
+      "control_path": [
+        "search",
+        "read_6",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 12331,
+          "charged_tokens": 12331,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 47.121838209997804,
+            "forwards": 3,
+            "input_tokens": 6688,
+            "sequence_rows": 3,
+            "state_tokenizations": 3,
+            "state_tokens": 5742,
+            "wall_seconds": 12.80991246085614
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.3274554189997616,
+            "loads": 1,
+            "wall_seconds": 2.1137082055211067
+          }
+        }
+      },
+      "wall_seconds": 81.95546239893883,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/a4879801-cea5-46b7-aa4f-60f396d78de8/a2529858-faff-403f-87f2-0da05e509a1b-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/a4879801-cea5-46b7-aa4f-60f396d78de8/a2529858-faff-403f-87f2-0da05e509a1b-trace-0.jsonl"
+    },
+    {
+      "family": "nonunique_identity",
+      "step": "repeat",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied; representative preference examples accepted.",
+      "expected": "光帆项目。",
+      "answer": "根据当前已提供的记录，记录中的“阿林”应该通知**光帆项目**。尽管早期的记录（s0、s1、s2）显示“光帆项目”和“影帆项目”均有一位名为“阿林”的联络员，导致通知单存在歧义，但在最新的记录（s4）中明确指出：“通知单补充项目编号，明确指光帆的阿林”，这一信息已消除了不确定性。",
+      "control_path": [
+        "search",
+        "read_7",
+        "context_7",
+        "read_2",
+        "context_1",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 8289,
+          "charged_tokens": 8289,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 148.0423680360036,
+            "forwards": 6,
+            "input_tokens": 17282,
+            "sequence_rows": 6,
+            "state_tokenizations": 6,
+            "state_tokens": 15663,
+            "wall_seconds": 40.72412013169378
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.6241351300000133,
+            "loads": 1,
+            "wall_seconds": 2.171266724355519
+          }
+        }
+      },
+      "wall_seconds": 77.74317104555666,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/a4879801-cea5-46b7-aa4f-60f396d78de8/7054a902-0714-4e43-9a15-00c67350a204-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/a4879801-cea5-46b7-aa4f-60f396d78de8/7054a902-0714-4e43-9a15-00c67350a204-trace-0.jsonl"
+    },
+    {
+      "family": "joint_schedule",
+      "step": "cold",
+      "label": "unfulfilled",
+      "full_task_success": false,
+      "note": "Required facts were not answered; inspect actual delivered material to distinguish empty evidence from an old refusal.",
+      "expected": "15:00至16:00。",
+      "answer": "根据当前提供的记录（证据列表为空），缺乏关于流云讨论参与者日程安排的具体信息，无法确定重叠的可用时段。",
+      "control_path": [
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 5638,
+          "charged_tokens": 5638,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 4.22472543999902,
+            "forwards": 1,
+            "input_tokens": 908,
+            "sequence_rows": 1,
+            "state_tokenizations": 1,
+            "state_tokens": 728,
+            "wall_seconds": 1.095502725802362
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.0022984110000834,
+            "loads": 1,
+            "wall_seconds": 1.8776681227609515
+          }
+        }
+      },
+      "wall_seconds": 28.637674981728196,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/033a3027-658f-4b40-8f22-421ed826f1b9/0e91f30f-0204-4ff9-8da8-7b2d797db4fe-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/033a3027-658f-4b40-8f22-421ed826f1b9/0e91f30f-0204-4ff9-8da8-7b2d797db4fe-trace-0.jsonl"
+    },
+    {
+      "family": "joint_schedule",
+      "step": "changed",
+      "label": "length_failure",
+      "full_task_success": false,
+      "note": "First output-length failure retained; no task credit.",
+      "expected": "两位必要参与者没有重叠可用区间。",
+      "answer": "回答协议失败, 执行已停止; 以下是已确认的操作状态。未列出的请求完成情况仍未确认。\n\n本轮业务结果: 未执行新的业务操作。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。\n\n本轮未取得新的业务回执。\n\n本轮语义记忆: 未提交。这里只报告列出的回执, 不确认全部请求或语义覆盖。\n\n本轮保存许可: 当前未获允许。\n\n本轮原始消息已记录。原始消息记录与语义记忆提交分别计数。",
+      "control_path": [
+        "search",
+        "read_2",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 12868,
+          "charged_tokens": 12868,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 30.141955456005235,
+            "forwards": 3,
+            "input_tokens": 4996,
+            "sequence_rows": 3,
+            "state_tokenizations": 3,
+            "state_tokens": 4176,
+            "wall_seconds": 8.182184539735317
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.11603734099981,
+            "loads": 1,
+            "wall_seconds": 2.031863640062511
+          }
+        }
+      },
+      "wall_seconds": 83.84714666008949,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/033a3027-658f-4b40-8f22-421ed826f1b9/5af0874f-4819-46c6-8e31-74998438eb33-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/033a3027-658f-4b40-8f22-421ed826f1b9/5af0874f-4819-46c6-8e31-74998438eb33-trace-0.jsonl"
+    },
+    {
+      "family": "joint_schedule",
+      "step": "repeat",
+      "label": "unfulfilled",
+      "full_task_success": false,
+      "note": "Required facts were not answered; inspect actual delivered material to distinguish empty evidence from an old refusal.",
+      "expected": "两位必要参与者没有重叠可用区间。",
+      "answer": "根据当前已提供的记录，无法确定流云讨论在两位参与者都可用的具体安排区间。之前的记录显示证据列表为空，缺乏关于参与者日程安排的具体信息，因此无法判断重叠的可用时段。",
+      "control_path": [
+        "search",
+        "read_1",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 6103,
+          "charged_tokens": 6103,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 44.469711322002695,
+            "forwards": 3,
+            "input_tokens": 6380,
+            "sequence_rows": 3,
+            "state_tokenizations": 3,
+            "state_tokens": 5525,
+            "wall_seconds": 12.135603103786707
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.7385595260002447,
+            "loads": 1,
+            "wall_seconds": 2.2109712501987815
+          }
+        }
+      },
+      "wall_seconds": 41.50010309834033,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/033a3027-658f-4b40-8f22-421ed826f1b9/19ba2ccd-f79c-4575-b0cb-6330d5766898-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/033a3027-658f-4b40-8f22-421ed826f1b9/19ba2ccd-f79c-4575-b0cb-6330d5766898-trace-0.jsonl"
+    },
+    {
+      "family": "joint_schedule",
+      "step": "unrelated",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied; representative preference examples accepted.",
+      "expected": "两位必要参与者没有重叠可用区间。",
+      "answer": "根据当前记录，沈岚的可用时间为14:00至16:00，邵石最新的可用时间为16:30至17:00。由于这两个时间段没有交集，因此不存在两位参与者都可用的区间。",
+      "control_path": [
+        "search",
+        "read_7",
+        "context_7",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 12972,
+          "charged_tokens": 12972,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 86.64254433099995,
+            "forwards": 4,
+            "input_tokens": 10686,
+            "sequence_rows": 4,
+            "state_tokenizations": 4,
+            "state_tokens": 9462,
+            "wall_seconds": 23.90767503529787
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.260444882000229,
+            "loads": 1,
+            "wall_seconds": 2.005778042599559
+          }
+        }
+      },
+      "wall_seconds": 95.25279205199331,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/033a3027-658f-4b40-8f22-421ed826f1b9/1d7cc16a-7173-43e0-bbe5-dbae67c29bee-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/033a3027-658f-4b40-8f22-421ed826f1b9/1d7cc16a-7173-43e0-bbe5-dbae67c29bee-trace-0.jsonl"
+    },
+    {
+      "family": "negated_exception",
+      "step": "cold",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied; representative preference examples accepted.",
+      "expected": "不可以，命中含磁片例外。",
+      "answer": "根据当前已提供的记录，雾岭这批含磁片的轻件**不可**走加急通道。依据显示，规则明确“含磁片的轻件不得走加急通道”，且已确认该批货物属于“含磁片的轻件”，因此不满足准入标准。",
+      "control_path": [
+        "search",
+        "read_2",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 5350,
+          "charged_tokens": 5350,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 15.932887098999345,
+            "forwards": 3,
+            "input_tokens": 3305,
+            "sequence_rows": 3,
+            "state_tokenizations": 3,
+            "state_tokens": 2583,
+            "wall_seconds": 4.215310036204755
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 2.625145728000007,
+            "loads": 1,
+            "wall_seconds": 1.77334547881037
+          }
+        }
+      },
+      "wall_seconds": 28.28228715620935,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/2b03f640-72e6-4897-9ecb-fc8536603ac2/ab49a021-2c78-4227-ac50-e39f4cdfdb6f-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/2b03f640-72e6-4897-9ecb-fc8536603ac2/ab49a021-2c78-4227-ac50-e39f4cdfdb6f-trace-0.jsonl"
+    },
+    {
+      "family": "negated_exception",
+      "step": "changed",
+      "label": "length_failure",
+      "full_task_success": false,
+      "note": "First output-length failure retained; no task credit.",
+      "expected": "可以，命中已屏蔽封装的例外之例外。",
+      "answer": "回答协议失败, 执行已停止; 以下是已确认的操作状态。未列出的请求完成情况仍未确认。\n\n本轮业务结果: 未执行新的业务操作。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。\n\n本轮未取得新的业务回执。\n\n本轮语义记忆: 未提交。这里只报告列出的回执, 不确认全部请求或语义覆盖。\n\n本轮保存许可: 当前未获允许。\n\n本轮原始消息已记录。原始消息记录与语义记忆提交分别计数。",
+      "control_path": [
+        "refresh_view",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 15866,
+          "charged_tokens": 15866,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 29.498088980995817,
+            "forwards": 2,
+            "input_tokens": 4171,
+            "sequence_rows": 2,
+            "state_tokenizations": 2,
+            "state_tokens": 3860,
+            "wall_seconds": 8.063347001560032
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.023501467999722,
+            "loads": 1,
+            "wall_seconds": 2.009346602484584
+          }
+        }
+      },
+      "wall_seconds": 84.85552776698023,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/2b03f640-72e6-4897-9ecb-fc8536603ac2/201135e2-8ffe-473e-b4ad-3bff9891468d-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/2b03f640-72e6-4897-9ecb-fc8536603ac2/201135e2-8ffe-473e-b4ad-3bff9891468d-trace-0.jsonl"
+    },
+    {
+      "family": "negated_exception",
+      "step": "unrelated",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied; representative preference examples accepted.",
+      "expected": "可以，命中已屏蔽封装的例外之例外。",
+      "answer": "根据记录，这批雾岭含磁片的轻件**可以**走加急通道。虽然通常含磁片轻件禁止使用加急通道，但针对已使用指定屏蔽包装的货物有例外规定。由于该批货物已完成指定的屏蔽包装，符合豁免条件。",
+      "control_path": [
+        "use_view",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 5969,
+          "charged_tokens": 5969,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 26.9990136300039,
+            "forwards": 2,
+            "input_tokens": 4087,
+            "sequence_rows": 2,
+            "state_tokenizations": 2,
+            "state_tokens": 3709,
+            "wall_seconds": 7.2435450330376625
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.0892646629999945,
+            "loads": 1,
+            "wall_seconds": 2.116237472742796
+          }
+        }
+      },
+      "wall_seconds": 48.15577049739659,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/2b03f640-72e6-4897-9ecb-fc8536603ac2/d8350dd3-0244-4d40-8150-6f65a1ad4725-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/2b03f640-72e6-4897-9ecb-fc8536603ac2/d8350dd3-0244-4d40-8150-6f65a1ad4725-trace-0.jsonl"
+    },
+    {
+      "family": "negated_exception",
+      "step": "repeat",
+      "label": "wrong",
+      "full_task_success": false,
+      "note": "Invents unresolved priority conflict even though the source explicitly disapplies the prohibition for shielded goods.",
+      "expected": "可以，命中已屏蔽封装的例外之例外。",
+      "answer": "根据当前提供的记录，雾岭这批含磁片的轻件能否走加急通道存在冲突，暂时无法确定。\n\n1. **禁止通行**：2032-07-02 09:00:00 的记录规定，含磁片轻件禁止走加急通道。\n2. **例外允许**：2032-07-02 09:20:00 的记录规定，封装在指定屏蔽盒内的含磁片轻件可以通行。\n3. **事实情况**：该批轻件既含磁片又已完成屏蔽盒包装。\n\n虽然该批货物符合“屏蔽盒例外”条件，但通用禁止规则与新增例外规则之间存在未解决的冲突。最终能否通行取决于 09:20 的例外规则是否优先于 09:00 的通用规则。",
+      "control_path": [
+        "use_view",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 13094,
+          "charged_tokens": 13094,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 34.689930581000226,
+            "forwards": 2,
+            "input_tokens": 4759,
+            "sequence_rows": 2,
+            "state_tokenizations": 2,
+            "state_tokens": 4381,
+            "wall_seconds": 9.371831947006285
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 2.934811130000071,
+            "loads": 1,
+            "wall_seconds": 1.9845967292785645
+          }
+        }
+      },
+      "wall_seconds": 80.61365802772343,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/2b03f640-72e6-4897-9ecb-fc8536603ac2/17a491dc-0438-482b-8daf-6b6753297ab0-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/2b03f640-72e6-4897-9ecb-fc8536603ac2/17a491dc-0438-482b-8daf-6b6753297ab0-trace-0.jsonl"
+    },
+    {
+      "family": "serial_responsibility",
+      "step": "cold",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied; representative preference examples accepted.",
+      "expected": "吴庭保管，俞青为作者。",
+      "answer": "根据当前已提供的记录，原作者是俞青，当前保管人是吴庭。",
+      "control_path": [
+        "search",
+        "read_0",
+        "read_2",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 5009,
+          "charged_tokens": 5009,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 20.891007420003007,
+            "forwards": 4,
+            "input_tokens": 4500,
+            "sequence_rows": 4,
+            "state_tokenizations": 4,
+            "state_tokens": 3528,
+            "wall_seconds": 5.5046411929652095
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 2.7392375539998284,
+            "loads": 1,
+            "wall_seconds": 1.9359842063859105
+          }
+        }
+      },
+      "wall_seconds": 27.47999913804233,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/2e29866b-92fb-45f9-a128-cd3ff2dd988f/b19dcc90-c78a-4667-8f65-2c1104de4a8c-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/2e29866b-92fb-45f9-a128-cd3ff2dd988f/b19dcc90-c78a-4667-8f65-2c1104de4a8c-trace-0.jsonl"
+    },
+    {
+      "family": "serial_responsibility",
+      "step": "repeat",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied; representative preference examples accepted.",
+      "expected": "吴庭保管，俞青为作者。",
+      "answer": "根据现有记录，鸣沙档案的原作者是俞青，现任保管人是吴庭。",
+      "control_path": [
+        "search",
+        "read_1",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 7417,
+          "charged_tokens": 7417,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 21.01410585600388,
+            "forwards": 3,
+            "input_tokens": 4186,
+            "sequence_rows": 3,
+            "state_tokenizations": 3,
+            "state_tokens": 3450,
+            "wall_seconds": 5.56041781231761
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 2.8754593389999172,
+            "loads": 1,
+            "wall_seconds": 2.0700482670217752
+          }
+        }
+      },
+      "wall_seconds": 43.15948889311403,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/2e29866b-92fb-45f9-a128-cd3ff2dd988f/04e44728-edf1-4e11-998d-19ea923228ff-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/2e29866b-92fb-45f9-a128-cd3ff2dd988f/04e44728-edf1-4e11-998d-19ea923228ff-trace-0.jsonl"
+    },
+    {
+      "family": "serial_responsibility",
+      "step": "unrelated",
+      "label": "unfulfilled",
+      "full_task_success": false,
+      "note": "Required facts were not answered; inspect actual delivered material to distinguish empty evidence from an old refusal.",
+      "expected": "吴庭保管，俞青为作者。",
+      "answer": "根据当前已提供的记录，其中并未包含关于‘鸣沙档案’的现保管人及原作者的信息。当前交付的记忆证据（question_evidence_v1）显示证据列表为空。",
+      "control_path": [
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 6430,
+          "charged_tokens": 6430,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 7.503380328002095,
+            "forwards": 1,
+            "input_tokens": 1488,
+            "sequence_rows": 1,
+            "state_tokenizations": 1,
+            "state_tokens": 1308,
+            "wall_seconds": 2.0339618297293782
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.3792088280001735,
+            "loads": 1,
+            "wall_seconds": 2.4755623443052173
+          }
+        }
+      },
+      "wall_seconds": 36.6327457241714,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/2e29866b-92fb-45f9-a128-cd3ff2dd988f/2dd75f86-aeeb-4322-aa54-d7bd8032ba80-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/2e29866b-92fb-45f9-a128-cd3ff2dd988f/2dd75f86-aeeb-4322-aa54-d7bd8032ba80-trace-0.jsonl"
+    },
+    {
+      "family": "serial_responsibility",
+      "step": "changed",
+      "label": "unfulfilled",
+      "full_task_success": false,
+      "note": "Required facts were not answered; inspect actual delivered material to distinguish empty evidence from an old refusal.",
+      "expected": "连舒保管，俞青仍是作者。",
+      "answer": "根据当前已提供的记录，未包含关于“鸣沙档案”的信息，无法确定其保管人及原作者。",
+      "control_path": [
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 9909,
+          "charged_tokens": 9909,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 10.585335367999505,
+            "forwards": 1,
+            "input_tokens": 1843,
+            "sequence_rows": 1,
+            "state_tokenizations": 1,
+            "state_tokens": 1663,
+            "wall_seconds": 2.8181310603395104
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.5851787470001,
+            "loads": 1,
+            "wall_seconds": 2.6443720012903214
+          }
+        }
+      },
+      "wall_seconds": 60.09820811264217,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/2e29866b-92fb-45f9-a128-cd3ff2dd988f/fcfc53ea-24a5-4a27-90d4-58ca5b1259fe-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/2e29866b-92fb-45f9-a128-cd3ff2dd988f/fcfc53ea-24a5-4a27-90d4-58ca5b1259fe-trace-0.jsonl"
+    },
+    {
+      "family": "count_distinct",
+      "step": "cold",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied; representative preference examples accepted.",
+      "expected": "2个。",
+      "answer": "根据目前提供的记录，银禾清单初始全部样品编号为S11和S12，且明确没有其他样品编号；另有记录明确S11为重复登记。因此，按目前已记录的清单，银禾实际共有2个不同的样品（S11和S12）。",
+      "control_path": [
+        "search",
+        "read_2",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 5976,
+          "charged_tokens": 5976,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 14.801538715000788,
+            "forwards": 3,
+            "input_tokens": 3308,
+            "sequence_rows": 3,
+            "state_tokenizations": 3,
+            "state_tokens": 2600,
+            "wall_seconds": 3.907571081072092
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.677409379999972,
+            "loads": 1,
+            "wall_seconds": 2.7490456346422434
+          }
+        }
+      },
+      "wall_seconds": 33.27904910966754,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/6b157069-0322-4b4f-8103-1adc01fe72e1/154c104d-e610-44ee-b2ca-b6445fe645d7-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/6b157069-0322-4b4f-8103-1adc01fe72e1/154c104d-e610-44ee-b2ca-b6445fe645d7-trace-0.jsonl"
+    },
+    {
+      "family": "count_distinct",
+      "step": "repeat",
+      "label": "length_failure",
+      "full_task_success": false,
+      "note": "First output-length failure retained; no task credit.",
+      "expected": "2个。",
+      "answer": "回答协议失败, 执行已停止; 以下是已确认的操作状态。未列出的请求完成情况仍未确认。\n\n本轮业务结果: 未执行新的业务操作。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。\n\n本轮未取得新的业务回执。\n\n本轮语义记忆: 未提交。这里只报告列出的回执, 不确认全部请求或语义覆盖。\n\n本轮保存许可: 当前未获允许。\n\n本轮原始消息已记录。原始消息记录与语义记忆提交分别计数。",
+      "control_path": [
+        "search",
+        "read_0",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 12405,
+          "charged_tokens": 12405,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 23.154441536004015,
+            "forwards": 3,
+            "input_tokens": 4474,
+            "sequence_rows": 3,
+            "state_tokenizations": 3,
+            "state_tokens": 3724,
+            "wall_seconds": 6.170873292721808
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.876286584000354,
+            "loads": 1,
+            "wall_seconds": 2.8345567137002945
+          }
+        }
+      },
+      "wall_seconds": 76.39521977957338,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/6b157069-0322-4b4f-8103-1adc01fe72e1/9d877cc6-6e3f-4cb3-ad11-6c1d4df20c44-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/6b157069-0322-4b4f-8103-1adc01fe72e1/9d877cc6-6e3f-4cb3-ad11-6c1d4df20c44-trace-0.jsonl"
+    },
+    {
+      "family": "count_distinct",
+      "step": "changed",
+      "label": "wrong",
+      "full_task_success": false,
+      "note": "Omits newly registered distinctS13; returns stale count2.",
+      "expected": "3个。",
+      "answer": "根据当前已提供的记录，银禾实际有2个不同的样品。根据初始记录，样品编号包含S11和S12，其中S11在清单中有重复登记，去重后实际共有2个不同的样品（S11和S12）。",
+      "control_path": [
+        "search",
+        "read_1",
+        "read_5",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 9204,
+          "charged_tokens": 9204,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 60.61271300500084,
+            "forwards": 4,
+            "input_tokens": 9095,
+            "sequence_rows": 4,
+            "state_tokenizations": 4,
+            "state_tokens": 7955,
+            "wall_seconds": 16.345400870777667
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.524975791000088,
+            "loads": 1,
+            "wall_seconds": 2.630681994371116
+          }
+        }
+      },
+      "wall_seconds": 62.45599998533726,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/6b157069-0322-4b4f-8103-1adc01fe72e1/55ea1f3a-57c4-4ab6-abaa-b91de6c23702-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/6b157069-0322-4b4f-8103-1adc01fe72e1/55ea1f3a-57c4-4ab6-abaa-b91de6c23702-trace-0.jsonl"
+    },
+    {
+      "family": "count_distinct",
+      "step": "unrelated",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied; representative preference examples accepted.",
+      "expected": "3个。",
+      "answer": "3",
+      "control_path": [
+        "search",
+        "read_7",
+        "context_7",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 5777,
+          "charged_tokens": 5777,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 79.56551144799596,
+            "forwards": 4,
+            "input_tokens": 10748,
+            "sequence_rows": 4,
+            "state_tokenizations": 4,
+            "state_tokens": 9538,
+            "wall_seconds": 21.558202255517244
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.3024770540000645,
+            "loads": 1,
+            "wall_seconds": 2.593641145154834
+          }
+        }
+      },
+      "wall_seconds": 47.60356470849365,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/6b157069-0322-4b4f-8103-1adc01fe72e1/6def61b7-8c54-45df-aab2-3e89336eff8a-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/6b157069-0322-4b4f-8103-1adc01fe72e1/6def61b7-8c54-45df-aab2-3e89336eff8a-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A19",
+      "step": "stage-0",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied; representative preference examples accepted.",
+      "expected": "Karen Liu is the current primary at HR and CoreFit. Her phone number has not yet been supplied;520-334-7190belongs to the former contact Diane and must not be transferred to Karen.",
+      "answer": "Based on the latest confirmed reports so far:\n\n**Current Primary Emergency Contact (Work & CoreFit):** Karen Liu (your older sister). She has completely replaced Diane Liu as the primary contact for both your work profile and CoreFit gym membership.\n\n**Phone Number Supplied:** No phone number has been supplied for Karen Liu yet. The only phone number provided in the delivered reports (520-334-7190) belonged to Diane Liu, who is no longer the primary contact.\n\n**Status Distinction:**\n- **Completed Changes:** Karen Liu is fully established and active as your primary emergency contact for both work and CoreFit.\n- **Unfinished/Pending:** Her phone number has not yet been provided or saved. Diane Liu's previous number is no longer relevant to the current primary contact setup, and no secondary contact arrangement has been explicitly confirmed.",
+      "control_path": [
+        "search",
+        "refresh_view",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 9266,
+          "charged_tokens": 9266,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 57.17106986900035,
+            "forwards": 3,
+            "input_tokens": 7784,
+            "sequence_rows": 3,
+            "state_tokenizations": 3,
+            "state_tokens": 7027,
+            "wall_seconds": 15.725970446132123
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.0953061909999633,
+            "loads": 1,
+            "wall_seconds": 2.3991191582754254
+          }
+        }
+      },
+      "wall_seconds": 50.31998623907566,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/1ad7f714-6d43-44c1-af63-e4f24d0366e3/37d9f56b-da1a-4d85-8dc3-8e6a4fd7e2f5-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/1ad7f714-6d43-44c1-af63-e4f24d0366e3/37d9f56b-da1a-4d85-8dc3-8e6a4fd7e2f5-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A19",
+      "step": "stage-0-repeat",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied; representative preference examples accepted.",
+      "expected": "Karen Liu is the current primary at HR and CoreFit. Her phone number has not yet been supplied;520-334-7190belongs to the former contact Diane and must not be transferred to Karen.",
+      "answer": "According to your latest confirmed reports, your current primary emergency contact for both work and CoreFit is **Karen Liu**. The update to list her as the primary contact has been completed. However, a phone number for Karen Liu has not yet been supplied in your records (you indicated you would provide it later). The previously supplied number, 520-334-7190, belonged to your original contact, Diane Liu, who is no longer the primary.",
+      "control_path": [
+        "use_view",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 7302,
+          "charged_tokens": 7302,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 22.82259072099987,
+            "forwards": 2,
+            "input_tokens": 3824,
+            "sequence_rows": 2,
+            "state_tokenizations": 2,
+            "state_tokens": 3446,
+            "wall_seconds": 6.283398250117898
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.0510451929999363,
+            "loads": 1,
+            "wall_seconds": 2.4016033951193094
+          }
+        }
+      },
+      "wall_seconds": 41.22956603765488,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/1ad7f714-6d43-44c1-af63-e4f24d0366e3/9f2f59d4-92cc-4b41-b909-54171a9e330e-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/1ad7f714-6d43-44c1-af63-e4f24d0366e3/9f2f59d4-92cc-4b41-b909-54171a9e330e-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A19",
+      "step": "stage-1",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied; representative preference examples accepted.",
+      "expected": "Priya Nair,503-772-4415, is the current primary at HR and the gym during Karen’s trip. Karen’s earlier accident response does not reverse the subsequent change; Marcus is an outdated removed contact, not current.",
+      "answer": "Based on the latest confirmed reports provided, your current primary emergency contact for work and CoreFit is **Priya Nair** (coworker). The phone number supplied for her is **503-772-4415**.\n\nThe records distinguish the following completed changes:\n- **Priya Nair**: Identified as the 'Subsequent primary emergency contact' in the most recent reports, replacing the earlier arrangement.\n- **Karen Liu** (older sister): Previously the primary contact (supplied with 503-461-2283) prior to Priya Nair.\n- **Diane Liu** (mother): The original primary contact (supplied with 520-334-7190).\n- **Marcus Webb** (ex-boyfriend): Listed as an outdated/ex-contact.",
+      "control_path": [
+        "refresh_view",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 14368,
+          "charged_tokens": 14368,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 110.75229964200116,
+            "forwards": 2,
+            "input_tokens": 9297,
+            "sequence_rows": 2,
+            "state_tokenizations": 2,
+            "state_tokens": 8968,
+            "wall_seconds": 30.37414093594998
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 4.1156772720000845,
+            "loads": 1,
+            "wall_seconds": 2.664988503791392
+          }
+        }
+      },
+      "wall_seconds": 79.2025111336261,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/1ad7f714-6d43-44c1-af63-e4f24d0366e3/3b2a3bf8-14b5-49b8-92fc-54b49a41a68a-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/1ad7f714-6d43-44c1-af63-e4f24d0366e3/3b2a3bf8-14b5-49b8-92fc-54b49a41a68a-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A19",
+      "step": "stage-1-repeat",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied; representative preference examples accepted.",
+      "expected": "Priya Nair,503-772-4415, is the current primary at HR and the gym during Karen’s trip. Karen’s earlier accident response does not reverse the subsequent change; Marcus is an outdated removed contact, not current.",
+      "answer": "Based on the latest confirmed reports, your current primary emergency contact for work and CoreFit is **Priya Nair**. The phone number supplied for Priya Nair is **503-772-4415**.\n\n**Distinction of Changes:**\n- **Completed Changes:** The update designating **Priya Nair** as your primary emergency contact is **completed**. She has succeeded Karen Liu as the primary contact.\n- **Previous Primary Contact:** **Karen Liu** (Phone: 503-461-2283) was your primary contact prior to Priya Nair.\n- **Original Primary Contact:** **Diane Liu** (Phone: 520-334-7190) was your original primary contact.\n- **Proposed/Secondary Contacts:** No secondary contact arrangement has been explicitly confirmed or is currently proposed in the latest reports.",
+      "control_path": [
+        "search",
+        "use_view",
+        "context_1",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 18291,
+          "charged_tokens": 18291,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 150.3369664250058,
+            "forwards": 4,
+            "input_tokens": 14588,
+            "sequence_rows": 4,
+            "state_tokenizations": 4,
+            "state_tokens": 12855,
+            "wall_seconds": 41.172385113313794
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.0787813310003003,
+            "loads": 1,
+            "wall_seconds": 2.4171931091696024
+          }
+        }
+      },
+      "wall_seconds": 143.54911364614964,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/1ad7f714-6d43-44c1-af63-e4f24d0366e3/47ed2e0d-2d5c-4414-8dc8-a5b61a6719a1-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/1ad7f714-6d43-44c1-af63-e4f24d0366e3/47ed2e0d-2d5c-4414-8dc8-a5b61a6719a1-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A19",
+      "step": "stage-2",
+      "label": "operation_failure",
+      "full_task_success": false,
+      "note": "REFRESH aborts on KeyError from duplicate valid remove_rules IDs. Captured response replay reproduces before and applies after generic set-removal fix. Original answer remains unfulfilled, not repaired.",
+      "expected": "Karen Liu at503-461-2283 is primary again at HR and CoreFit after the reported update this morning. The Tom switch never happened; Priya as an official secondary is only being considered and has not been submitted. No calendar date for this morning is supplied.",
+      "answer": "Based on the current visible memory and confirmed reports, no primary emergency contact or phone number is recorded for work and CoreFit. The available evidence is empty, so no completed, proposed, or secondary contacts are present.",
+      "control_path": [
+        "refresh_view"
+      ],
+      "handoff_reason": "operation_outcome_unknown",
+      "cost": {
+        "generation": {
+          "known_tokens": 19272,
+          "charged_tokens": 19272,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 46.83216740199714,
+            "forwards": 1,
+            "input_tokens": 4440,
+            "sequence_rows": 1,
+            "state_tokenizations": 1,
+            "state_tokens": 4242,
+            "wall_seconds": 13.139815624803305
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.0711709039997004,
+            "loads": 1,
+            "wall_seconds": 2.4188836151733994
+          }
+        }
+      },
+      "wall_seconds": 85.532499990426,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/1ad7f714-6d43-44c1-af63-e4f24d0366e3/79b25490-4688-4a78-8b68-80dfae901223-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/1ad7f714-6d43-44c1-af63-e4f24d0366e3/79b25490-4688-4a78-8b68-80dfae901223-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A19",
+      "step": "stage-2-repeat",
+      "label": "incomplete",
+      "full_task_success": false,
+      "note": "CurrentKaren/phone and abortedTomchange correct, but omits the explicitly unsubmitted Priya secondary proposal required by the question.",
+      "expected": "Karen Liu at503-461-2283 is primary again at HR and CoreFit after the reported update this morning. The Tom switch never happened; Priya as an official secondary is only being considered and has not been submitted. No calendar date for this morning is supplied.",
+      "answer": "Based on your latest confirmed reports, your current primary emergency contact for work and CoreFit is Karen Liu, and the phone number supplied for her is 503-461-2283.\n\nDistinguishing completed changes from proposed contacts based on your reports:\n- **Current/Completed Primary:** Karen Liu was re-established as your primary contact in your most recent reports, effectively supplanting previous arrangements.\n- **Previous/Reverted:** Priya Nair served as your primary contact \"last week\" before you switched back to Karen Liu.\n- **Proposed (Not Completed):** Tom Brennan was proposed as a future primary contact with the number 503-889-3102. This update was explicitly planned for a later date and never finalized, as you reverted to Karen Liu.\n- **Historical/Original:** Diane Liu (520-334-7190) was your original contact prior to these recent switches.",
+      "control_path": [
+        "refresh_view",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 16812,
+          "charged_tokens": 16812,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 192.3718261200047,
+            "forwards": 2,
+            "input_tokens": 12168,
+            "sequence_rows": 2,
+            "state_tokenizations": 2,
+            "state_tokens": 11839,
+            "wall_seconds": 62.07621974032372
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.451663785999699,
+            "loads": 1,
+            "wall_seconds": 2.8023563930764794
+          }
+        }
+      },
+      "wall_seconds": 106.71357329376042,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/1ad7f714-6d43-44c1-af63-e4f24d0366e3/a75e878a-5f77-4915-b345-bd9b996e8da1-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/1ad7f714-6d43-44c1-af63-e4f24d0366e3/a75e878a-5f77-4915-b345-bd9b996e8da1-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A32",
+      "step": "stage-0",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied; representative preference examples accepted.",
+      "expected": "A bounded preference for an orderly, more controlled existing email setup: inbox cleanup on March16, password changed after the April2lockout, and2FAenabled. Gmail is primary. These are user reports of actions, not independent verification of account security.",
+      "answer": "Based on the available evidence, here is the breakdown of your email choices and status:\n\n**Pattern of Choices:**\nYour email management habits reflect a priority on **organization** and **security**. You actively maintain a structured inbox using Gmail’s organizational tools (labels and color-coding) and have taken immediate, decisive action to secure your account following a suspicious login event.\n\n**Completed Changes:**\nYou have successfully implemented the following changes:\n*   **Organization:** You performed a major inbox cleanup on March 16, reducing unread messages from approximately 4,000 to 200.\n*   **Security:** Following a lockout caused by a suspicious login on April 2, you **changed your password** and **enabled two-factor authentication (2FA)**.\n\n**Primary Provider:**\nYour primary email provider remains **Gmail** (marcus.t.holloway@gmail.com), which you have used since 2014. While there are indications of intentions or proposals regarding future organizational strategies or potential migrations, there is no evidence that a migration has taken place; Gmail remains your active and primary account.",
+      "control_path": [
+        "refresh_view",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 12191,
+          "charged_tokens": 12191,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 40.62882769600401,
+            "forwards": 2,
+            "input_tokens": 5164,
+            "sequence_rows": 2,
+            "state_tokenizations": 2,
+            "state_tokens": 4853,
+            "wall_seconds": 10.980573382228613
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.3229992980000134,
+            "loads": 1,
+            "wall_seconds": 2.545080630108714
+          }
+        }
+      },
+      "wall_seconds": 65.40549727436155,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/e8b16027-8642-4b3c-8686-f547e1315ed7/3bf860a4-f70a-4474-873d-03afd717f58a-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/e8b16027-8642-4b3c-8686-f547e1315ed7/3bf860a4-f70a-4474-873d-03afd717f58a-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A32",
+      "step": "stage-0-repeat",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied; representative preference examples accepted.",
+      "expected": "A bounded preference for an orderly, more controlled existing email setup: inbox cleanup on March16, password changed after the April2lockout, and2FAenabled. Gmail is primary. These are user reports of actions, not independent verification of account security.",
+      "answer": "Based on your recorded history, here are the findings regarding your email maintenance and current status:\n\n**1. Primary Provider**\nYour primary email provider remains **Gmail** (marcus.t.holloway@gmail.com). There is no evidence of a migration to a different provider occurring.\n\n**2. Completed Changes**\nYou have successfully executed the following specific maintenance actions:\n*   **Inbox Cleanup (March 16):** You performed a major cleanup that reduced your unread message count from approximately 4,000 down to ~200.\n*   **Security Reset (Post-April 2):** Immediately following the account lockout caused by a suspicious login, you successfully changed your password.\n*   **Two-Factor Authentication:** You enabled 2FA for the account after regaining access on April 2.\n\n**3. Supported Pattern**\nYour actions support a clear pattern of **intentional organization and security maintenance**. You have demonstrated a preference for highly structured email management—specifically utilizing Gmail's labeling and color-coding systems—rather than allowing the inbox to become disorganized or insecure. These decisions reflect a proactive approach to maintaining control over your digital correspondence.\n\n*Note: The points listed above represent your actual completed steps. They are distinct from assistant suggestions, future organizational strategies, or proposed migrations, none of which have been executed.*",
+      "control_path": [
+        "use_view",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 9057,
+          "charged_tokens": 9057,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 25.581394703003753,
+            "forwards": 2,
+            "input_tokens": 3951,
+            "sequence_rows": 2,
+            "state_tokenizations": 2,
+            "state_tokens": 3573,
+            "wall_seconds": 6.839796885848045
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 4.432461955000235,
+            "loads": 1,
+            "wall_seconds": 3.125639750622213
+          }
+        }
+      },
+      "wall_seconds": 54.55614428687841,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/e8b16027-8642-4b3c-8686-f547e1315ed7/6d33cd0c-cfdd-4097-9caa-c66649cc397e-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/e8b16027-8642-4b3c-8686-f547e1315ed7/6d33cd0c-cfdd-4097-9caa-c66649cc397e-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A32",
+      "step": "stage-1",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied; representative preference examples accepted.",
+      "expected": "The same organization/security pattern while retaining Gmail, with inbox cleanup, password change and2FAalready reported. Connected-app review and suspicious-activity alerts are plans, not completed actions. Danielle’s ProtonMail switch and Kevin’s phishing are other people’s events.",
+      "answer": "Pattern: Your choices reflect a preference for **structuring and securing your current Gmail account** (specifically using labels and color-coding) rather than migrating to a competitor. \n\nCompleted Changes: \n1. Performed a major inbox cleanup on March 16. \n2. Changed password and enabled two-factor authentication (2FA) following the April 2 security incident. \n\nPrimary Provider: Gmail (marcus.t.holloway@gmail.com). \n\nDistinctions: \n- **Intentions (Not Completed):** You have not yet reviewed connected apps or set up alerts. \n- **Proposals (Not Completed):** You considered switching to ProtonMail but rejected it due to migration burdens; no migration occurred.",
+      "control_path": [
+        "refresh_view",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 18284,
+          "charged_tokens": 18284,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 119.08040113299649,
+            "forwards": 2,
+            "input_tokens": 9745,
+            "sequence_rows": 2,
+            "state_tokenizations": 2,
+            "state_tokens": 9416,
+            "wall_seconds": 32.71087740827352
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.7567977439998685,
+            "loads": 1,
+            "wall_seconds": 2.8663516137748957
+          }
+        }
+      },
+      "wall_seconds": 108.39813001733273,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/e8b16027-8642-4b3c-8686-f547e1315ed7/9675f1ad-c48b-49ad-b253-da7cade35f28-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/e8b16027-8642-4b3c-8686-f547e1315ed7/9675f1ad-c48b-49ad-b253-da7cade35f28-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A32",
+      "step": "stage-1-repeat",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied; representative preference examples accepted.",
+      "expected": "The same organization/security pattern while retaining Gmail, with inbox cleanup, password change and2FAalready reported. Connected-app review and suspicious-activity alerts are plans, not completed actions. Danielle’s ProtonMail switch and Kevin’s phishing are other people’s events.",
+      "answer": "Based on your email management history, your choices reflect a consistent pattern of prioritizing both high-level organization and robust account security.\n\n**Changes Actually Completed:**\n1. **Major Inbox Cleanup (March 16):** You actively reorganized your inbox, significantly reducing your unread messages from approximately 4,000 down to about 200.\n2. **Security Reinforcement (Post-April 2 Incident):** Following a suspicious login lockout from Southeast Asia, you immediately changed your password and enabled two-factor authentication (2FA) to secure the account.\n\n**Distinction of Intentions vs. Actions:**\n- *Unexecuted Intention:* You have a stated intention to review your connected apps and set up alerts, but these actions have not been completed.\n- *Unexecuted Considerations:* You have considered migrating to a provider like ProtonMail; however, you have not done so, finding the migration too burdensome and preferring the utility of your current system.\n\n**Primary Email Provider:**\nYour primary provider remains **Gmail** (marcus.t.holloway@gmail.com). You have maintained this specific account since 2014, valuing its structured label and color-coding systems, and you have not migrated despite suggestions to do so.",
+      "control_path": [
+        "use_view",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 13141,
+          "charged_tokens": 13141,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 42.07856482199713,
+            "forwards": 2,
+            "input_tokens": 5485,
+            "sequence_rows": 2,
+            "state_tokenizations": 2,
+            "state_tokens": 5107,
+            "wall_seconds": 11.289740069769323
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.685828055999991,
+            "loads": 1,
+            "wall_seconds": 2.8590001398697495
+          }
+        }
+      },
+      "wall_seconds": 85.26062506902963,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/e8b16027-8642-4b3c-8686-f547e1315ed7/5f4c88d0-542b-41c2-a106-c082d52e3434-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/e8b16027-8642-4b3c-8686-f547e1315ed7/5f4c88d0-542b-41c2-a106-c082d52e3434-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A32",
+      "step": "stage-2",
+      "label": "wrong",
+      "full_task_success": false,
+      "note": "Says connected-app audit not completed after explicit completed audit/revocations report; stale view.",
+      "expected": "Gmail remains primary. In addition to inbox cleanup, password change and2FA, the connected-app audit is now reported complete and about eight old services had access revoked. Danielle’s proposed Proton address is not adopted as primary. Alert setup is still not confirmed; do not claim a full migration or guaranteed security.",
+      "answer": "Your email-related pattern indicates a preference for structured organization using Gmail's labeling and color-coding systems, alongside responsive security management. \n\nCompleted changes include:\n- A major inbox cleanup performed on March 16 (reducing unread messages from ~4,000 to ~200).\n- A password change executed immediately after regaining account access following a suspicious login on April 2.\n- Two-factor authentication (2FA) enabled subsequent to the April 2 incident.\n\nYour primary email provider remains Gmail (used since 2014), with no completed migration.\n\nDistinction between actions and intentions:\n- Actual completed actions: Inbox cleanup, password change, and 2FA setup.\n- Unexecuted intentions/proposals: You have not yet reviewed connected apps, set up alerts, or switched to ProtonMail. These items represent future plans or responses to third-party suggestions, whereas the cleanup and security settings are confirmed past actions.",
+      "control_path": [
+        "use_view",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 5042,
+          "charged_tokens": 5042,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 124.67958004899992,
+            "forwards": 2,
+            "input_tokens": 10197,
+            "sequence_rows": 2,
+            "state_tokenizations": 2,
+            "state_tokens": 9819,
+            "wall_seconds": 34.65336180385202
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.241993787999945,
+            "loads": 1,
+            "wall_seconds": 2.5144196450710297
+          }
+        }
+      },
+      "wall_seconds": 56.858370492234826,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/e8b16027-8642-4b3c-8686-f547e1315ed7/86b63107-9591-4d9f-bddc-0b8d690fd2ee-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/e8b16027-8642-4b3c-8686-f547e1315ed7/86b63107-9591-4d9f-bddc-0b8d690fd2ee-trace-0.jsonl"
+    },
+    {
+      "family": "memops_A32",
+      "step": "stage-2-repeat",
+      "label": "wrong",
+      "full_task_success": false,
+      "note": "Same stale uncompleted-app-audit claim.",
+      "expected": "Gmail remains primary. In addition to inbox cleanup, password change and2FA, the connected-app audit is now reported complete and about eight old services had access revoked. Danielle’s proposed Proton address is not adopted as primary. Alert setup is still not confirmed; do not claim a full migration or guaranteed security.",
+      "answer": "Based on the delivered evidence, your email choices reflect a pattern of structured maintenance and reactive security hardening within your established workflow.\n\n**Actually Completed Changes:**\n- **Inbox Organization:** On March 16, you performed a major cleanup, reducing unread messages from ~4,000 to ~200, utilizing Gmail's label and color-coding systems.\n- **Security Updates:** Following a suspicious login lockout on April 2, you immediately changed your password and enabled two-factor authentication (2FA) upon regaining access.\n\n**Primary Provider:**\n- **Gmail** (marcus.t.holloway@gmail.com) remains your primary provider, in use since 2014.\n\n**Distinction from Intentions & Proposals:**\n- **Unexecuted Intentions:** Reviewing connected apps and setting up security alerts are stated goals but have not been completed.\n- **Non-Executed Proposals:** While considering ProtonMail, you have not migrated, viewing it as overly burdensome. These remain future considerations and suggestions, not actual events.",
+      "control_path": [
+        "use_view",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 8894,
+          "charged_tokens": 8894,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 145.58791487599956,
+            "forwards": 2,
+            "input_tokens": 11101,
+            "sequence_rows": 2,
+            "state_tokenizations": 2,
+            "state_tokens": 10723,
+            "wall_seconds": 40.73885967861861
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.3084631949996037,
+            "loads": 1,
+            "wall_seconds": 2.5157811557874084
+          }
+        }
+      },
+      "wall_seconds": 86.89393776468933,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/e8b16027-8642-4b3c-8686-f547e1315ed7/e3ea7312-dd6a-4179-a2cf-154a726e9714-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/e8b16027-8642-4b3c-8686-f547e1315ed7/e3ea7312-dd6a-4179-a2cf-154a726e9714-trace-0.jsonl"
+    },
+    {
+      "family": "memops_B30",
+      "step": "stage-0",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied; representative preference examples accepted.",
+      "expected": "Use Marc professionally for the college friend and Chen Wei in full for the former roommate, not Wei. Chen Wei stated the preference on May2. No later personal reversal or future corporate branding is yet established.",
+      "answer": "For the professional introduction, use **Marc** and **Chen Wei**. \n\nTo adhere to your request to keep categories separate:\n- **Professional Names to Use Now:** Marc, Chen Wei\n- **Confirmed Personal Preferences:** Prefers \"Marc\" over \"Marcus\"; Prefers \"Chen Wei\" over just \"Wei\"\n- **Historical/Nicknames:** Marcus, Wei\n- **Corporate Branding/Contexts:** Whitfield & Associates (Marc's consulting firm), Meridian Labs (Chen Wei's fintech startup)\n- **Timestamp of Roommate's Naming Preference:** May 2nd (reported to you during a phone catch-up).",
+      "control_path": [
+        "search",
+        "refresh_view",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 15563,
+          "charged_tokens": 15563,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 63.21253942500334,
+            "forwards": 3,
+            "input_tokens": 7932,
+            "sequence_rows": 3,
+            "state_tokenizations": 3,
+            "state_tokens": 7175,
+            "wall_seconds": 17.153702912852168
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.245365879000019,
+            "loads": 1,
+            "wall_seconds": 2.5329579142853618
+          }
+        }
+      },
+      "wall_seconds": 91.10821884311736,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/3e3a5f3c-d4da-4a16-b4d0-9b670de3abaf/3d18415c-7172-424f-ba97-63662fbee5fe-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/3e3a5f3c-d4da-4a16-b4d0-9b670de3abaf/3d18415c-7172-424f-ba97-63662fbee5fe-trace-0.jsonl"
+    },
+    {
+      "family": "memops_B30",
+      "step": "stage-0-repeat",
+      "label": "qualified",
+      "full_task_success": false,
+      "note": "Correct names/date but falsely says source lacks college-friend/former-roommate mapping.",
+      "expected": "Use Marc professionally for the college friend and Chen Wei in full for the former roommate, not Wei. Chen Wei stated the preference on May2. No later personal reversal or future corporate branding is yet established.",
+      "answer": "Based on the provided evidence, here are the confirmed preferences, reported dates, and distinctions you requested:\n\n**Professional Names to Use:**\n- **Marc:** Use \"Marc\" in professional settings. He began preferring this name in January when he started a consulting role at Whitfield & Associates.\n- **Chen Wei:** Use his full name \"Chen Wei\" in professional and social contexts. He works at a fintech startup in Toronto and has requested not to be shortened to \"Wei.\"\n\n**When the Naming Preference Was Reported:**\n- The evidence explicitly states that **Chen Wei's** preference for his full name was reported to you on **May 2nd** (during a phone catch-up). \n*(Note: The provided source text does not specify which individual is your \"college friend\" versus your \"former roommate,\" so both are detailed above. Chen Wei is the only one with a specific reported date of May 2nd.)*\n\n**Historical Nicknames / Previous Names:**\n- **Marc:** Previously known as \"Marcus.\"\n- **Chen Wei:** Previously shortened to \"Wei\" by colleagues.\n\n**Future Corporate Branding:**\n- There is no evidence or information in the source text regarding future corporate branding for either individual's names.",
+      "control_path": [
+        "use_view",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 11597,
+          "charged_tokens": 11597,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 23.97741460600082,
+            "forwards": 2,
+            "input_tokens": 3929,
+            "sequence_rows": 2,
+            "state_tokenizations": 2,
+            "state_tokens": 3551,
+            "wall_seconds": 6.5694931503385305
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.149105010999847,
+            "loads": 1,
+            "wall_seconds": 2.441914931870997
+          }
+        }
+      },
+      "wall_seconds": 67.91467495076358,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/3e3a5f3c-d4da-4a16-b4d0-9b670de3abaf/e7e38d72-120d-4bd5-b8ea-f481e9158a39-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/3e3a5f3c-d4da-4a16-b4d0-9b670de3abaf/e7e38d72-120d-4bd5-b8ea-f481e9158a39-trace-0.jsonl"
+    },
+    {
+      "family": "memops_B30",
+      "step": "stage-1",
+      "label": "qualified",
+      "full_task_success": false,
+      "note": "Names/date mostly correct, but denies explicit relationship mapping and anchors lastweekend to October2026without an original report-time anchor.",
+      "expected": "Use Marcus, including at work, after the confirmed reversal of the Marc preference; use Chen Wei in full, as reported on May2. Other people’s Dave/Tommy/Sophie preferences do not change either name.",
+      "answer": "Based on the available records, here are the details for your professional introduction:\n\n**Names to Use:**\n- **Marcus** (for the individual who previously went by Marc)\n- **Chen Wei** (for the individual who previously went by Wei)\n\n**Categorized Information:**\n- **Confirmed Personal Preferences:** Both individuals explicitly prefer their full/longer names—'Marcus' and 'Chen Wei'—in professional and social contexts.\n- **Historical Nicknames:** 'Marc' (used for Marcus starting in January) and 'Wei' (shortened by colleagues at Meridian Labs).\n- **Future Corporate Branding:** No specific corporate branding names or aliases were recorded for either individual.\n\n**When the Naming Preference Was Reported:**\n- **Marcus:** His reversion to 'Marcus' was reported to you last weekend (mid-October 2026, relative to 2026-10-19).\n- **Chen Wei:** His preference for his full name was reported on May 2nd (year unspecified).\n\n*(Note: The provided records do not specify which individual corresponds to 'college friend' versus 'former roommate,' so both preferences and reporting dates are listed for you to match appropriately.)*",
+      "control_path": [
+        "refresh_view",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 13908,
+          "charged_tokens": 13908,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 112.96641961099522,
+            "forwards": 2,
+            "input_tokens": 9600,
+            "sequence_rows": 2,
+            "state_tokenizations": 2,
+            "state_tokens": 9271,
+            "wall_seconds": 31.061587410978973
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.15469866300009,
+            "loads": 1,
+            "wall_seconds": 2.526182785630226
+          }
+        }
+      },
+      "wall_seconds": 74.72161475662142,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/3e3a5f3c-d4da-4a16-b4d0-9b670de3abaf/c01979c2-8a65-4a76-9328-b28fae5fe4fe-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/3e3a5f3c-d4da-4a16-b4d0-9b670de3abaf/c01979c2-8a65-4a76-9328-b28fae5fe4fe-trace-0.jsonl"
+    },
+    {
+      "family": "memops_B30",
+      "step": "stage-1-repeat",
+      "label": "qualified",
+      "full_task_success": false,
+      "note": "Names/relationships/May2correct, but introduces unsupported midOctober2026anchor.",
+      "expected": "Use Marcus, including at work, after the confirmed reversal of the Marc preference; use Chen Wei in full, as reported on May2. Other people’s Dave/Tommy/Sophie preferences do not change either name.",
+      "answer": "Professional names to use: Marcus (college friend) and Chen Wei (former roommate).\n\nWhen preferences were reported:\n- Chen Wei (former roommate): May 2nd\n- Marcus (college friend): Last weekend relative to mid-October 2026\n\nSeparated categories:\n- Confirmed personal preferences: Marcus, Chen Wei\n- Historical nicknames: Marc, Wei\n- Future corporate branding: None identified in available records.",
+      "control_path": [
+        "search",
+        "use_view",
+        "refresh_view",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 15823,
+          "charged_tokens": 15823,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 150.98640369800705,
+            "forwards": 4,
+            "input_tokens": 15091,
+            "sequence_rows": 4,
+            "state_tokenizations": 4,
+            "state_tokens": 13358,
+            "wall_seconds": 41.71344435494393
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.5445900390000133,
+            "loads": 1,
+            "wall_seconds": 2.7600868651643395
+          }
+        }
+      },
+      "wall_seconds": 95.99304335936904,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/3e3a5f3c-d4da-4a16-b4d0-9b670de3abaf/07f76c36-4591-42db-b458-97c1b8fc7e6b-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/3e3a5f3c-d4da-4a16-b4d0-9b670de3abaf/07f76c36-4591-42db-b458-97c1b8fc7e6b-trace-0.jsonl"
+    },
+    {
+      "family": "memops_B30",
+      "step": "stage-2",
+      "label": "length_failure",
+      "full_task_success": false,
+      "note": "First output-length failure retained; no task credit.",
+      "expected": "The latest confirmed personal preference remains Marcus; a corporate website listing as Marc is planned for next week, without a confirmed new personal-preference reversal. Chen Wei remains full-name-only, reported May2. M.J. is an unused historical nickname. Do not invent a calendar anchor for next week.",
+      "answer": "回答协议失败, 执行已停止; 以下是已确认的操作状态。未列出的请求完成情况仍未确认。\n\n本轮业务结果: 未执行新的业务操作。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。\n\n本轮未取得新的业务回执。\n\n本轮语义记忆: 未提交。这里只报告列出的回执, 不确认全部请求或语义覆盖。\n\n本轮原始消息已记录。原始消息记录与语义记忆提交分别计数。",
+      "control_path": [],
+      "handoff_reason": null,
+      "cost": {
+        "generation": {
+          "known_tokens": 9265,
+          "charged_tokens": 9265,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 56.033054118976,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/3e3a5f3c-d4da-4a16-b4d0-9b670de3abaf/d4a598b7-c4dd-4e0a-9ced-21c8cbe3b367-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/3e3a5f3c-d4da-4a16-b4d0-9b670de3abaf/d4a598b7-c4dd-4e0a-9ced-21c8cbe3b367-trace-0.jsonl"
+    },
+    {
+      "family": "memops_B30",
+      "step": "stage-2-repeat",
+      "label": "wrong",
+      "full_task_success": false,
+      "note": "Invents legal-registration status and public rejection of corporate website branding; source reports futureMarcwebsite listing without personal-preference reversal. Also imports2026clock.",
+      "expected": "The latest confirmed personal preference remains Marcus; a corporate website listing as Marc is planned for next week, without a confirmed new personal-preference reversal. Chen Wei remains full-name-only, reported May2. M.J. is an unused historical nickname. Do not invent a calendar anchor for next week.",
+      "answer": "**Professional Names to Use Now:**\nFor your college friend and former roommate, use their full, legally registered names in professional settings:\n*   **Marcus**\n*   **Chen Wei**\n\n**Timestamp of Roommate’s Naming Preference:**\nThe roommate (Chen Wei) reported his preference for using his full name on **May 2nd**.\n(Your college friend Marcus confirmed his preference for \"Marcus\" last weekend relative to October 19, 2026).\n\n**Detailed Breakdown:**\n*   **Confirmed Personal Preferences:**\n    *   **Marcus:** Prefers to be called \"Marcus\" in all settings, including professional. He has explicitly rejected the shortening to \"Marc.\"\n    *   **Chen Wei:** Prefers \"Chen Wei\" rather than the shortened \"Wei.\"\n*   **Historical Nicknames:**\n    *   Marcus: \"Marc\"\n    *   Chen Wei: \"Wei\"\n*   **Future Corporate Branding & Contexts:**\n    *   Marcus (Whitfield & Associates): His firm recommended a corporate mandate to use \"Marc\" for client-facing materials starting next week; however, Marcus has publicly rejected this.\n    *   Chen Wei (Meridian Labs): Colleagues at his fintech startup have been shortening his name to \"Wei,\" which is the context for his reported preference.",
+      "control_path": [
+        "use_view",
+        "search",
+        "refresh_view",
+        "read_1",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 20193,
+          "charged_tokens": 20193,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 559.5826373060045,
+            "forwards": 5,
+            "input_tokens": 34106,
+            "sequence_rows": 5,
+            "state_tokenizations": 5,
+            "state_tokens": 31424,
+            "wall_seconds": 156.15044948738068
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.431381543000043,
+            "loads": 1,
+            "wall_seconds": 2.643353988416493
+          }
+        }
+      },
+      "wall_seconds": 218.563974683173,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/3e3a5f3c-d4da-4a16-b4d0-9b670de3abaf/679f0802-45fb-4d31-acc3-f141d47f4296-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/3e3a5f3c-d4da-4a16-b4d0-9b670de3abaf/679f0802-45fb-4d31-acc3-f141d47f4296-trace-0.jsonl"
+    },
+    {
+      "family": "memops_C03",
+      "step": "stage-0",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied; representative preference examples accepted.",
+      "expected": "May14at9:30AMwith Dr.Liang at Riverside General. No proposed replacement time has yet been reported. Mother’s May6St.Luke’s appointment and PT sessions are separate.",
+      "answer": "Your latest confirmed follow-up appointment is with Dr. Liang at Riverside General on May 14th at 9:30 AM. No suggested time change is currently awaiting your response.",
+      "control_path": [
+        "search",
+        "refresh_view",
+        "context_2",
+        "handoff"
+      ],
+      "handoff_reason": "no_available_operation",
+      "cost": {
+        "generation": {
+          "known_tokens": 11641,
+          "charged_tokens": 11641,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 63.31809714100382,
+            "forwards": 3,
+            "input_tokens": 8027,
+            "sequence_rows": 3,
+            "state_tokenizations": 3,
+            "state_tokens": 7270,
+            "wall_seconds": 17.503701609559357
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.5366328329996577,
+            "loads": 1,
+            "wall_seconds": 2.771179284900427
+          }
+        }
+      },
+      "wall_seconds": 59.721440452151,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/8ece33af-b433-4f79-9e3a-1b3381581f4e/eb54fe9f-8c3e-42c6-b05e-cbdae80ebde7-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/8ece33af-b433-4f79-9e3a-1b3381581f4e/eb54fe9f-8c3e-42c6-b05e-cbdae80ebde7-trace-0.jsonl"
+    },
+    {
+      "family": "memops_C03",
+      "step": "stage-0-repeat",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied; representative preference examples accepted.",
+      "expected": "May14at9:30AMwith Dr.Liang at Riverside General. No proposed replacement time has yet been reported. Mother’s May6St.Luke’s appointment and PT sessions are separate.",
+      "answer": "Your latest confirmed follow-up appointment is scheduled for **May 14th at 9:30 AM** with **Dr. Liang** at **Riverside General** to review your physical therapy progress. There are **no suggested time changes awaiting your response**; the appointment remains confirmed as scheduled. This is distinct from your mother's May 6th cardiology check-up at St. Luke's.",
+      "control_path": [
+        "use_view",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 8582,
+          "charged_tokens": 8582,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 22.44638835600199,
+            "forwards": 2,
+            "input_tokens": 3740,
+            "sequence_rows": 2,
+            "state_tokenizations": 2,
+            "state_tokens": 3362,
+            "wall_seconds": 6.077352190390229
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.571351899000092,
+            "loads": 1,
+            "wall_seconds": 2.8168514855206013
+          }
+        }
+      },
+      "wall_seconds": 48.89127488154918,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/8ece33af-b433-4f79-9e3a-1b3381581f4e/3f8a6009-5e53-4a16-8144-83728a2d9ad7-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/8ece33af-b433-4f79-9e3a-1b3381581f4e/3f8a6009-5e53-4a16-8144-83728a2d9ad7-trace-0.jsonl"
+    },
+    {
+      "family": "memops_C03",
+      "step": "stage-1",
+      "label": "qualified",
+      "full_task_success": false,
+      "note": "Own appointment and pending10:15proposal correct, but denies Kevin information despite his reported PTslot in this prefix; same qualification criterion as original/shared.",
+      "expected": "May14at9:45AMwith Dr.Liang at Riverside General remains the latest confirmed slot.10:15AMis a proposal awaiting the user’s callback, not an accepted change. Kevin’s9:30printout/11AMPTslot concerns Kevin.",
+      "answer": "Based on your records:\n\n**Latest Confirmed Follow-Up:**\n*   **Date:** May 14th\n*   **Time:** 9:45 AM\n*   **Clinician:** Dr. Liang\n*   **Location:** Riverside General\n\n**Time Change Proposal:**\n*   Dr. Liang's office has proposed moving the May 14th appointment to **10:15 AM**.\n*   **Status:** This is **still awaiting your response**. You have not called back to confirm or decline this change, so your appointment currently remains confirmed at **9:45 AM**.\n\n**Other Appointments (For Reference):**\n*   **Mother's Appointment:** May 6th at 11:00 AM (Cardiology at St. Luke's) - Separate from your follow-up.\n*   **Kevin:** No information was found regarding Kevin's appointments in your records.\n\n本轮业务结果: 未执行新的业务操作。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。\n\n实时查询预订: \n\n- 结果: 未查到对象\n- 物品: \"riverside-followup\"\n\n实时查询预订: \n\n- 结果: 未查到对象\n- 物品: \"riverside-general-follow-up\"",
+      "control_path": [
+        "refresh_view",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 26843,
+          "charged_tokens": 26843,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 159.23531170600472,
+            "forwards": 2,
+            "input_tokens": 11655,
+            "sequence_rows": 2,
+            "state_tokenizations": 2,
+            "state_tokens": 11326,
+            "wall_seconds": 44.02011392638087
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.4546810100000584,
+            "loads": 1,
+            "wall_seconds": 2.7267879815772176
+          }
+        }
+      },
+      "wall_seconds": 124.61958313267678,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/8ece33af-b433-4f79-9e3a-1b3381581f4e/47a4603c-0a6d-43d4-a2b5-e4b4861f4609-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/8ece33af-b433-4f79-9e3a-1b3381581f4e/47a4603c-0a6d-43d4-a2b5-e4b4861f4609-trace-0.jsonl"
+    },
+    {
+      "family": "memops_C03",
+      "step": "stage-1-repeat",
+      "label": "length_failure",
+      "full_task_success": false,
+      "note": "First output-length failure retained; no task credit.",
+      "expected": "May14at9:45AMwith Dr.Liang at Riverside General remains the latest confirmed slot.10:15AMis a proposal awaiting the user’s callback, not an accepted change. Kevin’s9:30printout/11AMPTslot concerns Kevin.",
+      "answer": "回答协议失败, 执行已停止; 以下是已确认的操作状态。未列出的请求完成情况仍未确认。\n\n本轮业务结果: 未执行新的业务操作。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。\n\n本轮未取得新的业务回执。\n\n本轮语义记忆: 未提交。这里只报告列出的回执, 不确认全部请求或语义覆盖。\n\n本轮原始消息已记录。原始消息记录与语义记忆提交分别计数。",
+      "control_path": [],
+      "handoff_reason": null,
+      "cost": {
+        "generation": {
+          "known_tokens": 9269,
+          "charged_tokens": 9269,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {}
+      },
+      "wall_seconds": 55.641447976231575,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/8ece33af-b433-4f79-9e3a-1b3381581f4e/469d0f46-3443-4b14-a4f2-cd388ebe5435-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/8ece33af-b433-4f79-9e3a-1b3381581f4e/469d0f46-3443-4b14-a4f2-cd388ebe5435-trace-0.jsonl"
+    },
+    {
+      "family": "memops_C03",
+      "step": "stage-2",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied; representative preference examples accepted.",
+      "expected": "May14at9:45AMwith Dr.Liang at Riverside General. The user rejected10:15and the office agreed to keep9:45; no pending time change remains in these reports. Do not revert to the old9:30or import another person’s appointment.",
+      "answer": "Your latest confirmed follow-up appointment is on **May 14th at 9:45 AM** with **Dr. Liang** at **Riverside General** to review your physical therapy progress.\n\nRegarding suggested changes, there are no pending responses awaiting you. Dr. Liang's office had previously proposed moving your appointment to 10:15 AM, but you explicitly rejected that change and confirmed the original 9:45 AM slot.",
+      "control_path": [
+        "refresh_view",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 15067,
+          "charged_tokens": 15067,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 159.90006401299615,
+            "forwards": 2,
+            "input_tokens": 11386,
+            "sequence_rows": 2,
+            "state_tokenizations": 2,
+            "state_tokens": 11057,
+            "wall_seconds": 44.446615480817854
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.421870602999661,
+            "loads": 1,
+            "wall_seconds": 2.629386947490275
+          }
+        }
+      },
+      "wall_seconds": 90.19110664632171,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/8ece33af-b433-4f79-9e3a-1b3381581f4e/09f5a796-f9b2-4945-a8ac-80f010f51a37-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/8ece33af-b433-4f79-9e3a-1b3381581f4e/09f5a796-f9b2-4945-a8ac-80f010f51a37-trace-0.jsonl"
+    },
+    {
+      "family": "memops_C03",
+      "step": "stage-2-repeat",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied; representative preference examples accepted.",
+      "expected": "May14at9:45AMwith Dr.Liang at Riverside General. The user rejected10:15and the office agreed to keep9:45; no pending time change remains in these reports. Do not revert to the old9:30or import another person’s appointment.",
+      "answer": "Your latest confirmed follow-up appointment is scheduled for May 14th at 9:45 AM with Dr. Liang at Riverside General. No suggested time change is currently awaiting your response; the earlier proposal to move the appointment to 10:15 AM was reviewed by you, rejected, and you confirmed the original 9:45 AM time.",
+      "control_path": [
+        "search",
+        "use_view",
+        "refresh_view",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 21392,
+          "charged_tokens": 21392,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 272.8707255130066,
+            "forwards": 4,
+            "input_tokens": 20568,
+            "sequence_rows": 4,
+            "state_tokenizations": 4,
+            "state_tokens": 18034,
+            "wall_seconds": 76.86865692958236
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.2510726370001066,
+            "loads": 1,
+            "wall_seconds": 2.5090537387877703
+          }
+        }
+      },
+      "wall_seconds": 146.50628672074527,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/8ece33af-b433-4f79-9e3a-1b3381581f4e/2936db3a-c06f-48e4-bd3b-db597e444303-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/8ece33af-b433-4f79-9e3a-1b3381581f4e/2936db3a-c06f-48e4-bd3b-db597e444303-trace-0.jsonl"
+    },
+    {
+      "family": "memops_D25",
+      "step": "stage-0",
+      "label": "correct",
+      "full_task_success": true,
+      "note": "All required source-report dimensions satisfied; representative preference examples accepted.",
+      "expected": "Prefers flavorful food without overwhelming chili burn: mild beef curry/pickled ginger at regular Koku Kitchen, adapted mapo tofu with less doubanjiang and enjoyable Sichuan numbing tingle, and sweet-savory bulgogi. Medium Thai curry and chili-flake side were too hot. No untried new venue is yet established; do not infer no interest in spices generally.",
+      "answer": "Based on your reported meals, your flavor preferences lean towards **sweet, savory, and rich profiles** (like bulgogi and beef curry) but with a **low tolerance for chili heat** (capsaicin), which you find overwhelming and capable of masking the dish's actual flavors. You distinguish between types of spice: while you find straight chili heat ('burn') too intense—even at 'medium' levels—you specifically **enjoy the numbing sensation of Sichuan peppercorns** ('tingly feeling') without the burn. This stands in contrast to the higher heat tolerance of your friends Darren and Priya. Your established **lunch go-to is Koku Kitchen**, a Japanese curry spot you have visited four times. Regarding suggested options, you have not confirmed trying **japchae**; while you confirmed eating the bulgogi and pickled radish at the Korean BBQ place, you did not mention the japchae (which the assistant suggested as a milder side).",
+      "control_path": [
+        "search",
+        "context_3",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 9254,
+          "charged_tokens": 9254,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 51.942362499998126,
+            "forwards": 3,
+            "input_tokens": 7269,
+            "sequence_rows": 3,
+            "state_tokenizations": 3,
+            "state_tokens": 6603,
+            "wall_seconds": 14.384782275184989
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.3074892629992974,
+            "loads": 1,
+            "wall_seconds": 2.5836507054045796
+          }
+        }
+      },
+      "wall_seconds": 57.97388979420066,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/c9607d7c-68e2-433b-b66e-4090252bb7ad/41793ffd-d2db-4c11-8220-2c9b1150cd38-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/c9607d7c-68e2-433b-b66e-4090252bb7ad/41793ffd-d2db-4c11-8220-2c9b1150cd38-trace-0.jsonl"
+    },
+    {
+      "family": "memops_D25",
+      "step": "stage-0-repeat",
+      "label": "wrong",
+      "full_task_success": false,
+      "note": "Falsely says Thai restaurant visit not confirmed despite explicit medium-green-curry experience.",
+      "expected": "Prefers flavorful food without overwhelming chili burn: mild beef curry/pickled ginger at regular Koku Kitchen, adapted mapo tofu with less doubanjiang and enjoyable Sichuan numbing tingle, and sweet-savory bulgogi. Medium Thai curry and chili-flake side were too hot. No untried new venue is yet established; do not infer no interest in spices generally.",
+      "answer": "Based on your reported meals, your flavor preferences lean towards sweet, savory, and rich profiles, such as bulgogi and beef curry. Regarding heat, you have a low tolerance for chili heat (capsaicin), as it overwhelms you and masks dish flavors; however, you enjoy the numbing sensation of Sichuan peppercorns. Your established go-to lunch place remains Koku Kitchen, where you have visited four times and typically order the mild beef curry with pickled ginger on the side. As for suggestions you have not yet tried, there is no confirmation that you have sampled Japchae or visited the Thai place on Elm Street. Your low chili tolerance is distinct from friends Darren and Priya, who have a higher tolerance for spice.",
+      "control_path": [
+        "search",
+        "refresh_view",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 8869,
+          "charged_tokens": 8869,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 93.63186742400285,
+            "forwards": 3,
+            "input_tokens": 10085,
+            "sequence_rows": 3,
+            "state_tokenizations": 3,
+            "state_tokens": 9300,
+            "wall_seconds": 26.253175913356245
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.4468597260001843,
+            "loads": 1,
+            "wall_seconds": 2.7276774579659104
+          }
+        }
+      },
+      "wall_seconds": 53.40262155421078,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/c9607d7c-68e2-433b-b66e-4090252bb7ad/5a0e7a20-b5bd-4618-a18e-3d6b6e0f9a2a-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/c9607d7c-68e2-433b-b66e-4090252bb7ad/5a0e7a20-b5bd-4618-a18e-3d6b6e0f9a2a-trace-0.jsonl"
+    },
+    {
+      "family": "memops_D25",
+      "step": "stage-1",
+      "label": "wrong",
+      "full_task_success": false,
+      "note": "Repeats false untriedThaiplace claim.",
+      "expected": "Layered umami, fermented sweetness and aromatic warmth without raw chili burn; mild butter chicken and about a teaspoon of gochujang per pan are reported successes. Koku Kitchen remains the go-to. Vindaloo was considered then declined, not tried. Priya’s hot-sauce preference is not the user’s.",
+      "answer": "Based on your reported meals, your flavor preferences lean towards sweet, savory, rich, creamy, and complex fermented profiles, such as those found in bulgogi, beef curry, and mild butter chicken. Regarding heat, you have a low tolerance for chili heat and avoid high-heat dishes like vindaloo to prevent the burn from masking underlying flavors; however, you do enjoy the numbing sensation of Sichuan peppercorns. Your established lunch go-to remains Koku Kitchen. From previous suggestions, you have not yet tried the Japchae or visited the Thai place on Elm Street.",
+      "control_path": [
+        "refresh_view",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 15709,
+          "charged_tokens": 15709,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 116.28779358499742,
+            "forwards": 2,
+            "input_tokens": 9690,
+            "sequence_rows": 2,
+            "state_tokenizations": 2,
+            "state_tokens": 9361,
+            "wall_seconds": 32.65142435953021
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.560444911000559,
+            "loads": 1,
+            "wall_seconds": 2.8609355399385095
+          }
+        }
+      },
+      "wall_seconds": 84.48839807603508,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/c9607d7c-68e2-433b-b66e-4090252bb7ad/97ad946f-a7a3-4aaa-ae03-e0b739d459f6-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/c9607d7c-68e2-433b-b66e-4090252bb7ad/97ad946f-a7a3-4aaa-ae03-e0b739d459f6-trace-0.jsonl"
+    },
+    {
+      "family": "memops_D25",
+      "step": "stage-1-repeat",
+      "label": "wrong",
+      "full_task_success": false,
+      "note": "Repeats false unconfirmedThai visit claim.",
+      "expected": "Layered umami, fermented sweetness and aromatic warmth without raw chili burn; mild butter chicken and about a teaspoon of gochujang per pan are reported successes. Koku Kitchen remains the go-to. Vindaloo was considered then declined, not tried. Priya’s hot-sauce preference is not the user’s.",
+      "answer": "Based on your reported meal history:\n\n**Flavor and Heat Preferences**\n- **Profile:** You favor sweet, savory, rich, creamy, and complex fermented profiles (e.g., bulgogi, beef curry, butter chicken).\n- **Heat Tolerance:** You have a low tolerance for chili heat, finding it overwhelming and capable of masking the dish's underlying flavors. Unlike your friends Darren and Priya, who have higher tolerances, you actively avoid high-heat dishes.\n- **Nuance:** You appreciate the numbing sensation of Sichuan peppercorns but dislike the accompanying chili burn.\n\n**Established Lunch Go-To**\n- **Koku Kitchen** is your current go-to. You have visited four times and typically order the **mild beef curry with pickled ginger on the side**.\n\n**Suggested Food or Place Changes Not Tried**\n- **Japchae** (not confirmed as tried)\n- **Thai place on Elm Street** (not confirmed as visited)\n- **Vindaloo** (decided against trying due to heat concerns)",
+      "control_path": [
+        "search",
+        "use_view",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 12574,
+          "charged_tokens": 12574,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 89.2998891919924,
+            "forwards": 3,
+            "input_tokens": 9883,
+            "sequence_rows": 3,
+            "state_tokenizations": 3,
+            "state_tokens": 8623,
+            "wall_seconds": 24.57618802320212
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.539644374999625,
+            "loads": 1,
+            "wall_seconds": 2.819714075885713
+          }
+        }
+      },
+      "wall_seconds": 92.77221272699535,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/c9607d7c-68e2-433b-b66e-4090252bb7ad/7ee31ced-bea5-4389-803b-4c0fa80b678d-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/c9607d7c-68e2-433b-b66e-4090252bb7ad/7ee31ced-bea5-4389-803b-4c0fa80b678d-trace-0.jsonl"
+    },
+    {
+      "family": "memops_D25",
+      "step": "stage-2",
+      "label": "unfulfilled",
+      "full_task_success": false,
+      "note": "Only says it is checking evidence; no substantive requested answer was delivered despite HostCOMPLETED.",
+      "expected": "Same bounded preference; Koku Kitchen remains established. A Szechuan visit is booked for next Friday by Priya but the user has not tried its food and retracts calling it a new favorite. Katsu curry and mirin are still things to try, while the gochujang/vinegar/sesame stir-fry was actually made. James/Priya’s heat scale does not establish the user’s.",
+      "answer": "Checking the relevant source evidence to detail your flavor preferences, established lunch habits, and untried suggestions.",
+      "control_path": [
+        "refresh_view",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 23526,
+          "charged_tokens": 23526,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 199.33497946400166,
+            "forwards": 2,
+            "input_tokens": 12899,
+            "sequence_rows": 2,
+            "state_tokenizations": 2,
+            "state_tokens": 12570,
+            "wall_seconds": 56.30011640675366
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 3.547417067000424,
+            "loads": 1,
+            "wall_seconds": 2.8501857919618487
+          }
+        }
+      },
+      "wall_seconds": 137.62093010358512,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/c9607d7c-68e2-433b-b66e-4090252bb7ad/3ebc0555-3c0e-485f-a26d-89b9353d33d4-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/c9607d7c-68e2-433b-b66e-4090252bb7ad/3ebc0555-3c0e-485f-a26d-89b9353d33d4-trace-0.jsonl"
+    },
+    {
+      "family": "memops_D25",
+      "step": "stage-2-repeat",
+      "label": "wrong",
+      "full_task_success": false,
+      "note": "Recasts user's actualThai meal as merely observing a coworker and claims place untried; also omits specific remaining katsu/mirin suggestions.",
+      "expected": "Same bounded preference; Koku Kitchen remains established. A Szechuan visit is booked for next Friday by Priya but the user has not tried its food and retracts calling it a new favorite. Katsu curry and mirin are still things to try, while the gochujang/vinegar/sesame stir-fry was actually made. James/Priya’s heat scale does not establish the user’s.",
+      "answer": "Based on your reported meal history and examples, here is the breakdown of your preferences, established habits, and untried suggestions:\n\n**Flavor and Heat Preferences**\n*   **Flavor:** You lean towards sweet, savory, rich, creamy, and complex fermented profiles. You prioritize depth of flavor over spice. Your examples include bulgogi, beef curry, butter chicken, gochujang marinades, and garlic naan.\n*   **Heat Tolerance:** You have a low tolerance for chili heat (capsaicin). You find it overwhelming and believe it masks the underlying flavors of the dish.\n*   **Sichuan Specifics:** You enjoy the numbing sensation ('tingly feeling') of Sichuan peppercorns but actively dislike the accompanying chili burn.\n\n**Established Lunch Go-To**\n*   **Koku Kitchen:** This is your confirmed established lunch spot. You have visited it at least four times.\n*   **Typical Order:** You typically order the mild beef curry with pickled ginger on the side.\n\n**Untried Suggested Food or Place Changes**\n*   **Szechuan Place Downtown:** You are considering this as a potential new favorite (a reservation was made by Priya), but you have not yet visited.\n*   **Thai Place on Elm Street:** You have not tried this place; your knowledge of it comes from observing a coworker eat there (the food appeared to have visible chili oil).\n*   **Japchae:** You have not confirmed trying this dish.\n*   **Vindaloo:** You decided against trying this dish due to anticipated discomfort with the heat level.\n\n*Note: Comparisons to others (Darren, Priya, James) indicate they have higher heat tolerances than you, which you use as a boundary for your own spice limits.*",
+      "control_path": [
+        "search",
+        "refresh_view",
+        "handoff"
+      ],
+      "handoff_reason": "policy_handoff",
+      "cost": {
+        "generation": {
+          "known_tokens": 18499,
+          "charged_tokens": 18499,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 0,
+          "charged_tokens": 0,
+          "unknown_usage": 0
+        },
+        "compute": {
+          "dynamic_memory_laya": {
+            "cpu_seconds": 198.19244145900302,
+            "forwards": 3,
+            "input_tokens": 14737,
+            "sequence_rows": 3,
+            "state_tokenizations": 3,
+            "state_tokens": 12992,
+            "wall_seconds": 55.32858292106539
+          },
+          "dynamic_memory_laya_load": {
+            "cpu_seconds": 4.079489828999613,
+            "loads": 1,
+            "wall_seconds": 3.282496567815542
+          }
+        }
+      },
+      "wall_seconds": 100.38459681905806,
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/c9607d7c-68e2-433b-b66e-4090252bb7ad/ce8a155c-048e-4763-9d88-89e75c2c3d06-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/c9607d7c-68e2-433b-b66e-4090252bb7ad/ce8a155c-048e-4763-9d88-89e75c2c3d06-trace-0.jsonl"
+    }
+  ],
+  "scope": "Partial descriptive task review, not recipe selection or fullstate certification. Preserve shared-executor failures separately from policy/Reader errors. No development labels enter training.",
+  "model_calls_by_review": 0
+}

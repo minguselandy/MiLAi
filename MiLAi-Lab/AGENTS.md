@@ -1,11 +1,20 @@
 # LIVE V10: 2026-10-19
 
-Only live coordinator PID1651723/exec59686; active child1849697 t1-broader-shared-evaluation-v1.
+Only live coordinator PID1651723/exec59686; active child1849697 broader/shared evaluation.
 Revalidate reviewed-followups-dispatch-v10.json and actual/proc commands. Never restart live queues.
-Original/shared evaluation CLOSED80 (55first+25continuation), all first failures retained.
-Broader/shared currently59/80; then baselines144 and own-train72. Do not alter the queue.
+Original/shared CLOSED80; broader/shared latest79/80, then baselines144 and own-train72.
 Evaluation method0acc4b9a, dispatcher17d6f621;30earlier offline phases settled ONCE beforeV10.
 NEVER settle new offline work while any model child lives.
+Broader closed-prefix author review: old32=18C/5unfulfilled/5length/4W; external first30=14C,
+1operationfailure/1incomplete/7W/4qualified/2length/1progress-only answer. Remainder still pending.
+A19stage-2 actual REFRESH KeyError/g1 diagnosed: response repeated remove_rules IDs, accepted by
+existing schema; loop popped same object twice before cachewrite. Originalcache unchanged.
+Generic fix uses set semantics (stable distinct IDs) for node/rule removal before replacement;
+unknown IDs, conflicting updates and missing rule nodes keep existing rejection. No case keywords.
+3actual SQLite regressions failedbefore;40query-structure/control tests pass after, Ruff/mypy1module/
+packageboundary pass. Actual recorded request+response offline replay matches original messages:
+beforeKeyError/cacheunchanged, afterrevision3,0newmodelcalls. Originalrun failure/cost unchanged.
+Live frozen0acc remains unchanged. Prepared postforget d230 followup remains separate/unchanged.
 
 Original/shared results: old8dev25C/5W/2length; external8dev11C/18empty-unfulfilled/6length/
 2incomplete/5W/2protocol/4qualified. E08stage-0 author grade correctedC->qualified after full

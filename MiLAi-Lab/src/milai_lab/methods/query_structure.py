@@ -241,9 +241,10 @@ def build_query_structure(
     Draft202012Validator(schema).validate(response)
     nodes = copy.deepcopy(previous.get("nodes", {}))
     rules = copy.deepcopy(previous.get("rules", {}))
-    for key in response["remove"]:
+    # Removal lists name a set of prior objects; repeating a name adds no operation.
+    for key in dict.fromkeys(response["remove"]):
         nodes.pop(key)
-    for key in response["remove_rules"]:
+    for key in dict.fromkeys(response["remove_rules"]):
         rules.pop(key)
     for key, target in (("nodes", nodes), ("rules", rules)):
         updates = {item["id"]: {k: copy.deepcopy(v) for k, v in item.items() if k != "id"}

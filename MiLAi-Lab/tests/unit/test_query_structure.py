@@ -148,6 +148,37 @@ def test_refresh_can_change_shared_rule_without_regenerating_unchanged_facts(tmp
         assert later["structure"]["rules"]["g0"]["all"] == ["n0"]
 
 
+@pytest.mark.parametrize("repeat_nodes,repeat_rules", [(True, False), (False, True), (True, True)])
+def test_repeated_removals_apply_once_before_replacement(tmp_path, repeat_nodes, repeat_rules):
+    with SqliteStore.from_conn_string(str(tmp_path / "bank.sqlite")) as store:
+        service = service_at(store, tmp_path)
+        ref = service.capture_user("s", "first", "A remains stable; B is an old claim.")[
+            "source_ref"]
+        original = {"scope": "Two independent claims", "nodes": [
+            {"id": key, "text": text, "kind": "reported", "evidence": ["e0"]}
+            for key, text in [("n0", "A remains stable."), ("n1", "B is an old claim.")]],
+            "rules": [{"id": "g0", "target": "n1", "all": ["n0"],
+                       "any": [[]], "evidence": ["e0"]}],
+            "remove": [], "remove_rules": [], "unresolved": []}
+        first, _ = build_query_structure(service, "What is recorded?", "", [ref],
+            policy="incremental", call=lambda *_: original)
+        previous = json.loads(json.dumps(first))
+        service.capture_user("s", "update", "Replace B; remove the old dependency; A is unchanged.")
+        delta = {"scope": "Two independent claims", "nodes": [
+            {"id": "n1", "text": "B has been replaced.", "kind": "reported",
+             "evidence": ["e1"]}], "rules": [],
+            "remove": ["n1"] * (2 if repeat_nodes else 1),
+            "remove_rules": ["g0"] * (2 if repeat_rules else 1), "unresolved": []}
+        later, report = build_query_structure(service, "What is recorded now?", "", [ref],
+            policy="incremental", call=lambda *_: delta)
+        assert later["revision"] == 2 and report["model_calls"] == 1
+        assert later["structure"]["nodes"]["n0"] == previous["structure"]["nodes"]["n0"]
+        assert later["structure"]["nodes"]["n1"]["text"] == "B has been replaced."
+        assert later["structure"]["rules"] == {}
+        assert cached_structure(service) == later
+        assert first == previous
+
+
 def test_forgetting_source_hides_cached_interpretation_and_does_not_resurrect_it(tmp_path):
     with SqliteStore.from_conn_string(str(tmp_path / "bank.sqlite")) as store:
         service = service_at(store, tmp_path)

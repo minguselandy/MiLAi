@@ -1,0 +1,38 @@
+{
+  "version": "dynamic-memory-control-repeated-removal-v1",
+  "status": "GENERIC_FIX_VALIDATED_OFFLINE",
+  "trigger": {
+    "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/1ad7f714-6d43-44c1-af63-e4f24d0366e3/79b25490-4688-4a78-8b68-80dfae901223-trace-0.jsonl",
+    "remove_rules": [
+      "g1",
+      "g2",
+      "g3",
+      "g4",
+      "g1",
+      "g2",
+      "g3",
+      "g4"
+    ],
+    "original_error": "KeyError/g1; read_outcome_unknown; first task not fulfilled"
+  },
+  "contract": "Existing schema accepts repeated prior IDs in removal arrays. Removal is a set operation applied before replacement; repeating the same removal adds no semantic operation.",
+  "change": "Iterate distinct removal IDs in original order for both nodes and rules. Unknown IDs remain schema errors; duplicate/conflicting updates and undefined rule nodes retain existing rejections. No semantic correction or fabricated value.",
+  "reproduction": {
+    "before": "artifacts/dynamic-memory-control/broader-a19-delta-before-v1/report.json",
+    "after": "artifacts/dynamic-memory-control/broader-a19-delta-after-v1/report.json",
+    "same_actual_model_messages": true,
+    "before_cache_unchanged": true,
+    "after_revision": 3,
+    "real_model_calls": 0,
+    "scope": "Diagnostic SQLite copy with recorded prior graph and exact captured response. Cache bookkeeping reconstructed from actual bindings/clocks; regenerated model input equals original recorded messages. This is not a replay of a model position or replacement of its first answer."
+  },
+  "validation": {
+    "before_regressions": "3fail on duplicate node/rule removals",
+    "after_regressions": "40query-structure/control tests pass",
+    "ruff": "passed",
+    "mypy": "1module passed",
+    "package_boundary": "passed"
+  },
+  "live_experiments": "Frozen0acc4b9aV10 remains unchanged; original error and cost count. Existing postforget followup stays on its separately frozen d230c945 contract.",
+  "semantic_limits": "Applying a syntactically valid recorded delta does not establish task completeness, source truth or correct rule meaning. The source response still omits some requested secondary-contact information."
+}
