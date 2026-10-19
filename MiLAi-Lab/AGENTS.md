@@ -10,13 +10,14 @@ Author/task/state/cost manifests in data/manifests/host-intent-retrieval-v3-rema
 First4oldversionJSON not merged into a sameversion claim. NativeE0still0/24 and shared7860
 reconfigurationapproval remainsPENDING; do not treat continuation/elapsedtime as approval.
 
-New semantic containers preserve extra fields literally instead of rejecting misplaced purpose/
+New read_goal AND task_context semantic containers preserve extra fields literally instead of rejecting misplaced purpose/
 scope; no aliases/domainrules, identity/reference/limit paths unchanged.11regressionsPASS;
 frozen c2extra-field failure reproduced. Newinterface not real-model-replayed.
 FollowIR1776rows imported/grouped1206components;965train1427rows/241dev349rows,seed0.
 T0metadataallocated64train(57MemOps+7admittedMuSiQue)/16dev(8MemOps+6authored+2MuSiQue).
 No v3trajectories/labels/fitting yet; source-only old labels not a substitute. FollowIR relevance
 is auxiliary applicability, never automaticHANDOFF. Group/split/primarysource manifests saved.
+Seven measured goalofflinephases settledonceatverifiedidle; originalmodelcountersunchanged. Settlementmanifest authoritative; raw compute snapshots may stillshowinitialpending. Nextdriver includes per-messageCPU/wall; do not fabricate these forclosedc2runs.
 FullM1–M6/E0–E5/T0–T2 remainsactive. Next actualsource review and collection onregisteredtrain.
 
 # CURRENT: all six development histories prepared; second diagnostic next
