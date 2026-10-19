@@ -1,0 +1,88 @@
+{
+  "status": "AUXILIARY_PREPARED_AND_INPUT_AUDITED_NOT_FITTED",
+  "data": "artifacts/host-intent-retrieval-v3/data/followir-applicability-v1",
+  "preparation": {
+    "status": "AUXILIARY_CANDIDATE_TASK_PREPARED_NOT_FITTED",
+    "source": "artifacts/host-intent-retrieval-v3/data/followir-train/train.jsonl",
+    "allocation": "artifacts/host-intent-retrieval-v3/data/followir-train/groups.json",
+    "splits": {
+      "train": {
+        "groups": 965,
+        "rows": 1427,
+        "published_labels": {
+          "true": 700,
+          "false": 727
+        }
+      },
+      "dev": {
+        "groups": 241,
+        "rows": 349,
+        "published_labels": {
+          "true": 178,
+          "false": 171
+        }
+      }
+    },
+    "task": "instruction_applicability",
+    "inputs": "Literal query, instruction as read_goal.purpose, and candidate document.",
+    "targets": "Published true/false candidate labels; teacher score is not used.",
+    "qualification": "Not Host trajectories or operation/stop/refresh labels. Published labels have not been independently reviewed. T1 mixing, complete-input audit and task-specific evaluation remain to be implemented.",
+    "operation_training_data_modified": false,
+    "model_calls": 0,
+    "wall_seconds": 0.06592205539345741,
+    "cpu_seconds": 0.06592345799999999,
+    "ledger_recorded": false
+  },
+  "input_audit": {
+    "status": "COMPLETE_LITERAL_INPUTS_NO_TRUNCATION",
+    "splits": {
+      "train": {
+        "rows": 1427,
+        "literal_input_equality": true,
+        "laya_items": 1427,
+        "skipped": {},
+        "max_sequence_tokens": 747,
+        "state_tokens_dropped": 0,
+        "head_tokens_dropped": 0
+      },
+      "dev": {
+        "rows": 349,
+        "literal_input_equality": true,
+        "laya_items": 349,
+        "skipped": {},
+        "max_sequence_tokens": 644,
+        "state_tokens_dropped": 0,
+        "head_tokens_dropped": 0
+      }
+    },
+    "group_overlap": false,
+    "max_len": 12288,
+    "head_max_len": 2048,
+    "tokenizer_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/models/laya-multilingual-base/tokenizer",
+    "model_loads": 0,
+    "model_calls": 0,
+    "http_requests": 0,
+    "wall_seconds": 10.711614292114973,
+    "cpu_seconds": 13.306647028,
+    "ledger_recorded": false,
+    "scope": "Tokenizer/SDK item conversion only; no model quality or published-label validity claim.",
+    "integration_remaining": "NativeDecision.predict currently expects question next; auxiliary applicability question requires explicit task-aware prediction/scoring in a later version. Current T0 frozen source unchanged."
+  },
+  "adapter": "src/milai_lab/datasets/followir.py:applicability_row",
+  "entrypoint": "tools/prepare_followir_applicability.py",
+  "validation": {
+    "unit_tests": "3 passed",
+    "ruff": "passed",
+    "mypy": "passed for adapter and entrypoint",
+    "package_boundary": "passed",
+    "tools_boundary": "passed"
+  },
+  "remaining": [
+    "Independent source/label spot review before claiming annotation quality.",
+    "Task-aware native prediction and per-task scoring; current NativeDecision expects next question.",
+    "Registered T1 source expansion, mixture/sampling and matched update budgets.",
+    "No current operation state, frozen T0 inputs, or running trainer modified."
+  ],
+  "first_preparation_diagnostic_failure": "artifacts/host-intent-retrieval-v3/data/followir-applicability-v1/input-audit-first-failure.json",
+  "failure_qualification": "Wrong tokenizer root rejected before tokenization; corrected to existing tokenizer subdirectory without model loads/forwards. Tool wall5.83700721s known, processCPU unmeasured."
+}

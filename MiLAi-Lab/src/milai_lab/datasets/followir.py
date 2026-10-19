@@ -6,6 +6,41 @@ from collections import Counter, defaultdict
 from typing import Any
 
 
+def applicability_row(row: dict[str, Any], index: int,
+                      group: dict[str, Any]) -> dict[str, Any]:
+    """Preserve the published candidate task, separate from operation supervision.
+
+    The release's label supplies a binary target, not calibrated confidence or
+    evidence that a retrieval should stop. Teacher scores stay in the raw source.
+    """
+    answer = {"true": "satisfies", "false": "does_not_satisfy"}[row["label"]]
+    return {
+        "state": {
+            "task": {"retrieval_request": {
+                "query": row["query"], "read_goal": {"purpose": row["instruction"]}}},
+            "candidate": {"text": row["document"]},
+        },
+        "questions": {"applicability": {
+            "type": "choice",
+            "instructions": "Judge whether the candidate document satisfies the query "
+                            "and the stated retrieval requirements.",
+            "criteria": {
+                "satisfies": "The candidate satisfies the retrieval requirements.",
+                "does_not_satisfy": "The candidate does not satisfy the retrieval requirements.",
+            },
+        }},
+        "gold": {"applicability": {"probabilities": {
+            option: float(option == answer) for option in ("satisfies", "does_not_satisfy")}}},
+        "metadata": {
+            "task": "instruction_applicability", "family": group["source_group"],
+            "split": group["split"], "row": index,
+            "event_id": f"{group['source_group']}/row-{index}", "training_event": index,
+            "source": "jhu-clsp/FollowIR-train", "topic_id": row["id"],
+            "label_status": "published_candidate_label",
+        },
+    }
+
+
 def group_followir(rows: list[dict[str, Any]], *, seed: int = 0,
                   dev_fraction: float = 0.2) -> list[dict[str, Any]]:
     """Keep topic IDs, repeated queries and literal repeated documents together.

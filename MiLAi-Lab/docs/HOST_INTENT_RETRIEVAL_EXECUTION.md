@@ -684,3 +684,22 @@ answerable及原生指标分开，保留错误桥接、题名歧义和历史唱�
 t0-matched48-descriptive-v1；384个采集位置均已有任务内容或失败判定。训练冻结数据未改动。
 本轮新测量成本与先前首输入审计汇总到ignored的offline-review-pending-v6.json，等待当前
 训练结束后核对原账本再一次性结算；未测量的人工标注不记零。
+
+
+## 2026-10-20：FollowIR候选适用性辅助样本准备
+
+新增纯数据适配器和CLI，把已分组发布行投影为query、read_goal.purpose中的原instruction、
+原candidate正文和单个二元适用性问题。发布true/false只形成候选标签；教师score和主题身份
+不进入模型输入，不构造虚假的SEARCH/HANDOFF/刷新轨迹。原965train组1427行、241dev组
+349行保持不变，正负分别700/727和178/171；没有把辅助主题计入T0主操作来源组。
+
+实际tokenizer/SDK item转换通过全部1776行，train最长747tokens、dev最长644，正文和动作头
+均无截断，零模型加载/前向/HTTP；逐行原query/instruction/document一致，无来源组交叠。
+首次离线检查误把Laya bundle根目录当tokenizer目录，加载前失败；改用现有tokenizer子目录
+完成检查，首次失败单列保留，未执行或重跑模型实验。此失败工具墙钟5.83700721秒可知，
+进程CPU未测得；成功检查计时与准备计时单独列入待结算清单。
+
+3项纯分组/输入泄漏/条件保真测试、Ruff、mypy和包/tools边界均通过。这仍是发布标签辅助
+数据准备，不是T1拟合完成：后续还需明确来源审阅、混合预算和任务评分；当前NativeDecision
+只读取next问题，需要以新版本支持辅助applicability问题，不能直接用当前操作评分器宣称通过。
+正在运行的T0冻结源码/输入不受影响。

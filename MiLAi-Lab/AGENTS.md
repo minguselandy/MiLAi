@@ -49,6 +49,12 @@ NativeE0 remains0/24; shared7860 parser permission PENDING. No SHA/subagents/new
 remote publication. Full goal ACTIVE. All shortartifact paths above under artifacts/host-intent-retrieval-v3/.
 Historical notes below superseded.
 
+FollowIR auxiliary prepared in data/followir-applicability-v1:1427train/349dev,965/241groups;
+max747/644 tokens,all literal inputs unchanged,no truncation,0modelcalls.3puretests/static/boundariesPASS.
+NOT mixed/fitted: NativeDecision currently expects next; task-aware auxiliary inference/scoring remains.
+7measured offlinephases now pending-v6 (14.432584CPU); failed tokenizer-root diagnostic wall5.83700721
+known,CPUunmeasured. Do not settle while fitter lives. See followir-applicability manifest.
+
 # LIVE UPDATE 2026-10-20: source review started; samemainjobrunning
 
 PID3815344/exec24523/frozen8f7f2a18 remainsRUNNING, snapshot44/272closed.
