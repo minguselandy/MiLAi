@@ -1,3 +1,27 @@
+# V8 TERMINAL / PROGRESS OBSERVATION FIX: 2026-10-19
+
+V8 PID1256244/exec94647 and child1256251 terminal/absent, exit0; all10v2sandbox positions closed.
+V7 also terminal: both shared seed0fits COMPLETED96; original dev95/125/train285/373 vs broader
+107/125/train422/468. Training tokens2,286,678vs3,036,660; wall290.79svs460.24s. No task-win claim.
+V2fixed reserved correct4units/current destination once, label still absent. Rules had2length failures
+and no reservation; truthful live not-found reports do not complete the workflow. All outcomes retained.
+New shared bridge makes actual visible progress-query Tool receipts available to object-reference
+validation and receipt rendering, preserving source/owner/current permission/fresh-query checks.
+Readonly substantive Agent answers retained with actual receipts/progress. Explicit business_mutation
+prohibition applied before planning even if raw classification says perform. No keyword/case branch.
+406Host +108application/evaluator +22focused tests passed; after receipt dedup4targeted pass.
+Ruff,mypy4changed modules,package/tools boundaries passed. New v3same-template input variant prepared,
+10positions, not a new independent family. Freeze new source before model admission.
+8jointly-dev MemOps contracts now complete:184literal turns,24cuts+repeats48tasks, no test body read.
+Projector preserves explicit train/dev/test split; conflict stops before body/output.13dispatch/source
+projection tests passed.241source-only dev states shared max8386fit12288; actual-view bound unproven.
+T1 evaluation protocol prepared376positions:2learned arms x80old+external dev,3simple/generative arms
+x48external dev, broader own-train72. All use fixed final96; no dev data entered either fit.
+Next model queue should run frozen v3usability first, then the already declared matched evaluation;
+actual learned method runtime remains0acc4b9a, independent of newer Host business fixes.
+No live model job now; revalidate, then settle new measured offline work only at the idle boundary.
+Broader cohort/protected confirmation/all seeds/full-state/lifecycle remain incomplete. Goal active.
+
 # LIVE V7: 2026-10-19
 
 Only live coordinator PID1109944 / exec16345; child1109949 active t1-original-shared-seed0-v2.

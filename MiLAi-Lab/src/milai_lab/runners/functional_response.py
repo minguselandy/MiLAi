@@ -180,6 +180,9 @@ def business_response(
         elif isinstance(message, ToolMessage):
             name = calls.pop(message.tool_call_id, None)
             authority = authorized.get(message.tool_call_id, {})
+            if (name is None
+                    and message.additional_kwargs.get("milai_origin") == "program_observation"):
+                name = message.name
             if name not in _TOOLS or name != message.name or authority.get("tool") != name:
                 continue
             try:

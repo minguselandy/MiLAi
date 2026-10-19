@@ -1,0 +1,362 @@
+{
+  "version": "dynamic-memory-control-t1-shared-fit-results-v2",
+  "status": "BOTH_FIXED96_FITS_COMPLETED",
+  "source_modules": "0acc4b9a",
+  "initial_dev_reference": "artifacts/dynamic-memory-control/t1-fitting-v1/t1-original-shared-seed0-v1/dev/0",
+  "initial_dev_repeated": false,
+  "arms": {
+    "original": {
+      "run": "artifacts/dynamic-memory-control/t1-fitting-v2/t1-original-shared-seed0-v2/run.json",
+      "checkpoint": "artifacts/dynamic-memory-control/t1-fitting-v2/t1-original-shared-seed0-v2/checkpoint",
+      "train_states": 373,
+      "history": [
+        {
+          "optimizer_updates": 48,
+          "weighted_loss_mean": 1.3645608673493068,
+          "dev": {
+            "counts": {
+              "labelled": 125,
+              "accepted": 92,
+              "handoff_outside_reviewed_preference": 26,
+              "masked": 14
+            },
+            "strata": {
+              "acquire_evidence_preference": {
+                "labelled": 89,
+                "accepted": 56
+              },
+              "ready_handoff_preference": {
+                "labelled": 36,
+                "accepted": 36
+              }
+            },
+            "selected_operations": {
+              "SEARCH": {
+                "selected": 26,
+                "accepted": 26
+              },
+              "READ": {
+                "selected": 31,
+                "accepted": 24
+              },
+              "HANDOFF": {
+                "selected": 62,
+                "accepted": 36
+              },
+              "USE_VIEW": {
+                "selected": 2,
+                "accepted": 2
+              },
+              "REFRESH_VIEW": {
+                "selected": 4,
+                "accepted": 4
+              }
+            },
+            "families": 8,
+            "family_macro_acceptance": 0.7394126400560224,
+            "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+          },
+          "weighted_ce_mean": 1.3645608673493068
+        },
+        {
+          "optimizer_updates": 96,
+          "weighted_loss_mean": 1.222751681925729,
+          "dev": {
+            "counts": {
+              "labelled": 125,
+              "accepted": 95,
+              "handoff_outside_reviewed_preference": 20,
+              "masked": 14
+            },
+            "strata": {
+              "acquire_evidence_preference": {
+                "labelled": 89,
+                "accepted": 60
+              },
+              "ready_handoff_preference": {
+                "labelled": 36,
+                "accepted": 35
+              }
+            },
+            "selected_operations": {
+              "SEARCH": {
+                "selected": 17,
+                "accepted": 16
+              },
+              "READ": {
+                "selected": 37,
+                "accepted": 28
+              },
+              "HANDOFF": {
+                "selected": 55,
+                "accepted": 35
+              },
+              "USE_VIEW": {
+                "selected": 11,
+                "accepted": 11
+              },
+              "REFRESH_VIEW": {
+                "selected": 5,
+                "accepted": 5
+              }
+            },
+            "families": 8,
+            "family_macro_acceptance": 0.7646227240896358,
+            "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+          },
+          "weighted_ce_mean": 1.222751681925729,
+          "train": {
+            "counts": {
+              "labelled": 373,
+              "accepted": 285,
+              "handoff_outside_reviewed_preference": 50
+            },
+            "strata": {
+              "acquire_evidence_preference": {
+                "labelled": 262,
+                "accepted": 177
+              },
+              "ready_handoff_preference": {
+                "labelled": 111,
+                "accepted": 108
+              }
+            },
+            "selected_operations": {
+              "SEARCH": {
+                "selected": 75,
+                "accepted": 75
+              },
+              "READ": {
+                "selected": 112,
+                "accepted": 75
+              },
+              "HANDOFF": {
+                "selected": 158,
+                "accepted": 108
+              },
+              "REFRESH_VIEW": {
+                "selected": 7,
+                "accepted": 6
+              },
+              "USE_VIEW": {
+                "selected": 21,
+                "accepted": 21
+              }
+            },
+            "families": 24,
+            "family_macro_acceptance": 0.768271349608424,
+            "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+          }
+        }
+      ],
+      "compute": {
+        "wall_seconds": 290.7853554012254,
+        "cpu_seconds": 331.588276168,
+        "runs": 1,
+        "train_sequence_rows": 1536,
+        "train_input_tokens": 2286678,
+        "train_batch_forwards": 1536,
+        "train_device_forwards": 1536,
+        "train_batch_attempts": 1536,
+        "train_offered_rows": 1536,
+        "train_offered_tokens": 2286678,
+        "dev_forwards": 278,
+        "dev_sequence_rows": 278,
+        "dev_input_tokens": 441292,
+        "dev_state_tokenizations": 278,
+        "dev_state_tokens": 384308,
+        "train_eval_forwards": 373,
+        "train_eval_sequence_rows": 373,
+        "train_eval_input_tokens": 555109,
+        "train_eval_state_tokenizations": 373,
+        "train_eval_state_tokens": 475747,
+        "peak_rss_kib": 4604560,
+        "peak_cuda_allocated_bytes": [
+          9168889344,
+          0
+        ],
+        "ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json"
+      },
+      "ledger_phase": "dynamic_memory_t1_original_shared_seed0_v2",
+      "ledger_verified_once": true
+    },
+    "broader": {
+      "run": "artifacts/dynamic-memory-control/t1-fitting-v2/t1-broader-shared-seed0-v2/run.json",
+      "checkpoint": "artifacts/dynamic-memory-control/t1-fitting-v2/t1-broader-shared-seed0-v2/checkpoint",
+      "train_states": 468,
+      "history": [
+        {
+          "optimizer_updates": 48,
+          "weighted_loss_mean": 1.2690347840322527,
+          "dev": {
+            "counts": {
+              "labelled": 125,
+              "accepted": 84,
+              "handoff_outside_reviewed_preference": 41,
+              "masked": 14
+            },
+            "strata": {
+              "acquire_evidence_preference": {
+                "labelled": 89,
+                "accepted": 48
+              },
+              "ready_handoff_preference": {
+                "labelled": 36,
+                "accepted": 36
+              }
+            },
+            "selected_operations": {
+              "SEARCH": {
+                "selected": 10,
+                "accepted": 10
+              },
+              "READ": {
+                "selected": 14,
+                "accepted": 14
+              },
+              "HANDOFF": {
+                "selected": 77,
+                "accepted": 36
+              },
+              "USE_VIEW": {
+                "selected": 24,
+                "accepted": 24
+              }
+            },
+            "families": 8,
+            "family_macro_acceptance": 0.6787742180205415,
+            "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+          },
+          "weighted_ce_mean": 1.2690347840322527
+        },
+        {
+          "optimizer_updates": 96,
+          "weighted_loss_mean": 1.0529409365556905,
+          "dev": {
+            "counts": {
+              "labelled": 125,
+              "accepted": 107,
+              "handoff_outside_reviewed_preference": 15,
+              "masked": 14
+            },
+            "strata": {
+              "acquire_evidence_preference": {
+                "labelled": 89,
+                "accepted": 71
+              },
+              "ready_handoff_preference": {
+                "labelled": 36,
+                "accepted": 36
+              }
+            },
+            "selected_operations": {
+              "SEARCH": {
+                "selected": 8,
+                "accepted": 8
+              },
+              "READ": {
+                "selected": 26,
+                "accepted": 23
+              },
+              "HANDOFF": {
+                "selected": 51,
+                "accepted": 36
+              },
+              "USE_VIEW": {
+                "selected": 36,
+                "accepted": 36
+              },
+              "REFRESH_VIEW": {
+                "selected": 4,
+                "accepted": 4
+              }
+            },
+            "families": 8,
+            "family_macro_acceptance": 0.862936216153128,
+            "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+          },
+          "weighted_ce_mean": 1.0529409365556905,
+          "train": {
+            "counts": {
+              "labelled": 468,
+              "accepted": 422,
+              "handoff_outside_reviewed_preference": 28
+            },
+            "strata": {
+              "acquire_evidence_preference": {
+                "labelled": 336,
+                "accepted": 297
+              },
+              "ready_handoff_preference": {
+                "labelled": 132,
+                "accepted": 125
+              }
+            },
+            "selected_operations": {
+              "SEARCH": {
+                "selected": 55,
+                "accepted": 54
+              },
+              "REFRESH_VIEW": {
+                "selected": 35,
+                "accepted": 34
+              },
+              "READ": {
+                "selected": 83,
+                "accepted": 67
+              },
+              "HANDOFF": {
+                "selected": 153,
+                "accepted": 125
+              },
+              "USE_VIEW": {
+                "selected": 142,
+                "accepted": 142
+              }
+            },
+            "families": 36,
+            "family_macro_acceptance": 0.9156651764462652,
+            "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+          }
+        }
+      ],
+      "compute": {
+        "wall_seconds": 460.2435373067856,
+        "cpu_seconds": 562.468737322,
+        "runs": 1,
+        "train_sequence_rows": 1536,
+        "train_input_tokens": 3036660,
+        "train_batch_forwards": 1536,
+        "train_device_forwards": 1536,
+        "train_batch_attempts": 1536,
+        "train_offered_rows": 1536,
+        "train_offered_tokens": 3036660,
+        "dev_forwards": 278,
+        "dev_sequence_rows": 278,
+        "dev_input_tokens": 441292,
+        "dev_state_tokenizations": 278,
+        "dev_state_tokens": 384308,
+        "train_eval_forwards": 468,
+        "train_eval_sequence_rows": 468,
+        "train_eval_input_tokens": 931875,
+        "train_eval_state_tokenizations": 468,
+        "train_eval_state_tokens": 835542,
+        "peak_rss_kib": 4489144,
+        "peak_cuda_allocated_bytes": [
+          22681642496,
+          0
+        ],
+        "ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json"
+      },
+      "ledger_phase": "dynamic_memory_t1_broader_shared_seed0_v2",
+      "ledger_verified_once": true
+    }
+  },
+  "qualifications": [
+    "Seed0development only; matching operation preferences is not end-to-end task success.",
+    "Both arms start from the same original BASE, use shared inputs,max12288,micro1/effective16,96updates and fixed final96. No best checkpoint selection.",
+    "Original24families373labels versus36families468labels; broader arm receives more and longer input tokens, so this is not compute-matched.",
+    "Original139base dev outputs and failed empty-shard attempt remain separately recorded. No zero-step rerun or replacement.",
+    "Actual learned rollouts, external dev task results, protected confirmation/all seeds and broader cohort remain pending."
+  ]
+}

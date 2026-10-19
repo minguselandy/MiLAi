@@ -138,12 +138,24 @@ class HostRequestProgress:
             for _, row in self.rows()
         ]
 
+    def observation_messages(self) -> list[ToolMessage]:
+        """Actual visible query receipts already delivered in the request-progress frame."""
+        messages = []
+        for row in self.snapshot():
+            observed = row["business"].get("observation", {})
+            if "delivery_response" in observed:
+                message = ToolMessage.model_validate(observed["delivery_response"])
+                message.additional_kwargs = {
+                    **message.additional_kwargs, "milai_origin": "program_observation"}
+                messages.append(message)
+        return messages
+
     def _target(self, request: Any) -> dict[str, Any] | None:
         name, arguments = request.tool_call["name"], request.tool_call["args"]
         if name != "complete_label":
             field = "title" if self.app.workflow == "document_publication_v1" else "item_key"
             return {field: arguments[field]}
-        for message in reversed(request.state["messages"]):
+        for message in reversed([*request.state["messages"], *self.adapter.delivered_observations]):
             if not isinstance(message, ToolMessage) or message.name not in self.app.tool_names:
                 continue
             try:

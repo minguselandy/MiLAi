@@ -3008,6 +3008,9 @@ def message(
                 )
                 if mode["protocol"] == "native_scope_requests_v9":
                     output["request_mode"] = mode
+                if "business_mutation" in mode.get("forbidden_operations", []):
+                    mode.update(business_action_request="none", business_operations=[],
+                                application_requests=[], allow_business_mutation=False)
                 if mode.get("read_goal") is not None and memory.memory_view_mode != "legacy":
                     view = memory.view_state(cfg)
                     if view["read_goal"] is None:
@@ -3617,6 +3620,13 @@ def message(
                 trace({"event": "functional_material_delivery", "material": material})
                 trace({"event": "functional_memory_effects", "effects": effects})
                 refresh_requests()
+                progress_observations = tracker.observation_messages() if tracker else []
+                if adapter is not None:
+                    adapter.delivered_observations = progress_observations
+                delivered_calls = {row.tool_call_id for row in wire_messages
+                                   if isinstance(row, ToolMessage)}
+                receipt_messages = [*wire_messages, *(row for row in progress_observations
+                                    if row.tool_call_id not in delivered_calls)]
                 if settings.get("capability_delivery") == "actual_catalog_v1":
                     active = [] if for_finalization else sorted(available_tool_names(config))
                     capability_text = (
@@ -3670,7 +3680,7 @@ def message(
                     return {"llm_input_messages": [
                         SystemMessage(content=final_input[0]["content"]),
                         HumanMessage(content=final_input[1]["content"]),
-                    ], "receipt_messages": wire_messages, "receipt_material": material}
+                    ], "receipt_messages": receipt_messages, "receipt_material": material}
                 return {
                     "llm_input_messages": [
                         SystemMessage(
@@ -3741,7 +3751,7 @@ def message(
                             + json.dumps(material, ensure_ascii=False)
                         ),
                         *wire_messages,
-                    ]
+                    ], "receipt_messages": receipt_messages,
                 }
 
             call_wrapper = app.call_wrapper(
@@ -4276,7 +4286,8 @@ def message(
                     or (effects["business"]["observations"]
                         and settings.get("finalization") != "receipt_or_agent_response_v1")
                     or (effects.get("application_requests")
-                        and settings.get("finalization") == "receipt_or_agent_response_v1")
+                        and settings.get("finalization") == "receipt_or_agent_response_v1"
+                        and mode and mode["business_action_request"] != "none")
                     or (
                         settings.get("finalization") == "receipt_business_response_v1"
                         and mode
@@ -4331,7 +4342,8 @@ def message(
                         # Preserve the answer and separately report its actual
                         # matched observations, without a new model call.
                         observed = business_response(receipt_input, effects, {},
-                            include_business=observations_appended, include_memory_feedback=False)
+                            include_business=observations_appended,
+                            include_memory_feedback=bool(effects.get("application_requests")))
                         final = final.model_copy(update={
                             "content": str(final.content) + "\n\n" + str(observed.content)})
                     if memory_receipts_appended:

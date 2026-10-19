@@ -6349,16 +6349,18 @@ def test_shared_host_delivers_selected_prior_request_beyond_recent_context(
 
 
 @pytest.mark.parametrize("recipe", ["single_pass", "extract_then_edit"])
-@pytest.mark.parametrize("continuation,scope_requests", [
-    pytest.param("complete", False, id="complete"),
-    pytest.param("no_save", False, id="no_save"),
-    pytest.param("readonly", False, id="readonly"),
-    pytest.param("empty_save", False, id="empty_save"),
-    pytest.param("complete", True, id="complete-scoped"),
+@pytest.mark.parametrize("continuation,scope_requests,internal_observation", [
+    pytest.param("complete", False, False, id="complete"),
+    pytest.param("no_save", False, False, id="no_save"),
+    pytest.param("readonly", False, False, id="readonly"),
+    pytest.param("empty_save", False, False, id="empty_save"),
+    pytest.param("complete", True, False, id="complete-scoped"),
+    pytest.param("no_save", True, True, id="label-from-progress-observation"),
+    pytest.param("readonly", True, True, id="readonly-progress-answer"),
 ])
 def test_complete_host_request_survives_partial_effect_and_new_session(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, recipe: str, continuation: str,
-    scope_requests: bool,
+    scope_requests: bool, internal_observation: bool,
 ) -> None:
     root = prepared(tmp_path, native=True, complete_requests=True, scope_requests=scope_requests,
         actual_capabilities=True,
@@ -6490,6 +6492,17 @@ def test_complete_host_request_survives_partial_effect_and_new_session(
             if current == initial_text:
                 seen["reserve"] += 1
                 return native_call("reserve_and_label", "reserve", **reserved)
+            if internal_observation:
+                progress = json.loads(next(line[len(functional.PROGRESS_PREFIX):]
+                    for line in system.splitlines() if line.startswith(functional.PROGRESS_PREFIX)))
+                observed = progress[0]["business"]["observation"]["receipt"]
+                assert observed["status"] == "found" and observed["label_status"] == "not_created"
+                if continuation == "readonly":
+                    return {"role": "assistant", "content":
+                        "The live reservation is for1 teal pack at local in a box; no label yet."}
+                seen["label"] += 1
+                return native_call("complete_label", "label-from-progress",
+                                   reservation_id=observed["reservation_id"])
             return native_call("get_reservation", "query", item_key="teal pack")
         last = tools[-1]
         if last["name"] == "get_reservation" and continuation != "readonly":
@@ -6522,6 +6535,9 @@ def test_complete_host_request_survives_partial_effect_and_new_session(
     assert second["status"] == "COMPLETED", second.get("error")
     progress = second["application_requests"][0]
     assert progress["request_id"] == original["request_id"]
+    if continuation == "readonly" and internal_observation:
+        assert second["final_answer"].startswith("The live reservation is for1 teal pack")
+        assert second["finalization"]["protocol"] == "agent_response_v1"
     assert seen["current_plan"] == int(scope_requests)
     assert seen["reserve"] == 1 and seen["label"] == int(continuation != "readonly")
     assert len(second["world"]["world"]["attempts"]) == 1 + int(continuation != "readonly")
@@ -7223,8 +7239,10 @@ def test_dynamic_host_reads_unformed_source_and_explicitly_consolidates_once(
 
 @pytest.mark.parametrize("evidence", [None, ["original_source"], ["live_business"],
                                       ["original_source", "live_business"]])
+@pytest.mark.parametrize("declared_action", ["none", "perform"])
 def test_memory_handoff_preserves_declared_live_business_queries(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, evidence: list[str] | None,
+    declared_action: str,
 ) -> None:
     root = prepared(tmp_path, native=True, json_scope_requests=True, direct_response=True,
         declaration_thinking="disabled", phase_thinking=True,
@@ -7240,7 +7258,8 @@ def test_memory_handoff_preserves_declared_live_business_queries(
         if ordinal == 1:
             return {"role": "assistant", "content": json.dumps({
                 "memory_requests": [], "allow_forgetting": False,
-                "business_action_request": "none", "application_continuation_request": "none",
+                "business_action_request": declared_action,
+                "application_continuation_request": "none",
                 "response_scope": "substantive", "forbidden_operations": [
                     "business_mutation", "memory_write"],
                 "read_goal": {"purpose": query, "evidence": evidence} if evidence else None})}

@@ -70,6 +70,7 @@ class SandboxApplicationAdapter:
         self.owner, self.session, self.turn_id = app.owner, session, turn_id
         self.can_read, self.allowed_operations = can_read, frozenset(allowed_operations)
         self.reuse_current_observations = reuse_current_observations
+        self.delivered_observations: list[ToolMessage] = []
         self.query = (
             "get_document_status"
             if app.workflow == "document_publication_v1"
@@ -160,7 +161,7 @@ class SandboxApplicationAdapter:
         operation: str,
         arguments: Mapping[str, Any],
     ) -> VerifiedObjectRef | None:
-        for message in reversed(messages):
+        for message in reversed([*messages, *self.delivered_observations]):
             if not isinstance(message, ToolMessage) or message.name not in self.app.tool_names:
                 continue
             try:
