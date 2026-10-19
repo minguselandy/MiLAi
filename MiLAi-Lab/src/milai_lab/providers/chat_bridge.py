@@ -267,8 +267,11 @@ class VLLMChatModel(BaseChatModel):
         request = ChatRequest(wire_messages, messages, tools, native, kwargs)
         if self.request_transform is not None:
             self.request_transform.validate(request)
+        tool_choice = kwargs.get("tool_choice")
+        named_tool = any(tool_choice == {"type": "function", "function": {
+            "name": tool["function"]["name"]}} for tool in tools)
         if native and (
-            kwargs.get("tool_choice") not in (None, "auto", "none", "required")
+            (tool_choice not in (None, "auto", "none", "required") and not named_tool)
             or (kwargs.get("tool_choice") == "required"
                 and (not self.allow_required_tool_choice or not tools))
             or self.client.config.response_format is not None

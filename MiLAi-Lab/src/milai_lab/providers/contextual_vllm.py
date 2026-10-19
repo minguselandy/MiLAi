@@ -146,7 +146,7 @@ class VLLMClient:
         messages: Sequence[Mapping[str, Any]],
         tools: Sequence[dict[str, Any]] | None = None,
         *,
-        tool_choice: str | None = None,
+        tool_choice: str | dict[str, Any] | None = None,
         response_format: dict[str, Any] | None = None,
         top_p: float | None = None,
         presence_penalty: float | None = None,

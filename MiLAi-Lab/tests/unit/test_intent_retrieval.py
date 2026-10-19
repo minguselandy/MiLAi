@@ -160,6 +160,8 @@ def test_normal_host_runner_calls_tool_and_receives_evidence(tmp_path, monkeypat
         tools = {t["function"]["name"] for t in wire.get("tools", [])}
         receipts = [m for m in wire["messages"] if m["role"] == "tool"]
         if not receipts:
+            assert wire["tool_choice"] == {
+                "type": "function", "function": {"name": "milai_retrieve"}}
             assert "milai_retrieve" in tools
             assert "read_evidence" not in tools and "search_memory" not in tools
             return {"role": "assistant", "content": "", "tool_calls": [{"id": "retrieve-1",
@@ -167,11 +169,19 @@ def test_normal_host_runner_calls_tool_and_receives_evidence(tmp_path, monkeypat
                     json.dumps({"query": "approval threshold", "read_goal": {
                         "purpose": "quote the original threshold"}})}}]}
         evidence = json.loads(receipts[-1]["content"])
+        assert wire["tool_choice"] == "none"
         assert "1000" in json.dumps(evidence["evidence"])
         return {"role": "assistant", "content": "The reported approval threshold was 1000."}
 
     wires = scripted(monkeypatch, reply, native=True)
+    from langchain_core.messages import ToolMessage
+
+    def native_probe(messages):
+        return ("none" if any(isinstance(m, ToolMessage) for m in messages) else
+                {"type": "function", "function": {"name": "milai_retrieve"}})
+
     result = message(root, bank="intent", owner="alice", session="host", message_id="query",
+        model_tool_choice=native_probe,
         content="What approval threshold did I report?", incoming_sources=[{
             "event_key": "reported-threshold", "session_id": "history", "role": "user",
             "content": "A approval threshold is 1000."}])

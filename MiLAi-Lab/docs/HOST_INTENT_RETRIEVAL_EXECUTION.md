@@ -83,3 +83,15 @@ PYTHONPATH=src <existing-cuda-env>/bin/python tools/run_host_intent_retrieval.py
 
 占位路径须替换为已存在环境；真实运行从本地提交的冻结副本启动。原始轨迹/数据库/
 权重留 ignored artifacts；目前无远端发布或合并。
+
+## 首次原生派发失败与适配修订
+
+冻结源码 `bbf27e2b` 的 `runs/e0-first-history-v1` 在第一个规则位置进入原 Host，
+但聊天桥在 HTTP 前拒绝命名 tool_choice，错误 `NATIVE_CHAT_PROTOCOL_UNSUPPORTED`。
+驱动已终止；1个失败位置保留，3个位置未开始。generation_requests、生成/embedding
+用量和 unknown_usage 增量均为0。没有把这次失败替换成成功或自动重试。
+
+修订只允许命名选择当前实际目录中的函数，仍保留未知名称、required限制和
+response_format边界。正常Host测试显式发出命名选择，修改前重现失败，修改后通过。
+新用例/Provider检查23通过；一个旧 `json_zero_tools` manual golden 不匹配，
+已在未修改 Provider 的冻结 bbf27e2b 上重现同一项失败，属于已有差异；未刷新 golden。两模块 mypy 和包边界通过。
