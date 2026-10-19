@@ -59,7 +59,6 @@
   "labels": "Do not copy rule/generative actions as gold. Review actual request intent, supports, current observations and views; ambiguous labels masked. No blanket SEARCH/USE_VIEW/REFRESH positives.",
   "native_e0_status": "0/24; thiscollection does not substitute for native E0. Sharedservice restart approval pending.",
   "budget": "original continuous ledger; every first failure and its cost retained",
-  "model_calls_so_far": 65,
   "sha_verification": false,
   "pilot_run": "artifacts/host-intent-retrieval-v3/runs/t0-pilot-v1",
   "pilot_result": "data/manifests/host-intent-retrieval-v3-t0-pilot-review.json",
@@ -74,7 +73,10 @@
     "run": "artifacts/host-intent-retrieval-v3/runs/t0-main-train-v2",
     "pid": 3815344,
     "exec_session": 24523,
-    "observed_closed_positions": 11
+    "observed_closed_positions": 192,
+    "observed_failures": 9,
+    "observed_at": "2026-10-19T17:03:58.018127+00:00"
   },
-  "pilot_positions_closed": 20
+  "pilot_positions_closed": 20,
+  "pilot_model_http_calls": 65
 }

@@ -1,21 +1,25 @@
-# LIVE UPDATE 2026-10-20: 648 reviewed labels; same collection continues
+# LIVE UPDATE 2026-10-20: 994 labels, exact saved versions, same running collection
 
-Main PID3815344 / exec24523 / frozen8f7f2a18 RUNNING, snapshot145/272 closed (9 failures).
-Revalidate driver/proc; do not restart or duplicate on observation timeout. No offline settlement while live.
-Closed prefix v4 has963 states from29 touched groups. Source reviews v7 approve108 actual requests
-from28 groups;3 conflicting/drifted requests held. Merged stored-version review ->648 labelled,
-48 forced /96 ambiguous /171 unreviewed masked. All963 state/questions unchanged; prior806 full rows
-identical after exporter indexing optimization. All133 observed deliveries match final visible labels.
-Data: artifacts/host-intent-retrieval-v3/data/t0-reviewed-prefix-v7; review requests in
- data/t0-main-closed-prefix-v4/original-witness-reviews-v7.json under the same artifact root.
-Tracked witness-labels-prefix and view-review-prefix manifests describe partial, not fit-ready data.
-Three views reviewed: B01 persisted but not delivered due budget; B06 rejected for absent rule nodes;
-B22 delivered with attribution qualification. No blanket USE_VIEW/REFRESH positive labels.
-Only exporter changed this checkpoint; Ruff/mypy pass. Running frozen source untouched. No new weights.
-Measured export/compile/audit costs: data/pending-offline-review-v2.json, NOT settled. Human/other untimed
-work unmeasured, not zero. Continue remaining source reviews, then dev64/generative48 serially.
-Native E0 still0/24; shared7860 parser change permission PENDING. No SHA/subagents/new service/second
-ledger/old-position replay or repair. Full goal ACTIVE; historical counts below are not current state.
+Main PID3815344 / exec24523 / frozen8f7f2a18 RUNNING; snapshot196/272 closed, 9 failures.
+Revalidate driver and /proc; never duplicate/restart on observation timeout. No offline settlement while live.
+Closed prefix v6:1259 states,38 groups. Source reviews v9:152 requests; plus16 explicitly reviewed
+saved-version requests. Combined t0-reviewed-prefix-v9:994 labels,67 forced/177 ambiguous/21 held
+masks. Three held requests remain two A27 drifted scopes and C04 current_public_message conflict.
+All1259 inputs unchanged; prior1129 full rows equal.173 actual deliveries match final visible labels.
+Actual Laya tokenizer/shared projection audit: max8530 tokens under12288/head2048,zero truncation,
+zero forwards. No v3 weights trained; cohort and generative-view supervision still incomplete.
+Saved-version review uses real save/update receipts and read-only snapshots:103 labels/128 states;
+11 actually opened target bodies checked in full. Five first-version requests never opened target;
+no HANDOFF label there. Current-vs-first follows explicit request review, not evidence-keyword routing.
+Review script and data remain under ignored artifacts/.../data; no runtime code changed this turn.
+Source v9 also handles A05 assistant-only3D and60/90-day suggestion as assistant reports, not user facts.
+102 refresh operations in closed prefix:50 opened/49 budget rejections/3 view rejections.68 occurred
+when reviewed raw source proof was already sufficient:68 HTTP receipts,208428 known tokens.
+This is descriptive work after source sufficiency, not net counterfactual savings or answer correctness.
+Pending measured offline costs v3 references earlier v2. Both NOT settled; human/untimed work unknown,
+not zero. Continue remaining source reviews, then dev64/generative48 serially after main actually closes.
+Native E0 still0/24; existing7860 parser-change permission PENDING. No SHA/subagents/new services/second
+ledger/old-position retries or repair. Full goal ACTIVE. Historical counts below are superseded.
 
 # LIVE UPDATE 2026-10-20: source review started; samemainjobrunning
 

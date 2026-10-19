@@ -1,21 +1,21 @@
 {
-  "states": 963,
-  "labelled": 648,
+  "states": 1259,
+  "labelled": 994,
   "status_counts": {
-    "source_reviewed_preference": 648,
-    "forced_single_action_masked": 48,
-    "unreviewed_masked": 171,
-    "reviewed_ambiguous_masked": 96
+    "source_reviewed_preference": 994,
+    "forced_single_action_masked": 67,
+    "reviewed_ambiguous_masked": 177,
+    "unreviewed_masked": 21
   },
-  "states_source": "artifacts/host-intent-retrieval-v3/data/t0-main-closed-prefix-v4/train.jsonl",
-  "reviews": "artifacts/host-intent-retrieval-v3/data/t0-main-closed-prefix-v4/combined-reviews-v2.json",
+  "states_source": "artifacts/host-intent-retrieval-v3/data/t0-main-closed-prefix-v6/train.jsonl",
+  "reviews": "artifacts/host-intent-retrieval-v3/data/t0-main-closed-prefix-v6/combined-reviews-v3.json",
   "input_changes": 0,
   "teacher_actions_copied": false,
-  "scope": "Whole-turn sufficient source witnesses and explicit literal saved-version review, not minimum or optimal utility proofs. Source identities/roles/arrival cuts and exact actual Host requests are checked offline.",
-  "status": "PARTIAL_SOURCE_REVIEW_NOT_FIT_READY",
-  "source_groups": 28,
-  "actual_source_requests_reviewed": 108,
-  "additional_stored_version_request": 1,
+  "scope": "Source witnesses and explicit saved-version judgments on closed training trajectories. No optimal-cost or full training-readiness claim.",
+  "status": "PARTIAL_COHORT_REVIEW_NOT_FIT_READY",
+  "source_groups": 38,
+  "actual_source_requests_reviewed": 152,
+  "saved_version_requests_reviewed": 16,
   "held_request_count": 3,
   "held_requests": [
     {
@@ -34,20 +34,73 @@
   "reviewer": "assistant author, not independent judgment",
   "original_inputs_equal": true,
   "prior_full_row_equality": {
-    "matched": 806,
-    "compared": 806
+    "prior_full_rows_compared": 1129,
+    "prior_full_rows_identical": 1129
   },
   "actual_delivery_audit": {
-    "closed_trace_files": 126,
-    "actual_tool_deliveries": 133,
-    "matching_visible_and_returned_labels": 133,
+    "closed_trace_files": 165,
+    "actual_tool_deliveries": 173,
+    "matching_visible_and_returned_labels": 173,
     "mismatches": []
   },
-  "read_preference": "Adds missing request-reviewed original evidence and fits the complete live return packet.",
-  "search_preference": "Only an observed search successor adding missing witnesses; not every executable SEARCH.",
-  "view_preference": "No automatic USE_VIEW or REFRESH positives; nonoriginal material needs explicit review.",
+  "read_preference": "Adds missing request-reviewed evidence or exact requested saved revision and fits the complete live return packet.",
+  "search_preference": "Observed search adds a needed witness or the specifically requested record.",
+  "saved_version_preference": "Explicit request interpretation identifies current or first saved version. Existing record/unit/revision identity and actual snapshot bodies are checked; no evidence-keyword route is trained as a rule.",
+  "view_preference": "No automatic USE_VIEW or REFRESH positives. Of 50 successful refreshes,49 already had sufficient reviewed raw sources;1 request has a held scope conflict. This does not prove full view validity or downstream savings.",
+  "refresh_prefix_audit": {
+    "refresh_statuses": {
+      "view_opened": 50,
+      "material_budget_exhausted": 49,
+      "view_rejected": 3
+    },
+    "successful_refresh_before_source_status": {
+      "reviewed_originals_sufficient": 49,
+      "request_unreviewed": 1
+    },
+    "qualification": "Readiness is only for reviewed original-source proof; not whole graph correctness, savings or counterfactual generation success."
+  },
+  "length_audit": {
+    "rows": 1259,
+    "max_len": 12288,
+    "head_max_len": 2048,
+    "oversized": 0,
+    "max_sequence_tokens": 8530,
+    "max_state_dropped": 0,
+    "max_head_dropped": 0,
+    "state_projection": "shared",
+    "model_forwards": 0
+  },
   "model_calls": 0,
-  "unmeasured_research_cost": "Human source review, earlier compilation, and some verification were not timed; not zero. Three measured offline phases retained pending settlement; no settlement during the live model run.",
-  "measured_offline_work": "artifacts/host-intent-retrieval-v3/data/pending-offline-review-v2.json",
-  "data_path": "artifacts/host-intent-retrieval-v3/data/t0-reviewed-prefix-v7"
+  "unmeasured_research_cost": "Human annotation and untimed analysis remain unmeasured, not zero. Measured offline phases await actual idle.",
+  "measured_offline_work": "artifacts/host-intent-retrieval-v3/data/pending-offline-review-v3.json",
+  "data_path": "artifacts/host-intent-retrieval-v3/data/t0-reviewed-prefix-v9",
+  "refresh_observed_cost_prefix": {
+    "by_before_source_proof": {
+      "reviewed_originals_sufficient": {
+        "refresh_operations": 68,
+        "observed_http_responses": 68,
+        "known_tokens": 208428,
+        "http_wall_seconds": 331.02464010193944
+      },
+      "reviewed_missing_original_progress": {
+        "refresh_operations": 4,
+        "observed_http_responses": 4,
+        "known_tokens": 22282,
+        "http_wall_seconds": 20.392155218869448
+      },
+      "request_unreviewed": {
+        "refresh_operations": 5,
+        "observed_http_responses": 5,
+        "known_tokens": 16688,
+        "http_wall_seconds": 28.107208319939673
+      },
+      "no_reviewed_progress_masked": {
+        "refresh_operations": 25,
+        "observed_http_responses": 25,
+        "known_tokens": 170174,
+        "http_wall_seconds": 179.20501328539103
+      }
+    },
+    "scope": "Closed-position HTTP receipts only; ongoing-run ledger not settled/reconciled. Source proof is request-specific author judgment. Counts describe generation after already sufficient raw evidence, not net counterfactual savings or final answer correctness."
+  }
 }
