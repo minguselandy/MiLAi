@@ -65,8 +65,14 @@ Ruff,mypy and package/tools boundariesPASS. No actual auxiliary model run or mix
 Frozen c0770e49 training and63603feb tool evaluation remain unchanged.
 Author spot review8randomgroups/11rows done:9topically supported (2explicit factuality-unverified),
 2qualified relevance boundaries; labelsunchanged, not independent or exhaustive. Sampleartifact underauxdir.
-8measured offlinephases now pending-v6 (14.655381CPU); failed tokenizer-root diagnostic wall5.83700721
+10measured offlinephases now pending-v6 (14.844556CPU); failed tokenizer-root diagnostic wall5.83700721
 known,CPUunmeasured. Do not settle while fitter lives. See followir-applicability manifest.
+
+T1 expanded metadata/source inputs prepared:128train/32dev primarygroups; new64/16groups,
+228/52 new positions. Use data/t1-sources-v1/new-histories.json only for new collection; full-histories
+preserves every oldT0 input. Allnewpools/requests/labels and T1mixedfitting remainpending.
+Manifest t1-allocation and t1-source-preparation;4source tests,static/tools boundaryPASS.
+Next model job remains T0seed0 dev64, not T1 collection. No old position replay.
 
 # LIVE UPDATE 2026-10-20: source review started; samemainjobrunning
 

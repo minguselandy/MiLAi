@@ -735,3 +735,23 @@ stored-vs-original（9/22）；same-name-scope只从12/26增至13/26。中点未
 Ruff与mypy通过（tools使用CUDA依赖环境，provider使用HTTP环境保留其可选依赖注释）。
 该新增入口未进行实际辅助模型评价或混合T1训练，当前T0训练与已登记工具评价仍使用各自
 原冻结版本。T1混合采样/扩展数据/等更新预算仍须完成。
+
+
+## 2026-10-20：T1扩展来源登记与新输入准备
+
+以既有admission及reference-boundary为依据，保留全部T0分组，加入剩余已获准MuSiQue
+来源并以seed0从已获准2Wiki元数据均匀抽取7train/5dev组。主来源合计128train、32dev：
+train为57MemOps+64MuSiQue+7补充2Wiki，dev为8MemOps+13MuSiQue+6作者历史+5补充2Wiki。
+既有冲突family000503继续排除；FollowIR965/241辅助主题不计入主来源数。选择未使用本轮
+策略表现，已暴露train/dev的复用不宣称新增独立背景；完整背景/预训练隔离仍未证明。
+2Wiki保持原作者训练材料来源标识，不虚构独立数据许可，也不授权发布派生正文。
+
+新增CLI只导出新增64train/16dev组，共228/52位置（两接口），保留原问题与全部原段落，
+答案/支持/answerable仅在offline-references。full-histories中的全部T0输入逐项未变；
+新采集必须使用new-histories，不能再跑旧位置。源码来源身份与既有split核对、公开投影
+及不重复旧组的4项回归通过，Ruff、mypy和tools边界通过。准备零模型调用，测量成本加入
+pending-v6，当前训练存活期间未结算。
+
+这不是T1轨迹、监督或拟合完成：新来源池/实际请求仍须审阅，混合采样与等更新预算待
+真实有效标签统计后冻结。下一模型作业顺序仍为当前T0最终诊断/权重完成后，执行已登记
+的64位置Laya工具开发评价。

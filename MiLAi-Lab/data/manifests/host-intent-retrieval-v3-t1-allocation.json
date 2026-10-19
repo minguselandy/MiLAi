@@ -1,0 +1,2584 @@
+{
+  "status": "METADATA_ALLOCATED_NOT_NEW_TRAJECTORIES_OR_T1_FITTING",
+  "selection_seed": 0,
+  "selection": "Retain all T0 groups. Use every remaining admitted MuSiQue train/dev family except existing boundary exclusion; sample7train/5dev already-admitted2Wiki groups uniformly from sorted family metadata. No task/model outcome used.",
+  "train": {
+    "memops": [
+      {
+        "family": "A01",
+        "split": "train",
+        "file": "A01_update.json",
+        "operation_type": "Update",
+        "track": "source_task"
+      },
+      {
+        "family": "A02",
+        "split": "train",
+        "file": "A02_update.json",
+        "operation_type": "Update",
+        "track": "source_task"
+      },
+      {
+        "family": "A04",
+        "split": "train",
+        "file": "A04_remember.json",
+        "operation_type": "Remember",
+        "track": "source_task"
+      },
+      {
+        "family": "A05",
+        "split": "train",
+        "file": "A05_trajectory_ops.json",
+        "operation_type": "TrajectoryOps",
+        "track": "source_task"
+      },
+      {
+        "family": "A07",
+        "split": "train",
+        "file": "A07_reflect.json",
+        "operation_type": "Reflect",
+        "track": "source_task"
+      },
+      {
+        "family": "A13",
+        "split": "train",
+        "file": "A13_reflect.json",
+        "operation_type": "Reflect",
+        "track": "source_task"
+      },
+      {
+        "family": "A14",
+        "split": "train",
+        "file": "A14_trajectory_ops.json",
+        "operation_type": "TrajectoryOps",
+        "track": "source_task"
+      },
+      {
+        "family": "A16",
+        "split": "train",
+        "file": "A16_trajectory_ops.json",
+        "operation_type": "TrajectoryOps",
+        "track": "source_task"
+      },
+      {
+        "family": "A20",
+        "split": "train",
+        "file": "A20_reflect.json",
+        "operation_type": "Reflect",
+        "track": "source_task"
+      },
+      {
+        "family": "A22",
+        "split": "train",
+        "file": "A22_reflect.json",
+        "operation_type": "Reflect",
+        "track": "source_task"
+      },
+      {
+        "family": "A27",
+        "split": "train",
+        "file": "A27_reflect.json",
+        "operation_type": "Reflect",
+        "track": "source_task"
+      },
+      {
+        "family": "A28",
+        "split": "train",
+        "file": "A28_remember.json",
+        "operation_type": "Remember",
+        "track": "source_task"
+      },
+      {
+        "family": "A29",
+        "split": "train",
+        "file": "A29_trajectory_ops.json",
+        "operation_type": "TrajectoryOps",
+        "track": "source_task"
+      },
+      {
+        "family": "A33",
+        "split": "train",
+        "file": "A33_update.json",
+        "operation_type": "Update",
+        "track": "source_task"
+      },
+      {
+        "family": "B01",
+        "split": "train",
+        "file": "B01_reflect.json",
+        "operation_type": "Reflect",
+        "track": "source_task"
+      },
+      {
+        "family": "B02",
+        "split": "train",
+        "file": "B02_remember.json",
+        "operation_type": "Remember",
+        "track": "source_task"
+      },
+      {
+        "family": "B03",
+        "split": "train",
+        "file": "B03_trajectory_ops.json",
+        "operation_type": "TrajectoryOps",
+        "track": "source_task"
+      },
+      {
+        "family": "B05",
+        "split": "train",
+        "file": "B05_update.json",
+        "operation_type": "Update",
+        "track": "source_task"
+      },
+      {
+        "family": "B06",
+        "split": "train",
+        "file": "B06_reflect.json",
+        "operation_type": "Reflect",
+        "track": "source_task"
+      },
+      {
+        "family": "B10",
+        "split": "train",
+        "file": "B10_remember.json",
+        "operation_type": "Remember",
+        "track": "source_task"
+      },
+      {
+        "family": "B12",
+        "split": "train",
+        "file": "B12_update.json",
+        "operation_type": "Update",
+        "track": "source_task"
+      },
+      {
+        "family": "B21",
+        "split": "train",
+        "file": "B21_update.json",
+        "operation_type": "Update",
+        "track": "source_task"
+      },
+      {
+        "family": "B22",
+        "split": "train",
+        "file": "B22_reflect.json",
+        "operation_type": "Reflect",
+        "track": "source_task"
+      },
+      {
+        "family": "B25",
+        "split": "train",
+        "file": "B25_trajectory_ops.json",
+        "operation_type": "TrajectoryOps",
+        "track": "source_task"
+      },
+      {
+        "family": "B26",
+        "split": "train",
+        "file": "B26_trajectory_ops.json",
+        "operation_type": "TrajectoryOps",
+        "track": "source_task"
+      },
+      {
+        "family": "C01",
+        "split": "train",
+        "file": "C01_update.json",
+        "operation_type": "Update",
+        "track": "source_task"
+      },
+      {
+        "family": "C02",
+        "split": "train",
+        "file": "C02_trajectory_ops.json",
+        "operation_type": "TrajectoryOps",
+        "track": "source_task"
+      },
+      {
+        "family": "C04",
+        "split": "train",
+        "file": "C04_trajectory_ops.json",
+        "operation_type": "TrajectoryOps",
+        "track": "source_task"
+      },
+      {
+        "family": "C05",
+        "split": "train",
+        "file": "C05_trajectory_ops.json",
+        "operation_type": "TrajectoryOps",
+        "track": "source_task"
+      },
+      {
+        "family": "C07",
+        "split": "train",
+        "file": "C07_update.json",
+        "operation_type": "Update",
+        "track": "source_task"
+      },
+      {
+        "family": "C10",
+        "split": "train",
+        "file": "C10_update.json",
+        "operation_type": "Update",
+        "track": "source_task"
+      },
+      {
+        "family": "C11",
+        "split": "train",
+        "file": "C11_reflect.json",
+        "operation_type": "Reflect",
+        "track": "source_task"
+      },
+      {
+        "family": "C23",
+        "split": "train",
+        "file": "C23_trajectory_ops.json",
+        "operation_type": "TrajectoryOps",
+        "track": "source_task"
+      },
+      {
+        "family": "C26",
+        "split": "train",
+        "file": "C26_update.json",
+        "operation_type": "Update",
+        "track": "source_task"
+      },
+      {
+        "family": "C27",
+        "split": "train",
+        "file": "C27_reflect.json",
+        "operation_type": "Reflect",
+        "track": "source_task"
+      },
+      {
+        "family": "C28",
+        "split": "train",
+        "file": "C28_remember.json",
+        "operation_type": "Remember",
+        "track": "source_task"
+      },
+      {
+        "family": "C29",
+        "split": "train",
+        "file": "C29_trajectory_ops.json",
+        "operation_type": "TrajectoryOps",
+        "track": "source_task"
+      },
+      {
+        "family": "D02",
+        "split": "train",
+        "file": "D02_update.json",
+        "operation_type": "Update",
+        "track": "source_task"
+      },
+      {
+        "family": "D11",
+        "split": "train",
+        "file": "D11_reflect.json",
+        "operation_type": "Reflect",
+        "track": "source_task"
+      },
+      {
+        "family": "D14",
+        "split": "train",
+        "file": "D14_remember.json",
+        "operation_type": "Remember",
+        "track": "source_task"
+      },
+      {
+        "family": "D17",
+        "split": "train",
+        "file": "D17_trajectory_ops.json",
+        "operation_type": "TrajectoryOps",
+        "track": "source_task"
+      },
+      {
+        "family": "D18",
+        "split": "train",
+        "file": "D18_update.json",
+        "operation_type": "Update",
+        "track": "source_task"
+      },
+      {
+        "family": "D19",
+        "split": "train",
+        "file": "D19_update.json",
+        "operation_type": "Update",
+        "track": "source_task"
+      },
+      {
+        "family": "D20",
+        "split": "train",
+        "file": "D20_reflect.json",
+        "operation_type": "Reflect",
+        "track": "source_task"
+      },
+      {
+        "family": "D21",
+        "split": "train",
+        "file": "D21_trajectory_ops.json",
+        "operation_type": "TrajectoryOps",
+        "track": "source_task"
+      },
+      {
+        "family": "D23",
+        "split": "train",
+        "file": "D23_trajectory_ops.json",
+        "operation_type": "TrajectoryOps",
+        "track": "source_task"
+      },
+      {
+        "family": "E01",
+        "split": "train",
+        "file": "E01_remember.json",
+        "operation_type": "Remember",
+        "track": "source_task"
+      },
+      {
+        "family": "E07",
+        "split": "train",
+        "file": "E07_reflect.json",
+        "operation_type": "Reflect",
+        "track": "source_task"
+      },
+      {
+        "family": "E10",
+        "split": "train",
+        "file": "E10_remember.json",
+        "operation_type": "Remember",
+        "track": "source_task"
+      },
+      {
+        "family": "E11",
+        "split": "train",
+        "file": "E11_trajectory_ops.json",
+        "operation_type": "TrajectoryOps",
+        "track": "source_task"
+      },
+      {
+        "family": "E14",
+        "split": "train",
+        "file": "E14_reflect.json",
+        "operation_type": "Reflect",
+        "track": "source_task"
+      },
+      {
+        "family": "F06",
+        "split": "train",
+        "file": "F06_reflect.json",
+        "operation_type": "Reflect",
+        "track": "source_task"
+      },
+      {
+        "family": "F07",
+        "split": "train",
+        "file": "F07_reflect.json",
+        "operation_type": "Reflect",
+        "track": "source_task"
+      },
+      {
+        "family": "F08",
+        "split": "train",
+        "file": "F08_trajectory_ops.json",
+        "operation_type": "TrajectoryOps",
+        "track": "source_task"
+      },
+      {
+        "family": "F12",
+        "split": "train",
+        "file": "F12_update.json",
+        "operation_type": "Update",
+        "track": "source_task"
+      },
+      {
+        "family": "F13",
+        "split": "train",
+        "file": "F13_reflect.json",
+        "operation_type": "Reflect",
+        "track": "source_task"
+      },
+      {
+        "family": "F14",
+        "split": "train",
+        "file": "F14_trajectory_ops.json",
+        "operation_type": "TrajectoryOps",
+        "track": "source_task"
+      }
+    ],
+    "musique": [
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000580",
+        "question_id": "2hop__87392_237509",
+        "source_rows": [
+          13888,
+          32204
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000236",
+        "question_id": "2hop__143075_377721",
+        "source_rows": [
+          1683,
+          14914
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000469",
+        "question_id": "2hop__435842_185893",
+        "source_rows": [
+          8772,
+          23184
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000783",
+        "question_id": "2hop__78083_188496",
+        "source_rows": [
+          3721,
+          28247
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000232",
+        "question_id": "2hop__68240_527576",
+        "source_rows": [
+          23869,
+          26656
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000643",
+        "question_id": "2hop__855152_71859",
+        "source_rows": [
+          31023,
+          35750
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000316",
+        "question_id": "2hop__143153_226090",
+        "source_rows": [
+          897,
+          25317
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000742",
+        "question_id": "2hop__66162_50225",
+        "source_rows": [
+          38745,
+          39722
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000289",
+        "question_id": "2hop__142515_31413",
+        "source_rows": [
+          31972,
+          34954
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000465",
+        "question_id": "2hop__840399_24352",
+        "source_rows": [
+          9713
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000706",
+        "question_id": "2hop__551022_210507",
+        "source_rows": [
+          4204,
+          30349
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000384",
+        "question_id": "2hop__145949_724126",
+        "source_rows": [
+          33802
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000180",
+        "question_id": "2hop__130639_29360",
+        "source_rows": [
+          31739,
+          32401
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000552",
+        "question_id": "2hop__806210_51671",
+        "source_rows": [
+          202,
+          6272
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000276",
+        "question_id": "2hop__141921_774871",
+        "source_rows": [
+          6588,
+          9186
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000010",
+        "question_id": "2hop__101960_136211",
+        "source_rows": [
+          29614,
+          35060
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000710",
+        "question_id": "2hop__569859_733106",
+        "source_rows": [
+          2817,
+          12620
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000525",
+        "question_id": "2hop__215144_790182",
+        "source_rows": [
+          20998,
+          30875
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000766",
+        "question_id": "2hop__73552_439537",
+        "source_rows": [
+          18441,
+          33114
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000606",
+        "question_id": "2hop__320476_281260",
+        "source_rows": [
+          11776,
+          19882
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000238",
+        "question_id": "2hop__74087_279044",
+        "source_rows": [
+          21103,
+          31984
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000571",
+        "question_id": "2hop__500064_592778",
+        "source_rows": [
+          2806,
+          5436
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000764",
+        "question_id": "2hop__843427_386778",
+        "source_rows": [
+          17655,
+          25490
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000675",
+        "question_id": "2hop__87357_65477",
+        "source_rows": [
+          17151,
+          25333
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000237",
+        "question_id": "2hop__269321_523858",
+        "source_rows": [
+          12659,
+          17720
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000098",
+        "question_id": "2hop__118355_825694",
+        "source_rows": [
+          22344,
+          24029
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000261",
+        "question_id": "2hop__141239_140916",
+        "source_rows": [
+          4327,
+          13262
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000462",
+        "question_id": "2hop__166845_159000",
+        "source_rows": [
+          35943
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000789",
+        "question_id": "2hop__799085_504109",
+        "source_rows": [
+          16036,
+          38105
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000309",
+        "question_id": "2hop__143873_127008",
+        "source_rows": [
+          2419,
+          32609
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000116",
+        "question_id": "2hop__595934_79705",
+        "source_rows": [
+          5060,
+          37423
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000303",
+        "question_id": "2hop__259942_126711",
+        "source_rows": [
+          37771
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000404",
+        "question_id": "3hop1__150120_301867_127418",
+        "source_rows": [
+          3991,
+          23786
+        ],
+        "native_max_decomposition_steps": 3,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000053",
+        "question_id": "3hop1__458856_630864_159045",
+        "source_rows": [
+          4547,
+          25996
+        ],
+        "native_max_decomposition_steps": 3,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000856",
+        "question_id": "3hop1__66960_300878_161879",
+        "source_rows": [
+          2427,
+          10869
+        ],
+        "native_max_decomposition_steps": 3,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000125",
+        "question_id": "3hop1__358656_182905_638959",
+        "source_rows": [
+          8341,
+          11699
+        ],
+        "native_max_decomposition_steps": 3,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000374",
+        "question_id": "3hop1__343268_298775_622895",
+        "source_rows": [
+          6552,
+          11010
+        ],
+        "native_max_decomposition_steps": 3,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000219",
+        "question_id": "3hop1__614774_42467_91253",
+        "source_rows": [
+          28688,
+          31405
+        ],
+        "native_max_decomposition_steps": 3,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000870",
+        "question_id": "3hop1__628275_196807_760519",
+        "source_rows": [
+          13162,
+          22561
+        ],
+        "native_max_decomposition_steps": 3,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000030",
+        "question_id": "3hop1__156060_561308_69291",
+        "source_rows": [
+          10118,
+          22459
+        ],
+        "native_max_decomposition_steps": 3,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000827",
+        "question_id": "3hop1__108877_305746_691523",
+        "source_rows": [
+          8409,
+          19299
+        ],
+        "native_max_decomposition_steps": 3,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "family": "musique-family-000477",
+        "question_id": "2hop__792975_539716",
+        "source_rows": [
+          12152,
+          33148
+        ],
+        "native_max_decomposition_steps": 2,
+        "split": "train",
+        "from_first_draw": false
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "family": "musique-family-000691",
+        "question_id": "2hop__52582_47867",
+        "source_rows": [
+          17900
+        ],
+        "native_max_decomposition_steps": 2,
+        "split": "train",
+        "from_first_draw": false
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "family": "musique-family-000732",
+        "question_id": "2hop__63539_85918",
+        "source_rows": [
+          942,
+          13163
+        ],
+        "native_max_decomposition_steps": 2,
+        "split": "train",
+        "from_first_draw": false
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "family": "musique-family-000104",
+        "question_id": "2hop__121170_720425",
+        "source_rows": [
+          4099,
+          14364
+        ],
+        "native_max_decomposition_steps": 2,
+        "split": "train",
+        "from_first_draw": false
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "family": "musique-family-000222",
+        "question_id": "2hop__152913_760193",
+        "source_rows": [
+          5787,
+          16229
+        ],
+        "native_max_decomposition_steps": 2,
+        "split": "train",
+        "from_first_draw": false
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "family": "musique-family-000692",
+        "question_id": "2hop__55488_506296",
+        "source_rows": [
+          20083,
+          26210
+        ],
+        "native_max_decomposition_steps": 2,
+        "split": "train",
+        "from_first_draw": false
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "family": "musique-family-000262",
+        "question_id": "2hop__140213_750102",
+        "source_rows": [
+          11064,
+          25066
+        ],
+        "native_max_decomposition_steps": 2,
+        "split": "train",
+        "from_first_draw": false
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "family": "musique-family-000239",
+        "question_id": "2hop__13398_864388",
+        "source_rows": [
+          25122,
+          32560
+        ],
+        "native_max_decomposition_steps": 2,
+        "split": "train",
+        "from_first_draw": false
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "family": "musique-family-000296",
+        "question_id": "2hop__142888_303417",
+        "source_rows": [
+          4410
+        ],
+        "native_max_decomposition_steps": 2,
+        "split": "train",
+        "from_first_draw": false
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "family": "musique-family-000451",
+        "question_id": "2hop__51749_43074",
+        "source_rows": [
+          25049,
+          37314
+        ],
+        "native_max_decomposition_steps": 2,
+        "split": "train",
+        "from_first_draw": false
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "family": "musique-family-000312",
+        "question_id": "2hop__743155_46366",
+        "source_rows": [
+          17763,
+          24554
+        ],
+        "native_max_decomposition_steps": 2,
+        "split": "train",
+        "from_first_draw": false
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "family": "musique-family-000085",
+        "question_id": "2hop__25968_727337",
+        "source_rows": [
+          2388,
+          30816
+        ],
+        "native_max_decomposition_steps": 2,
+        "split": "train",
+        "from_first_draw": false
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "family": "musique-family-000683",
+        "question_id": "2hop__510585_535604",
+        "source_rows": [
+          10077,
+          35110
+        ],
+        "native_max_decomposition_steps": 2,
+        "split": "train",
+        "from_first_draw": false
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "family": "musique-family-000255",
+        "question_id": "2hop__136275_240540",
+        "source_rows": [
+          2708,
+          5714
+        ],
+        "native_max_decomposition_steps": 2,
+        "split": "train",
+        "from_first_draw": false
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "family": "musique-family-000555",
+        "question_id": "2hop__305388_224387",
+        "source_rows": [
+          3925,
+          15354
+        ],
+        "native_max_decomposition_steps": 2,
+        "split": "train",
+        "from_first_draw": false
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "family": "musique-family-000664",
+        "question_id": "2hop__90091_83984",
+        "source_rows": [
+          31689,
+          34915
+        ],
+        "native_max_decomposition_steps": 2,
+        "split": "train",
+        "from_first_draw": false
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "family": "musique-family-000329",
+        "question_id": "2hop__425992_64214",
+        "source_rows": [
+          5790,
+          12240
+        ],
+        "native_max_decomposition_steps": 2,
+        "split": "train",
+        "from_first_draw": false
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "family": "musique-family-000007",
+        "question_id": "2hop__105411_90561",
+        "source_rows": [
+          9655,
+          30507
+        ],
+        "native_max_decomposition_steps": 2,
+        "split": "train",
+        "from_first_draw": false
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "family": "musique-family-000492",
+        "question_id": "2hop__709686_26789",
+        "source_rows": [
+          4025,
+          24360
+        ],
+        "native_max_decomposition_steps": 2,
+        "split": "train",
+        "from_first_draw": false
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "family": "musique-family-000047",
+        "question_id": "2hop__107374_49114",
+        "source_rows": [
+          39422
+        ],
+        "native_max_decomposition_steps": 2,
+        "split": "train",
+        "from_first_draw": false
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "family": "musique-family-000100",
+        "question_id": "2hop__118994_316166",
+        "source_rows": [
+          17256,
+          23793
+        ],
+        "native_max_decomposition_steps": 2,
+        "split": "train",
+        "from_first_draw": false
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "family": "musique-family-000011",
+        "question_id": "2hop__178263_52185",
+        "source_rows": [
+          2062,
+          16067
+        ],
+        "native_max_decomposition_steps": 2,
+        "split": "train",
+        "from_first_draw": false
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "family": "musique-family-000381",
+        "question_id": "2hop__145663_817204",
+        "source_rows": [
+          7405,
+          18778
+        ],
+        "native_max_decomposition_steps": 2,
+        "split": "train",
+        "from_first_draw": false
+      }
+    ],
+    "two_wiki": [
+      {
+        "dataset": "two_wiki_author_train",
+        "split": "train",
+        "family": "two-wiki-family-029087",
+        "question_id": "8f2da26708ea11ebbda7ac1f6bf848b6",
+        "source_rows": [
+          133441
+        ],
+        "native_support_titles": 2,
+        "native_reference_relations": 2,
+        "native_type": "comparison",
+        "whole_family_rows": 1,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "two_wiki_author_train",
+        "split": "train",
+        "family": "two-wiki-family-028404",
+        "question_id": "8b30892008f511ebbdaaac1f6bf848b6",
+        "source_rows": [
+          126856
+        ],
+        "native_support_titles": 2,
+        "native_reference_relations": 2,
+        "native_type": "comparison",
+        "whole_family_rows": 1,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "two_wiki_author_train",
+        "split": "train",
+        "family": "two-wiki-family-036808",
+        "question_id": "bedcb7fa089411ebbd75ac1f6bf848b6",
+        "source_rows": [
+          69819
+        ],
+        "native_support_titles": 4,
+        "native_reference_relations": 4,
+        "native_type": "bridge_comparison",
+        "whole_family_rows": 1,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "two_wiki_author_train",
+        "split": "train",
+        "family": "two-wiki-family-015907",
+        "question_id": "8c78e547088411ebbd6dac1f6bf848b6",
+        "source_rows": [
+          152040
+        ],
+        "native_support_titles": 4,
+        "native_reference_relations": 4,
+        "native_type": "bridge_comparison",
+        "whole_family_rows": 5,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "two_wiki_author_train",
+        "split": "train",
+        "family": "two-wiki-family-002308",
+        "question_id": "d7cebd2008c211ebbd8cac1f6bf848b6",
+        "source_rows": [
+          98344
+        ],
+        "native_support_titles": 4,
+        "native_reference_relations": 4,
+        "native_type": "bridge_comparison",
+        "whole_family_rows": 3,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "two_wiki_author_train",
+        "split": "train",
+        "family": "two-wiki-family-011171",
+        "question_id": "312155e00bde11eba7f7acde48001122",
+        "source_rows": [
+          20414
+        ],
+        "native_support_titles": 2,
+        "native_reference_relations": 2,
+        "native_type": "compositional",
+        "whole_family_rows": 1,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "two_wiki_author_train",
+        "split": "train",
+        "family": "two-wiki-family-019227",
+        "question_id": "592d3fc208a511ebbd7dac1f6bf848b6",
+        "source_rows": [
+          94572
+        ],
+        "native_support_titles": 4,
+        "native_reference_relations": 4,
+        "native_type": "bridge_comparison",
+        "whole_family_rows": 1,
+        "from_first_draw": true
+      }
+    ]
+  },
+  "dev": {
+    "memops": [
+      {
+        "family": "A19",
+        "split": "dev",
+        "file": "A19_update.json",
+        "operation_type": "Update",
+        "track": "source_task"
+      },
+      {
+        "family": "A32",
+        "split": "dev",
+        "file": "A32_reflect.json",
+        "operation_type": "Reflect",
+        "track": "source_task"
+      },
+      {
+        "family": "B30",
+        "split": "dev",
+        "file": "B30_trajectory_ops.json",
+        "operation_type": "TrajectoryOps",
+        "track": "source_task"
+      },
+      {
+        "family": "C03",
+        "split": "dev",
+        "file": "C03_trajectory_ops.json",
+        "operation_type": "TrajectoryOps",
+        "track": "source_task"
+      },
+      {
+        "family": "D25",
+        "split": "dev",
+        "file": "D25_reflect.json",
+        "operation_type": "Reflect",
+        "track": "source_task"
+      },
+      {
+        "family": "E08",
+        "split": "dev",
+        "file": "E08_reflect.json",
+        "operation_type": "Reflect",
+        "track": "source_task"
+      },
+      {
+        "family": "E15",
+        "split": "dev",
+        "file": "E15_remember.json",
+        "operation_type": "Remember",
+        "track": "source_task"
+      },
+      {
+        "family": "F01",
+        "split": "dev",
+        "file": "F01_trajectory_ops.json",
+        "operation_type": "TrajectoryOps",
+        "track": "source_task"
+      }
+    ],
+    "musique": [
+      {
+        "dataset": "musique_train_mirror",
+        "split": "dev",
+        "family": "musique-family-000475",
+        "question_id": "2hop__175229_493912",
+        "source_rows": [
+          3780,
+          16065
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "dev",
+        "family": "musique-family-000217",
+        "question_id": "2hop__1317_1327",
+        "source_rows": [
+          39246,
+          39309
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "dev",
+        "family": "musique-family-000293",
+        "question_id": "2hop__740985_126727",
+        "source_rows": [
+          1781,
+          31098
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "dev",
+        "family": "musique-family-000499",
+        "question_id": "2hop__359385_373394",
+        "source_rows": [
+          3484,
+          19394
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "dev",
+        "family": "musique-family-000306",
+        "question_id": "2hop__360970_161358",
+        "source_rows": [
+          21248
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "dev",
+        "family": "musique-family-000641",
+        "question_id": "2hop__431059_720696",
+        "source_rows": [
+          28634,
+          36356
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "dev",
+        "family": "musique-family-000339",
+        "question_id": "2hop__321624_500443",
+        "source_rows": [
+          4115,
+          22435
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "dev",
+        "family": "musique-family-000693",
+        "question_id": "2hop__753565_276103",
+        "source_rows": [
+          10845,
+          10943
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "dev",
+        "family": "musique-family-000879",
+        "question_id": "3hop1__537710_837052_487197",
+        "source_rows": [
+          39623,
+          39805
+        ],
+        "native_max_decomposition_steps": 3,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "family": "musique-family-000767",
+        "question_id": "2hop__758696_789970",
+        "source_rows": [
+          11241,
+          20765
+        ],
+        "native_max_decomposition_steps": 2,
+        "split": "dev",
+        "from_first_draw": false
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "family": "musique-family-000076",
+        "question_id": "2hop__116307_307978",
+        "source_rows": [
+          12317,
+          14422
+        ],
+        "native_max_decomposition_steps": 2,
+        "split": "dev",
+        "from_first_draw": false
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "family": "musique-family-000752",
+        "question_id": "2hop__79419_476825",
+        "source_rows": [
+          5087,
+          9233
+        ],
+        "native_max_decomposition_steps": 2,
+        "split": "dev",
+        "from_first_draw": false
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "family": "musique-family-000663",
+        "question_id": "2hop__613265_495107",
+        "source_rows": [
+          3480,
+          28012
+        ],
+        "native_max_decomposition_steps": 2,
+        "split": "dev",
+        "from_first_draw": false
+      }
+    ],
+    "two_wiki": [
+      {
+        "dataset": "two_wiki_author_train",
+        "split": "dev",
+        "family": "two-wiki-family-044772",
+        "question_id": "f3d0a910085011ebbd58ac1f6bf848b6",
+        "source_rows": [
+          120547
+        ],
+        "native_support_titles": 2,
+        "native_reference_relations": 2,
+        "native_type": "comparison",
+        "whole_family_rows": 1,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "two_wiki_author_train",
+        "split": "dev",
+        "family": "two-wiki-family-004030",
+        "question_id": "53518bca089211ebbd73ac1f6bf848b6",
+        "source_rows": [
+          149749
+        ],
+        "native_support_titles": 4,
+        "native_reference_relations": 5,
+        "native_type": "bridge_comparison",
+        "whole_family_rows": 5,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "two_wiki_author_train",
+        "split": "dev",
+        "family": "two-wiki-family-037004",
+        "question_id": "c00cae1c08aa11ebbd80ac1f6bf848b6",
+        "source_rows": [
+          85853
+        ],
+        "native_support_titles": 4,
+        "native_reference_relations": 4,
+        "native_type": "bridge_comparison",
+        "whole_family_rows": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "two_wiki_author_train",
+        "split": "dev",
+        "family": "two-wiki-family-002801",
+        "question_id": "0a9de7ee08d211ebbd95ac1f6bf848b6",
+        "source_rows": [
+          98150
+        ],
+        "native_support_titles": 4,
+        "native_reference_relations": 4,
+        "native_type": "bridge_comparison",
+        "whole_family_rows": 1,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "two_wiki_author_train",
+        "split": "dev",
+        "family": "two-wiki-family-006134",
+        "question_id": "5c35a55a08a111ebbd79ac1f6bf848b6",
+        "source_rows": [
+          76787
+        ],
+        "native_support_titles": 4,
+        "native_reference_relations": 4,
+        "native_type": "bridge_comparison",
+        "whole_family_rows": 3,
+        "from_first_draw": true
+      }
+    ],
+    "authored": [
+      "authored-language-preference-v3",
+      "authored-effective-threshold-v3",
+      "authored-stored-vs-original-v3",
+      "authored-partial-evidence-v3",
+      "authored-same-name-scope-v3",
+      "authored-changed-view-missing-detail-v3"
+    ]
+  },
+  "primary_source_groups": {
+    "train": 128,
+    "dev": 32
+  },
+  "new_source_groups": {
+    "train": 64,
+    "dev": 16
+  },
+  "new_positions_two_interfaces": {
+    "train": 228,
+    "dev": 52
+  },
+  "new_sources": {
+    "train": [
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000580",
+        "question_id": "2hop__87392_237509",
+        "source_rows": [
+          13888,
+          32204
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000236",
+        "question_id": "2hop__143075_377721",
+        "source_rows": [
+          1683,
+          14914
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000469",
+        "question_id": "2hop__435842_185893",
+        "source_rows": [
+          8772,
+          23184
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000783",
+        "question_id": "2hop__78083_188496",
+        "source_rows": [
+          3721,
+          28247
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000232",
+        "question_id": "2hop__68240_527576",
+        "source_rows": [
+          23869,
+          26656
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000643",
+        "question_id": "2hop__855152_71859",
+        "source_rows": [
+          31023,
+          35750
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000316",
+        "question_id": "2hop__143153_226090",
+        "source_rows": [
+          897,
+          25317
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000742",
+        "question_id": "2hop__66162_50225",
+        "source_rows": [
+          38745,
+          39722
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000289",
+        "question_id": "2hop__142515_31413",
+        "source_rows": [
+          31972,
+          34954
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000465",
+        "question_id": "2hop__840399_24352",
+        "source_rows": [
+          9713
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000706",
+        "question_id": "2hop__551022_210507",
+        "source_rows": [
+          4204,
+          30349
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000384",
+        "question_id": "2hop__145949_724126",
+        "source_rows": [
+          33802
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000180",
+        "question_id": "2hop__130639_29360",
+        "source_rows": [
+          31739,
+          32401
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000276",
+        "question_id": "2hop__141921_774871",
+        "source_rows": [
+          6588,
+          9186
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000010",
+        "question_id": "2hop__101960_136211",
+        "source_rows": [
+          29614,
+          35060
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000525",
+        "question_id": "2hop__215144_790182",
+        "source_rows": [
+          20998,
+          30875
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000606",
+        "question_id": "2hop__320476_281260",
+        "source_rows": [
+          11776,
+          19882
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000238",
+        "question_id": "2hop__74087_279044",
+        "source_rows": [
+          21103,
+          31984
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000571",
+        "question_id": "2hop__500064_592778",
+        "source_rows": [
+          2806,
+          5436
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000764",
+        "question_id": "2hop__843427_386778",
+        "source_rows": [
+          17655,
+          25490
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000675",
+        "question_id": "2hop__87357_65477",
+        "source_rows": [
+          17151,
+          25333
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000237",
+        "question_id": "2hop__269321_523858",
+        "source_rows": [
+          12659,
+          17720
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000098",
+        "question_id": "2hop__118355_825694",
+        "source_rows": [
+          22344,
+          24029
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000261",
+        "question_id": "2hop__141239_140916",
+        "source_rows": [
+          4327,
+          13262
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000462",
+        "question_id": "2hop__166845_159000",
+        "source_rows": [
+          35943
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000789",
+        "question_id": "2hop__799085_504109",
+        "source_rows": [
+          16036,
+          38105
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000309",
+        "question_id": "2hop__143873_127008",
+        "source_rows": [
+          2419,
+          32609
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000116",
+        "question_id": "2hop__595934_79705",
+        "source_rows": [
+          5060,
+          37423
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000303",
+        "question_id": "2hop__259942_126711",
+        "source_rows": [
+          37771
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000053",
+        "question_id": "3hop1__458856_630864_159045",
+        "source_rows": [
+          4547,
+          25996
+        ],
+        "native_max_decomposition_steps": 3,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000125",
+        "question_id": "3hop1__358656_182905_638959",
+        "source_rows": [
+          8341,
+          11699
+        ],
+        "native_max_decomposition_steps": 3,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000374",
+        "question_id": "3hop1__343268_298775_622895",
+        "source_rows": [
+          6552,
+          11010
+        ],
+        "native_max_decomposition_steps": 3,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000219",
+        "question_id": "3hop1__614774_42467_91253",
+        "source_rows": [
+          28688,
+          31405
+        ],
+        "native_max_decomposition_steps": 3,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000870",
+        "question_id": "3hop1__628275_196807_760519",
+        "source_rows": [
+          13162,
+          22561
+        ],
+        "native_max_decomposition_steps": 3,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000030",
+        "question_id": "3hop1__156060_561308_69291",
+        "source_rows": [
+          10118,
+          22459
+        ],
+        "native_max_decomposition_steps": 3,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "train",
+        "family": "musique-family-000827",
+        "question_id": "3hop1__108877_305746_691523",
+        "source_rows": [
+          8409,
+          19299
+        ],
+        "native_max_decomposition_steps": 3,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "family": "musique-family-000477",
+        "question_id": "2hop__792975_539716",
+        "source_rows": [
+          12152,
+          33148
+        ],
+        "native_max_decomposition_steps": 2,
+        "split": "train",
+        "from_first_draw": false
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "family": "musique-family-000691",
+        "question_id": "2hop__52582_47867",
+        "source_rows": [
+          17900
+        ],
+        "native_max_decomposition_steps": 2,
+        "split": "train",
+        "from_first_draw": false
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "family": "musique-family-000732",
+        "question_id": "2hop__63539_85918",
+        "source_rows": [
+          942,
+          13163
+        ],
+        "native_max_decomposition_steps": 2,
+        "split": "train",
+        "from_first_draw": false
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "family": "musique-family-000222",
+        "question_id": "2hop__152913_760193",
+        "source_rows": [
+          5787,
+          16229
+        ],
+        "native_max_decomposition_steps": 2,
+        "split": "train",
+        "from_first_draw": false
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "family": "musique-family-000692",
+        "question_id": "2hop__55488_506296",
+        "source_rows": [
+          20083,
+          26210
+        ],
+        "native_max_decomposition_steps": 2,
+        "split": "train",
+        "from_first_draw": false
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "family": "musique-family-000262",
+        "question_id": "2hop__140213_750102",
+        "source_rows": [
+          11064,
+          25066
+        ],
+        "native_max_decomposition_steps": 2,
+        "split": "train",
+        "from_first_draw": false
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "family": "musique-family-000239",
+        "question_id": "2hop__13398_864388",
+        "source_rows": [
+          25122,
+          32560
+        ],
+        "native_max_decomposition_steps": 2,
+        "split": "train",
+        "from_first_draw": false
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "family": "musique-family-000296",
+        "question_id": "2hop__142888_303417",
+        "source_rows": [
+          4410
+        ],
+        "native_max_decomposition_steps": 2,
+        "split": "train",
+        "from_first_draw": false
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "family": "musique-family-000451",
+        "question_id": "2hop__51749_43074",
+        "source_rows": [
+          25049,
+          37314
+        ],
+        "native_max_decomposition_steps": 2,
+        "split": "train",
+        "from_first_draw": false
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "family": "musique-family-000312",
+        "question_id": "2hop__743155_46366",
+        "source_rows": [
+          17763,
+          24554
+        ],
+        "native_max_decomposition_steps": 2,
+        "split": "train",
+        "from_first_draw": false
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "family": "musique-family-000085",
+        "question_id": "2hop__25968_727337",
+        "source_rows": [
+          2388,
+          30816
+        ],
+        "native_max_decomposition_steps": 2,
+        "split": "train",
+        "from_first_draw": false
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "family": "musique-family-000683",
+        "question_id": "2hop__510585_535604",
+        "source_rows": [
+          10077,
+          35110
+        ],
+        "native_max_decomposition_steps": 2,
+        "split": "train",
+        "from_first_draw": false
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "family": "musique-family-000255",
+        "question_id": "2hop__136275_240540",
+        "source_rows": [
+          2708,
+          5714
+        ],
+        "native_max_decomposition_steps": 2,
+        "split": "train",
+        "from_first_draw": false
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "family": "musique-family-000555",
+        "question_id": "2hop__305388_224387",
+        "source_rows": [
+          3925,
+          15354
+        ],
+        "native_max_decomposition_steps": 2,
+        "split": "train",
+        "from_first_draw": false
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "family": "musique-family-000329",
+        "question_id": "2hop__425992_64214",
+        "source_rows": [
+          5790,
+          12240
+        ],
+        "native_max_decomposition_steps": 2,
+        "split": "train",
+        "from_first_draw": false
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "family": "musique-family-000007",
+        "question_id": "2hop__105411_90561",
+        "source_rows": [
+          9655,
+          30507
+        ],
+        "native_max_decomposition_steps": 2,
+        "split": "train",
+        "from_first_draw": false
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "family": "musique-family-000492",
+        "question_id": "2hop__709686_26789",
+        "source_rows": [
+          4025,
+          24360
+        ],
+        "native_max_decomposition_steps": 2,
+        "split": "train",
+        "from_first_draw": false
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "family": "musique-family-000047",
+        "question_id": "2hop__107374_49114",
+        "source_rows": [
+          39422
+        ],
+        "native_max_decomposition_steps": 2,
+        "split": "train",
+        "from_first_draw": false
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "family": "musique-family-000100",
+        "question_id": "2hop__118994_316166",
+        "source_rows": [
+          17256,
+          23793
+        ],
+        "native_max_decomposition_steps": 2,
+        "split": "train",
+        "from_first_draw": false
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "family": "musique-family-000011",
+        "question_id": "2hop__178263_52185",
+        "source_rows": [
+          2062,
+          16067
+        ],
+        "native_max_decomposition_steps": 2,
+        "split": "train",
+        "from_first_draw": false
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "family": "musique-family-000381",
+        "question_id": "2hop__145663_817204",
+        "source_rows": [
+          7405,
+          18778
+        ],
+        "native_max_decomposition_steps": 2,
+        "split": "train",
+        "from_first_draw": false
+      },
+      {
+        "dataset": "two_wiki_author_train",
+        "split": "train",
+        "family": "two-wiki-family-029087",
+        "question_id": "8f2da26708ea11ebbda7ac1f6bf848b6",
+        "source_rows": [
+          133441
+        ],
+        "native_support_titles": 2,
+        "native_reference_relations": 2,
+        "native_type": "comparison",
+        "whole_family_rows": 1,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "two_wiki_author_train",
+        "split": "train",
+        "family": "two-wiki-family-028404",
+        "question_id": "8b30892008f511ebbdaaac1f6bf848b6",
+        "source_rows": [
+          126856
+        ],
+        "native_support_titles": 2,
+        "native_reference_relations": 2,
+        "native_type": "comparison",
+        "whole_family_rows": 1,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "two_wiki_author_train",
+        "split": "train",
+        "family": "two-wiki-family-036808",
+        "question_id": "bedcb7fa089411ebbd75ac1f6bf848b6",
+        "source_rows": [
+          69819
+        ],
+        "native_support_titles": 4,
+        "native_reference_relations": 4,
+        "native_type": "bridge_comparison",
+        "whole_family_rows": 1,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "two_wiki_author_train",
+        "split": "train",
+        "family": "two-wiki-family-015907",
+        "question_id": "8c78e547088411ebbd6dac1f6bf848b6",
+        "source_rows": [
+          152040
+        ],
+        "native_support_titles": 4,
+        "native_reference_relations": 4,
+        "native_type": "bridge_comparison",
+        "whole_family_rows": 5,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "two_wiki_author_train",
+        "split": "train",
+        "family": "two-wiki-family-002308",
+        "question_id": "d7cebd2008c211ebbd8cac1f6bf848b6",
+        "source_rows": [
+          98344
+        ],
+        "native_support_titles": 4,
+        "native_reference_relations": 4,
+        "native_type": "bridge_comparison",
+        "whole_family_rows": 3,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "two_wiki_author_train",
+        "split": "train",
+        "family": "two-wiki-family-011171",
+        "question_id": "312155e00bde11eba7f7acde48001122",
+        "source_rows": [
+          20414
+        ],
+        "native_support_titles": 2,
+        "native_reference_relations": 2,
+        "native_type": "compositional",
+        "whole_family_rows": 1,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "two_wiki_author_train",
+        "split": "train",
+        "family": "two-wiki-family-019227",
+        "question_id": "592d3fc208a511ebbd7dac1f6bf848b6",
+        "source_rows": [
+          94572
+        ],
+        "native_support_titles": 4,
+        "native_reference_relations": 4,
+        "native_type": "bridge_comparison",
+        "whole_family_rows": 1,
+        "from_first_draw": true
+      }
+    ],
+    "dev": [
+      {
+        "dataset": "musique_train_mirror",
+        "split": "dev",
+        "family": "musique-family-000475",
+        "question_id": "2hop__175229_493912",
+        "source_rows": [
+          3780,
+          16065
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "dev",
+        "family": "musique-family-000217",
+        "question_id": "2hop__1317_1327",
+        "source_rows": [
+          39246,
+          39309
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "dev",
+        "family": "musique-family-000293",
+        "question_id": "2hop__740985_126727",
+        "source_rows": [
+          1781,
+          31098
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "dev",
+        "family": "musique-family-000499",
+        "question_id": "2hop__359385_373394",
+        "source_rows": [
+          3484,
+          19394
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "dev",
+        "family": "musique-family-000306",
+        "question_id": "2hop__360970_161358",
+        "source_rows": [
+          21248
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "dev",
+        "family": "musique-family-000641",
+        "question_id": "2hop__431059_720696",
+        "source_rows": [
+          28634,
+          36356
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "dev",
+        "family": "musique-family-000339",
+        "question_id": "2hop__321624_500443",
+        "source_rows": [
+          4115,
+          22435
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "split": "dev",
+        "family": "musique-family-000693",
+        "question_id": "2hop__753565_276103",
+        "source_rows": [
+          10845,
+          10943
+        ],
+        "native_max_decomposition_steps": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "family": "musique-family-000767",
+        "question_id": "2hop__758696_789970",
+        "source_rows": [
+          11241,
+          20765
+        ],
+        "native_max_decomposition_steps": 2,
+        "split": "dev",
+        "from_first_draw": false
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "family": "musique-family-000076",
+        "question_id": "2hop__116307_307978",
+        "source_rows": [
+          12317,
+          14422
+        ],
+        "native_max_decomposition_steps": 2,
+        "split": "dev",
+        "from_first_draw": false
+      },
+      {
+        "dataset": "musique_train_mirror",
+        "family": "musique-family-000663",
+        "question_id": "2hop__613265_495107",
+        "source_rows": [
+          3480,
+          28012
+        ],
+        "native_max_decomposition_steps": 2,
+        "split": "dev",
+        "from_first_draw": false
+      },
+      {
+        "dataset": "two_wiki_author_train",
+        "split": "dev",
+        "family": "two-wiki-family-044772",
+        "question_id": "f3d0a910085011ebbd58ac1f6bf848b6",
+        "source_rows": [
+          120547
+        ],
+        "native_support_titles": 2,
+        "native_reference_relations": 2,
+        "native_type": "comparison",
+        "whole_family_rows": 1,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "two_wiki_author_train",
+        "split": "dev",
+        "family": "two-wiki-family-004030",
+        "question_id": "53518bca089211ebbd73ac1f6bf848b6",
+        "source_rows": [
+          149749
+        ],
+        "native_support_titles": 4,
+        "native_reference_relations": 5,
+        "native_type": "bridge_comparison",
+        "whole_family_rows": 5,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "two_wiki_author_train",
+        "split": "dev",
+        "family": "two-wiki-family-037004",
+        "question_id": "c00cae1c08aa11ebbd80ac1f6bf848b6",
+        "source_rows": [
+          85853
+        ],
+        "native_support_titles": 4,
+        "native_reference_relations": 4,
+        "native_type": "bridge_comparison",
+        "whole_family_rows": 2,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "two_wiki_author_train",
+        "split": "dev",
+        "family": "two-wiki-family-002801",
+        "question_id": "0a9de7ee08d211ebbd95ac1f6bf848b6",
+        "source_rows": [
+          98150
+        ],
+        "native_support_titles": 4,
+        "native_reference_relations": 4,
+        "native_type": "bridge_comparison",
+        "whole_family_rows": 1,
+        "from_first_draw": true
+      },
+      {
+        "dataset": "two_wiki_author_train",
+        "split": "dev",
+        "family": "two-wiki-family-006134",
+        "question_id": "5c35a55a08a111ebbd79ac1f6bf848b6",
+        "source_rows": [
+          76787
+        ],
+        "native_support_titles": 4,
+        "native_reference_relations": 4,
+        "native_type": "bridge_comparison",
+        "whole_family_rows": 3,
+        "from_first_draw": true
+      }
+    ]
+  },
+  "reused_t0_trajectories": "All previous T0 registered positions and first failures retained; no repeat collection of these positions.",
+  "followir": "965train/241dev auxiliary topics separate from primary128/32 groups. Mixture ratios/update budget not fixed until actual supervision available.",
+  "admission": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/data/manifests/milai-source-selection-v2-admission.json",
+  "reference_boundary": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/data/manifests/milai-source-selection-v2-reference-boundary.json",
+  "normalized_original_sources": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/selection-v2/admission/cohort-sources.jsonl",
+  "excluded_families": [
+    "musique-family-000503"
+  ],
+  "license_scope": "Inherited MuSiQue CC BY4.0;2Wiki local author-provided training material retained under existing intake provenance. No independent dataset license invented and no derivative publication authorized by this manifest.",
+  "limitations": [
+    "Previously exposed legal train/dev groups are reused, not new independent backgrounds.",
+    "Inherited grouping follows shared native seeds/entities/support titles. Complete background/pretraining isolation is unproven; original cross-corpus boundary qualifications retained.",
+    "Actual new source pools and requests require review; native answers/supports do not automatically label operations.",
+    "2Wiki remains a small supplementary source; its native relation/support count is not a certified proof length.",
+    "No held-out test/calibration or new reserved body/answer inspected."
+  ],
+  "model_calls": 0,
+  "http_requests": 0,
+  "phase": "host_intent_t1_metadata_allocation_v1",
+  "wall_seconds": 0.00216065626591444,
+  "cpu_seconds": 0.0021603099999999986,
+  "ledger_recorded": false
+}
