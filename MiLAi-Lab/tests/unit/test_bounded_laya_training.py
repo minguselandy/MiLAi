@@ -1,5 +1,6 @@
 """Derived prefixes and event multiplicity must not inflate a family's loss."""
 
+import os
 import random
 import sys
 from collections import Counter, defaultdict
@@ -13,6 +14,7 @@ from train_bounded_laya import (
     decision_loss,
     event_weights,
     state_option_seed,
+    training_forward,
     training_microbatches,
     training_stages,
 )
@@ -92,6 +94,37 @@ def test_legacy_epoch_order_and_partial_windows_remain_unchanged():
         assert [len(w) for w in windows] == [16, 16, 3]
         assert [i for w in windows for p, i in w] == expected
         assert {p for w in windows for p, _ in w} == {epoch}
+
+
+@pytest.mark.parametrize("rows", [1, 2, 3])
+def test_actual_gpu_microbatches_preserve_logits_and_gradients(rows):
+    torch = pytest.importorskip("torch")
+    if os.environ.get("CUDA_VISIBLE_DEVICES") != "2,3" or torch.cuda.device_count() != 2:
+        pytest.skip("This GPU regression uses only explicitly allocated physical GPUs2,3")
+    from laya.train import _forward
+
+    class TinyDecision(torch.nn.Module):
+        def __init__(self):
+            super().__init__()
+            self.weight = torch.nn.Parameter(
+                torch.arange(6, dtype=torch.float32).reshape(3, 2) / 10)
+
+        def forward(self, input_ids, attention_mask, marker_pos, marker_mask, qtype,
+                    detach_encoder=False):
+            return (input_ids * attention_mask) @ self.weight, None
+
+    device = torch.device("cuda:0")
+    model, reference = TinyDecision().to(device), TinyDecision().to(device)
+    parallel = torch.nn.DataParallel(model, device_ids=[0, 1])
+    batch = {"input_ids": torch.arange(rows * 3, dtype=torch.float32).reshape(rows, 3) / 31,
+             "attention_mask": torch.ones(rows, 3), "marker_pos": torch.zeros(rows, 2).long(),
+             "marker_mask": torch.ones(rows, 2).bool(), "qtype": torch.zeros(rows).long()}
+    expected = _forward(reference, batch, device, False, False)
+    actual = training_forward(model, parallel, batch, device)
+    expected.square().mean().backward()
+    actual.square().mean().backward()
+    assert torch.allclose(actual, expected, atol=1e-6)
+    assert torch.allclose(model.weight.grad, reference.weight.grad, atol=1e-6)
 
 
 def test_shared_state_option_order_is_independent_of_filtered_list_position():

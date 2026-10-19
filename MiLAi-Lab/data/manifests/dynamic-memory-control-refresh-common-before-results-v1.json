@@ -1,0 +1,388 @@
+{
+  "version": "dynamic-memory-control-refresh-common-before-results-v1",
+  "status": "ALL12FIRST_BRANCHES_REVIEWED",
+  "runtime_source": "8eb07410",
+  "source_families": 4,
+  "reader_positions": 12,
+  "generator_positions": 12,
+  "reviewer": "Codex author, branch visible; answers checked against original training source contracts.",
+  "arms": {
+    "rebuild_all_available": {
+      "correct": 4
+    },
+    "incremental_all_available": {
+      "qualified": 1,
+      "correct": 2,
+      "wrong": 1
+    },
+    "incremental_old_bindings_only": {
+      "wrong": 2,
+      "no_answer": 1,
+      "correct": 1
+    }
+  },
+  "rows": [
+    {
+      "family": "sealed_parcel",
+      "step": "changed",
+      "arm": "rebuild_all_available",
+      "generator_status": "completed",
+      "reader_status": "completed",
+      "grade": "correct",
+      "expected": "可以，封签和抽检两项前提均已满足。",
+      "answer": "是的，梧桐批次现在可以发运。不缺少任何前提条件。",
+      "source_count": 11,
+      "prior_revision": 2,
+      "error": null,
+      "result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/refresh-common-before-results-v1/sealed_parcel/rebuild_all_available/result.json",
+      "cost": {
+        "generator": {
+          "prompt_tokens": 2585,
+          "total_tokens": 3111,
+          "completion_tokens": 526,
+          "prompt_tokens_details": null
+        },
+        "reader": {
+          "prompt_tokens": 1069,
+          "total_tokens": 2217,
+          "completion_tokens": 1148,
+          "prompt_tokens_details": null
+        }
+      }
+    },
+    {
+      "family": "sealed_parcel",
+      "step": "changed",
+      "arm": "incremental_all_available",
+      "generator_status": "completed",
+      "reader_status": "completed",
+      "grade": "qualified",
+      "expected": "可以，封签和抽检两项前提均已满足。",
+      "answer": "根据当前已提供的记忆记录逻辑，结论如下：\n\n**1. 是否可以发运？**\n根据记忆中的内部逻辑推演，梧桐批次**目前可以发运**（对应节点 n4/n6）。该结论是基于“封签已完成”和“抽检已通过”两项条件同时满足而得出的。\n\n**2. 还缺哪项前提？**\n尽管记录内部逻辑已得出可以发运的结论，但从实际执行和记录完整性来看，缺失以下前提或存在风险：\n*   **原始证据来源未开放/未验证（关键缺失）**：记录中明确支撑上述两项条件的来源（e10 封签完成、e3 抽检通过）均标记为 `support_not_opened`。这意味着这两项关键发运前提的实际证据、原始单据或第三方验证报告并未开放或无法核实，当前结论仅停留在模型内部推演层面，缺乏事实支撑。\n*   **其他潜在发运前提**：当前记录仅列举了“封签”与“抽检”两项条件。如果发运流程涉及其他业务前提（如：物流运力已排定、财务款项已结清、出库单已生成等），这些内容在当前提供的范围内属于缺失或未提及状态，无法判断是否已满足。",
+      "source_count": 11,
+      "prior_revision": 2,
+      "error": null,
+      "result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/refresh-common-before-results-v1/sealed_parcel/incremental_all_available/result.json",
+      "cost": {
+        "generator": {
+          "prompt_tokens": 2836,
+          "total_tokens": 3459,
+          "completion_tokens": 623,
+          "prompt_tokens_details": null
+        },
+        "reader": {
+          "prompt_tokens": 1005,
+          "total_tokens": 3494,
+          "completion_tokens": 2489,
+          "prompt_tokens_details": null
+        }
+      }
+    },
+    {
+      "family": "sealed_parcel",
+      "step": "changed",
+      "arm": "incremental_old_bindings_only",
+      "generator_status": "completed",
+      "reader_status": "completed",
+      "grade": "wrong",
+      "expected": "可以，封签和抽检两项前提均已满足。",
+      "answer": "根据当前已提供的记录（查询时间 2032-07-02），梧桐批次**不可以**发运。\n\n**还缺前提：**\n1. **封签完成**：记录明确指出“梧桐批次封签尚未完成”。\n\n**判断依据：**\n- **发运条件**：必须同时满足“封签完成”和“抽检通过”。\n- **当前状态**：\n  - ✅ 抽检已通过\n  - ❌ 封签未完成（缺失项）\n\n因此，只有当封签环节完成后，批次才满足发运条件。",
+      "source_count": 8,
+      "prior_revision": 2,
+      "error": null,
+      "result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/refresh-common-before-results-v1/sealed_parcel/incremental_old_bindings_only/result.json",
+      "cost": {
+        "generator": {
+          "prompt_tokens": 2356,
+          "total_tokens": 2862,
+          "completion_tokens": 506,
+          "prompt_tokens_details": null
+        },
+        "reader": {
+          "prompt_tokens": 916,
+          "total_tokens": 2205,
+          "completion_tokens": 1289,
+          "prompt_tokens_details": null
+        }
+      }
+    },
+    {
+      "family": "publication_revision",
+      "step": "repeat",
+      "arm": "rebuild_all_available",
+      "generator_status": "completed",
+      "reader_status": "completed",
+      "grade": "correct",
+      "expected": "v2；v1仅保留历史身份。",
+      "answer": "根据当前提供的记录解读，发布白鹭手册时应采用**白鹭手册v2**。\n\n**依据说明**：\n- **规则要求**：发布规则要求采用当前已审核通过的最新版本。\n- **版本状态**：记录明确指出“白鹭手册v2现已审核通过，并声明取代v1用于今后的发布”。虽然v1也已审核通过，但v2已作为最新替代版本生效，因此当前发布应采用v2。",
+      "source_count": 8,
+      "prior_revision": 1,
+      "error": null,
+      "result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/refresh-common-before-results-v1/publication_revision/rebuild_all_available/result.json",
+      "cost": {
+        "generator": {
+          "prompt_tokens": 2118,
+          "total_tokens": 2705,
+          "completion_tokens": 587,
+          "prompt_tokens_details": null
+        },
+        "reader": {
+          "prompt_tokens": 987,
+          "total_tokens": 2644,
+          "completion_tokens": 1657,
+          "prompt_tokens_details": null
+        }
+      }
+    },
+    {
+      "family": "publication_revision",
+      "step": "repeat",
+      "arm": "incremental_all_available",
+      "generator_status": "completed",
+      "reader_status": "completed",
+      "grade": "correct",
+      "expected": "v2；v1仅保留历史身份。",
+      "answer": "发布白鹭手册时，当前应采用 **白鹭手册 v2** 作为审核版本。",
+      "source_count": 8,
+      "prior_revision": 1,
+      "error": null,
+      "result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/refresh-common-before-results-v1/publication_revision/incremental_all_available/result.json",
+      "cost": {
+        "generator": {
+          "prompt_tokens": 2690,
+          "total_tokens": 3594,
+          "completion_tokens": 904,
+          "prompt_tokens_details": null
+        },
+        "reader": {
+          "prompt_tokens": 1252,
+          "total_tokens": 5707,
+          "completion_tokens": 4455,
+          "prompt_tokens_details": null
+        }
+      }
+    },
+    {
+      "family": "publication_revision",
+      "step": "repeat",
+      "arm": "incremental_old_bindings_only",
+      "generator_status": "completed",
+      "reader_status": "incomplete",
+      "grade": "no_answer",
+      "expected": "v2；v1仅保留历史身份。",
+      "answer": null,
+      "source_count": 6,
+      "prior_revision": 1,
+      "error": null,
+      "result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/refresh-common-before-results-v1/publication_revision/incremental_old_bindings_only/result.json",
+      "cost": {
+        "generator": {
+          "prompt_tokens": 2423,
+          "total_tokens": 3351,
+          "completion_tokens": 928,
+          "prompt_tokens_details": null
+        },
+        "reader": {
+          "prompt_tokens": 1248,
+          "total_tokens": 9440,
+          "completion_tokens": 8192,
+          "prompt_tokens_details": null
+        }
+      }
+    },
+    {
+      "family": "measurement_replacement",
+      "step": "changed",
+      "arm": "rebuild_all_available",
+      "generator_status": "completed",
+      "reader_status": "completed",
+      "grade": "correct",
+      "expected": "17克；正式更正第一次。",
+      "answer": "Based on the provided records, the final adopted result for the first weighing of the Jingwan sample is **17 grams**.\n\nAlthough the first weighing was initially recorded as 18 grams, a formal correction report (generated at 09:20) explicitly stated that the 18-gram reading was a data entry error and established 17 grams as the correct value for the first weighing. The 19-gram result corresponds to the second independent weighing, not the first.",
+      "source_count": 6,
+      "prior_revision": 1,
+      "error": null,
+      "result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/refresh-common-before-results-v1/measurement_replacement/rebuild_all_available/result.json",
+      "cost": {
+        "generator": {
+          "prompt_tokens": 1839,
+          "total_tokens": 2470,
+          "completion_tokens": 631,
+          "prompt_tokens_details": null
+        },
+        "reader": {
+          "prompt_tokens": 1081,
+          "total_tokens": 2402,
+          "completion_tokens": 1321,
+          "prompt_tokens_details": null
+        }
+      }
+    },
+    {
+      "family": "measurement_replacement",
+      "step": "changed",
+      "arm": "incremental_all_available",
+      "generator_status": "rejected",
+      "reader_status": "completed",
+      "grade": "wrong",
+      "expected": "17克；正式更正第一次。",
+      "answer": "根据当前提供的记录，无法确定镜湾样品第一次称量最终应采用的结果。当前证据列表（evidence）为空，未包含该样品的任何称量数据。",
+      "source_count": 6,
+      "prior_revision": 1,
+      "error": "QUERY_STRUCTURE_RULE_NODE_UNAVAILABLE",
+      "result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/refresh-common-before-results-v1/measurement_replacement/incremental_all_available/result.json",
+      "cost": {
+        "generator": {
+          "prompt_tokens": 2198,
+          "total_tokens": 2614,
+          "completion_tokens": 416,
+          "prompt_tokens_details": null
+        },
+        "reader": {
+          "prompt_tokens": 464,
+          "total_tokens": 4719,
+          "completion_tokens": 4255,
+          "prompt_tokens_details": null
+        }
+      }
+    },
+    {
+      "family": "measurement_replacement",
+      "step": "changed",
+      "arm": "incremental_old_bindings_only",
+      "generator_status": "completed",
+      "reader_status": "completed",
+      "grade": "wrong",
+      "expected": "17克；正式更正第一次。",
+      "answer": "根据当前已提供的记录，镜湾样品第一次称量最终应采用的结果是 **18克**。",
+      "source_count": 3,
+      "prior_revision": 1,
+      "error": null,
+      "result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/refresh-common-before-results-v1/measurement_replacement/incremental_old_bindings_only/result.json",
+      "cost": {
+        "generator": {
+          "prompt_tokens": 1694,
+          "total_tokens": 2181,
+          "completion_tokens": 487,
+          "prompt_tokens_details": null
+        },
+        "reader": {
+          "prompt_tokens": 976,
+          "total_tokens": 2705,
+          "completion_tokens": 1729,
+          "prompt_tokens_details": null
+        }
+      }
+    },
+    {
+      "family": "delegation_boundary",
+      "step": "unrelated",
+      "arm": "rebuild_all_available",
+      "generator_status": "completed",
+      "reader_status": "completed",
+      "grade": "correct",
+      "expected": "程羽技术复核，韩松最终批准。",
+      "answer": "根据当前记录：\n\n- **技术复核**：由 **程羽** 负责（韩松授权）。\n- **最终批准**：由 **韩松** 负责。",
+      "source_count": 6,
+      "prior_revision": 1,
+      "error": null,
+      "result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/refresh-common-before-results-v1/delegation_boundary/rebuild_all_available/result.json",
+      "cost": {
+        "generator": {
+          "prompt_tokens": 1776,
+          "total_tokens": 2347,
+          "completion_tokens": 571,
+          "prompt_tokens_details": null
+        },
+        "reader": {
+          "prompt_tokens": 981,
+          "total_tokens": 1248,
+          "completion_tokens": 267,
+          "prompt_tokens_details": null
+        }
+      }
+    },
+    {
+      "family": "delegation_boundary",
+      "step": "unrelated",
+      "arm": "incremental_all_available",
+      "generator_status": "completed",
+      "reader_status": "completed",
+      "grade": "correct",
+      "expected": "程羽技术复核，韩松最终批准。",
+      "answer": "根据当前提供的记录，云杉报告的最终批准人是韩松，技术复核由程羽负责（由韩松委托）。",
+      "source_count": 6,
+      "prior_revision": 1,
+      "error": null,
+      "result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/refresh-common-before-results-v1/delegation_boundary/incremental_all_available/result.json",
+      "cost": {
+        "generator": {
+          "prompt_tokens": 2013,
+          "total_tokens": 2449,
+          "completion_tokens": 436,
+          "prompt_tokens_details": null
+        },
+        "reader": {
+          "prompt_tokens": 875,
+          "total_tokens": 2016,
+          "completion_tokens": 1141,
+          "prompt_tokens_details": null
+        }
+      }
+    },
+    {
+      "family": "delegation_boundary",
+      "step": "unrelated",
+      "arm": "incremental_old_bindings_only",
+      "generator_status": "completed",
+      "reader_status": "completed",
+      "grade": "correct",
+      "expected": "程羽技术复核，韩松最终批准。",
+      "answer": "根据2032年7月2日提供的记录：\n- **最终批准人**：韩松\n- **技术复核人**：程羽（由韩松委托负责）\n（注：上述结论基于提供的记忆记录解释，相关源文件支持未打开。）",
+      "source_count": 3,
+      "prior_revision": 1,
+      "error": null,
+      "result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/refresh-common-before-results-v1/delegation_boundary/incremental_old_bindings_only/result.json",
+      "cost": {
+        "generator": {
+          "prompt_tokens": 1555,
+          "total_tokens": 1991,
+          "completion_tokens": 436,
+          "prompt_tokens_details": null
+        },
+        "reader": {
+          "prompt_tokens": 845,
+          "total_tokens": 7606,
+          "completion_tokens": 6761,
+          "prompt_tokens_details": null
+        }
+      }
+    }
+  ],
+  "costs": {
+    "generation": {
+      "known_tokens": 79537,
+      "charged_tokens": 79537,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "known_tokens": 0,
+      "charged_tokens": 0,
+      "unknown_usage": 0
+    }
+  },
+  "compute": {
+    "wall_including_model_seconds": 277.7799797160551,
+    "local_cpu_seconds": 0.8460759279999994,
+    "runs": 1
+  },
+  "qualifications": [
+    "Actual prior views and source cuts, not repaired oracle states. Branch banks are separate copies; parent first outputs unchanged.",
+    "Four training-family mechanism diagnostics, no heldout or whole-policy superiority claim. One first generation per branch; random generation remains a confound.",
+    "Rebuild/all-source4correct; incremental/all-source2correct+1qualified+1rejected-view refusal. This does not establish full rebuild optimality across workloads.",
+    "Old-bindings-only omits newly arrived outside-binding facts and is intentionally weak; unchanged delegation remains answerable. It is not the sole comparator.",
+    "Sealed-parcel incremental answer has the correct yes conclusion but invents possible extra prerequisites and conflates support_not_opened with inaccessible/unverifiable sources.",
+    "Measurement incremental view rejected before write; Reader gets empty new material, not an implicit old-view fallback. Truthful refusal still misses an answerable source task.",
+    "One original old-bindings publication Reader length failure is retained. Accepted view syntax is not full graph/state validity."
+  ]
+}

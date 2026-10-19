@@ -1,3 +1,24 @@
+# V6 TERMINAL / TRAINING FIX READY: 2026-10-19
+
+V6 PID1012861/exec95123 and finalchild1071570 are terminal/absent; exec exit1.
+Four-slot now CLOSED36: rules8C/4W, Laya7C/3W/2input-capacity failures, generative6C/6W.
+All arms actually reached3slots, no duplicate view IDs. First failures/effects/costs retained.
+Common-before CLOSED12: rebuild-all4C; incremental-all2C/1qualified/1rejected-view refusal;
+old-bindings-only1C/2W/1length.79537generationtokens,unknown0. No general superiority claim.
+Longest9496-token real prefix forward/backward PASSED; peak CUDA13,797,836,800bytes, no update.
+First original-shared fit FAILED on its first1row DataParallel batch;0optimizerupdates but139base
+Dev0 predictions completed and retained, plus one failed training-forward attempt. No checkpoint trained.
+Generic training executor now avoids empty GPU shards; realGPU2,3 tests1/2/3rows preserve logits and
+gradients.18training/learning tests passed,Ruff/mypy/tools boundary pass; CLI default still evaluates base.
+New matched v2 fits must use this frozen trainer and --skip-initial-dev for both arms. The original139
+BASE/shared/dev predictions are the common reference, not rerun or replaced. All other recipe fields same.
+New sandbox frozen dbf08661 ready in prepared-after-v6-sandbox-v2.json; no real model call yet.
+8jointly-dev MemOps source_task backgrounds selected by existing cohort; A19/A32 raw-source contracts
+reviewed into artifacts/dynamic-memory-control/memops-dev-source-review-v1/source-review-partial.json.
+Six remaining B30/C03/D25/E08/E15/F01 not reviewed. Projector currently hardcodes train: preserve dev
+split explicitly before projecting. No dev row entered training; protected test content untouched.
+No current model job lives; revalidate before next settlement/serial queue. Full goal remains active.
+
 # LIVE V6 / HOST EVIDENCE PLANNING: 2026-10-19
 
 V6 dispatcher PID1012861 / exec95123, active child1012869 multitopic-four-slots-v1-remaining1.

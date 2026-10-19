@@ -33,6 +33,14 @@ def training_microbatches(window: TrainingWindow, size: int) -> list[TrainingWin
     return [window[start:start + size] for start in range(0, len(window), size)]
 
 
+def training_forward(model: Any, parallel: Any, batch: dict[str, Any], device: Any) -> Any:
+    """Avoid dispatching an empty shard when a microbatch has fewer rows than devices."""
+    from laya.train import _forward
+
+    executor = model if batch["input_ids"].shape[0] < len(parallel.device_ids) else parallel
+    return _forward(executor, batch, device, False, False)
+
+
 def training_stages(size: int, epochs: int, seed: int,
                     update_budget: int | None = None) -> list[tuple[int, list[TrainingWindow]]]:
     """Legacy epochs or an exact budget of full16-example optimizer updates.
@@ -135,13 +143,14 @@ def main() -> None:
                         help="Save train-prefix predictions as a learning diagnosis")
     parser.add_argument("--train-eval-final-only", action="store_true",
                         help="With --evaluate-train, evaluate training states only after fitting")
+    parser.add_argument("--skip-initial-dev", action="store_true",
+                        help="Omit unchanged base-checkpoint evaluation; retain its prior results")
     parser.add_argument("--shuffle-options", action="store_true",
                         help="Resample option slots and matching targets each training epoch")
     args = parser.parse_args()
     import torch
     from laya.common import collate_items
     from laya.train import (
-        _forward,
         draw_option_order,
         encode_item,
         items_from_rows,
@@ -185,6 +194,7 @@ def main() -> None:
            "loss_weighting": "event-and-family-normalized",
            "evaluate_train": args.evaluate_train,
            "train_eval_final_only": args.train_eval_final_only,
+           "evaluate_initial_dev": not args.skip_initial_dev,
            "shuffle_options": args.shuffle_options,
            "calibration_test_loaded": False, "http_requests": 0,
            "optimizer_updates": 0, "train_sequence_rows": 0, "train_input_tokens": 0,
@@ -258,8 +268,10 @@ def main() -> None:
             write_json(args.output / split / str(epoch) / "summary.json", result)
             return result
 
-        history = [{axis: 0, "dev": evaluate(0)}]
+        history = [] if args.skip_initial_dev else [{axis: 0, "dev": evaluate(0)}]
         if args.evaluate_train and not args.train_eval_final_only:
+            if not history:
+                history.append({axis: 0})
             history[0]["train"] = evaluate(0, "train")
         write_json(args.output / "history.json", history)
         option_rng = random.Random(args.seed + 10000)  # noqa: S311 -- independent of row order
@@ -298,7 +310,7 @@ def main() -> None:
                     run["train_batch_attempts"] += 1
                     run["train_offered_rows"] += len(indices)
                     run["train_offered_tokens"] += int(batch["attention_mask"].sum())
-                    logits = _forward(parallel, batch, decision.device, False, False)
+                    logits = training_forward(model, parallel, batch, decision.device)
                     mask = batch["marker_mask"].to(decision.device)
                     target = batch["target"].to(decision.device)
                     ce = decision_loss(logits, target, mask, args.objective)
