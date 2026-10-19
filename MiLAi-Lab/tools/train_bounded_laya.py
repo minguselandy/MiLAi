@@ -147,6 +147,8 @@ def main() -> None:
                         help="Omit unchanged base-checkpoint evaluation; retain its prior results")
     parser.add_argument("--shuffle-options", action="store_true",
                         help="Resample option slots and matching targets each training epoch")
+    parser.add_argument("--gradient-checkpointing", action="store_true",
+                        help="Recompute encoder activations during backward to reduce memory")
     args = parser.parse_args()
     import torch
     from laya.common import collate_items
@@ -182,6 +184,8 @@ def main() -> None:
            "physical_gpus": [2, 3], "device": "cuda", "torch_version": torch.__version__,
            "cuda_version": torch.version.cuda, "precision": "float32",
            "reference_compile": False,
+           "gradient_checkpointing": args.gradient_checkpointing,
+           "forward_count_scope": "Logical model calls; activation recomputation is in time cost",
            "backend": args.backend, "task": args.task, "operation_state": args.operation_state,
            "epochs": args.epochs if args.optimizer_updates is None else None,
            "planned_optimizer_updates": sum(len(windows) for _, windows in stages),
@@ -218,6 +222,9 @@ def main() -> None:
         # ModernBERT's compiled MLP cannot be traced concurrently by DataParallel
         # replicas when the final batch changes shape. Use its ordinary MLP path.
         model.encoder.config.reference_compile = False
+        if args.gradient_checkpointing:
+            model.encoder.gradient_checkpointing_enable(
+                gradient_checkpointing_kwargs={"use_reentrant": False})
         lengths = {split: audit(rows, tok, args.max_len, args.head_max_len) for split, rows in (
             ("train", train), ("dev", dev))}
         write_json(args.output / "lengths.json", lengths)

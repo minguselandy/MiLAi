@@ -1,0 +1,127 @@
+{
+  "status": "ALL_GENERATIVE_STATES_REVIEWED_OR_EXPLICITLY_HELD",
+  "raw_states": 197,
+  "source_requests": 38,
+  "storage_requests": 16,
+  "held_requests": [
+    {
+      "event_prefix": "generative-rich/memops_A04/record-current/chatcmpl-a07267289a56b182:tool:0",
+      "request": {
+        "query": "What exactly is currently stored in the retained conversation record?",
+        "read_goal": {
+          "purpose": "Report the stored content rather than reconstructing a better summary.",
+          "evidence": [
+            "current_interpretation"
+          ],
+          "required_points": [
+            "full content"
+          ],
+          "target_scope": "retained conversation record"
+        },
+        "task_context": {
+          "as_of": "2026-01-01T00:00:00Z"
+        }
+      },
+      "reason": "Current stored-content query also supplies as_of2026-01-01, predating actual creation. Do not silently erase this temporal conflict or substitute latest revision."
+    }
+  ],
+  "labels": {
+    "states": 197,
+    "labelled": 85,
+    "status_counts": {
+      "reviewed_ambiguous_masked": 108,
+      "source_reviewed_preference": 85,
+      "unreviewed_masked": 4
+    },
+    "states_source": "artifacts/host-intent-retrieval-v3/data/t0-gen-all-closed-v1/train.jsonl",
+    "reviews": "artifacts/host-intent-retrieval-v3/data/t0-gen-all-closed-v1/combined-gen-reviews-v1.json",
+    "input_changes": 0,
+    "teacher_actions_copied": false,
+    "scope": "Source-supported short-term preferences; other options not declared illegal"
+  },
+  "source_preference_reasons": {
+    "no_reviewed_progress_masked": 21,
+    "nonoriginal_opened_material_requires_review": 21,
+    "reviewed_missing_original_progress": 31,
+    "reviewed_originals_sufficient": 7,
+    "no_reviewed_source_proof_masked": 48,
+    "reviewed_partial_evidence_only_masked": 5
+  },
+  "storage_counts": {
+    "requests": 16,
+    "states": 60,
+    "labelled": 39,
+    "reasons": {
+      "no_verified_saved_revision_progress_masked": 21,
+      "observed_search_locates_requested_record": 10,
+      "requested_first_revision_navigation": 7,
+      "requested_saved_revision_read_fits": 6,
+      "requested_actual_saved_revision_complete": 16
+    }
+  },
+  "view_review_file": "artifacts/host-intent-retrieval-v3/data/t0-gen-all-closed-v1/gen-view-reviews-v2.json",
+  "withdrawn_provisional_view_labels": [
+    {
+      "event_id": "generative-query_only/memops_A01/stage-0/chatcmpl-99611da953efd496:tool:0/0",
+      "previous_preference": [
+        "refresh_view"
+      ],
+      "reason": "Full-field review found unsupported2024 temporal values in nodes1/2/6; source gives no year. Previous provisional view preference withdrawn, original model output unchanged."
+    },
+    {
+      "event_id": "generative-query_only/memops_A01/stage-0/chatcmpl-99611da953efd496:tool:0/1",
+      "previous_preference": [
+        "handoff"
+      ],
+      "reason": "Full-field review found unsupported2024 temporal values in nodes1/2/6; source gives no year. Previous provisional view preference withdrawn, original model output unchanged."
+    }
+  ],
+  "qualified_views": [
+    {
+      "view": "A01query-only early",
+      "status": "unsupported2024 temporal metadata; masked"
+    },
+    {
+      "view": "A01query-only late reused",
+      "status": "stale DataAnalyst/unknownsalary after currentSenior/74500/Leadproposal; masked"
+    },
+    {
+      "view": "A01rich late",
+      "status": "fact nodes mostly supported but g1 manager/project condition lacks reviewed entailment; no view sufficiency label"
+    },
+    {
+      "view": "A05rich early",
+      "status": "former Jan31 lease temporal metadata guesses likely previousyear; masked"
+    },
+    {
+      "view": "A05rich late reused old",
+      "status": "old3B/currentlease-missing view stale; not positive"
+    },
+    {
+      "view": "A07query-only late first",
+      "status": "g1 conditions birthday exception on Megan engagement; wrong dependency; masked"
+    },
+    {
+      "view": "A07query-only late second",
+      "status": "birthday/exception nodes cite only s2t5, which does not establish them; masked"
+    },
+    {
+      "view": "A07rich late",
+      "status": "calls birthday accommodation a general preference; insufficient for general quiet-dining request"
+    },
+    {
+      "view": "MuSiQue23786 generated book view",
+      "status": "correct publisher facts but adds nothing beyond already opened original; owner/year unresolved, no positive refresh or sufficiency"
+    },
+    {
+      "view": "All query views on literal stored-content requests",
+      "status": "Generated source interpretation is not proof of actual stored record/revision; handled by separate storage reviews"
+    }
+  ],
+  "final_data": "artifacts/host-intent-retrieval-v3/data/t0-fitting-v1",
+  "input_changes": 0,
+  "training_labels": 1649,
+  "dev_labels": 353,
+  "reviewer": "assistant author; not independent judgment",
+  "scope": "Short-term preferences, not optimal action utilities; no teacher actions copied. Unsupported temporal or rule fields are masked; model outputs were not repaired."
+}

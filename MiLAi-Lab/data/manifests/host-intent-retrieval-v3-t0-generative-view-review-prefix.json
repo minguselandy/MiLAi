@@ -23,5 +23,8 @@
     "handoff": 6,
     "use_view": 1
   },
-  "scope": "Nine explicit early A01 view-state preferences only, not a complete generative review. Warm USE_VIEW is grounded in an actual previous view with same query and no new/pending sources;559-token packet fit checked without model or bank writes."
+  "scope": "Nine explicit early A01 view-state preferences only, not a complete generative review. Warm USE_VIEW is grounded in an actual previous view with same query and no new/pending sources;559-token packet fit checked without model or bank writes.",
+  "status": "PROVISIONAL_V1_SUPERSEDED_BY_FULL_FIELD_V2_REVIEW",
+  "superseded_by": "artifacts/host-intent-retrieval-v3/data/t0-gen-all-closed-v1/gen-view-reviews-v2.json",
+  "correction": "Withdraw two query-only A01 early labels due unsupported2024 temporal values; add two source-reviewed A05 relevant-refresh/return labels. Aggregate9positive rows happens to remain unchanged; final row identities differ."
 }

@@ -61,6 +61,39 @@ def test_fixed_update_budget_keeps_full_windows_across_different_masks():
         assert stages == training_stages(size, epochs=9, seed=7, update_budget=5)
 
 
+def test_native_encoder_activation_recomputation_preserves_gradients():
+    import copy
+
+    torch = pytest.importorskip("torch")
+    transformers = pytest.importorskip("transformers")
+    from laya.common import DecisionModel
+
+    config = transformers.ModernBertConfig(
+        vocab_size=64, hidden_size=32, intermediate_size=64, num_hidden_layers=2,
+        num_attention_heads=4, max_position_embeddings=128, local_attention=8,
+        global_attn_every_n_layers=2, attention_dropout=0, embedding_dropout=0,
+        mlp_dropout=0, pad_token_id=0, reference_compile=False)
+    config._attn_implementation = "sdpa"
+    torch.manual_seed(21)
+    plain = DecisionModel(transformers.ModernBertModel(config), head_layers=1, n_act=1)
+    checkpointed = copy.deepcopy(plain)
+    checkpointed.encoder.gradient_checkpointing_enable(
+        gradient_checkpointing_kwargs={"use_reentrant": False})
+    inputs = {"input_ids": torch.randint(4, 64, (2, 16)),
+              "attention_mask": torch.ones(2, 16, dtype=torch.long),
+              "marker_pos": torch.tensor([[4, 8], [4, 8]]),
+              "marker_mask": torch.ones(2, 2, dtype=torch.bool),
+              "qtype": torch.zeros(2, dtype=torch.long)}
+    for model in (plain, checkpointed):
+        model.train()
+        torch.manual_seed(23)
+        model(**inputs)[0].square().mean().backward()
+    for left, right in zip(plain.parameters(), checkpointed.parameters(), strict=True):
+        assert (left.grad is None) == (right.grad is None)
+        if left.grad is not None:
+            assert torch.allclose(left.grad, right.grad, atol=1e-6, rtol=1e-5)
+
+
 @pytest.mark.parametrize("size", [3, 16])
 def test_microbatch_accumulation_preserves_the_weighted_full_window_gradient(size):
     torch = pytest.importorskip("torch")
