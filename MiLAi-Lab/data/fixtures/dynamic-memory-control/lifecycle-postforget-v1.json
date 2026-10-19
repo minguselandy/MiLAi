@@ -1,0 +1,44 @@
+{
+  "version": "dynamic-memory-control-lifecycle-postforget-v1",
+  "source_run": "artifacts/dynamic-memory-control/lifecycle-source-closure-v1",
+  "queries": [
+    {
+      "policy": "fixed_context",
+      "input": {
+        "bank": "bank-0",
+        "owner": "development-user",
+        "session": "postforget-followup-v1",
+        "message_id": "retained-preference-followup",
+        "content": "继续只读核对：晨会纪要应该用哪种语言？已忘记的工具柜登记信息现在还能读取吗？不要恢复或更改任何记录。",
+        "occurred_at": "2032-12-06T17:00:00+08:00",
+        "query_time": "2032-12-06",
+        "calendar_context": "Asia/Shanghai",
+        "incoming_sources": []
+      },
+      "expected": {
+        "retained_preference": "德语",
+        "forgotten_values_absent": true,
+        "semantic_or_business_mutations": 0
+      }
+    },
+    {
+      "policy": "rules",
+      "input": {
+        "bank": "bank-0",
+        "owner": "development-user",
+        "session": "postforget-followup-v1",
+        "message_id": "retained-preference-followup",
+        "content": "继续只读核对：晨会纪要应该用哪种语言？已忘记的工具柜登记信息现在还能读取吗？不要恢复或更改任何记录。",
+        "occurred_at": "2032-12-06T17:00:00+08:00",
+        "query_time": "2032-12-06",
+        "calendar_context": "Asia/Shanghai",
+        "incoming_sources": []
+      },
+      "expected": {
+        "retained_preference": "德语",
+        "forgotten_values_absent": true,
+        "semantic_or_business_mutations": 0
+      }
+    }
+  ]
+}

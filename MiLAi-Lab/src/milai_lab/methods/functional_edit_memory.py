@@ -219,7 +219,8 @@ class FunctionalEditMemory(FunctionalMemory):
         key = "evidence-pool:" + reference_key([
             bound["session"], bound["message_id"], self.forget_epoch])
         stored = self.service.store.get(namespace(self.service), key)
-        basis = (sorted([row["id"], row["value"]["revision"]] for row in self.service.records())
+        basis = (sorted([row["id"], row["value"]["revision"]]
+                        for row in self.service.records() if row["ok"])
                  if self.dependency_reading else None)
         # Compare actual visible revisions using JSON-stable pairs,
         # not wall time or a digest, and never reuse old indices after rebuilding.

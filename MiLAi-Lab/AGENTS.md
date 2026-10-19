@@ -1,18 +1,24 @@
 # LIVE V10: 2026-10-19
 
-Only live coordinator PID1651723/exec59686; active child1651747 lifecycle-source-closure-v1.
+Only live coordinator PID1651723/exec59686; active child1710423 original-shared25remaining.
 Revalidate reviewed-followups-dispatch-v10.json and actual/proc commands. Never restart live queues.
-Queue: lifecycle16(method3f3c10d3) -> original-shared25unstarted -> broader80 -> baselines144 ->
-broader own-train72. Evaluation method0acc4b9a, all dispatcher17d6f621.337newpositions, no old retry.
-30measured offline phases settled ONCE at idle beforeV10; original model/unknown counters unchanged.
-NEVER settle new offline work while this or another model child lives.
-Fixed lifecycle8nowclosed; rules stillrunning. Two distinct commits and identifierrevision2correction.
-History answer oldvalue correct but only current snapshots read, no historical_exact_revision access.
-Forget third attempt revoked targetrecord and9Sources (3explicit+6derived); postforgetquery says BOTH
-identifier and independent language preference unavailable. Control trace onlySEARCH, no openedviews.
-Next: copied-final-fixed-Store SDK audit distinguishes actual preservation from retrieval failure;
-inspect search operation result before any fix. Partial evidence lifecycle-fixed-partial-review-v1.
-Do not count lifecycle complete from the visibility receipt or answer alone.
+Queue: lifecycle16CLOSED(method3f3c10d3) -> original25remaining -> broader80 -> baselines144 -> own72.
+Evaluation method0acc4b9a, dispatcher17d6f621;337newpositions total, no old retry.
+30offline phases settled ONCE at idle beforeV10; NEVER settle new work while any model child lives.
+
+Lifecycle16first outcomes reviewed. Both formed2independent records and corrected identifier torev2;
+rules actually opened historical_exact_revision1, fixed only answered correctly from current/raw context.
+Both forgot target+old/new/request Sources (receipt9, finalvisibility10includes finalderivedassistant).
+Copied-SDK audits: targetcurrent/history unavailable, independentrecord/source stillfound; allrevoked
+sources inaccessible, rulecachedviews support_unavailable/no forgotten text. No physicalerase claim.
+Both postforgetanswers wrong because SEARCH hit KeyError/value in dependent_record_candidates.
+Generic fix filters unsuccessful current-body reads in dependency traversal and dependency-cache basis;
+public status/visibility API unchanged. Fixedactualcopy failedbefore and openspreservedrecordafter;
+rulescopy alsoopens.4actualSQLite regressions across both scopes/dependency modes pass;158other affected
+regressions pass.2test-stub optional-schema errors corrected/rechecked. Ruff,mypy2modules,packagepass.
+New two-query followup fixture/config prepared: later sessions on exact copied final banks, no initial
+history replay or state repair. Freeze testedsource, prepare profiles, then only afterV10terminalrun
+beforeexpanded81fit. Original16outcomes stayfailed where appropriate; fullsemanticgraphnotcertified.
 
 45source-only cohorts now compiled1361labels:1081acquire/280handoff.11107candidate matches and1035source
 identity matches on diagnostic Storecopies, original input/state unchanged, no ideal view/teacher-copy.

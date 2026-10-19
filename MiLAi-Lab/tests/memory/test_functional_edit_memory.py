@@ -3527,3 +3527,46 @@ def test_host_shared_maintenance_binds_preceding_receipt_and_keeps_partial_commi
         assert memory.service.read(credential)["value"]["revision"] == 2
         assert memory.service.read(credential, 1)["value"] == old_credential
         assert memory.service.read(target, 1)["value"] == before
+
+
+@pytest.mark.parametrize("scope", ["record", "record_and_sources"])
+@pytest.mark.parametrize("dependency_reading", [False, True])
+def test_dynamic_search_after_forget_still_delivers_independent_record(
+    tmp_path, scope, dependency_reading,
+):
+    from milai_lab.methods.memory_control import FixedContextMemoryPolicy
+
+    options = dict(interface_version="I2", memory_profile="unified_v1",
+        source_access="independent_v1", memory_view_mode="staged",
+        features=EditFeatures(bound_references=True, dependency_groups=True,
+                              cross_record_dependencies=True),
+        evidence_policy="question_pack_v1", control_policy=FixedContextMemoryPolicy(),
+        dependency_reading=dependency_reading,
+        dependency_read_call=lambda stage, messages, schema: {
+            key: {"roots": [0], "excluded": [], "history_revisions": [],
+                  **({"support_choices": {}} if "support_choices" in entry["properties"] else {})}
+            for key, entry in schema["properties"].items()})
+    with opened(tmp_path, **options) as memory:
+        saved = []
+        for key, text in (("alarm", "Alarms are quiet."),
+                          ("temperature", "Temperature is displayed in Celsius.")):
+            writer_turn(memory, key, text)
+            receipt = json.loads(invoke(memory, "save_memory", {"proposal": {
+                "action": "create", "clauses": [
+                    {"text": text, "conditions": [], "evidence": ["e1"]}]}},
+                "save-" + key, key).content)
+            assert receipt["ok"], receipt
+            saved.append(receipt["id"])
+        before = memory.service.read(saved[1])["value"]
+        turn(memory, "forget-alarm", "Forget the alarm record; preserve temperature settings.")
+        handle = memory.service.read(saved[0])["candidate_handle"]
+        assert memory.service.forget("s", "remove-alarm", handle, scope=scope)["ok"]
+        assert memory.service.read(saved[0])["status"] == "visibility_revoked"
+
+    with opened(tmp_path, **options) as memory:
+        turn(memory, "query", "What temperature unit remains saved?")
+        packet = memory.evidence_material(cfg("query"))
+        assert packet["control_handoff"] != "operation_outcome_unknown"
+        assert "Temperature is displayed in Celsius." in canonical(packet)
+        assert memory.service.read(saved[1])["value"] == before
+        assert memory.service.read(saved[0], 1)["status"] == "visibility_revoked"

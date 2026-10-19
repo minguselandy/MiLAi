@@ -72,7 +72,8 @@ def dependent_record_candidates(
     This small slice scans visible records rather than claiming a new O(k) index.
     Unit-level impact and preservation decisions happen after this candidate step.
     """
-    available = {row["id"]: row for row in service.records()}
+    # records() also returns unreadable status receipts, which have no current body.
+    available = {row["id"]: row for row in service.records() if row["ok"]}
     selected = {row["id"]: row for row in records if row.get("ok")}
     while True:
         before = set(selected)

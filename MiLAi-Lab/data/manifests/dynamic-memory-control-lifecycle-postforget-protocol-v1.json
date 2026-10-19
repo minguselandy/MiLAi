@@ -1,0 +1,12 @@
+{
+  "version": "dynamic-memory-control-lifecycle-postforget-protocol-v1",
+  "status": "PREPARED_NOT_STARTED",
+  "config": "configs/dynamic-memory-operation-lifecycle-postforget-v1.json",
+  "fixture": "data/fixtures/dynamic-memory-control/lifecycle-postforget-v1.json",
+  "positions": 2,
+  "prefix": "Exact completed policy banks from lifecycle-source-closure-v1, copied with SQLite backup, same namespaces/identities and retained immutable outcomes. No semantic/source/value repair. New run inputs and source version, new session/message IDs.",
+  "admission": "Freeze tested source, prepare both profiles and bank copies without model calls; execute only after liveV10terminalreview.",
+  "evaluation": "Actual final response must retrieve retained preference and respect revoked target. Verify no new semantic/business mutation. Historical access already demonstrated by rules, not inferred from fixed-context answer.",
+  "scope": "Follow-up implementation verification from actual state, not replay of original messages or independent method efficacy/generalization.",
+  "model_calls_by_preparation": 0
+}
