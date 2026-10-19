@@ -1,5 +1,27 @@
 # LIVE V10: 2026-10-19
 
+User explicitly requests organizing CURRENT development and submitting it to GitHub. This authorizes
+publishing this checkpoint to the existing branch despite earlier no-push snapshots; it does not mark
+the full goal complete or request a pause/merge. Preserve the user's untracked global research file.
+Current authoritative job: coordinator1651723/exec59686, child2665555 t1-broader-shared-own-train-v1.
+Revalidate actual/proc commands. Baselines CLOSED144; own-train8/72 at18:52Shanghai snapshot.
+Baseline full task/state/M4 manifests now authoritative: fixed22C/6W/17qualified/3length;
+rules30C/4W/11qualified/1length/2incomplete; generative8C/25unfulfilled/8W/4length/2qualified/1incomplete.
+Gen tokens525478/881984/842787; messagewall2035.52/2339.26/2541.15s, newunknown0;
+all2,250,249tokens reconcile by stage and closed-run ledger delta. Generative control68calls/304502tokens.
+State:60constructed/59delivered/1persisted-undelivered,494nodes/50rules,4USE_VIEW(3invalid/1uncertain).
+All144zero semanticcommits/revocations/businessmutations;1businessreadonlyquery. Construction readiness
+19true/20false/21uncertain is NOT fullgraph validity. M4:573states/532devlabels/4064candidate matches,
+trainEMPTY. Witness messages fixed33/rules37/gen3; fixed16extraREAD, rules15READ+35REFRESH afterwitness
+(196599gen tokens); descriptive work, not netcounterfactual savings.28genemptyhandoffs with7/8steps,
+25unfulfilled/3laterlength. All61view contexts reviewed;21uncertain,11state masks;30forced masks.
+V11 coordinator PREPARED_NOT_EXECUTED at run_prepared_followups_v11.py for the existing3jobs only.
+Requires V10COMPLETED and absentPIDs plus new reviewed pending-offline-settlement-v11.json at actualidle.
+Do not settle while V10/own-train lives. Postforgetd230, expanded81fit/eval0acc frozen unchanged.
+Source137763e9 conversation-context change is tested but not yet frozen/used in real model evaluation.
+
+## Earlier V10 audit snapshots (historical progress counts)
+
 E08/E15baseline tasks+views complete. E08fixed6qualified;rules1C/5qualified;
 generative1C/3unfulfilled/1incomplete/1qualified.8views49nodes/24rules,1stalereuse.
 E15fixed3C/3qualified;rules4C/2qualified;generative3W/3unfulfilled.8views42nodes/7rules,

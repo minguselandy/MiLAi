@@ -1,5 +1,22 @@
 # Results index
 
+## 动态记忆控制 v2 开发检查点 — 2026-10-19
+
+[当前执行摘要](MILAI_DYNAMIC_MEMORY_CONTROL_EXECUTION_20261018.md)与
+[当前状态](LAB_CURRENT_STATUS.md)：两项各80位置的学习策略评价、144个外部基线已关闭；
+72个自身轨迹正在运行，81背景候选、全部种子与保护确认尚未完成。
+
+| 证据 | 当前结果 |
+|---|---|
+| [外部基线](../data/manifests/dynamic-memory-control-memops-dev-baselines-results-v1.json) | 固定22/48、规则30/48、生成式8/48完整成功；分阶段成本与账本一致 |
+| [24/36背景匹配比较](../data/manifests/dynamic-memory-control-t1-shared-matched-comparison-v1.json) | 外部11→20/48，原开发25→18/32；尚无全面优势 |
+| [基线状态](../data/manifests/dynamic-memory-control-memops-dev-baselines-state-results-v1.json) | 60个实际构建视图全部审阅，含1个未交付视图 |
+| [基线充分性](../data/manifests/dynamic-memory-control-memops-dev-baselines-m4-readiness-v1.json) | 573状态、532个dev偏好；额外操作与过早交接分别报告 |
+| [会话上下文修正](../data/manifests/dynamic-memory-control-source-conversation-context-v1.json) | 50项相关测试及实际输入检查通过，模型质量效果待验证 |
+| [确认选择协议](../data/manifests/dynamic-memory-control-confirmation-selection-v1.json) | 全部0/1/2种子、7来源任务与3生命周期预留背景，保护语义内容尚未读取 |
+
+以下条目按各自日期保留历史状态。
+
 - [v13.5 r52终态](V13_5_R52_TERMINAL_REPORT.md)：同版L1–L4完整执行、140项回填、普通失败和费用；完整功能仍PARTIAL，无稳定推荐配置。
 
 ## Current development and merge handoff — 2026-10-04

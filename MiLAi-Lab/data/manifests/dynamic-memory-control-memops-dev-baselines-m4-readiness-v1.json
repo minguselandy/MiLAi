@@ -1,0 +1,141 @@
+{
+  "version": "dynamic-memory-control-memops-dev-baselines-m4-readiness-v1",
+  "status": "OFFLINE_TRAJECTORY_ANALYSIS_COMPLETE",
+  "positions": 144,
+  "policy_states": 573,
+  "positions_with_policy_states": 139,
+  "positions_before_controller_failure": [
+    {
+      "policy": "rules",
+      "family": "memops_A32",
+      "step": "stage-1-repeat",
+      "task_label": "length_failure"
+    },
+    {
+      "policy": "fixed_context",
+      "family": "memops_B30",
+      "step": "stage-1",
+      "task_label": "length_failure"
+    },
+    {
+      "policy": "generative",
+      "family": "memops_C03",
+      "step": "stage-1-repeat",
+      "task_label": "length_failure"
+    },
+    {
+      "policy": "fixed_context",
+      "family": "memops_D25",
+      "step": "stage-2-repeat",
+      "task_label": "length_failure"
+    },
+    {
+      "policy": "fixed_context",
+      "family": "memops_F01",
+      "step": "stage-2",
+      "task_label": "length_failure"
+    }
+  ],
+  "positions_with_established_sufficient_witness": 73,
+  "empty_handoff_outcomes": {
+    "unfulfilled": 25,
+    "length_failure": 3
+  },
+  "readiness_outcomes": {
+    "correct": 50,
+    "qualified": 21,
+    "wrong": 2
+  },
+  "source_label_summary": {
+    "source_run": "artifacts/dynamic-memory-control/memops-dev-baselines-v1",
+    "source_status": "COMPLETED_WITH_FAILURES",
+    "states": 573,
+    "labelled_by_split": {
+      "dev": 532
+    },
+    "statuses": {
+      "acquire_evidence_preference": 423,
+      "ready_handoff_preference": 109,
+      "forced_single_action_masked": 30,
+      "unreviewed_opened_view_masked": 11
+    },
+    "unreviewed_view_contexts": 21,
+    "persisted_candidate_matches": 4064,
+    "policy_choices_copied": false,
+    "scope": "Single-slot source-only own rollouts; inputs unchanged, actual pools only. View adequacy reviewed separately in the declared source contexts. No silent stale-view credit or future-source reconstruction."
+  },
+  "limits": [
+    "Registered witnesses are sufficient, not an exhaustive earliest-evidence oracle.",
+    "Qualified view contexts remain uncertain; absence of a witness does not prove impossibility.",
+    "Observed extra operation clocks are descriptive, not net counterfactual savings.",
+    "All labels are development analysis only; train.jsonl remains empty.",
+    "Author review is exposed to method identities and prior outcomes, not blinded confirmation."
+  ],
+  "model_calls": 0,
+  "by_policy": {
+    "fixed_context": {
+      "positions": 48,
+      "policy_states": 224,
+      "positions_with_witness": 33,
+      "witness_outcomes": {
+        "correct": 19,
+        "qualified": 14
+      },
+      "extra_operations": {
+        "READ": 16
+      },
+      "extra_operation_messages": 16,
+      "extra_operation_wall_seconds": 0.5490437084808946,
+      "empty_handoffs": 0,
+      "empty_handoff_outcomes": {}
+    },
+    "generative": {
+      "positions": 48,
+      "policy_states": 68,
+      "positions_with_witness": 3,
+      "witness_outcomes": {
+        "correct": 3
+      },
+      "extra_operations": {},
+      "extra_operation_messages": 0,
+      "extra_operation_wall_seconds": 0,
+      "empty_handoffs": 28,
+      "empty_handoff_outcomes": {
+        "unfulfilled": 25,
+        "length_failure": 3
+      }
+    },
+    "rules": {
+      "positions": 48,
+      "policy_states": 281,
+      "positions_with_witness": 37,
+      "witness_outcomes": {
+        "correct": 28,
+        "qualified": 7,
+        "wrong": 2
+      },
+      "extra_operations": {
+        "REFRESH_VIEW": 35,
+        "READ": 15
+      },
+      "extra_operation_messages": 35,
+      "extra_operation_wall_seconds": 230.89150165766478,
+      "empty_handoffs": 0,
+      "empty_handoff_outcomes": {}
+    }
+  },
+  "interpretation": {
+    "witness": "Conservative sufficient raw-source sets or reviewed adequate opened views; absence of this marker does not prove task impossibility.",
+    "read_followups": "31 READs follow a witness. Two (fixed/rules F01 stage1) add the older original budget segment after the current recap already suffices; remaining29 add no new recognized full original turns, often old query/answer material. Corroboration and potential stale interference are not assigned causal gains/losses without a counterfactual.",
+    "refresh_followups": "35 rule refreshes follow a witness, consuming196599generation tokens. These are observed work, not measured avoidable net cost; future cache value is not counterfactually tested.",
+    "ready_wrong": "Rules D25stage2/repeat have a raw witness yet wrong answers. One new view is delivered, the other is persisted but not delivered. Do not assign every final error to acquisition or claim both were caused by consuming a new view.",
+    "early_stop": "28generative empty handoffs retain7or8steps and available operations, resulting25unfulfilled/3laterlengthfailures. Five other failures across arms precede the controller.",
+    "review_masks": "All61view contexts were author reviewed.21remain uncertain; the helper historical unreviewed-view label denotes uncertainty here, not missing author review.11states masked for this reason;30forced states masked.",
+    "training": "All532preference labels are dev-only; train.jsonl is empty."
+  },
+  "refresh_after_witness_generation_tokens": 196599,
+  "missing_view_context_reviews": 0,
+  "reviewed_uncertain_view_contexts": 21,
+  "training_rows": 0,
+  "detailed_analysis": "artifacts/dynamic-memory-control/memops-dev-baselines-sufficiency-v1/m4-analysis.json"
+}

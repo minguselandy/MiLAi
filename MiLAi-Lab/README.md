@@ -1,6 +1,8 @@
 # MiLAi Lab
 
-当前开发执行[2026-10-14 全局规划](docs/MILAI_GLOBAL_DEVELOPMENT_PLAN_20261014.md)。检索、证据组合与命题更新已接入共享核心；长期对照显示读取成本下降但自动维护尚未回本，正常Host仍有验收缺口，最终保留用户确认已按用户要求暂停。以[当前状态](docs/LAB_CURRENT_STATUS.md)为准，以下旧阶段说明保留作历史记录。
+当前开发执行[动态记忆控制 v2 计划](docs/MILAI_DYNAMIC_MEMORY_CONTROL_DEVELOPMENT_EXPERIMENT_PLAN_20261018_v2.md)，完整目标仍在进行。两项各80位置的学习策略评价和144位置的外部基线已关闭，72位置的自身轨迹正在运行。当前结果尚未建立复杂控制器相对强简单方法的全面优势。最新实现、结果、成本和未完成项见[开发检查点](docs/MILAI_DYNAMIC_MEMORY_CONTROL_EXECUTION_20261018.md)及[当前状态](docs/LAB_CURRENT_STATUS.md)。
+
+此前[2026-10-14 全局规划](docs/MILAI_GLOBAL_DEVELOPMENT_PLAN_20261014.md)及下方旧阶段说明保留作历史记录；各阶段的暂停、完成和发布状态不替代本轮检查点。
 
 r52同版本开发实验与140项终态回填已完成，功能验收仍PARTIAL，没有稳定推荐配置，Product NO_GO。原L1为24/24 PASS；新增合同L1 23限定通过／1失败，L2 9／3，L3形成41／16、读取17／13，新L4 9／3。来源、时间范围、行动选择及提供方限制按原结果保留。详见[终态报告](docs/V13_5_R52_TERMINAL_REPORT.md)、[FUNC汇总](docs/V13_5_PROGRESS.md)及[验收映射](docs/V13_5_REQUIREMENTS_AND_ACCEPTANCE.md)。
 
@@ -12,6 +14,7 @@ MiLAi 的研究、评测与实验代码位于本目录。可部署产品属于
 
 ## 当前入口
 
+- [动态记忆控制当前开发检查点](docs/MILAI_DYNAMIC_MEMORY_CONTROL_EXECUTION_20261018.md)：共享操作循环、训练与机制比较、完整外部基线、实际状态和成本；实验继续，保护确认与全部种子尚未完成。
 - [2026-10-05 实验进度快照](docs/MILAI_EDIT_CHECKPOINT_20261005.md)：B0/B1 已完成，B2 运行中，M 未开始；实验继续，最终候选与产品验收尚未完成。
 - [MiLAi-Edit 原计划](docs/MILAI_EDIT_LITERATURE_AND_EXPERIMENT_PLAN.md)、[分析协议](docs/MILAI_EDIT_ANALYSIS_SPEC.md)和[实现说明](docs/MILAI_EDIT_IMPLEMENTATION.md)：本轮完整执行，历史结论原样保留。
 - [v13.5 功能入口](docs/V13_5_FUNCTIONAL_USAGE.md)：自然保存、修订、历史、遗忘及两工作流；[执行协议](docs/V13_5_EXECUTION_PROTOCOL.md)、[验收映射](docs/V13_5_REQUIREMENTS_AND_ACCEPTANCE.md)。
