@@ -1,5 +1,5 @@
 {
-  "status": "RUNNING",
+  "status": "COMPLETED",
   "pid": 509200,
   "exec_session": 65861,
   "source_version": "c0770e49",
@@ -98,8 +98,8 @@
   "snapshot_note": "Read from live run.json; revalidate process and current file before any dispatch.",
   "final_diagnostic_snapshot": {
     "dev_predictions": 456,
-    "train_predictions": 564,
-    "final_checkpoint_written": false
+    "train_predictions": 1649,
+    "final_checkpoint_written": true
   },
   "final_dev": {
     "counts": {
@@ -131,5 +131,37 @@
     "families": 16,
     "family_macro_acceptance": 0.746664859985231,
     "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
-  }
+  },
+  "final_train": {
+    "counts": {
+      "labelled": 1649,
+      "accepted": 1413,
+      "handoff_outside_reviewed_preference": 24
+    },
+    "strata": {
+      "source_reviewed_preference": {
+        "labelled": 1649,
+        "accepted": 1413
+      }
+    },
+    "selected_operations": {
+      "SEARCH": {
+        "selected": 287,
+        "accepted": 274
+      },
+      "READ": {
+        "selected": 1110,
+        "accepted": 911
+      },
+      "HANDOFF": {
+        "selected": 252,
+        "accepted": 228
+      }
+    },
+    "families": 64,
+    "family_macro_acceptance": 0.8746317018660565,
+    "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+  },
+  "final_checkpoint": "artifacts/host-intent-retrieval-v3/fitting/t0-native-shared-seed0-v1/checkpoint",
+  "next_model_job": "exported final207 dev456 validation; PID797851/exec35013"
 }

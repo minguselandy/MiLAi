@@ -1,4 +1,4 @@
-# CURRENT 2026-10-20: T0 seed0 FIT CLOSED; exported-weight validation next
+# CURRENT 2026-10-20: exported-weight validation RUNNING; T0 seed0 FIT CLOSED
 
 PID509200 gone; exec65861 exit0; fitting/t0-native-shared-seed0-v1/run.json COMPLETED207.
 Frozen training source c0770e49; final checkpoint exists.3312trainingrows/16457101tokens.
@@ -9,7 +9,9 @@ Final fit wall4042.812391/CPU6993.788020. NO fitted seeds1/2 yet.
 IMPORTANT: installed Laya SDK saves FP16, loads FP32. Header170F16 tensors; prior finaldev
 was in-memory FP32. Registered next: same456dev persisted final207 validation on physicalGPU2,
 shared projection12288/2048, originalledger phasehost_intent_t0_seed0_exported_dev_v1.
-Plan data/manifests/host-intent-retrieval-v3-t0-export-validation-plan.json. Not started at this snapshot.
+ACTIVE PID797851 / exec35013 / frozen-e1df7ede,
+evaluations/t0-seed0-exported-dev-v1/run.json. Revalidate/pollsamehandle; no second model job
+or offline settlement while alive. Plan data/manifests/host-intent-retrieval-v3-t0-export-validation-plan.json.
 Then registered64 ordinary-tool dev positions, frozen63603feb dispatch in
 artifacts/host-intent-retrieval-v3/t0-tool-eval-dispatch-v1.json. No checkpoint reselection or retry.
 Check actual process/driver before every launch; never restart after lost observation handle.
