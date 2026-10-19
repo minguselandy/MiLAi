@@ -1,0 +1,38 @@
+{
+  "version": "dynamic-memory-control-confirmation-selection-v1",
+  "status": "REGISTERED_NO_PROTECTED_BODY_OR_CONFIRMATION_RUN",
+  "timing": "Before author review of the current external-development QA outputs and before protected-family semantic inspection. Current development generation may already be underway.",
+  "candidate_scope": "Predeclared, actually fitted operation recipes with fixed final checkpoints. Current24/36family pilot recipes remain development candidates; wider-source intake is still incomplete and must not be redefined as finished.",
+  "selection_rule": {
+    "primary": "Source-faithful complete-task success macro-averaged over the8external development source families. Failure, unsupported qualification and incomplete required dimensions are not full success.",
+    "response_rule": "Judge all explicitly requested dimensions; supported representative reflection examples need not copy every authored sentence. Preserve unknowns, speaker/subject and current/planned/historical distinctions.",
+    "tie": "Use Pareto dominance over measured generation tokens, native input tokens and full per-message wall time if one tied-quality recipe is no worse on all three; otherwise retain the smaller-data recipe as a deterministic tie-break. Report all alternatives and uncertainty.",
+    "original_development": "The original8family slice is reported separately and used as a regression diagnostic, not substituted for the external-development criterion after seeing scores."
+  },
+  "confirmation": {
+    "training_seeds": [
+      0,
+      1,
+      2
+    ],
+    "checkpoint_rule": "Final declared update only for every seed; never best-seed/checkpoint selection on protected outcomes.",
+    "training_inputs": "Same source split, selected representation, initialization and update recipe across seeds. Reuse an identical already-completed BASE evaluation rather than repeating its model positions.",
+    "protected_data": "Use only preallocated protected families after recipe/data/runtime freeze. Keep source_task and explicit_lifecycle tracks distinct, report actual independent family counts and broad uncertainty. Do not claim the suggested48family scale if fewer are admitted.",
+    "required_controls": [
+      "strong fixed context",
+      "simple dynamic rules with declared context-read capability",
+      "selected learned recipe across all3seeds",
+      "generative controller with the same operations"
+    ],
+    "required_outputs": [
+      "whole-trajectory task outcomes",
+      "actual Source/record/view/lifecycle state evidence",
+      "reuse/refresh correctness",
+      "full disaggregated method computation including load/recovery",
+      "all first failures, unknown usage and partial effects"
+    ]
+  },
+  "conditional_work": "No automatic RL, value-model or encoder-cache platform. Additional mechanisms require evidence of the corresponding bottleneck and a separate matched comparison.",
+  "remaining": "Wider source review/collection/fitting, current development outcomes, protected task/source preparation and seed1/2fits are unfinished. This protocol is not completion evidence.",
+  "model_calls": 0
+}

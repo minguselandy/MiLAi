@@ -25,6 +25,7 @@ from milai_lab.memory.functional_state import (
     FunctionalOperationError,
     FunctionalRejection,
     FunctionalReviewRejection,
+    body_text,
     canonical,
     commit_request_targets,
     fragment_support,
@@ -585,7 +586,7 @@ class FunctionalMemory:
                         "when the user authorizes that entire Source and its linked records. "
                         "Partial Source revocation is not supported by this contract."
                     )
-            for ref in required:
+            for ref in sorted(required):
                 source = self.service.source(ref)
                 if source is None:
                     continue
@@ -594,12 +595,26 @@ class FunctionalMemory:
                     if start > end:
                         break
                     end = max(end, stop)
-                if end != len(source["content"]):
+                if end != len(body_text(source)):
+                    mapping = request_target_mapping(self.service, binding)
+                    missing = {
+                        "source_ref": ref, "current_request": ref == binding["source_ref"],
+                        "body_codepoints": len(body_text(source)),
+                        "selected_ranges": sorted(ranges.get(ref, [])),
+                        "issued_targets": [{"target": target, "kind": row["kind"],
+                            **{key: row["identity"][key] for key in ("start", "end")
+                               if key in row["identity"]}}
+                            for target, row in mapping["targets"].items()
+                            if row["identity"].get("source_ref") == ref],
+                    }
                     raise FunctionalRejection(
                         "V13_5_FORGET_WHOLE_SOURCE_SELECTION_REQUIRED: this contract cannot "
                         "revoke only part of a Source. Read and explicitly select its complete "
                         "body only when the user authorizes all of it; otherwise use record "
-                        "scope and report that original Sources remain accessible."
+                        "scope and report that original Sources remain accessible. The closure "
+                        "also includes the current request Source. Existing navigation targets "
+                        "still require a body read; no credential is issued by this feedback. "
+                        "first_uncovered_source=" + canonical(missing)
                     )
         return self.service.forget(
             binding["session"], operation_id,
@@ -2599,6 +2614,8 @@ class FunctionalMemory:
 
             Select at most one delivered_record target, and any delivered_source targets
             for other original copies. A source selection revokes that whole Source.
+            With independent Sources, also select the complete current request Source:
+            the existing closure includes it, so forgotten text cannot survive in its request.
             record_and_sources hides the record, support/history/raw fallbacks and derived
             assistant outputs; record alone retains source visibility. This is visibility
             revocation, not physical erasure. Navigation-only targets cannot be forgotten.

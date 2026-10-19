@@ -1,13 +1,23 @@
-# LIVE V9: 2026-10-19
+# LIVE V9 / SHARED FEEDBACK FIX READY: 2026-10-19
 
-Only live coordinator PID1338326 / exec71303; active child1338331 sandbox-progress-observation-v3.
-Status artifacts/dynamic-memory-control/reviewed-followups-dispatch-v9.json; inspect actual /proc commands.
-Queue: new v3sandbox10 (frozen7cb10883) -> matched original/shared vs broader/shared80each ->
-external dev baselines48x3 -> broader own-train72. Evaluation method0acc4b9a, dispatcherdc2d4b32.
-All5configs prepared offline; training gates require final96/shared. No best checkpoint selection.
-7measured offline phases settled ONCE at idle before V9; model andunknown counters unchanged.
-NEVER settle new offline work while V9 or any model child is live. No old position retried.
-V8 has closed old v2all10positions and is terminal; it is not a live dependency. Full goal active.
+Only live coordinator PID1338326 / exec71303; active child1387216 t1-original-shared-evaluation-v1.
+Revalidate actual /proc commands and reviewed-followups-dispatch-v9.json; do not restart/resume V9.
+Sandboxv3 CLOSED10: fixed correct reservation6/destination/packing and complete_label only continuation,
+final business target met but intermediate query length failure. Rules label completed without duplicate
+reservation, wrong initial standard packing so task failed. Three length failures retained. Extra fixed
+semantic revisions not credited as explicitly requested saves. Same template, no independent-family gain.
+New generic forget feedback identifies uncovered Source plus existing issued selectors; same closure,
+current-request inclusion, shared/partial-source restrictions. body_text handles structured Source length.
+Receipt renderer uses source capture order for journal-authorized receipts. Original answers unchanged.
+173affected tests, Ruff/mypy2modules and package/tools boundaries passed. Lifecycle16positions prepared,
+full-context4rule predeclared; freeze before later serial admission, never modify current V9 methods.
+Confirmation selection protocol registered before external-dev author grading/protected content use.
+All45remaining train backgrounds registered;6source-reviewed,39pending, none newly collected/fitted.
+Queue remains matched original/shared80 -> broader/shared80 -> external baselines144 -> own-train72.
+Evaluation method0acc4b9a, dispatcherdc2d4b32. All fixed final96; no best-checkpoint/protected selection.
+7earlier offline phases settled ONCE beforeV9; new offline work remains pending. NEVER settle while any
+model child lives. Model/unknown counters unchanged by preparation. Full goal/allseeds/protected/lifecycle
+and broad training remain incomplete. User-owned global architecture research file stays untouched.
 
 # V8 TERMINAL / PROGRESS OBSERVATION FIX: 2026-10-19
 

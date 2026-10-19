@@ -1,0 +1,419 @@
+{
+  "version": "dynamic-memory-control-sandbox-progress-observation-v3-results",
+  "status": "ALL10FIRST_POSITIONS_REVIEWED",
+  "runtime": "7cb10883",
+  "functional_template": "same template as v2, new input variant; not another independent family or a causal method comparison",
+  "records": [
+    {
+      "policy": "fixed_context",
+      "step": "recorded-requirements",
+      "status": "COMPLETED",
+      "error": null,
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-progress-observation-v3/fixed_context/banks/72a6ee0b-01bb-40ff-b5a8-afdf1375c18c/e774e45c-d69b-4d31-8d3d-8cf28f2adc21-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-progress-observation-v3/fixed_context/banks/72a6ee0b-01bb-40ff-b5a8-afdf1375c18c/e774e45c-d69b-4d31-8d3d-8cf28f2adc21-trace-0.jsonl",
+      "grade": "correct_requirements",
+      "world": {
+        "label_available": false,
+        "reservations": [],
+        "attempts": []
+      },
+      "model_business_calls": [],
+      "semantic_record_count": 0,
+      "declared_memory_requests": []
+    },
+    {
+      "policy": "fixed_context",
+      "step": "reserve-with-label-outage",
+      "status": "COMPLETED",
+      "error": null,
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-progress-observation-v3/fixed_context/banks/72a6ee0b-01bb-40ff-b5a8-afdf1375c18c/1aef6244-c021-4884-84d3-263cf5d03476-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-progress-observation-v3/fixed_context/banks/72a6ee0b-01bb-40ff-b5a8-afdf1375c18c/1aef6244-c021-4884-84d3-263cf5d03476-trace-0.jsonl",
+      "grade": "correct_partial_business_effect",
+      "world": {
+        "label_available": false,
+        "reservations": [
+          {
+            "reservation_id": "RSV-4825eef0-ffb8-4939-b178-058aca9ae2cf",
+            "user_id": "development-user",
+            "item_key": "石湾传感器箱（检验批）",
+            "quantity": 6,
+            "destination": "测量区4号位",
+            "packing": "隔震盒",
+            "label_status": "not_created"
+          }
+        ],
+        "attempts": [
+          {
+            "id": 1,
+            "user_id": "development-user",
+            "item_key": "石湾传感器箱（检验批）",
+            "operation": "reserve_and_label",
+            "outcome": "reserved"
+          }
+        ]
+      },
+      "model_business_calls": [
+        "get_reservation",
+        "reserve_and_label"
+      ],
+      "semantic_record_count": 1,
+      "declared_memory_requests": [
+        "new_assertion",
+        "explicit"
+      ]
+    },
+    {
+      "policy": "fixed_context",
+      "step": "reopened-live-status",
+      "status": "FAILED",
+      "error": "VLLM_CHAT_TRUNCATED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-progress-observation-v3/fixed_context/banks/72a6ee0b-01bb-40ff-b5a8-afdf1375c18c/e18967de-857f-41db-8c29-7a476e5c23c9-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-progress-observation-v3/fixed_context/banks/72a6ee0b-01bb-40ff-b5a8-afdf1375c18c/e18967de-857f-41db-8c29-7a476e5c23c9-trace-0.jsonl",
+      "grade": "no_answer",
+      "world": {
+        "label_available": false,
+        "reservations": [
+          {
+            "reservation_id": "RSV-4825eef0-ffb8-4939-b178-058aca9ae2cf",
+            "user_id": "development-user",
+            "item_key": "石湾传感器箱（检验批）",
+            "quantity": 6,
+            "destination": "测量区4号位",
+            "packing": "隔震盒",
+            "label_status": "not_created"
+          }
+        ],
+        "attempts": [
+          {
+            "id": 1,
+            "user_id": "development-user",
+            "item_key": "石湾传感器箱（检验批）",
+            "operation": "reserve_and_label",
+            "outcome": "reserved"
+          }
+        ]
+      },
+      "model_business_calls": [],
+      "semantic_record_count": 1,
+      "declared_memory_requests": null
+    },
+    {
+      "policy": "fixed_context",
+      "step": "finish-original-label",
+      "status": "COMPLETED",
+      "error": null,
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-progress-observation-v3/fixed_context/banks/72a6ee0b-01bb-40ff-b5a8-afdf1375c18c/064eda28-d9d1-47be-ad17-ca1044f9b027-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-progress-observation-v3/fixed_context/banks/72a6ee0b-01bb-40ff-b5a8-afdf1375c18c/064eda28-d9d1-47be-ad17-ca1044f9b027-trace-0.jsonl",
+      "grade": "correct_label_only_continuation",
+      "world": {
+        "label_available": true,
+        "reservations": [
+          {
+            "reservation_id": "RSV-4825eef0-ffb8-4939-b178-058aca9ae2cf",
+            "user_id": "development-user",
+            "item_key": "石湾传感器箱（检验批）",
+            "quantity": 6,
+            "destination": "测量区4号位",
+            "packing": "隔震盒",
+            "label_status": "created"
+          }
+        ],
+        "attempts": [
+          {
+            "id": 1,
+            "user_id": "development-user",
+            "item_key": "石湾传感器箱（检验批）",
+            "operation": "reserve_and_label",
+            "outcome": "reserved"
+          },
+          {
+            "id": 2,
+            "user_id": "development-user",
+            "item_key": "石湾传感器箱（检验批）",
+            "operation": "complete_label",
+            "outcome": "created"
+          }
+        ]
+      },
+      "model_business_calls": [
+        "complete_label"
+      ],
+      "semantic_record_count": 1,
+      "declared_memory_requests": []
+    },
+    {
+      "policy": "fixed_context",
+      "step": "confirmed-state",
+      "status": "COMPLETED",
+      "error": null,
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-progress-observation-v3/fixed_context/banks/72a6ee0b-01bb-40ff-b5a8-afdf1375c18c/2c318efe-a911-4b80-8a4e-09aebfd70939-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-progress-observation-v3/fixed_context/banks/72a6ee0b-01bb-40ff-b5a8-afdf1375c18c/2c318efe-a911-4b80-8a4e-09aebfd70939-trace-0.jsonl",
+      "grade": "correct_actual_state_query",
+      "world": {
+        "label_available": true,
+        "reservations": [
+          {
+            "reservation_id": "RSV-4825eef0-ffb8-4939-b178-058aca9ae2cf",
+            "user_id": "development-user",
+            "item_key": "石湾传感器箱（检验批）",
+            "quantity": 6,
+            "destination": "测量区4号位",
+            "packing": "隔震盒",
+            "label_status": "created"
+          }
+        ],
+        "attempts": [
+          {
+            "id": 1,
+            "user_id": "development-user",
+            "item_key": "石湾传感器箱（检验批）",
+            "operation": "reserve_and_label",
+            "outcome": "reserved"
+          },
+          {
+            "id": 2,
+            "user_id": "development-user",
+            "item_key": "石湾传感器箱（检验批）",
+            "operation": "complete_label",
+            "outcome": "created"
+          }
+        ]
+      },
+      "model_business_calls": [],
+      "semantic_record_count": 1,
+      "declared_memory_requests": []
+    },
+    {
+      "policy": "rules",
+      "step": "recorded-requirements",
+      "status": "FAILED",
+      "error": "VLLM_CHAT_TRUNCATED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-progress-observation-v3/rules/banks/89aaeb96-b82b-462c-8bef-326e0d15ddf3/3c6bee83-eb03-4b8c-9a80-9696eb890236-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-progress-observation-v3/rules/banks/89aaeb96-b82b-462c-8bef-326e0d15ddf3/3c6bee83-eb03-4b8c-9a80-9696eb890236-trace-0.jsonl",
+      "grade": "no_answer",
+      "world": {
+        "label_available": false,
+        "reservations": [],
+        "attempts": []
+      },
+      "model_business_calls": [],
+      "semantic_record_count": 0,
+      "declared_memory_requests": []
+    },
+    {
+      "policy": "rules",
+      "step": "reserve-with-label-outage",
+      "status": "FAILED",
+      "error": "VLLM_CHAT_TRUNCATED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-progress-observation-v3/rules/banks/89aaeb96-b82b-462c-8bef-326e0d15ddf3/c1b07399-717c-434d-95c9-787a976947af-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-progress-observation-v3/rules/banks/89aaeb96-b82b-462c-8bef-326e0d15ddf3/c1b07399-717c-434d-95c9-787a976947af-trace-0.jsonl",
+      "grade": "no_answer",
+      "world": {
+        "label_available": false,
+        "reservations": [
+          {
+            "reservation_id": "RSV-03a21b29-8e7e-4824-96c8-10c7b89868fa",
+            "user_id": "development-user",
+            "item_key": "石湾传感器箱（检验批）",
+            "quantity": 6,
+            "destination": "测量区4号位",
+            "packing": "standard",
+            "label_status": "not_created"
+          }
+        ],
+        "attempts": [
+          {
+            "id": 1,
+            "user_id": "development-user",
+            "item_key": "石湾传感器箱（检验批）",
+            "operation": "reserve_and_label",
+            "outcome": "reserved"
+          }
+        ]
+      },
+      "model_business_calls": [
+        "get_reservation",
+        "reserve_and_label"
+      ],
+      "semantic_record_count": 0,
+      "declared_memory_requests": []
+    },
+    {
+      "policy": "rules",
+      "step": "reopened-live-status",
+      "status": "COMPLETED",
+      "error": null,
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-progress-observation-v3/rules/banks/89aaeb96-b82b-462c-8bef-326e0d15ddf3/313e723f-a8c7-4a46-90cd-7c1360e06797-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-progress-observation-v3/rules/banks/89aaeb96-b82b-462c-8bef-326e0d15ddf3/313e723f-a8c7-4a46-90cd-7c1360e06797-trace-0.jsonl",
+      "grade": "correct_actual_state_query",
+      "world": {
+        "label_available": false,
+        "reservations": [
+          {
+            "reservation_id": "RSV-03a21b29-8e7e-4824-96c8-10c7b89868fa",
+            "user_id": "development-user",
+            "item_key": "石湾传感器箱（检验批）",
+            "quantity": 6,
+            "destination": "测量区4号位",
+            "packing": "standard",
+            "label_status": "not_created"
+          }
+        ],
+        "attempts": [
+          {
+            "id": 1,
+            "user_id": "development-user",
+            "item_key": "石湾传感器箱（检验批）",
+            "operation": "reserve_and_label",
+            "outcome": "reserved"
+          }
+        ]
+      },
+      "model_business_calls": [
+        "get_reservation"
+      ],
+      "semantic_record_count": 0,
+      "declared_memory_requests": []
+    },
+    {
+      "policy": "rules",
+      "step": "finish-original-label",
+      "status": "COMPLETED",
+      "error": null,
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-progress-observation-v3/rules/banks/89aaeb96-b82b-462c-8bef-326e0d15ddf3/86e1e504-f20a-43af-b1f0-946149bc7e10-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-progress-observation-v3/rules/banks/89aaeb96-b82b-462c-8bef-326e0d15ddf3/86e1e504-f20a-43af-b1f0-946149bc7e10-trace-0.jsonl",
+      "grade": "correct_label_only_continuation",
+      "world": {
+        "label_available": true,
+        "reservations": [
+          {
+            "reservation_id": "RSV-03a21b29-8e7e-4824-96c8-10c7b89868fa",
+            "user_id": "development-user",
+            "item_key": "石湾传感器箱（检验批）",
+            "quantity": 6,
+            "destination": "测量区4号位",
+            "packing": "standard",
+            "label_status": "created"
+          }
+        ],
+        "attempts": [
+          {
+            "id": 1,
+            "user_id": "development-user",
+            "item_key": "石湾传感器箱（检验批）",
+            "operation": "reserve_and_label",
+            "outcome": "reserved"
+          },
+          {
+            "id": 2,
+            "user_id": "development-user",
+            "item_key": "石湾传感器箱（检验批）",
+            "operation": "complete_label",
+            "outcome": "created"
+          }
+        ]
+      },
+      "model_business_calls": [
+        "complete_label"
+      ],
+      "semantic_record_count": 0,
+      "declared_memory_requests": []
+    },
+    {
+      "policy": "rules",
+      "step": "confirmed-state",
+      "status": "COMPLETED",
+      "error": null,
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-progress-observation-v3/rules/banks/89aaeb96-b82b-462c-8bef-326e0d15ddf3/dc155751-883d-4e2c-bde6-5d00a190d2ed-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-progress-observation-v3/rules/banks/89aaeb96-b82b-462c-8bef-326e0d15ddf3/dc155751-883d-4e2c-bde6-5d00a190d2ed-trace-0.jsonl",
+      "grade": "correct_actual_state_query",
+      "world": {
+        "label_available": true,
+        "reservations": [
+          {
+            "reservation_id": "RSV-03a21b29-8e7e-4824-96c8-10c7b89868fa",
+            "user_id": "development-user",
+            "item_key": "石湾传感器箱（检验批）",
+            "quantity": 6,
+            "destination": "测量区4号位",
+            "packing": "standard",
+            "label_status": "created"
+          }
+        ],
+        "attempts": [
+          {
+            "id": 1,
+            "user_id": "development-user",
+            "item_key": "石湾传感器箱（检验批）",
+            "operation": "reserve_and_label",
+            "outcome": "reserved"
+          },
+          {
+            "id": 2,
+            "user_id": "development-user",
+            "item_key": "石湾传感器箱（检验批）",
+            "operation": "complete_label",
+            "outcome": "created"
+          }
+        ]
+      },
+      "model_business_calls": [],
+      "semantic_record_count": 0,
+      "declared_memory_requests": []
+    }
+  ],
+  "final_states": {
+    "fixed_context": {
+      "business_target_state_correct": true,
+      "reservation_rows": 1,
+      "reservation_attempts": 1,
+      "duplicate_reservation_attempts": 0,
+      "all_requested_messages_fulfilled": false
+    },
+    "rules": {
+      "business_target_state_correct": false,
+      "reservation_rows": 1,
+      "reservation_attempts": 1,
+      "duplicate_reservation_attempts": 0,
+      "all_requested_messages_fulfilled": false
+    }
+  },
+  "costs": {
+    "fixed_context": {
+      "attempted": 5,
+      "host_completed": 4,
+      "task_positions": 3,
+      "explicit_positions": 2,
+      "generation_known_tokens": 206931,
+      "generation_charged_tokens": 206931,
+      "generation_unknown_usage": 0,
+      "embedding_known_tokens": 1020,
+      "embedding_charged_tokens": 1020,
+      "embedding_unknown_usage": 0
+    },
+    "rules": {
+      "attempted": 5,
+      "host_completed": 3,
+      "task_positions": 3,
+      "explicit_positions": 2,
+      "generation_known_tokens": 200241,
+      "generation_charged_tokens": 200241,
+      "generation_unknown_usage": 0,
+      "embedding_known_tokens": 0,
+      "embedding_charged_tokens": 0,
+      "embedding_unknown_usage": 0
+    }
+  },
+  "findings": [
+    "Fixed-context completed the correctly parameterized reservation after an actual outage and later label-only continuation, with one reservation and no duplicate attempt. Its intermediate readonly query hit a first-response length failure.",
+    "Rules also completed label-only continuation without duplicate reservation, but its earlier packing value was standard rather than the sourced隔震盒. Its final live status reports are faithful to that wrong prior state, not full workflow success.",
+    "Rules parameter-planning packet omitted the packing source, then the planner supplied an unsupported default. No hardcoded value repair is applied.",
+    "Both label completions used the internally recovered actual object reference. Record exact model business-call sequence separately.",
+    "Fixed current-scope classification additionally requested saving the result and created/updated semantic memory. This extra work is not credited as fulfillment of an explicitly requested memory task; full semantic state validity is unconfirmed.",
+    "The current renderer appended a pre-action query after the label completion receipt. New presentation code orders actual source-receipt capture timestamps; original text remains unchanged."
+  ],
+  "limits": [
+    "Three original length failures retained. Neither history satisfied every requested message.",
+    "No Laya or protected generalization result is inferred from this two-policy functional check."
+  ]
+}

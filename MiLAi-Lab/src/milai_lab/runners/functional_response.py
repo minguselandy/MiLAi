@@ -168,7 +168,7 @@ def business_response(
     authorized = {row["receipt_ref"]: row for row in [
         *business["operations"], *business["observations"]]}
     calls: dict[str, str] = {}
-    receipts: list[tuple[str, dict[str, Any]]] = []
+    receipts: list[tuple[str, dict[str, Any], str | None]] = []
     source_refs: set[str] = set()
     targets: set[tuple[str, str]] = set()
     for message in messages:
@@ -192,7 +192,8 @@ def business_response(
             receipt = body.get("receipt") if isinstance(body, dict) else None
             if not isinstance(receipt, dict):
                 continue
-            receipts.append((name, receipt))
+            captured = (body.get("raw_capture") or {}).get("observed_at")
+            receipts.append((name, receipt, captured if isinstance(captured, str) else None))
             source_refs.add(body.get("source_ref", ""))
             targets.update((k, receipt[k]) for k in ("item_key", "title")
                            if isinstance(receipt.get(k), str))
@@ -202,7 +203,11 @@ def business_response(
     if effects.get("request_part_failures"):
         paragraphs.append("本轮业务请求解析未完成, 没有由该分支取得新的执行许可。"
                           "独立记忆工作的回执另列, 不代表原请求全部完成。")
-    for name, receipt in receipts:
+    # Recovery observations can arrive through progress after the Agent's messages.
+    # Source capture clocks order those real receipts, not their business-event dates.
+    if all(captured is not None for _, _, captured in receipts):
+        receipts.sort(key=lambda item: item[2] or "")
+    for name, receipt, _ in receipts:
         paragraphs.append(_TOOLS[name] + ": \n\n" + "\n".join(
             "- " + line for line in _receipt_lines(receipt)))
     if include_business and not receipts:

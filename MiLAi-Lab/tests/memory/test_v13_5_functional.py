@@ -2910,6 +2910,43 @@ def test_independent_forget_preserves_shared_source_until_whole_selection(tmp_pa
         assert memory.service.source(ref) is None
 
 
+@pytest.mark.parametrize("content", ["The selected marker is amber.",
+                                      {"marker": "amber", "enabled": False, "count": 0}])
+def test_whole_source_feedback_identifies_the_unselected_trigger_without_granting_scope(
+    tmp_path: Path, content: Any,
+) -> None:
+    with opened(tmp_path, memory_profile="unified_v1", source_access="independent_v1",
+                memory_view_mode="staged", material_limit=40000) as memory:
+        ref = memory.service.capture_user("s", "original", content)["source_ref"]
+        keep = turn(memory, "keep", "The independent alarm stays quiet.")
+        kept = memory.save(cfg("keep"), "keep-alarm", "The independent alarm stays quiet.",
+                           handles(memory, keep))
+        trigger = turn(memory, "forget-selected",
+                       "Forget the selected original; preserve the alarm.")
+        config = cfg("forget-selected")
+        packet = memory.bind_request_targets(config, {"ok": True, "items": [
+            {"type": "fragment", **part} for source_ref in (ref, trigger)
+            for part in memory.service.source_fragments(source_ref)]})
+        targets = {item["source_ref"]: item["target"] for item in packet["items"]}
+        rejected = invoke(memory, "forget_memory", {"targets": [targets[ref]],
+            "scope": "record_and_sources"}, "incomplete-selection", config)
+        assert rejected["effect"] == "none" and rejected["status"] == "rejected"
+        reason = rejected["reason"]
+        assert "WHOLE_SOURCE_SELECTION_REQUIRED" in reason
+        assert "first_uncovered_source=" in reason
+        missing = json.loads(reason.split("first_uncovered_source=", 1)[1])
+        assert missing["source_ref"] == trigger and missing["current_request"] is True
+        assert missing["selected_ranges"] == []
+        assert any(row["target"] == targets[trigger]
+                   and row["kind"] == "delivered_source" for row in missing["issued_targets"])
+        assert memory.service.source(ref) is not None and memory.service.source(trigger) is not None
+        receipt = invoke(memory, "forget_memory", {"targets": list(targets.values()),
+            "scope": "record_and_sources"}, "complete-selection", config)
+        assert set(receipt["revoked_source_refs"]) == {ref, trigger}
+        assert memory.service.source(ref) is None and memory.service.source(trigger) is None
+        assert memory.service.source(keep) is not None and memory.service.read(kept["id"])["ok"]
+
+
 def test_request_read_ids_reuse_only_this_requests_issued_navigation(tmp_path: Path) -> None:
     options = {'memory_view_mode': 'state_driven', 'read_interface': 'explicit_selectors_v1',
                'read_limit': 10, 'material_limit': 30000}

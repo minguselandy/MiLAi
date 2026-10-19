@@ -1,0 +1,471 @@
+{
+  "version": "dynamic-memory-control-memops-expanded-train-intake-v1",
+  "status": "PARTIAL_SOURCE_REVIEW_NOT_COLLECTED_OR_FITTED",
+  "selection": "All45remaining jointly allocated source_task training backgrounds, in existing cohort order; no outcome-based substitution. Forget-only backgrounds remain the explicit lifecycle track.",
+  "families": [
+    {
+      "family": "A04",
+      "file": "A04_remember.json",
+      "split": "train",
+      "source_group": "A",
+      "operation_type": "Remember",
+      "source_reviewed": true,
+      "model_collected": false,
+      "fitted": false,
+      "source_review": "artifacts/dynamic-memory-control/memops-expanded-source-review-v1/source-review-partial.json"
+    },
+    {
+      "family": "A05",
+      "file": "A05_trajectory_ops.json",
+      "split": "train",
+      "source_group": "A",
+      "operation_type": "TrajectoryOps",
+      "source_reviewed": true,
+      "model_collected": false,
+      "fitted": false,
+      "source_review": "artifacts/dynamic-memory-control/memops-expanded-source-review-v1/source-review-partial.json"
+    },
+    {
+      "family": "A07",
+      "file": "A07_reflect.json",
+      "split": "train",
+      "source_group": "A",
+      "operation_type": "Reflect",
+      "source_reviewed": true,
+      "model_collected": false,
+      "fitted": false,
+      "source_review": "artifacts/dynamic-memory-control/memops-expanded-source-review-v1/source-review-partial.json"
+    },
+    {
+      "family": "A13",
+      "file": "A13_reflect.json",
+      "split": "train",
+      "source_group": "A",
+      "operation_type": "Reflect",
+      "source_reviewed": true,
+      "model_collected": false,
+      "fitted": false,
+      "source_review": "artifacts/dynamic-memory-control/memops-expanded-source-review-v1/source-review-partial.json"
+    },
+    {
+      "family": "A14",
+      "file": "A14_trajectory_ops.json",
+      "split": "train",
+      "source_group": "A",
+      "operation_type": "TrajectoryOps",
+      "source_reviewed": true,
+      "model_collected": false,
+      "fitted": false,
+      "source_review": "artifacts/dynamic-memory-control/memops-expanded-source-review-v1/source-review-partial.json"
+    },
+    {
+      "family": "A16",
+      "file": "A16_trajectory_ops.json",
+      "split": "train",
+      "source_group": "A",
+      "operation_type": "TrajectoryOps",
+      "source_reviewed": true,
+      "model_collected": false,
+      "fitted": false,
+      "source_review": "artifacts/dynamic-memory-control/memops-expanded-source-review-v1/source-review-partial.json"
+    },
+    {
+      "family": "A20",
+      "file": "A20_reflect.json",
+      "split": "train",
+      "source_group": "A",
+      "operation_type": "Reflect",
+      "source_reviewed": false,
+      "model_collected": false,
+      "fitted": false
+    },
+    {
+      "family": "A22",
+      "file": "A22_reflect.json",
+      "split": "train",
+      "source_group": "A",
+      "operation_type": "Reflect",
+      "source_reviewed": false,
+      "model_collected": false,
+      "fitted": false
+    },
+    {
+      "family": "A27",
+      "file": "A27_reflect.json",
+      "split": "train",
+      "source_group": "A",
+      "operation_type": "Reflect",
+      "source_reviewed": false,
+      "model_collected": false,
+      "fitted": false
+    },
+    {
+      "family": "A28",
+      "file": "A28_remember.json",
+      "split": "train",
+      "source_group": "A",
+      "operation_type": "Remember",
+      "source_reviewed": false,
+      "model_collected": false,
+      "fitted": false
+    },
+    {
+      "family": "A29",
+      "file": "A29_trajectory_ops.json",
+      "split": "train",
+      "source_group": "A",
+      "operation_type": "TrajectoryOps",
+      "source_reviewed": false,
+      "model_collected": false,
+      "fitted": false
+    },
+    {
+      "family": "A33",
+      "file": "A33_update.json",
+      "split": "train",
+      "source_group": "A",
+      "operation_type": "Update",
+      "source_reviewed": false,
+      "model_collected": false,
+      "fitted": false
+    },
+    {
+      "family": "B03",
+      "file": "B03_trajectory_ops.json",
+      "split": "train",
+      "source_group": "B",
+      "operation_type": "TrajectoryOps",
+      "source_reviewed": false,
+      "model_collected": false,
+      "fitted": false
+    },
+    {
+      "family": "B05",
+      "file": "B05_update.json",
+      "split": "train",
+      "source_group": "B",
+      "operation_type": "Update",
+      "source_reviewed": false,
+      "model_collected": false,
+      "fitted": false
+    },
+    {
+      "family": "B06",
+      "file": "B06_reflect.json",
+      "split": "train",
+      "source_group": "B",
+      "operation_type": "Reflect",
+      "source_reviewed": false,
+      "model_collected": false,
+      "fitted": false
+    },
+    {
+      "family": "B10",
+      "file": "B10_remember.json",
+      "split": "train",
+      "source_group": "B",
+      "operation_type": "Remember",
+      "source_reviewed": false,
+      "model_collected": false,
+      "fitted": false
+    },
+    {
+      "family": "B12",
+      "file": "B12_update.json",
+      "split": "train",
+      "source_group": "B",
+      "operation_type": "Update",
+      "source_reviewed": false,
+      "model_collected": false,
+      "fitted": false
+    },
+    {
+      "family": "B21",
+      "file": "B21_update.json",
+      "split": "train",
+      "source_group": "B",
+      "operation_type": "Update",
+      "source_reviewed": false,
+      "model_collected": false,
+      "fitted": false
+    },
+    {
+      "family": "B22",
+      "file": "B22_reflect.json",
+      "split": "train",
+      "source_group": "B",
+      "operation_type": "Reflect",
+      "source_reviewed": false,
+      "model_collected": false,
+      "fitted": false
+    },
+    {
+      "family": "B25",
+      "file": "B25_trajectory_ops.json",
+      "split": "train",
+      "source_group": "B",
+      "operation_type": "TrajectoryOps",
+      "source_reviewed": false,
+      "model_collected": false,
+      "fitted": false
+    },
+    {
+      "family": "B26",
+      "file": "B26_trajectory_ops.json",
+      "split": "train",
+      "source_group": "B",
+      "operation_type": "TrajectoryOps",
+      "source_reviewed": false,
+      "model_collected": false,
+      "fitted": false
+    },
+    {
+      "family": "C04",
+      "file": "C04_trajectory_ops.json",
+      "split": "train",
+      "source_group": "C",
+      "operation_type": "TrajectoryOps",
+      "source_reviewed": false,
+      "model_collected": false,
+      "fitted": false
+    },
+    {
+      "family": "C05",
+      "file": "C05_trajectory_ops.json",
+      "split": "train",
+      "source_group": "C",
+      "operation_type": "TrajectoryOps",
+      "source_reviewed": false,
+      "model_collected": false,
+      "fitted": false
+    },
+    {
+      "family": "C07",
+      "file": "C07_update.json",
+      "split": "train",
+      "source_group": "C",
+      "operation_type": "Update",
+      "source_reviewed": false,
+      "model_collected": false,
+      "fitted": false
+    },
+    {
+      "family": "C10",
+      "file": "C10_update.json",
+      "split": "train",
+      "source_group": "C",
+      "operation_type": "Update",
+      "source_reviewed": false,
+      "model_collected": false,
+      "fitted": false
+    },
+    {
+      "family": "C11",
+      "file": "C11_reflect.json",
+      "split": "train",
+      "source_group": "C",
+      "operation_type": "Reflect",
+      "source_reviewed": false,
+      "model_collected": false,
+      "fitted": false
+    },
+    {
+      "family": "C23",
+      "file": "C23_trajectory_ops.json",
+      "split": "train",
+      "source_group": "C",
+      "operation_type": "TrajectoryOps",
+      "source_reviewed": false,
+      "model_collected": false,
+      "fitted": false
+    },
+    {
+      "family": "C26",
+      "file": "C26_update.json",
+      "split": "train",
+      "source_group": "C",
+      "operation_type": "Update",
+      "source_reviewed": false,
+      "model_collected": false,
+      "fitted": false
+    },
+    {
+      "family": "C27",
+      "file": "C27_reflect.json",
+      "split": "train",
+      "source_group": "C",
+      "operation_type": "Reflect",
+      "source_reviewed": false,
+      "model_collected": false,
+      "fitted": false
+    },
+    {
+      "family": "C28",
+      "file": "C28_remember.json",
+      "split": "train",
+      "source_group": "C",
+      "operation_type": "Remember",
+      "source_reviewed": false,
+      "model_collected": false,
+      "fitted": false
+    },
+    {
+      "family": "C29",
+      "file": "C29_trajectory_ops.json",
+      "split": "train",
+      "source_group": "C",
+      "operation_type": "TrajectoryOps",
+      "source_reviewed": false,
+      "model_collected": false,
+      "fitted": false
+    },
+    {
+      "family": "D14",
+      "file": "D14_remember.json",
+      "split": "train",
+      "source_group": "D",
+      "operation_type": "Remember",
+      "source_reviewed": false,
+      "model_collected": false,
+      "fitted": false
+    },
+    {
+      "family": "D17",
+      "file": "D17_trajectory_ops.json",
+      "split": "train",
+      "source_group": "D",
+      "operation_type": "TrajectoryOps",
+      "source_reviewed": false,
+      "model_collected": false,
+      "fitted": false
+    },
+    {
+      "family": "D18",
+      "file": "D18_update.json",
+      "split": "train",
+      "source_group": "D",
+      "operation_type": "Update",
+      "source_reviewed": false,
+      "model_collected": false,
+      "fitted": false
+    },
+    {
+      "family": "D19",
+      "file": "D19_update.json",
+      "split": "train",
+      "source_group": "D",
+      "operation_type": "Update",
+      "source_reviewed": false,
+      "model_collected": false,
+      "fitted": false
+    },
+    {
+      "family": "D20",
+      "file": "D20_reflect.json",
+      "split": "train",
+      "source_group": "D",
+      "operation_type": "Reflect",
+      "source_reviewed": false,
+      "model_collected": false,
+      "fitted": false
+    },
+    {
+      "family": "D21",
+      "file": "D21_trajectory_ops.json",
+      "split": "train",
+      "source_group": "D",
+      "operation_type": "TrajectoryOps",
+      "source_reviewed": false,
+      "model_collected": false,
+      "fitted": false
+    },
+    {
+      "family": "D23",
+      "file": "D23_trajectory_ops.json",
+      "split": "train",
+      "source_group": "D",
+      "operation_type": "TrajectoryOps",
+      "source_reviewed": false,
+      "model_collected": false,
+      "fitted": false
+    },
+    {
+      "family": "E10",
+      "file": "E10_remember.json",
+      "split": "train",
+      "source_group": "E",
+      "operation_type": "Remember",
+      "source_reviewed": false,
+      "model_collected": false,
+      "fitted": false
+    },
+    {
+      "family": "E11",
+      "file": "E11_trajectory_ops.json",
+      "split": "train",
+      "source_group": "E",
+      "operation_type": "TrajectoryOps",
+      "source_reviewed": false,
+      "model_collected": false,
+      "fitted": false
+    },
+    {
+      "family": "E14",
+      "file": "E14_reflect.json",
+      "split": "train",
+      "source_group": "E",
+      "operation_type": "Reflect",
+      "source_reviewed": false,
+      "model_collected": false,
+      "fitted": false
+    },
+    {
+      "family": "F08",
+      "file": "F08_trajectory_ops.json",
+      "split": "train",
+      "source_group": "F",
+      "operation_type": "TrajectoryOps",
+      "source_reviewed": false,
+      "model_collected": false,
+      "fitted": false
+    },
+    {
+      "family": "F12",
+      "file": "F12_update.json",
+      "split": "train",
+      "source_group": "F",
+      "operation_type": "Update",
+      "source_reviewed": false,
+      "model_collected": false,
+      "fitted": false
+    },
+    {
+      "family": "F13",
+      "file": "F13_reflect.json",
+      "split": "train",
+      "source_group": "F",
+      "operation_type": "Reflect",
+      "source_reviewed": false,
+      "model_collected": false,
+      "fitted": false
+    },
+    {
+      "family": "F14",
+      "file": "F14_trajectory_ops.json",
+      "split": "train",
+      "source_group": "F",
+      "operation_type": "TrajectoryOps",
+      "source_reviewed": false,
+      "model_collected": false,
+      "fitted": false
+    }
+  ],
+  "planned_source_backgrounds": 45,
+  "already_fitted_external_backgrounds": 12,
+  "total_external_source_task_training_backgrounds": 57,
+  "with_original24_families": 81,
+  "scope": "Expanded source diversity, not81independent reasoning generators and not completion of the proposed128family target. Every source/task contract and actual state input must be reviewed before fitting. No dev/protected families admitted.",
+  "collection": "Reuse shared Source/operation executors; source-only acquisition states can be auxiliary, but cannot substitute ideal generated views or be reported as actual learned trajectories.",
+  "model_calls": 0,
+  "author_review_cost": "Stored compute measures cover scripts only; Codex source reading/semantic annotation is separate, not measured as zero cost."
+}
