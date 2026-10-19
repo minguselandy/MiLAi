@@ -1,3 +1,14 @@
+# LIVE V9: 2026-10-19
+
+Only live coordinator PID1338326 / exec71303; active child1338331 sandbox-progress-observation-v3.
+Status artifacts/dynamic-memory-control/reviewed-followups-dispatch-v9.json; inspect actual /proc commands.
+Queue: new v3sandbox10 (frozen7cb10883) -> matched original/shared vs broader/shared80each ->
+external dev baselines48x3 -> broader own-train72. Evaluation method0acc4b9a, dispatcherdc2d4b32.
+All5configs prepared offline; training gates require final96/shared. No best checkpoint selection.
+7measured offline phases settled ONCE at idle before V9; model andunknown counters unchanged.
+NEVER settle new offline work while V9 or any model child is live. No old position retried.
+V8 has closed old v2all10positions and is terminal; it is not a live dependency. Full goal active.
+
 # V8 TERMINAL / PROGRESS OBSERVATION FIX: 2026-10-19
 
 V8 PID1256244/exec94647 and child1256251 terminal/absent, exit0; all10v2sandbox positions closed.
