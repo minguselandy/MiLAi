@@ -1,3 +1,25 @@
+# LIVE V10: 2026-10-19
+
+Only live coordinator PID1651723/exec59686; active child1651747 lifecycle-source-closure-v1.
+Revalidate reviewed-followups-dispatch-v10.json and actual/proc commands. Never restart live queues.
+Queue: lifecycle16(method3f3c10d3) -> original-shared25unstarted -> broader80 -> baselines144 ->
+broader own-train72. Evaluation method0acc4b9a, all dispatcher17d6f621.337newpositions, no old retry.
+30measured offline phases settled ONCE at idle beforeV10; original model/unknown counters unchanged.
+NEVER settle new offline work while this or another model child lives.
+First6fixed lifecycle positions closed: two distinct commits, identifierrevision2correction, independent
+preference no_change; correct recall/reopen/history answers. Actual stored-history tool path and final
+forget/visibility fullstate still need review; do not call complete from answers alone.
+
+45source-only cohorts now compiled1361labels:1081acquire/280handoff.11107candidate matches and1035source
+identity matches on diagnostic Storecopies, original input/state unchanged, no ideal view/teacher-copy.
+Data provenance: original418scripted collection +98generative-controller prefixes +1361newsource-only
+auxiliary =1877rows/1829labels/81source backgrounds; same139dev/125labels, no family overlap.
+All shared inputs fit12288,max9496; existing capacity measures reused after exact input equality;
+new auxiliary typed roundtrip rechecked. No new numerical model probe or model call needed.
+Next fixed96 seed0 fit fromBASE prepared in prepared-after-v10-expanded81-v1.json; NOT_STARTED.
+No expansion of liveV10. Full goal/protected/allseeds/fullstate/final fit and QA remain incomplete.
+New source-label/preparation compute pending. User-owned global research file remains untouched.
+
 # V9 TERMINAL / NEXT SERIAL QUEUE READY: 2026-10-19
 
 V9 PID1338326/exec71303 and child1387216 terminal/absent, exec exit1. Do not restart V9.

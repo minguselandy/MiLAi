@@ -1,6 +1,6 @@
 {
   "version": "dynamic-memory-control-memops-expanded-train-intake-v1",
-  "status": "ALL45_SOURCE_ONLY_ADMITTED_NOT_LABELLED_OR_FITTED",
+  "status": "ALL45_SOURCE_PREFERENCES_COMPILED_NOT_FITTED",
   "selection": "All45remaining jointly allocated source_task training backgrounds, in existing cohort order; no outcome-based substitution. Forget-only backgrounds remain the explicit lifecycle track.",
   "families": [
     {
@@ -559,5 +559,7 @@
   "source_only_states": 1361,
   "shared_max_tokens": 8000,
   "shared_oversized": 0,
-  "real_generated_view_and_own_trajectory_coverage": "Not supplied by this source-only cohort; existing model cohorts remain separate."
+  "real_generated_view_and_own_trajectory_coverage": "Not supplied by this source-only cohort; existing model cohorts remain separate.",
+  "source_only_preferences": 1361,
+  "source_preference_manifest": "data/manifests/dynamic-memory-control-memops-expanded-source-preferences-v1.json"
 }

@@ -1,0 +1,42 @@
+{
+  "version": "dynamic-memory-control-t1-expanded81-protocol-v1",
+  "status": "PREPARED_NOT_STARTED",
+  "data": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-expanded81-preparation-v1",
+  "train_rows": 1877,
+  "train_labelled": 1829,
+  "train_backgrounds": 81,
+  "dev_rows": 139,
+  "dev_labelled": 125,
+  "dev_families": 8,
+  "train_max_full_tokens": 9496,
+  "auxiliary_source_only_prefixes": 1361,
+  "auxiliary_source_only_labels": 1361,
+  "auxiliary_status_counts": {
+    "acquire_evidence_preference": 1081,
+    "ready_handoff_preference": 280
+  },
+  "scope": "Expanded source coverage, with actual generated-view/model trajectories still supplied only by earlier cohorts.81source backgrounds are not81independent mechanisms and do not meet the suggested128family scale. All old states/questions/gold remain unchanged; masked rows retained. New source-only labels are reviewed preferences, not teacher actions or exhaustive legality.",
+  "length_admission": "Reuse earlier actual typed input measurements after exact state/question equality; new labels/metadata do not enter operation payload. Shared roundtrip rechecked for1361auxiliary rows. No checksum/content fingerprint.",
+  "recipe": {
+    "initialization": "original laya-multilingual-base",
+    "seed": 0,
+    "updates": 96,
+    "micro_batch_size": 1,
+    "effective_batch_size": 16,
+    "backend": "native",
+    "projection": "shared",
+    "objective": "soft-ce",
+    "max_len": 12288,
+    "head_max_len": 2048,
+    "checkpoint_selection": "fixed final96only",
+    "comparison": "Earlier24/36background shared candidates use same initialization/updates; tokens and training data size differ. No repeated unchangedBASEinitialdev."
+  },
+  "evaluation": "Use same frozen matched80development positions and declared external8family primary selection rule. No protected selection. Confirmation seeds0/1/2allremainrequired.",
+  "execution": "After V10 actual terminal review only; do not alter the live queue.",
+  "model_calls": 0,
+  "model_forwards": 0,
+  "original_scripted_collection_prefixes": 418,
+  "existing_generative_controller_prefixes": 98,
+  "existing_labelled_prefixes": 468,
+  "source_only_label_contract": "Reviewed preferences using sufficient source witnesses; alternatives not exhaustively enumerated, no optimal-control or semantic-truth guarantee."
+}

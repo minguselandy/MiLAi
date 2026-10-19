@@ -1,0 +1,30 @@
+{
+  "status": "COMPLETED",
+  "rows": 1361,
+  "labelled": 1361,
+  "backgrounds": 45,
+  "splits": {
+    "train": 1361
+  },
+  "label_status": {
+    "acquire_evidence_preference": 1081,
+    "ready_handoff_preference": 280
+  },
+  "candidate_matches": 11107,
+  "source_identity_matches": 1035,
+  "model_calls": 0,
+  "model_forwards": 0,
+  "scope": "Auxiliary source-acquisition/coverage preferences on preserved scripted paths; no generated views or learned trajectories. Proofs are sufficient witnesses, not exhaustive gold/legality. No data fitted yet.",
+  "original_inputs_changed": false,
+  "version": "dynamic-memory-control-memops-expanded-source-preferences-v1",
+  "collection_roots": [
+    "artifacts/dynamic-memory-control/memops-expanded-wave-a-capacity-v1",
+    "artifacts/dynamic-memory-control/memops-expanded-remaining-capacity-v1"
+  ],
+  "data": "artifacts/dynamic-memory-control/memops-expanded-source-preferences-v1/train.jsonl",
+  "compiler": "artifacts/dynamic-memory-control/prepare_expanded_source_preferences_v1.py",
+  "shared_rule": "milai_lab.methods.memory_control_learning.reviewed_prefix_preferences",
+  "source_contract": "data/manifests/dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+  "provenance": "Reconstruct only arrived original Sources and earlier query captures from SQLite copies; compare every recorded candidate. Recover action parameters from the original typed-choice payload, not from teacher decisions. Match delivered bodies/timestamps to captured source identities; no fabricated view.",
+  "cost": "Compute pending during liveV10; no rebilling of original model phases; Codex author annotation not included in script timing."
+}
