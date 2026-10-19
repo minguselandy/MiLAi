@@ -2,7 +2,7 @@
 
 ACTIVE model job PID509200 / exec65861, frozen training source c0770e49,
 artifacts/host-intent-retrieval-v3/fitting/t0-native-shared-seed0-v1/run.json.
-Snapshot 135/207 updates, 2160 train rows, 10777257 inputtokens; process RUNNING.
+Snapshot 163/207 updates, 2608 train rows, 12946448 inputtokens; process RUNNING.
 Initial dev456 predictions closed:152/353 reviewed preferences accepted,103masked;
 family-macro0.435331,15HANDOFF outside reviewed preference. This is NOT task accuracy or final gain.
 Revalidate actual PID/driver and pollsamehandle. Never restart from observation timeout.
@@ -32,6 +32,11 @@ Source-author exploratory training-collection review, not independent holdout. F
 data/manifests/host-intent-retrieval-v3-t0-task-review-full-v1.json. Raw outputs unchanged.
 Midpoint103 dev:241/353 accepted,macro0.707956,3HANDOFF outside reviewed preference.
 Tool-eval plan registered64dev laya positions after final207; NOT_STARTED; native E0 stillpending.
+Rulesdev64 also fully reviewed:38C/9Q/11W/6FAILED. Generative48:19C/1Q/15W/2UNFULFILLED/11FAILED.
+Matched48 rules:21C,142HTTP476795tokens; generative19C,320HTTP1611720tokens. Only8train
+groups/descriptive, not E2 same-before or learned-policy result. New full review manifests tracked.
+Pending offline review phases explicitly listed in artifacts/.../offline-review-pending-v6.json; do not
+settle until fitter terminal. Prior v1..v5 settlements stay recorded.
 
 Collectors all CLOSED: main272 has250 completed/22failed; dev64 has58/6; gen48 has37/11.
 No positions retried. Old collector processes are gone.
