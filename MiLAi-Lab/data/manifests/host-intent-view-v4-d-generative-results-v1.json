@@ -1,0 +1,181 @@
+{
+  "status": "D_GENERATIVE_CLOSED_AUTHOR_REVIEWED",
+  "source_version": "11798c8d",
+  "split": "exposed_dev",
+  "source_groups": 8,
+  "streams": 16,
+  "positions": 64,
+  "host_grades": {
+    "Q": 19,
+    "W": 14,
+    "C": 15,
+    "F": 16
+  },
+  "host_complete_primary": 15,
+  "host_complete_with_scope_ambiguity": 16,
+  "delivery": {
+    "partial": 43,
+    "complete": 18,
+    "insufficient": 3
+  },
+  "by_group": {
+    "memops_A19": {
+      "host": {
+        "Q": 3,
+        "W": 2,
+        "C": 1,
+        "F": 2
+      },
+      "delivery": {
+        "partial": 7,
+        "complete": 1
+      },
+      "generation_tokens": 141402
+    },
+    "memops_A32": {
+      "host": {
+        "C": 2,
+        "W": 5,
+        "F": 1
+      },
+      "delivery": {
+        "complete": 3,
+        "partial": 5
+      },
+      "generation_tokens": 213262
+    },
+    "memops_B30": {
+      "host": {
+        "C": 2,
+        "Q": 3,
+        "W": 1,
+        "F": 2
+      },
+      "delivery": {
+        "complete": 3,
+        "partial": 5
+      },
+      "generation_tokens": 151388
+    },
+    "memops_C03": {
+      "host": {
+        "C": 3,
+        "F": 3,
+        "Q": 2
+      },
+      "delivery": {
+        "complete": 4,
+        "partial": 4
+      },
+      "generation_tokens": 150174
+    },
+    "memops_D25": {
+      "host": {
+        "Q": 5,
+        "F": 2,
+        "W": 1
+      },
+      "delivery": {
+        "partial": 8
+      },
+      "generation_tokens": 106271
+    },
+    "memops_E08": {
+      "host": {
+        "F": 5,
+        "C": 2,
+        "Q": 1
+      },
+      "delivery": {
+        "insufficient": 1,
+        "complete": 2,
+        "partial": 5
+      },
+      "generation_tokens": 185376
+    },
+    "memops_E15": {
+      "host": {
+        "Q": 3,
+        "W": 4,
+        "C": 1
+      },
+      "delivery": {
+        "insufficient": 2,
+        "partial": 5,
+        "complete": 1
+      },
+      "generation_tokens": 162362
+    },
+    "memops_F01": {
+      "host": {
+        "C": 4,
+        "F": 1,
+        "Q": 2,
+        "W": 1
+      },
+      "delivery": {
+        "complete": 4,
+        "partial": 4
+      },
+      "generation_tokens": 111158
+    }
+  },
+  "final_arrivals": {
+    "positions": 16,
+    "host": {
+      "W": 7,
+      "F": 7,
+      "Q": 2
+    },
+    "retrieval_calls": 1,
+    "positions_with_new_retrieval": 1
+  },
+  "retrieval_calls": 36,
+  "empty_returns": 3,
+  "returns_seen_in_Host": 36,
+  "max_wire_tokens": 1986,
+  "generation_tokens": 1221393,
+  "generation_requests": 220,
+  "unknown_generation_delta": 0,
+  "stage_costs": {
+    "host_request": {
+      "requests": 35,
+      "tokens": 107408,
+      "http_wall_seconds": 263.80018063634634
+    },
+    "control_generation": {
+      "requests": 102,
+      "tokens": 572887,
+      "http_wall_seconds": 83.19496501516551
+    },
+    "host_completion": {
+      "requests": 48,
+      "tokens": 282696,
+      "http_wall_seconds": 828.3951714355499
+    },
+    "view_generation": {
+      "requests": 19,
+      "tokens": 72232,
+      "http_wall_seconds": 101.73992118798196
+    },
+    "host_incomplete": {
+      "requests": 16,
+      "tokens": 186170,
+      "http_wall_seconds": 856.8608512440696
+    }
+  },
+  "wall_seconds": 2276.578471420333,
+  "cpu_seconds_nested": 85.252563737,
+  "cpu_unbilled": 85.252563737,
+  "original_outputs_unchanged": true,
+  "task_metric": "Strict source-author C/Q/W/F, one explicit scope-reading ambiguity. No official score or independent reviewer claim.",
+  "view_review_scope": "Request-relevant facts/status/conditions reviewed and explicit defects retained. Not exhaustive formal verification of every citation/rule.",
+  "results": "artifacts/host-intent-retrieval-v3/view-v4-d-author-review-v1/generative/closed-results-v1.json",
+  "review": "artifacts/host-intent-retrieval-v3/view-v4-d-author-review-v1/generative/final-review-v1.json",
+  "remaining": "Other nine D arms; cross-arm grouped comparison and confirmation decisions not yet complete.",
+  "compute": {
+    "wall_seconds": 15.228635670617223,
+    "cpu_seconds": 15.228054678
+  },
+  "ledger_recorded": false
+}

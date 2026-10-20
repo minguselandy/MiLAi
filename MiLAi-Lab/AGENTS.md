@@ -1,10 +1,22 @@
 # CURRENT UPDATE: D comparison RUNNING — 2026-10-21
 
-Latest authoritative execution: Ddriver2468544/exec65603 RUNNING, firstchild2468551 generative.
+Latest authoritative execution: Ddriver2468544/exec65603 RUNNING, activefixed-context child2713006.
 Revalidate view-v4-d-v2/driver.json andactualPID. Plan view-v4-d-plan-v2.json, core11798c8d.
 10arms64positions=640, owncoldbanks, originalautonomousHost; noSTATEforced-initialquery inD.
 Queue gen/rules/fixed-context/T1main/T1control/continuedCE/answer/delivery/view-cache/MemPursuit.
 Parent runner frozen-baselines-11798c8d/run_matched_d.py measuresparentCPU, notyetcharged.
+Generative CLOSED64/64 exit0, source11798c8d. Authorreview15C19Q14W16F; oneexplicitposition0
+scopeambiguity couldC=>16total. Delivery18complete43partial3insufficient;36retrievals3empty,
+all36Host-visible,maxwire1986.220HTTP1221393known tokensunknown0;driverCPU85.252563737pendingv32.
+Finalarrivals16:0C2Q7W7F, only1newretrieval. Not comparative efficacy orindependentreview.
+Sourcefacts all8groups184sources read;prefix7/7/10/23,alloriginalclocksunknown. OnlyB30/F01
+intermediateupdatesclearlytarget-irrelevant. Source-review-v1 hasfactualrequirements/roles/bounds.
+Cards exported throughgen63 andrules11 atlatestexport; rerunexport_d_review_cards_v1.py appends
+onlyclosednewpositions, no labels. Actorgrade genfinal-review-v1.json+closed-results-v1.json.
+Eightreview batches preserved; no devtraininglabels. Viewreviewnotexhaustivecitation/ruleproof.
+Pendingv32 UNSETTLED has source/review/export CPU andwholeclosedgenchildCPU, HTTPalreadybilled.
+No offline settlement until entireDqueue idle; nativecompute laterchargedbyrunners, subtractnested.
+Currentfixed-context snapshot18/64;revalidateactualdriver/PID beforeaction.
 NO secondactualmodeljob oroffline settlement whileDactive. Preserveallfailures/noautoreruns.
 
 STATEall3closed: v1pid2357783 empty1memorycall63tokens,score0; v2pid2410215/exec71103

@@ -1,0 +1,26 @@
+{
+  "status": "D_SOURCE_REQUIREMENTS_REVIEWED_AND_FIRST_ARM_GRADED",
+  "source_groups": 8,
+  "distinct_sources": 184,
+  "prefixes": [
+    7,
+    7,
+    10,
+    23
+  ],
+  "all_original_occurrence_times_unknown": true,
+  "source_requirements": "artifacts/host-intent-retrieval-v3/view-v4-d-source-review-v1/source-requirements.json",
+  "source_inventory": "artifacts/host-intent-retrieval-v3/view-v4-d-source-review-v1/sources.json",
+  "protocol": "artifacts/host-intent-retrieval-v3/view-v4-d-source-review-v1/protocol.json",
+  "reviewer": "Current author/source review, not independent or blind",
+  "no_dev_training_labels": true,
+  "current_model_queue": {
+    "driver_pid": 2468544,
+    "exec_session": 65603,
+    "active_arm": "fixed-context",
+    "active_pid": 2713006,
+    "active_closed_positions": 18
+  },
+  "generative_result": "data/manifests/host-intent-view-v4-d-generative-results-v1.json",
+  "scope": "Only the first of ten D arms has completed author grading; do not infer comparative efficacy. All current candidates remain frozen11798c8d."
+}
