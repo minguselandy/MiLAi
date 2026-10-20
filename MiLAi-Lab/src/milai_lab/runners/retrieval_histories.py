@@ -8,6 +8,7 @@ from __future__ import annotations
 import copy
 import json
 import time
+from collections.abc import Callable
 from pathlib import Path
 from typing import Any, cast
 
@@ -26,6 +27,7 @@ from milai_lab.runners.functional import _bank_reference, frozen, seed_sources
 
 def prepare_history_bank(
     root: Path, *, bank: str, owner: str, history: dict[str, Any],
+    source_progress: Callable[[int], None] | None = None,
 ) -> dict[str, Any]:
     """One fresh bank; version history comes from actual save/update receipts."""
     started, cpu = time.perf_counter(), time.process_time()
@@ -43,7 +45,7 @@ def prepare_history_bank(
             memory_profile=settings.get("memory_profile", "ordinary"),
             memory_ranking=settings.get("memory_ranking", "dense"))
         sources = seed_sources(service, history["sources"], directory / "source-imports.json",
-                               preserve_occurrence=True)
+                               preserve_occurrence=True, progress=source_progress)
         report["sources"] = sources
         if history.get("stored_revisions") or history.get("prefetch"):
             capacity = HostCapacity(settings["capacity"])

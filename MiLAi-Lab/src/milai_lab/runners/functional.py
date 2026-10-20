@@ -2222,6 +2222,7 @@ def _model_memory_effects(effects: dict[str, Any]) -> dict[str, Any]:
 def seed_sources(
     service: MemoryService, rows: list[dict[str, Any]], path: Path,
     *, preserve_occurrence: bool = False,
+    progress: Callable[[int], None] | None = None,
 ) -> list[dict[str, Any]]:
     """Capture supplied events once; a later import cannot resurrect forgotten text."""
     if path.exists():
@@ -2268,6 +2269,8 @@ def seed_sources(
                 "receipt": capture,
             }
         )
+        if progress is not None:
+            progress(len(receipts))
     write_json(path, {"import_id": path.stem, "receipts": receipts})
     return receipts
 
@@ -2533,6 +2536,7 @@ def message(
     control_models: dict[tuple[Any, ...], Any] | None = None,
     model_tool_choice: Callable[[list[Any]], Any] | None = None,
     recorded_tool_schemas: list[dict[str, Any]] | None = None,
+    given_retrieval_request: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     freeze = frozen(root)
     workflow = {"reservation_v1": "reservation", "document_publication_v1": "document"}.get(
@@ -2569,6 +2573,13 @@ def message(
         if settings["request_mode"] != "disabled" or not settings.get("retrieval_tool"):
             raise ValueError("ACTION_INTENT_CATALOG_REQUIRES_RETRIEVAL_PROFILE")
         public["recorded_tool_schemas"] = deepcopy(recorded_tool_schemas)
+    if given_retrieval_request is not None:
+        if (settings["request_mode"] != "disabled" or not settings.get("retrieval_tool")
+                or recorded_tool_schemas is not None):
+            raise ValueError("GIVEN_RETRIEVAL_REQUIRES_RETRIEVAL_ONLY_PROFILE")
+        if settings["retrieval_tool"] == "query_only" and set(given_retrieval_request) != {"query"}:
+            raise ValueError("GIVEN_QUERY_ONLY_REQUEST_REQUIRES_QUERY_ONLY")
+        public["given_retrieval_request"] = deepcopy(given_retrieval_request)
     identity = _message_reference(bank_root, session, message_id)
     result_path = bank_root / (identity + "-result.json")
     input_path = bank_root / (identity + "-input.json")
@@ -2599,6 +2610,8 @@ def message(
     }
     if recorded_tool_schemas is not None:
         output["recorded_tool_calls"] = []
+    if given_retrieval_request is not None:
+        output.update(request_transport="programmatic_given_request", host_request_generated=False)
     execution_started = False
     scope = FoundationScope(
         freeze["run_id"], bank, owner, session + ":" + message_id,
@@ -2628,6 +2641,13 @@ def message(
             RunLimits(**freeze["budget_before"]["limits"]), Path(settings["budget_path"])
         )
         before = json.loads(json.dumps(budget.state))
+
+        def persist_result() -> dict[str, Any]:
+            output.update(usage=trace.usage, budget_before=before,
+                          budget_after=json.loads(json.dumps(budget.state)))
+            write_json(bank_root / f"{identity}-attempt-{attempt}.json", output)
+            write_json(result_path, output)
+            return output
 
         def persist_visibility_stop(receipt: dict[str, Any]) -> dict[str, Any]:
             if settings.get("memory_completion") != "declared_operations_v3":
@@ -2920,6 +2940,40 @@ def message(
                     "config_version": freeze["config_version"],
                 },
             )
+            if given_retrieval_request is not None:
+                # Native benchmark backends already supply the retrieval request.
+                # Invoke the same registered tool; do not ask a Host to rewrite it.
+                execution_started = True
+                tool = next(t for t in memory.tools() if t.name == "milai_retrieve")
+                retrieval_receipt = cast(ToolMessage, tool.invoke({"type": "tool_call",
+                    "name": "milai_retrieve", "id": "given-request",
+                    "args": given_retrieval_request}, config=cfg))
+                packet = json.loads(str(retrieval_receipt.content))
+                output.update(status="COMPLETED" if packet["ok"] else "FAILED",
+                    messages=[public_message_record(retrieval_receipt)], retrieval_result=packet,
+                    final_answer=None, final_delivery={"status": "not_requested",
+                        "reason": "retrieval packet only; no Host answer was requested"},
+                    generation_calls=model.calls_in_message, records=service.records(),
+                    sources=service.sources(), world=app.snapshot(), memory_mutation_receipts=[],
+                    formation_stage="given_retrieval_only", snapshot_before_close=True)
+                if not packet["ok"]:
+                    output.update(error_category="retrieval_tool",
+                                  error=packet["termination_reason"])
+                blocked = _visibility_replay(
+                    service, output, session=session, message_id=message_id)
+                if blocked is not None:
+                    trace({"event": "functional_given_retrieval_visibility_revoked", **blocked})
+                    output = {**blocked, "bank": bank, "owner": owner, "session": session,
+                        "message_id": message_id, "attempt": attempt, "process_id": os.getpid(),
+                        "request_transport": "programmatic_given_request",
+                        "host_request_generated": False, "content_retained": False}
+                    return persist_result()
+                output["capture"]["source_visibility"] = "visible"
+                output["operation_status"] = operation_status(output,
+                    thread_id=cfg["configurable"]["thread_id"], execution_started=True)
+                trace({"event": "functional_given_retrieval", "host_generation": False,
+                       "request": given_retrieval_request, "result": packet})
+                return persist_result()
             mode: dict[str, Any] | None = None
             mode_path = bank_root / f"{identity}-request-mode.json"
             request_cards: list[dict[str, Any]] | None = None
@@ -4571,7 +4625,7 @@ def message(
                                 "FUNCTIONAL_COMPLETION_FEEDBACK_BUDGET_EXHAUSTED"})
         exhausted_format = (settings.get("failure_delivery") == "receipt_status_v4"
                             and output.get("error") == "FUNCTIONAL_FORMAT_REPROPOSAL_EXHAUSTED")
-        if (settings.get("failure_delivery") in {
+        if (given_retrieval_request is None and settings.get("failure_delivery") in {
                 "receipt_status_v1", "receipt_status_v2", "receipt_status_v3", "receipt_status_v4"}
                 and (output.get("error_category") == "provider_protocol"
                      or known_incomplete or exhausted_format)
@@ -4616,13 +4670,7 @@ def message(
                 output["final_delivery"] = final_delivery(None)
         if "faults" in locals() and evaluator_control:
             output["evaluator_control_state"] = faults.state
-        output.update(
-            usage=trace.usage,
-            budget_before=before,
-            budget_after=json.loads(json.dumps(budget.state)),
-        )
-        write_json(bank_root / f"{identity}-attempt-{attempt}.json", output)
-        write_json(result_path, output)
+        persist_result()
     return output
 
 

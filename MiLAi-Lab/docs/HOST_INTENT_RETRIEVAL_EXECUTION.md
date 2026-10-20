@@ -1165,3 +1165,26 @@ Host tokenizer 的实际页预算显示原始来源观察，长单条来源也�
 pending-v12目前3个已测离线阶段CPU444.858517444秒，训练活动时不结算。诊断首次导入
 失败和未计时测试／人工成本保留为未测量；HTTP/CUDA环境未安装或修改，仅诊断脚本
 附加读取既有HTTP依赖路径。无SHA/替代内容指纹，无新服务、远端发布或Product契约修改。
+
+
+## 给定检索请求入口与真实语料Store准备
+
+`functional.message`新增可选`given_retrieval_request`，将给定请求直接送入原注册的
+milai_retrieve工具，复用同一Store、控制器、模型池、额度、可见性和原账本。
+公共消息身份包含完整请求，query-only显式拒绝丰富字段，不暗中丢字段。
+产物保留原ToolMessage和retrieval_result，标记programmatic_given_request；不生成Host
+请求或最终答案，不能据此宣称Host自主调用或原生E0。失败保留且不做答案修复，返回和
+重读均检查来源可见性。正常Host默认路径与Mem2Act调用意图路径保持原行为。
+
+`prepare_instructir_bank.py`仅摄入完整corpus，使用原Source捕获接口，逐条记录实际数量，
+原生document ID留在离线source-map。读取全部title/text，未知事件时间保持未知，不读取
+query/qrels、不形成语义记忆或运行模型。首次失败和部分摄取时间都会留下记录。
+6项新增测试和33项相关测试通过，Ruff/mypy与包/tools边界通过；测试使用隔离mock账本。
+初次新测试把event-delta维护配给v1接口，已修正测试为I2，未放宽生产规则。
+
+真实全语料Store摄取、查询/方法隔离与存储方案、从真实交付材料投影排名及完整评价仍待
+完成；当前并不把输入接线当作E4结果。详见given-request-entry-v1 manifest。
+
+T1中点262更新已完成1209个dev状态评测：操作偏好436/616、family macro0.736137；
+FollowIR319/349、family macro0.912863。初始分别206/616与204/349；仅为静态状态诊断，
+未验证实际Host收益、对照差异或外部泛化。继续预定最终524权重，不按中点择优停止。
