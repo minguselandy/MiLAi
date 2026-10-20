@@ -20,7 +20,8 @@ def main() -> None:
     parser.add_argument("output", type=Path)
     parser.add_argument("--source-version", required=True)
     parser.add_argument("--policies", nargs="+", choices=("fixed", "fixed_context", "rules",
-                        "laya", "generative"), default=["rules", "laya"])
+                        "laya", "generative", "view_cache", "mempursuit"),
+                        default=["rules", "laya"])
     parser.add_argument("--history", action="append")
     parser.add_argument("--split", choices=("train", "dev"))
     parser.add_argument("--interfaces", nargs="+", choices=("query_only", "rich"),

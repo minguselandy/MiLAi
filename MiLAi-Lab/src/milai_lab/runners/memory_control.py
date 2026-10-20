@@ -9,6 +9,7 @@ from typing import Any
 
 from milai_lab.harness.contextual_artifacts import RunBudget
 from milai_lab.memory.retrieval import SemanticRetriever
+from milai_lab.methods.cache_memory_policy import CacheMemoryPolicy
 from milai_lab.methods.evidence_reading import project_pack
 from milai_lab.methods.laya_memory_policy import (
     GenerativeMemoryPolicy,
@@ -20,6 +21,7 @@ from milai_lab.methods.memory_control import (
     FixedMemoryPolicy,
     MemoryPolicy,
     OneShotMemoryPolicy,
+    PursuitMemoryPolicy,
     RulesMemoryPolicy,
 )
 from milai_lab.providers.laya_local import NativeDecision
@@ -56,6 +58,12 @@ def memory_policy(
     if kind == "rules":
         return RulesMemoryPolicy(config.get("reads", 4), config.get("reuse_views", True),
                                  config.get("expand_context", False))
+    if kind == "view_cache":
+        return CacheMemoryPolicy(config.get("reads", 4), config.get("min_scope_overlap", 0.35))
+    if kind == "mempursuit":
+        if config.get("pool_order") != "mempursuit":
+            raise ValueError("MEMPURSUIT_POLICY_REQUIRES_ITS_SELECTED_POOL")
+        return PursuitMemoryPolicy()
     if kind == "generative":
         generative = GenerativeMemoryPolicy(call, config.get("state_projection", "full"))
         return (OneShotMemoryPolicy(generative, config.get("reads", 4))
@@ -73,7 +81,7 @@ def memory_policy(
         if model is None and models is not None:
             model = models.get(model_key)
         if model is None:
-            import torch  # type: ignore[import-not-found]
+            import torch
 
             torch.set_num_threads(config.get("threads", 4))
             started, cpu = time.perf_counter(), time.process_time()

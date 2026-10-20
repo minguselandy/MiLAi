@@ -13,7 +13,13 @@ Actual compile passed capture/state/fullbinding/continuation/failedreadout masks
 Feedback data data/view-v4-c-feedback-v1; matched data data/view-v4-feedback-fitting-v1 (artifactbase).
 37new+37sharedoldreplay; continuedCE74old.10updates160draws/arm,860oldoperationdev,seed0.
 Commoninit fitting/t1-native-shared-seed0-v1/checkpoint. Newpreptool3tests/Ruff/mypypassed.
-W5fits RUNNING driver2123239/exec93763, currentchild2172645 answer at snapshot 10/10updates.
+W5fits CLOSED driver2123239/exec93763 exit0; allchildren absent. Threefits10updates160rows each.
+CE/answer/delivery trainingtokens821606/872537/872537; sharedanswer/delivery inputs/schedules/
+optionorders/optimizer exactequal;81feedback79replaydraws each. NativeCPU3586.286305211directledger.
+Finalinprocessdev450/447/440 acceptedof616 (+244masked). NotHostefficacy;no bestcheckpointselection.
+Persistedreload RUNNING driver2287617/exec56236; firstchild2287649 continuedCE (revalidateactive).
+Authoritative view-v4-persisted-evaluations-v1/driver.json; same860dev, corefrozenae3950f2.
+Do not start anothermodeljob oroffline settlement. Current D/STATE plans remainunstarted.
 ContinuedCE CLOSED10updates160rows821606tokens;773.021042636wall/1181.609250961CPU directledger.
 CEfinal860dev450/616accepted244masked;encoder/headchanged,completeinputs. completion-audit.json saved.
 Thisisin-processstaticdiagnostic,notreloadedcheckpoint/Hostevidence. Answertrain160rows872537tokens.
@@ -25,8 +31,9 @@ Currentfits use existingCUDAenv,physical2,3,microbatch1/checkpointing,MHAfastpat
 Preservefailures, final10notbestdevcheckpoint. Afterfits, evaluatepersistedfinals thenexecuteD.
 D matched8arm plan view-v4-d-plan-v1.json READY_PREPARATION_ONLY:64positions/arm,512total.
 SameoldHostprompt, owncoldstreams, newcommonwire/sourceae3950f2; notrunning.
-Pendingv27 UNSETTLED containsDprepCPU; queueparentCPU/import/freezearchiveoverhead unknown.
-Persisted3arm evaluation prepared view-v4-persisted-evaluation-plan-v1.json; NOTSTARTED.
+Pendingv27 SETTLED2.076517171CPU atverifiedidle;8phases. Newmeasuredwork starts pendingv28.
+TrainingqueueparentCPU/import/freezearchiveoverhead unknown.
+Persisted3arm evaluation view-v4-persisted-evaluation-plan-v1.json NOWRUNNING as above.
 STATEbridge implemented in runners/state_bench_adapter.py; runner tools/run_state_bench_local_pilot.py.
 STATEsourcefrozen d4c1692d at frozen-state-d4c1692d/MiLAi-Lab; executableplan
 view-v4-state-local-pilot-plan-v1.json NOTSTARTED, noHTTP/models yet.
@@ -43,6 +50,14 @@ view-v4-state-travel-pilot-preparation-v1. No testtaskcontentsread. Actor/scorer
 Nextaftercurrentmodelqueue: persistedfinals, localSTATEfunctionalpilot, Dmatchedflows. STATEpilot
 usesfixed_context,existingQwenHost/simulator,originalupstreamprompts/tools,deterministicstatescore;
 noofficialGPT5.4/five-run claim,LLMjudgeNOTRUN. NeverinvokeofficialCLI/SHAvalidation.
+Simplebaselines implemented: view_cache scopeoverlap.35/reads4, eagerarrivalrefresh, boundoriginalREAD.
+37trainbeforelegal35REFRESH2READ, nosemanticlabelsused/no modelresults. Sourceintervals unchanged.
+MemPursuitPool upstreamselect NumPy/adaptive/defaulttol, cap4, existingmeteredBGE; alllegalcandidates
+remain, PursuitPolicyreadsselectedprefix. Metadata control_pool_selected is algorithmchoice,notgold.
+34tests+6boundaries+standaloneimportretest/Ruff/mypy passed. BaselineDconfiguration pending.
+Upstream versions: MemPursuit5138dd0,Coalent7edc7ee,GAM565db2c; sources underupstream/*-source-v1.
+StandaloneMemPursuit pathupstream/mempursuit-standalone-v1 avoids mem0namespace. No benchmarkdataread.
+Coalent/GAM stillnotintegrated. Baseline/manifestsimple-baselines-v1 haslimits/cost/remainingwork.
 No subagents/SHA/newservices/newledger/publication. All remaining fullgoal requirements stillapply.
 Manifest data/manifests/host-intent-view-v4-c-feedback-results-v1.json; executiondoc latestsection.
 

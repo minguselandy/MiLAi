@@ -2871,6 +2871,14 @@ def message(
                                                       retriever=pool_retriever, record=trace)
 
                         memory_options["control_rank_pool"] = rank_pool
+                    elif control.get("pool_order") == "mempursuit":
+                        from milai_lab.baselines.mempursuit import MemPursuitPool
+
+                        if retriever is None:
+                            raise ValueError("MEMPURSUIT_POOL_REQUIRES_EMBEDDINGS")
+                        memory_options["control_rank_pool"] = MemPursuitPool(
+                            retriever.embeddings, budget, selected_limit=control.get("reads", 4),
+                            adaptive=control.get("pursuit_adaptive", True), record=trace)
                     memory_options["control_record"] = trace
                     memory_options["control_available"] = lambda: (
                         model.calls_in_message < settings["max_calls_per_message"] - 2)

@@ -2097,3 +2097,14 @@ STATE原版因缺少azure.identity无法导入；未安装依赖或更改原版�
 实际SDK＋SQLite＋注册检索工具＋JSON-action桥接的机械测试已通过，脚本化HTTP响应促使公开harness调用真实sandbox酒店写入，确认返回材料被下一轮输入消费。4适配测试、24相关检索回归、6边界检查及Ruff/mypy通过；这不是实际模型或benchmark成功结果。第一训练任务及随后两条公开训练轨迹按官方split顺序预先选择，形成46个历史原始来源；排除了目标题轨迹，保留用户原话和工具执行记录，不导入评分、隐藏要求或simulator context。
 
 单任务本地研究runner已准备，使用既有Qwen Host/simulator及fixed_context完成首次功能接入，原travel工具与simulator提示保留，仅做确定性状态评分。该模型试跑尚未启动，必须等当前串行模型队列结束；它不代表官方GPT-5.4五次运行成绩。完整目标、外部学习策略比较与其余E实验仍未完成。索引：data/manifests/host-intent-view-v4-state-adapter-v1.json。
+
+
+## 2026-10-21：三臂训练闭合、持久化评测启动与简单基线
+
+三臂均已正常退出：continued-CE/answer/delivery各10次更新、160样本，训练tokens分别821606/872537/872537。后两臂共同起点、数据文件、抽样计划、三轮选项顺序、完整输入长度、优化设置逐项相等；各抽到81新反馈状态和79旧回放。实际方向配对抽样次数59/121，tie57/83、unknown133/45，均保留，不把监督覆盖差异归因于纯损失形式。原训练器累计直接记录3586.286305211秒CPU；v27离线测得2.076517171秒已在训练队列终止后一次结算。
+
+进程内旧操作dev：continued-CE450/616、answer447/616、delivery440/616，另各244masked。它们不是Host结果，也没有据此选择中途权重。最终预定权重的重载评测已串行启动，PID2287617/exec56236，每臂相同860dev，保存真实输入/输出并报告量化保存导致的变化。结果见data/manifests/host-intent-view-v4-three-fits-results-v1.json。
+
+新增简单View缓存策略按可见请求/范围的Unicode token余弦匹配（预先固定0.35），冷启动、范围不匹配或待处理来源到达时刷新；显式original_source需求通过节点与来源绑定补读，仍受共同完整包预算限制。37个既有训练before全部选择合法，35REFRESH/2READ；35包含冷启动等情况，并不证明35次刷新都有必要。它可能承担较高维护成本，目前无真实模型成绩。
+
+[MemPursuit](https://github.com/FengQi-HITSZ/MemPursuit)固定到5138dd0，直接使用独立NumPy选择器，保留单纯形完全修正、顺序与自适应停止，不引入Mem0服务栈。原候选和未选动作保留；实际执行只读取选中前缀。复用既有计费bge-m3客户端，完整候选embedding、获取和计算成本单列；不能把额外候选信息暴露混称纯选择算法收益。独立包只放mempursuit及其许可证，避免遮蔽现有mem0命名空间。34相关测试、6边界检查、独立包复测及Ruff/mypy通过；尚无模型基线结果。Coalent与GAM源码也已取得并固定版本，尚未接入或运行。索引：data/manifests/host-intent-view-v4-simple-baselines-v1.json。

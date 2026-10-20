@@ -1,0 +1,83 @@
+{
+  "status": "IMPLEMENTED_MECHANICALLY_VALIDATED_NO_MODEL_RESULTS",
+  "policies": [
+    "view_cache",
+    "mempursuit"
+  ],
+  "cache": {
+    "scope_match": "Binary Unicode token cosine of query vs visible built_for/scope",
+    "threshold": 0.35,
+    "threshold_selected_from_outcomes": false,
+    "refresh": "Cold/mismatching scope or pending arrivals; this is an eager change rule, not semantic novelty detection.",
+    "originals": "Typed original_source request triggers actual bound READs ranked by query/node lexical overlap.",
+    "reads": 4,
+    "actual_train_before_legal": 37,
+    "first_choices": {
+      "REFRESH_VIEW": 35,
+      "READ": 2
+    },
+    "limitation": "35 refresh choices include cold starts and scope/arrival checks; do not attribute all35 to new-source necessity."
+  },
+  "mempursuit": {
+    "upstream": "FengQi-HITSZ/MemPursuit",
+    "source_version": "5138dd0e6f6dbf843692526a44b696a4b9f4bcfb",
+    "source_url": "https://github.com/FengQi-HITSZ/MemPursuit",
+    "license": "Apache-2.0",
+    "implementation": "Unmodified standalone mempursuit.select, NumPy backend, adaptive stopping with upstream defaults, budget=min(4,candidates).",
+    "import_path": "artifacts/host-intent-retrieval-v3/upstream/mempursuit-standalone-v1",
+    "scope": "Selector adaptation only; no Mem0 services, storage or full-paper replication.",
+    "acquisition": "Largest offered request search, then selected original candidate READs in pursuit order; unselected legal actions retained.",
+    "embeddings": "Existing metered bge-m3 at127.0.0.1:7861, complete candidate projection, raw-text vector reuse; no fingerprints.",
+    "cost": "Provider embedding tokens plus original-ledger memory_control_mempursuit_pool CPU/wall. Retrieval and whole-flow costs remain separate.",
+    "diagnostic_limit": "Full-candidate embedding exposure must be disclosed; use same candidate vectors for a matched selector diagnostic before claiming pure selection-algorithm benefit."
+  },
+  "validation": {
+    "related_unit_tests": 34,
+    "boundary_tests": 6,
+    "standalone_package_retest": 1,
+    "ruff": "passed",
+    "mypy": "4 files passed",
+    "actual_models": 0
+  },
+  "source_downloads": [
+    {
+      "status": "SOURCE_DOWNLOADED_NOT_EXECUTED",
+      "repository": "FengQi-HITSZ/MemPursuit",
+      "source_version": "5138dd0e6f6dbf843692526a44b696a4b9f4bcfb",
+      "source_url": "https://codeload.github.com/FengQi-HITSZ/MemPursuit/tar.gz/5138dd0e6f6dbf843692526a44b696a4b9f4bcfb",
+      "source": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/upstream/mempursuit-source-v1/source/MemPursuit-5138dd0e6f6dbf843692526a44b696a4b9f4bcfb",
+      "archive_bytes": 171122,
+      "sha_validation_executed": false,
+      "model_calls": 0,
+      "benchmark_data_read": false
+    },
+    {
+      "status": "SOURCE_DOWNLOADED_NOT_EXECUTED",
+      "repository": "Vectorlink-Labs/coalent",
+      "source_version": "7edc7ee2debb4e6bc8fecebf5275a57cb1c935e7",
+      "source_url": "https://codeload.github.com/Vectorlink-Labs/coalent/tar.gz/7edc7ee2debb4e6bc8fecebf5275a57cb1c935e7",
+      "source": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/upstream/coalent-source-v1/source/coalent-7edc7ee2debb4e6bc8fecebf5275a57cb1c935e7",
+      "archive_bytes": 466871,
+      "sha_validation_executed": false,
+      "model_calls": 0,
+      "benchmark_data_read": false
+    },
+    {
+      "status": "SOURCE_DOWNLOADED_NOT_EXECUTED",
+      "repository": "VectorSpaceLab/general-agentic-memory",
+      "source_version": "565db2cc2518d377e44389b82aecf3cc129d5fe5",
+      "source_url": "https://codeload.github.com/VectorSpaceLab/general-agentic-memory/tar.gz/565db2cc2518d377e44389b82aecf3cc129d5fe5",
+      "source": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/upstream/gam-source-v1/source/general-agentic-memory-565db2cc2518d377e44389b82aecf3cc129d5fe5",
+      "archive_bytes": 1399438,
+      "sha_validation_executed": false,
+      "model_calls": 0,
+      "benchmark_data_read": false
+    }
+  ],
+  "sha_validation_executed": false,
+  "remaining": [
+    "Actual baseline Host runs and matched candidate diagnostic",
+    "Coalent mechanism integration and chosen GAM adaptation",
+    "D/E and external confirmation"
+  ]
+}

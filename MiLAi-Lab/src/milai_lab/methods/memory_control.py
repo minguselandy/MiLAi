@@ -168,6 +168,27 @@ class FixedContextMemoryPolicy:
 
 
 @dataclass
+class PursuitMemoryPolicy:
+    """One largest offered request search, then the upstream-selected READ prefix."""
+
+    def choose(self, state: MemoryControlState, actions: list[MemoryAction]) -> str:
+        if state.last_result is None and not state.pending_candidates:
+            searches = [a for a in actions if a.kind == "SEARCH" and (
+                a.parameters.get("query_from") == "request"
+                or a.parameters.get("query") == state.task["request"])]
+            if searches:
+                return max(searches, key=lambda a: a.parameters["limit"]).id
+        selected = sorted((p for p in state.pending_candidates
+                           if p.get("control_pool_selected")), key=lambda p: p["control_pool_rank"])
+        for candidate in selected:
+            read = next((a for a in actions if a.kind == "READ"
+                         and a.parameters == {"index": candidate["item_index"]}), None)
+            if read is not None:
+                return read.id
+        return next(a.id for a in actions if a.kind == "HANDOFF" and not a.parameters)
+
+
+@dataclass
 class OneShotMemoryPolicy:
     """One learned route, then a fixed read budget or a successful view handoff.
 

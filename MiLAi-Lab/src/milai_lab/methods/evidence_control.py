@@ -445,7 +445,7 @@ class EvidenceOperations:
     def candidate(item: dict[str, Any], index: int) -> dict[str, Any]:
         return {**pack_candidate(item, index), **{
             k: item[k] for k in ("revision", "version_view", "control_pool_rank",
-                                "control_dense_score") if k in item}}
+                                "control_pool_selected", "control_dense_score") if k in item}}
 
     def execute(self, action: MemoryAction, state: MemoryControlState) -> dict[str, Any]:
         if action.kind == "HANDOFF":
