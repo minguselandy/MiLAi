@@ -1,7 +1,11 @@
-# CURRENT 2026-10-20: T1 train/dev CLOSED; full T1 fit READY
+# CURRENT 2026-10-20: full T1 seed0 FIT RUNNING
 
-No actual model job is running after dev PID1918885/exec94959 CLOSED52, exit0/absentPID.
-Before launching a next job revalidate actual processes and ledger. Do not restart closed jobs.
+ACTIVE MODEL FIT PID2070802 / exec15108 / frozen-ba2bf8d8.
+fitting/t1-native-shared-seed0-v1/run.json,524plannedupdates;dispatch t1-fit-seed0-dispatch-v1.json.
+Same fullT1 data/native/base recipe below, GPU2/3, initial/mid/finaldev+finaltrain.
+RevalidatePID/authoritative run; pollsameexec. No restart on timeout, no secondactualmodeljob
+or offline settlement while live. Inspect terminal/exportvalidation before nextcontrol orseed.
+Dev PID1918885/exec94959 CLOSED52, exit0/absentPID. Do not restart closed collections.
 Train228:165completed/63fail(49length,14JSON);592HTTP1951856known=charged,newunknown0.
 Dev52:41completed/11fail(10length,1JSON);127HTTP390650known=charged,newunknown0.
 Frozen collectors c6b1f3bd; all original results/first failures unchanged. JSON-action, not nativeE0.
@@ -27,7 +31,7 @@ Main/control seeds0/1/2 each start SAME multilingual base (not T0weights),native
 softCE,float32,micro2/accum8,gradientcheckpoint,shuffleoptions. Diagnostics0/262/524; finalpreselected.
 Matched operation-only control data/t1-matched-operation-control-v1:2762labelledtrain/616dev,
 sameoperationstateIDs/labels,lossrenormalized.75/.25, same524updates; different tokens/passes explicit.
-Read data/manifests/host-intent-retrieval-v3-t1-fitting-plan-v1.json. No main T1weights yet.
+Read data/manifests/host-intent-retrieval-v3-t1-fitting-plan-v1.json. Main T1seed0 nowrunning.
 
 ALL offline settlements v1..v11 SETTLED at verified idle. v11=16phases,218.311390157CPU,
 1known-wall-only failedinputauditCPUmissing; modelcountersunchanged. No rebilling rawfalse flags.
