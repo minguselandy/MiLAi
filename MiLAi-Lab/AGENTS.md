@@ -6,38 +6,53 @@ older worktree. Full goal ACTIVE, incomplete. No subagents, SHA/checksum/content
 extra ledger, new services or remote publication. Existing HTTP/CUDA envs and models only.
 Serialize actual model jobs. Revalidate PID/command/terminal output; never restart on timeout.
 
-CURRENT EXECUTION: all current modeljobs CLOSED/absent. B160, H8, C supplement8 and8source-check
-followups closed. FollowupPID1741102/exec19688 CLOSEDexit0 COMPLETED_WITH_FAILURES. Runner4aa0b057,
-corefrozen d8447495, originalHTTPenv/ledger. OriginalA/B/CStores copied, originaloutcomes untouched.
-Followups: A29 no tool/falselyclaimsinspection/still74; B05/B06Hosttruncated; C26no tool/stale2PM;
-D11onecall readsoldbound originals andmisattributesmotherdish; F08oneREFRESH; C23twocalls;
-D23twocalls.4groups6actualcalls, no repairedoldpositions. Fullsemanticreviewpending.
+CURRENT EXECUTION: C remaining109branches RUNNING PID1937382/exec19324; revalidateactualPID.
+Corefrozen2e510e32; collector8458725a in frozen-c-continuation-8458725a. OriginalHTTPenv/ledger.
+Authoritative view-v4-c-branches-remaining-v1/driver.json; plan view-v4-c-remaining-run-plan-v1.json.
+Original C firstattempt1906069/exec76571 CLOSEDexit1 at2/111: firsttool+readoutcompleted;
+secondtoolcompleted butHost readout truncated8192,10894known tokens,unknown delta0. Both retained
+under view-v4-c-branches-v1. NEVERretrythem. Remainingrecipe excludesboth logicalarmnames.
+Combinedcohort111branches=old2+new109; matchbylogicalarmname+capture, notfolderarmindex acrossruns.
+--continue-known-readout-failures onlyretainsIncompleteChatResponse withknownusage; unknownusage/
+othererrors stillstop.25relatedtests then3targeted checks(defaultstop/continue/unknown) passed.
+No secondmodeljob oroffline settlement whilethisPIDlives.
 
-NEXT CONCRETE FIX, real evidence nowavailable: F08followup Writer DIDsee7742/7740 and generated
-correct7742 Viewrevision2 (6nodes1rule,30bindings) from30 actualsources. REFRESH returned
-material_budget_exhausted; actualToolpacket evidenceEMPTY, rejection1; Host fellback toold7724.
-DoNOTblameWriter for this case. Capture3cf3bf6b-4af2-4f76-9a57-514abab6dd44 underfollowuproot.
-Trace case-05/runtime/banks/eff2803d-908b-4fce-bac6-38877fa91c1b/
-5ea3d4f2-b429-4bca-ba2c-bba346ba828e-trace-0.jsonl. Step1 observed_evidence containsactualnewView;
-observed_materials['-1'] hasmetadata. Callerid chatcmpl-b0bf45f512ceb823:tool:0.
-Capacityaudit view-v4-refreshed-view-wire-audit-v1/audit.json: fullpacket2176 >2048; sameexact
-interpretation withonly6aliases actuallyreferenced anywhere in it needs871. Keys e1/e2/e3/e20/e25/e26.
-AuditONLY; compactpacketNOTexecuted, noissuedref/Hostscoreyet. Cache/snapshot shouldkeepall30
-bindings andcontroller observations/opportunities staycomplete. Implement WIRE-ONLY metadata
-compaction: project_packs optionalflag defaultFalse, retrieval_packet usescompactTrue; keep
-nodes/rules/unresolved/scope/querytime unchanged, retainanyreferencedalias includingfree-text refs.
-project_pack at495 andproject_packs secondloop652 inmethods/evidence_reading.py; retrieval_packet
-at70 inintent_retrieval.py. Beforeediting check currentfunction use. Avoidpruningsemantic content.
-Then meaningfulactualbudget/ref/known-view check +conditionalHostreadout onthissavedrealView,
-notregeneration/made-upView; preserveoriginal2176failure. Newversiondeclared, no oldresultrewrite.
-Verifyactualfirstbefore/actions equality beforeusingolder captures withnewwire version forC.
+WireFIX COMPLETE2e510e32: project_packs(compact_view_bindings=False) preservesdefaultcontroller
+observations; retrieval_packet requestsTrue forcompletewirebudget+delivery. Keepsaliases mentioned
+in typedfields ORfree text; neverchangesinterpretation. Cache/snapshot/knownrefbacking staysfull.
+39relatedregressions +2focused mixed/ref checks +6boundaries, Ruff/mypy2filespassed.
+ActualF08functionalreuse COMPLETED PID1870988/exec69110 exit0. ExistingcorrectView2 reusedwithout
+regeneration; registeredtool returned871tokens,6wirebindings; cache/snapshot/controllerretain30.
+Realrefreopened. FixedHost answered7742/Greenfield/7740uncertaintycorrectly.4767tokens1HTTP.
+Not same-before E2 ormodelpolicy performance; originalfailed2176packetretained. Viewruleg1still
+citesold7724sourcee1 forcorrect7742node; don'tcertifywholeView. Manifest compact-wire-results-v1.
+Realoldcapturebefore/actionchecks3/3 passed (knownView,originalquote,newsource), no models/readouts.
 
-Afterthisfix, proceedC actual2–3branches/source-state andmatchedfeedbacktraining; don'tremain
-in endlessprompttuning. Hguidance+explicitfollowups didnotensureupdates, andsomefailures areHost
-absence ofcall. Ccanuseactualnewcalls fromfollowups, notclaims. Needreview bindings proposals:
-includeSEARCH or relevantactualREAD foroutsidebindingupdates; don'tassumeREFRESH failed tosee
-news (F08scope30wascorrect). Existingfixed_context continuation alwaysSEARCH ifavailable; inspect
-actualpaths andcost, don'tinfersemanticstops frompolicyname.
+C selection READY/nowexecuting:37states8trainfamilies111branches, all37readoutframesREADY.
+view-v4-c-branches-preparation-v1/{selection,policies,readout-readiness}.json; raw-selected-states.jsonl
+fullactualinputs, allgoldempty. Sourcegroupcounts A29=3,B05=2,B06=6,C26=6,D11=6,F08=6,C23=3,D23=5.
+Not48states; no duplicates tofillquota. Allsource runsfrozen d844; newcommonwirecode applies equally
+to allCbranches. Eachactualreplaychecksfirstbefore/actions; changedlaterdelivery not oldresultrepair.
+Bindings nominations data/view-v4-c-binding-proposals-v1.json (underartifactsbase):
+A29 acdf1660-7cd9-49cd-aca2-454401f7690c: READview_source1score vs0intro vsuseView.
+C26 f449df09-c8ae-4ca5-8de4-354bbb9bfec5: READview_source2USER2PMcorrection vs1USERold2:30 vsuseView.
+C26source4isASSISTANTconfirmation; source7USERvenue. These were read inactualcapturedStore.
+F08late18aff9ea-7698-4c57-a323-3a8511bd816e andfollowup3cf3bf6b-4af2-4f76-9a57-514abab6dd44:
+USE_VIEW_ONLY/SEARCH0_8/REFRESH. Commonfixed_context <=2continuationsteps thenlegalHANDOFF.
+max_searches2 meansSEARCHbranch canexpand thenREAD; inspectactualpath, notpolicyname.
+NoCsemanticlabels yet. FirstA29goodREADreadout quotedactual74source; badREADreadoutfailedunknown.
+Prepare_retrieval_feedback permits knownactualdelivery withfailedHostreadout(answerunknown),
+butfailedtool branches stayunknown. Pairtrainingcode exists, no realW5fityet.
+
+B160,H8,Csupplement8 andsource-checkfollowups8 allclosed. Followups6tools across4groups; others
+includefalseinspectionclaims/no calls ortruncation. Do not backfilloriginalgrades orassumeallRefresh
+wrong: F08Writer sawall30sources andgeneratedcorrect7742; wireoverflow wascause, nowfixed.
+HgenericHostguidance actuallyvisible +toolssupplied yetbothlate0calls/stale; don'tcallitupdatefix.
+FullH/C/followup source reviews remainpending. MainB/ControlB taskreviews nowdone (see below).
+
+NEXT: letremainingC complete; reviewactualK+D/source/Host andcost, buildcommonanswer/delivery
+pairpool, thenmatchedcontinued-CE/answer/delivery fits fromT1mainseed0. Do notstay inprompttuning.
+Remainingfullgoal B–E/E1–E5/externalbaselines/STATE notcomplete. No SHA/subagents/newservices.
 
 B rules CLOSED16C/8Q/4W/4F,276431tokens47HTTP8toolcalls;7Viewgenerationcalls,2returnedViews.
 B fixed_context CLOSED12C/9Q/5W/6F,252288tokens42HTTP10toolcalls,noViewgeneration.
@@ -46,8 +61,8 @@ MainT1 B32closed,228299tokens40HTTP;41nativeforwards217517tokens,max7941,truncat
 ControlT1 B32closed,231774tokens43HTTP;55nativeforwards327198tokens,max12989,truncated0/finite.
 Both native were actual process-local MHAfastpathfalse,max16384. Native model CPU alreadybilled:
 main41.995967538,control63.452940421. RemainingdriverCPU38.349625391/41.519931636 settledv22.
-Native task semantic reviews stillpending. Main answers alreadyread; notes saved
-view-v4-b-main-author-notes-v1.json (proposed17C/5Q/6W/4F), not finalized. Control answersnotyetreviewed. FullB closure manifest and data/view-v4-b-states-v1/
+Native taskreviews finalizedasauthor/source reviews:main17C/5Q/6W/4F,control8C/14Q/6W/4F.
+Manifests host-intent-view-v4-b-t1-{main,control}-seed0-results-v1.json; Viewreviewseparate/partial. FullB closure manifest and data/view-v4-b-states-v1/
 export.json:250actualdecisionstates, allgoldmasked; four initialexports194 +control56, don'tduplicate.
 
 H generic Host coverage/quote guidance was actually visible; finalcounts13/15 and schema still
@@ -141,8 +156,8 @@ C supplementary normal collection is now CLOSED: existingT2 C23/D23,4requests ea
 initial andfinal actualprefix plusquote requests, original sources preserved; source d844.
 Combined A/B/C nowcover8sourcegroups. ActualE2branches/newlabels/fits notyetdone.
 pending-v22 SETTLED216.538961417CPU/17phases atverifiedidle; gen/embeddingunchanged.
-pending-v23 nowSETTLED36.127549393CPU/6phases atverifiedidle; includesH/C/followup localruntime,
-source-checkprep/freeze andwireaudit. Startpending-v24 fornewmeasuredwork; donotrebillv23.
+pending-v23 SETTLED36.127549393CPU;v24 SETTLED13.459542825CPU/6phases;
+v25 SETTLED14.491190190CPU/4phases. Startpending-v26 fornewmeasuredwork afterliveCcloses.
 Partial B gen answer notes0..26 saved view-v4-b-generative-author-notes-v1.json; not finalgrades,
 packets/KunionD and View review stillneeded. Do not convert partial answer notes into labels.
 W5 implementation source54371ea7; model queue still frozen d8447495.
@@ -168,7 +183,7 @@ parsed, no runtimecompatproof. BaseAgent hook +orchestrator API inspected. Runti
 hidden task_summary/state_requirements/task_requirements: never forwardthemtoHost/retrieval.
 NoSTATEadapteryet. See host-intent-view-v4-state-source-preparation-v1.json.
 
-NEXT: fix realViewwire-metadata overflow, verify actualdelivery; close remainingreviews; collectCbranches;
+NEXT: finishactualCbranches/reviews andmatchedfeedbacktraining; wirefixalreadyverified;
 
 W5 same-state branch comparisons and matched continued-CE/answer-only/delivery training stillneeded.
 Use completed T1 mainseed0 common initialization. Broader B–E/E1–E5/STATE remain unfinished.
@@ -181,9 +196,10 @@ Seed0both complete, mainseed1fit/export complete; controlseed1/export andseed2 u
 Reviewed recovery uses a new attempt preserving original failure/cost and unchanged recipe.
 
 ONLY ledger /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json.
-Pendingv15..v23 SETTLED once atidle. v20=61.143722329CPU;v21=9.896830322CPU;v22=216.538961417CPU.
+Pendingv15..v25 SETTLED once atidle. v20=61.143722329CPU;v21=9.896830322CPU;v22=216.538961417CPU.
 v23 SETTLED36.127549393CPU/6phases; nativeBmodelcompute alreadycharged directly.
-No active modelprocess atlatestboundary. Rawartifacts mayretainoldledger_recorded flags; settlements authoritative.
+CremainingPID1937382 activeatlatestboundary; nooffline settlement. Rawartifact oldledger_recorded flags
+canbestale; settlements authoritative. Newunbilledcostswillgointopending-v26.
 HTTP already billed. Driver/case/readout CPU nested; do not doublecount. Native compute directly
 billed by evaluator, not offline pending. Never settle while actual model job active.
 Unmeasured interactive review/tests/import overhead unknown,notzero. Raw corpora/traces/weights ignored.
