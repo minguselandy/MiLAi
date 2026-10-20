@@ -26,7 +26,7 @@ _SUBJECTS = {
 
 def recover_request_fields(text: str) -> dict[str, Any]:
     """Independent reader of the declared prose grammar, for equality auditing."""
-    lines = iter(text.splitlines())
+    lines = iter(text.split("\n"))
 
     def value(line: str, subject: str, depth: int) -> Any:
         prefix = "  " * depth + subject

@@ -8,8 +8,12 @@ usesoriginalrequest forsearch,refs,limits. Arbitraryextensions/types/nulls/empty
 3newmechanicaltests+41related, then14affected+2evaluatorchecks PASS; Ruff/mypy4files/boundariesPASS.
 Read e3-request-text-protocol-v1 manifest: allT1data,samebase,524updates,seeds0/1/2, ownretraining.
 Actualtextfits/effectiveness NOTstarted. tools/audit_request_text.py full6728input+tokenizer audit
-next; no weights/models. AppendCPUtopendingv14, no settlementwhilePID2670549runs.
-Lastverifiedcontrol149/524, stillsoleactualmodeljob. Previousturnmadecode/testprogress.
+CLOSEDexit0 PID2839157absent/exec61701, source8904ff13.5519train/1209dev tasks restoredEXACTLY,
+otherobservations/questions/gold/metadata equal. SDK4189train/965dev accepted,0skips/truncations;
+max9754train/8724dev at12288/2048.134.070653wall/136.757649673CPU, pendingv14now170.603221977CPU.
+ExtraUnicode-separator syntheticprobe exposedONLY offline decoder splitlines; changedto splitLF,
+runtimeprojectionunchanged. Follow-upfullreconstruction pending. No weights/models/SHA used.
+Lastverifiedcontrol173/524, stillsoleactualmodeljob. Previousturnmadecode/test/actualauditprogress.
 
 ACTIVE MODEL JOB PID2670549 / exec8252 / frozen-ba2bf8d8.
 fitting/t1-matched-operation-control-seed0-v1/run.json;524plannedupdates, same multilingualbase,

@@ -25,7 +25,7 @@ from retrieval_mixture import project_mixed_row
 
 
 def test_prose_retains_extensions_types_empty_values_order_and_literals():
-    request = {"query": '时点 "A"\nFor "x", the value is explicitly null.',
+    request = {"query": '时点 "A"\nFor "x", the value is explicitly null.\u2028a\u2029b\u0085c',
                "read_goal": {"purpose": "", "required_points": ["x", "x", "y"],
                              "extensions": [{"a.b": None, "a": {"b": []}}, {}, True, 0, 0.5]},
                "task_context": {"as_of": None, "target_scope": {"project": "B"},
