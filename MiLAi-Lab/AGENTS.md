@@ -1,8 +1,44 @@
-# CURRENT 2026-10-20: new T1 train collection RUNNING; train source review complete
+# CURRENT 2026-10-20: new T1 train CLOSED; new dev52 RUNNING
 
-ACTIVE model collection PID1429403 / exec94846 / frozen-c6b1f3bd:
-runs/t1-new-train-fixed-context-v1/driver.json, planned228. Registration faf56025.
+ACTIVE model collection PID1918885 / exec94959 / frozen-c6b1f3bd:
+runs/t1-new-dev-fixed-context-v1/driver.json, planned52. Same registered collector/config/ledger.
 Revalidate actual PID/driver and pollsamehandle; never restart after observation timeout.
+Train PID1429403/exec94846 CLOSED228, exit0/absentPID:165programcomplete/63fail
+(49length,14JSON_ACTION_MALFORMED), allfirstfailures retained.592HTTP1951856known=charged,
+newunknown0/embedding0;379retrievals159empty/1enumrejection,querysemanticmutations0.
+Wall7240.661909s,driverCPU404.979827s,messageCPU376.987485s (nested, notsummed).
+Closed mechanical cost summary reconciled toledger. Fulltrain export data/t1-new-train-closed-full-v1:
+1816states/221statefulpositions/64families. ALL358statefulrequests nowauthor-reviewed;
+data/t1-new-train-witness-labels-full-v1 has1113labels/703masks,877progress/236sufficient,
+62labelledfamilies. Publicstate/questions1816 unchanged; previous1319goldrows unchanged.
+All228taskreviews in t1-new-train-task-reviews-full-v1:82C/34Q/49W/63F, authornotindependent.
+All379packets match actualcontrol evidence andToolMessages, max1585tokens;220handoff/159budgetend.
+21zero-statecalls separatelyreviewed, allbudgetexhausted/zerooperations; no inventedtrainingrows.
+Firstauditerrors retained: offlineannotationmetadata comparison, thenfailedresultreceiptfield absent;
+correctedaudits pass. Allfinal operation_status semanticoperations empty. No modeloutputrepairs.
+No-stateindices35/59/72/122/133/137/138 retained. Exporter nowacceptsexplicitdriver snapshot,
+sofutureclosed-position andstatecounts arefromone snapshot. No duplicateprefix concatenation.
+Offlinepending-v10 SETTLED atverifiedidle beforedevstarted:29measured phases82.190369CPU plus
+1known-wall-onlyGithub403phase(.256669s,CPUmissing);modelcountersunchanged. Rawmeasurementfalse
+flags doNOTpermitrebilling. Allsettlements v1..v10 closed. Newofflinework inpending-v11;
+no offline settlement whiledevprocess lives.
+Newdevsource26pools alreadyreviewed; actualdevrequests notyetreviewed. T1 fitting NOT_STARTED.
+
+External assets: InstructIR fullHF release downloaded (9906query/instructionpairs,1267originalquery
+groups,16072docs,onepositiveqrelperpair), code58162a0f/data1615ed0e. Isolatedir-metrics-env has
+pytrec_eval0.5/numpy2.4.6; activeHTTP/CUDAenvsunchanged. InstructIRpublicprojection/nativepytrec
+metrics+groupminhelper added;4syntheticunittest checksPASS. All9906qrels IDs resolve;
+16072fulltext and9906publicrequest projections checked.48syntheticmetrics equal officialstaticmethod.
+Firstexactfloat comparisonfailedfromunorderedset summation; nowdeclaredqueryorder retained.
+Firstfailurepreserved; actualrankingrunnerNOTimplemented.
+LME-V2 existinglocalassets found, no7GBredownload. FullSmall snapshot underexternal/
+lme-v2-small-snapshot-v1:451questions,200completeSmall-selectedtrajectories,5095states,
+29questionimages+5095stateimages copied(548713157imagebytes), nohashchecks.2snapshot testsPASS;
+officialstructuralvalidator(2cc8c540)passed451/200/mappings/imageexistence. Notvisualdecoding orQA.
+AllSmallhistories havepriorprojectexposure; disclosedregressiononly, notfreshholdout. Localdataset
+downloadrevisionmetadata missing; retainlocalprovenance, do notclaim byteverifiedHFidentity.
+
+# PREVIOUS prefix/bridge details (superseded by current status above)
 Latest closed-prefix export v6 has930states/180actualrequests,560labels/370masked,
 455source-progress preferences/105sufficient; all930publicinputs unchanged. It covers118closed
 Hostpositions,115withstates; no-state indices35/59/72 arekept without inventeddecisions.

@@ -1,0 +1,53 @@
+{
+  "status": "SETTLED_ONCE_AT_VERIFIED_IDLE",
+  "ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+  "source_pending": "artifacts/host-intent-retrieval-v3/data/pending-offline-review-v10.json",
+  "model_process_absent": 1429403,
+  "model_exec_exit_code": 0,
+  "model_driver_status": "COMPLETED_WITH_FAILURES_228",
+  "phases": [
+    "host_intent_t1_closed_prefix_export_v1",
+    "host_intent_t1_closed_prefix_export_v2",
+    "host_intent_t1_new_witness_labels_v1",
+    "host_intent_t1_new_witness_labels_v2",
+    "host_intent_t1_closed_prefix_export_v3",
+    "host_intent_t1_new_witness_labels_v3",
+    "host_intent_t1_closed_prefix_export_v4",
+    "host_intent_t1_new_witness_labels_v4",
+    "host_intent_t1_closed_prefix_export_v5",
+    "host_intent_t1_new_witness_labels_v5",
+    "host_intent_mem2act_protocol_fetch_v1",
+    "host_intent_mem2act_small_docs_v1",
+    "host_intent_mem2act_small_intake_v1",
+    "host_intent_mem2act_projection_audit_v1",
+    "host_intent_t1_closed_prefix_export_v6",
+    "host_intent_t1_new_witness_labels_v6",
+    "host_intent_mem2act_capture_projection_v1",
+    "host_intent_mem2act_parameter_schema_audit_v1",
+    "host_intent_mem2act_schema_dialect_audit_v1",
+    "host_intent_mem2act_final_catalog_audit_v1",
+    "host_intent_t1_closed_prefix_export_v7",
+    "host_intent_t1_new_witness_labels_v7",
+    "host_intent_external_hf_metadata_v1",
+    "host_intent_external_code_intake_v1",
+    "host_intent_instructir_intake_v1",
+    "host_intent_lme_small_snapshot_v1",
+    "host_intent_lme_small_public_validation_v1",
+    "host_intent_t1_new_train_cost_summary_v1",
+    "host_intent_t1_new_train_full_export_v1",
+    "host_intent_external_metadata_rate_limit_v1"
+  ],
+  "measured_cpu_seconds": 82.19036932,
+  "known_wall_only_failures": [
+    {
+      "phase": "host_intent_external_metadata_rate_limit_v1",
+      "known_command_wall_seconds": 0.256668546,
+      "cpu_seconds_missing": 1,
+      "model_calls": 0,
+      "measurement_file": "artifacts/host-intent-retrieval-v3/external/benchmark-metadata-v1/first-failure.json"
+    }
+  ],
+  "model_counters_unchanged": true,
+  "unmeasured": "Author review, source printing, documentation and untimed failed/read-only commands are unmeasured, not zero. No model cost is added by these phases. Metric-environment installation, Git ref lookups and uninstrumented metadata commands are also unmeasured. Pip emitted its standard wheel digest; no project data/model checksum comparison was performed.",
+  "settled_epoch": 1792461752.6352954
+}

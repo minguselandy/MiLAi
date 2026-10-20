@@ -11,8 +11,12 @@ from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.methods.memory_control_learning import decision_example
 
 
-def export_states(root: Path) -> list[dict[str, Any]]:
-    driver = read_json(root / "driver.json")
+def export_states(
+    root: Path, *, driver: dict[str, Any] | None = None,
+) -> list[dict[str, Any]]:
+    """Export one caller-selected closed-position snapshot, including live runs."""
+    if driver is None:
+        driver = read_json(root / "driver.json")
     histories = {h["id"]: h for h in read_json(root / "fixture.json")["histories"]}
     rows: list[dict[str, Any]] = []
     results_by_profile: dict[str, dict[tuple[str, str], tuple[Path, dict[str, Any]]]] = {}
@@ -56,7 +60,10 @@ def main() -> None:
     parser.add_argument("--output", required=True, type=Path)
     args = parser.parse_args()
     args.output.mkdir(parents=True, exist_ok=False)
-    rows = [row for run in args.runs for row in export_states(run)]
+    snapshots = [(run, read_json(run / "driver.json")) for run in args.runs]
+    rows = [row for run, driver in snapshots for row in export_states(run, driver=driver)]
+    write_json(args.output / "closed-positions.json", {"runs": [
+        {"run": str(run), "driver": driver} for run, driver in snapshots]})
     keys = [row["metadata"]["event_id"] for row in rows]
     if len(set(keys)) != len(keys):
         raise ValueError("Duplicate source decisions; name collection policies/profiles explicitly")
@@ -68,6 +75,8 @@ def main() -> None:
     report = {"status": "ACTUAL_STATES_EXPORTED_ALL_LABELS_MASKED",
         "runs": list(map(str, args.runs)),
         "states": len(rows), "labelled": 0,
+        "closed_host_positions": sum(len(driver["completed"]) for _, driver in snapshots),
+        "positions_with_states": len({row["metadata"]["training_event"] for row in rows}),
         "splits": dict(Counter(row["metadata"]["split"] for row in rows)),
         "interfaces": dict(Counter(row["metadata"]["interface"] for row in rows)),
         "families": len({row["metadata"]["family"] for row in rows}),
