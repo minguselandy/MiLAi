@@ -28,6 +28,8 @@ SameoldHostprompt, owncoldstreams, newcommonwire/sourceae3950f2; notrunning.
 Pendingv27 UNSETTLED containsDprepCPU; queueparentCPU/import/freezearchiveoverhead unknown.
 Persisted3arm evaluation prepared view-v4-persisted-evaluation-plan-v1.json; NOTSTARTED.
 STATEbridge implemented in runners/state_bench_adapter.py; runner tools/run_state_bench_local_pilot.py.
+STATEsourcefrozen d4c1692d at frozen-state-d4c1692d/MiLAi-Lab; executableplan
+view-v4-state-local-pilot-plan-v1.json NOTSTARTED, noHTTP/models yet.
 OriginalSDK import failed missingazure; separate upstream/state-bench-local-research-v1/source moves
 optionalAzureimportinsidecredentialbuilder only. Originaluntouched,patch indata/fixtures.
 Python3.11 imports + actualupstreamharness/realStore/registeredtool/realhotelwrite passed with
