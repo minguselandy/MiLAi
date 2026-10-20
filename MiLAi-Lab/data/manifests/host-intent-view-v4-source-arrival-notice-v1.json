@@ -1,6 +1,6 @@
 {
   "schema": "host_intent_view_execution_v1",
-  "status": "IMPLEMENTED_CHECKED_REAL_DIAGNOSTIC_PENDING",
+  "status": "IMPLEMENTED_DIAGNOSTIC_CLOSED",
   "base_version": "8c3c5659",
   "problem_evidence": "Both related-update positions in each original A arm made no new tool call. Actual Host material contained empty fresh_observations; incoming source receipts were not in the Host input.",
   "implementation": {
@@ -25,17 +25,25 @@
   "planned_diagnostic": {
     "config": "configs/host-intent-view-v4-source-arrivals.json",
     "histories": "artifacts/host-intent-retrieval-v3/data/view-v4-a-streams-v1/histories.json",
-    "policies": ["generative", "rules"],
+    "policies": [
+      "generative",
+      "rules"
+    ],
     "positions_per_policy": 8,
-    "source_groups": ["memops_A29", "memops_B05"],
+    "source_groups": [
+      "memops_A29",
+      "memops_B05"
+    ],
     "split": "train",
     "exposure": "Already exposed development sources; no independent confirmation claim.",
     "common_constraints": "Same Host/generator, source objects/order, request text, 2048 return tokens and 8 control steps. Each arm has its own cold bank and actual Host history.",
     "interpretation": "Added Host information, not a learned-controller gain. New outcomes do not repair prior failures.",
-    "new_real_results": 0
+    "new_real_results": 16
   },
   "sha_checks": false,
   "new_services": false,
   "extra_ledger": false,
-  "full_goal_complete": false
+  "full_goal_complete": false,
+  "implementation_version": "41477465",
+  "results": "data/manifests/host-intent-view-v4-source-arrivals-results-v1.json"
 }

@@ -1,91 +1,87 @@
-# CURRENT: v4 View/Host plan activated — 2026-10-20
+# CURRENT: v4 Host/View execution — 2026-10-20
 
-NEW: rules A author review closed5C/3W; full source/answer/View review in
-view-v4-a-rules-review-v1, tracked host-intent-view-v4-a-rules-results-v1.
-Both initial tasks and quotes supported; A29 relevant update wrong74; B05 middle falsely
-claims no other names, late misses wife/user disagreement. Views11nodes/0rules:
-A29 native-dialect wording qualified; B05 invented2026/before-March annotations invalid.
-Task correctness does not certify full View. pending-v17 now includes review CPU.
-Actual Host material at both late rules positions was only retrieval instructions plus
-fresh_observations:[], with no incoming-source notice. Incoming receipts exist outside modelinput.
-Opt-in host_source_arrivals now exposes new_visible_sources from actual incoming captures only:
-same-source repeats not new; counts recheck visibility; no bodies/relevance labels/action commands.
-Same seed_sources/Store/Host path, no new protocol/db/agent. Default off keeps earlier frozen inputs.
-50relatedchecks PASS, including notice on/off frozen replay; Ruff/mypy/boundaries PASS.
-New common config configs/host-intent-view-v4-source-arrivals.json changes only version + notice.
-Next freeze this source and run same train streams under generative/rules as NEW diagnostic,
-not repair/retry of earlier outcomes; added Host information is not a learned-controller gain.
+Active full goal: docs/MILAI_HOST_INTENT_VIEW_DEVELOPMENT_EXPERIMENT_PLAN_20261020_v4.md.
+Work in this research worktree/feat/host-intent-retrieval-20261019; the original plan directory
+is an older worktree. Full goal remains ACTIVE, not complete. No subagents, SHA/checksum/content
+fingerprints, extra ledger, new model services or remote publication. Product remains unchanged.
+Existing HTTP/CUDA envs and local Qwen/Laya assets only. Serialize actual model jobs; verify
+actual PID/command and terminal output before starting another. Timeout alone is not termination.
 
-LATEST: Generative A PID76091/exec91120 CLOSEDexit0,8/8 retained, COMPLETED_WITH_FAILURES.
-Author review2C/3U/2W/1F;99166tokens/27requests,newunknown0;169.908661s wall.
-One B05 View8nodes/0rules/2unresolved; core supports task atconstruction but source/time
-overstatements remain. Two real shared controller payloads contain exact View, then actual
-view_source_0 READ. Cross-call known refs0. Both related-update tasks made0toolcalls and answeredold.
-Read host-intent-view-v4-a-generative-results-v1 and raw view-review. Earlier no-View
-annotation corrected with original review/results retained; model outcomes never repaired.
-Offline summary now counts only current-message tool receipts:6actual, not13cumulative.
-3tests/Ruff/mypy pass. A measured localCPU10.077288774 + summaryCPU settled once atidle;
-pending-v16 SETTLED. Initial failed summary-audit CPU/human review remain unknown, notzero.
-RULES A CLOSEDexit0 PID127539absent/exec5966,8/8COMPLETED,49252tokens/12requests/newunknown0,
-152.613872s wall,9.433878962CPU pending-v17. Two initial calls build/deliver5+6nodeViews;
-all6laterpositions make0toolcalls. Semanticreview NOTcomplete; do not assign tasksuccess fromstatus.
-Owncoldbank/samef31025b0/8requests/2048budget. No model job currently lives; revalidate beforelaunch.
-Read host-intent-view-v4-a-rules-closed-v1. Next reviewclosedrules,compare actualmaterials/cost.
-Check Host arrival awareness (incoming
-sources stored before request, no explicit Host notification), not just controller errors.
-B05middle arrival is unchanged corefirstchoice but adds requested preference/other-name facts;
-not pure irrelevant-update acrossallfacets. Preserve this limitation insteadofcallingrefreshwaste.
-W2realcross-call, W4ifdeliverybottleneck, realE2/W5training/W6 confirmation remain pending.
+Latest code frozen for runs:41477465 (source-arrival notice). No experiment model process lives
+at the latest verified boundary; revalidate before launch. All latest sessions closed exit0:
+- Source-notice diagnostic PID242488/exec67784:16/16 COMPLETED_WITH_FAILURES.
+- Initial E2 pilot exec21604:6/6 tools and conditional readouts COMPLETED, all before/actions equal.
+- Known-View reference check PID481077/exec81946:COMPLETED.
 
-Historical20:08Shanghai: A REAL RUN launched PID76091/exec91120, source f31025b0,
-artifacts/host-intent-retrieval-v3/view-v4-a-generative-v1/driver.json; initially0/8.
-Revalidate PID and poll the same handle; never restart on observation timeout.
-Original T1driver3509227/child4032674 disappeared by20:05, exec93571unknown.
-Controlseed1 last persisted225/524, no checkpoint/latest/compute or terminal log.
-Cause unknown. No stop marker or interposition plan was written: preparation failed at
-its first /proc read. Raw files keep RUNNING; separate interruption review is authoritative.
-See t1-control-seed1-interruption-v1 manifest. Known lowerbound17888063train tokens+
-3831246dev tokens recorded once in originalledger; CPU/wall totals UNKNOWN, notzero.
-Pending-v15 settled0.357179422CPU atverifiedidle, review0.042519015CPU separately.
-No automatic T1 retry; seed1control/export and seed2 remain incomplete. A is the only model job.
-Do not settle offline work while A lives. Its source/config remain frozen and unchanged.
+Author/source reviews, not independent or blind confirmation:
+- Original A f31025b0: generative2C/3U/2W/1F,99166tokens/27requests; rules5C/3W,
+  49252tokens/12requests. Own cold banks and actual Host histories. 2 exposed train groups.
+- New source-arrival information: generative5C/2W/1F,170373tokens/32requests;
+  rules6C/2F,77593tokens/14requests. Combined247966tokens,newunknown0,449.907457s wall.
+  Notices0/4/6/13/2/17 actually present as appropriate; late tools available.
+  GenA29 still ignores relevant arrivals; GenB05 late calls tool but returns old material,
+  with2 append-budget rejections. Rules late truncates before fresh retrieval. Do not call
+  all late errors controller errors or claim extra Host information is a learned-policy gain.
+- B05 middle arrival changes preferences/other-name facts, despite unchanged corefirstchoice;
+  it is not a pure irrelevant-update control. Keep original streams/results and this qualification.
+- View truth/provenance/time/rule quality remains separate from Host answer grades. Original
+  A reviews corrected an early no-View author mistake; initial review/results retained.
 
-Newest independent progress: E2 legal first-action + bounded continuation implemented while T1
-remains live. See data/manifests/host-intent-view-v4-e2-intervention-v1.json. replay_call accepts
-intervention={first_action:<exact captured action>,continuation_steps:N}. First action and
-terminal HANDOFF use existing operations/allowances; continuation alone calls the declared policy.
-Original first before/action set stays exact; no reset of control/read/model/return budgets.
-run_frozen_retrieval_calls.py accepts per-arm capture directory selector plus intervention.
-Unselected captures stay listed, never negative labels. Fixed Host readout keeps other batch receipts.
-This is initial-decision branching, not arbitrary intermediate-state restoration or W5 training.
-A frozen f31025b0 inputs remain unchanged; no real A/E2 models or new services launched.
-At19:58Shanghai T1driver3509227/child4032674 were live201/524; latest interruption above supersedes.
+W1/W2: visible View facts/rules/unresolved reach full/shared inputs; source locations retained;
+finite View-bound READ uses original Store. Old snapshot/current cache, eviction and revocation
+checks passed. Actual generative A had exact View in2 model inputs and a same-call bound READ.
+Known-View-only live functional check now proves actual cross-call ref use: Host generated the
+exact previously returned ref, known_reference_reads1, and read two actual user sources/quoted
+both correctly. Store copied from a real closed trajectory; real View supplied as known context.
+This is controlled functional evidence, not autonomous benchmark performance. It used76356tokens/
+8requests,6controlsteps/5READs;3extra READs after the requested originals were already present.
+Read data/manifests/host-intent-view-v4-known-view-reference-live-v1.json.
 
-User now explicitly requests full execution of
-docs/MILAI_HOST_INTENT_VIEW_DEVELOPMENT_EXPERIMENT_PLAN_20261020_v4.md.
-This supersedes the earlier T1-only/paused scope below. Goal ACTIVE; no completion claim.
-Continue in this actual research worktree, not the older jev-read-decisions plan directory.
-No subagents, SHA/checksum/content fingerprints, extra ledger or new model services.
-Preserve ongoing T1 driver PID3509227 and frozenba2bf8d8; revalidate its actual child.
-At 19:46 Shanghai controlseed1 PID4032674 was live143/524; no second model job or settlement.
+Host history continuation is opt-in --continue-host-history, importing actual prior completed
+same-bank/session messages into a separate new-request checkpoint with visibility/exposure checks.
+Opt-in host_source_arrivals shows only distinct newly captured, still visible incoming-source
+counts. Repeated old/duplicate inputs do not count as new; no body, relevance label or forced call.
+50 related tests, Ruff/mypy/boundaries passed. Default off preserves earlier frozen inputs.
 
-W1/W2 implemented: visible View interpretation reaches full/shared controller inputs;
-undelivered support locations survive projection; finite READ uses real Store bindings,
-including known delivered snapshots after cache replacement/eviction. Existing visibility applies.
-Normal JSON Host check found cross-request checkpoints omitted earlier tool receipts.
-New optional previous_host_message imports actual same-bank/session completed messages into
-the new request checkpoint, with existing visibility/exposure handling. Runner opt-in
---continue-host-history preserves each arm's own history; old default unchanged.
-141 affected tests PASS (including 5 new, normal two-message Host and revoked-history denial);
-Ruff/mypy5files PASS. No new real model outcome; scripted providers are functional checks only.
-Source recipe/config for A:2 original T2 train groups,8positions,46exact ordered sources audited.
-See data/manifests/host-intent-view-v4-a-functional-preparation-v1.json and latest execution entry.
-Preparation/audit0.017553445CPU plus source-freeze0.339625977CPU pending-v15 (0.357179422total);
-untimed author/test work unknown, notzero. Tested source committed/frozen f31025b0; exactargv/env
-in artifacts/host-intent-retrieval-v3/view-v4-a-run-plan-v1.json, PREPARED_NOT_STARTED.
-Next: follow the now-running A via the existing JSON runner,
-then review actual packets/Host answers/cost and decide W4 vs small real branches. W3 real-run,
-W4–W6/feedback comparisons/E1–E5/external confirmation remain uncompleted. No remote publish.
+E2 first-action + bounded continuation implemented (c84be38e; in41477465): intervention copies
+an exact captured action+parameters, then the declared policy for N decisions, then legal HANDOFF.
+Original budgets/before/actions unchanged. Per-arm capture selector supported; unselected captures
+remain listed, never negative labels. This only restores initial-call decisions, not arbitrary
+internal controller states. The pilot has 2 states × 3 branches = 6 endpoints.
+Pilot2C/1Q/1W/2U,25418tokens/8requests. Both SEARCH continuations actually succeeded within limits;
+empty HANDOFFs did not. B05 View readout falsely promoted backup preference to a switch. No training
+preferences generated yet; no claim delivery feedback exceeds answer-only. Read E2 pilot manifest.
+
+NEXT CONCRETE DEVELOPMENT: W4, now justified by an actual failed stream and Store/tokenizer audit.
+Current packet1542tokens; appending candidate4=2258 or16=2133 exceeds2048. Actual ranges4+16
+alone need1363; View+16 needs1600. These alternative packets were capacity-audited only, NOT
+executed/delivered/scored. See host-intent-view-v4-w4-delivery-fit-v1.json.
+Separate acquired controller material from selected final delivery in the existing request-local
+operations. Preserve default append until explicit finite selection; use existing USE_VIEW/HANDOFF
+parameters, actual acquired indices, same full retrieval_packet budget and selected-only snapshot
+refs. Refresh/source refs and READ dedup must use observed material. No oracle bundle selection,
+new storage, unconstrained powerset or silent deletion. Add only relevant actual Store/wire/ref checks,
+then a new real short flow. Preserve old frozen outcomes. Native final-input/option-binding capacity
+still needs actual verification before new T1/feedback evaluation; generative visibility is not that.
+Source-notice View review is partial; full inventory exists in its review directory. Complete relevant
+semantic review before labels. W4/W5 feedback training, broader B–E, E1–E5/STATE confirmation remain.
+
+Important T1 interruption: driver3509227/child4032674 disappeared at225/524; no terminal log,
+checkpoint/latest or compute.json. Cause unknown. No stop marker was written. Raw RUNNING files
+are stale; separate interruption review is authoritative. Known17888063train+3831246dev tokens
+recorded as lower bound with unknown CPU/wall flags. Do not pretend it completed or auto-replay.
+Seed0 both fits/exports and mainseed1 fit/export are closed. Controlseed1/export and seed2 unfinished.
+Any reviewed recovery must preserve failed attempt/cost and original recipe; do not overwrite it.
+Common W5 initialization remains completed T1 mainseed0 per v4, not a mix of recipes/seeds.
+
+ONLY ledger: /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json.
+Pending-v15..v19 now settled once at verified idle. v17=9.971530924CPU;v18=22.204496620CPU;
+v19=18.955338145CPU. Driver/case/readout timings are nested; never double-count. HTTP already billed.
+Interactive assistant review/tests/import overhead outside timers remain unknown, not zero.
+Do not settle during actual model activity. Raw corpora/weights/databases/traces remain ignored.
+Authoritative latest outcomes: docs/HOST_INTENT_RETRIEVAL_EXECUTION.md and data/manifests/
+host-intent-view-v4-{source-arrivals-results,e2-initial-pilot-results,known-view-reference-live,
+w4-delivery-fit}-v1.json. Runtime artifacts under artifacts/host-intent-retrieval-v3/.
 
 # Previous: user explicitly requests completing T1; T1 work resumed
 

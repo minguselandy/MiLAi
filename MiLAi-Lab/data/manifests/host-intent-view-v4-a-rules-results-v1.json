@@ -49,7 +49,8 @@
     "wall_seconds": 0.2157413326203823,
     "cpu_seconds": 0.215707029
   },
-  "ledger_recorded": false,
+  "ledger_recorded": true,
   "workload_qualification": "B05 middle sources do not change the core choice but add requested preference/other-name facts; not a pure irrelevant-update control.",
-  "next": "Test a generic source-arrival notice for Host, preserving original outcomes and identical sources/budgets. Do not assign all late errors to the controller."
+  "next": "Test a generic source-arrival notice for Host, preserving original outcomes and identical sources/budgets. Do not assign all late errors to the controller.",
+  "settlement": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/data/pending-offline-review-v17.json"
 }

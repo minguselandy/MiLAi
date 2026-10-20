@@ -1,0 +1,62 @@
+{
+  "status": "CLOSED_TASK_REVIEWED_VIEW_REVIEW_PARTIAL",
+  "source_version": "41477465",
+  "source_groups": 2,
+  "split": "train",
+  "positions": 16,
+  "per_arm": {
+    "generative-rich": {
+      "grades": {
+        "C": 5,
+        "W": 2,
+        "F": 1
+      },
+      "generation_tokens": 170373,
+      "generation_requests": 32,
+      "tool_calls": 5,
+      "sum_message_wall_seconds": 196.65182385779917,
+      "related_update_tool_calls": 1,
+      "material_budget_rejections": 2
+    },
+    "rules-rich": {
+      "grades": {
+        "C": 6,
+        "F": 2
+      },
+      "generation_tokens": 77593,
+      "generation_requests": 14,
+      "tool_calls": 3,
+      "sum_message_wall_seconds": 251.22525697387755,
+      "related_update_tool_calls": 0,
+      "material_budget_rejections": 1
+    }
+  },
+  "known_generation_tokens": 247966,
+  "generation_requests": 46,
+  "new_unknown_usage": 0,
+  "stream_wall_seconds": 449.90745685249567,
+  "stream_cpu_seconds_nested": 22.193152675999997,
+  "arrival_notice_check": "All16 positions have actual Host material with the expected count; both late13/17 counts were visible and milai_retrieve remained available.",
+  "limitations": [
+    "Exposed train sources, single stochastic run; no independent confirmation or causal success claim.",
+    "B05 middle arrival changes requested secondary facts; not a pure irrelevant-update control.",
+    "Full View semantic review remains partial; source-notice B05 generative View contains an unjustified rule from gentle-name preference to joint choice, and unsupported time annotations.",
+    "Material selection alternatives in the fit audit were not executed or scored."
+  ],
+  "key_findings": [
+    "Notice alone does not solve current-state use: generative A29 still does not retrieve after relevant arrivals.",
+    "Generative B05 late does retrieve but delivers old View/old sources, with2 rejected appended reads. Actual necessary-source package4+16 fits1363tokens versus2258/2133 for appending to old material at2048limit.",
+    "Rules late requests truncate before new tool execution; do not assign these Host failures to a controller choice."
+  ],
+  "results": "artifacts/host-intent-retrieval-v3/view-v4-source-arrivals-review-v1/results.json",
+  "source_review": "artifacts/host-intent-retrieval-v3/view-v4-source-arrivals-review-v1/author-review.json",
+  "arrival_audit": "artifacts/host-intent-retrieval-v3/view-v4-source-arrivals-review-v1/arrival-input-audit.json",
+  "view_inventory": "artifacts/host-intent-retrieval-v3/view-v4-source-arrivals-review-v1/view-operation-inventory.json",
+  "compute": {
+    "wall_seconds": 0.6963504971936345,
+    "cpu_seconds": 0.696308805
+  },
+  "ledger_recorded": true,
+  "next": "W4 explicit observation/delivery separation and finite material selection; keep Host and View-generator limitations visible.",
+  "settlement": "artifacts/host-intent-retrieval-v3/data/pending-offline-review-v19.json"
+}
