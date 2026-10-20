@@ -1,5 +1,5 @@
 {
-  "status": "SEED0_MAIN_RUNNING",
+  "status": "MAIN_SEED0_CLOSED_MATCHED_CONTROL_SEED0_RUNNING",
   "data": "artifacts/host-intent-retrieval-v3/data/t1-fitting-v1",
   "recipe": "artifacts/host-intent-retrieval-v3/data/t1-fitting-recipe-v1.json",
   "preparation": {
@@ -205,10 +205,11 @@
   },
   "offline_settlement": "host-intent-retrieval-v3-offline-review-settlement-v11.json",
   "active": {
-    "pid": 2070802,
-    "exec_session": 15108,
+    "pid": 2670549,
+    "exec_session": 8252,
     "source_version": "ba2bf8d8",
-    "run": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/fitting/t1-native-shared-seed0-v1",
-    "dispatch": "artifacts/host-intent-retrieval-v3/t1-fit-seed0-dispatch-v1.json"
-  }
+    "run": "artifacts/host-intent-retrieval-v3/fitting/t1-matched-operation-control-seed0-v1",
+    "dispatch": "artifacts/host-intent-retrieval-v3/t1-control-seed0-dispatch-v1.json"
+  },
+  "main_seed0": "Completed524; persisted1209inputs/choices/metrics verified unchanged. No Hostefficacy claim."
 }

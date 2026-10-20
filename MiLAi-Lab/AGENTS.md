@@ -1,33 +1,42 @@
-# CURRENT 2026-10-20: T1 seed0 fit CLOSED; persisted-checkpoint validation RUNNING
+# CURRENT 2026-10-20: matched T1 operation-only control seed0 RUNNING
 
-ACTIVE MODEL JOB PID2631774 / exec49953 / frozen-ba2bf8d8.
-evaluations/t1-seed0-export-validation-v1/run.json, all1209dev inputs; last656completed.
-RevalidatePID/run andpollsamehandle; no restart ontimeout, no secondactualmodeljob oroffline
-settlement whilelive. Compare exactpublicinputs/predictions/metrics withfitdev524 afterclose,
-then launchregistered matched operation-only control seed0 (samebase/524updates), not oldT0replay.
-Mainfit PID2070802/exec15108 CLOSED exit0/absentPID, finalcheckpoint exists andboth parameterprobeschanged.
-524updates/8384draws/28392562trainingtokens; finaldev op446/616 macro.7538688, FollowIR316/349
-macro.9024896. Finaltrain op2505/2762,FollowIR1426/1427. Predeterminedfinalweights unchanged even
-though FollowIRmidpoint319/349 washigher. Wholefit7982.539331wall/13526.082441CPU exactlyinoriginalledger.
-No Hostefficacy/matchedcontrol/externalclaim fromthese staticnative diagnostics.
+ACTIVE MODEL JOB PID2670549 / exec8252 / frozen-ba2bf8d8.
+fitting/t1-matched-operation-control-seed0-v1/run.json;524plannedupdates, same multilingualbase,
+native/fullencoder/shared,float32,micro2/accum8,gradientcheckpoint/optionshuffle.2762labelledtrain,
+860rawdev/616labels; loss.75/.25. Controls retain mainT1stateIDs. Originalledger ONLY.
+RevalidatePID/run andpollsamehandle. No restart ontimeout, no secondactualmodeljob oroffline
+settlement whilelive. Afterclose inspectcosts/failures andpersistedweights before nextseed/job.
+Mainfit PID2070802/exec15108 CLOSED exit0:524updates/8384draws/28392562trainingtokens,
+7982.539331wall/13526.082441CPU exactlyledger. Encoder/head probes changed.
+Finaldev op446/616 macro.7538687969; FollowIR316/349 macro.9024896266. Finaltrain2505/2762
+and1426/1427. Preselectedfinal524unchanged despite FollowIRmid319/349. Staticnative diagnostics,
+NOTHostefficacy or matched comparison. Fulloriginal matrix remainsbelow.
+Persisted-checkpoint validation PID2631774/exec49953 CLOSED exit0/absentPID:1209publicinputsand
+1209choicesunchanged,metricsidentical,maxlogitdelta.0521075726.1209forwards3932447tokens,
+312.220533wall/500.916869CPU reconciledoriginalledger. No outputrepairs/checkpointselection.
 
-OriginalCPUfullStoreprobe PID2523750/exec74656 intentionallyINTERRUPTED(exit130/absentPID), notlive.
-Two py-spy nonblockingstacks identify search->backlink_candidates->_rows repeatedperlexicalsource;
-12221matchingcorpusdocs,0semanticrecords, each emptyrecords scan18.780s/64288childitems.
-Originaltrace/DB/failure untouched; observedprocessCPUlowerbound1206.28s, tailunmeasured;
-oldorchestration0.867605707CPU nestednotadded. No nativequestion/qrel/model call.
-Fix nowinworkingtree: namespace-metadata membership beforevalue materialization; skipimpossible
-backlinks with0records; batchhistoryscan once fornonempty sets; preserve per-source100cap,
-historicalrefs,sourceorder,owner/visibility.4newtests/54relatedPASS,Ruff/mypy2files,boundariesPASS.
-Actual fullStore empty-semanticsearch now.046162578wall/.046163591CPU, notwholequerylatency.
-Need newfrozencode +separatefullStore syntheticCPUprobev2 tovalidatefullquery andarchivecapacity.
-RunnerCPUaccounting nowfinallymeasures interruptedquery too; originalfailedmeasurementsunchanged.
+InstructIR CPUprobev1 PID2523750/exec74656 deliberatelyinterrupted(exit130) afterstackproof of
+search->per-source backlink_candidates->_rows scans:12221matchingdocs,0semanticrecords;
+each emptyscan18.780s/64288childitems. Originaltrace/DB/failurekept. ObservedprocessCPUlowerbound
+1206.28s,tailunmeasured; nested.867605707orchestration notrebilled. No nativequestion/qrel/model.
+Fixcommitted17c3086d: namespace-metadata precheck; emptyrecords skipimpossiblebacklinks;
+nonemptyrecords batchonehistoryscan, preserveper-source cap/history/visibility/ranking.54tests,
+Ruff/mypy/boundariesPASS. InterruptedqueryCPU nowmeasuredin finally.
+CorrectedfullStore syntheticCPUprobev2 PID2654430/exec51395 CLOSEDexit0:1query/4returnedDocs,
+querywall50.856730s/CPU50.397813s,2SEARCH16.4681/16.2427s,4READ~.03s,sourceinventory9.5201s.
+NoHTTP/nativeforward; allgeneration/embeddingcountersunchanged. Archive19files107056042rawbytes,
+19549415compressedbytes. One-case extrapolationfour9906-queryarms=774626019960bytes, abovecurrent
+free~350GiB. NEED efficient query-local/shared source reads AND losslessly reconstructable common-
+source artifact reuse beforefullE4; do not weakenoutputretention/dropcorpus/skipqueries.
+No realIRquestions/models evaluated. Read synthetic-probe-v2-results manifest.
 
-Allsettlements v1..v12 SETTLED atverifiedidle beforeexportvalidation started. v12=1690.065452597
-measuredCPU plus1206.28observedCPUlowerbound withmissingtailflag; modelcountersunchanged,
-T1fitphase notrebilled. Newofflinework pendingv13 (currently46msmicrocheck), do notsettlewhilelive.
-py-spy0.4.1 isolateddebug-tools-env; HTTP/CUDAenvsunchanged. No SHA orreplacementfingerprints.
-Dev PID1918885/exec94959 CLOSED52; do not restart closedcollections.
+Allsettlements v1..v13 SETTLED atverifiedidle beforecontrolstart. v12=1690.065452597measuredCPU
++1206.28CPUlowerbound/missingtail;v13=58.692156108CPU. Modelcountersunchanged; fit/export notrebilled.
+Newofflinework pendingv14(tracearchiveaudit onlycurrently). No settlementwhilecontrol lives.
+py-spy0.4.1 isolateddebug-tools-env; HTTP/CUDAenvsunchanged. NoSHA/contentfingerprints.
+Originalledger /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json.
+
+# Earlier experiment detail (current process/status/accounting above takes precedence)
 Train228:165completed/63fail(49length,14JSON);592HTTP1951856known=charged,newunknown0.
 Dev52:41completed/11fail(10length,1JSON);127HTTP390650known=charged,newunknown0.
 Frozen collectors c6b1f3bd; all original results/first failures unchanged. JSON-action, not nativeE0.
