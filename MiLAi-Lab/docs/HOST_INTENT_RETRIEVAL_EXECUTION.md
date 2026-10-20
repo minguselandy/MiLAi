@@ -1388,3 +1388,34 @@ Host尝试。详见 `data/manifests/host-intent-retrieval-v3-e2-frozen-call-prot
 据此推断完整任务效果或最终方法胜负。保留原定第524更新权重，不选中点或改变配方。
 对照最新核实276/524，仍是唯一实际模型作业。核对3.588921407秒CPU追加pending-v14，
 现八个阶段共195.248007270秒CPU，训练活动期间不结算。
+
+## E2 固定 Host 的逐请求条件读出
+
+`run_frozen_retrieval_calls.py --host-readout` 现可在工具对照后使用原始Host输入，替换目标
+调用的实际ToolMessage内容，生成一次最终答案。原上下文、同批其他回执、工具目录、
+模型、采样、输出上限及thinking设置保持相同；原生模式固定tool_choice=none，
+JSON-action使用原有answer分支，不再执行新工具。原参考答案和原Host输出不进入新提示。
+
+这是逐请求的条件证据效应：其他实际回执即使含相关证据也作为共同输入保留，不是整批
+反事实重演或E1的完整自主闭环。完整原生/JSON批次先核对，再只替换目标回执；不能删除
+同批其他调用来拼出更容易回答的上下文。工具返回包来自实际复现结果，不由脚本补写。
+
+快照格式v2记录原Host本次attempt的结果路径，只有原attempt关闭后才准备读出。实际
+trace前缀按字节直接核对，不加SHA或内容指纹。失败的原Host也可提供真实输入；普通
+Host容量拒绝现在保留实际请求供审阅，仍不发送HTTP，既有忘记/撤销后的trace清理照常。
+没有Host来源或没有后续实际输入时，案例保留为NOT_EXECUTED，CLI明确报告缺失读出。
+
+读出使用既有FunctionalVLLMClient和HTTP所有权、原连续账本、原队列及该臂剩余的公共
+消息调用额度。完整request、原始response和trace保留；首次截断、额外工具调用、格式
+错误及超限不会触发补答或输入裁剪。发起HTTP前记录dispatch，因此中断也能保留尝试
+及未知用量，不能把无返回误记成零调用。读出CPU与工具CPU、外层编排CPU分开，不能
+重复加总driver的嵌套总量。
+
+33项相关接线检查和52项HTTP所有权/容量/队列回归通过，覆盖两种调用格式、完整多调用
+批次、原始文件不变、相同账本计量和2调用×2方法CLI。均为脚本化模型及临时隔离账本；
+正式E2采集、证据评分和下游答案评分仍未运行。协议见
+`data/manifests/host-intent-retrieval-v3-e2-fixed-host-readout-v2.json`。
+实际匹配训练最新核实393/524，冻结代码未变，仍为唯一实际模型作业。
+
+最终8项读出检查通过，包括中断时保留1次dispatch和新增1条unknown_usage、不重试；
+Ruff、mypy及包/tools边界通过。没有实际调用新增模型或修改原账本，pending-v14不变。

@@ -1,5 +1,23 @@
 # CURRENT 2026-10-20: matched T1 operation-only control seed0 RUNNING
 
+NEW E2 conditional fixedHost readout implemented; actualE2collection/evaluation NOTstarted.
+--host-readout on run_frozen_retrieval_calls.py prepares shared actualpost-tool inputs from closed
+originalHost attempts, verifies directtraceprefix equality andcomplete native/JSON-action batches.
+ReplaceONLYtargetToolMessage content withactualreplayreceipt; otherbatchreceipts/context/catalog/
+model/sampling/outputlimit/thinking preserved. Forceonefinalanswer(native none /JSONanswerbranch).
+Thisisconditionalper-call effect withotheractualreceipts fixed, NOTjointbatchreplay orautonomousE1.
+Newfrozen_retrieval_call_v2 records exactclosedHostattempt-result path. NoHostorigin/nopost-toolinput
+keptNOT_EXECUTED; CLI reportsCOMPLETED_WITH_MISSING_READOUTS, no silentlydroppedpositions.
+SameFunctionalVLLMClient.native_post, originalHTTPowner/ledger/queue andremainingpubliccallgate.
+Exactrequests/rawresponses/trace/answer retained. Capacityfailure0HTTP; incomplete/tool-call outputs
+failwithoutrepair. Native dispatchrecord precedesHTTP sointerruptionkeepsattempt/unknownusage.
+Ordinarycapacityrejection nowretainsactualrequest intrace; existingredactionstillremovesbodies.
+33related +52HTTPownership/capacity/queue testsPASS; final8readoutchecks(includeinterrupt) PASS.
+Interrupteddispatch retained1attempt/+1unknown_usage; no retry. Ruff7files/mypy4files/boundariesPASS.
+Read e2-fixed-host-readout-v2 manifest. Noactualmodels/ledgerwrites outsideactivefit; noSHA.
+ActivePID2670549/exec8252/frozenba2bf8d8 latest393/524; no secondactualmodeljob oroffline settlement.
+pendingv14 unchanged195.248007270CPU/8phases. Remaining T2/data/seeds/fullmatrix stillrequired.
+
 NEW E2 frozen actual-call capture/replay implemented; mechanicaltests only, NOactualE2collection.
 tools/run_host_intent_retrieval.py --capture-retrieval-calls opt-in: serialtoolcalls, snapshot before
 newtoolentry writes/knownrefs, originalStore+checkpointSQLiteonlinebackups, priorread/genallowances,

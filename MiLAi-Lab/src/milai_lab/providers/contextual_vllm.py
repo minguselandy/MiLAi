@@ -205,6 +205,7 @@ class VLLMClient:
                         {
                             "event": "vllm_capacity_rejected",
                             "path": "chat/completions",
+                            "request": request,
                             "capacity": error.receipt,
                         }
                     )

@@ -2,7 +2,8 @@
 
 The JSON recipe is a list of {"name": ..., "policy": {...}} arms. All captures,
 including original failures and zero-decision requests, stay in the cohort.
-This runner measures tool execution only; it does not score downstream answers.
+With --host-readout, substitute each target receipt in the original complete
+Host context and request one final answer. Semantic scoring remains separate.
 """
 from __future__ import annotations
 
@@ -25,6 +26,8 @@ def main() -> None:
     parser.add_argument("output", type=Path)
     parser.add_argument("--source-version", required=True)
     parser.add_argument("--host-site-packages", type=Path)
+    parser.add_argument("--host-readout", action="store_true",
+                        help="One conditional final Host answer using the original post-tool input")
     args = parser.parse_args()
     if args.host_site_packages:
         site.addsitedir(str(args.host_site_packages))
@@ -47,12 +50,21 @@ def main() -> None:
     driver: dict[str, Any] = {
         "status": "RUNNING", "pid": os.getpid(), "source_version": args.source_version,
         "planned_positions": len(calls) * len(policies), "completed": [], "automatic_retry": False,
-        "scope": "Tool evidence/cost comparison; fixed Host downstream effects remain separate.",
+        "host_readout": args.host_readout,
+        "scope": "Frozen tool comparison; optional conditional single-receipt Host readout.",
     }
     write_json(args.output / "driver.json", driver)
     models: dict[tuple[Any, ...], Any] = {}
     cases = []
+    frames: dict[int, dict[str, Any]] = {}
     try:
+        if args.host_readout:
+            from milai_lab.runners.frozen_host_readout import prepare_readout, run_readout
+
+            (args.output / "readout-frames").mkdir()
+            for index, (captured, _) in enumerate(calls):
+                frames[index] = prepare_readout(captured)
+                write_json(args.output / "readout-frames" / f"{index:05d}.json", frames[index])
         for arm_index, arm in enumerate(policies):
             for index, (captured, _) in enumerate(calls):
                 case = args.output / f"arm-{arm_index:02d}" / f"call-{index:05d}"
@@ -66,24 +78,41 @@ def main() -> None:
                        "before_equal": result.get("frozen_initial_observation_and_actions_equal")}
                 driver["completed"].append(row)
                 write_json(args.output / "driver.json", driver)
+                if args.host_readout:
+                    try:
+                        readout = run_readout(captured, case, case / "host-readout",
+                                             frames[index], source_version=args.source_version)
+                        row["host_readout_status"] = readout["status"]
+                        row["host_readout_reason"] = readout.get("reason")
+                    except BaseException:
+                        row["host_readout_status"] = "FAILED"
+                        write_json(args.output / "driver.json", driver)
+                        raise
+                    write_json(args.output / "driver.json", driver)
                 print(json.dumps(row, ensure_ascii=False), flush=True)
                 if result["status"] != "COMPLETED":
                     raise RuntimeError("First failed comparison retained; no automatic retry")
-        driver["status"] = "COMPLETED"
+        driver["status"] = ("COMPLETED_WITH_MISSING_READOUTS" if args.host_readout and any(
+            row["host_readout_status"] != "COMPLETED" for row in driver["completed"])
+            else "COMPLETED")
     except BaseException as error:
         driver.update(status="FAILED", error_type=type(error).__name__, error=str(error))
         raise
     finally:
         measured = [read_json(case / "replay.json") for case in cases
                     if (case / "replay.json").exists()]
+        readouts = [read_json(case / "host-readout/readout.json") for case in cases
+                    if (case / "host-readout/readout.json").exists()]
         elapsed_cpu = time.process_time() - cpu
         driver.update(wall_seconds=time.perf_counter() - started,
             cpu_seconds_nested=elapsed_cpu,
             orchestration_cpu_seconds_not_yet_recorded=elapsed_cpu - sum(
-                row.get("cpu_seconds_nested", 0) for row in measured),
+                row.get("cpu_seconds_nested", 0) for row in measured) - sum(
+                row["cpu_seconds"] for row in readouts),
             ledger_recorded=False,
             accounting="Per-case replay.json separates ledger CPU and pending CPU; "
-                       "outer orchestration CPU is additional, driver total is nested.")
+                       "readout CPU and outer orchestration CPU are additional. "
+                       "Driver total is nested; readout HTTP uses the original ledger.")
         write_json(args.output / "driver.json", driver)
 
 

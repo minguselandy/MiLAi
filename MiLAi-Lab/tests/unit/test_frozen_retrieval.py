@@ -164,8 +164,9 @@ def test_zero_decision_and_failed_calls_remain_available_without_repair(
     assert len(attempts) == (1 if steps else 0)
 
 
+@pytest.mark.parametrize("readout", [False, True])
 def test_multiple_native_calls_are_serially_captured_and_complete_cli_cohort_runs(
-    tmp_path, monkeypatch,
+    tmp_path, monkeypatch, readout,
 ):
     root = prepared_given(tmp_path)
     snapshots = tmp_path / "snapshots"
@@ -196,13 +197,17 @@ def test_multiple_native_calls_are_serially_captured_and_complete_cli_cohort_run
     import run_frozen_retrieval_calls
 
     monkeypatch.setattr(sys, "argv", ["run_frozen_retrieval_calls", str(snapshots),
-        str(policies), str(tmp_path / "matrix"), "--source-version", "mechanical"])
+        str(policies), str(tmp_path / "matrix"), "--source-version", "mechanical",
+        *(["--host-readout"] if readout else [])])
     run_frozen_retrieval_calls.main()
     driver = read_json(tmp_path / "matrix/driver.json")
     assert driver["status"] == "COMPLETED"
     assert driver["planned_positions"] == len(driver["completed"]) == 4
     assert all(row["before_equal"] for row in driver["completed"])
-    assert len(wires) == 2
+    assert len(wires) == (6 if readout else 2)
+    assert driver["orchestration_cpu_seconds_not_yet_recorded"] >= 0
+    if readout:
+        assert all(row["host_readout_status"] == "COMPLETED" for row in driver["completed"])
 
 
 def test_cached_actual_call_keeps_prior_packet_and_does_not_invent_a_policy_decision(

@@ -98,7 +98,10 @@ from milai_lab.providers.chat_bridge import IncompleteChatResponse
 from milai_lab.providers.contextual_capacity import CapacityExceeded, HostCapacity
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
 from milai_lab.providers.embedding_capacity import MeteredEmbeddings
-from milai_lab.providers.functional_queue import FunctionalQueue, FunctionalVLLMClient
+from milai_lab.providers.functional_queue import FunctionalQueue
+from milai_lab.providers.functional_queue import (
+    FunctionalVLLMClient as FunctionalVLLMClient,
+)
 from milai_lab.providers.request_pipeline import DeliveryObserver, PreparedRequest
 from milai_lab.runners.functional_request_progress import (
     PROGRESS_PREFIX,
@@ -2985,6 +2988,8 @@ def message(
                         "source_version": freeze["source_version"],
                         "admission_policy": memory._read_admission_policy(),
                         "host_prefix_trace": str(trace.path.relative_to(root)),
+                        "host_result_path": str((bank_root / (
+                            f"{identity}-attempt-{attempt}.json")).relative_to(root)),
                         "host": settings["host"],
                         "generation_calls_before": model.calls_in_message},
                     capture_call)

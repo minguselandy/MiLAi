@@ -1,0 +1,60 @@
+{
+  "status": "CONDITIONAL_FIXED_HOST_READOUT_IMPLEMENTED_MECHANICAL_VALIDATION_ONLY",
+  "previous_protocol": "host-intent-retrieval-v3-e2-frozen-call-protocol-v1.json",
+  "entry": "tools/run_frozen_retrieval_calls.py CAPTURES POLICIES_JSON OUTPUT --source-version VERSION --host-readout",
+  "implementation": [
+    "src/milai_lab/runners/frozen_host_readout.py",
+    "tools/run_frozen_retrieval_calls.py"
+  ],
+  "capture_schema": "frozen_retrieval_call_v2 adds exact original Host attempt-result path. The original attempt must be closed before a readout frame is prepared.",
+  "context": {
+    "source": "First original post-tool Host input containing the target receipt in its latest complete tool-call batch. Read from the closed original trace after direct byte comparison with the saved pre-call trace prefix.",
+    "retained": "All original messages, other receipts, tool catalog, model, sampling, token bound, thinking setting and other raw request fields. No reference answer or original output answer enters the new prompt.",
+    "intervention": "Replace only the target ToolMessage content with the actual replay ToolMessage. Force one final response: native tool_choice none, or the existing JSON-action final-answer schema branch. No further retrieval/business calls.",
+    "scope": "Conditional per-call evidence effect, holding other actual batch receipts fixed even when they provide related evidence. This is not a joint batch replay, an autonomous counterfactual conversation, or an E1 end-to-end effect.",
+    "formats": "Native and JSON-action complete batches checked. A missing batch member, wrong original packet, changed trace prefix or non-target receipt identity is retained as an error, not repaired.",
+    "original_failures": "A failed original Host attempt can supply a real input frame. Ordinary capacity rejection now retains its actual request in the trace without sending HTTP. Existing trace redaction removes request content when required.",
+    "missing_inputs": "No actual Host origin or no post-tool input is NOT_EXECUTED with a reason and remains in the cohort. CLI completes with missing-readout status, never silently drops those positions."
+  },
+  "execution": {
+    "provider": "Existing FunctionalVLLMClient.native_post with the recorded raw request, original serialized HTTP owner, original continuous ledger, original queue and remaining durable per-message generation allowance.",
+    "output": "Exact request.json, raw response.json when received, trace.jsonl, frame.json and readout.json. Empty valid answers remain empty; length termination, new tool calls, malformed JSON and capacity failure remain first failures.",
+    "retries": false,
+    "answer_repair": false,
+    "input_clipping": false,
+    "cost": "Each actual HTTP call charged once to original ledger. Readout CPU remains pending separately from tool replay CPU and outer orchestration; driver total is nested.",
+    "original_artifacts": "No original snapshot, Host answer, request, labels or trace is rewritten. The new reader call consumes the per-arm runtime continuation allowance.",
+    "dispatch_accounting": "Native request-dispatch event recorded before send. Count dispatch attempts, not server acknowledgements; interruptions retain unknown usage in the original ledger."
+  },
+  "validation": {
+    "new_readout_tests": 8,
+    "related_tests": 33,
+    "cli": "Both default tool-only and full2callx2arm --host-readout paths tested.",
+    "coverage": [
+      "Native and JSON-action whole-batch receipt substitution",
+      "Only target content/final-only directive differ; common prompt/catalog/sampling unchanged",
+      "Original source files unchanged",
+      "One HTTP call and one admission increment, original ledger exact",
+      "Truncation/extra-tool-call failures retained without repair",
+      "Capacity failure sends zero HTTP and retains complete request",
+      "Incomplete batch and open original attempt rejected",
+      "Failed original Host frame remains eligible",
+      "Given requests without Host origin retained as unexecuted",
+      "Interrupted native dispatch retained as1attempt and +1unknown_usage without retry"
+    ],
+    "checks": "PASS: Ruff7files; mypy4files and final2affected; package/tools boundaries and CLI help.33related,52HTTPownership/capacity/queue, final8readout tests passed.",
+    "scope": "Scripted HTTP/native replies with real SQLite, queue/admission and temporary test ledgers. Not native service E0, actual E2 quality or external benchmark results.",
+    "provider_regression_tests": 52,
+    "final_readout_tests": 8
+  },
+  "remaining": [
+    "Register actual E2 source groups and Host request origins after method recipe freeze",
+    "Collect real Host requests and reconcile schema-rejected/no-call/failed attempts with the complete task cohort",
+    "Run actual frozen tool and conditional Host readouts across declared methods",
+    "Source-grounded evidence-delivery and downstream answer scoring, including failed/unexecuted denominators",
+    "Full original T1/T2/seeds/E1confirmation/E3/E4full/E5/additionalHost/nativeE0 requirements"
+  ],
+  "original_ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+  "accounting": "No actual model job or original ledger settlement added. Existing pendingv14 remains195.248007270CPU/8phases. Untimed tests/author commands are not zero.",
+  "no_sha_or_content_fingerprints": true
+}

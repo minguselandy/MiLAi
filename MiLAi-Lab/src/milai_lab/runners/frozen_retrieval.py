@@ -50,7 +50,7 @@ class RetrievalRecorder:
         if phase == "start":
             case = self.directory / str(uuid.uuid4())
             case.mkdir(parents=True, exist_ok=False)
-            row = {"schema": "frozen_retrieval_call_v1", "status": "CAPTURING",
+            row = {"schema": "frozen_retrieval_call_v2", "status": "CAPTURING",
                 **copy.deepcopy(self.context()), **copy.deepcopy(event),
                 "source_root": str(self.root), "source_bank_root": str(self.bank_root),
                 "captured_epoch": time.time(),
