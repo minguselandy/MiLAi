@@ -24,7 +24,7 @@ from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.harness.contextual_artifacts import Trace, http_budget_scope
 from milai_lab.memory.service import MemoryService
 from milai_lab.methods.intent_retrieval import IntentRetrievalMemory
-from milai_lab.methods.memory_control import FixedContextMemoryPolicy
+from milai_lab.methods.memory_control import FixedContextMemoryPolicy, FixedMemoryPolicy
 from milai_lab.providers.chat_bridge import VLLMChatModel
 from milai_lab.providers.contextual_capacity import HostCapacity
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
@@ -58,6 +58,10 @@ def main() -> None:
     parser.add_argument("preparation", type=Path)
     parser.add_argument("output", type=Path)
     parser.add_argument("--source-version", required=True)
+    parser.add_argument("--policy", choices=("fixed_context", "fixed"), default="fixed_context",
+                        help="Existing whole-context or ordinary-pack baseline for this pilot")
+    parser.add_argument("--compute-phase", default="host_intent_view_v4_state_local_travel_pilot_v1",
+                        help="Distinct phase in the original ledger for each declared experiment")
     args = parser.parse_args()
     selection = read_json(args.preparation / "selection.json")
     sys.path.insert(0, selection["source"])
@@ -86,7 +90,8 @@ def main() -> None:
         "automatic_retry": False, "sha_validation_executed": False,
         "environment_file": str(env_path), "source_selection": selection,
         "host_and_simulator": asdict(host_config), "judge": "NOT_RUN",
-        "memory_policy": "fixed_context", "return_envelope": "at most3strings; one full receipt",
+        "memory_policy": args.policy, "return_envelope": "at most3strings; one full receipt",
+        "compute_phase": args.compute_phase,
         "max_return_tokens": settings["ordinary_material_tokens"],
         "monetary_cost": "Not priced; upstream default USD fields are not observed zero cost.",
         "scope": "Functional integration only. Local Qwen Host/simulator, JSON-action transport, "
@@ -115,12 +120,14 @@ def main() -> None:
             run["source_import_receipts"] = seed_sources(service,
                 read_json(args.preparation / "sources.json"), args.output / "source-imports.json",
                 preserve_occurrence=True)
+            policy = {"fixed_context": FixedContextMemoryPolicy, "fixed": FixedMemoryPolicy}[
+                args.policy](reads=4)
             memory = IntentRetrievalMemory(service, capacity.text_tokens,
                 material_limit=settings["ordinary_material_tokens"],
                 read_limit=settings["additional_reads"], source_access="independent_v1",
                 source_tokenization="unicode_v1", evidence_policy="question_pack_v1",
                 source_top_k=settings["source_top_k"], semantic_top_k=settings["semantic_top_k"],
-                control_policy=FixedContextMemoryPolicy(reads=4), control_steps=8,
+                control_policy=policy, control_steps=8,
                 control_delivery_selection=True, control_record=trace)
             hook = StateMemoryHook(memory, session="state-task", now=task.now, domain=domain.name,
                 user_id=task.user_id, config_version=args.source_version, record=trace)
@@ -149,7 +156,7 @@ def main() -> None:
         finally:
             measures = {"wall_seconds": time.perf_counter() - started,
                         "cpu_seconds": time.process_time() - cpu, "runs": 1}
-            budget.record_compute("host_intent_view_v4_state_local_travel_pilot_v1", measures)
+            budget.record_compute(args.compute_phase, measures)
             run.update(budget_before=before, budget_after=copy.deepcopy(budget.state),
                        compute=measures,
                        peak_rss_kib=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss)
