@@ -4,7 +4,7 @@ Supersedes the RUNNING/no-label schedule below. Full v4 goal ACTIVE/incomplete.
 C remaining PID1937382/exec19324 CLOSED exit0:109/109; original2 preserved, total111.
 Additional new A29 state2 READview_source1 PID2096899/exec20819 CLOSED exit0, correct74 quote.
 Additional v1 setup failed beforeoutput/HTTP due recipe rootobject; preserved run-plan-v1.
-Correctlist v2 executed once, not retry of a model branch. No active model job at this boundary.
+Correctlist v2 executed once, not retry of a model branch. Both C processes now closed.
 Core2e510e32/collector8458725a:37states8trainfamilies112branches, alltool/beforepassed.
 Host89COMPLETED/23FAILED;784737known generationtokens,unknown delta0,maxwire1721/2048.
 Review final: view-v4-c-author-review-v1/final-reviews-v1.json,114pairs,author/notblind.
@@ -12,10 +12,17 @@ answer27direction/27tie/60unknown;delivery56direction/36tie/22unknown. All37stat
 Actual compile passed capture/state/fullbinding/continuation/failedreadout masks; nofulloptiongold.
 Feedback data data/view-v4-c-feedback-v1; matched data data/view-v4-feedback-fitting-v1 (artifactbase).
 37new+37sharedoldreplay; continuedCE74old.10updates160draws/arm,860oldoperationdev,seed0.
-Commoninit fitting/t1-native-shared-seed0-v1/checkpoint. NoW5fit yet. Newpreptool3tests/Ruff/mypypassed.
+Commoninit fitting/t1-native-shared-seed0-v1/checkpoint. Newpreptool3tests/Ruff/mypypassed.
+W5fits RUNNING driver2123239/exec93763, child2123267 continuedCE at snapshot 5/10updates.
+Authoritative view-v4-three-fits-v1/driver.json and each fitting/view-v4-{arm}-seed0-v1/run.json.
+Frozen sourceae3950f2 in frozen-feedback-ae3950f2/MiLAi-Lab; queueCE->answer->delivery,stoponfailure.
+Plan view-v4-three-fits-plan-v1.json. No secondmodeljob oroffline settlement whiledriveractive.
 Pendingv26 SETTLED233.078499720CPU once atverifiedidle,16phases; HTTP unchanged,firstC alreadyv25.
-Next actual training needs frozen source, existingCUDAenv,physical2,3; microbatch1/checkpointing and
-MHAfastpathfalse for16k eval,full16updatewindow. Preservefailures, final10notbestdevcheckpoint.
+Currentfits use existingCUDAenv,physical2,3,microbatch1/checkpointing,MHAfastpathfalse,16k/head2048.
+Preservefailures, final10notbestdevcheckpoint. Afterfits, evaluatepersistedfinals thenexecuteD.
+D matched8arm plan view-v4-d-plan-v1.json READY_PREPARATION_ONLY:64positions/arm,512total.
+SameoldHostprompt, owncoldstreams, newcommonwire/sourceae3950f2; notrunning.
+Pendingv27 UNSETTLED containsDprepCPU; queueparentCPU/import/freezearchiveoverhead unknown.
 No subagents/SHA/newservices/newledger/publication. All remaining fullgoal requirements stillapply.
 Manifest data/manifests/host-intent-view-v4-c-feedback-results-v1.json; executiondoc latestsection.
 
