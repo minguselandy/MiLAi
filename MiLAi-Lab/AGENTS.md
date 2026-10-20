@@ -7,13 +7,24 @@ extra ledger, new services or remote publication. Existing HTTP/CUDA envs and mo
 Serialize actual model jobs. Revalidate PID/command/terminal output; never restart on timeout.
 
 CURRENT RUN: B serial five-arm queue frozen d8447495. DriverPID1130008 /exec98733;
-first generative child1130013. Check actual active PID/command, not this historical firstchild.
+generative child1130013 CLOSED exit0; active rules child1202584 at latest check. Revalidate actual PID/command.
 artifacts/host-intent-retrieval-v3/view-v4-b-v1/driver.json authoritative; per-arm driver below it.
 Plan view-v4-b-plan-v1.json.4existingT2groups B06/C26/D11/F08 x2owncoldstreams x4positions=32/arm.
 Order generative,rules,fixed_context,T1mainseed0,T1controlseed0.160positions planned, not completed.
 Native wrapper sets MHAfastpathfalse process-only and inserts frozen tools into sys.path; maxlen16384.
 Same source content/order/roles/clocks checked for all8streams. D11middle=corroborating,notpureirrelevant.
 Actual models serialized; no offline ledger settlement while queue lives.
+
+B generative32/32 CLOSED:13C/6Q/4W/9F,694017tokens113HTTP,20actualtoolcalls,
+1146.369535wall45.739693722CPU. Remaining4arms stillqueued/running, notcomplete.
+D11 normal mixed delivery actually executed observe_only2 +selectedView+2originals,1957wiretokens,
+refs0/1/2; oneassistant andoneuser body. Functional butpartialwitness/Viewtentativevisitdefect.
+Finalarrival8positions=4W/4F:7no newtool, F08content1realcall use_view_only→handoff returnsstale7724,
+missingactual7742correction. Good real staleView decision forfutureC. Initialsummary narrative
+mistakenly saidall8nocall (mechanicalcountalways1); originalsummaryretained andcorrected,gradesunchanged.
+Bgen manifest host-intent-view-v4-b-generative-results-v1.json; actualresults/review/viewinventory
+in view-v4-b-generative-review-v1. View reviewpartial; don'tinferpreferences fromanswergradesalone.
+pending-v22 includes genwholelocalCPU+review, stillUNSETTLED whileBqueue active.
 
 W4 normal A d844 CLOSED exit0:4C/2W/2F,123152tokens29HTTP,5toolcalls,227.939928wall,
 9.662331366CPU. Real knownref1; A29use_view_only→view_source_0→handoff_select_0 returned wrong
@@ -82,6 +93,15 @@ only, not final balanced replay data. No real W5 labels/fits yet.19loss/schedule
 mixture/T2 tests passed; Ruff/mypy3files with optional missing model imports ignored; boundaries6.
 Still need actual branch reviews, matched replay selection/update schedule and native execution.
 Do not equate implementation/testing with trained-policy evidence. Tests/review CPU untimed unknown.
+
+C supplementary source preparation is ready, NOT RUNNING: existingT2 C23/D23,4requests each,
+initial andfinal actualprefix plusquote requests, original sources preserved. After B queue closes,
+launch view-v4-c-supplement-plan-v1.json (same frozen d844 generative settings). Combined A/B/C
+would provide8sourcegroups; not48states/branches yet. Fixtures tracked in54371ea7.
+pending-v22 UNSETTLED contains measured C recipe/stream prep; no settlement while B active.
+Partial B gen answer notes0..26 saved view-v4-b-generative-author-notes-v1.json; not finalgrades,
+packets/KunionD and View review stillneeded. Do not convert partial answer notes into labels.
+W5 implementation source54371ea7; model queue still frozen d8447495.
 
 NEXT: close/review B own trajectories; prepare actual C branches and matched feedback training;
 W5 same-state branch comparisons and matched continued-CE/answer-only/delivery training stillneeded.

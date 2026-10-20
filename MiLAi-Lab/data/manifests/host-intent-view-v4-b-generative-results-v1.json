@@ -1,0 +1,105 @@
+{
+  "status": "CLOSED_TASK_REVIEWED_VIEW_REVIEW_PARTIAL",
+  "source_version": "d8447495",
+  "positions": 32,
+  "source_groups": 4,
+  "streams": 8,
+  "split": "exposed_train",
+  "grades": {
+    "generative-rich": {
+      "Q": 6,
+      "F": 9,
+      "C": 13,
+      "W": 4
+    }
+  },
+  "by_group": {
+    "memops_B06": {
+      "Q": 2,
+      "F": 4,
+      "C": 2
+    },
+    "memops_C26": {
+      "C": 5,
+      "W": 1,
+      "Q": 1,
+      "F": 1
+    },
+    "memops_D11": {
+      "C": 3,
+      "W": 1,
+      "Q": 2,
+      "F": 2
+    },
+    "memops_F08": {
+      "F": 2,
+      "C": 3,
+      "W": 2,
+      "Q": 1
+    }
+  },
+  "generation_tokens": 694017,
+  "generation_requests": 113,
+  "generation": {
+    "charged_tokens": 694017,
+    "known_tokens": 694017,
+    "unknown_usage": 0
+  },
+  "wall_seconds": 1146.3695352897048,
+  "cpu_seconds_nested": 45.739693722,
+  "tool_calls": 20,
+  "final_arrivals": {
+    "positions": 8,
+    "tool_calls": 1,
+    "grades": {
+      "F": 4,
+      "W": 4
+    },
+    "actual_call": "F08 content final: explicit updates/corrections query; use_view_only then handoff, old7724 View. This is a real controller stale-reuse decision, distinct from seven positions without a new call."
+  },
+  "actual_mixed_delivery": [
+    {
+      "history": "memops_D11-view-v4-b-originals",
+      "request": "middle-arrivals",
+      "path": [
+        "use_view_only",
+        "view_source_14_observe",
+        "view_source_4_observe",
+        "handoff_select_-1_0_1"
+      ],
+      "wire_tokens": 1957,
+      "ref_positions": [
+        0,
+        1,
+        2
+      ],
+      "source_roles": [
+        "assistant",
+        "user"
+      ],
+      "result_path": "artifacts/host-intent-retrieval-v3/view-v4-b-v1/generative/generative-rich/banks/5c1bb629-8b64-463d-9b6d-e309f5d4da6c/7faf912c-bdad-45d1-8289-cfe4499c749a-result.json",
+      "semantic_scope": "Functional mixed delivery, not sufficient evidence for all requested quotations."
+    }
+  ],
+  "view_scope": "Full returned inventory saved; B06/D11/F08 defects examined, remaining semantic/provenance review partial.",
+  "known_view_defects": [
+    "B06 rules connect draining party experience to swim-class confidence; not supported causal condition.",
+    "D11 completed first visit labelled tentative; Host carries this into later queries.",
+    "F08 node-label text is a paraphrase; later Host incorrectly quotes it as the original user statement."
+  ],
+  "limitations": [
+    "Single stochastic exposed-train run. Four source groups, not32 independent samples.",
+    "Seven of eight final-arrival positions execute no new tool call. F08 content final does call, then use_view_only/handoff returns the stale7724 View without reading new sources.",
+    "Actual mixed packet includes one assistant and one user source; selection alone is not semantic sufficiency.",
+    "No training preferences produced from answer-only notes; fixed Host K and branch results need separate review."
+  ],
+  "results": "artifacts/host-intent-retrieval-v3/view-v4-b-generative-review-v1/results.json",
+  "review": "artifacts/host-intent-retrieval-v3/view-v4-b-generative-review-v1/author-review.json",
+  "view_inventory": "artifacts/host-intent-retrieval-v3/view-v4-b-generative-review-v1/returned-view-inventory.json",
+  "compute": {
+    "wall_seconds": 4.060472257435322,
+    "cpu_seconds": 4.070078769
+  },
+  "ledger_recorded": false,
+  "review_correction": "Initial narrative incorrectly said all8 positions lacked a tool call; raw count always1. Retained initial summary; actual F08 call inspected and narrative corrected. No model result or grade changed."
+}
