@@ -1,14 +1,18 @@
 """Real Store/packet/reference tests; scripted choices do not measure policy quality."""
 import json
+from dataclasses import asdict
 
 import pytest
 from langgraph.store.sqlite import SqliteStore
 from test_intent_retrieval import context
 
 from milai_lab.memory.functional_state import FunctionalRejection, canonical, namespace
+from milai_lab.memory.literal_projection import expand_observation_state
 from milai_lab.memory.retrieval_request import RetrievalRequest
 from milai_lab.memory.service import MemoryService
 from milai_lab.methods.intent_retrieval import IntentRetrievalMemory
+from milai_lab.methods.laya_memory_policy import operation_payload
+from milai_lab.methods.memory_control import MemoryAction, MemoryControlState
 from milai_lab.methods.memory_control_learning import decision_example
 from milai_lab.methods.retrieval_supervision import original_witness_preferences
 
@@ -271,3 +275,57 @@ def test_normal_json_host_receives_view_without_controller_only_original(tmp_pat
     assert not control_inputs[2]["state"]["visible_evidence"]
     assert "PRIVATE_RAW_DETAIL" in json.dumps(control_inputs[2]["state"]["observed_evidence"])
     assert len(wires) == 7  # Four control, one Writer, two Host requests.
+
+
+@pytest.mark.parametrize("projection", ["full", "shared", "mechanical"])
+def test_bound_options_keep_complete_parameters_outside_capped_native_option_text(projection):
+    state = MemoryControlState(task={"request": "quote the relevant original", "query_time": ""},
+                               observed_materials=[], observed_evidence=[])
+    actions = [MemoryAction("read_bound", "READ", "A long navigation description " * 20, {
+        "observed_source": {"source_ref": "source-original-version-location",
+                            "source_revision": 7, "start": 120, "end": 2048},
+        "observe_only": True}),
+        MemoryAction("handoff_selected", "HANDOFF", "selected acquired material",
+                     {"delivery_indices": [-2, 4, 16]})]
+    payload = operation_payload(state, actions, projection)
+    restored = (expand_observation_state(payload["state"])
+                if projection == "shared" else payload["state"])
+    assert restored["action_bindings"] == [asdict(a) for a in actions]
+    assert payload["questions"]["next"]["criteria"] == {
+        "read_bound": "READ", "handoff_selected": "HANDOFF"}
+    exported = decision_example(
+        {"before": state.project(), "actions": [asdict(a) for a in actions]},
+        {}, projection=projection)
+    assert {key: exported[key] for key in ("state", "questions")} == payload
+
+
+def test_search_references_expand_to_the_actual_request_or_acquired_text(tmp_path):
+    from milai_lab.methods.evidence_control import EvidenceOperations
+    from milai_lab.methods.evidence_reading import open_evidence_packs
+
+    with SqliteStore.from_conn_string(str(tmp_path / "db")) as store:
+        service, _, _, _, _, refs = retrieve_setup(tmp_path, store, [])
+        pool = original_pool(service, refs)
+        known = open_evidence_packs(service, [pool[1]])[0]
+        state = MemoryControlState(task={"request": "exact query 文本",
+            "query_time": "", "read_goal": {"required_points": ["specific condition"]}})
+        queries = []
+
+        def search(query, limit):
+            queries.append((query, limit))
+            return [pool[0]]
+
+        ops = EvidenceOperations(service, state, load_pool=lambda: [],
+            search_pool=search, search_batch_sizes=(8,), max_searches=4,
+            known_materials=[known], refresh_call=lambda *_: {}, fits=lambda _: True,
+            delivery_selection=True)
+        for origin in ("request", "observed_material", "known_material", "required_point"):
+            if origin == "observed_material":
+                ops.execute(next(a for a in ops.actions(state) if a.id == "read_0_observe"), state)
+            action = next(a for a in ops.actions(state)
+                          if a.parameters.get("query_from") == origin)
+            result = ops.execute(action, state)
+            assert result["query"] == queries[-1][0]
+        assert [q for q, _ in queries] == [
+            state.task["request"], ops.observed[0]["index_text"], known["index_text"],
+            state.task["read_goal"]["required_points"][0]]

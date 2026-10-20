@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import json
 from collections.abc import Callable
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass
 from typing import Any
 
 from milai_lab.memory.literal_projection import project_observation_state
@@ -77,6 +77,7 @@ def project_operation_payload(payload: dict[str, Any], projection: str) -> dict[
                 "label", "kind", "revision", "visibility", "source_bindings"))
                 for item in state["observed_evidence"]]}
            if "observed_materials" in state else {}),
+        **({"action_bindings": state["action_bindings"]} if "action_bindings" in state else {}),
     }}
 
 
@@ -85,6 +86,10 @@ def operation_payload(
 ) -> dict[str, Any]:
     instructions = (RETRIEVAL_INSTRUCTIONS
                     if "retrieval_request" in state.task else INSTRUCTIONS)
+    projected_state = state.project()
+    criteria = {action.id: f"{action.kind} {action.target} "
+                + json.dumps(action.parameters, ensure_ascii=False, separators=(",", ":"))
+                for action in actions}
     if state.observed_materials is not None:
         instructions += (
             " observed_materials lists actual acquired items and whether each is selected. "
@@ -94,12 +99,17 @@ def operation_payload(
             "replace_delivery selects only that View. HANDOFF delivery_indices explicitly "
             "chooses an offered acquired packet; plain HANDOFF retains current delivery. "
             "Only selected material goes to the Host; observations and generation still cost work."
+            " action_bindings gives each option's complete target and parameters."
+            " SEARCH query_from refers to the request, a required point, or the actual search "
+            "text of an observed/known material at the supplied index."
         )
-    payload = {"state": state.project(), "questions": {"next": {
+        # Native Laya caps individual option text. Keep complete bound arguments in
+        # the shared state, with the same identifiers in the short decision head.
+        projected_state["action_bindings"] = [asdict(a) for a in actions]
+        criteria = {a.id: a.kind for a in actions}
+    payload = {"state": projected_state, "questions": {"next": {
         "type": "choice", "instructions": instructions,
-        "criteria": {action.id: f"{action.kind} {action.target} "
-                     + json.dumps(action.parameters, ensure_ascii=False, separators=(",", ":"))
-                     for action in actions},
+        "criteria": criteria,
     }}}
     return project_operation_payload(payload, projection)
 

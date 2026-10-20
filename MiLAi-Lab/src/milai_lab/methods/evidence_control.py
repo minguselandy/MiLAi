@@ -390,6 +390,28 @@ class EvidenceOperations:
         query = state.task["request"]
         goal = state.task.get("read_goal")
         points = goal.get("required_points", []) if isinstance(goal, dict) else []
+        if self.delivery_selection:
+            # Refer to actual request/material inputs instead of repeating long
+            # source text for every batch-size option.
+            bound: list[tuple[str, str, dict[str, Any]]] = [
+                (query, "Host query", {"query_from": "request"})]
+            bound.extend((point, "Host required point",
+                          {"query_from": "required_point", "index": i})
+                         for i, point in enumerate(points))
+            bound.extend((item["index_text"], "acquired material",
+                          {"query_from": "observed_material", "index": i})
+                         for i, item in self.observed.items()
+                         if item.get("body_delivered") is not False and item.get("index_text"))
+            bound.extend((item["index_text"], "known material",
+                          {"query_from": "known_material", "index": i})
+                         for i, item in enumerate(self.known_materials)
+                         if item.get("body_delivered") is not False and item.get("index_text"))
+            unique_bound = {text: (origin, parameters) for text, origin, parameters in bound}
+            return [MemoryAction(f"search_{i}_{limit}", "SEARCH", origin,
+                                 {**parameters, "limit": limit})
+                    for i, (text, (origin, parameters)) in enumerate(unique_bound.items())
+                    for limit in self.search_batch_sizes
+                    if (text, limit) not in self.search_attempts]
         queries = [(query, "Host query"), *(
             (point, "Host required point") for point in points)]
         queries.extend((item["index_text"], "opened evidence")
@@ -438,7 +460,19 @@ class EvidenceOperations:
             if self.search_pool is None:
                 self.materials = self.load_pool()
             else:
-                query, limit = action.parameters["query"], action.parameters["limit"]
+                parameters = action.parameters
+                if "query_from" not in parameters:
+                    query = parameters["query"]
+                elif parameters["query_from"] == "request":
+                    query = state.task["request"]
+                elif parameters["query_from"] == "required_point":
+                    query = state.task["read_goal"]["required_points"][parameters["index"]]
+                else:
+                    material = (self.observed[parameters["index"]]
+                                if parameters["query_from"] == "observed_material"
+                                else self.known_materials[parameters["index"]])
+                    query = material["index_text"]
+                limit = parameters["limit"]
                 self.search_attempts.add((query, limit))
                 found = self.search_pool(query, limit)
                 # Preserve the indices of earlier observations as the actual pool grows.
@@ -458,6 +492,7 @@ class EvidenceOperations:
                                         and not item.get("source_observation_read")]
             return {"ok": True, "status": "searched", "candidates": len(self.materials),
                     **action.parameters,
+                    **({"query": query} if self.search_pool is not None else {}),
                     "scope": "captured visible pool, not a sufficiency judgment"}
         if action.kind == "READ":
             if "source_observation_cursor" in action.parameters:
