@@ -34,6 +34,8 @@ def main() -> None:
     parser.add_argument("--capture-retrieval-calls", action="store_true",
                         help="Save each actual pre-call Store/allowance for E2; "
                              "serial tool execution")
+    parser.add_argument("--continue-host-history", action="store_true",
+                        help="Continuous banks retain their own completed Host/tool messages")
     args = parser.parse_args()
     if args.native_probe and args.transport == "json_action":
         parser.error("--native-probe requires native transport")
@@ -71,6 +73,7 @@ def main() -> None:
         "native_probe": args.native_probe, "planned_positions": sum(
             len(h["requests"]) for h in histories) * len(arms), "completed": [],
         "interfaces": interfaces, "split": args.split,
+        "continue_host_history": args.continue_host_history,
         "capture_retrieval_calls": args.capture_retrieval_calls,
         "automatic_retry": False, "source_groups": [h["source_group"] for h in histories],
         "costs": "original continuous ledger; provider and local model traces retained"}
@@ -79,6 +82,7 @@ def main() -> None:
     write_json(args.output / "budget-before.json", read_json(budget_path))
     models: dict[tuple[Any, ...], Any] = {}
     setups: dict[tuple[str, str], dict[str, Any]] = {}
+    previous_messages: dict[tuple[str, str], str] = {}
     started, cpu = time.perf_counter(), time.process_time()
     try:
         for policy, interface, profile in arms:
@@ -120,6 +124,7 @@ def main() -> None:
                         session="host", message_id=request["id"],
                         content=host_task_content(request, setups[profile, bank]),
                         incoming_sources=copy.deepcopy(request.get("incoming_sources", [])),
+                        previous_host_message=previous_messages.get((profile, bank)),
                         **{key: request[key] for key in (
                             "occurred_at", "query_time", "calendar_context") if key in request},
                         control_models=models,
@@ -131,6 +136,8 @@ def main() -> None:
                            "wall_seconds": time.perf_counter() - message_started,
                            "cpu_seconds": time.process_time() - message_cpu}
                     driver["completed"].append(row)
+                    if args.continue_host_history and result["status"] == "COMPLETED":
+                        previous_messages[profile, bank] = request["id"]
                     write_json(args.output / "driver.json", driver)
                     print(json.dumps(row, ensure_ascii=False), flush=True)
                     known_response_failure = (

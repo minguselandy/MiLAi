@@ -1,0 +1,60 @@
+{
+  "schema": "host_intent_view_execution_v1",
+  "status": "FUNCTIONAL_CHECKS_PASSED_REAL_A_NOT_EXECUTED",
+  "plan": "docs/MILAI_HOST_INTENT_VIEW_DEVELOPMENT_EXPERIMENT_PLAN_20261020_v4.md",
+  "base_version": "21756ba1",
+  "scope": "Full v4 goal remains active; this checkpoint implements and checks the first functional slice.",
+  "requirements": {
+    "W1": "Implemented; complete visible View semantics verified in final full/shared controller JSON with a scripted provider. Real model trajectory still required.",
+    "W2": "Implemented; actual ToolMessage ref reopens snapshot and Store original. Old/current View distinction, eviction, duplicate reads and revoked support checked. Real model trajectory still required.",
+    "W3": "Same-arm actual Host-message continuity implemented. Scripted normal JSON Host path passed; 2 train groups / 8 real positions prepared, 0 executed.",
+    "W4": "Not implemented; decide from actual A delivery bottleneck.",
+    "W5": "New legal first-action branches, matched answer/delivery feedback and continued-CE training not executed.",
+    "W6": "Full E5 and external Host execution not executed.",
+    "E1": "New interface T1/full Host comparisons pending; historical outcomes unchanged.",
+    "E2": "Existing capture/readout regression passed; v4 intervention/continuation and real branch review pending.",
+    "E3": "Matched equal-information retraining pending; optional View-structure claim requires separate evidence.",
+    "E4": "Prepared assets retained; actual external results/STATE domain confirmation pending.",
+    "E5": "Own-cache seven-workload comparison, selected budgets and complete flow costs pending.",
+    "native_E0": "No new native service test or service change."
+  },
+  "source_recipe": "data/fixtures/host-intent-view-v4-a-streams.json",
+  "config": "configs/host-intent-view-v4-a-generative.json",
+  "prepared_histories": "artifacts/host-intent-retrieval-v3/data/view-v4-a-streams-v1/histories.json",
+  "source_audit": "artifacts/host-intent-retrieval-v3/data/view-v4-a-streams-v1/preparation-audit.json",
+  "source_groups": ["memops_A29", "memops_B05"],
+  "split": "train",
+  "exposure": "Previously exposed T2 training groups, developer selected for auditable source changes; not independent confirmation.",
+  "original_source_objects": 46,
+  "request_positions": 8,
+  "actual_model_positions": 0,
+  "return_token_budget": 2048,
+  "max_control_steps": 8,
+  "prebuilt_views": 0,
+  "checks": {
+    "affected_tests": 141,
+    "result": "passed",
+    "new_tests": 5,
+    "provider": "Scripted only; no real model quality or cost claim.",
+    "normal_json_host": "Two completed public messages, actual first tool ref in second Host input, direct source read, then revoked-history denial with zero new provider calls.",
+    "static": "Ruff, mypy 5 files, package and tools boundaries passed",
+    "raw_artifacts": "artifacts/host-intent-retrieval-v3/view-v4-regression-v1"
+  },
+  "cost": {
+    "real_model_calls_added": 0,
+    "measured_preparation_and_audit_cpu_seconds": 0.017553445,
+    "pending": "artifacts/host-intent-retrieval-v3/data/pending-offline-review-v15.json",
+    "ledger_recorded": false,
+    "unmeasured": "Interactive development, tests and author source review time are unknown, not zero."
+  },
+  "constraints": {
+    "sha_checks": false,
+    "content_fingerprints": false,
+    "new_services": false,
+    "extra_ledger": false,
+    "subagents": false,
+    "product_changes": false,
+    "historical_result_changes": false,
+    "runtime_rules_based_on_task_ids_or_phrases": false
+  }
+}

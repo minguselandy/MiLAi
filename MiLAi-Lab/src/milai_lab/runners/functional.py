@@ -29,6 +29,7 @@ from langchain_core.messages import (
     RemoveMessage,
     SystemMessage,
     ToolMessage,
+    messages_from_dict,
 )
 from langchain_core.runnables import RunnableConfig
 from langchain_core.tools import BaseTool, InjectedToolCallId
@@ -66,7 +67,7 @@ from milai_lab.memory.functional import (
     StructuredReadGoal,
 )
 from milai_lab.memory.functional_state import FunctionalIntegrityError as FunctionalIntegrityError
-from milai_lab.memory.functional_state import FunctionalRejection, visibility
+from milai_lab.memory.functional_state import FunctionalRejection, note_exposure, visibility
 from milai_lab.memory.functional_state import namespace as functional_namespace
 from milai_lab.memory.functional_state import reference_key as functional_reference_key
 from milai_lab.memory.reader_projection import expand_host_packet
@@ -2545,6 +2546,7 @@ def message(
     retrieval_snapshots: Path | None = None,
     replay_retrieval: dict[str, Any] | None = None,
     control_policy_override: dict[str, Any] | None = None,
+    previous_host_message: str | None = None,
 ) -> dict[str, Any]:
     freeze = frozen(root)
     workflow = {"reservation_v1": "reservation", "document_publication_v1": "document"}.get(
@@ -2561,6 +2563,9 @@ def message(
         raise ValueError("FROZEN_RETRIEVAL_REQUIRES_RETRIEVAL_PROFILE")
     if control_policy_override is not None and replay_retrieval is None:
         raise ValueError("CONTROL_POLICY_OVERRIDE_REQUIRES_FROZEN_CALL")
+    if previous_host_message is not None and (
+            not settings.get("retrieval_tool") or settings["request_mode"] != "disabled"):
+        raise ValueError("HOST_HISTORY_REQUIRES_RETRIEVAL_PROFILE")
     direct_request = (replay_retrieval["request"] if replay_retrieval is not None
                       else given_retrieval_request)
     edit_features = EditFeatures.from_settings(settings.get("edit_features", {}))
@@ -2584,6 +2589,8 @@ def message(
         public["query_calendar_context"] = query_calendar_context
     if incoming_sources is not None:
         public["incoming_sources"] = incoming_sources
+    if previous_host_message is not None:
+        public["previous_host_message"] = previous_host_message
     if recorded_tool_schemas is not None:
         if settings["request_mode"] != "disabled" or not settings.get("retrieval_tool"):
             raise ValueError("ACTION_INTENT_CATALOG_REQUIRES_RETRIEVAL_PROFILE")
@@ -4279,8 +4286,29 @@ def message(
                 else:
                     messages = prior
             else:
+                initial_messages = []
+                if not prior and previous_host_message is not None:
+                    previous_id = _message_reference(bank_root, session, previous_host_message)
+                    previous = read_json(bank_root / (previous_id + "-result.json"))
+                    if previous["status"] != "COMPLETED":
+                        raise ValueError("HOST_HISTORY_REQUIRES_COMPLETED_MESSAGE")
+                    blocked = _visibility_replay(service, {
+                        "status": previous["status"], "messages": previous["messages"]},
+                        session=session, message_id=previous_host_message)
+                    if blocked is not None:
+                        return persist_visibility_stop(blocked)
+                    initial_messages = messages_from_dict([
+                        {"type": row["type"], "data": row} for row in previous["messages"]])
+                    with service._locked():
+                        note_exposure(service, capture["source_ref"], [
+                            service.event_id(session, previous_host_message, "user"),
+                            service.event_id(
+                                session, previous_host_message + ":final", "assistant")])
+                    trace({"event": "functional_host_history", "previous_message": previous_id,
+                           "messages": len(initial_messages), "source": "actual_completed_result"})
                 messages = invoke_execution(
-                    None if prior else {"messages": [HumanMessage(content=content, id=message_id)]}
+                    None if prior else {"messages": [
+                        *initial_messages, HumanMessage(content=content, id=message_id)]}
                 )
 
             if maintenance_recipe and isinstance(memory, FunctionalEditMemory):

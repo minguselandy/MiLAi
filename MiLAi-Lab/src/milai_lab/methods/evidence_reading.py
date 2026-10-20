@@ -650,6 +650,12 @@ def project_packs(items: list[dict[str, Any]], indices: list[int]) -> list[dict[
             originals[ranges] = projected
     for projected in result:
         if projected["kind"] == "query_structure" and "source_bindings" in projected:
+            locations = {alias: binding for alias, binding in projected["source_bindings"].items()
+                         if (binding["source_ref"], binding["source_revision"]) not in sources}
+            if locations:
+                projected.update(source_locations=copy.deepcopy(locations),
+                    source_location_semantics="Navigation only; these original bodies "
+                        "are not delivered. source_bindings identifies originals in this packet.")
             projected["source_bindings"] = {
                 alias: sources.get((binding["source_ref"], binding["source_revision"]),
                                    "support_not_opened")

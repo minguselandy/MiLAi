@@ -86,7 +86,9 @@ class EvidenceOperations:
         arrivals = [e for e in feed["events"] if e["event_id"] not in excluded_source_refs
                     and (e["observed_at"] != since or e["event_id"] not in seen)]
         by_ref = {e["event_id"]: e for e in arrivals}
-        bound_refs = {b["source_ref"] for view in self.views.values()
+        bound_refs = {b["source_ref"] for view in [
+            *self.views.values(), *(item for item in self.known_materials
+                if item["kind"] == "query_structure" and item.get("body_delivered") is not False)]
                       for b in view["source_bindings"].values()}
         for ref in bound_refs - set(by_ref):
             source = service.source(ref)
@@ -132,6 +134,11 @@ class EvidenceOperations:
             "revision": view["revision"], "visibility": opened[slot]["visibility"],
             "pending_events": [e["source_ref"] for e in state.new_events if self.pending(view, e)],
             "source_bindings": view["source_bindings"],
+            **({"interpretation": copy.deepcopy(opened[slot]["structure"]),
+                "interpretation_semantics": opened[slot]["semantics"],
+                "query_time": opened[slot]["query_time"],
+                "delivery": "controller_observation; Host receives only selected evidence"}
+               if opened[slot].get("body_delivered") is not False else {}),
             **({"retrieval_request": view["retrieval_request"]}
                if "retrieval_request" in view else {}),
             "semantics": "binding/inventory status is not semantic correctness or full coverage"}
@@ -152,6 +159,7 @@ class EvidenceOperations:
         self.visibility_epoch = epoch
         self.events = [s for e in self.events
                        if (s := self.service.source(e["event_id"])) is not None]
+        self.source_directory = {s["event_id"]: s for s in self.events}
         visible = {s["event_id"] for s in self.events}
         state.new_events = [e for e in state.new_events if e["source_ref"] in visible]
         if self.source_pages is not None:
@@ -221,6 +229,28 @@ class EvidenceOperations:
                 return True
         return False
 
+    def view_source_reads(self, state: MemoryControlState) -> list[MemoryAction]:
+        """Bound locations allow original reads without claiming prior body delivery."""
+        views = [view for view in state.views if view["visibility"] == "visible"]
+        views.extend(item for item in self.known_materials
+                     if item["kind"] == "query_structure"
+                     and item.get("body_delivered") is not False)
+        bindings = sorted({(binding["source_ref"], binding["source_revision"])
+                           for view in views for binding in view["source_bindings"].values()})
+        actions = []
+        for number, (ref, revision) in enumerate(bindings):
+            source = self.source_directory.get(ref)
+            if source is None or source.get("source_revision", 1) != revision:
+                continue
+            end = len(body_text(source))
+            span = {"source_ref": ref, "source_revision": revision, "start": 0, "end": end}
+            if (ref, 0, end) not in self.observed_source_attempts and self.adds_source_range(
+                    {"kind": "original_source", "source_ranges": [span]}):
+                actions.append(MemoryAction(f"view_source_{number}", "READ",
+                    "View-bound original source; location is not delivered evidence",
+                    {"observed_source": span}))
+        return actions
+
     def actions(self, state: MemoryControlState) -> list[MemoryAction]:
         self.refresh_visibility(state)
         actions = []
@@ -249,6 +279,10 @@ class EvidenceOperations:
                         actions.append(MemoryAction(f"source_{extent}_{number}", "READ",
                             f"observed source {number} {extent} as original Reader evidence",
                             {"observed_source": span}))
+        listed_spans = [action.parameters["observed_source"] for action in actions
+                        if "observed_source" in action.parameters]
+        actions.extend(action for action in self.view_source_reads(state)
+                       if action.parameters["observed_source"] not in listed_spans)
         for i, item in sorted(enumerate(self.materials),
                               key=lambda pair: pair[1].get("control_pool_rank", pair[0])):
             if item.get("source_observation_read"):

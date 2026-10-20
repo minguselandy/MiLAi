@@ -1,9 +1,9 @@
-# Host 意图检索 v3 执行记录
+# Host 意图检索 v3 / View v4 执行记录
 
-目标为完整执行 `MILAI_HOST_INTENT_RETRIEVAL_DEVELOPMENT_EXPERIMENT_PLAN_20261019_v3.md`，
-用户随后明确要求完成T1：seed0两臂及共同dev落盘验证已关闭，剩余种子1/2正在严格串行执行。
-当前以末尾“T1恢复”记录及 `artifacts/host-intent-retrieval-v3/t1-completion-v1/driver.json`
-为准；[2026-10-20 发布摘要](HOST_INTENT_RETRIEVAL_STATUS_20261020.md)保留当时的暂停快照。
+当前目标为用户新激活的 `MILAI_HOST_INTENT_VIEW_DEVELOPMENT_EXPERIMENT_PLAN_20261020_v4.md`，
+接续 v3 全部既有实现与结果。最新执行见末尾 v4 记录；现有 T1 串行队列仍以实际进程及
+`artifacts/host-intent-retrieval-v3/t1-completion-v1/driver.json` 为准。
+[2026-10-20 发布摘要](HOST_INTENT_RETRIEVAL_STATUS_20261020.md)保留历史发布快照。
 未宣称方法有效或目标完成。旧研究头 `1d568169` 为回滚基点。
 本次分支 `feat/host-intent-retrieval-20261019`，独立工作树
 `/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019`。
@@ -1443,3 +1443,63 @@ Ruff、mypy及包/tools边界通过。没有实际调用新增模型或修改原
 multilingual基础权重及原数据/配方，随后运行完整1209条共同dev和落盘/成本核对。
 首次失败即停止后续阶段，不自动重试或替换结果；不会按中点挑选权重。
 初始driver PID3509227、exec93571，main seed1子进程3509243。完整T1仍须等待所有阶段关闭。
+# 2026-10-20 v4：W1/W2 与正常 Host 历史接线，真实短流待运行
+
+本条执行用户新激活的
+`MILAI_HOST_INTENT_VIEW_DEVELOPMENT_EXPERIMENT_PLAN_20261020_v4.md`。
+原文件位于较早的 `jev-read-decisions-20261016` 工作树；本研究工作树保存了逐字相同副本，
+继续使用 `feat/host-intent-retrieval-20261019`。没有改写旧结果或运行中的冻结源码。
+
+本批功能改动：
+
+- `EvidenceOperations.view_observation()` 传递当前可见 View 的完整
+  nodes/rules/unresolved、构建时点与派生解释标识。沿现有 full/shared 在线和训练投影，
+  不增加摘要模型。不可见 View 不传正文。
+- `project_packs()` 在支持原文未同包交付时保留 `source_locations`；原有
+  `support_not_opened` 继续说明该原文未交付。同包已有原文仍使用共享短标签。
+  当前可见 View 和已交付快照的绑定提供有限 `observed_source` READ，复用原 Store
+  读取、去重、权限和完整 wire 包预算。新定位本身不算原文证据。
+- 完整 Host 检查发现，连续 bank 原本只延续 Store，下一请求的独立 checkpoint 没有
+  上轮工具回执。`functional.message(previous_host_message=...)` 现在可从同 bank、
+  同 session 的已完成实际结果取得消息，复用原可见性检查并记录来源暴露关系。
+  每条请求仍使用独立执行身份。现有 runner 的 `--continue-host-history` 显式启用，
+  每臂只沿自身已完成消息延续；原默认与冻结历史运行保持原状。
+
+验证：修正测试自身最初的非法 rule 名称后，旧实现明确失败于缺少 interpretation 与
+缺少来源 READ。首次完整 Host 检查又暴露了上轮回执缺失；这些失败未算模型结果。
+最终 **141 项相关回归通过**，包括 View 内容进入最终生成式控制器 JSON、真实返回 ref
+跨工具调用补读、旧快照 revision 1 与缓存 revision 2 区分、缓存淘汰、去重、撤销，
+以及真实 SQLite/消息/费用路径上的脚本化两轮 JSON Host。该 Host 检查使用 4 次 Host、
+4 次控制器、1 次 View 的模拟响应；第三轮撤销后 0 新请求。相关 E2 捕获/readout 回归通过。
+Ruff、5 文件 mypy、package/tools 边界通过。仅模拟响应，不能称为语义效果、真实费用或 native E0。
+原始功能检查保存在 ignored `view-v4-functional-check-v1/v2` 与
+`view-v4-regression-v1`，均位于 `artifacts/host-intent-retrieval-v3/`。
+
+A 批准备完成：既定 T2 train 组 `memops_A29`、`memops_B05`，每组 4 个位置。
+选组依据为可核查的独立后续来源与原话需求，不依据新策略得分。两组均为已暴露训练来源，
+不是确认集。每组 23 条原始 source 对象（正文、role、session、未知时钟及顺序）直接相等，
+仅移动请求位置，保留所有 46 条来源。到达分段为 4/0/6/13 与 4/0/2/17；
+新增正文不会提前进入早期请求。请求分别覆盖首次用途、原话要求、无关到达、相关到达。
+预制 View、prefetch、模型强制动作均为 0。配置沿现有 Qwen 服务、2048 返回 tokens、
+8 次内部决策和同一账本。来源准备与核对 CPU 共 0.017553445 秒登记 pending-v15；
+活动训练期间未结算。作者审阅和交互式开发/测试时间未测量，不补零。
+
+待运行入口（先将测试通过的源码保存为一个普通版本并冻结；不做 SHA 校验）：
+
+```bash
+PYTHONPATH=<frozen-lab>/src <existing-http-env>/bin/python \
+  <frozen-lab>/tools/run_host_intent_retrieval.py \
+  <frozen-lab>/configs/host-intent-view-v4-a-generative.json \
+  artifacts/host-intent-retrieval-v3/data/view-v4-a-streams-v1/histories.json \
+  artifacts/host-intent-retrieval-v3/view-v4-a-generative-v1 \
+  --source-version <frozen-version> --policies generative --interfaces rich \
+  --transport json_action --split train --capture-retrieval-calls --continue-host-history
+```
+
+截至本批，A 批真实模型 **0/8**，未启动第二模型作业。T1 coordinator3509227 与
+controlseed1 child4032674 在 19:46 上海时实核为活动，child143/524。
+先保持串行队列，再运行 A 并逐项审阅实际材料、Host 答案、操作、View 与整流成本。
+根据真实瓶颈决定 W4 或小批分支；本批没有证明 View 语义合格、成本节省或学习有效性。
+W1/W2 的真实模型可用证据、W3、条件 W4、W5、W6、训练对照、E1–E5 与外部确认仍待完成。
+Product Schema/API/权限/Canonical 未改；新增字段和参数仅在 Lab 研究执行链。
+本批基线版本 `21756ba1`，尚未发布远端。

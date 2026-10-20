@@ -1,4 +1,30 @@
-# CURRENT: user explicitly requests completing T1; T1 work resumed
+# CURRENT: v4 View/Host plan activated — 2026-10-20
+
+User now explicitly requests full execution of
+docs/MILAI_HOST_INTENT_VIEW_DEVELOPMENT_EXPERIMENT_PLAN_20261020_v4.md.
+This supersedes the earlier T1-only/paused scope below. Goal ACTIVE; no completion claim.
+Continue in this actual research worktree, not the older jev-read-decisions plan directory.
+No subagents, SHA/checksum/content fingerprints, extra ledger or new model services.
+Preserve ongoing T1 driver PID3509227 and frozenba2bf8d8; revalidate its actual child.
+At 19:46 Shanghai controlseed1 PID4032674 was live143/524; no second model job or settlement.
+
+W1/W2 implemented: visible View interpretation reaches full/shared controller inputs;
+undelivered support locations survive projection; finite READ uses real Store bindings,
+including known delivered snapshots after cache replacement/eviction. Existing visibility applies.
+Normal JSON Host check found cross-request checkpoints omitted earlier tool receipts.
+New optional previous_host_message imports actual same-bank/session completed messages into
+the new request checkpoint, with existing visibility/exposure handling. Runner opt-in
+--continue-host-history preserves each arm's own history; old default unchanged.
+141 affected tests PASS (including 5 new, normal two-message Host and revoked-history denial);
+Ruff/mypy5files PASS. No new real model outcome; scripted providers are functional checks only.
+Source recipe/config for A:2 original T2 train groups,8positions,46exact ordered sources audited.
+See data/manifests/host-intent-view-v4-a-functional-preparation-v1.json and latest execution entry.
+Preparation/audit0.01755344499999999CPU is pending-v15; untimed author/test work unknown, notzero.
+Next: freeze tested source and run A via existing JSON runner after actual T1 serial queue closes,
+then review actual packets/Host answers/cost and decide W4 vs small real branches. W3 real-run,
+W4–W6/feedback comparisons/E1–E5/external confirmation remain uncompleted. No remote publish.
+
+# Previous: user explicitly requests completing T1; T1 work resumed
 
 Latestuser "完成t1" authorizesT1completion despiteearlierpausedsnapshot. Complete main/control
 seeds0/1/2 andpersistedcommondev evaluation; do NOTstart T2/E1-E5 ornewservices inthisT1request.
