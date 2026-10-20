@@ -29,7 +29,11 @@ from milai_lab.providers.chat_bridge import VLLMChatModel
 from milai_lab.providers.contextual_capacity import HostCapacity
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
 from milai_lab.runners.functional import seed_sources
-from milai_lab.runners.state_bench_adapter import StateMemoryHook, make_state_agent
+from milai_lab.runners.state_bench_adapter import (
+    StateMemoryHook,
+    make_state_agent,
+    run_with_domain_snapshots,
+)
 
 
 class LocalSimulator:
@@ -124,9 +128,13 @@ def main() -> None:
             runtime = AgentRuntimeContext(task_id="state-task", user_id=task.user_id,
                                           domain=domain.name, now=task.now)
             agent = make_state_agent(host, hook, runtime)
-            trajectory = run_task(task=task, env_data=env_data, user_id=task.user_id,
+            environment = domain.environment_class(env_data.deep_copy(), now=task.now)
+            run["state_snapshot_files"] = [
+                "state-before.json", "state-after.json", "state-diff.json"]
+            trajectory = run_with_domain_snapshots(environment, args.output, lambda: run_task(
+                task=task, env_data=env_data, user_id=task.user_id, env=environment,
                 client=None, simulator_client=simulator, domain=domain, agent=agent,
-                trajectory_metadata={"research_variant": True, "official_protocol": False})
+                trajectory_metadata={"research_variant": True, "official_protocol": False}))
             write_json(args.output / "trajectory.json", trajectory.to_dict())
             state_score = evaluate_state_requirements(task, trajectory.state_diff)
             write_json(args.output / "deterministic-state-score.json",

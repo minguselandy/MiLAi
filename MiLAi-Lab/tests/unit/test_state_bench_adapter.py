@@ -17,6 +17,7 @@ from milai_lab.runners.state_bench_adapter import (
     conversation_messages,
     learning_envelope,
     make_state_agent,
+    run_with_domain_snapshots,
 )
 
 
@@ -150,3 +151,27 @@ def test_public_sdk_executes_real_sandbox_write_without_hidden_context(tmp_path)
         assert agent.token_usage.total_tokens == 45  # Scripted transport telemetry only.
         assert hidden not in canonical(records)
         client.close()
+
+
+def test_actual_sandbox_write_survives_later_readout_failure(tmp_path):
+    pytest.importorskip("state_bench.schemas")
+    from state_bench.domain import get_domain_config
+    from state_bench.domains.travel.schemas import EnvironmentData, HotelInventoryItem, User
+
+    data = EnvironmentData(flights=[], bookings=[], users=[User("u1", "Alice", "a@example.test")],
+        hotel_inventory=[HotelInventoryItem("H1", "Example Hotel", "DEN", "2026-07-01",
+                                           "2026-07-02", "standard", 100, 100)])
+    env = get_domain_config("travel").environment_class(data, "2026-06-15T10:00:00")
+
+    def execute_then_fail():
+        env.tool_handlers["book_hotel"]({"user_id": "u1", "hotel_id": "H1"})
+        raise RuntimeError("Later readout failed")
+
+    with pytest.raises(RuntimeError, match="Later readout failed"):
+        run_with_domain_snapshots(env, tmp_path, execute_then_fail)
+    before = json.loads((tmp_path / "state-before.json").read_text())
+    after = json.loads((tmp_path / "state-after.json").read_text())
+    assert before["hotels"] == {}
+    assert next(iter(after["hotels"].values()))["hotel_id"] == "H1"
+    diff = json.loads((tmp_path / "state-diff.json").read_text())
+    assert diff["created"]["hotels"] == after["hotels"]

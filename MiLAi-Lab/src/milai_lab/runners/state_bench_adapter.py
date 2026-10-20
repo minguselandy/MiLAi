@@ -7,11 +7,13 @@ from __future__ import annotations
 
 import json
 from collections.abc import Callable
+from pathlib import Path
 from typing import Any, cast
 
 from langchain_core.messages import AIMessage, BaseMessage, HumanMessage, SystemMessage, ToolMessage
 from langchain_core.runnables import RunnableConfig
 
+from milai_lab.harness.artifact_io import write_json
 from milai_lab.memory.functional_state import canonical
 from milai_lab.methods.intent_retrieval import IntentRetrievalMemory
 
@@ -39,6 +41,21 @@ RETRIEVAL_INSTRUCTION = (
     "with current domain tools, results and policies. Keep other users and past transactions "
     "distinct from the current user and task."
 )
+
+
+def run_with_domain_snapshots(environment: Any, output: Path,
+                              operation: Callable[[], Any]) -> Any:
+    """Preserve sandbox effects even if a later Host/simulator call fails."""
+    from state_bench.schemas import StateDiff
+
+    before = environment.get_full_snapshot()
+    write_json(output / "state-before.json", before)
+    try:
+        return operation()
+    finally:
+        after = environment.get_full_snapshot()
+        write_json(output / "state-after.json", after)
+        write_json(output / "state-diff.json", StateDiff.compute(before, after).to_dict())
 
 
 def conversation_messages(conversation: list[dict[str, Any]]) -> list[BaseMessage]:
