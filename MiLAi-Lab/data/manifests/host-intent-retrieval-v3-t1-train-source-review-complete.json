@@ -1,0 +1,63 @@
+{
+  "status": "NEW_TRAIN_SOURCE_REVIEW_COMPLETE_ACTUAL_COLLECTION_RUNNING",
+  "source_version": "c6b1f3bd",
+  "pid": 1429403,
+  "exec_session": 94846,
+  "run": "artifacts/host-intent-retrieval-v3/runs/t1-new-train-fixed-context-v1",
+  "observed_closed_positions": 49,
+  "planned_positions": 228,
+  "program_statuses": {
+    "COMPLETED": 40,
+    "FAILED": 9
+  },
+  "source_review": {
+    "notes": "artifacts/host-intent-retrieval-v3/data/t1-source-review-notes-v1.json",
+    "new_train_pools": 114,
+    "new_train_families": 64,
+    "source_document_occurrences": 2210,
+    "all_fixture_keys_and_indices_match": true,
+    "next_source_history_index": 64,
+    "dev_pools_reviewed": 0,
+    "rule": "Source notes are authorreview, notoperationgold. Unanchoreddownstreamfragments are conditional onactualrequest; nativesupport/answer neverautomaticlabel.",
+    "corrections": [
+      {
+        "family": "musique-family-000125",
+        "request_id": "corpus-8341",
+        "change": "Moved13/12 toconditional sources because missingbook-author link leaves downstream fragments unanchored.",
+        "operation_gold_affected": false,
+        "reason": "Actual request supervision so far covers only first4families, not this family."
+      }
+    ]
+  },
+  "actual_request_reviews": "artifacts/host-intent-retrieval-v3/data/t1-new-train-closed-prefix-v4/request-witness-reviews-v1.json",
+  "labels": {
+    "states": 327,
+    "reviewed_requests": 61,
+    "reviewed_states": 327,
+    "labelled": 201,
+    "reasons": {
+      "reviewed_missing_original_progress": 172,
+      "no_reviewed_source_proof_masked": 83,
+      "reviewed_originals_sufficient": 29,
+      "reviewed_partial_evidence_only_masked": 42,
+      "no_reviewed_progress_masked": 1
+    },
+    "families_labelled": 11,
+    "model_calls": 0,
+    "inputs_changed": false,
+    "states_source": "artifacts/host-intent-retrieval-v3/data/t1-new-train-closed-prefix-v4/train.jsonl",
+    "reviews_source": "artifacts/host-intent-retrieval-v3/data/t1-new-train-closed-prefix-v4/request-witness-reviews-v1.json"
+  },
+  "public_inputs_unchanged": 327,
+  "task_reviews": "artifacts/host-intent-retrieval-v3/data/t1-new-train-task-reviews-prefix-v3.json",
+  "task_review_counts": {
+    "QUALIFIED": 11,
+    "FAILED": 9,
+    "CORRECT": 13,
+    "WRONG": 8
+  },
+  "pending_offline_measurements": "artifacts/host-intent-retrieval-v3/data/pending-offline-review-v10.json",
+  "pending_offline_cpu_seconds": 23.572220548,
+  "constraints": "Onlyone actualmodeljob; nooffline settlementwhilelive; preserveoldfailures, originalledger. NoSHA/newservice/subagents/remote. NativeE0authorizationpending.",
+  "next": "Continueactualtrain228collection andreviewrequestsafterfirst41positions. Expandeddev52notstarted. Newdevsourcepools index64+needreview. FinalT1mixture,budgetandfitnotready; fullobjectiveactive."
+}
