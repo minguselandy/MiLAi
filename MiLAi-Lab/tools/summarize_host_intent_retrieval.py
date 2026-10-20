@@ -67,7 +67,10 @@ def summarize(roots: list[Path], reviews: list[dict[str, Any]]) -> dict[str, Any
             trace = next(path.parent.glob(path.name.replace("-result.json", "-trace-*.jsonl")))
             events = [json.loads(line) for line in trace.read_text().splitlines()]
             deliveries = [e for e in events if e.get("event") == "milai_retrieve_result"]
-            tools = [m for m in result.get("messages", [])
+            messages = result.get("messages", [])
+            current = max((i for i, message in enumerate(messages)
+                           if message.get("type") == "human"), default=-1)
+            tools = [m for m in messages[current + 1:]
                      if m.get("type") == "tool" and m.get("name") == "milai_retrieve"]
             row_stages: dict[str, Counter[str]] = defaultdict(Counter)
             for event in events:

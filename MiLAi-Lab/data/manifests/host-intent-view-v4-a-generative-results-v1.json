@@ -1,0 +1,72 @@
+{
+  "status": "A_GENERATIVE_CLOSED_AUTHOR_REVIEWED",
+  "source_version": "f31025b0",
+  "source_groups": 2,
+  "split": "train",
+  "positions": 8,
+  "grades": {
+    "generative-rich": {
+      "F": 1,
+      "U": 3,
+      "C": 2,
+      "W": 2
+    }
+  },
+  "grade_scope": "Exposed training groups, author source review, not independent confirmation or comparative efficacy.",
+  "tool_calls": 6,
+  "views_constructed_and_delivered": 1,
+  "view_nodes": 8,
+  "view_rules": 0,
+  "view_semantically_fully_valid": false,
+  "W1_real_final_inputs_with_view": 2,
+  "view_bound_READs": 1,
+  "cross_call_known_ref_reads": 0,
+  "related_update_positions": 2,
+  "related_update_new_calls": 0,
+  "known_generation_tokens": 99166,
+  "generation_requests": 27,
+  "unknown_usage_delta": 0,
+  "stage_costs": {
+    "host_request": {
+      "requests": 6,
+      "tokens": 20728,
+      "http_wall_seconds": 80.34257089346647
+    },
+    "control_generation": {
+      "requests": 12,
+      "tokens": 46061,
+      "http_wall_seconds": 7.104081409052014
+    },
+    "unparsed_host_response": {
+      "requests": 1,
+      "tokens": 1946,
+      "http_wall_seconds": 2.2457600627094507
+    },
+    "host_completion": {
+      "requests": 7,
+      "tokens": 26993,
+      "http_wall_seconds": 57.821504266001284
+    },
+    "view_generation": {
+      "requests": 1,
+      "tokens": 3438,
+      "http_wall_seconds": 4.448632118292153
+    }
+  },
+  "stream_wall_seconds": 169.9086610917002,
+  "stream_cpu_seconds_nested": 10.077288774,
+  "results": "artifacts/host-intent-retrieval-v3/view-v4-a-generative-review-v1/results.json",
+  "review": "artifacts/host-intent-retrieval-v3/view-v4-a-generative-review-v1/author-review.json",
+  "view_review": "artifacts/host-intent-retrieval-v3/view-v4-a-generative-review-v1/view-review.json",
+  "runtime": "artifacts/host-intent-retrieval-v3/view-v4-a-generative-v1",
+  "next": "Review the now-closed rules arm and Host source-arrival visibility; retain original outcomes. No blanket claim that all v4 functions or feedback comparisons are complete.",
+  "compute": {
+    "wall_seconds": 0.21165710221976042,
+    "cpu_seconds": 0.211638007
+  },
+  "ledger_recorded": true,
+  "cost_note": "HTTP stage wall, setup, snapshot and local CPU are nested in stream costs. No efficiency or amortization claim. Earlier failed audit cost and interactive review/test time are unmeasured, not zero.",
+  "local_runtime_cpu_recorded": 10.077288774,
+  "settlement": "artifacts/host-intent-retrieval-v3/data/pending-offline-review-v16.json",
+  "workload_qualification": "B05 middle arrival leaves the core first-name choice unchanged but adds user preferences and other-person names within the broader request. It is not a pure irrelevant-update example for every requested facet; do not label its refresh as no-benefit solely from the position name."
+}

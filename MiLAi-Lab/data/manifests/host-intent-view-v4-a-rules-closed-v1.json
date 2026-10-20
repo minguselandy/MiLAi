@@ -1,0 +1,23 @@
+{
+  "status": "CLOSED_AWAITING_FULL_SEMANTIC_REVIEW",
+  "source_version": "f31025b0",
+  "root": "artifacts/host-intent-retrieval-v3/view-v4-a-rules-v1",
+  "positions": 8,
+  "task_success": null,
+  "views_constructed_and_delivered": 2,
+  "constructed_node_counts": [
+    5,
+    6
+  ],
+  "rules_in_views": 0,
+  "tool_calls": 2,
+  "later_positions_with_no_new_tool_call": 6,
+  "known_generation_tokens": 49252,
+  "generation_requests": 12,
+  "unknown_usage_delta": 0,
+  "wall_seconds": 152.61387202888727,
+  "cpu_seconds_nested": 9.433878961999998,
+  "scope": "Two exposed training groups and the same frozen source/fixture/budget as the generative A arm. Runtime completion is not semantic success.",
+  "cost_status": "Remote generation already charged; measured local runner CPU pending-v17.",
+  "next": "Review all task answers and the two actual Views, then compare delivery and cost. Both arms require analysis of Host awareness of newly ingested sources."
+}

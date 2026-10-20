@@ -1,6 +1,27 @@
 # CURRENT: v4 View/Host plan activated — 2026-10-20
 
-LATEST20:08Shanghai: A REAL RUN LIVE PID76091/exec91120, source f31025b0,
+LATEST: Generative A PID76091/exec91120 CLOSEDexit0,8/8 retained, COMPLETED_WITH_FAILURES.
+Author review2C/3U/2W/1F;99166tokens/27requests,newunknown0;169.908661s wall.
+One B05 View8nodes/0rules/2unresolved; core supports task atconstruction but source/time
+overstatements remain. Two real shared controller payloads contain exact View, then actual
+view_source_0 READ. Cross-call known refs0. Both related-update tasks made0toolcalls and answeredold.
+Read host-intent-view-v4-a-generative-results-v1 and raw view-review. Earlier no-View
+annotation corrected with original review/results retained; model outcomes never repaired.
+Offline summary now counts only current-message tool receipts:6actual, not13cumulative.
+3tests/Ruff/mypy pass. A measured localCPU10.077288774 + summaryCPU settled once atidle;
+pending-v16 SETTLED. Initial failed summary-audit CPU/human review remain unknown, notzero.
+RULES A CLOSEDexit0 PID127539absent/exec5966,8/8COMPLETED,49252tokens/12requests/newunknown0,
+152.613872s wall,9.433878962CPU pending-v17. Two initial calls build/deliver5+6nodeViews;
+all6laterpositions make0toolcalls. Semanticreview NOTcomplete; do not assign tasksuccess fromstatus.
+Owncoldbank/samef31025b0/8requests/2048budget. No model job currently lives; revalidate beforelaunch.
+Read host-intent-view-v4-a-rules-closed-v1. Next reviewclosedrules,compare actualmaterials/cost.
+Check Host arrival awareness (incoming
+sources stored before request, no explicit Host notification), not just controller errors.
+B05middle arrival is unchanged corefirstchoice but adds requested preference/other-name facts;
+not pure irrelevant-update acrossallfacets. Preserve this limitation insteadofcallingrefreshwaste.
+W2realcross-call, W4ifdeliverybottleneck, realE2/W5training/W6 confirmation remain pending.
+
+Historical20:08Shanghai: A REAL RUN launched PID76091/exec91120, source f31025b0,
 artifacts/host-intent-retrieval-v3/view-v4-a-generative-v1/driver.json; initially0/8.
 Revalidate PID and poll the same handle; never restart on observation timeout.
 Original T1driver3509227/child4032674 disappeared by20:05, exec93571unknown.
