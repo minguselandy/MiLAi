@@ -10,7 +10,7 @@ Controlpersistedvalidation PID3451293/exec63372 CLOSEDexit0/absent:full1209commo
 312.735795wall/493.270286CPU,1209forwards3932447tokens, exactledger.860sharedopchoices
 unchanged/metricsidentical; additional349FollowIR200correct macro.557053942, main316/.902489627.
 Bothseed0fits/exports audited; completion-audit.json ineachfit/export directory. FP16save/F32load
-differences recordedwithoutrepair. Seed0main/control completed; seeds1/2 NOTstarted yet.
+differences recordedwithoutrepair. Seed0main/control completed; mainseed1 RUNNING, remainingjobs queued.
 v14offline197.879748359CPU SETTLED atverifiedidle aftercontrolfitexit, modelcountersunchanged.
 Newseed0finalpairaudit separatelymeasuredandsettled atidle; see t1-seed0-final-pair-v1 manifest.
 Remaining8modelstages RUNNING via driverPID3509227/exec93571; firstchild3509243 mainseed1.
@@ -23,6 +23,10 @@ Runner tools/run_host_intent_t1_completion.py usesfrozenba2bf8d8 modelentrypoint
 serialfit->export->audit, stoponfirstfailure/noautomaticretry. Modelsource/data/hyperparameters
 unchanged. Finalfullcommon1209dev usedforeacharm; controltrainingdiagnostics remainoriginal860.
 Neverrestart onobservationtimeout. Revalidate driver/child PID before anyadditionalmodeljob.
+
+GitHubpublication snapshot 2026-10-20T09:17:51.717042+00:00: mainseed1 100/524; driver/child alive.
+Read docs/HOST_INTENT_RETRIEVAL_STATUS_20261020.md latestupdate and
+data/manifests/host-intent-retrieval-v3-t1-publication-snapshot-20261020.json.
 
 # Previous published pause snapshot (superseded by latest T1 instruction above)
 
