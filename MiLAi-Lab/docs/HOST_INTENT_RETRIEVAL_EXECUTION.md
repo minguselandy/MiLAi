@@ -1,9 +1,9 @@
 # Host 意图检索 v3 执行记录
 
 目标为完整执行 `MILAI_HOST_INTENT_RETRIEVAL_DEVELOPMENT_EXPERIMENT_PLAN_20261019_v3.md`，
-用户现已暂停研究目标并要求发布当前开发训练快照；最新状态见
-[2026-10-20 状态摘要](HOST_INTENT_RETRIEVAL_STATUS_20261020.md)。
-T1 主配方 seed0 已完成，既有匹配对照进程仍运行；暂停期间不启动后续实验。
+用户随后明确要求完成T1：seed0两臂及共同dev落盘验证已关闭，剩余种子1/2正在严格串行执行。
+当前以末尾“T1恢复”记录及 `artifacts/host-intent-retrieval-v3/t1-completion-v1/driver.json`
+为准；[2026-10-20 发布摘要](HOST_INTENT_RETRIEVAL_STATUS_20261020.md)保留当时的暂停快照。
 未宣称方法有效或目标完成。旧研究头 `1d568169` 为回滚基点。
 本次分支 `feat/host-intent-retrieval-20261019`，独立工作树
 `/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019`。
@@ -1421,3 +1421,25 @@ Host容量拒绝现在保留实际请求供审阅，仍不发送HTTP，既有忘
 
 最终8项读出检查通过，包括中断时保留1次dispatch和新增1条unknown_usage、不重试；
 Ruff、mypy及包/tools边界通过。没有实际调用新增模型或修改原账本，pending-v14不变。
+
+## 用户恢复 T1：seed0 配对关闭，剩余种子串行执行
+
+用户随后明确要求“完成t1”。本次只推进T1，不自动启动T2或后续因素/外部矩阵。
+操作数据对照seed0已正常退出：524更新、8384抽样行、41,804,889训练tokens，
+8908.409秒墙钟/15305.425秒CPU与原账本一致；encoder与head均有变化。
+最终操作dev472/616、组宏平均0.787688；最终train2676/2762。
+
+对照最终权重重载后，原860个操作状态的选择及指标全部不变。共同的1209条dev还包括
+另外349条FollowIR，对照正确200、宏平均0.557054；主T1为316、0.902490。
+主T1操作dev仍为446/616、0.753869。这是完整配方的任务间权衡，不是统一“记忆分数”：
+更新/总抽样行数匹配，组件暴露、训练tokens和计算仍不同，不能据此宣称Host端到端收益。
+
+原控制器拟合和本次重载验证均关闭后，pending-v14的197.879748359秒CPU已结算一次，
+模型计数未改变。seed0两臂最终核对另行计量。所有原始输出和F16保存/F32加载差异保留。
+
+剩余main/control种子1、2共8个模型阶段已登记并启动严格串行驱动：
+`artifacts/host-intent-retrieval-v3/t1-completion-v1/driver.json`。
+驱动冻结于def79755，实际训练与评价工具仍冻结于ba2bf8d8；每次拟合保持524更新、同一
+multilingual基础权重及原数据/配方，随后运行完整1209条共同dev和落盘/成本核对。
+首次失败即停止后续阶段，不自动重试或替换结果；不会按中点挑选权重。
+初始driver PID3509227、exec93571，main seed1子进程3509243。完整T1仍须等待所有阶段关闭。

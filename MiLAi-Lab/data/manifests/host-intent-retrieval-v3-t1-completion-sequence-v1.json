@@ -1,0 +1,69 @@
+{
+  "status": "RUNNING",
+  "source_version": "def79755",
+  "model_source_version": "ba2bf8d8",
+  "plan": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/t1-completion-plan-v1.json",
+  "output": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/t1-completion-v1",
+  "ordered_jobs": [
+    {
+      "name": "t1-native-shared-seed1-v1",
+      "kind": "fit",
+      "seed": 1,
+      "arm": "main"
+    },
+    {
+      "name": "t1-seed1-export-validation-v1",
+      "kind": "export",
+      "seed": 1,
+      "arm": "main"
+    },
+    {
+      "name": "t1-matched-operation-control-seed1-v1",
+      "kind": "fit",
+      "seed": 1,
+      "arm": "operation_control"
+    },
+    {
+      "name": "t1-control-seed1-export-validation-v1",
+      "kind": "export",
+      "seed": 1,
+      "arm": "operation_control"
+    },
+    {
+      "name": "t1-native-shared-seed2-v1",
+      "kind": "fit",
+      "seed": 2,
+      "arm": "main"
+    },
+    {
+      "name": "t1-seed2-export-validation-v1",
+      "kind": "export",
+      "seed": 2,
+      "arm": "main"
+    },
+    {
+      "name": "t1-matched-operation-control-seed2-v1",
+      "kind": "fit",
+      "seed": 2,
+      "arm": "operation_control"
+    },
+    {
+      "name": "t1-control-seed2-export-validation-v1",
+      "kind": "export",
+      "seed": 2,
+      "arm": "operation_control"
+    }
+  ],
+  "scope": "Complete remaining T1 main and operation controls for seeds1/2, each final524 and full1209commondev persisted-checkpoint evaluation. Seed0fits/exports already closed and audited. No T2/E1/E2/E3/E4 or new services.",
+  "estimate_hours_from_seed0_measured_cost": 9.731304674684898,
+  "seeds0": "Both fits and full1209commondev persisted exports closed/audited.",
+  "validation_scope": "Every final checkpoint evaluated on common1209. Controls retain their original860training-dev diagnostics;349FollowIR rows are additional commonfinal evaluation. No midpoint selection.",
+  "failure": "No retry or failed output replacement; sequence stops on nonzero exit or failed audit.",
+  "precision": "Known FP16save/F32load effects recorded; all changed choices retained; persisted scores are the deployment diagnostics.",
+  "original_ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+  "no_checksums": true,
+  "driver_pid": 3509227,
+  "exec_session": 93571,
+  "active_child_pid": 3509243,
+  "active_job": "t1-native-shared-seed1-v1"
+}

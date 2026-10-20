@@ -318,6 +318,6 @@
     },
     "scope": "Task-specific native diagnostics; no combined memory score or Host success"
   },
-  "export_validation": "NOT_STARTED",
+  "export_validation": "COMPLETED: full1209commondev;860in-process operation choices/metrics unchanged,349additionalFollowIR200correct. See t1-seed0-final-pair-v1.",
   "scope": "Predetermined final524; native/static diagnostics only. Common final1209dev export probe will compare860in-process operation rows and add349common FollowIR rows, not change training or select a checkpoint."
 }

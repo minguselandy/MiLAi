@@ -13,7 +13,12 @@ Bothseed0fits/exports audited; completion-audit.json ineachfit/export directory.
 differences recordedwithoutrepair. Seed0main/control completed; seeds1/2 NOTstarted yet.
 v14offline197.879748359CPU SETTLED atverifiedidle aftercontrolfitexit, modelcountersunchanged.
 Newseed0finalpairaudit separatelymeasuredandsettled atidle; see t1-seed0-final-pair-v1 manifest.
-Remaining8modelstages preregistered in artifacts/host-intent-retrieval-v3/t1-completion-plan-v1.json.
+Remaining8modelstages RUNNING via driverPID3509227/exec93571; firstchild3509243 mainseed1.
+Authoritativedriver artifacts/host-intent-retrieval-v3/t1-completion-v1/driver.json, withcurrentchildPID.
+Plan artifacts/host-intent-retrieval-v3/t1-completion-plan-v1.json. Driverdef79755 frozen separately,
+modeltraining/evaluation entrypoints stayba2bf8d8. Queue main1->export1->control1->export1->
+main2->export2->control2->export2. Do NOTlaunchanothermodeljobwhilethisdriverisactive.
+stop-after-current file inside t1-completion-v1 pausesnextjobs aftercurrentchild, ONLYifuserrequests.
 Runner tools/run_host_intent_t1_completion.py usesfrozenba2bf8d8 modelentrypoints, originalledger,
 serialfit->export->audit, stoponfirstfailure/noautomaticretry. Modelsource/data/hyperparameters
 unchanged. Finalfullcommon1209dev usedforeacharm; controltrainingdiagnostics remainoriginal860.
