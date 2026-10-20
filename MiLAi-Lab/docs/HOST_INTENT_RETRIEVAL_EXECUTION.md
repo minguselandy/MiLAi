@@ -1214,3 +1214,15 @@ trace保存为tar.gz，核对文件名/长度后仅移除冗余工作副本；�
 协议见 `data/manifests/host-intent-retrieval-v3-instructir-runtime-protocol-v1.json`。
 仍需完整Store上的合成请求与归档容量检查，以及最终配方冻结后的全9906题实际评价。
 当前没有把接线、合成测试或原文摄取视为外部语义结果。
+
+
+完整真实Store上的单个合成请求检查已启动（CPU PID2523750/exec74656，冻结8bae8f28），
+使用fixed_context、无embedding，未读取正式评价题目/qrels，也未调用模型。当前第一次
+SEARCH尚未关闭，来源观察初始化9.587秒，进程持续占用CPU。一次/proc观察记录约307GB
+逻辑缓存读取、75M读取系统调用，物理read_bytes为0。只读SQL确认SDK以prefix LIKE和
+updated_at排序加OFFSET扫描全局索引；MemoryService._rows在取回后才排除子namespace，
+空语义namespace也会扫描子项。该形状已核实，尚未证明它独占全部耗时。完整9906题运行
+前需定位查询性能问题，保留同一活动进程和首个结果，不因观察超时重启。
+
+T1已完成524更新，目前仍在最终dev/train评测，尚未完成落盘权重验证或成本闭合。
+离线评分CLI的合成检查已确认缺失查询仍进入完整分母，并标记不完整cohort。

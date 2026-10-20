@@ -1,7 +1,14 @@
 """Synthetic native-metric checks; run in the isolated IR metrics environment."""
 import copy
+import io
+import json
 import math
+import runpy
+import tempfile
 import unittest
+from contextlib import redirect_stdout
+from pathlib import Path
+from unittest.mock import patch
 
 from milai_lab.datasets.instructir import (
     corpus_sources,
@@ -101,6 +108,34 @@ class InstructIRProtocolTests(unittest.TestCase):
                 "source_ranges": [{"source_ref": "s", "start": 0, "end": 4}]}, {"s": "doc"})
         with self.assertRaisesRegex(ValueError, "Unsupported"):
             delivered_document_ranking({"evidence": [{"kind": "unknown"}]}, lambda _: {}, {})
+
+    def test_offline_score_cli_keeps_missing_queries_and_marks_partial_cohort(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            release, run = root / "release", root / "run"
+            (release / "qrels").mkdir(parents=True)
+            run.mkdir()
+            queries = [{"_id": "q0", "text": "first[SEP]shared"},
+                       {"_id": "q1", "text": "second[SEP]shared"}]
+            (release / "queries.jsonl").write_text("".join(json.dumps(q) + "\n" for q in queries))
+            (release / "qrels/test.jsonl").write_text("".join(json.dumps({
+                "query-id": q["_id"], "corpus-id": "doc", "score": 1}) + "\n" for q in queries))
+            (run / "query-cohort.json").write_text(json.dumps({"queries": ["q0", "q1"]}))
+            (run / "rankings.json").write_text(json.dumps({"q0": {"doc": 1.0}}))
+            (run / "driver.json").write_text(json.dumps({"status": "FAILED", "completed": [{}],
+                "ranking_protocol": "synthetic only"}))
+            script = Path(__file__).resolve().parents[2] / "tools/score_host_intent_instructir.py"
+            output = root / "scores.json"
+            with patch("sys.argv", [str(script), str(release), str(run), str(output)]), (
+                redirect_stdout(io.StringIO())
+            ):
+                runpy.run_path(str(script), run_name="__main__")
+            report = json.loads(output.read_text())
+            self.assertFalse(report["full_cohort_closed"])
+            self.assertEqual(report["missing_rankings"], ["q1"])
+            self.assertEqual(report["queries"], 2)
+            self.assertEqual(report["metrics"]["cluster_NDCG@1_avg"], .5)
+            self.assertEqual(report["metrics"]["cluster_NDCG@1_min_avg"], 0.0)
 
 
 if __name__ == "__main__":

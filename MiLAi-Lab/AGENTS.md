@@ -87,6 +87,27 @@ regressionsPASS, Ruff/mypy/package/toolsboundaries/helpPASS. Read instructir-run
 No actualInstructIRquestions/models evaluated. Stillneed fullsource syntheticCPUprobe/archive-size
 check before finalrecipe evaluation; no secondmodeljob whileT1running. SourceprepCPUjobisclosed.
 
+ACTIVE CPU-ONLY synthetic fullStore probe PID2523750/exec74656/frozen8bae8f28:
+external/instructir-synthetic-store-probe-v1/driver.json, one synthetic request, no realIRquestion/qrels.
+Fixed_context, embeddingNone, expectednoHTTP/nativeforwards. Thisisnotasecondmodeljob.
+Do not restart on wait: lastverifiedalive CPU100%, firstSEARCH stillopen after~10min,0closedcases.
+Trace hascapture+decision_input/output only; source_inventory_wall9.586698s, sourcecount16072.
+/proc I/O showed~307GBlogicalcachedreads/75Mreadsyscalls atoneobservation; physicalread_bytes0.
+Read-onlySQL shows4namespaces×16072rows and SDK prefixLIKE+updated_atDESC+OFFSET scansglobalindex.
+_rows(root) filters exactnamespace onlyaftermaterialization, soemptysemantic namespace scanschildren.
+Thisisverifiedscan shape, notyetprofiled exclusive cause; investigate large-bank query performance
+BEFOREfull9906run. py-spy/gdb/pstack notonPATH; an rgfilename search ispendingexec73697.
+Do not mutate livefrozenprobe/sourceStore. Its firstactualtiming/output mustremainoriginal.
+
+SourceStore finalactualauditPASS; bothsourceprep1154.143850609CPU andaudit64.663762734CPU appended
+pendingv12 exactlyonce. No settlement whileT1fitruns; rawsource-setup timingnestedinprepnotrebilled.
+FullIRcodecommitted8bae8f28 includesfreshper-querycopies,same-source-namespace methodtemplates,
+completecase tar.gz archives, wire-basednativeDocprojection andofflineqrelscorer. No fullIRmodelrun.
+Additionaloffline-scoreCLItest passed complete-denominator/partial-cohort check (now8IRunitchecks).
+T1 lastverified 524/524 updates; FINAL EVALUATIONS STILLRUNNING.
+Finaldev directoryhas1209predictions+metrics.json; finaltrain partial. RunstatusRUNNING authoritative.
+No checkpoint validation/nextcontrol/seed/settlement until actualPIDexit andterminalrun inspected.
+
 Originalgoal remains FULL: T1/T2+matchedcontinuedCE,seeds0/1/2,finalE1/reservedconfirmation,
 E2frozenrequests,E3retrainedequal-info+one-shotfeedback,E4fullreleases,E5sevenworkloads/budgets,
 additionalHost,nativeE0. Nativeparser service-change permission unanswered; do not restart service.
