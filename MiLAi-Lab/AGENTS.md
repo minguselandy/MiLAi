@@ -96,7 +96,7 @@ Trace hascapture+decision_input/output only; source_inventory_wall9.586698s, sou
 Read-onlySQL shows4namespaces×16072rows and SDK prefixLIKE+updated_atDESC+OFFSET scansglobalindex.
 _rows(root) filters exactnamespace onlyaftermaterialization, soemptysemantic namespace scanschildren.
 Thisisverifiedscan shape, notyetprofiled exclusive cause; investigate large-bank query performance
-BEFOREfull9906run. py-spy/gdb/pstack notonPATH; an rgfilename search ispendingexec73697.
+BEFOREfull9906run. py-spy/gdb/pstack notonPATH; rgfilename search exec73697 CLOSED withno matching installedbinary.
 Do not mutate livefrozenprobe/sourceStore. Its firstactualtiming/output mustremainoriginal.
 
 SourceStore finalactualauditPASS; bothsourceprep1154.143850609CPU andaudit64.663762734CPU appended
