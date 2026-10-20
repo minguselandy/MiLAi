@@ -5,12 +5,15 @@ runs/t1-new-train-fixed-context-v1/driver.json, planned228. Registration faf5602
 Revalidate actual PID/driver and pollsamehandle; never restart after observation timeout.
 Latest closed-prefix export v3 has128states/16positions,24actualrequests,81labels/47masked,
 68source-progress preferences/13sufficient; all128publicinputs unchanged. Source-review-notes-v1
-has54reviewedpools/29trainfamilies; nextsource history index29 in new-histories.json. Actualrequest
+has62reviewedpools/33trainfamilies; nextsource history index33 in new-histories.json. Actualrequest
 reviews stop at first16positions; source notes never automatically approve later actual requests.
 Artist-only calls need less than signing calls; invented2024as_of heldmasked. Taskauthor review
 first16 only:4C/6Q/2W/4F in task-reviews-prefix-v2. Do not append duplicate earlier prefix states.
 pending-offline-review-v10 has6 measured export/label phases, unsettled whilelive; do not rebill
 closed probe/comparison or older v1..v9settlements. No newT1fitting or devcollection yet.
+Latest observed collection24closed/228 (19complete/5lengthfail; then stdout emitted25th), actual
+driver advances. All5firstfailures unknown-usage deltas0. PendingofflineCPU16.107059174.
+See t1-review-progress-v3. Source notes grow incrementally; older manifest counts are snapshots.
 
 Both mixed diagnostic jobs CLOSED: fit PID1380577 and exported dev6 PID1391476 absent,
 authoritative runs COMPLETED. Export exec53815 no longer available; no restart.
