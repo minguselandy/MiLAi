@@ -1,42 +1,52 @@
-# CURRENT 2026-10-20: new T1 train CLOSED; new dev52 RUNNING
+# CURRENT 2026-10-20: T1 train/dev CLOSED; full T1 fit READY
 
-ACTIVE model collection PID1918885 / exec94959 / frozen-c6b1f3bd:
-runs/t1-new-dev-fixed-context-v1/driver.json, planned52. Same registered collector/config/ledger.
-Revalidate actual PID/driver and pollsamehandle; never restart after observation timeout.
-Train PID1429403/exec94846 CLOSED228, exit0/absentPID:165programcomplete/63fail
-(49length,14JSON_ACTION_MALFORMED), allfirstfailures retained.592HTTP1951856known=charged,
-newunknown0/embedding0;379retrievals159empty/1enumrejection,querysemanticmutations0.
-Wall7240.661909s,driverCPU404.979827s,messageCPU376.987485s (nested, notsummed).
-Closed mechanical cost summary reconciled toledger. Fulltrain export data/t1-new-train-closed-full-v1:
-1816states/221statefulpositions/64families. ALL358statefulrequests nowauthor-reviewed;
-data/t1-new-train-witness-labels-full-v1 has1113labels/703masks,877progress/236sufficient,
-62labelledfamilies. Publicstate/questions1816 unchanged; previous1319goldrows unchanged.
-All228taskreviews in t1-new-train-task-reviews-full-v1:82C/34Q/49W/63F, authornotindependent.
-All379packets match actualcontrol evidence andToolMessages, max1585tokens;220handoff/159budgetend.
-21zero-statecalls separatelyreviewed, allbudgetexhausted/zerooperations; no inventedtrainingrows.
-Firstauditerrors retained: offlineannotationmetadata comparison, thenfailedresultreceiptfield absent;
-correctedaudits pass. Allfinal operation_status semanticoperations empty. No modeloutputrepairs.
-No-stateindices35/59/72/122/133/137/138 retained. Exporter nowacceptsexplicitdriver snapshot,
-sofutureclosed-position andstatecounts arefromone snapshot. No duplicateprefix concatenation.
-Offlinepending-v10 SETTLED atverifiedidle beforedevstarted:29measured phases82.190369CPU plus
-1known-wall-onlyGithub403phase(.256669s,CPUmissing);modelcountersunchanged. Rawmeasurementfalse
-flags doNOTpermitrebilling. Allsettlements v1..v10 closed. Newofflinework inpending-v11;
-no offline settlement whiledevprocess lives.
-Newdevsource26pools alreadyreviewed; actualdevrequests notyetreviewed. T1 fitting NOT_STARTED.
+No actual model job is running after dev PID1918885/exec94959 CLOSED52, exit0/absentPID.
+Before launching a next job revalidate actual processes and ledger. Do not restart closed jobs.
+Train228:165completed/63fail(49length,14JSON);592HTTP1951856known=charged,newunknown0.
+Dev52:41completed/11fail(10length,1JSON);127HTTP390650known=charged,newunknown0.
+Frozen collectors c6b1f3bd; all original results/first failures unchanged. JSON-action, not nativeE0.
 
-External assets: InstructIR fullHF release downloaded (9906query/instructionpairs,1267originalquery
-groups,16072docs,onepositiveqrelperpair), code58162a0f/data1615ed0e. Isolatedir-metrics-env has
-pytrec_eval0.5/numpy2.4.6; activeHTTP/CUDAenvsunchanged. InstructIRpublicprojection/nativepytrec
-metrics+groupminhelper added;4syntheticunittest checksPASS. All9906qrels IDs resolve;
-16072fulltext and9906publicrequest projections checked.48syntheticmetrics equal officialstaticmethod.
-Firstexactfloat comparisonfailedfromunorderedset summation; nowdeclaredqueryorder retained.
-Firstfailurepreserved; actualrankingrunnerNOTimplemented.
-LME-V2 existinglocalassets found, no7GBredownload. FullSmall snapshot underexternal/
-lme-v2-small-snapshot-v1:451questions,200completeSmall-selectedtrajectories,5095states,
-29questionimages+5095stateimages copied(548713157imagebytes), nohashchecks.2snapshot testsPASS;
-officialstructuralvalidator(2cc8c540)passed451/200/mappings/imageexistence. Notvisualdecoding orQA.
-AllSmallhistories havepriorprojectexposure; disclosedregressiononly, notfreshholdout. Localdataset
-downloadrevisionmetadata missing; retainlocalprovenance, do notclaim byteverifiedHFidentity.
+Train full: data/t1-new-train-witness-labels-full-v1,1816states/358statefulrequests,
+1113labels/703masks,877progress/236sufficient,62new labelled families. All1319previousgold unchanged.
+All379trainpackets match control evidence/ToolMessages,max1585tokens;21zero-statebudgetcalls reviewed.
+Train task-review-full-v1:82C/34Q/49W/63F, source-author not independent.
+Dev full: data/t1-new-dev-witness-labels-full-v1,404states/72statefulrequests,
+263labels/141masks,217progress/46sufficient,all16newfamilies. Publicinputs unchanged.
+All79devpackets match control/ToolMessages,max1659tokens;7zero-statebudgetcalls separately reviewed.
+Dev task-review-full-v1:23C/8Q/10W/11F, source-author not independent; no dev rows to train.
+Both packet audits found no post-return changes/overlimits; final semanticoperations empty.
+First offline audit failures retained, corrected checks passed; no actual output repairs.
+
+Full T1 data/t1-fitting-v1 READY: train5519raw/4189labelled,dev1209raw/965labelled.
+128/32primaryoperationgroups (126/32labelled) +965/241FollowIRtopics, inherited exposure qualifications.
+1499operation_history +1263complementary_evidence +1427instruction_applicability labelled train.
+Loss masses .6/.2/.2 with uniform shuffled rows, not sampling quotas. Actual task rows/tokens required.
+Inputaudit6728publicinputs/gold equal,SDKall4189/965labelledaccepted,trainmax9723/devmax8378,
+no clipping at12288/2048; no group crossing. T1 uses524updates=ceil(2*4189/16),8384draws.
+Main/control seeds0/1/2 each start SAME multilingual base (not T0weights),native/fullencoder/shared,
+softCE,float32,micro2/accum8,gradientcheckpoint,shuffleoptions. Diagnostics0/262/524; finalpreselected.
+Matched operation-only control data/t1-matched-operation-control-v1:2762labelledtrain/616dev,
+sameoperationstateIDs/labels,lossrenormalized.75/.25, same524updates; different tokens/passes explicit.
+Read data/manifests/host-intent-retrieval-v3-t1-fitting-plan-v1.json. No main T1weights yet.
+
+ALL offline settlements v1..v11 SETTLED at verified idle. v11=16phases,218.311390157CPU,
+1known-wall-only failedinputauditCPUmissing; modelcountersunchanged. No rebilling rawfalse flags.
+Newofflinework after this requirespendingv12. No offline settlement while anyactualmodeljob lives.
+Only ledger: /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json.
+
+External preparation committed35ad0387: InstructIR9906requests/1267querygroups/16072docs,
+allqrelIDs andpublicprojections checked.4synthetictestsPASS,48metrics matchofficialstaticmethod;
+pytrec_eval0.5/numpy2.4.6 isolatedenv. First float-equality failure retained; stablequeryordering fixed.
+Actual InstructIRrankingrunner/fullmodelrun NOTdone. LME-V2Small451/200fulltrajectories/5095states,
+5124imagefiles(548713157bytes) copied;officialstructuralvalidatorpassed,2testsPASS.
+AllSmallhistoriespriorcontact, regressionnotblind. LocalHFdownloadrevisionunknown, no byteidentityclaim.
+Nativebackend/fixedimageReader/full451remain. Mem2ActGivenTool capture-onlybridgecommitted3b39e6bd;
+400/429/16843releaseprepared, full400actualmodelrunstillpending. No newmodelservices.
+
+Originalgoal remains FULL: T1/T2+matchedcontinuedCE,seeds0/1/2,finalE1/reservedconfirmation,
+E2frozenrequests,E3retrainedequal-info+one-shotfeedback,E4fullreleases,E5sevenworkloads/budgets,
+additionalHost,nativeE0. Nativeparser service-change permission unanswered; do not restart service.
+No subagents, no SHA/checksum/content fingerprints, no old task replay, no remote publish.
 
 # PREVIOUS prefix/bridge details (superseded by current status above)
 Latest closed-prefix export v6 has930states/180actualrequests,560labels/370masked,

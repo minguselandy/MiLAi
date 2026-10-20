@@ -1,0 +1,42 @@
+{
+  "status": "SETTLED_ONCE_AT_VERIFIED_IDLE",
+  "ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+  "source_pending": "artifacts/host-intent-retrieval-v3/data/pending-offline-review-v11.json",
+  "model_process_absent": [
+    1429403,
+    1918885
+  ],
+  "model_exec_exit_code": 0,
+  "model_driver_status": "COMPLETED_WITH_FAILURES_52",
+  "phases": [
+    "host_intent_t1_new_train_witness_labels_full_v1",
+    "host_intent_t1_train_full_input_audit_first_failure_v1",
+    "host_intent_t1_train_full_input_audit_v1",
+    "host_intent_t1_train_full_runtime_audit_v1",
+    "host_intent_t1_train_full_runtime_audit_v2",
+    "host_intent_instructir_protocol_audit_v1",
+    "host_intent_instructir_protocol_audit_v2",
+    "host_intent_t1_new_dev_closed_prefix_export_v1",
+    "host_intent_t1_new_dev_closed_full_export_v1",
+    "host_intent_t1_new_dev_witness_labels_full_v1",
+    "host_intent_t1_new_dev_closed_summary_v1",
+    "host_intent_t1_dev_full_runtime_audit_v1",
+    "host_intent_t1_dev_full_input_audit_v1",
+    "host_intent_t1_full_mixture_preparation_v1",
+    "host_intent_t1_full_mixture_input_audit_v1",
+    "host_intent_t1_matched_operation_data_v1"
+  ],
+  "measured_cpu_seconds": 218.31139015700003,
+  "known_wall_only_failures": [
+    {
+      "phase": "host_intent_t1_train_full_input_audit_first_failure_v1",
+      "wall_seconds": 3.091536181,
+      "cpu_seconds": null,
+      "model_calls": 0,
+      "measurement_file": "artifacts/host-intent-retrieval-v3/data/t1-new-train-witness-labels-full-v1/input-audit-first-failure.json"
+    }
+  ],
+  "model_counters_unchanged": true,
+  "unmeasured": "Author review, prior uninstrumented tests and shell inspection are unmeasured, not zero.",
+  "settled_epoch": 1792464091.373048
+}

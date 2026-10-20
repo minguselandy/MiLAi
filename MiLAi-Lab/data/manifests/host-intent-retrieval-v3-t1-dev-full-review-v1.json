@@ -1,0 +1,93 @@
+{
+  "status": "T1_NEW_DEV_FULL_AUTHOR_REVIEW_COMPLETE",
+  "source_version": "c6b1f3bd",
+  "run": "artifacts/host-intent-retrieval-v3/runs/t1-new-dev-fixed-context-v1",
+  "closed_positions": 52,
+  "program_completed": 41,
+  "failures": 11,
+  "failure_types": {
+    "VLLM_CHAT_TRUNCATED": 10,
+    "JSON_ACTION_MALFORMED": 1
+  },
+  "http_requests": 127,
+  "known_generation_tokens": 390650,
+  "charged_generation_tokens": 390650,
+  "new_unknown_usage": 0,
+  "new_embedding_tokens": 0,
+  "whole_wall_seconds": 1735.595871812664,
+  "driver_cpu_seconds": 91.82321615400001,
+  "message_cpu_seconds_nested": 86.36183523199998,
+  "labels": {
+    "states": 404,
+    "reviewed_requests": 72,
+    "reviewed_states": 404,
+    "labelled": 263,
+    "reasons": {
+      "reviewed_missing_original_progress": 217,
+      "reviewed_originals_sufficient": 46,
+      "reviewed_partial_evidence_only_masked": 36,
+      "no_reviewed_source_proof_masked": 97,
+      "no_reviewed_progress_masked": 8
+    },
+    "families_labelled": 16,
+    "model_calls": 0,
+    "inputs_changed": false,
+    "states_source": "artifacts/host-intent-retrieval-v3/data/t1-new-dev-closed-full-v1/dev.jsonl",
+    "reviews_source": "artifacts/host-intent-retrieval-v3/data/t1-new-dev-closed-full-v1/request-witness-reviews-v1.json"
+  },
+  "input_audit": {
+    "public_inputs_equal": 404,
+    "model_calls": 0,
+    "wall_seconds": 0.3492229348048568,
+    "cpu_seconds": 0.349213987,
+    "ledger_recorded": false
+  },
+  "runtime_audit": {
+    "status": "PASS",
+    "phase": "host_intent_t1_dev_full_runtime_audit_v1",
+    "model_calls": 0,
+    "ledger_recorded": false,
+    "closed_host_positions": 52,
+    "executed_retrievals": 79,
+    "stateful_calls": 72,
+    "zero_state_calls": 7,
+    "tool_messages": 79,
+    "empty_deliveries": 27,
+    "termination_reasons": {
+      "policy_handoff": 52,
+      "budget_exhausted": 27
+    },
+    "max_full_packet_tokens": 1659,
+    "packets_over_actual_limit": 0,
+    "material_or_message_changes": 0,
+    "query_semantic_operations_in_final_status": 0,
+    "scope": "Exact actual control evidence and ToolMessage/packet equality; all source originals, no semantic-view snapshot transitions; no model loads or forwards.",
+    "wall_seconds": 2.584832336753607,
+    "cpu_seconds": 5.3511530899999995
+  },
+  "task_review_counts": {
+    "CORRECT": 23,
+    "WRONG": 10,
+    "QUALIFIED": 8,
+    "FAILED": 11
+  },
+  "task_review_by_profile": {
+    "fixed_context-query_only": {
+      "CORRECT": 11,
+      "WRONG": 6,
+      "QUALIFIED": 3,
+      "FAILED": 6
+    },
+    "fixed_context-rich": {
+      "CORRECT": 12,
+      "WRONG": 4,
+      "FAILED": 5,
+      "QUALIFIED": 5
+    }
+  },
+  "task_review": "artifacts/host-intent-retrieval-v3/data/t1-new-dev-task-reviews-full-v1.json",
+  "zero_state_requests_review": "artifacts/host-intent-retrieval-v3/data/t1-new-dev-witness-labels-full-v1/zero-state-request-reviews-v1.json",
+  "first_failures": "artifacts/host-intent-retrieval-v3/runs/t1-new-dev-fixed-context-v1/first-failures-audit-v1.json",
+  "cost_summary": "artifacts/host-intent-retrieval-v3/runs/t1-new-dev-fixed-context-v1/collection-cost-summary-v1.json",
+  "scope": "All actual requests and finals reviewed by source-author, not independent judgment. Dev excluded from fitting; no T1 model fitted yet."
+}

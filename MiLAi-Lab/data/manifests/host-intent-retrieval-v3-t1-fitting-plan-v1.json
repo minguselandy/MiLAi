@@ -1,0 +1,207 @@
+{
+  "status": "READY_FOR_T1_FITTING",
+  "data": "artifacts/host-intent-retrieval-v3/data/t1-fitting-v1",
+  "recipe": "artifacts/host-intent-retrieval-v3/data/t1-fitting-recipe-v1.json",
+  "preparation": {
+    "status": "MIXTURE_PREPARED_NOT_FITTED",
+    "recipe": "artifacts/host-intent-retrieval-v3/data/t1-fitting-recipe-v1.json",
+    "splits": {
+      "train": {
+        "rows": 5519,
+        "labelled": 4189,
+        "families": 1093,
+        "labelled_families": 1091,
+        "component_rows": {
+          "operation_history": 1955,
+          "complementary_evidence": 2137,
+          "instruction_applicability": 1427
+        },
+        "labelled_component_rows": {
+          "operation_history": 1499,
+          "complementary_evidence": 1263,
+          "instruction_applicability": 1427
+        }
+      },
+      "dev": {
+        "rows": 1209,
+        "labelled": 965,
+        "families": 273,
+        "labelled_families": 273,
+        "component_rows": {
+          "operation_history": 386,
+          "complementary_evidence": 474,
+          "instruction_applicability": 349
+        },
+        "labelled_component_rows": {
+          "operation_history": 309,
+          "complementary_evidence": 307,
+          "instruction_applicability": 349
+        }
+      }
+    },
+    "loss_mixture": {
+      "operation_history": 0.6,
+      "complementary_evidence": 0.2,
+      "instruction_applicability": 0.2
+    },
+    "suggested_two_pass_updates": 524,
+    "sampling": "Uniform shuffled passes over labelled rows, not stratified component quotas. Loss normalizes within component/family/event, then applies declared masses. Actual sampled rows and tokens must be reported from fitting.",
+    "state_ids": "Assigned over all train then dev rows before masking, outside model input.",
+    "scope": "Expanded T1: all frozen T0 operation data, all author-reviewed new64train/16dev source groups and existing published FollowIR applicability rows. Raw states/questions/gold preserved; all masks retained offline. No overlapping prefixes, dev-to-train movement, or new model outputs.",
+    "public_inputs_and_gold_changed": false,
+    "model_calls": 0,
+    "wall_seconds": 9.686337965540588,
+    "cpu_seconds": 9.686074361,
+    "ledger_recorded": false
+  },
+  "base_checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/models/laya-multilingual-base",
+  "initialization": "Every main and matched-control seed starts from same multilingual base. Historical T0seed0 weights are not silently mixed in.",
+  "primary_source_groups": {
+    "train": 128,
+    "dev": 32,
+    "labelled_train": 126,
+    "labelled_dev": 32
+  },
+  "followir_groups": {
+    "train": 965,
+    "dev": 241
+  },
+  "effective_train_rows": 4189,
+  "update_formula": "ceil(2*4189/16)=524",
+  "optimizer_updates": 524,
+  "planned_row_draws": 8384,
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "first_seed": 0,
+  "training_recipe": {
+    "backend": "native",
+    "task": "mixed_retrieval",
+    "objective": "soft-ce",
+    "operation_state": "shared",
+    "encoder_lr": 2.5e-05,
+    "head_lr": 0.0001,
+    "weight_decay": 0.01,
+    "micro_batch_size": 2,
+    "gradient_accumulation": 8,
+    "effective_batch": 16,
+    "shuffle_options": true,
+    "gradient_checkpointing": true,
+    "precision": "float32",
+    "physical_gpus": [
+      2,
+      3
+    ],
+    "max_len": 12288,
+    "head_max_len": 2048,
+    "diagnostics": [
+      0,
+      262,
+      524
+    ],
+    "selection": "Predetermined final524 checkpoint; initial/mid/final dev and final train diagnostics, no best-dev selection.",
+    "loss_mixture": {
+      "operation_history": 0.6,
+      "complementary_evidence": 0.2,
+      "instruction_applicability": 0.2
+    },
+    "sampling": "Uniform shuffled passes over labelled rows, not stratified component quotas. Loss normalizes within component/family/event, then applies declared masses. Actual sampled rows and tokens must be reported from fitting."
+  },
+  "matched_operation_control": {
+    "data": "artifacts/host-intent-retrieval-v3/data/t1-matched-operation-control-v1",
+    "preparation": {
+      "phase": "host_intent_t1_matched_operation_data_v1",
+      "status": "PREPARED_NOT_FITTED",
+      "splits": {
+        "train": {
+          "raw_rows": 4092,
+          "labelled": 2762,
+          "families": 128,
+          "labelled_component_rows": {
+            "operation_history": 1499,
+            "complementary_evidence": 1263
+          }
+        },
+        "dev": {
+          "raw_rows": 860,
+          "labelled": 616,
+          "families": 32,
+          "labelled_component_rows": {
+            "operation_history": 309,
+            "complementary_evidence": 307
+          }
+        }
+      },
+      "model_calls": 0,
+      "ledger_recorded": false,
+      "optimizer_updates": 524,
+      "effective_batch": 16,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "shared_operation_inputs_and_labels_unchanged": true,
+      "state_ids": "Preserve full-mixture pre-mask identities for option permutations.",
+      "contrast": "Same expanded operation states and common initialization, remove FollowIR auxiliary rows; renormalize unchanged relative memory-component masses .6:.2 to .75:.25. Same524updates, actual task rows/tokens reported; not equal examples or equal FLOPs. Main is ordinary soft-CE already.",
+      "wall_seconds": 7.07144676335156,
+      "cpu_seconds": 7.071110168
+    },
+    "optimizer_updates": 524,
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "common_initialization_and_optimizer": true
+  },
+  "comparison_scope": "Main training already uses ordinary soft-CE on the full declared data; no extra objective claimed. The operation-only contrast estimates the full auxiliary-data/loss-mixture recipe at matched updates, not identical token/FLOP cost or a pure architecture effect. Historical T0U207 is an earlier diagnostic, not the matched524 control. E3 comparisons must reuse full T1 data, initialization and524updates.",
+  "prioritization": "Seed0 main then matched operation control; remaining1/2seeds, T2+continued-CE, finalE1/reservedconfirmation,E2,E3,E4full,E5,additionalHost andnativeE0 remain required. No new external-model run before method/protocol freeze.",
+  "source_group_qualification": "Inherited registered source groups and exposure qualifications, not a new claim of complete independence or pretraining isolation.",
+  "original_ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+  "permissions": "No new services or remote publication. Native-tool parser change still awaits prior requested permission; no restart authorized.",
+  "no_checksums": true,
+  "input_audit": {
+    "phase": "host_intent_t1_full_mixture_input_audit_v1",
+    "status": "PASS_COMPLETE_INPUTS_AND_MIXTURE",
+    "model_loads": 0,
+    "model_calls": 0,
+    "ledger_recorded": false,
+    "splits": {
+      "train": {
+        "rows": 5519,
+        "labelled_sdk_items": 4189,
+        "max_sequence_tokens": 9723,
+        "public_inputs_and_gold_equal": 5519,
+        "truncated": 0
+      },
+      "dev": {
+        "rows": 1209,
+        "labelled_sdk_items": 965,
+        "max_sequence_tokens": 8378,
+        "public_inputs_and_gold_equal": 1209,
+        "truncated": 0
+      }
+    },
+    "source_group_overlap": false,
+    "loss_mass_per_full_pass": {
+      "operation_history": 0.5999999999999981,
+      "complementary_evidence": 0.20000000000000157,
+      "instruction_applicability": 0.19999999999999887
+    },
+    "sampling": "Uniform shuffled labelled rows; component masses are loss weights, not sampled quotas.",
+    "max_len": 12288,
+    "head_max_len": 2048,
+    "usable_train": 4189,
+    "optimizer_updates": 524,
+    "primary_operation_train_groups": 128,
+    "primary_operation_dev_groups": 32,
+    "followir_train_groups": 965,
+    "followir_dev_groups": 241,
+    "wall_seconds": 142.26848517544568,
+    "cpu_seconds": 145.01478416600003
+  },
+  "offline_settlement": "host-intent-retrieval-v3-offline-review-settlement-v11.json"
+}
