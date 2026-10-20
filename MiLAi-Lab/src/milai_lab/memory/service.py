@@ -21,6 +21,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any, Literal, cast
 
+from langgraph.store.base import GetOp, Item
 from langgraph.store.sqlite import SqliteStore
 
 from milai_lab.contracts.memory import (
@@ -53,6 +54,8 @@ from milai_lab.memory.retrieval import (
     semantic_text,
 )
 from milai_lab.memory.retrieval import _lexical_tokens as _lexical_tokens
+
+_STORE_SCAN_PAGE_SIZE = 512
 
 
 def _json(value: Any) -> str:
@@ -1799,23 +1802,56 @@ class MemoryService:
         rows: list[dict[str, Any]] = []
         offset = 0
         while True:
-            page = self.store.search(namespace, limit=100, offset=offset)
+            page = self.store.search(namespace, limit=_STORE_SCAN_PAGE_SIZE, offset=offset)
             # Store namespace searches are prefix searches, not owner exact scans.
             rows.extend(
                 {"id": item.key, "value": item.value}
                 for item in page
                 if item.namespace == namespace
             )
-            if len(page) < 100:
+            if len(page) < _STORE_SCAN_PAGE_SIZE:
                 return rows
             offset += len(page)
 
     def _visible_sources(self, session: str | None = None) -> list[dict[str, Any]]:
         """Only Source visibility and owner scope; no semantic formation history."""
-        events = [event for row in self._rows(self.sources_namespace)
-                  if (event := self.source(row["id"])) is not None
-                  and (session is None or event["session"] == session)]
+        with self._locked():
+            events = self._visible_source_rows(self._rows(self.sources_namespace))
+            if session is not None:
+                events = [event for event in events if event["session"] == session]
         return sorted(events, key=lambda event: (event["observed_at"], event["event_id"]))
+
+    def _visible_source_rows(self, rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+        """Validate captured rows under the caller's service lock, in bounded batches.
+
+        Search already fetched the immutable bodies. Reuse those exact values and
+        batch only their capture confirmations, keeping the single-source checks.
+        """
+        from milai_lab.memory.functional_state import namespace, validate_source, visibility
+
+        hidden = (set(visibility(self)["sources"])
+                  if self.functional_contract == "functional_v1" else set())
+        selected = [row for row in rows if row["id"] not in self._uncertain_captures
+                    and row["id"] not in hidden and row["value"].get("owner") == self.owner]
+        if self.functional_contract != "functional_v1":
+            return [row["value"] for row in selected]
+        events = []
+        refresh = (self.store.ttl_config or {}).get("refresh_on_read", True)
+        for offset in range(0, len(selected), _STORE_SCAN_PAGE_SIZE):
+            group = selected[offset:offset + _STORE_SCAN_PAGE_SIZE]
+            confirmations = cast(list[Item | None], self.store.batch([
+                GetOp(namespace(self), "capture:" + row["id"], refresh) for row in group]))
+            for row, confirmation in zip(group, confirmations, strict=True):
+                ref, event = row["id"], row["value"]
+                validate_source(ref, event, self.owner)
+                if confirmation is None:
+                    continue
+                if confirmation.value.get("source_ref") != ref or confirmation.value.get(
+                    "source_revision", 1
+                ) != event.get("source_revision", 1):
+                    raise FunctionalIntegrityError("V13_5_SOURCE_CAPTURE_CONFIRMATION_CHANGED")
+                events.append(event)
+        return events
 
     def sources(self, session: str | None = None) -> list[dict[str, Any]]:
         with self._locked():
@@ -1841,11 +1877,12 @@ class MemoryService:
             offset, materialized = 0, 0
             while True:
                 page = self.store.search(self.sources_namespace, filter=predicate,
-                                         limit=100, offset=offset)
+                                         limit=_STORE_SCAN_PAGE_SIZE, offset=offset)
                 materialized += len(page)
-                events.extend(source for item in page if item.namespace == self.sources_namespace
-                    and (source := self.source(item.key)) is not None)
-                if len(page) < 100:
+                events.extend(self._visible_source_rows([
+                    {"id": item.key, "value": item.value} for item in page
+                    if item.namespace == self.sources_namespace]))
+                if len(page) < _STORE_SCAN_PAGE_SIZE:
                     break
                 offset += len(page)
             return {"events": sorted(events, key=lambda e: (e["observed_at"], e["event_id"])),
@@ -1934,13 +1971,15 @@ class MemoryService:
         tokenization: Literal["rawrag_space", "unicode_v1"] = "rawrag_space",
         include_scope: bool = False,
         source_refs: Sequence[str] | None = None,
+        excluded_source_refs: Sequence[str] = (),
     ) -> dict[str, Any]:
         """Rank visible original text without traversing semantic formation history.
 
         Source storage, rather than semantic formation or Episode descriptions,
         owns the pool. An optional ordered Source allowlist is an arrival-prefix
         boundary, never an effective-date test. Without one, the pool is exactly
-        the currently captured visible Sources in this owner bank.
+        the currently captured visible Sources in this owner bank. Explicit
+        exclusions are applied before corpus assembly and ranking, not afterward.
         """
         from milai_lab.memory.functional_state import body_text
 
@@ -1952,7 +1991,9 @@ class MemoryService:
             visible = {source["event_id"]: source for source in self._visible_sources()}
             timings["enumerate_seconds"] = time.perf_counter() - started
             assemble_started = time.perf_counter()
-            ordered = list(visible) if source_refs is None else list(dict.fromkeys(source_refs))
+            excluded = set(excluded_source_refs)
+            scope_refs = visible if source_refs is None else dict.fromkeys(source_refs)
+            ordered = [ref for ref in scope_refs if ref not in excluded]
             sessions: dict[str, list[dict[str, Any]]] = {}
             for ref in ordered:
                 if ref in visible:
@@ -2024,6 +2065,7 @@ class MemoryService:
                 "visible_source_count": sum(ref in visible for ref in ordered),
                 "returned_source_count": len(raw_events),
                 "prefix": "explicit_source_ids" if source_refs is not None else "captured_visible",
+                **({"excluded_source_count": len(excluded & set(visible))} if excluded else {}),
             },
         }
 

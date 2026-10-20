@@ -1,0 +1,28 @@
+{
+  "status": "IMPLEMENTED_UNIT_VALIDATED_FULL_ARTIFACT_CHECK_NEXT",
+  "source_reads": [
+    "Reuse source bodies already obtained by the Store search, while validating owner/identity and capture confirmations in bounded512-row batches.",
+    "Use one visibility snapshot under the service lock; retain uncertain-capture exclusion, missing-confirmation masking, changed-confirmation/identity failures and unknown timestamps.",
+    "Increase value-scan page size to512 without limiting total rows; retain namespace and source ordering.",
+    "Exclude the current query within the same visible-corpus enumeration before assembly/ranking, rather than enumerate the whole bank twice."
+  ],
+  "archives": [
+    "Keep the complete immutable method template once. Each closed case records changed64KiBbyte blocks, new/deleted/truncated files, original modes/timestamps and identical-file references.",
+    "Compare every reconstructed byte directly with the still-existing case before removing its redundant working directory; no digest/fingerprint.",
+    "Restore to a fresh independent directory from explicit base plus archive. Original databases, model inputs/outputs and trace bytes remain recoverable.",
+    "The base is a required part of the artifact collection and must remain unchanged; an individual case archive is not standalone."
+  ],
+  "restore_cli": "tools/restore_case_archive.py ARCHIVE BASE OUTPUT",
+  "validation": {
+    "related_tests": 51,
+    "earlier_archive_and_runner_checks": 7,
+    "ruff": "PASS8files",
+    "mypy": "PASS5files",
+    "package_boundary": "PASS",
+    "tools_boundary": "PASS"
+  },
+  "scope": "No native benchmark question/qrel/model used for this development. Actual full-case size and full-source runtime effects still require measured checks. Active matched control remains frozen ba2bf8d8.",
+  "no_sha_checks": true,
+  "product_changes": "No Product Schema/API/permission/Canonical changes. Existing public Store operations and semantic selection retained.",
+  "remote_publication": false
+}

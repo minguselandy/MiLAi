@@ -201,10 +201,8 @@ class IntentRetrievalMemory(FunctionalEditMemory):
             budget={"max_return_tokens": return_limit})
 
         def search_pool(query: str, limit: int) -> list[dict[str, Any]]:
-            refs = [row["event_id"] for row in self.service._visible_sources()
-                    if row["event_id"] != bound["source_ref"]]
             native = self.service.search_sources(query, limit=min(limit, self.source_top_k),
-                source_refs=refs, tokenization=self.source_tokenization)
+                excluded_source_refs=(bound["source_ref"],), tokenization=self.source_tokenization)
             records = self.service.search(query, limit=min(limit, self.semantic_top_k),
                                           include_raw=False)["records"]
             materials = build_evidence_packs(self.service, request.query,

@@ -15,6 +15,7 @@ from typing import Any
 from milai_lab.baselines.langmem_sqlite_store import TransactionalSqliteStore as SqliteStore
 from milai_lab.datasets.instructir import delivered_document_ranking, retrieval_request
 from milai_lab.harness.artifact_io import read_json, write_json
+from milai_lab.harness.case_archive import archive_case
 from milai_lab.memory.functional_state import namespace
 from milai_lab.memory.service import MemoryService
 from milai_lab.methods.evidence_reading import open_evidence_packs
@@ -62,8 +63,10 @@ def project_query_result(
             "host_request_generated": result["host_request_generated"]}
 
 
-def archive_query(root: Path, destination: Path) -> dict[str, Any]:
+def archive_query(root: Path, destination: Path, *, base: Path | None = None) -> dict[str, Any]:
     """Retain a closed case losslessly before removing its working directory."""
+    if base is not None:
+        return archive_case(root, destination, base)
     files = {str(path.relative_to(root)): path.stat().st_size
              for path in root.rglob("*") if path.is_file()}
     with tarfile.open(destination, "x:gz", compresslevel=6) as archive:
@@ -111,6 +114,7 @@ def run_given_queries(
         "source_version": source_version, "started_epoch": time.time(),
         "planned_positions": len(queries), "completed": [], "automatic_retry": False,
         "source_bank": str(source_bank), "corpus_documents": setup["source_documents"],
+        "artifact_storage": "case_blocks_v1 against retained method template; byte-exact recovery",
         "request_transport": "programmatic_given_request", "host_request_generated": False,
         "qrels_loaded": False, "model_pool": "Same process across independent query copies",
         "ranking_protocol": "Returned original ranges or explicit returned view citations; "
@@ -180,7 +184,8 @@ def run_given_queries(
                     "ledger_compute_cpu_seconds_nested": billed_cpu,
                     "query_cpu_seconds_not_yet_recorded": exclusive_cpu, **projection}
                 write_json(case_root / "evaluation.json", case)
-                archive = archive_query(case_root, output / "cases" / f"{index:05d}.tar.gz")
+                archive = archive_query(case_root, output / "cases" / f"{index:05d}.tar.gz",
+                                        base=template)
                 case["artifacts"] = archive
                 rankings[row["_id"]] = projection["ranking"]
                 driver["completed"].append(case)

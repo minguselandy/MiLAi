@@ -8,6 +8,7 @@ import httpx
 import pytest
 
 from milai_lab.datasets.instructir import corpus_sources
+from milai_lab.harness.case_archive import restore_case
 from milai_lab.runners.functional import frozen, prepare
 from milai_lab.runners.instructir import archive_query, project_query_result, run_given_queries
 from milai_lab.runners.retrieval_histories import prepare_history_bank
@@ -55,9 +56,7 @@ def test_each_query_has_only_initial_corpus_and_its_own_query(tmp_path, monkeypa
     mapping = json.loads((bank / "source-map.json").read_text())
     for i, row in enumerate(queries):
         extracted = tmp_path / f"extract-{i}"
-        with tarfile.open(output / "cases" / f"{i:05d}.tar.gz") as archive:
-            archive.extractall(extracted, filter="data")
-        root = extracted / "case"
+        root = restore_case(output / "cases" / f"{i:05d}.tar.gz", output / "template", extracted)
         result_file = next(root.glob("banks/*/*-result.json"))
         result = json.loads(result_file.read_text())
         assert len(result["sources"]) == 3
