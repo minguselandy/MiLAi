@@ -1,0 +1,17 @@
+{
+  "status": "SETTLED_ONCE_AT_VERIFIED_IDLE",
+  "ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+  "measurement_file": "artifacts/host-intent-retrieval-v3/data/pending-offline-review-v26.json",
+  "phases": 16,
+  "total_cpu_seconds": 233.07849972,
+  "generation_embedding_unchanged": true,
+  "verified_closed_pids": [
+    1937382,
+    2096899
+  ],
+  "first_attempt_cpu_previously_settled": "pending-offline-review-v25.json",
+  "unknown_overhead": [
+    "Interactive author review, tests and imports outside timers unknown, not zero.",
+    "Additional binding v1 recipe-shape setup failure happened before output/HTTP; startup CPU/wall unknown. Review/model imports outside recorded timers unknown."
+  ]
+}
