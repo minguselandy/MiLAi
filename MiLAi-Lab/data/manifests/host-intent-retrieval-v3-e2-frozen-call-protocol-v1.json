@@ -1,0 +1,60 @@
+{
+  "status": "TOOL_CAPTURE_AND_REPLAY_IMPLEMENTED_MECHANICAL_VALIDATION_ONLY",
+  "plan_requirement": "Section10.4: same actual Host request, available sources and initial before; strong fixed/rules, Jev and generative controllers share the operation library.",
+  "collection": {
+    "entry": "tools/run_host_intent_retrieval.py --capture-retrieval-calls",
+    "directory": "<collection-output>/frozen-retrieval-calls/<opaque-uuid>/",
+    "boundary": "At entry to an actual schema-valid milai_retrieve call, before the started retrieval row and known-reference reads. Preserve literal request, call_id, bound public turn, source namespace and original read/generation allowances.",
+    "artifact": "call.json plus before/: root configuration/index, selected bank files, SQLite online backups of Store/checkpoints/application SQLite files. Raw Host prefix trace path retained. Other banks are outside this request.",
+    "concurrency": "Opt-in collection sets tool executor max_concurrency=1. Verified with two native calls in one scripted Host response; each next snapshot retains prior consumed allowance.",
+    "failures": "Original tool failures and zero-decision calls retained. No ideal-request filtering. Schema-rejected attempts have no tool-entry snapshot: future cohort assembly must reconcile original Host traces and report these separately, never silently treat captures as all Host attempts.",
+    "cached_calls": "Cached/idempotent tool re-entries are also captured; they retain the existing receipt and have no new policy decision. Native Host duplicate call IDs remain rejected by the unchanged provider boundary."
+  },
+  "execution": {
+    "entry": "tools/run_frozen_retrieval_calls.py CAPTURES POLICIES_JSON OUTPUT --source-version VERSION",
+    "recipe": "List of named arms, each with a policy config for existing memory_policy. Full captured cohort, fresh runtime copy per arm/call, common warm native-model pool, original external ledger.",
+    "request": "Invoke actual registered tool using original call_id and original public-message identity. No Host request regeneration or answer repair.",
+    "common_runtime": "Original execution caps, source/view capacity, visibility, Store, read admission and generation admission. Only executor configuration is an explicit factor recorded separately from original input-freeze.",
+    "admission": "Restore original read-admission policy identity because previous calls consumed that allowance under the original executor. Only memory_control class may differ; every other admission field must match. Prior calls and counters are not reset or rewritten. Default path retains its original policy check.",
+    "initial_observation": "Compare reconstructed semantic observation to captured first before. Reuse captured source_inventory_wall_seconds in the first model observation; record newly measured inventory wall separately. Then require exact complete before and action equality. Later trajectories are free to differ.",
+    "zero_decisions": "Retain original zero-step/exhausted cases with null initial observation; request/binding/allowance still checked.",
+    "failure": "First failed comparison retained with artifacts; CLI stops for review, no automatic retry. Existing closed original results cannot replace a new arm execution."
+  },
+  "accounting": {
+    "original_ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+    "capture": "Measured snapshot CPU/wall is nested collection overhead, recorded in call.json, not double billed.",
+    "replay": "replay.json separates actual ledger compute from remaining CPU. CLI driver adds outer orchestration CPU; total driver CPU is nested.",
+    "validation": "All current checks use isolated temporary mock ledgers and scripted HTTP/native models. No actual model job or original-ledger settlement added while PID2670549 runs. Untimed author/tests/commands are not zero."
+  },
+  "validation": {
+    "new_tests": 6,
+    "related_tests": 48,
+    "additional_read_operation_tests": 67,
+    "coverage": [
+      "actual scripted Host tool call and unchanged frozen source files",
+      "same first observation/actions across fixed, stub native and scripted generative executors",
+      "different later trajectory/delivery allowed",
+      "second request retains previously returned refs and consumed allowance",
+      "original failure and zero-decision cases retained",
+      "multi-call native response serialized, complete2callx2armCLI cohort",
+      "changed initial observation fails without regeneration",
+      "cached tool re-entry preserves existing packet without loading unused executor; native duplicate-ID validation unchanged"
+    ],
+    "ruff": "PASS7files",
+    "mypy": "PASS5files using actual HTTP environment dependencies",
+    "boundaries": "PASS package/tools",
+    "cli_help": "PASS",
+    "first_mechanical_failures": "Rules test expected no model call, but rules legitimately requested REFRESH; adjusted its expectation/fixture to test the strong fixed arm. Multi-call test exposed original read-admission executor identity mismatch; resolved with explicit frozen-admission identity and unchanged resource fields. A cached-entry test initially used duplicate Host call IDs, which the normal wire correctly rejects; it now explicitly tests tool idempotent re-entry without changing that provider guard.",
+    "final_affected_tests": 25
+  },
+  "remaining": [
+    "Predeclare actual E2 source groups and Host request origin after method recipe freeze",
+    "Collect actual Host calls with snapshots and reconcile all raw attempts including schema failures/no-call tasks",
+    "Run strong fixed/rules, Jev and generative comparisons with original ledger",
+    "Source-grounded evidence-delivery scoring",
+    "Fixed Host downstream continuation/evaluation, preserving complete native tool-call batches and common context",
+    "Original full T1/T2/seeds/E1confirmation/E3/E4full/E5/additionalHost/nativeE0 scope"
+  ],
+  "claims": "Current evidence proves mechanics only. No actual E2 semantic results, no native service E0 success, no claim that all later states remain matched.",
+  "no_sha_or_content_fingerprints": true
+}

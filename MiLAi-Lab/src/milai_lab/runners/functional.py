@@ -2539,6 +2539,9 @@ def message(
     model_tool_choice: Callable[[list[Any]], Any] | None = None,
     recorded_tool_schemas: list[dict[str, Any]] | None = None,
     given_retrieval_request: dict[str, Any] | None = None,
+    retrieval_snapshots: Path | None = None,
+    replay_retrieval: dict[str, Any] | None = None,
+    control_policy_override: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     freeze = frozen(root)
     workflow = {"reservation_v1": "reservation", "document_publication_v1": "document"}.get(
@@ -2550,6 +2553,13 @@ def message(
     if profile_state.exists() and read_json(profile_state).get("disabled"):
         raise ValueError("FUNCTIONAL_PROFILE_DISABLED")
     settings = freeze["config"]
+    if ((retrieval_snapshots is not None or replay_retrieval is not None)
+            and (not settings.get("retrieval_tool") or settings["request_mode"] != "disabled")):
+        raise ValueError("FROZEN_RETRIEVAL_REQUIRES_RETRIEVAL_PROFILE")
+    if control_policy_override is not None and replay_retrieval is None:
+        raise ValueError("CONTROL_POLICY_OVERRIDE_REQUIRES_FROZEN_CALL")
+    direct_request = (replay_retrieval["request"] if replay_retrieval is not None
+                      else given_retrieval_request)
     edit_features = EditFeatures.from_settings(settings.get("edit_features", {}))
     bank_id = _bank_reference(root, freeze["run_id"], bank, owner)
     bank_root = root / "banks" / bank_id
@@ -2582,6 +2592,8 @@ def message(
         if settings["retrieval_tool"] == "query_only" and set(given_retrieval_request) != {"query"}:
             raise ValueError("GIVEN_QUERY_ONLY_REQUEST_REQUIRES_QUERY_ONLY")
         public["given_retrieval_request"] = deepcopy(given_retrieval_request)
+    if replay_retrieval is not None and public != replay_retrieval["public_message"]:
+        raise ValueError("FROZEN_RETRIEVAL_PUBLIC_MESSAGE_CHANGED")
     identity = _message_reference(bank_root, session, message_id)
     result_path = bank_root / (identity + "-result.json")
     input_path = bank_root / (identity + "-input.json")
@@ -2614,6 +2626,11 @@ def message(
         output["recorded_tool_calls"] = []
     if given_retrieval_request is not None:
         output.update(request_transport="programmatic_given_request", host_request_generated=False)
+    if replay_retrieval is not None:
+        output.update(request_transport="frozen_actual_tool_call",
+            host_request_generated=replay_retrieval["host_request_generated"],
+            host_request_regenerated=False, control_policy_override=control_policy_override,
+            original_call_id=replay_retrieval["call_id"])
     execution_started = False
     scope = FoundationScope(
         freeze["run_id"], bank, owner, session + ":" + message_id,
@@ -2629,6 +2646,10 @@ def message(
         v13_turn_id=message_id,
         v13_config_version=freeze["config_version"],
     )
+    if retrieval_snapshots is not None:
+        # E2 collection takes a consistent before for each actual tool call.
+        # LangGraph's tool executor honors this per-invocation concurrency.
+        cfg["max_concurrency"] = 1
     with ExitStack() as stack:
         stack.enter_context(
             http_budget_scope(
@@ -2767,6 +2788,11 @@ def message(
 
                 memory_class = IntentRetrievalMemory
                 memory_options["retrieval_interface"] = settings["retrieval_tool"]
+                if replay_retrieval is not None:
+                    memory_options["replay_initial_observation"] = replay_retrieval[
+                        "initial_observation"]
+                    memory_options["replay_admission_policy"] = replay_retrieval[
+                        "admission_policy"]
             if issubclass(memory_class, FunctionalEditMemory):
                 def dependency_read_call(
                     stage: str, messages: list[dict[str, str]], schema: dict[str, Any],
@@ -2790,7 +2816,9 @@ def message(
                     from milai_lab.runners.memory_control import dense_control_pool, memory_policy
 
                     control = settings["memory_control"]
-                    memory_options["control_policy"] = memory_policy(control, budget,
+                    memory_options["control_policy"] = memory_policy(
+                        control_policy_override if control_policy_override is not None else control,
+                        budget,
                         call=dependency_read_call,
                         admit=lambda: model.reserve_external_request("memory_control"),
                         record=trace, models=control_models)
@@ -2942,14 +2970,54 @@ def message(
                     "config_version": freeze["config_version"],
                 },
             )
-            if given_retrieval_request is not None:
-                # Native benchmark backends already supply the retrieval request.
-                # Invoke the same registered tool; do not ask a Host to rewrite it.
+            if retrieval_snapshots is not None:
+                from milai_lab.runners.frozen_retrieval import RetrievalRecorder, copy_call_root
+
+                def capture_call(destination: Path) -> None:
+                    with service._locked():
+                        copy_call_root(root, bank_root, destination)
+
+                assert isinstance(memory, IntentRetrievalMemory)
+                memory.retrieval_observer = RetrievalRecorder(
+                    retrieval_snapshots, root, bank_root,
+                    lambda: {"bank": bank, "public_message": public,
+                        "host_request_generated": given_retrieval_request is None,
+                        "source_version": freeze["source_version"],
+                        "admission_policy": memory._read_admission_policy(),
+                        "host_prefix_trace": str(trace.path.relative_to(root)),
+                        "host": settings["host"],
+                        "generation_calls_before": model.calls_in_message},
+                    capture_call)
+            if replay_retrieval is not None:
+                assert isinstance(memory, IntentRetrievalMemory)
+                memory._read_admission_policy()
+                if model.calls_in_message != replay_retrieval["generation_calls_before"]:
+                    raise ValueError("FROZEN_RETRIEVAL_GENERATION_ALLOWANCE_CHANGED")
+
+                def verify_replay(event: dict[str, Any]) -> None:
+                    if event["phase"] == "start":
+                        if (event["request"] != replay_retrieval["request"]
+                                or event["binding"] != replay_retrieval["binding"]
+                                or event["read_allowance"] != replay_retrieval["read_allowance"]):
+                            raise ValueError("FROZEN_RETRIEVAL_REQUEST_OR_ALLOWANCE_CHANGED")
+                        output["frozen_request_and_allowance_equal"] = True
+                    if event["phase"] == "decision_input" and event["step"] == 0:
+                        if (event["before"] != replay_retrieval["initial_observation"]
+                                or event["actions"] != replay_retrieval["initial_actions"]):
+                            raise ValueError("FROZEN_RETRIEVAL_FIRST_DECISION_CHANGED")
+                        output["frozen_initial_observation_and_actions_equal"] = True
+
+                memory.retrieval_observer = verify_replay
+            if direct_request is not None:
+                # Native backends and frozen E2 calls already supply the request.
+                # Invoke the same registered tool without another Host rewrite.
                 execution_started = True
                 tool = next(t for t in memory.tools() if t.name == "milai_retrieve")
                 retrieval_receipt = cast(ToolMessage, tool.invoke({"type": "tool_call",
-                    "name": "milai_retrieve", "id": "given-request",
-                    "args": given_retrieval_request}, config=cfg))
+                    "name": "milai_retrieve", "id": (
+                        replay_retrieval["call_id"] if replay_retrieval is not None
+                        else "given-request"),
+                    "args": direct_request}, config=cfg))
                 packet = json.loads(str(retrieval_receipt.content))
                 output.update(status="COMPLETED" if packet["ok"] else "FAILED",
                     messages=[public_message_record(retrieval_receipt)], retrieval_result=packet,
@@ -2974,7 +3042,7 @@ def message(
                 output["operation_status"] = operation_status(output,
                     thread_id=cfg["configurable"]["thread_id"], execution_started=True)
                 trace({"event": "functional_given_retrieval", "host_generation": False,
-                       "request": given_retrieval_request, "result": packet})
+                       "request": direct_request, "result": packet})
                 return persist_result()
             mode: dict[str, Any] | None = None
             mode_path = bank_root / f"{identity}-request-mode.json"
@@ -4627,7 +4695,7 @@ def message(
                                 "FUNCTIONAL_COMPLETION_FEEDBACK_BUDGET_EXHAUSTED"})
         exhausted_format = (settings.get("failure_delivery") == "receipt_status_v4"
                             and output.get("error") == "FUNCTIONAL_FORMAT_REPROPOSAL_EXHAUSTED")
-        if (given_retrieval_request is None and settings.get("failure_delivery") in {
+        if (direct_request is None and settings.get("failure_delivery") in {
                 "receipt_status_v1", "receipt_status_v2", "receipt_status_v3", "receipt_status_v4"}
                 and (output.get("error_category") == "provider_protocol"
                      or known_incomplete or exhausted_format)

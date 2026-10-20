@@ -1,0 +1,92 @@
+{
+  "status": "MIDPOINT_DIAGNOSTIC_CLOSED_FIT_STILL_RUNNING",
+  "source_version": "ba2bf8d8",
+  "pid": 2670549,
+  "exec_session": 8252,
+  "comparison_file": "artifacts/host-intent-retrieval-v3/fitting/t1-matched-operation-control-seed0-v1/midpoint-comparison-v1.json",
+  "comparison": {
+    "phase": "host_intent_t1_midpoint_matched_comparison_v1",
+    "status": "PASS_COMMON_INPUTS_AND_RECOMPUTED_METRICS",
+    "optimizer_updates": 262,
+    "row_draws_per_arm": 4192,
+    "common_raw_rows": 860,
+    "common_public_inputs_labels_metadata_equal": true,
+    "common_input_tokens_equal": true,
+    "model_calls": 0,
+    "ledger_recorded": false,
+    "paired_label_acceptance": {
+      "both": 405,
+      "masked": 244,
+      "neither": 118,
+      "main_only": 31,
+      "control_only": 62
+    },
+    "main": {
+      "counts": {
+        "labelled": 616,
+        "accepted": 436,
+        "masked": 244,
+        "handoff_outside_reviewed_preference": 36
+      },
+      "strata": {
+        "source_reviewed_preference": {
+          "labelled": 616,
+          "accepted": 436
+        }
+      },
+      "selected_operations": {
+        "SEARCH": {
+          "selected": 113,
+          "accepted": 112
+        },
+        "READ": {
+          "selected": 384,
+          "accepted": 241
+        },
+        "HANDOFF": {
+          "selected": 119,
+          "accepted": 83
+        }
+      },
+      "families": 32,
+      "family_macro_acceptance": 0.7361370346903132,
+      "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+    },
+    "control": {
+      "counts": {
+        "labelled": 616,
+        "accepted": 467,
+        "masked": 244,
+        "handoff_outside_reviewed_preference": 27
+      },
+      "strata": {
+        "source_reviewed_preference": {
+          "labelled": 616,
+          "accepted": 467
+        }
+      },
+      "selected_operations": {
+        "SEARCH": {
+          "selected": 111,
+          "accepted": 111
+        },
+        "READ": {
+          "selected": 387,
+          "accepted": 265
+        },
+        "HANDOFF": {
+          "selected": 118,
+          "accepted": 91
+        }
+      },
+      "families": 32,
+      "family_macro_acceptance": 0.7851971991887844,
+      "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+    },
+    "scope": "Midpoint native/static development diagnostic only. Control currently higher than main, not final selection or downstream task efficacy. Both retain predetermined final524. Matched updates/draws, different component rows, exposures and token costs. FollowIR auxiliary task not evaluated by operation-only control.",
+    "wall_seconds": 3.5891385562717915,
+    "cpu_seconds": 3.588921407
+  },
+  "selection": "Keep predetermined final524 for both arms. No midpoint selection or recipe change.",
+  "accounting": "Comparison3.588921407CPU appended pendingv14; 8phases195.248007270CPU, not settled during fit."
+}

@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import copy
 import time
+from collections.abc import Callable
 from typing import Annotated, Any, Literal
 
 from langchain_core.messages import ToolMessage
@@ -78,10 +79,27 @@ class IntentRetrievalMemory(FunctionalEditMemory):
     """Opt-in adapter: the Host calls retrieval instead of receiving automatic retrieval."""
 
     def __init__(self, *args: Any, retrieval_interface: Literal["rich", "query_only"] = "rich",
+                 retrieval_observer: Callable[[dict[str, Any]], None] | None = None,
+                 replay_initial_observation: dict[str, Any] | None = None,
+                 replay_admission_policy: dict[str, Any] | None = None,
                  **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
         self.retrieval_interface = retrieval_interface
+        self.retrieval_observer = retrieval_observer
+        self.replay_initial_observation = replay_initial_observation
+        self.replay_admission_policy = replay_admission_policy
         self.policy["retrieval_interface"] = retrieval_interface
+
+    def _read_admission_policy(self) -> dict[str, Any]:
+        if self.replay_admission_policy is None:
+            return super()._read_admission_policy()
+        original = self.replay_admission_policy
+        if {k: v for k, v in original.items() if k != "memory_control"} != {
+                k: v for k, v in self.policy.items() if k != "memory_control"}:
+            raise ValueError("FROZEN_RETRIEVAL_READ_POLICY_CHANGED")
+        # Prior calls consumed this exact allowance under the original executor.
+        # E2 changes only the next executor; it cannot reset or rewrite those calls.
+        return original
 
     @property
     def read_tool_names(self) -> frozenset[str]:
@@ -161,22 +179,41 @@ class IntentRetrievalMemory(FunctionalEditMemory):
                  request: RetrievalRequest) -> dict[str, Any]:
         bound = self._binding(config)
         key = "retrieval:" + reference_key([bound["session"], bound["message_id"], call_id])
-        existing = self.service.store.get(namespace(self.service), key)
-        if existing is not None:
-            saved = existing.value
-            if saved["request"] != request.project():
-                raise FunctionalRejection("RETRIEVAL_CALL_CHANGED")
-            if saved["status"] != "completed":
-                raise FunctionalIntegrityError("RETRIEVAL_OUTCOME_UNKNOWN")
-            return self._retrieval_result(key, saved)
+        def observe(event: dict[str, Any]) -> None:
+            if self.retrieval_observer is not None:
+                self.retrieval_observer({"call_id": call_id, **event})
 
+        if self.retrieval_observer is not None:
+            observe({"phase": "start", "request": request.project(), "binding": bound,
+                     "read_allowance": self.read_allowance(config)})
+        try:
+            existing = self.service.store.get(namespace(self.service), key)
+            if existing is not None:
+                saved = existing.value
+                if saved["request"] != request.project():
+                    raise FunctionalRejection("RETRIEVAL_CALL_CHANGED")
+                if saved["status"] != "completed":
+                    raise FunctionalIntegrityError("RETRIEVAL_OUTCOME_UNKNOWN")
+                result = self._retrieval_result(key, saved)
+            else:
+                result = self._execute_retrieval(config, call_id, request, key, bound)
+        except BaseException as error:
+            observe({"phase": "failed", "error_type": type(error).__name__, "error": str(error)})
+            raise
+        observe({"phase": "completed", "result": result, "served_from_cache": existing is not None})
+        return result
+
+    def _execute_retrieval(
+        self, config: RunnableConfig, call_id: str, request: RetrievalRequest,
+        key: str, bound: dict[str, Any],
+    ) -> dict[str, Any]:
         started = time.perf_counter()
         return_limit = min(self.material_limit,
                            request.limits.max_return_tokens or self.material_limit)
         steps = min(self.control_steps, request.limits.max_control_steps
                     if request.limits.max_control_steps is not None else self.control_steps)
-        saved = {"schema": "milai_retrieval_snapshot_v1", "status": "started",
-                 "request": request.project(), "return_limit": return_limit}
+        saved: dict[str, Any] = {"schema": "milai_retrieval_snapshot_v1", "status": "started",
+                                "request": request.project(), "return_limit": return_limit}
         self.service.store.put(namespace(self.service), key, saved, index=False)
         known = []
         if request.task_context.known_evidence_refs:
@@ -239,6 +276,21 @@ class IntentRetrievalMemory(FunctionalEditMemory):
             known_materials=known,
             view_capacity=self.control_view_capacity, view_policy=self.control_view_policy,
             source_observation=self.control_source_observation)
+        if self.replay_initial_observation is not None:
+            expected = copy.deepcopy(self.replay_initial_observation)
+            for name in ("remaining_control_steps", "reader_capacity_reserved"):
+                expected["budget"].pop(name)
+            observed = state.project()
+            original_timing = expected["budget"].pop("source_inventory_wall_seconds")
+            actual_timing = observed["budget"].pop("source_inventory_wall_seconds")
+            if observed != expected:
+                raise ValueError("FROZEN_RETRIEVAL_INITIAL_OBSERVATION_CHANGED")
+            # E2 supplies the very same original first model observation. Actual
+            # replay computation time remains measured separately in the trace.
+            state.budget["source_inventory_wall_seconds"] = original_timing
+            self.control_record({"event": "frozen_retrieval_initial_observation",
+                "original_inventory_wall_seconds": original_timing,
+                "actual_inventory_wall_seconds": actual_timing})
         memory = self
 
         class AdmittedOperations:
@@ -268,6 +320,9 @@ class IntentRetrievalMemory(FunctionalEditMemory):
                                              for i, m in operations.opened.items()}
                 event["known_materials"] = [material_binding(m) for m in known]
             self.control_record({**event, "retrieval_call_id": call_id})
+            if self.retrieval_observer is not None and event["phase"] == "decision_input":
+                self.retrieval_observer({"call_id": call_id, "phase": "decision_input",
+                    "step": event["step"], "before": event["before"], "actions": event["actions"]})
 
         assert self.control_policy is not None
         result = run_memory_control(state, self.control_policy, AdmittedOperations(),

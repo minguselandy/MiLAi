@@ -1,5 +1,28 @@
 # CURRENT 2026-10-20: matched T1 operation-only control seed0 RUNNING
 
+NEW E2 frozen actual-call capture/replay implemented; mechanicaltests only, NOactualE2collection.
+tools/run_host_intent_retrieval.py --capture-retrieval-calls opt-in: serialtoolcalls, snapshot before
+newtoolentry writes/knownrefs, originalStore+checkpointSQLiteonlinebackups, priorread/genallowances,
+literalrequest/callID/publicbinding, firstactualbefore/actions, rawHostprefixtrace. Failures/zero-
+decisioncalls retained. Schema-invalid attempts requirelaterraw-tracereconciliation, notsilentlydropped.
+tools/run_frozen_retrieval_calls.py CAPTURES POLICIES_JSON OUTPUT --source-version VERSION runsfull
+capturedcohort in freshcopies, sameoriginalledger/models, onlyexplicitexecutoroverride, noHostrewrite.
+Firstbefore/actions exact aftercapturedinitialinventorytiming reusedasinput; actualnewtiming separately
+traced. Latertrajectories maydiffer. Priorreadpolicyidentity retained; onlyexecutorclass canchange,
+allotheradmissionfields match. No resetting priorconsumption; defaultreadpathsamepolicycheck.
+6newtests,48related+67read/operation testsPASS; final25affectedretestedaftercached-entrycoverage.
+Includesmulticallnativebatch, secondrequestknownrefs,
+stubnative+scriptedgenerative, zero/failure, full2callx2armCLI. Native-scripted isNOTserviceE0.
+Cachedtoolreentry also retained withoutinventedpolicydecision; HostduplicatecallIDs remainrejected.
+Read e2-frozen-call-protocol-v1. Actualcohort/modelruns/evidencegrading andfixedHostdownstream
+continuation STILLREQUIRED; rawHostprefix/checkpoints retainedforlatter, notimplementedhere.
+Originalactivefit frozenba2bf8d8 unchanged. Midpoint262dev CLOSED860rows: control467/616,
+familymacro.7851971992; main436/616,.7361370347.860inputs/labels/metadata/tokens equal; recomputed
+metrics match. Bothaccepted405, mainonly31, controlonly62, neither118, masked244. Staticmidpoint
+diagnosticONLY; retainpredeterminedfinal524. Latest276/524, stillrunning; do notrestart.
+Comparison3.588921407CPU pendingv14, now195.248007270CPU/8phases, UNSETTLED.
+Untimedtests/authorworknotzero. Read t1-control-seed0-midpoint-v1 manifest.
+
 NEW E3A shared_request_text implemented in currentworktree only; activefrozenba2bf8d8unchanged.
 One pure prose projection replaces task request/query_time/read_goal/retrieval_request; both operation
 and FollowIR training/evaluation useit; liveLaya/generative useexisting state_projection config.

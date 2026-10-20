@@ -1794,6 +1794,10 @@ class FunctionalMemory:
                 )
         return handles
 
+    def _read_admission_policy(self) -> dict[str, Any]:
+        """Identity of the existing per-message read allowance."""
+        return self.policy
+
     def _read(
         self,
         config: RunnableConfig,
@@ -1847,8 +1851,9 @@ class FunctionalMemory:
 
         with self.service._locked():
             old = self.service.store.get(namespace(self.service), key)
-            state = old.value if old else {"binding": bound, "policy": self.policy, "calls": {}}
-            if state["binding"] != bound or state["policy"] != self.policy:
+            policy = self._read_admission_policy()
+            state = old.value if old else {"binding": bound, "policy": policy, "calls": {}}
+            if state["binding"] != bound or state["policy"] != policy:
                 raise FunctionalIntegrityError("V13_5_READ_ADMISSION_CHANGED")
             previous = state["calls"].get(call_id)
             if previous is not None:

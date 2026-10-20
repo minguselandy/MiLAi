@@ -31,6 +31,9 @@ def main() -> None:
     parser.add_argument("--native-probe", action="store_true", help=(
         "E0 only: one named native retrieval call then the original Host answer. "
         "This is interface validation, not autonomous tool-use evaluation."))
+    parser.add_argument("--capture-retrieval-calls", action="store_true",
+                        help="Save each actual pre-call Store/allowance for E2; "
+                             "serial tool execution")
     args = parser.parse_args()
     if args.native_probe and args.transport == "json_action":
         parser.error("--native-probe requires native transport")
@@ -68,6 +71,7 @@ def main() -> None:
         "native_probe": args.native_probe, "planned_positions": sum(
             len(h["requests"]) for h in histories) * len(arms), "completed": [],
         "interfaces": interfaces, "split": args.split,
+        "capture_retrieval_calls": args.capture_retrieval_calls,
         "automatic_retry": False, "source_groups": [h["source_group"] for h in histories],
         "costs": "original continuous ledger; provider and local model traces retained"}
     write_json(args.output / "fixture.json", fixture)
@@ -119,6 +123,8 @@ def main() -> None:
                         **{key: request[key] for key in (
                             "occurred_at", "query_time", "calendar_context") if key in request},
                         control_models=models,
+                        retrieval_snapshots=(args.output / "frozen-retrieval-calls"
+                                             if args.capture_retrieval_calls else None),
                         model_tool_choice=native_probe if args.native_probe else None)
                     row = {**driver["active"], "status": result["status"],
                            "answer": result.get("final_answer"), "error": result.get("error"),
