@@ -1,4 +1,4 @@
-"""Matched soft-CE or acceptable-set loss on two explicitly allocated GPUs.
+"""CE, acceptable-set or reviewed-pair loss on two explicitly allocated GPUs.
 
 All labelled prefixes are used. Normalize within event and then family, so a
 long history or a family with many derived states cannot dominate the objective.
@@ -23,6 +23,7 @@ from evaluate_bounded_laya import score_applicability_predictions, score_predict
 from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.harness.contextual_artifacts import RunBudget, RunLimits
 from milai_lab.providers.laya_local import NativeDecision
+from retrieval_feedback import encoding_row, feedback_counts, pair_loss, score_feedback
 from retrieval_mixture import (
     event_weights,
     mixture_event_weights,
@@ -112,6 +113,10 @@ def compute_counts(run: dict[str, Any], evaluations: dict[str, Counter[str]]) ->
         counts[f"train_component_{component}_rows"] = count
     for component, tokens in run.get("sampled_component_input_tokens", {}).items():
         counts[f"train_component_{component}_input_tokens"] = tokens
+    for key in ("feedback_states", "replay_states", "directional_pairs",
+                "tie_pairs", "unknown_pairs"):
+        if "sampled_" + key in run:
+            counts["train_" + key] = run["sampled_" + key]
     return counts
 
 
@@ -133,7 +138,11 @@ def main() -> None:
     parser.add_argument("--max-len", type=int, default=4096)
     parser.add_argument("--head-max-len", type=int, default=384)
     parser.add_argument("--backend", choices=("native", "linear"), default="native")
-    parser.add_argument("--objective", choices=("soft-ce", "set"), default="soft-ce")
+    parser.add_argument("--objective", choices=("soft-ce", "set", "pair"), default="soft-ce")
+    parser.add_argument("--feedback-target", choices=("answer", "delivery"),
+                        help="Pair objective only; both targets use the same reviewed pair pool")
+    parser.add_argument("--replay-weight", type=float, default=0.25,
+                        help="Relative loss mass of old CE replay under the pair objective")
     parser.add_argument("--task", choices=("bounded_reader", "memory_operation",
                                            "instruction_applicability", "mixed_retrieval"),
                         default="bounded_reader", help="Use task-specific offline decision metrics")
@@ -154,6 +163,13 @@ def main() -> None:
     parser.add_argument("--gradient-checkpointing", action="store_true",
                         help="Recompute encoder activations during backward to reduce memory")
     args = parser.parse_args()
+    if (args.objective == "pair") != (args.feedback_target is not None):
+        parser.error("Pair training requires --feedback-target; CE does not use it")
+    if args.objective == "pair" and (args.task != "memory_operation"
+                                    or not 0 < args.replay_weight < float("inf")):
+        parser.error("Pair feedback uses memory_operation and a positive finite replay weight")
+    if args.objective == "pair" and args.optimizer_updates is None:
+        parser.error("Pair feedback requires an explicit matched optimizer-update budget")
     if (args.task == "mixed_retrieval") != (args.mixture is not None):
         parser.error("mixed_retrieval requires --mixture, and other tasks do not use it")
     if args.mixture is not None and args.optimizer_updates is None:
@@ -177,7 +193,7 @@ def main() -> None:
     args.output.mkdir(parents=True, exist_ok=False)
     started, cpu = time.perf_counter(), time.process_time()
     train = [json.loads(x) for x in (args.data / "train.jsonl").read_text().splitlines()]
-    train = [r for r in train if r["gold"]]
+    train = [r for r in train if r["gold"] or (args.objective == "pair" and "feedback" in r)]
     dev_path = args.dev_data or args.data / "dev.jsonl"
     dev = [json.loads(x) for x in dev_path.read_text().splitlines()]
     if args.task == "memory_operation":
@@ -195,6 +211,13 @@ def main() -> None:
         dev = [project_request_text(row) for row in dev]
     mixture = normalized_mixture(read_json(args.mixture)) if args.mixture is not None else None
     weights = mixture_event_weights(train, mixture) if mixture is not None else event_weights(train)
+    if args.objective == "pair":
+        # Normalize each component by family/event, then apply the declared replay mass.
+        weighted_rows = [{**row, "metadata": {**row["metadata"],
+            "component": "feedback" if "feedback" in row else "operation_replay"}}
+            for row in train]
+        weights = mixture_event_weights(weighted_rows, {
+            "feedback": 1.0, "operation_replay": args.replay_weight})
     stages = training_stages(len(train), args.epochs, args.seed, args.optimizer_updates)
     axis = "epoch" if args.optimizer_updates is None else "optimizer_updates"
     run = {"status": "RUNNING", "pid": os.getpid(), "data": str(args.data.resolve()),
@@ -227,6 +250,15 @@ def main() -> None:
                    mixture=mixture, sampling="uniform shuffled passes over labelled rows",
                    sampled_component_rows={}, sampled_task_rows={},
                    sampled_component_input_tokens={})
+    if args.objective == "pair":
+        run.update(feedback_target=args.feedback_target, replay_weight=args.replay_weight,
+                   feedback_pool=feedback_counts(train, args.feedback_target),
+                   sampling="uniform shuffled passes over retained feedback and old replay rows",
+                   loss_weighting="feedback:replay mass 1:alpha, then family/event; "
+                                  "mean directional pairs within each state",
+                   tie_unknown_sampling="Retained as zero-direction states in both arms",
+                   sampled_feedback_states=0, sampled_replay_states=0,
+                   sampled_directional_pairs=0, sampled_tie_pairs=0, sampled_unknown_pairs=0)
     write_json(args.output / "run.json", run)
     write_json(args.output / "training-plan.json", stages)
     decision: NativeDecision
@@ -254,10 +286,13 @@ def main() -> None:
         if any(r["state_tokens_dropped"] or r["head_tokens_dropped"]
                for records in lengths.values() for r in records):
             raise ValueError("Complete-input audit failed")
-        items, skipped = items_from_rows(tok, train, args.max_len, args.head_max_len)
+        codec_rows = ([encoding_row(row) for row in train]
+                      if args.objective == "pair" else train)
+        items, skipped = items_from_rows(tok, codec_rows, args.max_len, args.head_max_len)
         if skipped or len(items) != len(train):
             raise ValueError(f"Invalid training items: {skipped}")
         encoded = [encode_item(tok, item, args.max_len, args.head_max_len) for item in items]
+        option_orders: list[list[int] | None] = [None] * len(items)
         write_json(args.output / "sampling.json", [
             {"event_id": r["metadata"]["event_id"], "family": r["metadata"]["family"],
              "source_row": r["metadata"]["row"], "weight": w,
@@ -294,6 +329,9 @@ def main() -> None:
                 from milai_lab.methods.memory_control_learning import score_operation_predictions
 
                 result = score_operation_predictions(rows, predictions)
+                if args.objective == "pair":
+                    result["reviewed_branch_pairs"] = score_feedback(
+                        rows, predictions, args.feedback_target)
             elif args.task == "instruction_applicability":
                 result = score_applicability_predictions(rows, predictions)
             elif args.task == "mixed_retrieval":
@@ -319,7 +357,7 @@ def main() -> None:
                 denominator = len(window)
                 optimizer.zero_grad(set_to_none=True)
                 for microbatch in training_microbatches(window, args.micro_batch_size):
-                    indices, batch_items = [], []
+                    indices, batch_items, batch_keys = [], [], []
                     for data_pass, index in microbatch:
                         if encoded_pass != data_pass:
                             if args.shuffle_options:
@@ -341,6 +379,9 @@ def main() -> None:
                             run["data_passes_started"] = data_pass
                         indices.append(index)
                         batch_items.append([encoded[index]])
+                        keys = list(items[index]["q"]["crit"])
+                        order = option_orders[index]
+                        batch_keys.append(keys if order is None else [keys[i] for i in order])
                     batch = collate_items(batch_items, tok.pad_token_id)
                     run["train_batch_attempts"] += 1
                     run["train_offered_rows"] += len(indices)
@@ -348,7 +389,18 @@ def main() -> None:
                     logits = training_forward(model, parallel, batch, decision.device)
                     mask = batch["marker_mask"].to(decision.device)
                     target = batch["target"].to(decision.device)
-                    ce = decision_loss(logits, target, mask, args.objective)
+                    ce = decision_loss(logits, target, mask,
+                                       "soft-ce" if args.objective == "pair" else args.objective)
+                    if args.objective == "pair":
+                        ce = torch.stack([
+                            pair_loss(logits[slot], batch_keys[slot],
+                                      train[index]["feedback"]["comparisons"], args.feedback_target)
+                            if "feedback" in train[index] else ce[slot]
+                            for slot, index in enumerate(indices)])
+                        counts = feedback_counts([train[i] for i in indices], args.feedback_target)
+                        for name in ("feedback_states", "replay_states", "directional_pairs",
+                                     "tie_pairs", "unknown_pairs"):
+                            run["sampled_" + name] += counts.get(name, 0)
                     weighted = ce * torch.tensor([weights[i] for i in indices],
                                                   device=decision.device)
                     loss = weighted.sum() / denominator

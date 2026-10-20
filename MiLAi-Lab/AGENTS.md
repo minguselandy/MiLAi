@@ -71,6 +71,18 @@ Both native runs closed. Encoder advertises8192; single execution feasibility !=
 No default native backend/max_len change yet. Future wrapper must add frozen tools path to sys.path.
 Read data/manifests/host-intent-view-v4-w4-execution-v1.json and execution doc tail.
 
+W5 training support now implemented in current tree (B remains frozen d844):
+tools/train_bounded_laya.py --objective pair --feedback-target answer|delivery, same common rows,
+explicit optimizer budget, pair-only logit difference, mean pairs/state, family/event mass;
+old CE replay relative mass0.25. Tie/unknown rows retained in both sampling plans, no directional
+loss; unreviewed options absent from loss denominator. Dummy uniform SDK codec targets never gold.
+prepare_retrieval_feedback.py connects manual pair reviews to actual capture before/actions,
+matching continuation and closed readouts; unfinished comparisons unknown. Output common pool
+only, not final balanced replay data. No real W5 labels/fits yet.19loss/schedule tests then29feedback/
+mixture/T2 tests passed; Ruff/mypy3files with optional missing model imports ignored; boundaries6.
+Still need actual branch reviews, matched replay selection/update schedule and native execution.
+Do not equate implementation/testing with trained-policy evidence. Tests/review CPU untimed unknown.
+
 NEXT: close/review B own trajectories; prepare actual C branches and matched feedback training;
 W5 same-state branch comparisons and matched continued-CE/answer-only/delivery training stillneeded.
 Use completed T1 mainseed0 common initialization. Broader B–E/E1–E5/STATE remain unfinished.
