@@ -2803,6 +2803,15 @@ def message(
                         "initial_observation"]
                     memory_options["replay_admission_policy"] = replay_retrieval[
                         "admission_policy"]
+                    if replay_retrieval.get("intervention") is not None:
+                        from milai_lab.methods.memory_control import (
+                            FirstActionIntervention,
+                            MemoryAction,
+                        )
+
+                        branch = replay_retrieval["intervention"]
+                        memory_options["control_intervention"] = FirstActionIntervention(
+                            MemoryAction(**branch["first_action"]), branch["continuation_steps"])
             if issubclass(memory_class, FunctionalEditMemory):
                 def dependency_read_call(
                     stage: str, messages: list[dict[str, str]], schema: dict[str, Any],

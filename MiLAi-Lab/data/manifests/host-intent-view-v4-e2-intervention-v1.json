@@ -1,0 +1,55 @@
+{
+  "schema": "host_intent_view_execution_v1",
+  "status": "IMPLEMENTED_MECHANICAL_CHECKS_ONLY",
+  "plan_section": "MILAI_HOST_INTENT_VIEW_DEVELOPMENT_EXPERIMENT_PLAN_20261020_v4.md section 6.2",
+  "base_version": "d97f3547",
+  "entrypoint": "tools/run_frozen_retrieval_calls.py",
+  "scope": "An exact captured initial decision action, followed by declared ordinary-policy continuation and a legal HANDOFF. Not arbitrary intermediate-state restoration.",
+  "recipe": {
+    "capture": "Optional exact directory name from the supplied capture cohort; omitted retains the original full matrix behavior.",
+    "policy": "Existing frozen continuation policy configuration, including checkpoint/projection when applicable.",
+    "intervention": {
+      "first_action": "Full object copied from the actual capture initial_actions; never an invented ID or changed binding.",
+      "continuation_steps": "Nonnegative maximum ordinary decisions after the first action; v4 pilot uses 0, 1 or 2."
+    }
+  },
+  "invariants": [
+    "Original literal request, first before, actual action set and prior usage remain identical.",
+    "Existing control/read/model/return limits remain in force; HANDOFF is not a free step.",
+    "Intervention configuration stays outside model observations and prompts.",
+    "Only continuation invokes the configured controller; all operations retain their actual execution cost.",
+    "Complete return packets use the existing retrieval_packet and original reference mapping.",
+    "Fixed Host readout substitutes only the target actual receipt, preserving other receipts.",
+    "Original capture files and results remain unchanged.",
+    "All input captures remain listed; unselected cases have no outcome or preference label."
+  ],
+  "checks": {
+    "related_regression_passed": 106,
+    "followup_two_step_case": "Added after the 106-case run; all 13 affected-file tests passed.",
+    "static": "Ruff, mypy 5 files, package boundary and tools boundary passed.",
+    "artifacts": [
+      "artifacts/host-intent-retrieval-v3/view-v4-e2-intervention-regression-v1",
+      "artifacts/host-intent-retrieval-v3/view-v4-e2-intervention-check-v2"
+    ],
+    "provider": "Scripted transport with real Store/registered-tool/allowance paths; never model quality evidence."
+  },
+  "real_execution": {
+    "A_positions": 0,
+    "E2_intervention_endpoints": 0,
+    "W5_feedback_training_runs": 0,
+    "next": "A was launched separately after the T1 processes unexpectedly disappeared; review its closed outcomes before selecting real branch states. See the latest execution notes."
+  },
+  "cost": {
+    "new_real_model_calls": 0,
+    "original_ledger_written": false,
+    "interactive_development_and_tests": "Unmeasured, not zero.",
+    "accounting_note": "E2 mechanical checks do not write the original ledger. Separate T1 interruption reconciliation and previous pending-v15 settlement are recorded in their own manifest."
+  },
+  "sha_checks": false,
+  "content_fingerprints": false,
+  "new_services": false,
+  "extra_ledger": false,
+  "subagents": false,
+  "product_changes": false,
+  "full_goal_complete": false
+}

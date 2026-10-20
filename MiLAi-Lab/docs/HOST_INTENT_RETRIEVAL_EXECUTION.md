@@ -1507,3 +1507,78 @@ Product Schema/API/权限/Canonical 未改；新增字段和参数仅在 Lab 研
 `artifacts/host-intent-retrieval-v3/view-v4-a-run-plan-v1.json`，状态仍为
 `PREPARED_NOT_STARTED`。冻结另计父进程 CPU 0.339625977 秒；
 pending-v15 三阶段合计 0.357179422 秒，未结算。
+
+## 2026-10-20 v4：E2 合法首动作与短续跑接线
+
+上一批属于已实现并验证的功能进展。本批实核 T1 coordinator3509227 与 child4032674
+仍在运行；19:58 上海时匹配操作对照 seed1 为 201/524，没有重复启动或中断。
+在串行训练期间，接续计划第 6.2 节，把有限首动作干预接到已有 E2 入口，
+供 A 批真实轨迹形成后直接使用。A 的冻结版本 f31025b0 和运行配置未改变。
+
+`replay_call(..., intervention=...)` 接受两个字段：
+`first_action` 必须是该 capture 的 `initial_actions` 中完整的实际动作对象，
+包括 id、kind、target 和 parameters；`continuation_steps` 为首动作之后普通策略
+最多再决策的步数。计划首轮使用 0、1 或 2。实验参数不进入控制器的 before、选项或 prompt。
+
+控制循环先执行指定的合法动作；随后由原声明策略读取真实操作结果并继续，或在下一步
+选择实际 HANDOFF。没有通过缩小 `max_steps` 伪造“相同 before”：原剩余控制步数、
+读取额度、模型额度、完整返回包额度均保留。干预选择和终止交接使用
+`intervention_first_action` / `intervention_handoff` 记录；中间自主决策仍记录为 policy。
+若原预算先耗尽，就以原 `budget_exhausted` 停止，不再补免费 HANDOFF。
+短续跑策略自己提前交接或原操作出现未知结果时，沿原有停止行为处理。
+普通运行未设置 intervention，维持原投影、动作、预算和交接行为。
+
+现有 `run_frozen_retrieval_calls.py` 的 arm recipe 可以额外声明
+`capture`（实际 capture 目录名）及 `intervention`。因此每个真实 before 可选择不同的
+2–3 个合法动作，而不要求所有请求共用一套动作 ID。原矩阵 recipe 继续可用。
+`cohort.json` 保存全部输入 capture、选中和未选中的索引；未执行状态没有结果标签。
+不允许把现有 ID 配上改写的 query/来源参数，或把无实际初始决策的请求当成合法分支。
+这些是取证对照的动作身份与来源约束，不新增内容指纹或在线审核角色。
+
+检查覆盖真实 SQLite 快照、原注册工具、普通读取和完整 wire 包：
+立即交接/READ 产生不同材料；SEARCH 后 0/1/2 步续跑使用真实返回观察；
+仅剩一步时正确耗尽；错误绑定与零决策不执行；原快照逐字不变。
+两条原调用中只对第一条执行两个分支，固定 Host readout 保留第二条原回执。
+模拟 provider 的请求数逐项匹配：强制首动作和终止交接没有控制器调用，
+实际续跑才产生 1 或 2 次调用，readout 另计。它们是接线检查，不是模型效果或真实费用。
+先有 106 项相关回归通过，补充双步续跑后该文件 13 项检查也通过。
+Ruff、5 文件 mypy、package/tools 边界通过。原始检查目录为 ignored
+`artifacts/host-intent-retrieval-v3/view-v4-e2-intervention-check-v1/v2` 与
+`view-v4-e2-intervention-regression-v1`。
+
+当前能力范围为**已捕获请求的初始决策 before**；任意内部步骤的状态恢复尚未实现，
+不能据此宣称已经完成完整 W5。仍须执行 A、阅读真实材料/Host 结果/成本，再选择真实
+分歧 before，执行小批分支并审阅交付/答案/成本；未执行动作保持 unknown。
+本批没有新真实模型调用、训练标签、偏好训练、外部基准成绩或效率结论。
+原连续账本未写入；交互开发和测试 CPU 未单独测量，继续标为未知，不补零。
+Product Schema/API/权限/Canonical 未改变；没有 SHA 校验、新服务或额外账本。
+
+## 2026-10-20 20:08：T1 中断核对，A 批真实运行已启动
+
+19:58 曾通过 `/proc` 确认 T1 driver3509227/child4032674 活动201/524。
+依据 v4 第1.1节“首片不等待全部 T1 seeds”，原准备在当前阶段自然结束后插入 A，
+但排期命令在第一次 `/proc/3509227/cmdline` 读取时发现进程已经消失，因此尚未执行
+任何排期写入：`stop-after-current`、interposition 与后续 T1 plan 均不存在。
+这不是执行了停止标记后的正常退出。
+
+随后再次核实两个 PID 均不存在，原 exec93571 返回 Unknown process id，GPU 上也没有
+该训练进程。driver/run 原文件仍是 RUNNING，stage log 截止225次更新，mtime20:04；
+没有退出码、异常日志、`compute.json`、`checkpoint` 或 `checkpoint_latest`。
+因此该阶段确认为**进程已停止、训练未完成，原因未知**，没有把旧状态文件当作活动证据，
+没有重写原结果，也没有启动原位置重试。
+
+独立核对记录：
+`artifacts/host-intent-retrieval-v3/t1-control-seed1-interruption-review-v1/review.json`。
+225次更新、3600行、17,888,063训练tokens与1800 batch forwards为最后落盘下限；
+初始dev的860份真实预测另有3,831,246 input tokens。以上通过原 RunBudget 记入原账本
+独立 interrupted-lower-bound phase，同时记录 incomplete/unknown 标志。
+训练、编排 CPU/墙钟总量及最后一次落盘后的工作量未知，不填零，不补猜测。
+模型HTTP计数未改变。已实核空闲时结算此前pending-v15的0.357179422秒CPU，
+本次核对另记0.042519015秒CPU；模型与嵌入账本其他部分保持完全相同。
+
+20:08 使用原已冻结 A 方案 f31025b0 启动真实生成式短流，PID76091、exec91120，
+路径 `artifacts/host-intent-retrieval-v3/view-v4-a-generative-v1/driver.json`。
+首个位置为 memops_A29 / initial，计划8位置，JSON-action、rich、每臂实际Host历史与E2捕获。
+使用原服务、Store和连续账本；当前没有另一实验模型作业。
+原T1对照seed1无可用中间权重，其重做/恢复和后续种子仍需单独安排，完整T1不能称完成。
+下一步继续观察 A，逐条保留首个结果并审阅实际交付、View与Host；活动期间不再离线结算。

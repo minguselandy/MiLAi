@@ -90,6 +90,7 @@ class RetrievalRecorder:
 def replay_call(
     captured: Path, output: Path, policy: dict[str, Any], *, source_version: str,
     models: dict[tuple[Any, ...], Any] | None = None,
+    intervention: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """One new arm from the retained before, reusing the original public-message identity.
 
@@ -107,10 +108,15 @@ def replay_call(
         "status": "RUNNING", "captured_call": str(captured), "source_version": source_version,
         "policy": policy, "automatic_retry": False, "host_request_regenerated": False,
         "scope": "Frozen actual request tool execution; no downstream Host score.",
+        **({"intervention": copy.deepcopy(intervention)} if intervention is not None else {}),
     }
     write_json(output / "replay.json", run)
     entry_budget = None
     try:
+        if intervention is not None:
+            if intervention["first_action"] not in (call["initial_actions"] or []):
+                raise ValueError("Intervention first action is not a captured legal action")
+            call = {**call, "intervention": copy.deepcopy(intervention)}
         root = output / "runtime"
         shutil.copytree(captured / "before", root)
         settings = read_json(root / "input-freeze.json")["config"]

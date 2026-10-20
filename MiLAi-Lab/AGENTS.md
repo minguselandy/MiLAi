@@ -1,5 +1,29 @@
 # CURRENT: v4 View/Host plan activated — 2026-10-20
 
+LATEST20:08Shanghai: A REAL RUN LIVE PID76091/exec91120, source f31025b0,
+artifacts/host-intent-retrieval-v3/view-v4-a-generative-v1/driver.json; initially0/8.
+Revalidate PID and poll the same handle; never restart on observation timeout.
+Original T1driver3509227/child4032674 disappeared by20:05, exec93571unknown.
+Controlseed1 last persisted225/524, no checkpoint/latest/compute or terminal log.
+Cause unknown. No stop marker or interposition plan was written: preparation failed at
+its first /proc read. Raw files keep RUNNING; separate interruption review is authoritative.
+See t1-control-seed1-interruption-v1 manifest. Known lowerbound17888063train tokens+
+3831246dev tokens recorded once in originalledger; CPU/wall totals UNKNOWN, notzero.
+Pending-v15 settled0.357179422CPU atverifiedidle, review0.042519015CPU separately.
+No automatic T1 retry; seed1control/export and seed2 remain incomplete. A is the only model job.
+Do not settle offline work while A lives. Its source/config remain frozen and unchanged.
+
+Newest independent progress: E2 legal first-action + bounded continuation implemented while T1
+remains live. See data/manifests/host-intent-view-v4-e2-intervention-v1.json. replay_call accepts
+intervention={first_action:<exact captured action>,continuation_steps:N}. First action and
+terminal HANDOFF use existing operations/allowances; continuation alone calls the declared policy.
+Original first before/action set stays exact; no reset of control/read/model/return budgets.
+run_frozen_retrieval_calls.py accepts per-arm capture directory selector plus intervention.
+Unselected captures stay listed, never negative labels. Fixed Host readout keeps other batch receipts.
+This is initial-decision branching, not arbitrary intermediate-state restoration or W5 training.
+A frozen f31025b0 inputs remain unchanged; no real A/E2 models or new services launched.
+At19:58Shanghai T1driver3509227/child4032674 were live201/524; latest interruption above supersedes.
+
 User now explicitly requests full execution of
 docs/MILAI_HOST_INTENT_VIEW_DEVELOPMENT_EXPERIMENT_PLAN_20261020_v4.md.
 This supersedes the earlier T1-only/paused scope below. Goal ACTIVE; no completion claim.
@@ -22,7 +46,7 @@ See data/manifests/host-intent-view-v4-a-functional-preparation-v1.json and late
 Preparation/audit0.017553445CPU plus source-freeze0.339625977CPU pending-v15 (0.357179422total);
 untimed author/test work unknown, notzero. Tested source committed/frozen f31025b0; exactargv/env
 in artifacts/host-intent-retrieval-v3/view-v4-a-run-plan-v1.json, PREPARED_NOT_STARTED.
-Next: run A via existing JSON runner after actual T1 serial queue closes,
+Next: follow the now-running A via the existing JSON runner,
 then review actual packets/Host answers/cost and decide W4 vs small real branches. W3 real-run,
 W4–W6/feedback comparisons/E1–E5/external confirmation remain uncompleted. No remote publish.
 

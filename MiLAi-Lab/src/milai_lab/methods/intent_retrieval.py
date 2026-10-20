@@ -33,7 +33,12 @@ from milai_lab.methods.evidence_reading import (
     project_packs,
 )
 from milai_lab.methods.functional_edit_memory import FunctionalEditMemory
-from milai_lab.methods.memory_control import MemoryAction, MemoryControlState, run_memory_control
+from milai_lab.methods.memory_control import (
+    FirstActionIntervention,
+    MemoryAction,
+    MemoryControlState,
+    run_memory_control,
+)
 
 TOOL_DESCRIPTION = (
     "Retrieve evidence from existing memory for your current task. Supply the full query; "
@@ -82,12 +87,14 @@ class IntentRetrievalMemory(FunctionalEditMemory):
                  retrieval_observer: Callable[[dict[str, Any]], None] | None = None,
                  replay_initial_observation: dict[str, Any] | None = None,
                  replay_admission_policy: dict[str, Any] | None = None,
+                 control_intervention: FirstActionIntervention | None = None,
                  **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
         self.retrieval_interface = retrieval_interface
         self.retrieval_observer = retrieval_observer
         self.replay_initial_observation = replay_initial_observation
         self.replay_admission_policy = replay_admission_policy
+        self.control_intervention = control_intervention
         self.policy["retrieval_interface"] = retrieval_interface
 
     def _read_admission_policy(self) -> dict[str, Any]:
@@ -258,12 +265,15 @@ class IntentRetrievalMemory(FunctionalEditMemory):
             usage = {"control_steps": steps, "known_reference_reads": len(known),
                      "operations": steps, "read_operations": steps,
                      "material_budget_rejections": steps}
+            reasons: tuple[str, ...] = (
+                "policy_handoff", "budget_exhausted", "no_available_operation",
+                "operation_outcome_unknown")
+            if self.control_intervention is not None:
+                reasons += ("intervention_handoff",)
             return all(self.token_count(canonical(retrieval_packet(
                 key, list(items.values()), list(items), list(range(len(items))), reason, usage,
                 ok=False)))
-                <= return_limit for reason in (
-                    "policy_handoff", "budget_exhausted", "no_available_operation",
-                    "operation_outcome_unknown"))
+                <= return_limit for reason in reasons)
 
         operations = EvidenceOperations(self.service, state,
             load_pool=lambda: search_pool(request.query, self.source_top_k),
@@ -327,7 +337,8 @@ class IntentRetrievalMemory(FunctionalEditMemory):
         assert self.control_policy is not None
         result = run_memory_control(state, self.control_policy, AdmittedOperations(),
             max_steps=steps, record=record, can_continue=lambda: self.control_available()
-                and bool(self.read_allowance(config)["reads_remaining"]))
+                and bool(self.read_allowance(config)["reads_remaining"]),
+            intervention=self.control_intervention)
         trace = result["trace"]
         saved.update(status="completed", reason=result["reason"],
             materials=list(operations.opened.values()), indices=list(operations.opened),

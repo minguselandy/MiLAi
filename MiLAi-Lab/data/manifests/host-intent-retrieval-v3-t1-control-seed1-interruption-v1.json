@@ -1,0 +1,46 @@
+{
+  "status": "PROCESSES_ABSENT_INCOMPLETE_STAGE",
+  "observed_at": "2026-10-20T20:07:51+0800",
+  "pids_absent": [
+    3509227,
+    4032674
+  ],
+  "original_driver_status": "RUNNING",
+  "original_run_status": "RUNNING",
+  "last_persisted_updates": 225,
+  "planned_updates": 524,
+  "checkpoint_exists": false,
+  "latest_checkpoint_exists": false,
+  "compute_file_exists": false,
+  "cause": "Unknown; no terminal log or exit status. Original exec93571 is no longer registered.",
+  "scheduling_stop_marker_written": false,
+  "known_compute_lower_bound": {
+    "train_sequence_rows": 3600,
+    "train_input_tokens": 17888063,
+    "train_batch_forwards": 1800,
+    "train_device_forwards": 3600,
+    "train_batch_attempts": 1800,
+    "train_offered_rows": 3600,
+    "train_offered_tokens": 17888063,
+    "optimizer_updates_completed": 225,
+    "dev_forwards": 860,
+    "dev_input_tokens": 3831246,
+    "interrupted_runs": 1,
+    "incomplete_accounting_runs": 1,
+    "cpu_seconds_unknown_runs": 1,
+    "wall_seconds_unknown_runs": 1,
+    "coordinator_cpu_seconds_unknown_runs": 1
+  },
+  "ledger_phase": "host_intent_t1_matched_operation_control_seed1_v1_interrupted_lower_bound_v1",
+  "unknown_cost": "Training and coordinator CPU/wall totals, plus work after the last persisted update, are unavailable. These fields are not entered as zero.",
+  "T1_completion": "Control seed1 remains incomplete; no usable fitted checkpoint. Later stages unstarted. No automatic retry.",
+  "next": "Run v4 A from the already frozen seed-independent generative config; preserve this partial fit as interrupted.",
+  "review_compute": {
+    "wall_seconds": 0.04254102148115635,
+    "cpu_seconds": 0.04251901499999999
+  },
+  "ledger_recorded": true,
+  "settled_prior_pending_cpu_seconds": 0.357179422,
+  "artifact": "artifacts/host-intent-retrieval-v3/t1-control-seed1-interruption-review-v1/review.json",
+  "original_files_unchanged": true
+}

@@ -18,6 +18,18 @@ class MemoryAction:
     parameters: dict[str, Any] = field(default_factory=dict)
 
 
+@dataclass(frozen=True)
+class FirstActionIntervention:
+    """One actual bound action, then a bounded number of ordinary policy decisions."""
+
+    first_action: MemoryAction
+    continuation_steps: int = 0
+
+    def __post_init__(self) -> None:
+        if self.continuation_steps < 0:
+            raise ValueError("Intervention continuation steps must be nonnegative")
+
+
 @dataclass
 class MemoryControlState:
     task: dict[str, Any]
@@ -47,6 +59,7 @@ def run_memory_control(
     max_steps: int = 8,
     record: Callable[[dict[str, Any]], None] = lambda event: None,
     can_continue: Callable[[], bool] = lambda: True,
+    intervention: FirstActionIntervention | None = None,
 ) -> dict[str, Any]:
     """Each next decision sees the completed operation, never a predicted result."""
     reason = "budget_exhausted"
@@ -66,17 +79,30 @@ def run_memory_control(
         record({"phase": "decision_input", **copy.deepcopy(event)})
         started = time.perf_counter()
         forced = len(actions) == 1
-        selected = actions[0].id if forced else policy.choose(state, actions)
+        intervened = intervention is not None and (
+            step == 0 or step > intervention.continuation_steps)
+        if intervened:
+            assert intervention is not None
+            requested = (intervention.first_action if step == 0 else
+                         next(a for a in actions if a.kind == "HANDOFF"))
+            if requested not in actions:
+                raise ValueError("Intervention action is unavailable with these bindings")
+            selected = requested.id
+            selection_mode = "intervention_first_action" if step == 0 else "intervention_handoff"
+        else:
+            selected = actions[0].id if forced else policy.choose(state, actions)
+            selection_mode = "only_available_action" if forced else "policy"
         # The sole action boundary binds the returned ID to actual supplied parameters.
         action = next((a for a in actions if a.id == selected), None)
         if action is None:
             raise ValueError(f"Unknown memory operation ID: {selected}")
         event.update(selected=selected,
-                     selection_mode="only_available_action" if forced else "policy",
+                     selection_mode=selection_mode,
                      control_wall_seconds=time.perf_counter() - started)
         record({"phase": "decision_output", **copy.deepcopy(event)})
         if action.kind == "HANDOFF":
-            reason = "no_available_operation" if forced else "policy_handoff"
+            reason = ("intervention_handoff" if intervened else
+                      "no_available_operation" if forced else "policy_handoff")
             trace.append(event)
             break
         started = time.perf_counter()
