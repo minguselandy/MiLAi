@@ -7,6 +7,7 @@ from dataclasses import dataclass
 from typing import Any
 
 from milai_lab.memory.literal_projection import project_observation_state
+from milai_lab.memory.request_text import project_request_text
 from milai_lab.methods.memory_control import MemoryAction, MemoryControlState
 
 INSTRUCTIONS = (
@@ -37,8 +38,9 @@ def project_operation_payload(payload: dict[str, Any], projection: str) -> dict[
     """Project matched training/live inputs; task and actual operation options stay fixed."""
     if projection == "full":
         return payload
-    if projection == "shared":
-        return {**payload, "state": project_observation_state(payload["state"])}
+    if projection in {"shared", "shared_request_text"}:
+        shared = {**payload, "state": project_observation_state(payload["state"])}
+        return project_request_text(shared) if projection == "shared_request_text" else shared
     if projection != "mechanical":
         raise ValueError(f"Unknown operation state projection: {projection}")
 

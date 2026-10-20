@@ -128,7 +128,10 @@ def test_actual_return_budget_and_call_replay(tmp_path):
             "limits": {"max_control_steps": 0}}))["usage"]["control_steps"] == 0
 
 
-def test_model_instance_shared_across_host_messages_but_calls_charged_separately(monkeypatch):
+@pytest.mark.parametrize("projection", ["full", "shared_request_text"])
+def test_model_instance_shared_across_host_messages_but_calls_charged_separately(
+    monkeypatch, projection,
+):
     import sys
 
     loaded, charges, admissions = [], [], []
@@ -140,13 +143,19 @@ def test_model_instance_shared_across_host_messages_but_calls_charged_separately
 
         def predict(self, payload):
             self.counters["forwards"] += 1
+            task = payload["state"]["task"]
+            if projection == "shared_request_text":
+                assert task == {"request_text": 'The search query is the text "query".'}
+            else:
+                assert task == {"request": "query"}
             return {"choice": "handoff"}
 
     monkeypatch.setitem(sys.modules, "torch", SimpleNamespace(set_num_threads=lambda _: None))
     monkeypatch.setattr("milai_lab.runners.memory_control.NativeDecision", Model)
     pool = {}
     for message in range(2):
-        policy = memory_policy({"policy": "laya", "checkpoint": "test", "device": "cpu"},
+        policy = memory_policy({"policy": "laya", "checkpoint": "test", "device": "cpu",
+                                "state_projection": projection},
             SimpleNamespace(record_compute=lambda phase, values: charges.append((phase, values))),
             call=lambda *_: {}, admit=lambda m=message: admissions.append(m), record=lambda _: None,
             models=pool)

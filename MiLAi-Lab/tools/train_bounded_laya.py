@@ -139,7 +139,8 @@ def main() -> None:
                         default="bounded_reader", help="Use task-specific offline decision metrics")
     parser.add_argument("--mixture", type=Path,
                         help="Component loss masses for mixed_retrieval; draws stay uniform")
-    parser.add_argument("--operation-state", choices=("full", "mechanical", "shared"),
+    parser.add_argument("--operation-state", choices=(
+                            "full", "mechanical", "shared", "shared_request_text"),
                         default="full",
                         help="Retrain with the same operation-state projection used in the Host")
     parser.add_argument("--evaluate-train", action="store_true",
@@ -187,6 +188,11 @@ def main() -> None:
     elif args.task == "mixed_retrieval":
         train = [project_mixed_row(row, args.operation_state) for row in train]
         dev = [project_mixed_row(row, args.operation_state) for row in dev]
+    elif args.task == "instruction_applicability" and args.operation_state == "shared_request_text":
+        from milai_lab.memory.request_text import project_request_text
+
+        train = [project_request_text(row) for row in train]
+        dev = [project_request_text(row) for row in dev]
     mixture = normalized_mixture(read_json(args.mixture)) if args.mixture is not None else None
     weights = mixture_event_weights(train, mixture) if mixture is not None else event_weights(train)
     stages = training_stages(len(train), args.epochs, args.seed, args.optimizer_updates)

@@ -1,5 +1,16 @@
 # CURRENT 2026-10-20: matched T1 operation-only control seed0 RUNNING
 
+NEW E3A shared_request_text implemented in currentworktree only; activefrozenba2bf8d8unchanged.
+One pure prose projection replaces task request/query_time/read_goal/retrieval_request; both operation
+and FollowIR training/evaluation useit; liveLaya/generative useexisting state_projection config.
+Otherobservations/knownbodies/feedback/questions/actions/gold/masks/metadata unchanged. Runtime still
+usesoriginalrequest forsearch,refs,limits. Arbitraryextensions/types/nulls/emptycontainers/order kept.
+3newmechanicaltests+41related, then14affected+2evaluatorchecks PASS; Ruff/mypy4files/boundariesPASS.
+Read e3-request-text-protocol-v1 manifest: allT1data,samebase,524updates,seeds0/1/2, ownretraining.
+Actualtextfits/effectiveness NOTstarted. tools/audit_request_text.py full6728input+tokenizer audit
+next; no weights/models. AppendCPUtopendingv14, no settlementwhilePID2670549runs.
+Lastverifiedcontrol149/524, stillsoleactualmodeljob. Previousturnmadecode/testprogress.
+
 ACTIVE MODEL JOB PID2670549 / exec8252 / frozen-ba2bf8d8.
 fitting/t1-matched-operation-control-seed0-v1/run.json;524plannedupdates, same multilingualbase,
 native/fullencoder/shared,float32,micro2/accum8,gradientcheckpoint/optionshuffle.2762labelledtrain,

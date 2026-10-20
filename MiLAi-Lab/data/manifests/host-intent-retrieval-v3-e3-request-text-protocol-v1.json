@@ -1,0 +1,58 @@
+{
+  "status": "IMPLEMENTED_INPUT_AUDIT_PENDING_RETRAINING_NOT_STARTED",
+  "plan_requirement": "Section10.5A: retrained structured request versus equal-information prose, using corresponding train/live forms.",
+  "data": "artifacts/host-intent-retrieval-v3/data/t1-fitting-v1",
+  "structured_projection": "shared",
+  "text_projection": "shared_request_text",
+  "implementation": [
+    "src/milai_lab/memory/request_text.py",
+    "src/milai_lab/methods/laya_memory_policy.py",
+    "tools/retrieval_mixture.py",
+    "tools/train_bounded_laya.py",
+    "tools/evaluate_bounded_laya.py"
+  ],
+  "representation": {
+    "scope": "Current task request, query_time, normalized read_goal and retrieval_request become one prose string. All explicitly supplied fields, arbitrary extensions, nested objects, list order, empty containers, nulls, exact strings and scalar types remain. Both operation and FollowIR applicability tasks use this representation.",
+    "wording": "Deterministic English sentences with literal quoted values; no model paraphrase or interpretation. Named details and ordered items preserve containment. This tests this declared prose serialization, not every possible natural-language expression.",
+    "unchanged": "All source observations, actual feedback, candidate/action criteria, questions, known-evidence bodies, gold, masks, metadata, source groups, row order and state_ids. Historical view provenance stays the same observation in both arms.",
+    "runtime": "Only model payload changes. Raw tool request still resolves references, searches and enforces limits. No extra Host call. Existing default projections unchanged."
+  },
+  "matching": {
+    "initialization": "Same multilingual base as T1 structured main; not warm-started from the structured final checkpoint.",
+    "optimizer_updates": 524,
+    "effective_batch": 16,
+    "row_draws": 8384,
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "task": "mixed_retrieval",
+    "backend": "native",
+    "objective": "soft-ce",
+    "micro_batch_size": 2,
+    "gradient_accumulation": 8,
+    "gradient_checkpointing": true,
+    "precision": "float32",
+    "shuffle_options": true,
+    "max_len": 12288,
+    "head_max_len": 2048,
+    "loss_mixture": {
+      "operation_history": 0.6,
+      "complementary_evidence": 0.2,
+      "instruction_applicability": 0.2
+    },
+    "source_recipe": "host-intent-retrieval-v3-t1-fitting-plan-v1.json",
+    "selection": "Predetermined final524; initial/mid/final dev and finaltrain diagnostics. Same row schedules and option seeds; report different actual token/compute costs."
+  },
+  "audit": {
+    "tool": "tools/audit_request_text.py",
+    "expected_raw_rows": 6728,
+    "scope": "Independently decode prose to original request fields; direct full equality after restoration, plus tokenizer lengths and SDK labelled-item acceptance for all train/dev rows. No SHA/content fingerprints; no model loads/forwards."
+  },
+  "validation": "3new tests cover arbitrary extension types/literals, shared live/export/mixture/generative inputs and real SQLite known-reference/limit behavior. Runtime model-pool stub and exported-checkpoint evaluator exercised for the new projection. Related41 tests then affected14 and evaluator2 pass; Ruff,mypy4files,package/toolsboundary pass.",
+  "limitations": "This is implementation/preparation, not retraining or E3 efficacy. Actual text-arm fits, downstream matched evaluations, E3B, T2, seeds, finalE1/reserved,E2,E4full,E5,additionalHost,nativeE0 remain.",
+  "accounting": "CPU audit will append pendingv14, no settlement while actual control PID2670549 lives.",
+  "original_ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+  "no_checksums": true
+}

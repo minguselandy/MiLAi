@@ -82,13 +82,14 @@ def combine_components(components: list[dict[str, Any]]) -> tuple[
 
 
 def project_mixed_row(row: dict[str, Any], projection: str) -> dict[str, Any]:
+    from milai_lab.memory.request_text import project_request_text
     from milai_lab.methods.laya_memory_policy import project_operation_payload
 
     task = row["metadata"]["task"]
     if task == "memory_operation":
         return project_operation_payload(row, projection)
     if task == "instruction_applicability":
-        return row
+        return project_request_text(row) if projection == "shared_request_text" else row
     raise ValueError(f"Unsupported retrieval training task: {task}")
 
 
