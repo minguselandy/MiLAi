@@ -1,0 +1,15 @@
+{
+  "status": "SETTLED_ONCE_AT_VERIFIED_IDLE",
+  "ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+  "measurement_file": "artifacts/host-intent-retrieval-v3/data/pending-offline-review-v28.json",
+  "phases": 3,
+  "total_cpu_seconds": 0.046493849999999996,
+  "generation_embedding_unchanged": true,
+  "verified_closed_pids": [
+    2287617,
+    2287649,
+    2306526,
+    2325174
+  ],
+  "native_and_eval_parent_compute": "Already directly recorded; not counted again."
+}

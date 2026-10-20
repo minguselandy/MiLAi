@@ -1,0 +1,180 @@
+{
+  "status": "THREE_PERSISTED_FINAL_CHECKPOINTS_VALIDATED",
+  "source_version": "ae3950f2",
+  "arms": [
+    {
+      "arm": "continued-ce",
+      "status": "PERSISTED_FINAL_CHECKPOINT_VALIDATED",
+      "inputs": 860,
+      "loaded_dtype": "torch.float32",
+      "changes": 1,
+      "max_logit_delta": 0.21463966369628906,
+      "metrics": {
+        "counts": {
+          "labelled": 616,
+          "accepted": 450,
+          "masked": 244,
+          "handoff_outside_reviewed_preference": 41
+        },
+        "strata": {
+          "source_reviewed_preference": {
+            "labelled": 616,
+            "accepted": 450
+          }
+        },
+        "selected_operations": {
+          "SEARCH": {
+            "selected": 113,
+            "accepted": 112
+          },
+          "READ": {
+            "selected": 373,
+            "accepted": 249
+          },
+          "HANDOFF": {
+            "selected": 130,
+            "accepted": 89
+          }
+        },
+        "families": 32,
+        "family_macro_acceptance": 0.749538909329531,
+        "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+      },
+      "compute": {
+        "wall_seconds": 290.5999974301085,
+        "cpu_seconds": 485.26144910200003,
+        "runs": 1,
+        "forwards": 860,
+        "sequence_rows": 860,
+        "input_tokens": 3831246,
+        "state_tokenizations": 860,
+        "state_tokens": 3491132,
+        "peak_rss_kib": 2808828,
+        "ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json"
+      },
+      "output": "artifacts/host-intent-retrieval-v3/view-v4-persisted-continued-ce-seed0-v1"
+    },
+    {
+      "arm": "answer",
+      "status": "PERSISTED_FINAL_CHECKPOINT_VALIDATED",
+      "inputs": 860,
+      "loaded_dtype": "torch.float32",
+      "changes": 0,
+      "max_logit_delta": 0.0855633020401001,
+      "metrics": {
+        "counts": {
+          "labelled": 616,
+          "accepted": 447,
+          "masked": 244,
+          "handoff_outside_reviewed_preference": 31
+        },
+        "strata": {
+          "source_reviewed_preference": {
+            "labelled": 616,
+            "accepted": 447
+          }
+        },
+        "selected_operations": {
+          "SEARCH": {
+            "selected": 115,
+            "accepted": 113
+          },
+          "READ": {
+            "selected": 385,
+            "accepted": 251
+          },
+          "HANDOFF": {
+            "selected": 114,
+            "accepted": 83
+          },
+          "USE_VIEW": {
+            "selected": 1,
+            "accepted": 0
+          },
+          "REFRESH_VIEW": {
+            "selected": 1,
+            "accepted": 0
+          }
+        },
+        "families": 32,
+        "family_macro_acceptance": 0.7553505427311435,
+        "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+      },
+      "compute": {
+        "wall_seconds": 287.4964173529297,
+        "cpu_seconds": 475.281962783,
+        "runs": 1,
+        "forwards": 860,
+        "sequence_rows": 860,
+        "input_tokens": 3831246,
+        "state_tokenizations": 860,
+        "state_tokens": 3491132,
+        "peak_rss_kib": 2817004,
+        "ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json"
+      },
+      "output": "artifacts/host-intent-retrieval-v3/view-v4-persisted-answer-seed0-v1"
+    },
+    {
+      "arm": "delivery",
+      "status": "PERSISTED_FINAL_CHECKPOINT_VALIDATED",
+      "inputs": 860,
+      "loaded_dtype": "torch.float32",
+      "changes": 2,
+      "max_logit_delta": 0.08479690551757812,
+      "metrics": {
+        "counts": {
+          "labelled": 616,
+          "accepted": 439,
+          "masked": 244,
+          "handoff_outside_reviewed_preference": 37
+        },
+        "strata": {
+          "source_reviewed_preference": {
+            "labelled": 616,
+            "accepted": 439
+          }
+        },
+        "selected_operations": {
+          "SEARCH": {
+            "selected": 115,
+            "accepted": 112
+          },
+          "READ": {
+            "selected": 377,
+            "accepted": 241
+          },
+          "HANDOFF": {
+            "selected": 123,
+            "accepted": 86
+          },
+          "USE_VIEW": {
+            "selected": 1,
+            "accepted": 0
+          }
+        },
+        "families": 32,
+        "family_macro_acceptance": 0.7442835119373815,
+        "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+      },
+      "compute": {
+        "wall_seconds": 283.64091656915843,
+        "cpu_seconds": 469.472319954,
+        "runs": 1,
+        "forwards": 860,
+        "sequence_rows": 860,
+        "input_tokens": 3831246,
+        "state_tokenizations": 860,
+        "state_tokens": 3491132,
+        "peak_rss_kib": 2799024,
+        "ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json"
+      },
+      "output": "artifacts/host-intent-retrieval-v3/view-v4-persisted-delivery-seed0-v1"
+    }
+  ],
+  "model_inputs": 2580,
+  "truncations": 0,
+  "selection": "Predeclared final10; no weight selection or repair after serialization differences.",
+  "scope": "Reloaded static operation-preference diagnostics, not Host task success.",
+  "result_file": "artifacts/host-intent-retrieval-v3/view-v4-persisted-final-comparison-v1.json",
+  "driver": "artifacts/host-intent-retrieval-v3/view-v4-persisted-evaluations-v1/driver.json"
+}

@@ -19,10 +19,11 @@ optionorders/optimizer exactequal;81feedback79replaydraws each. NativeCPU3586.28
 Finalinprocessdev450/447/440 acceptedof616 (+244masked). NotHostefficacy;no bestcheckpointselection.
 Training-side cross-target savedfinalpredictions: bothanswer26/27; delivery47/56(answerarm) vs
 51/56(deliveryarm). No extra forwards, notheldout. view-v4-training-cross-target-v1.json.
-Persistedreload RUNNING driver2287617/exec56236; CE/answer validated860 each (1/0choicechanges).
-Currentchild2325174 delivery (revalidateactualdriver/PID). CEscore450/616 unchangedafterreload.
+Persistedreload CLOSED driver2287617/exec56236 exit0/allchildrenabsent;3x860complete,notruncation.
+CE/answer/delivery changedchoices1/0/2; reloadeddev450/447/439 of616,244masked each.
+Actualsavedfinals validated; currentno active modeljob atlatestboundary.
 Authoritative view-v4-persisted-evaluations-v1/driver.json; same860dev, corefrozenae3950f2.
-Do not start anothermodeljob oroffline settlement. Current D/STATE plans remainunstarted.
+D remainsunstarted. STATE firstmodelpilot nowCLOSED as below; no retry/oldresultrepair.
 ContinuedCE CLOSED10updates160rows821606tokens;773.021042636wall/1181.609250961CPU directledger.
 CEfinal860dev450/616accepted244masked;encoder/headchanged,completeinputs. completion-audit.json saved.
 Thisisin-processstaticdiagnostic,notreloadedcheckpoint/Hostevidence. Answertrain160rows872537tokens.
@@ -35,23 +36,31 @@ Preservefailures, final10notbestdevcheckpoint. Afterfits, evaluatepersistedfinal
 D matched10arm plan view-v4-d-plan-v2.json READY_PREPARATION_ONLY:64positions/arm,640total.
 Addsview_cache/MemPursuit beforeanyDoutcome; original8armv1 retainedunexecuted.
 All10usefrozen-baselines-11798c8d/MiLAi-Lab; sameoldHostprompt,owncoldstreams; notrunning.
-Pendingv27 SETTLED2.076517171CPU atverifiedidle;8phases. pendingv28 UNSETTLED containsDv2preparation; nooffline settlement whileevaldriveractive.
+Pendingv27 SETTLED2.076517171CPU atverifiedidle;8phases. pendingv28 SETTLED0.046493850CPU/3phases afterevalclose. Newpendingv29 UNSETTLED authorreviewassembly.
 TrainingqueueparentCPU/import/freezearchiveoverhead unknown.
 Persisted3arm evaluation view-v4-persisted-evaluation-plan-v1.json NOWRUNNING as above.
 STATEbridge implemented in runners/state_bench_adapter.py; runner tools/run_state_bench_local_pilot.py.
-STATEsourcefrozen d4c1692d at frozen-state-d4c1692d/MiLAi-Lab; executableplan
-view-v4-state-local-pilot-plan-v1.json NOTSTARTED, noHTTP/models yet.
+STATEsourcefrozen e19ae28f at frozen-state-e19ae28f/MiLAi-Lab; planv2 addsbefore/after/diff
+retention onlatermodelerrors beforeanytrial. Oldd4/v1neverexecuted. Actualpilotv1 output
+view-v4-state-local-travel-pilot-v1 CLOSED PID2357783/exec45776 exit0.10HTTP35155tokensunknown0,
+1.827245609CPU47.648076918wall directledger. Hook1,EMPTY63tokenreceipt: context_0/context_2
+wholehistoricalconversation budgetreject2; observedrange dedup removeslaterREAD. RealBK1000cancel
+fee52/refund298 afteruserconfirmation, BK1001connection missed=>deterministicstatescore0.
+NoLLMjudge/officialscore. Functionalreceipttransportworks, substantiveevidencedeliveryNOTcomplete.
+Preservefirstresult; next inspectsmallerexistingpacks/pagedsourceREAD generally, nohiddenrequirements
+orcase-specificanswers injected. Authorreview-v1 andstate-local-pilot-results-v1 manifest authoritative.
 OriginalSDK import failed missingazure; separate upstream/state-bench-local-research-v1/source moves
 optionalAzureimportinsidecredentialbuilder only. Originaluntouched,patch indata/fixtures.
 Python3.11 imports + actualupstreamharness/realStore/registeredtool/realhotelwrite passed with
 SCRIPTEDHTTP throughactualJSONactionbridge.4adapter+24retrievalregressions+6boundaries,Ruff/mypy.
-Not actualmodelSTATEresult. FlatResponses tools convertedtonestedChat schemas; hidden summary/
+First actualmodelSTATEresult nowrecorded above; failedtask/emptydelivery retained. FlatResponses
+tools convertedtonestedChat schemas; hidden summary/
 requirements/config/descriptivetaskIDexcluded. Runtimeusesopaquesession; offlineidentitiesretained.
 Genericoptionalreturn_envelope countsfullwrappedpacketbeforeselection andfinalcheck; defaultunchanged.
 STATEtravelpilot selectedfirstofficialtraintask1 beforebodyinspection; memoryothertrain2/3only,
 46actualpublicsourceevents,owntrajectoryexcluded,unknownoriginaltimes. Preparation under
 view-v4-state-travel-pilot-preparation-v1. No testtaskcontentsread. Actor/scorer separation explicit.
-Nextaftercurrentmodelqueue: persistedfinals, localSTATEfunctionalpilot, Dmatchedflows. STATEpilot
+NEXT: resolveSTATEempty-materialfunctionalpath, then Dmatchedflows. STATEpilot
 usesfixed_context,existingQwenHost/simulator,originalupstreamprompts/tools,deterministicstatescore;
 noofficialGPT5.4/five-run claim,LLMjudgeNOTRUN. NeverinvokeofficialCLI/SHAvalidation.
 Simplebaselines implemented: view_cache scopeoverlap.35/reads4, eagerarrivalrefresh, boundoriginalREAD.

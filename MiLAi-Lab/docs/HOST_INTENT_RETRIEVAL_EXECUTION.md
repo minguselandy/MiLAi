@@ -2112,3 +2112,14 @@ STATE原版因缺少azure.identity无法导入；未安装依赖或更改原版�
 D在任何D结果产生前增补两项规划基线，v2为10臂×64位置=640位置；保留原8臂v1未执行配方。全部使用冻结核心11798c8d，同原Host提示、来源顺序、独立冷缓存和2048/8额度。缓存阈值0.35、MemPursuit读取上限4及上游自适应默认值均提前固定。MemPursuit使用已有7861 embedding服务及原ledger，不增加服务。v2仍未执行，见data/manifests/host-intent-view-v4-d-comparison-preparation-v2.json。
 
 复用两反馈臂已保存的训练侧最终输出作交叉目标诊断：两者答案偏好均26/27，交付偏好分别47/56（answer臂）与51/56（delivery臂）。无新增模型forward；这是训练侧拟合检查，不能用作泛化或Host收益结论。重载评测已完成CE与answer各860输入验证，选择变化分别1与0；CE旧标签总分仍450/616。delivery重载仍在运行。
+
+
+## 2026-10-21：持久化权重验证闭合与首次STATE模型试跑
+
+三臂持久化权重均完成860个相同完整输入，合计2580次forward，无截断/非有限输出。与进程内最终输出相比，CE/answer/delivery分别有1/0/2个选择变化，保留差异，不重写权重。重载旧操作dev分别450/616、447/616、439/616；delivery进程内440/616不替代重载结果。各子评测和父级编排已直接记原ledger，v28离线三项0.046493850秒CPU在确认所有评测进程退出后结算。索引为data/manifests/host-intent-view-v4-persisted-final-results-v1.json。
+
+启动STATE前另补通用失败留存：公开sandbox由外层持有，正常结束或后续模型失败均保存before/after/diff。真实酒店写入后人为读出失败的测试通过，错误继续传播；源码冻结e19ae28f，原d4试跑计划从未执行。
+
+首次STATE训练题模型试跑已实际闭合（PID2357783/exec45776退出0）：现有Qwen Host＋原旅行simulator提示的本地Qwen研究变体，10次HTTP/35155生成tokens，unknown增量0，47.648076918秒墙时、1.827245609秒CPU均原ledger直接记录。工具hook被调用一次，公开harness随后实际查询、预览并在模拟用户确认后取消BK-1000，手续费52/退款298。
+
+任务确定性状态评分为0：连接航班BK-1001未取消，缺少状态、手续费50与退款130三项。另有独立交付问题：fixed_context先读两个完整历史会话，两次超过2048外层包额度；内容进入observed未进入selected，范围去重随后不再提供READ，最终只返回63-token空回执。注册/传输/实际sandbox操作已通，但真实MiLAi材料支持未通，不能称功能成功。没有LLM任务/UX评分，更不是官方GPT-5.4五次运行成绩。原始输出和失败均保留，后续只从通用材料粒度/合法动作改进，不能把连接航班答案或隐藏要求注入方法。索引：data/manifests/host-intent-view-v4-state-local-pilot-results-v1.json。
