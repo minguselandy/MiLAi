@@ -29,9 +29,10 @@ Plan view-v4-three-fits-plan-v1.json. No secondmodeljob oroffline settlement whi
 Pendingv26 SETTLED233.078499720CPU once atverifiedidle,16phases; HTTP unchanged,firstC alreadyv25.
 Currentfits use existingCUDAenv,physical2,3,microbatch1/checkpointing,MHAfastpathfalse,16k/head2048.
 Preservefailures, final10notbestdevcheckpoint. Afterfits, evaluatepersistedfinals thenexecuteD.
-D matched8arm plan view-v4-d-plan-v1.json READY_PREPARATION_ONLY:64positions/arm,512total.
-SameoldHostprompt, owncoldstreams, newcommonwire/sourceae3950f2; notrunning.
-Pendingv27 SETTLED2.076517171CPU atverifiedidle;8phases. Newmeasuredwork starts pendingv28.
+D matched10arm plan view-v4-d-plan-v2.json READY_PREPARATION_ONLY:64positions/arm,640total.
+Addsview_cache/MemPursuit beforeanyDoutcome; original8armv1 retainedunexecuted.
+All10usefrozen-baselines-11798c8d/MiLAi-Lab; sameoldHostprompt,owncoldstreams; notrunning.
+Pendingv27 SETTLED2.076517171CPU atverifiedidle;8phases. pendingv28 UNSETTLED containsDv2preparation; nooffline settlement whileevaldriveractive.
 TrainingqueueparentCPU/import/freezearchiveoverhead unknown.
 Persisted3arm evaluation view-v4-persisted-evaluation-plan-v1.json NOWRUNNING as above.
 STATEbridge implemented in runners/state_bench_adapter.py; runner tools/run_state_bench_local_pilot.py.
@@ -54,7 +55,7 @@ Simplebaselines implemented: view_cache scopeoverlap.35/reads4, eagerarrivalrefr
 37trainbeforelegal35REFRESH2READ, nosemanticlabelsused/no modelresults. Sourceintervals unchanged.
 MemPursuitPool upstreamselect NumPy/adaptive/defaulttol, cap4, existingmeteredBGE; alllegalcandidates
 remain, PursuitPolicyreadsselectedprefix. Metadata control_pool_selected is algorithmchoice,notgold.
-34tests+6boundaries+standaloneimportretest/Ruff/mypy passed. BaselineDconfiguration pending.
+34tests+6boundaries+standaloneimportretest/Ruff/mypy passed. Dv2configuration frozenbeforeD.
 Upstream versions: MemPursuit5138dd0,Coalent7edc7ee,GAM565db2c; sources underupstream/*-source-v1.
 StandaloneMemPursuit pathupstream/mempursuit-standalone-v1 avoids mem0namespace. No benchmarkdataread.
 Coalent/GAM stillnotintegrated. Baseline/manifestsimple-baselines-v1 haslimits/cost/remainingwork.
