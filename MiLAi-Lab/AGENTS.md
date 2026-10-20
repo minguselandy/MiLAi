@@ -1,11 +1,33 @@
-# CURRENT 2026-10-20: full T1 seed0 FIT RUNNING
+# CURRENT 2026-10-20: T1 seed0 fit CLOSED; persisted-checkpoint validation RUNNING
 
-ACTIVE MODEL FIT PID2070802 / exec15108 / frozen-ba2bf8d8.
-fitting/t1-native-shared-seed0-v1/run.json,524plannedupdates;dispatch t1-fit-seed0-dispatch-v1.json.
-Same fullT1 data/native/base recipe below, GPU2/3, initial/mid/finaldev+finaltrain.
-RevalidatePID/authoritative run; pollsameexec. No restart on timeout, no secondactualmodeljob
-or offline settlement while live. Inspect terminal/exportvalidation before nextcontrol orseed.
-Dev PID1918885/exec94959 CLOSED52, exit0/absentPID. Do not restart closed collections.
+ACTIVE MODEL JOB PID2631774 / exec49953 / frozen-ba2bf8d8.
+evaluations/t1-seed0-export-validation-v1/run.json, all1209dev inputs; last656completed.
+RevalidatePID/run andpollsamehandle; no restart ontimeout, no secondactualmodeljob oroffline
+settlement whilelive. Compare exactpublicinputs/predictions/metrics withfitdev524 afterclose,
+then launchregistered matched operation-only control seed0 (samebase/524updates), not oldT0replay.
+Mainfit PID2070802/exec15108 CLOSED exit0/absentPID, finalcheckpoint exists andboth parameterprobeschanged.
+524updates/8384draws/28392562trainingtokens; finaldev op446/616 macro.7538688, FollowIR316/349
+macro.9024896. Finaltrain op2505/2762,FollowIR1426/1427. Predeterminedfinalweights unchanged even
+though FollowIRmidpoint319/349 washigher. Wholefit7982.539331wall/13526.082441CPU exactlyinoriginalledger.
+No Hostefficacy/matchedcontrol/externalclaim fromthese staticnative diagnostics.
+
+OriginalCPUfullStoreprobe PID2523750/exec74656 intentionallyINTERRUPTED(exit130/absentPID), notlive.
+Two py-spy nonblockingstacks identify search->backlink_candidates->_rows repeatedperlexicalsource;
+12221matchingcorpusdocs,0semanticrecords, each emptyrecords scan18.780s/64288childitems.
+Originaltrace/DB/failure untouched; observedprocessCPUlowerbound1206.28s, tailunmeasured;
+oldorchestration0.867605707CPU nestednotadded. No nativequestion/qrel/model call.
+Fix nowinworkingtree: namespace-metadata membership beforevalue materialization; skipimpossible
+backlinks with0records; batchhistoryscan once fornonempty sets; preserve per-source100cap,
+historicalrefs,sourceorder,owner/visibility.4newtests/54relatedPASS,Ruff/mypy2files,boundariesPASS.
+Actual fullStore empty-semanticsearch now.046162578wall/.046163591CPU, notwholequerylatency.
+Need newfrozencode +separatefullStore syntheticCPUprobev2 tovalidatefullquery andarchivecapacity.
+RunnerCPUaccounting nowfinallymeasures interruptedquery too; originalfailedmeasurementsunchanged.
+
+Allsettlements v1..v12 SETTLED atverifiedidle beforeexportvalidation started. v12=1690.065452597
+measuredCPU plus1206.28observedCPUlowerbound withmissingtailflag; modelcountersunchanged,
+T1fitphase notrebilled. Newofflinework pendingv13 (currently46msmicrocheck), do notsettlewhilelive.
+py-spy0.4.1 isolateddebug-tools-env; HTTP/CUDAenvsunchanged. No SHA orreplacementfingerprints.
+Dev PID1918885/exec94959 CLOSED52; do not restart closedcollections.
 Train228:165completed/63fail(49length,14JSON);592HTTP1951856known=charged,newunknown0.
 Dev52:41completed/11fail(10length,1JSON);127HTTP390650known=charged,newunknown0.
 Frozen collectors c6b1f3bd; all original results/first failures unchanged. JSON-action, not nativeE0.

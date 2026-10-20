@@ -1,0 +1,52 @@
+{
+  "status": "BATCHED_BACKLINKS_IMPLEMENTED_FULL_QUERY_RECHECK_PENDING",
+  "root_cause": {
+    "stack_samples": [
+      "artifacts/host-intent-retrieval-v3/external/instructir-synthetic-store-probe-v1/stack-sample-v1.json",
+      "artifacts/host-intent-retrieval-v3/external/instructir-synthetic-store-probe-v1/stack-sample-v2.json"
+    ],
+    "path": "search -> backlink_candidates once per matching source -> _rows -> SDK prefix scan",
+    "matching_corpus_sources": 12221,
+    "semantic_records": 0,
+    "one_empty_record_scan_seconds": 18.78,
+    "empty_record_scan_profile": "artifacts/host-intent-retrieval-v3/external/instructir-store-v1/record-enumeration-profile-v1.txt"
+  },
+  "changes": [
+    "Discover exact namespace membership using the public Store metadata API before materializing values; no persistent negative cache.",
+    "Skip source-to-record backlink work when the authoritative record list is empty.",
+    "For nonempty records, collect source-to-record IDs with one history scan per retrieval, preserving historical source links, owner/visibility rules, sorted per-source caps, and source-order lexical text.",
+    "Tokenize each source once for lexical matching; preserve original matching semantics.",
+    "Measure query CPU in a finally block so interruptions do not silently omit the in-flight CPU."
+  ],
+  "interrupted_probe": {
+    "run": "artifacts/host-intent-retrieval-v3/external/instructir-synthetic-store-probe-v1",
+    "status": "FAILED_KeyboardInterrupt",
+    "reason": "Deliberately stopped after two stack samples and independent profile confirmed repeated redundant scans; not stopped/restarted because observation timed out.",
+    "exec_exit_code": 130,
+    "process_cpu_seconds_observed_lower_bound": 1206.28,
+    "final_cpu_tail": "unmeasured; lower bound logged separately, not zero. Nested0.867605707s orchestration not added again.",
+    "raw_trace_database_preserved": true,
+    "no_official_benchmark_query_or_model": true
+  },
+  "validation": {
+    "new_source_backlink_tests": 4,
+    "related_tests": 54,
+    "ruff": "PASS",
+    "mypy": "PASS2files",
+    "package_boundary": "PASS",
+    "tools_boundary": "PASS",
+    "actual_empty_semantic_search": {
+      "phase": "host_intent_instructir_batched_empty_semantic_search_v1",
+      "status": "PASS",
+      "wall_seconds": 0.04616257827728987,
+      "cpu_seconds": 0.046163591000000004,
+      "model_calls": 0,
+      "ledger_recorded": false,
+      "scope": "Closed fullsource Store, metadata/semantic search only; no native question/qrel/model. Expected empty semantic results preserved, backlink scan skipped because authoritative record set is empty."
+    }
+  },
+  "limits": "46ms is the isolated empty-semantic-search path, not whole-query latency. Full actual Store query must be rerun under a new frozen code version and separate output; prior interrupted version remains intact.",
+  "debug_tool": "py-spy0.4.1 installed only in artifacts/debug-tools-env; HTTP/CUDA environments unchanged. Nonblocking stack reads without locals. Installation/stack sampling CPU unmeasured.",
+  "no_sha_checks": true,
+  "product_changes": "No Product Schema/API/permissions/Canonical changes; public Store operations and existing source/record validation retained."
+}

@@ -1,0 +1,41 @@
+{
+  "status": "SETTLED_ONCE_AT_VERIFIED_IDLE",
+  "ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+  "source_pending": "artifacts/host-intent-retrieval-v3/data/pending-offline-review-v12.json",
+  "processes_absent": [
+    2070802,
+    2523750,
+    2340409
+  ],
+  "model_fit_exit_code": 0,
+  "cpu_probe_exit_code": 130,
+  "phases": [
+    "host_intent_instructir_large_bank_observation_preflight_v1",
+    "host_intent_instructir_paged_observation_capacity_v1",
+    "host_intent_instructir_paged_observation_capacity_v2",
+    "host_intent_instructir_full_source_store_v1",
+    "host_intent_instructir_source_store_audit_v1",
+    "host_intent_instructir_record_enumeration_profile_v1",
+    "host_intent_instructir_backlink_multiplicity_v1",
+    "host_intent_instructir_interrupted_probe_v1"
+  ],
+  "measured_cpu_seconds": 1690.065452597,
+  "additional_observed_cpu_lower_bound": 1206.28,
+  "incomplete_cpu_measurements": [
+    {
+      "phase": "host_intent_instructir_interrupted_probe_v1",
+      "wall_seconds": 1201.9672790821642,
+      "cpu_seconds": null,
+      "process_cpu_seconds_lower_bound": 1206.28,
+      "scope": "Original orchestration-compute omitted the interrupted query CPU. OS process CPU sample is a lower bound including startup and the nested0.867605707s orchestration; do not add that nested CPU again. Final post-signal CPU tail unmeasured, not zero.",
+      "model_calls": 0,
+      "ledger_recorded": false,
+      "model_counters_unchanged": true,
+      "measurement_file": "artifacts/host-intent-retrieval-v3/external/instructir-synthetic-store-probe-v1/interrupted-compute-qualification-v1.json"
+    }
+  ],
+  "model_counters_unchanged": true,
+  "fit_phase_not_rebilled": "host_intent_t1_native_shared_seed0_v1",
+  "unmeasured": "Author work, source freeze/registration and untimed commands are unmeasured, not zero. Isolated py-spy0.4.1 install and stack sampling were not CPU-timed; active HTTP/CUDA environments unchanged.",
+  "settled_epoch": 1792472658.7207856
+}

@@ -647,6 +647,29 @@ class MemoryService:
             result.append(row)
         return result
 
+    def _backlink_record_ids(
+        self, source_refs: list[str], *, limit_per_source: int,
+    ) -> dict[str, list[str]]:
+        """One authoritative history scan for many source-to-record lookups.
+
+        Keep the public single-source lookup's sorted-ID cap before checking a
+        record's current readability. No persistent content index is introduced.
+        """
+        with self._locked():
+            visible = {ref for ref in source_refs if self.source(ref) is not None}
+            if not visible:
+                return {}
+            matches: dict[str, list[str]] = {ref: [] for ref in visible}
+            for row in self._rows(self.namespace):
+                metadata = row["value"].get("_v13_1", {})
+                if metadata.get("owner") != self.owner:
+                    continue
+                referenced = {ref for version in metadata["history"]
+                              for ref in self._version_source_refs(version)}
+                for ref in referenced & visible:
+                    matches[ref].append(row["id"])
+            return {ref: sorted(ids)[:limit_per_source] for ref, ids in matches.items()}
+
     def history_index(
         self,
         memory_id: str,
@@ -1762,6 +1785,17 @@ class MemoryService:
             return receipt
 
     def _rows(self, namespace: tuple[str, ...]) -> list[dict[str, Any]]:
+        # An SDK prefix search also materializes every descendant namespace.
+        # Discover exact namespace membership before fetching its values; this
+        # avoids scanning capture/episode journals for an empty record namespace.
+        namespace_offset = 0
+        while True:
+            names = self.store.list_namespaces(prefix=namespace, limit=100, offset=namespace_offset)
+            if namespace in names:
+                break
+            if len(names) < 100:
+                return []
+            namespace_offset += len(names)
         rows: list[dict[str, Any]] = []
         offset = 0
         while True:
@@ -2834,7 +2868,7 @@ class MemoryService:
 
         # Dense record ranking does not consume keyword backlink text. Only raw
         # output and withdrawn-record notices still use the lexical path there.
-        needs_backlinks = (self.semantic_retriever is None or include_raw
+        needs_backlinks = bool(records) and (self.semantic_retriever is None or include_raw
                            or any(row.get("status") == "retracted" for row in records))
         if self.source_backlinks == "enabled" and tokens and needs_backlinks:
             all_sources = raw if include_raw else self.sources()
@@ -2844,22 +2878,19 @@ class MemoryService:
             matching_sources = [
                 event
                 for event in all_sources
-                if any(
-                    token
-                    in set(
-                        _lexical_tokens(
-                            searchable(event),
-                            include_cjk_unigrams=True,
-                        )
-                    )
-                    for token in tokens
-                )
+                if set(tokens).intersection(_lexical_tokens(
+                    searchable(event), include_cjk_unigrams=True))
             ]
+            backlinks = self._backlink_record_ids([event["event_id"] for event in matching_sources],
+                                                 limit_per_source=100)
+            readable: dict[str, bool] = {}
             for event in matching_sources:
-                for record in self.backlink_candidates([event["event_id"]], limit=100):
-                    linked_text[record["id"]] = (
-                        linked_text.get(record["id"], "") + " " + searchable(event)
-                    )
+                for record_id in backlinks.get(event["event_id"], []):
+                    if record_id not in readable:
+                        readable[record_id] = self.read(record_id)["ok"]
+                    if readable[record_id]:
+                        linked_text[record_id] = (
+                            linked_text.get(record_id, "") + " " + searchable(event))
         if self.receipt_contract == "explicit_receipt_v1" and tokens:
             started_wall, started_cpu = time.monotonic_ns(), time.process_time_ns()
             # Reuse sources already loaded for raw search. Internal target discovery

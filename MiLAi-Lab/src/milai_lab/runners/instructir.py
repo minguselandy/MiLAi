@@ -147,18 +147,18 @@ def run_given_queries(
                 case_root = output / "working" / f"{index:05d}"
                 shutil.copytree(template, case_root)
                 request = retrieval_request(row)
+                entry_budget = read_json(budget_path)
+            result = None
             query_wall, query_cpu = time.perf_counter(), time.process_time()
-            result = message(case_root, bank=setup["bank"], owner=setup["owner"],
-                session="instructir-query", message_id=row["_id"], content=request["query"],
-                given_retrieval_request=request, control_models=models)
-            elapsed_wall = time.perf_counter() - query_wall
-            elapsed_cpu = time.process_time() - query_cpu
-            with overhead():
-                before, after = result["budget_before"], result["budget_after"]
-                driver["active"].update(retrieval_status=result["status"],
-                    query_wall_seconds=elapsed_wall, query_cpu_seconds_nested=elapsed_cpu,
-                    working_directory=str(case_root))
-                write_json(output / "driver.json", driver)
+            try:
+                result = message(case_root, bank=setup["bank"], owner=setup["owner"],
+                    session="instructir-query", message_id=row["_id"], content=request["query"],
+                    given_retrieval_request=request, control_models=models)
+            finally:
+                elapsed_wall = time.perf_counter() - query_wall
+                elapsed_cpu = time.process_time() - query_cpu
+                before = result["budget_before"] if result is not None else entry_budget
+                after = result["budget_after"] if result is not None else read_json(budget_path)
                 billed_cpu = sum(values.get("cpu_seconds", 0) - before.get("compute", {}).get(
                     name, {}).get("cpu_seconds", 0)
                     for name, values in after.get("compute", {}).items())
@@ -166,6 +166,13 @@ def run_given_queries(
                 if exclusive_cpu < 0:
                     raise ValueError("Nested compute exceeds measured query CPU")
                 query_unattributed_cpu += exclusive_cpu
+                driver["active"].update(query_wall_seconds=elapsed_wall,
+                    query_cpu_seconds_nested=elapsed_cpu,
+                    query_cpu_seconds_not_yet_recorded=exclusive_cpu,
+                    working_directory=str(case_root))
+            with overhead():
+                driver["active"]["retrieval_status"] = result["status"]
+                write_json(output / "driver.json", driver)
                 projection = project_query_result(case_root, result, source_to_document)
                 case = {"row": index, "query_id": row["_id"], "status": result["status"],
                     "error": result.get("error"), "query_wall_seconds": elapsed_wall,
@@ -202,7 +209,8 @@ def run_given_queries(
             "query_cpu_seconds_not_in_nested_ledger_phases": query_unattributed_cpu,
             "scope": "Preparation/copies/projection/archive plus query CPU not already charged "
                      "by nested native/other compute phases. Query wall includes runtime setup "
-                     "and retrieval; excludes experimental reset/archive. Driver wall is nested.",
+                     "and retrieval, including interrupted calls; excludes reset/archive. "
+                     "Driver wall is nested.",
             "model_calls": 0, "ledger_recorded": False,
             "ledger": str(budget_path) if budget_path is not None else None})
         if budget_path is not None:

@@ -1,6 +1,7 @@
 """Real independent source copies and lossless closed-case archives; no model requests."""
 import json
 import tarfile
+import time
 from pathlib import Path
 
 import httpx
@@ -120,3 +121,28 @@ def test_unexpected_first_failure_is_retained_and_later_queries_do_not_run(tmp_p
     assert driver["completed"][0]["ranking"] == {}
     assert (output / "cases/00000.tar.gz").exists()
     assert not (output / "cases/00001.tar.gz").exists()
+
+
+def test_interrupted_query_cpu_is_measured_even_without_a_returned_result(tmp_path, monkeypatch):
+    import milai_lab.runners.instructir as runner
+
+    bank = source_bank_at(tmp_path)
+
+    def interrupted(*args, **kwargs):
+        start = time.process_time()
+        while time.process_time() - start < .02:
+            sum(i * i for i in range(1000))
+        raise KeyboardInterrupt("synthetic interruption")
+
+    monkeypatch.setattr(runner, "message", interrupted)
+    output = tmp_path / "interrupted"
+    with pytest.raises(KeyboardInterrupt):
+        runner.run_given_queries(tmp_path / "settings.json", [
+            {"_id": "q", "text": "instruction[SEP]query"}],
+            bank, output, source_version="synthetic-interruption")
+    driver = json.loads((output / "driver.json").read_text())
+    compute = json.loads((output / "orchestration-compute.json").read_text())
+    assert driver["error_type"] == "KeyboardInterrupt"
+    assert driver["active"]["query_cpu_seconds_nested"] >= .02
+    assert compute["query_cpu_seconds_not_in_nested_ledger_phases"] >= .02
+    assert (output / "working/00000").exists()
