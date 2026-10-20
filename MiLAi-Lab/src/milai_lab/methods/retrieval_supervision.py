@@ -25,9 +25,12 @@ def original_binding_material(
             "content": body_text(source)[span["start"]:span["end"]],
             "range": [span["start"], span["end"]],
             "occurred_at": source.get("occurred_at"), "observed_at": source["observed_at"],
+            **({"source_total_codepoints": len(body_text(source))}
+               if binding.get("source_observation_read") else {}),
             **({"calendar_context": source["calendar_context"]}
                if "calendar_context" in source else {})})
     return {"kind": "original_source", "source_ranges": ranges,
+            **({"source_observation_read": True} if binding.get("source_observation_read") else {}),
             "visibility": "visible", "body_delivered": True,
             "text": json.dumps(turns, ensure_ascii=False)}
 
@@ -87,10 +90,16 @@ def original_witness_preferences(
         if kinds[key] != "READ":
             continue
         parameters = row["metadata"]["action_parameters"][key]
-        if parameters.get("history_directory"):
+        if parameters.get("history_directory") or "source_observation_cursor" in parameters:
             continue
-        index = parameters["index"]
-        item = materials[index]
+        item: dict[str, Any]
+        if "observed_source" in parameters:
+            index = len(materials)  # Executor appends the selected source at this index.
+            item = {"kind": "original_source", "source_ranges": [parameters["observed_source"]],
+                    "source_observation_read": True}
+        else:
+            index = parameters["index"]
+            item = materials[index]
         if item["kind"] != "original_source" or item.get("body_delivered") is False:
             continue
         candidate = original_binding_material(item, sources,

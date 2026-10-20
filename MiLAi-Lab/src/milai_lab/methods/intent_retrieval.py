@@ -49,7 +49,8 @@ def material_binding(item: dict[str, Any]) -> dict[str, Any]:
     """Small evaluator trace of actual ranges/versions, outside the policy input."""
     result = {key: copy.deepcopy(item[key]) for key in (
         "kind", "id", "record_id", "revision", "version_view", "visibility", "body_delivered",
-        "source_ranges", "context_source_ranges", "focus_source_ranges", "source_bindings")
+        "source_ranges", "context_source_ranges", "focus_source_ranges", "source_bindings",
+        "source_observation_read")
         if key in item}
     if "support_turns" in item:
         result["support_turns"] = [{key: turn[key] for key in (
@@ -238,7 +239,8 @@ class IntentRetrievalMemory(FunctionalEditMemory):
             fits_materials=fits_delivery,
             excluded_source_refs=(bound["source_ref"],),
             known_materials=known,
-            view_capacity=self.control_view_capacity, view_policy=self.control_view_policy)
+            view_capacity=self.control_view_capacity, view_policy=self.control_view_policy,
+            source_observation=self.control_source_observation)
         memory = self
 
         class AdmittedOperations:

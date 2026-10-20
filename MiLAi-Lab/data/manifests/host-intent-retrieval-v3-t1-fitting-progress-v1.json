@@ -1,0 +1,205 @@
+{
+  "status": "RUNNING",
+  "source_version": "ba2bf8d8",
+  "pid": 2070802,
+  "exec_session": 15108,
+  "observed_epoch": 1792466585.4264338,
+  "run": "artifacts/host-intent-retrieval-v3/fitting/t1-native-shared-seed0-v1",
+  "optimizer_updates": 171,
+  "planned_updates": 524,
+  "train_sequence_rows": 2736,
+  "train_input_tokens": 9283551,
+  "sampled_component_rows": {
+    "instruction_applicability": 928,
+    "complementary_evidence": 830,
+    "operation_history": 978
+  },
+  "sampled_component_input_tokens": {
+    "instruction_applicability": 267275,
+    "complementary_evidence": 4222578,
+    "operation_history": 4793698
+  },
+  "initial_dev": {
+    "by_task": {
+      "memory_operation": {
+        "counts": {
+          "labelled": 616,
+          "accepted": 206,
+          "masked": 244,
+          "handoff_outside_reviewed_preference": 16
+        },
+        "strata": {
+          "source_reviewed_preference": {
+            "labelled": 616,
+            "accepted": 206
+          }
+        },
+        "selected_operations": {
+          "SEARCH": {
+            "selected": 171,
+            "accepted": 52
+          },
+          "READ": {
+            "selected": 326,
+            "accepted": 118
+          },
+          "HANDOFF": {
+            "selected": 52,
+            "accepted": 36
+          },
+          "REFRESH_VIEW": {
+            "selected": 37,
+            "accepted": 0
+          },
+          "USE_VIEW": {
+            "selected": 30,
+            "accepted": 0
+          }
+        },
+        "families": 32,
+        "family_macro_acceptance": 0.33756768765750494,
+        "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+      },
+      "instruction_applicability": {
+        "counts": {
+          "labelled": 349,
+          "correct": 204
+        },
+        "families": 241,
+        "family_macro_accuracy": 0.5816044260027663,
+        "confusion": [
+          {
+            "expected": "does_not_satisfy",
+            "predicted": "does_not_satisfy",
+            "count": 102
+          },
+          {
+            "expected": "does_not_satisfy",
+            "predicted": "satisfies",
+            "count": 69
+          },
+          {
+            "expected": "satisfies",
+            "predicted": "does_not_satisfy",
+            "count": 76
+          },
+          {
+            "expected": "satisfies",
+            "predicted": "satisfies",
+            "count": 102
+          }
+        ],
+        "scope": "Published candidate applicability labels; not factuality, calibrated confidence, operation preference or Host task success"
+      }
+    },
+    "by_component": {
+      "operation_history": {
+        "counts": {
+          "labelled": 309,
+          "accepted": 148,
+          "masked": 77,
+          "handoff_outside_reviewed_preference": 15
+        },
+        "strata": {
+          "source_reviewed_preference": {
+            "labelled": 309,
+            "accepted": 148
+          }
+        },
+        "selected_operations": {
+          "SEARCH": {
+            "selected": 68,
+            "accepted": 24
+          },
+          "READ": {
+            "selected": 152,
+            "accepted": 88
+          },
+          "HANDOFF": {
+            "selected": 51,
+            "accepted": 36
+          },
+          "REFRESH_VIEW": {
+            "selected": 8,
+            "accepted": 0
+          },
+          "USE_VIEW": {
+            "selected": 30,
+            "accepted": 0
+          }
+        },
+        "families": 14,
+        "family_macro_acceptance": 0.48537008224120026,
+        "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+      },
+      "complementary_evidence": {
+        "counts": {
+          "labelled": 307,
+          "accepted": 58,
+          "masked": 167,
+          "handoff_outside_reviewed_preference": 1
+        },
+        "strata": {
+          "source_reviewed_preference": {
+            "labelled": 307,
+            "accepted": 58
+          }
+        },
+        "selected_operations": {
+          "SEARCH": {
+            "selected": 103,
+            "accepted": 28
+          },
+          "READ": {
+            "selected": 174,
+            "accepted": 30
+          },
+          "REFRESH_VIEW": {
+            "selected": 29,
+            "accepted": 0
+          },
+          "HANDOFF": {
+            "selected": 1,
+            "accepted": 0
+          }
+        },
+        "families": 18,
+        "family_macro_acceptance": 0.22261026964796404,
+        "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+      },
+      "instruction_applicability": {
+        "counts": {
+          "labelled": 349,
+          "correct": 204
+        },
+        "families": 241,
+        "family_macro_accuracy": 0.5816044260027663,
+        "confusion": [
+          {
+            "expected": "does_not_satisfy",
+            "predicted": "does_not_satisfy",
+            "count": 102
+          },
+          {
+            "expected": "does_not_satisfy",
+            "predicted": "satisfies",
+            "count": 69
+          },
+          {
+            "expected": "satisfies",
+            "predicted": "does_not_satisfy",
+            "count": 76
+          },
+          {
+            "expected": "satisfies",
+            "predicted": "satisfies",
+            "count": 102
+          }
+        ],
+        "scope": "Published candidate applicability labels; not factuality, calibrated confidence, operation preference or Host task success"
+      }
+    },
+    "scope": "Task-specific native diagnostics; no combined memory score or Host success"
+  },
+  "scope": "Live progress only, no final weight selection, efficacy, main/control comparison, or final accounting claim."
+}

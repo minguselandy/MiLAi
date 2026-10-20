@@ -1,0 +1,77 @@
+{
+  "status": "IMPLEMENTED_AND_OFFLINE_VALIDATED_NOT_EXTERNAL_EVALUATION",
+  "rollback_commit": "7d081891",
+  "configuration": {
+    "key": "memory_control.source_observation_tokens",
+    "default": null,
+    "resource_meaning": "Host-token budget of one literal source observation page; controller total capacity remains separately enforced.",
+    "capacity_audit_value": 2048
+  },
+  "behavior": [
+    "All visible Store sources remain searchable; current observation page preserves roles, unknown dates, source order and explicit Unicode character ranges.",
+    "READ actions navigate next/previous source pages and can deliver a bound current fragment or whole observed source through existing source visibility checks and exact return-budget admission.",
+    "Observation navigation alone never enters Reader evidence. Returned observed-source evidence includes its range and complete source character count.",
+    "Page operations consume the existing read allowance/control steps; no hidden unlimited traversal in production.",
+    "Unobserved arrival holes are not acknowledged by a far-away search hit or view refresh. Pending counts include arrivals beyond the current page.",
+    "Equal-clock late sources below an old lexical cursor are admitted using the stored boundary-ID set.",
+    "Existing fixed/context baselines continue choosing their search candidates; new page/observed-source READ options remain available to learned policies without silently changing the baseline recipe.",
+    "Source witness compilation skips navigation as a delivery label and checks direct observed-source READ against the same real source spans and complete return packet. Partial spans do not become whole-source sufficiency."
+  ],
+  "validation": {
+    "new_tests": 9,
+    "related_regression_total_passed_before_final_extent_metadata": 49,
+    "final_directly_affected_tests_passed": 11,
+    "ruff": "PASS11files",
+    "mypy": "PASS9sourcefiles",
+    "package_boundary": "PASS",
+    "tools_boundary": "PASS",
+    "synthetic_normal_host": "PASS native ToolMessage with existing Host runner and isolated mock budget, no actual model request"
+  },
+  "full_corpus_capacity_audit": {
+    "phase": "host_intent_instructir_paged_observation_capacity_v2",
+    "status": "PASS_ALL_INITIAL_SOURCE_PAGES",
+    "model_calls": 0,
+    "model_loads": 0,
+    "ledger_recorded": false,
+    "documents": 16072,
+    "pages": 1531,
+    "max_host_page_tokens": 2048,
+    "max_native_full_sequence_tokens": 3260,
+    "max_native_head_tokens": 1215,
+    "exact_complete_source_reconstruction": 16072,
+    "truncated": 0,
+    "raw_arrival_sources_retained": 16072,
+    "scope": "Final EvidenceOperations with READ-page plus bound fragment/full-source READ options/shared projection over synthetic full released-source feed; full native tokenizer audit at every page with empty candidate/view state. All source characters reconstructed by direct equality, no digests. No actual Store ingestion, retrieval query, ranking, model forward or benchmark prediction.",
+    "limitations": "This does not prove complete capacity for every later candidate/view/known-evidence state, nor semantic paging quality. The traversal exceeds normal8-step runtime limits on purpose to audit navigability; real tools retain their finite limits and may stop earlier.",
+    "configuration": {
+      "source_observation_tokens": 2048,
+      "observation_tokenizer": "existing Host text tokenizer",
+      "native_max_len": 12288,
+      "native_head_max_len": 2048
+    },
+    "real_benchmark_questions_read": 0,
+    "real_benchmark_predictions": 0,
+    "wall_seconds": 216.66713532339782,
+    "cpu_seconds": 219.019051545
+  },
+  "first_failures_retained": {
+    "audit_import": "artifacts/host-intent-retrieval-v3/external/instructir-release-v1/paged-observation-first-import-failure.json",
+    "unit_expectations": "First normal-Host synthetic test had only3reads but needed2searches+2reads; helper now exposes6reads for this test while defaults and production budgets stay unchanged. A source-origin assertion was corrected from assumed user_turn to literal Store origin public_user_message. Production output was not changed to satisfy either test."
+  },
+  "actual_training": "PID2070802/exec15108 continues frozen ba2bf8d8. No active inputs, labels, weights, optimizer recipe or services altered by these commits. No E4 model outcomes used to select the page budget.",
+  "limitations": [
+    "Full Store ingestion and actual external retrieval/ranking/image backend remain to be implemented or run.",
+    "The1531-page traversal is a navigability/capacity audit with synthetic request and empty candidate/view state, not a legal8-step model trajectory or semantic success.",
+    "Later candidates, known evidence and views still need actual full-input capacity checks. Local source-arrival enumeration cost is not removed by bounding the model observation.",
+    "New observation configuration and operation parameters require declared common conditions and legal train/dev validation before final external evaluation."
+  ],
+  "accounting": {
+    "pending_file": "artifacts/host-intent-retrieval-v3/data/pending-offline-review-v12.json",
+    "measured_cpu_seconds": 444.858517444,
+    "ledger_recorded": false,
+    "scope": "No settlement while active fit lives. Tests, author work and failed import startup are unmeasured, not zero."
+  },
+  "no_checksums": true,
+  "product_changes": "No Product Schema/API/permission/Canonical change. Opt-in Lab control setting and READ bindings only.",
+  "remote_publication": false
+}

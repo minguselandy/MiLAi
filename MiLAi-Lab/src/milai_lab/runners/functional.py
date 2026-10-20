@@ -2773,6 +2773,8 @@ def message(
                         admit=lambda: model.reserve_external_request("memory_control"),
                         record=trace, models=control_models)
                     memory_options["control_steps"] = control.get("max_control_steps", 8)
+                    memory_options["control_source_observation_tokens"] = control.get(
+                        "source_observation_tokens")
                     memory_options["control_view_capacity"] = control.get("view_capacity", 1)
                     memory_options["control_view_policy"] = control.get(
                         "view_policy", "incremental")

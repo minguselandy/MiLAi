@@ -517,6 +517,8 @@ def project_pack(item: dict[str, Any], index: int) -> dict[str, Any]:
         if key in turn},
         "reported_at": turn.get("occurred_at", turn.get("timestamp")),
         "captured_at": turn.get("observed_at"),
+        **({"source_characters": turn["source_total_codepoints"]}
+           if item.get("source_observation_read") else {}),
     } for turn in turns]
     if item["kind"] == "semantic_view":
         view = item["applicability"]

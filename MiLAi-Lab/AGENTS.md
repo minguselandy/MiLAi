@@ -47,16 +47,28 @@ AllSmallhistoriespriorcontact, regressionnotblind. LocalHFdownloadrevisionunknow
 Nativebackend/fixedimageReader/full451remain. Mem2ActGivenTool capture-onlybridgecommitted3b39e6bd;
 400/429/16843releaseprepared, full400actualmodelrunstillpending. No newmodelservices.
 
-NEW concrete E4 capacity gap: data/manifests/host-intent-retrieval-v3-large-bank-capacity-preflight-v1.json.
-Existing EvidenceOperations puts ALL arrival bodies in state.new_events; shared projection islossless.
-Synthetic-request/fullInstructIRcorpus projection=2075367state tokens,263headtokens vs12288/2048.
-No realquery/gold read bythispreflight, no Storeingestion/modelforward orbenchmarkprediction.
-Need generic budgeted+navigable source observations overfullStore BEFORE fullE4; no qrelfilter,
-silentclipping or benchmark-specifichardcoding. Existinghistory_directory onlypagesknownsemantic
-recordversions, notrawarrivalfeed. Do NOTchangeactivefrozenT1; newobservationconfig mustbedeclared
-andcomparedfairly, withlegaltrain-only supervisionifneeded. This is next independent coding work.
-PreflightCPU20.558320989 pendingv12, notsettledwhilefitlive; firstscriptSyntaxErrorretained,
-startupCPUunmeasured. Activefitlastobserved initialdev451/1209, updates0, noerror;pollsamehandle.
+NEW opt-in source navigation IMPLEMENTED; active T1source ba2bf8d8 remains unchanged.
+Set memory_control.source_observation_tokens for future declared experiments; defaultNone unchanged.
+SourceObservationPages emits literal ranges/next+previous cursors, never dropsStore sources.
+READ page navigation consumes existingread allowance; bound fragment/full-source READ delivers actual
+originals withrange+source_characters, subject to normalvisibility andfullpacketbudget. No fakebody.
+Fixed/context baselines keep search-candidate recipe; witnesscompiler skips page-as-delivery gold,
+checks observed-source bindings withrealbudget, and doesnotpromote partialspans towhole-source proofs.
+Viewarrivalcursor advancesonlycontiguousfullyobservedprefix; farsearchhits do notacknowledgeholes.
+Equal-clocklate-arrival handling fixedusingboundaryIDs. Pendingcounts includeoff-page arrivals.
+Tests:9new;49relatedpassed beforefinalextentmetadata,11directaffected rerunPASS; Ruff11files,
+mypy9files,package/toolsboundaryPASS. Scriptednative tests are NOTnativeE0/modelsemantic results.
+Full16072InstructIRsource replay v2:1531pages,allcharacters exactlyreconstructed(nohash), maxHost
+page2048tokens/maxnativefullinput3260/head1215,no clipping. Syntheticrequest/emptycandidate-view
+state only; noactualStoreingestion/ranking/modelrun. Normal8step limitsremain; auditwalkisoffline.
+Read source-observation-navigation-v1 manifest. FullE4 adapters/Storeingestion/semantic eval stillremain;
+latercandidate/view/known-evidence inputs requireactualcapacitychecks, no blanketfitclaim.
+Pendingv12 now3measuredphases444.858517444CPU, unsettledwhilefitactive. FirstimportfailureCPU and
+untimedtests/authorwork unmeasured; bothHTTP/CUDA environments unchanged (diagnosticappendedHTTPpath).
+T1initialdevCOMPLETE1209: op206/616 accepted,macro.3375676877; FollowIR204/349,macro.5816044260.
+Latest observed mainfit 171/524, 2736rows/9283551tokens; pollsamePID/exec, no restart.
+Next independent work: fullexternaladapter/actualStorepath or E2/E3 implementation while solefit runs;
+maintain fulloriginalscope below and do not publish or launchanotheractualmodeljob.
 
 Originalgoal remains FULL: T1/T2+matchedcontinuedCE,seeds0/1/2,finalE1/reservedconfirmation,
 E2frozenrequests,E3retrainedequal-info+one-shotfeedback,E4fullreleases,E5sevenworkloads/budgets,

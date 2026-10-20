@@ -71,6 +71,7 @@ from milai_lab.methods.edit_memory import (
 )
 from milai_lab.methods.memory_control import MemoryPolicy
 from milai_lab.methods.query_structure import QueryStructurePolicy
+from milai_lab.methods.source_observations import SourceObservationBudget
 
 FUNCTIONAL_METHOD = "milai_edit_m_v1"
 FUNCTIONAL_B0_METHOD = "milai_edit_b0_v1"
@@ -141,6 +142,7 @@ class FunctionalEditMemory(FunctionalMemory):
         dependency_read_call: ModelCall | None = None,
         control_policy: MemoryPolicy | None = None,
         control_steps: int = 8,
+        control_source_observation_tokens: int | None = None,
         control_view_capacity: int = 1,
         control_view_policy: QueryStructurePolicy = "incremental",
         control_rank_pool: (Callable[[str, list[dict[str, Any]]],
@@ -174,6 +176,9 @@ class FunctionalEditMemory(FunctionalMemory):
         self.dependency_read_call = dependency_read_call
         self.control_policy = control_policy
         self.control_steps = control_steps
+        self.control_source_observation = (SourceObservationBudget(
+            control_source_observation_tokens, self.token_count)
+            if control_source_observation_tokens is not None else None)
         self.control_view_capacity = control_view_capacity
         self.control_view_policy = control_view_policy
         self.control_rank_pool = control_rank_pool
@@ -481,7 +486,8 @@ class FunctionalEditMemory(FunctionalMemory):
                 fits=lambda items: self.token_count(canonical(packet(items, "budget_exhausted")))
                     <= self.material_limit,
                 excluded_source_refs=(bound["source_ref"],),
-                view_capacity=self.control_view_capacity, view_policy=self.control_view_policy)
+                view_capacity=self.control_view_capacity, view_policy=self.control_view_policy,
+                source_observation=self.control_source_observation)
             memory = self
 
             def record_control(event: dict[str, Any]) -> None:

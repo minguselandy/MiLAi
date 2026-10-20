@@ -150,6 +150,7 @@ def build_query_structure(
     capacity: int = 1,
     replace_slot: bool = False,
     retrieval_request: dict[str, Any] | None = None,
+    arrival_coverage: dict[str, Any] | None = None,
 ) -> tuple[dict[str, Any] | None, dict[str, Any]]:
     """Reuse, reconstruct or incrementally refresh the same actually retrieved scope.
 
@@ -170,10 +171,26 @@ def build_query_structure(
     by_ref = {source["event_id"]: source for source in events}
     pool = sorted(set(source_refs) & set(by_ref))
     cursor = max(([source["observed_at"], source["event_id"]] for source in events), default=[])
+    boundary_refs = [source["event_id"] for source in events
+                     if cursor and source["observed_at"] == cursor[0]]
+    if arrival_coverage is not None:
+        # Search may select a source beyond the observed arrival prefix. Its body
+        # can support a view without acknowledging the intervening unseen sources.
+        cursor = max(prior["arrival_cursor"] if prior else [], arrival_coverage["cursor"])
+        boundary_refs = list(dict.fromkeys([
+            *(prior.get("arrival_boundary_refs", [prior["arrival_cursor"][1]])
+              if prior and prior["arrival_cursor"] and cursor
+              and prior["arrival_cursor"][0] == cursor[0] else []),
+            *(arrival_coverage["boundary_refs"] if arrival_coverage["cursor"] and cursor
+              and arrival_coverage["cursor"][0] == cursor[0] else [])]))
     valid = prior is not None and prior["policy"] == policy and _sources_valid(
         service, prior["source_bindings"])
     arrivals = ([source["event_id"] for source in events
-                 if [source["observed_at"], source["event_id"]] > prior["arrival_cursor"]]
+                 if not prior["arrival_cursor"]
+                 or source["observed_at"] > prior["arrival_cursor"][0]
+                 or (source["observed_at"] == prior["arrival_cursor"][0]
+                     and source["event_id"] not in prior.get(
+                         "arrival_boundary_refs", [prior["arrival_cursor"][1]]))]
                 if prior is not None and prior["policy"] == policy else [])
     report: dict[str, Any] = {"policy": policy, "visible_sources_enumerated": len(events),
         "source_inventory": ("MemoryService.sources full enumeration; "
@@ -275,8 +292,7 @@ def build_query_structure(
         "built_for": question, "slot": slot,
         **({"retrieval_request": retrieval_request} if retrieval_request else {}),
         "arrival_cursor": cursor, "retrieved_sources": pool, "query_time": date,
-        "arrival_boundary_refs": [s["event_id"] for s in events
-                                  if cursor and s["observed_at"] == cursor[0]],
+        "arrival_boundary_refs": boundary_refs,
         "index_text": response["scope"], "visibility": "visible", "body_delivered": True,
         "semantics": "source_bound_model_interpretation; all AND (OR of AND any routes); "
                      "unknown is not false; apply temporal rules at current query time"}

@@ -8,7 +8,7 @@ from typing import Any
 
 from jsonschema.exceptions import ValidationError  # type: ignore[import-untyped]
 
-from milai_lab.memory.functional_state import FunctionalRejection, body_text
+from milai_lab.memory.functional_state import FunctionalRejection, body_text, reference_key
 from milai_lab.memory.service import MemoryService
 from milai_lab.methods.evidence_reading import (
     build_evidence_packs,
@@ -26,6 +26,7 @@ from milai_lab.methods.query_structure import (
     structure_slots,
     touch_structure,
 )
+from milai_lab.methods.source_observations import SourceObservationBudget, SourceObservationPages
 
 
 def controlled_reader_packet(evidence: list[dict[str, Any]], reason: str) -> dict[str, Any]:
@@ -52,6 +53,7 @@ class EvidenceOperations:
         search_batch_sizes: tuple[int, ...] = (8, 16),
         max_searches: int = 2,
         fits_materials: Callable[[dict[int, dict[str, Any]]], bool] | None = None,
+        source_observation: SourceObservationBudget | None = None,
     ) -> None:
         self.service, self.load_pool, self.refresh_call, self.fits = (
             service, load_pool, refresh_call, fits)
@@ -70,6 +72,7 @@ class EvidenceOperations:
         self.used: set[str] = set()
         self.refreshed_inputs: set[tuple[str, tuple[str, ...], bool]] = set()
         self.history_pages: dict[str, dict[str, Any]] = {}
+        self.observed_source_attempts: set[tuple[str, int, int]] = set()
         self.visibility_epoch = service.forget_epoch
         self.views = cached_structures(service, view_capacity)
         started = time.perf_counter()
@@ -90,6 +93,7 @@ class EvidenceOperations:
             if source is not None and ref not in excluded_source_refs:
                 by_ref[ref] = source
         self.events = list(by_ref.values())
+        self.source_directory = by_ref
         state.budget.update(source_inventory_wall_seconds=time.perf_counter() - started,
             visible_sources_enumerated=len(self.events), source_feed_rows=feed["rows_materialized"],
             source_discovery=feed["query"], bound_source_lookups=len(bound_refs))
@@ -98,7 +102,20 @@ class EvidenceOperations:
             "delivery": "controller_observation; Reader uses visible_evidence",
             "reported_at": e.get("occurred_at"), "captured_at": e["observed_at"]}
             for e in arrivals]
+        self.source_pages = (SourceObservationPages(state.new_events, source_observation)
+                             if source_observation is not None else None)
+        if self.source_pages is not None:
+            self._observe_source_page(state)
         self.view_observation(state)
+
+    def _observe_source_page(self, state: MemoryControlState) -> None:
+        assert self.source_pages is not None
+        page = self.source_pages.current
+        state.new_events = copy.deepcopy(page["events"])
+        state.budget["source_observation"] = {
+            **{key: value for key, value in page.items() if key != "events"},
+            "max_tokens": self.source_pages.budget.max_tokens,
+            "tokenizer": "Host text tokenizer; complete controller input checked separately"}
 
     @staticmethod
     def pending(view: dict[str, Any], event: dict[str, Any]) -> bool:
@@ -119,6 +136,13 @@ class EvidenceOperations:
                if "retrieval_request" in view else {}),
             "semantics": "binding/inventory status is not semantic correctness or full coverage"}
             for slot, view in self.views.items()]
+        if self.source_pages is not None:
+            for metadata in state.views:
+                view = self.views[metadata["slot"]]
+                metadata.update(pending_event_count=sum(
+                    event["source_ref"] in self.source_pages.visible and self.pending(view, event)
+                    for event in self.source_pages.events),
+                    pending_events_scope="IDs on current source page; count covers all arrivals")
         return opened
 
     def refresh_visibility(self, state: MemoryControlState) -> None:
@@ -130,13 +154,17 @@ class EvidenceOperations:
                        if (s := self.service.source(e["event_id"])) is not None]
         visible = {s["event_id"] for s in self.events}
         state.new_events = [e for e in state.new_events if e["source_ref"] in visible]
+        if self.source_pages is not None:
+            self.source_pages.restrict(visible)
+            self._observe_source_page(state)
         self.materials = [open_evidence_packs(self.service, [m], refresh_current=True)[0]
             if m["kind"] != "stored_revision" else m for m in self.materials]
         self.opened = dict(zip(self.opened, open_evidence_packs(
             self.service, list(self.opened.values()), refresh_current=True), strict=True))
         self._deliver(state)
         state.pending_candidates = [self.candidate(m, i) for i, m in enumerate(self.materials)
-                                    if i not in self.opened]
+                                    if i not in self.opened
+                                    and not m.get("source_observation_read")]
         self.history_pages.clear()
         self.view_observation(state)
 
@@ -201,8 +229,30 @@ class EvidenceOperations:
             actions.extend(self.search_actions(state))
         elif not self.searched:
             actions.append(MemoryAction("search", "SEARCH", "original request"))
+        if self.source_pages is not None:
+            actions.extend(MemoryAction("source_page_" + direction, "READ",
+                direction + " source-observation page (not Reader delivery)",
+                {"source_observation_cursor": cursor})
+                for direction, cursor in self.source_pages.navigation().items())
+            for number, event in enumerate(state.new_events):
+                ranges = [("fragment", event["source_range"])]
+                if event["source_range"] != [0, event["source_characters"]]:
+                    ranges.append(("full", [0, event["source_characters"]]))
+                for extent, (start, end) in ranges:
+                    source = self.source_directory[event["source_ref"]]
+                    span = {"source_ref": event["source_ref"],
+                            "source_revision": source.get("source_revision", 1),
+                            "start": start, "end": end}
+                    identity = (event["source_ref"], start, end)
+                    if identity not in self.observed_source_attempts and self.adds_source_range(
+                            {"kind": "original_source", "source_ranges": [span]}):
+                        actions.append(MemoryAction(f"source_{extent}_{number}", "READ",
+                            f"observed source {number} {extent} as original Reader evidence",
+                            {"observed_source": span}))
         for i, item in sorted(enumerate(self.materials),
                               key=lambda pair: pair[1].get("control_pool_rank", pair[0])):
+            if item.get("source_observation_read"):
+                continue
             if item.get("body_delivered") is False:
                 continue
             if (i, False) not in self.attempted and self.adds_source_range(item):
@@ -305,12 +355,32 @@ class EvidenceOperations:
             self.searched = True
             state.pending_candidates = [self.candidate(item, i)
                                         for i, item in enumerate(self.materials)
-                                        if i not in self.opened]
+                                        if i not in self.opened
+                                        and not item.get("source_observation_read")]
             return {"ok": True, "status": "searched", "candidates": len(self.materials),
                     **action.parameters,
                     "scope": "captured visible pool, not a sufficiency judgment"}
         if action.kind == "READ":
-            i, expand = action.parameters["index"], action.parameters.get("expand_context", False)
+            if "source_observation_cursor" in action.parameters:
+                assert self.source_pages is not None
+                self.source_pages.open(tuple(action.parameters["source_observation_cursor"]))
+                self._observe_source_page(state)
+                self.view_observation(state)
+                return {"ok": True, "status": "source_observation_page", "body_delivered": False,
+                        "reader_evidence_changed": False,
+                        **state.budget["source_observation"]}
+            if "observed_source" in action.parameters:
+                span = action.parameters["observed_source"]
+                self.observed_source_attempts.add((span["source_ref"], span["start"], span["end"]))
+                source = self.source_directory[span["source_ref"]]
+                i, expand = len(self.materials), False
+                self.materials.append({"kind": "original_source",
+                    "id": "observed-source:" + reference_key(span),
+                    "session_id": source["session"], "turn_range": [0, 1],
+                    "source_ranges": [span], "source_observation_read": True})
+            else:
+                i, expand = (action.parameters["index"],
+                             action.parameters.get("expand_context", False))
             target = self.materials[i]
             if action.parameters.get("history_directory"):
                 page = self.service.history_index(target["record_id"],
@@ -366,13 +436,23 @@ class EvidenceOperations:
             self.refreshed_inputs.add((slot, refs, replace))
             events = [s for e in self.events
                       if (s := self.service.source(e["event_id"])) is not None]
+            coverage = None
+            if self.source_pages is not None:
+                # A partial observation cannot acknowledge every unseen arrival.
+                observed = {event["source_ref"] for event in state.new_events}
+                observed.update(refs)
+                observed.update(binding["source_ref"] for view in self.views.values()
+                                for binding in view["source_bindings"].values())
+                events = [event for event in events if event["event_id"] in observed]
+                coverage = self.source_pages.coverage()
             try:
                 built, report = build_query_structure(self.service, state.task["request"],
                     state.task["query_time"], list(refs), policy=self.view_policy,
                     call=self.refresh_call,
                     source_events=events, force_refresh=True, slot=slot,
                     capacity=self.view_capacity, replace_slot=replace,
-                    retrieval_request=state.task.get("retrieval_request"))
+                    retrieval_request=state.task.get("retrieval_request"),
+                    arrival_coverage=coverage)
             except (FunctionalRejection, ValidationError) as error:
                 # These checks precede the cache write. Preserve a definite failure
                 # as feedback; the attempted input cannot silently be regenerated.

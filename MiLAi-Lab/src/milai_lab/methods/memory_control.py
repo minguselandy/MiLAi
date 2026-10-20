@@ -101,6 +101,8 @@ class FixedMemoryPolicy:
             if action.kind == "SEARCH" or (action.kind == "READ"
                     and not action.parameters.get("expand_context")
                     and not action.parameters.get("history_directory")
+                    and "source_observation_cursor" not in action.parameters
+                    and "observed_source" not in action.parameters
                     and len(state.visible_evidence) < self.reads):
                 return action.id
         return next(a.id for a in actions if a.kind == "HANDOFF")
@@ -120,7 +122,9 @@ class FixedContextMemoryPolicy:
             for expanded in (True, False):
                 read = next((a for a in actions if a.kind == "READ"
                     and bool(a.parameters.get("expand_context")) == expanded
-                    and not a.parameters.get("history_directory")), None)
+                    and not a.parameters.get("history_directory")
+                    and "source_observation_cursor" not in a.parameters
+                    and "observed_source" not in a.parameters), None)
                 if read is not None:
                     return read.id
         return next(a.id for a in actions if a.kind == "HANDOFF")
@@ -176,7 +180,8 @@ class RulesMemoryPolicy:
                 return read.id
         matching = [v for v in state.views if v.get("built_for") == state.task["request"]
                     and v.get("retrieval_request") == state.task.get("retrieval_request")]
-        reusable = {v["id"] for v in matching if not v["pending_events"]}
+        reusable = {v["id"] for v in matching
+                    if not v.get("pending_event_count", len(v["pending_events"]))}
         if self.reuse_views and not wants_history and reusable:
             use = next((a for a in actions if a.kind == "USE_VIEW" and a.target in reusable), None)
             if use is not None:
