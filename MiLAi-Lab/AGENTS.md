@@ -12,8 +12,12 @@ CLOSEDexit0 PID2839157absent/exec61701, source8904ff13.5519train/1209dev tasks r
 otherobservations/questions/gold/metadata equal. SDK4189train/965dev accepted,0skips/truncations;
 max9754train/8724dev at12288/2048.134.070653wall/136.757649673CPU, pendingv14now170.603221977CPU.
 ExtraUnicode-separator syntheticprobe exposedONLY offline decoder splitlines; changedto splitLF,
-runtimeprojectionunchanged. Follow-upfullreconstruction pending. No weights/models/SHA used.
-Lastverifiedcontrol173/524, stillsoleactualmodeljob. Previousturnmadecode/test/actualauditprogress.
+runtimeprojectionunchanged. Follow-upall6728persistedinputs/exactreconstruction+3Unicodecases PASS,
+d37fdc15/exec45344 CLOSEDexit0;21.056657wall/21.055863886CPU. pendingv14now191.659085863CPU,
+7phases,UNSETTLED. Rawtrainpass tokens21639026->22173930, dev3932447->4043207, no clipping;
+theseareunshuffledallrawrowsINCLUDINGmasks, notactualtrainingcompute. No weights/models/SHA used.
+Textretraining dispatcharguments+runtimeprojection recordedinprotocol; NOTstarted, nofittedcheckpoint.
+Lastverifiedcontrol183/524, stillsoleactualmodeljob. Previousturnmadecode/test/actualauditprogress.
 
 ACTIVE MODEL JOB PID2670549 / exec8252 / frozen-ba2bf8d8.
 fitting/t1-matched-operation-control-seed0-v1/run.json;524plannedupdates, same multilingualbase,

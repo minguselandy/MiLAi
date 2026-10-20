@@ -99,12 +99,88 @@
       "wall_seconds": 134.07065268512815,
       "cpu_seconds": 136.757649673
     },
-    "unicode_followup": "Actual full audit passed. Additional synthetic U+2028/U+2029/U+0085 values exposed splitlines in the offline decoder. Decoder now splits only literal newline; runtime text projection unchanged. Follow-up reconstruction pending."
+    "unicode_followup": "Offline decoder correction d37fdc15: all6728 persisted projections and exact request reconstructions pass again; three Unicode separators pass. Runtime representation unchanged; no tokenizer/model rerun.",
+    "reconstruction_result": {
+      "phase": "host_intent_e3_text_reconstruction_v2",
+      "source_version": "d37fdc15",
+      "status": "PASS_ALL_PERSISTED_INPUTS_AND_UNICODE_LITERALS",
+      "model_calls": 0,
+      "model_loads": 0,
+      "ledger_recorded": false,
+      "splits": {
+        "train": {
+          "exact_reconstruction_and_projection_rows": 5519,
+          "component_rows": {
+            "operation_history": 1955,
+            "complementary_evidence": 2137,
+            "instruction_applicability": 1427
+          },
+          "structured_raw_pass_tokens": 21639026,
+          "text_raw_pass_tokens": 22173930,
+          "token_delta_min": 31,
+          "token_delta_max": 457,
+          "token_delta_sum": 534904,
+          "token_scope": "Complete unshuffled raw pass including masks; not actual training token usage."
+        },
+        "dev": {
+          "exact_reconstruction_and_projection_rows": 1209,
+          "component_rows": {
+            "operation_history": 386,
+            "complementary_evidence": 474,
+            "instruction_applicability": 349
+          },
+          "structured_raw_pass_tokens": 3932447,
+          "text_raw_pass_tokens": 4043207,
+          "token_delta_min": 31,
+          "token_delta_max": 375,
+          "token_delta_sum": 110760,
+          "token_scope": "Complete unshuffled raw pass including masks; not actual training token usage."
+        }
+      },
+      "unicode_separator_cases": 3,
+      "wall_seconds": 21.056657439097762,
+      "cpu_seconds": 21.055863886
+    },
+    "reconstruction_file": "artifacts/host-intent-retrieval-v3/data/e3-request-text-input-audit-v1/reconstruction-v2.json"
   },
   "validation": "3new tests cover arbitrary extension types/literals, shared live/export/mixture/generative inputs and real SQLite known-reference/limit behavior. Runtime model-pool stub and exported-checkpoint evaluator exercised for the new projection. Related41 tests then affected14 and evaluator2 pass; Ruff,mypy4files,package/toolsboundary pass.",
   "limitations": "This is implementation/preparation, not retraining or E3 efficacy. Actual text-arm fits, downstream matched evaluations, E3B, T2, seeds, finalE1/reserved,E2,E4full,E5,additionalHost,nativeE0 remain.",
-  "accounting": "Full audit136.757649673CPU appended pendingv14, total170.603221977CPU. Not settled while control PID2670549 lives; originalledger unchanged.",
+  "accounting": "Audit136.757649673CPU + reconstruction21.055863886CPU appended pendingv14; currenttotal191.659085863CPU. Not settled while control PID2670549 lives; originalledger unchanged by this offline work.",
   "original_ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
   "no_checksums": true,
-  "implementation_version": "8904ff13"
+  "implementation_version": "8904ff13",
+  "text_fitting_invocation": {
+    "data": "artifacts/host-intent-retrieval-v3/data/t1-fitting-v1",
+    "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/models/laya-multilingual-base",
+    "tool": "tools/train_bounded_laya.py",
+    "source_version": "d37fdc15",
+    "argument_list": [
+      "--budget",
+      "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+      "--task",
+      "mixed_retrieval",
+      "--mixture",
+      "artifacts/host-intent-retrieval-v3/data/t1-fitting-v1/mixture.json",
+      "--optimizer-updates",
+      "524",
+      "--epochs",
+      "2",
+      "--micro-batch-size",
+      "2",
+      "--max-len",
+      "12288",
+      "--head-max-len",
+      "2048",
+      "--operation-state",
+      "shared_request_text",
+      "--shuffle-options",
+      "--gradient-checkpointing",
+      "--evaluate-train",
+      "--train-eval-final-only"
+    ],
+    "dispatch_requirements": "NOT DISPATCHED. Pin code checkout and own output/compute-phase per seed0/1/2. Existing serial actual-model protocol applies; no second live job. Use original raw T1 input files, not audit exports. Validate persisted weights after each fit.",
+    "runtime_setting": {
+      "state_projection": "shared_request_text"
+    }
+  }
 }
