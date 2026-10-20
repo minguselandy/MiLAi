@@ -63,6 +63,8 @@ def main() -> None:
     parser.add_argument("--compute-phase",
                         default="host_intent_view_v4_state_local_travel_pilot_v1",
                         help="Distinct phase in the original ledger for each declared experiment")
+    parser.add_argument("--initial-retrieval", type=Path,
+                        help="Actual prior Host request for a conditional interface probe only")
     args = parser.parse_args()
     selection = read_json(args.preparation / "selection.json")
     sys.path.insert(0, selection["source"])
@@ -80,6 +82,10 @@ def main() -> None:
         raise ValueError("This functional pilot admits only an explicitly selected training task")
     task = TaskDefinition.load(source / "state_bench/domains" / domain.name / "tasks"
                                / (selection["task_id"] + ".json"))
+    initial = read_json(args.initial_retrieval) if args.initial_retrieval else None
+    if initial is not None and (initial["task_id"] != task.task_id
+                                or initial["public_opening"] != task.opening_message):
+        raise ValueError("Frozen initial retrieval belongs to a different public task")
     env_data, env_path = load_task_environment(domain, task)
     settings = read_json(args.config)["entrypoints"]["functional"]
     host_config = VLLMConfig(**settings["host"])
@@ -93,6 +99,8 @@ def main() -> None:
         "host_and_simulator": asdict(host_config), "judge": "NOT_RUN",
         "memory_policy": args.policy, "return_envelope": "at most3strings; one full receipt",
         "compute_phase": args.compute_phase,
+        "initial_request_transport": "frozen_actual_request" if initial else "autonomous",
+        "initial_request_provenance": initial,
         "max_return_tokens": settings["ordinary_material_tokens"],
         "monetary_cost": "Not priced; upstream default USD fields are not observed zero cost.",
         "scope": "Functional integration only. Local Qwen Host/simulator, JSON-action transport, "
@@ -135,7 +143,8 @@ def main() -> None:
             # The evaluator-only summary/requirements never enter this public context.
             runtime = AgentRuntimeContext(task_id="state-task", user_id=task.user_id,
                                           domain=domain.name, now=task.now)
-            agent = make_state_agent(host, hook, runtime)
+            agent = make_state_agent(host, hook, runtime,
+                                     initial_retrieval=initial["arguments"] if initial else None)
             environment = domain.environment_class(env_data.deep_copy(), now=task.now)
             run["state_snapshot_files"] = [
                 "state-before.json", "state-after.json", "state-diff.json"]

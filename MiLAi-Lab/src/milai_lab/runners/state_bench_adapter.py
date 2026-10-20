@@ -132,10 +132,16 @@ class StateMemoryHook:
         return envelope
 
 
-def make_state_agent(model: Any, hook: StateMemoryHook, runtime_context: Any) -> Any:
+def make_state_agent(model: Any, hook: StateMemoryHook, runtime_context: Any, *,
+                     initial_retrieval: dict[str, Any] | None = None) -> Any:
     """Use the public BaseAgent hook without retaining hidden evaluator context."""
     from state_bench.agents.base import AgentRuntimeContext, AgentTurnResponse, BaseAgent
 
+    if initial_retrieval is not None:
+        from jsonschema import validate
+
+        validate(initial_retrieval, MEMORY_SCHEMA["parameters"])
+        initial_retrieval = dict(initial_retrieval)
     public_context = AgentRuntimeContext(task_id=hook.session,
         user_id=runtime_context.user_id, domain=runtime_context.domain, now=runtime_context.now)
 
@@ -148,8 +154,15 @@ def make_state_agent(model: Any, hook: StateMemoryHook, runtime_context: Any) ->
 
         def generate_next_turn(self, *, system_prompt: str, conversation: list[dict[str, Any]],
                                tools: list[dict[str, Any]]) -> Any:
+            nonlocal initial_retrieval
             if hook.bind_conversation(conversation):
                 model.begin_public_message(hook.turn)
+            if initial_retrieval is not None:
+                arguments, initial_retrieval = initial_retrieval, None
+                hook.record({"event": "state_frozen_initial_retrieval", "arguments": arguments,
+                             "scope": "Actual prior Host request; conditional interface probe"})
+                return AgentTurnResponse(tool_calls=[
+                    {"name": "retrieve_learnings", "arguments": arguments}])
             messages = [SystemMessage(content=system_prompt + "\n\n" + RETRIEVAL_INSTRUCTION),
                         *conversation_messages(conversation)]
             # STATE publishes flat Responses schemas; the chat bridge uses nested functions.

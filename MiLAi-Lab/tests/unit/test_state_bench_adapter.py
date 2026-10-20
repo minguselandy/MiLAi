@@ -83,7 +83,8 @@ def test_memory_hook_keeps_one_public_allowance_and_only_actual_prior_refs(tmp_p
         assert records[0]["request"]["task_context"]["known_evidence_refs"] == []
 
 
-def test_public_sdk_executes_real_sandbox_write_without_hidden_context(tmp_path):
+@pytest.mark.parametrize("frozen_request", [False, True])
+def test_public_sdk_executes_real_sandbox_write_without_hidden_context(tmp_path, frozen_request):
     sdk = pytest.importorskip("state_bench.agents.base")
     from state_bench.domain import get_domain_config
     from state_bench.domains.travel.schemas import EnvironmentData, HotelInventoryItem, User
@@ -108,10 +109,11 @@ def test_public_sdk_executes_real_sandbox_write_without_hidden_context(tmp_path)
         text = "\n".join(m["content"] for m in payload["messages"])
         assert hidden not in text
         assert "retrieve_learnings" in text and "book_hotel" in text
-        if len(requests) == 1:
+        step = len(requests) + int(frozen_request)
+        if step == 1:
             action = {"calls": [{"name": "retrieve_learnings",
                 "arguments": {"query": "hotel inventory identifier", "top_k": 3}}]}
-        elif len(requests) == 2:
+        elif step == 2:
             assert "Use the hotel inventory identifier" in text
             action = {"calls": [{"name": "book_hotel",
                                 "arguments": {"user_id": "u1", "hotel_id": "H1"}}]}
@@ -133,7 +135,9 @@ def test_public_sdk_executes_real_sandbox_write_without_hidden_context(tmp_path)
         client = VLLMClient(VLLMConfig(base_url="http://example.test/v1/", model="scripted",
             tool_mode="json_action"), transport=httpx.MockTransport(scripted_transport))
         model = VLLMChatModel(client=client)
-        agent = make_state_agent(model, hook, runtime)
+        agent = make_state_agent(model, hook, runtime,
+            initial_retrieval={"query": "hotel inventory identifier", "top_k": 3}
+            if frozen_request else None)
         assert agent.runtime_context.task_id == "mechanical"
         assert agent.runtime_context.task_summary is None
         assert agent.runtime_context.state_requirements == []
@@ -147,10 +151,20 @@ def test_public_sdk_executes_real_sandbox_write_without_hidden_context(tmp_path)
         assert [c["name"] for c in calls] == ["retrieve_learnings", "book_hotel"]
         assert len(env.hotels) == 1
         assert next(iter(env.hotels.values())).hotel_id == "H1"
-        assert model.active_message_key == "turn-1" and model.calls_in_message == 3
-        assert agent.token_usage.total_tokens == 45  # Scripted transport telemetry only.
+        assert model.active_message_key == "turn-1"
+        assert model.calls_in_message == 3 - int(frozen_request)
+        assert agent.token_usage.total_tokens == 15 * (3 - int(frozen_request))
         assert hidden not in canonical(records)
         client.close()
+
+
+def test_frozen_probe_accepts_only_public_memory_tool_arguments():
+    pytest.importorskip("state_bench.agents.base")
+    from jsonschema.exceptions import ValidationError
+
+    with pytest.raises(ValidationError):
+        make_state_agent(None, None, None, initial_retrieval={
+            "query": "hotel", "state_requirements": ["hidden evaluator payload"]})
 
 
 def test_actual_sandbox_write_survives_later_readout_failure(tmp_path):
