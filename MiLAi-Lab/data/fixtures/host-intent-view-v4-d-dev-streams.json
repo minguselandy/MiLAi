@@ -1,0 +1,423 @@
+{
+  "schema": "host_intent_stream_recipe_v1",
+  "split": "dev",
+  "scope": "D development cohort: all eight existing natural continuous memops dev groups. Previously exposed development sources, not blind or independent confirmation. Two own-bank request flows per group retain full ordered original sources and unknown clocks. Intermediate arrivals are not assumed irrelevant; source-conditional review remains required. Original content queries are repeated, while the second flow adds original-quotation requirements.",
+  "streams": [
+    {
+      "id": "memops_A19-view-v4-d-content",
+      "history_id": "memops_A19",
+      "requests": [
+        {
+          "id": "initial",
+          "after_sources": 7,
+          "content": "According to my latest confirmed reports so far, who is my current primary emergency contact for work and CoreFit, and what phone number has actually been supplied for that person? Distinguish completed changes from proposed primary or secondary contacts."
+        },
+        {
+          "id": "same-sources",
+          "after_sources": 7,
+          "content": "According to my latest confirmed reports so far, who is my current primary emergency contact for work and CoreFit, and what phone number has actually been supplied for that person? Distinguish completed changes from proposed primary or secondary contacts."
+        },
+        {
+          "id": "intermediate-arrivals",
+          "after_sources": 10,
+          "content": "According to my latest confirmed reports so far, who is my current primary emergency contact for work and CoreFit, and what phone number has actually been supplied for that person? Distinguish completed changes from proposed primary or secondary contacts."
+        },
+        {
+          "id": "final-arrivals",
+          "after_sources": 23,
+          "content": "According to my latest confirmed reports so far, who is my current primary emergency contact for work and CoreFit, and what phone number has actually been supplied for that person? Distinguish completed changes from proposed primary or secondary contacts."
+        }
+      ]
+    },
+    {
+      "id": "memops_A19-view-v4-d-originals",
+      "history_id": "memops_A19",
+      "requests": [
+        {
+          "id": "initial",
+          "after_sources": 7,
+          "content": "According to my latest confirmed reports so far, who is my current primary emergency contact for work and CoreFit, and what phone number has actually been supplied for that person? Distinguish completed changes from proposed primary or secondary contacts."
+        },
+        {
+          "id": "same-sources",
+          "after_sources": 7,
+          "content": "According to my latest confirmed reports so far, who is my current primary emergency contact for work and CoreFit, and what phone number has actually been supplied for that person? Distinguish completed changes from proposed primary or secondary contacts. Quote the specific statements in my reports supporting your conclusions, and keep those quotations distinct from your interpretation."
+        },
+        {
+          "id": "intermediate-arrivals",
+          "after_sources": 10,
+          "content": "According to my latest confirmed reports so far, who is my current primary emergency contact for work and CoreFit, and what phone number has actually been supplied for that person? Distinguish completed changes from proposed primary or secondary contacts. Quote the specific statements in my reports supporting your conclusions, and keep those quotations distinct from your interpretation."
+        },
+        {
+          "id": "final-arrivals",
+          "after_sources": 23,
+          "content": "According to my latest confirmed reports so far, who is my current primary emergency contact for work and CoreFit, and what phone number has actually been supplied for that person? Distinguish completed changes from proposed primary or secondary contacts. Quote the specific statements in my reports supporting your conclusions, and keep those quotations distinct from your interpretation."
+        }
+      ]
+    },
+    {
+      "id": "memops_A32-view-v4-d-content",
+      "history_id": "memops_A32",
+      "requests": [
+        {
+          "id": "initial",
+          "after_sources": 7,
+          "content": "What pattern do my email-related choices support, which changes have I actually completed so far, and which provider is still my primary? Distinguish my reported actions from intentions and other people’s proposals; do not infer that a suggested migration already happened."
+        },
+        {
+          "id": "same-sources",
+          "after_sources": 7,
+          "content": "What pattern do my email-related choices support, which changes have I actually completed so far, and which provider is still my primary? Distinguish my reported actions from intentions and other people’s proposals; do not infer that a suggested migration already happened."
+        },
+        {
+          "id": "intermediate-arrivals",
+          "after_sources": 10,
+          "content": "What pattern do my email-related choices support, which changes have I actually completed so far, and which provider is still my primary? Distinguish my reported actions from intentions and other people’s proposals; do not infer that a suggested migration already happened."
+        },
+        {
+          "id": "final-arrivals",
+          "after_sources": 23,
+          "content": "What pattern do my email-related choices support, which changes have I actually completed so far, and which provider is still my primary? Distinguish my reported actions from intentions and other people’s proposals; do not infer that a suggested migration already happened."
+        }
+      ]
+    },
+    {
+      "id": "memops_A32-view-v4-d-originals",
+      "history_id": "memops_A32",
+      "requests": [
+        {
+          "id": "initial",
+          "after_sources": 7,
+          "content": "What pattern do my email-related choices support, which changes have I actually completed so far, and which provider is still my primary? Distinguish my reported actions from intentions and other people’s proposals; do not infer that a suggested migration already happened."
+        },
+        {
+          "id": "same-sources",
+          "after_sources": 7,
+          "content": "What pattern do my email-related choices support, which changes have I actually completed so far, and which provider is still my primary? Distinguish my reported actions from intentions and other people’s proposals; do not infer that a suggested migration already happened. Quote the specific statements in my reports supporting your conclusions, and keep those quotations distinct from your interpretation."
+        },
+        {
+          "id": "intermediate-arrivals",
+          "after_sources": 10,
+          "content": "What pattern do my email-related choices support, which changes have I actually completed so far, and which provider is still my primary? Distinguish my reported actions from intentions and other people’s proposals; do not infer that a suggested migration already happened. Quote the specific statements in my reports supporting your conclusions, and keep those quotations distinct from your interpretation."
+        },
+        {
+          "id": "final-arrivals",
+          "after_sources": 23,
+          "content": "What pattern do my email-related choices support, which changes have I actually completed so far, and which provider is still my primary? Distinguish my reported actions from intentions and other people’s proposals; do not infer that a suggested migration already happened. Quote the specific statements in my reports supporting your conclusions, and keep those quotations distinct from your interpretation."
+        }
+      ]
+    },
+    {
+      "id": "memops_B30-view-v4-d-content",
+      "history_id": "memops_B30",
+      "requests": [
+        {
+          "id": "initial",
+          "after_sources": 7,
+          "content": "What names should I use now in a professional introduction between my college friend and my former roommate, and when was the roommate’s naming preference reported? Keep confirmed personal preferences, historical nicknames and any future corporate branding separate."
+        },
+        {
+          "id": "same-sources",
+          "after_sources": 7,
+          "content": "What names should I use now in a professional introduction between my college friend and my former roommate, and when was the roommate’s naming preference reported? Keep confirmed personal preferences, historical nicknames and any future corporate branding separate."
+        },
+        {
+          "id": "intermediate-arrivals",
+          "after_sources": 10,
+          "content": "What names should I use now in a professional introduction between my college friend and my former roommate, and when was the roommate’s naming preference reported? Keep confirmed personal preferences, historical nicknames and any future corporate branding separate."
+        },
+        {
+          "id": "final-arrivals",
+          "after_sources": 23,
+          "content": "What names should I use now in a professional introduction between my college friend and my former roommate, and when was the roommate’s naming preference reported? Keep confirmed personal preferences, historical nicknames and any future corporate branding separate."
+        }
+      ]
+    },
+    {
+      "id": "memops_B30-view-v4-d-originals",
+      "history_id": "memops_B30",
+      "requests": [
+        {
+          "id": "initial",
+          "after_sources": 7,
+          "content": "What names should I use now in a professional introduction between my college friend and my former roommate, and when was the roommate’s naming preference reported? Keep confirmed personal preferences, historical nicknames and any future corporate branding separate."
+        },
+        {
+          "id": "same-sources",
+          "after_sources": 7,
+          "content": "What names should I use now in a professional introduction between my college friend and my former roommate, and when was the roommate’s naming preference reported? Keep confirmed personal preferences, historical nicknames and any future corporate branding separate. Quote the specific statements in my reports supporting your conclusions, and keep those quotations distinct from your interpretation."
+        },
+        {
+          "id": "intermediate-arrivals",
+          "after_sources": 10,
+          "content": "What names should I use now in a professional introduction between my college friend and my former roommate, and when was the roommate’s naming preference reported? Keep confirmed personal preferences, historical nicknames and any future corporate branding separate. Quote the specific statements in my reports supporting your conclusions, and keep those quotations distinct from your interpretation."
+        },
+        {
+          "id": "final-arrivals",
+          "after_sources": 23,
+          "content": "What names should I use now in a professional introduction between my college friend and my former roommate, and when was the roommate’s naming preference reported? Keep confirmed personal preferences, historical nicknames and any future corporate branding separate. Quote the specific statements in my reports supporting your conclusions, and keep those quotations distinct from your interpretation."
+        }
+      ]
+    },
+    {
+      "id": "memops_C03-view-v4-d-content",
+      "history_id": "memops_C03",
+      "requests": [
+        {
+          "id": "initial",
+          "after_sources": 7,
+          "content": "What is my latest confirmed follow-up date, time, clinician and location, and is any suggested time change still awaiting my response? Keep my appointment separate from my mother’s or Kevin’s, and distinguish a proposal from a confirmed change."
+        },
+        {
+          "id": "same-sources",
+          "after_sources": 7,
+          "content": "What is my latest confirmed follow-up date, time, clinician and location, and is any suggested time change still awaiting my response? Keep my appointment separate from my mother’s or Kevin’s, and distinguish a proposal from a confirmed change."
+        },
+        {
+          "id": "intermediate-arrivals",
+          "after_sources": 10,
+          "content": "What is my latest confirmed follow-up date, time, clinician and location, and is any suggested time change still awaiting my response? Keep my appointment separate from my mother’s or Kevin’s, and distinguish a proposal from a confirmed change."
+        },
+        {
+          "id": "final-arrivals",
+          "after_sources": 23,
+          "content": "What is my latest confirmed follow-up date, time, clinician and location, and is any suggested time change still awaiting my response? Keep my appointment separate from my mother’s or Kevin’s, and distinguish a proposal from a confirmed change."
+        }
+      ]
+    },
+    {
+      "id": "memops_C03-view-v4-d-originals",
+      "history_id": "memops_C03",
+      "requests": [
+        {
+          "id": "initial",
+          "after_sources": 7,
+          "content": "What is my latest confirmed follow-up date, time, clinician and location, and is any suggested time change still awaiting my response? Keep my appointment separate from my mother’s or Kevin’s, and distinguish a proposal from a confirmed change."
+        },
+        {
+          "id": "same-sources",
+          "after_sources": 7,
+          "content": "What is my latest confirmed follow-up date, time, clinician and location, and is any suggested time change still awaiting my response? Keep my appointment separate from my mother’s or Kevin’s, and distinguish a proposal from a confirmed change. Quote the specific statements in my reports supporting your conclusions, and keep those quotations distinct from your interpretation."
+        },
+        {
+          "id": "intermediate-arrivals",
+          "after_sources": 10,
+          "content": "What is my latest confirmed follow-up date, time, clinician and location, and is any suggested time change still awaiting my response? Keep my appointment separate from my mother’s or Kevin’s, and distinguish a proposal from a confirmed change. Quote the specific statements in my reports supporting your conclusions, and keep those quotations distinct from your interpretation."
+        },
+        {
+          "id": "final-arrivals",
+          "after_sources": 23,
+          "content": "What is my latest confirmed follow-up date, time, clinician and location, and is any suggested time change still awaiting my response? Keep my appointment separate from my mother’s or Kevin’s, and distinguish a proposal from a confirmed change. Quote the specific statements in my reports supporting your conclusions, and keep those quotations distinct from your interpretation."
+        }
+      ]
+    },
+    {
+      "id": "memops_D25-view-v4-d-content",
+      "history_id": "memops_D25",
+      "requests": [
+        {
+          "id": "initial",
+          "after_sources": 7,
+          "content": "What flavor and heat preferences do my reported meals support, which lunch place remains my established go-to, and which suggested food or place changes have I not actually tried? Separate other people’s tolerance from mine and keep the inference bounded to my examples."
+        },
+        {
+          "id": "same-sources",
+          "after_sources": 7,
+          "content": "What flavor and heat preferences do my reported meals support, which lunch place remains my established go-to, and which suggested food or place changes have I not actually tried? Separate other people’s tolerance from mine and keep the inference bounded to my examples."
+        },
+        {
+          "id": "intermediate-arrivals",
+          "after_sources": 10,
+          "content": "What flavor and heat preferences do my reported meals support, which lunch place remains my established go-to, and which suggested food or place changes have I not actually tried? Separate other people’s tolerance from mine and keep the inference bounded to my examples."
+        },
+        {
+          "id": "final-arrivals",
+          "after_sources": 23,
+          "content": "What flavor and heat preferences do my reported meals support, which lunch place remains my established go-to, and which suggested food or place changes have I not actually tried? Separate other people’s tolerance from mine and keep the inference bounded to my examples."
+        }
+      ]
+    },
+    {
+      "id": "memops_D25-view-v4-d-originals",
+      "history_id": "memops_D25",
+      "requests": [
+        {
+          "id": "initial",
+          "after_sources": 7,
+          "content": "What flavor and heat preferences do my reported meals support, which lunch place remains my established go-to, and which suggested food or place changes have I not actually tried? Separate other people’s tolerance from mine and keep the inference bounded to my examples."
+        },
+        {
+          "id": "same-sources",
+          "after_sources": 7,
+          "content": "What flavor and heat preferences do my reported meals support, which lunch place remains my established go-to, and which suggested food or place changes have I not actually tried? Separate other people’s tolerance from mine and keep the inference bounded to my examples. Quote the specific statements in my reports supporting your conclusions, and keep those quotations distinct from your interpretation."
+        },
+        {
+          "id": "intermediate-arrivals",
+          "after_sources": 10,
+          "content": "What flavor and heat preferences do my reported meals support, which lunch place remains my established go-to, and which suggested food or place changes have I not actually tried? Separate other people’s tolerance from mine and keep the inference bounded to my examples. Quote the specific statements in my reports supporting your conclusions, and keep those quotations distinct from your interpretation."
+        },
+        {
+          "id": "final-arrivals",
+          "after_sources": 23,
+          "content": "What flavor and heat preferences do my reported meals support, which lunch place remains my established go-to, and which suggested food or place changes have I not actually tried? Separate other people’s tolerance from mine and keep the inference bounded to my examples. Quote the specific statements in my reports supporting your conclusions, and keep those quotations distinct from your interpretation."
+        }
+      ]
+    },
+    {
+      "id": "memops_E08-view-v4-d-content",
+      "history_id": "memops_E08",
+      "requests": [
+        {
+          "id": "initial",
+          "after_sources": 7,
+          "content": "Based on my reports, what review routine am I actually following now, what planned change is not in force yet, and what is the correct total for my own Portland hotel? Separate my records from coworkers’ figures and reported preference from speculation about me."
+        },
+        {
+          "id": "same-sources",
+          "after_sources": 7,
+          "content": "Based on my reports, what review routine am I actually following now, what planned change is not in force yet, and what is the correct total for my own Portland hotel? Separate my records from coworkers’ figures and reported preference from speculation about me."
+        },
+        {
+          "id": "intermediate-arrivals",
+          "after_sources": 10,
+          "content": "Based on my reports, what review routine am I actually following now, what planned change is not in force yet, and what is the correct total for my own Portland hotel? Separate my records from coworkers’ figures and reported preference from speculation about me."
+        },
+        {
+          "id": "final-arrivals",
+          "after_sources": 23,
+          "content": "Based on my reports, what review routine am I actually following now, what planned change is not in force yet, and what is the correct total for my own Portland hotel? Separate my records from coworkers’ figures and reported preference from speculation about me."
+        }
+      ]
+    },
+    {
+      "id": "memops_E08-view-v4-d-originals",
+      "history_id": "memops_E08",
+      "requests": [
+        {
+          "id": "initial",
+          "after_sources": 7,
+          "content": "Based on my reports, what review routine am I actually following now, what planned change is not in force yet, and what is the correct total for my own Portland hotel? Separate my records from coworkers’ figures and reported preference from speculation about me."
+        },
+        {
+          "id": "same-sources",
+          "after_sources": 7,
+          "content": "Based on my reports, what review routine am I actually following now, what planned change is not in force yet, and what is the correct total for my own Portland hotel? Separate my records from coworkers’ figures and reported preference from speculation about me. Quote the specific statements in my reports supporting your conclusions, and keep those quotations distinct from your interpretation."
+        },
+        {
+          "id": "intermediate-arrivals",
+          "after_sources": 10,
+          "content": "Based on my reports, what review routine am I actually following now, what planned change is not in force yet, and what is the correct total for my own Portland hotel? Separate my records from coworkers’ figures and reported preference from speculation about me. Quote the specific statements in my reports supporting your conclusions, and keep those quotations distinct from your interpretation."
+        },
+        {
+          "id": "final-arrivals",
+          "after_sources": 23,
+          "content": "Based on my reports, what review routine am I actually following now, what planned change is not in force yet, and what is the correct total for my own Portland hotel? Separate my records from coworkers’ figures and reported preference from speculation about me. Quote the specific statements in my reports supporting your conclusions, and keep those quotations distinct from your interpretation."
+        }
+      ]
+    },
+    {
+      "id": "memops_E15-view-v4-d-content",
+      "history_id": "memops_E15",
+      "requests": [
+        {
+          "id": "initial",
+          "after_sources": 7,
+          "content": "Using only my personally verified priority-tracking records so far, summarize the reference ticket, corrected incident total and any established downgrade/upgrade split. If the observation duration is supplied, calculate average incidents per calendar day and per seven-day week; distinguish this from an unknown overall mislabeling percentage, and do not add coworkers’ cases or treat projections as observations."
+        },
+        {
+          "id": "same-sources",
+          "after_sources": 7,
+          "content": "Using only my personally verified priority-tracking records so far, summarize the reference ticket, corrected incident total and any established downgrade/upgrade split. If the observation duration is supplied, calculate average incidents per calendar day and per seven-day week; distinguish this from an unknown overall mislabeling percentage, and do not add coworkers’ cases or treat projections as observations."
+        },
+        {
+          "id": "intermediate-arrivals",
+          "after_sources": 10,
+          "content": "Using only my personally verified priority-tracking records so far, summarize the reference ticket, corrected incident total and any established downgrade/upgrade split. If the observation duration is supplied, calculate average incidents per calendar day and per seven-day week; distinguish this from an unknown overall mislabeling percentage, and do not add coworkers’ cases or treat projections as observations."
+        },
+        {
+          "id": "final-arrivals",
+          "after_sources": 23,
+          "content": "Using only my personally verified priority-tracking records so far, summarize the reference ticket, corrected incident total and any established downgrade/upgrade split. If the observation duration is supplied, calculate average incidents per calendar day and per seven-day week; distinguish this from an unknown overall mislabeling percentage, and do not add coworkers’ cases or treat projections as observations."
+        }
+      ]
+    },
+    {
+      "id": "memops_E15-view-v4-d-originals",
+      "history_id": "memops_E15",
+      "requests": [
+        {
+          "id": "initial",
+          "after_sources": 7,
+          "content": "Using only my personally verified priority-tracking records so far, summarize the reference ticket, corrected incident total and any established downgrade/upgrade split. If the observation duration is supplied, calculate average incidents per calendar day and per seven-day week; distinguish this from an unknown overall mislabeling percentage, and do not add coworkers’ cases or treat projections as observations."
+        },
+        {
+          "id": "same-sources",
+          "after_sources": 7,
+          "content": "Using only my personally verified priority-tracking records so far, summarize the reference ticket, corrected incident total and any established downgrade/upgrade split. If the observation duration is supplied, calculate average incidents per calendar day and per seven-day week; distinguish this from an unknown overall mislabeling percentage, and do not add coworkers’ cases or treat projections as observations. Quote the specific statements in my reports supporting your conclusions, and keep those quotations distinct from your interpretation."
+        },
+        {
+          "id": "intermediate-arrivals",
+          "after_sources": 10,
+          "content": "Using only my personally verified priority-tracking records so far, summarize the reference ticket, corrected incident total and any established downgrade/upgrade split. If the observation duration is supplied, calculate average incidents per calendar day and per seven-day week; distinguish this from an unknown overall mislabeling percentage, and do not add coworkers’ cases or treat projections as observations. Quote the specific statements in my reports supporting your conclusions, and keep those quotations distinct from your interpretation."
+        },
+        {
+          "id": "final-arrivals",
+          "after_sources": 23,
+          "content": "Using only my personally verified priority-tracking records so far, summarize the reference ticket, corrected incident total and any established downgrade/upgrade split. If the observation duration is supplied, calculate average incidents per calendar day and per seven-day week; distinguish this from an unknown overall mislabeling percentage, and do not add coworkers’ cases or treat projections as observations. Quote the specific statements in my reports supporting your conclusions, and keep those quotations distinct from your interpretation."
+        }
+      ]
+    },
+    {
+      "id": "memops_F01-view-v4-d-content",
+      "history_id": "memops_F01",
+      "requests": [
+        {
+          "id": "initial",
+          "after_sources": 7,
+          "content": "From my latest confirmed recurring figures, what net monthly pay should this budget use, and how much remains after all listed expenses and the savings transfer? Show the arithmetic; keep one-off reimbursements, other people’s pay, inactive freelance work and future pay changes out of the current total."
+        },
+        {
+          "id": "same-sources",
+          "after_sources": 7,
+          "content": "From my latest confirmed recurring figures, what net monthly pay should this budget use, and how much remains after all listed expenses and the savings transfer? Show the arithmetic; keep one-off reimbursements, other people’s pay, inactive freelance work and future pay changes out of the current total."
+        },
+        {
+          "id": "intermediate-arrivals",
+          "after_sources": 10,
+          "content": "From my latest confirmed recurring figures, what net monthly pay should this budget use, and how much remains after all listed expenses and the savings transfer? Show the arithmetic; keep one-off reimbursements, other people’s pay, inactive freelance work and future pay changes out of the current total."
+        },
+        {
+          "id": "final-arrivals",
+          "after_sources": 23,
+          "content": "From my latest confirmed recurring figures, what net monthly pay should this budget use, and how much remains after all listed expenses and the savings transfer? Show the arithmetic; keep one-off reimbursements, other people’s pay, inactive freelance work and future pay changes out of the current total."
+        }
+      ]
+    },
+    {
+      "id": "memops_F01-view-v4-d-originals",
+      "history_id": "memops_F01",
+      "requests": [
+        {
+          "id": "initial",
+          "after_sources": 7,
+          "content": "From my latest confirmed recurring figures, what net monthly pay should this budget use, and how much remains after all listed expenses and the savings transfer? Show the arithmetic; keep one-off reimbursements, other people’s pay, inactive freelance work and future pay changes out of the current total."
+        },
+        {
+          "id": "same-sources",
+          "after_sources": 7,
+          "content": "From my latest confirmed recurring figures, what net monthly pay should this budget use, and how much remains after all listed expenses and the savings transfer? Show the arithmetic; keep one-off reimbursements, other people’s pay, inactive freelance work and future pay changes out of the current total. Quote the specific statements in my reports supporting your conclusions, and keep those quotations distinct from your interpretation."
+        },
+        {
+          "id": "intermediate-arrivals",
+          "after_sources": 10,
+          "content": "From my latest confirmed recurring figures, what net monthly pay should this budget use, and how much remains after all listed expenses and the savings transfer? Show the arithmetic; keep one-off reimbursements, other people’s pay, inactive freelance work and future pay changes out of the current total. Quote the specific statements in my reports supporting your conclusions, and keep those quotations distinct from your interpretation."
+        },
+        {
+          "id": "final-arrivals",
+          "after_sources": 23,
+          "content": "From my latest confirmed recurring figures, what net monthly pay should this budget use, and how much remains after all listed expenses and the savings transfer? Show the arithmetic; keep one-off reimbursements, other people’s pay, inactive freelance work and future pay changes out of the current total. Quote the specific statements in my reports supporting your conclusions, and keep those quotations distinct from your interpretation."
+        }
+      ]
+    }
+  ]
+}

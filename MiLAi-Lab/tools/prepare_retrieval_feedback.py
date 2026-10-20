@@ -51,18 +51,22 @@ def compile_feedback(
                     or branches[0]["intervention"]["continuation_steps"]
                     != branches[1]["intervention"]["continuation_steps"]):
                 raise ValueError("First-action comparison requires a common continuation policy")
-            usable = all(
+            tools_completed = all(
                 branch["status"] == "COMPLETED"
                 and branch["result"]["frozen_initial_observation_and_actions_equal"]
-                and readout["status"] == "COMPLETED"
-                for branch, readout in zip(branches, readouts, strict=True))
-            if not usable and any(comparison[target] != "unknown"
-                                  for target in ("answer", "delivery")):
-                raise ValueError("Unclosed comparisons remain unknown; do not infer a preference")
+                for branch in branches)
+            if not tools_completed and any(comparison[target] != "unknown"
+                                           for target in ("answer", "delivery")):
+                raise ValueError("Unclosed tool comparisons remain unknown")
+            if (any(readout["status"] != "COMPLETED" for readout in readouts)
+                    and comparison["answer"] != "unknown"):
+                raise ValueError("Unclosed Host readouts leave answer feedback unknown")
             comparisons.append({
                 "left": actions[0]["id"], "right": actions[1]["id"],
                 **{key: copy.deepcopy(comparison[key]) for key in (
                     "answer", "delivery", "basis", "left_case", "right_case")},
+                "tool_statuses": [branch["status"] for branch in branches],
+                "host_readout_statuses": [readout["status"] for readout in readouts],
             })
         row["feedback"] = {"capture": str(capture), "comparisons": comparisons,
                            "reviewer": review["reviewer"]}

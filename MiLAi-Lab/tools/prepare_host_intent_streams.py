@@ -1,4 +1,4 @@
-"""Place declared Host requests between original, ordered training-source arrivals."""
+"""Place declared Host requests between original arrivals without changing source splits."""
 from __future__ import annotations
 
 import argparse
@@ -13,10 +13,11 @@ from milai_lab.harness.artifact_io import read_json, write_json
 def prepare_streams(fixture: dict[str, Any], recipe: dict[str, Any]) -> dict[str, Any]:
     histories = {history["id"]: history for history in fixture["histories"]}
     streams = []
+    split = recipe.get("split", "train")
     for specification in recipe["streams"]:
         history = histories[specification["history_id"]]
-        if history["split"] != "train" or not history.get("continuous"):
-            raise ValueError("Short-flow development requires a continuous training history")
+        if history["split"] != split or not history.get("continuous"):
+            raise ValueError("Short flows need continuous histories in the declared source split")
         arrivals = [source for request in history["requests"]
                     for source in request.get("incoming_sources", [])]
         previous = 0
@@ -53,6 +54,7 @@ def main() -> None:
         "status": "PREPARED_NOT_EXECUTED", "source_fixture": str(args.histories),
         "recipe": str(args.recipe),
         "source_groups": [h["source_group"] for h in streams["histories"]],
+        "split": recipe.get("split", "train"),
         "positions": sum(len(h["requests"]) for h in streams["histories"]),
         "original_source_order_and_content": "Retained by direct slicing; no source rewriting",
         "prebuilt_views": 0, "model_calls": 0,

@@ -1,0 +1,92 @@
+{
+  "status": "CLOSED_TASK_REVIEWED",
+  "source_version": "d8447495",
+  "source_groups": 4,
+  "positions": 32,
+  "streams": 8,
+  "split": "exposed_train",
+  "grades": {
+    "fixed_context-rich": {
+      "Q": 9,
+      "F": 6,
+      "W": 5,
+      "C": 12
+    }
+  },
+  "by_group": {
+    "memops_B06": {
+      "Q": 3,
+      "F": 1,
+      "W": 2,
+      "C": 2
+    },
+    "memops_C26": {
+      "C": 3,
+      "Q": 1,
+      "F": 3,
+      "W": 1
+    },
+    "memops_D11": {
+      "C": 5,
+      "F": 1,
+      "Q": 1,
+      "W": 1
+    },
+    "memops_F08": {
+      "Q": 4,
+      "W": 1,
+      "C": 2,
+      "F": 1
+    }
+  },
+  "generation_tokens": 252288,
+  "generation_requests": 42,
+  "generation": {
+    "charged_tokens": 252288,
+    "known_tokens": 252288,
+    "unknown_usage": 0
+  },
+  "wall_seconds": 892.3572103381157,
+  "cpu_seconds_nested": 36.612300482,
+  "tool_calls": 10,
+  "final_arrivals": {
+    "positions": 8,
+    "tool_calls": 0,
+    "grades": {
+      "W": 5,
+      "F": 3
+    }
+  },
+  "returned_view_count": 0,
+  "stages": {
+    "host_request": {
+      "requests": 10,
+      "tokens": 24341,
+      "http_wall_seconds": 45.580589424818754
+    },
+    "host_completion": {
+      "requests": 26,
+      "tokens": 157898,
+      "http_wall_seconds": 464.5010563042015
+    },
+    "host_incomplete": {
+      "requests": 6,
+      "tokens": 70049,
+      "http_wall_seconds": 320.7606538422406
+    }
+  },
+  "results": "artifacts/host-intent-retrieval-v3/view-v4-b-fixed-context-review-v1/results.json",
+  "review": "artifacts/host-intent-retrieval-v3/view-v4-b-fixed-context-review-v1/author-review.json",
+  "limitations": [
+    "Four exposed source groups, single stochastic development run; not independent confirmation.",
+    "Q includes source-attribution/qualification defects even where primary values are correct; these are author grades, not official metrics.",
+    "Valid old original quotes do not establish latest state after source arrivals.",
+    "No branch labels or trained-policy improvement inferred from this full-Host comparison."
+  ],
+  "compute": {
+    "wall_seconds": 3.202994809485972,
+    "cpu_seconds": 3.202944981
+  },
+  "ledger_recorded": true,
+  "settlement": "artifacts/host-intent-retrieval-v3/data/pending-offline-review-v22.json"
+}

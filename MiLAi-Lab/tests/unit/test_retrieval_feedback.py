@@ -196,3 +196,14 @@ def test_unfinished_readout_remains_unknown_and_state_is_retained(tmp_path):
     assert len(compiled) == 1
     assert feedback_counts(compiled, "delivery") == {
         "feedback_states": 1, "states_with_direction": 0, "unknown_pairs": 1}
+
+
+def test_closed_material_delivery_can_be_reviewed_when_host_readout_failed(tmp_path):
+    raw, reviews, cases = branch_fixture(tmp_path)
+    (cases[0] / "host-readout/readout.json").write_text(json.dumps({"status": "FAILED"}))
+    reviews[0]["comparisons"][0].update(answer="unknown", delivery="left")
+    compiled, = compile_feedback([raw], reviews)
+    pair, = compiled["feedback"]["comparisons"]
+    assert pair["answer"] == "unknown" and pair["delivery"] == "left"
+    assert pair["host_readout_statuses"] == ["FAILED", "COMPLETED"]
+    assert pair["tool_statuses"] == ["COMPLETED", "COMPLETED"]

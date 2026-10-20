@@ -100,6 +100,7 @@
     "wall_seconds": 4.060472257435322,
     "cpu_seconds": 4.070078769
   },
-  "ledger_recorded": false,
-  "review_correction": "Initial narrative incorrectly said all8 positions lacked a tool call; raw count always1. Retained initial summary; actual F08 call inspected and narrative corrected. No model result or grade changed."
+  "ledger_recorded": true,
+  "review_correction": "Initial narrative incorrectly said all8 positions lacked a tool call; raw count always1. Retained initial summary; actual F08 call inspected and narrative corrected. No model result or grade changed.",
+  "settlement": "artifacts/host-intent-retrieval-v3/data/pending-offline-review-v22.json"
 }

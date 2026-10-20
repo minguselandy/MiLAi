@@ -1,0 +1,154 @@
+{
+  "status": "ALL_B_ARMS_CLOSED_SOURCE_REVIEW_PARTIAL",
+  "source_version": "d8447495",
+  "positions": 160,
+  "source_groups": 4,
+  "arms": [
+    {
+      "arm": "generative",
+      "status": "COMPLETED_WITH_FAILURES",
+      "positions": 32,
+      "wall_seconds": 1146.3695352897048,
+      "cpu_seconds_nested": 45.739693722,
+      "already_billed_local_cpu_seconds": 0,
+      "local_cpu_not_yet_billed": 45.739693722,
+      "generation_requests": 113,
+      "generation": {
+        "charged_tokens": 694017,
+        "known_tokens": 694017,
+        "unknown_usage": 0
+      },
+      "compute_delta": {},
+      "root": "artifacts/host-intent-retrieval-v3/view-v4-b-v1/generative"
+    },
+    {
+      "arm": "rules",
+      "status": "COMPLETED_WITH_FAILURES",
+      "positions": 32,
+      "wall_seconds": 926.8824241496623,
+      "cpu_seconds_nested": 42.060836048,
+      "already_billed_local_cpu_seconds": 0,
+      "local_cpu_not_yet_billed": 42.060836048,
+      "generation_requests": 47,
+      "generation": {
+        "charged_tokens": 276431,
+        "known_tokens": 276431,
+        "unknown_usage": 0
+      },
+      "compute_delta": {},
+      "root": "artifacts/host-intent-retrieval-v3/view-v4-b-v1/rules"
+    },
+    {
+      "arm": "fixed-context",
+      "status": "COMPLETED_WITH_FAILURES",
+      "positions": 32,
+      "wall_seconds": 892.3572103381157,
+      "cpu_seconds_nested": 36.612300482,
+      "already_billed_local_cpu_seconds": 0,
+      "local_cpu_not_yet_billed": 36.612300482,
+      "generation_requests": 42,
+      "generation": {
+        "charged_tokens": 252288,
+        "known_tokens": 252288,
+        "unknown_usage": 0
+      },
+      "compute_delta": {},
+      "root": "artifacts/host-intent-retrieval-v3/view-v4-b-v1/fixed-context"
+    },
+    {
+      "arm": "t1-main-seed0",
+      "status": "COMPLETED_WITH_FAILURES",
+      "positions": 32,
+      "wall_seconds": 817.2106800246984,
+      "cpu_seconds_nested": 80.345592929,
+      "already_billed_local_cpu_seconds": 41.99596753800188,
+      "local_cpu_not_yet_billed": 38.34962539099813,
+      "generation_requests": 40,
+      "generation": {
+        "charged_tokens": 228299,
+        "known_tokens": 228299,
+        "unknown_usage": 0
+      },
+      "compute_delta": {
+        "dynamic_memory_laya": {
+          "cpu_seconds": 32.552720644001965,
+          "forwards": 41,
+          "input_tokens": 217517,
+          "sequence_rows": 41,
+          "state_tokenizations": 41,
+          "state_tokens": 198039,
+          "wall_seconds": 19.85745991114527
+        },
+        "dynamic_memory_laya_load": {
+          "cpu_seconds": 9.443246893999913,
+          "loads": 1,
+          "wall_seconds": 6.632854303345084
+        }
+      },
+      "root": "artifacts/host-intent-retrieval-v3/view-v4-b-v1/t1-main-seed0",
+      "native_outputs": {
+        "completed_predictions": 41,
+        "max_input_tokens": 7941,
+        "input_tokens": 217517,
+        "truncated": 0,
+        "finite_logits": true,
+        "backend": "process-local MHA fastpath disabled",
+        "declared_max_len": 16384
+      }
+    },
+    {
+      "arm": "t1-control-seed0",
+      "status": "COMPLETED_WITH_FAILURES",
+      "positions": 32,
+      "wall_seconds": 762.3257771898061,
+      "cpu_seconds_nested": 104.972872057,
+      "already_billed_local_cpu_seconds": 63.45294042100204,
+      "local_cpu_not_yet_billed": 41.51993163599796,
+      "generation_requests": 43,
+      "generation": {
+        "charged_tokens": 231774,
+        "known_tokens": 231774,
+        "unknown_usage": 0
+      },
+      "compute_delta": {
+        "dynamic_memory_laya": {
+          "cpu_seconds": 55.837842642002215,
+          "forwards": 55,
+          "input_tokens": 327198,
+          "sequence_rows": 55,
+          "state_tokenizations": 55,
+          "state_tokens": 298386,
+          "wall_seconds": 33.153367668390274
+        },
+        "dynamic_memory_laya_load": {
+          "cpu_seconds": 7.615097778999825,
+          "loads": 1,
+          "wall_seconds": 5.778941282071173
+        }
+      },
+      "root": "artifacts/host-intent-retrieval-v3/view-v4-b-v1/t1-control-seed0",
+      "native_outputs": {
+        "completed_predictions": 55,
+        "max_input_tokens": 12989,
+        "input_tokens": 327198,
+        "truncated": 0,
+        "finite_logits": true,
+        "backend": "process-local MHA fastpath disabled",
+        "declared_max_len": 16384
+      }
+    }
+  ],
+  "state_export": "artifacts/host-intent-retrieval-v3/data/view-v4-b-states-v1/export.json",
+  "semantic_reviews_completed": [
+    "generative",
+    "rules",
+    "fixed-context"
+  ],
+  "native_semantic_reviews": "In progress; no task grades inferred from execution completion.",
+  "compute": {
+    "wall_seconds": 0.44108937215059996,
+    "cpu_seconds": 0.441055832
+  },
+  "ledger_recorded": true,
+  "settlement": "artifacts/host-intent-retrieval-v3/data/pending-offline-review-v22.json"
+}

@@ -6,17 +6,35 @@ older worktree. Full goal ACTIVE, incomplete. No subagents, SHA/checksum/content
 extra ledger, new services or remote publication. Existing HTTP/CUDA envs and models only.
 Serialize actual model jobs. Revalidate PID/command/terminal output; never restart on timeout.
 
-CURRENT RUN: B serial five-arm queue frozen d8447495. DriverPID1130008 /exec98733;
-generative child1130013 CLOSED exit0; active rules child1202584 at latest check. Revalidate actual PID/command.
-artifacts/host-intent-retrieval-v3/view-v4-b-v1/driver.json authoritative; per-arm driver below it.
-Plan view-v4-b-plan-v1.json.4existingT2groups B06/C26/D11/F08 x2owncoldstreams x4positions=32/arm.
-Order generative,rules,fixed_context,T1mainseed0,T1controlseed0.160positions planned, not completed.
-Native wrapper sets MHAfastpathfalse process-only and inserts frozen tools into sys.path; maxlen16384.
-Same source content/order/roles/clocks checked for all8streams. D11middle=corroborating,notpureirrelevant.
-Actual models serialized; no offline ledger settlement while queue lives.
+CURRENT EXECUTION: B five-arm queue CLOSED, all160 positions, driver1130008/exec98733
+and both native children absent; root status CLOSED_ARMS_REQUIRE_SOURCE_REVIEW. Source d8447495.
+H guidance pilot1452387/exec30402 CLOSED8/8. C supplement1489319/exec93643 CLOSED8/8 withfailures.
+No actual model job at this boundary. NEXT launch prepared source-check followups on copies of8
+actual Gen histories; tools/run_host_intent_followups.py and view-v4-source-check-followups-plan-v1.json.
+Use frozen d844 src/HTTP env, retain actual prior completed Host messages/Store, new requestID;
+no forcedtoolchoice/internalaction, original positions unchanged.8groups afterfirstanswer arrivals
+19/19/9/15/7/19/16/16 verified. Runner source version mustbe recorded aftercurrentcommit.
+
+B rules CLOSED16C/8Q/4W/4F,276431tokens47HTTP8toolcalls;7Viewgenerationcalls,2returnedViews.
+B fixed_context CLOSED12C/9Q/5W/6F,252288tokens42HTTP10toolcalls,noViewgeneration.
+Each has0newcalls in8final-arrivalpositions. These are author/source grades,notofficial/blind.
+MainT1 B32closed,228299tokens40HTTP;41nativeforwards217517tokens,max7941,truncated0/finite.
+ControlT1 B32closed,231774tokens43HTTP;55nativeforwards327198tokens,max12989,truncated0/finite.
+Both native were actual process-local MHAfastpathfalse,max16384. Native model CPU alreadybilled:
+main41.995967538,control63.452940421. RemainingdriverCPU38.349625391/41.519931636 settledv22.
+Native task semantic reviews stillpending. Main answers alreadyread; tentative review notes inchat
+must be substantiated/persisted, not claimed completed. FullB closure manifest and data/view-v4-b-states-v1/
+export.json:250actualdecisionstates, allgoldmasked; four initialexports194 +control56, don'tduplicate.
+
+H generic Host coverage/quote guidance was actually visible; finalcounts13/15 and schema still
+allowedmilai_retrieve. Yet0latecalls, bothstale.8completed, source/quote reviewpending. Do notcall
+it anupdatefix or silentlyadopt it. C supplement keeps originalHost config. C closed firstC23 facts
+correct, quote usesassistant/View text; D23initial leftside preference mayoverextend singleflight;
+C23late2truncations, D23same-source1truncation andlater-originals JSON_ACTION_MALFORMED.
+D23later-sources stale.4failedtotal. Preserveactualoutputs/cost; reviewpending.
 
 B generative32/32 CLOSED:13C/6Q/4W/9F,694017tokens113HTTP,20actualtoolcalls,
-1146.369535wall45.739693722CPU. Remaining4arms stillqueued/running, notcomplete.
+1146.369535wall45.739693722CPU. All otherB arms nowclosed; seecurrentclosureabove.
 D11 normal mixed delivery actually executed observe_only2 +selectedView+2originals,1957wiretokens,
 refs0/1/2; oneassistant andoneuser body. Functional butpartialwitness/Viewtentativevisitdefect.
 Finalarrival8positions=4W/4F:7no newtool, F08content1realcall use_view_only→handoff returnsstale7724,
@@ -24,7 +42,7 @@ missingactual7742correction. Good real staleView decision forfutureC. Initialsum
 mistakenly saidall8nocall (mechanicalcountalways1); originalsummaryretained andcorrected,gradesunchanged.
 Bgen manifest host-intent-view-v4-b-generative-results-v1.json; actualresults/review/viewinventory
 in view-v4-b-generative-review-v1. View reviewpartial; don'tinferpreferences fromanswergradesalone.
-pending-v22 includes genwholelocalCPU+review, stillUNSETTLED whileBqueue active.
+pending-v22 SETTLED afterBclose; no nativecompute doublecounted.
 
 W4 normal A d844 CLOSED exit0:4C/2W/2F,123152tokens29HTTP,5toolcalls,227.939928wall,
 9.662331366CPU. Real knownref1; A29use_view_only→view_source_0→handoff_select_0 returned wrong
@@ -88,22 +106,45 @@ explicit optimizer budget, pair-only logit difference, mean pairs/state, family/
 old CE replay relative mass0.25. Tie/unknown rows retained in both sampling plans, no directional
 loss; unreviewed options absent from loss denominator. Dummy uniform SDK codec targets never gold.
 prepare_retrieval_feedback.py connects manual pair reviews to actual capture before/actions,
-matching continuation and closed readouts; unfinished comparisons unknown. Output common pool
+matching continuation and closed tool results. FailedHost readout leavesanswerunknown but actual
+closed delivery may be reviewed; failedtool branch remainsunknown forboth. Output common pool
 only, not final balanced replay data. No real W5 labels/fits yet.19loss/schedule tests then29feedback/
 mixture/T2 tests passed; Ruff/mypy3files with optional missing model imports ignored; boundaries6.
 Still need actual branch reviews, matched replay selection/update schedule and native execution.
 Do not equate implementation/testing with trained-policy evidence. Tests/review CPU untimed unknown.
 
-C supplementary source preparation is ready, NOT RUNNING: existingT2 C23/D23,4requests each,
-initial andfinal actualprefix plusquote requests, original sources preserved. After B queue closes,
-launch view-v4-c-supplement-plan-v1.json (same frozen d844 generative settings). Combined A/B/C
-would provide8sourcegroups; not48states/branches yet. Fixtures tracked in54371ea7.
-pending-v22 UNSETTLED contains measured C recipe/stream prep; no settlement while B active.
+C supplementary normal collection is now CLOSED: existingT2 C23/D23,4requests each,
+initial andfinal actualprefix plusquote requests, original sources preserved; source d844.
+Combined A/B/C nowcover8sourcegroups. ActualE2branches/newlabels/fits notyetdone.
+pending-v22 SETTLED216.538961417CPU/17phases atverifiedidle; gen/embeddingunchanged.
+pending-v23 UNSETTLED currentlyH/C wholelocalCPU +8followup planprep; addnewreview/runtimecosts once.
 Partial B gen answer notes0..26 saved view-v4-b-generative-author-notes-v1.json; not finalgrades,
 packets/KunionD and View review stillneeded. Do not convert partial answer notes into labels.
 W5 implementation source54371ea7; model queue still frozen d8447495.
 
-NEXT: close/review B own trajectories; prepare actual C branches and matched feedback training;
+New branch preparation tool: prepare_view_feedback_branches.py; max6states/group, observable
+strata +explicit diagnostic nominations, allremaininginventory retained. --bindings can nominate2–3
+actual actionIDs including differentREADbindings; fullparams copied, no outcome labels inferred.
+Review binding proposals beforeactual C launch (e.g.A29quote source1, C26actualcorrectedtime source),
+not blindly firstREAD. F08Bgen staleView capture18aff9ea-7698-4c57-a323-3a8511bd816e is usefulnominee.
+Onlyinitial-call before supported; don'tclaiminternaldecisionrestore. Source-check followups aimto
+collect more actualupdatedView states withoutforcing internal actions or repairingoldresults.
+
+D prepared BEFOREfeedbackfit: data/view-v4-d-dev-streams-v1 (relativeunderartifactsbase),64positions/
+arm,8existingnaturalcontinuousmemopsdevgroups. Source identity/order/roles/clocks exact; devexplicit
+recipe split, defaulttrainunchanged. Notblind; intermediatearrivals notassumedirrelevant. NoDmodelrun.
+
+STATE source downloadedonly, noSHAexecution/noheldtestcontentsread/noevaluation. Upstream path
+in upstream/state-bench-5644b18/preparation.json;100traintrajectories/domain actualJSONfiles.
+OfficialCLI requiresGPT5.4 evalendpoint/deployments (unset) andSHA256prompthashes (prohibited).
+Pluginsearch foundno connectedinferenceclient; noinstallation/credentialchanges. Needexplicitresearch
+variant ifusinglocalQwen/noSHA; cannotclaimofficialscore. OfficialPython>=3.12,current3.11; onlysyntax
+parsed, no runtimecompatproof. BaseAgent hook +orchestrator API inspected. Runtime_context contains
+hidden task_summary/state_requirements/task_requirements: never forwardthemtoHost/retrieval.
+NoSTATEadapteryet. See host-intent-view-v4-state-source-preparation-v1.json.
+
+NEXT: execute8source-check followups; close remainingB/H/C source reviews; collectCactualbranches;
+
 W5 same-state branch comparisons and matched continued-CE/answer-only/delivery training stillneeded.
 Use completed T1 mainseed0 common initialization. Broader B–E/E1–E5/STATE remain unfinished.
 Do not repeatedly expand checks once concrete functional evidence permits advancement.
@@ -115,7 +156,8 @@ Seed0both complete, mainseed1fit/export complete; controlseed1/export andseed2 u
 Reviewed recovery uses a new attempt preserving original failure/cost and unchanged recipe.
 
 ONLY ledger /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json.
-Pendingv15..v21 SETTLED once at actual idle; v20=61.143722329CPU/14phases;v21=9.896830322CPU/5phases.
+Pendingv15..v22 SETTLED once atidle. v20=61.143722329CPU;v21=9.896830322CPU;v22=216.538961417CPU.
+v23 pending H/C localruntime andsource-checkprep; nativeBmodelcompute alreadycharged directly.
 HTTP already billed. Driver/case/readout CPU nested; do not doublecount. Native compute directly
 billed by evaluator, not offline pending. Never settle while actual model job active.
 Unmeasured interactive review/tests/import overhead unknown,notzero. Raw corpora/traces/weights ignored.

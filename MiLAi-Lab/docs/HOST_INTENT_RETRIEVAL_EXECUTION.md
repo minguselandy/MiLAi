@@ -1901,8 +1901,9 @@ pending-v21在B启动前实核空闲结算一次，5项本地CPU9.896830322秒�
 实际暴露量。SDK编码所需的临时均匀target仅作batch格式占位，不作为反馈监督保存或优化。
 
 `prepare_retrieval_feedback.py`只连接作者已经给出的比较，核对真实捕获before、
-首动作及全部参数、相同续跑策略/步数和关闭的读出；不从动作ID、View类型或
-单个最终答案自动制造偏好。未完成比较只能保留unknown。输出仍是共同反馈池，
+首动作及全部参数、相同续跑策略/步数；不从动作ID、View类型或
+单个最终答案自动制造偏好。工具未完成时两层均为unknown；Host读出未完成时，
+答案反馈为unknown，已完成工具的实际交付仍可单独审阅。输出仍是共同反馈池，
 尚不是已经配好旧回放、完成审阅或运行过训练的数据。
 
 19项成对损失及原训练调度检查通过；补充真实记录连接检查后29项反馈/mixture/T2检查通过，
@@ -1939,3 +1940,57 @@ F08原文题把View节点字段当作用户原话。它们可提示后续比较�
 没有第二个并发模型任务。C23/D23的额外8个正常请求已准备但未启动，
 将在B关闭后补足八个来源组的候选池，再选择真实分支。pending-v22尚未结算；
 原生模型直接计费与整流CPU的嵌套关系需按各臂关闭快照核对，不能重复结算。
+
+## B 的三个非学习臂关闭；C、D 准备继续
+
+| 臂（各32位置、4来源组） | C / Q / W / F | 已知生成tokens | HTTP请求 |
+|---|---|---:|---:|
+| generative | 13 / 6 / 4 / 9 | 694,017 | 113 |
+| rules | 16 / 8 / 4 / 4 | 276,431 | 47 |
+| fixed_context | 12 / 9 / 5 / 6 | 252,288 | 42 |
+
+Q包括来源归属、限定或原文见证缺陷，部分核心事实可能正确；这是作者审阅，
+不是官方评分或独立判断。原始答案和逐条依据均保留，不能据此小样本宣称方法胜出。
+rules实际8次工具调用、7次View生成，只返回2份View；其余生成费用没有抹去，
+未返回View的全量语义审阅仍未完成。fixed_context实际10次工具调用、没有返回或生成View。
+两臂各8个最终到达位置均没有新工具调用；旧原文引用即使真实，也不证明最新状态仍相同。
+rules整流926.882424秒/CPU42.060836048秒，fixed_context为892.357210秒/
+CPU36.612300482秒；CPU暂存pending-v22，实际HTTP已在原账本。
+索引为`host-intent-view-v4-b-{rules,fixed-context}-results-v1.json`。
+
+C的`prepare_view_feedback_branches.py`沿既有捕获和E2 runner准备有限分支，
+按来源组及可见View/已知材料/原文需求/实际到达进行分层，最多每组6状态；
+可明确提名已核读的真实分歧状态，其余选择不读取答案、评分或动作分数。
+保留实际动作全部参数，用共同fixed_context策略最多续跑2步。
+未选、失败、没有决策或缺失的状态保留清单，不当负例，不复制状态凑数量。
+它仍只覆盖真实调用初始before，不声称恢复任意内部决策。新检查21项通过；
+与split/T2和边界相关的22项检查通过，Ruff与3文件mypy通过。
+
+D已在训练前固定：既有8个自然连续memops dev组，各2条4请求流，共64位置／臂。
+这些来源已用于开发，不称盲测。准备器只在显式声明dev时接收dev来源，
+原默认train及来源身份/全文/角色/顺序/未知时间保持不变。
+中间到达不预先标为无关，仍须按具体需求审阅。D未执行、dev未进入反馈训练。
+索引：`host-intent-view-v4-d-preparation-v1.json`。
+
+由已观察的旧状态沿用与伪原话问题，另准备8位置Host提示诊断：
+`configs/host-intent-view-v4-host-evidence-guidance.json`，C26/F08各一条原文短流。
+仅补充通用证据覆盖和原话使用说明，不规定内部操作；来源、控制器和预算相同，
+原B执行代码不变。待B关闭后执行；不将Host提示改进记成学习策略收益。
+
+## STATE 源码准备与实际运行边界
+
+规划固定版本的官方源码已取得，三领域各100个训练轨迹文件已按目录核对；
+未读取保留测试任务内容，也没有启动benchmark模型调用。官方学习赛道提供只读检索hook，
+允许自定义客户端和Agent，由benchmark执行领域工具。[官方接入说明](https://github.com/microsoft/STATE-Bench/blob/5644b1838d96bc4483da29642d058ecaa6f80f7f/docs/memory/custom-hook.md)
+
+官方评估要求GPT-5.4客户端，当前三个STATE评估配置变量均未设置；
+插件搜索也没有识别到已连接的该推理客户端。[客户端要求](https://github.com/microsoft/STATE-Bench/blob/5644b1838d96bc4483da29642d058ecaa6f80f7f/docs/setup/eval-client.md)
+官方CLI还会调用SHA-256提示校验；仅静态读取了代码，没有执行。
+用户禁用SHA的要求继续生效，后续若通过底层orchestrator使用本地模型运行，
+必须明确作为研究适配，不能报告官方成绩。[协议实现](https://github.com/microsoft/STATE-Bench/blob/5644b1838d96bc4483da29642d058ecaa6f80f7f/state_bench/protocol.py)
+
+接入时还有一个实际边界：`AgentRuntimeContext`携带任务要求等评估字段，
+不能把这些隐藏目标送入Host或检索模型；只使用可见对话及允许的身份/时间元数据。
+官方要求Python3.12+，当前执行解释器为3.11.13；源码语法可解析不等于运行兼容，
+适配和实际沙箱执行仍待完成。[orchestrator源码](https://github.com/microsoft/STATE-Bench/blob/5644b1838d96bc4483da29642d058ecaa6f80f7f/state_bench/orchestrator.py)
+来源与未完成范围记录在`host-intent-view-v4-state-source-preparation-v1.json`。
