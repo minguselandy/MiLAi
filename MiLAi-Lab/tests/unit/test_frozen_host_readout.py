@@ -202,3 +202,63 @@ def test_cli_retains_given_request_without_claiming_an_actual_host_context(tmp_p
     assert driver["status"] == "COMPLETED_WITH_MISSING_READOUTS"
     assert driver["completed"][0]["host_readout_status"] == "NOT_EXECUTED"
     assert driver["completed"][0]["host_readout_reason"] == "NO_HOST_REQUEST_ORIGIN"
+
+
+@pytest.mark.parametrize("keep_collecting,unknown_usage", [
+    (False, False), (True, False), (True, True)])
+def test_cli_keeps_known_failed_readout_and_never_retries_it(
+    tmp_path, monkeypatch, keep_collecting, unknown_usage,
+):
+    root = prepared_given(tmp_path)
+    snapshots = tmp_path / "snapshots"
+
+    def reply(_wire, number):
+        if number in (1, 3):
+            # Original request is legal; the same tool request in a final-only readout is invalid.
+            return native_request({"query": "Cedar code"}, f"call-{number}")
+        return {"role": "assistant", "content": "4312"}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    result = message(root, bank="bank", owner="alice", session="host", message_id="q",
+        content="Find the reported code", incoming_sources=[source()],
+        retrieval_snapshots=snapshots)
+    assert result["status"] == "COMPLETED"
+    policies = tmp_path / "policies.json"
+    policies.write_text(json.dumps([
+        {"name": name, "policy": {"policy": "fixed"}} for name in ("first", "second")]))
+    monkeypatch.syspath_prepend(str(Path(__file__).resolve().parents[2] / "tools"))
+    import run_frozen_retrieval_calls
+    from milai_lab.runners import frozen_host_readout
+
+    actual_readout = frozen_host_readout.run_readout
+
+    def readout_with_usage_status(*args, **kwargs):
+        try:
+            return actual_readout(*args, **kwargs)
+        except IncompleteChatResponse:
+            if unknown_usage:
+                # Exercise the collector's treatment of an unresolved accounting receipt.
+                path = args[2] / "readout.json"
+                report = read_json(path)
+                report["budget_after"]["generation"]["unknown_usage"] += 1
+                path.write_text(json.dumps(report))
+            raise
+
+    monkeypatch.setattr(frozen_host_readout, "run_readout", readout_with_usage_status)
+
+    monkeypatch.setattr(sys, "argv", ["run_frozen_retrieval_calls", str(snapshots),
+        str(policies), str(tmp_path / "matrix"), "--source-version", "mechanical",
+        "--host-readout", *(["--continue-known-readout-failures"] if keep_collecting else [])])
+    continues = keep_collecting and not unknown_usage
+    if continues:
+        run_frozen_retrieval_calls.main()
+    else:
+        with pytest.raises(IncompleteChatResponse):
+            run_frozen_retrieval_calls.main()
+    driver = read_json(tmp_path / "matrix/driver.json")
+    assert driver["completed"][0]["host_readout_status"] == "FAILED"
+    assert len(driver["completed"]) == (2 if continues else 1)
+    assert len(wires) == (4 if continues else 3)
+    if continues:
+        assert driver["completed"][1]["host_readout_status"] == "COMPLETED"
+        assert driver["status"] == "COMPLETED_WITH_MISSING_READOUTS"

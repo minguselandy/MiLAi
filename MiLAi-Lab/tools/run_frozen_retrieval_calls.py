@@ -27,9 +27,14 @@ def main() -> None:
     parser.add_argument("policies", type=Path)
     parser.add_argument("output", type=Path)
     parser.add_argument("--source-version", required=True)
+    parser.add_argument("--runner-version",
+                        help="Separate collection runner version, if applicable")
     parser.add_argument("--host-site-packages", type=Path)
     parser.add_argument("--host-readout", action="store_true",
                         help="One conditional final Host answer using the original post-tool input")
+    parser.add_argument("--continue-known-readout-failures", action="store_true",
+                        help="Retain terminal incomplete Host responses with known usage, "
+                             "then execute remaining cases once; never retry failed readouts")
     args = parser.parse_args()
     if args.host_site_packages:
         site.addsitedir(str(args.host_site_packages))
@@ -60,8 +65,10 @@ def main() -> None:
         "unselected_capture_indices": sorted(set(range(len(calls))) - selected)})
     driver: dict[str, Any] = {
         "status": "RUNNING", "pid": os.getpid(), "source_version": args.source_version,
+        "runner_version": args.runner_version or args.source_version,
         "planned_positions": len(jobs), "completed": [], "automatic_retry": False,
         "host_readout": args.host_readout,
+        "continue_known_readout_failures": args.continue_known_readout_failures,
         "scope": "Frozen tool comparison; optional conditional single-receipt Host readout.",
     }
     write_json(args.output / "driver.json", driver)
@@ -97,10 +104,20 @@ def main() -> None:
                                          frames[index], source_version=args.source_version)
                     row["host_readout_status"] = readout["status"]
                     row["host_readout_reason"] = readout.get("reason")
-                except BaseException:
+                except BaseException as error:
                     row["host_readout_status"] = "FAILED"
+                    row["host_readout_reason"] = str(error)
                     write_json(args.output / "driver.json", driver)
-                    raise
+                    from milai_lab.providers.chat_bridge import IncompleteChatResponse
+
+                    if not (args.continue_known_readout_failures
+                            and isinstance(error, IncompleteChatResponse)):
+                        raise
+                    readout = read_json(case / "host-readout/readout.json")
+                    if not all(readout["budget_before"][kind]["unknown_usage"]
+                               == readout["budget_after"][kind]["unknown_usage"]
+                               for kind in ("generation", "embedding")):
+                        raise
                 write_json(args.output / "driver.json", driver)
             print(json.dumps(row, ensure_ascii=False), flush=True)
             if result["status"] != "COMPLETED":
