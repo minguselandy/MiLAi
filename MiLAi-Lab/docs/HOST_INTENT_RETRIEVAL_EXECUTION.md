@@ -1656,3 +1656,37 @@ PID127539/exec5966，路径 `view-v4-a-rules-v1/driver.json`。观察时6/8已�
 不能将8个COMPLETED当作8个成功或直接发布方法胜负。
 当前没有活动实验模型进程。索引为
 `data/manifests/host-intent-view-v4-a-rules-closed-v1.json`。
+
+## 规则臂来源审阅关闭，补入通用 Host 来源到达观察
+
+规则臂原回答及全部11个View节点已按当时可用来源审阅，Host任务为 **5C/3W**。
+A29前三个位置及B05首次/原话位置满足请求；A29相关更新后仍答旧分数，
+B05中间位置断言没有他人名字、最后位置断言没有分歧，均与已到达来源矛盾。
+B05中间批对核心首选不变，但对请求的他人名字方面并非无关；保留此设计限制。
+View另审：A29把课程方言选择扩成母语方言，不能完全认证；B05明确写入未提供的
+2026年份及未支持的before-March时间。原文补救和正确任务答案不抹去这些问题。
+结果索引为 `host-intent-view-v4-a-rules-results-v1.json`，raw目录
+`artifacts/host-intent-retrieval-v3/view-v4-a-rules-review-v1/`。
+
+检查两个相关更新位置的实际 `functional_material_delivery`，Host材料只有取证说明与
+空 `fresh_observations`；外部来源虽已进入原Store，摄取回执只在运行侧保留。
+后续Host拥有旧ToolMessages，确实没有收到“这些来源刚被写入”的观察。
+这说明存在一个具体输入缺口，但不能仅凭它证明所有错误都由该缺口造成。
+
+新实验选项 `host_source_arrivals: true` 直接沿原 `seed_sources` 和正常Host上下文实现：
+记录本次输入中哪些来源原先尚不可读，在模型调用时重新检查可见性，显示去重后的
+`source_arrivals.new_visible_sources`。旧来源重送、批内重复均不增加新到达计数。
+提示明确这是本请求前的到达数，不是尚未读取的任务量；正文、相关性以及对旧证据的
+影响都没有包含或判定。没有改写Host问题、强制READ/REFRESH、预填答案或任务分类规则。
+该选项默认关闭，以保留原冻结运行；新配置对两臂同时开启。
+
+正常JSON Host检查覆盖开/关、批内重复、重送旧来源及无到达三轮，确认私有正文未进入
+Host输入且没有强制工具调用；开启后计数为1/1/0。已有冻结调用检查也加入开启条件，
+原请求、before、操作集合和剩余额度仍一致。50项相关检查、Ruff、mypy与包/tools边界通过。
+Product Schema/API/权限/Canonical不变；没有SHA/内容指纹、新服务或第二账本。
+
+下一批为同样两个已暴露训练组、同样原来源/请求/到达顺序与预算的 **新信息条件诊断**，
+使用 `configs/host-intent-view-v4-source-arrivals.json`，比较generative和rules自身冷bank。
+配置逐字段核对，只有版本和到达提示开关改变。真实采样仍会波动；新结果不回填旧位置，
+也不能把额外Host观察的效果归为Jev训练收益。先看请求链是否真的使用这项观察，再决定
+下一批分支与训练；W2跨调用真实引用、完整W5与W6等要求仍未完成。

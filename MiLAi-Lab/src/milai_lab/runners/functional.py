@@ -700,6 +700,7 @@ def prepare(
     settings = entrypoint_settings(read_json(settings_path), "functional")
     allowed = {
         "laya_impact", "writer_input", "memory_control", "retrieval_tool", "business_tools",
+        "host_source_arrivals",
         "profile",
         "host",
         "capacity",
@@ -813,6 +814,8 @@ def prepare(
         or not settings.get("memory_control")
     ):
         raise ValueError("RETRIEVAL_TOOL_REQUIRES_CONTROL_AND_REQUEST_INTERFACE")
+    if settings.get("host_source_arrivals") and not settings.get("retrieval_tool"):
+        raise ValueError("HOST_SOURCE_ARRIVALS_REQUIRES_RETRIEVAL_PROFILE")
     if edit_features.enabled and (
         edit_interface != "I2" or settings.get("memory_method") not in FUNCTIONAL_ARMS
     ):
@@ -2229,6 +2232,7 @@ def seed_sources(
     service: MemoryService, rows: list[dict[str, Any]], path: Path,
     *, preserve_occurrence: bool = False,
     progress: Callable[[int], None] | None = None,
+    mark_new_sources: bool = False,
 ) -> list[dict[str, Any]]:
     """Capture supplied events once; a later import cannot resurrect forgotten text."""
     if path.exists():
@@ -2238,6 +2242,10 @@ def seed_sources(
     for row in rows:
         if row.get("object_ref") is not None:
             raise ValueError("FUNCTIONAL_IMPORTED_OBJECT_AUTHORITY_FORBIDDEN")
+        if row["role"] not in {"user", "assistant", "tool"}:
+            raise ValueError("FUNCTIONAL_IMPORTED_ROLE_INVALID")
+        new_source = mark_new_sources and service.source(
+            service.event_id(row["session_id"], row["event_key"], row["role"])) is None
         if row["role"] == "user":
             capture = (
                 service.capture_user(row["session_id"], row["event_key"], row["content"],
@@ -2254,15 +2262,13 @@ def seed_sources(
                 if preserve_occurrence or row.get("calendar_context") is not None else
                 service.capture_assistant(row["session_id"], row["event_key"], row["content"])
             )
-        elif row["role"] == "tool":
+        else:
             capture = service.capture_tool(
                 row["session_id"], row["event_key"], row["origin"], row["content"], None,
                 calendar_context=row.get("calendar_context"),
                 **({"occurred_at": row.get("occurred_at", row.get("timestamp"))}
                    if preserve_occurrence or row.get("calendar_context") is not None else {}),
             )
-        else:
-            raise ValueError("FUNCTIONAL_IMPORTED_ROLE_INVALID")
         if not capture.get("ok"):
             raise ValueError("FUNCTIONAL_IMPORTED_SOURCE_UNAVAILABLE")
         actual = service.source(capture["source_ref"])
@@ -2273,6 +2279,7 @@ def seed_sources(
                 "original_event_id": row.get("original_event_id"),
                 "original_observed_at": row.get("observed_at"),
                 "receipt": capture,
+                **({"newly_captured": new_source} if mark_new_sources else {}),
             }
         )
         if progress is not None:
@@ -2748,7 +2755,8 @@ def message(
             if incoming_sources:
                 output["incoming_source_receipts"] = seed_sources(
                     service, incoming_sources, bank_root / f"{identity}-source-imports.json",
-                    preserve_occurrence=edit_features.source_metadata)
+                    preserve_occurrence=edit_features.source_metadata,
+                    mark_new_sources=settings.get("host_source_arrivals", False))
             output["capture_attempted"] = True
             capture = (
                 service.capture_user(session, message_id, content, occurred_at=occurred_at,
@@ -3792,6 +3800,17 @@ def message(
                             _delivered_tool_source_refs(wire_messages)
                         ))
                         wire_messages = memory.project_model_messages(config, wire_messages)
+                if settings.get("host_source_arrivals"):
+                    incoming_refs = {row["receipt"]["source_ref"]
+                        for row in output.get("incoming_source_receipts", [])
+                        if row["newly_captured"]}
+                    material["source_arrivals"] = {
+                        "new_visible_sources": sum(
+                            service.source(ref) is not None for ref in incoming_refs),
+                        "semantics": "New, still visible sources captured from the incoming "
+                            "batch before this request. This is an arrival count, not remaining "
+                            "unread work. Bodies are not included; relevance and effects on "
+                            "earlier evidence have not been assessed."}
                 business_query_targets = (
                     _business_query_targets(memory, config, material, app)
                     if memory.memory_view_mode != "legacy" and adapter is not None else []

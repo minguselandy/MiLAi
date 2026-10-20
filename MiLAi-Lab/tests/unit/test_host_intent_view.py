@@ -216,3 +216,48 @@ def test_json_host_continues_with_its_actual_view_ref(tmp_path, monkeypatch):
                       content="Quote it again.", previous_host_message="followup")
     assert stopped["status"] == "VISIBILITY_REVOKED"
     assert stopped["messages"] == [] and len(wires) == 9
+
+
+@pytest.mark.parametrize("enabled", [False, True])
+def test_host_sees_new_source_count_without_bodies_or_forced_retrieval(
+    tmp_path, monkeypatch, enabled,
+):
+    from test_v13_5_functional_integration import materials, prepared, scripted
+
+    from milai_lab.runners.functional import message
+
+    root = prepared(tmp_path, memory_method="milai_edit_m_v1", business_tools=[],
+        evidence_policy="question_pack_v1", memory_view_mode="staged", retrieval_tool="rich",
+        host_source_arrivals=enabled, memory_control={"policy": "fixed", "max_control_steps": 4})
+    notices = []
+    private = ["FIRST_SOURCE_BODY_UNSEEN", "SECOND_SOURCE_BODY_UNSEEN"]
+
+    def reply(wire, _number):
+        material = materials(wire)
+        assert all(body not in json.dumps(wire["messages"]) for body in private)
+        if enabled:
+            notices.append(material["source_arrivals"]["new_visible_sources"])
+        else:
+            assert "source_arrivals" not in material
+        # Arrival metadata grants no tool action or prescribed query.
+        return {"answer": "Acknowledged."}
+
+    wires = scripted(monkeypatch, reply)
+    first_source = {"session_id": "history", "event_key": "first",
+                    "role": "user", "content": private[0]}
+    second_source = {**first_source, "event_key": "second", "content": private[1]}
+    common = {"bank": "stream", "owner": "alice", "session": "host"}
+    first = message(root, **common, message_id="first", content="Acknowledge the update.",
+                    incoming_sources=[first_source, first_source])
+    assert first["status"] == "COMPLETED", first.get("error")
+    if enabled:
+        assert [row["newly_captured"] for row in first["incoming_source_receipts"]] == [True, False]
+    second = message(root, **common, message_id="second", content="Acknowledge again.",
+        previous_host_message="first", incoming_sources=[first_source, second_source])
+    assert second["status"] == "COMPLETED", second.get("error")
+    third = message(root, **common, message_id="third", content="Continue.",
+                    previous_host_message="second")
+    assert third["status"] == "COMPLETED", third.get("error")
+    assert notices == ([1, 1, 0] if enabled else [])
+    assert len(wires) == 3
+    assert all(m["type"] != "tool" for m in third["messages"])

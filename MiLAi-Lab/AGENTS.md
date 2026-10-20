@@ -1,5 +1,21 @@
 # CURRENT: v4 View/Host plan activated — 2026-10-20
 
+NEW: rules A author review closed5C/3W; full source/answer/View review in
+view-v4-a-rules-review-v1, tracked host-intent-view-v4-a-rules-results-v1.
+Both initial tasks and quotes supported; A29 relevant update wrong74; B05 middle falsely
+claims no other names, late misses wife/user disagreement. Views11nodes/0rules:
+A29 native-dialect wording qualified; B05 invented2026/before-March annotations invalid.
+Task correctness does not certify full View. pending-v17 now includes review CPU.
+Actual Host material at both late rules positions was only retrieval instructions plus
+fresh_observations:[], with no incoming-source notice. Incoming receipts exist outside modelinput.
+Opt-in host_source_arrivals now exposes new_visible_sources from actual incoming captures only:
+same-source repeats not new; counts recheck visibility; no bodies/relevance labels/action commands.
+Same seed_sources/Store/Host path, no new protocol/db/agent. Default off keeps earlier frozen inputs.
+50relatedchecks PASS, including notice on/off frozen replay; Ruff/mypy/boundaries PASS.
+New common config configs/host-intent-view-v4-source-arrivals.json changes only version + notice.
+Next freeze this source and run same train streams under generative/rules as NEW diagnostic,
+not repair/retry of earlier outcomes; added Host information is not a learned-controller gain.
+
 LATEST: Generative A PID76091/exec91120 CLOSEDexit0,8/8 retained, COMPLETED_WITH_FAILURES.
 Author review2C/3U/2W/1F;99166tokens/27requests,newunknown0;169.908661s wall.
 One B05 View8nodes/0rules/2unresolved; core supports task atconstruction but source/time

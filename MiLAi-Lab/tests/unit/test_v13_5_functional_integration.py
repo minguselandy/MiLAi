@@ -95,6 +95,7 @@ def prepared(
     additional_reads: int = 3,
     memory_control: dict[str, Any] | None = None,
     retrieval_tool: str | None = None,
+    host_source_arrivals: bool = False,
     business_tools: list[str] | None = None,
 ) -> Path:
     tokenizer = Tokenizer(models.WordLevel({"[UNK]": 0}, unk_token="[UNK]"))
@@ -207,6 +208,8 @@ def prepared(
             max_evidence_queries=2, maintenance_mode="event_delta_v1")
     if memory_control is not None:
         settings["memory_control"] = memory_control
+    if host_source_arrivals:
+        settings["host_source_arrivals"] = True
     if edit_features is not None:
         settings["edit_features"] = edit_features
     if maintenance_recipe is not None:

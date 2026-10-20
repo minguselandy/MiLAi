@@ -12,11 +12,14 @@ from milai_lab.memory.service import MemoryService
 from milai_lab.runners.functional import frozen, message
 
 
-def prepared_given(tmp_path, *, policy=None, interface="rich", failure_receipts=False):
+def prepared_given(
+    tmp_path, *, policy=None, interface="rich", failure_receipts=False, host_source_arrivals=False,
+):
     from test_v13_5_functional_integration import prepared
 
     return prepared(tmp_path, native=True, memory_method="milai_edit_m_v1",
         evidence_policy="question_pack_v1", retrieval_tool=interface, business_tools=[],
+        host_source_arrivals=host_source_arrivals,
         dynamic_memory=True, edit_interface_version="I2", memory_view_mode="staged",
         additional_reads=8,
         format_failure_receipts=failure_receipts,

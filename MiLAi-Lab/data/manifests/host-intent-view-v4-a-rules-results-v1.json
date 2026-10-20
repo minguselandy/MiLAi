@@ -1,0 +1,55 @@
+{
+  "status": "A_RULES_CLOSED_AUTHOR_REVIEWED",
+  "source_version": "f31025b0",
+  "source_groups": 2,
+  "split": "train",
+  "positions": 8,
+  "grades": {
+    "rules-rich": {
+      "C": 5,
+      "W": 3
+    }
+  },
+  "task_scope": "Requested task facts under the actual source prefix; explicit wrong other-name/disagreement claims are failures despite a correct core first choice. Not independent confirmation.",
+  "tool_calls": 2,
+  "views_constructed_and_delivered": 2,
+  "view_nodes": 11,
+  "view_rules": 0,
+  "view_semantics": "One qualified/unverified; one invalid time annotation. Neither is certified fully correct.",
+  "cross_call_known_ref_reads": 0,
+  "related_update_positions": 2,
+  "related_update_new_calls": 0,
+  "known_generation_tokens": 49252,
+  "generation_requests": 12,
+  "unknown_usage_delta": 0,
+  "stage_costs": {
+    "host_request": {
+      "requests": 2,
+      "tokens": 4219,
+      "http_wall_seconds": 11.15248806681484
+    },
+    "view_generation": {
+      "requests": 2,
+      "tokens": 4503,
+      "http_wall_seconds": 6.58133178204298
+    },
+    "host_completion": {
+      "requests": 8,
+      "tokens": 40530,
+      "http_wall_seconds": 118.80756213515997
+    }
+  },
+  "stream_wall_seconds": 152.61387202888727,
+  "stream_cpu_seconds_nested": 9.433878961999998,
+  "results": "artifacts/host-intent-retrieval-v3/view-v4-a-rules-review-v1/results.json",
+  "review": "artifacts/host-intent-retrieval-v3/view-v4-a-rules-review-v1/author-review.json",
+  "view_review": "artifacts/host-intent-retrieval-v3/view-v4-a-rules-review-v1/view-review.json",
+  "runtime": "artifacts/host-intent-retrieval-v3/view-v4-a-rules-v1",
+  "compute": {
+    "wall_seconds": 0.2157413326203823,
+    "cpu_seconds": 0.215707029
+  },
+  "ledger_recorded": false,
+  "workload_qualification": "B05 middle sources do not change the core choice but add requested preference/other-name facts; not a pure irrelevant-update control.",
+  "next": "Test a generic source-arrival notice for Host, preserving original outcomes and identical sources/budgets. Do not assign all late errors to the controller."
+}
