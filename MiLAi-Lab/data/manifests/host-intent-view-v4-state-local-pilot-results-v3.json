@@ -1,0 +1,80 @@
+{
+  "status": "CONDITIONAL_MEMORY_TO_SANDBOX_CHAIN_EXECUTED_TASK_FAILED",
+  "source_version": "9d0849e7",
+  "pid": 2447345,
+  "exec_session": 15845,
+  "exit_code": 0,
+  "task_id": "1-cancel_economy_domestic",
+  "initial_request_transport": "frozen_actual_request",
+  "initial_request_provenance": {
+    "task_id": "1-cancel_economy_domestic",
+    "public_opening": "Hi, I need to cancel my upcoming flight to Atlanta.",
+    "arguments": {
+      "query": "user_002 upcoming flight to Atlanta cancellation"
+    },
+    "source": "artifacts/host-intent-retrieval-v3/view-v4-state-local-travel-pilot-v1/trajectory.json",
+    "source_kind": "actual prior Host memory tool call",
+    "scope": "Conditional functional continuation, not new autonomous initial tool choice. Only these public tool arguments enter the agent."
+  },
+  "memory_calls": 1,
+  "delivered_packs": 1,
+  "complete_return_tokens": 1747,
+  "host_requests_containing_exact_delivery": 7,
+  "domain_tools_after_delivery": [
+    {
+      "name": "get_user_reservations",
+      "arguments": {
+        "user_id": "user_002"
+      }
+    },
+    {
+      "name": "get_booking",
+      "arguments": {
+        "booking_id": "BK-1000"
+      }
+    },
+    {
+      "name": "get_booking",
+      "arguments": {
+        "booking_id": "BK-1001"
+      }
+    },
+    {
+      "name": "get_policies",
+      "arguments": {
+        "topic": "cancel",
+        "cabin_class": "economy",
+        "route_type": "domestic"
+      }
+    },
+    {
+      "name": "cancel_booking",
+      "arguments": {
+        "booking_id": "BK-1000",
+        "confirm": false
+      }
+    },
+    {
+      "name": "cancel_booking",
+      "arguments": {
+        "booking_id": "BK-1000",
+        "confirm": true
+      }
+    }
+  ],
+  "state_changed": true,
+  "deterministic_state_score": 0,
+  "model_requests": 10,
+  "generation_tokens": 46180,
+  "unknown_usage_delta": 0,
+  "compute": {
+    "wall_seconds": 39.23896053433418,
+    "cpu_seconds": 2.1331395540000004,
+    "runs": 1
+  },
+  "compute_directly_recorded": true,
+  "official_protocol": false,
+  "sha_validation_executed": false,
+  "scope": "Exact actual first Host query reused, then normal local Host/simulator continuation with real public domain tools. One complete1747-token historical pack was consumed. This closes the conditional interface path, not autonomous retrieval reliability, task success, official benchmark scoring or learning efficacy. Both autonomous score0/empty-or-unused-memory results retained.",
+  "artifacts": "artifacts/host-intent-retrieval-v3/view-v4-state-local-travel-pilot-v3"
+}

@@ -1,0 +1,30 @@
+{
+  "status": "AUTONOMOUS_RESEARCH_TRAJECTORY_CLOSED_NO_MEMORY_CALL",
+  "source_version": "efa86797",
+  "pid": 2410215,
+  "exit_code": 0,
+  "exec_session": 71103,
+  "task_id": "1-cancel_economy_domestic",
+  "source_preparation": "view-v4-state-travel-pilot-preparation-v2",
+  "material_policy": "fixed",
+  "memory_calls": 0,
+  "memory_tool_and_instruction_visible": true,
+  "deterministic_state_score": 0,
+  "state_changed": true,
+  "generation_requests": 9,
+  "generation_tokens": 31050,
+  "unknown_usage_delta": 0,
+  "compute": {
+    "wall_seconds": 31.638546083122492,
+    "cpu_seconds": 1.3213226880000004,
+    "runs": 1
+  },
+  "compute_directly_recorded": true,
+  "scope": "Second autonomous train-side research condition. The new ordinary-pack/material-presentation path was not exercised by this Host. Do not attribute task failure or success to delivered memory, and do not treat the earlier result as repaired.",
+  "actual_result": "BK-1000 cancelled after confirmation; connecting BK-1001 remains confirmed; three expected state assertions missing.",
+  "official_protocol": false,
+  "sha_validation_executed": false,
+  "artifacts": "artifacts/host-intent-retrieval-v3/view-v4-state-local-travel-pilot-v2",
+  "host_requests_with_memory_schema_and_instruction": 7,
+  "inspection_correction": "The first report reader looked for separate vllm_request events. This trace retains the actual request within each vllm_response; all7 Host wire requests contain the schema and instruction. Original trajectory/score unchanged."
+}

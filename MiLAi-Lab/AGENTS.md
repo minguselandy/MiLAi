@@ -1,4 +1,29 @@
-# CURRENT UPDATE: W5 fits running, STATE bridge ready — 2026-10-21
+# CURRENT UPDATE: D comparison RUNNING — 2026-10-21
+
+Latest authoritative execution: Ddriver2468544/exec65603 RUNNING, firstchild2468551 generative.
+Revalidate view-v4-d-v2/driver.json andactualPID. Plan view-v4-d-plan-v2.json, core11798c8d.
+10arms64positions=640, owncoldbanks, originalautonomousHost; noSTATEforced-initialquery inD.
+Queue gen/rules/fixed-context/T1main/T1control/continuedCE/answer/delivery/view-cache/MemPursuit.
+Parent runner frozen-baselines-11798c8d/run_matched_d.py measuresparentCPU, notyetcharged.
+NO secondactualmodeljob oroffline settlement whileDactive. Preserveallfailures/noautoreruns.
+
+STATEall3closed: v1pid2357783 empty1memorycall63tokens,score0; v2pid2410215/exec71103
+normalHost0memorycalls despite7actualwireinputswithschema/instruction,score0; v3pid2447345/
+exec15845 conditionalactualv1query,1pack1747tokens consumedby7Hostrequests,realcancellation,score0.
+V2 cost9HTTP31050tokens1.321322688CPU31.638546083wall; v3 10HTTP46180tokens2.133139554CPU
+39.238960534wall, bothunknown delta0/directledger. Firstoriginalcostalreadyrecorded below.
+AllmissedBK1001connection. NoLLMjudge/noofficialsuccess/noautonomoussuccess/no memorybenefitclaim.
+Materialaudit view-v4-state-material-granularity-v1: originalnormalfirst2092/full5921,10865tokens.
+Prep2 retainsall46originalpayloads/roles/order/eventIDs, onlyshortensrepeatedprovenancewrapper.
+Registeredtoolcheck view-v4-state-compact-source-check-v2 delivers1747 withexistingfixedpolicy.
+Conditionalrunner flag --initial-retrieval validatespublicschema andsametaskopening, usesactual
+priorHostquery; neverpasses hiddenrequirements.7adaptertests/Ruff/mypy passed,source9d0849e7.
+V3plan view-v4-state-local-pilot-plan-v4.json; originalsunchanged,notexact-before E2 comparison.
+Pendingv29 SETTLED3.804793880CPU;v30 andv31SETTLED perfiles. Startpendingv32 fornewmeasuredwork.
+Next: keepD running/reviewclosedpositions; prepareCoalent/GAM/remainingE work withoutmodeloverlap.
+FullgoalACTIVE/incomplete. NoSHA/fingerprints/subagents/newservices/newledger/remote publication.
+
+# Prior update: W5 fits and STATE bridge — 2026-10-21
 
 Supersedes the RUNNING/no-label schedule below. Full v4 goal ACTIVE/incomplete.
 C remaining PID1937382/exec19324 CLOSED exit0:109/109; original2 preserved, total111.
