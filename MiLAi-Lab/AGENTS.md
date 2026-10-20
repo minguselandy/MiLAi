@@ -1,4 +1,19 @@
-# CURRENT 2026-10-20: matched T1 operation-only control seed0 RUNNING
+# CURRENT 2026-10-20: research goal PAUSED; existing T1 control job RUNNING
+
+User explicitly pausedthegoal andrequested GitHubsubmission ofCURRENTdevelopment/training.
+Publicationofthissnapshot toorigin/feat/host-intent-retrieval-20261019 isauthorized; nomerge.
+Do NOTstartnewcollection/fitting/checkpointvalidation oroffline settlements untiluserresumes.
+Do NOTkill/restart thealready-started PID2670549/exec8252 job. Publication snapshotat
+2026-10-20T07:16:10.748927+00:00: processalive,RUNNING503/524,40104519trainingtokens.
+Read docs/HOST_INTENT_RETRIEVAL_STATUS_20261020.md and publication-snapshot-20261020 manifest.
+NewT2preparation code83702344: actualuniformseed0selection32of128train groups,13operation/19
+complementary;62requests/interface,124positions/seed, fulloriginalhistories/sources/arrivals equal.
+Seed0/1/2configs prepared; onlyseed0T1checkpoint currentlyexists/validated. NOactualT2states/labels/fits.
+Aggregation preservesoldT1rows/stateIDs/dev, recompilesreviewedownlabels fromactualrawstates,
+keepsmasks, matchesadditionalU2=ceil(2*N_augmented_labelled/16) withold-onlycontinuedCE.
+14tests(9T2+5mixture),Ruff/mypy/toolsboundaryPASS. Source/configauditPASS, noactualmodelcalls.
+Selection2.581460160CPU+audit.050280929CPU pendingv14, now197.879748359CPU/10phases,UNSETTLED.
+Fulloriginalgoal remainsincomplete. Gitpublication isnotexperimentalcompletion.
 
 NEW E2 conditional fixedHost readout implemented; actualE2collection/evaluation NOTstarted.
 --host-readout on run_frozen_retrieval_calls.py prepares shared actualpost-tool inputs from closed
