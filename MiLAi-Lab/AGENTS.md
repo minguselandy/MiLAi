@@ -17,7 +17,10 @@ W5fits CLOSED driver2123239/exec93763 exit0; allchildren absent. Threefits10upda
 CE/answer/delivery trainingtokens821606/872537/872537; sharedanswer/delivery inputs/schedules/
 optionorders/optimizer exactequal;81feedback79replaydraws each. NativeCPU3586.286305211directledger.
 Finalinprocessdev450/447/440 acceptedof616 (+244masked). NotHostefficacy;no bestcheckpointselection.
-Persistedreload RUNNING driver2287617/exec56236; firstchild2287649 continuedCE (revalidateactive).
+Training-side cross-target savedfinalpredictions: bothanswer26/27; delivery47/56(answerarm) vs
+51/56(deliveryarm). No extra forwards, notheldout. view-v4-training-cross-target-v1.json.
+Persistedreload RUNNING driver2287617/exec56236; CE/answer validated860 each (1/0choicechanges).
+Currentchild2325174 delivery (revalidateactualdriver/PID). CEscore450/616 unchangedafterreload.
 Authoritative view-v4-persisted-evaluations-v1/driver.json; same860dev, corefrozenae3950f2.
 Do not start anothermodeljob oroffline settlement. Current D/STATE plans remainunstarted.
 ContinuedCE CLOSED10updates160rows821606tokens;773.021042636wall/1181.609250961CPU directledger.
@@ -58,7 +61,11 @@ remain, PursuitPolicyreadsselectedprefix. Metadata control_pool_selected is algo
 34tests+6boundaries+standaloneimportretest/Ruff/mypy passed. Dv2configuration frozenbeforeD.
 Upstream versions: MemPursuit5138dd0,Coalent7edc7ee,GAM565db2c; sources underupstream/*-source-v1.
 StandaloneMemPursuit pathupstream/mempursuit-standalone-v1 avoids mem0namespace. No benchmarkdataread.
-Coalent/GAM stillnotintegrated. Baseline/manifestsimple-baselines-v1 haslimits/cost/remainingwork.
+Coalent/GAM stillnotintegrated. Coalentstaticnotes atupstream/coalent-source-v1/integration-notes-v1.json:
+currentdefaultsemanticembedder=>poolpath;unitpath explicitlegacy. Freshrawescalation exists.
+DO NOTexecuteupstreamdefaultSHA1/SHA256/HashingEmbedderMD5 paths; nativeStoreversionmechanism
+adaptation orreviewedno-digestcopy required. No hashpath/import/modelrun executed.
+Baseline/manifestsimple-baselines-v1 haslimits/cost/remainingwork.
 No subagents/SHA/newservices/newledger/publication. All remaining fullgoal requirements stillapply.
 Manifest data/manifests/host-intent-view-v4-c-feedback-results-v1.json; executiondoc latestsection.
 

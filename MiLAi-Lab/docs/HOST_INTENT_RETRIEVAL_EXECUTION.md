@@ -2110,3 +2110,5 @@ STATE原版因缺少azure.identity无法导入；未安装依赖或更改原版�
 [MemPursuit](https://github.com/FengQi-HITSZ/MemPursuit)固定到5138dd0，直接使用独立NumPy选择器，保留单纯形完全修正、顺序与自适应停止，不引入Mem0服务栈。原候选和未选动作保留；实际执行只读取选中前缀。复用既有计费bge-m3客户端，完整候选embedding、获取和计算成本单列；不能把额外候选信息暴露混称纯选择算法收益。独立包只放mempursuit及其许可证，避免遮蔽现有mem0命名空间。34相关测试、6边界检查、独立包复测及Ruff/mypy通过；尚无模型基线结果。Coalent与GAM源码也已取得并固定版本，尚未接入或运行。索引：data/manifests/host-intent-view-v4-simple-baselines-v1.json。
 
 D在任何D结果产生前增补两项规划基线，v2为10臂×64位置=640位置；保留原8臂v1未执行配方。全部使用冻结核心11798c8d，同原Host提示、来源顺序、独立冷缓存和2048/8额度。缓存阈值0.35、MemPursuit读取上限4及上游自适应默认值均提前固定。MemPursuit使用已有7861 embedding服务及原ledger，不增加服务。v2仍未执行，见data/manifests/host-intent-view-v4-d-comparison-preparation-v2.json。
+
+复用两反馈臂已保存的训练侧最终输出作交叉目标诊断：两者答案偏好均26/27，交付偏好分别47/56（answer臂）与51/56（delivery臂）。无新增模型forward；这是训练侧拟合检查，不能用作泛化或Host收益结论。重载评测已完成CE与answer各860输入验证，选择变化分别1与0；CE旧标签总分仍450/616。delivery重载仍在运行。
