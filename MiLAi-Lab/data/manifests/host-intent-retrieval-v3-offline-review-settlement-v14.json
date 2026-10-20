@@ -1,0 +1,24 @@
+{
+  "status": "SETTLED_ONCE_AT_VERIFIED_IDLE",
+  "ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+  "source_pending": "artifacts/host-intent-retrieval-v3/data/pending-offline-review-v14.json",
+  "processes_absent": [
+    2670549
+  ],
+  "phases": [
+    "host_intent_instructir_probe_v2_trace_audit_v1",
+    "host_intent_instructir_bulk_archive_audit_v1",
+    "host_intent_instructir_synthetic_store_probe_v3",
+    "host_intent_instructir_probe_v3_comparison_v1",
+    "host_intent_t1_matched_initial_parity_v1",
+    "host_intent_e3_request_text_input_audit_v1",
+    "host_intent_e3_text_reconstruction_v2",
+    "host_intent_t1_midpoint_matched_comparison_v1",
+    "host_intent_t2_select_v1",
+    "host_intent_t2_source_config_audit_v1"
+  ],
+  "measured_cpu_seconds": 197.879748359,
+  "model_counters_unchanged": true,
+  "unmeasured": "Untimed author/tests/commands not zero.",
+  "settled_epoch": 1792485403.4343264
+}

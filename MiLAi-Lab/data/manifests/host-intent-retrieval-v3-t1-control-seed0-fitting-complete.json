@@ -1,0 +1,323 @@
+{
+  "status": "COMPLETE_MATCHED_OPERATION_CONTROL_SEED0_FIT",
+  "source_version": "ba2bf8d8",
+  "run_record": {
+    "status": "COMPLETED",
+    "pid": 2670549,
+    "data": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/data/t1-matched-operation-control-v1",
+    "base_checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/models/laya-multilingual-base",
+    "seed": 0,
+    "physical_gpus": [
+      2,
+      3
+    ],
+    "device": "cuda",
+    "torch_version": "2.7.0+cu126",
+    "cuda_version": "12.6",
+    "precision": "float32",
+    "reference_compile": false,
+    "gradient_checkpointing": true,
+    "forward_count_scope": "Logical model calls; activation recomputation is in time cost",
+    "backend": "native",
+    "task": "mixed_retrieval",
+    "operation_state": "shared",
+    "epochs": null,
+    "planned_optimizer_updates": 524,
+    "checkpoint_axis": "optimizer_updates",
+    "dev_source": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/data/t1-matched-operation-control-v1/dev.jsonl",
+    "batch_size": 2,
+    "gradient_accumulation": 8,
+    "max_len": 12288,
+    "head_max_len": 2048,
+    "train_states": 2762,
+    "dev_states": 860,
+    "encoder_lr": 2.5e-05,
+    "head_lr": 0.0001,
+    "freeze_encoder": false,
+    "objective": "soft-ce",
+    "loss_weighting": "declared component mass, then family and event",
+    "evaluate_train": true,
+    "train_eval_final_only": true,
+    "evaluate_initial_dev": true,
+    "shuffle_options": true,
+    "calibration_test_loaded": false,
+    "http_requests": 0,
+    "optimizer_updates": 524,
+    "train_sequence_rows": 8384,
+    "train_input_tokens": 41804889,
+    "train_batch_forwards": 4192,
+    "train_device_forwards": 8384,
+    "train_batch_attempts": 4192,
+    "train_offered_rows": 8384,
+    "train_offered_tokens": 41804889,
+    "mixture": {
+      "operation_history": 0.75,
+      "complementary_evidence": 0.25
+    },
+    "sampling": "uniform shuffled passes over labelled rows",
+    "sampled_component_rows": {
+      "operation_history": 4551,
+      "complementary_evidence": 3833
+    },
+    "sampled_task_rows": {
+      "memory_operation": 8384
+    },
+    "sampled_component_input_tokens": {
+      "operation_history": 22328983,
+      "complementary_evidence": 19475906
+    },
+    "data_passes_started": 4
+  },
+  "compute": {
+    "wall_seconds": 8908.409083603881,
+    "cpu_seconds": 15305.424595409,
+    "runs": 1,
+    "train_sequence_rows": 8384,
+    "train_input_tokens": 41804889,
+    "train_batch_forwards": 4192,
+    "train_device_forwards": 8384,
+    "train_batch_attempts": 4192,
+    "train_offered_rows": 8384,
+    "train_offered_tokens": 41804889,
+    "dev_forwards": 2580,
+    "dev_sequence_rows": 2580,
+    "dev_input_tokens": 11493738,
+    "dev_state_tokenizations": 2580,
+    "dev_state_tokens": 10473396,
+    "train_eval_forwards": 2762,
+    "train_eval_sequence_rows": 2762,
+    "train_eval_input_tokens": 13777324,
+    "train_eval_state_tokenizations": 2762,
+    "train_eval_state_tokens": 12518936,
+    "train_component_operation_history_rows": 4551,
+    "train_component_complementary_evidence_rows": 3833,
+    "train_component_operation_history_input_tokens": 22328983,
+    "train_component_complementary_evidence_input_tokens": 19475906,
+    "peak_rss_kib": 6932436,
+    "peak_cuda_allocated_bytes": [
+      19645527040,
+      3525470208
+    ],
+    "ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json"
+  },
+  "ledger_reconciled": true,
+  "exec_exit_code": 0,
+  "process_absent": true,
+  "parameter_probes": {
+    "encoder": {
+      "parameter": "encoder.embeddings.tok_embeddings.weight",
+      "changed_elements": 196607854
+    },
+    "head": {
+      "parameter": "head.layers.0.self_attn.in_proj_weight",
+      "changed_elements": 1769470
+    }
+  },
+  "dev_final": {
+    "by_task": {
+      "memory_operation": {
+        "counts": {
+          "labelled": 616,
+          "accepted": 472,
+          "masked": 244,
+          "handoff_outside_reviewed_preference": 40
+        },
+        "strata": {
+          "source_reviewed_preference": {
+            "labelled": 616,
+            "accepted": 472
+          }
+        },
+        "selected_operations": {
+          "SEARCH": {
+            "selected": 112,
+            "accepted": 111
+          },
+          "READ": {
+            "selected": 366,
+            "accepted": 263
+          },
+          "HANDOFF": {
+            "selected": 138,
+            "accepted": 98
+          }
+        },
+        "families": 32,
+        "family_macro_acceptance": 0.7876875550183688,
+        "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+      }
+    },
+    "by_component": {
+      "operation_history": {
+        "counts": {
+          "labelled": 309,
+          "accepted": 240,
+          "masked": 77,
+          "handoff_outside_reviewed_preference": 3
+        },
+        "strata": {
+          "source_reviewed_preference": {
+            "labelled": 309,
+            "accepted": 240
+          }
+        },
+        "selected_operations": {
+          "SEARCH": {
+            "selected": 56,
+            "accepted": 56
+          },
+          "READ": {
+            "selected": 212,
+            "accepted": 146
+          },
+          "HANDOFF": {
+            "selected": 41,
+            "accepted": 38
+          }
+        },
+        "families": 14,
+        "family_macro_acceptance": 0.7960230010385289,
+        "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+      },
+      "complementary_evidence": {
+        "counts": {
+          "labelled": 307,
+          "accepted": 232,
+          "masked": 167,
+          "handoff_outside_reviewed_preference": 37
+        },
+        "strata": {
+          "source_reviewed_preference": {
+            "labelled": 307,
+            "accepted": 232
+          }
+        },
+        "selected_operations": {
+          "SEARCH": {
+            "selected": 56,
+            "accepted": 55
+          },
+          "READ": {
+            "selected": 154,
+            "accepted": 117
+          },
+          "HANDOFF": {
+            "selected": 97,
+            "accepted": 60
+          }
+        },
+        "families": 18,
+        "family_macro_acceptance": 0.7812044303360227,
+        "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+      }
+    },
+    "scope": "Task-specific native diagnostics; no combined memory score or Host success"
+  },
+  "train_final": {
+    "by_task": {
+      "memory_operation": {
+        "counts": {
+          "labelled": 2762,
+          "accepted": 2676,
+          "handoff_outside_reviewed_preference": 14
+        },
+        "strata": {
+          "source_reviewed_preference": {
+            "labelled": 2762,
+            "accepted": 2676
+          }
+        },
+        "selected_operations": {
+          "SEARCH": {
+            "selected": 521,
+            "accepted": 509
+          },
+          "READ": {
+            "selected": 1754,
+            "accepted": 1694
+          },
+          "HANDOFF": {
+            "selected": 486,
+            "accepted": 472
+          },
+          "USE_VIEW": {
+            "selected": 1,
+            "accepted": 1
+          }
+        },
+        "families": 126,
+        "family_macro_acceptance": 0.9810685562319548,
+        "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+      }
+    },
+    "by_component": {
+      "operation_history": {
+        "counts": {
+          "labelled": 1499,
+          "accepted": 1419,
+          "handoff_outside_reviewed_preference": 10
+        },
+        "strata": {
+          "source_reviewed_preference": {
+            "labelled": 1499,
+            "accepted": 1419
+          }
+        },
+        "selected_operations": {
+          "SEARCH": {
+            "selected": 263,
+            "accepted": 251
+          },
+          "READ": {
+            "selected": 1036,
+            "accepted": 978
+          },
+          "HANDOFF": {
+            "selected": 199,
+            "accepted": 189
+          },
+          "USE_VIEW": {
+            "selected": 1,
+            "accepted": 1
+          }
+        },
+        "families": 57,
+        "family_macro_acceptance": 0.9627282043937491,
+        "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+      },
+      "complementary_evidence": {
+        "counts": {
+          "labelled": 1263,
+          "accepted": 1257,
+          "handoff_outside_reviewed_preference": 4
+        },
+        "strata": {
+          "source_reviewed_preference": {
+            "labelled": 1263,
+            "accepted": 1257
+          }
+        },
+        "selected_operations": {
+          "SEARCH": {
+            "selected": 258,
+            "accepted": 258
+          },
+          "READ": {
+            "selected": 718,
+            "accepted": 716
+          },
+          "HANDOFF": {
+            "selected": 287,
+            "accepted": 283
+          }
+        },
+        "families": 69,
+        "family_macro_acceptance": 0.996219281663516,
+        "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+      }
+    },
+    "scope": "Task-specific native diagnostics; no combined memory score or Host success"
+  },
+  "export_validation": "NOT_STARTED",
+  "scope": "Predetermined final524; native/static diagnostics only. Common final1209dev export probe will compare860in-process operation rows and add349common FollowIR rows, not change training or select a checkpoint."
+}

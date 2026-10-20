@@ -1,4 +1,25 @@
-# CURRENT 2026-10-20: research goal PAUSED; existing T1 control job RUNNING
+# CURRENT: user explicitly requests completing T1; T1 work resumed
+
+Latestuser "完成t1" authorizesT1completion despiteearlierpausedsnapshot. Complete main/control
+seeds0/1/2 andpersistedcommondev evaluation; do NOTstart T2/E1-E5 ornewservices inthisT1request.
+BroadgoalUI remainspaused; thisisexplicitmanualT1task. No globalgoalcompletionclaim.
+Controlseed0 PID2670549/exec8252 CLOSEDexit0/absent:524updates8384draws41804889tokens,
+8908.409084wall/15305.424595CPU exactlyoriginalledger; encoder/head changed.
+Finalopdev472/616 macro.7876875550; finaltrain2676/2762. Mainseed0finalop446/616 remains.
+Controlpersistedvalidation PID3451293/exec63372 CLOSEDexit0/absent:full1209commondev,
+312.735795wall/493.270286CPU,1209forwards3932447tokens, exactledger.860sharedopchoices
+unchanged/metricsidentical; additional349FollowIR200correct macro.557053942, main316/.902489627.
+Bothseed0fits/exports audited; completion-audit.json ineachfit/export directory. FP16save/F32load
+differences recordedwithoutrepair. Seed0main/control completed; seeds1/2 NOTstarted yet.
+v14offline197.879748359CPU SETTLED atverifiedidle aftercontrolfitexit, modelcountersunchanged.
+Newseed0finalpairaudit separatelymeasuredandsettled atidle; see t1-seed0-final-pair-v1 manifest.
+Remaining8modelstages preregistered in artifacts/host-intent-retrieval-v3/t1-completion-plan-v1.json.
+Runner tools/run_host_intent_t1_completion.py usesfrozenba2bf8d8 modelentrypoints, originalledger,
+serialfit->export->audit, stoponfirstfailure/noautomaticretry. Modelsource/data/hyperparameters
+unchanged. Finalfullcommon1209dev usedforeacharm; controltrainingdiagnostics remainoriginal860.
+Neverrestart onobservationtimeout. Revalidate driver/child PID before anyadditionalmodeljob.
+
+# Previous published pause snapshot (superseded by latest T1 instruction above)
 
 User explicitly pausedthegoal andrequested GitHubsubmission ofCURRENTdevelopment/training.
 Publicationofthissnapshot toorigin/feat/host-intent-retrieval-20261019 isauthorized; nomerge.
