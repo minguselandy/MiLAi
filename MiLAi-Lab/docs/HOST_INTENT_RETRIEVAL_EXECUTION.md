@@ -1502,4 +1502,8 @@ controlseed1 child4032674 在 19:46 上海时实核为活动，child143/524。
 根据真实瓶颈决定 W4 或小批分支；本批没有证明 View 语义合格、成本节省或学习有效性。
 W1/W2 的真实模型可用证据、W3、条件 W4、W5、W6、训练对照、E1–E5 与外部确认仍待完成。
 Product Schema/API/权限/Canonical 未改；新增字段和参数仅在 Lab 研究执行链。
-本批基线版本 `21756ba1`，尚未发布远端。
+本批基线版本 `21756ba1`；实现已本地提交并冻结为 `f31025b0`，尚未发布远端。
+准确 argv、工作目录、PYTHONPATH 与冻结路径保存在 ignored
+`artifacts/host-intent-retrieval-v3/view-v4-a-run-plan-v1.json`，状态仍为
+`PREPARED_NOT_STARTED`。冻结另计父进程 CPU 0.339625977 秒；
+pending-v15 三阶段合计 0.357179422 秒，未结算。

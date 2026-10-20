@@ -19,8 +19,10 @@ the new request checkpoint, with existing visibility/exposure handling. Runner o
 Ruff/mypy5files PASS. No new real model outcome; scripted providers are functional checks only.
 Source recipe/config for A:2 original T2 train groups,8positions,46exact ordered sources audited.
 See data/manifests/host-intent-view-v4-a-functional-preparation-v1.json and latest execution entry.
-Preparation/audit0.01755344499999999CPU is pending-v15; untimed author/test work unknown, notzero.
-Next: freeze tested source and run A via existing JSON runner after actual T1 serial queue closes,
+Preparation/audit0.017553445CPU plus source-freeze0.339625977CPU pending-v15 (0.357179422total);
+untimed author/test work unknown, notzero. Tested source committed/frozen f31025b0; exactargv/env
+in artifacts/host-intent-retrieval-v3/view-v4-a-run-plan-v1.json, PREPARED_NOT_STARTED.
+Next: run A via existing JSON runner after actual T1 serial queue closes,
 then review actual packets/Host answers/cost and decide W4 vs small real branches. W3 real-run,
 W4–W6/feedback comparisons/E1–E5/external confirmation remain uncompleted. No remote publish.
 

@@ -3,6 +3,8 @@
   "status": "FUNCTIONAL_CHECKS_PASSED_REAL_A_NOT_EXECUTED",
   "plan": "docs/MILAI_HOST_INTENT_VIEW_DEVELOPMENT_EXPERIMENT_PLAN_20261020_v4.md",
   "base_version": "21756ba1",
+  "implementation_version": "f31025b0",
+  "prepared_run_plan": "artifacts/host-intent-retrieval-v3/view-v4-a-run-plan-v1.json",
   "scope": "Full v4 goal remains active; this checkpoint implements and checks the first functional slice.",
   "requirements": {
     "W1": "Implemented; complete visible View semantics verified in final full/shared controller JSON with a scripted provider. Real model trajectory still required.",
@@ -43,6 +45,8 @@
   "cost": {
     "real_model_calls_added": 0,
     "measured_preparation_and_audit_cpu_seconds": 0.017553445,
+    "source_freeze_parent_cpu_seconds": 0.339625977,
+    "pending_cpu_seconds": 0.357179422,
     "pending": "artifacts/host-intent-retrieval-v3/data/pending-offline-review-v15.json",
     "ledger_recorded": false,
     "unmeasured": "Interactive development, tests and author source review time are unknown, not zero."
