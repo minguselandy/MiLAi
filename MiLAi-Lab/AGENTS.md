@@ -6,14 +6,38 @@ older worktree. Full goal ACTIVE, incomplete. No subagents, SHA/checksum/content
 extra ledger, new services or remote publication. Existing HTTP/CUDA envs and models only.
 Serialize actual model jobs. Revalidate PID/command/terminal output; never restart on timeout.
 
-CURRENT EXECUTION: B five-arm queue CLOSED, all160 positions, driver1130008/exec98733
-and both native children absent; root status CLOSED_ARMS_REQUIRE_SOURCE_REVIEW. Source d8447495.
-H guidance pilot1452387/exec30402 CLOSED8/8. C supplement1489319/exec93643 CLOSED8/8 withfailures.
-No actual model job at this boundary. NEXT launch prepared source-check followups on copies of8
-actual Gen histories; tools/run_host_intent_followups.py and view-v4-source-check-followups-plan-v1.json.
-Use frozen d844 src/HTTP env, retain actual prior completed Host messages/Store, new requestID;
-no forcedtoolchoice/internalaction, original positions unchanged.8groups afterfirstanswer arrivals
-19/19/9/15/7/19/16/16 verified. Runner source version mustbe recorded aftercurrentcommit.
+CURRENT EXECUTION: all current modeljobs CLOSED/absent. B160, H8, C supplement8 and8source-check
+followups closed. FollowupPID1741102/exec19688 CLOSEDexit0 COMPLETED_WITH_FAILURES. Runner4aa0b057,
+corefrozen d8447495, originalHTTPenv/ledger. OriginalA/B/CStores copied, originaloutcomes untouched.
+Followups: A29 no tool/falselyclaimsinspection/still74; B05/B06Hosttruncated; C26no tool/stale2PM;
+D11onecall readsoldbound originals andmisattributesmotherdish; F08oneREFRESH; C23twocalls;
+D23twocalls.4groups6actualcalls, no repairedoldpositions. Fullsemanticreviewpending.
+
+NEXT CONCRETE FIX, real evidence nowavailable: F08followup Writer DIDsee7742/7740 and generated
+correct7742 Viewrevision2 (6nodes1rule,30bindings) from30 actualsources. REFRESH returned
+material_budget_exhausted; actualToolpacket evidenceEMPTY, rejection1; Host fellback toold7724.
+DoNOTblameWriter for this case. Capture3cf3bf6b-4af2-4f76-9a57-514abab6dd44 underfollowuproot.
+Trace case-05/runtime/banks/eff2803d-908b-4fce-bac6-38877fa91c1b/
+5ea3d4f2-b429-4bca-ba2c-bba346ba828e-trace-0.jsonl. Step1 observed_evidence containsactualnewView;
+observed_materials['-1'] hasmetadata. Callerid chatcmpl-b0bf45f512ceb823:tool:0.
+Capacityaudit view-v4-refreshed-view-wire-audit-v1/audit.json: fullpacket2176 >2048; sameexact
+interpretation withonly6aliases actuallyreferenced anywhere in it needs871. Keys e1/e2/e3/e20/e25/e26.
+AuditONLY; compactpacketNOTexecuted, noissuedref/Hostscoreyet. Cache/snapshot shouldkeepall30
+bindings andcontroller observations/opportunities staycomplete. Implement WIRE-ONLY metadata
+compaction: project_packs optionalflag defaultFalse, retrieval_packet usescompactTrue; keep
+nodes/rules/unresolved/scope/querytime unchanged, retainanyreferencedalias includingfree-text refs.
+project_pack at495 andproject_packs secondloop652 inmethods/evidence_reading.py; retrieval_packet
+at70 inintent_retrieval.py. Beforeediting check currentfunction use. Avoidpruningsemantic content.
+Then meaningfulactualbudget/ref/known-view check +conditionalHostreadout onthissavedrealView,
+notregeneration/made-upView; preserveoriginal2176failure. Newversiondeclared, no oldresultrewrite.
+Verifyactualfirstbefore/actions equality beforeusingolder captures withnewwire version forC.
+
+Afterthisfix, proceedC actual2–3branches/source-state andmatchedfeedbacktraining; don'tremain
+in endlessprompttuning. Hguidance+explicitfollowups didnotensureupdates, andsomefailures areHost
+absence ofcall. Ccanuseactualnewcalls fromfollowups, notclaims. Needreview bindings proposals:
+includeSEARCH or relevantactualREAD foroutsidebindingupdates; don'tassumeREFRESH failed tosee
+news (F08scope30wascorrect). Existingfixed_context continuation alwaysSEARCH ifavailable; inspect
+actualpaths andcost, don'tinfersemanticstops frompolicyname.
 
 B rules CLOSED16C/8Q/4W/4F,276431tokens47HTTP8toolcalls;7Viewgenerationcalls,2returnedViews.
 B fixed_context CLOSED12C/9Q/5W/6F,252288tokens42HTTP10toolcalls,noViewgeneration.
@@ -22,8 +46,8 @@ MainT1 B32closed,228299tokens40HTTP;41nativeforwards217517tokens,max7941,truncat
 ControlT1 B32closed,231774tokens43HTTP;55nativeforwards327198tokens,max12989,truncated0/finite.
 Both native were actual process-local MHAfastpathfalse,max16384. Native model CPU alreadybilled:
 main41.995967538,control63.452940421. RemainingdriverCPU38.349625391/41.519931636 settledv22.
-Native task semantic reviews stillpending. Main answers alreadyread; tentative review notes inchat
-must be substantiated/persisted, not claimed completed. FullB closure manifest and data/view-v4-b-states-v1/
+Native task semantic reviews stillpending. Main answers alreadyread; notes saved
+view-v4-b-main-author-notes-v1.json (proposed17C/5Q/6W/4F), not finalized. Control answersnotyetreviewed. FullB closure manifest and data/view-v4-b-states-v1/
 export.json:250actualdecisionstates, allgoldmasked; four initialexports194 +control56, don'tduplicate.
 
 H generic Host coverage/quote guidance was actually visible; finalcounts13/15 and schema still
@@ -117,7 +141,8 @@ C supplementary normal collection is now CLOSED: existingT2 C23/D23,4requests ea
 initial andfinal actualprefix plusquote requests, original sources preserved; source d844.
 Combined A/B/C nowcover8sourcegroups. ActualE2branches/newlabels/fits notyetdone.
 pending-v22 SETTLED216.538961417CPU/17phases atverifiedidle; gen/embeddingunchanged.
-pending-v23 UNSETTLED currentlyH/C wholelocalCPU +8followup planprep; addnewreview/runtimecosts once.
+pending-v23 nowSETTLED36.127549393CPU/6phases atverifiedidle; includesH/C/followup localruntime,
+source-checkprep/freeze andwireaudit. Startpending-v24 fornewmeasuredwork; donotrebillv23.
 Partial B gen answer notes0..26 saved view-v4-b-generative-author-notes-v1.json; not finalgrades,
 packets/KunionD and View review stillneeded. Do not convert partial answer notes into labels.
 W5 implementation source54371ea7; model queue still frozen d8447495.
@@ -143,7 +168,7 @@ parsed, no runtimecompatproof. BaseAgent hook +orchestrator API inspected. Runti
 hidden task_summary/state_requirements/task_requirements: never forwardthemtoHost/retrieval.
 NoSTATEadapteryet. See host-intent-view-v4-state-source-preparation-v1.json.
 
-NEXT: execute8source-check followups; close remainingB/H/C source reviews; collectCactualbranches;
+NEXT: fix realViewwire-metadata overflow, verify actualdelivery; close remainingreviews; collectCbranches;
 
 W5 same-state branch comparisons and matched continued-CE/answer-only/delivery training stillneeded.
 Use completed T1 mainseed0 common initialization. Broader B–E/E1–E5/STATE remain unfinished.
@@ -156,8 +181,9 @@ Seed0both complete, mainseed1fit/export complete; controlseed1/export andseed2 u
 Reviewed recovery uses a new attempt preserving original failure/cost and unchanged recipe.
 
 ONLY ledger /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json.
-Pendingv15..v22 SETTLED once atidle. v20=61.143722329CPU;v21=9.896830322CPU;v22=216.538961417CPU.
-v23 pending H/C localruntime andsource-checkprep; nativeBmodelcompute alreadycharged directly.
+Pendingv15..v23 SETTLED once atidle. v20=61.143722329CPU;v21=9.896830322CPU;v22=216.538961417CPU.
+v23 SETTLED36.127549393CPU/6phases; nativeBmodelcompute alreadycharged directly.
+No active modelprocess atlatestboundary. Rawartifacts mayretainoldledger_recorded flags; settlements authoritative.
 HTTP already billed. Driver/case/readout CPU nested; do not doublecount. Native compute directly
 billed by evaluator, not offline pending. Never settle while actual model job active.
 Unmeasured interactive review/tests/import overhead unknown,notzero. Raw corpora/traces/weights ignored.
