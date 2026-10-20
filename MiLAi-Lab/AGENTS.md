@@ -47,6 +47,17 @@ AllSmallhistoriespriorcontact, regressionnotblind. LocalHFdownloadrevisionunknow
 Nativebackend/fixedimageReader/full451remain. Mem2ActGivenTool capture-onlybridgecommitted3b39e6bd;
 400/429/16843releaseprepared, full400actualmodelrunstillpending. No newmodelservices.
 
+NEW concrete E4 capacity gap: data/manifests/host-intent-retrieval-v3-large-bank-capacity-preflight-v1.json.
+Existing EvidenceOperations puts ALL arrival bodies in state.new_events; shared projection islossless.
+Synthetic-request/fullInstructIRcorpus projection=2075367state tokens,263headtokens vs12288/2048.
+No realquery/gold read bythispreflight, no Storeingestion/modelforward orbenchmarkprediction.
+Need generic budgeted+navigable source observations overfullStore BEFORE fullE4; no qrelfilter,
+silentclipping or benchmark-specifichardcoding. Existinghistory_directory onlypagesknownsemantic
+recordversions, notrawarrivalfeed. Do NOTchangeactivefrozenT1; newobservationconfig mustbedeclared
+andcomparedfairly, withlegaltrain-only supervisionifneeded. This is next independent coding work.
+PreflightCPU20.558320989 pendingv12, notsettledwhilefitlive; firstscriptSyntaxErrorretained,
+startupCPUunmeasured. Activefitlastobserved initialdev451/1209, updates0, noerror;pollsamehandle.
+
 Originalgoal remains FULL: T1/T2+matchedcontinuedCE,seeds0/1/2,finalE1/reservedconfirmation,
 E2frozenrequests,E3retrainedequal-info+one-shotfeedback,E4fullreleases,E5sevenworkloads/budgets,
 additionalHost,nativeE0. Nativeparser service-change permission unanswered; do not restart service.
