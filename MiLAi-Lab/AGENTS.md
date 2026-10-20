@@ -3,20 +3,33 @@
 ACTIVE model collection PID1429403 / exec94846 / frozen-c6b1f3bd:
 runs/t1-new-train-fixed-context-v1/driver.json, planned228. Registration faf56025.
 Revalidate actual PID/driver and pollsamehandle; never restart after observation timeout.
-Latest closed-prefix export v4 has327states/41positions,61actualrequests,201labels/126masked,
-172source-progress preferences/29sufficient; all327publicinputs unchanged. Source-review-notes-v1
+Latest closed-prefix export v5 has468states/58positions,89actualrequests,284labels/184masked,
+252source-progress preferences/32sufficient; all468publicinputs unchanged. Source-review-notes-v1
 now covers ALL114newtrainpools/64newtraingroups,2210source-document occurrences. Exactfixturekeys
-andindices checked; these are authornotes, notoperationgold. Nextsource history index64 =newdev;
-all26newdevpools stillunreviewed. Actualrequest supervision stops at first41positions.
+andindices checked; these are authornotes, notoperationgold. ALL26newdevpools/16groups also reviewed
+in t1-dev-source-review-notes-v1.json(470sourceoccurrences). Actualdevcollection NOT_STARTED.
+Actualtrainrequest supervision stops at first58positions; do notduplicate earlierprefixstates.
 Unanchored downstream fragments conditional onactualrequest, notnativegold. Provisional125/8341
 note correctedbeforeanyactualgold:Viorst/Rutgersfragments cannotprove missingbook-authorlink.
 Artist-only calls need less than signing; invented2024as_of heldmasked. HostSwedishKassettenpremise
 gets partial correctiveevidence, nofullmember-name proof; finalHost actually correctedthepremise.
-Taskauthor first41 only:13C/11Q/8W/9F in task-reviews-prefix-v3. No duplicate earlier prefixstates.
-pending-offline-review-v10 has8 measured export/label phases, unsettled whilelive; do not rebill
+Taskauthor first58 only:20C/13Q/13W/12F in task-reviews-prefix-v4. No duplicate earlier prefixstates.
+pending-offline-review-v10 has14 measured phases, unsettled whilelive; do not rebill
 closed probe/comparison or older v1..v9settlements. No newT1fitting or devcollection yet.
-Latest observed collection49closed/228; actualdriver advances. PendingofflineCPU23.572220548.
+Latest observed collection65closed/228; actualdriver advances. PendingofflineCPU37.134044519.
 See t1-train-source-review-complete manifest. Source notes grow; oldercounts are snapshots.
+
+Mem2Act preparation only: new datasets/mem2act.py gives literalquery+schema, ALL429sessions /
+16843turns(onlynormalizer source_idmetadata removed), separatelineageaudit andtypedstrictmetrics.
+Pinned releasedsmall c935c65be9aa19c930b60657c0c4b2b7ea13a34a downloaded underexternal/
+mem2act-protocol-v1;400QA/429sessions, structuralinspectiononly, noactualquestion/history/targetvalue
+display.7emptydeclaredsources,16nomatchedsessions,3partialmissing,11missingIDs,1schema/name mismatch;
+all400retained.341sourcecomponents areNOTindependentusers; primarybanksharedall429, NOgoldfilter.
+2nonstandardtool_callsroles preserved; runtimeingestion/catalogadapter stillpending.12synthetictests,
+Ruff,mypy,packageboundaryPASS. AdaptedF1/BLEU1 andstrict_call_match/argument_value_accuracy named
+explicitly; noofficialscoreridentity/leaderboardTAclaim. Readprotocol-v2;v1perQAassignment refined
+toofflineonly BEFOREmodeloutputs. No Mem2Actmodelrun/businessservicecall/checksum. Legacyv0213
+SHApreparer NOTinvoked. Full400actualeval+finalrecipe/seedmatrix remain.
 
 Both mixed diagnostic jobs CLOSED: fit PID1380577 and exported dev6 PID1391476 absent,
 authoritative runs COMPLETED. Export exec53815 no longer available; no restart.

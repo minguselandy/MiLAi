@@ -1,0 +1,48 @@
+{
+  "status": "T1_RUNNING_REQUEST_REVIEW_PREFIX58",
+  "pid": 1429403,
+  "exec_session": 94846,
+  "source_version": "c6b1f3bd",
+  "observed_closed_positions": 85,
+  "planned_positions": 228,
+  "program_counts": {
+    "COMPLETED": 67,
+    "FAILED": 18
+  },
+  "first_failures": 18,
+  "all_failure_unknown_deltas_zero": true,
+  "latest_export": "artifacts/host-intent-retrieval-v3/data/t1-new-train-closed-prefix-v5",
+  "labels": {
+    "states": 468,
+    "reviewed_requests": 89,
+    "reviewed_states": 468,
+    "labelled": 284,
+    "reasons": {
+      "reviewed_missing_original_progress": 252,
+      "no_reviewed_source_proof_masked": 121,
+      "reviewed_originals_sufficient": 32,
+      "reviewed_partial_evidence_only_masked": 58,
+      "no_reviewed_progress_masked": 5
+    },
+    "families_labelled": 15,
+    "model_calls": 0,
+    "inputs_changed": false,
+    "states_source": "artifacts/host-intent-retrieval-v3/data/t1-new-train-closed-prefix-v5/train.jsonl",
+    "reviews_source": "artifacts/host-intent-retrieval-v3/data/t1-new-train-closed-prefix-v5/request-witness-reviews-v1.json"
+  },
+  "public_inputs_unchanged": 468,
+  "task_reviews": "artifacts/host-intent-retrieval-v3/data/t1-new-train-task-reviews-prefix-v4.json",
+  "task_review_counts": {
+    "CORRECT": 20,
+    "QUALIFIED": 13,
+    "WRONG": 13,
+    "FAILED": 12
+  },
+  "new_source_pools_reviewed": {
+    "train": 114,
+    "dev": 26
+  },
+  "pending_offline_cpu_seconds": 37.134044519,
+  "pending_offline_manifest": "artifacts/host-intent-retrieval-v3/data/pending-offline-review-v10.json",
+  "next": "Continueoriginaltrain228; actualrequestsafter58unreviewed; finalfullexportthenserialnewdev52. NoT1fit/finalrecipe/seedsdone. Mem2Actpreparationseparate, zeroactualmodels."
+}

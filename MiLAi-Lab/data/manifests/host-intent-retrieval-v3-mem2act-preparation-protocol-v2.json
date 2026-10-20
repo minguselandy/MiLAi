@@ -1,0 +1,71 @@
+{
+  "status": "GIVENTOOL_PUBLIC_INPUTS_AND_ADAPTED_SCORING_READY_NOT_HOST_RUNNER",
+  "version": 2,
+  "previous": "data/manifests/host-intent-retrieval-v3-mem2act-preparation-protocol-v1.json",
+  "upstream_revision": "c935c65be9aa19c930b60657c0c4b2b7ea13a34a",
+  "primary_bank": "All429releasedsessions/16843turns inreleaseorder for everyquery, sameinitialbankperarm. No per-QA goldsource-based onlinecorpusfilter.",
+  "refinement_before_model_outputs": "v1mentionedsource-IDassignedsessions. Officialpaper uses429sessions andplanforbidsgoldsourcepointersinrequests; v2keepssource-IDmappingexclusivelyoffline. NoMem2Actmodeloutputexists.",
+  "online_current_input": [
+    "query",
+    "target_tool_schema"
+  ],
+  "historical_input": "Allsessions andallturns retained. Top-level perturnsource_id isoffline lineage; historicaltoolnames,args,tool_call_ids,roles/content intact, including2nonstandardtool_callsroles. Runtimeingestionadapterstillpending.",
+  "offline_only": [
+    "qa_id",
+    "source_conversation_ids",
+    "evolution_chain",
+    "tool_call",
+    "grounding_info",
+    "complexity_metadata"
+  ],
+  "coverage": {
+    "qa": 400,
+    "sessions": 429,
+    "no_declared_sources": 7,
+    "no_matched_sessions": 16,
+    "partially_missing_sources": 3,
+    "missing_source_ids": 11,
+    "schema_name_mismatches": 1,
+    "source_components": 341
+  },
+  "source_components": {
+    "count": 341,
+    "sizes": {
+      "1": 291,
+      "2": 45,
+      "4": 2,
+      "5": 1,
+      "3": 2
+    },
+    "interpretation": "Targetsource/fullsessioncorrelationcomponents, not400or341independentusers. Everyquerysharesonefullreleasedbank."
+  },
+  "defects": "Retainall400:7emptydeclaredsources,16nomatcheddeclaredsessions,3partialmissing-sourcecases,11missingIDs,1schema/reference-namemismatch. These aremetadata gaps, notproof noanswercanexistelsewhere. No sourcebackfill, namerepair orfiltering.",
+  "metrics": {
+    "strict_call_match": "Exactlyonebusinesscall; exacttoolname andidenticalargumentkeys/JSONvalues. Objectorderignored; arrayorderandJSONscalartypesretained.1and1.0areequalJSONnumbers;Trueand1differ.",
+    "argument_value_accuracy": "Correctexpectedtop-levelvalues / expectedargumentcount, conditionalonexactlyonecall/righttool; wrong/missingvalues count0, extraargslose strictmatch.",
+    "parameter_value_f1": "MiLAiadaptation ofparameterprecision/recall over exactJSONname/valuepairs; noclaimofauthorcodeidentity.",
+    "bleu1_json_lexical": "MiLAiadaptation: sorted-keyJSONofname+arguments, case-sensitiveUnicodeword/punctuationtokens, clippedunigramprecisionwithbrevitypenalty,nosmoothing. Notcompletesuccess.",
+    "paper_comparability": "FormalACL\u00a74.1and arXivv1 describeF1,BLEU1,TA; \u00a75.4separatesTSA/EM. Noofficialcomplete scorerdiscoveredinpublishedtree. Do notmapreportedTA/tablevaluesontoours orclaimleaderboardreproduction."
+  },
+  "validation": {
+    "synthetic_tests": "12passed",
+    "ruff": "passed",
+    "mypy": "passed",
+    "package_boundary": "passed",
+    "actualrelease_projection": "400query/schema inputsand429sessions/16843turns exactpublicprojectionchecked; noactualquestion/history/targetargumentvaluesdisplayed"
+  },
+  "remaining": [
+    "RuntimehistorycaptureandGivenToolbusinesscatalog/callcaptureintegration",
+    "FinalJevrecipe/3seedsandselectedC0freeze",
+    "Full400actualHostrunsandnative/adaptedmetricaggregationwithfullcosts",
+    "Priorcontactdisclosure/metadataaudit; nofreshindependenceclaim"
+  ],
+  "model_calls": 0,
+  "business_execution": false,
+  "content_checksum_verification": false,
+  "source_documents": [
+    "https://github.com/Cantaloupe-M/Mem2ActBench/blob/c935c65be9aa19c930b60657c0c4b2b7ea13a34a/Mem2ACTBench_small/README.md",
+    "https://aclanthology.org/2026.acl-long.370.pdf",
+    "https://arxiv.org/html/2601.19935v1"
+  ]
+}

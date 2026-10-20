@@ -1,7 +1,8 @@
 # Host 意图检索 v3 执行记录
 
 目标为完整执行 `MILAI_HOST_INTENT_RETRIEVAL_DEVELOPMENT_EXPERIMENT_PLAN_20261019_v3.md`，
-当前推进 M1 闭环和 M3 训练数据；未宣称方法有效或目标完成。旧研究头 `1d568169` 为回滚基点。
+当前推进 M3 的 T1 实际数据采集与 E4 接入准备；完整原生 E0 和后续矩阵仍未完成。
+未宣称方法有效或目标完成。旧研究头 `1d568169` 为回滚基点。
 本次分支 `feat/host-intent-retrieval-20261019`，独立工作树
 `/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019`。
 
@@ -24,7 +25,8 @@
   `tools/run_host_intent_retrieval.py` 只准备配置并调用原 prepare/message。
   明确的 native-probe 是 E0 实验强制一次工具调用再回答，方法默认仍允许 Host 自行调用。
 - 不更改 Product Schema/API、权限、Canonical、已有保存/更正/遗忘操作。
-  无 SHA/checksum/替代内容指纹校验，无子代理，无第二账本，无旧位置重跑。
+  当前检索路径禁用 SHA/checksum/内容指纹，无子代理、第二账本和旧位置重跑。
+  旧63603feb错误反馈曾生成schema指纹，原收据保留，修订与版本限制见后文。
 
 ## 当前证据
 
@@ -47,13 +49,13 @@ COMPLETED_WITH_FAILURES 72/72。没有重启或改动其冻结源码、结果与
 | query-only、丰富请求、跨调用引用和模型反馈 | 接口测试＋实际轨迹 | 机械通过；已有JSON开发轨迹，未完成全量语义验收 |
 | 六种条件配对＋D2 参数化补搜/范围 | 同池目的、时间、已读、相关/无关更新、排除范围、预算两侧效果 | 未完成；参数化 SEARCH 已接入，但六类语义配对未验证 |
 | FollowIR / 合法 MemOps train / MuSiQue-Full TRAIN | 来源/许可版本、主题背景共享种子分组、实际 Store 状态与偏好 | FollowIR已导入分组；主272、dev64、生成式48均关闭；T0有2276train/456dev实际状态，1649/353有效偏好；主272答案已全部作者复核 |
-| T0 / T1 / T2＋continued-CE、原生/实际工具评测 | 数据版本、最终权重、tokens、分组结果、0/1/2种子 | T0 seed0已完成207更新并写出最终权重；导出权重验证、其他种子、T1/T2和完整工具评测未完成 |
-| E1 Host×控制2×2，16组128开发任务及新保留组 | 全部位置和配对区间，允许无调用失败 | 未运行 |
+| T0 / T1 / T2＋continued-CE、原生/实际工具评测 | 数据版本、最终权重、tokens、分组结果、0/1/2种子 | T0 seed0的207更新、落盘456dev验证和64位置工具评价已关闭；T1新来源train64/dev16组已审阅，新增train228位置采集中；其他种子、T1拟合、T2及对照未完成 |
+| E1 Host×控制2×2，16组128开发任务及新保留组 | 全部位置和配对区间，允许无调用失败 | 初版开发已运行全部3臂192位置；fixed_context46完整正确选为C0，规则与T0seed0各38。选定2×2为128位置；最终配方与新保留组未完成 |
 | E2 同请求同before 固定/规则、Jev、生成式 | 原请求冻结、各臂独立后续轨迹、下游结果 | 未运行 |
 | E3 等信息文本重训、单次与反馈对照 | 同数据/预算的重训和实际工具结果 | 未运行 |
 | E4 InstructIR 完整选定配置 | 官方输入语料、原生检索指标和要求成对响应 | 未接入 |
 | E4 LongMemEval-V2-Small 451题 | 原生后端、固定Reader、图像、质量与查询成本 | 未接入；文本子集不替代全量 |
-| E4 Mem2Act-small GivenTool 400题 | 相同目标schema、原指标与 strict_call_match/argument_value_accuracy | 未接入；SelectTool 另列扩展 |
+| E4 Mem2Act-small GivenTool 400题 | 相同目标schema、原指标与 strict_call_match/argument_value_accuracy | 发布400/429数据、输入隔离、来源审计和适配评分已准备，12合成测试通过；真实Host接入与400评价未执行。SelectTool仍为扩展 |
 | E5 512/2048/4096 工作点与七类缓存工作负载 | 每臂自身缓存，真实交付量、冷暖完整成本 | 未运行 |
 | M6 额外Host、版本接口、最终报告 | 固定工具/Jev跨Host结果、逐项要求审计 | 未完成 |
 
@@ -953,3 +955,34 @@ HolyFuck当成EricClapton歌曲的歌手；来源还发现共同主持不证明�
 同一模型进程继续，最近快照49/228关闭。pending-v10增加v4导出/编译，8阶段共23.572221秒
 已测CPU，等待实际模型任务空闲单次结算。新T1最终混合、matched预算、拟合与全实验矩阵
 均未完成，目标保持active。
+
+## 2026-10-20：新dev来源审阅与Mem2Act输入边界
+
+新增dev16组26池、470个来源文档出现已审阅，键/索引与fixture一致；实际dev52位置仍未
+启动。新train+dev共140池的来源审阅完成，不等于实际请求/标签/拟合完成。train关闭前缀
+v5覆盖58位置、89调用、468状态，284标签/184遮罩（252补证、32充分）；公开输入逐项不变。
+首58任务作者复核20正确/13有保留/13错误/12失败，仍非完整效果比较。Kurt请求即使query
+只问身份，只要purpose/required_points仍要求公民身份，就不会仅按query的表面措辞标充分。
+
+外部准备核对[官方small说明](https://github.com/Cantaloupe-M/Mem2ActBench/tree/main/Mem2ACTBench_small)
+与[正式ACL论文](https://aclanthology.org/2026.acl-long.370.pdf)，固定发布revision
+c935c65be9aa19c930b60657c0c4b2b7ea13a34a，下载现成400QA/429会话。只显示结构、计数和来源
+元数据，未展示真实题目/历史正文/目标参数值；没有重新生成数据、模型请求、真实业务调用
+或SHA校验。旧v0213准备器含指纹校验，不用于新路径。
+
+元数据揭示7个空来源列表、16个无匹配会话、3个部分缺来源、11个缺失来源ID和1个目标schema
+名称与答案名称不一致；全部400保留，不补来源/改答案。其341个目标来源/整会话关联组件
+不是独立用户：主评价使用全部429会话作为共同记忆库，不依据gold来源ID缩小在线搜索池。
+最初准备登记提及按来源分配会话，已在任何Mem2Act模型输出之前修订为离线审计用途；见
+preparation-protocol-v2。发布历史中的2个非标准tool_calls角色也原样保留，后续摄取适配仍待做。
+
+新增datasets/mem2act.py隔离query/schema与离线答案/来源/复杂度，保留全部16843历史turns
+及历史工具调用内容，只移出规范化器添加的顶层source_id。400任务和全部历史投影实测
+一致。12项合成测试、Ruff、mypy和包边界通过，涵盖字段隔离、缺失来源不删除任务、对象/
+数组/标量类型语义、额外参数、多调用与BLEU词重叠不能证明完整调用正确。
+
+评分明确命名为MiLAi适配：参数键值对F1、已声明JSON词/标点分词的BLEU-1，另保留
+strict_call_match和argument_value_accuracy。正式PDF仍分别使用TA/TSA/EM，发布树未找到
+完整官方评分器；不将论文表格数字冒充这份实现或排行榜结果。真实Host业务catalog/调用
+捕获、历史摄取及全部400评价尚未完成。pending-v10现14个已测阶段37.134045秒CPU，实际
+模型作业运行中保持待结算；原账本不重复记账。
