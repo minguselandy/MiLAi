@@ -1,0 +1,52 @@
+{
+  "status": "HOST_BRIDGE_AND_RUNNER_SYNTHETICALLY_VALIDATED_NOT_EXTERNAL_MODEL_RUN",
+  "version": 3,
+  "previous": "data/manifests/host-intent-retrieval-v3-mem2act-preparation-protocol-v2.json",
+  "entrypoint": "tools/run_host_intent_mem2act.py",
+  "runtime": "Existingfunctional.prepare/message, existingIntentRetrievalMemory andStore. Recordedtoolcatalogsuppliedaspublicinputonlyinretrievalprofile/request_mode disabled. Defaultlocalapplication pathunchanged.",
+  "business_tools": "Capture-onlyBaseTools; validatedparameters recordedwithout business effects. Modelargumentnames suchasconfig/self/callbacks remainliteralarguments, separatefromframeworkoptions. Namesmatchinglocalapplicationoperations cannotdispatchintothatapplication.",
+  "predictions": "AllcurrentAIbusinessproposals, includinginvalid/rejected/unknowncalls; memorytoolcallsexcluded. Executedintentrecords separate. Nochoose-best receipt.",
+  "history": "All429sessions/16843turns captured once asinitialtemplate. For EACHquery cloneclosedtemplateStore; earlierQAqueries/answers/receipts cannotenterlaterquerymemory. Sameinitialcommonhistory, not400users. Layaweightpoolreusedacrosscopies. E5persistentcacheworkloadsremainseparate.",
+  "source_envelopes": "Fullpublishedmessagefieldspreservedinsidecontent, excludingtoplineage source_id. Knownuser/assistant/tool roleskept;2tool_callsroleturns storedasreference toolenvelopeswithliteraloriginalrole. Noobjectauthorityorhistoricaltimeinvented.",
+  "schema_adapter": {
+    "reason": "All400publishedparametersusePythonstyledict/int/floataliases, incompatiblewithnormalJSONSchema validation. Rawfilesandpublicidentity remainunchanged.",
+    "mapping": {
+      "dict": "object",
+      "int": "integer",
+      "float": "number"
+    },
+    "changed_keyword_counts": {
+      "dict": 419,
+      "int": 163,
+      "float": 78
+    },
+    "scope": "VisitonlyJSONSchema nodes. Properties/required/descriptions/defaults/enums/examplevalues unchanged; noargument/defaultfilling oranswerrepair. Unknown typesnotguessed.",
+    "all400_valid": true,
+    "source_audit": "artifacts/host-intent-retrieval-v3/external/mem2act-protocol-v1/parameter-schema-audit.json",
+    "adapted_audit": "artifacts/host-intent-retrieval-v3/external/mem2act-protocol-v1/schema-dialect-audit.json"
+  },
+  "costs": "Originalledger configuredinprofile persistsacrossStorecopies. Functionalrunnerownmodelreceipts unchanged. Exclusive setup/copy/scoringCPU recordedasorchestration-compute.json, includingfailedpartialstages; settleafterjobcloses. Wholejobwallnonadditivewithnestedmeasurements.",
+  "failure": "Firstoutputsandfailedpositionspreserved. Knownlength/formatfailures withzero newunknown advanceonlytountouchednextpositions;unexpectedfailuresstop. Noautomaticretry/resume.",
+  "metrics": "v2adaptedmetricskept; completed_strict_call_match additionallyrequiresnormalHostworkflowcompletion. Intentmatchandfinaldeliveryfailureremainseparate.",
+  "validation": {
+    "related_tests": "23passed",
+    "default_business_regression": "1passed (M/I2successfulactualbusinessreceipt)",
+    "shared_budget_and_case_isolation": "2syntheticcases/4mockrequests allbilledtosameisolatedtestledger; noearliercaseanswer/queryinnextsources",
+    "native_and_json_action": "ScriptednormalHost->retrieve->intentcapture->finalresponse passed; notrealnativeE0 evidence",
+    "fingerprints": "Feedback _sha helper andhashlib.sha256 patchedtofail innewHosttests; fingerprintpathnotexecuted.",
+    "ruff": "passed",
+    "mypy": "5sourcefilespassed",
+    "boundaries": "packageandtoolspassed",
+    "help": "entrypointhelp executed",
+    "actual_release_projection": "16843turnenvelopes projected; finalcapture-onlycatalogs all400 matchdeclaredschema-dialectprojection. FullStoreingestionnotrun."
+  },
+  "remaining": [
+    "FinalHost/controllerconfigurationandthreeJevseeds",
+    "Full429sessionactualStoreingestionandresourceaccounting",
+    "Full400GivenToolactualruns",
+    "Groupedmetric/costaggregationandpriorcontactdisclosure"
+  ],
+  "model_calls_on_external_release": 0,
+  "native_E0": "0/24; existingserviceparserpermissionpending",
+  "sha_verification": false
+}

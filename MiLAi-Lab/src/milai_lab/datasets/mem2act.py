@@ -31,6 +31,24 @@ def public_history(sessions: list[dict[str, Any]]) -> list[dict[str, Any]]:
             for session in sessions]
 
 
+def history_sources(sessions: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Lossless released-turn envelopes for the existing source capture API.
+
+    Native user/assistant/tool roles keep their capture roles. The release's
+    `tool_calls` role is captured as a reference tool document, with that exact
+    original role inside the body, not reinterpreted as a user assertion.
+    Historical call names, IDs, argument JSON and response text remain together.
+    """
+    capture_role = {"user": "user", "assistant": "assistant", "tool": "tool",
+                    "tool_calls": "tool"}
+    return [{"session_id": session["session_id"], "event_key": f"turn-{index:05d}",
+             "original_event_id": f"{session['session_id']}/turn-{index:05d}",
+             "role": capture_role[turn["role"]], "origin": "mem2act_released_turn",
+             "occurred_at": None, "content": turn}
+            for session in public_history(sessions)
+            for index, turn in enumerate(session["turns"])]
+
+
 def source_coverage(
     rows: list[dict[str, Any]], sessions: list[dict[str, Any]],
 ) -> dict[str, Any]:

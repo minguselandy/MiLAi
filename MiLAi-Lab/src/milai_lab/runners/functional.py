@@ -2532,6 +2532,7 @@ def message(
     resume: bool = False,
     control_models: dict[tuple[Any, ...], Any] | None = None,
     model_tool_choice: Callable[[list[Any]], Any] | None = None,
+    recorded_tool_schemas: list[dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
     freeze = frozen(root)
     workflow = {"reservation_v1": "reservation", "document_publication_v1": "document"}.get(
@@ -2564,6 +2565,10 @@ def message(
         public["query_calendar_context"] = query_calendar_context
     if incoming_sources is not None:
         public["incoming_sources"] = incoming_sources
+    if recorded_tool_schemas is not None:
+        if settings["request_mode"] != "disabled" or not settings.get("retrieval_tool"):
+            raise ValueError("ACTION_INTENT_CATALOG_REQUIRES_RETRIEVAL_PROFILE")
+        public["recorded_tool_schemas"] = deepcopy(recorded_tool_schemas)
     identity = _message_reference(bank_root, session, message_id)
     result_path = bank_root / (identity + "-result.json")
     input_path = bank_root / (identity + "-input.json")
@@ -2592,6 +2597,8 @@ def message(
         "status": "UNKNOWN",
         "capture_attempted": False,
     }
+    if recorded_tool_schemas is not None:
+        output["recorded_tool_calls"] = []
     execution_started = False
     scope = FoundationScope(
         freeze["run_id"], bank, owner, session + ":" + message_id,
@@ -3313,13 +3320,25 @@ def message(
                     return False
                 return True
 
-            selected_business = tuple(tool for tool in app.tools if mode is None
-                or tool.name in {"get_reservation", "get_document_status"}
-                or (tool.name in mode["business_operations"] if "business_operations" in mode
-                    else mode["allow_business_mutation"]))
-            if "business_tools" in settings:
-                selected_business = tuple(tool for tool in selected_business
-                                          if tool.name in settings["business_tools"])
+            recorded_names: set[str] = set()
+            if recorded_tool_schemas is None:
+                selected_business = tuple(tool for tool in app.tools if mode is None
+                    or tool.name in {"get_reservation", "get_document_status"}
+                    or (tool.name in mode["business_operations"] if "business_operations" in mode
+                        else mode["allow_business_mutation"]))
+                if "business_tools" in settings:
+                    selected_business = tuple(tool for tool in selected_business
+                                              if tool.name in settings["business_tools"])
+            else:
+                from milai_lab.runners.action_intents import recording_tools
+
+                def record_intent(call: dict[str, Any]) -> None:
+                    output["recorded_tool_calls"].append(deepcopy(call))
+                    trace({"event": "functional_action_intent", **call,
+                           "business_executed": False})
+
+                selected_business = recording_tools(recorded_tool_schemas, record_intent)
+                recorded_names = {tool.name for tool in selected_business}
             allowed_tools = {tool.name for tool in (*selected_memory, *selected_business)}
             mode_reproposals = mode["format_reproposals_used"] if mode else 0
             completion_path = bank_root / f"{identity}-completion-feedback.json"
@@ -3784,7 +3803,7 @@ def message(
                 if settings.get("max_evidence_queries") is not None else None,
             )
             adapter = None
-            if service.memory_profile == "unified_v1":
+            if service.memory_profile == "unified_v1" and recorded_tool_schemas is None:
                 adapter = app.adapter(
                     service, session, message_id, runtime_config=cfg,
                     reuse_current_observations=settings.get("max_evidence_queries") is not None,
@@ -3902,6 +3921,10 @@ def message(
                                        tool_call_id=request.tool_call["id"], status="error",
                                        content=json.dumps({"ok": False,
                                            "status": "request_mode_rejected", "effect": "none"}))
+                if request.tool_call["name"] in recorded_names:
+                    # Capture-only catalogs cannot dispatch into the local application,
+                    # even when a released tool shares one of its operation names.
+                    return execute(request)
                 def native(current: Any) -> Any:
                     faults.before_native(current)
                     return execute(current)

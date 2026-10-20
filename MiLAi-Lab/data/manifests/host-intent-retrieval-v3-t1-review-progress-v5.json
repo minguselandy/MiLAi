@@ -1,0 +1,52 @@
+{
+  "status": "T1_COLLECTION_RUNNING_PREFIX118_REVIEWED",
+  "pid": 1429403,
+  "exec_session": 94846,
+  "source_version": "c6b1f3bd",
+  "observed_closed_positions": 151,
+  "planned_positions": 228,
+  "program_counts": {
+    "COMPLETED": 110,
+    "FAILED": 41
+  },
+  "closed_review_prefix_positions": 118,
+  "positions_with_states": 115,
+  "no_state_positions": [
+    35,
+    59,
+    72
+  ],
+  "latest_export": "artifacts/host-intent-retrieval-v3/data/t1-new-train-closed-prefix-v6",
+  "labels": {
+    "states": 930,
+    "reviewed_requests": 180,
+    "reviewed_states": 930,
+    "labelled": 560,
+    "reasons": {
+      "reviewed_missing_original_progress": 455,
+      "no_reviewed_source_proof_masked": 256,
+      "reviewed_originals_sufficient": 105,
+      "reviewed_partial_evidence_only_masked": 95,
+      "no_reviewed_progress_masked": 19
+    },
+    "families_labelled": 31,
+    "model_calls": 0,
+    "inputs_changed": false,
+    "states_source": "artifacts/host-intent-retrieval-v3/data/t1-new-train-closed-prefix-v6/train.jsonl",
+    "reviews_source": "artifacts/host-intent-retrieval-v3/data/t1-new-train-closed-prefix-v6/request-witness-reviews-v1.json"
+  },
+  "public_inputs_unchanged": 930,
+  "task_reviews": "artifacts/host-intent-retrieval-v3/data/t1-new-train-task-reviews-prefix-v5.json",
+  "task_review_counts": {
+    "CORRECT": 46,
+    "QUALIFIED": 21,
+    "WRONG": 26,
+    "FAILED": 25
+  },
+  "position_count_clarification": "artifacts/host-intent-retrieval-v3/data/t1-position-count-clarification.json",
+  "review_refinement": "FinalFrontierwork-type correctioncan supporthonestcompleteanswerwhenartistandformationaregiven. ReviewedcontractrefinedbeforeT1fit; actualold468goldrowsunchangedbecausetrajectoryneverreachedfullcoverage. Priorfileskept.",
+  "label_delta_audit": "artifacts/host-intent-retrieval-v3/data/t1-new-witness-labels-v6/label-delta-audit.json",
+  "pending_offline_measurements": "artifacts/host-intent-retrieval-v3/data/pending-offline-review-v10.json",
+  "pending_offline_cpu_seconds": 49.444912880000004,
+  "scope": "NoT1fit,dev52collection orfullbenchmarks yet; fullobjectiveactive."
+}

@@ -3,20 +3,25 @@
 ACTIVE model collection PID1429403 / exec94846 / frozen-c6b1f3bd:
 runs/t1-new-train-fixed-context-v1/driver.json, planned228. Registration faf56025.
 Revalidate actual PID/driver and pollsamehandle; never restart after observation timeout.
-Latest closed-prefix export v5 has468states/58positions,89actualrequests,284labels/184masked,
-252source-progress preferences/32sufficient; all468publicinputs unchanged. Source-review-notes-v1
+Latest closed-prefix export v6 has930states/180actualrequests,560labels/370masked,
+455source-progress preferences/105sufficient; all930publicinputs unchanged. It covers118closed
+Hostpositions,115withstates; no-state indices35/59/72 arekept without inventeddecisions.
+Oldv4/v5 counts41/58 meantpositionsWITHstates; fullspans42/59. Originaloutputs/states/goldunchanged;
+taskauthorreview prefixes41/58 werecorrect asstated. See position-count-clarification.
+Source-review-notes-v1
 now covers ALL114newtrainpools/64newtraingroups,2210source-document occurrences. Exactfixturekeys
 andindices checked; these are authornotes, notoperationgold. ALL26newdevpools/16groups also reviewed
 in t1-dev-source-review-notes-v1.json(470sourceoccurrences). Actualdevcollection NOT_STARTED.
-Actualtrainrequest supervision stops at first58positions; do notduplicate earlierprefixstates.
+Actualtrainrequest supervision nowthrough118positions; do notduplicate earlierprefixstates.
 Unanchored downstream fragments conditional onactualrequest, notnativegold. Provisional125/8341
 note correctedbeforeanyactualgold:Viorst/Rutgersfragments cannotprove missingbook-authorlink.
 Artist-only calls need less than signing; invented2024as_of heldmasked. HostSwedishKassettenpremise
 gets partial correctiveevidence, nofullmember-name proof; finalHost actually correctedthepremise.
-Taskauthor first58 only:20C/13Q/13W/12F in task-reviews-prefix-v4. No duplicate earlier prefixstates.
-pending-offline-review-v10 has14 measured phases, unsettled whilelive; do not rebill
+Taskauthor first118:46C/21Q/26W/25F in task-reviews-prefix-v5. FinalFrontierwork-typecorrection
+reviewrefinedbeforeT1fit, butold468goldrowsactuallyunchanged(noobservedfullcoverage state).
+pending-offline-review-v10 has20 measured phases, unsettled whilelive; do not rebill
 closed probe/comparison or older v1..v9settlements. No newT1fitting or devcollection yet.
-Latest observed collection65closed/228; actualdriver advances. PendingofflineCPU37.134044519.
+Latest observed collection157closed/228; actualdriver advances. PendingofflineCPU49.444912880.
 See t1-train-source-review-complete manifest. Source notes grow; oldercounts are snapshots.
 
 Mem2Act preparation only: new datasets/mem2act.py gives literalquery+schema, ALL429sessions /
@@ -25,9 +30,21 @@ Pinned releasedsmall c935c65be9aa19c930b60657c0c4b2b7ea13a34a downloaded underex
 mem2act-protocol-v1;400QA/429sessions, structuralinspectiononly, noactualquestion/history/targetvalue
 display.7emptydeclaredsources,16nomatchedsessions,3partialmissing,11missingIDs,1schema/name mismatch;
 all400retained.341sourcecomponents areNOTindependentusers; primarybanksharedall429, NOgoldfilter.
-2nonstandardtool_callsroles preserved; runtimeingestion/catalogadapter stillpending.12synthetictests,
-Ruff,mypy,packageboundaryPASS. AdaptedF1/BLEU1 andstrict_call_match/argument_value_accuracy named
-explicitly; noofficialscoreridentity/leaderboardTAclaim. Readprotocol-v2;v1perQAassignment refined
+Mem2Act runtime bridge nowimplemented: action_intents.py capture-onlyBaseTools, optional
+recorded_tool_schemas onexistingfunctional.message onlyforretrieval/request_mode disabled.
+NativeandJSON-action scriptedHost retrieve->recordtarget->answer passed, includinglocalbusinessname
+collisionandinvalidattemptaccounting. FullhistoryturnenvelopescaptureviaexistingStore;2tool_calls
+rolesremainliteralbodyinside reference-tool source, noobjectauthority/timeinvented.
+run_host_intent_mem2act.py / runners/mem2act.py seedonefulltemplate thencloneperquery, soearlier
+evaluationqueries/answerscannotcontaminatelatercases; nativeweightpoolreused, originalledger
+sharedacrosscopies. OrchestrationCPUmeasuredseparately/pendinguntiljobcloses. No400realrunyet.
+RAW400schemasallusePythonaliases. Explicit schema-node-onlydict->object419,int->integer163,
+float->number78 changes; all400validaftermapping, otherfields/defaults/answersunchanged.
+Oldraw-equalityaudit wasNOTschema-validityproof; originalfailedschemaauditretained. Final400wire
+catalogsverified; argumentnamesconfig/self/callbacks do notbecomeframeworkoptions.
+23relatedtests +1defaultbusinessregressionPASS; Ruff/mypy5files/package/toolsboundaries/helpPASS.
+AdaptedF1/BLEU1 andstrict_call_match/argument_value_accuracy named
+explicitly; noofficialscoreridentity/leaderboardTAclaim. Readruntime-protocol-v3;v1perQAassignment refined
 toofflineonly BEFOREmodeloutputs. No Mem2Actmodelrun/businessservicecall/checksum. Legacyv0213
 SHApreparer NOTinvoked. Full400actualeval+finalrecipe/seedmatrix remain.
 
