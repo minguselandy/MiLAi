@@ -1,5 +1,5 @@
 {
-  "status": "IMPLEMENTED_UNIT_VALIDATED_FULL_ARTIFACT_CHECK_NEXT",
+  "status": "IMPLEMENTED_AND_VALIDATED_ON_FULL_ACTUAL_SOURCE_STORE",
   "source_reads": [
     "Reuse source bodies already obtained by the Store search, while validating owner/identity and capture confirmations in bounded512-row batches.",
     "Use one visibility snapshot under the service lock; retain uncertain-capture exclusion, missing-confirmation masking, changed-confirmation/identity failures and unknown timestamps.",
@@ -21,8 +21,101 @@
     "package_boundary": "PASS",
     "tools_boundary": "PASS"
   },
-  "scope": "No native benchmark question/qrel/model used for this development. Actual full-case size and full-source runtime effects still require measured checks. Active matched control remains frozen ba2bf8d8.",
+  "scope": "All16072actualsources preserved; previous real synthetic-case files restored byte-for-byte and ranking provenance identical. One unchanged synthetic fullStore query only, no official benchmark question/qrel/model; final method freeze and full E4 still required.",
   "no_sha_checks": true,
   "product_changes": "No Product Schema/API/permission/Canonical changes. Existing public Store operations and semantic selection retained.",
-  "remote_publication": false
+  "remote_publication": false,
+  "actual_archive_reconstruction": {
+    "phase": "host_intent_instructir_bulk_archive_audit_v1",
+    "status": "PASS_ACTUAL_BASE_AND_RECONSTRUCTED_CASE",
+    "source_version": "b79ae31c",
+    "model_calls": 0,
+    "ledger_recorded": false,
+    "actual_source_read": {
+      "records": 16072,
+      "exact_literal_equal": 16072,
+      "wall_seconds": 1.948453702032566,
+      "cpu_seconds": 1.9483362920000005,
+      "role_time_authority_preserved": true
+    },
+    "delta_archive": {
+      "archive": "artifacts/host-intent-retrieval-v3/external/instructir-bulk-archive-audit-v1/case-blocks.tar.gz",
+      "base": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/external/instructir-synthetic-store-probe-v2/template",
+      "format": "case_blocks_v1",
+      "files": 19,
+      "uncompressed_bytes": 107056042,
+      "stored_block_bytes": 20232597,
+      "archive_bytes": 4868322,
+      "verification": "Every reconstructed byte compared directly; no SHA/fingerprint",
+      "retention": "Full immutable base plus per-case blocks reconstruct all original files.",
+      "wall_seconds": 1.6380005246028304,
+      "cpu_seconds": 1.6379723669999997
+    },
+    "verified_original_files": 19,
+    "restored_rankings_equal": true,
+    "restore_and_provenance_wall_seconds": 2.559041733853519,
+    "restore_and_provenance_cpu_seconds": 2.341283579999999,
+    "old_archive_bytes": 19549415,
+    "four_arms_archive_projection_bytes": 192902390928,
+    "scope": "Closed actual corpus and earlier synthetic case only. All original files reconstructed byte-for-byte and actual Store ranking provenance unchanged. This is not a new benchmark query/model evaluation; common base must remain retained and immutable.",
+    "wall_seconds": 9.097062637098134,
+    "cpu_seconds": 11.516523110000001
+  },
+  "actual_fullquery_comparison": {
+    "status": "COMPLETE_ACTUAL_SOURCE_QUERY_AND_ARCHIVE_CHECK",
+    "source_version": "b79ae31c",
+    "native_benchmark_queries": 0,
+    "model_calls": 0,
+    "http_requests": 0,
+    "native_forwards": 0,
+    "query_wall_seconds": 16.58026603423059,
+    "query_cpu_seconds": 16.097560346,
+    "previous_query_wall_seconds": 50.8567301845178,
+    "whole_retrieval_packet_equal": true,
+    "rankings_and_provenance_equal": true,
+    "archive": {
+      "archive": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/external/instructir-synthetic-store-probe-v3/cases/00000.tar.gz",
+      "base": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/external/instructir-synthetic-store-probe-v3/template",
+      "format": "case_blocks_v1",
+      "files": 19,
+      "uncompressed_bytes": 107054985,
+      "stored_block_bytes": 19902081,
+      "archive_bytes": 4812304,
+      "verification": "Every reconstructed byte compared directly; no SHA/fingerprint",
+      "retention": "Full immutable base plus per-case blocks reconstruct all original files."
+    },
+    "operation_steps": [
+      {
+        "action": "search_0_8",
+        "wall_seconds": 5.505662497133017
+      },
+      {
+        "action": "search_0_16",
+        "wall_seconds": 5.438700440339744
+      },
+      {
+        "action": "read_0",
+        "wall_seconds": 0.03570750821381807
+      },
+      {
+        "action": "read_1",
+        "wall_seconds": 0.032347964122891426
+      },
+      {
+        "action": "read_2",
+        "wall_seconds": 0.0339317275211215
+      },
+      {
+        "action": "read_3",
+        "wall_seconds": 0.04385205265134573
+      }
+    ],
+    "source_inventory_wall_seconds": 1.9478135770186782,
+    "four_arms_archive_projection_bytes": 190682733696,
+    "scope": "One unchanged synthetic query on all16072actual sources; same returned packet, native-ID ordering and provenance after source-read/storage changes. Arithmetic archive extrapolation is not measured full-release occupancy or semantic quality.",
+    "phase": "host_intent_instructir_probe_v3_comparison_v1",
+    "wall_seconds": 2.3708800403401256,
+    "cpu_seconds": 2.160792705,
+    "ledger_recorded": false
+  }
 }

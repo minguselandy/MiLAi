@@ -1,0 +1,57 @@
+{
+  "status": "COMPLETE_ACTUAL_SOURCE_QUERY_AND_ARCHIVE_CHECK",
+  "source_version": "b79ae31c",
+  "native_benchmark_queries": 0,
+  "model_calls": 0,
+  "http_requests": 0,
+  "native_forwards": 0,
+  "query_wall_seconds": 16.58026603423059,
+  "query_cpu_seconds": 16.097560346,
+  "previous_query_wall_seconds": 50.8567301845178,
+  "whole_retrieval_packet_equal": true,
+  "rankings_and_provenance_equal": true,
+  "archive": {
+    "archive": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/external/instructir-synthetic-store-probe-v3/cases/00000.tar.gz",
+    "base": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/external/instructir-synthetic-store-probe-v3/template",
+    "format": "case_blocks_v1",
+    "files": 19,
+    "uncompressed_bytes": 107054985,
+    "stored_block_bytes": 19902081,
+    "archive_bytes": 4812304,
+    "verification": "Every reconstructed byte compared directly; no SHA/fingerprint",
+    "retention": "Full immutable base plus per-case blocks reconstruct all original files."
+  },
+  "operation_steps": [
+    {
+      "action": "search_0_8",
+      "wall_seconds": 5.505662497133017
+    },
+    {
+      "action": "search_0_16",
+      "wall_seconds": 5.438700440339744
+    },
+    {
+      "action": "read_0",
+      "wall_seconds": 0.03570750821381807
+    },
+    {
+      "action": "read_1",
+      "wall_seconds": 0.032347964122891426
+    },
+    {
+      "action": "read_2",
+      "wall_seconds": 0.0339317275211215
+    },
+    {
+      "action": "read_3",
+      "wall_seconds": 0.04385205265134573
+    }
+  ],
+  "source_inventory_wall_seconds": 1.9478135770186782,
+  "four_arms_archive_projection_bytes": 190682733696,
+  "scope": "One unchanged synthetic query on all16072actual sources; same returned packet, native-ID ordering and provenance after source-read/storage changes. Arithmetic archive extrapolation is not measured full-release occupancy or semantic quality.",
+  "phase": "host_intent_instructir_probe_v3_comparison_v1",
+  "wall_seconds": 2.3708800403401256,
+  "cpu_seconds": 2.160792705,
+  "ledger_recorded": false
+}

@@ -36,6 +36,28 @@ Newofflinework pendingv14(tracearchiveaudit onlycurrently). No settlementwhileco
 py-spy0.4.1 isolateddebug-tools-env; HTTP/CUDAenvsunchanged. NoSHA/contentfingerprints.
 Originalledger /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json.
 
+NEW source/storage work committedb79ae31c, validated actual fullStore and priorrealcase:
+512-row source scans +boundedpublicGetOp confirmationbatches; reuse fetchedimmutablebodies,
+retain owner/visibility/uncertaincapture/identity/versionchecks andunknownoccurrence times.
+Single exclusion filter beforecorpusassembly/ranking replacesdouble full-source enumeration.
+Actual16072sources equaloriginaltitle/text+roles, fullarrivalread1.948454s.51relatedtestsPASS,
+Ruff8files/mypy5files/package/toolsboundaryPASS. No activefitcode/datachanged.
+case_blocks_v1 storesper-case changed64KiBblocks/new/deleted/truncatedfiles andexactduplicatefile
+referencesagainstretainedmethodtemplate. Everyreconstructedbyte comparedbeforeworkingcopyremoval.
+Restore via tools/restore_case_archive.py ARCHIVE BASE OUTPUT to fresh independentdirectory;
+baseisrequiredimmutableartifact, do notdelete/mutateit. OriginalDB/results/trace bytes preserved.
+Realv2case19files107056042bytes restoredexactly; archive19549415->4868322bytes; nativeIDrankings
+andprovenanceequal. Originalv2archiveuntouched. NoSHA or contentfingerprints.
+FullsyntheticCPUprobev3 PID2763582/exec74526 CLOSEDexit0/absentPID, frozenb79ae31c:16.580266s query,
+16.097560CPU; entireToolpacket/rankings/provenance EQUALv2(50.856730s).2SEARCH5.5057/5.4387s,
+sourceinventory1.9478s,4READ~.03s. NoHTTP/nativeforwards; noofficialquestion/qrels.
+v3archive4812304bytes; four9906arms arithmetic190682733696bytes, single-case estimateonly.
+Allv3/archive/comparison costs appendedpendingv14; currently33.845572304measuredCPU, unsettledwhilecontrolruns.
+Controlinitialparity audited860commonstates:inputs/labels/stateIDs/logits/choicesALLidenticalto
+maininitial, maxlogitdelta0. Actualcontrolnow118/524,9396011trainingtokens; pollsamePID2670549/exec8252.
+Nextwork should advance E2/E3/T2/remaining externalbackend work whilecontrolruns; do not turn
+these mechanical/storage checks into semantic efficacy or fullE4 completion.
+
 # Earlier experiment detail (current process/status/accounting above takes precedence)
 Train228:165completed/63fail(49length,14JSON);592HTTP1951856known=charged,newunknown0.
 Dev52:41completed/11fail(10length,1JSON);127HTTP390650known=charged,newunknown0.
