@@ -1,0 +1,46 @@
+{
+  "schema": "host_intent_view_execution_v1",
+  "status": "IMPLEMENTED_CHECKED_REAL_EXECUTION_PENDING",
+  "base_version": "2c08c03c",
+  "trigger": "data/manifests/host-intent-view-v4-w4-delivery-fit-v1.json",
+  "setting": "memory_control.delivery_selection",
+  "default": false,
+  "material_roles": {
+    "observed": "Actual acquired request-local materials, including successful reads whose append exceeded the return budget.",
+    "opened": "Current explicitly selected final delivery; retains the original default append behavior.",
+    "known": "Previously issued refs, reopened through the original Store."
+  },
+  "finite_options": [
+    "Keep current packet with plain HANDOFF.",
+    "USE_VIEW replace_delivery selects only that View.",
+    "HANDOFF delivery_indices selects an acquired singleton or pair.",
+    "One acquired View plus at most two acquired originals.",
+    "All acquired originals or all acquired materials, if the complete packet fits."
+  ],
+  "invariants": [
+    "Only actual acquired items can be selected; no semantic label or reference answer chooses a packet.",
+    "No new persistent store or operation kind.",
+    "READ observe_only uses the existing read/control/model allowances.",
+    "Selection uses a control step but no new acquisition quota.",
+    "Original full return envelope budget remains mandatory.",
+    "Snapshot materials and issued indices contain selected delivery only.",
+    "Observed sources feed refresh and dedup; no reread merely to deliver an acquired item.",
+    "Older acquired View revisions remain distinct from current cache revisions.",
+    "Observed-only bodies are removed from controller projection on revocation."
+  ],
+  "checks": {
+    "related_regressions": 131,
+    "subsequent_focused_checks": 24,
+    "w4_tests": 7,
+    "static": "Ruff, mypy 7 files, package/tools boundaries passed.",
+    "scope": "Real SQLite and registered-tool/Host paths with scripted provider outputs; not model quality."
+  },
+  "config": "configs/host-intent-view-v4-delivery-selection.json",
+  "next": "Execute the real failed source prefix with the new finite selector, then fixed Host readout and a new normal stream.",
+  "native_capacity": "Actual native complete-state and option-binding verification remains required before new Laya experiments.",
+  "sha_checks": false,
+  "new_services": false,
+  "extra_ledger": false,
+  "product_changes": false,
+  "full_goal_complete": false
+}

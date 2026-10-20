@@ -70,10 +70,21 @@ def original_witness_preferences(
     known = bindings["known_materials"]
     covered = complete_originals([*opened.values(), *known], sources)
     kinds = row["metadata"]["action_kinds"]
-    if any(proof <= covered for proof in proofs):
+    observed = {int(i): item for i, item in bindings.get("observed_materials", {}).items()}
+    handoffs = []
+    for key in choices:
+        if kinds[key] != "HANDOFF":
+            continue
+        indices = row["metadata"]["action_parameters"][key].get("delivery_indices")
+        selected = opened.values() if indices is None else [observed[i] for i in indices]
+        delivered = complete_originals([*selected, *known], sources)
+        if any(proof <= delivered for proof in proofs):
+            handoffs.append(key)
+    if handoffs:
         if not proof_complete:
             return [], "reviewed_partial_evidence_only_masked"
-        return [key for key in choices if kinds[key] == "HANDOFF"], "reviewed_originals_sufficient"
+        return handoffs, ("reviewed_originals_sufficient" if any(
+            proof <= covered for proof in proofs) else "reviewed_observed_originals_deliverable")
     if any(item["kind"] != "original_source" for item in opened.values()):
         return [], "nonoriginal_opened_material_requires_review"
     missing = set().union(*(proof - covered for proof in proofs)) if proofs else set()
@@ -90,7 +101,8 @@ def original_witness_preferences(
         if kinds[key] != "READ":
             continue
         parameters = row["metadata"]["action_parameters"][key]
-        if parameters.get("history_directory") or "source_observation_cursor" in parameters:
+        if (parameters.get("history_directory") or "source_observation_cursor" in parameters
+                or parameters.get("observe_only")):
             continue
         item: dict[str, Any]
         if "observed_source" in parameters:

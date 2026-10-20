@@ -4,6 +4,7 @@ from __future__ import annotations
 import copy
 import time
 from collections.abc import Callable
+from itertools import combinations
 from typing import Any
 
 from jsonschema.exceptions import ValidationError  # type: ignore[import-untyped]
@@ -14,6 +15,7 @@ from milai_lab.methods.evidence_reading import (
     build_evidence_packs,
     open_evidence_packs,
     pack_candidate,
+    project_pack,
     project_packs,
 )
 from milai_lab.methods.memory_control import MemoryAction, MemoryControlState
@@ -54,11 +56,15 @@ class EvidenceOperations:
         max_searches: int = 2,
         fits_materials: Callable[[dict[int, dict[str, Any]]], bool] | None = None,
         source_observation: SourceObservationBudget | None = None,
+        delivery_selection: bool = False,
     ) -> None:
         self.service, self.load_pool, self.refresh_call, self.fits = (
             service, load_pool, refresh_call, fits)
         self.materials: list[dict[str, Any]] = []
         self.opened: dict[int, dict[str, Any]] = {}
+        self.delivery_selection = delivery_selection
+        self.observed: dict[int, dict[str, Any]] = {}
+        self.delivered_view_slots: dict[str, int] = {}
         self.known_materials = known_materials or []
         self.search_pool = search_pool
         self.search_batch_sizes = search_batch_sizes
@@ -109,6 +115,12 @@ class EvidenceOperations:
         if self.source_pages is not None:
             self._observe_source_page(state)
         self.view_observation(state)
+        if self.delivery_selection:
+            self._deliver(state)
+
+    @property
+    def acquired(self) -> dict[int, dict[str, Any]]:
+        return self.observed if self.delivery_selection else self.opened
 
     def _observe_source_page(self, state: MemoryControlState) -> None:
         assert self.source_pages is not None
@@ -169,9 +181,12 @@ class EvidenceOperations:
             if m["kind"] != "stored_revision" else m for m in self.materials]
         self.opened = dict(zip(self.opened, open_evidence_packs(
             self.service, list(self.opened.values()), refresh_current=True), strict=True))
+        if self.delivery_selection:
+            self.observed = dict(zip(self.observed, open_evidence_packs(
+                self.service, list(self.observed.values()), refresh_current=True), strict=True))
         self._deliver(state)
         state.pending_candidates = [self.candidate(m, i) for i, m in enumerate(self.materials)
-                                    if i not in self.opened
+                                    if i not in self.acquired
                                     and not m.get("source_observation_read")]
         self.history_pages.clear()
         self.view_observation(state)
@@ -192,12 +207,13 @@ class EvidenceOperations:
         return tuple(sorted(refs)) if changed else ()
 
     def source_refs(self) -> tuple[str, ...]:
-        return tuple(sorted({span["source_ref"] for item in self.opened.values()
+        return tuple(sorted({span["source_ref"] for item in self.acquired.values()
             for span in [*item.get("source_ranges", []), *item.get("support_turns", [])]}))
 
     def observation_source_refs(self, state: MemoryControlState) -> list[str]:
         """Origins of controller-visible bodies/excerpts, distinct from Reader delivery."""
         refs = {event["source_ref"] for event in state.new_events}
+        refs.update(self.source_refs())
         for view in state.views:
             if view["visibility"] == "visible":
                 refs.update(b["source_ref"] for b in view["source_bindings"].values())
@@ -213,7 +229,7 @@ class EvidenceOperations:
         """Availability uses actual versioned intervals, never semantic sufficiency."""
         if item["kind"] != "original_source":
             return True
-        delivered = [span for opened in [*self.opened.values(), *self.known_materials]
+        delivered = [span for opened in [*self.acquired.values(), *self.known_materials]
                      if opened.get("body_delivered") is not False
                      for span in opened.get("source_ranges", [])]
         for target in item["context_source_ranges" if expand else "source_ranges"]:
@@ -313,6 +329,9 @@ class EvidenceOperations:
             if view and slot not in self.used and meta and meta["visibility"] == "visible":
                 actions.append(MemoryAction("use_view" + suffix, "USE_VIEW", view["id"],
                                             {"slot": slot}))
+                if self.delivery_selection:
+                    actions.append(MemoryAction("use_view_only" + suffix, "USE_VIEW", view["id"],
+                        {"slot": slot, "replace_delivery": True}))
             if view is None and self.view_capacity > 1:
                 continue
             refs = self.refresh_refs(state, slot)
@@ -333,7 +352,35 @@ class EvidenceOperations:
                 actions.append(MemoryAction("new_view", "REFRESH_VIEW", "new selected source scope",
                     {"slot": slot, "source_refs": list(refs), "new_scope": True,
                      "replaces": self.views[slot]["id"] if slot in self.views else None}))
+        if self.delivery_selection:
+            actions.extend(MemoryAction(a.id + "_observe", "READ",
+                a.target + "; controller observation only", {**a.parameters, "observe_only": True})
+                for a in list(actions) if a.kind == "READ"
+                and not a.parameters.get("history_directory")
+                and "source_observation_cursor" not in a.parameters)
         actions.append(MemoryAction("handoff", "HANDOFF", "Reader with opened evidence"))
+        if self.delivery_selection:
+            actions.extend(self.delivery_actions())
+        return actions
+
+    def delivery_actions(self) -> list[MemoryAction]:
+        """Small acquired packets: single/pair, a View with up to two originals, or all."""
+        indices = tuple(self.observed)
+        originals = tuple(i for i, item in self.observed.items()
+                          if item["kind"] == "original_source")
+        views = [i for i, item in self.observed.items() if item["kind"] == "query_structure"]
+        choices = [*combinations(indices, 1), *combinations(indices, 2),
+                   *((v, *pair) for v in views for pair in combinations(originals, 2)),
+                   originals, indices]
+        actions = []
+        for selected in dict.fromkeys(choices):
+            if not selected:
+                continue
+            items = {i: self.observed[i] for i in selected}
+            if items != self.opened and self.fits_delivery(items):
+                actions.append(MemoryAction("handoff_select_" + "_".join(map(str, selected)),
+                    "HANDOFF", "selected acquired material",
+                    {"delivery_indices": list(selected)}))
         return actions
 
     def search_actions(self, state: MemoryControlState) -> list[MemoryAction]:
@@ -346,7 +393,7 @@ class EvidenceOperations:
         queries = [(query, "Host query"), *(
             (point, "Host required point") for point in points)]
         queries.extend((item["index_text"], "opened evidence")
-            for item in [*self.opened.values(), *self.known_materials]
+            for item in [*self.acquired.values(), *self.known_materials]
             if item.get("body_delivered") is not False and item.get("index_text"))
         unique = dict(queries)
         return [MemoryAction(f"search_{i}_{limit}", "SEARCH", origin,
@@ -356,6 +403,16 @@ class EvidenceOperations:
 
     def _deliver(self, state: MemoryControlState) -> None:
         state.visible_evidence = project_packs(list(self.opened.values()), list(self.opened))
+        if self.delivery_selection:
+            state.observed_materials = [{"item_index": i,
+                "selected": self.opened.get(i) == item,
+                **{key: copy.deepcopy(item[key]) for key in (
+                    "kind", "id", "revision", "version_view", "visibility", "body_delivered",
+                    "source_ranges", "source_bindings") if key in item}}
+                for i, item in self.observed.items()]
+            # Per-item source aliases distinguish these controller-only bodies from delivery.
+            state.observed_evidence = [project_pack(item, i) for i, item in self.observed.items()
+                                       if self.opened.get(i) != item]
 
     def fits_delivery(self, items: dict[int, dict[str, Any]]) -> bool:
         if self.fits_materials is not None:
@@ -369,6 +426,14 @@ class EvidenceOperations:
                                 "control_dense_score") if k in item}}
 
     def execute(self, action: MemoryAction, state: MemoryControlState) -> dict[str, Any]:
+        if action.kind == "HANDOFF":
+            selected = {i: self.observed[i] for i in action.parameters["delivery_indices"]}
+            if not self.fits_delivery(selected):
+                return {"ok": False, "status": "material_budget_exhausted"}
+            self.opened = selected
+            self._deliver(state)
+            return {"ok": True, "status": "delivery_selected",
+                    "delivery_indices": list(selected)}
         if action.kind == "SEARCH":
             if self.search_pool is None:
                 self.materials = self.load_pool()
@@ -389,7 +454,7 @@ class EvidenceOperations:
             self.searched = True
             state.pending_candidates = [self.candidate(item, i)
                                         for i, item in enumerate(self.materials)
-                                        if i not in self.opened
+                                        if i not in self.acquired
                                         and not item.get("source_observation_read")]
             return {"ok": True, "status": "searched", "candidates": len(self.materials),
                     **action.parameters,
@@ -443,20 +508,28 @@ class EvidenceOperations:
                                         and p["revision"] == target["revision"])
             item = open_evidence_packs(self.service, [self.materials[i]],
                                       expand_context=expand, refresh_current=True)[0]
+            if self.delivery_selection:
+                self.observed[i] = item
             trial = {**self.opened, i: item}
-            if not self.fits_delivery(trial):
+            observing = action.parameters.get("observe_only", False)
+            delivered = not observing and self.fits_delivery(trial)
+            if delivered:
+                self.opened = trial
+            elif not self.delivery_selection:
                 return {"ok": False, "status": "material_budget_exhausted", "index": i}
-            self.opened = trial
             known = {source["event_id"] for source in self.events}
             for ref in self.source_refs():
                 if ref not in known and (source := self.service.source(ref)) is not None:
                     self.events.append(source)
+                    self.source_directory[ref] = source
                     known.add(ref)
             self._deliver(state)
             state.pending_candidates = [c for c in state.pending_candidates
                                         if c["item_index"] != i]
-            return {"ok": item.get("body_delivered") is not False,
-                    "status": "opened", "index": i, "visibility": item.get("visibility")}
+            return {"ok": item.get("body_delivered") is not False and (observing or delivered),
+                    "status": ("observed" if observing else "opened" if delivered
+                               else "material_budget_exhausted"),
+                    "index": i, "visibility": item.get("visibility")}
         if action.kind == "USE_VIEW":
             slot = action.parameters.get("slot", "current")
             item = self.view_observation(state)[slot]
@@ -501,10 +574,21 @@ class EvidenceOperations:
             raise ValueError(f"Non-executable operation: {action.kind}")
         item["query_time"] = state.task["query_time"]
         view_index = -1 - structure_slots(self.view_capacity).index(slot)
-        trial = {**self.opened, view_index: item}
+        if self.delivery_selection:
+            view_index = next((i for i, prior in self.observed.items()
+                               if prior["kind"] == "query_structure" and prior["id"] == item["id"]),
+                              min([0, *self.observed]) - 1)
+            self.observed[view_index] = item
+        trial = ({} if action.parameters.get("replace_delivery") else dict(self.opened))
+        if self.delivery_selection and slot in self.delivered_view_slots:
+            trial.pop(self.delivered_view_slots[slot], None)
+        trial[view_index] = item
         delivered = self.fits_delivery(trial)
         if delivered:
             self.opened = trial
+            if self.delivery_selection:
+                self.delivered_view_slots[slot] = view_index
+        if delivered or self.delivery_selection:
             self._deliver(state)
         available = item.get("body_delivered") is not False
         return {"ok": available and delivered,

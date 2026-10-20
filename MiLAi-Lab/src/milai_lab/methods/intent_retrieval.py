@@ -88,6 +88,7 @@ class IntentRetrievalMemory(FunctionalEditMemory):
                  replay_initial_observation: dict[str, Any] | None = None,
                  replay_admission_policy: dict[str, Any] | None = None,
                  control_intervention: FirstActionIntervention | None = None,
+                 control_delivery_selection: bool = False,
                  **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
         self.retrieval_interface = retrieval_interface
@@ -95,6 +96,7 @@ class IntentRetrievalMemory(FunctionalEditMemory):
         self.replay_initial_observation = replay_initial_observation
         self.replay_admission_policy = replay_admission_policy
         self.control_intervention = control_intervention
+        self.control_delivery_selection = control_delivery_selection
         self.policy["retrieval_interface"] = retrieval_interface
 
     def _read_admission_policy(self) -> dict[str, Any]:
@@ -285,7 +287,11 @@ class IntentRetrievalMemory(FunctionalEditMemory):
             excluded_source_refs=(bound["source_ref"],),
             known_materials=known,
             view_capacity=self.control_view_capacity, view_policy=self.control_view_policy,
-            source_observation=self.control_source_observation)
+            source_observation=self.control_source_observation,
+            delivery_selection=self.control_delivery_selection)
+        if self.control_delivery_selection:
+            state.budget["acquisition_reads_remaining"] = self.read_allowance(config)[
+                "reads_remaining"]
         if self.replay_initial_observation is not None:
             expected = copy.deepcopy(self.replay_initial_observation)
             for name in ("remaining_control_steps", "reader_capacity_reserved"):
@@ -305,9 +311,17 @@ class IntentRetrievalMemory(FunctionalEditMemory):
 
         class AdmittedOperations:
             def actions(self, observed: MemoryControlState) -> list[MemoryAction]:
-                return operations.actions(observed)
+                actions = operations.actions(observed)
+                if memory.control_delivery_selection:
+                    remaining = memory.read_allowance(config)["reads_remaining"]
+                    observed.budget["acquisition_reads_remaining"] = remaining
+                    if not remaining:
+                        actions = [a for a in actions if a.kind == "HANDOFF"]
+                return actions
 
             def execute(self, action: MemoryAction, observed: MemoryControlState) -> dict[str, Any]:
+                if action.kind == "HANDOFF":
+                    return operations.execute(action, observed)
                 return memory._read(config, call_id + ":" + str(
                     observed.budget["remaining_control_steps"]),
                     {"tool": "search_memory" if action.kind == "SEARCH" else "memory_control",
@@ -329,6 +343,9 @@ class IntentRetrievalMemory(FunctionalEditMemory):
                 event["opened_materials"] = {i: material_binding(m)
                                              for i, m in operations.opened.items()}
                 event["known_materials"] = [material_binding(m) for m in known]
+                if memory.control_delivery_selection:
+                    event["observed_materials"] = {i: material_binding(m)
+                                                  for i, m in operations.observed.items()}
             self.control_record({**event, "retrieval_call_id": call_id})
             if self.retrieval_observer is not None and event["phase"] == "decision_input":
                 self.retrieval_observer({"call_id": call_id, "phase": "decision_input",
@@ -337,7 +354,8 @@ class IntentRetrievalMemory(FunctionalEditMemory):
         assert self.control_policy is not None
         result = run_memory_control(state, self.control_policy, AdmittedOperations(),
             max_steps=steps, record=record, can_continue=lambda: self.control_available()
-                and bool(self.read_allowance(config)["reads_remaining"]),
+                and (bool(self.read_allowance(config)["reads_remaining"])
+                     or (self.control_delivery_selection and bool(operations.observed))),
             intervention=self.control_intervention)
         trace = result["trace"]
         saved.update(status="completed", reason=result["reason"],

@@ -39,9 +39,15 @@ class MemoryControlState:
     new_events: list[dict[str, Any]] = field(default_factory=list)
     last_result: dict[str, Any] | None = None
     budget: dict[str, Any] = field(default_factory=dict)
+    observed_materials: list[dict[str, Any]] | None = None
+    observed_evidence: list[dict[str, Any]] | None = None
 
     def project(self) -> dict[str, Any]:
-        return asdict(self)
+        result = asdict(self)
+        for key in ("observed_materials", "observed_evidence"):
+            if result[key] is None:
+                del result[key]
+        return result
 
 
 class MemoryPolicy(Protocol):
@@ -103,8 +109,9 @@ def run_memory_control(
         if action.kind == "HANDOFF":
             reason = ("intervention_handoff" if intervened else
                       "no_available_operation" if forced else "policy_handoff")
-            trace.append(event)
-            break
+            if not action.parameters:
+                trace.append(event)
+                break
         started = time.perf_counter()
         result = operations.execute(action, state)
         state.last_result = {"action": asdict(action), **result}
@@ -112,6 +119,10 @@ def run_memory_control(
                      operation_wall_seconds=time.perf_counter() - started)
         trace.append(event)
         record({"phase": "operation_result", **copy.deepcopy(event)})
+        if action.kind == "HANDOFF":
+            if not result["ok"]:
+                reason = "budget_exhausted"
+            break
         if result.get("status") in {"read_outcome_unknown", "read_integrity_error"}:
             reason = "operation_outcome_unknown"
             break

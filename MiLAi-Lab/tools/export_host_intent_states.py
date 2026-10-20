@@ -49,7 +49,8 @@ def export_states(
                 "collection_policy": position["policy"], "source_version": driver["source_version"],
                 "result_path": str(path), "trace_path": str(trace),
                 "task_status": result["status"], "actual_bindings": {key: event[key] for key in (
-                    "candidate_materials", "opened_materials", "known_materials") if key in event}}
+                    "candidate_materials", "opened_materials", "known_materials",
+                    "observed_materials") if key in event}}
             rows.append(decision_example(event, metadata))
     return rows
 

@@ -2855,6 +2855,9 @@ def message(
                     memory_options["control_view_capacity"] = control.get("view_capacity", 1)
                     memory_options["control_view_policy"] = control.get(
                         "view_policy", "incremental")
+                    if settings.get("retrieval_tool"):
+                        memory_options["control_delivery_selection"] = control.get(
+                            "delivery_selection", False)
                     if control.get("pool_order", "shared") == "dense":
                         if retriever is None:
                             raise ValueError("DENSE_CONTROL_POOL_REQUIRES_EMBEDDINGS")

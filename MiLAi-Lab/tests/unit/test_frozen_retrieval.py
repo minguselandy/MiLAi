@@ -21,11 +21,14 @@ def native_request(request, call_id="actual-call"):
          "function": {"name": "milai_retrieve", "arguments": json.dumps(request)}}]}
 
 
-@pytest.mark.parametrize("host_source_arrivals", [False, True])
+@pytest.mark.parametrize("host_source_arrivals,delivery_selection", [
+    (False, False), (True, False), (True, True)])
 def test_actual_host_request_replays_equal_before_with_other_policy_and_no_host_retry(
-    tmp_path, monkeypatch, host_source_arrivals,
+    tmp_path, monkeypatch, host_source_arrivals, delivery_selection,
 ):
-    root = prepared_given(tmp_path, host_source_arrivals=host_source_arrivals)
+    root = prepared_given(tmp_path, host_source_arrivals=host_source_arrivals,
+        policy={"policy": "fixed_context", "max_control_steps": 5,
+                "source_observation_tokens": 300, "delivery_selection": delivery_selection})
     snapshots = tmp_path / "snapshots"
     request = {"query": "Cedar code", "read_goal": {"purpose": "quote the source"},
                "task_context": {"as_of": None}, "limits": {"max_control_steps": 5}}

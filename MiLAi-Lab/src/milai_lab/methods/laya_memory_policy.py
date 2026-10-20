@@ -72,15 +72,31 @@ def project_operation_payload(payload: dict[str, Any], projection: str) -> dict[
         "new_events": [fields(item, (
             "source_ref", "role", "origin", "reported_at", "captured_at"))
             for item in state["new_events"]],
+        **({"observed_materials": state["observed_materials"],
+            "observed_evidence": [fields(item, (
+                "label", "kind", "revision", "visibility", "source_bindings"))
+                for item in state["observed_evidence"]]}
+           if "observed_materials" in state else {}),
     }}
 
 
 def operation_payload(
     state: MemoryControlState, actions: list[MemoryAction], projection: str = "full",
 ) -> dict[str, Any]:
+    instructions = (RETRIEVAL_INSTRUCTIONS
+                    if "retrieval_request" in state.task else INSTRUCTIONS)
+    if state.observed_materials is not None:
+        instructions += (
+            " observed_materials lists actual acquired items and whether each is selected. "
+            "observed_evidence contains controller-only bodies not in the current delivery; "
+            "its source aliases are local to each item. visible_evidence is the selected packet. "
+            "READ observe_only acquires material without adding it to delivery. USE_VIEW "
+            "replace_delivery selects only that View. HANDOFF delivery_indices explicitly "
+            "chooses an offered acquired packet; plain HANDOFF retains current delivery. "
+            "Only selected material goes to the Host; observations and generation still cost work."
+        )
     payload = {"state": state.project(), "questions": {"next": {
-        "type": "choice", "instructions": (RETRIEVAL_INSTRUCTIONS
-            if "retrieval_request" in state.task else INSTRUCTIONS),
+        "type": "choice", "instructions": instructions,
         "criteria": {action.id: f"{action.kind} {action.target} "
                      + json.dumps(action.parameters, ensure_ascii=False, separators=(",", ":"))
                      for action in actions},
