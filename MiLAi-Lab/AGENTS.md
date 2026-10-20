@@ -3,11 +3,13 @@
 ACTIVE model collection PID1429403 / exec94846 / frozen-c6b1f3bd:
 runs/t1-new-train-fixed-context-v1/driver.json, planned228. Registration faf56025.
 Revalidate actual PID/driver and pollsamehandle; never restart after observation timeout.
-Latest closed-prefix export v2 has62states/8positions,11actualrequests,44labels/18masked,
-40source-progress preferences/4sufficient; all62publicinputs unchanged. Source-review-notes-v1
-has34reviewedpools/18trainfamilies. Artist-only actualrequests use narrower evidence than full
-signing relation; invented2024as_of call heldmasked. Taskauthor review first8 only:1C/3Q/1W/3F.
-pending-offline-review-v10 has4 measured export/label phases, unsettled whilelive; do not rebill
+Latest closed-prefix export v3 has128states/16positions,24actualrequests,81labels/47masked,
+68source-progress preferences/13sufficient; all128publicinputs unchanged. Source-review-notes-v1
+has54reviewedpools/29trainfamilies; nextsource history index29 in new-histories.json. Actualrequest
+reviews stop at first16positions; source notes never automatically approve later actual requests.
+Artist-only calls need less than signing calls; invented2024as_of heldmasked. Taskauthor review
+first16 only:4C/6Q/2W/4F in task-reviews-prefix-v2. Do not append duplicate earlier prefix states.
+pending-offline-review-v10 has6 measured export/label phases, unsettled whilelive; do not rebill
 closed probe/comparison or older v1..v9settlements. No newT1fitting or devcollection yet.
 
 Both mixed diagnostic jobs CLOSED: fit PID1380577 and exported dev6 PID1391476 absent,
