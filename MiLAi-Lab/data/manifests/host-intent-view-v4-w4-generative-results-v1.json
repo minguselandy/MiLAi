@@ -1,0 +1,45 @@
+{
+  "status": "CLOSED_TASK_AND_RETURNED_VIEW_REVIEWED",
+  "source_version": "d8447495",
+  "source_groups": 2,
+  "positions": 8,
+  "split": "exposed_train",
+  "grades": {
+    "generative-rich": {
+      "C": 4,
+      "F": 2,
+      "W": 2
+    }
+  },
+  "generation_tokens": 123152,
+  "generation_requests": 29,
+  "generation": {
+    "charged_tokens": 123152,
+    "known_tokens": 123152,
+    "unknown_usage": 0
+  },
+  "wall_seconds": 227.93992803804576,
+  "cpu_seconds_nested": 9.662331366,
+  "tool_calls": 5,
+  "actual_explicit_selection_calls": 1,
+  "selection_result": "A29 originals request: use_view_only, view_source_0, handoff_select_0. Selected source lacked score; Host recognized remaining gap and made a second real call, then correctly quoted score source.",
+  "known_reference_reads": 1,
+  "update_results": "No fresh tool execution in either relevant-arrival position: A29 wrong stale answer; B05 Host truncation.",
+  "full_goal_complete": false,
+  "next": "B: four different existing T2 train groups, two streams each, generative/rules/fixed_context and both frozen T1 seed0 observers.",
+  "limitations": [
+    "Single stochastic run on two repeatedly exposed train groups; no causal learned-policy gain.",
+    "Fewer returned tokens or selected View is not by itself evidence of sufficient original witnesses.",
+    "Exact quote copied through View can satisfy content; do not assume its View type proves semantic failure.",
+    "B05 middle source arrival is not irrelevant to all requested facts."
+  ],
+  "results": "artifacts/host-intent-retrieval-v3/view-v4-w4-generative-review-v1/results.json",
+  "review": "artifacts/host-intent-retrieval-v3/view-v4-w4-generative-review-v1/author-review.json",
+  "view_review": "artifacts/host-intent-retrieval-v3/view-v4-w4-generative-review-v1/view-review.json",
+  "compute": {
+    "wall_seconds": 0.21077576745301485,
+    "cpu_seconds": 0.21077605099999996
+  },
+  "ledger_recorded": true,
+  "settlement": "artifacts/host-intent-retrieval-v3/data/pending-offline-review-v21.json"
+}

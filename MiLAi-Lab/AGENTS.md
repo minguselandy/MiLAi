@@ -1,87 +1,92 @@
-# CURRENT: v4 Host/View execution — 2026-10-20
+# CURRENT: v4 Host/View execution — 2026-10-21
 
-Active full goal: docs/MILAI_HOST_INTENT_VIEW_DEVELOPMENT_EXPERIMENT_PLAN_20261020_v4.md.
-Work in this research worktree/feat/host-intent-retrieval-20261019; the original plan directory
-is an older worktree. Full goal remains ACTIVE, not complete. No subagents, SHA/checksum/content
-fingerprints, extra ledger, new model services or remote publication. Product remains unchanged.
-Existing HTTP/CUDA envs and local Qwen/Laya assets only. Serialize actual model jobs; verify
-actual PID/command and terminal output before starting another. Timeout alone is not termination.
+Full active goal: docs/MILAI_HOST_INTENT_VIEW_DEVELOPMENT_EXPERIMENT_PLAN_20261020_v4.md.
+Work in this research worktree/feat/host-intent-retrieval-20261019; original plan is in an
+older worktree. Full goal ACTIVE, incomplete. No subagents, SHA/checksum/content fingerprints,
+extra ledger, new services or remote publication. Existing HTTP/CUDA envs and models only.
+Serialize actual model jobs. Revalidate PID/command/terminal output; never restart on timeout.
 
-Latest code frozen for runs:41477465 (source-arrival notice). No experiment model process lives
-at the latest verified boundary; revalidate before launch. All latest sessions closed exit0:
-- Source-notice diagnostic PID242488/exec67784:16/16 COMPLETED_WITH_FAILURES.
-- Initial E2 pilot exec21604:6/6 tools and conditional readouts COMPLETED, all before/actions equal.
-- Known-View reference check PID481077/exec81946:COMPLETED.
+CURRENT RUN: B serial five-arm queue frozen d8447495. DriverPID1130008 /exec98733;
+first generative child1130013. Check actual active PID/command, not this historical firstchild.
+artifacts/host-intent-retrieval-v3/view-v4-b-v1/driver.json authoritative; per-arm driver below it.
+Plan view-v4-b-plan-v1.json.4existingT2groups B06/C26/D11/F08 x2owncoldstreams x4positions=32/arm.
+Order generative,rules,fixed_context,T1mainseed0,T1controlseed0.160positions planned, not completed.
+Native wrapper sets MHAfastpathfalse process-only and inserts frozen tools into sys.path; maxlen16384.
+Same source content/order/roles/clocks checked for all8streams. D11middle=corroborating,notpureirrelevant.
+Actual models serialized; no offline ledger settlement while queue lives.
 
-Author/source reviews, not independent or blind confirmation:
-- Original A f31025b0: generative2C/3U/2W/1F,99166tokens/27requests; rules5C/3W,
-  49252tokens/12requests. Own cold banks and actual Host histories. 2 exposed train groups.
-- New source-arrival information: generative5C/2W/1F,170373tokens/32requests;
-  rules6C/2F,77593tokens/14requests. Combined247966tokens,newunknown0,449.907457s wall.
-  Notices0/4/6/13/2/17 actually present as appropriate; late tools available.
-  GenA29 still ignores relevant arrivals; GenB05 late calls tool but returns old material,
-  with2 append-budget rejections. Rules late truncates before fresh retrieval. Do not call
-  all late errors controller errors or claim extra Host information is a learned-policy gain.
-- B05 middle arrival changes preferences/other-name facts, despite unchanged corefirstchoice;
-  it is not a pure irrelevant-update control. Keep original streams/results and this qualification.
-- View truth/provenance/time/rule quality remains separate from Host answer grades. Original
-  A reviews corrected an early no-View author mistake; initial review/results retained.
+W4 normal A d844 CLOSED exit0:4C/2W/2F,123152tokens29HTTP,5toolcalls,227.939928wall,
+9.662331366CPU. Real knownref1; A29use_view_only→view_source_0→handoff_select_0 returned wrong
+source; Host secondcall got actualscore and quoted correctly. LateA29stale74/no call; lateB05Host
+truncated. B05middle omitsKevin/Matteo/Luca,wrongdiscovery attribution. All3returnedViews reviewed;
+B05quote matches source via Viewonly, noexplicit original_source type in tool request: contentC,
+raworiginalnotdelivered separately; don't manufacture negative labels solely from Viewtype.
+Manifest host-intent-view-v4-w4-generative-results-v1.json.8positions exposedtrain,notindependent.
 
-W1/W2: visible View facts/rules/unresolved reach full/shared inputs; source locations retained;
-finite View-bound READ uses original Store. Old snapshot/current cache, eviction and revocation
-checks passed. Actual generative A had exact View in2 model inputs and a same-call bound READ.
-Known-View-only live functional check now proves actual cross-call ref use: Host generated the
-exact previously returned ref, known_reference_reads1, and read two actual user sources/quoted
-both correctly. Store copied from a real closed trajectory; real View supplied as known context.
-This is controlled functional evidence, not autonomous benchmark performance. It used76356tokens/
-8requests,6controlsteps/5READs;3extra READs after the requested originals were already present.
-Read data/manifests/host-intent-view-v4-known-view-reference-live-v1.json.
+W1/W2/W3: View facts/rules/unresolved and source locators reach full/shared controller inputs;
+finite bound READ works. Actual generative traces saw View and selected bound READ.
+Known-View-only live functional check used exact actual prior ref, reopened1 and quoted2 actual
+user sources correctly. 76356tokens/8requests,6steps/5READs (3extra after needed originals).
+Controlled functionality, not autonomous benchmark success. Manifest known-view-reference-live-v1.
 
-Host history continuation is opt-in --continue-host-history, importing actual prior completed
-same-bank/session messages into a separate new-request checkpoint with visibility/exposure checks.
-Opt-in host_source_arrivals shows only distinct newly captured, still visible incoming-source
-counts. Repeated old/duplicate inputs do not count as new; no body, relevance label or forced call.
-50 related tests, Ruff/mypy/boundaries passed. Default off preserves earlier frozen inputs.
+A outcomes, author/source review (not independent/blind):
+- Original f31025b0: gen2C/3U/2W/1F,99166tokens27requests; rules5C/3W,49252tokens12requests.
+- Source-arrival notice41477465: gen5C/2W/1F,170373tokens32requests;
+  rules6C/2F,77593tokens14requests. 247966tokens,total449.907457s,newunknown0.
+  Notice counts actually visible; late tool available. GenA29 ignores relevant arrivals;
+  genB05 retrieves but old1542token packet blocks2 appended originals at2048limit;
+  rules late truncates before retrieval. Separate Host, controller and delivery failures.
+- B05 middle arrival changes secondary requested facts, so not pure irrelevant-update control.
+- View review remains partial. B05 View contains unjustified preference=>joint-choice rule and
+  time overclaims. Preserve defects even when originals rescue Host answer.
 
-E2 first-action + bounded continuation implemented (c84be38e; in41477465): intervention copies
-an exact captured action+parameters, then the declared policy for N decisions, then legal HANDOFF.
-Original budgets/before/actions unchanged. Per-arm capture selector supported; unselected captures
-remain listed, never negative labels. This only restores initial-call decisions, not arbitrary
-internal controller states. The pilot has 2 states × 3 branches = 6 endpoints.
-Pilot2C/1Q/1W/2U,25418tokens/8requests. Both SEARCH continuations actually succeeded within limits;
-empty HANDOFFs did not. B05 View readout falsely promoted backup preference to a switch. No training
-preferences generated yet; no claim delivery feedback exceeds answer-only. Read E2 pilot manifest.
+E2 c84be38e: force exact legal initial action, common policy <=2 further decisions then HANDOFF;
+first before/actions/remaining budgets equal. Initial-state only, no arbitrary internal restore.
+Pilot2states x3branches:6tools/6readouts closed,25418tokens8requests; 2C/1Q/1W/2U.
+Both SEARCH paths successful; View B05 Host falsely infers switch; A29 dialect overclaim.
+No W5 preferences generated; not48state cohort or matched feedback training.
 
-NEXT CONCRETE DEVELOPMENT: W4, now justified by an actual failed stream and Store/tokenizer audit.
-Current packet1542tokens; appending candidate4=2258 or16=2133 exceeds2048. Actual ranges4+16
-alone need1363; View+16 needs1600. These alternative packets were capacity-audited only, NOT
-executed/delivered/scored. See host-intent-view-v4-w4-delivery-fit-v1.json.
-Separate acquired controller material from selected final delivery in the existing request-local
-operations. Preserve default append until explicit finite selection; use existing USE_VIEW/HANDOFF
-parameters, actual acquired indices, same full retrieval_packet budget and selected-only snapshot
-refs. Refresh/source refs and READ dedup must use observed material. No oracle bundle selection,
-new storage, unconstrained powerset or silent deletion. Add only relevant actual Store/wire/ref checks,
-then a new real short flow. Preserve old frozen outcomes. Native final-input/option-binding capacity
-still needs actual verification before new T1/feedback evaluation; generative visibility is not that.
-Source-notice View review is partial; full inventory exists in its review directory. Complete relevant
-semantic review before labels. W4/W5 feedback training, broader B–E, E1–E5/STATE confirmation remain.
+W4 IMPLEMENTED ba35b9da; complete binding fix d8447495. Opt-in delivery_selection=true,
+default off. observed=actual acquired, opened=selected packet; budget-rejected append bodies remain
+observed. READ observe_only; USE_VIEW replace_delivery; finite HANDOFF delivery_indices.
+No powerset/oracle selection. Acquired controls source refs/refresh/dedup; selected-only snapshot,
+wire budget and ref positions. Quota0 permits legal selection; acquisition policy identity unchanged.
+Actual ba35 functional replay source4+16 now EXECUTED:1362token packet,8steps5READs,1readremaining,
+refs0/1 reopened correctly; fixed Host correct jointElara/wifeIris/usernotagreed/templateLilyAnne.
+Scripted capability check, not model/equal-action-space E2 result. 7446tokens1HTTP; original failed
+fixture omitted public-turn resume, failed0models, retained separately. Source replay v2 closed.
 
-Important T1 interruption: driver3509227/child4032674 disappeared at225/524; no terminal log,
-checkpoint/latest or compute.json. Cause unknown. No stop marker was written. Raw RUNNING files
-are stale; separate interruption review is authoritative. Known17888063train+3831246dev tokens
-recorded as lower bound with unknown CPU/wall flags. Do not pretend it completed or auto-replay.
-Seed0 both fits/exports and mainseed1 fit/export are closed. Controlseed1/export and seed2 unfinished.
-Any reviewed recovery must preserve failed attempt/cost and original recipe; do not overwrite it.
-Common W5 initialization remains completed T1 mainseed0 per v4, not a mix of recipes/seeds.
+Native option audit found SDK48token cap. d844 moves complete action bindings to shared state,
+head id/kind only; SEARCH query_from references actual request/requiredpoint/acquired/known text.
+No literal rewrite/SDK patch.46relatedtests passed; earlier131regression +24focused, Ruff/mypy/
+boundaries passed.8actualstates exact bindings, maxhead1396/maxoption18/maxsequence16310.
+12288 insufficient;1024source pagination also insufficient, not adopted. Unpaged16384 tokenizer-pass.
+Actual16k default fused Transformer forward OOM; partial encoder work happened despite completed
+forwardcounter0. compute22.304236863CPU14.066799wall already originalledger.
+Process-local torch.backends.mha.set_fastpath_enabled(False) same inputs/weights/float32 DIDfinish
+1forward16310tokens, finite/no truncation. Then wrapper tools path missing => retrieval_mixture
+summary import FAILED. Original run FAILED preserved; offline saved-output review completed,
+masked1/no quality label.14.703552475CPU11.478697wall alreadyledger. No rerun needed.
+Both native runs closed. Encoder advertises8192; single execution feasibility !=long-context quality.
+No default native backend/max_len change yet. Future wrapper must add frozen tools path to sys.path.
+Read data/manifests/host-intent-view-v4-w4-execution-v1.json and execution doc tail.
 
-ONLY ledger: /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json.
-Pending-v15..v19 now settled once at verified idle. v17=9.971530924CPU;v18=22.204496620CPU;
-v19=18.955338145CPU. Driver/case/readout timings are nested; never double-count. HTTP already billed.
-Interactive assistant review/tests/import overhead outside timers remain unknown, not zero.
-Do not settle during actual model activity. Raw corpora/weights/databases/traces remain ignored.
-Authoritative latest outcomes: docs/HOST_INTENT_RETRIEVAL_EXECUTION.md and data/manifests/
-host-intent-view-v4-{source-arrivals-results,e2-initial-pilot-results,known-view-reference-live,
-w4-delivery-fit}-v1.json. Runtime artifacts under artifacts/host-intent-retrieval-v3/.
+NEXT: close/review B own trajectories; prepare actual C branches and matched feedback training;
+W5 same-state branch comparisons and matched continued-CE/answer-only/delivery training stillneeded.
+Use completed T1 mainseed0 common initialization. Broader B–E/E1–E5/STATE remain unfinished.
+Do not repeatedly expand checks once concrete functional evidence permits advancement.
+
+T1 interruption: olddriver3509227/child4032674 disappeared225/524, no final log/checkpoint/compute;
+cause unknown, no stopmarker. Old RUNNING files stale; interruption review authoritative.
+17888063train+3831246dev known lower-bound tokens, CPU/wallunknown. No automatic replay.
+Seed0both complete, mainseed1fit/export complete; controlseed1/export andseed2 unfinished.
+Reviewed recovery uses a new attempt preserving original failure/cost and unchanged recipe.
+
+ONLY ledger /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json.
+Pendingv15..v21 SETTLED once at actual idle; v20=61.143722329CPU/14phases;v21=9.896830322CPU/5phases.
+HTTP already billed. Driver/case/readout CPU nested; do not doublecount. Native compute directly
+billed by evaluator, not offline pending. Never settle while actual model job active.
+Unmeasured interactive review/tests/import overhead unknown,notzero. Raw corpora/traces/weights ignored.
 
 # Previous: user explicitly requests completing T1; T1 work resumed
 
