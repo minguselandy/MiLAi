@@ -1,4 +1,4 @@
-# CURRENT UPDATE: C closed, W5 data ready — 2026-10-21
+# CURRENT UPDATE: W5 fits running, STATE bridge ready — 2026-10-21
 
 Supersedes the RUNNING/no-label schedule below. Full v4 goal ACTIVE/incomplete.
 C remaining PID1937382/exec19324 CLOSED exit0:109/109; original2 preserved, total111.
@@ -13,7 +13,10 @@ Actual compile passed capture/state/fullbinding/continuation/failedreadout masks
 Feedback data data/view-v4-c-feedback-v1; matched data data/view-v4-feedback-fitting-v1 (artifactbase).
 37new+37sharedoldreplay; continuedCE74old.10updates160draws/arm,860oldoperationdev,seed0.
 Commoninit fitting/t1-native-shared-seed0-v1/checkpoint. Newpreptool3tests/Ruff/mypypassed.
-W5fits RUNNING driver2123239/exec93763, child2123267 continuedCE at snapshot 5/10updates.
+W5fits RUNNING driver2123239/exec93763, currentchild2172645 answer at snapshot 10/10updates.
+ContinuedCE CLOSED10updates160rows821606tokens;773.021042636wall/1181.609250961CPU directledger.
+CEfinal860dev450/616accepted244masked;encoder/headchanged,completeinputs. completion-audit.json saved.
+Thisisin-processstaticdiagnostic,notreloadedcheckpoint/Hostevidence. Answertrain160rows872537tokens.
 Authoritative view-v4-three-fits-v1/driver.json and each fitting/view-v4-{arm}-seed0-v1/run.json.
 Frozen sourceae3950f2 in frozen-feedback-ae3950f2/MiLAi-Lab; queueCE->answer->delivery,stoponfailure.
 Plan view-v4-three-fits-plan-v1.json. No secondmodeljob oroffline settlement whiledriveractive.
@@ -23,6 +26,21 @@ Preservefailures, final10notbestdevcheckpoint. Afterfits, evaluatepersistedfinal
 D matched8arm plan view-v4-d-plan-v1.json READY_PREPARATION_ONLY:64positions/arm,512total.
 SameoldHostprompt, owncoldstreams, newcommonwire/sourceae3950f2; notrunning.
 Pendingv27 UNSETTLED containsDprepCPU; queueparentCPU/import/freezearchiveoverhead unknown.
+Persisted3arm evaluation prepared view-v4-persisted-evaluation-plan-v1.json; NOTSTARTED.
+STATEbridge implemented in runners/state_bench_adapter.py; runner tools/run_state_bench_local_pilot.py.
+OriginalSDK import failed missingazure; separate upstream/state-bench-local-research-v1/source moves
+optionalAzureimportinsidecredentialbuilder only. Originaluntouched,patch indata/fixtures.
+Python3.11 imports + actualupstreamharness/realStore/registeredtool/realhotelwrite passed with
+SCRIPTEDHTTP throughactualJSONactionbridge.4adapter+24retrievalregressions+6boundaries,Ruff/mypy.
+Not actualmodelSTATEresult. FlatResponses tools convertedtonestedChat schemas; hidden summary/
+requirements/config/descriptivetaskIDexcluded. Runtimeusesopaquesession; offlineidentitiesretained.
+Genericoptionalreturn_envelope countsfullwrappedpacketbeforeselection andfinalcheck; defaultunchanged.
+STATEtravelpilot selectedfirstofficialtraintask1 beforebodyinspection; memoryothertrain2/3only,
+46actualpublicsourceevents,owntrajectoryexcluded,unknownoriginaltimes. Preparation under
+view-v4-state-travel-pilot-preparation-v1. No testtaskcontentsread. Actor/scorer separation explicit.
+Nextaftercurrentmodelqueue: persistedfinals, localSTATEfunctionalpilot, Dmatchedflows. STATEpilot
+usesfixed_context,existingQwenHost/simulator,originalupstreamprompts/tools,deterministicstatescore;
+noofficialGPT5.4/five-run claim,LLMjudgeNOTRUN. NeverinvokeofficialCLI/SHAvalidation.
 No subagents/SHA/newservices/newledger/publication. All remaining fullgoal requirements stillapply.
 Manifest data/manifests/host-intent-view-v4-c-feedback-results-v1.json; executiondoc latestsection.
 

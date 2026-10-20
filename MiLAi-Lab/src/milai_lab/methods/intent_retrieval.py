@@ -89,6 +89,7 @@ class IntentRetrievalMemory(FunctionalEditMemory):
                  replay_admission_policy: dict[str, Any] | None = None,
                  control_intervention: FirstActionIntervention | None = None,
                  control_delivery_selection: bool = False,
+                 return_envelope: Callable[[dict[str, Any]], Any] | None = None,
                  **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
         self.retrieval_interface = retrieval_interface
@@ -97,7 +98,13 @@ class IntentRetrievalMemory(FunctionalEditMemory):
         self.replay_admission_policy = replay_admission_policy
         self.control_intervention = control_intervention
         self.control_delivery_selection = control_delivery_selection
+        self.return_envelope = return_envelope
         self.policy["retrieval_interface"] = retrieval_interface
+
+    def return_tokens(self, packet: dict[str, Any]) -> int:
+        """Budget the actual adapter envelope before selecting complete materials."""
+        envelope = self.return_envelope(packet) if self.return_envelope else packet
+        return self.token_count(canonical(envelope))
 
     def _read_admission_policy(self) -> dict[str, Any]:
         if self.replay_admission_policy is None:
@@ -272,9 +279,9 @@ class IntentRetrievalMemory(FunctionalEditMemory):
                 "operation_outcome_unknown")
             if self.control_intervention is not None:
                 reasons += ("intervention_handoff",)
-            return all(self.token_count(canonical(retrieval_packet(
+            return all(self.return_tokens(retrieval_packet(
                 key, list(items.values()), list(items), list(range(len(items))), reason, usage,
-                ok=False)))
+                ok=False))
                 <= return_limit for reason in reasons)
 
         operations = EvidenceOperations(self.service, state,
@@ -388,6 +395,6 @@ class IntentRetrievalMemory(FunctionalEditMemory):
         packet = retrieval_packet(key, actual, [labels[i] for i in positions], positions,
             saved["reason"], saved["usage"],
             ok=saved.get("ok", saved["reason"] != "operation_outcome_unknown"))
-        if self.token_count(canonical(packet)) > saved["return_limit"]:
+        if self.return_tokens(packet) > saved["return_limit"]:
             raise FunctionalRejection("RETRIEVAL_RETURN_ENVELOPE_EXCEEDS_LIMIT")
         return packet

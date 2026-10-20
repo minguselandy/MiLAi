@@ -2084,3 +2084,16 @@ pending-v24已在空闲时结算13.459542825 CPU秒，v25结算14.491190190秒�
 三臂实际训练随后以冻结源码 ae3950f2 启动，队列 PID2123239/exec93763，首子进程2123267（continued-CE）已观察到5/10更新、80样本。使用原CUDA环境、物理GPU2/3、float32、microbatch1＋梯度检查点，完整更新仍为16样本；MHA fastpath在进程内关闭，max_len16384/head2048。这只是首臂反向与更新已发生，尚无完整反馈模型结果。后续按同配方执行answer/delivery，遇失败即停，不自动重试。
 
 D配方也已在训练结果产生前固定：原B五臂＋三新增训练臂，同8个既有dev来源组、每臂64位置、共512位置，各自冷缓存并使用原共同Host提示。`view-v4-d-plan-v1.json`仅准备，须等训练和持久化最终权重检查结束后运行。v27离线费用待实际空闲结算；不得与当前模型任务并行启动。
+
+
+## 2026-10-21：STATE 研究适配与训练进度
+
+continued-CE 已完成预定10次更新、160样本，encoder/head探针均实际改变；完整输入审计和最终860dev/74train输出复算通过，费用与原ledger逐项相符。训练821606tokens，773.021042636秒墙时、1181.609250961秒CPU，原训练器已直接记账。最终旧操作dev为450/616，另244 masked；这是进程内静态指标，持久化权重重载和Host效果尚未验证。answer臂已实际完成10次更新/160样本（872537训练tokens），当前做最终dev诊断；delivery仍在串行队列中。
+
+STATE原版因缺少azure.identity无法导入；未安装依赖或更改原版。单独研究副本仅将该可选导入移至Azure凭据构造路径，公开orchestrator与travel17工具已在现有Python3.11环境导入，补丁保存于data/fixtures。上游要求>=3.12，不能由这些检查推出全部运行兼容。选定travel，是基于现有预约/旅行接口的接入成本；没有查看保留测试任务正文。
+
+新适配器通过公开BaseAgent hook交付MiLAi回执，保留原domain工具执行。STATE的平面Responses工具schema显式转换为现有Chat bridge的function结构。隐藏summary/requirements/config及描述性任务ID不进入Host或检索输入；当前任务使用不含题意的会话名，历史来源的原始身份只在离线索引保留。三个字符串的限制没有被用来绕过token预算：新增通用return_envelope计数钩子，在材料选择和最终返回时计入完整外层JSON；默认路径不变。
+
+实际SDK＋SQLite＋注册检索工具＋JSON-action桥接的机械测试已通过，脚本化HTTP响应促使公开harness调用真实sandbox酒店写入，确认返回材料被下一轮输入消费。4适配测试、24相关检索回归、6边界检查及Ruff/mypy通过；这不是实际模型或benchmark成功结果。第一训练任务及随后两条公开训练轨迹按官方split顺序预先选择，形成46个历史原始来源；排除了目标题轨迹，保留用户原话和工具执行记录，不导入评分、隐藏要求或simulator context。
+
+单任务本地研究runner已准备，使用既有Qwen Host/simulator及fixed_context完成首次功能接入，原travel工具与simulator提示保留，仅做确定性状态评分。该模型试跑尚未启动，必须等当前串行模型队列结束；它不代表官方GPT-5.4五次运行成绩。完整目标、外部学习策略比较与其余E实验仍未完成。索引：data/manifests/host-intent-view-v4-state-adapter-v1.json。
