@@ -60,7 +60,8 @@ def main() -> None:
     parser.add_argument("--source-version", required=True)
     parser.add_argument("--policy", choices=("fixed_context", "fixed"), default="fixed_context",
                         help="Existing whole-context or ordinary-pack baseline for this pilot")
-    parser.add_argument("--compute-phase", default="host_intent_view_v4_state_local_travel_pilot_v1",
+    parser.add_argument("--compute-phase",
+                        default="host_intent_view_v4_state_local_travel_pilot_v1",
                         help="Distinct phase in the original ledger for each declared experiment")
     args = parser.parse_args()
     selection = read_json(args.preparation / "selection.json")
