@@ -72,7 +72,7 @@ def retrieval_packet(
     reason: str, usage: dict[str, Any], *, ok: bool = True,
 ) -> dict[str, Any]:
     """One full return representation for read admission and final delivery."""
-    evidence = project_packs(items, indices)
+    evidence = project_packs(items, indices, compact_view_bindings=True)
     references = dict(zip(indices, positions, strict=True))
     for row in evidence:
         row["ref"] = material_ref(key, references[int(row["label"][1:])])

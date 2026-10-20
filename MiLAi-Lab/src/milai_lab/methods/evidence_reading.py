@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import copy
 import json
+import re
 from collections.abc import Callable
 from typing import Any, Literal
 
@@ -578,7 +579,9 @@ SOURCE_REUSE_INSTRUCTIONS = (
 )
 
 
-def project_packs(items: list[dict[str, Any]], indices: list[int]) -> list[dict[str, Any]]:
+def project_packs(
+    items: list[dict[str, Any]], indices: list[int], *, compact_view_bindings: bool = False,
+) -> list[dict[str, Any]]:
     """Render one body for exactly repeated visible Source ranges.
 
     Expanding several hits in one session may reopen the same complete parent.
@@ -650,6 +653,13 @@ def project_packs(items: list[dict[str, Any]], indices: list[int]) -> list[dict[
             originals[ranges] = projected
     for projected in result:
         if projected["kind"] == "query_structure" and "source_bindings" in projected:
+            if compact_view_bindings:
+                # Keep references in both typed evidence fields and literal prose.
+                # This changes only the returned locator table, never the View or its backing data.
+                text = json.dumps(projected["interpretation"], ensure_ascii=False)
+                projected["source_bindings"] = {
+                    alias: binding for alias, binding in projected["source_bindings"].items()
+                    if re.search(r"(?<!\w)" + re.escape(alias) + r"(?!\w)", text)}
             locations = {alias: binding for alias, binding in projected["source_bindings"].items()
                          if (binding["source_ref"], binding["source_revision"]) not in sources}
             if locations:
