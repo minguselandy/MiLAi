@@ -3,7 +3,12 @@ import copy
 import math
 import unittest
 
-from milai_lab.datasets.instructir import corpus_sources, evaluate_rankings, retrieval_request
+from milai_lab.datasets.instructir import (
+    corpus_sources,
+    delivered_document_ranking,
+    evaluate_rankings,
+    retrieval_request,
+)
 
 
 class InstructIRProtocolTests(unittest.TestCase):
@@ -55,6 +60,47 @@ class InstructIRProtocolTests(unittest.TestCase):
         self.assertEqual(filtered["metrics"]["cluster_NDCG@1_avg"], 0.0)
         self.assertEqual(retained["metrics"]["cluster_NDCG@1_avg"], 1.0)
         self.assertEqual(run, {"same": {"same": 1.0}})
+
+    def test_ranking_uses_delivered_ranges_and_only_explicit_view_citations(self):
+        refs = [{"snapshot_id": "actual", "collection": "materials", "item_index": i}
+                for i in range(3)]
+        materials = [
+            {"source_ranges": [{"source_ref": "source-a", "start": 2, "end": 8}]},
+            {"source_bindings": {"cited": {"source_ref": "source-b"},
+                                 "duplicate": {"source_ref": "source-a"},
+                                 "unused": {"source_ref": "source-not-returned"}}},
+            {"source_ranges": [{"source_ref": "source-a", "start": 8, "end": 12}]},
+        ]
+        packet = {"evidence": [
+            {"kind": "original_source", "ref": refs[0], "evidence": [{"range": [2, 8]}]},
+            {"kind": "query_structure", "ref": refs[1], "interpretation": {"nodes": {
+                "n0": {"text": "Literal delivered claim", "evidence": ["cited", "duplicate"]}}}},
+            {"kind": "original_source", "ref": refs[2], "evidence": [{"range": [8, 12]}]},
+        ]}
+        before = copy.deepcopy(packet)
+        result = delivered_document_ranking(packet,
+            lambda ref: materials[ref["item_index"]],
+            {"source-a": "doc-a", "source-b": "doc-b", "source-not-returned": "not-ranked"})
+        self.assertEqual(result["ranking"], {"doc-a": 1.0, "doc-b": .5})
+        self.assertEqual([r["basis"] for r in result["entries"]],
+                         ["delivered_original_range", "delivered_interpretation_citation"])
+        self.assertEqual(packet, before)
+
+    def test_unavailable_packets_do_not_gain_document_credit(self):
+        packet = {"evidence": [{"kind": "original_source", "visibility": "unavailable"},
+                               {"kind": "query_structure", "visibility": "unavailable"}]}
+        result = delivered_document_ranking(
+            packet, lambda _: self.fail("No material was delivered"), {})
+        self.assertEqual(result["ranking"], {})
+
+    def test_changed_ranges_and_unknown_material_kinds_are_not_silently_scored(self):
+        packet = {"evidence": [{"kind": "original_source", "ref": {},
+                                "evidence": [{"range": [0, 3]}]}]}
+        with self.assertRaisesRegex(ValueError, "ranges differ"):
+            delivered_document_ranking(packet, lambda _: {
+                "source_ranges": [{"source_ref": "s", "start": 0, "end": 4}]}, {"s": "doc"})
+        with self.assertRaisesRegex(ValueError, "Unsupported"):
+            delivered_document_ranking({"evidence": [{"kind": "unknown"}]}, lambda _: {}, {})
 
 
 if __name__ == "__main__":

@@ -193,3 +193,64 @@ def test_corpus_preparation_keeps_every_literal_document_and_offline_id(tmp_path
     assert all(row["content"] == "Complete title\nSame literal text 甲🙂" for row in sources)
     assert all(row["role"] == "tool" and row["origin"] == "reference_document" for row in sources)
     assert all(row.get("occurred_at") is None for row in sources)
+
+
+def test_actual_returned_document_refs_project_to_native_ids_without_search_candidates(
+    tmp_path, monkeypatch,
+):
+    from milai_lab.datasets.instructir import corpus_sources
+    from milai_lab.runners.instructir import project_query_result
+
+    root = prepared_given(tmp_path, policy={"policy": "fixed_context", "reads": 1,
+                                           "max_control_steps": 5})
+    monkeypatch.setattr(httpx.Client, "send", no_http)
+    result = message(root, bank="corpus", owner="alice", session="evaluation", message_id="q",
+        content="Cedar code", given_retrieval_request={"query": "Cedar code"},
+        incoming_sources=corpus_sources([
+            {"_id": "native-first", "title": "Cedar", "text": "The code is 4312."},
+            {"_id": "native-unreturned", "title": "Another source",
+             "text": "The colour is blue."}]))
+    assert result["status"] == "COMPLETED", result.get("error")
+    mapping = {row["receipt"]["source_ref"]: row["original_event_id"]
+               for row in result["incoming_source_receipts"]}
+    projection = project_query_result(root, result, mapping)
+    assert projection["ranking"] == {"native-first": 1.0}
+    assert projection["entries"][0]["basis"] == "delivered_original_range"
+    assert projection["host_request_generated"] is False
+
+
+def test_delivered_view_ranks_its_citation_and_not_unused_store_bindings(tmp_path, monkeypatch):
+    from test_v13_5_functional_integration import scripted
+
+    from milai_lab.datasets.instructir import corpus_sources
+    from milai_lab.runners.instructir import project_query_result
+
+    root = prepared_given(tmp_path, policy={"policy": "rules", "reads": 0, "max_control_steps": 5})
+
+    def reply(wire, _number):
+        assert not wire.get("tools")
+        supplied = json.loads(wire["messages"][-1]["content"])
+        assert supplied["retrieval_request"]["read_goal"]["purpose"] == "Use the second report"
+        assert len(supplied["sources"]) == 2
+        selected = supplied["sources"][-1]
+        return {"role": "assistant", "content": json.dumps({"scope": "reported code",
+            "nodes": [{"id": "n0", "text": selected["text"], "evidence": [selected["id"]],
+                       "kind": "reported"}], "rules": [], "remove": [], "remove_rules": [],
+            "unresolved": []})}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    result = message(root, bank="corpus", owner="alice", session="evaluation", message_id="q",
+        content="reported code", given_retrieval_request={"query": "reported code",
+            "read_goal": {"purpose": "Use the second report"}},
+        incoming_sources=corpus_sources([
+            {"_id": "native-unused", "title": "First report", "text": "The code is 1000."},
+            {"_id": "native-selected", "title": "Second report", "text": "The code is 4312."}]))
+    assert result["status"] == "COMPLETED", result.get("error")
+    assert len(wires) == 1  # The view generator, never a Host rewrite or answer.
+    assert result["final_answer"] is None and not result["host_request_generated"]
+    mapping = {row["receipt"]["source_ref"]: row["original_event_id"]
+               for row in result["incoming_source_receipts"]}
+    projection = project_query_result(root, result, mapping)
+    assert projection["ranking"] == {"native-selected": 1.0}
+    assert projection["entries"][0]["basis"] == "delivered_interpretation_citation"
+    assert result["budget_after"]["generation_requests"] == 1

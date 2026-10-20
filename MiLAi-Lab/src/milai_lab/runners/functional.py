@@ -691,7 +691,7 @@ def prepare(
     settings_path: Path,
     fixture_path: Path | None = None,
     controls_path: Path | None = None,
-    *, source_version: str | None = None,
+    *, source_version: str | None = None, run_id: str | None = None,
 ) -> dict[str, Any]:
     settings = entrypoint_settings(read_json(settings_path), "functional")
     allowed = {
@@ -1014,7 +1014,7 @@ def prepare(
         "evaluator_controls_version": controls_path.stem if controls_path else None,
         "capacity_identity": capacity.identity,
         "budget_before": ledger,
-        "run_id": root.resolve().name,
+        "run_id": root.resolve().name if run_id is None else run_id,
         "backend": "public_sdk_sqlite",
         "formation": "host_tool_commit_before_final",
         "format_reproposals": settings["format_reproposals"],
@@ -1029,6 +1029,8 @@ def prepare(
         existing = read_json(target)
         if existing.get("config_version") != config_version:
             raise ValueError("FUNCTIONAL_EXISTING_CONFIGURATION_VERSION_CHANGED")
+        if run_id is not None and existing["run_id"] != run_id:
+            raise ValueError("FUNCTIONAL_EXISTING_SOURCE_NAMESPACE_CHANGED")
         return cast(dict[str, Any], existing)
     write_json(target, frozen)
     return frozen

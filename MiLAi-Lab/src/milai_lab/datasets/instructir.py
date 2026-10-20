@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 from collections import defaultdict
+from collections.abc import Callable
 from typing import Any
 
 
@@ -17,6 +18,57 @@ def corpus_sources(rows: list[dict[str, str]]) -> list[dict[str, Any]]:
              "original_event_id": row["_id"], "role": "tool", "origin": "reference_document",
              "occurred_at": None, "content": row["title"] + "\n" + row["text"]}
             for index, row in enumerate(rows)]
+
+
+def delivered_document_ranking(
+    packet: dict[str, Any], resolve_material: Callable[[dict[str, Any]], dict[str, Any]],
+    source_to_document: dict[str, str],
+) -> dict[str, Any]:
+    """Rank only sources selected in the actual returned packet, in wire order.
+
+    Every corpus document has its own source/session. An original range selects
+    that document. A delivered interpretation selects only its explicit node
+    citations, not every binding retained in the view or every search candidate.
+    Citation-based retrieval does not claim the original text reached the Reader.
+    """
+    entries: list[dict[str, Any]] = []
+    seen: set[str] = set()
+
+    def select(source: str, ref: dict[str, Any], basis: str, **details: Any) -> None:
+        document = source_to_document[source]
+        if document not in seen:
+            seen.add(document)
+            entries.append({"document_id": document, "source_ref": source,
+                            "material_ref": ref, "basis": basis, **details})
+
+    for item in packet["evidence"]:
+        if item["kind"] == "original_source":
+            if not item.get("evidence"):
+                continue
+            material = resolve_material(item["ref"])
+            refs = {span["source_ref"] for span in material["source_ranges"]}
+            if len(refs) != 1:
+                raise ValueError("InstructIR requires one corpus document per source pack")
+            ranges = [[span["start"], span["end"]] for span in material["source_ranges"]]
+            if ranges != [turn["range"] for turn in item["evidence"]]:
+                raise ValueError("Delivered source ranges differ from the retained material")
+            select(next(iter(refs)), item["ref"], "delivered_original_range", ranges=ranges)
+        elif item["kind"] == "query_structure":
+            if "interpretation" not in item:
+                continue
+            material = resolve_material(item["ref"])
+            for node_id, node in item["interpretation"]["nodes"].items():
+                for alias in node["evidence"]:
+                    select(material["source_bindings"][alias]["source_ref"], item["ref"],
+                           "delivered_interpretation_citation", node=node_id, citation=alias)
+        else:
+            raise ValueError("Unsupported returned material for the declared InstructIR projection")
+    return {"ranking": {row["document_id"]: 1.0 / (i + 1) for i, row in enumerate(entries)},
+            "entries": entries,
+            "ordering": "First occurrence in actual ToolMessage material/node/citation order; "
+                        "reciprocal rank values encode order only, not similarity/confidence.",
+            "scope": "Delivered original ranges or explicit delivered interpretation citations. "
+                     "No unreturned candidates, unused view bindings, qrels or answer fields."}
 
 
 def evaluate_rankings(

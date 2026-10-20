@@ -70,6 +70,23 @@ Latest observed mainfit 171/524, 2736rows/9283551tokens; pollsamePID/exec, no re
 Next independent work: fullexternaladapter/actualStorepath or E2/E3 implementation while solefit runs;
 maintain fulloriginalscope below and do not publish or launchanotheractualmodeljob.
 
+NEW InstructIR actual source Store CLOSED: PID2340409/exec34300 exit0/absentPID, frozen4e62fe95.
+external/instructir-store-v1:16072fulltitle/text sources, allactualStorecontents/IDs/roles/unknown
+occurrence times checked bydirectequality; noobjectauthority orsemanticrecords. Template70184214bytes.
+Prep1995.890040wall/1154.143851CPU; audit63.054724wall/64.663763CPU. Bothpendingv12, no settlement.
+Given-request entrycommitted4e62fe95: functional.message(given_retrieval_request=...) callsactual
+registeredtool withliteralrequest, noHostrewrite/finalanswer. SameStore/models/ledger/visibility,
+firstfailureretained, query-only rejectsrichfields. NotautonomousHost/nativeE0.
+InstructIR runtime nowimplemented: pure delivered-doc projection plusactualStore-ref resolver;
+rawrangesor explicitviewnodecitations only; unusedbindings/candidatesneverranked. Wirefirstoccurrence,
+reciprocalranksnotconfidence. CompletequeriedcohortCLI, freshStorecopyperquery,warmmodelpool,
+closedcase tar.gz preservingallrawfilesbeforeremovingredundantworkingcopy. Separateofflineqrelscorer.
+Common source namespace/IDs preserved whilemethodconfig explicitlyrefrozen; originalSourceTemplate
+unchanged. Tests8given/provenance+3isolation/archive/stop+7metrics/projectionPASS; prior33Host/Mem2Act
+regressionsPASS, Ruff/mypy/package/toolsboundaries/helpPASS. Read instructir-runtime-protocol-v1.
+No actualInstructIRquestions/models evaluated. Stillneed fullsource syntheticCPUprobe/archive-size
+check before finalrecipe evaluation; no secondmodeljob whileT1running. SourceprepCPUjobisclosed.
+
 Originalgoal remains FULL: T1/T2+matchedcontinuedCE,seeds0/1/2,finalE1/reservedconfirmation,
 E2frozenrequests,E3retrainedequal-info+one-shotfeedback,E4fullreleases,E5sevenworkloads/budgets,
 additionalHost,nativeE0. Nativeparser service-change permission unanswered; do not restart service.
