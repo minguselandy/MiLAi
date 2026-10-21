@@ -1,0 +1,61 @@
+{
+  "status": "SOURCE_AND_VIEW_REVIEWS_COMPLETE;NOT_DISPATCHED_WAIT_CURRENT_FIT",
+  "declared_at": "2026-10-21T22:26:33.523004+00:00",
+  "source_version": "074ee79e",
+  "source_freeze": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/frozen-state-view-074ee79e/MiLAi-Lab",
+  "argv": [
+    "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/http-env/bin/python",
+    "-u",
+    "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/frozen-state-view-074ee79e/MiLAi-Lab/tools/run_frozen_retrieval_calls.py",
+    "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-view-feedback-branches-v2/captures",
+    "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-view-feedback-branches-v2/policies.json",
+    "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-view-feedback-execution-v2",
+    "--source-version",
+    "074ee79e",
+    "--runner-version",
+    "074ee79e"
+  ],
+  "cwd": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab",
+  "environment": {
+    "PYTHONPATH": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/frozen-state-view-074ee79e/MiLAi-Lab/src",
+    "TOKENIZERS_PARALLELISM": "false"
+  },
+  "output": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-view-feedback-execution-v2",
+  "original_ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+  "captures": 100,
+  "selected_states": 36,
+  "selected_post_operation_states": 20,
+  "branches": 108,
+  "source_streams": 6,
+  "seed": 0,
+  "per_stream_maximum": 6,
+  "manual_nominations": 0,
+  "policy": "fixed_context reads4 after exact actual first action;atmost2commoncontinuation steps constrained by inherited budgets",
+  "source_review": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-view-acceptance-preparation-v1/source-first-review-v1.json",
+  "view_review_closure": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-view-semantic-review-v2/review-closure-v1.json",
+  "host_readout": false,
+  "no_Host_frame_fabrication": true,
+  "compiler": {
+    "source_version": "2a179b58",
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/frozen-feedback-expansion-2a179b58/MiLAi-Lab/tools/prepare_retrieval_feedback.py",
+    "required_flags": [
+      "--split",
+      "train",
+      "--delivery-only"
+    ],
+    "answer_labels": "UNKNOWN; not fake ties or negatives",
+    "delivery_labels": "Require actualclosedbranches andseparate source-grounded comparison review;notinferredfromcurrent View grade"
+  },
+  "admission": "Actualparent3470595/child3470601 anddriver/run must be terminal first. Verify noothermodeljob. Sameledger/capacity/limits,noautomaticretry. Nodispatchfromthispreparation.",
+  "preservation": "Original100captures,36selectedstates,108offeredactionbindings/parameters,sourceversionandcontinuation unchanged. Reviewafterfixedselection didnotreplacecases orrepairView/source content. Commonprefix costs are historical and not reexecuted/rebilled.",
+  "scope": "Conditionalretrievalmechanism on sixpublictrainstreams,not autonomousHost/nativeSTATE/independentfamilyconfirmation",
+  "automatic_retry": false,
+  "model_jobs_started": 0,
+  "new_training_labels": 0,
+  "no_sha_validation": true,
+  "ledger_recorded": false,
+  "compute": {
+    "cpu_seconds": 0.03793803,
+    "wall_seconds": 0.037953983061015606
+  }
+}

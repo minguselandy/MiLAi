@@ -1,3 +1,96 @@
+# LATEST V19 (2026-10-22): CORRECTED FIT32 LIVE / STATE REVIEW COMPLETE
+
+Full goal ACTIVE, not complete/blocked/paused. Revalidate CURRENT ONLY REAL MODEL:
+exec17952,parent3470595/child3470601,complete-actions-fit-v1/driver.json and
+fitting/source256-actions-full-seed0-u524-v1/run.json under artifacts/generalization-20261021.
+Latest actualPIDs alive,RUNNING32/524;initialtrain4886 eval complete. Frozen d6a8afd3,
+allparameters/data/labels unchanged. No hotupdate/restart,secondmodel orofflinesettlement
+whilelive. Observationtimeout notterminal. No automatic successor afterthisfit. Current
+post-update scores notreadforselection;fullterminal audit andsavedCPU selection stillrequired.
+Alloldlegacy/STATE/sourcequeue PIDs/jobs CLOSED asV18;NEVER restartthem. PausedCoalent untouched.
+
+This turn completed author review of ALL36actualSTATEViews after59originalsources had been
+reviewed beforegeneration. Rawsource re-read bydomain,thenactualnodes/bindings/rules/scope/
+unresolved anddeliveredranges.273literaloriginalcasejoins verified;readonlySQLite resolves
+actualsnapshot references,nottext-similarity identity guesses. Review packets +sixreviews:
+state-view-semantic-review-v2/{state-train-*.json,reviews/*.json,review-closure-v1.json}.
+v1packetpreparation failed beforepackets onabsent incoming_source_receipts whenincoming_sources
+isempty;failure retained,unmeasured/notzero. v2followsactualdeclaredlayout. No modelretry.
+
+Descriptiveauthorcounts:15Viewscompletewithinrecordedscope,18partial,3qualifiedwording;
+requestedmaterial assessment16complete/20partial. NOT officialaccuracy/Hostsuccess orindependent
+annotation;6correlatedstreams andrepeatphases not36independentfamilies. No traininglabelscreated.
+Importantfindings (details/sourceindices inreviewfiles):
+- travel000 lateView promotes user's BK-1001 confirmationquestion to verifiedactive;no later
+  recheck. support001promotesconfirmationquestion to userconfirmedcorrectness. Emptyunresolved
+  hidesquestion/dialogueuncertainty. Actual1299returnfactsremain supported separately.
+- support001 returntime explicitly equated withingestion2026-10-21;eventtimeunknown. Merecapture
+  metadata inotherViews notautomaticallymarkedfalse. Wrongclockmeaning,notakeywordtest.
+- support000 removesOPENED conditionfrom15%electronicschanged-mindfee;support001overgeneralizes
+  onezero-adjustmentdefectiveoutcome beyondexplicitpolicyexemptions. Actualcasevalues vsbroadrule
+  separated. support000lateheavyusage explanation shiftedtoinitialcomplaint;actual999completed
+  return/rejectedchanged-mind remainsdistinctfromuserdesired879/149/37/8. Teacherhistorynotrepaired.
+- shopping000 initialfive-model concern refined:search has5laptops+1tablet,4detailcalls;ambiguous
+  scope isnot a fabricatedfifthproduct. Latergenerations improvefacts/scope. shopping001earlyrepeat
+  explicitly says5detailswhilelisting4detailaliases. Giftintent/falsegiftwrap,cartvs purchase
+  otherwisecorrect. Probealias-labelledquerynodes notautomaticallytreatedasfalsebusinessfacts.
+- travel001nativeuser_001actorattributiontoprobequery unestablished;self-target graph routes are
+  circularasindependentderivations,whileactualcancellationfacts havedirecttool support.
+
+Sixoriginal-source requests return19completephysicalranges:4nativeTool,10nativeUser,5probeQuery.
+Twoonlyprobes;twonativeUserintentwithouttoolresults;twohaveToolobservations (travel000still
+missesotherbookingoriginal;support001coreoriginalverification completebutViewerrorsremain).
+Do NOT inferalluserSourcesarelessauthoritative. Compare actualtask/source role/intent.
+
+FrozenCacheMemoryPolicy074ee79e recomputed onactualobservations:100/100choices identical,
+no world/modelreplay.36REFRESH_VIEW,31READ attempts=>19opened,12material_budget_exhausted.
+All6exactearlyrepeatrequests have matchingView andexactly1pendingpriorprobeQuery Source;
+policyrefreshesonpending. Explains recordedbranch,notmeasuredcounterfactualcachebenefit.
+Fortravel001/shopping001 originalrequests, query-echo nodes gethighestlexicalscore;
+shopping001fillsall4rawslotswithprobes. Viewfirstallocation+ranking+budget allmatter.
+All36savedgenerationprompts ALREADY included questionsarenotassertions andingestiontime isnot
+an event/effectivedate. Do notclaimaddingthesameremindersasvalidatedfix. Semanticcompliance
+needsactualevidence;no case-IDguards,sourceerasure,oldoutputrepair orprotectedretuning.
+Mechanismfile state-view-policy-mechanisms-v1.json (purefrozenpolicyrecomputation).
+
+Capacityonly: state-view-return-capacity-v2.json authoritative. All6actualpackets reconstruct
+literally. Alternatecompositions preserveactualcandidatelabels(inclViewe-1);v1kept,one-token
+labelbookkeeping correction affects hypotheticalcompositionsonly,notactualreceipts.
+Travel001View1822tokens;actuallyattempted5toolsourcebundle1108alone,2632withView>2048.
+Support000actuallyattempted2toolbundle527alone,1945withView<2048 ifotherselecteditemsabsent.
+Combinedsizesnotadditive because sharedlocatorprojection changes. Theseare unexecutedpacket
+geometries,NOT validstoredreceipts,optimalchoices,NoViewsuccess orproofallrelevantbodiesfit.
+ActualE2/Host/lifecycle comparisons stillrequired. All19returned originalranges werecomplete;
+no silenttruncation explanation for theirselection/coveragegaps.
+
+STATEE2 readiness NOW COMPLETE forsourceandViewreview:existing36states/108branches,20post-op,
+6perstream,seed0,nonominations unchanged.130Viewbodyoccurrences in fixedbeforeobservations
+match reviewedactualbodies.108firstaction/parameter dicts literal members ofactualoffers.
+NEW authoritative plan state-view-feedback-execution-plan-v2.json and tracked
+training-generalization-state-feedback-plan-v2.json. NOTDISPATCHED;waitcurrentfitterminal.
+Exactfrozen074ee79e tools/run_frozen_retrieval_calls.py, captures/policies from
+state-view-feedback-branches-v2,output state-view-feedback-execution-v2. Fixed_contextreads4,
+actualfirstaction+atmost2commoncontinuation underinheritedbudgets. NO --host-readout (nooriginal
+Hostframe). Afteractualbranches+newsource-groundedcomparisonreview,compile frozen2a179b58
+--split train --delivery-only;answerUNKNOWN,notfake tie/negative. No newbranchresults yet.
+Do NOT replace alreadyfrozenpool/choices usingreviewfindings. Actualcommonprefix costs notrebilled.
+
+Tracked summaries: training-generalization-state-view-semantic-review-v1.json and
+training-generalization-progress-20261022-v19.json;executiondocV19. No production/trainingcode
+changed,no redundanttests rerun;verification isactualjoins/decisionreproduction/renderequality/
+nativetokenizergeometry/actionmembership.6newmeasuredcanonicalphases total2.725998690CPU
+PENDING;paths inprogressv19. Semanticreading/authoring/failedprep/otherinspection unknown,notzero.
+No labelsrecompiledfortiming. Closedsettlementsv1/v2/v3 neverappend/re-settle;oldpending35 and
+v11-v18pending untouched. Legacytrainercompute andSTATEHTTP alreadybilled;currenttrainerbills
+terminalonce. Originalledgeronly /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json.
+
+No SHA/substitute fingerprint verification,subagents,push/merge,services,Productschema/API/
+permissions/Canonical changes. Fullremaining:activecorrected256 +nested/parameter/aux/E3fits;
+savedCPUcandidate evals incllegacy;actual108STATEE2+deliverycomparisons;factorialv2;feedbackv2
+threecollector128sources/labels/192fits/T2/common-support;strongsimple/full/NoView/text autonomous
+Hostlifecycle+costs;fullprotected/external andseed0,1,2 familyconfirmation. LMEfixedReader/scorer/
+servervisionaccounting remainsnextofflineimplementationwork. V18LMEbridge18tests remainpassed.
+
 # LATEST V18 (2026-10-22): CORRECTED PRIMARY LIVE / LEGACY AND STATE CLOSED
 
 Full goal ACTIVE, not complete/blocked/paused. CURRENT ONLY REAL MODEL JOB:

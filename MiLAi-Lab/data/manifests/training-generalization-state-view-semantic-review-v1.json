@@ -1,0 +1,222 @@
+{
+  "status": "AUTHOR_REVIEW_AND_MECHANISM_DIAGNOSTICS_COMPLETE;E2_NOT_EXECUTED",
+  "observed_at": "2026-10-21T22:30:06.851570+00:00",
+  "collector_source_version": "074ee79e",
+  "original_execution": "state-view-acceptance-v2;36/36COMPLETED;36generationrequests/191365knowntokens previouslyrecorded",
+  "source_first": "59originalsources reviewed before outputs;all36actualViews subsequently reviewed against those originals and actualbindings/ranges",
+  "review_root": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-view-semantic-review-v2",
+  "reviewed_cases": 36,
+  "source_streams": 6,
+  "review_counts": {
+    "view_fidelity": {
+      "COMPLETE_WITHIN_RECORDED_SCOPE": 15,
+      "PARTIAL": 18,
+      "QUALIFIED_SCOPE_WORDING": 2,
+      "QUALIFIED_COMPLETION_WORDING": 1
+    },
+    "requested_delivery": {
+      "COMPLETE": 16,
+      "PARTIAL": 20
+    }
+  },
+  "counts_scope": "Author descriptive judgements,not benchmark accuracy or independent annotations. Six correlated streams;repeat phases are not independent samples. Qualified wording is distinct from a contradicted fact.",
+  "findings": [
+    {
+      "histories": [
+        "state-train-travel-000",
+        "state-train-customer_support-001"
+      ],
+      "finding": "Lateruserconfirmation questions are asserted as userverification/confirmation;unresolvedquestion is erased. TravelBK-1001 has no laterindependentrecheck. Return1299facts are supported,butdialogueclosureisnot."
+    },
+    {
+      "histories": [
+        "state-train-customer_support-001"
+      ],
+      "finding": "Returntime asserted at Storeingestiontime despite unknownsourceeventtime. Merementionofcapturetime elsewhere was notautomaticallyflagged;theerroris equating itwithprocessingtime."
+    },
+    {
+      "histories": [
+        "state-train-customer_support-000",
+        "state-train-customer_support-001"
+      ],
+      "finding": "Policyconditions are omitted/generalized:opened-electronicscondition lost;singlezero-adjustmentdefectiveoutcome generalized beyondpolicyclawbackexceptions. Correctcurrentrefundvalues distinguishedfromunsupportedgeneralrule."
+    },
+    {
+      "histories": [
+        "state-train-customer_support-000"
+      ],
+      "finding": "Lateheavy-usageexplanation moved intoinitialcomplaintchronology. Nevertheless actualdefective999return and rejectedchanged_mindattempt remain distinct fromdesired879/149/37/8;theteachertrajectorywasnotrepaired."
+    },
+    {
+      "histories": [
+        "state-train-shopping_assistant-000"
+      ],
+      "finding": "Preliminaryfive-modelconcern refined:searchhasfive laptopsplusone tablet,fourdetailcalls. Scopewasambiguous,notproofafifthmodelwasinvented. LaterViewsfixcount/coverageandaddfaithfuldetails;regenerationisnotassumedzeroinformationvalue."
+    },
+    {
+      "histories": [
+        "state-train-shopping_assistant-001"
+      ],
+      "finding": "Early-repeat explicitly saysfive detailitems whilelistingfouractualdetailaliases;laterViewsretaincorrectgiftintent versusgift_wrapfalse,onecartaddition,notpurchase."
+    },
+    {
+      "histories": [
+        "state-train-travel-001"
+      ],
+      "finding": "Probequery explicitlyattributed to nativeuser_001 withoutestablishedactorlink. Threegraphself-routesinlater-overview arecircularasindependentderivations;directcommitreceipts stillsupportcancellationfacts. Graphquality notconflatedwithfalsebusinessoutcome."
+    }
+  ],
+  "raw_original_delivery": {
+    "requests": 6,
+    "items": 19,
+    "all_selected_ranges_complete": true,
+    "types": {
+      "native_user": 10,
+      "native_tool": 4,
+      "probe_query": 5
+    },
+    "by_request": [
+      {
+        "history": "state-train-travel-000",
+        "items": {
+          "native_user": 2,
+          "native_tool": 2
+        },
+        "source_indices": [
+          5,
+          6,
+          7,
+          4
+        ]
+      },
+      {
+        "history": "state-train-travel-001",
+        "items": {
+          "probe_query": 1
+        },
+        "source_indices": [
+          "early-overview"
+        ]
+      },
+      {
+        "history": "state-train-customer_support-000",
+        "items": {
+          "native_user": 3
+        },
+        "source_indices": [
+          11,
+          12,
+          5
+        ]
+      },
+      {
+        "history": "state-train-customer_support-001",
+        "items": {
+          "native_tool": 2,
+          "native_user": 2
+        },
+        "source_indices": [
+          3,
+          5,
+          4,
+          0
+        ]
+      },
+      {
+        "history": "state-train-shopping_assistant-000",
+        "items": {
+          "native_user": 3
+        },
+        "source_indices": [
+          8,
+          6,
+          7
+        ]
+      },
+      {
+        "history": "state-train-shopping_assistant-001",
+        "items": {
+          "probe_query": 4
+        },
+        "source_indices": [
+          "early-overview",
+          "early-repeat",
+          "early-known",
+          "later-known"
+        ]
+      }
+    ],
+    "interpretation": "Twooriginalrequestsreturnonlyprobequeries;tworeturnnativeuserrequestswithouttooloutcomes;tworeturntoolobservations.One ofthose lacks the otherbooking original;customer_support001hascorepreview/return/userquestionproof butViewerrors remain. This isnot a genericrule thattool sources outrankuser sources."
+  },
+  "mechanisms": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-view-policy-mechanisms-v1.json",
+    "choices_reproduced": 100,
+    "new_model_calls": 0,
+    "world_replay": false,
+    "operation_counts": {
+      "REFRESH_VIEW": 36,
+      "READ": 31
+    },
+    "operation_status_counts": {
+      "REFRESH_VIEW:view_opened": 36,
+      "READ:opened": 19,
+      "READ:material_budget_exhausted": 12
+    },
+    "repeat_branch": "Everyexactearlyrepeat has matchingView,onependingSource frompriorprobequery,andfrozenpolicy choosesREFRESH_VIEW. Thefrontierisnotunchanged.",
+    "query_echo_ranking": "For travel001 andshopping001 originals,priorquerynodes get highest lexicalsource scores and areread first. Shopping001 spendsall4successfuloriginalslots onprobequeries. Thisexplainsrecordedpolicychoices,notcounterfactualHostresults.",
+    "view_first_budget": "Alloriginalrequests refresh/openView first.12actualREAD attempts hitmaterial_budget_exhausted. Failurethereforecombinesallocation/ranking andcapacity,not silenttruncationofreturnedbodies.",
+    "prompt_contracts": "All36actualgenerationwires already include userquestionsare requests/notassertions andingestiontime doesnotestablishevent/effectivedate. Semanticcompliance failedincases despiteexistinginstructions."
+  },
+  "capacity_only_diagnostic": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-view-return-capacity-v2.json",
+    "actual_packets_reconstructed_literally": 6,
+    "limit": 2048,
+    "examples": [
+      {
+        "history": "state-train-travel-001",
+        "actual_packet_tokens": 1933,
+        "view_only_tokens": 1822,
+        "actual_attempted_tool_bundle_without_view": 1108,
+        "view_plus_same_bundle": 2632
+      },
+      {
+        "history": "state-train-customer_support-000",
+        "actual_packet_tokens": 2016,
+        "view_only_tokens": 1570,
+        "actual_attempted_tool_bundle_without_view": 527,
+        "view_plus_same_bundle": 1945
+      }
+    ],
+    "scope": "All actual packets first reconstructed literally through the same frozen renderer. Other compositions only measure text capacity with fixed actual metadata. They are not valid new stored receipts,policy choices,semantic success or runtime-cost estimates. No View/source/state was deleted or edited. No claim all available relevant bodies fit.",
+    "interpretation": "Fortravel001 theattemptedtoolbundlecannotfitwiththeView;forcustomer_support000 itcanfit ifotheralreadyselecteduseritemsareabsent. No claims thattheseunexecutedcompositionsareoptimal,chosenbyNoView,orsemanticallycomplete;actualE2/lifecyclestillrequired.",
+    "version_note": "state-view-return-capacity-v1.json;v2 preserves actual candidate labels, including View e-1, in alternate compositions. v1 actual packet reconstruction was already literal; only hypothetical label bookkeeping changed."
+  },
+  "E2_readiness": {
+    "states": 36,
+    "post_operation_states": 20,
+    "branches": 108,
+    "view_occurrences_matched": 130,
+    "action_bindings_checked": 108,
+    "state_pool_or_actions_changed": false,
+    "manual_nominations": 0,
+    "source_and_View_review_before_new_branch_outputs": true,
+    "plan": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-view-feedback-execution-plan-v2.json",
+    "status": "NOT_DISPATCHED_WAIT_CURRENT_CORRECTED_FIT",
+    "host_readout": false,
+    "compiler_source": "2a179b58 --split train --delivery-only",
+    "answer_target": "UNKNOWN untilvalidHostframe/outcome;nonefabricated"
+  },
+  "next_decisions": "Executealreadyfrozen108E2branchesaftercurrentmodeljobcloses;compareactualdeliveryandcostwithoutassumingrefreshorNoViewwins. Keepdeclaredstrongsimple/NoViewlifecycleexperiments. SeparateViewproducersemanticerrorsfromcontrollerinput/selection;moreoperationtrainingaloneisnotproofproducererrorsarefixed. Do notaddcase-IDrules,erasequerySources,alteroldoutputsorretuneprotected/testsettings.",
+  "limitations": [
+    "Singleauthor;notindependentannotationorofficialSTATE/Hostscore",
+    "Sixcorrelatedtrainstreams;36probesand130bodyoccurrencesarenotindependentsourcefamilies",
+    "Noactualcounterfactualbranches/Hostreadouts/newtraininglabels yet",
+    "Semanticreading/authoringcostunknown,notzero;measuredprogramauditsseparate"
+  ],
+  "production_code_changed": false,
+  "new_model_jobs_started": 0,
+  "training_labels_created": false,
+  "no_sha_validation": true,
+  "no_subagents": true,
+  "ledger_recorded": false
+}

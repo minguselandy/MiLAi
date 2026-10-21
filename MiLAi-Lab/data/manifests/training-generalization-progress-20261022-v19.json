@@ -1,0 +1,131 @@
+{
+  "status": "ACTIVE_GOAL_NOT_COMPLETE",
+  "observed_at": "2026-10-21T22:34:37.997971+00:00",
+  "previous": "training-generalization-progress-20261022-v18.json",
+  "previous_turn_classification": "PROGRESS: legacyandSTATEclosed;correctedfitstarted;18testedmultimodalbridgefunctions. Revalidated actual process tree inthisturn.",
+  "active_fit": {
+    "session": 17952,
+    "parent_pid": 3470595,
+    "child_pid": 3470601,
+    "parent_alive": true,
+    "child_alive": true,
+    "status": "RUNNING",
+    "updates": 32,
+    "planned_updates": 524,
+    "source_version": "d6a8afd3",
+    "run_id": "source256-actions-full-seed0-u524-v1",
+    "driver": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/complete-actions-fit-v1/driver.json",
+    "run": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/fitting/source256-actions-full-seed0-u524-v1/run.json",
+    "initial_train_evaluation_rows": 4886,
+    "unchanged": "No restart/hotupdate/parameter/data/label changes; no secondmodeljob oroffline settlement whilelive. No automaticnextsuccessor.",
+    "post_update_scores_read_for_selection": false
+  },
+  "STATE_semantics": {
+    "manifest": "training-generalization-state-view-semantic-review-v1.json",
+    "review_root": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-view-semantic-review-v2",
+    "original_sources_prior_review": 59,
+    "literal_original_case_joins": 273,
+    "reviewed_outputs": 36,
+    "source_streams": 6,
+    "view_fidelity": {
+      "COMPLETE_WITHIN_RECORDED_SCOPE": 15,
+      "PARTIAL": 18,
+      "QUALIFIED_SCOPE_WORDING": 2,
+      "QUALIFIED_COMPLETION_WORDING": 1
+    },
+    "delivery_assessment": {
+      "COMPLETE": 16,
+      "PARTIAL": 20
+    },
+    "scope": "Author descriptive judgements,not benchmark accuracy or independent annotations. Six correlated streams;repeat phases are not independent samples. Qualified wording is distinct from a contradicted fact.",
+    "original_requests": 6,
+    "original_items": 19,
+    "original_item_types": {
+      "native_user": 10,
+      "native_tool": 4,
+      "probe_query": 5
+    },
+    "all_selected_original_ranges_complete": true,
+    "view_occurrences_in_fixed_E2_states_matched": 130,
+    "training_labels_created": false,
+    "main_findings": [
+      "Questions promotedtoverification;unresolvedquestions erased",
+      "Ingestiontime incorrectly used as returneventtime",
+      "Opened-electronicscondition lost;singlezeroadjustmentreturn generalizedbeyondpolicy",
+      "Lateheavyusage explanation shiftedtoinitialcomplaint;actual999vsdesired879 distinction neverthelesspreserved",
+      "Scopefive-model concern refined againstactualsearch/detailcounts;notautomaticallyfabricatedobject",
+      "Originalverificationoften returnsquestions/userintent ratherthan tooloutcomes;source/source-role comparisons remain taskconditioned"
+    ],
+    "no_production_code_change": true
+  },
+  "mechanisms": {
+    "recorded_choices_reproduced": 100,
+    "operation_counts": {
+      "REFRESH_VIEW": 36,
+      "READ": 31
+    },
+    "operation_status_counts": {
+      "REFRESH_VIEW:view_opened": 36,
+      "READ:opened": 19,
+      "READ:material_budget_exhausted": 12
+    },
+    "repeat": "All6early-repeatmatchingViews have exactlyonependingpriorquery Source; frozenpolicyrefreshesaccordingly. Localbranchmechanismproved bypurepolicyrecomputation,not measuredcounterfactualcachebenefit.",
+    "query_echo": "Lexicaloverlapranksoldquerynodeshighest intravel001/shopping001 originalrequests. Shopping001spendsall4rawreadslots onpriorqueries.",
+    "capacity": "12actualREADbudgetrejections afterView-firstallocation. Samefrozenrendererliterallyreconstructsall6actualpackets;v2alternatecompositions preserveactuale-1/candidatelabels. Thesearetokengeometryonly,notpolicyoutcome/NoViewwin.",
+    "existing_instructions": "All36actualwirepromptsalready say questionsare requestsnotassertions andingestiontimestamps do notestablishevent/effectivedates;no claimedfixbyrepeatingthoseinstructions."
+  },
+  "E2": {
+    "plan": "training-generalization-state-feedback-plan-v2.json",
+    "status": "SOURCE_AND_VIEW_REVIEWS_COMPLETE;NOT_DISPATCHED_WAIT_CURRENT_FIT",
+    "states": 36,
+    "post_operation_states": 20,
+    "branches": 108,
+    "manual_nominations": 0,
+    "all108first_actions_literal_members_of_actualoffers": true,
+    "source_and_View_reviews_precede_new_branch_outputs": true,
+    "source_version": "074ee79e",
+    "host_readout": false,
+    "compiler": "frozen2a179b58 --split train --delivery-only",
+    "answer_target": "UNKNOWN; no inventedHostframe,answers,ties,failures-as-negative",
+    "no_model_jobs_started": true
+  },
+  "verification": "No production/training code changed andno redundanttests run. Evidence joins,recomputedfrozenpolicysource,exactpacketreconstruction,nativeTokenizergeometry,anddirectactionmembershipcheckedagainstactualclosedartifacts.",
+  "new_measured_cpu_pending": {
+    "phases": [
+      {
+        "measurement_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-view-semantic-review-v2/preparation.json",
+        "cpu_seconds": 0.182866036
+      },
+      {
+        "measurement_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-view-semantic-review-v2/review-closure-v1.json",
+        "cpu_seconds": 0.021819443999999993
+      },
+      {
+        "measurement_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-view-policy-mechanisms-v1.json",
+        "cpu_seconds": 0.44612361800000006
+      },
+      {
+        "measurement_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-view-return-capacity-v1.json",
+        "cpu_seconds": 1.0807059079999997
+      },
+      {
+        "measurement_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-view-return-capacity-v2.json",
+        "cpu_seconds": 0.9565456540000001
+      },
+      {
+        "measurement_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-view-feedback-execution-plan-v2.json",
+        "cpu_seconds": 0.03793803
+      }
+    ],
+    "total_cpu_seconds": 2.7259986899999995,
+    "scope": "Successfulmechanicalprogramphasesonly. Semanticreading/authoring/failedv1packetpreparerandunmeasuredtraceinspectionunknown,notzero. v1packetprepfailedonabsentreceiptsforno-incomingcase;v2followsdeclaredinputschema. v1capacitykept;v2correctsonetokenlabelbookkeepingofhypotheticalcompositions,notactualpackets. No labelsrecompiledfortiming."
+  },
+  "closed_settlements": "v1/v2/v3 neverappend/re-settle;oldpending35/v11-v18pendingunchanged. Legacytrainercomputealreadybilledonce;STATEHTTP191365alreadybilled. Currentcorrectedtrainerwillbillatterminal. No settlementwhilelive.",
+  "remaining": "Completeactivecorrected256 andallnested/parameter/aux/E3fits;savedCPUcandidateevaluationsincllegacy;execute108STATEE2andreviewactualdeliverycomparisons;factorialv2;feedbackv2current/rules/fixedcontext128sourcecollection/labels/192fits/T2/common-support;strongsimple/full/NoView/textautonomousHostlifecycleandcosts;fullprotected/external/seeds0,1,2 confirmation. LMEReader/scorer/servervisionmeteringstillpending.",
+  "new_real_model_jobs_started": 0,
+  "new_training_labels": 0,
+  "no_sha_validation": true,
+  "no_subagents": true,
+  "no_push_merge_services_or_Product_schema_API_permission_Canonical_change": true,
+  "no_new_generalization_or_Host_gain_claimed": true
+}
