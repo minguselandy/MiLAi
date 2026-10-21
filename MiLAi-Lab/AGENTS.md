@@ -1,4 +1,75 @@
-# LATEST V14 (2026-10-22): LEGACY FIT211 LIVE / FEEDBACK COHORTS AND PROTOCOL READY
+# LATEST V15 (2026-10-22): LEGACY FIT262 LIVE / STATE SOURCE REVIEW COMPLETE
+
+Full goal ACTIVE,not complete or blocked. Previous turn completed STATE pilot source-first
+review,typed literal checks,36-request review matrix and whole-train descriptive exposure audit.
+No production code changed/no redundant tests. Revalidate exec42364,parent2089181,child2089186
+plus first-operation-fit-v1/driver.json and fitting/source256-full-seed0-u524-v1/run.json.
+Latest both alive,RUNNING262/524,frozen490c683e unchanged as legacy representation control.
+No second real model job/offline settlement/restart/hot update while alive. Timeouts are
+observations,not terminal. Source queue93727 CLOSED480;never restart. Paused Coalent untouched.
+
+STATE six fixed pilot streams:all59 planned original sources reviewed (38tool+21user),
+92typed JSON-field assertions pass,early/later prefixes equal immutable prepared streams.
+source-first-review-v1.json under state-view-acceptance-preparation-v1 is COMPLETE before
+any NEW real STATE View output. Raw sources/queries/frontiers unchanged,new operation labels0,
+business actions0,real STATE Views0. Review is author evidence judgment,not independent truth.
+Native task/test/environment/judge bodies were not opened;only prepared public train materials.
+
+Key actual distinctions:
+- travel000 early cancellation preview52/298 then actual recorded BK-1000cancelled;BK-1001
+  only last read confirmed,no subsequent independent check. No live guarantee/refund settlement.
+- travel001 early one flight preview;later both flights+hotel explicitly cancelled,recorded
+  refunds828/384/1540(sum2752). Do not leak later trip-wide request into early prefix.
+- support000 initial prefix ALREADY committed defective return999. Later get_order confirms
+  fully_returned/defective999;changed_mind preview rejected. User879breakdown is desired,
+  not applied. Do not repair this contested teacher trajectory into an ideal state.
+- support001 initial returned1299/originalpayment/nofee/label;later ONLY user confirmation,
+  no new tool outcome or secondrefund. Assistant answer prose is absent,so dialogue closure unknown.
+- shopping000 ProBook2.9lb is not lightest;Air2.6,Chromebook2.2 with coursework limitation.
+  Later oneAir cart addition849/gift_wrapfalse,NOT purchase. shopping001 samecart IDs in
+  another episode,oneAir/gift_wrapfalse despite gifting intent. Never merge into quantity2.
+
+Actual get_policies source responses include policy/scoring prose. Preserve as public TRAIN
+tool material,not current system instructions/hidden test oracle/automatic action labels.
+System messages/assistant prose remain excluded;tool-returned policy text is not excluded.
+Whole300streams literal audit:2842tool observations;310get_policies calls in177streams;
+exact 'fails state scoring' phrase55occurrences(customer_support). This is counting only,
+NOT semantic review of all300trajectories. No raw material was rewritten.
+
+IMPORTANT QUALIFICATION of old88/max67 identity diagnostic:88 repeated top-level *_id
+field values include86nonempty+2empty placeholders. Emptyflight_id spans11trajectories;
+emptyvariant_id spans67 and caused the oldmaximum. Maxnonempty sharing59. These are not
+verified objects or a grouping/split algorithm. Nonempty IDs may recur in reset episodes;
+do not merge them or infer statistical independence. Pilot8repeated values include1empty.
+Audit: state-public-train-materials-v1/identity-policy-exposure-audit-v2.json. Oldv1unchanged.
+
+36-request review matrix: state-view-acceptance-preparation-v1/source-review-readiness-v1.json.
+Collector stays frozen074ee79e and original state-view-acceptance-execution-plan-v1.json.
+Actual execution remains NOT_DISPATCHED waiting current job terminal. Review matrix joins
+each request to early/later source contract without fabricated results/refs/actions/labels.
+Later feedback compiler must be frozen-feedback-expansion-2a179b58/.../prepare_retrieval_feedback.py
+with --split train --delivery-only;NO Host readout for given-request probes,answer staysunknown.
+
+Repeated/known stages have no new imported STATE material,NOT zero new Store Sources:
+each public probe query is captured;previous probe queries can appear as later arrivals.
+Separate these from native material updates/pending counts. No automatic ideal cache-hit claim.
+Known condition realized only if actual earlier delivered refs/materials exist;empty/failed
+delivery remains empty/failed,not filled. A ref or View binding is not semantic adequacy.
+Current query already explicitly limits claims to historical observations,not today's live state.
+
+Three canonical new audit phases CPU.122045255 PENDING;v15progress lists exact files.
+Semantic reading/authoring/final report I/O and unmeasured work unknown,not zero. Priorv11-v14
+pending unchanged. Closedsettlementsv1/v2/v3 NEVERappend/re-settle;exclude their phase files
+and all embedded timing copies;oldpending35untouched. Trainer bills its terminal compute once.
+No SHA/subagents/push/merge/services/Product API/permissions/Canonical changes.
+
+Full remaining:finishlegacy524;corrected64/128/256/lowLR/head-only/aux/E3 (v12);STATE36actual
+Views/E2/delivery semantics;factorial8-call prelude/pairs/64cells-per-policy (v13);feedback
+128-source3-collector72batches/labels/nested192fits/T2/common-support (v14);strong simple
+autonomous Host/no-View/lifecyclecost comparisons,protectedexternal,seeds0/1/2+family inference.
+No gain/completion claim. See execution doc and training-generalization-progress-20261022-v15.json.
+
+# V14 HISTORY: LEGACY FIT211 LIVE / FEEDBACK COHORTS AND PROTOCOL READY
 
 Full goal ACTIVE, not complete or blocked. Previous turn made substantive progress:
 feedback source/collector/phase preparation,delivery-only compiler,paired nested subset
