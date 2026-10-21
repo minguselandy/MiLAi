@@ -50,6 +50,7 @@ class EvidenceOperations:
         excluded_source_refs: tuple[str, ...] = (),
         view_capacity: int = 1,
         view_policy: QueryStructurePolicy = "incremental",
+        internal_views: bool = True,
         known_materials: list[dict[str, Any]] | None = None,
         search_pool: Callable[[str, int], list[dict[str, Any]]] | None = None,
         search_batch_sizes: tuple[int, ...] = (8, 16),
@@ -76,12 +77,14 @@ class EvidenceOperations:
         self.searched = False
         self.view_capacity = view_capacity
         self.view_policy = view_policy
+        self.internal_views = internal_views
         self.checkpoint_configuration = {
             "view_capacity": view_capacity, "view_policy": view_policy,
             "search_batch_sizes": list(search_batch_sizes), "max_searches": max_searches,
             "delivery_selection": delivery_selection,
             "source_observation_tokens": (source_observation.max_tokens
                                           if source_observation else None),
+            **({"internal_views": False} if not internal_views else {}),
         }
         if checkpoint is not None:
             self.restore_checkpoint(checkpoint, source_observation)
@@ -91,7 +94,7 @@ class EvidenceOperations:
         self.history_pages: dict[str, dict[str, Any]] = {}
         self.observed_source_attempts: set[tuple[str, int, int]] = set()
         self.visibility_epoch = service.forget_epoch
-        self.views = cached_structures(service, view_capacity)
+        self.views = cached_structures(service, view_capacity) if internal_views else {}
         started = time.perf_counter()
         cursors = [v["arrival_cursor"][0] for v in self.views.values() if v["arrival_cursor"]]
         since = min(cursors) if cursors else None
@@ -372,7 +375,7 @@ class EvidenceOperations:
                         f"candidate {i} stored-version directory", {"index": i,
                             "history_directory": True,
                             "cursor": page["next_cursor"] if page else None}))
-        for slot in structure_slots(self.view_capacity):
+        for slot in (structure_slots(self.view_capacity) if self.internal_views else []):
             view = self.views.get(slot)
             meta = next((v for v in state.views if v["slot"] == slot), None)
             suffix = "" if self.view_capacity == 1 else "_" + slot
@@ -389,7 +392,7 @@ class EvidenceOperations:
                 actions.append(MemoryAction("refresh_view" + suffix, "REFRESH_VIEW",
                     view["id"] if view else "current source scope",
                     {"source_refs": list(refs), "slot": slot}))
-        if self.view_capacity > 1:
+        if self.internal_views and self.view_capacity > 1:
             refs = tuple(sorted(set(self.source_refs()) or {
                 event["source_ref"] for event in state.new_events}))
             duplicate = any(v.get("built_for") == state.task["request"]
@@ -497,6 +500,11 @@ class EvidenceOperations:
             k: item[k] for k in ("revision", "version_view", "control_pool_rank",
                                 "control_pool_selected", "control_dense_score") if k in item}}
 
+    def internal_pool(self, items: list[dict[str, Any]]) -> list[dict[str, Any]]:
+        """Disable internally retrieved derivations; explicit caller-known material stays intact."""
+        return items if self.internal_views else [item for item in items if item["kind"] not in {
+            "query_structure", "semantic_view", "stored_revision"}]
+
     def execute(self, action: MemoryAction, state: MemoryControlState) -> dict[str, Any]:
         if action.kind == "HANDOFF":
             selected = {i: self.observed[i] for i in action.parameters["delivery_indices"]}
@@ -508,7 +516,7 @@ class EvidenceOperations:
                     "delivery_indices": list(selected)}
         if action.kind == "SEARCH":
             if self.search_pool is None:
-                self.materials = self.load_pool()
+                self.materials = self.internal_pool(self.load_pool())
             else:
                 parameters = action.parameters
                 if "query_from" not in parameters:
@@ -524,7 +532,7 @@ class EvidenceOperations:
                     query = material["index_text"]
                 limit = parameters["limit"]
                 self.search_attempts.add((query, limit))
-                found = self.search_pool(query, limit)
+                found = self.internal_pool(self.search_pool(query, limit))
                 # Preserve the indices of earlier observations as the actual pool grows.
                 def identity(item: dict[str, Any]) -> tuple[Any, ...]:
                     return (item["kind"], item.get("id", item.get("record_id")),
@@ -615,13 +623,13 @@ class EvidenceOperations:
                     "status": ("observed" if observing else "opened" if delivered
                                else "material_budget_exhausted"),
                     "index": i, "visibility": item.get("visibility")}
-        if action.kind == "USE_VIEW":
+        if action.kind == "USE_VIEW" and self.internal_views:
             slot = action.parameters.get("slot", "current")
             item = self.view_observation(state)[slot]
             self.used.add(slot)
             if self.view_capacity > 1:
                 touch_structure(self.service, slot)
-        elif action.kind == "REFRESH_VIEW":
+        elif action.kind == "REFRESH_VIEW" and self.internal_views:
             refs = tuple(action.parameters["source_refs"])
             slot = action.parameters.get("slot", "current")
             replace = action.parameters.get("new_scope", False)

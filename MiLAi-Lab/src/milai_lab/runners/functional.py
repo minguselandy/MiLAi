@@ -2882,6 +2882,7 @@ def message(
                     memory_options["control_view_capacity"] = control.get("view_capacity", 1)
                     memory_options["control_view_policy"] = control.get(
                         "view_policy", "incremental")
+                    memory_options["control_internal_views"] = control.get("internal_views", True)
                     if settings.get("retrieval_tool"):
                         memory_options["control_delivery_selection"] = control.get(
                             "delivery_selection", False)

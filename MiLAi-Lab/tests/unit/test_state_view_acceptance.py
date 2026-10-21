@@ -49,6 +49,39 @@ def test_no_new_tool_frontier_remains_a_control_not_a_fabricated_object_update()
     assert [s["role"] for s in history["requests"][3]["incoming_sources"]] == ["user"]
 
 
+def test_preparer_binds_source_metadata_to_supported_interface_from_legacy_base(
+    tmp_path, monkeypatch,
+):
+    import httpx
+    from test_given_retrieval import no_http, prepared_given
+
+    from milai_lab.runners.functional import prepare
+    from prepare_state_view_acceptance import main
+
+    prepared_given(tmp_path)
+    legacy = read_json(tmp_path / "settings.json")
+    legacy.pop("edit_interface_version")
+    legacy.pop("edit_features", None)
+    base = tmp_path / "legacy.json"
+    write_json(base, {"entrypoints": {"functional": legacy}})
+    original = base.read_bytes()
+    materials = tmp_path / "materials"
+    materials.mkdir()
+    stream = training_stream(conversation(), "travel", 0)
+    (materials / "streams.jsonl").write_text(json.dumps(stream) + "\n")
+    write_json(materials / "pilot-selection.json", {"stream_ids": [stream["id"]]})
+    output = tmp_path / "prepared"
+    monkeypatch.setattr(sys, "argv", ["prepare", str(materials), str(base), str(output)])
+    monkeypatch.setattr(httpx.Client, "send", no_http)
+    main()
+    settings = read_json(output / "config.json")["entrypoints"]["functional"]
+    assert settings["edit_interface_version"] == "I2"
+    assert settings["edit_features"] == {"source_metadata": True}
+    assert base.read_bytes() == original
+    frozen = prepare(tmp_path / "runtime", output / "config.json", source_version="mechanical")
+    assert frozen["config"]["edit_interface_version"] == "I2"
+
+
 def test_existing_runner_binds_actual_receipts_and_restores_a_real_post_view_snapshot(
     tmp_path, monkeypatch,
 ):

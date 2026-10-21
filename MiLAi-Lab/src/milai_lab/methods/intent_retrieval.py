@@ -198,6 +198,7 @@ class IntentRetrievalMemory(FunctionalEditMemory):
     def retrieve(self, config: RunnableConfig, call_id: str,
                  request: RetrievalRequest) -> dict[str, Any]:
         bound = self._binding(config)
+        # Existing receipts retain ordinary call replay/known-evidence semantics.
         key = "retrieval:" + reference_key([bound["session"], bound["message_id"], call_id])
         def observe(event: dict[str, Any]) -> None:
             if self.retrieval_observer is not None:
@@ -269,8 +270,9 @@ class IntentRetrievalMemory(FunctionalEditMemory):
         def search_pool(query: str, limit: int) -> list[dict[str, Any]]:
             native = self.service.search_sources(query, limit=min(limit, self.source_top_k),
                 excluded_source_refs=(bound["source_ref"],), tokenization=self.source_tokenization)
-            records = self.service.search(query, limit=min(limit, self.semantic_top_k),
-                                          include_raw=False)["records"]
+            records = (self.service.search(query, limit=min(limit, self.semantic_top_k),
+                                           include_raw=False)["records"]
+                       if self.control_internal_views else [])
             materials = build_evidence_packs(self.service, request.query,
                 request.task_context.as_of or "", native["source_materials"], records,
                 tokenization=self.source_tokenization)
@@ -307,6 +309,7 @@ class IntentRetrievalMemory(FunctionalEditMemory):
             excluded_source_refs=(bound["source_ref"],),
             known_materials=known,
             view_capacity=self.control_view_capacity, view_policy=self.control_view_policy,
+            internal_views=self.control_internal_views,
             source_observation=self.control_source_observation,
             delivery_selection=self.control_delivery_selection,
             checkpoint=checkpoint["operations"] if checkpoint else None)

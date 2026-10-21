@@ -145,6 +145,7 @@ class FunctionalEditMemory(FunctionalMemory):
         control_source_observation_tokens: int | None = None,
         control_view_capacity: int = 1,
         control_view_policy: QueryStructurePolicy = "incremental",
+        control_internal_views: bool = True,
         control_rank_pool: (Callable[[str, list[dict[str, Any]]],
                                      list[dict[str, Any]]] | None) = None,
         control_record: Callable[[dict[str, Any]], None] = lambda event: None,
@@ -181,12 +182,15 @@ class FunctionalEditMemory(FunctionalMemory):
             if control_source_observation_tokens is not None else None)
         self.control_view_capacity = control_view_capacity
         self.control_view_policy = control_view_policy
+        self.control_internal_views = control_internal_views
         self.control_rank_pool = control_rank_pool
         self.control_record = control_record
         self.control_available = control_available
         self.control_handed_off = False
         if control_policy is not None:
             self.policy["memory_control"] = type(control_policy).__name__
+        if not control_internal_views:
+            self.policy["internal_views"] = False
         if dependency_reading:
             if evidence_policy != "question_pack_v1" or dependency_read_call is None:
                 raise ValueError("FUNCTIONAL_DEPENDENCY_READING_REQUIRES_PACKS_AND_CALLER")
@@ -222,14 +226,16 @@ class FunctionalEditMemory(FunctionalMemory):
 
         bound = self._binding(config)
         key = "evidence-pool:" + reference_key([
-            bound["session"], bound["message_id"], self.forget_epoch])
+            bound["session"], bound["message_id"], self.forget_epoch,
+            *([] if self.control_internal_views else ["no_internal_views"])])
         stored = self.service.store.get(namespace(self.service), key)
+        dependencies = self.dependency_reading and self.control_internal_views
         basis = (sorted([row["id"], row["value"]["revision"]]
                         for row in self.service.records() if row["ok"])
-                 if self.dependency_reading else None)
+                 if dependencies else None)
         # Compare actual visible revisions using JSON-stable pairs,
         # not wall time or a digest, and never reuse old indices after rebuilding.
-        if stored is not None and (not self.dependency_reading
+        if stored is not None and (not dependencies
                                    or stored.value.get("record_basis") == basis):
             state = stored.value
             if "materials" in state:
@@ -247,13 +253,14 @@ class FunctionalEditMemory(FunctionalMemory):
                 tokenization=self.source_tokenization, include_scope=True)
             # Current semantic revisions may legitimately use this message's newly
             # committed update; excluding the query from raw history must not hide it.
-            records = self.service.search(query, limit=self.semantic_top_k,
-                                          include_raw=False)["records"]
-            if self.features.cross_record_dependencies:
+            records = (self.service.search(query, limit=self.semantic_top_k,
+                                           include_raw=False)["records"]
+                       if self.control_internal_views else [])
+            if self.control_internal_views and self.features.cross_record_dependencies:
                 from milai_lab.memory.external_support import dependent_record_candidates
 
                 records = dependent_record_candidates(self.service, records)
-        if self.dependency_reading:
+        if dependencies:
             state = {"binding": bound, "query": query, "native": native, "records": records,
                      "record_basis": basis,
                      "pool_generation": stored.value["pool_generation"] + 1 if stored else 0}
@@ -470,7 +477,8 @@ class FunctionalEditMemory(FunctionalMemory):
             assert self.dependency_read_call is not None
             return self.dependency_read_call("query_structure", messages, schema)
 
-        key = "dynamic-control:" + reference_key([bound["session"], bound["message_id"]])
+        key = "dynamic-control:" + reference_key([bound["session"], bound["message_id"],
+            *([] if self.control_internal_views else ["no_internal_views"])])
         stored = self.service.store.get(namespace(self.service), key)
         if stored is None:
             self.service.store.put(namespace(self.service), key, {"status": "started"}, index=False)
@@ -487,6 +495,7 @@ class FunctionalEditMemory(FunctionalMemory):
                     <= self.material_limit,
                 excluded_source_refs=(bound["source_ref"],),
                 view_capacity=self.control_view_capacity, view_policy=self.control_view_policy,
+                internal_views=self.control_internal_views,
                 source_observation=self.control_source_observation)
             memory = self
 

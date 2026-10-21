@@ -22,7 +22,8 @@ def main() -> None:
     histories = [view_acceptance_history(streams[key]) for key in selection["stream_ids"]]
     config = read_json(args.config)
     settings = config["entrypoints"]["functional"]
-    settings["config_version"] = "generalization-state-view-acceptance-v1"
+    settings["config_version"] = "generalization-state-view-acceptance-v2"
+    settings["edit_interface_version"] = "I2"
     settings["retrieval_tool"] = "rich"
     settings["host_source_arrivals"] = True
     settings["edit_features"] = {**settings.get("edit_features", {}), "source_metadata": True}
