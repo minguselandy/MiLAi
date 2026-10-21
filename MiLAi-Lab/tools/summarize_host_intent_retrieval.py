@@ -33,6 +33,7 @@ def summarize(roots: list[Path], reviews: list[dict[str, Any]]) -> dict[str, Any
     rows, runs = [], []
     stages: dict[str, Counter[str]] = defaultdict(Counter)
     local: dict[str, Counter[str]] = defaultdict(Counter)
+    compute: dict[str, Counter[str]] = defaultdict(Counter)
     for root in roots:
         driver = read_json(root / "driver.json")
         if driver["status"] == "RUNNING":
@@ -44,7 +45,14 @@ def summarize(roots: list[Path], reviews: list[dict[str, Any]]) -> dict[str, Any
             "transport": driver["transport"], "wall_seconds": driver["wall_seconds"],
             "generation": {k: after["generation"][k] - before["generation"][k]
                            for k in after["generation"]},
+            "embedding": {k: after["embedding"][k] - before["embedding"][k]
+                          for k in after["embedding"]},
             "generation_requests": after["generation_requests"] - before["generation_requests"]})
+        for name, metrics in after.get("compute", {}).items():
+            delta = {k: v - before.get("compute", {}).get(name, {}).get(k, 0)
+                     for k, v in metrics.items()}
+            if any(delta.values()):
+                compute[name].update(delta)
         for name in ("dynamic_memory_laya", "dynamic_memory_laya_load"):
             local[name].update({k: v - before.get("compute", {}).get(name, {}).get(k, 0)
                 for k, v in after.get("compute", {}).get(name, {}).items()})
@@ -72,6 +80,8 @@ def summarize(roots: list[Path], reviews: list[dict[str, Any]]) -> dict[str, Any
                            if message.get("type") == "human"), default=-1)
             tools = [m for m in messages[current + 1:]
                      if m.get("type") == "tool" and m.get("name") == "milai_retrieve"]
+            requested = [call for m in messages[current + 1:] if m.get("type") == "ai"
+                         for call in m.get("tool_calls", []) if call["name"] == "milai_retrieve"]
             row_stages: dict[str, Counter[str]] = defaultdict(Counter)
             for event in events:
                 if event.get("event") != "vllm_response":
@@ -81,7 +91,7 @@ def summarize(roots: list[Path], reviews: list[dict[str, Any]]) -> dict[str, Any
                     target[stage].update(requests=1, tokens=event["usage"]["total_tokens"],
                                          http_wall_seconds=event["wall_seconds"])
             rows.append({**position, "review": reviewed[key], "result_path": str(path),
-                "tool_attempts": len(tools),
+                "tool_attempts": len(requested), "tool_returns": len(tools),
                 "tool_rejections": sum(t.get("status") == "error" for t in tools),
                 "executed_retrievals": len(deliveries),
                 "empty_returns": sum(not e["result"]["evidence"] for e in deliveries),
@@ -104,6 +114,7 @@ def summarize(roots: list[Path], reviews: list[dict[str, Any]]) -> dict[str, Any
               for profile in sorted({row.get("profile", row["policy"]) for row in rows})}
     return {"schema": "host_intent_closed_results_v1", "runs": runs, "positions": rows,
             "grades": counts, "stages": dict(stages), "local_model": dict(local),
+            "local_compute": dict(compute),
             "known_generation_tokens": tokens, "model_outcomes_rewritten": False,
             "semantic_review_kind": "author_source_review_not_independent_judgment",
             "cost_note": "Stage HTTP wall is nested inside retrieval/message wall; "
