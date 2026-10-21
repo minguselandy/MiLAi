@@ -30,8 +30,10 @@ class CoalentGenerationProvider:
     """
 
     def __init__(self, client: VLLMClient, *, admit: Callable[[], None],
-                 record: Callable[[dict[str, Any]], None]) -> None:
+                 record: Callable[[dict[str, Any]], None],
+                 enable_thinking: bool | None = None) -> None:
         self.client, self.admit, self.record = client, admit, record
+        self.enable_thinking = enable_thinking
 
     def generate(self, *, model: str, system: str, user: str, max_tokens: int,
                  temperature: float) -> Any:
@@ -44,6 +46,8 @@ class CoalentGenerationProvider:
         thinking = (self.client.config.enable_thinking
                     if self.client.config.enable_thinking is not None else
                     self.client.capacity.enable_thinking if self.client.capacity else None)
+        if self.enable_thinking is not None:
+            thinking = self.enable_thinking
         if thinking is not None:
             request["chat_template_kwargs"] = {"enable_thinking": thinking}
         receipt = self.client.native_post("chat/completions", request)

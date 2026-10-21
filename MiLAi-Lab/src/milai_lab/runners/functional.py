@@ -1244,7 +1244,7 @@ def request_mode(
             and "business_operations" not in value)
         operations = value.get("business_operations") if isinstance(value, dict) else None
         if application_workflow is not None:
-            from jsonschema.exceptions import ValidationError  # type: ignore[import-untyped]
+            from jsonschema.exceptions import ValidationError
 
             if not isinstance(value, dict) or "application_requests" not in value:
                 return False
@@ -2799,7 +2799,8 @@ def message(
                     contract=settings.get("support_review_contract", "legacy"))
 
             edit_arm = FUNCTIONAL_ARMS.get(settings.get("memory_method", "functional_v1"))
-            memory_class = FunctionalEditMemory if edit_arm is not None else FunctionalMemory
+            memory_class: type[FunctionalMemory] = (
+                FunctionalEditMemory if edit_arm is not None else FunctionalMemory)
             memory_options: dict[str, Any] = {}
             if settings.get("retrieval_tool"):
                 from milai_lab.methods.intent_retrieval import IntentRetrievalMemory
@@ -2843,12 +2844,32 @@ def message(
                     from milai_lab.runners.memory_control import dense_control_pool, memory_policy
 
                     control = settings["memory_control"]
-                    memory_options["control_policy"] = memory_policy(
-                        control_policy_override if control_policy_override is not None else control,
-                        budget,
-                        call=dependency_read_call,
-                        admit=lambda: model.reserve_external_request("memory_control"),
-                        record=trace, models=control_models)
+                    if control["policy"] == "coalent":
+                        from milai_lab.baselines.coalent_memory import CoalentRetrievalMemory
+                        from milai_lab.runners.coalent_memory import coalent_factory
+
+                        if retriever is None or not settings.get("retrieval_tool"):
+                            raise ValueError("COALENT_REQUIRES_RETRIEVAL_TOOL_AND_EMBEDDINGS")
+                        memory_class = CoalentRetrievalMemory
+                        thinking = settings.get("stage_enable_thinking", {}).get("query_structure")
+                        coalent_embeddings = retriever.embeddings
+
+                        def build_coalent(retriever_port: Any, persistence: Any) -> Any:
+                            # The Host model is bound below after memory construction.
+                            return coalent_factory(control, model, coalent_embeddings, trace,
+                                enable_thinking=thinking)(retriever_port, persistence)
+
+                        memory_options["coalent_factory"] = build_coalent
+                        memory_options["coalent_settings"] = {
+                            **control, "synthesis_thinking": thinking, "retries": 0}
+                    else:
+                        memory_options["control_policy"] = memory_policy(
+                            control_policy_override
+                            if control_policy_override is not None else control,
+                            budget,
+                            call=dependency_read_call,
+                            admit=lambda: model.reserve_external_request("memory_control"),
+                            record=trace, models=control_models)
                     memory_options["control_steps"] = control.get("max_control_steps", 8)
                     memory_options["control_source_observation_tokens"] = control.get(
                         "source_observation_tokens")
