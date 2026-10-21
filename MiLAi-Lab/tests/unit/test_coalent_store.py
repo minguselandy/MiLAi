@@ -25,7 +25,7 @@ def service_at(store, tmp_path, owner="alice"):
                          functional_contract="functional_v1")
 
 
-def make_cache(coalent, service, search, events, synth_calls):
+def make_cache(coalent, service, search, events, synth_calls, *, artifact_scope="source"):
     def embed(text):
         words = {"alpha", "beta"}
         return [float(word in text.lower()) for word in sorted(words)]
@@ -37,7 +37,8 @@ def make_cache(coalent, service, search, events, synth_calls):
                 json.loads(c.text)["content"] for c in chunks]}, used=list(range(len(chunks))))
 
     persistence = StoreCognitionStore(service)
-    cache = coalent.SemanticCache(SourceRetriever(service, search, events.append), Synthesizer(),
+    cache = coalent.SemanticCache(SourceRetriever(service, search, events.append,
+                                                 artifact_scope=artifact_scope), Synthesizer(),
         embedder=coalent.FunctionEmbedder(embed), store=persistence,
         pool_header=lambda unit: "[sources " + ",".join(unit.provenance.artifact_ids()) + "]")
     return cache, persistence
@@ -72,7 +73,8 @@ def test_source_port_keeps_roles_clocks_and_exact_search_scope(tmp_path, coalent
         assert unselected not in events[0]["requested_source_refs"] and calls == [("alpha", "n")]
 
 
-def test_cache_survives_real_store_reopen_and_forget_invalidates(tmp_path, coalent):
+@pytest.mark.parametrize("artifact_scope", ["source", "session"])
+def test_cache_survives_real_store_reopen_and_forget_invalidates(tmp_path, coalent, artifact_scope):
     database = str(tmp_path / "bank.sqlite")
     events, synth_calls, search_calls = [], [], []
     with SqliteStore.from_conn_string(database) as store:
@@ -81,14 +83,18 @@ def test_cache_survives_real_store_reopen_and_forget_invalidates(tmp_path, coale
         def search(query, namespace):
             search_calls.append(query)
             return [ref]
-        cache, persistence = make_cache(coalent, service, search, events, synth_calls)
+        cache, persistence = make_cache(coalent, service, search, events, synth_calls,
+                                              artifact_scope=artifact_scope)
         assert "alpha report" in json.dumps(cache.get("alpha").context)
         assert len(persistence) == 1
         unit_id = persistence.all()[0].id
-        assert persistence.get(unit_id).provenance.source_spans[0].artifact_id == ref
+        span = persistence.get(unit_id).provenance.source_spans[0]
+        assert persistence.source_bindings(span.artifact_id, span.version) == [
+            {"source_ref": ref, "source_revision": 1}]
     with SqliteStore.from_conn_string(database) as store:
         service = service_at(store, tmp_path)
-        cache, persistence = make_cache(coalent, service, search, events, synth_calls)
+        cache, persistence = make_cache(coalent, service, search, events, synth_calls,
+                                              artifact_scope=artifact_scope)
         sync = persistence.sync_sources(cache)
         assert not sync["changes"][0]["invalidation"]["dirtied"]
         assert "alpha report" in json.dumps(cache.get("alpha").context)
@@ -113,7 +119,7 @@ def test_new_unbound_source_is_retrievable_without_global_invalidation(tmp_path,
         beta = service.capture_user("history", "2", "beta report")["source_ref"]
         refs["beta"] = beta
         sync = persistence.sync_sources(cache)
-        assert sync["bound_sources_enumerated"] == 1
+        assert sync["bound_artifacts_enumerated"] == 1
         assert not sync["changes"][0]["invalidation"]["dirtied"]
         result = cache.get("beta")
         assert beta in result.sources and "beta report" in json.dumps(result.context)
@@ -207,3 +213,58 @@ def test_embedding_port_uses_existing_capacity_batching_and_meter(tmp_path, coal
     assert [r["input"] for r in requests] == [["alpha"], ["beta", "alpha"]]
     assert budget.state["embedding"]["known_tokens"] == 3
     assert budget.state["generation_requests"] == 0
+
+
+def test_session_artifacts_keep_all_message_chunks_and_native_revision_bindings(tmp_path, coalent):
+    with SqliteStore.from_conn_string(str(tmp_path / "bank.sqlite")) as store:
+        service = service_at(store, tmp_path)
+        refs = [service.capture_user("history", str(i), f"alpha fact {i}")["source_ref"]
+                for i in range(4)]
+        calls, events = [], []
+        class Synth:
+            def synthesize(self, query, chunks):
+                calls.append(chunks)
+                return coalent.Synthesis(
+                    {"claims": [json.loads(c.text)["content"] for c in chunks]},
+                    used=list(range(len(chunks))))
+        persistence = StoreCognitionStore(service)
+        retriever = SourceRetriever(service, lambda q, ns: refs, events.append,
+                                    artifact_scope="session")
+        cache = coalent.SemanticCache(retriever, Synth(), store=persistence,
+            embedder=coalent.FunctionEmbedder(lambda _: [1., 0.]),
+            pool_header=lambda _: "[history]")
+        cache.get("alpha")
+        assert len(calls) == 1 and len(calls[0]) == 4
+        assert [json.loads(c.text)["source_ref"] for c in calls[0]] == refs
+        assert len({c.artifact_id for c in calls[0]}) == 1
+        unit = persistence.all()[0]
+        span = unit.provenance.source_spans[0]
+        old_version = span.version
+        assert [x["source_ref"] for x in persistence.source_bindings(span.artifact_id,
+                                                                  old_version)] == refs
+        live = service.capture_user("history", "live", "alpha current question")["source_ref"]
+        unchanged = persistence.sync_sources(cache, excluded_source_refs=(live,))
+        assert not unchanged["changes"][0]["invalidation"]["dirtied"]
+        service.capture_user("unrelated", "1", "beta independent source")
+        unchanged = persistence.sync_sources(cache, excluded_source_refs=(live,))
+        assert not unchanged["changes"][0]["invalidation"]["dirtied"]
+        addition = service.capture_user("history", "next", "alpha later correction")["source_ref"]
+        refs.append(addition)
+        changed = persistence.sync_sources(cache, excluded_source_refs=(live,))
+        assert changed["changes"][0]["invalidation"]["dirtied"]
+        cache.get("alpha")
+        assert len(calls) == 2 and len(calls[-1]) == 5
+        current = persistence.all()[0].provenance.source_spans[0]
+        assert current.version != old_version
+        assert len(persistence.source_bindings(span.artifact_id, old_version)) == 4
+        assert len(persistence.source_bindings(span.artifact_id, current.version)) == 5
+        # Partial revocation changes the document version and excludes the hidden body.
+        fragment = service.source_fragment_range(refs[1], 0, len("alpha fact 1"))["fragment_handle"]
+        service.forget("history", "forget-one", fragment_handles=[fragment])
+        assert persistence.sync_sources(cache, excluded_source_refs=(live,))["changes"][0][
+            "invalidation"]["dirtied"]
+        result = cache.get("alpha")
+        assert "alpha fact 1" not in result.raw_text
+        latest = persistence.all()[0].provenance.source_spans[0]
+        assert refs[1] not in [x["source_ref"] for x in persistence.source_bindings(
+            latest.artifact_id, latest.version)]

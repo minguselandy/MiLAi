@@ -16,6 +16,7 @@ from milai_lab.memory.functional_state import (
     canonical,
     namespace,
     note_exposure,
+    reference_key,
 )
 from milai_lab.memory.retrieval_request import RetrievalRequest
 from milai_lab.methods.evidence_reading import project_packs
@@ -38,7 +39,9 @@ class CoalentRetrievalMemory(IntentRetrievalMemory):
         if self.replay_initial_observation is not None or self.control_intervention is not None:
             raise ValueError("COALENT_FINITE_ACTION_REPLAY_UNSUPPORTED")
         self.coalent_factory = coalent_factory
-        self.policy["coalent"] = canonical(coalent_settings)
+        self.coalent_artifact_scope = coalent_settings.get("source_artifact_scope", "session")
+        self.policy["coalent"] = canonical({**coalent_settings,
+                                            "source_artifact_scope": self.coalent_artifact_scope})
 
     def _execute_retrieval(self, config: RunnableConfig, call_id: str,
                            request: RetrievalRequest, key: str,
@@ -101,25 +104,34 @@ class CoalentRetrievalMemory(IntentRetrievalMemory):
         def run_cache() -> dict[str, Any]:
             nonlocal rejections
             persistence = StoreCognitionStore(self.service)
-            cache = self.coalent_factory(SourceRetriever(self.service, search, self.control_record),
+            cache = self.coalent_factory(SourceRetriever(self.service, search, self.control_record,
+                artifact_scope=self.coalent_artifact_scope),
                                          persistence)
-            sync = persistence.sync_sources(cache)
-            exposed.update(row["source_ref"] for row in sync["changes"])
+            sync = persistence.sync_sources(cache, excluded_source_refs=(bound["source_ref"],))
+            exposed.update(sync["checked_source_refs"])
             self.control_record({"event": "coalent_source_sync", **sync})
             # Literal public request and actual known receipts retain rich information.
             # No task labels, hidden requirements or source-family identifiers are added.
             query = canonical({"request": request.project(),
                                "known_evidence": project_packs(known, list(range(len(known))))})
-            result = cache.get(query)
+            result = cache.get(query, namespace=self.coalent_artifact_scope)
             units = {claim.unit_id: persistence.get(claim.unit_id) for claim in result.pool}
-            source_refs = list(dict.fromkeys(
-                span.artifact_id for unit in units.values()
-                for span in unit.provenance.source_spans))
+            bindings_by_unit = {}
+            for uid, unit in units.items():
+                bindings = {}
+                for span in unit.provenance.source_spans:
+                    for binding in persistence.source_bindings(span.artifact_id, span.version):
+                        bindings[binding["source_ref"], binding["source_revision"]] = binding
+                bindings_by_unit[uid] = list(bindings.values())
+            source_refs = list(dict.fromkeys(binding["source_ref"]
+                for bindings in bindings_by_unit.values() for binding in bindings))
             exposed.update(source_refs)
             goal = normalize_read_goal(request.read_goal)
             originals = isinstance(goal, dict) and "original_source" in goal.get("evidence", [])
+            raw_artifacts = dict.fromkeys((c.artifact_id, c.version) for c in result.evidence)
             raw_refs = list(dict.fromkeys([
-                *(c.artifact_id for c in result.evidence), *source_refs]))
+                *(binding["source_ref"] for artifact, version in raw_artifacts
+                  for binding in persistence.source_bindings(artifact, version)), *source_refs]))
             max_rejections = len(result.pool) + len(raw_refs)
             materials: list[dict[str, Any]] = []
             if not originals:
@@ -139,12 +151,10 @@ class CoalentRetrievalMemory(IntentRetrievalMemory):
                     bindings = candidate["source_bindings"]
                     aliases = {value["source_ref"]: name for name, value in bindings.items()}
                     evidence = []
-                    for span in units[claim.unit_id].provenance.source_spans:
-                        alias = aliases.setdefault(span.artifact_id, f"e{len(aliases)}")
-                        bindings[alias] = {"source_ref": span.artifact_id,
-                                           "source_revision": int(span.version),
-                                           "unit_metadata": copy.deepcopy(
-                                               units[claim.unit_id].source_meta)}
+                    for binding in bindings_by_unit[claim.unit_id]:
+                        alias = aliases.setdefault(binding["source_ref"], f"e{len(aliases)}")
+                        bindings[alias] = {**binding, "unit_metadata": copy.deepcopy(
+                            units[claim.unit_id].source_meta)}
                         evidence.append(alias)
                     candidate["structure"]["nodes"][f"n{len(view['structure']['nodes'])}"] = {
                         "text": claim.claim, "kind": "inferred", "evidence": evidence}
@@ -157,16 +167,18 @@ class CoalentRetrievalMemory(IntentRetrievalMemory):
             if originals or result.escalated:
                 refs = raw_refs
                 def read_originals() -> dict[str, Any]:
-                    packs = []
+                    grouped: dict[str, list[dict[str, Any]]] = {}
                     for ref in refs:
                         source = self.service.source(ref)
-                        if source is None:
-                            continue
-                        packs.append({"kind": "original_source", "id": ref,
-                            "session_id": source["session"], "turn_range": [0, 1],
-                            "source_ranges": [{"source_ref": ref,
+                        if source is not None:
+                            grouped.setdefault(source["session"], []).append({
+                                "source_ref": ref,
                                 "source_revision": source.get("source_revision", 1),
-                                "start": 0, "end": len(body_text(source))}]})
+                                "start": 0, "end": len(body_text(source))})
+                    packs = [{"kind": "original_source",
+                              "id": reference_key(["coalent_originals", session]),
+                              "session_id": session, "turn_range": [0, len(spans)],
+                              "source_ranges": spans} for session, spans in grouped.items()]
                     exposed.update(refs)
                     return {"ok": True, "materials": self.service.read_source_materials(packs)}
                 receipt = admitted("original_read", read_originals)
@@ -182,7 +194,8 @@ class CoalentRetrievalMemory(IntentRetrievalMemory):
                 "escalated": result.escalated, "upstream_pool": [
                     {"claim": c.claim, "unit_id": c.unit_id, "score": c.score}
                     for c in result.pool],
-                "raw_source_refs": [c.artifact_id for c in result.evidence],
+                "raw_source_refs": raw_refs,
+                "raw_artifacts": list(raw_artifacts),
                 "stats": cache.stats(), "usage": usage()})
             return {"ok": True, "materials": materials}
 
