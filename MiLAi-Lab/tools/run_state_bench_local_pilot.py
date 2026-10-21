@@ -1,4 +1,4 @@
-"""One training-side STATE research run with the existing local Host and MiLAi.
+"""One explicitly selected STATE research run with the existing local Host and MiLAi.
 
 Uses the public orchestrator directly, not the official CLI/protocol or its hash
 validation. Domain tools/prompts remain upstream; local Host/simulator, JSON-action
@@ -12,22 +12,30 @@ import os
 import resource
 import sys
 import time
+from collections.abc import Callable
 from contextlib import ExitStack
 from dataclasses import asdict
 from pathlib import Path
 from typing import Any
 
+from langchain_core.embeddings import Embeddings
 from langchain_core.messages import HumanMessage, SystemMessage
 
 from milai_lab.baselines.langmem_sqlite_store import TransactionalSqliteStore
 from milai_lab.harness.artifact_io import read_json, write_json
-from milai_lab.harness.contextual_artifacts import Trace, http_budget_scope
+from milai_lab.harness.contextual_artifacts import RunBudget, Trace, http_budget_scope
 from milai_lab.memory.service import MemoryService
 from milai_lab.methods.intent_retrieval import IntentRetrievalMemory
-from milai_lab.methods.memory_control import FixedContextMemoryPolicy, FixedMemoryPolicy
+from milai_lab.methods.memory_control import (
+    FixedContextMemoryPolicy,
+    FixedMemoryPolicy,
+    MemoryPolicy,
+    PursuitMemoryPolicy,
+)
 from milai_lab.providers.chat_bridge import VLLMChatModel
 from milai_lab.providers.contextual_capacity import HostCapacity
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
+from milai_lab.providers.embedding_capacity import MeteredEmbeddings
 from milai_lab.runners.functional import seed_sources
 from milai_lab.runners.state_bench_adapter import (
     StateMemoryHook,
@@ -52,14 +60,46 @@ class LocalSimulator:
         return str(result.content)
 
 
+def build_retrieval(service: MemoryService, token_count: Callable[[str], int],
+                    settings: dict[str, Any], policy_name: str, budget: RunBudget,
+                    record: Callable[[dict[str, Any]], None], *,
+                    embeddings: Embeddings | None = None) -> IntentRetrievalMemory:
+    """Use the existing ordinary/whole-context/selected-pool paths in the STATE hook."""
+    control = settings.get("memory_control", {})
+    reads = control.get("reads", 4)
+    rank_pool = None
+    policy: MemoryPolicy
+    if policy_name == "mempursuit":
+        from milai_lab.baselines.mempursuit import MemPursuitPool
+
+        if embeddings is None:
+            raise ValueError("STATE_MEMPURSUIT_REQUIRES_METERED_EMBEDDINGS")
+        rank_pool = MemPursuitPool(embeddings, budget, selected_limit=reads,
+            adaptive=control.get("pursuit_adaptive", True), record=record)
+        policy = PursuitMemoryPolicy()
+    else:
+        factories: dict[str, Callable[[int], MemoryPolicy]] = {
+            "fixed_context": FixedContextMemoryPolicy, "fixed": FixedMemoryPolicy}
+        policy = factories[policy_name](reads)
+    return IntentRetrievalMemory(service, token_count,
+        material_limit=settings["ordinary_material_tokens"],
+        read_limit=settings["additional_reads"], source_access="independent_v1",
+        source_tokenization="unicode_v1", evidence_policy="question_pack_v1",
+        source_top_k=settings["source_top_k"], semantic_top_k=settings["semantic_top_k"],
+        control_policy=policy, control_steps=control.get("max_control_steps", 8),
+        control_rank_pool=rank_pool, control_delivery_selection=True, control_record=record)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("config", type=Path)
     parser.add_argument("preparation", type=Path)
     parser.add_argument("output", type=Path)
     parser.add_argument("--source-version", required=True)
-    parser.add_argument("--policy", choices=("fixed_context", "fixed"), default="fixed_context",
-                        help="Existing whole-context or ordinary-pack baseline for this pilot")
+    parser.add_argument("--policy", choices=("fixed_context", "fixed", "mempursuit"),
+                        default="fixed_context", help="Existing raw-evidence retrieval policy")
+    parser.add_argument("--split", choices=("train", "test"), default="train",
+                        help="Declared selection split; task membership is checked before loading")
     parser.add_argument("--compute-phase",
                         default="host_intent_view_v4_state_local_travel_pilot_v1",
                         help="Distinct phase in the original ledger for each declared experiment")
@@ -78,8 +118,9 @@ def main() -> None:
     source = Path(selection["source"])
     domain = get_domain_config(selection["domain"])
     split = read_json(source / "state_bench/domains" / domain.name / "splits/train_test.json")
-    if selection["task_id"] not in split["splits"]["train"]:
-        raise ValueError("This functional pilot admits only an explicitly selected training task")
+    if (selection["split"] != args.split
+            or selection["task_id"] not in split["splits"][args.split]):
+        raise ValueError("STATE task does not belong to the explicitly selected split")
     task = TaskDefinition.load(source / "state_bench/domains" / domain.name / "tasks"
                                / (selection["task_id"] + ".json"))
     initial = read_json(args.initial_retrieval) if args.initial_retrieval else None
@@ -89,11 +130,16 @@ def main() -> None:
     env_data, env_path = load_task_environment(domain, task)
     settings = read_json(args.config)["entrypoints"]["functional"]
     host_config = VLLMConfig(**settings["host"])
+    embedding_config = (VLLMConfig(**settings["embedding"])
+                        if args.policy == "mempursuit" else None)
+    clients = [asdict(host_config)]
+    if embedding_config is not None:
+        clients.append(asdict(embedding_config))
     args.output.mkdir(parents=True, exist_ok=False)
     trace = Trace(args.output / "trace.jsonl", "state_local_research_v1")
     run: dict[str, Any] = {"status": "RUNNING", "pid": os.getpid(),
         "source_version": args.source_version, "task_id": task.task_id,
-        "split": "train", "domain": domain.name, "runs": 1, "official_protocol": False,
+        "split": args.split, "domain": domain.name, "runs": 1, "official_protocol": False,
         "automatic_retry": False, "sha_validation_executed": False,
         "environment_file": str(env_path), "source_selection": selection,
         "host_and_simulator": asdict(host_config), "judge": "NOT_RUN",
@@ -103,14 +149,14 @@ def main() -> None:
         "initial_request_provenance": initial,
         "max_return_tokens": settings["ordinary_material_tokens"],
         "monetary_cost": "Not priced; upstream default USD fields are not observed zero cost.",
-        "scope": "Functional integration only. Local Qwen Host/simulator, JSON-action transport, "
-                 "historical evidence from two other public training trajectories; no official "
-                 "five-run score, learned-policy comparison or LLM task/UX judge."}
+        "scope": "One research trajectory with the declared split and public training corpus. "
+                 "Local Qwen Host/simulator and JSON-action transport; deterministic state "
+                 "evaluation, without the official simulator/judge or LLM task/UX score."}
     write_json(args.output / "run.json", run)
     started, cpu = time.perf_counter(), time.process_time()
     with ExitStack() as stack:
         budget = stack.enter_context(http_budget_scope(
-            settings, client_configs=[asdict(host_config)]))
+            settings, client_configs=clients))
         assert budget is not None
         before = copy.deepcopy(budget.state)
         try:
@@ -120,6 +166,13 @@ def main() -> None:
             host = VLLMChatModel(client=client,
                                 max_calls_per_message=settings["max_calls_per_message"])
             simulator = LocalSimulator(VLLMChatModel(client=client, max_calls_per_message=1))
+            embeddings = None
+            if embedding_config is not None:
+                embedding_client = stack.enter_context(VLLMClient(
+                    embedding_config, emit=trace, budget=budget))
+                embeddings = MeteredEmbeddings(embedding_client, embedding_config.model,
+                    settings["embedding_capacity"], dimension=settings["embedding_dimension"],
+                    batch_size=settings["embedding_batch_size"])
             store = stack.enter_context(TransactionalSqliteStore.from_conn_string(
                 str(args.output / "memory.sqlite")))
             owner = "state-public-training-corpus"
@@ -129,15 +182,8 @@ def main() -> None:
             run["source_import_receipts"] = seed_sources(service,
                 read_json(args.preparation / "sources.json"), args.output / "source-imports.json",
                 preserve_occurrence=True)
-            policy = {"fixed_context": FixedContextMemoryPolicy, "fixed": FixedMemoryPolicy}[
-                args.policy](reads=4)
-            memory = IntentRetrievalMemory(service, capacity.text_tokens,
-                material_limit=settings["ordinary_material_tokens"],
-                read_limit=settings["additional_reads"], source_access="independent_v1",
-                source_tokenization="unicode_v1", evidence_policy="question_pack_v1",
-                source_top_k=settings["source_top_k"], semantic_top_k=settings["semantic_top_k"],
-                control_policy=policy, control_steps=8,
-                control_delivery_selection=True, control_record=trace)
+            memory = build_retrieval(service, capacity.text_tokens, settings, args.policy,
+                                     budget, trace, embeddings=embeddings)
             hook = StateMemoryHook(memory, session="state-task", now=task.now, domain=domain.name,
                 user_id=task.user_id, config_version=args.source_version, record=trace)
             # The evaluator-only summary/requirements never enter this public context.
@@ -164,11 +210,17 @@ def main() -> None:
             run.update(status="FAILED", error_type=type(error).__name__, error=str(error))
             raise
         finally:
+            whole_cpu = time.process_time() - cpu
+            direct_cpu = sum(metrics.get("cpu_seconds", 0)
+                - before.get("compute", {}).get(name, {}).get("cpu_seconds", 0)
+                for name, metrics in budget.state.get("compute", {}).items())
             measures = {"wall_seconds": time.perf_counter() - started,
-                        "cpu_seconds": time.process_time() - cpu, "runs": 1}
+                        "cpu_seconds": whole_cpu - direct_cpu, "runs": 1}
             budget.record_compute(args.compute_phase, measures)
             run.update(budget_before=before, budget_after=copy.deepcopy(budget.state),
                        compute=measures,
+                       whole_driver_cpu_seconds=whole_cpu,
+                       nested_cpu_seconds_already_billed=direct_cpu,
                        peak_rss_kib=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss)
             write_json(args.output / "run.json", run)
 

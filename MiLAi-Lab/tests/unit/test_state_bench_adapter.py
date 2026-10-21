@@ -83,6 +83,47 @@ def test_memory_hook_keeps_one_public_allowance_and_only_actual_prior_refs(tmp_p
         assert records[0]["request"]["task_context"]["known_evidence_refs"] == []
 
 
+def test_state_selected_pool_uses_actual_hook_and_records_nested_compute(tmp_path):
+    pytest.importorskip("mempursuit")
+    from langchain_core.embeddings import Embeddings
+
+    from milai_lab.harness.contextual_artifacts import RunBudget, RunLimits
+    from run_state_bench_local_pilot import build_retrieval
+
+    class Vectors(Embeddings):
+        def embed_documents(self, texts):
+            return [[1., 0.] if "hotel" in text else [0., 1.] for text in texts]
+
+        def embed_query(self, text):
+            return self.embed_documents([text])[0]
+
+    settings = {"ordinary_material_tokens": 8000, "additional_reads": 8,
+                "source_top_k": 16, "semantic_top_k": 16,
+                "memory_control": {"reads": 4, "max_control_steps": 8,
+                                   "pursuit_adaptive": True}}
+    budget = RunBudget(RunLimits(), tmp_path / "unit-budget.json")
+    with SqliteStore.from_conn_string(str(tmp_path / "db")) as store:
+        service = MemoryService(store, ("state-pursuit", "alice"), "alice", tmp_path / "lock",
+                                functional_contract="functional_v1")
+        service.capture_user("history", "hotel", "Use the hotel inventory identifier to book.")
+        service.capture_user("history", "train", "A train reservation uses its service identifier.")
+        records = []
+        memory = build_retrieval(service, len, settings, "mempursuit", budget,
+                                 records.append, embeddings=Vectors())
+        hook = StateMemoryHook(memory, session="task", now="2026-06-15T10:00:00",
+            domain="travel", user_id="u1", config_version="state-test", record=records.append)
+        hook.bind_conversation([{"role": "user", "content": "Book my hotel."}])
+        envelope = hook.retrieve({"query": "hotel inventory identifier", "top_k": 3})
+        packet = json.loads(envelope["learnings"][0])
+        assert "Use the hotel inventory identifier to book." in canonical(packet)
+        assert len(canonical(envelope)) <= settings["ordinary_material_tokens"]
+        assert all(item["kind"] == "original_source" for item in packet["evidence"])
+        pools = [event for event in records if event["event"] == "memory_control_mempursuit_pool"]
+        assert pools and pools[0]["query"] == "hotel inventory identifier"
+        assert budget.state["compute"]["memory_control_mempursuit_pool"]["pools"] == len(pools)
+        assert budget.state["generation_requests"] == 0
+
+
 @pytest.mark.parametrize("frozen_request", [False, True])
 def test_public_sdk_executes_real_sandbox_write_without_hidden_context(tmp_path, frozen_request):
     sdk = pytest.importorskip("state_bench.agents.base")
