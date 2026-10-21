@@ -2192,3 +2192,24 @@ Coalent7edc7ee的独立研究副本保留semantic/domain核心、原许可证及
 补丁data/fixtures/coalent-native-source-versions-v1.patch为零上下文格式，应用时使用git apply --unidiff-zero；已对原始源码通过相应--check。字面ID还会改变等分时的稳定排序，故这是明确研究适配，不能称逐字节复现。当前只是核心机械可用，尚未接MiLAi原Store、实际Qwen/BGE、完整返回预算与Host；不是Coalent效果结果。索引data/manifests/host-intent-view-v4-coalent-native-version-core-v1.json。所有实际模型仍由原D队列串行执行。
 
 T1主臂作者评审已保存位置0–28。预约内容流末轮27实际context3观察到source9–16，其中有9:45修正；合并交付超预算后，末步仍有合法handoff_select_3，但模型选择handoff_select_1，只返回自己的旧Host对话。该例的9:30错误有明确选择失误，不能解释成修正不可达；独立交付3的后续Host结果未执行，不作反事实成功声明。未从这些dev审阅生成训练标签，整臂及完整D比较仍待后续结果。
+
+
+## 2026-10-21：Coalent原Store与计费端口接入
+
+6155b242增加StoreCognitionStore与SourceRetriever：缓存单元直接存入现有service.store的owner隔离派生namespace，不引入新服务或持久化后端；保留上游完整cognition序列化。读取只消费调用方检索函数实际返回的Source ID，复核真实owner/可见性，保留原文与角色，不扩张候选集合。d5abcd7b补全工具origin、object_ref和calendar_context，报告时钟未知仍为null，捕获时钟独列。
+
+缓存读取前可通过sync_sources同步实际绑定来源的原生版本／撤销；新独立来源不会被机械当作相关变化，而仍可通过上游欠覆盖回源进入缓存。这里的artifact单位明确为不可变捕获Source，并非可变整篇文档连接器；不能据此保证重复查询一定发现所有后来的纠正。真实Store重开后复用、真实forget句柄撤销缓存、513单元分页和owner隔离均通过。
+
+CoalentGenerationProvider把原上游LLMSynthesizer的提示、model/max_tokens/temperature和已有thinking配置交给既有VLLMClient.native_post；这里是普通chat JSON请求，无native工具解析器。原有Host admission回调先执行，账本仍由该client记录；Usage从实际回执传回上游，不二次计费。CoalentEmbedder调用既有MeteredEmbeddings，保留tokenizer准入、批处理、向量顺序与归一化。检查配方使用retries=0；无效JSON经真实上游解析得到ok=False、无claims，同时保留实际mock用量。
+
+7项接入测试无跳过，包含实际LangGraph SQLite/MemoryService、真实计费client＋模拟HTTP；Ruff与两实现文件mypy通过，199项导入边界检查通过。它们未访问实际模型服务，测试账本仅在临时目录。测得检查CPU加入pending-v32，导入边界检查CPU未单独测得、仍为unknown。索引data/manifests/host-intent-view-v4-coalent-ports-v1.json。下一缺口是注册检索工具／完整外层预算／跨调用ref／Host生命周期，之后才能冻结真实Qwen/BGE配方并在D空闲时执行；当前不是Coalent端到端或效果结果。
+
+## 2026-10-21：D冻结T1主seed0闭合
+
+主臂64位置作者评审为19C/13Q/19W/13F；实际K∪D材料37完整、27部分。24次检索均非空且在真实Host wire可见，最大完整包1515tokens。6个失败位置18/37/53/56/61/62实际已有完整材料；56初始失败后的57真实K为空，模型重新检索得到原文后正确计算，未把失败轮回执假装自动保留。
+
+16末轮为0C/1Q/12W/3F，仅预约内容流27发起一次新检索。该例已观察到9:45修正且有合法单包交付动作，却选择旧Host对话，留下9:30错误；其他末轮大多沿用旧材料。预约原文流30则真实交付source9/10并正确引用9:45，后续31虽时间恰好正确，仍错误否认新增Kevin记录。全臂没有View生成HTTP，不能据此证明View本身有无价值。
+
+94次本地forward累计401840输入tokens，最大11000；逐实际结果核对无截断、无非有限logits/probabilities，forward与tokens均和账本本地计数相符。生成88HTTP、537603tokens，unknown增量0。整臂墙时1920.250695114秒、CPU134.067920167秒；其中模型加载／推理56.530148856秒已直接记账，只将差额77.537771311秒加入pending-v32，HTTP不重复计。
+
+索引data/manifests/host-intent-view-v4-d-t1-main-seed0-results-v1.json。原D父进程2468544/exec65603继续串行执行操作对照seed0，子进程2941887；前三简单臂和本臂共4臂关闭，其余6臂、完整来源组配对比较和E阶段确认仍未完成。

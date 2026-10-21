@@ -1,3 +1,27 @@
+# LATEST D / COALENT PORTS — 2026-10-21
+
+Dparent2468544/exec65603 RUNNING; T1main2818578 CLOSED64/64, nowcontrolseed0
+PID2941887 latest10/64. RevalidateactualPID anddriver. First4of10armsclosed.
+T1main author64review19C13Q19W13F; delivery37complete27partial;24retrievals,0empty,
+allHost-visible,max1515. Final16:0C1Q12W3F,1newcall(C03content27). No Viewgeneration.
+94nativeforward401840tokens/max11000,trunc0/nonfinite0, actualtrace/ledgercountsreconciled.
+88HTTP537603tokensunknown0,wall1920.250695114CPU134.067920167. ModelCPU56.530148856
+alreadydirectledger; ONLYremainder77.537771311 appendedpending32. Don'tdoublecharge.
+Reviewsall0–63 andfinal/summary/closed under view-v4-d-author-review-v1/t1-main-seed0;
+manifest d-t1-main-seed0-results-v1. Generic finalize_d_native_review_v1.py readyforfuture
+closednativearms; takesarmarg, reconcilesnativeactualforwards andsubtractsdirectcompute.
+DO NOT rerun finishedfinalizer. show_d_review_cards_v2.py abbreviatesalreadyshownreceipts
+anddynamicbodies byliteral equality, nofingerprints; useforsmallerreviewoutputs.
+Coalentports committed6155b242+metadatafixd5abcd7b: baselines/coalent_store.py and
+coalent_providers.py. ExistingStore+SourceIDs/nativeversions, explicitsearchcallback,
+visibilitysync, existingmeteredVLLM/Embeddings. No realmodelcalls.7tests+Ruff/mypy2files
+passed;199architecturepassed. latestcheck view-v4-coalent-store-port-check-v3/result.json.
+Manifest host-intent-view-v4-coalent-ports-v1. StillNOTregisteredHostretrievalruntime.
+NextCoalent gap:commonfullreturnbudget/readallowance/deliveryrefs/Hostlifecycle; preserve
+upstreamdefaultpool+retries0, explicitpatchedcorepath. No modeljob untilDidle.
+Allmeasuredofflinephasespending32UNSETTLED;architectureCPUunknown. FullgoalACTIVE;
+remainingD+E/externalconfirmationnotdone. NoSHA/newservices/newrealledger/subagents.
+
 # LATEST FOLLOWUP — 2026-10-21
 
 Dparent2468544/exec65603 stillRUNNING; T1mainPID2818578 latest36/64. Revalidate.
