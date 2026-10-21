@@ -134,6 +134,33 @@ def test_failed_engine_is_preserved_and_not_retried(tmp_path, coalent):
         assert invoke(memory, cfg) == result and len(calls) == 1
 
 
+def test_original_budget_keeps_whole_messages_from_an_oversized_session(tmp_path, coalent):
+    from milai_lab.memory.retrieval_request import RetrievalRequest
+
+    with SqliteStore.from_conn_string(str(tmp_path / "bank.sqlite")) as store:
+        service = service_at(store, tmp_path)
+        long = "alpha " + "word " * 1000
+        service.capture_user("history", "1", long)
+        statements = ["alpha requires a permit.", "alpha exception: visitors use an escort."]
+        for index, statement in enumerate(statements, 2):
+            service.capture_user("history", str(index), statement)
+        cfg, calls = context(service), []
+        memory = memory_at(coalent, service, calls, claims=["alpha summary"],
+                           material_limit=1800,
+                           return_envelope=lambda packet: {"learnings": [canonical(packet)]})
+        packet = invoke(memory, cfg, read_goal={"evidence": ["original_source"]})
+        assert memory.return_tokens(packet) <= 1800
+        assert packet["usage"]["material_budget_rejections"] == 1
+        assert [row["content"] for item in packet["evidence"]
+                for row in item["evidence"]] == statements
+        request = RetrievalRequest(query="alpha requirement", task_context={
+            "known_evidence_refs": [packet["evidence"][0]["ref"]]})
+        reopened = memory._known_materials(request)
+        assert [turn["content"] for item in reopened
+                for turn in json.loads(item["text"])] == statements
+        assert all(not item["truncated"] for item in reopened)
+
+
 def test_known_only_budget_and_undelivered_ref_do_not_run_engine(tmp_path, coalent):
     with SqliteStore.from_conn_string(str(tmp_path / "bank.sqlite")) as store:
         service = service_at(store, tmp_path)

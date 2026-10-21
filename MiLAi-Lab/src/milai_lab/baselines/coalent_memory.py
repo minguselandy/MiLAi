@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import copy
+import json
 import time
 from collections.abc import Callable
 from typing import Any, cast
@@ -185,10 +186,27 @@ class CoalentRetrievalMemory(IntentRetrievalMemory):
                 if not receipt["ok"]:
                     raise FunctionalRejection(receipt["status"])
                 for item in receipt["materials"]:
-                    if fits([*materials, item], max_rejections):
-                        materials.append(item)
-                    else:
-                        rejections += 1
+                    # Session artifacts govern cache freshness, not return granularity.
+                    # Keep complete messages in retrieved order within the full wire budget.
+                    turns: list[dict[str, Any]] = []
+                    spans: list[dict[str, Any]] = []
+                    selected = None
+                    for turn, span in zip(json.loads(item["text"]), item["source_ranges"],
+                                          strict=True):
+                        candidate = {**item, "text": json.dumps([*turns, turn],
+                                                                ensure_ascii=False),
+                            "source_ranges": [*spans, span], "unavailable_source_ranges": [],
+                            "turn_range": [0, len(turns) + 1],
+                            "date": (turns[0] if turns else turn)["timestamp"],
+                            "body_delivered": True, "visibility": "visible", "truncated": False}
+                        if fits([*materials, candidate], max_rejections):
+                            turns.append(turn)
+                            spans.append(span)
+                            selected = candidate
+                        else:
+                            rejections += 1
+                    if selected is not None:
+                        materials.append(selected)
             self.control_record({"event": "coalent_cache_result", "cache_hit": result.cache_hit,
                 "coverage": result.coverage, "needs_retrieval": result.needs_retrieval,
                 "escalated": result.escalated, "upstream_pool": [
