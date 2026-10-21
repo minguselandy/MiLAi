@@ -2323,3 +2323,16 @@ e4844f28将原文选择改为按实际检索顺序逐完整消息装包，继续
 新增边界检查验证：一个会话含超大消息和两条短消息时，在完整外层learnings封装预算内返回两条原始短消息，随后真实ref重开仍只有这两条，正文未截断。Coalent注册工具/正常模拟Host等8项检查、Ruff和实现文件mypy均通过。生产适配器再次实测B06返回10条/1898tokens、C26返回8条/1408tokens，与同序整消息探针一致；原v1测量保留。索引host-intent-view-v4-coalent-raw-packing-v1.json，所有测得CPU在pending-v33，未调用实际模型。
 
 真实模型试跑计划更新为view-v4-coalent-pilot-plan-v2.json，冻结e4844f28源码与原审阅core，替代未启动的v1。B06/C26四条流16位置、原fixture、配置参数和预约额度保持不变。启动参数已检查引用存在的原v1选定fixture，输出为独立v2目录。必须等待D实际父子进程退出后显式调度，不自动重试；两版目前都没有实际模型成绩。
+
+
+## 2026-10-21：简单View缓存闭合与MemPursuit实际成本核对
+
+view-cache已关闭64位置并全部作者评审：20C/19Q/15W/10F；B30位置20–22的分类标题有C替代解读，完整成功上界23。实际材料31完整/33部分。112次生成HTTP/631125tokens，其中24次View生成93915tokens；其余为24次Host请求75329、54次完整回答343832、10次不完整回答118049。24次实际Host检索请求均有非空回执，最大1723tokens。无embedding或本地模型计算；整臂墙时2110.530491076秒、CPU84.400114435秒，CPU仅加入pending-v33，尚未结算。索引host-intent-view-v4-d-view-cache-results-v1.json。
+
+16个末轮为1C/3Q/9W/3F，仅A19原文流7再次请求检索；其更新View虽纳入多数联系人变化，仍漏secondary提议且未满足原始引文要求。唯一末轮C是C03内容流27：中间9:45修正恰与最终结果一致，但没有取得后来的10:15提议及拒绝，材料仍partial。故不能把这一C视作最终更新维护成功。同源和无关来源到达也出现未增加必要事实的刷新；每次生成费用保留。完整来源组比较仍等待MemPursuit。
+
+汇总工具现按实际AI tool_calls统计请求，另外保留tool_returns，并列出全部非零本地compute增量、embedding与generation各自账本差额。实际MemPursuit trace将embedding也记作vllm_response，因此按原path区分embeddings与chat/completions，分别对账，不能塞进生成tokens或当Host JSON解析。原答案44+20闭合数据验证54次请求/53回执/740852生成tokens；完整view-cache验证631125生成tokens、0embedding。MemPursuit首个已完成位置实测2生成HTTP/5666tokens、2embeddingHTTP/2567tokens、本地selector CPU0.08634627秒。未把活跃臂当闭合臂，也未重复记其HTTP/本地费用。
+
+首次新增embedding分项的类型检查因空字典类型推断报错；实际数据核对已通过。改用实际stage的显式求和后Ruff/mypy通过，v1/v2/v3检查记录保留；没有重跑实际模型。finalize_d_native_review_v2.py已补存embedding和全部local_compute，供后续MemPursuit闭合使用；view-cache已执行一次，不能再运行其finalizer重复加入CPU差额。
+
+MemPursuit前8位置已完成作者评审，整臂仍运行。用当前前9个已完成位置中3次实际pool记录及其已付费BGE响应，经过原normalized和上游NumPy select离线复放，selected_indices/stop_reason/weights均匹配。与同一候选、同一向量的cosine排序比较，3池选中集合都相同，2池顺序不同；这只是候选选择诊断，没有执行替代Host或证明质量收益。结果candidate-vector-audit-prefix-v1.json；后续可用audit_mempursuit_actual_vectors_v1.py在全64张cards上输出新文件补全，不重新embedding。

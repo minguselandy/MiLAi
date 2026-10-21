@@ -1,3 +1,25 @@
+# LATEST VIEW-CACHE CLOSED / MEMPURSUIT RUNNING — 2026-10-21
+
+Dparent3434203/exec69127 RUNNING; active mempursuit PID3763296, latest12/64.
+Revalidateprocess. View-cache CLOSED64 fullyreviewed:20C19Q15W10F; Cupper23 forB30
+20–22headingambiguity. Material31complete33partial;112HTTP631125tokensunknown0;
+24ViewHTTP93915tokens;24actualrequestedcalls/24nonemptyreturns/max1723.
+Final16=1C3Q9W3F;1actualcallat7. OnlyC27 usesmiddle9:45coincidentallyright,
+withoutfinal10:15proposal/rejection; materialpartial. No final update maintenance claim.
+CPU84.400114435 pending33; native/embedding0. Finalizerv2alreadyDONE; NEVERrerun.
+Manifestd-view-cache-results-v1. First9Darmsclosed; fullMP/Econfirmationpending.
+Summarytools updated374d28cb: actualAIcallcount vsreturns; allnonzero local_compute;
+embedding separatefromgeneration byactualvllm_response.path. Actualanswer44+20 and
+cache64validated; firstMP2generation5666tokens/2embedding2567 validated. v2mypyemptydict
+inferenceerrorretained; fixedv3Ruff/mypyPASS. No actualmodelreruns.
+finalize_d_native_review_v2.py now includesembedding/local_compute; futureMPready.
+MPcards0–8exported, reviews0–7SAVED;8notyetgraded. MPactual-vectorprobe on9closedpositions
+3poolsreplaysoriginalselectexactly; cosineidenticalsetsall3,orderdiff2. NotHostbenefit.
+Helperaudit_mempursuit_actual_vectors_v1.py OUTPUT usesavailableMPcards; laterfull64
+useNEWoutputpath, addsownCPUto33, noHTTP. Prefixaudit retainedinMPreviewdir.
+Coalentpilotv2 e4844f28 stillFROZEN_NOT_DISPATCHED; see nextsection. NeverlaunchwhileDactive.
+Pending33UNSETTLED. FullgoalACTIVE. NoSHA/subagents/newservices/newrealledger.
+
 # LATEST COALENT MESSAGE PACKING / PILOT V2 — 2026-10-21
 
 Coalent sourcee4844f28 now packs complete original messages within full wire budget,
