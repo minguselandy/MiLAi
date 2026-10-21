@@ -2281,3 +2281,16 @@ a99a5aa8实现Coalent原会话artifact：每条原消息仍是独立、未改写
 生产适配器又在原四个B训练前缀上完成无模型审计：source与session条件的完整Chunk.text数组逐项相同，仅artifact归组/原生版本元数据不同。逐Source条件12次脚本合成调用只接触12条原文，会话条件6次接触全部42条；本次每条消息块最长305个BGE tokens，两边长度逐项相同。与前次普通exchange分组探针不同，本次直接运行SourceRetriever/StoreCognitionStore实现；原文分组数、角色和正文未变。仍不据固定等分向量推断真实排序、质量或费用。索引host-intent-view-v4-coalent-granularity-audit-v3.json、host-intent-view-v4-coalent-session-artifacts-v1.json。
 
 当前续跑父3434203/exec69127继续交付反馈臂；尚不能宣布D完成或选择最终E范围。真实Coalent试跑、其余D评审和确认实验仍待完成，所有新的离线测得CPU在pending-v33等待空闲结算。
+
+
+## 2026-10-21：交付反馈臂闭合、核心配对与Coalent试跑冻结
+
+交付反馈臂64位置完成并逐项作者评审：21C/18Q/15W/10F，实际K加D材料33完整/31部分。共93次生成HTTP、588121tokens、unknown增量0；21次完成检索回执均非空，最大完整包1994tokens。110次本地forward、500353输入tokens、最大10805，未截断且所有输出有限。整臂墙时2219.490979424秒、CPU148.368329975秒；原账本已直接计本地计算65.987418139秒，只将差额82.380911836秒加入pending-v33。16个最终更新位置为0C/3Q/9W/4F，没有完成的新检索回执；此项是回执计数，不替代Host调用尝试计数。结果索引host-intent-view-v4-d-delivery-seed0-results-v1.json。
+
+与同初始化、同状态/分支池及优化设置的answer-only相比，主评完整成功为21对17，材料完整33对26，生成tokens少152731。8来源组中只有A32与B30各多2个C，其余6组C相同；原答案臂B30两处标题歧义允许C替代，故总差距范围为2–4个位置。材料增量集中D25(+2)、E08(+4)、E15(+1)。两臂最终更新位置均0C，不能据总分宣布更新响应有效。相对冻结T1主臂，delivery有3组C更多、4组更少、1组相同；这些是已暴露dev、单seed、不同自主Host轨迹的描述性结果，不能归因为控制器单独因果收益。配对索引host-intent-view-v4-d-feedback-paired-v1.json。
+
+简单view-cache已接续运行，前24位置的作者评审已保存但尚非整臂成绩。观察到刷新纳入新号码、同源/无关更新后刷新无必要增量，以及未再次取证导致末轮沿用旧材料等不同情况。继续保留实际K/D、View缺陷和原文补救的区分，未将任何dev评审用于训练。
+
+Coalent真实模型试跑已冻结而未启动：fd0f4705源码快照及已审阅原生版本core；按现有B fixture顺序选首两个train来源组B06/C26、各content/originals两流、四请求，共16位置。保持原来源和请求，不读新确认组；session artifact、上游pool默认参数、extractive合成、原Qwen/BGE、rich/JSON-action、2048完整返回包与8步/8读，禁用重试。该小队列声明180次生成/2400000预约tokens上限，不改变单次方法参数；配置、来源和启动参数见host-intent-view-v4-coalent-pilot-plan-v1.json。必须等当前D父子进程全部退出后再显式调度，同一真实ledger串行计费。
+
+D最后两臂、完整流成本/条件响应汇总及E确认仍未完成；当前不扩大训练或选最终获胜配方。pending-v33尚未结算，未计时人工审阅/准备开销仍unknown。

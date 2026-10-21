@@ -1,0 +1,405 @@
+{
+  "status": "DESCRIPTIVE_CORE_TRAINING_COMPARISON_EXPOSED_DEV",
+  "arms": {
+    "t1-main-seed0": {
+      "host_grades": {
+        "C": 19,
+        "W": 19,
+        "Q": 13,
+        "F": 13
+      },
+      "host_complete_primary": 19,
+      "host_complete_with_scope_ambiguity": 19,
+      "delivery": {
+        "complete": 37,
+        "partial": 27
+      },
+      "generation_tokens": 537603,
+      "generation_requests": 88,
+      "native_input_audit": {
+        "forwards": 94,
+        "input_tokens": 401840,
+        "max_input_tokens": 11000,
+        "truncated": 0,
+        "nonfinite": 0
+      },
+      "final_arrivals": {
+        "positions": 16,
+        "host": {
+          "W": 12,
+          "F": 3,
+          "Q": 1
+        },
+        "retrieval_calls": 1,
+        "positions_with_new_retrieval": 1
+      }
+    },
+    "t1-control-seed0": {
+      "host_grades": {
+        "C": 16,
+        "W": 20,
+        "Q": 19,
+        "F": 9
+      },
+      "host_complete_primary": 16,
+      "host_complete_with_scope_ambiguity": 16,
+      "delivery": {
+        "complete": 36,
+        "partial": 28
+      },
+      "generation_tokens": 525203,
+      "generation_requests": 89,
+      "native_input_audit": {
+        "forwards": 111,
+        "input_tokens": 484251,
+        "max_input_tokens": 11626,
+        "truncated": 0,
+        "nonfinite": 0
+      },
+      "final_arrivals": {
+        "positions": 16,
+        "host": {
+          "W": 13,
+          "Q": 3
+        },
+        "retrieval_calls": 1,
+        "positions_with_new_retrieval": 1
+      }
+    },
+    "continued-ce-seed0": {
+      "host_grades": {
+        "C": 18,
+        "W": 19,
+        "Q": 17,
+        "F": 10
+      },
+      "host_complete_primary": 18,
+      "host_complete_with_scope_ambiguity": 18,
+      "delivery": {
+        "complete": 36,
+        "partial": 28
+      },
+      "generation_tokens": 539523,
+      "generation_requests": 85,
+      "native_input_audit": {
+        "forwards": 83,
+        "input_tokens": 369416,
+        "max_input_tokens": 12194,
+        "truncated": 0,
+        "nonfinite": 0
+      },
+      "final_arrivals": {
+        "positions": 16,
+        "host": {
+          "W": 11,
+          "Q": 3,
+          "F": 2
+        },
+        "retrieval_calls": 1,
+        "positions_with_new_retrieval": 1
+      }
+    },
+    "answer-seed0": {
+      "host_grades": {
+        "C": 17,
+        "W": 17,
+        "F": 12,
+        "Q": 18
+      },
+      "host_complete_primary": 17,
+      "host_complete_with_scope_ambiguity": 19,
+      "delivery": {
+        "complete": 26,
+        "partial": 38
+      },
+      "generation_tokens": 740852,
+      "generation_requests": 143,
+      "native_input_audit": {
+        "successful_forwards": 169,
+        "input_tokens": 1063440,
+        "max_successful_input_tokens": 15963,
+        "truncated_successful_inputs": 0,
+        "nonfinite_successful_results": 0,
+        "rejected_before_forward": 1
+      },
+      "final_arrivals": {
+        "positions": 16,
+        "host": {
+          "W": 8,
+          "F": 6,
+          "Q": 2
+        },
+        "retrieval_calls": 0,
+        "positions_with_new_retrieval": 0,
+        "Host_requested_calls": 1,
+        "positions_with_Host_requested_retrieval": 1
+      }
+    },
+    "delivery-seed0": {
+      "host_grades": {
+        "C": 21,
+        "W": 15,
+        "F": 10,
+        "Q": 18
+      },
+      "host_complete_primary": 21,
+      "host_complete_with_scope_ambiguity": 21,
+      "delivery": {
+        "complete": 33,
+        "partial": 31
+      },
+      "generation_tokens": 588121,
+      "generation_requests": 93,
+      "native_input_audit": {
+        "forwards": 110,
+        "input_tokens": 500353,
+        "max_input_tokens": 10805,
+        "truncated": 0,
+        "nonfinite": 0
+      },
+      "final_arrivals": {
+        "positions": 16,
+        "host": {
+          "F": 4,
+          "W": 9,
+          "Q": 3
+        },
+        "retrieval_calls": 0,
+        "positions_with_new_retrieval": 0
+      }
+    }
+  },
+  "paired": {
+    "delivery-seed0_minus_t1-main-seed0": {
+      "rows": [
+        {
+          "source_group": "memops_A19",
+          "complete_Host_delta": 0,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": 13845
+        },
+        {
+          "source_group": "memops_A32",
+          "complete_Host_delta": 2,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": 4027
+        },
+        {
+          "source_group": "memops_B30",
+          "complete_Host_delta": 3,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": 16820
+        },
+        {
+          "source_group": "memops_C03",
+          "complete_Host_delta": -1,
+          "complete_material_delta": -1,
+          "generation_tokens_delta": -23034
+        },
+        {
+          "source_group": "memops_D25",
+          "complete_Host_delta": -1,
+          "complete_material_delta": -2,
+          "generation_tokens_delta": -3645
+        },
+        {
+          "source_group": "memops_E08",
+          "complete_Host_delta": -2,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": 13928
+        },
+        {
+          "source_group": "memops_E15",
+          "complete_Host_delta": -1,
+          "complete_material_delta": -1,
+          "generation_tokens_delta": 30017
+        },
+        {
+          "source_group": "memops_F01",
+          "complete_Host_delta": 2,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": -1440
+        }
+      ],
+      "groups_Host_more": 3,
+      "groups_Host_equal": 1,
+      "groups_Host_fewer": 4
+    },
+    "delivery-seed0_minus_t1-control-seed0": {
+      "rows": [
+        {
+          "source_group": "memops_A19",
+          "complete_Host_delta": 1,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": 11132
+        },
+        {
+          "source_group": "memops_A32",
+          "complete_Host_delta": 2,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": 3106
+        },
+        {
+          "source_group": "memops_B30",
+          "complete_Host_delta": 2,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": 31253
+        },
+        {
+          "source_group": "memops_C03",
+          "complete_Host_delta": 0,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": -12355
+        },
+        {
+          "source_group": "memops_D25",
+          "complete_Host_delta": -2,
+          "complete_material_delta": -2,
+          "generation_tokens_delta": 14419
+        },
+        {
+          "source_group": "memops_E08",
+          "complete_Host_delta": 0,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": 9688
+        },
+        {
+          "source_group": "memops_E15",
+          "complete_Host_delta": 1,
+          "complete_material_delta": -1,
+          "generation_tokens_delta": 12726
+        },
+        {
+          "source_group": "memops_F01",
+          "complete_Host_delta": 1,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": -7051
+        }
+      ],
+      "groups_Host_more": 5,
+      "groups_Host_equal": 2,
+      "groups_Host_fewer": 1
+    },
+    "delivery-seed0_minus_continued-ce-seed0": {
+      "rows": [
+        {
+          "source_group": "memops_A19",
+          "complete_Host_delta": 0,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": 15681
+        },
+        {
+          "source_group": "memops_A32",
+          "complete_Host_delta": 2,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": 6660
+        },
+        {
+          "source_group": "memops_B30",
+          "complete_Host_delta": 1,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": 16975
+        },
+        {
+          "source_group": "memops_C03",
+          "complete_Host_delta": 1,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": -13198
+        },
+        {
+          "source_group": "memops_D25",
+          "complete_Host_delta": 0,
+          "complete_material_delta": -2,
+          "generation_tokens_delta": 2564
+        },
+        {
+          "source_group": "memops_E08",
+          "complete_Host_delta": -1,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": 19844
+        },
+        {
+          "source_group": "memops_E15",
+          "complete_Host_delta": -1,
+          "complete_material_delta": -1,
+          "generation_tokens_delta": 16156
+        },
+        {
+          "source_group": "memops_F01",
+          "complete_Host_delta": 1,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": -16084
+        }
+      ],
+      "groups_Host_more": 4,
+      "groups_Host_equal": 2,
+      "groups_Host_fewer": 2
+    },
+    "delivery-seed0_minus_answer-seed0": {
+      "rows": [
+        {
+          "source_group": "memops_A19",
+          "complete_Host_delta": 0,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": -5752
+        },
+        {
+          "source_group": "memops_A32",
+          "complete_Host_delta": 2,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": 6986
+        },
+        {
+          "source_group": "memops_B30",
+          "complete_Host_delta": 2,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": 5751
+        },
+        {
+          "source_group": "memops_C03",
+          "complete_Host_delta": 0,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": -31776
+        },
+        {
+          "source_group": "memops_D25",
+          "complete_Host_delta": 0,
+          "complete_material_delta": 2,
+          "generation_tokens_delta": -63312
+        },
+        {
+          "source_group": "memops_E08",
+          "complete_Host_delta": 0,
+          "complete_material_delta": 4,
+          "generation_tokens_delta": -63121
+        },
+        {
+          "source_group": "memops_E15",
+          "complete_Host_delta": 0,
+          "complete_material_delta": 1,
+          "generation_tokens_delta": 2461
+        },
+        {
+          "source_group": "memops_F01",
+          "complete_Host_delta": 0,
+          "complete_material_delta": 0,
+          "generation_tokens_delta": -3968
+        }
+      ],
+      "groups_Host_more": 2,
+      "groups_Host_equal": 6,
+      "groups_Host_fewer": 0
+    }
+  },
+  "unit": "Eight source groups, not 64 independent requests. Two four-position flows per group.",
+  "reviewer": "Current source-author review, not independent or blind.",
+  "scope": "Matched answer/delivery training start, state/branch pool, optimizer and update schedule; autonomous Host trajectories differ. No controller-only causal claim. Answer capacity failure, extra reload and all original failures retained.",
+  "interpretation": "Delivery has 4 more complete Host positions than answer on primary grading, confined to two groups; answer B30 quote-heading alternatives reduce the gap to 2. Complete material gains are 7 positions in three groups. Both arms have zero complete final-arrival positions. No learned-policy winner selected before remaining cache/MemPursuit arms.",
+  "remaining": "View-cache/MemPursuit D closure; full stream costs and conditional response analysis; confirmation selection.",
+  "model_calls": 0,
+  "compute": {
+    "wall_seconds": 0.0006536766886711121,
+    "cpu_seconds": 0.0006531469999999998
+  },
+  "ledger_recorded": false
+}

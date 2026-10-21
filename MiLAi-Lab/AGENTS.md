@@ -1,3 +1,23 @@
+# LATEST DELIVERY CLOSED / COALENT PILOT FROZEN — 2026-10-21
+
+D continuation parent3434203/exec69127 remains RUNNING; active view-cache PID3627857,
+last observed27/64. Revalidate driver/process. delivery-seed0 CLOSED64 and fully reviewed:
+21C18Q15W10F; material33complete31partial; 93HTTP588121tokens unknown0;110native
+forwards500353tokens/max10805,trunc0/nonfinite0. 21 nonempty completed returns, max1994.
+Final16=0C3Q9W4F,0completedreturns (not an attempted-call count).
+CPU148.368329975, native65.987418139 directly billed; remainder82.380911836 pending33.
+finalize_d_native_review_v2 delivery already DONE; do not rerun. Manifest d-delivery-seed0-results-v1.
+Core pair d-feedback-paired-v1: delivery vs answer2groups moreC/6same, raw21vs17;
+answer B30 ambiguity permits19, gap2–4. Material33vs26; both final16 zeroC.
+View-cache cards0–23 reviewed; 20–22 have C alternative to primaryQ heading ambiguity.
+Coalent16 train pilot FROZEN_NOT_DISPATCHED. plan view-v4-coalent-pilot-plan-v1.json,
+first B groupsB06/C26 in fixture order,4coldflows/16positions, sourcefd0f4705 frozen
+at frozen-coalent-fd0f4705 (src/tools plus reviewed core). Same2048/8steps/8reads,
+session artifacts/defaultpool, Qwen/BGE, originalledger; queue180requests/2.4Mreserved.
+Do not launch until Dparent/children actually closed. No automatic retry.
+Pending33UNSETTLED; never settle/overlap model runs while Dactive. Fullgoal ACTIVE.
+No SHA/content fingerprints/subagents/newservices/newreal ledger. Earlier details below.
+
 # LATEST ANSWER CLOSED / SESSION ARTIFACTS — 2026-10-21
 
 Continuationparent3434203/exec69127 RUNNING, activedelivery-seed0 PID3486484 latest
