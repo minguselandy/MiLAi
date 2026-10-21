@@ -1,4 +1,95 @@
-# LATEST V13 (2026-10-22): LEGACY FIT128 LIVE / FACTORIAL PROTOCOL READY
+# LATEST V14 (2026-10-22): LEGACY FIT211 LIVE / FEEDBACK COHORTS AND PROTOCOL READY
+
+Full goal ACTIVE, not complete or blocked. Previous turn made substantive progress:
+feedback source/collector/phase preparation,delivery-only compiler,paired nested subset
+tool,real data audits and protocol. Revalidate exec42364 parent2089181/child2089186 plus
+first-operation-fit-v1/driver.json and fitting/source256-full-seed0-u524-v1/run.json.
+Latest both alive,RUNNING211/524,frozen490c683e unchanged as legacy representation control.
+The v14 progress JSON is its earlier187-update timestamped snapshot.
+No second real model job,offline settlement,restart or hot update while it lives.
+Observation timeouts not terminal. Closed source queue93727/all4children NEVER restart;
+paused Coalent untouched. No new real model job this turn;actual new feedback labels0.
+
+Code2a179b58: prepare_feedback_source_cohorts metadata-only nested selection preserves
+all public histories,queries,arrivals and splits. Old W5 eight anchors retained,then
+seed0 shuffled component queues round-robin.32/64/128 feedback groups are exact prefixes,
+component groups20/12,36/28,57/71 history/complementary;public positions61/127/251 per
+collector. Four wholly masked primary groups retained:000384,000881,000670,000123.
+These are existing admitted sources,not128 newly independent families.
+
+prepare_view_feedback_branches optional --state-quotas JSON gives each source/collector
+at most1initial+1after_operation state,three collectors rules/laya/fixed_context =>max6.
+Missing cells stay missing;no quota borrowing/repeated states/error-only sampling.
+--branch-sampling post-operation-bindings samples actual same-kind target/parameter
+alternatives on poststeps plus control;initials keep operation representatives.
+Main pool has no manual nominations. Largest128pool prepared once;smaller cohorts
+filter the same reviewed states and branch choices,not resample. Source splitting/
+state selection does not use gold,answers or scores. Default old behavior retained.
+
+prepare_retrieval_feedback --delivery-only reads NO Host readout and requires every
+answer comparison unknown;status NOT_EVALUATED,never fabricated tie/answer result.
+Closed exact tool results remain necessary for directional delivery labels. Needed for
+given-request STATE/factorial;their actual branches/semantic reviews still not run.
+Autonomous new feedback collection has original Host frames and retains conditional
+readout for both targets. Unknown/ties/failures/unexecuted options remain explicit.
+
+Closed source-expansion four batches audited:770initial captures,728actual first
+decisions,42without decision,post-operation snapshots0,onlyFixedContext,Host history
+continuation false. This is not an inventory of every historical run. Quota diagnostic
+on those four runs supplies46fixed_context initial states of the new128source list,
+722/768 quota cells missing. Generated138legacy branch proposals are DIAGNOSTIC ONLY,
+NOT DISPATCHED/new protocol pool. Keep old observations distinct from replayable state.
+
+Code20907af8: prepare_feedback_subset derives source subsets from one matched parent,
+preserving exact feedback/replay/CE-replacement correspondence,IDs,labels and physical
+JSONL lines. Dev and feedback-dev copied byte-exact. Actual historical37-state data
+layout audit selected14feedback+14replay/28CE rows,NO label recompilation/model fitting.
+feedback-subset-layout-audit-v1 is LEGACY_LAYOUT_AUDIT_ONLY,not a new4-source experiment.
+
+feedback-expansion-study-plan-v1.json / tracked counterpart freezes new protocol:
+source cohorts in feedback-source-cohorts-v1;templates/68train+4dev batches in
+feedback-expansion-preparation-v1.753train collector positions+48dev=801 planned.
+Each batch <=4public positions per profile,whole families kept,cohort boundaries kept.
+Three policies serial in their own banks;rich,W4delivery_selection,shared_actions,
+16384/head2048 feedback context,2048return,source_metadata true,continue Host history,
+capture control steps. Host/model/capacity/queue limits unchanged600/8M. Worst per-profile
+admission <=96calls/6291456reserved tokens under existing24calls/message/65536context.
+This is a bound,not usage. No old exhausted queue reset or budget expansion.
+
+Collector freeze frozen-feedback-expansion-2a179b58/MiLAi-Lab (10 literal files checked).
+Template has NO checkpoint;bound-config.json intentionally absent. Must bind actual
+corrected source256-actions-full selected checkpoint (fixed operation dev rule,0eligible)
+after its terminal fit. No legacy substitute or factor/Host checkpoint selection.
+All collection remains NOT_DISPATCHED. Data helper freeze frozen-feedback-data-20907af8/
+MiLAi-Lab;readiness in feedback-protocol-readiness-v1.json. Original files/whole batches/
+nested prefixes/source splits and actual legacy matched subset all checked literally.
+
+Feedback fits:ALL32/64/128 and CE/answer/delivery use192updates/3072draws,same192cosine,
+eval0/12/24/48/96/192;micro1/effective16,encoder2.5e-5/head1e-4,shuffle/gradcheckpoint,
+shared_actions16384/head2048.192 comes from maximum768feedback+768replay,two passes,
+but stays fixed for smaller/shortfall cohorts (override preparer's old two-pass suggestion).
+Sampled rows1:1 feedback/replay,replay loss alpha.25 inherited. Largest matching once,
+smaller subsets preserve matches;report actual subset component counts,not pretendexact.75.
+Expanded dev max48new from same8devgroups+unchanged old16;common file before all fits,
+old/new strata separate,old860/616operation dev retained. Target selects own dev family
+macro pair accuracy/earliest tie/0eligible;CE has explicit per-target selection views.
+Always report common192endpoint. Common-support keeps full states/replay;identical
+directions imply identical objective,not target superiority. Separate ALL laya-state
+T2 export/source review/CE augmentation and matched old CE STILL REQUIRED,not replaced
+by feedback-vs-old-CE. Full details in plan;no feedback fitting has happened.
+
+48 unique related tests pass,0skip,includes CPU pair gradients and scripted-HTTP real
+Store/E2/factorial quota integration. Ruff9/mypy4 and tools boundary pass (old6 private).
+Canonical6new measured phases total10.127094438CPU PENDING (progressv14lists exactfiles).
+Embedded copies not extra phases. Priorv11-v13pending untouched;closedsettlementsv1/v2/v3
+NEVERappend/re-settle;excludeall phase measurement_files;oldpending35untouched. Tests,
+semantic work/imports/wrappers/unmeasured checks unknown,not zero. Trainer bills terminal
+compute once,parent separate. No SHA/subagents/push/merge/services/Product API changes.
+Full remaining stilllegacy524/correctedcurves/controls,STATE/factorial real models and
+semantics,newfeedback/ownstates/fits/common-support,Host/no-View/lifecycle,protectedexternal,
+seeds0/1/2 and family-paired inference. See execution doc and v14progressmanifest.
+
+# V13 HISTORY: LEGACY FIT128 LIVE / FACTORIAL PROTOCOL READY
 
 Full goal ACTIVE, not complete or blocked. Previous turn made substantive progress:
 8e9f5d70 implements crossed request probes over actual E2 retained/refreshed branches;
