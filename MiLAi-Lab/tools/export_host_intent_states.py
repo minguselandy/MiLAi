@@ -7,7 +7,7 @@ from collections import Counter
 from pathlib import Path
 from typing import Any
 
-from milai_lab.harness.artifact_io import read_json, write_json
+from milai_lab.harness.artifact_io import read_json, read_jsonl, write_json
 from milai_lab.methods.memory_control_learning import decision_example
 
 
@@ -36,8 +36,7 @@ def export_states(
         result_key = (bank, position["request"])
         path, result = indexed[result_key if result_key in indexed else (bank, "request")]
         trace = next(path.parent.glob(path.name.replace("-result.json", "-trace-*.jsonl")))
-        for line in trace.read_text().splitlines():
-            event = json.loads(line)
+        for event in read_jsonl(trace):
             if (event.get("event") != "memory_control_step"
                     or event.get("phase") != "decision_input"):
                 continue

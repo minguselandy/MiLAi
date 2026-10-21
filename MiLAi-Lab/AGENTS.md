@@ -1,4 +1,30 @@
-# TRAINING GENERALIZATION GOAL ACTIVE — 2026-10-21
+# LATEST GENERALIZATION PROGRESS — 2026-10-21 / FULL GOAL ACTIVE
+
+Actual feedback-dev execution CLOSED: session71390exit0/PID956232absent, frozen9f153b68.
+All48toolbranches/16states/8devfamilies,48beforeequal;42Hostreadouts completed/6known-usage
+incomplete failures.64generationHTTP287903tokens,0newunknown/0embedding. No retries.
+Full driver wall896.151687s, CPU94.711639s; actual percase ledger deltas reconcile.
+8of16states/4families/24pairs source-reviewed, partialfeedback compiled (11answer/17delivery
+ directionalpairs); remainingcards8-15 exported but UNREVIEWED. All dev stays out of gradients.
+Next source-native boundary: later retained metadata reduces330candidatefamilies to280/3978rows.
+204pass literal target/title/question panels, first128selected seed0/240sources, no shortfall.
+Old128+new128registered train, old32dev unchanged; targettitle coverage old71Wiki+new128,
+other57oldfamilies remain singleton, not a semantic-independence proof.240publicrequests
+prepared via existing adapter; no gold/support leak; NO new train trajectories. First source
+family2rows reviewed before native reference, both insufficient;238rows still need review.
+Artifacts: artifacts/generalization-20261021. See docs/TRAINING_GENERALIZATION_EXECUTION_20261021.md
+and data/manifests/training-generalization-progress-20261021-v2.json for current authoritative evidence.
+Compute-settlement-v1.json SETTLED ONCE:19phases106.288865CPU seconds on original ledger;
+HTTPtokens/limits unchanged, oldpending35 untouched. NEVER append/re-settle this closed file.
+Future offline work needs new pending records. Semantic/debug/tests/unmeasured overhead unknown.
+Newsource helper tests7pass; broader32pass4torchskips (unchanged tensor tests passed earlierGPU67).
+Ruff4files/mypy3modules/package/tools pass. No research fit or final Host efficacy evaluation.
+No newservices/SHA/subagents/publication. Current real process NONE; verify/proc before launch.
+Continue remaining feedback review + common-support, newsource review/actualcollection,
+post-action restore and complete original curves/controls/factorial/Host/external/allseed goal.
+All earlier snapshots are historical. Do not restart closed feedback or paused Coalent queues.
+
+# INITIAL P0 GENERALIZATION SNAPSHOT — 2026-10-21
 
 Current user explicitly requests full execution of the training-data generalization plan.
 Work in this independent training-generalization-20261021 worktree/branch, based on248aa05d.

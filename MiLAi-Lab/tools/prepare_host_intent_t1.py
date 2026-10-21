@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Any
 
 from milai_lab.datasets.intent_training import musique_intent_request
-from milai_lab.harness.artifact_io import read_json, write_json
+from milai_lab.harness.artifact_io import read_json, read_jsonl, write_json
 
 
 def prepare_sources(allocation: dict[str, Any], t0: dict[str, Any],
@@ -47,8 +47,7 @@ def main() -> None:
     args = parser.parse_args()
     started, cpu = time.perf_counter(), time.process_time()
     allocation = read_json(args.allocation)
-    references = [json.loads(line) for line in
-                  Path(allocation["normalized_original_sources"]).read_text().splitlines()]
+    references = read_jsonl(Path(allocation["normalized_original_sources"]))
     t0 = read_json(args.t0_histories)
     new, full = prepare_sources(allocation, t0, references)
     counts = {split: sum(h["split"] == split for h in full["histories"])
