@@ -33,6 +33,25 @@ def encoding_row(row: dict[str, Any]) -> dict[str, Any]:
     return {**row, "gold": {"next": {"probabilities": {k: 1 / len(keys) for k in keys}}}}
 
 
+def feedback_dev_report(
+    rows: list[dict[str, Any]], train: list[dict[str, Any]], old_dev: list[dict[str, Any]],
+) -> dict[str, Any]:
+    """Keep the new target's denominator and original source exposure explicit."""
+    for row in rows:
+        validate_feedback(row)
+        if row["metadata"]["split"] != "dev":
+            raise ValueError("Feedback development requires declared dev-source states")
+    families = {row["metadata"]["family"] for row in rows}
+    if families & {row["metadata"]["family"] for row in train}:
+        raise ValueError("Feedback development source family overlaps training")
+    return {
+        "states": len(rows), "families": len(families),
+        "old_dev_family_overlap": sorted(families & {
+            row["metadata"]["family"] for row in old_dev}),
+        "targets": {target: feedback_counts(rows, target) for target in ("answer", "delivery")},
+    }
+
+
 def pair_loss(
     logits: Any, keys: list[str], comparisons: list[dict[str, Any]], target: str,
 ) -> Any:

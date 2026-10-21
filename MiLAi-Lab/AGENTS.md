@@ -1,3 +1,31 @@
+# TRAINING GENERALIZATION GOAL ACTIVE — 2026-10-21
+
+Current user explicitly requests full execution of the training-data generalization plan.
+Work in this independent training-generalization-20261021 worktree/branch, based on248aa05d.
+Original jev-read-decisions plan and host-intent worktree/paused Coalent queue remain untouched.
+See docs/TRAINING_GENERALIZATION_EXECUTION_20261021.md and
+ data/manifests/training-generalization-execution-20261021.json for current evidence and full gaps.
+P0 interfaces rebuilt locally: physical JSONL, separate feedback dev, update checkpoints,
+encoder/head rates/freeze, Promptriever adapter.67 tests passed/no skips incl real GPU2,3 tiny
+native CLI/gradient/checkpoint tests.15files Ruff/10implementation mypy/package/tools passed.
+Public first2000 downloaded20requests/no retries;3979train/961dev,912connectedfamilies;
+full raw-candidate grouping precedes caps; both input and targets unchanged through mixture.
+Artifacts root: artifacts/generalization-20261021. Original continuous real budget remains
+/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json; no new real ledger.
+Synthetic tests use temporary test ledgers. No research fit or new Host run this turn.
+Feedback dev:8existing exposed devgroups/16actualinitialstates/48branches prepared only.
+Source metadata:444candidatefamilies/17975rows cross-checked both original assignments;
+64alreadyT1train; after existing exclusions330newcandidatefamilies/14412rows, NOT admitted.
+Next: inherited/native boundary and source review, actual new operation states and independent
+feedback dev, then full nested-source curves, controls, post-action replay, factorial/Host/
+external/multiseed confirmation. No claim of effect or completion. Do not reduce the scope.
+No SHA or substitute fingerprint validation, subagents, services, silent truncation, new real
+ledger, old-score rewriting, automatic retries. Preserve unknown/tie and real offered parameters.
+No current research process launched; revalidate actual processes before any next launch.
+Current offline measurements in new artifacts remain unposted; old pending35 stays untouched.
+Use existing cuda-env under jev-read-decisions artifacts/jev-reader and original .venv test packages.
+Earlier inherited research snapshots follow; their live PIDs and publication permissions are historical.
+
 # LATEST PUBLICATION / D10 CLOSED / COALENT D64 LIVE / PENDING35 — 2026-10-21
 
 User requests current experiment summary and GitHub submission; authorized to push existing

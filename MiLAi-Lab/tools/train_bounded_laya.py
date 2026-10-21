@@ -11,6 +11,7 @@ from __future__ import annotations
 import argparse
 import fcntl
 import json
+import math
 import os
 import random
 import resource
@@ -20,10 +21,16 @@ from pathlib import Path
 from typing import Any
 
 from evaluate_bounded_laya import score_applicability_predictions, score_predictions
-from milai_lab.harness.artifact_io import read_json, write_json
+from milai_lab.harness.artifact_io import read_json, read_jsonl, write_json
 from milai_lab.harness.contextual_artifacts import RunBudget, RunLimits
 from milai_lab.providers.laya_local import NativeDecision
-from retrieval_feedback import encoding_row, feedback_counts, pair_loss, score_feedback
+from retrieval_feedback import (
+    encoding_row,
+    feedback_counts,
+    feedback_dev_report,
+    pair_loss,
+    score_feedback,
+)
 from retrieval_mixture import (
     event_weights,
     mixture_event_weights,
@@ -50,7 +57,10 @@ def training_forward(model: Any, parallel: Any, batch: dict[str, Any], device: A
 
 
 def training_stages(size: int, epochs: int, seed: int,
-                    update_budget: int | None = None) -> list[tuple[int, list[TrainingWindow]]]:
+                    update_budget: int | None = None,
+                    eval_at_updates: list[int] | None = None,
+                    eval_every_updates: int | None = None,
+                    ) -> list[tuple[int, list[TrainingWindow]]]:
     """Legacy epochs or an exact budget of full16-example optimizer updates.
 
     Budgeted updates cross pass boundaries without dropping or padding examples.
@@ -58,6 +68,16 @@ def training_stages(size: int, epochs: int, seed: int,
     """
     if size < 1 or epochs < 1 or (update_budget is not None and update_budget < 1):
         raise ValueError("Training requires labelled states and a positive budget")
+    if eval_at_updates is not None and eval_every_updates is not None:
+        raise ValueError("Specify evaluation points or an interval, not both")
+    if eval_at_updates is not None or eval_every_updates is not None:
+        if update_budget is None:
+            raise ValueError("Custom evaluation requires an explicit optimizer-update budget")
+        if eval_every_updates is not None and eval_every_updates < 1:
+            raise ValueError("Evaluation interval must be positive")
+        if eval_at_updates is not None and any(
+                step < 1 or step > update_budget for step in eval_at_updates):
+            raise ValueError("Evaluation points must be within the optimizer-update budget")
     rng = random.Random(seed)  # noqa: S311 -- reproducible training schedule
     if update_budget is None:
         stages = []
@@ -76,7 +96,30 @@ def training_stages(size: int, epochs: int, seed: int,
         draws.extend((data_pass, i) for i in order)
     windows = [draws[i:i + 16] for i in range(0, update_budget * 16, 16)]
     cuts = sorted({update_budget // 2, update_budget} - {0})
+    if eval_at_updates is not None:
+        cuts = sorted({*eval_at_updates, update_budget})
+    elif eval_every_updates is not None:
+        cuts = sorted({*range(eval_every_updates, update_budget, eval_every_updates),
+                       update_budget})
     return [(end, windows[start:end]) for start, end in zip([0, *cuts[:-1]], cuts, strict=True)]
+
+
+def optimizer_groups(model: Any, encoder_lr: float, head_lr: float,
+                     freeze_encoder: bool) -> list[dict[str, Any]]:
+    """Optimize the declared parameter scope; a frozen encoder has no optimizer state."""
+    model.encoder.requires_grad_(not freeze_encoder)
+    parameters = dict(model.named_parameters())
+    groups = [{"params": [p for n, p in parameters.items() if not n.startswith("encoder.")],
+               "lr": head_lr}]
+    if not freeze_encoder:
+        groups.insert(0, {"params": list(model.encoder.parameters()), "lr": encoder_lr})
+    return groups
+
+
+def training_mode(model: Any, freeze_encoder: bool) -> None:
+    model.train()
+    if freeze_encoder:
+        model.encoder.eval()
 
 
 def state_option_seed(seed: int, data_pass: int, state_id: int) -> int:
@@ -130,10 +173,18 @@ def main() -> None:
     parser.add_argument("--epochs", type=int, default=4)
     parser.add_argument("--optimizer-updates", type=int,
                         help="Use this exact update budget with full16-example windows")
+    evaluation = parser.add_mutually_exclusive_group()
+    evaluation.add_argument("--eval-at-updates", type=int, nargs="+")
+    evaluation.add_argument("--eval-every-updates", type=int)
+    parser.add_argument("--encoder-lr", type=float, default=2.5e-5)
+    parser.add_argument("--head-lr", type=float, default=1e-4)
+    parser.add_argument("--freeze-encoder", action="store_true")
     parser.add_argument("--micro-batch-size", type=int, choices=(1, 2, 4, 8, 16), default=4,
                         help="Per-forward rows; effective optimizer windows remain16 examples")
     parser.add_argument("--dev-data", type=Path,
                         help="Common development labels/inputs independent of the training recipe")
+    parser.add_argument("--feedback-dev-data", type=Path,
+                        help="Separate source-disjoint answer/delivery evaluation for all arms")
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--max-len", type=int, default=4096)
     parser.add_argument("--head-max-len", type=int, default=384)
@@ -174,6 +225,16 @@ def main() -> None:
         parser.error("mixed_retrieval requires --mixture, and other tasks do not use it")
     if args.mixture is not None and args.optimizer_updates is None:
         parser.error("The mixed recipe requires an explicit matched optimizer-update budget")
+    if any(not math.isfinite(lr) or lr <= 0 for lr in (args.encoder_lr, args.head_lr)):
+        parser.error("Learning rates must be positive and finite")
+    if args.feedback_dev_data is not None and args.task not in {
+            "memory_operation", "mixed_retrieval"}:
+        parser.error("Feedback development evaluates memory-operation inputs")
+    try:
+        training_stages(1, args.epochs, args.seed, args.optimizer_updates,
+                        args.eval_at_updates, args.eval_every_updates)
+    except ValueError as error:
+        parser.error(str(error))
     import torch
     from laya.common import collate_items
     from laya.train import (
@@ -192,10 +253,17 @@ def main() -> None:
         torch.cuda.set_per_process_memory_fraction(0.75, device)
     args.output.mkdir(parents=True, exist_ok=False)
     started, cpu = time.perf_counter(), time.process_time()
-    train = [json.loads(x) for x in (args.data / "train.jsonl").read_text().splitlines()]
-    train = [r for r in train if r["gold"] or (args.objective == "pair" and "feedback" in r)]
+    raw_train = read_jsonl(args.data / "train.jsonl")
+    train = [r for r in raw_train if r["gold"] or (args.objective == "pair" and "feedback" in r)]
     dev_path = args.dev_data or args.data / "dev.jsonl"
-    dev = [json.loads(x) for x in dev_path.read_text().splitlines()]
+    dev = read_jsonl(dev_path)
+    feedback_dev = read_jsonl(args.feedback_dev_data) if args.feedback_dev_data is not None else []
+    feedback_development = feedback_dev_report(feedback_dev, raw_train, dev)
+    if args.feedback_dev_data is not None:
+        from milai_lab.methods.laya_memory_policy import project_operation_payload
+
+        feedback_dev = [project_operation_payload(row, args.operation_state)
+                        for row in feedback_dev]
     if args.task == "memory_operation":
         from milai_lab.methods.laya_memory_policy import project_operation_payload
 
@@ -218,7 +286,8 @@ def main() -> None:
             for row in train]
         weights = mixture_event_weights(weighted_rows, {
             "feedback": 1.0, "operation_replay": args.replay_weight})
-    stages = training_stages(len(train), args.epochs, args.seed, args.optimizer_updates)
+    stages = training_stages(len(train), args.epochs, args.seed, args.optimizer_updates,
+                             args.eval_at_updates, args.eval_every_updates)
     axis = "epoch" if args.optimizer_updates is None else "optimizer_updates"
     run = {"status": "RUNNING", "pid": os.getpid(), "data": str(args.data.resolve()),
            "base_checkpoint": str(args.checkpoint.resolve()), "seed": args.seed,
@@ -234,8 +303,12 @@ def main() -> None:
            "batch_size": args.micro_batch_size,
            "gradient_accumulation": 16 // args.micro_batch_size,
            "max_len": args.max_len, "head_max_len": args.head_max_len, "train_states": len(train),
-           "dev_states": len(dev), "encoder_lr": 2.5e-5, "head_lr": 1e-4,
-           "freeze_encoder": False, "objective": args.objective,
+           "dev_states": len(dev), "encoder_lr": args.encoder_lr, "head_lr": args.head_lr,
+           "freeze_encoder": args.freeze_encoder, "objective": args.objective,
+           "evaluation_points": [step for step, _ in stages],
+           "feedback_dev": feedback_development,
+           "feedback_dev_source": (str(args.feedback_dev_data.resolve())
+                                   if args.feedback_dev_data is not None else None),
            "loss_weighting": "event-and-family-normalized",
            "evaluate_train": args.evaluate_train,
            "train_eval_final_only": args.train_eval_final_only,
@@ -280,8 +353,11 @@ def main() -> None:
         if args.gradient_checkpointing:
             model.encoder.gradient_checkpointing_enable(
                 gradient_checkpointing_kwargs={"use_reentrant": False})
-        lengths = {split: audit(rows, tok, args.max_len, args.head_max_len) for split, rows in (
-            ("train", train), ("dev", dev))}
+        evaluation_rows = {"train": train, "dev": dev}
+        if args.feedback_dev_data is not None:
+            evaluation_rows["feedback-dev"] = feedback_dev
+        lengths = {split: audit(rows, tok, args.max_len, args.head_max_len)
+                   for split, rows in evaluation_rows.items()}
         write_json(args.output / "lengths.json", lengths)
         if any(r["state_tokens_dropped"] or r["head_tokens_dropped"]
                for records in lengths.values() for r in records):
@@ -306,18 +382,15 @@ def main() -> None:
         probes = {"encoder": next(n for n in parameters if n.startswith("encoder.")),
                   "head": next(n for n in parameters if not n.startswith("encoder."))}
         before = {key: parameters[name].detach().cpu().clone() for key, name in probes.items()}
-        optimizer = torch.optim.AdamW([
-            {"params": [p for n, p in parameters.items() if n.startswith("encoder.")],
-             "lr": run["encoder_lr"]},
-            {"params": [p for n, p in parameters.items() if not n.startswith("encoder.")],
-             "lr": run["head_lr"]}], weight_decay=0.01)
+        optimizer = torch.optim.AdamW(optimizer_groups(
+            model, args.encoder_lr, args.head_lr, args.freeze_encoder), weight_decay=0.01)
         steps = run["planned_optimizer_updates"]
         scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, steps, eta_min=1e-6)
 
         def evaluate(epoch: int, split: str = "dev") -> dict[str, Any]:
             model.eval()
             predictions = []
-            rows = dev if split == "dev" else train
+            rows = evaluation_rows[split]
             for index, row in enumerate(rows):
                 payload = {k: row[k] for k in ("state", "questions")}
                 previous_counts = dict(decision.counters)
@@ -325,7 +398,11 @@ def main() -> None:
                 evaluation_counts[split].update({
                     k: v - previous_counts[k] for k, v in decision.counters.items()})
                 write_json(args.output / split / str(epoch) / f"{index}.json", predictions[-1])
-            if args.task == "memory_operation":
+            if split == "feedback-dev":
+                result = {target: score_feedback(rows, predictions, target)
+                          for target in ("answer", "delivery")}
+                result["coverage"] = feedback_development
+            elif args.task == "memory_operation":
                 from milai_lab.methods.memory_control_learning import score_operation_predictions
 
                 result = score_operation_predictions(rows, predictions)
@@ -342,6 +419,8 @@ def main() -> None:
             return result
 
         history = [] if args.skip_initial_dev else [{axis: 0, "dev": evaluate(0)}]
+        if args.feedback_dev_data is not None and not args.skip_initial_dev:
+            history[0]["feedback-dev"] = evaluate(0, "feedback-dev")
         if args.evaluate_train and not args.train_eval_final_only:
             if not history:
                 history.append({axis: 0})
@@ -350,7 +429,7 @@ def main() -> None:
         option_rng = random.Random(args.seed + 10000)  # noqa: S311 -- independent of row order
         encoded_pass = 0
         for checkpoint_step, windows in stages:
-            model.train()
+            training_mode(model, args.freeze_encoder)
             loss_total = 0.0
             offered = 0
             for window in windows:
@@ -433,6 +512,8 @@ def main() -> None:
                                   "updates": run["optimizer_updates"]}), flush=True)
             history.append({axis: checkpoint_step, "weighted_loss_mean": loss_total / offered,
                             "dev": evaluate(checkpoint_step)})
+            if args.feedback_dev_data is not None:
+                history[-1]["feedback-dev"] = evaluate(checkpoint_step, "feedback-dev")
             if args.objective == "soft-ce":
                 history[-1]["weighted_ce_mean"] = loss_total / offered
             if args.evaluate_train and (
@@ -443,7 +524,10 @@ def main() -> None:
                       "temperature": [1.0, 1.0, 1.0], "temperature_by_options": {},
                       "fine_tuned": True,
                       "training": {"milai_reader": {**run, axis: checkpoint_step}}}
-            checkpoint_writer(model, tok, config, str(args.output / "checkpoint_latest"))
+            destination = args.output / "checkpoint_latest"
+            if args.eval_at_updates is not None or args.eval_every_updates is not None:
+                destination = args.output / "checkpoints" / f"update-{checkpoint_step}"
+            checkpoint_writer(model, tok, config, str(destination))
         changes = {key: {"parameter": name, "changed_elements": int((
             parameters[name].detach().cpu() != before[key]).sum())} for key, name in probes.items()}
         write_json(args.output / "parameter-probes.json", changes)

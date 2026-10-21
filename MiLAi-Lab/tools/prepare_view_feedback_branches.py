@@ -96,6 +96,7 @@ def main() -> None:
                              "explicit source-based branch proposals, not outcome labels")
     parser.add_argument("--per-group", type=int, default=6)
     parser.add_argument("--seed", type=int, default=0)
+    parser.add_argument("--split", choices=("train", "dev"), default="train")
     parser.add_argument("--continuation-steps", type=int, default=2)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
@@ -129,8 +130,8 @@ def main() -> None:
                 entry["reason"] = "no_actual_decision"
             elif call["initial_observation"].get("observed_materials") is None:
                 entry["reason"] = "pre_W4_observation"
-            elif history["split"] != "train" or history["source_group"] not in args.groups:
-                entry["reason"] = "outside_declared_training_groups"
+            elif history["split"] != args.split or history["source_group"] not in args.groups:
+                entry["reason"] = "outside_declared_source_groups_or_split"
             elif len(branch_actions(call)) < 2:
                 entry["reason"] = "fewer_than_two_actual_action_branches"
             else:
@@ -163,6 +164,7 @@ def main() -> None:
     write_json(args.output / "policies.json", policies)
     write_json(args.output / "selection.json", {
         "status": "PREPARED_NOT_EXECUTED", "groups": args.groups, "seed": args.seed,
+        "split": args.split,
         "per_group_maximum": args.per_group, "nominated_captures": include,
         "binding_nominations": bindings,
         "selected": selected, "inventory": inventory, "states": len(selected),

@@ -17,7 +17,7 @@ from collections import Counter
 from pathlib import Path
 from typing import Any
 
-from milai_lab.harness.artifact_io import read_json, write_json
+from milai_lab.harness.artifact_io import read_json, read_jsonl, write_json
 from milai_lab.harness.contextual_artifacts import RunBudget, RunLimits
 from milai_lab.providers.laya_local import NativeDecision
 
@@ -113,7 +113,7 @@ def main() -> None:
     torch.set_num_threads(args.threads)
     torch.manual_seed(0)
     args.output.mkdir(parents=True, exist_ok=False)
-    rows = [json.loads(line) for line in args.data.read_text().splitlines()]
+    rows = read_jsonl(args.data)
     if args.task == "memory_operation":
         from milai_lab.methods.laya_memory_policy import project_operation_payload
 

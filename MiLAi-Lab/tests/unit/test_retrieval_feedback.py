@@ -168,6 +168,16 @@ def test_compile_keeps_actual_input_and_both_feedbacks_in_one_pool(tmp_path):
     assert "refresh" not in {pair["left"], pair["right"]}
 
 
+def test_dev_compilation_preserves_declared_split_and_exposure(tmp_path):
+    raw, reviews, _ = branch_fixture(tmp_path)
+    raw["metadata"].update(split="dev", exposure="existing_development")
+    compiled, = compile_feedback([raw], reviews, split="dev")
+    assert compiled["metadata"]["split"] == "dev"
+    assert compiled["metadata"]["exposure"] == "existing_development"
+    with pytest.raises(ValueError, match="declared split"):
+        compile_feedback([raw], reviews, split="train")
+
+
 @pytest.mark.parametrize("change", ["parameters", "before", "continuation", "source_split"])
 def test_changed_experiment_cannot_be_compiled_as_same_state_feedback(tmp_path, change):
     raw, reviews, cases = branch_fixture(tmp_path)

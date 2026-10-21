@@ -36,6 +36,12 @@ def read_json(path: Path) -> Any:
     return json.loads(path.read_text())
 
 
+def read_jsonl(path: Path) -> list[dict[str, Any]]:
+    """Read physical JSONL records; Unicode separators inside strings are content."""
+    with path.open(encoding="utf-8") as stream:
+        return [json.loads(line) for line in stream]
+
+
 def entrypoint_settings(settings: dict[str, Any], name: str) -> dict[str, Any]:
     """Select an existing entry's settings from one declared candidate file."""
     if "entrypoints" not in settings:

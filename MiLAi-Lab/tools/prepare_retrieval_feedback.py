@@ -8,13 +8,14 @@ import time
 from pathlib import Path
 from typing import Any
 
-from milai_lab.harness.artifact_io import read_json, write_json
+from milai_lab.harness.artifact_io import read_json, read_jsonl, write_json
 from milai_lab.methods.memory_control_learning import decision_example
 from retrieval_feedback import feedback_counts, validate_feedback
 
 
 def compile_feedback(
     raw: list[dict[str, Any]], reviews: list[dict[str, Any]],
+    *, split: str = "train",
 ) -> list[dict[str, Any]]:
     by_event = {row["metadata"]["event_id"]: row for row in raw}
     if len(by_event) != len(raw):
@@ -27,8 +28,8 @@ def compile_feedback(
             raise ValueError("Duplicate state review")
         seen.add(event_id)
         row = copy.deepcopy(by_event[event_id])
-        if row["metadata"]["split"] != "train" or row["gold"]:
-            raise ValueError("Feedback collection uses masked training-source states")
+        if row["metadata"]["split"] != split or row["gold"]:
+            raise ValueError("Feedback collection requires masked states from the declared split")
         capture = Path(review["capture"])
         call = read_json(capture / "call.json")
         expected = decision_example(
@@ -81,10 +82,11 @@ def main() -> None:
     parser.add_argument("raw", type=Path)
     parser.add_argument("reviews", type=Path)
     parser.add_argument("output", type=Path)
+    parser.add_argument("--split", choices=("train", "dev"), default="train")
     args = parser.parse_args()
     started, cpu = time.perf_counter(), time.process_time()
-    raw = [json.loads(line) for line in args.raw.read_text().splitlines()]
-    rows = compile_feedback(raw, read_json(args.reviews)["states"])
+    raw = read_jsonl(args.raw)
+    rows = compile_feedback(raw, read_json(args.reviews)["states"], split=args.split)
     args.output.mkdir(parents=True, exist_ok=False)
     (args.output / "feedback.jsonl").write_text(
         "".join(json.dumps(row, ensure_ascii=False) + "\n" for row in rows))
@@ -92,6 +94,7 @@ def main() -> None:
         "status": "REVIEWED_COMMON_PAIR_POOL_NOT_FITTED",
         "raw": str(args.raw), "reviews": str(args.reviews), "raw_states": len(raw),
         "reviewed_states": len(rows), "unreviewed_states": len(raw) - len(rows),
+        "split": args.split,
         "families": len({row["metadata"]["family"] for row in rows}),
         "feedback": {target: feedback_counts(rows, target) for target in ("answer", "delivery")},
         "model_input_unchanged": True, "full_option_ce_labels_added": False,

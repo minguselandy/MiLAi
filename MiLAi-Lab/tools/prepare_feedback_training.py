@@ -11,13 +11,13 @@ from collections import Counter
 from pathlib import Path
 from typing import Any
 
-from milai_lab.harness.artifact_io import read_json, write_json
-from retrieval_feedback import feedback_counts, validate_feedback
+from milai_lab.harness.artifact_io import read_json, read_jsonl, write_json
+from retrieval_feedback import feedback_counts, feedback_dev_report, validate_feedback
 from retrieval_mixture import normalized_mixture
 
 
 def read_rows(path: Path) -> list[dict[str, Any]]:
-    return [json.loads(line) for line in path.read_text().splitlines()]
+    return read_jsonl(path)
 
 
 def matched_old_rows(
@@ -52,7 +52,10 @@ def prepare(
     old_train: list[dict[str, Any]], old_dev: list[dict[str, Any]],
     feedback: list[dict[str, Any]], old_lengths: dict[str, int], new_lengths: dict[str, int],
     masses: dict[str, float], seed: int,
+    *, feedback_dev: list[dict[str, Any]] | None = None,
 ) -> tuple[dict[str, list[dict[str, Any]]], dict[str, Any]]:
+    feedback_dev = [] if feedback_dev is None else feedback_dev
+    dev_report = feedback_dev_report(feedback_dev, [*old_train, *feedback], old_dev)
     pool = [row for row in old_train
             if row["metadata"]["task"] == "memory_operation" and row["gold"]]
     dev = [copy.deepcopy(row) for row in old_dev if row["metadata"]["task"] == "memory_operation"]
@@ -84,6 +87,7 @@ def prepare(
         "feedback_states": len(own), "old_replay_states": len(replay),
         "continued_ce_states": len(control), "shared_states": len(shared),
         "dev_states": len(dev), "optimizer_updates": updates, "row_draws_each_arm": updates * 16,
+        "feedback_dev": dev_report,
         "effective_batch": 16, "feedback": {
             target: feedback_counts(shared, target) for target in ("answer", "delivery")},
         "old_sampling": "Component quotas from original operation masses; prefer least-used source "
@@ -102,7 +106,8 @@ def prepare(
                  "differences. "
                  "Original full T1 train/dev files are retained, not rewritten.",
     }
-    return {"feedback": shared, "continued-ce": control, "dev": dev}, report
+    return {"feedback": shared, "continued-ce": control, "dev": dev,
+            "feedback-dev": copy.deepcopy(feedback_dev)}, report
 
 
 def main() -> None:
@@ -113,6 +118,7 @@ def main() -> None:
     parser.add_argument("new_lengths", type=Path)
     parser.add_argument("output", type=Path)
     parser.add_argument("--seed", type=int, default=0)
+    parser.add_argument("--feedback-dev", type=Path)
     args = parser.parse_args()
     started, cpu = time.perf_counter(), time.process_time()
     old_lengths = {x["event_id"]: x["sequence_tokens"]
@@ -120,15 +126,20 @@ def main() -> None:
     new_lengths = {x["event_id"]: x["sequence_tokens"] for x in read_json(args.new_lengths)}
     data, report = prepare(read_rows(args.old_data / "train.jsonl"),
         read_rows(args.old_data / "dev.jsonl"), read_rows(args.feedback), old_lengths, new_lengths,
-        read_json(args.old_data / "mixture.json"), args.seed)
+        read_json(args.old_data / "mixture.json"), args.seed,
+        feedback_dev=read_rows(args.feedback_dev) if args.feedback_dev is not None else None)
     args.output.mkdir(parents=True, exist_ok=False)
     for arm in ("feedback", "continued-ce"):
         directory = args.output / arm
         directory.mkdir()
-        for split, rows in (("train", data[arm]), ("dev", data["dev"])):
+        splits = [("train", data[arm]), ("dev", data["dev"])]
+        if args.feedback_dev is not None:
+            splits.append(("feedback-dev", data["feedback-dev"]))
+        for split, rows in splits:
             (directory / f"{split}.jsonl").write_text(
                 "".join(json.dumps(row, ensure_ascii=False) + "\n" for row in rows))
     report.update(old_data=str(args.old_data), feedback_file=str(args.feedback),
+        feedback_dev_file=str(args.feedback_dev) if args.feedback_dev is not None else None,
         old_length_audit=str(args.old_lengths), new_length_audit=str(args.new_lengths),
         compute={"wall_seconds": time.perf_counter() - started,
                  "cpu_seconds": time.process_time() - cpu}, ledger_recorded=False)

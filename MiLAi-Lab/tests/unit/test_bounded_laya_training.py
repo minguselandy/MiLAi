@@ -1,5 +1,7 @@
 """Derived prefixes and event multiplicity must not inflate a family's loss."""
 
+import copy
+import json
 import os
 import random
 import sys
@@ -13,9 +15,11 @@ from train_bounded_laya import (
     compute_counts,
     decision_loss,
     event_weights,
+    optimizer_groups,
     state_option_seed,
     training_forward,
     training_microbatches,
+    training_mode,
     training_stages,
 )
 
@@ -59,6 +63,119 @@ def test_fixed_update_budget_keeps_full_windows_across_different_masks():
         for data_pass in range(1, len(draws) // size + 1):
             assert sorted(i for p, i in draws if p == data_pass) == list(range(size))
         assert stages == training_stages(size, epochs=9, seed=7, update_budget=5)
+
+
+def test_evaluation_points_partition_one_long_optimization_trajectory():
+    reference = training_stages(37, 2, 7, 524)
+    for options, points in (({"eval_at_updates": [32, 64, 128, 262, 393]},
+                            [32, 64, 128, 262, 393, 524]),
+                           ({"eval_every_updates": 128}, [128, 256, 384, 512, 524])):
+        stages = training_stages(37, 2, 7, 524, **options)
+        assert [step for step, _ in stages] == points
+        assert [w for _, ws in stages for w in ws] == [w for _, ws in reference for w in ws]
+
+
+@pytest.mark.parametrize("budget,options", [
+    (None, {"eval_at_updates": [1]}), (5, {"eval_at_updates": [6]}),
+    (5, {"eval_at_updates": [0]}), (5, {"eval_every_updates": 0}),
+    (5, {"eval_at_updates": [1], "eval_every_updates": 2}),
+])
+def test_custom_evaluation_requires_points_on_an_explicit_update_budget(budget, options):
+    with pytest.raises(ValueError):
+        training_stages(37, 2, 0, budget, **options)
+
+
+@pytest.mark.parametrize("freeze", [False, True])
+def test_declared_parameter_scope_controls_real_updates_and_encoder_dropout(freeze):
+    torch = pytest.importorskip("torch")
+    model = torch.nn.Module()
+    model.encoder = torch.nn.Sequential(torch.nn.Linear(3, 3), torch.nn.Dropout(.5))
+    model.head = torch.nn.Linear(3, 1)
+    original = {n: p.detach().clone() for n, p in model.named_parameters()}
+    groups = optimizer_groups(model, 5e-6, 1e-4, freeze)
+    optimizer = torch.optim.AdamW(groups)
+    model.eval()  # Simulate the preceding checkpoint evaluation.
+    training_mode(model, freeze)
+    assert model.head.training and model.encoder.training is not freeze
+    model.head(model.encoder(torch.ones(4, 3))).square().mean().backward()
+    optimizer.step()
+    for name, parameter in model.named_parameters():
+        if name.startswith("encoder.") and freeze:
+            assert torch.equal(parameter, original[name])
+            assert parameter.grad is None and parameter not in optimizer.state
+        else:
+            assert not torch.equal(parameter, original[name])
+    assert [group["lr"] for group in groups] == ([1e-4] if freeze else [5e-6, 1e-4])
+
+
+@pytest.mark.parametrize("freeze", [False, True])
+def test_native_training_cli_retains_checkpoints_and_separate_feedback_predictions(
+    tmp_path, monkeypatch, freeze,
+):
+    torch = pytest.importorskip("torch")
+    transformers = pytest.importorskip("transformers")
+    if os.environ.get("CUDA_VISIBLE_DEVICES") != "2,3" or torch.cuda.device_count() != 2:
+        pytest.skip("Native trainer uses allocated physical GPUs 2,3")
+    from laya.common import DecisionModel
+    from laya.train import load_checkpoint, save_checkpoint
+
+    import train_bounded_laya
+    from milai_lab.harness.artifact_io import read_json
+    from milai_lab.harness.contextual_artifacts import RunBudget, RunLimits
+
+    vocab = tmp_path / "vocab.txt"
+    vocab.write_text("[PAD]\n[UNK]\n[CLS]\n[SEP]\n[MASK]\nread\nfinish\nevidence\n")
+    tokenizer = transformers.BertTokenizer(vocab_file=str(vocab))
+    encoder = transformers.BertModel(transformers.BertConfig(
+        vocab_size=8, hidden_size=16, intermediate_size=24,
+        num_hidden_layers=1, num_attention_heads=2, max_position_embeddings=512))
+    initial = DecisionModel(encoder, head_layers=0, n_act=1)
+    base = tmp_path / "base"
+    save_checkpoint(initial, tokenizer, {"head_layers": 0, "act_costs": {}}, str(base))
+    source = {"state": {"task": {"request": "read\u0085evidence\u2028then\u2029finish"}},
+              "questions": {"next": {"type": "choice", "instructions": "Choose",
+                                      "criteria": {"read": "READ", "finish": "HANDOFF"}}},
+              "gold": {"next": {"probabilities": {"read": 1.0}}},
+              "metadata": {"family": "train-family", "split": "train", "row": 0,
+                           "state_id": 0, "event_id": "train/0", "label_status": "reviewed",
+                           "action_kinds": {"read": "READ", "finish": "HANDOFF"}}}
+    dev = copy.deepcopy(source)
+    dev["metadata"].update(family="dev-family", split="dev", state_id=1, event_id="dev/0")
+    feedback = copy.deepcopy(dev)
+    feedback["gold"] = {}
+    feedback["feedback"] = {"comparisons": [{"left": "read", "right": "finish",
+                                             "answer": "unknown", "delivery": "left"}]}
+    data = tmp_path / "data"
+    data.mkdir()
+    for name, row in (("train", source), ("dev", dev), ("feedback-dev", feedback)):
+        (data / f"{name}.jsonl").write_text(json.dumps(row, ensure_ascii=False) + "\n")
+    budget = tmp_path / "budget.json"  # Isolated unit-test ledger, never the research ledger.
+    budget.write_text(json.dumps(RunBudget(RunLimits(), budget).state))
+    output = tmp_path / "run"
+    monkeypatch.setattr(sys, "argv", ["train_bounded_laya", str(data), str(base), str(output),
+        "--budget", str(budget), "--task", "memory_operation", "--optimizer-updates", "2",
+        "--eval-at-updates", "1", "--evaluate-train", "--shuffle-options", "--max-len", "512",
+        "--head-max-len", "128", "--feedback-dev-data", str(data / "feedback-dev.jsonl"),
+        *(["--freeze-encoder"] if freeze else [])])
+    train_bounded_laya.main()
+    run, history = read_json(output / "run.json"), read_json(output / "history.json")
+    assert run["status"] == "COMPLETED" and run["optimizer_updates"] == 2
+    assert run["train_sequence_rows"] == 32 and run["dev_states"] == 1
+    assert [h["optimizer_updates"] for h in history] == [0, 1, 2]
+    for entry in history:
+        assert entry["dev"]["counts"]["labelled"] == entry["train"]["counts"]["labelled"] == 1
+        assert entry["feedback-dev"]["answer"]["counts"] == {"unknown": 1}
+        assert entry["feedback-dev"]["delivery"]["counts"]["directional_pairs"] == 1
+    # Both targets reuse three predictions, not six separate model calls.
+    assert read_json(output / "compute.json")["feedback-dev_forwards"] == 3
+    final, _, _ = load_checkpoint(str(output / "checkpoint"))
+    saved, _, _ = load_checkpoint(str(output / "checkpoints/update-2"))
+    assert (output / "checkpoints/update-1/model.safetensors").exists()
+    assert all(torch.equal(p, q)
+               for p, q in zip(final.parameters(), saved.parameters(), strict=True))
+    changes = read_json(output / "parameter-probes.json")
+    assert (changes["encoder"]["changed_elements"] == 0) == freeze
+    assert changes["head"]["changed_elements"] > 0
 
 
 def test_native_encoder_activation_recomputation_preserves_gradients():

@@ -8,7 +8,7 @@ import time
 from collections import Counter
 from pathlib import Path
 
-from milai_lab.harness.artifact_io import read_json, write_json
+from milai_lab.harness.artifact_io import read_json, read_jsonl, write_json
 from retrieval_mixture import combine_components
 
 
@@ -20,7 +20,7 @@ def main() -> None:
     started, cpu = time.perf_counter(), time.process_time()
     recipe = read_json(args.recipe)
     paths = {path for component in recipe["components"] for path in component["files"]}
-    sources = {path: [json.loads(line) for line in Path(path).read_text().splitlines()]
+    sources = {path: read_jsonl(Path(path))
                for path in sorted(paths)}
     components = []
     for component in recipe["components"]:
