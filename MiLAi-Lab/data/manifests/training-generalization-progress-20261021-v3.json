@@ -1,0 +1,460 @@
+{
+  "status": "ACTIVE_COMPLETE_FEEDBACK_DEV_DIAGNOSIS_NEW_SOURCE_COLLECTION_RUNNING",
+  "previous_goal_turn": "progress:48realbranches,source admission,commit92d37ee1",
+  "implementation_version": "890dbdd0",
+  "execution_document": "docs/TRAINING_GENERALIZATION_EXECUTION_20261021.md",
+  "feedback_dev": {
+    "status": "REVIEWED_COMMON_PAIR_POOL_NOT_FITTED",
+    "raw": "artifacts/generalization-20261021/feedback-dev-branches-v1/raw-selected-states.jsonl",
+    "reviews": "artifacts/generalization-20261021/feedback-dev-review-v1/final-reviews-v1.json",
+    "raw_states": 16,
+    "reviewed_states": 16,
+    "unreviewed_states": 0,
+    "split": "dev",
+    "families": 8,
+    "feedback": {
+      "answer": {
+        "feedback_states": 16,
+        "states_with_direction": 11,
+        "unknown_pairs": 20,
+        "directional_pairs": 21,
+        "tie_pairs": 7
+      },
+      "delivery": {
+        "feedback_states": 16,
+        "states_with_direction": 16,
+        "directional_pairs": 39,
+        "tie_pairs": 6,
+        "unknown_pairs": 3
+      }
+    },
+    "model_input_unchanged": true,
+    "full_option_ce_labels_added": false,
+    "scope": "One shared pair pool; arm chooses feedback target, not a different state set.",
+    "compute": {
+      "wall_seconds": 1.1137162437662482,
+      "cpu_seconds": 1.1136817860000001
+    },
+    "ledger_recorded": false
+  },
+  "common_support_dev": {
+    "counts": {
+      "pairs_outside_common_support": 27,
+      "states_with_common_direction": 11,
+      "directional_pairs": 21,
+      "same_direction_pairs": 21
+    },
+    "states_retained": 16,
+    "original": {
+      "answer": {
+        "feedback_states": 16,
+        "states_with_direction": 11,
+        "unknown_pairs": 20,
+        "directional_pairs": 21,
+        "tie_pairs": 7
+      },
+      "delivery": {
+        "feedback_states": 16,
+        "states_with_direction": 16,
+        "directional_pairs": 39,
+        "tie_pairs": 6,
+        "unknown_pairs": 3
+      }
+    },
+    "common": {
+      "answer": {
+        "feedback_states": 16,
+        "states_with_direction": 11,
+        "directional_pairs": 21
+      },
+      "delivery": {
+        "feedback_states": 16,
+        "states_with_direction": 11,
+        "directional_pairs": 21
+      }
+    },
+    "scope": "Conditional diagnostic, not replacement for the full feedback pool. State order/IDs/replay retained; both targets use identical pair support. States with no common direction remain zero-direction states.",
+    "source": "artifacts/generalization-20261021/feedback-dev-final-v1/feedback.jsonl",
+    "model_calls": 0,
+    "compute": {
+      "wall_seconds": 0.012234136462211609,
+      "cpu_seconds": 0.012233942999999997
+    },
+    "ledger_recorded": false
+  },
+  "common_support_historical_train": {
+    "counts": {
+      "pairs_outside_common_support": 89,
+      "states_with_common_direction": 14,
+      "directional_pairs": 25,
+      "same_direction_pairs": 24,
+      "opposite_direction_pairs": 1
+    },
+    "states_retained": 74,
+    "original": {
+      "answer": {
+        "feedback_states": 37,
+        "states_with_direction": 15,
+        "unknown_pairs": 60,
+        "tie_pairs": 27,
+        "directional_pairs": 27,
+        "replay_states": 37
+      },
+      "delivery": {
+        "feedback_states": 37,
+        "states_with_direction": 26,
+        "directional_pairs": 56,
+        "tie_pairs": 36,
+        "unknown_pairs": 22,
+        "replay_states": 37
+      }
+    },
+    "common": {
+      "answer": {
+        "feedback_states": 37,
+        "states_with_direction": 14,
+        "directional_pairs": 25,
+        "replay_states": 37
+      },
+      "delivery": {
+        "feedback_states": 37,
+        "states_with_direction": 14,
+        "directional_pairs": 25,
+        "replay_states": 37
+      }
+    },
+    "scope": "Conditional diagnostic, not replacement for the full feedback pool. State order/IDs/replay retained; both targets use identical pair support. States with no common direction remain zero-direction states.",
+    "source": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/data/view-v4-feedback-fitting-v1/feedback/train.jsonl",
+    "model_calls": 0,
+    "compute": {
+      "wall_seconds": 0.08954393770545721,
+      "cpu_seconds": 0.08954432299999993
+    },
+    "ledger_recorded": false
+  },
+  "unchanged_training_inputs": {
+    "status": "EXACT_TRAIN_REPLAY_AND_OLD_DEV_ROWS_PRESERVED",
+    "arms": {
+      "feedback": {
+        "train": 74,
+        "dev": 860
+      },
+      "continued-ce": {
+        "train": 74,
+        "dev": 860
+      }
+    },
+    "feedback_dev_states": 16,
+    "feedback_dev_same_for_all_arms": true,
+    "new_training_runs": 0,
+    "compute": {
+      "wall_seconds": 1.486979952082038,
+      "cpu_seconds": 1.486927736
+    },
+    "ledger_recorded": false
+  },
+  "frozen_checkpoint_models": {
+    "t1-main": {
+      "answer": {
+        "counts": {
+          "unknown": 20,
+          "directional_pairs": 21,
+          "ordered_correctly": 7,
+          "tie": 7
+        },
+        "family_macro_state_pair_accuracy": 0.3125,
+        "family_macro_state_pair_loss": 2.880944871483306,
+        "families": 8,
+        "families_with_direction": 8
+      },
+      "delivery": {
+        "counts": {
+          "directional_pairs": 39,
+          "ordered_correctly": 20,
+          "tie": 6,
+          "unknown": 3
+        },
+        "family_macro_state_pair_accuracy": 0.53125,
+        "family_macro_state_pair_loss": 1.8806621852704288,
+        "families": 8,
+        "families_with_direction": 8
+      },
+      "selected_action_ids": {
+        "search_0_8": 16
+      },
+      "same_first_action_and_binding_as_t1_main": 16,
+      "unreviewed_actual_choices": [],
+      "reviewed_three_operation_rankings": {
+        "SEARCH>HANDOFF>REFRESH_VIEW": 16
+      }
+    },
+    "t1-operation-control": {
+      "answer": {
+        "counts": {
+          "unknown": 20,
+          "directional_pairs": 21,
+          "ordered_correctly": 7,
+          "tie": 7
+        },
+        "family_macro_state_pair_accuracy": 0.3125,
+        "family_macro_state_pair_loss": 2.2153721896104157,
+        "families": 8,
+        "families_with_direction": 8
+      },
+      "delivery": {
+        "counts": {
+          "directional_pairs": 39,
+          "ordered_correctly": 20,
+          "tie": 6,
+          "unknown": 3
+        },
+        "family_macro_state_pair_accuracy": 0.53125,
+        "family_macro_state_pair_loss": 1.2970483722866915,
+        "families": 8,
+        "families_with_direction": 8
+      },
+      "selected_action_ids": {
+        "search_0_8": 16
+      },
+      "same_first_action_and_binding_as_t1_main": 16,
+      "unreviewed_actual_choices": [],
+      "reviewed_three_operation_rankings": {
+        "SEARCH>HANDOFF>REFRESH_VIEW": 16
+      }
+    },
+    "continued-ce": {
+      "answer": {
+        "counts": {
+          "unknown": 20,
+          "directional_pairs": 21,
+          "ordered_correctly": 7,
+          "tie": 7
+        },
+        "family_macro_state_pair_accuracy": 0.3125,
+        "family_macro_state_pair_loss": 2.8830943909502658,
+        "families": 8,
+        "families_with_direction": 8
+      },
+      "delivery": {
+        "counts": {
+          "directional_pairs": 39,
+          "ordered_correctly": 20,
+          "tie": 6,
+          "unknown": 3
+        },
+        "family_macro_state_pair_accuracy": 0.53125,
+        "family_macro_state_pair_loss": 1.88762184879406,
+        "families": 8,
+        "families_with_direction": 8
+      },
+      "selected_action_ids": {
+        "search_0_8": 16
+      },
+      "same_first_action_and_binding_as_t1_main": 16,
+      "unreviewed_actual_choices": [],
+      "reviewed_three_operation_rankings": {
+        "SEARCH>HANDOFF>REFRESH_VIEW": 16
+      }
+    },
+    "answer": {
+      "answer": {
+        "counts": {
+          "unknown": 20,
+          "directional_pairs": 21,
+          "ordered_correctly": 15,
+          "tie": 7
+        },
+        "family_macro_state_pair_accuracy": 0.7083333333333334,
+        "family_macro_state_pair_loss": 0.6381719009291562,
+        "families": 8,
+        "families_with_direction": 8
+      },
+      "delivery": {
+        "counts": {
+          "directional_pairs": 39,
+          "ordered_correctly": 31,
+          "tie": 6,
+          "unknown": 3
+        },
+        "family_macro_state_pair_accuracy": 0.8333333333333334,
+        "family_macro_state_pair_loss": 0.392575168550862,
+        "families": 8,
+        "families_with_direction": 8
+      },
+      "selected_action_ids": {
+        "search_0_8": 13,
+        "search_0_16": 1,
+        "search_2_16": 1,
+        "refresh_view": 1
+      },
+      "same_first_action_and_binding_as_t1_main": 13,
+      "unreviewed_actual_choices": [
+        {
+          "state": 7,
+          "family": "memops_C03",
+          "choice": "search_0_16",
+          "parameters": {
+            "query_from": "request",
+            "limit": 16
+          }
+        },
+        {
+          "state": 10,
+          "family": "memops_E08",
+          "choice": "search_2_16",
+          "parameters": {
+            "query_from": "required_point",
+            "index": 1,
+            "limit": 16
+          }
+        }
+      ],
+      "reviewed_three_operation_rankings": {
+        "SEARCH>REFRESH_VIEW>HANDOFF": 15,
+        "REFRESH_VIEW>SEARCH>HANDOFF": 1
+      }
+    },
+    "delivery": {
+      "answer": {
+        "counts": {
+          "unknown": 20,
+          "directional_pairs": 21,
+          "ordered_correctly": 15,
+          "tie": 7
+        },
+        "family_macro_state_pair_accuracy": 0.7083333333333334,
+        "family_macro_state_pair_loss": 0.7911311579060125,
+        "families": 8,
+        "families_with_direction": 8
+      },
+      "delivery": {
+        "counts": {
+          "directional_pairs": 39,
+          "ordered_correctly": 32,
+          "tie": 6,
+          "unknown": 3
+        },
+        "family_macro_state_pair_accuracy": 0.8541666666666667,
+        "family_macro_state_pair_loss": 0.46286272357503483,
+        "families": 8,
+        "families_with_direction": 8
+      },
+      "selected_action_ids": {
+        "search_0_8": 16
+      },
+      "same_first_action_and_binding_as_t1_main": 16,
+      "unreviewed_actual_choices": [],
+      "reviewed_three_operation_rankings": {
+        "SEARCH>REFRESH_VIEW>HANDOFF": 16
+      }
+    }
+  },
+  "native_input_lengths": {
+    "operation_state": "shared",
+    "max_len": 16384,
+    "head_max_len": 2048,
+    "max_actual_tokens": 7761,
+    "within_8192": 16,
+    "over_8192": 0,
+    "complete_inputs": true,
+    "no_model_forward": true,
+    "compute": {
+      "wall_seconds": 1.8671750528737903,
+      "cpu_seconds": 1.8729891739999998
+    },
+    "ledger_recorded": false
+  },
+  "aggregate_model_compute": {
+    "forwards": 80,
+    "sequence_rows": 80,
+    "input_tokens": 266675,
+    "cpu_seconds": 71.30634895700001,
+    "wall_seconds": 58.47345689218491
+  },
+  "analysis_artifact": "artifacts/generalization-20261021/feedback-checkpoint-evaluation-v1/analysis-v1.json",
+  "action_prior_finding": "Delivery has exactly SEARCH>REFRESH_VIEW>HANDOFF on all16states and selects the same search_0_8 as T1. Its score improvement is matched by that fixed order; no demonstrated conditional first-action gain in this cohort. Answer changes3bindings,2unexecuted in this branch pool remain unknown.",
+  "scope": "8exposed development families; source-author review, partial action coverage, not a new fit, blind confirmation or fullHost endpoint.",
+  "new_collection": {
+    "observed_at": "2026-10-21T11:30:34.754065+00:00",
+    "exec_session": 93727,
+    "parent_status": "RUNNING",
+    "parent_pid": 1131060,
+    "parent_cmdline": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python -u artifacts/generalization-20261021/collect_source_expansion_v1.py ",
+    "active_batch": 0,
+    "child_status": "RUNNING",
+    "child_pid": 1131065,
+    "child_cmdline": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/http-env/bin/python -u /cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/frozen-feedback-diagnostics-v1/MiLAi-Lab/tools/run_host_intent_retrieval.py /cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/source-expansion-collection-v1-preparation/config.json /cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/source-expansion-collection-v1-preparation/batch-0.json /cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/source-expansion-collection-v1/batch-0 --source-version 890dbdd0 --policies fixed_context --interfaces query_only rich --split train --transport json_action --capture-retrieval-calls ",
+    "closed_positions_current_batch": 13,
+    "planned_positions_current_batch": 122,
+    "closed_statuses": {
+      "COMPLETED": 11,
+      "FAILED": 2
+    },
+    "planned_positions_all_batches": 480,
+    "source_version": "890dbdd0",
+    "source_reviewed_rows": 4,
+    "source_review_planned_rows": 240,
+    "annotation_blinding": "No answers/action results from unreviewed source rows emitted by this observer.",
+    "complete_goal": false
+  },
+  "new_collection_plan": "data/manifests/training-generalization-source-collection-plan-v1.json",
+  "source_review": {
+    "reviewed_families": 2,
+    "reviewed_rows": 4,
+    "planned_families": 128,
+    "planned_rows": 240,
+    "source_first_rule": "Save visible-pool semantics before corresponding native answers/model outputs; collecting fixed inputs can run concurrently, but no automatic labels or gradient admission."
+  },
+  "new_actual_training_source_states": {
+    "status": "ACTUAL_NEW_TRAIN_SOURCE_STATES_EXPORTED_MASKED",
+    "closed_positions": 7,
+    "actual_states": 46,
+    "source_families": [
+      "musique-family-000690",
+      "musique-family-000743"
+    ],
+    "labelled_states": 0,
+    "split": "train",
+    "source_version": "890dbdd0",
+    "interfaces": {
+      "query_only": 32,
+      "rich": 14
+    },
+    "states_with_completed_prior_operation": 38,
+    "actual_bindings_retained": true,
+    "scope": "Only currently closed positions from the two source-first-reviewed families; full480position collection continues. No negative labels inferred from empty/insufficient pools. No arbitrary-state replay claim.",
+    "compute": {
+      "wall_seconds": 0.12035403400659561,
+      "cpu_seconds": 0.12033729399999998
+    },
+    "ledger_recorded": false
+  },
+  "validation": {
+    "pytest": {
+      "passed": 55,
+      "skipped": 0,
+      "failed": 0,
+      "junit": "artifacts/generalization-20261021/validation/feedback-diagnostics-tests.xml"
+    },
+    "ruff": "PASS5changedfiles",
+    "mypy": "PASS3implementationfiles",
+    "package_boundary": "PASS",
+    "tools_boundary": "PASS, existing grandfathered dependencies unchanged"
+  },
+  "compute_settlement_v2": {
+    "status": "SETTLED_ONCE",
+    "cpu_seconds": 10.304391396,
+    "measured_phases": 12,
+    "phase": "training_generalization_20261021_feedback_diagnostics_preparation_v2",
+    "native_model_compute_already_directly_recorded": true,
+    "closed_file_must_not_be_reused": true
+  },
+  "new_research_fits": 0,
+  "no_sha_verification": true,
+  "no_new_services": true,
+  "no_subagents": true,
+  "pushed": false,
+  "merged": false,
+  "goal_complete": false,
+  "remaining": "Complete480positioncollection and source/actual-state review; post-action same-before replay, nested64/128/256 fits and controls, STATE, factorial/long-context/E3/Host/cost, protected external andseed0/1/2 confirmation."
+}

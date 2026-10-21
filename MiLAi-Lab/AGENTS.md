@@ -1,3 +1,38 @@
+# LATEST V3: SOURCE COLLECTION LIVE / FEEDBACK DEV COMPLETE — 2026-10-21
+
+Full generalization goal ACTIVE. Previous goal turn was progress, not blocked.
+LIVE parent1131060/exec93727, child1131065(batch0), frozen890dbdd0. Revalidate actual/proc
+and artifacts/generalization-20261021/source-expansion-collection-v1/driver.json. Do not restart.
+Four predeclared32-family batches122/116/122/120 positions =480, only new128trainfamilies.
+19:30Shanghai snapshot batch0closed13/122:11completed2knownfailures; live now must be rechecked.
+Original T1 fixed_context settings/Host/perrequest budgets and600/8m queue limits unchanged;
+independent batches keep whole cohort without increasing queue/perrequest limits. Serial only.
+Source semantics review currently4/240rows(twofamilies), native reference/model answers unopened
+for unreviewed rows. Collection can run while source-only annotation proceeds: save sourceproofs
+BEFORE opening corresponding native answers or collected outputs. No automatic gradient labels.
+Progress polling must print only counts/status, not answers/actions for unreviewed sources.
+Closed7positions from reviewedtwofamilies exported46realstates(38afteroperation), goldEMPTY.
+No arbitrary post-action same-before replay or new fitting yet. Full requirements remain.
+
+Feedback dev CLOSED48realbranches/16states/8families,42readoutscomplete6failed; no retries.
+All16 reviewed, all48pairs compiled. Answer21directional/7tie/20unknown,delivery39/6/3.
+Inherited componentwise resource rule changes3qualityties; originalqualitynotes retained.
+Common-support dev21all same direction; historical train25(24same/1opposite), keep74states/replay.
+New dev appended to both fitting arms, original74train/860olddev exactly unchanged.
+Five frozen seed0 checkpoint evaluations CLOSED exec94121:80forwards266675tokens; all16inputs
+<8192(max7761), no truncation. No actual gradient updates/checkpoint selection. CPU71.306349
+seconds directly charged by evaluators; do not bill again.55tests passed/no skips +Ruff/mypy/boundaries.
+Delivery higher pair scores are exactly a constant SEARCH>REFRESH_VIEW>HANDOFF ordering;
+its firstaction remains search_0_8 on all16, identical toT1. Answer changes3bindings,2notexecuted
+in originalbranchpool stayunknown. Not evidence of conditional policy or Host generalization gain.
+All6fixed type rankings are diagnostic only, not six executed controllers or a chosen test winner.
+
+compute-settlement-v1(106.288865CPU) andv2(10.304391CPU/12phases) CLOSED/SETTLEDONCE.
+NEVER append/re-settle these files. No offline settlement or second model job whilecollectionlive.
+Current source-review/export work is pending/unmeasured as recorded; oldpending35 untouched.
+See docs/TRAINING_GENERALIZATION_EXECUTION_20261021.md andprogress-20261021-v3manifest.
+NoSHA/fingerprint checks/newservices/subagents/publication; earlier snapshots below historical.
+
 # LATEST GENERALIZATION PROGRESS — 2026-10-21 / FULL GOAL ACTIVE
 
 Actual feedback-dev execution CLOSED: session71390exit0/PID956232absent, frozen9f153b68.

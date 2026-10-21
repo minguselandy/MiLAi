@@ -1,0 +1,60 @@
+{
+  "status": "FROZEN_BEFORE_NEW_FEEDBACK_DEV_PREDICTIONS",
+  "source_version": "890dbdd0",
+  "data": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/frozen-feedback-inputs-v1/feedback-dev.jsonl",
+  "common_support": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/frozen-feedback-inputs-v1/common-support.jsonl",
+  "frozen_source": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/frozen-feedback-diagnostics-v1/MiLAi-Lab",
+  "old_attention_wrapper": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/frozen-feedback-ae3950f2/train_with_declared_attention.py",
+  "interpreter": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/cuda-env/bin/python",
+  "physical_gpu": 2,
+  "device": "cuda:0",
+  "threads": 4,
+  "mha_fastpath": false,
+  "max_len": 16384,
+  "head_max_len": 2048,
+  "operation_state": "shared",
+  "states": 16,
+  "source_groups": 8,
+  "max_actual_tokens": 7761,
+  "within_8192": 16,
+  "over_8192": 0,
+  "new_gradient_updates": 0,
+  "original_ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+  "models": [
+    {
+      "name": "t1-main",
+      "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/fitting/t1-native-shared-seed0-v1/checkpoint",
+      "output": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-checkpoint-evaluation-v1/t1-main",
+      "compute_phase": "training_generalization_feedback_dev_t1_main_v1"
+    },
+    {
+      "name": "t1-operation-control",
+      "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/fitting/t1-matched-operation-control-seed0-v1/checkpoint",
+      "output": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-checkpoint-evaluation-v1/t1-operation-control",
+      "compute_phase": "training_generalization_feedback_dev_t1_operation_control_v1"
+    },
+    {
+      "name": "continued-ce",
+      "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/fitting/view-v4-continued-ce-seed0-v1/checkpoint",
+      "output": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-checkpoint-evaluation-v1/continued-ce",
+      "compute_phase": "training_generalization_feedback_dev_continued_ce_v1"
+    },
+    {
+      "name": "answer",
+      "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/fitting/view-v4-answer-seed0-v1/checkpoint",
+      "output": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-checkpoint-evaluation-v1/answer",
+      "compute_phase": "training_generalization_feedback_dev_answer_v1"
+    },
+    {
+      "name": "delivery",
+      "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/fitting/view-v4-delivery-seed0-v1/checkpoint",
+      "output": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-checkpoint-evaluation-v1/delivery",
+      "compute_phase": "training_generalization_feedback_dev_delivery_v1"
+    }
+  ],
+  "analysis": "Same literal16inputs and option bindings; one forward per state gives both targets. Report family macro state-pair accuracy/loss, coverage and common-support using same predictions. All inputs below8192; no long-input claim.",
+  "selection_rule": "Evaluate all five already persisted seed0 final checkpoints. No winner/checkpoint selection, parameter change or retraining based on this exposed dev result. Diagnostic does not replace new-source curves or Host endpoint.",
+  "statistical_unit": "Eight source families, not48pairs or80forwards.",
+  "automatic_retry": false,
+  "sha_verification": false
+}
