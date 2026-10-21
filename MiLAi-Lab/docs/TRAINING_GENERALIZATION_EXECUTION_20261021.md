@@ -29,12 +29,14 @@ ModernBert配置序列化还会移除reference_compile，因而后续重载评�
 来源配对统计保留未知与全部计划分母，先在来源内平均配对状态和种子，再bootstrap来源组；
 10000次、seed0。增加状态或种子不增加独立来源组数。区间是条件性开发诊断，
 零宽区间不代表总体等效。新增22项审计/统计/串行评估测试全部通过；另有5项原生评价CLI测试通过。
-Ruff9文件、mypy4实现文件、package/tools边界通过；6项历史私有依赖未变。
+另4项六基线配对检查通过，合计31项。Ruff11文件、mypy5实现文件、package/tools边界通过；6项历史私有依赖未变。
 PNG/SVG绘图入口已用明确标注的合成产物验收，不是研究结果。
 真实完整曲线、CPU重载评价、来源组配对结果仍待实际闭合和执行，不宣称模型改善。
 
 工具入口为`analyze_operation_curve.py`、`evaluate_saved_operation_curve.py`、
-`plot_operation_curve.py`，统计模块为`analysis/paired_sources.py`。
+`plot_operation_curve.py`、`compare_operation_baselines.py`，统计模块为`analysis/paired_sources.py`。
+六个既定基线逐一与同一模型、同一实际状态配对，不筛掉弱基线，也不把未标注状态补成失败。
+开发集选点后在同一开发集计算的区间明确含选择乐观性，不能当保护集合确认。
 准备/测试/检查源码等未计时开销为未知；合成绘图实测单独保留，不作模型成本或重复登记。
 现有v1/v2/v3结算保持关闭，后续pending不追加旧文件。完整目标继续ACTIVE。
 
