@@ -1,0 +1,60 @@
+{
+  "status": "FROZEN_NOT_DISPATCHED",
+  "source_version": "e4844f28",
+  "cwd": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab",
+  "output": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/view-v4-coalent-pilot-v2",
+  "argv": [
+    "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/http-env/bin/python",
+    "-u",
+    "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/frozen-coalent-e4844f28/MiLAi-Lab/tools/run_host_intent_retrieval.py",
+    "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/view-v4-coalent-pilot-config-v2.json",
+    "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/data/view-v4-coalent-pilot-v1/histories.json",
+    "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/view-v4-coalent-pilot-v2",
+    "--source-version",
+    "e4844f28",
+    "--policies",
+    "coalent",
+    "--interfaces",
+    "rich",
+    "--transport",
+    "json_action",
+    "--split",
+    "train",
+    "--capture-retrieval-calls",
+    "--continue-host-history"
+  ],
+  "environment": {
+    "PYTHONPATH": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/frozen-coalent-e4844f28/MiLAi-Lab/src:/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/frozen-coalent-e4844f28/coalent-core",
+    "CUDA_VISIBLE_DEVICES": ""
+  },
+  "source_groups": [
+    "memops_B06",
+    "memops_C26"
+  ],
+  "streams": 4,
+  "positions": 16,
+  "config": "artifacts/host-intent-retrieval-v3/view-v4-coalent-pilot-config-v2.json",
+  "histories": "artifacts/host-intent-retrieval-v3/data/view-v4-coalent-pilot-v1/histories.json",
+  "scope": "First two existing B train source groups in fixture order, both original content/originals streams, all four requests. Selected before any actual Coalent model outcome; exposed train diagnostic, not independent confirmation.",
+  "baseline": "Coalent 0.7.0.post1 pool core with native version/source Store adapter; not an unmodified upstream reproduction.",
+  "upstream_version": "7edc7ee2debb4e6bc8fecebf5275a57cb1c935e7",
+  "upstream_patch": "data/fixtures/coalent-native-source-versions-v1.patch",
+  "upstream_defaults": "cache_options empty; extractive synthesizer, original pool selection/gates; Qwen/BGE providers and session artifacts declared. No teacher/judge, retries=0.",
+  "budgets": {
+    "return_tokens": 2048,
+    "public_additional_reads": 8,
+    "control_operations": 8,
+    "generation_queue_requests": 180,
+    "generation_queue_reserved_tokens": 2400000
+  },
+  "launch_condition": "D continuation parent and all children exited; inspect terminal outcomes and original ledger ownership before explicit dispatch. No automatic retry or overlapping model job.",
+  "model_calls": 0,
+  "compute": {
+    "wall_seconds": 0.21788973174989223,
+    "cpu_seconds": 0.217718396
+  },
+  "unmeasured_compute": "Manual preparation not measured; Python parent and child archive CPU included.",
+  "ledger_recorded": false,
+  "supersedes_unexecuted_plan": "artifacts/host-intent-retrieval-v3/view-v4-coalent-pilot-plan-v1.json",
+  "amendment": "Model-free actual registered original-return audit found whole-session packing dropped otherwise fitting complete messages. New source version packs complete messages in retrieved order, preserving session cache units, actual bindings and full wire budget. No actual model outcomes exist for either pilot version."
+}

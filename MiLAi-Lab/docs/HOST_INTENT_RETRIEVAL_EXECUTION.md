@@ -2312,3 +2312,14 @@ D最后两臂、完整流成本/条件响应汇总及E确认仍未完成；当�
 上述三种复杂臂在四个实际窗口中均未追平fixed-context生成tokens；这只比较同一生成模型的用量，不把embedding/本地推理免费化，也不外推未来摊销。fixed-context同样由自主Host决定是否调用，绝非每轮强制回源基准；多数末轮没有重新取证，便宜的暖回答不能证明缓存维护有效。其他四臂及逐流完整分项见host-intent-view-v4-d-stream-costs-first8-v1.json和所指stream-costs-first8-v1.json。512位置仍只有8个来源组，不能当512个独立样本。
 
 view-cache已评审0–40，但尚未闭合。C03内容流末轮27答案9:45恰好正确，实际K仅到中间修正，缺最终10:15提议与拒绝确认，故分别记Host C与材料partial。E08初轮40的View混淆疲劳推测，原文包却使Host明确区分assistant推测与自己的报告；这是原文补救成功，未认证View正确。
+
+
+## 2026-10-21：Coalent完整消息装包与试跑v2
+
+在已选的B06/C26训练初始前缀上运行注册检索工具、实际Store和Qwen tokenizer，使用固定向量/脚本合成仅检查原文交付边界。旧版本把整个session作为返回选择单位：B06两个session的单独完整包分别1501/1211tokens，在2048总额度下只交付首会话8条消息；逐完整消息装包可以保留10条。C26单会话8条本来即可完整返回。该测量直接暴露了缓存artifact粒度与返回粒度耦合，未检验实际语义排序或模型质量。
+
+e4844f28将原文选择改为按实际检索顺序逐完整消息装包，继续按session保存缓存artifact、新鲜度和原生来源绑定。不会截短消息正文；过大的消息可跳过，后续能放下的完整消息仍可进入同一个统一返回包。snapshot仅保存实际选择的source ranges，跨调用ref不补入未交付消息。material_budget_rejections对原文现在按被舍弃的消息计数，claim侧仍逐claim计数。没有改Host、来源检索机会、上游pool算法或D冻结运行。
+
+新增边界检查验证：一个会话含超大消息和两条短消息时，在完整外层learnings封装预算内返回两条原始短消息，随后真实ref重开仍只有这两条，正文未截断。Coalent注册工具/正常模拟Host等8项检查、Ruff和实现文件mypy均通过。生产适配器再次实测B06返回10条/1898tokens、C26返回8条/1408tokens，与同序整消息探针一致；原v1测量保留。索引host-intent-view-v4-coalent-raw-packing-v1.json，所有测得CPU在pending-v33，未调用实际模型。
+
+真实模型试跑计划更新为view-v4-coalent-pilot-plan-v2.json，冻结e4844f28源码与原审阅core，替代未启动的v1。B06/C26四条流16位置、原fixture、配置参数和预约额度保持不变。启动参数已检查引用存在的原v1选定fixture，输出为独立v2目录。必须等待D实际父子进程退出后显式调度，不自动重试；两版目前都没有实际模型成绩。

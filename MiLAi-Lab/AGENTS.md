@@ -1,3 +1,21 @@
+# LATEST COALENT MESSAGE PACKING / PILOT V2 — 2026-10-21
+
+Coalent sourcee4844f28 now packs complete original messages within full wire budget,
+keeping session cache artifacts/native bindings. Actual registered no-model trainprobe:
+B06 old8messages ->10/1898tokens; C26 stays8/1408. Fixedvectors/scriptedsynth only,
+notranking/quality. Originalv1auditretained; v2actualauditmatchesmessagepackingprobe.
+New oversized-session regression confirms small whole messages survive and actualref
+reopens only delivered ranges. 8CoalentmemorychecksPASS,Ruff/mypyPASS. CPU pending33.
+Manifest coalent-raw-packing-v1. No change to D frozen11798 or existingactualoutcomes.
+IMPORTANT NEXT COALENT plan=view-v4-coalent-pilot-plan-v2.json, frozen-coalent-e4844f28;
+v1 NOT DISPATCHED and superseded. V2 reuses originaldata/view-v4-coalent-pilot-v1/histories.json,
+not nonexistentv2fixture. Allargvinputpathsexist; outputview-v4-coalent-pilot-v2notcreated.
+SameB06/C26/4streams/16positions/2048/8reads/8steps/180requests/2.4Mreserved.
+Wait actual Dclosure beforedispatch. No automaticretry/modeloverlap/newledger.
+View-cache reviews0–52 saved; lastreadcard52. Remaining53–63 unreviewed;
+parent3434203/exec69127, active3627857 revalidate authoritative driver/process.
+Pending33UNSETTLED. FullgoalACTIVE. NoSHA/contentfingerprints/subagents/newservices.
+
 # LATEST HOST TRIGGER / STREAM AUDIT — 2026-10-21
 
 Dparent3434203/exec69127 RUNNING; activeview-cache3627857, lastobserved41/64.
