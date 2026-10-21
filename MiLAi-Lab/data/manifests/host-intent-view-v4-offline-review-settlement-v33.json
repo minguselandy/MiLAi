@@ -1,0 +1,16 @@
+{
+  "status": "SETTLED_ONCE_AT_VERIFIED_IDLE",
+  "ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+  "measurement_file": "artifacts/host-intent-retrieval-v3/data/pending-offline-review-v33.json",
+  "phases": 105,
+  "total_cpu_seconds": 530.2117453299735,
+  "generation_embedding_unchanged": true,
+  "closed_driver": "artifacts/host-intent-retrieval-v3/view-v4-d-continuation-v1/driver.json",
+  "verified_absent_pids": [
+    3434203,
+    3763296
+  ],
+  "active_experiment_runners": [],
+  "scope": "Measured pending33 CPU only. Direct native computation subtracted from child driver CPU; continuation parent CPU counted once. Nested wall times are not additive. Manual/debug/unmeasured aggregation failure and settlement overhead remain unknown, not zero.",
+  "snapshots": "artifacts/host-intent-retrieval-v3/offline-review-settlement-v33"
+}

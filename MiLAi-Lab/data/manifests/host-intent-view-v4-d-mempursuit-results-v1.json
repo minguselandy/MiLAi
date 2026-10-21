@@ -1,0 +1,217 @@
+{
+  "status": "D_MEMPURSUIT_CLOSED_AUTHOR_REVIEWED",
+  "source_version": "11798c8d",
+  "split": "exposed_dev",
+  "source_groups": 8,
+  "streams": 16,
+  "positions": 64,
+  "host_grades": {
+    "C": 16,
+    "W": 19,
+    "F": 14,
+    "Q": 15
+  },
+  "host_complete_primary": 16,
+  "host_complete_with_scope_ambiguity": 19,
+  "delivery": {
+    "complete": 36,
+    "partial": 27,
+    "insufficient": 1
+  },
+  "by_group": {
+    "memops_A19": {
+      "host": {
+        "C": 4,
+        "W": 2,
+        "F": 2
+      },
+      "delivery": {
+        "complete": 4,
+        "partial": 4
+      },
+      "generation_tokens": 63104
+    },
+    "memops_A32": {
+      "host": {
+        "W": 2,
+        "F": 2,
+        "Q": 4
+      },
+      "delivery": {
+        "complete": 4,
+        "partial": 4
+      },
+      "generation_tokens": 59752
+    },
+    "memops_B30": {
+      "host": {
+        "C": 2,
+        "Q": 4,
+        "W": 2
+      },
+      "delivery": {
+        "complete": 6,
+        "partial": 2
+      },
+      "generation_tokens": 48592
+    },
+    "memops_C03": {
+      "host": {
+        "C": 3,
+        "F": 2,
+        "W": 3
+      },
+      "delivery": {
+        "complete": 4,
+        "partial": 4
+      },
+      "generation_tokens": 82430
+    },
+    "memops_D25": {
+      "host": {
+        "W": 4,
+        "Q": 2,
+        "F": 2
+      },
+      "delivery": {
+        "complete": 4,
+        "partial": 4
+      },
+      "generation_tokens": 65261
+    },
+    "memops_E08": {
+      "host": {
+        "C": 4,
+        "W": 1,
+        "F": 3
+      },
+      "delivery": {
+        "complete": 5,
+        "partial": 3
+      },
+      "generation_tokens": 83239
+    },
+    "memops_E15": {
+      "host": {
+        "Q": 4,
+        "W": 3,
+        "F": 1
+      },
+      "delivery": {
+        "complete": 4,
+        "partial": 4
+      },
+      "generation_tokens": 68838
+    },
+    "memops_F01": {
+      "host": {
+        "F": 2,
+        "C": 3,
+        "W": 2,
+        "Q": 1
+      },
+      "delivery": {
+        "complete": 5,
+        "insufficient": 1,
+        "partial": 2
+      },
+      "generation_tokens": 73230
+    }
+  },
+  "final_arrivals": {
+    "positions": 16,
+    "host": {
+      "F": 5,
+      "W": 10,
+      "Q": 1
+    },
+    "retrieval_calls": 0,
+    "positions_with_new_retrieval": 0
+  },
+  "retrieval_calls": 24,
+  "empty_returns": 0,
+  "returns_seen_in_Host": 24,
+  "max_wire_tokens": 1874,
+  "generation_tokens": 544446,
+  "generation_requests": 87,
+  "unknown_generation_delta": 0,
+  "stage_costs": {
+    "host_request": {
+      "requests": 23,
+      "tokens": 65989,
+      "http_wall_seconds": 261.6358381509781
+    },
+    "embedding": {
+      "requests": 47,
+      "tokens": 66045,
+      "http_wall_seconds": 10.473293436691165
+    },
+    "host_completion": {
+      "requests": 50,
+      "tokens": 318636,
+      "http_wall_seconds": 1335.4755871808156
+    },
+    "host_incomplete": {
+      "requests": 13,
+      "tokens": 153561,
+      "http_wall_seconds": 954.0184401180595
+    },
+    "unparsed_host_response": {
+      "requests": 1,
+      "tokens": 6260,
+      "http_wall_seconds": 55.4238501843065
+    }
+  },
+  "wall_seconds": 2832.6043822430074,
+  "cpu_seconds_nested": 163.60850564499998,
+  "cpu_unbilled": 162.10882953499998,
+  "original_outputs_unchanged": true,
+  "task_metric": "Strict source-author C/Q/W/F, Any explicit annotation uncertainty retained. No official score or independent reviewer claim.",
+  "view_review_scope": "Request-relevant facts/status/conditions reviewed and explicit defects retained. Not exhaustive formal verification of every citation/rule.",
+  "results": "artifacts/host-intent-retrieval-v3/view-v4-d-author-review-v1/mempursuit/closed-results-v1.json",
+  "review": "artifacts/host-intent-retrieval-v3/view-v4-d-author-review-v1/mempursuit/final-review-v1.json",
+  "remaining": "Remaining D arms and source-group comparisons; E confirmation selection remains incomplete.",
+  "compute": {
+    "wall_seconds": 15.922223148867488,
+    "cpu_seconds": 15.921512403
+  },
+  "ledger_recorded": false,
+  "embedding": {
+    "charged_tokens": 66045,
+    "known_tokens": 66045,
+    "unknown_usage": 0
+  },
+  "local_compute": {
+    "memory_control_mempursuit_pool": {
+      "candidate_embedding_cache_misses": 102,
+      "candidates": 109,
+      "cpu_seconds": 1.4996761100000082,
+      "pools": 24,
+      "wall_seconds": 12.642015921883285
+    }
+  },
+  "native_input_audit": {
+    "forwards": 0,
+    "input_tokens": 0,
+    "max_input_tokens": 0,
+    "truncated": 0,
+    "nonfinite": 0
+  },
+  "native_compute_directly_billed": 1.4996761100000082,
+  "local_model": {
+    "dynamic_memory_laya": {
+      "cpu_seconds": 0.0,
+      "forwards": 0,
+      "input_tokens": 0,
+      "sequence_rows": 0,
+      "state_tokenizations": 0,
+      "state_tokens": 0,
+      "wall_seconds": 0.0
+    },
+    "dynamic_memory_laya_load": {
+      "cpu_seconds": 0.0,
+      "loads": 0,
+      "wall_seconds": 0.0
+    }
+  }
+}

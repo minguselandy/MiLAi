@@ -1,3 +1,28 @@
+# LATEST D ALL TEN CLOSED / COALENT LIVE / PENDING34 — 2026-10-21
+
+Dparent3434203/exec69127 CLOSED; MP3763296 CLOSED64. All10arms640logicalpositions
+fullyreviewed/finalized. Main aggregate manifestd-complete-results-v1 +stream-costs-all10-v1.
+MP16C15Q19W14F,Cupper19; material36complete27partial1insufficient(57Kemptyafterfailed56).
+87genHTTP544446tokens;47embeddingHTTP66045tokens;unknownincrements0.24actualHostcalls/
+24nonemptyreturns,max1874; final16=0C1Q10W5F,0attempts/returns.
+MP24pools109candidates102cachemisses; nativeCPU1.49967611direct; whole163.608505645,
+remainder162.108829535SETTLED33. Full64vectoraudit24poolsallreproduce;4setdiff/22orderdiff
+vs samevectorcosine. No alternateHosteffectclaim. FinalizersalreadyDONE:neverrerun.
+Dtotal1105genHTTP6393171tokens,plusMPembedding.8groupsnot640independent. Simplefixed
+primary21C/material38/gen513678 vsdelivery21C/material33/gen588121+Laya; no learnedwin.
+close_d_comparison_v1.py failed oldcardsmissingrun_root; v2success usesclosed-results.runs.
+Failurekept,CPUunknown;nooutputs/modelsrerun.
+PENDING33 SETTLED105phases530.2117453299735CPU atactualidle+ledgerlock. ParentCPU.022849412
+included. generation/embeddingunchanged. Newpending-offline-review-v34.json OPEN.
+IMPORTANT all oldv2export/write/finalize/stream/vector helpers stillwrite33:DO NOT RUN THEM.
+Use new34-specific helpers/inline accounting for future offlinework. No settlementwhilemodelactive.
+Coalentv2 REALRUN PID3980746/exec8106; latest2/16RUNNING,revalidateactualdriver/process.
+Planview-v4-coalent-pilot-plan-v2.json sourcee4844f28; launch-v2 +log; outputview-v4-coalent-pilot-v2.
+Onlyjob now; noautomaticretry. First2Hostanswersnotgraded yet. NeedCoalent/Bsource review
+adapter, notD-only source mapping. No nativefinite-action E2 support forCoalent.
+E5coverage18positionspreparedonly (see below); STATEconfirmation/E3actualtrainingpending.
+FullgoalACTIVE,noSHA/subagents/newservices/newrealledger. Earlierdetailsfollow.
+
 # LATEST E5 COVERAGE INPUTS / MP REVIEWS THROUGH55 — 2026-10-21
 
 MPPID3763296,Dparent3434203/exec69127 lastobserved56/64RUNNING; revalidateprocess.

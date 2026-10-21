@@ -2358,3 +2358,31 @@ MemPursuit已评审前36位置。位置26（C03内容流中间更新）实际再
 全部8个原始Source对象的内容、角色、原生标识、日期及顺序逐项相等；阈值来源从原同批初始可见改为第二条在q03到达，作为明确声明的可用性干预。公开runtime fixture不含expected、离线rubric或workload标签；评审依据和条件映射单列。两来源族均已暴露，旧functional-development标签保留，统一dev运行不构成新独立划分，也不提供训练标签。
 
 产物为data/fixtures/host-intent-view-v4-e5-coverage-streams.json及host-intent-view-v4-e5-coverage-preparation-v1.json所指histories。只是已准备的机制诊断，没有运行模型、选择最终方法或完成512/2048/4096工作点；方法与资源配置须在D/Coalent结果后冻结。STATE保留任务确认仍单独未完成。
+
+
+## 2026-10-21：D十臂640位置闭合，Coalent真实试跑启动
+
+全部十臂各64逻辑位置已完成执行和作者来源评审；原答案43的容量失败与44+20续跑边界保留。以下是已暴露dev、8来源组的描述性汇总；括号内为已记录评分歧义允许的C上界，不是统计置信区间。不同臂的自主Host轨迹不同，不能作为控制器单独因果效果。
+
+| 臂 | Host完整C（歧义上界） | 材料完整/64 | 生成HTTP/tokens | embedding tokens |
+|---|---:|---:|---:|---:|
+| generative | 15（16） | 18 | 220 / 1221393 | 0 |
+| rules | 19（19） | 36 | 100 / 551227 | 0 |
+| fixed-context | 21（22） | 38 | 88 / 513678 | 0 |
+| t1-main-seed0 | 19（19） | 37 | 88 / 537603 | 0 |
+| t1-control-seed0 | 16（16） | 36 | 89 / 525203 | 0 |
+| continued-ce-seed0 | 18（18） | 36 | 85 / 539523 | 0 |
+| answer-seed0 | 17（19） | 26 | 143 / 740852 | 0 |
+| delivery-seed0 | 21（21） | 33 | 93 / 588121 | 0 |
+| view-cache | 20（23） | 31 | 112 / 631125 | 0 |
+| mempursuit | 16（19） | 36 | 87 / 544446 | 66045 |
+
+固定上下文在主评中达到21C、38个材料充分位置，生成用量513678tokens。delivery同为21C，但材料充分33，生成588121tokens，另有本地Laya计算；当前不支持学习控制必要或复杂缓存普遍胜出的结论。总计1105次生成HTTP、6393171tokens，另MemPursuit47次embeddingHTTP/66045tokens；所有本轮known/unknown增量分别核对，unknown增量为0。原失败与所有重复工具调用均留在分母和费用内。
+
+MemPursuit最终16C/15Q/19W/14F、材料36完整/27部分/1不足，B30三个标题歧义允许C上界19；24请求/24非空回执，最大1874tokens。F01位置57实际K为空且没有新调用，故材料不足，不能沿用失败56时曾经交付的原文。末轮16位置0C/1Q/10W/5F，实际没有新检索请求。24次pool共109候选、102次候选向量缓存缺失，选择器CPU1.49967611秒已直接记账；整臂CPU163.608505645秒，只追加差额162.108829535秒。全64位置的24个pool均可用原BGE响应复放上游选择；与同数量cosine选择比较4池集合不同、22池顺序不同，没有执行替代Host，不能从此推导质量增益。
+
+跨十臂的640个位置逐项history/request/source_group对齐；实际Host请求与回执单列，来源组配对及四个累计窗口见host-intent-view-v4-d-complete-results-v1.json。首次离线汇总因早期cards没有新增run_root字段失败，未生成结果或改动实际轨迹；改从各闭合结果的runs取得原生根目录后通过。失败脚本/记录保留，其未测得CPU属于unknown调试开销。
+
+D续跑父3434203与末臂3763296均已实际退出，父进程CPU0.022849412秒单独加入。确认没有活动实验runner并取得原ledger的http-owner锁后，pending-v33共105个测得阶段一次结算530.21174533秒CPU，生成/embedding及请求计数不变；结算索引offline-review-settlement-v33。后续使用pending-v34，旧写pending33的helpers不得再运行，也不能重复finalize已经闭合的臂。
+
+Coalent v2已按冻结e4844f28计划实际启动，PID3980746/exec8106，输出view-v4-coalent-pilot-v2，计划16个训练侧位置。原计划、来源、参数和核心适配不变；launch-v2记录实际调度，driver.json为运行状态权威。该运行完成前不再启动模型作业或结算离线费用。D主表完成不代表整个v4完成：Coalent实测、E5补充流/预算工作点、选定E3与保留外部任务确认仍待完成。
