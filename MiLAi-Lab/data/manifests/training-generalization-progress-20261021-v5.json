@@ -1,0 +1,218 @@
+{
+  "status": "ACTIVE_FIRST32_SOURCE_REQUEST_REVIEW_AND_OPERATION_LABELS_CLOSED_COLLECTION_LIVE",
+  "previous_goal_turn": "progress:post-operation checkpoint code/tests and live source collection",
+  "implementation_commit": "aaa0885a",
+  "execution_document": "docs/TRAINING_GENERALIZATION_EXECUTION_20261021.md",
+  "source_review": {
+    "source_rows": 61,
+    "source_families": 32,
+    "dispositions": {
+      "source_pool_insufficient": 39,
+      "supported_with_qualification": 9,
+      "qualified_alternative": 4,
+      "supported": 9
+    },
+    "native_reference_answers_used": false,
+    "corresponding_model_outputs_used": false,
+    "operation_labels_added": 0
+  },
+  "source_review_progress": "artifacts/generalization-20261021/source-expansion-v1/source-review-progress-v15.json",
+  "native_comparison": {
+    "cross_table": {
+      "native_True__source_pool_insufficient": 10,
+      "native_False__source_pool_insufficient": 29,
+      "native_True__supported_with_qualification": 9,
+      "native_True__qualified_alternative": 3,
+      "native_True__supported": 9,
+      "native_False__qualified_alternative": 1
+    },
+    "source_annotations_changed": false,
+    "scope": "Native reference labels are separate weak references, not source-semantic truth or an estimated corpus-wide error rate. No failed/insufficient cases replaced.",
+    "artifact": "artifacts/generalization-20261021/source-expansion-v1/batch-0-native-comparison-v1.json"
+  },
+  "actual_request_review": {
+    "requests": 177,
+    "complete_witnesses": 49,
+    "partial_witnesses": 60,
+    "no_witness": 68,
+    "artifact": "artifacts/generalization-20261021/source-expansion-batch-0-request-reviews-v1/requests.json",
+    "teacher_actions_or_predictions_used_as_labels": false
+  },
+  "operation_labels": {
+    "states": 949,
+    "reviewed_requests": 177,
+    "reviewed_states": 949,
+    "labelled": 531,
+    "reasons": {
+      "reviewed_missing_original_progress": 439,
+      "reviewed_partial_evidence_only_masked": 87,
+      "no_reviewed_source_proof_masked": 291,
+      "reviewed_originals_sufficient": 92,
+      "no_reviewed_progress_masked": 40
+    },
+    "families_labelled": 31,
+    "model_calls": 0,
+    "inputs_changed": false,
+    "states_source": "artifacts/generalization-20261021/source-expansion-batch-0-states-v1/train.jsonl",
+    "reviews_source": "artifacts/generalization-20261021/source-expansion-batch-0-request-reviews-v1/requests.json"
+  },
+  "input_and_mask_audit": {
+    "status": "PASS_ACTUAL_INPUT_BINDINGS_AND_PARTIAL_MASKS",
+    "states": 949,
+    "labelled": 531,
+    "families": 32,
+    "labelled_families": 31,
+    "families_without_labels": [
+      "musique-family-000881"
+    ],
+    "positive_action_occurrences": {
+      "SEARCH": 112,
+      "READ": 418,
+      "HANDOFF": 92
+    },
+    "partial_proof_handoff_labels": 0,
+    "inputs_questions_bindings_equal": true,
+    "native_reference_truth_not_used_for_labels": true,
+    "requests_with_known_evidence_refs": 0,
+    "request_count": 177,
+    "qualification": "Whole-source factual original-witness preferences, inherited CE objective. Not exhaustive operation quality/legality or actual Host success. Partial proofs cannot certify sufficiency. Unlabelled states and failures retained.",
+    "label_compilation_cpu_seconds": "unmeasured; not zero",
+    "compute": {
+      "wall_seconds": 0.03112880513072014,
+      "cpu_seconds": 0.031129642999999985
+    },
+    "ledger_recorded": false
+  },
+  "operation_input_lengths": {
+    "status": "AUDITED_NOT_FITTED",
+    "states": 949,
+    "labelled_states": 531,
+    "operation_state": "shared",
+    "max_len": 12288,
+    "head_max_len": 2048,
+    "max_encoded_tokens": 6681,
+    "state_truncations": 0,
+    "head_truncations": 0,
+    "labelled_over_8192": 0,
+    "model_forwards": 0,
+    "gpu_used": false,
+    "compute": {
+      "wall_seconds": 16.1907880557701,
+      "cpu_seconds": 16.192661458
+    },
+    "ledger_recorded": false
+  },
+  "auxiliary_input_audit": {
+    "status": "AUDITED_NOT_FITTED",
+    "base_checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/models/laya-multilingual-base",
+    "max_len": 8192,
+    "head_max_len": 384,
+    "splits": {
+      "train": {
+        "rows": 3979,
+        "max_tokens": 533,
+        "state_truncations": 0,
+        "head_truncations": 0,
+        "input_tokens": 927445
+      },
+      "dev": {
+        "rows": 961,
+        "max_tokens": 552,
+        "state_truncations": 0,
+        "head_truncations": 0,
+        "input_tokens": 225569
+      }
+    },
+    "model_forwards": 0,
+    "gpu_used": false,
+    "compute": {
+      "wall_seconds": 9.230737720616162,
+      "cpu_seconds": 9.235908128
+    },
+    "ledger_recorded": false
+  },
+  "auxiliary_stage_plan": "data/manifests/training-generalization-promptriever-auxiliary-stage-plan-v1.json",
+  "auxiliary_stage_status": "PREPARED_NOT_DISPATCHED",
+  "collection": {
+    "observed_at": "2026-10-21T14:05:29.614489+00:00",
+    "exec_session": 93727,
+    "parent_pid": 1131060,
+    "parent_status": "RUNNING",
+    "parent_live": true,
+    "active_batch": 2,
+    "batches": [
+      {
+        "batch": "batch-0",
+        "status": "COMPLETED_WITH_FAILURES",
+        "pid": 1131065,
+        "live": false,
+        "closed_positions": 122,
+        "planned_positions": 122,
+        "program_statuses": {
+          "COMPLETED": 87,
+          "FAILED": 35
+        }
+      },
+      {
+        "batch": "batch-1",
+        "status": "COMPLETED_WITH_FAILURES",
+        "pid": 1381395,
+        "live": false,
+        "closed_positions": 116,
+        "planned_positions": 116,
+        "program_statuses": {
+          "FAILED": 30,
+          "COMPLETED": 86
+        }
+      },
+      {
+        "batch": "batch-2",
+        "status": "RUNNING",
+        "pid": 1591077,
+        "live": true,
+        "closed_positions": 84,
+        "planned_positions": 122,
+        "program_statuses": {
+          "FAILED": 17,
+          "COMPLETED": 67
+        }
+      }
+    ],
+    "closed_positions": 322,
+    "planned_positions": 480,
+    "live_method_version": "890dbdd0",
+    "source_review_families": 32,
+    "source_review_rows": 61,
+    "source_review_total_rows": 240,
+    "unreviewed_model_outputs_displayed": false
+  },
+  "validation": {
+    "supervision_tests": {
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0
+    },
+    "ruff": "PASS2files",
+    "mypy": "PASS2files",
+    "package_boundary": "PASS",
+    "tools_boundary": "PASS",
+    "real_input_audits": "949 operation inputs and4940auxiliary inputs complete; zero model forwards"
+  },
+  "boundaries": {
+    "full_trainable_recipe_and_stable_state_ids_not_built_yet": true,
+    "new_research_fits": 0,
+    "new_real_post_operation_checkpoint_branches": 0,
+    "all_first32_original_failures_and_masks_retained": true,
+    "native_answers_not_promoted_to_truth": true,
+    "static_preferences_not_host_success": true,
+    "explicit_known_refs_coverage_gap": true,
+    "no_offline_settlement_while_live": true,
+    "no_sha_verification": true,
+    "no_subagents": true,
+    "no_new_services": true,
+    "pushed": false,
+    "merged": false
+  },
+  "remaining": "96sourcefamilies/179sourcepools plus corresponding request/witness review; finish480positions, post-step real-model acceptance, nested-source524update fits/controls, STATE/factorial/E3/Host/external/multiseed confirmation.",
+  "goal_complete": false
+}

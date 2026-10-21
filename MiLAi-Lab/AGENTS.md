@@ -1,3 +1,42 @@
+# LATEST V5: FIRST32 SOURCE/REQUEST LABELS CLOSED / COLLECTION STILL LIVE
+
+Full goal ACTIVE. Prior goal turn was progress, no blocker. Current queue remains frozen890dbdd0.
+22:05Shanghai snapshot: parent1131060/exec93727 live; activebatch2 child1591077live,84/122.
+Batch0CLOSED122(87programcompleted35failed);batch1CLOSED116(86completed30failed), total322/480.
+Revalidate actual/proc+driver; never restart or append jobs to the live queue. No second realmodel
+job or offline settlement until terminal. Program statuses are not semantic success rates.
+
+Source-first review now32families/61rows (firstwholebatch) of128/240. Source-only snapshot saved
+BEFORE native comparison and corresponding model outputs. Cross-table nativeTrue:10insufficient/
+9qualifiedsupport/3qualifiedalternative/9directsupport; nativeFalse29insufficient/1qualifiedalt.
+Not a corpus error rate. No annotation rewrite or outcome-based replacement. Current progress:
+artifacts/generalization-20261021/source-expansion-v1/source-review-progress-v15.json.
+Reusable show_new_source_pools.py prints new full paragraphs and exact already-read references;
+start next atfamilyindex32. Do not treat unseen model outputs as source truth.
+
+All177actual batch0 requests reviewed against their literal query/purpose/points:49complete,
+60partial,68no witness. Existing original_witness_preferences compiled949states/531labels,
+31labelledfamilies;418masked retained.439progress/92sufficientstates; partialproofHANDOFF0.
+SEARCHpositive only when observed search adds reviewed witness; READadds missing full source
+andfits actual full return budget. This is inherited static CE preference, not causal action
+utility, exhaustive legality or Host success. Source-type hints do not establish live/history facts.
+Actual subgoals can be answerable when fullQAisnot. No native answer or teacher choice copied.
+Data: source-expansion-batch-0-labelled-v1. Allstate/questions/bindings equal original949.
+No stable finalmixturestateIDs/fit yet.531labelledsharedinputs all<8K,max6681,nodrops12288/head2048.
+All177requests have0explicitknownrefs; this is a coverage gap, not proof Host had no prior evidence.
+
+Promptriever4940inputs audited noforward/noGPU: maxtrain533/dev552, no8192/head384drops.
+Seed0auxiliary128update2048draw plan PREPARED_NOT_DISPATCHED atpromptriever-auxiliary-stage-plan-v1.
+Future final128 only, not auxiliary-dev winner; later identical operation data/order/524budget
+required. Not inserted in current queue or a replacement for operation/Host objectives.
+Label CLI physicalJSONL+compute timers commitaaa0885a;2supervisiontests,Ruff/mypy2/boundariespass.
+Initial531label compilation CPU unmeasured, not rerun for timing. New measured offline phases
+pending whilequeue lives; closedsettlements-v1/v2 MUST NOT be appended/re-settled.
+Post-op source490c683e already archived atfrozen-control-checkpoints-490c683e, not activated in live
+collection. Its realmodel acceptance still pending. Remaining96families/179pools need source
+review then actualrequest/witness labels. Full fits/STATE/factorial/E3/Host/external/seedsremain.
+NoSHA/subagents/newservices/push/merge. See executiondoc andprogress-20261021-v5manifest.
+
 # LATEST V4: POST-OPERATION CHECKPOINT CODE / SOURCE COLLECTION STILL LIVE
 
 Full goal ACTIVE; previous turn was substantive progress. New codeeb112254+490c683e is NOT
