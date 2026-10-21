@@ -1,3 +1,96 @@
+# LATEST V17 (2026-10-22): LEGACY524 FINAL EVAL LIVE / ONE SERIAL SUCCESSOR
+
+Full goal ACTIVE, not complete/blocked/paused. Current training is still frozen490c683e
+legacy shared representation control. Exec42364, parent2089181/child2089186 alive at last
+observation;524 updates reached, final dev860/feedback16 written, train345/4886 still being
+written. Do not equate update524 with terminal. Revalidate actual /proc, parent driver,
+run and artifacts. No restart/hot update, second model or offline settlement while live.
+
+CRITICAL NEW SERIAL SUCCESSOR: exec62733, PID3337827, script
+artifacts/generalization-20261021/run_after_legacy_fit_v1.py; driver
+artifacts/generalization-20261021/after-legacy-fit-v1/driver.json.
+Latest WAITING_FOR_EXISTING_FIT, new_model_jobs_started0. It waits for BOTH existing PIDs
+exit, requires parent/run COMPLETED524, then runs frozen full curve audit, all-six baseline
+paired analysis and PNG/SVG plots, scans actual model entrypoints and executes the exact
+STATEv2 plan ONCE. Failure stops chain, no automatic retry. DO NOT manually dispatch
+STATE or another model without first checking this successor: it can start STATE between
+turns. This is authorized serial continuation, not a second running model. No further fit,
+saved-CPU evaluation or feedback auto-dispatch follows STATE.
+
+Automatic outputs if predecessor closes/audit passes:
+- legacy-operation-curve-analysis-v1/analysis.json and curve.csv
+- legacy-operation-paired-baselines-v1/comparisons.json and paired-units.json
+- legacy-operation-curve-plots-v1/curve.png,curve.svg,plot.json
+- state-view-acceptance-v2/ (real model Views; driver/first outputs retained)
+All relative to artifacts/generalization-20261021. If analysis fails, inspect exact failure;
+do not bypass evidence checks, restart training or silently choose a partial checkpoint.
+
+NEW PRECISION FINDING / DECLARED BEFORE CURRENT POST-UPDATE SCORES READ:
+Installed Laya save_checkpoint uses detach().half(); actual update32 header has170F16
+weight tensors despite FP32 in-memory training. load_checkpoint.model.float() does not
+recover precision. ModernBertConfig.to_dict removes reference_compile. Actual saved CPU
+inference explicitly fixes reference_compile=false and MHA fastpath=false with declared
+wrapper, loadedFP32, same projection/max_len/head2048. No quantization-only causal claim:
+serialization plus inference device changes together. Only header/source inspection so far.
+
+checkpoint-persistence-evaluation-plan-v1.json and tracked corresponding manifest record
+pre-outcome clarification: preserve original in-memory curves/choice, but downstream binding
+uses SAME operation-dev family macro/earliest tie/0eligible rule on ACTUAL SAVED CPU
+predictions over all0/32/64/128/262/393/524 candidates. Fixed860/616/32-family opdev primary;
+fixed16 feedback dev secondary both targets, never opselection. Combine immutable blocks
+for one load/candidate, separate scoring. Evaluate selected saved model on labelledtrain for
+matching CPU train/dev gap. Seeds1/2 use decisive seed0 selected update, no per-seed/Host/test
+reselection. Explicitly amended, not backdated original preregistration. No savedCPU jobs yet.
+
+Code41bff5d4 adds terminal curve audit, saved evaluator, group statistics and plots;
+1df7669d adds all-six baseline pairing. Final freeze:
+frozen-curve-analysis-with-pairs-v1/MiLAi-Lab (source1df7669d),
+curve-analysis-readiness-v2.json records direct literal source equality, no SHA.
+Earlier frozen-curve-analysis-41bff5d4 retained but lacks baseline CLI; use final freeze.
+CLI evaluate_bounded_laya --disable-reference-compile is optional/default unchanged.
+Saved evaluator uses existing original-ledger child accounting once/candidate, validates
+actual input/coverage/conditions and existing compute phase. All candidates must complete
+before selection; staged skip-selected-train explicitly reports train pending.
+
+31 unique tests PASS:9curve audit,6paired stats,7saved serial evaluator,5native evaluatorCLI,
+4all-six baseline pairing. Ruff11, mypy5 implementation files, package/tools boundaries PASS;
+6inherited private edges unchanged. Synthetic fixture files/ledgers are NOT actual research
+results or compute measurements. Standalone system Python3 plotting smoke PNG/SVG inspected.
+One REAL measured phase from that syntheticplot process=3.843663422CPU pending (plot.json).
+Tests/imports/header review/archive preparation/debug/authoring unknown, not zero. Waiting
+successor process CPU not final yet. On terminal later audit/plots/comparison and STATE process
+measurements will be separate pending canonical phases, not copies to add twice.
+
+Source-group bootstrap10000 seed0: average paired states and seeds within family, resample
+families; unknowns retained with coverage and all-planned bounds. All six recorded-state
+baselines retained. Selected-on-dev comparisons explicitly include selection optimism;
+not protected confirmation, baseline rollouts or Host success. Degenerate interval not
+population equivalence. Current post-update scores not read yet; no gain claim.
+
+External review used only prior manifests and released protocol docs, no new question/test
+body/environment/model output: LME-V2 all200Small histories previous contact (451questions,
+full images needed), not fresh history holdout. Mem2Act latest v3 runtime exists; do not
+rebuild v2's formerly missing runner. Full429sessions/16843turns/400GivenTool cases remain.
+STATE official guide:300train/150test,5runs,topk3,read-only learning retrieval,locked GPT5.4
+simulator/judge; domain tools benchmark-owned. Changed Qwen judge/simulator or mutable
+internalView protocol must be called modified protocol, not official comparable score.
+External adapters/full evaluation/finalmethod freeze still required; metadata reading is
+not completion. Test bodies remain unread.
+
+Original ledger only /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json.
+Closed settlements v1/v2/v3 NEVER append/re-settle;exclude their canonical phases and copies.
+Oldpending35 and v11-v16pending untouched. Trainer bills terminal once; parent orchestration
+CPU separate pending. Source queue93727/all4children CLOSED480 NEVER restart; pausedCoalent
+untouched. No SHA/subagents/push/merge/services/Product schema/API/permission/Canonical change.
+
+Authoritative pending configs remain STATEv2/factorialv2/feedbackv2 from V16 below. STATE
+source review stays v1prep, collector074ee79e, no Host readout for given-request probes.
+Full remaining:closelegacyfit; corrected64/128/256/lowLR/head-only/aux/E3 fits and savedCPU
+selection; STATE real Views/E2/delivery semantics; factorial; feedback3collectors128sources,
+labels/nested192fits/T2/common-support; actual strongsimple/full/NoView/text autonomousHost
+lifecycle and costs; finalcandidate/protectedexternal/seeds0/1/2 family confirmation.
+See progress-20261022-v17.json and execution doc. Keep full goal ACTIVE.
+
 # LATEST V16 (2026-10-22): LEGACY FIT393 LIVE / NO-VIEW AND CONFIG REPAIR
 
 Full goal ACTIVE,not complete or blocked. Previous turn implemented internal View ablation,
