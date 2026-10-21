@@ -2336,3 +2336,14 @@ view-cache已关闭64位置并全部作者评审：20C/19Q/15W/10F；B30位置20
 首次新增embedding分项的类型检查因空字典类型推断报错；实际数据核对已通过。改用实际stage的显式求和后Ruff/mypy通过，v1/v2/v3检查记录保留；没有重跑实际模型。finalize_d_native_review_v2.py已补存embedding和全部local_compute，供后续MemPursuit闭合使用；view-cache已执行一次，不能再运行其finalizer重复加入CPU差额。
 
 MemPursuit前8位置已完成作者评审，整臂仍运行。用当前前9个已完成位置中3次实际pool记录及其已付费BGE响应，经过原normalized和上游NumPy select离线复放，selected_indices/stop_reason/weights均匹配。与同一候选、同一向量的cosine排序比较，3池选中集合都相同，2池顺序不同；这只是候选选择诊断，没有执行替代Host或证明质量收益。结果candidate-vector-audit-prefix-v1.json；后续可用audit_mempursuit_actual_vectors_v1.py在全64张cards上输出新文件补全，不重新embedding。
+
+
+## 2026-10-21：STATE保留任务入口与MemPursuit更新候选诊断
+
+06d103c3扩展现有单轨迹STATE研究入口：显式--split train/test必须与preparation选择及上游split成员一致，正文加载仍在检查之后；默认train不变。新增现有MemPursuitPool/PursuitMemoryPolicy组合，原fixed/fixed-context仍走原路径。BGE client纳入原HTTP所有权域和同一ledger，真实pool使用原完整候选与有限READ接口。每段末尾CPU只记整驱动减已单独计费的native compute差额，另存whole_driver_cpu_seconds与nested_cpu_seconds_already_billed，避免把选择器CPU计两次。
+
+8项机械检查通过，包括新增实际Store→公开STATE检索hook→原文回执→完整learnings预算→原selector计算计费；既有公开SDK合成沙箱与隐藏context隔离检查仍通过。首次静态检查发现构造器字典类型推断和测试import顺序问题，修正后Ruff/mypy通过。均为脚本Host/embedding，没有模型HTTP，也未读取STATE保留任务正文或运行确认任务。配置/任务/重复次数冻结与真实确认仍待D和Coalent结果；不把入口实现称为外部成绩。索引host-intent-view-v4-state-confirmation-runner-v1.json。
+
+MemPursuit已评审前36位置。位置26（C03内容流中间更新）实际再次检索，候选5包含原source9/10的9:45修正；SEARCH后的下一状态明确提供合法read_5。原选择器选择[0,2,3,1]，主要是旧Host问题/答案和早期原文，最终继续回答9:30。同批实际BGE向量的cosine top4是[0,1,2,6]，也未选5；没有执行替代READ/Host轨迹，不能声称cosine会成功或归因于单一算法差异。原before、合法action、候选原文、实际选择及向量比较保留在mempursuit/selection-026-v1.json。
+
+前32张已完成cards共11个pool用原记录向量复放，上游selected_indices/stop/weights全部一致；与同数量cosine前项相比，1池集合不同、10池顺序不同。该诊断共享真实候选/向量且不额外embedding，费用只计离线CPU，原HTTP不重复计。全64诊断与整臂质量/成本仍待执行结束。

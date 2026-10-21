@@ -1,0 +1,25 @@
+{
+  "status": "STATE_DECLARED_SPLIT_AND_SELECTED_POOL_MECHANICALLY_AVAILABLE",
+  "source_version": "06d103c3",
+  "entrypoint": "tools/run_state_bench_local_pilot.py",
+  "policies": [
+    "fixed_context",
+    "fixed",
+    "mempursuit"
+  ],
+  "split": "Explicit --split train/test must match preparation selection and original split membership before task body load; default remains train.",
+  "memory": "Original registered retrieval, actual public STATE hook, three-string outer envelope and original budget; declared BGE client for MemPursuit.",
+  "accounting": "Original owned ledger; end-of-run driver CPU subtracts nested already-billed compute deltas. Whole CPU and direct nested CPU reported separately.",
+  "evaluator_boundary": "Task summary/requirements remain evaluator-side; only public opening/context, domain tools/results and retrieved materials reach Host. Deterministic sandbox state evaluation; official simulator/judge not run.",
+  "checks": [
+    "artifacts/host-intent-retrieval-v3/view-v4-state-confirmation-runner-check-v1/checks.json",
+    "artifacts/host-intent-retrieval-v3/view-v4-state-confirmation-runner-check-v2/checks.json"
+  ],
+  "functional_checks_passed": 8,
+  "static_checks": "Ruff/mypy PASS after import-order and constructor-map typing fixes; original failed static outputs retained.",
+  "model_calls": 0,
+  "test_task_contents_read": false,
+  "test_runs_executed": 0,
+  "selection_status": "Confirmation task/method/repetition plan not yet frozen; D and Coalent outcomes remain pending.",
+  "costs": "Measured checks in pending33; manual preparation unknown; no new real ledger."
+}

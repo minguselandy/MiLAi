@@ -1,3 +1,24 @@
+# LATEST STATE RUNNER / MP REVIEWS THROUGH35 — 2026-10-21
+
+Current code06d103c3 extends tools/run_state_bench_local_pilot.py: explicit--split train/test,
+selection.split+native membership checked before task bodyload; train default preserved.
+Existing fixed/fixed_context plus MemPursuitPool/PursuitMemoryPolicy supported, declaredBGE
+ownedclient and originalledger. WholeCPU minus alreadychargednestedcompute atfinalization;
+whole_driver_cpu_seconds/nested_cpu_seconds_already_billed separatelyreported.
+8mechanical checksPASS inclnewrealStore/Statehook/selectedpool/envelope/compute; v1static
+constructor-map typing/import-order failures retained; v2Ruff/mypyPASS. No STATEtestbody
+read, no newactualHTTP, no confirmationplan frozen. Manifeststate-confirmation-runner-v1.
+Dparent3434203/exec69127 and MPPID3763296 remainrunning; revalidate driver/process.
+MPcards0–35exported; reviews0–35SAVED. 17/18/21 have Calternative toprimaryQ;
+12Q/Wslashambiguity recordedinbasis(noCimpact). 26W newcallmissedactual9:45source.
+selection-026-v1.json: candidate5=ownsource9/10, read_5LEGAL aftersearch; MP[0,2,3,1],
+samevectorcosine[0,1,2,6], neitherselects5. Noalternativeexecution/successclaim.
+actual-vector helperfirst32 audit11pools, allreproduce;1setdiff/10orderdiffvs cosine.
+Laterfull64 useNEWoutputpath. Native/embeddingcost chargedalready; onlyofflineCPUto33.
+View-cache64 andfirst8arms alreadyclosed/finalized. Neverrerunclosedfinalizers.
+Coalentpilotv2 remainsFROZEN_NOT_DISPATCHED; waitDactualclosure. Pending33UNSETTLED.
+FullgoalACTIVE; noSHA/subagents/newservices/newrealledger. Detailsbelow.
+
 # LATEST VIEW-CACHE CLOSED / MEMPURSUIT RUNNING — 2026-10-21
 
 Dparent3434203/exec69127 RUNNING; active mempursuit PID3763296, latest12/64.
