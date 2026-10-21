@@ -53,6 +53,27 @@ def nominated_actions(call: dict[str, Any], ids: list[str]) -> list[dict[str, An
     return [copy.deepcopy(actual[i]) for i in ids]
 
 
+def parameter_actions(call: dict[str, Any], rng: random.Random) -> list[dict[str, Any]]:
+    """Sample actual alternatives of one kind, retaining plain HANDOFF when offered."""
+    by_kind: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for action in call["initial_actions"]:
+        alternatives = by_kind[action["kind"]]
+        if not any((a["target"], a["parameters"]) == (action["target"], action["parameters"])
+                   for a in alternatives):
+            alternatives.append(action)
+    eligible = sorted(kind for kind, actions in by_kind.items() if len(actions) >= 2)
+    if not eligible:
+        return branch_actions(call)
+    selected = rng.sample(by_kind[rng.choice(eligible)], 2)
+    stop = [a for a in call["initial_actions"] if a["kind"] == "HANDOFF" and not a["parameters"]]
+    for action in [*stop, *branch_actions(call)]:
+        if action not in selected:
+            selected.append(action)
+        if len(selected) == 3:
+            break
+    return copy.deepcopy(selected)
+
+
 def select_states(
     entries: list[dict[str, Any]], groups: list[str], per_group: int, seed: int,
     include: list[str],
@@ -88,6 +109,41 @@ def select_states(
     return selected
 
 
+def state_phase(entry: dict[str, Any]) -> str:
+    return "after_operation" if entry["control_step"] else "initial"
+
+
+def select_quota_states(
+    entries: list[dict[str, Any]], groups: list[str], quotas: dict[str, dict[str, int]],
+    seed: int, include: list[str],
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    """Fixed collector/phase cells; missing reached states never borrow another cell's quota."""
+    available = {entry["capture"]: entry for entry in entries}
+    for capture in include:
+        entry = available[capture]
+        if (entry["family"] not in groups
+                or state_phase(entry) not in quotas.get(entry["collection_policy"], {})):
+            raise ValueError("A nomination is outside the declared collector/phase quota")
+    selected, cells = [], []
+    for collector, phases in quotas.items():
+        for phase, count in phases.items():
+            if phase not in {"initial", "after_operation"} or count < 0:
+                raise ValueError("State quotas need a known phase and nonnegative count")
+            pool = [entry for entry in entries if entry["collection_policy"] == collector
+                    and state_phase(entry) == phase]
+            captures = {entry["capture"] for entry in pool}
+            chosen = select_states(pool, groups, count, seed,
+                                   [key for key in include if key in captures])
+            selected.extend(chosen)
+            for group in groups:
+                eligible = sum(entry["family"] == group for entry in pool)
+                retained = sum(entry["family"] == group for entry in chosen)
+                cells.append({"family": group, "collection_policy": collector, "phase": phase,
+                    "quota": count, "eligible": eligible, "selected": retained,
+                    "shortfall": count - retained})
+    return selected, cells
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("runs", nargs="+", type=Path)
@@ -101,11 +157,18 @@ def main() -> None:
     parser.add_argument("--split", choices=("train", "dev"), default="train")
     parser.add_argument("--include-control-steps", action="store_true",
                         help="Include captured post-operation decisions as branch starting states")
+    parser.add_argument("--state-quotas", type=Path,
+                        help="JSON collector policy -> {initial: n, after_operation: n}; "
+                             "explicit per-source quotas replace pooled --per-group selection")
+    parser.add_argument("--branch-sampling", choices=("operations", "post-operation-bindings"),
+                        default="operations",
+                        help="Optional seeded binding alternatives on actual post-operation states")
     parser.add_argument("--continuation-steps", type=int, default=2)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     started, cpu = time.perf_counter(), time.process_time()
     entries, inventory, calls = [], [], {}
+    collectors: dict[str, str] = {}
     for root in args.runs:
         driver = read_json(root / "driver.json")
         if driver["status"] == "RUNNING":
@@ -132,6 +195,12 @@ def main() -> None:
                      "message_id": call["public_message"]["message_id"],
                      "control_step": call.get("control_step", 0),
                      "original_status": call["status"], "eligible": False}
+            if args.state_quotas is not None:
+                source_root = call["source_root"]
+                if source_root not in collectors:
+                    collectors[source_root] = read_json(Path(source_root) / "input-freeze.json")[
+                        "config"]["memory_control"]["policy"]
+                entry["collection_policy"] = collectors[source_root]
             if call["status"] not in {"ORIGINAL_COMPLETED", "ORIGINAL_FAILED"}:
                 entry["reason"] = "original_call_not_closed"
             elif not call["initial_actions"] or call["initial_observation"] is None:
@@ -150,7 +219,16 @@ def main() -> None:
             inventory.append(entry)
     bindings = read_json(args.bindings) if args.bindings is not None else {}
     include = list(dict.fromkeys([*args.include, *bindings]))
-    selected = select_states(entries, args.groups, args.per_group, args.seed, include)
+    quotas = read_json(args.state_quotas) if args.state_quotas is not None else None
+    quota_cells = None
+    if quotas is None:
+        selected = select_states(entries, args.groups, args.per_group, args.seed, include)
+    else:
+        if not args.include_control_steps and any(
+                phases.get("after_operation", 0) for phases in quotas.values()):
+            parser.error("After-operation quotas require --include-control-steps")
+        selected, quota_cells = select_quota_states(
+            entries, args.groups, quotas, args.seed, include)
     args.output.mkdir(parents=True, exist_ok=False)
     captures = args.output / "captures"
     captures.mkdir()
@@ -159,10 +237,15 @@ def main() -> None:
         if entry["original_status"] in {"ORIGINAL_COMPLETED", "ORIGINAL_FAILED"}:
             (captures / entry["capture"]).symlink_to(entry["path"], target_is_directory=True)
     policies = []
+    binding_rng = random.Random(args.seed)  # noqa: S311 -- explicit data acquisition seed
     for index, entry in enumerate(selected):
         capture = entry["capture"]
-        actions = (nominated_actions(calls[capture], bindings[capture]["actions"])
-                   if capture in bindings else branch_actions(calls[capture]))
+        if capture in bindings:
+            actions = nominated_actions(calls[capture], bindings[capture]["actions"])
+        elif args.branch_sampling == "post-operation-bindings" and entry["control_step"]:
+            actions = parameter_actions(calls[capture], binding_rng)
+        else:
+            actions = branch_actions(calls[capture])
         for branch_index, action in enumerate(actions):
             policies.append({
                 "name": f"state-{index:03d}-branch-{branch_index:02d}",
@@ -185,8 +268,14 @@ def main() -> None:
         "status": "PREPARED_NOT_EXECUTED", "groups": args.groups, "seed": args.seed,
         "split": args.split,
         "include_control_steps": args.include_control_steps,
-        "per_group_maximum": args.per_group, "nominated_captures": include,
+        "per_group_maximum": (args.per_group if quotas is None else
+                              sum(n for phases in quotas.values() for n in phases.values())),
+        "nominated_captures": include,
+        **({"state_quotas": quotas, "quota_cells": quota_cells,
+            "quota_shortfall": sum(cell["shortfall"] for cell in quota_cells)}
+           if quota_cells is not None else {}),
         "binding_nominations": bindings,
+        "branch_sampling": args.branch_sampling,
         "selected": selected, "inventory": inventory, "states": len(selected),
         "branches": len(policies),
         "exported_raw_states": len(selected), "operation_labels_added": False,
@@ -199,7 +288,11 @@ def main() -> None:
         "selection": "Declared diagnostic nominations, then round-robin observable strata; "
                      "no answers, semantic grades or action scores used for remaining selection.",
         "branch_selection": "Explicit binding nominations use actual offered actions. Other "
-                            "representatives use operation opportunities, not presumed utility.",
+                            "representatives use operation opportunities, not presumed utility. "
+                            "Optional post-step binding sampling chooses a kind uniformly, then "
+                            "two distinct actual target/parameter bindings and a control. "
+                            "For nested studies prepare the largest pool once and filter its "
+                            "reviewed rows; do not resample branches for smaller cohorts.",
         "scope": "Actual captured initial or explicitly checkpointed post-operation states only. "
                  "No reconstruction is inferred from an observation or action trace alone. "
                  "Unselected/failed/missing states remain in inventory without negative labels.",

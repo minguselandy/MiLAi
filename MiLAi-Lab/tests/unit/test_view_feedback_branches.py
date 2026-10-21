@@ -1,5 +1,6 @@
 """Branch sampling preserves real bindings and does not infer outcome labels."""
 import copy
+import random
 import sys
 from pathlib import Path
 
@@ -10,6 +11,8 @@ from prepare_view_feedback_branches import (
     branch_actions,
     call_stratum,
     nominated_actions,
+    parameter_actions,
+    select_quota_states,
     select_states,
 )
 
@@ -97,3 +100,71 @@ def test_source_review_can_compare_different_bindings_of_one_kind():
     assert actions[1]["parameters"] == {"source_ref": "other-ref", "ranges": [[11, 52]]}
     with pytest.raises(ValueError, match="captured action"):
         nominated_actions(original, ["a2", "invented"])
+
+
+def quota_pool():
+    return [{"capture": f"{group}/{collector}/{step}/{i}", "family": group,
+        "collection_policy": collector, "control_step": step,
+        "stratum": [bool(i % 2), False, False, False, bool(step)], "outcome": "unused"}
+        for group in ("g0", "g1", "g2") for collector in ("rules", "laya", "fixed_context")
+        for step in (0, 1) for i in range(4)]
+
+
+def test_collector_phase_quotas_keep_missing_cells_without_borrowing_more_rule_states():
+    pool = [e for e in quota_pool()
+            if not (e["family"] == "g1" and e["collection_policy"] == "laya"
+                    and e["control_step"])]
+    quotas = {name: {"initial": 1, "after_operation": 1}
+              for name in ("rules", "laya", "fixed_context")}
+    selected, cells = select_quota_states(pool, ["g0", "g1"], quotas, 0, [])
+    assert len(selected) == 11 and sum(c["shortfall"] for c in cells) == 1
+    missing, = [c for c in cells if c["shortfall"]]
+    assert (missing["family"], missing["collection_policy"], missing["phase"]) == (
+        "g1", "laya", "after_operation")
+    assert sum(e["collection_policy"] == "rules" for e in selected) == 4
+    assert all(c["selected"] <= c["quota"] for c in cells)
+
+
+def test_nested_group_prefixes_keep_exact_quota_selections_without_score_selection():
+    pool = quota_pool()
+    quotas = {name: {"initial": 1, "after_operation": 1}
+              for name in ("rules", "laya", "fixed_context")}
+    short, _ = select_quota_states(pool, ["g0", "g1"], quotas, 0, [])
+    full, _ = select_quota_states(pool, ["g0", "g1", "g2"], quotas, 0, [])
+    assert short == [e for e in full if e["family"] in {"g0", "g1"}]
+    changed = copy.deepcopy(pool)
+    for entry in changed:
+        entry["outcome"] = "opposite"
+    again, _ = select_quota_states(changed, ["g0", "g1"], quotas, 0, [])
+    assert [e["capture"] for e in short] == [e["capture"] for e in again]
+
+
+def test_nominations_stay_inside_their_declared_collector_and_phase_quota():
+    pool = quota_pool()
+    quotas = {"laya": {"after_operation": 1}}
+    selected, _ = select_quota_states(pool, ["g0"], quotas, 0, ["g0/laya/1/3"])
+    assert [e["capture"] for e in selected] == ["g0/laya/1/3"]
+    with pytest.raises(ValueError, match="collector/phase"):
+        select_quota_states(pool, ["g0"], quotas, 0, ["g0/rules/1/0"])
+
+
+def test_seeded_parameter_comparison_preserves_actual_targets_and_unknown_other_options():
+    original = call()
+    before = copy.deepcopy(original)
+    rng = random.Random(0)  # noqa: S311 -- deterministic branch sampling test
+    chosen = parameter_actions(original, rng)
+    reads = [a for a in chosen if a["kind"] == "READ"]
+    assert len(reads) == 2 and reads[0]["parameters"] != reads[1]["parameters"]
+    assert any(a["kind"] == "HANDOFF" and not a["parameters"] for a in chosen)
+    assert all(a in original["initial_actions"] for a in chosen)
+    assert original == before
+    rng.seed(0)
+    assert chosen == parameter_actions(original, rng)
+    # A different display ID for identical executable bindings is not a new parameter branch.
+    original["initial_actions"] = [
+        {"id": key, "kind": "READ", "target": "same", "parameters": {"index": 0}}
+        for key in ("read", "alias")]
+    original["initial_actions"].append(
+        {"id": "stop", "kind": "HANDOFF", "target": "Host", "parameters": {}})
+    rng.seed(0)
+    assert parameter_actions(original, rng) == branch_actions(original)

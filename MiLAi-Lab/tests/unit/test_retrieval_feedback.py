@@ -217,3 +217,37 @@ def test_closed_material_delivery_can_be_reviewed_when_host_readout_failed(tmp_p
     assert pair["answer"] == "unknown" and pair["delivery"] == "left"
     assert pair["host_readout_statuses"] == ["FAILED", "COMPLETED"]
     assert pair["tool_statuses"] == ["COMPLETED", "COMPLETED"]
+
+
+def test_explicit_delivery_only_compiles_without_inventing_a_host_readout(tmp_path):
+    raw, reviews, cases = branch_fixture(tmp_path)
+    for case in cases:
+        (case / "host-readout/readout.json").unlink()
+    untouched = copy.deepcopy(raw)
+    reviews[0]["comparisons"][0]["answer"] = "unknown"
+    compiled, = compile_feedback([raw], reviews, delivery_only=True)
+    assert raw == untouched
+    assert all(compiled[key] == raw[key] for key in ("state", "questions", "gold"))
+    pair, = compiled["feedback"]["comparisons"]
+    assert pair["delivery"] == "left" and pair["answer"] == "unknown"
+    assert pair["host_readout_statuses"] == ["NOT_EVALUATED", "NOT_EVALUATED"]
+    assert feedback_counts([compiled], "answer")["unknown_pairs"] == 1
+    with pytest.raises(FileNotFoundError):
+        compile_feedback([raw], reviews)  # The default protocol still requires actual readouts.
+    reviews[0]["comparisons"][0]["answer"] = "tie"
+    with pytest.raises(ValueError, match="answer feedback unknown"):
+        compile_feedback([raw], reviews, delivery_only=True)
+
+
+def test_delivery_only_still_requires_closed_matched_tool_results(tmp_path):
+    raw, reviews, cases = branch_fixture(tmp_path)
+    reviews[0]["comparisons"][0]["answer"] = "unknown"
+    path = cases[0] / "replay.json"
+    replay = json.loads(path.read_text())
+    replay["status"] = "FAILED"
+    path.write_text(json.dumps(replay))
+    with pytest.raises(ValueError, match="tool comparisons remain unknown"):
+        compile_feedback([raw], reviews, delivery_only=True)
+    reviews[0]["comparisons"][0]["delivery"] = "unknown"
+    compiled, = compile_feedback([raw], reviews, delivery_only=True)
+    assert feedback_counts([compiled], "delivery")["unknown_pairs"] == 1

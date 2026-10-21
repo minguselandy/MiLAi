@@ -15,7 +15,7 @@ from retrieval_feedback import feedback_counts, validate_feedback
 
 def compile_feedback(
     raw: list[dict[str, Any]], reviews: list[dict[str, Any]],
-    *, split: str = "train",
+    *, split: str = "train", delivery_only: bool = False,
 ) -> list[dict[str, Any]]:
     by_event = {row["metadata"]["event_id"]: row for row in raw}
     if len(by_event) != len(raw):
@@ -40,8 +40,9 @@ def compile_feedback(
         for comparison in review["comparisons"]:
             branches = [read_json(Path(comparison[side + "_case"]) / "replay.json")
                         for side in ("left", "right")]
-            readouts = [read_json(Path(comparison[side + "_case"]) / "host-readout/readout.json")
-                        for side in ("left", "right")]
+            readout_statuses = (["NOT_EVALUATED", "NOT_EVALUATED"] if delivery_only else [
+                read_json(Path(comparison[side + "_case"]) / "host-readout/readout.json")["status"]
+                for side in ("left", "right")])
             if any(Path(branch["captured_call"]).resolve() != capture.resolve()
                    for branch in branches):
                 raise ValueError("Compared branches came from different captures")
@@ -59,15 +60,16 @@ def compile_feedback(
             if not tools_completed and any(comparison[target] != "unknown"
                                            for target in ("answer", "delivery")):
                 raise ValueError("Unclosed tool comparisons remain unknown")
-            if (any(readout["status"] != "COMPLETED" for readout in readouts)
+            if (any(status != "COMPLETED" for status in readout_statuses)
                     and comparison["answer"] != "unknown"):
-                raise ValueError("Unclosed Host readouts leave answer feedback unknown")
+                raise ValueError(
+                    "Unclosed or unevaluated Host readouts leave answer feedback unknown")
             comparisons.append({
                 "left": actions[0]["id"], "right": actions[1]["id"],
                 **{key: copy.deepcopy(comparison[key]) for key in (
                     "answer", "delivery", "basis", "left_case", "right_case")},
                 "tool_statuses": [branch["status"] for branch in branches],
-                "host_readout_statuses": [readout["status"] for readout in readouts],
+                "host_readout_statuses": readout_statuses,
             })
         row["feedback"] = {"capture": str(capture), "comparisons": comparisons,
                            "reviewer": review["reviewer"]}
@@ -83,10 +85,13 @@ def main() -> None:
     parser.add_argument("reviews", type=Path)
     parser.add_argument("output", type=Path)
     parser.add_argument("--split", choices=("train", "dev"), default="train")
+    parser.add_argument("--delivery-only", action="store_true",
+                        help="Do not read Host readouts; every answer comparison must stay unknown")
     args = parser.parse_args()
     started, cpu = time.perf_counter(), time.process_time()
     raw = read_jsonl(args.raw)
-    rows = compile_feedback(raw, read_json(args.reviews)["states"], split=args.split)
+    rows = compile_feedback(raw, read_json(args.reviews)["states"], split=args.split,
+                            delivery_only=args.delivery_only)
     args.output.mkdir(parents=True, exist_ok=False)
     (args.output / "feedback.jsonl").write_text(
         "".join(json.dumps(row, ensure_ascii=False) + "\n" for row in rows))
@@ -95,6 +100,7 @@ def main() -> None:
         "raw": str(args.raw), "reviews": str(args.reviews), "raw_states": len(raw),
         "reviewed_states": len(rows), "unreviewed_states": len(raw) - len(rows),
         "split": args.split,
+        "host_readout_evaluation": "not_used" if args.delivery_only else "required",
         "families": len({row["metadata"]["family"] for row in rows}),
         "feedback": {target: feedback_counts(rows, target) for target in ("answer", "delivery")},
         "model_input_unchanged": True, "full_option_ce_labels_added": False,

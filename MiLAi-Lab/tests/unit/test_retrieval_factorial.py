@@ -7,7 +7,7 @@ from pathlib import Path
 from test_given_retrieval import prepared_given, source
 from test_v13_5_functional_integration import scripted
 
-from milai_lab.harness.artifact_io import read_json
+from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.runners.functional import frozen, message
 from milai_lab.runners.retrieval_factorial import (
     prelude_history,
@@ -152,11 +152,18 @@ def test_actual_e2_refresh_then_full_cross_keeps_sources_refs_budget_and_separat
         assert originals == arrived["sources"]
     assert seen_views == {"retained": {1}, "refreshed": {2}}
     feedback = tmp_path / "feedback"
+    quotas = tmp_path / "quotas.json"
+    write_json(quotas, {"fixed_context": {"initial": 1, "after_operation": 1}})
     monkeypatch.setattr(sys, "argv", ["feedback", str(output), "--groups", "source-family",
-        "--include-control-steps", "--per-group", "2", "--output", str(feedback)])
+        "--include-control-steps", "--state-quotas", str(quotas), "--branch-sampling",
+        "post-operation-bindings", "--output", str(feedback)])
     prepare_feedback()
     selected = read_json(feedback / "selection.json")
     assert selected["states"] == 2 and not selected["operation_labels_added"]
+    assert selected["quota_shortfall"] == 0
+    assert selected["branch_sampling"] == "post-operation-bindings"
+    assert {bool(x["control_step"]) for x in selected["selected"]} == {False, True}
+    assert {x["collection_policy"] for x in selected["selected"]} == {"fixed_context"}
     assert any(x["control_step"] > 0 for x in selected["inventory"])
     assert {x["family"] for x in selected["selected"]} == {"source-family"}
     assert all(not json.loads(line)["gold"]
