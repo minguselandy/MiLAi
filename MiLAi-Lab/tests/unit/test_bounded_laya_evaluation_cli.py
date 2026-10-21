@@ -12,8 +12,9 @@ from milai_lab.harness.contextual_artifacts import RunBudget, RunLimits
 
 
 @pytest.mark.parametrize("projection", ["shared", "shared_request_text"])
+@pytest.mark.parametrize("disable_compile", [False, True])
 def test_operation_evaluator_projects_public_input_and_uses_operation_metrics(
-    tmp_path, monkeypatch, projection,
+    tmp_path, monkeypatch, projection, disable_compile,
 ):
     pytest.importorskip("torch")
     rows = [{"state": {"task": {"retrieval_request": {"query": "Question\u0085\u2028\u2029end"}},
@@ -31,11 +32,14 @@ def test_operation_evaluator_projects_public_input_and_uses_operation_metrics(
     class StubDecision:
         def __init__(self, checkpoint, max_len, head_max_len, device):
             self.model = SimpleNamespace(
-                parameters=lambda: iter([SimpleNamespace(dtype="float32")]))
+                parameters=lambda: iter([SimpleNamespace(dtype="float32")]),
+                encoder=SimpleNamespace(config=SimpleNamespace(reference_compile=None)))
             self.counters = {"forwards": 0, "sequence_rows": 0, "input_tokens": 0}
             assert device == "cpu"
 
         def predict(self, payload):
+            expected_compile = False if disable_compile else None
+            assert self.model.encoder.config.reference_compile is expected_compile
             observed.append(payload)
             self.counters.update(forwards=1, sequence_rows=1, input_tokens=10)
             return {"choice": "finish", "input_tokens": 10}
@@ -44,7 +48,8 @@ def test_operation_evaluator_projects_public_input_and_uses_operation_metrics(
     monkeypatch.setattr(sys, "argv", ["evaluate_bounded_laya", str(data),
         str(tmp_path / "checkpoint"), str(output), "--budget", str(budget),
         "--task", "memory_operation", "--operation-state", projection,
-        "--compute-phase", "test_exported_operations"])
+        "--compute-phase", "test_exported_operations",
+        *(["--disable-reference-compile"] if disable_compile else [])])
     evaluate_bounded_laya.main()
     result = json.loads((output / "results.json").read_text())
     assert result["counts"] == {"labelled": 1, "accepted": 1}
@@ -60,6 +65,7 @@ def test_operation_evaluator_projects_public_input_and_uses_operation_metrics(
     run = json.loads((output / "run.json").read_text())
     assert run["status"] == "COMPLETED" and run["completed_states"] == 1
     assert run["task"] == "memory_operation" and run["operation_state"] == projection
+    assert run["reference_compile_override"] is (False if disable_compile else None)
     assert json.loads(budget.read_text())["compute"]["test_exported_operations"]["forwards"] == 1
 
 

@@ -109,6 +109,8 @@ def main() -> None:
     parser.add_argument("--device", default="cpu")
     parser.add_argument("--max-len", type=int, default=4096)
     parser.add_argument("--head-max-len", type=int, default=384)
+    parser.add_argument("--disable-reference-compile", action="store_true",
+                        help="Use the explicitly declared noncompiled encoder inference path")
     parser.add_argument("--task", choices=("bounded_reader", "memory_operation",
                                            "instruction_applicability", "mixed_retrieval",
                                            "memory_feedback"),
@@ -143,6 +145,8 @@ def main() -> None:
            "threads": args.threads, "max_len": args.max_len,
            "head_max_len": args.head_max_len, "completed_states": 0, "planned_states": len(rows),
            "task": args.task, "operation_state": args.operation_state,
+           "reference_compile_override": False if args.disable_reference_compile else None,
+           "mha_fastpath_enabled": torch.backends.mha.get_fastpath_enabled(),
            "calibrated": False, "http_requests": 0}
     write_json(args.output / "run.json", run)
     started, cpu = time.perf_counter(), time.process_time()
@@ -150,6 +154,8 @@ def main() -> None:
     model = None
     try:
         model = NativeDecision(args.checkpoint, args.max_len, args.head_max_len, args.device)
+        if args.disable_reference_compile:
+            model.model.encoder.config.reference_compile = False
         run["loaded_weight_dtype"] = str(next(model.model.parameters()).dtype)
         for index, row in enumerate(rows):
             payload = {k: row[k] for k in ("state", "questions")}
