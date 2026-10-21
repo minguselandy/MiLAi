@@ -66,11 +66,13 @@ def run_memory_control(
     record: Callable[[dict[str, Any]], None] = lambda event: None,
     can_continue: Callable[[], bool] = lambda: True,
     intervention: FirstActionIntervention | None = None,
+    start_step: int = 0,
+    prefix_trace: list[dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
     """Each next decision sees the completed operation, never a predicted result."""
     reason = "budget_exhausted"
-    trace = []
-    for step in range(max_steps):
+    trace = copy.deepcopy(prefix_trace) if prefix_trace is not None else []
+    for step in range(start_step, max_steps):
         state.budget.update(remaining_control_steps=max_steps - step,
                             reader_capacity_reserved=True)
         if not can_continue():
@@ -85,16 +87,18 @@ def run_memory_control(
         record({"phase": "decision_input", **copy.deepcopy(event)})
         started = time.perf_counter()
         forced = len(actions) == 1
+        relative_step = step - start_step
         intervened = intervention is not None and (
-            step == 0 or step > intervention.continuation_steps)
+            relative_step == 0 or relative_step > intervention.continuation_steps)
         if intervened:
             assert intervention is not None
-            requested = (intervention.first_action if step == 0 else
+            requested = (intervention.first_action if relative_step == 0 else
                          next(a for a in actions if a.kind == "HANDOFF"))
             if requested not in actions:
                 raise ValueError("Intervention action is unavailable with these bindings")
             selected = requested.id
-            selection_mode = "intervention_first_action" if step == 0 else "intervention_handoff"
+            selection_mode = ("intervention_first_action" if relative_step == 0
+                              else "intervention_handoff")
         else:
             selected = actions[0].id if forced else policy.choose(state, actions)
             selection_mode = "only_available_action" if forced else "policy"

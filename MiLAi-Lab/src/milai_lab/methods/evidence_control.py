@@ -7,7 +7,7 @@ from collections.abc import Callable
 from itertools import combinations
 from typing import Any
 
-from jsonschema.exceptions import ValidationError  # type: ignore[import-untyped]
+from jsonschema.exceptions import ValidationError
 
 from milai_lab.memory.functional_state import FunctionalRejection, body_text, reference_key
 from milai_lab.memory.service import MemoryService
@@ -57,6 +57,7 @@ class EvidenceOperations:
         fits_materials: Callable[[dict[int, dict[str, Any]]], bool] | None = None,
         source_observation: SourceObservationBudget | None = None,
         delivery_selection: bool = False,
+        checkpoint: dict[str, Any] | None = None,
     ) -> None:
         self.service, self.load_pool, self.refresh_call, self.fits = (
             service, load_pool, refresh_call, fits)
@@ -75,6 +76,16 @@ class EvidenceOperations:
         self.searched = False
         self.view_capacity = view_capacity
         self.view_policy = view_policy
+        self.checkpoint_configuration = {
+            "view_capacity": view_capacity, "view_policy": view_policy,
+            "search_batch_sizes": list(search_batch_sizes), "max_searches": max_searches,
+            "delivery_selection": delivery_selection,
+            "source_observation_tokens": (source_observation.max_tokens
+                                          if source_observation else None),
+        }
+        if checkpoint is not None:
+            self.restore_checkpoint(checkpoint, source_observation)
+            return
         self.used: set[str] = set()
         self.refreshed_inputs: set[tuple[str, tuple[str, ...], bool]] = set()
         self.history_pages: dict[str, dict[str, Any]] = {}
@@ -117,6 +128,45 @@ class EvidenceOperations:
         self.view_observation(state)
         if self.delivery_selection:
             self._deliver(state)
+
+    def checkpoint(self) -> dict[str, Any]:
+        """Save actual request-local executor state alongside a Store snapshot.
+
+        These private experiment artifacts never enter the policy observation.
+        Material indices, attempted bindings and generated View revisions are retained.
+        """
+        values = {name: copy.deepcopy(getattr(self, name)) for name in (
+            "materials", "known_materials", "delivered_view_slots", "searched", "history_pages",
+            "visibility_epoch", "views", "events", "source_directory")}
+        values.update(configuration=self.checkpoint_configuration,
+            opened=list(self.opened.items()), observed=list(self.observed.items()),
+            search_attempts=sorted(self.search_attempts), attempted=sorted(self.attempted),
+            used=sorted(self.used), refreshed_inputs=sorted(self.refreshed_inputs),
+            observed_source_attempts=sorted(self.observed_source_attempts),
+            source_pages=self.source_pages.checkpoint() if self.source_pages else None)
+        return copy.deepcopy(values)
+
+    def restore_checkpoint(self, saved: dict[str, Any],
+                           source_observation: SourceObservationBudget | None) -> None:
+        if saved["configuration"] != self.checkpoint_configuration:
+            raise ValueError("CONTROL_CHECKPOINT_CONFIGURATION_CHANGED")
+        for name in ("materials", "known_materials", "delivered_view_slots", "searched",
+                     "history_pages", "visibility_epoch", "views", "events", "source_directory"):
+            setattr(self, name, copy.deepcopy(saved[name]))
+        self.opened = {index: copy.deepcopy(item) for index, item in saved["opened"]}
+        self.observed = {index: copy.deepcopy(item) for index, item in saved["observed"]}
+        self.search_attempts = {(query, limit) for query, limit in saved["search_attempts"]}
+        self.attempted = {(index, expand) for index, expand in saved["attempted"]}
+        self.used = set(saved["used"])
+        self.refreshed_inputs = {(slot, tuple(refs), replace)
+                                for slot, refs, replace in saved["refreshed_inputs"]}
+        self.observed_source_attempts = {(ref, start, end)
+                                        for ref, start, end in saved["observed_source_attempts"]}
+        self.source_pages = None
+        if saved["source_pages"] is not None:
+            assert source_observation is not None
+            self.source_pages = SourceObservationPages.restore(saved["source_pages"],
+                                                                source_observation)
 
     @property
     def acquired(self) -> dict[int, dict[str, Any]]:

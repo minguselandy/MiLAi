@@ -37,7 +37,8 @@ class CoalentRetrievalMemory(IntentRetrievalMemory):
                  coalent_factory: Callable[[SourceRetriever, StoreCognitionStore], Any],
                  coalent_settings: dict[str, Any], **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
-        if self.replay_initial_observation is not None or self.control_intervention is not None:
+        if (self.replay_initial_observation is not None or self.control_intervention is not None
+                or self.replay_control_checkpoint is not None):
             raise ValueError("COALENT_FINITE_ACTION_REPLAY_UNSUPPORTED")
         self.coalent_factory = coalent_factory
         self.coalent_artifact_scope = coalent_settings.get("source_artifact_scope", "session")

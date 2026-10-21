@@ -87,6 +87,8 @@ class IntentRetrievalMemory(FunctionalEditMemory):
                  retrieval_observer: Callable[[dict[str, Any]], None] | None = None,
                  replay_initial_observation: dict[str, Any] | None = None,
                  replay_admission_policy: dict[str, Any] | None = None,
+                 replay_control_checkpoint: dict[str, Any] | None = None,
+                 capture_control_steps: bool = False,
                  control_intervention: FirstActionIntervention | None = None,
                  control_delivery_selection: bool = False,
                  return_envelope: Callable[[dict[str, Any]], Any] | None = None,
@@ -96,6 +98,8 @@ class IntentRetrievalMemory(FunctionalEditMemory):
         self.retrieval_observer = retrieval_observer
         self.replay_initial_observation = replay_initial_observation
         self.replay_admission_policy = replay_admission_policy
+        self.replay_control_checkpoint = replay_control_checkpoint
+        self.capture_control_steps = capture_control_steps
         self.control_intervention = control_intervention
         self.control_delivery_selection = control_delivery_selection
         self.return_envelope = return_envelope
@@ -208,15 +212,22 @@ class IntentRetrievalMemory(FunctionalEditMemory):
                 saved = existing.value
                 if saved["request"] != request.project():
                     raise FunctionalRejection("RETRIEVAL_CALL_CHANGED")
-                if saved["status"] != "completed":
+                if self.replay_control_checkpoint is not None:
+                    if saved["status"] != "started":
+                        raise ValueError("CONTROL_CHECKPOINT_REQUIRES_IN_PROGRESS_CALL")
+                    result = self._execute_retrieval(config, call_id, request, key, bound)
+                elif saved["status"] != "completed":
                     raise FunctionalIntegrityError("RETRIEVAL_OUTCOME_UNKNOWN")
-                result = self._retrieval_result(key, saved)
+                else:
+                    result = self._retrieval_result(key, saved)
             else:
                 result = self._execute_retrieval(config, call_id, request, key, bound)
         except BaseException as error:
             observe({"phase": "failed", "error_type": type(error).__name__, "error": str(error)})
             raise
-        observe({"phase": "completed", "result": result, "served_from_cache": existing is not None})
+        observe({"phase": "completed", "result": result,
+                 "served_from_cache": existing is not None
+                                      and self.replay_control_checkpoint is None})
         return result
 
     def _execute_retrieval(
@@ -231,8 +242,9 @@ class IntentRetrievalMemory(FunctionalEditMemory):
         saved: dict[str, Any] = {"schema": "milai_retrieval_snapshot_v1", "status": "started",
                                 "request": request.project(), "return_limit": return_limit}
         self.service.store.put(namespace(self.service), key, saved, index=False)
-        known = []
-        if request.task_context.known_evidence_refs:
+        checkpoint = self.replay_control_checkpoint
+        known = copy.deepcopy(checkpoint["operations"]["known_materials"]) if checkpoint else []
+        if checkpoint is None and request.task_context.known_evidence_refs:
             receipt = self._read(config, call_id + ":known",
                 {"tool": "memory_control", "known_evidence_refs": [
                     ref.model_dump() for ref in request.task_context.known_evidence_refs]},
@@ -246,12 +258,13 @@ class IntentRetrievalMemory(FunctionalEditMemory):
                 self.service.store.put(namespace(self.service), key, saved, index=False)
                 return self._retrieval_result(key, saved)
             known = receipt["materials"]
-        state = MemoryControlState(task={"request": request.query,
+        state = (MemoryControlState(**copy.deepcopy(checkpoint["state"])) if checkpoint else
+                 MemoryControlState(task={"request": request.query,
             "query_time": request.task_context.as_of or "", "mode": "retrieve",
             "read_goal": normalize_read_goal(request.read_goal),
             "retrieval_request": request.project(),
             "known_evidence": project_packs(known, list(range(len(known))))},
-            budget={"max_return_tokens": return_limit})
+            budget={"max_return_tokens": return_limit}))
 
         def search_pool(query: str, limit: int) -> list[dict[str, Any]]:
             native = self.service.search_sources(query, limit=min(limit, self.source_top_k),
@@ -295,11 +308,12 @@ class IntentRetrievalMemory(FunctionalEditMemory):
             known_materials=known,
             view_capacity=self.control_view_capacity, view_policy=self.control_view_policy,
             source_observation=self.control_source_observation,
-            delivery_selection=self.control_delivery_selection)
+            delivery_selection=self.control_delivery_selection,
+            checkpoint=checkpoint["operations"] if checkpoint else None)
         if self.control_delivery_selection:
             state.budget["acquisition_reads_remaining"] = self.read_allowance(config)[
                 "reads_remaining"]
-        if self.replay_initial_observation is not None:
+        if self.replay_initial_observation is not None and checkpoint is None:
             expected = copy.deepcopy(self.replay_initial_observation)
             for name in ("remaining_control_steps", "reader_capacity_reserved"):
                 expected["budget"].pop(name)
@@ -315,6 +329,7 @@ class IntentRetrievalMemory(FunctionalEditMemory):
                 "original_inventory_wall_seconds": original_timing,
                 "actual_inventory_wall_seconds": actual_timing})
         memory = self
+        prefix_events = copy.deepcopy(checkpoint["prefix_trace"]) if checkpoint else []
 
         class AdmittedOperations:
             def actions(self, observed: MemoryControlState) -> list[MemoryAction]:
@@ -337,6 +352,9 @@ class IntentRetrievalMemory(FunctionalEditMemory):
                     lambda _: operations.execute(action, observed), deliver_material=False)
 
         def record(event: dict[str, Any]) -> None:
+            if self.capture_control_steps and event["phase"] == "operation_result":
+                prefix_events.append({k: copy.deepcopy(v)
+                                      for k, v in event.items() if k != "phase"})
             if event.get("phase") == "decision_input":
                 refs = {span["source_ref"] for item in known for span in [
                     *item.get("source_ranges", []), *item.get("support_turns", []),
@@ -355,15 +373,23 @@ class IntentRetrievalMemory(FunctionalEditMemory):
                                                   for i, m in operations.observed.items()}
             self.control_record({**event, "retrieval_call_id": call_id})
             if self.retrieval_observer is not None and event["phase"] == "decision_input":
-                self.retrieval_observer({"call_id": call_id, "phase": "decision_input",
-                    "step": event["step"], "before": event["before"], "actions": event["actions"]})
+                observation = {"call_id": call_id, "phase": "decision_input",
+                    "step": event["step"], "before": event["before"], "actions": event["actions"]}
+                if self.capture_control_steps:
+                    observation.update(read_allowance=self.read_allowance(config),
+                        control_checkpoint={"step": event["step"], "state": event["before"],
+                            "operations": operations.checkpoint(),
+                            "prefix_trace": copy.deepcopy(prefix_events)})
+                self.retrieval_observer(observation)
 
         assert self.control_policy is not None
         result = run_memory_control(state, self.control_policy, AdmittedOperations(),
             max_steps=steps, record=record, can_continue=lambda: self.control_available()
                 and (bool(self.read_allowance(config)["reads_remaining"])
                      or (self.control_delivery_selection and bool(operations.observed))),
-            intervention=self.control_intervention)
+            intervention=self.control_intervention,
+            start_step=checkpoint["step"] if checkpoint else 0,
+            prefix_trace=checkpoint["prefix_trace"] if checkpoint else None)
         trace = result["trace"]
         saved.update(status="completed", reason=result["reason"],
             materials=list(operations.opened.values()), indices=list(operations.opened),

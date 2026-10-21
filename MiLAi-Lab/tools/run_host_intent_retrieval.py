@@ -35,6 +35,9 @@ def main() -> None:
     parser.add_argument("--capture-retrieval-calls", action="store_true",
                         help="Save each actual pre-call Store/allowance for E2; "
                              "serial tool execution")
+    parser.add_argument("--capture-control-steps", action="store_true",
+                        help="Also retain actual post-operation executor/Store checkpoints; "
+                             "implies --capture-retrieval-calls")
     parser.add_argument("--continue-host-history", action="store_true",
                         help="Continuous banks retain their own completed Host/tool messages")
     args = parser.parse_args()
@@ -75,7 +78,8 @@ def main() -> None:
             len(h["requests"]) for h in histories) * len(arms), "completed": [],
         "interfaces": interfaces, "split": args.split,
         "continue_host_history": args.continue_host_history,
-        "capture_retrieval_calls": args.capture_retrieval_calls,
+        "capture_retrieval_calls": args.capture_retrieval_calls or args.capture_control_steps,
+        "capture_control_steps": args.capture_control_steps,
         "automatic_retry": False, "source_groups": [h["source_group"] for h in histories],
         "costs": "original continuous ledger; provider and local model traces retained"}
     write_json(args.output / "fixture.json", fixture)
@@ -130,7 +134,9 @@ def main() -> None:
                             "occurred_at", "query_time", "calendar_context") if key in request},
                         control_models=models,
                         retrieval_snapshots=(args.output / "frozen-retrieval-calls"
-                                             if args.capture_retrieval_calls else None),
+                                             if args.capture_retrieval_calls
+                                             or args.capture_control_steps else None),
+                        retrieval_step_snapshots=args.capture_control_steps,
                         model_tool_choice=native_probe if args.native_probe else None)
                     row = {**driver["active"], "status": result["status"],
                            "answer": result.get("final_answer"), "error": result.get("error"),

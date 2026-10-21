@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import copy
+import json
 import random
 import time
 from collections import Counter, defaultdict
@@ -10,6 +11,7 @@ from pathlib import Path
 from typing import Any
 
 from milai_lab.harness.artifact_io import read_json, write_json
+from milai_lab.methods.memory_control_learning import decision_example
 
 
 def call_stratum(call: dict[str, Any]) -> tuple[bool, bool, bool, bool]:
@@ -69,7 +71,7 @@ def select_states(
         if len(nominated) > per_group:
             raise ValueError("Nominations exceed the declared per-source state budget")
         used = {entry["capture"] for entry in nominated}
-        buckets: dict[tuple[bool, bool, bool, bool], list[dict[str, Any]]] = defaultdict(list)
+        buckets: dict[tuple[bool, ...], list[dict[str, Any]]] = defaultdict(list)
         for entry in entries:
             if entry["family"] == group and entry["capture"] not in used:
                 buckets[tuple(entry["stratum"])].append(entry)
@@ -97,6 +99,8 @@ def main() -> None:
     parser.add_argument("--per-group", type=int, default=6)
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--split", choices=("train", "dev"), default="train")
+    parser.add_argument("--include-control-steps", action="store_true",
+                        help="Include captured post-operation decisions as branch starting states")
     parser.add_argument("--continuation-steps", type=int, default=2)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
@@ -113,8 +117,11 @@ def main() -> None:
                         and not request.get("independent") else
                         history["id"] + "-" + request["id"])
                 banks[bank] = history
-        for path in sorted((root / "frozen-retrieval-calls").glob("*/call.json")):
-            call, capture = read_json(path), path.parent.name
+        call_root = root / "frozen-retrieval-calls"
+        pattern = "**/call.json" if args.include_control_steps else "*/call.json"
+        for path in sorted(call_root.glob(pattern)):
+            call = read_json(path)
+            capture = "--".join(path.parent.relative_to(call_root).parts)
             if capture in calls:
                 raise ValueError("A real capture was included twice")
             calls[capture] = call
@@ -123,19 +130,22 @@ def main() -> None:
                      "family": history["source_group"], "split": history["split"],
                      "run": str(root), "source_version": driver["source_version"],
                      "message_id": call["public_message"]["message_id"],
+                     "control_step": call.get("control_step", 0),
                      "original_status": call["status"], "eligible": False}
             if call["status"] not in {"ORIGINAL_COMPLETED", "ORIGINAL_FAILED"}:
                 entry["reason"] = "original_call_not_closed"
             elif not call["initial_actions"] or call["initial_observation"] is None:
                 entry["reason"] = "no_actual_decision"
-            elif call["initial_observation"].get("observed_materials") is None:
-                entry["reason"] = "pre_W4_observation"
             elif history["split"] != args.split or history["source_group"] not in args.groups:
                 entry["reason"] = "outside_declared_source_groups_or_split"
             elif len(branch_actions(call)) < 2:
                 entry["reason"] = "fewer_than_two_actual_action_branches"
             else:
-                entry.update(eligible=True, stratum=call_stratum(call))
+                stratum: tuple[bool, ...] = call_stratum(call)
+                if args.include_control_steps:
+                    stratum = (*stratum, bool(entry["control_step"]),
+                               bool(call["initial_observation"]["visible_evidence"]))
+                entry.update(eligible=True, stratum=stratum)
                 entries.append(entry)
             inventory.append(entry)
     bindings = read_json(args.bindings) if args.bindings is not None else {}
@@ -162,23 +172,36 @@ def main() -> None:
                                  "continuation_steps": args.continuation_steps},
             })
     write_json(args.output / "policies.json", policies)
+    with (args.output / "raw-selected-states.jsonl").open("w", encoding="utf-8") as stream:
+        for index, entry in enumerate(selected):
+            call = calls[entry["capture"]]
+            metadata = {**entry, "row": index, "state_id": index, "task": "memory_operation",
+                "event_id": f"{entry['run']}/{entry['capture']}/step-{entry['control_step']}",
+                "training_event": f"{call['source_root']}/{call['bank']}/{entry['message_id']}"}
+            row = decision_example({"before": call["initial_observation"],
+                                    "actions": call["initial_actions"]}, metadata)
+            stream.write(json.dumps(row, ensure_ascii=False) + "\n")
     write_json(args.output / "selection.json", {
         "status": "PREPARED_NOT_EXECUTED", "groups": args.groups, "seed": args.seed,
         "split": args.split,
+        "include_control_steps": args.include_control_steps,
         "per_group_maximum": args.per_group, "nominated_captures": include,
         "binding_nominations": bindings,
         "selected": selected, "inventory": inventory, "states": len(selected),
         "branches": len(policies),
+        "exported_raw_states": len(selected), "operation_labels_added": False,
         "group_states": dict(Counter(entry["family"] for entry in selected)),
         "groups_without_eligible_state": sorted(set(args.groups) - {
             entry["family"] for entry in selected}),
         "stratum_order": ["has_view", "known_evidence", "original_source_requested",
-                          "actual_incoming_sources"],
+                          "actual_incoming_sources", *(["after_operation", "has_delivered_evidence"]
+                                                       if args.include_control_steps else [])],
         "selection": "Declared diagnostic nominations, then round-robin observable strata; "
                      "no answers, semantic grades or action scores used for remaining selection.",
         "branch_selection": "Explicit binding nominations use actual offered actions. Other "
                             "representatives use operation opportunities, not presumed utility.",
-        "scope": "Initial actual call states only; not arbitrary internal decision restoration. "
+        "scope": "Actual captured initial or explicitly checkpointed post-operation states only. "
+                 "No reconstruction is inferred from an observation or action trace alone. "
                  "Unselected/failed/missing states remain in inventory without negative labels.",
         "compute": {"wall_seconds": time.perf_counter() - started,
                     "cpu_seconds": time.process_time() - cpu},

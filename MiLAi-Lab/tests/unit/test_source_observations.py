@@ -57,6 +57,23 @@ def test_long_unicode_sources_reconstruct_exactly_and_previous_page_reopens():
     assert pages.current == saved[-1]
 
 
+def test_json_checkpoint_preserves_navigation_coverage_and_visibility():
+    budget = SourceObservationBudget(900, len)
+    pages = SourceObservationPages([event("first", "甲🙂" * 2000), event("last", "ending")], budget)
+    pages.open(tuple(pages.navigation()["next"]))
+    pages.open(tuple(pages.navigation()["next"]))
+    pages.restrict({"first"})
+    saved = json.loads(json.dumps(pages.checkpoint()))
+    restored = SourceObservationPages.restore(saved, budget)
+    assert restored.current == pages.current
+    assert restored.navigation() == pages.navigation()
+    assert restored.coverage() == pages.coverage()
+    for direction in ("previous", "next"):
+        assert restored.open(tuple(restored.navigation()[direction])) == pages.open(
+            tuple(pages.navigation()[direction]))
+    assert restored.visible == {"first"}
+
+
 def service_at(store, path, **kwargs):
     return MemoryService(store, ("paged", "alice"), "alice", path / "lock",
                          functional_contract="functional_v1", **kwargs)

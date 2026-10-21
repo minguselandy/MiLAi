@@ -31,6 +31,24 @@ class SourceObservationPages:
         self.current: dict[str, Any] = {}
         self.open((0, 0))
 
+    def checkpoint(self) -> dict[str, Any]:
+        """Literal navigation state for a captured decision, without serializing callbacks."""
+        return copy.deepcopy({"events": self.events, "visible": sorted(self.visible),
+            "starts": [list(cursor) for cursor in self.starts], "position": self.position,
+            "complete_prefix": self.complete_prefix, "current": self.current})
+
+    @classmethod
+    def restore(cls, saved: dict[str, Any],
+                budget: SourceObservationBudget) -> SourceObservationPages:
+        result = cls.__new__(cls)
+        result.budget = budget
+        result.events = copy.deepcopy(saved["events"])
+        result.visible = set(saved["visible"])
+        result.starts = [(index, offset) for index, offset in saved["starts"]]
+        result.position, result.complete_prefix = saved["position"], saved["complete_prefix"]
+        result.current = copy.deepcopy(saved["current"])
+        return result
+
     def restrict(self, visible: set[str]) -> None:
         self.visible.intersection_update(visible)
         self.current = self._page(self.starts[self.position])

@@ -2551,6 +2551,7 @@ def message(
     recorded_tool_schemas: list[dict[str, Any]] | None = None,
     given_retrieval_request: dict[str, Any] | None = None,
     retrieval_snapshots: Path | None = None,
+    retrieval_step_snapshots: bool = False,
     replay_retrieval: dict[str, Any] | None = None,
     control_policy_override: dict[str, Any] | None = None,
     previous_host_message: str | None = None,
@@ -2565,6 +2566,8 @@ def message(
     if profile_state.exists() and read_json(profile_state).get("disabled"):
         raise ValueError("FUNCTIONAL_PROFILE_DISABLED")
     settings = freeze["config"]
+    if retrieval_step_snapshots and retrieval_snapshots is None:
+        raise ValueError("CONTROL_STEP_CAPTURE_REQUIRES_RETRIEVAL_SNAPSHOTS")
     if ((retrieval_snapshots is not None or replay_retrieval is not None)
             and (not settings.get("retrieval_tool") or settings["request_mode"] != "disabled")):
         raise ValueError("FROZEN_RETRIEVAL_REQUIRES_RETRIEVAL_PROFILE")
@@ -2807,11 +2810,14 @@ def message(
 
                 memory_class = IntentRetrievalMemory
                 memory_options["retrieval_interface"] = settings["retrieval_tool"]
+                memory_options["capture_control_steps"] = retrieval_step_snapshots
                 if replay_retrieval is not None:
                     memory_options["replay_initial_observation"] = replay_retrieval[
                         "initial_observation"]
                     memory_options["replay_admission_policy"] = replay_retrieval[
                         "admission_policy"]
+                    memory_options["replay_control_checkpoint"] = replay_retrieval.get(
+                        "execution_checkpoint")
                     if replay_retrieval.get("intervention") is not None:
                         from milai_lab.methods.memory_control import (
                             FirstActionIntervention,
@@ -3048,7 +3054,7 @@ def message(
                             f"{identity}-attempt-{attempt}.json")).relative_to(root)),
                         "host": settings["host"],
                         "generation_calls_before": model.calls_in_message},
-                    capture_call)
+                    capture_call, capture_control_steps=retrieval_step_snapshots)
             if replay_retrieval is not None:
                 assert isinstance(memory, IntentRetrievalMemory)
                 memory._read_admission_policy()
@@ -3062,11 +3068,14 @@ def message(
                                 or event["read_allowance"] != replay_retrieval["read_allowance"]):
                             raise ValueError("FROZEN_RETRIEVAL_REQUEST_OR_ALLOWANCE_CHANGED")
                         output["frozen_request_and_allowance_equal"] = True
-                    if event["phase"] == "decision_input" and event["step"] == 0:
+                    start_step = (replay_retrieval["execution_checkpoint"]["step"]
+                                  if "execution_checkpoint" in replay_retrieval else 0)
+                    if event["phase"] == "decision_input" and event["step"] == start_step:
                         if (event["before"] != replay_retrieval["initial_observation"]
                                 or event["actions"] != replay_retrieval["initial_actions"]):
                             raise ValueError("FROZEN_RETRIEVAL_FIRST_DECISION_CHANGED")
                         output["frozen_initial_observation_and_actions_equal"] = True
+                        output["frozen_start_step"] = start_step
 
                 memory.retrieval_observer = verify_replay
             if direct_request is not None:
