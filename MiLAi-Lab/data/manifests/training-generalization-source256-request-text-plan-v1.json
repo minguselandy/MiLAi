@@ -1,0 +1,204 @@
+{
+  "status": "PREPARED_NOT_DISPATCHED_EQUAL_INFORMATION_INPUT_AUDIT_PASSED",
+  "source_version": "490c683e",
+  "control": "source256-full-seed0-u524-v1",
+  "argv": [
+    "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/cuda-env/bin/python",
+    "-u",
+    "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/frozen-feedback-ae3950f2/train_with_declared_attention.py",
+    "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/frozen-control-checkpoints-490c683e/MiLAi-Lab/tools/train_bounded_laya.py",
+    "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/nested-operation-data-v1/sources-256",
+    "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/models/laya-multilingual-base",
+    "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/fitting/source256-request-text-seed0-u524-v1",
+    "--budget",
+    "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+    "--task",
+    "mixed_retrieval",
+    "--mixture",
+    "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/nested-operation-data-v1/sources-256/mixture.json",
+    "--objective",
+    "soft-ce",
+    "--operation-state",
+    "shared_request_text",
+    "--optimizer-updates",
+    "524",
+    "--eval-at-updates",
+    "32",
+    "64",
+    "128",
+    "262",
+    "393",
+    "524",
+    "--evaluate-train",
+    "--shuffle-options",
+    "--gradient-checkpointing",
+    "--seed",
+    "0",
+    "--max-len",
+    "12288",
+    "--head-max-len",
+    "2048",
+    "--micro-batch-size",
+    "2",
+    "--encoder-lr",
+    "2.5e-5",
+    "--head-lr",
+    "1e-4",
+    "--feedback-dev-data",
+    "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-fitting-with-dev-v1/feedback/feedback-dev.jsonl",
+    "--compute-phase",
+    "training_generalization_operation_source256_request_text_seed0_u524_v1"
+  ],
+  "cwd": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab",
+  "environment": {
+    "CUDA_VISIBLE_DEVICES": "2,3",
+    "PYTHONPATH": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/frozen-control-checkpoints-490c683e/MiLAi-Lab/src:/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/frozen-control-checkpoints-490c683e/MiLAi-Lab/tools",
+    "TOKENIZERS_PARALLELISM": "false"
+  },
+  "shared_data_directory": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/nested-operation-data-v1/sources-256",
+  "input_projection_only_change": "shared -> shared_request_text",
+  "same": {
+    "source_families": 256,
+    "labelled_families": 249,
+    "labelled_train_rows": 4886,
+    "dev_rows": 860,
+    "feedback_dev_rows": 16,
+    "state_ids": true,
+    "gold": true,
+    "questions": true,
+    "seed": 0,
+    "optimizer_updates": 524,
+    "row_draws": 8384,
+    "mixture": {
+      "operation_history": 0.75,
+      "complementary_evidence": 0.25
+    },
+    "encoder_lr": 2.5e-05,
+    "head_lr": 0.0001,
+    "max_len": 12288,
+    "head_max_len": 2048,
+    "micro_batch_size": 2,
+    "gradient_checkpointing": true,
+    "eval_points": [
+      0,
+      32,
+      64,
+      128,
+      262,
+      393,
+      524
+    ]
+  },
+  "native_input_audit": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/source256-request-text-input-audit-v1/audit.json",
+  "data_for_fitting": "Use original shared-data directory with projection flag,not already transformed audit JSONL;avoid double projection",
+  "selection_rule": {
+    "metric": "by_task.memory_operation.family_macro_acceptance on fixed32-family operation dev",
+    "eligible_updates": [
+      0,
+      32,
+      64,
+      128,
+      262,
+      393,
+      524
+    ],
+    "tie_break": "highest macro,then earliest update;initialization is eligible",
+    "feedback_dev": "both answer/delivery ranking and coverage at same checkpoints,not a replacement operation selection metric",
+    "diagnostics": [
+      "train/dev family macro",
+      "READ and complementary-source strata",
+      "HANDOFF outside reviewed preference",
+      "complete-input <=8192 versus >8192 buckets",
+      "source-support positions and candidate counts"
+    ],
+    "no_Host_or_protected_test_selection": true
+  },
+  "extra_token_compute": "Measured separately;equal information does not mean equal tokenizer length or FLOPs",
+  "automatic_retry": false,
+  "model_runs": 0,
+  "no_sha_validation": true,
+  "scope": "Required E3 matched representation contrast;not an extra benchmark score or an alteration of the active control run.",
+  "input_audit_result": {
+    "phase": "host_intent_e3_request_text_input_audit_v1",
+    "status": "PASS_COMPLETE_EQUAL_INFORMATION_INPUTS",
+    "data": "artifacts/generalization-20261021/nested-operation-data-v1/sources-256",
+    "tokenizer": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/models/laya-multilingual-base/tokenizer",
+    "projection": "shared_request_text",
+    "model_loads": 0,
+    "model_calls": 0,
+    "ledger_recorded": false,
+    "splits": {
+      "train": {
+        "rows": 7884,
+        "literal_task_reconstructions_equal": 7884,
+        "observations_questions_gold_metadata_equal": 7884,
+        "labelled": 4886,
+        "sdk_items": 4886,
+        "sdk_skipped": {},
+        "max_sequence_tokens": 9754,
+        "sequence_tokens": 41823334,
+        "truncated": 0,
+        "component_rows": {
+          "operation_history": 1955,
+          "complementary_evidence": 5929
+        }
+      },
+      "dev": {
+        "rows": 860,
+        "literal_task_reconstructions_equal": 860,
+        "observations_questions_gold_metadata_equal": 860,
+        "labelled": 616,
+        "sdk_items": 616,
+        "sdk_skipped": {},
+        "max_sequence_tokens": 8724,
+        "sequence_tokens": 3927256,
+        "truncated": 0,
+        "component_rows": {
+          "operation_history": 386,
+          "complementary_evidence": 474
+        }
+      }
+    },
+    "max_len": 12288,
+    "head_max_len": 2048,
+    "source_version": "074ee79e",
+    "wall_seconds": 219.54034406132996,
+    "cpu_seconds": 221.343317687
+  },
+  "paired_input_comparison": {
+    "status": "PASS_ORDERED_IDENTITIES_AND_EQUAL_INFORMATION_NATIVE_AUDIT",
+    "splits": {
+      "train": {
+        "rows": 7884,
+        "labelled": 4886,
+        "shared_tokens": 41031724,
+        "request_text_tokens": 41823334,
+        "request_text_minus_shared_tokens": 791610,
+        "request_text_labelled_le8192": 4860,
+        "request_text_labelled_gt8192": 26,
+        "state_truncations": 0,
+        "head_truncations": 0
+      },
+      "dev": {
+        "rows": 860,
+        "labelled": 616,
+        "shared_tokens": 3831246,
+        "request_text_tokens": 3927256,
+        "request_text_minus_shared_tokens": 96010,
+        "request_text_labelled_le8192": 610,
+        "request_text_labelled_gt8192": 6,
+        "state_truncations": 0,
+        "head_truncations": 0
+      }
+    },
+    "projection_scope": "Host request fields only;observations,Views,questions,gold andmetadata unchanged",
+    "model_calls": 0,
+    "ledger_recorded": false,
+    "compute": {
+      "cpu_seconds": 4.145570094,
+      "wall_seconds": 4.145725771784782
+    }
+  },
+  "output": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/fitting/source256-request-text-seed0-u524-v1",
+  "run_id": "source256-request-text-seed0-u524-v1"
+}

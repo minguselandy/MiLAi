@@ -1,0 +1,283 @@
+{
+  "status": "STATE_VIEW_PROBES_PREPARED_AND_MECHANICALLY_VALIDATED_NOT_EXECUTED",
+  "implementation_commit": "074ee79e",
+  "preparation": {
+    "status": "PREPARED_NOT_EXECUTED",
+    "source_materials": "artifacts/generalization-20261021/state-public-train-materials-v1",
+    "selection": {
+      "status": "PREPARED_NOT_EXECUTED",
+      "selection": "first2native-train-IDs/domain",
+      "stream_ids": [
+        "state-train-travel-000",
+        "state-train-travel-001",
+        "state-train-customer_support-000",
+        "state-train-customer_support-001",
+        "state-train-shopping_assistant-000",
+        "state-train-shopping_assistant-001"
+      ],
+      "scope": "Future sequential source ingestion and real View build/refresh acceptance; not an official STATE score or a sample selected by teacher success."
+    },
+    "histories": 6,
+    "planned_retrieval_calls": 36,
+    "frontiers": [
+      {
+        "id": "state-train-travel-000",
+        "early_source_count": 5,
+        "later_source_count": 8,
+        "later_new_tool_observations": 1,
+        "terminal_marker_observed": true
+      },
+      {
+        "id": "state-train-travel-001",
+        "early_source_count": 5,
+        "later_source_count": 14,
+        "later_new_tool_observations": 6,
+        "terminal_marker_observed": true
+      },
+      {
+        "id": "state-train-customer_support-000",
+        "early_source_count": 5,
+        "later_source_count": 13,
+        "later_new_tool_observations": 3,
+        "terminal_marker_observed": true
+      },
+      {
+        "id": "state-train-customer_support-001",
+        "early_source_count": 5,
+        "later_source_count": 6,
+        "later_new_tool_observations": 0,
+        "terminal_marker_observed": true
+      },
+      {
+        "id": "state-train-shopping_assistant-000",
+        "early_source_count": 6,
+        "later_source_count": 10,
+        "later_new_tool_observations": 1,
+        "terminal_marker_observed": true
+      },
+      {
+        "id": "state-train-shopping_assistant-001",
+        "early_source_count": 6,
+        "later_source_count": 8,
+        "later_new_tool_observations": 1,
+        "terminal_marker_observed": true
+      }
+    ],
+    "runtime": "Existing run_host_intent_retrieval.py --given-requests --capture-control-steps --policies view_cache --interfaces rich --split train",
+    "known_refs": "Only actual earlier returned evidence references, bound at execution",
+    "view_creation": "Actual model query-structure path; no fixture stored_revisions",
+    "branches": "Existing prepare_view_feedback_branches --include-control-steps; run_frozen_retrieval_calls without Host readout for these given requests",
+    "host_answer_requested": false,
+    "business_actions_executed": 0,
+    "views_generated": 0,
+    "new_operation_labels": 0,
+    "model_calls": 0,
+    "no_sha_validation": true,
+    "ledger_recorded": false,
+    "compute": {
+      "wall_seconds": 0.06755207106471062,
+      "cpu_seconds": 0.06752076799999998
+    }
+  },
+  "literal_config_audit": {
+    "status": "PASS_LITERAL_SOURCE_FRONTIERS_AND_PROBE_CONFIG",
+    "streams": 6,
+    "planned_calls": 36,
+    "sources": 59,
+    "frontiers": [
+      {
+        "id": "state-train-travel-000",
+        "sources": 8,
+        "early": 5,
+        "later": 8,
+        "new_tool_observations": 1
+      },
+      {
+        "id": "state-train-travel-001",
+        "sources": 14,
+        "early": 5,
+        "later": 14,
+        "new_tool_observations": 6
+      },
+      {
+        "id": "state-train-customer_support-000",
+        "sources": 13,
+        "early": 5,
+        "later": 13,
+        "new_tool_observations": 3
+      },
+      {
+        "id": "state-train-customer_support-001",
+        "sources": 6,
+        "early": 5,
+        "later": 6,
+        "new_tool_observations": 0
+      },
+      {
+        "id": "state-train-shopping_assistant-000",
+        "sources": 10,
+        "early": 6,
+        "later": 10,
+        "new_tool_observations": 1
+      },
+      {
+        "id": "state-train-shopping_assistant-001",
+        "sources": 8,
+        "early": 6,
+        "later": 8,
+        "new_tool_observations": 1
+      }
+    ],
+    "config_changes": [
+      "config_version",
+      "edit_features",
+      "host_source_arrivals",
+      "memory_control"
+    ],
+    "control_changes": [
+      "policy"
+    ],
+    "host_models_budgets_and_queue_limits_unchanged": true,
+    "known_refs_static_empty_runtime_actual_only": true,
+    "no_scripted_Views": true,
+    "source_times_or_authority_not_invented": true,
+    "model_calls": 0,
+    "ledger_recorded": false,
+    "compute": {
+      "cpu_seconds": 0.041077579999999995,
+      "wall_seconds": 0.041077807545661926
+    }
+  },
+  "execution_plan": {
+    "status": "PREPARED_NOT_DISPATCHED_WAIT_FOR_ACTIVE_PRIMARY_FIT_TERMINAL",
+    "source_version": "074ee79e",
+    "source_freeze": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/frozen-state-view-074ee79e/MiLAi-Lab",
+    "literal_source_files_checked": [
+      "src/milai_lab/datasets/state_training.py",
+      "tools/run_host_intent_retrieval.py",
+      "tools/prepare_state_view_acceptance.py",
+      "tests/unit/test_state_view_acceptance.py",
+      "src/milai_lab/runners/frozen_retrieval.py",
+      "src/milai_lab/methods/intent_retrieval.py"
+    ],
+    "argv": [
+      "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/http-env/bin/python",
+      "-u",
+      "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/frozen-state-view-074ee79e/MiLAi-Lab/tools/run_host_intent_retrieval.py",
+      "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-view-acceptance-preparation-v1/config.json",
+      "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-view-acceptance-preparation-v1/histories.json",
+      "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-view-acceptance-v1",
+      "--source-version",
+      "074ee79e",
+      "--policies",
+      "view_cache",
+      "--interfaces",
+      "rich",
+      "--split",
+      "train",
+      "--transport",
+      "json_action",
+      "--given-requests",
+      "--capture-control-steps"
+    ],
+    "cwd": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab",
+    "environment": {
+      "PYTHONPATH": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/frozen-state-view-074ee79e/MiLAi-Lab/src",
+      "TOKENIZERS_PARALLELISM": "false"
+    },
+    "output": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-view-acceptance-v1",
+    "planned_calls": 36,
+    "source_streams": 6,
+    "source_frontiers": [
+      {
+        "id": "state-train-travel-000",
+        "early_source_count": 5,
+        "later_source_count": 8,
+        "later_new_tool_observations": 1,
+        "terminal_marker_observed": true
+      },
+      {
+        "id": "state-train-travel-001",
+        "early_source_count": 5,
+        "later_source_count": 14,
+        "later_new_tool_observations": 6,
+        "terminal_marker_observed": true
+      },
+      {
+        "id": "state-train-customer_support-000",
+        "early_source_count": 5,
+        "later_source_count": 13,
+        "later_new_tool_observations": 3,
+        "terminal_marker_observed": true
+      },
+      {
+        "id": "state-train-customer_support-001",
+        "early_source_count": 5,
+        "later_source_count": 6,
+        "later_new_tool_observations": 0,
+        "terminal_marker_observed": true
+      },
+      {
+        "id": "state-train-shopping_assistant-000",
+        "early_source_count": 6,
+        "later_source_count": 10,
+        "later_new_tool_observations": 1,
+        "terminal_marker_observed": true
+      },
+      {
+        "id": "state-train-shopping_assistant-001",
+        "early_source_count": 6,
+        "later_source_count": 8,
+        "later_new_tool_observations": 1,
+        "terminal_marker_observed": true
+      }
+    ],
+    "protocol": "Conditional given retrieval requests over recorded public STATE training observations;not native STATE tasks,not autonomous Host calls,not official benchmark score",
+    "known_evidence": "Only earlier actually returned references;empty-reference contrast is explicit anddoesnotassertthecallerhasnomemory",
+    "model_View_generation": "Existing query_structure model path,actualstoredversions/costs;nooracle/scriptedviews",
+    "snapshots": "Initialandactualpost-operation Store/executor states; no historicalprefix reconstruction",
+    "post_execution_branches": {
+      "preparer": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/frozen-state-view-074ee79e/MiLAi-Lab/tools/prepare_view_feedback_branches.py",
+      "groups": [
+        "state-train-travel-000",
+        "state-train-travel-001",
+        "state-train-customer_support-000",
+        "state-train-customer_support-001",
+        "state-train-shopping_assistant-000",
+        "state-train-shopping_assistant-001"
+      ],
+      "per_group": 6,
+      "seed": 0,
+      "include_control_steps": true,
+      "continuation_steps": 2,
+      "host_readout": false,
+      "reason": "No original autonomous Host frame exists for given-request probes. Delivery mechanics/semantics only;Host endpointevaluatedseparately."
+    },
+    "request_count_not_source_count": true,
+    "no_model_results_or_labels_yet": true,
+    "automatic_retry": false,
+    "original_ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+    "new_services": false,
+    "no_sha_validation": true,
+    "compute": {
+      "cpu_seconds": 0.0020507659999999955,
+      "wall_seconds": 0.0020510265603661537
+    },
+    "compute_scope": "Plan and literal source checks only;archive command/unmeasured setup excluded",
+    "ledger_recorded": false,
+    "preserved_host_model_capacity_and_budget_settings": true
+  },
+  "validation": {
+    "new_and_related_adapter_tests": 7,
+    "given_request_checkpoint_branch_and_architecture_regressions": 231,
+    "ruff": "PASS4files",
+    "mypy": "PASS3implementationfiles",
+    "two_actual_Store_banks_in_new_runner_test": true,
+    "scripted_HTTP_only_no_real_model_test": true,
+    "actual_post_View_replay_preserved_before_no_prefix_reexecution": true
+  },
+  "actual_model_views": 0,
+  "new_operation_labels": 0,
+  "full_factorial_or_Host_success_claimed": false,
+  "goal_complete": false
+}

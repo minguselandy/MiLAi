@@ -1,4 +1,53 @@
-# LATEST V10: SOURCE QUEUE CLOSED / NESTED DATA FROZEN / FIRST PRIMARY FIT LIVE
+# LATEST V11 (2026-10-22): PRIMARY FIT LIVE / STATE VIEW AND E3 READY NOT RUN
+
+FullgoalACTIVE. Priorgoalturn progress:newconditionalSTATEViewdriver+36probes+mechanicaltests,
+frozenexecutionplan,andE3equal-informationaudit/fitplan. No blocker/completion. ACTIVE MODEL JOB
+stillprimarysource256-full-seed0-u524-v1,exec42364,parent2089181,child2089186,frozen490c683e.
+00:20Shanghai snapshot alive/RUNNING,updates16/524,zeroevaldev860/feedback16/train4886complete.
+Initialtrain1307/4886,dev206/616,macro.247270/.337568 are PREUPDATE staticpreferencebaselines,
+notlearnedgain orHostsuccess. Actual latestupdates mustberevalidated fromrun.json.
+Revalidate/proc+first-operation-fit-v1/driver.json andfitting/source256-full-seed0-u524-v1/run.json.
+No secondrealmodeljob/offlinesettlementwhilelive,no restartonobservationtimeout. Sourcequeue
+93727andchildrenareCLOSED480;doNOTrestart. OriginalpausedCoalentuntouched.
+
+NEW CODE074ee79e frozen atartifacts/generalization-20261021/frozen-state-view-074ee79e/MiLAi-Lab.
+run_host_intent_retrieval.py opt-in --given-requests invokes declaredretrieval_request only,
+noautonomousHostquery/answer. use_delivered_refs binds earlier actualreturnedrefs in same
+profile/bank;explicitknownrefs cannotbeoverwritten. Defaultautonomouspathkept;livefitcodeunchanged.
+state_training.view_acceptance_history +prepare_state_view_acceptance.py prepare6streams x6stages:
+earlyoverview/repeat/known;later-arrivals/known/originals. Querysame,finalread_goaloriginals.
+Allsourcearrivalcontent/orderliteral,earlycuts5/5/5/5/6/6,later8/14/13/6/10/8,total59sources.
+Laternewtoolobservations1/6/3/0/1/1;no-new-toolcasekept,nofabricatedupdates. No scriptedViews.
+Source_metadata preservesunknownoccurred_at;host_source_arrivals true;policyview_cache. Hostmodel,
+capacity,budget,queue limits unchanged. Native domainbusinessoperationsNOTexecuted/mappedtoJev.
+
+Preparedstate-view-acceptance-preparation-v1/{histories.json,config.json,preparation.json,
+literal-config-audit-v1.json}. Exactargv instate-view-acceptance-execution-plan-v1.json,
+statusWAIT_FOR_ACTIVE_PRIMARY_FIT_TERMINAL;NOTDISPATCHED,realSTATEViews/labelsstill0.
+FutureexistingE2preparer --include-control-steps/pergroup6/seed0/continuation2;givenrequests
+haveNOoriginalautonomousHostframe,soNO --host-readout for these probes. Delivery/recovery
+acceptance only,notnativeSTATEscore/fullfactorial/Hostsuccess. Sourcegroups notprovenindependent.
+7new/adaptertests+231relatedgiven/checkpoint/branch/architecturetests passed;Ruff4/mypy3pass.
+TwoactualStorebanks+scriptedHTTPverifyrefs,no futurematerial,andactualpostViewrestore with
+prefixreexecution0. No realmodels used for tests. Parentfit unchanged,no needrepeatpassedtests.
+
+E3: source256-request-text-input-audit-v1 PASSED8744literalreconstructions7884train860dev,
+observations/Views/questions/gold/metadata equal. Native4886/616labelleditems,0skipped/drops,
+max9754/8724 at12288/head2048. Rawtokens41823334train3927256dev,delta+791610/+96010versusshared.
+Labelled>8K26train6dev(vs5/3shared). Equalinfo !=equaltokens/FLOPs. No model loaded/called.
+source256-request-text-fit-plan-v1.json readyNOTDISPATCHED,frozen490c683e. Sameoriginalsources-256
+data/stateIDs/gold/draws/seed0/524schedule/weights/base/selection;only--operation-state
+shared_request_text(+output/phase). Fit usesORIGINALdata andprojects once,not auditJSONL twice.
+This changesHostrequestrepresentation only,notwholeView removal/ablation. E3actualfitpending.
+
+NewauditCPU221.343317687andseparateprep/comparison/freezechecks pending/unmeasured whilefitlives.
+Closedcompute-settlement-v1/v2/v3 NEVERappend/re-settle;excludeallregistryfiles infuturebilling.
+Oldpending35untouched. Fullgoalremainingcurrentfit/restcurves/lowLR/headonly/auxmatched,
+STATEactualView/post-opacceptance/feedback/selfstates/factorial/E3fit/Host/external/seeds0,1,2.
+NoSHA/subagents/newservices/push/merge. Seeexecutiondoc,20261022-v11progressmanifest,
+state-view-acceptance-v1 andsource256-request-text-plan-v1manifests. Earlier snapshots historical.
+
+# V10 HISTORY: SOURCE QUEUE CLOSED / NESTED DATA FROZEN / FIRST PRIMARY FIT LIVE
 
 FullgoalACTIVE. Previousgoalturn progress:closed480sourcepositions/full728requestreview,
 finalnewlabels/nesteddata/preregistration/idleonceCPUsettlement,firstrealprimaryfitdispatched.
