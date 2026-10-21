@@ -1,4 +1,56 @@
-# LATEST V9: BATCH3 FIRST87 LABELLED / STATE TRAIN MATERIALS READY / QUEUE LIVE
+# LATEST V10: SOURCE QUEUE CLOSED / NESTED DATA FROZEN / FIRST PRIMARY FIT LIVE
+
+FullgoalACTIVE. Previousgoalturn progress:closed480sourcepositions/full728requestreview,
+finalnewlabels/nesteddata/preregistration/idleonceCPUsettlement,firstrealprimaryfitdispatched.
+NO completion/blocker. ACTIVE JOB CHANGED: sourcequeueexec93727terminalexit0,all4childrenabsent.
+Do NOT restart it. New primaryfit exec42364,parent2089181,child2089186 source490c683e.
+23:41:43Shanghai bothlive,runRUNNING updates0/524,initialization/encoding underway. Revalidate
+actual/proc and artifacts/generalization-20261021/first-operation-fit-v1/driver.json plus
+fitting/source256-full-seed0-u524-v1/run.json. No secondmodeljob/offlinesettlementwhilefitlive.
+No auto retry;observationtimeoutsarenottermination. OriginalpausedCoalentuntouched.
+
+SOURCECOMPLETE:480positions=352programcompleted128failed,notsemanticrate.1233generationHTTP,
+3968951known/chargedtokens,newunknown0,embedding0. Allperresultusage reconcilesbatchdeltas.
+source-expansion-closed-costs-v1.json has4childCPUs+parentseparate,total746.354611186CPU.
+All128newfamilies/240pools sourcefirstdone;all728actualrequests reviewed217complete243partial
+268none.467positionswithdecisions,13without retaineddenominator.3792states2124labels1668masked,
+123labelledfamilies/128registered.5nolabels:000089,000123,000216,000670,000881.1709progress415
+sufficient;positiveSEARCH478READ1564HANDOFF415;partialproofHANDOFF0. Allactualinputs/questions/
+bindings preserved,IDs/prefixesunique,newsharedmax7379/no drops. All728knownrefsempty=coveragegap.
+Finalmergednewpool source-expansion-all-labelled-v1/{train.jsonl,raw-train.jsonl,request-reviews.json,
+origins.json,native-lengths.json,preparation.json}. Allpartsimmutable,NO oldlabelrecompilation.
+Latest source-expansion-v1/source-review-progress-v68.json;no remaining source/requestannotation.
+
+NESTEDDATA: nested-operation-study-plan-v1.json preregisteredbeforefit;cohortorderold128shuffled
+seed0,64prefix,128allold,appendpreviouslyadmittednew128for256. Raw/labelled/familylabels:
+64→2142/1468/63;128→4092/2762/126;256→7884/4886/249. Allregisteredgroupshaveactualstates.
+nested-operation-data-v1/sources-{64,128,256} hastrain/dev/mixture/expected-seed0-draws.
+Oldtrain/devstateIDsunchanged;newIDs6379..10170pre-mask/fullpool;devbytesexactold860/616labels/
+32families. Allinputs/gold unchanged. Fullnativeaudittrainmax9723/dev8378,nodrops12288/head2048.
+Labelledtrain>8K3/5/5,dev3. Tokenizer8Kwarningretained;oldnativecontrolCOMPLETED524handled
+8634train/8378devtokens. Support-token-positionbucketsstillpending,candidatecountsretained.
+Draws8384/524updatesfixed;operation_history/complementary_evidence masses.75/.25unchanged.
+Fixed16feedbackdev/8families addedtodualmetrics,train-disjoint;notprimaryselectionmetric.
+
+FIRSTFIT source256-full-seed0-u524-v1: native,frozen490c683e+existingattentionwrapper,mha_fastpath
+false,GPU2,3float32,micro2,gradientcheckpointing,encoder2.5e-5/head1e-4,shared12288/head2048.
+Evaltrain/dev/feedback0,32,64,128,262,393,524. Primaryselectionfixed32familydevmacro,earliesttie,
+initializationeligible. No Host/protectedselection. Plan first-operation-fit-plan-v1.json,
+driverhelperrun_first_operation_fit_v1.py alreadylaunched,DO NOT relaunch. Childwritescompute
+directlyoriginalledgeronterminal;parentorchestrationCPUdistinctpending. Futureplanned128/64
+full,64low5e-6/headonly,andaux128stage→same256operationdata/order/budget. AuxNOTDISPATCHED.
+Decisivearms/selectedupdatesseed0frozenforseed1/2confirmation. No completednewfits/results yet.
+
+compute-settlement-v3.json SETTLEDONCE/CLOSED:63phases1039.874442707CPU,originalledger,
+tokens/limitsunchanged. v1/v2/v3 NEVERappend/re-settle;excludeallregistrymeasurement_files in
+futurebilling. Oldpending35untouched. Semanticreview/unmeasuredchecks/imports/someexportsunknown.
+Newworkafterv3mustremainpendingwhilefitlives. No implementationchange thisturn;realdataaudits
+passed,no repeatedunrelatedtests. NoSHA/subagents/newservices/push/merge. Fullgoalremaining:
+finishcurrent524fit,remainingcurves/controls,post-opactualacceptance,STATEactualViewbuild/refresh,
+feedbackexpansion/selfstates/common-support,factorial/E3/Host/external/seeds0,1,2. STATEmaterials
+and6actualStoreprefixesfromv9remainreadybutmodelsViews0. Seeexecutiondoc/v10andnewdata manifests.
+
+# V9 HISTORY: BATCH3 FIRST87 LABELLED / STATE TRAIN MATERIALS READY / QUEUE LIVE
 
 FullgoalACTIVE. Previousgoalturn progress:2newclosedannotationsegments+STATEpublictrainadapter/
 actualStoreprefixes. Notcomplete/notblocked. Revalidate/proc anddriver.23:14:02Shanghai

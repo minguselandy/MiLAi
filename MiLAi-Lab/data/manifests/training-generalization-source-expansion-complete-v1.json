@@ -1,0 +1,179 @@
+{
+  "status": "NEW_SOURCE_EXPANSION_COLLECTION_AND_AUTHOR_REVIEW_COMPLETE",
+  "source_review_progress": "artifacts/generalization-20261021/source-expansion-v1/source-review-progress-v68.json",
+  "source_review_complete": "artifacts/generalization-20261021/source-expansion-v1/source-review-complete-v1.json",
+  "labels": {
+    "status": "COMPLETE_NEW_SOURCE_COLLECTION_LABELS_MERGED_NOT_FITTED",
+    "planned_positions": 480,
+    "positions_with_decisions": 467,
+    "source_families": 128,
+    "source_rows_reviewed": 240,
+    "states": 3792,
+    "labelled": 2124,
+    "masked": 1668,
+    "labelled_families": 123,
+    "families_without_labels": [
+      "musique-family-000089",
+      "musique-family-000123",
+      "musique-family-000216",
+      "musique-family-000670",
+      "musique-family-000881"
+    ],
+    "actual_requests": 728,
+    "request_witnesses": {
+      "partial": 243,
+      "none": 268,
+      "complete": 217
+    },
+    "reasons": {
+      "reviewed_missing_original_progress": 1709,
+      "reviewed_partial_evidence_only_masked": 378,
+      "no_reviewed_source_proof_masked": 1157,
+      "reviewed_originals_sufficient": 415,
+      "no_reviewed_progress_masked": 133
+    },
+    "positive_action_occurrences": {
+      "SEARCH": 478,
+      "READ": 1564,
+      "HANDOFF": 415
+    },
+    "partial_proof_handoff_labels": 0,
+    "all_states_questions_bindings_equal": true,
+    "all_ids_prefixes_unique": true,
+    "new_states_recompiled": false,
+    "max_native_shared_tokens": 7379,
+    "state_truncations": 0,
+    "head_truncations": 0,
+    "known_refs_nonempty_requests": 0,
+    "compute": {
+      "cpu_seconds": 6.572812486999999,
+      "wall_seconds": 6.573696019127965
+    },
+    "ledger_recorded": false,
+    "scope": "All closedpositions/failures retained;author static source-witness preferences,not fulllegality,causalutility or Hostsuccess."
+  },
+  "closed_execution": {
+    "status": "ALL480_POSITIONS_TERMINAL_FIRST_FAILURES_RETAINED",
+    "parent_driver": "artifacts/generalization-20261021/source-expansion-collection-v1/driver.json",
+    "parent_wall_seconds": 14467.155051743612,
+    "parent_orchestration_cpu_seconds": 0.04468889000000001,
+    "batches": [
+      {
+        "batch": 0,
+        "driver": "artifacts/generalization-20261021/source-expansion-collection-v1/batch-0/driver.json",
+        "positions": 122,
+        "program_statuses": {
+          "COMPLETED": 87,
+          "FAILED": 35
+        },
+        "budget_deltas": {
+          "generation_requests": 308,
+          "generation_charged_tokens": 1010341,
+          "generation_known_tokens": 1010341,
+          "generation_unknown_usage": 0,
+          "embedding_charged_tokens": 0,
+          "embedding_known_tokens": 0,
+          "embedding_unknown_usage": 0
+        },
+        "per_result_deltas_equal_batch": true,
+        "wall_seconds": 4008.007938255556,
+        "whole_cpu_seconds": 187.933328654,
+        "direct_compute_cpu_already_recorded": 0.0,
+        "unsettled_driver_cpu_seconds": 187.933328654
+      },
+      {
+        "batch": 1,
+        "driver": "artifacts/generalization-20261021/source-expansion-collection-v1/batch-1/driver.json",
+        "positions": 116,
+        "program_statuses": {
+          "FAILED": 30,
+          "COMPLETED": 86
+        },
+        "budget_deltas": {
+          "generation_requests": 301,
+          "generation_charged_tokens": 962697,
+          "generation_known_tokens": 962697,
+          "generation_unknown_usage": 0,
+          "embedding_charged_tokens": 0,
+          "embedding_known_tokens": 0,
+          "embedding_unknown_usage": 0
+        },
+        "per_result_deltas_equal_batch": true,
+        "wall_seconds": 3362.779490821995,
+        "whole_cpu_seconds": 178.336063532,
+        "direct_compute_cpu_already_recorded": 0.0,
+        "unsettled_driver_cpu_seconds": 178.336063532
+      },
+      {
+        "batch": 2,
+        "driver": "artifacts/generalization-20261021/source-expansion-collection-v1/batch-2/driver.json",
+        "positions": 122,
+        "program_statuses": {
+          "FAILED": 31,
+          "COMPLETED": 91
+        },
+        "budget_deltas": {
+          "generation_requests": 308,
+          "generation_charged_tokens": 958335,
+          "generation_known_tokens": 958335,
+          "generation_unknown_usage": 0,
+          "embedding_charged_tokens": 0,
+          "embedding_known_tokens": 0,
+          "embedding_unknown_usage": 0
+        },
+        "per_result_deltas_equal_batch": true,
+        "wall_seconds": 3332.907757854089,
+        "whole_cpu_seconds": 188.143246101,
+        "direct_compute_cpu_already_recorded": 0.0,
+        "unsettled_driver_cpu_seconds": 188.143246101
+      },
+      {
+        "batch": 3,
+        "driver": "artifacts/generalization-20261021/source-expansion-collection-v1/batch-3/driver.json",
+        "positions": 120,
+        "program_statuses": {
+          "COMPLETED": 88,
+          "FAILED": 32
+        },
+        "budget_deltas": {
+          "generation_requests": 316,
+          "generation_charged_tokens": 1037578,
+          "generation_known_tokens": 1037578,
+          "generation_unknown_usage": 0,
+          "embedding_charged_tokens": 0,
+          "embedding_known_tokens": 0,
+          "embedding_unknown_usage": 0
+        },
+        "per_result_deltas_equal_batch": true,
+        "wall_seconds": 3750.5033186171204,
+        "whole_cpu_seconds": 191.897284009,
+        "direct_compute_cpu_already_recorded": 0.0,
+        "unsettled_driver_cpu_seconds": 191.897284009
+      }
+    ],
+    "positions": 480,
+    "program_statuses": {
+      "COMPLETED": 352,
+      "FAILED": 128
+    },
+    "usage_totals": {
+      "generation_requests": 1233,
+      "generation_charged_tokens": 3968951,
+      "generation_known_tokens": 3968951
+    },
+    "unsettled_execution_cpu_seconds": 746.3546111859999,
+    "no_second_model_process": true,
+    "semantic_success_rate": "Not inferred from program status",
+    "automatic_retries": 0,
+    "cpu_counts_exclude_nested_double_billing": true,
+    "compute": {
+      "cpu_seconds": 1.931150868,
+      "wall_seconds": 1.9313258472830057
+    },
+    "ledger_recorded": false
+  },
+  "settlement": "artifacts/generalization-20261021/compute-settlement-v3.json",
+  "semantic_success_rate": "Not inferred from program completion or static preference labels",
+  "new_research_fit_result": "None yet",
+  "goal_complete": false
+}
