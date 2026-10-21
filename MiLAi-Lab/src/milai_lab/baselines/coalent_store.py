@@ -86,9 +86,11 @@ class SourceRetriever:
             if source is None:
                 unavailable.append(ref)
                 continue
-            payload = {"source_ref": ref, "role": source["role"], "content": body_text(source),
+            payload = {"source_ref": ref, "role": source["role"], "origin": source["origin"],
+                       "content": body_text(source), "object_ref": source.get("object_ref"),
                        "session": source["session"], "reported_at": source.get("occurred_at"),
-                       "captured_at": source["observed_at"]}
+                       "captured_at": source["observed_at"],
+                       "calendar_context": source.get("calendar_context")}
             chunks.append(Chunk(artifact_id=ref,
                 version=str(source.get("source_revision", 1)),
                 text=json.dumps(payload, ensure_ascii=False),

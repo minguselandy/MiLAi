@@ -46,22 +46,28 @@ def make_cache(coalent, service, search, events, synth_calls):
 def test_source_port_keeps_roles_clocks_and_exact_search_scope(tmp_path, coalent):
     with SqliteStore.from_conn_string(str(tmp_path / "bank.sqlite")) as store:
         service = service_at(store, tmp_path)
-        user = service.capture_user("history", "1", "alpha report", occurred_at="2035-01-02")[
+        user = service.capture_user("history", "1", "alpha report", occurred_at="2035-01-02",
+                                    calendar_context="reported local day")[
             "source_ref"]
         assistant = service.capture_assistant("history", "2", "alpha inference")["source_ref"]
+        tool = service.capture_tool("history", "tool-1", "lookup",
+                                    '{"status":"ok","value":7}', None)["source_ref"]
         unselected = service.capture_user("history", "3", "beta report")["source_ref"]
         bob = service_at(store, tmp_path, "bob")
         other = bob.capture_user("history", "1", "alpha other owner")["source_ref"]
         events, calls = [], []
         def search(query, namespace):
             calls.append((query, namespace))
-            return [assistant, user, assistant, other]
+            return [assistant, tool, user, assistant, other]
         result = SourceRetriever(service, search, events.append).retrieve("alpha", namespace="n")
-        assert [c.artifact_id for c in result] == [assistant, user]
+        assert [c.artifact_id for c in result] == [assistant, tool, user]
         assert all(c.version == "1" and not c.content_hash for c in result)
-        assert [json.loads(c.text)["role"] for c in result] == ["assistant", "user"]
-        assert [json.loads(c.text)["reported_at"] for c in result] == [None, "2035-01-02"]
-        assert json.loads(result[1].text)["captured_at"] == service.source(user)["observed_at"]
+        assert [json.loads(c.text)["role"] for c in result] == ["assistant", "tool", "user"]
+        assert [json.loads(c.text)["reported_at"] for c in result] == [None, None, "2035-01-02"]
+        assert json.loads(result[2].text)["captured_at"] == service.source(user)["observed_at"]
+        assert json.loads(result[1].text)["origin"] == "lookup"
+        assert json.loads(result[1].text)["content"] == '{"status":"ok","value":7}'
+        assert json.loads(result[2].text)["calendar_context"] == "reported local day"
         assert events[0]["unavailable_source_refs"] == [other]
         assert unselected not in events[0]["requested_source_refs"] and calls == [("alpha", "n")]
 
