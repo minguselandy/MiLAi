@@ -1,4 +1,52 @@
-# LATEST V8: ALL128 SOURCE POOLS REVIEWED / BATCH3 FIRST47 LABELLED / LIVE QUEUE
+# LATEST V9: BATCH3 FIRST87 LABELLED / STATE TRAIN MATERIALS READY / QUEUE LIVE
+
+FullgoalACTIVE. Previousgoalturn progress:2newclosedannotationsegments+STATEpublictrainadapter/
+actualStoreprefixes. Notcomplete/notblocked. Revalidate/proc anddriver.23:14:02Shanghai
+parent1131060/exec93727live,batch3child1798815live100/120(75completed25failed),whole460/480.
+First3batches terminal360. Queuefrozen890dbdd0unchanged. No restart/hotupdate/secondrealmodeljob/
+offlinesettlementwhilelive. PausedCoalentuntouched. Closedv1/v2neverappend;oldpending35untouched.
+
+All128sourcefamilies/240pools SOURCEFIRSTDONE;source-review-complete-v1.json containscases/audit.
+Latest source-expansion-v1/source-review-progress-v67.json underartifacts/generalization-20261021.
+Batch3 first87positions annotated in3IMMUTABLEparts:3-closed-047,3-closed-047-061,3-closed-061-087.
+Use source-expansion-batch-{scope}-{states,request-reviews,labelled}-v1 directories.
+New14positions120states25requests90labels;new26positions208states39requests113labels.
+Newrequests9complete8partial8none +15complete8partial16none. Inputs/request/bindingsequal;
+280+520sourceparagraphsliteralequal;sharedmax5857/6218,alllabels<8K,no12288/head2048drops,
+partialproofHANDOFF0. CompileCPU1.505632574+1.731985253pending,otherphasesseparate.
+Cumulative447positionsannotated,673requests,3517uniqueactualstates1995labels1522masked,
+115labelledfamilies/120represented. Fullsource128review is not fulltrajectory/label completion.
+Next:export CLOSED positions fromindex87,excludeall earlierIDs/prefixes;reviewnewrequests;
+compileonlynewwholecalls/successors;combineeventIDwithliteralinputs. No oldlabelrecompile.
+No finalbatch3/finalmixture/stableIDs/researchfits yet. StaticCE notfulllegality/utility/Hostsuccess.
+
+STATE: new src/milai_lab/datasets/state_training.py +tools/prepare_state_train_materials.py.
+Uses frozenofficialpublictrain corpus source5644b18 underoldhost-intent upstream;notofficialCLI,
+notSHAvalidation.300trajectories(100/domain)→4001user/toolsourceevents,2842toolobservations,
+1159usercuts,860nonterminal,558withpriortools. Originalusertext/callname,args,result preserved.
+Native descriptive taskIDs onlyofflineprovenance;no taskdefinitions/testbodies/environmentsread.
+Noassistantprose/systempromptingested;policyremainsHost's. Preview/rejected/commit staywhole,
+not merged into guessedobjects orJevlabels. No timestamps/VerifiedObjectRef invented.
+88explicitIDbindings sharedacrosstrajectories,max67;300trajectories NOT300independentgroups.
+Artifacts state-public-train-materials-v1/{streams.jsonl,provenance.json,pilot-selection.json,
+preparation.json,literal-temporal-audit-v1.json,LICENSE}. MITcopyliteralretained.
+
+First2native trainIDs/domain fixedbeforeintake,6streams actuallyimportedviaMemoryService:
+65sources38toolobservations27SQLiteprefixsnapshots,allpriorcontentverified/currentuserandfuture
+absent. Artifacts state-train-pilot-store-prefixes-v1;helperingest_state_pilot_materials_v1.py
+alreadyrun,DO NOT rerunexistingoutput. These arehistoricalmaterialprefixes,notdomainreexecution
+oractualViews. ModelViewbuild/refresh/operationlabelsstill0 andpendingafterlivequeue. Raw
+importdoesnotgrantliveobjectauthority. DomainbusinessactionsremainHost's,notJevoperations.
+
+Validation:4newtests pass inclactualStore,204architecture/tools boundarytests pass,Ruff3/mypy2.
+All300realdataentries/cuts auditedliteral;no needrepeatpassedtests. Model/Viewacceptance pending.
+StatepreparationCPU0.238646020,audit0.131379317,prefixingest0.356769215pending;manual/unmeasured
+inspection/testsunknown. Oldsettlementsclosed. Auxiliary128planNOTDISPATCHED,post-op490c683e
+freeze awaitsrealacceptance. Fullnested524curves/parameters/auxmatched/feedback/selfstates/
+STATEViews/factorial/E3/Host/external/seeds0,1,2remain. NoSHA/subagents/newservices/push/merge.
+Seeexecutiondoc,progressv9manifest andtraining-generalization-state-materials-v1manifest.
+
+# V8 HISTORY: ALL128 SOURCE POOLS REVIEWED / BATCH3 FIRST47 LABELLED / LIVE QUEUE
 
 FullgoalACTIVE. Previousgoalturn substantiveprogress:all128sourcefamilies/240pools reviewed;
 fourthbatch first47closedpositions request labels/audits. Notfullcompletion/notblocked.

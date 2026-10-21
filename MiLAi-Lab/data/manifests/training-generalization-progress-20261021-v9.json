@@ -1,0 +1,266 @@
+{
+  "status": "ACTIVE_NEW_CLOSED_POSITIONS_LABELLED_AND_STATE_TRAIN_MATERIALS_PREPARED_COLLECTION_LIVE",
+  "prior_progress_commit": "a035a781",
+  "execution_document": "docs/TRAINING_GENERALIZATION_EXECUTION_20261021.md",
+  "source_review_progress": "artifacts/generalization-20261021/source-expansion-v1/source-review-progress-v67.json",
+  "all128_source_families_240_pools_reviewed": true,
+  "new_incremental_parts": [
+    {
+      "scope": "3-closed-047-061",
+      "labels": {
+        "states": 120,
+        "reviewed_requests": 25,
+        "reviewed_states": 120,
+        "labelled": 90,
+        "reasons": {
+          "reviewed_missing_original_progress": 63,
+          "reviewed_originals_sufficient": 27,
+          "no_reviewed_source_proof_masked": 26,
+          "reviewed_partial_evidence_only_masked": 4
+        },
+        "families_labelled": 4,
+        "model_calls": 0,
+        "inputs_changed": false,
+        "states_source": "artifacts/generalization-20261021/source-expansion-batch-3-closed-047-061-states-v1/train.jsonl",
+        "reviews_source": "artifacts/generalization-20261021/source-expansion-batch-3-closed-047-061-request-reviews-v1/requests.json",
+        "compute": {
+          "wall_seconds": 1.5092422142624855,
+          "cpu_seconds": 1.5056325739999998
+        },
+        "ledger_recorded": false
+      },
+      "input_audit": {
+        "status": "PASS_ACTUAL_INPUT_BINDINGS_AND_PARTIAL_MASKS",
+        "states": 120,
+        "labelled": 90,
+        "families": 4,
+        "labelled_families": 4,
+        "families_without_labels": [],
+        "positive_action_occurrences": {
+          "SEARCH": 18,
+          "READ": 60,
+          "HANDOFF": 27
+        },
+        "partial_proof_handoff_labels": 0,
+        "inputs_questions_bindings_equal": true,
+        "native_reference_truth_not_used_for_labels": true,
+        "request_count": 25,
+        "requests_with_known_evidence_refs": 0,
+        "qualification": "Inherited static original-source CE preferences;not full legality,causal utility or Host success. All raw masks/failures retained.",
+        "compute": {
+          "cpu_seconds": 0.07171441900000008,
+          "wall_seconds": 0.07174914702773094
+        },
+        "ledger_recorded": false
+      },
+      "original_source_audit": {
+        "status": "PASS_LITERAL_ORIGINAL_SOURCE_MATCH",
+        "result_paths": 14,
+        "source_paragraph_comparisons": 280,
+        "hashes_used": false,
+        "compute": {
+          "cpu_seconds": 0.14591459299999965,
+          "wall_seconds": 0.1459435010328889
+        },
+        "ledger_recorded": false
+      },
+      "length_audit": {
+        "status": "AUDITED_NOT_FITTED",
+        "states": 120,
+        "labelled_states": 90,
+        "operation_state": "shared",
+        "max_len": 12288,
+        "head_max_len": 2048,
+        "max_encoded_tokens": 5857,
+        "state_truncations": 0,
+        "head_truncations": 0,
+        "labelled_over_8192": 0,
+        "model_forwards": 0,
+        "gpu_used": false,
+        "compute": {
+          "wall_seconds": 4.745895534753799,
+          "cpu_seconds": 4.748350369000001
+        },
+        "ledger_recorded": false
+      }
+    },
+    {
+      "scope": "3-closed-061-087",
+      "labels": {
+        "states": 208,
+        "reviewed_requests": 39,
+        "reviewed_states": 208,
+        "labelled": 113,
+        "reasons": {
+          "reviewed_missing_original_progress": 98,
+          "no_reviewed_source_proof_masked": 82,
+          "reviewed_originals_sufficient": 15,
+          "reviewed_partial_evidence_only_masked": 7,
+          "no_reviewed_progress_masked": 6
+        },
+        "families_labelled": 7,
+        "model_calls": 0,
+        "inputs_changed": false,
+        "states_source": "artifacts/generalization-20261021/source-expansion-batch-3-closed-061-087-states-v1/train.jsonl",
+        "reviews_source": "artifacts/generalization-20261021/source-expansion-batch-3-closed-061-087-request-reviews-v1/requests.json",
+        "compute": {
+          "wall_seconds": 1.7451487202197313,
+          "cpu_seconds": 1.7319852530000004
+        },
+        "ledger_recorded": false
+      },
+      "input_audit": {
+        "status": "PASS_ACTUAL_INPUT_BINDINGS_AND_PARTIAL_MASKS",
+        "states": 208,
+        "labelled": 113,
+        "families": 9,
+        "labelled_families": 7,
+        "families_without_labels": [
+          "musique-family-000216",
+          "musique-family-000670"
+        ],
+        "positive_action_occurrences": {
+          "SEARCH": 24,
+          "READ": 86,
+          "HANDOFF": 15
+        },
+        "partial_proof_handoff_labels": 0,
+        "inputs_questions_bindings_equal": true,
+        "native_reference_truth_not_used_for_labels": true,
+        "request_count": 39,
+        "requests_with_known_evidence_refs": 0,
+        "qualification": "Inherited static original-source CE preferences;not full legality,causal utility or Host success. All raw masks/failures retained.",
+        "compute": {
+          "cpu_seconds": 0.3267849380000003,
+          "wall_seconds": 0.32679630536586046
+        },
+        "ledger_recorded": false
+      },
+      "original_source_audit": {
+        "status": "PASS_LITERAL_ORIGINAL_SOURCE_MATCH",
+        "result_paths": 26,
+        "source_paragraph_comparisons": 520,
+        "hashes_used": false,
+        "compute": {
+          "cpu_seconds": 0.1321165990000006,
+          "wall_seconds": 0.13214706163853407
+        },
+        "ledger_recorded": false
+      },
+      "length_audit": {
+        "status": "AUDITED_NOT_FITTED",
+        "states": 208,
+        "labelled_states": 113,
+        "operation_state": "shared",
+        "max_len": 12288,
+        "head_max_len": 2048,
+        "max_encoded_tokens": 6218,
+        "state_truncations": 0,
+        "head_truncations": 0,
+        "labelled_over_8192": 0,
+        "model_forwards": 0,
+        "gpu_used": false,
+        "compute": {
+          "wall_seconds": 6.8818691074848175,
+          "cpu_seconds": 6.884288942000001
+        },
+        "ledger_recorded": false
+      }
+    }
+  ],
+  "cumulative_new_source_supervision": {
+    "raw_states": 3517,
+    "labelled_states": 1995,
+    "masked_states": 1522,
+    "labelled_families": 115,
+    "represented_families": 120,
+    "reviewed_actual_requests": 673,
+    "actual_request_witnesses": {
+      "partial": 226,
+      "none": 243,
+      "complete": 204
+    },
+    "source_rows_reviewed": 240,
+    "completed_positions_annotated": 447,
+    "final_mixture_and_stable_ids_built": false
+  },
+  "state_material_manifest": "data/manifests/training-generalization-state-materials-v1.json",
+  "collection": {
+    "observed_at": "2026-10-21T15:14:02.748211+00:00",
+    "exec_session": 93727,
+    "parent_pid": 1131060,
+    "parent_status": "RUNNING",
+    "parent_live": true,
+    "batches": [
+      {
+        "batch": "batch-0",
+        "status": "COMPLETED_WITH_FAILURES",
+        "pid": 1131065,
+        "live": false,
+        "closed_positions": 122,
+        "planned_positions": 122,
+        "program_statuses": {
+          "COMPLETED": 87,
+          "FAILED": 35
+        }
+      },
+      {
+        "batch": "batch-1",
+        "status": "COMPLETED_WITH_FAILURES",
+        "pid": 1381395,
+        "live": false,
+        "closed_positions": 116,
+        "planned_positions": 116,
+        "program_statuses": {
+          "FAILED": 30,
+          "COMPLETED": 86
+        }
+      },
+      {
+        "batch": "batch-2",
+        "status": "COMPLETED_WITH_FAILURES",
+        "pid": 1591077,
+        "live": false,
+        "closed_positions": 122,
+        "planned_positions": 122,
+        "program_statuses": {
+          "FAILED": 31,
+          "COMPLETED": 91
+        }
+      },
+      {
+        "batch": "batch-3",
+        "status": "RUNNING",
+        "pid": 1798815,
+        "live": true,
+        "closed_positions": 100,
+        "planned_positions": 120,
+        "program_statuses": {
+          "COMPLETED": 75,
+          "FAILED": 25
+        }
+      }
+    ],
+    "closed_positions": 460,
+    "planned_positions": 480,
+    "live_method_version": "890dbdd0"
+  },
+  "boundaries": {
+    "new_research_fits": 0,
+    "new_real_post_operation_checkpoint_branches": 0,
+    "new_STATE_model_Views": 0,
+    "old_labels_not_recompiled": true,
+    "all_failures_and_masks_retained": true,
+    "new_offline_compute_pending_while_collection_live": true,
+    "closed_settlements_v1_v2_not_appended": true,
+    "old_pending35_untouched": true,
+    "no_sha_validation": true,
+    "no_subagents": true,
+    "no_new_services": true,
+    "pushed": false,
+    "merged": false
+  },
+  "next_annotation": "Fourthbatch remaining closed positions fromindex87. Keep allthree earlier batch3 parts immutable;compile only new complete retrieval calls,then merge byeventID with literalinputchecks.",
+  "remaining": "Finish480positionqueue and remaining33batch3position annotations;final nested-source datasets,524update curves andparametercontrols;real post-op branch acceptance;auxiliary matched operation stage;STATE real View build/refresh and operation evidence;feedback expansion,selfstates,factorial,E3,Host,protected external,seeds0/1/2.",
+  "goal_complete": false
+}
