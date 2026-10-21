@@ -1,0 +1,206 @@
+{
+  "status": "ACTIVE_POST_OPERATION_CHECKPOINTS_IMPLEMENTED_MECHANICALLY_VERIFIED_COLLECTION_LIVE",
+  "previous_goal_turn": "progress: complete feedback dev, frozen checkpoint evaluation and live source collection",
+  "implementation_commits": [
+    "eb112254",
+    "490c683e"
+  ],
+  "rollback_before_checkpoint_feature": "5549550c",
+  "execution_document": "docs/TRAINING_GENERALIZATION_EXECUTION_20261021.md",
+  "capabilities": [
+    "Opt-in SQLite/Store plus executor checkpoint at actual post-operation decision",
+    "Preserve material indices, observed/delivered/known evidence, attempted searches/reads, View state and source paging",
+    "Restore absolute remaining step/read/generation budgets; relative first-action continuation window",
+    "No execution of original prefix or regeneration/repair of original View",
+    "Actual offered actions/parameters and before equality verified at restored point",
+    "Existing Host readout frame and normal cached completion semantics retained",
+    "Prepare both initial and checkpointed feedback rows with observable stage/evidence stratification, labels masked",
+    "Logical prefix usage separated from current replay timing and ledger deltas"
+  ],
+  "commands": {
+    "collection_option": "tools/run_host_intent_retrieval.py --capture-control-steps (implies initial call capture)",
+    "feedback_selection_option": "tools/prepare_view_feedback_branches.py --include-control-steps",
+    "replay": "Existing replay_call / run_frozen_retrieval_calls automatically loads declared control.json"
+  },
+  "scope": "Captured finite-operation executor+Store state, not arbitrary unobserved state, Agent hidden state or retroactive reconstruction from old traces. New common continuation policy is explicitly declared. No new actual-model checkpoint branches yet.",
+  "normal_defaults_unchanged": true,
+  "lab_snapshot_schema_added": "frozen_retrieval_decision_v1",
+  "product_schema_api_permissions_canonical_changed": false,
+  "validation": {
+    "core_regression": {
+      "passed": 74,
+      "failed": 0,
+      "skipped": 0,
+      "junit": "artifacts/generalization-20261021/validation/control-step-checkpoint-tests.xml"
+    },
+    "host_frame_regression": {
+      "passed": 21,
+      "failed": 0,
+      "skipped": 0,
+      "junit": "artifacts/generalization-20261021/validation/control-step-readout-tests.xml"
+    },
+    "selection_regression": {
+      "passed": 15,
+      "failed": 0,
+      "skipped": 0,
+      "junit": "artifacts/generalization-20261021/validation/control-step-selection-tests.xml"
+    },
+    "final_cached_completion_regression": {
+      "passed": 28,
+      "failed": 0,
+      "skipped": 0,
+      "junit": "artifacts/generalization-20261021/validation/control-step-idempotence-tests.xml"
+    },
+    "counts_overlap_do_not_sum": true,
+    "models": "Real SQLite/Store, scripted model transport; no new real model job",
+    "optional_native_coalent_tests": {
+      "skipped": 8,
+      "reason": "MILAI_COALENT_RESEARCH_PATH not configured; external core not claimed validated for this feature. Finite-action replay remains unsupported."
+    },
+    "ruff": "PASS 11 changed Python files",
+    "mypy": "PASS9implementationfiles; later cache fix rechecked",
+    "package_boundary": "PASS",
+    "tools_boundary": "PASS, no new private dependencies",
+    "first_test_failures": "One paging fixture incorrectly assumed navigation after removal; one failed-call assertion confused closed error packets with uncaught failures. Fixtures/expectations corrected, both status paths now covered."
+  },
+  "collection": {
+    "observed_at": "2026-10-21T13:02:11.349995+00:00",
+    "exec_session": 93727,
+    "parent_pid": 1131060,
+    "parent_status": "RUNNING",
+    "parent_live": true,
+    "active_batch": 1,
+    "batches": [
+      {
+        "batch": 0,
+        "status": "COMPLETED_WITH_FAILURES",
+        "pid": 1131065,
+        "live": false,
+        "closed_positions": 122,
+        "planned_positions": 122,
+        "statuses": {
+          "COMPLETED": 87,
+          "FAILED": 35
+        }
+      },
+      {
+        "batch": 1,
+        "status": "RUNNING",
+        "pid": 1381395,
+        "live": true,
+        "closed_positions": 59,
+        "planned_positions": 116,
+        "statuses": {
+          "FAILED": 17,
+          "COMPLETED": 42
+        }
+      }
+    ],
+    "closed_positions": 181,
+    "planned_positions": 480,
+    "live_method_version": "890dbdd0",
+    "source_review_families": 6,
+    "source_review_rows": 12,
+    "source_review_total_rows": 240,
+    "unreviewed_model_outputs_displayed": false
+  },
+  "first_batch_cost_status": {
+    "status": "COMPLETED_WITH_FAILURES",
+    "positions": 122,
+    "planned_positions": 122,
+    "source_groups": 32,
+    "program_statuses": {
+      "COMPLETED": 87,
+      "FAILED": 35
+    },
+    "interfaces": {
+      "query_only": 61,
+      "rich": 61
+    },
+    "generation_and_embedding": {
+      "generation_requests": 308,
+      "generation": {
+        "known_tokens": 1010341,
+        "charged_tokens": 1010341,
+        "unknown_usage": 0
+      },
+      "embedding": {
+        "known_tokens": 0,
+        "charged_tokens": 0,
+        "unknown_usage": 0
+      }
+    },
+    "driver_wall_seconds": 4008.007938255556,
+    "driver_cpu_seconds_nested": 187.933328654,
+    "already_recorded_compute_delta": {},
+    "cpu_seconds_pending": 187.933328654,
+    "ledger_recorded": false,
+    "settlement_rule": "Parentcollection is still live; no settlement now. HTTP already recorded. Whole child CPU minus direct compute only; do not add per-position nested CPU.",
+    "semantic_scope": "Program statuses only, no task-success grades. Unreviewed answers/actions not opened for source annotation.",
+    "captured_initial_calls": 187,
+    "compute": {
+      "wall_seconds": 0.008868113160133362,
+      "cpu_seconds": 0.008867957000000003
+    }
+  },
+  "source_review": {
+    "reviewed_families": 6,
+    "planned_families": 128,
+    "reviewed_source_rows": 12,
+    "planned_source_rows": 240,
+    "dispositions": {
+      "source_pool_insufficient": 8,
+      "supported_with_qualification": 1,
+      "qualified_alternative": 1,
+      "supported": 2
+    },
+    "source_progress": "artifacts/generalization-20261021/source-expansion-v1/source-review-progress-v3.json",
+    "native_answers_and_corresponding_model_outputs_used": false,
+    "operation_labels_added": 0
+  },
+  "actual_state_export": {
+    "status": "ACTUAL_REVIEWED_SOURCE_STATES_EXPORTED_NOT_OPERATION_LABELLED",
+    "closed_positions": 24,
+    "positions_with_decisions": 23,
+    "actual_states": 177,
+    "source_families": [
+      "musique-family-000161",
+      "musique-family-000354",
+      "musique-family-000385",
+      "musique-family-000690",
+      "musique-family-000743",
+      "musique-family-000796"
+    ],
+    "labelled_states": 0,
+    "split": "train",
+    "source_version": "890dbdd0",
+    "interfaces": {
+      "query_only": 94,
+      "rich": 83
+    },
+    "states_with_completed_prior_operation": 146,
+    "scope": "Only already source-first-reviewed families; actual public-request/decision witness review still pending. Failed and zero-opportunity positions remain in the closed snapshot. These traces do not supply post-operation Store checkpoints retroactively.",
+    "compute": {
+      "wall_seconds": 0.9466559896245599,
+      "cpu_seconds": 0.920273963
+    },
+    "ledger_recorded": false
+  },
+  "new_actual_model_checkpoint_branch_runs": 0,
+  "new_research_fits": 0,
+  "offline_cost_settled_while_model_live": false,
+  "closed_settlements_reused": false,
+  "no_sha_verification": true,
+  "no_subagents": true,
+  "no_new_services": true,
+  "pushed": false,
+  "merged": false,
+  "remote_head_checked_this_turn": false,
+  "goal_complete": false,
+  "next": [
+    "Keep observing the live four-batch collection; never restart on observation timeout",
+    "Continue source-first review and then actual-request/state witness annotation",
+    "After live queue terminal, freeze new method code and run real post-operation capture/branch acceptance, including View-generated states",
+    "Complete nested-source fitting curves, parameter/auxiliary/feedback controls, STATE and factorial/E3/Host/external/multiseed requirements"
+  ]
+}

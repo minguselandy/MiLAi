@@ -1,3 +1,38 @@
+# LATEST V4: POST-OPERATION CHECKPOINT CODE / SOURCE COLLECTION STILL LIVE
+
+Full goal ACTIVE; previous turn was substantive progress. New codeeb112254+490c683e is NOT
+used by the live queue, which remains frozen890dbdd0. No hot source/flag changes to that queue.
+Actual21:02Shanghai snapshot: parent1131060/exec93727 RUNNING, activebatch1 child1381395live.
+Batch0 CLOSED122(87programcompleted35failed),308generationHTTP1010341known/chargedtokens,
+newunknown0; CPU187.933329UNSETTLED whileparentlives. Batch1closed59/116(42completed17failed),
+whole181/480. Revalidate driver AND /proc; do not restart. Batch0pid1131065is terminal.
+Collection driver: artifacts/generalization-20261021/source-expansion-collection-v1/driver.json.
+No second realmodel job or offline settlement while queue lives; v1/v2 settlements CLOSED.
+
+New opt-in --capture-control-steps retains actual Store/SQLite and full executor checkpoints.
+--include-control-steps prepares actual post-operation states with actual offered bindings,
+initial/post and delivered-evidence strata, and masked raw-selected-states.jsonl.
+Restore keeps consumed absolute budgets, source pages, known/observed/delivered materials,
+View versions and attempts. Prefix is NOT reexecuted; even wrong recordedView is preserved.
+Original Host readout frame works; known evidence not reread; cached completion stays idempotent.
+Logical prefix usage explicitly separated from current physical replay/ledger costs.
+Supports only actual saved checkpoints; old traces alone cannot become state snapshots.
+Core74tests, Hostframe21, selection15, finalcache28 passed (overlapping sets, do not sum).
+Ruff11/mypy9/package/tools passed.8optionalnativeCoalenttests skipped(no configured upstreampath);
+external nonfinite replay remains unsupported. Tests use realStore with scripted model callbacks.
+New actual-model post-step branches still pending until livequeue ends and new code is frozen.
+
+Source-first review now6families/12rows of128/240; progress file
+source-expansion-v1/source-review-progress-v3.json.8insufficient2supported1qualifiedsupport1
+qualifiedalternative; no native reference/model outputs used to decide these. No operation gold yet.
+From these6families24closedpositions(23withdecisions),177actualstates/146postoperation exported
+at source-expansion-reviewed-six-families-states-v1; allgoldEMPTY, no retroactiveStorecheckpoints.
+Continue source-only review before opening corresponding native/model outputs. Poll other sources
+with counts only. New source review/export compute pending or unmeasured; no settlementwhilelive.
+Full scale524update/parameter/auxiliary/selftrajectory/feedback/STATE/factorial/E3/Host/external/
+seed0,1,2 requirements remain. NoSHA/subagents/newservices/push/merge. Prior snapshots historical.
+See docs/TRAINING_GENERALIZATION_EXECUTION_20261021.md and progress-20261021-v4 manifest.
+
 # LATEST V3: SOURCE COLLECTION LIVE / FEEDBACK DEV COMPLETE — 2026-10-21
 
 Full generalization goal ACTIVE. Previous goal turn was progress, not blocked.
