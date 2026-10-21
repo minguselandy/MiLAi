@@ -85,6 +85,40 @@ def test_post_operation_store_materials_actions_and_allowance_resume_without_pre
     assert all("control_checkpoint" not in row["state"] for row in raw)
 
 
+def test_restored_retrieval_returns_its_cached_completion_on_reentry(tmp_path, monkeypatch):
+    from milai_lab.methods.intent_retrieval import IntentRetrievalMemory
+
+    root = prepared_given(tmp_path)
+    snapshots = root / "frozen-retrieval-calls"
+    monkeypatch.setattr(httpx.Client, "send", no_http)
+    original = message(root, bank="bank", owner="alice", session="host", message_id="q",
+        content="Find the reported Cedar code", incoming_sources=[source()],
+        given_retrieval_request={"query": "Cedar code"}, retrieval_snapshots=snapshots,
+        retrieval_step_snapshots=True)
+    assert original["status"] == "COMPLETED", original.get("error")
+    captured = captured_after(snapshots, "READ")
+    call = read_json(captured / "call.json")
+    retrieve = IntentRetrievalMemory.retrieve
+    completed = []
+
+    def twice(memory, config, call_id, request):
+        first = retrieve(memory, config, call_id, request)
+        second = retrieve(memory, config, call_id, request)
+        assert second == first
+        completed.append(second)
+        return second
+
+    monkeypatch.setattr(IntentRetrievalMemory, "retrieve", twice)
+    handoff = next(a for a in call["initial_actions"] if a["kind"] == "HANDOFF"
+                   and not a["parameters"])
+    result = replay_call(captured, tmp_path / "branch", {"policy": "fixed_context"},
+        source_version="mechanical", intervention={"first_action": handoff,
+                                                   "continuation_steps": 0})
+    assert result["status"] == "COMPLETED", result.get("error")
+    assert result["frozen_initial_observation_and_actions_equal"]
+    assert len(completed) == 1
+
+
 @pytest.mark.parametrize("delivery_selection", [False, True])
 def test_generated_view_and_consumed_generation_allowance_are_restored_not_regenerated(
     tmp_path, monkeypatch, delivery_selection,

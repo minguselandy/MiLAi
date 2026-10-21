@@ -206,28 +206,28 @@ class IntentRetrievalMemory(FunctionalEditMemory):
         if self.retrieval_observer is not None:
             observe({"phase": "start", "request": request.project(), "binding": bound,
                      "read_allowance": self.read_allowance(config)})
+        served_from_cache = False
         try:
             existing = self.service.store.get(namespace(self.service), key)
             if existing is not None:
                 saved = existing.value
                 if saved["request"] != request.project():
                     raise FunctionalRejection("RETRIEVAL_CALL_CHANGED")
-                if self.replay_control_checkpoint is not None:
+                if saved["status"] == "completed":
+                    result = self._retrieval_result(key, saved)
+                    served_from_cache = True
+                elif self.replay_control_checkpoint is not None:
                     if saved["status"] != "started":
                         raise ValueError("CONTROL_CHECKPOINT_REQUIRES_IN_PROGRESS_CALL")
                     result = self._execute_retrieval(config, call_id, request, key, bound)
-                elif saved["status"] != "completed":
-                    raise FunctionalIntegrityError("RETRIEVAL_OUTCOME_UNKNOWN")
                 else:
-                    result = self._retrieval_result(key, saved)
+                    raise FunctionalIntegrityError("RETRIEVAL_OUTCOME_UNKNOWN")
             else:
                 result = self._execute_retrieval(config, call_id, request, key, bound)
         except BaseException as error:
             observe({"phase": "failed", "error_type": type(error).__name__, "error": str(error)})
             raise
-        observe({"phase": "completed", "result": result,
-                 "served_from_cache": existing is not None
-                                      and self.replay_control_checkpoint is None})
+        observe({"phase": "completed", "result": result, "served_from_cache": served_from_cache})
         return result
 
     def _execute_retrieval(
