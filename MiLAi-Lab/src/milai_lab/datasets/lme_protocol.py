@@ -3,13 +3,34 @@ from __future__ import annotations
 
 import ast
 import base64
-import importlib.util
+import json
 import mimetypes
+import os
+import re
 from collections import Counter
 from collections.abc import Callable
 from pathlib import Path
 from types import SimpleNamespace
 from typing import Any
+
+
+def native_exports(path: Path, names: set[str], namespace: dict[str, Any]) -> dict[str, Any]:
+    """Load only inspected definitions; imports and unrelated module initialization stay out."""
+    parsed = ast.parse(path.read_text())
+    nodes = [node for node in parsed.body if (
+        isinstance(node, ast.FunctionDef) and node.name in names) or (
+        isinstance(node, ast.Assign) and any(
+            isinstance(target, ast.Name) and target.id in names for target in node.targets)) or (
+        isinstance(node, ast.AnnAssign) and isinstance(node.target, ast.Name)
+        and node.target.id in names)]
+    if any(isinstance(child, (ast.Import, ast.ImportFrom))
+           for node in nodes for child in ast.walk(node)):
+        raise ValueError("Native exports must use explicitly supplied dependencies, not imports")
+    module = ast.Module(body=[ast.ImportFrom(module="__future__",
+        names=[ast.alias(name="annotations")], level=0), *nodes], type_ignores=[])
+    ast.fix_missing_locations(module)
+    exec(compile(module, str(path), "exec"), namespace)  # noqa: S102 -- inspected import-free exports
+    return {name: namespace[name] for name in names}
 
 
 class NativeLmeProtocol:
@@ -22,31 +43,31 @@ class NativeLmeProtocol:
 
     def __init__(self, upstream: Path) -> None:
         metrics_path = upstream / "evaluation/qa_eval_metrics.py"
-        spec = importlib.util.spec_from_file_location("_milai_lme_native_metrics", metrics_path)
-        assert spec is not None and spec.loader is not None
-        self.metrics: Any = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(self.metrics)
+        metric_names = {"DEFAULT_SEPARATORS", "_MULTI_SELECT_FILLER_WORDS",
+            "_ABSTENTION_JUDGE_SYSTEM_PROMPT", "_GOTCHAS_JUDGE_SYSTEM_PROMPT",
+            "normalize_phrase", "split_phrases", "norm_phrase_set_match",
+            "norm_phrase_set_match_ordered", "mc_choice_match", "_extract_multi_select_letters",
+            "mc_choice_set_match", "extract_boxed_answer", "is_unknown", "eval_name",
+            "score_to_bool", "llm_abstention_checker", "llm_gotchas_checker", "_stringify_text",
+            "_extract_question_text", "_build_abstention_judge_messages",
+            "_build_gotchas_judge_messages", "_strip_markdown_code_fence",
+            "_parse_llm_binary_judgement", "_call_chat_completion", "_parse_eval_value",
+            "parse_eval_function_spec", "eval_from_spec"}
+        self.metric_namespace: dict[str, Any] = {"__name__": "_milai_lme_native_metrics",
+                                                "json": json, "os": os, "re": re}
+        self.metrics = SimpleNamespace(**native_exports(
+            metrics_path, metric_names, self.metric_namespace))
         names = {"DOMAIN_SYSTEM_PROMPTS", "CATEGORY_MAP", "NON_ABSTENTION_CATEGORIES",
             "ABSTENTION_CATEGORIES", "COMBINED_ABSTENTION_CATEGORY_PAIRS", "LLM_EVAL_FUNCTIONS",
             "require", "get_system_prompt", "to_data_url", "build_messages",
             "category_from_question_type", "aggregate_metrics", "score_prediction",
             "build_extra_body", "build_reader_request"}
         path = upstream / "evaluation/harness.py"
-        parsed = ast.parse(path.read_text())
-        nodes = [node for node in parsed.body if (
-            isinstance(node, ast.FunctionDef) and node.name in names) or (
-            isinstance(node, ast.Assign) and any(
-                isinstance(target, ast.Name) and target.id in names for target in node.targets))]
         namespace: dict[str, Any] = {"__name__": "_milai_lme_native_harness",
             "base64": base64, "mimetypes": mimetypes, "Path": Path,
             "eval_from_spec": self.metrics.eval_from_spec,
             "score_to_bool": self.metrics.score_to_bool}
-        # Deferring type annotations avoids importing unrelated optional backend packages.
-        module = ast.Module(body=[ast.ImportFrom(module="__future__",
-            names=[ast.alias(name="annotations")], level=0), *nodes], type_ignores=[])
-        ast.fix_missing_locations(module)
-        exec(compile(module, str(path), "exec"), namespace)  # noqa: S102 -- inspected upstream bodies
-        self.api = SimpleNamespace(**{name: namespace[name] for name in names})
+        self.api = SimpleNamespace(**native_exports(path, names, namespace))
         self.source_files = [str(metrics_path.resolve()), str(path.resolve())]
 
     def messages(self, domain: str, query: str, query_image: str | None,
@@ -75,7 +96,7 @@ class NativeLmeProtocol:
             return SimpleNamespace(choices=[SimpleNamespace(message=SimpleNamespace(content=text))])
 
         client = SimpleNamespace(chat=SimpleNamespace(completions=SimpleNamespace(create=create)))
-        self.metrics._create_openai_client = lambda **_: client
+        self.metric_namespace["_create_openai_client"] = lambda **_: client
         parsed = self.metrics.extract_boxed_answer(response)
         name = self.metrics.eval_name(question["eval_function"])
         row = {"question_item": question, "eval_function": question["eval_function"],

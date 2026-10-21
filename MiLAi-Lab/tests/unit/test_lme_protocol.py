@@ -1,5 +1,6 @@
 """Pinned upstream prompt and metric functions on synthetic questions only."""
 import base64
+import shutil
 from pathlib import Path
 
 import pytest
@@ -95,3 +96,26 @@ def test_malformed_judge_response_retains_native_failure(protocol):
         protocol.score({"question": "Synthetic", "question_type": "errors-gotchas",
             "eval_function": "llm_gotchas_checker", "answer": "reference"}, "answer",
             judge_options=options(), complete=lambda _: "not a binary judgement")
+
+
+def test_unrelated_native_initialization_and_sdk_client_are_not_loaded(tmp_path):
+    (tmp_path/"evaluation").mkdir()
+    for name in ("harness.py", "qa_eval_metrics.py"):
+        shutil.copyfile(UPSTREAM/"evaluation"/name, tmp_path/"evaluation"/name)
+        with (tmp_path/"evaluation"/name).open("a") as stream:
+            stream.write('\nraise AssertionError("UNRELATED_MODULE_INITIALIZATION")\n')
+    protocol = NativeLmeProtocol(tmp_path)
+    assert "_create_openai_client" not in protocol.metric_namespace
+    assert "OPENAI_MAX_RETRIES" not in protocol.metric_namespace
+    assert protocol.metrics.mc_choice_match("A", "A")
+
+
+def test_new_import_in_selected_native_function_requires_explicit_dependency(tmp_path):
+    (tmp_path/"evaluation").mkdir()
+    source = (UPSTREAM/"evaluation/qa_eval_metrics.py").read_text()
+    source = source.replace('    marker = "\\\\boxed{"',
+                            '    import socket\n    marker = "\\\\boxed{"')
+    assert "    import socket" in source
+    (tmp_path/"evaluation/qa_eval_metrics.py").write_text(source)
+    with pytest.raises(ValueError, match="explicitly supplied dependencies"):
+        NativeLmeProtocol(tmp_path)
