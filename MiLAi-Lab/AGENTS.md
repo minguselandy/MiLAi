@@ -1,4 +1,4 @@
-# LATEST STATE RUNNER / MP REVIEWS THROUGH35 — 2026-10-21
+# LATEST STATE RUNNER / MP REVIEWS THROUGH37 — 2026-10-21
 
 Current code06d103c3 extends tools/run_state_bench_local_pilot.py: explicit--split train/test,
 selection.split+native membership checked before task bodyload; train default preserved.
@@ -9,7 +9,7 @@ whole_driver_cpu_seconds/nested_cpu_seconds_already_billed separatelyreported.
 constructor-map typing/import-order failures retained; v2Ruff/mypyPASS. No STATEtestbody
 read, no newactualHTTP, no confirmationplan frozen. Manifeststate-confirmation-runner-v1.
 Dparent3434203/exec69127 and MPPID3763296 remainrunning; revalidate driver/process.
-MPcards0–35exported; reviews0–35SAVED. 17/18/21 have Calternative toprimaryQ;
+MPcards0–37exported; reviews0–37SAVED. 17/18/21 have Calternative toprimaryQ;
 12Q/Wslashambiguity recordedinbasis(noCimpact). 26W newcallmissedactual9:45source.
 selection-026-v1.json: candidate5=ownsource9/10, read_5LEGAL aftersearch; MP[0,2,3,1],
 samevectorcosine[0,1,2,6], neitherselects5. Noalternativeexecution/successclaim.
