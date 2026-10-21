@@ -1,4 +1,41 @@
-# LATEST V5: FIRST32 SOURCE/REQUEST LABELS CLOSED / COLLECTION STILL LIVE
+# LATEST V6: FIRST64 SOURCE/REQUEST LABELS CLOSED / FOURTH BATCH LIVE
+
+Full goal ACTIVE. Previous turn is progress, not blocked or complete. Revalidate live processes.
+22:26:53Shanghai snapshot parent1131060/exec93727live, batch3 child1798815live9/120.
+Batch0closed122(87completed35failed);batch1closed116(86completed30failed);
+batch2closed122(91completed31failed),child1591077terminal. Whole369/480.
+Queue stays frozen890dbdd0; no restart/hotupdate/second realmodel job/offline settlement whilelive.
+Only counts/status may be displayed for unreviewed sources. Program completed is not semantic success.
+
+Source-first64families/119rows done, first two fullbatches. Latest progress-v32.json under
+artifacts/generalization-20261021/source-expansion-v1. Start next atfamilyindex64.
+Full pools saved BEFORE corresponding native refs/modeloutputs. Batch1nativeTrue9insufficient/
+11qualifiedsupport/2qualifiedalternative/8supported;nativeFalse28insufficient. Not errorrate.
+Source judgments not revised to matchnative. All remaining64families/121pools stillunreviewed.
+Use show_new_source_pools.py64 COUNT progress-v32.json for source-only fulltext; keep output
+withinlimit and re-read any truncation before markingreviewed. save_source_review.py stores
+explicitly authored caseJSON fromstdin and a NEW progresssnapshot; does not infersemantics.
+
+Batch1 all178actualrequests reviewed:55complete54partial69none. Localrequests may narrow or
+addrequirements:capitalcitymissing despite state/builddatepresent;1961Coltranehome not1964home;
+servicearea notlicencecity;airportserving notmunicipallocation. Own author,notindependentreview.
+Compiler unchanged.906rawstates/499labelled/31labelledfamilies,407masked.392progress107sufficient;
+positiveSEARCH112READ355HANDOFF107,partialproofHANDOFF0. Family000123IkeAwgu whollyunlabelled.
+All906inputs/questions/bindings equal;110actualresultpaths/2200sourceparagraphs literal equal.
+sharedinput max6490,all499<8K,zero12288/head2048truncations,noforward/noGPU.
+Batch1 files source-expansion-batch-1-{states,request-reviews,labelled}-v1.
+First2batches total1855states1030labels825masked62labelledfamilies,355actualrequests.
+All355requests explicitknownrefs empty =coveragegap,not noHostmemory. StaticCE preferences
+not causalutility/fulllegality/Hostsuccess; finalmixture/stableIDs/fits notcreated.
+
+No implementationchanges thisturn, dataauditsdirect; no unnecessarytests. Labelcompilation
+CPU4.042427748 pending; otherphase timing stored separately. Initial906export/manualreview/
+inspectionCPUunmeasured. Closedsettlements-v1/v2 never append/re-settle. Priorpending35untouched.
+Auxiliary128updateplan stillPREPARED_NOT_DISPATCHED; post-op490c683efreeze stillpendingrealmodel
+acceptance. Fullnested524updatecurves/parameters/feedbackexpansion/STATE/factorial/E3/Host/
+external/seeds0,1,2remain. NoSHA/subagents/newservices/push/merge. Seeexecutiondoc andv6manifest.
+
+# V5 HISTORY: FIRST32 SOURCE/REQUEST LABELS CLOSED / COLLECTION STILL LIVE
 
 Full goal ACTIVE. Prior goal turn was progress, no blocker. Current queue remains frozen890dbdd0.
 22:05Shanghai snapshot: parent1131060/exec93727 live; activebatch2 child1591077live,84/122.
