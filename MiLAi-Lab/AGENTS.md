@@ -1,3 +1,28 @@
+# LATEST ANSWER CLOSED / SESSION ARTIFACTS — 2026-10-21
+
+Continuationparent3434203/exec69127 RUNNING, activedelivery-seed0 PID3486484 latest
+54/64. Revalidateactualprocess. Answerremaining20 CLOSED, logicalanswer64fullyreviewed.
+Answer17C18Q17W12F (Cupper19fortwoheadingambiguities), material26complete38partial.
+143HTTP740852tokensunknown0;169successfulnativeforward1063440tokens/max15963,
+trunc0/nonfinite0 plusoldindex43capacityrejectionbeforeforward.54Hostrequestedcalls vs
+53completedreturns,24empty. Final16:0C2Q8W6F,1Hostrequest(index43),0completedreturns.
+Mergedactual44+20roots; old44CPUremainder61.997542272SETTLEDv32; onlylast20remainder
+31.604852705pending33. Native last20CPU64.835143190directledger. Neverrechargeold44.
+Manifestd-answer-results-v1 andlogicalanswerfinal/summary/closed files;
+finalize_answer_combined_v1.py alreadyDONE; don'trerun. Host-request-counts-v1clarifies
+failedcallvsreturns. Native64single-rootfinalizerv2isforlaterfullarms, notanswer.
+Coalentsessionartifactcodea99a5aa8: SourceRetriever keepsonechunkperactualmessage,
+registeredruntimeartifact_scope=session. NativeID/revisionlists areversions(nohashes).
+Storeartifactscope+immutablebindings handleappend/partialforget/reload; newunboundsession
+notglobalinvalidation; livequeryexcluded. Rawdeliverygroupedbysession, fullbudgetretained.
+15functionalchecksPASS,v2types+source/sessionreopen3PASS,Ruff/mypyPASS.
+Productiongrain auditv3 fourBtrainprefixes:exactChunk.text arrayssame; event12synth
+process12/42sources vs session6process42/42;maxBGEchunk305. Scriptedonly, noefficacyclaim.
+Manifests coalent-session-artifacts-v1 /coalent-granularity-audit-v3. Actualmodelpilotpending.
+Pending33UNSETTLED;nooffline settlement/modeloverlap whilequeueactive. FullgoalACTIVE.
+Next reviewdeliverycards0–14alreadyexported(refreshv2), thenview-cache/MemPursuit.
+No SHA/subagents/newservices/newreal ledger. Earlier detailsbelow; currenttop supersedes.
+
 # LATEST: D CONTINUATION RUNNING — 2026-10-21
 
 OldDparent2468544/exec65603 CLOSED STOPPED_AFTER_FAILED_ARM. Answer3182964 CLOSED44/64,

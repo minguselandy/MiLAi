@@ -2266,3 +2266,18 @@ D原队列随后按原停止规则退出：父2468544/exec65603与答案子进�
 续跑仅含从未执行的5条独立冷流（答案indices44–63）及未启动的delivery/view-cache/MemPursuit，共212位置。失败43恰为上一内容流的末轮，无需复制或重放已失败流。模型、提示、输入/返回上限、步数、来源和请求均不变；答案原队列已预约100次/1200520tokens，剩余子运行只给500次/6799480tokens，保持原600次/8M总预约上限。实际用量仍记同一ledger，额外权重重载费用不免除。
 
 续跑已实际启动，父3434203/exec69127，答案remaining20子进程3434228；后三臂继续串行。主索引host-intent-view-v4-d-continuation-v1.json。后续用export_d_review_cards_v2.py将新增答案位置映射回44–63，用write_d_review_batch_v2.py写pending33；不能再运行会写已结算pending32的旧helper。最终答案整臂须合并原44与新20，只追加新20的未计CPU差额，不能再次计原44。完整目标仍在进行中。
+
+
+## 2026-10-21：答案反馈臂64位置合并与来源归组实现
+
+答案原44位置与未执行的后20冷流逐项核对history/request后合并，容量失败43仍保留为F：作者评审17C/18Q/17W/12F，两个B30分类标题歧义允许C上界19；材料26完整/38部分。共143次生成HTTP、740852tokens、unknown增量0；169次成功forward、1063440输入tokens，成功输入最大15963、无截断/非有限输出，另一次16663>16384的输入在forward前拒绝。原失败没有修补或重跑。
+
+需要区分调用尝试和回执：Host实际提出54次检索调用，完成53次回执，其中24空。16末轮为0C/2Q/8W/6F；末轮有1次Host检索请求（失败43），但0次完成回执，不能写成Host完全没有尝试检索。答案原44驱动CPU差额61.997542272秒已结算v32，后20只新增差额31.604852705秒到pending-v33；第二次模型加载与推理64.835143190秒由原runner直接记账。原44+新20墙时分别1379.864749645、814.687972826秒，失败／重载费用保留。结果索引host-intent-view-v4-d-answer-results-v1.json，实际请求核对为answer-seed0/Host-request-counts-v1.json。
+
+a99a5aa8实现Coalent原会话artifact：每条原消息仍是独立、未改写的chunk，按真实session组织artifact；默认运行模式为session，source模式仍显式可用。原Store保存artifact描述符和不可变的原生ID/版本绑定表，session版本是原生Source ID与revision的字面列表，无内容摘要。追加同会话消息或局部撤销使相应artifact失效；新独立session不全局刷新旧缓存；当前活动问题在检索和新鲜度同步中一致排除。旧版本绑定保留，完整Source重开、snapshot引用、当前可见性和整包预算仍走原路径。
+
+首轮15项功能检查通过，随后修正两处类型标注并用3项检查覆盖source/session两种模式的真实Store重开、追加、局部撤销和旧版本绑定；Ruff/mypy通过。注册Host、原文要求和外层预算检查随session模式一并通过，均为模拟模型/HTTP。
+
+生产适配器又在原四个B训练前缀上完成无模型审计：source与session条件的完整Chunk.text数组逐项相同，仅artifact归组/原生版本元数据不同。逐Source条件12次脚本合成调用只接触12条原文，会话条件6次接触全部42条；本次每条消息块最长305个BGE tokens，两边长度逐项相同。与前次普通exchange分组探针不同，本次直接运行SourceRetriever/StoreCognitionStore实现；原文分组数、角色和正文未变。仍不据固定等分向量推断真实排序、质量或费用。索引host-intent-view-v4-coalent-granularity-audit-v3.json、host-intent-view-v4-coalent-session-artifacts-v1.json。
+
+当前续跑父3434203/exec69127继续交付反馈臂；尚不能宣布D完成或选择最终E范围。真实Coalent试跑、其余D评审和确认实验仍待完成，所有新的离线测得CPU在pending-v33等待空闲结算。

@@ -1,0 +1,52 @@
+{
+  "status": "SESSION_ARTIFACT_RUNTIME_AND_BINDINGS_MECHANICALLY_PASSED",
+  "source_version": "a99a5aa8",
+  "implementation": [
+    "src/milai_lab/baselines/coalent_store.py",
+    "src/milai_lab/baselines/coalent_memory.py"
+  ],
+  "artifact_scope": "Registered runtime defaults to session; explicit source scope remains available. Individual original-message chunks remain unchanged and in the caller-provided order.",
+  "bindings": "Existing Store holds artifact descriptors and immutable revision-to-native-source-binding records. Session revision is a literal sorted list of source IDs/native revisions, not a content digest. Old revision bindings remain readable for snapshots.",
+  "freshness": "Current visible session membership/native revisions invalidate only affected bound artifacts. Actual live-query source is excluded consistently. New independent sessions do not globally dirty old units. All-source-revoked artifact is evicted; partial revocation changes its version and rebuild excludes hidden bodies.",
+  "delivery": "Selected upstream unit provenance expands back to real native Source refs/revisions. Original receipts group complete native source ranges by session and still pass the full outer packet/envelope budget. No invented citation IDs or text truncation.",
+  "validation": {
+    "v1": "artifacts/host-intent-retrieval-v3/view-v4-coalent-session-bindings-check-v1/result.json",
+    "v1_tests": 15,
+    "v1_mypy": "Two annotation errors, fixed without behavioral fallback",
+    "v2": "artifacts/host-intent-retrieval-v3/view-v4-coalent-session-bindings-check-v2/result.json",
+    "v2_tests": 3,
+    "ruff": "PASS",
+    "mypy": "PASS two implementation files",
+    "coverage": [
+      "One session with four original messages is synthesized in one native artifact build",
+      "Native-version bindings retained through append and partial revocation",
+      "Unrelated new session and excluded current live source do not invalidate the old artifact",
+      "Both source and session modes survive actual Store close/reopen and native forget",
+      "Registered Host and original-source/ref/envelope checks passed with the grouped runtime"
+    ]
+  },
+  "production_granularity_audit": {
+    "file": "artifacts/host-intent-retrieval-v3/view-v4-coalent-granularity-audit-v3/audit.json",
+    "groups": 4,
+    "unique_sources": 42,
+    "source_bodies_seen_by_synthesis": {
+      "source_artifacts": 12,
+      "session_artifacts": 42
+    },
+    "synthesis_calls": {
+      "source_artifacts": 12,
+      "session_artifacts": 6
+    },
+    "exact_chunk_text_arrays_equal": true,
+    "max_bge_chunk_tokens": 305
+  },
+  "actual_models": 0,
+  "actual_external_HTTP": 0,
+  "limitations": [
+    "This is structural/scripted validation, not semantic accuracy, real BGE ranking, Host benefit or actual synthesis-cost evidence.",
+    "Session scope requires complete native sessions from the existing session search and matching live-source exclusions.",
+    "Query/return representations remain a declared MiLAi native-version adaptation; no byte-identical upstream replication or claim-specific entailment certification.",
+    "Actual Qwen/BGE comparison and E scope still pending; current D queue remains serialized."
+  ],
+  "accounting": "Measured checks/audit pending-v33; no real ledger settlement while D is active."
+}

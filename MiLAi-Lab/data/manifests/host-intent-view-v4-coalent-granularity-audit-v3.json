@@ -1,0 +1,270 @@
+{
+  "status": "NATIVE_BUILD_CAP_AND_INPUT_GRANULARITY_AUDITED_NO_MODELS",
+  "source_version": "a99a5aa8",
+  "fixture": "artifacts/host-intent-retrieval-v3/data/view-v4-b-streams-v1/histories.json",
+  "selection": "First content flow initial prefix of each of four existing B train source groups, before any Coalent model outcome; no new dev/test sources.",
+  "upstream_max_builds_per_read": 3,
+  "rows": [
+    {
+      "source_group": "memops_B06",
+      "history": "memops_B06-view-v4-b-content",
+      "source_prefix": 14,
+      "retrieved_unique_sources": 14,
+      "native_sessions": 2,
+      "ordinary_packs": 7,
+      "conditions": {
+        "event_artifacts": {
+          "chunks": 14,
+          "artifacts": 14,
+          "synthesis_calls": 3,
+          "retrieval_calls": 1,
+          "source_bodies_seen_by_synthesis": 3,
+          "sources_not_materialized_this_read": 11,
+          "bge_tokens_per_chunk": [
+            228,
+            263,
+            220,
+            266,
+            231,
+            254,
+            211,
+            268,
+            228,
+            268,
+            242,
+            277,
+            233,
+            305
+          ],
+          "bge_max_tokens": 305,
+          "over_bge8192": 0,
+          "source_session_sizes": {
+            "source-session-1": 8,
+            "source-session-2": 6
+          }
+        },
+        "message_chunks_grouped_by_native_session": {
+          "chunks": 14,
+          "artifacts": 2,
+          "synthesis_calls": 2,
+          "retrieval_calls": 1,
+          "source_bodies_seen_by_synthesis": 14,
+          "sources_not_materialized_this_read": 0,
+          "bge_tokens_per_chunk": [
+            228,
+            263,
+            220,
+            266,
+            231,
+            254,
+            211,
+            268,
+            228,
+            268,
+            242,
+            277,
+            233,
+            305
+          ],
+          "bge_max_tokens": 305,
+          "over_bge8192": 0,
+          "source_session_sizes": {
+            "source-session-1": 8,
+            "source-session-2": 6
+          }
+        }
+      }
+    },
+    {
+      "source_group": "memops_C26",
+      "history": "memops_C26-view-v4-b-content",
+      "source_prefix": 8,
+      "retrieved_unique_sources": 8,
+      "native_sessions": 1,
+      "ordinary_packs": 4,
+      "conditions": {
+        "event_artifacts": {
+          "chunks": 8,
+          "artifacts": 8,
+          "synthesis_calls": 3,
+          "retrieval_calls": 1,
+          "source_bodies_seen_by_synthesis": 3,
+          "sources_not_materialized_this_read": 5,
+          "bge_tokens_per_chunk": [
+            203,
+            231,
+            200,
+            248,
+            206,
+            233,
+            208,
+            246
+          ],
+          "bge_max_tokens": 248,
+          "over_bge8192": 0,
+          "source_session_sizes": {
+            "source-session-1": 8
+          }
+        },
+        "message_chunks_grouped_by_native_session": {
+          "chunks": 8,
+          "artifacts": 1,
+          "synthesis_calls": 1,
+          "retrieval_calls": 1,
+          "source_bodies_seen_by_synthesis": 8,
+          "sources_not_materialized_this_read": 0,
+          "bge_tokens_per_chunk": [
+            203,
+            231,
+            200,
+            248,
+            206,
+            233,
+            208,
+            246
+          ],
+          "bge_max_tokens": 248,
+          "over_bge8192": 0,
+          "source_session_sizes": {
+            "source-session-1": 8
+          }
+        }
+      }
+    },
+    {
+      "source_group": "memops_D11",
+      "history": "memops_D11-view-v4-b-content",
+      "source_prefix": 16,
+      "retrieved_unique_sources": 16,
+      "native_sessions": 2,
+      "ordinary_packs": 8,
+      "conditions": {
+        "event_artifacts": {
+          "chunks": 16,
+          "artifacts": 16,
+          "synthesis_calls": 3,
+          "retrieval_calls": 1,
+          "source_bodies_seen_by_synthesis": 3,
+          "sources_not_materialized_this_read": 13,
+          "bge_tokens_per_chunk": [
+            222,
+            283,
+            219,
+            270,
+            247,
+            290,
+            214,
+            275,
+            210,
+            248,
+            237,
+            247,
+            239,
+            269,
+            223,
+            259
+          ],
+          "bge_max_tokens": 290,
+          "over_bge8192": 0,
+          "source_session_sizes": {
+            "source-session-2": 8,
+            "source-session-1": 8
+          }
+        },
+        "message_chunks_grouped_by_native_session": {
+          "chunks": 16,
+          "artifacts": 2,
+          "synthesis_calls": 2,
+          "retrieval_calls": 1,
+          "source_bodies_seen_by_synthesis": 16,
+          "sources_not_materialized_this_read": 0,
+          "bge_tokens_per_chunk": [
+            222,
+            283,
+            219,
+            270,
+            247,
+            290,
+            214,
+            275,
+            210,
+            248,
+            237,
+            247,
+            239,
+            269,
+            223,
+            259
+          ],
+          "bge_max_tokens": 290,
+          "over_bge8192": 0,
+          "source_session_sizes": {
+            "source-session-2": 8,
+            "source-session-1": 8
+          }
+        }
+      }
+    },
+    {
+      "source_group": "memops_F08",
+      "history": "memops_F08-view-v4-b-content",
+      "source_prefix": 4,
+      "retrieved_unique_sources": 4,
+      "native_sessions": 1,
+      "ordinary_packs": 2,
+      "conditions": {
+        "event_artifacts": {
+          "chunks": 4,
+          "artifacts": 4,
+          "synthesis_calls": 3,
+          "retrieval_calls": 1,
+          "source_bodies_seen_by_synthesis": 3,
+          "sources_not_materialized_this_read": 1,
+          "bge_tokens_per_chunk": [
+            201,
+            236,
+            202,
+            227
+          ],
+          "bge_max_tokens": 236,
+          "over_bge8192": 0,
+          "source_session_sizes": {
+            "source-session-1": 4
+          }
+        },
+        "message_chunks_grouped_by_native_session": {
+          "chunks": 4,
+          "artifacts": 1,
+          "synthesis_calls": 1,
+          "retrieval_calls": 1,
+          "source_bodies_seen_by_synthesis": 4,
+          "sources_not_materialized_this_read": 0,
+          "bge_tokens_per_chunk": [
+            201,
+            236,
+            202,
+            227
+          ],
+          "bge_max_tokens": 236,
+          "over_bge8192": 0,
+          "source_session_sizes": {
+            "source-session-1": 4
+          }
+        }
+      }
+    }
+  ],
+  "method": "Actual MemoryService capture/search, production source/session SourceRetriever and StoreCognitionStore. Complete Chunk.text arrays match exactly; only artifact grouping/version metadata differs. Actual upstream pool runs with fixed equal-score vectors and scripted synthesis solely to exercise build cap.",
+  "limitations": [
+    "This does not estimate BGE ranking, semantic coverage, Host success or real synthesis cost. Constant vectors deliberately cannot establish any semantic result.",
+    "Both conditions now use the production SourceRetriever and native artifact binding registry. Source/session namespaces keep each condition cold; model quality remains untested.",
+    "BGE token lengths are measured local input lengths, not billed model usage. No output/return budget claim from the large synthetic serve_budget.",
+    "No Host prior-answer sources are added in this prefix-only probe. Actual continuous runtime corpus can contain them."
+  ],
+  "model_calls": 0,
+  "ledger_recorded": false,
+  "compute": {
+    "wall_seconds": 3.9977213023230433,
+    "cpu_seconds": 3.623693818
+  }
+}
