@@ -1,3 +1,22 @@
+# LATEST PUBLICATION / D10 CLOSED / COALENT D64 LIVE / PENDING35 — 2026-10-21
+
+User requests current experiment summary and GitHub submission; authorized to push existing
+feat/host-intent-retrieval-20261019. Full v4 remains incomplete; no pause/merge requested.
+Snapshot 2026-10-21T06:15:55.584365+00:00: Coalent D64 PID4137372/exec35123 RUNNING 26/64,
+actual process verified. Frozen e4844f28, view-v4-d-coalent-v1/driver.json authoritative.
+No other model job or offline settlement while active; no automatic retry.
+Coalent B train pilot PID3980746 CLOSED16, all reviewed:2C1Q9W4F, material6complete10partial.
+29generationHTTP191457tokens;25embeddingHTTP7326tokens;7cachecalls3hits; final4 no calls.
+Whole CPU47.799688007, included in pending34 settlement49.599711637 across9phases.
+Pending33 and34 SETTLED ONCE. Current pending-offline-review-v35.json OPEN.
+Old D helper scripts write33 and pilot helpers write34: DO NOT RUN settled-ledger writers
+or rerun closed finalizers. New D-Coalent review helpers must target35 and original D sources.
+D10 all640 reviewed: fixed-context21C/material38/513678gen vs delivery21C/material33/588121+Laya.
+8 exposed groups, author review, no learned win or independent confirmation established.
+Current summary docs/HOST_INTENT_RETRIEVAL_STATUS_20261021.md and publication-snapshot-20261021.
+E3 actual retraining/E5 runs and budget points/STATE confirmation remain pending. No SHA,
+subagents, new services or new real ledger. Earlier chronological evidence follows.
+
 # LATEST D ALL TEN CLOSED / COALENT LIVE / PENDING34 — 2026-10-21
 
 Dparent3434203/exec69127 CLOSED; MP3763296 CLOSED64. All10arms640logicalpositions

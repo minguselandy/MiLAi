@@ -2386,3 +2386,25 @@ MemPursuit最终16C/15Q/19W/14F、材料36完整/27部分/1不足，B30三个标
 D续跑父3434203与末臂3763296均已实际退出，父进程CPU0.022849412秒单独加入。确认没有活动实验runner并取得原ledger的http-owner锁后，pending-v33共105个测得阶段一次结算530.21174533秒CPU，生成/embedding及请求计数不变；结算索引offline-review-settlement-v33。后续使用pending-v34，旧写pending33的helpers不得再运行，也不能重复finalize已经闭合的臂。
 
 Coalent v2已按冻结e4844f28计划实际启动，PID3980746/exec8106，输出view-v4-coalent-pilot-v2，计划16个训练侧位置。原计划、来源、参数和核心适配不变；launch-v2记录实际调度，driver.json为运行状态权威。该运行完成前不再启动模型作业或结算离线费用。D主表完成不代表整个v4完成：Coalent实测、E5补充流/预算工作点、选定E3与保留外部任务确认仍待完成。
+
+
+## 2026-10-21：Coalent 试跑闭合、D 补充对比与 GitHub 状态发布
+
+训练侧 Coalent v2 已完成 16 位置并全部评审：2C/1Q/9W/4F，材料 6 完整/10 部分。
+29 次生成 HTTP /191457tokens、25 次 embedding HTTP /7326tokens，各自 unknown 增量为 0。
+7 次缓存调用中 3 次命中；最后四个更新位置均未调用，不能评价其更新维护。
+实际 native claim pool 中的无依据说法与 Host 错误保留，来源绑定不升级为语义蕴含。
+整驱动 CPU47.799688007 秒包含在 pending34 的 9 阶段49.599711637秒一次结算中；
+PID3980746退出且持有原ledger所有权时完成，生成/embedding未重复记账。后续使用pending35。
+
+按原冻结e4844f28启动同一D8来源组/16流/64位置的Coalent补充比较，代码/方法参数不变，
+只改数据、输出身份及队列总额度。快照2026-10-21T06:15:55.584365+00:00为RUNNING 26/64，PID4137372已核实存活。
+来源评审和最终费用尚未闭合；准备manifest的FROZEN_NOT_DISPATCHED保留启动前历史，
+当前状态见publication-snapshot-20261021和实际launch/driver。无其他模型作业或离线结算。
+
+用户要求“总结当前实验情况，提交到github上”，本次整理10月21日状态报告，发布已有Lab
+研究代码与精简结果，不表示暂停、整个v4完成、main合并或产品发布。D10完整640位置的
+主要结论仍为尚无学习/复杂缓存明确优势；E3真实重训、E5工作点及外部保留确认仍未执行。
+详见[当前状态](HOST_INTENT_RETRIEVAL_STATUS_20261021.md)。旧失败、成本及历史状态均保留。
+
+发布校验：92个JSON解析、D十臂计数/费用、试跑分母、报告链接和Lab路径范围通过；现有HTTP环境下package/tools边界通过（tools保留既有11文件/20依赖/6 grandfathered private）。初次系统Python3.10导入StrEnum失败，切换已有环境后通过。整段旧提交的diff空白检查提示保留的STATE补丁context空行、v4原计划Markdown硬换行与EOF空行；不改原件。新发布改动的空白检查通过；全仓测试和远端CI未宣称执行。发布检查CPU未单独计时，仍为unknown，不结算活动模型期间的ledger。

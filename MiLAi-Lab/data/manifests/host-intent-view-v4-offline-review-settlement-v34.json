@@ -1,0 +1,15 @@
+{
+  "status": "SETTLED_ONCE_AT_VERIFIED_IDLE",
+  "ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+  "measurement_file": "artifacts/host-intent-retrieval-v3/data/pending-offline-review-v34.json",
+  "phases": 9,
+  "total_cpu_seconds": 49.599711637,
+  "generation_embedding_unchanged": true,
+  "closed_driver": "artifacts/host-intent-retrieval-v3/view-v4-coalent-pilot-v2/driver.json",
+  "verified_absent_pids": [
+    3980746
+  ],
+  "active_experiment_runners": [],
+  "scope": "Measured pending34 CPU including pilot child remainder and offline review/preparation. HTTP already billed. Nested wall not additive; manual/unmeasured work and settlement overhead unknown.",
+  "snapshots": "artifacts/host-intent-retrieval-v3/offline-review-settlement-v34"
+}

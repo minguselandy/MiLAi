@@ -1,0 +1,195 @@
+{
+  "status": "CLOSED_REAL_MODEL_PILOT_AUTHOR_REVIEWED",
+  "source_version": "e4844f28",
+  "split": "exposed_train",
+  "source_groups": 2,
+  "streams": 4,
+  "positions": 16,
+  "host_grades": {
+    "W": 9,
+    "F": 4,
+    "C": 2,
+    "Q": 1
+  },
+  "material": {
+    "partial": 10,
+    "complete": 6
+  },
+  "costs": {
+    "generation": {
+      "charged_tokens": 191457,
+      "known_tokens": 191457,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "charged_tokens": 7326,
+      "known_tokens": 7326,
+      "unknown_usage": 0
+    }
+  },
+  "generation_requests": 29,
+  "stages": {
+    "host_request": {
+      "requests": 7,
+      "known_tokens": 24474,
+      "http_wall_seconds": 41.29990923963487
+    },
+    "embedding": {
+      "requests": 25,
+      "known_tokens": 7326,
+      "http_wall_seconds": 1.3884206507354975
+    },
+    "coalent_synthesis": {
+      "requests": 6,
+      "known_tokens": 18025,
+      "http_wall_seconds": 32.873240302316844
+    },
+    "host_completion": {
+      "requests": 12,
+      "known_tokens": 95381,
+      "http_wall_seconds": 264.88194085657597
+    },
+    "host_incomplete": {
+      "requests": 4,
+      "known_tokens": 53577,
+      "http_wall_seconds": 221.30228555575013
+    }
+  },
+  "Host_requested_calls": 7,
+  "completed_returns": 7,
+  "empty_returns": 0,
+  "max_wire_tokens": 2038,
+  "cache_calls": 7,
+  "cache_hits": 3,
+  "cache_hit_positions": [
+    4,
+    5,
+    14
+  ],
+  "source_searches": 4,
+  "original_reopens": 5,
+  "final_arrivals": {
+    "positions": 4,
+    "host": {
+      "W": 3,
+      "F": 1
+    },
+    "Host_requested": 0
+  },
+  "whole_driver_cpu_seconds": 47.799688007,
+  "whole_driver_wall_seconds": 623.9146622978151,
+  "direct_compute_cpu_already_billed": 0.0,
+  "cpu_remainder_to_offline_ledger": 47.799688007,
+  "reviewer": "Current source-author review, not independent/blind or official scoring.",
+  "scope": "Real Qwen/BGE registered normal Host and native cache, not unmodified upstream reproduction. Two exposed B train groups only, not matched D64 or independent confirmation. Native coverage/cache_hit are mechanical outcomes, not semantic sufficiency labels.",
+  "mechanisms": "Cache hit within index4, cross-public-request original reopen5, and irrelevant-source-arrival reuse14 observed. Four final related-update positions generated no retrieval; old-binding/new-independent-source response therefore not tested there.",
+  "quality": "Raw1–10 B06 packaging omits11/13 direct reports; native claim pools contain unsupported party-size/class-attendance and one Lily-wife-Sara role error (not all delivered). Host often invents large-party exceptions despite raw sources. C26 raw evidence sufficient at initial/middle; Host pending-status/quote defects and output failures retained.",
+  "cost_note": "Generation/embedding tokens remain separate. Driver CPU includes local compute, which is subtracted before offline charge. Wall components overlap. Manual/unmeasured review overhead unknown.",
+  "protocol": "artifacts/host-intent-retrieval-v3/view-v4-coalent-author-review-v2/protocol.json",
+  "reviews": "artifacts/host-intent-retrieval-v3/view-v4-coalent-author-review-v2/coalent/final-review-v1.json",
+  "actual_calls": [
+    {
+      "index": 0,
+      "request": "initial",
+      "Host_requested": 1,
+      "completed_returns": 1
+    },
+    {
+      "index": 1,
+      "request": "same-sources",
+      "Host_requested": 0,
+      "completed_returns": 0
+    },
+    {
+      "index": 2,
+      "request": "middle-arrivals",
+      "Host_requested": 0,
+      "completed_returns": 0
+    },
+    {
+      "index": 3,
+      "request": "final-arrivals",
+      "Host_requested": 0,
+      "completed_returns": 0
+    },
+    {
+      "index": 4,
+      "request": "initial",
+      "Host_requested": 2,
+      "completed_returns": 2
+    },
+    {
+      "index": 5,
+      "request": "same-sources",
+      "Host_requested": 1,
+      "completed_returns": 1
+    },
+    {
+      "index": 6,
+      "request": "middle-arrivals",
+      "Host_requested": 0,
+      "completed_returns": 0
+    },
+    {
+      "index": 7,
+      "request": "final-arrivals",
+      "Host_requested": 0,
+      "completed_returns": 0
+    },
+    {
+      "index": 8,
+      "request": "initial",
+      "Host_requested": 1,
+      "completed_returns": 1
+    },
+    {
+      "index": 9,
+      "request": "same-sources",
+      "Host_requested": 0,
+      "completed_returns": 0
+    },
+    {
+      "index": 10,
+      "request": "middle-arrivals",
+      "Host_requested": 0,
+      "completed_returns": 0
+    },
+    {
+      "index": 11,
+      "request": "final-arrivals",
+      "Host_requested": 0,
+      "completed_returns": 0
+    },
+    {
+      "index": 12,
+      "request": "initial",
+      "Host_requested": 1,
+      "completed_returns": 1
+    },
+    {
+      "index": 13,
+      "request": "same-sources",
+      "Host_requested": 0,
+      "completed_returns": 0
+    },
+    {
+      "index": 14,
+      "request": "middle-arrivals",
+      "Host_requested": 1,
+      "completed_returns": 1
+    },
+    {
+      "index": 15,
+      "request": "final-arrivals",
+      "Host_requested": 0,
+      "completed_returns": 0
+    }
+  ],
+  "original_root": "artifacts/host-intent-retrieval-v3/view-v4-coalent-pilot-v2",
+  "model_outcomes_rewritten": false,
+  "compute": {
+    "wall_seconds": 0.07546594645828009,
+    "cpu_seconds": 0.075458266
+  },
+  "ledger_recorded": false
+}
