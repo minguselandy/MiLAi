@@ -20,6 +20,14 @@ from typing import Any
 from milai_lab.harness.artifact_io import read_json, read_jsonl, write_json
 from milai_lab.harness.contextual_artifacts import RunBudget, RunLimits
 from milai_lab.providers.laya_local import NativeDecision
+from retrieval_feedback import score_feedback
+
+
+def score_feedback_predictions(
+    rows: list[dict[str, Any]], predictions: list[dict[str, Any]],
+) -> dict[str, Any]:
+    """Both reviewed targets share one forward pass per actual state."""
+    return {target: score_feedback(rows, predictions, target) for target in ("answer", "delivery")}
 
 
 def score_applicability_predictions(
@@ -102,7 +110,8 @@ def main() -> None:
     parser.add_argument("--max-len", type=int, default=4096)
     parser.add_argument("--head-max-len", type=int, default=384)
     parser.add_argument("--task", choices=("bounded_reader", "memory_operation",
-                                           "instruction_applicability", "mixed_retrieval"),
+                                           "instruction_applicability", "mixed_retrieval",
+                                           "memory_feedback"),
                         default="bounded_reader")
     parser.add_argument("--operation-state", choices=(
                             "full", "mechanical", "shared", "shared_request_text"),
@@ -114,7 +123,7 @@ def main() -> None:
     torch.manual_seed(0)
     args.output.mkdir(parents=True, exist_ok=False)
     rows = read_jsonl(args.data)
-    if args.task == "memory_operation":
+    if args.task in {"memory_operation", "memory_feedback"}:
         from milai_lab.methods.laya_memory_policy import project_operation_payload
 
         rows = [project_operation_payload(row, args.operation_state) for row in rows]
@@ -155,6 +164,7 @@ def main() -> None:
 
         scorer = {"bounded_reader": score_predictions,
                   "memory_operation": score_operation_predictions,
+                  "memory_feedback": score_feedback_predictions,
                   "mixed_retrieval": score_mixed_predictions,
                   "instruction_applicability": score_applicability_predictions}[args.task]
         write_json(args.output / "results.json", scorer(rows, predictions))
@@ -175,6 +185,7 @@ def main() -> None:
             phase = args.compute_phase or {
                 "bounded_reader": "laya_reader_prefix",
                 "memory_operation": "laya_memory_operation_evaluation",
+                "memory_feedback": "laya_memory_feedback_evaluation",
                 "mixed_retrieval": "laya_mixed_retrieval_evaluation",
                 "instruction_applicability": "laya_candidate_applicability",
             }[args.task]

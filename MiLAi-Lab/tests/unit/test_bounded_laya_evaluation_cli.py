@@ -61,3 +61,38 @@ def test_operation_evaluator_projects_public_input_and_uses_operation_metrics(
     assert run["status"] == "COMPLETED" and run["completed_states"] == 1
     assert run["task"] == "memory_operation" and run["operation_state"] == projection
     assert json.loads(budget.read_text())["compute"]["test_exported_operations"]["forwards"] == 1
+
+
+def test_feedback_evaluator_uses_one_forward_for_both_targets(tmp_path, monkeypatch):
+    pytest.importorskip("torch")
+    row = {"state": {"task": {"retrieval_request": {"query": "actual request"}}},
+           "questions": {"next": {"type": "choice", "criteria": {"a": "READ", "b": "HANDOFF"}}},
+           "gold": {}, "metadata": {"family": "held-dev", "split": "dev"},
+           "feedback": {"comparisons": [{"left": "a", "right": "b",
+                                          "answer": "left", "delivery": "right"}]}}
+    data, budget, output = tmp_path / "feedback.jsonl", tmp_path / "budget.json", tmp_path / "run"
+    data.write_text(json.dumps(row) + "\n")
+    budget.write_text(json.dumps(RunBudget(RunLimits(), budget).state))
+    observed = []
+
+    class StubDecision:
+        def __init__(self, *args):
+            self.model = SimpleNamespace(
+                parameters=lambda: iter([SimpleNamespace(dtype="float32")]))
+            self.counters = {"forwards": 0, "sequence_rows": 0, "input_tokens": 0}
+
+        def predict(self, payload):
+            observed.append(payload)
+            self.counters.update(forwards=1, sequence_rows=1, input_tokens=10)
+            return {"choice": "a", "logits": {"a": 2., "b": 0.}, "input_tokens": 10}
+
+    monkeypatch.setattr(evaluate_bounded_laya, "NativeDecision", StubDecision)
+    monkeypatch.setattr(sys, "argv", ["evaluate", str(data), str(tmp_path / "checkpoint"),
+        str(output), "--budget", str(budget), "--task", "memory_feedback"])
+    evaluate_bounded_laya.main()
+    result = json.loads((output / "results.json").read_text())
+    assert result["answer"]["family_macro_state_pair_accuracy"] == 1
+    assert result["delivery"]["family_macro_state_pair_accuracy"] == 0
+    assert len(observed) == 1 and set(observed[0]) == {"state", "questions"}
+    compute = json.loads(budget.read_text())["compute"]["laya_memory_feedback_evaluation"]
+    assert compute["forwards"] == 1 and compute["input_tokens"] == 10
