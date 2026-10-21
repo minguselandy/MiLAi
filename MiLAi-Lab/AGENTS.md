@@ -1,4 +1,48 @@
-# LATEST V7: FIRST96 SOURCE/REQUEST LABELS CLOSED / FOURTH BATCH STILL LIVE
+# LATEST V8: ALL128 SOURCE POOLS REVIEWED / BATCH3 FIRST47 LABELLED / LIVE QUEUE
+
+FullgoalACTIVE. Previousgoalturn substantiveprogress:all128sourcefamilies/240pools reviewed;
+fourthbatch first47closedpositions request labels/audits. Notfullcompletion/notblocked.
+22:54:53Shanghai parent1131060/exec93727live,batch3child1798815live56/120(40completed16failed),
+whole416/480. First3batches terminal360. Revalidate/proc+driver. Queuefrozen890dbdd0unchanged.
+No restart/hotupdate/secondrealmodeljob/offline settlement whilelive. PausedCoalentuntouched.
+
+ALL128SOURCEFIRSTDONE,240pools(239x20paragraphs+1x19),exactindiceschecked. Sourcejudgments
+savedBEFORE correspondingnative/modeloutputs in fourbatch snapshots. Latest source-expansion-v1/
+source-review-progress-v66.json;complete sourceaudit+cases source-review-complete-v1.json.
+No nextsourcefamilyto review. Whole dispositions160insufficient37qualifiedsupport13qualifiedalt
+30supported. NativeTrue42insufficient37qualified12alt30supported;nativeFalse118insufficient1alt.
+Authorreviews,notindependenttruth/notreal-worldrefutations/notcorpuserrorrate. No native rewrite.
+Actualrequestreview remains; wholeQA sourceproofs must NOT be copied blindly to localqueries.
+
+Batch3first47closedpositions IMMUTABLE snapshot,46withdecisions,377states73requests13families.
+73requestreviews20complete33partial20none;compiler218labels159masked12labelledfamilies.
+178progress40sufficient;positiveSEARCH56READ156HANDOFF40(nonindependent),partialproofHANDOFF0.
+Family000089(1709capital)whollyunlabelled. Inputs/questions/bindingsequal;46resultpaths920
+sourceparagraphsliteralequal;sharedmax6290,all218<8K,no12288/head2048truncations,noforward/noGPU.
+Paths:source-expansion-batch-3-closed-047-{states,request-reviews,labelled}-v1 underartifactroot.
+Do NOT create/overwrite a misleading finalbatch3 directory until all120positionsclosed/annotated.
+
+Nextannotations: export new CLOSED snapshot;exclude IDs already in first47labelled train.jsonl
+and prefixes already in first47requests.json. Existing377states+73requests remainimmutable.
+Compile onlynewstates withallstates/successors of each complete actualretrievalcall;combineby
+event_id withliteralinputchecks. No recompile oldstates for timing. Requestcardindices localto
+their snapshot; event_prefix/source_row/literalrequest are stable join keys. Actualdriver may
+have newpositions already; do useful incrementalreview whilecollection runs,never fake terminal.
+
+Cumulativefirst3+part47:3189actualstates1792label1397masked106labelledfamilies/109represented,
+609reviewedrequests(180complete210partial219none),407positionsannotated. Sourcefamilyreview128
+does not mean128new labelledfamilies or full256train ready. All609explicitknownrefs empty=gap.
+Originalplan§6.1 allows reporting true sourcecount shortfall;never inflate with samefamily states.
+Finalmixture/stableIDs/researchfits/post-oprealmodelacceptance remain unperformed.
+
+audit_labelled_source_batch.py nowaccepts scope string3-closed-047,tokenizeronly. LabelCPU
+1.959982986 pending;separateprepare/auditCPU artifacts;manualreview/unmeasuredinspection unknown.
+No settlementwhilelive;v1/v2closedneverappend/re-settle;oldpending35untouched. Auxiliary128plan
+NOTDISPATCHED;post-op490c683efreeze awaitsactualacceptance. Fullnested524curves/parameters/
+auxiliarymatchedoperation/feedback/selfstates/STATE/factorial/E3/Host/external/seeds0,1,2remain.
+NoSHA/subagents/newservices/push/merge. Seeexecutiondoc/v8manifest. Earlier snapshots historical.
+
+# V7 HISTORY: FIRST96 SOURCE/REQUEST LABELS CLOSED / FOURTH BATCH STILL LIVE
 
 FullgoalACTIVE. Previousgoalturn substantiveprogress:third32family fullsource/request labels and
 realdataaudits. No blocker/completion. Revalidate/proc+driver before relying on thissnapshot.

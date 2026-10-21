@@ -1,0 +1,221 @@
+{
+  "status": "ACTIVE_ALL128_SOURCE_REVIEW_COMPLETE_FOURTH_BATCH_OPERATION_ANNOTATION_PARTIAL_COLLECTION_LIVE",
+  "prior_progress_commit": "f05192c0",
+  "implementation_commit": "aaa0885a",
+  "execution_document": "docs/TRAINING_GENERALIZATION_EXECUTION_20261021.md",
+  "source_review": {
+    "status": "PASS_ALL128_SOURCE_FAMILIES_AND240_ACTUAL_POOLS_REVIEWED",
+    "source_rows": 240,
+    "families": 128,
+    "paragraph_count_distribution": {
+      "20": 239,
+      "19": 1
+    },
+    "dispositions": {
+      "source_pool_insufficient": 160,
+      "supported_with_qualification": 37,
+      "qualified_alternative": 13,
+      "supported": 30
+    },
+    "cross_table": {
+      "native_True__source_pool_insufficient": 42,
+      "native_False__source_pool_insufficient": 118,
+      "native_True__supported_with_qualification": 37,
+      "native_True__qualified_alternative": 12,
+      "native_True__supported": 30,
+      "native_False__qualified_alternative": 1
+    },
+    "all_actual_paragraph_indices_accounted_for": true,
+    "no_missing_or_duplicate_source_rows": true,
+    "source_judgments_native_or_model_derived": false,
+    "independent_review": false,
+    "compute": {
+      "cpu_seconds": 0.028399458000000002,
+      "wall_seconds": 0.028399713337421417
+    },
+    "semantic_review_compute": "unmeasured",
+    "ledger_recorded": false
+  },
+  "source_review_progress": "artifacts/generalization-20261021/source-expansion-v1/source-review-progress-v66.json",
+  "source_review_complete": "artifacts/generalization-20261021/source-expansion-v1/source-review-complete-v1.json",
+  "source_review_is_not_full_goal_completion": true,
+  "partial_batch_scope": "First47closedpositions of batch3 only;do not claim all120 annotated",
+  "partial_batch_actual_requests": {
+    "requests": 73,
+    "partial": 33,
+    "none": 20,
+    "complete": 20
+  },
+  "partial_batch_operation_labels": {
+    "states": 377,
+    "reviewed_requests": 73,
+    "reviewed_states": 377,
+    "labelled": 218,
+    "reasons": {
+      "reviewed_missing_original_progress": 178,
+      "reviewed_partial_evidence_only_masked": 68,
+      "no_reviewed_source_proof_masked": 91,
+      "reviewed_originals_sufficient": 40
+    },
+    "families_labelled": 12,
+    "model_calls": 0,
+    "inputs_changed": false,
+    "states_source": "artifacts/generalization-20261021/source-expansion-batch-3-closed-047-states-v1/train.jsonl",
+    "reviews_source": "artifacts/generalization-20261021/source-expansion-batch-3-closed-047-request-reviews-v1/requests.json",
+    "compute": {
+      "wall_seconds": 1.9575557326897979,
+      "cpu_seconds": 1.959982986
+    },
+    "ledger_recorded": false
+  },
+  "partial_batch_input_and_mask_audit": {
+    "status": "PASS_ACTUAL_INPUT_BINDINGS_AND_PARTIAL_MASKS",
+    "states": 377,
+    "labelled": 218,
+    "families": 13,
+    "labelled_families": 12,
+    "families_without_labels": [
+      "musique-family-000089"
+    ],
+    "positive_action_occurrences": {
+      "SEARCH": 56,
+      "READ": 156,
+      "HANDOFF": 40
+    },
+    "partial_proof_handoff_labels": 0,
+    "inputs_questions_bindings_equal": true,
+    "native_reference_truth_not_used_for_labels": true,
+    "request_count": 73,
+    "requests_with_known_evidence_refs": 0,
+    "qualification": "Inherited static original-source CE preferences;not full legality,causal utility or Host success. All raw masks/failures retained.",
+    "compute": {
+      "cpu_seconds": 0.3607724999999995,
+      "wall_seconds": 0.3608510456979275
+    },
+    "ledger_recorded": false
+  },
+  "partial_batch_original_source_audit": {
+    "status": "PASS_LITERAL_ORIGINAL_SOURCE_MATCH",
+    "result_paths": 46,
+    "source_paragraph_comparisons": 920,
+    "hashes_used": false,
+    "compute": {
+      "cpu_seconds": 0.19155012299999985,
+      "wall_seconds": 0.19157935585826635
+    },
+    "ledger_recorded": false
+  },
+  "partial_batch_input_lengths": {
+    "status": "AUDITED_NOT_FITTED",
+    "states": 377,
+    "labelled_states": 218,
+    "operation_state": "shared",
+    "max_len": 12288,
+    "head_max_len": 2048,
+    "max_encoded_tokens": 6290,
+    "state_truncations": 0,
+    "head_truncations": 0,
+    "labelled_over_8192": 0,
+    "model_forwards": 0,
+    "gpu_used": false,
+    "compute": {
+      "wall_seconds": 8.425571360625327,
+      "cpu_seconds": 8.429847242000001
+    },
+    "ledger_recorded": false
+  },
+  "cumulative_new_source_supervision": {
+    "raw_states": 3189,
+    "labelled_states": 1792,
+    "masked_states": 1397,
+    "labelled_families": 106,
+    "represented_families": 109,
+    "reviewed_actual_requests": 609,
+    "actual_request_witnesses": {
+      "partial": 210,
+      "none": 219,
+      "complete": 180
+    },
+    "source_rows_reviewed": 240,
+    "completed_positions_annotated": 407,
+    "final_mixture_and_stable_ids_built": false
+  },
+  "collection": {
+    "observed_at": "2026-10-21T14:54:53.693872+00:00",
+    "exec_session": 93727,
+    "parent_pid": 1131060,
+    "parent_status": "RUNNING",
+    "parent_live": true,
+    "batches": [
+      {
+        "batch": "batch-0",
+        "status": "COMPLETED_WITH_FAILURES",
+        "pid": 1131065,
+        "live": false,
+        "closed_positions": 122,
+        "planned_positions": 122,
+        "program_statuses": {
+          "COMPLETED": 87,
+          "FAILED": 35
+        }
+      },
+      {
+        "batch": "batch-1",
+        "status": "COMPLETED_WITH_FAILURES",
+        "pid": 1381395,
+        "live": false,
+        "closed_positions": 116,
+        "planned_positions": 116,
+        "program_statuses": {
+          "FAILED": 30,
+          "COMPLETED": 86
+        }
+      },
+      {
+        "batch": "batch-2",
+        "status": "COMPLETED_WITH_FAILURES",
+        "pid": 1591077,
+        "live": false,
+        "closed_positions": 122,
+        "planned_positions": 122,
+        "program_statuses": {
+          "FAILED": 31,
+          "COMPLETED": 91
+        }
+      },
+      {
+        "batch": "batch-3",
+        "status": "RUNNING",
+        "pid": 1798815,
+        "live": true,
+        "closed_positions": 56,
+        "planned_positions": 120,
+        "program_statuses": {
+          "COMPLETED": 40,
+          "FAILED": 16
+        }
+      }
+    ],
+    "closed_positions": 416,
+    "planned_positions": 480,
+    "live_method_version": "890dbdd0"
+  },
+  "boundaries": {
+    "new_research_fits": 0,
+    "new_real_post_operation_checkpoint_branches": 0,
+    "static_preferences_not_host_success": true,
+    "all_failed_positions_and_masked_states_retained": true,
+    "explicit_known_refs_nonempty_requests": 0,
+    "closed_settlements_v1_v2_not_appended": true,
+    "new_offline_compute_pending_while_collection_live": true,
+    "semantic_review_and_unmeasured_inspection_cpu": "unmeasured,not zero",
+    "no_sha_verification": true,
+    "no_subagents": true,
+    "no_new_services": true,
+    "pushed": false,
+    "merged": false
+  },
+  "next_annotation": "Keep first47batch3 compiled states immutable. Export a later closed snapshot,filter already labelled event_ids and already reviewed event_prefixes;review only new requests,compile only new states with whole retrieval calls/successors;merge once by actual event_id with literal input checks. Do not regenerate closed labels for timing.",
+  "remaining": "Finish480positions and remaining73batch3positions actualrequest/witness labels;final nested-source datasets and524update curves/parameter controls;post-operation actual-model acceptance;auxiliary matched operation stage;feedback expansion,self-trajectories,STATE,factorial,E3,Host,protected external and seeds0/1/2.",
+  "goal_complete": false
+}
