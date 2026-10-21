@@ -1,3 +1,26 @@
+# LATEST COALENT RUNTIME / D — 2026-10-21
+
+Dparent2468544/exec65603 RUNNING; t1-control2941887 CLOSED64. Activecontinued-ce-seed0
+PID3059662 latest37/64, revalidate. First5/10armsclosed. No secondactualmodeljob.
+Controlcardsall64exported, onlyreviews0–7done. Next8–63; finalizerNOTRUN, no pending
+controlwholechildCPUyet. Genericfinalize_d_native_review_v1.py subtractsdirectnativecompute.
+Coalentregisteredruntime committedd3d5a229: baselines/coalent_memory.py +runnerfactory,
+normalfunctionalrunner andCLI--policiescoalent. Sourceversionnativepatchedcore onPYTHONPATH
+required; use stagedretrievalprofile, existingembeddingclient, originalledger andJSONaction.
+Wholeclaim/source admissionusescompletewire+outerenvelope, sharedread/queries/Hostgeneration
+quotas, originalref/snapshot/replayvisibility. Returnsmodelclaimswithunit-levelprovenance;
+original_source orupstreamescalation reopensrealSource ranges. Fullpublicrequest+actualknown
+receipts literalJSON isnativequeryprojection; compositeoperations aren'tfiniteactions.
+FiniteactionE2initial-observation/interventionexplicitlyunsupported, notsilentlyaccepted.
+Normalfunctional.message +Store+tool+Hostwire PASSwithmockHTTP:2Host+1synthesis=3shared
+generationadmissions/ledgerrequests, embeddingsseparate. Noactualmodels. v3normalHostPASS,
+v2other14relatedPASS,v4unsupported-replayPASS;Ruff/mypy5filesPASS. Initialbroad222passed
+plus1setupfailure retained. Testsunder view-v4-coalent-host-bridge-check-v1/v2/v3/v4.
+Manifesthost-intent-view-v4-coalent-host-runtime-v1; docs updated. Needactualmodelpilot and
+sourcegranularityaudit:one capturedSource/chunk,upstreammax3artifactbuilds/read. Noefficacy
+claim. Do NOT launchuntilDidle. No SHA/fingerprints/newservice/realledger/subagents.
+Pending32allnewtimedchecksappended, UNSETTLED; manualdebugCPUunknown. FullgoalACTIVE.
+
 # LATEST D / COALENT PORTS — 2026-10-21
 
 Dparent2468544/exec65603 RUNNING; T1main2818578 CLOSED64/64, nowcontrolseed0

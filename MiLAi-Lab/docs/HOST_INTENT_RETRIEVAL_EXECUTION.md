@@ -2213,3 +2213,18 @@ CoalentGenerationProvider把原上游LLMSynthesizer的提示、model/max_tokens/
 94次本地forward累计401840输入tokens，最大11000；逐实际结果核对无截断、无非有限logits/probabilities，forward与tokens均和账本本地计数相符。生成88HTTP、537603tokens，unknown增量0。整臂墙时1920.250695114秒、CPU134.067920167秒；其中模型加载／推理56.530148856秒已直接记账，只将差额77.537771311秒加入pending-v32，HTTP不重复计。
 
 索引data/manifests/host-intent-view-v4-d-t1-main-seed0-results-v1.json。原D父进程2468544/exec65603继续串行执行操作对照seed0，子进程2941887；前三简单臂和本臂共4臂关闭，其余6臂、完整来源组配对比较和E阶段确认仍未完成。
+
+
+## 2026-10-21：Coalent注册检索与正常Host机械链路
+
+d3d5a229增加CoalentRetrievalMemory，并接入原functional.message runner与--policies coalent。复用已有公共消息读配额、查询配额、持久snapshot、实际已交付ref、重放可见性检查和完整外层回执预算。模型解释逐条保留原claim文本及unit级来源绑定／元数据，超预算跳过整条，不截短；显式原文需求或上游原文回源按真实Source范围重新读取。解释的nodes只是共同回执载体，未补造图规则或认证claim级蕴含。
+
+上游查询输入为完整公开请求与实际解开的known receipts的字面JSON，明确属于rich-request适配；不加入隐藏题目／评分要求。缓存使用原pool路径与extractive提示，retries=0，生成max_tokens/temperature沿已有client，thinking使用原query_structure阶段设置。cache接口调用、真实源检索／原文重开计入公共读配额和操作上限；内部合成另计共享Host生成配额，复合操作数不伪装成有限动作数。原生有限动作E2的before/actions协议不能由此自动成立，明确拒绝该不支持的重放接口。
+
+正常functional.message测试已经用真实Store、注册工具和JSON-action桥接完成：Host先生成检索调用，Coalent收到真实来源、按原提示合成，回执及来源元数据出现在下一轮Host wire，Host完成最终回答。两次Host请求加一次合成均计入同一public-message generation admission，账本恰为3次；embedding另计。整个测试是模拟HTTP，没有调用实际模型服务。
+
+工具层检查覆盖跨实例复用、原文和旧ref、真实撤销、调用重放、共享配额、0步、完整嵌套回执预算、整claim选择、异常不重试、known-only预算和未交付ref。v2其余14项通过；正常Host测试修正source_locations断言后v3通过，新增不支持的有限动作重放检查v4通过；Ruff及5个实现／CLI文件mypy通过。较早大范围检查222通过、1测试配置失败也保留。调试修复了测试准备函数的native声明选项、Path参数和legacy自动上下文配置；未重跑或修补任何实际模型实验结果。测得费用在pending-v32，未计时调试开销unknown。
+
+当前Source-event粒度和上游每read最多3个artifact合成仍需在实际效果比较前审计，不能把这种输入粒度影响说成纯选择算法收益。真实Qwen/BGE试跑尚未执行，必须等待原D队列空闲。索引data/manifests/host-intent-view-v4-coalent-host-runtime-v1.json。
+
+D操作对照seed0已关闭64位置；已开始作者评审，目前0–7保存。A19末轮实际再次取证，但只交付旧Host对话与sources9–12，停在临时Priya阶段，漏掉后来的Karen恢复及号码；这是不完整新交付而非完全不调用。完整对照臂分数、CPU差额与跨臂比较尚未汇总。D已进入continued-CE，完整目标仍未完成。

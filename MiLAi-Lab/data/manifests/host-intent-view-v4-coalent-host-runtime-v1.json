@@ -1,0 +1,59 @@
+{
+  "status": "REGISTERED_TOOL_AND_NORMAL_HOST_MECHANICS_PASSED_ACTUAL_MODELS_NOT_RUN",
+  "source_version": "d3d5a229",
+  "research_core": "artifacts/host-intent-retrieval-v3/upstream/coalent-native-versions-v1",
+  "core_upstream_version": "7edc7ee2debb4e6bc8fecebf5275a57cb1c935e7",
+  "implementation": [
+    "src/milai_lab/baselines/coalent_memory.py",
+    "src/milai_lab/runners/coalent_memory.py",
+    "src/milai_lab/baselines/coalent_providers.py",
+    "src/milai_lab/runners/functional.py",
+    "tools/run_host_intent_retrieval.py"
+  ],
+  "runtime": {
+    "entrypoint": "Existing functional Host runner; retrieval_tool rich/query_only with memory_control.policy=coalent, embedding config and explicit patched core on PYTHONPATH. CLI --policies coalent. Use the staged retrieval profile.",
+    "query_projection": "Literal complete public request plus actual resolved known-evidence receipts. No hidden task labels/evaluator requirements. This is a declared rich-request adapter, not original query-only serialization.",
+    "cache": "Original native pool path, explicit existing metered embedder, original extractive LLMSynthesizer; retries0. Defaults synthesis max_tokens/temperature from original owned client, query_structure thinking stage override retained.",
+    "claims": "Literal selected claim text packed into the existing source-bound interpretation carrier; unit-level provenance and native metadata retained, no invented graph rules or claim-specific entailment certification.",
+    "originals": "Explicit original_source requirements or upstream raw escalation reopen actual Source ranges. Uses retained upstream probe evidence/selected units, then complete-package admission. Does not pretend rewritten claims are original quotations.",
+    "budget": "Counts complete common retrieval packet and any external envelope before admitting whole claims/sources; no textual truncation. Existing per-public-turn read allowance, source-query allowance, operation cap and Host generation admission reused.",
+    "operations": "Cache-interface call and actual source search/original reopen consume admitted operations. Upstream internal synthesis operations are composite and additionally consume shared Host generation quota; counts are not learned finite-action decisions.",
+    "refs": "Existing durable snapshot/ref format, actual delivered indices only, source visibility checked again on replay; unsupported finite-action E2 before/actions replay explicitly rejected.",
+    "cost": "All HTTP uses original clients/ledger, no rebilling. Offline measured checks remain pending-v32 until full D queue idle."
+  },
+  "validation": {
+    "registered_tool_tests": "Reuse after Store reconstruction, original requests, actual prior refs, visibility revocation, idempotent replay, shared allowance, zero steps, full outer envelope, whole-claim selection, failure preservation/no retries, known-only budget, undelivered-ref rejection.",
+    "normal_Host": "Actual functional.message runner + real Store + registered milai_retrieve + JSON-action bridge with scripted HTTP. First Host request has no source answer; retrieved source-bound claims and native attribution appear in subsequent Host wire; final answer completes.",
+    "generation_admission": "Two Host HTTP requests plus one upstream synthesis = three actual mock requests and three shared public-message generation admissions; mock embedding tokens recorded separately.",
+    "checks": {
+      "v1": {
+        "status": "FAILED",
+        "file": "artifacts/host-intent-retrieval-v3/view-v4-coalent-host-bridge-check-v1/result.json"
+      },
+      "v2": {
+        "status": "FAILED",
+        "file": "artifacts/host-intent-retrieval-v3/view-v4-coalent-host-bridge-check-v2/result.json"
+      },
+      "v3": {
+        "status": "PASS",
+        "file": "artifacts/host-intent-retrieval-v3/view-v4-coalent-host-bridge-check-v3/result.json"
+      },
+      "v4": {
+        "status": "PASS",
+        "file": "artifacts/host-intent-retrieval-v3/view-v4-coalent-host-bridge-check-v4/result.json"
+      }
+    },
+    "current_result": "v2 other14 relevant tests passed; corrected normal Host assertion passed v3; new unsupported finite-replay case passed v4. Ruff and mypy5 changed implementation/CLI files pass. Initial broader suite222 passed with one setup failure, retained.",
+    "debug_history": "Fixed fixture-only native-declaration settings, Path arguments and staged-vs-legacy context; native source metadata is exposed via source_locations, while source_bindings maps to returned-body aliases. Initial failed receipts/logs retained; no actual model reruns.",
+    "unmeasured": "Manual debugging/test invocations outside timers unknown, not zero."
+  },
+  "actual_model_calls": 0,
+  "actual_external_HTTP": 0,
+  "limitations": [
+    "Only scripted provider mechanics so far, no semantic accuracy or efficiency evidence.",
+    "Current chunk granularity is one immutable captured Source event. Upstream caps synthesis at three artifact builds per read; granularity and candidate exposure need explicit audit before efficacy attribution.",
+    "This is a native-version research adaptation with literal IDs and potentially changed equal-score tie ordering; not byte-identical upstream reproduction.",
+    "Native finite-action E2 intervention/initial-observation replay is not implemented for the composite pool method.",
+    "Actual Qwen/BGE pilot and matched evaluation must wait until the current D model queue closes."
+  ]
+}
