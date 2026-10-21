@@ -1,3 +1,112 @@
+# LATEST V18 (2026-10-22): CORRECTED PRIMARY LIVE / LEGACY AND STATE CLOSED
+
+Full goal ACTIVE, not complete/blocked/paused. CURRENT ONLY REAL MODEL JOB:
+exec17952, parent3470595, child3470601, source frozen d6a8afd3,
+artifacts/generalization-20261021/complete-actions-fit-v1/driver.json,
+fitting/source256-actions-full-seed0-u524-v1/run.json. Latest RUNNING0/524 (initial evaluation).
+Script run_complete_actions_fit_v1.py uses exact already declared complete-action-study-amendment-v1
+source256 plan: shared_actions,524updates/8384draws,0/32/64/128/262/393/524 eval,FP32/native,
+GPU2/3,micro2,gradcheckpoint,shuffle,seed0,encoder2.5e-5/head1e-4,12288/head2048,fixed masses.
+All raw data/labels/dev unchanged. It started ONLY after actual STATE+parent exit and readiness
+checks. No retry/hot update/second real model/offline settlement while live. Revalidate /proc,
+driver and run;observation timeout is not terminal. No further automatic successor after this fit.
+Corrected primary is needed for future current-policy collector. Legacy savedCPU evaluation
+remains PENDING, not cancelled. NEVER bind legacy262 or in-memory-only weights as that collector.
+
+CLOSED AND NEVER RESTART: legacy exec42364/PIDs2089181,2089186 ended0/COMPLETED524;
+STATE chain exec62733/PIDs3337827,3450346 ended0/COMPLETED36. Both actual process pairs absent.
+Source queue93727/all4children remain CLOSED480;pausedCoalent untouched. V17's waiting
+successor is no longer live. New parent3470595 is the active scheduler/fit owner.
+
+Legacy complete curve audited by frozen1df7669d in legacy-operation-curve-analysis-v1.
+Train macro at0/32/64/128/262/393/524:
+.247270/.694352/.737559/.863260/.941906/.964529/.973026.
+Dev macro:.337568/.671573/.733485/.763151/.773265/.760500/.758633.
+Dev accepted206/399/437/454/462/452/449 of616;244unknown retained. In-memory choice262,
+not deployment choice. Gap16.864pp at262,21.439pp at524. Late overfit pattern is single-seed
+legacy48-option-clipped input,not a matched source-size or Host/protected gain. Corrected
+recipes still run full declared524;do not prematurely truncate them to262.
+Posthoc descriptive262->524:36lost/23gained accepted states. Losses25READ->READ,
+10HANDOFF->READ,1READ->HANDOFF. UnacceptedHANDOFF32->19,so decline is not simply more
+premature handoffs. Labels are reviewed positive preferences,not certification of bad actions.
+Feedback16states/8families:answer11directionstates/21pairs,delivery16/39;macros initial
+.729167/.666667,at262 .375/.552083,terminal .3125/.510417. Do not use secondary feedback to
+reselect operation checkpoints. Legacy>8K dev only3labelled states/2families;not long-context proof.
+Allsix static baselines retained. Versusfixed_context selected-dev macro+23.414pp,conditional
+32family bootstrap[17.229,29.641]pp;all-plannedunknown bounds[-12.665,42.787]pp. Selection
+optimism and static-state scope explicit;not actual baseline rollout/Host superiority.
+Actual chart legacy-operation-curve-plots-v2/{curve.png,curve.svg};v1 retained,only colors fixed.
+legacy-operation-late-diagnostic-v1.json and legacy-operation-paired-baselines-v1 retain details.
+
+Legacy trainer has ALREADY billed one unique original-ledger phase:CPU35897.16973052,
+wall21341.97637613956,8384draws,42603019train tokens. Evaltrain34202/173792682tokens,
+dev6020/26818722,feedback112/373345. These are not pending or to rebill. Separate GPU-only
+kernel time not measured;whole-phase wall includes preparation/train/eval. ParentCPU.003280556
+separate pending. Actual checkpoints/optionorders/draws/predictions/counts/ledger verified.
+SavedCPU protocol from V17 stays unchanged;all candidates before binding,matching selectedtrain.
+
+STATEv2 actual36/36 COMPLETED,36generationrequests/191365known chargedtokens,
+0newunknown,0embedding;originalledger already records HTTP. DriverCPU40.012685504 pending,
+no new compute phases in its budget delta. Actual36query_structure delivered items and19
+original_source items;100closed captures=36initial+64postoperation. No Host answers/native
+STATE business actions/official score. All59originalsources/92typedchecks were reviewed FIRST.
+Full actual View/delivery semantic review remains PENDING. One shopping000 overview inspected:
+'detail retrieval ... five specific laptop models' wording needs checking against the four
+actual detailed laptop records;do not treat program status/ref bindings as semantic success.
+All6early-repeat requests literally equal overview,0new importedSTATEsources,but each adds
+1captured query Source and incurs1generation. No cache amortization observed in these probes;
+no causal attribution yet. Do not erase query sources to manufacture ideal repeats.
+Closure: state-view-acceptance-closure-v2.json. Raw outputs state-view-acceptance-v2.
+
+STATE E2 pool ALREADY prepared once using frozen074ee79e preparer:
+state-view-feedback-branches-v2,36states/108branches,6per source,seed0,20postoperation,
+no nominations/labels. All100captured states remain inventory;no partial-run selection.
+New branch outputs require first reviewing actual selected View/source states. DO NOT DISPATCH
+while correctedfit lives. Use existing run_frozen_retrieval_calls.py with NO --host-readout:
+givenrequests have no original autonomous Host frame. Compile with frozen2a179b58
+prepare_retrieval_feedback.py --split train --delivery-only;answer remainsunknown. This is
+separate from later v2 three-collector128source feedback pool.
+
+LME external bridge code350b8601;freeze frozen-lme-media-350b8601/MiLAi-Lab. Protocol tracked
+training-generalization-lme-media-bridge-v1.json. Full existing Small mechanical projection:
+451questions/200trajectories/5095states/5295Source units;every released field reconstructs
+exactly,original orderedhaystacks preserved. All5124images verified and decoded,RGB PNG,
+548713157bytes;5068x1280*720,46x1000*480,10x800*480.29questionimages retained. No real
+benchmark bodies displayed/semantically reviewed,no labels or model calls. Existing200Small
+histories have prior contact;not fresh holdout. No gold-source filtering or text-only subset.
+LmeMemoryBackend uses real existing given-request runner and closedtemplate Store copies
+per query;earlier question/answer excluded,model pool reused. Source images only accompany
+actual complete locator delivery,never unread offers/Viewnavigation. Laya remains TEXTUAL;
+queryimage explicitly retained for separate fixedReader,not encoded/captioned by controller.
+Native insert/query text-image contract implemented;fullofficial harness registration/persistence,
+fixedReader/scorer/original-ledger judge integration and all451real evaluations still pending.
+No actual full-corpus Store ingestion yet;real Store tests use synthetic cases.
+
+ImageHostCapacity is EXPLICIT,default HostCapacity unchanged. Native Qwen image-grid expansion,
+original text/tools/thinking/counting retained,visual overflow rejected before HTTP. HTTPenv4.57.6
+plus CUDAenvtorch2.7 and local ignored image-reader-pillow-overlay-v1 (cachedPillow12.3.0,
+156literal-file copies) works;no download/install/activeenv/service change. Run image tests using
+HTTPpython,add CUDA sitepackages,localoverlay and mainvenv sitepackages;CUDA_VISIBLE_DEVICES='',
+TOKENIZERS_PARALLELISM=false. use_fast=false imagecomponent explicit. Unusedvideo processor
+not constructed. Image-only native __call__ conformance tested;actual servervision/usage notyet.
+Three synthetic dimension probes880/465/375visualtokens are localgeometry,not corpusmodelusage.
+Audit scripts audit_lme_media_projection_v1.py,decode_lme_assets_v1.py,audit_image_capacity_v1.py.
+Actualgeometry/decode files under lme-small-media-projection-v1 and image-reader-capacity-preflight-v1.
+18unique tests PASS/0skip (8media+2snapshotUnicode+2realbackend+6imagecapacity/client),Ruff9,
+mypy5,package/tools boundaries PASS,6inheritedprivateedges unchanged. prepare_lme_small_snapshot
+now uses physical-line JSONL,not splitlines. Plot colorfix ae447f56 separately Ruff/visual checked.
+
+13 canonical new CPU phases total121.309363629 PENDING;exact paths in progress-20261022-v18.json.
+Imports/tests/dependencyexploration/overlaycopy/freeze/semanticreview/finalreport overhead unknown,
+notzero. Embedded copies NOT extra phases;current correctedparentCPU notfinalyet. No settlement
+while model lives. Closedsettlementsv1/v2/v3 NEVER append/re-settle;oldpending35/v11-v17 unchanged.
+Original ledger only /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json.
+No SHA or substitute fingerprint verification,no subagents/push/merge/services/Product
+schema/API/permissions/Canonical changes. Full scope remaining:all corrected nested/parameter/
+aux/E3 fits andsavedCPU incllegacy;STATEsemantic/E2/deliverylabels;factorialv2;feedbackv2
+threecollectors/labels/192fits/T2/common-support;actualstrongsimple/full/NoView/text autonomous
+Hostlifecycle/costs;fullprotected/external/seed0,1,2 familyconfirmation. Goal ACTIVE.
+
 # LATEST V17 (2026-10-22): LEGACY524 FINAL EVAL LIVE / ONE SERIAL SUCCESSOR
 
 Full goal ACTIVE, not complete/blocked/paused. Current training is still frozen490c683e

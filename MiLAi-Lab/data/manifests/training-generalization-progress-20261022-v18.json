@@ -1,0 +1,317 @@
+{
+  "status": "ACTIVE_GOAL_NOT_COMPLETE",
+  "observed_at": "2026-10-21T21:49:10.980622+00:00",
+  "previous": "training-generalization-progress-20261022-v17.json",
+  "previous_turn_classification": "PROGRESS: committed validated analysis/evaluation tools and serial successor; this turn independently revalidated all actual process transitions.",
+  "closed_legacy_fit": {
+    "session": 42364,
+    "parent_pid": 2089181,
+    "child_pid": 2089186,
+    "actual_pids_absent": true,
+    "status": "COMPLETED",
+    "updates": 524,
+    "source_version": "490c683e",
+    "representation": "legacy shared; native48option cap remains known limitation",
+    "analysis": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/legacy-operation-curve-analysis-v1/analysis.json",
+    "curve": [
+      {
+        "update": 0,
+        "train_macro": 0.2472701959344005,
+        "dev_macro": 0.33756768765750494,
+        "dev_accepted": 206,
+        "dev_labelled": 616,
+        "dev_masked": 244,
+        "train_dev_gap": -0.09029749172310444,
+        "dev_handoff_outside_reviewed_preference": 16,
+        "feedback_answer_macro": 0.7291666666666666,
+        "feedback_delivery_macro": 0.6666666666666665
+      },
+      {
+        "update": 32,
+        "train_macro": 0.6943516202561604,
+        "dev_macro": 0.6715726940523997,
+        "dev_accepted": 399,
+        "dev_labelled": 616,
+        "dev_masked": 244,
+        "train_dev_gap": 0.022778926203760652,
+        "dev_handoff_outside_reviewed_preference": 75,
+        "feedback_answer_macro": 0.3125,
+        "feedback_delivery_macro": 0.53125
+      },
+      {
+        "update": 64,
+        "train_macro": 0.7375590080934998,
+        "dev_macro": 0.7334850764351649,
+        "dev_accepted": 437,
+        "dev_labelled": 616,
+        "dev_masked": 244,
+        "train_dev_gap": 0.004073931658334917,
+        "dev_handoff_outside_reviewed_preference": 45,
+        "feedback_answer_macro": 0.3125,
+        "feedback_delivery_macro": 0.53125
+      },
+      {
+        "update": 128,
+        "train_macro": 0.8632599610866809,
+        "dev_macro": 0.7631508518976722,
+        "dev_accepted": 454,
+        "dev_labelled": 616,
+        "dev_masked": 244,
+        "train_dev_gap": 0.10010910918900873,
+        "dev_handoff_outside_reviewed_preference": 47,
+        "feedback_answer_macro": 0.3125,
+        "feedback_delivery_macro": 0.53125
+      },
+      {
+        "update": 262,
+        "train_macro": 0.9419061558967338,
+        "dev_macro": 0.7732654876193595,
+        "dev_accepted": 462,
+        "dev_labelled": 616,
+        "dev_masked": 244,
+        "train_dev_gap": 0.16864066827737423,
+        "dev_handoff_outside_reviewed_preference": 32,
+        "feedback_answer_macro": 0.375,
+        "feedback_delivery_macro": 0.5520833333333334
+      },
+      {
+        "update": 393,
+        "train_macro": 0.9645285813034826,
+        "dev_macro": 0.7605000341001297,
+        "dev_accepted": 452,
+        "dev_labelled": 616,
+        "dev_masked": 244,
+        "train_dev_gap": 0.20402854720335295,
+        "dev_handoff_outside_reviewed_preference": 31,
+        "feedback_answer_macro": 0.3125,
+        "feedback_delivery_macro": 0.5104166666666666
+      },
+      {
+        "update": 524,
+        "train_macro": 0.973026087572789,
+        "dev_macro": 0.758632835683784,
+        "dev_accepted": 449,
+        "dev_labelled": 616,
+        "dev_masked": 244,
+        "train_dev_gap": 0.21439325188900493,
+        "dev_handoff_outside_reviewed_preference": 19,
+        "feedback_answer_macro": 0.3125,
+        "feedback_delivery_macro": 0.5104166666666666
+      }
+    ],
+    "in_memory_selection": {
+      "update": 262,
+      "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/fitting/source256-full-seed0-u524-v1/checkpoints/update-262",
+      "metric": 0.7732654876193595,
+      "rule": "highest dev source-family macro acceptance,earliest tie,0eligible"
+    },
+    "deployment_selection": null,
+    "saved_cpu_evaluation": "Pending;no downstream binding from in-memory selection",
+    "training_draws_verified": 8384,
+    "training_tokens_verified": 42603019,
+    "evaluation_totals_verified": {
+      "train_rows": 34202,
+      "train_tokens": 173792682,
+      "dev_rows": 6020,
+      "dev_tokens": 26818722,
+      "feedback-dev_rows": 112,
+      "feedback-dev_tokens": 373345
+    },
+    "compute_already_recorded_once": {
+      "wall_seconds": 21341.97637613956,
+      "cpu_seconds": 35897.16973052,
+      "runs": 1,
+      "train_sequence_rows": 8384,
+      "train_input_tokens": 42603019,
+      "train_batch_forwards": 4192,
+      "train_device_forwards": 8384,
+      "train_batch_attempts": 4192,
+      "train_offered_rows": 8384,
+      "train_offered_tokens": 42603019,
+      "dev_forwards": 6020,
+      "dev_sequence_rows": 6020,
+      "dev_input_tokens": 26818722,
+      "dev_state_tokenizations": 6020,
+      "dev_state_tokens": 24437924,
+      "feedback-dev_forwards": 112,
+      "feedback-dev_sequence_rows": 112,
+      "feedback-dev_input_tokens": 373345,
+      "feedback-dev_state_tokenizations": 112,
+      "feedback-dev_state_tokens": 330771,
+      "train_eval_forwards": 34202,
+      "train_eval_sequence_rows": 34202,
+      "train_eval_input_tokens": 173792682,
+      "train_eval_state_tokenizations": 34202,
+      "train_eval_state_tokens": 159123118,
+      "train_component_complementary_evidence_rows": 5803,
+      "train_component_operation_history_rows": 2581,
+      "train_component_complementary_evidence_input_tokens": 29953226,
+      "train_component_operation_history_input_tokens": 12649793,
+      "peak_rss_kib": 8263852,
+      "peak_cuda_allocated_bytes": [
+        7835987968,
+        3525555712
+      ],
+      "ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json"
+    },
+    "unique_ledger_phase_equal": true,
+    "GPU_only_kernel_time": "Not independently measured;whole-phase wall includes preparation/training/evaluation,not isolated GPU time",
+    "plot": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/legacy-operation-curve-plots-v2/curve.png",
+    "plot_svg": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/legacy-operation-curve-plots-v2/curve.svg",
+    "baseline_comparisons": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/legacy-operation-paired-baselines-v1/comparisons.json",
+    "late_diagnostic": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/legacy-operation-late-diagnostic-v1.json",
+    "interpretation": "Train continues rising while observed dev falls after selected262,consistent with late overfitting in this legacy condition.13netaccepted-state loss at524:36lost/23gained;25losses areREAD->READ and10HANDOFF->READ. Not explained simply by more early handoffs. Selection-conditioned descriptive evidence,not causal/population/Host generalization proof.",
+    "limitations": "Single seed,oldclippedrepresentation,authorstaticpreferences.Only3labelleddev states>8192. Unknown244notnegative. Baseline bootstrap32families on same selected dev is conditional with selection optimism;all-plannedbounds remain wide. No source-size gain claim before matched correctedcohorts."
+  },
+  "closed_STATE": {
+    "session": 62733,
+    "parent_pid": 3337827,
+    "child_pid": 3450346,
+    "actual_pids_absent": true,
+    "source_version": "074ee79e",
+    "status": "COMPLETED",
+    "program_positions": 36,
+    "program_failures": 0,
+    "generation_requests": 36,
+    "ledger_deltas": {
+      "generation": {
+        "charged_tokens": 191365,
+        "known_tokens": 191365,
+        "unknown_usage": 0
+      },
+      "embedding": {
+        "charged_tokens": 0,
+        "known_tokens": 0,
+        "unknown_usage": 0
+      }
+    },
+    "capture_count": 100,
+    "initial_captures": 36,
+    "post_operation_captures": 64,
+    "packet_evidence_kind_counts": {
+      "query_structure": 36,
+      "original_source": 19
+    },
+    "closure_audit": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-view-acceptance-closure-v2.json",
+    "source_first_review": "All59originalsources/92typedchecks reviewed before new outputs,unchanged v1source review reused",
+    "repeat_diagnostic": "All6earlyrepeat requests literally equal their overview request,0new importedSTATEsources,but+1capturedStoreSource and1newgeneration call each. No amortized generation saving observed for this diagnostic;no causal claim yet.",
+    "semantic_review": "Pending full actualView/deliveryreview. ProgramCOMPLETED andboundrefsnotsemanticcorrectness. Oneviewexamined flaggeddetail-count wording forsourceverification;nonewlabels.",
+    "native_task_or_Host_score": false,
+    "branch_preparation": {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-view-feedback-branches-v2",
+      "status": "PREPARED_NOT_EXECUTED",
+      "states": 36,
+      "branches": 108,
+      "per_group": 6,
+      "nominations": 0,
+      "seed": 0,
+      "continuation_steps": 2,
+      "selected_post_operation": 20,
+      "labels_added": false,
+      "host_readout": false,
+      "compiler": "frozen-feedback-expansion-2a179b58 tools/prepare_retrieval_feedback.py --split train --delivery-only afteractualbranchesandsemanticreview"
+    }
+  },
+  "active_corrected_fit": {
+    "session": 17952,
+    "parent_pid": 3470595,
+    "child_pid": 3470601,
+    "parent_alive": true,
+    "child_alive": true,
+    "status": "RUNNING",
+    "updates": 0,
+    "planned_updates": 524,
+    "source_version": "d6a8afd3",
+    "run_id": "source256-actions-full-seed0-u524-v1",
+    "output": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/fitting/source256-actions-full-seed0-u524-v1",
+    "driver": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/complete-actions-fit-v1/driver.json",
+    "representation": "shared_actions; complete exactofferedactiontable inState,shortID/kindoptionheads",
+    "plan": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/complete-action-study-amendment-v1.json",
+    "parameters": "Existingdeclared524/8384draws,all7checkpoints,FP32,native,micro2,encoder2.5e-5/head1e-4,seed0,gradcheckpoint,shuffle,12288/head2048,.75history/.25complement masses unchanged",
+    "prior_ready_checks": "Full literal actionbindings,state/head/intrinsicoption zero drops,all4886/616labels accepted,E3equalinformation. Actualreportsre-readbeforelaunch.",
+    "ordering": "AfterlegacyandSTATEactualprocess closure,not parallel. Correctedprimary providesfuture current-policy collectorcheckpoint;legacysavedCPUevaluationremainsrequired/pending. Allotherfits/feedback/factorial/E2/externalmodeljobsnotstartedwhilelive.",
+    "automatic_retry": false
+  },
+  "external_bridge": {
+    "source_version": "350b8601",
+    "manifest": "training-generalization-lme-media-bridge-v1.json",
+    "questions": 451,
+    "trajectories": 200,
+    "states": 5095,
+    "source_rows": 5295,
+    "decoded_images": 5124,
+    "tests_unique_passed": 18,
+    "skipped": 0,
+    "ruff_files": 9,
+    "mypy_files": 5,
+    "package_and_tools_boundaries": "PASS;6inheritedprivateedgesunchanged",
+    "full_model_evaluation": false,
+    "next": "Meteredservervision/usagepreflight,separatefixedReader/scorerpath,fullcorpusStoreingestion andreal451regression underfrozenmethods. Do not use questionimagesoranswers fortraining;queryimageheldforReader,notLaya.",
+    "no_current_environment_or_service_changes": true
+  },
+  "new_measured_cpu_pending": {
+    "phases": [
+      {
+        "measurement_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lme-small-media-projection-v1/audit.json",
+        "cpu_seconds": 4.907140737
+      },
+      {
+        "measurement_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lme-small-media-projection-v1/image-decoding-v1.json",
+        "cpu_seconds": 47.397397280999996
+      },
+      {
+        "measurement_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/image-reader-capacity-preflight-v1.json",
+        "cpu_seconds": 7.357958726000001
+      },
+      {
+        "measurement_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/first-operation-fit-v1/driver.json",
+        "cpu_seconds": 0.003280556000000004
+      },
+      {
+        "measurement_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/legacy-operation-curve-analysis-v1/analysis.json",
+        "cpu_seconds": 9.279735039
+      },
+      {
+        "measurement_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/legacy-operation-paired-baselines-v1/comparisons.json",
+        "cpu_seconds": 2.423479934
+      },
+      {
+        "measurement_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/legacy-operation-curve-plots-v1/plot.json",
+        "cpu_seconds": 4.4696244279999995
+      },
+      {
+        "measurement_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/legacy-operation-curve-plots-v2/plot.json",
+        "cpu_seconds": 4.613506991
+      },
+      {
+        "measurement_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/after-legacy-fit-v1/driver.json",
+        "cpu_seconds": 0.105343078
+      },
+      {
+        "measurement_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-view-acceptance-v2/driver.json",
+        "cpu_seconds": 40.012685504
+      },
+      {
+        "measurement_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-view-feedback-branches-v2/selection.json",
+        "cpu_seconds": 0.128499036
+      },
+      {
+        "measurement_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-view-acceptance-closure-v2.json",
+        "cpu_seconds": 0.23594394400000002
+      },
+      {
+        "measurement_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/legacy-operation-late-diagnostic-v1.json",
+        "cpu_seconds": 0.37476837500000004
+      }
+    ],
+    "total_cpu_seconds": 121.30936362899998,
+    "scope": "Canonicalfilesonly. Embeddedcopiesarenotnewphases. CurrentcorrectedparentCPU notfinalyet. Legacytrainercomputealreadybilled,notpending. Imports,tests,unmeasureddependencyexploration/overlaycopy/freeze/semanticreview/reportingunknown,notzero."
+  },
+  "closed_settlements": "v1/v2/v3neverappend/re-settle;oldpending35 andv11-v17pendingunchanged. No offline settlement whilecorrectedfitlives.",
+  "new_real_model_jobs_started": 2,
+  "remaining": "Correctednested/parameter/aux/E3fits andsavedCPUcandidateevaluation incllegacy;STATEViewsemantics/108E2branches/deliverylabels;factorialv2;feedbackv2current/rules/fixedcontextcollection/labels/nested192fits/T2/common-support;autonomousHoststrongsimple/full/noView/textlifecycleandcosts;fullprotected/external/seed0,1,2 confirmation. FullgoalACTIVE.",
+  "no_sha_validation": true,
+  "no_subagents": true,
+  "no_push_merge_services_or_Product_schema_API_permission_Canonical_change": true,
+  "no_Host_or_protected_generalization_gain_claimed": true
+}
