@@ -1,4 +1,43 @@
-# LATEST V6: FIRST64 SOURCE/REQUEST LABELS CLOSED / FOURTH BATCH LIVE
+# LATEST V7: FIRST96 SOURCE/REQUEST LABELS CLOSED / FOURTH BATCH STILL LIVE
+
+FullgoalACTIVE. Previousgoalturn substantiveprogress:third32family fullsource/request labels and
+realdataaudits. No blocker/completion. Revalidate/proc+driver before relying on thissnapshot.
+22:41:11Shanghai parent1131060/exec93727live;batch3child1798815live35/120;whole395/480.
+Batch0closed122(87completed35failed),batch1closed116(86completed30failed),batch2closed122
+(91completed31failed). Queuefrozen890dbdd0 unchanged. No restart/hotupdate/secondmodeljob/
+offline settlement whilelive. OriginalpausedCoalent untouched. Counts only forunreviewedoutputs.
+
+Sourcefirst96families/180pools closed. Latest source-expansion-v1/source-review-progress-v49.json
+underartifacts/generalization-20261021. Nextsourcefamilyindex96,count32(60pools). Eachfullpool
+savedBEFORE correspondingnative/modeloutputs. Thirdbatch61pools:43insufficient7supported
+9qualifiedsupport2qualifiedalternative. NativeTrue13insufficient7supported9qualified2alternative;
+nativeFalse30insufficient. Authorjudgments,notindependenttruth/notcorpuserrorrate. No native rewrite.
+Onepoolrow27321has19paragraphs,others20;review/helpercontractsuse actualparagraphindices/count.
+Use show_new_source_pools.py96 COUNT progress-v49.json; re-readtruncations beforemarkingreviewed.
+save_source_review.py accepts explicitly authoredJSONstdin and createsnextprogress; noauto labels.
+
+Thirdbatch all181actualrequests manuallyreviewed:56complete63partial62none. Additionaloverall
+draftpick unavailable despite knownround/year/team; SQL conditionalnamesakequery allows premise
+correction; localbirthplace/county query canfinish without fullQAneighborhop. No goldteacheractions.
+Compilerunchanged:957states544labels413masked32labelledfamilies,439progress105sufficient.
+PositiveSEARCH127READ401HANDOFF105(nonindependent);partialproofHANDOFF0.957actualinput/question/
+bindingsequal;119resultpaths2378originalparagraphsliteralequal;sharedmax6637,all544<8K,no12288/
+head2048truncations,noforward/noGPU. Thirdbatch artifacts source-expansion-batch-2-{states,
+request-reviews,labelled}-v1. Cumulative2812raw1574label1238masked94labelledfamilies/96registered,
+536actualrequests. All536explicitknownrefs empty inboth task_context/read_goal=coveragegap.
+Threebatchfamilysetsdisjoint,all2812actualeventIDsunique;finalmixture/stableIDs/fits notcreated.
+StaticCEpreferences notfulllegality/causalactionutility/Hostsuccess. Sourceformhintsnotliveproof.
+
+Reusable ignored audit_labelled_source_batch.py BATCH performs literalinputs/sourcecompares and
+native sharedinputtokenization only. RunCUDA_VISIBLE_DEVICES='' PYTHONPATH=src:tools viaexisting
+cuda-env if neededfornewbatch; do NOT rerunclosedbatchfornewtiming. NewlabelcompileCPU4.346326384
+andotherseparatephaseCPU pending;semanticreview/unmeasuredinspection unknown. No offlinesettlement
+whilequeue lives; closedv1/v2neverappend/re-settle; oldpending35untouched. Noimplementationchange
+thisturn, no unnecessarytests. Auxiliary128plan remainsNOTDISPATCHED. Post-op490c683efreeze
+awaitsactualmodelacceptance. Fullnested524curves/controls/feedback/selfstates/STATE/factorial/E3/
+Host/external/seeds0,1,2remain. NoSHA/subagents/newservices/push/merge. Seeexecutiondoc/v7manifest.
+
+# V6 HISTORY: FIRST64 SOURCE/REQUEST LABELS CLOSED / FOURTH BATCH LIVE
 
 Full goal ACTIVE. Previous turn is progress, not blocked or complete. Revalidate live processes.
 22:26:53Shanghai snapshot parent1131060/exec93727live, batch3 child1798815live9/120.
