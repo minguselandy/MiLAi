@@ -1,0 +1,662 @@
+{
+  "status": "ACTIVE_NOT_COMPLETE;PRIMARY_LEGACY_FIT_LIVE",
+  "recorded_at": "2026-10-22T01:27:03.626527+08:00",
+  "implementation": "d6a8afd3",
+  "active_model_job": {
+    "exec_session": 42364,
+    "driver": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/first-operation-fit-v1/driver.json",
+    "output": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/fitting/source256-full-seed0-u524-v1",
+    "status": "RUNNING",
+    "optimizer_updates": 64,
+    "planned_optimizer_updates": 524,
+    "process_states": {
+      "2089181": "State:\tS (sleeping)",
+      "2089186": "State:\tR (running)"
+    },
+    "frozen_source": "490c683e",
+    "disposition": "Continue unchanged as legacy representation control"
+  },
+  "recorded_state_baselines": {
+    "train": {
+      "fixed": {
+        "counts": {
+          "labelled": 4886,
+          "accepted": 2376,
+          "masked": 2998,
+          "handoff_outside_reviewed_preference": 135
+        },
+        "families": 249,
+        "family_macro_acceptance": 0.4933725650417358
+      },
+      "fixed_context": {
+        "counts": {
+          "labelled": 4886,
+          "accepted": 2448,
+          "masked": 2998,
+          "handoff_outside_reviewed_preference": 134
+        },
+        "families": 249,
+        "family_macro_acceptance": 0.5059492050827602
+      },
+      "rules": {
+        "counts": {
+          "labelled": 4886,
+          "accepted": 2080,
+          "masked": 2998,
+          "handoff_outside_reviewed_preference": 6
+        },
+        "families": 249,
+        "family_macro_acceptance": 0.43391588191411096
+      },
+      "view_cache": {
+        "counts": {
+          "labelled": 4886,
+          "accepted": 19,
+          "masked": 2998,
+          "handoff_outside_reviewed_preference": 5
+        },
+        "families": 249,
+        "family_macro_acceptance": 0.0025422197185336697
+      },
+      "first_offered": {
+        "counts": {
+          "labelled": 4886,
+          "accepted": 2069,
+          "masked": 2998
+        },
+        "families": 249,
+        "family_macro_acceptance": 0.43597178700607764
+      },
+      "handoff": {
+        "counts": {
+          "labelled": 4886,
+          "accepted": 891,
+          "handoff_outside_reviewed_preference": 3995,
+          "masked": 2998
+        },
+        "families": 249,
+        "family_macro_acceptance": 0.17034530475272638
+      }
+    },
+    "dev": {
+      "fixed": {
+        "counts": {
+          "labelled": 616,
+          "accepted": 311,
+          "masked": 244,
+          "handoff_outside_reviewed_preference": 16
+        },
+        "families": 32,
+        "family_macro_acceptance": 0.5161754523527704
+      },
+      "fixed_context": {
+        "counts": {
+          "labelled": 616,
+          "accepted": 328,
+          "masked": 244,
+          "handoff_outside_reviewed_preference": 16
+        },
+        "families": 32,
+        "family_macro_acceptance": 0.5391283280298309
+      },
+      "rules": {
+        "counts": {
+          "labelled": 616,
+          "accepted": 257,
+          "masked": 244
+        },
+        "families": 32,
+        "family_macro_acceptance": 0.4331968991040076
+      },
+      "view_cache": {
+        "counts": {
+          "labelled": 616,
+          "accepted": 5,
+          "masked": 244
+        },
+        "families": 32,
+        "family_macro_acceptance": 0.007079414838035527
+      },
+      "first_offered": {
+        "counts": {
+          "labelled": 616,
+          "accepted": 257,
+          "masked": 244
+        },
+        "families": 32,
+        "family_macro_acceptance": 0.43322434668193777
+      },
+      "handoff": {
+        "counts": {
+          "labelled": 616,
+          "accepted": 122,
+          "handoff_outside_reviewed_preference": 494,
+          "masked": 244
+        },
+        "families": 32,
+        "family_macro_acceptance": 0.18199834245974436
+      }
+    }
+  },
+  "baseline_scope": "Six prespecified one-step policies on recorded reached states,not rollouts. Static original-source preference does not certify legality or View utility.",
+  "legacy_witness_positions": {
+    "train": {
+      "rows": 7884,
+      "labelled": 4886,
+      "position_buckets": {
+        "fourth_quarter": 3486,
+        "no_original_witness_contract": 2017,
+        "third_quarter": 1025,
+        "unavailable_or_incomplete": 638,
+        "second_quarter": 625,
+        "first_quarter": 93
+      },
+      "labelled_position_buckets": {
+        "fourth_quarter": 2586,
+        "no_original_witness_contract": 142,
+        "third_quarter": 977,
+        "unavailable_or_incomplete": 490,
+        "second_quarter": 601,
+        "first_quarter": 90
+      },
+      "length_buckets": {
+        "<=8192": 7852,
+        ">8192": 32
+      },
+      "candidate_buckets": {
+        "0": 1473,
+        "1-8": 1847,
+        "9-16": 4561,
+        "17+": 3
+      },
+      "witness_contracts": {
+        "present": 5867,
+        "absent": 223,
+        "empty": 1794
+      }
+    },
+    "dev": {
+      "rows": 860,
+      "labelled": 616,
+      "position_buckets": {
+        "fourth_quarter": 484,
+        "third_quarter": 123,
+        "unavailable_or_incomplete": 65,
+        "second_quarter": 48,
+        "no_original_witness_contract": 131,
+        "first_quarter": 9
+      },
+      "labelled_position_buckets": {
+        "fourth_quarter": 381,
+        "unavailable_or_incomplete": 49,
+        "third_quarter": 119,
+        "second_quarter": 48,
+        "no_original_witness_contract": 10,
+        "first_quarter": 9
+      },
+      "length_buckets": {
+        "<=8192": 849,
+        ">8192": 11
+      },
+      "candidate_buckets": {
+        "0": 170,
+        "1-8": 300,
+        "9-16": 390
+      },
+      "witness_contracts": {
+        "present": 729,
+        "absent": 14,
+        "empty": 117
+      }
+    }
+  },
+  "legacy_native_crosscheck": {
+    "status": "PASS_LITERAL_ORDER_AND_NATIVE_LENGTH_CROSSCHECK",
+    "splits": {
+      "train": {
+        "native_lengths_and_order_equal": 7884,
+        "sdk_mask_replacements": 0,
+        "identity_diagnostics": {},
+        "labelled_length_buckets": {
+          "<=8192": 4881,
+          ">8192": 5
+        },
+        "proof_complete_by_position": {
+          "True": {
+            "fourth_quarter": 2367,
+            "third_quarter": 543,
+            "unavailable_or_incomplete": 630,
+            "second_quarter": 311,
+            "first_quarter": 58
+          },
+          "False": {
+            "fourth_quarter": 1119,
+            "unavailable_or_incomplete": 8,
+            "third_quarter": 482,
+            "no_original_witness_contract": 1794,
+            "second_quarter": 314,
+            "first_quarter": 35
+          },
+          "None": {
+            "no_original_witness_contract": 223
+          }
+        }
+      },
+      "dev": {
+        "native_lengths_and_order_equal": 860,
+        "sdk_mask_replacements": 0,
+        "identity_diagnostics": {},
+        "labelled_length_buckets": {
+          "<=8192": 613,
+          ">8192": 3
+        },
+        "proof_complete_by_position": {
+          "True": {
+            "fourth_quarter": 411,
+            "third_quarter": 89,
+            "unavailable_or_incomplete": 64,
+            "second_quarter": 36,
+            "first_quarter": 6
+          },
+          "False": {
+            "no_original_witness_contract": 117,
+            "second_quarter": 12,
+            "fourth_quarter": 73,
+            "unavailable_or_incomplete": 1,
+            "third_quarter": 34,
+            "first_quarter": 3
+          },
+          "None": {
+            "no_original_witness_contract": 14
+          }
+        }
+      }
+    },
+    "model_calls": 0,
+    "ledger_recorded": false,
+    "compute": {
+      "cpu_seconds": 0.198785822,
+      "wall_seconds": 0.19881497789174318
+    },
+    "scope": "Identity diagnostics count observed content records,not independent sources or witness failures;whole-source positions do not certify provenance or minimal semantic spans."
+  },
+  "intrinsic_option_clipping": {
+    "train": {
+      "rows": 7884,
+      "rows_with_capped_options": 7717,
+      "labelled_rows_with_capped_options": 4868,
+      "rows_with_complete_action_table": 0,
+      "rows_capped_without_action_table": 7717,
+      "capped_options_by_kind": {
+        "SEARCH": 957,
+        "REFRESH_VIEW": 7701
+      },
+      "option_token_drops": 2865744,
+      "head_option_collision_rows": 0
+    },
+    "dev": {
+      "rows": 860,
+      "rows_with_capped_options": 810,
+      "labelled_rows_with_capped_options": 611,
+      "rows_with_complete_action_table": 0,
+      "rows_capped_without_action_table": 810,
+      "capped_options_by_kind": {
+        "SEARCH": 106,
+        "REFRESH_VIEW": 810
+      },
+      "option_token_drops": 236547,
+      "head_option_collision_rows": 0
+    },
+    "feedback-dev": {
+      "rows": 16,
+      "rows_with_capped_options": 0,
+      "labelled_rows_with_capped_options": 0,
+      "rows_with_complete_action_table": 16,
+      "rows_capped_without_action_table": 0,
+      "capped_options_by_kind": {},
+      "option_token_drops": 0,
+      "head_option_collision_rows": 0
+    }
+  },
+  "complete_action_encoding": {
+    "train": {
+      "rows": 7884,
+      "rows_with_capped_options": 0,
+      "labelled_rows_with_capped_options": 0,
+      "rows_with_complete_action_table": 7884,
+      "rows_capped_without_action_table": 0,
+      "capped_options_by_kind": {},
+      "option_token_drops": 0,
+      "native_state_truncated_rows": 0,
+      "native_head_truncated_rows": 0,
+      "max_sequence_tokens": 10237,
+      "sequence_tokens": 45838344,
+      "sdk_mask_replacements": 0,
+      "head_option_collision_rows": 0
+    },
+    "dev": {
+      "rows": 860,
+      "rows_with_capped_options": 0,
+      "labelled_rows_with_capped_options": 0,
+      "rows_with_complete_action_table": 860,
+      "rows_capped_without_action_table": 0,
+      "capped_options_by_kind": {},
+      "option_token_drops": 0,
+      "native_state_truncated_rows": 0,
+      "native_head_truncated_rows": 0,
+      "max_sequence_tokens": 9905,
+      "sequence_tokens": 4260933,
+      "sdk_mask_replacements": 0,
+      "head_option_collision_rows": 0
+    },
+    "feedback-dev": {
+      "rows": 16,
+      "rows_with_capped_options": 0,
+      "labelled_rows_with_capped_options": 0,
+      "rows_with_complete_action_table": 16,
+      "rows_capped_without_action_table": 0,
+      "capped_options_by_kind": {},
+      "option_token_drops": 0,
+      "native_state_truncated_rows": 0,
+      "native_head_truncated_rows": 0,
+      "max_sequence_tokens": 7795,
+      "sequence_tokens": 53879,
+      "sdk_mask_replacements": 0,
+      "head_option_collision_rows": 0
+    }
+  },
+  "complete_action_request_text": {
+    "train": {
+      "rows": 7884,
+      "literal_task_reconstructions_equal": 7884,
+      "observations_questions_gold_metadata_equal": 7884,
+      "labelled": 4886,
+      "sdk_items": 4886,
+      "sdk_skipped": {},
+      "max_sequence_tokens": 10268,
+      "sequence_tokens": 46629954,
+      "truncated": 0,
+      "component_rows": {
+        "operation_history": 1955,
+        "complementary_evidence": 5929
+      }
+    },
+    "dev": {
+      "rows": 860,
+      "literal_task_reconstructions_equal": 860,
+      "observations_questions_gold_metadata_equal": 860,
+      "labelled": 616,
+      "sdk_items": 616,
+      "sdk_skipped": {},
+      "max_sequence_tokens": 10251,
+      "sequence_tokens": 4356943,
+      "truncated": 0,
+      "component_rows": {
+        "operation_history": 386,
+        "complementary_evidence": 474
+      }
+    }
+  },
+  "complete_action_readiness": {
+    "status": "PASS_COMPLETE_ACTION_CODEC_AND_LEGACY_COMPATIBILITY",
+    "source_version": "d6a8afd3",
+    "splits": {
+      "train": {
+        "rows": 7884,
+        "legacy_modes_literal_equal": 3,
+        "labelled": 4886,
+        "sdk_items": 4886,
+        "sdk_skipped": {},
+        "length_buckets": {
+          "<=8192": 7490,
+          ">8192": 394
+        },
+        "labelled_length_buckets": {
+          "<=8192": 4648,
+          ">8192": 238
+        },
+        "position_buckets": {
+          "third_quarter": 1575,
+          "fourth_quarter": 2531,
+          "no_original_witness_contract": 2017,
+          "unavailable_or_incomplete": 638,
+          "second_quarter": 905,
+          "first_quarter": 218
+        },
+        "labelled_position_buckets": {
+          "third_quarter": 1507,
+          "fourth_quarter": 1658,
+          "no_original_witness_contract": 142,
+          "unavailable_or_incomplete": 490,
+          "second_quarter": 879,
+          "first_quarter": 210
+        },
+        "sdk_mask_replacements": 0,
+        "state_truncated_rows": 0
+      },
+      "dev": {
+        "rows": 860,
+        "legacy_modes_literal_equal": 3,
+        "labelled": 616,
+        "sdk_items": 616,
+        "sdk_skipped": {},
+        "length_buckets": {
+          "<=8192": 793,
+          ">8192": 67
+        },
+        "labelled_length_buckets": {
+          "<=8192": 578,
+          ">8192": 38
+        },
+        "position_buckets": {
+          "third_quarter": 187,
+          "fourth_quarter": 368,
+          "unavailable_or_incomplete": 65,
+          "second_quarter": 88,
+          "no_original_witness_contract": 131,
+          "first_quarter": 21
+        },
+        "labelled_position_buckets": {
+          "third_quarter": 180,
+          "fourth_quarter": 268,
+          "unavailable_or_incomplete": 49,
+          "second_quarter": 88,
+          "no_original_witness_contract": 10,
+          "first_quarter": 21
+        },
+        "sdk_mask_replacements": 0,
+        "state_truncated_rows": 0
+      }
+    },
+    "model_calls": 0,
+    "model_loads": 0,
+    "ledger_recorded": false,
+    "no_sha_validation": true,
+    "scope": "Native codec and literal inputs only;no gradient or learned-quality claim. Positions are whole original witness bodies,not minimal fact spans or provenance.",
+    "feedback_text": {
+      "rows_equal_information": 16,
+      "max_sequence_tokens": 8089,
+      "sequence_tokens": 58258,
+      "truncated": 0
+    },
+    "compute": {
+      "cpu_seconds": 319.891249652,
+      "wall_seconds": 319.9002743549645
+    }
+  },
+  "paired_input_comparison": {
+    "status": "PASS_FIXED_COHORTS_IDENTITIES_GOLD_DRAWS_AND_INPUT_COMPARISON",
+    "cohorts": {
+      "64": {
+        "rows": 2142,
+        "labelled": 1468,
+        "actual_families": 64,
+        "labelled_families": 63,
+        "identical_original_rows": 2142,
+        "dev_bytes_equal": true,
+        "draws_preserved": 8384,
+        "complete_actions_max_tokens": 10237,
+        "labelled_complete_actions_gt8192": 116,
+        "planned_canonical_input_tokens": {
+          "legacy": 41502112,
+          "actions": 46905134,
+          "actions_text": 47909175
+        }
+      },
+      "128": {
+        "rows": 4092,
+        "labelled": 2762,
+        "actual_families": 128,
+        "labelled_families": 126,
+        "identical_original_rows": 4092,
+        "dev_bytes_equal": true,
+        "draws_preserved": 8384,
+        "complete_actions_max_tokens": 10237,
+        "labelled_complete_actions_gt8192": 236,
+        "planned_canonical_input_tokens": {
+          "legacy": 41804889,
+          "actions": 47191489,
+          "actions_text": 48178595
+        }
+      },
+      "256": {
+        "rows": 7884,
+        "labelled": 4886,
+        "actual_families": 256,
+        "labelled_families": 249,
+        "identical_original_rows": 7884,
+        "dev_bytes_equal": true,
+        "draws_preserved": 8384,
+        "complete_actions_max_tokens": 10237,
+        "labelled_complete_actions_gt8192": 238,
+        "planned_canonical_input_tokens": {
+          "legacy": 42603019,
+          "actions": 48034873,
+          "actions_text": 48891301
+        }
+      }
+    },
+    "splits": {
+      "train": {
+        "rows": 7884,
+        "legacy_tokens": 41031724,
+        "complete_actions_tokens": 45838344,
+        "complete_actions_text_tokens": 46629954,
+        "labelled_complete_actions_gt8192": 238,
+        "labelled_complete_actions_text_gt8192": 311,
+        "actions_minus_legacy_tokens": 4806620,
+        "text_minus_actions_tokens": 791610
+      },
+      "dev": {
+        "rows": 860,
+        "legacy_tokens": 3831246,
+        "complete_actions_tokens": 4260933,
+        "complete_actions_text_tokens": 4356943,
+        "labelled_complete_actions_gt8192": 38,
+        "labelled_complete_actions_text_gt8192": 44,
+        "actions_minus_legacy_tokens": 429687,
+        "text_minus_actions_tokens": 96010
+      }
+    },
+    "model_calls": 0,
+    "ledger_recorded": false,
+    "no_sha_validation": true,
+    "compute": {
+      "cpu_seconds": 12.421719891,
+      "wall_seconds": 12.422073170542717
+    },
+    "scope": "Canonical-order unpadded input token accounting over frozen draws;not actual forwards,padding,FLOPs or GPU time. Token totals do not replace terminal measured cost."
+  },
+  "study_amendment": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/complete-action-study-amendment-v1.json",
+  "frozen_code": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/frozen-complete-actions-d6a8afd3/MiLAi-Lab",
+  "new_fit_plans": [
+    {
+      "id": "source256-actions-full-seed0-u524-v1",
+      "projection": "shared_actions",
+      "status": "INPUT_READY_NOT_DISPATCHED_WAIT_FOR_ACTIVE_FIT_TERMINAL"
+    },
+    {
+      "id": "source128-actions-full-seed0-u524-v1",
+      "projection": "shared_actions",
+      "status": "INPUT_READY_NOT_DISPATCHED_WAIT_FOR_ACTIVE_FIT_TERMINAL"
+    },
+    {
+      "id": "source64-actions-full-seed0-u524-v1",
+      "projection": "shared_actions",
+      "status": "INPUT_READY_NOT_DISPATCHED_WAIT_FOR_ACTIVE_FIT_TERMINAL"
+    },
+    {
+      "id": "source64-actions-low-encoder-seed0-u524-v1",
+      "projection": "shared_actions",
+      "status": "INPUT_READY_NOT_DISPATCHED_WAIT_FOR_ACTIVE_FIT_TERMINAL"
+    },
+    {
+      "id": "source64-actions-head-only-seed0-u524-v1",
+      "projection": "shared_actions",
+      "status": "INPUT_READY_NOT_DISPATCHED_WAIT_FOR_ACTIVE_FIT_TERMINAL"
+    },
+    {
+      "id": "source256-actions-request-text-seed0-u524-v1",
+      "projection": "shared_actions_request_text",
+      "status": "INPUT_READY_NOT_DISPATCHED_WAIT_FOR_ACTIVE_FIT_TERMINAL"
+    }
+  ],
+  "legacy_e3_plan": "Retained but dispatch superseded by full-action matched E3;not run",
+  "validation": {
+    "targeted_native_tokenizer_tests_passed": 26,
+    "related_tests_passed": 49,
+    "related_gpu_tests_skipped": 5,
+    "skip_reason": "Allocated GPUs belong to the live primary job;no second real model job",
+    "ruff_files_passed": 12,
+    "mypy_implementation_files_passed": 6,
+    "mypy_scope": "follow-imports=silent,ignore-missing-imports;not all external libraries typed",
+    "package_boundary": "PASS",
+    "tools_boundary": "PASS;6 existing grandfathered private edges"
+  },
+  "new_measured_cpu_pending": {
+    "phases": [
+      {
+        "measurement_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/operation-input-diagnostics-v1/analysis.json",
+        "cpu_seconds": 174.69675979099998
+      },
+      {
+        "measurement_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/operation-input-diagnostics-v1/native-crosscheck.json",
+        "cpu_seconds": 0.198785822
+      },
+      {
+        "measurement_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/legacy-action-option-encoding-v1/audit.json",
+        "cpu_seconds": 56.121801649
+      },
+      {
+        "measurement_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/complete-action-input-audit-v1/audit.json",
+        "cpu_seconds": 163.472081469
+      },
+      {
+        "measurement_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/complete-action-request-text-input-audit-v1/audit.json",
+        "cpu_seconds": 228.042429765
+      },
+      {
+        "measurement_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/complete-action-study-amendment-v1.json",
+        "cpu_seconds": 0.294673981
+      },
+      {
+        "measurement_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/complete-action-input-comparison-v1.json",
+        "cpu_seconds": 12.421719891
+      },
+      {
+        "measurement_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/complete-action-readiness-v1/audit.json",
+        "cpu_seconds": 319.891249652
+      }
+    ],
+    "total_cpu_seconds": 955.13950202,
+    "scope": "Canonical files only;embedded copies in plans/manifests are not extra phases. Earlier v11 pending work separate. Manual review/tests/import/debug overhead not fully measured and not zero. No ledger settlement while model fit lives."
+  },
+  "closed_cost_registries": "v1/v2/v3 CLOSED;exclude all their measurement_files from future settlements. Do not append or re-settle. Old pending35 untouched.",
+  "remaining": "Complete active524 legacy fit;corrected64/128/256 curves and lowLR/head-only/auxiliary/E3 fits;actual STATE View and post-operation acceptance;expanded32/64/128 feedback/selfstates/common-support;full intent/known/freshness/budget factorial; strong baselines and Host endpoints;protected external and seeds0/1/2.",
+  "new_model_jobs_this_stage": 0,
+  "no_generalization_or_Host_gain_claimed": true,
+  "no_sha_validation": true,
+  "no_subagents": true,
+  "no_push_merge_or_service_change": true,
+  "ledger_recorded": false
+}

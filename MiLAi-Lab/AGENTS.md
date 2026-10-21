@@ -1,4 +1,73 @@
-# LATEST V11 (2026-10-22): PRIMARY FIT LIVE / STATE VIEW AND E3 READY NOT RUN
+# LATEST V12 (2026-10-22): LEGACY FIT LIVE / COMPLETE ACTION INPUTS READY
+
+Full goal ACTIVE, not complete or blocked. Read this before historical snapshots below.
+01:27 Shanghai snapshot: primary exec42364, parent2089181, child2089186 both alive;
+run RUNNING,64/524 updates. Frozen490c683e remains unchanged. Revalidate /proc plus
+artifacts/generalization-20261021/first-operation-fit-v1/driver.json and
+fitting/source256-full-seed0-u524-v1/run.json. This run now explicitly serves as the
+legacy representation control. Do not restart or hot-update it, start a second real
+model job, or settle offline costs while it lives. Observation timeouts are not terminal.
+Source queue93727 and all children CLOSED480; NEVER restart. Paused Coalent untouched.
+
+NEW FINDING: native Laya build_head caps EACH option at48 tokens before the global head
+budget. Earlier zero state/global-head drops did NOT measure this intrinsic cap.
+legacy-action-option-encoding-v1: train7717/7884 capped (labelled4868/4886),dev810/860
+(labelled611/616); SEARCH/REFRESH_VIEW affected, zero option-ID collisions. Some clipped
+text exists elsewhere,so do not claim uniquely lost semantic facts. Feedback-dev16
+already had complete W4 tables and no capped options. Old inputs/scores remain unchanged.
+
+Implementation d6a8afd3 adds explicit shared_actions/shared_actions_request_text. Exact
+offered id/kind/target/parameters go into reversible state table;short ID/kind heads.
+Training/live/generation inputs match;no fabricated observed_materials,executor/gold changes.
+Legacy full/shared/shared_request_text are literal-equal to490c683e on all8744 rows.
+New complete-action audit:7884train/860dev/16feedback rows exact bindings,zero intrinsic
+option/global state/head drops,zero collisions/mask replacements. Native labels4886/616,
+zero skips. New E3 all8744 requests reconstruct exactly;other fields unchanged. Feedback16
+text condition also audited. max train/dev actions10237/9905,text10268/10251. Labelled>8K
+actions238/38,text311/44;legacy5/3. No truncation does not prove long-input semantics.
+
+complete-action-study-amendment-v1.json (tracked counterpart exists) declared while legacy
+fit at64, BEFORE reading post-update metrics for this correction. Input evidence triggered
+an explicit amendment,not backdated preregistration. Six exact new plans:64/128/256full,
+64low5e-6,64head-only,256request-text,all524updates/8384draws. Primary condition shared_actions;
+E3 shared_actions_request_text. Original source files,IDs,gold,masks,cohorts,dev bytes,
+draw order,masses .75/.25,schedule and selection rules unchanged. Auxiliary128 then same
+corrected256 operation stage remains required. Current legacy256 is NOT corrected256.
+Legacy source256-request-text-fit-plan-v1 is retained but its dispatch is SUPERSEDED;
+NOT run. New E3 compares within complete-action inputs. No View removal claim.
+Frozen source: frozen-complete-actions-d6a8afd3/MiLAi-Lab;8 key files literal-equal,no SHA.
+Amendment's AUDITS_RUNNING is its declaration-time status;v12 progress/readiness reports
+show INPUT_READY_NOT_DISPATCHED. No new real model job was run in v12.
+
+Offline outputs COMPLETE (do not rerun/overwrite): operation-input-diagnostics-v1,
+legacy-action-option-encoding-v1,complete-action-input-audit-v1,
+complete-action-request-text-input-audit-v1,complete-action-readiness-v1,
+complete-action-input-comparison-v1.json. Readiness exec34168 exited0. Whole-source positions
+trace original field/identity/ranges through literal tables and native offsets;not minimal
+answer/provenance spans or semantic sufficiency. Old native lengths/order all8744 equal;
+zero mask replacements/identity ambiguity. New positions recomputed,not old buckets reused.
+Six prespecified simple baselines are one-step choices on RECORDED states,not rollouts;
+all retained. Dev accepted:fixed311,fixed_context328,rules257,view_cache5,first257,handoff122
+of616. Static original-source labels do not establish View utility/legality/Host success.
+
+26 targeted tests pass,49 related pass,5 allocated-GPU tests deliberately skipped while
+fit lives. Ruff12/mypy6 (external imports limited),package/tools boundary pass. No need
+repeat passed checks absent changes. STATE36 probes/frozen074ee79e plan fromv11 remain
+NOT_DISPATCHED;real STATE Views/labels0. Given probes have NO autonomous Host readout frame.
+
+v12 canonical8 measured phases total955.139502020CPU PENDING;see progress-20261022-v12.json.
+Embedded copies in manifests/plans are NOT extra cost phases. v11 prior pending separate.
+Closed compute-settlement-v1/v2/v3 NEVER append/re-settle;exclude all their measurement_files
+from future settlement. Oldpending35 untouched. Manual/tests/import/debug overhead partly
+unmeasured,not zero. Live trainer writes its own compute at terminal;parent cost separate.
+Remaining full goal:finish legacy524,corrected nested/parameter/aux/E3 fits,actual STATE View
+and post-op acceptance,feedback32/64/128/selfstates/common-support,complete four-factor
+intent/known/freshness/budget experiment,strong simple Host baselines,protected external,
+seed0/1/2 and family-paired bootstrap. No new generalization/Host gain claimed.
+No SHA/subagents/push/merge/service or Product schema/API/permissions/Canonical changes.
+See execution doc and data/manifests/training-generalization-progress-20261022-v12.json.
+
+# V11 HISTORY: PRIMARY FIT LIVE / STATE VIEW AND E3 READY NOT RUN
 
 FullgoalACTIVE. Priorgoalturn progress:newconditionalSTATEViewdriver+36probes+mechanicaltests,
 frozenexecutionplan,andE3equal-informationaudit/fitplan. No blocker/completion. ACTIVE MODEL JOB
