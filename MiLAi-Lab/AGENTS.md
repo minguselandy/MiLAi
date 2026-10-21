@@ -1,4 +1,83 @@
-# LATEST V15 (2026-10-22): LEGACY FIT262 LIVE / STATE SOURCE REVIEW COMPLETE
+# LATEST V16 (2026-10-22): LEGACY FIT393 LIVE / NO-VIEW AND CONFIG REPAIR
+
+Full goal ACTIVE,not complete or blocked. Previous turn implemented internal View ablation,
+validated it,found/fixed a real pending-config defect,and prepared five-arm lifecycle inputs.
+Revalidate exec42364 parent2089181/child2089186 and first-operation-fit-v1/driver.json plus
+fitting/source256-full-seed0-u524-v1/run.json. Latest both alive,RUNNING393/524,frozen490c683e
+unchanged as legacy representation control. No second real model job/offline settlement,
+restart or hot update while live. Observation timeout is not terminal. Closedsource93727/
+all4children NEVER restart. PausedCoalent untouched. No new real model job this turn.
+
+CRITICAL DISPATCH CORRECTION: real prepare rejected all THREE previous pending configs
+because source_metadata=true lacked required edit_interface_version=I2. Earlier data/unit
+checks had NOT established config entrypoint readiness. Do NOT dispatch their v1plans.
+Existing validation was NOT weakened. Only I2 and config/output version bindings changed;
+Host/model/capacity/queue/ledger and original histories/specifications/reviews remain equal.
+Authoritative plans now:
+- state-view-acceptance-execution-plan-v2.json -> state-view-acceptance-v2 output,
+  config/histories in state-view-acceptance-preparation-v2;collector remains074ee79e.
+- factorial-execution-plan-v2.json -> factorial-prelude-v2,then
+  factorial-captured-preparation-v2;collector remains8e9f5d70.
+- feedback-expansion-study-plan-v2.json -> feedback-collection-v2/train|dev/batch-...;
+  config template/bound-config in feedback-expansion-preparation-v2;collector2a179b58.
+  Original72batch/history/quotas files remain unchanged in v1prep. Bound-config still absent
+  until correctedsource256 selected checkpoint exists. No silent legacy checkpoint fallback.
+Actual frozen prepare+local tokenizer preflights PASS in their declared environments,
+model weights/calls0,original ledger literal-equal before/after. config-interface-readiness-v2.json
+and config-interface-amendment-v2.json record this;old rejected plans remain history.
+STATE/factorial source reviews remain authoritative in their v1prep dirs (inputs byte-equal).
+
+Code36543a5b adds memory_control.internal_views=false to the finite evidence-controller path.
+It skips unprovided query-structure inventory/body and semantic-record search/dependency
+selection,filters derived/stored-revision candidates,and removes USE/REFRESH/new-View
+opportunities/execution. Originals/search/read/paging/budgets/visibility/costs remain.
+Existing Store contents are NOT deleted. Explicit caller-known material and cached already
+delivered receipts keep normal semantics;provided-View probes are not pure View-free runs.
+Pure lifecycle NoView starts from cold original-source-only banks. Original Host assistant
+answers stay raw Sources,not stripped. NoView shares EXACT full checkpoint;not separately
+optimized weights. It is runtime config,NOT a policy-only E2 override. Defaults retain old
+checkpoint/read-policy shape;false mode recorded in executor checkpoint,unsafe cross-mode
+restore rejects. Only private evidence/control cache keys distinguish mode;public receipt
+keys/idempotency remain unchanged. No Product schema/API/permission/Canonical change.
+
+9new NoView tests+110related regression+1new legacy-base/I2preparer test=120unique pass,0skip.
+Includes real Store/actual post-step E2 restore,no internal cache/search/generation access,
+caller-known and cached receipt fidelity,normal two-message Host history and all Host/local
+controller costs retained. Scripted HTTP/stub classifier are mechanical,not model quality.
+Ruff7,mypy5,package/tools boundaries pass;6 inherited private edges unchanged.
+prepare_state_view_acceptance now emits I2/v2;config preflight no longer relies on tests
+whose fixture already supplied I2. No need repeat passed tests without relevant changes.
+
+lifecycle-comparison-plan-v1.json and lifecycle-comparison-preparation-v1 ready INPUTS only:
+five arms fixed_context,rules,jev_full,jev_no_view,jev_request_text;original exposed D16
+streams/8devfamilies/64positions per arm,320total,80serial whole-bank jobs (4positions each).
+All start cold,no stored_revisions/prefetch/initialSources,only original scheduled arrivals.
+Autonomous rich JSON-action Host,own continued Host history,no forced/given retrieval.
+All failures/no-call positions kept. Return2048,reads8,control8,encoder limit16384/head2048,
+no new source-observation cap. NoView differs fromfull onlyinternal_views flag (plus config
+version);same checkpoint. Text uses matched operation-stage E3 weights/projection,not a
+feedback-tuned full versus unmatched text comparison. Source36543a5b frozen in
+frozen-lifecycle-36543a5b/MiLAi-Lab;all5templates actual prepare/tokenizer preflight PASS.
+Learned checkpoint config paths deliberately unbound. No lifecycle job started. Later final
+feedback candidate/strong controls/protected/multiseed still required;this is devdiagnosis.
+
+no-view-existing-input-audit-v1:105real historical fixed_context decisions from21/64positions,
+8families;verified no stored/visible/known View/candidate/boundlookup. Counterfactual input
+removes only offered unexecuted View actions,shared_actions native tokenization: max9942,
+99<=8K/6>8K,zero state/head/intrinsic option drops/collisions at16384/head2048. NO policy/world
+execution,labels or scores generated. Not proof future own-history states all fit;native
+complete-input checks remain. Source old11798c8d outputs unchanged.
+
+14canonical new measured phases total10.845186123CPU PENDING (v16progress lists paths).
+Imports/wrappers/tests/failed amendment attempt/unmeasured work unknown,not zero. Embedded
+copies not extra phases. Priorv11-v15pending unchanged. Closedsettlementsv1/v2/v3 NEVER
+append/re-settle;exclude their phase files;oldpending35untouched. Trainer bills terminal once.
+No SHA/subagents/push/merge/newservices. Source/data/quality requirements remain full scope:
+legacy524,correctedcurves/controls,STATEv2/factorialv2/feedbackv2 real models and semantics,
+own-stateT2/common-support,lifecycle/Host/NoView/extra costs,protectedexternal,seeds0/1/2.
+See execution doc and training-generalization-progress-20261022-v16.json. No gain claim.
+
+# V15 HISTORY: LEGACY FIT262 LIVE / STATE SOURCE REVIEW COMPLETE
 
 Full goal ACTIVE,not complete or blocked. Previous turn completed STATE pilot source-first
 review,typed literal checks,36-request review matrix and whole-train descriptive exposure audit.

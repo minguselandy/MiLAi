@@ -4,7 +4,80 @@
 [原计划](MILAI_TRAINING_DATA_GENERALIZATION_PLAN_20261021.md)，原文复制留存，原目录文件未修改。
 该计划中的“本轮已完成”是另一环境的历史说明，不能代替本机当前验证。
 
-## 续次执行 v15（2026-10-22）：STATE材料先审与身份、政策暴露限定
+## 续次执行 v16（2026-10-22）：去View对照及真实配置入口修正
+
+完整目标继续ACTIVE。主训练仍为exec42364、父2089181/子2089186，实际存活，最新复核393/524更新。
+冻结490c683e没有热更新，仍作为旧表示对照；没有启动第二个真实模型任务或离线结算。
+
+提交 **36543a5b** 增加明确的`memory_control.internal_views=false`研究条件。
+执行器停止读取未提供的query-structure库存、检索内部semantic records及其旧版本、生成或刷新View，
+相应USE/REFRESH/new-View动作不再提供。原始来源的搜索、读取、分页、可见性检查和实际预算/成本继续保留。
+这在取证路径上生效，不是只从决策头隐藏名称；已有Store内容保持原样，没有为了消融删除历史。
+
+调用方明确提供的known材料和已经交付的缓存回执保留原语义，包含历史View时也不会被偷偷改写。
+因此带外部View输入的条件式测试不能称为纯去View；正式生命周期对照从无View的原文冷启动。
+Host自己生成的历史回答仍是有角色标记的原始Source，不删掉这些对话信息来削弱基线。
+NoView与full使用完全相同的检查点，属于固定权重的功能消融，不代表单独优化过的最佳无View模型。
+
+默认开启行为保留旧执行器快照/read-policy结构。关闭状态显式进入checkpoint配置，跨模式恢复不能伪装成同一before。
+私有证据池/控制缓存区分模式，公共回执键及幂等重放保持不变。
+该条件须写入runtime的memory_control配置，不是传给E2的policy-only override；改变执行器后不能声称与原View条件首动作集合相同。
+
+验证覆盖真实Store中已存在的结构化与semantic View、原文检索、正常Host连续对话、实际known引用、
+已交付回执重放和执行后E2恢复。测试确认没有内部库存/语义索引访问或View生成，原Store仍保留原数据，
+Host生成与本地控制器计数继续收费。9项新测试、110项相关回归及1项新增配置准备回归通过，共120项、零跳过；
+Ruff7文件、mypy5实现文件及package/tools边界通过。脚本HTTP和替身分类器只验证接线，不是模型效果。
+
+**实际入口预检发现并纠正了此前准备工作的缺口。** STATE、因子和反馈三个待执行配置设置了
+`source_metadata=true`，却没有声明现有入口要求的`edit_interface_version=I2`。
+真实`prepare`对三者都返回`FUNCTIONAL_EDIT_FEATURES_REQUIRE_I2_EDIT_METHOD`，发生在模型执行之前。
+此前的材料审计和单元测试没有证明这些实际配置能通过入口；测试fixture本身已带I2，掩盖了这个缺项。
+
+当前配置显式使用已支持的I2，保留原校验。除该接口声明、版本和输出绑定外，Host、模型、容量、队列、账本和原始输入均不变。
+STATE生成工具也修正了这一绑定，并增加从真实形态legacy base开始的回归。
+修正后的三个配置分别通过各自**冻结代码及声明解释器**的`prepare`和本地tokenizer预检，模型权重加载/调用均为0，
+原账本预检前后逐项相等。旧配置没有被分派，旧计划保留为历史，后续以以下v2为准：
+
+| 工作 | 当前计划 | 实际执行输出 |
+|---|---|---|
+| STATE 36次验收 | `state-view-acceptance-execution-plan-v2.json` | `state-view-acceptance-v2` |
+| 四因子预热 | `factorial-execution-plan-v2.json` | `factorial-prelude-v2`，再准备`factorial-captured-preparation-v2` |
+| 反馈扩源 | `feedback-expansion-study-plan-v2.json` | `feedback-collection-v2/train`与`dev`各批次 |
+
+三个collector代码仍分别为074ee79e、8e9f5d70、2a179b58。STATE/factorial的history与spec文件逐字节不变，
+原v1目录中的来源先审继续适用。反馈72个batch输入和配额也保留原样，只更新配置/输出路径；
+`feedback-expansion-preparation-v2/bound-config.json`仍等待修正后256档真实检查点选择，未填入旧权重代替。
+依据为`config-interface-amendment-v2.json`、各实际preflight文件及`config-interface-readiness-v2.json`。
+配置通过不等于模型质量或完整实验完成。
+
+五臂生命周期开发对照已经准备：fixed_context、rules、Jev full、Jev no-view、等信息request-text。
+沿用已暴露D开发集的16条流、8个来源族，每臂64个公共请求位置，共320个；按完整四请求bank分为80个串行job。
+所有流从空bank及原始到达材料开始，没有stored_revisions、prefetch或继承View回执。
+Host正常自主发出rich JSON-action请求并使用自己此前的实际Host/tool历史，没有given-request或强制取证。
+未调用工具、失败和空交付仍在64位置分母内。
+
+这是**操作阶段**的匹配比较：full和text使用各自在固定操作dev上按预声明规则选出的检查点，NoView复用full的同一权重。
+不能将反馈调优后的full与仅操作训练的text混称为E3。后续最终反馈/自身轨迹候选仍须单独完成匹配Host、NoView及外部确认。
+共同设置为返回2048、额外读8、控制步8、模型上限16384/head2048；未提前增加新的来源观察分页上限。
+各臂原始来源/用户任务/Host预算一致，实际调用数、生成token、控制器输入长度和工作量可以不同，须实测报告。
+创建、刷新、复用、原文读取与Host成本沿每条真实bank累计，没有免费预热或只统计成功命中。
+
+`lifecycle-comparison-plan-v1.json`和`lifecycle-comparison-preparation-v1/`保存配置、完整原输入与80份命令。
+代码冻结为`frozen-lifecycle-36543a5b/MiLAi-Lab`，五份模板也均通过实际prepare/tokenizer预检。
+学习检查点仍未绑定，**所有新生命周期job均未启动**。这八个开发来源不能替代保护外部集合或多seed确认。
+
+还在旧固定上下文运行的真实记录上做了纯编码可行性检查：64个关闭位置中，21个位置提供105条实际决策，涉及8族。
+这些状态确实没有View库存、派生候选、已知/已交付View或View绑定来源查找；只移除未执行的View选项后，
+完整动作表示最长9,942 tokens，99条≤8K、6条>8K，在16384/head2048下无state/head/单选项裁切和碰撞。
+原输出未改、无新标签、无新策略执行。新Host历史和新策略可能到达不同状态，不能据此保证所有未来输入都能容纳；
+现有完整输入检查继续保留，长度失败不能静默截断。
+
+本轮14个独立程序化测量合计10.845186123 CPU秒，保持pending。导入、wrapper、测试、首次配置修订失败等
+未计时开销仍未知；计划里的嵌套计时副本不重复计费。旧v1/v2/v3结算、pending35和v11–v15待结算记录不追加或重结算。
+没有SHA或替代指纹校验、子代理、推送、合并、服务变更或Product公开Schema/权限/Canonical改动。
+完整训练与实际STATE/因子/反馈/生命周期执行、语义审核、保护外部确认及seed0/1/2仍未完成，没有收益结论。
+
+## v15 历史快照：STATE材料先审与身份、政策暴露限定
 
 完整目标继续ACTIVE。主训练exec42364、父2089181/子2089186仍实际存活，最新复核为RUNNING、262/524更新。
 冻结490c683e未热更新，没有第二个真实模型任务或离线结算；此运行继续作为旧表示对照完成。
@@ -957,7 +1030,7 @@ native row/question/family 与 train 身份一致，且两套均 included。
 | §6.6 结果驱动方向 | 尚无新模型效果 | 按实际曲线决定扩源/优化/简化，允许复杂方案不胜出 |
 | §7.1 证据增量价值 | 已保留真实分支与参数机制 | known-evidence 对照、即时增量及共同 continuation 结果 |
 | §7.2 组合泛化 | 四组92条来源先审完成；真实E2分支上的完整因子入口经16格机械验证，64格/策略输入已声明 | 实际预热、View配对、全部因子执行与来源忠实评价；分开来源暴露和组合变化 |
-| §7.3 View 维护成本 | 未新运行 | 固定上下文/规则/Jev/去 View/等信息文本，创建刷新复用总成本 |
+| §7.3 View 维护成本 | 内部View消融已实现验证；五臂原文冷启动D开发输入及真实配置预检完成 | 绑定检查点后实际自主Host生命周期与累计成本；最终候选和保护确认仍须执行 |
 | §8、§9 P3 外部分布与 seed0/1/2 | 未新运行 | 保护集合、冻结方法、修改协议标识、不用 test oracle 学习 |
 
 计划 §2 的旧统计和 §3 的架构边界沿用为历史参照；没有以新代码或辅助分数替换旧 Host 结果。

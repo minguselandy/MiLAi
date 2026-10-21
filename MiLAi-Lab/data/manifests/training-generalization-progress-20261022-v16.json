@@ -1,0 +1,242 @@
+{
+  "status": "ACTIVE_NOT_COMPLETE;PRIMARY_LEGACY_FIT_LIVE",
+  "recorded_at": "2026-10-22T04:14:08.043834+08:00",
+  "implementation": "36543a5b",
+  "active_model_job": {
+    "session": 42364,
+    "parent_pid": 2089181,
+    "child_pid": 2089186,
+    "process_states": {
+      "2089181": "State:\tS (sleeping)",
+      "2089186": "State:\tR (running)"
+    },
+    "status": "RUNNING",
+    "updates": 393,
+    "planned_updates": 524,
+    "frozen_source": "490c683e",
+    "action": "Continue unchanged;no second model job/offline settlement/restart/hot update"
+  },
+  "internal_view_ablation": {
+    "config": "memory_control.internal_views=false",
+    "disabled": [
+      "unprovided query-structure inventory and body access",
+      "USE_VIEW/REFRESH_VIEW/new-View options and execution",
+      "semantic-record search and stored-revision candidates",
+      "dependency read selection over internal records"
+    ],
+    "preserved": [
+      "original Source search/read/paging and visibility",
+      "actual caller request and budgets",
+      "explicit earlier known material including derived material if supplied",
+      "cached delivered receipt replay",
+      "existing Store data;no deletion",
+      "legacy enabled checkpoint configuration shape"
+    ],
+    "scope": "Finite evidence-controller ablation. Pure lifecycle comparison starts cold with original sources only;provided-View conditional comparisons are not described as View-free."
+  },
+  "validation": {
+    "new_no_view_tests_passed": 9,
+    "related_regression_tests_passed": 110,
+    "additional_I2_preparer_test_passed": 1,
+    "unique_total": 120,
+    "skipped": 0,
+    "ruff_files_passed": 7,
+    "mypy_implementation_files_passed": 5,
+    "package_boundary": "PASS",
+    "tools_boundary": "PASS;6 inherited private edges",
+    "mechanical_scope": "Real Stores and scripted HTTP/native classifier;normal Host history,exact known receipts,source retrieval,default compatibility and post-step E2 restore. No new real model outcome."
+  },
+  "actual_config_defect": {
+    "v1_preflight": {
+      "status": "ACTUAL_ENTRYPOINT_PRECHECK",
+      "cases": [
+        {
+          "case": "state",
+          "status": "REJECTED",
+          "reason": "FUNCTIONAL_EDIT_FEATURES_REQUIRE_I2_EDIT_METHOD"
+        },
+        {
+          "case": "factorial",
+          "status": "REJECTED",
+          "reason": "FUNCTIONAL_EDIT_FEATURES_REQUIRE_I2_EDIT_METHOD"
+        },
+        {
+          "case": "feedback",
+          "status": "REJECTED",
+          "reason": "FUNCTIONAL_EDIT_FEATURES_REQUIRE_I2_EDIT_METHOD"
+        }
+      ],
+      "model_calls": 0,
+      "ledger_recorded": false,
+      "no_sha_validation": true,
+      "compute": {
+        "cpu_seconds": 0.00046414200000022277,
+        "wall_seconds": 0.00047069601714611053
+      }
+    },
+    "cause": "Three pending templates enabled source_metadata without edit_interface_version I2;actual prepare rejected them before model execution. Earlier material/unit readiness did not cover this entrypoint.",
+    "fix": "Explicit I2 plus versioned config/output bindings. Existing validation unchanged;Host/model/capacity/queue/ledger and original histories/specs/reviews retained.",
+    "authoritative_plans": {
+      "state": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-view-acceptance-execution-plan-v2.json",
+      "factorial": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/factorial-execution-plan-v2.json",
+      "feedback": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-expansion-study-plan-v2.json"
+    },
+    "old_v1_dispatch": "SUPERSEDED;do not run old configs",
+    "preflights": {
+      "status": "PASS_V2_CONFIGS_AND_FIVE_LIFECYCLE_TEMPLATES;NO_DISPATCH",
+      "v2_preflights": {
+        "state": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/config-preflight-source-metadata-v2/state/preflight.json",
+        "factorial": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/config-preflight-source-metadata-v2/factorial/preflight.json",
+        "feedback": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/config-preflight-source-metadata-v2/feedback/preflight.json"
+      },
+      "lifecycle_arms": 5,
+      "unchanged_input_files": {
+        "state_histories": true,
+        "factorial_histories": true,
+        "factorial_specification": true
+      },
+      "old_v1_dispatch_superseded": true,
+      "model_jobs_started": 0,
+      "ledger_recorded": false,
+      "no_sha_validation": true,
+      "compute": {
+        "cpu_seconds": 0.011515431000000003,
+        "wall_seconds": 0.011519133113324642,
+        "scope": "Readiness/status closure only;individual actual prepare preflights have separate canonical measurements."
+      }
+    },
+    "collector_sources": {
+      "state": "074ee79e",
+      "factorial": "8e9f5d70",
+      "feedback": "2a179b58"
+    },
+    "binding_scope": "STATE/factorial configuration ready after current job terminal. Feedback still needs corrected selected checkpoint. Config acceptance does not prove model effect."
+  },
+  "lifecycle": {
+    "plan": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lifecycle-comparison-plan-v1.json",
+    "status": "INPUT_CONFIG_PREFLIGHTS_PASSED_NOT_DISPATCHED;LEARNED_CHECKPOINT_BINDING_PENDING",
+    "source_version": "36543a5b",
+    "arms": [
+      "fixed_context",
+      "rules",
+      "jev_full",
+      "jev_no_view",
+      "jev_request_text"
+    ],
+    "source_families": 8,
+    "banks_per_arm": 16,
+    "positions_per_arm": 64,
+    "jobs": 80,
+    "planned_positions": 320,
+    "cold_original_source_inputs": true,
+    "shared_no_view_checkpoint": "Exactly the operation-stage full model checkpoint;not separately optimized no-view weights",
+    "E3_scope": "Operation-stage full vs request-text fits;do not compare feedback-tuned full against unmatched operation-only text",
+    "own_Host_history": true,
+    "no_forced_retrieval_or_given_requests": true,
+    "normal_Host_failures_and_no_calls_retained": true,
+    "context_limit": 16384,
+    "return_tokens": 2048,
+    "source_observation_tokens": null,
+    "model_jobs_started": 0
+  },
+  "existing_input_audit": {
+    "status": "PASS_COUNTERFACTUAL_INPUT_LENGTHS_NOT_EXECUTED_POLICY",
+    "source": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/view-v4-d-v2/fixed-context",
+    "source_version": "11798c8d",
+    "input_projection": "shared_actions",
+    "states": 105,
+    "closed_public_positions": 64,
+    "positions_with_states": 21,
+    "families": 8,
+    "max_sequence_tokens": 9942,
+    "length_buckets": {
+      "<=8192": 99,
+      ">8192": 6
+    },
+    "state_or_head_drops": 0,
+    "intrinsic_option_drops": 0,
+    "collisions": 0,
+    "existing_observations_verified_view_free": true,
+    "max_len": 16384,
+    "head_max_len": 2048,
+    "scope": "Actual historical fixed_context states had no View inventory,derived candidates, visible/known Views or View-bound source lookups. Only unexecuted offered View actions are removed for this encoding audit. No original source/question/labels rewritten. This is not a new policy rollout or proof every future own-trajectory input will fit. The new Host history/learned choices can produce different states and costs.",
+    "model_calls": 0,
+    "model_weights_loaded": 0,
+    "new_labels": 0,
+    "no_sha_validation": true,
+    "ledger_recorded": false,
+    "compute": {
+      "cpu_seconds": 5.286915196,
+      "wall_seconds": 5.287136533297598
+    }
+  },
+  "new_measured_cpu_pending": {
+    "phases": [
+      {
+        "measurement_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/config-preflight-source-metadata-v1/audit.json",
+        "cpu_seconds": 0.00046414200000022277
+      },
+      {
+        "measurement_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-view-acceptance-preparation-v2/preparation.json",
+        "cpu_seconds": 0.04470747500000001
+      },
+      {
+        "measurement_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/config-interface-amendment-v2.json",
+        "cpu_seconds": 0.012735766999999995
+      },
+      {
+        "measurement_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/config-preflight-source-metadata-v2/state/preflight.json",
+        "cpu_seconds": 0.7100718409999995
+      },
+      {
+        "measurement_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/config-preflight-source-metadata-v2/factorial/preflight.json",
+        "cpu_seconds": 0.6382064010000006
+      },
+      {
+        "measurement_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/config-preflight-source-metadata-v2/feedback/preflight.json",
+        "cpu_seconds": 0.6671143440000007
+      },
+      {
+        "measurement_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lifecycle-comparison-plan-v1.json",
+        "cpu_seconds": 0.34704848499999996
+      },
+      {
+        "measurement_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lifecycle-config-preflight-v1/fixed_context/preflight.json",
+        "cpu_seconds": 0.6345324479999999
+      },
+      {
+        "measurement_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lifecycle-config-preflight-v1/rules/preflight.json",
+        "cpu_seconds": 0.6196347970000007
+      },
+      {
+        "measurement_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lifecycle-config-preflight-v1/jev_full/preflight.json",
+        "cpu_seconds": 0.6218452719999998
+      },
+      {
+        "measurement_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lifecycle-config-preflight-v1/jev_no_view/preflight.json",
+        "cpu_seconds": 0.6252341249999995
+      },
+      {
+        "measurement_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lifecycle-config-preflight-v1/jev_request_text/preflight.json",
+        "cpu_seconds": 0.6251603989999994
+      },
+      {
+        "measurement_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/no-view-existing-input-audit-v1/audit.json",
+        "cpu_seconds": 5.286915196
+      },
+      {
+        "measurement_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/config-interface-readiness-v2.json",
+        "cpu_seconds": 0.011515431000000003
+      }
+    ],
+    "total_cpu_seconds": 10.845186123,
+    "scope": "Canonical phase files only. Individual subprocess imports/wrappers,initial failed amendment attempt,tests and unmeasured inspection unknown;embedded copies do not add phases."
+  },
+  "closed_settlements": "v1/v2/v3CLOSED neverappend/re-settle;oldpending35 and priorv11-v15pending untouched. No settlement while fit lives.",
+  "remaining": "Legacy524 and corrected nested/parameter/aux/E3 fits;STATEv2 actual36calls/Views/E2/delivery review;factorialv2 prelude/pairs/cells;feedbackv2 checkpoint binding and72batches/labels/nested192fits/T2/common-support;actual5-arm lifecycle plus finalfeedback candidate/protected external/seeds0,1,2 family inference.",
+  "new_real_model_jobs": 0,
+  "no_sha_validation": true,
+  "no_subagents": true,
+  "no_push_merge_service_or_Product_schema_permission_change": true,
+  "no_generalization_or_Host_gain_claimed": true
+}
