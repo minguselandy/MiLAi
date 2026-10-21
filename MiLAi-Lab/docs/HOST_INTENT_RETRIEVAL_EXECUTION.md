@@ -2294,3 +2294,21 @@ a99a5aa8实现Coalent原会话artifact：每条原消息仍是独立、未改写
 Coalent真实模型试跑已冻结而未启动：fd0f4705源码快照及已审阅原生版本core；按现有B fixture顺序选首两个train来源组B06/C26、各content/originals两流、四请求，共16位置。保持原来源和请求，不读新确认组；session artifact、上游pool默认参数、extractive合成、原Qwen/BGE、rich/JSON-action、2048完整返回包与8步/8读，禁用重试。该小队列声明180次生成/2400000预约tokens上限，不改变单次方法参数；配置、来源和启动参数见host-intent-view-v4-coalent-pilot-plan-v1.json。必须等当前D父子进程全部退出后再显式调度，同一真实ledger串行计费。
 
 D最后两臂、完整流成本/条件响应汇总及E确认仍未完成；当前不扩大训练或选最终获胜配方。pending-v33尚未结算，未计时人工审阅/准备开销仍unknown。
+
+
+## 2026-10-21：前八臂Host触发与四请求累计成本
+
+对前八个已关闭臂的512个实际位置，按当前public Human message ID截断历史后逐项计数持久AI tool_calls，并独立对照已完成回执。generative/rules/fixed-context/T1主/T1操作对照/CE/answer/delivery的实际请求次数分别36/19/24/24/25/23/54/21；仅answer少一条完成回执（原容量失败43）。前七臂各16个末轮均仅1个位置发起检索，delivery为0。解析实际首次Host system wire后，四位置的新可见来源计数在每条流均为7/0/3/13；末轮到达提示确实送达。计数提示不提供正文、相关性或剩余未读量，不能将其当语义充分性证明。索引host-intent-view-v4-d-host-requests-first8-v1.json；此发现将Host未触发与调用后控制选择的错误分开，保留当前冻结结果。
+
+真实四请求流的累计成本按16条冷缓存bank逐条保存；请求位置包含失败、所有已计生成/embedding、本地计算、完整返回量和消息墙时。整驱动开销及模型加载在各臂summary另列，嵌套墙时不相加；冷bank不等于每流重新加载权重。汇总的生成tokens（每流累计前1/2/3/4请求后再跨流求和）如下：
+
+| 臂 | 前1请求 | 前2请求 | 前3请求 | 全4请求 | 全流C/材料完整 |
+|---|---:|---:|---:|---:|---:|
+| fixed-context | 120342 | 237814 | 375026 | 513678 | 21/38 |
+| generative | 417278 | 721766 | 1037645 | 1221393 | 15/18 |
+| answer | 224271 | 403499 | 586506 | 740852 | 17/26 |
+| delivery | 131425 | 258384 | 431231 | 588121 | 21/33 |
+
+上述三种复杂臂在四个实际窗口中均未追平fixed-context生成tokens；这只比较同一生成模型的用量，不把embedding/本地推理免费化，也不外推未来摊销。fixed-context同样由自主Host决定是否调用，绝非每轮强制回源基准；多数末轮没有重新取证，便宜的暖回答不能证明缓存维护有效。其他四臂及逐流完整分项见host-intent-view-v4-d-stream-costs-first8-v1.json和所指stream-costs-first8-v1.json。512位置仍只有8个来源组，不能当512个独立样本。
+
+view-cache已评审0–40，但尚未闭合。C03内容流末轮27答案9:45恰好正确，实际K仅到中间修正，缺最终10:15提议与拒绝确认，故分别记Host C与材料partial。E08初轮40的View混淆疲劳推测，原文包却使Host明确区分assistant推测与自己的报告；这是原文补救成功，未认证View正确。

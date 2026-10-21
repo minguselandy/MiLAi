@@ -1,0 +1,362 @@
+{
+  "status": "EIGHT_CLOSED_ARMS_ACTUAL_HOST_REQUEST_AUDIT",
+  "arms": {
+    "generative": {
+      "positions": 64,
+      "Host_requested_calls": 36,
+      "completed_returns": 36,
+      "by_stage": {
+        "initial": {
+          "positions": 16,
+          "Host_requested_calls": 20,
+          "positions_with_Host_request": 16,
+          "completed_returns": 20,
+          "actual_arrival_notice_counts": [
+            7
+          ]
+        },
+        "same-sources": {
+          "positions": 16,
+          "Host_requested_calls": 9,
+          "positions_with_Host_request": 6,
+          "completed_returns": 9,
+          "actual_arrival_notice_counts": [
+            0
+          ]
+        },
+        "intermediate-arrivals": {
+          "positions": 16,
+          "Host_requested_calls": 6,
+          "positions_with_Host_request": 5,
+          "completed_returns": 6,
+          "actual_arrival_notice_counts": [
+            3
+          ]
+        },
+        "final-arrivals": {
+          "positions": 16,
+          "Host_requested_calls": 1,
+          "positions_with_Host_request": 1,
+          "completed_returns": 1,
+          "actual_arrival_notice_counts": [
+            13
+          ]
+        }
+      }
+    },
+    "rules": {
+      "positions": 64,
+      "Host_requested_calls": 19,
+      "completed_returns": 19,
+      "by_stage": {
+        "initial": {
+          "positions": 16,
+          "Host_requested_calls": 16,
+          "positions_with_Host_request": 16,
+          "completed_returns": 16,
+          "actual_arrival_notice_counts": [
+            7
+          ]
+        },
+        "same-sources": {
+          "positions": 16,
+          "Host_requested_calls": 0,
+          "positions_with_Host_request": 0,
+          "completed_returns": 0,
+          "actual_arrival_notice_counts": [
+            0
+          ]
+        },
+        "intermediate-arrivals": {
+          "positions": 16,
+          "Host_requested_calls": 2,
+          "positions_with_Host_request": 2,
+          "completed_returns": 2,
+          "actual_arrival_notice_counts": [
+            3
+          ]
+        },
+        "final-arrivals": {
+          "positions": 16,
+          "Host_requested_calls": 1,
+          "positions_with_Host_request": 1,
+          "completed_returns": 1,
+          "actual_arrival_notice_counts": [
+            13
+          ]
+        }
+      }
+    },
+    "fixed-context": {
+      "positions": 64,
+      "Host_requested_calls": 24,
+      "completed_returns": 24,
+      "by_stage": {
+        "initial": {
+          "positions": 16,
+          "Host_requested_calls": 19,
+          "positions_with_Host_request": 16,
+          "completed_returns": 19,
+          "actual_arrival_notice_counts": [
+            7
+          ]
+        },
+        "same-sources": {
+          "positions": 16,
+          "Host_requested_calls": 2,
+          "positions_with_Host_request": 2,
+          "completed_returns": 2,
+          "actual_arrival_notice_counts": [
+            0
+          ]
+        },
+        "intermediate-arrivals": {
+          "positions": 16,
+          "Host_requested_calls": 2,
+          "positions_with_Host_request": 2,
+          "completed_returns": 2,
+          "actual_arrival_notice_counts": [
+            3
+          ]
+        },
+        "final-arrivals": {
+          "positions": 16,
+          "Host_requested_calls": 1,
+          "positions_with_Host_request": 1,
+          "completed_returns": 1,
+          "actual_arrival_notice_counts": [
+            13
+          ]
+        }
+      }
+    },
+    "t1-main-seed0": {
+      "positions": 64,
+      "Host_requested_calls": 24,
+      "completed_returns": 24,
+      "by_stage": {
+        "initial": {
+          "positions": 16,
+          "Host_requested_calls": 19,
+          "positions_with_Host_request": 16,
+          "completed_returns": 19,
+          "actual_arrival_notice_counts": [
+            7
+          ]
+        },
+        "same-sources": {
+          "positions": 16,
+          "Host_requested_calls": 3,
+          "positions_with_Host_request": 3,
+          "completed_returns": 3,
+          "actual_arrival_notice_counts": [
+            0
+          ]
+        },
+        "intermediate-arrivals": {
+          "positions": 16,
+          "Host_requested_calls": 1,
+          "positions_with_Host_request": 1,
+          "completed_returns": 1,
+          "actual_arrival_notice_counts": [
+            3
+          ]
+        },
+        "final-arrivals": {
+          "positions": 16,
+          "Host_requested_calls": 1,
+          "positions_with_Host_request": 1,
+          "completed_returns": 1,
+          "actual_arrival_notice_counts": [
+            13
+          ]
+        }
+      }
+    },
+    "t1-control-seed0": {
+      "positions": 64,
+      "Host_requested_calls": 25,
+      "completed_returns": 25,
+      "by_stage": {
+        "initial": {
+          "positions": 16,
+          "Host_requested_calls": 18,
+          "positions_with_Host_request": 16,
+          "completed_returns": 18,
+          "actual_arrival_notice_counts": [
+            7
+          ]
+        },
+        "same-sources": {
+          "positions": 16,
+          "Host_requested_calls": 5,
+          "positions_with_Host_request": 3,
+          "completed_returns": 5,
+          "actual_arrival_notice_counts": [
+            0
+          ]
+        },
+        "intermediate-arrivals": {
+          "positions": 16,
+          "Host_requested_calls": 1,
+          "positions_with_Host_request": 1,
+          "completed_returns": 1,
+          "actual_arrival_notice_counts": [
+            3
+          ]
+        },
+        "final-arrivals": {
+          "positions": 16,
+          "Host_requested_calls": 1,
+          "positions_with_Host_request": 1,
+          "completed_returns": 1,
+          "actual_arrival_notice_counts": [
+            13
+          ]
+        }
+      }
+    },
+    "continued-ce-seed0": {
+      "positions": 64,
+      "Host_requested_calls": 23,
+      "completed_returns": 23,
+      "by_stage": {
+        "initial": {
+          "positions": 16,
+          "Host_requested_calls": 20,
+          "positions_with_Host_request": 16,
+          "completed_returns": 20,
+          "actual_arrival_notice_counts": [
+            7
+          ]
+        },
+        "same-sources": {
+          "positions": 16,
+          "Host_requested_calls": 0,
+          "positions_with_Host_request": 0,
+          "completed_returns": 0,
+          "actual_arrival_notice_counts": [
+            0
+          ]
+        },
+        "intermediate-arrivals": {
+          "positions": 16,
+          "Host_requested_calls": 2,
+          "positions_with_Host_request": 2,
+          "completed_returns": 2,
+          "actual_arrival_notice_counts": [
+            3
+          ]
+        },
+        "final-arrivals": {
+          "positions": 16,
+          "Host_requested_calls": 1,
+          "positions_with_Host_request": 1,
+          "completed_returns": 1,
+          "actual_arrival_notice_counts": [
+            13
+          ]
+        }
+      }
+    },
+    "answer-seed0": {
+      "positions": 64,
+      "Host_requested_calls": 54,
+      "completed_returns": 53,
+      "by_stage": {
+        "initial": {
+          "positions": 16,
+          "Host_requested_calls": 42,
+          "positions_with_Host_request": 16,
+          "completed_returns": 42,
+          "actual_arrival_notice_counts": [
+            7
+          ]
+        },
+        "same-sources": {
+          "positions": 16,
+          "Host_requested_calls": 8,
+          "positions_with_Host_request": 4,
+          "completed_returns": 8,
+          "actual_arrival_notice_counts": [
+            0
+          ]
+        },
+        "intermediate-arrivals": {
+          "positions": 16,
+          "Host_requested_calls": 3,
+          "positions_with_Host_request": 2,
+          "completed_returns": 3,
+          "actual_arrival_notice_counts": [
+            3
+          ]
+        },
+        "final-arrivals": {
+          "positions": 16,
+          "Host_requested_calls": 1,
+          "positions_with_Host_request": 1,
+          "completed_returns": 0,
+          "actual_arrival_notice_counts": [
+            13
+          ]
+        }
+      }
+    },
+    "delivery-seed0": {
+      "positions": 64,
+      "Host_requested_calls": 21,
+      "completed_returns": 21,
+      "by_stage": {
+        "initial": {
+          "positions": 16,
+          "Host_requested_calls": 16,
+          "positions_with_Host_request": 16,
+          "completed_returns": 16,
+          "actual_arrival_notice_counts": [
+            7
+          ]
+        },
+        "same-sources": {
+          "positions": 16,
+          "Host_requested_calls": 3,
+          "positions_with_Host_request": 2,
+          "completed_returns": 3,
+          "actual_arrival_notice_counts": [
+            0
+          ]
+        },
+        "intermediate-arrivals": {
+          "positions": 16,
+          "Host_requested_calls": 2,
+          "positions_with_Host_request": 2,
+          "completed_returns": 2,
+          "actual_arrival_notice_counts": [
+            3
+          ]
+        },
+        "final-arrivals": {
+          "positions": 16,
+          "Host_requested_calls": 0,
+          "positions_with_Host_request": 0,
+          "completed_returns": 0,
+          "actual_arrival_notice_counts": [
+            13
+          ]
+        }
+      }
+    }
+  },
+  "scope": "Persisted AI tool_calls after current public Human message, independently counted against actual completed milai_retrieve receipts. Prior history calls excluded by original current message ID. Failures retained.",
+  "model_calls": 0,
+  "compute": {
+    "wall_seconds": 1.7068390613421798,
+    "cpu_seconds": 1.706733595
+  },
+  "ledger_recorded": false,
+  "arrival_notice_scope": "Parsed actual first Host system wire material for each position; counts indicate new visible source arrivals, not relevance, unread status or semantic correctness. All final positions receive13.",
+  "arrival_notice_compute": {
+    "wall_seconds": 0.11309893522411585,
+    "cpu_seconds": 0.11300808400000001
+  },
+  "actual_rows": "artifacts/host-intent-retrieval-v3/view-v4-d-author-review-v1/Host-request-counts-first8-v1.json"
+}

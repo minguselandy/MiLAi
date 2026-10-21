@@ -1,3 +1,24 @@
+# LATEST HOST TRIGGER / STREAM AUDIT — 2026-10-21
+
+Dparent3434203/exec69127 RUNNING; activeview-cache3627857, lastobserved41/64.
+Actual revalidation required. View-cache reviews0–40 SAVED, remaining41–63 unreviewed;
+threeB30heading alternatives20–22 remain; no wholearm score yet. 27HostC/materialpartial
+(finalcorrect9:45but finalproposal/rejectionnotobtained);40HostC/rawrescue,Viewfatiguewrong.
+Delivery64 fully closed/reviewed and cost remainder pending33; do not repeat finalizer.
+New first8 Host call audit: requests36/19/24/24/25/23/54/21; completed same exceptanswer53.
+Order generative/rules/fixed-context/main/control/CE/answer/delivery. Final16 eacharm:
+first7 have1 attempted retrieval, delivery0. ActualfirstHostwire arrivals all7/0/3/13.
+Manifestd-host-requests-first8-v1. Thus missingfinalretrieval is Host behavior despitecue;
+not all final errors identify Jev choices. No prompt or experiment outputs changed.
+Cumulativecost first8 executed: stream-costs-first8-v1.json and trackedmanifest;
+script summarize_d_stream_costs_v1.py accepts newoutput then closedarmnames. Later full10
+may use v2 output, charges only ownanalysisCPU to33. Allsource/modelcosts alreadybilled.
+Generative/answer/delivery exceedfixed-context generationcost at allfour actualwindows;
+no observed generation-tokenbreak-even. SimplebaselinealsoautonomousHost, notforcedread.
+Coalent16 trainpilot remainsFROZEN_NOT_DISPATCHED; wait Dclosure/actualownership.
+Pending33UNSETTLED; no modeloverlap oroffline settlementwhileactive. Fullgoal ACTIVE.
+No SHA/contentfingerprints/subagents/newservices/newledger. Current detailsfollow.
+
 # LATEST DELIVERY CLOSED / COALENT PILOT FROZEN — 2026-10-21
 
 D continuation parent3434203/exec69127 remains RUNNING; active view-cache PID3627857,
