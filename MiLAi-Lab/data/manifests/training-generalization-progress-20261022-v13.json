@@ -1,0 +1,189 @@
+{
+  "status": "ACTIVE_NOT_COMPLETE;PRIMARY_LEGACY_FIT_LIVE",
+  "recorded_at": "2026-10-22T01:56:02.415768+08:00",
+  "implementation": "8e9f5d70",
+  "active_model_job": {
+    "session": 42364,
+    "parent_pid": 2089181,
+    "child_pid": 2089186,
+    "status": "RUNNING",
+    "updates": 128,
+    "planned_updates": 524,
+    "frozen_source": "490c683e",
+    "action": "Continue unchanged;no restart/hot update/second model/offline settlement"
+  },
+  "factorial": {
+    "plan": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/factorial-execution-plan-v1.json",
+    "prepared_inputs": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/factorial-preparation-v1",
+    "frozen_source": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/frozen-factorial-8e9f5d70/MiLAi-Lab",
+    "status": "SOURCE_REVIEW_COMPLETE;INPUT_READY_NOT_DISPATCHED",
+    "groups": [
+      {
+        "family": "memops_B06",
+        "split": "train",
+        "original_recipe": "host-intent-view-v4-b-streams.json",
+        "original_stream": "memops_B06-view-v4-b-content",
+        "query_from": "requests[0].content, literal unchanged",
+        "initial_source_count": 14,
+        "later_source_count": 23,
+        "incoming_after_seed": 9,
+        "all_original_sources_equal": true
+      },
+      {
+        "family": "memops_C26",
+        "split": "train",
+        "original_recipe": "host-intent-view-v4-b-streams.json",
+        "original_stream": "memops_C26-view-v4-b-content",
+        "query_from": "requests[0].content, literal unchanged",
+        "initial_source_count": 8,
+        "later_source_count": 23,
+        "incoming_after_seed": 15,
+        "all_original_sources_equal": true
+      },
+      {
+        "family": "memops_A19",
+        "split": "dev",
+        "original_recipe": "host-intent-view-v4-d-dev-streams.json",
+        "original_stream": "memops_A19-view-v4-d-content",
+        "query_from": "requests[0].content, literal unchanged",
+        "initial_source_count": 7,
+        "later_source_count": 23,
+        "incoming_after_seed": 16,
+        "all_original_sources_equal": true
+      },
+      {
+        "family": "memops_A32",
+        "split": "dev",
+        "original_recipe": "host-intent-view-v4-d-dev-streams.json",
+        "original_stream": "memops_A32-view-v4-d-content",
+        "query_from": "requests[0].content, literal unchanged",
+        "initial_source_count": 7,
+        "later_source_count": 23,
+        "incoming_after_seed": 16,
+        "all_original_sources_equal": true
+      }
+    ],
+    "prelude_calls": 8,
+    "original_sources": 92,
+    "cells_per_policy": 64,
+    "factors": {
+      "view": 2,
+      "intent": 2,
+      "known": 2,
+      "control_step_budget": 2
+    },
+    "source_membership": {
+      "64": {
+        "memops_B06": {
+          "raw_states": 0,
+          "labelled_states": 0
+        },
+        "memops_C26": {
+          "raw_states": 0,
+          "labelled_states": 0
+        },
+        "memops_A19": {
+          "raw_states": 0,
+          "labelled_states": 0
+        },
+        "memops_A32": {
+          "raw_states": 0,
+          "labelled_states": 0
+        }
+      },
+      "128": {
+        "memops_B06": {
+          "raw_states": 30,
+          "labelled_states": 23
+        },
+        "memops_C26": {
+          "raw_states": 30,
+          "labelled_states": 24
+        },
+        "memops_A19": {
+          "raw_states": 0,
+          "labelled_states": 0
+        },
+        "memops_A32": {
+          "raw_states": 0,
+          "labelled_states": 0
+        }
+      },
+      "256": {
+        "memops_B06": {
+          "raw_states": 30,
+          "labelled_states": 23
+        },
+        "memops_C26": {
+          "raw_states": 30,
+          "labelled_states": 24
+        },
+        "memops_A19": {
+          "raw_states": 0,
+          "labelled_states": 0
+        },
+        "memops_A32": {
+          "raw_states": 0,
+          "labelled_states": 0
+        }
+      }
+    },
+    "known_refs_in_original_operation_pool": {
+      "train": {
+        "rows": 7884,
+        "nonempty_explicit_refs": 0
+      },
+      "dev": {
+        "rows": 860,
+        "nonempty_explicit_refs": 0
+      }
+    },
+    "source_review": {
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/factorial-preparation-v1/source-first-review-v1.json",
+      "sources_read": 92,
+      "new_model_outputs_read": 0,
+      "operation_labels_added": 0,
+      "scope": "Author source review,not independent truth or native oracle. Sources are statements by their recorded speakers; no external-world verification."
+    },
+    "readiness": "Prelude and actual E2 pair execution await current job terminal. Learned cell arms additionally await their preregistered checkpoint selection;factor results do not choose weights.",
+    "mechanical_validation": {
+      "tests_passed": 3,
+      "real_Store_cells_completed": 16,
+      "actual_E2_treatment_branches": 2,
+      "shared_original_before_equal": true,
+      "retained_view_revision": 1,
+      "refreshed_view_revision": 2,
+      "new_original_source_bound_only_after_refresh": true,
+      "existing_original_sources_literal_equal_across_cells": true,
+      "all_source_pending_retained_refreshed": [
+        3,
+        1
+      ],
+      "pending_scope": "Scripted test:prior query text still pending after actual material refresh;not a semantic correctness claim",
+      "known_refs_and_request_limits_preserved": true,
+      "new_cell_snapshots_feed_existing_feedback_preparer": true,
+      "missing_group_retained_in_planned_denominator": true,
+      "test_model_provider": "Scripted HTTP;not real model quality evidence"
+    },
+    "ruff_files_passed": 4,
+    "mypy_implementation_files_passed": 3,
+    "boundaries": "Package and tools passed;6 inherited private dependency edges unchanged",
+    "scope": "Conditional retrieval mechanism,not autonomous Host or independent cache lifecycle. No-View/Host/protected/seeds requirements remain."
+  },
+  "new_canonical_measured_phases_pending": [
+    {
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/factorial-execution-plan-v1.json",
+      "cpu_seconds": 10.78527915
+    },
+    {
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/factorial-preparation-v1/source-first-review-v1.json",
+      "cpu_seconds": 6.641699999999917e-05
+    }
+  ],
+  "cost_scope": "Source-review semantic time,tests,unmeasured inspections/imports unknown. Embedded timing copies are not new phases. Prior v11/v12 pending untouched;closed settlementsv1/v2/v3 never append/re-settle;oldpending35 untouched.",
+  "real_model_jobs_started_this_turn": 0,
+  "no_sha_validation": true,
+  "no_subagents": true,
+  "no_push_merge_or_service_change": true,
+  "remaining": "Complete legacy524 and corrected64/128/256/lowLR/head-only/aux/E3 fits;actual STATE View and E2 acceptance;full factorial executions and semantic review;feedback32/64/128/selfstates/common-support;strong simple autonomous Host/no-View/cost comparisons;protected external and seeds0/1/2 family-level confirmation."
+}

@@ -1,4 +1,75 @@
-# LATEST V12 (2026-10-22): LEGACY FIT LIVE / COMPLETE ACTION INPUTS READY
+# LATEST V13 (2026-10-22): LEGACY FIT128 LIVE / FACTORIAL PROTOCOL READY
+
+Full goal ACTIVE, not complete or blocked. Previous turn made substantive progress:
+8e9f5d70 implements crossed request probes over actual E2 retained/refreshed branches;
+four source preludes and source-first reviews prepared. Actual new model jobs0.
+Revalidate exec42364 parent2089181/child2089186 plus first-operation-fit-v1/driver.json
+and fitting/source256-full-seed0-u524-v1/run.json. Latest both alive,RUNNING128/524.
+Frozen490c683e remains unchanged as legacy representation control. No second model
+job/offline settlement/restart/hot update while alive. Observation timeouts not terminal.
+Source queue93727 CLOSED480;do not restart. Paused Coalent untouched.
+
+New src/milai_lab/runners/retrieval_factorial.py,prepare_retrieval_factorial.py,
+run_retrieval_factorial.py reuse existing given-request/E2/Store/ledger paths.
+No changes to functional runner,public schema,permissions,Canonical or policy algorithms.
+prepare_factorial selects only declared closed bank/message captures with actual pending
+View,resolved prior refs,and offered plain HANDOFF/REFRESH_VIEW. It prepares exact E2
+first actions,continuation0. Missing conditions stay in planned denominator,not negatives.
+Existing run_frozen_retrieval_calls executes the two treatments;NO --host-readout.
+New runner requires closed E2 treatments,checks original Sources equal,and copies each
+treatment per cell/policy while retaining source namespace and original ledger.
+Factor labels stay evaluator-side. Requests vary only declared goal,actual known refs,
+control-step limit;query/other context fixed. Each actual initial/post-step capture can
+feed the existing prepare_view_feedback_branches;no new labels automatically added.
+
+Mechanical test uses real Store + scripted HTTP:2 E2 actions before/actions equal,
+16 complete cells,retainedView revision1/refreshed2,unchanged original Sources,
+exact known refs/limits,one missing group kept in32 planned denominator. New arriving
+source bound only after refresh. Global pending remains3/1 because prior query text
+still arrives;do NOT equate revision/binding exposure with semantic freshness or truth.
+Feedback preparer admits actual new captured states/poststeps,raw gold remains empty.
+3 tests pass,Ruff4/mypy3 and package/tools boundaries pass;6 inherited private edges.
+No need repeat passed checks without relevant changes. No real model quality evidence.
+
+factorial-preparation-v1/{histories.json,config.json,specification.json,preparation.json,
+source-review-cards.json,source-first-review-v1.json}. Four groups:train B06,C26 and
+dev A19,A32. First two content streams from inherited B/D recipes;no score selection.
+92 literal original arrivals,seed cuts14/8/7/7,then23 each;8 given prelude calls.
+No scripted View or invented refs;later request binds actual earlier receipts only.
+Four binary factors give64 PLANNED cells/policy,not executed cells. Limits steps2/8,
+full return2048 fixed. Both train groups in128/256 cohorts only,NOT64;dev groups never
+gradient-train but already exposed dev. Source/combination claims must respect this.
+All7884 raw operation train and860dev have ZERO nonempty explicit known refs. This
+is an input coverage gap,not proof the original Host had no memory.
+
+All92 sources reviewed before NEW View results;no operation labels added. B06 planned
+large-group exception vs stable preference;C26 confirmed3PM vs pending4PM;A19 initial
+Karen number unknown,final same person with number and cancelled/unsubmitted changes;
+A32 completed app audit vs unaccepted provider migration. Assistant claims not user
+ground truth;initial frontiers exclude later facts. Full notes in ignored source-review
+file. Semantic review unmeasured,not independent truth. No ideal View has been authored.
+
+factorial-execution-plan-v1.json exact prelude and subsequent preparation commands;
+frozen-factorial-8e9f5d70/MiLAi-Lab has7 checked literal files. Source-review wait in
+plan is declaration-time history;v13 progress confirms review COMPLETE,prelude INPUT
+READY_NOT_DISPATCHED. Actual captures/pairs/cells/learned weight paths still await execution.
+Prelude follows current job terminal;learned arms additionally await preregistered
+operation-dev checkpoint selection. Factor outcomes NEVER select weights. Shared setup
+and E2 refresh costs separate;this is not autonomous Host or own-bank cache efficiency.
+
+Canonical new pending CPU10.785279150(plan/archive)+.000066417(note assembly/identity
+checks only). Note I/O,semantic review,tests and other unmeasured inspection unknown.
+v11/v12 pending untouched. Closed settlementsv1/v2/v3 NEVER append/re-settle;exclude all
+their phase measurement_files and embedded copies. Oldpending35 untouched. Trainer
+records its own compute on terminal,parent cost separate. No SHA/subagents/push/merge.
+
+Full remaining:finish legacy524,corrected64/128/256/lowLR/head-only/aux/E3 fits (v12);
+STATE36 actual View/post-op acceptance (v11);factorial8-call prelude,pairs,cells/semantic
+review;feedback32/64/128/selfstates/common-support;strong simple autonomous Host/no-View/
+lifecycle cost comparisons;protected external,seeds0/1/2 and family-paired bootstrap.
+See execution doc and training-generalization-progress-20261022-v13.json. No gain claim.
+
+# V12 HISTORY: LEGACY FIT LIVE / COMPLETE ACTION INPUTS READY
 
 Full goal ACTIVE, not complete or blocked. Read this before historical snapshots below.
 01:27 Shanghai snapshot: primary exec42364, parent2089181, child2089186 both alive;
