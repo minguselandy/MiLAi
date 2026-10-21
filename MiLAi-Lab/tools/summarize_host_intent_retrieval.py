@@ -86,7 +86,8 @@ def summarize(roots: list[Path], reviews: list[dict[str, Any]]) -> dict[str, Any
             for event in events:
                 if event.get("event") != "vllm_response":
                     continue
-                stage = generation_stage(event)
+                stage = ("embedding" if event["path"] == "embeddings"
+                         else generation_stage(event))
                 for target in (stages, row_stages):
                     target[stage].update(requests=1, tokens=event["usage"]["total_tokens"],
                                          http_wall_seconds=event["wall_seconds"])
@@ -106,16 +107,20 @@ def summarize(roots: list[Path], reviews: list[dict[str, Any]]) -> dict[str, Any
                           if v["kind"] == "query_structure"],
                 "stage_costs": dict(row_stages),
                 "semantic_mutation_receipts": len(result.get("memory_mutation_receipts", []))})
-    tokens = sum(stage["tokens"] for stage in stages.values())
+    tokens = sum(stage["tokens"] for name, stage in stages.items() if name != "embedding")
     if tokens != sum(run["generation"]["known_tokens"] for run in runs):
         raise ValueError("Stage response tokens do not reconcile with closed-run ledger deltas")
+    embedding_tokens = sum(stage["tokens"] for name, stage in stages.items() if name == "embedding")
+    if embedding_tokens != sum(run["embedding"]["known_tokens"] for run in runs):
+        raise ValueError("Embedding response tokens do not reconcile with closed-run ledger deltas")
     counts = {profile: dict(Counter(row["review"]["grade"] for row in rows
                                    if row.get("profile", row["policy"]) == profile))
               for profile in sorted({row.get("profile", row["policy"]) for row in rows})}
     return {"schema": "host_intent_closed_results_v1", "runs": runs, "positions": rows,
             "grades": counts, "stages": dict(stages), "local_model": dict(local),
             "local_compute": dict(compute),
-            "known_generation_tokens": tokens, "model_outcomes_rewritten": False,
+            "known_generation_tokens": tokens, "known_embedding_tokens": embedding_tokens,
+            "model_outcomes_rewritten": False,
             "semantic_review_kind": "author_source_review_not_independent_judgment",
             "cost_note": "Stage HTTP wall is nested inside retrieval/message wall; "
                          "do not sum twice."}
