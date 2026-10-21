@@ -1,3 +1,34 @@
+# LATEST: D CONTINUATION RUNNING — 2026-10-21
+
+OldDparent2468544/exec65603 CLOSED STOPPED_AFTER_FAILED_ARM. Answer3182964 CLOSED44/64,
+index43 E08contentfinal failed complete-input capacity. OriginalF retained, no rerun.
+Actualinput audit:16663fulltokens vs16384,head1216<2048,279state tokenswoulddrop;
+rejectedBEFOREforward.5previouspayloads exactlyreconstructed;step5 has92actions.
+Audit view-v4-d-answer-capacity-audit-v1. First44review11C13Q15W5F,18complete26partial;
+45retrievals24empty,100HTTP506887tokens;120successfulforward745301tokens/max15963;
+1rejection. First44-summary-v1 +manifest d-answer-first44-v1, NOTfullarm.
+AnsweroldCPU188.591851525 total/native126.594309253alreadybilled;61.997542272remainder
+settledv32. OldparentCPU0.027123587also settled. Neverrechargeold44orparent.
+PENDING32 SETTLED103phases783.286192445CPU underactualidle+ledgerlock;HTTPunchanged.
+NewPENDING33 UNSETTLED. Use NEW helpers export_d_review_cards_v2.py /
+write_d_review_batch_v2.py / finalize_d_native_review_v2.py (lasttakesoptionalrootarg).
+OLDhelperswriteSETTLED32:DO NOT USE. Newexport combinesoldplan+continuationplan andmaps
+answerremaining20 tologicalindices44–63, sameanswerreviewdirectory. Existingcardsnotrewritten.
+Answerfinalaggregate mustcombineold44+new20roots; generic64single-rootfinalizerNOTsuitable.
+Currentparent3434203/exec69127, activeanswerremaining20PID3434228 latest12/20.
+Authoritative view-v4-d-continuation-v1/driver.json; plan view-v4-d-continuation-plan-v1.json.
+Queueanswerremaining20 ->delivery64 ->view-cache64 ->MemPursuit64. Core11798c8dunchanged.
+Only5untouchedcoldhistories; originalanswerreservation100/1200520 retained via residual
+config500requests/6799480reservedtokens. Allinput/head/return/steps/Host/weights unchanged.
+RevalidateactualPID; no parallelmodeljobs orsettlementwhilealive.
+Cardsanswer44–46exported, notgraded; old0–43reviewed. Otherlast3armsnotstartedyet.
+Coalentgrain auditv2 PASS model-free:trainBgroups14/8/16/4sources. Eventunits synth3each
+vsordinarychunks groupedby session synth2/1/2/1, coveringall42vs12. SameuniqueSourcebodies,
+maxBGEchunk1449. Fixedvectors/scriptedsynth only; NOsemantic/performanceclaim. Session
+grouping offlineonly; nativeaggregatebinding/visibility/versionhandlingnotimplemented.
+Firstv1setupfailurepreserved, CPUunknown;v2CPU3.982491251settled32.
+Coalent actualmodelpilotstillpending. FullgoalACTIVE; noSHA/subagents/newservices/ledger.
+
 # LATEST D REVIEWS — 2026-10-21
 
 Dparent2468544/exec65603 RUNNING; first6arms CLOSEDandreviewed. Activeanswer-seed0

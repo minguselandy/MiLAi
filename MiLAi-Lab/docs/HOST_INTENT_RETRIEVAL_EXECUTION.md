@@ -2249,3 +2249,20 @@ CE有23次检索、1空返回，均实际进入Host wire，最大1952tokens；�
 以8个来源组为配对单位，相对T1主臂，操作对照有3组C更多、4组更少、1组相同；CE为2组更多、3组更少、3组相同。只是已暴露dev的作者描述，不能把64位置当独立样本、把随机Host轨迹差异归为控制器单独因果效果，或据此宣布胜出。CE位置15的RecoveryInformationUpdate标题有Q/W解读歧义，主评Q并保留W替代，不影响完整C数。
 
 结果索引：data/manifests/host-intent-view-v4-d-t1-control-seed0-results-v1.json、host-intent-view-v4-d-continued-ce-seed0-results-v1.json；分组配对见host-intent-view-v4-d-frozen-and-ce-paired-v1.json。六臂执行与作者评审已闭合；答案反馈、交付反馈、简单缓存和MemPursuit尚待完成及比较，完整E确认范围仍未选择。
+
+
+## 2026-10-21：Coalent输入粒度审计与答案臂容量失败
+
+在四个已暴露B训练来源组的首个前缀上做了无模型结构检查：B06/C26/D11/F08分别14/8/16/4个原始Source，共42条。逐Source作为artifact时，上游每read最多3个artifact构建，使各组合成器首轮只收到3条（总12条）；把同一批普通exchange候选按原生session归组时，分别2/1/2/1次合成调用覆盖该组全部原文。两条件实际唯一Source集合、角色和正文逐项相等；最长普通候选1449个BGE tokens，均未超8192。固定等分向量和脚本合成仅用于检查上游构建上限，不代表真实BGE排序、Host效果或便宜的实际合成。
+
+该结果说明逐消息分块会额外限制合成覆盖，不能据此评价Coalent优劣。session分组目前仅离线表示探针；正式接入仍需补齐聚合来源绑定、可见性和原生版本处理，不能直接用新artifactID替换真实Source ID。首次审计因owner/namespace不一致在导入任何来源前失败，原目录和failure保留、CPU未测得；v2修正配置后完成，3.982491251秒CPU记入pending-v32。索引host-intent-view-v4-coalent-granularity-audit-v2.json。
+
+D原队列随后按原停止规则退出：父2468544/exec65603与答案子进程3182964均已结束，答案臂执行44/64后在index43（E08内容流末轮）失败。离线使用原frozen11798投影和真实tokenizer复原该输入，前5个实际模型输入逐项相等；失败步5有92个合法选项，完整state15446＋head1216等构成16663token序列，比16384上限多279。head本身未超2048；原推理器在forward前拒绝，并未截断执行。单独字段长度显示action_bindings4643tokens较大，但这些诊断长度不可简单相加。失败前该位置已经花费3HTTP/19028tokens和5次有效forward，全部保留。
+
+答案前44位置作者评审为11C/13Q/15W/5F，材料18完整/26部分；B30两处分类标题有C替代解读，完整数上界13。共45次检索、24空回执，100HTTP/506887tokens；120次成功forward745301tokens、最大15963，成功输入无截断/非有限结果，另1次容量拒绝。特别是C03原文首轮28有20次实际工具回执，其中18空，原始完整材料仍保留在K；D25多次把View文本当作用户引文，或把自己的旧Host答案/公共问题重新绑定成原始支持。前44不是完整64位置成绩，不与其他整臂作比例胜负比较。原始结果及first44-summary-v1.json全部保留，索引host-intent-view-v4-d-answer-first44-v1.json。
+
+确认所有实验进程退出并取得原ledger的http-owner锁后，pending-v32的103个测得阶段一次结算783.286192445秒CPU；已直接计费的本地模型CPU从各驱动中扣除，生成/embedding计数不变。原D父进程仅0.027123587秒CPU单独计入，墙时含子进程不可叠加。未测得的调试/审阅开销仍unknown。结算索引host-intent-view-v4-offline-review-settlement-v32.json；后续使用pending-v33。
+
+续跑仅含从未执行的5条独立冷流（答案indices44–63）及未启动的delivery/view-cache/MemPursuit，共212位置。失败43恰为上一内容流的末轮，无需复制或重放已失败流。模型、提示、输入/返回上限、步数、来源和请求均不变；答案原队列已预约100次/1200520tokens，剩余子运行只给500次/6799480tokens，保持原600次/8M总预约上限。实际用量仍记同一ledger，额外权重重载费用不免除。
+
+续跑已实际启动，父3434203/exec69127，答案remaining20子进程3434228；后三臂继续串行。主索引host-intent-view-v4-d-continuation-v1.json。后续用export_d_review_cards_v2.py将新增答案位置映射回44–63，用write_d_review_batch_v2.py写pending33；不能再运行会写已结算pending32的旧helper。最终答案整臂须合并原44与新20，只追加新20的未计CPU差额，不能再次计原44。完整目标仍在进行中。
