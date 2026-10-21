@@ -1,0 +1,686 @@
+{
+  "status": "PARTIAL_D_COMPARISON_THREE_CLOSED_ARMS",
+  "source_version": "11798c8d",
+  "arms": {
+    "generative": {
+      "host_grades": {
+        "Q": 19,
+        "W": 14,
+        "C": 15,
+        "F": 16
+      },
+      "host_complete_primary": 15,
+      "host_complete_with_scope_ambiguity": 16,
+      "delivery": {
+        "partial": 43,
+        "complete": 18,
+        "insufficient": 3
+      },
+      "retrieval_calls": 36,
+      "empty_returns": 3,
+      "returns_seen_in_Host": 36,
+      "max_wire_tokens": 1986,
+      "generation_tokens": 1221393,
+      "generation_requests": 220,
+      "unknown_generation_delta": 0,
+      "stage_costs": {
+        "host_request": {
+          "requests": 35,
+          "tokens": 107408,
+          "http_wall_seconds": 263.80018063634634
+        },
+        "control_generation": {
+          "requests": 102,
+          "tokens": 572887,
+          "http_wall_seconds": 83.19496501516551
+        },
+        "host_completion": {
+          "requests": 48,
+          "tokens": 282696,
+          "http_wall_seconds": 828.3951714355499
+        },
+        "view_generation": {
+          "requests": 19,
+          "tokens": 72232,
+          "http_wall_seconds": 101.73992118798196
+        },
+        "host_incomplete": {
+          "requests": 16,
+          "tokens": 186170,
+          "http_wall_seconds": 856.8608512440696
+        }
+      },
+      "wall_seconds": 2276.578471420333,
+      "cpu_seconds_nested": 85.252563737,
+      "cpu_unbilled": 85.252563737,
+      "by_source_group": {
+        "memops_A19": {
+          "complete_Host": 1,
+          "complete_material": 1,
+          "generation_tokens": 141402
+        },
+        "memops_A32": {
+          "complete_Host": 2,
+          "complete_material": 3,
+          "generation_tokens": 213262
+        },
+        "memops_B30": {
+          "complete_Host": 2,
+          "complete_material": 3,
+          "generation_tokens": 151388
+        },
+        "memops_C03": {
+          "complete_Host": 3,
+          "complete_material": 4,
+          "generation_tokens": 150174
+        },
+        "memops_D25": {
+          "complete_Host": 0,
+          "complete_material": 0,
+          "generation_tokens": 106271
+        },
+        "memops_E08": {
+          "complete_Host": 2,
+          "complete_material": 2,
+          "generation_tokens": 185376
+        },
+        "memops_E15": {
+          "complete_Host": 1,
+          "complete_material": 1,
+          "generation_tokens": 162362
+        },
+        "memops_F01": {
+          "complete_Host": 4,
+          "complete_material": 4,
+          "generation_tokens": 111158
+        }
+      },
+      "by_request_position": {
+        "initial": {
+          "positions": 16,
+          "host": {
+            "Q": 3,
+            "C": 9,
+            "W": 2,
+            "F": 2
+          },
+          "delivery": {
+            "partial": 5,
+            "complete": 9,
+            "insufficient": 2
+          },
+          "known_generation_tokens": 417278,
+          "retrieval_calls": 20,
+          "positions_with_new_retrieval": 16
+        },
+        "same-sources": {
+          "positions": 16,
+          "host": {
+            "Q": 8,
+            "C": 4,
+            "W": 2,
+            "F": 2
+          },
+          "delivery": {
+            "partial": 9,
+            "complete": 6,
+            "insufficient": 1
+          },
+          "known_generation_tokens": 304488,
+          "retrieval_calls": 9,
+          "positions_with_new_retrieval": 6
+        },
+        "intermediate-arrivals": {
+          "positions": 16,
+          "host": {
+            "W": 3,
+            "F": 5,
+            "Q": 6,
+            "C": 2
+          },
+          "delivery": {
+            "partial": 13,
+            "complete": 3
+          },
+          "known_generation_tokens": 315879,
+          "retrieval_calls": 6,
+          "positions_with_new_retrieval": 5
+        },
+        "final-arrivals": {
+          "positions": 16,
+          "host": {
+            "W": 7,
+            "F": 7,
+            "Q": 2
+          },
+          "delivery": {
+            "partial": 16
+          },
+          "known_generation_tokens": 183748,
+          "retrieval_calls": 1,
+          "positions_with_new_retrieval": 1
+        }
+      },
+      "failed_with_complete_material": [
+        29,
+        41
+      ],
+      "embedding_delta": {
+        "charged_tokens": 0,
+        "known_tokens": 0,
+        "unknown_usage": 0
+      },
+      "material_budget_rejections": []
+    },
+    "rules": {
+      "host_grades": {
+        "C": 19,
+        "W": 22,
+        "Q": 18,
+        "F": 5
+      },
+      "host_complete_primary": 19,
+      "host_complete_with_scope_ambiguity": 19,
+      "delivery": {
+        "complete": 36,
+        "partial": 28
+      },
+      "retrieval_calls": 19,
+      "empty_returns": 0,
+      "returns_seen_in_Host": 19,
+      "max_wire_tokens": 2045,
+      "generation_tokens": 551227,
+      "generation_requests": 100,
+      "unknown_generation_delta": 0,
+      "stage_costs": {
+        "host_request": {
+          "requests": 19,
+          "tokens": 49922,
+          "http_wall_seconds": 95.41671597585082
+        },
+        "view_generation": {
+          "requests": 17,
+          "tokens": 56706,
+          "http_wall_seconds": 93.26279377844185
+        },
+        "host_completion": {
+          "requests": 59,
+          "tokens": 380620,
+          "http_wall_seconds": 1004.1895245024934
+        },
+        "host_incomplete": {
+          "requests": 5,
+          "tokens": 63979,
+          "http_wall_seconds": 268.54205699823797
+        }
+      },
+      "wall_seconds": 1596.1456794040278,
+      "cpu_seconds_nested": 84.060736934,
+      "cpu_unbilled": 84.060736934,
+      "by_source_group": {
+        "memops_A19": {
+          "complete_Host": 4,
+          "complete_material": 4,
+          "generation_tokens": 48256
+        },
+        "memops_A32": {
+          "complete_Host": 0,
+          "complete_material": 4,
+          "generation_tokens": 63905
+        },
+        "memops_B30": {
+          "complete_Host": 2,
+          "complete_material": 6,
+          "generation_tokens": 59669
+        },
+        "memops_C03": {
+          "complete_Host": 4,
+          "complete_material": 4,
+          "generation_tokens": 55619
+        },
+        "memops_D25": {
+          "complete_Host": 1,
+          "complete_material": 4,
+          "generation_tokens": 77226
+        },
+        "memops_E08": {
+          "complete_Host": 1,
+          "complete_material": 4,
+          "generation_tokens": 96249
+        },
+        "memops_E15": {
+          "complete_Host": 1,
+          "complete_material": 4,
+          "generation_tokens": 72452
+        },
+        "memops_F01": {
+          "complete_Host": 6,
+          "complete_material": 6,
+          "generation_tokens": 77851
+        }
+      },
+      "by_request_position": {
+        "initial": {
+          "positions": 16,
+          "host": {
+            "C": 10,
+            "W": 1,
+            "Q": 5
+          },
+          "delivery": {
+            "complete": 16
+          },
+          "known_generation_tokens": 169831,
+          "retrieval_calls": 16,
+          "positions_with_new_retrieval": 16
+        },
+        "same-sources": {
+          "positions": 16,
+          "host": {
+            "C": 7,
+            "W": 2,
+            "Q": 6,
+            "F": 1
+          },
+          "delivery": {
+            "complete": 16
+          },
+          "known_generation_tokens": 104235,
+          "retrieval_calls": 0,
+          "positions_with_new_retrieval": 0
+        },
+        "intermediate-arrivals": {
+          "positions": 16,
+          "host": {
+            "W": 8,
+            "Q": 6,
+            "C": 2
+          },
+          "delivery": {
+            "partial": 12,
+            "complete": 4
+          },
+          "known_generation_tokens": 119516,
+          "retrieval_calls": 2,
+          "positions_with_new_retrieval": 2
+        },
+        "final-arrivals": {
+          "positions": 16,
+          "host": {
+            "W": 11,
+            "Q": 1,
+            "F": 4
+          },
+          "delivery": {
+            "partial": 16
+          },
+          "known_generation_tokens": 157645,
+          "retrieval_calls": 1,
+          "positions_with_new_retrieval": 1
+        }
+      },
+      "failed_with_complete_material": [
+        41
+      ],
+      "embedding_delta": {
+        "charged_tokens": 0,
+        "known_tokens": 0,
+        "unknown_usage": 0
+      },
+      "material_budget_rejections": [
+        {
+          "index": 4,
+          "selected": "refresh_view",
+          "trace": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/view-v4-d-v2/rules/rules-rich/banks/90931852-1020-4fe1-9d04-11ae04703ab7/1aa8564a-3923-4ab6-b255-6bc69fb4a9b9-trace-0.jsonl"
+        },
+        {
+          "index": 16,
+          "selected": "refresh_view",
+          "trace": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/view-v4-d-v2/rules/rules-rich/banks/85fa5473-1dc4-4629-a62b-24d2693885b7/8dcda3af-1d91-43d0-866a-fe3c08d88057-trace-0.jsonl"
+        },
+        {
+          "index": 32,
+          "selected": "refresh_view",
+          "trace": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/view-v4-d-v2/rules/rules-rich/banks/74448658-f234-46b5-93e9-17545c026dbc/7398516d-6c1d-4013-9cde-9cb3631367f8-trace-0.jsonl"
+        },
+        {
+          "index": 36,
+          "selected": "refresh_view",
+          "trace": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/view-v4-d-v2/rules/rules-rich/banks/21c0961b-8615-4fb5-a0bc-3f6fd132333e/6c3965a9-6ee6-4718-a510-4da518abefbb-trace-0.jsonl"
+        },
+        {
+          "index": 42,
+          "selected": "refresh_view",
+          "trace": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/view-v4-d-v2/rules/rules-rich/banks/32646981-ddab-4df9-a9fa-7dcb26ac2c5c/28d71dcc-f21f-4e61-a412-f59cd6904636-trace-0.jsonl"
+        },
+        {
+          "index": 48,
+          "selected": "refresh_view",
+          "trace": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/view-v4-d-v2/rules/rules-rich/banks/390591aa-cb69-4da1-8ed2-333fe5139dc1/3e3985d3-3993-4612-9089-c77562d5350d-trace-0.jsonl"
+        },
+        {
+          "index": 62,
+          "selected": "read_3",
+          "trace": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/view-v4-d-v2/rules/rules-rich/banks/e4f07a7f-7e1d-4835-8d7c-f98cd2fc1aa2/9a7763b2-3e96-4e06-b06b-de0a198ccddb-trace-0.jsonl"
+        },
+        {
+          "index": 62,
+          "selected": "read_4",
+          "trace": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/view-v4-d-v2/rules/rules-rich/banks/e4f07a7f-7e1d-4835-8d7c-f98cd2fc1aa2/9a7763b2-3e96-4e06-b06b-de0a198ccddb-trace-0.jsonl"
+        },
+        {
+          "index": 63,
+          "selected": "read_3",
+          "trace": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/view-v4-d-v2/rules/rules-rich/banks/e4f07a7f-7e1d-4835-8d7c-f98cd2fc1aa2/d76d28c8-3fc8-43dd-b362-3d1ebb996dcc-trace-0.jsonl"
+        },
+        {
+          "index": 63,
+          "selected": "read_4",
+          "trace": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/view-v4-d-v2/rules/rules-rich/banks/e4f07a7f-7e1d-4835-8d7c-f98cd2fc1aa2/d76d28c8-3fc8-43dd-b362-3d1ebb996dcc-trace-0.jsonl"
+        },
+        {
+          "index": 63,
+          "selected": "read_5",
+          "trace": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/view-v4-d-v2/rules/rules-rich/banks/e4f07a7f-7e1d-4835-8d7c-f98cd2fc1aa2/d76d28c8-3fc8-43dd-b362-3d1ebb996dcc-trace-0.jsonl"
+        },
+        {
+          "index": 63,
+          "selected": "read_6",
+          "trace": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/view-v4-d-v2/rules/rules-rich/banks/e4f07a7f-7e1d-4835-8d7c-f98cd2fc1aa2/d76d28c8-3fc8-43dd-b362-3d1ebb996dcc-trace-0.jsonl"
+        }
+      ]
+    },
+    "fixed-context": {
+      "host_grades": {
+        "C": 21,
+        "W": 17,
+        "Q": 14,
+        "F": 12
+      },
+      "host_complete_primary": 21,
+      "host_complete_with_scope_ambiguity": 22,
+      "delivery": {
+        "complete": 38,
+        "partial": 26
+      },
+      "retrieval_calls": 24,
+      "empty_returns": 0,
+      "returns_seen_in_Host": 24,
+      "max_wire_tokens": 1616,
+      "generation_tokens": 513678,
+      "generation_requests": 88,
+      "unknown_generation_delta": 0,
+      "stage_costs": {
+        "host_request": {
+          "requests": 24,
+          "tokens": 66978,
+          "http_wall_seconds": 150.01498983986676
+        },
+        "host_completion": {
+          "requests": 52,
+          "tokens": 311466,
+          "http_wall_seconds": 789.2562147676945
+        },
+        "host_incomplete": {
+          "requests": 11,
+          "tokens": 130799,
+          "http_wall_seconds": 591.0351852271706
+        },
+        "unparsed_host_response": {
+          "requests": 1,
+          "tokens": 4435,
+          "http_wall_seconds": 11.274153495207429
+        }
+      },
+      "wall_seconds": 1667.778053865768,
+      "cpu_seconds_nested": 76.823128998,
+      "cpu_unbilled": 76.823128998,
+      "by_source_group": {
+        "memops_A19": {
+          "complete_Host": 4,
+          "complete_material": 4,
+          "generation_tokens": 51801
+        },
+        "memops_A32": {
+          "complete_Host": 0,
+          "complete_material": 4,
+          "generation_tokens": 61037
+        },
+        "memops_B30": {
+          "complete_Host": 2,
+          "complete_material": 6,
+          "generation_tokens": 49643
+        },
+        "memops_C03": {
+          "complete_Host": 4,
+          "complete_material": 5,
+          "generation_tokens": 58224
+        },
+        "memops_D25": {
+          "complete_Host": 0,
+          "complete_material": 4,
+          "generation_tokens": 71341
+        },
+        "memops_E08": {
+          "complete_Host": 3,
+          "complete_material": 5,
+          "generation_tokens": 85573
+        },
+        "memops_E15": {
+          "complete_Host": 3,
+          "complete_material": 4,
+          "generation_tokens": 69212
+        },
+        "memops_F01": {
+          "complete_Host": 5,
+          "complete_material": 6,
+          "generation_tokens": 66847
+        }
+      },
+      "by_request_position": {
+        "initial": {
+          "positions": 16,
+          "host": {
+            "C": 11,
+            "Q": 4,
+            "F": 1
+          },
+          "delivery": {
+            "complete": 16
+          },
+          "known_generation_tokens": 120342,
+          "retrieval_calls": 19,
+          "positions_with_new_retrieval": 16
+        },
+        "same-sources": {
+          "positions": 16,
+          "host": {
+            "C": 7,
+            "F": 3,
+            "W": 1,
+            "Q": 5
+          },
+          "delivery": {
+            "complete": 16
+          },
+          "known_generation_tokens": 117472,
+          "retrieval_calls": 2,
+          "positions_with_new_retrieval": 2
+        },
+        "intermediate-arrivals": {
+          "positions": 16,
+          "host": {
+            "W": 5,
+            "Q": 4,
+            "F": 4,
+            "C": 3
+          },
+          "delivery": {
+            "partial": 10,
+            "complete": 6
+          },
+          "known_generation_tokens": 137212,
+          "retrieval_calls": 2,
+          "positions_with_new_retrieval": 2
+        },
+        "final-arrivals": {
+          "positions": 16,
+          "host": {
+            "W": 11,
+            "F": 4,
+            "Q": 1
+          },
+          "delivery": {
+            "partial": 16
+          },
+          "known_generation_tokens": 138652,
+          "retrieval_calls": 1,
+          "positions_with_new_retrieval": 1
+        }
+      },
+      "failed_with_complete_material": [
+        9,
+        12,
+        21,
+        22,
+        49,
+        58
+      ],
+      "embedding_delta": {
+        "charged_tokens": 0,
+        "known_tokens": 0,
+        "unknown_usage": 0
+      },
+      "material_budget_rejections": [
+        {
+          "index": 30,
+          "selected": "context_2",
+          "trace": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/view-v4-d-v2/fixed-context/fixed_context-rich/banks/5197d192-4328-40e2-a6cf-08319d086de1/f6c4f8be-51e8-4f27-8266-d47bc7b35106-trace-0.jsonl"
+        },
+        {
+          "index": 42,
+          "selected": "context_3",
+          "trace": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/view-v4-d-v2/fixed-context/fixed_context-rich/banks/5914fad6-adeb-4e1c-9e40-8e64c3c92551/bfbe0f65-6ba2-46d4-9817-88845d5cd37d-trace-0.jsonl"
+        },
+        {
+          "index": 59,
+          "selected": "context_3",
+          "trace": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/view-v4-d-v2/fixed-context/fixed_context-rich/banks/1c9cbcb8-e542-4a1d-aa24-3f42a7114e48/8c33a7c4-2d94-41cc-a74a-f7d777912494-trace-0.jsonl"
+        },
+        {
+          "index": 59,
+          "selected": "context_5",
+          "trace": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/view-v4-d-v2/fixed-context/fixed_context-rich/banks/1c9cbcb8-e542-4a1d-aa24-3f42a7114e48/8c33a7c4-2d94-41cc-a74a-f7d777912494-trace-0.jsonl"
+        },
+        {
+          "index": 59,
+          "selected": "context_8",
+          "trace": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/view-v4-d-v2/fixed-context/fixed_context-rich/banks/1c9cbcb8-e542-4a1d-aa24-3f42a7114e48/8c33a7c4-2d94-41cc-a74a-f7d777912494-trace-0.jsonl"
+        }
+      ]
+    }
+  },
+  "paired_group_differences": {
+    "rules_minus_generative": {
+      "memops_A19": {
+        "complete_Host": 3,
+        "complete_material": 3,
+        "generation_tokens": -93146
+      },
+      "memops_A32": {
+        "complete_Host": -2,
+        "complete_material": 1,
+        "generation_tokens": -149357
+      },
+      "memops_B30": {
+        "complete_Host": 0,
+        "complete_material": 3,
+        "generation_tokens": -91719
+      },
+      "memops_C03": {
+        "complete_Host": 1,
+        "complete_material": 0,
+        "generation_tokens": -94555
+      },
+      "memops_D25": {
+        "complete_Host": 1,
+        "complete_material": 4,
+        "generation_tokens": -29045
+      },
+      "memops_E08": {
+        "complete_Host": -1,
+        "complete_material": 2,
+        "generation_tokens": -89127
+      },
+      "memops_E15": {
+        "complete_Host": 0,
+        "complete_material": 3,
+        "generation_tokens": -89910
+      },
+      "memops_F01": {
+        "complete_Host": 2,
+        "complete_material": 2,
+        "generation_tokens": -33307
+      }
+    },
+    "fixed-context_minus_generative": {
+      "memops_A19": {
+        "complete_Host": 3,
+        "complete_material": 3,
+        "generation_tokens": -89601
+      },
+      "memops_A32": {
+        "complete_Host": -2,
+        "complete_material": 1,
+        "generation_tokens": -152225
+      },
+      "memops_B30": {
+        "complete_Host": 0,
+        "complete_material": 3,
+        "generation_tokens": -101745
+      },
+      "memops_C03": {
+        "complete_Host": 1,
+        "complete_material": 1,
+        "generation_tokens": -91950
+      },
+      "memops_D25": {
+        "complete_Host": 0,
+        "complete_material": 4,
+        "generation_tokens": -34930
+      },
+      "memops_E08": {
+        "complete_Host": 1,
+        "complete_material": 3,
+        "generation_tokens": -99803
+      },
+      "memops_E15": {
+        "complete_Host": 2,
+        "complete_material": 3,
+        "generation_tokens": -93150
+      },
+      "memops_F01": {
+        "complete_Host": 1,
+        "complete_material": 2,
+        "generation_tokens": -44311
+      }
+    }
+  },
+  "statistical_unit": "Eight source groups; positions/rewrites/within-stream turns are not independent samples. Descriptive dev comparison only.",
+  "reviewer": "Current author/source review, not independent or blind. Explicit grade ambiguities remain in each final-review.",
+  "matching": "Same histories, source prefixes and public requests; autonomous Host requests and own cold banks. No forced STATE query.",
+  "interpretation_limits": [
+    "Different stochastic Host trajectories; no controller-only causal attribution from total arm differences.",
+    "All three have zero strict complete final-arrival answers; lack of autonomous retrieval and material choice/budget failures both remain.",
+    "First three arms only; all learned/cache/MemPursuit comparisons and E selection remain pending.",
+    "Wall intervals include HTTP waiting and nested stages. Do not sum stage wall with whole driver wall. CPU field is nested; unbilled driver CPU remains pending-v32 until queue idle.",
+    "Untimed interactive review and import overhead unknown, not zero."
+  ],
+  "model_calls": 0,
+  "no_dev_training_labels": true,
+  "compute": {
+    "wall_seconds": 0.48306280840188265,
+    "cpu_seconds": 0.482997855
+  },
+  "ledger_recorded": false
+}

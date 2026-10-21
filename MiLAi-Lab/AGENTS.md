@@ -1,3 +1,25 @@
+# LATEST D UPDATE — 2026-10-21
+
+Dparent2468544/exec65603 RUNNING, first3arms closed. Now T1mainseed0 PID2818578;
+revalidate authoritativeview-v4-d-v2/driver.json andactualPID. Modeljobsserialized.
+Rules64review19C18Q22W5F;delivery36complete28partial;100HTTP551227tokensunknown0,
+19retrievalsnoempty,max2045;final16:0C1Q11W4F,1newretrieval. DriverCPU84.060736934pending32.
+Fixed64review21C14Q17W12F (position29 headingambiguityalternateC=>22);delivery38/26;
+88HTTP513678tokensunknown0,24retrievalsnoempty/max1616;final16:0C1Q11W4F,1newretrieval.
+DriverCPU76.823128998pending32. Both fullbatches/final/closed/summary artifacts under
+view-v4-d-author-review-v1/{rules,fixed-context}; manifests d-{rules,fixed-context}-results-v1.
+First3comparison manifesthost-intent-view-v4-d-first-three-results-v1,8source-groupdescriptive
+paired differences/prefixcosts. NotallD/independentconfirmation. No winnerdeclared.
+Fixed59 newcallreturnsownprioranswers;context3/5/8material_budget_exhausted. Fixed30/42
+newsource9receiptsallowcorrectappointment/routine. Fwithcompletematerialfixed9/12/21/22/49/58.
+Pending32 UNSETTLED, includesclosedgen/rules/fixedwholechildCPU andofflineassembly;
+DO NOT rerun finalizers/comparison orchargeagain. NativeT1 laterCPUdirectlybilled;subtract
+fromwholechildCPU beforependingentry. DparentCPU separatelymeasured, notyetbilled.
+No secondmodeljob oroffline settlement whileDactive. Fullgoal ACTIVE/incomplete.
+NextreviewT1closedpositions; Dlearned/cache/MemPursuit pending, E selectionneedsD.
+Coalent/GAM stillstaticonly; E3shared_request_text existsandaudited6728oldinputs butno
+matchedretraining. Do not startEtrainingwhileDactiveorchooseonpartialD. Rulesbelowapply.
+
 # CURRENT UPDATE: D comparison RUNNING — 2026-10-21
 
 Latest authoritative execution: Ddriver2468544/exec65603 RUNNING, activefixed-context child2713006.
