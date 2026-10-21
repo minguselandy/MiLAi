@@ -1,3 +1,23 @@
+# LATEST E5 COVERAGE INPUTS / MP REVIEWS THROUGH55 — 2026-10-21
+
+MPPID3763296,Dparent3434203/exec69127 lastobserved56/64RUNNING; revalidateprocess.
+MPcards0–55exported andreviews0–55SAVED. New42C actualupdatedmorning/coffee source9/10
+composeswitholdK;43W deniesfinalpeerreview/coworkers. 44Fcomplete;45Cnewrawafterfailed44.
+48Qconditional22days,49Wunqualified22,50Qomits11/5withoutdenial;51Wfinalwrong22;
+52Qconditional21beforeactualdurationknown;53Qconditional22;54Fpartial;55Wfinal22.
+Nativeupdatedsource26diagnostic andprefix32vectorauditretained. Final8positions pending.
+E5scope gap identified: Ddoesnotcoverallseven. Newinputonly(noHTTP/no methodchoice):
+data/fixtures/host-intent-view-v4-e5-coverage-streams.json +manifest e5-coverage-preparation-v1.
+Artifactdata/view-v4-e5-coverage-streams-v1/histories.json has2EXPOSEDfamilies/18positions:
+oldmultitopic12plus1paraphrase; oldeffective_threshold5requestswithsource1lateatq03,
+thenas-of10/31->11/2->10/31 usingunchangedsources.8originalSourceobjects equal/orderretained.
+Oldfunctional_development exposure explicitlyretained;runtime dev isnotfreshsplit.
+Originalmultitopic2032scenario declaredsynthetic; lateactualcapturereceiptstillrequired.
+Noexpected/rubric/workloadlabels inruntime. No modeldispatched/budgetworkpoints run.
+Plan/sourcecopy literalcmpidentical;noSHA. STATEconfirmationandE3actualretrainingpending.
+Coalentpilotv2 e4844f28 remainsFROZEN_NOT_DISPATCHED, waitactualDclosure beforelaunch.
+Pending33UNSETTLED; nooffline settlement/modeloverlapwhilequeueactive. FullgoalACTIVE.
+
 # LATEST STATE RUNNER / MP REVIEWS THROUGH37 — 2026-10-21
 
 Current code06d103c3 extends tools/run_state_bench_local_pilot.py: explicit--split train/test,
