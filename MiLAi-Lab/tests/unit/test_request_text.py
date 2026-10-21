@@ -5,6 +5,7 @@ import sys
 from dataclasses import asdict
 from pathlib import Path
 
+import pytest
 from langgraph.store.sqlite import SqliteStore
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "tools"))
@@ -86,7 +87,8 @@ def test_live_export_mixture_and_generative_use_identical_text_with_feedback():
     assert project_mixed_row(instruction, "shared") == instruction
 
 
-def test_text_policy_keeps_actual_tool_request_limits_delivery_and_references(tmp_path):
+@pytest.mark.parametrize("projection", ["shared_request_text", "shared_actions_request_text"])
+def test_text_policy_keeps_actual_tool_request_limits_delivery_and_references(tmp_path, projection):
     with SqliteStore.from_conn_string(str(tmp_path / "db")) as store:
         service = MemoryService(store, ("text-arm", "alice"), "alice", tmp_path / "lock",
                                 functional_contract="functional_v1")
@@ -99,7 +101,7 @@ def test_text_policy_keeps_actual_tool_request_limits_delivery_and_references(tm
         observed = []
         memory.control_policy = LayaMemoryPolicy(
             lambda payload: observed.append(payload) or {"choice": "handoff"},
-            "shared_request_text")
+            projection)
         cfg = context(service, "second")
         request = RetrievalRequest.model_validate({
             "query": "verify effective date", "read_goal": {"required_points": ["date"]},

@@ -89,7 +89,8 @@ def project_mixed_row(row: dict[str, Any], projection: str) -> dict[str, Any]:
     if task == "memory_operation":
         return project_operation_payload(row, projection)
     if task == "instruction_applicability":
-        return project_request_text(row) if projection == "shared_request_text" else row
+        return project_request_text(row) if projection in {
+            "shared_request_text", "shared_actions_request_text"} else row
     raise ValueError(f"Unsupported retrieval training task: {task}")
 
 

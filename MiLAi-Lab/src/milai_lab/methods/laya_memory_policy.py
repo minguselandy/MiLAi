@@ -1,12 +1,13 @@
 """One operation projection for native Laya, generation and training exports."""
 from __future__ import annotations
 
+import copy
 import json
 from collections.abc import Callable
 from dataclasses import asdict, dataclass
 from typing import Any
 
-from milai_lab.memory.literal_projection import project_observation_state
+from milai_lab.memory.literal_projection import expand_observation_state, project_observation_state
 from milai_lab.memory.request_text import project_request_text
 from milai_lab.methods.memory_control import MemoryAction, MemoryControlState
 
@@ -33,14 +34,71 @@ RETRIEVAL_INSTRUCTIONS = (
     "material, never invented facts or the Host's final answer."
 )
 
+ACTION_BOUND_PROJECTIONS = {"shared_actions", "shared_actions_request_text"}
+ACTION_BINDING_INSTRUCTIONS = (
+    " action_bindings lists each offered action's exact target and complete parameters. "
+    "Match the decision-head action ID to that table; the short head names its operation kind."
+)
+
+
+def payload_actions(payload: dict[str, Any]) -> list[MemoryAction]:
+    """Recover exact recorded options from the binding table or legacy export metadata."""
+    state = payload["state"]
+    criteria = payload["questions"]["next"]["criteria"]
+    metadata = payload.get("metadata", {})
+    if "action_bindings" in state:
+        actions = [MemoryAction(**item)
+                   for item in expand_observation_state(state)["action_bindings"]]
+    else:
+        actions = []
+        for key, text in criteria.items():
+            kind, parameters = metadata["action_kinds"][key], metadata["action_parameters"][key]
+            prefix = kind + " "
+            suffix = " " + json.dumps(parameters, ensure_ascii=False, separators=(",", ":"))
+            if not text.startswith(prefix) or not text.endswith(suffix):
+                raise ValueError("Recorded action text does not match its kind and parameters")
+            actions.append(MemoryAction(key, kind, text[len(prefix):-len(suffix)],
+                                        copy.deepcopy(parameters)))
+    if [action.id for action in actions] != list(criteria):
+        raise ValueError("Recorded action bindings differ from the actual option order")
+    if "action_parameters" in metadata:
+        if any(action.kind != metadata["action_kinds"][action.id]
+               or action.parameters != metadata["action_parameters"][action.id]
+               for action in actions):
+            raise ValueError("Recorded action bindings differ from export metadata")
+    return actions
+
+
+def complete_action_payload(payload: dict[str, Any], actions: list[MemoryAction] | None = None,
+                            ) -> dict[str, Any]:
+    """Explicit input condition: full arguments in state, short unique IDs in the head.
+
+    This does not invent observed/delivered materials or change executable options.
+    Existing shared/legacy checkpoints keep their original representation.
+    """
+    actions = payload_actions(payload) if actions is None else actions
+    state = payload["state"]
+    if "action_bindings" not in state:
+        state = {**expand_observation_state(state),
+                 "action_bindings": [asdict(action) for action in actions]}
+    question = payload["questions"]["next"]
+    instructions = question["instructions"]
+    if not instructions.endswith(ACTION_BINDING_INSTRUCTIONS):
+        instructions += ACTION_BINDING_INSTRUCTIONS
+    return {**payload, "state": state, "questions": {**payload["questions"], "next": {
+        **question, "instructions": instructions, "criteria": {
+            action.id: action.kind for action in actions}}}}
+
 
 def project_operation_payload(payload: dict[str, Any], projection: str) -> dict[str, Any]:
     """Project matched training/live inputs; task and actual operation options stay fixed."""
     if projection == "full":
         return payload
-    if projection in {"shared", "shared_request_text"}:
+    if projection in ACTION_BOUND_PROJECTIONS:
+        payload = complete_action_payload(payload)
+    if projection in {"shared", "shared_request_text", *ACTION_BOUND_PROJECTIONS}:
         shared = {**payload, "state": project_observation_state(payload["state"])}
-        return project_request_text(shared) if projection == "shared_request_text" else shared
+        return project_request_text(shared) if projection.endswith("request_text") else shared
     if projection != "mechanical":
         raise ValueError(f"Unknown operation state projection: {projection}")
 
@@ -111,6 +169,8 @@ def operation_payload(
         "type": "choice", "instructions": instructions,
         "criteria": criteria,
     }}}
+    if projection in ACTION_BOUND_PROJECTIONS:
+        payload = complete_action_payload(payload, actions)
     return project_operation_payload(payload, projection)
 
 

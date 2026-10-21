@@ -95,7 +95,8 @@ def test_shared_export_native_and_generation_use_identical_information_without_g
     assert seen[-1] == json.loads(json.dumps(expected))
 
 
-@pytest.mark.parametrize("projection", ["full", "mechanical", "shared"])
+@pytest.mark.parametrize("projection", ["full", "mechanical", "shared", "shared_request_text",
+                                        "shared_actions", "shared_actions_request_text"])
 def test_host_factory_projects_inside_metered_native_call(monkeypatch, projection):
     seen, charged = [], []
 

@@ -12,6 +12,7 @@ from milai_lab.memory.retrieval import SemanticRetriever
 from milai_lab.methods.cache_memory_policy import CacheMemoryPolicy
 from milai_lab.methods.evidence_reading import project_pack
 from milai_lab.methods.laya_memory_policy import (
+    ACTION_BOUND_PROJECTIONS,
     GenerativeMemoryPolicy,
     LayaMemoryPolicy,
     project_operation_payload,
@@ -118,6 +119,8 @@ def memory_policy(
                 "cpu_seconds": time.process_time() - cpu,
                 **{k: v - before[k] for k, v in model.counters.items()}})
 
-    learned = LayaMemoryPolicy(predict)
+    projection = config.get("state_projection", "full")
+    learned = LayaMemoryPolicy(
+        predict, projection if projection in ACTION_BOUND_PROJECTIONS else "full")
     return (OneShotMemoryPolicy(learned, config.get("reads", 4))
             if config.get("routing") == "one_shot" else learned)

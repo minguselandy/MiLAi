@@ -64,8 +64,9 @@ def recover_request_fields(text: str) -> dict[str, Any]:
     return recovered
 
 
-def check_projection(row: dict[str, Any], projected: dict[str, Any]) -> None:
-    reference = project_mixed_row(row, "shared")
+def check_projection(row: dict[str, Any], projected: dict[str, Any],
+                     reference_projection: str = "shared") -> None:
+    reference = project_mixed_row(row, reference_projection)
     task = projected["state"]["task"]
     restored = {key: val for key, val in task.items() if key != "request_text"}
     restored.update(recover_request_fields(task["request_text"]))
@@ -82,28 +83,32 @@ def main() -> None:
     parser.add_argument("--source-version", required=True, help="Git provenance label, no checksum")
     parser.add_argument("--max-len", type=int, default=12288)
     parser.add_argument("--head-max-len", type=int, default=2048)
+    parser.add_argument("--complete-actions", action="store_true",
+                        help="Compare the explicit full-action-table input condition")
     args = parser.parse_args()
     args.output.mkdir(parents=True, exist_ok=False)
     started, cpu = time.perf_counter(), time.process_time()
     report: dict[str, Any] = {
         "phase": "host_intent_e3_request_text_input_audit_v1",
         "status": "RUNNING", "data": str(args.data), "tokenizer": str(args.tokenizer),
-        "projection": "shared_request_text", "model_loads": 0, "model_calls": 0,
+        "projection": ("shared_actions_request_text" if args.complete_actions
+                       else "shared_request_text"), "model_loads": 0, "model_calls": 0,
         "ledger_recorded": False, "splits": {}, "max_len": args.max_len,
         "head_max_len": args.head_max_len,
         "source_version": args.source_version,
     }
     try:
-        from laya.train import items_from_rows  # type: ignore[import-not-found]
+        from laya.train import items_from_rows
         from transformers import AutoTokenizer
 
         tokenizer = AutoTokenizer.from_pretrained(  # type: ignore[no-untyped-call]
             args.tokenizer, local_files_only=True)
         for split in ("train", "dev"):
             rows = [json.loads(line) for line in (args.data / f"{split}.jsonl").open()]
-            projected = [project_mixed_row(row, "shared_request_text") for row in rows]
+            projected = [project_mixed_row(row, report["projection"]) for row in rows]
             for row, transformed in zip(rows, projected, strict=True):
-                check_projection(row, transformed)
+                check_projection(row, transformed,
+                                 "shared_actions" if args.complete_actions else "shared")
             with (args.output / f"{split}.jsonl").open("w") as stream:
                 for transformed in projected:
                     stream.write(json.dumps(transformed, ensure_ascii=False) + "\n")
