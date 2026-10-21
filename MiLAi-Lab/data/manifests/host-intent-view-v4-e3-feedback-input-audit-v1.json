@@ -1,0 +1,156 @@
+{
+  "status": "PASS_W5_EQUAL_INFORMATION_INPUTS_AND_CODEC",
+  "source_version": "d98f4f10",
+  "data": "artifacts/host-intent-retrieval-v3/data/view-v4-feedback-fitting-v1",
+  "tokenizer": "artifacts/host-intent-retrieval-v3/fitting/t1-native-shared-seed0-v1/checkpoint/tokenizer",
+  "model_loads": 0,
+  "model_calls": 0,
+  "ledger_recorded": false,
+  "max_len": 16384,
+  "head_max_len": 2048,
+  "datasets": {
+    "feedback_train": {
+      "shared": {
+        "raw_rows": 74,
+        "codec_rows": 74,
+        "sdk_items": 74,
+        "sdk_skipped": {},
+        "full_raw_sequence_tokens": 397328,
+        "max_sequence_tokens": 11177,
+        "truncated_rows": 0,
+        "component_rows": {
+          "reviewed_feedback": 37,
+          "operation_history": 28,
+          "complementary_evidence": 9
+        }
+      },
+      "shared_request_text": {
+        "raw_rows": 74,
+        "codec_rows": 74,
+        "sdk_items": 74,
+        "sdk_skipped": {},
+        "full_raw_sequence_tokens": 413577,
+        "max_sequence_tokens": 11525,
+        "truncated_rows": 0,
+        "component_rows": {
+          "reviewed_feedback": 37,
+          "operation_history": 28,
+          "complementary_evidence": 9
+        }
+      },
+      "request_text_token_delta": {
+        "min": 31,
+        "max": 427,
+        "sum": 16249
+      },
+      "actual_saved_option_orders_checked": {
+        "passes": 3,
+        "rows": 222,
+        "source": "artifacts/host-intent-retrieval-v3/fitting/view-v4-answer-seed0-v1/option-orders",
+        "targets_questions_marker_counts_equal": true
+      },
+      "exact_request_reconstructions": 74,
+      "all_other_state_questions_gold_metadata_feedback_equal": 74,
+      "feedback": {
+        "answer": {
+          "feedback_states": 37,
+          "states_with_direction": 15,
+          "unknown_pairs": 60,
+          "tie_pairs": 27,
+          "directional_pairs": 27,
+          "replay_states": 37
+        },
+        "delivery": {
+          "feedback_states": 37,
+          "states_with_direction": 26,
+          "directional_pairs": 56,
+          "tie_pairs": 36,
+          "unknown_pairs": 22,
+          "replay_states": 37
+        }
+      }
+    },
+    "continued_ce_train": {
+      "shared": {
+        "raw_rows": 74,
+        "codec_rows": 74,
+        "sdk_items": 74,
+        "sdk_skipped": {},
+        "full_raw_sequence_tokens": 376115,
+        "max_sequence_tokens": 8203,
+        "truncated_rows": 0,
+        "component_rows": {
+          "operation_history": 56,
+          "complementary_evidence": 18
+        }
+      },
+      "shared_request_text": {
+        "raw_rows": 74,
+        "codec_rows": 74,
+        "sdk_items": 74,
+        "sdk_skipped": {},
+        "full_raw_sequence_tokens": 388146,
+        "max_sequence_tokens": 8627,
+        "truncated_rows": 0,
+        "component_rows": {
+          "operation_history": 56,
+          "complementary_evidence": 18
+        }
+      },
+      "request_text_token_delta": {
+        "min": 31,
+        "max": 457,
+        "sum": 12031
+      },
+      "actual_saved_option_orders_checked": {
+        "passes": 3,
+        "rows": 222,
+        "source": "artifacts/host-intent-retrieval-v3/fitting/view-v4-continued-ce-seed0-v1/option-orders",
+        "targets_questions_marker_counts_equal": true
+      },
+      "exact_request_reconstructions": 74,
+      "all_other_state_questions_gold_metadata_feedback_equal": 74
+    },
+    "common_dev": {
+      "shared": {
+        "raw_rows": 860,
+        "codec_rows": 616,
+        "sdk_items": 616,
+        "sdk_skipped": {},
+        "full_raw_sequence_tokens": 3831246,
+        "max_sequence_tokens": 8378,
+        "truncated_rows": 0,
+        "component_rows": {
+          "operation_history": 386,
+          "complementary_evidence": 474
+        }
+      },
+      "shared_request_text": {
+        "raw_rows": 860,
+        "codec_rows": 616,
+        "sdk_items": 616,
+        "sdk_skipped": {},
+        "full_raw_sequence_tokens": 3927256,
+        "max_sequence_tokens": 8724,
+        "truncated_rows": 0,
+        "component_rows": {
+          "operation_history": 386,
+          "complementary_evidence": 474
+        }
+      },
+      "exact_request_reconstructions": 860,
+      "all_other_state_questions_gold_metadata_feedback_equal": 860
+    }
+  },
+  "scope": "Representation/codec feasibility on actual W5 data only. No new model fits or selection. Does not substitute for full matched E3 retraining.",
+  "cost_note": "Raw complete passes and codec order checks are offline preparation, not training token consumption. Import overhead within timer included.",
+  "compute": {
+    "wall_seconds": 44.273349564522505,
+    "cpu_seconds": 44.269719844
+  },
+  "audit_file": "artifacts/host-intent-retrieval-v3/data/view-v4-e3-input-audit-v1/audit.json",
+  "script": "artifacts/host-intent-retrieval-v3/audit_v4_feedback_request_text_v1.py",
+  "common_dev_once": true,
+  "remaining": "Choose an E3 recipe after complete D comparison, then matched actual training and corresponding runtime evaluation; this audit alone is no representation-effect evidence.",
+  "tokenizer_warning": "Tokenizer metadata advertises8192; complete SDK input audit uses the existing declared16384/2048. No model was loaded, so this audit makes no new model-execution compatibility claim."
+}

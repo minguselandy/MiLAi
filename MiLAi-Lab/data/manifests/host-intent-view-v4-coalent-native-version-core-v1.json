@@ -1,0 +1,59 @@
+{
+  "status": "SEMANTIC_CORE_RESEARCH_COPY_MECHANICALLY_CHECKED_NOT_INTEGRATED",
+  "upstream_version": "7edc7ee2debb4e6bc8fecebf5275a57cb1c935e7",
+  "upstream_release": "0.7.0.post1",
+  "source": "artifacts/host-intent-retrieval-v3/upstream/coalent-source-v1/source/coalent-7edc7ee2debb4e6bc8fecebf5275a57cb1c935e7",
+  "research_package": "artifacts/host-intent-retrieval-v3/upstream/coalent-native-versions-v1",
+  "patch": "data/fixtures/coalent-native-source-versions-v1.patch",
+  "changed_files": [
+    "__init__.py",
+    "domain/models.py",
+    "semantic/cache.py",
+    "semantic/embedding.py"
+  ],
+  "changes": [
+    "Native source revision equality replaces content digests for invalidation, TTL revalidation and repair. Empty native versions cannot establish unchanged status.",
+    "Query/artifact identities use literal namespace/key tuples serialized as JSON, never content fingerprints.",
+    "Gap hydration cache uses addressable source IDs/revisions; adapter must supply one unambiguous source revision per chunk.",
+    "Unused provenance fingerprint method removed. Legacy content_hash serialization fields retained empty and ignored for freshness.",
+    "Explicit semantic embedder required; no automatic provider choice or hashed lexical fallback.",
+    "Only semantic/domain package and upstream license copied. No webhook, CLI or MCP service layer."
+  ],
+  "preserved": "Upstream default semantic-embedder pool resolution, claim scoring/gating, source-bound invalidation, reuse, build, recall, raw fallback, packing and persistence logic otherwise retained. Not a new implementation of the pool algorithm.",
+  "scope": "Research adaptation under user no-digest constraint, not byte-identical upstream replication or efficacy result. Existing Qwen/BGE/native Store ports still to integrate.",
+  "model_calls": 0,
+  "ledger_recorded": false,
+  "compute": {
+    "wall_seconds": 0.286667762324214,
+    "cpu_seconds": 0.264010387
+  },
+  "mechanical_check": {
+    "status": "PASS",
+    "tests_run": 9,
+    "failures": [],
+    "errors": [],
+    "model_calls": 0,
+    "prior_attempts": [
+      "v1 failed missing json import, fixed in research copy; original failure retained",
+      "v2: seven checks passed; failed-flag plus populated claims retained raw but did not necessarily set escalation/needs_retrieval. This upstream behavior remains. Separate v3 empty-claims failure tests actual raw-floor context."
+    ],
+    "scope": "Deterministic mechanical embeddings/synthesis and temporary SQLite only. Not actual semantic model quality, MiLAi Store integration or benchmark outcome.",
+    "compute": {
+      "wall_seconds": 0.17089181579649448,
+      "cpu_seconds": 2.701159448
+    },
+    "ledger_recorded": false
+  },
+  "mechanical_check_file": "artifacts/host-intent-retrieval-v3/upstream/coalent-native-versions-v1/mechanical-check-v3.json",
+  "known_limitations": [
+    "The failed-synthesis flag does not itself discard populated claims in upstream. Separate empty-claims failure does fall back to raw context; keep this distinction in provider integration.",
+    "Native versions are authoritative adapter metadata. Same source ID/version with changed body violates the adapter contract; this variant deliberately does no content-based validation.",
+    "Pool algorithm only mechanically exercised with scripted vectors/synthesis. No actual Qwen/BGE/MiLAi Store or Host run yet.",
+    "Webhook/CLI/MCP and hashed lexical embedder excluded; not a complete upstream-package replication.",
+    "Initial failed mechanical attempts retained; import fix is included in current patch. Untimed editing overhead unknown.",
+    "Literal unit IDs differ from upstream digest IDs, including the deterministic tie-break order when scores are exactly equal. Do not claim bit-identical rankings or results. Full adapter return sizes must include changed provenance metadata."
+  ],
+  "patch_applies_to_original_source": true,
+  "patch_format": "Zero-context unified diff; apply with git apply --unidiff-zero from the original upstream source root.",
+  "patch_check": "git apply --check --unidiff-zero <patch>"
+}

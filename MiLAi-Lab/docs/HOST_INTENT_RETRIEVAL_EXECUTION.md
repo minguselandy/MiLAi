@@ -2177,3 +2177,18 @@ D已按预先冻结的v2配方启动，driver2468544/exec65603，首子进程246
 相对generative，rules在8来源组中4组C增加、2组减少、2组相同；fixed-context为5组增加、1组减少、2组相同。两简单臂在各来源组的生成tokens均更少，但这是包含不同随机Host轨迹、View生成与失败成本的端到端差异。64位置不能当64独立样本，未以本批计算显著性或宣布方法获胜。三个臂在各自16末轮中都仅1位置新检索；末轮0C与当中明确的材料预算拒绝共同说明Host发起取证、材料选择以及交付后的推理仍需分别解释。
 
 原始预算拒绝轨迹、按来源组配对差异、按四个请求位置的冷暖费用和充分材料下Host失败索引见data/manifests/host-intent-view-v4-d-first-three-results-v1.json；固定臂见host-intent-view-v4-d-fixed-context-results-v1.json。当前前三臂已关闭，原D父进程2468544继续串行T1主seed0，子进程2818578。其余7臂、完整D比较、E阶段候选选择与外部确认仍未完成。
+
+
+## 2026-10-21：W5等信息输入审计与Coalent版本适配核心
+
+补齐实际W5数据的E3输入检查：feedback与continued-CE各74训练行、共同860旧操作dev，各做shared与shared_request_text两种投影。请求可逐字还原，其他观察、问题、gold、metadata和feedback完全相等；两训练集均74个SDK条目、dev616有标签条目加244 masked，无跳过或16384/2048下截断。反馈臂原始整遍tokens为397328→413577、最大11177→11525；CE为376115→388146、最大8203→8627；dev为3831246→3927256、最大8378→8724。还实际检查了每套训练已保存的3轮选项顺序，各222次编码，目标／问题／marker数量保持一致。
+
+这是CPU/tokenizer/codec检查，未加载或调用模型，未选择E3候选或开始重训；旧tokenizer元数据8192的警告保留，不能用本次检查推导新的模型执行能力。44.269719844秒CPU加入pending-v32，待D空闲结算。索引data/manifests/host-intent-view-v4-e3-feedback-input-audit-v1.json。
+
+Coalent7edc7ee的独立研究副本保留semantic/domain核心、原许可证及默认semantic-embedder→pool路径。只改变身份与新鲜度机制：来源原生ID/revision替代内容摘要，查询／artifact键改为完整字面元组；原生版本相同才可跳过刷新，无版本不能证明未变。合成claim的评分、池扫描、复用、按需构建、回源、打包与持久化算法保留。显式要求传入语义embedder，取消自动模型选择与hashing词袋回退；没有导入webhook/MCP/CLI服务层。原版源码未改，也没有计算任何SHA／内容指纹校验。
+
+机械检查覆盖冷构建／复用、相同与变化版本、旧绑定之外的新来源检索、命名空间、删除、SQLite重载后失效、TTL、修复与原文回源，共9项通过。第一次因研究副本漏导入json失败，已修复且保留结果；第二次发现“失败但仍返回claims”的合成器不会必然触发escalated标志，上游仍评分其claims，保留这一行为和限制。第三次分别检查原文保留与空claims时的原文context回源，两者通过；不以失败标志充当语义安全保证。
+
+补丁data/fixtures/coalent-native-source-versions-v1.patch为零上下文格式，应用时使用git apply --unidiff-zero；已对原始源码通过相应--check。字面ID还会改变等分时的稳定排序，故这是明确研究适配，不能称逐字节复现。当前只是核心机械可用，尚未接MiLAi原Store、实际Qwen/BGE、完整返回预算与Host；不是Coalent效果结果。索引data/manifests/host-intent-view-v4-coalent-native-version-core-v1.json。所有实际模型仍由原D队列串行执行。
+
+T1主臂作者评审已保存位置0–28。预约内容流末轮27实际context3观察到source9–16，其中有9:45修正；合并交付超预算后，末步仍有合法handoff_select_3，但模型选择handoff_select_1，只返回自己的旧Host对话。该例的9:30错误有明确选择失误，不能解释成修正不可达；独立交付3的后续Host结果未执行，不作反事实成功声明。未从这些dev审阅生成训练标签，整臂及完整D比较仍待后续结果。

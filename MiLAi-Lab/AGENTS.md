@@ -1,3 +1,25 @@
+# LATEST FOLLOWUP — 2026-10-21
+
+Dparent2468544/exec65603 stillRUNNING; T1mainPID2818578 latest36/64. Revalidate.
+T1maincards0–28 exported, reviews0–7,8–15,16–23,24–28 saved; next29 onward.
+27actualcontext3observes9–16incl9:45 butcombinedbudgetreject; legalHANDOFFselect3exists,
+modelchoosesselect1(oldHostanswers). No counterfactualrun; donotlabeldevfortraining.
+NewE3CPUauditPASS: W5feedback74+CE74+commondev860, exactrequestroundtrip/fullotherfields,
+74/74trainSDKitems,616dev+244masked,notrunc16384/2048;3actualoptionorders222checkspertrain.
+No modelsloaded/called.44.269719844CPU pending32. Artifactdata/view-v4-e3-input-audit-v1;
+manifesthost-intent-view-v4-e3-feedback-input-audit-v1. Not actualE3training.
+Coalentnative-versioncore nowprepared/mechanical9pass,NOT yetMiLAiStore/model/Hostintegrated.
+Researchpackage upstream/coalent-native-versions-v1; originalsourceuntouched.
+Trackedpatch data/fixtures/coalent-native-source-versions-v1.patch applies tooriginal.
+Nativeversions/literalIDs replaceallcorehashes,explicitsemanticembedder; noMCP/eventsimport.
+Defaultsemanticpoolretained; IDchangescanchangeequal-scoretieorder, notbitidenticalreplication.
+Priorchecks v1missingjsonimportfixed;v2failureflagwithclaimsnotguaranteedrawescalation;v3
+9pass includesseparateemptyclaimsrawfloor. Preservev1/v2failures. SourceSpanrequiresnative
+revisioncontract, legacycontent_hashfieldsunused. No defaultupstreamhashpaths run.
+Manifesthost-intent-view-v4-coalent-native-version-core-v1; fullscope/futureportsstillpending.
+Pending32includesaudit/coreprep/mechanicalchecks; do notrerun scripts orduplicateCPU.
+No secondactualmodeljob/offline settlement whileDactive. FullgoalACTIVE/incomplete.
+
 # LATEST D UPDATE — 2026-10-21
 
 Dparent2468544/exec65603 RUNNING, first3arms closed. Now T1mainseed0 PID2818578;
