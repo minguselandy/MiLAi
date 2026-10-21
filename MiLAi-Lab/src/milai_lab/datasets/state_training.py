@@ -82,6 +82,61 @@ def source_cut(stream: dict[str, Any], checkpoint_index: int) -> dict[str, Any]:
             "sources": copy.deepcopy(stream["sources"][:checkpoint["source_count"]])}
 
 
+VIEW_PROBE_QUERY = (
+    "Summarize the latest recorded facts about the objects in this history and any unresolved "
+    "user requests. Distinguish previews and earlier reports from completed actions. "
+    "Treat these as historical observations, not a verification of today's live state."
+)
+
+
+def view_acceptance_history(stream: dict[str, Any]) -> dict[str, Any]:
+    """Two real material frontiers plus repeat/known/original-evidence conditions.
+
+    The probes are authored retrieval questions, not original STATE user tasks or
+    teacher operation labels. A frontier without new tools remains a control.
+    """
+    checkpoints = stream["checkpoints"]
+    early = next((c for c in checkpoints if not c["terminal"] and any(
+        o["source_index"] < c["source_count"] for o in stream["observations"])), None)
+    if early is None:
+        raise ValueError("STATE stream has no user frontier after a tool observation")
+    terminal = next((c for c in checkpoints if c["terminal"]), None)
+    end = terminal["source_count"] if terminal is not None else len(stream["sources"])
+    start = early["source_count"]
+    stages = [
+        ("early-overview", False, False, stream["sources"][:start]),
+        ("early-repeat", False, False, []),
+        ("early-known", True, False, []),
+        ("later-overview", True, False, stream["sources"][start:end]),
+        ("later-known", True, False, []),
+        ("later-originals", True, True, []),
+    ]
+    requests = []
+    for name, known, originals, arrivals in stages:
+        purpose = ("Verify the latest recorded facts against the original user and tool records; "
+                   "preserve exact reported values and distinguish previews from completed actions."
+                   if originals else
+                   "Summarize the latest recorded object facts and unresolved requests, "
+                   "distinguishing previews from completed actions.")
+        requests.append({"id": name, "content": VIEW_PROBE_QUERY,
+            "incoming_sources": copy.deepcopy(arrivals), "use_delivered_refs": known,
+            "retrieval_request": {"query": VIEW_PROBE_QUERY,
+                "read_goal": {"purpose": purpose,
+                    "evidence": ["original_source" if originals else "current_interpretation"],
+                    "required_points": ["latest observations", "earlier or tentative observations",
+                                        "unresolved requests"]},
+                "task_context": {"known_evidence_refs": []}}})
+    return {"id": stream["id"], "source_group": stream["source_group"], "split": "train",
+        "continuous": True, "sources": [], "requests": requests,
+        "source_group_scope": stream["source_group_scope"],
+        "request_origin": "authored generic historical-evidence probes, not native STATE tasks",
+        "frontiers": {"early_source_count": start, "later_source_count": end,
+            "later_new_tool_observations": sum(start <= o["source_index"] < end
+                                               for o in stream["observations"]),
+            "terminal_marker_observed": terminal is not None},
+        "native_business_actions_reexecuted": False, "operation_labels": []}
+
+
 def load_training_streams(root: Path, domains: list[str]) -> tuple[
         list[dict[str, Any]], list[dict[str, Any]]]:
     """Check native membership before opening train bodies; never load task/env files."""

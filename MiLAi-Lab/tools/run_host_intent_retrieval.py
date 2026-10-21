@@ -13,6 +13,18 @@ from typing import Any
 from milai_lab.harness.artifact_io import read_json, write_json
 
 
+def bind_given_request(request: dict[str, Any], delivered_refs: list[dict[str, Any]],
+                       ) -> dict[str, Any]:
+    """Resolve an explicit fixture condition using only earlier delivered references."""
+    bound: dict[str, Any] = copy.deepcopy(request["retrieval_request"])
+    if request.get("use_delivered_refs", False):
+        context = bound.setdefault("task_context", {})
+        if context.get("known_evidence_refs"):
+            raise ValueError("Dynamic delivered refs cannot replace explicit fixture references")
+        context["known_evidence_refs"] = copy.deepcopy(delivered_refs)
+    return bound
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("config", type=Path)
@@ -40,9 +52,14 @@ def main() -> None:
                              "implies --capture-retrieval-calls")
     parser.add_argument("--continue-host-history", action="store_true",
                         help="Continuous banks retain their own completed Host/tool messages")
+    parser.add_argument("--given-requests", action="store_true",
+                        help="Conditional retrieval-only probes from fixture retrieval_request; "
+                             "use_delivered_refs binds earlier actual receipts, no Host answer")
     args = parser.parse_args()
     if args.native_probe and args.transport == "json_action":
         parser.error("--native-probe requires native transport")
+    if args.given_requests and (args.native_probe or args.continue_host_history):
+        parser.error("--given-requests cannot generate or continue an autonomous Host conversation")
     if args.host_site_packages:
         site.addsitedir(str(args.host_site_packages))
     from langchain_core.messages import ToolMessage
@@ -78,6 +95,7 @@ def main() -> None:
             len(h["requests"]) for h in histories) * len(arms), "completed": [],
         "interfaces": interfaces, "split": args.split,
         "continue_host_history": args.continue_host_history,
+        "given_requests": args.given_requests,
         "capture_retrieval_calls": args.capture_retrieval_calls or args.capture_control_steps,
         "capture_control_steps": args.capture_control_steps,
         "automatic_retry": False, "source_groups": [h["source_group"] for h in histories],
@@ -88,6 +106,7 @@ def main() -> None:
     models: dict[tuple[Any, ...], Any] = {}
     setups: dict[tuple[str, str], dict[str, Any]] = {}
     previous_messages: dict[tuple[str, str], str] = {}
+    delivered_refs: dict[tuple[str, str], list[dict[str, Any]]] = {}
     started, cpu = time.perf_counter(), time.process_time()
     try:
         for policy, interface, profile in arms:
@@ -137,7 +156,15 @@ def main() -> None:
                                              if args.capture_retrieval_calls
                                              or args.capture_control_steps else None),
                         retrieval_step_snapshots=args.capture_control_steps,
+                        given_retrieval_request=(bind_given_request(
+                            request, delivered_refs.get((profile, bank), []))
+                            if args.given_requests else None),
                         model_tool_choice=native_probe if args.native_probe else None)
+                    if args.given_requests:
+                        known = delivered_refs.setdefault((profile, bank), [])
+                        for item in result.get("retrieval_result", {}).get("evidence", []):
+                            if item["ref"] not in known:
+                                known.append(copy.deepcopy(item["ref"]))
                     row = {**driver["active"], "status": result["status"],
                            "answer": result.get("final_answer"), "error": result.get("error"),
                            "wall_seconds": time.perf_counter() - message_started,
