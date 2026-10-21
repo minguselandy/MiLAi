@@ -1,3 +1,26 @@
+# LATEST D REVIEWS — 2026-10-21
+
+Dparent2468544/exec65603 RUNNING; first6arms CLOSEDandreviewed. Activeanswer-seed0
+PID3182964 latest38/64; revalidate. Modeljobsserialized, nooffline settlement.
+T1control64author16C19Q20W9F;material36complete28partial;25retrievals/0empty/max1893;
+89HTTP525203tokensunknown0;111nativeforward484251tokens,max11626,trunc0/nonfinite0.
+CPU137.249810309 total,64.934046744directmodel;remainder72.315763565pending32.
+CE64author18C17Q19W10F;material36/28;23retrievals/1empty/max1952;85HTTP539523tokens;
+83nativeforward369416tokens,max12194,trunc0/nonfinite0. CPU129.455290788,totalmodel
+57.691132079direct;remainder71.764158709pending32. Final16both0C,one newcall each.
+CE15 Q/W headingambiguityretained; Ccountunaffected. AllnativefinalizersDONE,don'trerun.
+Control45Viewalle1binding=priorHostassistantanswer,e0=publicquestion; Viewnotreturned,
+oldKcomplete despiteHostF. CE59openedcontext3=sources17–23current6080/175; plainHANDOFF
+retainedit, butselect1replacedwitholdHostexchange. Actualbefore/actions savedselection-059.
+No alternateHostrun; notacounterfactualsuccessclaim. No devtraininglabels.
+Manifests d-t1-control-seed0-results-v1 / d-continued-ce-seed0-results-v1 and
+d-frozen-and-ce-paired-v1. Groupcomparison8units,descriptiveonly.
+Cardsanswer0–2 exportedatlastexport; refresh exporterforclosednewpositions.
+Nextreviewanswer/delivery/cache/MemPursuit; preserveallfailures. Dsource11798c8d unchanged.
+Coalentcode d3d5a229 mechanicallyready, actualmodelsnotrun; sourcegranularityaudit remains.
+Pending32 includesnewnative CPUremainders andallmeasuredreview/export/pairedassembly;
+UNSETTLED. FullgoalACTIVE/incomplete; Escope dependsfullD. NoSHA/subagents/newservices.
+
 # LATEST COALENT RUNTIME / D — 2026-10-21
 
 Dparent2468544/exec65603 RUNNING; t1-control2941887 CLOSED64. Activecontinued-ce-seed0

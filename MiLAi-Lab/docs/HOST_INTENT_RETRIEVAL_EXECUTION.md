@@ -2228,3 +2228,24 @@ d3d5a229增加CoalentRetrievalMemory，并接入原functional.message runner与-
 当前Source-event粒度和上游每read最多3个artifact合成仍需在实际效果比较前审计，不能把这种输入粒度影响说成纯选择算法收益。真实Qwen/BGE试跑尚未执行，必须等待原D队列空闲。索引data/manifests/host-intent-view-v4-coalent-host-runtime-v1.json。
 
 D操作对照seed0已关闭64位置；已开始作者评审，目前0–7保存。A19末轮实际再次取证，但只交付旧Host对话与sources9–12，停在临时Priya阶段，漏掉后来的Karen恢复及号码；这是不完整新交付而非完全不调用。完整对照臂分数、CPU差额与跨臂比较尚未汇总。D已进入continued-CE，完整目标仍未完成。
+
+
+## 2026-10-21：D操作对照与continued-CE评审闭合
+
+两臂均按原冻结配方完成64位置，并逐位置核对真实K、交付D、原始来源及Host回答：
+
+| 臂 | C/Q/W/F | 材料完整/部分 | 生成HTTP/tokens | 本地forward/input tokens | 最终16位置C |
+|---|---|---|---|---|---:|
+| T1主seed0（前次） | 19/13/19/13 | 37/27 | 88 / 537603 | 94 / 401840 | 0 |
+| T1操作对照seed0 | 16/19/20/9 | 36/28 | 89 / 525203 | 111 / 484251 | 0 |
+| continued-CE seed0 | 18/17/19/10 | 36/28 | 85 / 539523 | 83 / 369416 | 0 |
+
+操作对照25次检索、无空返回、最大完整包1893tokens；最大本地输入11626。末轮13W/3Q，只有A19内容流一次新调用，材料停在临时Priya阶段，漏掉Karen恢复。E08原文同源轮45创建的View全节点绑定e1，实际是上一条Host答案；e0是公共问题，已按真实result.sources核对。两次最终回执只返回旧问题／旧答案，View留在控制器内部。该轮Host失败，但初始K仍含充分原始报告，故材料完整与执行失败分别记账。
+
+CE有23次检索、1空返回，均实际进入Host wire，最大1952tokens；最大本地输入12194，未发生View生成。末轮11W/3Q/2F，只有F01内容流59一次新调用。此例context3已成功打开source17–23，包含当前6080、已采纳175餐饮和未来6200的区分；后续context8/12虽预算拒绝，普通HANDOFF仍合法且会保留已选context3。模型却选handoff_select_1，把原先只供观察的旧Host对话替换为最终交付，继续输出6200/2240。保留actual before/actions/selected于selection-059-v1.json；没有执行替代Host读出，不作反事实任务成功声明。
+
+两臂所有本地logits/probabilities有限且无输入截断，实际trace forward/tokens与账本一致。操作对照整臂CPU137.249810309秒，原已计本地模型64.934046744秒，仅差额72.315763565秒加入pending-v32；CE整臂CPU129.455290788秒，原已计57.691132079秒，仅差额71.764158709秒加入pending-v32。生成unknown增量均0，HTTP不重复计费。整臂墙时分别1848.799110104、1940.711410535秒。
+
+以8个来源组为配对单位，相对T1主臂，操作对照有3组C更多、4组更少、1组相同；CE为2组更多、3组更少、3组相同。只是已暴露dev的作者描述，不能把64位置当独立样本、把随机Host轨迹差异归为控制器单独因果效果，或据此宣布胜出。CE位置15的RecoveryInformationUpdate标题有Q/W解读歧义，主评Q并保留W替代，不影响完整C数。
+
+结果索引：data/manifests/host-intent-view-v4-d-t1-control-seed0-results-v1.json、host-intent-view-v4-d-continued-ce-seed0-results-v1.json；分组配对见host-intent-view-v4-d-frozen-and-ce-paired-v1.json。六臂执行与作者评审已闭合；答案反馈、交付反馈、简单缓存和MemPursuit尚待完成及比较，完整E确认范围仍未选择。

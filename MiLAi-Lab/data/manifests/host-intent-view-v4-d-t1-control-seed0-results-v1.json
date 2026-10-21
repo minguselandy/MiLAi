@@ -1,0 +1,194 @@
+{
+  "status": "D_T1_CONTROL_SEED0_CLOSED_AUTHOR_REVIEWED",
+  "source_version": "11798c8d",
+  "split": "exposed_dev",
+  "source_groups": 8,
+  "streams": 16,
+  "positions": 64,
+  "host_grades": {
+    "C": 16,
+    "W": 20,
+    "Q": 19,
+    "F": 9
+  },
+  "host_complete_primary": 16,
+  "host_complete_with_scope_ambiguity": 16,
+  "delivery": {
+    "complete": 36,
+    "partial": 28
+  },
+  "by_group": {
+    "memops_A19": {
+      "host": {
+        "C": 3,
+        "W": 4,
+        "Q": 1
+      },
+      "delivery": {
+        "complete": 4,
+        "partial": 4
+      },
+      "generation_tokens": 55773
+    },
+    "memops_A32": {
+      "host": {
+        "Q": 5,
+        "F": 2,
+        "W": 1
+      },
+      "delivery": {
+        "complete": 4,
+        "partial": 4
+      },
+      "generation_tokens": 63486
+    },
+    "memops_B30": {
+      "host": {
+        "C": 3,
+        "Q": 3,
+        "W": 2
+      },
+      "delivery": {
+        "complete": 6,
+        "partial": 2
+      },
+      "generation_tokens": 41392
+    },
+    "memops_C03": {
+      "host": {
+        "C": 4,
+        "W": 4
+      },
+      "delivery": {
+        "complete": 4,
+        "partial": 4
+      },
+      "generation_tokens": 63494
+    },
+    "memops_D25": {
+      "host": {
+        "C": 2,
+        "Q": 4,
+        "F": 1,
+        "W": 1
+      },
+      "delivery": {
+        "complete": 4,
+        "partial": 4
+      },
+      "generation_tokens": 61914
+    },
+    "memops_E08": {
+      "host": {
+        "Q": 4,
+        "F": 2,
+        "W": 2
+      },
+      "delivery": {
+        "complete": 4,
+        "partial": 4
+      },
+      "generation_tokens": 92830
+    },
+    "memops_E15": {
+      "host": {
+        "W": 4,
+        "Q": 2,
+        "F": 2
+      },
+      "delivery": {
+        "complete": 4,
+        "partial": 4
+      },
+      "generation_tokens": 78954
+    },
+    "memops_F01": {
+      "host": {
+        "C": 4,
+        "F": 2,
+        "W": 2
+      },
+      "delivery": {
+        "complete": 6,
+        "partial": 2
+      },
+      "generation_tokens": 67360
+    }
+  },
+  "final_arrivals": {
+    "positions": 16,
+    "host": {
+      "W": 13,
+      "Q": 3
+    },
+    "retrieval_calls": 1,
+    "positions_with_new_retrieval": 1
+  },
+  "retrieval_calls": 25,
+  "empty_returns": 0,
+  "returns_seen_in_Host": 25,
+  "max_wire_tokens": 1893,
+  "generation_tokens": 525203,
+  "generation_requests": 89,
+  "unknown_generation_delta": 0,
+  "stage_costs": {
+    "host_request": {
+      "requests": 24,
+      "tokens": 65006,
+      "http_wall_seconds": 130.40684806834906
+    },
+    "host_completion": {
+      "requests": 55,
+      "tokens": 353647,
+      "http_wall_seconds": 1065.8951842198148
+    },
+    "host_incomplete": {
+      "requests": 9,
+      "tokens": 104694,
+      "http_wall_seconds": 481.2411995809525
+    },
+    "view_generation": {
+      "requests": 1,
+      "tokens": 1856,
+      "http_wall_seconds": 2.9979458954185247
+    }
+  },
+  "wall_seconds": 1848.7991101043299,
+  "cpu_seconds_nested": 137.249810309,
+  "cpu_unbilled": 72.31576356499164,
+  "original_outputs_unchanged": true,
+  "task_metric": "Strict source-author C/Q/W/F, Any explicit annotation uncertainty retained. No official score or independent reviewer claim.",
+  "view_review_scope": "Request-relevant facts/status/conditions reviewed and explicit defects retained. Not exhaustive formal verification of every citation/rule.",
+  "results": "artifacts/host-intent-retrieval-v3/view-v4-d-author-review-v1/t1-control-seed0/closed-results-v1.json",
+  "review": "artifacts/host-intent-retrieval-v3/view-v4-d-author-review-v1/t1-control-seed0/final-review-v1.json",
+  "remaining": "Remaining D arms and source-group comparisons; E confirmation selection remains incomplete.",
+  "compute": {
+    "wall_seconds": 14.563286918215454,
+    "cpu_seconds": 14.562534169
+  },
+  "ledger_recorded": false,
+  "native_input_audit": {
+    "forwards": 111,
+    "input_tokens": 484251,
+    "max_input_tokens": 11626,
+    "truncated": 0,
+    "nonfinite": 0
+  },
+  "native_compute_directly_billed": 64.93404674400836,
+  "local_model": {
+    "dynamic_memory_laya": {
+      "cpu_seconds": 57.957624349008256,
+      "forwards": 111,
+      "input_tokens": 484251,
+      "sequence_rows": 111,
+      "state_tokenizations": 111,
+      "state_tokens": 434109,
+      "wall_seconds": 36.74164289049804
+    },
+    "dynamic_memory_laya_load": {
+      "cpu_seconds": 6.9764223950001,
+      "loads": 1,
+      "wall_seconds": 5.679080648347735
+    }
+  }
+}
