@@ -9,7 +9,7 @@ import time
 from pathlib import Path
 from typing import Any
 
-from milai_lab.harness.artifact_io import read_json, write_json
+from milai_lab.harness.artifact_io import read_json, read_jsonl, write_json
 
 
 def prepare_snapshot(source: Path, output: Path) -> dict[str, Any]:
@@ -21,8 +21,7 @@ def prepare_snapshot(source: Path, output: Path) -> dict[str, Any]:
         "checksum_verification": False, "ledger_recorded": False}
     write_json(output / "preparation.json", report)
     try:
-        questions = [json.loads(line) for line in
-                     (source / "questions.jsonl").read_text().splitlines()]
+        questions = read_jsonl(source / "questions.jsonl")
         haystacks = read_json(source / "haystacks/lme_v2_small.json")
         if set(haystacks) != {row["id"] for row in questions}:
             raise ValueError("Small mapping must cover every released question")

@@ -10,9 +10,11 @@ from prepare_lme_small_snapshot import prepare_snapshot
 def release(root: Path):
     root.mkdir()
     (root / "haystacks").mkdir()
-    questions = [{"id": "q1", "question": "one", "answer": "offline one", "image": "q/one.png"},
+    questions = [{"id": "q1", "question": "one\u2028line\u2029next", "answer": "offline one",
+                  "image": "q/one.png"},
                  {"id": "q2", "question": "two", "answer": "offline two", "image": None}]
-    (root / "questions.jsonl").write_text("".join(json.dumps(x) + "\n" for x in questions))
+    (root / "questions.jsonl").write_text(
+        "".join(json.dumps(x, ensure_ascii=False) + "\n" for x in questions))
     (root / "haystacks/lme_v2_small.json").write_text(json.dumps({"q1": ["b", "a"], "q2": ["a"]}))
     trajectories = [{"id": "a", "states": [{"accessibility_tree": "entire first observation",
         "thought": "recorded interpretation", "action": None, "screenshot": "screens/a/0.png"},
