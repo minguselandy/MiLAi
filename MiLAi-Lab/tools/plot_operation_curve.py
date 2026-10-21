@@ -31,9 +31,10 @@ def main() -> None:
                      "o-", color=color, label=f"In-memory GPU {split}")
     if args.baseline_summary:
         baselines = json.loads(args.baseline_summary.read_text())["baselines"]
-        for name, score in baselines.items():
+        colors = ("#666666", "#a6611a", "#1b7837", "#762a83", "#d6604d", "#008b8b")
+        for (name, score), color in zip(baselines.items(), colors, strict=True):
             axes[0].axhline(score["family_macro_acceptance"], linewidth=.8, linestyle=":",
-                            label=f"Recorded-state {name}")
+                            color=color, label=f"Recorded-state {name}")
     axes[1].plot(updates, [p["train_dev_family_gap"] for p in points], "o-",
                  color="#2166ac", label="In-memory GPU train minus dev")
     axes[1].axhline(0, color="grey", linewidth=.8)

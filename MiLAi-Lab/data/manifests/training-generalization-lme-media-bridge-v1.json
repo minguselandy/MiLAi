@@ -1,0 +1,154 @@
+{
+  "status": "FULL_SMALL_PUBLIC_PROJECTION_AND_MEMORY_BRIDGE_VERIFIED;READER_SCORING_AND_REAL_EVALUATION_PENDING",
+  "declared_at": "2026-10-21T21:32:47.053785+00:00",
+  "source_version": "350b8601",
+  "source_freeze": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/frozen-lme-media-350b8601/MiLAi-Lab",
+  "upstream_code_revision": "2cc8c540bdb87fe6761629b585e727e1c4704520",
+  "existing_snapshot": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/external/lme-v2-small-snapshot-v1",
+  "asset_revision": "Unknown original download revision; no byte identity to remote revision claimed",
+  "prior_contact": "All200Small histories have prior project contact; 451questions retained as disclosed external regression, not fresh independent history holdout. No reset by selecting another tier.",
+  "public_inputs": {
+    "questions": 451,
+    "trajectories": 200,
+    "states": 5095,
+    "source_rows": 5295,
+    "state_image_locators": 5095,
+    "question_images": 29,
+    "all_assets": 5124,
+    "ordered_haystacks": 2,
+    "cases_per_pool": {
+      "pool-0": 211,
+      "pool-1": 240
+    },
+    "projection": "Every released trajectory field retained; separate header plus one complete state per source. A public trajectory/state/screenshot locator precedes each state. Reconstructed values equal all original records; source JSON physical lines preserve Unicode separators. No reference answers, eval specs or goldsource filter exported online.",
+    "question_method_input": "Exact question text. Existing finite controller ranks textual observations; current question image is explicitly not consumed by Laya or captioned. The same original image must reach the fixed Reader for every arm.",
+    "source_image_delivery": "Only actual delivered source locator range at matching source identity/revision admits its bound original image. Offered/unread actions, partial locator and View navigation citations do not fetch images. Existing actually opened support bodies can qualify.",
+    "native_haystack_membership": "Exact released ordered mapping; never filter by target sources, answer or evaluation category."
+  },
+  "backend": {
+    "module": "milai_lab.runners.lme_v2.LmeMemoryBackend",
+    "interface": "insert(full trajectory),query(text,query_image) returning native text/image context items; full official harness registration/persistence not claimed",
+    "execution": "Existing prepare_history_bank and functional.message given-retrieval path, same original ledger and controls. Closed original-haystack Store cloned for EACHquestion; loaded local controller pool reused. No earlier question/answer enters next memory.",
+    "costs": "Existing controller/HTTP work retains runner accounting. Exclusive insert/setup/copy/image-binding CPU and wall measured separately; final Reader/scorer cost still required.",
+    "failure": "First failed query retained, further automatic queries/retries rejected. Later aggregate must retain missing/failed denominators.",
+    "lifecycle_scope": "Isolated QA regression; not persistent-query online learning or the separately required E5 lifecycle experiment.",
+    "business_actions_executed": false
+  },
+  "image_assets": {
+    "status": "COMPLETE_ALL_ASSETS_DECODED_NOT_VISUAL_SEMANTIC_EVALUATION",
+    "planned": 5124,
+    "formats": {
+      "PNG": 5124
+    },
+    "modes": {
+      "RGB": 5124
+    },
+    "dimensions": {
+      "1280x720": 5068,
+      "1000x480": 46,
+      "800x480": 10
+    },
+    "image_bytes": 548713157
+  },
+  "capacity": {
+    "module": "milai_lab.providers.image_capacity.ImageHostCapacity",
+    "default_HostCapacity_changed": false,
+    "rule": "Local Qwen image processor grid product / merge_size squared replaces each native image placeholder. Complete wire text/history/tools and thinking template retained. Inherited budget admission adds original output and safety reserves.",
+    "inline_only": "Process the exact base64 image on the wire; no unmetered remote fetch. Video is outside this image-only Reader path.",
+    "processor": "Qwen2VLImageProcessor",
+    "use_fast": false,
+    "versions": {
+      "transformers": "4.57.6",
+      "torch": "2.7.0+cu126",
+      "Pillow": "12.3.0"
+    },
+    "geometry_probes": [
+      {
+        "width": 1280,
+        "height": 720,
+        "image_grid_thw": [
+          [
+            1,
+            44,
+            80
+          ]
+        ],
+        "visual_tokens": 880,
+        "complete_prompt_tokens": 897,
+        "total_reserved_tokens": 9601,
+        "remaining_tokens": 55935
+      },
+      {
+        "width": 1000,
+        "height": 480,
+        "image_grid_thw": [
+          [
+            1,
+            30,
+            62
+          ]
+        ],
+        "visual_tokens": 465,
+        "complete_prompt_tokens": 482,
+        "total_reserved_tokens": 9186,
+        "remaining_tokens": 56350
+      },
+      {
+        "width": 800,
+        "height": 480,
+        "image_grid_thw": [
+          [
+            1,
+            30,
+            50
+          ]
+        ],
+        "visual_tokens": 375,
+        "complete_prompt_tokens": 392,
+        "total_reserved_tokens": 9096,
+        "remaining_tokens": 56440
+      }
+    ],
+    "scope": "Native image component conformance and mocked existing-client admission, not actual server vision or usage verification. All18tests are mechanical,not benchmark model scores.",
+    "environment": {
+      "interpreter": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/http-env/bin/python",
+      "additional_sites": [
+        "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/cuda-env/lib/python3.11/site-packages",
+        "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/image-reader-pillow-overlay-v1"
+      ],
+      "overlay": "Existing Pillow12.3.0 cache archive copied into isolated ignored directory;156files direct-byte equal. No installation,active environment change,download or checksum verification."
+    },
+    "service": "Existing7860 model/context unchanged; read-only process metadata showed no explicit image processor overrides. Actual vision request still needed after other model job closes."
+  },
+  "validation": {
+    "projection_and_real_source_media_tests": 8,
+    "snapshot_Unicode_tests": 2,
+    "real_backend_query_isolation_tests": 2,
+    "native_image_capacity_and_existing_client_tests": 6,
+    "total_unique_passed": 18,
+    "skipped": 0,
+    "ruff_files": 9,
+    "mypy_implementation_files": 5,
+    "boundaries": "package and tools PASS;6inheritedprivateedges unchanged",
+    "full_snapshot_roundtrip": true,
+    "all5124_images_verified_and_fully_decoded": true,
+    "benchmark_image_semantics_reviewed": false,
+    "actual_benchmark_model_calls": 0,
+    "actual_full_corpus_Store_ingestion": false
+  },
+  "remaining": [
+    "Finalize/freeze method and checkpoint before external question outcomes; keep disclosed prior contact",
+    "Use the complete451questions and original Small mappings/images, with all intended baseline/candidate arms and seeds",
+    "Metered existing-server synthetic vision/usage preflight; no service change or automatic retry",
+    "Complete fixed Reader message path, native/adapted offline scoring and all required judge accounting through the original ledger",
+    "Complete corpus actual Store ingestion, real retrieval/Reader/scoring and source-faithful semantic evaluation",
+    "Keep shared-history and source dependence;451questions or3seeds are not451independent source families. Report failures/no-calls/unknowns and all offline/online costs",
+    "STATE Learning Track/Mem2Act and protected confirmations remain separate full requirements"
+  ],
+  "no_question_answer_or_history_body_displayed_to_reviewer": true,
+  "scope_of_program_reads": "Mechanical program parsed existing raw JSON, projected public fields and compared literal values. No semantic annotation, new labels, training or model output inspection.",
+  "new_training_labels": 0,
+  "new_real_model_jobs": 0,
+  "no_sha_validation": true,
+  "no_push_merge_services_or_Product_schema_permission_change": true
+}
