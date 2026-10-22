@@ -1,0 +1,129 @@
+{
+  "status": "ACTIVE_GOAL;CLOSED_CASE_ARCHIVE_AND_RESTORE_WORKFLOW_VERIFIED",
+  "observed_at": "2026-10-22T03:39:00.284959+00:00",
+  "previous": "training-generalization-progress-20261022-v25.json",
+  "previous_turn_classification": "PROGRESS:full paging/source-cache equality closed and lossless archive feasibility established. This turn reused the existing common-base archive in a closed LME prediction/scoring workflow with exact restoration.",
+  "active_fit": {
+    "session": 17952,
+    "parent_pid": 3470595,
+    "child_pid": 3470601,
+    "actual_pids_alive": true,
+    "status": "RUNNING",
+    "latest_recorded_updates": 422,
+    "planned": 524,
+    "source_version": "d6a8afd3",
+    "no_hot_update_restart_or_recipe_change": true,
+    "post_update_scores_not_read_for_selection": true
+  },
+  "implementation": {
+    "source_version": "a33974c0",
+    "initial_commit": "8e9b981c",
+    "freeze": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/frozen-lme-archives-a33974c0/MiLAi-Lab",
+    "manifest": "training-generalization-lme-case-archive-plan-v1.json",
+    "entrypoint": "tools/archive_lme_cases.py archive PREDICTIONS SCORES --source-version VERSION; restore PREDICTIONS ROW",
+    "format": "Existing case_blocks_v1 retained common-base plus fixed-offset changed blocks, ordinary gzip container. Existing archive_case compares every reconstructed byte before working-case removal. No new format or content fingerprint.",
+    "workflow": "Prediction and matching scoring phases must be terminal, all actual case directories mapped uniquely. Include failed attempts; preserve unattempted positions in unchanged original drivers/metrics. Shared templates and predictions/scores stay in place; keep bases unchanged. Case paths recorded before retrieval so failures are located. Restore one case to original runtime path; restore metadata is outside byte-identical runtime.",
+    "boundaries": "Running stages, mismatched cohort, unlisted/missing runtimes or templates overlapping removable case trees reject before removal. No automatic retry/overwrite. Existing generic restore_case_archive.py remains available for explicit archive/base/fresh-output recovery. Archival is separate after scoring, never an implicit model success or partial-cohort selection."
+  },
+  "validation": {
+    "passed": 14,
+    "new_tests": 8,
+    "skipped": 0,
+    "ruff_files": 4,
+    "mypy_files": 2,
+    "package_tools_boundaries": "PASS;6grandfatheredprivateedges unchanged",
+    "CLI_help": "PASS",
+    "scope": "Complete mocked native prediction/scoring over real temporary Stores, byte-identical all-file restore, unchanged templates/drivers/scores and full denominators; Reader/retrieval failure and unattempted tails; active/missing/orphan/base-overlap cases. No research model calls."
+  },
+  "full_store_probe": {
+    "session": 24029,
+    "pid": 608766,
+    "actual_pid_alive": false,
+    "exit_code": 0,
+    "status": "COMPLETE_FULL_STORE_CASE_BLOCK_ROUNDTRIP_NOT_BENCHMARK_RUN",
+    "report": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lme-case-blocks-full-store-probe-v1/report.json",
+    "pools": [
+      {
+        "pool": "pool-0",
+        "archive": {
+          "archive": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lme-case-blocks-full-store-probe-v1/pool-0/case.tar.gz",
+          "base": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lme-case-blocks-full-store-probe-v1/pool-0/base",
+          "format": "case_blocks_v1",
+          "files": 7,
+          "uncompressed_bytes": 120506452,
+          "stored_block_bytes": 1380706,
+          "archive_bytes": 179669,
+          "verification": "Every reconstructed byte compared directly; no SHA/fingerprint",
+          "retention": "Full immutable base plus per-case blocks reconstruct all original files."
+        },
+        "full_case_literal_restore": {
+          "files": 7,
+          "bytes_literally_equal": 120506452
+        },
+        "base_literal_unchanged": {
+          "files": 6,
+          "bytes_literally_equal": 120497906
+        },
+        "restored_Source_query_succeeded": true,
+        "archive_compute_nested": {
+          "cpu_seconds": 0.2055837760000001,
+          "wall_seconds": 0.2056194031611085
+        },
+        "restore_compute_nested": {
+          "cpu_seconds": 0.23709495099999955,
+          "wall_seconds": 0.4570241719484329
+        }
+      },
+      {
+        "pool": "pool-1",
+        "archive": {
+          "archive": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lme-case-blocks-full-store-probe-v1/pool-1/case.tar.gz",
+          "base": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lme-case-blocks-full-store-probe-v1/pool-1/base",
+          "format": "case_blocks_v1",
+          "files": 7,
+          "uncompressed_bytes": 96289084,
+          "stored_block_bytes": 983394,
+          "archive_bytes": 120283,
+          "verification": "Every reconstructed byte compared directly; no SHA/fingerprint",
+          "retention": "Full immutable base plus per-case blocks reconstruct all original files."
+        },
+        "full_case_literal_restore": {
+          "files": 7,
+          "bytes_literally_equal": 96289084
+        },
+        "base_literal_unchanged": {
+          "files": 6,
+          "bytes_literally_equal": 96284634
+        },
+        "restored_Source_query_succeeded": true,
+        "archive_compute_nested": {
+          "cpu_seconds": 0.13234592100000064,
+          "wall_seconds": 0.13240777514874935
+        },
+        "restore_compute_nested": {
+          "cpu_seconds": 0.17814854799999935,
+          "wall_seconds": 0.17828286718577147
+        }
+      }
+    ],
+    "original_ledger_unchanged": true,
+    "scope": "Two independent full preflight runtime/base/case copies. One synthetic Source added only to each case; expected copies retained. Archive removes/restores only those new case copies. All restored files byte-equal, original/base files unchanged and actual Source lookup works. No fabricated benchmark prediction/scoring status. Not a real research cohort archive, performance result or general future archive-size bound."
+  },
+  "new_closed_measured_phases": [
+    {
+      "id": "lme_case_blocks_full_store_probe_v1",
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lme-case-blocks-full-store-probe-v1/report.json",
+      "cpu_seconds": 2.6487895829999992,
+      "wall_seconds": 3.816765235736966,
+      "ledger_recorded": false
+    }
+  ],
+  "new_closed_CPU_seconds_pending": 2.6487895829999992,
+  "costs": "2.648789583new measured CPU seconds pending; per-pool archive/restore subclocks nested, never additional phases. Authoring/tests/import/freezing unmeasured, unknown not0. V25pending7380.353031073 and all older pending unchanged. Original ledger only; no offline settlement while fit lives; closedv1/v2/v3 never reopen.",
+  "new_model_jobs_started": 0,
+  "new_training_labels": 0,
+  "no_sha_validation": true,
+  "no_subagents": true,
+  "no_push_merge_services_or_Product_schema_API_permission_Canonical_change": true,
+  "remaining": "Active corrected fit/remaining controls/savedCPU incl legacy; STATE108E2/factorial/expandedfeedback/T2/common-support; actualHost/lifecycle/costs; full external/protected/seeds0,1,2. External requires actual-query post-operation/learned paths, completeReadercontexts, server vision/usage, selected checkpoints/method/seedfreeze and real evaluation. Source cache/full paging proofs unchanged; no real evaluation cohort has yet been archived."
+}

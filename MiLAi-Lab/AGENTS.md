@@ -1,3 +1,55 @@
+# LATEST V26 (2026-10-22): FIT422 LIVE / CLOSED CASE ARCHIVE WORKFLOW READY
+
+Full goal ACTIVE. ONLY real model job remains exec17952, parent3470595/child3470601,
+frozen d6a8afd3. Actual PIDs alive; latest run.json RUNNING422/524. No post-update scores read
+for selection, hot update, restart, second model job or offline settlement. No automatic model
+successor. All old closed jobs/audits stay closed; paused Coalent untouched.
+
+NEW CODE a33974c0 (initial8e9b981c), freeze frozen-lme-archives-a33974c0/MiLAi-Lab,
+5files literal-equal. Reuses EXISTING harness.case_archive.archive_case/restore_case and
+case_blocks_v1 shared-base fixed-offset blocks; no new archive format or fingerprint.
+tools/archive_lme_cases.py archive PREDICTIONS SCORES --source-version VERSION:
+requires matching terminal prediction/scoring drivers and unique inventory of every actual
+case directory. Failed runtimes included; original drivers/scores/full planned denominators
+unchanged. Existing primitive compares every reconstructed byte before removing working case.
+Keep complete unchanged shared templates. Predictions, scores and unattempted positions stay.
+restore PREDICTIONS ROW restores one case to original path; no overwrite. Restore observation
+outside runtime keeps every original byte unchanged. Generic restore_case_archive.py still
+supports explicit archive/base/fresh output recovery. No automatic retry or hidden model rerun.
+Predictor now records runtime BEFORE retrieval, so first retrieval failure has a location.
+Running stages, mismatched cohorts, unlisted/missing runtimes and retained bases overlapping
+removable cases reject before removal. Archive happens separately AFTER scoring; do not archive
+an active cohort or lose its queue/admission state. Base mutation invalidates this retention
+contract; ordinary versions/paths and byte equality are used, never SHA/substitute fingerprints.
+
+14tests PASS,0skip(8new+6existing):real temporary Stores plus mocked native Reader/scoring;
+success/failed Reader/failed retrieval/NOT_RUN tail, all-file restore, unchanged bases/outcomes,
+running/missing/unlisted/base-overlap boundaries. Ruff4,mypy2,package/tools and CLI help PASS;
+6grandfathered private edges unchanged. No real model/HTTP/labels in validation.
+
+CLOSED full-store probe exec24029/PID608766, exit0, actual PID absent:
+probe_lme_case_blocks_v1.py -> lme-case-blocks-full-store-probe-v1/report.json.
+Independent copies of both complete preflight runtimes; one synthetic Source added only to
+each case copy. Original preflight Stores/base/expected copies retained. Existing archive
+primitive removes/restores only the new case copy. All7files restored literally, Source lookup
+works, all6base files unchanged. Pool0 case120506452bytes, changed blocks1380706, archive179669;
+pool1 case96289084bytes, changed blocks983394, archive120283. These controlled mutations are
+not a real model cohort and not a future archive-size bound. No real cohort archived yet.
+Original ledger unchanged. Canonical whole CPU2.648789583 pending; nested archive/restore
+clocks not extra phases. No other new measured phase. Unmeasured work unknown/not0.
+
+Original ledger ONLY /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json.
+No offline settlement while fit lives. V25pending7380.353031073 and all older pending unchanged;
+closed v1/v2/v3 never append/re-settle. Source-cache8e2178bd/full-page/public-input/View-budget
+proofs remain valid. Live fit/data/labels/inputs unchanged, no new neural model jobs.
+
+Full goal still requires corrected fit/control matrix and savedCPU incl legacy, STATE108E2,
+factorial/expandedfeedback/T2/common-support, Host/lifecycle/costs, full external/protected/
+seeds0,1,2. External actual-query post-operation/learned paths, full Reader inputs, server
+vision/usage, selected checkpoints/method/seed freeze and real evaluation still pending.
+No subagents/push/merge/services/ProductSchema/API/permissions/Canonical changes. See progress-v26
+and lme-case-archive-plan-v1. Revalidate live fit before any model dispatch.
+
 # LATEST V25 (2026-10-22): FIT393 LIVE / FULL PAGES CLOSED / ALL SEARCHES EQUIVALENT
 
 Full goal ACTIVE. ONLY real model job remains exec17952, parent3470595/child3470601,
