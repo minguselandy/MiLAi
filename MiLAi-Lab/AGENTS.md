@@ -1,3 +1,28 @@
+# LATEST V48 (2026-10-22): SAVED CPU UPDATE32 LIVE / FOUR W5 ANCHOR NOTES ADDED
+
+Full goal ACTIVE. Same only model exec8452,parent893356/driver893357/current child1589315 live,
+update32 latest71/876states; candidate0 already COMPLETE and billed once. Do not restart/re-bill
+candidate0 or read partial metrics for selection. All remaining saved candidates and selected
+train required. CPU-only exec37854/PID662822 also live,197/902paths. Revalidate actual PIDs/counts.
+No second model/probe/fit/E2, inference change or offline settlement while original job lives.
+
+New public-prefix notes for original W5 anchors A29,B05,B06,C23 (batches000–001):92source units,
+8requests. A29 starts11sources, others7; final23. Old W5 branch reviews/labels untouched.
+New-note series totals53families/1219source units/114requests,including8earlier independent
+record requests. Closed49nonanchor coverage audit unchanged. Four anchors remain for new notes:
+C26,D11,D23,F08 in batches002–003. Other71source groups are outside this new semantic-note count.
+A29 corrected/recalibrated scores differ; B05 last joint choice differs from current disagreement;
+B06 agrees to future large-group exception without changing usual preference; C23 chosen renewal
+window is not a booked appointment. Notes offline, not new labels/model inputs. Actual future
+requests/Views/branches/answers still need review. Pool/quotas/order/splits unchanged. See
+review-progress-v14, tracked source-review-v14/progress-v48. Full original scope remains active.
+
+New note-save/literal/code-check CPU0.006198000 pending. V47pending0.041111181 separate;
+candidate0CPU43688.529695180 already billed, never settle again. V34inventory10663.791232191
+is existing74phase subtotal, not extra cost. Original ledger only;closedv1/v2/v3 untouched.
+Unmeasured semantic work unknown,not0. No production/label/SHA/subagent/service/push/merge changes.
+All earlier paused queues remain untouched.
+
 # LATEST V47 (2026-10-22): SAVED CPU UPDATE32 LIVE / NONANCHOR NOTES COMPLETE
 
 Full goal ACTIVE. Same only model job exec8452,parent893356/driver893357 continues automatically.
