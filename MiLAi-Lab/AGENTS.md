@@ -1,3 +1,28 @@
+# LATEST V42 (2026-10-22): SAVED CPU LIVE / PREFERENCE EXCEPTIONS AND REPORTED ACTIONS
+
+Full goal ACTIVE. Only model remains exec8452, parent893356/driver893357/current child893516,
+all live. CPU-only exec37854/PID662822 also live. Revalidate actual PIDs and driver/counts.
+All seven saved candidates and selected train still required. No restart, inference change,
+early selection, second model or offline settlement while saved CPU evaluation lives.
+
+Four new reviews B12,A07,A20,F06 in batches031,033–035:92source units/10publicrequests, all turns
+read. Ordinary prefixes7then23; A07 adds independent first/current record tasks with46literal
+source-copy entries and four declared write occurrences across two banks, not new sources.
+Actual new save/update/read/version receipts still pending. New-note totals30families/690source
+units/64requests, including4independent record requests (A04+A07). Not total historical review
+coverage or new independent sources. B12 separates typo/retired/current/proposed numbers;
+A07 preference exception is not changed usual preference or confirmed dinner; A20 retains
+explicitly reported completed contact changes but not an undownloaded app; F06 retains a
+period-limited, sensory-rich coping preference and separates enrollment from future attendance.
+Notes offline only, not labels/model inputs. Real new requests/Views/branches/answers still need
+review. Source pool,quotas,order,splits unchanged; Wiki-only batch032 remains in frozen pool.
+Next batches start036. See review-progress-v8, tracked source-review-v8 and progress-v42.
+
+New note-save/literal/code-check CPU0.008268095 pending; V41CPU0.007640478 and all earlier
+phase costs remain separate. V34inventory10663.791232191 is existing74phase subtotal, never
+extra cost. Original ledger only; pending/closedv1/v2/v3 untouched. Unmeasured semantic work
+unknown,not0. No production/model/label/SHA/subagent/service/push/merge changes. Full scope intact.
+
 # LATEST V41 (2026-10-22): SAVED CPU LIVE / INDEPENDENT STORED-RECORD REQUESTS REVIEWED
 
 Full goal ACTIVE. Only model remains exec8452, parent893356/driver893357/current child893516,

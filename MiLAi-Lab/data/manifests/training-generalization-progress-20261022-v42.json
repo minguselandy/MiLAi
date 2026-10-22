@@ -1,0 +1,82 @@
+{
+  "status": "ACTIVE_SAVED_CPU_AND_PUBLIC_PATH_AUDIT_LIVE;FOUR_MORE_PUBLIC_SOURCE_REVIEWS_WITH_RECORD_TASKS",
+  "observed_at": "2026-10-22T06:56:25.844804+00:00",
+  "previous": "data/manifests/training-generalization-progress-20261022-v41.json",
+  "previous_turn_classification": "PROGRESS: four source reviews including independent record contexts and frozen mechanism checks saved and committed",
+  "only_real_model": {
+    "exec_session": 8452,
+    "parent_pid": 893356,
+    "driver_pid": 893357,
+    "evaluator_pid": 893516,
+    "actual_proc_present": true,
+    "status": "RUNNING",
+    "update": 0,
+    "completed_states": 591,
+    "planned_states": 876,
+    "completed_candidates": 0,
+    "deployment_selection": null,
+    "condition": "All seven saved CPU candidates, then matching selected train; CPU FP32 loaded, reference_compile=False, MHA fastpath=False, shared_actions12288/head2048. Unchanged."
+  },
+  "CPU_audit": {
+    "exec_session": 37854,
+    "pid": 662822,
+    "actual_proc_present": true,
+    "status": "RUNNING",
+    "completed_paths": 141,
+    "planned_paths": 902,
+    "closed_prefix_state_drop_inputs": 0,
+    "closed_prefix_head_drop_inputs": 0,
+    "closed_prefix_Reader_overflow_paths": 0
+  },
+  "public_source_review": {
+    "manifest": "data/manifests/training-generalization-feedback-source-review-v8.json",
+    "new_notes_families": [
+      "memops_B12",
+      "memops_A07",
+      "memops_A20",
+      "memops_F06"
+    ],
+    "new_source_units": 92,
+    "new_public_requests": 10,
+    "cumulative_new_note_families": 30,
+    "cumulative_source_units": 690,
+    "cumulative_public_requests": 64,
+    "ordinary_prefix_sizes_each": [
+      7,
+      23
+    ],
+    "new_independent_record_requests": 2,
+    "cumulative_independent_record_requests": 4,
+    "new_repeated_source_entries_checked_not_added_to_units": 46,
+    "new_declared_revision_write_occurrences": 4,
+    "new_distinct_literal_revision_texts": 2,
+    "frozen_collector_source": "2a179b58",
+    "literal_contract_files_match": true,
+    "all_sources_read_including_assistant": true,
+    "source_copies_literal_equal": true,
+    "scope": "Existing exposed train histories only. New-note coverage is not all historical review coverage. No outputs, labels, source selection or conditions changed. Actual captured requests, Views, branches and answers still require later review.",
+    "findings": [
+      "B12: typo, corrected old number, retired number and proposed port-back are distinct; brother maintenance number still missing, promise to repair is not completion.",
+      "A07: willingness to make birthday exception does not change usual quiet-dining preference or confirm dinner; separate first/current literal-record tasks require real receipts later.",
+      "A20: reported completed contact changes retained with correct gym/work/wallet scope; digital app not downloaded and wallet remains current.",
+      "F06: coping pattern limited to current period and includes sensory richness, not pure solitude; pottery registration done but attendance future, gallery attendance still planned."
+    ]
+  },
+  "new_closed_measured_phases": [
+    {
+      "id": "feedback_public_source_reviews_batches031_035_save_v1",
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-source-review-v1/review-progress-v8.json",
+      "cpu_seconds": 0.008268094999999996,
+      "wall_seconds": 0.008271806873381138,
+      "ledger_recorded": false
+    }
+  ],
+  "new_closed_CPU_seconds_pending": 0.008268094999999996,
+  "costs": "Only new note-save/literal/frozen-code checks CPU0.008268095 pending. V41CPU0.007640478 and all earlier phase costs remain separate. V34inventory10663.791232191 represents existing74phases, never a new charge. All prior pending/closedv1/v2/v3 unchanged. No offline settlement while savedCPU lives. Semantic reading/authoring/inspection unknown,not0.",
+  "production_code_changed": false,
+  "new_model_jobs_started": 0,
+  "new_training_labels": 0,
+  "no_sha_validation": true,
+  "no_subagents": true,
+  "remaining": "All savedCPU candidates/selectedtrain,legacy savedCPU,corrected64/128/parameter/aux/E3fits;STATEE2/factorial/expandedfeedback/T2/common-support,Host/lifecycle/costs,servervision and external/protected/seeds0/1/2. Full original goal remains active."
+}
