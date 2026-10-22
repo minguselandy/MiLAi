@@ -1,3 +1,83 @@
+# LATEST V20 (2026-10-22): FIT96 LIVE / LME WORKFLOW + CPU BANK PREFLIGHT LIVE
+
+Full goal ACTIVE, not complete/blocked/paused. CURRENT ONLY REAL MODEL:
+exec17952,parent3470595/child3470601, frozen d6a8afd3, complete-actions-fit-v1/driver.json and
+fitting/source256-actions-full-seed0-u524-v1/run.json under artifacts/generalization-20261021.
+Latest actualPIDs alive,RUNNING96/524 (revalidate). No hotupdate/restart/data/parameter/labelchange,
+newrealmodeljob orofflinesettlement. No newpost-update metricsreadforselection. No automatic
+successor afterfit. Alllegacy/STATE/sourcequeue closed jobs NEVERrestart;pausedCoalent untouched.
+
+IMPORTANT ALSO LIVE, CPU-ONLY / NOT A MODEL JOB: exec21998, PID3985384, script
+artifacts/generalization-20261021/audit_lme_whole_bank_inputs_v1.py. Output
+lme-whole-bank-input-preflight-v1/audit.json, log lme-whole-bank-input-preflight-v1.log,
+process handle lme-whole-bank-input-preflight-v1-process.json. Last actualPIDalive, pool-0
+ingestion3072/3458;pool-1 later1837sources. DO NOTrestartonobservationtimeout orwhilelive.
+It ingests bothcomplete100trajectoryhaystacks usingrealStore APIs, then sharedEvidenceOperations
+initialstates/realLayaSDKtokenization foroneSYNTHETICquery. No actualQAtextdisplay,weights,
+forward,generation,embedding ornetwork. Originalledgerliteralbefore/after check;no billing.
+No Source subset/drop. Tests unpageddefault vs existingSourceObservationPages4096 candidate;
+this is NOT a final externalinputamendment. Initialpage only; laterpages/realquery/search/View/
+owntrajectory coverage remain. LiveauditCPU notfinal;embedded setup costs are nested,notnewphases.
+If it fails,retainpartialStores/report,inspectcause;do not startamodel or silentlyacceptclipping.
+
+LME prediction/scoring implementation frozen ec2bc88a in frozen-lme-reader-ec2bc88a/MiLAi-Lab
+(lme-reader-code-freeze-v1.json;6literalfilecomparisons). Commits99c49bb7core,00cd0105bounded
+nativeexports,ec2bc88aoriginalReadercallgate. Entry tools/run_lme_predictions.py takes config,
+completeSmall snapshot,upstreamcode,output;tools/score_lme_predictions.py takes closedprediction
+root andnewscore output. Both --source-version; repeatable --site-packages fordeclaredlocaldeps.
+Full inputcohort/nativeorderedhaystacks;perqueryclosedStoreclone andsharedloadedcontrollerpool
+acrossbanks. Query/imageonlytoReader;noanswer/evalspec/goldsourcefilter. Allsourcesretained.
+Literalcopies of nativecodeandreferenceinputs savedbeforepredictions;referencesneverinStore/
+Reader andscoringdoesnotreadmutableupstreamreplacement. Firstfailure retained,noautomaticretry;
+failedReader/Judge+untouchedtail unscored infullplanneddenominator. ValidmodelUNKNOWN obeys
+nativezero-score rule,distinctfrommissingoutcome. Nativefullmetrics onlywhenallscored;conditional
+subsetandboundsseparate. Scoringrequirespredictionphaseterminal,doesnotregenerateReader.
+
+Nativeprompt/rubric/parser/metricfunctionbodies copiedvia explicitAST export set,staticstdlib
+namespace,import-free selecteddefinitions. Initialwholemoduledynamicimport failedpackage
+boundary;resolved withoutallowlist/weakening. Unrelatedmoduleinit/SDKclient/retries/notselected
+trajectorySHA code notloaded. ActualJudgeclient injectedthroughoriginalmeteredtransport.
+ExistingQwenHost DTO forbothReader/Judge=>modifiedmodelprotocol,notofficialpaper leaderboard.
+Reader resumes actual public-query DurableGenerationAdmission: retrieval+Reader<=original24
+calls;exhaustionrejectsbeforeHTTP. OfflineJudgeatmost1separateevaluationcall,notHosttask allowance.
+Bothsharethequery'sexistingqueue-admission.json andoriginalledger;600requests/8M unchanged,
+no reset. Unknownusage remainsoriginalchargedreservation/None,notzero. PerrequestCPU/exclusive
+orchestration/nestedwholephase observationsdistinct;noautomaticCPUsettlement/nestedsums.
+
+PIXEL CONFIG CORRECTION: BOTH pinnedslowQwenimageprocessors4.52.3 and4.57.6 reset valid size dict
+todefault3136..1003520;from_pretrained pixelkwargsarriveafterconstructoranddon'tfixsize.
+ImageHostCapacity nowresolvesnativeclass thenconstructswithfullmodelconfig+declaredpixelbounds
+65536..16777216. Effectiveanddeclaredconfigs inreceipts. No upstream/library/env/servicepatch.
+New64x128->72visualtokens (olddefault8),2048x1024->2048;actualassetresolutions800x480/1000x480/
+1280x720 remain375/465/880,soV18's3geometrycountsunchanged. Previouscomponentagreementalone
+hadnotprovedconfigbounds. Actualservervision/usage still NOT tested;mustwaitmodelslot.
+PRIMARY LME runtime must keepCUDAenv Python/transformers4.52.3/torch2.7 (matchingLayaCPU
+selection),then add HTTPenvsitepackages and local image-reader-pillow-overlay-v1. DoNOTrun
+learnedcontrollerunderHTTPenv4.57 silently. CLIsetsMHAfastpathfalse anddeclaredCPUthreads.
+Set CUDA_VISIBLE_DEVICES='',TOKENIZERS_PARALLELISM=false inlaunchplan. 4.57 testedsecondaryonly.
+Image remainsoriginalReaderinput;Laya controller istextual,notcaptioned orvisionupgraded.
+
+34unique testsPASS/0skip:15nativeprotocol+7Readerprivacy/budget/failure+3realStorefullsynthetic
+cohort+3newnativepixel/fullReaderimage+6existingimage regressions. New3image testsruninboth
+4.52.3and4.57.6,notdoublecounted. AllHTTPmocked,realnetworkblocked,isolatedtestledgersnotresearch
+results. Ruff10changedPythonfiles,mypy6implementationfiles,package/tools boundaries andbothCLI
+helpPASS;6historicalprivateedgesunchanged. No actualbenchmark modelcalls/traininglabels.
+
+Newclosed measuredphases image-pixel-bounds-audit-v2/{cuda452,http457}.json CPU5.532889467+
+6.836637233=12.369526700 PENDING. Tests/debug/freeze/unmeasuredwork unknown,notzero. CPUwholebank
+audit live,don'tcountpartialtiming. Closedsettlementsv1/v2/v3neverappend/re-settle;oldpending35/
+v11-v19pending unchanged. Currenttrainerbills terminalonce;legacytrainer/STATEHTTPalreadybilled.
+Originalledgeronly /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json.
+
+Protocol training-generalization-lme-reader-workflow-v2.json;progress-v20 andexecutiondoc.
+Actualmodelsnotdispatched:needs fullcorpusinput/pagingpreflight,actualservervisioncheck,final
+method/weights/seeds frozenbeforeexternaloutcomes. All451/nativeimages remainfullscope.
+V19STATEsource/Viewreview/E2readiness alreadycomplete;108branchesnotrun. Restfullgoalunchanged:
+allcorrectednested/parameter/aux/E3fits+savedCPUincllegacy;STATE108E2/deliverylabels;factorialv2;
+feedback128sources3collectors/labels/192fits/T2/common-support;strongsimple/full/NoView/text
+Hostlifecycle+costs;fullprotected/external/seed0,1,2confirmation. No SHA/substitute fingerprint,
+subagents,push/merge/services/ProductSchema/API/permissions/Canonical changes.
+
 # LATEST V19 (2026-10-22): CORRECTED FIT32 LIVE / STATE REVIEW COMPLETE
 
 Full goal ACTIVE, not complete/blocked/paused. Revalidate CURRENT ONLY REAL MODEL:
