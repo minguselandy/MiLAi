@@ -1,0 +1,359 @@
+{
+  "status": "NOT_READY_FOR_COMPLETE_EXTERNAL_MODEL_COHORT;READ_GRANULARITY_CAPACITY_FAILURE_FOUND",
+  "observed_at": "2026-10-22T00:36:35.460025+00:00",
+  "workflow": "training-generalization-lme-reader-workflow-v2.json",
+  "workflow_source_version": "ec2bc88a",
+  "audit_workspace_version": "56bb28db",
+  "primary_training_change": false,
+  "external_models_dispatched": 0,
+  "new_training_labels": 0,
+  "initial_input": {
+    "status": "COMPLETE_FULL_CORPUS_INITIAL_INPUT_AUDIT_NOT_MODEL_EVALUATION",
+    "pools": [
+      {
+        "pool": "pool-0",
+        "trajectories": 100,
+        "sources": 3458,
+        "state_images": 3358,
+        "conditions": [
+          {
+            "event_id": "pool-0/unpaged",
+            "question": "next",
+            "sequence_tokens": 16384,
+            "state_tokens_dropped": 46959729,
+            "head_tokens_dropped": 0,
+            "condition": "unpaged",
+            "source_observation_tokens": null,
+            "source_rows_visible": 3458,
+            "offered_actions": 4,
+            "sdk_mask_replacements": 0,
+            "full_visible_bank_sources": 3458,
+            "next_cursor": null
+          },
+          {
+            "event_id": "pool-0/paged4096",
+            "question": "next",
+            "sequence_tokens": 5232,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "condition": "paged4096",
+            "source_observation_tokens": 4096,
+            "source_rows_visible": 3,
+            "offered_actions": 9,
+            "sdk_mask_replacements": 0,
+            "full_visible_bank_sources": 3458,
+            "next_cursor": [
+              2,
+              6543
+            ]
+          }
+        ]
+      },
+      {
+        "pool": "pool-1",
+        "trajectories": 100,
+        "sources": 1837,
+        "state_images": 1737,
+        "conditions": [
+          {
+            "event_id": "pool-1/unpaged",
+            "question": "next",
+            "sequence_tokens": 16384,
+            "state_tokens_dropped": 41360833,
+            "head_tokens_dropped": 0,
+            "condition": "unpaged",
+            "source_observation_tokens": null,
+            "source_rows_visible": 1837,
+            "offered_actions": 4,
+            "sdk_mask_replacements": 0,
+            "full_visible_bank_sources": 1837,
+            "next_cursor": null
+          },
+          {
+            "event_id": "pool-1/paged4096",
+            "question": "next",
+            "sequence_tokens": 5139,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "condition": "paged4096",
+            "source_observation_tokens": 4096,
+            "source_rows_visible": 2,
+            "offered_actions": 8,
+            "sdk_mask_replacements": 0,
+            "full_visible_bank_sources": 1837,
+            "next_cursor": [
+              1,
+              8669
+            ]
+          }
+        ]
+      }
+    ],
+    "original_ledger_unchanged": true
+  },
+  "search_read": {
+    "status": "COMPLETE_SEARCH_READ_INPUT_DIAGNOSTIC_NOT_POLICY_EVALUATION",
+    "conditions": [
+      {
+        "pool": "pool-0",
+        "delivery_selection": false,
+        "candidate_count": 8,
+        "candidate_source_counts": [
+          102,
+          52,
+          51,
+          102,
+          52,
+          26,
+          52,
+          102
+        ],
+        "read_result": {
+          "ok": false,
+          "status": "material_budget_exhausted",
+          "index": 0
+        },
+        "full_packet_tokens": [
+          946169
+        ],
+        "visible_evidence": 0,
+        "observed_evidence": 0,
+        "inputs": [
+          {
+            "event_id": "pool-0/False/initial",
+            "question": "next",
+            "sequence_tokens": 5232,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "stage": "initial",
+            "offered_actions": 9,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-0/False/after_search",
+            "question": "next",
+            "sequence_tokens": 6124,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "stage": "after_search",
+            "offered_actions": 16,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-0/False/after_read",
+            "question": "next",
+            "sequence_tokens": 6048,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "stage": "after_read",
+            "offered_actions": 15,
+            "SDK_mask_replacements": 0
+          }
+        ]
+      },
+      {
+        "pool": "pool-0",
+        "delivery_selection": true,
+        "candidate_count": 8,
+        "candidate_source_counts": [
+          102,
+          52,
+          51,
+          102,
+          52,
+          26,
+          52,
+          102
+        ],
+        "read_result": {
+          "ok": false,
+          "status": "material_budget_exhausted",
+          "index": 0,
+          "visibility": "visible"
+        },
+        "full_packet_tokens": [
+          946169,
+          946169
+        ],
+        "visible_evidence": 0,
+        "observed_evidence": 1,
+        "inputs": [
+          {
+            "event_id": "pool-0/True/initial",
+            "question": "next",
+            "sequence_tokens": 5707,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "stage": "initial",
+            "offered_actions": 13,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-0/True/after_search",
+            "question": "next",
+            "sequence_tokens": 6927,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "stage": "after_search",
+            "offered_actions": 28,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-0/True/after_read",
+            "question": "next",
+            "sequence_tokens": 16384,
+            "state_tokens_dropped": 956770,
+            "head_tokens_dropped": 0,
+            "stage": "after_read",
+            "offered_actions": 28,
+            "SDK_mask_replacements": 0
+          }
+        ]
+      },
+      {
+        "pool": "pool-1",
+        "delivery_selection": false,
+        "candidate_count": 8,
+        "candidate_source_counts": [
+          18,
+          11,
+          14,
+          52,
+          35,
+          4,
+          52,
+          28
+        ],
+        "read_result": {
+          "ok": false,
+          "status": "material_budget_exhausted",
+          "index": 0
+        },
+        "full_packet_tokens": [
+          217265
+        ],
+        "visible_evidence": 0,
+        "observed_evidence": 0,
+        "inputs": [
+          {
+            "event_id": "pool-1/False/initial",
+            "question": "next",
+            "sequence_tokens": 5139,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "stage": "initial",
+            "offered_actions": 8,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-1/False/after_search",
+            "question": "next",
+            "sequence_tokens": 6119,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "stage": "after_search",
+            "offered_actions": 15,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-1/False/after_read",
+            "question": "next",
+            "sequence_tokens": 6043,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "stage": "after_read",
+            "offered_actions": 14,
+            "SDK_mask_replacements": 0
+          }
+        ]
+      },
+      {
+        "pool": "pool-1",
+        "delivery_selection": true,
+        "candidate_count": 8,
+        "candidate_source_counts": [
+          18,
+          11,
+          14,
+          52,
+          35,
+          4,
+          52,
+          28
+        ],
+        "read_result": {
+          "ok": false,
+          "status": "material_budget_exhausted",
+          "index": 0,
+          "visibility": "visible"
+        },
+        "full_packet_tokens": [
+          217265,
+          217265
+        ],
+        "visible_evidence": 0,
+        "observed_evidence": 1,
+        "inputs": [
+          {
+            "event_id": "pool-1/True/initial",
+            "question": "next",
+            "sequence_tokens": 5533,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "stage": "initial",
+            "offered_actions": 11,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-1/True/after_search",
+            "question": "next",
+            "sequence_tokens": 6841,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "stage": "after_search",
+            "offered_actions": 26,
+            "SDK_mask_replacements": 0
+          },
+          {
+            "event_id": "pool-1/True/after_read",
+            "question": "next",
+            "sequence_tokens": 16384,
+            "state_tokens_dropped": 204786,
+            "head_tokens_dropped": 0,
+            "stage": "after_read",
+            "offered_actions": 26,
+            "SDK_mask_replacements": 0
+          }
+        ]
+      }
+    ],
+    "original_ledger_unchanged": true,
+    "scope": "Same synthetic query in both complete100-trajectory Stores. One actual offered SEARCH limit8 and first ordinary candidate READ, separately in delivery_selection false/true. Query is not an LME question; no reference answers, model policy, generated View, HTTP or model weights. Exact same actual search result reused within each paired condition.",
+    "source_values": "All5295original Source units retained. Probe query is excluded. No originals shortened, re-labelled or substituted by a top-N haystack.",
+    "guard_evidence": "Native tokenizer audit measured nonzero state_tokens_dropped. By existing NativeDecision.predict complete-input check, these states would raise before forward. The production guard itself was inspected, not invoked with weights in this audit.",
+    "mechanism": "All released trajectory units have tool role. Existing session search and exchange packing group the whole trajectory into one candidate when no user boundary exists. First candidate source counts102 and18; packet sizes946169 and217265 exceed2048. Delivery-selection retains unreturned read bodies as observed_evidence, so the next complete Laya state also overflows.",
+    "interpretation": "Source-observation paging solves the initial observation capacity only. This does not establish poor retrieval relevance, learned-policy failure frequency, benchmark accuracy or whether an actual policy would choose these actions. No truncated input was forwarded."
+  },
+  "page_audit": {
+    "session": 68138,
+    "pid": 4070915,
+    "actual_pid_alive": true,
+    "status": "RUNNING",
+    "active": {
+      "pool": "pool-0",
+      "pages": 2600,
+      "sources_complete": 886
+    },
+    "report": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lme-all-source-pages-audit-v1/audit.json",
+    "scope": "Full literal Unicode coverage and per-page native length audit still running; no policy rollout or claim that8steps visit all pages."
+  },
+  "next_input_work": {
+    "status": "NO_NEW_INPUT_CONDITION_IMPLEMENTED_OR_SELECTED",
+    "requirement": "Resolve search-hit read granularity as one explicit shared condition before final external method freeze. Preserve complete Store and original source identity/revision/character ranges, explicit incomplete navigation and full Reader accounting; no gold-dependent filtering or benchmark-specific answer rules. Any changed condition must be matched across arms and retain this oversized-session diagnostic.",
+    "existing_defaults": "Do not silently enable a different granularity or raise model limits. Existing turn mode alone does not create user boundaries inside an all-tool trajectory; rich retrieve currently calls the session search path.",
+    "further_readiness": "Actual public queries, post-SEARCH/READ/View/own-policy states, complete source-page result, existing-server image/usage probe, saved-selected checkpoints and final seed/method freeze remain pending."
+  },
+  "no_sha_validation": true,
+  "no_subagents": true,
+  "no_production_schema_API_permission_or_service_change": true
+}

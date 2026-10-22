@@ -1,3 +1,56 @@
+# LATEST V22 (2026-10-22): FIT128 LIVE / SEARCH-READ CAPACITY FAILURE
+
+Full goal ACTIVE. The ONLY real model job remains exec17952, parent3470595/child3470601,
+frozen d6a8afd3, complete-actions-fit-v1/driver.json and
+fitting/source256-actions-full-seed0-u524-v1/run.json. Actual PIDs alive, RUNNING128/524.
+No post-update scores read for selection. No hot update/restart, second model job or offline
+settlement while live. No automatic model successor. All old closed jobs stay closed.
+
+INITIAL CPU AUDIT CLOSED: exec21998/PID3985384 exited0 and actual PID absent. Both complete
+100-trajectory banks imported:3458/1837Sources,3358/1737state-image bindings. Final report
+lme-whole-bank-input-preflight-v1/audit.json COMPLETE, original ledger unchanged.
+Unpaged state drops46959729/41360833 at16384; paged4096 first inputs5232/5139, no drops.
+Canonical whole-phase CPU1393.082489669 pending; nested setup times are NOT extra phases.
+
+STILL LIVE CPU-ONLY: exec68138/PID4070915 audit_lme_all_pages_v1.py, actual process alive.
+lme-all-source-pages-audit-v1/audit.json RUNNING, latest pool0 page2600/886sources complete.
+Do NOT restart. It traverses all literal pages, not a policy rollout. Inspect final state/head
+drop counts and Store/search invariance, not just COMPLETE. No final CPU cost yet.
+
+NEW SEARCH/READ DIAGNOSTIC CLOSED: exec41195/PID4113583 exited0, actual PID absent.
+audit_lme_search_read_inputs_v1.py -> lme-search-read-input-audit-v1/audit.json.
+One SAME synthetic request, actual offered SEARCH(limit8), first ordinary candidate READ,
+delivery_selection false/true on both complete banks. No QA question/answer inspection,
+weights, model policy, HTTP, generated View or Source mutation. Original ledger unchanged.
+First candidates contain102/18Source ranges; whole return packets946169/217265Host tokens,
+far above2048. Both modes retain material_budget_exhausted, no delivered evidence.
+False mode next inputs6048/6043 fit. True mode retains body in observed_evidence, native
+state drops956770/204786 at16384; head drops and mask replacements0. These were tokenizer
+diagnostics ONLY, never model forwards. Existing NativeDecision.predict would reject before
+forward (code inspected, not invoked with weights). Do not describe this as actual model error.
+Cause: all-tool trajectory has no user exchange boundary; existing session search/pack groups
+the full trajectory. Initial source paging does not bound searched/read material. Existing
+turn mode does not split an all-tool prefix, and rich retrieve currently uses session search.
+
+LME is NOT ready for a full model cohort. No new input condition implemented/selected.
+Next input work: one explicit shared literal-range read/search condition preserving full Store,
+source identity/revision/Unicode ranges, original image bindings, complete Reader accounting.
+Match any changed condition across arms; retain this oversized-session diagnostic. Do not
+silently clip, drop sources, raise model limits, use gold filtering or add benchmark-specific
+answer rules. Existing ec2bc88a workflow/34tests remain implementation evidence only.
+Actual queries/View/own-policy states, page closure, server vision probe and checkpoint freeze
+are still pending. All primary training/data/labels stay unchanged.
+
+Two new closed canonical CPU phases:1393.082489669 +112.378101471 =1505.460591140 pending.
+Embedded search/setup times and copied report numbers are nested, never additional billing.
+No offline settlement. Original ledger remains /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/
+ser-v20/budget.json. Existing pending unchanged; closed settlements v1/v2/v3 never re-settle.
+No production changes/new tests/model jobs/training labels this turn. No SHA/substitute
+fingerprints, subagents, push/merge/services/ProductSchema/API/permissions/Canonical changes.
+Full remaining work unchanged: corrected fits/saved CPU incl legacy, STATE108E2/factorial,
+expanded feedback/T2/common-support, Host/lifecycle/costs, complete external/protected/seeds.
+See progress-v22, lme-input-readiness-v1 and execution doc. Earlier snapshots are historical.
+
 # LATEST V21 (2026-10-22): FIT128 LIVE / FULL-HISTORY SIZE EVIDENCE
 
 Full goal ACTIVE. CURRENT ONLY REAL MODEL remains exec17952,parent3470595/child3470601,
