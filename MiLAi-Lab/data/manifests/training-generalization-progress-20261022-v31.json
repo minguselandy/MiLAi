@@ -1,0 +1,137 @@
+{
+  "status": "ACTIVE_GOAL;SAVED_CPU_EVALUATION_LIVE;FEEDBACK_ACTION_COVERAGE_DIAGNOSED",
+  "observed_at": "2026-10-22T05:12:50.639724+00:00",
+  "previous": "training-generalization-progress-20261022-v30.json",
+  "previous_turn_classification": "PROGRESS:terminal corrected fit audited and savedCPU evaluation started. This turn checked live processes and quantified action-kind coverage using only closed in-memory outputs and existing labels.",
+  "only_real_model": {
+    "session": 8452,
+    "parent_pid": 893356,
+    "driver_pid": 893357,
+    "evaluator_pid": 893516,
+    "actual_pids_alive": true,
+    "status": "RUNNING",
+    "active_update": 0,
+    "completed_states": 90,
+    "planned_states_per_candidate": 876,
+    "planned_candidates": 7,
+    "deployment_selection": null,
+    "source_version": "1df7669d",
+    "conditions_unchanged": true
+  },
+  "cpu_audit": {
+    "session": 37854,
+    "pid": 662822,
+    "actual_pid_alive": true,
+    "status": "RUNNING",
+    "completed_paths": 63,
+    "planned_paths": 902,
+    "active": {
+      "row": 31,
+      "pool": "pool-0",
+      "delivery_selection": true
+    },
+    "native_overflow_paths_in_closed_prefix": 0,
+    "Reader_overflow_paths_in_closed_prefix": 0,
+    "scope": "Fixed-policy CPU input audit, not learned-policy or QA result; final cost still unknown."
+  },
+  "feedback_diagnostic": {
+    "report": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/complete-actions-feedback-action-diagnostic-v1.json",
+    "train_action_kind_state_coverage": {
+      "raw_states": 7884,
+      "offered": {
+        "HANDOFF": 7884,
+        "SEARCH": 2905,
+        "REFRESH_VIEW": 7701,
+        "READ": 6221,
+        "USE_VIEW": 878
+      },
+      "positive": {
+        "SEARCH": 1009,
+        "READ": 3028,
+        "HANDOFF": 891,
+        "REFRESH_VIEW": 2,
+        "USE_VIEW": 1
+      },
+      "scope": "Counts overlap when a state offers or accepts multiple kinds;not probabilities or independent samples."
+    },
+    "top_action_kinds": [
+      {
+        "update": 0,
+        "kinds": {
+          "REFRESH_VIEW": 2,
+          "SEARCH": 13,
+          "HANDOFF": 1
+        }
+      },
+      {
+        "update": 32,
+        "kinds": {
+          "SEARCH": 16
+        }
+      },
+      {
+        "update": 64,
+        "kinds": {
+          "SEARCH": 16
+        }
+      },
+      {
+        "update": 128,
+        "kinds": {
+          "SEARCH": 16
+        }
+      },
+      {
+        "update": 262,
+        "kinds": {
+          "SEARCH": 16
+        }
+      },
+      {
+        "update": 393,
+        "kinds": {
+          "SEARCH": 16
+        }
+      },
+      {
+        "update": 524,
+        "kinds": {
+          "SEARCH": 16
+        }
+      }
+    ],
+    "selected262_directional_kind_pairs": {
+      "delivery:SEARCH>HANDOFF:correct": 13,
+      "answer:REFRESH_VIEW>HANDOFF:incorrect": 9,
+      "delivery:REFRESH_VIEW>HANDOFF:incorrect": 13,
+      "answer:REFRESH_VIEW>SEARCH:incorrect": 3,
+      "delivery:REFRESH_VIEW>SEARCH:incorrect": 3,
+      "answer:SEARCH>HANDOFF:correct": 6,
+      "delivery:HANDOFF>SEARCH:incorrect": 3,
+      "delivery:SEARCH>REFRESH_VIEW:correct": 6,
+      "answer:HANDOFF>SEARCH:incorrect": 2,
+      "answer:HANDOFF>REFRESH_VIEW:correct": 1,
+      "delivery:HANDOFF>REFRESH_VIEW:correct": 1
+    },
+    "scope": "Descriptive action-kind/pair transitions on previously frozen feedback labels and fully closed in-memory predictions. No labels, data, checkpoint selection or algorithm changed. Does not prove causal goal conflict or Host effects; savedCPU evaluation remains separate.",
+    "interpretation_limit": "An offered but unlabelled/unexecuted action is not established to be bad. Positive-state counts do not measure how many states would actually benefit from View. These dev observations do not authorize relabelling old training data or selecting a checkpoint by feedback.",
+    "next_action": "Retain immutable labels and existing preregistered STATE E2/expanded feedback collection. Diagnose real View experience and outcome directions; do not add case-specific rules or relabel from dev. Cannot execute those model branches while savedCPU job lives."
+  },
+  "new_closed_measured_phases": [
+    {
+      "id": "complete_actions_feedback_kind_diagnostic_v1",
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/complete-actions-feedback-action-diagnostic-v1.json",
+      "cpu_seconds": 6.057575553,
+      "wall_seconds": 6.05782319791615,
+      "ledger_recorded": false
+    }
+  ],
+  "new_closed_CPU_seconds_pending": 6.057575553,
+  "costs": "Only6.057575553new measured offline CPU seconds pending. No settlement while model job lives. Trainer already billed; savedCPU children bill their own phases. All previous pending and closedv1/v2/v3 unchanged; unmeasured authoring/monitoring unknown,not0.",
+  "production_code_changed": false,
+  "new_model_jobs_started": 0,
+  "new_training_labels": 0,
+  "no_sha_validation": true,
+  "no_subagents": true,
+  "remaining": "All savedCPU candidates and matching selected train,legacy savedCPU,remaining corrected controls/aux/E3,seeds,STATE108E2/factorial/expandedfeedback/T2/common-support,Host/lifecycle/costs,server vision and complete external/protected confirmation. No final generalization or Host gain claimed."
+}

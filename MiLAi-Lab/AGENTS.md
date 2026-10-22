@@ -1,3 +1,35 @@
+# LATEST V31 (2026-10-22): SAVED CPU LIVE / FEEDBACK VIEW-SUPERVISION COVERAGE
+
+Full goal ACTIVE. ONLY real model remains exec8452,parent893356/driver893357/current child893516,
+actual PIDs alive. complete-actions-saved-cpu-v1/driver.json RUNNING update0,latest90/876states.
+All7candidates and matching selected train still required; no deployment selection. Conditions
+unchanged:CPUFP32loaded,MHAfastpathFalse,reference_compileFalse,shared_actions12288/head2048.
+Child changes per checkpoint; revalidate driver and /proc. Do not restart, start another model
+or settle offline costs while live. Old corrected fit/parent closed, never restart/rebill.
+
+CPU-only exec37854/PID662822 also alive; all-public-fixed-path audit latest63/902closed,
+closed prefix native/Reader overflow paths0. Not full-cohort or learned-policy/QA success.
+No automatic retry. It may observe legitimate ledger changes from savedCPU child settlement.
+
+NEW CLOSED offline diagnostic complete-actions-feedback-action-diagnostic-v1.json:
+On all16frozen feedback states, in-memory update0 top kinds SEARCH13/REFRESH_VIEW2/HANDOFF1.
+Every update32/64/128/262/393/524 chooses SEARCH on all16. At262, all9answer and13delivery
+REFRESH_VIEW>HANDOFF directions misordered, and all3REFRESH_VIEW>SEARCH directions per target
+misordered. This is descriptive closed-output evidence, not savedCPU/Host outcome or causal proof.
+Raw train7884states offer HANDOFF7884,SEARCH2905,READ6221,REFRESH_VIEW7701,USE_VIEW878.
+Positive-kind state counts:SEARCH1009,READ3028,HANDOFF891,REFRESH_VIEW2,USE_VIEW1; counts can
+overlap. Unlabelled/unexecuted alternatives are NOT established bad actions. Positive counts
+do not measure how many states truly benefit from Views. Do NOT relabel old data from dev.
+This reinforces the already-frozen STATE E2/expanded-feedback actual View experience work;
+no case-specific rules, pool changes, labels or new model branches added this turn.
+
+Canonical diagnostic CPU6.057575553 pending, no settlement. All earlier pending unchanged;
+trainer already billed, savedCPU children bill their own phases, closedv1/v2/v3 never reopen.
+Original ledger ONLY /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json.
+Unmeasured authoring/monitoring unknown/not0. No SHA/substitute fingerprints,subagents,
+push/merge/services/ProductSchema/API/permissions/Canonical changes. Full original remaining
+fit/control/feedback/Host/external/protected/multiseed requirements unchanged. See progress-v31.
+
 # LATEST V30 (2026-10-22): CORRECTED FIT CLOSED / SAVED CPU EVALUATION IS ONLY MODEL JOB
 
 Full goal ACTIVE. OLD FIT exec17952,parent3470595/child3470601 CLOSED COMPLETE524,exit0,
