@@ -1,3 +1,27 @@
+# LATEST V43 (2026-10-22): SAVED CPU LIVE / DEVICE, EVENT AND SPEAKER SCOPE
+
+Full goal ACTIVE. Only model remains exec8452, parent893356/driver893357/current child893516,
+all live. CPU-only exec37854/PID662822 also live. Revalidate actual PIDs and driver/counts.
+All seven saved candidates and selected train still required. No restart, inference change,
+early selection, second model or offline settlement while saved CPU evaluation lives.
+
+Four new source reviews D18,C04,C01,B22 in batches036–039:92source units/8publicrequests,
+all turns read, ordinary prefixes7then23 and exact copies/references verified. New-note total
+34families/782source units/72requests. No new independent record tasks; four earlier requests
+remain retained. Not total historical review coverage or independent new sources.
+D18 preserves current versus planned keyboard settings by device/app/person; C04 appointment
+location cannot inherit an endoscopy floor, and abandoned reschedule/closedENT stay distinct;
+C01 firm quote differs from conditional offers and purchased boxed fan is not installed;
+B22 user's forecast of spouse's reaction is not her stated response or completed office move.
+Notes remain offline, no labels/model inputs/sourcepool/quota/order/split changes. Actual new
+requests/Views/branches/answers still require later review. Next batches start040. See
+review-progress-v9 in feedback-source-review-v1 and tracked source-review-v9/progress-v43.
+
+New note-save/literal/code-check CPU0.005806819 pending. V42CPU0.008268095,V41CPU0.007640478
+and all earlier phases separate; V34inventory10663.791232191 is existing74phase subtotal,
+not extra cost. Original ledger only; pending/closedv1/v2/v3 untouched. Unmeasured semantic
+work unknown,not0. No production/model/label/SHA/subagent/service/push/merge changes. Full scope intact.
+
 # LATEST V42 (2026-10-22): SAVED CPU LIVE / PREFERENCE EXCEPTIONS AND REPORTED ACTIONS
 
 Full goal ACTIVE. Only model remains exec8452, parent893356/driver893357/current child893516,
