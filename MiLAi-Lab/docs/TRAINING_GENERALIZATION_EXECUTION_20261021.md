@@ -4,6 +4,25 @@
 [原计划](MILAI_TRAINING_DATA_GENERALIZATION_PLAN_20261021.md)，原文复制留存，原目录文件未修改。
 该计划中的“本轮已完成”是另一环境的历史说明，不能代替本机当前验证。
 
+## 续次执行 v47（2026-10-22）：首个保存候选闭合，49组非锚点笔记覆盖完成
+
+原保存CPU任务已完成update0的876状态，旧子893516实际退出，driver自动进入update32，当前子1589315存活。
+新子进程仍为原CPU FP32载入、reference_compile/MHA fastpath关闭、shared_actions12288/head2048条件。
+update0的876次前向、4314812输入tokens、CPU **43688.529695180005秒**及墙钟11132.235744120553秒
+已由原evaluator一次入原账本，runs=1、compute文件逐字段一致；本轮未读部分质量指标或选择检查点，不重复计费。
+其余候选和匹配训练集仍须执行，整个模型任务未结束；另一纯CPU查询审计也仍在推进。
+
+完成A27、E14、A05三组69条原文、8个请求，包含A05独立记录版本任务。
+新笔记累计49组、1127条原文、106请求，其中八个独立记录请求的184条复制出现没有算新增来源。
+全覆盖核对确认这49组恰为冻结历史池中所有非W5锚点组，全部原文、实际前缀和引用一致。
+剩余八个原W5锚点尚无本系列新笔记，旧评审/标签保留；71个其他来源组不在本次语义重审结论内。
+真实新请求、View、分支和答案仍需执行后评审，完整目标未完成。
+
+新增笔记保存CPU0.005903997与独立覆盖核对CPU0.035207184，合计 **0.041111181秒待结算**，不含已入账模型计算。
+见[来源评审v13](../data/manifests/training-generalization-feedback-source-review-v13.json)、
+[49组覆盖核对](../data/manifests/training-generalization-feedback-nonanchor-source-review-coverage-v1.json)和
+[进度v47](../data/manifests/training-generalization-progress-20261022-v47.json)。
+
 ## 续次执行 v46（2026-10-22）：观察值、预测与已完成操作
 
 完成批次049–052的B10、D14、B26、F12，共92条原文、8个请求，前缀均七条/23条。

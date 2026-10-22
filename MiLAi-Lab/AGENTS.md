@@ -1,3 +1,35 @@
+# LATEST V47 (2026-10-22): SAVED CPU UPDATE32 LIVE / NONANCHOR NOTES COMPLETE
+
+Full goal ACTIVE. Same only model job exec8452,parent893356/driver893357 continues automatically.
+OLD evaluator893516 absent; saved candidate0 COMPLETE876. Its unique original-ledger phase
+training_generalization_source256_actions_full_seed0_u524_v1_saved_cpu_u0 already bills CPU
+43688.529695180005,wall11132.235744120553,876forwards/4314812tokens,runs1. Exact compute record
+matched; never restart or re-bill. No partial quality metrics read or checkpoint selected.
+CURRENT evaluator1589315 is update32, actual PID live. Re-read driver/run for counts/currentchild.
+Same CPUFP32loaded/reference_compileFalse/MHAfastpathFalse/shared_actions12288/head2048 verified.
+All remaining saved candidates and selected train required. No second model/probe/fit/E2,
+restart/inference change/early selection/offline settlement while job lives. CPU-only exec37854/
+PID662822 also live,latest186+ paths of902,closed-prefix native/Reader overflows0. Do not restart.
+
+New A27,E14,A05 reviews in batches053–054,056:69source units/8requests. A05 includes independent
+first/current record tasks; stored first text retains original3B while ordinary current facts3A.
+New-note series now49families/1127source units/106requests,including8independent record requests.
+Full coverage audit checks these49 are EXACTLY all non-W5-anchor history groups in frozen pool,
+all literal histories/prefixes/claim refs match. Copies184source entries are not new sources;
+16record write specs are not executed receipts. Remaining new-prefix notes are eight original
+anchors A29,B05,B06,C23,C26,D11,D23,F08 (batches000–003). Old W5 reviews/labels unchanged.
+The other71Wiki/complementary groups inherit earlier evidence; no full semantic re-review claimed.
+Notes remain offline only, not labels/model inputs. Actual new requests/Views/branches/answers
+still need review. No sourcepool/quota/order/split changes. See review-progress-v13, nonanchor
+source-review-coverage-v1 and progress-v47. Source-only reviews do not complete original full goal.
+
+New pending CPU:note save0.005903997 + separate coverage audit0.035207184 =0.041111181.
+Candidate0 compute already billed, excluded. Earlier phases and V34inventory existing74phase
+subtotal10663.791232191 stay separate, never double-count. Original ledger only at
+/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json;closedv1/v2/v3 untouched.
+Unmeasured semantic/inspection work unknown,not0. No production/labels/SHA/subagents/services/
+push/merge changes. All prior paused queues and full remaining research scope unchanged.
+
 # LATEST V46 (2026-10-22): SAVED CPU LIVE / OBSERVATIONS, FORECASTS AND COMPLETED TRANSFERS
 
 Full goal ACTIVE. Only model exec8452,parent893356/driver893357/current child893516 live;
