@@ -1,3 +1,31 @@
+# LATEST V52 (2026-10-22): SAVED CPU UPDATE32 LIVE / V11 COST PROVENANCE RECONCILED
+
+Full goal ACTIVE. Only model exec8452,parent893356/driver893357/current child1589315 live,
+update32 latest571/876states. Candidate0 already complete/billed once;never restart/re-bill.
+All remaining saved candidates and selected train required,no partial selection. CPU-only
+exec37854/PID662822 live,275/902paths,closed-prefix state/head/Reader overflows0. Revalidate
+actual PIDs/current driver. No second model/probe/fit/E2,inference change or offline settlement.
+
+Source preparation/index from V51 remains closed; no new semantic review or labels this turn.
+NEW pending-cpu-v11-audit-v1.json identifies FIVE existing unlisted V11measured phases totaling
+225.599536895CPU:legacy source256request-text native audit221.343317687,comparison4.145570094,
+STATEacceptance preparation0.067520768,literal-config audit0.041077580,execution plan0.002050766.
+Canonical paths+CPU JSON pointers recorded. These are existing pending costs,not new execution;
+future idle settlement must include each once,not subtotal plus components. No overlap with
+closed generalizationv1/v2/v3 or declaredV12–V51 pending. Three olderSTATEpreparation phases were
+already settled; three laterSTATEreview phases already inventoried; embedded E3plan copies excluded.
+
+IMPORTANT generic phase-name collision:original ledger host_intent_e3_request_text_input_audit_v1
+CPU136.757649673/wall134.070652685 matches OLD host-intent T1data audit and its settled pending-v14.
+It is NOT the current source256audit221.343317687. Preserve old closed phase; identify new
+canonical measurement separately in a future settlement. No ledger writes; observed bytes unchanged.
+Audit program's NEW CPU0.020186044 is separate pending under JSON pointer
+/new_audit_compute_separate_from_existing_pending/cpu_seconds. Earlier known pending retained;
+V34inventory10663.791232191 is existing74phases,not extra. Oldpending35 untouched;unmeasured work
+unknown,not0. This identifies five measured phases,not an exhaustive claim for all overhead.
+See tracked pending-cpu-v11-audit-v1 and progress-v52. Full source index,all original remaining
+research scope and paused queues unchanged. No production/label/SHA/subagent/service/push/merge.
+
 # LATEST V51 (2026-10-22): SAVED CPU UPDATE32 LIVE / PRIMARY SOURCE EVIDENCE INDEX COMPLETE
 
 Full goal ACTIVE. Only model exec8452,parent893356/driver893357/current child1589315 live,

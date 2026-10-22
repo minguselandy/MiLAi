@@ -1,0 +1,132 @@
+{
+  "status": "FIVE_IDENTIFIED_V11_MEASUREMENTS_RECONCILED;NOT_SETTLED",
+  "observed_at": "2026-10-22T09:49:50.699889+00:00",
+  "existing_pending_phases": [
+    {
+      "id": "v11_source256_legacy_request_text_audit",
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/source256-request-text-input-audit-v1/audit.json",
+      "cpu_json_pointer": "/cpu_seconds",
+      "cpu_seconds": 221.343317687,
+      "source_status": "PASS_COMPLETE_EQUAL_INFORMATION_INPUTS",
+      "reported_phase": "host_intent_e3_request_text_input_audit_v1",
+      "scope": "Closed preparation/audit process only;future experiment status is separate.",
+      "ledger_recorded": false
+    },
+    {
+      "id": "v11_source256_legacy_request_text_comparison",
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/source256-request-text-input-audit-v1/paired-input-comparison-v1.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 4.145570094,
+      "source_status": "PASS_ORDERED_IDENTITIES_AND_EQUAL_INFORMATION_NATIVE_AUDIT",
+      "reported_phase": null,
+      "scope": "Closed preparation/audit process only;future experiment status is separate.",
+      "ledger_recorded": false
+    },
+    {
+      "id": "v11_state_view_acceptance_input_preparation",
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-view-acceptance-preparation-v1/preparation.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 0.06752076799999998,
+      "source_status": "PREPARED_NOT_EXECUTED",
+      "reported_phase": null,
+      "scope": "Closed preparation/audit process only;future experiment status is separate.",
+      "ledger_recorded": false
+    },
+    {
+      "id": "v11_state_view_acceptance_literal_config_audit",
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-view-acceptance-preparation-v1/literal-config-audit-v1.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 0.041077579999999995,
+      "source_status": "PASS_LITERAL_SOURCE_FRONTIERS_AND_PROBE_CONFIG",
+      "reported_phase": null,
+      "scope": "Closed preparation/audit process only;future experiment status is separate.",
+      "ledger_recorded": false
+    },
+    {
+      "id": "v11_state_view_acceptance_execution_plan",
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-view-acceptance-execution-plan-v1.json",
+      "cpu_json_pointer": "/compute/cpu_seconds",
+      "cpu_seconds": 0.0020507659999999955,
+      "source_status": "PREPARED_NOT_DISPATCHED_WAIT_FOR_ACTIVE_PRIMARY_FIT_TERMINAL",
+      "reported_phase": null,
+      "scope": "Closed preparation/audit process only;future experiment status is separate.",
+      "ledger_recorded": false
+    }
+  ],
+  "existing_pending_CPU_seconds": 225.599536895,
+  "overlap_with_closed_generalization_settlements": 0,
+  "overlap_with_existing_V12_V51_pending_declarations": 0,
+  "already_settled_STATE_preparation_excluded": [
+    {
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-public-train-materials-v1/preparation.json",
+      "closed_registries": [
+        {
+          "registry": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/compute-settlement-v3.json",
+          "ledger_phase": "training_generalization_20261021_source_collection_preparation_v3",
+          "measurement_file": "artifacts/generalization-20261021/state-public-train-materials-v1/preparation.json",
+          "cpu_seconds": 0.23864601999999996,
+          "scope": "Top-level measurement only;not nested summaries"
+        }
+      ]
+    },
+    {
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-public-train-materials-v1/literal-temporal-audit-v1.json",
+      "closed_registries": [
+        {
+          "registry": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/compute-settlement-v3.json",
+          "ledger_phase": "training_generalization_20261021_source_collection_preparation_v3",
+          "measurement_file": "artifacts/generalization-20261021/state-public-train-materials-v1/literal-temporal-audit-v1.json",
+          "cpu_seconds": 0.131379317,
+          "scope": "Top-level measurement only;not nested summaries"
+        }
+      ]
+    },
+    {
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-train-pilot-store-prefixes-v1/ingestion.json",
+      "closed_registries": [
+        {
+          "registry": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/compute-settlement-v3.json",
+          "ledger_phase": "training_generalization_20261021_source_collection_preparation_v3",
+          "measurement_file": "artifacts/generalization-20261021/state-train-pilot-store-prefixes-v1/ingestion.json",
+          "cpu_seconds": 0.3567692149999999,
+          "scope": "Top-level measurement only;not nested summaries"
+        }
+      ]
+    }
+  ],
+  "already_declared_later_pending_excluded": [
+    "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-view-acceptance-preparation-v1/source-first-review-v1.json",
+    "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-view-acceptance-preparation-v1/source-review-readiness-v1.json",
+    "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/state-public-train-materials-v1/identity-policy-exposure-audit-v2.json"
+  ],
+  "embedded_plan_copies_verified_not_counted": [
+    "input_audit_result",
+    "paired_input_comparison"
+  ],
+  "historical_phase_name_collision": {
+    "reported_phase": "host_intent_e3_request_text_input_audit_v1",
+    "already_settled_registry": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/data/pending-offline-review-v14.json",
+    "already_billed_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/data/e3-request-text-input-audit-v1/audit.json",
+    "already_billed_data": "artifacts/host-intent-retrieval-v3/data/t1-fitting-v1",
+    "already_billed_ledger_values": {
+      "cpu_seconds": 136.757649673,
+      "wall_seconds": 134.07065268512815
+    },
+    "new_pending_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/source256-request-text-input-audit-v1/audit.json",
+    "new_pending_data": "artifacts/generalization-20261021/nested-operation-data-v1/sources-256",
+    "new_pending_cpu_seconds": 221.343317687,
+    "rule": "Same generic audit phase name,different input/run. Preserve old closed phase; future settlement must identify the new canonical measurement separately."
+  },
+  "scope": "Only these five identified measured phases,not exhaustive research cost. This subtotal is existing pending work,not a new charge. Do not sum it again with its constituent measurements. Old pending35 and all other declarations remain untouched. Unmeasured tests,authoring,imports,debug/freezing and any other unidentified work remain unknown,not0.",
+  "original_ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+  "ledger_write_calls": 0,
+  "ledger_recorded": false,
+  "ledger_bytes_equal_before_after": true,
+  "ledger_observation": "Read-only observation;legitimate live model settlement may change bytes.",
+  "model_calls": 0,
+  "no_sha_validation": true,
+  "new_audit_compute_separate_from_existing_pending": {
+    "cpu_seconds": 0.020186044,
+    "wall_seconds": 0.02021240908652544
+  }
+}
