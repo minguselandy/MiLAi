@@ -2836,12 +2836,24 @@ def message(
                 def dependency_read_call(
                     stage: str, messages: list[dict[str, str]], schema: dict[str, Any],
                 ) -> dict[str, Any]:
-                    response = model.invoke(
-                        messages, tools=[], tool_choice="none",
-                        response_format={"type": "json_schema", "json_schema": {
-                            "name": "dependency_reads", "schema": schema}},
-                        **({"enable_thinking": settings["stage_enable_thinking"][stage]}
-                           if stage in settings.get("stage_enable_thinking", {}) else {}))
+                    try:
+                        response = model.invoke(
+                            messages, tools=[], tool_choice="none",
+                            response_format={"type": "json_schema", "json_schema": {
+                                "name": "dependency_reads", "schema": schema}},
+                            **({"enable_thinking": settings["stage_enable_thinking"][stage]}
+                               if stage in settings.get("stage_enable_thinking", {}) else {}))
+                    except CapacityExceeded as error:
+                        if stage != "query_structure":
+                            raise
+                        # The client rejected the complete input before HTTP. View construction
+                        # has not committed; return its existing definite-rejection outcome.
+                        # The read and generation-admission attempts remain consumed.
+                        limits = {key: error.receipt[key] for key in (
+                            "prompt_tokens", "output_reserve_tokens", "context_tokens",
+                            "total_reserved_tokens")}
+                        raise FunctionalRejection("QUERY_STRUCTURE_INPUT_CAPACITY_EXCEEDED:"
+                            + json.dumps(limits, separators=(",", ":"))) from error
                     if not isinstance(response, AIMessage) or not isinstance(response.content, str):
                         raise ValueError("FUNCTIONAL_DEPENDENCY_RESPONSE_MISSING")
                     value = parse_object(response.content, reject_duplicate_keys=True)
