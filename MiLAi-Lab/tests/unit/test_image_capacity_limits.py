@@ -11,7 +11,7 @@ from test_v13_5_functional_integration import prepared
 from milai_lab.datasets.lme_protocol import NativeLmeProtocol
 from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.providers.image_capacity import ImageHostCapacity
-from milai_lab.runners.functional import prepare
+from milai_lab.runners.functional import message, prepare
 from milai_lab.runners.lme_reader import predict_reader
 
 
@@ -33,13 +33,19 @@ def test_local_model_pixel_bounds_are_applied(capacity, shape, expected):
 
 def test_fixed_reader_preserves_two_images_and_uses_native_image_capacity(tmp_path, monkeypatch):
     monkeypatch.setattr(socket.socket, "connect", lambda *_: pytest.fail("REAL_NETWORK_FORBIDDEN"))
-    prepared(tmp_path, native=False)
+    prepared(tmp_path, native=False, memory_method="milai_edit_m_v1",
+        memory_profile="unified_v1", evidence_policy="question_pack_v1", retrieval_tool="rich",
+        business_tools=[], memory_view_mode="staged",
+        memory_control={"policy":"fixed_context","reads":4,"max_control_steps":6})
     settings = read_json(tmp_path/"settings.json")
     settings["capacity"]["tokenizer_path"] = "/cra/qwen36-35B"
     config = tmp_path/"image-settings.json"
     write_json(config, settings)
     runtime = tmp_path/"image-runtime"
     prepare(runtime, config, source_version="mechanical")
+    result = message(runtime, bank="reader", owner="alice", session="evaluation", message_id="q",
+        content="Synthetic question", given_retrieval_request={"query":"Synthetic question"})
+    assert result["status"] == "COMPLETED" and result["generation_calls"] == 0
     capacity = ImageHostCapacity(settings["capacity"])
     source, question = tmp_path/"source.png", tmp_path/"question.png"
     Image.new("RGB", (1280, 720), "red").save(source)

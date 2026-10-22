@@ -21,6 +21,7 @@ from milai_lab.providers.chat_bridge import IncompleteChatResponse
 from milai_lab.providers.contextual_capacity import CapacityExceeded, HostCapacity
 from milai_lab.providers.contextual_vllm import VLLMConfig
 from milai_lab.providers.functional_queue import FunctionalQueue, FunctionalVLLMClient
+from milai_lab.providers.generation_admission import DurableGenerationAdmission
 from milai_lab.runners.functional import frozen
 
 
@@ -77,6 +78,20 @@ def run_completion(runtime: Path, output: Path, request: dict[str, Any],
         with http_budget_scope(settings, limits, client_configs=configs):
             budget = entry_budget(limits, Path(settings["budget_path"]))
             report["budget_before"] = copy.deepcopy(budget.state)
+            if phase == "reader":
+                admission_path, = runtime.glob("banks/*/message-admission.json")
+                entry, = read_json(admission_path)["messages"].values()
+                identity = entry["identity"]
+                admission = DurableGenerationAdmission(admission_path,
+                    identity["public_message_id"], identity, asdict(host),
+                    settings["max_calls_per_message"], "resume", 0)
+                report["generation_calls_before"] = admission.count
+                admission.reserve(asdict(host), settings["max_calls_per_message"],
+                                  "lme_fixed_reader")
+                report["generation_calls_after"] = admission.count
+            else:
+                report["admission_scope"] = (
+                    "One offline Judge call; same queue/ledger, separate from Host task allowance")
             client = FunctionalVLLMClient(host, emit=trace, budget=budget, capacity=capacity,
                                          transport=transport)
             with client:

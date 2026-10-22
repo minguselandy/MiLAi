@@ -13,14 +13,22 @@ from milai_lab.datasets.lme_protocol import NativeLmeProtocol
 from milai_lab.harness.artifact_io import read_json
 from milai_lab.providers.chat_bridge import IncompleteChatResponse
 from milai_lab.providers.contextual_capacity import HostCapacity
-from milai_lab.runners.functional import frozen
+from milai_lab.providers.generation_admission import DurableGenerationAdmission
+from milai_lab.runners.functional import frozen, message
 from milai_lab.runners.lme_reader import predict_reader, score_reader
 
 
 def setup(tmp_path, monkeypatch, *, native=True):
     forbid_fingerprints(monkeypatch)
     monkeypatch.setattr(socket.socket, "connect", lambda *_: pytest.fail("REAL_NETWORK_FORBIDDEN"))
-    runtime = prepared(tmp_path, native=native)
+    runtime = prepared(tmp_path, native=native, memory_method="milai_edit_m_v1",
+        memory_profile="unified_v1", evidence_policy="question_pack_v1", retrieval_tool="rich",
+        business_tools=[], memory_view_mode="staged",
+        memory_control={"policy":"fixed_context","reads":4,"max_control_steps":6})
+    result = message(runtime, bank="reader", owner="alice", session="evaluation", message_id="q",
+        content="Public synthetic question",
+        given_retrieval_request={"query":"Public synthetic question"})
+    assert result["status"] == "COMPLETED" and result["generation_calls"] == 0
     capacity = HostCapacity(frozen(runtime)["config"]["capacity"])
     protocol = NativeLmeProtocol(UPSTREAM)
     return runtime, capacity, protocol
@@ -83,6 +91,8 @@ def test_reader_judge_use_same_ledger_and_queue_without_reference_leak(
     assert budget["generation"]["unknown_usage"] == 0
     assert read_json(tmp_path/"reader/reader/call.json")["actual_http_attempts"] == 1
     assert read_json(tmp_path/"score/judge/call.json")["actual_http_attempts"] == 1
+    admission = read_json(next(runtime.glob("banks/*/message-admission.json")))
+    assert next(iter(admission["messages"].values()))["count"] == 1
 
 
 def test_truncated_reader_is_retained_unscored_and_not_retried(tmp_path, monkeypatch):
@@ -149,3 +159,20 @@ def test_reference_question_cannot_be_swapped_after_prediction(tmp_path, monkeyp
             source_version="mechanical",
             transport=httpx.MockTransport(lambda _: pytest.fail("No call")))
     assert read_json(tmp_path/"isolated-mechanical-budget.json")["generation_requests"] == 1
+
+
+def test_reader_respects_the_existing_task_call_allowance(tmp_path, monkeypatch):
+    runtime, capacity, protocol = setup(tmp_path, monkeypatch)
+    path = next(runtime.glob("banks/*/message-admission.json"))
+    saved = read_json(path)
+    entry = next(iter(saved["messages"].values()))
+    identity, config = entry["identity"], saved["configuration"]
+    admission = DurableGenerationAdmission(path, identity["public_message_id"], identity,
+        config["host"], config["cap"], "resume", 0)
+    for _ in range(config["cap"]):
+        admission.reserve(config["host"], config["cap"], "synthetic_prior_reservation")
+    with pytest.raises(ValueError, match="PUBLIC_MESSAGE_GENERATION_CAPACITY_EXCEEDED"):
+        predict(runtime, tmp_path/"reader", protocol, capacity,
+                httpx.MockTransport(lambda _: pytest.fail("No call beyond original cap")))
+    assert read_json(tmp_path/"reader/reader/call.json")["actual_http_attempts"] == 0
+    assert read_json(tmp_path/"isolated-mechanical-budget.json")["generation_requests"] == 0
