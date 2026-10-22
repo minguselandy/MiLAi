@@ -1,0 +1,70 @@
+{
+  "status": "ACTIVE_SAVED_CPU_AND_PUBLIC_PATH_AUDIT_LIVE;TWO_PUBLIC_SOURCE_REVIEWS_SAVED",
+  "observed_at": "2026-10-22T06:00:12.626873+00:00",
+  "previous": "data/manifests/training-generalization-progress-20261022-v34.json",
+  "previous_turn_classification": "VERIFIED_WAIT: actual processes and advancing counters verified",
+  "only_real_model": {
+    "exec_session": 8452,
+    "parent_pid": 893356,
+    "driver_pid": 893357,
+    "evaluator_pid": 893516,
+    "actual_proc_present": true,
+    "status": "RUNNING",
+    "update": 0,
+    "completed_states": 340,
+    "planned_states": 876,
+    "completed_candidates": 0,
+    "deployment_selection": null,
+    "condition": "All7savedCPU candidates then matching selected train;CPUFP32loaded,reference_compileFalse,MHAfastpathFalse,shared_actions12288/head2048;unchanged"
+  },
+  "CPU_audit": {
+    "exec_session": 37854,
+    "pid": 662822,
+    "actual_proc_present": true,
+    "status": "RUNNING",
+    "completed_paths": 96,
+    "planned_paths": 902,
+    "closed_prefix_state_drop_inputs": 0,
+    "closed_prefix_head_drop_inputs": 0,
+    "closed_prefix_Reader_overflow_paths": 0
+  },
+  "public_source_review": {
+    "manifest": "data/manifests/training-generalization-feedback-source-review-v1.json",
+    "new_notes_families": [
+      "memops_B25",
+      "memops_B21"
+    ],
+    "source_units": 46,
+    "public_requests": 4,
+    "prefix_sizes_per_family": [
+      7,
+      23
+    ],
+    "all_sources_read_including_assistant": true,
+    "source_copies_literal_equal": true,
+    "scope": "Two new public-prefix reviews of existing exposed train histories;not a count of all historical review coverage. No outputs/labels/source-selection changes. Actual captured requests/Views/branches/answers still require later review.",
+    "findings": [
+      "Stage0 public questions mention future changes absent from the7-source prefix;question wording is not factual evidence.",
+      "B25 keeps corrected Friday recurrence,April Tuesday-only swim time,unconfirmedMay move/climbing,otherchild and one-offartshow separate.",
+      "B21 keeps salary corrections within visible prefix,informalprospective raise and consulting proposal separate;old74500salary is an assistant-only claim,not an exposed document/userconfirmation.",
+      "Null timestamps remain unknown;OCSpreparation does not establish pass;dryneedlingworkshop/certification reported by user remains attributed."
+    ]
+  },
+  "new_closed_measured_phases": [
+    {
+      "id": "feedback_public_source_reviews_b25_b21_save_v1",
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-source-review-v1/review-progress-v1.json",
+      "cpu_seconds": 0.002314110000000001,
+      "wall_seconds": 0.0023178700357675552,
+      "ledger_recorded": false
+    }
+  ],
+  "new_closed_CPU_seconds_pending": 0.002314110000000001,
+  "costs": "Only mechanicalsave/referencechecksCPU0.002314110newpending;semanticreading/authoring/inspectionunmeasured,unknownnot0. V34inventory10663.791232191is existing74phases,notnewcharge;V34auditCPU0.042770830separate. All olderpending and closedv1/v2/v3 unchanged. No offline settlement while savedCPU lives.",
+  "production_code_changed": false,
+  "new_model_jobs_started": 0,
+  "new_training_labels": 0,
+  "no_sha_validation": true,
+  "no_subagents": true,
+  "remaining": "All savedCPU candidates/selectedtrain,legacy savedCPU,corrected64/128/parameter/aux/E3fits;STATEE2/factorial/expandedfeedback/T2/common-support,Host/lifecycle/costs,servervision and external/protected/seeds0/1/2. Full original goal remains active."
+}

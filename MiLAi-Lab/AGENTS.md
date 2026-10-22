@@ -1,3 +1,28 @@
+# LATEST V35 (2026-10-22): SAVED CPU LIVE / TWO FEEDBACK PUBLIC-SOURCE REVIEWS
+
+Full goal ACTIVE. Same ONLY model exec8452,parent893356/driver893357/current child893516 lives;
+update0 still incomplete. CPU-only exec37854/PID662822 also lives. Revalidate current counts in
+drivers and actual PIDs. Do not restart, change inference, select early, start another model or
+settle offline costs. All7saved candidates and selectedtrain remain required.
+
+NEW offline feedback-source-review-v1: author read all46Source units and4publicrequests for
+already-frozen train memops_B25(batch004) and memops_B21(batch005),including assistant turns.
+Per-family publicsource prefixes are7 then23units. Literal histories saved unchanged; claim
+references checked within each prefix. Stage0 question wording mentions future changes not yet
+in its sources: do not import stage2facts. B25 separates recurrence/day-specific updates/proposals/
+otherchild/oneoffshow. B21 keeps salarycorrections/prospective changes/roles distinct;74500oldpay
+appears only in a historicalassistant claim with no document/userconfirmation. Null eventtimes
+stay unknown;OCSprep is not pass;dryneedling workshop/certification remains attributed userreport.
+These are existing exposedtraining histories,not new/held-out sources or automaticactionlabels.
+Only2newnotes,not a totalhistorical-review coverage count. Actual newHostrequests/Views/reached
+states/branches/answers still require later review. No collection/sourcequota/split/order changes.
+
+New mechanical save/referencecheckCPU0.002314110pending;semanticreading/authoring unknown/not0.
+V34 existing74phase subtotal10663.791232191 is NOT a newcharge;V34auditCPU0.042770830separate.
+All oldpending and closedv1/v2/v3 untouched. Original ledger only. No production/models/labels/
+SHA/substitute fingerprints/subagents/push/merge/services changes. Full original remaining
+scope unchanged; see progress-v35. Earlier pausedqueues and all closedjobs remain untouched.
+
 # LATEST V34 (2026-10-22): SAVED CPU LIVE / EXISTING PENDING CPU RECONCILED
 
 Full goal ACTIVE. ONLY real model exec8452,parent893356/driver893357/current evaluator893516
