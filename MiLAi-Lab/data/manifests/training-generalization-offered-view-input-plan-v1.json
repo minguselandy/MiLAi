@@ -1,0 +1,21 @@
+{
+  "status": "DECLARED_BEFORE_OFFERED_VIEW_WIRE_AUDIT",
+  "declared_at": "2026-10-22T01:18:39.311167+00:00",
+  "source_version": "bcebf420",
+  "source_freeze": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/frozen-source-ranges-bcebf420-v2/MiLAi-Lab",
+  "inputs": "All32actual offered REFRESH_VIEW alternatives from retained256range fixed-policy predecision states, two complete original banks, same synthetic query. No case/error selection and no QA/reference access.",
+  "execution": "Actual build_query_structure renderer with exact offered Source refs, observed-page events, original current Source values and reconstructed unchanged initial-page arrival coverage. Assert no existing View. Callback counts native full wire then stops BEFORE generation/validation/cache commit. No View generated or persisted.",
+  "budgets": {
+    "context_tokens": 65536,
+    "output_reserve_tokens": 8192,
+    "stage_enable_thinking": false,
+    "source_range_condition_tokens": 256
+  },
+  "scope": "Source-range condition bounds ordinary READ candidate bodies. This audit measures the current full-Source View input separately. Not a selected refresh rollout, learned-policy frequency, quality score or server probe.",
+  "ledger": "Original ledger before/after literal comparison; no settlement or HTTP. Final process CPU pending; nested per-source token counts not cost phases.",
+  "no_sha_validation": true,
+  "no_subagents": true,
+  "models": 0,
+  "new_training_labels": 0,
+  "automatic_retry": false
+}

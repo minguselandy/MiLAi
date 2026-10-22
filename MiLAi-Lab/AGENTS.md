@@ -1,3 +1,79 @@
+# LATEST V24 (2026-10-22): FIT262 LIVE / ALL PUBLIC INITIAL INPUTS / VIEW BUDGET OUTCOME
+
+Full goal ACTIVE. ONLY real model job remains exec17952, parent3470595/child3470601,
+frozen d6a8afd3. Actual PIDs alive; latest run.json RUNNING262/524. No post-update scores
+read for selection, hot update, restart, second model job or offline settlement. No automatic
+model successor. Old closed jobs never restart; paused Coalent remains untouched.
+
+STILL LIVE CPU-ONLY exec68138/PID4070915 audit_lme_all_pages_v1.py ->
+lme-all-source-pages-audit-v1/audit.json. Pool0 COMPLETE:11987pages/3458Sources,
+93966498literal characters, max native5606, state/head drops0, mask replacements0,
+Store Source values and full-bank search unchanged. Latest pool1 RUNNING6800pages/1121Sources
+complete. Do not restart or claim whole-job completion. Final whole-phase CPU not available;
+embedded first-pool observations are not separate new closed phases. Verify actual /proc.
+
+CLOSED PUBLIC QUERY AUDIT exec36685/PID77655, exit0, actual PID absent:
+audit_lme_public_query_inputs_v1.py -> lme-public-query-input-audit-v1/audit.json.
+All451public questions, exact211/240native pool joins, literal-equal prior public projection.
+Native question containers accessed ONLY for id/domain/question/image; no reference values
+or displayed question text, no labels/model calls. Query maxima Host417/Laya412tokens.
+2representations(shared_actions/request_text) x internalViews true/false x deliverySelection
+true/false =3608initial input checks, all state/head/mask drops0; max native6866.
+Actual query-independent original Store first observation reused per bank/condition;
+exact public task substituted and actual offered actions regenerated/bindings compared.
+No query capture, SEARCH/READ, policy or world execution. Source-range256 not exercised yet
+in those initial states. Current question image remains outside textual Laya, unchanged.
+Native Reader domain/query/image with EMPTY memory context:451inputs/29images, all fit;
+max prompt1188, total reserved9892(includes8192output+512safety). Not final retrieved-context
+capacity or real server vision/usage. Original ledger unchanged; CPU62.479384781 pending.
+
+CLOSED VIEW WIRE AUDIT exec51567/PID96665, exit0, actual PID absent:
+audit_lme_offered_view_inputs_v1.py -> lme-offered-view-input-audit-v1/audit.json.
+All32actually offered REFRESH alternatives from frozen256fixed-policy predecision states.
+Same synthetic query; actual fullSource values, exact offered refs/observed-page scope and
+initial arrival coverage. Actual build_query_structure callback stopped BEFORE generation
+and cache commit. No generated View, QA, selected refresh or learned-policy frequency claim.
+2/32overflow:pool0,deliverySelection true,steps6/7. Prompt57590/63759; full reservations
+66294/72463 exceed65536. Others fit. FullSource semantics retained; original ledger and View
+cache unchanged. Canonical CPU2.936208033 pending. This failure is not silently fixed by slicing.
+
+NEW CODE c85eb6d3: only query_structure CapacityExceeded at pre-HTTP capacity check becomes
+existing FunctionalRejection -> view_rejected/effect:none, with compact actual token limits.
+Same policy can choose later actual actions within remaining budgets. Existing View untouched;
+read and generation-admission attempts stay consumed; provider full vllm_capacity_rejected
+trace retained;0HTTP/0HTTP charge for this rejection. No refund/retry/output-cap/clipping changes.
+Dispatched timeout stays unknown/charged; non-View controller overflow still fails; other errors
+unchanged. This is a bounded operation outcome, not View/task success or a guarantee inputs fit.
+25unique latest tests PASS,0skip(4new+21regressions):normal runner actual temporary Store/ledger,
+prior/no prior View, continuation Source read, unchanged cache/consumed attempts, no dispatched
+HTTP on overflow, timeout and controller overflow boundaries. All models mocked/no research HTTP.
+Ruff2,mypy1,package/tools PASS;6grandfathered private edges unchanged. Initial fixture failures
+retained in view-capacity-outcome-validation-v1; latest new4pass in v2.
+Freeze frozen-view-capacity-c85eb6d3/MiLAi-Lab:11files literally equal,10input/Reader/View
+renderers unchanged from bcebf420. See view-capacity-outcome-freeze-v1.json and tracked manifest.
+No change to live d6a8afd3 fit, frozen training labels, closed outcomes or original View bodies.
+
+New closed measured CPU62.479384781+2.936208033=65.415592814 pending. Original ledger ONLY
+/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json. Nested/copy summaries are
+not extra phases. V23pending549.912019680,V22pending1505.460591140 and older pending unchanged;
+closed settlements v1/v2/v3 never append/re-settle. Authoring/tests/import/freezing unknown,not0.
+
+RESOURCE EVIDENCE for next preparation, not a new run/cost: existing V22 full-bank SEARCH
+indexing29.855985710/24.305069491sec of total30.754489505/24.915476001; ranking~0.0015/0.0010sec.
+Current preflight main Store files117305344/94498816bytes. Plain copies for211/240cases imply
+47431143424bytes(~44.17GiB) per451arm before case growth/other DBs/traces/checkpoints; preflight
+stores include one excluded probe. ext4, about332GiB available at observation. Preserve full
+history/cohort/raw evidence when preparing indexing/storage; no cache/compression/retention
+change implemented. See lme-resource-observations-v1.json; old search timings are nested costs.
+
+256condition remains candidate; external full model readiness NOT claimed. Need all-page closure,
+actual-query post-operation/learned trajectories, complete Reader contexts, server vision/usage,
+saved-selected checkpoints and matched method/seed freeze. Full goal still requires all remaining
+corrected fits/controls/savedCPU incl legacy; STATE108E2/factorial/expandedfeedback/T2/common-support;
+Host/lifecycle/costs; complete external/protected/seeds0,1,2. No SHA/substitute fingerprints,
+subagents,push/merge/services/ProductSchema/API/permissions/Canonical changes. See progress-v24
+and execution doc. Earlier snapshots are historical; do not reopen closed audits.
+
 # LATEST V23 (2026-10-22): FIT139 LIVE / RANGE512 FAILURE / RANGE256 FIXED-PATH INPUTS PASS
 
 Full goal ACTIVE. ONLY real model job remains exec17952, parent3470595/child3470601,
