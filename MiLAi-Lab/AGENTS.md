@@ -1,3 +1,27 @@
+# LATEST V37 (2026-10-22): SAVED CPU LIVE / MEASUREMENT AND COMPLETION CONTEXT REVIEWED
+
+Full goal ACTIVE. Same only model exec8452, parent893356/driver893357/current child893516 live.
+CPU-only exec37854/PID662822 also live. Revalidate actual PIDs and driver for current counts.
+All seven saved candidates and selected train remain required. No restart, inference change,
+early selection, second model or offline settlement while this model job lives.
+
+Four more author reviews: F14,A33,C05,B01, frozen batches010–013. All92source units/8public
+requests read; each new prefix7then23. Exact source copies and prefix references verified.
+New-note total now10families/230source units/20requests, not total historical review coverage
+or new independent sources. F14 preserves corrected office baseline plus distinct home readings;
+A33 retains measurement conditions and separates future height prediction. C05 distinguishes
+completed May26 change from rejected May28 proposal and preserves two-person non-flight budget.
+B01 grounds social preference in examples while retaining qualified job-acceptance finality.
+No medical/legal/travel advice adopted from historical assistant turns. Notes are offline only,
+not action labels or model inputs. Actual new requests/Views/branches/answers still need review.
+Sources, quotas, splits and collection order unchanged. See source-review-v3 and progress-v37.
+
+New mechanical save/reference-check CPU0.004544047 pending. Earlier V36CPU0.006230720,
+V35CPU0.002314110,V34CPU0.042770830 separate; V34's10663.791232191 is existing74phase subtotal,
+not a new charge. Original ledger only; all pending and closedv1/v2/v3 untouched. Unmeasured
+reading/authoring unknown,not0. No production/model/label/SHA/subagent/service/push/merge changes.
+Full remaining original scope and paused-queue boundaries unchanged.
+
 # LATEST V36 (2026-10-22): SAVED CPU LIVE / FOUR MORE PUBLIC-SOURCE REVIEWS
 
 Full goal ACTIVE. Same ONLY model exec8452,parent893356/driver893357/current child893516 alive,
