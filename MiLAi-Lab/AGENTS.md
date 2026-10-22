@@ -1,3 +1,28 @@
+# LATEST V44 (2026-10-22): SAVED CPU LIVE / FOUR MORE SOURCE REVIEWS
+
+Full goal ACTIVE. Only model exec8452, parent893356/driver893357/current child893516 live;
+latest update0 707/876states. CPU-only exec37854/PID662822 live,163/902paths,closed-prefix
+state/head/Reader overflows0. Revalidate actual PIDs and current driver. All seven candidates
+and selected train required. No restart, inference change, early selection, second model or
+offline settlement while saved CPU evaluation lives.
+
+New reviews D02,C07,C28,A01 in batches040–042,044:92source units/10requests. D02/A01 initial
+prefix5, C07/C28 initial7; all final23. A01 adds independent current/first-record tasks;
+46same-source copies checked, not new sources. Actual write/read/version receipts still pending.
+New-note total38families/874source units/82requests, including6independent record requests.
+D02 keeps latest reported specs; C07 confirmed lodging versus holds/arrival gaps; C28 reported
+history versus targets and unverified clinical advice; A01 first-prefix salary unknown and
+later current title/pay versus proposed Lead. Record text is not replaced by a better summary.
+Notes offline only, no labels/model inputs/pool/quota/order/split changes. Actual new requests,
+Views, branches and answers still need review. Next batches start045. See review-progress-v10,
+tracked source-review-v10 and progress-v44. Individual author notes now also in
+feedback-source-author-notes-v1; assembled batch notes and existing savers retained.
+
+New measured save/literal/code-check CPU0.011459039 pending. V43CPU0.005806819 and all earlier
+phases remain separate; V34inventory10663.791232191 is existing74phase subtotal, not extra cost.
+Original ledger only; pending/closedv1/v2/v3 untouched. Unmeasured semantic work unknown,not0.
+No production/model/label/SHA/subagent/service/push/merge changes. Full original scope intact.
+
 # LATEST V43 (2026-10-22): SAVED CPU LIVE / DEVICE, EVENT AND SPEAKER SCOPE
 
 Full goal ACTIVE. Only model remains exec8452, parent893356/driver893357/current child893516,
