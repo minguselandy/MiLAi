@@ -51,6 +51,10 @@ def archive_lme_cases(predictions: Path, scores: Path, *, source_version: str) -
     declared = {_inside(predictions, e["runtime"]) for e in entries}
     if actual != declared or len(declared) != len(entries):
         raise ValueError("Retain a unique declared mapping for every actual case directory")
+    if any(_inside(predictions, e["base"]).is_relative_to(case)
+           or case.is_relative_to(_inside(predictions, e["base"]))
+           for e in entries for case in declared):
+        raise ValueError("Retained templates must be separate from archived case directories")
     output = predictions/"case-archives"
     output.mkdir(exist_ok=False)
     started, cpu = time.perf_counter(), time.process_time()

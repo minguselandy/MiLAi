@@ -117,3 +117,20 @@ def test_missing_declared_runtime_is_not_a_successful_empty_archive(tmp_path):
     with pytest.raises(FileNotFoundError, match='runtime is missing'):
         archive_lme_cases(predicted, scored, source_version='mechanical')
     assert not (predicted/'case-archives').exists()
+
+
+def test_retained_base_cannot_alias_a_case_that_would_be_removed(tmp_path):
+    predicted, scored = tmp_path/'predicted', tmp_path/'scored'
+    runtime = predicted/'memory/pool-0000/cases/0000'
+    runtime.mkdir(parents=True)
+    (runtime/'original.txt').write_text('Preserve this original')
+    (predicted/'memory/pool-0000/template').symlink_to(runtime, target_is_directory=True)
+    case = {'row': 0, 'question_id': 'q', 'status': 'COMPLETED', 'pool': 'pool-0000',
+            'runtime': str(runtime)}
+    write_json(predicted/'driver.json', {'status': 'COMPLETED', 'cases': [case]})
+    write_json(scored/'driver.json', {'status': 'COMPLETED', 'predictions': str(predicted),
+                                    'cases': [{'question_id': 'q', 'status': 'COMPLETED'}]})
+    with pytest.raises(ValueError, match='templates must be separate'):
+        archive_lme_cases(predicted, scored, source_version='mechanical')
+    assert (runtime/'original.txt').read_text() == 'Preserve this original'
+    assert not (predicted/'case-archives').exists()
