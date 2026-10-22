@@ -1,3 +1,26 @@
+# LATEST V45 (2026-10-22): SAVED CPU LIVE / SUPERVISION, STUDY AND CONFIRMED PREFERENCES
+
+Full goal ACTIVE. Only model exec8452,parent893356/driver893357/current child893516 live;
+latest update0 741/876states. CPU-only exec37854/PID662822 live,170/902paths; closed-prefix
+state/head/Reader overflows0. Revalidate actual PIDs/current driver. All seven saved candidates
+and selected train required. No restart, inference change, early selection, second model or
+offline settlement while saved CPU evaluation lives.
+
+New reviews A28,C11,D21,A16, batches045–048:92source units/8requests. A16 starts with11sources,
+others7; final23. New-note total42families/966source units/90requests, including six retained
+independent record requests (none added this batch). Exact copies and prefix references checked.
+A28 distinguishes current/upcoming roles and unsupplied names from absent arrangements; C11
+keeps own booking versus friend's relocation and flexible study plans; D21 latest confirmed
+favorite versus tentative reaction/context-specific taste; A16 accepted title differs by prefix,
+with future rename still optional. Notes offline, not labels/model inputs. Actual new requests,
+Views,branches,answers still need review; pool/quotas/order/splits unchanged. Next batches049.
+See review-progress-v11, tracked source-review-v11/progress-v45. Full remaining scope unchanged.
+
+New note-save/literal/code-check CPU0.006384787 pending; V44CPU0.011459039 and prior phases
+separate. V34inventory10663.791232191 is existing74phase subtotal, not extra cost. Original
+ledger only, closedv1/v2/v3 untouched. Semantic/unmeasured work unknown,not0. No production/
+model/label/SHA/subagent/service/push/merge changes. Paused queues remain untouched.
+
 # LATEST V44 (2026-10-22): SAVED CPU LIVE / FOUR MORE SOURCE REVIEWS
 
 Full goal ACTIVE. Only model exec8452, parent893356/driver893357/current child893516 live;

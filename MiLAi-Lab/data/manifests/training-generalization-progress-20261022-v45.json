@@ -1,0 +1,92 @@
+{
+  "status": "ACTIVE_SAVED_CPU_AND_PUBLIC_PATH_AUDIT_LIVE;FOUR_MORE_PUBLIC_SOURCE_REVIEWS",
+  "observed_at": "2026-10-22T07:33:29.760628+00:00",
+  "previous": "data/manifests/training-generalization-progress-20261022-v44.json",
+  "previous_turn_classification": "PROGRESS: four source reviews saved and committed",
+  "only_real_model": {
+    "exec_session": 8452,
+    "parent_pid": 893356,
+    "driver_pid": 893357,
+    "evaluator_pid": 893516,
+    "actual_proc_present": true,
+    "status": "RUNNING",
+    "update": 0,
+    "completed_states": 741,
+    "planned_states": 876,
+    "completed_candidates": 0,
+    "deployment_selection": null,
+    "condition": "All seven saved CPU candidates, then matching selected train; CPU FP32 loaded, reference_compile=False, MHA fastpath=False, shared_actions12288/head2048. Unchanged."
+  },
+  "CPU_audit": {
+    "exec_session": 37854,
+    "pid": 662822,
+    "actual_proc_present": true,
+    "status": "RUNNING",
+    "completed_paths": 170,
+    "planned_paths": 902,
+    "closed_prefix_state_drop_inputs": 0,
+    "closed_prefix_head_drop_inputs": 0,
+    "closed_prefix_Reader_overflow_paths": 0
+  },
+  "public_source_review": {
+    "manifest": "data/manifests/training-generalization-feedback-source-review-v11.json",
+    "new_notes_families": [
+      "memops_A28",
+      "memops_C11",
+      "memops_D21",
+      "memops_A16"
+    ],
+    "new_source_units": 92,
+    "new_public_requests": 8,
+    "cumulative_new_note_families": 42,
+    "cumulative_source_units": 966,
+    "cumulative_public_requests": 90,
+    "new_independent_record_requests": 0,
+    "cumulative_independent_record_requests": 6,
+    "all_sources_read_including_assistant": true,
+    "source_copies_literal_equal": true,
+    "scope": "Existing exposed train histories only. New-note coverage is not all historical review coverage. No outputs, labels, source selection or conditions changed. Actual captured requests, Views, branches and answers still require later review.",
+    "findings": [
+      "A28当前导师、将来代导和统计支持分开；早期未提供姓名不等于未安排。",
+      "C11当前自有确认仍May10/9AM/250Yonge，朋友迁址不替换；学习策略灵活且实际/计划分开。",
+      "D21Discovery为最后确认，Homework暂定已撤回；不同用途音乐和他人口味分开。",
+      "A16初始11条包含长标题纠正，后阶段才按证书回改；未来更名未选择，个人merit不混朋友distinction。"
+    ],
+    "new_prefix_sizes": {
+      "memops_A28": [
+        7,
+        23
+      ],
+      "memops_C11": [
+        7,
+        23
+      ],
+      "memops_D21": [
+        7,
+        23
+      ],
+      "memops_A16": [
+        11,
+        23
+      ]
+    },
+    "new_repeated_source_entries_checked_not_added_to_units": 0
+  },
+  "new_closed_measured_phases": [
+    {
+      "id": "feedback_public_source_reviews_batches045_048_save_v1",
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-source-review-v1/review-progress-v11.json",
+      "cpu_seconds": 0.006384786999999996,
+      "wall_seconds": 0.006389182060956955,
+      "ledger_recorded": false
+    }
+  ],
+  "new_closed_CPU_seconds_pending": 0.006384786999999996,
+  "costs": "Only new note-save/literal/code-check CPU0.006384787 pending. V44CPU0.011459039 and prior phases separate. V34subtotal10663.791232191 is existing74phases, not new cost. Original ledger only; closedv1/v2/v3 unchanged. No settlement while model live. Semantic work and unmeasured overhead unknown,not0.",
+  "production_code_changed": false,
+  "new_model_jobs_started": 0,
+  "new_training_labels": 0,
+  "no_sha_validation": true,
+  "no_subagents": true,
+  "remaining": "All savedCPU candidates/selectedtrain,legacy savedCPU,corrected64/128/parameter/aux/E3fits;STATEE2/factorial/expandedfeedback/T2/common-support,Host/lifecycle/costs,servervision and external/protected/seeds0/1/2. Full original goal remains active."
+}
