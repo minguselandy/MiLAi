@@ -1,3 +1,23 @@
+# LATEST V34 (2026-10-22): SAVED CPU LIVE / EXISTING PENDING CPU RECONCILED
+
+Full goal ACTIVE. ONLY real model exec8452,parent893356/driver893357/current evaluator893516
+still live, update0 over210/876states; CPU-only exec37854/PID662822 over88/902paths. Revalidate
+actual PIDs and driver for current child/counts. All7saved candidates and selected train remain
+required. No restart, second model, inference condition change, selection or offline settlement.
+
+NEW read-only pending-cpu-v12-v33-audit-v1.json reconciles74 EXISTING pending phase fields,
+total10663.791232191CPU seconds, exactly against canonical measurements. No duplicate path+field
+and no overlap with closedv1/v2/v3 measurement files; original ledger records for those closed
+settlements match and observed ledger bytes unchanged. This subtotal is NOT a new charge.
+Earlier pending35, V11, live jobs, and unmeasured overhead remain separate; this is NOT all-cost
+closure. Already billed model compute/copy/nested clocks excluded. Only NEW auditCPU0.042770830
+is pending as its own phase, excluded from74phase subtotal. Never sum inventory+its constituent
+phases. Original ledger remains sole accounting destination; no writes or settlement this turn.
+
+No production changes/models/labels/SHA/substitute fingerprints/subagents. Full fits/controls/
+savedCPU/STATEE2/feedback/Host/external/protected/seeds scope unchanged. See progress-v34 and
+tracked pending-cpu-v12-v33 audit manifest. Prior paused queues and all closed jobs untouched.
+
 # LATEST V33 (2026-10-22): SAVED CPU LIVE / VIEW-POSITIVE SOURCE AND DRAW COVERAGE
 
 Full goal ACTIVE. ONLY real model exec8452,parent893356/driver893357/current evaluator893516,
