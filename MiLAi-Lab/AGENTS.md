@@ -1,3 +1,27 @@
+# LATEST V46 (2026-10-22): SAVED CPU LIVE / OBSERVATIONS, FORECASTS AND COMPLETED TRANSFERS
+
+Full goal ACTIVE. Only model exec8452,parent893356/driver893357/current child893516 live;
+latest update0 772/876states. CPU-only exec37854/PID662822 live,176/902paths; closed-prefix
+state/head/Reader overflows0. Revalidate actual PIDs/current driver. All seven saved candidates
+and selected train required. No restart, inference change, early selection, second model or
+offline settlement while saved CPU evaluation lives.
+
+New reviews B10,D14,B26,F12, batches049–052:92source units/8requests, prefixes7then23, copies
+and references verified. New-note total46families/1058source units/98requests, including six
+earlier independent record requests. B10 measured weight differs from expected growth and
+unknown chip status; D14 actual transfers/deletion differ from pending closure/historical rates;
+B26 completed move differs from confirmed future relocation and unbooked family visit;
+F12 provider-specific observed scores differ from simulations/other person's score. Notes
+offline only, not labels/model inputs; no pool/quotas/order/splits changed. Actual new requests,
+Views/branches/answers still need review. Next source batches053. See review-progress-v12 and
+tracked source-review-v12/progress-v46. Full original remaining scope unchanged.
+
+New save/literal/code-check CPU0.007910626 pending; V45CPU0.006384787 and all earlier phases
+separate. V34inventory10663.791232191 is existing74phase subtotal, never extra cost. Only ledger:
+/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json. Closedv1/v2/v3 untouched.
+Unmeasured semantic work unknown,not0. No production/model/label/SHA/subagent/service/push/merge
+changes. All previously paused queues remain untouched.
+
 # LATEST V45 (2026-10-22): SAVED CPU LIVE / SUPERVISION, STUDY AND CONFIRMED PREFERENCES
 
 Full goal ACTIVE. Only model exec8452,parent893356/driver893357/current child893516 live;
