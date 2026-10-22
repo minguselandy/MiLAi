@@ -1,0 +1,130 @@
+{
+  "status": "ACTIVE_GOAL;COMPLETE_HISTORY_INPUT_CONDITION_UNDER_AUDIT",
+  "observed_at": "2026-10-22T00:24:32.164987+00:00",
+  "previous": "training-generalization-progress-20261022-v20.json",
+  "previous_turn_classification": "PROGRESS:completeLMEworkflow/nativepixelboundsimplementedandtested;fullStoreauditstarted. Revalidated actualprocesses thisturn.",
+  "active_fit": {
+    "session": 17952,
+    "parent_pid": 3470595,
+    "child_pid": 3470601,
+    "actual_pids_alive": true,
+    "status": "RUNNING",
+    "updates": 128,
+    "planned": 524,
+    "source_version": "d6a8afd3",
+    "no_hotupdate_restart_or_recipe_change": true,
+    "post_update_scores_not_read_for_selection": true
+  },
+  "initial_full_bank_audit": {
+    "session": 21998,
+    "pid": 3985384,
+    "actual_pid_alive": true,
+    "status": "RUNNING",
+    "active": {
+      "pool": "pool-1",
+      "stage": "ingest"
+    },
+    "closed_pools": [
+      {
+        "pool": "pool-0",
+        "trajectories": 100,
+        "sources": 3458,
+        "state_images": 3358,
+        "conditions": [
+          {
+            "event_id": "pool-0/unpaged",
+            "question": "next",
+            "sequence_tokens": 16384,
+            "state_tokens_dropped": 46959729,
+            "head_tokens_dropped": 0,
+            "condition": "unpaged",
+            "source_observation_tokens": null,
+            "source_rows_visible": 3458,
+            "offered_actions": 4,
+            "sdk_mask_replacements": 0,
+            "full_visible_bank_sources": 3458,
+            "next_cursor": null
+          },
+          {
+            "event_id": "pool-0/paged4096",
+            "question": "next",
+            "sequence_tokens": 5232,
+            "state_tokens_dropped": 0,
+            "head_tokens_dropped": 0,
+            "condition": "paged4096",
+            "source_observation_tokens": 4096,
+            "source_rows_visible": 3,
+            "offered_actions": 9,
+            "sdk_mask_replacements": 0,
+            "full_visible_bank_sources": 3458,
+            "next_cursor": [
+              2,
+              6543
+            ]
+          }
+        ]
+      }
+    ],
+    "output": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lme-whole-bank-input-preflight-v1",
+    "scope": "ActualcompleteStoreingestion,syntheticrequest,sharedEvidenceOperationsandnativeLayaSDKtokenization;no modelweights/calls orQAanswers. Stillrunning;wholephaseCPU notfinal."
+  },
+  "new_observation": {
+    "pool": "pool-0",
+    "trajectories": 100,
+    "source_units": 3458,
+    "state_images": 3358,
+    "unpaged_state_tokens": 46975895,
+    "unpaged_state_tokens_dropped_at_16384": 46959729,
+    "head_drops": 0,
+    "SDK_mask_replacements": 0,
+    "paged_candidate_source_observation_tokens": 4096,
+    "first_page_native_sequence_tokens": 5232,
+    "first_page_state_or_head_drops": 0,
+    "first_page_source_rows": 3,
+    "first_page_next_cursor": [
+      2,
+      6543
+    ],
+    "full_visible_bank_sources": 3458,
+    "interpretation": "Thefullunpagedcontrolinputcannotfit thedeclarednativeencoder. Existingpagination yieldsacompletefirstpage withoutdiscardinganyStoreSource. Thisdoesnotproveallpages,actualqueries/search/View states orlearnedpolicybehavior fit."
+  },
+  "exhaustive_followup": {
+    "session": 68138,
+    "pid": 4070915,
+    "actual_pid_alive": true,
+    "status": "WAITING_FOR_INITIAL_AUDIT",
+    "script": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/audit_lme_all_pages_v1.py",
+    "output": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lme-all-source-pages-audit-v1",
+    "dependency": "WaitPID3985384exit andcompleteinitialaudit,thenrunonce;no automaticretry.",
+    "checks": [
+      "ContiguousUnicodecharacterranges recovereveryoriginalbody",
+      "EveryHostobservationpage<=4096tokens",
+      "Native shared_actions state/head lengths checkedoneachsyntheticpage",
+      "Full-banksearch andStoreSourcevalues unchanged after navigation",
+      "Originalledger unchanged;nonewworld/modelcalls"
+    ],
+    "scope": "Exhaustivemetadata-navigation/codec audit,notpolicyrollout. Doesnotclaim8controlstepscanvisitallpages orprovefutureView/realqueryinputfit. Pagefailureswillbe reported,not silentlyaccepted.",
+    "model_calls": 0,
+    "model_weights_loaded": 0,
+    "new_services": false
+  },
+  "candidate_input_condition": {
+    "source_observation_tokens": 4096,
+    "controller_max_len": 16384,
+    "head_max_len": 2048,
+    "representation": "shared_actions",
+    "original_sources": "Fullnativeorderedhaystacks remaininStore andsearchable;no prefix/top-Nsubstitute.",
+    "status": "Candidateonly;finalmatchedexternalarmconditionpendingcompleteaudits",
+    "basis": "Chosenfrommechanicalinputcapacitybeforeexternalmodeloutputs,notQAanswers/scores",
+    "runtime_method_or_training_changes": false
+  },
+  "new_closed_measured_phases": [],
+  "costs": "BothCPUauditprocesseslive;finalcostunknown/notzero andnotsettled. No new closedmeasurementphase countedthisturn. Existingpendingandclosedsettlementsv1/v2/v3unchanged.",
+  "production_code_changed": false,
+  "new_model_jobs_started": 0,
+  "new_training_labels": 0,
+  "no_sha_validation": true,
+  "no_subagents": true,
+  "no_push_merge_services_or_Product_schema_API_permission_Canonical_change": true,
+  "remaining": "Alloriginalfullgoalrequirements remain:activeandremainingfits/savedCPUevals,STATE108E2/factorial/expandedfeedbackT2/common-support,actualHost/lifecyclecosts,completeexternal/protected/multiseedconfirmation. LMEwholehistorypagingandservervisionreadiness notyetcomplete."
+}

@@ -1,3 +1,43 @@
+# LATEST V21 (2026-10-22): FIT128 LIVE / FULL-HISTORY SIZE EVIDENCE
+
+Full goal ACTIVE. CURRENT ONLY REAL MODEL remains exec17952,parent3470595/child3470601,
+frozen d6a8afd3,complete-actions-fit-v1/driver.json andfitting/source256-actions-full-seed0-u524-v1/run.json.
+LatestactualPIDs alive,RUNNING128/524;no post-update scoresreadforselection. No hotupdate/restart,
+newmodel/offlinesettlement whilelive. No automaticmodelsuccessor. Oldclosedjobs neverrestart.
+
+TWO CPU-ONLY AUDIT HANDLES, neither loadsweights/callsmodels ornetwork:
+1. exec21998 PID3985384 audit_lme_whole_bank_inputs_v1.py -> lme-whole-bank-input-preflight-v1.
+   Actualprocessalive;pool0 COMPLETE3458Sources/100trajectories,nowpool1ingesting1837Sources.
+   Rootaudit stillRUNNING;doNOTrestartorclaimwholejobcomplete. Log sibling .log.
+2. NEW exec68138 PID4070915 audit_lme_all_pages_v1.py -> lme-all-source-pages-audit-v1.
+   Actualprocessalive WAITING_FOR_INITIAL_AUDIT. WaitsPID3985384exit andrequiresitsfinalcomplete
+   status+ledgerunchanged,thenwalksALLpagesonce. No model/worldexecution orautomaticretry.
+   TrackscontiguousliteralUnicodecoverage,every4096Host-tokenpage,native shared_actions lengths,
+   Store/searchinvariance. Thisisnotproof8policyactionsvisitallpages oractualquery/Viewcapacity.
+   State/headdrop counts mustbe inspected,notmerelythewordCOMPLETE. Handlefile
+   lme-all-source-pages-audit-v1-process.json;predecessorhandlefile fromV20 retained.
+No edits to actualruntimeSource content;theaudit'ssyntheticprobe onlyinitsdedicatedpreflightStore,
+excludedfromobservations like normalcurrentquery. Don'tstartanothercopy oftheseaudits.
+
+NEW ACTUAL EVIDENCE: pool0unpagedinitialstate46975895Laya tokens. At16384budgetSDKwoulddrop
+46959729state tokens;head drops0,maskreplacements0. ThiswasTOKENIZATIONONLY,nevermodelinput.
+SamefullStore with existing4096Host-tokenSourceObservationPages:initialnativeinput5232tokens,
+0state/headdrops,3sourcefragments,nextcursor[2,6543],all3458sourcesstillavailable. No top-N/prefix
+replacement or originalbodyloss. Candidate4096notyetfinal externalcondition;pool1/fullpages and
+actualquery/search/View/ownpolicy pathsstillneedchecks. Currentmaintrainingconfigurationunchanged.
+
+No productioncode/newtests/modelcalls/traininglabels thisturn. ActualStore/nativeSDK evidence
+changesnextaction:completefullpagingaudit before freezing matched externalinput conditions.
+No closed newcomputephase yet;bothCPUauditslive,partialsetuptiming embedded/notadditive.
+Authoring/unmeasuredworkunknown/notzero. Existingv20pixel12.369526700pendingandolderpending
+unchanged;closedsettlementsv1/v2/v3neverappend/re-settle. Originalledgeronly asV20.
+
+Fullremaininggoalunchanged:currentandremainingcorrectedfits+savedCPUevalsincllegacy;
+STATE108E2/factorial/expandedfeedback/T2/common-support;actualHost/lifecycle+costs;
+completeexternal/protected/seed0,1,2confirmation. LMEworkflow ec2bc88a/34tests remainsreadycode,
+notcompleteexternalmodelreadiness. No SHA/substitute fingerprints,subagents,push/merge/services/
+ProductSchema/API/permissions/Canonical changes. See progress-v21 andexecutiondoc.
+
 # LATEST V20 (2026-10-22): FIT96 LIVE / LME WORKFLOW + CPU BANK PREFLIGHT LIVE
 
 Full goal ACTIVE, not complete/blocked/paused. CURRENT ONLY REAL MODEL:
