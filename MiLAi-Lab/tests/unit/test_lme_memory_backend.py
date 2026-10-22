@@ -47,6 +47,11 @@ def test_real_queries_return_selected_image_and_never_reuse_earlier_question(tmp
     assert report["status"] == "COMPLETED" and report["reader_called"] is False
     assert report["query_image_consumed_by_retriever"] is False
     assert report["query_image"] == str(tmp_path / "assets/screens/0.png")
+    assert report["source_index_cache"]["builds"] == 1
+    assert report["source_index_cache"]["hits"] == 3
+    assert memory.source_search_cache._entry is not None
+    assert "first-private-question" not in str(memory.source_search_cache._entry.texts)
+    assert "second-private-question" not in str(memory.source_search_cache._entry.texts)
     assert json.loads((memory.output / "orchestration-compute.json").read_text())["cpu_seconds"] > 0
 
 

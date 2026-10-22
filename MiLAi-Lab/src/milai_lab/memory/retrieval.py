@@ -5,6 +5,7 @@ from __future__ import annotations
 import time
 import unicodedata
 from collections.abc import Callable, Sequence
+from dataclasses import dataclass
 from typing import Any, Literal
 
 from langchain_core.embeddings import Embeddings
@@ -79,30 +80,91 @@ def raw_exchange_units(
             for start, end in zip(starts, [*starts[1:], len(turns)], strict=True)]
 
 
+def _check_bm25_version() -> None:
+    from importlib.metadata import version
+
+    if version("rank-bm25") != BM25_VERSION:
+        raise ValueError("RAWRAG_BM25_VERSION_CHANGED")
+
+
+class _BM25Corpus:
+    """Pinned native statistics; scoring does not retain a query or Source bindings."""
+
+    def __init__(self, texts: Sequence[str], tokenization: str) -> None:
+        if tokenization not in {"rawrag_space", "unicode_v1"}:
+            raise ValueError("SOURCE_TOKENIZATION_INVALID")
+        from importlib import import_module
+
+        _check_bm25_version()
+        self.tokenize: Callable[[str], list[str]] = (
+            _lexical_tokens if tokenization == "unicode_v1" else lambda text: text.split(" "))
+        corpus = [self.tokenize(text) for text in texts]
+        self.bm25 = import_module("rank_bm25").BM25Okapi(corpus) if any(corpus) else None
+
+    def rank(self, units: list[dict[str, Any]], query: str, limit: int) -> list[dict[str, Any]]:
+        import numpy as np
+
+        scores = (self.bm25.get_scores(self.tokenize(query)) if self.bm25 is not None
+                  else np.zeros(len(units)))
+        return [{**units[int(index)], "score": float(scores[index])}
+                for index in np.argsort(scores)[::-1][:limit]]
+
+
+@dataclass(frozen=True)
+class _CorpusEntry:
+    scope: tuple[Any, ...]
+    tokenization: str
+    texts: tuple[str, ...]
+    index: _BM25Corpus
+
+
+class SourceSearchCache:
+    """One latest ordered corpus owned by a serial caller, without fingerprints.
+
+    Compare current strings literally. Only native statistics are reused; current
+    units and their Source bindings are supplied anew on every call. Visibility,
+    exclusions and reads remain the caller's responsibility before/after ranking.
+    """
+
+    def __init__(self) -> None:
+        self._entry: _CorpusEntry | None = None
+        self.builds = self.hits = 0
+
+    def rank(self, units: list[dict[str, Any]], query: str, limit: int, *,
+             scope: tuple[Any, ...], tokenization: Literal["rawrag_space", "unicode_v1"],
+             timings: dict[str, float]) -> tuple[list[dict[str, Any]], bool]:
+        started = time.perf_counter()
+        texts = tuple(unit["index_text"] for unit in units)
+        entry = self._entry
+        reused = (entry is not None and entry.scope == scope
+                  and entry.tokenization == tokenization and entry.texts == texts)
+        compared = time.perf_counter()
+        if reused:
+            assert entry is not None
+            _check_bm25_version()
+            self.hits += 1
+        else:
+            entry = _CorpusEntry(scope, tokenization, texts, _BM25Corpus(texts, tokenization))
+            self._entry = entry
+            self.builds += 1
+        indexed = time.perf_counter()
+        ranked = entry.index.rank(units, query, limit)
+        timings.update(cache_lookup_seconds=(indexed if reused else compared)-started,
+            index_seconds=0.0 if reused else indexed-compared,
+            rank_seconds=time.perf_counter()-indexed)
+        return ranked, reused
+
+
 def flat_bm25_rank(
     units: list[dict[str, Any]], query: str, limit: int, *,
     tokenization: Literal["rawrag_space", "unicode_v1"] = "rawrag_space",
     timings: dict[str, float] | None = None,
 ) -> list[dict[str, Any]]:
     """Pinned RawRAG by default; opt-in Unicode uses identical query/document tokens."""
-    if tokenization not in {"rawrag_space", "unicode_v1"}:
-        raise ValueError("SOURCE_TOKENIZATION_INVALID")
-    from importlib import import_module
-    from importlib.metadata import version
-
-    import numpy as np
-
     started = time.perf_counter()
-    bm25_type = import_module("rank_bm25").BM25Okapi
-    if version("rank-bm25") != BM25_VERSION:
-        raise ValueError("RAWRAG_BM25_VERSION_CHANGED")
-    tokenize = _lexical_tokens if tokenization == "unicode_v1" else lambda text: text.split(" ")
-    corpus = [tokenize(row["index_text"]) for row in units]
-    bm25 = bm25_type(corpus) if any(corpus) else None
+    index = _BM25Corpus([row["index_text"] for row in units], tokenization)
     indexed = time.perf_counter()
-    scores = bm25.get_scores(tokenize(query)) if bm25 is not None else np.zeros(len(units))
-    ranked = [{**units[int(index)], "score": float(scores[index])}
-              for index in np.argsort(scores)[::-1][:limit]]
+    ranked = index.rank(units, query, limit)
     if timings is not None:
         timings.update(index_seconds=indexed - started,
                        rank_seconds=time.perf_counter() - indexed)

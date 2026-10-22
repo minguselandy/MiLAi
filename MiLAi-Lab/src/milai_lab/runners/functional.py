@@ -71,7 +71,7 @@ from milai_lab.memory.functional_state import FunctionalRejection, note_exposure
 from milai_lab.memory.functional_state import namespace as functional_namespace
 from milai_lab.memory.functional_state import reference_key as functional_reference_key
 from milai_lab.memory.reader_projection import expand_host_packet
-from milai_lab.memory.retrieval import SemanticRetriever
+from milai_lab.memory.retrieval import SemanticRetriever, SourceSearchCache
 from milai_lab.memory.service import MemoryService
 from milai_lab.methods.edit_features import EditFeatures
 from milai_lab.methods.edit_maintenance import (
@@ -2552,6 +2552,7 @@ def message(
     message_index: int = 0,
     resume: bool = False,
     control_models: dict[tuple[Any, ...], Any] | None = None,
+    source_search_cache: SourceSearchCache | None = None,
     model_tool_choice: Callable[[list[Any]], Any] | None = None,
     recorded_tool_schemas: list[dict[str, Any]] | None = None,
     given_retrieval_request: dict[str, Any] | None = None,
@@ -2749,6 +2750,7 @@ def message(
                 ),
                 observer=trace,
                 semantic_retriever=retriever,
+                source_search_cache=source_search_cache,
                 memory_profile=settings.get("memory_profile", "ordinary"),
                 memory_ranking=settings.get("memory_ranking", "dense"),
             )

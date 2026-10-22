@@ -11,6 +11,7 @@ from typing import Any
 from milai_lab.baselines.langmem_sqlite_store import TransactionalSqliteStore as SqliteStore
 from milai_lab.datasets.longmemeval_v2 import asset_path, bind_media, trajectory_sources
 from milai_lab.harness.artifact_io import read_json, write_json
+from milai_lab.memory.retrieval import SourceSearchCache
 from milai_lab.memory.service import MemoryService
 from milai_lab.runners.functional import _bank_reference, frozen, message, prepare
 from milai_lab.runners.multimodal_evidence import delivered_image_context
@@ -34,6 +35,7 @@ class LmeMemoryBackend:
         self.template = output / "template"
         self.bank, self.owner = "released-haystack", "lme-evaluation"
         self.models: dict[tuple[Any, ...], Any] = {}
+        self.source_search_cache = SourceSearchCache()
         self.media: dict[str, dict[str, Any]] = {}
         self.queries = 0
         self.failed = False
@@ -99,7 +101,8 @@ class LmeMemoryBackend:
                 write_json(case / "query.json", report)
             result = message(case, bank=self.bank, owner=self.owner, session="evaluation",
                 message_id=f"query-{index}", content=query,
-                given_retrieval_request={"query": query}, control_models=self.models)
+                given_retrieval_request={"query": query}, control_models=self.models,
+                source_search_cache=self.source_search_cache)
             if result["status"] != "COMPLETED":
                 raise RuntimeError("First failed retrieval retained: " + str(result.get("error")))
             with self.overhead():
@@ -124,6 +127,9 @@ class LmeMemoryBackend:
             report.update(status="FAILED", error_type=type(error).__name__, error=str(error))
             raise
         finally:
+            report["source_index_cache"] = {"builds": self.source_search_cache.builds,
+                                            "hits": self.source_search_cache.hits,
+                "scope": "Cumulative per-backend native corpus computations; no query/answer cache"}
             write_json(case / "query.json", report)
             if hasattr(self, "ledger"):
                 write_json(self.output / "budget-after.json", read_json(self.ledger))

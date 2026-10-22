@@ -49,6 +49,7 @@ from milai_lab.memory.observation import (
 )
 from milai_lab.memory.retrieval import (
     SemanticRetriever,
+    SourceSearchCache,
     flat_bm25_rank,
     raw_exchange_units,
     semantic_text,
@@ -112,6 +113,7 @@ class MemoryService:
         functional_contract: str = "legacy",
         observer: Callable[[dict[str, Any]], None] | None = None,
         semantic_retriever: SemanticRetriever | None = None,
+        source_search_cache: SourceSearchCache | None = None,
         memory_profile: str = "ordinary",
         memory_ranking: str = "dense",
         clock: Callable[[], datetime] | None = None,
@@ -136,6 +138,7 @@ class MemoryService:
             raise ValueError("V13_MEMORY_OWNER_NAMESPACE_MISMATCH")
         self.store, self.namespace, self.owner = store, namespace, owner
         self.semantic_retriever = semantic_retriever
+        self.source_search_cache = source_search_cache
         self._thread_lock = threading.RLock()
         self._lock_depth = 0
         self.memory_profile = memory_profile
@@ -2032,8 +2035,14 @@ class MemoryService:
                     unit["index_text"] = " ".join(turn["content"] for turn in unit["turns"])
                 units.extend(selected)
             timings["assemble_seconds"] = time.perf_counter() - assemble_started
-            ranked = flat_bm25_rank(units, query, limit, tokenization=tokenization,
-                                    timings=timings)
+            cache_reused: bool | None = None
+            if self.source_search_cache is None:
+                ranked = flat_bm25_rank(units, query, limit, tokenization=tokenization,
+                                        timings=timings)
+            else:
+                ranked, cache_reused = self.source_search_cache.rank(units, query, limit,
+                    scope=(self.sources_namespace, self.owner, granularity),
+                    tokenization=tokenization, timings=timings)
             open_started = time.perf_counter()
             def descriptor(unit: dict[str, Any]) -> dict[str, Any]:
                 return {"kind": "original_source", **{key: unit[key] for key in (
@@ -2061,6 +2070,8 @@ class MemoryService:
                 "retrieval": "source_flat_bm25", "granularity": granularity,
                 "tokenization": tokenization, "timings": timings,
                 "index_text": "all_original_source_roles", "requested_count": limit,
+                **({"corpus_index_cache": "reused" if cache_reused else "built"}
+                   if cache_reused is not None else {}),
                 "indexed_count": len(units), "returned_count": len(materials),
                 "visible_source_count": sum(ref in visible for ref in ordered),
                 "returned_source_count": len(raw_events),
