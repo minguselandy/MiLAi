@@ -1,3 +1,36 @@
+# LATEST V50 (2026-10-22): SAVED CPU UPDATE32 LIVE / 71 DOCUMENT GROUPS RECONCILED
+
+Full goal ACTIVE. Only model exec8452,parent893356/driver893357/current child1589315 live,
+update32 latest220/876states. Candidate0 complete/billed once,never restart/re-bill. All remaining
+candidates and selected train required;no partial selection. CPU-only exec37854/PID662822 live,
+228/902paths,closed-prefix state/head/Reader overflows0. Revalidate actual PIDs/driver. No second
+model/probe/fit/E2, inference change or offline settlement while original saved CPU job lives.
+
+Completed57history source notes/coverage remain closed and unchanged; no repeat semantic review.
+NEW feedback-document-review-provenance-v2.json verifies all71document groups/129public requests
+and2570paragraph appearances (not unique documents) literally match prior public-source inputs,
+including every content/identity/order field.85requests/46groups link to generalization source-first
+full-pool records;40/23 link to oldT1 source notes with matching original counts;4/2 link to oldT0
+source/witness reviews. The last four do NOT have the same full-pool coverage inventory; this
+does not prove they were unread or old labels wrong. Prior proofs/qualifications/labels untouched.
+Oracle answer/support/answerability fields not used in joins or printed; no new semantic reviews.
+Initial audit v1 failed because unrelated authored dev histories had request id 'original'; failed
+program/record retained. v2 restricts old lookup to planned train families, keeps all129requests.
+
+NEXT independent source work: four public-only cards in feedback-document-source-review-v1:
+musique-family-000104 rows4099/14364;musique-family-000766 rows18441/33114.4requests/2groups,
+80paragraph appearances. Read full question/source cards before native references or model
+outputs; old review metadata was already seen, so no independent/blind claim. These are new
+full-pool note clarifications, not relabeling or collection selection. Preparation.json lists paths.
+Actual new Host requests/Views/reached states/branches/answers still require later review.
+See tracked feedback-document-review-provenance-v2 manifest and progress-v50.
+
+New pending CPU:audit0.109179854+public-card export0.004253805=0.113433659. Failed initial attempt,
+inspection/authoring unknown,not0. Earlier phases separate;V34inventory10663.791232191 existing
+74phase subtotal,not extra. Candidate0CPU43688.529695180 already billed. Original ledger only;
+closedv1/v2/v3 untouched. No production/label/SHA/subagent/service/push/merge changes. Full original
+fit/control/feedback/Host/external/protected/seeds scope and paused-queue boundaries intact.
+
 # LATEST V49 (2026-10-22): SAVED CPU UPDATE32 LIVE / ALL57 HISTORY SOURCE NOTES COMPLETE
 
 Full goal ACTIVE. Only model exec8452,parent893356/driver893357/current child1589315 live;

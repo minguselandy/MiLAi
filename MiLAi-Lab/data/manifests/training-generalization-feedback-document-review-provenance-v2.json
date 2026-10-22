@@ -1,0 +1,195 @@
+{
+  "status": "LITERAL_PROVENANCE_RECONCILED;FOUR_LEGACY_FULL_POOL_COVERAGE_GAPS",
+  "plan": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-expansion-study-plan-v2.json",
+  "adapter": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/frozen-feedback-expansion-2a179b58/MiLAi-Lab/src/milai_lab/datasets/intent_training.py",
+  "source_version": "2a179b58",
+  "document_groups": 71,
+  "public_requests": 129,
+  "review_evidence_request_counts": {
+    "generalization_source_first": 85,
+    "legacy_t0_witness_scoped_source_review": 4,
+    "legacy_t1_source_notes": 40
+  },
+  "literal_mismatch_count": 0,
+  "scope": "Mechanical provenance and literal-input reconciliation,not new semantic review, new labels or model performance. Existing exposed train groups. Earlier notes retain their partial proofs,qualifications and source roles. Legacy T0 witness lists do not prove exhaustive pool coverage. All future actual Host requests, Views,reached states,branches and answers require their own review.",
+  "oracle_boundary": "Historical reference files contain native answers/support flags;only family,row,split,question,title and paragraph text are used in joins. Oracle fields are neither used nor printed nor passed to online inputs.",
+  "source_inputs_changed": false,
+  "new_training_labels": 0,
+  "model_calls": 0,
+  "no_sha_validation": true,
+  "ledger_recorded": false,
+  "ledger_write_calls": 0,
+  "canonical_audit": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-document-review-provenance-v2.json",
+  "audit_program": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/audit_feedback_document_review_provenance_v2.py",
+  "paragraph_appearances": 2570,
+  "paragraph_count_scope": "2570 appearances across129question pools;shared/paired paragraphs are not deduplicated or independent sources.",
+  "review_evidence_group_counts": {
+    "generalization_source_first": 46,
+    "legacy_t0_witness_scoped_source_review": 2,
+    "legacy_t1_source_notes": 23
+  },
+  "full_pool_coverage_not_reasserted": [
+    {
+      "family": "musique-family-000766",
+      "source_row": 18441,
+      "request_id": "corpus-18441",
+      "batch": 17,
+      "input_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-expansion-preparation-v1/train-batch-017.json",
+      "public_source_count": 20,
+      "evidence_group": "legacy_t0_witness_scoped_source_review",
+      "review_input": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/data/t0-sources-v3/offline-references.jsonl",
+      "review_input_line": 77,
+      "review_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/data/manifests/host-intent-retrieval-v3-t0-musique-source-review-v1.json",
+      "review_pointer": "/cases/10",
+      "prior_status": "label_scope_requires_actual_request_review",
+      "declared_full_pool_reviewed": null,
+      "reviewed_witness_indices": [
+        9
+      ],
+      "scope": "Source-specific review linked. Listed witnesses are not a full-pool coverage inventory;do not upgrade this to a fresh full-pool review.",
+      "public_request_and_all_source_fields_literal_equal": true,
+      "oracle_fields_used_for_join": false
+    },
+    {
+      "family": "musique-family-000766",
+      "source_row": 33114,
+      "request_id": "corpus-33114",
+      "batch": 17,
+      "input_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-expansion-preparation-v1/train-batch-017.json",
+      "public_source_count": 20,
+      "evidence_group": "legacy_t0_witness_scoped_source_review",
+      "review_input": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/data/t0-sources-v3/offline-references.jsonl",
+      "review_input_line": 80,
+      "review_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/data/manifests/host-intent-retrieval-v3-t0-musique-source-review-v1.json",
+      "review_pointer": "/cases/11",
+      "prior_status": "multiple_historical_labels",
+      "declared_full_pool_reviewed": null,
+      "reviewed_witness_indices": [
+        7,
+        8,
+        18
+      ],
+      "scope": "Source-specific review linked. Listed witnesses are not a full-pool coverage inventory;do not upgrade this to a fresh full-pool review.",
+      "public_request_and_all_source_fields_literal_equal": true,
+      "oracle_fields_used_for_join": false
+    },
+    {
+      "family": "musique-family-000104",
+      "source_row": 4099,
+      "request_id": "corpus-4099",
+      "batch": 24,
+      "input_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-expansion-preparation-v1/train-batch-024.json",
+      "public_source_count": 20,
+      "evidence_group": "legacy_t0_witness_scoped_source_review",
+      "review_input": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/data/t0-sources-v3/offline-references.jsonl",
+      "review_input_line": 70,
+      "review_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/data/manifests/host-intent-retrieval-v3-t0-musique-source-review-v1.json",
+      "review_pointer": "/cases/8",
+      "prior_status": "partial_original_chain",
+      "declared_full_pool_reviewed": null,
+      "reviewed_witness_indices": [
+        16
+      ],
+      "scope": "Source-specific review linked. Listed witnesses are not a full-pool coverage inventory;do not upgrade this to a fresh full-pool review.",
+      "public_request_and_all_source_fields_literal_equal": true,
+      "oracle_fields_used_for_join": false
+    },
+    {
+      "family": "musique-family-000104",
+      "source_row": 14364,
+      "request_id": "corpus-14364",
+      "batch": 24,
+      "input_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-expansion-preparation-v1/train-batch-024.json",
+      "public_source_count": 20,
+      "evidence_group": "legacy_t0_witness_scoped_source_review",
+      "review_input": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/data/t0-sources-v3/offline-references.jsonl",
+      "review_input_line": 76,
+      "review_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/data/manifests/host-intent-retrieval-v3-t0-musique-source-review-v1.json",
+      "review_pointer": "/cases/9",
+      "prior_status": "partial_original_chain",
+      "declared_full_pool_reviewed": null,
+      "reviewed_witness_indices": [
+        18
+      ],
+      "scope": "Source-specific review linked. Listed witnesses are not a full-pool coverage inventory;do not upgrade this to a fresh full-pool review.",
+      "public_request_and_all_source_fields_literal_equal": true,
+      "oracle_fields_used_for_join": false
+    }
+  ],
+  "fresh_public_review_preparation": {
+    "status": "FOUR_PUBLIC_POOLS_PREPARED;NO_NEW_SEMANTIC_REVIEW_OR_LABELS",
+    "audit": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-document-review-provenance-v2.json",
+    "cards": [
+      {
+        "family": "musique-family-000766",
+        "source_row": 18441,
+        "request_id": "corpus-18441",
+        "card": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-document-source-review-v1/musique-family-000766-18441.json",
+        "source_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-expansion-preparation-v1/train-batch-017.json",
+        "source_units": 20,
+        "review_status": "NOT_YET_REVIEWED_HERE"
+      },
+      {
+        "family": "musique-family-000766",
+        "source_row": 33114,
+        "request_id": "corpus-33114",
+        "card": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-document-source-review-v1/musique-family-000766-33114.json",
+        "source_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-expansion-preparation-v1/train-batch-017.json",
+        "source_units": 20,
+        "review_status": "NOT_YET_REVIEWED_HERE"
+      },
+      {
+        "family": "musique-family-000104",
+        "source_row": 4099,
+        "request_id": "corpus-4099",
+        "card": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-document-source-review-v1/musique-family-000104-4099.json",
+        "source_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-expansion-preparation-v1/train-batch-024.json",
+        "source_units": 20,
+        "review_status": "NOT_YET_REVIEWED_HERE"
+      },
+      {
+        "family": "musique-family-000104",
+        "source_row": 14364,
+        "request_id": "corpus-14364",
+        "card": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-document-source-review-v1/musique-family-000104-14364.json",
+        "source_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-expansion-preparation-v1/train-batch-024.json",
+        "source_units": 20,
+        "review_status": "NOT_YET_REVIEWED_HERE"
+      }
+    ],
+    "source_groups": 2,
+    "public_requests": 4,
+    "source_units": 80,
+    "selection": "Four declared train requests whose old review inventory lists witnesses without a full-pool coverage field. Review scheduling only;collection pool and all129requests unchanged. No model/task outcome used to select them.",
+    "scope": "Existing exposed train material. Prior source/witness reviews and operation labels remain intact. Missing inventory fields do not prove those sources were unread or existing labels incorrect. New notes may clarify full-pool evidence later.",
+    "new_training_labels": 0,
+    "model_calls": 0,
+    "no_sha_validation": true,
+    "ledger_recorded": false,
+    "compute": {
+      "cpu_seconds": 0.004253804999999999,
+      "wall_seconds": 0.004257585853338242
+    }
+  },
+  "retained_first_schema_failure": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-document-review-provenance-v1-failure.json",
+  "failure_scope": "Initial lookup included unrelated authored dev histories. v2 restricts lookup to declared train families while retaining every planned129request;no dataset or review changed.",
+  "new_semantic_reviews": 0,
+  "new_compute_phases": [
+    {
+      "id": "feedback_document_review_provenance_v2",
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-document-review-provenance-v2.json",
+      "cpu_seconds": 0.10917985399999999,
+      "wall_seconds": 0.10918525885790586,
+      "ledger_recorded": false
+    },
+    {
+      "id": "feedback_document_source_review_input_preparation_v1",
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-document-source-review-v1/preparation.json",
+      "cpu_seconds": 0.004253804999999999,
+      "wall_seconds": 0.004257585853338242,
+      "ledger_recorded": false
+    }
+  ],
+  "new_CPU_seconds_pending": 0.11343365899999999,
+  "costs": "Only audit and export process CPU measured;failed attempt/inspection/authoring unknown,not0. Prior copied times not new phases. No ledger settlement."
+}
