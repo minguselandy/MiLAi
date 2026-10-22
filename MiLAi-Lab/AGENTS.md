@@ -1,3 +1,32 @@
+# LATEST V49 (2026-10-22): SAVED CPU UPDATE32 LIVE / ALL57 HISTORY SOURCE NOTES COMPLETE
+
+Full goal ACTIVE. Only model exec8452,parent893356/driver893357/current child1589315 live;
+update32 latest119/876states, one of seven candidates closed. Candidate0 already billed once,
+never restart/re-bill. All remaining candidates and matching selected train required; no
+partial-metric selection. CPU-only exec37854/PID662822 live,207/902paths,closed-prefix state/
+head/Reader overflows0. Revalidate actual PIDs/driver. No second model/probe/fit/E2, inference
+change or offline settlement while original saved CPU job lives. No retries on observation timeout.
+
+Final four anchor notes C26,D11,D23,F08 added. New source-note series now covers ALL57 registered
+history groups in the frozen128train collection pool:1311source units/122publicrequests,
+including8independent record requests. Full audit verified exact coverage, current literal
+histories, actual prefixes, claim references and184repeated source entries (not new sources).
+16declared record writes remain input specs, not actual new runtime receipts. Original W5
+reviews/labels unchanged. Other71document groups inherit earlier evidence; this closure does
+not assert fresh complete semantic review of those groups. Actual future Host requests, Views,
+reached states, branches and answers still require review; no new labels or online input changes.
+No need to repeat completed57notes or recompile labels for timing. Useful independent follow-up
+can reconcile inherited71document-group reviews to frozen public source bindings. No protected
+test bodies or new outcome-based panel selection. See feedback-source-review-v1/review-progress-v15.json,
+feedback-all-history-source-review-coverage-v1.json and progress-v49; old nonanchor audit retained.
+
+New pending CPU:note save0.007053504 + separate all57coverage audit0.036051805 =0.043105309.
+V48CPU0.006198000 and all earlier phases separate. Candidate0CPU43688.529695180 already billed;
+V34inventory10663.791232191 is existing74phase subtotal, never extra cost. Original ledger only
+/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json;closedv1/v2/v3 untouched.
+Unmeasured semantic work unknown,not0. No production/label/SHA/subagents/services/push/merge.
+All paused queues and full remaining fit/control/feedback/Host/external/protected/seeds scope intact.
+
 # LATEST V48 (2026-10-22): SAVED CPU UPDATE32 LIVE / FOUR W5 ANCHOR NOTES ADDED
 
 Full goal ACTIVE. Same only model exec8452,parent893356/driver893357/current child1589315 live,
