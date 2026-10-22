@@ -1,3 +1,57 @@
+# LATEST V27 (2026-10-22): FIT484 LIVE / ALL PUBLIC FIXED PATHS CPU AUDIT LIVE
+
+Full goal ACTIVE. ONLY real model job remains exec17952, parent3470595/child3470601,
+frozen d6a8afd3. Actual PIDs alive; latest run.json RUNNING484/524. No post-update scores read
+for selection, hot update, restart, second model job or offline settlement. No automatic model
+successor. All old closed jobs/audits remain closed; paused Coalent untouched.
+
+NEW LIVE CPU-ONLY exec37854/PID662822:
+audit_lme_all_public_fixed_paths_v1.py -> lme-all-public-fixed-path-audit-v1/audit.json.
+Handle lme-all-public-fixed-path-audit-v1-process.json. Actual PID alive; latest5/902paths
+complete, row2 in progress. Full451public queries x deliverySelection false/true. Fixed-context
+reads4/max8steps, source ranges256, observation4096, return2048. Both shared_actions and
+request_text native lengths measured at every actual decision input; no Laya weights/forward.
+Real IntentRetrievalMemory capture/binding/read admission/receipts/image attachment, I2/
+source_metadata. Fresh Store copy per path, per-bank native source cache. Actual delivered
+memory packet/images plus original query/image locally counted for full Reader input; no HTTP,
+Reader answer, Judge or QA scoring. Fixed policy does not need Laya capacity, so measured
+overflows are retained diagnostics, not learned-policy failure frequency or automatic clipping.
+No generated Views; callback forbids generation. No reference answer/eval fields accessed.
+Audit bases are independent preflight Store copies. Hide ONLY their old synthetic probe by
+existing Source revocation; verify all original visible Source values unchanged. Future real
+benchmark backend builds clean original templates. No corpus/source/gold filtering.
+Completed CPU audit cases are byte-verified archived against retained audit bases, not fake
+benchmark prediction/scoring completions. First5paths fit both native representations and
+full Reader capacity; prefix only, NOT all-query success. Initial complete paths include
+actual source-image delivery and consumed8read allowances; see per-case summaries/archives.
+DO NOT restart on timeout/live PID. Unexpected failure keeps first failure and NOT_RUN tail.
+Final CPU cost unknown/not0 while live. This script enters no model/HTTP ledger scope and
+does not write original ledger. A concurrent fit may append legitimate terminal compute;
+global before/after equality is an observation, NOT grounds to undo charges or blame audit.
+
+CONCRETE POSTFIT COMMANDS READY, NOT DISPATCHED:
+complete-actions-postfit-commands-v1.json (tracked training-generalization-complete-actions-
+postfit-v1.json) contains exact argv/environment for frozen1df7669d analyzer and savedCPU driver.
+Analyze complete-action-study-amendment-v1.json run source256-actions-full-seed0-u524-v1 with positions
+complete-action-readiness-v1; all4886train/860dev fit length identities/tokens matched positions
+without reading metrics. Raw7884train position rows preserved. Proposed output directories
+complete-actions-operation-curve-analysis-v1 and complete-actions-saved-cpu-v1 do not exist yet.
+Before dispatch verify actual parent/child terminal, COMPLETE524, unique original-ledger compute,
+no other real model job. Then complete terminal audit and all savedCPU0/32/64/128/262/393/524,
+selected savedCPU train, unchanged32family dev macro/earliest tie/0eligible, feedback16secondary,
+CPUFP32loaded tensors/MHAfastpathFalse/reference_compileFalse/shared_actions12288/head2048.
+Saved evaluation is a REAL model job and must wait. Legacy savedCPU remains pending too.
+
+No production code/model jobs/labels/newly closed measured phase this turn. Live audit not
+settled; command/position preparation unmeasured, not re-run for timing. Original ledger ONLY
+/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json. V26pending2.648789583,
+V25pending7380.353031073 and older pending unchanged; closed v1/v2/v3 never reopen.
+Full remaining scope unchanged: corrected fits/controls/savedCPU incl legacy; STATE108E2,
+factorial/expandedfeedback/T2/common-support; Host/lifecycle/costs; full external/protected/
+seeds0,1,2. Actual learned paths, server vision/usage, model Reader/QA, methods/checkpoints/seeds
+and final outcomes remain. No SHA/substitute fingerprints,subagents,push/merge/services/Product
+Schema/API/permissions/Canonical changes. See progress-v27 and all-public-fixed-path-plan-v1.
+
 # LATEST V26 (2026-10-22): FIT422 LIVE / CLOSED CASE ARCHIVE WORKFLOW READY
 
 Full goal ACTIVE. ONLY real model job remains exec17952, parent3470595/child3470601,

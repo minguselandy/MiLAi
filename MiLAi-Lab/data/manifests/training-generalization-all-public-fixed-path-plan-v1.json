@@ -1,0 +1,37 @@
+{
+  "status": "DECLARED_BEFORE_ALL_PUBLIC_FIXED_RETRIEVAL_AUDIT",
+  "declared_at": "2026-10-22T03:46:26.639069+00:00",
+  "source_version": "a33974c0",
+  "source_freeze": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/frozen-lme-archives-a33974c0/MiLAi-Lab",
+  "cohort": {
+    "public_queries": 451,
+    "paths": 902,
+    "delivery_selection": [
+      false,
+      true
+    ],
+    "internal_views": true,
+    "representations_checked": [
+      "shared_actions",
+      "shared_actions_request_text"
+    ],
+    "policy": "FixedContextMemoryPolicy(reads=4)",
+    "control_steps": 8,
+    "read_limit": 8,
+    "source_observation_tokens": 4096,
+    "source_range_tokens": 256,
+    "return_tokens": 2048,
+    "controller_max_len": 16384,
+    "head_max_len": 2048
+  },
+  "execution": "Real IntentRetrievalMemory with actual public query capture/binding, existing read-admission and Source delivery receipts, full native haystacks. Fresh Store copy per path. Existing source corpus cache per bank; no original QA answer/eval access. Existing I2/source_metadata features retained.",
+  "preflight_probe": "Audit bases are independent copies of complete preflight runtimes. Hide ONLY their earlier synthetic probe using existing Source revocation; verify all original visible Source values unchanged. No history Source removed or re-labelled. Real benchmark backend later builds clean original templates without this diagnostic probe.",
+  "checks": "Every actual decision input native-tokenized in both representations without model forwards. Full actual delivered receipt and qualifying original images combined with exact question/image for native Reader capacity. Record overflows across the full cohort, do not silently clip/halve. Fixed policy does not use Laya; these are input diagnostics, not learned-policy failure rates or QA scores.",
+  "storage": "After closing each audit Store, existing archive_case verifies every reconstructed byte and archives against retained immutable audit base. No benchmark prediction or scoring completion fabricated; these are explicitly CPU audit cases. All paths/inputs/failures retained. No retention change to earlier research runs.",
+  "ledger": "No HTTP/model budget scope is entered and this script does not write the original ledger. Observe before/after bytes; concurrent main fit may legitimately append terminal compute, which must not be removed or treated as an audit write. Final standalone CPU cost pending, no offline settlement while fit lives.",
+  "failure": "Unexpected execution failure stops, keeps first failure and NOT_RUN tail. Capacity diagnostics recorded without model dispatch. No automatic retry.",
+  "no_sha_validation": true,
+  "no_subagents": true,
+  "models": 0,
+  "new_training_labels": 0
+}

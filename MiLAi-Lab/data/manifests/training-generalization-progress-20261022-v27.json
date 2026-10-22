@@ -1,0 +1,168 @@
+{
+  "status": "ACTIVE_GOAL;ALL_PUBLIC_FIXED_RETRIEVAL_CPU_AUDIT_RUNNING",
+  "observed_at": "2026-10-22T03:54:26.286112+00:00",
+  "previous": "training-generalization-progress-20261022-v26.json",
+  "previous_turn_classification": "PROGRESS:closed-case archive/restore implemented and full Store copies verified. This turn starts full public-query actual retrieval paths and prepares concrete postfit commands without dispatching another model.",
+  "active_fit": {
+    "session": 17952,
+    "parent_pid": 3470595,
+    "child_pid": 3470601,
+    "actual_pids_alive": true,
+    "status": "RUNNING",
+    "latest_recorded_updates": 484,
+    "planned": 524,
+    "source_version": "d6a8afd3",
+    "no_hot_update_restart_or_recipe_change": true,
+    "post_update_scores_not_read_for_selection": true
+  },
+  "public_fixed_path_audit": {
+    "session": 37854,
+    "pid": 662822,
+    "actual_pid_alive": true,
+    "status": "RUNNING",
+    "active": {
+      "row": 2,
+      "pool": "pool-0",
+      "delivery_selection": true
+    },
+    "completed_paths": 5,
+    "planned_paths": 902,
+    "planned_queries": 451,
+    "source_version": "a33974c0",
+    "script": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/audit_lme_all_public_fixed_paths_v1.py",
+    "report": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lme-all-public-fixed-path-audit-v1/audit.json",
+    "process_handle": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lme-all-public-fixed-path-audit-v1-process.json",
+    "plan": "training-generalization-all-public-fixed-path-plan-v1.json",
+    "closed_prefix": [
+      {
+        "row": 0,
+        "pool": "pool-0",
+        "delivery_selection": false,
+        "native_inputs": 16,
+        "state_drop_inputs": 0,
+        "head_drop_inputs": 0,
+        "mask_replacements": 0,
+        "max_sequence_tokens": 9041,
+        "material_items": 2,
+        "source_images": 2,
+        "Reader_fits": true,
+        "Reader_total_reserved_tokens": 12790,
+        "usage": {
+          "control_steps": 8,
+          "known_reference_reads": 0,
+          "operations": 8,
+          "material_budget_rejections": 4,
+          "read_operations": 6
+        },
+        "read_allowance_consumed": 8
+      },
+      {
+        "row": 0,
+        "pool": "pool-0",
+        "delivery_selection": true,
+        "native_inputs": 16,
+        "state_drop_inputs": 0,
+        "head_drop_inputs": 0,
+        "mask_replacements": 0,
+        "max_sequence_tokens": 14163,
+        "material_items": 2,
+        "source_images": 2,
+        "Reader_fits": true,
+        "Reader_total_reserved_tokens": 12790,
+        "usage": {
+          "control_steps": 8,
+          "known_reference_reads": 0,
+          "operations": 8,
+          "material_budget_rejections": 4,
+          "read_operations": 6
+        },
+        "read_allowance_consumed": 8
+      },
+      {
+        "row": 1,
+        "pool": "pool-0",
+        "delivery_selection": false,
+        "native_inputs": 16,
+        "state_drop_inputs": 0,
+        "head_drop_inputs": 0,
+        "mask_replacements": 0,
+        "max_sequence_tokens": 8619,
+        "material_items": 1,
+        "source_images": 0,
+        "Reader_fits": true,
+        "Reader_total_reserved_tokens": 10120,
+        "usage": {
+          "control_steps": 8,
+          "known_reference_reads": 0,
+          "operations": 8,
+          "material_budget_rejections": 5,
+          "read_operations": 6
+        },
+        "read_allowance_consumed": 8
+      },
+      {
+        "row": 1,
+        "pool": "pool-0",
+        "delivery_selection": true,
+        "native_inputs": 16,
+        "state_drop_inputs": 0,
+        "head_drop_inputs": 0,
+        "mask_replacements": 0,
+        "max_sequence_tokens": 14844,
+        "material_items": 1,
+        "source_images": 0,
+        "Reader_fits": true,
+        "Reader_total_reserved_tokens": 10120,
+        "usage": {
+          "control_steps": 8,
+          "known_reference_reads": 0,
+          "operations": 8,
+          "material_budget_rejections": 5,
+          "read_operations": 6
+        },
+        "read_allowance_consumed": 8
+      },
+      {
+        "row": 2,
+        "pool": "pool-0",
+        "delivery_selection": false,
+        "native_inputs": 16,
+        "state_drop_inputs": 0,
+        "head_drop_inputs": 0,
+        "mask_replacements": 0,
+        "max_sequence_tokens": 8775,
+        "material_items": 1,
+        "source_images": 0,
+        "Reader_fits": true,
+        "Reader_total_reserved_tokens": 10069,
+        "usage": {
+          "control_steps": 8,
+          "known_reference_reads": 0,
+          "operations": 8,
+          "material_budget_rejections": 5,
+          "read_operations": 6
+        },
+        "read_allowance_consumed": 8
+      }
+    ],
+    "scope": "Actual IntentRetrievalMemory capture/binding/read allowance/Source receipts and image attachment, fixed-context reads4/steps8, range256/observation4096/return2048; false/true delivery selection. Fresh Store per path. Both shared_actions/request_text native lengths measured, no Laya forwards. Full delivered context plus query/image locally counted for Reader; no HTTP/QA judgment. Not learned-policy trajectories or full actual server usage.",
+    "source_integrity": "Audit bases hide only earlier synthetic preflight probe through ordinary visibility revocation. Original Source values/visible haystacks verified unchanged. No QA answer/eval fields, no source/cohort filtering. Source cache per bank; completed CPU audit cases archived byte-exact against retained base, originals untouched.",
+    "costs": "Still live; no final measured CPU or settlement. Script does not enter HTTP/model ledger scope or write ledger. A legitimate concurrent fit terminal settlement can change global ledger bytes; final equality is recorded, never used to undo charges. No automatic retry on timeout or failure."
+  },
+  "postfit_readiness": {
+    "manifest": "training-generalization-complete-actions-postfit-v1.json",
+    "analysis_version": "1df7669d",
+    "positions": "All4886train and860dev event/token bindings equal complete-action-readiness positions; raw7884train positions retained. No metrics read.",
+    "commands": "Frozen terminal analyze_operation_curve with --run-id source256-actions-full-seed0-u524-v1 and --positions, then existing serial evaluate_saved_operation_curve on actual saved candidates and selected train. Explicit argv/environment retained, not dispatched.",
+    "required": "Actual fit parent/child terminal, COMPLETE524, unique original-ledger compute and no other real model job. Native savedCPU conditions and dev selection rule unchanged. No automatic successor; legacy savedCPU still pending."
+  },
+  "new_closed_measured_phases": [],
+  "costs": "No newly closed measured phase this turn; live audit CPU unknown/not0. Position/command preparation and authoring unmeasured, not re-run for timing. V26pending2.648789583,V25pending7380.353031073 and older pending unchanged; no offline settlement while fit lives, closedv1/v2/v3 never reopen.",
+  "production_code_changed": false,
+  "new_model_jobs_started": 0,
+  "new_training_labels": 0,
+  "no_sha_validation": true,
+  "no_subagents": true,
+  "no_push_merge_services_or_Product_schema_API_permission_Canonical_change": true,
+  "remaining": "Active/remaining corrected fits and controls plus savedCPU incl legacy; STATE108E2/factorial/expandedfeedback/T2/common-support; actualHost/lifecycle/costs; full external/protected/seeds0,1,2. This CPU fixed-policy audit does not replace actual learned-policy, server vision/usage, full model Reader/QA, checkpoint/method/seed freeze or final outcomes."
+}
