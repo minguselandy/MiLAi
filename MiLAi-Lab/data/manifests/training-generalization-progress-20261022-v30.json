@@ -1,0 +1,416 @@
+{
+  "status": "ACTIVE_GOAL;CORRECTED_FIT_AND_TERMINAL_AUDIT_COMPLETE;SAVED_CPU_MODEL_EVALUATION_LIVE",
+  "observed_at": "2026-10-22T04:57:02.846489+00:00",
+  "previous": "training-generalization-progress-20261022-v29.json",
+  "previous_turn_classification": "VERIFIED_WAIT:actual training final-evaluation process and CPU audit remained live. This turn verified complete524exit, audited the whole curve and started the declared savedCPU model job.",
+  "closed_fit": {
+    "session": 17952,
+    "parent_pid": 3470595,
+    "child_pid": 3470601,
+    "actual_pids_absent": true,
+    "status": "COMPLETED",
+    "returncode": 0,
+    "source_version": "d6a8afd3",
+    "updates": 524,
+    "train_draws_verified": 8384,
+    "train_tokens_verified": 48034873,
+    "complete_curve_audit": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/complete-actions-operation-curve-analysis-v1/analysis.json",
+    "unique_original_ledger_phase_verified": true,
+    "final_checkpoint_literal_equal": true,
+    "compute_ALREADY_RECORDED_DO_NOT_REBILL": {
+      "wall_seconds": 25437.914778205566,
+      "cpu_seconds": 43736.394334495,
+      "runs": 1,
+      "train_sequence_rows": 8384,
+      "train_input_tokens": 48034873,
+      "train_batch_forwards": 4192,
+      "train_device_forwards": 8384,
+      "train_batch_attempts": 4192,
+      "train_offered_rows": 8384,
+      "train_offered_tokens": 48034873,
+      "dev_forwards": 6020,
+      "dev_sequence_rows": 6020,
+      "dev_input_tokens": 29826531,
+      "dev_state_tokenizations": 6020,
+      "dev_state_tokens": 28209846,
+      "feedback-dev_forwards": 112,
+      "feedback-dev_sequence_rows": 112,
+      "feedback-dev_input_tokens": 377153,
+      "feedback-dev_state_tokenizations": 112,
+      "feedback-dev_state_tokens": 330771,
+      "train_eval_forwards": 34202,
+      "train_eval_sequence_rows": 34202,
+      "train_eval_input_tokens": 195965511,
+      "train_eval_state_tokenizations": 34202,
+      "train_eval_state_tokens": 186352866,
+      "train_component_complementary_evidence_rows": 5803,
+      "train_component_operation_history_rows": 2581,
+      "train_component_complementary_evidence_input_tokens": 33682932,
+      "train_component_operation_history_input_tokens": 14351941,
+      "peak_rss_kib": 9029828,
+      "peak_cuda_allocated_bytes": [
+        8024465920,
+        3940427264
+      ],
+      "ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json"
+    }
+  },
+  "in_memory_curve": [
+    {
+      "update": 0,
+      "train_macro": 0.10761635680368595,
+      "dev_macro": 0.15169274712903175,
+      "dev_counts": {
+        "labelled": 616,
+        "accepted": 85,
+        "masked": 244
+      },
+      "train_dev_gap": -0.0440763903253458,
+      "answer_macro": 0.8020833333333334,
+      "delivery_macro": 0.84375,
+      "length_buckets": {
+        "<=8192": {
+          "labelled": 578,
+          "accepted": 80,
+          "masked": 215
+        },
+        ">8192": {
+          "masked": 29,
+          "labelled": 38,
+          "accepted": 5
+        }
+      }
+    },
+    {
+      "update": 32,
+      "train_macro": 0.664738447476537,
+      "dev_macro": 0.6568691517285074,
+      "dev_counts": {
+        "labelled": 616,
+        "accepted": 386,
+        "masked": 244,
+        "handoff_outside_reviewed_preference": 125
+      },
+      "train_dev_gap": 0.007869295748029637,
+      "answer_macro": 0.3125,
+      "delivery_macro": 0.53125,
+      "length_buckets": {
+        "<=8192": {
+          "labelled": 578,
+          "accepted": 370,
+          "masked": 215,
+          "handoff_outside_reviewed_preference": 118
+        },
+        ">8192": {
+          "masked": 29,
+          "labelled": 38,
+          "accepted": 16,
+          "handoff_outside_reviewed_preference": 7
+        }
+      }
+    },
+    {
+      "update": 64,
+      "train_macro": 0.7395387240668161,
+      "dev_macro": 0.7096675983429561,
+      "dev_counts": {
+        "labelled": 616,
+        "accepted": 421,
+        "masked": 244,
+        "handoff_outside_reviewed_preference": 74
+      },
+      "train_dev_gap": 0.02987112572385997,
+      "answer_macro": 0.3125,
+      "delivery_macro": 0.53125,
+      "length_buckets": {
+        "<=8192": {
+          "labelled": 578,
+          "accepted": 394,
+          "masked": 215,
+          "handoff_outside_reviewed_preference": 74
+        },
+        ">8192": {
+          "masked": 29,
+          "labelled": 38,
+          "accepted": 27
+        }
+      }
+    },
+    {
+      "update": 128,
+      "train_macro": 0.8611248622549217,
+      "dev_macro": 0.7409879208277952,
+      "dev_counts": {
+        "labelled": 616,
+        "accepted": 442,
+        "handoff_outside_reviewed_preference": 69,
+        "masked": 244
+      },
+      "train_dev_gap": 0.1201369414271265,
+      "answer_macro": 0.3125,
+      "delivery_macro": 0.53125,
+      "length_buckets": {
+        "<=8192": {
+          "labelled": 578,
+          "accepted": 424,
+          "handoff_outside_reviewed_preference": 69,
+          "masked": 215
+        },
+        ">8192": {
+          "masked": 29,
+          "labelled": 38,
+          "accepted": 18
+        }
+      }
+    },
+    {
+      "update": 262,
+      "train_macro": 0.9713787059472135,
+      "dev_macro": 0.807826854448818,
+      "dev_counts": {
+        "labelled": 616,
+        "accepted": 484,
+        "masked": 244,
+        "handoff_outside_reviewed_preference": 36
+      },
+      "train_dev_gap": 0.16355185149839557,
+      "answer_macro": 0.3125,
+      "delivery_macro": 0.53125,
+      "length_buckets": {
+        "<=8192": {
+          "labelled": 578,
+          "accepted": 462,
+          "masked": 215,
+          "handoff_outside_reviewed_preference": 36
+        },
+        ">8192": {
+          "masked": 29,
+          "labelled": 38,
+          "accepted": 22
+        }
+      }
+    },
+    {
+      "update": 393,
+      "train_macro": 0.9876007842910858,
+      "dev_macro": 0.7866396864599797,
+      "dev_counts": {
+        "labelled": 616,
+        "accepted": 470,
+        "masked": 244,
+        "handoff_outside_reviewed_preference": 32
+      },
+      "train_dev_gap": 0.20096109783110605,
+      "answer_macro": 0.3125,
+      "delivery_macro": 0.53125,
+      "length_buckets": {
+        "<=8192": {
+          "labelled": 578,
+          "accepted": 445,
+          "masked": 215,
+          "handoff_outside_reviewed_preference": 32
+        },
+        ">8192": {
+          "masked": 29,
+          "labelled": 38,
+          "accepted": 25
+        }
+      }
+    },
+    {
+      "update": 524,
+      "train_macro": 0.9905987297794735,
+      "dev_macro": 0.7706700547083952,
+      "dev_counts": {
+        "labelled": 616,
+        "accepted": 457,
+        "masked": 244,
+        "handoff_outside_reviewed_preference": 26
+      },
+      "train_dev_gap": 0.21992867507107827,
+      "answer_macro": 0.375,
+      "delivery_macro": 0.53125,
+      "length_buckets": {
+        "<=8192": {
+          "labelled": 578,
+          "accepted": 436,
+          "masked": 215,
+          "handoff_outside_reviewed_preference": 26
+        },
+        ">8192": {
+          "masked": 29,
+          "labelled": 38,
+          "accepted": 21
+        }
+      }
+    }
+  ],
+  "in_memory_selection": {
+    "update": 262,
+    "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/fitting/source256-actions-full-seed0-u524-v1/checkpoints/update-262",
+    "metric": 0.807826854448818,
+    "rule": "highest dev source-family macro acceptance,earliest tie,0eligible"
+  },
+  "deployment_selection": null,
+  "interpretation": "Dev macro peaks0.807826854at262 then0.786639686/0.770670055at393/524 while train continues to0.990598730. Gap16.355ppat262 and21.993ppat524. This supports late over-optimization on these static reviewed dev preferences, not a claim about savedCPU/Host/generalization. No source-size effect isolated until remaining corrected cohort controls run. Same complete actions representation starts lower than legacy; not uniform representation gain.",
+  "feedback_scope": {
+    "states": 16,
+    "families": 8,
+    "answer_direction_states": 11,
+    "answer_pairs": 21,
+    "delivery_direction_states": 16,
+    "delivery_pairs": 39,
+    "finding": "Initialization macros0.802083/0.84375 drop to0.3125/0.53125atselected in-memory262; endpoint0.375/0.53125. Small secondary covered target, not used for operation checkpoint selection or substituted for actual Host task success."
+  },
+  "late_transitions": {
+    "updates": [
+      262,
+      524
+    ],
+    "lost_accepted": 39,
+    "gained_accepted": 12,
+    "transitions": {
+      "lost:READ->READ": 20,
+      "gained:READ->READ": 7,
+      "lost:HANDOFF->READ": 17,
+      "gained:HANDOFF->READ": 4,
+      "lost:HANDOFF->USE_VIEW": 1,
+      "gained:READ->HANDOFF": 1,
+      "lost:READ->HANDOFF": 1
+    },
+    "scope": "Recorded dev preferences at complete in-memory checkpoints, not minimal proofs, causal failure attribution, savedCPU selection or Host success. No labels changed."
+  },
+  "static_baselines": {
+    "report": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/complete-actions-paired-baselines-v1/comparisons.json",
+    "all_six_retained": [
+      "fixed",
+      "fixed_context",
+      "rules",
+      "view_cache",
+      "first_offered",
+      "handoff"
+    ],
+    "fixed_context": {
+      "planned_pairs": 860,
+      "planned_units_per_seed": 860,
+      "paired_scored": 616,
+      "unscored_pairs": 244,
+      "seeds": [
+        0
+      ],
+      "planned_families": 32,
+      "families_with_scored_pairs_in_every_seed": 32,
+      "per_seed": {
+        "0": {
+          "families_with_scores": 32,
+          "scored_pairs": 616,
+          "family_macro_baseline": 0.5391283280298309,
+          "family_macro_candidate": 0.8078268544488181
+        }
+      },
+      "paired_family_interval": {
+        "difference_second_minus_first": 0.26869852641898717,
+        "percentile_95_interval": [
+          0.20078521584166167,
+          0.33758141987591717
+        ],
+        "sampling_unit": "source family;paired states and seed means remain inside family",
+        "seed": 0,
+        "resamples": 10000,
+        "limit": "Conditional on frozen grouping,annotations and scored pairs. A zero-width empirical interval is not population equivalence. No independent sample count is gained from additional states or seeds of the same family.",
+        "families": 32,
+        "degenerate": false
+      },
+      "all_planned_family_macro_difference_bounds": [
+        -0.10374086249212257,
+        0.4507779050306772
+      ],
+      "scope": "Unknowns are not failures. Scored-pair estimates are conditional;all-planned bounds retain unknown outcomes. Equal family weight and equal seed weight within family;no unpaired or per-seed checkpoint selection is performed."
+    },
+    "scope": "Selected and evaluated on the same development families;descriptive intervals include selection optimism and are not protected confirmation. Static recorded states,not baseline rollouts or Host success. All six baselines retained."
+  },
+  "plot": {
+    "png": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/complete-actions-operation-curve-plots-v1/curve.png",
+    "svg": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/complete-actions-operation-curve-plots-v1/curve.svg",
+    "visually_inspected": true,
+    "scope": "In-memory curve only; savedCPU pending explicitly labelled; all6static baselines shown."
+  },
+  "ACTIVE_ONLY_REAL_MODEL_JOB": {
+    "session": 8452,
+    "parent_pid": 893356,
+    "driver_pid": 893357,
+    "current_evaluator_pid": 893516,
+    "actual_pids_alive": true,
+    "status": "RUNNING",
+    "active": {
+      "update": 0,
+      "output": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/complete-actions-saved-cpu-v1/update-0"
+    },
+    "source_version": "1df7669d",
+    "source_freeze": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/frozen-curve-analysis-with-pairs-v1/MiLAi-Lab",
+    "driver": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/complete-actions-saved-cpu-v1/driver.json",
+    "handle": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/complete-actions-saved-cpu-v1-process.json",
+    "log": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/complete-actions-saved-cpu-v1.log",
+    "conditions": "All7saved candidates0/32/64/128/262/393/524,860operation+16feedback immutable block,CPUFP32loaded/MHAfastpathFalse/reference_compileFalse/shared_actions12288/head2048; selected savedCPU train follows. Dev32familymacro/earliesttie/0eligible unchanged. Child compute billed once by existing evaluator, driverCPU separatepending. No retries or next model job while live."
+  },
+  "cpu_audit_also_live": {
+    "session": 37854,
+    "pid": 662822,
+    "actual_pid_alive": true,
+    "status": "RUNNING",
+    "completed_paths": 52,
+    "planned_paths": 902,
+    "active": {
+      "row": 26,
+      "pool": "pool-0",
+      "delivery_selection": false
+    },
+    "report": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lme-all-public-fixed-path-audit-v1/audit.json",
+    "scope": "CPU-only actual fixed-policy/input audit; no neural model/HTTP. It may observe legitimate original-ledger changes from completed fit/new evaluator, never undo them. Final CPU unknown until closed."
+  },
+  "new_closed_measured_phases": [
+    {
+      "id": "complete_actions_terminal_curve_audit_v1",
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/complete-actions-operation-curve-analysis-v1/analysis.json",
+      "cpu_seconds": 10.538385121999998,
+      "wall_seconds": 10.541388871148229,
+      "ledger_recorded": false
+    },
+    {
+      "id": "complete_actions_paired_recorded_baselines_v1",
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/complete-actions-paired-baselines-v1/comparisons.json",
+      "cpu_seconds": 2.5668583540000003,
+      "wall_seconds": 2.567255536094308,
+      "ledger_recorded": false
+    },
+    {
+      "id": "complete_actions_curve_plot_v1",
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/complete-actions-operation-curve-plots-v1/plot.json",
+      "cpu_seconds": 4.136362168000001,
+      "wall_seconds": 1.8306579841300845,
+      "ledger_recorded": false
+    },
+    {
+      "id": "complete_actions_late_transition_diagnostic_v1",
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/complete-actions-late-diagnostic-v1.json",
+      "cpu_seconds": 0.45693724,
+      "wall_seconds": 0.45706324465572834,
+      "ledger_recorded": false
+    },
+    {
+      "id": "complete_actions_fit_parent_orchestration_v1",
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/complete-actions-fit-v1/driver.json",
+      "cpu_seconds": 0.04296475600000001,
+      "ledger_recorded": false,
+      "scope": "Parent CPU only; parent wall nests billed trainer and is not added."
+    }
+  ],
+  "new_closed_CPU_seconds_pending": 17.74150764,
+  "costs": "17.741507640new closed offline/parentCPU pending. TrainerCPU43736.394334495already in original ledger, never re-settle. SavedCPU children bill their own phases once; driver and CPU audit not final. No offline settlement while model job live. All older pending unchanged; closedv1/v2/v3 never reopen. Unmeasured orchestration/authoring unknown,not0.",
+  "production_code_changed": false,
+  "new_model_jobs_started": 1,
+  "new_training_labels": 0,
+  "no_sha_validation": true,
+  "no_subagents": true,
+  "remaining": "SavedCPU deployment selection pending; legacy savedCPU,remaining corrected64/128/parameter/aux/E3fits,seeds,STATE108E2/factorial/expandedfeedback/T2/common-support,Host/lifecycle/costs,server vision and full external/protected confirmation all remain. No final generalization or Host gain claimed."
+}

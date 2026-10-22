@@ -1,3 +1,59 @@
+# LATEST V30 (2026-10-22): CORRECTED FIT CLOSED / SAVED CPU EVALUATION IS ONLY MODEL JOB
+
+Full goal ACTIVE. OLD FIT exec17952,parent3470595/child3470601 CLOSED COMPLETE524,exit0,
+actual PIDs absent. Never restart. Whole curve audited from frozen1df7669d with positions:
+complete-actions-operation-curve-analysis-v1/analysis.json. All8384draws/48034873train tokens,
+options/weights/lengths/full predictions/checkpoint metadata and final byte equality verified.
+One unique original-ledger phase already records trainerCPU43736.394334495,wall25437.914778206;
+do NOT rebill. Train evaluation34202rows/195965511tokens,dev6020/29826531,feedback112/377153.
+GPU kernel time not separately measured. ParentCPU0.042964756 remains separate pending.
+
+CURRENT ONLY REAL MODEL JOB exec8452:
+parent893356, saved-curve driver893357, current evaluator893516 (revalidate; child changes per
+checkpoint). Actual PIDs alive. Driver complete-actions-saved-cpu-v1/driver.json RUNNING,
+active update0; log sibling complete-actions-saved-cpu-v1.log; process handle
+complete-actions-saved-cpu-v1-process.json. Frozen1df7669d/frozen-curve-analysis-with-pairs-v1.
+Do NOT restart on timeout; no other model, vision probe, fit, E2 or offline settlement while live.
+All7actual saved candidates0/32/64/128/262/393/524 on unchanged860dev+16feedback, CPUFP32loaded,
+MHAfastpathFalse,reference_compileFalse,shared_actions12288/head2048. Child run confirms these.
+All candidates precede selection; fixed32family dev macro,earliesttie,0eligible; feedback secondary.
+Matching selected savedCPU train follows. Each child bills its original-ledger phase once;
+driverCPU separate pending. No deployment checkpoint bound yet. Legacy savedCPU still pending.
+
+COMPLETE IN-MEMORY CURVE (not savedCPU/Host result): updates0/32/64/128/262/393/524.
+Trainmacro .107616/.664738/.739539/.861125/.971379/.987601/.990599.
+Devmacro .151693/.656869/.709668/.740988/.807827/.786640/.770670.
+Devaccepted85/386/421/442/484/470/457 of616labelled;244unknown of860raw/32families retained.
+In-memory selected262,macro0.807826854448818;deployment_selectionNone. Gap16.355ppat262,
+21.993ppat524. Late decline3.716pp with rising train supports over-optimization on this
+static author-reviewed target, not full generalization or a source-size effect (controls pending).
+Complete-action initialization lower than legacy; do not describe uniform representation gain.
+Late262->524:39accepted lost/12gained. Losses20READ->READ,17HANDOFF->READ,1HANDOFF->USE_VIEW,
+1READ->HANDOFF. Outside-preference HANDOFF36->26, so decline is not simply more early handoff.
+Long dev>8K38labelled/29masked:accepted5at0,22at262,21at524. No semantic reliability claim.
+Feedback16states/8families:answer11directionstates/21pairs,delivery16/39. Initmacro.802083/.84375;
+262 .3125/.53125;524 .375/.53125. Small secondary coverage, not selection metric or Host score.
+
+All6recorded-state baselines retained in complete-actions-paired-baselines-v1/comparisons.json.
+vsfixed_context selected-dev macro +26.8699pp,32family bootstrap10000seed0 CI[20.0785,33.7581]pp;
+all-planned unknown bounds[-10.3741,45.0778]pp. Same-dev selection optimism and author labels;
+not rollout/protected confirmation. PNG/SVG complete-actions-operation-curve-plots-v1 visually
+checked; no savedCPU selection shown. Late diagnostic complete-actions-late-diagnostic-v1.json.
+
+ALSO LIVE CPU-ONLY exec37854/PID662822, all-public-fixed-path audit, latest51/902closed.
+No neural weights/HTTP; original ledger changes from fit/savedCPU are legitimate and not audit
+writes. Do not restart. Full actual-query/policy/Reader capacities and finalCPU still unfinished.
+
+New CLOSED pending CPU:terminalaudit10.538385122,pairedbaseline2.566858354,plot4.136362168,
+latediagnostic0.456937240,fitparent0.042964756 =17.741507640. Model trainer already billed;
+savedCPUchild billing separate. No nested sums or offline settlement. Original ledger ONLY
+/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json. All earlier pending unchanged,
+closedv1/v2/v3 never reopen. Unmeasured work unknown/not0. No SHA/substitute fingerprints,
+subagents,push/merge/services/ProductSchema/API/permissions/Canonical changes.
+Full goal still requires savedCPU selection,legacy savedCPU,corrected64/128/parameter/aux/E3
+fits,multiseed,STATE108E2/factorial/expandedfeedback/T2/common-support,Host/lifecycle/costs,
+server vision probe and full external/protected confirmation. See progress-v30/execution doc.
+
 # LATEST V29 (2026-10-22): FINAL TRAIN EVAL LIVE / SERVER IMAGE PROBE READY NOT RUN
 
 Full goal ACTIVE. ONLY real model job remains exec17952,parent3470595/child3470601,
