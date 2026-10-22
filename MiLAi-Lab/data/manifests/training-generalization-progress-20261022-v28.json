@@ -1,0 +1,62 @@
+{
+  "status": "ACTIVE_GOAL;524OPTIMIZATION_DONE_FINAL_EVALUATION_STILL_LIVE",
+  "observed_at": "2026-10-22T04:06:02.982688+00:00",
+  "previous": "training-generalization-progress-20261022-v27.json",
+  "previous_turn_classification": "PROGRESS:all-public actual fixed paths launched and concrete postfit commands prepared. This turn verified the same live jobs while optimization reached524; no restart or model successor.",
+  "active_fit": {
+    "session": 17952,
+    "parent_pid": 3470595,
+    "child_pid": 3470601,
+    "actual_pids_alive": true,
+    "status": "RUNNING",
+    "latest_recorded_updates": 524,
+    "planned": 524,
+    "train_draws_recorded": 8384,
+    "train_input_tokens_recorded": 48034873,
+    "source_version": "d6a8afd3",
+    "terminal_eval_files": {
+      "train": {
+        "numeric_prediction_files": 0,
+        "summary_exists": false
+      },
+      "dev": {
+        "numeric_prediction_files": 278,
+        "summary_exists": false
+      },
+      "feedback-dev": {
+        "numeric_prediction_files": 0,
+        "summary_exists": false
+      }
+    },
+    "interpretation": "524optimization is not terminal fit completion. Final synchronized evaluation/save/accounting still live. Counts only inspected; no prediction metrics read or checkpoint selected.",
+    "no_hot_update_restart_or_recipe_change": true
+  },
+  "public_fixed_path_audit": {
+    "session": 37854,
+    "pid": 662822,
+    "actual_pid_alive": true,
+    "status": "RUNNING",
+    "active": {
+      "row": 7,
+      "pool": "pool-0",
+      "delivery_selection": false
+    },
+    "completed_paths": 14,
+    "planned_paths": 902,
+    "planned_queries": 451,
+    "state_overflow_paths_in_closed_prefix": 0,
+    "head_overflow_paths_in_closed_prefix": 0,
+    "Reader_overflow_paths_in_closed_prefix": 0,
+    "max_native_tokens_in_closed_prefix": 15937,
+    "scope": "Live all-public actual IntentRetrievalMemory fixed-policy paths with literal case archives and locally counted full Reader context; no models/HTTP/QA scores. Prefix only; no full-cohort claim. No automatic retry. Final CPU still unknown. Ledger changes from legitimate concurrent fit settlement are observed, not undone."
+  },
+  "postfit": "Use complete-actions-postfit-commands-v1.json only AFTER parent/child terminal, run/driver COMPLETE524 and unique original-ledger compute confirmed. Then frozen terminal audit followed by all declared savedCPU candidates and matching selected-train; unchanged dev macro/earliest tie/0eligible. Legacy savedCPU still pending.",
+  "new_closed_measured_phases": [],
+  "costs": "No newly closed phase or offline settlement. Both jobs still live. Monitoring/preparation unmeasured,unknown/not0. All prior pending and closedv1/v2/v3 unchanged.",
+  "production_code_changed": false,
+  "new_model_jobs_started": 0,
+  "new_training_labels": 0,
+  "no_sha_validation": true,
+  "no_subagents": true,
+  "remaining": "Full corrected controls/savedCPU incl legacy,STATE108E2/factorial/expandedfeedback/T2/common-support,Host/lifecycle/costs,full external/protected/seeds0,1,2 remain. Optimization completion alone does not satisfy fit closure or any generalization outcome."
+}

@@ -1,3 +1,32 @@
+# LATEST V28 (2026-10-22): OPTIMIZATION524 DONE / FINAL EVALUATION STILL LIVE
+
+Full goal ACTIVE. ONLY real model job remains exec17952, parent3470595/child3470601,
+frozen d6a8afd3. Actual PIDs alive, run.json RUNNING524/524, driver still RUNNING.
+Recorded training8384draws/48034873input tokens. These counts are not a terminal curve audit.
+Final evaluation still writing: latest dev/524 numeric files278, train/524 andfeedback-dev/524
+zero, summaries absent. Do NOT equate524updates with COMPLETE or start savedCPU/another model.
+No metric/prediction contents read for selection. No hot update/restart/recipe/label change.
+Wait for actual parent/child terminal +run/driver COMPLETE +original unique compute record,
+then use existing complete-actions-postfit-commands-v1.json. No automatic model successor.
+Legacy savedCPU and all other required fits/controls remain pending.
+
+STILL LIVE CPU-ONLY exec37854/PID662822, same all-public-fixed-path audit asV27.
+Latest14/902paths closed; actual PID alive. Closed prefix has0state/head/Reader overflows,
+native maximum15937; this is only a prefix. Source ranges256/observation4096/return2048,
+actual IntentRetrievalMemory read admission/receipts/images, fixed-policy paths, both projections.
+No model weights/forward/HTTP/QA scoring; no replay/restart on timeout. Case archives and
+immutable bases retained. Final CPU unknown/not0. It does not write original ledger; a later
+legitimate fit settlement may change global bytes, which must never be undone or misattributed.
+
+No new production code/model jobs/labels/closed measured phase or offline settlement this turn.
+Monitoring unmeasured,not0. Original ledger ONLY /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/
+ser-v20/budget.json; all previous pending unchanged, closedv1/v2/v3 never reopen.
+Full remaining goal unchanged: terminal audit/savedCPU incl legacy, corrected controls,
+STATE108E2/factorial/expandedfeedback/T2/common-support, actualHost/lifecycle/costs, full
+external/protected/seeds0,1,2. No generalization outcome yet from this incomplete fit.
+No SHA/substitute fingerprints,subagents,push/merge/services/ProductSchema/API/permissions/
+Canonical changes. See progress-v28. Earlier snapshots remain historical.
+
 # LATEST V27 (2026-10-22): FIT484 LIVE / ALL PUBLIC FIXED PATHS CPU AUDIT LIVE
 
 Full goal ACTIVE. ONLY real model job remains exec17952, parent3470595/child3470601,
