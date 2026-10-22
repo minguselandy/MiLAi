@@ -1,3 +1,27 @@
+# LATEST V38 (2026-10-22): SAVED CPU LIVE / DEADLINES, APPOINTMENTS, OWNERSHIP AND WEIGH-INS
+
+Full goal ACTIVE. Only model remains exec8452, parent893356/driver893357/current child893516,
+all live. CPU-only exec37854/PID662822 also live. Revalidate actual PIDs and driver/counts.
+All seven saved candidates and selected train still required. No restart, condition change,
+early selection, second model or offline settlement while saved CPU evaluation lives.
+
+Four new source reviews C02,C27,F13,A22 in frozen batches014–017:92source units/8publicrequests,
+all turns read, each prefix7then23. Exact source copies and in-prefix references verified.
+Cumulative new-note coverage14families/322source units/28requests, not all historical review
+coverage or new independent sources. C02 separates official deadline/buffer target/rejected
+extension and unfinished work. C27 questionnaire completes but proposed appointment move does
+not. F13 retains actual sale/move-out, provisional house transaction and temporary residence.
+A22 keeps latest reported187.4lb, approximate loss intervals and hopeful186 separate; no health
+advice adopted. Reviews remain offline only, no labels/model inputs/source or quota changes.
+Actual new captured requests, Views, branches and answers still require subsequent review.
+See review-progress-v4 in feedback-source-review-v1 and tracked source-review-v4/progress-v38.
+
+New mechanical save/reference-check CPU0.005873282 pending; earlier V37CPU0.004544047,
+V36CPU0.006230720,V35CPU0.002314110,V34CPU0.042770830 separate. V34 inventory10663.791232191
+is existing74phase subtotal, not a new charge. Original ledger only, all prior pending and
+closedv1/v2/v3 untouched. Unmeasured reading/authoring unknown,not0. No production/model/label/
+SHA/subagent/service/push/merge changes. Full original scope and paused-queue boundaries intact.
+
 # LATEST V37 (2026-10-22): SAVED CPU LIVE / MEASUREMENT AND COMPLETION CONTEXT REVIEWED
 
 Full goal ACTIVE. Same only model exec8452, parent893356/driver893357/current child893516 live.
