@@ -1,0 +1,51 @@
+{
+  "status": "COMPLETE_LITERAL_ARCHIVE_ROUNDTRIP_NOT_RETENTION_CHANGE",
+  "report": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/sqlite-lossless-archive-probe-v1/report.json",
+  "post_process_byte_check": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/sqlite-lossless-archive-probe-v1/post-close-readback.json",
+  "format": "Standard XZ,preset0,CHECK_NONE; no content checksum or hash/fingerprint validation",
+  "pools": [
+    {
+      "pool": "pool-0",
+      "consistent_snapshot_bytes": 117305344,
+      "archive_bytes": 3231004,
+      "restored_bytes_literally_equal": 117305344,
+      "Store_table_rows": 13836,
+      "sqlite_quick_check": "ok",
+      "compression_nested": {
+        "cpu_seconds": 3.0722814300000003,
+        "wall_seconds": 3.072386432439089
+      },
+      "restoration_nested": {
+        "cpu_seconds": 3.4773843970000002,
+        "wall_seconds": 3.489062137901783
+      },
+      "snapshot": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/sqlite-lossless-archive-probe-v1/pool-0/snapshot.sqlite",
+      "archive": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/sqlite-lossless-archive-probe-v1/pool-0/snapshot.sqlite.xz",
+      "restore": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/sqlite-lossless-archive-probe-v1/pool-0/restored.sqlite"
+    },
+    {
+      "pool": "pool-1",
+      "consistent_snapshot_bytes": 94498816,
+      "archive_bytes": 3455816,
+      "restored_bytes_literally_equal": 94498816,
+      "Store_table_rows": 7352,
+      "sqlite_quick_check": "ok",
+      "compression_nested": {
+        "cpu_seconds": 2.8405565779999993,
+        "wall_seconds": 2.840778767131269
+      },
+      "restoration_nested": {
+        "cpu_seconds": 0.5130776370000003,
+        "wall_seconds": 0.5130912661552429
+      },
+      "snapshot": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/sqlite-lossless-archive-probe-v1/pool-1/snapshot.sqlite",
+      "archive": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/sqlite-lossless-archive-probe-v1/pool-1/snapshot.sqlite.xz",
+      "restore": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/sqlite-lossless-archive-probe-v1/pool-1/restored.sqlite"
+    }
+  ],
+  "snapshot_bytes": 211804160,
+  "archive_bytes": 6686820,
+  "main_db_copy_estimate_per_451_arm_bytes": 47431143424,
+  "main_db_archive_estimate_per_451_arm_bytes": 1511137684,
+  "scope": "Independent readonly SQLite backups of both complete preflight Stores. Direct byte equality after restore and again after process exit; SQLite quick_check and row counts pass. Original Stores, snapshots, compressed files and restores all retained. Projection is only a static main-DB estimate, excludes actual query growth/otherDBs/traces. No evaluator archival, deletion or retention change implemented."
+}

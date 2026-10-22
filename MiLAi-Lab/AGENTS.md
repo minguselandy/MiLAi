@@ -1,3 +1,69 @@
+# LATEST V25 (2026-10-22): FIT393 LIVE / FULL PAGES CLOSED / ALL SEARCHES EQUIVALENT
+
+Full goal ACTIVE. ONLY real model job remains exec17952, parent3470595/child3470601,
+frozen d6a8afd3. Actual PIDs alive; latest run.json RUNNING393/524. No post-update scores
+read for selection, hot update, restart, second model job or offline settlement. No automatic
+model successor. Old closed jobs never restart; paused Coalent remains untouched.
+
+ALL PREVIOUS CPU AUDITS CLOSED; no CPU audit needs restarting:
+1. exec68138/PID4070915 all-source-pages audit exited0, actual PID absent. Final
+   lme-all-source-pages-audit-v1/audit.json COMPLETE. Pool0:11987pages/3458Sources,
+   93966498characters,max native5606. Pool1:10835pages/1837Sources,77507410characters,
+   max native5544. TOTAL22822pages/5295Sources/171473908characters; full contiguous literal
+   coverage, state/head drops0, mask replacements0, Store/search unchanged, ledger unchanged.
+   This is complete mechanical paging, not8step policy coverage or task success.
+   Whole canonical CPU6340.347716984 now closes; prior partial timings never count separately.
+2. exec85875/PID362155 source-search-cache audit exited0, actual PID absent. Final
+   lme-source-search-cache-audit-v1/audit.json COMPLETE902searches/451public queries at8/16.
+   Both complete native pools; exact ranks/scores/full current material text/ranges/revisions.
+   Independent reference: frozen c85 old flat function through service once per bank, retain
+   its native BM25 corpus/units for all queries. First query also direct old-function integration
+   equality. Not902old re-indexings; no QA answers, policy, Reader or neural model calls.
+   Pool0 builds1/hits421, pool1 builds1/hits479. Current Source values/ledger unchanged.
+   Warm search medians0.886181068/0.481089677sec; maxima1.435324438/6.306860358.
+   Old reference single cold calls31.659456682/28.697868640sec. Reference validation reopens
+   outside per-search timings; not end-to-end cloned-runtime/Host latency or quality proof.
+   Canonical CPU1028.186257835 pending.
+3. exec44734/PID395866 sqlite-lossless-archive probe exited0, actual PID absent. Final
+   sqlite-lossless-archive-probe-v1/report.json COMPLETE, original ledger unchanged.
+   Independent readonly SQLite backups:117305344/94498816bytes -> XZ3231004/3455816bytes.
+   StandardXZ,preset0,CHECK_NONE; direct every-byte restore comparison and SQLite quick_check/
+   row counts pass. Rechecked all bytes after process exit, no sidecars (post-close-readback.json).
+   Originals, snapshots, archives and restores ALL retained. No evaluator archival/deletion/
+   retention policy implemented. Static main-DB per451arm projection44.17GiB ->1.41GiB,
+   excluding real case growth/other DBs/traces/checkpoints. Not future actual storage usage.
+   Canonical CPU11.819056254 pending; compression/restore subclocks nested, not extra costs.
+
+NEW CODE8e2178bd, freeze frozen-source-search-cache-8e2178bd/MiLAi-Lab,4literal file comparisons.
+SourceSearchCache owns one latest corpus per serial caller. Compare scope/tokenization/ordered
+strings literally, no digest/fingerprint. Cache only native statistics and their literal inputs;
+never queries/results/answers/old provenance. Every service call still checks current visibility,
+exclusions, assembly and reads current bindings. Identical-text replacement can reuse numerical
+statistics while fresh Source identities come from current units; revoked identities never return.
+Pinned rank-bm25 0.2.2 checked on hit/miss; native scoring/argsort preserved. No persistent index,
+new schema or service. MemoryService/functional.message cache argument optional(defaultNone);
+LME owns one per backend across isolated question clones, with private cumulative counters.
+21tests PASS,0skip(10new cache cases):native ties/empty/Unicode, changed text/scope/version,
+visibility/order/exclusions/new/forgotten/replaced Sources, real isolated backend queries.
+Ruff6,mypy4,package/tools PASS;6grandfathered private edges unchanged. All model work mocked.
+No live fit/data/label/projection/source-range256/View-budget changes. Preserve c85 View rejection.
+
+New CLOSED measured CPU6340.347716984+1028.186257835+11.819056254=7380.353031073 pending.
+Original ledger ONLY /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json.
+No offline settlement while real fit lives. Nested observations/report copies never re-bill.
+V24pending65.415592814,V23pending549.912019680,V22pending1505.460591140 and older pending
+unchanged; closed settlements v1/v2/v3 never reopen. Post-close readback, authoring/tests/import/
+freeze overhead unmeasured,unknown/not0. See progress-v25 and archive-feasibility-v1.
+
+Full external model readiness still NOT claimed: source-range256 actual-query post-operation/
+learned paths, full Reader contexts, existing-server vision/usage, saved-selected checkpoints,
+matched methods/seeds and real evaluation remain. Archive feasibility needs an explicit closed-
+case retention/restore integration before large matrix; do not discard raw evidence or shrink
+cohorts. Full goal still requires corrected fits/controls/savedCPU incl legacy, STATE108E2,
+factorial/expandedfeedback/T2/common-support, Host/lifecycle/costs and external/protected/seeds0,1,2.
+No SHA/substitute fingerprints,subagents,push/merge/services/ProductSchema/API/permissions/
+Canonical changes. Earlier snapshots historical; revalidate main fit before any model dispatch.
+
 # LATEST V24 (2026-10-22): FIT262 LIVE / ALL PUBLIC INITIAL INPUTS / VIEW BUDGET OUTCOME
 
 Full goal ACTIVE. ONLY real model job remains exec17952, parent3470595/child3470601,
