@@ -1,3 +1,22 @@
+# USER PAUSE / GITHUB PUBLICATION (2026-10-22)
+
+The user paused the full goal and requested submission to GitHub. Goal status is PAUSED;
+publication is authorized now. Stop autonomous research scheduling, new experiments and
+offline settlement until explicit resume. The read-only monitoring cell was terminated.
+Already-running saved-CPU driver893357/current child2253075 and CPU-only path audit662822
+were NOT signalled or restarted; they may continue and the existing driver may advance its
+own declared candidates. This is a goal pause, not a claim that OS processes are suspended.
+Before any future resume, inspect their actual processes and terminal artifacts; never
+duplicate runs or re-bill closed candidates0/32. All earlier paused queues remain untouched.
+
+Publish the existing local branch and this handoff. Keep raw data, weights, Stores and logs
+ignored. No SHA/content-fingerprint validation. Existing PR workflows include SHA checks,
+so this publication uses a branch push without opening a PR or triggering those workflows.
+No merge, Product/API/Schema/permission/Canonical changes or model-success claim. Full
+remaining study scope and pending-cost provenance are retained in the execution record.
+See data/manifests/training-generalization-publication-pause-20261022.json for the timed
+publication snapshot; live counts can advance after it.
+
 # LATEST V53 (2026-10-22): SAVED CPU UPDATE64 LIVE / CANDIDATE32 CLOSED AND BILLED
 
 Full goal ACTIVE. Same only model job exec8452,parent893356/driver893357 continues automatically.
