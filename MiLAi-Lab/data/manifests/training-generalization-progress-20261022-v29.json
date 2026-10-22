@@ -1,0 +1,100 @@
+{
+  "status": "ACTIVE_GOAL;FINAL_TRAIN_EVALUATION_LIVE;SERVER_VISION_PROBE_PREPARED",
+  "observed_at": "2026-10-22T04:22:59.262193+00:00",
+  "previous": "training-generalization-progress-20261022-v28.json",
+  "previous_turn_classification": "VERIFIED_WAIT:actual fit and CPU audit processes remained live; final dev/feedback completed and final train advanced. This turn prepared concrete three-image server conformance probe without dispatch.",
+  "active_fit": {
+    "session": 17952,
+    "parent_pid": 3470595,
+    "child_pid": 3470601,
+    "actual_pids_alive": true,
+    "status": "RUNNING",
+    "updates": 524,
+    "planned": 524,
+    "source_version": "d6a8afd3",
+    "final_evaluation_files": {
+      "train": {
+        "numeric_predictions": 1785,
+        "summary_exists": false
+      },
+      "dev": {
+        "numeric_predictions": 860,
+        "summary_exists": true
+      },
+      "feedback-dev": {
+        "numeric_predictions": 16,
+        "summary_exists": true
+      }
+    },
+    "metrics_not_read_for_selection": true,
+    "no_hot_update_restart_or_recipe_change": true
+  },
+  "public_fixed_path_audit": {
+    "session": 37854,
+    "pid": 662822,
+    "actual_pid_alive": true,
+    "status": "RUNNING",
+    "completed_paths": 27,
+    "planned_paths": 902,
+    "active": {
+      "row": 13,
+      "pool": "pool-0",
+      "delivery_selection": true
+    },
+    "native_overflow_paths_in_closed_prefix": 0,
+    "Reader_overflow_paths_in_closed_prefix": 0,
+    "scope": "Actual fixed-policy retrieval and full Reader input measurement only;no model/QA result. Still live,final cost unknown. No restart or automatic retry."
+  },
+  "vision_probe_preparation": {
+    "plan": "training-generalization-server-vision-probe-plan-v1.json",
+    "script": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/run_server_vision_probe_v1.py",
+    "source_freeze": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/frozen-lme-archives-a33974c0/MiLAi-Lab",
+    "source_version": "a33974c0",
+    "cases": [
+      {
+        "case": 0,
+        "image": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/server-vision-probe-preparation-v1/image-0.png",
+        "size": [
+          64,
+          128
+        ],
+        "expected_color_offline_only": "red",
+        "query_only_prompt_tokens": 243,
+        "query_only_total_reserved_tokens": 8947
+      },
+      {
+        "case": 1,
+        "image": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/server-vision-probe-preparation-v1/image-1.png",
+        "size": [
+          2048,
+          1024
+        ],
+        "expected_color_offline_only": "blue",
+        "query_only_prompt_tokens": 2219,
+        "query_only_total_reserved_tokens": 10923
+      },
+      {
+        "case": 2,
+        "image": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/server-vision-probe-preparation-v1/image-2.png",
+        "size": [
+          1280,
+          720
+        ],
+        "expected_color_offline_only": "green",
+        "query_only_prompt_tokens": 1051,
+        "query_only_total_reserved_tokens": 9755
+      }
+    ],
+    "model_jobs_started": 0,
+    "scope": "Exact solid-color synthetic PNGs with neutral filenames and same request/choice set. Query-only local counts243/2219/1051, excluding actual empty receipt added by later runtime. Native server input/usage and parsed color will be checked separately after original metered Reader calls. Expected color not case-specific input. Basic conformance only,not broad vision/benchmark accuracy.",
+    "execution": "Concrete script syntax checked; current fit must close and all real-model script handles be absent. Actual normal empty-history given retrieval followed by predict_reader uses original durable admission/queue/ledger. Same host/model/caps; no server changes or retries. Script not run."
+  },
+  "new_closed_measured_phases": [],
+  "costs": "Fixture/image/local-counter preparation and authoring unmetered,unknown/not0. No real calls or settlement. Live fit/audit costs unfinished. Existingpending and closedv1/v2/v3 unchanged.",
+  "production_code_changed": false,
+  "new_model_jobs_started": 0,
+  "new_training_labels": 0,
+  "no_sha_validation": true,
+  "no_subagents": true,
+  "remaining": "Terminal fit audit/savedCPU candidates incl legacy,remaining corrected controls,STATE108E2/factorial/expandedfeedback/T2/common-support,Host/lifecycle/costs,actual server probe and full external/protected/seeds0,1,2. No current weight selection or generalization conclusion."
+}

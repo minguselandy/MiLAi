@@ -1,3 +1,43 @@
+# LATEST V29 (2026-10-22): FINAL TRAIN EVAL LIVE / SERVER IMAGE PROBE READY NOT RUN
+
+Full goal ACTIVE. ONLY real model job remains exec17952,parent3470595/child3470601,
+frozen d6a8afd3. Actual PIDs alive; run RUNNING524. Final dev860 andfeedback16 summaries
+exist; final train latest1785/4886, summary absent. NO metric/prediction contents read for
+selection. Optimization complete is not terminal fit closure. No hot update/restart/second
+model/offline settlement. After actual terminal parent/child +COMPLETE524+unique ledger phase,
+use complete-actions-postfit-commands-v1.json for full terminal audit and savedCPU candidates.
+Legacy savedCPU and other declared comparisons remain pending. No automatic successor.
+
+CPU audit exec37854/PID662822 remains actual live, same all-public-fixed-path-v1.
+Latest27/902paths closed, prefix state/Reader overflows0; no full-cohort claim. Actual
+fixed-policy retrieval/receipts and local full Reader capacity, no models/HTTP/QA. Do not
+restart on timeout. Final CPU unknown. Legitimate fit settlement may change ledger bytes;
+audit does not write ledger and must not undo external legitimate charges.
+
+NEW PREPARATION ONLY: server-vision-probe-plan-v1.json, tracked matching manifest,
+server-vision-probe-preparation-v1/{config.json,cases.json,query.txt,image-0/1/2.png}.
+Exact synthetic solid-color RGB PNGs64x128red,2048x1024blue,1280x720green; neutral filenames,
+same question/choice set for all. Expected color is offline-only, never a case-specific prompt.
+Local query/image-only prompt counts243/2219/1051; later actual empty-evidence receipt adds
+tokens, so these are NOT the actual future wire expectations. Existing image processor/caps.
+run_server_vision_probe_v1.py prepared/syntax-checked, NOT EXECUTED. Its exact argv/env in plan.
+Frozen a33974c0 +CUDA4.52.3 interpreter, HTTPsite/Pillowoverlay, CUDA_VISIBLE_DEVICES=''.
+Before running: current corrected fit COMPLETE with actual parent/child absent and no other
+real model script handles. Then normal empty-history given retrieval followed by existing
+predict_reader: three planned Reader calls through actual durable admission/queue/original
+ledger, no service/model/cap changes. Preserve raw responses/usage; compare actual complete
+wire count and parsed color separately. Unknown usage/incomplete response not a pass.
+No retries/repair; all3needed for probe pass, not broad vision/benchmark certification.
+No real server calls or new model jobs started. Output server-vision-probe-v1 absent.
+
+No new production code/labels/closed measured phase or settlement. CPU fixture preparation,
+local counters/authoring unmeasured,unknown/not0. Original ledger ONLY
+/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json; all pending and closed
+settlementsv1/v2/v3 unchanged. No SHA/substitute fingerprints,subagents,push/merge/services/
+ProductSchema/API/permissions/Canonical changes. Full remaining original scope unchanged:
+fits/controls/savedCPU incl legacy,STATE108E2/factorial/expandedfeedback/T2/common-support,
+Host/lifecycle/costs,server conformance and full external/protected/seeds0,1,2. See progress-v29.
+
 # LATEST V28 (2026-10-22): OPTIMIZATION524 DONE / FINAL EVALUATION STILL LIVE
 
 Full goal ACTIVE. ONLY real model job remains exec17952, parent3470595/child3470601,
