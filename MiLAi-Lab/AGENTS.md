@@ -1,3 +1,27 @@
+# LATEST V33 (2026-10-22): SAVED CPU LIVE / VIEW-POSITIVE SOURCE AND DRAW COVERAGE
+
+Full goal ACTIVE. ONLY real model exec8452,parent893356/driver893357/current evaluator893516,
+actual PIDs alive; RUNNING update0,latest148/876states. All7candidates and matching selected
+train still required; deployment selectionNone. No new model/restart/parameter change/settlement.
+CPU-only exec37854/PID662822 also live,latest75/902paths. Do not restart either live job.
+
+NEW closed offline diagnostic complete-actions-view-supervision-provenance-v1.json:
+64source cohort:1REFRESH_VIEW-positive state,memops_A05.128and256:2REFRESH_VIEW and1USE_VIEW
+positive states,only memops_A01/A05. All from operation_history,generative collector8f7f2a18.
+128->256 expansion added no View-positive state. Actual completed source256 training-plan
+8384draws exposed each of these3states twice. One REFRESH-positive state also accepts READ.
+Counts are states/families/draws, NOT gradient mass, causal proof or counts of all beneficial
+Views. Do not relabel old examples or infer unexecuted alternatives are bad. Existing STATE
+E2/expanded feedback plans remain unchanged and must supply actual outcome evidence later.
+
+Canonical measured CPU8.933107323 pending; no model calls/new labels/production changes.
+Original ledger only /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json.
+All prior pending unchanged; trainer already billed,closedv1/v2/v3 never reopen. No offline
+settlement while savedCPU lives. Unmeasured authoring/monitoring unknown/not0. No SHA/substitute
+fingerprints,subagents,push/merge/services/ProductSchema/API/permissions/Canonical changes.
+Full original remaining fits/controls/savedCPU/feedback/Host/external/protected/seeds scope
+unchanged. See progress-v33. Old closed jobs remain closed; historical paused queues untouched.
+
 # LATEST V32 (2026-10-22): SAVED CPU LIVE / PROTECTED ROLE BOUNDARIES RECONCILED
 
 Full goal ACTIVE. ONLY real model remains exec8452,parent893356/driver893357/current child893516,
