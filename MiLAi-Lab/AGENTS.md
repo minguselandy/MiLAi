@@ -1,3 +1,30 @@
+# LATEST V32 (2026-10-22): SAVED CPU LIVE / PROTECTED ROLE BOUNDARIES RECONCILED
+
+Full goal ACTIVE. ONLY real model remains exec8452,parent893356/driver893357/current child893516,
+actual PIDs alive. SavedCPU driver RUNNING update0,latest116/876states. Conditions/7candidates/
+selected-train unchanged; no deployment selection. No other model, restart or offline settlement.
+CPU-only exec37854/PID662822 also alive; latest68/902closed, prefix native/Reader overflows0.
+These are incomplete jobs, not blocked or terminal. Old fit and all old audits remain closed.
+
+NEW metadata-only protected-confirmation-role-inventory-v1.json/tracked counterpart:
+Original MuSiQue reserved49groups=349uniquequestions/698source rows.14groups/28rows already
+source-reviewed historically; remaining35are just a set difference, exposure UNESTABLISHED.
+Do not call either set fresh/blind or select a new panel from current outcomes. All49 remain
+excluded from current gradient/development through existing boundary protocol. No new protected
+source/question/answer bodies or numerical model outcomes read for selection this turn.
+Historical global-final-confirmation two-user queue has explicit PAUSED_BY_USER record and
+semantic content already accessed. No process signals, resume, duplicate queue or reclassification.
+Old LongMemEval-S shared histories remain exposed development; current LME-V2 Small remains
+disclosed regression. STATE test bodies not opened here; final method/task/repetition freeze
+still required. Metadata roles do not replace actual exposure reconciliation or final validation.
+
+New measured metadata-program CPU0.001291541pending; earlier exploratory reads/authoring
+unmeasured,unknown/not0. No production changes/models/labels/new final panel. Original ledger
+ONLY /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json; all prior pending
+unchanged,closedv1/v2/v3 never reopen. No SHA/substitute fingerprints,subagents,push/merge/
+services/ProductSchema/API/permissions/Canonical changes. Full original goal still requires
+all savedCPU/controls/feedback/Host/external/protected/multiseed work. See progress-v32.
+
 # LATEST V31 (2026-10-22): SAVED CPU LIVE / FEEDBACK VIEW-SUPERVISION COVERAGE
 
 Full goal ACTIVE. ONLY real model remains exec8452,parent893356/driver893357/current child893516,
