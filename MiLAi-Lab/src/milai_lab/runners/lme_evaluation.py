@@ -108,9 +108,9 @@ def predict_cohort(
                     backends[pool] = memory
                 memory = backends[pool]
                 local_index = memory.queries
-                context = memory.query(query, query_image)
                 runtime = memory.output/"cases"/f"{local_index:04d}"
                 case["runtime"] = str(runtime.resolve())
+                context = memory.query(query, query_image)
             finally:
                 case["retrieval_cpu_seconds_nested"] = time.process_time()-child_cpu
                 nested_cpu += case["retrieval_cpu_seconds_nested"]
