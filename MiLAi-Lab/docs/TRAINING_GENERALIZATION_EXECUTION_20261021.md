@@ -4,6 +4,23 @@
 [原计划](MILAI_TRAINING_DATA_GENERALIZATION_PLAN_20261021.md)，原文复制留存，原目录文件未修改。
 该计划中的“本轮已完成”是另一环境的历史说明，不能代替本机当前验证。
 
+## 续次执行 v51（2026-10-22）：补齐四池全文笔记并建立原训练来源索引
+
+仅从公开材料完成两个旧T0族的四份来源池全文评审，未使用原生答案、支持标记或模型输出。
+80次段落出现中57段正文直接读完、23次为配对池中已读正文的字面复用，逐段引用及范围核对通过。
+两个Ode to Joy池可识别Schiller，但没有死亡地点关系；另一作品的Weimar首演不能充当死亡证据。
+Lou Rawls的18441池提供歌手和录音相关公司的上下文线索；33114池明确支持1976录音的Philadelphia International Records，
+同时保留1962 Capitol发行和1990 Blue Note再版等不同关系。单段已有完整限定证据时，不人为要求两次READ。
+
+离线来源索引已连接原128个训练组、每采集器251个公开请求（三策略753位置）：122历史请求、85扩容先审、40旧T1笔记、4份新全文笔记。
+它复用关闭的字面核对记录，不重计旧费用；旧标签和来源池未改。这是公开材料的评审依据，不替代未来实际Host请求、View、到达状态、分支和答案的评审，亦不证明模型收益。
+原CPU评估仍在update32，纯CPU查询审计继续运行，完整目标未完成。
+
+新笔记绑定/引用核对CPU0.005725985及独立索引CPU0.034056420，共 **0.039782405秒待结算**，语义工作未知。
+见[四池全文评审](../data/manifests/training-generalization-feedback-document-source-reviews-v1.json)、
+[训练来源证据索引](../data/manifests/training-generalization-feedback-primary-source-evidence-index-v1.json)及
+[进度v51](../data/manifests/training-generalization-progress-20261022-v51.json)。
+
 ## 续次执行 v50（2026-10-22）：71组文档来源与既有评审对应
 
 对冻结训练池另71组文档来源的129个公开请求进行来源绑定核对：问题及2570次段落出现的内容、身份和顺序全部字面一致，零差异。

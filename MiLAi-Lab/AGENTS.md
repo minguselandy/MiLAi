@@ -1,3 +1,38 @@
+# LATEST V51 (2026-10-22): SAVED CPU UPDATE32 LIVE / PRIMARY SOURCE EVIDENCE INDEX COMPLETE
+
+Full goal ACTIVE. Only model exec8452,parent893356/driver893357/current child1589315 live,
+update32 latest455/876states;one of seven candidates closed. Candidate0 already billed once,
+never restart/re-bill. All remaining candidates and selected train required;no partial selection.
+CPU-only exec37854/PID662822 live,248/902paths,closed-prefix state/head/Reader overflows0.
+Revalidate actual PIDs/current driver. No second model/probe/fit/E2, inference change or offline
+settlement while original saved CPU job lives. Observation timeout is not terminal.
+
+Four legacy source pools now fully reviewed from public cards, without native answers/support
+or model outputs:musique104 rows4099/14364 identify Schiller but lack death-location relation;
+Weimar in4099 is a different work's premiere location,not a death witness. musique766 row18441
+has explicit performer and contextual Philadelphia International recording link;33114 explicitly
+supports the1976recording's Philadelphia International Records and preserves Capitol1962/
+BlueNote1990reissue scopes. Do not collapse to a sole timeless label or insist on two reads when
+one paragraph closes a scoped proof.80paragraph appearances covered:57directly read bodies,
+23literal reused appearances;single author/prior metadata exposure disclosed. Old labels unchanged.
+Canonical new notes:feedback-document-source-review-v1/reviews;closure review-closure-v1.json.
+
+NEW feedback-primary-source-evidence-index-v1.json links ALL128registered train groups and
+251primary public requests per collector (753positions across declared3collectors):122history
+requests from57new source notes,85source-expansion reviews,40legacyT1notes,4newfull-pool notes.
+Old provenance audit and witness reviews retained. Index is offline lookup only, never online
+input/gold. Coverage of primary source grounding does NOT review actual future Host requests,
+known materials,Views,reached states,branches or answers. Full model/feedback/Host/external/
+protected/seed work remains. Do not repeat closed source reviews or invent more diagnostic layers
+just to fill the wait; verified waiting on actual live jobs is valid when no independent work remains.
+See tracked document-source-reviews-v1,primary-source-evidence-index-v1 and progress-v51.
+
+New pending CPU:note binding/quote/literal checks0.005725985+separate index0.034056420=0.039782405.
+V50CPU0.113433659 and older phases separate. Candidate0CPU43688.529695180 already billed;
+V34inventory10663.791232191 existing74phase subtotal,not new cost. Original ledger only;
+closedv1/v2/v3 untouched. Unmeasured semantic/authoring work unknown,not0. No production/labels/
+SHA/subagents/services/push/merge. Full scope and all previously paused queues unchanged.
+
 # LATEST V50 (2026-10-22): SAVED CPU UPDATE32 LIVE / 71 DOCUMENT GROUPS RECONCILED
 
 Full goal ACTIVE. Only model exec8452,parent893356/driver893357/current child1589315 live,

@@ -1,0 +1,54 @@
+{
+  "status": "ALL251_PRIMARY_TRAIN_REQUESTS_HAVE_LINKED_SOURCE_REVIEW_EVIDENCE;REAL_FEEDBACK_PENDING",
+  "plan": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-expansion-study-plan-v2.json",
+  "registered_source_groups": 128,
+  "public_requests_per_collector": 251,
+  "declared_collectors": [
+    "rules",
+    "laya",
+    "fixed_context"
+  ],
+  "collection_positions": 753,
+  "evidence_request_counts": {
+    "current_history_public_source_note": 122,
+    "generalization_source_first": 85,
+    "legacy_t1_source_notes": 40,
+    "supplemental_full_document_pool_note": 4
+  },
+  "closed_literal_audit_reused": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-document-review-provenance-v2.json",
+  "supplemental_document_closure": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-document-source-review-v1/review-closure-v1.json",
+  "binding_scope": "New index checks identities/counts,all history snapshots and four new document-card equalities. It reuses the closed v2 literal audit for remaining frozen document inputs;does not rerun or re-bill that audit.",
+  "scope": "Offline lookup only. Original128train groups,251public positions and three collectors unchanged. Mixed evidence ages and one-author reviews are disclosed;not 251independent tasks or fresh/blind validation. Prior notes,qualifications and labels retained. This covers primary public-source grounding,not actual generated retrieval queries,intents,known materials,Views or branch outcomes. No automatic action labels.",
+  "online_inputs_changed": false,
+  "new_operation_labels": 0,
+  "model_calls": 0,
+  "no_sha_validation": true,
+  "ledger_recorded": false,
+  "ledger_write_calls": 0,
+  "compute_scope": "Only this separate index process measured;prior note/audit timings not summed. Authoring,inspection and unmeasured overhead unknown,not0.",
+  "compute": {
+    "cpu_seconds": 0.034056420000000004,
+    "wall_seconds": 0.03406211454421282
+  },
+  "canonical_index": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-primary-source-evidence-index-v1.json",
+  "index_program": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/index_feedback_source_evidence_v1.py",
+  "entry_count": 251,
+  "source_note_closure_manifest": "data/manifests/training-generalization-feedback-document-source-reviews-v1.json",
+  "new_compute_phases": [
+    {
+      "id": "feedback_legacy_document_full_pool_note_binding_v1",
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-document-source-review-v1/review-closure-v1.json",
+      "cpu_seconds": 0.005725985000000003,
+      "wall_seconds": 0.00573041383177042,
+      "ledger_recorded": false
+    },
+    {
+      "id": "feedback_primary_source_evidence_index_v1",
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-primary-source-evidence-index-v1.json",
+      "cpu_seconds": 0.034056420000000004,
+      "wall_seconds": 0.03406211454421282,
+      "ledger_recorded": false
+    }
+  ],
+  "new_CPU_seconds_pending": 0.03978240500000001
+}
