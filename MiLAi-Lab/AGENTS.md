@@ -1,3 +1,32 @@
+# LATEST V41 (2026-10-22): SAVED CPU LIVE / INDEPENDENT STORED-RECORD REQUESTS REVIEWED
+
+Full goal ACTIVE. Only model remains exec8452, parent893356/driver893357/current child893516,
+all live. CPU-only exec37854/PID662822 also live. Revalidate actual PIDs and driver/counts.
+All seven saved candidates and selected train still required. No restart, inference change,
+early selection, second model or offline settlement while saved CPU evaluation lives.
+
+Four new source reviews A04,B02,D20,D17 in frozen batches027–030:92distinct within-history
+source units/10public requests. Ordinary prefixes7then23, plus A04's two independent current/
+first-record requests. Their46copied source entries match literal contents,roles,originalIDs;
+four declared writes across two banks share two distinct literal texts, not new source units.
+Read actual declared collector code2a179b58: independent banks seed sources then save_edit and
+update_edit one record. Current text is last declared revision, first version is first revision;
+actual new runtime receipts/version IDs still pending. Do not substitute a better semantic
+summary for stored record text or invent action labels. Current source files equal frozen code.
+v1/v2 feedback plan source paths equal. Batch026 Wiki mus689 has existing source-first reviews
+for rows28520/37892; metadata confirmed, no new semantic review/labels claimed.
+
+New-note totals26families/598source units/54requests, not total historical review coverage or
+new independent sources. Notes offline only; actual new requests/Views/branches/answers still
+need review. Source pool,quotas,order,splits unchanged. Next batches start031 (A07 later also has
+independent record requests; inspect schemas, do not assume all requests have incoming_sources).
+See review-progress-v7 in feedback-source-review-v1 and tracked source-review-v7/progress-v41.
+
+New note-save/literal/code-check CPU0.007640478 pending; all earlier phase costs separate,
+V34inventory10663.791232191 is existing74phase subtotal, never extra cost. Original ledger only;
+pending/closedv1/v2/v3 untouched. Unmeasured semantic work/failed metadata previews unknown,not0.
+No production/model/label/SHA/subagent/service/push/merge changes. Full scope and paused queues intact.
+
 # LATEST V40 (2026-10-22): SAVED CPU LIVE / ACTUAL USE, REQUESTS AND CANCELLED CHANGES
 
 Full goal ACTIVE. Only model remains exec8452, parent893356/driver893357/current child893516,
