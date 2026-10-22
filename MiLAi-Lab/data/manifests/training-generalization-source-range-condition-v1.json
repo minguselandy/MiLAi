@@ -1,0 +1,46 @@
+{
+  "status": "IMPLEMENTED_AND_SYNTHETICALLY_VERIFIED;REAL_INPUT_CANDIDATE_NOT_FINAL_EXTERNAL_CONDITION",
+  "declared_at": "2026-10-22T00:49:35.683805+00:00",
+  "source_version": "bcebf420",
+  "source_freeze": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/frozen-source-ranges-bcebf420-v2/MiLAi-Lab",
+  "literal_source_files_equal": [
+    "src/milai_lab/methods/source_ranges.py",
+    "src/milai_lab/methods/evidence_reading.py",
+    "src/milai_lab/methods/intent_retrieval.py",
+    "src/milai_lab/providers/contextual_capacity.py",
+    "src/milai_lab/runners/functional.py"
+  ],
+  "no_sha_validation": true,
+  "basis": "V22 full trajectory SEARCH/READ overflow, before any benchmark question/answer/model outcomes.",
+  "configuration": {
+    "source_observation_tokens": 4096,
+    "source_range_tokens": 512,
+    "source_top_k": 16,
+    "search_batch_sizes": [
+      8,
+      16
+    ],
+    "return_tokens": 2048,
+    "control_steps": 8,
+    "representation": "shared_actions",
+    "controller_max_len": 16384,
+    "head_max_len": 2048
+  },
+  "algorithm": "Existing full-bank session search first. Split every returned Source body into contiguous Unicode ranges of at most512nativeHost tokens, counting exact fragment retokenization. Existing BM25 ranks fragments with the request and returns requested8/16candidates. READ reopens original identity/revision/range. Explicit context expansion opens previous/current/next ranges of the SAME Source.",
+  "information_scope": "Changed observation/read granularity, NOT equal-information model projection. Full Store/haystack remains. Only actually returned session pools are split; not global fragment ranking across unreturned sessions. All later comparison arms must share the condition.",
+  "data_and_images": "Original Sources/roles/timestamps/images unchanged. Partiality visible via exact ranges and total source characters. Image still requires complete delivered locator; unrelated body fragments do not automatically receive screenshots. No gold filtering, captions, case rules, altered model limits or model calls.",
+  "defaults": "Unset preserves whole exchanges; primary training/data/frozen evaluations unchanged.",
+  "validation": {
+    "unique_passed": 78,
+    "failed": 0,
+    "skipped": 0,
+    "new_range_tests": 7,
+    "new_image_tests": 2,
+    "ruff_files": 7,
+    "mypy_implementation_files": 5,
+    "package_tools_boundaries": "PASS;6grandfatheredprivateedges unchanged",
+    "initial_fixture_failures": "v1/v2preserved. Corrected author assertions about READ/SEARCH/selected HANDOFF counts and missing synthetic tool-origin; production accounting not changed.",
+    "models": "No weights/HTTP; realStore/mockHost/native tokenizers."
+  },
+  "pending": "Full returned-pool range coverage and real base/context READ inputs, actual queries/cumulative reads/View/own-policy paths, all-source-page closure, server imageprobe, checkpoint/method/seedfreeze. No accuracy or full-cohort readiness claim."
+}

@@ -1,3 +1,82 @@
+# LATEST V23 (2026-10-22): FIT139 LIVE / RANGE512 FAILURE / RANGE256 FIXED-PATH INPUTS PASS
+
+Full goal ACTIVE. ONLY real model job remains exec17952, parent3470595/child3470601,
+frozen d6a8afd3. Actual PIDs alive; latest run.json RUNNING139/524. No post-update score
+selection, hot update, restart, second model job or offline settlement. No automatic model
+successor. Old closed fits/STATE/source jobs never restart; paused Coalent stays untouched.
+
+NEW CODE bcebf420: optional memory_control.source_range_tokens, wired through normal rich
+retrieval. Unset preserves whole exchanges. Existing full-bank session SEARCH first; within
+that actual pool, split Source bodies into contiguous Unicode ranges using native Host token
+offsets and exact fragment counts, then existing BM25 selects requested8/16 candidates.
+READ reopens real identity/revision/range; context opens previous/current/next range of the
+SAME Source. Partial ranges and total Source characters are disclosed. Original Source values,
+roles, images and full bank remain intact; no captions/gold filtering/benchmark rules.
+This changes observation/read granularity, NOT an equal-information projection. It is NOT
+global fragment ranking across unreturned sessions. Must match across arms if later admitted.
+Default model/training/data/labels unchanged. Existing image attachment still requires an
+actually delivered complete locator; other body fragments do not automatically get images.
+
+Freeze: frozen-source-ranges-bcebf420-v2/MiLAi-Lab. Five changed implementation files literally
+equal committed source. First archive attempt failed before copying due to cwd-relative path
+selection; failed folder retained, no model run/retry. No SHA/substitute fingerprints used.
+78 unique latest tests PASS,0skip:7new range tests,2new image-boundary tests,69existing tests.
+Real Store/default behavior/visibility/Unicode/native runner verified; Host mocked/no weights.
+v1/v2 fixture failures retained; author accounting expectations and missing synthetic tool
+origin corrected without changing production accounting. Ruff7,mypy5,package/tools PASS;
+6grandfathered private edges unchanged. No test result is research model effectiveness.
+
+CLOSED CPU DIAGNOSTIC exec3875/PID4178857, exit0, actual PID absent:
+audit_lme_source_range_inputs_v1.py -> lme-source-range-input-audit-v1/audit.json.
+Same synthetic query on both full100-trajectory banks, actual SEARCH8 then first ordinary
+READ and context READ, paired delivery_selection false/true. Candidate512Host-token ranges,
+source observation4096, return2048, native16384/head2048. All16decision inputs no state/head
+drops or mask replacements. Pool0 base/context packets713/1294; native max9778(false),
+8833(true). Pool1 packets767/1446; native max10251(false),8917(true). All eight reads opened.
+Returned8session pools each:539/214Source units,7812/3955ranges,10791657/5006515characters
+literally/contiguously covered. This is coverage of actual returned pools, not all5295Sources;
+paired copies do not double counts. New first fragment can differ from old first session,
+so713tokens do NOT contain the old946169token candidate's information. No QA/model accuracy.
+Original ledger unchanged. Canonical CPU133.567970440 seconds pending, no offline settlement.
+
+CLOSED CUMULATIVE512 AUDIT exec32900/PID3227, exit0, actual PID absent:
+audit_lme_source_range_fixed_path_v1.py -> lme-source-range-fixed-path-audit-v1/audit.json.
+32actual fixed-policy decision inputs. Pool0 native maxima8699(false)/15414(true), no drops;
+pool1 9370(false), true step7 drops511state tokens, head0. At that input5materials acquired,
+4undelivered bodies,1visible evidence,15pending candidates. Search8/16 then context0 opens;
+context1..4 fail return budget but accumulate controller-only bodies. Fixed CPU policy does
+not require Laya, so diagnostic continued; NO truncated model forward.512condition NOT ADMITTED.
+Original ledger unchanged, canonical CPU208.790618718 pending. Keep this failure unchanged.
+
+CLOSED256 AUDIT exec28996/PID23035, exit0, actual PID absent:
+audit_lme_source_range_fixed_path_v2.py -> lme-source-range-fixed-path-audit-v2/audit.json.
+One declared revision512->256tokens, all other conditions unchanged. Plan source-range-
+condition-plan-v2.json/tracked training-generalization-source-range-condition-v2.json.
+All32native fixed-policy inputs:state/head drops0,mask replacements0. Pool0 native maxima
+9188(false)/13454(true), pool1 9566(false)/14207(true). Final2visible materials each condition;
+true modes acquired6, false modes do not retain rejected controller-only bodies. No model,
+View or HTTP. Paired static search cache/local counters are diagnostic-only, not full functional
+admission/latency comparison or learned-policy success. Original ledger unchanged;
+canonical CPU207.553430522 pending. Keep512failure. No automatic further halving/retry.
+
+STILL LIVE CPU-ONLY exec68138/PID4070915 audit_lme_all_pages_v1.py ->
+lme-all-source-pages-audit-v1/audit.json. Last RUNNING pool0 page11400/3290Sources complete.
+All-original paging test, not8step ability. Inspect actual PID before action; do not restart
+on timeout. Final state/head drops and Store/search invariance must be inspected.
+Its final costs unknown. New closed CPU133.567970440+208.790618718+207.553430522
+=549.912019680pending, no offline settlement.
+Nested search/setup clocks, paired summaries and report copies never count again. V22pending
+1505.460591140 and all older pending unchanged; closed v1/v2/v3 never reopen. Original ledger
+ONLY /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json.
+
+512range condition is NOT admitted;256 is a candidate, NOT final LME readiness. Need
+actual questions/View/own-policy inputs, all-page closure, existing-server image/usage probe,
+saved-selected checkpoints and final matched method/seeds. Do not change live frozen fit.
+Full remaining scope unchanged: corrected fits/controls/savedCPU incl legacy; STATE108E2,
+factorial/expandedfeedback/T2/common-support; Host/lifecycle/costs; external/protected/seeds0,1,2.
+No subagents, push/merge/services/ProductSchema/API/permissions/Canonical changes. See progress-v23,
+source-range-condition-v2 and execution doc. Earlier snapshots remain historical.
+
 # LATEST V22 (2026-10-22): FIT128 LIVE / SEARCH-READ CAPACITY FAILURE
 
 Full goal ACTIVE. The ONLY real model job remains exec17952, parent3470595/child3470601,
