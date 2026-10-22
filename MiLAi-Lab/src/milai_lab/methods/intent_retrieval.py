@@ -39,6 +39,7 @@ from milai_lab.methods.memory_control import (
     MemoryControlState,
     run_memory_control,
 )
+from milai_lab.methods.source_ranges import SourceRangeBudget
 
 TOOL_DESCRIPTION = (
     "Retrieve evidence from existing memory for your current task. Supply the full query; "
@@ -56,7 +57,7 @@ def material_binding(item: dict[str, Any]) -> dict[str, Any]:
     result = {key: copy.deepcopy(item[key]) for key in (
         "kind", "id", "record_id", "revision", "version_view", "visibility", "body_delivered",
         "source_ranges", "context_source_ranges", "focus_source_ranges", "source_bindings",
-        "source_observation_read")
+        "source_observation_read", "source_range_read")
         if key in item}
     if "support_turns" in item:
         result["support_turns"] = [{key: turn[key] for key in (
@@ -91,6 +92,7 @@ class IntentRetrievalMemory(FunctionalEditMemory):
                  capture_control_steps: bool = False,
                  control_intervention: FirstActionIntervention | None = None,
                  control_delivery_selection: bool = False,
+                 control_source_ranges: SourceRangeBudget | None = None,
                  return_envelope: Callable[[dict[str, Any]], Any] | None = None,
                  **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
@@ -102,8 +104,11 @@ class IntentRetrievalMemory(FunctionalEditMemory):
         self.capture_control_steps = capture_control_steps
         self.control_intervention = control_intervention
         self.control_delivery_selection = control_delivery_selection
+        self.control_source_ranges = control_source_ranges
         self.return_envelope = return_envelope
         self.policy["retrieval_interface"] = retrieval_interface
+        if control_source_ranges is not None:
+            self.policy["source_range_tokens"] = control_source_ranges.tokens
 
     def return_tokens(self, packet: dict[str, Any]) -> int:
         """Budget the actual adapter envelope before selecting complete materials."""
@@ -275,7 +280,9 @@ class IntentRetrievalMemory(FunctionalEditMemory):
                        if self.control_internal_views else [])
             materials = build_evidence_packs(self.service, request.query,
                 request.task_context.as_of or "", native["source_materials"], records,
-                tokenization=self.source_tokenization)
+                tokenization=self.source_tokenization,
+                source_range_budget=self.control_source_ranges,
+                source_range_limit=min(limit, self.source_top_k))
             return (self.control_rank_pool(query, materials)
                     if self.control_rank_pool else materials)
 

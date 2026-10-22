@@ -98,6 +98,11 @@ class HostCapacity:
             raise ValueError(f"INVALID_CAPACITY_{name.upper()}")
         return value
 
+    def text_offsets(self, text: str) -> list[tuple[int, int]]:
+        """Native Unicode character offsets for explicit literal-range retrieval."""
+        return list(self.tokenizer(text, add_special_tokens=False,
+            return_offsets_mapping=True)["offset_mapping"])
+
     def text_tokens(self, text: str) -> int:
         if not isinstance(text, str):
             raise TypeError("TEXT_TOKENS_REQUIRES_STRING")

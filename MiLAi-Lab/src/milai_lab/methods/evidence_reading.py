@@ -8,7 +8,7 @@ import re
 from collections.abc import Callable
 from typing import Any, Literal
 
-from jsonschema import Draft202012Validator  # type: ignore[import-untyped]
+from jsonschema import Draft202012Validator
 
 from milai_lab.memory.dependency_groups import select_support_routes, support_status
 from milai_lab.memory.edit_units import read_revision_evidence
@@ -20,6 +20,7 @@ from milai_lab.memory.working_set import material_ref, plan_delivery
 from milai_lab.methods.dependency_memory import query_support
 from milai_lab.methods.edit_maintenance import parse_object
 from milai_lab.methods.edit_memory import EditMemory
+from milai_lab.methods.source_ranges import SourceRangeBudget, source_range_packs
 
 
 def unit_closure(state: dict[str, Any], unit_id: str) -> tuple[list[str], list[dict[str, Any]]]:
@@ -85,11 +86,15 @@ def build_evidence_packs(
     calendar_context: str | None = None,
     source_scope: dict[str, Any] | None = None,
     dependency_selections: dict[str, Any] | None = None,
+    source_range_budget: SourceRangeBudget | None = None,
+    source_range_limit: int = 16,
 ) -> list[dict[str, Any]]:
-    """Split only the captured pool; keep complete exchanges and one preceding exchange.
+    """Split only the captured pool; default to complete exchanges with prior context.
 
     Full captured parent ranges stay program-side for explicit context expansion.
     No later session source, semantic formation or new retrieval enters this pool.
+    An explicit range budget instead ranks literal fragments inside this same pool,
+    with adjacent same-Source ranges as context and a declared candidate limit.
     """
     source_packs = []
     retrieved_ids = {item["id"] for item in originals}
@@ -97,6 +102,10 @@ def build_evidence_packs(
         item for item in source_scope["materials"] if item["id"] not in retrieved_ids
     ]) if source_scope is not None else [])
     for material in [*originals, *additional]:
+        if source_range_budget is not None:
+            source_packs.extend(source_range_packs(material, source_range_budget,
+                scope_only=material["id"] not in retrieved_ids))
+            continue
         turns = json.loads(material["text"])
         if not turns:
             continue
@@ -121,7 +130,8 @@ def build_evidence_packs(
                 "scope_only": material["id"] not in retrieved_ids,
             })
     # Search within the identical original pool. RawRAG's own fixed path is unchanged.
-    ranked = flat_bm25_rank(source_packs, question, len(source_packs),
+    ranked = flat_bm25_rank(source_packs, question,
+                           source_range_limit if source_range_budget else len(source_packs),
                            tokenization=tokenization)
     semantic = []
     selected_records = list(records)
@@ -519,7 +529,7 @@ def project_pack(item: dict[str, Any], index: int) -> dict[str, Any]:
         "reported_at": turn.get("occurred_at", turn.get("timestamp")),
         "captured_at": turn.get("observed_at"),
         **({"source_characters": turn["source_total_codepoints"]}
-           if item.get("source_observation_read") else {}),
+           if item.get("source_observation_read") or item.get("source_range_read") else {}),
     } for turn in turns]
     if item["kind"] == "semantic_view":
         view = item["applicability"]

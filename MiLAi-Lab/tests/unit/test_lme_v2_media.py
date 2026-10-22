@@ -111,3 +111,32 @@ def test_missing_image_is_retained_as_failure_not_a_text_only_success(tmp_path):
                 "receipt": {"source_ref": f"source-{i}"}} for i, row in enumerate(rows)]
     with pytest.raises(FileNotFoundError):
         bind_media(assets, imports, tmp_path)
+
+
+@pytest.mark.parametrize('complete_locator', [True, False])
+def test_literal_range_candidate_preserves_image_locator_boundary(tmp_path, complete_locator):
+    from milai_lab.methods.evidence_reading import open_evidence_packs
+    from milai_lab.methods.source_ranges import SourceRangeBudget, source_range_packs
+
+    image = tmp_path/'screens/0.png'
+    image.parent.mkdir()
+    image.write_bytes(b'unchanged synthetic asset; no image decoding in this receipt test')
+    rows, assets = trajectory_sources(trajectory())
+    with SqliteStore.from_conn_string(str(tmp_path/'db')) as store:
+        service = MemoryService(store, ('ranges-media', 'alice'), 'alice', tmp_path/'lock',
+                                functional_contract='functional_v1')
+        imports = [{'original_event_id': r['original_event_id'], 'receipt': service.capture_tool(
+            r['session_id'], r['event_key'], r['origin'], r['content'], None)} for r in rows]
+        media = bind_media(assets, imports, tmp_path)
+        ref = imports[1]['receipt']['source_ref']
+        original = service.search_sources('', source_refs=[ref])['source_materials'][0]
+        size = len(assets[0]['locator_text']) + (1 if complete_locator else -1)
+        candidate = source_range_packs(original, SourceRangeBudget(size, len,
+            lambda text: [(i, i+1) for i in range(len(text))]))[0]
+        opened = open_evidence_packs(service, [candidate])
+        service.store.put(namespace(service), 'receipt', {'schema': 'milai_retrieval_snapshot_v1',
+            'materials': opened, 'indices': [0], 'delivered_indices': [0]}, index=False)
+        packet = retrieval_packet('receipt', opened, [0], [0], 'policy_handoff', {})
+        context = delivered_image_context(service, packet, media)
+        assert [c['value'] for c in context if c['type'] == 'image'] == (
+            [str(image)] if complete_locator else [])

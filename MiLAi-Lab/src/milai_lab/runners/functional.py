@@ -814,6 +814,11 @@ def prepare(
         or not settings.get("memory_control")
     ):
         raise ValueError("RETRIEVAL_TOOL_REQUIRES_CONTROL_AND_REQUEST_INTERFACE")
+    range_tokens = (settings.get("memory_control") or {}).get("source_range_tokens")
+    if range_tokens is not None and (
+        not settings.get("retrieval_tool") or type(range_tokens) is not int or range_tokens < 1
+    ):
+        raise ValueError("SOURCE_RANGE_TOKENS_REQUIRE_RETRIEVAL_AND_POSITIVE_INTEGER")
     if settings.get("host_source_arrivals") and not settings.get("retrieval_tool"):
         raise ValueError("HOST_SOURCE_ARRIVALS_REQUIRES_RETRIEVAL_PROFILE")
     if edit_features.enabled and (
@@ -2886,6 +2891,12 @@ def message(
                     if settings.get("retrieval_tool"):
                         memory_options["control_delivery_selection"] = control.get(
                             "delivery_selection", False)
+                        if control.get("source_range_tokens") is not None:
+                            from milai_lab.methods.source_ranges import SourceRangeBudget
+
+                            memory_options["control_source_ranges"] = SourceRangeBudget(
+                                control["source_range_tokens"], capacity.text_tokens,
+                                capacity.text_offsets)
                     if control.get("pool_order", "shared") == "dense":
                         if retriever is None:
                             raise ValueError("DENSE_CONTROL_POOL_REQUIRES_EMBEDDINGS")
