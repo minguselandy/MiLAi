@@ -1,3 +1,30 @@
+# LATEST V53 (2026-10-22): SAVED CPU UPDATE64 LIVE / CANDIDATE32 CLOSED AND BILLED
+
+Full goal ACTIVE. Same only model job exec8452,parent893356/driver893357 continues automatically.
+OLD evaluator1589315 absent; candidate32 COMPLETE876 with call dirs0–875 and parent partitioned
+result present. Unique original-ledger phase
+training_generalization_source256_actions_full_seed0_u524_v1_saved_cpu_u32 already bills CPU
+42191.226043333,wall10722.434969019145,876forwards/4314812input tokens,runs1. Exact ledger values
+match compute.json; same input token count as candidate0. Never restart or re-bill0/32.
+No partial quality metrics read and no deployment selection. Original candidates0and32closed,
+64/128/262/393/524 plus matching selected train still required.
+
+CURRENT evaluator2253075 update64 live,latest25/876states. Re-read driver/current child/counts;
+exec/session unchanged. CPUFP32loaded,reference_compileFalse,MHAfastpathFalse,shared_actions
+12288/head2048,threads4,CUDA_VISIBLE_DEVICES empty verified. No second model/probe/fit/E2,
+inference change, restart or offline settlement while job lives. CPU-only exec37854/PID662822
+also live,latest326/902paths;closed-prefix state/head/Reader overflows0. No timeout restarts.
+Canonical closure saved-cpu-update32-closure-v1.json;tracked same-name manifest and progress-v53.
+
+New metadata/condition/accounting audit CPU0.005753067pending under /audit_compute_pending/cpu_seconds.
+Evaluator costs0/32 already billed and excluded. PriorV52 auditCPU0.020186044 and existing five
+V11 pending phases225.599536895 remain in their registry;do not re-enumerate them as new costs.
+V12–V33inventory10663.791232191 is existing74phases,not extra. Original ledger only;closedv1/v2/v3
+and oldpending35 untouched. Unmeasured authoring/monitoring unknown,not0. Source evidence index
+and all prior preparation remain closed;do not repeat them. Full original fit/control/feedback/
+Host/external/protected/seeds scope unchanged. No production/labels/SHA/subagents/services/push/
+merge changes;all previously paused queues untouched.
+
 # LATEST V52 (2026-10-22): SAVED CPU UPDATE32 LIVE / V11 COST PROVENANCE RECONCILED
 
 Full goal ACTIVE. Only model exec8452,parent893356/driver893357/current child1589315 live,

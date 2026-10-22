@@ -4,6 +4,22 @@
 [原计划](MILAI_TRAINING_DATA_GENERALIZATION_PLAN_20261021.md)，原文复制留存，原目录文件未修改。
 该计划中的“本轮已完成”是另一环境的历史说明，不能代替本机当前验证。
 
+## 续次执行 v53（2026-10-22）：update32保存模型评估闭合，原任务继续update64
+
+update32已完成全部876个状态，旧子进程1589315退出，原driver自动启动update64（当前子2253075）。
+关闭候选的调用目录0–875完整、分区结果存在，原账本唯一阶段runs=1与compute文件逐字段一致：
+876次前向、4314812输入tokens、CPU **42191.226043333秒**、墙钟10722.434969019145秒。
+这些费用已由evaluator一次入账，不列待结算、不重跑；输入token数与候选0相同。
+
+新旧子进程仍为CPU FP32载入、reference_compile和MHA fastpath关闭、shared_actions12288/head2048，
+线程4且CUDA不可见。未读取部分质量指标或选择部署权重，七候选仅完成0和32，余下五个及选中模型训练集评估仍需继续。
+纯CPU公开查询审计亦仍运行，完整目标未完成。
+
+本次终态/条件/账本核对程序CPU **0.005753067秒**单列待结算，模型计算已入账部分不重复加入。
+此前V11五个测量及其核对费用留在原登记，新进度不将它们重复枚举为新增费用。见
+[update32关闭核对](../data/manifests/training-generalization-saved-cpu-update32-closure-v1.json)与
+[进度v53](../data/manifests/training-generalization-progress-20261022-v53.json)。
+
 ## 续次执行 v52（2026-10-22）：补齐V11既有待结算计时来源
 
 核对五个此前未纳入清单的V11测量：source256旧表示E3审计、配对比较、STATE验收准备、字面配置审计与执行计划，
