@@ -1,0 +1,75 @@
+{
+  "status": "ACTIVE_SAVED_CPU_AND_PUBLIC_PATH_AUDIT_LIVE;FOUR_MORE_PUBLIC_SOURCE_REVIEWS",
+  "observed_at": "2026-10-22T06:27:30.479132+00:00",
+  "previous": "data/manifests/training-generalization-progress-20261022-v38.json",
+  "previous_turn_classification": "PROGRESS: four complete public-source reviews with actual prefix references saved and committed",
+  "only_real_model": {
+    "exec_session": 8452,
+    "parent_pid": 893356,
+    "driver_pid": 893357,
+    "evaluator_pid": 893516,
+    "actual_proc_present": true,
+    "status": "RUNNING",
+    "update": 0,
+    "completed_states": 491,
+    "planned_states": 876,
+    "completed_candidates": 0,
+    "deployment_selection": null,
+    "condition": "All seven saved CPU candidates, then matching selected train; CPU FP32 loaded, reference_compile=False, MHA fastpath=False, shared_actions12288/head2048. Unchanged."
+  },
+  "CPU_audit": {
+    "exec_session": 37854,
+    "pid": 662822,
+    "actual_proc_present": true,
+    "status": "RUNNING",
+    "completed_paths": 118,
+    "planned_paths": 902,
+    "closed_prefix_state_drop_inputs": 0,
+    "closed_prefix_head_drop_inputs": 0,
+    "closed_prefix_Reader_overflow_paths": 0
+  },
+  "public_source_review": {
+    "manifest": "data/manifests/training-generalization-feedback-source-review-v5.json",
+    "new_notes_families": [
+      "memops_A13",
+      "memops_B03",
+      "memops_E10",
+      "memops_C10"
+    ],
+    "new_source_units": 92,
+    "new_public_requests": 8,
+    "cumulative_new_note_families": 18,
+    "cumulative_source_units": 414,
+    "cumulative_public_requests": 36,
+    "new_prefix_sizes_each": [
+      7,
+      23
+    ],
+    "all_sources_read_including_assistant": true,
+    "source_copies_literal_equal": true,
+    "scope": "Existing exposed train histories only. New-note coverage is not all historical review coverage. No outputs, labels, source selection or conditions changed. Actual captured requests, Views, branches and answers still require later review.",
+    "findings": [
+      "A13: current daily/PRN/stopped medicines and relatives remain separate from proposed extended-release conversion; only reported experience, no medical advice.",
+      "B03: Senior Technical Lead plus interim duty remains current; permanent replacement proposal delayed and stale chart does not change reported role.",
+      "E10: April1+12weeks yieldsJune24, two-week notice yieldsJune10; birthday six weeks from an undated utterance cannot be anchored to renewal.",
+      "C10: June21 is actually rescheduled, June14 conditional;72percentcompletion differs from topic accuracy, and36study days/87hours are unanchored assumptions."
+    ]
+  },
+  "new_closed_measured_phases": [
+    {
+      "id": "feedback_public_source_reviews_batches018_021_save_v1",
+      "canonical_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-source-review-v1/review-progress-v5.json",
+      "cpu_seconds": 0.005072422,
+      "wall_seconds": 0.0050766002386808395,
+      "ledger_recorded": false
+    }
+  ],
+  "new_closed_CPU_seconds_pending": 0.005072422,
+  "costs": "Only new four-note mechanical save/reference checks CPU0.005072422 pending. V38CPU0.005873282,V37CPU0.004544047,V36CPU0.006230720,V35CPU0.002314110,V34CPU0.042770830 remain separate. V34inventory10663.791232191 represents existing74phases, never a new charge. All prior pending/closedv1/v2/v3 unchanged. No offline settlement while savedCPU lives. Semantic reading,calendar-arithmetic inspection,authoring and other unmeasured work unknown,not0.",
+  "production_code_changed": false,
+  "new_model_jobs_started": 0,
+  "new_training_labels": 0,
+  "no_sha_validation": true,
+  "no_subagents": true,
+  "remaining": "All savedCPU candidates/selectedtrain,legacy savedCPU,corrected64/128/parameter/aux/E3fits;STATEE2/factorial/expandedfeedback/T2/common-support,Host/lifecycle/costs,servervision and external/protected/seeds0/1/2. Full original goal remains active."
+}

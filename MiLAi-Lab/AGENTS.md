@@ -1,3 +1,28 @@
+# LATEST V39 (2026-10-22): SAVED CPU LIVE / CURRENT ARRANGEMENTS AND CONDITIONAL PLANS
+
+Full goal ACTIVE. Only model remains exec8452, parent893356/driver893357/current child893516,
+all live. CPU-only exec37854/PID662822 also live. Revalidate actual PIDs and driver/counts.
+All seven saved candidates and selected train still required; no restart, inference change,
+early selection, second model or offline settlement while saved CPU evaluation lives.
+
+Four new source reviews A13,B03,E10,C10 in frozen batches018–021:92source units/8publicrequests,
+all turns read, prefix7then23. Exact copies and references verified. New-note total now
+18families/414source units/36requests, not all historical review coverage or independent new
+sources. A13 preserves current daily/PRN/stopped medicines versus proposed conversion; no
+medical advice. B03 retains current title plus interim duty despite stale chart/delayed proposal.
+E10 derives June24 assessment and June10 notice from April1+12weeks/two-week notice, but cannot
+date birthday from an unanchored six-week utterance. C10 keeps actualJune21 exam versus
+conditionalJune14, course completion versus accuracy, and unverified study-day assumptions.
+Notes are offline only, not labels/model inputs. Actual new requests, Views, branches and
+answers still need subsequent review. Source pool/quotas/order/splits unchanged. See review-v5
+and progress-v39. Next frozen source batches start022; prior anchor/Wiki reviews still retained.
+
+New mechanical save/reference-check CPU0.005072422 pending. V38CPU0.005873282,V37CPU0.004544047,
+V36CPU0.006230720,V35CPU0.002314110,V34CPU0.042770830 separate. V34inventory10663.791232191 is
+existing74phase subtotal, not a new charge. Original ledger only; prior pending/closedv1/v2/v3
+untouched. Unmeasured reading/authoring/arithmetic inspection unknown,not0. No production/model/
+label/SHA/subagent/service/push/merge changes. Full scope and paused-queue boundaries intact.
+
 # LATEST V38 (2026-10-22): SAVED CPU LIVE / DEADLINES, APPOINTMENTS, OWNERSHIP AND WEIGH-INS
 
 Full goal ACTIVE. Only model remains exec8452, parent893356/driver893357/current child893516,
