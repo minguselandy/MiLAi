@@ -1,3 +1,27 @@
+# LATEST V36 (2026-10-22): SAVED CPU LIVE / FOUR MORE PUBLIC-SOURCE REVIEWS
+
+Full goal ACTIVE. Same ONLY model exec8452,parent893356/driver893357/current child893516 alive,
+update0 incomplete. CPU-only exec37854/PID662822 also alive. Revalidate current driver/counts/PIDs.
+All7saved candidates and selectedtrain required;no restart/parameterchange/earlyselection/second
+model or offline settlement. Full remaining fits/feedback/Host/external/protected/seeds unchanged.
+
+NEW offline source reviews E11,C29,A14,E07 in fixed batches006–009:92sourceunits/8publicrequests,
+alluser/assistantturns read. Together with V35 now6newnotes/138sourceunits/12requests;this is NOT
+all historical review coverage or6new independent sources. Exact copies and in-prefix references
+checked. C29 initialprefix15sources,others7;all finalprefixes23. Do not assumeuniformprefixsize.
+E11 distinguishes agreed750boxes/unaccepted1000offer/historical sleeves andseparates an unsupported
+assistant GreenBox600claim. C29 selectedgift initiallynotpaid;finalrecipeboxpaid65,futureshipping
+notarrival. A14 userreportedcurrent/corrected/projected/templateIDs andpendingcitizenship remain
+distinct;no external legalclaim. E07 signupreportedcompleted,but attending/adopting grouphikes
+stilltentative;2.5Lpersonalreportedtarget notgeneric3L,notmedicaladvice. Sourcequestion is notfact.
+Notes are offline evidence support,not labels/Hostinput/case rules. Actual newrequests/Views/
+reachedstates/branches/answers stillneedlaterreview. Sourcepool/quotas/order/splitsunchanged.
+
+New mechanicalsave/referencecheckCPU0.006230720pending;V35CPU0.002314110,V34CPU0.042770830
+separate. V34existing74phase subtotal10663.791232191NOTnewcharge. Alloldpending/closedv1/v2/v3
+untouched;originalledgeronly. Semanticreading/authoringunknown,not0. No production/models/labels/
+SHA/substitute fingerprints/subagents/push/merge/services. See progress-v36 and review-v2manifest.
+
 # LATEST V35 (2026-10-22): SAVED CPU LIVE / TWO FEEDBACK PUBLIC-SOURCE REVIEWS
 
 Full goal ACTIVE. Same ONLY model exec8452,parent893356/driver893357/current child893516 lives;
