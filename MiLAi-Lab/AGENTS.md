@@ -1,4 +1,34 @@
-# LATEST: 2026-10-23 CPU262 verified; STATEv3/branches CLOSED; original CPU393 LIVE
+# LATEST: 2026-10-23 explicit Host-only diagnostic ready; original CPU393 LIVE
+
+Functional sourcef1e8b9ce adds --memory-protocol none to existingSTATErunner. No memory
+tool/schema/handler/forcedretrievalinstruction/corpusread/Sourcecapture/Store/policy/model
+construction or empty retrievalreceipt. Normal current-task conversation/domain tools,
+Host/simulator/capacity/originalledger preserved. Dynamic/readonly defaults unchanged.
+None mode forbids initial retrieval/snapshots;metadata reports zero memorycalls/no policy.
+18SDK+CLItests pass/1optionalMemPursuitskip;7readout regressions pass;Ruff,2module scopedtyping,
+boundaries pass. ActualSDK/sandbox+scriptedtransport proves domain effect,existingledger3test
+requests and no memoryfiles/corpusaccess. No real model/network calls;strict limitations retained.
+
+state-host-only-task3-v1/plan.json FROZEN_NOT_DISPATCHED;source frozen-f1e8b9ce. Same exposed
+task3/HostthinkingTrue/simulatorFalse/domain/limits asSTATEv3. Removes memorysystem/instruction,
+not normal task history. Post-hoc common-Host diagnostic,not confirmation or oldtask retry/repair.
+Dispatch once only after original393terminal/verified and closedcosts accounted;then original524.
+OriginalSTATEv3/branches remainclosed and unsuccessful at native task level.
+
+Zero-model v3capacity diagnostic confirms4oldactual inputs and5capturedstates/10pairedprofiles.
+Failed actualshared16978;explicitshared_actions17012->compact15290;request_text17306->15613,
+allcompleteJSON/head/actions preserved and fit16384. Extra34tokens are explicitactionhead,
+not oldrun input. No forward or compactretry;quality still unmeasured. Artifact:
+state-dynamic-f5-v3/laya/compact-capacity-analysis.json.
+pending-costs-v13 adds43.009283445 measuredCPU;no ledgerwrite while393live. Previousu262/
+STATEv3settlements alreadyclosed;don't rebill. Unknownauthoring/priorcosts remainunknown.
+
+ONLY LIVE neural job: savedCPU393 driver3654617/child3654665/exec24298,latest59/876 snapshot.
+VerifyactualPID/files;no restart on stale observations,no secondneural job/offlinesettlement.
+Original524/selection/selectedtrain and all otherplan work remainrequired;M1-M5unachieved.
+No agents,newservices,secondledger,push/merge,SHA/fingerprints. Latestprogress-v13/executionrecord.
+
+# Earlier: 2026-10-23 CPU262 verified; STATEv3/branches CLOSED; original CPU393 LIVE
 
 Original savedCPU262 COMPLETE876,verified with ORIGINAL frozen helpers:literal inputs,exact
 lengths,finitepredictions,checkpoint/CPUFP32/4threads/shared_actions12288/head2048/compileFalse/

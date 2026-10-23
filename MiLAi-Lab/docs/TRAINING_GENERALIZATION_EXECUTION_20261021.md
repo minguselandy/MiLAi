@@ -4,6 +4,37 @@
 [原计划](MILAI_TRAINING_DATA_GENERALIZATION_PLAN_20261021.md)，原文复制留存，原目录文件未修改。
 该计划中的“本轮已完成”是另一环境的历史说明，不能代替本机当前验证。
 
+## 2026-10-23：无记忆Host诊断入口与新失败状态容量检查
+
+上轮任务失败涉及共同Host/模拟用户能力，不能全部归因于记忆。`f1e8b9ce`在原STATE runner
+加入显式`--memory-protocol none`：没有记忆工具/schema/handler、强制检索指令、训练语料读取、
+Source摄入、Store或策略/模型加载，也不通过空检索回执冒充无记忆。当前任务的正常对话历史、
+领域工具、Host/模拟用户、额度、原账本及before/after/diff保留。默认dynamic与readonly路径不变。
+none模式不接受初始强制检索或检索快照，运行元数据明确记录memory_calls=0及未使用记忆政策。
+
+18项SDK/CLI检查通过、1可选MemPursuit跳过，另7项条件续读回归通过；Ruff、两模块局部类型与
+两项边界通过。完整CLI检查使用真实native任务/沙箱和脚本HTTP transport，明确禁止调用语料/
+Store/策略构造器，确认无记忆文件/工具回执、领域写入仍发生、原账本登记实际3次测试请求。
+测试没有真实模型或网络调用；局部类型的既有排除、非全仓strict限制继续披露。
+
+`state-host-only-task3-v1/plan.json`冻结了同一已暴露第三任务的无记忆诊断，尚未派发。
+Host与simulator配置、上游领域环境及其他预算和原v3固定上下文一致；只是移除MiLAi记忆系统及
+对应调用要求，config_version另作身份记录。这是看到三臂失败后准备的**事后诊断**，不补成
+原三臂的预先确认比较，也不重试/覆盖旧轨迹。计划在原393终止、核对和费用衔接后执行一次，
+然后继续原524；如果首次失败，保留失败。
+
+同时对v3的五份实际Jev状态作零模型容量检查，四次原已完成输入再次字面相同。失败状态的
+旧实际shared总长16978；显式完整动作条件增加34个头tokens，shared_actions为17012，
+compact_actions为**15290**；对应request-text为17306→**15613**，均可装入原16384声明额度。
+十组表示比较的JSON值、完整头及动作绑定相同。没有重跑失败轨迹、给旧checkpoint切换输入后
+再试，或从长度通过推断模型质量；结果在`state-dynamic-f5-v3/laya/compact-capacity-analysis.json`。
+
+本轮已测验证、冻结计划及容量诊断新增待结算**43.009283445 CPU秒**，记录在
+`pending-costs-v13.json`；此前u262与STATEv3结算不重计。原savedCPU393仍是唯一神经作业，
+未并发派发新模型或结算离线费用。原524/选点/匹配train与全部其他研究范围保持开放。
+当前索引：[进度v13](../data/manifests/evidence-gap-development-progress-20261023-v13.json)。
+M1–M5未完成；无SHA、远端写入、新服务、第二账本或子Agent。
+
 ## 2026-10-23：update262核对、第三任务真实失败与两条条件续读闭合；update393继续
 
 原savedCPU262正常完成876/876。原冻结校验器逐项核对全部字面输入、原长度、有限预测、
