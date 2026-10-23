@@ -107,6 +107,15 @@ class StateMemoryHook:
         self.calls = 0
         self.captured_events: set[str] = set()
 
+    def _capture_calendar(self, event_key: str, role: str) -> str | None:
+        service = self.memory.service
+        previous = service.source(service.event_id(self.session, event_key, role))
+        # Replay preserves an old Source's unknown context; it must not backfill it.
+        # Explicit conflicting context still goes through Source immutability checks.
+        if previous is not None and previous.get("calendar_context") is None:
+            return None
+        return self.now or None
+
     def bind_conversation(self, conversation: list[dict[str, Any]]) -> bool:
         service = self.memory.service
         previous_turn = self.turn
@@ -117,14 +126,16 @@ class StateMemoryHook:
                 # have folded all its tool rounds into one transcript row.
                 final_key = f"turn-{user_number}-assistant"
                 if final_text and final_key not in self.captured_events:
-                    receipt = service.capture_assistant(self.session, final_key, final_text)
+                    receipt = service.capture_assistant(self.session, final_key, final_text,
+                        calendar_context=self._capture_calendar(final_key, "assistant"))
                     if not receipt["ok"]:
                         raise ValueError("STATE_PUBLIC_SOURCE_CAPTURE_FAILED:" + receipt["status"])
                     self.captured_events.add(final_key)
                 user_number, tool_number, final_text = user_number + 1, 0, ""
                 turn = f"turn-{user_number}"
                 if turn not in self.captured_events:
-                    source = service.capture_user(self.session, turn, row["content"])
+                    source = service.capture_user(self.session, turn, row["content"],
+                        calendar_context=self._capture_calendar(turn, "user"))
                     service.bind_source_boundary(self.session, turn, [source["source_ref"]])
                     service.bind_public_turn(self.session, turn, source["source_ref"],
                         config_version=self.config_version, phase="start")
@@ -142,7 +153,8 @@ class StateMemoryHook:
                     if call["name"] != "retrieve_learnings" and key not in self.captured_events:
                         receipt = service.capture_tool(self.session, key, call["name"],
                             canonical({field: call[field]
-                                       for field in ("name", "arguments", "result")}), None)
+                                       for field in ("name", "arguments", "result")}), None,
+                            calendar_context=self._capture_calendar(key, "tool"))
                         if not receipt["ok"]:
                             raise ValueError("STATE_PUBLIC_SOURCE_CAPTURE_FAILED:"
                                              + receipt["status"])

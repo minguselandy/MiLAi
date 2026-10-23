@@ -128,7 +128,8 @@ def project_operation_payload(payload: dict[str, Any], projection: str) -> dict[
         "visible_evidence": [{**fields(item, (
             "label", "kind", "revision", "version_view", "visibility", "dependency_status",
             "source_bindings", "reused_sources")), "evidence": [fields(source, (
-                "source", "role", "origin", "range", "reported_at", "captured_at"))
+                "source", "role", "origin", "range", "reported_at", "captured_at",
+                "calendar_context"))
                 for source in item.get("evidence", [])]}
             for item in state["visible_evidence"]],
         "pending_candidates": [fields(item, (
@@ -140,7 +141,7 @@ def project_operation_payload(payload: dict[str, Any], projection: str) -> dict[
             "source_metadata"))
             for item in state["views"]],
         "new_events": [fields(item, (
-            "source_ref", "role", "origin", "reported_at", "captured_at"))
+            "source_ref", "role", "origin", "reported_at", "captured_at", "calendar_context"))
             for item in state["new_events"]],
         **({"observed_materials": state["observed_materials"],
             "observed_evidence": [fields(item, (

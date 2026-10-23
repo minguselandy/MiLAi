@@ -1,6 +1,7 @@
 """Actual Store/optional STATE sandbox mechanics; scripted Host is not model evidence."""
 import json
 import sys
+from datetime import UTC, datetime
 from types import SimpleNamespace
 
 import httpx
@@ -120,12 +121,16 @@ def test_memory_hook_keeps_one_public_allowance_and_only_actual_prior_refs(tmp_p
         assert records[0]["request"]["task_context"]["known_evidence_refs"] == []
 
 
-def test_dynamic_hook_keeps_real_tool_occurrences_across_upstream_transcript_regrouping(tmp_path):
+@pytest.mark.parametrize("now", ["2026-06-15T10:00:00", ""])
+def test_dynamic_hook_keeps_real_tool_occurrences_across_upstream_transcript_regrouping(
+    tmp_path, now,
+):
     with SqliteStore.from_conn_string(str(tmp_path / "db")) as store:
+        captured = datetime(2039, 10, 24, tzinfo=UTC)
         service = MemoryService(store, ("state-observations", "alice"), "alice", tmp_path / "lock",
-                                functional_contract="functional_v1")
+                                functional_contract="functional_v1", clock=lambda: captured)
         memory = memory_at(service)
-        hook = StateMemoryHook(memory, session="task", now="2026-06-15T10:00:00",
+        hook = StateMemoryHook(memory, session="task", now=now,
             domain="travel", user_id="u1", config_version="test", record=lambda _: None)
         opening = {"role": "user", "content": "Check my reservation before changing it."}
         assert hook.bind_conversation([opening])
@@ -162,6 +167,41 @@ def test_dynamic_hook_keeps_real_tool_occurrences_across_upstream_transcript_reg
             "It is still confirmed."]
         assert len([s for s in after if s["role"] == "user"]) == 2
         assert "Already stored evidence" not in canonical(after)
+        assert all(s.get("calendar_context") == (now or None) for s in after)
+        assert all(s.get("occurred_at") is None for s in after)
+        assert all(s["observed_at"] == captured.isoformat() for s in after)
+        # Reopening a hook replays the same occurrences without changing their clocks.
+        reopened = StateMemoryHook(memory, session="task", now=now,
+            domain="travel", user_id="u1", config_version="test", record=lambda _: None)
+        assert reopened.bind_conversation(collapsed)
+        assert service.sources() == after
+
+
+@pytest.mark.parametrize("prior_calendar", [None, "2026-06-14T10:00:00"])
+def test_dynamic_hook_does_not_backfill_or_replace_existing_source_calendar(
+    tmp_path, prior_calendar,
+):
+    with SqliteStore.from_conn_string(str(tmp_path / "db")) as store:
+        service = MemoryService(store, ("state-existing", "alice"), "alice", tmp_path / "lock",
+                                functional_contract="functional_v1")
+        text = "Check my reservation before changing it."
+        ref = service.capture_user("task", "turn-1", text,
+                                   calendar_context=prior_calendar)["source_ref"]
+        original = service.source(ref)
+        now = "2026-06-15T10:00:00"
+        hook = StateMemoryHook(memory_at(service), session="task", now=now,
+            domain="travel", user_id="u1", config_version="test", record=lambda _: None)
+        conversation = [{"role": "user", "content": text}]
+        if prior_calendar is not None:
+            with pytest.raises(ValueError, match="V13_SOURCE_CALENDAR_CONTEXT_CHANGED"):
+                hook.bind_conversation(conversation)
+        else:
+            assert hook.bind_conversation(conversation)
+            conversation.append({"role": "user", "content": "Keep it as is."})
+            assert hook.bind_conversation(conversation)
+            new_ref = service.event_id("task", "turn-2", "user")
+            assert service.source(new_ref)["calendar_context"] == now
+        assert service.source(ref) == original
 
 
 def test_state_hook_preserves_host_evidence_requirements(tmp_path):

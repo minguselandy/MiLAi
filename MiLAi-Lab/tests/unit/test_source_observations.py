@@ -7,11 +7,13 @@ import pytest
 from langgraph.store.sqlite import SqliteStore
 
 from milai_lab.memory.functional_state import canonical
+from milai_lab.memory.literal_projection import expand_observation_state
 from milai_lab.memory.retrieval_request import RetrievalRequest
 from milai_lab.memory.service import MemoryService
 from milai_lab.methods.evidence_control import EvidenceOperations
 from milai_lab.methods.evidence_reading import build_evidence_packs
 from milai_lab.methods.intent_retrieval import IntentRetrievalMemory
+from milai_lab.methods.laya_memory_policy import operation_payload
 from milai_lab.methods.memory_control import (
     FixedContextMemoryPolicy,
     FixedMemoryPolicy,
@@ -85,6 +87,29 @@ def interpret(messages, schema):
         {"id": "n" + s["id"][1:], "text": s["text"], "evidence": [s["id"]],
          "kind": "reported"} for s in data["sources"]],
         "rules": [], "remove": [], "remove_rules": [], "unresolved": []}
+
+
+@pytest.mark.parametrize("paged", [False, True])
+def test_source_observation_preserves_calendar_without_assigning_event_time(tmp_path, paged):
+    with SqliteStore.from_conn_string(str(tmp_path / "db")) as store:
+        captured = datetime(2039, 10, 24, tzinfo=UTC)
+        service = service_at(store, tmp_path, clock=lambda: captured)
+        calendar = "2026-06-15T10:00:00"
+        ref = service.capture_user("s", "with-calendar", "Is my reservation confirmed?",
+                                    calendar_context=calendar)["source_ref"]
+        unknown = service.capture_user("s", "no-calendar", "Use the window seat.")["source_ref"]
+        state = MemoryControlState(task={"request": "reservation", "query_time": ""})
+        ops = EvidenceOperations(service, state, load_pool=lambda: [], refresh_call=interpret,
+            fits=lambda _: True,
+            source_observation=SourceObservationBudget(2048, len) if paged else None)
+        for projection in ("full", "mechanical", "shared", "shared_actions"):
+            projected = operation_payload(state, ops.actions(state), projection)["state"]
+            rows = {row["source_ref"]: row
+                    for row in expand_observation_state(projected)["new_events"]}
+            assert rows[ref]["calendar_context"] == calendar
+            assert "calendar_context" not in rows[unknown]
+            assert all(row["reported_at"] is None for row in rows.values())
+            assert all(row["captured_at"] == captured.isoformat() for row in rows.values())
 
 
 def test_paging_consumes_reads_but_only_search_and_evidence_reads_deliver_to_host(tmp_path):

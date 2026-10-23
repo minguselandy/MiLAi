@@ -295,8 +295,9 @@ def build_query_structure(
                     "source_directory": [{"id": key, "body_delivered": key in delivered_aliases,
                         "role": by_ref[binding["source_ref"]]["role"],
                         "origin": by_ref[binding["source_ref"]]["origin"],
-                        **({"capture_context": by_ref[binding["source_ref"]]["capture_context"]}
-                           if "capture_context" in by_ref[binding["source_ref"]] else {}),
+                        **{field: by_ref[binding["source_ref"]][field]
+                           for field in ("capture_context", "calendar_context")
+                           if field in by_ref[binding["source_ref"]]},
                         "session": by_ref[binding["source_ref"]]["session"],
                         "reported_at": by_ref[binding["source_ref"]].get("occurred_at")}
                         for key, binding in bindings.items()], "current_scope_sources": [

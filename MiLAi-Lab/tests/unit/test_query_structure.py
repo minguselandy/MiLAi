@@ -1,6 +1,7 @@
 """Source-bound reuse, new-event refresh and actual common Reader delivery."""
 
 import json
+from datetime import UTC, datetime
 from types import SimpleNamespace
 
 import pytest
@@ -25,6 +26,54 @@ def interpretation(payload):
          "temporal": "Use the dates literally stated in this source."}
         for source in payload["sources"]],
         "remove": [], "rules": [], "remove_rules": [], "unresolved": []}
+
+
+def test_calendar_survives_old_alias_directory_and_raw_and_view_delivery(tmp_path):
+    from milai_lab.methods.evidence_reading import build_evidence_packs
+    from milai_lab.methods.query_structure import open_structure
+
+    with SqliteStore.from_conn_string(str(tmp_path / "bank.sqlite")) as store:
+        captured = datetime(2039, 10, 24, tzinfo=UTC)
+        service = MemoryService(store, ("calendar", "alice"), "alice", tmp_path / "lock",
+                                functional_contract="functional_v1", clock=lambda: captured)
+        calendar = "2026-06-15T10:00:00"
+        ref = service.capture_user("s", "first", "Is my reservation confirmed?",
+                                    calendar_context=calendar)["source_ref"]
+        original = service.source(ref)
+        inputs = []
+
+        def call(messages, _schema):
+            payload = json.loads(messages[1]["content"])
+            inputs.append(payload)
+            return interpretation(payload)
+
+        build_query_structure(service, "reservation", "", [ref], policy="incremental", call=call)
+        captured = datetime(2039, 10, 25, tzinfo=UTC)
+        later = service.capture_user("s", "next", "Use the window seat.")["source_ref"]
+        view, _ = build_query_structure(service, "reservation", "", [ref, later],
+                                        policy="incremental", call=call)
+        alias = next(key for key, binding in view["source_bindings"].items()
+                     if binding["source_ref"] == ref)
+        assert inputs[0]["sources"][0]["calendar_context"] == calendar
+        assert alias not in {source["id"] for source in inputs[1]["sources"]}
+        directory = {source["id"]: source for source in inputs[1]["source_directory"]}
+        assert directory[alias]["body_delivered"] is False
+        assert directory[alias]["calendar_context"] == calendar
+        assert directory[alias]["reported_at"] is None
+        raw = build_evidence_packs(service, "reservation", "", service.search_sources(
+            "reservation", tokenization="unicode_v1")["source_materials"], [])
+        raw_evidence = [e for packet in project_packs(raw, list(range(len(raw))))
+                        for e in packet["evidence"]]
+        assert any(e.get("calendar_context") == calendar for e in raw_evidence)
+        assert all(e["reported_at"] is None for e in raw_evidence)
+        opened = open_structure(service, view)
+        packet = project_packs([opened], [-1], compact_view_bindings=True)[0]
+        metadata = {**packet["source_metadata"]["shared"],
+                    **packet["source_metadata"]["by_alias"].get(alias, {})}
+        assert metadata["calendar_context"] == calendar
+        assert metadata["reported_at"] is None
+        assert metadata["captured_at"] == original["observed_at"]
+        assert service.source(ref) == original
 
 
 def test_legacy_view_metadata_comes_from_actual_sources_without_rewriting_interpretation(tmp_path):

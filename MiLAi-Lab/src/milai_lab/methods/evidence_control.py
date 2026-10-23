@@ -137,7 +137,7 @@ class EvidenceOperations:
             **({"deferred_source_lookups": len(deferred_lookups)} if deferred_lookups else {}))
         state.new_events = [{"source_ref": e["event_id"], "role": e["role"],
             "content": body_text(e), "origin": e.get("origin"),
-            **({"capture_context": e["capture_context"]} if "capture_context" in e else {}),
+            **{key: e[key] for key in ("capture_context", "calendar_context") if key in e},
             "delivery": "controller_observation; Reader uses visible_evidence",
             "reported_at": e.get("occurred_at"), "captured_at": e["observed_at"]}
             for e in arrivals]
