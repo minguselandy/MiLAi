@@ -4,6 +4,52 @@
 [原计划](MILAI_TRAINING_DATA_GENERALIZATION_PLAN_20261021.md)，原文复制留存，原目录文件未修改。
 该计划中的“本轮已完成”是另一环境的历史说明，不能代替本机当前验证。
 
+## 2026-10-23：可选紧凑 JSON 输入与完整原生容量核对
+
+从上轮STATE/LME真实失败输入继续诊断，先尝试共享长文本的完整子串。
+`text-spans-prototype-v1.json`记录了该未采用方案：STATE四个状态分别增加41/1/11/11 tokens，
+失败状态没有收益。没有接入源码、修改来源或重跑任务以寻求成功。
+
+随后测量只省略JSON语法空格的方案。正文字符串里的空格、换行、引号、Unicode、身份、条件、
+时间、完整动作与顺序均保持原值；不截断、不删除字段。原STATE实际失败状态的state部分由
+16070降至14689tokens。把紧凑JSON再嵌入普通JSON对象会增加转义开销（16874tokens），也未采用。
+实现使用原生Laya本已接受的文本state直接传递完整JSON文本，没有修改共享SDK或模型服务。
+
+功能提交`67c9a9eb`新增显式条件`compact_actions`及`compact_actions_request_text`。
+它们分别在原`shared_actions`及其request-text条件之后做JSON序列化，保留相同完整动作表与头。
+默认值和已有配置没有改变，原保存CPU及原冻结反馈队列仍使用原表示。训练/保存后评估CLI可通过
+`--operation-state`选用新条件；运行政策使用相应`state_projection`。操作、辅助适用性、混合数据、
+离线导出、动作还原、来源witness位置与静态曲线读取均接通。输入变化需要单独训练/推理及Host效果
+证据，**不能因为长度下降就直接替换已选模型的部署输入**。
+
+45项相关原生SDK检查通过；补充的来源位置/监督检查10项通过（与前批重叠）。覆盖完整绑定、
+原始正文及JSON类型/空值保留、request-text还原、混合组件与mask不变、真实token位置及截断后
+不误认来源完整、原返包额度监督不变。没有加载模型权重或forward。
+首轮3项失败保留：一个测试错误地把单独返回的action_bindings也要求留在MemoryControlState；
+另两个检查需按真实JSON值比较内部literal-table的tuple/list传输形式，不能比较Python容器类型。
+修正后仍逐项检查JSON类型和正文，没有放宽实际模型输入的信息保留要求。
+
+Ruff与两项依赖边界通过。首次九模块mypy因工具环境缺torch/laya报7项导入错误；指定既有
+CUDA Python并通过临时PYTHONPATH提供HTTP依赖后，**九模块局部mypy通过**，没有新增依赖屏蔽。
+原有follow-imports=silent及import-untyped/unused-ignore排除继续披露；不是全仓strict或远端CI。
+
+当前纯CPU核对`compact-input-audit-v1`已经启动，原savedCPU262仍是唯一神经作业。
+核对使用原STATE四份真实输入、原901条LME完成路径的7208个实际决策，以及既有source256
+train/dev混合数据；两种request条件均逐项比较JSON值/顺序、头、动作、metadata/gold及原生完整长度。
+原LME路径长度还与上轮归档逐项对照；unknown路径501不重建。没有模型权重、前向、HTTP、账本写入
+或检索任务重跑。只记录实际测量，若新表示仍超限也会保留，不以减少候选或调整个例额度通过。
+
+已完成的STATE四状态检查中，完整动作结构条件最大总长16699→15318，request-text条件
+17019→15669；均在原16384声明上限内。这一对照的完整动作头与旧T1实际shared头有34token差别，
+所以不把16699冒充旧运行的16665。两个新旧比较各自保持同一个头，原始实际输入另列保存。
+后续LME及source256核对仍在运行，不能从这四状态推断全部输入或模型理解通过。
+
+本轮纯编码原型与验证费用另记为待结算，旧`pending-costs-v7.json`不变；活跃核对与模型成本
+等进程终止后再核对，原262运行期间不结算。作者与其他未测开销继续unknown。
+原393/524及选点/匹配train、F1/F2、真实模型与Host/生命周期、反馈/状态/种子、完整LME QA及
+正式外部/四主图均未完成。当前索引：[进度v8](../data/manifests/evidence-gap-development-progress-20261023-v8.json)。
+没有SHA/内容指纹、远端写入、新服务、第二研究账本或子Agent；M1–M5仍未闭合。
+
 ## 2026-10-23：STATE 同 before 分支可执行；原 LME 路径检查闭合至 901/902
 
 `b1a8956b`把上轮真实STATE快照接入分支执行。`replay_state_retrieval`在独立Store副本中恢复

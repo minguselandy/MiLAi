@@ -1,4 +1,40 @@
-# LATEST: 2026-10-23 STATE branches executable; LME tail CLOSED; savedCPU262 LIVE
+# LATEST: 2026-10-23 optional compact JSON inputs; savedCPU262 + CPU-only input audit LIVE
+
+Functional source67c9a9eb adds compact_actions / compact_actions_request_text. These opt-in
+conditions serialize the SAME shared_actions JSON without syntax spaces; literal source
+whitespace,values,types,order,complete actions and head remain. Native SDK already accepts
+text state directly; no SDK/service change. Existing profiles/defaults/frozen queues unchanged.
+Train/evaluate --operation-state,live state_projection,mixed/auxiliary/export/diagnostics wired.
+Do not switch a deployed checkpoint merely because capacity improves: fitting/inference/Host
+quality for this new condition still needs independent evidence. No new model run performed.
+
+Text-substring sharing prototype failed to reduce the actualSTATE failure (+11tokens),notadopted.
+Direct compact JSON reduces its state16070->14689; nested compact JSON increases escaping,notused.
+45native related tests PASS;final10position/supervision tests PASS(overlap). Complete values/heads,
+request-text,mask labels/types,witness offsets/native truncation and original supervision tested.
+First3assertion failures retained: action bindings return separately;literal-table Python tuples
+must be compared as actual JSON arrays. Ruff,boundaries and9module scopedmypy PASS. Initialtyping
+environment lackedtorch/laya; actualCUDA Python+temporaryHTTP PYTHONPATH resolved imports without
+extra error suppression. Existing follow-imports/import-untyped/unused-ignore exclusions disclosed.
+
+CPU-only compact-input-audit-v1 driver3158998/child3159005/exec83608 LIVE,latest3100pairs snapshot.
+Uses actualSTATE4,originalLME901paths/7208decisions,existing source256train/dev,each paired under
+bothrequest conditions. Loads no weights,does no forward/HTTP/ledgerwrite. Preserves original
+unknownLMEindex501. Original LME counts checked against archived measurements; no task reruns.
+STATE complete-action max total16699->15318;request-text17019->15669,all4fit16384 in each condition.
+Original actualsharedT1total16665 stays separately recorded (explicitactionhead adds34tokens).
+All901/currentdataset capacity not yet proven; current progress/lengths in audit directory.
+
+Only neural job: original savedCPU262 driver2925107/child2925108/exec47993 LIVE,latest312/876.
+Revalidate actualPID/files;never restart because observation/session lost. No second neural work
+or offline settlement while262lives. Original LME400 CLOSED and901archives verified;2oldnative
+capacity failures remain historical facts,not edited by the new serialization audit.
+pending-costs-v8.json adds112.418406275 measured closed CPU to unchanged v7 pending; activeaudit
+wholechild CPU not counted yet. Unknown costs stayunknown. All F1/F2/F3quality and full original
+research scope remain; M1-M5 not achieved. No agents,newservices,secondledger,push/merge,SHA.
+Latest details: progress-v8 and execution record. Source worktree is clean after local commits.
+
+# Earlier: 2026-10-23 STATE branches executable; LME tail CLOSED; savedCPU262 LIVE
 
 Functional source b1a8956b adds actual STATE branch execution from recorded pre-call or
 post-operation Store/checkpoint. Before/request/allowance/complete actions compared before
