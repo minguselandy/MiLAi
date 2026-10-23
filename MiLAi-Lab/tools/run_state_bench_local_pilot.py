@@ -47,8 +47,9 @@ from milai_lab.runners.state_retrieval_capture import capture_state_retrieval
 class LocalSimulator:
     """Keep upstream simulator prompts and use the accounted JSON-action bridge."""
 
-    def __init__(self, model: VLLMChatModel) -> None:
+    def __init__(self, model: VLLMChatModel, *, enable_thinking: bool | None = None) -> None:
         self.model = model
+        self.enable_thinking = enable_thinking
         self.calls = 0
 
     def complete_chat(self, *, messages: list[dict[str, str]]) -> str:
@@ -56,7 +57,8 @@ class LocalSimulator:
         self.model.begin_public_message(f"simulator-{self.calls}")
         result = self.model.invoke([
             SystemMessage(content=messages[0]["content"]),
-            HumanMessage(content=messages[1]["content"])])
+            HumanMessage(content=messages[1]["content"])],
+            enable_thinking=self.enable_thinking)
         return str(result.content)
 
 
@@ -111,6 +113,7 @@ def main() -> None:
     env_data, env_path = load_task_environment(domain, task)
     settings = read_json(args.config)["entrypoints"]["functional"]
     host_config = VLLMConfig(**settings["host"])
+    simulator_thinking = settings.get("stage_enable_thinking", {}).get("state_simulator")
     embedding_config = (VLLMConfig(**settings["embedding"])
                         if args.policy == "mempursuit" else None)
     clients = [asdict(host_config)]
@@ -124,6 +127,7 @@ def main() -> None:
         "automatic_retry": False, "sha_validation_executed": False,
         "environment_file": str(env_path), "source_selection": selection,
         "host_and_simulator": asdict(host_config), "judge": "NOT_RUN",
+        "simulator_enable_thinking_override": simulator_thinking,
         "memory_policy": args.policy, "return_envelope": "at most3strings; one full receipt",
         "memory_protocol": args.memory_protocol,
         "retrieval_snapshots": args.retrieval_snapshots,
@@ -150,7 +154,8 @@ def main() -> None:
                                                    capacity=capacity))
             host = VLLMChatModel(client=client,
                                 max_calls_per_message=settings["max_calls_per_message"])
-            simulator = LocalSimulator(VLLMChatModel(client=client, max_calls_per_message=1))
+            simulator = LocalSimulator(VLLMChatModel(client=client, max_calls_per_message=1),
+                                       enable_thinking=simulator_thinking)
             embeddings = None
             if embedding_config is not None:
                 embedding_client = stack.enter_context(VLLMClient(

@@ -23,6 +23,41 @@ from milai_lab.runners.state_bench_adapter import (
 )
 
 
+@pytest.mark.parametrize("override", [None, False, True])
+def test_local_simulator_thinking_override_is_per_request_and_keeps_host_and_prompt(override):
+    from run_state_bench_local_pilot import LocalSimulator
+
+    wires = []
+
+    def respond(request):
+        wires.append(json.loads(request.content))
+        return httpx.Response(200, json={"choices": [{"message": {"role": "assistant",
+            "content": '{"answer":"Actual reply"}'}, "finish_reason": "stop"}],
+            "usage": {"prompt_tokens": 10, "completion_tokens": 5, "total_tokens": 15}})
+
+    with VLLMClient(VLLMConfig(base_url="http://example.test/v1", model="scripted",
+        tool_mode="json_action", enable_thinking=True),
+        transport=httpx.MockTransport(respond)) as client:
+        host = VLLMChatModel(client=client)
+        simulator_model = VLLMChatModel(client=client, max_calls_per_message=1)
+        simulator = LocalSimulator(simulator_model, enable_thinking=override)
+        original = [{"role": "system", "content": "Literal upstream simulator instructions"},
+                    {"role": "user", "content": "Literal upstream conversation"}]
+        assert simulator.complete_chat(messages=original) == "Actual reply"
+        assert simulator.complete_chat(messages=original) == "Actual reply"
+        assert simulator.calls == 2 and simulator_model.active_message_key == "simulator-2"
+        assert simulator_model.calls_in_message == 1
+        assert host.calls_in_message == 0
+        host.begin_public_message("host-turn")
+        host.invoke([{"role": "user", "content": "Host continues"}])
+        assert [wire["chat_template_kwargs"]["enable_thinking"] for wire in wires] == [
+            True if override is None else override,
+            True if override is None else override, True]
+        assert all(wire["messages"][-1]["content"] == original[-1]["content"] for wire in wires[:2])
+        assert all(original[0]["content"] in wire["messages"][0]["content"] for wire in wires[:2])
+        assert client.config.enable_thinking is True and host.calls_in_message == 1
+
+
 def test_canonical_transcript_keeps_executed_tool_results_once_in_order():
     calls = [{"name": "lookup", "arguments": {"id": "B1"}, "result": {"seat": "aisle"}},
              {"name": "update", "arguments": {"seat": "window"}, "result": {"ok": True}}]
