@@ -1,8 +1,8 @@
 """One explicitly selected STATE research run with the existing local Host and MiLAi.
 
 Uses the public orchestrator directly, not the official CLI/protocol or its hash
-validation. Domain tools/prompts remain upstream; local Host/simulator, JSON-action
-transport and raw historical evidence are explicit research-variant choices.
+validation. Domain tools/prompts remain upstream; local Host/simulator, JSON-action,
+public observation capture and optional Views are explicit dynamic-research choices.
 """
 from __future__ import annotations
 
@@ -16,7 +16,7 @@ from collections.abc import Callable
 from contextlib import ExitStack
 from dataclasses import asdict
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 from langchain_core.embeddings import Embeddings
 from langchain_core.messages import HumanMessage, SystemMessage
@@ -25,6 +25,7 @@ from milai_lab.baselines.langmem_sqlite_store import TransactionalSqliteStore
 from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.harness.contextual_artifacts import RunBudget, Trace, http_budget_scope
 from milai_lab.memory.service import MemoryService
+from milai_lab.methods.edit_maintenance import parse_object
 from milai_lab.methods.intent_retrieval import IntentRetrievalMemory
 from milai_lab.methods.memory_control import (
     FixedContextMemoryPolicy,
@@ -37,6 +38,7 @@ from milai_lab.providers.contextual_capacity import HostCapacity
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
 from milai_lab.providers.embedding_capacity import MeteredEmbeddings
 from milai_lab.runners.functional import seed_sources
+from milai_lab.runners.memory_control import memory_policy
 from milai_lab.runners.state_bench_adapter import (
     StateMemoryHook,
     make_state_agent,
@@ -63,8 +65,12 @@ class LocalSimulator:
 def build_retrieval(service: MemoryService, token_count: Callable[[str], int],
                     settings: dict[str, Any], policy_name: str, budget: RunBudget,
                     record: Callable[[dict[str, Any]], None], *,
-                    embeddings: Embeddings | None = None) -> IntentRetrievalMemory:
-    """Use the existing ordinary/whole-context/selected-pool paths in the STATE hook."""
+                    embeddings: Embeddings | None = None,
+                    call: Callable[[str, list[dict[str, str]], dict[str, Any]],
+                                   dict[str, Any]] | None = None,
+                    admit: Callable[[], None] = lambda: None,
+                    available: Callable[[], bool] = lambda: True) -> IntentRetrievalMemory:
+    """Use existing policies, View generation and metering in the local dynamic hook."""
     control = settings.get("memory_control", {})
     reads = control.get("reads", 4)
     rank_pool = None
@@ -77,17 +83,26 @@ def build_retrieval(service: MemoryService, token_count: Callable[[str], int],
         rank_pool = MemPursuitPool(embeddings, budget, selected_limit=reads,
             adaptive=control.get("pursuit_adaptive", True), record=record)
         policy = PursuitMemoryPolicy()
-    else:
+    elif policy_name in {"fixed_context", "fixed"}:
         factories: dict[str, Callable[[int], MemoryPolicy]] = {
             "fixed_context": FixedContextMemoryPolicy, "fixed": FixedMemoryPolicy}
         policy = factories[policy_name](reads)
+    else:
+        assert call is not None
+        policy = memory_policy({**control, "policy": policy_name}, budget,
+                               call=call, admit=admit, record=record)
     return IntentRetrievalMemory(service, token_count,
         material_limit=settings["ordinary_material_tokens"],
         read_limit=settings["additional_reads"], source_access="independent_v1",
         source_tokenization="unicode_v1", evidence_policy="question_pack_v1",
         source_top_k=settings["source_top_k"], semantic_top_k=settings["semantic_top_k"],
         control_policy=policy, control_steps=control.get("max_control_steps", 8),
-        control_rank_pool=rank_pool, control_delivery_selection=True, control_record=record)
+        control_rank_pool=rank_pool, control_delivery_selection=True, control_record=record,
+        dependency_read_call=call, control_available=available,
+        control_source_observation_tokens=control.get("source_observation_tokens"),
+        control_view_capacity=control.get("view_capacity", 1),
+        control_view_policy=control.get("view_policy", "incremental"),
+        control_internal_views=control.get("internal_views", True))
 
 
 def main() -> None:
@@ -96,8 +111,9 @@ def main() -> None:
     parser.add_argument("preparation", type=Path)
     parser.add_argument("output", type=Path)
     parser.add_argument("--source-version", required=True)
-    parser.add_argument("--policy", choices=("fixed_context", "fixed", "mempursuit"),
-                        default="fixed_context", help="Existing raw-evidence retrieval policy")
+    parser.add_argument("--policy", choices=("fixed_context", "fixed", "mempursuit", "rules",
+                                            "view_cache", "laya"),
+                        default="fixed_context", help="Existing local evidence policy")
     parser.add_argument("--split", choices=("train", "test"), default="train",
                         help="Declared selection split; task membership is checked before loading")
     parser.add_argument("--compute-phase",
@@ -144,6 +160,8 @@ def main() -> None:
         "environment_file": str(env_path), "source_selection": selection,
         "host_and_simulator": asdict(host_config), "judge": "NOT_RUN",
         "memory_policy": args.policy, "return_envelope": "at most3strings; one full receipt",
+        "memory_protocol": "local_dynamic_public_observations_and_views",
+        "memory_control_configuration": settings.get("memory_control", {}),
         "compute_phase": args.compute_phase,
         "initial_request_transport": "frozen_actual_request" if initial else "autonomous",
         "initial_request_provenance": initial,
@@ -182,8 +200,25 @@ def main() -> None:
             run["source_import_receipts"] = seed_sources(service,
                 read_json(args.preparation / "sources.json"), args.output / "source-imports.json",
                 preserve_occurrence=True)
+
+            def generate(stage: str, messages: list[dict[str, str]],
+                         schema: dict[str, Any]) -> dict[str, Any]:
+                response = host.invoke(messages, tools=[], tool_choice="none",
+                    response_format={"type": "json_schema", "json_schema": {
+                        "name": "dependency_reads", "schema": schema}},
+                    **({"enable_thinking": settings["stage_enable_thinking"][stage]}
+                       if stage in settings.get("stage_enable_thinking", {}) else {}))
+                if not isinstance(response.content, str):
+                    raise ValueError("STATE_DEPENDENCY_RESPONSE_MISSING")
+                value = parse_object(response.content, reject_duplicate_keys=True)
+                trace({"event": "state_dependency_read_envelope", "generation_stage": stage,
+                       "envelope": value})
+                return value
+
             memory = build_retrieval(service, capacity.text_tokens, settings, args.policy,
-                                     budget, trace, embeddings=embeddings)
+                budget, trace, embeddings=embeddings, call=generate,
+                admit=lambda: host.reserve_external_request("memory_control"),
+                available=lambda: host.calls_in_message < settings["max_calls_per_message"] - 2)
             hook = StateMemoryHook(memory, session="state-task", now=task.now, domain=domain.name,
                 user_id=task.user_id, config_version=args.source_version, record=trace)
             # The evaluator-only summary/requirements never enter this public context.
@@ -196,9 +231,12 @@ def main() -> None:
                 "state-before.json", "state-after.json", "state-diff.json"]
             trajectory = run_with_domain_snapshots(environment, args.output, lambda: run_task(
                 task=task, env_data=env_data, user_id=task.user_id, env=environment,
-                client=None, simulator_client=simulator, domain=domain, agent=agent,
+                # Upstream annotates concrete clients; this local adapter implements complete_chat.
+                client=None, simulator_client=cast(Any, simulator), domain=domain, agent=agent,
                 trajectory_metadata={"research_variant": True, "official_protocol": False}))
             write_json(args.output / "trajectory.json", trajectory.to_dict())
+            hook.bind_conversation(trajectory.conversation)
+            write_json(args.output / "memory-sources.json", service.sources())
             state_score = evaluate_state_requirements(task, trajectory.state_diff)
             write_json(args.output / "deterministic-state-score.json",
                        state_score.to_dict() if state_score is not None else None)

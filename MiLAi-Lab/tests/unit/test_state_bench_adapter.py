@@ -1,5 +1,7 @@
 """Actual Store/optional STATE sandbox mechanics; scripted Host is not model evidence."""
 import json
+import sys
+from types import SimpleNamespace
 
 import httpx
 import pytest
@@ -81,6 +83,118 @@ def test_memory_hook_keeps_one_public_allowance_and_only_actual_prior_refs(tmp_p
         assert records[1]["request"]["task_context"]["known_evidence_refs"] == [
             item["ref"] for item in packet["evidence"]]
         assert records[0]["request"]["task_context"]["known_evidence_refs"] == []
+
+
+def test_dynamic_hook_keeps_real_tool_occurrences_across_upstream_transcript_regrouping(tmp_path):
+    with SqliteStore.from_conn_string(str(tmp_path / "db")) as store:
+        service = MemoryService(store, ("state-observations", "alice"), "alice", tmp_path / "lock",
+                                functional_contract="functional_v1")
+        memory = memory_at(service)
+        hook = StateMemoryHook(memory, session="task", now="2026-06-15T10:00:00",
+            domain="travel", user_id="u1", config_version="test", record=lambda _: None)
+        opening = {"role": "user", "content": "Check my reservation before changing it."}
+        assert hook.bind_conversation([opening])
+        first = {"name": "lookup", "arguments": {"id": "B1"},
+                 "result": {"status": "confirmed"}}
+        recall = {"name": "retrieve_learnings", "arguments": {"query": "reservation"},
+                  "result": {"learnings": ["Already stored evidence; not a new observation"]}}
+        current = [opening, {"role": "assistant", "content": "Checking.",
+                            "tool_calls": [recall, first]},
+                   {"role": "tool", "content": [recall, first]}]
+        assert not hook.bind_conversation(current)
+        remaining = memory.read_allowance(hook.config)["reads_remaining"]
+        # A repeated actual call with identical content is a distinct occurrence.
+        current += [{"role": "assistant", "content": "Checking again.", "tool_calls": [first]},
+                    {"role": "tool", "content": [first]}]
+        assert not hook.bind_conversation(current)
+        sources = service.sources()
+        observed = [s for s in sources if s["role"] == "tool"]
+        assert len(observed) == 2
+        assert observed[0]["content"] == observed[1]["content"]
+        assert json.loads(observed[0]["content"]) == first
+        assert observed[0]["event_id"] != observed[1]["event_id"]
+        assert all(s["origin"] == "lookup" and s["object_ref"] is None for s in observed)
+        assert not hook.bind_conversation(current)
+        assert memory.read_allowance(hook.config)["reads_remaining"] == remaining
+        # STATE folds all calls into one assistant row after finishing a user turn.
+        collapsed = [opening, {"role": "assistant", "content": "It is still confirmed.",
+                               "tool_calls": [recall, first, first]},
+                     {"role": "user", "content": "Keep it as is."}]
+        assert hook.bind_conversation(collapsed)
+        after = service.sources()
+        assert len([s for s in after if s["role"] == "tool"]) == 2
+        assert [s["content"] for s in after if s["role"] == "assistant"] == [
+            "It is still confirmed."]
+        assert len([s for s in after if s["role"] == "user"]) == 2
+        assert "Already stored evidence" not in canonical(after)
+
+
+def test_state_hook_preserves_host_evidence_requirements(tmp_path):
+    with SqliteStore.from_conn_string(str(tmp_path / "db")) as store:
+        service = MemoryService(store, ("state-rich", "alice"), "alice", tmp_path / "lock",
+                                functional_contract="functional_v1")
+        service.capture_user("history", "report", "The cancellation was only a preview.")
+        records = []
+        hook = StateMemoryHook(memory_at(service), session="task", now="2026-06-15T10:00:00",
+            domain="travel", user_id="u1", config_version="test", record=records.append)
+        hook.bind_conversation([{"role": "user", "content": "Has it actually executed?"}])
+        goal = {"purpose": "Check execution against the original receipt",
+                "evidence": ["original_source"], "required_points": ["preview or completed"]}
+        hook.retrieve({"query": "cancellation", "top_k": 3, "read_goal": goal})
+        assert records[-1]["request"]["read_goal"] == goal
+        assert records[-1]["request"]["task_context"]["target_scope"] == {
+            "domain": "travel", "user_id": "u1"}
+
+
+@pytest.mark.parametrize("policy", ["rules", "laya"])
+def test_state_builder_reuses_existing_policy_and_view_metering(tmp_path, monkeypatch, policy):
+    from milai_lab.harness.contextual_artifacts import RunBudget, RunLimits
+    from run_state_bench_local_pilot import build_retrieval
+
+    loads, admissions, generations, records = [], [], [], []
+
+    class Decision:
+        def __init__(self, *args, **kwargs):
+            loads.append(args)
+            self.counters = {"forwards": 0, "input_tokens": 0}
+
+        def predict(self, payload):
+            self.counters["forwards"] += 1
+            self.counters["input_tokens"] += 1  # Synthetic unit-test accounting.
+            return {"choice": "handoff" if payload["state"]["visible_evidence"]
+                    else "refresh_view"}
+
+    monkeypatch.setitem(sys.modules, "torch", SimpleNamespace(set_num_threads=lambda _: None))
+    monkeypatch.setattr("milai_lab.runners.memory_control.NativeDecision", Decision)
+
+    def generate(stage, messages, schema):
+        payload = json.loads(messages[-1]["content"])
+        generations.append(stage)
+        return {"scope": "Original booking advice", "nodes": [
+            {"id": "n" + row["id"][1:], "text": row["text"], "kind": "reported",
+             "evidence": [row["id"]]} for row in payload["sources"]],
+            "rules": [], "remove": [], "remove_rules": [], "unresolved": []}
+
+    settings = {"ordinary_material_tokens": 8000, "additional_reads": 8,
+        "source_top_k": 16, "semantic_top_k": 16, "memory_control": {
+            "reads": 1, "max_control_steps": 8, "checkpoint": "scripted",
+            "device": "cpu", "state_projection": "full"}}
+    budget = RunBudget(RunLimits(), tmp_path / "unit-budget.json")
+    with SqliteStore.from_conn_string(str(tmp_path / "db")) as store:
+        service = MemoryService(store, ("state-builder", "alice"), "alice", tmp_path / "lock",
+                                functional_contract="functional_v1")
+        service.capture_user("history", "report", "Use the hotel inventory identifier to book.")
+        memory = build_retrieval(service, len, settings, policy, budget, records.append,
+            call=generate, admit=lambda: admissions.append("local_prediction"))
+        packet = memory.retrieve(context(service), "query", RetrievalRequest(query="hotel"))
+        assert generations == ["query_structure"]
+        assert any(e["kind"] == "query_structure" for e in packet["evidence"])
+        if policy == "laya":
+            assert len(loads) == 1 and len(admissions) == 2
+            assert budget.state["compute"]["dynamic_memory_laya_load"]["loads"] == 1
+            assert budget.state["compute"]["dynamic_memory_laya"]["forwards"] == 2
+        else:
+            assert not loads and not admissions and "compute" not in budget.state
 
 
 def test_state_selected_pool_uses_actual_hook_and_records_nested_compute(tmp_path):

@@ -15,6 +15,7 @@ from langchain_core.runnables import RunnableConfig
 
 from milai_lab.harness.artifact_io import write_json
 from milai_lab.memory.functional_state import canonical
+from milai_lab.memory.retrieval_request import StructuredReadGoal
 from milai_lab.methods.intent_retrieval import IntentRetrievalMemory
 
 
@@ -29,13 +30,15 @@ MEMORY_SCHEMA = {
                    "An interpretation is not an original statement or current business state. "
                    "Use domain tools for current state and actions.",
     "parameters": {"type": "object", "properties": {
-        "query": {"type": "string"}, "top_k": {"type": "integer", "const": 3}},
+        "query": {"type": "string"}, "top_k": {"type": "integer", "const": 3},
+        "read_goal": StructuredReadGoal.model_json_schema()},
         "required": ["query"], "additionalProperties": False},
 }
 
 RETRIEVAL_INSTRUCTION = (
     "Before your first substantive answer, call retrieve_learnings with a query based on "
     "the actual user request and visible conversation. You may retrieve again when needed. "
+    "When useful, specify read_goal with your purpose, required_points and evidence type. "
     "Its at-most-three strings contain bounded MiLAi evidence receipts, not task solutions "
     "or business authorization. Apply historical guidance only when relevant and consistent "
     "with current domain tools, results and policies. Keep other users and past transactions "
@@ -81,7 +84,11 @@ def conversation_messages(conversation: list[dict[str, Any]]) -> list[BaseMessag
 
 
 class StateMemoryHook:
-    """Bind actual public turns and call the existing registered retrieval tool."""
+    """Local dynamic protocol: capture public observations and retrieve bounded evidence.
+
+    This hook writes Sources and request receipts. It is not the official read-only
+    Learning Track hook. Business effects remain in STATE's domain handlers.
+    """
 
     def __init__(self, memory: IntentRetrievalMemory, *, session: str, now: str,
                  domain: str, user_id: str, config_version: str,
@@ -94,23 +101,51 @@ class StateMemoryHook:
         self.config: RunnableConfig | None = None
         self.references: list[dict[str, Any]] = []
         self.calls = 0
+        self.captured_events: set[str] = set()
 
     def bind_conversation(self, conversation: list[dict[str, Any]]) -> bool:
-        users = [row for row in conversation if row["role"] == "user"]
-        turn = f"turn-{len(users)}"
-        if turn == self.turn:
-            return False
-        content = users[-1]["content"]
         service = self.memory.service
-        source = service.capture_user(self.session, turn, content)
-        service.bind_source_boundary(self.session, turn, [source["source_ref"]])
-        service.bind_public_turn(self.session, turn, source["source_ref"],
-                                config_version=self.config_version, phase="start")
-        self.turn = turn
-        self.config = cast(RunnableConfig, {"configurable": {"user_id": service.owner,
-            "v13_session": self.session, "v13_turn_id": turn,
-            "v13_config_version": self.config_version}})
-        return True
+        previous_turn = self.turn
+        user_number, tool_number, final_text = 0, 0, ""
+        for row in conversation:
+            if row["role"] == "user":
+                # The next user closes the preceding assistant turn. STATE may
+                # have folded all its tool rounds into one transcript row.
+                final_key = f"turn-{user_number}-assistant"
+                if final_text and final_key not in self.captured_events:
+                    receipt = service.capture_assistant(self.session, final_key, final_text)
+                    if not receipt["ok"]:
+                        raise ValueError("STATE_PUBLIC_SOURCE_CAPTURE_FAILED:" + receipt["status"])
+                    self.captured_events.add(final_key)
+                user_number, tool_number, final_text = user_number + 1, 0, ""
+                turn = f"turn-{user_number}"
+                if turn not in self.captured_events:
+                    source = service.capture_user(self.session, turn, row["content"])
+                    service.bind_source_boundary(self.session, turn, [source["source_ref"]])
+                    service.bind_public_turn(self.session, turn, source["source_ref"],
+                        config_version=self.config_version, phase="start")
+                    self.captured_events.add(turn)
+                    self.turn = turn
+                    self.config = cast(RunnableConfig, {"configurable": {
+                        "user_id": service.owner, "v13_session": self.session,
+                        "v13_turn_id": turn, "v13_config_version": self.config_version}})
+            elif row["role"] == "assistant":
+                for call in row.get("tool_calls") or []:
+                    tool_number += 1
+                    key = f"turn-{user_number}-tool-{tool_number}"
+                    # Retrieval receipts already retain their source references;
+                    # copying them into a new Source would invent independent support.
+                    if call["name"] != "retrieve_learnings" and key not in self.captured_events:
+                        receipt = service.capture_tool(self.session, key, call["name"],
+                            canonical({field: call[field]
+                                       for field in ("name", "arguments", "result")}), None)
+                        if not receipt["ok"]:
+                            raise ValueError("STATE_PUBLIC_SOURCE_CAPTURE_FAILED:"
+                                             + receipt["status"])
+                        self.captured_events.add(key)
+                final_text = row.get("content") or ""
+            # Upstream tool rows repeat the preceding assistant's executed calls.
+        return self.turn != previous_turn
 
     def retrieve(self, arguments: dict[str, Any]) -> dict[str, list[str]]:
         if self.config is None:
@@ -119,6 +154,8 @@ class StateMemoryHook:
         request = {"query": arguments["query"], "task_context": {
             "as_of": self.now, "target_scope": {"domain": self.domain, "user_id": self.user_id},
             "known_evidence_refs": list(self.references)}}
+        if "read_goal" in arguments:
+            request["read_goal"] = arguments["read_goal"]
         response = self.memory.tools()[0].invoke({"type": "tool_call", "name": "milai_retrieve",
             "id": f"state-retrieve-{self.calls}", "args": request}, config=self.config)
         packet = json.loads(response.content)
