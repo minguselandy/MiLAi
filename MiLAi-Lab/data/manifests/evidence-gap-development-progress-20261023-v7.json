@@ -1,0 +1,189 @@
+{
+  "status": "ACTIVE;STATE_BRANCH_EXECUTOR_VERIFIED;LME901_COMPLETE_ONE_UNKNOWN;SAVED_CPU262_RUNNING",
+  "observed_at": "2026-10-23T09:52:13.243037+00:00",
+  "source_version": "b1a8956b",
+  "previous_progress": "data/manifests/evidence-gap-development-progress-20261023-v6.json",
+  "plan": "docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261023.md",
+  "execution": "docs/TRAINING_GENERALIZATION_EXECUTION_20261021.md",
+  "previous_turn_classification": "progress: actual STATE capture code/validation and local commits; live jobs verified",
+  "state_branch": {
+    "CLI": "tools/run_state_retrieval_branch.py CAPTURE RECIPE OUTPUT --source-version VERSION --compute-phase UNIQUE_PHASE",
+    "capability": "Actual original request/allowance and complete first decision checked; Store clone and real checkpoint prefix restored; legal bound intervention plus fixed declared continuation; no domain execution or invented feedback",
+    "shared_policy_generation_meter": "runners/state_memory.py used by task and branch runners",
+    "Host_continuation": "still pending"
+  },
+  "validation": {
+    "affected_tests": {
+      "passed": 27,
+      "skipped": 1
+    },
+    "skip": "optional MemPursuit absent",
+    "first_failure": "fixture had one exchange, already-known material no longer offered READ; independent actual occurrence fixtures used without altering executor",
+    "ruff": "PASS",
+    "scoped_mypy": "4 modules PASS with disclosed exclusions",
+    "package_boundary": "PASS",
+    "tools_boundary": "PASS",
+    "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-branch-validation-v1",
+    "full_suite": "not_run",
+    "remote_CI": "not_run"
+  },
+  "public_component": {
+    "root": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-public-branches-v1",
+    "status": "COMPLETE_GIVEN_REQUEST_COMPONENT_BRANCHES",
+    "source_records": 39,
+    "actual_known_refs": 1,
+    "selection": "First two ordinary READs from actual candidate order, declared before branch results; continuation0",
+    "branches": [
+      {
+        "action": {
+          "id": "read_0",
+          "kind": "READ",
+          "target": "candidate 0",
+          "parameters": {
+            "index": 0
+          }
+        },
+        "return_tokens": 207,
+        "material_items": 1,
+        "usage": {
+          "control_steps": 3,
+          "known_reference_reads": 1,
+          "operations": 2,
+          "material_budget_rejections": 0,
+          "read_operations": 1
+        },
+        "before_equal": true,
+        "allowance_equal": true
+      },
+      {
+        "action": {
+          "id": "read_1",
+          "kind": "READ",
+          "target": "candidate 1",
+          "parameters": {
+            "index": 1
+          }
+        },
+        "return_tokens": 63,
+        "material_items": 0,
+        "usage": {
+          "control_steps": 3,
+          "known_reference_reads": 1,
+          "operations": 2,
+          "material_budget_rejections": 1,
+          "read_operations": 1
+        },
+        "before_equal": true,
+        "allowance_equal": true
+      }
+    ],
+    "finding": "read0 delivered previous public user question; read1 budget rejection and empty packet. F1/F3 issues persist; no utility/answer labels.",
+    "captured_bytes_unchanged": true,
+    "native_domain_unchanged": true,
+    "scope": "New given-request component run using an actual prior Host query and public train corpus. Repeated request on a new public turn carries actual delivered refs. Fresh native sandbox, no domain operations. Not reconstruction of old F5 before or repair of old task results; no Host answer, task score or feedback labels.",
+    "model_forwards": 0,
+    "HTTP_requests": 0
+  },
+  "LME": {
+    "status": "COMPLETE_901_ARCHIVED_PATHS_VERIFIED_ONE_ORIGINAL_PATH_UNKNOWN",
+    "source_version": "a33974c0",
+    "completed_paths": 901,
+    "planned_paths": 902,
+    "original_preserved_complete": 501,
+    "continued_complete": 400,
+    "unknown": [
+      {
+        "original_index": 501,
+        "row": 250,
+        "delivery_selection": true,
+        "reason": "Original interrupted path has neither completed case nor archive; never retried."
+      }
+    ],
+    "archives_verified": 901,
+    "by_delivery_selection": {
+      "False": {
+        "paths": 451,
+        "empty_packets": 0,
+        "reader_overflow_paths": 0,
+        "state_drop_paths": 0,
+        "head_drop_paths": 0,
+        "mask_replacement_paths": 0,
+        "material_budget_rejections": 1838,
+        "max_sequence_tokens": 10817,
+        "max_reader_reserved_tokens": 14816,
+        "source_images": 545,
+        "native_inputs": 7216
+      },
+      "True": {
+        "paths": 450,
+        "empty_packets": 0,
+        "reader_overflow_paths": 0,
+        "state_drop_paths": 2,
+        "head_drop_paths": 0,
+        "mask_replacement_paths": 0,
+        "material_budget_rejections": 1834,
+        "max_sequence_tokens": 16384,
+        "max_reader_reserved_tokens": 14816,
+        "source_images": 545,
+        "native_inputs": 7200
+      }
+    },
+    "by_representation": {
+      "shared_actions": {
+        "inputs": 7208,
+        "state_drop_inputs": 2,
+        "head_drop_inputs": 0,
+        "mask_replacements": 0,
+        "max_sequence_tokens": 16384
+      },
+      "shared_actions_request_text": {
+        "inputs": 7208,
+        "state_drop_inputs": 2,
+        "head_drop_inputs": 0,
+        "mask_replacements": 0,
+        "max_sequence_tokens": 16384
+      }
+    },
+    "fully_paired_questions": 450,
+    "single_path_questions": [
+      250
+    ],
+    "paired_delivered_evidence_different": 1,
+    "scope": "Frozen fixed-policy path and capacity coverage only; no Reader answers, native QA judgements, learned-policy coverage or current-method result.",
+    "archive_verification_scope": "All901 archived audit-case JSON reconstructed and checked against summary, decisions, paired input representation counts and actual packet/Reader measurements. Full database/trace bytes were verified directly at original archive construction; this reconciliation does not repeat that entire byte comparison or alter bases.",
+    "reconciliation": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/lme-fixed-path-tail400-v1/reconciliation.json",
+    "overflow_details": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/lme-fixed-path-tail400-v1/overflow-details.json",
+    "native_capacity_pass": false,
+    "Reader_QA_answers": 0,
+    "native_QA_judging": "not_run"
+  },
+  "active_processes": [
+    {
+      "root": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-u262-v1",
+      "driver_pid": 2925107,
+      "child_pid": 2925108,
+      "session": 47993,
+      "status": "RUNNING",
+      "actual_proc_present": true,
+      "completed": 163,
+      "planned": 876,
+      "neural_model": true
+    }
+  ],
+  "accounting": {
+    "pending_manifest": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/pending-costs-v7.json",
+    "measured_cpu_seconds_pending": 11071.146434655,
+    "ledger_recorded": false,
+    "reason": "Saved CPU262 remains live; no offline settlement",
+    "unmeasured": "Original LME501prefix wholeprocess, Python3.10 reconciliation startup and other unmeasured overhead remain unknown; prior settled costs unchanged"
+  },
+  "scheduling": "Only original saved CPU262 neural job lives. Do not restart on stale status or launch second neural work or settle offline costs. LME400 is CLOSED; retain original immutable bases and all901 archives.",
+  "remaining": "Original262/393/524andselectedtrain/selection;otherfits/feedback32/64/128/T2/statecomparison/seeds;F1relevance/F2faithfulness/F3nativecapacity/simulatorcompletion;LMEReader/lifecycle/Host/officialfullprotocol/external/protected/finalfigures. M1-M5 not achieved. STATE fixed Host continuation and real task feedback after actual branch executor.",
+  "Product_API_Schema_permissions_Canonical_changed": false,
+  "Lab_interfaces_changed": true,
+  "no_sha_or_content_fingerprint_validation": true,
+  "no_subagents": true,
+  "no_new_model_services_or_ledger": true,
+  "no_remote_writes": true,
+  "goal_complete": false
+}

@@ -1,4 +1,42 @@
-# LATEST: 2026-10-23 STATE actual decision capture added; original CPU jobs LIVE
+# LATEST: 2026-10-23 STATE branches executable; LME tail CLOSED; savedCPU262 LIVE
+
+Functional source b1a8956b adds actual STATE branch execution from recorded pre-call or
+post-operation Store/checkpoint. Before/request/allowance/complete actions compared before
+policy selection; only captured complete first binding accepted; fixed declared continuation.
+No prefix reexecution,domain tools,automatic retry,Host answer or fabricated feedback labels.
+Task/branch runners share state_memory policy assembly and generation/metering. CLI:
+tools/run_state_retrieval_branch.py CAPTURE RECIPE OUTPUT --source-version VERSION
+--compute-phase UNIQUE_PHASE. Recipe policy plus optional intervention first_action/continuation_steps.
+Original continuous ledger and original generation count/capacity retained; no forked budget.
+27 affected tests pass,1 optional MemPursuit skip;Ruff,4module scopedtyping and boundaries pass.
+First2fixture failures retained: one exchange and known-material READ suppression,not executor bug.
+
+state-public-branches-v1 is a NEW given-request component probe over39existing public train
+records and actual prior Host query. New public turns/Store/native sandbox,not oldF5before repair.
+Second request carries1actual prior deliveredref. First2ordinaryREADs nominated before outcomes:
+read0 delivered previous public user question(207tokens);read1 budget rejected(empty63tokens).
+Both before/allowance equal; original snapshots and sandbox unchanged. No models/HTTP/QA labels.
+8.598946266CPU pending, includes nested branch cost. F1/F3 quality issues remain demonstrated.
+
+Original a33974c0 LME400tail CLOSED normally. All901 old+new audit-case JSON reconstructed and
+crosschecked with summaries,decision traces/native representations/packets/Reader capacity.
+Original index501(row250,selectiontrue) remains unknown,notrerun. Bases/archives retained unchanged.
+451false+450truepaths;allnonempty/allReaderfit/noheadloss/nomaskreplacement. BUT selectiontrue
+row231step7 drops67/100state tokens and row445step7 drops207/244(shared/request_text): native
+capacity NOTpassed, no model forwards. 450pairedquestions/1single;1paired evidencefield differs
+literally,not semantic-quality evidence. No451Readeranswers/nativeQA. Reconciliation+overflow-details
+at lme-fixed-path-tail400-v1. Its driver2364262/child2364263 stopped; do NOT restart.
+
+ONLY live neural job: savedCPU262 driver2925107/child2925108/exec47993,latest163/876 snapshot.
+Verify actual PID/files;do not restart on stale observation. No second neural work or offline
+settlement while262lives. Pending-costs-v7.json totals11071.146434655CPU, includes whole LME400
+child10938.450565(coordinator separate),reconciliation32.159649717,current7validation phases,
+probe,and PREVIOUS7capture validation phases. Nested audit/replay CPU not added again.
+Original interrupted LME501prefix wholeprocess and failed Python3.10 reconciliation startup
+remain unknown. All prior costs/failures preserved. Full remaining scope unchanged;M1-M5 open.
+No agents,newservices,secondledger,push/merge,SHA/fingerprints. See progress-v7/execution record.
+
+# Earlier: 2026-10-23 STATE actual decision capture added; original CPU jobs LIVE
 
 Functional source279124ab adds opt-in --retrieval-snapshots to STATE dynamic runs.
 Reuses RetrievalRecorder; actual pre-call SQLite online backup (including WAL), domain

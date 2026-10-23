@@ -4,6 +4,68 @@
 [原计划](MILAI_TRAINING_DATA_GENERALIZATION_PLAN_20261021.md)，原文复制留存，原目录文件未修改。
 该计划中的“本轮已完成”是另一环境的历史说明，不能代替本机当前验证。
 
+## 2026-10-23：STATE 同 before 分支可执行；原 LME 路径检查闭合至 901/902
+
+`b1a8956b`把上轮真实STATE快照接入分支执行。`replay_state_retrieval`在独立Store副本中恢复
+原公开轮次、请求、known refs、读额度、候选及实际执行前缀；在新的政策决策前逐项核对before和
+完整动作列表。分支首动作必须等于已捕获的完整绑定，之后使用声明的政策和continuation步数，
+不重新执行prefix，也不执行领域业务工具。失败保留为失败；不重试，不产生任务反馈标签。
+
+命令`tools/run_state_retrieval_branch.py CAPTURE RECIPE OUTPUT --source-version VERSION
+--compute-phase UNIQUE_PHASE`使用原连续账本、原容量配置及当时已消耗的generation额度。
+RECIPE包括`policy`，可选`intervention: {first_action: 完整已捕获动作, continuation_steps: N}`。
+原STATE runner与分支runner共用`runners/state_memory.py`中的政策工厂及View生成通路，避免两套
+调用/计量规则。领域快照只复制用于核查；没有把它送给控制器。Host续跑及其真实任务评分仍未接入。
+
+相关检查**27通过、1可选MemPursuit依赖跳过**；Ruff、四模块局部mypy及两项依赖边界通过。
+覆盖两个不同READ绑定、真实known refs、完整初始和post-READ恢复、不同参数拒绝、失败不重试、
+原连续账本与generation额度保留。mypy仍是披露排除项的局部检查；未声称全仓strict/远端CI。
+首轮两项测试失败来自fixture只有一个exchange：紧随用户消息的工具回执属于同一材料，返回后
+也不会再次提供该已知材料的READ。测试改用独立调用记录，没有改变执行器来人为增加合法动作。
+
+随后用原39条公开train来源、原F5第二任务Host的真实查询、原tokenizer和2048完整返包额度，
+做了新的given-request组件运行，目录`state-public-branches-v1`。这不是旧F5 before重建：
+新Store、新公开轮次和新原生沙箱；第二轮携带第一次实际返回的1个known ref。
+先按候选顺序声明两个普通READ，再各执行一次，continuation=0，随后按既有干预机制HANDOFF。
+
+| 实际绑定 | 实际结果 | 完整返包tokens |
+| --- | --- | ---: |
+| read_0 / index0 | 取得新组件运行上一公开轮的用户取消问题，没有补充执行事实 | 207 |
+| read_1 / index1 | `material_budget_exhausted`，空evidence | 63 |
+
+两分支before/完整候选/请求/额度相同，原快照字节及原生沙箱均不变。结果保留了F1请求占位、
+F3额度不足的问题，没有把差异直接标成方向pair或任务收益。没有模型权重、forward、HTTP、
+Host答案或业务执行；8.598946266 CPU秒暂未入账，子replay CPU已包含其中，不重复相加。
+
+原a33974c0版本LME的400条NOT_RUN尾部路径已正常完成。旧501条完成路径及新400条归档的
+`audit-case.json`逐份还原，核对row/profile、完整trace决策、两种原生输入表示计数、实际packet和
+Reader容量。**901条完成路径通过归档一致性核对，原index501（第250题selection=true）仍unknown**，
+未重跑；共450题有完整双路径，另1题只有一条完成路径。原base与全部归档继续保留。
+全数据库/trace逐字节重构比较由原archive构建时完成，本次不冒充重新执行了整库比较。
+
+| 原固定路径配置 | 完成路径 | 空返包 | Reader超限 | 原生state丢token的路径 |
+| --- | ---: | ---: | ---: | ---: |
+| delivery_selection=false | 451 | 0 | 0 | 0 |
+| delivery_selection=true | 450 | 0 | 0 | 2 |
+
+两种表示各7208份输入，均无动作头丢失或mask替换；selection=true的第231题step7，
+shared_actions/request_text分别丢67/100 tokens；第445题step7分别丢207/244 tokens。
+这是SDK容量检查发现的截断风险，未运行模型forward，不能称为原生完整输入通过。
+450个配对中只有1对`evidence`字段字面不同；这不是语义质量或学习政策收益证据。
+Reader最大总预留14816tokens且均可装入，也不代替451份Reader答案及原生QA评分。
+
+尾部子进程完整实测10938.450565 CPU秒（其中audit内部10927.038345876秒，不能再相加），
+协调器0.005101672秒，901归档核对32.159649717秒。首次核对启动因系统Python3.10的StrEnum
+导入失败，在读取归档前退出；记录保留，改用既有3.11环境后核对完成，失败启动CPU仍unknown。
+这些费用加上本轮七项验证和组件probe、上轮尚未结算的七项验证，当前已测待结算合计
+**11071.146434655 CPU秒**，清单`artifacts/evidence-gap-20261023/pending-costs-v7.json`。
+原中断LME前501条的全进程成本仍unknown，未填0。原单账本未改；update262运行期间不结算。
+
+当前唯一神经模型仍为原savedCPU262；393/524、选点及匹配train尚未完成。LME Reader/native judge、
+新来源/反馈/状态比较/种子、F1/F2/F3、完整Host/生命周期/官方外部/四主图均继续保留。
+当前状态索引为[进度v7](../data/manifests/evidence-gap-development-progress-20261023-v7.json)。
+M1–M5未宣布闭合；未执行SHA、远端写入、新服务或第二研究账本。
+
 ## 2026-10-23：STATE 实际决策快照接线，原评估继续运行
 
 `279124ab`补齐动态STATE运行中的F4采集入口。原命令增加`--retrieval-snapshots`，复用已有
