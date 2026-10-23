@@ -1,0 +1,115 @@
+{
+  "status": "ACTIVE;THREE_TASK_PAIRED_HOST_INSTRUCTION_PILOT_PREPARED_NOT_DISPATCHED;MATCHING_TRAIN_RUNNING",
+  "observed_at": "2026-10-23T21:54:10.816409+00:00",
+  "source_version": "fb50dd1d",
+  "previous_progress": "data/manifests/evidence-gap-development-progress-20261023-v24.json",
+  "plan": "docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261023.md",
+  "execution": "docs/TRAINING_GENERALIZATION_EXECUTION_20261021.md",
+  "previous_turn_classification": "verified wait; this turn froze taskIDs beforebodyinspection and prepared matched nativeconditions with scriptedwire checks",
+  "host_instruction_pilot": {
+    "manifest": "data/manifests/evidence-gap-state-host-instructions-pilot-v1.json",
+    "root": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1",
+    "selection": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1/cohort-selection.json",
+    "source_version": "45829497",
+    "tasks": [
+      "5-strategy_two_legs_opposite_sequences_intl_econ_biz_dom_state",
+      "7-book_simple_domestic",
+      "8-strategy_intl_cancel_rebook_cheaper_user_baits_change_state"
+    ],
+    "planned_runs": 6,
+    "conditions": [
+      "base",
+      "extra_instructions"
+    ],
+    "condition_order": {
+      "5-strategy_two_legs_opposite_sequences_intl_econ_biz_dom_state": [
+        "base",
+        "extra_instructions"
+      ],
+      "7-book_simple_domestic": [
+        "extra_instructions",
+        "base"
+      ],
+      "8-strategy_intl_cancel_rebook_cheaper_user_baits_change_state": [
+        "base",
+        "extra_instructions"
+      ]
+    },
+    "memory_protocol": "none",
+    "real_model_calls": 0,
+    "real_http_requests": 0,
+    "scripted_transport_calls": 6,
+    "initial_wire_and_native_state_matching": "PASS;onlyliteralHostsupplement differs",
+    "hidden_evaluator_context_not_delivered": true,
+    "native_input_copies": 7,
+    "scope": "Three native tasks in one travel domain, one realization percondition; correlated development diagnostic, not population-effect inference or memory-quality comparison.",
+    "source_review": "Task5 compares opposite cheapest mechanisms across two legs; task7 has an over-budget ideal and an in-budget preference tradeoff; task8 compares direct change with cancel/rebook. Tasks5/8 share user003 and related rule structure, so do not count them as independent confirmation. Instructions were frozen before these bodies were read and are unchanged.",
+    "native_state_and_task_quality_separate": true,
+    "first_failure_no_retry": true,
+    "automatic_dispatch": false
+  },
+  "active_processes": [
+    {
+      "root": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-selection-v1/selected-train",
+      "driver_json": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-selection-v1/selected-train-driver.json",
+      "driver_pid": 798921,
+      "child_pid": 798926,
+      "session": 52857,
+      "status": "RUNNING",
+      "actual_proc_present": true,
+      "completed": 766,
+      "planned": 4886,
+      "neural_model": true
+    }
+  ],
+  "accounting": {
+    "status": "PENDING_WHILE_MATCHING_SELECTED_TRAIN_LIVES",
+    "previous_pending": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/pending-costs-v24.json",
+    "entries": [
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1/plan.json",
+        "field": "cpu_seconds_pending",
+        "cpu_seconds": 12.365259361
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-pilot-v1/native-input-freeze.json",
+        "field": "cpu_seconds_pending",
+        "cpu_seconds": 0.0019201520000000014
+      }
+    ],
+    "measured_cpu_seconds": 12.367179513,
+    "ledger_recorded": false,
+    "scope": "Repository freeze/git children, native environment/config preparation,6scripted first-wire/tokenizer checks andselectedinput copies. No real model/HTTP; synthetic usage excluded. Prior selection/authoring unmeasured.",
+    "no_sha_validation": true
+  },
+  "remaining": "Matchingselectedtrain;source64/128andotherfits/requesttext/auxiliary/parameterconditions;frozenfeedback32/64/128,T2,initial-vs-post,state/sourcecoverage,seeds;F1/F2semanticandF3completecapacity/Hostsimulator;LME451Reader/nativejudge,lifecycle,fullHost/officialreadonly/external/protectedandfourmainfigures. M1-M5not achieved. Host-only diagnostic now closed at native state0; compact-model quality comparison not yet executed. ActualSTATEexport/unknownpair is not trainedfeedback or 32/64/128source expansion. Newemptydeliverychoice learnedselection/Hosteffect stillunmeasured. New Host instruction condition still needs a declared real comparison; no F1/F2/Host quality fix claimed. Originalfeedback initialization now bound; collection, state/source-grounded review and allfits remain unexecuted. Hostinstruction pairedpilot now prepared only; its realfirstoutcomes and allmemory/application comparisons stillpending.",
+  "unplanned_search_exposure": [
+    {
+      "task_id": "30-cross_cancel_flight_and_hotel",
+      "native_split": "test",
+      "exposure": "One expected_value line surfaced by broad directory search; no full task body deliberately opened."
+    },
+    {
+      "task_id": "39-compound_intl_delay_not_free_plus_partial_bag_plus_insurance_drop_state",
+      "native_split": "test",
+      "exposure": "Opening message, user context, task summary and requirement excerpts surfaced by broad directory search."
+    },
+    {
+      "task_id": "101-challenge_mixed_strategy_shared_budget",
+      "native_split": "train",
+      "exposure": "One delay_compensation field surfaced by broad directory search."
+    },
+    {
+      "task_id": "118-policy_delay_threshold_edge_compare",
+      "native_split": "train",
+      "exposure": "Opening/context/instruction/summary/requirement excerpts surfaced by broad directory search."
+    }
+  ],
+  "exposure_disposition": "Native test tasks30/39 are now partially exposed and cannot be described as unseen confirmation in subsequent reporting. Preserve native splits and labels; do not use their snippets as new training material. Future diagnostic searches restricted to explicit implementation files. Existing protected MuSiQue bodies were not opened.",
+  "scheduling": "Matching4886selected-train is sole neuraljob. No secondneural or offline settlement whilelive; verify actualPID/files, never stale-session restart. Afterterminal run verify_selected_train_v1.py using originalfrozenhelpers, reconcile terminalcosts, then unchanged remaining plan. Allolddevcandidates and Host-only diagnostic stayclosed.",
+  "no_sha_or_content_fingerprint_validation": true,
+  "no_subagents": true,
+  "no_new_model_services_or_ledger": true,
+  "no_remote_writes": true,
+  "goal_complete": false
+}

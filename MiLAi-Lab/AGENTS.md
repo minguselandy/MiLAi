@@ -1,4 +1,28 @@
-# LATEST: 2026-10-24 audited development curve exported; matching train LIVE
+# LATEST: 2026-10-24 three-task paired Host instruction pilot ready/NOTDISPATCHED; train LIVE
+
+state-host-instructions-pilot-v1 selects next3nativeTRAIN IDs5/7/8 in originalsplit order,
+after previouslyattempted1/2/3, BEFORE thispilot bodyinspection; fixedconditionorder recorded.
+6plannedruns:base vs unchangedgenericextra Hostinstructions, memory_protocol none. Frozen
+45829497 source archived;4criticalfiles literalchecked. SameHost/model/budgets/simulatorFalse/
+tools/nativeinitialstate perpair;only configversion+literalHostsupplement differ. Actualscripted
+initialwire pairs checked:only systemsuffix differs,publicopening/tools equal,hiddenevaluator
+context absent.6MOCKtransport calls,0realmodel/HTTP,0weights,syntheticusage excluded. Initial
+capacity check only,not fulltrajectory orquality.7selectednative inputfiles copied literal.
+
+Source-first task+simulator review complete.5/8shareuser003/relatedrules;3tasks arecorrelated
+developmentdiagnostics,not independent/unseenconfirmation ormemory-qualitycomparison.
+Native state andconversation/taskrequirements reviewedseparately;TASK_DONE alone isn'tsuccess.
+No taskreplacement/outcome-based ordering/retry. Runtimefailure/unknownusage inspected before
+remainingunattemptedjob;completedstate0 remainsoutcome,doesn'tchange order. Noautomaticdispatch.
+Plan: data/manifests/evidence-gap-state-host-instructions-pilot-v1.json. No changes tooriginal
+frozenfeedbackv2recipe. pending-costs-v25 adds12.367179513CPU to v21-v24pending; noledgerwrite.
+
+ONLY LIVE neuraljob full4886matchingtrain262 driver798921/child798926/exec52857;verifyactualPID/
+files. No secondneural/offlinesettlement/restart. Aftertrainterminal originalverification/costs
+before nextmodel. Fullremainingplan/M1-M5unfinished;nativeSTATEtest30/39 priorpartialexposure
+retained. Latestprogress-v25/execution;noSHA/agents/services/secondledger/push/merge.
+
+# Earlier: 2026-10-24 audited development curve exported; matching train LIVE
 
 fb50dd1d extends EXISTING tools/plot_operation_curve.py withprimaryCSV andexplicit savedcoverage/
 pendingtrain caveats. Missing savedresults are notsupplied; matchingtrainstatus null,notfalse.
