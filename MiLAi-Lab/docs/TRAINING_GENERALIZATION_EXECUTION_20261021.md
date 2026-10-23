@@ -4,6 +4,28 @@
 [原计划](MILAI_TRAINING_DATA_GENERALIZATION_PLAN_20261021.md)，原文复制留存，原目录文件未修改。
 该计划中的“本轮已完成”是另一环境的历史说明，不能代替本机当前验证。
 
+## 2026-10-24：排除首负例抽样对该字面对照缺口的解释
+
+沿用原始全候选来源分组，分析同一first2000 intake中1612条已登记train原料行的全部候选；
+388条dev原料行在JSON解码前跳过，没有分析或显示dev正文/标签，也没有访问保护来源。
+先按原规则重新构造首负例前缀，逐项对应现有3979条模型输入、gold及来源身份metadata，全部相同。
+
+| 范围 | positive | ordinary negative | instruction negative | 候选合计 |
+| --- | ---: | ---: | ---: | ---: |
+| 原冻结前缀 | 1612 | 1612 | 755 | 3979 |
+| 同批train原料的全部候选 | 1612 | 48360 | 1790 | 51762 |
+
+全部候选中有24082组相同query/完整candidate、不同purpose的字面对照，但相反标签组仍为0；
+完整输入的标签冲突也为0。因此在这批已登记原料内，这项直接条件对照缺口并非仅由
+“每类取首个负例”造成。该结论不外推到整个公开数据集，也不说明指令无用或模型能达到某个分数。
+51762个候选仍对应同一批730个来源族、807个base-query，不能作为50k个独立query组报告。
+
+没有生成扩大后的训练文件、修改原标签或配方，也没有模型/HTTP。raw、groups和原train文件
+逐字节不变；产物为`auxiliary-input-conditions-v1/raw-candidate-instruction-contrast.json`。
+新增已测1.04710063 CPU秒记入`pending-costs-v23.json`，衔接v21/v22，当前匹配train运行期间未结算。
+完整4886条匹配train仍是唯一神经作业，其余研究范围保持开放。当前索引：
+[进度v23](../data/manifests/evidence-gap-development-progress-20261023-v23.json)。M1–M5未完成。
+
 ## 2026-10-24：辅助训练池的字面条件对照诊断
 
 对既有3979条train候选（730来源族、807个base-query）做直接文本分组，不读取dev或保护正文。

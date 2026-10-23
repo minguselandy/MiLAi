@@ -1,4 +1,23 @@
-# LATEST: 2026-10-24 auxiliary literal instruction contrast checked; matching train LIVE
+# LATEST: 2026-10-24 full registered raw auxiliary candidates checked; matching train LIVE
+
+No data/gold/model change. Reused originalallcandidate groupregistry todecode1612TRAIN rawrows
+ofexistingfirst2000intake;388devrows skippedbeforeJSONdecoding. Reconstructed all3979original
+prefix modelinputs/gold/identitymetadata exactly. Same trainrows contain51762publishedcandidate
+occurrences:1612positive,48360ordinarynegative,1790instructionnegative;still730families/807basequeries.
+24082literal(query,completecandidate) groups differ inpurpose,0oppositelabel groups;fullinput
+conflicts0. Thus thisspecific literalcontrast gap isn't onlyfirst-negative sampling. Do not
+generalize towhole release,call51762rows50kquerygroups,or claim instructionsuseless/modelaccuracy.
+No expandedtrainfile/labels/fit. Raw/groups/originaltrain bytesunchanged;no protectedsource.
+Artifactauxiliary-input-conditions-v1/raw-candidate-instruction-contrast.json. pending-costs-v23
+adds1.04710063CPU to v21/v22pending; no ledgerwrite whilematchingtrainlive.
+
+ONLY LIVE neuraljob full4886matchingtrain262 driver798921/child798926/exec52857;verifyactualPID/
+files. No secondneural/offlinesettlement/restart. Originalfeedbackv2bound,notdispatched. Aftertrain
+terminal originalverification/costs before nextmodel. Fullremainingplan/M1-M5unfinished;
+nativeSTATEtest30/39 prior partialexposure retained. Latestprogress-v23/execution;
+noSHA/agents/services/secondledger/push/merge.
+
+# Earlier: 2026-10-24 auxiliary literal instruction contrast checked; matching train LIVE
 
 No functional/data/gold/model change. Existing3979train candidates/730families/807basequeries:
 805basequeries haveempty+nonempty purpose. Directliteral(query,completecandidate) sorting gives
