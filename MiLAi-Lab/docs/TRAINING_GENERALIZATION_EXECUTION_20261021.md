@@ -4,6 +4,47 @@
 [原计划](MILAI_TRAINING_DATA_GENERALIZATION_PLAN_20261021.md)，原文复制留存，原目录文件未修改。
 该计划中的“本轮已完成”是另一环境的历史说明，不能代替本机当前验证。
 
+## 2026-10-23：STATE 实际决策快照接线，原评估继续运行
+
+`279124ab`补齐动态STATE运行中的F4采集入口。原命令增加`--retrieval-snapshots`，复用已有
+`RetrievalRecorder`及执行器检查点，保存每次真实调用前的SQLite在线backup、当时的领域沙箱，
+以及SEARCH/READ后的实际控制状态、剩余额度、全部候选绑定、已取得材料和已执行前缀。
+SELECTED与operation_result分别记录，执行在选择后失败时不会被补成成功结果；零决策调用也保留。
+本次没有修改政策选择或补造方向标签，来源资格和数据划分仍由后续真实采集方案负责。
+
+STATE快照采用独立schema，原functional replay入口明确拒绝把它当成functional目录。
+记录中的`host_frame`来自实际公开Host输入及其工具请求；每轮公开frame另外保存到`host-frames/`，
+包含frame序号及该批调用前的记忆调用计数，便于以后对应真实后续输入。
+这些frame是STATE公开转录和工具目录，不冒充HTTP wire；精确wire仍在原`trace.jsonl`。
+同批领域工具可能先于检索执行，故沙箱快照允许包含它们的实际效果，而原Host frame仍不能
+提前含有尚未返回的工具结果。完整domain快照及这些采集元数据均在评估侧，不进入政策观察。
+
+只读模式不使用这个动态采集开关。默认关闭快照；示例为：
+
+```text
+tools/run_state_bench_local_pilot.py CONFIG PREPARATION OUTPUT
+  --source-version 279124ab --policy fixed_context --split train
+  --memory-protocol dynamic --retrieval-snapshots
+```
+
+真实SQLite/WAL和公开STATE SDK机械检查共**43通过、1可选MemPursuit依赖缺失跳过**。
+验证了真实READ后的检查点在副本中恢复出相同before、候选、最终返包，且不重新执行已有前缀；
+原快照字节保持不变。还检查了选择后异常保留、零决策、公开Host frame与同批实际领域写入的时序，
+隐藏任务summary/requirements不进入公开frame。Ruff、五模块局部mypy、package/tools边界通过；
+局部mypy仍使用既有import-untyped/unused-ignore排除，不称作完整strict或远端CI。
+
+首轮两项新测试失败保留在`state-capture-validation-v1/tests-first.log`：恢复副本需通过既有
+`bind_public_turn(..., phase="resume")`激活当前轮次；普通READ异常本来会形成结构化错误回执，
+不能预期它必然向外抛出。按实际接口修正测试后通过，没有修改执行语义来迎合测试。
+七项已测验证子进程（包括首次失败）合计**53.365518 CPU秒**，尚未入账；运行中的神经评估完成前
+不结算，原先已结算费用不重计。作者操作与其他未测开销仍unknown。
+
+这只是实际状态采集能力，尚未用本版本跑新的真实模型STATE任务或同before任务反馈；
+既有F5失败没有倒推补快照，也没有改为答案反馈。固定Host续跑、STATE分支运行接线与任务结果仍待完成，
+F1适用性/F2语义/F3模型输入容量及M1–M5均未宣布闭合。
+原update262保存后评估和原LME纯CPU尾部检查仍在运行；实际PID、计数及所有剩余范围见
+[进度v6](../data/manifests/evidence-gap-development-progress-20261023-v6.json)，历史快照不是重启依据。
+
 ## 2026-10-23：STATE 只读入口与原 CPU 队列继续
 
 本轮核实update128实际进程继续运行，并按原计划续接独立的纯CPU LongMemEval路径检查。

@@ -1,4 +1,35 @@
-# LATEST: 2026-10-23 readonly STATE added; savedCPU262 + CPU-only LME tail LIVE
+# LATEST: 2026-10-23 STATE actual decision capture added; original CPU jobs LIVE
+
+Functional source279124ab adds opt-in --retrieval-snapshots to STATE dynamic runs.
+Reuses RetrievalRecorder; actual pre-call SQLite online backup (including WAL), domain
+snapshot, real post-operation executor checkpoints/allowance/candidates/full bindings/prefix.
+Selection and result events retained separately; selection followed by an exception has no
+invented result. Zero-decision calls retained. Distinct STATE schemas; functional replay
+rejects these roots. Public Host frames saved under host-frames with frame ordinal and memory
+call count before batch. Frame is public STATE transcript/catalog/response, not an HTTP wire;
+exact wire remains trace.jsonl. Earlier sibling domain effects can exist in retrieval-time
+snapshot while original Host frame has no later results. Evaluator state never enters policy.
+Readonly mode does not use this dynamic capture flag. No old F5 snapshots reconstructed.
+
+43 affected tests PASS,1 optional MemPursuit dependency skip. Actual WAL backup, post-READ
+resume equal before/actions/packet/no prefix reexecution, preserved original snapshot bytes,
+failed/zero-decision calls and real SDK sibling domain writes covered. Ruff,5module scoped
+mypy (same disclosed exclusions),package/tools boundaries pass. First2test failures retained:
+copy must activate public turn via existing resume API; ordinary READ errors are structured
+receipts rather than necessarily raised. Tests corrected to real semantics. No new real-model
+STATE run, task feedback or new labels. STATE branch runner/fixed Host continuation still open.
+
+Original neural savedCPU262 driver2925107/child2925108/exec47993 LIVE,latest89/876 snapshot.
+Original CPU-only LME400 driver2364262/child2364263/exec98205 LIVE,latest367/400. Revalidate
+PID and files; never restart on stale status/session loss. Original code/settings unchanged.
+Keep only one neural model; no offline settlement while262lives. Seven measured validation
+subprocesses including first failures total53.365518CPU pending at state-capture-validation-v1;
+not billed yet. Snapshot overhead in real runners is nested driver CPU,not additional compute.
+Old64 index791 and LME index501 remain unknown. All prior failures/costs preserved.
+Full remaining research scope unchanged; M1-M5 not achieved. No agents,new services,second
+ledger,push/merge,SHA/fingerprints. Current details: progress-20261023-v6 and execution record.
+
+# Earlier: 2026-10-23 readonly STATE added; savedCPU262 + CPU-only LME tail LIVE
 
 Functional source d9f53c61 adds an actual read-only training-artifact path, distinct from
 the existing dynamic hook. SQLite mode=ro, no test Source capture, mutation read-handle,
