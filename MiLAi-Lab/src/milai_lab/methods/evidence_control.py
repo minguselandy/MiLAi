@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import copy
+import json
 import time
 from collections.abc import Callable
 from itertools import combinations
@@ -10,6 +11,7 @@ from typing import Any
 from jsonschema.exceptions import ValidationError
 
 from milai_lab.memory.functional_state import FunctionalRejection, body_text, reference_key
+from milai_lab.memory.retrieval import _lexical_tokens
 from milai_lab.memory.service import MemoryService
 from milai_lab.methods.evidence_reading import (
     build_evidence_packs,
@@ -18,6 +20,7 @@ from milai_lab.methods.evidence_reading import (
     project_pack,
     project_packs,
 )
+from milai_lab.methods.evidence_selection import request_terms
 from milai_lab.methods.memory_control import MemoryAction, MemoryControlState
 from milai_lab.methods.query_structure import (
     QueryStructurePolicy,
@@ -413,18 +416,54 @@ class EvidenceOperations:
                 and "source_observation_cursor" not in a.parameters)
         actions.append(MemoryAction("handoff", "HANDOFF", "Reader with opened evidence"))
         if self.delivery_selection:
-            actions.extend(self.delivery_actions())
+            actions.extend(self.delivery_actions(state))
         return actions
 
-    def delivery_actions(self) -> list[MemoryAction]:
-        """Small acquired packets: single/pair, a View with up to two originals, or all."""
+    def request_delivery_choices(self, state: MemoryControlState) -> list[tuple[int, ...]]:
+        """Offer a bounded greedy prefix for request coverage, not a sufficiency label.
+
+        Whole original bodies supply lexical coverage. Each added source must contribute
+        request terms beyond Host-known originals and the selected prefix, and the whole
+        packet must fit. This adds at most one prefix per observed original; existing
+        choices remain available for semantic alternatives and different evidence types.
+        """
+        needs = request_terms(state.task)
+
+        def terms(item: dict[str, Any]) -> set[str]:
+            return set(_lexical_tokens(" ".join(
+                turn["content"] for turn in json.loads(item["text"]))))
+
+        covered: set[str] = set()
+        for item in self.known_materials:
+            if item["kind"] == "original_source" and item.get("body_delivered") is not False:
+                covered.update(terms(item))
+        remaining = {i: terms(item) for i, item in self.observed.items()
+                     if item["kind"] == "original_source"
+                     and item.get("body_delivered") is not False}
+        selected: set[int] = set()
+        choices = []
+        while remaining:
+            gains = {i: sum(len((tokens - covered) & point) / len(point) for point in needs)
+                     for i, tokens in remaining.items()}
+            index = next((i for i in sorted(remaining, key=lambda i: -gains[i])
+                          if gains[i] > 0 and self.fits_delivery({j: self.observed[j]
+                              for j in self.observed if j in selected or j == i})), None)
+            if index is None:
+                break
+            selected.add(index)
+            covered.update(remaining.pop(index))
+            choices.append(tuple(i for i in self.observed if i in selected))
+        return choices
+
+    def delivery_actions(self, state: MemoryControlState) -> list[MemoryAction]:
+        """Single/pair, View combinations, all, and request-related original prefixes."""
         indices = tuple(self.observed)
         originals = tuple(i for i, item in self.observed.items()
                           if item["kind"] == "original_source")
         views = [i for i, item in self.observed.items() if item["kind"] == "query_structure"]
         choices = [*combinations(indices, 1), *combinations(indices, 2),
                    *((v, *pair) for v in views for pair in combinations(originals, 2)),
-                   originals, indices]
+                   originals, indices, *self.request_delivery_choices(state)]
         actions = []
         for selected in dict.fromkeys(choices):
             if not selected:

@@ -52,21 +52,26 @@ def test_source_presentation_keeps_capture_context_and_existing_aliases(tmp_path
             "Did that option work?", "A different report.", "Yes, that one worked."]
         assert [s["session"] for s in inputs[0]["sources"]] == [
             "conversation-a", "conversation-b", "conversation-a"]
+        assert [s["origin"] for s in inputs[0]["sources"]] == [
+            original[ref]["origin"] for ref in (question, unrelated, reply)]
         assert [s["reported_at"] for s in inputs[0]["sources"]] == [
             "2035-06-02T12:00:00+08:00", "2035-05-01T12:00:00+08:00", None]
         # Presentation must not renumber the established opaque-ID bindings.
         assert [s["id"] for s in inputs[0]["sources"]] == ["e2", "e1", "e0"]
-        later = service.capture_user("conversation-a", "3", "Here is a later update.")[
-            "source_ref"]
+        later = service.capture_tool("conversation-a", "3", "inventory.preview",
+            '{"preview": true, "changed": false}', None)["source_ref"]
         second, _ = build_query_structure(service, "What was reported now?", "",
             [unrelated, reply, question, later], policy="incremental", call=call,
             source_events=list(reversed(service.sources())), force_refresh=True)
         assert [s["id"] for s in inputs[1]["sources"]] == ["e2", "e1", "e0", "e3"]
+        assert inputs[1]["sources"][-1]["origin"] == "inventory.preview"
+        assert inputs[1]["sources"][-1]["text"] == '{"preview": true, "changed": false}'
         assert all(second["source_bindings"][key] == value
                    for key, value in first["source_bindings"].items())
         for item in inputs[1]["source_directory"]:
             ref = second["source_bindings"][item["id"]]["source_ref"]
             assert item["session"] == service.source(ref)["session"]
+            assert item["origin"] == service.source(ref)["origin"]
         assert {ref: service.source(ref) for ref in original} == original
 
 

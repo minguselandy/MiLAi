@@ -5,6 +5,7 @@ from dataclasses import dataclass
 from typing import Any
 
 from milai_lab.memory.retrieval import _lexical_tokens
+from milai_lab.methods.evidence_selection import original_evidence_action
 from milai_lab.methods.memory_control import (
     FixedContextMemoryPolicy,
     MemoryAction,
@@ -43,6 +44,9 @@ class CacheMemoryPolicy:
     min_scope_overlap: float = 0.35
 
     def choose(self, state: MemoryControlState, actions: list[MemoryAction]) -> str:
+        original = original_evidence_action(state, actions, self.reads)
+        if original is not None:
+            return original
         handoff = next(a.id for a in actions if a.kind == "HANDOFF" and not a.parameters)
         goal = state.task.get("read_goal")
         originals = isinstance(goal, dict) and "original_source" in goal.get("evidence", [])

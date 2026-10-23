@@ -7,6 +7,8 @@ from collections.abc import Callable
 from dataclasses import asdict, dataclass, field
 from typing import Any, Literal, Protocol
 
+from milai_lab.methods.evidence_selection import original_evidence_action
+
 Operation = Literal["SEARCH", "READ", "USE_VIEW", "REFRESH_VIEW", "HANDOFF"]
 
 
@@ -223,10 +225,6 @@ class RulesMemoryPolicy:
     expand_context: bool = False
 
     def choose(self, state: MemoryControlState, actions: list[MemoryAction]) -> str:
-        if state.last_result and state.last_result["action"]["kind"] in {
-            "USE_VIEW", "REFRESH_VIEW"
-        } and state.last_result.get("ok"):
-            return next(a.id for a in actions if a.kind == "HANDOFF")
         read_goal = state.task.get("read_goal") or {}
         wants_history = (isinstance(read_goal, dict)
                          and "saved_history" in read_goal.get("evidence", []))
@@ -240,6 +238,13 @@ class RulesMemoryPolicy:
                          and a.parameters.get("index") in historical), None)
             if read is not None:
                 return read.id
+        original = original_evidence_action(state, actions, self.reads)
+        if original is not None:
+            return original
+        if state.last_result and state.last_result["action"]["kind"] in {
+            "USE_VIEW", "REFRESH_VIEW"
+        } and state.last_result.get("ok"):
+            return next(a.id for a in actions if a.kind == "HANDOFF")
         matching = [v for v in state.views if v.get("built_for") == state.task["request"]
                     and v.get("retrieval_request") == state.task.get("retrieval_request")]
         reusable = {v["id"] for v in matching

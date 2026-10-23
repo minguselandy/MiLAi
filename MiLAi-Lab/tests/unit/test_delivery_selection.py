@@ -157,6 +157,115 @@ def original_pool(service, refs):
         for i, ref in enumerate(refs)])
 
 
+def test_required_points_offer_complementary_triple_within_whole_packet_budget(tmp_path):
+    from milai_lab.methods.evidence_control import EvidenceOperations
+
+    with SqliteStore.from_conn_string(str(tmp_path / "db")) as store:
+        service = MemoryService(store, ("delivery", "alice"), "alice", tmp_path / "lock",
+                                functional_contract="functional_v1")
+        texts = ["Catering menu: soup.", "Training completed on Monday.",
+                 "Access card expires Friday.", "Entry receipt: admitted Tuesday."]
+        refs = [service.capture_user("history", str(i), text)["source_ref"]
+                for i, text in enumerate(texts)]
+        state = MemoryControlState(task={"request": "Check entry eligibility and actual entry",
+            "query_time": "", "read_goal": {"evidence": ["original_source"],
+                "required_points": ["Training completed", "Access card expires",
+                                    "Entry receipt admitted"]}})
+        # Keep references and envelope in the limit, not just the source bodies.
+        def fits(packet):
+            return len(canonical({"evidence": packet, "instructions": "Use the sources"})) <= 900
+
+        ops = EvidenceOperations(service, state, load_pool=lambda: original_pool(service, refs),
+            refresh_call=lambda *_: pytest.fail("No generation needed"), fits=fits,
+            delivery_selection=True)
+        for name in ("search", "read_0_observe", "read_1_observe", "read_2_observe",
+                     "read_3_observe"):
+            ops.execute(next(a for a in ops.actions(state) if a.id == name), state)
+        assert not ops.opened
+        choice = next(a for a in ops.actions(state)
+                      if set(a.parameters.get("delivery_indices", [])) == {1, 2, 3})
+        assert ops.execute(choice, state)["ok"]
+        assert fits(ops.reader_evidence())
+        delivered = [s["content"] for item in ops.reader_evidence() for s in item["evidence"]]
+        assert delivered == texts[1:]
+        assert not any(set(a.parameters.get("delivery_indices", [])) == {0, 1, 2, 3}
+                       for a in ops.actions(state))
+
+        # The same actual observations with a different need yield another finite prefix.
+        state.task["read_goal"]["required_points"] = ["Catering menu", "Training completed",
+                                                   "Access card expires"]
+        assert any(set(a.parameters.get("delivery_indices", [])) == {0, 1, 2}
+                   for a in ops.actions(state))
+        # Host-known text is not newly delivered or counted again for lexical coverage.
+        ops.known_materials = [ops.observed[1]]
+        assert not any(set(a.parameters.get("delivery_indices", [])) == {0, 1, 2}
+                       for a in ops.actions(state))
+
+
+@pytest.mark.parametrize("policy_name", ["rules", "cache"])
+def test_simple_policy_selects_originals_without_refresh_and_uses_known_refs(tmp_path, policy_name):
+    from milai_lab.methods.cache_memory_policy import CacheMemoryPolicy
+    from milai_lab.methods.memory_control import RulesMemoryPolicy
+    from milai_lab.methods.query_structure import build_query_structure
+
+    with SqliteStore.from_conn_string(str(tmp_path / "db")) as store:
+        service, memory, _, traces, generated, refs = retrieve_setup(tmp_path, store, [], size=2200)
+        policy = CacheMemoryPolicy() if policy_name == "cache" else RulesMemoryPolicy()
+        memory.control_policy = policy
+        build_query_structure(service, "record", "", refs, policy="incremental",
+            call=lambda messages, schema: memory.dependency_read_call(
+                "query_structure", messages, schema))
+        request = {"query": "Verify both record conditions", "read_goal": {
+            "evidence": ["original_source"],
+            "required_points": ["Record A requires review", "Record B has an exception"]}}
+        packet = memory.retrieve(context(service), "raw", RetrievalRequest.model_validate(request))
+        assert len(generated) == 1  # Existing View; no new generation for an original request.
+        assert packet["usage"]["read_operations"] == 2
+        assert packet["usage"]["material_budget_rejections"] == 0
+        assert {item["kind"] for item in packet["evidence"]} == {"original_source"}
+        assert len(packet["evidence"]) == 2 and len(canonical(packet)) <= 2200
+        operations = [e for e in traces if e.get("phase") == "operation_result"]
+        reads = [e for e in operations if e["result"].get("status") == "observed"]
+        assert len(reads) == 2
+        assert not reads[1]["before"]["visible_evidence"]
+        assert operations[-1]["result"]["status"] == "delivery_selected"
+
+        known = [item["ref"] for item in packet["evidence"]]
+        request["task_context"] = {"known_evidence_refs": known}
+        warm = memory.retrieve(context(service, "again"), "known",
+                               RetrievalRequest.model_validate(request))
+        assert warm["usage"]["read_operations"] == 0
+        assert warm["usage"]["known_reference_reads"] == 2
+        assert warm["evidence"] == [] and len(generated) == 1
+
+
+@pytest.mark.parametrize("policy_name", ["rules", "cache"])
+def test_simple_original_policy_stops_after_one_read_and_preserves_unfittable_gap(
+    tmp_path, policy_name,
+):
+    from milai_lab.methods.cache_memory_policy import CacheMemoryPolicy
+    from milai_lab.methods.memory_control import RulesMemoryPolicy
+
+    with SqliteStore.from_conn_string(str(tmp_path / "db")) as store:
+        service, memory, _, _, generated, _ = retrieve_setup(tmp_path, store, [], size=1600)
+        memory.control_policy = (CacheMemoryPolicy() if policy_name == "cache"
+                                 else RulesMemoryPolicy())
+        request = {"query": "Record A", "read_goal": {"evidence": ["original_source"],
+                                                      "required_points": ["requires review"]}}
+        packet = memory.retrieve(context(service), "single",
+                                 RetrievalRequest.model_validate(request))
+        assert packet["usage"]["read_operations"] == 1
+        assert len(packet["evidence"]) == 1 and not generated
+
+        # Actual content is acquired but no original packet fits. Keep the empty
+        # result and gap; never truncate a source or manufacture a View to pass.
+        request["limits"] = {"max_return_tokens": 500}
+        small = memory.retrieve(context(service, "small"), "unfittable",
+                                RetrievalRequest.model_validate(request))
+        assert small["evidence"] == []
+        assert not generated and len(canonical(small)) <= 500
+
+
 def test_refresh_keeps_older_acquired_view_as_a_distinct_delivery_choice(tmp_path):
     from milai_lab.methods.evidence_control import EvidenceOperations
     from milai_lab.methods.memory_control import MemoryControlState

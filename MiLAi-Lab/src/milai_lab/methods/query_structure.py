@@ -236,6 +236,7 @@ def build_query_structure(
         alias = aliases.get(ref, f"e{len(bindings)}")
         bindings[alias] = {"source_ref": ref, "source_revision": source.get("source_revision", 1)}
         sources.append({"id": alias, "text": body_text(source), "role": source["role"],
+            "origin": source["origin"],
             "session": source["session"],
             "reported_at": source.get("occurred_at"),
             "calendar_context": source.get("calendar_context")})
@@ -257,6 +258,7 @@ def build_query_structure(
                         for alias, binding in bindings.items()],
                     "source_directory": [{"id": key, "body_delivered": key in delivered_aliases,
                         "role": by_ref[binding["source_ref"]]["role"],
+                        "origin": by_ref[binding["source_ref"]]["origin"],
                         "session": by_ref[binding["source_ref"]]["session"],
                         "reported_at": by_ref[binding["source_ref"]].get("occurred_at")}
                         for key, binding in bindings.items()], "current_scope_sources": [
