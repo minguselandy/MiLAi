@@ -222,7 +222,7 @@ class StateReadOnlyMemoryHook:
         return envelope
 
 
-def make_state_agent(model: Any, hook: StateMemoryHook | StateReadOnlyMemoryHook,
+def make_state_agent(model: Any, hook: StateMemoryHook | StateReadOnlyMemoryHook | None,
                      runtime_context: Any, *,
                      initial_retrieval: dict[str, Any] | None = None,
                      observe_host: Callable[[dict[str, Any]], None] = lambda _: None) -> Any:
@@ -233,23 +233,33 @@ def make_state_agent(model: Any, hook: StateMemoryHook | StateReadOnlyMemoryHook
         from jsonschema import validate
 
         validate(initial_retrieval, MEMORY_SCHEMA["parameters"])
+        if hook is None:
+            raise ValueError("Initial retrieval requires a memory hook")
         initial_retrieval = dict(initial_retrieval)
-    public_context = AgentRuntimeContext(task_id=hook.session,
+    public_context = AgentRuntimeContext(task_id=hook.session if hook is not None else "state-task",
         user_id=runtime_context.user_id, domain=runtime_context.domain, now=runtime_context.now)
+    public_turn: str | None = None
 
     class MiLAiStateAgent(BaseAgent):  # type: ignore[misc]  # Optional upstream SDK.
         def memory_tool_schemas(self) -> list[dict[str, Any]]:
-            return [hook.schema]
+            return [hook.schema] if hook is not None else []
 
         def memory_tool_handlers(self) -> dict[str, Any]:
-            return {"retrieve_learnings": hook.retrieve}
+            return {"retrieve_learnings": hook.retrieve} if hook is not None else {}
 
         def generate_next_turn(self, *, system_prompt: str, conversation: list[dict[str, Any]],
                                tools: list[dict[str, Any]]) -> Any:
-            nonlocal initial_retrieval
-            if hook.bind_conversation(conversation):
-                model.begin_public_message(hook.turn)
+            nonlocal initial_retrieval, public_turn
+            if hook is not None:
+                if hook.bind_conversation(conversation):
+                    model.begin_public_message(hook.turn)
+            else:
+                turn = f"turn-{sum(row['role'] == 'user' for row in conversation)}"
+                if turn != public_turn:
+                    model.begin_public_message(turn)
+                    public_turn = turn
             if initial_retrieval is not None:
+                assert hook is not None
                 arguments, initial_retrieval = initial_retrieval, None
                 hook.record({"event": "state_frozen_initial_retrieval", "arguments": arguments,
                              "scope": "Actual prior Host request; conditional interface probe"})
@@ -259,7 +269,8 @@ def make_state_agent(model: Any, hook: StateMemoryHook | StateReadOnlyMemoryHook
                         {"name": "retrieve_learnings", "arguments": arguments}]}}))
                 return AgentTurnResponse(tool_calls=[
                     {"name": "retrieve_learnings", "arguments": arguments}])
-            messages = [SystemMessage(content=system_prompt + "\n\n" + RETRIEVAL_INSTRUCTION),
+            prompt = system_prompt + ("\n\n" + RETRIEVAL_INSTRUCTION if hook is not None else "")
+            messages = [SystemMessage(content=prompt),
                         *conversation_messages(conversation)]
             # STATE publishes flat Responses schemas; the chat bridge uses nested functions.
             chat_tools = [{"type": "function", "function": {

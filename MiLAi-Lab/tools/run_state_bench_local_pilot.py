@@ -73,7 +73,8 @@ def main() -> None:
                         default="fixed_context", help="Existing local evidence policy")
     parser.add_argument("--split", choices=("train", "test"), default="train",
                         help="Declared selection split; task membership is checked before loading")
-    parser.add_argument("--memory-protocol", choices=("dynamic", "readonly"), default="dynamic")
+    parser.add_argument("--memory-protocol", choices=("dynamic", "readonly", "none"),
+                        default="dynamic", help="none is an explicit Host-only diagnostic")
     parser.add_argument("--memory-artifact", type=Path,
                         help="Readonly descriptor: database, namespace, owner, source_split=train")
     parser.add_argument("--compute-phase",
@@ -86,9 +87,11 @@ def main() -> None:
     args = parser.parse_args()
     if (args.memory_protocol == "readonly") != (args.memory_artifact is not None):
         parser.error("--memory-protocol readonly requires --memory-artifact; "
-                     "dynamic does not use it")
+                     "other protocols do not use it")
     if args.retrieval_snapshots and args.memory_protocol != "dynamic":
         parser.error("--retrieval-snapshots captures the dynamic protocol only")
+    if args.memory_protocol == "none" and args.initial_retrieval is not None:
+        parser.error("--initial-retrieval requires an enabled memory protocol")
     selection = read_json(args.preparation / "selection.json")
     sys.path.insert(0, selection["source"])
     from state_bench.agents.base import AgentRuntimeContext
@@ -115,7 +118,7 @@ def main() -> None:
     host_config = VLLMConfig(**settings["host"])
     simulator_thinking = settings.get("stage_enable_thinking", {}).get("state_simulator")
     embedding_config = (VLLMConfig(**settings["embedding"])
-                        if args.policy == "mempursuit" else None)
+                        if args.memory_protocol != "none" and args.policy == "mempursuit" else None)
     clients = [asdict(host_config)]
     if embedding_config is not None:
         clients.append(asdict(embedding_config))
@@ -128,18 +131,24 @@ def main() -> None:
         "environment_file": str(env_path), "source_selection": selection,
         "host_and_simulator": asdict(host_config), "judge": "NOT_RUN",
         "simulator_enable_thinking_override": simulator_thinking,
-        "memory_policy": args.policy, "return_envelope": "at most3strings; one full receipt",
+        "memory_policy": args.policy if args.memory_protocol != "none" else None,
+        "return_envelope": "at most3strings; one full receipt"
+            if args.memory_protocol != "none" else None,
         "memory_protocol": args.memory_protocol,
         "retrieval_snapshots": args.retrieval_snapshots,
         "memory_artifact": str(args.memory_artifact) if args.memory_artifact else None,
-        "memory_control_configuration": settings.get("memory_control", {}),
+        "memory_control_configuration": settings.get("memory_control", {})
+            if args.memory_protocol != "none" else None,
         "compute_phase": args.compute_phase,
         "initial_request_transport": "frozen_actual_request" if initial else "autonomous",
         "initial_request_provenance": initial,
-        "max_return_tokens": settings["ordinary_material_tokens"],
+        "max_return_tokens": settings["ordinary_material_tokens"]
+            if args.memory_protocol != "none" else None,
         "monetary_cost": "Not priced; upstream default USD fields are not observed zero cost.",
-        "scope": "One research trajectory with the declared split and public training corpus. "
-                 "Local Qwen Host/simulator and JSON-action transport; deterministic state "
+        "scope": ("One Host-only research trajectory with no memory tool or corpus. "
+                  if args.memory_protocol == "none" else
+                  "One research trajectory with the declared split and public training corpus. ")
+                 + "Local Qwen Host/simulator and JSON-action transport; deterministic state "
                  "evaluation, without the official simulator/judge or LLM task/UX score."}
     write_json(args.output / "run.json", run)
     started, cpu = time.perf_counter(), time.process_time()
@@ -163,7 +172,7 @@ def main() -> None:
                 embeddings = MeteredEmbeddings(embedding_client, embedding_config.model,
                     settings["embedding_capacity"], dimension=settings["embedding_dimension"],
                     batch_size=settings["embedding_batch_size"])
-            service: MemoryService
+            service: MemoryService | None = None
             store: SqliteStore
             if args.memory_protocol == "dynamic":
                 store = stack.enter_context(TransactionalSqliteStore.from_conn_string(
@@ -176,7 +185,7 @@ def main() -> None:
                     read_json(args.preparation / "sources.json"),
                     args.output / "source-imports.json",
                     preserve_occurrence=True)
-            else:
+            elif args.memory_protocol == "readonly":
                 artifact = read_json(args.memory_artifact)
                 if artifact["source_split"] != "train":
                     raise ValueError("STATE_READONLY_ARTIFACT_REQUIRES_DECLARED_TRAIN_SOURCES")
@@ -190,8 +199,9 @@ def main() -> None:
 
             generate = dependency_generator(host, settings, trace)
 
-            hook: StateMemoryHook | StateReadOnlyMemoryHook
+            hook: StateMemoryHook | StateReadOnlyMemoryHook | None = None
             if args.memory_protocol == "dynamic":
+                assert service is not None
                 memory = build_retrieval(service, capacity.text_tokens, settings, args.policy,
                     budget, trace, embeddings=embeddings, call=generate,
                     admit=lambda: host.reserve_external_request("memory_control"),
@@ -199,7 +209,7 @@ def main() -> None:
                 hook = StateMemoryHook(memory, session="state-task", now=task.now,
                     domain=domain.name,
                     user_id=task.user_id, config_version=args.source_version, record=trace)
-            else:
+            elif args.memory_protocol == "readonly":
                 control = settings.get("memory_control", {})
                 policy, rank_pool = policy_and_pool(control, args.policy, budget, trace, embeddings,
                     generate, lambda: host.reserve_external_request("memory_control"))
@@ -226,7 +236,8 @@ def main() -> None:
                 nonlocal frame_number
                 frame_number += 1
                 host_frame.clear()
-                host_frame.update(frame, frame_number=frame_number, memory_calls_before=hook.calls)
+                host_frame.update(frame, frame_number=frame_number,
+                                  memory_calls_before=hook.calls if hook is not None else 0)
                 if args.retrieval_snapshots:
                     write_json(args.output / "host-frames" / f"frame-{frame_number:04d}.json",
                                host_frame)
@@ -250,12 +261,15 @@ def main() -> None:
                 client=None, simulator_client=cast(Any, simulator), domain=domain, agent=agent,
                 trajectory_metadata={"research_variant": True, "official_protocol": False}))
             write_json(args.output / "trajectory.json", trajectory.to_dict())
-            hook.bind_conversation(trajectory.conversation)
-            write_json(args.output / "memory-sources.json", service.sources())
+            if hook is not None:
+                hook.bind_conversation(trajectory.conversation)
+            if service is not None:
+                write_json(args.output / "memory-sources.json", service.sources())
             state_score = evaluate_state_requirements(task, trajectory.state_diff)
             write_json(args.output / "deterministic-state-score.json",
                        state_score.to_dict() if state_score is not None else None)
-            run.update(status="COMPLETED_RESEARCH_TRAJECTORY", memory_calls=hook.calls,
+            run.update(status="COMPLETED_RESEARCH_TRAJECTORY",
+                       memory_calls=hook.calls if hook is not None else 0,
                        simulator_calls=simulator.calls,
                        state_changed=not trajectory.state_diff.is_empty(),
                        deterministic_state_score=(state_score.score if state_score else None))
