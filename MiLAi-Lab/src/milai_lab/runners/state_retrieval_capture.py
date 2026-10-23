@@ -7,6 +7,7 @@ at retrieval time and can already include effects of earlier sibling tools.
 from __future__ import annotations
 
 import copy
+import shutil
 import sqlite3
 from collections.abc import Callable
 from pathlib import Path
@@ -28,6 +29,7 @@ def capture_state_retrieval(
     WAL contents; no raw database copy, fingerprint or forked ledger is used.
     Snapshot CPU is nested in the caller's already measured driver cost.
     """
+    root = root.resolve()
     memory, service = hook.memory, hook.memory.service
 
     def snapshot(destination: Path) -> None:
@@ -36,6 +38,9 @@ def capture_state_retrieval(
             with sqlite3.connect(destination / "memory.sqlite") as saved:
                 service.store.conn.backup(saved)
         write_json(destination / "domain.json", domain_snapshot())
+        trace_path = context().get("trace_path")
+        if trace_path is not None:
+            shutil.copyfile(trace_path, destination / "provider-trace-prefix.jsonl")
 
     def call_context() -> dict[str, Any]:
         return copy.deepcopy({**context(), "memory_protocol": "state_dynamic",

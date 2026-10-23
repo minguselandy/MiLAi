@@ -5,6 +5,8 @@ Recipe: {"policy": {"policy": "fixed_context", ...}, "intervention":
 Omit intervention to compare the declared policy's normal continuation. Uses the
 original continuous budget and original capacity; never regenerates a Host task,
 retries a failure, executes business tools or assigns task-feedback labels.
+With --host-readout, substitute the branch packet into an actual recorded post-tool
+Host input and request one final answer. This does not execute a counterfactual task.
 """
 from __future__ import annotations
 
@@ -22,6 +24,7 @@ from milai_lab.providers.chat_bridge import VLLMChatModel
 from milai_lab.providers.contextual_capacity import HostCapacity
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
 from milai_lab.providers.embedding_capacity import MeteredEmbeddings
+from milai_lab.runners.state_host_readout import prepare_state_readout, run_state_readout
 from milai_lab.runners.state_memory import build_retrieval, dependency_generator
 from milai_lab.runners.state_retrieval_replay import replay_state_retrieval
 
@@ -34,6 +37,8 @@ def main() -> None:
     parser.add_argument("--source-version", required=True)
     parser.add_argument("--compute-phase", required=True,
                         help="Distinct original-ledger phase for this branch's direct CPU")
+    parser.add_argument("--host-readout", action="store_true",
+                        help="One final answer from the actual original post-tool Host input")
     args = parser.parse_args()
     call, recipe = read_json(args.capture / "call.json"), read_json(args.recipe)
     settings = copy.deepcopy(call["settings"])
@@ -50,6 +55,7 @@ def main() -> None:
         "source_version": args.source_version, "recipe": recipe, "settings": settings,
         "compute_phase": args.compute_phase, "automatic_retry": False,
         "original_generation_calls": call["generation_calls_before"],
+        "host_readout_requested": args.host_readout,
         "budget_path": settings["budget_path"], "new_budget_created": False,
         "scope": "Frozen actual retrieval branch, not autonomous Host/task feedback."}
     write_json(args.output / "run.json", run)
@@ -85,6 +91,15 @@ def main() -> None:
                     < settings["max_calls_per_message"] - 2))
             run.update(status=result["status"],
                        generation_calls_after=host.calls_in_message)
+            if args.host_readout:
+                try:
+                    readout = run_state_readout(prepare_state_readout(args.capture), result,
+                        args.output / "host-readout", host=host, source_version=args.source_version)
+                finally:
+                    run["generation_calls_after"] = host.calls_in_message
+                run.update(host_readout=readout, generation_calls_after=host.calls_in_message)
+                if readout["status"] != "COMPLETED":
+                    run["status"] = "COMPLETED_WITHOUT_HOST_READOUT"
         except BaseException as error:
             run.update(status="FAILED", error_type=type(error).__name__, error=str(error))
             raise

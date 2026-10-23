@@ -19,7 +19,7 @@ from milai_lab.providers.functional_queue import FunctionalQueue
 from milai_lab.providers.generation_admission import DurableGenerationAdmission
 
 
-def _batch(request: dict[str, Any], mode: str) -> list[str]:
+def readout_batch(request: dict[str, Any], mode: str) -> list[str]:
     messages = request["messages"]
     index = max(i for i, item in enumerate(messages) if item["role"] == "assistant")
     response = messages[index]
@@ -71,7 +71,7 @@ def prepare_readout(captured: Path) -> dict[str, Any]:
                 continue
             if len(positions) != 1:
                 raise ValueError("FROZEN_READOUT_AMBIGUOUS_RECEIPT")
-            batch = _batch(request, frame["tool_mode"])
+            batch = readout_batch(request, frame["tool_mode"])
             if call["call_id"] not in batch:
                 raise ValueError("FROZEN_READOUT_TARGET_NOT_IN_LATEST_BATCH")
             position, = positions

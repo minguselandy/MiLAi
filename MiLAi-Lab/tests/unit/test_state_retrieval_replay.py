@@ -121,7 +121,8 @@ def test_changed_binding_rejected_and_policy_failure_retained_without_retry(tmp_
     assert "packet" not in failed and not (tmp_path / "failed/packet.json").exists()
 
 
-def test_cli_uses_original_ledger_and_generation_gate_without_http(tmp_path, monkeypatch):
+@pytest.mark.parametrize("readout", [False, True])
+def test_cli_uses_original_ledger_and_generation_gate_without_http(tmp_path, monkeypatch, readout):
     import run_state_retrieval_branch as cli
     from milai_lab.harness.contextual_artifacts import RunBudget, RunLimits
     from milai_lab.harness.http_ownership import PROFILE
@@ -158,10 +159,13 @@ def test_cli_uses_original_ledger_and_generation_gate_without_http(tmp_path, mon
     recipe = tmp_path / "recipe.json"
     write_json(recipe, {"policy": {"policy": "fixed_context", "reads": 1}})
     monkeypatch.setattr("sys.argv", ["branch", str(captured), str(recipe), str(tmp_path / "branch"),
-        "--source-version", "test", "--compute-phase", "state-unit-branch"])
+        "--source-version", "test", "--compute-phase", "state-unit-branch",
+        *(["--host-readout"] if readout else [])])
     cli.main()
     run = read_json(tmp_path / "branch/run.json")
-    assert run["status"] == "COMPLETED"
+    assert run["status"] == ("COMPLETED_WITHOUT_HOST_READOUT" if readout else "COMPLETED")
+    if readout:
+        assert run["host_readout"]["reason"] == "NO_HOST_REQUEST_ORIGIN"
     assert run["generation_calls_after"] == run["original_generation_calls"] == 4
     assert run["budget_path"] == str(budget_path)
     assert run["budget_before"]["generation_requests"] == run["budget_after"]["generation_requests"]
