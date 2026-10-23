@@ -47,10 +47,11 @@ class MemoryControlState:
     budget: dict[str, Any] = field(default_factory=dict)
     observed_materials: list[dict[str, Any]] | None = None
     observed_evidence: list[dict[str, Any]] | None = None
+    retrieved_scopes: list[dict[str, Any]] | None = None
 
     def project(self) -> dict[str, Any]:
         result = asdict(self)
-        for key in ("observed_materials", "observed_evidence"):
+        for key in ("observed_materials", "observed_evidence", "retrieved_scopes"):
             if result[key] is None:
                 del result[key]
         return result
@@ -157,7 +158,7 @@ class FixedMemoryPolicy:
 
 @dataclass
 class FixedContextMemoryPolicy:
-    """Fixed complete-context reads; no semantic selector or hidden sufficiency label."""
+    """Fixed context acquisition, then an admitted packet in retrieval order."""
 
     reads: int = 4
 
@@ -174,7 +175,11 @@ class FixedContextMemoryPolicy:
                     and "observed_source" not in a.parameters), None)
                 if read is not None:
                     return read.id
-        return next(a.id for a in actions if a.kind == "HANDOFF")
+        handoffs = [a for a in actions if a.kind == "HANDOFF" and (not a.parameters or len(
+            a.parameters["delivery_indices"]) <= self.reads)]
+        return max(handoffs, key=lambda a: (
+            len(a.parameters.get("delivery_indices", state.visible_evidence)),
+            -len(a.parameters.get("retrieved_scope_indices", [])))).id
 
 
 @dataclass

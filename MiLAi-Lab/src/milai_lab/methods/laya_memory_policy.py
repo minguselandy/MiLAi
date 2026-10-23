@@ -135,6 +135,9 @@ def project_operation_payload(payload: dict[str, Any], projection: str) -> dict[
                 "label", "kind", "revision", "visibility", "source_bindings"))
                 for item in state["observed_evidence"]]}
            if "observed_materials" in state else {}),
+        **({"retrieved_scopes": [fields(item, ("item_index", "source_ranges"))
+                                  for item in state["retrieved_scopes"]]}
+           if "retrieved_scopes" in state else {}),
         **({"action_bindings": state["action_bindings"]} if "action_bindings" in state else {}),
     }}
 
@@ -156,6 +159,10 @@ def operation_payload(
             "READ observe_only acquires material without adding it to delivery. USE_VIEW "
             "replace_delivery selects only that View. HANDOFF delivery_indices explicitly "
             "chooses an offered acquired packet; plain HANDOFF retains current delivery. "
+            "retrieved_scope_indices selects original retrieved ranges (including their "
+            "provided context), listed with exact bodies in retrieved_scopes. These may include "
+            "another candidate covered by an acquired expanded context, without a separate READ. "
+            "Full expanded observations remain available; scope selection performs no new READ. "
             "Only selected material goes to the Host; observations and generation still cost work."
             " action_bindings gives each option's complete target and parameters."
             " SEARCH query_from refers to the request, a required point, or the actual search "

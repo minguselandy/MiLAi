@@ -26,11 +26,15 @@ def original_binding_material(
             "range": [span["start"], span["end"]],
             "occurred_at": source.get("occurred_at"), "observed_at": source["observed_at"],
             **({"source_total_codepoints": len(body_text(source))}
-               if binding.get("source_observation_read") else {}),
+               if binding.get("source_observation_read") or binding.get("source_range_read")
+               else {}),
             **({"calendar_context": source["calendar_context"]}
-               if "calendar_context" in source else {})})
+               if "calendar_context" in source else {}),
+            **({"capture_context": source["capture_context"]}
+               if "capture_context" in source else {})})
     return {"kind": "original_source", "source_ranges": ranges,
-            **({"source_observation_read": True} if binding.get("source_observation_read") else {}),
+            **{key: binding[key] for key in ("source_observation_read", "source_range_read")
+               if key in binding},
             "visibility": "visible", "body_delivered": True,
             "text": json.dumps(turns, ensure_ascii=False)}
 
@@ -75,8 +79,11 @@ def original_witness_preferences(
     for key in choices:
         if kinds[key] != "HANDOFF":
             continue
-        indices = row["metadata"]["action_parameters"][key].get("delivery_indices")
-        selected = opened.values() if indices is None else [observed[i] for i in indices]
+        parameters = row["metadata"]["action_parameters"][key]
+        indices = parameters.get("delivery_indices")
+        narrowed = parameters.get("retrieved_scope_indices", [])
+        selected = opened.values() if indices is None else [
+            bindings["candidate_materials"][i] if i in narrowed else observed[i] for i in indices]
         delivered = complete_originals([*selected, *known], sources)
         if any(proof <= delivered for proof in proofs):
             handoffs.append(key)

@@ -11,16 +11,17 @@ from typing import Any
 from jsonschema.exceptions import ValidationError
 
 from milai_lab.memory.functional_state import FunctionalRejection, body_text, reference_key
-from milai_lab.memory.retrieval import _lexical_tokens
+from milai_lab.memory.reader_projection import merge_source_ranges
 from milai_lab.memory.service import MemoryService
 from milai_lab.methods.evidence_reading import (
     build_evidence_packs,
+    observed_original_scope,
     open_evidence_packs,
     pack_candidate,
     project_pack,
     project_packs,
 )
-from milai_lab.methods.evidence_selection import request_terms
+from milai_lab.methods.evidence_selection import original_terms, request_terms
 from milai_lab.methods.memory_control import MemoryAction, MemoryControlState
 from milai_lab.methods.query_structure import (
     QueryStructurePolicy,
@@ -420,7 +421,8 @@ class EvidenceOperations:
             actions.extend(self.delivery_actions(state))
         return actions
 
-    def request_delivery_choices(self, state: MemoryControlState) -> list[tuple[int, ...]]:
+    def request_delivery_choices(self, state: MemoryControlState,
+                                 materials: dict[int, dict[str, Any]]) -> list[tuple[int, ...]]:
         """Offer a bounded greedy prefix for request coverage, not a sufficiency label.
 
         Whole original bodies supply lexical coverage. Each added source must contribute
@@ -431,14 +433,13 @@ class EvidenceOperations:
         needs = request_terms(state.task)
 
         def terms(item: dict[str, Any]) -> set[str]:
-            return set(_lexical_tokens(" ".join(
-                turn["content"] for turn in json.loads(item["text"]))))
+            return original_terms({"kind": item["kind"], "evidence": json.loads(item["text"])})
 
         covered: set[str] = set()
         for item in self.known_materials:
             if item["kind"] == "original_source" and item.get("body_delivered") is not False:
                 covered.update(terms(item))
-        remaining = {i: terms(item) for i, item in self.observed.items()
+        remaining = {i: terms(item) for i, item in materials.items()
                      if item["kind"] == "original_source"
                      and item.get("body_delivered") is not False}
         selected: set[int] = set()
@@ -447,14 +448,25 @@ class EvidenceOperations:
             gains = {i: sum(len((tokens - covered) & point) / len(point) for point in needs)
                      for i, tokens in remaining.items()}
             index = next((i for i in sorted(remaining, key=lambda i: -gains[i])
-                          if gains[i] > 0 and self.fits_delivery({j: self.observed[j]
-                              for j in self.observed if j in selected or j == i})), None)
+                          if gains[i] > 0 and self.fits_delivery({j: materials[j]
+                              for j in materials if j in selected or j == i})), None)
             if index is None:
                 break
             selected.add(index)
             covered.update(remaining.pop(index))
-            choices.append(tuple(i for i in self.observed if i in selected))
+            choices.append(tuple(i for i in materials if i in selected))
         return choices
+
+    def retrieved_scopes(self) -> dict[int, dict[str, Any]]:
+        """Bounded alternatives to actual expanded originals; full observations stay intact."""
+        acquired = [item for item in self.observed.values()
+                    if item["kind"] == "original_source"
+                    and item.get("body_delivered") is not False]
+        return {i: scope for i, item in enumerate(self.materials)
+                if item["kind"] == "original_source" and item.get("body_delivered") is not False
+                and (i not in self.observed
+                     or item["source_ranges"] != self.observed[i].get("source_ranges"))
+                and (scope := observed_original_scope(acquired, item)) is not None}
 
     def delivery_actions(self, state: MemoryControlState) -> list[MemoryAction]:
         """Single/pair, View combinations, all, and request-related original prefixes."""
@@ -462,18 +474,45 @@ class EvidenceOperations:
         originals = tuple(i for i, item in self.observed.items()
                           if item["kind"] == "original_source")
         views = [i for i, item in self.observed.items() if item["kind"] == "query_structure"]
+        retrieved = self.retrieved_scopes()
+        # All covered original candidates remain available individually. A fitting
+        # retrieval-order prefix and a request-related prefix add combinations,
+        # without enumerating pairs/subsets of a potentially large acquired context.
+        prefixes = []
+        prefix: dict[int, dict[str, Any]] = {}
+        covered: list[dict[str, Any]] = []
+        for i, item in retrieved.items():
+            combined = merge_source_ranges([*covered, *item["source_ranges"]])
+            if combined != merge_source_ranges(covered) and self.fits_delivery({**prefix, i: item}):
+                prefix[i] = item
+                covered = combined
+                prefixes.append(tuple(prefix))
         choices = [*combinations(indices, 1), *combinations(indices, 2),
                    *((v, *pair) for v in views for pair in combinations(originals, 2)),
-                   originals, indices, *self.request_delivery_choices(state)]
+                   originals, indices, *self.request_delivery_choices(state, self.observed),
+                   *((i,) for i in retrieved), *prefixes,
+                   *((v, *p) for v in views for p in prefixes),
+                   *(self.request_delivery_choices(state, {**self.observed, **retrieved})
+                     if retrieved else [])]
         actions = []
         for selected in dict.fromkeys(choices):
             if not selected:
                 continue
-            items = {i: self.observed[i] for i in selected}
-            if items != self.opened and self.fits_delivery(items):
-                actions.append(MemoryAction("handoff_select_" + "_".join(map(str, selected)),
-                    "HANDOFF", "selected acquired material",
-                    {"delivery_indices": list(selected)}))
+            required = tuple(i for i in selected if i not in self.observed)
+            bounded = tuple(i for i in selected if i in retrieved and i in self.observed)
+            # Full, all retrieved scopes, and one retrieved scope at a time;
+            # do not enumerate the power set of scope assignments.
+            variants = dict.fromkeys([required, (*required, *bounded),
+                                      *((*required, i) for i in bounded)])
+            for narrowed in variants:
+                items = {i: retrieved[i] if i in narrowed else self.observed[i] for i in selected}
+                if items != self.opened and self.fits_delivery(items):
+                    suffix = ("_retrieved_" + "_".join(map(str, narrowed))) if narrowed else ""
+                    actions.append(MemoryAction(
+                        "handoff_select_" + "_".join(map(str, selected)) + suffix,
+                        "HANDOFF", "selected acquired material",
+                        {"delivery_indices": list(selected),
+                         **({"retrieved_scope_indices": list(narrowed)} if narrowed else {})}))
         return actions
 
     def search_actions(self, state: MemoryControlState) -> list[MemoryAction]:
@@ -519,12 +558,16 @@ class EvidenceOperations:
     def _deliver(self, state: MemoryControlState) -> None:
         state.visible_evidence = project_packs(list(self.opened.values()), list(self.opened))
         if self.delivery_selection:
+            retrieved = self.retrieved_scopes()
             state.observed_materials = [{"item_index": i,
                 "selected": self.opened.get(i) == item,
                 **{key: copy.deepcopy(item[key]) for key in (
                     "kind", "id", "revision", "version_view", "visibility", "body_delivered",
                     "source_ranges", "source_bindings") if key in item}}
                 for i, item in self.observed.items()]
+            state.retrieved_scopes = [{"item_index": i,
+                "source_ranges": copy.deepcopy(item["source_ranges"]),
+                "evidence": project_pack(item, i)} for i, item in retrieved.items()]
             # Per-item source aliases distinguish these controller-only bodies from delivery.
             state.observed_evidence = [project_pack(item, i) for i, item in self.observed.items()
                                        if self.opened.get(i) != item]
@@ -547,13 +590,17 @@ class EvidenceOperations:
 
     def execute(self, action: MemoryAction, state: MemoryControlState) -> dict[str, Any]:
         if action.kind == "HANDOFF":
-            selected = {i: self.observed[i] for i in action.parameters["delivery_indices"]}
+            narrowed = action.parameters.get("retrieved_scope_indices", [])
+            retrieved = self.retrieved_scopes() if narrowed else {}
+            selected = {i: retrieved[i] if i in narrowed else self.observed[i]
+                        for i in action.parameters["delivery_indices"]}
             if not self.fits_delivery(selected):
                 return {"ok": False, "status": "material_budget_exhausted"}
             self.opened = selected
             self._deliver(state)
             return {"ok": True, "status": "delivery_selected",
-                    "delivery_indices": list(selected)}
+                    "delivery_indices": list(selected),
+                    **({"retrieved_scope_indices": narrowed} if narrowed else {})}
         if action.kind == "SEARCH":
             if self.search_pool is None:
                 self.materials = self.internal_pool(self.load_pool())

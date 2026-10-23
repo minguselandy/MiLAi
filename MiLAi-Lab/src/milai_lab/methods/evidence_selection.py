@@ -84,7 +84,8 @@ def original_evidence_action(
                row.get("capture_context") != "given_retrieval_request"
                for row in item.get("evidence", []))}
     acquired = known.union(*raw.values())
-    current = [m["item_index"] for m in state.observed_materials if m["selected"]]
+    current = [int(item["label"][1:]) for item in state.visible_evidence]
+    retrieved = {m["item_index"]: m["evidence"] for m in state.retrieved_scopes or []}
 
     def handoff() -> str:
         options = [a for a in actions if a.kind == "HANDOFF"]
@@ -95,15 +96,19 @@ def original_evidence_action(
 
         def score(action: MemoryAction) -> tuple[float, int]:
             indices = selected(action)
-            terms = known.union(*(raw.get(i, set()) for i in indices))
-            size = len(json.dumps([observed[i] for i in indices], ensure_ascii=False))
+            narrowed = action.parameters.get("retrieved_scope_indices", [])
+            packet = ([retrieved[i] if i in narrowed else observed[i] for i in indices]
+                      if action.parameters else state.visible_evidence)
+            terms = known.union(*(original_terms(item) for item in packet))
+            size = len(json.dumps(packet, ensure_ascii=False))
             return coverage(terms, needs), -size
 
         best = max(options, key=score)
         # With no lexical signal, keep a real observation rather than pretending
         # that an empty packet resolves a semantically opaque request.
         if not selected(best) and raw and coverage(known, needs) == 0:
-            best = next((a for a in options if any(i in raw for i in selected(a))), best)
+            best = next((a for a in options if any(i in raw or i in retrieved
+                                                 for i in selected(a))), best)
         return best.id
 
     acquired_originals = sum(item["kind"] == "original_source"

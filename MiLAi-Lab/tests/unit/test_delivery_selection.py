@@ -157,6 +157,177 @@ def original_pool(service, refs):
         for i, ref in enumerate(refs)])
 
 
+def test_expanded_context_can_deliver_retrieved_scope_without_rereading_or_false_labels(tmp_path):
+    from milai_lab.methods.memory_control import FixedContextMemoryPolicy
+
+    with SqliteStore.from_conn_string(str(tmp_path / "db")) as store:
+        service = MemoryService(store, ("delivery", "alice"), "alice", tmp_path / "lock",
+                                functional_contract="functional_v1")
+        texts = ["Access requires completed training AND a valid permit.",
+                 "The access receipt records training complete and permit valid.",
+                 "UNRELATED_CONTEXT " + "cafeteria " * 600]
+        refs = [service.capture_user("history", str(i), body)["source_ref"]
+                for i, body in enumerate(texts)]
+        traces = []
+        memory = IntentRetrievalMemory(service, len, material_limit=1800, read_limit=8,
+            evidence_policy="question_pack_v1", source_access="independent_v1",
+            source_tokenization="unicode_v1", control_policy=FixedContextMemoryPolicy(),
+            control_steps=8, control_delivery_selection=True, control_record=traces.append)
+        cfg = context(service)
+        packet = memory.retrieve(cfg, "bounded", RetrievalRequest(query="access receipt"))
+        assert packet["evidence"]  # Old implementation handed off an empty packet.
+        assert len(canonical(packet)) <= 1800
+        assert packet["usage"]["read_operations"] == 1
+        assert packet["usage"]["material_budget_rejections"] == 1
+        delivered = [s["content"] for e in packet["evidence"] for s in e["evidence"]]
+        assert delivered == texts[:2]  # Includes the original previous-exchange condition.
+        assert memory.read_allowance(cfg)["reads_remaining"] == 5  # Two searches + one read.
+        before = [e for e in traces if e.get("phase") == "decision_input"][-1]
+        assert texts[2] in canonical(before["before"]["observed_evidence"])
+        assert before["before"]["visible_evidence"] == []
+        assert len(before["before"]["observed_materials"]) == 1
+        action = next(e for e in traces if e.get("phase") == "operation_result"
+                      and e["result"].get("status") == "delivery_selected")
+        assert action["result"]["retrieved_scope_indices"] == [0]
+        full = operation_payload(MemoryControlState(**before["before"]),
+                                 [MemoryAction(**a) for a in before["actions"]], "shared_actions")
+        expanded = expand_observation_state(full["state"])
+        assert expanded["retrieved_scopes"][0]["source_ranges"] == (
+            before["candidate_materials"][0]["source_ranges"])
+        mechanical = operation_payload(MemoryControlState(**before["before"]),
+                                      [MemoryAction(**a) for a in before["actions"]], "mechanical")
+        assert "evidence" not in mechanical["state"]["retrieved_scopes"][0]
+
+        row = decision_example(before, {"event_id": f"bounded/{before['step']}",
+            "actual_bindings": {k: before[k] for k in (
+                "candidate_materials", "opened_materials", "known_materials",
+                "observed_materials")}})
+        sources = {s["event_id"]: s for s in service.sources()}
+        selected_ref = packet["evidence"][0]["ref"]
+        positive, _ = original_witness_preferences(row, proofs=[set(refs[:2])], sources=sources,
+            return_key=selected_ref["snapshot_id"], token_count=len)
+        assert action["selected"] in positive
+        outside, _ = original_witness_preferences(row, proofs=[{refs[2]}], sources=sources,
+            return_key=selected_ref["snapshot_id"], token_count=len)
+        assert action["selected"] not in outside  # An acquired witness was NOT delivered.
+        reopened = memory._known_materials(RetrievalRequest.model_validate({"query": "same",
+            "task_context": {"known_evidence_refs": [selected_ref]}}))
+        assert [s["content"] for s in json.loads(reopened[0]["text"])] == texts[:2]
+        assert service.source(refs[2])["content"] == texts[2]
+
+
+def test_retrieved_scope_uses_actual_unicode_offsets_and_cannot_resurrect_revoked_body(tmp_path):
+    from milai_lab.methods.evidence_control import EvidenceOperations
+    from milai_lab.methods.evidence_reading import project_pack
+    from milai_lab.methods.intent_retrieval import material_binding
+    from milai_lab.methods.retrieval_supervision import original_binding_material
+    from milai_lab.methods.source_ranges import SourceRangeBudget, source_range_packs
+
+    with SqliteStore.from_conn_string(str(tmp_path / "db")) as store:
+        service = MemoryService(store, ("delivery", "alice"), "alice", tmp_path / "lock",
+                                functional_contract="functional_v1")
+        text = 'prefix 雨🙂e\u0301 "conditional" suffix'
+        ref = service.capture_tool("history", "1", "observation", text, None)["source_ref"]
+        whole = original_pool(service, [ref])[0]
+        packs = source_range_packs(whole, SourceRangeBudget(
+            8, len, lambda body: [(i, i + 1) for i in range(len(body))]))
+        state = MemoryControlState(task={"request": "conditional", "query_time": ""})
+        ops = EvidenceOperations(service, state, load_pool=lambda: [packs[1]],
+            refresh_call=lambda *_: {}, fits=lambda _: True, delivery_selection=True)
+        for name in ("search", "context_0_observe"):
+            ops.execute(next(a for a in ops.actions(state) if a.id == name), state)
+        full_body = ops.observed[0]["text"]
+        choice = next(a for a in ops.actions(state)
+                      if a.parameters.get("retrieved_scope_indices") == [0])
+        assert ops.execute(choice, state)["ok"]
+        body, = json.loads(ops.opened[0]["text"])
+        span = packs[1]["source_ranges"][0]
+        assert body["content"] == text[span["start"]:span["end"]]
+        assert body["range"] == [span["start"], span["end"]]
+        assert body["source_ref"] == ref and body["source_revision"] == 1
+        projected = original_binding_material(material_binding(ops.opened[0]),
+                                               {ref: service.source(ref)})
+        assert project_pack(projected, 0) == project_pack(ops.opened[0], 0)
+        assert ops.observed[0]["text"] == full_body
+        handle = service.source_fragment_range(ref, 0, len(text))["fragment_handle"]
+        service.forget("history", "forget", fragment_handles=[handle])
+        available = ops.actions(state)
+        assert not any(a.parameters.get("retrieved_scope_indices") for a in available)
+        assert text not in canonical(state.project())
+        assert all(e.get("body_delivered") is False for e in ops.opened.values())
+
+
+def test_one_acquired_context_offers_three_complementary_scopes_but_not_unread_source(
+    tmp_path, monkeypatch,
+):
+    from milai_lab.methods.cache_memory_policy import CacheMemoryPolicy
+    from milai_lab.methods.evidence_control import EvidenceOperations
+
+    with SqliteStore.from_conn_string(str(tmp_path / "db")) as store:
+        service = MemoryService(store, ("delivery", "alice"), "alice", tmp_path / "lock",
+                                functional_contract="functional_v1")
+        texts = ["Catering menu: soup.", "Training completed on Monday.",
+                 "Access card expires Friday.", "Entry receipt: admitted Tuesday.",
+                 "Unrelated long context " * 200, "Unread source must not enter this packet."]
+        refs = [service.capture_user("history", str(i), text)["source_ref"]
+                for i, text in enumerate(texts)]
+        materials = original_pool(service, refs)
+        acquired_ranges = [span for item in materials[:5] for span in item["source_ranges"]]
+        materials[0].update(context_source_ranges=acquired_ranges, context_turn_range=[0, 5])
+        state = MemoryControlState(task={"request": "Check entry eligibility and actual entry",
+            "query_time": "", "read_goal": {"evidence": ["original_source"],
+                "required_points": ["Training completed", "Access card expires",
+                                    "Entry receipt admitted"]}})
+        ops = EvidenceOperations(service, state, load_pool=lambda: materials,
+            refresh_call=lambda *_: pytest.fail("No generation needed"),
+            fits=lambda packet: len(canonical({"evidence": packet})) <= 900,
+            delivery_selection=True)
+        for name in ("search", "context_0_observe"):
+            ops.execute(next(a for a in ops.actions(state) if a.id == name), state)
+        original_observation = canonical(ops.observed)
+        assert len(ops.observed) == 1 and not ops.opened
+        assert 5 not in {item["item_index"] for item in state.retrieved_scopes}
+        monkeypatch.setattr(service, "read_source_materials",
+                            lambda *_args, **_kwargs: pytest.fail("Selection must not reread"))
+        actions = ops.actions(state)
+        choice = next(a for a in actions
+                      if a.parameters == {"delivery_indices": [1, 2, 3],
+                                          "retrieved_scope_indices": [1, 2, 3]})
+        assert CacheMemoryPolicy().choose(state, actions) == choice.id
+        assert ops.execute(choice, state)["ok"]
+        assert canonical(ops.observed) == original_observation
+        assert [s["content"] for e in state.visible_evidence for s in e["evidence"]] == texts[1:4]
+        assert all("Unread source" not in canonical(e) for e in state.visible_evidence)
+
+
+def test_retrieved_scope_can_join_actual_fragments_but_never_fill_an_unread_gap(tmp_path):
+    from milai_lab.methods.evidence_control import EvidenceOperations
+    from milai_lab.methods.source_ranges import SourceRangeBudget, source_range_packs
+
+    with SqliteStore.from_conn_string(str(tmp_path / "db")) as store:
+        service = MemoryService(store, ("delivery", "alice"), "alice", tmp_path / "lock",
+                                functional_contract="functional_v1")
+        text = "rain雨🙂e\u0301\nEND"
+        ref = service.capture_tool("history", "1", "observed", text, None)["source_ref"]
+        whole = original_pool(service, [ref])[0]
+        fragments = source_range_packs(whole, SourceRangeBudget(
+            4, len, lambda body: [(i, i + 1) for i in range(len(body))]))
+        assert len(fragments) == 3
+        state = MemoryControlState(task={"request": "quote original", "query_time": ""})
+        ops = EvidenceOperations(service, state, load_pool=lambda: [*fragments, whole],
+            refresh_call=lambda *_: {}, fits=lambda _: True, delivery_selection=True)
+        for name in ("search", "read_0_observe", "read_2_observe"):
+            ops.execute(next(a for a in ops.actions(state) if a.id == name), state)
+        assert 3 not in {item["item_index"] for item in state.retrieved_scopes}
+        ops.execute(next(a for a in ops.actions(state) if a.id == "read_1_observe"), state)
+        scope = next(a for a in ops.actions(state) if a.parameters == {
+            "delivery_indices": [3], "retrieved_scope_indices": [3]})
+        ops.execute(scope, state)
+        assert state.visible_evidence[0]["evidence"][0]["content"] == text
+        assert ops.opened[3]["source_ranges"] == whole["source_ranges"]
+        assert len(ops.observed) == 3 and 3 not in ops.observed
+
+
 def test_required_points_offer_complementary_triple_within_whole_packet_budget(tmp_path):
     from milai_lab.methods.evidence_control import EvidenceOperations
 

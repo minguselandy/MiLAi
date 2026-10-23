@@ -503,6 +503,40 @@ def open_evidence_packs(
     return result
 
 
+def observed_original_scope(
+    materials: list[dict[str, Any]], candidate: dict[str, Any],
+) -> dict[str, Any] | None:
+    """Select an original candidate only when its complete ranges were actually acquired.
+
+    No Store read,
+    token truncation or new boundary is introduced; previous-exchange context and
+    absolute source/version ranges remain exactly as offered by retrieval.
+    """
+    ranges = merge_source_ranges(candidate["source_ranges"])
+    acquired = [turn for material in materials for turn in json.loads(material["text"])]
+    turns = []
+    for span in ranges:
+        pieces = sorted((turn for turn in acquired
+            if (turn["source_ref"], turn["source_revision"]) == (
+                span["source_ref"], span["source_revision"])), key=lambda turn: turn["range"][0])
+        cursor, text = span["start"], []
+        for turn in pieces:
+            start, end = turn["range"]
+            if start > cursor:
+                break
+            stop = min(end, span["end"])
+            if stop > cursor:
+                text.append(turn["content"][cursor - start:stop - start])
+                cursor = stop
+        if not pieces or cursor < span["end"]:
+            return None
+        turns.append({**pieces[0], "content": "".join(text),
+                      "range": [span["start"], span["end"]]})
+    return {**copy.deepcopy(candidate), "source_ranges": ranges,
+            "visibility": "visible", "body_delivered": True,
+            "text": json.dumps(turns, ensure_ascii=False)}
+
+
 def project_pack(item: dict[str, Any], index: int) -> dict[str, Any]:
     """Short labels and literal evidence; locations and operation handles stay in the pool."""
     result: dict[str, Any] = {"label": f"e{index}", "kind": item["kind"]}
