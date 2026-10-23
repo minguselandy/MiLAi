@@ -1,4 +1,38 @@
-# LATEST: 2026-10-23 STATE conditional Host readout connected; savedCPU262 LIVE
+# LATEST: 2026-10-23 STATEv3 real task frozen/not dispatched; savedCPU262 LIVE
+
+Functional source3b136f3c adds optional stage_enable_thinking.state_simulator per invoke.
+None inherits old config;false/true alter simulator wire only,not shared Host config/prompts.
+Observed oldv2rules simulator failure:thinkingTrue,8192completion/max tokens,contentnull,
+reasoning field32014chars. Originalfailure preserved;no extracted reply/retry. Newcondition
+simulatorFalse aims to avoid exhaustion but quality/termination still unproven.
+16adaptertests pass/1optionalMemPursuit skip;3focused overridewiretests pass(overlap);Ruff,
+runner scopedtyping and boundaries pass. Typing needed directkeyword and actualSDK path,
+no extra exclusions. Existing fullstrict limitations remain.
+
+state-dynamic-f5-v3/plan.json FROZEN_NOT_DISPATCHED;frozen-3b136f3c contains source.
+Next native train task3-delay_no_free_rebook_cheaper_paid_path_state; previously exposed memory
+history,not blind confirmation. Memories histories1/2,31records(9user/15tool/7assistant),target3
+excluded. Complete literal statements/toolnames/args/results/nativeoccurrences verified. Only
+history2local session/historical_scope alias rebound to avoid history1 collision. No idealization.
+Independentcoldstores fixed_context/rules/OLD publishedT1-main. Configs identical exceptpolicy;
+commonv3config_version. HostthinkingTrue,ViewFalse,simulatorFalse;original2048return/8192output,
+reads8/steps8/sourceobs4096,oldJevshared profile. No unvalidatedcompact or newsource256selection.
+Actual retrieval/step/trace-prefix capture enabled. Nativeenvpreflight0domain/model/HTTP calls.
+Driver prepared run_state_dynamic_f5_v3.py;stop firstfailedarm,no retries;inspect before any
+unattempted arm. Two preparation assertion failures retained:actualassistant eventIDs and stale
+v2config labels corrected before dispatch. Not model failures; firstfailed-prepCPU unknown.
+
+ONLY LIVE neural job: original savedCPU262 driver2925107/child2925108/exec47993,latest757/876.
+Verify PID/files;no secondneural/settlement/restart whilelive. Terminal verifier PREPARED ONLY:
+artifacts/evidence-gap-20261023/verify_saved_cpu_u262_v1.py (existing HTTP Python3.11).
+After original262terminal: verify original876inputs/finitepredictions/lengths/ledger,settle closed
+pending once when idle,then run frozenSTATEv3batch before resuming original393/524. These original
+candidates/selection/matchingtrain remain required. No partial-curve deploymentselection.
+pending-costs-v11 adds70.18340014measured closedCPU to priorpending;earlierunknowns preserved.
+LME400/compact audits CLOSED;do not restart. Fullplan/M1-M5 remainopen. No agents/newservices/
+secondledger/push/merge/SHA. Latest: progress-v11 and execution record.
+
+# Earlier: 2026-10-23 STATE conditional Host readout connected; savedCPU262 LIVE
 
 Functional source2f3ea550 adds STATE actual-wire conditional readout. Dynamic retrieval snapshots
 now copy literal provider trace prefix alongside Store/domain snapshots; no SHA. Capture roots

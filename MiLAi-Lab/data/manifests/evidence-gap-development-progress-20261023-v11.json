@@ -1,0 +1,184 @@
+{
+  "status": "ACTIVE;NEXT_REAL_STATE_TASK_FROZEN_NOT_DISPATCHED;SAVEDCPU262_RUNNING",
+  "observed_at": "2026-10-23T11:49:34.218654+00:00",
+  "source_version": "3b136f3c",
+  "previous_progress": "data/manifests/evidence-gap-development-progress-20261023-v10.json",
+  "plan": "docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261023.md",
+  "execution": "docs/TRAINING_GENERALIZATION_EXECUTION_20261021.md",
+  "previous_turn_classification": "progress: STATE actual-wire conditional readout code/validation, actual given-capture availability check",
+  "simulator_variant": {
+    "code": "LocalSimulator optional per-invoke enable_thinking; existing default inherited",
+    "configuration": "stage_enable_thinking.state_simulator=false",
+    "wire_check": "None inherits True;False/True affect simulator requests only;Host original True and prompts preserved",
+    "run_metadata": "simulator_enable_thinking_override",
+    "original_failure": {
+      "trace": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-dynamic-f5-v2/rules/trace.jsonl",
+      "line_index": 33,
+      "finish_reason": "length",
+      "usage": {
+        "prompt_tokens": 1446,
+        "total_tokens": 9638,
+        "completion_tokens": 8192,
+        "prompt_tokens_details": null
+      },
+      "max_tokens": 8192,
+      "thinking": {
+        "enable_thinking": true
+      },
+      "is_simulator_conversation_prompt": true,
+      "final_content": null,
+      "reasoning_field_names": [
+        "reasoning"
+      ],
+      "reasoning_characters": 32014,
+      "original_failure_retried": false
+    },
+    "original_failure_preserved": true,
+    "inference": "Reasoning exhausted output before final text in the observed failed simulator response; disabling thinking is a new declared development condition,not a proven quality fix"
+  },
+  "new_STATE_batch": {
+    "root": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-dynamic-f5-v3",
+    "status": "FROZEN_NOT_DISPATCHED",
+    "frozen_source": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/frozen-3b136f3c",
+    "task": "3-delay_no_free_rebook_cheaper_paid_path_state",
+    "split": "train",
+    "source_count": 31,
+    "roles": {
+      "user": 9,
+      "tool": 15,
+      "assistant": 7
+    },
+    "native_histories": [
+      "1-cancel_economy_domestic",
+      "2-cancel_business_international"
+    ],
+    "source_identity_and_body_checks": "All public user/assistant statements and executed tool names/arguments/results compared literally to native trajectories. System policy not copied into memory. Only localhistory2session/historical_scope aliases changed to avoid merging withhistory1.",
+    "target_history_excluded": true,
+    "exposure": "Two previously exposed task histories; shared domain/IDs. Target3was previously memory material. No new independent-family/blind-confirmation claim.",
+    "arms": [
+      "fixed_context",
+      "rules",
+      "laya"
+    ],
+    "common_conditions": {
+      "Host_thinking": true,
+      "View_thinking": false,
+      "simulator_thinking": false,
+      "max_output_tokens": 8192,
+      "max_return_tokens": 2048,
+      "reads_per_message": 8,
+      "control_steps": 8,
+      "simple_policy_reads": 4,
+      "source_observation_tokens": 4096,
+      "JSON_action": true,
+      "capture_actual_retrieval_steps_and_trace_prefix": true
+    },
+    "configuration_equality": "Literal equal after removing only memory_control.policy",
+    "saved_Jev_identity": "Previously published T1-main; not new source256 deployment selection. Original shared input profile, no unvalidated compact switch.",
+    "native_task_environment_preflight": "Passed,0domaincalls/0modelcalls",
+    "dispatch_requirement": "Original savedCPU262 must be terminal and verified; settle closed pending costs once when no neuraljob lives,then dispatch this frozen real-task batch before resuming393. One logical neural experiment at a time. No automatic dispatch while262is live.",
+    "automatic_retry": false,
+    "real_runs_started": 0
+  },
+  "validation": {
+    "state_adapter_tests": {
+      "passed": 16,
+      "skipped": 1
+    },
+    "focused_wire_tests_overlapping": {
+      "passed": 3
+    },
+    "skip": "optional MemPursuit absent",
+    "ruff": "PASS",
+    "scoped_mypy": "runner PASS with actual SDK MYPYPATH and existing exclusions",
+    "boundaries": "PASS",
+    "first_failures": "Typed kwargs unpack replaced by direct declared keyword; subsequent missing SDK path supplied. Source ID completeness check corrected to native message IDs; stale v2config_version metadata normalized before dispatch. Failed checks retained.",
+    "full_suite": "not_run",
+    "remote_CI": "not_run"
+  },
+  "active_processes": [
+    {
+      "root": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-u262-v1",
+      "driver_pid": 2925107,
+      "child_pid": 2925108,
+      "session": 47993,
+      "status": "RUNNING",
+      "actual_proc_present": true,
+      "completed": 757,
+      "planned": 876,
+      "neural_model": true
+    }
+  ],
+  "terminal_verifier_prepared": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/verify_saved_cpu_u262_v1.py",
+  "verifier_executed": false,
+  "accounting": {
+    "status": "PENDING_NO_LEDGER_WRITE_WHILE_SAVEDCPU262_LIVES",
+    "previous_pending": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/pending-costs-v10.json",
+    "additional_closed_phases": [
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-simulator-stage-validation-v1/package-boundary.json",
+        "cpu_seconds": 3.7306700000000035,
+        "exit_code": 0
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-simulator-stage-validation-v1/tests-override-final.json",
+        "cpu_seconds": 5.18748,
+        "exit_code": 0
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-simulator-stage-validation-v1/tests.json",
+        "cpu_seconds": 6.562177999999999,
+        "exit_code": 0
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-simulator-stage-validation-v1/tools-boundary.json",
+        "cpu_seconds": 7.6389739999999975,
+        "exit_code": 0
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-simulator-stage-validation-v1/typing-final.json",
+        "cpu_seconds": 20.439652,
+        "exit_code": 1
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-simulator-stage-validation-v1/typing-sdk-final.json",
+        "cpu_seconds": 22.016875999999996,
+        "exit_code": 0
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-simulator-stage-validation-v1/typing.json",
+        "cpu_seconds": 3.1422459999999997,
+        "exit_code": 1
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-dynamic-f5-v3/preparation/source-review.json",
+        "cpu_seconds": 0.003299569000000002
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-dynamic-f5-v3/native-preflight.json",
+        "cpu_seconds": 0.032831075
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-dynamic-f5-v3/preparation-compute.json",
+        "cpu_seconds": 1.4257974500000001
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-dynamic-f5-v3/plan-verification.json",
+        "cpu_seconds": 0.003396046
+      }
+    ],
+    "additional_measured_cpu_seconds": 70.18340014000002,
+    "ledger_recorded": false,
+    "unknown": "First source completeness assertion and first config-equality verification CPU not retained; both remain unknown. Earlier unknowns and authoring/reporting unmeasured overhead unchanged.",
+    "source_version": "3b136f3c"
+  },
+  "remaining": "Original262/393/524andselectedtrain/selection;otherfits/feedback32/64/128/T2/statecomparison/seeds;F1relevance/F2faithfulness/F3nativecapacity/simulatorcompletion;LMEReader/lifecycle/Host/officialfullprotocol/external/protected/finalfigures. M1-M5 not achieved. STATE real conditional Host readouts and real task feedback; readout mechanism now connected.  New compact condition separate learned/Host comparison; old frozen queues unchanged. Closed compact old-input capacity audit; separate learned/Host comparison and new metadata-rich states/A-pool capacity still pending.",
+  "scheduling": "No additional neural dispatch or offline settlement while original262lives. Once terminal,verify original outputs/ledger and settle closed costs once,then run frozen STATEv3 batch;resume original393after the batch. Original393/524/selection/matchingtrain remain required.",
+  "Product_API_Schema_permissions_Canonical_changed": false,
+  "Lab_interfaces_changed": true,
+  "no_sha_or_content_fingerprint_validation": true,
+  "no_subagents": true,
+  "no_new_model_services_or_ledger": true,
+  "no_remote_writes": true,
+  "goal_complete": false
+}

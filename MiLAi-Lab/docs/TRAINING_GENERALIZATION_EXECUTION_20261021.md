@@ -4,6 +4,50 @@
 [原计划](MILAI_TRAINING_DATA_GENERALIZATION_PLAN_20261021.md)，原文复制留存，原目录文件未修改。
 该计划中的“本轮已完成”是另一环境的历史说明，不能代替本机当前验证。
 
+## 2026-10-23：下一真实任务与模拟用户阶段设置已冻结，尚未派发
+
+本轮先核实原savedCPU262进程仍在运行，没有重启或同时启动模型。为继续F5真实闭环，
+按原native train顺序选择第三题`3-delay_no_free_rebook_cheaper_paid_path_state`；选择文件先落盘，
+再加载其原生任务/环境作零模型检查。这个目标以前已作为记忆历史暴露，明确属于开发用途。
+
+进一步检查原F5v2 rules的首次中断：该请求确为模拟用户的conversation prompt，
+`enable_thinking=true`、输出上限8192，实际completion=8192、final content=null，
+原响应`reasoning`字段有32014字符。旧失败及计费保持不变，不从推理中抽取一个回复补成成功。
+功能提交`3b136f3c`增加`stage_enable_thinking.state_simulator`，作为每次模拟用户调用的显式覆盖；
+不设置时继承旧Host配置。下一批三臂统一设false，Host保持true、View保持false，原输出/上下文/
+完整返包额度不变。这是新声明的开发条件，尚未证明模拟质量或完整任务表现改善。
+
+`state-dynamic-f5-v3`冻结fixed_context、rules及既有已保存T1-main三臂，独立冷Store、真实自主Host
+请求、动态捕获、完整before/控制步/trace前缀。没有切换到尚未验证效果的compact输入，也未把
+未完成选择的新source256模型称为部署模型。每臂除`memory_control.policy`外，配置逐字面相同；
+脚本在第一个失败臂停止，保留结果，检查后才可执行从未尝试的剩余臂。
+
+运行记忆复用公开训练历史1和2的**31条记录：9 user、15 tool、7 assistant**。完整用户/助手
+陈述与每个执行工具的name/arguments/result已逐项对照native轨迹。目标历史3不在运行记忆中。
+历史2的本地session/historical_scope别名重绑定为history2，以免与history1合并；原事件ID、正文、
+参数、成功/preview/失败结果均不改。历史1只取消BK-1000且保留BK-1001；历史2先展示各项预览，
+再明确确认取消完整London行程。TASK_DONE及助手陈述不作为独立正确性证明。
+源历史和目标都已有暴露、共享领域及部分对象ID，不能作为新的独立来源族或盲确认样本。
+
+原生任务环境加载通过，未执行领域工具或模型。三臂runner/配置/来源/冻结代码与driver语法检查
+通过，具体命令已保存于`state-dynamic-f5-v3/plan.json`，状态仍为`FROZEN_NOT_DISPATCHED`。
+原savedCPU262终止后先用原校验器核对876份输入/预测/长度/费用，空闲时一次结算已关闭pending，
+再执行本批真实任务，之后恢复原393/524队列。此次只准备了`verify_saved_cpu_u262_v1.py`，
+没有提前运行校验或按部分曲线选点。
+
+16项适配器检查通过、1可选MemPursuit跳过；3项聚焦wire检查通过（重叠），确认None/false/true
+只影响模拟用户请求，Host保持原设置、上游prompt不变、每次模拟轮额度仍为1。局部mypy、Ruff及
+两项边界通过，原类型排除限制不变。第一次kwargs类型问题改为直接传递声明关键字；随后静态
+检查补回实际SDK路径，没有增加屏蔽。准备时的两个首次失败也保留：复用事件的assistant没有
+额外`/assistant`后缀；拷贝的v2配置标识需更新为共同v3标识。都在派发前修正，没有重跑旧任务。
+
+本轮已测检查/来源准备/环境预检/冻结计划新增待结算**70.18340014 CPU秒**，
+`pending-costs-v11.json`衔接此前pending。首次两项准备失败及未测作者操作成本仍unknown。
+原262运行期间没有模型/HTTP派发或账本结算；393/524/选点、全计划其他训练/反馈/Host/LME QA/
+生命周期/外部及四主图仍保持未完成。当前索引：
+[进度v11](../data/manifests/evidence-gap-development-progress-20261023-v11.json)。
+M1–M5未闭合；无SHA、远端写入、新服务、第二账本或子Agent。
+
 ## 2026-10-23：STATE 实际 Host wire 的条件续读接通
 
 `2f3ea550`把STATE分支的实际返包接到已记录的Host续读输入。启用动态
