@@ -1,0 +1,195 @@
+{
+  "status": "ACTIVE;SAVED_CPU262_VERIFIED;STATEV3_AND_CONDITIONAL_BRANCHES_CLOSED;SAVEDCPU393_RUNNING",
+  "observed_at": "2026-10-23T12:27:21.783411+00:00",
+  "functional_source_version": "3b136f3c",
+  "previous_progress": "data/manifests/evidence-gap-development-progress-20261023-v11.json",
+  "plan": "docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261023.md",
+  "execution": "docs/TRAINING_GENERALIZATION_EXECUTION_20261021.md",
+  "previous_turn_classification": "progress: simulator-stage code/validation,31source verification and frozen three-arm task plan",
+  "saved_CPU262": {
+    "root": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-u262-v1",
+    "status": "COMPLETE_VERIFIED_SAVED_CPU_CANDIDATE",
+    "rows": 876,
+    "dev": {
+      "counts": {
+        "labelled": 616,
+        "accepted": 484,
+        "masked": 244,
+        "handoff_outside_reviewed_preference": 36
+      },
+      "families": 32,
+      "macro": 0.807826854448818
+    },
+    "CPU_already_billed": 41459.554457326,
+    "deployment_selection": null,
+    "scope": "Original literal inputs/lengths/finite predictions/CPU conditions/ledger verified. Static preferences,not Host success."
+  },
+  "STATEv3": {
+    "root": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-dynamic-f5-v3",
+    "status": "THREE_ACTUAL_ARMS_REVIEWED;ONE_COMPLETED_TRAJECTORY_TWO_FAILED;NO_NATIVE_STATE_SUCCESS",
+    "task": "3-delay_no_free_rebook_cheaper_paid_path_state",
+    "split": "train",
+    "source_records": 31,
+    "source_scope": "One previously exposed target and two public memory histories;not independent confirmation",
+    "arms": [
+      {
+        "policy": "fixed_context",
+        "status": "COMPLETED_RESEARCH_TRAJECTORY",
+        "error": null,
+        "state_score": 0,
+        "generation_requests": 6,
+        "known_tokens": 34458,
+        "unknown_increment": 0,
+        "deliveries": [
+          {
+            "tokens": 1746,
+            "actual_later_Host_attempts": 4
+          }
+        ],
+        "native_forwards": 0,
+        "native_input_tokens": 0
+      },
+      {
+        "policy": "rules",
+        "status": "FAILED",
+        "error": "VLLM_CHAT_TRUNCATED",
+        "state_score": 0,
+        "generation_requests": 8,
+        "known_tokens": 59054,
+        "unknown_increment": 0,
+        "deliveries": [
+          {
+            "tokens": 1747,
+            "actual_later_Host_attempts": 7
+          }
+        ],
+        "native_forwards": 0,
+        "native_input_tokens": 0
+      },
+      {
+        "policy": "laya",
+        "status": "FAILED",
+        "error": "Finite decision input exceeds declared complete-input capacity",
+        "state_score": 0,
+        "generation_requests": 1,
+        "known_tokens": 6344,
+        "unknown_increment": 0,
+        "deliveries": [],
+        "native_forwards": 4,
+        "native_input_tokens": 37838
+      }
+    ],
+    "total_HTTP": 15,
+    "total_known_tokens": 99856,
+    "unknown_increment": 0,
+    "review": {
+      "fixed_context": "Wrong free schedule-change treatment for180minute delay:actual change_fee0 andprice_paid400 instead of native75/475. Host committed after failed preview without a separate confirmation. Voucher issuance claimed without a recorded issuing action. Simulator emittedTASK_DONE;short termination is not quality proof.",
+      "rules": "Host length failure after same actual free change;original failed trajectory retained. Actualstate score0 does not repair missing final reply.",
+      "laya": "Four successful finite native predictions,then input-capacity rejection before fifth forward;no business effects or memory receipt. No compact-profile retry or truncation.",
+      "memory": "Returned old cancellation context is not evidence for current delay threshold. Presence in later actual Host attempts does not prove useful contribution."
+    },
+    "official_protocol": false,
+    "LLM_task_UX_judging": "not_run",
+    "Laya_capacity": {
+      "successful_forwards": 4,
+      "failed_decision_step": 4,
+      "state_tokens": 16405,
+      "head_tokens": 572,
+      "complete_tokens": 16978,
+      "limit": 16384,
+      "excess": 594,
+      "truncated_forward_executed": false,
+      "compact_retry": false
+    }
+  },
+  "actual_branches": {
+    "root": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-dynamic-f5-v3/fixed-first-read-branches-v2",
+    "status": "TWO_REAL_BOUND_READ_AND_CONDITIONAL_HOST_READOUTS_VERIFIED",
+    "selection": "Earliest actual fixed-context post-SEARCH decision whose observed top1 is an ordinary READ with>=2legal ordinary READ bindings. Original top1 plus first distinct same-kind binding in recorded order. No branch outcome used.",
+    "step": 2,
+    "same_before_and_Host_wire_except_receipt": true,
+    "arms": [
+      {
+        "action": {
+          "id": "context_0",
+          "kind": "READ",
+          "target": "candidate 0 context",
+          "parameters": {
+            "index": 0,
+            "expand_context": true
+          }
+        },
+        "operation_result": {
+          "ok": false,
+          "status": "material_budget_exhausted",
+          "index": 0,
+          "visibility": "visible"
+        },
+        "tokens": 63,
+        "answer": "I can help you with that, Emma. Since your flight UA800 is delayed by 3 hours, you are likely eligible for a free change to a later flight. Let me first check the specific policies and then find flight UA820 for you to see the details.",
+        "HTTP": 1,
+        "known_tokens": 4309
+      },
+      {
+        "action": {
+          "id": "read_0",
+          "kind": "READ",
+          "target": "candidate 0",
+          "parameters": {
+            "index": 0
+          }
+        },
+        "operation_result": {
+          "ok": true,
+          "status": "opened",
+          "index": 0,
+          "visibility": "visible"
+        },
+        "tokens": 1746,
+        "answer": "I can help you with that. Let me first check the delay compensation policy and look up the next available United flight from Chicago to Seattle today to see our options.",
+        "HTTP": 1,
+        "known_tokens": 5712
+      }
+    ],
+    "total_HTTP": 2,
+    "total_known_tokens": 10021,
+    "directional_labels_created": 0,
+    "review": "Expanded context is budget rejected; bounded candidate delivers historical cancellation-trip user/tool records,not the current delay rule. One answer says likely free change while promising policy lookup; the other only proposes checking policy/options. Both are conditional final-only replies,no business execution. No task success or useful-memory contribution established; no automatic directional label.",
+    "scope": "Conditional final-only answer,no new business effects or task-success claim."
+  },
+  "settlements": [
+    {
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-u262-v1/settlement.json",
+      "phase": "evidence_gap_20261023_u262_closed_followups_v1",
+      "cpu_seconds": 13015.50027627899,
+      "phases": 70
+    },
+    {
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-dynamic-f5-v3/offline-settlement.json",
+      "phase": "evidence_gap_20261023_state_v3_closed_overhead_v1",
+      "cpu_seconds": 68.33080614099994,
+      "phases": 14
+    }
+  ],
+  "cost_scope": "Both settled once with no neural job live. Existing model/HTTP/directCPU charges not rebilled. Unknown/unmeasured work remains unknown. v7-v11pending closed by first settlement;393prep included in second.",
+  "active_processes": [
+    {
+      "root": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-u393-v1",
+      "driver_pid": 3654617,
+      "child_pid": 3654665,
+      "session": 24298,
+      "status": "RUNNING",
+      "actual_proc_present": true,
+      "completed": 13,
+      "planned": 876,
+      "neural_model": true
+    }
+  ],
+  "remaining": "Original393/524/selection/matchingselectedtrain;source64/128andotherfits/requesttext/auxiliary/parameterconditions;frozenfeedback32/64/128,T2,initial-vs-post,state/sourcecoverage,seeds;F1/F2semanticandF3completecapacity/Hostsimulator;LME451Reader/nativejudge,lifecycle,fullHost/officialreadonly/external/protectedandfourmainfigures. M1-M5not achieved.",
+  "scheduling": "Only savedCPU393 neural evaluation lives. No second neuraljob or offline settlement while it runs. All STATEv3 failures/branches and priorLME/compact audits are closed;do not replay them.",
+  "no_sha_or_content_fingerprint_validation": true,
+  "no_subagents": true,
+  "no_new_model_services_or_ledger": true,
+  "no_remote_writes": true,
+  "goal_complete": false
+}

@@ -1,4 +1,43 @@
-# LATEST: 2026-10-23 STATEv3 real task frozen/not dispatched; savedCPU262 LIVE
+# LATEST: 2026-10-23 CPU262 verified; STATEv3/branches CLOSED; original CPU393 LIVE
+
+Original savedCPU262 COMPLETE876,verified with ORIGINAL frozen helpers:literal inputs,exact
+lengths,finitepredictions,checkpoint/CPUFP32/4threads/shared_actions12288/head2048/compileFalse/
+MHAFalse/originalledger.484/616accepted,244masked,32familymacro.807826854448818. Feedback16
+separate.41459.554457326CPU alreadybilled once. No selection before393/524+matchingtrain.
+Allv7-v11closedpending +262startup/coordinator/verification70phases13015.500276279CPU settled
+once under evidence_gap_20261023_u262_closed_followups_v1 with no neuraljob;no model rebill.
+
+Frozen source3b136f3c STATEv3 task3/31sources ran all3arms. Fixed_context completedtrajectory
+butstate0: free schedule_change for180mindelay,fee0/price400 versusrequired75/475;failedpreview
+thencommit,no separateconfirmation;unrecordedvoucherissuance claimed;simulatorFalse accepted
+andTASK_DONE. Rules Host8192lengthfailure aftersamefreechange;originalFAILED,partialstate0.
+Laya4finiteforwards8548/8246/10071/10973(total37838),then5thinput16978=16405state+572head+1,
+594over16384,pre-forwardrejection;no business effect/no memoryreceipt,partialstate0. No retry,
+truncation orcompactswitch. Rulesfailure stoppedoriginaldriver;onlyunattemptedLaya dispatched
+afterexit/knownusage check. Bothdrivers closed. Main15HTTP/99856known/unknown0. Fixed/rules
+packets1746/1747 in4/7laterHostattempts;historicalcancellationcontext notdelayrule evidence.
+
+FirsteligiblepostSEARCH withactualREADtop1 isfixedstep2. context_0 vsread_0,continuation0,
+frozenbeforebranchoutcomes. Firstprep selectedearlierSEARCHtop1 and failedbeforedispatch,
+retained. Bothrealbranches+singleactualHostreadouts COMPLETE:context0budgetreject/empty63,
+read0historicaluser/toolrecords1746. Identicalbefore/request/options/allowance;prefix notrerun;
+Hostwire differs onlytargetreceipt,siblingsfixed,no business effects.2HTTP/10021known/unknown0.
+Oneanswer sayslikelyfree pluspolicylookup;other onlyproposespolicy/optionslookup. Neither
+deliverscurrentdelayrule; no automaticdirectionallabel or tasksuccess/useful-memory claim.
+Artifacts: state-dynamic-f5-v3/review-results.json,failedpartial-state-score.json,
+laya/capacity-analysis.json,fixed-first-read-branches-v2/review.json.
+14closedoverhead/review/prep phases68.330806141CPU settledonce under
+evidence_gap_20261023_state_v3_closed_overhead_v1. Directrunner/model/HTTPcosts notrebilled.
+393preparationCPU included here;unmeasured/failedprepunknowns preserved.
+
+ONLY LIVE neural job: original savedCPU393 driver3654617/child3654665/exec24298,latest13/876.
+root saved-cpu-u393-v1,originalsource/checkpoint/data/inferenceconditions unchanged. Revalidate
+PID/files;no secondneural or offlinesettlement whilelive.262,STATEv3,branches,LME400,compact
+audits CLOSED:never restart.393/524/selection/selectedtrain andfull otherresearch stillrequired.
+F1/F2/F3/Hostsimulator/quality unresolved;M1-M5 unachieved. No agents,newservices,secondledger,
+push/merge,SHA/fingerprints. Current progress-v12 and execution record.
+
+# Earlier: 2026-10-23 STATEv3 real task frozen/not dispatched; savedCPU262 LIVE
 
 Functional source3b136f3c adds optional stage_enable_thinking.state_simulator per invoke.
 None inherits old config;false/true alter simulator wire only,not shared Host config/prompts.
