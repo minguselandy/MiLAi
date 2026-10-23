@@ -4,6 +4,33 @@
 [原计划](MILAI_TRAINING_DATA_GENERALIZATION_PLAN_20261021.md)，原文复制留存，原目录文件未修改。
 该计划中的“本轮已完成”是另一环境的历史说明，不能代替本机当前验证。
 
+## 2026-10-23：实际取得范围核对与显式空交付
+
+对v3 Jev失败前的实际Source ranges核对发现：三项已取得材料已覆盖全部31条历史来源；
+范围累计11182字符，完整独立来源正文11059字符，差额只是最初用户片段重复的123字符。
+因此不能把这次输入增长笼统解释为反复取得同一整段上下文。当前公开用户请求是另外一条Source，
+不属于历史政策证据。范围覆盖不等于语义相关或足够回答，全部历史仍没有被认定为当前延误规则。
+
+同时发现交付动作缺口：旧实际状态已选择一个历史用户片段，但没有显式清空选择的动作。
+`e1e99dae`在现有有限候选中加入`handoff_select_none`，绑定`delivery_indices=[]`。
+它只清空将要交付的集合，保留已取得材料、所有观察及已消耗额度；不进行新READ、退款、
+Source改写或“证据已经足够”的判定。plain HANDOFF仍保持当前交付；原交付已空时不重复提供空选项。
+
+57项相关检查通过、1可选MemPursuit跳过；Ruff、执行器局部类型与两项边界通过。
+实际Store检查验证额度耗尽后仍能选择空HANDOFF，观察完整保留，未交付位置不能伪造为known ref。
+随后复制v3真实step4检查点验证新执行器：before观察相同，只增加一个动作，旧候选无删除；
+执行后返回63tokens，reads_remaining仍为4，三项完整观察保留，旧捕获字节不变。
+产物：`laya/acquisition-coverage.json`与`empty-delivery-v3-checkpoint-v1`。
+
+这是**新动作集合下的脚本执行器检查**。旧模型当时没有这个合法动作，原失败没有重跑或修补，
+也没有把新动作回填成旧数据gold。新模型是否会在恰当条件下选择它、是否改善Host，仍需真实验证。
+本轮已测范围检查/测试/副本检查新增待结算28.478133594 CPU秒，`pending-costs-v16.json`
+衔接之前pending；没有模型权重、forward、HTTP或账本写入，其他未测开销仍unknown。
+
+原savedCPU393继续运行，原Host-only诊断/524/选点/匹配train及全部其他研究范围保持未完成。
+当前索引：[进度v16](../data/manifests/evidence-gap-development-progress-20261023-v16.json)。
+M1–M5未闭合；无SHA、远端写入、新服务、第二账本或子Agent。
+
 ## 2026-10-23：真实STATE状态接入既有导出与反馈编译，标签仍masked/unknown
 
 `86daa6e9`扩展两个既有入口：`export_host_intent_states.py --protocol state_dynamic`

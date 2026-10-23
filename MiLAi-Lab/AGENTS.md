@@ -1,4 +1,29 @@
-# LATEST: 2026-10-23 actualSTATE18states/unknownpair exported; original CPU393 LIVE
+# LATEST: 2026-10-23 empty delivery selectable without losing observations; CPU393 LIVE
+
+Functional sourcee1e99dae adds HANDOFF handoff_select_none {delivery_indices:[]} to existing
+finite choices when selected delivery is nonempty and empty packet fits. PlainHANDOFF unchanged;
+alreadyempty delivery gets no duplicate option. Clears delivery only;keeps observations/spent
+allowance,does no READ/refund/Source mutation/sufficiency claim. Old frozen actionsets unchanged.
+57relatedtestsPASS/1optionalMemPursuitskip,Ruff,executor scopedtyping,boundariesPASS. ActualStore
+test verifies quota0stillallows selection and an undeliveredposition cannot become knownref.
+
+Actualv3Laya acquisition review:before5thdecision all31seedSources fullyacquired through3items;
+11182spancharacters vs11059uniquecompletebodycharacters,only initial123charfragment overlaps.
+CurrentpublicuserSource is separate/not historical policy evidence. Full coverage isn't relevance.
+Oldstep4selected1item and lackedexplicit emptyselection. Newexecutor probe oncopy:beforeequal,
+only1newaction,no removedoldactions;empty63tokens,remainingreads4->4,3observationsretained,
+oldcapturebytes unchanged. Scripted newaction-set condition,not oldpolicy replay or newgold.
+No model/HTTP;quality/newlearnedselection/Hosteffect stillpending. Artifacts:
+state-dynamic-f5-v3/laya/acquisition-coverage.json and empty-delivery-v3-checkpoint-v1.
+pending-costs-v16 adds28.478133594CPU to priorpending;no ledgerwrite while393live;unknowns retained.
+
+ONLY LIVE neuraljob: original savedCPU393 driver3654617/child3654665/exec24298,latest194/876.
+VerifyPID/files;no secondneural/offlinesettlement or restart based on stale observations.
+After393terminal/verification/accounting: frozenHost-onlytask3diagnostic,thenoriginal524.
+Allpriorclosedjobs stayclosed;fulloriginalscope/M1-M5 remainopen. No agents/newservices/
+secondledger/push/merge/SHA. Latestprogress-v16/executionrecord.
+
+# Earlier: 2026-10-23 actualSTATE18states/unknownpair exported; original CPU393 LIVE
 
 Functional source86daa6e9 extends EXISTING export_host_intent_states --protocol state_dynamic
 and prepare_retrieval_feedback for actualSTATEbranch layout. Closedrun inputs/fulloptions,
