@@ -1,4 +1,32 @@
-# LATEST: 2026-10-24 excluded Source cursor loss FIXED; matching train LIVE
+# LATEST: 2026-10-24 public calendar propagation fixed; matching train LIVE
+
+3c892d30 preserves the public STATE runtime calendar on newly captured user, assistant and
+domain-tool Sources. Existing calendar_context now survives arrival observations, mechanical
+projection and old View alias directories. No event/report timestamp is inferred; machine capture
+time stays separate. Old Sources without context stay unknown; explicit conflicting context still
+fails the existing immutable Source check. Empty public context has no wall-clock fallback.
+
+Actual closed F5v3 evidence: first public system contains 2026-06-15T10:00:00, while its current
+user Source has no calendar_context and only an October capture timestamp. Original files unchanged.
+Six of seven regression cases failed before the fix. Afterward, two tests incorrectly compared
+encoded metadata to plain text; using the existing literal expansion resolved those test failures.
+Final related suite: 144 PASS, 2 optional MemPursuit skips. Ruff, scoped typing of four modules and
+both boundaries PASS. No full suite or remote CI. All first failures retained.
+
+This is metadata preservation, not evidence of F1/F2 semantic acceptance or Host benefit. The new
+lookup and metadata may add cost/input size; budgets unchanged. Product public Schema/API,
+permissions and Canonical unchanged. No new parsing, services, databases or ledger.
+Evidence: state-calendar-validation-v1/result.json. Pending-costs-v27 adds 41.611103732 measured CPU
+seconds in ten phases, without writing the original ledger. Latest progress-v27 and execution doc.
+
+ONLY LIVE neural job: full 4886-row matching train evaluation of selected update262;
+driver798921/child798926/exec52857. Last recorded 1276/4886; verify actual PID and files.
+No second neural job, concurrent ledger settlement or restart. Frozen current evaluation,
+feedback2a179b58 and prepared Host-only pilot45829497 unchanged. After terminal exit, run the
+existing verification and accounting before any next model job. Full plan/M1-M5 unfinished.
+Prior partial exposure of native STATE test30/39 retained. No SHA, agents, new services, push/merge.
+
+# Earlier: 2026-10-24 excluded Source cursor loss FIXED; matching train LIVE
 
 41048b50 fixes a reproduced realStore bookkeeping defect: currentuserSource at10 excluded,
 later toolSource at11 advancedViewcursor, nextturn omitted the stillvisible10Source. Bothpaged/
