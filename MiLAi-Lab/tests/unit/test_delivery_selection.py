@@ -138,6 +138,41 @@ def test_rejected_append_can_be_selected_without_rereading_or_resetting_read_quo
         assert status == "reviewed_observed_originals_deliverable"
 
 
+def test_explicit_empty_handoff_keeps_acquisitions_and_spent_allowance(tmp_path):
+    with SqliteStore.from_conn_string(str(tmp_path / "db")) as store:
+        service, memory, policy, traces, generated, _ = retrieve_setup(tmp_path, store,
+            ["search_0_8", "read_0", "handoff_select_none"], reads=2)
+        cfg = context(service)
+        packet = memory.retrieve(cfg, "empty-selection", RetrievalRequest(query="record"))
+        assert packet["evidence"] == [] and packet["termination_reason"] == "policy_handoff"
+        assert packet["usage"]["read_operations"] == 1 and not generated
+        assert memory.read_allowance(cfg)["reads_remaining"] == 0
+        assert all(action.kind == "HANDOFF" for action in policy.actions[-1])
+        event = next(e for e in traces if e.get("event") == "milai_retrieve_result")
+        final = event["control"]["state"]
+        assert final["visible_evidence"] == []
+        assert len(final["observed_materials"]) == len(final["observed_evidence"]) == 1
+        assert final["observed_materials"][0]["selected"] is False
+        assert final["observed_evidence"][0]["evidence"]
+        selected = next(e for e in traces if e.get("phase") == "operation_result"
+                        and e.get("selected") == "handoff_select_none")
+        assert selected["result"]["delivery_indices"] == []
+        # There was no delivered position to turn into a Host-known reference.
+        snapshot = next(item for item in store.search(namespace(service))
+                        if item.value.get("schema") == "milai_retrieval_snapshot_v1")
+        with pytest.raises(FunctionalRejection, match="REFERENCE_NOT_DELIVERED"):
+            memory._known_materials(RetrievalRequest.model_validate({"query": "again",
+                "task_context": {"known_evidence_refs": [{"snapshot_id": snapshot.key,
+                                                           "item_index": 0}]}}))
+
+
+def test_empty_handoff_is_not_offered_when_delivery_is_already_empty(tmp_path):
+    with SqliteStore.from_conn_string(str(tmp_path / "db")) as store:
+        service, memory, policy, _, _, _ = retrieve_setup(tmp_path, store, ["handoff"])
+        memory.retrieve(context(service), "already-empty", RetrievalRequest(query="record"))
+        assert all(action.id != "handoff_select_none" for action in policy.actions[0])
+
+
 def test_observation_only_reads_feed_refresh_without_entering_host_packet(tmp_path):
     with SqliteStore.from_conn_string(str(tmp_path / "db")) as store:
         service, memory, policy, _, generated, sources = retrieve_setup(tmp_path, store, [

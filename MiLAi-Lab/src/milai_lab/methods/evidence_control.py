@@ -491,7 +491,7 @@ class EvidenceOperations:
                 prefix[i] = item
                 covered = combined
                 prefixes.append(tuple(prefix))
-        choices = [*combinations(indices, 1), *combinations(indices, 2),
+        choices = [(), *combinations(indices, 1), *combinations(indices, 2),
                    *((v, *pair) for v in views for pair in combinations(originals, 2)),
                    originals, indices, *self.request_delivery_choices(state, self.observed),
                    *((i,) for i in retrieved), *prefixes,
@@ -500,8 +500,6 @@ class EvidenceOperations:
                      if retrieved else [])]
         actions = []
         for selected in dict.fromkeys(choices):
-            if not selected:
-                continue
             required = tuple(i for i in selected if i not in self.observed)
             bounded = tuple(i for i in selected if i in retrieved and i in self.observed)
             # Full, all retrieved scopes, and one retrieved scope at a time;
@@ -513,8 +511,9 @@ class EvidenceOperations:
                 if items != self.opened and self.fits_delivery(items):
                     suffix = ("_retrieved_" + "_".join(map(str, narrowed))) if narrowed else ""
                     actions.append(MemoryAction(
-                        "handoff_select_" + "_".join(map(str, selected)) + suffix,
-                        "HANDOFF", "selected acquired material",
+                        "handoff_select_" + ("_".join(map(str, selected)) or "none") + suffix,
+                        "HANDOFF",
+                        "selected acquired material" if selected else "no selected material",
                         {"delivery_indices": list(selected),
                          **({"retrieved_scope_indices": list(narrowed)} if narrowed else {})}))
         return actions
