@@ -1,4 +1,43 @@
-# LATEST: 2026-10-23 optional compact JSON inputs; savedCPU262 + CPU-only input audit LIVE
+# LATEST: 2026-10-23 View provenance/summary delivery improved; compact audit CLOSED
+
+Functional source30f74766 (also58f2cec5/f4372cea) adds actual capture context to Views,
+scope-aware cache reuse and acquired View-only summary delivery. Existing frozen inputs/runs
+unchanged. Metadata role/origin/session/report/ingestion/calendar/capture context comes from
+actual visible Source,not model prose. Old Views hydrate on read with no Store migration.
+Reader source_metadata.shared applies to all bindings;by_alias adds differences;actual delivered
+originals supply omitted equal fields. All source identities/revisions remain distinct.
+Cache compares purpose/target/as_of context before lexical matching;knownrefs/call limits don't
+change scope. Visible original text overrides generated attribution for source navigation score.
+No secret reads or semantic certainty. Ordinary question/preference/irrelevant-arrival issues open.
+
+Actual30old View packets from the same exposed train family:initialmetadata added412–635tokens,
+8old combinations >2048. Sharing reduced additions to60–476tokens,3old combinations still>2048.
+All fields reconstruct;oldpacket/interpretation/refs/6DBbytes unchanged. Three explicit
+current_interpretation requests have real View-only candidates1707/1643/1661tokens,all<=2048.
+Rules/cache now choose offered View-only USE_VIEW/HANDOFF after actual acquisition,including
+failed append; no second generation/read. Mixed/original requests don't use that shortcut.
+These are projection/admission diagnostics,not repaired trajectories,newHost/QA scores or faithful
+View semantics. Firstoverhead regression retained;2legacy1600CHARACTER positive-view testfixtures
+changed to2048characters for addedmetadata;actual2048TOKEN experiments unchanged. New actual
+failed-append/summary-selection unit tests still1600characters. No claim that3oldfullsets fit.
+85initialpass/1skip,79aftersharingpass,50finaldelivery/policypass/1skip,1calendarcheck(overlap).
+Ruff,affected scopedtyping and finalpackage/tools boundaries pass;prior exclusions retained.
+
+compact-input-audit-v1 driver3158998/child3159005 CLOSED normally. 31912pairs/15956recordedstates
+verified:STATE4,LME7208decisions(901paths),source256train7884/dev860,eachstructured/request_text.
+Allnewstate/headcomplete,no masks/token regressions;JSON/head/actions/gold/metadata preserved.
+Actual source256 rows are ALL memory_operation:real auxiliaryA pool not audited. New metadata-rich
+future states not covered. No modelweights/forward/HTTP/quality result. Unknown LMEindex501 retained.
+Wholechild1568.195317CPU;coordinator.002469126;closedstreamverify.35614173,not doublecounted with
+internalaudit. pending-costs-v9 adds1648.368143027CPU total including currentchecks/probes to prior
+v8/v7pending. No ledger settlement while neuraljob lives;unmeasured/earlierunknown costs preserved.
+
+ONLY LIVE neural job: original savedCPU262 driver2925107/child2925108/exec47993,latest536/876.
+RevalidatePID/files. Never restart stale sessions or closedLME/compactaudits. No secondneural job
+or offline settlement before262terminal. Full originalremaining scope andM1-M5 unchanged/open.
+No agents,newservices,secondledger,push/merge,SHA/fingerprints. See progress-v9/execution record.
+
+# Earlier: 2026-10-23 optional compact JSON inputs; savedCPU262 + CPU-only input audit LIVE
 
 Functional source67c9a9eb adds compact_actions / compact_actions_request_text. These opt-in
 conditions serialize the SAME shared_actions JSON without syntax spaces; literal source

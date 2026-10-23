@@ -1,0 +1,384 @@
+{
+  "status": "ACTIVE;VIEW_SOURCE_CONTEXT_AND_SUMMARY_DELIVERY_IMPROVED;COMPACT_AUDIT_CLOSED;SAVEDCPU262_RUNNING",
+  "observed_at": "2026-10-23T10:58:09.718794+00:00",
+  "source_version": "30f74766",
+  "functional_commits": [
+    "58f2cec5",
+    "f4372cea",
+    "30f74766"
+  ],
+  "previous_progress": "data/manifests/evidence-gap-development-progress-20261023-v8.json",
+  "plan": "docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261023.md",
+  "execution": "docs/TRAINING_GENERALIZATION_EXECUTION_20261021.md",
+  "previous_turn_classification": "progress: opt-in compact input implementation, native tests and dispatched original-record capacity audit",
+  "view_context": {
+    "cache": "Semantic purpose/target/as_of context matched before lexical query; actual prior refs/per-call limits excluded from scope comparison",
+    "source_ranking": "Visible actual source text and required points override generated node attribution; no hidden Store reads; lexical scores are not semantic certification",
+    "metadata": "Actual source role/origin/session/report/ingestion/calendar/capture context; read-only old-View enrichment; interpretation unchanged",
+    "delivery": "Supplement exact delivered-source metadata; literal common fields plus by-alias differences; no event merging",
+    "summary": "For explicit current_interpretation-only requests, use actual offered View-only operation/packet, including after failed append. No duplicate generation or READ."
+  },
+  "real_projection_diagnostics": {
+    "first": {
+      "root": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/view-metadata-probe-v1",
+      "receipts": 30,
+      "over_limit": 8,
+      "token_increase": [
+        412,
+        635
+      ]
+    },
+    "after_sharing": {
+      "root": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/view-metadata-probe-v2",
+      "receipts": 30,
+      "over_limit": 3,
+      "token_increase": [
+        60,
+        476
+      ],
+      "all_actual_metadata_reconstructed": true,
+      "old_packets_interpretations_refs_and_DB_bytes_unchanged": true
+    },
+    "three_view_only_candidates": [
+      {
+        "version": 1,
+        "mixed_tokens": 2138,
+        "view_only_tokens": 1707,
+        "limit": 2048,
+        "fits": true
+      },
+      {
+        "version": 2,
+        "mixed_tokens": 2254,
+        "view_only_tokens": 1643,
+        "limit": 2048,
+        "fits": true
+      },
+      {
+        "version": 3,
+        "mixed_tokens": 2269,
+        "view_only_tokens": 1661,
+        "limit": 2048,
+        "fits": true
+      }
+    ],
+    "scope": "Same exposed train family; projections/admission only,not new Host/task trajectories or correction of prior View semantics"
+  },
+  "validation": {
+    "first_affected": {
+      "passed": 85,
+      "skipped": 1
+    },
+    "after_metadata_sharing": {
+      "passed": 79
+    },
+    "final_delivery_and_policies": {
+      "passed": 50,
+      "skipped": 1
+    },
+    "calendar_focused": {
+      "passed": 1
+    },
+    "overlap": "Do not sum overlapping suites",
+    "first_delivery_failures": "2 legacy1600character positive-View fixtures exceeded new metadata size; moved those fixtures to2048characters. Real2048model-token limits unchanged. New failed-append/singleView tests remain1600characters.",
+    "ruff": "PASS",
+    "scoped_mypy": "Affected modules passed in5module/2module/3module batches with existing exclusions",
+    "package_boundary": "PASS",
+    "tools_boundary": "PASS",
+    "full_suite": "not_run",
+    "remote_CI": "not_run",
+    "root": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/view-provenance-validation-v1"
+  },
+  "compact_audit": {
+    "source_version": "67c9a9eb",
+    "status": "COMPLETE_CLOSED_AUDIT_COVERAGE_VERIFIED",
+    "root": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/compact-input-audit-v1",
+    "pairs": 31912,
+    "state_records": 15956,
+    "groups": {
+      "STATE_actual4/shared_actions": {
+        "pairs": 4,
+        "before_state_drops": 1,
+        "after_state_drops": 0,
+        "before_head_drops": 0,
+        "after_head_drops": 0,
+        "mask_replacements": 0,
+        "before_total_tokens": 46223,
+        "after_total_tokens": 42125,
+        "max_before_complete_tokens": 16699,
+        "max_after_complete_tokens": 15318,
+        "token_regressions": 0
+      },
+      "STATE_actual4/shared_actions_request_text": {
+        "pairs": 4,
+        "before_state_drops": 1,
+        "after_state_drops": 0,
+        "before_head_drops": 0,
+        "after_head_drops": 0,
+        "mask_replacements": 0,
+        "before_total_tokens": 47503,
+        "after_total_tokens": 43529,
+        "max_before_complete_tokens": 17019,
+        "max_after_complete_tokens": 15669,
+        "token_regressions": 0
+      },
+      "LME_901_paths/shared_actions": {
+        "pairs": 7208,
+        "before_state_drops": 2,
+        "after_state_drops": 0,
+        "before_head_drops": 0,
+        "after_head_drops": 0,
+        "mask_replacements": 0,
+        "before_total_tokens": 67889593,
+        "after_total_tokens": 64964992,
+        "max_before_complete_tokens": 16591,
+        "max_after_complete_tokens": 15867,
+        "token_regressions": 0
+      },
+      "LME_901_paths/shared_actions_request_text": {
+        "pairs": 7208,
+        "before_state_drops": 2,
+        "after_state_drops": 0,
+        "before_head_drops": 0,
+        "after_head_drops": 0,
+        "mask_replacements": 0,
+        "before_total_tokens": 68140689,
+        "after_total_tokens": 65258872,
+        "max_before_complete_tokens": 16628,
+        "max_after_complete_tokens": 15910,
+        "token_regressions": 0
+      },
+      "source256_train/shared_actions": {
+        "pairs": 7884,
+        "before_state_drops": 0,
+        "after_state_drops": 0,
+        "before_head_drops": 0,
+        "after_head_drops": 0,
+        "mask_replacements": 0,
+        "before_total_tokens": 45838344,
+        "after_total_tokens": 43766614,
+        "max_before_complete_tokens": 10237,
+        "max_after_complete_tokens": 9467,
+        "token_regressions": 0
+      },
+      "source256_train/shared_actions_request_text": {
+        "pairs": 7884,
+        "before_state_drops": 0,
+        "after_state_drops": 0,
+        "before_head_drops": 0,
+        "after_head_drops": 0,
+        "mask_replacements": 0,
+        "before_total_tokens": 46629954,
+        "after_total_tokens": 44633562,
+        "max_before_complete_tokens": 10268,
+        "max_after_complete_tokens": 9763,
+        "token_regressions": 0
+      },
+      "source256_dev/shared_actions": {
+        "pairs": 860,
+        "before_state_drops": 0,
+        "after_state_drops": 0,
+        "before_head_drops": 0,
+        "after_head_drops": 0,
+        "mask_replacements": 0,
+        "before_total_tokens": 4260933,
+        "after_total_tokens": 4044486,
+        "max_before_complete_tokens": 9905,
+        "max_after_complete_tokens": 9433,
+        "token_regressions": 0
+      },
+      "source256_dev/shared_actions_request_text": {
+        "pairs": 860,
+        "before_state_drops": 0,
+        "after_state_drops": 0,
+        "before_head_drops": 0,
+        "after_head_drops": 0,
+        "mask_replacements": 0,
+        "before_total_tokens": 4356943,
+        "after_total_tokens": 4149466,
+        "max_before_complete_tokens": 10251,
+        "max_after_complete_tokens": 9806,
+        "token_regressions": 0
+      }
+    },
+    "task_pairs": [
+      {
+        "cohort": "STATE_actual4",
+        "task": "memory_operation",
+        "pairs": 8
+      },
+      {
+        "cohort": "LME_901_paths",
+        "task": "memory_operation",
+        "pairs": 14416
+      },
+      {
+        "cohort": "source256_train",
+        "task": "memory_operation",
+        "pairs": 15768
+      },
+      {
+        "cohort": "source256_dev",
+        "task": "memory_operation",
+        "pairs": 1720
+      }
+    ],
+    "all_new_inputs_within_declared_capacity": true,
+    "token_regressions": 0,
+    "all_metadata_gold_head_actions_JSON_preserved": true,
+    "missing_original_path": 501,
+    "auxiliary_real_pool": "not_audited; actual source256 rows all memory_operation",
+    "new_View_metadata_states": "not covered by this old-record audit",
+    "model_quality": "not measured",
+    "driver": {
+      "status": "COMPLETED",
+      "pid": 3158998,
+      "plan": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/compact-input-audit-v1/plan.json",
+      "mode": "CPU_ONLY_NO_WEIGHTS_FORWARD_HTTP_OR_LEDGER_WRITES",
+      "automatic_retry": false,
+      "no_sha_validation": true,
+      "child_pid": 3159005,
+      "exit_code": 0,
+      "whole_child_cpu_seconds": 1568.1953170000002,
+      "coordinator_cpu_seconds_pending": 0.0024691259999999986,
+      "wall_seconds": 1565.890760814771
+    }
+  },
+  "active_processes": [
+    {
+      "root": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-u262-v1",
+      "driver_pid": 2925107,
+      "child_pid": 2925108,
+      "session": 47993,
+      "status": "RUNNING",
+      "actual_proc_present": true,
+      "completed": 536,
+      "planned": 876,
+      "neural_model": true
+    }
+  ],
+  "accounting": {
+    "status": "PENDING_NO_LEDGER_WRITE_WHILE_SAVEDCPU262_LIVES",
+    "previous_pending": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/pending-costs-v8.json",
+    "additional_closed_phases": [
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/view-provenance-validation-v1/package-boundary-final.json",
+        "cpu_seconds": 3.7014639999999996,
+        "exit_code": 0
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/view-provenance-validation-v1/package-boundary.json",
+        "cpu_seconds": 3.669118000000001,
+        "exit_code": 0
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/view-provenance-validation-v1/ruff-final.json",
+        "cpu_seconds": 0.044632,
+        "exit_code": 0
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/view-provenance-validation-v1/ruff-summary.json",
+        "cpu_seconds": 0.038804,
+        "exit_code": 0
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/view-provenance-validation-v1/ruff.json",
+        "cpu_seconds": 0.08996499999999999,
+        "exit_code": 0
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/view-provenance-validation-v1/test-calendar-final.json",
+        "cpu_seconds": 4.608148,
+        "exit_code": 0
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/view-provenance-validation-v1/tests-first.json",
+        "cpu_seconds": 9.113769,
+        "exit_code": 0
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/view-provenance-validation-v1/tests-shared-metadata.json",
+        "cpu_seconds": 8.285294,
+        "exit_code": 0
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/view-provenance-validation-v1/tests-summary-corrected.json",
+        "cpu_seconds": 6.727435,
+        "exit_code": 0
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/view-provenance-validation-v1/tests-summary-delivery.json",
+        "cpu_seconds": 6.792295,
+        "exit_code": 1
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/view-provenance-validation-v1/tools-boundary-final.json",
+        "cpu_seconds": 7.738304999999998,
+        "exit_code": 0
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/view-provenance-validation-v1/tools-boundary.json",
+        "cpu_seconds": 7.6470839999999995,
+        "exit_code": 0
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/view-provenance-validation-v1/typing-final.json",
+        "cpu_seconds": 1.2672480000000002,
+        "exit_code": 0
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/view-provenance-validation-v1/typing-summary.json",
+        "cpu_seconds": 1.2844259999999998,
+        "exit_code": 0
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/view-provenance-validation-v1/typing.json",
+        "cpu_seconds": 3.5851909999999996,
+        "exit_code": 0
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/view-metadata-probe-v1/probe.json",
+        "cpu_seconds": 5.326240319,
+        "status": "COMPLETE_ACTUAL_VIEW_PROJECTION_DIAGNOSTIC"
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/view-metadata-probe-v2/probe.json",
+        "cpu_seconds": 5.384712003,
+        "status": "COMPLETE_ACTUAL_VIEW_PROJECTION_DIAGNOSTIC"
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/view-summary-candidates-v1/probe.json",
+        "cpu_seconds": 4.510084849,
+        "status": "COMPLETE_ACTUAL_VIEW_ONLY_CANDIDATE_DIAGNOSTIC"
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/compact-input-audit-v1/driver.json",
+        "cpu_seconds": 1568.1953170000002,
+        "scope": "whole child; internal audit compute is nested, do not add twice"
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/compact-input-audit-v1/driver.json",
+        "cpu_seconds": 0.0024691259999999986,
+        "scope": "coordinator only"
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/compact-input-audit-v1/verification.json",
+        "cpu_seconds": 0.35614173000000005,
+        "scope": "closed stream coverage check"
+      }
+    ],
+    "additional_measured_cpu_seconds": 1648.368143027,
+    "ledger_recorded": false,
+    "unknown": "Earlier unknowns and authoring/unmeasured operations remain unknown. No new model inference or HTTP costs in these phases.",
+    "source_version": "30f74766"
+  },
+  "remaining": "Original262/393/524andselectedtrain/selection;otherfits/feedback32/64/128/T2/statecomparison/seeds;F1relevance/F2faithfulness/F3nativecapacity/simulatorcompletion;LMEReader/lifecycle/Host/officialfullprotocol/external/protected/finalfigures. M1-M5 not achieved. STATE fixed Host continuation and real task feedback after actual branch executor. New compact condition separate learned/Host comparison; old frozen queues unchanged. Closed compact old-input capacity audit; separate learned/Host comparison and new metadata-rich states/A-pool capacity still pending.",
+  "scheduling": "Only original savedCPU262 neural job remains. Do not start another neural job or settle pending offline costs until it terminates. Compact audit and original LME400 tail are closed; never restart those jobs.",
+  "Product_API_Schema_permissions_Canonical_changed": false,
+  "Lab_interfaces_changed": true,
+  "no_sha_or_content_fingerprint_validation": true,
+  "no_subagents": true,
+  "no_new_model_services_or_ledger": true,
+  "no_remote_writes": true,
+  "goal_complete": false
+}
