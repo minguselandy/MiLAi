@@ -1,4 +1,23 @@
-# LATEST: 2026-10-24 frozen feedback v2 initialization BOUND; matching train LIVE
+# LATEST: 2026-10-24 auxiliary literal instruction contrast checked; matching train LIVE
+
+No functional/data/gold/model change. Existing3979train candidates/730families/807basequeries:
+805basequeries haveempty+nonempty purpose. Directliteral(query,completecandidate) sorting gives
+3169groups;810groups/1620rows have differingpurposes,but0oppositelabel groups. Fullrequest3979
+uniquegroups,0conflictinglabels. Hidingpurpose adds0 unavoidable label-conflict errors onthis
+fixedtrainingmultiset. This is a datasetconsistency bound,NOT modelaccuracy/semanticcertification,
+proof instructionsuseless or transfer result. Auxclassification alone cannot demonstrate changing
+decisions with instructions. Frozenauxiliary/matchedoperation recipe unchanged;10k/50k expansion
+not accepted fromthisdiagnostic. Artifactauxiliary-input-conditions-v1/instruction-contrast.json.
+Originaltrainbytes unchanged;no dev/protectedbodies,weights/forward/HTTP/ledgerwrite/digests.
+pending-costs-v22 adds.153352369CPU to v21pending;unknownoverhead staysunknown.
+
+ONLY LIVE neuraljob full4886matchingtrain262 driver798921/child798926/exec52857;verifyactual
+PID/files. No secondneural/offlinesettlement/restart. Originalfeedbackv2binding complete butno
+collection/fits dispatched. Aftertrainterminal originalverification/costs before nextmodel.
+Allremainingplan/M1-M5 unfinished;nativeSTATEtest30/39 prior partialexposure retained.
+Latestprogress-v22/execution;noSHA/agents/services/secondledger/push/merge.
+
+# Earlier: 2026-10-24 frozen feedback v2 initialization BOUND; matching train LIVE
 
 Original feedback-expansion-study-plan-v2 (I2 amendment, frozen2a179b58) now has its intended
 feedback-expansion-preparation-v2/bound-config.json. Onlyaddedfield is memory_control.checkpoint
