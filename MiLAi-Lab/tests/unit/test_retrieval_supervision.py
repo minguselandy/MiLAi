@@ -88,6 +88,12 @@ def test_source_preferences_add_missing_material_fit_budget_and_skip_redundant_s
         assert preferred == [f"read_{target_index}"]
         assert status == "reviewed_missing_original_progress"
         assert "refresh_view" not in preferred
+        from milai_lab.methods.laya_memory_policy import project_operation_payload
+
+        compact = project_operation_payload(row, "compact_actions")
+        assert original_witness_preferences(compact, proofs=[{target}], sources=sources,
+            return_key="snapshot", token_count=len,
+            observed_search=("search_0_1", candidates)) == (preferred, status)
         # One known premise is still worth reading when another required link is missing.
         assert original_witness_preferences(row, proofs=[{target}], sources=sources,
             return_key="snapshot", token_count=len, proof_complete=False)[0] == preferred

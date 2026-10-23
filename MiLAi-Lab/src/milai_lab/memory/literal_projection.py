@@ -69,13 +69,30 @@ _OBSERVATION_INSTRUCTIONS = (
 )
 
 
-def project_observation_state(state: dict[str, Any]) -> dict[str, Any]:
+def observation_object(state: dict[str, Any] | str) -> dict[str, Any]:
+    """Decode the explicit JSON-text input condition without interpreting source text."""
+    return cast(dict[str, Any], json.loads(state)) if isinstance(state, str) else state
+
+
+def compact_observation_state(state: dict[str, Any] | str) -> str:
+    """Keep all JSON values, field order and string whitespace; omit syntax whitespace.
+
+    Native Laya accepts state text directly. Keeping it as text avoids a second
+    JSON serialization adding the syntax spaces back. This is an opt-in input
+    condition, not a change to the existing shared representation or checkpoint.
+    """
+    return json.dumps(observation_object(state), ensure_ascii=False,
+                      separators=(",", ":"), allow_nan=False)
+
+
+def project_observation_state(state: dict[str, Any] | str) -> dict[str, Any]:
     """Share literal values and repeated field names without dropping observations.
 
     The caller supplies a MemoryControlState projection. Its task stays literal;
     source bodies are never interpreted. This is an input representation, not
     a relevance filter, source merge, Store mutation or reusable encoder state.
     """
+    state = observation_object(state)
     if "observation_encoding" in state:
         return copy.deepcopy(state)
     result = copy.deepcopy(state)
@@ -130,9 +147,9 @@ def project_observation_state(state: dict[str, Any]) -> dict[str, Any]:
     return result
 
 
-def expand_observation_state(state: dict[str, Any]) -> dict[str, Any]:
+def expand_observation_state(state: dict[str, Any] | str) -> dict[str, Any]:
     """Restore the exact JSON state, including table-shaped literal source metadata."""
-    result = copy.deepcopy(state)
+    result = copy.deepcopy(observation_object(state))
     encoding = result.pop("observation_encoding", None)
     if encoding is None:
         return result

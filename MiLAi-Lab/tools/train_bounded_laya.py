@@ -201,7 +201,8 @@ def main() -> None:
                         help="Component loss masses for mixed_retrieval; draws stay uniform")
     parser.add_argument("--operation-state", choices=(
                             "full", "mechanical", "shared", "shared_request_text",
-                            "shared_actions", "shared_actions_request_text"),
+                            "shared_actions", "shared_actions_request_text",
+                            "compact_actions", "compact_actions_request_text"),
                         default="full",
                         help="Retrain with the same operation-state projection used in the Host")
     parser.add_argument("--evaluate-train", action="store_true",
@@ -273,12 +274,11 @@ def main() -> None:
     elif args.task == "mixed_retrieval":
         train = [project_mixed_row(row, args.operation_state) for row in train]
         dev = [project_mixed_row(row, args.operation_state) for row in dev]
-    elif args.task == "instruction_applicability" and args.operation_state in {
-            "shared_request_text", "shared_actions_request_text"}:
-        from milai_lab.memory.request_text import project_request_text
+    elif args.task == "instruction_applicability":
+        from retrieval_mixture import project_applicability_row
 
-        train = [project_request_text(row) for row in train]
-        dev = [project_request_text(row) for row in dev]
+        train = [project_applicability_row(row, args.operation_state) for row in train]
+        dev = [project_applicability_row(row, args.operation_state) for row in dev]
     mixture = normalized_mixture(read_json(args.mixture)) if args.mixture is not None else None
     weights = mixture_event_weights(train, mixture) if mixture is not None else event_weights(train)
     if args.objective == "pair":

@@ -70,7 +70,8 @@ def test_same_literal_in_query_or_another_source_does_not_move_the_witness():
         ("new_events", 1, "content")}
 
 
-def test_shared_body_moves_to_metadata_table_and_sdk_mask_normalization_is_explicit():
+@pytest.mark.parametrize("projection", ["shared", "compact_actions"])
+def test_shared_body_moves_to_metadata_table_and_sdk_mask_normalization_is_explicit(projection):
     pytest.importorskip("laya.common")
     s = source('alpha Ω😀 北 [MASK] "quoted" \\ beta gamma delta')
     evidence = {"role": "user", "origin": "original", "captured_at": "clock-A",
@@ -80,7 +81,7 @@ def test_shared_body_moves_to_metadata_table_and_sdk_mask_normalization_is_expli
         visible_evidence=[{"kind": "original_source", "evidence": [evidence]}])
     example = row(state)
     before = copy.deepcopy(example)
-    report = witness_positions(example, {"A": s}, tokenizer())
+    report = witness_positions(example, {"A": s}, tokenizer(), projection=projection)
     fragments = report["witnesses"]["A"]["fragments"]
     assert fragments and all(x["literal_path"][0] == "metadata_table" for x in fragments)
     assert all(x["sdk_mask_replaced"] and x["fully_encoded"] for x in fragments)
@@ -91,7 +92,8 @@ def test_shared_body_moves_to_metadata_table_and_sdk_mask_normalization_is_expli
     assert spans[0]["start"] < spans[0]["end"] <= len(rendered)
 
 
-def test_complete_fragment_union_is_not_credited_after_native_truncation():
+@pytest.mark.parametrize("projection", ["full", "compact_actions"])
+def test_complete_fragment_union_is_not_credited_after_native_truncation(projection):
     pytest.importorskip("laya.common")
     s = source()
     state = MemoryControlState(task={"request": "q", "query_time": ""},
@@ -101,10 +103,10 @@ def test_complete_fragment_union_is_not_credited_after_native_truncation():
         new_events=[{"source_ref": "A", "role": "user", "origin": "original",
             "captured_at": "clock-A", "content": s["content"][:11], "source_range": [0, 11]}])
     example, tok = row(state), tokenizer()
-    whole = witness_positions(example, {"A": s}, tok, projection="full")
+    whole = witness_positions(example, {"A": s}, tok, projection=projection)
     assert whole["witnesses"]["A"]["whole_body_end"] is not None
     end = min(x["token_end"] for x in whole["witnesses"]["A"]["fragments"])
-    clipped = witness_positions(example, {"A": s}, tok, projection="full", max_len=end + 1)
+    clipped = witness_positions(example, {"A": s}, tok, projection=projection, max_len=end + 1)
     assert clipped["state_tokens_dropped"] > 0
     assert clipped["witnesses"]["A"]["whole_body_end"] is None
     assert clipped["position_bucket"] == "unavailable_or_incomplete"

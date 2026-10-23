@@ -117,7 +117,8 @@ def main() -> None:
                         default="bounded_reader")
     parser.add_argument("--operation-state", choices=(
                             "full", "mechanical", "shared", "shared_request_text",
-                            "shared_actions", "shared_actions_request_text"),
+                            "shared_actions", "shared_actions_request_text",
+                            "compact_actions", "compact_actions_request_text"),
                         default="full")
     args = parser.parse_args()
     import torch
@@ -134,11 +135,10 @@ def main() -> None:
         from retrieval_mixture import project_mixed_row
 
         rows = [project_mixed_row(row, args.operation_state) for row in rows]
-    elif args.task == "instruction_applicability" and args.operation_state in {
-            "shared_request_text", "shared_actions_request_text"}:
-        from milai_lab.memory.request_text import project_request_text
+    elif args.task == "instruction_applicability":
+        from retrieval_mixture import project_applicability_row
 
-        rows = [project_request_text(row) for row in rows]
+        rows = [project_applicability_row(row, args.operation_state) for row in rows]
     run = {"status": "RUNNING", "pid": os.getpid(), "data": str(args.data.resolve()),
            "checkpoint": str(args.checkpoint.resolve()), "device": args.device,
            "visible_cuda_devices": os.environ.get("CUDA_VISIBLE_DEVICES"),

@@ -13,6 +13,7 @@ from pathlib import Path
 from typing import Any
 
 from milai_lab.harness.artifact_io import write_json
+from milai_lab.memory.literal_projection import observation_object
 from retrieval_mixture import project_mixed_row
 from train_laya_matched import audit
 
@@ -67,10 +68,14 @@ def recover_request_fields(text: str) -> dict[str, Any]:
 def check_projection(row: dict[str, Any], projected: dict[str, Any],
                      reference_projection: str = "shared") -> None:
     reference = project_mixed_row(row, reference_projection)
-    task = projected["state"]["task"]
+    state = observation_object(projected["state"])
+    task = state["task"]
     restored = {key: val for key, val in task.items() if key != "request_text"}
     restored.update(recover_request_fields(task["request_text"]))
-    assert {**projected["state"], "task": restored} == reference["state"]
+    # Literal-table pairs may still be Python tuples before their JSON wire is
+    # written. Compare JSON values, retaining number/boolean distinctions.
+    assert json.dumps({**state, "task": restored}, sort_keys=True) == json.dumps(
+        observation_object(reference["state"]), sort_keys=True)
     assert {key: val for key, val in projected.items() if key != "state"} == {
         key: val for key, val in reference.items() if key != "state"}
 

@@ -111,8 +111,7 @@ def operation_diagnostics(rows: list[dict[str, Any]], predictions: list[dict[str
         meta = row["metadata"]
         buckets["component"][meta["component"]].append(i)
         buckets["length"]["<=8192" if length["sequence_tokens"] <= 8192 else ">8192"].append(i)
-        state = (expand_observation_state(row["state"])
-                 if "observation_encoding" in row["state"] else row["state"])
+        state = expand_observation_state(row["state"])
         count = len(state["pending_candidates"])
         buckets["candidates"]["0" if not count else "1-8" if count <= 8 else
                                "9-16" if count <= 16 else "17+"].append(i)

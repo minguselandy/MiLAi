@@ -7,6 +7,7 @@ from collections.abc import Callable
 from typing import Any
 
 from milai_lab.memory.functional_state import body_text, canonical
+from milai_lab.memory.literal_projection import expand_observation_state
 from milai_lab.memory.reader_projection import merge_source_ranges
 from milai_lab.methods.intent_retrieval import retrieval_packet
 
@@ -98,7 +99,8 @@ def original_witness_preferences(
     materials = bindings["candidate_materials"]
     actual = {i: original_binding_material(item, sources) for i, item in opened.items()}
     step = int(row["metadata"]["event_id"].rsplit("/", 1)[1])
-    total_steps = row["state"]["budget"]["remaining_control_steps"] + step
+    state = expand_observation_state(row["state"])
+    total_steps = state["budget"]["remaining_control_steps"] + step
     usage = {"control_steps": total_steps, "known_reference_reads": len(known),
              "operations": total_steps, "read_operations": total_steps,
              "material_budget_rejections": total_steps}
@@ -128,7 +130,7 @@ def original_witness_preferences(
         trial = {**actual, index: candidate}
         if all(token_count(canonical(retrieval_packet(
             return_key, list(trial.values()), list(trial), list(range(len(trial))), reason,
-            usage, ok=False))) <= row["state"]["budget"]["max_return_tokens"]
+            usage, ok=False))) <= state["budget"]["max_return_tokens"]
             for reason in ("policy_handoff", "budget_exhausted", "no_available_operation",
                            "operation_outcome_unknown")):
             preferred.append(key)

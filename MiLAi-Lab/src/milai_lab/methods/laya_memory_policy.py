@@ -7,7 +7,12 @@ from collections.abc import Callable
 from dataclasses import asdict, dataclass
 from typing import Any
 
-from milai_lab.memory.literal_projection import expand_observation_state, project_observation_state
+from milai_lab.memory.literal_projection import (
+    compact_observation_state,
+    expand_observation_state,
+    observation_object,
+    project_observation_state,
+)
 from milai_lab.memory.request_text import project_request_text
 from milai_lab.methods.memory_control import MemoryAction, MemoryControlState
 
@@ -34,7 +39,9 @@ RETRIEVAL_INSTRUCTIONS = (
     "material, never invented facts or the Host's final answer."
 )
 
-ACTION_BOUND_PROJECTIONS = {"shared_actions", "shared_actions_request_text"}
+COMPACT_ACTION_PROJECTIONS = {"compact_actions", "compact_actions_request_text"}
+ACTION_BOUND_PROJECTIONS = {
+    "shared_actions", "shared_actions_request_text", *COMPACT_ACTION_PROJECTIONS}
 ACTION_BINDING_INSTRUCTIONS = (
     " action_bindings lists each offered action's exact target and complete parameters. "
     "Match the decision-head action ID to that table; the short head names its operation kind."
@@ -43,7 +50,7 @@ ACTION_BINDING_INSTRUCTIONS = (
 
 def payload_actions(payload: dict[str, Any]) -> list[MemoryAction]:
     """Recover exact recorded options from the binding table or legacy export metadata."""
-    state = payload["state"]
+    state = observation_object(payload["state"])
     criteria = payload["questions"]["next"]["criteria"]
     metadata = payload.get("metadata", {})
     if "action_bindings" in state:
@@ -77,7 +84,7 @@ def complete_action_payload(payload: dict[str, Any], actions: list[MemoryAction]
     Existing shared/legacy checkpoints keep their original representation.
     """
     actions = payload_actions(payload) if actions is None else actions
-    state = payload["state"]
+    state = observation_object(payload["state"])
     if "action_bindings" not in state:
         state = {**expand_observation_state(state),
                  "action_bindings": [asdict(action) for action in actions]}
@@ -98,7 +105,11 @@ def project_operation_payload(payload: dict[str, Any], projection: str) -> dict[
         payload = complete_action_payload(payload)
     if projection in {"shared", "shared_request_text", *ACTION_BOUND_PROJECTIONS}:
         shared = {**payload, "state": project_observation_state(payload["state"])}
-        return project_request_text(shared) if projection.endswith("request_text") else shared
+        if projection.endswith("request_text"):
+            shared = project_request_text(shared)
+        if projection in COMPACT_ACTION_PROJECTIONS:
+            shared = {**shared, "state": compact_observation_state(shared["state"])}
+        return shared
     if projection != "mechanical":
         raise ValueError(f"Unknown operation state projection: {projection}")
 

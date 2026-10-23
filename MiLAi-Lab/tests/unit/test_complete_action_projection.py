@@ -42,7 +42,8 @@ def inputs(w4=False):
     return state, actions, event, row
 
 
-@pytest.mark.parametrize("projection", ["shared_actions", "shared_actions_request_text"])
+@pytest.mark.parametrize("projection", ["shared_actions", "shared_actions_request_text",
+                                        "compact_actions", "compact_actions_request_text"])
 @pytest.mark.parametrize("w4", [False, True])
 def test_export_live_generation_and_repeated_projection_keep_exact_bindings(projection, w4):
     state, actions, event, row = inputs(w4)
@@ -89,7 +90,8 @@ def test_previously_shared_legacy_export_matches_live_projection_without_reinter
     assert projected["questions"]["next"]["criteria"] == {a.id: a.kind for a in actions}
 
 
-def test_native_cap_is_observed_and_complete_table_survives_every_option_order():
+@pytest.mark.parametrize("projection", ["shared_actions", "compact_actions"])
+def test_native_cap_is_observed_and_complete_table_survives_every_option_order(projection):
     pytest.importorskip("laya.common")
     from laya.common import build_sequence
     from laya.train import to_internal
@@ -99,11 +101,11 @@ def test_native_cap_is_observed_and_complete_table_survives_every_option_order()
     legacy = option_encoding(row, tok)
     assert legacy["capped_options"] == 2
     assert not legacy["literal_complete_action_table_present"]
-    complete = option_encoding(row, tok, "shared_actions")
+    complete = option_encoding(row, tok, projection)
     assert complete["literal_complete_action_table_present"] and complete["capped_options"] == 0
     assert complete["sequence_stats"]["state_tokens_dropped"] == 0
     assert complete["sequence_stats"]["head_tokens_dropped"] == 0
-    payload = project_operation_payload(row, "shared_actions")
+    payload = project_operation_payload(row, projection)
     for order in permutations(range(len(actions))):
         _, markers, options, stats = build_sequence(tok, payload["state"],
             to_internal("next", payload["questions"]["next"]), max_len=12288, head_max_len=2048,

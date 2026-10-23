@@ -16,9 +16,13 @@ from typing import Any, cast
 
 from milai_lab.harness.artifact_io import read_json, read_jsonl, write_json
 from milai_lab.memory.functional_state import body_text
-from milai_lab.memory.literal_projection import expand_observation_state
+from milai_lab.memory.literal_projection import expand_observation_state, observation_object
 from milai_lab.methods.cache_memory_policy import CacheMemoryPolicy
-from milai_lab.methods.laya_memory_policy import payload_actions, project_operation_payload
+from milai_lab.methods.laya_memory_policy import (
+    ACTION_BOUND_PROJECTIONS,
+    payload_actions,
+    project_operation_payload,
+)
 from milai_lab.methods.memory_control import (
     FixedContextMemoryPolicy,
     FixedMemoryPolicy,
@@ -52,12 +56,14 @@ def simple_choices(row: dict[str, Any]) -> dict[str, str]:
     return choices
 
 
-def serialized_strings(state: dict[str, Any], mask_token: str) -> tuple[
+def serialized_strings(state: dict[str, Any] | str, mask_token: str) -> tuple[
         str, list[dict[str, Any]]]:
     """Match native json.dumps exactly and retain value offsets after mask replacement."""
     pieces: list[str] = []
     spans: list[dict[str, Any]] = []
     position = 0
+    expected = state if isinstance(state, str) else json.dumps(state, ensure_ascii=False)
+    comma, colon = (",", ":") if isinstance(state, str) else (", ", ": ")
 
     def emit(text: str) -> None:
         nonlocal position
@@ -70,16 +76,16 @@ def serialized_strings(state: dict[str, Any], mask_token: str) -> tuple[
             emit("{")
             for index, (key, item) in enumerate(value.items()):
                 if index:
-                    emit(", ")
+                    emit(comma)
                 emit(json.dumps(key, ensure_ascii=False))
-                emit(": ")
+                emit(colon)
                 visit(item, (*path, key))
             emit("}")
         elif isinstance(value, list):
             emit("[")
             for index, item in enumerate(value):
                 if index:
-                    emit(", ")
+                    emit(comma)
                 visit(item, (*path, index))
             emit("]")
         else:
@@ -89,9 +95,9 @@ def serialized_strings(state: dict[str, Any], mask_token: str) -> tuple[
                 spans.append({"path": list(path), "text": value,
                               "start": start + 1, "end": position - 1})
 
-    visit(state, ())
+    visit(observation_object(state), ())
     text = "".join(pieces)
-    assert text == json.dumps(state, ensure_ascii=False).replace(mask_token, " ")
+    assert text == expected.replace(mask_token, " ")
     return text, spans
 
 
@@ -236,7 +242,7 @@ def witness_positions(row: dict[str, Any], sources: dict[str, dict[str, Any]], t
             if ref not in witnesses:
                 located = []
                 for fragment in fragments.get(ref, []):
-                    path = literal_value_path(projected["state"], full,
+                    path = literal_value_path(observation_object(projected["state"]), full,
                                               fragment["observation_path"])
                     span = by_path[path]
                     assert span["text"] == fragment["text"]
@@ -286,7 +292,8 @@ def main() -> None:
     parser.add_argument("tokenizer", type=Path)
     parser.add_argument("output", type=Path)
     parser.add_argument("--result-root", action="append", type=Path, required=True)
-    parser.add_argument("--projection", choices=("shared", "shared_request_text"), default="shared")
+    parser.add_argument("--projection", choices=(
+        "shared", "shared_request_text", *sorted(ACTION_BOUND_PROJECTIONS)), default="shared")
     args = parser.parse_args()
     args.output.mkdir(parents=True, exist_ok=False)
     from transformers import AutoTokenizer

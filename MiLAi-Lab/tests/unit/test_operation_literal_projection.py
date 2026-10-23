@@ -96,7 +96,8 @@ def test_shared_export_native_and_generation_use_identical_information_without_g
 
 
 @pytest.mark.parametrize("projection", ["full", "mechanical", "shared", "shared_request_text",
-                                        "shared_actions", "shared_actions_request_text"])
+                                        "shared_actions", "shared_actions_request_text",
+                                        "compact_actions", "compact_actions_request_text"])
 def test_host_factory_projects_inside_metered_native_call(monkeypatch, projection):
     seen, charged = [], []
 

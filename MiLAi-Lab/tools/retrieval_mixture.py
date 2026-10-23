@@ -81,16 +81,28 @@ def combine_components(components: list[dict[str, Any]]) -> tuple[
     return data, masses
 
 
-def project_mixed_row(row: dict[str, Any], projection: str) -> dict[str, Any]:
+def project_applicability_row(row: dict[str, Any], projection: str) -> dict[str, Any]:
+    from milai_lab.memory.literal_projection import compact_observation_state, observation_object
     from milai_lab.memory.request_text import project_request_text
+    from milai_lab.methods.laya_memory_policy import COMPACT_ACTION_PROJECTIONS
+
+    if projection in COMPACT_ACTION_PROJECTIONS:
+        row = {**row, "state": observation_object(row["state"])}
+    if projection.endswith("request_text"):
+        row = project_request_text(row)
+    if projection in COMPACT_ACTION_PROJECTIONS:
+        row = {**row, "state": compact_observation_state(row["state"])}
+    return row
+
+
+def project_mixed_row(row: dict[str, Any], projection: str) -> dict[str, Any]:
     from milai_lab.methods.laya_memory_policy import project_operation_payload
 
     task = row["metadata"]["task"]
     if task == "memory_operation":
         return project_operation_payload(row, projection)
     if task == "instruction_applicability":
-        return project_request_text(row) if projection in {
-            "shared_request_text", "shared_actions_request_text"} else row
+        return project_applicability_row(row, projection)
     raise ValueError(f"Unsupported retrieval training task: {task}")
 
 
