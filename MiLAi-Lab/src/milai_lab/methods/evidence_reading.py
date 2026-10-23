@@ -549,6 +549,11 @@ def project_pack(item: dict[str, Any], index: int) -> dict[str, Any]:
     if item["kind"] == "query_structure":
         return {**result, "interpretation": copy.deepcopy(item["structure"]),
                 "source_bindings": copy.deepcopy(item["source_bindings"]),
+                **({"source_metadata": copy.deepcopy(item["source_metadata"]),
+                    "source_metadata_semantics": "Capture metadata, not validation of the "
+                        "interpretation. reported_at is source report time; captured_at is "
+                        "ingestion time. Neither establishes event or effective time."}
+                   if "source_metadata" in item else {}),
                 "query_time": item["query_time"], "semantics": item["semantics"],
                 "revision": item["revision"]}
     if item["kind"] == "external_memory":
@@ -707,6 +712,10 @@ def project_packs(
                     if re.search(r"(?<!\w)" + re.escape(alias) + r"(?!\w)", text)}
             locations = {alias: binding for alias, binding in projected["source_bindings"].items()
                          if (binding["source_ref"], binding["source_revision"]) not in sources}
+            if "source_metadata" in projected:
+                projected["source_metadata"] = {alias: {
+                    **projected["source_metadata"][alias], "body_delivered": alias not in locations}
+                    for alias in projected["source_bindings"]}
             if locations:
                 projected.update(source_locations=copy.deepcopy(locations),
                     source_location_semantics="Navigation only; these original bodies "

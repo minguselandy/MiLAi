@@ -27,6 +27,50 @@ def interpretation(payload):
         "remove": [], "rules": [], "remove_rules": [], "unresolved": []}
 
 
+def test_legacy_view_metadata_comes_from_actual_sources_without_rewriting_interpretation(tmp_path):
+    from milai_lab.methods.query_structure import open_structure
+
+    with SqliteStore.from_conn_string(str(tmp_path / "bank.sqlite")) as store:
+        service = service_at(store, tmp_path)
+        user = service.capture_user("conversation", "question", "Did the transfer complete?")[
+            "source_ref"]
+        tool = service.capture_tool("conversation", "preview", "payments.preview",
+            '{"status":"preview","amount":40}', None,
+            occurred_at="2035-05-07T09:00:00+08:00")["source_ref"]
+        assistant = service.capture_assistant("conversation", "claim", "Done.")["source_ref"]
+
+        def call(messages, _schema):
+            payload = json.loads(messages[1]["content"])
+            ids = {item["role"]: item["id"] for item in payload["sources"]}
+            return {"scope": "Transfer", "nodes": [{"id": "n0", "text": "Transfer completed",
+                "kind": "reported", "evidence": [ids["user"], ids["tool"]]}],
+                "remove": [], "rules": [], "remove_rules": [], "unresolved": []}
+
+        view, _ = build_query_structure(service, "Transfer status?", "", [user, tool, assistant],
+                                        policy="incremental", call=call)
+        # Simulate the old stored format. Opening it must not migrate the Store.
+        view.pop("source_metadata")
+        store.put((*service.namespace, "query_structure_v1"), "current", view, index=False)
+        before = list(store.conn.iterdump())
+        store.conn.execute("PRAGMA query_only=ON")
+        opened = open_structure(service, view)
+        assert opened["structure"] == view["structure"]  # Metadata does not repair semantics.
+        metadata = opened["source_metadata"]
+        by_ref = {binding["source_ref"]: alias
+                  for alias, binding in view["source_bindings"].items()}
+        assert metadata[by_ref[user]]["role"] == "user"
+        assert metadata[by_ref[user]]["reported_at"] is None
+        assert metadata[by_ref[user]]["captured_at"] == service.source(user)["observed_at"]
+        assert metadata[by_ref[tool]]["origin"] == "payments.preview"
+        assert metadata[by_ref[tool]]["reported_at"] == "2035-05-07T09:00:00+08:00"
+        assert "content" not in json.dumps(metadata)
+        packet = project_packs([opened], [-1], compact_view_bindings=True)[0]
+        assert by_ref[assistant] not in packet["source_metadata"]
+        assert set(packet["source_metadata"]) == set(packet["source_locations"])
+        assert all(not m["body_delivered"] for m in packet["source_metadata"].values())
+        assert list(store.conn.iterdump()) == before
+
+
 def test_source_presentation_keeps_capture_context_and_existing_aliases(tmp_path, monkeypatch):
     with SqliteStore.from_conn_string(str(tmp_path / "bank.sqlite")) as store:
         service = service_at(store, tmp_path)

@@ -208,6 +208,7 @@ class EvidenceOperations:
             "pending_events": [e["source_ref"] for e in state.new_events if self.pending(view, e)],
             "source_bindings": view["source_bindings"],
             **({"interpretation": copy.deepcopy(opened[slot]["structure"]),
+                "source_metadata": copy.deepcopy(opened[slot]["source_metadata"]),
                 "interpretation_semantics": opened[slot]["semantics"],
                 "query_time": opened[slot]["query_time"],
                 "delivery": "controller_observation; Host receives only selected evidence"}

@@ -136,7 +136,8 @@ def project_operation_payload(payload: dict[str, Any], projection: str) -> dict[
             "can_expand_context", "revision", "version_view", "control_pool_rank"))
             for item in state["pending_candidates"]],
         "views": [fields(item, (
-            "id", "slot", "revision", "visibility", "pending_events", "source_bindings"))
+            "id", "slot", "revision", "visibility", "pending_events", "source_bindings",
+            "source_metadata"))
             for item in state["views"]],
         "new_events": [fields(item, (
             "source_ref", "role", "origin", "reported_at", "captured_at"))

@@ -111,10 +111,24 @@ def _sources_valid(service: MemoryService, bindings: dict[str, Any]) -> bool:
 
 def open_structure(service: MemoryService, item: dict[str, Any]) -> dict[str, Any]:
     """Recheck actual visibility when the common Reader opens the cached view."""
-    if not _sources_valid(service, item["source_bindings"]):
-        return {"id": item["id"], "kind": "query_structure", "body_delivered": False,
-                "visibility": "support_unavailable"}
-    return copy.deepcopy(item)
+    sources = {}
+    for alias, binding in item["source_bindings"].items():
+        source = service.source(binding["source_ref"])
+        if source is None or source.get("source_revision", 1) != binding["source_revision"]:
+            return {"id": item["id"], "kind": "query_structure", "body_delivered": False,
+                    "visibility": "support_unavailable"}
+        sources[alias] = source
+    # Read authoritative capture metadata, including for older cached Views.
+    # No original body is projected and no cache migration/write is required.
+    return {**copy.deepcopy(item), "source_metadata": _source_metadata(sources)}
+
+
+def _source_metadata(sources: dict[str, dict[str, Any]]) -> dict[str, dict[str, Any]]:
+    return {alias: {"role": source["role"], "origin": source["origin"],
+        "session": source["session"], "reported_at": source.get("occurred_at"),
+        "captured_at": source["observed_at"],
+        **({"capture_context": source["capture_context"]} if "capture_context" in source else {})}
+        for alias, source in sources.items()}
 
 
 def cached_structure(service: MemoryService, slot: str = "current") -> dict[str, Any] | None:
@@ -309,6 +323,8 @@ def build_query_structure(
                   else f"query-structure:{slot}:{revision}")
     item = {"id": identifier, "kind": "query_structure", "policy": policy,
         "revision": revision, "structure": structure, "source_bindings": bindings,
+        "source_metadata": _source_metadata({alias: by_ref[binding["source_ref"]]
+                                             for alias, binding in bindings.items()}),
         "built_for": question, "slot": slot,
         **({"retrieval_request": retrieval_request} if retrieval_request else {}),
         "arrival_cursor": cursor, "retrieved_sources": pool, "query_time": date,
@@ -320,7 +336,7 @@ def build_query_structure(
     if policy == "rebuild":
         # Only the observed arrival cursor is retained in the no-cache control;
         # it receives the same newly arrived events as the cached conditions.
-        saved.update(structure={}, source_bindings={})
+        saved.update(structure={}, source_bindings={}, source_metadata={})
     service.store.put(namespace, slot, saved, index=False)
     if capacity > 1:
         touch_structure(service, slot)

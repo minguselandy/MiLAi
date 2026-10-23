@@ -63,6 +63,55 @@ def test_cache_matches_scope_and_original_binding_without_case_specific_words():
     assert text_overlap("花园准入条件", "花园准入条件") == 1.0
 
 
+def test_cache_uses_purpose_and_target_context_but_not_prior_refs_or_call_limits():
+    request = {"query": "garden access", "read_goal": {"purpose": "Check eligibility"},
+        "task_context": {"target_scope": {"account": "B"}, "as_of": "2035-05-01"}}
+    views = [{"id": name, "slot": slot, "visibility": "visible", "pending_events": [],
+        "built_for": "garden access", "scope": "garden access", "source_bindings": {},
+        "retrieval_request": {**request, "task_context": {
+            **request["task_context"], "target_scope": {"account": name}}}}
+        for name, slot in [("A", "current"), ("B", "slot1")]]
+    state = MemoryControlState(task={"request": "garden access", "retrieval_request": {
+        **request, "limits": {"max_return_tokens": 200}, "task_context": {
+            **request["task_context"], "known_evidence_refs": [{"snapshot_id": "actual-prior"}]}}},
+        views=views)
+    actions = [MemoryAction("use-a", "USE_VIEW", "A"),
+        MemoryAction("use-b", "USE_VIEW", "B"),
+        MemoryAction("refresh-a", "REFRESH_VIEW", "A", {"slot": "current"}),
+        MemoryAction("refresh-b", "REFRESH_VIEW", "B", {"slot": "slot1"}),
+        MemoryAction("end", "HANDOFF", "Host")]
+    policy = CacheMemoryPolicy()
+    assert policy.choose(state, actions) == "use-b"
+    state.task["retrieval_request"]["read_goal"] = {"purpose": "Summarize unresolved requests"}
+    assert policy.choose(state, actions).startswith("refresh-")
+    state.task["retrieval_request"] = {**request, "task_context": {
+        **request["task_context"], "as_of": "2035-06-01"}}
+    assert policy.choose(state, actions).startswith("refresh-")
+
+
+def test_cache_original_read_uses_visible_source_requirements_over_generated_attribution():
+    refs = {"e0": {"source_ref": "question"}, "e1": {"source_ref": "receipt"}}
+    view = {"id": "v", "slot": "current", "visibility": "visible", "pending_events": [],
+        "built_for": "garden access", "scope": "garden access", "source_bindings": refs,
+        "interpretation": {"nodes": {
+            "n0": {"text": "completed audit garden access", "evidence": ["e0"]},
+            "n1": {"text": "Earlier inspection", "evidence": ["e1"]}}}}
+    state = MemoryControlState(task={"request": "garden access", "read_goal": {
+        "evidence": ["original_source"], "required_points": ["completed audit"]}}, views=[view],
+        new_events=[{"source_ref": "question", "role": "user", "content": "garden access?"},
+                    {"source_ref": "receipt", "role": "tool", "content": "completed audit"}])
+    actions = [MemoryAction(alias, "READ", "bound", {"observed_source": binding})
+               for alias, binding in refs.items()]
+    actions.append(MemoryAction("end", "HANDOFF", "Host"))
+    policy = CacheMemoryPolicy()
+    assert policy.choose(state, actions) == "e1"
+    state.task["read_goal"]["required_points"] = ["garden access"]
+    assert policy.choose(state, actions) == "e0"  # A user question remains retrievable.
+    state.task["read_goal"]["required_points"] = ["completed audit"]
+    state.new_events = []
+    assert policy.choose(state, actions) == "e0"  # Unseen bodies are not secretly read.
+
+
 def test_retrieval_probe_context_does_not_acknowledge_or_erase_user_arrivals(tmp_path):
     with SqliteStore.from_conn_string(str(tmp_path / "db")) as store:
         service = service_at(store, tmp_path)
