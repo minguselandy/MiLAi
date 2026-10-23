@@ -310,7 +310,8 @@ def test_public_sdk_executes_real_sandbox_write_without_hidden_context(
         client = VLLMClient(VLLMConfig(base_url="http://example.test/v1/", model="scripted",
             tool_mode="json_action"), transport=httpx.MockTransport(scripted_transport))
         model = VLLMChatModel(client=client)
-        agent = make_state_agent(model, hook, runtime,
+        frames = []
+        agent = make_state_agent(model, hook, runtime, observe_host=frames.append,
             initial_retrieval={"query": "hotel inventory identifier", "top_k": 3}
             if frozen_request else None)
         assert agent.runtime_context.task_id == "mechanical"
@@ -330,6 +331,11 @@ def test_public_sdk_executes_real_sandbox_write_without_hidden_context(
         assert model.calls_in_message == 3 - int(frozen_request)
         assert agent.token_usage.total_tokens == 15 * (3 - int(frozen_request))
         assert hidden not in canonical(records)
+        assert hidden not in canonical(frames)
+        assert frames[0]["host_request_generated"] is not frozen_request
+        assert frames[0]["response"]["tool_calls"][0]["name"] == "retrieve_learnings"
+        assert frames[1]["conversation"][1]["tool_calls"][0]["result"] == calls[0]["result"]
+        assert frames[-1]["response"]["text"] == "Booked."
         if readonly:
             assert isinstance(calls[0]["result"], list) and len(calls[0]["result"]) <= 3
             assert list(store.conn.iterdump()) == before

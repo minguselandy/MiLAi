@@ -391,6 +391,9 @@ class IntentRetrievalMemory(FunctionalEditMemory):
                             "operations": operations.checkpoint(),
                             "prefix_trace": copy.deepcopy(prefix_events)})
                 self.retrieval_observer(observation)
+            elif (self.retrieval_observer is not None and self.capture_control_steps
+                    and event["phase"] in {"decision_output", "operation_result"}):
+                self.retrieval_observer({"call_id": call_id, **copy.deepcopy(event)})
 
         assert self.control_policy is not None
         result = run_memory_control(state, self.control_policy, AdmittedOperations(),

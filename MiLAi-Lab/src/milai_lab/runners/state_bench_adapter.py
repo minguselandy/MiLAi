@@ -5,6 +5,7 @@ This module does not load tasks, judges, credentials, or official protocol check
 """
 from __future__ import annotations
 
+import copy
 import json
 from collections.abc import Callable
 from pathlib import Path
@@ -223,7 +224,8 @@ class StateReadOnlyMemoryHook:
 
 def make_state_agent(model: Any, hook: StateMemoryHook | StateReadOnlyMemoryHook,
                      runtime_context: Any, *,
-                     initial_retrieval: dict[str, Any] | None = None) -> Any:
+                     initial_retrieval: dict[str, Any] | None = None,
+                     observe_host: Callable[[dict[str, Any]], None] = lambda _: None) -> Any:
     """Use the public BaseAgent hook without retaining hidden evaluator context."""
     from state_bench.agents.base import AgentRuntimeContext, AgentTurnResponse, BaseAgent
 
@@ -251,6 +253,10 @@ def make_state_agent(model: Any, hook: StateMemoryHook | StateReadOnlyMemoryHook
                 arguments, initial_retrieval = initial_retrieval, None
                 hook.record({"event": "state_frozen_initial_retrieval", "arguments": arguments,
                              "scope": "Actual prior Host request; conditional interface probe"})
+                observe_host(copy.deepcopy({"host_request_generated": False,
+                    "system_prompt": system_prompt, "conversation": conversation, "tools": tools,
+                    "response": {"text": "", "tool_calls": [
+                        {"name": "retrieve_learnings", "arguments": arguments}]}}))
                 return AgentTurnResponse(tool_calls=[
                     {"name": "retrieve_learnings", "arguments": arguments}])
             messages = [SystemMessage(content=system_prompt + "\n\n" + RETRIEVAL_INSTRUCTION),
@@ -259,6 +265,11 @@ def make_state_agent(model: Any, hook: StateMemoryHook | StateReadOnlyMemoryHook
             chat_tools = [{"type": "function", "function": {
                 key: value for key, value in tool.items() if key != "type"}} for tool in tools]
             result = model.bind_tools(chat_tools).invoke(messages)
+            observe_host(copy.deepcopy({"host_request_generated": True,
+                "system_prompt": messages[0].content, "conversation": conversation,
+                "tools": tools, "response": {"text": result.content, "tool_calls": [
+                    {"name": call["name"], "arguments": call["args"]}
+                    for call in result.tool_calls]}}))
             if result.usage_metadata:
                 self.add_token_usage(input_tokens=result.usage_metadata["input_tokens"],
                                      output_tokens=result.usage_metadata["output_tokens"])

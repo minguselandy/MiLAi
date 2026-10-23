@@ -41,10 +41,13 @@ class RetrievalRecorder:
         self, directory: Path, root: Path, bank_root: Path,
         context: Callable[[], dict[str, Any]], snapshot: Callable[[Path], None],
         *, capture_control_steps: bool = False,
+        call_schema: str = "frozen_retrieval_call_v2",
+        decision_schema: str = "frozen_retrieval_decision_v1",
     ) -> None:
         self.directory, self.root, self.bank_root = directory, root, bank_root
         self.context, self.snapshot = context, snapshot
         self.capture_control_steps = capture_control_steps
+        self.call_schema, self.decision_schema = call_schema, decision_schema
         self.calls: dict[str, tuple[Path, dict[str, Any]]] = {}
         self.steps: dict[str, list[tuple[Path, dict[str, Any]]]] = {}
 
@@ -53,7 +56,7 @@ class RetrievalRecorder:
         if phase == "start":
             case = self.directory / str(uuid.uuid4())
             case.mkdir(parents=True, exist_ok=False)
-            row = {"schema": "frozen_retrieval_call_v2", "status": "CAPTURING",
+            row = {"schema": self.call_schema, "status": "CAPTURING",
                 **copy.deepcopy(self.context()), **copy.deepcopy(event),
                 "source_root": str(self.root), "source_bank_root": str(self.bank_root),
                 "captured_epoch": time.time(),
@@ -87,7 +90,7 @@ class RetrievalRecorder:
                 step_case = case / "steps" / f"step-{event['step']:04d}"
                 step_case.mkdir(parents=True, exist_ok=False)
                 step = {**copy.deepcopy(row), **copy.deepcopy(self.context()),
-                    "schema": "frozen_retrieval_decision_v1", "control_step": event["step"],
+                    "schema": self.decision_schema, "control_step": event["step"],
                     "captured_epoch": time.time(), "read_allowance": event["read_allowance"],
                     "initial_observation": event["before"], "initial_actions": event["actions"],
                     "control_checkpoint": "control.json", "status": "CAPTURING",
@@ -109,6 +112,10 @@ class RetrievalRecorder:
                         "scope": "Nested snapshot overhead, not additional model work."}
                     write_json(step_case / "call.json", step)
                 self.steps[call_id].append((step_case, step))
+        elif phase in {"decision_output", "operation_result"}:
+            # Keep selection even when execution subsequently raises. Absence of
+            # an operation_result is not a failed or successful outcome label.
+            row.setdefault("control_events", []).append(copy.deepcopy(event))
         elif phase == "completed":
             row.update(status="ORIGINAL_COMPLETED", original_result=event["result"],
                        served_from_cache=event["served_from_cache"])
@@ -138,6 +145,8 @@ def replay_call(
     from milai_lab.runners.functional import message
 
     call = read_json(captured / "call.json")
+    if call["schema"] not in {"frozen_retrieval_call_v2", "frozen_retrieval_decision_v1"}:
+        raise ValueError("Frozen functional replay requires a functional capture")
     if call["status"] not in {"ORIGINAL_COMPLETED", "ORIGINAL_FAILED"}:
         raise ValueError("Frozen call collection must be closed before comparison")
     output.mkdir(parents=True, exist_ok=False)

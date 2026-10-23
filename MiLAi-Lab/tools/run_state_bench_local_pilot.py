@@ -51,6 +51,7 @@ from milai_lab.runners.state_bench_adapter import (
     make_state_agent,
     run_with_domain_snapshots,
 )
+from milai_lab.runners.state_retrieval_capture import capture_state_retrieval
 
 
 class LocalSimulator:
@@ -144,10 +145,14 @@ def main() -> None:
                         help="Distinct phase in the original ledger for each declared experiment")
     parser.add_argument("--initial-retrieval", type=Path,
                         help="Actual prior Host request for a conditional interface probe only")
+    parser.add_argument("--retrieval-snapshots", action="store_true",
+                        help="Save actual dynamic pre-call and control-step Store/domain states")
     args = parser.parse_args()
     if (args.memory_protocol == "readonly") != (args.memory_artifact is not None):
         parser.error("--memory-protocol readonly requires --memory-artifact; "
                      "dynamic does not use it")
+    if args.retrieval_snapshots and args.memory_protocol != "dynamic":
+        parser.error("--retrieval-snapshots captures the dynamic protocol only")
     selection = read_json(args.preparation / "selection.json")
     sys.path.insert(0, selection["source"])
     from state_bench.agents.base import AgentRuntimeContext
@@ -187,6 +192,7 @@ def main() -> None:
         "host_and_simulator": asdict(host_config), "judge": "NOT_RUN",
         "memory_policy": args.policy, "return_envelope": "at most3strings; one full receipt",
         "memory_protocol": args.memory_protocol,
+        "retrieval_snapshots": args.retrieval_snapshots,
         "memory_artifact": str(args.memory_artifact) if args.memory_artifact else None,
         "memory_control_configuration": settings.get("memory_control", {}),
         "compute_phase": args.compute_phase,
@@ -285,9 +291,30 @@ def main() -> None:
             # The evaluator-only summary/requirements never enter this public context.
             runtime = AgentRuntimeContext(task_id="state-task", user_id=task.user_id,
                                           domain=domain.name, now=task.now)
-            agent = make_state_agent(host, hook, runtime,
-                                     initial_retrieval=initial["arguments"] if initial else None)
             environment = domain.environment_class(env_data.deep_copy(), now=task.now)
+            host_frame: dict[str, Any] = {}
+            frame_number = 0
+
+            def observe_host(frame: dict[str, Any]) -> None:
+                nonlocal frame_number
+                frame_number += 1
+                host_frame.clear()
+                host_frame.update(frame, frame_number=frame_number, memory_calls_before=hook.calls)
+                if args.retrieval_snapshots:
+                    write_json(args.output / "host-frames" / f"frame-{frame_number:04d}.json",
+                               host_frame)
+
+            if args.retrieval_snapshots:
+                assert isinstance(hook, StateMemoryHook)
+                capture_state_retrieval(hook, args.output,
+                    domain_snapshot=environment.get_full_snapshot,
+                    context=lambda: {"host_frame": host_frame,
+                        "generation_calls_before": host.calls_in_message,
+                        "source_version": args.source_version, "settings": settings,
+                        "source_selection": selection, "trace_path": str(trace.path.resolve())})
+            agent = make_state_agent(host, hook, runtime,
+                initial_retrieval=initial["arguments"] if initial else None,
+                observe_host=observe_host)
             run["state_snapshot_files"] = [
                 "state-before.json", "state-after.json", "state-diff.json"]
             trajectory = run_with_domain_snapshots(environment, args.output, lambda: run_task(
