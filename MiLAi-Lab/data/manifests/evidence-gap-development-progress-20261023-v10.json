@@ -1,0 +1,108 @@
+{
+  "status": "ACTIVE;STATE_CONDITIONAL_HOST_READOUT_CONNECTED;SAVEDCPU262_RUNNING",
+  "observed_at": "2026-10-23T11:24:13.758143+00:00",
+  "source_version": "2f3ea550",
+  "previous_progress": "data/manifests/evidence-gap-development-progress-20261023-v9.json",
+  "plan": "docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261023.md",
+  "execution": "docs/TRAINING_GENERALIZATION_EXECUTION_20261021.md",
+  "previous_turn_classification": "progress: View source context and delivery fixes,actual packet diagnostics,closed compact-input coverage audit",
+  "state_readout": {
+    "entrypoint": "tools/run_state_retrieval_branch.py ... --host-readout",
+    "collection": "--retrieval-snapshots also stores literal provider trace prefix; no hash",
+    "matching": "Actual batch ordinal disambiguates repeated identical queries; prefix,complete batch,action bindings and original envelope verified",
+    "intervention": "One receipt in the first actual post-tool Host wire; original prompt/catalog/sampling/sibling receipts fixed; final-answer-only output",
+    "accounting": "Existing branch client/continuous ledger/per-turn remaining gate; CPU nested in branch,not rebilled",
+    "failures": "No retries; missing origin/receipt/prefix/postinput stays unavailable; changed prefix/batch rejects; length/capacity/call-budget failures retained",
+    "scope": "Conditional single answer,not autonomous task/business effect. No original answer/evaluator-only domain context supplied.",
+    "new_real_model_runs": 0,
+    "new_real_HTTP_requests": 0,
+    "new_answer_feedback_labels": 0
+  },
+  "validation": {
+    "related_tests_passed": 28,
+    "scope": "Scripted HTTP transport with actual public SDK sandbox/SQLite/wire capture; no real model or HTTP",
+    "ruff": "PASS",
+    "scoped_mypy": "4 modules PASS with existing exclusions",
+    "package_boundary": "PASS",
+    "tools_boundary": "PASS",
+    "full_suite": "not_run",
+    "remote_CI": "not_run",
+    "root": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-readout-validation-v1"
+  },
+  "actual_availability": {
+    "root": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-readout-preflight-v1",
+    "captures": 11,
+    "status_counts": {
+      "NO_HOST_REQUEST_ORIGIN": 11
+    },
+    "scope": "Existing given-request captures remain delivery-only; prior real query text does not constitute an actual Host frame for this new Store/trajectory. No fabricated input or answer feedback."
+  },
+  "active_processes": [
+    {
+      "root": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-u262-v1",
+      "driver_pid": 2925107,
+      "child_pid": 2925108,
+      "session": 47993,
+      "status": "RUNNING",
+      "actual_proc_present": true,
+      "completed": 649,
+      "planned": 876,
+      "neural_model": true
+    }
+  ],
+  "accounting": {
+    "status": "PENDING_NO_LEDGER_WRITE_WHILE_SAVEDCPU262_LIVES",
+    "previous_pending": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/pending-costs-v9.json",
+    "additional_closed_phases": [
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-readout-validation-v1/package-boundary.json",
+        "cpu_seconds": 3.660704,
+        "exit_code": 0
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-readout-validation-v1/ruff.json",
+        "cpu_seconds": 0.036959,
+        "exit_code": 0
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-readout-validation-v1/tests-final.json",
+        "cpu_seconds": 11.874804999999997,
+        "exit_code": 0
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-readout-validation-v1/tests-first.json",
+        "cpu_seconds": 11.772288,
+        "exit_code": 0
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-readout-validation-v1/tools-boundary.json",
+        "cpu_seconds": 7.599755,
+        "exit_code": 0
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-readout-validation-v1/typing.json",
+        "cpu_seconds": 22.508223,
+        "exit_code": 0
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-readout-preflight-v1/availability.json",
+        "cpu_seconds": 4.396794069,
+        "scope": "Actual given-request capture availability check; no dispatch"
+      }
+    ],
+    "additional_measured_cpu_seconds": 61.849528069,
+    "ledger_recorded": false,
+    "scope": "Scripted tests plus zero-model actual-capture availability. No real HTTP/model calls.",
+    "unknown": "Earlier unknowns and authoring/unmeasured operations remain unknown.",
+    "source_version": "2f3ea550"
+  },
+  "remaining": "Original262/393/524andselectedtrain/selection;otherfits/feedback32/64/128/T2/statecomparison/seeds;F1relevance/F2faithfulness/F3nativecapacity/simulatorcompletion;LMEReader/lifecycle/Host/officialfullprotocol/external/protected/finalfigures. M1-M5 not achieved. STATE real conditional Host readouts and real task feedback; readout mechanism now connected.  New compact condition separate learned/Host comparison; old frozen queues unchanged. Closed compact old-input capacity audit; separate learned/Host comparison and new metadata-rich states/A-pool capacity still pending.",
+  "scheduling": "Only original savedCPU262 neural job remains; no second neural work or offline settlement until terminal. Original LME400 and compact-input audits are closed; never restart closed jobs or restart a live job on stale observations.",
+  "Product_API_Schema_permissions_Canonical_changed": false,
+  "Lab_interfaces_changed": true,
+  "no_sha_or_content_fingerprint_validation": true,
+  "no_subagents": true,
+  "no_new_model_services_or_ledger": true,
+  "no_remote_writes": true,
+  "goal_complete": false
+}

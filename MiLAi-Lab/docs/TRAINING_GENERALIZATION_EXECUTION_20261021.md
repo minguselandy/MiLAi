@@ -4,6 +4,43 @@
 [原计划](MILAI_TRAINING_DATA_GENERALIZATION_PLAN_20261021.md)，原文复制留存，原目录文件未修改。
 该计划中的“本轮已完成”是另一环境的历史说明，不能代替本机当前验证。
 
+## 2026-10-23：STATE 实际 Host wire 的条件续读接通
+
+`2f3ea550`把STATE分支的实际返包接到已记录的Host续读输入。启用动态
+`--retrieval-snapshots`时，原调用及控制步快照同时保存当时完整trace前缀；不使用SHA。
+`prepare_state_readout`按公开Host批次中的检索调用序号定位下一次实际wire，因此相同query的
+多个调用仍能区分。它逐字节核对前缀，再检查完整批次、工具名称/参数、目标回执与原packet。
+普通客户端的实际wire在`vllm_response`或`vllm_error`中，不能只搜索`vllm_request`事件名。
+
+分支命令增加可选`--host-readout`。它只替换一条目标检索回执，保持原prompt、工具目录、
+采样参数、同批其他实际回执，并限制为一次最终回答。使用分支已有client、原连续账本和
+该分支剩余的公开轮次generation额度；不重复计入readout内部CPU。原任务须已终止，原最终回答
+不会进入新输入。来源/批次/回执不一致直接保留失败；模型长度失败、容量或调用额度拒绝均不重试。
+缺少真实Host来源、原回执、trace前缀或实际post-tool输入时，保留明确不可续读状态。
+
+这是一条**条件性的单次回答**通路，同批其他回执固定；不执行业务工具、不模拟未来用户，
+也不等于完整反事实STATE任务。现有原生任务runner的完整业务执行方式未被替代。答案质量与
+方向pair仍需真实结果评审，不能从成功调用或schema合法自动生成监督标签。
+
+28项相关检查通过，覆盖真实STATE SDK沙箱、实际SQLite快照以及脚本HTTP transport：
+一个业务工具加两个相同query的批次能逐一定位，只有目标回执变化；原业务状态/快照不变；
+隐藏评估context及原最终回答不进入续读输入。原始Host长度失败仍可保留确实发出的post-tool
+输入，而新续读失败不重试；调用额度和输入容量拒绝不会派发HTTP；改变前缀/批次会拒绝；
+CLI没有真实frame时记录`COMPLETED_WITHOUT_HOST_READOUT`。Ruff、四模块局部类型及两项边界通过，
+既有类型排除项/非全仓strict限制不变。所有测试均无真实模型或网络调用。
+
+另外对现有`state-public-branches-v1`的两次given-request及其控制步共11份真实快照做可用性检查，
+全部为`NO_HOST_REQUEST_ORIGIN`。它们虽然沿用了过去真实Host的查询文字，仍没有这次新Store/
+轨迹的真实Host frame；继续仅用于delivery，不补造answer feedback。结果位于
+`state-readout-preflight-v1/availability.json`。
+
+六项已测验证子进程加此次可用性检查新增待结算**61.849528069 CPU秒**，记录在
+`pending-costs-v10.json`，衔接此前pending。原savedCPU262仍为唯一神经作业，未进行真实Host续读，
+未提前结算、重启或改变原CPU评估。原393/524/选点及匹配train、新Host任务/真实反馈、F1/F2语义、
+状态/来源/种子比较、完整LME QA/生命周期/官方外部与四主图仍未完成。
+当前索引：[进度v10](../data/manifests/evidence-gap-development-progress-20261023-v10.json)。
+M1–M5继续开放；无远端写入、新模型服务、第二研究账本、子Agent或SHA校验。
+
 ## 2026-10-23：View 来源上下文、摘要交付与紧凑输入核对结果
 
 本轮功能提交`58f2cec5`、`f4372cea`及`30f74766`推进F1/F2/F3的具体接口缺口。

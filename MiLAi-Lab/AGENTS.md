@@ -1,4 +1,38 @@
-# LATEST: 2026-10-23 View provenance/summary delivery improved; compact audit CLOSED
+# LATEST: 2026-10-23 STATE conditional Host readout connected; savedCPU262 LIVE
+
+Functional source2f3ea550 adds STATE actual-wire conditional readout. Dynamic retrieval snapshots
+now copy literal provider trace prefix alongside Store/domain snapshots; no SHA. Capture roots
+are absolute. prepare_state_readout matches original public batch retrieval ordinal, including
+identical queries, to transcript/call-index wire IDs. Prefix bytes,complete batch,full original
+tool bindings and actual packet/envelope checked. Real regular-client wire occurs in response/error
+events,not only request events. No synthetic frame from query text/final Store/original answer.
+
+run_state_retrieval_branch.py adds optional --host-readout: one receipt substituted in the first
+actual post-tool Host input,other receipts/prompt/catalog/sampling fixed,one final-answer output.
+No business tools/future-user simulation/autonomous task success inferred. Branch's existing
+client,original continuous ledger and remaining generation gate reused. Readout CPU nested in
+driver;failure counters retained. Original task must be closed. No retries or answer labels.
+Missing host origin/receipt/prefix/postinput stays unavailable;changed binding/prefix rejects.
+
+28 related checks PASS using scripted transport,real public STATE SDK sandbox andSQLite/wires.
+Native+JSON batch with domain tool and2identicalqueries resolves each receipt;only target changes,
+hidden evaluator context/original final answer absent,newdomain effects0,snapshots unchanged.
+Length failure,callgate/capacity refusal,alteredprefix/batch,CLI withoutframe covered. Ruff,4module
+scopedmypy (existing exclusions) and bothboundaries PASS;not fullstrict/remoteCI/model quality.
+Actual state-public-branches-v1 2givenrequests+controlsteps=11captures ALL NO_HOST_REQUEST_ORIGIN.
+They remain delivery-only despite borrowing prior real query text; no answer feedback invented.
+Artifacts: state-readout-validation-v1, state-readout-preflight-v1/availability.json.
+
+Only live neural job: original savedCPU262 driver2925107/child2925108/exec47993,latest649/876.
+Revalidate actualPID/files; no restart on stale session/status,no second neural work or offline
+settlement before262terminal. No real STATE readout dispatched this turn. Original LME400 and
+compact-input audits CLOSED; never restart them. pending-costs-v10 adds61.849528069 measured
+closedCPU(6validation subprocesses+availability check) to priorv9/v8/v7pending. Unknowns preserved.
+Fulloriginal393/524/selection/selectedtrain,realHost/feedback,F1/F2,state/source/seeds,LMEQA,
+lifecycle/external/finalfigures stillopen;M1-M5 unachieved. No agents,newservices,secondledger,
+push/merge,SHA/fingerprints. Latest: progress-v10 and execution record.
+
+# Earlier: 2026-10-23 View provenance/summary delivery improved; compact audit CLOSED
 
 Functional source30f74766 (also58f2cec5/f4372cea) adds actual capture context to Views,
 scope-aware cache reuse and acquired View-only summary delivery. Existing frozen inputs/runs
