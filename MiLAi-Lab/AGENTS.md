@@ -1,4 +1,30 @@
-# LATEST: 2026-10-23 explicit Host-only diagnostic ready; original CPU393 LIVE
+# LATEST: 2026-10-23 actual auxiliary new-input audit CLOSED; original CPU393 LIVE
+
+No new functional code this turn;sourcef1e8b9ce. auxiliary-input-conditions-v1 audits the
+existing3979train/961internaldev candidate pool under4input conditions=19760nativeinputs.
+Candidate text/questions/options/gold/metadata/masks unchanged;requesttext recovers original
+request,compactJSON recovers same values/order. Alllabelledrows encode toSDKitems,no skips,
+state/head truncation or masks. Originalordinarylengths match old audit exactly;not a newfit.
+No weights/forward/HTTP/ledgerwrite. Aux128update/2048draw/final128init and matchedoperation
+follow-on recipe unchanged. Auxiliary transfer/Host/benchmark benefit remains unmeasured.
+Train:730families/807basequeries/1612native rows/3169docIDs/3979candidates;dev182/195/388/768/961.
+Candidate kinds train1612positive+1612ordinaryneg+755instructionneg;dev388+388+185. Published
+membership labels not independently semantically certified. Family/basequery/docID/eventID
+crosssplit overlaps0;sortedliteral completecandidatebody comparison also0,no fingerprint.
+Not substring/paraphrase/pretraining/global independence or protected confirmation.
+Maxtrain/devtokens:ordinary533/552,compact525/544,requesttext575/594,compacttext570/589;
+original8192total/384head. Short inputs fitting says nothing about learnedtransfer benefit.
+Closedstream identity/count/aggregate verification PASS. Artifacts audit/lengths/verification
+underauxiliary-input-conditions-v1. pending-costs-v14 adds53.473427091CPU to v13pending;old
+ordinaryaudit not rebilled. Unknownoverhead remainsunknown.
+
+ONLY LIVE neural job: original savedCPU393 driver3654617/child3654665/exec24298,latest89/876.
+RevalidatePID/files;no secondneural or offlinesettlement whilelive;no stale-session restart.
+After393terminal+verification/accounting: frozen Host-onlytask3diagnostic,then original524.
+AllpriorSTATEv3/branches/LME400/compact audits CLOSED;do not replay. Fullremainingplan and
+M1-M5 stillopen. No agents,newservices,secondledger,push/merge,SHA. Latestprogress-v14/execution.
+
+# Earlier: 2026-10-23 explicit Host-only diagnostic ready; original CPU393 LIVE
 
 Functional sourcef1e8b9ce adds --memory-protocol none to existingSTATErunner. No memory
 tool/schema/handler/forcedretrievalinstruction/corpusread/Sourcecapture/Store/policy/model

@@ -4,6 +4,47 @@
 [原计划](MILAI_TRAINING_DATA_GENERALIZATION_PLAN_20261021.md)，原文复制留存，原目录文件未修改。
 该计划中的“本轮已完成”是另一环境的历史说明，不能代替本机当前验证。
 
+## 2026-10-23：辅助适用性真实数据的新输入条件检查，未训练
+
+此前31912组检查只覆盖memory_operation，不能替代辅助A池检查。本轮复用原
+`promptriever-first2000/trainable`的3979 train、961内部dev候选，没有重新下载、改划分或改标签。
+原普通输入检查已经完成；本轮将它作为字面长度参照，核对新接入的compact与等信息request-text
+路径，原冻结辅助128更新/2048draws/final128初始化及后续匹配操作训练方案不变。
+
+实际完成4940候选×4种输入条件＝**19760份原生输入**。候选正文、问题/选项、gold、metadata
+与mask均保留；request-text可还原原请求，紧凑JSON可还原相同值与顺序。每种条件的labelled行均
+生成对应SDK训练item，没有跳过、state/head截断或mask替换，原始长度与旧检查逐行一致。
+未加载权重、forward、训练或HTTP调用，也没有辅助迁移效果/benchmark成绩。
+
+| split | 候选数 | 来源族 | base-query | native原料行 | 文档ID |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| train | 3979 | 730 | 807 | 1612 | 3169 |
+| 内部dev | 961 | 182 | 195 | 388 | 768 |
+
+train候选为1612 positive、1612 ordinary_negative、755 instruction_negative；dev为388/388/185。
+这仍是公开passage-membership标签，未做独立语义认证，不能把候选数当作独立来源数或训练draws。
+来源族、base-query、native_docid、event_id跨train/dev交集均为0。另用原正文排序和直接字面比较
+核对跨划分完整candidate正文重复，结果为0；没有摘要/内容指纹。这不证明子串、改写、预训练或
+全网内容独立，内部dev也不是受保护外部确认集。
+
+| 条件 | train最大tokens | dev最大tokens |
+| --- | ---: | ---: |
+| 原结构化输入 | 533 | 552 |
+| compact | 525 | 544 |
+| 等信息request-text | 575 | 594 |
+| compact request-text | 570 | 589 |
+
+均使用原8192总长、384头上限。此池原本已经很短，长度减少不是辅助初始化有效的证据。
+关闭输出后逐行核对19760个身份、计数、长度汇总与零截断结果。产物在
+`auxiliary-input-conditions-v1/audit.json`、`lengths.jsonl`和`verification.json`。
+本轮原生检查与关闭核对新增待结算**53.473427091 CPU秒**，`pending-costs-v14.json`衔接v13；
+旧普通输入检查不重计，其他未测开销仍unknown。
+
+原savedCPU393仍是唯一神经作业，未结算离线费用或派发新模型。之后的Host-only诊断、原524/
+选点/匹配train，以及辅助训练/操作迁移、全部其他原研究要求继续开放。
+当前索引：[进度v14](../data/manifests/evidence-gap-development-progress-20261023-v14.json)。
+M1–M5未完成；无SHA、远端写入、新服务、第二账本或子Agent。
+
 ## 2026-10-23：无记忆Host诊断入口与新失败状态容量检查
 
 上轮任务失败涉及共同Host/模拟用户能力，不能全部归因于记忆。`f1e8b9ce`在原STATE runner
