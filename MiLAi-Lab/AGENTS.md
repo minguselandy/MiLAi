@@ -1,4 +1,19 @@
-# LATEST: 2026-10-23 empty delivery selectable without losing observations; CPU393 LIVE
+# LATEST: 2026-10-23 auxiliary textual prefix reviewed; CPU393 LIVE
+
+No functional/data/gold changes. auxiliary-input-conditions-v1/semantic-prefix-review.json
+reviews first8 instruction-bearing basequeries in existing train order,24candidates/7connected
+families. Firstquery already previewed; not blind.7positive texts align,1has uncertain completeness
+of requested mechanism detail.6instruction negatives already fail the basequery;1clear extra
+constraint contrast and1plausible contrast. Limited agent textual review,not factual certification,
+pool quality estimate,transfer result or authorization to infer instruction-following gains.
+Original auxiliary/follow-on recipe preserved; larger expansion still needs adequate acceptance.
+pending-costs-v17 adds0.097480873 measured extractionCPU; review/authoring unmeasured.
+393 settlement-preparation now31closedentries; no ledgerwrite whilelive. Prepared393 verifier,
+settler and dispatch_host_only_task3_v1.py remain UNEXECUTED. Verify actualPID/files first.
+Original393 -> verification/accounting -> frozenHost-onlytask3 -> original524 unchanged.
+Allremaining scope and constraints below remain; M1-M5 unfinished.
+
+# Earlier: 2026-10-23 empty delivery selectable without losing observations; CPU393 LIVE
 
 Functional sourcee1e99dae adds HANDOFF handoff_select_none {delivery_indices:[]} to existing
 finite choices when selected delivery is nonempty and empty packet fits. PlainHANDOFF unchanged;
