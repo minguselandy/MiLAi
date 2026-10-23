@@ -16,6 +16,12 @@ Prepared dispatch_selected_train_v1.py and verify_selected_train_v1.py are synta
 UNEXECUTED. Driver requires selection-plan+524settlement (includingselectionanalysisCPU);
 verifier checks all4886originalrows/predictions/lengths/ledger and writes complete-results.json,
 keeping original selectionresults and masked64gap. No automatic retry or partialtrain substitute.
+Prepared saved-cpu-u524-v1/settlement-preparation.json:8closed entries38.084011824CPU,
+literal timing values checked, no overlap with prior262/393/Host-only settlements. Noledgerwrite.
+After actual524exit: verify_saved_cpu_u524_v1.py -> select_saved_cpu_curve_v1.py -> include
+any laterpending and run settle_u524_followups_v1.py -> dispatch_selected_train_v1.py.
+Settler adds524startup/coordinator/verification +selectionanalysis only, never modelCPU again.
+All these terminal steps remain UNEXECUTED; current524 must finish first.
 
 pending-costs-v19 adds7.403995419CPU to pendingv18; no ledgerwrite while524live.
 ONLY LIVE neuraljob524 driver137761/child137766/exec60323. VerifyactualPID/files; afterterminal
