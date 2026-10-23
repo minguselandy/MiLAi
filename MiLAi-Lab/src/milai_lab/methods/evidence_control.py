@@ -124,6 +124,7 @@ class EvidenceOperations:
             source_discovery=feed["query"], bound_source_lookups=len(bound_refs))
         state.new_events = [{"source_ref": e["event_id"], "role": e["role"],
             "content": body_text(e), "origin": e.get("origin"),
+            **({"capture_context": e["capture_context"]} if "capture_context" in e else {}),
             "delivery": "controller_observation; Reader uses visible_evidence",
             "reported_at": e.get("occurred_at"), "captured_at": e["observed_at"]}
             for e in arrivals]

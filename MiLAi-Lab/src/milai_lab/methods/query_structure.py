@@ -28,6 +28,8 @@ INSTRUCTIONS = (
     "task can use them. scope describes that scope, not proof that all history was examined. "
     "Old nodes and rules in previous are model interpretations, not original evidence. "
     "sources contains newly delivered original bodies in capture order, with session identifiers "
+    "and capture context. given_retrieval_request marks a supplied memory query; it does not "
+    "provide a new domain observation or independently confirm the queried facts. "
     "for captured conversation context. source_directory binds the old and new "
     "e aliases; an old alias without a body does not supply its semantic content. "
     "New arrivals can introduce an overriding rule even if they are absent from old support. "
@@ -44,7 +46,19 @@ INSTRUCTIONS = (
     "means no available support route. These are different logical states, both representable. "
     "An uncertain or unavailable premise is unknown, never its negation. Rules express "
     "source-supported implications, not an assurance that their premises hold. If the source "
-    "does not support a relation, retain plain text. Return the supplied schema."
+    "does not support a relation, retain plain text. Return the supplied schema. "
+    "Examples of faithful source-to-node transformations (not additional evidence): "
+    "User: 'Could you confirm the transfer completed?' -> reported node: "
+    "'The user asks whether the transfer completed'; unresolved: 'Transfer completion "
+    "has not been established by this question.' Do not write 'The user confirmed completion'. "
+    "Tool: {status: preview, proposed_amount: 40} -> reported node: "
+    "'The preview proposes an amount of 40; execution is not established.' "
+    "Source: 'Access is allowed if training is complete and the permit is valid' -> "
+    "self-contained node: 'If training is complete AND the permit is valid, access is allowed.' "
+    "This source does not assert either prerequisite or current access. "
+    "Source reported_at=null with a captured_at value -> omit temporal unless the body "
+    "itself states an event or effective date; the capture time stays in ingestion metadata. "
+    "A direct statement such as 'The agreed limit is 40' can remain a plain reported node."
 )
 EXPLICIT_REFRESH_INSTRUCTIONS = (
     " Prior assistant answers are model interpretations, not independent factual support; "
@@ -237,6 +251,8 @@ def build_query_structure(
         bindings[alias] = {"source_ref": ref, "source_revision": source.get("source_revision", 1)}
         sources.append({"id": alias, "text": body_text(source), "role": source["role"],
             "origin": source["origin"],
+            **({"capture_context": source["capture_context"]}
+               if "capture_context" in source else {}),
             "session": source["session"],
             "reported_at": source.get("occurred_at"),
             "calendar_context": source.get("calendar_context")})
@@ -259,6 +275,8 @@ def build_query_structure(
                     "source_directory": [{"id": key, "body_delivered": key in delivered_aliases,
                         "role": by_ref[binding["source_ref"]]["role"],
                         "origin": by_ref[binding["source_ref"]]["origin"],
+                        **({"capture_context": by_ref[binding["source_ref"]]["capture_context"]}
+                           if "capture_context" in by_ref[binding["source_ref"]] else {}),
                         "session": by_ref[binding["source_ref"]]["session"],
                         "reported_at": by_ref[binding["source_ref"]].get("occurred_at")}
                         for key, binding in bindings.items()], "current_scope_sources": [

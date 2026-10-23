@@ -63,6 +63,38 @@ def test_cache_matches_scope_and_original_binding_without_case_specific_words():
     assert text_overlap("花园准入条件", "花园准入条件") == 1.0
 
 
+def test_retrieval_probe_context_does_not_acknowledge_or_erase_user_arrivals(tmp_path):
+    with SqliteStore.from_conn_string(str(tmp_path / "db")) as store:
+        service = service_at(store, tmp_path)
+        service.capture_user("history", "1", "The approval threshold is 1000.")
+        policy = CacheMemoryPolicy()
+        state, ops = setup_operations(service)
+        run_memory_control(state, policy, ops)
+        question = state.task["request"]
+        probe = service.capture_user("probe", "repeat", question,
+                                     capture_context="given_retrieval_request")["source_ref"]
+        state, ops = setup_operations(service)
+        repeat = run_memory_control(state, policy, ops)
+        assert repeat["trace"][0]["selected"] == "use_view"
+        assert probe in state.views[0]["pending_events"]  # Still stored and unacknowledged.
+        assert service.source(probe)["content"] == question
+
+        # The exact same words from an actual user retain a distinct Source and
+        # trigger interpretation. Identity is determined by the event, not text.
+        user = service.capture_user("history", "2", question)["source_ref"]
+        state, ops = setup_operations(service)
+        actual = run_memory_control(state, policy, ops)
+        assert actual["trace"][0]["selected"] == "refresh_view"
+        assert user != probe and service.source(user)["origin"] == "public_user_message"
+        assert len(service.sources()) == 3
+
+        service.capture_user("history", "3", "Use my new approval threshold of 1200.")
+        state, ops = setup_operations(service)
+        changed = run_memory_control(state, policy, ops)
+        assert changed["trace"][0]["selected"] == "refresh_view"
+        assert "1200" in json.dumps(state.visible_evidence)
+
+
 def test_upstream_pursuit_reads_complementary_prefix_without_removing_other_actions(tmp_path):
     pytest.importorskip("mempursuit")
 

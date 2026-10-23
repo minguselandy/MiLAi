@@ -26,11 +26,38 @@ def original_terms(material: dict[str, Any]) -> set[str]:
     if material["kind"] != "original_source" or material.get("body_delivered") is False:
         return set()
     return set(_lexical_tokens(" ".join(row["content"]
-                                       for row in material.get("evidence", []))))
+        for row in material.get("evidence", [])
+        if row.get("capture_context") != "given_retrieval_request")))
 
 
 def coverage(terms: set[str], needs: list[set[str]]) -> float:
     return sum(len(terms & point) / len(point) for point in needs)
+
+
+def pending_content(view: dict[str, Any], events: list[dict[str, Any]]) -> bool:
+    """Supplied retrieval probes remain stored requests, not new domain observations.
+
+    Unseen pending arrivals and ordinary user messages still count. In particular,
+    a user's question may also contain a new preference; no text classifier or
+    identical-body deduplication is used here.
+    """
+    requests = sum(1 for event in events
+                   if event.get("capture_context") == "given_retrieval_request"
+                   and event["source_ref"] in view["pending_events"])
+    count: int = view.get("pending_event_count", len(view["pending_events"]))
+    return count > requests
+
+
+def view_request_context(request: dict[str, Any] | None) -> dict[str, Any] | None:
+    """Known deliveries and per-call limits do not change a View's semantic scope."""
+    if request is None:
+        return None
+    scope = {key: value for key, value in request.items() if key not in {"limits", "task_context"}}
+    context = {key: value for key, value in request.get("task_context", {}).items()
+               if key != "known_evidence_refs"}
+    if context:
+        scope["task_context"] = context
+    return scope
 
 
 def original_evidence_action(
@@ -53,7 +80,9 @@ def original_evidence_action(
     observed = {int(item["label"][1:]): item
                 for item in [*state.visible_evidence, *(state.observed_evidence or [])]}
     raw = {i: original_terms(item) for i, item in observed.items()
-           if item["kind"] == "original_source"}
+           if item["kind"] == "original_source" and any(
+               row.get("capture_context") != "given_retrieval_request"
+               for row in item.get("evidence", []))}
     acquired = known.union(*raw.values())
     current = [m["item_index"] for m in state.observed_materials if m["selected"]]
 
@@ -81,8 +110,12 @@ def original_evidence_action(
             or (needs and coverage(acquired, needs) == len(needs))):
         return handoff()
 
+    search = next((a for a in actions if a.kind == "SEARCH"), None)
+    if not observed and not state.pending_candidates and search is not None:
+        # Retrieve actual source candidates before ranking only View-bound locations.
+        return search.id
     candidates = {c["item_index"]: c for c in state.pending_candidates}
-    events = {e["source_ref"]: e["content"] for e in state.new_events}
+    events = {e["source_ref"]: e for e in state.new_events}
     available = [a for a in actions if a.kind == "READ" and a.parameters.get("observe_only")
                  and ("observed_source" in a.parameters
                       or candidates.get(a.parameters.get("index"), {}).get("kind")
@@ -90,12 +123,19 @@ def original_evidence_action(
 
     def read_score(action: MemoryAction) -> float:
         if "observed_source" in action.parameters:
-            text = events.get(action.parameters["observed_source"]["source_ref"], "")
+            event = events.get(action.parameters["observed_source"]["source_ref"], {})
+            if event.get("capture_context") == "given_retrieval_request":
+                return -1.0
+            text = event.get("content", "")
         else:
-            text = candidates[action.parameters["index"]]["excerpt"]
+            candidate = candidates[action.parameters["index"]]
+            if candidate.get("capture_contexts") == ["given_retrieval_request"]:
+                return -1.0
+            text = candidate["excerpt"]
         return coverage(set(_lexical_tokens(text)) - acquired, needs)
 
     if available:
-        return max(available, key=read_score).id
-    search = next((a for a in actions if a.kind == "SEARCH"), None)
+        best = max(available, key=lambda a: (read_score(a), "index" in a.parameters))
+        if read_score(best) >= 0:
+            return best.id
     return search.id if search is not None else handoff()

@@ -524,7 +524,8 @@ def project_pack(item: dict[str, Any], index: int) -> dict[str, Any]:
              else item.get("support_turns", []))
     sources = {turn["source_ref"]: f"e{index}:s{i}" for i, turn in enumerate(turns)}
     result["evidence"] = [{"source": sources[turn["source_ref"]], **{
-        key: turn[key] for key in ("role", "origin", "content", "calendar_context", "range")
+        key: turn[key] for key in ("role", "origin", "capture_context", "content",
+                                  "calendar_context", "range")
         if key in turn},
         "reported_at": turn.get("occurred_at", turn.get("timestamp")),
         "captured_at": turn.get("observed_at"),
@@ -687,6 +688,10 @@ def pack_candidate(item: dict[str, Any], index: int) -> dict[str, Any]:
     """An explicitly incomplete navigation excerpt, never an evidence body."""
     text = item.get("index_text", "") if item.get("body_delivered") is not False else ""
     return {"item_index": index, "kind": item["kind"], "navigation_only": True,
+            **({"capture_contexts": sorted({turn.get("capture_context", "ordinary_source")
+                for turn in json.loads(item["text"])})}
+               if item["kind"] == "original_source" and "text" in item
+               and item.get("body_delivered") is not False else {}),
             "excerpt": text[:160], "excerpt_truncated": len(text) > 160,
             "date": item.get("date"), "visibility": item.get("visibility", "visible"),
             "can_expand_context": bool(item.get("context_source_ranges"))}

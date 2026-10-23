@@ -1318,8 +1318,13 @@ class MemoryService:
     def capture_user(
         self, session: str, event_key: str, content: Any, *, occurred_at: str | None = None,
         calendar_context: str | None = None,
+        capture_context: str | None = None,
     ) -> dict[str, Any]:
-        """Capture an actual incoming user event, not a model-selected source body."""
+        """Capture an incoming event with optional trusted execution context.
+
+        Context identifies the capture path, not whether a user's words are facts.
+        Ordinary user messages retain their default identity and original content.
+        """
         return self._capture(
             session,
             event_key,
@@ -1329,6 +1334,7 @@ class MemoryService:
             None,
             occurred_at=occurred_at,
             calendar_context=calendar_context,
+            capture_context=capture_context,
         )
 
     def capture_assistant(
@@ -1393,6 +1399,7 @@ class MemoryService:
         *,
         occurred_at: str | None = None,
         calendar_context: str | None = None,
+        capture_context: str | None = None,
     ) -> dict[str, Any]:
         if occurred_at is not None and (
             not isinstance(occurred_at, str) or not occurred_at.strip()
@@ -1452,12 +1459,17 @@ class MemoryService:
             event["occurred_at"] = occurred_at
         if calendar_context is not None:
             event["calendar_context"] = calendar_context
+        if capture_context is not None:
+            event["capture_context"] = capture_context
         if self.memory_profile == "unified_v1":
             event["episode_id"] = reference_key([session, event_key, role])
         with self._locked():
             prior = self.store.get(self.sources_namespace, event_id)
             formed = False
             if prior is not None:
+                if (capture_context is not None
+                        and prior.value.get("capture_context") != capture_context):
+                    raise ValueError("V13_SOURCE_CAPTURE_CONTEXT_CHANGED")
                 if occurred_at is not None and prior.value.get("occurred_at") != occurred_at:
                     raise ValueError("V13_SOURCE_OCCURRENCE_TIME_CHANGED")
                 if (calendar_context is not None
@@ -1952,6 +1964,8 @@ class MemoryService:
                     }
                     if "calendar_context" in event:
                         turn["calendar_context"] = event["calendar_context"]
+                    if "capture_context" in event:
+                        turn["capture_context"] = event["capture_context"]
                     turns.append(turn)
                     actual_ranges.append(dict(span))
                 result.append({

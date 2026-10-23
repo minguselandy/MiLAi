@@ -2768,11 +2768,13 @@ def message(
                     preserve_occurrence=edit_features.source_metadata,
                     mark_new_sources=settings.get("host_source_arrivals", False))
             output["capture_attempted"] = True
+            request_context = ({"capture_context": "given_retrieval_request"}
+                               if given_retrieval_request is not None else {})
             capture = (
                 service.capture_user(session, message_id, content, occurred_at=occurred_at,
-                                     calendar_context=calendar_context)
+                                     calendar_context=calendar_context, **request_context)
                 if edit_features.source_metadata or calendar_context is not None else
-                service.capture_user(session, message_id, content)
+                service.capture_user(session, message_id, content, **request_context)
             )
             output["capture"] = capture
             trace({"event": "functional_capture", "receipt": capture})

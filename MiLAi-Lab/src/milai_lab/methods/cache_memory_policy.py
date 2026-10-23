@@ -5,7 +5,7 @@ from dataclasses import dataclass
 from typing import Any
 
 from milai_lab.memory.retrieval import _lexical_tokens
-from milai_lab.methods.evidence_selection import original_evidence_action
+from milai_lab.methods.evidence_selection import original_evidence_action, pending_content
 from milai_lab.methods.memory_control import (
     FixedContextMemoryPolicy,
     MemoryAction,
@@ -62,8 +62,7 @@ class CacheMemoryPolicy:
             "USE_VIEW", "REFRESH_VIEW"}
         if delivered_view and not originals:
             return handoff
-        pending = view is not None and bool(view.get("pending_event_count",
-                                                    len(view["pending_events"])))
+        pending = view is not None and pending_content(view, state.new_events)
         if not delivered_view and (not matching or pending):
             refresh = next((a for a in actions if a.kind == "REFRESH_VIEW"
                 and (view is None or a.parameters.get("slot") == view["slot"])), None)

@@ -7,7 +7,11 @@ from collections.abc import Callable
 from dataclasses import asdict, dataclass, field
 from typing import Any, Literal, Protocol
 
-from milai_lab.methods.evidence_selection import original_evidence_action
+from milai_lab.methods.evidence_selection import (
+    original_evidence_action,
+    pending_content,
+    view_request_context,
+)
 
 Operation = Literal["SEARCH", "READ", "USE_VIEW", "REFRESH_VIEW", "HANDOFF"]
 
@@ -246,9 +250,10 @@ class RulesMemoryPolicy:
         } and state.last_result.get("ok"):
             return next(a.id for a in actions if a.kind == "HANDOFF")
         matching = [v for v in state.views if v.get("built_for") == state.task["request"]
-                    and v.get("retrieval_request") == state.task.get("retrieval_request")]
+                    and view_request_context(v.get("retrieval_request"))
+                    == view_request_context(state.task.get("retrieval_request"))]
         reusable = {v["id"] for v in matching
-                    if not v.get("pending_event_count", len(v["pending_events"]))}
+                    if not pending_content(v, state.new_events)}
         if self.reuse_views and not wants_history and reusable:
             use = next((a for a in actions if a.kind == "USE_VIEW" and a.target in reusable), None)
             if use is not None:

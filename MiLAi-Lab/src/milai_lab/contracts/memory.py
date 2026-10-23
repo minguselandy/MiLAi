@@ -52,6 +52,7 @@ class SourceEvent(TypedDict):
     content: Any
     source_revision: int
     capture_key: NotRequired[str]
+    capture_context: NotRequired[str]
     observed_at: str
     occurred_at: NotRequired[str]
     # Framework-declared coordinates for unzoned event/effective clocks; this

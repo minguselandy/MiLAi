@@ -53,6 +53,11 @@ def test_given_request_is_exact_and_no_host_answer_or_generation_is_added(tmp_pa
     assert "4312" in json.dumps(result["retrieval_result"]["evidence"])
     assert [m["type"] for m in result["messages"]] == ["tool"]
     assert all(row["role"] != "assistant" for row in result["sources"])
+    captured = next(row for row in result["sources"]
+                    if row["event_id"] == result["capture"]["source_ref"])
+    assert captured["origin"] == "public_user_message"
+    assert captured["capture_context"] == "given_retrieval_request"
+    assert captured["content"] == request["query"]
     assert not result["records"] and not result["memory_mutation_receipts"]
     assert result["budget_before"]["generation"] == result["budget_after"]["generation"]
     assert result["budget_before"]["generation_requests"] == (
