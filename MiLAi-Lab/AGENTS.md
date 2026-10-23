@@ -1,4 +1,30 @@
-# LATEST: 2026-10-23 actual auxiliary new-input audit CLOSED; original CPU393 LIVE
+# LATEST: 2026-10-23 actualSTATE18states/unknownpair exported; original CPU393 LIVE
+
+Functional source86daa6e9 extends EXISTING export_host_intent_states --protocol state_dynamic
+and prepare_retrieval_feedback for actualSTATEbranch layout. Closedrun inputs/fulloptions,
+selectedbindings/results/failures retained;no teacher-choicegold. Actualtrace/capture before/actions
+checked,outputs match originalinputs. Zero-decision calls remain in callinventory,no inventedrow.
+STATEcompiler reads retrieval/replay plus actualrunner recipe;samecapture/fullbinding/continuation
+required;unclosed/mismatched conditions cannot receive direction. Existingfunctional defaults kept.
+Groups conservatively connect recordednative task/history IDs among suppliedruns,retain splits,
+reject connectedcrosssplit exports. Export-local identity join,not secondledger/independenceproof.
+
+Actualv3export18states=fixed5/rules8/laya5,alltrain/allmasked,ONEassociatedsourcegroup. LastLaya
+step4 capacityfailure retained as selection_not_returned,no inventedselection. Other17actual
+operationresults retained.4actualJevinputs exactly equal reconstructedsharedinputs. Oneactual
+context0/read0pair compiled withanswerUNKNOWN/deliveryUNKNOWN,0direction/CElabels;other17states
+remainraw. Not trainedfeedback/sourceexpansion/Hostbenefit. Artifacts state-v3-decision-export-v1
+andstate-v3-feedback-unknown-v1. 28native-environment checksPASS,includingSQLite failurecapture
+andtiny tensorpairloss(no weights/forward);initial4torchskips subsequently covered. Ruff,2tool
+scopedtyping andboundariesPASS;loopPath/stringtypingfixed,no addedexclusions/fullstrictclaim.
+pending-costs-v15 adds28.670170569CPU to v14/v13pending;compilerinnercostnotdoublecounted.
+
+ONLY LIVE neuraljob: original savedCPU393 driver3654617/child3654665/exec24298,latest148/876.
+RevalidatePID/files;no secondneural/offlinesettlement/stale-observation restart. After393terminal/
+verification/accounting: frozenHost-onlytask3diagnostic,thenoriginal524. Closedpriorjobs notrerun.
+Fullremainingplan/M1-M5 open. No agents,newservices,secondledger,push/merge,SHA. Progress-v15.
+
+# Earlier: 2026-10-23 actual auxiliary new-input audit CLOSED; original CPU393 LIVE
 
 No new functional code this turn;sourcef1e8b9ce. auxiliary-input-conditions-v1 audits the
 existing3979train/961internaldev candidate pool under4input conditions=19760nativeinputs.

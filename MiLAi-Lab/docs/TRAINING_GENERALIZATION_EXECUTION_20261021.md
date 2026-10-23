@@ -4,6 +4,44 @@
 [原计划](MILAI_TRAINING_DATA_GENERALIZATION_PLAN_20261021.md)，原文复制留存，原目录文件未修改。
 该计划中的“本轮已完成”是另一环境的历史说明，不能代替本机当前验证。
 
+## 2026-10-23：真实STATE状态接入既有导出与反馈编译，标签仍masked/unknown
+
+`86daa6e9`扩展两个既有入口：`export_host_intent_states.py --protocol state_dynamic`
+读取已关闭的STATE动态运行；`prepare_retrieval_feedback.py`直接读取STATE分支的真实
+`retrieval/replay.json`与runner recipe，不制造旧functional格式的结果wrapper。
+旧functional路径保留原默认行为。
+
+导出保留每个实际decision_input、完整候选绑定、实际selection/operation_result、运行失败与
+尚未返回的选择。输出与操作结果还需对应同一个原输入；有实际快照时再逐项核对before/actions。
+已选动作不自动变成gold，未生成方向pair的状态不会因此消失。零决策调用另列call inventory，
+不补造状态。反馈编译仍要求同capture、同完整绑定与同continuation；未闭合或条件不一致的
+比较不能获得非unknown偏好。
+
+来源分组使用本次输入run已记录的native任务/历史身份做保守关联：共享任何任务或历史的
+输入合并，保留原split，拒绝关联组跨划分混写。这是导出局部的身份连接，不是新的全局来源
+账本或内容独立性证明；不会因为换了政策或冷Store就增加来源族。
+
+实际v3三臂导出**18个状态：fixed_context 5、rules 8、Jev 5**，均为train、gold为空。
+三臂的目标和记忆历史共享，只有一个关联组。Jev最后一个容量失败前状态保留为
+`selection_not_returned`，没有伪造selected_action；其他17个状态有实际operation_result。
+四次原Jev模型输入与从导出重建的shared输入逐字面一致。原失败身份及真实绑定都保留。
+
+已执行的context_0/read_0分支接入原反馈编译器，形成1个被记录比较状态，answer和delivery
+均维持unknown，方向状态数0、CE标签0。其余17个未评审状态仍保留在完整raw导出中；没有
+因为两条Host回答不同就赋方向，也未启动训练。这不等于原32/64/128反馈扩张或新增独立来源。
+产物：`state-v3-decision-export-v1`与`state-v3-feedback-unknown-v1`。
+
+28项检查在原生环境通过，包含真实SQLite的失败状态与小张量pair-loss检查，无模型权重或
+真实前向。初次HTTP环境4项torch检查跳过，随后在原生环境补齐；Ruff、两工具局部类型和边界
+通过。循环变量的Path/string类型冲突已修正，没有增加类型屏蔽；完整strict/远端CI未声称通过。
+实物导出、编译与关闭核对通过，共新增已测待结算**28.670170569 CPU秒**，
+`pending-costs-v15.json`衔接v14/v13；编译子进程包含内部preparation成本，不重复相加。
+
+原savedCPU393仍运行；没有并发派发新模型或写入待结算账本。Host-only诊断、原524/选点/
+匹配train、真实有方向反馈与全部其他原研究要求继续开放。
+当前索引：[进度v15](../data/manifests/evidence-gap-development-progress-20261023-v15.json)。
+M1–M5未完成；无SHA、远端写入、新服务、第二账本或子Agent。
+
 ## 2026-10-23：辅助适用性真实数据的新输入条件检查，未训练
 
 此前31912组检查只覆盖memory_operation，不能替代辅助A池检查。本轮复用原
