@@ -1,4 +1,23 @@
-# LATEST: 2026-10-24 full registered raw auxiliary candidates checked; matching train LIVE
+# LATEST: 2026-10-24 audited development curve exported; matching train LIVE
+
+fb50dd1d extends EXISTING tools/plot_operation_curve.py withprimaryCSV andexplicit savedcoverage/
+pendingtrain caveats. Missing savedresults are notsupplied; matchingtrainstatus null,notfalse.
+Actual source256 completeaction seed0 figure at saved-cpu-selection-v1/figures-v1/curve.png,
+curve.svg,curve.csv. GPUtrain/dev+matchingGPUgap separated fromsavedCPUdev; u64unknown791 noted,
+savedCPUtrain/gap absent/pending. Secondaryfeedback remains diagnostic,not selection.
+21primaryCSVrows=14GPU+7savedCPUdev,allsourcevalues checked;0savedCPUtrain rows. PNG visually
+inspected:no clippedpanels/legends/caveats. Defaultpath14GPUrows/null savedtrainstatus checked.
+Ruff/scopedmypy(actualsystemPython)/bothboundariesPASS. No newunit/fullsuite/remoteCI claim.
+This singledevelopment-condition plot is NOT completion of fourmainresearchfigures orHostquality.
+pending-costs-v24 addsmeasuredplot/checkCPU to v21-v23pending;no ledgerwrite whiletrainlive.
+
+ONLY LIVE neuraljob full4886matchingtrain262 driver798921/child798926/exec52857;verifyactualPID/
+files. No secondneural/offlinesettlement/restart. Originalfeedbackv2bound,notdispatched. Aftertrain
+terminal originalverification/costs before nextmodel. Fullremainingplan/M1-M5unfinished;
+nativeSTATEtest30/39 prior partialexposure retained. Latestprogress-v24/execution;
+noSHA/agents/services/secondledger/push/merge.
+
+# Earlier: 2026-10-24 full registered raw auxiliary candidates checked; matching train LIVE
 
 No data/gold/model change. Reused originalallcandidate groupregistry todecode1612TRAIN rawrows
 ofexistingfirst2000intake;388devrows skippedbeforeJSONdecoding. Reconstructed all3979original

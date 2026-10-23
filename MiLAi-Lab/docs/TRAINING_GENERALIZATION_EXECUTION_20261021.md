@@ -4,6 +4,28 @@
 [原计划](MILAI_TRAINING_DATA_GENERALIZATION_PLAN_20261021.md)，原文复制留存，原目录文件未修改。
 该计划中的“本轮已完成”是另一环境的历史说明，不能代替本机当前验证。
 
+## 2026-10-24：导出已核对的开发曲线，明确保存评价缺口
+
+`fb50dd1d`扩展现有`plot_operation_curve.py`，增加主操作CSV及保存模型覆盖缺口/匹配train
+待完成的明确图注。未提供保存结果时写“未提供”，对应train状态为null，不把缺失解释成false。
+没有改模型、评分或选点条件。
+
+真实产物在`saved-cpu-selection-v1/figures-v1/curve.png`、`curve.svg`、`curve.csv`。
+图中分别标注原GPU内存train/dev、同GPU条件gap、保存CPU dev及选中点；图注明确说明
+CPU匹配train仍未完成，gap面板只有原GPU结果，并保留64的一个未知运行输出。
+次要feedback曲线仍单独显示，不参与初始化反选。它是source256全动作seed0的开发图，
+不能替代来源规模、Host质量/完整成本、状态/绑定和生命周期四类完整主结果。
+
+CSV的21行（14条GPU train/dev、7条保存CPU dev）逐项核对原JSON数值，未补CPU train行或gap。
+主PNG已视觉检查，三个面板、图例和限制说明无裁切。另验证无saved输入的默认导出：14条GPU行，
+保存train状态null；该默认路径产物仅为导出检查，不是新实验。Ruff、实际system Python环境下的
+单工具局部类型、两项依赖边界均通过；无新单元测试、全套或远端CI完成声明。
+
+图表、实际CSV核对及静态检查共27.024401671 CPU秒计入`pending-costs-v24.json`，
+没有模型、HTTP或原账本写入；其他未测作者/启动/报告开销仍unknown。
+当前完整4886条匹配train继续作为唯一神经作业，完整gap与其他研究仍未完成。
+当前索引：[进度v24](../data/manifests/evidence-gap-development-progress-20261023-v24.json)。
+
 ## 2026-10-24：排除首负例抽样对该字面对照缺口的解释
 
 沿用原始全候选来源分组，分析同一first2000 intake中1612条已登记train原料行的全部候选；
