@@ -4,6 +4,36 @@
 [原计划](MILAI_TRAINING_DATA_GENERALIZATION_PLAN_20261021.md)，原文复制留存，原目录文件未修改。
 该计划中的“本轮已完成”是另一环境的历史说明，不能代替本机当前验证。
 
+## 2026-10-24：修复当前用户Source被后续到达游标越过的问题
+
+检查既有当前请求排除逻辑时，用真实SQLite/MemoryService复现了一项F1追踪缺陷：
+10:00的当前用户消息被本次取证排除，11:00的工具回执随后推动View到达游标；12:00的新一轮
+取证只查询游标之后的Source，漏掉了仍然可见的10:00用户消息。其中可以包含新的偏好或决定。
+分页和非分页两个回归均先失败，记录保留在`deferred-arrival-validation-v1/reproduction-before.log`。
+
+`41048b50`在原View对象中保留`deferred_source_refs`，不另建数据库或来源账本。
+后续Source库存按这些实际身份恢复游标之前尚未提供的可见消息；pending按每个View分别判断，
+正文实际提供后解除。再次打开较早的deferred Source不会回退游标或丢失已见边界身份。
+新检查点保存实际排除的Source身份；旧检查点缺该字段时按原资料恢复，不猜补历史信息。
+Source正文、角色与发生/捕获时间不改，也不按文本相同合并真实的不同发生记录。
+
+最终101项相关回归通过、1可选MemPursuit跳过，覆盖incremental/version_cache/rebuild、
+分页/非分页、JSON快照恢复、正文提供后的非重复pending、不同View各自的pending、
+相同文本但不同Source身份，以及撤销后正文/引用不进入模型或Reader投影。此前2项和20项
+检查与最终集重叠，不累加成独立测试数。Ruff首次仅发现6条测试行过长，换行后通过；
+两实现模块局部类型及两项依赖边界均通过，未声称全仓strict、全套或远端CI通过。
+
+这是Lab内部View/检查点元数据修复；Product公开Schema/API、权限和Canonical语义未改，
+Reader投影不暴露deferred追踪字段。旧View若没有这项追踪信息，不会自动修复过去已遗漏的
+消息，原Source仍可搜索。pending仍不等于事实，普通问题是否值得刷新、View内容是否忠实
+及真实Host效果尚需验收；恢复原本遗漏的Source也可能增加处理量或输入长度，未放宽预算。
+这些检查使用脚本解释/传输，没有真实模型结果，不能据此宣布F1/F2或M1已完成。
+
+修复与检查证据见`deferred-arrival-validation-v1/result.json`，9个实测检查阶段共40.851578 CPU秒
+记入`pending-costs-v26.json`，原账本未写入。正在运行的匹配train、原反馈冻结2a179b58以及已准备
+Host说明对照冻结45829497均未热更新，旧结果和标签不变。当前索引：
+[进度v26](../data/manifests/evidence-gap-development-progress-20261023-v26.json)。完整研究范围继续开放。
+
 ## 2026-10-24：准备三任务Host补充说明对照，未调用真实模型
 
 针对已观察的共同Host失效，使用此前冻结的通用补充说明，按原生train列表顺序取已经运行的

@@ -1,4 +1,28 @@
-# LATEST: 2026-10-24 three-task paired Host instruction pilot ready/NOTDISPATCHED; train LIVE
+# LATEST: 2026-10-24 excluded Source cursor loss FIXED; matching train LIVE
+
+41048b50 fixes a reproduced realStore bookkeeping defect: currentuserSource at10 excluded,
+later toolSource at11 advancedViewcursor, nextturn omitted the stillvisible10Source. Bothpaged/
+unpaged reproductions failedbeforefix. ExistingView now retains deferred_source_refs; inventory
+recovers visible deferredSources belowcursor, pending is perView and clears afteractualbody
+delivery. Cursor/boundary neverrewind whenolddeferredbody reopened. Actual exclusions saved in
+newcheckpoints; legacycheckpoints defaultempty, no inventedpastmetadata. No textclassifier/digest.
+101relatedtestsPASS/1optionalMemPursuitskip,including3Viewpolicies,paging,JSONrestore,revocation,
+distinctsame-text occurrences andperViewpending. Earlier2/20case checks overlap. Ruff(aftertest
+linewraps),2module scopedtyping,bothboundariesPASS. Failurelogs retained. No fullsuite/remoteCI.
+
+OnlyLabinternal View/checkpoint metadata; Productpublicschema/API/permissions/Canonical unchanged.
+Readerprojection doesn'texpose deferredtrackingIDs. OldViews withoutmetadata notretroactively
+repaired; rawSources remainsearchable. Pending isn'tfact; questionsemantics/F2/realHostbenefit
+stillunverified. RecoveringmissedSources mayincreaseprocessing/inputsize; budgets unchanged.
+Artifact deferred-arrival-validation-v1/result.json;pending-costs-v26 records9measuredphases,
+no ledgerwrite whiletrainlive. Originalfrozenfeedback2a179b58/pilot45829497 andrunningeval unchanged.
+
+ONLY LIVE neuraljob full4886matchingtrain262 driver798921/child798926/exec52857;verifyactualPID/
+files. No secondneural/offlinesettlement/restart. Aftertrainterminal originalverification/costs
+before nextmodel. Fullremainingplan/M1-M5unfinished;nativeSTATEtest30/39 priorpartialexposure
+retained. Latestprogress-v26/execution;noSHA/agents/services/secondledger/push/merge.
+
+# Earlier: 2026-10-24 three-task paired Host instruction pilot ready/NOTDISPATCHED; train LIVE
 
 state-host-instructions-pilot-v1 selects next3nativeTRAIN IDs5/7/8 in originalsplit order,
 after previouslyattempted1/2/3, BEFORE thispilot bodyinspection; fixedconditionorder recorded.
