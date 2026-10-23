@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import csv
 import json
 import time
 from pathlib import Path
@@ -74,16 +75,55 @@ def main() -> None:
     axes[2].set_ylim(0, 1)
     subtitle = "Static reviewed preferences; not Host success. "
     subtitle += ("Saved CPU selection shown separately." if saved
-                 else "Saved-model evaluation pending; no deployment selection.")
+                 else "Saved-model results not supplied; no deployment selection shown.")
+    coverage_gaps = [
+        {"update": point["update"], "unknown_indices": point["coverage"]["unknown_indices"]}
+        for point in saved["curve"] if point.get("coverage", {}).get("unknown_indices")
+    ] if saved else []
+    saved_train_pending = ("selected_train_dev_family_gap" not in saved
+                           if saved is not None else None)
+    caveats = []
+    if saved_train_pending:
+        caveats.append("Saved CPU matching train pending; gap panel is in-memory GPU only")
+    if coverage_gaps:
+        caveats.append("Unknown runtime predictions: " + ", ".join(
+            f"u{item['update']} ({len(item['unknown_indices'])})" for item in coverage_gaps))
+    if caveats:
+        subtitle += "\n" + "; ".join(caveats) + "."
     fig.suptitle(args.title + "\n" + subtitle, fontsize=12)
     args.output.mkdir(parents=True, exist_ok=False)
     for extension in ("png", "svg"):
         fig.savefig(args.output / f"curve.{extension}", dpi=180)
     plt.close(fig)
+    with (args.output / "curve.csv").open("w", newline="") as stream:
+        writer = csv.writer(stream)
+        writer.writerow(["condition", "update", "split", "labelled", "accepted",
+                         "family_macro_acceptance", "unknown_runtime_indices"])
+        for point in points:
+            for split in ("train", "dev"):
+                score = point[split]
+                writer.writerow(["in_memory_gpu", point["update"], split,
+                    score["counts"]["labelled"], score["counts"].get("accepted", 0),
+                    score["family_macro_acceptance"], "[]"])
+        if saved:
+            for point in saved["curve"]:
+                score = point["dev"]
+                writer.writerow(["saved_cpu", point["update"], "dev",
+                    score["counts"]["labelled"], score["counts"].get("accepted", 0),
+                    score["family_macro_acceptance"],
+                    json.dumps(point.get("coverage", {}).get("unknown_indices", []))])
+            if saved.get("selected_train") is not None:
+                score = saved["selected_train"]
+                writer.writerow(["saved_cpu", saved["deployment_selection"]["update"], "train",
+                    score["counts"]["labelled"], score["counts"].get("accepted", 0),
+                    score["family_macro_acceptance"], "[]"])
     report = {"analysis": str(args.analysis),
         "saved_results": str(args.saved_results) if args.saved_results else None,
         "baseline_summary": str(args.baseline_summary) if args.baseline_summary else None,
         "title": args.title, "model_calls": 0, "no_sha_validation": True,
+        "csv_scope": "Primary operation acceptance; device conditions and splits stay separate.",
+        "saved_runtime_coverage_gaps": coverage_gaps,
+        "saved_matching_train_pending": saved_train_pending,
         "ledger_recorded": False,
         "compute": {"cpu_seconds": time.process_time()-cpu,
                     "wall_seconds": time.perf_counter()-started}}
