@@ -13,6 +13,23 @@ from milai_lab.methods.memory_control_learning import decision_example
 from retrieval_feedback import feedback_counts, validate_feedback
 
 
+def compared_branch(path: Path, state_protocol: bool) -> tuple[
+        dict[str, Any], dict[str, Any], bool]:
+    """Read the existing protocol's actual result, without manufacturing a legacy wrapper."""
+    if state_protocol:
+        branch = read_json(path / "retrieval/replay.json")
+        run = read_json(path / "run.json")
+        if branch["intervention"] != run["recipe"]["intervention"]:
+            raise ValueError("STATE branch result differs from its declared intervention")
+        return branch, run["recipe"]["policy"], (
+            branch["status"] == "COMPLETED"
+            and branch["frozen_request_and_allowance_equal"]
+            and branch["frozen_initial_observation_and_actions_equal"])
+    branch = read_json(path / "replay.json")
+    return branch, branch["policy"], (branch["status"] == "COMPLETED"
+        and branch["result"]["frozen_initial_observation_and_actions_equal"])
+
+
 def compile_feedback(
     raw: list[dict[str, Any]], reviews: list[dict[str, Any]],
     *, split: str = "train", delivery_only: bool = False,
@@ -38,8 +55,11 @@ def compile_feedback(
             raise ValueError("Review capture differs from the exported actual initial state")
         comparisons = []
         for comparison in review["comparisons"]:
-            branches = [read_json(Path(comparison[side + "_case"]) / "replay.json")
-                        for side in ("left", "right")]
+            loaded = [compared_branch(Path(comparison[side + "_case"]),
+                call.get("schema") in {"state_dynamic_retrieval_call_v1",
+                                       "state_dynamic_retrieval_decision_v1"})
+                for side in ("left", "right")]
+            branches = [value[0] for value in loaded]
             readout_statuses = (["NOT_EVALUATED", "NOT_EVALUATED"] if delivery_only else [
                 read_json(Path(comparison[side + "_case"]) / "host-readout/readout.json")["status"]
                 for side in ("left", "right")])
@@ -49,14 +69,11 @@ def compile_feedback(
             actions = [branch["intervention"]["first_action"] for branch in branches]
             if any(action not in call["initial_actions"] for action in actions):
                 raise ValueError("Compared action or its parameters differ from actual options")
-            if (branches[0]["policy"] != branches[1]["policy"]
+            if (loaded[0][1] != loaded[1][1]
                     or branches[0]["intervention"]["continuation_steps"]
                     != branches[1]["intervention"]["continuation_steps"]):
                 raise ValueError("First-action comparison requires a common continuation policy")
-            tools_completed = all(
-                branch["status"] == "COMPLETED"
-                and branch["result"]["frozen_initial_observation_and_actions_equal"]
-                for branch in branches)
+            tools_completed = all(value[2] for value in loaded)
             if not tools_completed and any(comparison[target] != "unknown"
                                            for target in ("answer", "delivery")):
                 raise ValueError("Unclosed tool comparisons remain unknown")
@@ -69,6 +86,7 @@ def compile_feedback(
                 **{key: copy.deepcopy(comparison[key]) for key in (
                     "answer", "delivery", "basis", "left_case", "right_case")},
                 "tool_statuses": [branch["status"] for branch in branches],
+                "matched_completed_tool_conditions": [value[2] for value in loaded],
                 "host_readout_statuses": readout_statuses,
             })
         row["feedback"] = {"capture": str(capture), "comparisons": comparisons,
