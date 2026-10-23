@@ -1,0 +1,88 @@
+{
+  "status": "ACTIVE;MATCHING_TRAIN_INPUT_PREPARED;SELECTION_PENDING;CPU524_RUNNING",
+  "observed_at": "2026-10-23T15:50:43.220252+00:00",
+  "source_version": "45829497",
+  "previous_progress": "data/manifests/evidence-gap-development-progress-20261023-v18.json",
+  "plan": "docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261023.md",
+  "execution": "docs/TRAINING_GENERALIZATION_EXECUTION_20261021.md",
+  "previous_turn_classification": "progress:nativeprompt/preview checked andoptionalHostconditionimplemented",
+  "matching_train_preparation": {
+    "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-selection-v1/train-preparation.json",
+    "output": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-selection-v1/selected-train.jsonl",
+    "source_raw_rows": 7884,
+    "labelled_rows": 4886,
+    "unlabelled_rows_still_in_original_pool": 2998,
+    "original_registered_train_families": 256,
+    "labelled_evaluation_families": 249,
+    "component_rows": {
+      "operation_history": 1499,
+      "complementary_evidence": 3387
+    },
+    "sequence_tokens": 27995073,
+    "max_sequence_tokens": 9869,
+    "literal_rows_gold_metadata_order_equal": true,
+    "original_length_ids_order_and_zero_drops_equal": true,
+    "checkpoint": null,
+    "selection": null,
+    "model_forwards": 0
+  },
+  "selection_rule": "Unchanged original operation-dev source-family macro; earliest tie; update0eligible. No feedback/Host/test selection and no selection before verified524. Original64unknown791 is masked and unused by primary metric; retain its runtime coverage gap without fabricated output or retry.",
+  "active_processes": [
+    {
+      "root": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-u524-v1",
+      "driver_pid": 137761,
+      "child_pid": 137766,
+      "session": 60323,
+      "status": "RUNNING",
+      "actual_proc_present": true,
+      "completed": 104,
+      "planned": 876,
+      "neural_model": true
+    }
+  ],
+  "accounting": {
+    "status": "PENDING_WHILE_ORIGINAL_SAVEDCPU524_LIVES",
+    "previous_pending": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/pending-costs-v18.json",
+    "entries": [
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-selection-v1/train-preparation.json",
+        "field": "cpu_seconds_pending",
+        "cpu_seconds": 7.403995419
+      }
+    ],
+    "measured_cpu_seconds": 7.403995419,
+    "ledger_recorded": false,
+    "scope": "Read/write/verify original selected-train evaluation input only; no weights/forward/HTTP. Exploratory reads and authoring unmeasured.",
+    "no_sha_validation": true
+  },
+  "remaining": "Original524/selection/matchingselectedtrain;source64/128andotherfits/requesttext/auxiliary/parameterconditions;frozenfeedback32/64/128,T2,initial-vs-post,state/sourcecoverage,seeds;F1/F2semanticandF3completecapacity/Hostsimulator;LME451Reader/nativejudge,lifecycle,fullHost/officialreadonly/external/protectedandfourmainfigures. M1-M5not achieved. Host-only diagnostic now closed at native state0; compact-model quality comparison not yet executed. ActualSTATEexport/unknownpair is not trainedfeedback or 32/64/128source expansion. Newemptydeliverychoice learnedselection/Hosteffect stillunmeasured. New Host instruction condition still needs a declared real comparison; no F1/F2/Host quality fix claimed.",
+  "unplanned_search_exposure": [
+    {
+      "task_id": "30-cross_cancel_flight_and_hotel",
+      "native_split": "test",
+      "exposure": "One expected_value line surfaced by broad directory search; no full task body deliberately opened."
+    },
+    {
+      "task_id": "39-compound_intl_delay_not_free_plus_partial_bag_plus_insurance_drop_state",
+      "native_split": "test",
+      "exposure": "Opening message, user context, task summary and requirement excerpts surfaced by broad directory search."
+    },
+    {
+      "task_id": "101-challenge_mixed_strategy_shared_budget",
+      "native_split": "train",
+      "exposure": "One delay_compensation field surfaced by broad directory search."
+    },
+    {
+      "task_id": "118-policy_delay_threshold_edge_compare",
+      "native_split": "train",
+      "exposure": "Opening/context/instruction/summary/requirement excerpts surfaced by broad directory search."
+    }
+  ],
+  "exposure_disposition": "Native test tasks30/39 are now partially exposed and cannot be described as unseen confirmation in subsequent reporting. Preserve native splits and labels; do not use their snippets as new training material. Future diagnostic searches restricted to explicit implementation files. Existing protected MuSiQue bodies were not opened.",
+  "scheduling": "Original524 sole neural job. No second neural run or offline settlement whilelive; verify actual PID/files, no stale-session restart. After524terminal: original verification, dev selection and matching selected-train, then unchanged remaining plan.393/Host-only and all previous closed jobs stayclosed.",
+  "no_sha_or_content_fingerprint_validation": true,
+  "no_subagents": true,
+  "no_new_model_services_or_ledger": true,
+  "no_remote_writes": true,
+  "goal_complete": false
+}

@@ -4,6 +4,26 @@
 [原计划](MILAI_TRAINING_DATA_GENERALIZATION_PLAN_20261021.md)，原文复制留存，原目录文件未修改。
 该计划中的“本轮已完成”是另一环境的历史说明，不能代替本机当前验证。
 
+## 2026-10-23：按原规则准备完整匹配train输入，未提前选点
+
+核对原冻结`run_saved_curve`：选点仍用操作dev来源族宏平均，最早并列、update0可选，
+feedback/Host/test不参与；选中保存模型随后必须评价全部有标签train，不能把内存GPU的
+train指标与保存CPU的dev指标拼成gap。原64的791号输出继续unknown；它没有标签，不进入
+原主指标，但最终报告必须保留运行覆盖缺口，不能声称所有候选的876个输出均成功。
+
+已生成`saved-cpu-selection-v1/selected-train.jsonl`：原7884行按既有`row[gold]`非空规则
+保留4886行，逐行JSON/gold/metadata/顺序与原文件相同；逐项对应原train长度记录的event_id、
+question和零截断。包括1499个operation_history、3387个complementary_evidence状态，
+共27995073个输入tokens、最长9869，沿用12288/head2048及原CPU推理条件。
+
+评价输入覆盖249个有标签来源族；原池登记256族，另7族没有有标签评价行。2998个无标签状态
+仍在原训练池，没有删改训练数据、标签或来源角色。准备结果及原行号在`train-preparation.json`。
+检查点与selection均为空，尚未执行模型或得到匹配train结果；该输入准备与候选胜负无关。
+已测准备/逐行核对7.403995419 CPU秒记入`pending-costs-v19.json`，衔接v18，524运行期间未结算。
+
+原524仍是唯一神经作业，全部其余研究范围保持开放。当前索引：
+[进度v19](../data/manifests/evidence-gap-development-progress-20261023-v19.json)。M1–M5未完成。
+
 ## 2026-10-23：确认Host条件报价失效机制，接入显式补充说明条件
 
 从已关闭Host-only任务的真实wire核对：上游领域系统提示完整保留，17个工具schema逐项相同，

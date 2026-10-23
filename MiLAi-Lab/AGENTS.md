@@ -1,4 +1,21 @@
-# LATEST: 2026-10-23 native Host contract checked; optional Host instructions; CPU524 LIVE
+# LATEST: 2026-10-23 matching train input prepared; selection pending; CPU524 LIVE
+
+No functional/model change. saved-cpu-selection-v1/selected-train.jsonl now contains the
+original declared4886labelled trainrows, filtered from7884 in originalorder. Literal JSON/gold/
+metadata and originallength eventIDs/order/zero drops verified.249labelledfamilies of256raw;
+2998maskedrows remain in originaltrainingpool,7families have no labelled evaluation rows.
+1499operation_history +3387complementary_evidence;27995073tokens,max9869. No sampled shortcut,
+checkpointbinding/selection/weights/forward/HTTP. train-preparation.json records sourceindices.
+Originalrule: operationdev familymacro,earliesttie,0eligible; feedback/Host/test secondary.
+Wait for verified524; keep original64masked791 outputUNKNOWN and runtimecoverage gap.
+
+pending-costs-v19 adds7.403995419CPU to pendingv18; no ledgerwrite while524live.
+ONLY LIVE neuraljob524 driver137761/child137766/exec60323. VerifyactualPID/files; afterterminal
+originalverification/devselection then full4886matchingtrain. Prepareddata is not evaluated.
+NativeSTATEtest30/39 prior partialexposure remains recorded inprogress-v18/v19,not unseenconfirmation.
+Allremainingplan/M1-M5 unfinished. Latestprogress-v19/execution; noSHA/agents/services/ledger/push.
+
+# Earlier: 2026-10-23 native Host contract checked; optional Host instructions; CPU524 LIVE
 
 45829497 adds optional entrypoints.functional.state_host_instructions to existingSTATErunner.
 Emptydefault preserves upstreamdomain prompt; literaladditionaltext reaches Host/systemframes
