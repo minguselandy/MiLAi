@@ -683,6 +683,7 @@ class MemoryService:
         cursor: str | None = None,
         limit: int = 6,
         source_ref: str | None = None,
+        transient_snapshots: dict[str, dict[str, Any]] | None = None,
     ) -> dict[str, Any]:
         """Enumerate actual owner-bound stored revisions; this grants no write authority."""
         if type(limit) is not int or not 1 <= limit <= 6:
@@ -734,24 +735,31 @@ class MemoryService:
                 "revisions": revisions,
                 "current_revision": metadata["revision"],
             }
-            self.store.put(snapshot_ns, snapshot_id, snapshot, index=False)
+            if transient_snapshots is None:
+                self.store.put(snapshot_ns, snapshot_id, snapshot, index=False)
+            else:
+                transient_snapshots[snapshot_id] = copy.deepcopy(snapshot)
         else:
             snapshot_id, separator, offset = cursor.rpartition(":")
-            stored = self.store.get(snapshot_ns, snapshot_id)
+            if transient_snapshots is None:
+                stored = self.store.get(snapshot_ns, snapshot_id)
+                saved = stored.value if stored is not None else None
+            else:
+                saved = transient_snapshots.get(snapshot_id)
             if (
                 separator != ":"
                 or not offset.isdecimal()
-                or stored is None
-                or stored.value.get("owner") != self.owner
-                or stored.value.get("record_id") != memory_id
-                or stored.value.get("source_ref") != source_ref
+                or saved is None
+                or saved.get("owner") != self.owner
+                or saved.get("record_id") != memory_id
+                or saved.get("source_ref") != source_ref
             ):
                 reject(
                     "V13_HISTORY_CURSOR_CHANGED_OR_INVALID",
                     "memory_service",
                     self.tool_read_feedback,
                 )
-            snapshot = stored.value
+            snapshot = saved
             revisions = snapshot["revisions"]
             # Later appends do not alter the issued history page. Revocation still applies.
             available = {v["revision"] for v in versions}
@@ -2811,7 +2819,8 @@ class MemoryService:
         self.store.put(self.namespace, target, prior, index=False)
         return receipt
 
-    def read(self, memory_id: str, revision: int | None = None) -> dict[str, Any]:
+    def read(self, memory_id: str, revision: int | None = None, *,
+             issue_candidate: bool = True) -> dict[str, Any]:
         if self._functional_hidden(record_id=memory_id):
             return {"ok": False, "status": "visibility_revoked", "id": memory_id}
         item = self.store.get(self.namespace, memory_id)
@@ -2863,7 +2872,7 @@ class MemoryService:
             "value": version,
             "observation_only": True,
         }
-        if self.mutation_contract == "event_bound_v1" and version is not None:
+        if issue_candidate and self.mutation_contract == "event_bound_v1" and version is not None:
             with self._locked():
                 result["candidate_handle"] = self._issue_candidate(memory_id, version)
         return result

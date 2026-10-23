@@ -55,6 +55,7 @@ class EvidenceOperations:
         view_capacity: int = 1,
         view_policy: QueryStructurePolicy = "incremental",
         internal_views: bool = True,
+        view_updates: bool = True,
         known_materials: list[dict[str, Any]] | None = None,
         search_pool: Callable[[str, int], list[dict[str, Any]]] | None = None,
         search_batch_sizes: tuple[int, ...] = (8, 16),
@@ -82,6 +83,7 @@ class EvidenceOperations:
         self.view_capacity = view_capacity
         self.view_policy = view_policy
         self.internal_views = internal_views
+        self.view_updates = view_updates
         self.checkpoint_configuration = {
             "view_capacity": view_capacity, "view_policy": view_policy,
             "search_batch_sizes": list(search_batch_sizes), "max_searches": max_searches,
@@ -89,6 +91,7 @@ class EvidenceOperations:
             "source_observation_tokens": (source_observation.max_tokens
                                           if source_observation else None),
             **({"internal_views": False} if not internal_views else {}),
+            **({"view_updates": False} if not view_updates else {}),
         }
         if checkpoint is not None:
             self.restore_checkpoint(checkpoint, source_observation)
@@ -390,14 +393,14 @@ class EvidenceOperations:
                 if self.delivery_selection:
                     actions.append(MemoryAction("use_view_only" + suffix, "USE_VIEW", view["id"],
                         {"slot": slot, "replace_delivery": True}))
-            if view is None and self.view_capacity > 1:
+            if not self.view_updates or (view is None and self.view_capacity > 1):
                 continue
             refs = self.refresh_refs(state, slot)
             if refs and (slot, refs, False) not in self.refreshed_inputs:
                 actions.append(MemoryAction("refresh_view" + suffix, "REFRESH_VIEW",
                     view["id"] if view else "current source scope",
                     {"source_refs": list(refs), "slot": slot}))
-        if self.internal_views and self.view_capacity > 1:
+        if self.internal_views and self.view_updates and self.view_capacity > 1:
             refs = tuple(sorted(set(self.source_refs()) or {
                 event["source_ref"] for event in state.new_events}))
             duplicate = any(v.get("built_for") == state.task["request"]
@@ -714,9 +717,9 @@ class EvidenceOperations:
             slot = action.parameters.get("slot", "current")
             item = self.view_observation(state)[slot]
             self.used.add(slot)
-            if self.view_capacity > 1:
+            if self.view_updates and self.view_capacity > 1:
                 touch_structure(self.service, slot)
-        elif action.kind == "REFRESH_VIEW" and self.internal_views:
+        elif action.kind == "REFRESH_VIEW" and self.internal_views and self.view_updates:
             refs = tuple(action.parameters["source_refs"])
             slot = action.parameters.get("slot", "current")
             replace = action.parameters.get("new_scope", False)

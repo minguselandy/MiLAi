@@ -8,15 +8,16 @@ from __future__ import annotations
 import json
 from collections.abc import Callable
 from pathlib import Path
-from typing import Any, cast
+from typing import Any, ClassVar, cast
 
 from langchain_core.messages import AIMessage, BaseMessage, HumanMessage, SystemMessage, ToolMessage
 from langchain_core.runnables import RunnableConfig
 
 from milai_lab.harness.artifact_io import write_json
 from milai_lab.memory.functional_state import canonical
-from milai_lab.memory.retrieval_request import StructuredReadGoal
+from milai_lab.memory.retrieval_request import RetrievalRequest, StructuredReadGoal
 from milai_lab.methods.intent_retrieval import IntentRetrievalMemory
+from milai_lab.methods.readonly_retrieval import ReadOnlyRetrieval
 
 
 def learning_envelope(packet: dict[str, Any]) -> dict[str, list[str]]:
@@ -89,6 +90,8 @@ class StateMemoryHook:
     This hook writes Sources and request receipts. It is not the official read-only
     Learning Track hook. Business effects remain in STATE's domain handlers.
     """
+
+    schema = MEMORY_SCHEMA
 
     def __init__(self, memory: IntentRetrievalMemory, *, session: str, now: str,
                  domain: str, user_id: str, config_version: str,
@@ -169,7 +172,57 @@ class StateMemoryHook:
         return envelope
 
 
-def make_state_agent(model: Any, hook: StateMemoryHook, runtime_context: Any, *,
+class StateReadOnlyMemoryHook:
+    """Learning-track retrieval boundary over a prebuilt training artifact.
+
+    No test user, assistant or domain-tool messages enter the artifact. Turn
+    allowance and references to actual returned material stay in this task only.
+    This boundary alone does not supply the official simulator/judge or full run.
+    """
+
+    schema: ClassVar[dict[str, Any]] = {**MEMORY_SCHEMA, "parameters": {
+        "type": "object", "properties": {
+        "query": {"type": "string"}, "top_k": {"type": "integer", "minimum": 1}},
+        "required": ["query"], "additionalProperties": False}}
+
+    def __init__(self, memory: ReadOnlyRetrieval, *, session: str, now: str,
+                 domain: str, user_id: str,
+                 record: Callable[[dict[str, Any]], None]) -> None:
+        self.memory, self.session, self.now = memory, session, now
+        self.domain, self.user_id, self.record = domain, user_id, record
+        self.memory.return_envelope = lambda packet: [canonical(packet)]
+        self.turn: str | None = None
+        self.references: list[dict[str, Any]] = []
+        self.calls = 0
+
+    def bind_conversation(self, conversation: list[dict[str, Any]]) -> bool:
+        turn = f"turn-{sum(row['role'] == 'user' for row in conversation)}"
+        if turn == self.turn:
+            return False
+        self.turn = turn
+        self.memory.begin_turn(turn)
+        return True
+
+    def retrieve(self, arguments: dict[str, Any]) -> list[str]:
+        self.calls += 1
+        request = RetrievalRequest.model_validate({"query": arguments["query"], "task_context": {
+            "as_of": self.now, "target_scope": {"domain": self.domain, "user_id": self.user_id},
+            "known_evidence_refs": list(self.references)}})
+        packet = self.memory.retrieve(request)
+        for item in packet["evidence"]:
+            if item["ref"] not in self.references:
+                self.references.append(item["ref"])
+        # One complete bounded receipt satisfies the configured top_k<=3 contract;
+        # a model-supplied larger top_k never expands this boundary.
+        envelope = [canonical(packet)]
+        self.record({"event": "state_readonly_memory_delivery", "public_turn": self.turn,
+            "request": request.project(), "packet": packet, "envelope": envelope,
+            "complete_return_tokens": self.memory.return_tokens(packet)})
+        return envelope
+
+
+def make_state_agent(model: Any, hook: StateMemoryHook | StateReadOnlyMemoryHook,
+                     runtime_context: Any, *,
                      initial_retrieval: dict[str, Any] | None = None) -> Any:
     """Use the public BaseAgent hook without retaining hidden evaluator context."""
     from state_bench.agents.base import AgentRuntimeContext, AgentTurnResponse, BaseAgent
@@ -184,7 +237,7 @@ def make_state_agent(model: Any, hook: StateMemoryHook, runtime_context: Any, *,
 
     class MiLAiStateAgent(BaseAgent):  # type: ignore[misc]  # Optional upstream SDK.
         def memory_tool_schemas(self) -> list[dict[str, Any]]:
-            return [MEMORY_SCHEMA]
+            return [hook.schema]
 
         def memory_tool_handlers(self) -> dict[str, Any]:
             return {"retrieve_learnings": hook.retrieve}

@@ -239,7 +239,10 @@ def test_state_selected_pool_uses_actual_hook_and_records_nested_compute(tmp_pat
 
 
 @pytest.mark.parametrize("frozen_request", [False, True])
-def test_public_sdk_executes_real_sandbox_write_without_hidden_context(tmp_path, frozen_request):
+@pytest.mark.parametrize("readonly", [False, True])
+def test_public_sdk_executes_real_sandbox_write_without_hidden_context(
+    tmp_path, frozen_request, readonly,
+):
     sdk = pytest.importorskip("state_bench.agents.base")
     from state_bench.domain import get_domain_config
     from state_bench.domains.travel.schemas import EnvironmentData, HotelInventoryItem, User
@@ -285,8 +288,25 @@ def test_public_sdk_executes_real_sandbox_write_without_hidden_context(tmp_path,
                                 functional_contract="functional_v1")
         service.capture_user("history", "report", "Use the hotel inventory identifier to book.")
         records = []
-        hook = StateMemoryHook(memory_at(service), session="mechanical", now=now, domain="travel",
-            user_id="u1", config_version="state-test", record=records.append)
+        if readonly:
+            from milai_lab.methods.memory_control import FixedContextMemoryPolicy
+            from milai_lab.methods.readonly_retrieval import (
+                ReadOnlyMemoryService,
+                ReadOnlyRetrieval,
+            )
+            from milai_lab.runners.state_bench_adapter import StateReadOnlyMemoryHook
+
+            reader = ReadOnlyMemoryService(store, service.namespace, service.owner,
+                tmp_path / "readonly.lock", functional_contract="functional_v1")
+            memory = ReadOnlyRetrieval(reader, len, FixedContextMemoryPolicy(), material_limit=8000)
+            hook = StateReadOnlyMemoryHook(memory, session="mechanical", now=now, domain="travel",
+                user_id="u1", record=records.append)
+            before = list(store.conn.iterdump())
+            store.conn.execute("PRAGMA query_only=ON")
+        else:
+            hook = StateMemoryHook(memory_at(service), session="mechanical", now=now,
+                domain="travel",
+                user_id="u1", config_version="state-test", record=records.append)
         client = VLLMClient(VLLMConfig(base_url="http://example.test/v1/", model="scripted",
             tool_mode="json_action"), transport=httpx.MockTransport(scripted_transport))
         model = VLLMChatModel(client=client)
@@ -310,6 +330,9 @@ def test_public_sdk_executes_real_sandbox_write_without_hidden_context(tmp_path,
         assert model.calls_in_message == 3 - int(frozen_request)
         assert agent.token_usage.total_tokens == 15 * (3 - int(frozen_request))
         assert hidden not in canonical(records)
+        if readonly:
+            assert isinstance(calls[0]["result"], list) and len(calls[0]["result"]) <= 3
+            assert list(store.conn.iterdump()) == before
         client.close()
 
 

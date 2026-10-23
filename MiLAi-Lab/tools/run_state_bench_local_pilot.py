@@ -20,6 +20,7 @@ from typing import Any, cast
 
 from langchain_core.embeddings import Embeddings
 from langchain_core.messages import HumanMessage, SystemMessage
+from langgraph.store.sqlite import SqliteStore
 
 from milai_lab.baselines.langmem_sqlite_store import TransactionalSqliteStore
 from milai_lab.harness.artifact_io import read_json, write_json
@@ -33,6 +34,11 @@ from milai_lab.methods.memory_control import (
     MemoryPolicy,
     PursuitMemoryPolicy,
 )
+from milai_lab.methods.readonly_retrieval import (
+    ReadOnlyMemoryService,
+    ReadOnlyRetrieval,
+    open_readonly_store,
+)
 from milai_lab.providers.chat_bridge import VLLMChatModel
 from milai_lab.providers.contextual_capacity import HostCapacity
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
@@ -41,6 +47,7 @@ from milai_lab.runners.functional import seed_sources
 from milai_lab.runners.memory_control import memory_policy
 from milai_lab.runners.state_bench_adapter import (
     StateMemoryHook,
+    StateReadOnlyMemoryHook,
     make_state_agent,
     run_with_domain_snapshots,
 )
@@ -62,16 +69,14 @@ class LocalSimulator:
         return str(result.content)
 
 
-def build_retrieval(service: MemoryService, token_count: Callable[[str], int],
-                    settings: dict[str, Any], policy_name: str, budget: RunBudget,
-                    record: Callable[[dict[str, Any]], None], *,
-                    embeddings: Embeddings | None = None,
+def policy_and_pool(control: dict[str, Any], policy_name: str, budget: RunBudget,
+                    record: Callable[[dict[str, Any]], None], embeddings: Embeddings | None,
                     call: Callable[[str, list[dict[str, str]], dict[str, Any]],
-                                   dict[str, Any]] | None = None,
-                    admit: Callable[[], None] = lambda: None,
-                    available: Callable[[], bool] = lambda: True) -> IntentRetrievalMemory:
-    """Use existing policies, View generation and metering in the local dynamic hook."""
-    control = settings.get("memory_control", {})
+                                   dict[str, Any]] | None,
+                    admit: Callable[[], None]) -> tuple[
+                        MemoryPolicy,
+                        Callable[[str, list[dict[str, Any]]], list[dict[str, Any]]] | None]:
+    """One policy factory for dynamic and prebuilt read-only artifacts."""
     reads = control.get("reads", 4)
     rank_pool = None
     policy: MemoryPolicy
@@ -91,6 +96,21 @@ def build_retrieval(service: MemoryService, token_count: Callable[[str], int],
         assert call is not None
         policy = memory_policy({**control, "policy": policy_name}, budget,
                                call=call, admit=admit, record=record)
+    return policy, rank_pool
+
+
+def build_retrieval(service: MemoryService, token_count: Callable[[str], int],
+                    settings: dict[str, Any], policy_name: str, budget: RunBudget,
+                    record: Callable[[dict[str, Any]], None], *,
+                    embeddings: Embeddings | None = None,
+                    call: Callable[[str, list[dict[str, str]], dict[str, Any]],
+                                   dict[str, Any]] | None = None,
+                    admit: Callable[[], None] = lambda: None,
+                    available: Callable[[], bool] = lambda: True) -> IntentRetrievalMemory:
+    """Use existing policies, View generation and metering in the local dynamic hook."""
+    control = settings.get("memory_control", {})
+    policy, rank_pool = policy_and_pool(
+        control, policy_name, budget, record, embeddings, call, admit)
     return IntentRetrievalMemory(service, token_count,
         material_limit=settings["ordinary_material_tokens"],
         read_limit=settings["additional_reads"], source_access="independent_v1",
@@ -116,12 +136,18 @@ def main() -> None:
                         default="fixed_context", help="Existing local evidence policy")
     parser.add_argument("--split", choices=("train", "test"), default="train",
                         help="Declared selection split; task membership is checked before loading")
+    parser.add_argument("--memory-protocol", choices=("dynamic", "readonly"), default="dynamic")
+    parser.add_argument("--memory-artifact", type=Path,
+                        help="Readonly descriptor: database, namespace, owner, source_split=train")
     parser.add_argument("--compute-phase",
                         default="host_intent_view_v4_state_local_travel_pilot_v1",
                         help="Distinct phase in the original ledger for each declared experiment")
     parser.add_argument("--initial-retrieval", type=Path,
                         help="Actual prior Host request for a conditional interface probe only")
     args = parser.parse_args()
+    if (args.memory_protocol == "readonly") != (args.memory_artifact is not None):
+        parser.error("--memory-protocol readonly requires --memory-artifact; "
+                     "dynamic does not use it")
     selection = read_json(args.preparation / "selection.json")
     sys.path.insert(0, selection["source"])
     from state_bench.agents.base import AgentRuntimeContext
@@ -160,7 +186,8 @@ def main() -> None:
         "environment_file": str(env_path), "source_selection": selection,
         "host_and_simulator": asdict(host_config), "judge": "NOT_RUN",
         "memory_policy": args.policy, "return_envelope": "at most3strings; one full receipt",
-        "memory_protocol": "local_dynamic_public_observations_and_views",
+        "memory_protocol": args.memory_protocol,
+        "memory_artifact": str(args.memory_artifact) if args.memory_artifact else None,
         "memory_control_configuration": settings.get("memory_control", {}),
         "compute_phase": args.compute_phase,
         "initial_request_transport": "frozen_actual_request" if initial else "autonomous",
@@ -191,15 +218,30 @@ def main() -> None:
                 embeddings = MeteredEmbeddings(embedding_client, embedding_config.model,
                     settings["embedding_capacity"], dimension=settings["embedding_dimension"],
                     batch_size=settings["embedding_batch_size"])
-            store = stack.enter_context(TransactionalSqliteStore.from_conn_string(
-                str(args.output / "memory.sqlite")))
-            owner = "state-public-training-corpus"
-            service = MemoryService(store, ("state-research", "pilot", owner), owner,
-                args.output / "memory.lock", functional_contract="functional_v1",
-                memory_profile="unified_v1", memory_ranking="activation")
-            run["source_import_receipts"] = seed_sources(service,
-                read_json(args.preparation / "sources.json"), args.output / "source-imports.json",
-                preserve_occurrence=True)
+            service: MemoryService
+            store: SqliteStore
+            if args.memory_protocol == "dynamic":
+                store = stack.enter_context(TransactionalSqliteStore.from_conn_string(
+                    str(args.output / "memory.sqlite")))
+                owner = "state-public-training-corpus"
+                service = MemoryService(store, ("state-research", "pilot", owner), owner,
+                    args.output / "memory.lock", functional_contract="functional_v1",
+                    memory_profile="unified_v1", memory_ranking="activation")
+                run["source_import_receipts"] = seed_sources(service,
+                    read_json(args.preparation / "sources.json"),
+                    args.output / "source-imports.json",
+                    preserve_occurrence=True)
+            else:
+                artifact = read_json(args.memory_artifact)
+                if artifact["source_split"] != "train":
+                    raise ValueError("STATE_READONLY_ARTIFACT_REQUIRES_DECLARED_TRAIN_SOURCES")
+                store = stack.enter_context(open_readonly_store(Path(artifact["database"])))
+                readonly = ReadOnlyMemoryService(store, tuple(artifact["namespace"]),
+                    artifact["owner"], args.output / "memory.lock",
+                    functional_contract="functional_v1", memory_profile="unified_v1",
+                    memory_ranking="activation")
+                service = readonly
+                run["memory_artifact_provenance"] = artifact
 
             def generate(stage: str, messages: list[dict[str, str]],
                          schema: dict[str, Any]) -> dict[str, Any]:
@@ -215,12 +257,31 @@ def main() -> None:
                        "envelope": value})
                 return value
 
-            memory = build_retrieval(service, capacity.text_tokens, settings, args.policy,
-                budget, trace, embeddings=embeddings, call=generate,
-                admit=lambda: host.reserve_external_request("memory_control"),
-                available=lambda: host.calls_in_message < settings["max_calls_per_message"] - 2)
-            hook = StateMemoryHook(memory, session="state-task", now=task.now, domain=domain.name,
-                user_id=task.user_id, config_version=args.source_version, record=trace)
+            hook: StateMemoryHook | StateReadOnlyMemoryHook
+            if args.memory_protocol == "dynamic":
+                memory = build_retrieval(service, capacity.text_tokens, settings, args.policy,
+                    budget, trace, embeddings=embeddings, call=generate,
+                    admit=lambda: host.reserve_external_request("memory_control"),
+                    available=lambda: host.calls_in_message < settings["max_calls_per_message"] - 2)
+                hook = StateMemoryHook(memory, session="state-task", now=task.now,
+                    domain=domain.name,
+                    user_id=task.user_id, config_version=args.source_version, record=trace)
+            else:
+                control = settings.get("memory_control", {})
+                policy, rank_pool = policy_and_pool(control, args.policy, budget, trace, embeddings,
+                    generate, lambda: host.reserve_external_request("memory_control"))
+                readonly_memory = ReadOnlyRetrieval(readonly, capacity.text_tokens, policy,
+                    material_limit=settings["ordinary_material_tokens"],
+                    read_limit=settings["additional_reads"],
+                    control_steps=control.get("max_control_steps", 8),
+                    source_top_k=settings["source_top_k"],
+                    semantic_top_k=settings["semantic_top_k"],
+                    view_capacity=control.get("view_capacity", 1),
+                    source_observation_tokens=control.get("source_observation_tokens"),
+                    record=trace, rank_pool=rank_pool,
+                    available=lambda: host.calls_in_message < settings["max_calls_per_message"] - 2)
+                hook = StateReadOnlyMemoryHook(readonly_memory, session="state-task", now=task.now,
+                    domain=domain.name, user_id=task.user_id, record=trace)
             # The evaluator-only summary/requirements never enter this public context.
             runtime = AgentRuntimeContext(task_id="state-task", user_id=task.user_id,
                                           domain=domain.name, now=task.now)
