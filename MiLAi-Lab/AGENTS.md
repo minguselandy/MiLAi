@@ -1,4 +1,46 @@
-# LATEST: 2026-10-23 functional rounds closed; full goal ACTIVE
+# LATEST: 2026-10-23 STATE dynamic F5 three-arm run CLOSED; full goal ACTIVE
+
+Source8a824f72 adds rich read_goal passthrough, rules/cache/saved-Laya factory+metering to
+the existing STATE local runner, and captures actual public domain tool occurrences plus
+closed assistant replies. Flatten tool ordinal WITHIN each user turn; upstream regroups
+working rows into one final assistant row. Identical repeated calls remain distinct events;
+duplicated upstream tool rows and retrieve_learnings receipts do not become new Sources.
+Original roles/origins/visibility/authority unchanged. This WRITES memory and is explicitly
+LOCAL DYNAMIC, NOT official Learning Track read-only. Hidden task requirements stay off Host.
+11STATE tests passed,1optionalMemPursuit skip;Ruff,2module scoped mypy with local upstream,
+package/tools boundaries passed. New capture/rich-request tests failed before the change.
+
+artifacts/evidence-gap-20261023/state-dynamic-f5-v1 has all3 CLOSED actual task trajectories.
+Coordinator1702283/exec95684, children including1712900 absent/terminal; no live model job.
+Same exposed train task1-cancel_economy_domestic,46old source records from tasks2/3, independent
+cold banks,2048complete envelope,8steps/8read allowance,source observation4096. T1-main saved
+checkpoint is the published old selected model,NOT new source256 deployment selection.
+Actual CPU/shared16384/head2048,MHAfastpathFalse:3forwards/25319tokens,max8550,finite/no truncation.
+fixed_context/rules/laya each deterministic task score0; all cancelBK-1000 only52fee/298refund,
+BK-1001 unchanged. Local simulated users confirm one booking thenTASK_DONE; no official judge.
+Generation calls9/8/8,tokens32520/35141/31283(total25/98944),newunknown0.
+Return envelopes63(empty)/503/515tokens. Rules delivered another user's London-trip assistant
+report;Laya read London user001 request/reservation result,not current Atlanta user002.
+Exact returned envelopes appear in6/5/5laterHost wires,not proof of meaningful task use.
+All18actual domain calls plus9users/6finalassistant messages match new Source occurrences;
+memory returns not recaptured,0newViews in actual runs. Model/View capability tests are scripted.
+
+Next concrete F3 defect: fixed_context expanded two full histories, both exceeded2048; full
+observed-range dedup removed bounded candidate reads despite empty Host delivery. Need bounded
+delivery from acquired context while preserving all observed material, actual read costs,
+range bindings, known-reference/visibility semantics and supervision. Do not simply rerun the
+same task, change its original required outcome, or infer View semantic success from these runs.
+Scope/actor-sensitive source choice and F2 faithful conditional/temporal statements remain open.
+All original savedCPU/LME,feedback/training/seeds/external/protected scope remains untouched/open.
+
+Each child billed driver and nested Laya once:total378.301512496CPU. Verified-idle original-ledger
+phase evidence_gap_20261023_state_dynamic_f5_v1_offline_settlement billed7phases39.321024265CPU
+once (includes startup/child CPU,coordination,prep,analysis and prior pending read-cap0.040418528).
+Old75.905835768settlement unchanged,old generalizationpending untouched. Unknown author/tests/
+archive-subprocess/settlement overhead stays unknown. No SHA/subagents/newservices/newledger/push.
+See progress-20261023-v3,review-results.json and the execution record; no milestone completed.
+
+# Earlier: 2026-10-23 functional rounds closed; full goal ACTIVE
 
 Current source622cbcdd; earlier functional freezes65c7c0e3(v1) and66d56c35(v2/v3) preserved.
 Three actual given-request rounds CLOSED:18+18+12positions,ONE exposed STATE train family.
