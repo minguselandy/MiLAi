@@ -1,0 +1,124 @@
+{
+  "status": "ACTIVE_PARTIAL_FUNCTIONAL_IMPLEMENTATION;FULL_PLAN_INCOMPLETE",
+  "observed_at": "2026-10-23T02:43:28.869058+00:00",
+  "plan": "docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261023.md",
+  "original_plan": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261023.md",
+  "execution": "docs/TRAINING_GENERALIZATION_EXECUTION_20261021.md",
+  "worktree": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023",
+  "branch": "feat/evidence-gap-development-20261023",
+  "base_commit_provenance_only": "b197255d59af9f3fc6d0533421cfb9a08f334de9",
+  "previous_goal_turn_classification": "No earlier execution turn available in this thread; historical paused artifacts revalidated from current processes and files.",
+  "current_goal_turn_classification": "progress: implementation, before/after regressions, incomplete-job evidence and preserved full-scope execution record",
+  "process_observation": {
+    "absent_pids": [
+      893357,
+      2253075,
+      662822
+    ],
+    "matching_experiment_command_observed": false,
+    "saved_curve": {
+      "driver": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/complete-actions-saved-cpu-v1/driver.json",
+      "observed_status": "PROCESS_ABSENT_WITH_PARTIAL_OUTPUT",
+      "stored_status": "RUNNING",
+      "closed_candidates_already_billed": [
+        0,
+        32
+      ],
+      "interrupted_update": 64,
+      "completed_outputs": 791,
+      "saved_inputs": 792,
+      "planned_states": 876,
+      "input_without_output": [
+        791
+      ],
+      "compute_file_present": false,
+      "partitioned_results_present": false,
+      "exit_cause": null,
+      "unstarted_candidates": [
+        128,
+        262,
+        393,
+        524
+      ],
+      "selected_train": "not_started"
+    },
+    "lme_paths": {
+      "report": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/lme-all-public-fixed-path-audit-v1/audit.json",
+      "observed_status": "PROCESS_ABSENT_WITH_PARTIAL_OUTPUT",
+      "stored_status": "RUNNING",
+      "completed": 501,
+      "interrupted": 1,
+      "not_run": 400,
+      "planned": 902,
+      "interrupted_position": {
+        "row": 250,
+        "pool": "pool-1",
+        "delivery_selection": true
+      },
+      "exit_cause": null
+    }
+  },
+  "changes": [
+    {
+      "path": "src/milai_lab/methods/evidence_control.py",
+      "scope": "F3 partial",
+      "behavior": "Additional finite original-source prefixes based on request terms, actual observed bodies and Host-known originals, with full-packet fit; existing alternatives retained.",
+      "limitations": "Lexical candidate generation only, no semantic sufficiency, no controller-quality or Host-success result."
+    },
+    {
+      "path": "src/milai_lab/methods/query_structure.py",
+      "scope": "F2 input partial",
+      "behavior": "Preserve actual Source origin in delivered source bodies and bound source directory.",
+      "limitations": "Generated View faithfulness remains untested with real model."
+    }
+  ],
+  "validation": {
+    "pytest": {
+      "passed": 59,
+      "skipped": 1,
+      "skip_reason": "optional mempursuit package absent",
+      "files": [
+        "tests/unit/test_delivery_selection.py",
+        "tests/unit/test_query_structure.py",
+        "tests/unit/test_cache_and_pursuit_policies.py",
+        "tests/unit/test_memory_control.py",
+        "tests/unit/test_memory_control_slots.py"
+      ],
+      "environment": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/http-env/bin/python",
+      "before_fix": "Both targeted regressions failed on old implementation.",
+      "budget_scope": "900-character synthetic complete packet, not 2048-token real-Host acceptance"
+    },
+    "ruff": "PASS",
+    "package_boundary": "PASS",
+    "tools_boundary": "PASS; existing11files/20dependencies/6grandfathered private",
+    "diff_whitespace": "PASS",
+    "strict_mypy": "UNRESOLVED_ENVIRONMENT: missing jsonschema stubs",
+    "mypy_local_types": "PASS 2 modules with import-untyped and unused-ignore disabled; all other strict checks retained",
+    "real_model_runs": 0,
+    "real_Host_acceptance": "not_run",
+    "full_suite": "not_run",
+    "remote_CI": "not_run"
+  },
+  "remaining": "Full F1-F5/M1-M5, original saved evaluations and queued studies, frozen feedback32/64/128, new initial/post-state comparison, core seeds, Host/lifecycle, external/protected results, cumulative accounting and four main figures; exact requirements in execution table and unchanged plans.",
+  "next_actions": [
+    "Implement F1 request/source semantics and request-aware original selection without per-case rules or text deduplication.",
+    "Wire F3 cache/rules policy choice to actual observed-only reads and selective handoff; preserve simple baselines and prior versions.",
+    "Freeze new behavior and execute F1-F3 true source streams plus first F5 baseline task under original serial model ownership.",
+    "Prepare original-condition continuations for interrupted saved CPU and LME paths, preserving closed outputs, interrupted first attempts and unknown costs; never directly rerun nonresumable old scripts."
+  ],
+  "costs": {
+    "ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+    "new_ledger_created": false,
+    "ledger_writes": false,
+    "new_development_test_review_cpu_seconds": null,
+    "accounting": "Unmeasured new work remains unknown. Prior pending registries and billed0/32 unchanged. Interrupted run cost incomplete, not zero."
+  },
+  "no_sha_or_content_fingerprint_validation": true,
+  "no_subagents": true,
+  "no_new_services": true,
+  "no_old_attempt_replayed": true,
+  "no_remote_writes": true,
+  "product_API_schema_permissions_Canonical_changed": false,
+  "research_behavior_changed": true,
+  "goal_complete": false
+}

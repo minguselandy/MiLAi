@@ -1,0 +1,325 @@
+{
+  "status": "ACTIVE_FUNCTIONAL_PROGRESS;M1_AND_FULL_PLAN_INCOMPLETE",
+  "observed_at": "2026-10-23T03:23:12.698153+00:00",
+  "previous_turn": "progress; current source, tests and runtime absence revalidated before new work",
+  "current_turn": "progress: two functional implementations, three closed real-generation rounds, semantic failure analysis and real-state read-cap repair",
+  "plan": "docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261023.md",
+  "execution": "docs/TRAINING_GENERALIZATION_EXECUTION_20261021.md",
+  "branch": "feat/evidence-gap-development-20261023",
+  "current_code": "622cbcdd",
+  "commits_provenance_only": {
+    "65c7c0e3": "selective raw policies and request-related delivery candidates; origin input",
+    "66d56c35": "capture_context preserving Source origin, actual source selection and View examples",
+    "622cbcdd": "count every acquired original against policy read cap"
+  },
+  "runs": [
+    {
+      "version": "v1",
+      "run": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/acceptance-v1",
+      "source_version": "65c7c0e3",
+      "status": "COMPLETED",
+      "session": 36753,
+      "pid": 1528958,
+      "process_absent": true,
+      "positions": 18,
+      "source_groups": 1,
+      "summary": {
+        "fixed_context-rich": {
+          "positions": 6,
+          "generation_requests": 0,
+          "generation_tokens": 0,
+          "read_operations": 8,
+          "return_tokens_max": 1914,
+          "View_deliveries": 0,
+          "actual_actions": {
+            "search_0_8": 6,
+            "search_0_16": 6,
+            "read_0": 2,
+            "handoff": 6,
+            "read_1": 1,
+            "context_1": 1,
+            "context_0": 3,
+            "context_3": 1
+          }
+        },
+        "rules-rich": {
+          "positions": 6,
+          "generation_requests": 5,
+          "generation_tokens": 17878,
+          "read_operations": 8,
+          "return_tokens_max": 1890,
+          "View_deliveries": 5,
+          "actual_actions": {
+            "search_0_8": 6,
+            "search_0_16": 6,
+            "read_0": 5,
+            "refresh_view": 5,
+            "handoff": 6,
+            "read_1": 1,
+            "read_3": 1,
+            "read_0_observe": 1
+          }
+        },
+        "view_cache-rich": {
+          "positions": 6,
+          "generation_requests": 5,
+          "generation_tokens": 21244,
+          "read_operations": 4,
+          "return_tokens_max": 1273,
+          "View_deliveries": 5,
+          "actual_actions": {
+            "refresh_view": 5,
+            "handoff": 5,
+            "view_source_0_observe": 1,
+            "view_source_1_observe": 1,
+            "view_source_2_observe": 1,
+            "view_source_3_observe": 1,
+            "handoff_select_0": 1
+          }
+        }
+      },
+      "ledger_delta": {
+        "generation_requests": 10,
+        "generation_tokens": 39122,
+        "unknown_generation_increment": 0
+      },
+      "scope": "Actual given-request evidence and full-packet tokens; no autonomous Host answer, semantic grading or benchmark accuracy.",
+      "driver_wall_seconds": 275.54565805383027,
+      "driver_cpu_seconds_already_billed": 27.367735474
+    },
+    {
+      "version": "v2",
+      "run": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/acceptance-v2",
+      "source_version": "66d56c35",
+      "status": "COMPLETED",
+      "session": 85141,
+      "pid": 1581774,
+      "process_absent": true,
+      "positions": 18,
+      "source_groups": 1,
+      "summary": {
+        "fixed_context-rich": {
+          "positions": 6,
+          "generation_requests": 0,
+          "generation_tokens": 0,
+          "read_operations": 8,
+          "return_tokens_max": 1941,
+          "View_deliveries": 0,
+          "actual_actions": {
+            "search_0_8": 6,
+            "search_0_16": 6,
+            "read_0": 2,
+            "handoff": 6,
+            "read_1": 1,
+            "context_1": 1,
+            "context_0": 3,
+            "context_3": 1
+          }
+        },
+        "rules-rich": {
+          "positions": 6,
+          "generation_requests": 2,
+          "generation_tokens": 7525,
+          "read_operations": 4,
+          "return_tokens_max": 1911,
+          "View_deliveries": 5,
+          "actual_actions": {
+            "search_0_8": 3,
+            "search_0_16": 3,
+            "read_0": 2,
+            "refresh_view": 2,
+            "handoff": 6,
+            "use_view": 3,
+            "read_1": 1,
+            "read_3": 1
+          }
+        },
+        "view_cache-rich": {
+          "positions": 6,
+          "generation_requests": 2,
+          "generation_tokens": 8198,
+          "read_operations": 5,
+          "return_tokens_max": 1156,
+          "View_deliveries": 5,
+          "actual_actions": {
+            "refresh_view": 2,
+            "handoff": 5,
+            "use_view": 3,
+            "search_0_8": 1,
+            "read_5_observe": 1,
+            "read_6_observe": 1,
+            "view_source_0_observe": 1,
+            "view_source_9_observe": 1,
+            "view_source_10_observe": 1,
+            "search_0_16": 1,
+            "handoff_select_5": 1
+          }
+        }
+      },
+      "ledger_delta": {
+        "generation_requests": 4,
+        "generation_tokens": 15723,
+        "unknown_generation_increment": 0
+      },
+      "scope": "Actual given-request evidence and full-packet tokens; no autonomous Host answer, semantic grading or benchmark accuracy.",
+      "driver_wall_seconds": 50.435295979492366,
+      "driver_cpu_seconds_already_billed": 21.705147897
+    },
+    {
+      "version": "v3",
+      "run": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/acceptance-v3",
+      "source_version": "66d56c35",
+      "status": "COMPLETED",
+      "session": 31612,
+      "pid": 1594801,
+      "process_absent": true,
+      "positions": 12,
+      "source_groups": 1,
+      "summary": {
+        "rules-rich": {
+          "positions": 6,
+          "generation_requests": 2,
+          "generation_tokens": 17679,
+          "read_operations": 4,
+          "return_tokens_max": 1981,
+          "View_deliveries": 5,
+          "actual_actions": {
+            "search_0_8": 3,
+            "search_0_16": 3,
+            "read_0": 2,
+            "refresh_view": 2,
+            "handoff": 6,
+            "use_view": 3,
+            "read_1": 1,
+            "read_3": 1
+          }
+        },
+        "view_cache-rich": {
+          "positions": 6,
+          "generation_requests": 2,
+          "generation_tokens": 17029,
+          "read_operations": 5,
+          "return_tokens_max": 975,
+          "View_deliveries": 5,
+          "actual_actions": {
+            "refresh_view": 2,
+            "handoff": 5,
+            "use_view": 3,
+            "search_0_8": 1,
+            "read_5_observe": 1,
+            "read_6_observe": 1,
+            "view_source_1_observe": 1,
+            "view_source_3_observe": 1,
+            "view_source_10_observe": 1,
+            "search_0_16": 1,
+            "handoff_select_5": 1
+          }
+        }
+      },
+      "ledger_delta": {
+        "generation_requests": 4,
+        "generation_tokens": 34708,
+        "unknown_generation_increment": 0
+      },
+      "scope": "Actual given-request evidence and full-packet tokens; no autonomous Host answer, semantic grading or benchmark accuracy.",
+      "driver_wall_seconds": 174.8434165790677,
+      "driver_cpu_seconds_already_billed": 13.241506866999998
+    }
+  ],
+  "total_positions": 48,
+  "independent_source_groups": 1,
+  "exposure": "existing STATE train family already used for development",
+  "total_generation_requests": 18,
+  "total_known_generation_tokens": 89553,
+  "new_unknown_generation": 0,
+  "full_return_packet_budget": 2048,
+  "observed_return_max_tokens": 1981,
+  "author_reviews": [
+    "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/acceptance-development-review-v1.json",
+    "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/acceptance-reasoning-review-v3.json"
+  ],
+  "functional_findings": [
+    "rules/cache refreshes each5->2 on v1->v2;3 repeat/known positions reuse,actual new receipt stillrefreshes",
+    "v2/v3 cache delivers actual cancelled receipt; required earlier original booking sources still missing",
+    "Typed supplied-query context leaves ordinary user messages and source origin/content/identity unchanged; no identical-text dedup",
+    "F2 not solved: confirmation questions become verified statements; historical status/temporal qualifications remain wrong",
+    "v3 actual reasoning confirmed by4wire flags/nonempty reasoning receipts,34708tokens; no reliable semantic fix",
+    "v2/v3 cache raw request exceeded policyreads4 with5 actual reads; execution read limit8 intact;original outcomes retained"
+  ],
+  "repair": {
+    "status": "ACTUAL_STATE_READ_CAP_REGRESSION_REPRODUCED_AND_FIXED_OFFLINE",
+    "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/acceptance-v2/view_cache-rich/banks/b752d760-2c38-41b0-a214-7aa57cfc584e/1720ad41-524f-4ab9-96df-af7500fe2650-result.json",
+    "step": 5,
+    "old_actual_choice": "view_source_10_observe",
+    "new_choice_not_executed": "handoff_select_5",
+    "actual_original_materials_already_observed": 4,
+    "declared_policy_read_cap": 4,
+    "original_v2_read_operations": 5,
+    "new_model_calls": 0,
+    "new_Host_outcomes": null,
+    "cpu_seconds": 0.04041852800000001,
+    "ledger_recorded": false,
+    "scope": "Same captured state/actions; policy decision only. Original five-read outcome preserved."
+  },
+  "repair_real_model_validation": "not_run; original failed-cap trajectories unchanged",
+  "discarded_attempt": "Changing user origin failed existing Source identity validation; replaced with optional capture_context, integrity validator unchanged",
+  "milestones": {
+    "M1": "incomplete: View semantics, F1 broader normal-user/unrelated arrival conditions and full raw delivery unresolved",
+    "M2": "not_achieved",
+    "M3": "not_achieved",
+    "M4": "not_achieved",
+    "M5": "not_achieved"
+  },
+  "validation": {
+    "broad_after_context_changes": {
+      "passed": 106,
+      "skipped": 1,
+      "skip": "mempursuit optional dependency absent"
+    },
+    "after_scope_matching_change": {
+      "passed": 37,
+      "skipped": 1
+    },
+    "after_read_cap_fix": {
+      "passed": 21,
+      "skipped": 1
+    },
+    "old_code_raw_policy_regressions": "4failed on authoritative prechange source,4passed after65c7",
+    "ruff": "PASS",
+    "package_boundary": "PASS",
+    "tools_boundary": "PASS existing11files/20dependencies/6grandfathered private",
+    "type_check": "9modules pass with import-untyped and unused-ignore disabled;strict full typing limited by missing jsonschema stubs",
+    "full_suite": "not_run",
+    "remote_CI": "not_run"
+  },
+  "accounting": {
+    "settlement": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/offline-settlement-v1.json",
+    "phase": "evidence_gap_20261023_acceptance_v1_v3_offline_v1",
+    "measures": {
+      "cpu_seconds": 75.90583576800002,
+      "measured_phases": 10,
+      "runs": 1
+    },
+    "generation_already_recorded_once": true,
+    "new_read_cap_replay_cpu_pending": 0.04041852800000001,
+    "new_read_cap_replay_measurement": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/read-cap-regression-v1.json",
+    "old_pending_registries": "unchanged",
+    "unknown": "unmeasured development/tests/authoring/archive child work/v3 preparation/settlement; older interrupted run costs remain incomplete"
+  },
+  "old_study_jobs": "original savedCPU update64 has791 outputs/792 inputs, LME501complete+1interrupted+400notrun; no restart/replay/rebilling this turn",
+  "next_actions": [
+    "Ground View statements, conditions and time in actual source meaning; retain these failures and avoid further same-family retries merely seeking success",
+    "Broaden F1 normal-user preference/question, tool receipt and unrelated-arrival streams; complete F3 original evidence under2048 with current622cbcdd",
+    "Run F5 real task chain fixed_context/rules/available saved Jev with original Host frame and actual business outcome",
+    "Recover original saved CPU/LME untouched prefixes and complete declared remaining scope; then frozen feedback32/64/128, newinitial/post comparison,seeds,Host/lifecycle/external/mainfigures"
+  ],
+  "interfaces": {
+    "Lab_SourceEvent": "optional capture_context added",
+    "Product_API_Schema_permissions_Canonical": "unchanged"
+  },
+  "no_sha_or_content_fingerprint_validation": true,
+  "no_subagents": true,
+  "no_new_services_or_ledger": true,
+  "no_remote_writes": true,
+  "goal_complete": false
+}

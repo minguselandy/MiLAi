@@ -1,4 +1,71 @@
-# USER PAUSE / GITHUB PUBLICATION (2026-10-22)
+# LATEST: 2026-10-23 functional rounds closed; full goal ACTIVE
+
+Current source622cbcdd; earlier functional freezes65c7c0e3(v1) and66d56c35(v2/v3) preserved.
+Three actual given-request rounds CLOSED:18+18+12positions,ONE exposed STATE train family.
+PIDs1528958/1581774/1594801 and exec36753/85141/31612 terminal. No live model job remains.
+Raw artifacts: artifacts/evidence-gap-20261023/acceptance-v{1,2,3}; original source/fixture,
+all48receipts,30delivered View instances and first outcomes retained.18generationHTTP/
+89553known tokens,newunknown0;all complete packets<=2048 native Host tokens.
+v1->v2 rules/cache refreshes each5->2,repeat/known reuse3times and later tool receipt refreshes.
+v2cache now delivers actual cancellation source, but required earlier originals remain absent.
+F2 still FAILS: questions become verified facts; older confirmed state stays unqualified.
+v3 enabled actual reasoning (wire flag + nonempty reasoning receipts),34708tokens vs v2's15723,
+and did NOT resolve semantics. Do not keep repeating this one family until success or claim
+M1/Host/generalization complete. Given requests have NO autonomous Host answer/business action.
+
+65c7 added actual observed-only raw selection for cache/rules and finite handoff packets.
+66d56 preserves public_user_message origin and adds OPTIONAL capture_context to Lab SourceEvent,
+passed through actual observation/generation/delivery. Only supplied programmatic requests get
+given_retrieval_request; normal user statements/questions unchanged, no text dedup. Initial
+attempt to change origin failed existing integrity validation; reverted, validator unchanged.
+Known refs/return budgets excluded from rules View semantic-scope equality, dates/purpose kept.
+F2 examples added but actual semantics remain failed. No new source semantics certified.
+
+IMPORTANT v2/v3 cache final request consumed5reads despite policyreads4 because irrelevant
+probe observations were excluded from the cap. Original failed-cap outcomes retained.
+622cbcdd fixes counting ALL acquired originals. Same captured v2step5 changes fifthREAD to
+handoff_select_5 in offline decision replay,0newmodelcalls.21relatedtests+Ruffpass; no real
+622cbcdd run yet. Earlier broad106tests+1optionalMemPursuitskip,9module scoped type check and
+package/tools boundaries passed. Full strict typing still lacks jsonschema stubs.
+
+At verified idle, original ledger phase evidence_gap_20261023_acceptance_v1_v3_offline_v1
+settled TEN measured phases75.905835768CPU once; generation counters unchanged. Old pending
+registries and interrupted original-study costs untouched. New read-cap replayCPU0.040418528
+PENDING at read-cap-regression-v1.json; unmeasured authoring/tests/settlement stay unknown.
+Next: ground View statements/conditions/time to actual source meaning; broader F1 normal-user,
+unrelated-arrival and task scenarios; actual F5 fixed/rules/saved-Jev path. Keep original
+savedCPU/LME recovery and full training/feedback/seeds/external scope. No SHA/subagents/new
+services/ledger/push/merge. See progress-20261023-v2 and the execution record.
+
+# Earlier ACTIVE: 2026-10-23 evidence-gap development
+
+The user explicitly requested execution of MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261023.md.
+This resumes the referenced study; the pause below is historical. Worktree:
+/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023,
+branch feat/evidence-gap-development-20261023, based on the plan's b197255d source.
+The original plan remains untouched in jev-read-decisions-20261016; this branch has a copy.
+No subagents, SHA/checksum/content fingerprints, new services, second ledger, push or merge.
+Other unrelated paused queues remain paused. Full F1–F5/M1–M5 and inherited unfinished
+training/feedback/Host/external/seed scope remain required; current changes are partial.
+
+Actual process inspection found driver893357/evaluator2253075/path-audit662822 absent.
+Their RUNNING files are stale, not verified live jobs. update64 has 791 output files,
+792 inputs (call791 has no output), no compute.json or partitioned results. Old0/32 remain
+closed and billed; never replay or rebill them. LME path audit has501 COMPLETE,1 interrupted,
+400 NOT_RUN. Preserve interrupted first attempts and unknown cost; existing scripts cannot
+resume in place. Prepare continuation from untouched outputs with original conditions and
+single-ledger accounting before resuming. No jobs were restarted this turn.
+
+First changes: request-related greedy original delivery prefixes supplement existing finite
+choices and fit the complete packet; View generation preserves actual Source origin in
+bodies and directory. Lexical coverage is ONLY candidate generation, not semantic sufficiency.
+59 targeted tests passed,1 optional MemPursuit test skipped. Ruff/package/tools boundaries pass.
+Strict mypy is limited by missing jsonschema stubs in existing environments; do not claim
+an unqualified strict pass. No real model quality/2048-token Host acceptance yet.
+See TRAINING_GENERALIZATION_EXECUTION_20261021.md and
+data/manifests/evidence-gap-development-progress-20261023-v1.json for current scope/evidence.
+
+# HISTORICAL USER PAUSE / GITHUB PUBLICATION (2026-10-22)
 
 The user paused the full goal and requested submission to GitHub. Goal status is PAUSED;
 publication is authorized now. Stop autonomous research scheduling, new experiments and
