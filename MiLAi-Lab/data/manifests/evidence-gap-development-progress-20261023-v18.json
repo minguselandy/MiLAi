@@ -1,0 +1,137 @@
+{
+  "status": "ACTIVE;NATIVE_HOST_PROMPT_CONFIRMED;EXPLICIT_HOST_INSTRUCTION_CONDITION_IMPLEMENTED;CPU524_RUNNING",
+  "observed_at": "2026-10-23T15:38:02.827338+00:00",
+  "source_version": "45829497",
+  "previous_progress": "data/manifests/evidence-gap-development-progress-20261023-v17.json",
+  "plan": "docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261023.md",
+  "execution": "docs/TRAINING_GENERALIZATION_EXECUTION_20261021.md",
+  "previous_turn_classification": "progress:393verified/accounted;Host-onlydiagnosticclosed;524started",
+  "native_contract_diagnostic": {
+    "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-only-task3-v1/prompt-contract-review.json",
+    "native_system_prompt_literal_suffix_equal": true,
+    "native_tool_schemas_literal_equal": true,
+    "native_tools": 17,
+    "preview_change_fees": [
+      0,
+      75
+    ],
+    "scope": "One already exposed train task; fresh local native environments for preview-only checks, no model/HTTP/commit. Not a memory-action feedback pair, Host retry or factual-policy repair.",
+    "interpretation": "No omitted native Host prompt/tool-schema found. Native change policy trusts the supplied exempt change_reason and returns fee0; the delay-specific waiver cannot restore the ordinary fee when that earlier policy already returned zero. Preview outcome is conditional on the chosen reason and does not independently establish that reason. The actual Host selected that unsupported reason; this does not alter the native state failure.",
+    "original_files_literal_unchanged": true
+  },
+  "unplanned_search_exposure": [
+    {
+      "task_id": "30-cross_cancel_flight_and_hotel",
+      "native_split": "test",
+      "exposure": "One expected_value line surfaced by broad directory search; no full task body deliberately opened."
+    },
+    {
+      "task_id": "39-compound_intl_delay_not_free_plus_partial_bag_plus_insurance_drop_state",
+      "native_split": "test",
+      "exposure": "Opening message, user context, task summary and requirement excerpts surfaced by broad directory search."
+    },
+    {
+      "task_id": "101-challenge_mixed_strategy_shared_budget",
+      "native_split": "train",
+      "exposure": "One delay_compensation field surfaced by broad directory search."
+    },
+    {
+      "task_id": "118-policy_delay_threshold_edge_compare",
+      "native_split": "train",
+      "exposure": "Opening/context/instruction/summary/requirement excerpts surfaced by broad directory search."
+    }
+  ],
+  "exposure_disposition": "Native test tasks30/39 are now partially exposed and cannot be described as unseen confirmation in subsequent reporting. Preserve native splits and labels; do not use their snippets as new training material. Future diagnostic searches restricted to explicit implementation files. Existing protected MuSiQue bodies were not opened.",
+  "new_host_condition": {
+    "settings_path": "entrypoints.functional.state_host_instructions",
+    "configuration_fragment": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-v1/condition.json",
+    "default": "Empty: original prompts preserved",
+    "scope": "Appended to Host public domain prompt/actual captured frame only; simulator and native tools unchanged. Applies to dynamic/readonly/none, frozen initial-request frames retain host_request_generated=false. No automatic evaluator data, domain-specific rules or new approvals.",
+    "real_model_outcome": "NOT_RUN;functional wiring is not semantic success"
+  },
+  "validation": {
+    "related_tests_passed": 30,
+    "skipped": 1,
+    "skip": "optionalMemPursuit missing",
+    "ruff": "PASS after two decorator-line wraps; first failure retained",
+    "scoped_mypy": "PASS two modules, existing import-untyped/unused-ignore exclusions; no full-strict claim",
+    "package_boundary": "PASS",
+    "tools_boundary": "PASS",
+    "full_suite": "NOT_RUN",
+    "remote_CI": "NOT_RUN"
+  },
+  "active_processes": [
+    {
+      "root": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-u524-v1",
+      "driver_pid": 137761,
+      "child_pid": 137766,
+      "session": 60323,
+      "status": "RUNNING",
+      "actual_proc_present": true,
+      "completed": 56,
+      "planned": 876,
+      "neural_model": true
+    }
+  ],
+  "accounting": {
+    "status": "PENDING_WHILE_ORIGINAL_SAVEDCPU524_LIVES",
+    "previous_closed_settlements": [
+      "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-u393-v1/settlement.json",
+      "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-only-task3-v1/offline-settlement.json"
+    ],
+    "entries": [
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-only-task3-v1/prompt-contract-review.json",
+        "field": "cpu_seconds_pending",
+        "cpu_seconds": 0.033535405000000004
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-validation-v1/package-boundary.json",
+        "field": "cpu_seconds",
+        "cpu_seconds": 4.22846,
+        "exit_code": 0
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-validation-v1/ruff-final.json",
+        "field": "cpu_seconds",
+        "cpu_seconds": 0.311168,
+        "exit_code": 0
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-validation-v1/ruff.json",
+        "field": "cpu_seconds",
+        "cpu_seconds": 1.364673,
+        "exit_code": 1
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-validation-v1/tests.json",
+        "field": "cpu_seconds",
+        "cpu_seconds": 9.570530999999999,
+        "exit_code": 0
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-validation-v1/tools-boundary.json",
+        "field": "cpu_seconds",
+        "cpu_seconds": 8.232246,
+        "exit_code": 0
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-instructions-validation-v1/typing.json",
+        "field": "cpu_seconds",
+        "cpu_seconds": 6.9394029999999995,
+        "exit_code": 0
+      }
+    ],
+    "measured_cpu_seconds": 30.680016404999996,
+    "ledger_recorded": false,
+    "scope": "Native preview/prompt-schema diagnostic plus scripted SDK/transport/static/boundary checks. No model weights/forward/real HTTP/original ledger writes; other unmeasured work stays unknown.",
+    "no_sha_validation": true
+  },
+  "remaining": "Original524/selection/matchingselectedtrain;source64/128andotherfits/requesttext/auxiliary/parameterconditions;frozenfeedback32/64/128,T2,initial-vs-post,state/sourcecoverage,seeds;F1/F2semanticandF3completecapacity/Hostsimulator;LME451Reader/nativejudge,lifecycle,fullHost/officialreadonly/external/protectedandfourmainfigures. M1-M5not achieved. Host-only diagnostic now closed at native state0; compact-model quality comparison not yet executed. ActualSTATEexport/unknownpair is not trainedfeedback or 32/64/128source expansion. Newemptydeliverychoice learnedselection/Hosteffect stillunmeasured. New Host instruction condition still needs a declared real comparison; no F1/F2/Host quality fix claimed.",
+  "scheduling": "Original524 sole neural job. No second neural run or offline settlement whilelive; verify actual PID/files, no stale-session restart. After524terminal: original verification, dev selection and matching selected-train, then unchanged remaining plan.393/Host-only and all previous closed jobs stayclosed.",
+  "no_sha_or_content_fingerprint_validation": true,
+  "no_subagents": true,
+  "no_new_model_services_or_ledger": true,
+  "no_remote_writes": true,
+  "goal_complete": false
+}

@@ -1,4 +1,31 @@
-# LATEST: 2026-10-23 CPU393 verified; Host-only task3 CLOSED/state0; CPU524 LIVE
+# LATEST: 2026-10-23 native Host contract checked; optional Host instructions; CPU524 LIVE
+
+45829497 adds optional entrypoints.functional.state_host_instructions to existingSTATErunner.
+Emptydefault preserves upstreamdomain prompt; literaladditionaltext reaches Host/systemframes
+only, notsimulator/native tools. Dynamic/readonly/none and frozeninitialframe supported; false
+host_request_generated staysfalse.30relatedtestsPASS/1optionalMemPursuitskip,Ruff,2module scoped
+typing,bothboundariesPASS. No model-quality claim. Candidate generic condition fragment at
+state-host-instructions-v1/condition.json NOTDISPATCHED/no newtaskselected; use sameHost condition
+across arms. Originalclosedruns/checkpoints/frozen524 source unchanged.
+
+ActualHost-only task3 wire preserves nativeprompt and all17tools. Freshnative preview-only
+probes fromsameinitialstate,changing only reason: schedule_change fee0/price400;personal75/475.
+Publicsnapshots unchanged,actualfirstpreview matches,oldfiles unchanged. Native tool trusts
+suppliedexemption reason; conditionalquote isn't independent premise verification. Artifact
+state-host-only-task3-v1/prompt-contract-review.json. Not memoryfeedback or Hostretry/domainrepair.
+
+Broadsource search inadvertently exposed snippets of nativeSTATE TEST task30 and39, plustrain
+101/118. Partialscope recorded in sameartifact/progress-v18; preserve native splits/labels,
+do not use snippets as newtraining material or describe30/39 as unseenconfirmation. Restrict
+diagnostic searches to explicitimplementation files. OriginalMuSiQue protectedbodies unopened.
+
+pending-costs-v18 has7measuredphases30.680016405CPU; no ledgerwrite while524live,unknowns retained.
+ONLY LIVE neuraljob: original524 driver137761/child137766/exec60323,latest56/876. Verifyactual
+PID/files; no secondneural/offlinesettlement/restart. Afterterminal originalverification/dev
+selection/matchingtrain and fullremainingplan. M1-M5unfinished. Latestprogress-v18/execution.
+NoSHA/fingerprints,subagents,newservices/ledger,push/merge.
+
+# Earlier: 2026-10-23 CPU393 verified; Host-only task3 CLOSED/state0; CPU524 LIVE
 
 Original393 COMPLETE876, original frozen verification PASS:471/616 accepted,244masked,
 32familymacro .7878896864599797;16feedback separate. Original modelCPU41078.389841804
