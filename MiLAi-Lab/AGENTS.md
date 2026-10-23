@@ -8,6 +8,10 @@ metadata and originallength eventIDs/order/zero drops verified.249labelledfamili
 checkpointbinding/selection/weights/forward/HTTP. train-preparation.json records sourceindices.
 Originalrule: operationdev familymacro,earliesttie,0eligible; feedback/Host/test secondary.
 Wait for verified524; keep original64masked791 outputUNKNOWN and runtimecoverage gap.
+Prepared select_saved_cpu_curve_v1.py (syntaxchecked only,UNEXECUTED) revalidates alloriginal
+observedpredictions/ledgerphases,usesoriginal scorer/choose_checkpoint onall616labelleddev,
+retains sparse64unknown,then writes selection and4886selected-train-plan withoutdispatch.
+Requires actual524exit+verified-results; do not run while524live or rerun oldcandidates.
 
 pending-costs-v19 adds7.403995419CPU to pendingv18; no ledgerwrite while524live.
 ONLY LIVE neuraljob524 driver137761/child137766/exec60323. VerifyactualPID/files; afterterminal
