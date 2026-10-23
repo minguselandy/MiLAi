@@ -12,6 +12,10 @@ Prepared select_saved_cpu_curve_v1.py (syntaxchecked only,UNEXECUTED) revalidate
 observedpredictions/ledgerphases,usesoriginal scorer/choose_checkpoint onall616labelleddev,
 retains sparse64unknown,then writes selection and4886selected-train-plan withoutdispatch.
 Requires actual524exit+verified-results; do not run while524live or rerun oldcandidates.
+Prepared dispatch_selected_train_v1.py and verify_selected_train_v1.py are syntaxchecked,
+UNEXECUTED. Driver requires selection-plan+524settlement (includingselectionanalysisCPU);
+verifier checks all4886originalrows/predictions/lengths/ledger and writes complete-results.json,
+keeping original selectionresults and masked64gap. No automatic retry or partialtrain substitute.
 
 pending-costs-v19 adds7.403995419CPU to pendingv18; no ledgerwrite while524live.
 ONLY LIVE neuraljob524 driver137761/child137766/exec60323. VerifyactualPID/files; afterterminal

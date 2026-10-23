@@ -25,6 +25,10 @@ question和零截断。包括1499个operation_history、3387个complementary_evi
 随后重核各候选的真实输出/字面输入/计量，用原scorer和`choose_checkpoint`对全部616个有标签
 dev状态选点；64保留稀疏输出及791 unknown，不伪造全876覆盖。它只生成selection与完整
 selected-train启动参数，不调用模型或重跑候选。脚本准备/作者开销未测，未冒充已完成选点。
+对应`dispatch_selected_train_v1.py`和`verify_selected_train_v1.py`也仅完成语法检查、尚未执行。
+前者要求选点及524关闭费用（含选点分析CPU）结算后才启动完整4886行；后者直接核对原始行、
+输入/长度/预测/计量，输出`complete-results.json`及匹配gap，保留原选点结果和64的覆盖缺口。
+两个脚本不重试失败、不抽样替代完整train，也未形成任何新模型结果。
 
 原524仍是唯一神经作业，全部其余研究范围保持开放。当前索引：
 [进度v19](../data/manifests/evidence-gap-development-progress-20261023-v19.json)。M1–M5未完成。
