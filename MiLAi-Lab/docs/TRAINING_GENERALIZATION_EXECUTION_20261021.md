@@ -4,6 +4,73 @@
 [原计划](MILAI_TRAINING_DATA_GENERALIZATION_PLAN_20261021.md)，原文复制留存，原目录文件未修改。
 该计划中的“本轮已完成”是另一环境的历史说明，不能代替本机当前验证。
 
+## 2026-10-23：STATE 只读入口与原 CPU 队列继续
+
+本轮核实update128实际进程继续运行，并按原计划续接独立的纯CPU LongMemEval路径检查。
+没有重跑旧501条完成路径或第250题selection=true的中断路径；后者既无完成case文件也无archive，
+继续标为unknown。新目录`artifacts/evidence-gap-20261023/lme-fixed-path-tail400-v1/`只执行原NOT_RUN
+的索引502–901，共200题/400路径。复用原a33974c0冻结方法、原数据、原已准备base及native协议文件，
+逐例执行体经字面比较保持相同，仅调整输出/base路径、选择未执行位置和进度计数。
+没有加载模型权重、forward、HTTP调用或账本写入；这与原研究中savedCPU和纯CPU路径检查并行的调度一致。
+路径通过不能替代451个Reader答案或原生QA评分，也不代表当前新F3方法的外部结果。
+
+同时完成`d9f53c61`的只读记忆路径。官方Learning Track明确要求测试期检索只读；
+自定义BaseAgent由handler负责返回字符串列表及数量限制。
+依据：[Learning Track](https://github.com/microsoft/STATE-Bench/blob/main/docs/AGENT_LEARNING_TRACK.md)、
+[Custom memory hook](https://github.com/microsoft/STATE-Bench/blob/main/docs/memory/custom-hook.md)。
+
+实现复用现有EvidenceOperations、原文/范围读取、预建View、历史版本、完整返包计量和政策工厂：
+
+- `ReadOnlyMemoryService`的读取不签发修改凭证，历史分页快照保留在任务内存，仍检查owner、版本与可见性。
+- `ReadOnlyRetrieval`的查询、额度和实际交付引用均为任务内状态；不捕获测试用户/助手/工具消息，
+  不写持久retrieval snapshot，不调用REFRESH_VIEW，也不写多槽View的LRU。
+- `StateReadOnlyMemoryHook`与动态hook分开，返回`list[str]`；一份完整受限回执不会超出三个字符串。
+  动态模式继续正常摄入真实观察，没有被官方只读要求取消。
+- 原命令新增`--memory-protocol readonly --memory-artifact <artifact.json>`。
+  描述符包含`database`、`namespace`、`owner`、`source_split: train`及训练来源provenance。
+  SQLite以`mode=ro`打开已经准备好的库；需要迁移的artifact必须在线下准备，不能在检索期偷偷改库。
+  `source_split`字段是声明，实际来源审核仍不能被这个标记替代。
+
+例如使用本轮已生成的39条真实公开训练记录artifact，调用形式为：
+
+```text
+tools/run_state_bench_local_pilot.py CONFIG PREPARATION OUTPUT
+  --source-version d9f53c61 --policy fixed_context --split train
+  --memory-protocol readonly
+  --memory-artifact artifacts/evidence-gap-20261023/state-readonly-artifact-v1/artifact.json
+```
+
+该命令仍是**本地研究runner**，不是官方完整成绩：当前仍使用本地Qwen Host/simulator、单次任务和
+确定性state检查，未运行锁定官方simulator/judge、全部test任务或5 runs，也没有触发官方SHA验证流程。
+只读边界现在可用，不据此宣称整个协议或研究完成。
+
+实际SQLite `query_only`与只读URI检查覆盖查询/工具观察不入库、预算不重置、跨任务引用拒绝、
+已撤销材料不返回、静态View复用不写LRU、历史版本读取不写凭证/分页快照。公共STATE SDK测试中，
+领域沙箱仍能执行真实写入，而训练记忆库保持不变，隐藏任务context不进入Host。
+相关74项测试通过、1项可选MemPursuit依赖缺失跳过；最后聚焦18项通过、1项跳过（重叠，不能加总）。
+Ruff、五模块局部类型及package/tools边界通过；完整strict环境缺stubs的限制保持披露。
+初次测试发现缺少project_packs的indices参数，已按真实接口修正，没有改造接口来掩盖错误。
+
+零模型实物probe使用原39条train来源构建`state-readonly-artifact-v1/training.sqlite`，
+在只读URI下发出两次请求，按真实Host tokenizer核对整个字符串列表返包≤2048tokens。
+查询中新增的偏好和测试文本未被摄入，关闭连接后数据库逐字节相同；没有模型或HTTP调用。
+这证明artifact/工具路径的只读行为，不证明训练记忆语义质量或任务收益。
+
+原保存CPU update128随后完成876/876。用原校验器逐项核对所有原输入、长度、有限logits、
+checkpoint和单账本阶段：**441/616接受，32来源族宏平均74.0011%**，仍是静态操作偏好。
+42698.668951127 CPU秒由evaluator一次入账；退出后启动/核对/只读probe和后续准备六阶段
+44.698407712 CPU秒另一次结算，未重复模型费用、未重计以前结算或改旧pending。
+
+当前唯一神经模型作业为原update262：driver2925107/child2925108/exec47993，最近快照10/876；
+仍为CPU FP32、4threads、shared_actions12288/head2048、关闭reference_compile和MHA fastpath。
+纯CPU LME续接driver2364262/child2364263/exec98205最近324/400。两者必须按实际进程与产物继续观察，
+不能根据历史快照或丢失session句柄重启；神经作业运行期间不再开另一模型或结算离线费用。
+update393/524、最终选点和匹配train，以及原反馈、状态比较、种子、Reader/生命周期/外部与四主图仍待完成。
+F1适用性、F2语义、Jev当前输入容量和模拟用户完成问题仍保留，M1–M5均未宣布闭合。
+当前索引：[进度v5](../data/manifests/evidence-gap-development-progress-20261023-v5.json)。
+只读入口尚未运行真实模型任务；原保存模型评估按上述继续。未修改Product API/Schema/权限/Canonical，
+未执行SHA或远端写入。
+
 ## 2026-10-23：F3 按已观察范围交付，第二任务保留失败，原保存评估继续
 
 本轮先核实上轮为实质进展、工作区干净且无活动实验。`3eef6575`修复了“已读大上下文却只能

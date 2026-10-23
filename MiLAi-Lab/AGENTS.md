@@ -1,4 +1,47 @@
-# LATEST: 2026-10-23 F3 scopes verified; original savedCPU u128 LIVE
+# LATEST: 2026-10-23 readonly STATE added; savedCPU262 + CPU-only LME tail LIVE
+
+Functional source d9f53c61 adds an actual read-only training-artifact path, distinct from
+the existing dynamic hook. SQLite mode=ro, no test Source capture, mutation read-handle,
+persistent history cursor, retrieval snapshot, View refresh or LRU write. Task-local Python
+refs/cursors/allowance only; same evidence executor, ranges, packet budgets and visibility.
+Prebuilt Views and historical records remain readable. STATE custom hook returns list[str]
+bounded to<=3 and full envelope; --memory-protocol readonly --memory-artifact descriptor.
+This is a retrieval boundary,NOT an official full run: current runner still local Qwen
+Host/simulator and deterministic state check. No official simulator/judge/test runs executed.
+Official guidance checked at microsoft/STATE-Bench docs/AGENT_LEARNING_TRACK.md and
+docs/memory/custom-hook.md (public web). No SHA used. Product interfaces unchanged.
+
+74affectedtests pass,1optionalMemPursuit skip;finalfocused18pass+1skip(overlapping). Real SDK
+sandbox updates while artifact query_only proves unchanged SQLite contents. New URI-ro loader
+rejects writes. Actual39public train records built at state-readonly-artifact-v1/artifact.json;
+two zero-model queries,full2048token envelope,DBbytes unchanged/no test query/preference capture.
+Ruff,5module scopedtyping and package/tools boundaries pass. Fullstrict missing-stub limitation
+unchanged. No new model quality result or milestone completion.
+
+Original savedCPU128 CLOSED876 and all inputs/lengths/finite predictions verified,441/616
+accepted,32family macro.7400113583.42698.668951127CPU already billed once. Closed startup,
+verification,readonly smoke,LMEprep/u262prep6phases44.698407712CPU settled once before262.
+Original source/inference unchanged;0/32 and64prefix/tail not repeated,masked64index791 remains
+unknown. No deployment selection before262/393/524 and matching selectedtrain/full audit.
+
+ONLY LIVE neural job: saved-cpu-u262-v1 driver2925107/child2925108/exec47993,latest10/876snapshot.
+CPUFP32/shared_actions12288/head2048/threads4,compileFalse/MHAfastpathFalse;revalidate actualPID.
+Independent original CPU-only LME continuation: driver2364262/child2364263/exec98205,
+lme-fixed-path-tail400-v1,latest324/400. This loads no weights,does no forward/HTTP/ledgerwrite,
+and uses ORIGINAL a33974c0 source. Only oldNOT_RUN indices502..901 (rows251..450,false/true).
+Original501completed archives retained;oldrow250/selectionTrue has no completedcase/archive,
+kept interruptedunknown,notrerun. Same per-case execution body;reuse old immutable bases/native
+protocol. No new source/profile mixed into old paths; path checks are not451ReaderQA scores.
+Concurrent CPU-only audit with one neural evaluator matches original study scheduling.
+Never start another neural model/probe/fit/E2 or settle costs while262lives. Never restart
+because observation/sessionhandle expires;actualPID/status authoritative.
+
+Full F1/F2/F3/nativecapacity/simulator issues,other fits/feedback32/64/128/T2/statecomparison/
+seeds/LMEReader/lifecycle/Host/external/protected/finalfigures remain open. All existing failures
+and oldpending costs unchanged. No agents/newservices/secondledger/push/merge/SHA. Current
+details: progress-20261023-v5 and execution record. Unmeasured reporting remains unknown.
+
+# Earlier: 2026-10-23 F3 scopes verified; original savedCPU u128 LIVE
 
 Current functional source3eef6575. F3 adds HANDOFF retrieved_scope_indices over pre-existing
 candidate ranges wholly covered by actual acquisitions. No Store/body READ during selection,
