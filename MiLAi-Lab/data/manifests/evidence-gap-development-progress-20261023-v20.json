@@ -1,0 +1,281 @@
+{
+  "status": "ACTIVE;ALL_ORIGINAL_PRIMARY_DEV_CANDIDATES_VERIFIED;UPDATE262_SELECTED;MATCHING_TRAIN_RUNNING",
+  "observed_at": "2026-10-23T18:27:07.742657+00:00",
+  "source_version": "45829497",
+  "previous_progress": "data/manifests/evidence-gap-development-progress-20261023-v19.json",
+  "plan": "docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261023.md",
+  "execution": "docs/TRAINING_GENERALIZATION_EXECUTION_20261021.md",
+  "previous_turn_classification": "verified wait; this turn completed524verification/originalselection/accounting and started fullmatchingtrain",
+  "saved_cpu524": {
+    "root": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-u524-v1",
+    "status": "COMPLETE_VERIFIED_SAVED_CPU_CANDIDATE",
+    "rows": 876,
+    "dev_counts": {
+      "labelled": 616,
+      "accepted": 457,
+      "masked": 244,
+      "handoff_outside_reviewed_preference": 26
+    },
+    "family_macro_acceptance": 0.7706700547083952,
+    "model_cpu_seconds_already_billed": 41706.656768187
+  },
+  "saved_primary_dev_curve": [
+    {
+      "update": 0,
+      "counts": {
+        "labelled": 616,
+        "accepted": 85
+      },
+      "family_macro_acceptance": 0.15169274712903175,
+      "coverage": {
+        "planned_states": 876,
+        "observed_predictions": 876,
+        "unknown_indices": [],
+        "labelled_dev_observed": 616,
+        "feedback_observed": 16,
+        "original_masked_dev_states": 244
+      },
+      "in_memory_gpu_vs_saved_cpu": {
+        "choice_changes": 0,
+        "compared_states": 860,
+        "kind_changes": 0,
+        "scope": "Serialization and inference-device differences together; not isolated quantization. Unknown64 position excluded from this comparison only."
+      }
+    },
+    {
+      "update": 32,
+      "counts": {
+        "labelled": 616,
+        "accepted": 386,
+        "handoff_outside_reviewed_preference": 125
+      },
+      "family_macro_acceptance": 0.6568691517285074,
+      "coverage": {
+        "planned_states": 876,
+        "observed_predictions": 876,
+        "unknown_indices": [],
+        "labelled_dev_observed": 616,
+        "feedback_observed": 16,
+        "original_masked_dev_states": 244
+      },
+      "in_memory_gpu_vs_saved_cpu": {
+        "choice_changes": 0,
+        "compared_states": 860,
+        "kind_changes": 0,
+        "scope": "Serialization and inference-device differences together; not isolated quantization. Unknown64 position excluded from this comparison only."
+      }
+    },
+    {
+      "update": 64,
+      "counts": {
+        "labelled": 616,
+        "accepted": 421,
+        "handoff_outside_reviewed_preference": 74
+      },
+      "family_macro_acceptance": 0.7096675983429561,
+      "coverage": {
+        "planned_states": 876,
+        "observed_predictions": 875,
+        "unknown_indices": [
+          791
+        ],
+        "labelled_dev_observed": 616,
+        "feedback_observed": 16,
+        "original_masked_dev_states": 244
+      },
+      "in_memory_gpu_vs_saved_cpu": {
+        "choice_changes": 0,
+        "compared_states": 859,
+        "kind_changes": 0,
+        "scope": "Serialization and inference-device differences together; not isolated quantization. Unknown64 position excluded from this comparison only."
+      }
+    },
+    {
+      "update": 128,
+      "counts": {
+        "labelled": 616,
+        "accepted": 441,
+        "handoff_outside_reviewed_preference": 70
+      },
+      "family_macro_acceptance": 0.7400113583277952,
+      "coverage": {
+        "planned_states": 876,
+        "observed_predictions": 876,
+        "unknown_indices": [],
+        "labelled_dev_observed": 616,
+        "feedback_observed": 16,
+        "original_masked_dev_states": 244
+      },
+      "in_memory_gpu_vs_saved_cpu": {
+        "choice_changes": 3,
+        "compared_states": 860,
+        "kind_changes": 1,
+        "scope": "Serialization and inference-device differences together; not isolated quantization. Unknown64 position excluded from this comparison only."
+      }
+    },
+    {
+      "update": 262,
+      "counts": {
+        "labelled": 616,
+        "accepted": 484,
+        "handoff_outside_reviewed_preference": 36
+      },
+      "family_macro_acceptance": 0.807826854448818,
+      "coverage": {
+        "planned_states": 876,
+        "observed_predictions": 876,
+        "unknown_indices": [],
+        "labelled_dev_observed": 616,
+        "feedback_observed": 16,
+        "original_masked_dev_states": 244
+      },
+      "in_memory_gpu_vs_saved_cpu": {
+        "choice_changes": 0,
+        "compared_states": 860,
+        "kind_changes": 0,
+        "scope": "Serialization and inference-device differences together; not isolated quantization. Unknown64 position excluded from this comparison only."
+      }
+    },
+    {
+      "update": 393,
+      "counts": {
+        "labelled": 616,
+        "accepted": 471,
+        "handoff_outside_reviewed_preference": 32
+      },
+      "family_macro_acceptance": 0.7878896864599797,
+      "coverage": {
+        "planned_states": 876,
+        "observed_predictions": 876,
+        "unknown_indices": [],
+        "labelled_dev_observed": 616,
+        "feedback_observed": 16,
+        "original_masked_dev_states": 244
+      },
+      "in_memory_gpu_vs_saved_cpu": {
+        "choice_changes": 3,
+        "compared_states": 860,
+        "kind_changes": 0,
+        "scope": "Serialization and inference-device differences together; not isolated quantization. Unknown64 position excluded from this comparison only."
+      }
+    },
+    {
+      "update": 524,
+      "counts": {
+        "labelled": 616,
+        "accepted": 457,
+        "handoff_outside_reviewed_preference": 26
+      },
+      "family_macro_acceptance": 0.7706700547083952,
+      "coverage": {
+        "planned_states": 876,
+        "observed_predictions": 876,
+        "unknown_indices": [],
+        "labelled_dev_observed": 616,
+        "feedback_observed": 16,
+        "original_masked_dev_states": 244
+      },
+      "in_memory_gpu_vs_saved_cpu": {
+        "choice_changes": 0,
+        "compared_states": 860,
+        "kind_changes": 0,
+        "scope": "Serialization and inference-device differences together; not isolated quantization. Unknown64 position excluded from this comparison only."
+      }
+    }
+  ],
+  "selection": {
+    "update": 262,
+    "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/fitting/source256-actions-full-seed0-u524-v1/checkpoints/update-262",
+    "metric": 0.807826854448818,
+    "condition": {
+      "device": "cpu",
+      "visible_cuda_devices": "",
+      "threads": 4,
+      "max_len": 12288,
+      "head_max_len": 2048,
+      "operation_state": "shared_actions",
+      "reference_compile_override": false,
+      "mha_fastpath_enabled": false,
+      "loaded_weight_dtype": "torch.float32"
+    },
+    "rule": "Original operation-dev family macro, earliest tie, update0eligible; feedback/Host/test not used",
+    "scope": "Complete primary labelled-dev metric for all seven candidates; masked64 output791 remains unknown. Matching selected-train evaluation still pending."
+  },
+  "original_in_memory_selection": {
+    "update": 262,
+    "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/fitting/source256-actions-full-seed0-u524-v1/checkpoints/update-262",
+    "metric": 0.807826854448818,
+    "rule": "highest dev source-family macro acceptance,earliest tie,0eligible"
+  },
+  "selection_artifact": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-selection-v1/selection.json",
+  "curve_artifact": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-selection-v1/results.json",
+  "selection_scope": "All616labelled primarydev positions and16secondary feedback positions available for each candidate. Preserve one masked64unknown output; not an all876runtime-success claim for everycandidate. Original familymacro/earliesttie/update0 rule used; no feedback/Host/test selection.",
+  "matching_train": {
+    "root": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-selection-v1/selected-train",
+    "input": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-selection-v1/selected-train.jsonl",
+    "labelled_rows": 4886,
+    "labelled_families": 249,
+    "original_raw_train_rows": 7884,
+    "original_registered_train_families": 256,
+    "input_tokens_declared": 27995073,
+    "selection_update": 262,
+    "completed": false,
+    "same_inference_condition_as_dev": true,
+    "train_dev_gap": null
+  },
+  "active_processes": [
+    {
+      "root": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-selection-v1/selected-train",
+      "driver_json": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-selection-v1/selected-train-driver.json",
+      "driver_pid": 798921,
+      "child_pid": 798926,
+      "session": 52857,
+      "status": "RUNNING",
+      "actual_proc_present": true,
+      "completed": 12,
+      "planned": 4886,
+      "neural_model": true
+    }
+  ],
+  "accounting": {
+    "status": "PENDINGv18_v19_AND524_OVERHEAD_SELECTION_SETTLED_ONCE_BEFORE_TRAIN",
+    "phase": "evidence_gap_20261023_u524_closed_followups_v1",
+    "measures": {
+      "cpu_seconds": 100.70579428200111,
+      "measured_phases": 12,
+      "runs": 1
+    },
+    "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-u524-v1/settlement.json",
+    "scope": "8closed measured entries +524startup/coordinator/verification +selectionanalysis. ModelCPU not rebilled. Matching-train terminal overhead not yet available. Unmeasured authoring/reporting/startup of check scripts/settlement and earlier unknowns remain unknown,not zero."
+  },
+  "remaining": "Matchingselectedtrain;source64/128andotherfits/requesttext/auxiliary/parameterconditions;frozenfeedback32/64/128,T2,initial-vs-post,state/sourcecoverage,seeds;F1/F2semanticandF3completecapacity/Hostsimulator;LME451Reader/nativejudge,lifecycle,fullHost/officialreadonly/external/protectedandfourmainfigures. M1-M5not achieved. Host-only diagnostic now closed at native state0; compact-model quality comparison not yet executed. ActualSTATEexport/unknownpair is not trainedfeedback or 32/64/128source expansion. Newemptydeliverychoice learnedselection/Hosteffect stillunmeasured. New Host instruction condition still needs a declared real comparison; no F1/F2/Host quality fix claimed.",
+  "unplanned_search_exposure": [
+    {
+      "task_id": "30-cross_cancel_flight_and_hotel",
+      "native_split": "test",
+      "exposure": "One expected_value line surfaced by broad directory search; no full task body deliberately opened."
+    },
+    {
+      "task_id": "39-compound_intl_delay_not_free_plus_partial_bag_plus_insurance_drop_state",
+      "native_split": "test",
+      "exposure": "Opening message, user context, task summary and requirement excerpts surfaced by broad directory search."
+    },
+    {
+      "task_id": "101-challenge_mixed_strategy_shared_budget",
+      "native_split": "train",
+      "exposure": "One delay_compensation field surfaced by broad directory search."
+    },
+    {
+      "task_id": "118-policy_delay_threshold_edge_compare",
+      "native_split": "train",
+      "exposure": "Opening/context/instruction/summary/requirement excerpts surfaced by broad directory search."
+    }
+  ],
+  "exposure_disposition": "Native test tasks30/39 are now partially exposed and cannot be described as unseen confirmation in subsequent reporting. Preserve native splits and labels; do not use their snippets as new training material. Future diagnostic searches restricted to explicit implementation files. Existing protected MuSiQue bodies were not opened.",
+  "scheduling": "Matching4886selected-train is sole neuraljob. No secondneural or offline settlement whilelive; verify actualPID/files, never stale-session restart. Afterterminal run verify_selected_train_v1.py using originalfrozenhelpers, reconcile terminalcosts, then unchanged remaining plan. Allolddevcandidates and Host-only diagnostic stayclosed.",
+  "no_sha_or_content_fingerprint_validation": true,
+  "no_subagents": true,
+  "no_new_model_services_or_ledger": true,
+  "no_remote_writes": true,
+  "goal_complete": false
+}

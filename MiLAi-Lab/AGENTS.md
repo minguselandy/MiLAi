@@ -1,4 +1,32 @@
-# LATEST: 2026-10-23 matching train input prepared; selection pending; CPU524 LIVE
+# LATEST: 2026-10-24 original primary-dev selection COMPLETE; matching train LIVE
+
+Original524 COMPLETE876, originalfrozen verificationPASS:457/616 accepted,244masked,
+32familymacro .7706700547083952;16feedback separate.ModelCPU41706.656768187 billedonce.
+All7original primarydev candidates reverified usingliteralinputs,lengths,finitepredictions,
+conditions andledger. Originalscorer/choose_checkpoint selects262:484/616,macro.807826854448818.
+0/32/64/128/262/393/524 macros:.151692747/.656869152/.709667598/.740011358/.807826854/
+.787889686/.770670055. Sameupdate asoriginalinmemory selection. ActualGPUvsCPUchoicechanges
+are3at128(kind1),3at393(kind0),0else;64comparison859states,others860. Serialization+device
+jointdifference,not isolatedquantization. Staticpreference metrics,notHost success.
+
+Original64 masked791 output staysUNKNOWN. All616labelleddev+16feedback real for eachcandidate,
+but never claim all876outputs succeeded for64. No retry/fakeoutput/label change. Artifacts:
+saved-cpu-selection-v1/results.json,selection.json,selected-train-plan.json.
+pendingv18/v19 +524startup/coordinator/verification +selectionanalysis12phases100.705794282001
+CPU settledonce under evidence_gap_20261023_u524_closed_followups_v1;no modelrebill.
+Priorpendingfiles keep historicalfalse flags; actualsettlement saved-cpu-u524-v1/settlement.json.
+
+ONLY LIVE neuraljob: full4886matchingselected-train atupdate262,driver798921/child798926/
+exec52857. Root saved-cpu-selection-v1/selected-train;driver selected-train-driver.json.
+OriginalCPUFP32/4threads/shared_actions12288/head2048/compileFalse/MHAFalse unchanged.
+249labelledfamilies of256raw,27995073declaredtokens. No sampling shortcut; result/gapstillpending.
+VerifyactualPID/files;no secondneural/offlinesettlement/restart. Afterterminal run
+verify_selected_train_v1.py,then reconcilecosts;complete-results.json mustretain masked64gap.
+Allcloseddev/Hostruns remainclosed. RemainingF1-F5,source/feedback/conditions/seeds/T2/Host/
+lifecycle/LME/external/protected/figures intact;M1-M5unfinished. NativeSTATEtest30/39 previously
+partiallyexposed,notunseenconfirmation. Latestprogress-v20/execution. NoSHA/agents/services/ledger/push.
+
+# Earlier: 2026-10-23 matching train input prepared; selection pending; CPU524 LIVE
 
 No functional/model change. saved-cpu-selection-v1/selected-train.jsonl now contains the
 original declared4886labelled trainrows, filtered from7884 in originalorder. Literal JSON/gold/

@@ -4,6 +4,47 @@
 [原计划](MILAI_TRAINING_DATA_GENERALIZATION_PLAN_20261021.md)，原文复制留存，原目录文件未修改。
 该计划中的“本轮已完成”是另一环境的历史说明，不能代替本机当前验证。
 
+## 2026-10-24：原保存候选主dev选点完成，完整匹配train已启动
+
+原savedCPU524正常完成876/876，父子进程退出。原冻结校验器核对完整字面输入、精确长度、
+有限预测、原CPU FP32/4threads/shared_actions12288/head2048/两个关闭选项及原账本。
+其主dev为457/616接受、32来源族宏平均77.067005%；244个masked状态保留，16个feedback另列。
+模型CPU41706.656768187秒已由原evaluator一次登记。
+
+随后汇总所有七个原候选，重新核对已观察输出、原输入、长度与计量，使用原scorer和
+`choose_checkpoint`，按操作dev来源族宏平均、最早并列、update0可选的规则选中**update262**。
+feedback/Host/test未参与选点。
+
+| update | 接受 / 616 | 32来源族宏平均 |
+| --- | ---: | ---: |
+| 0 | 85 | 15.169275% |
+| 32 | 386 | 65.686915% |
+| 64 | 421 | 70.966760% |
+| 128 | 441 | 74.001136% |
+| **262** | **484** | **80.782685%** |
+| 393 | 471 | 78.788969% |
+| 524 | 457 | 77.067005% |
+
+每个候选的616个有标签dev和16个次要feedback均有实际预测；64的无标签791号输出仍unknown，
+其总观察数为875，其余候选为876。该位置不参与原主指标，但不能声称全部候选运行覆盖均完整；
+没有重试、补造输出或修改标签。选点与原GPU内存曲线同为262；实际choice差异在128有3个
+（其中1个操作类型变化）、393有3个（类型未变），其他已观察位置为0。64比较859个dev状态、
+其余860；这是保存序列化与推理设备的联合差异，不是隔离的量化效应。后段下降在保存CPU曲线
+仍存在，原因及Host意义不能由这张静态偏好表单独确定。
+
+产物在`saved-cpu-selection-v1/results.json`与`selection.json`。v18/v19的8项关闭测量，加上
+524启动/协调器/核对和选点分析，共12项**100.705794282001 CPU秒**在空闲时一次结算；
+阶段`evidence_gap_20261023_u524_closed_followups_v1`，模型费用未重复计入。历史pending文件
+保持原记录，实际结算见`saved-cpu-u524-v1/settlement.json`；未测作者/报告/结算开销仍unknown。
+
+已据此启动update262的**全部4886条匹配train评价**，249个有标签来源族，27995073个声明输入
+tokens，沿用与dev完全相同的推理条件。原7884行/256族训练池未改；没有抽样替代。
+当前唯一神经作业driver798921、child798926、exec52857；产物
+`saved-cpu-selection-v1/selected-train`，driver为`selected-train-driver.json`。
+终态后用`verify_selected_train_v1.py`逐项核对并生成保留64缺口的`complete-results.json`。
+匹配train尚无完整结果，train/dev gap仍未报告；原全局研究和M1–M5继续未完成。
+当前索引：[进度v20](../data/manifests/evidence-gap-development-progress-20261023-v20.json)。
+
 ## 2026-10-23：按原规则准备完整匹配train输入，未提前选点
 
 核对原冻结`run_saved_curve`：选点仍用操作dev来源族宏平均，最早并列、update0可选，
