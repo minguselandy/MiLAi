@@ -106,7 +106,9 @@ def original_evidence_action(
             best = next((a for a in options if any(i in raw for i in selected(a))), best)
         return best.id
 
-    if (len(raw) >= reads or state.budget.get("remaining_control_steps") == 1
+    acquired_originals = sum(item["kind"] == "original_source"
+                             for item in state.observed_materials)
+    if (acquired_originals >= reads or state.budget.get("remaining_control_steps") == 1
             or (needs and coverage(acquired, needs) == len(needs))):
         return handoff()
 

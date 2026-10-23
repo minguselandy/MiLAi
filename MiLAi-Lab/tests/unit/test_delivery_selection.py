@@ -266,6 +266,31 @@ def test_simple_original_policy_stops_after_one_read_and_preserves_unfittable_ga
         assert not generated and len(canonical(small)) <= 500
 
 
+def test_irrelevant_acquired_originals_still_consume_simple_policy_read_cap(tmp_path):
+    from milai_lab.methods.cache_memory_policy import CacheMemoryPolicy
+    from milai_lab.methods.evidence_control import EvidenceOperations
+
+    with SqliteStore.from_conn_string(str(tmp_path / "db")) as store:
+        service = MemoryService(store, ("delivery", "alice"), "alice", tmp_path / "lock",
+                                functional_contract="functional_v1")
+        refs = [service.capture_user("probe", str(i), "Which receipt?",
+            capture_context="given_retrieval_request")["source_ref"] for i in range(3)]
+        refs += [service.capture_user("history", str(i), text)["source_ref"]
+                 for i, text in enumerate(["Receipt X was recorded.", "Another recorded field."])]
+        state = MemoryControlState(task={"request": "Find the missing condition",
+            "query_time": "", "read_goal": {"evidence": ["original_source"]}})
+        ops = EvidenceOperations(service, state, load_pool=lambda: original_pool(service, refs),
+            refresh_call=lambda *_: pytest.fail("No View required"), fits=lambda _: True,
+            delivery_selection=True)
+        for name in ("search", "read_0_observe", "read_1_observe", "read_2_observe",
+                     "read_3_observe"):
+            ops.execute(next(a for a in ops.actions(state) if a.id == name), state)
+        actions = ops.actions(state)
+        assert any(a.id == "read_4_observe" for a in actions)  # Executor can still read.
+        choice = CacheMemoryPolicy(reads=4).choose(state, actions)
+        assert next(a.kind for a in actions if a.id == choice) == "HANDOFF"
+
+
 def test_refresh_keeps_older_acquired_view_as_a_distinct_delivery_choice(tmp_path):
     from milai_lab.methods.evidence_control import EvidenceOperations
     from milai_lab.methods.memory_control import MemoryControlState
