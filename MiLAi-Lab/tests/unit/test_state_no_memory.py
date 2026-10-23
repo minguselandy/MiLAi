@@ -49,7 +49,11 @@ def test_no_memory_agent_keeps_public_turn_gate_and_strips_hidden_context():
         make_state_agent(Model(), None, runtime, initial_retrieval={"query": "memory"})
 
 
-def test_cli_runs_native_domain_without_memory_storage_or_receipts(tmp_path, monkeypatch):
+@pytest.mark.parametrize("host_instructions", [
+    None, "Separate observed premises from conditional quotes."])
+def test_cli_runs_native_domain_without_memory_storage_or_receipts(
+    tmp_path, monkeypatch, host_instructions,
+):
     state_bench = pytest.importorskip("state_bench")
     import run_state_bench_local_pilot as cli
 
@@ -68,6 +72,8 @@ def test_cli_runs_native_domain_without_memory_storage_or_receipts(tmp_path, mon
         "stage_enable_thinking": {"state_simulator": False},
         "budget_path": str(budget_path), "http_ownership_profile": PROFILE,
         "http_ownership_domain": {"deployment_id": "unit-no-memory", "clients": [host]}}
+    if host_instructions is not None:
+        settings["state_host_instructions"] = host_instructions
     config = tmp_path / "config.json"
     write_json(config, {"entrypoints": {"functional": settings}})
     requests = []
@@ -76,6 +82,10 @@ def test_cli_runs_native_domain_without_memory_storage_or_receipts(tmp_path, mon
         payload = json.loads(request.content)
         requests.append(payload)
         assert "retrieve_learnings" not in json.dumps(payload)
+        prompt = payload["messages"][0]["content"]
+        is_simulator = payload["messages"][-1]["content"].startswith("CONVERSATION SO FAR:")
+        if host_instructions is not None:
+            assert (host_instructions in prompt) is not is_simulator
         if len(requests) == 1:
             result = {"calls": [{"name": "cancel_booking",
                                  "arguments": {"booking_id": "BK-1000", "confirm": True}}]}
@@ -106,6 +116,7 @@ def test_cli_runs_native_domain_without_memory_storage_or_receipts(tmp_path, mon
     run = read_json(tmp_path / "run/run.json")
     assert run["status"] == "COMPLETED_RESEARCH_TRAJECTORY"
     assert run["memory_calls"] == 0 and run["memory_policy"] is None
+    assert run["state_host_instructions"] == (host_instructions or "")
     assert run["memory_control_configuration"] is None and run["max_return_tokens"] is None
     assert "source_import_receipts" not in run
     assert not (tmp_path / "run/memory.sqlite").exists()

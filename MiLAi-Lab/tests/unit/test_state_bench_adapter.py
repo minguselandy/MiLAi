@@ -275,8 +275,10 @@ def test_state_selected_pool_uses_actual_hook_and_records_nested_compute(tmp_pat
 
 @pytest.mark.parametrize("frozen_request", [False, True])
 @pytest.mark.parametrize("readonly", [False, True])
+@pytest.mark.parametrize("host_instructions", [
+    "", "Separate observed premises from conditional quotes."])
 def test_public_sdk_executes_real_sandbox_write_without_hidden_context(
-    tmp_path, frozen_request, readonly,
+    tmp_path, frozen_request, readonly, host_instructions,
 ):
     sdk = pytest.importorskip("state_bench.agents.base")
     from state_bench.domain import get_domain_config
@@ -302,6 +304,8 @@ def test_public_sdk_executes_real_sandbox_write_without_hidden_context(
         text = "\n".join(m["content"] for m in payload["messages"])
         assert hidden not in text
         assert "retrieve_learnings" in text and "book_hotel" in text
+        if host_instructions:
+            assert payload["messages"][0]["content"].count(host_instructions) == 1
         step = len(requests) + int(frozen_request)
         if step == 1:
             action = {"calls": [{"name": "retrieve_learnings",
@@ -347,6 +351,7 @@ def test_public_sdk_executes_real_sandbox_write_without_hidden_context(
         model = VLLMChatModel(client=client)
         frames = []
         agent = make_state_agent(model, hook, runtime, observe_host=frames.append,
+            host_instructions=host_instructions,
             initial_retrieval={"query": "hotel inventory identifier", "top_k": 3}
             if frozen_request else None)
         assert agent.runtime_context.task_id == "mechanical"
@@ -371,6 +376,8 @@ def test_public_sdk_executes_real_sandbox_write_without_hidden_context(
         assert frames[0]["response"]["tool_calls"][0]["name"] == "retrieve_learnings"
         assert frames[1]["conversation"][1]["tool_calls"][0]["result"] == calls[0]["result"]
         assert frames[-1]["response"]["text"] == "Booked."
+        if host_instructions:
+            assert all(frame["system_prompt"].count(host_instructions) == 1 for frame in frames)
         if readonly:
             assert isinstance(calls[0]["result"], list) and len(calls[0]["result"]) <= 3
             assert list(store.conn.iterdump()) == before

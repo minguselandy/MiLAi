@@ -225,6 +225,7 @@ class StateReadOnlyMemoryHook:
 def make_state_agent(model: Any, hook: StateMemoryHook | StateReadOnlyMemoryHook | None,
                      runtime_context: Any, *,
                      initial_retrieval: dict[str, Any] | None = None,
+                     host_instructions: str = "",
                      observe_host: Callable[[dict[str, Any]], None] = lambda _: None) -> Any:
     """Use the public BaseAgent hook without retaining hidden evaluator context."""
     from state_bench.agents.base import AgentRuntimeContext, AgentTurnResponse, BaseAgent
@@ -250,6 +251,8 @@ def make_state_agent(model: Any, hook: StateMemoryHook | StateReadOnlyMemoryHook
         def generate_next_turn(self, *, system_prompt: str, conversation: list[dict[str, Any]],
                                tools: list[dict[str, Any]]) -> Any:
             nonlocal initial_retrieval, public_turn
+            if host_instructions:
+                system_prompt += "\n\n" + host_instructions
             if hook is not None:
                 if hook.bind_conversation(conversation):
                     model.begin_public_message(hook.turn)

@@ -3,6 +3,8 @@
 Uses the public orchestrator directly, not the official CLI/protocol or its hash
 validation. Domain tools/prompts remain upstream; local Host/simulator, JSON-action,
 public observation capture and optional Views are explicit dynamic-research choices.
+Optional entrypoints.functional.state_host_instructions appends literal instructions
+to the Host only; the default preserves the upstream domain prompt.
 """
 from __future__ import annotations
 
@@ -117,6 +119,7 @@ def main() -> None:
     settings = read_json(args.config)["entrypoints"]["functional"]
     host_config = VLLMConfig(**settings["host"])
     simulator_thinking = settings.get("stage_enable_thinking", {}).get("state_simulator")
+    host_instructions = settings.get("state_host_instructions", "")
     embedding_config = (VLLMConfig(**settings["embedding"])
                         if args.memory_protocol != "none" and args.policy == "mempursuit" else None)
     clients = [asdict(host_config)]
@@ -131,6 +134,7 @@ def main() -> None:
         "environment_file": str(env_path), "source_selection": selection,
         "host_and_simulator": asdict(host_config), "judge": "NOT_RUN",
         "simulator_enable_thinking_override": simulator_thinking,
+        "state_host_instructions": host_instructions,
         "memory_policy": args.policy if args.memory_protocol != "none" else None,
         "return_envelope": "at most3strings; one full receipt"
             if args.memory_protocol != "none" else None,
@@ -252,6 +256,7 @@ def main() -> None:
                         "source_selection": selection, "trace_path": str(trace.path.resolve())})
             agent = make_state_agent(host, hook, runtime,
                 initial_retrieval=initial["arguments"] if initial else None,
+                host_instructions=host_instructions,
                 observe_host=observe_host)
             run["state_snapshot_files"] = [
                 "state-before.json", "state-after.json", "state-diff.json"]
