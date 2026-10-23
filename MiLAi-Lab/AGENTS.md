@@ -1,4 +1,50 @@
-# LATEST: 2026-10-23 STATE dynamic F5 three-arm run CLOSED; full goal ACTIVE
+# LATEST: 2026-10-23 F3 scopes verified; original savedCPU u128 LIVE
+
+Current functional source3eef6575. F3 adds HANDOFF retrieved_scope_indices over pre-existing
+candidate ranges wholly covered by actual acquisitions. No Store/body READ during selection,
+no token-cut boundaries, no lost full observations. Covered scopes of other candidates and
+three complementary originals are available; unread gaps/revoked bodies are not. New
+retrieved_scopes controller field exposes exact bounds/bodies; ordinary acquired-count stays
+unchanged. Fixed-context selects an admitted packet; raw policies and offline witness labels
+use the selected scope. Mechanical projection strips new bodies; shared projection is literal.
+3regressions failed onold8a;75relatedtests+61otherchecks(1optionalMemPursuitskip),finaldelivery21
+pass (overlapping suites,do not sum);Ruff,6module scopedtype,package/tools boundaries pass.
+
+Zero-model fresh-Store probe on original F5task1 query/same46source payloads:2contextREADs still,
+now1746token nonempty delivery vs original empty63. Full actual before IDs/clocks not reused;
+not task replay/repair or proof of relevance/Host benefit. bounded-context-delivery-v1 retained.
+
+New train task2 (native next order;memory histories1+3,target excluded)3arms TERMINAL:
+fixed_context state1 but user-control qualification (return/hotel previews and commits same
+turn);rules FAILED on simulator8192length,only outbound state changes;Laya FAILED before4th
+forward complete-input check,no business changes. No rules retry; unstarted Laya ran once.
+All20HTTP/96206tokens,newunknown0. Fixed1768/rules1171returns;Laya no receipt. Source relevance
+still poor (Atlanta history versus London task). Native3forwards/29422tokens;state3 needs
+16665=16070state+594head+separator at16384limit,281over. No actual truncation/4thforward.
+Object-sharing proposal saved0tokens; do not claim encoding/capacity solved. First failures intact.
+
+Original u64 tail84 CLOSED from frozen ORIGINAL source/inference,onlyindices792..875;never
+replayed0/32/oldprefix791/interrupted791. All875observed predictions verified against literal
+inputs+original lengths/finite outputs.791 has no gold:all616primary labels and16feedback now
+complete;originalfamilymacro.7096675983,421/616accepted,32families. Masked791 output staysUNKNOWN,
+not all876finite coverage or deployed selection. See saved-cpu-u64-tail84-v1/reconciliation.json.
+Tail1810.2978113CPU already billed. Original791successful-prediction CPU40098.843120582 lower
+bound recorded ONCE separately; original load/outerloop/unknown791 costs remainunknown.
+Newu64reconciliation/startup/u128prep4phases20.290949644CPU settledonce. F3/F5v2offline13phases
+59.572667623CPU settledonce;child465.262681632CPU alreadybilled. Oldpending/prior fees untouched.
+
+ONLY LIVE model: saved-cpu-u128-v1,driver2185772/child2185773/exec19679,latest24/876 snapshot.
+Revalidate actual/proc and run.json; do not restart. Original CPUFP32,threads4,shared_actions
+12288/head2048,reference_compileFalse,MHAfastpathFalse confirmed. Newoutput root under
+artifacts/evidence-gap-20261023;oldfrozen source/assets undertraining-generalization-20261021.
+No model job/probe/fit/E2 or ledger settlement while it lives. Remaining262/393/524,selection+
+selected-train,oldlegacy savedCPU,feedback32/64/128,newstatecomparison,seeds,LME/lifecycle/Host/
+external/protected/fullfigures remain. M1–M5 unproven;F1relevance/F2faithfulness/nativecapacity
+and simulator completion issues unresolved. No SHA/subagents/newservices/newledger/push.
+See progress-20261023-v4 and execution record for current paths/limits. New unmeasured reporting
+work remainsunknown; never re-bill the closed settlements above.
+
+# Earlier: 2026-10-23 STATE dynamic F5 three-arm run CLOSED; full goal ACTIVE
 
 Source8a824f72 adds rich read_goal passthrough, rules/cache/saved-Laya factory+metering to
 the existing STATE local runner, and captures actual public domain tool occurrences plus

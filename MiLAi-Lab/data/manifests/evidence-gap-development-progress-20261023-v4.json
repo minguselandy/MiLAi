@@ -1,0 +1,398 @@
+{
+  "status": "ACTIVE;F3_BOUNDED_SCOPE_DELIVERY_VERIFIED;SAVED_CPU128_LIVE;FULL_GOAL_INCOMPLETE",
+  "observed_at": "2026-10-23T06:01:20.230570+00:00",
+  "previous_goal_turn": "progress verified from current clean source,closed artifacts and absent processes before this turn",
+  "current_goal_turn": "progress: implemented range-faithful scope delivery,closed newtask2arms with failures,preserved all64outputs and completed unattemptedtail84,started original128candidate",
+  "source_version": "3eef6575",
+  "execution": "docs/TRAINING_GENERALIZATION_EXECUTION_20261021.md",
+  "plan": "docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261023.md",
+  "code_changes": [
+    "methods/evidence_control.py:finite scope HANDOFF candidates from actually acquired originals",
+    "methods/evidence_reading.py:literal covered-range projection,including actual fragment joins",
+    "methods/evidence_selection.py and memory_control.py:score/select actual admitted scope;no new acquisition count",
+    "methods/laya_memory_policy.py:full bindings,scope observation and mechanical body exclusion",
+    "methods/retrieval_supervision.py:scope-correct witnesses and range/context metadata costs"
+  ],
+  "F3_invariants": [
+    "original retrieval boundaries and previous context preserved",
+    "full acquired observations remain intact",
+    "no additional READ,Store lookup or token truncation for scope selection",
+    "unread gaps/different revisions/revoked bodies cannot become delivered evidence",
+    "covered candidates not individually read may be selected from actual larger acquisition",
+    "source identity/type/order/offsets and known-ref reopen preserved",
+    "labels describe delivered scope,not all controller-seen evidence"
+  ],
+  "validation": {
+    "before_change": "3newregressions failed on original8a824f72",
+    "affected_suite": {
+      "passed": 75
+    },
+    "additional_overlapping_suite": {
+      "passed": 61,
+      "skipped": 1
+    },
+    "final_delivery_suite": {
+      "passed": 21
+    },
+    "skip": "optional mempursuit absent",
+    "ruff": "PASS",
+    "scoped_mypy": "6modulesPASS with disclosed import-untyped/unused-ignore exclusions",
+    "package_and_tools_boundaries": "PASS existing toolinventory unchanged",
+    "full_suite": "not_run",
+    "remote_CI": "not_run"
+  },
+  "delivery_probe": {
+    "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/bounded-context-delivery-v1/result.json",
+    "sources": 46,
+    "model_calls": 0,
+    "full_return_tokens": 1746,
+    "read_operations": 2,
+    "actions": [
+      "search_0_8",
+      "search_0_16",
+      "context_0",
+      "context_2",
+      "handoff_select_0_retrieved_0"
+    ],
+    "scope": "Same46publicsource payloads and original actual query on a fresh Store. Source IDs/capture clocks are new; not an exact-before replay or a repaired task outcome. Scope/actor relevance still requires review."
+  },
+  "new_task_experiment": {
+    "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-dynamic-f5-v2/review-results.json",
+    "target": "2-cancel_business_international",
+    "sources": 39,
+    "exposure": "next native training task,already exposed; target trajectory excluded;sharedhistory3/domain,no independent-family claim",
+    "generation_requests": 20,
+    "generation_tokens": 96206,
+    "new_unknown": 0,
+    "official_protocol": false,
+    "arms": [
+      {
+        "policy": "fixed_context",
+        "run_status": "COMPLETED_RESEARCH_TRAJECTORY",
+        "error": null,
+        "state_score": {
+          "score": 1,
+          "reasoning": "All required state assertions matched the saved state_diff."
+        },
+        "generation_requests": 11,
+        "generation_tokens": 51483,
+        "new_unknown": 0,
+        "completed_native_forwards": 0,
+        "native_input_tokens": 0,
+        "known_native_max_tokens": null,
+        "actual_actions": [
+          "search_0_8",
+          "search_0_16",
+          "context_0",
+          "context_3",
+          "handoff_select_4_retrieved_4"
+        ],
+        "author_review": {
+          "task_state": "All native state requirements achieved",
+          "interaction": "User asked for return-flight/hotel previews after authorizing outbound cancellation; Host performed previews and commits in the same turn, without separately presenting their fees and receiving later confirmation. Keep this control/communication qualification separate from state score1.",
+          "task_success": "QUALIFIED_STATE_SUCCESS;FULL_USER_CONTROL_NOT_ESTABLISHED"
+        }
+      },
+      {
+        "policy": "rules",
+        "run_status": "FAILED",
+        "error": "VLLM_CHAT_TRUNCATED",
+        "state_score": {
+          "score": 0,
+          "reasoning": "State requirements failed: missing_assertions=6",
+          "details": {
+            "missing_assertions": [
+              {
+                "entity_type": "bookings",
+                "record_key": "BK-1003",
+                "field": "cancellation_fee",
+                "value": 96
+              },
+              {
+                "entity_type": "bookings",
+                "record_key": "BK-1003",
+                "field": "refund_amount",
+                "value": 384
+              },
+              {
+                "entity_type": "bookings",
+                "record_key": "BK-1003",
+                "field": "status",
+                "value": "cancelled"
+              },
+              {
+                "entity_type": "hotels",
+                "record_key": "HR-0100",
+                "field": "cancellation_fee",
+                "value": 0
+              },
+              {
+                "entity_type": "hotels",
+                "record_key": "HR-0100",
+                "field": "refund_amount",
+                "value": 1540
+              },
+              {
+                "entity_type": "hotels",
+                "record_key": "HR-0100",
+                "field": "status",
+                "value": "cancelled"
+              }
+            ]
+          }
+        },
+        "generation_requests": 8,
+        "generation_tokens": 41146,
+        "new_unknown": 0,
+        "completed_native_forwards": 0,
+        "native_input_tokens": 0,
+        "known_native_max_tokens": null,
+        "actual_actions": [
+          "search_0_8",
+          "search_0_16",
+          "read_0",
+          "read_1",
+          "read_4",
+          "read_5",
+          "read_6",
+          "read_7"
+        ],
+        "author_review": {
+          "task_state": "Only outbound cancelled;6required return/hotel assertions missing",
+          "interaction": "Simulator completion hit8192token limit; first failure preserved,no rerun or synthetic user reply.",
+          "task_success": "FAILED_SIMULATOR_LENGTH;PARTIAL_STATE0"
+        }
+      },
+      {
+        "policy": "laya",
+        "run_status": "FAILED",
+        "error": "Finite decision input exceeds declared complete-input capacity",
+        "state_score": {
+          "score": 0,
+          "reasoning": "State requirements failed: missing_assertions=9",
+          "details": {
+            "missing_assertions": [
+              {
+                "entity_type": "bookings",
+                "record_key": "BK-1000",
+                "field": "cancellation_fee",
+                "value": 72
+              },
+              {
+                "entity_type": "bookings",
+                "record_key": "BK-1000",
+                "field": "refund_amount",
+                "value": 828
+              },
+              {
+                "entity_type": "bookings",
+                "record_key": "BK-1000",
+                "field": "status",
+                "value": "cancelled"
+              },
+              {
+                "entity_type": "bookings",
+                "record_key": "BK-1003",
+                "field": "cancellation_fee",
+                "value": 96
+              },
+              {
+                "entity_type": "bookings",
+                "record_key": "BK-1003",
+                "field": "refund_amount",
+                "value": 384
+              },
+              {
+                "entity_type": "bookings",
+                "record_key": "BK-1003",
+                "field": "status",
+                "value": "cancelled"
+              },
+              {
+                "entity_type": "hotels",
+                "record_key": "HR-0100",
+                "field": "cancellation_fee",
+                "value": 0
+              },
+              {
+                "entity_type": "hotels",
+                "record_key": "HR-0100",
+                "field": "refund_amount",
+                "value": 1540
+              },
+              {
+                "entity_type": "hotels",
+                "record_key": "HR-0100",
+                "field": "status",
+                "value": "cancelled"
+              }
+            ]
+          }
+        },
+        "generation_requests": 1,
+        "generation_tokens": 3577,
+        "new_unknown": 0,
+        "completed_native_forwards": 3,
+        "native_input_tokens": 29422,
+        "known_native_max_tokens": 10524,
+        "actual_actions": [
+          "search_0_8",
+          "context_4",
+          "read_0"
+        ],
+        "author_review": {
+          "task_state": "No sandbox business changes",
+          "interaction": "Fourth decision rejected complete16665token input at16384limit after3successful forwards; no input clipping or repaired memory/Host answer.",
+          "task_success": "FAILED_CONTROLLER_CAPACITY;STATE0"
+        }
+      }
+    ]
+  },
+  "capacity_failure": {
+    "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/scope-capacity-v1.json",
+    "failed_state": {
+      "step": 3,
+      "state_tokens": 16070,
+      "full_head_tokens": 594,
+      "limited_head_tokens": 594,
+      "head_was_truncated": false,
+      "sequence_tokens": 16384,
+      "stats": {
+        "state_tokens": 16070,
+        "state_tokens_used": 15789,
+        "state_tokens_dropped": 281,
+        "truncated": true
+      },
+      "actions": 29,
+      "retrieved_scopes": 5,
+      "actual_forward_completed": false
+    },
+    "candidate_object_sharing_probe": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/scope-object-sharing-probe-v1.json",
+    "outcome": "16665total needs281more than16384;head594untruncated. Extraobjectsharing saved0tokens;no source/action removal or artificial pass."
+  },
+  "old_u64": {
+    "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-u64-tail84-v1/reconciliation.json",
+    "tail_only_original_indices": [
+      792,
+      875
+    ],
+    "tail_completed": 84,
+    "old_outputs_retained": 791,
+    "observed_outputs": 875,
+    "missing_masked_output": [
+      791
+    ],
+    "primary_original_rows": 860,
+    "primary_labelled_complete": 616,
+    "primary_masked_rows": 244,
+    "feedback_complete": 16,
+    "primary": {
+      "counts": {
+        "labelled": 616,
+        "accepted": 421,
+        "handoff_outside_reviewed_preference": 74
+      },
+      "strata": {
+        "source_reviewed_preference": {
+          "labelled": 616,
+          "accepted": 421
+        }
+      },
+      "selected_operations": {
+        "SEARCH": {
+          "selected": 111,
+          "accepted": 111
+        },
+        "READ": {
+          "selected": 337,
+          "accepted": 216
+        },
+        "HANDOFF": {
+          "selected": 168,
+          "accepted": 94
+        }
+      },
+      "families": 32,
+      "family_macro_acceptance": 0.7096675983429561,
+      "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+    },
+    "deployment_selection": null,
+    "coverage_limit": "not all876finite inference;interrupted no-gold row keptunknown;primary metric skipsmasked rows before prediction access",
+    "original_frozen_inference": {
+      "device": "cpu",
+      "threads": 4,
+      "max_len": 12288,
+      "head_max_len": 2048,
+      "operation_state": "shared_actions",
+      "reference_compile_override": false,
+      "mha_fastpath_enabled": false,
+      "loaded_weight_dtype": "torch.float32"
+    }
+  },
+  "active_model": {
+    "root": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-u128-v1",
+    "driver": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-u128-v1/driver.json",
+    "driver_pid": 2185772,
+    "child_pid": 2185773,
+    "session": 19679,
+    "status": "RUNNING",
+    "update": 128,
+    "completed": 41,
+    "planned": 876,
+    "inference": {
+      "device": "cpu",
+      "visible_cuda_devices": "",
+      "threads": 4,
+      "max_len": 12288,
+      "head_max_len": 2048,
+      "operation_state": "shared_actions",
+      "reference_compile_override": false,
+      "mha_fastpath_enabled": false,
+      "loaded_weight_dtype": "torch.float32"
+    },
+    "plan": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-u128-v1/plan.json",
+    "constraint": "No second model/probe/fit/E2 or offline settlement while live;revalidate actualprocess,never restart on observation timeout"
+  },
+  "accounting": {
+    "F3_F5v2_settlement": {
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-dynamic-f5-v2/offline-settlement.json",
+      "phase": "evidence_gap_20261023_f3_and_state_f5_v2_offline_v1",
+      "measures": {
+        "cpu_seconds": 59.572667623000015,
+        "measured_phases": 13,
+        "runs": 1
+      },
+      "child_CPU_already_billed": 465.26268163199995
+    },
+    "u64_tail_CPU_already_billed": 1810.2978113,
+    "u64_prefix_known_lower_bound": {
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-u64-tail84-v1/settlement.json",
+      "phase": "training_generalization_source256_actions_full_seed0_u524_v1_saved_cpu_u64_interrupted_observed791_v1",
+      "measures": {
+        "cpu_seconds": 40098.843120582016,
+        "forwards": 791,
+        "input_tokens": 4043118,
+        "partial_runs": 1
+      },
+      "unknown": "Original load/outer-loop/unknown791 costs are unmeasured;not zero."
+    },
+    "u64_reconciliation_settlement": {
+      "phase": "evidence_gap_20261023_saved_cpu_u64_reconciliation_v1",
+      "measures": {
+        "cpu_seconds": 20.29094964400019,
+        "measured_phases": 4,
+        "runs": 1
+      }
+    },
+    "old0_32_and_other_prior_pending": "unchanged;notrebilled",
+    "unmeasured": "authoring/tests/other preparation/reporting and ledger overhead unknown;live128 costs pending its finalization"
+  },
+  "remaining": "Original128/262/393/524 andselectedtrain/selection;otheroriginalfit/feedback32/64/128,T2/newinitialpostcomparison,seeds;F1relevance,F2faithfulness,current nativecapacity/simulatorcompletion;LME/lifecycle/Host/officialreadonly/external/protected/fullfigures. M1-M5 unproven.",
+  "Product_API_Schema_permissions_Canonical_changed": false,
+  "Lab_control_observation_and_action_fields_changed": true,
+  "no_sha_or_content_fingerprint_validation": true,
+  "no_subagents": true,
+  "no_new_services_or_ledger": true,
+  "no_remote_writes": true,
+  "goal_complete": false
+}
