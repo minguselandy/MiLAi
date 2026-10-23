@@ -269,6 +269,144 @@ def test_equal_clock_late_arrival_below_old_cursor_is_delivered_to_refresh(tmp_p
         assert {first, late} == set(boundary)
 
 
+@pytest.mark.parametrize("paged", [False, True])
+@pytest.mark.parametrize("view_policy", ["incremental", "version_cache", "rebuild"])
+@pytest.mark.parametrize("restore", [False, True])
+def test_excluded_user_arrival_survives_a_later_tool_cursor(
+    tmp_path, paged, view_policy, restore,
+):
+    from milai_lab.methods.cache_memory_policy import CacheMemoryPolicy
+
+    now = [datetime(2032, 7, 2, 9, tzinfo=UTC)]
+    with SqliteStore.from_conn_string(str(tmp_path / "db")) as store:
+        service = service_at(store, tmp_path, clock=lambda: now[0])
+        service.capture_user("history", "old", "My meal preference is vegetarian.")
+        now[0] = datetime(2032, 7, 2, 10, tzinfo=UTC)
+        preference = service.capture_user("live", "first", "I now prefer vegan meals.")[
+            "source_ref"]
+        now[0] = datetime(2032, 7, 2, 11, tzinfo=UTC)
+        receipt = service.capture_tool("live", "lookup", "lookup", "The account is active.", None)
+        inputs = []
+
+        def generate(messages, schema):
+            inputs.append(json.loads(messages[-1]["content"]))
+            return interpret(messages, schema)
+
+        def operations(excluded):
+            state = MemoryControlState(task={"request": "meal preference", "query_time": ""})
+            ops = EvidenceOperations(service, state, load_pool=lambda: [], refresh_call=generate,
+                fits=lambda _: True, excluded_source_refs=(excluded,),
+                source_observation=SourceObservationBudget(10000, len) if paged else None,
+                view_policy=view_policy)
+            return state, ops
+
+        state, ops = operations(preference)
+        if restore:
+            saved = json.loads(json.dumps(ops.checkpoint()))
+            ops = EvidenceOperations(service, state, load_pool=lambda: [], refresh_call=generate,
+                fits=lambda _: True, excluded_source_refs=(), checkpoint=saved,
+                source_observation=SourceObservationBudget(10000, len) if paged else None,
+                view_policy=view_policy)
+        ops.execute(next(a for a in ops.actions(state) if a.id == "refresh_view"), state)
+        assert "I now prefer vegan meals." not in {s["text"] for s in inputs[-1]["sources"]}
+        view = cached_structures(service, 1)["current"]
+        assert view["arrival_cursor"][0] == service.source(receipt["source_ref"])["observed_at"]
+        now[0] = datetime(2032, 7, 2, 12, tzinfo=UTC)
+        question = service.capture_user("live", "second", "What meal do I prefer?")["source_ref"]
+        state, ops = operations(question)
+        assert preference in {event["source_ref"] for event in state.new_events}
+        assert preference in state.views[0]["pending_events"]
+        assert CacheMemoryPolicy().choose(state, ops.actions(state)) == "refresh_view"
+        ops.execute(next(a for a in ops.actions(state) if a.id == "refresh_view"), state)
+        assert "I now prefer vegan meals." in {s["text"] for s in inputs[-1]["sources"]}
+        assert cached_structures(service, 1)["current"]["arrival_cursor"] == view["arrival_cursor"]
+        state, ops = operations(question)
+        assert not state.views[0]["pending_events"]
+        if view_policy == "incremental":
+            assert CacheMemoryPolicy().choose(state, ops.actions(state)) == "use_view"
+        assert service.source(preference)["content"] == "I now prefer vegan meals."
+
+
+def test_forgotten_deferred_source_is_not_observed_or_delivered(tmp_path):
+    now = [datetime(2032, 7, 2, 9, tzinfo=UTC)]
+    with SqliteStore.from_conn_string(str(tmp_path / "db")) as store:
+        service = service_at(store, tmp_path, clock=lambda: now[0])
+        secret = service.capture_user("live", "first", "PRIVATE_CURRENT_USER_STATEMENT")[
+            "source_ref"]
+        now[0] = datetime(2032, 7, 2, 10, tzinfo=UTC)
+        receipt = service.capture_tool("live", "lookup", "lookup", "Public account status.", None)[
+            "source_ref"]
+        build_query_structure(service, "account", "", [receipt], policy="incremental",
+            call=interpret, source_events=[service.source(receipt)], excluded_source_refs=(secret,))
+        assert cached_structures(service, 1)["current"]["deferred_source_refs"] == [secret]
+        handle = service.source_fragments(secret)[0]["fragment_handle"]
+        service.forget("live", "forget", fragment_handles=[handle])
+        assert service.source(secret) is None
+        now[0] = datetime(2032, 7, 2, 11, tzinfo=UTC)
+        question = service.capture_user("live", "second", "What is the account status?")[
+            "source_ref"]
+
+        def operations():
+            state = MemoryControlState(task={"request": "account", "query_time": ""})
+            return state, EvidenceOperations(service, state, load_pool=lambda: [],
+                refresh_call=interpret, fits=lambda _: True, excluded_source_refs=(question,),
+                source_observation=SourceObservationBudget(10000, len))
+
+        state, ops = operations()
+        assert not state.new_events and not state.views[0]["pending_events"]
+        ops.execute(next(a for a in ops.actions(state) if a.id == "use_view"), state)
+        visible = canonical(state.project()) + canonical(ops.reader_evidence())
+        assert secret not in visible and "PRIVATE_CURRENT_USER_STATEMENT" not in visible
+        now[0] = datetime(2032, 7, 2, 12, tzinfo=UTC)
+        service.capture_tool("live", "updated", "lookup", "Public account update.", None)
+        state, ops = operations()
+        ops.execute(next(a for a in ops.actions(state) if a.id == "refresh_view"), state)
+        view = cached_structures(service, 1)["current"]
+        assert secret not in view.get("deferred_source_refs", [])
+
+
+def test_deferred_occurrences_keep_identity_and_each_view_own_pending_state(tmp_path):
+    now = [datetime(2032, 7, 2, 9, tzinfo=UTC)]
+    with SqliteStore.from_conn_string(str(tmp_path / "db")) as store:
+        service = service_at(store, tmp_path, clock=lambda: now[0])
+        first = service.capture_user("live", "first", "A repeated public statement.")["source_ref"]
+        second = service.capture_user("live", "second", "A repeated public statement.")[
+            "source_ref"]
+        now[0] = datetime(2032, 7, 2, 10, tzinfo=UTC)
+        receipt = service.capture_tool("live", "lookup", "lookup", "Public status.", None)[
+            "source_ref"]
+        build_query_structure(service, "statement", "", [receipt], policy="incremental",
+            call=interpret, source_events=[service.source(receipt)], capacity=2,
+            excluded_source_refs=(first, second))
+        build_query_structure(service, "statement", "", [receipt, first], policy="incremental",
+            call=interpret, source_events=[service.source(receipt), service.source(first)],
+            capacity=2, slot="slot1", excluded_source_refs=(second,))
+        now[0] = datetime(2032, 7, 2, 11, tzinfo=UTC)
+        question = service.capture_user("live", "third", "What was stated?")["source_ref"]
+        inputs = []
+
+        def generate(messages, schema):
+            inputs.append(json.loads(messages[-1]["content"]))
+            return interpret(messages, schema)
+
+        def operations():
+            state = MemoryControlState(task={"request": "statement", "query_time": ""})
+            return state, EvidenceOperations(service, state, load_pool=lambda: [],
+                refresh_call=generate, fits=lambda _: True, excluded_source_refs=(question,),
+                view_capacity=2, source_observation=SourceObservationBudget(10000, len))
+
+        state, ops = operations()
+        assert {event["source_ref"] for event in state.new_events} == {first, second}
+        pending = {view["slot"]: set(view["pending_events"]) for view in state.views}
+        assert pending == {"current": {first, second}, "slot1": {second}}
+        ops.execute(next(a for a in ops.actions(state) if a.id == "refresh_view_current"), state)
+        repeated = [s for s in inputs[-1]["sources"] if s["text"] == "A repeated public statement."]
+        assert len(repeated) == 2 and len({s["id"] for s in repeated}) == 2
+        state, _ = operations()
+        pending = {view["slot"]: set(view["pending_events"]) for view in state.views}
+        assert pending == {"current": set(), "slot1": {second}}
+
+
 def test_normal_host_runner_uses_declared_page_budget_and_full_bank_search(tmp_path, monkeypatch):
     from langchain_core.messages import ToolMessage
     from test_v13_5_functional_integration import prepared, scripted

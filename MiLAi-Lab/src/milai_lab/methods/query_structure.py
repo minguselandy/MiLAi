@@ -179,6 +179,7 @@ def build_query_structure(
     replace_slot: bool = False,
     retrieval_request: dict[str, Any] | None = None,
     arrival_coverage: dict[str, Any] | None = None,
+    excluded_source_refs: tuple[str, ...] = (),
 ) -> tuple[dict[str, Any] | None, dict[str, Any]]:
     """Reuse, reconstruct or incrementally refresh the same actually retrieved scope.
 
@@ -198,23 +199,28 @@ def build_query_structure(
     events = service.sources() if source_events is None else source_events
     by_ref = {source["event_id"]: source for source in events}
     pool = sorted(set(source_refs) & set(by_ref))
-    cursor = max(([source["observed_at"], source["event_id"]] for source in events), default=[])
-    boundary_refs = [source["event_id"] for source in events
-                     if cursor and source["observed_at"] == cursor[0]]
+    observed_cursor = max(([source["observed_at"], source["event_id"]]
+                           for source in events), default=[])
+    observed_boundary = [source["event_id"] for source in events
+                         if observed_cursor and source["observed_at"] == observed_cursor[0]]
     if arrival_coverage is not None:
         # Search may select a source beyond the observed arrival prefix. Its body
         # can support a view without acknowledging the intervening unseen sources.
-        cursor = max(prior["arrival_cursor"] if prior else [], arrival_coverage["cursor"])
-        boundary_refs = list(dict.fromkeys([
-            *(prior.get("arrival_boundary_refs", [prior["arrival_cursor"][1]])
-              if prior and prior["arrival_cursor"] and cursor
-              and prior["arrival_cursor"][0] == cursor[0] else []),
-            *(arrival_coverage["boundary_refs"] if arrival_coverage["cursor"] and cursor
-              and arrival_coverage["cursor"][0] == cursor[0] else [])]))
+        observed_cursor = arrival_coverage["cursor"]
+        observed_boundary = arrival_coverage["boundary_refs"]
+    # Reopening a deferred source below the watermark must not forget later arrivals.
+    cursor = max(prior["arrival_cursor"] if prior else [], observed_cursor)
+    boundary_refs = list(dict.fromkeys([
+        *(prior.get("arrival_boundary_refs", [prior["arrival_cursor"][1]])
+          if prior and prior["arrival_cursor"] and cursor
+          and prior["arrival_cursor"][0] == cursor[0] else []),
+        *(observed_boundary if observed_cursor and cursor
+          and observed_cursor[0] == cursor[0] else [])]))
     valid = prior is not None and prior["policy"] == policy and _sources_valid(
         service, prior["source_bindings"])
     arrivals = ([source["event_id"] for source in events
-                 if not prior["arrival_cursor"]
+                 if source["event_id"] in prior.get("deferred_source_refs", [])
+                 or not prior["arrival_cursor"]
                  or source["observed_at"] > prior["arrival_cursor"][0]
                  or (source["observed_at"] == prior["arrival_cursor"][0]
                      and source["event_id"] not in prior.get(
@@ -318,6 +324,15 @@ def build_query_structure(
             raise FunctionalRejection("QUERY_STRUCTURE_RULE_NODE_UNAVAILABLE")
     structure = {"scope": response["scope"], "nodes": nodes, "rules": rules,
                  "unresolved": response["unresolved"]}
+    # A current request can precede a later tool arrival that advances the cursor.
+    # Keep that occurrence pending until a future refresh actually receives its body.
+    interpreted = {binding["source_ref"] for binding in bindings.values()}
+    deferred_candidates = [ref for ref in dict.fromkeys([
+        *(prior.get("deferred_source_refs", []) if prior else []), *excluded_source_refs])
+        if ref not in interpreted]
+    deferred = [ref for ref in deferred_candidates if service.source(ref) is not None]
+    if deferred_candidates:
+        report["deferred_source_visibility_checks"] = len(deferred_candidates)
     revision = cached.value["revision"] + 1 if cached else 1
     identifier = (f"query-structure:{revision}" if slot == "current"
                   else f"query-structure:{slot}:{revision}")
@@ -329,6 +344,7 @@ def build_query_structure(
         **({"retrieval_request": retrieval_request} if retrieval_request else {}),
         "arrival_cursor": cursor, "retrieved_sources": pool, "query_time": date,
         "arrival_boundary_refs": boundary_refs,
+        **({"deferred_source_refs": deferred} if deferred else {}),
         "index_text": response["scope"], "visibility": "visible", "body_delivered": True,
         "semantics": "source_bound_model_interpretation; all AND (OR of AND any routes); "
                      "unknown is not false; apply temporal rules at current query time"}

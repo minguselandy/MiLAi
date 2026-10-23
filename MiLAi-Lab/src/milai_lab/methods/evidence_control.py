@@ -101,6 +101,7 @@ class EvidenceOperations:
         self.history_pages: dict[str, dict[str, Any]] = {}
         self.observed_source_attempts: set[tuple[str, int, int]] = set()
         self.visibility_epoch = service.forget_epoch
+        self.excluded_source_refs = list(excluded_source_refs)
         self.views = cached_structures(service, view_capacity) if internal_views else {}
         started = time.perf_counter()
         cursors = [v["arrival_cursor"][0] for v in self.views.values() if v["arrival_cursor"]]
@@ -112,6 +113,13 @@ class EvidenceOperations:
                                   for v in boundary_views)) if boundary_views else set()
         arrivals = [e for e in feed["events"] if e["event_id"] not in excluded_source_refs
                     and (e["observed_at"] != since or e["event_id"] not in seen)]
+        deferred = {ref for view in self.views.values()
+                    for ref in view.get("deferred_source_refs", [])}
+        arrival_refs = {source["event_id"] for source in arrivals}
+        deferred_lookups = sorted(deferred - arrival_refs - set(excluded_source_refs))
+        arrivals.extend(source for ref in deferred_lookups
+                        if (source := service.source(ref)) is not None)
+        arrivals.sort(key=lambda source: (source["observed_at"], source["event_id"]))
         by_ref = {e["event_id"]: e for e in arrivals}
         bound_refs = {b["source_ref"] for view in [
             *self.views.values(), *(item for item in self.known_materials
@@ -125,7 +133,8 @@ class EvidenceOperations:
         self.source_directory = by_ref
         state.budget.update(source_inventory_wall_seconds=time.perf_counter() - started,
             visible_sources_enumerated=len(self.events), source_feed_rows=feed["rows_materialized"],
-            source_discovery=feed["query"], bound_source_lookups=len(bound_refs))
+            source_discovery=feed["query"], bound_source_lookups=len(bound_refs),
+            **({"deferred_source_lookups": len(deferred_lookups)} if deferred_lookups else {}))
         state.new_events = [{"source_ref": e["event_id"], "role": e["role"],
             "content": body_text(e), "origin": e.get("origin"),
             **({"capture_context": e["capture_context"]} if "capture_context" in e else {}),
@@ -154,7 +163,9 @@ class EvidenceOperations:
             search_attempts=sorted(self.search_attempts), attempted=sorted(self.attempted),
             used=sorted(self.used), refreshed_inputs=sorted(self.refreshed_inputs),
             observed_source_attempts=sorted(self.observed_source_attempts),
-            source_pages=self.source_pages.checkpoint() if self.source_pages else None)
+            source_pages=self.source_pages.checkpoint() if self.source_pages else None,
+            **({"excluded_source_refs": self.excluded_source_refs}
+               if self.excluded_source_refs else {}))
         return copy.deepcopy(values)
 
     def restore_checkpoint(self, saved: dict[str, Any],
@@ -173,6 +184,7 @@ class EvidenceOperations:
                                 for slot, refs, replace in saved["refreshed_inputs"]}
         self.observed_source_attempts = {(ref, start, end)
                                         for ref, start, end in saved["observed_source_attempts"]}
+        self.excluded_source_refs = list(saved.get("excluded_source_refs", []))
         self.source_pages = None
         if saved["source_pages"] is not None:
             assert source_observation is not None
@@ -194,6 +206,8 @@ class EvidenceOperations:
 
     @staticmethod
     def pending(view: dict[str, Any], event: dict[str, Any]) -> bool:
+        if event["source_ref"] in view.get("deferred_source_refs", []):
+            return True
         cursor = view["arrival_cursor"]
         if not cursor:
             return True
@@ -742,7 +756,8 @@ class EvidenceOperations:
                     source_events=events, force_refresh=True, slot=slot,
                     capacity=self.view_capacity, replace_slot=replace,
                     retrieval_request=state.task.get("retrieval_request"),
-                    arrival_coverage=coverage)
+                    arrival_coverage=coverage,
+                    excluded_source_refs=tuple(self.excluded_source_refs))
             except (FunctionalRejection, ValidationError) as error:
                 # These checks precede the cache write. Preserve a definite failure
                 # as feedback; the attempted input cannot silently be regenerated.
