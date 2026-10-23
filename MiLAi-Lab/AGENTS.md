@@ -1,4 +1,26 @@
-# LATEST: 2026-10-24 original primary-dev selection COMPLETE; matching train LIVE
+# LATEST: 2026-10-24 frozen feedback v2 initialization BOUND; matching train LIVE
+
+Original feedback-expansion-study-plan-v2 (I2 amendment, frozen2a179b58) now has its intended
+feedback-expansion-preparation-v2/bound-config.json. Onlyaddedfield is memory_control.checkpoint
+at selectedsource256 update262. Originalplan/template literalunchanged;68train+4dev batches,
+32/64/128sourceprefixes,3collectors,quota/branches/readout/replay and192updates/3072draws unchanged.
+Sameactualcheckpoint declared for all9feedbackfits. Historicalv1 paths are not currentv2.
+Threeactualfrozen prepare/localtokenizer/policy-construction profilesPASS usingdeclaredCUDA-env/
+attentionwrapper; models cacheempty,no weights/forward/HTTP/sourcebody. Originalledger bytes
+unchanged. Preflight isn't longinput or Hostquality validation. No collection/training dispatch.
+Artifacts feedback-initialization-binding-v1; tracked training-generalization-feedback-
+initialization-binding-v1.json. Only bindingresolved; feedback data/labels/results stillmissing.
+Do not fold newHostinstructions/compact/executor behavior into this originalfrozen recipe.
+pending-costs-v21:2entries9.16343017CPU; wholepreflight includesnestedprepare,notdoublecounted.
+
+ONLY LIVE neuraljob: full4886matchingtrain update262,driver798921/child798926/exec52857;
+root saved-cpu-selection-v1/selected-train,driver selected-train-driver.json. VerifyactualPID/
+files;no secondneural/offlinesettlement/restart. Afterterminal originalverification/costs before
+nextdispatch. Allpriorclosedruns remainclosed;fullremainingplan/M1-M5unfinished. NativeSTATE
+test30/39 partiallyexposed,notunseenconfirmation. Latestprogress-v21/execution;noSHA/agents/
+services/secondledger/push/merge. Previousselection and runtimecoverage qualifications below.
+
+# Earlier: 2026-10-24 original primary-dev selection COMPLETE; matching train LIVE
 
 Original524 COMPLETE876, originalfrozen verificationPASS:457/616 accepted,244masked,
 32familymacro .7706700547083952;16feedback separate.ModelCPU41706.656768187 billedonce.

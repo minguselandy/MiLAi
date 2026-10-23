@@ -4,6 +4,30 @@
 [原计划](MILAI_TRAINING_DATA_GENERALIZATION_PLAN_20261021.md)，原文复制留存，原目录文件未修改。
 该计划中的“本轮已完成”是另一环境的历史说明，不能代替本机当前验证。
 
+## 2026-10-24：为原冻结反馈v2绑定真实选中初始化，未派发
+
+回查后续I2配置修订，当前原反馈入口应为`feedback-expansion-study-plan-v2.json`，
+而非历史v1输出路径。根据已完成的原操作dev选点，现向其原计划位置
+`feedback-expansion-preparation-v2/bound-config.json`补入真实source256 **update262**路径。
+唯一新增配置字段为`entrypoints.functional.memory_control.checkpoint`；原v2计划和模板
+字面不变，未用feedback、Host或仍在运行的匹配train结果反选初始化。
+
+68个train与4个dev串行批次、32/64/128来源前缀、rules/laya/fixed_context collectors、
+initial/post配额、分支/续跑/readout、replay质量及每臂192更新/3072draws均沿用原方案。
+三个目标在三个来源档位的共同初始化明确为同一实际检查点，没有把新Host补充说明、
+compact表示或新执行器动作混入原冻结实验，也没有生成新标签或派发采集/训练。
+
+使用原声明CUDA解释器、attention wrapper与`2a179b58`冻结入口，对三个rich profile分别执行
+真实`prepare`、本地tokenizer检查及策略对象构造，全部通过。策略模型缓存保持空，未加载权重、
+前向、HTTP或来源正文；原账本字节保持不变。这验证配置接线，不证明未来状态容量、Host质量
+或反馈覆盖。实际产物在`feedback-initialization-binding-v1`，绑定记录为
+[初始化绑定v1](../data/manifests/training-generalization-feedback-initialization-binding-v1.json)。
+
+绑定及整个预检子进程共新增待结算9.16343017 CPU秒，`pending-costs-v21.json`；子进程已包含
+内部prepare计时，未重复相加。其他探索/作者/报告开销仍unknown。当前完整4886条匹配train
+仍是唯一神经作业；必须待其终态核对与费用衔接后再派发模型。原反馈收集、语义评审、训练及
+全部其余原研究范围仍未完成。当前索引：[进度v21](../data/manifests/evidence-gap-development-progress-20261023-v21.json)。
+
 ## 2026-10-24：原保存候选主dev选点完成，完整匹配train已启动
 
 原savedCPU524正常完成876/876，父子进程退出。原冻结校验器核对完整字面输入、精确长度、

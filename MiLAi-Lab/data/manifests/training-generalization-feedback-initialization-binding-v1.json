@@ -1,0 +1,92 @@
+{
+  "status": "SELECTED_CHECKPOINT_BOUND_AND_FROZEN_PREFLIGHT_PASSED;NOT_DISPATCHED",
+  "plan": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-expansion-study-plan-v2.json",
+  "frozen_source": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/frozen-feedback-expansion-2a179b58/MiLAi-Lab",
+  "source_version": "2a179b58",
+  "template": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-expansion-preparation-v2/config-template.json",
+  "bound_config": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-expansion-preparation-v2/bound-config.json",
+  "only_config_addition": "entrypoints.functional.memory_control.checkpoint",
+  "selection_source": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-selection-v1/selection.json",
+  "selected_update": 262,
+  "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/fitting/source256-actions-full-seed0-u524-v1/checkpoints/update-262",
+  "selection_rule": "Original operation-dev family macro, earliest tie, update0eligible; feedback/Host/test not used",
+  "common_training_initialization": {
+    "32": {
+      "continued-ce": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/fitting/source256-actions-full-seed0-u524-v1/checkpoints/update-262",
+      "answer": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/fitting/source256-actions-full-seed0-u524-v1/checkpoints/update-262",
+      "delivery": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/fitting/source256-actions-full-seed0-u524-v1/checkpoints/update-262"
+    },
+    "64": {
+      "continued-ce": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/fitting/source256-actions-full-seed0-u524-v1/checkpoints/update-262",
+      "answer": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/fitting/source256-actions-full-seed0-u524-v1/checkpoints/update-262",
+      "delivery": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/fitting/source256-actions-full-seed0-u524-v1/checkpoints/update-262"
+    },
+    "128": {
+      "continued-ce": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/fitting/source256-actions-full-seed0-u524-v1/checkpoints/update-262",
+      "answer": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/fitting/source256-actions-full-seed0-u524-v1/checkpoints/update-262",
+      "delivery": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/fitting/source256-actions-full-seed0-u524-v1/checkpoints/update-262"
+    }
+  },
+  "train_batches": 68,
+  "dev_batches": 4,
+  "source_cohorts": [
+    32,
+    64,
+    128
+  ],
+  "fitting_recipe_unchanged": {
+    "seed": 0,
+    "arms": [
+      "continued-ce",
+      "answer",
+      "delivery"
+    ],
+    "source_cohorts": [
+      32,
+      64,
+      128
+    ],
+    "optimizer_updates_each_arm": 192,
+    "draws_each_arm": 3072,
+    "schedule_cycle": 192,
+    "eval_updates": [
+      0,
+      12,
+      24,
+      48,
+      96,
+      192
+    ],
+    "encoder_lr": 2.5e-05,
+    "head_lr": 0.0001,
+    "freeze_encoder": false,
+    "effective_batch": 16,
+    "micro_batch_size": 1,
+    "gradient_checkpointing": true,
+    "shuffle_options": true,
+    "max_len": 16384,
+    "head_max_len": 2048,
+    "operation_state": "shared_actions",
+    "reason": "192=ceil(2*(768feedback+768replay)/16) from preregistered maximum128-source pool. Fix this same budget/cosine cycle for ALL cohorts,including shortfalls; do not confound feedback source count with extra updates. Existing data preparer legacy two-pass suggestion is recorded but explicitly overridden.",
+    "selection": "For each target,highest independent feedback-dev family_macro_state_pair_accuracy, earliest update on ties,0eligible. CE curve has separately declared answer and delivery selection views for its corresponding contrast;report both, not a single retrospectively convenient control. Always report common192 endpoint and old-operation retention. No final Host/protected selection."
+  },
+  "source_quota_branch_readout_sampling_unchanged": true,
+  "old_plan_and_template_literal_unchanged": true,
+  "model_weights_loaded": 0,
+  "model_calls": 0,
+  "ledger_recorded": false,
+  "no_sha_validation": true,
+  "dispatch_requirement": "Only after the currently running full matching-train evaluation closes, is verified and costs reconciled; honor existing serial scheduler. No automatic collection or training dispatch from this binding.",
+  "scope": "Resolve the previously pending original v2 initialization from original operation-dev selection. Matched-train gap remains pending; no feedback or Host outcome used to select initialization. New Host instruction/compact/input/executor conditions are not added to the frozen feedback recipe.",
+  "cpu_seconds_pending": 0.0035351700000000007,
+  "unknown": "Earlier exploratory reads/authoring unmeasured, not zero.",
+  "preflight": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/feedback-initialization-binding-v1/preflight.json",
+  "preflight_command_compute": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/feedback-initialization-binding-v1/command-compute.json",
+  "collector_profiles": [
+    "rules-rich",
+    "laya-rich",
+    "fixed_context-rich"
+  ],
+  "original_ledger_literal_unchanged": true,
+  "matched_train_evaluation": "RUNNING;result/gap still pending, not used to select initialization"
+}
