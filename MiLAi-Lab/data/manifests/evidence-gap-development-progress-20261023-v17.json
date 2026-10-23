@@ -1,0 +1,127 @@
+{
+  "status": "ACTIVE;CPU393_VERIFIED;HOST_ONLY_DIAGNOSTIC_CLOSED_STATE_ZERO;CPU524_RUNNING",
+  "observed_at": "2026-10-23T15:26:34.289744+00:00",
+  "source_version": "e1e99dae",
+  "previous_progress": "data/manifests/evidence-gap-development-progress-20261023-v16.json",
+  "plan": "docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261023.md",
+  "execution": "docs/TRAINING_GENERALIZATION_EXECUTION_20261021.md",
+  "previous_turn_classification": "verified wait; this turn completed original393 verification/accounting and frozenHost-only diagnostic, then started original524",
+  "saved_cpu393": {
+    "root": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-u393-v1",
+    "status": "COMPLETE_VERIFIED_SAVED_CPU_CANDIDATE",
+    "rows": 876,
+    "counts": {
+      "labelled": 616,
+      "accepted": 471,
+      "masked": 244,
+      "handoff_outside_reviewed_preference": 32
+    },
+    "family_macro_acceptance": 0.7878896864599797,
+    "families": 32,
+    "conditions": "Original frozen helpers checked all literal inputs, full lengths/finite outputs, CPUFP32/4threads/shared_actions12288/head2048/compileFalse/MHAFalse and original ledger",
+    "compute_already_billed": {
+      "wall_seconds": 10391.434221778996,
+      "cpu_seconds": 41078.389841804,
+      "runs": 1,
+      "forwards": 876,
+      "sequence_rows": 876,
+      "input_tokens": 4314812,
+      "state_tokenizations": 876,
+      "state_tokens": 4077231,
+      "peak_rss_kib": 4544352,
+      "ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json"
+    },
+    "deployment_selection": null,
+    "matching_selected_train_complete": false
+  },
+  "closed_followup_settlement": {
+    "phase": "evidence_gap_20261023_u393_closed_followups_v1",
+    "measures": {
+      "cpu_seconds": 195.925833206004,
+      "measured_phases": 34,
+      "runs": 1
+    },
+    "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-u393-v1/settlement.json",
+    "scope": "31closed entries from pendingv13-v17 plus393startup/coordinator/verification; modelCPU not rebilled"
+  },
+  "host_only": {
+    "root": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/state-host-only-task3-v1",
+    "source_version": "f1e8b9ce",
+    "status": "CLOSED_HOST_ONLY_DIAGNOSTIC_REVIEWED_NATIVE_STATE_ZERO",
+    "native_state_score": {
+      "score": 0,
+      "reasoning": "State requirements failed: missing_assertions=2; unexpected_assertions=1",
+      "details": {
+        "missing_assertions": [
+          {
+            "entity_type": "bookings",
+            "record_key": "BK-7700",
+            "field": "change_fee",
+            "value": 75
+          },
+          {
+            "entity_type": "bookings",
+            "record_key": "BK-7700",
+            "field": "price_paid",
+            "value": 475
+          }
+        ],
+        "unexpected_assertions": [
+          {
+            "entity_type": "bookings",
+            "record_key": "BK-7700",
+            "field": "change_fee",
+            "value": 0
+          }
+        ]
+      }
+    },
+    "memory_calls": 0,
+    "generation_requests": 13,
+    "known_generation_tokens": 54262,
+    "unknown_usage_increment": 0,
+    "Host_attempts": 10,
+    "simulator_attempts": 3,
+    "same_initial_native_state": true,
+    "config_difference": "entrypoints.functional.config_version only",
+    "semantic_review": "Host read delay_compensation and change policies, but treated 180-minute delay as airline schedule_change. Preview and confirmed update charged fee0/price400 instead of native75/475. Separate confirmation occurred and booking preferences remained unchanged. Simulator requested a policy recheck, then accepted the incorrect explanation and ended TASK_DONE. This replicates a common Host/simulator failure without memory; one post-hoc exposed-task trajectory does not quantify a memory causal effect. No retry or domain-policy repair.",
+    "scope": "One post-hoc exposed native train task; no official task/UX judge, no memory causal-effect estimate or retry",
+    "settlement": {
+      "phase": "evidence_gap_20261023_host_only_task3_closed_overhead_v1",
+      "measures": {
+        "cpu_seconds": 6.018513506999999,
+        "measured_phases": 4,
+        "runs": 1
+      }
+    }
+  },
+  "auxiliary_prefix_review": {
+    "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/auxiliary-input-conditions-v1/semantic-prefix-review.json",
+    "verification": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/auxiliary-input-conditions-v1/semantic-prefix-verification.json",
+    "scope": "24candidates/8queries/7families; limited agent textual review, published labels unchanged; no pool certification"
+  },
+  "active_processes": [
+    {
+      "root": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-u524-v1",
+      "driver_pid": 137761,
+      "child_pid": 137766,
+      "session": 60323,
+      "status": "RUNNING",
+      "actual_proc_present": true,
+      "completed": 10,
+      "planned": 876,
+      "neural_model": true
+    }
+  ],
+  "accounting": {
+    "status": "ALL_LISTED_CLOSED_PENDING_SETTLED_ONCE_BEFORE524;524_TERMINAL_OVERHEAD_PENDING",
+    "unknown": "Earlier unknowns, failed config-path/config-level review probes, authoring/reporting/verification-preparation/settlement overhead remain unmeasured; not zero. No ledger writes while524live."
+  },
+  "remaining": "Original524/selection/matchingselectedtrain;source64/128andotherfits/requesttext/auxiliary/parameterconditions;frozenfeedback32/64/128,T2,initial-vs-post,state/sourcecoverage,seeds;F1/F2semanticandF3completecapacity/Hostsimulator;LME451Reader/nativejudge,lifecycle,fullHost/officialreadonly/external/protectedandfourmainfigures. M1-M5not achieved. Host-only diagnostic now closed at native state0; compact-model quality comparison not yet executed. ActualSTATEexport/unknownpair is not trainedfeedback or 32/64/128source expansion. Newemptydeliverychoice learnedselection/Hosteffect stillunmeasured.",
+  "scheduling": "Original524 sole neural job. No second neural run or offline settlement whilelive; verify actual PID/files, no stale-session restart. After524terminal: original verification, dev selection and matching selected-train, then unchanged remaining plan.393/Host-only and all previous closed jobs stayclosed.",
+  "no_sha_or_content_fingerprint_validation": true,
+  "no_subagents": true,
+  "no_new_model_services_or_ledger": true,
+  "no_remote_writes": true,
+  "goal_complete": false
+}

@@ -4,6 +4,40 @@
 [原计划](MILAI_TRAINING_DATA_GENERALIZATION_PLAN_20261021.md)，原文复制留存，原目录文件未修改。
 该计划中的“本轮已完成”是另一环境的历史说明，不能代替本机当前验证。
 
+## 2026-10-23：393完成核对、无记忆诊断仍失败，原524继续
+
+原savedCPU393正常完成876/876，父子进程均退出。原冻结校验器核对完整字面输入、长度、
+有限预测及原CPU FP32/4threads/shared_actions12288/head2048/两个关闭选项和原账本。
+主dev **471/616接受，32来源族宏平均78.788969%**；244个masked状态保留，16个反馈状态另列。
+模型CPU **41078.389841804秒**已由原evaluator一次登记。524及匹配selected-train仍未完成，
+未根据393或此前262点选择部署模型。
+
+退出后，将pendingv13–v17的31项关闭测量及393启动/协调器/核对共34项，一次结算
+**195.925833206004 CPU秒**，阶段`evidence_gap_20261023_u393_closed_followups_v1`。
+既有模型费用未重复计入；原始pending文件保留历史状态，实际结算见`settlement.json`。
+
+随后按冻结`f1e8b9ce`执行第三任务的Host-only诊断一次，正常结束轨迹但**原生状态分数0**。
+实际13次生成HTTP、54262已知tokens、未知增量0：10次Host thinking=true，3次simulator=false。
+memory_calls=0，实际请求无记忆工具，未建立Store或生成空检索回执。与v3固定上下文臂的
+初始领域状态逐字段相同，配置仅`entrypoints.functional.config_version`不同。
+
+Host实际读取了延误补偿和改签政策，仍把180分钟延误解释为免费`schedule_change`。
+这次preview成功，之后取得了独立用户确认，再执行commit；实际change_fee=0、price_paid=400，
+任务要求则为75和475。原订座偏好保留。模拟用户曾要求再次检查三小时延误的具体权益，
+但接受了Host随后重复的错误解释，最后输出TASK_DONE。这提供了无记忆条件下共同Host/
+模拟用户失效的实际证据；单个已暴露任务的事后诊断不能估计记忆因果效应或替代官方评测。
+
+核对实物：`state-host-only-task3-v1/review-results.json`及原轨迹/before/after/diff。
+核对过程中两个配置探查假设失败：先误用配置文件名，再误认为版本字段位于顶层；按原plan和
+实际嵌套路径修正，失败记录保留，实验和配置均未重跑或改写，失败探查成本仍unknown。
+Host启动/协调器/核对和524准备共4项**6.018513507 CPU秒**在空闲时一次结算，
+原runner直接CPU及HTTP未重复计入；其他未测作者/报告/结算开销不补0。
+
+原savedCPU524随后按相同冻结条件启动，是当前唯一神经作业：driver137761、child137766、
+exec60323，产物`saved-cpu-u524-v1`。终态核对脚本已准备，尚未执行；之后仍需原dev选点与
+匹配train，以及全部其他原研究范围。当前索引：[进度v17](../data/manifests/evidence-gap-development-progress-20261023-v17.json)。
+M1–M5未完成；无SHA、子Agent、新服务、第二账本或远端写入。
+
 ## 2026-10-23：辅助池有限文本审阅，未修改标签
 
 按既有train文件顺序查看前8个带instruction的base-query，共24候选、7个关联来源族。

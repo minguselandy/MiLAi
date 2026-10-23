@@ -1,4 +1,31 @@
-# LATEST: 2026-10-23 auxiliary textual prefix reviewed; CPU393 LIVE
+# LATEST: 2026-10-23 CPU393 verified; Host-only task3 CLOSED/state0; CPU524 LIVE
+
+Original393 COMPLETE876, original frozen verification PASS:471/616 accepted,244masked,
+32familymacro .7878896864599797;16feedback separate. Original modelCPU41078.389841804
+already billed once. No selection before524 and matching selected-train evaluation.
+31closed pendingv13-v17 entries +393startup/coordinator/verification =34phases,
+195.925833206004 CPU settled once under evidence_gap_20261023_u393_closed_followups_v1.
+
+Frozen f1e8b9ce Host-only task3 ran once and CLOSED:13HTTP/54262known/unknown0,
+10Host thinkingTrue +3simulatorFalse; memorycalls0, no memorytool in actualwire, noStore.
+Sameinitial native state/config except entrypoints.functional.config_version. Native state0:
+despite actual delay/change policy reads, Host treated180min as free schedule_change;
+preview then independent userconfirmation thencommit yieldedfee0/price400 vs required75/475.
+Simulator requested recheck but accepted wrongexplanation/TASK_DONE. Oneposthoc exposedtask,
+not a memorycausal-effect estimate or confirmation sample; no retry/domain repair/officialjudge.
+Actualreview in state-host-only-task3-v1/review-results.json. Failedconfig-path/level review
+probes retained; corrected exactpath, no run/config change, failedCPUunknown. Hoststartup/
+coordinator/review +524prep4phases6.018513507CPU settled once, no directCPU/HTTP rebill.
+
+ONLY LIVE neuraljob: original savedCPU524 driver137761/child137766/exec60323,
+root saved-cpu-u524-v1. Originalsource/checkpoint/CPUFP32/4threads/shared_actions12288/
+head2048/compileFalse/MHAFalse preserved. Verify actualPID/files; no secondneural or offline
+settlement whilelive, no stale-session restart. Prepared verify_saved_cpu_u524_v1.py notrun.
+After524terminal verify, originaldev selection and matchingselectedtrain; allremaining F1-F5,
+feedback/conditions/seeds/Host/lifecycle/LME/external/protected/figures continue. M1-M5unfinished.
+Latestprogress-v17/execution. NoSHA/fingerprints,subagents,newservices/ledger,push/merge.
+
+# Earlier: 2026-10-23 auxiliary textual prefix reviewed; CPU393 LIVE
 
 No functional/data/gold changes. auxiliary-input-conditions-v1/semantic-prefix-review.json
 reviews first8 instruction-bearing basequeries in existing train order,24candidates/7connected
