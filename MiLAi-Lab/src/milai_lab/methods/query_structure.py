@@ -127,7 +127,7 @@ def _source_metadata(sources: dict[str, dict[str, Any]]) -> dict[str, dict[str, 
     return {alias: {"role": source["role"], "origin": source["origin"],
         "session": source["session"], "reported_at": source.get("occurred_at"),
         "captured_at": source["observed_at"],
-        **({"capture_context": source["capture_context"]} if "capture_context" in source else {})}
+        **{key: source[key] for key in ("capture_context", "calendar_context") if key in source}}
         for alias, source in sources.items()}
 
 

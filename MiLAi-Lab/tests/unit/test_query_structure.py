@@ -28,12 +28,13 @@ def interpretation(payload):
 
 
 def test_legacy_view_metadata_comes_from_actual_sources_without_rewriting_interpretation(tmp_path):
+    from milai_lab.methods.evidence_reading import build_evidence_packs
     from milai_lab.methods.query_structure import open_structure
 
     with SqliteStore.from_conn_string(str(tmp_path / "bank.sqlite")) as store:
         service = service_at(store, tmp_path)
-        user = service.capture_user("conversation", "question", "Did the transfer complete?")[
-            "source_ref"]
+        user = service.capture_user("conversation", "question", "Did the transfer complete?",
+            calendar_context="User calendar: Asia/Shanghai")["source_ref"]
         tool = service.capture_tool("conversation", "preview", "payments.preview",
             '{"status":"preview","amount":40}', None,
             occurred_at="2035-05-07T09:00:00+08:00")["source_ref"]
@@ -51,6 +52,8 @@ def test_legacy_view_metadata_comes_from_actual_sources_without_rewriting_interp
         # Simulate the old stored format. Opening it must not migrate the Store.
         view.pop("source_metadata")
         store.put((*service.namespace, "query_structure_v1"), "current", view, index=False)
+        originals = build_evidence_packs(service, "transfer", "", service.search_sources(
+            "transfer", tokenization="unicode_v1")["source_materials"], [])
         before = list(store.conn.iterdump())
         store.conn.execute("PRAGMA query_only=ON")
         opened = open_structure(service, view)
@@ -65,9 +68,24 @@ def test_legacy_view_metadata_comes_from_actual_sources_without_rewriting_interp
         assert metadata[by_ref[tool]]["reported_at"] == "2035-05-07T09:00:00+08:00"
         assert "content" not in json.dumps(metadata)
         packet = project_packs([opened], [-1], compact_view_bindings=True)[0]
-        assert by_ref[assistant] not in packet["source_metadata"]
-        assert set(packet["source_metadata"]) == set(packet["source_locations"])
-        assert all(not m["body_delivered"] for m in packet["source_metadata"].values())
+        assert by_ref[assistant] not in packet["source_bindings"]
+        for alias in packet["source_bindings"]:
+            assert {**packet["source_metadata"]["shared"],
+                    **packet["source_metadata"]["by_alias"].get(alias, {})} == metadata[alias]
+        assert set(packet["source_bindings"]) == set(packet["source_locations"])
+        assert set(packet["source_bindings"].values()) == {"support_not_opened"}
+        combined = project_packs([*originals, opened], [*range(len(originals)), -1],
+                                 compact_view_bindings=True)
+        projected = combined[-1]
+        bodies = {e["source"]: e for p in combined[:-1] for e in p["evidence"]}
+        for alias, source_label in projected["source_bindings"].items():
+            supplement = {**projected["source_metadata"]["shared"],
+                          **projected["source_metadata"]["by_alias"].get(alias, {})}
+            delivered = bodies.get(source_label, {})
+            assert {key: {**delivered, **supplement}[key]
+                    for key in metadata[alias]} == metadata[alias]
+            assert not any(key in delivered and delivered[key] == value
+                           for key, value in supplement.items())
         assert list(store.conn.iterdump()) == before
 
 

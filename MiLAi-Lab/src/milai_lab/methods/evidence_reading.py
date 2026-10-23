@@ -550,9 +550,9 @@ def project_pack(item: dict[str, Any], index: int) -> dict[str, Any]:
         return {**result, "interpretation": copy.deepcopy(item["structure"]),
                 "source_bindings": copy.deepcopy(item["source_bindings"]),
                 **({"source_metadata": copy.deepcopy(item["source_metadata"]),
-                    "source_metadata_semantics": "Capture metadata, not validation of the "
-                        "interpretation. reported_at is source report time; captured_at is "
-                        "ingestion time. Neither establishes event or effective time."}
+                    "source_metadata_semantics": "Capture metadata, not semantic validation. "
+                        "reported_at is report time; captured_at is ingestion time, "
+                        "not event time."}
                    if "source_metadata" in item else {}),
                 "query_time": item["query_time"], "semantics": item["semantics"],
                 "revision": item["revision"]}
@@ -646,6 +646,7 @@ def project_packs(
                     for position, unit in enumerate(item.get("applicability", {}).get("units", []))}
     originals: dict[tuple[tuple[Any, ...], ...], dict[str, Any]] = {}
     sources: dict[tuple[str, int], str] = {}
+    source_metadata: dict[tuple[str, int], dict[str, Any]] = {}
     spans: set[tuple[str, int, tuple[int, ...]]] = set()
     for item, index in zip(items, indices, strict=True):
         ranges = tuple(tuple(span[key] for key in (
@@ -679,6 +680,9 @@ def project_packs(
             for turn, body in zip(turns, projected["evidence"], strict=True):
                 source = (turn["source_ref"], turn.get("source_revision", 1))
                 alias = sources.setdefault(source, f"s{len(sources)}")
+                source_metadata[source] = {key: value for key, value in body.items()
+                    if key in {"role", "origin", "capture_context", "calendar_context",
+                               "reported_at", "captured_at"}}
                 local_sources.add(source)
                 body["source"] = alias
                 span = (*source, tuple(turn["range"]))
@@ -713,9 +717,25 @@ def project_packs(
             locations = {alias: binding for alias, binding in projected["source_bindings"].items()
                          if (binding["source_ref"], binding["source_revision"]) not in sources}
             if "source_metadata" in projected:
-                projected["source_metadata"] = {alias: {
-                    **projected["source_metadata"][alias], "body_delivered": alias not in locations}
-                    for alias in projected["source_bindings"]}
+                # Original bodies already carry their capture metadata. Supplement
+                # those exact source/revision aliases rather than repeating it.
+                supplemental = {}
+                for alias, binding in projected["source_bindings"].items():
+                    delivered = source_metadata.get(
+                        (binding["source_ref"], binding["source_revision"]), {})
+                    supplemental[alias] = {key: value for key, value in
+                        projected["source_metadata"][alias].items()
+                        if key not in delivered or delivered[key] != value}
+                common = {key: value for key, value in next(iter(supplemental.values()), {}).items()
+                    if all(key in metadata and metadata[key] == value
+                           for metadata in supplemental.values())}
+                projected["source_metadata"] = {"shared": common, "by_alias": {
+                    alias: {key: value for key, value in metadata.items() if key not in common}
+                    for alias, metadata in supplemental.items() if set(metadata) - set(common)}}
+                projected["source_metadata_semantics"] = (
+                    "Shared fields apply to all bindings; by_alias adds fields; delivered "
+                    "originals supply omitted fields. Clocks describe reports/ingestion, "
+                    "not events or validity.")
             if locations:
                 projected.update(source_locations=copy.deepcopy(locations),
                     source_location_semantics="Navigation only; these original bodies "
