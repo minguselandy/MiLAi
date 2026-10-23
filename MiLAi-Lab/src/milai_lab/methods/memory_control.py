@@ -8,6 +8,8 @@ from dataclasses import asdict, dataclass, field
 from typing import Any, Literal, Protocol
 
 from milai_lab.methods.evidence_selection import (
+    interpretation_handoff,
+    interpretation_only,
     original_evidence_action,
     pending_content,
     view_request_context,
@@ -250,6 +252,9 @@ class RulesMemoryPolicy:
         original = original_evidence_action(state, actions, self.reads)
         if original is not None:
             return original
+        selected_view = interpretation_handoff(state, actions)
+        if selected_view is not None:
+            return selected_view
         if state.last_result and state.last_result["action"]["kind"] in {
             "USE_VIEW", "REFRESH_VIEW"
         } and state.last_result.get("ok"):
@@ -260,7 +265,9 @@ class RulesMemoryPolicy:
         reusable = {v["id"] for v in matching
                     if not pending_content(v, state.new_events)}
         if self.reuse_views and not wants_history and reusable:
-            use = next((a for a in actions if a.kind == "USE_VIEW" and a.target in reusable), None)
+            uses = [a for a in actions if a.kind == "USE_VIEW" and a.target in reusable]
+            use = max(uses, key=lambda a: interpretation_only(state.task)
+                      and a.parameters.get("replace_delivery", False), default=None)
             if use is not None:
                 return use.id
         reading = (FixedContextMemoryPolicy(self.reads) if self.expand_context

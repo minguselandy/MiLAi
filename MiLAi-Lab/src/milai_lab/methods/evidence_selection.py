@@ -60,6 +60,36 @@ def view_request_context(request: dict[str, Any] | None) -> dict[str, Any] | Non
     return scope
 
 
+def interpretation_only(task: dict[str, Any]) -> bool:
+    goal = task.get("read_goal")
+    return isinstance(goal, dict) and set(goal.get("evidence", [])) == {"current_interpretation"}
+
+
+def interpretation_handoff(state: MemoryControlState, actions: list[MemoryAction]) -> str | None:
+    """Deliver the actually acquired View alone when that is the requested evidence type.
+
+    A View-plus-originals attempt can exceed the packet limit while the View-only
+    action still fits. Use that offered binding without another generation/read.
+    This selects a representation, not a verdict that its claims are correct.
+    """
+    last = state.last_result
+    if not interpretation_only(state.task) or not last or not state.observed_materials:
+        return None
+    if (last["action"]["kind"] not in {"USE_VIEW", "REFRESH_VIEW"}
+            or last.get("status") not in {"view_opened", "material_budget_exhausted"}):
+        return None
+    for item in state.observed_materials:
+        if (item["kind"] != "query_structure" or item.get("id") != last.get("view_id")
+                or item.get("body_delivered") is False
+                or item.get("visibility", "visible") != "visible"):
+            continue
+        selected = next((a for a in actions if a.kind == "HANDOFF"
+                         and a.parameters.get("delivery_indices") == [item["item_index"]]), None)
+        if selected is not None:
+            return selected.id
+    return None
+
+
 def original_evidence_action(
     state: MemoryControlState, actions: list[MemoryAction], reads: int,
 ) -> str | None:

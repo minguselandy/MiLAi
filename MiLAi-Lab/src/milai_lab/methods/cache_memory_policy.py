@@ -7,6 +7,8 @@ from typing import Any
 
 from milai_lab.memory.retrieval import _lexical_tokens
 from milai_lab.methods.evidence_selection import (
+    interpretation_handoff,
+    interpretation_only,
     original_evidence_action,
     pending_content,
     request_terms,
@@ -79,6 +81,9 @@ class CacheMemoryPolicy:
         original = original_evidence_action(state, actions, self.reads)
         if original is not None:
             return original
+        selected_view = interpretation_handoff(state, actions)
+        if selected_view is not None:
+            return selected_view
         handoff = next(a.id for a in actions if a.kind == "HANDOFF" and not a.parameters)
         goal = state.task.get("read_goal")
         originals = isinstance(goal, dict) and "original_source" in goal.get("evidence", [])
@@ -104,8 +109,9 @@ class CacheMemoryPolicy:
             if refresh is not None and not (last and last["action"]["kind"] == "REFRESH_VIEW"):
                 return refresh.id
         if view is not None and matching and not pending and not originals:
-            use = next((a for a in actions if a.kind == "USE_VIEW"
-                        and a.target == view["id"]), None)
+            uses = [a for a in actions if a.kind == "USE_VIEW" and a.target == view["id"]]
+            use = max(uses, key=lambda a: interpretation_only(state.task)
+                      and a.parameters.get("replace_delivery", False), default=None)
             if use is not None:
                 return use.id
         if originals and view is not None:

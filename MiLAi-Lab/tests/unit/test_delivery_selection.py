@@ -57,6 +57,43 @@ def retrieve_setup(tmp_path, store, choices, *, size=1600, reads=8):
     return service, memory, policy, traces, generations, sources
 
 
+@pytest.mark.parametrize("kind", ["rules", "cache"])
+def test_summary_policy_selects_acquired_view_after_full_combination_rejection(tmp_path, kind):
+    from milai_lab.methods.cache_memory_policy import CacheMemoryPolicy
+    from milai_lab.methods.memory_control import RulesMemoryPolicy
+
+    policy = RulesMemoryPolicy() if kind == "rules" else CacheMemoryPolicy()
+    with SqliteStore.from_conn_string(str(tmp_path / "db")) as store:
+        service, memory, _, traces, generations, _ = retrieve_setup(tmp_path, store,
+            ["search_0_8", "read_0", "refresh_view", policy.choose])
+        packet = memory.retrieve(context(service), "summary", RetrievalRequest.model_validate({
+            "query": "record", "read_goal": {"evidence": ["current_interpretation"]}}))
+        events = [event for event in traces if event.get("phase") == "operation_result"]
+        refresh = next(event for event in events if event["selected"] == "refresh_view")
+        assert refresh["result"]["status"] == "material_budget_exhausted"
+        assert events[-1]["selected"].startswith("handoff_select_")
+        assert len(generations) == 1 and packet["usage"]["read_operations"] == 1
+        assert len(canonical(packet)) <= 1600
+        assert [item["kind"] for item in packet["evidence"]] == ["query_structure"]
+
+
+@pytest.mark.parametrize("kind", ["rules", "cache"])
+def test_summary_policy_prefers_offered_view_only_opening(kind):
+    from milai_lab.methods.cache_memory_policy import CacheMemoryPolicy
+    from milai_lab.methods.memory_control import RulesMemoryPolicy
+
+    request = {"query": "topic", "read_goal": {"evidence": ["current_interpretation"]}}
+    state = MemoryControlState(task={"request": "topic", "read_goal": request["read_goal"],
+        "retrieval_request": request}, views=[{"id": "v", "slot": "current",
+        "visibility": "visible", "built_for": "topic", "scope": "topic", "pending_events": [],
+        "source_bindings": {}, "retrieval_request": request}])
+    actions = [MemoryAction("append", "USE_VIEW", "v", {"slot": "current"}),
+        MemoryAction("replace", "USE_VIEW", "v", {"slot": "current", "replace_delivery": True}),
+        MemoryAction("end", "HANDOFF", "Host")]
+    policy = RulesMemoryPolicy() if kind == "rules" else CacheMemoryPolicy()
+    assert policy.choose(state, actions) == "replace"
+
+
 def test_rejected_append_can_be_selected_without_rereading_or_resetting_read_quota(tmp_path):
     with SqliteStore.from_conn_string(str(tmp_path / "db")) as store:
         service, memory, policy, traces, _, _ = retrieve_setup(
@@ -104,7 +141,7 @@ def test_rejected_append_can_be_selected_without_rereading_or_resetting_read_quo
 def test_observation_only_reads_feed_refresh_without_entering_host_packet(tmp_path):
     with SqliteStore.from_conn_string(str(tmp_path / "db")) as store:
         service, memory, policy, _, generated, sources = retrieve_setup(tmp_path, store, [
-            "search_0_8", "read_0_observe", "read_1_observe", "refresh_view", "handoff"])
+            "search_0_8", "read_0_observe", "read_1_observe", "refresh_view", "handoff"], size=2048)
         packet = memory.retrieve(context(service), "view", RetrievalRequest(query="record"))
         before_refresh = policy.states[3]
         assert not before_refresh["visible_evidence"]
@@ -117,7 +154,7 @@ def test_observation_only_reads_feed_refresh_without_entering_host_packet(tmp_pa
         assert "a a a a" not in canonical(packet) and "b b b b" not in canonical(packet)
         assert packet["usage"]["read_operations"] == 2
         assert packet["usage"]["material_budget_rejections"] == 0
-        assert len(canonical(packet)) <= 1600
+        assert len(canonical(packet)) <= 2048  # This fixture counts characters, not model tokens.
 
 
 def test_generated_view_can_replace_full_original_packet_only_by_explicit_handoff(tmp_path):
@@ -521,7 +558,7 @@ def test_use_view_can_explicitly_replace_selected_original_without_generation(tm
 
     with SqliteStore.from_conn_string(str(tmp_path / "db")) as store:
         service, memory, policy, _, generated, refs = retrieve_setup(tmp_path, store, [
-            "search_0_8", "read_0", "use_view_only", "handoff"])
+            "search_0_8", "read_0", "use_view_only", "handoff"], size=2048)
         build_query_structure(service, "record", "", refs, policy="incremental",
             call=lambda messages, schema: memory.dependency_read_call(
                 "query_structure", messages, schema))
