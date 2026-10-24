@@ -1,4 +1,39 @@
-# LATEST: 2026-10-25 feedback batches000–012 reviewed; batch013 LIVE
+# LATEST: 2026-10-25 feedback batches000–013 reviewed; batch014 LIVE
+
+Batch013 (B01/musique-family-000738) attempted12 positions:7 process completions and5 retained
+Host8192/content-null truncations.29 HTTP/116290 known tokens,unknown0;26 Host/3 View calls.
+28 finite,untruncated Laya forwards used201480 input tokens,max11433;one load.14 initial+58 post
+states match72 decisions/14 retrievals;no zero-decision calls. Full literal mechanics passed.
+
+B01 rules/fixed early answers ground low-key preference in described friendship;rules adds an
+unsupported formal-arrangements comparison. Laya early fails before retrieval,so later Host is
+fresh despite16 incoming Sources;its direct dive-bar/ramen/group-contrast delivery supports later
+answer. Four extra READs get material-budget rejections. Rules/fixed later retain old Host history
+and fail before retrieval;not a strictly matched Host-history comparison or method-wide win.
+Missing Houx pool supports abstention. Fuller pool only says born nearLexington and has a bridge
+betweenRay/Lafayette,not a unique birthplace county. Rules answersLafayette without county material;
+fixed introducesClayCounty absent from supplied sources. Laya fuller pool checks a hypothesis but
+truncates. Native annotations/first failures unchanged;no external county repair.
+
+Review:original-feedback-v2-collection-dispatch/train-013-review.json. Model/load2381.877075999028
+CPU seconds already billed;whole child2424.74469 is nested.6 measured remaining phases totaling
+43.232114801972024 CPU seconds settled once with no live job. Unmeasured work remains unknown.
+14 closed batches:29 declared groups,165 attempts,134 process completions/31 failures,369 HTTP/
+1447691 known tokens,847 state occurrences,11 zero-decision calls. Not accuracy/independent states;
+no training labels or counterfactual branches created.
+
+ONLY LIVE neural job: original train batch014,memops_C02/musique-family-000402,12 positions.
+Driver2544186/child2544201/exec23070;verify actual PID/files. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-014.json.
+Original schedule checked from metadata:68 train/4 dev batches;frontier32 uses000–015(32 groups),
+frontier64 has18 batches,frontier128 has34. Batch015 has6 positions;batch016 starts64. Do NOT run
+branch preparation at32:complete full128-source collection before once-only original quota/seed.
+No second neural job/offline settlement while live. Review closure before next untouched batch.
+Keep frozen2a179b58/update262,source order/quotas/budgets. Latestv45/execution;full M1–M5 open.
+Saved CPU/train/Host pilot closed. No SHA,agents,new services,second ledger,remote writes.
+Lab behavior remains3c892d30.
+
+# Earlier: 2026-10-25 feedback batches000–012 reviewed; batch013 LIVE
 
 Batch012 (musique-family-000384/C05/musique-family-000047) attempted12 positions:9 process
 completions and3 Host truncations (fixed/Tiburon,Laya/C05 later,Laya/film). All8192/content null;
