@@ -1,4 +1,38 @@
-# LATEST: 2026-10-25 batch017 reviewed; batch018 LIVE at frontier64
+# LATEST: 2026-10-25 batch018 reviewed; batch019 LIVE at frontier64
+
+Batch018 (musique-family-000312/A13):12 attempted,8 process completions/4 retained Host truncations
+(rules both document pools,Laya missing pool,fixed A13 later). All8192/content null;reasoning
+35077/31918/33881/33567 characters.29 HTTP/129356 known tokens,unknown0;26 Host/3 View.20 finite,
+untruncated local forwards used110209 input tokens,max6875;one load.15 retrievals include1 true
+zero-state call;14 initial+53 post=67 actual state observations. Full literal mechanics passed.
+
+Missing music pool has Today/GaryAllan but not EveryStorm backing vocalist;fuller pool explicitly
+names HillaryLindsey backing vocals, not merely co-writer. Several Host queries conflate titles
+or invent qualifiers. Fuller Laya/fixed return relevant vocalist bodies and answer correctly but
+do not deliver Today identity bridge. Missing fixed abstains on distorted relation;not full task
+understanding. Rules fuller truncates despite delivered backing-vocal fact;failures not salvaged.
+A13 rules View adds unsupported content;Host treats prior self-management as unconfirmed plan.
+Laya early acquires all7 first-session bodies (11 overlapping ranges verified),then selects only
+older4,omitting current treatment/positive experience. Later all3 have16 arrivals/prior tools but
+no retrieval:rules/Laya stale answers,fixed truncation. Own reports,assistant wording,relatives,
+current/superseded/conditional changes remain distinct. Private clinical values stay ignored.
+
+Review:original-feedback-v2-collection-dispatch/train-018-review.json. Already-billed model/load
+1068.2049407249997 CPU seconds;whole child1109.639355 nested.11 measured remaining phases totaling
+41.775708510000335 CPU seconds settled once with no live job. Unmeasured work remains unknown.
+Cumulative19 closed batches:38 declared groups,219 attempts,178 process completions/41 failures,
+494 HTTP/1965739 known tokens,1154 state observations,15 zero-state calls. Not accuracy,independent
+rows or branch eligibility. First32 report/accounting remains000–015. No labels/branches/new fits.
+
+ONLY LIVE neural job: original batch019,musique-family-000550/memops_B03,12 positions.
+Driver2986978/child2986993/exec86472;verify actual PID/files. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-019.json.
+No second neural job/offline settlement while live;review closure before next untouched batch.
+Full128 train and4 dev collection precede once-only original quota/seed prep. Latestv50/execution.
+Frozen2a179b58/update262/order/budgets unchanged;Lab behavior3c892d30. Full M1–M5 remain open.
+No SHA,agents,new services,second ledger or remote writes. Saved CPU/train/Host pilot stay closed.
+
+# Earlier: 2026-10-25 batch017 reviewed; batch018 LIVE at frontier64
 
 Batch017 (musique-family-000766/A22) all12 positions process-completed, but this is not semantic
 accuracy.24 HTTP/79272 known tokens,unknown0;21 Host/3 View.14 finite,untruncated local forwards
