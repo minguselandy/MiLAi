@@ -1,4 +1,35 @@
-# LATEST: 2026-10-25 feedback batches000–006 reviewed; batch007 LIVE
+# LATEST: 2026-10-25 feedback batches000–007 reviewed; batch008 LIVE
+
+Batch007 musique-family-000648/C29 closed after12 attempts:11 process completions,1 retained
+fixed/corpus34091 Host8192/contentnull/reasoning34973 truncation.28 HTTP/88486 known tokens,
+unknown0;26 Host/2 View.25 finite/untruncated Laya forwards,143216 input tokens,max8562;one load.
+14 real retrievals,14 initial+57 post states match71 decisions;no zero-decision call. Full literal
+source/bank/capture/result/actualHost-packet audit PASS. Empty packet after actualSEARCH is a state.
+
+Full geography pool supportsNaples-Collier-EastNaples. Laya directly delivered bothhops;rules/fixed
+used neighbor/seat context forfirsthop, with actualViewinput checked. Incomplete pool lacks county/
+seat;Laya limitation is right but noNaplesinformation overstates absence ofadminfacts. C29 starts
+with15 source rows coveringtwo sessions, then8 newrows. Allthree lateHostrequests show8-arrival
+notice/prior tool history but make no newretrieval. Rules/fixed retain65decision butmisspaidorder/
+future3-day shipping;Laya early reads65/budget/olive thenreturnsoldtea120, laterrepeatsit. Name/maybe-
+year engraving is tentative; quoted65 is not proof ofearly payment. Preserve state distinctions.
+
+Review: original-feedback-v2-collection-dispatch/train-007-review.json. Model/load1469.8322506039685
+CPU already billed;wholechild1511.297159 nested. Seven measured remaining phases41.78480265503142
+CPU settled once while nojoblive. Unmeasuredwork staysunknown. Eight closedbatches:16 declaredgroups,
+96 attempts,82 processcompletions/14 failures,208 HTTP/800494 knowntokens,474 actualstateoccurrences,
+5 cumulativezero-decisioncalls. Not taskaccuracy orindependentstates; no labels/branches yet.
+
+ONLY LIVE neural job: original train batch008 musique-family-000272/memops_A14,12 positions.
+Driver2185725/child2185740/exec90247;verifyactualPID/files. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-008.json.
+No secondneuraljob/offline settlement whilelive. Reviewclosure before nextuntouchedbatch. Keep
+frozen2a179b58/update262/sourceorder/quotas/budgets;complete128-sourcepool before once-only original
+branchpreparation. No manualwinners/syntheticstates/answersalvage. Latestv39/execution; fullM1–M5
+open. SavedCPU/train/Hostpilot closed. NoSHA,agents,newservices,secondledger,remotewrites.
+Lab behavior remains3c892d30.
+
+# Earlier: 2026-10-25 feedback batches000–006 reviewed; batch007 LIVE
 
 Batch006 musique-family-000796/E11 closed after12 attempts:9 process completions,3 retained
 Host length failures (Laya corpus35433,E11 Laya/fixed stage2). All8192/contentnull;reasoning34889/
