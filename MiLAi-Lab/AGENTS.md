@@ -1,4 +1,39 @@
-# LATEST: 2026-10-25 feedback batches000–013 reviewed; batch014 LIVE
+# LATEST: 2026-10-25 feedback batches000–014 reviewed; batch015 LIVE
+
+Batch014 (C02/musique-family-000402) attempted12 positions:10 process completions and2 retained
+Laya Host truncations (C02 later and corpus34253),both8192/content null;reasoning32537/34356.
+26 HTTP/104574 known tokens,unknown0;24 Host/2 View calls.23 finite,untruncated Laya forwards used
+135085 input tokens,max6926;one load.13 initial+47 post states match60 decisions/13 retrievals;
+no zero-decision calls. Full literal mechanics audit passed.
+
+C02 early answers have delivered deadline/buffer support;Laya uses a faithful assistant summary
+plus direct user rule. View adds an unprovided year. Later all3 requests have16 new Sources/prior
+tools but no retrieval;completed answers retain stale deadline/target and miss rejected extension.
+Rules/full literary question performs NO retrieval and ends with a promise to retrieve,not the
+requested character;COMPLETED is process status only. Laya actually delivers full Dracula text
+containingRenfield and answers,but repeats lookup. Fixed misses available answer passage.
+A real fixed follow-up uses a literal prior delivered reference:2 reads at start,1 after reference
+resolution,thenSEARCH exhausts allowance with0 new material reads. Known-reference cost is real;
+this is not proof such context is useless. Exact capture/probe evidence is in review.
+
+Review:original-feedback-v2-collection-dispatch/train-014-review.json. Model/load1332.2181234320055
+CPU seconds already billed;whole child1376.256454 nested.6 measured remaining phases totaling
+44.31843044599453 CPU seconds settled once with no live job. Unmeasured work remains unknown.
+15 closed batches:31 declared groups,177 attempts,144 process completions/33 failures,395 HTTP/
+1552265 known tokens,907 state occurrences,11 zero-decision calls. Not accuracy/independent states;
+no training labels or counterfactual branches created.
+
+ONLY LIVE neural job: original train batch015,memops_C27,6 declared positions.
+Driver2612053/child2612068/exec97924;verify actual PID/files. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-015.json.
+This is the last32-source batch,not the end of collection. After actual closure/review/settlement,
+continue original batch016 at64 frontier. Complete full128-source pool before once-only quota/seed
+preparation. No second neural job/offline settlement while live. No filling6 positions to12.
+Keep frozen2a179b58/update262,order/quotas/budgets. Latestv46/execution;full M1–M5 remain open.
+Saved CPU/train/Host pilot closed. No SHA,agents,new services,second ledger,remote writes.
+Lab behavior remains3c892d30.
+
+# Earlier: 2026-10-25 feedback batches000–013 reviewed; batch014 LIVE
 
 Batch013 (B01/musique-family-000738) attempted12 positions:7 process completions and5 retained
 Host8192/content-null truncations.29 HTTP/116290 known tokens,unknown0;26 Host/3 View calls.
