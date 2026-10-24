@@ -1,4 +1,39 @@
-# LATEST: 2026-10-25 feedback batches000–010 reviewed; batch011 LIVE
+# LATEST: 2026-10-25 feedback batches000–011 reviewed; batch012 LIVE
+
+Batch011 (musique-family-000743/A33) attempted all12 positions:11 process completions and1 retained
+Laya/corpus31196 JSON_ACTION_MALFORMED. Actual final response:HTTP200,finish stop,content null,
+1419 output tokens,5972 reasoning characters;literal JSON parse raises TypeError. No answer salvage.
+25 HTTP/83686 known tokens,unknown0;22 Host/3 View calls.16 finite,untruncated Laya forwards used
+73795 input tokens,max6318;one load.10 initial+47 post states match57 decisions/10 retrievals;
+no zero-decision calls. Full literal mechanics audit passed.
+
+Rules/corpus31152 generated rules referencing absent nodes with previous View empty. Existing
+validator rejected QUERY_STRUCTURE_RULE_NODE_UNAVAILABLE;View not delivered. Its final town name
+still substitutes venue location for missing ownership/containment. Second rules View is accepted
+but binds a generic stadium name to another qualified venue;rules/fixed answerTreviso without the
+requested chain. Laya/fixed firstpool preserve the relation limits. A33 all late requests have16
+new Sources/prior tools but no retrieval;later measurement conditions and prediction are omitted.
+Laya adds an unprovided year;the nurse term came from a historical assistant question,not fresh
+Host invention. Exact personal measurements remain in ignored local sources/review.
+
+Auditor now records literal operation status counts and explicit negative receipts. One View
+rejection is recorded this batch;older reports were not backfilled,so absent fields are not zero.
+This is reporting,not a new runtime guard. Review:original-feedback-v2-collection-dispatch/
+train-011-review.json. Model/load602.8314829269743 CPU seconds already billed;whole child640.410246
+is nested.6 measured remaining phases totaling37.842743863025696 CPU seconds settled once with
+no live job. Unmeasured work remains unknown.12 closed batches:24 groups,141 attempts,118 process
+completions/23 failures,310 HTTP/1200699 known tokens,692 state occurrences,9 zero-decision calls.
+These are not accuracy or independent-state counts;no training labels or branches created.
+
+ONLY LIVE neural job: original train batch012,groups musique-family-000384,memops_C05,
+musique-family-000047;12 declared positions. Driver2378351/child2378366/exec90437;verify PID/files.
+Driver:artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-012.json.
+No second neural job/offline settlement while live. Review closure before next untouched batch.
+Keep frozen2a179b58/update262,source order,quotas and budgets;finish128-source collection before
+once-only original branch preparation. Latestv43/execution;full M1–M5 remain open. Saved CPU/train/
+Host pilot closed. No SHA,agents,new services,second ledger or remote writes. Lab remains3c892d30.
+
+# Earlier: 2026-10-25 feedback batches000–010 reviewed; batch011 LIVE
 
 Batch010 (musique-family-000652/F14) attempted all9 declared positions:7 process completions and
 2 retained Host truncations (fixed/corpus7161 and F14/rules/stage2). Both8192/content null;
