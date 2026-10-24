@@ -1,4 +1,36 @@
-# LATEST: 2026-10-25 feedback batches000–009 reviewed; batch010 LIVE
+# LATEST: 2026-10-25 feedback batches000–010 reviewed; batch011 LIVE
+
+Batch010 (musique-family-000652/F14) attempted all9 declared positions:7 process completions and
+2 retained Host truncations (fixed/corpus7161 and F14/rules/stage2). Both8192/content null;
+reasoning31677/31891 characters.17 HTTP/70772 known tokens,unknown0;15 Host/2 View calls.
+7 finite,untruncated Laya forwards used35413 input tokens,max7032;one load.6 real retrievals,
+6 initial+27 post states match33 trace decisions. No zero-decision call. Literal mechanics PASS.
+
+Music sources support NinaSimone as original singer and former Bethlehem association,not the exact
+1964 recording label. All Host queries narrow to release-time label;no method returns the former-
+label document. Preserve relation/time ambiguity and original annotations. F14 early answers keep
+corrected clinic report and doctor roles,but infer not-completed transfer from missing confirmation;
+delivered rules View actually leaves completion unknown. Later all3 requests have16 new Sources and
+prior tools but no new retrieval. Completed answers miss home/context/template distinctions and
+explicitly completed transfer;rules truncates. Unchanged office value is not proof of contextual
+measurement handling. Exact clinical details stay in ignored local source/review records.
+
+Review: original-feedback-v2-collection-dispatch/train-010-review.json. Model/load356.19067999098934
+CPU seconds already billed;whole child393.416391 is nested.6 measured remaining phases totaling
+37.40948926301064 CPU seconds settled once with no live job. Unmeasured work remains unknown.
+Eleven closed batches:22 declared groups,129 attempts,107 process completions/22 failures,
+285 HTTP/1117013 known tokens,635 actual state occurrences,9 cumulative zero-decision calls.
+These are not accuracy or independent-state counts;no training labels or branches created.
+
+ONLY LIVE neural job: original train batch011,musique-family-000743/memops_A33,12 declared positions.
+Driver2329874/child2329889/exec56625;verify actual PID/files. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-011.json.
+No second neural job/offline settlement while live. Review closure before next untouched batch.
+Keep frozen2a179b58/update262,source order,quotas and budgets;finish128-source collection before
+once-only original branch preparation. Latestv42/execution;full M1–M5 remain open. Saved CPU/train/
+Host pilot closed. No SHA,agents,new services,second ledger or remote writes. Lab remains3c892d30.
+
+# Earlier: 2026-10-25 feedback batches000–009 reviewed; batch010 LIVE
 
 Batch009 (musique-family-000522/E07) attempted all12 positions:9 process completions and3 retained
 Host truncations (rules/Laya corpus33322 and E07/rules stage2). All8192 output tokens/content null;

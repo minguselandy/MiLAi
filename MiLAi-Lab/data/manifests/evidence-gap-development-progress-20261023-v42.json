@@ -1,0 +1,305 @@
+{
+  "source_version": "3c892d30",
+  "plan": "docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261023.md",
+  "execution": "docs/TRAINING_GENERALIZATION_EXECUTION_20261021.md",
+  "remaining": "F1/F2 real semantic acceptance for ordinary questions, explicit preferences, tool changes, unrelated arrivals, faithful conditions, object identity and unknown times; F3 real compact-input and bounded delivery/Host effects, including learned empty handoff.; Original source64/source128 fits and remaining matched representation/request-text, auxiliary initialization and parameter-update comparisons; decisive seed1/2 where the plan calls for them.; Frozen feedback-expansion v2 collection and nine source32/64/128 collector fits from the verified update262 initialization: original quotas, up-to-three branches, fixed continuation/readout,192 updates and3072 draws, independent feedback-dev selection, masks/ties/unknowns retained.; New source/state coverage, initial-only versus initial-plus-post, complete T2 trajectories, common-support and parameter-binding E2/E3/factorial comparisons under their declared conditions.; Actual autonomous Host main comparison of fixed_context/rules/Jev with matched tasks, model, sources, budgets and tool behavior; distinguish requested/needed/acquired/delivered/used evidence and preserve common Host/simulator limitations.; Ordered lifecycle studies for high/low reuse and related/unrelated updates, View versus no-view, cumulative quality and full measured maintenance/retrieval/delivery costs.; LongMemEval451 real Reader/native judge; full declared STATE read-only and other external protocols; protected-source exposure reconciliation and final method/checkpoint/seed freeze before any new protected-body inspection. Native STATE test30/39 partial exposure remains recorded.; Four main research result figures and complete protocol-aware reporting, including source grouping, unsuccessful/unknown runs and known/unmeasured costs. Saved CPU curve and the three-task Host-only diagnostic do not substitute for these deliverables.",
+  "remaining_requirements": [
+    "F1/F2 real semantic acceptance for ordinary questions, explicit preferences, tool changes, unrelated arrivals, faithful conditions, object identity and unknown times; F3 real compact-input and bounded delivery/Host effects, including learned empty handoff.",
+    "Original source64/source128 fits and remaining matched representation/request-text, auxiliary initialization and parameter-update comparisons; decisive seed1/2 where the plan calls for them.",
+    "Frozen feedback-expansion v2 collection and nine source32/64/128 collector fits from the verified update262 initialization: original quotas, up-to-three branches, fixed continuation/readout,192 updates and3072 draws, independent feedback-dev selection, masks/ties/unknowns retained.",
+    "New source/state coverage, initial-only versus initial-plus-post, complete T2 trajectories, common-support and parameter-binding E2/E3/factorial comparisons under their declared conditions.",
+    "Actual autonomous Host main comparison of fixed_context/rules/Jev with matched tasks, model, sources, budgets and tool behavior; distinguish requested/needed/acquired/delivered/used evidence and preserve common Host/simulator limitations.",
+    "Ordered lifecycle studies for high/low reuse and related/unrelated updates, View versus no-view, cumulative quality and full measured maintenance/retrieval/delivery costs.",
+    "LongMemEval451 real Reader/native judge; full declared STATE read-only and other external protocols; protected-source exposure reconciliation and final method/checkpoint/seed freeze before any new protected-body inspection. Native STATE test30/39 partial exposure remains recorded.",
+    "Four main research result figures and complete protocol-aware reporting, including source grouping, unsuccessful/unknown runs and known/unmeasured costs. Saved CPU curve and the three-task Host-only diagnostic do not substitute for these deliverables."
+  ],
+  "unplanned_search_exposure": [
+    {
+      "task_id": "30-cross_cancel_flight_and_hotel",
+      "native_split": "test",
+      "exposure": "One expected_value line surfaced by broad directory search; no full task body deliberately opened."
+    },
+    {
+      "task_id": "39-compound_intl_delay_not_free_plus_partial_bag_plus_insurance_drop_state",
+      "native_split": "test",
+      "exposure": "Opening message, user context, task summary and requirement excerpts surfaced by broad directory search."
+    },
+    {
+      "task_id": "101-challenge_mixed_strategy_shared_budget",
+      "native_split": "train",
+      "exposure": "One delay_compensation field surfaced by broad directory search."
+    },
+    {
+      "task_id": "118-policy_delay_threshold_edge_compare",
+      "native_split": "train",
+      "exposure": "Opening/context/instruction/summary/requirement excerpts surfaced by broad directory search."
+    }
+  ],
+  "exposure_disposition": "Native test tasks30/39 are now partially exposed and cannot be described as unseen confirmation in subsequent reporting. Preserve native splits and labels; do not use their snippets as new training material. Future diagnostic searches restricted to explicit implementation files. Existing protected MuSiQue bodies were not opened.",
+  "scheduling": "Original feedback train batch011 is the sole live neural job. No second neural job or offline ledger settlement while live. Verify actual PID/files, never restart from stale status. Review terminal outputs/costs before next untouched batch. Saved CPU/train and six Host pilot jobs remain closed.",
+  "no_sha_or_content_fingerprint_validation": true,
+  "no_subagents": true,
+  "no_new_model_services_or_ledger": true,
+  "no_remote_writes": true,
+  "status": "ACTIVE;ORIGINAL_FEEDBACK_V2_BATCH000_010_REVIEWED_WITH_FAILURES;BATCH011_RUNNING",
+  "observed_at": "2026-10-24T20:09:07.120434+00:00",
+  "previous_progress": "data/manifests/evidence-gap-development-progress-20261023-v41.json",
+  "previous_turn_classification": "progress",
+  "current_turn_progress": "Closed batch010 under its declared9 positions, preserving two truncations, former-label versus recording-time relation and measurement/source/transfer distinctions. Settled measured costs once and dispatched original untouched batch011.",
+  "closed_batch": {
+    "split": "train",
+    "index": 10,
+    "groups": [
+      "musique-family-000652",
+      "memops_F14"
+    ],
+    "output": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-collection-v2/train/batch-010",
+    "review": "artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-010-review.json",
+    "status": "CLOSED_BATCH010_MECHANICS_AND_SOURCE_GROUNDED_FINDINGS_REVIEWED;FIRST_FAILURES_AND_MEASUREMENT_ROLES_RETAINED",
+    "position_status_counts": {
+      "COMPLETED": 7,
+      "FAILED": 2
+    },
+    "HTTP_requests": 17,
+    "known_generation_tokens": 70772,
+    "unknown_usage_increment": 0,
+    "local_model_forwards": 7,
+    "local_model_input_tokens": 35413,
+    "max_local_model_input_tokens": 7032,
+    "all_local_model_outputs_finite_and_untruncated": true,
+    "initial_state_occurrences": 6,
+    "post_operation_state_occurrences": 27,
+    "actual_decision_state_occurrences": 33,
+    "no_retrieval_positions": [
+      {
+        "history": "memops_F14",
+        "profile": "rules-rich",
+        "request": "stage-2",
+        "status": "FAILED"
+      },
+      {
+        "history": "memops_F14",
+        "profile": "laya-rich",
+        "request": "stage-2",
+        "status": "COMPLETED"
+      },
+      {
+        "history": "memops_F14",
+        "profile": "fixed_context-rich",
+        "request": "stage-2",
+        "status": "COMPLETED"
+      }
+    ],
+    "training_labels_created": 0,
+    "counterfactual_branches_executed": 0,
+    "actual_host_receipts_verified": true,
+    "retrieval_calls": 6,
+    "retrieval_calls_without_decision_state": [],
+    "semantic_findings": [
+      {
+        "history": "musique-family-000652",
+        "profile": "rules-rich",
+        "request": "corpus-7161",
+        "finding": "Host expands question to first recording/release label. Returns original-song article plus unrelated titles and View, not NinaSimoneAndHerFriends/Bethlehem. View preserves Nina1964 and later covers, adds unnecessary zero-path rules around ordinary facts, and marks original-recording label unknown. Final limitation is supported for that narrower time-specific relation, but does not surface the available former-artist/Bethlehem association. Original question ambiguity retained, no invented1964label or native relabel."
+      },
+      {
+        "history": "musique-family-000652",
+        "profile": "laya-rich",
+        "request": "corpus-7161",
+        "finding": "SEARCH8/READ0/HANDOFF returns original-song article. Request explicitly adds label at time of release; final identifies NinaSimone and limits original-recording label as unknown. Does not acquire former-label document. Narrowing should not be mistaken for proving all artist-label associations absent; no external label supplied."
+      },
+      {
+        "history": "musique-family-000652",
+        "profile": "fixed_context-rich",
+        "request": "corpus-7161",
+        "finding": "Request adds signing at first release. One retrieval returns original-song article and three unrelated titles. Host length8192/contentnull/reasoning31677; no final answer or rescued label. Former-label source not returned."
+      },
+      {
+        "history": "memops_F14",
+        "profile": "rules-rich",
+        "request": "stage-0",
+        "finding": "Correctly retains corrected office baseline, earlier user misstatement and distinct primary/historical-surgeon roles. Delivered View describes initial value as reported by doctor, blurring user misstatement versus official measurement; View appropriately leaves transfer completion unresolved. Host nevertheless labels transfer not completed from absence of evidence, rather than not reported complete. No actual transfer request was established by keeping a historical name for potential future use."
+      },
+      {
+        "history": "memops_F14",
+        "profile": "rules-rich",
+        "request": "stage-2",
+        "finding": "No new retrieval despite16-source notice/prior tool history. Host length8192/contentnull/reasoning31891; no final answer or new Jev decisions. Preserve first failure, not an inferred clinical answer."
+      },
+      {
+        "history": "memops_F14",
+        "profile": "laya-rich",
+        "request": "stage-0",
+        "finding": "Two actual reads plus HANDOFF preserve corrected clinic report, historical surgeon and current primary doctor; no home values reported yet is correct at this frontier. Calls earlier misstatement a transposition without source support, and adds hypertension wording not explicitly reported; review does not diagnose or assess treatment. Not completed/pending request overstates missing transfer evidence, since only a potential future need was mentioned."
+      },
+      {
+        "history": "memops_F14",
+        "profile": "laya-rich",
+        "request": "stage-2",
+        "finding": "No new retrieval despite16-source notice/prior tools. Repeats old correction but attributes both initial misstatement and corrected value to doctor-recorded readings, obscuring that one was a user report error. Misses later home range/single measurement, non-patient template and explicitly completed transfer; falsely says transfer not executed. Unchanged clinic baseline does not prove separation from unseen home data."
+      },
+      {
+        "history": "memops_F14",
+        "profile": "fixed_context-rich",
+        "request": "stage-0",
+        "finding": "Actual context delivery supports corrected office report and primary versus historical surgeon. Explains user misspoke instead of inventing a different measurement. Still infers transfer not completed from only potential future transfer need; better source-limited status is no completion reported."
+      },
+      {
+        "history": "memops_F14",
+        "profile": "fixed_context-rich",
+        "request": "stage-2",
+        "finding": "No new retrieval despite16-source notice/prior tools. Repeats initial/corrected reports and doctor roles, but omits new home measurements, their supplementary role, non-patient template and office reconfirmation. Falsely says records transfer not completed despite later explicit report. Does not replace clinic with home value because it never acquired home update; not evidence of successful contextual measurement handling."
+      }
+    ],
+    "document_pool_review": {
+      "family": "musique-family-000652",
+      "request": "corpus-7161",
+      "source_rows": 20,
+      "collector_positions": 3,
+      "literal_initial_sources_and_independent_Host_prefixes_verified": true,
+      "source_grounding": "NinaSimone first recorded song in1964; Bethlehem is a supported former artist-label association, with compilation released after artists left. Exact original-recording label is not specified. Original question does not unambiguously impose1964 signing condition; preserve relation/time qualification. Only one declared question, no artificial paired counterpart or new label."
+    },
+    "host_arrival_review": {
+      "F14_later_positions": 3,
+      "new_visible_sources_each": 16,
+      "prior_tool_history_each": true,
+      "new_retrieval_calls": {
+        "rules": 0,
+        "laya": 0,
+        "fixed_context": 0
+      },
+      "scope": "Actual first Host system notices checked; counts are not body delivery. Review evaluates reported measurement/doctor/transfer roles, not medical guidance."
+    },
+    "sensitive_detail_reporting": "Exact clinical values and historical procedure details remain in local ignored sources/review. Tracked progress should use source keys and measurement/doctor roles rather than copying personal clinical details.",
+    "reflection_and_disposition": {
+      "frozen_collection_unchanged": true,
+      "training_labels_created": 0,
+      "counterfactual_branches_executed": 0,
+      "no_manual_winner_nominations": true,
+      "next": "Settle closed measured overhead then untouched original batch011. Preserve both Host truncations, nine declared positions and distinction between correction, supplementary measurement, template and completion report. No source/label repair, response salvage or task filling."
+    }
+  },
+  "feedback_collection": {
+    "original_plan": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-expansion-study-plan-v2.json",
+    "source_version": "2a179b58",
+    "split": "train",
+    "batch_index": 11,
+    "groups": [
+      "musique-family-000743",
+      "memops_A33"
+    ],
+    "planned_positions": 12,
+    "completed_positions_observed": 2,
+    "active_position_observed": {
+      "history": "musique-family-000743",
+      "policy": "laya",
+      "interface": "rich",
+      "profile": "laya-rich",
+      "request": "corpus-31152"
+    },
+    "output": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-collection-v2/train/batch-011",
+    "frozen_recipe_unchanged": true,
+    "full128_pool_branch_preparation": "NOT_STARTED; do once after declared collection with original quotas/seed, no hand-picked binding winners."
+  },
+  "active_processes": [
+    {
+      "role": "original_feedback_v2_train_batch011",
+      "pid": 2329874,
+      "child_pid": 2329889,
+      "exec_session": 56625,
+      "driver": "artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-011.json",
+      "status": "RUNNING_AT_OBSERVATION"
+    }
+  ],
+  "accounting": {
+    "closed_batch_model_CPU_already_billed": 356.19067999098934,
+    "closed_batch_whole_child_CPU_not_additive": 393.416391,
+    "closed_batch_overhead": {
+      "status": "SETTLED_ONCE_WITH_NO_NEURAL_JOB_ACTIVE",
+      "phase": "evidence_gap_20261025_original_feedback_v2_train010_closed_overhead",
+      "measures": {
+        "cpu_seconds": 37.40948926301064,
+        "measured_phases": 6,
+        "runs": 1
+      },
+      "entries": [
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-010.json",
+          "field": "startup_and_child_cpu_seconds_pending",
+          "cpu_seconds": 37.22571100901064
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-010.json",
+          "field": "preflight_children_cpu_seconds_pending",
+          "cpu_seconds": 0.041614
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-010.json",
+          "field": "coordinator_cpu_seconds_pending",
+          "cpu_seconds": 0.026680123000000007
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-010-review.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 0.11488080499999999
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-010-review.json",
+          "field": "semantic_annotation_cpu_seconds_pending",
+          "cpu_seconds": 0.00039937099999999906
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-010-source-pre-review.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 0.0002039550000000022
+        }
+      ],
+      "model_CPU_already_billed_not_rebilled": 356.19067999098934,
+      "known_HTTP_tokens_not_rebilled": 70772,
+      "no_sha_validation": true,
+      "scope": "Whole child minus actual ledger CPU delta, plus preflight/coordinator and measured reviews/annotations. Nested model/inner driver are not additive. Unmeasured interpreter, source/exploratory reads, authoring, reporting/settlement remain unknown."
+    },
+    "live_batch": "Batch011 original runner records actual HTTP/model costs. Outer remainder/preflight/coordinator await actual exit; no concurrent settlement.",
+    "unknowns": "Unmeasured interpreter, source/exploratory reads, authoring and reporting/settlement CPU, GPU time and prices remain unknown."
+  },
+  "goal_complete": false,
+  "closed_collection_to_date": {
+    "batches": 11,
+    "source_groups": 22,
+    "source_group_ids": [
+      "memops_A14",
+      "memops_A29",
+      "memops_B05",
+      "memops_B06",
+      "memops_B21",
+      "memops_B25",
+      "memops_C23",
+      "memops_C26",
+      "memops_C29",
+      "memops_D11",
+      "memops_D23",
+      "memops_E07",
+      "memops_E11",
+      "memops_F08",
+      "memops_F14",
+      "musique-family-000272",
+      "musique-family-000275",
+      "musique-family-000395",
+      "musique-family-000522",
+      "musique-family-000648",
+      "musique-family-000652",
+      "musique-family-000796"
+    ],
+    "attempted_positions": 129,
+    "process_completed": 107,
+    "retained_failed": 22,
+    "HTTP_requests": 285,
+    "known_tokens": 1117013,
+    "unknown_usage_increment": 0,
+    "actual_decision_state_occurrences": 635,
+    "zero_decision_calls": 9,
+    "independent_source_warning": "Declared group IDs, repeated collector positions and actual state occurrences are distinct units. Process completion is not semantic correctness.",
+    "counterfactual_branches_executed": 0,
+    "training_labels_created": 0
+  }
+}
