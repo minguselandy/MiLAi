@@ -1,4 +1,37 @@
-# LATEST: 2026-10-25 first32 closed; frontier64 batch016 reviewed, batch017 LIVE
+# LATEST: 2026-10-25 batch017 reviewed; batch018 LIVE at frontier64
+
+Batch017 (musique-family-000766/A22) all12 positions process-completed, but this is not semantic
+accuracy.24 HTTP/79272 known tokens,unknown0;21 Host/3 View.14 finite,untruncated local forwards
+used76494 input tokens,max6671;one load.11 retrievals,11 initial+48 post=59 state observations,
+no zero-state calls. Source/bank/capture/actual Host packet audit passed.
+
+Both music pools support LouRawls/PhiladelphiaInternational in the target-hit context; all6
+answers grounded. Rules View includes drafting commentary. Fixed fuller query asks only artist,
+but actual returned album body supplies label: incidental coverage is not full query transmission.
+A22 all3 later Host inputs have16 arrivals/prior tools but no new retrieval, missing intermediate
+measurements and recent interval despite unchanged latest value. Laya early acquires full dated
+source but selects an older block/assistant echo, losing available date; later infers constancy
+from two endpoints. Rules reuse occurs but benefit untested. Fixed precise day span assumes an
+unknown year; qualitative stability does not establish exact recent rate. Personal health values
+and histories remain in ignored sources/review; tracked findings use roles and timing relations.
+
+Review:original-feedback-v2-collection-dispatch/train-017-review.json. Model/load713.2049667519836
+CPU seconds already billed;whole child751.760987 nested.6 measured remaining phases totaling
+38.82673691501635 CPU seconds settled once with no live job, literal ledger equality reverified.
+Cumulative18 closed batches:36 declared groups,207 attempts,170 process completions/37 failures,
+465 HTTP/1836383 known tokens,1087 state observations,14 zero-state calls. Not independent rows,
+branch eligibility or accuracy. First32 report remains scoped to000–015. No labels/branches/fits.
+
+ONLY LIVE neural job: original train batch018,musique-family-000312/memops_A13,12 positions.
+Driver2934843/child2934858;exec handle unavailable after output overflow,actual PIDs/files verified.
+Driver:artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-018.json.
+Never restart for lost handle. No second neural job/offline settlement while live. Review closure
+before next untouched batch; full128 train and4 dev collection precede once-only quota/seed prep.
+Latestv49/execution. Two report-only composition failures retained; no experiment rerun or rebill.
+Frozen2a179b58/update262/order/budgets unchanged;Lab behavior3c892d30. Full M1–M5 remain open.
+No SHA,agents,new services,second ledger or remote writes. Saved CPU/train/Host pilot stay closed.
+
+# Earlier: 2026-10-25 first32 closed; frontier64 batch016 reviewed, batch017 LIVE
 
 Batch016 (musique-family-000423/F13) attempted12 positions:10 process completions and2 retained
 Laya truncations (corpus38609/F13 early). Both8192/content null,reasoning33791/34383 characters.
