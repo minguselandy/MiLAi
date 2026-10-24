@@ -1,4 +1,36 @@
-# LATEST: 2026-10-25 feedback batches000–007 reviewed; batch008 LIVE
+# LATEST: 2026-10-25 feedback batches000–008 reviewed; batch009 LIVE
+
+Batch008 musique-family-000272/A14 closed after12 attempts:9 process completions,3 retained
+Host8192/contentnull truncations (rules/fixed corpus6328,A14 Laya stage2;reasoning34317/33687/35242).
+29 HTTP/116556 known tokens,unknown0;26 Host/3 View.21 finite/untruncated Laya forwards,121697 input
+tokens,max7075;one load.14 real retrievals,14 initial+51 post states match65 trace decisions;
+no zero-decision calls. Full literal source/bank/capture/result/actualHost-packet audit PASS.
+
+Full spouse pool has OneEmotion->ClintBlack and WhenISaidIDo->wifeLisaHartmanBlack. Laya actually
+returns both in two single-READ calls and answers from evidence;rules/fixed miss artistlink and
+prematurely dismiss useful relationship text from another song. Incomplete pool has no spouse.
+A14 early Laya acquires identity then drops it for application-only delivery, claiming identity
+missing; also misstates ancestry. Later allthree Hostrequests show16-source notice/prior tool
+history but no newretrieval;rules/fixed repeat initialidentifier and deny correction/projection,
+Laya truncates. View infers year fromreference withcaveat,Host dropscaveat;friend becomescolleague.
+Exact identifiers remain local ignored records; tracked progress uses status/source-role terms.
+
+Review: original-feedback-v2-collection-dispatch/train-008-review.json. Model/load1226.473822987973
+CPU already billed;wholechild1267.391763 nested. Six measured remaining phases41.21255496802697
+CPU settled once while nojoblive. Unmeasuredwork staysunknown. Nine closedbatches:18 declaredgroups,
+108 attempts,91 processcompletions/17 failures,237 HTTP/917050 knowntokens,539 actualstateoccurrences,
+5 cumulativezero-decisioncalls. Not taskaccuracy orindependentstates; no labels/branches yet.
+
+ONLY LIVE neural job: original train batch009 musique-family-000522/memops_E07,12 positions.
+Driver2240825/child2240890/exec40607;verifyactualPID/files. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-009.json.
+No secondneuraljob/offline settlement whilelive. Reviewclosure before nextuntouchedbatch. Keep
+frozen2a179b58/update262/sourceorder/quotas/budgets;complete128-sourcepool before once-only original
+branchpreparation. No manualwinners/syntheticstates/answersalvage. Latestv40/execution; fullM1–M5
+open. SavedCPU/train/Hostpilot closed. NoSHA,agents,newservices,secondledger,remotewrites.
+Lab behavior remains3c892d30.
+
+# Earlier: 2026-10-25 feedback batches000–007 reviewed; batch008 LIVE
 
 Batch007 musique-family-000648/C29 closed after12 attempts:11 process completions,1 retained
 fixed/corpus34091 Host8192/contentnull/reasoning34973 truncation.28 HTTP/88486 known tokens,
