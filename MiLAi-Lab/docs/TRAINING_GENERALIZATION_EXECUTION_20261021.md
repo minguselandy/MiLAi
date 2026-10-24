@@ -4,6 +4,36 @@
 [原计划](MILAI_TRAINING_DATA_GENERALIZATION_PLAN_20261021.md)，原文复制留存，原目录文件未修改。
 该计划中的“本轮已完成”是另一环境的历史说明，不能代替本机当前验证。
 
+## 2026-10-25：启动原冻结反馈 v2 首批收集
+
+完成保存后选点/匹配train核对和Host小批诊断后，实际检查确认没有其他活动神经作业，
+原v2的68个train批次与4个dev批次均尚无输出。当前只启动既定train-batch-000：
+memops_A29与memops_B05两个既有训练来源，各自连续两次公开请求，共4个位置/collector、
+12个位置。保持原程序的history→policy→request顺序，rules、Laya、fixed_context分别使用
+自己的bank；不是重跑旧W5或重置已经运行的队列。
+
+派发前把10个冻结源码文件与2a179b58提交内容做字面比较，把bound-config与原I2模板比较，
+确认唯一新增配置是已核对的update262 checkpoint；批次history与既定source32 cohort的
+对应条目也字面一致。使用原CUDA解释器/既有attention wrapper和collection_environment，
+没有另加依赖路径或改代码。wrapper本身已声明HTTP依赖路径，已有真实配置预检保持有效。
+原计划中的checkpoint pending仍是历史标记，以初始化绑定manifest和已关闭的匹配评估为准。
+
+收集保持CPU4、shared_actions16384/head2048、2048完整返回额度、8次读取与8个控制步骤，
+原600-request/8M队列上限不变；未加入compact表示或Host试验补充说明。
+实际自主Host请求及控制步骤快照进入原收集入口，前一位置成功的Host历史只在自己的bank
+续接。状态配额、至多三分支、固定续跑/readout和后续192更新/3072 draws配方均未更动。
+没有手工指定赢家、补造frame或借用缺失来源单元。
+
+当前外层驱动1541852、子进程1541867、会话67648，v31记录时已完成8/12个流程位置，正在
+B05的laya-rich/stage-0。源文件输出在原`feedback-collection-v2/train/batch-000`，额外驱动
+测量在本工作树`original-feedback-v2-collection-dispatch/train-000.json`。这里尚无语义成绩，
+实际新请求、View与分支仍须源先审阅。原冻结驱动会保留已知用量的响应格式失败并继续未尝试
+位置；其他失败停止批次，不自动重试，须检查真实前缀与用量后才能派发后续未尝试工作。
+
+运行期间不并行启动其他神经作业或写入离线费用。原入口继续计量HTTP和本地模型CPU，
+外层完整子进程减去实际已入账CPU增量、协调进程和Git预检子进程等待真实退出后衔接。
+完整研究目标仍开放；当前索引：[进度v31](../data/manifests/evidence-gap-development-progress-20261023-v31.json)。
+
 ## 2026-10-25：三任务 Host 说明对照全部关闭，未显示一致收益
 
 此前冻结的三条native TRAIN任务5/7/8、六个base/extra_instructions条件已全部执行一次，

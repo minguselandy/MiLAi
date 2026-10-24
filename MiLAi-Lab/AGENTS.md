@@ -1,4 +1,29 @@
-# LATEST: 2026-10-25 six-job Host instruction diagnostic CLOSED; no neural job live
+# LATEST: 2026-10-25 original frozen feedback-v2 collection batch000 LIVE
+
+ONLY LIVE neural job: original train batch000, groups memops_A29/memops_B05,12 public positions
+across rules-rich/laya-rich/fixed_context-rich. Driver1541852/child1541867/session67648;
+verify actual PID and files. Outer driver: artifacts/evidence-gap-20261023/
+original-feedback-v2-collection-dispatch/train-000.json. Inner output is the original
+training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/
+feedback-collection-v2/train/batch-000. At progress-v31 snapshot:8/12, B05/laya-rich/stage-0.
+
+Source2a179b58 and original argv retained;10 frozen source files matched declared commit literally.
+Bound config differs from original I2 template only by verified selected262 checkpoint. Batch
+histories matched their declared source32 cohort literally. No new source reclassification,
+compact profile, Host supplement, quota change, retry, queue reset, source/position substitution.
+CPU4/shared_actions16384/head2048; return2048,reads8,controlsteps8; original600-request/8M queues.
+Autonomous Host requests and actual control-step/Store frames are captured; no invented readouts.
+
+Process completion is not semantic correctness. Frozen runner retains fully-known response-format
+failures while advancing to untouched positions; other failures stop. Inspect actual prefix,
+known/unknown usage and fresh source-grounded semantics before any subsequent unattempted batch.
+Do not start another neural job or settle offline CPU while this job holds its budget state.
+Outer whole-child CPU minus actual billed-compute deltas, coordinator and preflight Git children
+await actual exit. No original closed phase is rebilled. Latest progress-v31/execution record.
+Saved CPU selection/train and six Host pilot jobs are CLOSED; optional supplement was not promoted.
+Full plan/M1-M5 remain open. No SHA, agents, new services, second ledger or remote writes.
+
+# Earlier: 2026-10-25 six-job Host instruction diagnostic CLOSED; no neural job live
 
 All six frozen45829497/no-memory jobs completed once, with original order/inputs/limits kept.
 Native state results (base / extra): TRAIN5 0/1; TRAIN7 1/0; TRAIN8 0/0. Both conditions have
