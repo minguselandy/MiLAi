@@ -1,4 +1,38 @@
-# LATEST: 2026-10-25 first32 feedback collection VERIFIED; frontier64 batch016 LIVE
+# LATEST: 2026-10-25 first32 closed; frontier64 batch016 reviewed, batch017 LIVE
+
+Batch016 (musique-family-000423/F13) attempted12 positions:10 process completions and2 retained
+Laya truncations (corpus38609/F13 early). Both8192/content null,reasoning33791/34383 characters.
+32 HTTP/127540 known tokens,unknown0;29 Host/3 View.36 finite,untruncated local forwards used269748
+input tokens,max12393;one load.20 retrievals include3 zero-state calls.17 initial+69 post states
+match86 decision_input observations. Full literal source/bank/capture/Host-packet audit passed.
+
+Show SonyTV premiere is not producer identity;SonySix sister-channel list does not transfer its
+TataSky numbers toSonyTV. Target-number limitations valid;blanket absence of all lineup data is
+not a full-pool fact. F13 rules changes last-month sale tolast-year and overstates being outbid;
+View keeps relative sale time but adds implied tour years and is not delivered. Later rules/fixed
+make no retrieval. Laya later has a fresh Host after earlyfailure and retrieves:full body ranges
+include temporary-family residence and unsigned conditional deal/mother vehicle, but those are
+not selected. It retains generic search/no completed purchase, not full updated state. Exact
+personal financing/addresses/vehicle detail remain in ignored local sources/review.
+
+Review:original-feedback-v2-collection-dispatch/train-016-review.json. Model/load3709.290501417017
+CPU seconds already billed;whole child3757.343261 nested.7 measured remaining phases totaling
+48.424205349983076 CPU seconds settled once with no live job. Unmeasured work unknown. First32
+report/accounting remains scoped to000–015 and is not rebilled or expanded. Cumulative17 closed
+batches:34 declared groups,195 attempts,158 process completions/37 failures,441 HTTP/1757111 known
+tokens,1028 state observations,14 zero-state calls. Not accuracy/independence/branch eligibility.
+No preparation,selection,labels or new feedback training has run.
+
+ONLY LIVE neural job: original train batch017 at64 frontier,musique-family-000766/memops_A22,
+12 positions. Driver2856205/child2856220/exec2164;verify actual PID/files. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-017.json.
+No second neural job/offline settlement while live. Review closure before next untouched batch.
+Continue full128 train pool and4 dev batches before once-only original quota/seed preparation.
+Frozen2a179b58/update262/order/budgets unchanged. Latestv48/execution;full M1–M5 remain open.
+Saved CPU/train/Host pilot closed. No SHA,agents,new services,second ledger or remote writes.
+Lab behavior remains3c892d30.
+
+# Earlier: 2026-10-25 first32 feedback collection VERIFIED; frontier64 batch016 LIVE
 
 All original batches000–015 are closed,source-reviewed and measured overhead settled once.32 declared
 histories and183 positions match the source32 cohort literally,with no missing/duplicate history or
