@@ -1,4 +1,44 @@
-# LATEST: 2026-10-25 feedback batches000–014 reviewed; batch015 LIVE
+# LATEST: 2026-10-25 first32 feedback collection VERIFIED; frontier64 batch016 LIVE
+
+All original batches000–015 are closed,source-reviewed and measured overhead settled once.32 declared
+histories and183 positions match the source32 cohort literally,with no missing/duplicate history or
+position. All32 groups under each of3 collectors have initial and post observations. Counts:
+rules61 attempts/52 process completions/9 failures,45 initial+291 post;
+Laya61/44/17,82 initial+263 post,9 zero-state calls;
+fixed61/52/9,52 initial+209 post,2 zero-state calls.
+Total190 retrievals,179 initial+763 post=942 observed states,148 process completions/35 failures,
+409 HTTP/1629571 known tokens,unknown increments0.339 local forwards/2026053 input tokens,max12445.
+State observations are not model forwards,independent sources,branch-eligible rows or accuracy.
+No branch preparation,quota selection,labels or new feedback training has occurred.
+
+Authoritative frontier32-collection-review.json in original-feedback-v2-collection-dispatch.
+First rollup failed because Counter(mapping) used dictionary values as counts;corrected to keys,
+failed log retained,no experiment rerun. Known explicit reference reads occur in only1 recorded
+case;implicit knowledge in queries/history is a different unit. Phase presence does not prove
+adequate condition coverage. Native annotations and all first failures stay unchanged.
+Known measured collection CPU subtotal23556.828438591998 = already-billed child compute22893.796010538874
++ settled follow-ups662.9723986791251 + prior prelaunch failure0.060029374. Whole-child23551.969276
+is nested,not added. Serial driver wall11314.882785 excludes authoring gaps. GPU time/prices and
+unmeasured work remain unknown;earlier source/binding preparation and other studies are separate.
+
+Latest batch015,C27:6 attempts,4 process completions/2 retained8192 truncations.14 HTTP/77306 known
+tokens;8 finite/untruncated forwards,30413 input tokens,max4360.7 initial+28 post states;no zero-state
+call. Rules later used a real caller cap5 (initial read allowance8),not a known-ref shortage. Fixed
+later partial answer JSON ends in escaped-tab repetition;no salvage. Laya later makes no retrieval
+and misses completed paperwork/pending reschedule. Exact medical details remain local ignored.
+Batch015 model/load223.4208580959853 CPU already billed;7 measured follow-up phases29.04009870701471
+include successful frontier rollup CPU and are settled once. First failed rollup CPU unmeasured.
+
+ONLY LIVE neural job: original train batch016 at64 frontier,musique-family-000423/memops_F13,
+12 positions. Driver2732306/child2732326/exec49727;verify PID/files. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-016.json.
+No second neural job/offline settlement while live. Review closure before next untouched batch.
+Continue original full128 train pool and4 dev batches before once-only branch preparation;do not
+promote source32 collection closure to full goal completion. Frozen2a179b58/update262/order/quotas/
+budgets unchanged. Latestv47/execution;M1–M5 open. Saved CPU/train/Host pilot closed. No SHA,agents,
+new services,second ledger or remote writes. Lab behavior remains3c892d30.
+
+# Earlier: 2026-10-25 feedback batches000–014 reviewed; batch015 LIVE
 
 Batch014 (C02/musique-family-000402) attempted12 positions:10 process completions and2 retained
 Laya Host truncations (C02 later and corpus34253),both8192/content null;reasoning32537/34356.
