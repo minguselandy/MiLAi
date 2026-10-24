@@ -1,4 +1,37 @@
-# LATEST: 2026-10-25 feedback batches000–011 reviewed; batch012 LIVE
+# LATEST: 2026-10-25 feedback batches000–012 reviewed; batch013 LIVE
+
+Batch012 (musique-family-000384/C05/musique-family-000047) attempted12 positions:9 process
+completions and3 Host truncations (fixed/Tiburon,Laya/C05 later,Laya/film). All8192/content null;
+reasoning35549/31594/39591 characters.30 HTTP/130702 known tokens,unknown0;27 Host/3 View calls.
+28 finite,untruncated Laya forwards used180033 input tokens,max11613;one load.17 retrievals include
+2 zero-decision calls.15 initial+68 post states match83 decisions;full literal audit passed.
+
+Tiburon pool only supports California,not county/region;completed answers retain that limit.
+C05 rules later retrieves but keeps old Host answer/old booking/sightseeing,omitting acquired changed
+return and nonflight budget. Laya acquires final refused extension and confirmed return/budget,
+then selects sightseeing only and Host truncates. Fixed later makes no new retrieval. Leave
+approval,flight change,fee quote,two-person budget and another booking remain distinct. Exact
+booking codes stay in ignored local sources/review. Film sources list3 countries but give France
+history only. Rules/fixed preserve this condition and1792,using incidental NationalConvention text
+from filming-only retrieval. Fixed makes3 empty follow-ups;only2 are zero-decision calls.
+
+Review:original-feedback-v2-collection-dispatch/train-012-review.json. Model/load2182.009734427986
+CPU seconds already billed;whole child2228.456533 is nested.6 measured remaining phases totaling
+46.86741977701345 CPU seconds settled once with no live job. Unmeasured work remains unknown.
+13 closed batches:27 declared groups,153 attempts,127 process completions/26 failures,340 HTTP/
+1331401 known tokens,775 state occurrences,11 zero-decision calls. Not accuracy or independent
+states;no training labels or counterfactual branches created.
+
+ONLY LIVE neural job: original train batch013,memops_B01 then musique-family-000738,12 positions.
+Driver2457378/child2457393/exec22506;verify actual PID/files. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-013.json.
+Preserve this original MemOps-first order;do not assume every batch starts with a document pool.
+No second neural job/offline settlement while live. Review closure before next untouched batch.
+Keep frozen2a179b58/update262,source order,quotas and budgets;finish128-source collection before
+once-only original branch preparation. Latestv44/execution;full M1–M5 remain open. Saved CPU/train/
+Host pilot closed. No SHA,agents,new services,second ledger or remote writes. Lab remains3c892d30.
+
+# Earlier: 2026-10-25 feedback batches000–011 reviewed; batch012 LIVE
 
 Batch011 (musique-family-000743/A33) attempted all12 positions:11 process completions and1 retained
 Laya/corpus31196 JSON_ACTION_MALFORMED. Actual final response:HTTP200,finish stop,content null,
