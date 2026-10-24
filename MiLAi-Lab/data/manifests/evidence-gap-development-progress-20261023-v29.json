@@ -1,0 +1,154 @@
+{
+  "source_version": "3c892d30",
+  "plan": "docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261023.md",
+  "execution": "docs/TRAINING_GENERALIZATION_EXECUTION_20261021.md",
+  "unplanned_search_exposure": [
+    {
+      "task_id": "30-cross_cancel_flight_and_hotel",
+      "native_split": "test",
+      "exposure": "One expected_value line surfaced by broad directory search; no full task body deliberately opened."
+    },
+    {
+      "task_id": "39-compound_intl_delay_not_free_plus_partial_bag_plus_insurance_drop_state",
+      "native_split": "test",
+      "exposure": "Opening message, user context, task summary and requirement excerpts surfaced by broad directory search."
+    },
+    {
+      "task_id": "101-challenge_mixed_strategy_shared_budget",
+      "native_split": "train",
+      "exposure": "One delay_compensation field surfaced by broad directory search."
+    },
+    {
+      "task_id": "118-policy_delay_threshold_edge_compare",
+      "native_split": "train",
+      "exposure": "Opening/context/instruction/summary/requirement excerpts surfaced by broad directory search."
+    }
+  ],
+  "exposure_disposition": "Native test tasks30/39 are now partially exposed and cannot be described as unseen confirmation in subsequent reporting. Preserve native splits and labels; do not use their snippets as new training material. Future diagnostic searches restricted to explicit implementation files. Existing protected MuSiQue bodies were not opened.",
+  "scheduling": "Matching4886selected-train is sole neuraljob. No secondneural or offline settlement whilelive; verify actualPID/files, never stale-session restart. Afterterminal run verify_selected_train_v1.py using originalfrozenhelpers, reconcile terminalcosts, then unchanged remaining plan. Allolddevcandidates and Host-only diagnostic stayclosed.",
+  "no_sha_or_content_fingerprint_validation": true,
+  "no_subagents": true,
+  "no_new_model_services_or_ledger": true,
+  "no_remote_writes": true,
+  "status": "ACTIVE;SAVED_CPU_PRIMARY_SELECTION_AND_FULL_MATCHING_TRAIN_VERIFIED_AND_SETTLED;HOST_PILOT_NEXT",
+  "observed_at": "2026-10-24T14:53:24.843017+00:00",
+  "previous_progress": "data/manifests/evidence-gap-development-progress-20261023-v28.json",
+  "previous_turn_classification": "Verified wait; current turn observed normal exit, verified all 4886 rows, reconciled measured costs and exported the complete matching gap",
+  "saved_selection": {
+    "authoritative_complete_result": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-selection-v1/complete-results.json",
+    "selection": {
+      "update": 262,
+      "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/fitting/source256-actions-full-seed0-u524-v1/checkpoints/update-262",
+      "metric": 0.807826854448818,
+      "condition": {
+        "device": "cpu",
+        "visible_cuda_devices": "",
+        "threads": 4,
+        "max_len": 12288,
+        "head_max_len": 2048,
+        "operation_state": "shared_actions",
+        "reference_compile_override": false,
+        "mha_fastpath_enabled": false,
+        "loaded_weight_dtype": "torch.float32"
+      },
+      "rule": "Original operation-dev family macro, earliest tie, update0eligible; feedback/Host/test not used",
+      "scope": "Complete primary labelled-dev metric for all seven candidates; masked64 output791 remains unknown. Matching selected-train evaluation still pending."
+    },
+    "primary_dev_labelled": 616,
+    "primary_dev_families": 32,
+    "primary_dev_accepted": 484,
+    "metric": "Source-family macro acceptance on static reviewed operation preferences; not Host success",
+    "original_checkpoint_rule_unchanged": true,
+    "historical_gap": {
+      "update": 64,
+      "unknown_original_index": 791,
+      "masked": true,
+      "disposition": "Runtime prediction remains unknown; no retry or fabricated output. All primary labelled dev rows and separate feedback rows were actual."
+    }
+  },
+  "matching_train": {
+    "verification": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-selection-v1/selected-train-verification.json",
+    "driver": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-selection-v1/selected-train-driver.json",
+    "labelled_rows": 4886,
+    "families": 249,
+    "accepted": 4691,
+    "family_macro_acceptance": 0.9713787059472135,
+    "train_dev_family_gap": 0.16355185149839557,
+    "original_raw_train_rows": 7884,
+    "original_masked_rows_retained_in_pool": 2998,
+    "comparison_to_in_memory_gpu": "Same acceptance counts, family count, family macro and matching gap; per-action prediction equality has not been claimed.",
+    "conditions": {
+      "device": "cpu",
+      "operation_state": "shared_actions",
+      "loaded_weight_dtype": "torch.float32",
+      "threads": 4,
+      "visible_cuda_devices": "",
+      "http_requests": 0,
+      "max_len": 12288,
+      "head_max_len": 2048,
+      "reference_compile_override": false,
+      "mha_fastpath_enabled": false,
+      "calibrated": false
+    },
+    "actual_exit_code": 0,
+    "whole_child_cpu_seconds": 286051.821469,
+    "driver_wall_seconds_not_additive": 72974.20144657325,
+    "model_compute_already_recorded": {
+      "wall_seconds": 72951.28189662099,
+      "cpu_seconds": 285894.79894698603,
+      "runs": 1,
+      "forwards": 4886,
+      "sequence_rows": 4886,
+      "input_tokens": 27995073,
+      "state_tokenizations": 4886,
+      "state_tokens": 26621838,
+      "peak_rss_kib": 4499948,
+      "ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json"
+    }
+  },
+  "accounting": {
+    "closed_followups": {
+      "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-selection-v1/selected-train-settlement.json",
+      "phase": "evidence_gap_20261023_selected_train_closed_followups_v1",
+      "measures": {
+        "cpu_seconds": 313.1682496719836,
+        "measured_phases": 40,
+        "runs": 1
+      },
+      "includes": "v21-v28 measured work plus actual evaluation startup remainder, coordinator and verification CPU; model and earlier selection-analysis CPU not rebilled"
+    },
+    "complete_figure": {
+      "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-selection-v1/figures-v2/accounting.json",
+      "phase": "evidence_gap_20261023_selected_train_figures_v2",
+      "measures": {
+        "cpu_seconds": 5.253525001000001,
+        "measured_phases": 2,
+        "runs": 1
+      }
+    },
+    "unknowns": "Previously unmeasured startup, authoring/reporting, visual inspection, settlement overhead and original LME prefix whole-process costs remain unknown, not zero."
+  },
+  "figure": {
+    "directory": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-selection-v1/figures-v2",
+    "verification": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-selection-v1/figures-v2/verification.json",
+    "csv_rows": 22,
+    "saved_cpu_train_rows": 1,
+    "saved_cpu_dev_rows": 7,
+    "in_memory_gpu_rows": 14,
+    "masked64_runtime_gap_retained": true,
+    "png_viewed": true,
+    "earlier_pending_figure_preserved": true,
+    "scope": "Source256 complete-action seed0 diagnostic; not the four full main research figures"
+  },
+  "active_processes": [],
+  "next_authorized_dispatch": {
+    "plan": "data/manifests/evidence-gap-state-host-instructions-pilot-v1.json",
+    "first_job": "task-0-base",
+    "native_train_task": "5-strategy_two_legs_opposite_sequences_intl_econ_biz_dom_state",
+    "source_freeze": "45829497",
+    "memory_protocol": "none",
+    "scope": "Predeclared correlated three-task Host instruction diagnostic; preserve first failure and original six-job order, no retry. Compare stored native input bytes before dispatch."
+  },
+  "remaining": "source64/128andotherfits/requesttext/auxiliary/parameterconditions;frozenfeedback32/64/128,T2,initial-vs-post,state/sourcecoverage,seeds;F1/F2semanticandF3completecapacity/Hostsimulator;LME451Reader/nativejudge,lifecycle,fullHost/officialreadonly/external/protectedandfourmainfigures. M1-M5not achieved. Host-only diagnostic now closed at native state0; compact-model quality comparison not yet executed. ActualSTATEexport/unknownpair is not trainedfeedback or 32/64/128source expansion. Newemptydeliverychoice learnedselection/Hosteffect stillunmeasured. New Host instruction condition still needs a declared real comparison; no F1/F2/Host quality fix claimed. Originalfeedback initialization now bound; collection, state/source-grounded review and allfits remain unexecuted. Hostinstruction pairedpilot now prepared only; its realfirstoutcomes and allmemory/application comparisons stillpending. Deferred-source bookkeeping fixed; realF1semanticacceptance and F2faithfulgeneration remainpending. Public calendar metadata now propagates; semantic date handling and real acceptance remain unmeasured. Saved CPU selection and full matching train are now closed; original historical unknowns remain. Host instruction pilot and all broader application/training requirements still need execution.",
+  "goal_complete": false
+}

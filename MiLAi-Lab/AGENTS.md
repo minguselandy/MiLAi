@@ -1,4 +1,31 @@
-# LATEST: 2026-10-24 selected-train follow-up settlement prepared, NOT EXECUTED
+# LATEST: 2026-10-24 saved CPU selection and full matching train VERIFIED/CLOSED
+
+Selected update262 completed all4886 labelled train rows; driver798921/child798926/session52857
+EXITED normally. Do not restart. Full original rows, literal projected inputs, finite outputs,
+lengths, checkpoint and frozen CPU FP32/threads4/shared_actions12288/head2048 conditions verified.
+No calibration, reference compilation, MHA fastpath, CUDA visibility or HTTP calls.
+Train:4691/4886 accepted,249 families,macro0.9713787059472135. Selected dev:484/616,32 families,
+macro0.807826854448818; matching gap0.16355185149839557. Aggregates match original in-memory GPU;
+this does not claim identical per-action predictions or Host success. Original selection rule
+unchanged. Raw7884 train rows and2998 masked remain in original pool. Masked64 output791 remains
+unknown; no invented output/retry. Full plan/M1-M5 remain unfinished.
+
+Authoritative saved-cpu-selection-v1/complete-results.json and selected-train-verification.json.
+Model compute285894.79894698603 CPU seconds already billed once; whole child286051.821469 CPU.
+selected-train-settlement.json closes v21-v28 plus actual startup/coordinator/verification:
+40 phases313.1682496719836 CPU seconds. Do not rebill historical pending flags. Figures-v2 exports
+22 verified CSV rows and the actual selected CPU gap; PNG viewed, old pending figure preserved.
+Figure rendering/check costs separately settled once:2 phases5.253525001000001 CPU seconds.
+Previously unmeasured costs stay unknown. Do not rerun closed verification/settlement scripts.
+
+At this record no neural job is live. Next authorized work is the frozen six-job Host instruction
+pilot in its existing order: task-0-base (native TRAIN5) first, source45829497, memory_protocol none.
+Compare original native inputs to stored literal copies before each dispatch; preserve first
+failure/unknown usage and inspect before remaining jobs. No automatic retry, task replacement,
+new service, second ledger, SHA, agents or remote writes. Lab behavior remains3c892d30; original
+feedback2a179b58 unchanged. Latest progress-v29/execution doc; revalidate actual processes.
+
+# Earlier: 2026-10-24 selected-train follow-up settlement prepared, NOT EXECUTED
 
 Matching train remains the sole live neural job: driver798921/child798926/exec52857,
 last observed 1390/4886. Verify actual PID and files; no restart or second neural job.
