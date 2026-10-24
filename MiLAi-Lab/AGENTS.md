@@ -1,4 +1,37 @@
-# LATEST: 2026-10-25 original frozen feedback-v2 collection batch000 LIVE
+# LATEST: 2026-10-25 original feedback batch000 reviewed; batch001 LIVE
+
+Batch000 A29/B05 attempted all12 positions under frozen2a179b58:10 process completions,
+2 retained VLLM_CHAT_TRUNCATED Host failures (B05 rules stage-2 and Laya stage-0), both8192
+completion tokens/content null, known usage.22 HTTP/109683 known tokens,unknown0;20 Host/2 View
+calls.25 finite/untruncated Laya forwards,160221 input tokens,max11534;one model load.
+8 actual retrieval calls,8 initial+41 post-operation state occurrences match49 decision inputs.
+Actual returned packets were found in real Host requests. No branch replay or training labels yet.
+
+Fresh source review found: A29 Laya acquired correction72 but handoff_select_1 discarded it for
+old74 context; fitting options retaining the correction existed. B05 late Laya acquired the
+wife's Iris proposal and user's non-agreement, but step exhaustion returned older material;
+fitting handoffs including the late sources existed. Five positions made no new retrieval
+(four completed answers); later explanations/decisions remained stale. Source clocks were unknown;
+an unsupported calendar anchor and View scope overstatement remain recorded. No quality win claim.
+Review: original-feedback-v2-collection-dispatch/train-000-review.json.
+
+First audit incorrectly equated nested native CPU with metered projection/predict/record CPU.
+Frozen code explains0.183617058 already-billed overhead; audit fixed, failed log retained, no model
+retry or ledger repair. Native model/load CPU2111.122186588 already billed; wholechild2155.386649
+is not additive. Remaining5 measured phases44.589955080996646 CPU settled once. Unmeasured work
+stays unknown. Do not rerun batch000 or rebill its historical pending fields.
+
+ONLY LIVE neural job: original train batch001, B06/C23,12 positions, same three rich collectors.
+Driver1785857/child1785872/session58607; verify actual PID/files. Outer driver is
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-001.json;
+inner output is original training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/
+feedback-collection-v2/train/batch-001. v32 snapshot9/12, C23/laya-rich/stage-2.
+No second neural job/offline settlement while live. No condition, budget, source order or quota
+changes after first failures. Complete the declared128-source collection before the single original
+quota/seed branch preparation; no manual winner nominations, borrowing cells or fabricated frames.
+Latest progress-v32/execution. Full goal/M1-M5 open; no SHA/agents/services/new ledger/remote writes.
+
+# Earlier: 2026-10-25 original frozen feedback-v2 collection batch000 LIVE
 
 ONLY LIVE neural job: original train batch000, groups memops_A29/memops_B05,12 public positions
 across rules-rich/laya-rich/fixed_context-rich. Driver1541852/child1541867/session67648;
