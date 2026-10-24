@@ -1,0 +1,95 @@
+{
+  "source_version": "3c892d30",
+  "plan": "docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261023.md",
+  "execution": "docs/TRAINING_GENERALIZATION_EXECUTION_20261021.md",
+  "remaining": "Matchingselectedtrain;source64/128andotherfits/requesttext/auxiliary/parameterconditions;frozenfeedback32/64/128,T2,initial-vs-post,state/sourcecoverage,seeds;F1/F2semanticandF3completecapacity/Hostsimulator;LME451Reader/nativejudge,lifecycle,fullHost/officialreadonly/external/protectedandfourmainfigures. M1-M5not achieved. Host-only diagnostic now closed at native state0; compact-model quality comparison not yet executed. ActualSTATEexport/unknownpair is not trainedfeedback or 32/64/128source expansion. Newemptydeliverychoice learnedselection/Hosteffect stillunmeasured. New Host instruction condition still needs a declared real comparison; no F1/F2/Host quality fix claimed. Originalfeedback initialization now bound; collection, state/source-grounded review and allfits remain unexecuted. Hostinstruction pairedpilot now prepared only; its realfirstoutcomes and allmemory/application comparisons stillpending. Deferred-source bookkeeping fixed; realF1semanticacceptance and F2faithfulgeneration remainpending. Public calendar metadata now propagates; semantic date handling and real acceptance remain unmeasured.",
+  "unplanned_search_exposure": [
+    {
+      "task_id": "30-cross_cancel_flight_and_hotel",
+      "native_split": "test",
+      "exposure": "One expected_value line surfaced by broad directory search; no full task body deliberately opened."
+    },
+    {
+      "task_id": "39-compound_intl_delay_not_free_plus_partial_bag_plus_insurance_drop_state",
+      "native_split": "test",
+      "exposure": "Opening message, user context, task summary and requirement excerpts surfaced by broad directory search."
+    },
+    {
+      "task_id": "101-challenge_mixed_strategy_shared_budget",
+      "native_split": "train",
+      "exposure": "One delay_compensation field surfaced by broad directory search."
+    },
+    {
+      "task_id": "118-policy_delay_threshold_edge_compare",
+      "native_split": "train",
+      "exposure": "Opening/context/instruction/summary/requirement excerpts surfaced by broad directory search."
+    }
+  ],
+  "exposure_disposition": "Native test tasks30/39 are now partially exposed and cannot be described as unseen confirmation in subsequent reporting. Preserve native splits and labels; do not use their snippets as new training material. Future diagnostic searches restricted to explicit implementation files. Existing protected MuSiQue bodies were not opened.",
+  "scheduling": "Matching4886selected-train is sole neuraljob. No secondneural or offline settlement whilelive; verify actualPID/files, never stale-session restart. Afterterminal run verify_selected_train_v1.py using originalfrozenhelpers, reconcile terminalcosts, then unchanged remaining plan. Allolddevcandidates and Host-only diagnostic stayclosed.",
+  "no_sha_or_content_fingerprint_validation": true,
+  "no_subagents": true,
+  "no_new_model_services_or_ledger": true,
+  "no_remote_writes": true,
+  "status": "ACTIVE;MATCHING_TRAIN_RUNNING;POST_EXIT_COST_SETTLEMENT_PREPARED_NOT_EXECUTED",
+  "observed_at": "2026-10-24T00:27:54.511258+00:00",
+  "previous_progress": "data/manifests/evidence-gap-development-progress-20261023-v27.json",
+  "previous_turn_classification": "Verified wait; this turn checked measured cost provenance and prepared the required post-exit settlement",
+  "followup_settlement": {
+    "preparation": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-selection-v1/selected-train-settlement-preparation.json",
+    "script": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/settle_selected_train_followups_v1.py",
+    "original_ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+    "closed_measured_phases": 37,
+    "closed_cpu_seconds": 132.25218957999996,
+    "closed_settlement_reports_checked": 10,
+    "previously_settled_entries_checked": 174,
+    "checks": [
+      "All 35 original pending v21-v27 file/field values match their measurements",
+      "No duplicate pending file/field or overlap with ten closed settlement records, including older path/measurement formats",
+      "Frozen compute verification projection checked against actual closed update524 and original ledger; ledger path and peak RSS are artifact metadata",
+      "Settlement script parsed successfully; not imported or executed"
+    ],
+    "measurement_scope": "v28 adds two read-only audit process CPU measurements, excluding interpreter startup. Other authoring/reporting stays unknown.",
+    "terminal_additions_pending": "Matching-train startup/child remainder, coordinator CPU and verification CPU, only after complete successful verification and actual exit. Do not bill model compute or already-settled selection analysis again.",
+    "dispatch_requirement": "After no neural process remains, run verify_selected_train_v1.py successfully, review actual terminal artifacts and pending costs, then invoke this settlement. No automatic dispatch or retries.",
+    "subsequent_costs": "If later measured work is added, explicitly reconcile it before running the prepared settlement.",
+    "ledger_written": false
+  },
+  "active_processes": [
+    {
+      "root": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-selection-v1/selected-train",
+      "driver_json": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-selection-v1/selected-train-driver.json",
+      "driver_pid": 798921,
+      "child_pid": 798926,
+      "session": 52857,
+      "status": "RUNNING",
+      "actual_proc_present": true,
+      "completed": 1390,
+      "planned": 4886,
+      "neural_model": true
+    }
+  ],
+  "accounting": {
+    "status": "PENDING_WHILE_MATCHING_SELECTED_TRAIN_LIVES",
+    "previous_pending": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/pending-costs-v27.json",
+    "entries": [
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-selection-v1/selected-train-followup-cost-audit.json",
+        "field": "cpu_seconds",
+        "cpu_seconds": 0.019007173000000002,
+        "measurement": "This read-only audit process CPU excluding interpreter startup; authoring/reporting and other unmeasured costs remain unknown"
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-cpu-selection-v1/selected-train-followup-closed-cost-audit.json",
+        "field": "cpu_seconds",
+        "cpu_seconds": 0.015036321999999998,
+        "measurement": "Read-only audit process CPU excluding startup; other authoring/reporting is unmeasured"
+      }
+    ],
+    "measured_cpu_seconds": 0.034043495,
+    "ledger_recorded": false,
+    "scope": "Read-only pending cost provenance and existing closed compute-format verification; settlement not executed",
+    "no_sha_validation": true
+  },
+  "goal_complete": false
+}

@@ -1,4 +1,26 @@
-# LATEST: 2026-10-24 public calendar propagation fixed; matching train LIVE
+# LATEST: 2026-10-24 selected-train follow-up settlement prepared, NOT EXECUTED
+
+Matching train remains the sole live neural job: driver798921/child798926/exec52857,
+last observed 1390/4886. Verify actual PID and files; no restart or second neural job.
+Previous turn was a verified wait. Current work checked pending cost provenance while waiting.
+
+saved-cpu-selection-v1/selected-train-settlement-preparation.json now lists 37 closed phases,
+132.25218957999996 measured CPU seconds: v21-v27 plus two v28 read-only audits. Original 35
+pending file/field values match actual measurements, with no duplicates or overlap against all
+ten existing closed settlement reports (174 prior entries), including old path/measurement formats.
+Frozen compute projection checked against actual closed524: ledger path and peak RSS are artifact
+metadata, not ordinary ledger measures. New script only parsed; it has NOT been executed/imported.
+
+After actual evaluation/driver exit and no other neural job, run verify_selected_train_v1.py.
+Only after successful full4886 verification and review, run settle_selected_train_followups_v1.py.
+It adds actual startup remainder/coordinator/verification CPU; model and old selection-analysis
+CPU are not billed twice. Reconcile any later pending costs explicitly before settlement.
+Original ledger untouched. v28 audit CPU excludes interpreter startup; other unmeasured work
+remains unknown. No model/HTTP calls, SHA, new ledger/services/agents or remote writes.
+Latest progress-v28/execution doc; full plan and M1-M5 remain unfinished. Lab behavior stays3c892d30;
+frozen current evaluation, feedback2a179b58 and Host-only pilot45829497 stay unchanged.
+
+# Earlier: 2026-10-24 public calendar propagation fixed; matching train LIVE
 
 3c892d30 preserves the public STATE runtime calendar on newly captured user, assistant and
 domain-tool Sources. Existing calendar_context now survives arrival observations, mechanical
