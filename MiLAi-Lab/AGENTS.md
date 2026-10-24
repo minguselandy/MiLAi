@@ -1,4 +1,38 @@
-# LATEST: 2026-10-25 feedback batches000–003 reviewed; batch004 LIVE
+# LATEST: 2026-10-25 feedback batches000–004 reviewed; batch005 LIVE
+
+Batch004 musique-family-000395/B25 closed after all12 attempts:9 process completions,3 retained
+Host8192/content-null truncations (MuSiQue fixed corpus34827;B25 Laya stage0/stage2).38 HTTP/130562
+known tokens,unknown0;35 Host/3 View.42 finite/untruncated Laya forwards,257874 input tokens,
+max11398;one load.23 real retrieval calls/captures include4 zero-decision budget-exhausted calls.
+19 actual initial+69 post states match88 decisions; actual packets and captured original results
+match real Host requests/trace. No initial state was invented for empty observations/actions.
+
+Auditor now follows frozen independent/continuous bank identity, optional incoming sources, and
+literal seeded source content/role/session/key/origin/event-time equality. All six MuSiQue positions
+have20 declared source rows, independent banks, no prior Host history,0 new-arrival count. Native
+annotations unchanged. Source review found Germany/US Bamberg cannot be joined: completed answers
+retain county unknown, though Laya repeatedly retrieves US material for German questions. View
+invented2010-01-01 from census year. B25 Laya repeatedly reads April updates then hands off initial
+wrongfirst/thirdFriday; late rules/fixed do no retrieval and repeat stale schedule. All failures kept.
+
+Existing frozen prepare_view_feedback_branches already marks no_actual_decision and preserves closed
+unselected captures; inspected code only, no branch preparation/sampling/model call performed.
+Full128-source collection still precedes once-only original quota/seed preparation. No manual winners.
+Review: original-feedback-v2-collection-dispatch/train-004-review.json. Model/load2935.6519890110053
+CPU already billed; wholechild2981.421527 is nested. Seven remaining measured phases46.151038433994664
+CPU settled once with no live job. All unmeasured work stays unknown. Five closed batches total:
+10 source groups,60 attempts,51 process completions/9 failures,124 HTTP/506251 known tokens,
+261 actual state occurrences,4 zero-decision calls. Not task accuracy or independent-state count.
+
+ONLY LIVE neural job: original train batch005 musique-family-000275/memops_B21,12 positions.
+Driver2035810/child2035825/exec31284; verify actual PID/files. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-005.json.
+No second neural job/offline ledger settlement while live. Review closure before next untouched
+batch. Frozen2a179b58/update262 binding, original order/quotas/budgets unchanged. Latest v36/execution.
+Full M1–M5 remain open; savedCPU/train and Host pilot stay closed. No SHA, agents, new services,
+second ledger or remote writes. Lab behavior remains3c892d30.
+
+# Earlier: 2026-10-25 feedback batches000–003 reviewed; batch004 LIVE
 
 Batch003 D23/F08 closed after all12 positions:11 process completions,1 retained D23/rules/stage-2
 Host truncation (8192 output tokens,content null,reasoning33560).20 HTTP/73934 known tokens,
