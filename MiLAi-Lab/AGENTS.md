@@ -1,4 +1,37 @@
-# LATEST: 2026-10-25 feedback batches000–002 reviewed; batch003 LIVE
+# LATEST: 2026-10-25 feedback batches000–003 reviewed; batch004 LIVE
+
+Batch003 D23/F08 closed after all12 positions:11 process completions,1 retained D23/rules/stage-2
+Host truncation (8192 output tokens,content null,reasoning33560).20 HTTP/73934 known tokens,
+unknown0;18 Host/2 View calls.11 finite/untruncated Laya forwards,44904 input tokens,max5091;
+one load.6 actual retrievals,6 initial+29 post states match35 trace decisions; actual packets
+verified in Host requests. All six later positions made no new retrieval, so no new Jev decisions.
+
+Actual first Host requests in all six later positions show16 new visible Sources plus prior tool
+messages. Notice explicitly gives no bodies and says relevance/effects unassessed: arrival count
+is not semantic change. Five completed later answers stayed stale; one failed. D23 misses actual
+Tampa trips/cancelled Seattle/unbooked Boston/tentative layout and HR correction. F08 all repeatold
+7724, missing corrected7742, provisional7740 doubt and final email-body7742 confirmation. Earlier
+answers largely reflect their frontier; F08 Laya upgrades assistant inference to user-confirmed
+pickup. Views preserve some distinctions but contain temporal/ownership overstatement; neither
+View was delivered. Do not attribute absent retrieval directly to Jev ranking or force retry.
+
+Review: original-feedback-v2-collection-dispatch/train-003-review.json. Future audit now records
+actual first Host arrival notice and prior-tool presence; AST parsed, current12 positions checked.
+Model/load331.3476321939893 CPU already billed; wholechild368.807872 is nested. Six remaining
+measured phases37.679051229010696 CPU settled once while no job live. Unmeasured work staysunknown.
+Four closed batches:8 source groups,48 attempts,42 process completions/6 failures,86 HTTP/375689
+known tokens,173 state occurrences. These are not independent states or task accuracy.
+
+ONLY LIVE neural job: original train batch004, musique-family-000395/memops_B25,12 positions.
+Driver1958063/child1958078/exec19453; verify actual PID/files. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-004.json.
+No second neural job/offline ledger settlement while live. Review closure before next untouched
+batch. Frozen2a179b58/update262 binding, original order/quotas/budgets unchanged. Finish128-source
+collection before once-only original branch preparation; no manual winners or fabricated frames.
+Latest progress-v35/execution. Full M1–M5 remain open; savedCPU/train and Host pilot stayclosed.
+No SHA, agents, new services, second ledger or remote writes. Lab behavior remains3c892d30.
+
+# Earlier: 2026-10-25 feedback batches000–002 reviewed; batch003 LIVE
 
 Batch002 C26/D11 closed after all12 positions:10 process completions,2 retained Host length
 failures (C26/Laya/stage-0 and D11/Laya/stage-2). Both8192 output tokens; unlike prior batches,
