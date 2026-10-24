@@ -1,4 +1,38 @@
-# LATEST: 2026-10-25 feedback batches000–008 reviewed; batch009 LIVE
+# LATEST: 2026-10-25 feedback batches000–009 reviewed; batch010 LIVE
+
+Batch009 (musique-family-000522/E07) attempted all12 positions:9 process completions and3 retained
+Host truncations (rules/Laya corpus33322 and E07/rules stage2). All8192 output tokens/content null;
+reasoning35956/35764/34660 characters.31 HTTP/129191 known tokens,unknown0;28 Host/3 View calls.
+22 finite,untruncated Laya forwards used109398 input tokens,max6579;one load.16 retrieval calls
+include4 zero-decision calls.12 initial+51 post states match63 trace decisions;literal audit PASS.
+
+The full geography pool directly supports Illinois in one source. Laya's observe-only READ plus
+selection delivers it. In the missing pool, rules View invents a named Elk Prairie feature from
+prairie/wild-elk habitat text and labels it reported;the bad View was actually delivered,then Host
+truncated. E07 early rules/fixed invent tentative hydration tracking from an uncertain start date
+and lost notepad. Rules View correctly notes no tentative change,but is not delivered;it separately
+confuses tracking start with target timing. Early Laya answers within the source frontier,but uses
+6 retrieval calls including4 empty zero-decision calls. All3 later Host requests show16 new Sources
+and prior tools,yet no new retrieval;current group-hiking trial/registration and generic3L context
+are missed. An unchanged correct2.5L reported target is not evidence of understanding the update.
+
+Review: original-feedback-v2-collection-dispatch/train-009-review.json. Model/load970.2280633439645
+CPU seconds already billed;whole child1010.386884 is nested.7 measured remaining phases totaling
+40.47040101703546 CPU seconds settled once with no live job. Unmeasured work remains unknown.
+Ten closed batches:20 declared groups,120 attempts,100 process completions/20 failures,268 HTTP/
+1046241 known tokens,602 actual state occurrences,9 cumulative zero-decision calls. Not accuracy
+or independent-state counts;no training labels or counterfactual branches created.
+
+ONLY LIVE neural job: original train batch010,musique-family-000652/memops_F14,9 declared positions.
+Driver2293856/child2293871/exec11838;verify actual PID/files. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-010.json.
+Do not fill this9-position batch to12 or substitute tasks. No second neural job/offline settlement
+while live. Review closure before the next untouched batch. Keep frozen2a179b58/update262,source
+order,quotas and budgets;finish128-source collection before once-only original branch preparation.
+Latestv41/execution;full M1–M5 remain open. Saved CPU/train/Host pilot closed. No SHA,agents,new
+services,second ledger or remote writes. Lab behavior remains3c892d30.
+
+# Earlier: 2026-10-25 feedback batches000–008 reviewed; batch009 LIVE
 
 Batch008 musique-family-000272/A14 closed after12 attempts:9 process completions,3 retained
 Host8192/contentnull truncations (rules/fixed corpus6328,A14 Laya stage2;reasoning34317/33687/35242).
