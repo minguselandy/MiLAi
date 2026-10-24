@@ -1,4 +1,35 @@
-# LATEST: 2026-10-25 original feedback batch000 reviewed; batch001 LIVE
+# LATEST: 2026-10-25 original feedback batches000/001 reviewed; batch002 LIVE
+
+Batch001 B06/C23 attempted all12 positions under unchanged frozen2a179b58:11 process completions,
+1 retained Host VLLM_CHAT_TRUNCATED at C23/fixed_context/stage-2 (8192 output tokens/content null,
+reasoning32359).22 HTTP/91358 known tokens, unknown0;20 Host/2 View calls.22 finite/untruncated
+Laya forwards,137756 input tokens,max12445;one load.8 actual retrievals,8 initial+36 actual post
+states match44 trace decisions. Actual packets verified in Host requests; no branches/labels yet.
+
+Source-first findings: all B06 late positions made no new retrieval and missed the explicit
+upcoming30-family barbecue agreement. Trampoline party group size was never supplied; Host/View
+inferred it and Laya conflated stress with prohibition. C23 early Laya read June/wife expiry then
+discarded it via handoff_select_1. Late Laya observed earlyMay/son uncertainty but four rejected
+reads ended at step limit with old selections; Host repeatedJune and omitted son uncertainty.
+C23 late rules did no retrieval and stayed stale; fixed failed before retrieval. Process completion
+is not correctness. Full review: original-feedback-v2-collection-dispatch/train-001-review.json.
+
+Model/load1942.3310912829934 CPU already billed; wholechild1987.708278 not additive. Five remaining
+measured phases45.65025790200668 CPU settled once with no live job. First batch002 launch failed
+BEFORE subprocess.Popen: outer shell redirect precreated exclusive child log. Driver/log preserved
+in train-002-prelaunch-log-collision, output absent/no child. Measured preflight/coordinator0.060029374
+CPU settled once. Corrected invocation uses direct outer output, no frozen code/config change.
+
+ONLY LIVE neural job: original train batch002 C26/D11,12 positions. Driver1878631/child1878646/
+exec23843; verify actual PID/files, never restart from stale snapshot. Driver path:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-002.json.
+No second neural job or offline ledger settlement while live. Inspect closure before next untouched
+batch; no retry of actual experiments, no quota/budget/order changes, no manual label nomination.
+Complete original128-source collection before once-only quota/seed branch preparation.
+Latest progress-v33/execution; savedCPU/train and six Host pilot jobs closed. Full M1-M5 remain open.
+No SHA, agents, new services, second ledger or remote writes. Lab behavior remains3c892d30.
+
+# Earlier: 2026-10-25 original feedback batch000 reviewed; batch001 LIVE
 
 Batch000 A29/B05 attempted all12 positions under frozen2a179b58:10 process completions,
 2 retained VLLM_CHAT_TRUNCATED Host failures (B05 rules stage-2 and Laya stage-0), both8192
