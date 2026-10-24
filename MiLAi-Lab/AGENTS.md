@@ -1,4 +1,37 @@
-# LATEST: 2026-10-25 batch019 reviewed; batch020 LIVE at frontier64
+# LATEST: 2026-10-25 batch020 reviewed; batch021 LIVE at frontier64
+
+Batch020 (musique-family-000764/E10):all12 process-completed,not all semantically correct.
+29 HTTP/91054 known tokens,unknown0;26 Host/3 View.20 finite,untruncated local forwards used97733
+input tokens,max6357;one load.14 retrievals,14 initial+53 post=67 state observations,no zero-state
+calls or explicit failed operations. Full literal source/bank/capture/actual Host packet audit passed.
+
+Neither geographic pool establishes target countyseat. First GrayTN body gives WashingtonCounty,
+not countyseat/JohnsonCity equivalence;second lacksGray. All6 finalanswers retain these limits.
+Rules View scope overstates multipleGray entities;final boundary remains grounded. Laya firstpool
+retrieves sameGray body twice;fixed missingpool secondempty call has search decisions,notzero-state.
+E10 early answers faithfully retain12week assessment and absentnotice/preferences atthatfrontier.
+Laya second earlyretrieval repairs actualfirstpacket coverage;fixed repeats fullsession. Later all3
+have16 arrivals/prior tools but no newretrieval,omit notice/coffee/contact/gift/person facts. Laya
+also substitutes roughly3months for12weeks.84-day assessment/70-day notice arithmetic verified on
+example leap/nonleap calendars without assigning occurrenceyear. Unanchoredbirthday remainsunknown.
+Exact personal costs/routines/recipientdetails remain inignored source/review;no newadvice/actions.
+
+Review:original-feedback-v2-collection-dispatch/train-020-review.json. Already-billed model/load
+864.7148824620049 CPU seconds;whole child903.651587 nested.11 measured remaining phases totaling
+39.21048804299518 CPU seconds settled once with no live job. Unmeasured work unknown.
+Cumulative21 closed batches:42 declared groups,243 attempts,198 process completions/45 failures,
+547 HTTP/2174454 known tokens,1266 state observations,16 zero-state calls. Not accuracy,independent
+rows or branch eligibility. First32 report/accounting stays000–015. No labels/branches/new fits.
+
+ONLY LIVE neural job: original batch021,musique-family-000116/memops_C10,12 positions.
+Driver3079919/child3079934/exec49821;verify actual PID/files. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-021.json.
+No second neural job/offline settlement while live;review closure before next untouched batch.
+Full128 train and4 dev collection precede once-only original quota/seed prep. Latestv52/execution.
+Frozen2a179b58/update262/order/budgets unchanged;Lab behavior3c892d30. Full M1–M5 remain open.
+No SHA,agents,new services,second ledger or remote writes. Saved CPU/train/Host pilot stay closed.
+
+# Earlier: 2026-10-25 batch019 reviewed; batch020 LIVE at frontier64
 
 Batch019 (musique-family-000550/B03):12 attempted,8 process completions/4 failures. Laya/fullmusic,
 fixed/missingmusic,rules/B03later truncate8192/content null (reasoning27323/24478/34777 chars).
