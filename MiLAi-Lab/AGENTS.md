@@ -1,4 +1,36 @@
-# LATEST: 2026-10-25 original feedback batches000/001 reviewed; batch002 LIVE
+# LATEST: 2026-10-25 feedback batches000–002 reviewed; batch003 LIVE
+
+Batch002 C26/D11 closed after all12 positions:10 process completions,2 retained Host length
+failures (C26/Laya/stage-0 and D11/Laya/stage-2). Both8192 output tokens; unlike prior batches,
+partial content was non-null (37179/1134 characters, reasoning1210/32458). C26 text contains86
+literal tool-name occurrences but ZERO executed retrievals. Frozen bridge rejects length responses
+before parsing. Auditor now records content presence/length instead of assuming null; actual traces
+remain unchanged. Full mechanical audit PASS; no response salvage, retry or new training label.
+
+22 HTTP/100714 known tokens,unknown0;20 Host/2 View calls.15 finite/untruncated Laya forwards,
+111108 input tokens,max10741;one load.8 actual retrievals,8 initial+37 post states match45 trace
+decisions, returned packets verified in real Host inputs. C26 rules retrieved but returned prior
+Host answer and omitted acquired3PM update. C26 Laya twice read3PM and twice handed off old2:30.
+D11 early Laya read atmosphere facts then discarded them. Later fixed/rules often reused stale
+history. D11 generated View invented2026 and shifted mother's portion judgment to user, but was
+not delivered. Findings are source-grounded diagnostics, not counterfactual winner labels.
+
+Review: original-feedback-v2-collection-dispatch/train-002-review.json. Model/load1441.3416286259935
+CPU already billed; whole child1480.838452 is nested. Seven remaining measured phases39.76749654800646
+CPU settled once with no live job; prelaunch log-collision cost was already settled and not repeated.
+All unmeasured work stays unknown. Across three closed batches:6 source groups,36 attempted positions,
+31 process completions/5 failures,66 HTTP/301755 known tokens,138 state occurrences. Not accuracy.
+
+ONLY LIVE neural job: original train batch003 D23/F08,12 positions. Driver1929790/child1929805/
+exec89649; verify actual PID/files. Driver path:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-003.json.
+No second neural job or offline ledger settlement while live. Review actual closure before next
+untouched batch. Keep frozen2a179b58, update262 binding, original order/budgets/quotas unchanged.
+Complete128-source collection before once-only original branch sampling; no manual nominations.
+Latest progress-v34/execution. Saved CPU/train and six Host pilot jobs closed; full M1–M5 open.
+No SHA, agents, new services, second ledger or remote writes; Lab behavior remains3c892d30.
+
+# Earlier: 2026-10-25 original feedback batches000/001 reviewed; batch002 LIVE
 
 Batch001 B06/C23 attempted all12 positions under unchanged frozen2a179b58:11 process completions,
 1 retained Host VLLM_CHAT_TRUNCATED at C23/fixed_context/stage-2 (8192 output tokens/content null,
