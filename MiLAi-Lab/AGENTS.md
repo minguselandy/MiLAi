@@ -1,4 +1,35 @@
-# LATEST: 2026-10-25 feedback batches000–005 reviewed; batch006 LIVE
+# LATEST: 2026-10-25 feedback batches000–006 reviewed; batch007 LIVE
+
+Batch006 musique-family-000796/E11 closed after12 attempts:9 process completions,3 retained
+Host length failures (Laya corpus35433,E11 Laya/fixed stage2). All8192/contentnull;reasoning34889/
+31974/31175.29 HTTP/119282 known tokens,unknown0;26 Host/3 View.20 finite/untruncated Laya forwards,
+103301 input tokens,max6056;one load.14 real retrievals,14 initial+61 post states match75 decisions;
+no zero-decision call this batch. Literal source/independent-bank/result/Host-packet audit PASS.
+
+First MuSiQue pool supports LindaPerry identity and Custard association, not explicit personal/band
+signing; second lacks identity. Preserve ambiguous question relation and native labels. No method
+returned Custard association; Laya initially discarded Linda for Xander then paid for further lookup.
+E11 all early answers use confirmed1000boxes. Later rules retrieves750boxes/144jars/old25000boxes,
+but repeats historical-assistant-derived150 follow-up as user intention and drops observed-but-
+undelivered unaccepted1000 offer. Numerical correctness is not understanding order changes. Laya/
+fixed late fail before new retrieval despite16-source notices; do not assign those failures to Jev.
+
+Review: original-feedback-v2-collection-dispatch/train-006-review.json. Model/load958.2245874630189
+CPU already billed; wholechild999.920096 is nested. Seven measured remaining phases42.02235969798115
+CPU settled once with no job live. Unmeasured work stays unknown. Seven closed batches:14 declared
+source groups,84 attempts,71 process completions/13 failures,180 HTTP/712008 known tokens,
+403 actual state occurrences,5 cumulative zero-decision calls. Not task accuracy/independent states.
+
+ONLY LIVE neural job: original train batch007 musique-family-000648/memops_C29,12 positions.
+Driver2140489/child2140504/exec66905; verify actual PID/files. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-007.json.
+No second neural job/offline settlement while live. Review closure before next untouched batch.
+Keep frozen2a179b58/update262/source order/quotas/budgets; complete128-source collection before
+once-only branch preparation. No manual winners, synthetic states or answer salvage. Latest v38/
+execution. Full M1–M5 remain open; savedCPU/train/Host pilot stay closed. No SHA, agents, new
+services, second ledger or remote writes. Lab behavior remains3c892d30.
+
+# Earlier: 2026-10-25 feedback batches000–005 reviewed; batch006 LIVE
 
 Batch005 musique-family-000275/B21 closed after12 attempts:11 process completions,1 retained
 rules/corpus4273 JSON_ACTION_MALFORMED. Actual final HTTP200/finishstop/contentNone,1514 output

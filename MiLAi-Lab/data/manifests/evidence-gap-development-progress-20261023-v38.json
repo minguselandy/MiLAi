@@ -1,0 +1,316 @@
+{
+  "source_version": "3c892d30",
+  "plan": "docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261023.md",
+  "execution": "docs/TRAINING_GENERALIZATION_EXECUTION_20261021.md",
+  "remaining": "F1/F2 real semantic acceptance for ordinary questions, explicit preferences, tool changes, unrelated arrivals, faithful conditions, object identity and unknown times; F3 real compact-input and bounded delivery/Host effects, including learned empty handoff.; Original source64/source128 fits and remaining matched representation/request-text, auxiliary initialization and parameter-update comparisons; decisive seed1/2 where the plan calls for them.; Frozen feedback-expansion v2 collection and nine source32/64/128 collector fits from the verified update262 initialization: original quotas, up-to-three branches, fixed continuation/readout,192 updates and3072 draws, independent feedback-dev selection, masks/ties/unknowns retained.; New source/state coverage, initial-only versus initial-plus-post, complete T2 trajectories, common-support and parameter-binding E2/E3/factorial comparisons under their declared conditions.; Actual autonomous Host main comparison of fixed_context/rules/Jev with matched tasks, model, sources, budgets and tool behavior; distinguish requested/needed/acquired/delivered/used evidence and preserve common Host/simulator limitations.; Ordered lifecycle studies for high/low reuse and related/unrelated updates, View versus no-view, cumulative quality and full measured maintenance/retrieval/delivery costs.; LongMemEval451 real Reader/native judge; full declared STATE read-only and other external protocols; protected-source exposure reconciliation and final method/checkpoint/seed freeze before any new protected-body inspection. Native STATE test30/39 partial exposure remains recorded.; Four main research result figures and complete protocol-aware reporting, including source grouping, unsuccessful/unknown runs and known/unmeasured costs. Saved CPU curve and the three-task Host-only diagnostic do not substitute for these deliverables.",
+  "remaining_requirements": [
+    "F1/F2 real semantic acceptance for ordinary questions, explicit preferences, tool changes, unrelated arrivals, faithful conditions, object identity and unknown times; F3 real compact-input and bounded delivery/Host effects, including learned empty handoff.",
+    "Original source64/source128 fits and remaining matched representation/request-text, auxiliary initialization and parameter-update comparisons; decisive seed1/2 where the plan calls for them.",
+    "Frozen feedback-expansion v2 collection and nine source32/64/128 collector fits from the verified update262 initialization: original quotas, up-to-three branches, fixed continuation/readout,192 updates and3072 draws, independent feedback-dev selection, masks/ties/unknowns retained.",
+    "New source/state coverage, initial-only versus initial-plus-post, complete T2 trajectories, common-support and parameter-binding E2/E3/factorial comparisons under their declared conditions.",
+    "Actual autonomous Host main comparison of fixed_context/rules/Jev with matched tasks, model, sources, budgets and tool behavior; distinguish requested/needed/acquired/delivered/used evidence and preserve common Host/simulator limitations.",
+    "Ordered lifecycle studies for high/low reuse and related/unrelated updates, View versus no-view, cumulative quality and full measured maintenance/retrieval/delivery costs.",
+    "LongMemEval451 real Reader/native judge; full declared STATE read-only and other external protocols; protected-source exposure reconciliation and final method/checkpoint/seed freeze before any new protected-body inspection. Native STATE test30/39 partial exposure remains recorded.",
+    "Four main research result figures and complete protocol-aware reporting, including source grouping, unsuccessful/unknown runs and known/unmeasured costs. Saved CPU curve and the three-task Host-only diagnostic do not substitute for these deliverables."
+  ],
+  "unplanned_search_exposure": [
+    {
+      "task_id": "30-cross_cancel_flight_and_hotel",
+      "native_split": "test",
+      "exposure": "One expected_value line surfaced by broad directory search; no full task body deliberately opened."
+    },
+    {
+      "task_id": "39-compound_intl_delay_not_free_plus_partial_bag_plus_insurance_drop_state",
+      "native_split": "test",
+      "exposure": "Opening message, user context, task summary and requirement excerpts surfaced by broad directory search."
+    },
+    {
+      "task_id": "101-challenge_mixed_strategy_shared_budget",
+      "native_split": "train",
+      "exposure": "One delay_compensation field surfaced by broad directory search."
+    },
+    {
+      "task_id": "118-policy_delay_threshold_edge_compare",
+      "native_split": "train",
+      "exposure": "Opening/context/instruction/summary/requirement excerpts surfaced by broad directory search."
+    }
+  ],
+  "exposure_disposition": "Native test tasks30/39 are now partially exposed and cannot be described as unseen confirmation in subsequent reporting. Preserve native splits and labels; do not use their snippets as new training material. Future diagnostic searches restricted to explicit implementation files. Existing protected MuSiQue bodies were not opened.",
+  "scheduling": "Original feedback train batch007 is the sole live neural job. No second neural job or offline ledger settlement while live. Verify actual PID/files, never restart from stale status. Review terminal outputs/costs before next untouched batch. Saved CPU/train and six Host pilot jobs remain closed.",
+  "no_sha_or_content_fingerprint_validation": true,
+  "no_subagents": true,
+  "no_new_model_services_or_ledger": true,
+  "no_remote_writes": true,
+  "status": "ACTIVE;ORIGINAL_FEEDBACK_V2_BATCH000_006_REVIEWED_WITH_FAILURES;BATCH007_RUNNING",
+  "observed_at": "2026-10-24T19:18:34.545584+00:00",
+  "previous_progress": "data/manifests/evidence-gap-development-progress-20261023-v37.json",
+  "previous_turn_classification": "progress",
+  "current_turn_progress": "Closed batch006 source/Host/View mechanics and cost review, retaining three truncations, ambiguous label relation and source-role distinction for assistant-derived order intention. Settled measured costs once and started original untouched batch007.",
+  "closed_batch": {
+    "split": "train",
+    "index": 6,
+    "groups": [
+      "musique-family-000796",
+      "memops_E11"
+    ],
+    "output": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-collection-v2/train/batch-006",
+    "review": "artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-006-review.json",
+    "status": "CLOSED_BATCH006_MECHANICS_AND_SOURCE_GROUNDED_FINDINGS_REVIEWED;FIRST_FAILURES_AND_RELATION_LIMITS_RETAINED",
+    "position_status_counts": {
+      "COMPLETED": 9,
+      "FAILED": 3
+    },
+    "HTTP_requests": 29,
+    "known_generation_tokens": 119282,
+    "unknown_usage_increment": 0,
+    "local_model_forwards": 20,
+    "local_model_input_tokens": 103301,
+    "max_local_model_input_tokens": 6056,
+    "all_local_model_outputs_finite_and_untruncated": true,
+    "initial_state_occurrences": 14,
+    "post_operation_state_occurrences": 61,
+    "actual_decision_state_occurrences": 75,
+    "no_retrieval_positions": [
+      {
+        "history": "memops_E11",
+        "profile": "laya-rich",
+        "request": "stage-2",
+        "status": "FAILED"
+      },
+      {
+        "history": "memops_E11",
+        "profile": "fixed_context-rich",
+        "request": "stage-2",
+        "status": "FAILED"
+      }
+    ],
+    "training_labels_created": 0,
+    "counterfactual_branches_executed": 0,
+    "actual_host_receipts_verified": true,
+    "retrieval_calls": 14,
+    "retrieval_calls_without_decision_state": [],
+    "semantic_findings": [
+      {
+        "history": "musique-family-000796",
+        "profile": "rules-rich",
+        "request": "corpus-14164",
+        "finding": "ReturnsLindaPerry biography,Xander,BobDylan,LizaManili andView, notExSensitive/Custard. View preserves founded-label versus signed-artist distinction and separates other artists. Final correctly limits personal/band signing relation, but doesnotcoveravailableCustardassociation. Ambiguous original wording retained; no binary native grade or newtraininglabel."
+      },
+      {
+        "history": "musique-family-000796",
+        "profile": "rules-rich",
+        "request": "corpus-35433",
+        "finding": "Returns otherartist/label sources andView, which accurately says no4NonBlondes/singer evidence. Final abstention is supported by wholeindependent pool. No borrowing first-questionLinda knowledge."
+      },
+      {
+        "history": "musique-family-000796",
+        "profile": "laya-rich",
+        "request": "corpus-14164",
+        "finding": "FirstactualREAD0Linda andREAD1Xander,thenhandoff_select_1 returnsXander. Secondquery returnsLinda plusBlondeOnBlonde,third shifts toband label andreturnsBlondeOnBlonde;terminationno_available_operation. Final identifiesLinda andkeepssigned-labelunknown. Custard association notdelivered; initialidentitydiscard andwrongentityreturns costextra without provingcontract. No counterfactual ormanualwinner."
+      },
+      {
+        "history": "musique-family-000796",
+        "profile": "laya-rich",
+        "request": "corpus-35433",
+        "finding": "Two actual retrievals returnBlondeOnBlonde for4NonBlondes questions. Host then8192/contentnull/reasoning34889 truncates. No finalanswer, no semanticcompletion label."
+      },
+      {
+        "history": "musique-family-000796",
+        "profile": "fixed_context-rich",
+        "request": "corpus-14164",
+        "finding": "ReturnsLinda,Liza,Xander,NickRecords,notExSensitive. Final preservesknownsinger/unknownsigning relation. AvailableCustard association remainsundelivered; preserve questionrelationambiguity ratherthan claiming allrelevantlabel evidence absent."
+      },
+      {
+        "history": "musique-family-000796",
+        "profile": "fixed_context-rich",
+        "request": "corpus-35433",
+        "finding": "ReturnsWarmMoods,Xander,MonaBoneJakon,Liza. Wholepool lacksrequestedidentity andlabel; finalexplicitlimitation supported, no unrelatedlabel substitution."
+      },
+      {
+        "history": "memops_E11",
+        "profile": "rules-rich",
+        "request": "stage-0",
+        "finding": "Correct current1000boxes changedfrom500,GreenWrap distinct,JarSourceunknown atthisfrontier. Recipeounces versusmetric correctlyreported but should not beinterpreted asoldinvoiceunit. DeliveredView preservesnoactualdeliveryconfirmation,althoughadds redundant conditionalgraph aroundordinaryorderfact."
+      },
+      {
+        "history": "memops_E11",
+        "profile": "rules-rich",
+        "request": "stage-2",
+        "finding": "Actualnewretrieval. ReturnspriorHostanswer,source3question/assistant750&144summary/old500sleeveinvoice andinitial500box source. READ3 observes unaccepted1000offer butbudgetrejects;READ4/7also rejected,8stepsbudgetexhausted. Final750 and12cases144 andhistorical25000 correct; missesunacceptedoffer. Repeats historicalassistant-derived150follow-up asuserfutureintention, conflatingproductionprojection withorderintent; not arithmeticfailure. PortlandOR is unsupportedprecision. Doesnotexplicitlyestablishshipmentreceipt; packagingincases shouldnot implydeliveredstatus. s3t4GreenBox600assistantclaim not repeated."
+      },
+      {
+        "history": "memops_E11",
+        "profile": "laya-rich",
+        "request": "stage-0",
+        "finding": "ActualSEARCH/READ2/READ1/HANDOFF returns relevant first-session material. Final correctly uses1000boxes after500 correction,GreenWrap identity,JarSource notyetreported. Separatesrecipe metric units and doesnotinventoldinvoice data orconfirmedshipment. PlainHANDOFF can preserve useful evidence here; do not generalize failure from numericbindingchoice alone."
+      },
+      {
+        "history": "memops_E11",
+        "profile": "laya-rich",
+        "request": "stage-2",
+        "finding": "No new retrieval despiteactual16-sourcearrivalnotice/prior tool history. Host length8192/contentnull/reasoning31974; finalanswerNone. Preserve failure without inferring intendedanswer fromreasoning."
+      },
+      {
+        "history": "memops_E11",
+        "profile": "fixed_context-rich",
+        "request": "stage-0",
+        "finding": "Two actual retrievals. Final1000boxes/currentadjustment andnoJarSourceatthisfrontier supported. Six-week150candles/week plan is correctlyseparate. Oldinvoiceunits/productionsetup heading mixesrecipe metric history withinvoiceconcept; actualoldinvoiceinformation notyetprovided. No explicitshipmentcompletion claim."
+      },
+      {
+        "history": "memops_E11",
+        "profile": "fixed_context-rich",
+        "request": "stage-2",
+        "finding": "No new retrieval despiteactual16-sourcearrivalnotice/prior tool history. Host length8192/contentnull/reasoning31175; no finalanswer. Not an internalJev ranking failure because no newcontrolrequest executed."
+      }
+    ],
+    "independent_document_pool_review": {
+      "family": "musique-family-000796",
+      "requests": [
+        "corpus-14164",
+        "corpus-35433"
+      ],
+      "source_rows_per_request": 20,
+      "collector_positions": 6,
+      "literal_initial_sources_and_independent_Host_prefixes_verified": true,
+      "semantic_scope": "Firstpool supportsLindaidentity andCustardassociation throughExSensitive, notexplicitpersonal/bandsigning; allmethods failedtodisplayCustardassociation. Secondpool lacksrequestedidentity/association entirely. Original sign wording ambiguity retained; noexternalcontractclaim, borrowedfirstpool evidence, nativeannotationchange ornewlabel."
+    },
+    "host_arrival_review": {
+      "E11_stage2_positions": 3,
+      "new_visible_sources_each": 16,
+      "prior_tool_history_each": true,
+      "new_retrieval_calls": {
+        "rules": 1,
+        "laya": 0,
+        "fixed_context": 0
+      },
+      "scope": "Arrival notice gives counts without bodies/relevancejudgment. Rules retrieved but droppedoffer afterbudgetrejection; other two failedbefore retrieval."
+    },
+    "reflection_and_disposition": {
+      "frozen_collection_unchanged": true,
+      "training_labels_created": 0,
+      "counterfactual_branches_executed": 0,
+      "no_manual_winner_nominations": true,
+      "next": "Settle closed measured overhead then dispatch untouched original batch007. Preserve threeHostfailures, relationambiguity, directuser versusderivedassistant assertions and observed-but-undelivered offer. No rawsource repair, response salvage, protocol change orsuccess-seeking retry."
+    }
+  },
+  "feedback_collection": {
+    "original_plan": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-expansion-study-plan-v2.json",
+    "source_version": "2a179b58",
+    "split": "train",
+    "batch_index": 7,
+    "groups": [
+      "musique-family-000648",
+      "memops_C29"
+    ],
+    "planned_positions": 12,
+    "completed_positions_observed": 2,
+    "active_position_observed": {
+      "history": "musique-family-000648",
+      "policy": "laya",
+      "interface": "rich",
+      "profile": "laya-rich",
+      "request": "corpus-33018"
+    },
+    "output": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-collection-v2/train/batch-007",
+    "frozen_recipe_unchanged": true,
+    "full128_pool_branch_preparation": "NOT_STARTED; do once after declared collection with original quotas/seed, no hand-picked binding winners."
+  },
+  "active_processes": [
+    {
+      "role": "original_feedback_v2_train_batch007",
+      "pid": 2140489,
+      "child_pid": 2140504,
+      "exec_session": 66905,
+      "driver": "artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-007.json",
+      "status": "RUNNING_AT_OBSERVATION"
+    }
+  ],
+  "accounting": {
+    "closed_batch_model_CPU_already_billed": 958.2245874630189,
+    "closed_batch_whole_child_CPU_not_additive": 999.9200960000001,
+    "closed_batch_overhead": {
+      "status": "SETTLED_ONCE_WITH_NO_NEURAL_JOB_ACTIVE",
+      "phase": "evidence_gap_20261025_original_feedback_v2_train006_closed_overhead",
+      "measures": {
+        "cpu_seconds": 42.02235969798115,
+        "measured_phases": 7,
+        "runs": 1
+      },
+      "entries": [
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-006.json",
+          "field": "startup_and_child_cpu_seconds_pending",
+          "cpu_seconds": 41.69550853698115
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-006.json",
+          "field": "preflight_children_cpu_seconds_pending",
+          "cpu_seconds": 0.042186
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-006.json",
+          "field": "coordinator_cpu_seconds_pending",
+          "cpu_seconds": 0.021957096999999995
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-006-review.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 0.261913694
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-006-review.json",
+          "field": "semantic_annotation_cpu_seconds_pending",
+          "cpu_seconds": 0.00047767699999999927
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-006-source-pre-review.json",
+          "field": "cpu_seconds_pending",
+          "cpu_seconds": 0.00018243800000000004
+        },
+        {
+          "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-006-source-pre-review.json",
+          "field": "partial_output_annotation_cpu_seconds_pending",
+          "cpu_seconds": 0.0001342549999999998
+        }
+      ],
+      "model_CPU_already_billed_not_rebilled": 958.2245874630189,
+      "known_HTTP_tokens_not_rebilled": 119282,
+      "no_sha_validation": true,
+      "scope": "Whole child minus actual ledger CPU delta plus preflight/coordinator and measured reviews/annotations. Nested model andinnerdriver notadditive. Unmeasuredinterpreter,source/exploratoryreads,authoring,reporting/settlement remainunknown."
+    },
+    "live_batch": "Batch007 original runner records actual HTTP/model costs. Outer remainder/preflight/coordinator await actual exit; no concurrent settlement.",
+    "unknowns": "Unmeasured interpreter, source/exploratory reads, authoring and reporting/settlement CPU, GPU time and prices remain unknown."
+  },
+  "goal_complete": false,
+  "closed_collection_to_date": {
+    "batches": 7,
+    "source_groups": 14,
+    "source_group_ids": [
+      "memops_A29",
+      "memops_B05",
+      "memops_B06",
+      "memops_B21",
+      "memops_B25",
+      "memops_C23",
+      "memops_C26",
+      "memops_D11",
+      "memops_D23",
+      "memops_E11",
+      "memops_F08",
+      "musique-family-000275",
+      "musique-family-000395",
+      "musique-family-000796"
+    ],
+    "attempted_positions": 84,
+    "process_completed": 71,
+    "retained_failed": 13,
+    "HTTP_requests": 180,
+    "known_tokens": 712008,
+    "unknown_usage_increment": 0,
+    "actual_decision_state_occurrences": 403,
+    "zero_decision_calls": 5,
+    "independent_source_warning": "Declared group IDs, repeated collector positions and actual state occurrences are distinct units. Process completion is not semantic correctness.",
+    "counterfactual_branches_executed": 0,
+    "training_labels_created": 0
+  }
+}
