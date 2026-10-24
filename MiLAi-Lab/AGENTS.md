@@ -1,4 +1,37 @@
-# LATEST: 2026-10-25 batch021 reviewed; batch022 LIVE,9 declared positions
+# LATEST: 2026-10-25 batch022 reviewed; batch023 LIVE at frontier64
+
+Batch022 (musique-family-000420/E01):original9 positions,8 process completions/1 fixedmusic
+JSON_ACTION_MALFORMED. HTTP200/finishstop/contentnull,776 outputtokens/reasoning3746;literalJSON
+TypeError retained,noanswer salvage.19 HTTP/60928 known tokens,unknown0;17 Host/2 View.17 finite,
+untruncated local forwards used77076 input tokens,max6585;one load.9 retrievals,9 initial+36 post
+=45 state observations,no zero-state calls or explicit failed operations. Full literal audit passed.
+
+Singlemusicpool establishesLouis asLilHardinArmstrongspouse, nottargetyear. Rules/Laya preservegap;
+fixed fails afteractualpackets. No borrowedotherworksyears or inventedsecondpool. E01 earlyrules/
+fixed correctlyseparatewritingpreference/intention fromnot-yet-adoptedwrittenaid andcolleaguebackup.
+Laya twocalls returnsourceunion1–6,omittingbackupsource7 acquiredfirstcall. Actualranges: first7
+unique/11overlaps,second6/10;firstread-onlyprobe incorrectlyassumed7both,failedbeforewrite. Corrected
+byactualSourceidentity,notactionindex;failure/unmeasuredCPUretained,noexperimentrerun. View/Host
+causalassistantlanguage isnotverifieduserdiagnosis. Laterall3 have16arrivals/priortools butnoretrieval,
+denyactualsticky-noteadoption/maintenance/near-slip despiteexplicitreports. Proposedextensions and
+otherpersons remainseparate;relativeclientmeetingunanchored. Privateclient/colleague detailsignored.
+
+Review:original-feedback-v2-collection-dispatch/train-022-review.json. Already-billed model/load
+643.3357144510069 CPU seconds;whole child678.105815 nested.10 measured remaining phases totaling
+35.01697614299312 CPU seconds settled once with no live job. Unmeasured work unknown.
+Cumulative23 closed batches:46 declared groups,264 attempts,216 process completions/48 failures,
+592 HTTP/2339646 known tokens,1374 state observations,16 zero-state calls. Not accuracy,independent
+rows or branch eligibility. First32 report/accounting stays000–015. No labels/branches/new fits.
+
+ONLY LIVE neural job: original batch023,musique-family-000782/memops_D19,12 declared positions.
+Driver3148996/child3149011/exec12360;verify actual PID/files. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-023.json.
+No second neural job/offline settlement whilelive;reviewclosure before nextuntouchedbatch.
+Full128 train and4 dev collection precede once-only original quota/seed prep. Latestv54/execution.
+Frozen2a179b58/update262/order/budgets unchanged;Lab behavior3c892d30. Full M1–M5 remain open.
+No SHA,agents,new services,second ledger or remote writes. Saved CPU/train/Host pilot stay closed.
+
+# Earlier: 2026-10-25 batch021 reviewed; batch022 LIVE,9 declared positions
 
 Batch021 (musique-family-000116/C10):12 attempted,10 process completions/2 Host truncations,
 rules/missingbuildinglink andLaya/C10later. Both8192/contentnull,reasoning34265/30569 chars.
