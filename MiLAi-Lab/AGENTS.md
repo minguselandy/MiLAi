@@ -1,4 +1,39 @@
-# LATEST: 2026-10-25 batch018 reviewed; batch019 LIVE at frontier64
+# LATEST: 2026-10-25 batch019 reviewed; batch020 LIVE at frontier64
+
+Batch019 (musique-family-000550/B03):12 attempted,8 process completions/4 failures. Laya/fullmusic,
+fixed/missingmusic,rules/B03later truncate8192/content null (reasoning27323/24478/34777 chars).
+Laya/missingmusic finishstop/content null,2420 outputtokens/reasoning8865;literal JSON TypeError
+retained separately.24 HTTP/117661 known tokens,unknown0;22 Host/2 View.17 finite,untruncated local
+forwards used121103 input tokens,max12023;one load.9 retrievals include1 zero-state call;8 initial
++37 post=45 state observations. Full literal source/bank/capture/actual Host packet audit passed.
+
+Music pool order is FULL then MISSING. Full Gold/JoeCocker album plus UpWhereWeBelong identifies
+JenniferWarnes;rules/fixed assume Gold/song,miss album and abstain after returning duet body.
+Missing rules makes no retrieval and supplies unsupported alternative artists/relationship.
+Two initial truncations occur before retrieval,not learned-policy selection. Source labels stay.
+B03 early rules/fixed grounded;rules generates faithful9-node View but material budget rejects
+delivery. Laya reads all7 initial bodies then selects reporting-line block,omitting Priya placement.
+Later all3 have16 arrivals/prior tools;rules/fixed no retrieval,former fails/latter stale. Laya
+retrieves twice and preserves interim duty/stalechart,but misses transfer/pendingproposal despite
+full observed bodies;3 READ+1 CONTEXT budget rejections. Finalconfirmation exists in pool but its
+acquisition not asserted. Actual observed vs delivered distinctions verified;no candidate winner.
+
+Review:original-feedback-v2-collection-dispatch/train-019-review.json. Already-billed model/load
+1622.331509354996 CPU seconds;whole child1661.602522 nested.13 measured remaining phases totaling
+39.585528080004245 CPU seconds settled once with no live job. Unmeasured work unknown.
+Cumulative20 closed batches:40 declared groups,231 attempts,186 process completions/45 failures,
+518 HTTP/2083400 known tokens,1199 state observations,16 zero-state calls. Not accuracy,independent
+rows or branch eligibility. First32 report/accounting stays000–015. No labels/branches/new fits.
+
+ONLY LIVE neural job: original batch020,musique-family-000764/memops_E10,12 positions.
+Driver3048029/child3048064/exec73631;verify actual PID/files. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-020.json.
+No second neural job/offline settlement while live;review closure before next untouched batch.
+Full128 train and4 dev collection precede once-only original quota/seed prep. Latestv51/execution.
+Frozen2a179b58/update262/order/budgets unchanged;Lab behavior3c892d30. Full M1–M5 remain open.
+No SHA,agents,new services,second ledger or remote writes. Saved CPU/train/Host pilot stay closed.
+
+# Earlier: 2026-10-25 batch018 reviewed; batch019 LIVE at frontier64
 
 Batch018 (musique-family-000312/A13):12 attempted,8 process completions/4 retained Host truncations
 (rules both document pools,Laya missing pool,fixed A13 later). All8192/content null;reasoning
