@@ -1,4 +1,36 @@
-# LATEST: 2026-10-25 feedback batches000–004 reviewed; batch005 LIVE
+# LATEST: 2026-10-25 feedback batches000–005 reviewed; batch006 LIVE
+
+Batch005 musique-family-000275/B21 closed after12 attempts:11 process completions,1 retained
+rules/corpus4273 JSON_ACTION_MALFORMED. Actual final HTTP200/finishstop/contentNone,1514 output
+and6485 reasoning characters; no answer salvaged. Frozen bridge json.loads(None) raises TypeError,
+separate from length failures. Audit now verifies this actual protocol failure; full audit PASS.
+27 HTTP/86475 known tokens,unknown0;24 Host/3 View.26 finite/untruncated Laya forwards,180359 input
+tokens,max12362;one load.12 real retrievals include1 zero-decision call;11 initial+56 post states
+match67 trace decisions. Actual source pools, independent banks, captured results and Host packets verified.
+
+Incomplete MuSiQue pool has album/chart only; fuller pool has Kikki-Eurovision1985 bridge in
+BraVibrationer. Rules Host narrows request to artist only; Laya/fixed do not acquire bridge and
+substitute chart/unsupported background or overstate missing evidence. Correct bridge absent from
+Laya's current8 candidates, so do not misattribute solely to choice among offered READs. B21 early
+Laya reads82000/workweek then discards it for78000; late reads82500/Priya but returns earliest78000.
+Rules/fixed late make no new retrieval despite16-source notice and repeat82000. No manual winners.
+
+Review: original-feedback-v2-collection-dispatch/train-005-review.json. Model/load2428.6948035649957
+CPU already billed; wholechild2473.294881 is nested. Seven measured remaining phases44.934184289004094
+CPU settled once with no job live. Unmeasured work stays unknown. Six closed batches:12 source groups,
+72 attempts,62 process completions/10 failures,151 HTTP/592726 known tokens,328 actual state
+occurrences,5 zero-decision calls. These are not task accuracy or independent-state counts.
+
+ONLY LIVE neural job: original train batch006 musique-family-000796/memops_E11,12 positions.
+Driver2094692/child2094707/exec93512; verify actual PID/files. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-006.json.
+No second neural job/offline settlement while live. Review closure before next untouched batch.
+Keep frozen2a179b58/update262, source order/quotas/budgets; complete128-source collection before
+once-only branch preparation. Existing sampler retains no_actual_decision calls; no invented states.
+Latest v37/execution. Full M1–M5 remain open; savedCPU/train/Host pilot stay closed. No SHA, agents,
+new services, second ledger or remote writes. Lab behavior remains3c892d30.
+
+# Earlier: 2026-10-25 feedback batches000–004 reviewed; batch005 LIVE
 
 Batch004 musique-family-000395/B25 closed after all12 attempts:9 process completions,3 retained
 Host8192/content-null truncations (MuSiQue fixed corpus34827;B25 Laya stage0/stage2).38 HTTP/130562
