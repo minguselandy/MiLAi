@@ -1,4 +1,38 @@
-# LATEST: 2026-10-24 saved CPU selection and full matching train VERIFIED/CLOSED
+# LATEST: 2026-10-25 six-job Host instruction diagnostic CLOSED; no neural job live
+
+All six frozen45829497/no-memory jobs completed once, with original order/inputs/limits kept.
+Native state results (base / extra): TRAIN5 0/1; TRAIN7 1/0; TRAIN8 0/0. Both conditions have
+one native pass in these three related cases; this is neither equivalence nor a population claim.
+Extra used more tokens/requests in every pair: total52 HTTP/239033 tokens vs base40/167014.
+Whole cohort92 actual HTTP,406047 known tokens,unknown0;64 Host/28 simulator calls,57 domain calls,
+zero memory calls and zero runtime failures. Native state is not full task/UX correctness.
+All three actual paired initial states matched; first Host wire differs only by frozen literal
+instructions. Native/source byte checks passed; no prompt/native-rule changes, retries or replacements.
+
+Source-first reviews retain crucial limitations: TRAIN5 extra reached native1 after insurance
+correction but retained wrong arithmetic; TRAIN7 extra followed a simulator-led booking detour,
+recovered public itinerary/preferences/price but failed native cash matching; TRAIN8 base repeated
+creation after actual success receipts were visible, whereas extra double-counted cancellation fee
+and chose the pricier direct change. Simulator replies sometimes drifted; TASK_DONE is not a label.
+No official task/UX judge, scalar author reward, memory-quality or unseen-confirmation claim.
+The optional Host supplement is NOT promoted to default or injected into frozen feedback.
+
+Artifacts: state-host-instructions-pilot-v1/results.json,results.csv and reviews/task-{0,1,2}-pair.json.
+All runner CPU/HTTP and each job's five overhead measurements are settled once in the original
+ledger: runner10.774421139 CPU seconds, overhead35.222269213; summary0.027961562 separately.
+Preparation12.367179513 CPU was already settled in selected-train followups, not rebilled.
+Unmeasured startup/authoring/reporting, model GPU time and monetary prices remain unknown.
+All driver/child processes exited. Revalidate actual files/PIDs; do not rerun closed jobs.
+
+Saved CPU selection/full4886matchingtrain and v21-v28 costs are CLOSED in progress-v29.
+Latest progress-v30/execution records retain full remaining scope. Next inspect original frozen
+feedback-expansion-study-plan-v2.json and its authoritative initialization-binding-v1 manifest;
+checkpoint262 is already bound/verified despite the old plan's historical pending label. Resume
+first unattempted original collection only, preserving2a179b58/quota/branch/readout/fitting recipe;
+no new Host prompt folded in. F1/F2 semantics, all broader training/Host/lifecycle/external/protected
+work and four main result figures remain open. No SHA, agents, new services, second ledger or remote writes.
+
+# Earlier: 2026-10-24 saved CPU selection and full matching train VERIFIED/CLOSED
 
 Selected update262 completed all4886 labelled train rows; driver798921/child798926/session52857
 EXITED normally. Do not restart. Full original rows, literal projected inputs, finite outputs,
