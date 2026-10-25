@@ -1,4 +1,41 @@
-# LATEST: 2026-10-25 batch035 reviewed; batch036 LIVE
+# LATEST: 2026-10-25 batch036 reviewed; batch037 LIVE
+
+Original036 (musique-family-000125/D18):12 positions,11 native completions/1 rules full-document
+Host truncation before retrieval,8192/null,reasoning32260.27 HTTP/95557 known tokens,unknown0;
+25 Host/2 View.24 finite untruncated forwards,133402 input,max6441;one load.13 retrievals,
+13 initial+51 post=64 observations,0 zero-state calls.3 material-budget rejections.
+Source-first, literal mechanics and source/acquisition/delivery/output review complete.
+
+Missing document pool has Viorst/Rutgers/land-grant facts but no book-author bridge. Rules/fixed
+preserve unknown;Laya inserts author identity unsupported by that relation and overstates absent
+education information. Full pool supplies all3 links. Laya call1 observes book19 unselected and
+hands off empty,call2 delivers book,call3 observes Viorst18 unselected but delivers generic
+national-university9,call4 SEARCH exhausts allowance. Actual observe-only receipts and full bodies
+verified. Fixed delivers book+schooling,not land-grant body10. Neither completed answer establishes
+type;no native-label changes, external lookup or fabricated alternative branch result.
+D18 early tall/English+Japanese/current phone correct;Laya observes all7/11ranges then delivers
+s1t3–6,omitting emoji-bar-off source7. Later all3 receive16arrivals/prior tools;rules/Laya0retrieval
+repeat stale tall/no laptop/no plans. Fixed retrieves and observes all23original+2Host full bodies,
+but delivers old session1 eight Sources+old Host pair. Medium reversion/laptop layout, future short
+trial and Korean rejection remain undelivered after2 CONTEXT budget failures. Query required points
+also omit current phone height. Final remains stale. Current languages still right,not update proof.
+
+Model/load1256.2293668160019 CPU already billed;whole child1297.398482 nested.7 measured remaining
+phases41.7252986859982 settled once with no live neural job,including once-only completed-document
+read while batch lived;partial answers literal-unchanged at closure. Unmeasured work/GPU/prices unknown.
+Cumulative37 closed batches:70groups,414positions,343 native completions/71 protocol failures,
+945 HTTP/3618708 known tokens,2238 observations,19 zero-state calls. Not accuracy/independence.
+Source32/64 reports/accounting unchanged. No branch prep,labels or new feedback fits.
+
+ONLY LIVE neural job: original037,musique-family-000711/memops_C04,12positions,128 frontier.
+Driver4008712/child4008728/exec71042;verify actual PID/files. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-037.json.
+No second neural job/offline settlement while live. Source-first review before actual answers.
+Full128 train+4dev precede once-only original quota/seed prep. Latestv68/execution;M1–M5 still open.
+Frozen2a179b58/update262/order/recipe unchanged;Lab behavior3c892d30. No SHA,agents,new services,
+second ledger or remote writes. Saved CPU/train and Host pilot remain closed.
+
+# Earlier: 2026-10-25 batch035 reviewed; batch036 LIVE
 
 Original035 (musique-family-000465/F06) kept9 declared positions:7 native completions/2 Host
 truncations (rules document/Laya late,8192/null,reasoning35782/35247).19 HTTP/74580 known tokens,
