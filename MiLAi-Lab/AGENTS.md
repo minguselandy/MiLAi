@@ -1,4 +1,49 @@
-# LATEST: 2026-10-26 first88 rules initial states reviewed; attribution and native-completed answer defects retained
+# LATEST: 2026-10-26 first96 rules initial states reviewed; acquired evidence and refresh defects distinguished
+
+States0–95:96rules-initial selectedstates/288pairs; NEXTsource-first state96. This isnotanew
+source96studycohort andnotcomplete source32/64/128 feedback. First64audit unchanged; fullsource64
+selectedcohort384 across6strata stillincomplete. Qualityanswer97direction/44ties/147unknown;
+final121/20/147 (76right45left). Qualitydelivery164direction/69ties/55unknown; final209/24/55
+(131right78left).113qualitytie targets:44incomparable/65leftdominant/4rightdominant;69costchanges
+not69correctanswers. New6=2answer/4delivery. Direction-bearing statesquality57answer/78delivery,
+final68/96, pairlossaverageswithinstate. Newfinal/resourcechunks088–091,092–095 disjoint/no compile.
+
+88ViewcorrecttwoCambridgeTownships andmissingadjacency; rawHostaddsoutsideborderlist.89Viewinvents
+friendDrive recommendation/tastealignment; favorite/focusvsrelaxation boundaries preserved.
+90actualHostinputmessages all lackagencyname/abbreviation; fullpooldoc16hasit butraw/Viewonly
+countrydoc3 delivered. Bothanswerscorrectagency, NOTproofacquired/deliveredagencybody orcausal
+benefit. Formalcitizenshipnotestablishedbyregionalassociation.91actual11Sourcesinclude2t3full
+formaldegreecorrection; rawonlyold8staleshorttitle, Viewcurrenttitle/statsbetter withpartialreason
+caveat. PrivatecredentialID/contact nevertrackedprose.92mergerplace/dateprovided,countryabsent;
+raw/Viewsameoutsidecountryanswer, rawfaithfulmaterialvsViewunsupportedcountry/admin-centertype.
+
+93stage2full23ordinarySources, fixedHostonlyoldraw7; originalHostas_ofcapture-like2026 preserved.
+REFRESHacquiresactualmeasurement/3monthinterval/projection/chipunknown; finalmonth-dayuseful,
+Viewaddsunsupplied2026eventyears andkeepsoldstalenodes. Caller as_ofnotuser eventyear proof; noyear
+repair.94priorbirthplaceK only, actualcountybodyfullpoolavailable; reads_remaining1 SEARCH8then
+budget_exhausted/zeroREAD. CachedViewHostwrongcounty; emptyanswersstillfailavailabletarget, no
+successclaimfromcost.95refreshaddsnewtools/closure-vs-intention andat-openingratequalification,
+butALL9rulesany[]no-route. Actualnewgeneratorhasuser3t3pendingtransfer and3t5oldrate, bothomitted
+View/final. No livefinancialverification/transaction. Earlierpartialanswerlocked-rateclaim retained.
+
+Auditsstate-090-answer-versus-delivery-audit-v1.json, state-093-refresh-temporal-audit-v1.json,
+state-094-context-and-allowance-audit-v1.json, state-095-refresh-rules-coverage-audit-v1.json in
+ignoredreviewdir. Newgenerations identified AFTER frozen_retrieval_initial_observation boundary,
+notfirstnonthinkingeventincopiedprefix. Targetcallfilters foroperations; oldcostsnotrebilled.
+RootpendingCPU27.44692548399999 across123explicitentries inv117; no rootledgerwritewhilelive.
+Helpersartifact-only, resourceINITIALONLY untilpostcommon-prefixreview. Failedtoolbothlabelsunknown,
+failedHostanswerunknown. No rawsource/year/question/gold/citation/answerrepairs orresampling.
+
+ONLY neuraljob continuation001 originalpolicies60–2284,2225branches/748states. Driver2522910,
+child2522923,exec69037;verifyactualPID/cmdline/files. Outer artifacts/evidence-gap-20261023/
+original-feedback-v2-branch-execution-train-continuation-001-dispatch.json; native in
+training-generalization-20261021/.../feedback-branch-execution-v2/train-source128-continuation-001.
+First60retained/settled, no retries. Onterminalinspectboundary/failure,settleonlynoNN,continueonly
+unattemptedoriginalpolicies. NativependingCPU nestedinouterwholechild-minus-ledgerCPU. Finishtrain+
+142devbranches/all816reviews/largestpoolcompileonce/32-64SOURCEFAMILYderivation/nine192fits/fullM1–M5
+remainopen. NoSHA,agents,newservices,secondledger,remote writes orcompletion. Latestv117/execution.
+
+# Earlier: 2026-10-26 first88 rules initial states reviewed; attribution and native-completed answer defects retained
 
 States0–87:88rules-initial states/264pairs, NEXTsource-first state88. Fullsource64cohort384states
 across6strata stillincomplete; first64audit unchanged. Qualityanswer81direction/41ties/142unknown;
