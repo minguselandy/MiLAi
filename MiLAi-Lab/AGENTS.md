@@ -1,4 +1,42 @@
-# LATEST: 2026-10-25 source64 collection verified; batch034 exited, review pending
+# LATEST: 2026-10-25 batch034 reviewed; batch035 LIVE with 9 positions
+
+Original034 (musique-family-000706/A20):12 process completions, not semantic successes.
+26 HTTP/81736 known tokens,unknown increment0;23 Host/3 View.13 finite,untruncated local
+forwards,69233 input tokens,max6749;one load.11 retrievals,11 initial+52 post=63 observations,
+no zero-state calls.3 actual material-budget rejections. Source/bank/capture/actual Host-packet
+mechanical checks passed; semantic review stored in train-034-review.json.
+
+Full document pool gives House→Newton→Harvey County, both links delivered to all3 collectors;
+all3 answer correctly. Missing pool lacks county evidence; rules/Laya preserve unknown, fixed
+answers unsupported Butler County. No external lookup/native-label change or cross-pool claim.
+A20 early card/app evidence absent. Laya observes all7 initial Sources/9 ranges but selects only
+s1t3–6; then calls omitted user's gym/landline statement assistant-only. Rules/fixed transfer
+assistant reliability rationale to user; fixed also changes sister's carrier-switch actor.
+All3 later Host frames have16 arrivals/prior tools. Rules/Laya do not retrieve. Rules returns
+valid stop JSON but only192 answer characters ending mid-bullet (230 content chars,7253 reasoning,
+1804 completion tokens); retain native COMPLETED, no protocol-truncation relabel or salvage.
+Laya repeats stale absence of wallet-card evidence. Fixed observes all23 original+2 Host Sources,
+returns all7 session3 originals plus old Host pair, correctly keeps wallet card/app not downloaded,
+but repeats actor/rationale errors and omits proximity/responsiveness/other-person-form distinctions.
+Acquisition, delivery, answer completeness and actual state use remain separate.
+
+Model/load614.7103950580313 CPU seconds already billed;whole child655.694781 is nested.6 measured
+remaining phases41.41395347996864 settled once with no neural job live. Read-only probe assumed
+wrong trace envelope, and settlement precheck omitted valid COMPLETED_WITH_FAILURES enum; corrected
+without experiment rerun/ledger mutation on failure. Unmeasured failed checks/author work unknown.
+Cumulative35 closed batches:66 declared groups,393 positions,325 process completions/68 protocol
+failures,899 HTTP/3448571 known tokens,2130 observations,19 zero-state calls. Not accuracy or
+independent-state counts. Source32/64 audit/accounting remain unchanged; no branches/labels/fits.
+
+ONLY LIVE neural job: original035,musique-family-000465/memops_F06,9 declared positions,128 frontier.
+Driver3929154/child3929169/exec99443;verify actual PID/files. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-035.json.
+Do not pad to12. No second neural job or offline settlement while live. Source-first review before
+actual output review and original next batch. Full128 train+4 dev precede once-only quota/seed prep.
+Latestv66/execution;full M1–M5 remain open. Frozen2a179b58/update262/order/recipe unchanged;
+Lab behavior3c892d30. No SHA,agents,new services,second ledger or remote writes.
+
+# Earlier: 2026-10-25 source64 collection verified; batch034 exited, review pending
 
 Original batches000–033 are closed and source-reviewed. All64 histories and381 positions match
 sources-64/histories.json literally, without missing/duplicate history or position. All64 groups
