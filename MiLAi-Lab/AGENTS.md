@@ -1,4 +1,50 @@
-# LATEST: 2026-10-26 first120 rules initial states reviewed; actual missing versus unacquired evidence retained
+# LATEST: 2026-10-26 rules initial stratum reviewed; post prefix accounting verified
+
+States0–127:128 selected rules-initial states/384 pairs; NEXT source-first state128.
+First128 audit verifies128 unique source families in declared order and384 actual cases.
+This is ONE of six train strata: full source128 cohort has768 states,128 per collector/phase;
+dev48 separate. No pool compilation, new fit, resampling, gold repair or unexecuted labels.
+Quality answer127 directions/65 ties/192 unknown; final168/24/192 (97right71left).
+Quality delivery209 directions/108 ties/67 unknown; final282/35/67 (171right111left).
+173 quality-tie target comparisons:59 incomparable/103 left/11 right,114 cost-only changes.
+New7=2answer/5delivery, allLEFT; not7correctanswers. Direction-bearing states quality76/100,
+final93/128 (answer/delivery). Pair loss means within state; counts not gradient mass.
+
+120 SQL/MySQL naming distinction preserved; View scope/final inject unsupported person name.
+121 missing artwork creator/father, existing fixed raw/View sufficient for bounded unknown;
+repeated View/unrelated artwork READ adds no target fact.122 View contains three coowners but
+Host drops third; raw answer retains all three.123 raw reads different player yet answers target
+from outside delivered material; View acquires actual draft round. Unsupported overall pick and
+historical win-count mismatches retained.124 developer differs from distributor; View final
+keeps distinction, but creator relation reversed in View node.125 release label not independent
+contract-signing proof, failed View Host remains unknown.126 target university absent; speculative
+location/institution answer worse than bounded unknown; empty structure omits source_locations.
+127 incident/airport does not establish country or home base; unsupported country and any[]
+no-route rule retained. No citation, role, entity, source, question or answer repair.
+
+Ignored audits: review-first128-rules-initial-audit-v1.json (2 failed-tool pairs both unknown;
+104 failed-Host pairs answer unknown; overlapping counts), post-prefix-accounting-states-128-131-
+audit-v1.json (12actual cases, metadata only). Restored prefixes contain2/6/6/4operations and
+0/3/3/2READs, not reexecuted. Artifact resource helper now supports post checkpoints: subtract
+common prefix operations/READs, keep native new-generation deltas and full receipt wire tokens.
+Post traces can lack frozen_retrieval_initial_observation; filter target call_id AND step>=restored
+step for new operations. Do not treat copied prefix/duplicate decision_input as new execution.
+Raw post event IDs use flattened --steps-- capture names; use actual raw metadata, not assumption.
+No post quality review yet. Source/material content must still be read before branch answers.
+
+Root pendingCPU40.05806679999998 across167 explicit entries inv121; no root ledger write whilelive.
+Runtime/API/permissions/models unchanged. Helper artifact-only; source/observer/tokenizer/audits
+use no model forward or HTTP. Native COMPLETED not semantic certificate; failure gates preserved.
+ONLY neuraljob continuation001 original policies60–2284,2225branches/748states. Driver2522910,
+child2522923,exec69037; verify actual PIDs/cmdline/files. Latest snapshot1620 tool rows, Host1432C/
+188F; active state559branch02, fixed_context initial. First60 retained/settled, never retry.
+On terminal inspect actual boundary; settle only no neural process, then unchanged unattempted
+suffix in new output. Native pendingCPU nested in outer whole-child-minus-ledgerCPU.
+Finish train +142dev branches/all816reviews/largestpool compile once/32-64SOURCEFAMILY derivation/
+nine192fits/fullM1–M5 remain open. NoSHA,agents,newservices,secondledger,remote writes orcompletion.
+Latest data/manifests/evidence-gap-development-progress-20261023-v121.json.
+
+# Earlier: 2026-10-26 first120 rules initial states reviewed; actual missing versus unacquired evidence retained
 
 States0–119:120rules-initial selectedstates/360pairs; NEXTsource-first state120. Notnewsource120
 studycohort orcomplete source32/64/128 feedback. First64audit/cohort384scope unchanged. Qualityanswer
