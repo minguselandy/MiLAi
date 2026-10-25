@@ -1,4 +1,41 @@
-# LATEST: 2026-10-25 batch037 reviewed; batch038 LIVE
+# LATEST: 2026-10-25 batch038 reviewed; batch039 LIVE
+
+Original038 (musique-family-000079/C01):12positions,10 native completions/2 Host truncations,
+Laya target-film pool/fixed missing-film pool,8192/null,reasoning33830/32939.26 HTTP/97618 known,
+unknown0;23 Host/3 View.19 finite untruncated forwards,96334 input,max7104;one load.12 retrievals,
+12 initial+50 post=62 observations,0 zero-state calls,no explicit failed operations.
+Source-first/partial closed-document/mechanical/semantic review complete;no retries/native-label edits.
+
+Missing target-film pool:rules distinguishes similar Veera Thalattu and unrelated Deafula;Laya
+retains target unknown but calls its sole returned film the only film in documents. Fixed truncates.
+Target-film pool:rules/fixed actual delivery includes target film/director and same-name Hindi-film
+association. Rules preserves personal-language unknown but merges identity and expands song adaptation
+to direction of Bobby. Fixed answers Hindi without explicit person-language/identity bridge. Laya
+returns target film+Deafula then truncates. No external biography or asserted homonym resolution.
+C01 all3 early packet unions deliver all7 originals and correctly use initial corrected firm quote.
+Laya second call delivers only s1t3–6,but first actual Host receipt already contains all7;no false
+overall omission claim. Query drifts to Brightness Fan. Rules View preserves corrected quote and
+uncertain alternative,leaves installation status unresolved;final pending inference uses actual Sources.
+Later all3 have16arrivals/prior tools,0retrieval. All stale initial quote;miss updated firm versus
+conditional bundle/unconfirmed seasonal/other-person price,part purchase and concrete boxed/plan facts.
+Laya/fixed retain abandoned cousin lead. Planned/not-completed is still right,not evidence of updates.
+Private names/expenditure values remain ignored;tracked literal flags,no actual purchase/install action.
+
+Model/load875.2590869829987 CPU already billed;whole child914.651656 nested.7 measured remaining
+phases39.86858012800128 settled once with no live job. Partial answers unchanged at closure.
+Unknown unmeasured work/GPU/prices retained. Cumulative39 closed batches:74groups,438positions,
+363 native completions/75 protocol failures,999 HTTP/3817866 known tokens,2363 observations,
+19 zero-state calls. Not accuracy/independence. Source32/64 reports/accounting unchanged.
+No branch preparation,labels or new fits;full128 train+4dev precede once-only original quota/seed prep.
+
+ONLY LIVE neural job: original039,musique-family-000401/memops_B22,12positions,128 frontier.
+Driver4098593/child4098660/exec52223;verify actual PID/files. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-039.json.
+No second neural job/offline settlement while live. Source-first review before actual answers.
+Latestv70/execution;M1–M5 still open. Frozen2a179b58/update262/order/recipe unchanged;Lab3c892d30.
+No SHA,agents,new services,second ledger or remote writes. Saved CPU/train and Host pilot stay closed.
+
+# Earlier: 2026-10-25 batch037 reviewed; batch038 LIVE
 
 Original037 (musique-family-000711/C04):12positions,10 native completions/2 rules+Laya late Host
 truncations,8192/null,reasoning30440/33250.28 HTTP/101540 known tokens,unknown0;25 Host/3 View.
