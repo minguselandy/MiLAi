@@ -1,4 +1,57 @@
-# LATEST: 2026-10-26 first24 states reviewed; repeated citation defect and irrelevant-material cost tie; continuation001 LIVE
+# LATEST: 2026-10-26 first32 rules-initial states reviewed; actual old-Host-K/menu limits recorded; continuation001 LIVE
+
+Selectedstates0–31:32rules-initial states,96pairs source-first quality/resources finalized.
+Theyspanoriginalfirst32sourcefamilies,NOT thecomplete192-state source32feedbackcohort; other
+collectors/poststates remain. Quality answer31direction/11ties/54unknown; final36direction/
+6ties/54unknown (25right11left). Qualitydelivery66direction/14ties/16unknown; final73direction/
+7ties/16unknown (53right20left).25qualitytie targetcomparisons:13incomparable/12left;12cost-only
+changes total,not12correctanswers. No fullpoolcompile/newfit; allrawgold{},pairannotationspresent.
+
+New24–27:24poolhasTiburonCalifornia premiseonly,no within-state location;boundedabstentions
+tie,ViewHostaddsunsupportedgeography.25lateflightfrontier23sources; allsampledactions leave
+oldHostK/stalereturn/flightprice,missactualnewchanges/resolution/nonflightbudget. ActualHostold
+packet exists,requestknown_evidence0,new_events18 includesnewconfirmedupdate/finalresolution.
+SelectedHANDOFF/USE_VIEW/view_source0;REFRESHlegalbutNOTEXECUTED,unknown outcome. No addedrefs/
+manualnomination/resampling.26threefilmingcountries,onlyonefoundingdate infullpool;actualpackets
+firsthoponly,rawHostaddsoutside dates,ViewHostunfinished.27boundedone-to-one socialpref/examples,
+rawotherpersonplans retained;ViewreadoutFAILED. Caller as_ofdate notsource-year proof.
+
+New28–31:28targetpersonabsent,otherFrankentitiesnotmerged,abstentions/irrelevantmaterialties.
+29officialdeadline vsderivedpersonal3day targetcorrect; no otherdeadline/softproposal substitution.
+30targetfictionalrelationshipabsent;emptyoutside-knowledge answerunsupported,rawunrelatedsinger,
+Viewuncertainidentifiedclaim conflictsmissingtitle andHostFAILED. No title/goldrepair.
+31lateclinicalfrontier23sources:oldHostK alreadyhasoldraw+View,USE_VIEWduplicatesoldandHostellipsis;
+REFRESH addsconfirmedcurrentappt,completedquestionnaire,andpendingreschedule withoutpromoting
+theproposal. Actualcallercontrol_limit5 preserved. Source25menu READ-vs31REFRESH followsdeclared
+initialrepresentative rule, butdifferenttasks—notacausalcomparison ofevidenceflag orlicense
+toresamplebadmenus. Privatebookings/medical/names/budgetdata ignoredonly. Initialstep≠coldHost.
+
+Finaldisjointchunks under artifacts/evidence-gap-20261023/feedback-branch-reviews-v2/train:
+final-reviews-states-{000-007,008-011,012-015,016-019,020-023,024-027,028-031}-v1.json;
+matchingresource-vectors. Source/quality/observed filesprovenanceonly,notduplicatecompilerrows.
+New audits state-025-knowledge-and-sampling-audit-v1.json andstate-031-knowledge-and-sampling-audit-v1.json
+recordactualK,menus,availableupdates/limits. NEXTreviewstate32. ActualSourcepool/frontier and
+fixedHostK beforelabels; stableoriginalpolicynames acrossparts,notrelativearmnumbers.
+Read-only observe_feedback_review_states_v1.py andapply_feedback_resource_rule_v1.py helpers;
+resourcehelperINITIALONLY untilpoststatecommon-prefix accounting reviewed. Failedtool BOTH
+targetsunknown,failedHost answerunknown. Never repair/salvage responses orlabel unexecutedoptions.
+
+RootCPU pending8.977011187000002 across33explicitentries inv109; noledgerwritewhilelive.
+Priorquality0–3/prefix/collection/prep settled separately,notrebilled;invalidsource1–3 estimates
+excluded/unknown. Firstv109metadataassembly hadPythonparenthesis SyntaxError beforeexecution;
+fixedassemblyonly,no model/sampler/ledger impact,failedCPUunknown.
+
+ONLY LIVE neuraljob originalunattemptedcontinuation001,policies60–2284,2225branches/748states.
+Driver2522910/child2522923/exec69037;verifyactualPID/files. Outer:
+artifacts/evidence-gap-20261023/original-feedback-v2-branch-execution-train-continuation-001-dispatch.json.
+Native .../generalization-20261021/feedback-branch-execution-v2/train-source128-continuation-001/driver.json.
+Originalfirst60 retained/settled;samefrozen2a179b58/config/budgets/bindings, no retries/resampling.
+Onterminal inspectattemptboundary/failure,settleonlywithoutlivejobs,continueonlyunattempted
+originalpolicies. NativependingCPU nestedinouterwholechildminusledgerCPU. Finishtrainthen142dev
+branches;largestpoolcompileonce/32-64SOURCEFAMILY derivation/nine192fits/fullM1–M5stillopen.
+Latestv109/execution. NoSHA,agents,newservices,secondledger,remote writes orprematurecompletion.
+
+# Earlier: 2026-10-26 first24 states reviewed; repeated citation defect and irrelevant-material cost tie; continuation001 LIVE
 
 Selected states0–23:24rules-initial states,72pairs source-first quality/resource reviewed.
 Quality answer24direction/5ties/43unknown; finalanswer25direction/4ties/43unknown (20right5left).
