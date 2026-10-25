@@ -1,4 +1,43 @@
-# LATEST: 2026-10-25 batch026 reviewed; batch027 LIVE, one history/12 positions
+# LATEST: 2026-10-25 batch027 facts/stored versions reviewed; batch028 LIVE
+
+Batch027 (memops_A04) has four original requests per collector, 12 positions: 11 process completions
+and 1 Laya stage-2 truncation (8192/null, reasoning31471). 22 HTTP/77509 known tokens, unknown0;
+21 Host/1 View. 15 finite, untruncated local forwards used107515 input tokens, max9666; one load.
+9 retrievals,9 initial+47 post=56 state observations; no zero-state calls.9 material-budget rejections.
+Ordinary stage-2 frames have16 arrivals/prior tools but no retrieval: rules/fixed miss written notice,
+Laya fails. Early Laya reads current-city bodies but selects another block and omits the city.
+
+record-current and record-first are independent banks, each seeded with23 literal Sources and actual
+save/update revisions1/2. All6 banks and12 scripted commit receipts verified through read-only SQLite;
+setup model calls0. Stored unit texts equal fixture texts. Raw rendered content also has an internal
+unitID/role prefix; exactness claims apply unit payloads, not raw JSON/rendering. Rules reads/quotes
+correct current and first units. Laya reads current2 correctly, but first-version task sees revision1
+candidate13/READ13 available after HISTORY, chooses current2 and answers exactly version2. Fixed
+current returns ordinary dialogue; fixed first summarizes ordinary Source/current2 and invents a year.
+Matching ordinary text and history-directory metadata do not prove an actual historical-version read.
+These fixture storage operations are not learned Writer results. No manual binding winners or labels.
+
+First mechanical audit failed on absent declared origin for public user/assistant seed rows. Frozen
+seed_sources uses role-specific origins; reviewer now mirrors that contract, tool origin still strict.
+Original log train-027-review.log retained; successful readonly rerun uses after-role-origin-fix log.
+No experiment/runtime rerun. Failed audit and one mistyped implementation read path CPU unmeasured.
+Auxiliary train-027-stored-record-review.json holds actual version/provenance checks. No SHA used.
+
+Model/load1379.6738020510156 CPU seconds already billed; whole child1425.965875 nested.8 measured
+remaining phases totaling47.03253827998447 CPU seconds settled once with no live job. Other work unknown.
+Cumulative28 closed batches:54 declared groups,318 attempts,259 process completions/59 failures,
+725 HTTP/2822033 known tokens,1699 state observations,18 zero-state calls. Not accuracy/independence/
+branch eligibility. First32 accounting stays000–015. No branch preparation, labels or new feedback fits.
+
+ONLY LIVE neural job: original batch028,musique-family-000470/memops_B02,12 positions.
+Driver3429575/child3429590/exec82872; verify actual PID/files. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-028.json.
+No second neural job or offline settlement while live; review closure before the next untouched batch.
+Full128 train and4 dev collection precede once-only original quota/seed preparation. Latestv59/execution.
+Frozen2a179b58/update262/order/budgets unchanged; Lab behavior3c892d30. Full M1–M5 remain open.
+No agents, new services, second ledger or remote writes. Saved CPU/train and Host pilot remain closed.
+
+# Earlier: 2026-10-25 batch026 reviewed; batch027 LIVE, one history/12 positions
 
 Batch026 (musique-family-000689) attempted its original 6 positions: 5 process completions and
 1 rules/full-pool Host truncation, 8192 output tokens, null content, 35756 reasoning characters.
