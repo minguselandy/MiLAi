@@ -1,4 +1,86 @@
-# LATEST: 2026-10-25 batch065 reviewed; batch066 LIVE
+# LATEST: 2026-10-25 full128 train reviewed/settled; dev000 terminal, review pending
+
+Closed067 (musique-family-000816):6 native COMPLETED,not6 semantic successes.14 HTTP/41613known,
+unknown0;12Host/2View.7finite untruncated forwards,45366 input,max7104,one load.6calls,
+6initial+31post=37observations,nozero/noexplicitrejects. Source-first review began afterclosure.
+Affretair source is an aircraft incident atHarareAirport,notbase/headquarters/part-ofproof.
+Firstpool countrycontext AirZimbabwe7 exists. Rules gets7 notAffretair16,thenclaimsnoAffretair;
+fixedgetsneither. Layaonly16 yetaddsZimbabwe withoutcountrybody inactualobservations/packet.
+Secondpool lacks7;all3 getincident12 andpreservecountryunknown. Vieweventdates attachedto
+broader operating relations needscope limits;no currentaviation/geography/aliasverification.
+ChildCPU489.3712681619709 alreadybilled;whole518.361137 nested. Eight measured remaining
+phases29.915503456029107 settledonce,includingfull128aggregate/coverage CPU.
+
+Full original TRAIN000–067:128 declaredgroups,753positions,no duplicate/missing histories/
+positions,literal againstoriginalsources128.605 nativeCOMPLETED/148protocolFAILED(134length/
+14malformed).1825HTTP/6893820known+chargedtokens,unknownincrements0.920retrievalcalls,
+873initial+3550post=4423state observations,47truezero-statecalls.1430actualmodel forwards,
+8551968 inputtokens,max12704. Every128group×3collector hasinitial/postpresence,NOTeligibility.
+Eachcollector251positions:rules206/45,247initial/1350post;Laya194/57,354/1091;fixed205/46,272/1109.
+171laterordinarypositions allhavearrivals:37retrieve/134none(105completed/29failed). Different
+priorHostframes/failures precludecausalcomparison.24storedtasks/4sourcegroups scripted,notWriter.
+Actualknown-reference cases4 (014,041,044,045);misplaced/malformedhints notsuccesses.
+Explicitoperation-summarycoverage011–067:131materialrejects/5Viewrejects;earliermissingnotzero.
+
+frontier128-collection-review.json/scriptreview_frontier128_collection_v1.py created/runONCE.
+All68settlements plusretainedcollision matchoriginalledger. ChildmodelCPU92653.79763343504
++followups2767.5195432219843+collision0.060029374=95421.37720603103 knownmeasuredCPU seconds.
+Wholechild95389.78806600001 nested,notadded;serialdriverwall46337.98043530062 excludesauthorgaps.
+First32/source64 unchanged andincludedonce,notadditive;earlierprep/selection/pilot separate.
+Eligibility/selectedcountsNone;no quota prep,branches,labels,draws orfits. Full M1–M5 remainopen.
+Progress v98 closes both066/067 andpreservesfullscope. RUNNING-only snapshot checks racednatural
+067/dev000 completion;acceptverifiedterminalstates,notonlyRUNNING. No model restart orfailed
+probe ledger mutation;probe CPUunknown.067 reviewed/settled;dev000 stillpending review.
+
+NO LIVE neuraljob. Original DEV000 naturally COMPLETED exit0,12positions,memops_A19/memops_A32,each7+16ordinarySources.
+Devbodies/outputs NOT YET reviewed;source-first,privatefactsstayignored. Formerdriver1974190/
+child1974205 absent;exec80401 completed. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/dev-000.json.
+Next read declared dev000 sources beforeoutputs,thenreview/settle once;do not rerun. Continue
+originaldev001–003 usingexistingdispatcher. Do not append
+devcounts/coststo sealedtrain subtotal. All4dev BEFORE once-only originalquota/seed preparation.
+No concurrentneuraljob/ledger settlement whilelive. No new128collection rerun oroldcostrebilling.
+Frozen2a179b58/update262/recipe unchanged;Lab3c892d30. No SHA,agents,newservices,secondledger,
+remote writes orprematureGoalcompletion.
+
+# Earlier: 2026-10-25 batch066 reviewed; final train batch067 LIVE
+
+Original066 (000236/000123):9 positions,6 native COMPLETED/3 lengthfailures8192/null:
+Laya secondlabel29761,rulesuniversity33379,Layauniversity28457 reasoning.23 HTTP/81032 known,
+unknown0;20 Host/3 View.23 finite untruncated forwards,127677 input,max6305,one load.
+12 calls,12 initial+56 post=68 observations;nozero/noexplicitoperationrejects.
+
+Both song pools containEricClapton/Reprise1999single inonebody;rules/fixed fouranswers Reprise
+all haveactualtargetbody. Older1972compilationPolydorUK/AtcoUS differentrelease/territory,
+not currentexclusivecontract/signingdate. Blankcompilationtitleunchanged. Laya first receives
+artist+label andqueryaskslabel, butvalidstopfinalJSON answersEricClaptononly. This iswrong
+requested field/partialfirsthop,not protocolfailure/missingevidence. Laya second gets target8,
+then twoqueriesqueuedinoneHostresponse return18and8+18;Hostlengthfails,not threeadaptivecalls.
+University pool hasnoIkeAwguconnection. FixeddeliversHughesHalloldname15butpreservesunknown;
+oldnamealone notperson/universityproof. Rules/Laya unrelatednamesakesthenfail. No source/goldrepair.
+
+Child CPU already billed1209.8481311950268; whole1246.1162140000001 nested. Seven measured
+remaining phases36.89027927497335 settled once after PIDs absent. Partial answers unchanged.
+Cumulative67 closed train batches:127groups,747positions,599native completions/148failures,
+1811HTTP/6852207known tokens,4386observations,47zero-statecalls. Notaccuracy/eligibility.
+Source32/64 andfullremaining scope unchanged;no branches,labels orfits.
+
+ONLY LIVE neural job: original067,musique-family-000816,6positions/two20-source requests:
+corpus-9205/corpus-29808. This isfinaldeclaredtrainbatch,notfullGoalcompletion.
+Driver1907071/child1907104/exec55820;verify actualPID/files. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-067.json.
+No second neural job or offline settlement while live. Read sources before outputs.
+
+After067terminal:source/mechanical/semantic review,settle once,thenoriginaldev000–003.
+Planmetadata confirms4devbatches,12positions each. Dispatcheraccepts dev butpriorbatch guard
+onlychecks same split;root must independently verifyalltrainclosures/settlements/no livejobs
+before dev0. Nextcommandafterclosure:python3 -u artifacts/evidence-gap-20261023/dispatch_original_feedback_batch_v2.py dev 0
+Devmetadata onlyread,no devbodies/outcomes yet. Full128train+4dev BEFORE once-onlyquota/seed
+branchpreparation. Source128 collection milestone isnot eligibility/feedback/training completion.
+Latestv98/execution;M1–M5 open. Frozen2a179b58/update262/recipe unchanged;Lab3c892d30.
+No SHA,agents,new services,second ledger orremote writes.
+
+# Earlier: 2026-10-25 batch065 reviewed; batch066 LIVE
 
 Original065 (000638/000102):12 positions,7 native COMPLETED/5 protocol failures.
 Fourlength8192/null:fixed sparse draft34410,rules sparse company37479,fixed sparse company36344,
