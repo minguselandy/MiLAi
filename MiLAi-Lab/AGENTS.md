@@ -1,4 +1,40 @@
-# LATEST: 2026-10-25 batch027 facts/stored versions reviewed; batch028 LIVE
+# LATEST: 2026-10-25 batch028 reviewed; batch029 LIVE at frontier64
+
+Batch028 (musique-family-000470/B02):12 attempted,9 process completions/3 Host truncations.
+Rules/full pool and Laya/stage2 have null content; fixed/missing pool retains64 incomplete content
+characters. All8192 output tokens; reasoning29018/31600/33558.26 HTTP/112248 known tokens, unknown0;
+24 Host/2 View.17 finite, untruncated local forwards used98120 input tokens,max7144; one load.
+12 retrievals,12 initial+48 post=60 observations; no zero-state calls.3 rules late READ budget rejects.
+Full literal mechanics audit passed; partial response was not salvaged as an answer or action.
+
+Missing music pool lacks target performer. Full pool has Sing Like Me→Chris Brown plus Heartbreak
+on a Full Moon digital/physical dates in2017; no completed answer delivers that album's dates.
+Queries sometimes treat the song title as a performer. Laya transfers the single's2009 date to
+Graffiti; fixed keeps that distinction but still misses the newer album body. Historical source
+dates are not current upcoming-release news. Rules/full fails before any retrieval.
+B02 early rules/fixed preserve address/text preference and unknown dates. Laya observes all7 Sources
+in9 overlapping ranges, selects the email block, omits city and calls active email the preferred
+channel. Later all3 have16 arrivals/prior tools: rules retrieves and correctly updates deadline,
+approximate send window and text channel using actual new bodies; Laya fails without retrieval;
+fixed retains old unknown dates. Literal address/unit/channel checks store booleans, no private
+contact values. No shipping guarantee, purchase, message, call or real contact update occurred.
+
+Model/load994.0863530839929 CPU seconds already billed; whole child1035.224743 nested.9 measured
+remaining phases totaling41.477355866007095 CPU seconds settled once with no live job. Other work
+unknown. Cumulative29 closed batches:56 groups,330 attempts,268 process completions/62 failures,
+751 HTTP/2934281 known tokens,1759 state observations,18 zero-state calls. Not accuracy/independence/
+branch eligibility. First32 accounting stays000–015. No branch preparation, labels or new fits.
+
+ONLY LIVE neural job: original batch029,musique-family-000555/memops_D20,12 positions.
+Driver3490739/child3490772/exec55369; verify actual PID/files. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-029.json.
+No second neural job or offline settlement while live; review closure before the next untouched batch.
+Full128 train and4 dev collection precede once-only original quota/seed preparation. Latestv60/execution.
+Frozen2a179b58/update262/order/budgets unchanged; Lab behavior3c892d30. Full M1–M5 remain open.
+Reviewer role-origin contract fix and closed batch027 stored-version audit remain intact.
+No SHA, agents, new services, second ledger or remote writes. Saved CPU/train/Host pilot stay closed.
+
+# Earlier: 2026-10-25 batch027 facts/stored versions reviewed; batch028 LIVE
 
 Batch027 (memops_A04) has four original requests per collector, 12 positions: 11 process completions
 and 1 Laya stage-2 truncation (8192/null, reasoning31471). 22 HTTP/77509 known tokens, unknown0;
