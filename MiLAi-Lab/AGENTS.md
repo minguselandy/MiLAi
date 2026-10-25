@@ -1,4 +1,53 @@
-# LATEST: 2026-10-26 original first60 cases fully reviewed; continuation001 LIVE
+# LATEST: 2026-10-26 first24 states reviewed; repeated citation defect and irrelevant-material cost tie; continuation001 LIVE
+
+Selected states0–23:24rules-initial states,72pairs source-first quality/resource reviewed.
+Quality answer24direction/5ties/43unknown; finalanswer25direction/4ties/43unknown (20right5left).
+Qualitydelivery53direction/6ties/13unknown; finaldelivery54direction/5ties/13unknown (44right10left).
+Two inheritedcost-only changes total:state8answer betweensemanticnonanswers;state22delivery
+betweenempty andunlinkedmaterial. Neither provesgoodanswer.11qualitytie targetcomparisons:
+9incomparable/2left. No fullpoolcompile/newfit; paircountsnotgradient-mass/accuracy ratios.
+
+State20:doc7originalperformer/year,doc5formerlabelassociation,notlabelatthatrecording/current
+contract. SEARCHHost addsunsupportedlabels/periodclaims;ViewHostmorebounded butbothViewnodes
+citee7→unrelateddoc17. Actualgeneratorcorrectsongbodydoc7=e5,historicalassociation=e2; all
+available, no missing-input claim. Secondverifiedcitation mismatch,notcausalnamespaceproof.
+State21:raw preservesuser provenance/same-appointmentcorrection;View describesoldermisreport
+asdoctorinitialreading andadds unrelatedsurgeryguard. Currentcorrectedvalue,primaryvsoldsurgeon,
+transferunknown separated; no clinicaladvice. State22:SEARCH returnsunlinkedstadiumdoc17;
+empty andthatpacketprovidezerorelevanttargetmaterial,deliveryqualitytie→HANDOFFbycostonly.
+Viewcorrectdoc12/doc7locations andmissingownership/containment,HostFAILED soanswerpairsunknown.
+State23:rawaddsfriendconditions/reversesothermeasurement-loss timing;Viewweakensownmeasurement
+date andaddsunsuppliedrelativeorder. Exactsourceconditions retained; answertradeoffsunknown.
+Privatehealth/heights/names/places ignored only; no source/citation/year/response repairs.
+
+FINAL reviewchunks under artifacts/evidence-gap-20261023/feedback-branch-reviews-v2/train:
+final-reviews-states-{000-007,008-011,012-015,016-019,020-023}-v1.json, withmatchingresources.
+Allrawgold{},72pairannotationspresent,compiledfeedbackrows0. Newprovenance proof:
+generation-provenance-state-020-v1.json. Source/quality/observed copies areprovenance,notextra
+compile rows. NEXTreviewstate24; use stableoriginalpolicyname acrossparts,notrelativearmnumber.
+Actualsamebefore/continuation/Hostframe andtarget-onlyreceipt verified;all4newstates noother
+fixedtoolpackets. Firsthop/materialsource-kind/fullHostquestion andworldtruth remain distinct.
+
+PureCPU helpers observe_feedback_review_states_v1.py START END and
+apply_feedback_resource_rule_v1.py START END unchangedexperiment/no model/HTTP/ledger writes.
+Observer preservesFAILEDtool (bothpairtargetsunknown) separatelyfromFAILEDHost (answerunknown).
+Resourcehelper currentlyINITIALONLY; poststate common-prefix accounting notyetreviewed.
+RootCPU pending7.036723847000002 across23explicitfile/fields in v108. Do notsettlewhilelive;
+priorquality0–3 andprefix/collection/prep costs alreadysettled,notrebilled; invalidsource1–3
+allocations remainexcluded/unknown. Allnewbatchmeasurements disjoint.
+
+ONLY LIVE neuraljob originalunattemptedcontinuation001,policies60–2284,2225branches/748states.
+Driver2522910/child2522923/exec69037; verifyactualPID/files. Outer:
+artifacts/evidence-gap-20261023/original-feedback-v2-branch-execution-train-continuation-001-dispatch.json.
+Native .../generalization-20261021/feedback-branch-execution-v2/train-source128-continuation-001/driver.json.
+First60 attemptsretained/settled (first20states nowreviewed),samefrozen2a179b58/config/budgets/
+bindings. No retries/resampling. Onterminal inspectattemptboundary/failure,settlewithoutlivejob,
+continueonlyunattempted originals; nativependingCPU nestedinouterwholechildminusledgerCPU.
+Finishtrainthen142prepareddevbranches;fullpoolcompileonce,derive32/64 BY SOURCEFAMILY prefix
+(not selected-row index prefix),sameIDs/matches; nine192fits/fullM1–M5stillopen. Latestv108.
+NoSHA,agents,newservices,secondledger,remote writes orprematurecompletion. Terminal-aware snapshots.
+
+# Earlier: 2026-10-26 original first60 cases fully reviewed; continuation001 LIVE
 
 Selected train states0–19:20rules-initial states,60pairs,firstexecutionprefix60 unique cases
 now source/quality/resource reviewed. Notfullpoolcompile,notmodel fit/fullHostaccuracy.
