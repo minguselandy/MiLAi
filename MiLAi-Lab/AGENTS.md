@@ -1,4 +1,46 @@
-# LATEST: 2026-10-25 batch055 reviewed; batch056 LIVE (stored-record case)
+# LATEST: 2026-10-25 batch056 reviewed; batch057 LIVE
+
+Original056 (A05):ONE history/12 positions, all native COMPLETED, not12 semantic successes.
+24 HTTP/86346 known,unknown0;22 Host/2 View.18 finite untruncated forwards,136817 input,
+max10078,one load.10 calls,10 initial+49 post=59 observations,no zero-state calls.
+9 material-budget rejects:rules early1/current-record2,fixed current3/first3.
+
+Original7+16 Sources; independent record23 common fields/bodies equal,extra original_event_id,
+whole objects differ. Stored texts are single paragraphs. Ordinary early rules/fixed all7;
+Laya observes7 in9 full ranges but delivers s1t3–6,omits relative source7. Later16arrivals/prior
+tools all3. Rules/fixed0 new retrieval, stale unit and missing lease/cancelled plan. Rules
+misclassifies user-origin move/location/mixup facts as assistant-only. Laya newpacket andlastbefore
+only s3t3–6: corrected current unit/cancelled proposal right, lease/mother unreported claims
+too broad; initial user unit mislabeled assistant summary. Private addresses/identifiers ignored.
+
+Readonly SQLite verified6 independent stored-record banks,2 scripted committed versions each,
+12 receipts,setup model0. Actual unit payloads equal fixture; not learned Writer. Directory
+body_deliveredFalse is metadata,not historical body. Internal rendering includes unit/role
+prefixes and is not literally equal to unit text; quoted-unit checks are separate.
+Rules current/first deliver both1+2 and quote2/1 respectively with framing. Laya current delivers2
+and quotes2. Laya first READ13 succeeds on historic1 after observe-only current2; lastbefore
+historic1 selected/current2 unselected. Plain HANDOFF and pair1_13 offered; explicit single13
+omitted because already opened. HANDOFF_SELECT1 switches delivery tocurrent2,quoted asfirst.
+Not missing version/candidate; no full historical encoder payload or counterfactual win claim.
+Fixed current/first deliver ordinary first8 Sources,no stored versions. First contains duplicate
+first-unit text but not stored-version proof; answers reconstruct summaries/eight-message record.
+Rules first terminal REFRESH_VIEW succeeds and adds View; no after-refresh state invented.
+
+Child CPU already billed1865.4413036170272; whole1912.386067 nested. Eight measured remaining
+phases47.69959920097273 settled once with no live neural job. Partial answers unchanged.
+Cumulative57 closed batches:106 groups,639 positions,522 native completions/117 failures,
+1492 HTTP/5794498 known tokens,3561 observations,35 zero-state calls. Not accuracy/eligibility.
+Source32/64 and full remaining scope unchanged; no branches, labels or fits.
+
+ONLY LIVE neural job: original057,musique-family-000010/musique-family-000895,12 positions.
+Driver1253465/child1253487/exec57562; verify actual PID/files. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-057.json.
+No second neural job or offline settlement while live. Read sources before outputs.
+Full128 train+4dev before once-only original quota/seed preparation. Latest v88/execution.
+M1–M5 remain open. Frozen2a179b58/update262/recipe unchanged;Lab3c892d30.
+No SHA, agents, new services, second ledger or remote writes.
+
+# Earlier: 2026-10-25 batch055 reviewed; batch056 LIVE (stored-record case)
 
 Original055 (musique-family-000854):ONE history/3 positions, all native COMPLETED; no protocol
 failure or explicit operation rejection.8 HTTP/22521 known,unknown0;7 Host/1 View.7 finite
