@@ -1,4 +1,39 @@
-# LATEST: 2026-10-25 batch061 reviewed; batch062 LIVE (3 histories)
+# LATEST: 2026-10-25 batch062 reviewed; batch063 LIVE (10/20/20 source rows)
+
+Original062 (000232/000303/000051):3 histories2+1+1requests,12 positions,11 native COMPLETED/
+1 fixed sparse-label Host length failure8192/null,35286 reasoning.35 HTTP/94979 known,
+unknown0;31 Host/4 View.22 finite untruncated forwards,126392 input,max6366,one load.
+19 calls,19 initial+71 post=90 observations,no zero-state calls/no explicit operation rejects.
+
+Sammy Hagar source names Cabo Wabo founder;historical club association not current ownership
+verification. Sparse label unknown rules/Laya,no other-band label transfer;fixedfails. Added
+Anthology4 supplies Capitol/Geffen personal eras and Montrose/Warner band recordings,not unique
+current contract or labelownership. No collector observes/delivers4; finalno-label claims
+overlook available historical associations. Views retain founder,Host calls him owner.
+
+Band case: Hang Your Head→Deacon Blue3 and formed1985→17. Laya actual Host calls[1,1] deliver
+each link,answer1985. Rules/fixed omit17 thenempty SEARCH from1/2remaining reads andunknown.
+Painting case: Laya onepacket15+10 supplies creator/spouse andmarriage1883 vs painting1892.
+Primaryanswer grounded;née qualifier inference notexplicitmaiden-namefield. Rules/fixed get
+creator andrelatedpainting,notspouse15,thenemptyfollowup/unknown. No forcedtwo-call policy.
+
+Child CPU already billed1173.834372921031; whole1215.7135700000001 nested. Seven measured
+remaining phases42.76001682496913 settled once after PIDs absent. Partial answers unchanged.
+Cumulative63 closed batches:119 groups,708 positions,574 native completions/134 failures,
+1705 HTTP/6475512 known tokens,4108 observations,45 zero-state calls. Not accuracy/eligibility.
+Source32/64 and full remaining scope unchanged; no branches, labels or fits.
+
+ONLY LIVE neural job: original063,two-wiki-family-036808/musique-family-000060,9 positions.
+TwoWiki corpus-69819 has10 original Sources;MuSiQue corpus-4483/corpus-22403 have20 each.
+Preserve1+2requests and10/20/20 source counts;do not assume every pool has20 documents.
+Source bodies/outputs not yet reviewed. Driver1650079/child1650096/exec80093;verify actual PID/files.
+Driver: artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-063.json.
+No second neural job or offline settlement while live. Read sources before outputs.
+Full128 train+4dev before once-only original quota/seed preparation. Latest v94/execution.
+M1–M5 remain open. Frozen2a179b58/update262/recipe unchanged;Lab3c892d30.
+No SHA, agents, new services, second ledger or remote writes.
+
+# Earlier: 2026-10-25 batch061 reviewed; batch062 LIVE (3 histories)
 
 Original061 (musique-family-000870/000319):12 positions,10 native COMPLETED/2 length failures,
 all8192/null:fixed fullborder37261 reasoning,rules fullspouse35674.39 HTTP/133476 known,
