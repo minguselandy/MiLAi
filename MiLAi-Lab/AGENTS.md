@@ -1,4 +1,60 @@
-# LATEST: 2026-10-26 first12 states reviewed; cost-only nonanswer preference exposed; continuation001 LIVE
+# LATEST: 2026-10-26 first16 states reviewed; citation/status defects verified; continuation001 LIVE
+
+Selected train states 0–15 have source-first quality and resource reviews: 16 rules-initial
+states, 48 pairs. Quality: answer14 directional/4ties/30unknown; delivery37 directional/
+4ties/7unknown. After the one previously declared state8 cost tiebreak, answer15 directional/
+3ties/30unknown (11right4left); delivery30right7left4ties7unknown. Eight quality-tie target
+comparisons:7 resource-incomparable,1left; this batch changed none. No fullpool compilation orfit.
+
+State12: source ownership/label association does not establish artist signing contract; Host
+relation ambiguity and introduced band-era restriction keep answer comparisons unknown.
+Actual generation input has e8=correct biography(document17), e13=label-association document12,
+e17=unrelated biography(document8). All3 generated nodes cite e17; delivered source_locations
+still maps e17 to document8. Correct body was available; this is a verified wrong citation,
+not a missing-input claim or proof of a causal numbering collision. Raw delivery preferred.
+State13: both empty and SEARCH Host readouts failed, so all answer pairs unknown. Raw7 and
+View retain current quantity/unit, past quantity, separate production metrics and missing
+second-supplier information; deliverytie/resource-incomparable. No delivery-arrival inferred.
+State14: targetcity body has marketing slogan only, no county/seat; Italian namesakes distinct.
+Both grounded abstentions preferred to empty-packet unsupported geography, not a world-truth test.
+State15:15input bodies, not7. Raw2t1–7 faithful latest-plan/quote/budget but incompletehistory.
+Viewn11/Host invent purchased status; n8 turns paused photo work into abandonment. Actualinput
+contains future sellercontact2t7 and not-redone-yet1t7. No missingbody/citationrepair/transaction.
+Answertradeoffsunknown; rawdeliverypreferred over misleadingView. Privatefacts ignored only.
+
+Reviewdir: artifacts/evidence-gap-20261023/feedback-branch-reviews-v2/train.
+FINAL disjointchunks 000–007,008–011,012–015 in final-reviews-states-*-v1.json; matchingresource
+vectors. Preserve source/observed/quality files asprovenance,notduplicatecompilerrows. Generation
+proof in generation-provenance-states-012-015-v1.json. Allrawgold{},pairannotationspresent,
+compiledfeedbackrows0. Nextstate16; state19 hasknownFAILEDtool, both targets of its pairs MUST
+beunknown even though Hostreadout completed. Do not salvage failedtext or classify it successful.
+
+Ignored read-only helpers under artifacts/evidence-gap-20261023:
+observe_feedback_review_states_v1.py START END requires source reviews first, matches original
+policy names across execution parts, handles two/three selectedbranches and preserves failed
+tools. It verifies actualbefore/continuation/frame/target-onlyreceipt,fullsource identities.
+New material schemas or non-READY frames need explicit inspection,not experiment reruns.
+apply_feedback_resource_rule_v1.py START END uses frozen retrieval_feedback and localtokenizer;
+currently INITIAL states only. Futurepoststate resource pass needs common-prefix accounting.
+Run resourcehelper with cuda-env Python, frozen2a src:tools PYTHONPATH,TOKENIZERS_PARALLELISM=false;
+no model weights/forwards/HTTP/ledger writes. These helpers are not frozenexperiment changes.
+
+Root review CPU pending3.2009995870000005 in13explicit file/field entries in v106, including
+newsource/observation/provenance/quality/resource batch processing. Priorquality0–3 settled;
+invalidsource1–3 allocations excluded/unknown. No ledger writes while neuralqueue runs.
+
+ONLY LIVE neuraljob continuation001: original policies60–2284,2225unattemptedbranches/748states.
+Driver2522910/child2522923/exec69037; verifyactualPID/files. Outer:
+artifacts/evidence-gap-20261023/original-feedback-v2-branch-execution-train-continuation-001-dispatch.json.
+Native .../generalization-20261021/feedback-branch-execution-v2/train-source128-continuation-001/driver.json.
+Originalfirst60 retained/settled; unchanged originalnames/captures/bindings/model/prompt/budgets,
+frozen2a179b58. No retry/resampling. Afterterminal inspect failure/attemptboundary,settleonly
+withoutlivejob,continueonlyunattempted originals; nativependingCPU nested inouterwholechild
+minusledgerCPU,notadditive. Finishtrain then prepared142devbranches; compilelargestpoolonce,
+derive32/64sameIDs/matches andrun nine192updatefits. FullM1–M5 stillopen. Latestv106/execution.
+NoSHA,agents,newservices,secondledger,remote writes orprematurecompletion. Terminal-aware snapshots.
+
+# Earlier: 2026-10-26 first12 states reviewed; cost-only nonanswer preference exposed; continuation001 LIVE
 
 SelectedTRAIN states0–11 now source-first quality+resource reviewed,36pairs,allrules-initial.
 Quality:answer12direction/3ties/21unknown;delivery29direction/2ties/5unknown. One declared
