@@ -1,4 +1,39 @@
-# LATEST: 2026-10-25 batch063 reviewed; batch064 LIVE (9 positions)
+# LATEST: 2026-10-25 batch064 reviewed; batch065 LIVE
+
+Original064 (000049/000260):9 positions,8 native COMPLETED/1 rules missing-art lengthfailure,
+8192/null,32138 reasoning.28 HTTP/82451 known,unknown0;25 Host/3 View.20 finite untruncated
+forwards,118364 input,max6858,one load.16 calls,16 initial+55 post=71 observations,
+no zero-state calls/no explicit operation rejections. Empty follow-ups have actual SEARCH states.
+
+Full artwork0→GianLorenzoBernini,Faun9→fatherPietro. Laya actualtwoHostresponses0then9,
+Pietro answer grounded. First raw query is incomplete ("Who is the artist who created "),
+but actual read_goal purpose/task_context retain full target. No query repair or query-only
+counterfactual; do not claim causal rich-request benefit. Rules/fixed never observe/deliver9,
+then emptySEARCH andoverbroadsourceabsence. MissingLaya/fixed unknown, rulesfails;
+View distinguishes otherpainting/myth/otherartists,not targetidentity substitutions.
+
+All3WB requests returnshow19/group1. SourceoperatorWBNetwork,ownersWarnerBrosEntertainment
+divisionTimeWarner/Tribune/JamieKellner. Laya actualtwoHop19then1+19 keepshierarchy/all3;
+rulesonepacket listsall3 butcombinesnetwork/serviceownership attribution. FixedmentionsKellner
+onlyasfounder,omitscoownerrole despite namepresent. Not independentlegal/currentownership or
+complete historicalshare timeline. Irrelevantsensitivepassages stayignored,nottrackedclaims.
+
+Child CPU already billed1150.030569382976; whole1186.736608 nested. Seven measured remaining
+phases37.30645013002398 settled once after PIDs absent. Partial answers unchanged.
+Cumulative65 closed batches:123 groups,726 positions,586 native completions/140 failures,
+1756 HTTP/6657139 known tokens,4232 observations,47 zero-state calls. Not accuracy/eligibility.
+Source32/64 and full remaining scope unchanged; no branches, labels or fits.
+
+ONLY LIVE neural job: original065,musique-family-000638/musique-family-000102,12 positions.
+000638 corpus-25329/corpus-31734;000102 corpus-9464/corpus-29414,all20sources.
+Driver1774106/child1774131/exec43408;verify actual PID/files. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-065.json.
+No second neural job or offline settlement while live. Read sources before outputs.
+Full128 train+4dev before once-only original quota/seed preparation. Latest v96/execution.
+M1–M5 remain open. Frozen2a179b58/update262/recipe unchanged;Lab3c892d30.
+No SHA, agents, new services, second ledger or remote writes.
+
+# Earlier: 2026-10-25 batch063 reviewed; batch064 LIVE (9 positions)
 
 Original063 (TwoWiki036808/MuSiQue000060):9 positions,source rows10/20/20.4 native COMPLETED/
 5 protocol failures. Fourlength8192/null:rulesSQLfirst31434/second27491,Layasecond38118,
