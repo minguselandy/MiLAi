@@ -1,4 +1,59 @@
-# LATEST: 2026-10-26 first8 states quality/resource reviewed; continuation001 LIVE
+# LATEST: 2026-10-26 first12 states reviewed; cost-only nonanswer preference exposed; continuation001 LIVE
+
+SelectedTRAIN states0–11 now source-first quality+resource reviewed,36pairs,allrules-initial.
+Quality:answer12direction/3ties/21unknown;delivery29direction/2ties/5unknown. One declared
+resource tiebreak changes ananswer tie toleft,so finalanswer13direction/2ties/21unknown
+(9right4left);delivery24right5left2ties5unknown unchanged. No fullpoolcompile orfit.
+Fivequalitytie targetcomparisons:4resource-incomparable,1left dominance. Unknown/directional
+quality nevercost-overridden. Do not call these countsaccuracy/fullHostsuccess/generalization.
+
+State8 documentpool20,request-specific,notincomingmessages:doc6deathcityGermany;doc15US
+same-namecountyseat cannotbridge;doc18genericdistrict text notspecificcitycounty. Toolquery
+firsthopcity,Hostquestioncounty(notcountry). HANDOFFechoesquestion,SEARCHanswersellipsis,
+bothnativeCOMPLETED semanticnonanswers. SEARCH packetactualdoc6;Viewfaithfulcityonly but
+Hostaddsunsupplieddistrict-freecity assertion afterstatingcountyunknown. Noexternallookup/
+questionrepair/world-truthclaim. Qualitytie betweenecho/ellipsis:HANDOFFcheaperallfivefields,
+so ANSWER finalleftbyinheritedcostrule;DELIVERY rightforusefulSEARCHfirsthop. This isone
+opposed-target pair,not evidenceemptyhandoffanswerscorrectly. Frozenrule unchanged,diagnostic retained.
+
+State9 all7currentactivitydays/times/correctedordinalmonthlyrecurrence presentinbothpackets;
+SEARCHusesdetails,ViewHostonlylistsactivities. MissingApril/laterchanges remainunknown.
+PreferSEARCHanswer/combineddelivery throughactualuse,notclaimViewmissingfacts.
+State10 doc5co-creditedalbum/titletrack + doc16artist's differentcompetitionentry support
+fullpoolchain. EmptyHostunsupportedartist/year despitecoincidentcompetitionname. SEARCH
+ellipsis/Viewquestionecho bothsemanticnonanswers,answerqualitytie/resource-incomparable.
+Actualnonempty packetsbothdoc5firsthoponly. Toolread_goal evidenceONLYoriginal_source;
+SEARCHprovidesactualbody,Viewsupport_not_opened doesnot,deliveryleft. No chart/competition
+or song/album/performer conflation. State11 rawcurrentjob/correctedpay/workweek/alreadyassigned
+consulting right;ViewHostmakesactualassignment upcoming,Viewinfersold-employerwork. Rawpreferred.
+All4actualframes have nootherfixedtoolpackets. Sourceidentity includes session+event+role;
+document event_key=document repeats,nevermerge bythatkey alone. Privatepersonal details ignored.
+
+Reviewdir artifacts/evidence-gap-20261023/feedback-branch-reviews-v2/train:
+FINAL disjointchunks final-reviews-states-000-007-v1.json AND final-reviews-states-008-011-v1.json.
+Resourcevectorsmatchingranges; source/observed/quality files retainedforprovenance,notextra
+compile rows. 12uniqueevents/36pairs; rawgold{},full-optionCElabelsnone,compiledfeedbackrows0.
+Nextreviewstate12. Literalactualsamebefore/actions/continuation/Hostframe,target-onlysubstitution
+verified. Firsthoptoolrequirement andfullHostquestion distinct; wholeViewnotcertified.
+
+RootreviewCPU pending2.074301204 across8files inlatestmanifest (newsource/observation/quality/
+resourceprocessing for4–11 plusresource0–7). Noledgerwritewhilelive; priorquality0–3 already
+settled separately. Invalidsource1–3 estimates excluded/unknown. Nativeprefix/collection/prep
+subtotals unchanged andnotrebilled. CPUlocaltokenizer only,no weights/forwards/HTTP addedbyreview.
+
+ONLY LIVE neuraljob continuation001 remains originalunattemptedpolicies60–2284,2225branches/
+748states. Driver2522910/child2522923/exec69037; verifyactualPID/files. Outer:
+artifacts/evidence-gap-20261023/original-feedback-v2-branch-execution-train-continuation-001-dispatch.json.
+Native .../generalization-20261021/feedback-branch-execution-v2/train-source128-continuation-001/driver.json.
+Originalfirst60 retainedandsettled,neverretry/resample. Samefrozen2a179b58/Host/config/budgets/
+bindings. Counttoolrows/readoutstatuses separately. Onterminalinspectattemptboundary/failure,
+settleonlywithoutlivejob,continueonlystill-unattemptedoriginalpolicies. NativependingCPU
+nested inouterwholechildminusledgerCPU,notadditive. Finishtrainthenprepared142devbranches.
+Allcollection+quotaprep sealed;compilelargestpoolonce,derive32/64sameIDs/matches, nine192fits
+andfullM1–M5 stillopen. Latestv105/execution. NoSHA,agents,newservices,secondledger,remote writes
+or prematureGoalcompletion. Snapshots mustacceptnaturalterminaltransitions.
+
+# Earlier: 2026-10-26 first8 states quality/resource reviewed; continuation001 LIVE
 
 SelectedTRAIN states0–7 (rulescollector,allinitial) now source-first QUALITY+RESOURCE reviewed.
 8preexposedanchor groups,24pairs; notoverallaccuracy,notpost-binding evidence. Answer7direction/
