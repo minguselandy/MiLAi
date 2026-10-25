@@ -1,4 +1,42 @@
-# LATEST: 2026-10-25 batch060 reviewed; batch061 LIVE
+# LATEST: 2026-10-25 batch061 reviewed; batch062 LIVE (3 histories)
+
+Original061 (musique-family-000870/000319):12 positions,10 native COMPLETED/2 length failures,
+all8192/null:fixed fullborder37261 reasoning,rules fullspouse35674.39 HTTP/133476 known,
+unknown0;35 Host/4 View.27 finite untruncated forwards,162229 input,max6966,one load.
+23 calls,22 initial+75 post=97 observations;one true zero-state rulesfullborder thirdcall.
+No explicit operation rejections. Partial outputs unchanged at closure.
+
+Full border pool birthBrockton→Plymouth plus Route25 Plymouth/Barnstable geographic connection.
+Rules/fixed get birth/county but notroad;rulesunknown,fixedfails. Laya observes/delivers all3
+yet final unknown does not discuss road. Adjacency remains inference,not explicit border text;
+do not force Barnstable label or misclassify Laya as missing-delivery. Missing rules/Laya
+preserve countyunknown;fixed says service in7thPlymouthDistrict impliesbirthcounty,unsupported.
+
+Full spouse pool album17→FrankZappa,wife6→Gail. Rules/fixed omitwife from captured bodies/packet;
+rulesfails,fixedunknown. Laya first opens17/6/13(all selected),with plainHANDOFF andpair1_4
+offered,then HANDOFF_SELECT0 returns only unrelatedwrestling13. Next two actual Host calls
+reacquire17 then6 and finalGailgrounded. Lastno_available_operation returnswife andhascaptured
+post-read state; not zero-state/no fabricatedencoderinput. Actualextra calls,not asserted
+counterfactual savings or handpickedwinner. Missing all3 identifyFrank/keepwifeunknown.
+Views distinguish performer from archivist;release2004 not proof of performance date.
+
+Child CPU already billed1631.520422760023; whole1674.45949 nested. Seven measured remaining
+phases43.69854968797703 settled once after PIDs absent. Cumulative62 closed batches:
+116 groups,696 positions,563 native completions/133 failures,1670 HTTP/6380533 known tokens,
+4018 observations,45 zero-state calls. Not accuracy/eligibility. Source32/64 and full remaining
+scope unchanged; no branches, labels or fits.
+
+ONLY LIVE neural job: original062,THREE histories,12 positions:
+000232 corpus-23869/corpus-26656;000303 corpus-37771;000051 corpus-32026. Preserve2+1+1requests;
+do not assume two histories or two requests each. Source bodies/outputs not yet reviewed.
+Driver1600284/child1600308/exec25230; verify actual PID/files. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-062.json.
+No second neural job or offline settlement while live. Read sources before outputs.
+Full128 train+4dev before once-only original quota/seed preparation. Latest v93/execution.
+M1–M5 remain open. Frozen2a179b58/update262/recipe unchanged;Lab3c892d30.
+No SHA, agents, new services, second ledger or remote writes.
+
+# Earlier: 2026-10-25 batch060 reviewed; batch061 LIVE
 
 Original060 (musique-family-000670/000878):9 positions,5 native COMPLETED/4 Host length
 failures,all8192/null. Rules added-person/Laya sparse/fixed sparse/fixed added reasoning
