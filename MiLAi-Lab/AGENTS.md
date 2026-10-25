@@ -1,4 +1,40 @@
-# LATEST: 2026-10-25 batch048 reviewed; batch049 LIVE
+# LATEST: 2026-10-25 batch049 reviewed; batch050 LIVE
+
+Original049 (musique-family-000770/B10):12 native COMPLETED,not12 semantic successes.26 HTTP/98104
+known,unknown0;23 Host/3 View.20 finite untruncated forwards,143301 input,max11582;one load.
+11 retrievals,11initial+58post=69observations,0zero-state calls.7materialbudget rejects+1View reject.
+Full source-first/partial/mechanical/semantic+terminal-read/capture-provenance audit complete.
+
+All3 country-pool packets containRauland→Vinje andnamedHordaland-village→Norway bodies;country value
+hasvillage support butmunicipalrecipient/village identity notexplicit. Missingcountry rules/Laya
+stillanswerNorway unsupported bythatpool;fixed unknown. No externalgeography/source/goldrepair.
+Rules generatedView nodesn1–4 referencesmissingn5–8,rejected,norepair. Originalpacket stillsupports
+completedHostanswer;Viewreject notidenticaltoHostfailure. MissingView hasno countryfact/unresolved
+empty,not sufficiencycertification.
+B10 earlyrules/fixed all7;Laya observesall7 butreturnsonly s1t5–7,omitsappearance/adoption andfalsely
+denies otherpet. Laterall16arrivals/prior tools. Fixed0retrieval stale. Rules newpacket hasbaseline,
+oldHostpair ands1t5–8,butnot interval/microchip;growth observed notdelivered. Requestasof literally
+matchespriorassistantcapture timestamp,reported_at null;effect untested,not eventyear inference.
+Laya lastbefore21ranges/19unique;finalpacket late sources plusbaseline s2t1–2 fromsuccessfulterminal
+READ6. Thatbaseline notinlastbefore;no extraencoderstate invented. Correct reportedmeasurement,
+calendar-interval date,growth expectation,otherpet andunknownchip;appearance/adoption stillomitted.
+No independentvetadvice/action orcausalmethodwin. Private pet/owner/health details stay ignored.
+
+Model/load1836.0657691969977 CPU already billed;whole child1876.072425 nested.7 measured remaining
+phases40.641446201002324 settled once,no livejob. Partial answers unchanged;unmeasured author/report/
+GPU/prices unknown. Cumulative50closed batches:94groups,564positions,461native completions/103
+protocol failures,1299 HTTP/5022165known tokens,3095observations,26zero-state calls. Notaccuracy/
+independence. Source32/64 reports unchanged;no branches,labels ornewfits. M1–M5 still open.
+
+ONLY LIVE neural job: original050,musique-family-000683/memops_D14,12positions,128frontier.
+Driver762420/child762441/exec23804;verify actualPID/files. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-050.json.
+No second neuraljob/offline settlement while live. Source-first beforeoutputs. Full128 train+4dev
+before once-only originalquota/seed prep. Latestv81/execution. Frozen2a179b58/update262/order/recipe
+unchanged;Lab3c892d30. No SHA,agents,new services,secondledger orremote writes. SavedCPU/train/
+Hostpilot stayclosed. Longcommand inputs use raw multiline heredocs.
+
+# Earlier: 2026-10-25 batch048 reviewed; batch049 LIVE
 
 Original048 (musique-family-000032/A16):12positions,9 native completions/3 Host failures.
 Rules/fixed agency-pool length8192/null,reasoning33032/35361;fixed missing stop/null malformed,
