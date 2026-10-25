@@ -1,4 +1,42 @@
-# LATEST: 2026-10-25 batch024 reviewed; batch025 LIVE at frontier64
+# LATEST: 2026-10-25 batch025 reviewed; batch026 LIVE with 6 declared positions
+
+Batch025 (musique-family-000431/F07) attempted 12 positions: 9 process completions and 3 Host
+truncations (rules both document pools, Laya second pool). All used 8192 output tokens with null
+content; reasoning lengths were 34050/32892/34933 characters. 34 HTTP requests used 130005 known
+tokens, unknown increment 0; 31 Host and 3 View calls. 24 finite, untruncated local forwards used
+145790 input tokens, maximum 7043; one load. 19 retrievals include 2 calls exhausted before any
+decision. 17 initial + 54 post = 71 actual state observations. Full literal mechanics audit passed.
+
+Neither pool establishes the requested Tanjore organizer/language relation. Dandi, Gandhi and
+the Gujarati publication are different predicates. View/query names remain unverified hypotheses;
+one View explicitly admits the name is outside its source. Laya repeats the same body across calls;
+its first final abstains but overstates the Congress declaration as leadership of the march.
+F07 early answers capture the core walking/overcast preference, while some specific sensory causes
+come from historical assistant text and are attributed to the user. Later all three have 16 arrivals
+and prior tools but no new retrieval. Core preference remains broadly consistent; voice-only audio,
+handwriting, newer frequency, slow conversation and limited social-walk tolerance are omitted.
+Do not label the whole stable preference false, or mistake absence of new examples for processing
+them. Clinical identifiers, scores, medication and friends' health details remain in ignored raw
+sources. No medical advice, diagnosis, efficacy claim or real appointment action is added.
+
+Review: original-feedback-v2-collection-dispatch/train-025-review.json. Model/load CPU already
+billed: 1397.5271545700089 seconds; whole child 1438.916949 is nested. 11 measured remaining phases,
+41.69556539599107 CPU seconds, settled once with no live job. Unmeasured work remains unknown.
+Cumulative 26 closed batches: 52 declared groups, 300 attempts, 243 process completions/57 failures,
+685 HTTP/2690823 known tokens, 1594 state observations and 18 zero-state calls. These are not
+accuracy, independent rows or branch eligibility. First32 accounting stays scoped to 000–015.
+No labels, branches or new feedback fits have run.
+
+ONLY LIVE neural job: original batch026, musique-family-000689, 6 declared positions.
+Driver3323094/child3323109/exec89966; verify actual PID/files. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-026.json.
+Do not pad to 12. No second neural job or offline settlement while live; review closure before the
+next untouched batch. Full128 train and 4 dev collection precede once-only original quota/seed prep.
+Latest v57/execution. Frozen2a179b58/update262/order/budgets unchanged; Lab behavior3c892d30.
+Full M1–M5 remain open. No SHA, agents, new services, second ledger or remote writes.
+Saved CPU/train and Host pilot remain closed.
+
+# Earlier: 2026-10-25 batch024 reviewed; batch025 LIVE at frontier64
 
 Batch024 (musique-family-000104/A02):12 attempted,9 process completions/3 Host truncations:
 Layabothdocumentpools andrulesA02later. All8192/contentnull,reasoning33954/33166/35129 chars.
