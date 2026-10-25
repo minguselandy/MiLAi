@@ -1,4 +1,36 @@
-# LATEST: 2026-10-25 batch023 reviewed; batch024 LIVE at frontier64
+# LATEST: 2026-10-25 batch024 reviewed; batch025 LIVE at frontier64
+
+Batch024 (musique-family-000104/A02):12 attempted,9 process completions/3 Host truncations:
+Layabothdocumentpools andrulesA02later. All8192/contentnull,reasoning33954/33166/35129 chars.
+29 HTTP/103632 known tokens,unknown0;26 Host/3 View.25 finite,untruncated local forwards used131311
+input tokens,max6572;one load.14 retrievals,14 initial+55 post=69 state observations,no zero-state
+calls or explicit failed operations. Full literal source/bank/capture/actual Host packet audit passed.
+
+Bothpoempools identifySchiller,notdeathplace. BrideOfMessinaWeimarpremiere notdeath;Layaactuallyreads
+itbutfails, nofinalaccept/rejectclaim. Rules/fixed finalunknownsgrounded. Fixedquery addsunsupported
+as_of2026-05-22; effectuntested. RulesView addsunsourcedcomposername/reopensofficialdepartmentfact.
+A02 originalfrontiers5early/18late,not7/16. EarlyLaya acquiresall5 in7overlappingranges thenselects
+first4,omittingofficialcorrection andconfirmswrongname. Earlyrules/fixed distinguishcorrectionfrom
+rename. Laterall3 have18arrivals/priortools butnoretrieval:rulesfails,Layawrongname/nohistory,fixed
+currentname/noactiveplan stillcorrectbutomitsactualproposed-then-cancelledhistory/staletemplate.
+Unchangedvaluesnotproofcancellationunderstood. PersonalID/addressnottracked/backfilledintodates.
+
+Review:original-feedback-v2-collection-dispatch/train-024-review.json. Already-billed model/load
+1240.4456392889638 CPU seconds;whole child1280.650392 nested.11 measured remaining phases totaling
+40.548138165036235 CPU seconds settled once with no live job. Unmeasured work unknown.
+Cumulative25 closed batches:50 declared groups,288 attempts,234 process completions/54 failures,
+651 HTTP/2560818 known tokens,1523 state observations,16 zero-state calls. Not accuracy,independent
+rows or branch eligibility. First32 report/accounting stays000–015. No labels/branches/new fits.
+
+ONLY LIVE neural job: original batch025,musique-family-000431/memops_F07,12 declared positions.
+Driver3267696/child3267719/exec5792;verify actual PID/files. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-025.json.
+No second neural job/offline settlement whilelive;reviewclosure before nextuntouchedbatch.
+Full128 train and4 dev collection precede once-only original quota/seed prep. Latestv56/execution.
+Frozen2a179b58/update262/order/budgets unchanged;Lab behavior3c892d30. Full M1–M5 remain open.
+No SHA,agents,new services,second ledger or remote writes. Saved CPU/train/Host pilot stay closed.
+
+# Earlier: 2026-10-25 batch023 reviewed; batch024 LIVE at frontier64
 
 Batch023 (musique-family-000782/D19):12 attempted,9 process completions/3 Host truncations:
 fixedbothdocumentpools andrulesD19later. All8192/contentnull,reasoning36563/37216/32076 chars.
