@@ -1,4 +1,41 @@
-# LATEST: 2026-10-25 batch036 reviewed; batch037 LIVE
+# LATEST: 2026-10-25 batch037 reviewed; batch038 LIVE
+
+Original037 (musique-family-000711/C04):12positions,10 native completions/2 rules+Laya late Host
+truncations,8192/null,reasoning30440/33250.28 HTTP/101540 known tokens,unknown0;25 Host/3 View.
+20 finite untruncated forwards,109219 input,max6626;one load.13 retrievals,13 initial+50 post=63
+observations,0 zero-state calls.1 actual material-budget rejection of rules early generated View.
+Source-first,partial closed-document read,mechanical and semantic review completed without retries.
+
+Full pool has Excellent Cadavers→Stille→Yale then Columbia journalism. All3 miss education in
+delivery;Laya actually observe-only READs full biography but leaves it unselected and HANDOFF empty.
+Missing pool lacks target relation;final college unknowns retained. Fixed inserts author identity
+unsupported by missing bank. Rules View acknowledges absence but adds uncertain Danforth/Bates
+attendance and target-authorship nodes plus unsupported employment→target-authorship rule. Its
+uncertain marking/unresolved and final unknown are preserved;no claim Host used the bad rule.
+C04 early rules/fixed all7 bodies support reported scheduling/identity/conditional/person distinctions.
+Laya observes all7 across9ranges then selects only initial procedure pair,s1t1–2;final falsely denies
+scheduled/conditional/friend appointments. Diagnosis wording remains right;past procedure location
+is not asserted as follow-up room. Later all3 receive16arrivals/prior tools but0retrieval:rules/Laya
+truncate;fixed repeats superseded schedule/absence of proposal/obsolete conditional return despite
+explicit later confirmation/closure. Stable diagnosis wording and correct room non-inference do
+not establish current-state handling. Clinical names/details stay ignored;tracked literal flags only.
+
+Model/load1055.163943992004 CPU already billed;whole child1096.499821 nested.7 measured remaining
+phases41.83110921599581 settled once with no live neural job. Partial document answers unchanged
+at closure. Unknown interpreter/exploratory/author/report/GPU/price costs retained.
+Cumulative38 closed batches:72groups,426positions,353 native completions/73 protocol failures,
+973 HTTP/3720248 known tokens,2301 observations,19zero-state calls. Not accuracy/independence.
+Source32/64 reports/accounting unchanged. No branch preparation,labels or new feedback fits.
+
+ONLY LIVE neural job: original038,musique-family-000079/memops_C01,12positions,128 frontier.
+Driver4054883/child4054898/exec96691;verify actual PID/files. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-038.json.
+No second neural job/offline settlement while live. Source-first review before actual answers.
+Full128 train+4dev precede once-only original quota/seed prep. Latestv69/execution;M1–M5 still open.
+Frozen2a179b58/update262/order/recipe unchanged;Lab behavior3c892d30. No SHA,agents,new services,
+second ledger or remote writes. Saved CPU/train and Host pilot remain closed.
+
+# Earlier: 2026-10-25 batch036 reviewed; batch037 LIVE
 
 Original036 (musique-family-000125/D18):12 positions,11 native completions/1 rules full-document
 Host truncation before retrieval,8192/null,reasoning32260.27 HTTP/95557 known tokens,unknown0;
