@@ -1,4 +1,54 @@
-# LATEST: 2026-10-26 first 48 rules initial states reviewed; missing relations and status distinctions retained
+# LATEST: 2026-10-26 first56 rules initial states reviewed; actual stored record inspected; continuation001 LIVE
+
+States0–55:56rules-initial selectedstates,168pairs; NEXT source-first state56. Notcomplete
+source32/64 collector×phase cohorts. Qualityanswer53direction/21ties/94unknown; final64/10/94
+(41right23left). Qualitydelivery101direction/36ties/31unknown; final124/13/31 (77right47left).
+57qualitytie targetcomparisons:23incomparable/34left-dominant,34cost-onlychanges total. New9
+changes=3answer/6delivery, not9correctanswers. Direction-bearing states quality33answer/48delivery,
+final39/56; pairloss averages withinstate. Finalchunks048–051,052–055 andmatchingresources added.
+
+48poetinpute8doc18 available, Viewn1citese18doc1wrong; rawHostoutsidebiography, ViewHostsearchpromise.
+49actual5ordinarySources, not7; personaldepartmentcorrection notformalrename/cancellation.
+50targetlocalorganizer/language absent, generalmarchnotbridge; ViewHostoutsideanswerunsupported.
+51assistantvisual/sensoryinterpretations becomeuserreported inView/Host; originalroles preserved.
+52Viewactualtwo-documentlabel/foundingchaincorrect, rawunrelatedlabel/emptyfalseabsence.
+
+53INDEPENDENT record-current query, actualrequest.sources23 withoriginal_event_id (bodiesmatch
+ordinaryhistory). Read-only captured BEFORE SQLite record: revision2 currentunit643codepoints,
+fixturesecondscriptedcommit literal match; history includesBOTH1and2,currentrenderedprefix+unit.
+Do not assume history excludescurrent. Asked exactcurrentrecord, notbetter23turnsummary. All3
+branches fail: handofffalseempty; SEARCHoldsource1t1–8quoteswrongrecord; REFRESHoverbudget View,
+2SEARCH/noREAD, emptyreceipt andHostmisusescurrentturnzero mutation asglobalrecordabsence.
+Taskqualityties are exact-payload failures,notfullresponseequivalence/correctanswers. Sourceproof
+instate-053-source.json; state-053-current-record-delivery-audit-v1.json verifiesno actualpayload.
+No Writertraining claim: two scripted commits, actualrecordnotrepaired.
+
+54actualnode/rule/bindingempty query_structure legitimatelyomits source_locations. Observer now
+accepts ONLYverifiedemptyshape, recordsomissionflag, inventsnorefs. EmptyViewscopeassumesaband
+unsupportedbywork/performerquery; Hostfailedrawanswerunknown.55stage2has23sources/new_events18,
+oldHostraw+View stillfixed, requestknown_evidenceempty. Selectedhandoff/use_view/oldassistantREAD
+failacquirenewdeadline/window; refreshlegalUNEXECUTED. state-055-stale-context-audit-v1.json.
+No nominating/resampling. generation-provenance-state-048-v1.json retainsverifiedwrongcitation.
+Allprivatecontact/address/health/folder/workdetails ignoredonly; no source/gold/query/response repair.
+
+Root pendingCPU14.827212797999998 across65explicitentries inv112. Noledgerwritewhilelive. First
+source52–55assembly incorrectlyexpectedhistoryonly1, stoppedafterwriting52; failedCPUincluding
+52creation unknown/notbilled. Laterbatch measures53–55proof/assembly+52verification. Observerfirst
+probefailedonmissingemptyViewnavigation beforeoutputwrite; failedCPUunknown. Re-readtruncated
+sourceoutputbeforelabels; helperchanges areignoredartifact-only, noexperimentalcode/receiptedits.
+Resourcehelper remainsINITIALONLY untilpost common-prefix accountingreview; failedtoolbothlabels
+unknown, failedHostanswerunknown. Fullpoolcompile/newfits pending, rawgoldunchanged.
+
+ONLY neuraljob continuation001 originalpolicies60–2284,2225branches/748states. Driver2522910,
+child2522923,exec69037;verifyactualPID/cmdline/files. Outer artifacts/evidence-gap-20261023/
+original-feedback-v2-branch-execution-train-continuation-001-dispatch.json; native in
+training-generalization-20261021/.../feedback-branch-execution-v2/train-source128-continuation-001.
+First60retained/settled,neverretry/resample. Onterminalinspectboundary/failure,settleonlynoNN,
+continueonlyunattemptedoriginals. NativeCPU nestedinouterwholechild-minus-ledgerCPU. Finishtrain,
+142devbranches,all816reviews,largestpoolcompileonce/32-64sourcefamilyderivation/nine192fits and
+fullM1–M5 remainopen. NoSHA,agents,newservices,secondledger,remote writes orcompletion. Latestv112.
+
+# Earlier: 2026-10-26 first 48 rules initial states reviewed; missing relations and status distinctions retained
 
 Reviewed selected states 0–47: 48 states, 144 pairs, all rules initial control states.
 NEXT source-first state48. Not complete source32/64 cohorts: those require all collectors and
