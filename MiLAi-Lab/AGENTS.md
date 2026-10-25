@@ -1,4 +1,39 @@
-# LATEST: 2026-10-25 batch031 reviewed; batch032 LIVE with 6 positions
+# LATEST: 2026-10-25 batch032 reviewed; final frontier64 batch033 LIVE
+
+Batch032 (musique-family-000090) kept6 declared positions:4 process completions/2 Host truncations,
+rules and fixed on corpus16003. Both8192/null,reasoning32308/32392.20 HTTP/68167 known tokens,
+unknown0;18 Host/2 View.14 finite,untruncated local forwards used83192 input tokens,max6617;one load.
+12 retrievals,12 initial+38 post=50 observations;no zero-state calls or explicit failed operations.
+Full literal source/bank/capture/actual Host-packet audit passed.
+
+Both pools give Fanfan cast/Sophie Marceau association but no spouse relation. Trivial co-stars,
+fictional spouses and unrelated historical spouses do not establish that relation. Four completed
+answers retain the unknown; no external relationship lookup or claim of no spouse existing. Rules
+first query mislabels the work a TV series; View corrects it to the1993 film, but Host still fails.
+Correct partial View content does not salvage a truncated final answer. Empty follow-ups have real
+search decisions, not zero-state status. Original labels and first failures remain unchanged.
+
+Model/load796.170484823007 CPU seconds already billed;whole child829.057256 nested.7 measured
+remaining phases totaling33.128180555993076 CPU seconds settled once with no live job. Other work
+unknown. Cumulative33 closed batches:63 groups,369 attempts,302 process completions/67 failures,
+846 HTTP/3267347 known tokens,1990 state observations,19 zero-state calls. Not accuracy/independence/
+branch eligibility. First32-source accounting stays000–015. No branch preparation, labels or fits.
+
+ONLY LIVE neural job: original batch033,memops_A07,12 positions in one history.
+Driver3719797/child3719819/exec26995;verify actual PID/files. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-033.json.
+Original plan metadata reconfirmed:033 is last frontier64 batch;034 starts128 with
+musique-family-000706/memops_A20. After033 actual closure/source review, audit000–033 against
+feedback-source-cohorts-v1/sources-64/histories.json for declared inputs, positions, state coverage,
+known/unknown costs and update-after-arrival retrieval coverage. Keep stored-version fixture tasks
+separate from learned Writer claims. Do not rerun/rebill the closed first32 report. Then continue034.
+No second neural job or offline settlement while live. Full128 train and4 dev collection precede
+once-only original quota/seed preparation. Latestv64/execution;64 frontier is NOT yet closed.
+Frozen2a179b58/update262/order/budgets unchanged;Lab behavior3c892d30. Full M1–M5 remain open.
+Reviewer role-origin fix and batch027 stored-version audit remain intact. No SHA,agents,new services,
+second ledger or remote writes. Saved CPU/train/Host pilot stay closed.
+
+# Earlier: 2026-10-25 batch031 reviewed; batch032 LIVE with 6 positions
 
 Batch031 (musique-family-000148/B12):all12 process-completed, not all semantically correct.
 27 HTTP/73252 known tokens,unknown0;24 Host/3 View.23 finite,untruncated local forwards used112237
