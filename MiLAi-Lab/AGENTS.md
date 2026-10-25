@@ -1,4 +1,42 @@
-# LATEST: 2026-10-25 batch043 reviewed; batch044 LIVE, one history/12 positions
+# LATEST: 2026-10-25 batch044 reviewed; batch045 LIVE
+
+Original044 (memops_A01,onehistory/12positions):11 native completions/1 fixed record-first
+JSON_ACTION_MALFORMED,stop/null,4649completion/17091reasoning chars;no salvage.25 HTTP/88959known,
+unknown0;23 Host/2 View.20 finite untruncated forwards,150295 input,max9934;one load.12 retrievals,
+12 initial+58 post=70 observations,0 zero-state calls.8 material-budget rejections retained.
+Ordinary5initial+18later. Independent23-source inputs addoriginal_event_id;all commonfields/bodies
+and2seedunittexts literally match ordinarysources,not full-object equality. Frozeninputs unchanged.
+
+Early all3 current intermediate title/manager andsalaryunknown correct. Later18arrivals/prior tools:
+rules usesactualknownref tofirst4Source packet,1knownread/initialremaining7. It observes12unique/
+14ranges,returns current title/base/manager butmisses planned-title s3t5–6 andfalsely deniesplan.
+Laya/fixed0retrieval remain stale. Actual knownref isnot implicit history or proof of complete answer.
+Six independentrecord banks/12scripted commits/versions1–2 verified via read-only SQLite,setupmodel0.
+All3 currentrequests deliver2:rules/fixed quoteexactunit,Laya wholeanswer equalsunit2. Rules first
+delivershistoric1 andanswer equalsunit1. Laya firstquery correct,HISTORY1 andREAD13 succeed,observed
+versions1/2 beforehandoff;HANDOFF_SELECT1 returns2 andquotesit asfirst. Historicalhandoff offered,
+no counterfactual winner nominated/fullpayload-encoder claim. Fixed first returns2+ordinarysource
+containingunit1,notstoredhistorical1,then malformedresponse. Ordinarytext match notversion proof.
+Laya current2calls queued inoneHostresponse,nonidenticalrequests;notadaptivefollowup. Exact unit
+quotation differs fromwholeanswer/rawinternalrendering/JSON. Fixture writes are notlearnedWriter.
+
+Model/load2028.9395859139972 CPU already billed;whole child2073.321217 nested.7 measured remaining
+phases45.07214569800293 settled once,no livejob,includingstored audit. Offline JS command-string
+SyntaxError occurred before subprocess/ledger mutation;fixed with raw multiline heredoc. FailureCPU
+unknown,experiment notrerun. Prefer raw multiline commands to manual newline escapes for long audits.
+Cumulative45 closed batches:84groups,504positions,421 native completions/83protocol failures,
+1155 HTTP/4387681 known tokens,2741observations,22zero-state calls. Notaccuracy/independence.
+Source32/64 reports unchanged. No branch preparation,labels or new fits;full M1–M5 still open.
+
+ONLY LIVE neural job: original045,musique-family-000885/memops_A28,12positions,128frontier.
+Driver278228/child278243/exec70181;verify actualPID/files. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-045.json.
+No second neuraljob/offline settlement while live. Source-first beforeoutputs. Full128 train+4dev
+before once-only originalquota/seed prep. Latestv76/execution. Frozen2a179b58/update262/order/recipe
+unchanged;Lab3c892d30. No SHA,agents,new services,secondledger orremote writes. SavedCPU/train/Host
+pilot stayclosed;private names/employer/address/salary andunitpayloads remain ignored artifacts.
+
+# Earlier: 2026-10-25 batch043 reviewed; batch044 LIVE, one history/12 positions
 
 Original043 (musique-family-000567) kept6 declared positions,all native COMPLETED.15 HTTP/36030
 known tokens,unknown0;13 Host/2 View.10 finite untruncated forwards,62783 input,max6920;one load.
