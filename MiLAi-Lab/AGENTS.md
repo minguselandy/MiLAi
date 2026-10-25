@@ -1,4 +1,39 @@
-# LATEST: 2026-10-25 batch030 reviewed; batch031 LIVE at frontier64
+# LATEST: 2026-10-25 batch031 reviewed; batch032 LIVE with 6 positions
+
+Batch031 (musique-family-000148/B12):all12 process-completed, not all semantically correct.
+27 HTTP/73252 known tokens,unknown0;24 Host/3 View.23 finite,untruncated local forwards used112237
+input tokens,max5883;one load.12 retrievals,12 initial+52 post=64 observations;no zero-state calls or
+explicit failed operations. Full literal source/bank/capture/actual Host-packet audit passed.
+
+First Piner pool gives Santa Rosa but no county; rules/fixed assert Sonoma from outside that pool,
+with rules View explicitly marking the county uncertain/external. This is not grounded retrieval
+success or evidence of cross-pool leakage. Full pool includes Santa Rosa→Sonoma; Laya returns both
+links through actual follow-up retrieval, while rules/fixed miss the county body.
+B12 early corrected phone/text/email are mostly grounded, but a transcription error is called a
+retired number. Laya observes all7 Sources/9 ranges then omits the email source. Later all3 have16
+arrivals/prior tools but no retrieval: all retain the earlier corrected number as current after it
+was retired and only proposed for port-back. New confirmed number, pending port, stale prefill,
+abandoned other contact and known coverage with missing delegate phone are not handled. Literal
+checks store booleans, no private values; presence alone is not status correctness. No outreach or
+legal/financial advice. Stable name/email/channel do not establish correct current-number state.
+
+Model/load979.2612795449891 CPU seconds already billed;whole child1019.108558 nested.7 measured
+remaining phases totaling40.14509043501096 CPU seconds settled once with no live job. Other work
+unknown. Cumulative32 closed batches:62 groups,363 attempts,298 process completions/65 failures,
+826 HTTP/3199180 known tokens,1940 state observations,19 zero-state calls. Not accuracy/independence/
+branch eligibility. First32-source accounting stays000–015;64-source frontier is not yet closed.
+No branch preparation, labels or new feedback fits.
+
+ONLY LIVE neural job: original batch032,musique-family-000090,6 declared positions.
+Driver3679985/child3680000/exec21463;verify actual PID/files. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-032.json.
+Do not pad to12. No second neural job or offline settlement while live;review closure before next.
+Full128 train and4 dev collection precede once-only original quota/seed preparation. Latestv63/execution.
+Frozen2a179b58/update262/order/budgets unchanged;Lab behavior3c892d30. Full M1–M5 remain open.
+Reviewer role-origin fix and closed batch027 stored-version audit remain intact.
+No SHA,agents,new services,second ledger or remote writes. Saved CPU/train/Host pilot stay closed.
+
+# Earlier: 2026-10-25 batch030 reviewed; batch031 LIVE at frontier64
 
 Batch030 (musique-family-000462/D17) kept9 declared positions:8 process completions and1 Laya
 document Host truncation,8192/null,reasoning39574.21 HTTP/83494 known tokens,unknown0;19 Host/2 View.
