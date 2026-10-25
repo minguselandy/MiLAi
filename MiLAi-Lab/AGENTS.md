@@ -1,4 +1,40 @@
-# LATEST: 2026-10-25 batch039 reviewed; batch040 LIVE
+# LATEST: 2026-10-25 batch040 reviewed; batch041 LIVE
+
+Original040 (musique-family-000180/D02):12positions,10 native completions/2 Host truncations,
+Laya early/fixed missing-document,8192/null,reasoning29830/31429.30 HTTP/114988 known,unknown0;
+27 Host/3 View.25 finite untruncated forwards,167338 input,max12172;one load.15 retrievals,
+15 initial+56 post=71 observations,0 zero-state calls.3 Laya late material-budget rejections.
+Actual ordinary arrival counts5initial+18later,not7+16. No padding/retries/early termination.
+
+Full document pool supplies airport→Ohio and congressional debate on2004-election objection.
+Rules/fixed deliver airport but follow-up cannot acquire debate;Laya delivers debate+Seattle bridge,
+not airport,so conditional answer misses actual available link. Each overstates full-pool absence.
+Missing debate pool rules/Laya correctly retain unknown;fixed truncates. No fraud/outcome inference,
+state/year substitution,external lookup or native-label changes.
+D02 early rules/fixed deliver all5 and correctly report initial corrected resolution/full model;
+Laya returns s1t3–5 without model and truncates,no causal attribution. Later rules/fixed0retrieval
+retain obsolete resolution. Laya has fresh system/user frame after earlier failure,18arrivals,
+no prior tools;actually retrieves. Last before has17unique Sources/25 full ranges,including full
+model,but HANDOFF_SELECT1 delivers only session3 seven bodies. Latest user-reported resolution
+correct;full model omitted (only Lenovo),PSREF discrepancy explanation overstated and old email/Dell
+context mixed. This is not physical panel validation or matched-context causal superiority.
+Long CPU execution verified progressing through local decisions,not stalled/restarted;max below16384.
+
+Model/load2151.619234048003 CPU already billed;whole child2190.776686 nested.7 measured remaining
+phases39.70030745899725 settled once with no live job. Partial document answers unchanged at closure.
+Unmeasured live probes/author/reporting/GPU/prices unknown. Cumulative41 closed batches:78groups,
+462positions,384 native completions/78 protocol failures,1056 HTTP/4027126 known tokens,
+2493 observations,19 zero-state calls. Not accuracy/independence. Source32/64 reports unchanged.
+No branch preparation,labels or new fits;full128 train+4dev before once-only original quota/seed prep.
+
+ONLY LIVE neural job: original041,musique-family-000469/memops_C07,12positions,128 frontier.
+Driver18812/child18827/exec80193;verify actual PID/files. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-041.json.
+No second neural job/offline settlement while live. Source-first review before actual answers.
+Latestv72/execution;M1–M5 still open. Frozen2a179b58/update262/order/recipe unchanged;Lab3c892d30.
+No SHA,agents,new services,second ledger or remote writes. Saved CPU/train and Host pilot stay closed.
+
+# Earlier: 2026-10-25 batch039 reviewed; batch040 LIVE
 
 Original039 (musique-family-000401/B22):12positions,11 native completions/1 fixed missing-document
 Host truncation,8192/null,reasoning32117.27 HTTP/94272 known,unknown0;24 Host/3 View.15 finite
