@@ -1,4 +1,38 @@
-# LATEST: 2026-10-25 batch029 reviewed; batch030 LIVE with 9 positions
+# LATEST: 2026-10-25 batch030 reviewed; batch031 LIVE at frontier64
+
+Batch030 (musique-family-000462/D17) kept9 declared positions:8 process completions and1 Laya
+document Host truncation,8192/null,reasoning39574.21 HTTP/83494 known tokens,unknown0;19 Host/2 View.
+26 finite,untruncated local forwards used159919 input tokens,max11325;one load.10 retrievals,
+10 initial+49 post=59 observations;no zero-state calls.6 material-budget rejections (Laya4/fixed2).
+Full literal source/bank/capture/actual Host-packet audit passed.
+
+Cobham/Chelsea association exists but league is absent. Rules preserves this; fixed misses the
+target body; Laya retrieves then truncates. D17 early device defaults/settings are grounded.
+Later all3 have16 arrivals/prior tools; rules does not retrieve and stays stale. Laya retrieves and
+updates Edge/Safari/home Chrome plus non-migrated Firefox settings, but asserts the obsolete
+next-month Chrome rollout and omits Outlook scope/retired tablet. Fixed retrieves but delivers old
+context, despite observing all new sessions including indefinite postponement. Laya observes the
+Outlook body, not the final postponement in its last decision input; no post-terminal acquisition
+claim is made. Actual packet bodies checked independently of selected flags: failed CONTEXT
+expansion can replace an observation item while earlier partial delivery remains. Range occurrences
+22 Laya/25 fixed are not independent sources. No browser/registry/extension/IT actions performed.
+
+Model/load1904.9600975950075 CPU seconds already billed;whole child1942.457575 nested.8 measured
+remaining phases totaling37.83647236399242 CPU seconds settled once with no live job. Other work
+unknown. Cumulative31 closed batches:60 groups,351 attempts,286 process completions/65 failures,
+799 HTTP/3125928 known tokens,1876 state observations,19 zero-state calls. Not accuracy/independence/
+branch eligibility. First32 accounting stays000–015. No branch preparation, labels or new fits.
+
+ONLY LIVE neural job: original batch031,musique-family-000148/memops_B12,12 declared positions.
+Driver3618376/child3618391/exec68741;verify actual PID/files. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-031.json.
+No second neural job or offline settlement while live;review closure before the next untouched batch.
+Full128 train and4 dev collection precede once-only original quota/seed preparation. Latestv62/execution.
+Frozen2a179b58/update262/order/budgets unchanged;Lab behavior3c892d30. Full M1–M5 remain open.
+Reviewer role-origin fix and closed batch027 stored-version audit remain intact.
+No SHA,agents,new services,second ledger or remote writes. Saved CPU/train/Host pilot stay closed.
+
+# Earlier: 2026-10-25 batch029 reviewed; batch030 LIVE with 9 positions
 
 Batch029 (musique-family-000555/D20):12 attempted,10 process completions/2 Laya Host truncations.
 Full document pool fails before retrieval with32498 incomplete content characters,987 reasoning
