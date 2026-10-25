@@ -1,4 +1,41 @@
-# LATEST: 2026-10-25 batch034 reviewed; batch035 LIVE with 9 positions
+# LATEST: 2026-10-25 batch035 reviewed; batch036 LIVE
+
+Original035 (musique-family-000465/F06) kept9 declared positions:7 native completions/2 Host
+truncations (rules document/Laya late,8192/null,reasoning35782/35247).19 HTTP/74580 known tokens,
+unknown0;18 Host/1 View.14 finite untruncated forwards,74972 input,max6441;one load.9 retrievals,
+9 initial+35 post=44 observations,0 zero-state calls.3 actual material-budget rejections.
+Source-first and literal mechanical/source/packet/output review complete;no reruns or labels.
+
+Document pool states Aruban identity and month-long Aruba Carnival, but not explicit birthplace.
+Rules View correctly preserves missing birthplace, then Host truncates; Laya obtains Carnival
+duration but asserts missing birthplace bridge. Fixed lacks Carnival in delivery and wrongly
+claims entire provided pool lacks it while also asserting birthplace. Native labels unchanged.
+F06 rules early valid stop JSON is only107-character promise to retrieve,no actual call. Laya/fixed
+early deliver all7 Sources,mostly preserve examples but attribute some assistant interpretations
+to user (body seeking nothing overwhelming; fixed movement quote). Later rules frame continues
+old user/assistant promise without prior tools;not a fresh frame. Its actual delivery includes old
+Host question/promise+s2t5–8+s1t1–2. Last before observes14 full Sources (12original+2Host), but
+not s3t3–7 richness/plans;no post-terminal-read claim. It omits quiet sensory richness versus pure
+isolation and planned class/gallery versus actual experience;adaptive/not-avoidance assertion is
+not clinical proof. Laya later0 retrieval+truncation;fixed later0 retrieval+valid stop JSON with
+180-character introduction only (198content,28410reasoning,7090completion). All3 later16arrivals.
+Protocol completion, substantive answer and grounding remain separate;no salvaged reasoning.
+
+Model/load702.1486408009914 CPU already billed;whole child735.996783 nested.6 remaining measured
+phases34.20520687900852 settled once with no live neural job;unmeasured work/GPU/prices unknown.
+Cumulative36 closed batches:68 groups,402 positions,332 process completions/70 protocol failures,
+918 HTTP/3523151 known tokens,2174 observations,19 zero-state calls. Not accuracy/independence.
+Source32/64 closure/report/accounting unchanged. No branch preparation, new labels or fits.
+
+ONLY LIVE neural job: original036,musique-family-000125/memops_D18,12 positions,128 frontier.
+Driver3962644/child3962664/exec73104;verify actual PID/files. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-036.json.
+No second neural job or offline settlement while live. Source-first review before actual answers.
+Full128 train+4 dev precede once-only quota/seed prep. Latestv67/execution;full M1–M5 remain open.
+Frozen2a179b58/update262/order/recipe unchanged;Lab behavior3c892d30. No SHA,agents,new services,
+second ledger or remote writes. Saved CPU/train and Host pilot remain closed.
+
+# Earlier: 2026-10-25 batch034 reviewed; batch035 LIVE with 9 positions
 
 Original034 (musique-family-000706/A20):12 process completions, not semantic successes.
 26 HTTP/81736 known tokens,unknown increment0;23 Host/3 View.13 finite,untruncated local
