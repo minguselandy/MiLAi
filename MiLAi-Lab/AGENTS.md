@@ -1,4 +1,39 @@
-# LATEST: 2026-10-25 batch028 reviewed; batch029 LIVE at frontier64
+# LATEST: 2026-10-25 batch029 reviewed; batch030 LIVE with 9 positions
+
+Batch029 (musique-family-000555/D20):12 attempted,10 process completions/2 Laya Host truncations.
+Full document pool fails before retrieval with32498 incomplete content characters,987 reasoning
+characters; stage2 has null content/reasoning33752. Both8192 output tokens; no partial calls executed.
+27 HTTP/108153 known tokens, unknown0;25 Host/2 View.13 finite, untruncated local forwards used72286
+input tokens,max6904; one load.13 retrievals include1 zero-state call.12 initial+46 post=58 observations.
+4 material-budget rejections. Full literal source/bank/capture/actual Host-packet audit passed.
+
+Full pool supports Gita co-authorship and Jakarta birthplace, but not exclusive lyricist/composer
+assignment. No completed answer returns the biography. Rules query drifts to creation time and
+requests max_return_tokens1000; actual initial limit1000 verified against ordinary2048 on stage0.
+Rejected reads target unrelated documents; larger budget alone is not a demonstrated solution.
+D20 early answers preserve Le Guin, completed works and others' reading. Rules generates12-node
+View but cannot deliver it within material budget. Later all3 have16 arrivals/prior tools but no
+retrieval: rules/fixed miss current Project Hail Mary progress, abandoned/past experiences, tentative
+New Weird label and subsequent reading order; Laya truncates. Stable favorite/preferences remain
+partly correct. Owned copies, planned next books and completed reading are different states.
+No new recommendations, purchases or library actions; original labels remain unchanged.
+
+Model/load731.9014774289944 CPU seconds already billed; whole child770.758986 nested.8 measured
+remaining phases totaling39.139518096005496 CPU seconds settled once with no live job. Other work
+unknown. Cumulative30 closed batches:58 groups,342 attempts,278 process completions/64 failures,
+778 HTTP/3042434 known tokens,1817 state observations,19 zero-state calls. Not accuracy/independence/
+branch eligibility. First32 accounting stays000–015. No branch preparation, labels or new fits.
+
+ONLY LIVE neural job: original batch030,musique-family-000462/memops_D17,9 declared positions.
+Driver3551822/child3551839/exec76945; verify actual PID/files. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-030.json.
+Do not pad to12. No second neural job or offline settlement while live; review closure before next.
+Full128 train and4 dev collection precede once-only original quota/seed preparation. Latestv61/execution.
+Frozen2a179b58/update262/order/budgets unchanged; Lab behavior3c892d30. Full M1–M5 remain open.
+Reviewer role-origin fix and closed batch027 stored-version audit remain intact.
+No SHA, agents, new services, second ledger or remote writes. Saved CPU/train/Host pilot stay closed.
+
+# Earlier: 2026-10-25 batch028 reviewed; batch029 LIVE at frontier64
 
 Batch028 (musique-family-000470/B02):12 attempted,9 process completions/3 Host truncations.
 Rules/full pool and Laya/stage2 have null content; fixed/missing pool retains64 incomplete content
