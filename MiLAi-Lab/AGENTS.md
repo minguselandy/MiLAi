@@ -1,4 +1,47 @@
-# LATEST: 2026-10-26 first112 rules initial states reviewed; empty completion and wrong answer-role retained
+# LATEST: 2026-10-26 first120 rules initial states reviewed; actual missing versus unacquired evidence retained
+
+States0–119:120rules-initial selectedstates/360pairs; NEXTsource-first state120. Notnewsource120
+studycohort orcomplete source32/64/128 feedback. First64audit/cohort384scope unchanged. Qualityanswer
+120direction/62ties/178unknown;final159/23/178 (93right66left). Qualitydelivery198direction/100ties/
+62unknown;final266/32/62 (161right105left).162qualitytie targets:55incomparable/96leftdominant/
+11rightdominant,107costchanges not107correctanswers. New21=10answer/11delivery,including6right.
+Direction-bearingstatesquality71answer/94delivery,final87/120;pairlossmeanswithinstate. Newfinal/
+resourcechunks112–115,116–119 disjoint, no compile/fit/goldchanges orunexecutedlabels.
+
+112targetglacierabsent, unrelatedglaciers/continentnotbridge; properunknowns/failedHostretained.
+113sourceFROMcity notexplicitphysicalbirthplace, parentcountyknown; Viewpreservesqualification,
+no inventedneighborlist. Schooldistrictcoverage notdirectborderproof.114birthcityknown, legislative
+Districtnotbirthcounty; ViewHostoutsidecountieswithlimitation retained, rawbarevaluewrongrole.
+115priorraw+Viewperformerknown/wifeabsentfullpool; allanswersboundedunknown, duplicatedView/
+emptySEARCH addnone.116sourcefounder notcurrentlegalowner, labelabsent; bothanswersowner/founder
+conflationcaveat, actualmaterials preservefounder.117/118fullpoolhasformationyear/spousebody,
+butallbranchesoldKonly andmissingtargetanswer, NOTgloballyunanswerable. Threefollowupcases115/
+117/118 eachreads_remaining1/control8, SEARCH8candidates thenbudget_exhausted/zeroREAD. Same
+observedboundary acrossdifferenttasks, notcontrolledcausalexperiment; no rerun/allowanceincrease.
+
+119two-wikiTENsources, fullMexican/Indiancomparisonavailable, ViewfinalNo correct. CriticalMexican
+nodecitese2→doc5Americanotherdirector, correctinpute1doc2available. n5correctlyusesamee2forother
+person. EmptyNo guess hasfalse/speculativeidentity/culturalassumptions, notfullresponsecorrectness
+frombooleanmatch. No nationality/citation/sourcebodyrepair orquestionreinterpretation.
+Auditscontext-allowance-states-115-117-118-audit-v1.json andgeneration-provenance-state-119-v1.json.
+
+RootpendingCPU33.44637819199999 across157explicitentries inv120; no rootledgerwritewhilelive.
+Runtime/API/permissions/modelsunchanged. Source/observer/tokenizerhelpers artifact-only. Resource
+helperINITIALONLY untilpostcommon-prefixaccountingreview. Afterrulesinitial0–127, selectedpoststates
+begin128: inspectactualcapturepaths/raw event IDs/checkpoints/prefix usage beforeextendinghelper,
+neverassumeinitialeventformulaorfirstnonthinkingtraceevent. Copiedprefixnotnewoperations/cost.
+Failedtoolbothlabelsunknown/failedHostanswerunknown, nativeCOMPLETEDnotsemanticcertificate.
+
+ONLY neuraljob continuation001 originalpolicies60–2284,2225branches/748states. Driver2522910,
+child2522923,exec69037; verifyactualPID/cmdline/files. Outer artifacts/evidence-gap-20261023/
+original-feedback-v2-branch-execution-train-continuation-001-dispatch.json; native in
+training-generalization-20261021/.../feedback-branch-execution-v2/train-source128-continuation-001.
+First60retained/settled,neverretry/resample. Onterminalinspectboundary/failure,settleonlynoNN,
+continueonlyunattemptedoriginalpolicies. NativependingCPU nestedinouterwholechild-minus-ledgerCPU.
+Finishtrain+142devbranches/all816reviews/largestpoolcompileonce/32-64SOURCEFAMILYderivation/nine192fits/
+fullM1–M5 remainopen. NoSHA,agents,newservices,secondledger,remote writes orcompletion. Latestv120.
+
+# Earlier: 2026-10-26 first112 rules initial states reviewed; empty completion and wrong answer-role retained
 
 States0–111:112rules-initial selectedstates/336pairs; NEXTsource-first state112. Notnewsource112
 studycohort orfullsource32/64/128 feedback; first64audit/cohort384scope unchanged. Qualityanswer
