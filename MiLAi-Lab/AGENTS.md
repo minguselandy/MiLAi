@@ -1,4 +1,43 @@
-# LATEST: 2026-10-25 batch064 reviewed; batch065 LIVE
+# LATEST: 2026-10-25 batch065 reviewed; batch066 LIVE
+
+Original065 (000638/000102):12 positions,7 native COMPLETED/5 protocol failures.
+Fourlength8192/null:fixed sparse draft34410,rules sparse company37479,fixed sparse company36344,
+fixed addedcompany35566 reasoning. Rulesaddedcompany stop withNONEMPTY526chars malformed,
+982completion/3723reasoning;JSONDecodeError unterminated string at444.32 HTTP/114036 known,
+unknown0;28 Host/4 View.21 finite untruncated forwards,118917 input,max6726,one load.
+16 calls,16 initial+70 post=86 observations;nozero/noexplicitoperationrejects.
+
+HistoricalQBtable exists bothpools but no collector observes/delivers it. TableBrady5wins/8starts
+vs bio7appearances not same measure/date. Firstpool draft6thround2000Patriots supported,nooverall
+pick. Rules preserves appearance/wins limit but whole-pool absence claim ignores table.
+Laya/fixed add7wins;Laya missing-pool query shifts draftpositiontocollege and finalexplicit
+general-knowledge7wins/Michigan addendum,notprovided evidence. No current sports update.
+Company game2007/developerFEN/PearsonEducationcreatedJuly1998/rebrand2011 distinct. Laya full
+returns17+5 and separates developer fromcompanydate;doesnotassertverifieddistributor. Sparse
+Layaunknowngrounded. Rules/fixed fullomitcompany5 andfail;Viewskeepdistributionunresolved.
+
+Rules fullcompany malformed second-call text embeds prior snapshotref without closingquote.
+Literal encodedprefix matches oldref/item0,but no valid second call/state/refread occurred:
+actualretrieval1,known_reference_reads0. Do not repair, salvage, rerun or count known-refsuccess.
+Existing mechanical audit handlesnonnullmalformed. Earlierpartial flags onlylength/null;
+empty partial failure list did not mean no native failure.
+
+Child CPU already billed1119.3748686340055; whole1158.783956 nested. Seven measured remaining
+phases40.140968991994534 settled once after PIDs absent. Partial status/answers unchanged.
+Cumulative66 closed batches:125groups,738positions,593native completions/145failures,
+1788HTTP/6771175known tokens,4318observations,47zero-statecalls. Notaccuracy/eligibility.
+Source32/64 and full remaining scope unchanged;no branches,labels orfits.
+
+ONLY LIVE neural job: original066,musique-family-000236/000123,9positions.
+000236 corpus-1683/corpus-14914;000123 corpus-28594. All20sources;preserve2+1requests.
+Driver1852612/child1852627/exec99372;verify actualPID/files. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-066.json.
+No second neural job or offline settlement while live. Read sources before outputs.
+Full128 train+4dev before once-only original quota/seed preparation. Latestv97/execution.
+M1–M5 remain open. Frozen2a179b58/update262/recipe unchanged;Lab3c892d30.
+No SHA,agents,new services,second ledger orremote writes.
+
+# Earlier: 2026-10-25 batch064 reviewed; batch065 LIVE
 
 Original064 (000049/000260):9 positions,8 native COMPLETED/1 rules missing-art lengthfailure,
 8192/null,32138 reasoning.28 HTTP/82451 known,unknown0;25 Host/3 View.20 finite untruncated
