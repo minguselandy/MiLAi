@@ -1,4 +1,50 @@
-# LATEST: 2026-10-26 first56 rules initial states reviewed; actual stored record inspected; continuation001 LIVE
+# LATEST: 2026-10-26 first64 rules initial states reviewed; full source64 cohort still incomplete; continuation001 LIVE
+
+States0–63 reviewed:64rules-initial states/192pairs/192unique cases. Literalfirst64sourcefamilies
+match originalsource order. Fullsource64selectedcohort is384states:64each rules/laya/fixed_context
+×initial/post, so this isonly1of6strata, NOTcomplete source64 feedback orcompiledsubset. NEXTstate64.
+Qualityanswer58direction/25ties/109unknown; final71/12/109 (45right26left). Qualitydelivery115direction/
+43ties/34unknown; final141/17/34 (89right52left).68qualitytie targets:29incomparable/39leftdominant;
+39totalcost-onlychanges, new5=2answer/3delivery, not5newcorrectanswers. Direction-bearing states
+quality36answer/55delivery, final43/64; pairloss averageswithinstate, countsnotgradientmass.
+
+Newfinal/resourcechunks056–059 and060–063, no overlap/compile/goldrepair.56actualcaller1000token
+returnlimit preserved; publicbirthplacequestion vs toolwriter/creationquery; bothnonemptyonlysong
+premise, availablebiographicalsource missed andHostconflicting/outsidebirthdetails retained.
+57ownedbook notconfirmednext/currentread, tentativefuturegenre/authorplans notcompleted; raw/View
+strengthenorder/recency differently.58traininggroundassociation notlegalownership/league; View
+preservesmissingrelations, emptyoutsideanswerunsupported.59device-scopeddefaults/settings/friend
+proposal; rawHostmorecomplete, ViewHostpartialandfuturesearch.60bothHostsameunsupportedcounty
+althoughfaithfulcitypremise; tie notgroundedanswerproof.61misrecordedphone notretiredvalidline,
+leaseemail notprovenprefilledform, thirdpartyweekends notformalmaintenancecoverage. Privatevalues
+remainignored; no question/identity/source/body/goldrepairs.
+
+62actualHostearlierraw+View containsactresspremise/absentspouse; allanswerscorrectboundedunknown,
+redeliveredView/oldunrelatedbodyzeroincrement.63cachedoldView butactualHostframeNOotherreceipts;
+oldViewclaimsno birthdayexception despitefullfrontier23sources containingtentativeexception.
+Faithfuloldrawprefbody ispartial, no fullcurrentanswer. Legalrefreshunexecuted, no resampling or
+causalcomparison acrossdifferenttasks. Auditsstate-056-request-budget-audit-v1.json,
+fixed-context-states-062-063-audit-v1.json, review-first64-rules-initial-audit-v1.json inreviewdir.
+First64audit verifiesactualcases/menu/before andfailuregates:2failed-toolpairs bothunknown,
+52failed-Hostpairs answerunknown; counts overlap, donotsum. Authorsemanticlabels notindependent.
+
+RootpendingCPU19.128901222999996 across76explicitentries inv113; noledgerwritewhilelive.
+Includesnewfirst64mechanicalcohortaudit CPU2.226459154, anewread-onlyprocess, notrebillingoldreviews.
+Existing source/observer/resource helpers artifact-only; emptyquery_structuremayomitnavigationONLY
+whenactualnodes/rules/bindings empty, omissionflagretained. ResourcehelperINITIALONLY untilpost
+common-prefix accountingreview. Failedtoolbothlabelsunknown/failedHostanswerunknown. No model/HTTP
+fromrootreviews, no newfunctionalcode, no fullpoolcompile/newfit.
+
+ONLY neuraljob continuation001 originalpolicies60–2284,2225branches/748states. Driver2522910,
+child2522923,exec69037; revalidatePID/cmdline/files. Outer artifacts/evidence-gap-20261023/
+original-feedback-v2-branch-execution-train-continuation-001-dispatch.json; native in
+training-generalization-20261021/.../feedback-branch-execution-v2/train-source128-continuation-001.
+First60retained/settled, no retries/resampling. Onterminal inspectboundary/failure,settleonlynoNN,
+continueonlyunattemptedoriginals. NativependingCPU nestedinouterwholechild-minus-ledgerCPU. Finish
+train+142devbranches/all816reviews/largestpoolcompileonce/32-64SOURCEFAMILYderivation/nine192fits
+andfullM1–M5 remainopen. NoSHA,agents,newservices,secondledger,remote writes orcompletion. Latestv113.
+
+# Earlier: 2026-10-26 first56 rules initial states reviewed; actual stored record inspected; continuation001 LIVE
 
 States0–55:56rules-initial selectedstates,168pairs; NEXT source-first state56. Notcomplete
 source32/64 collector×phase cohorts. Qualityanswer53direction/21ties/94unknown; final64/10/94
