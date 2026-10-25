@@ -1,4 +1,41 @@
-# LATEST: 2026-10-25 batch057 reviewed; batch058 LIVE
+# LATEST: 2026-10-25 batch058 reviewed; batch059 LIVE
+
+Original058 (musique-family-000222/000172):12 positions,9 native COMPLETED/3 Host length
+failures. Laya missing person/fixed person-with-bio/rules missing station all8192/null,
+reasoning32575/35518/33095.36 HTTP/110062 known,unknown0;32 Host/4 View.26 finite untruncated
+forwards,141436 input,max6584,one load.20 calls,20 initial+72 post=92 observations,nozero-state
+calls. One View rejection,no explicit material-budget rejection; empty follow-ups have states.
+
+Person missing pool lacks Dan Goldie;rules/fixed unknown and distinguish fictional Goldie.
+Second pool bio says residence/business Palo Alto California; separate Palo Alto Texas body
+gives Nueces. No California county body. Rules/Laya preserve residence/county unknown;fixed
+gets bio then two SEARCHs exhaust remaining allowance and Host fails. No Texas full body in
+captured observations/packets for any collector; not demonstrated comparison of both namesakes.
+Rules View has grounded residence fact but presidency+firm-location rule is not extra proof.
+Snapshot current statuses not independently verified today; no geographic/gold repair.
+
+Full station pool all3 actually deliver KZOI→Dakota City Nebraska→Dakota County and answer
+Dakota County. Rules/fixed onecall,Laya two actual Host responses [1,1],source1 then8.
+Rules generated nodesn1/n2,rule targets absentn3:QUERY_STRUCTURE_RULE_NODE_UNAVAILABLE.
+View rejected but original sources delivered and Host succeeds; do not merge these outcomes.
+Missing station Laya/fixed unknown;rules lengthfailure. Laya last no_available_operation
+still has real read/states,not zero-state. No external licensing/ownership verification.
+
+Child CPU already billed1269.4653461289881; whole1309.7560299999998 nested. Seven measured
+remaining phases41.02714855501165 settled once after PIDs absent. Partial answers unchanged.
+Cumulative59 closed batches:110 groups,663 positions,538 native completions/125 failures,
+1565 HTTP/6040163 known tokens,3748 observations,39 zero-state calls. Not accuracy/eligibility.
+Source32/64 and full remaining scope unchanged; no branches, labels or fits.
+
+ONLY LIVE neural job: original059,musique-family-000329/musique-family-000749,12 positions.
+Driver1384586/child1384601/exec31803; verify actual PID/files. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-059.json.
+No second neural job or offline settlement while live. Read sources before outputs.
+Full128 train+4dev before once-only original quota/seed preparation. Latest v90/execution.
+M1–M5 remain open. Frozen2a179b58/update262/recipe unchanged;Lab3c892d30.
+No SHA, agents, new services, second ledger or remote writes.
+
+# Earlier: 2026-10-25 batch057 reviewed; batch058 LIVE
 
 Original057 (musique-family-000010/000895):12 positions,7 native COMPLETED/5 protocol failures.
 Rules/Laya missing country-name and Laya full music length8192/null,reasoning37928/36707/28416.
