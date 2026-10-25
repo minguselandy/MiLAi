@@ -1,4 +1,52 @@
-# LATEST: 2026-10-26 first24 post states reviewed; selection can drop already acquired evidence
+# LATEST: 2026-10-26 first32 post states reviewed; available late updates rejected by material budget
+
+States0–159:160selected states/480pairs,128unique families;128rulesinitial+32rulespost.
+NEXT source-first state160. Full train768/dev48/all6strata/allreviews/largestpoolcompile/original
+fits remain. First32 source-family audit: full192selected states, only64reviewed (32rulesinitial/
+32rulespost),128othercollectorstates remain. This64 is nested in160, not additional or complete
+source32feedback. Derive32/64 by SOURCEFAMILY order after largestpool compile once.
+Quality answer173 directions/85ties/222unknown; final229/29/222 (134right95left).
+Quality delivery262 directions/151ties/67unknown; final367/46/67 (224right143left).
+236quality-tie targets:64incomparable/116left/45right/11equal-cost,161cost-only changes.
+New16=6answer/10delivery,3LEFT/13RIGHT; not16correctanswers. Direction-bearing states quality97/122,
+final120/160 (answer/delivery). Pair loss means withinstate, counts not gradientmass.
+
+152 within-state location absent, country/state repeated in question not new county evidence.
+153 bookedflight price perperson not wholetripbudget; itinerary intention not bookedflightchange.
+154 actualtoolquery onlyfilminglocations; faithfulView narrowerthanpublicrepublicdategoal.
+Fullhandoff retainsConventiondoc11 but21vs22dateconfusion persists; doc18notacquired. No queryrepair.
+155 fullraw addsnearby/spontaneousweekday examples, Viewduplicatesboundedpreferences nottraitproof.
+156 bornNEARcity/bridgebetween2counties notbirthcountyproof.157 acquiredbufferrule droppedbyselection;
+fullraw derivescorrectcompletion, butViewleaseg1 any[] hasno route, correctHost notgraphcertificate.
+158 nativeCOMPLETED answer276codepoints ends dangling conjunction, finishstop/raw307. Imported
+literarynames unsupportedpool; no extraction/statusrewrite/retry.159 stage2fixture23records includes
+completedpaperwork andunconfirmedreschedule, but allbranches misscurrentstatus andclaimglobalabsence.
+
+159 actualcaller max_control_steps5, capturedstep2/remaining3, readsremaining6/new_events18.
+Fixed prior receipt beforetarget hasoldraw7+View. USE_VIEW/USE_VIEW_ONLY yield identical packets:
+step2openoldView;step3context_1 opensoldsession1eight (one extraassistantrecap);step4context_2 rejects
+session3seven asmaterial_budget_exhausted. Rejectedcontext containsusercompletedpaperwork/proposed
+reschedule keys s3t1/s3t7. Candidatebody metadata not Hostdelivery. No claim alternatepackingwould
+solvefulltask; no increasequota/resample/refreshnomination orretry. Emptynewreceipt stillhasfixedK.
+
+Newignored audits: post-prefix-accounting-states-152-159-audit-v1.json (24cases),
+semantic-boundaries-states-154-157-158-159-audit-v1.json, and
+review-first32-rules-initial-post-scope-audit-v1.json. All96postcases commonprefix excluded/newgen
+andfullreceipt costschecked. PhysicalJSONL, literal source/packet/checkpoint checks; no hash.
+Failed candidate-shape probe CPU unknown; actualcandidate_materials list subsequently inspected.
+Helpers only CPU artifacts; no runtime/Schema/API/permission/model changes, no newmodelcalls/fits.
+
+Root pendingCPU49.82526044999998 across209 explicit entries inv125; no root ledger write whilelive.
+ONLY neuraljob continuation001 original policies60–2284,2225branches/748states. Driver2522910,
+child2522923,exec69037; verify actual PIDs/cmdline/files. Snapshot1781tool rows, Host1568C/213F.
+Originalfirst60 retained/settled,neverretry. Onterminalinspectactualboundary; settle onlynoneural
+process, then unchangedunattemptedsuffix innewoutput. NativependingCPU nestedinouter wholechild
+minusledgerCPU, notadditive. Otherreading/author/import/probes unknown, noGPU/pricesimputedzero.
+Finishtrain+142devbranches/all816reviews/largestpoolonce/32-64sourcefamilyderivation/nine192fits/
+fullM1–M5 remainopen. NoSHA,agents,newservices,secondledger,remote writes orcompletion.
+Latest data/manifests/evidence-gap-development-progress-20261023-v125.json.
+
+# Earlier: 2026-10-26 first24 post states reviewed; selection can drop already acquired evidence
 
 States0–151:152selected states/456pairs,128unique families;128rulesinitial+24rulespost.
 NEXT source-first state152. Full train768/dev48/all6strata, allreviews/largestpoolcompile/original
