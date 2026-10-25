@@ -1,4 +1,72 @@
-# LATEST: 2026-10-25 dev002 reviewed/settled; original dev003 LIVE
+# LATEST: 2026-10-25 all original collection closed; train feedback branches LIVE
+
+Original dev003 (E15/F01) reviewed/settled:11COMPLETED/1lengthFAILED,25HTTP/114830known,
+unknown0;23Host/2View.23finite untruncated forwards,142370input,max12101,one load.
+12retrievalcalls,11initial+49post=60observations,one actualzero-statecall andone known-ref read.
+7material rejects:rulesrate late2READ,Layabudget late2READ,fixedbudget late2CONTEXT+1READ.
+
+E15 rulesearly all7+View then8192/null/30755reasoning failure. View borrows tracking-window
+time/identifier date for referenceincident and attributes assistant commentary to user.
+Laya earlyobservesall7 twice (11/7ranges),both returns1t1–4; thirdoneSEARCHempty is a real
+initialstate,notzero. Exactsplit/duration unknown correctly, but majority/partialwindow omitted;
+unknown overallpercentage explained by wrong missing factors rather than total-ticket denominator.
+Fixedall7 adds unprovided trackingyear. Later16arrivals:rulesfreshHostframe afterfailure;
+lastbefore15fullSources/17ranges,terminalREAD6 adds2t1–2 afterlastbefore. Actualpacket supports
+correctsplit/daily/seven-day rates using reported duration and unknown overallpercentage.
+No fabricated nextstate/inclusivecalendarrepair/projection-as-observation. Laya/fixed0retrieval
+stale missingstatistics; fixed repeats year. DifferentHostframes,not causalcollectorcomparison.
+
+F01 earlyall3 all7 and arithmeticcorrect. Laterall16arrivals/prior tools. Rules0retrieval
+staleincome/expenses despite exclusionclaim. Laya actualparsedknownref1→known_material all7early
+Sources,knownreads1; lastbefore15newSources/21ranges plusknownold. HANDOFF_SELECT1 returns3t3–6,
+oldexpenses inactualHosthistory + newuserexpense/assistantcurrentpay give correctfullarithmetic.
+Latestuserportal3t7 acquirednotdelivered. Twoqueriesqueuedtogether; secondtruezero-stateempty,
+notadaptive recovery. Fixedobserves23originals+oldHostpair25full,returns2t1–8 afterrejects;
+incomeupdated but acquirednewexpenseomitted, incompleteexpense total. PrivateIDs/names/dates/
+amounts ignored only.11 partialanswers/2generatedViews literalunchanged. No labels/retries.
+Dev003 billedCPU1851.0578943139944,whole1893.047001nested;8phase42.548467874005475settledonce.
+
+ALL4 ORIGINAL DEV000–003 CLOSED:8groups/48positions/46COMPLETED2lengthFAILED;94HTTP413880known,
+unknown0;85Host9View.87forwards552876input/max13112.39retrievalcalls,38initial+177post=215states,
+1zero,26materialrejects. Later24positions9retrieve/15none;22withprior tools,2fresh afterfailure.
+Rules15C1F/10initial63post/2laterretrieval;Laya15C1F/16initial71post/4laterretrieval;
+fixed16C/12initial43post/3laterretrieval. Each8group×3collector hasinitial/post presence.
+dev8-collection-review.json ranONCE,all4settlements checked against originalledger;aggregateCPU
+0.023638171 settled once. Devknown subtotal7668.159929889CPU. TRAIN128 report/subtotal remains
+SEALED andseparate:128groups/753positions/95421.37720603103CPU. Do not rerun/rebill eitheraggregate.
+
+ONCE-ONLY originalseed0 quota preparation DONE afterall68train+4dev settled/no livejob.
+Prepared root: training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/
+feedback-branch-preparation-v2/{train-source128,dev}. Native directory is captures, NOT
+frozen-retrieval-calls. Train768states(384initial384post),2285branches;dev48states(24+24),142branches.
+Allcells1initial+1post percollector/source,no shortfall/no nominations. Traineligible4406 of4470
+inventory;dev215of216. Actualoffered bindings/rawactionbindings equal;816uniqueeventIDs,
+allrawgold{},postcheckpoints real;fixed_context reads4/continuation2. No resampling smallercohorts.
+Train19states2branches/749three;dev2two/46three. Prepwholechildren6.287894+coordinator0.110317025
++audit0.723489023=7.121700048CPU settledonce, nativecompute nested. Failedfirstaudit looked in
+wrongoutputsubdirectory; correctedread only,no resampling/model/ledger mutation;failedCPUunknown.
+Artifacts: original-feedback-v2-branch-preparation-{invocations,dispatch,audit}.json;
+original-feedback-v2-preparation-settlement.json. These are ignored artifacts under current
+Lab artifacts/evidence-gap-20261023. Aggregate status is historical before quota prep.
+
+ONLY LIVE neuraljob: ORIGINAL TRAIN BRANCH QUEUE,768states/2285branches. Driver2388294/
+child2388299/exec66759; verifyactualPID/files. Outerdriver:
+artifacts/evidence-gap-20261023/original-feedback-v2-branch-execution-train-dispatch.json.
+Native output: training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/
+feedback-branch-execution-v2/train-source128/driver.json. Source2a179b58/nativefrozenrunner,
+actualbefore/firstbinding,commonfixedcontext4/2,oneconditionaloriginalHostframe readout;
+siblingsfixed,originalprefix restored/notreexecuted. --continue-known-readout-failures retains
+known incomplete responses thenexecutesremainingcases once; no automaticretry. This isnot
+autonomousHostbenchmark. Count native toolrows and terminalreadouts separately whilelive.
+Do notsettleANY ledgerphasewhilelive. Outerwholechild minusactualledgerCPU willcover allnative
+replay/readout/orchestration pendingCPU once; doNOTalsoadd theirnestedpending totals orprefixcosts.
+On terminal review retainedoutcomes/failures,then already-prepared142devbranches. No samplerrerun,
+manualnomination orsubsetresampling. Compilelargestpool/reviewonce;derive32/64 later withsame
+IDs/labels/replaymatches. Nine192updatefits,fullM1–M5 remainopen. Latestv102/execution.
+Labfunctional3c892d30/frozen2a179b58/update262/recipe unchanged. NoSHA,agents,newservices,
+secondledger,remote writes orprematureGoalcompletion.
+
+# Earlier: 2026-10-25 dev002 reviewed/settled; original dev003 LIVE
 
 Original dev002 (D25/E08): all12 native COMPLETED, not12 semantic successes.
 21HTTP/102392known, unknown0;19Host/2View.18 finite untruncated forwards,131954 input,
