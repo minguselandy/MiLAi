@@ -1,4 +1,53 @@
-# LATEST: 2026-10-25 first60 branches retained; unattempted continuation001 LIVE
+# LATEST: 2026-10-26 first8 states quality/resource reviewed; continuation001 LIVE
+
+SelectedTRAIN states0–7 (rulescollector,allinitial) now source-first QUALITY+RESOURCE reviewed.
+8preexposedanchor groups,24pairs; notoverallaccuracy,notpost-binding evidence. Answer7direction/
+1tie/16unknown (6right1left);delivery18direction/2ties/4unknown (16right2left). Actualsame
+before/actions,commoncontinuation,Hostframe/target-only receipt substitution verified.
+Allrawgoldstill{},full-optionCElabelsnone,compiledfeedbackrows0. Pairannotations ARE present.
+
+Newstates4–7: C26 SEARCH coverscurrentlogistics/otherperson distinctions;ViewreadoutFAILED,
+answerunknown againstit,taskdeliverytie. D11 rawanswer transfersmother's portion appraisal to
+user;View adds unprovidedyear andassignsuserbillappraisal tomother. Answertradeoffunknown,
+deliveryrawpreferred. D23 rawanswer conflateshotelwithconferencevenue;View corepreferences
+correctbutpromisesunexecutedsearch/usesunmarkedfirstperson; tradeoffs retained. F08 Viewomits
+ownersofothercodes,Hostcalls them user's;rawretainsservice/personseparation,preferredbothtargets.
+Private names,codes,dates,venues andanswers onlyignored. No eventyear/identity repairs orretry.
+
+Inherited resource rule from original finalize_feedback_dev_reviews_v1.py andfrozen
+retrieval_feedback.resource_preference applied to24actual toolreceipts usingexistinglocal
+tokenizer only:wiretokens56–1334,modelweights/forwards/HTTP0. Fivefields keptseparate:
+retrievalgenerationrequests/tokens,acquisitionoperations,readoperations,wiretokens.
+Only3knownqualitytie targetcomparisons examined foroverride; allresource-incomparable
+(generation vsread tradeoff),zero labelchanges. Unknown/directionalquality preserved.
+All8initial,so operationcounters haveno restoredprefix;futurepoststates need explicit
+common-prefix accounting,not original-work rebilling. No fullpoolcompile ornewfit yet.
+
+Reviewdir artifacts/evidence-gap-20261023/feedback-branch-reviews-v2/train:
+FINAL disjointchunk final-reviews-states-000-007-v1.json,resources resource-vectors-states-000-007-v1.json.
+Quality/source/observed originals remainprovenance; doNOTconcatenate them withfinalchunk as
+duplicate state rows. Nextreview row8; documenthistory mayuse history.sources orrequest.sources,
+notonlyincoming_sources. Readactualpool atselectedrequestfrontier beforeoutputs; do notassume7.
+Casesstates0–19 inoriginal train-source128; latercasesmatchstablepolicyname acrosscontinuations.
+NewpendingrootCPU1.1544533109999997 across4files: source-batch-004-007-processing.json,
+observed-states-004-007-v1.json,quality-states-004-007-v1.json,final-reviews-states-000-007-v1.json.
+No settlementwhilelive. Priorquality0–3 CPU alreadysettled andnotincluded; invalidsource1–3
+estimates remainnon-billable/unknown. Eachnewbatch measuredonce,not overlappingstateallocations.
+
+ONLY LIVE neuraljob remainscontinuation001 oforiginal train policies60–2284,2225unattempted
+branches/748states; first60retained,59toolC1F/53readoutC7F,settled137.390514828CPU,304957knownHTTP.
+Driver2522910/child2522923/exec69037; verifyactualPID/files. Outer:
+artifacts/evidence-gap-20261023/original-feedback-v2-branch-execution-train-continuation-001-dispatch.json.
+Native output .../training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/
+feedback-branch-execution-v2/train-source128-continuation-001/driver.json.
+Sameoriginalpolicies/order/bindings/model/prompt/budget/frozen2a179b58; nofailed-arm retry/resampling.
+Onterminal inspectretainedfailure/attemptboundary,settleonlywithoutlivejobs,continueonlystill-
+unattemptedoriginalpolicies. No ledgerwriteswhilelive; nativependingCPU nested inouterwholechild
+minusledgerCPU,neveraddtwice. Aftertrain2285 attempted, already-prepared142devbranches.
+Allcollection+quotaprep sealed;fullM1–M5/nine192updatefits/Host/lifecycle/externalremainopen.
+Latestv104/execution. NoSHA,agents,newservices,secondledger,remote writes orprematurecompletion.
+
+# Earlier: 2026-10-25 first60 branches retained; unattempted continuation001 LIVE
 
 Original train branch invocation stopped after original policies0–59,60attempts.59tool
 COMPLETED/1toolFAILED,53readoutCOMPLETED/7FAILED (4TEXT_REQUIRED,3INCOMPLETE_FINAL_RESPONSE).
