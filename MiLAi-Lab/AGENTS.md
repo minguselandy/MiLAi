@@ -1,4 +1,45 @@
-# LATEST: 2026-10-26 first104 rules initial states reviewed; stale future-city alias, provider and question-citation defects retained
+# LATEST: 2026-10-26 first112 rules initial states reviewed; empty completion and wrong answer-role retained
+
+States0–111:112rules-initial selectedstates/336pairs; NEXTsource-first state112. Notnewsource112
+studycohort orfullsource32/64/128 feedback; first64audit/cohort384scope unchanged. Qualityanswer
+116direction/51ties/169unknown;final145/22/169 (86right59left). Qualitydelivery190direction/86ties/
+60unknown;final247/29/60 (150right97left).137qualitytie targets:51incomparable/81leftdominant/
+5rightdominant;86costchanges not86correctanswers. New10=3answer/7delivery. Direction-bearingstates
+quality68answer/90delivery,final80/112;pairlossmeanswithinstate. Newchunks104–107,108–111 disjoint.
+
+104Viewbirth+parentcountybettermaterial, finalellipsis; rawonlybirthplacepartialanswer. Shared
+reservoirassociation inpoolnotdelivered, nofullneighboranswer.105currentaddress/ZIP userprovided,
+currentleaseendabsent; rawfinalmisclassifiesuserdetailsasassistant-only, Viewpreviousleaseadds
+prior-yearwithoutsource. No currentlease/formerorrelativeaddressmerge.106actualcountry/namesake
+chain givescorrectanswer, self-dependentconditioncaveatsretained/notformalpassportverification.
+107nativeCOMPLETED emptystring answerlength0, actualsavedstatuspreserved; rawHostFAILED, View
+partialfirstsinger/genrechainmissing withno-routegatedidentity. Never salvageorrepairblankresponse.
+
+108targetpersonabsent, fictionalnamesakenotbridge; boundedunknowns betterthanellipsis, no new
+material.109targetradioabsent, Polishgminasnotstationlicensedcity; emptyViewlegitimatelyomits
+navigation andHostfailuresunknown.110actualinputsalllackrecipientname althoughfullpooldoc6hasit;
+emptyfinalmentionscorrectnameinsideinability-to-establishstatement, NOTgroundedpositiveanswer
+orstring-matchsuccess. Rawwrongrecipient, Viewbareperformer answerssubqueryratherthanpublicrole.
+111targetsong/vocalistabsent, unrelatedTV/similar-songtitlecannotfilllabel; appropriateunknowns
+vsrawellipsis. No externalentity/label/questionrepair, no model/citation/year/goldmutations.
+
+Auditsstate-105-source-role-temporal-audit-v1.json, state-107-empty-completed-readout-audit-v1.json,
+state-110-role-and-name-readout-audit-v1.json inignoredreviewdir. Privateaddress/lease/details
+ignoredonly. RootpendingCPU31.274672029999994 across147explicitentries inv119; no rootledgerwrite
+whilelive. Runtime/API/permissions/modelsunchanged; resourcehelperINITIALONLY untilpostprefixaudit.
+Newgenerationafterfrozenboundary, targetcalloperationfilter forcopiedprefix, oldcostsnotrebilled.
+Failedtoolbothlabelsunknown, failedHostanswerunknown; completedblank/ellipsis judgedactualcontent.
+
+ONLY neuraljob continuation001 originalpolicies60–2284,2225branches/748states. Driver2522910,
+child2522923,exec69037;verifyactualPID/cmdline/files. Outer artifacts/evidence-gap-20261023/
+original-feedback-v2-branch-execution-train-continuation-001-dispatch.json; native in
+training-generalization-20261021/.../feedback-branch-execution-v2/train-source128-continuation-001.
+First60retained/settled,neverretry/resample. Onterminalinspectboundary/failure,settleonlynoNN,
+continueonlyunattemptedoriginalpolicies. NativependingCPU nestedinouterwholechild-minus-ledgerCPU.
+Finishtrain+142devbranches/all816reviews/largestpoolcompileonce/32-64SOURCEFAMILYderivation/nine192fits/
+fullM1–M5 remainopen. NoSHA,agents,newservices,secondledger,remote writes orcompletion. Latestv119.
+
+# Earlier: 2026-10-26 first104 rules initial states reviewed; stale future-city alias, provider and question-citation defects retained
 
 States0–103:104rules-initial selectedstates/312pairs; NEXTsource-first state104. Notnewsource104
 studycohort/notfullsource32/64/128 feedback. First64audit/cohort384scope unchanged. Qualityanswer
