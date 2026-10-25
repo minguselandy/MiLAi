@@ -1,4 +1,47 @@
-# LATEST: 2026-10-26 first40 rules-initial states reviewed; sibling context, rejected View and citation defects retained
+# LATEST: 2026-10-26 first 48 rules initial states reviewed; missing relations and status distinctions retained
+
+Reviewed selected states 0–47: 48 states, 144 pairs, all rules initial control states.
+NEXT source-first state48. Not complete source32/64 cohorts: those require all collectors and
+initial/post states by original SOURCEFAMILY prefix after largest-pool compilation once.
+Quality answer: 48 directions /17 ties /79 unknown (39right9left); final56/9/79 (39right17left).
+Quality delivery: 90 directions /28 ties /26 unknown; final107/11/26 (70right37left).
+45 quality-tie target comparisons:20 resource-incomparable,25 left-dominant. New5 changes all
+DELIVERY; total25 cost-only changes are not25 correct answers. Direction-bearing states quality
+29answer/42delivery, final34/48. Pair loss averages within state; counts not gradient-mass ratios.
+
+New final/resource chunks040–043 and044–047 in ignored feedback-branch-reviews-v2/train.
+40targetplace absent, unrelated raw/View material; correct bounded abstentions.41raw interval
+calculation correct, no notice lead time; View adds implicit contract deadline unsupported even
+though marked uncertain.42historical enrollment figure has no building-university bridge; View
+final bounded but n1/n2 cite e10→doc13, actual ASU input e4→doc10; n4 cites e13→doc9 instead of
+church e10→doc13. generation-provenance-state-042-v1.json verifies actual generator input.
+43reported confirmed reschedule becomes conditional in View/Host; g2any[] no route, current
+progress unknown conflicts later reaffirmation. Completion and aggregate accuracy not topic scores.
+44spouse premise exists but target duet year absent; empty outside year unsupported, raw unrelated,
+View supplies actual premise and unknown year.45written preference/intention not confirmed aid use;
+raw Host absolute nonuse overstates reports, View bounded but metaphor/causal and gating caveats.
+Answer preference can oppose delivery preference.46author present/birthplace absent, other author
+or book not bridge.47capacity upgrade and backup setting done, exact proposed hierarchy unconfirmed,
+enabled backup not verified running. Raw reminder→offline-priority error; View omits requested check.
+Private schedule/workplace/folder data remain ignored; no source/question/citation/gold repairs.
+
+Root pending CPU12.839447400999997 in54 explicit entries inv111, no ledger write while live.
+No fullpool compile/newfit/newmodel calls in root review. Existing observer and local-tokenizer
+resource helper remain artifact-only. Resource helper INITIALONLY until post-state prefix accounting
+reviewed. Failed tool => both targets unknown; failed Host => answer unknown. Sibling-context
+limits from v110 retained; actual fixed final frame is not proof all receipts predated the decision.
+
+ONLY neural job continuation001 original policies60–2284,2225branches/748states. Driver2522910,
+child2522923,exec69037: revalidate PID/cmdline/native output. Dispatch under
+artifacts/evidence-gap-20261023/original-feedback-v2-branch-execution-train-continuation-001-dispatch.json.
+Native training-generalization-20261021/.../feedback-branch-execution-v2/train-source128-continuation-001.
+First60 retained/settled, no retry/resampling. On terminal inspect attempt boundary/failure, settle
+only without live neural processes, continue still-unattempted original policies only. Native pending
+CPU nested in outer whole-child-minus-ledger CPU. Finish train then142dev branches, all816 state
+reviews, largest-pool compilation/32-64 derivation/nine192fits/fullM1–M5 remain open. NoSHA, agents,
+newservices, secondledger, remote writes or premature completion. Latestv111/execution.
+
+# Earlier: 2026-10-26 first40 rules-initial states reviewed; sibling context, rejected View and citation defects retained
 
 States0–39:40 rules-initial states/120pairs finalized, NEXT source-first state40. Not complete
 source32/64 cohort: derive by sourcefamily across collectors/phases only after fullpool compile.
