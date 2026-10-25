@@ -1,4 +1,54 @@
-# LATEST: 2026-10-25 batch032 reviewed; final frontier64 batch033 LIVE
+# LATEST: 2026-10-25 source64 collection verified; batch034 exited, review pending
+
+Original batches000–033 are closed and source-reviewed. All64 histories and381 positions match
+sources-64/histories.json literally, without missing/duplicate history or position. All64 groups
+under each collector have initial and post observations. Rules127 attempts/106 process completions/
+21 failures,108 initial+630 post; Laya127/96/31,170+542 with15 zero-state calls; fixed127/111/16,
+122+495 with4 zero-state calls. Total419 calls,400 initial+1667 post=2067 observations,313 process
+completions/68 failures (64 truncations,4 malformed responses).873 HTTP/3366835 known and charged
+generation tokens; unknown increments0.703 local forwards/4186264 input tokens,max12704. Embedding
+token deltas0 do not prove zero service GPU work. These are not accuracy or independent-state counts.
+
+Authoritative frontier64-collection-review.json in original-feedback-v2-collection-dispatch;
+script review_frontier64_collection_v1.py. All108 later ordinary requests have new-source notices,
+but executed retrieval occurs in rules6/36,Laya11/36,fixed4/36;87 have none (67 process-completed,
+20 protocol failures). Prior Host frames differ: rules1 and Laya5 are fresh after earlier failures,
+and all6 fresh frames retrieve; continued-frame counts are5/35,6/31,4/36. Descriptive, not causal.
+Phase presence does not establish branch eligibility or sufficient updated-state conditions.
+Only1 explicit known-reference case; implicit knowledge is a different unit. Operation-failure
+summaries cover011–033 (61 material rejects,1 view reject), not earlier missing summary fields.
+12 independent stored-record tasks in groups A04/A07 use scripted fixture saves, not learned Writer.
+
+Collection CPU subtotal47821.552382084 = already-billed child compute46427.38735944983 + settled
+follow-ups1394.1049932601763 + retained prelaunch collision0.060029374. All34 settlement phases
+match the original ledger. Whole-child47810.21992 is nested, not added. Serial driver wall22970.136793
+excludes authoring gaps. Earlier preparation/selection/pilot costs are separate; unmeasured work,
+GPU time and monetary prices unknown. First32 report/accounting unchanged and included once, not added.
+No branch preparation, quota selection, labels or new feedback fits; eligibility/selected counts null.
+
+Latest batch033/A07:11 process completions/1 rules early truncation,8192 output tokens with23168
+incomplete content chars/reasoning2698.27 HTTP/99488 known tokens;19 finite forwards,114126 input,
+max9493.9 budget rejections. Rules late fresh frame handles tentative birthday exception but lacks
+past examples; fixed uses old context plus new Sources correctly; Laya stays stale. Actual6 stored
+banks/12 commit receipts/versions1–2 verified via read-only SQLite. Rules current receives target2
+but summarizes mixed content; rules first quotes1. Laya current quotes2; its first task successfully
+READs13/revision1, then HANDOFF_SELECT1 discards it and returns2. Fixed current quotes2; first also
+returns2. Actual read, selected delivery and exact output are separate. Unit payload exactness is
+not raw internal rendering/JSON equality. Helper review_stored_record_payloads_v1.py makes no model,
+HTTP or ledger calls. Batch033 remaining9 measured phases47.6901110349698 CPU seconds settled once,
+including new64 audit/coverage-detail CPU. No model/previous-report rebilling.
+
+No live neural job at latest observation. Original batch034,musique-family-000706/memops_A20,
+completed all12 positions at128 frontier;driver3865949/child3865964 exited. Source/output review
+and remaining measured overhead settlement are pending before035. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-034.json.
+Do not rerun034. Continue original batches035–067 and4 dev after its review/settlement
+batches before once-only original quota/seed preparation; do not train early at the64 milestone.
+Latestv65/execution. Frozen2a179b58/update262/order/budgets unchanged;Lab behavior3c892d30.
+Full M1–M5 remain open. No SHA,agents,new services,second ledger or remote writes.
+Saved CPU/train/Host pilot and first32 audit stay closed; reviewer role-origin fix remains intact.
+
+# Earlier: 2026-10-25 batch032 reviewed; final frontier64 batch033 LIVE
 
 Batch032 (musique-family-000090) kept6 declared positions:4 process completions/2 Host truncations,
 rules and fixed on corpus16003. Both8192/null,reasoning32308/32392.20 HTTP/68167 known tokens,
