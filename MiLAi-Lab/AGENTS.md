@@ -1,4 +1,41 @@
-# LATEST: 2026-10-25 batch040 reviewed; batch041 LIVE
+# LATEST: 2026-10-25 batch041 reviewed; batch042 LIVE
+
+Original041 (musique-family-000469/C07):12positions,10 native completions/2 Host truncations,
+Laya missing-document/fixed target-pool,8192/null,reasoning28372/29565.29 HTTP/117538 known,
+unknown0;26 Host/3 View.15 finite untruncated forwards,96558 input,max11513;one load.16 retrievals,
+15 initial+51 post=66 observations;1 actual zero-state rules third missing-pool call (allowance0).
+3 material-budget rejections. Source-first/partial/mechanical/semantic+known-reference audit complete.
+
+Both pools have Oursi title but Markoye body;target pool contains two Douré villages in different
+departments/provinces within same country. Preserve ambiguity,not native-gold/source rewrite.
+Rules missing View distinguishes Markoye body and leaves Oursi unresolved;full answer gives supported
+Zimtenga/Bam candidate actually delivered but doesnot surface second candidate/title mismatch fully.
+Laya full misses Doure bodies;fixed full truncates. No geography lookup/manual winner nomination.
+C07 all3 early packet unions contain all7 sources and correctly keep intermediate booking/unknown
+exactdates. Fixed inserts2026 in past stays:absent source bodies/firstHost frame,only captureyear2026;
+causal origin unproven,capturetime not eventyear. Later16arrivals/prior tools inall3;rules/fixed0retrieval.
+Laya declares actual known ref to earlier packet:reference+all7 bodies literally verified,resolves
+1 known material,known_reference_reads1,initial allowance7. Last before observes10unique/12fullranges,
+including new arrival/hold reports but not user rebooking/fullstay dates/latest autumn timing.
+HANDOFF_SELECT1 returns s1t5–8:3already-known originals+later assistant reiterating old booking.
+All3 remain stale and deny later plans/dates. No known-ref→quality/eligibility claim or new labels.
+
+Model/load1259.4990136070128 CPU already billed;whole child1300.688683 nested.7 measured remaining
+phases41.7808167239873 settled once with no live job. Partial answers unchanged at closure.
+Unknown unmeasured probes/author/report/GPU/prices retained. Cumulative42 closed batches:80groups,
+474positions,394 native completions/80 protocol failures,1085 HTTP/4144664 known tokens,
+2559 observations,20 zero-state calls. Not accuracy/independence. Source32/64 reports unchanged;
+new041 known-reference case is outside their scope. No branch preparation,labels or new fits.
+
+ONLY LIVE neural job: original042,musique-family-000235/memops_C28,12positions,128 frontier.
+Driver82544/child82584/exec48568;verify actual PID/files. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-042.json.
+No second neural job/offline settlement while live. Source-first review before actual answers.
+Full128 train+4dev precede once-only quota/seed prep. Latestv73/execution;M1–M5 still open.
+Frozen2a179b58/update262/order/recipe unchanged;Lab3c892d30. No SHA,agents,new services,second ledger,
+remote writes. Saved CPU/train and Host pilot remain closed;private itinerary details stay ignored.
+
+# Earlier: 2026-10-25 batch040 reviewed; batch041 LIVE
 
 Original040 (musique-family-000180/D02):12positions,10 native completions/2 Host truncations,
 Laya early/fixed missing-document,8192/null,reasoning29830/31429.30 HTTP/114988 known,unknown0;
