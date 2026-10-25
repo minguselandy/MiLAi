@@ -1,4 +1,52 @@
-# LATEST: 2026-10-26 rules initial stratum reviewed; post prefix accounting verified
+# LATEST: 2026-10-26 first8 post states reviewed; controller observation is not Host delivery
+
+States0–135:136 selected states/408 pairs,128unique families;128rulesinitial+8rulespost.
+NEXT source-first state136. Original first128 stratum audit retained; full train768/dev48 and
+all six strata remain required. Existing allN_initial flags refer to earlier firstN milestones.
+Quality answer140 directions/68 ties/200 unknown; final184/24/200 (107right77left).
+Quality delivery228 directions/113 ties/67 unknown; final305/36/67 (185right120left).
+181 quality-tie targets:59 incomparable/105 left/16 right/1equal-cost,121 cost-only changes.
+New7=3answer/4delivery,2LEFT/5RIGHT; not7correctanswers. Direction-bearing states quality82/107,
+final100/136 (answer/delivery). Pair loss averages within state; no gradient-mass inference.
+
+128 observe-only READ exposes correction in actual controller observed_evidence, but omits it
+from Host receipt. Host returns stale value and denies correction; raw-delivery arm includes
+correction/current answer. body_delivered in controller state is not Host receipt delivery.
+129 explicit joint switch preserved; unprovided middle-name decision must not become undecided.
+130 birthday group size unknown; View infers larger-group exception and all Hosts repeat it,
+including raw-only. Identified class not booked future attendance, preference not absolute ban.
+131 existing raw covers asked passport dates/plan, identity-document addition no requested fact.
+132 observe-only empty receipt leads Host to claim no stored interview evidence; pool has it.
+133 View adds unsupplied year and shifts another person's judgment to user; differing answer
+errors remain unknown in pair ordering.134 identical raw delivery but one answer generalizes
+single seat-side experience to standing preference.135 View input4 records, final raw7 after
+continuation READ; full answer not evidence View alone acquired all7. Historical codes neverused.
+
+Observer artifact helper now resolves View wire source_bindings through co-delivered raw s-labels
+before processing View (View may appear first). Nonempty View can omit source_locations when all
+bindings have raw bodies; preserve omission, never confuse raw material e-labels with source IDs.
+Verified8bindings in2actual Views, plus literal controller observed bodies. Initial failed observer
+probe CPU unmeasured/unknown; no neural retry. Empty raw container after dedup remains actual.
+All24post case costs checked: restored logical-prefix operations/READs excluded, full receipt
+wire tokens kept, native generation deltas new-only. Filter traces by call_id AND step boundary;
+post need not emit initial-observation marker. Raw event identities verified from physical JSONL.
+Ignored audits: post-observation-delivery-bindings-states-128-131-audit-v1.json,
+post-prefix-accounting-states-132-135-audit-v1.json, state-135-refresh-scope-delivery-audit-v1.json.
+No raw private names, dates, addresses, codes or bodies in tracked summaries.
+
+Root pendingCPU42.62318021399998 across178 explicit entries inv122; no root ledger write whilelive.
+Runtime/API/permissions/models unchanged; helpers only ignored CPU artifact processing. No pool
+compile/newfit/unexecutedlabels. Native COMPLETED not semantic success; failure gates preserved.
+ONLY neuraljob continuation001 original policies60–2284,2225branches/748states. Driver2522910,
+child2522923,exec69037; verify actual PIDs/cmdline/files. Snapshot1655tool rows, Host1460C/194F/
+1pending; active state571branch01 fixed_contextinitial. First60 retained/settled,neverretry.
+On terminal inspect actual boundary; settle only no neural process, then unchanged unattempted
+suffix in new output. Native pendingCPU nested in outer whole-child-minus-ledgerCPU.
+Finish train+142dev branches/all816reviews/largestpool compile once/32-64SOURCEFAMILY derivation/
+nine192fits/fullM1–M5 remain open. NoSHA,agents,newservices,secondledger,remote writes orcompletion.
+Latest data/manifests/evidence-gap-development-progress-20261023-v122.json.
+
+# Earlier: 2026-10-26 rules initial stratum reviewed; post prefix accounting verified
 
 States0–127:128 selected rules-initial states/384 pairs; NEXT source-first state128.
 First128 audit verifies128 unique source families in declared order and384 actual cases.
