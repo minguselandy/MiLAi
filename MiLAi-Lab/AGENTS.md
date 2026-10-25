@@ -1,4 +1,47 @@
-# LATEST: 2026-10-25 dev000 reviewed/settled; original dev001 LIVE
+# LATEST: 2026-10-25 dev001 reviewed/settled; original dev002 LIVE
+
+Original dev001 (B30/C03): 11 native COMPLETED/1 length FAILED, not 11 semantic successes.
+24 HTTP/95932 known, unknown0; 22Host/2View. 31 finite untruncated forwards,219533 input,
+max12038,one load. 11calls,11initial+51post=62 observations,nozero/known-reference reads.
+9 material rejects: rules naming early View; Laya naming late2READ/appointment late4READ;
+fixed appointment late2CONTEXT. Early Laya naming failure8192/null,36797 reasoning retained.
+
+B30 early rules/fixed all7, correct current names/report date but misclassify original name/
+rejected shortening as historical nicknames. Laya observes all7/11ranges, returns1t3–6 then fails.
+Later rules/fixed16arrivals/prior tools,0retrieval, stale personal name and omitted history/branding.
+Laya fresh Host frame after failure; lastbefore21 full Sources includes report date, retired
+nickname and future branding. HANDOFF_SELECT1 returns only3t1–4 introduction draft; plainHANDOFF/
+pairs1_3/1_2 offered. Current names right, report date equals packet capture dates while reported_at
+null, history denied, affiliations substituted for future branding. No causal/counterfactual claim.
+Rules initial View preserves narrative date but entertains ingestion time in unresolved text;
+budget rejected and not delivered, not a cause of another collector's later answer.
+
+C03 early all3 final fields/no-pending grounded; rules/fixed returnall7, Laya first1–4 thenall7.
+Later all16arrivals/prior tools. Rules0retrieval stale time. Laya lastbefore18 Sources/22ranges;
+packet3t1–4,2t1–2,1t1–4 includes correction/proposal, not resolution3t5–6. Final wrongly pending.
+TerminalREAD9 targets3t3–6,delivery rejected; no fabricated next decision state. Fixed observes
+23originals+oldHostpair25full, returns3t1–7+pair, final corrected time/resolved proposal grounded.
+Its2calls queued in one Host response; second2SEARCH empty but real states, not adaptive recovery.
+Private names, medical details and dates remain ignored; tracked source keys/boolean audits only.
+
+Dev001 child CPU3202.61495878499 already billed, including load; whole3246.940965 nested.
+Eight remaining measured phases44.91032925800979 settled once after PIDs absent. Dev000–001
+closed subtotal3737.297706932 CPU,4groups/24positions/23COMPLETED1FAILED/196658known tokens/
+114observations. SEALED TRAIN unchanged128groups/753positions,knownCPU95421.37720603103.
+No labels/branches/fits. Two read-only audit probes failed before writes, corrected actual source
+schema and duplicate occurrence matching using capture timestamp+literal body/role; CPUunknown.
+
+ONLY LIVE neuraljob: originaldev002,memops_D25/memops_E08,12positions,each7+16ordinarySources.
+Driver2213600/child2213615/exec96118; verify actual PID/files. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/dev-002.json.
+Dev002 bodies/outputs not yet reviewed at this snapshot. Source-first review, then terminal
+mechanical/semantic review and settlement before originaldev003. All4dev before once-only
+original quota/seed preparation. No concurrent neural job or ledger settlement while live.
+Accept natural terminal transitions during reporting. Latestv100/execution; M1–M5 remainopen.
+Frozen2a179b58/update262/recipe unchanged; Lab3c892d30. No SHA,agents,newservices,secondledger,
+remote writes or premature Goal completion.
+
+# Earlier: 2026-10-25 dev000 reviewed/settled; original dev001 LIVE
 
 Originaldev000 (A19/A32):12 native COMPLETED,not12 semantic successes.24 HTTP/100726known,
 unknown0;21Host/3View.15finite untruncated forwards,59019 input,max4812,one load.9calls,
