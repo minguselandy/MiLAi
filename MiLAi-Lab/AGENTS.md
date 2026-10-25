@@ -1,4 +1,40 @@
-# LATEST: 2026-10-25 batch045 reviewed; batch046 LIVE
+# LATEST: 2026-10-25 batch046 reviewed; batch047 LIVE
+
+Original046 (musique-family-000242/C11):12positions,7 native completions/5 Host length failures,
+all8192/null. Reasoning chars:rulesfull34144,fixedmissing34452/full33243,Laya late33272,fixedlate33755.
+30 HTTP/134571 known,unknown0;27 Host/3 View.24 finite untruncated forwards,130443 input,max7202;
+one load.15 retrievals,15 initial+56 post=71 observations,0 zero-state calls,no explicit failedops.
+Source-first/partial/mechanical/semantic+View fidelity/complementary-delivery audit complete.
+
+Paine has3former teams;sourceChiefs Jan11,1970 lastappearance is a snapshot,not asserted as current.
+Missingpool rules/Laya preserve unknown;fixed truncates. TargetChiefs body insecondpool neverdelivered.
+Queries/answers addcurrentemployer orparticipation/duringcareer restrictions absentoriginalquestion;
+Laya full returnsPaine+Jets andmisses availablehistoricalcandidate;rules/fixedfulltruncate.
+Rules View adds1984–1990s careerperiod labeledimplied,unsupported enddecade despiteonlydraftyear/former
+inboundbiography. No source/nativegold rewrite,external sports lookup ordate transfer fromJets/NCAA.
+C11 early all3 packetunions contain all7;corephysical/morning/flexible preference anddistinctuser/friend
+bookingdates grounded. Laya firstpacket s1t1–4,second s1t5–7 suppliescomplementaryfacts without an
+explicit known reference;no counterfactual gain claimed. Rules View facts separatelytrue butg1 adds
+unsupported physical-card→reschedule
+dependency;bindings verified. Laterall3 have16arrivals/prior tools,0retrieval. Rules completeswith
+stabledate/preferences butomits newtime/ownconfirmedvenue versusfriendmove,practiceprogress/bedtimepass
+andfuturelightreview/phonecheck plans. Laya/fixedtruncate. Private examdetails stay ignored.
+
+Model/load1232.7842847529869 CPU already billed;whole child1272.885725 nested.7 measured remaining
+phases40.66673161801299 settled once,no livejob. Partial answers unchanged atclosure;unmeasured
+author/report/GPU/prices unknown. Cumulative47 closed batches:88groups,528positions,435 native
+completions/93protocol failures,1210 HTTP/4639118 known tokens,2874observations,22zero-state calls.
+Notaccuracy/independence. Source32/64 reports unchanged;no branches,labels ornewfits.
+
+ONLY LIVE neural job: original047,musique-family-000518/memops_D21,12positions,128frontier.
+Driver455344/child455359/exec38111;verify actualPID/files. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-047.json.
+No second neuraljob/offline settlement while live. Source-first beforeoutputs. Full128 train+4dev
+before once-only originalquota/seed prep. Latestv78/execution;M1–M5 still open. Frozen2a179b58/
+update262/order/recipe unchanged;Lab3c892d30. No SHA,agents,new services,secondledger orremote writes.
+SavedCPU/train/Hostpilot stayclosed. Long command inputs use raw multiline heredocs.
+
+# Earlier: 2026-10-25 batch045 reviewed; batch046 LIVE
 
 Original045 (musique-family-000885/A28):12positions,7 native completions/5 Host length failures,
 all8192/null. Reasoning chars:rules missing30345,Laya full28497/early31329/late31781,fixed missing33873.
