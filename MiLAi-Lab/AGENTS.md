@@ -1,4 +1,48 @@
-# LATEST: 2026-10-26 first40 post states reviewed; later sibling evidence is not prior knowledge
+# LATEST: 2026-10-26 first48 post states reviewed; unsupported dates and proposed paths retained
+
+States0–175:176 selected states/528pairs,128unique families;128rulesinitial+48rulespost.
+NEXT source-first state176. Full train768/dev48/all6strata/allreviews/largestpoolcompile/original
+fits remain. Source32review stays64of192; new families outsidefirst32 do not close othercollectors.
+Quality answer198 directions/97ties/233unknown; final260/35/233 (149right111left).
+Quality delivery282 directions/178ties/68unknown; final404/56/68 (246right158left).
+275quality-tie targets:74incomparable/121left/63right/17equal-cost,184cost-only changes.
+New4=1answer/3delivery,2LEFT/2RIGHT; firstnewchunk hasZEROcostchanges. Eight incomparable andtwo
+equal-cost newties retained. Direction-bearing states quality109/131,final134/176(answer/delivery).
+Pair loss averages within state; paircount not gradientmass or correct-answer count.
+
+168 Graycountyfirsthop butseatabsent; otherstate'ssamecounty/suburb cannotfillseat.
+169 twelveweeks84days, not3calendarmonths; no noticeleadtime. Selectiondropsassessmentinterval;
+fulleranswerskeeprelativeinterval, do notcomputeendpoint. Arithmeticverifiedwithoutassigningyear.
+170 historicASUenrollmentdoc14availableunacquired; actualtooladdsCURRENTcondition, fullpoolalso
+anotherOldMain university. Neither currentnumber nor completehistoricanswer establishedbybranches.
+171 rawcurrentreschedule/progressanswercorrect butViewall8dates inventunsupportedyear. No year
+in source text/supplied temporalmetadata. Selectedold-dateanswer literalNoneoftheabove retained.
+172 spouseknown/duetyearabsent, no transferofunrelateddates.173 samefullraw supports completed
+answerbutotherHostfailed; failed-answerpairsunknown. Writtenpreference/intention notactualaiduse.
+174 authorbodyavailable/birthplaceabsent; directREADaddsfirsthop, generatedretryrequest notexecuted.
+175 Viewinput5/finalraw7: assistant-suggesteddeepdirectorybecomescompleteduserupload in n4 and
+Host, boundto genericuserupload s1t5 insteadassistantproposal s1t6. Otheranswer misclassifiesreminder
+asofflinepriority. Enabledbackup not liveverification; no actualDrive/reminder actions.
+
+Newignored audits: post-prefix-accounting-states-168-175-audit-v1.json (24cases),
+semantic-boundaries-states-169-170-171-173-175-audit-v1.json. All144postcases prefix/newoperations/
+newgeneration/fullreceipt costs verified. Metadata source times inspected for unsupportedyear;
+calendar arithmetic uses arbitrary leap/common years only, not assigned eventyear.
+Literal source/packet/frame checks, no source/query/date/path/citation/answer repair. Runtime/
+Schema/API/permissions/models unchanged; no newmodelcalls, unexecutedlabels, compile ornewfits.
+
+Root pendingCPU54.99611689999998 across229 explicit entries inv127; no root ledger write whilelive.
+ONLY neuraljob continuation001 original policies60–2284,2225branches/748states. Driver2522910,
+child2522923,exec69037; verify actual PIDs/cmdline/files. Snapshot1922tool rows, Host1685C/236F/
+1pending; original queue now in fixed_context post region. First60 retained/settled, neverretry.
+Onterminal inspect actualboundary; settle only noneuralprocess, then unchanged still-unattempted
+suffix in newoutput. NativependingCPU nested inouter wholechild-minus-ledgerCPU, not additive.
+Other reading/author/import/probe CPU unknown; no GPU/prices imputedzero or remote writes.
+Finishtrain+142devbranches/all816reviews/largestpoolonce/32-64SOURCEFAMILYderivation/nine192fits/
+fullM1–M5 remainopen. NoSHA,agents,newservices,secondledger or completion.
+Latest data/manifests/evidence-gap-development-progress-20261023-v127.json.
+
+# Earlier: 2026-10-26 first40 post states reviewed; later sibling evidence is not prior knowledge
 
 States0–167:168 selected states/504pairs,128 unique families;128rulesinitial+40rulespost.
 NEXT source-first state168. Full train768/dev48/all6strata/allreviews/largestpoolcompile/original
