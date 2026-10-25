@@ -1,4 +1,50 @@
-# LATEST: 2026-10-26 first64 rules initial states reviewed; full source64 cohort still incomplete; continuation001 LIVE
+# LATEST: 2026-10-26 first72 rules initial states reviewed; target-call allowance and cost-only right direction retained
+
+Reviewedstates0–71:72rules-initial states/216pairs; NEXT source-first state72. First64audit remains
+historical64rules-initialonly; complete source64selectedcohort384 across6strata, notcompleted.
+Qualityanswer67direction/27ties/122unknown; final81/13/122 (51right30left). Qualitydelivery127direction/
+51ties/38unknown; final159/19/38 (101right58left).78qualitytie targets:32incomparable,45leftdominant,
+1rightdominant.46totalcost-onlychanges, new7=1answer/6delivery, not7newcorrectanswers. Direction-
+bearing statesquality42answer/60delivery,final49/72; pairlossaverageswithinstate.
+
+Newfinal/resourcechunks064–067,068–071, disjoint/no compile/fit/goldrewrite.64fullcountychainexists;
+Viewfinalcorrectbuthouse/citycitese4→doc2library, actualinpute1doc4;countye2doc9correct. Selfcondition
+rules targetn2requiresn2/entity-onlynodes notfullrelationgraphcertificate.65actualfixedrawall7,
+newView/oldassistantbodyzerofactincrement; finalassistantpriorities/causes andno-evidence→nonuse errors.
+66actualnewqueryfestival, oldbiographyViewalreadyinHostK. reads_remaining1/controlsteps8. Target
+SEARCHfinds8candidates thenbudget_exhausted/noREAD/emptyreceipt, NOTzeroresults orcontrolbudget1.
+Beforeinventory4viewboundrefs NOTentirestore:replaysources21(20docs+Host)stillcontainsdoc13festival.
+Fulltracecopiesearliercallwith4READs/refresh; filtertargetretrieval_call_id beforecountingoperations
+ornewgeneration. Rootauditdoesnotrebillcopiedprefix. No targetbirthplacebridge fromnationality alone.
+66qualitydeliverytie oldViewvsSEARCHemptypacket→RIGHTcostdirection:both0gen/1operation/0READ,
+wire614vs57tokens. SEARCHHostFAILED, answerunknown; thisisnotcorrectanswer/successfulretrieval.
+
+67rawmiddlesession2t1–8missesnewplans;refreshincludesactuallydoneactivities andfutureclass/gallery
+withstatus distinction; attribution/time/biological/gatingcaveats retained. PriorHostquestion/search
+promise arecapturedSources, notnew independentfacts.68generatorall20bodiesliteralfixtureequal;
+Viewadmits externalbook-authorbridge, notlicensedbyinferredlabel. Educatione2doc13correct; type
+sourcee6doc12availablebutuncited; scopee18actor actuallydoc15memoir.69currentphoneattributes correct,
+Viewderivedhistorydateswrong; finalstie/rawdeli better.70actualbook-author-Yale/latergradschoolchain
+correctinView; rawmissingcollege cost-onlyanswertie notsuccess.71reportedappointment/diagnosis and
+conditional/otherperson/pastprocedure locations separated; ViewHostwithholdscurrentdetails. Noadvice.
+
+Audits generation-provenance-state-064-v1.json, generation-provenance-state-068-v1.json,
+state-066-allowance-and-context-audit-v1.json, state-066-resource-order-diagnostic-v1.json inignored
+reviewdir. Privatecontact/health/familyfacts ignoredonly. RootpendingCPU21.480920881999992 across
+88explicitentries inv114; noledgerwritewhilelive. No new runtime/API/permission/model changes.
+Observerartifact-only acceptsactualemptyquery_structureomittednavigation; resourcehelperINITIALONLY
+untilpostcommon-prefixreview. Failedtoolbothlabelsunknown; failedHostanswerunknown. NoSHA/agents.
+
+ONLY neuraljob continuation001 originalpolicies60–2284,2225branches/748states. Driver2522910,
+child2522923,exec69037; verifyactualPID/cmdline/files. Outer artifacts/evidence-gap-20261023/
+original-feedback-v2-branch-execution-train-continuation-001-dispatch.json; native in
+training-generalization-20261021/.../feedback-branch-execution-v2/train-source128-continuation-001.
+First60retained/settled, neverretry/resample. Onterminalinspectboundary/failure, settleonlynoNN,
+continueonlyunattemptedoriginals. NativeCPU nestedinouterwholechild-minus-ledgerCPU. Finishtrain+
+142devbranches/all816reviews/largestpoolcompileonce/32-64SOURCEFAMILYderivation/nine192fits/full
+M1–M5 remainopen. No newservices/secondledger/remote writes orcompletion. Latestv114/execution.
+
+# Earlier: 2026-10-26 first64 rules initial states reviewed; full source64 cohort still incomplete; continuation001 LIVE
 
 States0–63 reviewed:64rules-initial states/192pairs/192unique cases. Literalfirst64sourcefamilies
 match originalsource order. Fullsource64selectedcohort is384states:64each rules/laya/fixed_context
