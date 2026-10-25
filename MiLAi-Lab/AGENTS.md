@@ -1,4 +1,37 @@
-# LATEST: 2026-10-25 batch042 reviewed; batch043 LIVE with 6 positions
+# LATEST: 2026-10-25 batch043 reviewed; batch044 LIVE, one history/12 positions
+
+Original043 (musique-family-000567) kept6 declared positions,all native COMPLETED.15 HTTP/36030
+known tokens,unknown0;13 Host/2 View.10 finite untruncated forwards,62783 input,max6920;one load.
+8 retrievals,8 initial+34 post=42 observations,0 zero-state calls,no explicit failed operations.
+Source-first/mechanical/semantic and actualViewreuse audit complete;no retries or new labels.
+
+Both pools identify Percy as Prometheus Unbound author;only full pool contains his biography.
+All3 actual full-pool deliveries contain both bodies and answers parse8July1822 from concatenated
+lifespan1792|8July1822. Original missingseparator retained,not source rewrite/external verification.
+All3 missing-pool answers preserve deathdate unknown;Mary/otherauthor dates not transferred.
+Rules missing-pool Host queues2 identicalcalls inone response. First buildsView1,second actually
+USE_VIEW opens revision1;interpretation same,1 generatedinterpretation response. Firstbindings
+e2→s0/play,e3→s1/Mary;second both support_not_opened andno originalbody. Second termination
+no_available_operation retained. This is runtime reuse,not Host choosing again afterseeingfirst
+result,not demonstrated task-quality/lifecycle gain. Subsequent actual Host frame includes packets.
+No ordinary continuous tasks here;no invented update coverage or counterfactual outcome.
+
+Model/load622.461838279999 CPU already billed;whole child651.215518 nested.6 measured remaining
+phases29.057224220000947 settled once with no live job. Unmeasured probes/author/report/GPU/prices
+unknown. Cumulative44 closed batches:83groups,492positions,410 native completions/82 protocol
+failures,1130 HTTP/4298722 known tokens,2671 observations,22 zero-state calls. Not accuracy or
+independence. Source32/64 reports unchanged. No branch preparation,labels or new fits.
+
+ONLY LIVE neural job: original044,memops_A01,onehistory/12 declared positions,128 frontier.
+Driver188036/child188051/exec65740;verify actual PID/files. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-044.json.
+No second neural job/offline settlement while live. Source-first before outputs;inspect actual
+request shapes/independent stored-version fixtures before semantic review,do not assume2histories.
+Full128 train+4dev precede once-only quota/seed prep. Latestv75/execution;M1–M5 still open.
+Frozen2a179b58/update262/order/recipe unchanged;Lab3c892d30. No SHA,agents,new services,second ledger,
+remote writes. Saved CPU/train and Host pilot remain closed.
+
+# Earlier: 2026-10-25 batch042 reviewed; batch043 LIVE with 6 positions
 
 Original042 (musique-family-000235/C28):12positions,10 native completions/2 Host truncations,
 rules late/fixed missing-document,8192/null,reasoning31183/37476.30 HTTP/118028 known,unknown0;
