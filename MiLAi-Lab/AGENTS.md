@@ -1,4 +1,45 @@
-# LATEST: 2026-10-25 full128 train reviewed/settled; dev000 terminal, review pending
+# LATEST: 2026-10-25 dev000 reviewed/settled; original dev001 LIVE
+
+Originaldev000 (A19/A32):12 native COMPLETED,not12 semantic successes.24 HTTP/100726known,
+unknown0;21Host/3View.15finite untruncated forwards,59019 input,max4812,one load.9calls,
+9initial+43post=52observations,nozero/actualknown-reference reads.4materialbudget rejects:
+rules contactlateView,emailinitialView,andfixedcontactlate2CONTEXT.
+
+A19 earlyrules/fixedall7;Laya firstreturns1–2,secondall7. Allfinals currentprimary and
+unsupplied-current-phone correct. Later16arrivals/prior tools all3. Rules newpacket/lastbefore
+10fullSources:oldHostpair,early6andnewphone2t1–2;not latestrestoration/proposals. Finalname+phone
+agree but reversion/temporary/proposed/secondary distinctions incomplete. Laya0retrievalstale
+unknownphone. Fixedobserves23originals+oldHostpair25fullSources,returnsoldfirst8+pairafter
+budgetrejects,missesacquiredphone/lateststatus. Stablefinalname notupdateproof.
+Ruleslate Viewgenerator sees24bodies includingcancel/restoration/secondary proposal,beyond
+controller current_scope10. Scope/n6 imply unexecuted friend was temporaryprimary;node8
+correctlycancelled,secondaryomitted. GeneratedView notdelivered;do notclaimHostused it.
+
+A32 earlyrules/fixedall7,mostlygroundedcleanup/password/2FA. Fixedcallsalready-linkedrecovery
+phone a newcompletedaddition,unsupportedtiming. Laya observesall7/11ranges butdeliversfirst4,
+omitssecurityfacts. Laterall3 get16arrivals/prior tools,0retrieval,omitcompletedappaudit/
+revocations andnewproposal distinctions. Stableprovider notupdateproof. No actualaccountactions.
+RejectedruleView inventseventyear whilequery_timeempty/reported_at/calendar_contextnull;
+yearmatchescaptureyear andgenerateddateweekdaycontradictsuserweekday. No causalclaim/yearrepair.
+Privatephones/names/emails/recoverydigits/dates remainignored;trackedboolean/sourcekeychecks only.
+
+Dev000childCPU452.00979638894114 alreadybilled;whole489.285318 nested. Six measuredremaining
+phases37.76262250005888 settledonce,no livejob. Devclosedsubtotal489.77241888900005 CPU.
+SEALED TRAIN stays128groups/753positions/605COMPLETED148FAILED/6893820known tokens,
+4423observations;knownmeasuredCPU95421.37720603103. Do not rerun/rebill itsaggregates oradddev
+counts/costs totrain subtotal. Devsofar2groups/12reviewedpositions;no labels/branches/fits.
+
+ONLY LIVE neuraljob: originaldev001,memops_B30/memops_C03,12positions,each7+16ordinarySources.
+Dev001bodies/outputs NOT YET reviewed;source-first,privatefactsignored. Driver2105825/
+child2105857/exec77574;verifyactualPID/files. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/dev-001.json.
+Afterterminalreview/settle thenoriginaldev002/003. All4dev BEFORE once-onlyoriginalquota/seedprep.
+No concurrentneuraljob orledger settlementwhilelive. Snapshots mustacceptactualterminal
+transitions,notassumejobremainsRUNNING. Latestv99/execution;M1–M5stillopen.
+Frozen2a179b58/update262/recipe unchanged;Lab3c892d30. No SHA,agents,newservices,secondledger,
+remote writes orprematureGoalcompletion.
+
+# Earlier: 2026-10-25 full128 train reviewed/settled; dev000 terminal, review pending
 
 Closed067 (musique-family-000816):6 native COMPLETED,not6 semantic successes.14 HTTP/41613known,
 unknown0;12Host/2View.7finite untruncated forwards,45366 input,max7104,one load.6calls,
