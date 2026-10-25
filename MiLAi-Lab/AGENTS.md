@@ -1,4 +1,43 @@
-# LATEST: 2026-10-25 batch059 reviewed; batch060 LIVE (9 positions)
+# LATEST: 2026-10-25 batch060 reviewed; batch061 LIVE
+
+Original060 (musique-family-000670/000878):9 positions,5 native COMPLETED/4 Host length
+failures,all8192/null. Rules added-person/Laya sparse/fixed sparse/fixed added reasoning
+39141/40286/40808/31576.29 HTTP/100090 known,unknown0;26 Host/3 View.25 finite untruncated
+forwards,146271 input,max6564,one load.20 calls,16 initial+59 post=75 observations;4 true
+zero-state calls. No explicit operation rejections. Original1+2requests not padded.
+
+Carnein absent from pool;all3 preserve unknown continent. Rules View labels Norway→Europe
+reported while bound source only gives Norway;fixed adds continent for Canadian glacier.
+Background geography not independently verified and not explicit source claim. Laya puts
+evidence-category names in required_points,not evidence; actual decision goal unchanged.
+Selected SEARCH binds original request,not category queries. No field relocation/causal claim.
+
+Person bio says from Sterling Heights,not born there. Sparse rules explicitly preserves gap;
+Laya/fixed fail. Laya last Host response queues4calls,first repeatsbio,other3 true zero-state.
+Added pool has Sterling→Macomb and school-district coverage in Oakland/Macomb,not explicit
+county-border sentence. Rules/fixed get bio/city,not district,and fail. Rules View keeps birth
+unresolved but tags county fact with population census context. Laya actual2Hostresponses deliver
+bio4+district8 then city12,all relevant supplied bodies. Final turns from into born and regional
+coverage into established neighbor relation. Candidate association has source basis; birth
+premise/adjacency certainty remain unproved. No outside correction or nativegold rewrite.
+
+Child CPU already billed1420.5211726290431; whole1458.5378610000002 nested. Seven measured
+remaining phases38.61001908395712 settled once after PIDs absent. Partial answers unchanged.
+Readonly terminal probe first used wrong driver directory; actual exec had completed. Correct
+path confirmed terminal/exit0/PIDs absent; no restart/ledger mutation,failed probe CPU unknown.
+Cumulative61 closed batches:114 groups,684 positions,553 native completions/131 failures,
+1631 HTTP/6247057 known tokens,3921 observations,44 zero-state calls. Not accuracy/eligibility.
+Source32/64 and full remaining scope unchanged; no branches, labels or fits.
+
+ONLY LIVE neural job: original061,musique-family-000870/musique-family-000319,12 positions.
+Driver1522217/child1522232/exec79190; verify actual PID/files. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-061.json.
+No second neural job or offline settlement while live. Read sources before outputs.
+Full128 train+4dev before once-only original quota/seed preparation. Latest v92/execution.
+M1–M5 remain open. Frozen2a179b58/update262/recipe unchanged;Lab3c892d30.
+No SHA, agents, new services, second ledger or remote writes.
+
+# Earlier: 2026-10-25 batch059 reviewed; batch060 LIVE (9 positions)
 
 Original059 (musique-family-000329/000749):12 positions,10 native COMPLETED/2 protocol failures.
 Rules missing dedication length8192/null,34392 reasoning;fixed missing label stop/null malformed,
