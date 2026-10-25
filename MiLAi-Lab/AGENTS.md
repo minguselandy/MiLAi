@@ -1,4 +1,52 @@
-# LATEST: 2026-10-25 dev001 reviewed/settled; original dev002 LIVE
+# LATEST: 2026-10-25 dev002 reviewed/settled; original dev003 LIVE
+
+Original dev002 (D25/E08): all12 native COMPLETED, not12 semantic successes.
+21HTTP/102392known, unknown0;19Host/2View.18 finite untruncated forwards,131954 input,
+max13112,one load.7calls,7initial+34post=41 observations,nozero/known-reference reads.
+6material rejects:rules foodinitialView andLaya foodlate5READ.11 partialanswers and2
+generatedViews literally unchanged at closure. Source/private output details remain ignored.
+
+D25 early rules/fixed deliverall7 but infer birthdayfriend high heat tolerance/enjoyment
+from laughter alone. Rules adds unsupported numbing-tolerance level and definite untried
+status where confirmation is missing. Laya observesall7/11ranges but returns1t1–4, omits
+side-dish suggestion and denies untried suggestions. Laterall16arrivals/prior tools.
+Rules/fixed0retrieval retain stable go-to but omit later meals/plans. Laya lastbefore19full
+Sources/21ranges; packet2t5–8+3t5–7 correctly distinguishes established venue, untried new
+venue, canceled dish and future ingredient. Acquired3t1 variation omitted; user's feeling
+judged becomes claimed otherperson judgment. Anotherperson's extreme sauce report is not
+a suggestion to user. No recommendation/diagnosis. Rejected rulesView similar inference,
+reportedkind; do not claim Host used that View. It preserves unconfirmed side trial.
+
+E08 earlyall3 deliverall7 and correctownhotel total/currentroutine. Laya falsely says
+no assistant speculation despite delivered commentary. Laterall3 have16arrivals/prior
+tools,0retrieval; correct stableamount but omit solitarymorning/categorypasses, denyfuture
+peer-review plan and missuncertaincoworkerdraft. Stableamount notupdateproof. Rulesearly
+View delivered, earlyfacts preserved; verifiedwording=userreport, notindependentinvoice.
+Private venues/names/billing/work details excluded from tracked summaries.
+
+Dev002 childCPU1996.0234601269608 alreadybilled; whole2036.760182 nested. Eight measured
+remaining phases41.208762471039414 settledonce after PIDs absent. Dev000–002 subtotal
+5774.52992953CPU,6groups/36positions/35COMPLETED1FAILED/299050known/155observations.
+SEALED TRAIN unchanged128groups/753positions/95421.37720603103knownCPU. No labels/branches/fits.
+Read-only annotation assertion failed on singular/plural phrase, before write; corrected
+literal shared phrase, no experiment/ledger changes. FailedprobeCPUunknown.
+
+ONLY LIVE neuraljob: originaldev003,memops_E15/memops_F01,12positions,each7+16ordinarySources.
+Driver2281943/child2281958/exec31484; verify actual PID/files. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/dev-003.json.
+Both dev003 sources ALREADY source-first reviewed before launch in ignored
+dev-003-source-pre-review.json, duringdev002live. SourceCPU remains pending fordev003;
+not included in dev002 settlement. Outputs notyetread at thissnapshot. E15 keep reported
+duration/calendar-day/seven-day rates separate from unknown total-ticket percentage,
+coworker data and projections. F01 use currentconfirmed pay/alllisted expenses+savings,
+exclude futurepay/oneoff/otherpeople/inactivework. Private rawfacts ignored.
+Afterdev003terminal review/settle, verifyall4dev+sealedtrain before once-only original
+fullpool quota/seed0 preparation. No manual state/binding nominations or resampledsubsets.
+No concurrent neuraljob or ledger settlement while live. Accept natural terminal transitions.
+Latestv101/execution; fullM1–M5remainopen. Frozen2a179b58/update262/recipe unchanged;
+Lab3c892d30. NoSHA,agents,newservices,secondledger,remote writes or prematureGoalcompletion.
+
+# Earlier: 2026-10-25 dev001 reviewed/settled; original dev002 LIVE
 
 Original dev001 (B30/C03): 11 native COMPLETED/1 length FAILED, not 11 semantic successes.
 24 HTTP/95932 known, unknown0; 22Host/2View. 31 finite untruncated forwards,219533 input,
