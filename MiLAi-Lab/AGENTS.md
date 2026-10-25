@@ -1,4 +1,51 @@
-# LATEST: 2026-10-26 first16 post states reviewed; empty completion and stale View retained
+# LATEST: 2026-10-26 first24 post states reviewed; selection can drop already acquired evidence
+
+States0–151:152selected states/456pairs,128unique families;128rulesinitial+24rulespost.
+NEXT source-first state152. Full train768/dev48/all6strata, allreviews/largestpoolcompile/original
+fits remain. Existing allN initial flags are historical firstN milestones, not current152initial.
+Quality answer161 directions/77ties/218unknown; final211/27/218 (122right89left).
+Quality delivery251 directions/138ties/67unknown; final346/43/67 (209right137left).
+215quality-tie targets:64incomparable/113left/32right/6equal-cost,145cost-only changes.
+New9=1answer/8delivery,5LEFT/4RIGHT; not9correctanswers. Direction-bearing states quality91/117,
+final113/152 (answer/delivery). Pair loss averages within state; paircounts not gradient mass.
+
+144 artist-only View faithful; Host invents spouse without source. Do not attribute spouseclaim
+to View.145 selection drops own identity fields; fuller delivery restores them, but View infers
+applicationyear from reference digits and calls friend colleague. Full handoff answer avoids year
+while View remains unchanged. Application submitted not granted; private IDs never in summaries.
+146 targetdoc3 already opened in checkpoint. Selection[1,2] drops it, retains other townships,
+and Host invents alternatives; [0,1]/full handoff keep it and answercorrectly. All3newREAD0.
+Selection adds native operation cost without source acquisition; inherited five-field names kept.
+147 uncertain tracking start not tentative adoption. View correctly bounds no tentative change,
+but raw-only Host invents it; View not delivered in that arm, no ignored-View/causal claim.
+148 formerlabel body available but not acquired; formerassociation not song-recording-era label.
+149 same-appointment correction not new measurement; missing transfer-completion evidence not
+proof no action happened. Historical assistant clinical statements not independently verified.
+150 otherstadiums/theatres/regions cannot establish specific ownership chain.151 samefullraw,
+one answer promotes assistant assumption about another person's measurement setting to report.
+Own dated remeasurement/oldlicense belief/otherpeople separate; no medical advice or new values.
+
+Newignored audits: post-prefix-accounting-states-144-151-audit-v1.json (24cases),
+semantic-boundaries-states-145-146-147-149-151-audit-v1.json. All72postcases checked for commonprefix
+exclusion/newgeneration deltas/fullreceipt tokens. Source/checkpoint body equality literal only.
+Post traces filter call_id AND step boundary. Co-delivered View bindings through wire s-labels,
+empty raw containers and original failure statuses retained. No source/question/citation/answer
+repair, additional model calls, unexecuted labels, pool compilation or newfits.
+Four new componentwise-incomparable ties: smaller packet can require extra selection operation;
+no heterogeneous cost sum or lower-cost override of unknown/directional quality.
+
+Root pendingCPU47.39928786399999 across198 explicit entries inv124; no root ledger write whilelive.
+ONLY neuraljob continuation001 original policies60–2284,2225branches/748states. Driver2522910,
+child2522923,exec69037; verify actual PIDs/cmdline/files. Snapshot1727tool rows, Host1522C/205F.
+Original first60 retained/settled,neverretry. Onterminal inspect actualboundary; settle only no
+neuralprocess, then unchanged still-unattempted suffix in new output. Native pendingCPU nested
+in outer whole-child-minus-ledgerCPU, not additive. Other reading/author/import/probe CPU unknown;
+no GPU/prices imputedzero. Runtime/Schema/API/permissions/models unchanged; no remote writes.
+Finish train+142dev branches/all816reviews/largestpool compile once/32-64SOURCEFAMILY derivation/
+nine192fits/fullM1–M5 remain open. NoSHA,agents,newservices,secondledger or completion.
+Latest data/manifests/evidence-gap-development-progress-20261023-v124.json.
+
+# Earlier: 2026-10-26 first16 post states reviewed; empty completion and stale View retained
 
 States0–143:144selected states/432pairs,128unique families;128rulesinitial+16rulespost.
 NEXT source-first state144. First128 stratum audit retained; full train768/dev48/all6strata,
