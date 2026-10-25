@@ -1,4 +1,44 @@
-# LATEST: 2026-10-25 batch056 reviewed; batch057 LIVE
+# LATEST: 2026-10-25 batch057 reviewed; batch058 LIVE
+
+Original057 (musique-family-000010/000895):12 positions,7 native COMPLETED/5 protocol failures.
+Rules/Laya missing country-name and Laya full music length8192/null,reasoning37928/36707/28416.
+Rules full music stop/null malformed3776 completion/14204 reasoning;fixed sparse music2572/9346.
+37 HTTP/135603 known,unknown0;33 Host/4 View.28 finite untruncated forwards,167954 input,
+max6927,one load.23 calls,19 initial+76 post=95 observations;4 true zero-state calls.
+One View rejection, no explicit material-budget rejection.
+
+Country full: Laya actual separate Host calls [1,1],bio12 thenetymology13+12, grounded name
+Saint Lucy of Syracuse. Rules/fixed miss available etymology and claim it absent. Source says
+from Saint Lucia/national team, not formal citizenship; View retains association, Host asserts
+citizenship unqualified. Missing pool fixed preserves etymology unknown;rules/Laya fail.
+Rules missing View adds unsupported pen-name/real-name speculation while target remains unresolved.
+
+Music question compressed/ambiguous; preserve original. On the Avenue and Live: Cookin' are
+distinct albums. Al Green album RCA vs another album Blue Note, not one unique label.
+Sparse rules invents composite title with RCA, then unknown. Laya ends unknown but adds
+unsupported artist/label genre claims and conditional Jazz; self-described search is not
+external tool evidence. Fixed sparse malformed. Full pool target Ronnie Foster jazz body0
+is absent from all captured observed inputs and packets. Rules generated nodesn1/n2 but rule
+targets n3/n4 absent: QUERY_STRUCTURE_RULE_NODE_UNAVAILABLE, then malformed Host; no causal
+claim/repaired nodes. Laya queries shift performer genre to label genre, two packets omit0,
+then length failure. Fixed batches [3,1,1],first3 queued; first packet unrelated to target
+performer, later empty. Third queued and last2 calls zero-state, not all empty calls zero.
+
+Child CPU already billed1683.2930815839836; whole1727.600508 nested. Seven measured remaining
+phases45.04285998801637 settled once after PIDs absent. Partial answers unchanged.
+Cumulative58 closed batches:108 groups,651 positions,529 native completions/122 failures,
+1529 HTTP/5930101 known tokens,3656 observations,39 zero-state calls. Not accuracy/eligibility.
+Source32/64 and full remaining scope unchanged; no branches, labels or fits.
+
+ONLY LIVE neural job: original058,musique-family-000222/musique-family-000172,12 positions.
+Driver1327344/child1327359/exec57940; verify actual PID/files. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-058.json.
+No second neural job or offline settlement while live. Read sources before outputs.
+Full128 train+4dev before once-only original quota/seed preparation. Latest v89/execution.
+M1–M5 remain open. Frozen2a179b58/update262/recipe unchanged;Lab3c892d30.
+No SHA, agents, new services, second ledger or remote writes.
+
+# Earlier: 2026-10-25 batch056 reviewed; batch057 LIVE
 
 Original056 (A05):ONE history/12 positions, all native COMPLETED, not12 semantic successes.
 24 HTTP/86346 known,unknown0;22 Host/2 View.18 finite untruncated forwards,136817 input,
