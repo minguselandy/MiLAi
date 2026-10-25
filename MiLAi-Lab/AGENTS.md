@@ -1,4 +1,43 @@
-# LATEST: 2026-10-25 batch062 reviewed; batch063 LIVE (10/20/20 source rows)
+# LATEST: 2026-10-25 batch063 reviewed; batch064 LIVE (9 positions)
+
+Original063 (TwoWiki036808/MuSiQue000060):9 positions,source rows10/20/20.4 native COMPLETED/
+5 protocol failures. Fourlength8192/null:rulesSQLfirst31434/second27491,Layasecond38118,
+fixedsecond31719 reasoning. FixedSQLfirst stop/null malformed3533 completion/14164 reasoning.
+23 HTTP/99176 known,unknown0;21 Host/2 View.22 finite untruncated forwards,117302 input,
+max6575,one load.12 calls,10 initial+43 post=53 observations;2 true zero-state calls.
+No explicit operation rejections;rules/fixed secondSQL fail before any retrieval.
+
+Film comparison fixed delivers0/2/3/7,both directors/nationalities,No grounded. Rules first
+director only,notRao0/film7,followupSEARCH/zero thenoverbroadabsence. Laya observesall4 but
+read_2_observe leaves Indianbio0 unselected;plainHANDOFF sends7/2/3,not0. All-materials
+handoff0_2_3_1 offered. Answer "No" matches source pool,but Hostfilm-language inference not full
+person-nationality evidence. Not missing candidate or proven counterfactual improvement.
+Rules View's2004–2017 nationality/career range borrows companyfoundation/death,not explicitrange.
+
+HAVING source identifiesSQL;separateMySQL source isRDBMS namedMy(daughter)+SQL acronym.
+Laya firstSQL receivesbothbodies andanswersSQL/acronym,doesnottransferpersonname tolanguage.
+Rules View retains nodes' type distinction but scope/candidate wording blurs product/language;
+Hostfails. Fixedfirst hasbothbodies butmalformed. MissingpoolMySQLbodyabsent;Laya eventual
+lengthfail afterSQL/unrelatednamesake reads andzero finalcall;no answer salvaged. Literal
+codice placeholders andirrelevantfiction/presidency anomaly retained,notadopted asworldfact.
+No question/nativegoldrepair or externaltechnical/politicalverification.
+
+Child CPU already billed1118.889388585047; whole1157.417563 nested. Seven measured remaining
+phases39.0689148229529 settled once after PIDs absent. Partial answers unchanged.
+Cumulative64 closed batches:121 groups,717 positions,578 native completions/139 failures,
+1728 HTTP/6574688 known tokens,4161 observations,47 zero-state calls. Not accuracy/eligibility.
+Source32/64 and full remaining scope unchanged; no branches, labels or fits.
+
+ONLY LIVE neural job: original064,musique-family-000049/000260,9 positions,frontier128.
+000049 corpus-31434/corpus-37311;000260 corpus-22680. All3 pools20 sources;do notpad requests.
+Batch064 is not a new source64 milestone. Driver1717871/child1717888/exec22214;verify actualPID/files.
+Driver: artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-064.json.
+No second neural job or offline settlement while live. Read sources before outputs.
+Full128 train+4dev before once-only original quota/seed preparation. Latest v95/execution.
+M1–M5 remain open. Frozen2a179b58/update262/recipe unchanged;Lab3c892d30.
+No SHA, agents, new services, second ledger or remote writes.
+
+# Earlier: 2026-10-25 batch062 reviewed; batch063 LIVE (10/20/20 source rows)
 
 Original062 (000232/000303/000051):3 histories2+1+1requests,12 positions,11 native COMPLETED/
 1 fixed sparse-label Host length failure8192/null,35286 reasoning.35 HTTP/94979 known,
