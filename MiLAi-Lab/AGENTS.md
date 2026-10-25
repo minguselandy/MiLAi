@@ -1,4 +1,41 @@
-# LATEST: 2026-10-25 batch058 reviewed; batch059 LIVE
+# LATEST: 2026-10-25 batch059 reviewed; batch060 LIVE (9 positions)
+
+Original059 (musique-family-000329/000749):12 positions,10 native COMPLETED/2 protocol failures.
+Rules missing dedication length8192/null,34392 reasoning;fixed missing label stop/null malformed,
+263 completion/1170 reasoning.37 HTTP/106804 known,unknown0;33 Host/4 View.30 finite untruncated
+forwards,184988 input,max7157,one load.21 calls,20 initial+78 post=98 observations;one true
+zero-state Laya full-dedication third call. No explicit operation rejections.
+
+Dedication sparse Laya/fixed preserve recipient unknown,do not transfer another song's setting.
+Full pool has Any Road→Harrison and Something→Pattie Boyd, but targetbody6 never observed/delivered
+by any collector; all3 complete with overbroad document-absence claim. Laya first observes12/13/
+18/19 but delivers unrelated19,second recovers18,third zero-state. Rules follow-up oneSEARCH from
+one remaining read;fixed twoSEARCH fromtwo. Successful first hop is not a completed evidence chain.
+
+Label full has Brian Wilson leadbody11 and Capitol association through2002 compilationbody1;
+not proof of unique/current contract or1964 original-song label. All3 omitbody1 from captured
+observations/packets. Laya queries focus signing/original release, final unknown must keep that
+scope. Fixed mentions Capitol only as parenthetical example while denying established label;
+name match not affirmative supported answer. Missing rules/Laya unknown, fixed malformed.
+Rules missing View nevertheless calls it Beach Boys' song, absent all sources/question/query;
+unsupported presupposition retained, no cross-pool leakage claim. No lyric/gold/source repair.
+
+Child CPU already billed1897.9135577209768; whole1941.833468 nested. Seven measured remaining
+phases44.673317863023264 settled once after PIDs absent. Partial answers unchanged.
+Cumulative60 closed batches:112 groups,675 positions,548 native completions/127 failures,
+1602 HTTP/6146967 known tokens,3846 observations,40 zero-state calls. Not accuracy/eligibility.
+Source32/64 and full remaining scope unchanged; no branches, labels or fits.
+
+ONLY LIVE neural job: original060,musique-family-000670/000878,9 positions (not12).
+000670 has corpus-8625 only;000878 has corpus-39040/corpus-39052. Do not pad or assume2 requests
+per history. Driver1453655/child1453670/exec61813; verify actual PID/files. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-060.json.
+No second neural job or offline settlement while live. Read sources before outputs.
+Full128 train+4dev before once-only original quota/seed preparation. Latest v91/execution.
+M1–M5 remain open. Frozen2a179b58/update262/recipe unchanged;Lab3c892d30.
+No SHA, agents, new services, second ledger or remote writes.
+
+# Earlier: 2026-10-25 batch058 reviewed; batch059 LIVE
 
 Original058 (musique-family-000222/000172):12 positions,9 native COMPLETED/3 Host length
 failures. Laya missing person/fixed person-with-bio/rules missing station all8192/null,
