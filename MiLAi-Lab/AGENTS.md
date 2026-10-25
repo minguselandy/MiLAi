@@ -1,4 +1,46 @@
-# LATEST: 2026-10-25 batch051 reviewed; batch052 LIVE
+# LATEST: 2026-10-25 batch052 reviewed; batch053 LIVE
+
+Original052 (musique-family-000675/F12): 12 positions, 11 native COMPLETED and one Laya
+missing-pool Host length failure (8192 tokens/null content, 24854 reasoning characters).
+31 HTTP / 125351 known tokens, unknown increment0; 28 Host / 3 View.25 finite untruncated
+local forwards,167730 input tokens,max9554,one load.16 retrieval calls,13 initial+58 post=71
+state observations;3 true zero-state calls. One material-budget READ rejection retained.
+
+Full document pool supplies both Villanova championship and Wisconsin loss. Rules/Laya
+actually deliver both and answer the opponent. Laya valid stop JSON has unclosed Markdown
+bold but the supported requested fact is present: not protocol truncation or a nonanswer.
+Fixed delivers only first hop, then follow-up SEARCH exhausts allowance, leaving answer
+unknown despite available second-hop source. Missing pool rules/fixed preserve opponent
+unknown; fixed overstates absence of all tournament information. No source/gold repair.
+
+F12 early rules/fixed deliver all7; Laya first delivers s1t3–6, second all7, third zero-state.
+First two calls each observe all7 in11 full ranges. Provider/reading and other-person
+distinctions mostly retained; causal explanations are not independently verified.
+Rules View extends pre-application payoff timing to closure; date of checking is not
+known reporting date. Laya later as_of literally matches first packet user s1t3 captured_at,
+reported_at null, absent initial Host frame; causal effect untested, not an event year.
+Later all3 get16 arrivals with prior tool history but make no new retrieval. All stay stale,
+omit new observed reading/other-person result/conditional projection, and deny the plan.
+Failure occurs before a new MiLAi call, not evidence of Jev rejecting newly observed states.
+Private credit/account/person details remain ignored; no financial advice or account actions.
+
+Child CPU already billed1887.779840726996; whole child1932.0266219999999 is nested.
+Six measured remaining phases44.772858334003764 CPU seconds settled once with no live job.
+Cumulative53 closed batches:100 groups,600 positions,490 native completions/110 protocol
+failures,1393 HTTP/5401488 known tokens,3322 state observations,31 zero-state calls.
+These are not accuracy, independence or eligibility counts. Source32/64 reports unchanged.
+First v84 report assertion incorrectly assumed new review status names in older batches;
+failed before writing, no experiment/ledger mutation. Historical names preserved; CPU unknown.
+
+ONLY LIVE neural job: original053,musique-family-000850/memops_A27,12 positions,128 frontier.
+Driver1006193/child1006209/exec89761; verify actual PID/files. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-053.json.
+No second neural job or offline settlement while live. Read sources before outputs.
+Full128 train+4dev before once-only original quota/seed preparation. Latest v84/execution.
+M1–M5 remain open; no branches, labels or fits. Frozen2a179b58/update262/recipe unchanged;
+Lab3c892d30. No SHA, agents, new services, second ledger or remote writes.
+
+# Earlier: 2026-10-25 batch051 reviewed; batch052 LIVE
 
 Original051 (musique-family-000881/B26):12positions,8 native completions/4 Host failures.
 Rulesfirstdoc stop/null malformed,2489completion/11016reasoning. Rulessecond/Layafirst/fixedsecond
