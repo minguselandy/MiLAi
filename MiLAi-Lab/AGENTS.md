@@ -1,4 +1,48 @@
-# LATEST: 2026-10-26 first72 rules initial states reviewed; target-call allowance and cost-only right direction retained
+# LATEST: 2026-10-26 first80 rules initial states reviewed; source conflicts, agency and adequate fixed K retained
+
+States0–79 reviewed:80rules-initial states/240pairs. NEXTsource-first state80. Fullsource64cohort
+384states across6strata stillincomplete; oldfirst64audit unchanged. Qualityanswer68direction/
+34ties/138unknown; final87/15/138 (52right35left). Qualitydelivery138direction/57ties/45unknown;
+final175/20/45 (110right65left).91qualitytie targets:35incomparable,53leftdominant,3rightdominant.
+56cost-onlychanges total;new10=5answer/5delivery,including2rightdirections, not10newcorrectanswers.
+Direction-bearing statesquality43answer/66delivery,final53/80;pairlossmeanswithinstate,notpaircount.
+Newfinal/resourcechunks072–075,076–079 disjoint; no compile/fit/goldrepair/unexecutedlabels.
+
+72filmTamil/director notpersonalspokenlanguage; actualfilm e11doc16, Viewcitese16doc6Singapore.
+Hostoutsidealternative-director correction contradictsprovidedfilm.73correctpersonalquotecorrection
+andunscheduledinstallation, butViewg1any[]no-route gatesquote. Finalanswerqualityties notgraph
+certificates.74actualfixedrawdoc0 alreadyfullcharacter/show/actor; all3answerssamecorrectliteral.
+USE_VIEWduplicateoldg1any[]defectalreadyfixed; SEARCH8candidates/readallowance1 thenbudget_exhausted
+zeroREAD/emptyreceipt. Rightcostdirections againstlargerduplicateView areconditionalexistingK,
+notnewsearchbenefit.75userrechargeinterpretation becomeswifedirectclaim; ViewHosttheycutremotedays
+→shecutthem, alsojobchoicecausalityinvented. Actualroles/agency retainedinqualityrationale.
+
+76airportOhiofirsthopavailable/no2004votingevidence, toolqueryonlystate; ViewHostquestion echo,
+others outsidecontext orscopeerrors.77actual5Sources, latestreportedmodel/resolutioncorrectboth;
+no externalSKU repair/actualsheetwriteclaim.78doc6headerOursi/bodyMarkoye conflict, twoDoure
+villages samecountry, noforceduniqueanswer. ViewDoulougoue0→doc8CaliforniaDepartment wrong, actual
+e9doc0;Zimtengae4doc3correct; scopeignoresactualOursiheader, HostFAILED.79currentreportedbooking
+switch/monthknown, exactdates/earlyarrival/othertrip absent; rawHostfuturesearchonly, Viewmainbooking
+usefulbutplanpresuppositions/oldbookingcategory/otherpersonprovenancecaveats retained.
+
+Audits generation-provenance-state-072-v1.json, generation-provenance-state-078-v1.json,
+state-074-context-and-allowance-audit-v1.json underignoredreviewdir. No source/title/body/query/
+answer/citationrepairs orresampling. Privateworkplace/travel/price/details ignoredonly.
+RootpendingCPU23.329043055999993 across99explicitentries inv115, noledgerwritewhilelive. Helpers
+artifact-only; resourceINITIALONLY untilpost common-prefixaccounting reviewed. Target-call trace
+filter requiredwhenprefixcopied; no oldgenerationsrebilled. Failedtoolbothlabelsunknown, failedHost
+answerunknown; unresolved/homonyms/sourceconflicts preserved. No runtime/API/permission/modelchanges.
+
+ONLY neuraljob continuation001 originalpolicies60–2284,2225branches/748states. Driver2522910,
+child2522923,exec69037; verifyactualPID/cmdline/files. Outer artifacts/evidence-gap-20261023/
+original-feedback-v2-branch-execution-train-continuation-001-dispatch.json; native in
+training-generalization-20261021/.../feedback-branch-execution-v2/train-source128-continuation-001.
+First60retained/settled, neverretry/resample. Onterminalinspectboundary/failure,settleonlynoNN,
+continueonlyunattemptedoriginals. NativependingCPU nestedinouterwholechild-minus-ledgerCPU. Finish
+train+142devbranches/all816reviews/largestpoolcompileonce/32-64SOURCEFAMILYderivation/nine192fits/
+fullM1–M5 remainopen. NoSHA,agents,newservices,secondledger,remote writes orcompletion. Latestv115.
+
+# Earlier: 2026-10-26 first72 rules initial states reviewed; target-call allowance and cost-only right direction retained
 
 Reviewedstates0–71:72rules-initial states/216pairs; NEXT source-first state72. First64audit remains
 historical64rules-initialonly; complete source64selectedcohort384 across6strata, notcompleted.
