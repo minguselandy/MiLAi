@@ -1,4 +1,48 @@
-# LATEST: 2026-10-26 first80 rules initial states reviewed; source conflicts, agency and adequate fixed K retained
+# LATEST: 2026-10-26 first88 rules initial states reviewed; attribution and native-completed answer defects retained
+
+States0–87:88rules-initial states/264pairs, NEXTsource-first state88. Fullsource64cohort384states
+across6strata stillincomplete; first64audit unchanged. Qualityanswer81direction/41ties/142unknown;
+final103/19/142 (63right40left). Qualitydelivery151direction/64ties/49unknown; final192/23/49
+(120right72left).105qualitytie targets:42incomparable/60leftdominant/3rightdominant;63cost-onlychanges
+not63correctanswers. New7=3answer/4delivery. Direction-bearing statesquality50answer/72delivery,
+final61/88;pairlossmeanswithinstate. Final/resourcechunks080–083,084–087 disjoint/no compile/fit.
+
+80Viewcorrectactualmanufacturer/endyearchain, rawunrelatedrailcar/emptyfalseabsence.81actual7
+user/assistantSources doNOTcontainindependentclinicalverification: rawHostlabelsassistantclaims
+verified, ViewHostchangespharmacistinterval→self-referencedstandards anddoctorrecommendation→
+specificassistantintroducedbrand; n2/n3/n5self-dependent. Do notendorse/repairclinically; thisis
+provenanceaudit, notmedicaladvice.82fixedpriorraw+Viewalreadyauthor/deathunknown, repeatedView/old
+filmno newinformation; cachedany[]nogates notcertified.83actual5Sources/currenttitlehierarchychange,
+managerknown/salarymissing/clientnotemployer, bothnonemptycorrect.84correctcountryanswer despite
+Viewshowe13→Canadianballetdoc17; actualshowinpute17doc13, salaryperyearunitnotprovidedtable.
+
+85currentadvisor/start/meeting/futureleaveandformerrole separated; interimplanclarifiedinworld
+butidentitynotprovidedhere, statisticshelperunknown.86actualHostreadoutstatusCOMPLETED andfinish
+reasonstop, BUTanswerfield8761codepoints endsopenbrace, containsrepeatedselfcorrection/outside
+histories. Preservewholeactualanswer; NEVERextractoneinternalfinal-lookingparagraph, recover
+reasoning, retryorclaimnativeCOMPLETEDsemanticcompletion. Bio3teams, no providedSuperBowldates.
+87Viewfinalmorefaithfulflexiblemorningend/neededscenario-practice/ownvsfriendbooking; rawmaterial
+preservesuncertaintrip alternatives andsourcewording betterthanView. Privatework/health/academic/
+examdetails ignoredonly; no externalfactbridge, source/query/gold/response/citationrepair.
+
+Auditsstate-081-attribution-audit-v1.json, state-082-fixed-context-audit-v1.json,
+generation-provenance-state-084-v1.json, state-086-native-completed-readout-audit-v1.json inreviewdir.
+Allnew24pairs have nativeCOMPLETEDreadouts, butsemanticdefects remain; zero failed-statuspairs
+isnotqualitysuccess. RootpendingCPU25.463902703999985 across111explicitentries inv116; no root
+ledgerwritewhilelive. Helpers artifact-only; resourceINITIALONLY untilpostcommon-prefixaccounting
+review, targetcallfilter forcopedtraceprefix. Failedtoolbothlabelsunknown, failedHostanswerunknown.
+No runtime/API/permission/model changes, no independent/blindlabelcertificate.
+
+ONLY neuraljob continuation001 originalpolicies60–2284,2225branches/748states. Driver2522910,
+child2522923,exec69037;verifyactualPID/cmdline/files. Outer artifacts/evidence-gap-20261023/
+original-feedback-v2-branch-execution-train-continuation-001-dispatch.json; native in
+training-generalization-20261021/.../feedback-branch-execution-v2/train-source128-continuation-001.
+First60retained/settled,neverretry/resample. Onterminalinspectboundary/failure,settleonlynoNN,
+continueonlyunattemptedoriginals. NativependingCPU nestedinouterwholechild-minus-ledgerCPU. Finish
+train+142devbranches/all816reviews/largestpoolcompileonce/32-64SOURCEFAMILYderivation/nine192fits/
+fullM1–M5 remainopen. NoSHA,agents,newservices,secondledger,remote writes orcompletion. Latestv116.
+
+# Earlier: 2026-10-26 first80 rules initial states reviewed; source conflicts, agency and adequate fixed K retained
 
 States0–79 reviewed:80rules-initial states/240pairs. NEXTsource-first state80. Fullsource64cohort
 384states across6strata stillincomplete; oldfirst64audit unchanged. Qualityanswer68direction/
