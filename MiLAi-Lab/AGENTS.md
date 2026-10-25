@@ -1,4 +1,48 @@
-# LATEST: 2026-10-26 first96 rules initial states reviewed; acquired evidence and refresh defects distinguished
+# LATEST: 2026-10-26 first104 rules initial states reviewed; stale future-city alias, provider and question-citation defects retained
+
+States0–103:104rules-initial selectedstates/312pairs; NEXTsource-first state104. Notnewsource104
+studycohort/notfullsource32/64/128 feedback. First64audit/cohort384scope unchanged. Qualityanswer
+106direction/47ties/159unknown;final132/21/159 (82right50left). Qualitydelivery179direction/75ties/
+58unknown;final229/25/58 (141right88left).122qualitytie targets:46incomparable/71leftdominant/
+5rightdominant,76costchanges not76correctanswers. New7=2answer/5delivery. Direction-bearingstates
+quality62answer/85delivery,final74/104;pairlossaverageswithinstate. Newchunks096–099,100–103 disjoint.
+
+96oldfixedraw/directorView lackswriter/birthplace/constituencychain; duplicateViewzero increment,
+readallowance1 SEARCH8thenbudget_exhausted/zeroREAD, twoFAILEDHosts allanswerpairsunknown.97full23
+sourcefrontier hascurrentsecondcity/upcomingreturntooldcity/unbookedfamilyvisit/due-datefuture;
+allselectedbranchesonlyoldK, legalrefreshUNEXECUTED. Oldcitymatchingfuturecity notcurrenttruth.
+98Viewcorrect1985winner→2017lossopponent actual2docchain;rawHostdenies2017participation falsely.
+99finalprovider/time separation correct, Viewn6misassignslaterreadingtoearlierproviderbasedon
+assistantrecap, contradictsownn4; unknowncommonmodelnotverifiedsingle-series change orcause.
+
+100NewportSCcountyfirsthop present,no full2county-borderchain; raw/ViewHostFAILED. Viewadds
+Pagnellcounty inferencefromnearbyplace, no namesakeMecklenburgstate/county-distance collapse.
+101Viewfinalcoworkersbetterboundedthanrawexclusiveclaim, BUTtruecoworkerfactn6citesassistant
+QUESTION e5, actualuserconfirmatione0inputavailable; do notrepairorclaimquestionisconfirmation.
+102bothdeliverBrudenellcountryfirsthop, no Hebroncountybody; ViewHostwrongcountycontradictsfullpool.
+103actualfixedrawall7alreadyroutines/missingworkmeeting/sister; USE_VIEW/REFRESHidenticalnodes/rules,
+onlyscopeabsence sentenceadded. BothViewsstrengthenlastSeptember→previouscalendar-yearunsupplied;
+REFRESHHostonlyfuturesearchpromise. Correctroutinesummarynotnewclinicaladvice/universalfrequencyrule.
+
+Auditsstate-096-context-and-allowance-audit-v1.json, state-097-stale-context-audit-v1.json,
+state-099-provider-attribution-audit-v1.json, generation-provenance-state-101-v1.json,
+state-103-refresh-reuse-audit-v1.json underignoredreviewdir. RootpendingCPU29.457112609999992 across
+136explicitentries inv118; no rootledgerwritewhilelive. No newruntime/API/permission/model changes.
+Source/observer/tokenizer helpersartifact-only; resourceINITIALONLY untilpostcommon-prefixreview.
+Newgenerationafterfrozenboundary, target-calloperationfilter forcopiedprefix, no oldcostrebill.
+Failedtoolbothlabelsunknown,failedHostanswerunknown; no source/year/question/gold/citation/answer
+repair,resampling orsalvage. Privatefamily/credit/credential/health factsignoredonly.
+
+ONLY neuraljob continuation001 originalpolicies60–2284,2225branches/748states. Driver2522910,
+child2522923,exec69037;verifyactualPID/cmdline/files. Outer artifacts/evidence-gap-20261023/
+original-feedback-v2-branch-execution-train-continuation-001-dispatch.json; native in
+training-generalization-20261021/.../feedback-branch-execution-v2/train-source128-continuation-001.
+First60retained/settled, no retries. Onterminalinspectboundary/failure,settleonlynoNN,continueonly
+unattemptedoriginalpolicies. NativependingCPU nestedinouterwholechild-minus-ledgerCPU. Finishtrain+
+142devbranches/all816reviews/largestpoolcompileonce/32-64SOURCEFAMILYderivation/nine192fits/fullM1–M5
+remainopen. NoSHA,agents,newservices,secondledger,remote writes orcompletion. Latestv118/execution.
+
+# Earlier: 2026-10-26 first96 rules initial states reviewed; acquired evidence and refresh defects distinguished
 
 States0–95:96rules-initial selectedstates/288pairs; NEXTsource-first state96. This isnotanew
 source96studycohort andnotcomplete source32/64/128 feedback. First64audit unchanged; fullsource64
