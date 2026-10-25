@@ -1,4 +1,41 @@
-# LATEST: 2026-10-25 batch041 reviewed; batch042 LIVE
+# LATEST: 2026-10-25 batch042 reviewed; batch043 LIVE with 6 positions
+
+Original042 (musique-family-000235/C28):12positions,10 native completions/2 Host truncations,
+rules late/fixed missing-document,8192/null,reasoning31183/37476.30 HTTP/118028 known,unknown0;
+27 Host/3 View.25 finite untruncated forwards,142220 input,max6715;one load.16 retrievals,
+14 initial+56 post=70 observations;2 true zero-state Laya final missing-pool calls (allowance0).
+1 rules early View material-budget rejection. Full source-first/mechanical/semantic/provenance
+review complete;partial completed-document answers unchanged at closure. No retries/labels.
+
+All3 full-pool answers1980 supported by actual car→manufacturer and1900–1980 company bodies;
+Laya gets two hops through real follow-up. Missing pool keeps requested endyear unknown,not other
+model productionend;fixed truncates. Manufacturer hypotheses in queries/parenthetical examples are
+not evidence. Rules missing-pool answer overstates coverage of its returned subset. No external lookup.
+C28 rules/fixed early deliver all7. Laya observes all7/11ranges but returns s1t3–6,omitting older
+completed self-history andspecific personalbuffer. Laya calls prior assistant assertions verified
+guidance;rules transfers assistant standard-protocol characterization to clinician;fixed labels user-
+reported clinician recommendation independent. Actual bound tool catalog only milai_retrieve,no
+external verification receipt. Underlying medicine not adjudicated. Later16arrivals/prior tools,
+0retrieval all3. Rules truncates;Laya/fixed miss newer targets,personal timing/conditions. Laya
+invents clinician-office location and repeats verification claims;fixed says later target date/location
+undetermined. Some past history/nearer target remain right. No clinical recommendation,contact or
+record action;private clinical names/products/dates/location stay ignored,tracked literal flags only.
+
+Model/load1312.4005734719822 CPU already billed;whole child1353.439212 nested.7 measured remaining
+phases41.58197231701782 settled once with no live job. Unknown unmeasured work/GPU/prices retained.
+Cumulative43 closed batches:82groups,486positions,404 native completions/82 protocol failures,
+1115 HTTP/4262692 known tokens,2629 observations,22 zero-state calls. Not accuracy/independence.
+Source32/64 reports unchanged. No branch preparation,labels or new fits.
+
+ONLY LIVE neural job: original043,musique-family-000567,6 declared positions,128 frontier.
+Driver145714/child145729/exec89773;verify actual PID/files. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-043.json.
+Do not pad to12. No second neural job/offline settlement while live. Source-first before answers.
+Full128 train+4dev precede once-only quota/seed prep. Latestv74/execution;M1–M5 still open.
+Frozen2a179b58/update262/order/recipe unchanged;Lab3c892d30. No SHA,agents,new services,second ledger,
+remote writes. Saved CPU/train and Host pilot remain closed.
+
+# Earlier: 2026-10-25 batch041 reviewed; batch042 LIVE
 
 Original041 (musique-family-000469/C07):12positions,10 native completions/2 Host truncations,
 Laya missing-document/fixed target-pool,8192/null,reasoning28372/29565.29 HTTP/117538 known,
