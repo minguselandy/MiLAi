@@ -1,4 +1,50 @@
-# LATEST: 2026-10-26 first32 post states reviewed; available late updates rejected by material budget
+# LATEST: 2026-10-26 first40 post states reviewed; later sibling evidence is not prior knowledge
+
+States0–167:168 selected states/504pairs,128 unique families;128rulesinitial+40rulespost.
+NEXT source-first state168. Full train768/dev48/all6strata/allreviews/largestpoolcompile/original
+fits remain. First32 source-family coverage stays64of192 (32rulesinitial/32rulespost); new families
+outsidefirst32 do not close remaining128other-collector states. No early subset compilation.
+Quality answer184 directions/91ties/229unknown; final245/30/229 (141right104left).
+Quality delivery267 directions/170ties/67unknown; final386/51/67 (238right148left).
+261quality-tie targets:66incomparable/119left/61right/15equal-cost,180cost-only changes.
+New19=5answer/14delivery,3LEFT/16RIGHT; not19correctanswers. Direction-bearing states quality102/124,
+final126/168 (answer/delivery). Pair loss averages within state; paircount not gradient mass.
+
+160 broadcaster/studio/otherchannel distinction retained, no borrowed channel number.
+161 same full raw but different timing/residence/no-ownership errors, answer order unknown.
+162 exact correct-label doc3/doc18 appear in controller observed_evidence, but Host gets only
+unrelateddoc15. Wrong label/album/writer/chart answers retained; artist-name match not acquisition.
+163 targettool0 receipt atmessage3, fixed siblingtool1/tool2 Views atmessages4/5, initialknown0.
+All targetreceipts empty; later Views support final answers but are NOTpriorK at originaldecision.
+No siblingremoval/replacement, fakefutureinputs or autonomous-stop success claim from this readout.
+164 same family AND identical public question asstate36, but corpus24554 vs17763 source pools:
+initial has2supporting songbodies, actualpost replay hasneither. No source/label transfer or causal
+initial-post comparison; currentanswers conflate2titles, onecontainsliteralplaceholders.
+165 authorparaphrase narrowed beforelabels fromperformedtrial toexplicitpastbelief. Rawsource
+unchanged. View unsupportedoutcome phrase/formalrejection and current/pastplanerrors retained.
+166 duet known/Goldalbum bodyavailableunacquired; ellipsis retained, namepresence not fullanswer.
+167 faithfulView facts notusedbyfuturepromise; fullraw final falsely denies other-person titles
+although extra userrole body delivered. Main rolefacts correct, fullresponse caveat remains.
+
+Newignored audits: post-prefix-accounting-states-160-167-audit-v1.json (24cases),
+semantic-boundaries-states-162-163-164-165-167-audit-v1.json. All120postcases prefix/newoperations/
+newgeneration/fullreceipt costs verified. Native operationcount includes selection/attempted READ,
+not newly delivered facts. Actualobserved bodies/frame positions/sourcevariants checked literally.
+Current helper/module logic unchanged; no runtime/Schema/API/permissions/model modifications.
+No unexecutedlabels, source/query/citation/answer repair, newmodelcalls, poolcompile ornewfits.
+
+Root pendingCPU52.30837098899998 across219 explicit entries inv126; no root ledger write whilelive.
+ONLY neuraljob continuation001 original policies60–2284,2225branches/748states. Driver2522910,
+child2522923,exec69037; verify actual PIDs/cmdline/files. Snapshot1843tool rows, Host1616C/226F/
+1pending. Originalfirst60 retained/settled, neverretry. Onterminal inspect actualboundary; settle
+only no neural process, then unchanged still-unattempted suffix in newoutput. NativependingCPU
+nested in outer wholechild-minus-ledgerCPU, not additive. Other reading/author/import/probe CPU
+unknown; authorparaphrase refinement unmeasured, no GPU/prices imputedzero.
+Finishtrain+142devbranches/all816reviews/largestpoolonce/32-64SOURCEFAMILYderivation/nine192fits/
+fullM1–M5 remainopen. NoSHA,agents,newservices,secondledger,remote writes orcompletion.
+Latest data/manifests/evidence-gap-development-progress-20261023-v126.json.
+
+# Earlier: 2026-10-26 first32 post states reviewed; available late updates rejected by material budget
 
 States0–159:160selected states/480pairs,128unique families;128rulesinitial+32rulespost.
 NEXT source-first state160. Full train768/dev48/all6strata/allreviews/largestpoolcompile/original
