@@ -1,4 +1,44 @@
-# LATEST: 2026-10-25 batch053 reviewed; batch054 LIVE
+# LATEST: 2026-10-25 batch054 reviewed; batch055 LIVE (3 positions)
+
+Original054 (musique-family-000477/E14):12 positions,7 native COMPLETED/5 protocol failures.
+Rules missing/fixed missing/Laya late/fixed late length8192/null,reasoning30454/29022/35817/
+32965;rules late stop/null malformed3568 completion/15320 reasoning.33 HTTP/148051 known,
+unknown0;30 Host/3 View.26 finite untruncated forwards,133448 input,max6739,one load.
+21 retrievals,18 initial+55 post=73 observations;3 true zero-state calls.1 material reject.
+
+Full pool Brudenell→Canada and Canadian Hebron→Prince County both delivered by Laya/fixed;
+fixed second call queued in same Host response, not adaptive follow-up. Rules gets first hop
+only, follow-up SEARCH exhausts allowance; claims no Hebron despite Canadian and US bodies
+available. Missing pool Laya preserves unknown; rules/fixed fail, fixed before any retrieval.
+Repeated Laya missing-pool body has known_materials0/known_reference_reads0, not reference reuse.
+Rules View changes historical municipality wording to present tense; country still grounded.
+
+E14 early rules/fixed deliver all7, mostly preserve personal pattern/fixed routines and unknown
+meeting/sister fields. Rules first two calls queued; fixed two sequential calls repeat all7.
+Laya observes13 full ranges/all7 in first call but delivers1–4, next observes6/delivers3–6;
+third zero-state. Union omits source7 despite first acquisition. Generated rules View rejected
+by material budget, absent packet; last September→previous calendar year not established.
+Later all3 have16 arrivals/prior tools, all final answers FAILED. Rules actual request limits
+max_control_steps2/max_return_tokens2000; first state8 acquisition reads/2 steps. Two SEARCH,
+no READ/observed bodies/delivery, then malformed final. Not initially exhausted reads, and no
+larger-limit counterfactual claim. Laya/fixed no new retrieval then length failures. No completed
+current-vs-future meeting or self-vs-sister answer. Private health/billing/identity details ignored.
+
+Child CPU already billed1186.3459517279753; whole1226.2491810000001 nested. Seven measured remaining
+phases40.484486922024864 settled once after PIDs absent. Partial document answers unchanged.
+Cumulative55 closed batches:104 groups,624 positions,507 native completions/117 failures,
+1460 HTTP/5685631 known tokens,3480 observations,35 zero-state calls. Not accuracy/eligibility.
+Source32/64 reports and complete remaining scope unchanged; no branches, labels or fits.
+
+ONLY LIVE neural job: original055,musique-family-000854,ONE history/3 positions,128 frontier.
+Driver1153339/child1153367/exec23452; verify actual PID/files. Do not pad to12 positions.
+Driver: artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-055.json.
+No second neural job or offline settlement while live. Read sources before outputs.
+Full128 train+4dev before once-only original quota/seed preparation. Latest v86/execution.
+M1–M5 remain open. Frozen2a179b58/update262/recipe unchanged;Lab3c892d30.
+No SHA, agents, new services, second ledger or remote writes.
+
+# Earlier: 2026-10-25 batch053 reviewed; batch054 LIVE
 
 Original053 (musique-family-000850/A27):12 positions,10 native COMPLETED/2 Laya document
 failures. First is actual stop/null JSON_ACTION_MALFORMED,1966 completion/9483 reasoning;
