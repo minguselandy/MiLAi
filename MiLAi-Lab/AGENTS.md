@@ -1,4 +1,51 @@
-# LATEST: 2026-10-26 first8 post states reviewed; controller observation is not Host delivery
+# LATEST: 2026-10-26 first16 post states reviewed; empty completion and stale View retained
+
+States0–143:144selected states/432pairs,128unique families;128rulesinitial+16rulespost.
+NEXT source-first state144. First128 stratum audit retained; full train768/dev48/all6strata,
+allreviews/largestpoolcompile and original fits remain. No unexecuted labels or pool compilation.
+Quality answer146 directions/75ties/211unknown; final195/26/211 (113right82left).
+Quality delivery239 directions/126ties/67unknown; final326/39/67 (197right129left).
+201quality-tie targets:60incomparable/108left/28right/5equal-cost,136cost-only changes.
+New15=5answer/10delivery,3LEFT/12RIGHT; not15correctanswers. Direction-bearing states quality85/112,
+final106/144 (answer/delivery). Pair loss averages within state, not proportional to paircount.
+
+136 death city Germany, same-name US county not valid bridge; both completed answers import
+unsupported county/state. Same firsthop delivery, failed handoff Host answer unknown.
+137 full7 corrected schedule bodies delivered, nativeCOMPLETED answer emptystring, finishstop,
+raw content13codepoints. No salvage/relabel/retry; empty/futurepromise qualitytie means no asked
+facts, not success.138 artist/chart known but competition absent, generic competition no link;
+existing prefix supports boundedunknown, extra unrelatedREAD adds no targetfact.
+139 full current role/pay/workweek/consulting evidence delivered only completed arm; every
+answer pair touches failed Host, allunknown. Exam preparation not certification completion.
+140 target singer/label absent; source-bounded unknown preferred to outside label claims even
+when latter cheaper delivery.141 refresh onlyold4 records, View marksoldquantity current; later
+READ delivers7 includingusercorrection, Host choosesnewquantity. Correctanswer != currentView.
+142 correctcountyseat alreadyinprefix; directcity-county source6 notdelivered. No full multi-hop
+acquisition proof from finalmatch.143 pool15records, bothsearchesdeliver same later7; earlier
+otherperson/unfinishedalternative facts presentinStore. Notretrieved differsfrom nomemory.
+Giftchoice/quotedprice notcompletedpurchase, engraving/strictbudget limits retained.
+
+Newignored audits: post-prefix-accounting-states-136-143-audit-v1.json (24cases),
+semantic-boundaries-states-137-141-142-143-audit-v1.json. All48postcases checked for commonprefix
+exclusion/newgeneration deltas/fullreceipt tokens. Metadata and literal source/body checks only.
+Post traces filter call_id AND step boundary, no assumed initial-observation marker. Actual
+response.json schema used after a failed trace-shape probe; that probe CPU unmeasured/unknown.
+Observer co-delivered View bindings through wire s-labels preserved; empty raw containers retained.
+No runtime/schema/API/permission/model changes, no neural retries or additionalmodelcalls.
+No private source names, addresses, dates, amounts or codes copied into tracked findings.
+
+Root pendingCPU44.99595563999998 across188 explicit entries inv123; no root ledger write whilelive.
+ONLY neuraljob continuation001 original policies60–2284,2225branches/748states. Driver2522910,
+child2522923,exec69037; verify actual PIDs/cmdline/files. Snapshot1683tool rows, Host1483C/200F.
+Original first60 retained/settled, neverretry. Onterminal inspect actualboundary; settle only no
+neuralprocess, then unchanged still-unattempted suffix in new output. Native pendingCPU nested
+in outer whole-child-minus-ledgerCPU, not additive. Pending root read/author/import/probe CPU
+outside explicit measured fields remains unknown. No GPU/prices imputed zero.
+Finish train+142dev branches/all816reviews/largestpool compile once/32-64SOURCEFAMILY derivation/
+nine192fits/fullM1–M5 remain open. NoSHA,agents,newservices,secondledger,remote writes orcompletion.
+Latest data/manifests/evidence-gap-development-progress-20261023-v123.json.
+
+# Earlier: 2026-10-26 first8 post states reviewed; controller observation is not Host delivery
 
 States0–135:136 selected states/408 pairs,128unique families;128rulesinitial+8rulespost.
 NEXT source-first state136. Original first128 stratum audit retained; full train768/dev48 and
