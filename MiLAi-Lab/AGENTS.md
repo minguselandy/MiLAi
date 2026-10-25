@@ -1,4 +1,39 @@
-# LATEST: 2026-10-25 batch050 reviewed; batch051 LIVE
+# LATEST: 2026-10-25 batch051 reviewed; batch052 LIVE
+
+Original051 (musique-family-000881/B26):12positions,8 native completions/4 Host failures.
+Rulesfirstdoc stop/null malformed,2489completion/11016reasoning. Rulessecond/Layafirst/fixedsecond
+length8192/null,reasoning37704/25431/36863.31 HTTP/135897known,unknown0;28 Host/3 View.
+20 finite untruncated forwards,105743 input,max6535;one load.17retrievals,17initial+58post=75
+observations,0zero-state calls.3materialbudget rejects. Full source/mechanical/semantic audit.
+
+Bothpools lackscreenwriter/birthplace/targetconstituency chain;director notwriter,otherKenneth notBi.
+Completedfixedfirst/Layasecond answers preserveunknown;Laya second overstates absence ofall
+functionalconstituency snippets,which exist butnotlinked. Laya firstqueries addunsupported饭戏攻心/
+2022 versusprovidedHainanChickenRice/海南雞飯/2004. No repairedquery,source/goldrewrite orcausal
+retrieval claim. Rules Views preserve role/missing-link distinctions despiteHostfailures.
+B26 earlyall3 packetsall7,current firstmove/brothercity correct. Fixed usesuser middle-name as
+unqualified name;sourcefirstname notgiven. Later16arrivals/prior tools all3. Rules newretrieval:
+lastbefore16fullSources,not directsecondmove s2t3–4 orlatesttarget s3t7. SuccessfulterminalREAD5
+adds s3t7 toactualpacket afterlastbefore. Finalcurrentcity/upcomingmove,latesttripintent/notbooked
+andexpecting/notreportedbirth mostlygrounded;completedmove bulletcompressesintermediate move,
+visit-before-move opportunity remainsforecast,notconfirmedorder. Laya/fixed0retrieval staystale;
+fixed repeatsname-field mismatch. No messages/travel/birthverification;privatefamily details ignored.
+
+Model/load939.7415098830197 CPU already billed;whole child980.786747 nested.7 measured remaining
+phases41.62816753498027 settled once,no livejob. Partial answers unchanged;unmeasured author/report/
+GPU/prices unknown. Cumulative52closed batches:98groups,588positions,479native completions/109
+protocol failures,1362 HTTP/5276137known tokens,3251observations,28zero-state calls. Notaccuracy/
+independence. Source32/64 reports unchanged;no branches,labels ornewfits. Full M1–M5 remain open.
+
+ONLY LIVE neural job: original052,musique-family-000675/memops_F12,12positions,128frontier.
+Driver939311/child939404/exec17907;verify actualPID/files. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-052.json.
+No second neuraljob/offline settlement while live. Source-first beforeoutputs. Full128 train+4dev
+before once-only originalquota/seed prep. Latestv83/execution. Frozen2a179b58/update262/order/recipe
+unchanged;Lab3c892d30. No SHA,agents,new services,secondledger orremote writes. SavedCPU/train/
+Hostpilot stayclosed. Longcommand inputs use raw multiline heredocs.
+
+# Earlier: 2026-10-25 batch050 reviewed; batch051 LIVE
 
 Original050 (musique-family-000683/D14):12positions,10 native completions/2 Laya Hostlength failures,
 missingdoc/late,8192/null,reasoning36555/33574.32 HTTP/118075 known,unknown0;29 Host/3 View.
