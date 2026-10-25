@@ -1,4 +1,56 @@
-# LATEST: 2026-10-26 first16 states reviewed; citation/status defects verified; continuation001 LIVE
+# LATEST: 2026-10-26 original first60 cases fully reviewed; continuation001 LIVE
+
+Selected train states0–19:20rules-initial states,60pairs,firstexecutionprefix60 unique cases
+now source/quality/resource reviewed. Notfullpoolcompile,notmodel fit/fullHostaccuracy.
+Quality answer20direction/5ties/35unknown; finalanswer21direction/4ties/35unknown (17right4left)
+after onlyearlierstate8costflip. Delivery45direction/5ties/10unknown (38right7left),unchanged.
+Finaldirection-bearing states13answer/20delivery;pair loss averageswithineachstate,countsarenot
+gradient-mass ratios. Ten qualitytie targetcomparisons:9incomparable/1left;nonechangedthisbatch.
+
+Newstate16 fullpooldoc9artist/title+doc15spouse. SEARCHreturnsdoc15only andexplainsmissingtitle
+link;emptyHostunsupportedperformer narrative. Viewcorrectlybindsbothandanswers,preferredboth
+targets againstboth alternatives. Boundedcommoncontinuationonly,notoptimalautonomousproof.
+State17 rawall7/identitystatus/referencecorecorrect butHostfillsunprovidedyear;Viewkeepsyear
+unknown butfriend/colleaguewordingimprecise. Otherpersondetailsseparate, noapproval/newdocument.
+Partialresponse caveats retained; privateIDs/country/healthnumbers notintrackedsummary.
+State18 document3 alonefulltownship→county→state; bothnonemptyanswerssamecorrectstate,
+taskqualitytie/resourcesincomparable. No forcedtwoREADs/namesakecountymerge.
+State19 HANDOFFreadoutFAILED;SEARCHall7 reportedfood/drink/personaltarget facts;ViewtoolFAILED
+fromretainedlengtherror,despiteHostnativeCOMPLETED. Allanswerpairsunknown; bothpairs involving
+FAILEDtool unknownforBOTH targets. OnlyHANDOFF-vsSEARCH deliverydirection known. No salvage/retry.
+
+Reviewdir artifacts/evidence-gap-20261023/feedback-branch-reviews-v2/train:
+FINAL disjointchunks000–007,008–011,012–015,016–019 in final-reviews-states-*-v1.json.
+Firstprefixaudit review-prefix-states-000-019-audit-v1.json verifies20uniqueevents/60cases/
+60pairs,actualcapture/before/policy/continuation andfailuregates.2tool-failedpairs and13
+failed-readout answerpairs overlap;donotsum. No compiler execution. Quality/source/observed
+artifacts provenanceonly,notduplicate rows. Allrawgold{},compiledfeedbackrows0.
+NEXT source-first reviewstate20. Its cases are incontinuation001, originalpolicyname
+state-020-branch-00 etc, NOT originalarmnumber. Observehelper matches acrossparts.
+
+Ignoredhelpers observe_feedback_review_states_v1.py START END and
+apply_feedback_resource_rule_v1.py START END remainartifact-only. Observer prints toolstatus
+separatelyfromreadoutstatus andflagboth-targetunknownonfailedtool. Actualnewmaterial/hostframe
+schemas requireinspection,notcase rerun. Resourcehelper stillINITIALONLY; poststate resource
+accounting requires explicitcommon-prefix review. Runtimequeue itselfhasenteredactualpoststates,
+but semanticallyreviewedfirst20 remaininitial. No concurrency ofneuralexperiments.
+
+RootCPU pending5.813672588000001 in18explicitfile/field entries inv107; includesnewbatch
+source/observation/quality/resource andfirst20prefixaudit. Noledgerwritewhilelive; priorquality
+0–3 settledseparately; invalidsource1–3 allocations excluded/unknown. Nativeprefix/collection/
+prep costs unchanged andnotrebilled. Resourcepasslocaltokenizer only,no modelweights/forward/HTTP.
+
+ONLY LIVE neuraljob originalunattemptedcontinuation001: policies60–2284,2225branches/748states,
+samefrozen2a179b58/model/prompt/budgets/bindings. Driver2522910/child2522923/exec69037; verifyactual.
+Outer artifacts/evidence-gap-20261023/original-feedback-v2-branch-execution-train-continuation-001-dispatch.json.
+Native .../generalization-20261021/feedback-branch-execution-v2/train-source128-continuation-001/driver.json.
+First60 retained/settled,neverretry/resample. Onterminal inspectfailure/attemptboundary,settle
+onlywithoutlivejobs,continueonlystill-unattemptedoriginalpolicies. NativependingCPU nested in
+outerwholechildminusledgerCPU,notadditive. Finishtrainthenprepared142devbranches;largestpool
+compileonce/32-64fixedderivation/nine192fits/fullM1–M5remainopen. Latestv107/execution.
+NoSHA,agents,newservices,secondledger,remote writes orprematurecompletion. Terminal-aware snapshots.
+
+# Earlier: 2026-10-26 first16 states reviewed; citation/status defects verified; continuation001 LIVE
 
 Selected train states 0–15 have source-first quality and resource reviews: 16 rules-initial
 states, 48 pairs. Quality: answer14 directional/4ties/30unknown; delivery37 directional/
