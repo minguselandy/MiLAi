@@ -1,4 +1,48 @@
-# LATEST: 2026-10-26 first32 rules-initial states reviewed; actual old-Host-K/menu limits recorded; continuation001 LIVE
+# LATEST: 2026-10-26 first40 rules-initial states reviewed; sibling context, rejected View and citation defects retained
+
+States0–39:40 rules-initial states/120pairs finalized, NEXT source-first state40. Not complete
+source32/64 cohort: derive by sourcefamily across collectors/phases only after fullpool compile.
+Quality answer35direction/16ties/69unknown; final43direction/8ties/69unknown (28right15left).
+Quality delivery76direction/22ties/22unknown; final88direction/10ties/22unknown (60right28left).
+38qualitytie targetcomparisons:18resource-incomparable/20left-dominant;20cost-onlychanges total,
+not20correctanswers. Direction-bearing states quality22answer/36delivery, final27/40; pair loss
+averages withinstate, counts notgradientmass. No compile/fit/gold repair or unexecuted labels.
+
+New final disjointchunks032–035,036–039 under feedback-branch-reviews-v2/train; resource vectors
+match.32REFRESH internally view_rejected QUERY_STRUCTURE_RULE_NODE_UNAVAILABLE, then2SEARCH/noREAD,
+nativeCOMPLETEDemptydelivery; generated rejected View nevercounted asdelivered. RawHostaddsoutside
+channelnumber.33rawfullfrontier/Hostfuturesearchpromise;View strengthensdates/disposition/tours.
+34oneoriginal contains fullrequestedchain; bothanswerscorrect.35targetsecond ofsame3-callbatch:
+fixedearlierrawall7 ANDlater-indexView sibling. LiteralView/oldsourceduplicates provide noincrement
+inconditionalfinalframe; laterreceipt NOTproofHostalreadyknewitbeforetargetdecision. Missing-time
+handling differs; retain actualsameframe, no autonomousHost or all-prior-K claim.
+
+36actualgeneratorinput correcttargetdoc11=e6, deliveredn3citese11→unrelateddoc14; correctfinalanswer
+notcitation/fullgraphcertificate.37rawall7/HostliteralNone issemanticnonanswer despiteCOMPLETED;
+qualitytie withemptyabstention thenHANDOFFcheaper, deliveryprefersraw. View alreadyadoptedhabit
+becomesconsidered; pastselfmanagement becomesplans.38albumvsrequest-songpremise preserved; correct
+Viewnodes butg1any[]no-route gate, HostFAILED, nofullgraphcertificate.39earlierrawall7 plusprior
+schemaenumerror(toolnotexecuted) fixed; actualtargetvalid, allanswerscorrect/duplicateevidence.
+Privatehealth/workplace/finance names andvalues remainignored. Audits:
+state-032-rejected-view-empty-delivery-audit-v1.json, state-035-sibling-context-audit-v1.json,
+generation-provenance-state-036-v1.json, fixed-context-states-037-039-audit-v1.json.
+
+Root CPU pending11.014444500000002 in45 explicitentries inv110; noledgerwritewhilelive. Readonly
+probes corrected unavailable python→python3, ordinarysources→incoming_sources beforeoutputs,
+andmetadataCounter dict→preference beforemanifestwrite; no experiment/sampler/ledger mutation,
+failedprobe/import/authoring costsunknown. Existing helpers artifact-only, resourcehelperINITIALONLY
+untilpost common-prefix accounting reviewed. Failedtool BOTHtargetsunknown; failedHost answerunknown.
+
+ONLY LIVE neuraljob continuation001 originalpolicies60–2284,2225branches/748states. Driver2522910,
+child2522923,exec69037; revalidateactualPIDs/native beforeaction. Outer original-feedback-v2-branch-
+execution-train-continuation-001-dispatch.json in artifacts/evidence-gap-20261023; native driver in
+training-generalization-20261021/.../feedback-branch-execution-v2/train-source128-continuation-001.
+First60 retained/settled, neverretry/resample. Onterminal inspectboundary/failure,settleonlynoNN,
+continueonlyunattemptedoriginals. NativependingCPU nestedinouterwholechild-minus-ledgerCPU.
+Finishtrain+142devbranches,fullpoolcompileonce/32-64sourcefamilyderivation/nine192fits/fullM1–M5
+remainopen. Latestv110/execution. NoSHA,agents,newservices,secondledger,remote writes orcompletion.
+
+# Earlier: 2026-10-26 first32 rules-initial states reviewed; actual old-Host-K/menu limits recorded; continuation001 LIVE
 
 Selectedstates0–31:32rules-initial states,96pairs source-first quality/resources finalized.
 Theyspanoriginalfirst32sourcefamilies,NOT thecomplete192-state source32feedbackcohort; other
