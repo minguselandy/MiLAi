@@ -1,4 +1,66 @@
-# LATEST: 2026-10-25 all original collection closed; train feedback branches LIVE
+# LATEST: 2026-10-25 first60 branches retained; unattempted continuation001 LIVE
+
+Original train branch invocation stopped after original policies0–59,60attempts.59tool
+COMPLETED/1toolFAILED,53readoutCOMPLETED/7FAILED (4TEXT_REQUIRED,3INCOMPLETE_FINAL_RESPONSE).
+All60 actualbefore/actions equal andbinding/policy/continuation match once-selected originals.
+80newHTTP/304957known,unknown increments0. Stop:state-019-branch-02 REFRESH_VIEW hit8192
+nonthinking outputtokens;finishlength,193541contentchars,IncompleteChatResponse→read_outcome_unknown
+→operation_outcome_unknown. NoViewcommit/businessaction. Its later readout nativeCOMPLETED is
+not tasksuccess; any pair involving FAILED tool must be UNKNOWN for BOTH answer/delivery.
+Do not salvage output,rerun arm,raise limits ormodify frozen runner. Native first-failure stop retained.
+Original outer2388294/child2388299/exec66759 terminal/absent. Reports under artifacts/evidence-gap-20261023:
+original-feedback-v2-train-prefix-000-059-{mechanics,settlement}.json.
+Wholechild136.606160CPU,alreadybilledCPU0 (not serverGPUzero); preflight/coordinator+closure
+audit total137.390514828 settledonce. Rootsource/quality auditCPU0.19694731 separatelysettled.
+Do NOT also settle original native replay/readout/orchestration pending fields; theyare nested.
+
+ONLY LIVE neuraljob is original UNATTEMPTED suffix60–2284,2225branches/748remainingstates.
+Same originalpolicies/order/names/captures/fullbindings,source2a179b58,Host/frame/config/budgets,
+fixed_context4reads/2continuation. No resampling/retry orfailedcase replacement. Driver2522910/
+child2522923/exec69037; verifyactualPID/files. Outer:
+artifacts/evidence-gap-20261023/original-feedback-v2-branch-execution-train-continuation-001-dispatch.json.
+Native: training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/
+feedback-branch-execution-v2/train-source128-continuation-001/driver.json.
+Originalfulltrain selection remains768states/2285branches; first60 retained in train-source128,
+new native arm-NN paths restart numbering but policy names/state/eventIDs unchanged. Match cases
+byoriginalpolicyname/capture,not directoryarmnumber across parts. Manifest/policies:
+original-feedback-v2-train-continuation-001-manifest.json and
+original-feedback-v2-train-remaining-policies-001.json (literaloriginal[60:]).
+
+First4 selectedTRAIN states0–3 source-first QUALITY reviewed,12pairs,not compiled/fitted.
+SourcegroupsA29/B05/B06/C23; actualframe identical excepttargetreceipt,commonbefore/actions/
+continuation verified. Answerquality4right/7unknown/1tie;delivery8right/3unknown/1tie.
+Unknown includes failedreadouts andcoverage/errortradeoffs,not a tie ornegative label.
+State0 currentcorrection in11sources (1t1–8,2t1–3), not7. SEARCH maincorrectioncorrect but
+omitsnumbercontext;Viewcoversmore butHost turns personalrecallcorrection intoofficialchange.
+State1 all7raw vsView;bothunsupportedsecondrank,SEARCHinvented ultrasoundtiming removedbyView.
+State2 SEARCH invents larger-group exception from unspecifiedpartysize;View preservesunknown
+but adds partyday inference/unexecuted further-retrieval promise. Partial/errortradeoffs retained.
+State3 both nonemptybranches retain requestedexpiry/ownplanning distinctions; qualitytie read
+withinexplicit record scope,notproof of external bookingabsence/availability ortravel law.
+WholeViews notcertified. Privatefacts/answers onlyignored artifacts.
+
+Reviewdir artifacts/evidence-gap-20261023/feedback-branch-reviews-v2/train:
+state-000-quality-review.json; quality-states-001-003-v1.json;
+observed-states-001-003-v1.json; state-000/001/002/003-source.json.
+Qualityfiles have compiler-compatible states/comparisons. RESOURCE PASS PENDING, thenfullpool
+compileonce. Existingresource_preference onlyafterknownqualitytie,using componentwise5fields,
+noheterogeneoussum/no costoverrideofunknown/directionalquality. No wiretokenmeasurement yet.
+Allrawselectedgoldstill{},unreviewedactions/statesunknown;pairqualityannotations ARE now present.
+States4onward semanticallyunreviewed; continue sequentialsource-first review whilequeue runs.
+Source1–3 CPU shared-counter division was invalid: pendingfields removed beforebilling,original
+values retained as invalid_cpu_estimate_retained_not_billable, actualsourceCPUunknown. Subsequent
+observation/annotation batches measuredonce,notper-state overlapping sums. No ledgerwrite whilelive.
+
+All68train+4dev collection andonce-onlyquota prep SEALED (seev102); do not rerun/rebill.
+TraincollectionCPU95421.37720603103;devcollection+aggregate7668.159929889;prep7.121700048 separate.
+Finish originaltrainremaining,thenalready-prepared142devbranches. On nativefailure retain/check
+attempt boundary andknownusage,settleonlywithoutlivejobs,continueonlyunattemptedoriginalpolicies.
+No blindsource/goldrepair. Compilelargestpoolonce andderive32/64 withoutresampling; nine192-update
+fits andfullM1–M5remainopen. Latestv103/execution. NoSHA,agents,newservices,secondledger,
+remote writes orprematureGoalcompletion. Use actualterminal-aware snapshots,notRUNNING-only assumptions.
+
+# Earlier: 2026-10-25 all original collection closed; train feedback branches LIVE
 
 Original dev003 (E15/F01) reviewed/settled:11COMPLETED/1lengthFAILED,25HTTP/114830known,
 unknown0;23Host/2View.23finite untruncated forwards,142370input,max12101,one load.
