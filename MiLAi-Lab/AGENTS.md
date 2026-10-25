@@ -1,4 +1,40 @@
-# LATEST: 2026-10-25 batch047 reviewed; batch048 LIVE
+# LATEST: 2026-10-25 batch048 reviewed; batch049 LIVE
+
+Original048 (musique-family-000032/A16):12positions,9 native completions/3 Host failures.
+Rules/fixed agency-pool length8192/null,reasoning33032/35361;fixed missing stop/null malformed,
+3577completion/15854reasoning.31 HTTP/129600 known,unknown0;28 Host/3 View.24 finite untruncated
+forwards,137413 input,max7552;one load.17 retrievals,14initial+56post=70observations;3 true zero-state
+Laya finalearly calls.5materialbudget rejects+1View reject. Actual11initial+12later Sources.
+
+Missingagency pool rules/Laya preservecounterpartunknown,distinguishforensiclab frompublichealth.
+Canadiancontext inferred fromQuebec/Montreal,not independentlyprovedlegalcitizenship. Laya targetpool
+returnsbiography+PHAC rolebody andanswersfunctionalcounterpart. Rules generatedView nodesn1–3 but
+bothrules targetabsentn4;QUERY_STRUCTURE_RULE_NODE_UNAVAILABLE rejection retained,norepair/retry.
+Rules/fixed neverreturnPHAC body andHostfail;no causal claimView rejection causedtruncation.
+A16 all3 firstcall observations include11Sources/correction (13/17/11ranges rules/Laya/fixed).
+Rules/fixed deliveronlyoldsession1eight,wrongshorttitle anddenyacceptedcorrection. Laya firstreturns
+s1t5–8,second s1t3–6,omits acquiredtitle/dates/correction. Validpriorref isunderread_goal,not
+task_context:knownmaterials0/known_reference_reads0,initialremaining2. Rawhint notcountedasresolved
+knowncase andnotrelocated. Laterall3 have12arrivals/prior tools,0retrieval. Rules/fixedunchangedshort
+title nowmatchesuserreversion butdenies actualcorrection/futureoptin/friendfields;no transition proof.
+Laya stillclaimsdegree/dates absent. ID/months/merit partlyright;studentID/email/private facts ignored.
+No credentialauthority verification,oldemail deletion,contact oracademic-record action claimed.
+
+Model/load1342.3313782120485 CPU already billed;whole child1384.120187 nested.6 measured remaining
+phases42.26611149995144 settled once,no livejob;unmeasured author/report/GPU/prices unknown.
+Cumulative49closed batches:92groups,552positions,449native completions/103protocol failures,
+1273 HTTP/4924061 known tokens,3026observations,26zero-state calls. Notaccuracy/independence.
+Source32/64 reports unchanged;no branches,labels ornewfits. Full M1–M5 remain open.
+
+ONLY LIVE neural job: original049,musique-family-000770/memops_B10,12positions,128frontier.
+Driver661710/child661726/exec86323;verify actualPID/files. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-049.json.
+No second neuraljob/offline settlement while live. Source-first beforeoutputs. Full128 train+4dev
+before once-only originalquota/seed prep. Latestv80/execution. Frozen2a179b58/update262/order/recipe
+unchanged;Lab3c892d30. No SHA,agents,new services,secondledger orremote writes. SavedCPU/train/
+Hostpilot stayclosed. Longcommand inputs use raw multiline heredocs.
+
+# Earlier: 2026-10-25 batch047 reviewed; batch048 LIVE
 
 Original047 (musique-family-000518/D21):12positions,5 native completions/7 Host length failures,
 all8192/null. Reasoning chars:rulesfirstdoc40514,Laya docs33341/36044 andearly36455,fixed docs38952/
