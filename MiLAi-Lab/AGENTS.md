@@ -1,4 +1,40 @@
-# LATEST: 2026-10-25 batch038 reviewed; batch039 LIVE
+# LATEST: 2026-10-25 batch039 reviewed; batch040 LIVE
+
+Original039 (musique-family-000401/B22):12positions,11 native completions/1 fixed missing-document
+Host truncation,8192/null,reasoning32117.27 HTTP/94272 known,unknown0;24 Host/3 View.15 finite
+untruncated forwards,89844 input,max7142;one load.12 retrievals,12 initial+47 post=59 observations,
+0 zero-state calls.1 rules early View material-budget rejection. Full source-first/mechanical/
+source/packet/output review complete;partial document answers literal-unchanged at closure.
+
+Missing pool rules/Laya preserve absent Mason/show/cast relationship. Full pool all3 actually
+deliver Mason→Neighbours→Taylor Glockner and answer that actor correctly. Fixed also delivers
+Bailey/Calen body supporting extra actor. Rules subsequent empty budget-exhausted call does not
+invalidate earlier sufficient body;Laya succeeds after one READ. No forced extra reads/labels.
+B22 all3 early packets contain all7 Sources;basic reported preferences and one remote day grounded.
+Rules wrongly attributes narrator recharge-day framing to spouse;Laya/fixed separate it from reported
+productivity. Fixed also asserts old-clinic dislike not explicitly reported. Necessity/trait language
+remains interpretation,not confirmed psychology. Later all3 get16arrivals/prior tools,0retrieval.
+Rules valid stop JSON gives226-character mid-sentence answer (242content,10273reasoning,2460completion),
+native COMPLETED retained. Laya/fixed omit actual role-change reaction,trust/childcare evidence and
+future layout versus narrator forecast/other-team move. Fixed falsely says no future plans;Laya
+reverses current building light/space claim. Stable old preferences are not update-handling proof.
+Private names,address/extension stay ignored;no workplace/clinical/contact action or external lookup.
+
+Model/load923.7451582190088 CPU already billed;whole child961.807403 nested.7 measured remaining
+phases38.512089331991135 settled once with no live job. Unknown unmeasured work/GPU/prices retained.
+Cumulative40 closed batches:76groups,450positions,374 native completions/76 protocol failures,
+1026 HTTP/3912138 known tokens,2422 observations,19 zero-state calls. Not accuracy/independence.
+Source32/64 reports/accounting unchanged. No branch preparation,labels or new fits.
+
+ONLY LIVE neural job: original040,musique-family-000180/memops_D02,12positions,128 frontier.
+Driver4139094/child4139109/exec86185;verify actual PID/files. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-040.json.
+No second neural job/offline settlement while live. Source-first review before actual answers.
+Full128 train+4dev precede once-only original quota/seed prep. Latestv71/execution;M1–M5 still open.
+Frozen2a179b58/update262/order/recipe unchanged;Lab3c892d30. No SHA,agents,new services,second ledger,
+remote writes. Saved CPU/train and Host pilot remain closed.
+
+# Earlier: 2026-10-25 batch038 reviewed; batch039 LIVE
 
 Original038 (musique-family-000079/C01):12positions,10 native completions/2 Host truncations,
 Laya target-film pool/fixed missing-film pool,8192/null,reasoning33830/32939.26 HTTP/97618 known,
