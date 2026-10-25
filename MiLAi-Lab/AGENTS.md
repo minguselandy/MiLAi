@@ -1,4 +1,40 @@
-# LATEST: 2026-10-25 batch025 reviewed; batch026 LIVE with 6 declared positions
+# LATEST: 2026-10-25 batch026 reviewed; batch027 LIVE, one history/12 positions
+
+Batch026 (musique-family-000689) attempted its original 6 positions: 5 process completions and
+1 rules/full-pool Host truncation, 8192 output tokens, null content, 35756 reasoning characters.
+18 HTTP requests used 53701 known tokens, unknown increment 0; 16 Host and 2 View calls.
+15 finite, untruncated local forwards used 87038 input tokens, maximum 6521; one load.
+10 retrievals, 10 initial + 39 post = 49 state observations; no zero-state calls or explicit failed
+operations. Full literal source/bank/capture/actual Host-packet mechanics passed.
+
+Missing pool has no Factory Floor/DFA relation; completed abstentions are grounded. Full pool has
+Factory Floor album → DFA Records → founded 2001, distinct from album release 2013 and other labels.
+No collector delivers the available DFA founding body. Rules truncates after album/other-label
+material; View unresolved target drifts to Factory Floor establishment. Laya stops after album and
+Equator material; fixed identifies DFA, then makes a targeted follow-up with only 2 acquisition
+reads left. Actual SEARCH8 and SEARCH16 spend both: states show 2 then 1 remaining, 0 material reads,
+0 known-reference reads and an empty packet. This call has real decisions, not zero-state status.
+No budget change, alternate query rerun, hand-picked winner or native annotation repair.
+
+Review: original-feedback-v2-collection-dispatch/train-026-review.json. Model/load CPU already
+billed: 867.282651911949 seconds; whole child 900.370139 is nested. 8 measured remaining phases,
+33.30805661705104 CPU seconds, settled once with no live job. Unmeasured work remains unknown.
+Cumulative 27 closed batches: 53 declared groups, 306 attempts, 248 process completions/58 failures,
+703 HTTP/2744524 known tokens, 1643 state observations and 18 zero-state calls. These are not
+accuracy, independent rows or branch eligibility. First32 accounting stays scoped to 000–015.
+No labels, branches or new feedback fits have run.
+
+ONLY LIVE neural job: original batch027, memops_A04, 12 declared positions in one history.
+Driver3357428/child3357443/exec96723; verify actual PID/files. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-027.json.
+Preserve original request order; do not assume two histories or two requests per history.
+No second neural job or offline settlement while live; review closure before the next untouched
+batch. Full128 train and 4 dev collection precede once-only original quota/seed preparation.
+Latest v58/execution. Frozen2a179b58/update262/order/budgets unchanged; Lab behavior3c892d30.
+Full M1–M5 remain open. No SHA, agents, new services, second ledger or remote writes.
+Saved CPU/train and Host pilot remain closed.
+
+# Earlier: 2026-10-25 batch025 reviewed; batch026 LIVE with 6 declared positions
 
 Batch025 (musique-family-000431/F07) attempted 12 positions: 9 process completions and 3 Host
 truncations (rules both document pools, Laya second pool). All used 8192 output tokens with null
