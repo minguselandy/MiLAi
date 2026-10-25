@@ -1,4 +1,47 @@
-# LATEST: 2026-10-25 batch052 reviewed; batch053 LIVE
+# LATEST: 2026-10-25 batch053 reviewed; batch054 LIVE
+
+Original053 (musique-family-000850/A27):12 positions,10 native COMPLETED/2 Laya document
+failures. First is actual stop/null JSON_ACTION_MALFORMED,1966 completion/9483 reasoning;
+second length8192/null,37306 reasoning. Earlier commentary called both length; corrected
+from closed responses without removing failures.34 HTTP/136092 known,unknown0;31 Host/3 View.
+38 finite untruncated forwards,239575 input,max11881,one load.19 retrievals,18 initial+67 post
+=85 observations;one true zero-state final Laya first-document call.5 material-budget rejects.
+
+Neither document pool supplies full requested county-border chain. First Newport→York
+explicit and bridge context available, but bridge not delivered by any collector; second
+has no Newport location. Rules/fixed preserve unknown. Nearby-place county not proof of
+Newport Pagnell county; rules View marks inference but source does not establish it.
+Mecklenburg Virginia distances not North Carolina border evidence. No geography/gold repair.
+
+A27 initial rules/fixed deliver all7, mostly grounded preferences. Rules transfers assistant
+transcription rationale to user; fixed adds plain replacement lanyards for unnamed coworkers.
+Laya observes all7 in7/13 ranges across two calls but returns only s1t1–4 twice; misses ID-format
+preference and coworker examples. Generated rules initial View rejected by material budget,
+not delivered; do not infer Host use. Later all3 have16 arrivals/prior tools. Rules/fixed no new
+retrieval. Laya lastbefore19 full ranges/15 unique Sources includes planned badge s3t5–6,
+routine s3t7 and coffee s2t1–2, all absent actual packet. Returns s1t1–2,s1t5–8,s3t1–4.
+Four late budget rejections, terminal CONTEXT failed; no extra post-input invented.
+Laya adds new parking/profile examples but denies badge plan, changes student institution to
+former employer, and presents assistant-only coworker photo/bio unqualified. All retain current
+credential, not proof of update success; private identifiers/names/workplace details ignored.
+
+Child CPU already billed2750.0947083710116; whole2794.416065 nested. Seven remaining measured
+phases44.95732522498827 settled once after PIDs absent. Partial document answers unchanged.
+Readonly failed-result probe first assumed final_answer key; inspected actual failure schema,
+retained absent answer/FAILED, no rerun or ledger mutation; failed CPU unknown.
+Cumulative54 closed batches:102 groups,612 positions,500 native completions/112 failures,
+1427 HTTP/5537580 known tokens,3407 observations,32 zero-state calls. Not accuracy/eligibility.
+Source32/64 reports unchanged. Readonly post-collection entrypoint review did not sample states.
+
+ONLY LIVE neural job: original054,musique-family-000477/memops_E14,12 positions,128 frontier.
+Driver1089676/child1089691/exec21425; verify actual PID/files. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-054.json.
+No second neural job or offline settlement while live. Read sources before outputs.
+Full128 train+4dev before once-only original quota/seed preparation. Latest v85/execution.
+M1–M5 remain open; no branches, labels or fits. Frozen2a179b58/update262/recipe unchanged;
+Lab3c892d30. No SHA, agents, new services, second ledger or remote writes.
+
+# Earlier: 2026-10-25 batch052 reviewed; batch053 LIVE
 
 Original052 (musique-family-000675/F12): 12 positions, 11 native COMPLETED and one Laya
 missing-pool Host length failure (8192 tokens/null content, 24854 reasoning characters).
