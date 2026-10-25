@@ -1,4 +1,40 @@
-# LATEST: 2026-10-25 batch049 reviewed; batch050 LIVE
+# LATEST: 2026-10-25 batch050 reviewed; batch051 LIVE
+
+Original050 (musique-family-000683/D14):12positions,10 native completions/2 Laya Hostlength failures,
+missingdoc/late,8192/null,reasoning36555/33574.32 HTTP/118075 known,unknown0;29 Host/3 View.
+24 finite untruncated forwards,147351 input,max7191;one load.19retrievals,17initial+64post=81
+observations;2 true zero-state finalLaya missing-pool calls.3 ruleslate material-budget rejects.
+Source-first/partial/mechanical/semantic+two-hop/temporal/queued-call audit complete.
+
+Missingdoc rules/fixed preserveunknown anddistinguishEcholCole;Laya truncates. Full Laya actually
+getsEchols→Madison inoneHostturn,thenMadison→Boone innext;fixedonecall alsohasboth. Rulesgets
+birthcity,followupSEARCH exhausts remainingallowance,theninventsMadisonCounty despiteavailable
+Boonebody. Correctfirsthop/View notcountyproof;no externalgeography/native-label rewrite.
+D14 earlyrules/fixed all7,completedtransfer/fee reversal andhistoricalrate largelygrounded. Laya
+observesall7/11ranges butselectsfirst4 andsaysamount/status notquantified. Fixed2differentqueries
+queuedinoneHostresponse returnidenticalall7,notadaptiveconfirmation. Rules View combinespriorholding
+andpost-transfer reduction underprior temporal tag;separate scopes notpreserved,no downstreamcauseclaim.
+Later16arrivals/prior tools all3. Rules newpacket oldHostpair+s2t1–2+s3t5–7,observed13unique/15ranges:
+recap supportswallet/rent/deletedtool/dormantclosure,butpendingbalance-transfer notcovered;unknown
+old-savingsclosure groupedunderpending andoldrent-autodebit wording retainedalongside newroute.
+Fixed0retrieval stale/denies pendingactions andclosure;Laya0retrieval truncates. Historicalreports
+notlivefinancialverification. Private figures/names ignored;no transactions/account/contactactions.
+
+Model/load1548.6656738990082 CPU already billed;whole child1591.253108 nested.7 measured remaining
+phases43.25050837799191 settled once,no livejob. Partial answers unchanged;unmeasured author/report/
+GPU/prices unknown. Cumulative51closed batches:96groups,576positions,471native completions/105
+protocol failures,1331 HTTP/5140240known tokens,3176observations,28zero-state calls. Notaccuracy/
+independence.96groups isnot a newtraining frontier. Source32/64 reports unchanged;no branches/labels/fits.
+
+ONLY LIVE neural job: original051,musique-family-000881/memops_B26,12positions,128frontier.
+Driver855507/child855522/exec79686;verify actualPID/files. Driver:
+artifacts/evidence-gap-20261023/original-feedback-v2-collection-dispatch/train-051.json.
+No second neuraljob/offline settlement while live. Source-first beforeoutputs. Full128 train+4dev
+before once-only originalquota/seed prep. Latestv82/execution;M1–M5 still open. Frozen2a179b58/
+update262/order/recipe unchanged;Lab3c892d30. No SHA,agents,new services,secondledger orremote writes.
+SavedCPU/train/Hostpilot stayclosed. Longcommand inputs use raw multiline heredocs.
+
+# Earlier: 2026-10-25 batch049 reviewed; batch050 LIVE
 
 Original049 (musique-family-000770/B10):12 native COMPLETED,not12 semantic successes.26 HTTP/98104
 known,unknown0;23 Host/3 View.20 finite untruncated forwards,143301 input,max11582;one load.
