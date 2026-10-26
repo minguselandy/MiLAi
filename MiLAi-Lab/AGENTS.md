@@ -1,4 +1,47 @@
-# LATEST: 2026-10-26 first48 post states reviewed; unsupported dates and proposed paths retained
+# LATEST: 2026-10-26 first56 post states reviewed; tiny completions and equivalent source packing retained
+
+States0–183:184 selected states/552pairs,128unique families;128rulesinitial+56rulespost.
+NEXT source-first state184. Full train768/dev48/all6strata/allreviews/largestpoolcompile/original
+fits remain. Source32review remains64of192; first64 source-family fullpool not complete either.
+Quality answer207 directions/103ties/242unknown; final275/35/242 (160right115left).
+Quality delivery293 directions/190ties/69unknown; final424/59/69 (259right165left).
+293quality-tie targets:77incomparable/127left/72right/17equal-cost,199cost-only changes.
+New15=6answer/9delivery,6LEFT/9RIGHT; not15correctanswers. Three incomparable newties retained.
+Direction-bearing states quality114/136,final141/184(answer/delivery); pairloss means withinstate.
+
+176 poet known/deathplace absent; faithfulView unresolved butHost adds outsidebiography/title.
+177 FIVE records observed includingcorrectinguser s1t5, Hostreceipt empty; extraHR-access story
+notactualpermissionfailure. Directraw givescurrentdepartment/manager, correctionnotplannedrename.
+178 different saltmarches/languages not valid bridge; unsupportedhistories/question-onlyoutput
+kept, no reliableanswerorder.179 Viewn6 attaches assistant-specific stimuluslist to user s1t5,
+actualspecificlist fromassistant s1t6; broaduserpreference remains supported, notclinicaladvice.
+180 actualfoundingdoc11availablebutneverdelivered; onlylabelpremise, partialgapnotunanswerablepool.
+181 nativeCOMPLETED/stop answers literal'...' (3codepoints/raw16) and'{' (1/raw14), not repaired.
+Fullhandoff answersknownlocation/relativeleaseend andunknownnoticeterm, no calendaryearguess.
+182 allanswersmisparse songtitleasperfomer/band, boundednodate notcorrectunderstanding.
+183 samefour originalbodies packedasonevs2materials, differentanswers: selectedfuturepromisewith
+quote/brace tail, fullanswerknownaddress/text andunknownmailingdateswith7literalbackslash-n escapes.
+No private contact values in tracked summaries, no dates/ZIP invented or contact action.
+
+Newignored audits: post-prefix-accounting-states-176-183-audit-v1.json (24cases),
+semantic-boundaries-states-177-179-180-181-183-audit-v1.json. All168postcases prefix/newoperations/
+newgeneration/fullreceipt costs verified. Source/role/body/frame checks literal, no hashes.
+No source/query/citation/output/status repair or reasoning salvage. Samebodycoverage notsame
+container/wirecost; unknownpairorders preserved. Helpers/runtime/Schema/API/permissions/models
+unchanged; no extra modelcalls, unexecutedlabels, poolcompile, newfits or remote actions.
+
+Root pendingCPU57.579669051999986 across239 explicit entries inv128; no rootledgerwritewhilelive.
+ONLY neuraljob continuation001 original policies60–2284,2225branches/748states. Driver2522910,
+child2522923,exec69037; verify actual PIDs/cmdline/files. Snapshot2023tool rows, Host1777C/245F/
+1pending in original fixed_context post queue. First60 retained/settled, neverretry.
+Onterminal inspect actualboundary; settle onlynoneuralprocess, then unchanged still-unattempted
+suffix innewoutput. NativependingCPU nested inouter wholechild-minus-ledgerCPU, not additive.
+Other reading/author/import/probe CPU unknown, noGPU/pricesimputedzero. Finishtrain+142devbranches/
+all816reviews/largestpoolonce/32-64SOURCEFAMILYderivation/nine192fits/fullM1–M5 remainopen.
+NoSHA,agents,newservices,secondledger,remote writes orcompletion.
+Latest data/manifests/evidence-gap-development-progress-20261023-v128.json.
+
+# Earlier: 2026-10-26 first48 post states reviewed; unsupported dates and proposed paths retained
 
 States0–175:176 selected states/528pairs,128unique families;128rulesinitial+48rulespost.
 NEXT source-first state176. Full train768/dev48/all6strata/allreviews/largestpoolcompile/original
