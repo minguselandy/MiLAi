@@ -1,4 +1,47 @@
-# LATEST: 2026-10-26 first56 post states reviewed; tiny completions and equivalent source packing retained
+# LATEST: 2026-10-26 first64 post states reviewed; source64 remains only128 of384 states reviewed
+
+States0–191:192selected states/576pairs,128unique families;128rulesinitial+64rulespost.
+NEXT source-first state192. Source64 cohort:384selected states across6cells64each; reviewed128
+rulesinitial/post states with384pairs, remaining256other-collector states. This128 nestsincumulative192,
+not additive or complete source64feedback. Source32still64of192. Largestpoolcompile/originalfits pending.
+Quality answer217 directions/114ties/245unknown; final290/41/245 (168right122left).
+Quality delivery305 directions/202ties/69unknown; final441/66/69 (268right173left).
+316quality-tie targets:88incomparable/131left/78right/19equal-cost,209cost-only changes.
+New10=5answer/5delivery,4LEFT/6RIGHT; not10correctanswers. Eleven incomparable/two equal-cost newties
+retained. Direction-bearing states quality119/142,final148/192(answer/delivery); lossmeanwithinstate.
+
+184 currentpoollyricist/songabsent, no cross-requestsupport.185 favorite/completed/ownedcandidate/
+otherpersonreading separate; tentativefuturewordingretained, failedHostanswerpairsunknown.
+186 clubassociationknown/leagueabsent, no outsideleagueorlegalownerproof.187 nativeCOMPLETED
+answer1077codepoints includesdraft/tool-instructiontail anddanglingbrace, actualresponse tool_calls
+absent. Savedtextnotinstruction, no toolaction or clean-prefixsalvage. Device scope remains distinct.
+188 correctcountyanswer butcountybodydoc16notdelivered; school-cityfirsthopnotfullchainproof.
+189 incorrectphone transcription notactualretiredservice; lease notprefilled-formproof. Viewn7
+negativealternatecontactcitesassistantquestion, notlandlordstatement; scopeabsencewithinrecords only.
+190 sameactress/filmknown-spouseunknown; no co-star→marriage inference.191 actual23sourcefrontier,
+onlylatest7delivered in2arms; correcttentativebirthday/willingexception/nopreferencechange, butolder
+actualdiningexamplesavailableunacquired. No fixedotherreceipts orconfirmedbooking/attendance inferred.
+
+Newignored audits: post-prefix-accounting-states-184-191-audit-v1.json (24cases),
+semantic-boundaries-states-187-188-189-191-audit-v1.json,
+review-first64-rules-initial-post-scope-audit-v1.json. All192postcases prefix/newoperations/newgen/
+fullreceipt cost verified. Source64 scope audit metadata only, not independent semantic validation.
+Samefamily neednotmeansameactualrequest/pool. No source/query/citation/outputrepair, newmodelcalls,
+unexecutedlabels, compile ornewfits. Helpers/runtime/Schema/API/permissions/models unchanged.
+
+Root pendingCPU60.51794622099999 across250explicit entries inv129; no rootledgerwritewhilelive.
+ONLY neuraljob continuation001 original policies60–2284,2225branches/748states. Driver2522910,
+child2522923,exec69037; verify actual PIDs/cmdline/files. Snapshot2154tool rows, Host1902C/252F.
+First60 retained/settled, neverretry. Train tail nearing closure: inspect actualboundary, settleonly
+noneuralprocess; nativependingCPU nested inouter wholechild-minus-ledgerCPU, not additive. Then
+execute unchanged142dev policies; read-only readiness check foundall142captures, no dev output yet.
+Iftrainstops early, retainfailures and continueonlyunchangedstill-unattemptedsuffix innewoutput.
+Other reading/author/import/probe CPU unknown, noGPU/pricesimputedzero. Finishall816reviews/
+largestpoolonce/32-64SOURCEFAMILYderivation/nine192fits/fullM1–M5 remainopen.
+NoSHA,agents,newservices,secondledger,remote writes orcompletion.
+Latest data/manifests/evidence-gap-development-progress-20261023-v129.json.
+
+# Earlier: 2026-10-26 first56 post states reviewed; tiny completions and equivalent source packing retained
 
 States0–183:184 selected states/552pairs,128unique families;128rulesinitial+56rulespost.
 NEXT source-first state184. Full train768/dev48/all6strata/allreviews/largestpoolcompile/original
