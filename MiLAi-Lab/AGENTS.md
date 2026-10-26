@@ -1,4 +1,45 @@
-# LATEST: 2026-10-26 first64 post states reviewed; source64 remains only128 of384 states reviewed
+# LATEST: 2026-10-26 USER REQUESTED PAUSE; no experiments until explicit resume
+
+Goal status PAUSED. User explicitly requested stopping the current experiment and submitting
+work to GitHub. GitHub publication of the current branch is authorized; experiment continuation
+is NOT authorized until explicit resume. Preserve all failures and interrupted attempts.
+
+Train branch queue CLOSED:2285original attempts/768states, tools2284COMPLETED/1FAILED;
+Host2012COMPLETED/273FAILED. Original first60 unchanged. Continuation001 all2225attempts finished
+with nativeCOMPLETED_WITH_MISSING_READOUTS,2605HTTP/11124120known tokens, unknown deltas0.
+Train total2685HTTP/11429077known tokens. Not all answers/tasks successful. No neural retries.
+Known continuation overhead4356.01174331CPU and254explicit root-review fields throughstate195
+61.68017881799999CPU SETTLED once with no experiment processes; HTTP/modelCPU not rebilled.
+Settlement: artifacts/evidence-gap-20261023/original-feedback-v2-train-continuation-001-settlement.json.
+
+Dev original142branch queue started only after train closure/settlement. Userpause SIGINT stopped
+child582148; coordinator582139 saved closure then exited (exec74287). Both absent. NativeFAILED/
+KeyboardInterrupt andouterFAILED_RETAINED/exit-2 preserved as actual interruption, not rewritten.
+Dev originalpolicies0–35 attempted36, tools36C; Host32C/4F. Laststate-011-branch-02 Host interrupted;
+44generationrequests/166055known tokens,1unknown generation usage increment remains reserved/
+charged, not refunded or retried. No branch artifacts beyond35. Original36–141 =106unattempted,
+nextstate-012-branch-00. After EXPLICIT RESUME inspect/settle pending costs, then only unchanged
+unattempted suffix in NEW output. Do not restartdev or retryinterruptedarm35.
+Pause checkpoint: artifacts/evidence-gap-20261023/original-feedback-v2-user-pause-20261026.json.
+
+Source review finalized0–195:196states/588pairs,128rulesinitial+68rulespost,128unique families.
+NEXT source-first196 afterresume. All204post case costs checked. Source32review64of192 and
+source64review128of384 remain incomplete; all816reviews/once-largestpool compilation/sourcefamily
+32-64derivation/nine192fits/fullM1–M5 still open. No new fits/compile/unexecuted labels.
+Beforepause new192–195 retained county gap, scope-specific emergency contacts, unacquired festival
+body with wrong duration, andold-only coping receipts incl priorHost question/retrievalpromise.
+Latestupdaterefinement/plansnotdelivered; assistant clinical language notindependentuser evidence.
+
+Dev knownCPU79.82209903200001 pending (outerchildresidual/preflight/coordinator); native case CPU
+nested, not additive. Fresh root measured pending0.24784811599999998CPU in2explicit files only
+(post-prefix192–195 audit andpausecheckpoint). Earlier250+4root fields settled, never rebill.
+Read-only dev preflight initially mistook structuredsource_version forstring; fixed againstactual
+{implementation_version,git_commit} metadata, no source/policy/modelattempt beforecorrection.
+Failed preflight/diagnostic/import/authoring/push CPU unmeasured, notzero. No ledger write afterpause.
+Raw private source/replay files remain ignored/local. NoSHA,agents,newservices,secondledger.
+Latest data/manifests/evidence-gap-development-progress-20261023-v130.json.
+
+# Earlier: 2026-10-26 first64 post states reviewed; source64 remains only128 of384 states reviewed
 
 States0–191:192selected states/576pairs,128unique families;128rulesinitial+64rulespost.
 NEXT source-first state192. Source64 cohort:384selected states across6cells64each; reviewed128
