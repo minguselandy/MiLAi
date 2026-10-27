@@ -94,5 +94,6 @@ def build_retrieval(service: MemoryService, token_count: Callable[[str], int],
         control_source_observation_tokens=control.get("source_observation_tokens"),
         control_view_capacity=control.get("view_capacity", 1),
         control_view_policy=control.get("view_policy", "incremental"),
+        control_view_builder=control.get("view_builder", "generated"),
         control_internal_views=control.get("internal_views", True))
 

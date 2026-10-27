@@ -527,10 +527,12 @@ class BenchmarkRun:
                 and settings.get("evidence_policy") != "question_pack_v1":
             raise ValueError("EVIDENCE_SELECTION_REQUIRES_QUESTION_PACKS")
         if settings.get("query_structure_policy") is not None:
-            from milai_lab.methods.query_structure import POLICIES
+            from milai_lab.methods.query_structure import BUILDERS, POLICIES
 
             if settings["query_structure_policy"] not in POLICIES:
                 raise ValueError("QUERY_STRUCTURE_POLICY_INVALID")
+            if settings.get("query_structure_builder", "generated") not in BUILDERS:
+                raise ValueError("QUERY_STRUCTURE_BUILDER_INVALID")
             if settings.get("evidence_policy") != "question_pack_v1" \
                     or settings.get("source_access") != "independent_v1" \
                     or settings.get("dependency_reading"):
@@ -1908,6 +1910,7 @@ class BenchmarkRun:
                 materials[0]["pre_read_calls"] = 1
             if self.settings.get("query_structure_policy"):
                 from milai_lab.methods.query_structure import (
+                    QueryStructureBuilder,
                     QueryStructurePolicy,
                     build_query_structure,
                 )
@@ -1928,7 +1931,8 @@ class BenchmarkRun:
                         [span["source_ref"] for material in native["source_materials"]
                          for span in material["source_ranges"]],
                         policy=cast(QueryStructurePolicy, self.settings["query_structure_policy"]),
-                        call=interpret)
+                        call=interpret, builder=cast(QueryStructureBuilder,
+                            self.settings.get("query_structure_builder", "generated")))
                 except ValueError as error:
                     question_key = (snapshot_id.removeprefix("native/").removesuffix(
                         "/retrieval.json") if self.settings.get("alignment_backend") else

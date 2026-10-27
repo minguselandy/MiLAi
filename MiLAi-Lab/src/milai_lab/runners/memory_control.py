@@ -4,6 +4,7 @@ from __future__ import annotations
 import json
 import time
 from collections.abc import Callable
+from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any
 
@@ -20,12 +21,40 @@ from milai_lab.methods.laya_memory_policy import (
 from milai_lab.methods.memory_control import (
     FixedContextMemoryPolicy,
     FixedMemoryPolicy,
+    MemoryAction,
+    MemoryControlState,
     MemoryPolicy,
     OneShotMemoryPolicy,
     PursuitMemoryPolicy,
     RulesMemoryPolicy,
 )
 from milai_lab.providers.laya_local import NativeDecision
+
+
+@dataclass
+class HandoffOnlyPolicy:
+    """F1 research condition: select delivery from the same acquired state.
+
+    The executor still verifies its full legal menu and original allowance. Only
+    the policy's decision menu is restricted; no evidence, budget or history is
+    rewritten, and the underlying selector is unchanged.
+    """
+
+    policy: MemoryPolicy
+    record: Callable[[dict[str, Any]], None]
+
+    def choose(self, state: MemoryControlState, actions: list[MemoryAction]) -> str:
+        offered = [action for action in actions if action.kind == "HANDOFF"]
+        if not offered:
+            raise ValueError("Handoff comparison requires an executable HANDOFF")
+        self.record({"event": "handoff_comparison_input", "state": state.project(),
+                     "actions": [asdict(action) for action in offered]})
+        selected = offered[0].id if len(offered) == 1 else self.policy.choose(state, offered)
+        if selected not in {action.id for action in offered}:
+            raise ValueError("Handoff comparison policy selected outside the delivery menu")
+        self.record({"event": "handoff_comparison_selection", "selected": selected,
+                     "selection_mode": "only_available_handoff" if len(offered) == 1 else "policy"})
+        return selected
 
 
 def dense_control_pool(
@@ -51,6 +80,10 @@ def memory_policy(
     admit: Callable[[], None], record: Callable[[dict[str, Any]], None],
     models: dict[tuple[Any, ...], NativeDecision] | None = None,
 ) -> MemoryPolicy:
+    if config.get("routing") == "handoff_only":
+        unrestricted = {key: value for key, value in config.items() if key != "routing"}
+        return HandoffOnlyPolicy(memory_policy(unrestricted, budget, call=call, admit=admit,
+                                               record=record, models=models), record)
     kind = config["policy"]
     if kind == "fixed":
         return FixedMemoryPolicy(config.get("reads", 4))

@@ -138,7 +138,7 @@ def test_legacy_view_metadata_comes_from_actual_sources_without_rewriting_interp
         assert list(store.conn.iterdump()) == before
 
 
-def test_source_presentation_keeps_capture_context_and_existing_aliases(tmp_path, monkeypatch):
+def test_new_aliases_follow_capture_order_and_existing_aliases_stay_stable(tmp_path, monkeypatch):
     with SqliteStore.from_conn_string(str(tmp_path / "bank.sqlite")) as store:
         service = service_at(store, tmp_path)
         # Opaque IDs deliberately sort opposite to actual arrival order.
@@ -167,14 +167,14 @@ def test_source_presentation_keeps_capture_context_and_existing_aliases(tmp_path
             original[ref]["origin"] for ref in (question, unrelated, reply)]
         assert [s["reported_at"] for s in inputs[0]["sources"]] == [
             "2035-06-02T12:00:00+08:00", "2035-05-01T12:00:00+08:00", None]
-        # Presentation must not renumber the established opaque-ID bindings.
-        assert [s["id"] for s in inputs[0]["sources"]] == ["e2", "e1", "e0"]
+        # New aliases follow the same order as the bodies, not opaque source IDs.
+        assert [s["id"] for s in inputs[0]["sources"]] == ["e0", "e1", "e2"]
         later = service.capture_tool("conversation-a", "3", "inventory.preview",
             '{"preview": true, "changed": false}', None)["source_ref"]
         second, _ = build_query_structure(service, "What was reported now?", "",
             [unrelated, reply, question, later], policy="incremental", call=call,
             source_events=list(reversed(service.sources())), force_refresh=True)
-        assert [s["id"] for s in inputs[1]["sources"]] == ["e2", "e1", "e0", "e3"]
+        assert [s["id"] for s in inputs[1]["sources"]] == ["e0", "e1", "e2", "e3"]
         assert inputs[1]["sources"][-1]["origin"] == "inventory.preview"
         assert inputs[1]["sources"][-1]["text"] == '{"preview": true, "changed": false}'
         assert all(second["source_bindings"][key] == value
@@ -184,6 +184,54 @@ def test_source_presentation_keeps_capture_context_and_existing_aliases(tmp_path
             assert item["session"] == service.source(ref)["session"]
             assert item["origin"] == service.source(ref)["origin"]
         assert {ref: service.source(ref) for ref in original} == original
+
+
+def test_refresh_preserves_legacy_aliases_while_appending_new_source(tmp_path):
+    from milai_lab.methods.query_structure import open_structure
+
+    with SqliteStore.from_conn_string(str(tmp_path / "bank.sqlite")) as store:
+        captured = datetime(2039, 10, 24, tzinfo=UTC)
+        service = MemoryService(store, ("legacy-alias", "alice"), "alice", tmp_path / "lock",
+                                functional_contract="functional_v1", clock=lambda: captured)
+        first = service.capture_user("s", "first", "Was the permit approved?")["source_ref"]
+        captured = datetime(2039, 10, 25, tzinfo=UTC)
+        second = service.capture_assistant("s", "second", "The decision is pending.")["source_ref"]
+        inputs = []
+
+        def call(messages, _schema):
+            payload = json.loads(messages[1]["content"])
+            inputs.append(payload)
+            return interpretation(payload)
+
+        build_query_structure(service, "Permit status?", "", [first, second],
+                              policy="incremental", call=call)
+        legacy = cached_structure(service)
+        # A real persisted legacy shape: aliases differ from body capture order.
+        legacy["source_bindings"] = {
+            "e0": {"source_ref": second, "source_revision": 1},
+            "e1": {"source_ref": first, "source_revision": 1}}
+        legacy["structure"]["nodes"] = {
+            "n0": {"text": "The decision is pending.", "evidence": ["e0"], "kind": "reported"},
+            "n1": {"text": "Was the permit approved?", "evidence": ["e1"], "kind": "reported"}}
+        legacy.pop("source_metadata")
+        store.put((*service.namespace, "query_structure_v1"), "current", legacy, index=False)
+        captured = datetime(2039, 10, 26, tzinfo=UTC)
+        later = service.capture_tool("s", "later", "permit.preview",
+                                     '{"approved": false}', None)["source_ref"]
+        updated, report = build_query_structure(service, "Permit status?", "",
+            [later, second, first], policy="incremental", call=call, force_refresh=True)
+        payload = inputs[-1]
+        assert [s["id"] for s in payload["sources"]] == ["e1", "e0", "e2"]
+        assert payload["previous"] == legacy["structure"]
+        assert all(updated["source_bindings"][key] == value
+                   for key, value in legacy["source_bindings"].items())
+        assert updated["source_bindings"]["e2"]["source_ref"] == later
+        assert report["action"] == "refresh" and updated["revision"] == 2
+        packet = project_packs([open_structure(service, updated)], [-1],
+                               compact_view_bindings=True)[0]
+        assert {alias: location["source_ref"]
+                for alias, location in packet["source_locations"].items()} == {
+                    "e0": second, "e1": first, "e2": later}
 
 
 @pytest.mark.parametrize("routes", [[[]], [], [["n0"], ["n1"]]])

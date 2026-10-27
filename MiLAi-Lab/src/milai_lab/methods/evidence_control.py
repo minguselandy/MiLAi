@@ -24,6 +24,8 @@ from milai_lab.methods.evidence_reading import (
 from milai_lab.methods.evidence_selection import original_terms, request_terms
 from milai_lab.methods.memory_control import MemoryAction, MemoryControlState
 from milai_lab.methods.query_structure import (
+    BUILDERS,
+    QueryStructureBuilder,
     QueryStructurePolicy,
     build_query_structure,
     cached_structures,
@@ -36,10 +38,14 @@ from milai_lab.methods.source_observations import SourceObservationBudget, Sourc
 
 
 def controlled_reader_packet(evidence: list[dict[str, Any]], reason: str) -> dict[str, Any]:
+    provenance = ("Extractive Views quote source text with its reporting context; other "
+                  "interpretations are model-derived, not original sources. "
+                  if any(item.get("builder") == "extractive" for item in evidence) else
+                  "Interpretations are model-derived, not original sources. ")
     return {"ok": True, "schema": "question_evidence_v1", "evidence": evidence,
         "control_handoff": reason,
         "instructions": "Answer the original request from delivered evidence. "
-            "Interpretations are model-derived, not original sources. Handoff does not "
+            + provenance + "Handoff does not "
             "certify sufficiency. Report missing conditions or sources explicitly."}
 
 
@@ -54,6 +60,7 @@ class EvidenceOperations:
         excluded_source_refs: tuple[str, ...] = (),
         view_capacity: int = 1,
         view_policy: QueryStructurePolicy = "incremental",
+        view_builder: QueryStructureBuilder = "generated",
         internal_views: bool = True,
         view_updates: bool = True,
         known_materials: list[dict[str, Any]] | None = None,
@@ -81,11 +88,15 @@ class EvidenceOperations:
         self.attempted: set[tuple[int, bool]] = set()
         self.searched = False
         self.view_capacity = view_capacity
+        if view_builder not in BUILDERS:
+            raise ValueError("QUERY_STRUCTURE_BUILDER_INVALID")
         self.view_policy = view_policy
+        self.view_builder = view_builder
         self.internal_views = internal_views
         self.view_updates = view_updates
         self.checkpoint_configuration = {
             "view_capacity": view_capacity, "view_policy": view_policy,
+            **({"view_builder": view_builder} if view_builder != "generated" else {}),
             "search_batch_sizes": list(search_batch_sizes), "max_searches": max_searches,
             "delivery_selection": delivery_selection,
             "source_observation_tokens": (source_observation.max_tokens
@@ -102,7 +113,9 @@ class EvidenceOperations:
         self.observed_source_attempts: set[tuple[str, int, int]] = set()
         self.visibility_epoch = service.forget_epoch
         self.excluded_source_refs = list(excluded_source_refs)
-        self.views = cached_structures(service, view_capacity) if internal_views else {}
+        self.views = {slot: view for slot, view in cached_structures(
+            service, view_capacity).items() if view.get("builder", "generated") == view_builder
+        } if internal_views else {}
         started = time.perf_counter()
         cursors = [v["arrival_cursor"][0] for v in self.views.values() if v["arrival_cursor"]]
         since = min(cursors) if cursors else None
@@ -752,7 +765,7 @@ class EvidenceOperations:
             try:
                 built, report = build_query_structure(self.service, state.task["request"],
                     state.task["query_time"], list(refs), policy=self.view_policy,
-                    call=self.refresh_call,
+                    call=self.refresh_call, builder=self.view_builder,
                     source_events=events, force_refresh=True, slot=slot,
                     capacity=self.view_capacity, replace_slot=replace,
                     retrieval_request=state.task.get("retrieval_request"),

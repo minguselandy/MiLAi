@@ -548,6 +548,7 @@ def project_pack(item: dict[str, Any], index: int) -> dict[str, Any]:
         return result
     if item["kind"] == "query_structure":
         return {**result, "interpretation": copy.deepcopy(item["structure"]),
+                **({"builder": item["builder"]} if "builder" in item else {}),
                 "source_bindings": copy.deepcopy(item["source_bindings"]),
                 **({"source_metadata": copy.deepcopy(item["source_metadata"]),
                     "source_metadata_semantics": "Capture metadata, not semantic validation. "
@@ -738,8 +739,12 @@ def project_packs(
                     "not events or validity.")
             if locations:
                 projected.update(source_locations=copy.deepcopy(locations),
-                    source_location_semantics="Navigation only; these original bodies "
-                        "are not delivered. source_bindings identifies originals in this packet.")
+                    source_location_semantics=(
+                        "Locations bind the literal source excerpts in this View; quoting "
+                        "does not establish the quoted claims as true."
+                        if projected.get("builder") == "extractive" else
+                        "Navigation only; these original bodies are not delivered. "
+                        "source_bindings identifies originals in this packet."))
             projected["source_bindings"] = {
                 alias: sources.get((binding["source_ref"], binding["source_revision"]),
                                    "support_not_opened")

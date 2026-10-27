@@ -700,7 +700,7 @@ def prepare(
     settings = entrypoint_settings(read_json(settings_path), "functional")
     allowed = {
         "laya_impact", "writer_input", "memory_control", "retrieval_tool", "business_tools",
-        "host_source_arrivals",
+        "host_source_arrivals", "host_evidence_presentation",
         "profile",
         "host",
         "capacity",
@@ -821,6 +821,11 @@ def prepare(
         raise ValueError("SOURCE_RANGE_TOKENS_REQUIRE_RETRIEVAL_AND_POSITIVE_INTEGER")
     if settings.get("host_source_arrivals") and not settings.get("retrieval_tool"):
         raise ValueError("HOST_SOURCE_ARRIVALS_REQUIRES_RETRIEVAL_PROFILE")
+    if "host_evidence_presentation" in settings and (
+        settings["host_evidence_presentation"] != "request_adjacent_metadata_v1"
+        or not settings.get("retrieval_tool")
+    ):
+        raise ValueError("HOST_EVIDENCE_PRESENTATION_REQUIRES_RETRIEVAL_AND_DECLARED_MODE")
     if edit_features.enabled and (
         edit_interface != "I2" or settings.get("memory_method") not in FUNCTIONAL_ARMS
     ):
@@ -2561,6 +2566,9 @@ def message(
     replay_retrieval: dict[str, Any] | None = None,
     control_policy_override: dict[str, Any] | None = None,
     previous_host_message: str | None = None,
+    host_snapshots: Path | None = None,
+    replay_host_message: dict[str, Any] | None = None,
+    host_presentation_override: str | None = None,
 ) -> dict[str, Any]:
     freeze = frozen(root)
     workflow = {"reservation_v1": "reservation", "document_publication_v1": "document"}.get(
@@ -2571,7 +2579,28 @@ def message(
     profile_state = root / "profile-state.json"
     if profile_state.exists() and read_json(profile_state).get("disabled"):
         raise ValueError("FUNCTIONAL_PROFILE_DISABLED")
-    settings = freeze["config"]
+    settings = deepcopy(freeze["config"]) if replay_host_message is not None else freeze["config"]
+    if host_snapshots is not None or replay_host_message is not None:
+        if (not settings.get("retrieval_tool") or settings["request_mode"] != "disabled"
+                or settings.get("business_tools") != []
+                or settings.get("memory_view_mode", "legacy") == "legacy"
+                or given_retrieval_request is not None or replay_retrieval is not None
+                or recorded_tool_schemas is not None
+                or model_tool_choice is not None
+                or settings.get("completion_tool_choice", "auto") != "auto"
+                or (host_snapshots is not None and replay_host_message is not None)
+                or not freeze["source_version"].get("git_commit")):
+            raise ValueError("PRE_HOST_CAPTURE_REQUIRES_DECLARED_VERSION_AND_AUTONOMOUS_RETRIEVAL")
+    if replay_host_message is not None:
+        if (host_presentation_override not in {"current", "request_adjacent_metadata_v1"}
+                or replay_host_message["source_version"] != freeze["source_version"]):
+            raise ValueError("FROZEN_HOST_PRESENTATION_OR_VERSION_INVALID")
+        if host_presentation_override == "current":
+            settings.pop("host_evidence_presentation", None)
+        else:
+            settings["host_evidence_presentation"] = host_presentation_override
+    elif host_presentation_override is not None:
+        raise ValueError("HOST_PRESENTATION_OVERRIDE_REQUIRES_PRE_HOST_SNAPSHOT")
     if retrieval_step_snapshots and retrieval_snapshots is None:
         raise ValueError("CONTROL_STEP_CAPTURE_REQUIRES_RETRIEVAL_SNAPSHOTS")
     if ((retrieval_snapshots is not None or replay_retrieval is not None)
@@ -2620,6 +2649,8 @@ def message(
         public["given_retrieval_request"] = deepcopy(given_retrieval_request)
     if replay_retrieval is not None and public != replay_retrieval["public_message"]:
         raise ValueError("FROZEN_RETRIEVAL_PUBLIC_MESSAGE_CHANGED")
+    if replay_host_message is not None and public != replay_host_message["public_message"]:
+        raise ValueError("FROZEN_HOST_PUBLIC_MESSAGE_CHANGED")
     identity = _message_reference(bank_root, session, message_id)
     result_path = bank_root / (identity + "-result.json")
     input_path = bank_root / (identity + "-input.json")
@@ -2672,7 +2703,8 @@ def message(
         v13_turn_id=message_id,
         v13_config_version=freeze["config_version"],
     )
-    if retrieval_snapshots is not None:
+    if (retrieval_snapshots is not None or host_snapshots is not None
+            or replay_host_message is not None):
         # E2 collection takes a consistent before for each actual tool call.
         # LangGraph's tool executor honors this per-invocation concurrency.
         cfg["max_concurrency"] = 1
@@ -2903,6 +2935,8 @@ def message(
                     memory_options["control_view_capacity"] = control.get("view_capacity", 1)
                     memory_options["control_view_policy"] = control.get(
                         "view_policy", "incremental")
+                    memory_options["control_view_builder"] = control.get(
+                        "view_builder", "generated")
                     memory_options["control_internal_views"] = control.get("internal_views", True)
                     if settings.get("retrieval_tool"):
                         memory_options["control_delivery_selection"] = control.get(
@@ -3063,7 +3097,11 @@ def message(
                     "config_version": freeze["config_version"],
                 },
             )
-            if retrieval_snapshots is not None:
+            from milai_lab.runners.frozen_host_message import HostMessageRecorder
+
+            host_recorder: HostMessageRecorder | None = None
+            host_context_verified = host_catalog_verified = False
+            if retrieval_snapshots is not None or host_snapshots is not None:
                 from milai_lab.runners.frozen_retrieval import RetrievalRecorder, copy_call_root
 
                 def capture_call(destination: Path) -> None:
@@ -3071,18 +3109,29 @@ def message(
                         copy_call_root(root, bank_root, destination)
 
                 assert isinstance(memory, IntentRetrievalMemory)
-                memory.retrieval_observer = RetrievalRecorder(
-                    retrieval_snapshots, root, bank_root,
-                    lambda: {"bank": bank, "public_message": public,
-                        "host_request_generated": given_retrieval_request is None,
+                if retrieval_snapshots is not None:
+                    memory.retrieval_observer = RetrievalRecorder(
+                        retrieval_snapshots, root, bank_root,
+                        lambda: {"bank": bank, "public_message": public,
+                            "host_request_generated": given_retrieval_request is None,
+                            "source_version": freeze["source_version"],
+                            "admission_policy": memory._read_admission_policy(),
+                            "host_prefix_trace": str(trace.path.relative_to(root)),
+                            "host_result_path": str((bank_root / (
+                                f"{identity}-attempt-{attempt}.json")).relative_to(root)),
+                            "host": settings["host"],
+                            "generation_calls_before": model.calls_in_message},
+                        capture_call, capture_control_steps=retrieval_step_snapshots)
+                if host_snapshots is not None:
+                    host_recorder = HostMessageRecorder(host_snapshots, root, bank_root, {
+                        "bank": bank, "public_message": public,
                         "source_version": freeze["source_version"],
-                        "admission_policy": memory._read_admission_policy(),
                         "host_prefix_trace": str(trace.path.relative_to(root)),
                         "host_result_path": str((bank_root / (
                             f"{identity}-attempt-{attempt}.json")).relative_to(root)),
-                        "host": settings["host"],
-                        "generation_calls_before": model.calls_in_message},
-                    capture_call, capture_control_steps=retrieval_step_snapshots)
+                        "collected_presentation": settings.get(
+                            "host_evidence_presentation", "current"),
+                    }, capture_call)
             if replay_retrieval is not None:
                 assert isinstance(memory, IntentRetrievalMemory)
                 memory._read_admission_policy()
@@ -3711,6 +3760,7 @@ def message(
                 state: dict[str, Any], config: RunnableConfig, *, for_finalization: bool = False
             ) -> dict[str, Any]:
                 nonlocal read_exhausted, business_query_targets
+                nonlocal host_context_verified
                 messages = list(state["messages"])
                 blocked = _visibility_replay(service, {
                     "status": "PENDING", "messages": [row.model_dump(mode="json")
@@ -3950,7 +4000,16 @@ def message(
                         SystemMessage(content=final_input[0]["content"]),
                         HumanMessage(content=final_input[1]["content"]),
                     ], "receipt_messages": receipt_messages, "receipt_material": material}
-                return {
+                presented_messages = wire_messages
+                if settings.get("host_evidence_presentation") == "request_adjacent_metadata_v1":
+                    from milai_lab.runners.host_evidence_presentation import (
+                        request_adjacent_metadata,
+                    )
+
+                    presented_messages, presentation = request_adjacent_metadata(
+                        wire_messages, _model_memory_effects(effects), material)
+                    trace(presentation)
+                projected_context = {
                     "llm_input_messages": [
                         SystemMessage(
                             # LangGraph projects llm_input_messages before resolving
@@ -4019,9 +4078,21 @@ def message(
                             + "\n"
                             + json.dumps(material, ensure_ascii=False)
                         ),
-                        *wire_messages,
+                        *presented_messages,
                     ], "receipt_messages": receipt_messages,
                 }
+                if host_recorder is not None or (
+                        replay_host_message is not None and not host_context_verified):
+                    baseline_context = [projected_context["llm_input_messages"][0], *wire_messages]
+                    if host_recorder is not None:
+                        host_recorder.context(baseline_context)
+                    if replay_host_message is not None:
+                        if [row.model_dump(mode="json") for row in baseline_context] != (
+                                replay_host_message["initial_baseline_context"]):
+                            raise ValueError("FROZEN_HOST_INITIAL_CONTEXT_CHANGED")
+                        host_context_verified = True
+                        output["frozen_host_baseline_context_equal"] = True
+                return projected_context
 
             call_wrapper = app.call_wrapper(
                 service, session, message_id, trace, cfg, boundary_hook=faults.boundary,
@@ -4215,6 +4286,7 @@ def message(
                                else None)
 
             def current_tool_catalog(config: RunnableConfig) -> tuple[BaseTool, ...]:
+                nonlocal host_catalog_verified
                 memory_catalog = (
                     memory.writer_tools(config) if isinstance(memory, FunctionalEditMemory)
                     else memory.tools()
@@ -4228,8 +4300,15 @@ def message(
                 available = available_tool_names(config)
                 catalog = tuple(tool for tool in memory_catalog if tool.name in available) + tuple(
                     tool for tool in business_catalog if tool.name in available)
-                trace({"event": "functional_bound_tool_catalog",
-                       "tools": [convert_to_openai_tool(tool) for tool in catalog]})
+                schemas = [convert_to_openai_tool(tool) for tool in catalog]
+                trace({"event": "functional_bound_tool_catalog", "tools": schemas})
+                if host_recorder is not None:
+                    host_recorder.catalog(schemas)
+                if replay_host_message is not None and not host_catalog_verified:
+                    if schemas != replay_host_message["initial_tool_catalog"]:
+                        raise ValueError("FROZEN_HOST_INITIAL_TOOL_CATALOG_CHANGED")
+                    host_catalog_verified = True
+                    output["frozen_host_tool_catalog_equal"] = True
                 return catalog
 
             tools_provider = current_tool_catalog if edit_features.enabled or (
@@ -4403,10 +4482,33 @@ def message(
                                 session, previous_host_message + ":final", "assistant")])
                     trace({"event": "functional_host_history", "previous_message": previous_id,
                            "messages": len(initial_messages), "source": "actual_completed_result"})
-                messages = invoke_execution(
-                    None if prior else {"messages": [
-                        *initial_messages, HumanMessage(content=content, id=message_id)]}
-                )
+                graph_input = (None if prior else {"messages": [
+                    *initial_messages, HumanMessage(content=content, id=message_id)]})
+                if host_recorder is not None or replay_host_message is not None:
+                    from milai_lab.runners.frozen_host_message import memory_store_values
+
+                    if prior or not isinstance(memory, IntentRetrievalMemory):
+                        raise ValueError("PRE_HOST_SNAPSHOT_REQUIRES_FIRST_MODEL_OF_NEW_MESSAGE")
+                    assert graph_input is not None
+                    ready_state = {
+                        "initial_messages": [m.model_dump(mode="json")
+                                             for m in graph_input["messages"]],
+                        "world": app.snapshot(),
+                        "generation_calls_before": model.calls_in_message,
+                        "read_allowance": memory.read_allowance(cfg),
+                        "admission_policy": memory._read_admission_policy(),
+                        "public_source_ref": capture["source_ref"],
+                        "incoming_source_receipts": output.get("incoming_source_receipts", []),
+                        "memory_store_values": memory_store_values(service),
+                    }
+                    if host_recorder is not None:
+                        host_recorder.ready(ready_state)
+                    if replay_host_message is not None:
+                        if ready_state != replay_host_message["ready_state"]:
+                            raise ValueError("FROZEN_PRE_HOST_STATE_CHANGED")
+                        output["frozen_pre_host_state_equal"] = True
+                        output["host_presentation_override"] = host_presentation_override
+                messages = invoke_execution(graph_input)
 
             if maintenance_recipe and isinstance(memory, FunctionalEditMemory):
                 # A completed graph can reopen without running its model hook.

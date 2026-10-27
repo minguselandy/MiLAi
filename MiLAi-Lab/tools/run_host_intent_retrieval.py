@@ -50,6 +50,8 @@ def main() -> None:
     parser.add_argument("--capture-control-steps", action="store_true",
                         help="Also retain actual post-operation executor/Store checkpoints; "
                              "implies --capture-retrieval-calls")
+    parser.add_argument("--capture-host-messages", action="store_true",
+                        help="Save complete pre-first-Host state for autonomous F2 branches")
     parser.add_argument("--continue-host-history", action="store_true",
                         help="Continuous banks retain their own completed Host/tool messages")
     parser.add_argument("--given-requests", action="store_true",
@@ -60,6 +62,8 @@ def main() -> None:
         parser.error("--native-probe requires native transport")
     if args.given_requests and (args.native_probe or args.continue_host_history):
         parser.error("--given-requests cannot generate or continue an autonomous Host conversation")
+    if args.capture_host_messages and (args.given_requests or args.native_probe):
+        parser.error("--capture-host-messages requires autonomous Host decisions")
     if args.host_site_packages:
         site.addsitedir(str(args.host_site_packages))
     from langchain_core.messages import ToolMessage
@@ -98,6 +102,7 @@ def main() -> None:
         "given_requests": args.given_requests,
         "capture_retrieval_calls": args.capture_retrieval_calls or args.capture_control_steps,
         "capture_control_steps": args.capture_control_steps,
+        "capture_host_messages": args.capture_host_messages,
         "automatic_retry": False, "source_groups": [h["source_group"] for h in histories],
         "costs": "original continuous ledger; provider and local model traces retained"}
     write_json(args.output / "fixture.json", fixture)
@@ -156,6 +161,8 @@ def main() -> None:
                                              if args.capture_retrieval_calls
                                              or args.capture_control_steps else None),
                         retrieval_step_snapshots=args.capture_control_steps,
+                        host_snapshots=(args.output / "frozen-host-messages"
+                                        if args.capture_host_messages else None),
                         given_retrieval_request=(bind_given_request(
                             request, delivered_refs.get((profile, bank), []))
                             if args.given_requests else None),

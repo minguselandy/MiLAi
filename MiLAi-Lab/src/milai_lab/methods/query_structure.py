@@ -20,6 +20,14 @@ from milai_lab.memory.service import MemoryService
 
 QueryStructurePolicy = Literal["rebuild", "version_cache", "incremental"]
 POLICIES = ("rebuild", "version_cache", "incremental")
+QueryStructureBuilder = Literal["generated", "extractive"]
+BUILDERS = ("generated", "extractive")
+EXTRACTIVE_SEMANTICS = (
+    "source_bound_literal_excerpts; each node quotes one selected source body verbatim. "
+    "Use its source metadata for role and reporting context. Questions, proposals, conditions "
+    "and prior assistant text retain their original meaning; quoting does not confirm them. "
+    "No semantic classification, inferred rule or event date has been added."
+)
 
 INSTRUCTIONS = (
     "Build a reusable local interpretation of the delivered source scope. Keep self-contained "
@@ -172,6 +180,7 @@ def build_query_structure(
     service: MemoryService, question: str, date: str, source_refs: list[str], *,
     policy: QueryStructurePolicy,
     call: Callable[[list[dict[str, str]], dict[str, Any]], dict[str, Any]],
+    builder: QueryStructureBuilder = "generated",
     source_events: list[dict[str, Any]] | None = None,
     force_refresh: bool = False,
     slot: str = "current",
@@ -190,12 +199,18 @@ def build_query_structure(
     """
     if policy not in POLICIES:
         raise ValueError("QUERY_STRUCTURE_POLICY_INVALID")
+    if builder not in BUILDERS:
+        raise ValueError("QUERY_STRUCTURE_BUILDER_INVALID")
     started = time.perf_counter()
     namespace = (*service.namespace, "query_structure_v1")
     if slot not in structure_slots(capacity):
         raise ValueError("QUERY_STRUCTURE_SLOT_INVALID")
     cached = service.store.get(namespace, slot)
     prior = copy.deepcopy(cached.value) if cached and not replace_slot else None
+    # Existing caches without this field were built by the generator. Changing
+    # the builder starts from the selected sources, not the other builder's text.
+    if prior is not None and prior.get("builder", "generated") != builder:
+        prior = None
     events = service.sources() if source_events is None else source_events
     by_ref = {source["event_id"]: source for source in events}
     pool = sorted(set(source_refs) & set(by_ref))
@@ -227,6 +242,7 @@ def build_query_structure(
                          "arrival_boundary_refs", [prior["arrival_cursor"][1]]))]
                 if prior is not None and prior["policy"] == policy else [])
     report: dict[str, Any] = {"policy": policy, "visible_sources_enumerated": len(events),
+        **({"builder": builder} if builder != "generated" else {}),
         "source_inventory": ("MemoryService.sources full enumeration; "
                              "hidden-row scan count unobserved" if source_events is None else
                              "explicit source events; upstream discovery counted separately"),
@@ -265,7 +281,8 @@ def build_query_structure(
         return None, report
     sources = []
     aliases = {binding["source_ref"]: alias for alias, binding in bindings.items()}
-    for ref in delivered:
+    # Allocate new aliases in presentation order; existing cache bindings stay fixed.
+    for ref in sorted(delivered, key=lambda ref: (by_ref[ref]["observed_at"], ref)):
         source = by_ref[ref]
         alias = aliases.get(ref, f"e{len(bindings)}")
         bindings[alias] = {"source_ref": ref, "source_revision": source.get("source_revision", 1)}
@@ -276,35 +293,43 @@ def build_query_structure(
             "session": source["session"],
             "reported_at": source.get("occurred_at"),
             "calendar_context": source.get("calendar_context")})
-    # Preserve stable aliases while presenting the actual capture sequence.
-    sources.sort(key=lambda item: (
-        by_ref[bindings[item["id"]]["source_ref"]]["observed_at"],
-        bindings[item["id"]]["source_ref"]))
     schema = structure_schema(bindings, previous)
-    delivered_aliases = {item["id"] for item in sources}
-    messages = [{"role": "system", "content": INSTRUCTIONS + (
-                    EXPLICIT_REFRESH_INSTRUCTIONS if force_refresh else "")},
-                {"role": "user", "content": json.dumps({
-                    "question": question, "query_time": date,
-                    **({"retrieval_request": retrieval_request} if retrieval_request else {}),
-                    "previous": previous, "sources": sources,
-                    "ingestion_observations": [{"source": alias,
-                        "source_revision": binding["source_revision"],
-                        "captured_at": by_ref[binding["source_ref"]]["observed_at"]}
-                        for alias, binding in bindings.items()],
-                    "source_directory": [{"id": key, "body_delivered": key in delivered_aliases,
-                        "role": by_ref[binding["source_ref"]]["role"],
-                        "origin": by_ref[binding["source_ref"]]["origin"],
-                        **{field: by_ref[binding["source_ref"]][field]
-                           for field in ("capture_context", "calendar_context")
-                           if field in by_ref[binding["source_ref"]]},
-                        "session": by_ref[binding["source_ref"]]["session"],
-                        "reported_at": by_ref[binding["source_ref"]].get("occurred_at")}
-                        for key, binding in bindings.items()], "current_scope_sources": [
-                        key for key, binding in bindings.items() if binding["source_ref"] in pool],
-                    "response_schema": schema,
-                }, ensure_ascii=False, separators=(",", ":"))}]
-    response = call(messages, schema)
+    response: dict[str, Any]
+    if builder == "extractive":
+        # The retrieved scope is already selected by the ordinary source path.
+        # Keep whole bodies, including questions and conditions; no sentence filter
+        # or synthesized fact is needed for this generation-free baseline.
+        response = {"scope": "Literal source excerpts.",
+            "nodes": [{"id": "n" + source["id"][1:], "text": source["text"],
+                       "kind": "reported", "evidence": [source["id"]]}
+                      for source in sources],
+            "remove": [], "rules": [], "remove_rules": [], "unresolved": []}
+    else:
+        delivered_aliases = {item["id"] for item in sources}
+        messages = [{"role": "system", "content": INSTRUCTIONS + (
+                        EXPLICIT_REFRESH_INSTRUCTIONS if force_refresh else "")},
+                    {"role": "user", "content": json.dumps({
+                        "question": question, "query_time": date,
+                        **({"retrieval_request": retrieval_request} if retrieval_request else {}),
+                        "previous": previous, "sources": sources,
+                        "ingestion_observations": [{"source": alias,
+                            "source_revision": binding["source_revision"],
+                            "captured_at": by_ref[binding["source_ref"]]["observed_at"]}
+                            for alias, binding in bindings.items()],
+                        "source_directory": [{"id": key, "body_delivered": key in delivered_aliases,
+                            "role": by_ref[binding["source_ref"]]["role"],
+                            "origin": by_ref[binding["source_ref"]]["origin"],
+                            **{field: by_ref[binding["source_ref"]][field]
+                               for field in ("capture_context", "calendar_context")
+                               if field in by_ref[binding["source_ref"]]},
+                            "session": by_ref[binding["source_ref"]]["session"],
+                            "reported_at": by_ref[binding["source_ref"]].get("occurred_at")}
+                            for key, binding in bindings.items()], "current_scope_sources": [
+                            key for key, binding in bindings.items()
+                            if binding["source_ref"] in pool],
+                        "response_schema": schema,
+                    }, ensure_ascii=False, separators=(",", ":"))}]
+        response = call(messages, schema)
     Draft202012Validator(schema).validate(response)
     nodes = copy.deepcopy(previous.get("nodes", {}))
     rules = copy.deepcopy(previous.get("rules", {}))
@@ -338,6 +363,7 @@ def build_query_structure(
     identifier = (f"query-structure:{revision}" if slot == "current"
                   else f"query-structure:{slot}:{revision}")
     item = {"id": identifier, "kind": "query_structure", "policy": policy,
+        **({"builder": builder} if builder != "generated" else {}),
         "revision": revision, "structure": structure, "source_bindings": bindings,
         "source_metadata": _source_metadata({alias: by_ref[binding["source_ref"]]
                                              for alias, binding in bindings.items()}),
@@ -347,8 +373,9 @@ def build_query_structure(
         "arrival_boundary_refs": boundary_refs,
         **({"deferred_source_refs": deferred} if deferred else {}),
         "index_text": response["scope"], "visibility": "visible", "body_delivered": True,
-        "semantics": "source_bound_model_interpretation; all AND (OR of AND any routes); "
-                     "unknown is not false; apply temporal rules at current query time"}
+        "semantics": (EXTRACTIVE_SEMANTICS if builder == "extractive" else
+                      "source_bound_model_interpretation; all AND (OR of AND any routes); "
+                      "unknown is not false; apply temporal rules at current query time")}
     saved = copy.deepcopy(item)
     if policy == "rebuild":
         # Only the observed arrival cursor is retained in the no-cache control;
@@ -357,7 +384,8 @@ def build_query_structure(
     service.store.put(namespace, slot, saved, index=False)
     if capacity > 1:
         touch_structure(service, slot)
-    report.update(action="refresh" if incremental else "build", model_calls=1,
+    report.update(action="refresh" if incremental else "build",
+                  model_calls=int(builder == "generated"),
                   source_bodies_delivered=len(sources), node_count=len(nodes),
                   rule_count=len(rules),
                   elapsed_ms=(time.perf_counter() - started) * 1000)

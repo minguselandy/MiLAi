@@ -70,7 +70,7 @@ from milai_lab.methods.edit_memory import (
     MaintenanceMode,
 )
 from milai_lab.methods.memory_control import MemoryPolicy
-from milai_lab.methods.query_structure import QueryStructurePolicy
+from milai_lab.methods.query_structure import QueryStructureBuilder, QueryStructurePolicy
 from milai_lab.methods.source_observations import SourceObservationBudget
 
 FUNCTIONAL_METHOD = "milai_edit_m_v1"
@@ -145,6 +145,7 @@ class FunctionalEditMemory(FunctionalMemory):
         control_source_observation_tokens: int | None = None,
         control_view_capacity: int = 1,
         control_view_policy: QueryStructurePolicy = "incremental",
+        control_view_builder: QueryStructureBuilder = "generated",
         control_internal_views: bool = True,
         control_rank_pool: (Callable[[str, list[dict[str, Any]]],
                                      list[dict[str, Any]]] | None) = None,
@@ -182,6 +183,7 @@ class FunctionalEditMemory(FunctionalMemory):
             if control_source_observation_tokens is not None else None)
         self.control_view_capacity = control_view_capacity
         self.control_view_policy = control_view_policy
+        self.control_view_builder = control_view_builder
         self.control_internal_views = control_internal_views
         self.control_rank_pool = control_rank_pool
         self.control_record = control_record
@@ -191,6 +193,8 @@ class FunctionalEditMemory(FunctionalMemory):
             self.policy["memory_control"] = type(control_policy).__name__
         if not control_internal_views:
             self.policy["internal_views"] = False
+        if control_view_builder != "generated":
+            self.policy["view_builder"] = control_view_builder
         if dependency_reading:
             if evidence_policy != "question_pack_v1" or dependency_read_call is None:
                 raise ValueError("FUNCTIONAL_DEPENDENCY_READING_REQUIRES_PACKS_AND_CALLER")
@@ -495,6 +499,7 @@ class FunctionalEditMemory(FunctionalMemory):
                     <= self.material_limit,
                 excluded_source_refs=(bound["source_ref"],),
                 view_capacity=self.control_view_capacity, view_policy=self.control_view_policy,
+                view_builder=self.control_view_builder,
                 internal_views=self.control_internal_views,
                 source_observation=self.control_source_observation)
             memory = self

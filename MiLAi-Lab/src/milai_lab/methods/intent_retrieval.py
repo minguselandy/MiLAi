@@ -81,6 +81,24 @@ def retrieval_packet(
             "termination_reason": reason, "usage": usage}
 
 
+def delivery_packet_fits(
+    key: str, items: dict[int, dict[str, Any]], *, steps: int, known_count: int,
+    return_limit: int, return_tokens: Callable[[dict[str, Any]], int],
+    intervention: bool = False,
+) -> bool:
+    """Admit the complete return packet under every possible termination label."""
+    usage = {"control_steps": steps, "known_reference_reads": known_count,
+             "operations": steps, "read_operations": steps,
+             "material_budget_rejections": steps}
+    reasons: tuple[str, ...] = ("policy_handoff", "budget_exhausted", "no_available_operation",
+                                "operation_outcome_unknown")
+    if intervention:
+        reasons += ("intervention_handoff",)
+    return all(return_tokens(retrieval_packet(
+        key, list(items.values()), list(items), list(range(len(items))), reason, usage, ok=False))
+        <= return_limit for reason in reasons)
+
+
 class IntentRetrievalMemory(FunctionalEditMemory):
     """Opt-in adapter: the Host calls retrieval instead of receiving automatic retrieval."""
 
@@ -293,18 +311,9 @@ class IntentRetrievalMemory(FunctionalEditMemory):
         def fits_delivery(items: dict[int, dict[str, Any]]) -> bool:
             # Counts are bounded by this call's declared decision budget. Timing
             # stays in the trace, so elapsed-time digits cannot displace evidence.
-            usage = {"control_steps": steps, "known_reference_reads": len(known),
-                     "operations": steps, "read_operations": steps,
-                     "material_budget_rejections": steps}
-            reasons: tuple[str, ...] = (
-                "policy_handoff", "budget_exhausted", "no_available_operation",
-                "operation_outcome_unknown")
-            if self.control_intervention is not None:
-                reasons += ("intervention_handoff",)
-            return all(self.return_tokens(retrieval_packet(
-                key, list(items.values()), list(items), list(range(len(items))), reason, usage,
-                ok=False))
-                <= return_limit for reason in reasons)
+            return delivery_packet_fits(key, items, steps=steps, known_count=len(known),
+                return_limit=return_limit, return_tokens=self.return_tokens,
+                intervention=self.control_intervention is not None)
 
         operations = EvidenceOperations(self.service, state,
             load_pool=lambda: search_pool(request.query, self.source_top_k),
@@ -316,6 +325,7 @@ class IntentRetrievalMemory(FunctionalEditMemory):
             excluded_source_refs=(bound["source_ref"],),
             known_materials=known,
             view_capacity=self.control_view_capacity, view_policy=self.control_view_policy,
+            view_builder=self.control_view_builder,
             internal_views=self.control_internal_views,
             source_observation=self.control_source_observation,
             delivery_selection=self.control_delivery_selection,

@@ -145,16 +145,25 @@ def replay_call(
     from milai_lab.runners.functional import message
 
     call = read_json(captured / "call.json")
-    if call["schema"] not in {"frozen_retrieval_call_v2", "frozen_retrieval_decision_v1"}:
+    if call["schema"] not in {"frozen_retrieval_call_v2", "frozen_retrieval_decision_v1",
+                              "handoff_comparison_decision_v1"}:
         raise ValueError("Frozen functional replay requires a functional capture")
     if call["status"] not in {"ORIGINAL_COMPLETED", "ORIGINAL_FAILED"}:
         raise ValueError("Frozen call collection must be closed before comparison")
+    if call["schema"] == "handoff_comparison_decision_v1":
+        if (policy.get("routing") != "handoff_only"
+                or source_version != call["comparison_projection"]["source_version"]
+                or (intervention is not None
+                    and intervention["first_action"]["kind"] != "HANDOFF")):
+            raise ValueError("Prepared F1 input requires its declared version and HANDOFF-only arm")
     output.mkdir(parents=True, exist_ok=False)
     started, cpu = time.perf_counter(), time.process_time()
     run: dict[str, Any] = {
         "status": "RUNNING", "captured_call": str(captured), "source_version": source_version,
         "policy": policy, "automatic_retry": False, "host_request_regenerated": False,
         "scope": "Frozen actual request tool execution; no downstream Host score.",
+        **({"comparison_projection": copy.deepcopy(call["comparison_projection"])}
+           if "comparison_projection" in call else {}),
         **({"intervention": copy.deepcopy(intervention)} if intervention is not None else {}),
     }
     write_json(output / "replay.json", run)
