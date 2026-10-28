@@ -46,6 +46,13 @@ def test_closed_bank_and_final_provider_input_precede_later_source_arrivals(tmp_
     assert final["output_message_id"] == result["messages"][-1]["id"]
     assert final["messages"] == wires[-1]["messages"]
     assert any(m["role"] == "tool" and "4312" in m["content"] for m in final["messages"])
+    boundary = report["pre_final_snapshot"]
+    assert boundary["status"] == "CAPTURED_BEFORE_FINAL_RESPONSE_PERSISTENCE"
+    assert boundary["output_message_id"] == final["output_message_id"]
+    earlier = read_json(captured / boundary["inventory"])["memory_store_values"]
+    final_source = result["final_capture"]["source_ref"]
+    assert final_source not in [r["key"] for r in earlier]
+    assert final_source in [r["key"] for r in report["memory_store_values"]]
     host = read_json(captured / "host.json")
     assert len(host["delivered_model_requests"]) == 2
     assert not any(m["type"] == "tool" for m in host["initial_baseline_context"])
@@ -217,3 +224,27 @@ def test_snapshot_failure_keeps_the_actual_completed_public_outcome(tmp_path, mo
     row, = driver["completed"]
     assert row["status"] == "COMPLETED" and row["answer"] == "Done."
     assert row["closed_host_capture_status"] == "FAILED_RETAINED"
+
+
+def test_pre_final_recording_failure_retains_real_completed_response(tmp_path, monkeypatch):
+    from milai_lab.runners import frozen_retrieval
+
+    root = capture_root(tmp_path)
+    scripted(monkeypatch, lambda *_: {"role": "assistant", "content": "Done."}, native=True)
+    original_copy = frozen_retrieval.copy_call_root
+
+    def fail_only_final(root, bank, target):
+        if target.name.startswith("final-input-"):
+            raise OSError("synthetic pre-final snapshot failure")
+        return original_copy(root, bank, target)
+
+    monkeypatch.setattr(frozen_retrieval, "copy_call_root", fail_only_final)
+    captures = tmp_path / "captures"
+    result = message(root, bank="bank", owner="alice", session="host", message_id="q",
+        content="Acknowledge.", host_snapshots=captures)
+    captured, = captures.iterdir()
+    report = capture_closed_host_message(captured, result)
+    assert result["status"] == "COMPLETED" and result["final_answer"] == "Done."
+    assert report["final_context_status"] == "BOUND_TO_COMPLETED_FINAL_GENERATION"
+    assert report["pre_final_snapshot"]["status"] == "FAILED_RETAINED"
+    assert report["pre_final_snapshot"]["error"] == "synthetic pre-final snapshot failure"
