@@ -13,12 +13,14 @@ def main() -> None:
     parser.add_argument("upstream", type=Path)
     parser.add_argument("output", type=Path)
     parser.add_argument("--source-version", required=True)
+    parser.add_argument("--continue-unattempted", type=Path,
+                        help="Closed failed prediction collection; preserve every prior attempt")
     parser.add_argument("--site-packages", action="append", type=Path, default=[],
                         help="Declared HTTP/Pillow sites; preserve the selected interpreter first")
     args = parser.parse_args()
     for path in args.site_packages:
         site.addsitedir(str(path))
-    import torch
+    import torch  # type: ignore[import-not-found]
 
     from milai_lab.harness.artifact_io import entrypoint_settings, read_json
     from milai_lab.runners.lme_evaluation import predict_cohort
@@ -27,7 +29,8 @@ def main() -> None:
     torch.set_num_threads(settings["memory_control"].get("threads", 4))
     torch.backends.mha.set_fastpath_enabled(False)
     result = predict_cohort(args.config, args.snapshot, args.upstream, args.output,
-                            source_version=args.source_version)
+                            source_version=args.source_version,
+                            continue_from=args.continue_unattempted)
     print({"status": result["status"], "positions": result["planned_positions"]})
 
 

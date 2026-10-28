@@ -11,13 +11,16 @@ def main() -> None:
     parser.add_argument("predictions", type=Path)
     parser.add_argument("output", type=Path)
     parser.add_argument("--source-version", required=True)
+    parser.add_argument("--continue-unattempted", type=Path,
+                        help="Closed failed scoring collection; retain scored and failed cases")
     parser.add_argument("--site-packages", action="append", type=Path, default=[])
     args = parser.parse_args()
     for path in args.site_packages:
         site.addsitedir(str(path))
     from milai_lab.runners.lme_evaluation import score_cohort
 
-    result = score_cohort(args.predictions, args.output, source_version=args.source_version)
+    result = score_cohort(args.predictions, args.output, source_version=args.source_version,
+                         continue_from=args.continue_unattempted)
     print({"status": result["status"], "status_counts": result["status_counts"]})
 
 

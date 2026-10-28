@@ -77,6 +77,24 @@ class LmeMemoryBackend:
             self.ledger = Path(frozen(self.template)["config"]["budget_path"])
             write_json(self.output / "budget-before.json", read_json(self.ledger))
 
+    def reuse_closed_template(self, previous: Path) -> None:
+        """Copy the original full corpus for new, unattempted questions, without old queries."""
+        import shutil
+
+        with self.overhead():
+            setup = read_json(previous / "source-setup.json")
+            self.media = read_json(previous / "bound-images.json")
+            shutil.copytree(previous / "template", self.template)
+            write_json(self.output / "source-setup.json", setup)
+            write_json(self.output / "bound-images.json", self.media)
+            self.ledger = Path(frozen(self.template)["config"]["budget_path"])
+            write_json(self.output / "budget-before.json", read_json(self.ledger))
+            write_json(self.output / "continuation-template.json", {
+                "original_backend": str(previous.resolve()),
+                "scope": "Original closed haystack identity/Store retained. No previous question "
+                         "runtime, answer, allowance or query cache is reused. Copied source-setup "
+                         "costs are historical; this backend measures only the new copy overhead."})
+
     def query(self, query: str, query_image: str | None = None) -> list[dict[str, str]]:
         """Fresh original haystack for each question; no earlier question/answer enters memory."""
         import shutil

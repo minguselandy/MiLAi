@@ -7,6 +7,7 @@ from typing import Any
 
 from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.harness.case_archive import archive_case, restore_case
+from milai_lab.runners.lme_continuation import prediction_roots
 
 
 def _inside(root: Path, relative: str) -> Path:
@@ -25,34 +26,41 @@ def archive_lme_cases(predictions: Path, scores: Path, *, source_version: str) -
     """
     predictions, scores = predictions.resolve(), scores.resolve()
     generation, grading = read_json(predictions/"driver.json"), read_json(scores/"driver.json")
-    if generation["status"] not in {"COMPLETED", "FAILED"} or grading["status"] not in {
+    if generation["status"] not in {
+            "COMPLETED", "COMPLETED_WITH_RETAINED_FAILURES", "FAILED"} or grading["status"] not in {
             "COMPLETED", "COMPLETED_WITH_UNSCORED_POSITIONS", "FAILED"}:
         raise ValueError("Close prediction and scoring phases before archiving cases")
     if Path(grading["predictions"]).resolve() != predictions or [c["question_id"]
             for c in generation["cases"]] != [c["question_id"] for c in grading["cases"]]:
         raise ValueError("Scoring must refer to this complete prediction cohort")
     entries = []
+    owners = prediction_roots(predictions)
     for case in generation["cases"]:
         if "runtime" not in case:
             continue
-        runtime = _inside(predictions, case["runtime"])
-        parent = _inside(predictions, f"memory/{case['pool']}/cases")
-        base = _inside(predictions, f"memory/{case['pool']}/template")
+        owner = Path(case.get("owner_predictions", predictions)).resolve()
+        if owner not in owners:
+            raise ValueError("Case owner is outside the declared prediction ancestry")
+        runtime = _inside(owner, case["runtime"])
+        parent = _inside(owner, f"memory/{case['pool']}/cases")
+        base = _inside(owner, f"memory/{case['pool']}/template")
         if runtime.parent != parent or not runtime.name.isdecimal() or not base.is_dir():
             raise ValueError("Runtime must be a declared case with its retained template")
         if not runtime.is_dir():
             raise FileNotFoundError(f"Declared case runtime is missing: {runtime}")
         entries.append({"row": case["row"], "prediction_status": case["status"],
             "scoring_status": grading["cases"][case["row"]]["status"],
-            "runtime": str(runtime.relative_to(predictions)),
-            "base": str(base.relative_to(predictions)),
+            "owner_predictions": str(owner),
+            "runtime": str(runtime.relative_to(owner)),
+            "base": str(base.relative_to(owner)),
             "archive": f"case-archives/case-{case['row']:04d}.tar.gz", "status": "PENDING"})
-    actual = {p.resolve() for p in (predictions/"memory").glob("*/cases/*") if p.is_dir()}
-    declared = {_inside(predictions, e["runtime"]) for e in entries}
+    actual = {p.resolve() for owner in owners
+              for p in (owner/"memory").glob("*/cases/*") if p.is_dir()}
+    declared = {_inside(Path(e["owner_predictions"]), e["runtime"]) for e in entries}
     if actual != declared or len(declared) != len(entries):
         raise ValueError("Retain a unique declared mapping for every actual case directory")
-    if any(_inside(predictions, e["base"]).is_relative_to(case)
-           or case.is_relative_to(_inside(predictions, e["base"]))
+    if any(_inside(Path(e["owner_predictions"]), e["base"]).is_relative_to(case)
+           or case.is_relative_to(_inside(Path(e["owner_predictions"]), e["base"]))
            for e in entries for case in declared):
         raise ValueError("Retained templates must be separate from archived case directories")
     output = predictions/"case-archives"
@@ -69,8 +77,9 @@ def archive_lme_cases(predictions: Path, scores: Path, *, source_version: str) -
         for entry in entries:
             entry["status"] = "ARCHIVING"
             write_json(output/"index.json", report)
-            result = archive_case(_inside(predictions, entry["runtime"]),
-                _inside(predictions, entry["archive"]), _inside(predictions, entry["base"]))
+            owner = Path(entry["owner_predictions"])
+            result = archive_case(_inside(owner, entry["runtime"]),
+                _inside(predictions, entry["archive"]), _inside(owner, entry["base"]))
             entry.update(status="ARCHIVED", details=result)
             write_json(output/"index.json", report)
         report.update(status="COMPLETED", archived_cases=len(entries),
@@ -93,9 +102,12 @@ def restore_lme_case(predictions: Path, row: int) -> Path:
     if index["schema"] != "lme_case_archives_v1":
         raise ValueError("Unsupported LME case archive index")
     entry, = [e for e in index["cases"] if e["row"] == row and e["status"] == "ARCHIVED"]
+    owner = Path(entry.get("owner_predictions", predictions)).resolve()
+    if owner not in prediction_roots(predictions):
+        raise ValueError("Restore owner is outside the declared prediction ancestry")
     started, cpu = time.perf_counter(), time.process_time()
     restored = restore_case(_inside(predictions, entry["archive"]),
-        _inside(predictions, entry["base"]), _inside(predictions, entry["runtime"]))
+        _inside(owner, entry["base"]), _inside(owner, entry["runtime"]))
     # Keep restore observations outside the byte-identical restored runtime.
     write_json(predictions/"case-archives"/f"restore-{row:04d}.json", {
         "runtime": str(restored), "archive_retained": True, "base_retained": True,
