@@ -52,12 +52,17 @@ def main() -> None:
                              "implies --capture-retrieval-calls")
     parser.add_argument("--capture-host-messages", action="store_true",
                         help="Save complete pre-first-Host state for autonomous F2 branches")
+    parser.add_argument("--capture-closed-host-messages", action="store_true",
+                        help="Also retain each post-invocation bank before later arrivals; "
+                             "implies --capture-host-messages")
     parser.add_argument("--continue-host-history", action="store_true",
                         help="Continuous banks retain their own completed Host/tool messages")
     parser.add_argument("--given-requests", action="store_true",
                         help="Conditional retrieval-only probes from fixture retrieval_request; "
                              "use_delivered_refs binds earlier actual receipts, no Host answer")
     args = parser.parse_args()
+    if args.capture_closed_host_messages:
+        args.capture_host_messages = True
     if args.native_probe and args.transport == "json_action":
         parser.error("--native-probe requires native transport")
     if args.given_requests and (args.native_probe or args.continue_host_history):
@@ -103,6 +108,7 @@ def main() -> None:
         "capture_retrieval_calls": args.capture_retrieval_calls or args.capture_control_steps,
         "capture_control_steps": args.capture_control_steps,
         "capture_host_messages": args.capture_host_messages,
+        "capture_closed_host_messages": args.capture_closed_host_messages,
         "automatic_retry": False, "source_groups": [h["source_group"] for h in histories],
         "costs": "original continuous ledger; provider and local model traces retained"}
     write_json(args.output / "fixture.json", fixture)
@@ -148,6 +154,9 @@ def main() -> None:
                     # Independent goals share the declared initial source pool. Continuous
                     # histories keep their own policy's actual view and subsequent arrivals.
                     message_started, message_cpu = time.perf_counter(), time.process_time()
+                    host_directory = args.output / "frozen-host-messages"
+                    prior_captures = (set(host_directory.glob("*/host.json"))
+                                      if args.capture_closed_host_messages else set())
                     result = message(args.output / profile,
                         bank=bank, owner="development-user",
                         session="host", message_id=request["id"],
@@ -167,6 +176,16 @@ def main() -> None:
                             request, delivered_refs.get((profile, bank), []))
                             if args.given_requests else None),
                         model_tool_choice=native_probe if args.native_probe else None)
+                    closed = []
+                    if args.capture_closed_host_messages:
+                        from milai_lab.runners.frozen_host_message import (
+                            capture_closed_host_message,
+                        )
+
+                        for capture in sorted(set(host_directory.glob("*/host.json"))
+                                              - prior_captures):
+                            capture_closed_host_message(capture.parent, result)
+                            closed.append(str(capture.parent / "closed.json"))
                     if args.given_requests:
                         known = delivered_refs.setdefault((profile, bank), [])
                         for item in result.get("retrieval_result", {}).get("evidence", []):
@@ -176,6 +195,8 @@ def main() -> None:
                            "answer": result.get("final_answer"), "error": result.get("error"),
                            "wall_seconds": time.perf_counter() - message_started,
                            "cpu_seconds": time.process_time() - message_cpu}
+                    if args.capture_closed_host_messages:
+                        row["closed_host_snapshots"] = closed
                     driver["completed"].append(row)
                     if args.continue_host_history and result["status"] == "COMPLETED":
                         previous_messages[profile, bank] = request["id"]

@@ -4321,6 +4321,10 @@ def message(
                 )
             if tracker is not None and model.delivery_observer is not None:
                 model.delivery_observer = RequestProgressDelivery(model.delivery_observer, tracker)
+            if host_recorder is not None:
+                from milai_lab.runners.frozen_host_message import HostResponseRecorder
+
+                model.response_hook = HostResponseRecorder(host_recorder, model.response_hook)
             agent = build_agent(
                 model,
                 store,

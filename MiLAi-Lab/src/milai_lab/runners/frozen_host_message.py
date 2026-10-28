@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import copy
+import json
 import shutil
 import time
 import uuid
@@ -11,6 +12,7 @@ from typing import Any
 
 from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.memory.service import MemoryService
+from milai_lab.providers.request_pipeline import ResponseEvent, ResponseHook
 from milai_lab.runners.host_evidence_presentation import PRESENTATION
 
 
@@ -53,6 +55,7 @@ class HostMessageRecorder:
             **copy.deepcopy(self.metadata), "source_root": str(self.root.resolve()),
             "source_bank_root": str(self.bank_root.resolve()), "ready_state": copy.deepcopy(state),
             "initial_baseline_context": None, "initial_tool_catalog": None,
+            "delivered_model_requests": [],
             "captured_epoch": time.time(),
             "scope": "Same actual public message before its first Host model dispatch. "
                      "Source imports/history are common preparation, not reexecuted tools. "
@@ -81,6 +84,97 @@ class HostMessageRecorder:
         if self.path is not None and self.row["initial_tool_catalog"] is None:
             self.row["initial_tool_catalog"] = copy.deepcopy(tools)
             write_json(self.path / "host.json", self.row)
+
+    def delivered(self, event: ResponseEvent) -> None:
+        if self.path is None:
+            return
+        self.row["delivered_model_requests"].append({
+            "schema": "provider_request_content_v1", "output_message_id": event.message_id,
+            "messages": [{key: copy.deepcopy(value) for key, value in message.items()
+                          if key not in {"reasoning", "reasoning_content"}}
+                         for message in event.request.messages],
+            "tools": copy.deepcopy(event.request.tools),
+            "scope": "Request content associated with a decoded provider response; "
+                     "provider reasoning fields are omitted. Not a correctness judgment."})
+        write_json(self.path / "host.json", self.row)
+
+
+class HostResponseRecorder:
+    """Observe the existing decoded-response hook without changing request or response."""
+
+    def __init__(self, recorder: HostMessageRecorder, inner: ResponseHook | None) -> None:
+        self.recorder, self.inner = recorder, inner
+
+    def on_response(self, event: ResponseEvent) -> None:
+        if self.inner is not None:
+            self.inner.on_response(event)
+        if event.stage == "decoded_message":
+            self.recorder.delivered(event)
+
+
+def capture_closed_host_message(captured: Path, result: dict[str, Any]) -> dict[str, Any]:
+    """Retain the bank at this closed invocation before later messages change it.
+
+    A final provider request is associated only with a completed final Host
+    generation and its unique decoded message identity. Ambiguous or failed cases
+    remain recorded without certifying a context or evidence sufficiency.
+    """
+    from milai_lab.baselines.langmem_sqlite_store import TransactionalSqliteStore as SqliteStore
+    from milai_lab.runners.frozen_retrieval import copy_call_root
+
+    started = time.process_time()
+    wall = time.perf_counter()
+    row = read_json(captured / "host.json")
+    if (row["schema"] != "frozen_host_message_v1" or row["status"] != "CAPTURED_PRE_HOST"
+            or result["status"] in {"RUNNING", "PENDING", "UNKNOWN"}
+            or result["bank"] != row["bank"]
+            or any(result[k] != v for k, v in row["public_message"].items())):
+        raise ValueError("Closed snapshot requires this exact returned public invocation")
+    root, bank = Path(row["source_root"]), Path(row["source_bank_root"])
+    original = read_json(root / row["host_result_path"])
+    if json.dumps(original, ensure_ascii=False) != json.dumps(result, ensure_ascii=False):
+        raise ValueError("Returned message differs from its persisted actual attempt")
+    if read_json(root / "input-freeze.json")["source_version"] != row["source_version"]:
+        raise ValueError("Closed snapshot requires the captured implementation")
+    public_source, = [item for item in row["ready_state"]["memory_store_values"]
+        if item["namespace"][-1] == "v13_1_sources"
+        and item["key"] == row["ready_state"]["public_source_ref"]]
+    after = captured / "after"
+    copy_call_root(root, bank, after)
+    frozen_bank = after / bank.relative_to(root)
+    with SqliteStore.from_conn_string(str(frozen_bank / "memory.sqlite")) as store:
+        service = MemoryService(store, tuple(public_source["namespace"][:-1]),
+            row["public_message"]["owner"], frozen_bank / "memory.lock",
+            functional_contract="functional_v1")
+        values = memory_store_values(service)
+    messages = result.get("messages", [])
+    final_generation = (result["status"] == "COMPLETED" and bool(messages)
+        and messages[-1]["type"] == "ai" and not messages[-1].get("tool_calls")
+        and "failure_delivery" not in result)
+    deliveries = row["delivered_model_requests"]
+    matches = ([i for i, delivery in enumerate(deliveries)
+                if delivery["output_message_id"] == messages[-1]["id"]]
+               if final_generation else [])
+    bound = final_generation and len(matches) == 1
+    report = {"schema": "closed_host_message_v1", "status": "CLOSED_INVOCATION_SNAPSHOTTED",
+        "source_capture": str(captured.resolve()), "source_version": row["source_version"],
+        "bank": row["bank"], "public_message": row["public_message"],
+        "message_status": result["status"], "generation_calls": result["generation_calls"],
+        "result_path": row["host_result_path"], "snapshot": "after",
+        "public_source_ref": row["ready_state"]["public_source_ref"],
+        "memory_store_values": values, "delivered_request_candidates": matches,
+        "final_context_status": "BOUND_TO_COMPLETED_FINAL_GENERATION" if bound else
+            "NOT_BOUND_TO_A_COMPLETED_FINAL_GENERATION",
+        "final_context": copy.deepcopy(deliveries[matches[0]]) if bound else None,
+        "scope": "Exact post-invocation Store/Saver and provider-request content bound by "
+                 "decoded final response identity; provider reasoning omitted. No replay, "
+                 "known-reference creation, semantic witness label or Host-success grade. "
+                 "Earlier receipts, current visibility and Source slices still require audit.",
+        "capture_compute": {"cpu_seconds_nested": time.process_time() - started,
+            "wall_seconds_nested": time.perf_counter() - wall, "ledger_recorded": False,
+            "scope": "Collection-driver CPU includes this snapshot; do not add it again."}}
+    write_json(captured / "closed.json", report)
+    return report
 
 
 def replay_host_message(
