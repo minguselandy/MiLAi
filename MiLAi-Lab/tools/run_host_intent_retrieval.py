@@ -176,16 +176,6 @@ def main() -> None:
                             request, delivered_refs.get((profile, bank), []))
                             if args.given_requests else None),
                         model_tool_choice=native_probe if args.native_probe else None)
-                    closed = []
-                    if args.capture_closed_host_messages:
-                        from milai_lab.runners.frozen_host_message import (
-                            capture_closed_host_message,
-                        )
-
-                        for capture in sorted(set(host_directory.glob("*/host.json"))
-                                              - prior_captures):
-                            capture_closed_host_message(capture.parent, result)
-                            closed.append(str(capture.parent / "closed.json"))
                     if args.given_requests:
                         known = delivered_refs.setdefault((profile, bank), [])
                         for item in result.get("retrieval_result", {}).get("evidence", []):
@@ -196,8 +186,31 @@ def main() -> None:
                            "wall_seconds": time.perf_counter() - message_started,
                            "cpu_seconds": time.process_time() - message_cpu}
                     if args.capture_closed_host_messages:
-                        row["closed_host_snapshots"] = closed
+                        row.update(closed_host_snapshots=[], closed_host_capture_status="PENDING")
                     driver["completed"].append(row)
+                    # The public invocation has returned even if its optional snapshot fails.
+                    write_json(args.output / "driver.json", driver)
+                    if args.capture_closed_host_messages:
+                        from milai_lab.runners.frozen_host_message import (
+                            capture_closed_host_message,
+                        )
+
+                        try:
+                            for capture in sorted(set(host_directory.glob("*/host.json"))
+                                                  - prior_captures):
+                                capture_closed_host_message(capture.parent, result)
+                                row["closed_host_snapshots"].append(
+                                    str(capture.parent / "closed.json"))
+                            row["closed_host_capture_status"] = (
+                                "CAPTURED" if row["closed_host_snapshots"]
+                                else "NO_PRE_HOST_CAPTURE")
+                        except BaseException as error:
+                            row.update(closed_host_capture_status="FAILED_RETAINED",
+                                closed_host_capture_error=type(error).__name__ + ":" + str(error))
+                            write_json(args.output / "driver.json", driver)
+                            raise
+                        row.update(wall_seconds=time.perf_counter() - message_started,
+                                   cpu_seconds=time.process_time() - message_cpu)
                     if args.continue_host_history and result["status"] == "COMPLETED":
                         previous_messages[profile, bank] = request["id"]
                     write_json(args.output / "driver.json", driver)

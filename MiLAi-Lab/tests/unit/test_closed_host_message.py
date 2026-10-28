@@ -186,3 +186,34 @@ def test_response_observer_delegates_without_mutating_wire_or_exporting_reasonin
     saved, = recorder.row["delivered_model_requests"]
     assert "reasoning_content" not in saved["messages"][0]
     assert saved["messages"][1] == before[1] and saved["output_message_id"] == "final-id"
+
+
+def test_snapshot_failure_keeps_the_actual_completed_public_outcome(tmp_path, monkeypatch):
+    import run_host_intent_retrieval
+
+    root = capture_root(tmp_path)
+    freeze = read_json(root / "input-freeze.json")
+    config = tmp_path / "config.json"
+    settings = {**freeze["config"], "config_version": freeze["config_version"]}
+    write_json(config, {"entrypoints": {"functional": settings}})
+    fixture = tmp_path / "fixture.json"
+    write_json(fixture, {"histories": [{"id": "one", "source_group": "one", "split": "train",
+        "sources": [source()], "requests": [{"id": "q", "content": "Acknowledge."}]}]})
+    wires = scripted(monkeypatch, lambda *_: {"role": "assistant", "content": "Done."}, native=True)
+
+    def failed_snapshot(*_args):
+        raise OSError("synthetic snapshot failure")
+
+    monkeypatch.setattr("milai_lab.runners.frozen_host_message.capture_closed_host_message",
+                        failed_snapshot)
+    output = tmp_path / "collection"
+    monkeypatch.setattr(sys, "argv", ["collect", str(config), str(fixture), str(output),
+        "--source-version", VERSION, "--policies", "fixed_context", "--interfaces", "rich",
+        "--capture-closed-host-messages"])
+    with pytest.raises(OSError, match="synthetic snapshot failure"):
+        run_host_intent_retrieval.main()
+    driver = read_json(output / "driver.json")
+    assert driver["status"] == "FAILED" and len(wires) == 1
+    row, = driver["completed"]
+    assert row["status"] == "COMPLETED" and row["answer"] == "Done."
+    assert row["closed_host_capture_status"] == "FAILED_RETAINED"
