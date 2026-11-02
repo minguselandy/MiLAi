@@ -13,6 +13,9 @@ from typing import Any
 from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.methods.memory_control_learning import decision_example
 
+PREFIX_SLOTS = ("initial", "first_read", "second_read",
+                "same_known_changed_requirement_or_return_limit")
+
 
 def call_stratum(call: dict[str, Any]) -> tuple[bool, bool, bool, bool]:
     before = call["initial_observation"]
@@ -144,6 +147,120 @@ def select_quota_states(
     return selected, cells
 
 
+def select_prefix_states(
+    inventory: list[dict[str, Any]], report: dict[str, Any], groups: list[str], split: str,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    """Use exact reached prefixes, preserving missing and non-branchable cells separately."""
+    if report["status"] != "PRIMARY_PREFIX_INVENTORY_CREATED;NO_BRANCH_QUALITY_LABELS":
+        raise ValueError("Prefix branches require the actual primary-prefix inventory")
+    if [r["family"] for r in report["records"]] != groups:
+        raise ValueError("Each declared family must appear once, in the fixed prefix order")
+    available = {str(Path(e["path"]).resolve()): e for e in inventory}
+    selected: list[dict[str, Any]] = []
+    cells: list[dict[str, Any]] = []
+    used: set[str] = set()
+    for record in report["records"]:
+        selection = record["selection"]
+        slots = (selection["slots"] if selection is not None
+                 else dict.fromkeys(PREFIX_SLOTS))
+        if set(slots) != set(PREFIX_SLOTS):
+            raise ValueError("Prefix inventory must retain all four declared slots")
+        for name in PREFIX_SLOTS:
+            slot = slots[name]
+            cell = {"family": record["family"], "collection_policy": record["collector"],
+                    "prefix_slot": name,
+                    "primary_public_position": record["primary_public_position"],
+                    "public_position": copy.deepcopy(record["public_position"])}
+            if slot is None:
+                cells.append({**cell, "status": "MISSING_PREFIX", "path": None,
+                    "prefix_selection_status": (record["status"] if selection is None
+                                                else selection["status"])})
+                continue
+            path = str(Path(slot["capture"]).resolve())
+            if path not in available:
+                raise ValueError("Selected prefix has no actual capture in this collection")
+            entry = available[path]
+            if (entry["family"] != record["family"] or entry["split"] != split
+                    or entry["collection_policy"] != record["collector"]
+                    or entry["message_id"] != record["primary_public_position"]
+                    or entry["control_step"] != slot["control_step"]
+                    or Path(entry["run"]).resolve() != Path(report["collection"]).resolve()):
+                raise ValueError("Prefix identity differs from the actual source/call/step")
+            if path in used:
+                raise ValueError("One actual state cannot occupy multiple prefix slots")
+            used.add(path)
+            if not entry["eligible"]:
+                cells.append({**cell, "status": "REACHED_NOT_BRANCHABLE", "path": path,
+                              "reason": entry["reason"]})
+                continue
+            selected.append({**copy.deepcopy(entry), "prefix_slot": name,
+                             "primary_public_position": record["primary_public_position"]})
+            cells.append({**cell, "status": "SELECTED_FOR_BRANCHES", "path": path,
+                          "capture": entry["capture"]})
+    return selected, cells
+
+
+def fresh_inventory(allocation: dict[str, Any], split: str) -> list[dict[str, Any]]:
+    """Index only the exact fresh initial captures admitted to reserved cells."""
+    entries = []
+    for record in allocation["records"]:
+        for slot in record["slots"]:
+            if slot["origin"] != "fresh_request" or slot["capture"] is None:
+                continue
+            call = read_json(Path(slot["capture"]) / "call.json")
+            eligible = len(branch_actions(call)) >= 2
+            entries.append({"capture": f"fresh--{record['family']}--{slot['arm']}",
+                "path": slot["capture"], "family": record["family"], "split": split,
+                "run": slot["run"], "source_version": call["source_version"],
+                "message_id": call["public_message"]["message_id"], "control_step": 0,
+                "original_status": call["status"], "eligible": eligible,
+                "reason": None if eligible else "fewer_than_two_actual_action_branches",
+                "collection_policy": record["collector"], "state_origin": "fresh_request",
+                "stratum": (*call_stratum(call), False,
+                            bool(call["initial_observation"]["visible_evidence"]))})
+    return entries
+
+
+def select_allocated_states(
+    inventory: list[dict[str, Any]], allocation: dict[str, Any], groups: list[str], split: str,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    """Four fixed positions, including missing fresh arms; no original READ2 refill."""
+    if allocation["status"] != "FOUR_SLOT_ALLOCATION_RESOLVED_NO_QUALITY_LABELS":
+        raise ValueError("Branch preparation requires a resolved pre-execution allocation")
+    if [r["family"] for r in allocation["records"]] != groups:
+        raise ValueError("Allocated families must preserve the declared collection order")
+    available = {str(Path(e["path"]).resolve()): e for e in inventory}
+    selected, cells = [], []
+    used: set[str] = set()
+    for record in allocation["records"]:
+        if [s["slot"] for s in record["slots"]] != [1, 2, 3, 4]:
+            raise ValueError("Every family must retain exactly four allocated positions")
+        for slot in record["slots"]:
+            cell = {"family": record["family"], "collection_policy": record["collector"],
+                "prefix_slot": slot["role"], "slot": slot["slot"],
+                "state_origin": slot["origin"], "allocation_status": slot["status"],
+                "path": slot["capture"]}
+            if slot["capture"] is None:
+                cells.append({**cell, "status": "MISSING_PREFIX"})
+                continue
+            path = str(Path(slot["capture"]).resolve())
+            entry = available[path]
+            if (entry["family"] != record["family"] or entry["split"] != split
+                    or entry["collection_policy"] != record["collector"]
+                    or entry["control_step"] != slot["control_step"] or path in used):
+                raise ValueError("Allocated state identity changed or occupies multiple slots")
+            used.add(path)
+            if not entry["eligible"]:
+                cells.append({**cell, "status": "REACHED_NOT_BRANCHABLE",
+                              "reason": entry["reason"]})
+                continue
+            selected.append({**copy.deepcopy(entry), "prefix_slot": slot["role"],
+                "state_origin": slot["origin"], "allocated_slot": slot["slot"],
+                "primary_public_position": record["source_record"]["primary_public_position"]})
+            cells.append({**cell, "status": "SELECTED_FOR_BRANCHES", "capture": entry["capture"]})
+    return selected, cells
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("runs", nargs="+", type=Path)
@@ -160,13 +277,42 @@ def main() -> None:
     parser.add_argument("--state-quotas", type=Path,
                         help="JSON collector policy -> {initial: n, after_operation: n}; "
                              "explicit per-source quotas replace pooled --per-group selection")
+    parser.add_argument("--prefix-selection", type=Path,
+                        help="Exact primary-prefix selection.json for one collection; "
+                             "replaces pooled/phase quotas, with no missing-slot fill")
+    parser.add_argument("--prefix-allocation", type=Path,
+                        help="Resolved four-slot allocation with explicit fresh request arms")
     parser.add_argument("--branch-sampling", choices=("operations", "post-operation-bindings"),
                         default="operations",
                         help="Optional seeded binding alternatives on actual post-operation states")
     parser.add_argument("--continuation-steps", type=int, default=2)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
+    if args.prefix_selection is not None and args.prefix_allocation is not None:
+        parser.error("Choose original prefix selection or explicit fresh-slot allocation")
+    exact_path = args.prefix_selection or args.prefix_allocation
+    if exact_path is not None and (
+            not args.include_control_steps or args.state_quotas is not None
+            or args.include or args.bindings is not None):
+        parser.error("Prefix selection needs control steps and excludes quotas/manual nominations")
     started, cpu = time.perf_counter(), time.process_time()
+    prefix = read_json(args.prefix_selection) if args.prefix_selection is not None else None
+    allocation = read_json(args.prefix_allocation) if args.prefix_allocation is not None else None
+    exact = prefix or allocation
+    if exact is not None and (len(args.runs) != 1 or args.runs[0].resolve() != Path(
+            exact["collection"]).resolve()):
+        parser.error("Prefix selection binds one declared actual collection")
+    if allocation is not None:
+        from allocate_known_budget_prefixes import resolve_record
+
+        fixed = read_json(Path(allocation["input"]))
+        if fixed["status"] != "FOUR_SLOT_ALLOCATION_FIXED_BEFORE_FRESH_EXECUTION":
+            raise ValueError("Fresh branch slots need their original pre-execution allocation")
+        for prior, actual in zip(fixed["records"], allocation["records"], strict=True):
+            outputs = {s["arm"]: Path(s["run"]) for s in actual["slots"]
+                       if s["origin"] == "fresh_request"}
+            if resolve_record(prior, outputs) != actual:
+                raise ValueError("Resolved allocation no longer matches the actual fresh attempts")
     entries, inventory, calls = [], [], {}
     collectors: dict[str, str] = {}
     for root in args.runs:
@@ -195,7 +341,7 @@ def main() -> None:
                      "message_id": call["public_message"]["message_id"],
                      "control_step": call.get("control_step", 0),
                      "original_status": call["status"], "eligible": False}
-            if args.state_quotas is not None:
+            if args.state_quotas is not None or exact is not None:
                 source_root = call["source_root"]
                 if source_root not in collectors:
                     collectors[source_root] = read_json(Path(source_root) / "input-freeze.json")[
@@ -217,11 +363,23 @@ def main() -> None:
                 entry.update(eligible=True, stratum=stratum)
                 entries.append(entry)
             inventory.append(entry)
+    if allocation is not None:
+        for entry in fresh_inventory(allocation, args.split):
+            if entry["capture"] in calls:
+                raise ValueError("Fresh capture name collides with an original capture")
+            calls[entry["capture"]] = read_json(Path(entry["path"]) / "call.json")
+            inventory.append(entry)
     bindings = read_json(args.bindings) if args.bindings is not None else {}
     include = list(dict.fromkeys([*args.include, *bindings]))
     quotas = read_json(args.state_quotas) if args.state_quotas is not None else None
     quota_cells = None
-    if quotas is None:
+    prefix_cells = None
+    if allocation is not None:
+        selected, prefix_cells = select_allocated_states(
+            inventory, allocation, args.groups, args.split)
+    elif prefix is not None:
+        selected, prefix_cells = select_prefix_states(inventory, prefix, args.groups, args.split)
+    elif quotas is None:
         selected = select_states(entries, args.groups, args.per_group, args.seed, include)
     else:
         if not args.include_control_steps and any(
@@ -236,6 +394,18 @@ def main() -> None:
     for entry in inventory:
         if entry["original_status"] in {"ORIGINAL_COMPLETED", "ORIGINAL_FAILED"}:
             (captures / entry["capture"]).symlink_to(entry["path"], target_is_directory=True)
+    controlled_frames = {}
+    if allocation is not None:
+        from prepare_known_budget_readout import prepare_controlled_readout
+
+        preparations = {r["family"]: r["preparation"] for r in allocation["records"]}
+        for entry in selected:
+            if entry["state_origin"] == "fresh_request":
+                frame = prepare_controlled_readout(
+                    preparations[entry["family"]], Path(entry["path"]))
+                path = args.output / "controlled-readout-frames" / (entry["capture"] + ".json")
+                write_json(path, frame)
+                controlled_frames[entry["capture"]] = str(path.resolve())
     policies = []
     binding_rng = random.Random(args.seed)  # noqa: S311 -- explicit data acquisition seed
     for index, entry in enumerate(selected):
@@ -253,6 +423,8 @@ def main() -> None:
                 "policy": {"policy": "fixed_context", "reads": 4},
                 "intervention": {"first_action": action,
                                  "continuation_steps": args.continuation_steps},
+                **({"host_readout_frame": controlled_frames[capture]}
+                   if capture in controlled_frames else {}),
             })
     write_json(args.output / "policies.json", policies)
     with (args.output / "raw-selected-states.jsonl").open("w", encoding="utf-8") as stream:
@@ -265,19 +437,27 @@ def main() -> None:
                                     "actions": call["initial_actions"]}, metadata)
             stream.write(json.dumps(row, ensure_ascii=False) + "\n")
     write_json(args.output / "selection.json", {
-        "status": "PREPARED_NOT_EXECUTED", "groups": args.groups, "seed": args.seed,
+        "status": ("NO_EXECUTABLE_BRANCHES_PREFIX_DENOMINATORS_RETAINED"
+                   if exact is not None and not policies else "PREPARED_NOT_EXECUTED"),
+        "groups": args.groups, "seed": args.seed,
         "split": args.split,
         "include_control_steps": args.include_control_steps,
-        "per_group_maximum": (args.per_group if quotas is None else
-                              sum(n for phases in quotas.values() for n in phases.values())),
+        "per_group_maximum": (len(PREFIX_SLOTS) if exact is not None else args.per_group
+                              if quotas is None else sum(
+                                  n for phases in quotas.values() for n in phases.values())),
         "nominated_captures": include,
         **({"state_quotas": quotas, "quota_cells": quota_cells,
             "quota_shortfall": sum(cell["shortfall"] for cell in quota_cells)}
            if quota_cells is not None else {}),
+        **({"prefix_selection": str(exact_path.resolve()),
+            "prefix_cells": prefix_cells,
+            "prefix_cell_statuses": dict(Counter(c["status"] for c in prefix_cells))}
+           if exact_path is not None and prefix_cells is not None else {}),
         "binding_nominations": bindings,
         "branch_sampling": args.branch_sampling,
         "selected": selected, "inventory": inventory, "states": len(selected),
         "branches": len(policies),
+        "controlled_readout_frames": controlled_frames,
         "exported_raw_states": len(selected), "operation_labels_added": False,
         "group_states": dict(Counter(entry["family"] for entry in selected)),
         "groups_without_eligible_state": sorted(set(args.groups) - {
@@ -285,8 +465,11 @@ def main() -> None:
         "stratum_order": ["has_view", "known_evidence", "original_source_requested",
                           "actual_incoming_sources", *(["after_operation", "has_delivered_evidence"]
                                                        if args.include_control_steps else [])],
-        "selection": "Declared diagnostic nominations, then round-robin observable strata; "
-                     "no answers, semantic grades or action scores used for remaining selection.",
+        "selection": ("Exact predeclared primary-prefix slots only; missing/unbranchable "
+                      "cells remain without substitutes or negative labels."
+                      if exact is not None else
+                      "Declared diagnostic nominations, then round-robin observable strata; "
+                      "no answers, semantic grades or action scores used for remaining selection."),
         "branch_selection": "Explicit binding nominations use actual offered actions. Other "
                             "representatives use operation opportunities, not presumed utility. "
                             "Optional post-step binding sampling chooses a kind uniformly, then "

@@ -125,57 +125,27 @@ def readout_answer(response: dict[str, Any], mode: str, request: dict[str, Any])
     return content
 
 
-def run_readout(
-    captured: Path, replay: Path, output: Path, frame: dict[str, Any], *, source_version: str,
-) -> dict[str, Any]:
-    """Meter one readout through the original HTTP owner, queue and remaining call gate."""
+def execute_readout_request(
+    runtime: Path, call: dict[str, Any], wire: dict[str, Any], output: Path,
+    report: dict[str, Any], trace: Trace, *, answer_mode: str,
+) -> None:
+    """Send one final answer through the actual bank's remaining admission and ledger."""
     from milai_lab.runners import functional
-
-    output.mkdir(parents=True, exist_ok=False)
-    started, cpu = time.perf_counter(), time.process_time()
-    report: dict[str, Any] = {
-        "status": "RUNNING", "source_version": source_version,
-        "captured_call": str(captured), "replay": str(replay),
-        "automatic_retry": False, "actual_http_attempts": 0,
-        "http_attempt_scope": "Native dispatch attempts, not provider acknowledgements.",
-        "scope": frame["scope"], "cpu_ledger_recorded": False,
-        "http_accounting": "Original continuous ledger, no separate budget.",
-    }
-    trace = Trace(output / "trace.jsonl", "frozen_host_readout")
 
     def dispatched(event: dict[str, Any]) -> None:
         if event["event"] == "vllm_request":
             report["actual_http_attempts"] += 1
             trace(event)
 
+    freeze = functional.frozen(runtime)
+    settings = freeze["config"]
+    bank_root = runtime / Path(call["source_bank_root"]).relative_to(call["source_root"])
+    limits = RunLimits(**freeze["budget_before"]["limits"])
+    configs = [asdict(VLLMConfig(**settings["host"]))]
+    if "embedding" in settings:
+        configs.append(asdict(VLLMConfig(**settings["embedding"])))
     budget = None
     try:
-        write_json(output / "frame.json", frame)
-        if frame["status"] != "READY":
-            report.update(status="NOT_EXECUTED", reason=frame["status"])
-            return report
-        result = read_json(replay / "replay.json")["result"]
-        receipts = [row for row in result.get("messages", [])
-                    if row.get("type") == "tool" and row.get("tool_call_id") == frame["call_id"]]
-        if not receipts:
-            report.update(status="NOT_EXECUTED", reason="NO_ACTUAL_TOOL_RECEIPT",
-                          tool_status=result["status"])
-            return report
-        receipt, = receipts
-        # This is the actual returned ToolMessage, including structured error packets.
-        if json.loads(receipt["content"]) != result["retrieval_result"]:
-            raise ValueError("FROZEN_READOUT_RECEIPT_AND_RESULT_DIFFER")
-        wire = substitute_receipt(frame, receipt)
-        write_json(output / "request.json", wire)
-        call = read_json(captured / "call.json")
-        runtime = replay / "runtime"
-        freeze = functional.frozen(runtime)
-        settings = freeze["config"]
-        bank_root = runtime / Path(call["source_bank_root"]).relative_to(call["source_root"])
-        limits = RunLimits(**freeze["budget_before"]["limits"])
-        configs = [asdict(VLLMConfig(**settings["host"]))]
-        if "embedding" in settings:
-            configs.append(asdict(VLLMConfig(**settings["embedding"])))
         with http_budget_scope(settings, limits, client_configs=configs):
             budget = entry_budget(limits, Path(settings["budget_path"]))
             report["budget_before"] = copy.deepcopy(budget.state)
@@ -200,7 +170,49 @@ def run_readout(
                 response = client.native_post("chat/completions", wire, on_event=dispatched)
                 write_json(output / "response.json", response)
                 report.update(status="COMPLETED",
-                    answer=readout_answer(response, frame["tool_mode"], wire))
+                    answer=readout_answer(response, answer_mode, wire))
+    finally:
+        if budget is not None:
+            report["budget_after"] = copy.deepcopy(budget.state)
+
+
+def run_readout(
+    captured: Path, replay: Path, output: Path, frame: dict[str, Any], *, source_version: str,
+) -> dict[str, Any]:
+    """Meter one readout through the original HTTP owner, queue and remaining call gate."""
+    output.mkdir(parents=True, exist_ok=False)
+    started, cpu = time.perf_counter(), time.process_time()
+    report: dict[str, Any] = {
+        "status": "RUNNING", "source_version": source_version,
+        "captured_call": str(captured), "replay": str(replay),
+        "automatic_retry": False, "actual_http_attempts": 0,
+        "http_attempt_scope": "Native dispatch attempts, not provider acknowledgements.",
+        "scope": frame["scope"], "cpu_ledger_recorded": False,
+        "http_accounting": "Original continuous ledger, no separate budget.",
+    }
+    trace = Trace(output / "trace.jsonl", "frozen_host_readout")
+
+    try:
+        write_json(output / "frame.json", frame)
+        if frame["status"] != "READY":
+            report.update(status="NOT_EXECUTED", reason=frame["status"])
+            return report
+        result = read_json(replay / "replay.json")["result"]
+        receipts = [row for row in result.get("messages", [])
+                    if row.get("type") == "tool" and row.get("tool_call_id") == frame["call_id"]]
+        if not receipts:
+            report.update(status="NOT_EXECUTED", reason="NO_ACTUAL_TOOL_RECEIPT",
+                          tool_status=result["status"])
+            return report
+        receipt, = receipts
+        # This is the actual returned ToolMessage, including structured error packets.
+        if json.loads(receipt["content"]) != result["retrieval_result"]:
+            raise ValueError("FROZEN_READOUT_RECEIPT_AND_RESULT_DIFFER")
+        wire = substitute_receipt(frame, receipt)
+        write_json(output / "request.json", wire)
+        call = read_json(captured / "call.json")
+        execute_readout_request(replay / "runtime", call, wire, output, report, trace,
+                                answer_mode=frame["tool_mode"])
         return report
     except BaseException as error:
         report.update(status="FAILED", error_type=type(error).__name__, error=str(error))
@@ -211,6 +223,4 @@ def run_readout(
         report.update(wall_seconds=time.perf_counter() - started,
             cpu_seconds=time.process_time() - cpu,
             usage=trace.usage)
-        if budget is not None:
-            report["budget_after"] = copy.deepcopy(budget.state)
         write_json(output / "readout.json", report)

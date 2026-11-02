@@ -58,6 +58,7 @@ class EvidenceOperations:
         refresh_call: Callable[[list[dict[str, str]], dict[str, Any]], dict[str, Any]],
         fits: Callable[[list[dict[str, Any]]], bool],
         excluded_source_refs: tuple[str, ...] = (),
+        exclude_given_requests: bool = False,
         view_capacity: int = 1,
         view_policy: QueryStructurePolicy = "incremental",
         view_builder: QueryStructureBuilder = "generated",
@@ -103,6 +104,7 @@ class EvidenceOperations:
                                           if source_observation else None),
             **({"internal_views": False} if not internal_views else {}),
             **({"view_updates": False} if not view_updates else {}),
+            **({"exclude_given_requests": True} if exclude_given_requests else {}),
         }
         if checkpoint is not None:
             self.restore_checkpoint(checkpoint, source_observation)
@@ -115,6 +117,9 @@ class EvidenceOperations:
         self.excluded_source_refs = list(excluded_source_refs)
         self.views = {slot: view for slot, view in cached_structures(
             service, view_capacity).items() if view.get("builder", "generated") == view_builder
+            and (not exclude_given_requests or not any(
+                binding["source_ref"] in excluded_source_refs
+                for binding in view["source_bindings"].values()))
         } if internal_views else {}
         started = time.perf_counter()
         cursors = [v["arrival_cursor"][0] for v in self.views.values() if v["arrival_cursor"]]

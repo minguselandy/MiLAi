@@ -12,6 +12,7 @@ from prepare_view_feedback_branches import (
     call_stratum,
     nominated_actions,
     parameter_actions,
+    select_prefix_states,
     select_quota_states,
     select_states,
 )
@@ -168,3 +169,78 @@ def test_seeded_parameter_comparison_preserves_actual_targets_and_unknown_other_
         {"id": "stop", "kind": "HANDOFF", "target": "Host", "parameters": {}})
     rng.seed(0)
     assert parameter_actions(original, rng) == branch_actions(original)
+
+
+def prefix_pool():
+    root = "/collection/frozen-retrieval-calls/primary"
+    entries = [{"capture": f"primary-step-{step}", "path": root + f"/step-{step}",
+        "family": "g0", "split": "train", "collection_policy": "rules",
+        "message_id": "p0", "control_step": step, "run": "/collection",
+        "eligible": step != 1, "reason": "fewer_than_two_actual_action_branches"}
+        for step in range(3)]
+    report = {"status": "PRIMARY_PREFIX_INVENTORY_CREATED;NO_BRANCH_QUALITY_LABELS",
+        "collection": "/collection", "records": [
+            {"family": "g0", "collector": "rules", "primary_public_position": "p0",
+             "public_position": {"status": "FAILED"}, "status": "FIRST_ACTUAL_CALL_RETAINED",
+             "selection": {"status": "ACTUAL_PREFIX_SLOTS_SELECTED_MISSING_RETAINED", "slots": {
+                 "initial": {"capture": entries[0]["path"], "control_step": 0},
+                 "first_read": {"capture": entries[1]["path"], "control_step": 1},
+                 "second_read": None, "same_known_changed_requirement_or_return_limit": None}}},
+            {"family": "g1", "collector": "rules", "primary_public_position": "p0",
+             "public_position": {"status": "NOT_EXECUTED"},
+             "status": "NO_ACTUAL_PRIMARY_CALL", "selection": None}]}
+    return entries, report
+
+
+def test_exact_prefix_selection_does_not_fill_missing_or_single_action_slots():
+    entries, report = prefix_pool()
+    before = copy.deepcopy((entries, report))
+    selected, cells = select_prefix_states(entries, report, ["g0", "g1"], "train")
+    assert (entries, report) == before
+    assert len(selected) == 1 and selected[0]["control_step"] == 0
+    assert selected[0]["prefix_slot"] == "initial"
+    assert len(cells) == 8
+    assert sum(c["status"] == "MISSING_PREFIX" for c in cells) == 6
+    assert sum(c["status"] == "REACHED_NOT_BRANCHABLE" for c in cells) == 1
+    assert all(e["control_step"] != 2 for e in selected)
+    assert cells[0]["public_position"]["status"] == "FAILED"
+
+
+def test_all_missing_prefixes_preserve_every_planned_cell_without_any_branch_state():
+    _, report = prefix_pool()
+    report["records"] = [report["records"][1]]
+    selected, cells = select_prefix_states([], report, ["g1"], "train")
+    assert selected == [] and len(cells) == 4
+    assert all(c["status"] == "MISSING_PREFIX" for c in cells)
+
+
+@pytest.mark.parametrize("field,value", [
+    ("family", "other"), ("split", "dev"), ("collection_policy", "fixed_context"),
+    ("message_id", "later"), ("control_step", 9), ("run", "/other-collection")])
+def test_prefix_cannot_borrow_a_state_from_another_identity_or_split(field, value):
+    entries, report = prefix_pool()
+    entries[0][field] = value
+    with pytest.raises(ValueError, match="identity"):
+        select_prefix_states(entries, report, ["g0", "g1"], "train")
+
+
+def test_one_state_cannot_be_counted_as_two_prefix_slots_or_drop_missing_slots():
+    entries, report = prefix_pool()
+    slots = report["records"][0]["selection"]["slots"]
+    slots["first_read"] = slots["initial"]
+    with pytest.raises(ValueError, match="multiple prefix slots"):
+        select_prefix_states(entries, report, ["g0", "g1"], "train")
+    del slots["second_read"]
+    with pytest.raises(ValueError, match="all four"):
+        select_prefix_states(entries, report, ["g0", "g1"], "train")
+
+
+def test_fixed_source_order_is_not_resampled_and_outcomes_do_not_select_prefixes():
+    entries, report = prefix_pool()
+    with pytest.raises(ValueError, match="fixed prefix order"):
+        select_prefix_states(entries, report, ["g1", "g0"], "train")
+    selected, _ = select_prefix_states(entries, report, ["g0", "g1"], "train")
+    for entry in entries:
+        entry.update(answer="opposite", semantic_quality=100)
+    again, _ = select_prefix_states(entries, report, ["g0", "g1"], "train")
+    assert [e["capture"] for e in selected] == [e["capture"] for e in again]

@@ -60,7 +60,14 @@ def main() -> None:
     parser.add_argument("--given-requests", action="store_true",
                         help="Conditional retrieval-only probes from fixture retrieval_request; "
                              "use_delivered_refs binds earlier actual receipts, no Host answer")
+    parser.add_argument("--given-readouts", action="store_true",
+                        help="With --given-requests, measure one final answer from each actual "
+                             "packet before later arrivals; answers are not stored or continued")
     args = parser.parse_args()
+    if args.given_readouts:
+        if not args.given_requests:
+            parser.error("--given-readouts requires --given-requests")
+        args.capture_retrieval_calls = True
     if args.capture_closed_host_messages:
         args.capture_host_messages = True
     if args.native_probe and args.transport == "json_action":
@@ -86,6 +93,14 @@ def main() -> None:
     histories = [h for h in fixture["histories"]
                  if (not args.history or h["id"] in args.history)
                  and (not args.split or h["split"] == args.split)]
+    if args.given_readouts:
+        from milai_lab.runners.given_host_readout import validate_given_readout_request
+
+        for history in histories:
+            for request in history["requests"]:
+                if request.get("use_delivered_refs"):
+                    raise ValueError("GIVEN_READOUT_CANNOT_RECONSTRUCT_PRIOR_HOST_KNOWLEDGE")
+                validate_given_readout_request(request["retrieval_request"])
     config = read_json(args.config)
     if args.transport:
         settings = config["entrypoints"]["functional"]
@@ -105,6 +120,7 @@ def main() -> None:
         "interfaces": interfaces, "split": args.split,
         "continue_host_history": args.continue_host_history,
         "given_requests": args.given_requests,
+        **({"given_readouts": True} if args.given_readouts else {}),
         "capture_retrieval_calls": args.capture_retrieval_calls or args.capture_control_steps,
         "capture_control_steps": args.capture_control_steps,
         "capture_host_messages": args.capture_host_messages,
@@ -157,6 +173,9 @@ def main() -> None:
                     host_directory = args.output / "frozen-host-messages"
                     prior_captures = (set(host_directory.glob("*/host.json"))
                                       if args.capture_closed_host_messages else set())
+                    retrieval_directory = args.output / "frozen-retrieval-calls"
+                    prior_retrievals = (set(retrieval_directory.glob("*/call.json"))
+                                        if args.given_readouts else set())
                     result = message(args.output / profile,
                         bank=bank, owner="development-user",
                         session="host", message_id=request["id"],
@@ -190,6 +209,39 @@ def main() -> None:
                     driver["completed"].append(row)
                     # The public invocation has returned even if its optional snapshot fails.
                     write_json(args.output / "driver.json", driver)
+                    if args.given_readouts:
+                        from milai_lab.providers.chat_bridge import IncompleteChatResponse
+                        from milai_lab.runners.given_host_readout import run_given_readout
+
+                        capture, = set(retrieval_directory.glob("*/call.json")) - prior_retrievals
+                        readout_output = args.output / "given-readouts" / capture.parent.name
+                        readout_file = readout_output / "readout.json"
+                        row["conditional_readout"] = {
+                            "status": "RUNNING", "result": str(readout_file)}
+                        write_json(args.output / "driver.json", driver)
+                        try:
+                            run_given_readout(capture.parent, readout_output,
+                                              source_version=args.source_version)
+                        except IncompleteChatResponse:
+                            readout = read_json(readout_file)
+                            if any(readout["budget_after"][kind]["unknown_usage"]
+                                   != readout["budget_before"][kind]["unknown_usage"]
+                                   for kind in ("generation", "embedding")):
+                                raise
+                        finally:
+                            if readout_file.exists():
+                                readout = read_json(readout_file)
+                                row["conditional_readout"].update(
+                                    status=readout["status"], answer=readout.get("answer"),
+                                    error=readout.get("error"),
+                                    actual_http_attempts=readout["actual_http_attempts"],
+                                    wall_seconds=readout["wall_seconds"],
+                                    cpu_seconds_nested=readout["cpu_seconds"])
+                                row["wall_seconds_including_readout"] = (
+                                    time.perf_counter() - message_started)
+                                row["cpu_seconds_including_readout_nested"] = (
+                                    time.process_time() - message_cpu)
+                                write_json(args.output / "driver.json", driver)
                     if args.capture_closed_host_messages:
                         from milai_lab.runners.frozen_host_message import (
                             capture_closed_host_message,
@@ -227,7 +279,9 @@ def main() -> None:
                         raise RuntimeError(
                             "First failed position retained; inspect before continuing")
         driver["status"] = ("COMPLETED_WITH_FAILURES" if any(
-            row["status"] != "COMPLETED" for row in driver["completed"]) else "COMPLETED")
+            row["status"] != "COMPLETED" or (
+                args.given_readouts and row["conditional_readout"]["status"] != "COMPLETED")
+            for row in driver["completed"]) else "COMPLETED")
     except BaseException as error:
         driver.update(status="FAILED", error_type=type(error).__name__, error=str(error))
         raise

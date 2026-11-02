@@ -20,6 +20,28 @@ from typing import Any
 from milai_lab.harness.artifact_io import read_json, write_json
 
 
+def declared_readout_frame(captured: Path, policies: list[dict[str, Any]]) -> dict[str, Any]:
+    """Explicit controlled frames remain distinct from an original autonomous Host frame."""
+    from milai_lab.runners.frozen_host_readout import prepare_readout
+
+    selected = [p for p in policies if p.get("capture") == captured.name]
+    paths = {p.get("host_readout_frame") for p in selected}
+    if not paths or paths == {None}:
+        return prepare_readout(captured)
+    if len(paths) != 1 or None in paths:
+        raise ValueError("One actual state must use the same declared Host frame across branches")
+    path, = paths
+    assert path is not None
+    frame: dict[str, Any] = read_json(Path(path))
+    call = read_json(captured / "call.json")
+    if (frame["schema"] != "frozen_host_readout_v1" or frame["status"] != "READY"
+            or frame["frame_origin"] != "CONTROLLED_FRESH_REQUEST_AFTER_CLOSED_ACTUAL_DELIVERY"
+            or Path(frame["captured_call"]).resolve() != captured.resolve()
+            or frame["call_id"] != call["call_id"] or call["host_request_generated"]):
+        raise ValueError("Controlled Host frame does not belong to this actual fresh capture")
+    return frame
+
+
 def main() -> None:
     started, cpu = time.perf_counter(), time.process_time()
     parser = argparse.ArgumentParser(description=__doc__)
@@ -43,6 +65,8 @@ def main() -> None:
     calls = [(path.parent, read_json(path)) for path in args.captures.glob("*/call.json")]
     calls.sort(key=lambda item: item[1]["captured_epoch"])
     policies = read_json(args.policies)
+    if not args.host_readout and any("host_readout_frame" in arm for arm in policies):
+        parser.error("Declared controlled Host frames require --host-readout")
     if not calls or not policies or len({arm["name"] for arm in policies}) != len(policies):
         raise ValueError("Frozen comparison needs a nonempty cohort and uniquely named policies")
     if any(call["status"] not in {"ORIGINAL_COMPLETED", "ORIGINAL_FAILED"} for _, call in calls):
@@ -77,12 +101,12 @@ def main() -> None:
     frames: dict[int, dict[str, Any]] = {}
     try:
         if args.host_readout:
-            from milai_lab.runners.frozen_host_readout import prepare_readout, run_readout
+            from milai_lab.runners.frozen_host_readout import run_readout
 
             (args.output / "readout-frames").mkdir()
             for index in sorted(selected):
                 captured = calls[index][0]
-                frames[index] = prepare_readout(captured)
+                frames[index] = declared_readout_frame(captured, policies)
                 write_json(args.output / "readout-frames" / f"{index:05d}.json", frames[index])
         for arm_index, index in jobs:
             arm, captured = policies[arm_index], calls[index][0]

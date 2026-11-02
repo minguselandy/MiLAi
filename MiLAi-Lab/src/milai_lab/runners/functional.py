@@ -2941,6 +2941,8 @@ def message(
                     if settings.get("retrieval_tool"):
                         memory_options["control_delivery_selection"] = control.get(
                             "delivery_selection", False)
+                        memory_options["control_exclude_given_requests"] = control.get(
+                            "exclude_given_requests", False)
                         if control.get("source_range_tokens") is not None:
                             from milai_lab.methods.source_ranges import SourceRangeBudget
 

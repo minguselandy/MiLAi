@@ -1,8 +1,9 @@
 """Measure native Laya decisions on frozen read prefixes, without generation.
 
 All model-visible requests and first outputs are saved. Reference labels are
-used only after the forward pass. The original shared ledger receives CPU cost;
-no HTTP request or zero-output-token saving is invented for this local workload.
+used only after the forward pass. The original shared ledger receives measured
+local cost; CUDA runs also record their device-reservation wall interval and peak
+memory. This is not active-kernel time or a generation-token saving.
 """
 
 from __future__ import annotations
@@ -152,7 +153,22 @@ def main() -> None:
     started, cpu = time.perf_counter(), time.process_time()
     predictions = []
     model = None
+    cuda_index = None
+    cuda_started = None
     try:
+        device = torch.device(args.device)
+        if device.type == "cuda":
+            index = torch.cuda.current_device() if device.index is None else device.index
+            torch.cuda.set_device(index)
+            torch.cuda.set_per_process_memory_fraction(0.75, index)
+            torch.cuda.reset_peak_memory_stats(index)
+            torch.backends.cuda.matmul.allow_tf32 = False
+            torch.backends.cudnn.allow_tf32 = False
+            cuda_index, cuda_started = index, time.perf_counter()
+            run.update(cuda_device_index=index, cuda_memory_fraction=0.75,
+                cuda_matmul_allow_tf32=False, cudnn_allow_tf32=False,
+                cuda_time_scope="Wall interval after CUDA admission through cost snapshot, "
+                                "including model loading/preparation; not active-kernel time")
         model = NativeDecision(args.checkpoint, args.max_len, args.head_max_len, args.device)
         if args.disable_reference_compile:
             model.model.encoder.config.reference_compile = False
@@ -167,6 +183,9 @@ def main() -> None:
             write_json(args.output / "run.json", run)
             print(json.dumps({"completed": len(predictions), "planned": len(rows),
                               "input_tokens": prediction["input_tokens"]}), flush=True)
+        if cuda_index is not None:
+            torch.cuda.synchronize(cuda_index)
+            run["cuda_synchronized_completion"] = True
         from milai_lab.methods.memory_control_learning import score_operation_predictions
         from retrieval_mixture import score_mixed_predictions
 
@@ -181,11 +200,18 @@ def main() -> None:
         run.update(status="FAILED", error_type=type(error).__name__, error=str(error))
         raise
     finally:
-        measures = {"wall_seconds": time.perf_counter() - started,
+        finished = time.perf_counter()
+        measures = {"wall_seconds": finished - started,
                     "cpu_seconds": time.process_time() - cpu, "runs": 1,
                     **(model.counters if model is not None else {})}
+        cuda_peaks = {}
+        if cuda_started is not None:
+            measures["cuda_job_wall_seconds"] = finished - cuda_started
+            cuda_peaks = {"peak_cuda_allocated_bytes": torch.cuda.max_memory_allocated(cuda_index),
+                          "peak_cuda_reserved_bytes": torch.cuda.max_memory_reserved(cuda_index)}
         write_json(args.output / "compute.json", {**measures,
             "peak_rss_kib": resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,
+            **cuda_peaks,
             "ledger": str(args.budget)})
         with args.budget.with_name("budget.json.http-owner.lock").open("a+b") as lease:
             fcntl.flock(lease, fcntl.LOCK_EX)

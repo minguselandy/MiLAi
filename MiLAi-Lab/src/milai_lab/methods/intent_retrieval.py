@@ -110,6 +110,7 @@ class IntentRetrievalMemory(FunctionalEditMemory):
                  capture_control_steps: bool = False,
                  control_intervention: FirstActionIntervention | None = None,
                  control_delivery_selection: bool = False,
+                 control_exclude_given_requests: bool = False,
                  control_source_ranges: SourceRangeBudget | None = None,
                  return_envelope: Callable[[dict[str, Any]], Any] | None = None,
                  **kwargs: Any) -> None:
@@ -122,9 +123,12 @@ class IntentRetrievalMemory(FunctionalEditMemory):
         self.capture_control_steps = capture_control_steps
         self.control_intervention = control_intervention
         self.control_delivery_selection = control_delivery_selection
+        self.control_exclude_given_requests = control_exclude_given_requests
         self.control_source_ranges = control_source_ranges
         self.return_envelope = return_envelope
         self.policy["retrieval_interface"] = retrieval_interface
+        if control_exclude_given_requests:
+            self.policy["exclude_given_requests"] = True
         if control_source_ranges is not None:
             self.policy["source_range_tokens"] = control_source_ranges.tokens
 
@@ -290,9 +294,32 @@ class IntentRetrievalMemory(FunctionalEditMemory):
             "known_evidence": project_packs(known, list(range(len(known))))},
             budget={"max_return_tokens": return_limit}))
 
+        excluded: tuple[str, ...] = (bound["source_ref"],)
+        if self.control_exclude_given_requests:
+            # Explicit experiment queries remain in the audit Store, but are not
+            # domain evidence. Ordinary questions, including mixed assertions,
+            # have no such producer marker and stay in the common source pool.
+            refs = set(excluded)
+            offset, materialized = 0, 0
+            while True:
+                page = self.service.store.search(self.service.sources_namespace,
+                    filter={"owner": self.service.owner,
+                            "capture_context": "given_retrieval_request"},
+                    limit=1000, offset=offset)
+                materialized += len(page)
+                refs.update(item.key for item in page
+                            if item.namespace == self.service.sources_namespace)
+                if len(page) < 1000:
+                    break
+                offset += len(page)
+            excluded = tuple(sorted(refs))
+            self.control_record({"event": "retrieval_given_request_source_exclusion",
+                "metadata_rows_materialized": materialized, "excluded_source_refs": list(excluded),
+                "scope": "Producer-marked supplied queries only; no question-text classifier."})
+
         def search_pool(query: str, limit: int) -> list[dict[str, Any]]:
             native = self.service.search_sources(query, limit=min(limit, self.source_top_k),
-                excluded_source_refs=(bound["source_ref"],), tokenization=self.source_tokenization)
+                excluded_source_refs=excluded, tokenization=self.source_tokenization)
             records = (self.service.search(query, limit=min(limit, self.semantic_top_k),
                                            include_raw=False)["records"]
                        if self.control_internal_views else [])
@@ -322,7 +349,8 @@ class IntentRetrievalMemory(FunctionalEditMemory):
             refresh_call=refresh,
             fits=lambda items: self.token_count(canonical(items)) <= return_limit,
             fits_materials=fits_delivery,
-            excluded_source_refs=(bound["source_ref"],),
+            excluded_source_refs=excluded,
+            exclude_given_requests=self.control_exclude_given_requests,
             known_materials=known,
             view_capacity=self.control_view_capacity, view_policy=self.control_view_policy,
             view_builder=self.control_view_builder,

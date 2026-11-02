@@ -32,14 +32,17 @@ def evaluate_file(data: Path, checkpoint: Path, output: Path, recipe: dict[str, 
 def verified_predictions(output: Path, rows: list[dict[str, Any]], lengths: list[dict[str, Any]],
                          recipe: dict[str, Any], checkpoint: Path) -> list[dict[str, Any]]:
     run = read_json(output / "run.json")
+    device = recipe.get("device", "cpu")
     if (run["status"] != "COMPLETED" or run["completed_states"] != len(rows)
-            or run["operation_state"] != recipe["operation_state"] or run["device"] != "cpu"
+            or run["operation_state"] != recipe["operation_state"] or run["device"] != device
             or run["reference_compile_override"] is not False or run["mha_fastpath_enabled"]
             or run["loaded_weight_dtype"] != "torch.float32" or run["calibrated"]
             or run["max_len"] != recipe["max_len"]
             or run["head_max_len"] != recipe["head_max_len"]
             or Path(run["checkpoint"]).resolve() != checkpoint.resolve()):
         raise ValueError("Saved-model evaluation differs from the declared inference condition")
+    if device.startswith("cuda") and run.get("cuda_synchronized_completion") is not True:
+        raise ValueError("CUDA saved evaluation has no synchronized completion evidence")
     if sorted(int(p.name) for p in (output / "calls").iterdir()) != list(range(len(rows))):
         raise ValueError("Saved-model evaluation has incomplete planned coverage")
     predictions = []
@@ -60,8 +63,15 @@ def verified_compute(output: Path, recipe: dict[str, Any], phase: str,
                      predictions: list[dict[str, Any]]) -> dict[str, Any]:
     compute: dict[str, Any] = read_json(output / "compute.json")
     recorded = read_json(Path(recipe["ledger"]))["compute"][phase]
-    measures = {k: v for k, v in compute.items() if k not in ("ledger", "peak_rss_kib")}
+    peaks = {"peak_rss_kib", "peak_cuda_allocated_bytes", "peak_cuda_reserved_bytes"}
+    measures = {k: v for k, v in compute.items() if k not in {"ledger", *peaks}}
+    if recipe.get("device", "cpu").startswith("cuda") and (
+            "cuda_job_wall_seconds" not in compute
+            or not 0 <= compute["cuda_job_wall_seconds"] <= compute["wall_seconds"]
+            or not {"peak_cuda_allocated_bytes", "peak_cuda_reserved_bytes"} <= compute.keys()):
+        raise ValueError("CUDA saved evaluation is missing measured timing or memory metadata")
     if (Path(compute["ledger"]).resolve() != Path(recipe["ledger"]).resolve()
+            or not measures.keys() <= recorded.keys()
             or any(recorded[k] != value for k, value in measures.items())
             or compute["sequence_rows"] != len(predictions)
             or compute["input_tokens"] != sum(p["input_tokens"] for p in predictions)):

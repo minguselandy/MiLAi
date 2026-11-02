@@ -18,12 +18,21 @@ import resource
 import time
 from collections import Counter, defaultdict
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 from evaluate_bounded_laya import score_applicability_predictions, score_predictions
 from milai_lab.harness.artifact_io import read_json, read_jsonl, write_json
 from milai_lab.harness.contextual_artifacts import RunBudget, RunLimits
 from milai_lab.providers.laya_local import NativeDecision
+from quality_feedback import (
+    QUALITY_MODES,
+    QualityMode,
+    quality_counts,
+    quality_event_weights,
+    quality_pair_loss,
+    score_quality_feedback,
+    validate_quality_pool,
+)
 from retrieval_feedback import (
     encoding_row,
     feedback_counts,
@@ -50,7 +59,7 @@ def training_microbatches(window: TrainingWindow, size: int) -> list[TrainingWin
 
 def training_forward(model: Any, parallel: Any, batch: dict[str, Any], device: Any) -> Any:
     """Avoid dispatching an empty shard when a microbatch has fewer rows than devices."""
-    from laya.train import _forward
+    from laya.train import _forward  # type: ignore[import-untyped]  # SDK has no py.typed.
 
     executor = model if batch["input_ids"].shape[0] < len(parallel.device_ids) else parallel
     return _forward(executor, batch, device, False, False)
@@ -143,6 +152,25 @@ def decision_loss(logits: Any, target: Any, mask: Any, objective: str) -> Any:
     return -(target * logp).sum(-1)
 
 
+def feedback_training_losses(
+    logits: Any, target: Any, mask: Any, keys: list[list[str]],
+    rows: list[dict[str, Any]], feedback_target: str,
+    quality_mode: QualityMode | None, replay_objective: str = "soft-ce",
+    label_smoothing: float = 0.0,
+) -> Any:
+    """Keep feedback supervision fixed while choosing the old-operation replay loss."""
+    import torch
+
+    replay = decision_loss(logits, target, mask, replay_objective)
+    return torch.stack([
+        (quality_pair_loss(logits[i], keys[i], row["feedback"]["comparisons"],
+                           feedback_target, quality_mode, label_smoothing=label_smoothing)
+         if quality_mode is not None else
+         pair_loss(logits[i], keys[i], row["feedback"]["comparisons"], feedback_target))
+        if "feedback" in row else replay[i]
+        for i, row in enumerate(rows)])
+
+
 def compute_counts(run: dict[str, Any], evaluations: dict[str, Counter[str]]) -> dict[str, int]:
     """Keep optimization work distinct from evaluation on the training split."""
     counts = {k: run[k] for k in (
@@ -160,6 +188,13 @@ def compute_counts(run: dict[str, Any], evaluations: dict[str, Counter[str]]) ->
                 "tie_pairs", "unknown_pairs"):
         if "sampled_" + key in run:
             counts["train_" + key] = run["sampled_" + key]
+    for key in ("feedback_target_states", "target_pairs", "cost_only_direction_pairs"):
+        if "sampled_" + key in run:
+            counts["train_" + key] = run["sampled_" + key]
+    for key in ("nonzero_logit_gradient_rows", "feedback_nonzero_logit_gradient_rows",
+                "replay_nonzero_logit_gradient_rows"):
+        if key in run:
+            counts["train_" + key] = run[key]
     return counts
 
 
@@ -192,8 +227,15 @@ def main() -> None:
     parser.add_argument("--objective", choices=("soft-ce", "set", "pair"), default="soft-ce")
     parser.add_argument("--feedback-target", choices=("answer", "delivery"),
                         help="Pair objective only; both targets use the same reviewed pair pool")
+    parser.add_argument("--pair-supervision", default="legacy-direction",
+                        choices=("legacy-direction", *QUALITY_MODES),
+                        help="Quality controls use explicit pre-cost judgments; legacy unchanged")
+    parser.add_argument("--pair-label-smoothing", type=float, default=0.0,
+                        help="Quality-mode training targets only; ties stay0.5, unknowns masked")
     parser.add_argument("--replay-weight", type=float, default=0.25,
-                        help="Relative loss mass of old CE replay under the pair objective")
+                        help="Relative loss mass of old-operation replay under the pair objective")
+    parser.add_argument("--replay-objective", choices=("soft-ce", "set"), default="soft-ce",
+                        help="Pair replay only: target CE or likelihood of the accepted set")
     parser.add_argument("--task", choices=("bounded_reader", "memory_operation",
                                            "instruction_applicability", "mixed_retrieval"),
                         default="bounded_reader", help="Use task-specific offline decision metrics")
@@ -223,6 +265,17 @@ def main() -> None:
         parser.error("Pair feedback uses memory_operation and a positive finite replay weight")
     if args.objective == "pair" and args.optimizer_updates is None:
         parser.error("Pair feedback requires an explicit matched optimizer-update budget")
+    if args.replay_objective != "soft-ce" and args.objective != "pair":
+        parser.error("--replay-objective applies only to pair training")
+    if args.pair_supervision != "legacy-direction" and (
+            args.objective != "pair" or args.feedback_dev_data is None):
+        parser.error("Quality supervision requires pair objective and fixed feedback development")
+    quality_mode = (cast(QualityMode, args.pair_supervision)
+                    if args.pair_supervision != "legacy-direction" else None)
+    if not 0 <= args.pair_label_smoothing < .5:
+        parser.error("Pair label smoothing must be finite and in [0,0.5)")
+    if args.pair_label_smoothing and quality_mode is None:
+        parser.error("Pair label smoothing requires an explicit quality-supervision mode")
     if (args.task == "mixed_retrieval") != (args.mixture is not None):
         parser.error("mixed_retrieval requires --mixture, and other tasks do not use it")
     if args.mixture is not None and args.optimizer_updates is None:
@@ -238,7 +291,7 @@ def main() -> None:
     except ValueError as error:
         parser.error(str(error))
     import torch
-    from laya.common import collate_items
+    from laya.common import collate_items  # type: ignore[import-untyped]  # SDK has no py.typed.
     from laya.train import (
         draw_option_order,
         encode_item,
@@ -260,6 +313,8 @@ def main() -> None:
     dev_path = args.dev_data or args.data / "dev.jsonl"
     dev = read_jsonl(dev_path)
     feedback_dev = read_jsonl(args.feedback_dev_data) if args.feedback_dev_data is not None else []
+    if quality_mode is not None:
+        validate_quality_pool([*train, *feedback_dev])
     feedback_development = feedback_dev_report(feedback_dev, raw_train, dev)
     if args.feedback_dev_data is not None:
         from milai_lab.methods.laya_memory_policy import project_operation_payload
@@ -281,7 +336,10 @@ def main() -> None:
         dev = [project_applicability_row(row, args.operation_state) for row in dev]
     mixture = normalized_mixture(read_json(args.mixture)) if args.mixture is not None else None
     weights = mixture_event_weights(train, mixture) if mixture is not None else event_weights(train)
-    if args.objective == "pair":
+    if quality_mode is not None:
+        weights = quality_event_weights(train, args.feedback_target, quality_mode,
+                                        args.replay_weight)
+    elif args.objective == "pair":
         # Normalize each component by family/event, then apply the declared replay mass.
         weighted_rows = [{**row, "metadata": {**row["metadata"],
             "component": "feedback" if "feedback" in row else "operation_replay"}}
@@ -334,6 +392,29 @@ def main() -> None:
                    tie_unknown_sampling="Retained as zero-direction states in both arms",
                    sampled_feedback_states=0, sampled_replay_states=0,
                    sampled_directional_pairs=0, sampled_tie_pairs=0, sampled_unknown_pairs=0)
+    if quality_mode is not None:
+        run.update(pair_supervision=quality_mode,
+            feedback_pool=quality_counts(train, args.feedback_target, quality_mode),
+            loss_weighting="known pairs within state; eligible family/event within fixed "
+                           "feedback/replay masses; zero-target rows kept with zero weight",
+            selection_rule="pure_quality[target].directional.family_macro_state_pair_accuracy; "
+                           "highest, earliest tie, update0 eligible; cost and tie fit separate",
+            tie_unknown_sampling="All rows retained; quality-tie uses0.5; quality-cost uses0.5 "
+                                 "unless cost dominance exists; quality-direction skips ties. "
+                                 "Unknown-target states have zero loss weight",
+            sampled_feedback_target_states=0, sampled_target_pairs=0,
+            sampled_cost_only_direction_pairs=0,
+            nonzero_logit_gradient_rows=0, feedback_nonzero_logit_gradient_rows=0,
+            replay_nonzero_logit_gradient_rows=0,
+            gradient_count_scope="Nonzero gradient at per-forward output logits, before parameter "
+                                 "clipping/optimizer momentum; not per-parameter attribution")
+        if args.pair_label_smoothing:
+            run["pair_label_smoothing"] = args.pair_label_smoothing
+    if args.objective == "pair" and args.replay_objective == "set":
+        run.update(replay_objective="set",
+            replay_target_scope="Positive old-operation targets form an accepted set; target "
+                                "magnitudes are not preferences within that set. Feedback "
+                                "targets, row sampling and replay loss mass are unchanged.")
     write_json(args.output / "run.json", run)
     write_json(args.output / "training-plan.json", stages)
     decision: NativeDecision
@@ -404,6 +485,13 @@ def main() -> None:
                 result = {target: score_feedback(rows, predictions, target)
                           for target in ("answer", "delivery")}
                 result["coverage"] = feedback_development
+                if quality_mode is not None:
+                    result["pure_quality"] = {target: score_quality_feedback(
+                        rows, predictions, target, "quality-tie")
+                        for target in ("answer", "delivery")}
+                    result["quality_cost"] = {target: score_quality_feedback(
+                        rows, predictions, target, "quality-cost")
+                        for target in ("answer", "delivery")}
             elif args.task == "memory_operation":
                 from milai_lab.methods.memory_control_learning import score_operation_predictions
 
@@ -470,24 +558,39 @@ def main() -> None:
                     logits = training_forward(model, parallel, batch, decision.device)
                     mask = batch["marker_mask"].to(decision.device)
                     target = batch["target"].to(decision.device)
-                    ce = decision_loss(logits, target, mask,
-                                       "soft-ce" if args.objective == "pair" else args.objective)
                     if args.objective == "pair":
-                        ce = torch.stack([
-                            pair_loss(logits[slot], batch_keys[slot],
-                                      train[index]["feedback"]["comparisons"], args.feedback_target)
-                            if "feedback" in train[index] else ce[slot]
-                            for slot, index in enumerate(indices)])
-                        counts = feedback_counts([train[i] for i in indices], args.feedback_target)
+                        batch_rows = [train[i] for i in indices]
+                        ce = feedback_training_losses(
+                            logits, target, mask, batch_keys, batch_rows, args.feedback_target,
+                            quality_mode, args.replay_objective, args.pair_label_smoothing)
+                        counts = (quality_counts(batch_rows, args.feedback_target, quality_mode)
+                                  if quality_mode is not None else
+                                  feedback_counts(batch_rows, args.feedback_target))
                         for name in ("feedback_states", "replay_states", "directional_pairs",
                                      "tie_pairs", "unknown_pairs"):
                             run["sampled_" + name] += counts.get(name, 0)
+                        if quality_mode is not None:
+                            run["sampled_feedback_target_states"] += counts.get(
+                                "states_with_targets", 0)
+                            run["sampled_target_pairs"] += counts.get("target_pairs", 0)
+                            run["sampled_cost_only_direction_pairs"] += counts.get(
+                                "cost_only_direction_pairs", 0)
+                    else:
+                        ce = decision_loss(logits, target, mask, args.objective)
                     weighted = ce * torch.tensor([weights[i] for i in indices],
                                                   device=decision.device)
                     loss = weighted.sum() / denominator
                     if not torch.isfinite(loss):
                         raise ValueError("Non-finite decision loss")
+                    if quality_mode is not None:
+                        logits.retain_grad()
                     loss.backward()
+                    if quality_mode is not None:
+                        nonzero = logits.grad.detach().ne(0).any(dim=1).tolist()
+                        for index, active in zip(indices, nonzero, strict=True):
+                            run["nonzero_logit_gradient_rows"] += int(active)
+                            component = "feedback" if "feedback" in train[index] else "replay"
+                            run[component + "_nonzero_logit_gradient_rows"] += int(active)
                     loss_total += float(weighted.sum().detach())
                     offered += len(indices)
                     run["train_sequence_rows"] += len(indices)

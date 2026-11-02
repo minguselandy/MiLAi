@@ -1534,3 +1534,28 @@ Root的一次元数据命令在uuid过滤前解码了所有JSONL行，只输出�
 原 native32/12会话/4用户、drift/recovery、必要 M 消融与紧预算、最终冻结后的16保留用户、
 LongMemEval、RawRAG/RollingSummary/A-MEM真实适配，以及 Host135case/192message 和新故事。
 六项最终交付和方法选择均未完成，Product 仍为 NO_GO。工程可用、模型语义与科研优势分开判断。
+
+
+## 条件检索读出与实验查询范围
+
+`tools/run_host_intent_retrieval.py` 的 `--given-requests --given-readouts` 用于受控机制实验：
+每个显式检索请求完成后，用公开问题、原值请求时钟和实际返回包生成一次最终答案，然后才处理下一批到达。
+答案不写入 Source，也不形成后续 Host 对话。此结果属于条件读出，不能替代自主 Host 的取证或停止评价。
+只提供 `--given-requests` 时仍保持原来的纯检索行为。
+
+读出沿用同一账本、队列和该消息剩余额度。截断或缺失答案保留失败，不从 reasoning 恢复；未知用量失败停止后续执行。
+已经撤销的来源不能借旧回执重新披露。包含 `known_evidence_refs` 或 `use_delivered_refs` 的场景应使用保留实际历史的读出接口，
+因为仅有引用标识不能重建 Host 原先知道的正文。
+
+受控重复查询可能挤占原始来源的搜索结果。此类实验可以显式设置
+`memory_control.exclude_given_requests=true`，在所有比较臂统一排除生产者标记为
+`capture_context=given_retrieval_request` 的查询记录。记录仍保存在审计 Store 中；普通用户问题、包含断言的问题和原始到达均保留。
+该选项默认关闭，并绑定到控制器检查点条件；含已排除查询的旧 View 会重新构建。
+
+原文摘取基线使用现有 `memory_control.view_builder=extractive`；`view_policy=version_cache`
+允许匹配且无新材料的范围复用，并在更新时重新构建。View 命中、成功刷新、字面来源覆盖和最终答案正确性应分别报告。
+
+训练和数据工具还提供条件适用性审阅、旧划分锁定的来源族扩展、质量／平局／成本监督对照、保存模型重载验证与逐臂 Host 结果汇总。
+标签掩码和审阅结论不进入模型输入；未知与未执行位置保留原分母。冻结实验继续使用其声明的旧实现和条件。
+CPU／CUDA 验证分别保留设备、同步完成、输入长度和实际成本记录；FP32 计算不代表检查点以 FP32 存盘。
+实验代码、程序验证和真实模型结果是不同层次的证据，完整研究结论仍需对应的实际执行与来源复核。

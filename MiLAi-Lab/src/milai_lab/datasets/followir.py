@@ -6,19 +6,14 @@ from collections import Counter, defaultdict
 from typing import Any
 
 
-def applicability_row(row: dict[str, Any], index: int,
-                      group: dict[str, Any]) -> dict[str, Any]:
-    """Preserve the published candidate task, separate from operation supervision.
-
-    The release's label supplies a binary target, not calibrated confidence or
-    evidence that a retrieval should stop. Teacher scores stay in the raw source.
-    """
-    answer = {"true": "satisfies", "false": "does_not_satisfy"}[row["label"]]
+def applicability_input(query: str, instruction: str,
+                        candidate: dict[str, Any]) -> dict[str, Any]:
+    """The model-visible task contains source material, never a supervision mask."""
     return {
         "state": {
             "task": {"retrieval_request": {
-                "query": row["query"], "read_goal": {"purpose": row["instruction"]}}},
-            "candidate": {"text": row["document"]},
+                "query": query, "read_goal": {"purpose": instruction}}},
+            "candidate": dict(candidate),
         },
         "questions": {"applicability": {
             "type": "choice",
@@ -29,6 +24,15 @@ def applicability_row(row: dict[str, Any], index: int,
                 "does_not_satisfy": "The candidate does not satisfy the retrieval requirements.",
             },
         }},
+    }
+
+
+def applicability_row(row: dict[str, Any], index: int,
+                      group: dict[str, Any]) -> dict[str, Any]:
+    """Published binary applicability, not confidence or operation/stop supervision."""
+    answer = {"true": "satisfies", "false": "does_not_satisfy"}[row["label"]]
+    return {
+        **applicability_input(row["query"], row["instruction"], {"text": row["document"]}),
         "gold": {"applicability": {"probabilities": {
             option: float(option == answer) for option in ("satisfies", "does_not_satisfy")}}},
         "metadata": {
