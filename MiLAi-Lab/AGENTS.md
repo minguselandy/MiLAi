@@ -1,4 +1,65 @@
-# LIVE A100 EXECUTION v2: 2026-11-04
+# LIVE A100 EXECUTION v3: 2026-11-04
+
+Full goal ACTIVE/incomplete; latest data/manifests/a100-development-progress-20261104-v3.json
+and docs/MILAI_A100_DEVELOPMENT_EXECUTION_20261104.md. Current turn and previous turn PROGRESS.
+No SHA/content fingerprints/subagents/new services/second ledger/limit reset/remote writes.
+
+A0/A1 CLOSED2805 each, child443247/443248 absent and exec24100/25015 exited0. Never poll/restart.
+Full-pass/weights/options/input/checkpoint/compute/ledger audit passed in a-full-fit-closeout.json:
+44868rows each,37502475/37318166tokens,22434single-GPU forwards, native-negative conditions5/9540.
+2.3430/2.3810GPU job-hours. Both predeclared nominees are2104. Old8 joint1/5 vs initial6 across
+the trained curve; no adoption, A20k/extra seeds/J not justified by this alone.
+
+ACTIVE GPU3 saved evaluation queue exec44900: a-saved-evaluation-driver.json,7jobs total;
+revalidate current active PID/run.json. Evaluate actual saved E1 initialization and A0/A1u2104
+on new128 and nominees on common dev/feedback. Reuse exact old3132update0 outputs. Native/reviewed
+new128 labels use identical inputs and share predictions; no repeated inference for label views.
+
+New128 DEV condition families allocated from canonical unanchored DEV, excluding old32 and
+reserved64 query families. Native8744cells/8202known/542unknown,3830stable/0change. Before new
+model outputs,16 structural-prefix Source-author judgments added12known/4stillunknown; separate
+reviewed16 view3840stable/2change/530unknown. Actual supplied-text applicability only, independent
+factuality/clinical/source credibility NOT certified. Do not inflate2changes or fill unknowns.
+
+B64 PILOT8 ACTUALLY CLOSED in b64-collection-pilot8-v2:8readouts COMPLETE,64localforwards,
+395334inputtokens,8HTTP/31730known/newunknown0. Native GPU receipt VERIFIED cuda:0/visible2,
+FP32,threads4,MHAfalse,reference_compilefalse. Peak allocated2304864256/reserved7998537728bytes,
+wholeclient206.85s including Host waits,0.05746GPU reservationhours. NativeCPU56.6613+load7.4902
+already billed; fullchild111.37CPU and client residual separately recorded once.
+Original pilot attempt FAILED before any model/HTTP: missing retrieval_request in autonomous
+fixture, then systemPython3.10 StrEnum import broke owner closeout. Old owner RUNNING file is
+stale; authoritative reconciled b64-pilot8-owner-reconciled.json records terminal/0calls.
+Never restart old attempt or poll exec19808/88543. V2 uses native-question adapter and project
+Python3.11; terminal/resource evidence persists before ledger import. Partial failed wrapperCPU
+pending; lost whole-child/startup CPU unknown, notzero. No old actual task was retried.
+
+ACTIVE only model HTTP queue is remaining56 exec44563 (native child1023932 at snapshot),
+b64-collection-remaining56-v2/driver.json; revalidate /proc/currentdriver. Coordinator is
+artifacts/a100-development-20261104/run_b64_segment.py remaining56, projectPython3.11.
+Do not run any branch/readout/autonomous HTTP concurrently. Local GPU3 saved evaluations are
+HTTP-free and may continue. Both model queues must be terminal before offline cost settlement.
+
+New state/branch selector code69963529: acquired_parameter_support chooses at most2 actual
+post states per source with material and3distinct argmax/baseline/alternative bindings; missing
+slots remain. --exact-nominations prevents quota backfill.48related tests and actual prior
+16state/48binding zero-model structural rehearsal PASS; default old initial/post is preserved.
+Pilot8 actual selection also16states/48bindings. b64-pilot8-branches/prepared-execution.json:
+3exact eligible terminal single-slot READ first outcomes reused under existing compiler;
+45new bindings PREPARED NOT EXECUTED. After remaining56 closes, select/prepare its actual states,
+then execute shared union serially. B0 onlyargmax-baseline, B1 onlyalternative-baseline;
+same full menus/sharedbaseline/family-event weighting and old E3 pure-delivery recipe.
+
+Idle-cost-settlement-v1.json: prior75timers45.39CPU plus38newtimers residual458.54577243803345CPU
+settled ONCE after A processes exited and before new model jobs. Cnative380.64422756196655CPU
+deducted, P0/A compute not rebilled, tokens/limits unchanged. New timers since then pending.
+Native prefix CPU deduction uses only dynamic_memory_laya/load phases, not unrelated GPU3
+evaluation phase deltas. Keep startup/author/GPU-unit-test unknown costs explicit.
+Standalone diagnostic PNG/SVG/PDF in development-figures inspected; exposed-dev only.
+All B64pairedfits/new-source task selection/necessary seeds/scale/D32updates/autonomous Host/
+heldconfirmation/LME451/Mem2Act400/fullcost/finalpaper requirements remain. Reserved QASPER
+DEV64/confirmation256 metadata only; no held body/annotation admission before frozen method.
+
+# HISTORICAL A100 EXECUTION v2: 2026-11-04
 
 Full user goal remains ACTIVE. Latest report:
 docs/MILAI_A100_DEVELOPMENT_EXECUTION_20261104.md and
