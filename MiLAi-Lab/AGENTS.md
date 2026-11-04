@@ -1,8 +1,8 @@
-# LIVE A100 EXECUTION v1: 2026-11-04
+# LIVE A100 EXECUTION v2: 2026-11-04
 
 Full user goal remains ACTIVE. Latest report:
 docs/MILAI_A100_DEVELOPMENT_EXECUTION_20261104.md and
-data/manifests/a100-development-progress-20261104-v1.json.
+data/manifests/a100-development-progress-20261104-v2.json.
 New source commits9d00439a/b3d7cbef/24710507 are provenance only; no SHA checks.
 Root artifact directory: artifacts/a100-development-20261104.
 
@@ -14,6 +14,8 @@ steady speed ratio2.345; SDK exportFP16, BF16 reload changes1/512 near-boundary 
 Formal A common update0 all3132 inputs/logits identical. At702, old8 supported-change
 joint correctness A0=1/A1=5, initial6. Partial exposed-dev signal, NO adoption or
 full-curve nomination. Continue both fixed budgets/cuts; no unplanned A20k/seeds/J.
+1403 and2104 checkpoints/diagnoses also CLOSED: supported joint A0=1/A1=5 each,
+initial6. Latest a-diagnostics-through-2104.json. Fits remain live; inspect current counters.
 
 B8 CLOSED and source-author reviewed: all4 direct observed-Source READs actually
 opened and returned,16 ranges bound,8HTTP/30879known/newunknown0. Alt1C vs baseline3C;
@@ -29,6 +31,12 @@ readout, not autonomous Host/confirmation. Never poll/restart closed B8/C8/profi
 B64 new TRAIN fixture prepared (64families/4502Source units/one native question each),
 no actual new prefix collection yet. Source allocation also reserves new task DEV64
 and confirmation256 (185nativeDEV/71nativeTRAIN). Held body/annotations NOT exported.
+Next collector plan b64-collection-plan/plan.json has serial pilot8/remaining56 jobs,
+GPU2 after the current fit releases it, same E1-u16 and FP32/shared_actions. Preflight
+config already prepared0calls. Immutable runtime-b64 GPU wrapper adapts the existing
+saved-CPU constructor wrapper to cuda:0/visible2, keeping reference_compile=False,
+same attention/dependency init; checkpoint encoder config omits reference_compile.
+It records real inference conditions/peak memory. Inspect pilot before remaining56.
 Do not access confirmation content before method/checkpoint/scoring/budget freeze.
 New128 conditional DEV is a separate unresolved data track. B64 training, necessary
 seeds/scale, D32updates, autonomous Host, external LME451/Mem2Act400 and final reporting

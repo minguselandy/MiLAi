@@ -6,7 +6,7 @@
 历史 worktree、原始失败与用户文档保持原状。没有使用子代理、SHA/内容指纹校验、新服务、第二账本或远端写入。
 
 本轮机器可读入口为
-[progress](../data/manifests/a100-development-progress-20261104-v1.json)。
+[progress](../data/manifests/a100-development-progress-20261104-v2.json)。
 原始数据、冻结运行时、权重、命令、计时和实际输出位于本 worktree 的 ignored
 `artifacts/a100-development-20261104/`。本记录是现有报告体系的执行摘要。
 
@@ -14,7 +14,7 @@
 
 GPU 2、3 是独立的 A100 PCIe 40GB；每进程仅见一张卡，进程内为 `cuda:0`。
 GPU 0、1 上的既有服务没有变动。运行环境仍为 Torch `2.7.0+cu126`、CUDA `12.6`、
-既有 Laya SDK 与 `train_with_declared_attention.py` 初始化，不升级依赖。
+Laya SDK `0.4.8` 与 `train_with_declared_attention.py` 初始化，不升级依赖。
 
 训练入口新增 `--device`、`--parallel-mode single|legacy-dp`、`--precision float32|bf16`
 和可选 allocator 份额。默认仍为 legacy-dp/FP32；BF16 限于单卡路径，显式 autocast
@@ -85,10 +85,14 @@ profile 输出不作为初始化。预定选择规则和完整命令保存在 `a
 | 共同起点0 | 0.752563 | 0.778851 | 6/8 |
 | A0 update702 | 0.890389 | 0.801943 | 1/8 |
 | A1 update702 | 0.820530 | 0.801919 | 5/8 |
+| A0 update1403 | 0.885107 | 0.798606 | 1/8 |
+| A1 update1403 | 0.828600 | 0.782987 | 5/8 |
+| A0 update2104 | 0.895039 | 0.793754 | 1/8 |
+| A1 update2104 | 0.845812 | 0.799413 | 5/8 |
 
 A1减少了A0在这组诊断上的退化，但尚未超过初始化；不能凭一个检查点选择最终模型。
 两臂继续各自预定的完整2,805更新。该表为内存模型的统一FP32推理，尚非落盘模型任务效果，
-也不替代新128条件家族或自主Host。证据为 `a-diagnostics-through-702.json`。
+也不替代新128条件家族或自主Host。最新证据为 `a-diagnostics-through-2104.json`。
 
 ## B：先补真实功能，保留原首结果
 
@@ -150,6 +154,9 @@ rules/learned在一个状态收到完全相同的packet和wire，不将其措辞
 确认正文与标注尚未导出/查看；冻结候选、规则、预算后才使用。公开预训练隔离未获认证，
 256也不是+5pp的功效保证。新128条件开发家族属于另一数据轨，仍需按真实标签资格处理。
 证据为 `source-allocation-v1.json`；分配接续parent和实际使用记录，不直接套用历史unused计数。
+采集已准备为8＋56两个串行段，配置预检查完成且模型调用为0；见 `b64-collection-plan/plan.json`。
+释放GPU后使用现有FP32推理路径，保留关闭reference_compile的既有初始化并记录实际设备、精度和峰值显存；
+checkpoint没有持久化该encoder标志，不能仅换解释器后依赖其默认值。
 
 ## 失败与改进
 
