@@ -1,4 +1,47 @@
-# LIVE A100 EXECUTION v3: 2026-11-04
+# LIVE A100 EXECUTION v4: 2026-11-04
+
+Goal ACTIVE/full scope unchanged. Latest data/manifests/a100-development-progress-20261104-v4.json.
+Current/previous goal turns are PROGRESS. No SHA/fingerprints/subagents/new services/second ledger/
+limit reset/remote writes. Immutable original outcomes and user documents retained.
+
+Both A full fits, seven saved evaluations(exec44900), and two31-state task-menu evaluations
+(exec22885) CLOSED normally. Never poll/restart those sessions. A new128 saved native balanced:
+initial.661798/A0.883766/A1.838801; reviewed-change2 family joint .5/0/0. Old8 pairs actually5
+query families, saved family-joint .866667/.1/.4. a-saved-evaluation-closeout.json verifies
+actual inputs and label-view reuse. NoA20k/extra seeds/J/adoption from these classification gains.
+Actual task choices a-task32-choices/choices.json reuse prior matching first outcomes;11new
+bindings PREPARED NOT EXECUTED, old missing state remains in32 denominator. Execute after B queue.
+
+B64 all prefixes CLOSED: pilot8/remaining56 and owners completed0; exec44563 CLOSED.
+64families/512localforwards/3115914localinputtokens,64HTTP readouts COMPLETE,
+237960known generationtokens/newunknown0. Full actual request/input/readout reconciliation:
+b64-full-collection-reconciliation.json. No Source-author task-quality claims yet.
+Selector69963529/48tests/rehearsal adopted structurally: real acquired material+3distinct
+bindings, exact nominations, no missing fill/no quality/gold selection. New B64 selects exactly
+128states/384bindings. Pilot16/48:3equivalent actual terminal READ first outcomes reused,45new.
+Remaining112/336:23equivalent terminalREADs reused,313new. Total358new/26reused; sharedbaseline
+executes once and supplies both B0(argmax-baseline)/B1(alternative-baseline), same full menus.
+
+ONLY LIVE model HTTP worker: b64-pilot8-branch-execution/driver.json child1112437/exec34601,
+owner b64-pilot8-branch-owner.json. At snapshot23/45, revalidate actual /proc and driver.
+Runtime-c-handoff8 immutable, original captured source local-a100-b64-gpu-24710507,
+fixed_context4 first-action +2 ordinary decisions then HANDOFF; given-readout with known-only
+terminal response failures retained, never retries. Do NOT run another HTTP job concurrently.
+After pilot terminal, bind actual45new+3reused outcomes, Source ranges/roles/wires/resource cost;
+execute remaining313 policies from b64-remaining56-branches/execution-policies.json serially.
+Then compile quality BEFORE cost, preserve ties/unknowns/failures, split B0/B1 supervision,
+same old replay/E1-u16 initialization/E3pure-delivery recipe/exposure budget and BF16 fit pair.
+
+Development figure PNG/SVG/PDF inspected. All full-plan B fits/new-source autonomous selection,
+necessary seeds/scale, D32updates, held freeze/confirmation, LME451/Mem2Act400 and full cost/paper
+remain incomplete. No claim of overall completion. Held QASPER DEV64/confirmation256 and old
+query confirmation64 remain protected by original frozen-method use rules.
+Original ledger only. Idle settlement v1 already billed75old45.39CPU+38new458.54577243803345
+residualCPU ONCE, deducted Cnative380.64422756196655 and did not rebill model compute.
+Subsequent timers remainpending while branchworker live; branchowner records its actual child
+CPU residual automatically once on exit. SourceAuthor/boot/GPUunit unknown costs remainexplicit.
+
+# HISTORICAL A100 EXECUTION v3: 2026-11-04
 
 Full goal ACTIVE/incomplete; latest data/manifests/a100-development-progress-20261104-v3.json
 and docs/MILAI_A100_DEVELOPMENT_EXECUTION_20261104.md. Current turn and previous turn PROGRESS.
