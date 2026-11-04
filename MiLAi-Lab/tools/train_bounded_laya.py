@@ -1,4 +1,4 @@
-"""CE, acceptable-set or reviewed-pair loss on two explicitly allocated GPUs.
+"""CE, acceptable-set or reviewed-pair loss on explicitly allocated CUDA devices.
 
 All labelled prefixes are used. Normalize within event and then family, so a
 long history or a family with many derived states cannot dominate the objective.
@@ -67,12 +67,18 @@ def training_microbatches(window: TrainingWindow, size: int) -> list[TrainingWin
     return [window[start:start + size] for start in range(0, len(window), size)]
 
 
-def training_forward(model: Any, parallel: Any, batch: dict[str, Any], device: Any) -> Any:
+def training_forward(model: Any, parallel: Any, batch: dict[str, Any], device: Any,
+                     precision: str = "float32") -> Any:
     """Avoid dispatching an empty shard when a microbatch has fewer rows than devices."""
+    import torch
     from laya.train import _forward  # type: ignore[import-untyped]  # SDK has no py.typed.
 
-    executor = model if batch["input_ids"].shape[0] < len(parallel.device_ids) else parallel
-    return _forward(executor, batch, device, False, False)
+    executor = (model if parallel is None or
+                batch["input_ids"].shape[0] < len(parallel.device_ids) else parallel)
+    with torch.autocast(device.type, dtype=torch.bfloat16, enabled=precision == "bf16"):
+        # The SDK's amp=True selects FP16. Its FP32 logits keep all losses and
+        # their reductions outside this BF16 forward context.
+        return _forward(executor, batch, device, False, False)
 
 
 def training_stages(size: int, epochs: int, seed: int,
@@ -249,6 +255,11 @@ def main() -> None:
     parser.add_argument("output", type=Path)
     parser.add_argument("--budget", type=Path, required=True)
     parser.add_argument("--compute-phase", help="Distinct phase in the original shared ledger")
+    parser.add_argument("--device", default="cuda:0")
+    parser.add_argument("--parallel-mode", choices=("legacy-dp", "single"), default="legacy-dp")
+    parser.add_argument("--precision", choices=("float32", "bf16"), default="float32")
+    parser.add_argument("--memory-fraction", type=float,
+                        help="Optional allocator share; legacy-dp defaults to0.75, single to1")
     parser.add_argument("--epochs", type=int, default=4)
     parser.add_argument("--optimizer-updates", type=int,
                         help="Use this exact update budget with full16-example windows")
@@ -310,6 +321,10 @@ def main() -> None:
     parser.add_argument("--gradient-checkpointing", action="store_true",
                         help="Recompute encoder activations during backward to reduce memory")
     args = parser.parse_args()
+    if args.precision == "bf16" and args.parallel_mode != "single":
+        parser.error("BF16 uses the single-device path; legacy DataParallel remains FP32")
+    if args.memory_fraction is not None and not 0 < args.memory_fraction <= 1:
+        parser.error("Allocator fraction must be in (0,1]")
     if (args.objective == "pair") != (args.feedback_target is not None):
         parser.error("Pair training requires --feedback-target; CE does not use it")
     if args.objective == "pair" and (args.task != "memory_operation"
@@ -374,10 +389,19 @@ def main() -> None:
     torch.set_num_threads(4)
     torch.manual_seed(args.seed)
     torch.cuda.manual_seed_all(args.seed)
-    if os.environ.get("CUDA_VISIBLE_DEVICES") != "2,3" or torch.cuda.device_count() != 2:
-        raise ValueError("This declared run uses only physical GPUs 2,3")
-    for device in (0, 1):
-        torch.cuda.set_per_process_memory_fraction(0.75, device)
+    device = torch.device(args.device)
+    if device.type != "cuda":
+        parser.error("Training requires an allocated CUDA device")
+    primary = device.index if device.index is not None else torch.cuda.current_device()
+    device = torch.device("cuda", primary)
+    device_ids = ([primary] if args.parallel_mode == "single" else
+                  [primary, *[i for i in range(torch.cuda.device_count()) if i != primary]])
+    memory_fraction = args.memory_fraction
+    if memory_fraction is None:
+        memory_fraction = .75 if args.parallel_mode == "legacy-dp" else 1.0
+    for index in device_ids:
+        torch.cuda.set_per_process_memory_fraction(memory_fraction, index)
+        torch.cuda.reset_peak_memory_stats(index)
     args.output.mkdir(parents=True, exist_ok=False)
     started, cpu = time.perf_counter(), time.process_time()
     raw_train = read_jsonl(args.data / "train.jsonl")
@@ -439,8 +463,16 @@ def main() -> None:
     axis = "epoch" if args.optimizer_updates is None else "optimizer_updates"
     run = {"status": "RUNNING", "pid": os.getpid(), "data": str(args.data.resolve()),
            "base_checkpoint": str(args.checkpoint.resolve()), "seed": args.seed,
-           "physical_gpus": [2, 3], "device": "cuda", "torch_version": torch.__version__,
-           "cuda_version": torch.version.cuda, "precision": "float32",
+           "cuda_visible_devices": os.environ.get("CUDA_VISIBLE_DEVICES"),
+           "device_ids": device_ids, "device": str(device),
+           "devices": [{"index": i, "name": torch.cuda.get_device_name(i),
+                        "total_bytes": torch.cuda.get_device_properties(i).total_memory}
+                       for i in device_ids],
+           "torch_version": torch.__version__, "cuda_version": torch.version.cuda,
+           "precision": args.precision, "parameter_precision": "float32",
+           "parallel_mode": args.parallel_mode, "memory_fraction": memory_fraction,
+           "tf32_matmul": torch.backends.cuda.matmul.allow_tf32,
+           "tf32_cudnn": torch.backends.cudnn.allow_tf32,
            "reference_compile": False,
            "gradient_checkpointing": args.gradient_checkpointing,
            "forward_count_scope": "Logical model calls; activation recomputation is in time cost",
@@ -465,7 +497,8 @@ def main() -> None:
            "calibration_test_loaded": False, "http_requests": 0,
            "optimizer_updates": 0, "train_sequence_rows": 0, "train_input_tokens": 0,
            "train_batch_forwards": 0, "train_device_forwards": 0,
-           "train_batch_attempts": 0, "train_offered_rows": 0, "train_offered_tokens": 0}
+           "train_batch_attempts": 0, "train_offered_rows": 0, "train_offered_tokens": 0,
+           "train_padded_input_tokens": 0}
     if mixture is not None:
         run.update(loss_weighting="declared component mass, then family and event",
                    mixture=mixture, mixture_loss_scale=args.mixture_loss_scale,
@@ -536,6 +569,18 @@ def main() -> None:
     write_json(args.output / "training-plan.json", stages)
     decision: NativeDecision
     evaluation_counts: dict[str, Counter[str]] = defaultdict(Counter)
+    stage_seconds: Counter[str] = Counter()
+
+    def synchronize() -> None:
+        for index in device_ids:
+            torch.cuda.synchronize(index)
+
+    def save_model(config: dict[str, Any], destination: Path) -> None:
+        synchronize()
+        save_started = time.perf_counter()
+        checkpoint_writer(model, tok, config, str(destination))
+        stage_seconds["save"] += time.perf_counter() - save_started
+
     try:
         if args.backend == "linear":
             from linear_reader_classifier import LinearDecision, save_linear_checkpoint
@@ -543,7 +588,8 @@ def main() -> None:
             decision = LinearDecision(args.checkpoint, args.max_len, args.head_max_len)
             checkpoint_writer = save_linear_checkpoint
         else:
-            decision = NativeDecision(args.checkpoint, args.max_len, args.head_max_len)
+            decision = NativeDecision(args.checkpoint, args.max_len, args.head_max_len,
+                                      device=str(device))
             checkpoint_writer = save_checkpoint
         decision.config = {**decision.config, "operation_state": args.operation_state}
         model, tok = decision.model, decision.tokenizer
@@ -577,9 +623,14 @@ def main() -> None:
              **({"component": r["metadata"]["component"], "task": r["metadata"]["task"]}
                 if mixture is not None else {})}
             for index, (r, w) in enumerate(zip(train, weights, strict=True))])
-        decision.device = torch.device("cuda:0")
+        decision.device = device
         model.to(decision.device)
-        parallel = torch.nn.DataParallel(model, device_ids=[0, 1])
+        parallel = (torch.nn.DataParallel(model, device_ids=device_ids)
+                    if args.parallel_mode == "legacy-dp" else None)
+        run["attention_backend"] = model.encoder.config._attn_implementation
+        run["encoder_max_position_embeddings"] = model.encoder.config.max_position_embeddings
+        run["parameter_dtypes"] = dict(Counter(str(p.dtype) for p in model.parameters()))
+        stage_seconds["prepare"] = time.perf_counter() - started
         parameters = dict(model.named_parameters())
         probes = {"encoder": next(n for n in parameters if n.startswith("encoder.")),
                   "head": next(n for n in parameters if not n.startswith("encoder."))}
@@ -590,6 +641,8 @@ def main() -> None:
         scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, steps, eta_min=1e-6)
 
         def evaluate(epoch: int, split: str = "dev") -> dict[str, Any]:
+            synchronize()
+            eval_started = time.perf_counter()
             model.eval()
             predictions = []
             rows = evaluation_rows[split]
@@ -627,6 +680,7 @@ def main() -> None:
             else:
                 result = score_predictions(rows, predictions)
             write_json(args.output / split / str(epoch) / "summary.json", result)
+            stage_seconds["evaluation"] += time.perf_counter() - eval_started
             return result
 
         history = [] if args.skip_initial_dev else [{axis: 0, "dev": evaluate(0)}]
@@ -645,6 +699,10 @@ def main() -> None:
             offered = 0
             condition_loss_total = 0.0
             for window in windows:
+                synchronize()
+                update_started, update_cpu = time.perf_counter(), time.process_time()
+                prior_tokens = run["train_input_tokens"]
+                prior_padded_tokens = run["train_padded_input_tokens"]
                 denominator = len(window)
                 optimizer.zero_grad(set_to_none=True)
                 microbatches = training_microbatches(window, args.micro_batch_size)
@@ -680,7 +738,8 @@ def main() -> None:
                     run["train_batch_attempts"] += 1
                     run["train_offered_rows"] += len(indices)
                     run["train_offered_tokens"] += int(batch["attention_mask"].sum())
-                    logits = training_forward(model, parallel, batch, decision.device)
+                    logits = training_forward(model, parallel, batch, decision.device,
+                                              args.precision)
                     mask = batch["marker_mask"].to(decision.device)
                     target = batch["target"].to(decision.device)
                     if args.objective == "pair":
@@ -760,12 +819,25 @@ def main() -> None:
                             component_tokens[component] = (
                                 component_tokens.get(component, 0) + int(tokens))
                     run["train_input_tokens"] += int(batch["attention_mask"].sum())
+                    run["train_padded_input_tokens"] += batch["attention_mask"].numel()
                     run["train_batch_forwards"] += 1
-                    run["train_device_forwards"] += min(len(indices), 2)
+                    run["train_device_forwards"] += min(len(indices), len(device_ids))
                 torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
                 optimizer.step()
                 scheduler.step()
                 run["optimizer_updates"] += 1
+                synchronize()
+                update_seconds = time.perf_counter() - update_started
+                stage_seconds["training"] += update_seconds
+                with (args.output / "update-profile.jsonl").open("a") as stream:
+                    stream.write(json.dumps({
+                        "update": run["optimizer_updates"], "rows": denominator,
+                        "input_tokens": run["train_input_tokens"] - prior_tokens,
+                        "padded_input_tokens": (run["train_padded_input_tokens"]
+                                                - prior_padded_tokens),
+                        "wall_seconds": update_seconds,
+                        "cpu_seconds": time.process_time() - update_cpu,
+                    }) + "\n")
                 write_json(args.output / "run.json", run)
                 print(json.dumps({"data_pass": encoded_pass,
                                   "updates": run["optimizer_updates"]}), flush=True)
@@ -788,24 +860,27 @@ def main() -> None:
             destination = args.output / "checkpoint_latest"
             if args.eval_at_updates is not None or args.eval_every_updates is not None:
                 destination = args.output / "checkpoints" / f"update-{checkpoint_step}"
-            checkpoint_writer(model, tok, config, str(destination))
+            save_model(config, destination)
         changes = {key: {"parameter": name, "changed_elements": int((
             parameters[name].detach().cpu() != before[key]).sum())} for key, name in probes.items()}
         write_json(args.output / "parameter-probes.json", changes)
-        checkpoint_writer(model, tok, config, str(args.output / "checkpoint"))
+        save_model(config, args.output / "checkpoint")
         run["status"] = "COMPLETED"
     except BaseException as error:
         run.update(status="FAILED", error_type=type(error).__name__, error=str(error))
         raise
     finally:
-        for device in (0, 1):
-            torch.cuda.synchronize(device)
+        synchronize()
         measures = {"wall_seconds": time.perf_counter() - started,
                     "cpu_seconds": time.process_time() - cpu, "runs": 1,
                     **compute_counts(run, evaluation_counts)}
         write_json(args.output / "compute.json", {**measures,
             "peak_rss_kib": resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,
-            "peak_cuda_allocated_bytes": [torch.cuda.max_memory_allocated(i) for i in (0, 1)],
+            "stage_wall_seconds": dict(stage_seconds),
+            "gpu_hours": measures["wall_seconds"] * len(device_ids) / 3600,
+            "peak_cuda_allocated_bytes": [torch.cuda.max_memory_allocated(i) for i in device_ids],
+            "peak_cuda_reserved_bytes": [torch.cuda.max_memory_reserved(i) for i in device_ids],
+            "final_cuda_free_total_bytes": [list(torch.cuda.mem_get_info(i)) for i in device_ids],
             "ledger": str(args.budget)})
         with args.budget.with_name("budget.json.http-owner.lock").open("a+b") as lease:
             fcntl.flock(lease, fcntl.LOCK_EX)

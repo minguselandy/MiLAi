@@ -31,6 +31,7 @@ def instruction_negative_coverage(
 
 def condition_stratified_auxiliary_panel(
     matrix: list[dict[str, Any]], pairs: list[dict[str, Any]], *, seed: int,
+    negative_selection: str = "legacy",
 ) -> dict[str, Any]:
     """Retain rare pairs and known label coverage for every actual training condition.
 
@@ -89,6 +90,40 @@ def condition_stratified_auxiliary_panel(
                                     "training_event": event, "label": label})
                 elif not selected.intersection(positions):
                     selected.add(rng.choice(positions))
+    if negative_selection not in {"legacy", "native-priority"}:
+        raise ValueError("Unknown conditional negative-selection mode")
+    replacements = 0
+    if negative_selection == "native-priority":
+        # Replace within the same actual condition and known negative stratum.
+        # This preserves every positive, the exact row/condition loss budgets,
+        # unknown masks, and all change endpoints. Stable pairs may change.
+        required = {by_id[p[side + "_event"]] for p in known_pairs if p["kind"] == "change"
+                    for side in ("left", "right")}
+        stable_neighbors: dict[int, set[int]] = defaultdict(set)
+        for group in negative_pairs.values():
+            for left, right in group:
+                stable_neighbors[left].add(right)
+                stable_neighbors[right].add(left)
+        for strata in conditions.values():
+            native = [i for i in strata[False] if any(
+                j["native_field"] == "new_negatives"
+                for j in matrix[i]["metadata"].get("native_judgments", []))]
+            if not native or selected.intersection(native):
+                continue
+            replaceable = sorted(selected.intersection(strata[False]) - required)
+            if not replaceable:
+                continue  # A mandatory change endpoint can exhaust this condition's slots.
+            alternatives = [(old, new) for old in replaceable for new in native]
+            # Prefer substitutions retaining the most complete stable-negative
+            # relations; seeded ties never consult task answers or results.
+            scores = [len(stable_neighbors[new] & selected) - int(old in stable_neighbors[new])
+                      - len(stable_neighbors[old] & selected) for old, new in alternatives]
+            best = max(scores)
+            old, new = rng.choice([pair for pair, score in zip(alternatives, scores, strict=True)
+                                   if score == best])
+            selected.remove(old)
+            selected.add(new)
+            replacements += 1
     rows, slots = [], []
     for i in sorted(selected):
         row = copy.deepcopy(matrix[i])
@@ -102,7 +137,9 @@ def condition_stratified_auxiliary_panel(
     return {"rows": rows, "pairs": copy.deepcopy(exposed), "slots": slots,
         "missing_condition_labels": missing,
         "instruction_negative_coverage": instruction_negative_coverage(matrix, rows),
+        "negative_selection": negative_selection,
         "counts": {"training_slots": len(rows), "distinct_cells": len(selected),
+            "negative_replacements": replacements,
             "source_families": len({r["metadata"]["family"] for r in matrix}),
             "families": len(represented),
             "unrepresented_families": sorted({r["metadata"]["family"] for r in matrix}

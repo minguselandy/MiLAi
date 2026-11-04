@@ -109,8 +109,11 @@ def test_declared_parameter_scope_controls_real_updates_and_encoder_dropout(free
 
 
 @pytest.mark.parametrize("freeze", [False, True])
+@pytest.mark.parametrize("parallel_mode,precision", [
+    ("legacy-dp", "float32"), ("single", "float32"), ("single", "bf16"),
+])
 def test_native_training_cli_retains_checkpoints_and_separate_feedback_predictions(
-    tmp_path, monkeypatch, freeze,
+    tmp_path, monkeypatch, freeze, parallel_mode, precision,
 ):
     torch = pytest.importorskip("torch")
     transformers = pytest.importorskip("transformers")
@@ -156,11 +159,18 @@ def test_native_training_cli_retains_checkpoints_and_separate_feedback_predictio
         "--budget", str(budget), "--task", "memory_operation", "--optimizer-updates", "2",
         "--eval-at-updates", "1", "--evaluate-train", "--shuffle-options", "--max-len", "512",
         "--head-max-len", "128", "--feedback-dev-data", str(data / "feedback-dev.jsonl"),
+        "--parallel-mode", parallel_mode, "--precision", precision,
         *(["--freeze-encoder"] if freeze else [])])
     train_bounded_laya.main()
     run, history = read_json(output / "run.json"), read_json(output / "history.json")
     assert run["status"] == "COMPLETED" and run["optimizer_updates"] == 2
     assert run["train_sequence_rows"] == 32 and run["dev_states"] == 1
+    devices = 1 if parallel_mode == "single" else 2
+    assert run["train_device_forwards"] == run["train_batch_forwards"] * devices
+    assert run["precision"] == precision and set(run["parameter_dtypes"]) == {"torch.float32"}
+    compute = read_json(output / "compute.json")
+    assert len(compute["peak_cuda_reserved_bytes"]) == (1 if parallel_mode == "single" else 2)
+    assert compute["stage_wall_seconds"]["training"] > 0
     assert [h["optimizer_updates"] for h in history] == [0, 1, 2]
     for entry in history:
         assert entry["dev"]["counts"]["labelled"] == entry["train"]["counts"]["labelled"] == 1

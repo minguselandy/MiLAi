@@ -1,4 +1,18 @@
-# USER-PAUSED TRAINING CHECKPOINT v79: 2026-11-04
+# ACTIVE A100 DEVELOPMENT: 2026-11-04
+
+User explicitly requests executing the full plan at
+`/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_2XA100_40GB_20261104.md`.
+This new authorization supersedes the historical pause below for this plan.
+Worktree: a100-development-20261104, based on the plan's Nov4 source 6c49bf05.
+Use GPUs 2 and 3 as separate single-GPU jobs after P0 validation. Existing services
+on GPUs 0/1 are untouched. Real Host HTTP remains serial. No subagents, SHA/checksums/
+content fingerprints, new service, second ledger, limit reset, or remote writes.
+Retain the existing budget at /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json.
+All new outputs go under this worktree's ignored artifacts/a100-development-20261104.
+The original evidence-gap worktree, frozen runtimes, first outcomes and user-owned
+plan/research files remain unchanged. No claim of completion from P0 or unit tests.
+
+# HISTORICAL USER-PAUSED TRAINING CHECKPOINT v79: 2026-11-04
 
 用户已暂停完整Nov2训练目标；不得自动恢复、启动raw1024或继续研究。用户另行明确要求“提交到github”，只执行该提交/推送任务。新授权覆盖此前no-remote限制，但不授权删除产物或上传ignored模型/原始运行日志。
 最新data/manifests/development-training-progress-20261102-v79.json；可发布摘要data/manifests/development-training-checkpoint-20261104-v1.json和docs/MILAI_DEVELOPMENT_TRAINING_CHECKPOINT_20261104.md。当前无模型进程。

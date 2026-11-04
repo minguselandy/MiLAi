@@ -130,8 +130,9 @@ def test_relative_loss_moves_both_conditions_and_is_option_order_invariant(direc
 
 
 @pytest.mark.parametrize('condition_weight', [0., .25])
+@pytest.mark.parametrize('parallel_mode,precision', [('legacy-dp', 'float32'), ('single', 'bf16')])
 def test_native_grouped_unit_fit_uses_exact_rows_and_scaled_component_weights(
-    tmp_path, monkeypatch, condition_weight,
+    tmp_path, monkeypatch, condition_weight, parallel_mode, precision,
 ):
     torch = pytest.importorskip("torch")
     transformers = pytest.importorskip("transformers")
@@ -176,7 +177,8 @@ def test_native_grouped_unit_fit_uses_exact_rows_and_scaled_component_weights(
         '--conditional-pairs', str(data / 'pairs.jsonl'), '--epochs', '1',
         '--conditional-loss-weight', str(condition_weight),
         '--optimizer-updates', '1', '--eval-at-updates', '1', '--micro-batch-size', '2',
-        '--max-len', '256', '--head-max-len', '96', '--shuffle-options'])
+        '--max-len', '256', '--head-max-len', '96', '--shuffle-options',
+        '--parallel-mode', parallel_mode, '--precision', precision])
     train_bounded_laya.main()
     run = read_json(output / 'run.json')
     assert run['status'] == 'COMPLETED' and run['optimizer_updates'] == 1

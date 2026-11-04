@@ -155,6 +155,35 @@ def test_instruction_negative_coverage_is_distinct_from_ordinary_label_coverage(
         rows, panel['rows'])
 
 
+def test_native_priority_replaces_same_condition_negatives_without_changing_known_labels():
+    rows, pairs = pool()
+    for row in rows:
+        row['metadata']['native_judgments'] = [{'native_field': 'new_negatives'}] if (
+            row['metadata']['event_id'].split('/')[1] == '4') else []
+    before = copy.deepcopy((rows, pairs))
+    legacy = condition_stratified_auxiliary_panel(rows, pairs, seed=0)
+    native = condition_stratified_auxiliary_panel(rows, pairs, seed=0,
+                                                negative_selection='native-priority')
+    assert (rows, pairs) == before
+    assert native['instruction_negative_coverage']['represented_conditions'] == 3
+    assert native['counts']['training_slots'] == legacy['counts']['training_slots']
+    assert native['counts']['negative_slots'] == legacy['counts']['negative_slots']
+    assert native['missing_condition_labels'] == legacy['missing_condition_labels']
+    for panel in (legacy, native):
+        for row in panel['rows']:
+            assert row['gold']
+    positives = lambda panel: {r['metadata']['event_id'] for r in panel['rows']  # noqa: E731
+                               if binary_label(r) is True}
+    assert positives(native) == positives(legacy)
+    assert [p for p in native['pairs'] if p['kind'] == 'change'] == [
+        p for p in legacy['pairs'] if p['kind'] == 'change']
+    # A mandatory negative endpoint can exhaust its condition's only slot.
+    limited = condition_stratified_auxiliary_panel(rows[:2] + rows[8:10], pairs[:1], seed=0,
+                                                 negative_selection='native-priority')
+    assert limited['instruction_negative_coverage']['represented_conditions'] == 0
+    assert limited['counts']['training_slots'] == 2
+
+
 @pytest.mark.parametrize("mutation", ["candidate", "query", "label"])
 def test_stratified_panel_does_not_train_stale_conditional_pairs(mutation):
     rows, pairs = pool()
