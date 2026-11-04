@@ -1,3 +1,53 @@
+# LIVE A100 EXECUTION v1: 2026-11-04
+
+Full user goal remains ACTIVE. Latest report:
+docs/MILAI_A100_DEVELOPMENT_EXECUTION_20261104.md and
+data/manifests/a100-development-progress-20261104-v1.json.
+New source commits9d00439a/b3d7cbef/24710507 are provenance only; no SHA checks.
+Root artifact directory: artifacts/a100-development-20261104.
+
+Two live full2805-update fits: A0 child443247/exec24100, A1 child443248/exec25015.
+Revalidate actual /proc command and their run.json; do not restart after a lost handle
+or an observation timeout. Both use immutable runtime-p0, BF16, single GPU2/3.
+P0 two32-update fits and both512-row real reloads CLOSED. Same initial512 argmax;
+steady speed ratio2.345; SDK exportFP16, BF16 reload changes1/512 near-boundary choice.
+Formal A common update0 all3132 inputs/logits identical. At702, old8 supported-change
+joint correctness A0=1/A1=5, initial6. Partial exposed-dev signal, NO adoption or
+full-curve nomination. Continue both fixed budgets/cuts; no unplanned A20k/seeds/J.
+
+B8 CLOSED and source-author reviewed: all4 direct observed-Source READs actually
+opened and returned,16 ranges bound,8HTTP/30879known/newunknown0. Alt1C vs baseline3C;
+answer5ties/3baseline wins; delivery4ties/3baseline wins/1unknown. Old first results
+unchanged. Future coverage excludes empty HANDOFF alternatives; do not rerun B8.
+C8x3 CLOSED: exec87384/PID547248 exited,24first positions/22completed readouts/2failed.
+62ranges and actual menus/packets/wires bound,24HTTP/71109known/newunknown0.
+fixed_context/rules/E1-u16 complete4/4/1 of8. Three actual sufficient acquired sets
+omitted by E1 selection; no menu expansion justified. Failures stay in task denominator,
+answer pair feedback involving failures staysunknown. Source-author, conditional given
+readout, not autonomous Host/confirmation. Never poll/restart closed B8/C8/profile jobs.
+
+B64 new TRAIN fixture prepared (64families/4502Source units/one native question each),
+no actual new prefix collection yet. Source allocation also reserves new task DEV64
+and confirmation256 (185nativeDEV/71nativeTRAIN). Held body/annotations NOT exported.
+Do not access confirmation content before method/checkpoint/scoring/budget freeze.
+New128 conditional DEV is a separate unresolved data track. B64 training, necessary
+seeds/scale, D32updates, autonomous Host, external LME451/Mem2Act400 and final reporting
+remain in the full plan; do not redefine completion around this checkpoint.
+
+61 training/GPU-related checks plus27 nomination/handoff checks PASS; Ruff and both
+dependency boundaries PASS. C preparation originally failed configuration equality:
+pass existing exclude_given_requests; actual8 reprepare with original menus unchanged.
+Regression failed before and passes after; failed preparations/analysis/timers retained.
+No Product/public schema/API/permission/Canonical changes or remote writes.
+
+Single original ledger remains /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json.
+Do not settle offline commands while model jobs live. P0 fit/reload already recorded;
+C native CPU380.64422756196655 already recorded. Whole C command447.88CPU includes that;
+only residual~67.24CPU is pending. Old v79 offline45.39CPU also remains pending.
+New timer list is in manifest; nested measurements are not additive. Unmetered author,
+trainer startup/admission and GPU unit-test hours are unknown, notzero. No limit reset,
+second ledger, subagent, new service, SHA/content fingerprint or old-position retries.
+
 # ACTIVE A100 DEVELOPMENT: 2026-11-04
 
 User explicitly requests executing the full plan at

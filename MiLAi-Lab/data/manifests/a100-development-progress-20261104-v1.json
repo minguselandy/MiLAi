@@ -1,0 +1,382 @@
+{
+  "status": "ACTIVE_FULL_PLAN;P0_B8_C8_REVIEWED;ACTUAL_A_FIT_STATE_RECORDED",
+  "timestamp_utc": "2026-11-04T12:02:38.736096+00:00",
+  "goal_complete": false,
+  "goal_status": "active",
+  "current_goal_turn_classification": "progress",
+  "plan": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_2XA100_40GB_20261104.md",
+  "worktree": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104",
+  "branch": "feat/a100-development-20261104",
+  "source_commits": [
+    "9d00439a",
+    "b3d7cbef",
+    "24710507"
+  ],
+  "processes": [
+    {
+      "phase": "a0-seed0",
+      "exec_session": 24100,
+      "coordinator_pid": 443244,
+      "child_pid": 443247,
+      "proc_alive": true,
+      "driver_status": "RUNNING",
+      "run_status": "RUNNING",
+      "optimizer_updates": 1403,
+      "frozen_command": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/cuda-env/bin/python -u /cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/frozen-feedback-ae3950f2/train_with_declared_attention.py /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/runtime-p0/tools/train_bounded_laya.py /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/a-matched/a0 /cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e1-fitting-v1/delivery-only/checkpoints/update-16 /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/a0-seed0 --budget /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json --compute-phase milai_a100_a0_seed0_fullpass_20261104 --task mixed_retrieval --objective set --mixture /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/a-matched/a0/mixture.json --mixture-loss-scale 1.25 --conditional-pairs /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/a-matched/a0/selected-pairs.jsonl --epochs 1 --optimizer-updates 2805 --eval-at-updates 702 1403 2104 2805 --seed 0 --operation-state shared_actions --max-len 16384 --head-max-len 2048 --micro-batch-size 2 --encoder-lr 5e-6 --head-lr 1e-4 --shuffle-options --gradient-checkpointing --feedback-dev-data /cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e1-matched-data-v1/feedback-dev.jsonl --device cuda:0 --parallel-mode single --precision bf16 ",
+      "run": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/a0-seed0/run.json"
+    },
+    {
+      "phase": "a1-seed0",
+      "exec_session": 25015,
+      "coordinator_pid": 443246,
+      "child_pid": 443248,
+      "proc_alive": true,
+      "driver_status": "RUNNING",
+      "run_status": "RUNNING",
+      "optimizer_updates": 1403,
+      "frozen_command": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/cuda-env/bin/python -u /cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/frozen-feedback-ae3950f2/train_with_declared_attention.py /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/runtime-p0/tools/train_bounded_laya.py /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/a-matched/a1 /cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e1-fitting-v1/delivery-only/checkpoints/update-16 /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/a1-seed0 --budget /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json --compute-phase milai_a100_a1_seed0_fullpass_20261104 --task mixed_retrieval --objective set --mixture /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/a-matched/a1/mixture.json --mixture-loss-scale 1.25 --conditional-pairs /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/a-matched/a1/selected-pairs.jsonl --epochs 1 --optimizer-updates 2805 --eval-at-updates 702 1403 2104 2805 --seed 0 --operation-state shared_actions --max-len 16384 --head-max-len 2048 --micro-batch-size 2 --encoder-lr 5e-6 --head-lr 1e-4 --shuffle-options --gradient-checkpointing --feedback-dev-data /cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e1-matched-data-v1/feedback-dev.jsonl --device cuda:0 --parallel-mode single --precision bf16 ",
+      "run": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/a1-seed0/run.json"
+    },
+    {
+      "phase": "c-handoff8",
+      "exec_session": 87384,
+      "pid": 547248,
+      "proc_alive": false,
+      "status": "COMPLETED_WITH_MISSING_READOUTS",
+      "completed_positions": 24,
+      "planned_positions": 24,
+      "driver": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/c-handoff8-execution/driver.json"
+    }
+  ],
+  "P0": {
+    "report": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/p0-analysis.json",
+    "fits": 2,
+    "updates_each": 32,
+    "train_rows_each": 512,
+    "actual_train_tokens_each": 639380,
+    "same_initial_argmax": 512,
+    "final_argmax_agreement": 508,
+    "steady_time_ratio_fp32_over_bf16": 2.3446451350368647,
+    "export_weight_dtype": "FP16",
+    "reload_rows_each": 512,
+    "reload_argmax_flips": {
+      "float32": [],
+      "bf16": [
+        {
+          "index": 177,
+          "before_margin": 0.025008320808410645,
+          "before": "satisfies",
+          "after": "does_not_satisfy"
+        }
+      ]
+    },
+    "effective_12k_context_proven": false,
+    "method_quality_claim": false
+  },
+  "A": {
+    "plan": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/a-seed0-plan.json",
+    "data_audit": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/a-matched/comparison-preparation.json",
+    "families_each": 10000,
+    "known_rows_each": 44868,
+    "updates_each": 2805,
+    "negative_slots_each": 19974,
+    "positive_slots_each": 20008,
+    "selected_native_negative_conditions": {
+      "a0": 5,
+      "a1": 9540
+    },
+    "stable_negative_pairs": {
+      "a0": 9968,
+      "a1": 433
+    },
+    "change_pairs_each": 6,
+    "complete_fit_or_quality_claim": false,
+    "draw_exposure_snapshot": {
+      "a0": {
+        "observed_completed_updates": 1403,
+        "actual_rows": 22448,
+        "actual_input_tokens": 18934966,
+        "actual_padded_tokens": 31085330,
+        "native_negative_draws": 3,
+        "native_negative_conditions_drawn": 3,
+        "evidence": "Persisted actual update/row counters equal the fixed full-pass window prefix; original source provenance inspected only offline."
+      },
+      "a1": {
+        "observed_completed_updates": 1403,
+        "actual_rows": 22448,
+        "actual_input_tokens": 18750522,
+        "actual_padded_tokens": 31779658,
+        "native_negative_draws": 4845,
+        "native_negative_conditions_drawn": 4845,
+        "evidence": "Persisted actual update/row counters equal the fixed full-pass window prefix; original source provenance inspected only offline."
+      }
+    },
+    "observed_diagnostic_report": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/a-diagnostics-through-702.json",
+    "common_update0": {
+      "dev": {
+        "rows": 3068,
+        "identical_argmax": 3068,
+        "maximum_absolute_logit_difference": 0
+      },
+      "feedback-dev": {
+        "rows": 64,
+        "identical_argmax": 64,
+        "maximum_absolute_logit_difference": 0
+      }
+    },
+    "diagnostic_supported_change_joint": {
+      "initial": "6/8",
+      "a0_update702": "1/8",
+      "a1_update702": "5/8"
+    },
+    "actual_config": {
+      "max_len": 16384,
+      "head_max_len": 2048,
+      "encoder_lr": 5e-06,
+      "objective": "set",
+      "conditional_loss_weight": 0,
+      "precision": "bf16",
+      "parameter_scope": "full"
+    },
+    "config_reason": "Preserve real E2 singleton conditional CE and accepted-set operation replay rather than silently replacing the historical recipe."
+  },
+  "B": {
+    "repair_inventory": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/b-repair-inventory.json",
+    "old_states": 57,
+    "functional_states_executed_and_reviewed": 8,
+    "functional_source_ranges": 16,
+    "direct_observed_Source_READs_verified": 4,
+    "functional_packet_binding": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/b-functional8-bound-results.json",
+    "quality_review": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/b-functional8-quality-review.json",
+    "complete_alternative": 1,
+    "complete_baseline": 3,
+    "pre_cost_answer_comparison": {
+      "tie": 5,
+      "baseline": 3
+    },
+    "pre_cost_delivery_comparison": {
+      "tie": 4,
+      "baseline": 3,
+      "unknown": 1
+    },
+    "new_HTTP": 8,
+    "new_known_generation_tokens": 30879,
+    "new_unknown_usage": 0,
+    "autonomous_Host": false,
+    "old_first_outcomes_retried": false,
+    "B64": {
+      "allocation": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/source-allocation-v1.json",
+      "fixture": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/b64-sources/train.json",
+      "new_train_source_families": 64,
+      "Source_units": 4502,
+      "reached_states_collected": 0,
+      "two_supervision_panels_fitted": false
+    },
+    "protocol_improvement": "Keep the first8 ties/losses. Future parameter-coverage nominations exclude empty HANDOFF subsets; infer no quality gain from opening a Source alone."
+  },
+  "C": {
+    "plan": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/c-handoff8-plan.json",
+    "source_commit": "24710507",
+    "actual_pools": 8,
+    "policies": [
+      "fixed_context",
+      "rules",
+      "laya_E1_delivery_u16"
+    ],
+    "all_prepared_menus_equal_original": true,
+    "acquisition_allowed": false,
+    "status": "C8_ORIGINAL_MENU_FUNCTION_AND_SOURCE_AUTHOR_REVIEW_CLOSED",
+    "binding": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/c-handoff8-bound-results.json",
+    "quality_review": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/c-handoff8-quality-review.json",
+    "complete_by_method": {
+      "fixed_context": 4,
+      "rules": 4,
+      "laya": 1
+    },
+    "failed_first_readouts": 2,
+    "Source_ranges": 62,
+    "actual_positions": 24,
+    "HTTP_attempts": 24,
+    "known_generation_tokens": 71109,
+    "new_unknown_usage": 0,
+    "existing_good_sets_not_selected_states": 3,
+    "candidate_menu_expansion_supported": false,
+    "selected_candidate": "E1 delivery-only-u16 reference only; not aggregate or final B model",
+    "failure_reflection": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/c-handoff8-preparation-reflection.json",
+    "fix": "Preserve supported exclude_given_requests in actual checkpoint restoration; strict configuration/material/prefix checks retained."
+  },
+  "source_reservations": {
+    "allocation": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/source-allocation-v1.json",
+    "new_task_DEVELOPMENT": 64,
+    "CONFIRMATION": 256,
+    "confirmation_native_splits": {
+      "dev": 185,
+      "train": 71
+    },
+    "confirmation_bodies_or_annotations_exported": false,
+    "confirmation_power_guaranteed": false
+  },
+  "verification": {
+    "training_related_passed": 61,
+    "real_GPU_tests_run": true,
+    "nomination_and_handoff_passed": 27,
+    "failed_before_configuration_fix": "Actual captured preparation and new SQLite regression, preserved; after fix all27 affected tests pass.",
+    "ruff": "pass",
+    "package_boundary": "pass",
+    "tools_Product_boundary": "pass",
+    "full_repo_CI_claim": false
+  },
+  "cost": {
+    "original_ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+    "second_ledger_created": false,
+    "old_v79_pending_offline_CPU_seconds": 45.39,
+    "new_measured_command_timers": [
+      {
+        "timer": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/a-diagnostics-702.time.txt",
+        "wall_seconds": 6.26,
+        "whole_command_CPU_seconds": 8.870000000000001
+      },
+      {
+        "timer": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/a-matched-preparation.time.txt",
+        "wall_seconds": 20.94,
+        "whole_command_CPU_seconds": 20.87
+      },
+      {
+        "timer": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/a0-preparation.time.txt",
+        "wall_seconds": 57.51,
+        "whole_command_CPU_seconds": 57.5
+      },
+      {
+        "timer": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/a1-preparation.time.txt",
+        "wall_seconds": 55.23,
+        "whole_command_CPU_seconds": 55.22
+      },
+      {
+        "timer": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/b-functional8-binding-failed-boundary.time.txt",
+        "wall_seconds": 2.49,
+        "whole_command_CPU_seconds": 4.74
+      },
+      {
+        "timer": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/b-functional8-binding.time.txt",
+        "wall_seconds": 2.39,
+        "whole_command_CPU_seconds": 4.98
+      },
+      {
+        "timer": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/b-functional8-execution.time.txt",
+        "wall_seconds": 174.63,
+        "whole_command_CPU_seconds": 22.21
+      },
+      {
+        "timer": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/b-functional8-preparation-v2.time.txt",
+        "wall_seconds": 2.18,
+        "whole_command_CPU_seconds": 2.1399999999999997
+      },
+      {
+        "timer": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/b-functional8-preparation.time.txt",
+        "wall_seconds": 2.25,
+        "whole_command_CPU_seconds": 2.17
+      },
+      {
+        "timer": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/b-nomination-tests.time.txt",
+        "wall_seconds": 2.69,
+        "whole_command_CPU_seconds": 5.36
+      },
+      {
+        "timer": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/c-and-nomination-tests-v2.time.txt",
+        "wall_seconds": 4.95,
+        "whole_command_CPU_seconds": 6.65
+      },
+      {
+        "timer": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/c-and-nomination-tests.time.txt",
+        "wall_seconds": 4.87,
+        "whole_command_CPU_seconds": 6.5200000000000005
+      },
+      {
+        "timer": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/c-configuration-regression-before.time.txt",
+        "wall_seconds": 6.12,
+        "whole_command_CPU_seconds": 8.2
+      },
+      {
+        "timer": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/c-handoff8-binding.time.txt",
+        "wall_seconds": 3.23,
+        "whole_command_CPU_seconds": 5.739999999999999
+      },
+      {
+        "timer": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/c-handoff8-execution.time.txt",
+        "wall_seconds": 453.04,
+        "whole_command_CPU_seconds": 447.88
+      },
+      {
+        "timer": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/c-handoff8-preparation-v2.time.txt",
+        "wall_seconds": 10.2,
+        "whole_command_CPU_seconds": 12.9
+      },
+      {
+        "timer": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/c-handoff8-preparation.time.txt",
+        "wall_seconds": 2.92,
+        "whole_command_CPU_seconds": 5.49
+      },
+      {
+        "timer": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/p0-analysis-with-reload-costs.time.txt",
+        "wall_seconds": 2.86,
+        "whole_command_CPU_seconds": 5.41
+      },
+      {
+        "timer": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/p0-analysis.time.txt",
+        "wall_seconds": 4.43,
+        "whole_command_CPU_seconds": 7.140000000000001
+      },
+      {
+        "timer": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/p0-preparation-failed-import.time.txt",
+        "wall_seconds": 1.78,
+        "whole_command_CPU_seconds": 4.53
+      },
+      {
+        "timer": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/p0-preparation.time.txt",
+        "wall_seconds": 32.34,
+        "whole_command_CPU_seconds": 35.11
+      },
+      {
+        "timer": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/p0-tests.time.txt",
+        "wall_seconds": 18.72,
+        "whole_command_CPU_seconds": 27.85
+      },
+      {
+        "timer": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/runtime-environment.time.txt",
+        "wall_seconds": 4.2,
+        "whole_command_CPU_seconds": 5.8
+      },
+      {
+        "timer": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/source-allocation.time.txt",
+        "wall_seconds": 0.44,
+        "whole_command_CPU_seconds": 0.44
+      }
+    ],
+    "timer_accounting": "Command CPU is nested. Deduct already-recorded native/model CPU once before any later idle residual settlement; never sum both. No offline settlement performed while these model jobs live.",
+    "P0_fits_and_reloads_already_recorded": true,
+    "C_native_CPU_already_recorded": 380.64422756196655,
+    "C_whole_command_CPU_seconds": 447.88,
+    "C_client_CPU_residual_pending_approx_seconds": 67.24,
+    "GNU_timer_resolution_seconds": 0.01,
+    "GPU_unit_test_hours": "not separately measured; unknown_not_zero",
+    "trainer_import_and_CUDA_admission_overhead": "outside in-process trainer clock; not separately measured, unknown_not_zero",
+    "A_fit_compute_recording": "Each trainer finally uses the original short ledger lock.",
+    "unmetered_author_work": "unknown_not_zero",
+    "remote_hardware_and_monetary_cost": "unmeasured"
+  },
+  "remaining_requirements": [
+    "Close full A0/A1 seed0 fits and saved-checkpoint/old8/new128 conditional development diagnoses plus actual full-binding/Host selection; no20k or seed sweep without signal.",
+    "Finish relevant missing READ/actual acquired-set repairs within57/24-state bounds; collect new B64 actual reached states and shared argmax/baseline/coverage union. Predeclare3-distinct core eligibility, preserve singleton/tie/unknown and first failures.",
+    "Compile B0 argmax-baseline and B1 alternative-baseline supervision with same full menus, same replay/initializer/objective, actual draws/weights and 2-exposure budget; fit both.",
+    "C8 actual packets/source/conditional-Host review closed; expand up to24 states only as needed, add bounded candidate sets only after an actual TRAIN expression gap is established.",
+    "Run necessary retained seeds1/2 and justified20k or192/256 scale comparisons.",
+    "D: view_cache/incremental/learned on original8 development flows plus32 new legal update families, separate irrelevant growth/relevant updates/old Host output; autonomous final-arrivals and full-cost evidence.1024 only if budget mechanism warrants it.",
+    "Export/admit new64 task-development sources as development; freeze final candidate, selection/scoring/limits before reserved confirmation bodies or labels are accessed.",
+    "Run final new-source/multi-seed confirmation with paired family gains/losses/bootstrap, LME451 Reader/Judge and Mem2Act400 after real exposure reconciliation; do not rerun probes.",
+    "Complete full cost preparation/prefix/branch/train/selection/Host/external reporting and paper figures; state scope and uncertainty; allow the simple method to win."
+  ],
+  "no_sha_validation": true,
+  "subagents": false,
+  "remote_written": false,
+  "Product_changed": false
+}
