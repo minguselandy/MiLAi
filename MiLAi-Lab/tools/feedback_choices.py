@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import copy
 import math
+import random
 from collections import Counter, defaultdict
 from collections.abc import Sequence
 from dataclasses import asdict
@@ -58,6 +59,39 @@ def decision_actions(
     if len(selected) > 3:
         raise ValueError("Current-decision sampling admits at most three distinct bindings")
     return selected
+
+
+def parameter_stratum(action: dict[str, Any]) -> str:
+    """Describe offered parameter types, without task/source identity or outcomes."""
+    parameters = action['parameters']
+    if action['kind'] == 'READ' and 'observed_source' in parameters:
+        granularity = 'full' if action['id'].startswith('source_full_') else 'range'
+        return 'READ.observed_source.' + granularity
+    return action['kind'] + '.' + ','.join(sorted(parameters))
+
+
+def coverage_alternative(call: dict[str, Any], excluded: Sequence[dict[str, Any]],
+                         coverage: Counter[str], seed: int) -> dict[str, Any] | None:
+    """Nominate an undercovered legal READ/delivery binding from visible state only."""
+    state = call['initial_observation']
+    material = bool(state['visible_evidence'] or state.get('observed_evidence')
+                    or state.get('retrieved_scopes'))
+    candidates = []
+    for action in call['initial_actions']:
+        params = action['parameters']
+        if (action['kind'] not in {'READ', 'HANDOFF'} or params.get('observe_only')
+                or 'source_observation_cursor' in params
+                or (action['kind'] == 'HANDOFF' and not material)):
+            continue
+        if any(all(action[k] == prior[k] for k in ('kind', 'target', 'parameters'))
+               for prior in excluded):
+            continue
+        candidates.append(action)
+    if not candidates:
+        return None
+    minimum = min(coverage[parameter_stratum(action)] for action in candidates)
+    return copy.deepcopy(random.Random(seed).choice(  # noqa: S311 -- declared collection seed
+        [a for a in candidates if coverage[parameter_stratum(a)] == minimum]))
 
 
 def saved_decisions(evaluation: Path) -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:

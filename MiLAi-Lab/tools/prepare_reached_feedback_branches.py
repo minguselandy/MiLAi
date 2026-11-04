@@ -5,19 +5,26 @@ import argparse
 import subprocess
 import sys
 import time
+from collections import Counter
 from pathlib import Path
 from typing import Any
 
-from feedback_choices import baseline_choice
+from feedback_choices import baseline_choice, coverage_alternative, parameter_stratum
 from milai_lab.harness.artifact_io import read_json, write_json
 from prepare_e1_choice_branches import binding_equal
 
 
-def declared_alternative(record: dict[str, Any], mode: str) -> tuple[dict[str, Any] | None, str]:
+def declared_alternative(record: dict[str, Any], mode: str, *,
+                         coverage: Counter[str] | None = None,
+                         seed: int = 0) -> tuple[dict[str, Any] | None, str]:
     """A real acquired-material delivery choice, otherwise the original context alternative."""
-    if mode not in {'fixed_context', 'acquired_raw_delivery'}:
+    if mode not in {'fixed_context', 'acquired_raw_delivery', 'parameter_coverage'}:
         raise ValueError('Unknown declared reached-state alternative protocol')
     first_two = (record['argmax'], record['baseline'])
+    if mode == 'parameter_coverage':
+        call = read_json(Path(record['capture'])/'call.json')
+        action = coverage_alternative(call, first_two, coverage or Counter(), seed)
+        return action, 'Seeded undercovered legal READ/HANDOFF parameters; outcomes not consulted'
     if mode == 'acquired_raw_delivery':
         call = read_json(Path(record['capture'])/'call.json')
         state = call['initial_observation']
@@ -55,13 +62,18 @@ def main() -> None:
     inputs.mkdir(parents=True,exist_ok=False)
     includes=[]
     bindings={}
-    for chosen in selection['selected']:
+    coverage=Counter(plan.get('branch_parameter_coverage', {}))
+    for index, chosen in enumerate(selection['selected']):
         record=inventory[chosen['capture']]
         name='--'.join(Path(chosen['capture']).relative_to(
             collection/'frozen-retrieval-calls').parts)
         includes.append(name)
-        alternate,reason=declared_alternative(record,alternative_mode)
+        for action in (record['argmax'], record['baseline']):
+            coverage[parameter_stratum(action)] += 1
+        alternate,reason=declared_alternative(record,alternative_mode,
+                                             coverage=coverage, seed=index)
         if alternate is not None:
+            coverage[parameter_stratum(alternate)] += 1
             bindings[name]={'actions':[alternate['id']],
                 'reason':reason}
     write_json(inputs/'bindings.json',bindings)
@@ -89,6 +101,7 @@ def main() -> None:
         'status':'REACHED_STATE_COMPARISONS_PREPARED_NOT_EXECUTED',
         'source_selection':str(args.selection.resolve()),'preparer_argv':argv,
         'branch_alternative_protocol':alternative_mode,
+        'nominated_parameter_coverage':dict(coverage),
         'selected_actual_states':len(expected),'all_nominated_bindings':len(policies),
         'comparison_bindings':len(comparable),
         'comparison_states':sum(r['has_comparison'] for r in nominations.values()),

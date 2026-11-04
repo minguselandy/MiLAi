@@ -1,5 +1,8 @@
 """Add a legal stop comparison only after material exists; old plans keep their rule."""
 
+from collections import Counter
+
+from feedback_choices import coverage_alternative, decision_actions, parameter_stratum
 from milai_lab.harness.artifact_io import write_json
 from milai_lab.methods.memory_control import MemoryControlState
 from prepare_reached_feedback_branches import declared_alternative
@@ -72,3 +75,29 @@ def test_same_delivery_binding_is_deduplicated_then_context_fallback_remains(tmp
     assert declared_alternative(record, "acquired_raw_delivery")[0] == actions[3]
     record["raw_context"] = actions[1]
     assert declared_alternative(record, "acquired_raw_delivery")[0] is None
+
+
+def test_parameter_coverage_uses_legal_full_bindings_and_ignores_unknown_outcomes(tmp_path):
+    from milai_lab.harness.artifact_io import read_json
+
+    record, actions = fixture(tmp_path)
+    call = read_json(tmp_path / "call.json")
+    direct = {"id": "source_full_0", "kind": "READ", "target": "observed source full",
+              "parameters": {"observed_source": {"source_ref": "s", "source_revision": 2,
+                                                 "start": 0, "end": 800}}}
+    call['initial_actions'].extend([direct, {**direct, 'id': 'observe-only',
+                                           'parameters': {**direct['parameters'],
+                                                          'observe_only': True}}])
+    coverage = Counter({parameter_stratum(actions[3]): 8})
+    before = read_json(tmp_path / 'call.json')
+    chosen = coverage_alternative(call, [record['argmax'], record['baseline']], coverage, 0)
+    assert chosen == direct
+    call['answer'] = 'Hidden outcomes must never affect nomination'
+    assert coverage_alternative(call, [record['argmax'], record['baseline']], coverage, 0) == direct
+    logits = {a['id']: float(a['id'] == record['argmax']['id']) for a in call['initial_actions']}
+    nominations = decision_actions(call, logits, record['baseline']['id'], [chosen['id']])
+    assert len(nominations) == 3 and nominations[-1] == direct
+    write_json(tmp_path / 'call.json', call)
+    assert declared_alternative(record, 'parameter_coverage', coverage=coverage)[0] == direct
+    # Nomination does not execute or edit any stored state.
+    assert before['initial_actions'] == actions
