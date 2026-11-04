@@ -217,11 +217,14 @@ def capture_closed_host_message(captured: Path, result: dict[str, Any]) -> dict[
 def replay_host_message(
     captured: Path, output: Path, presentation: str, *, source_version: str,
     models: dict[tuple[Any, ...], Any] | None = None,
+    control_policy: dict[str, Any] | None = None,
+    host_enable_thinking: bool | None = None,
 ) -> dict[str, Any]:
     """One full Host/tools/answer branch from a real pre-Host snapshot; never retry.
 
-    Only the presentation is overridden. Source imports, prior delivered messages,
-    per-message admission and read allowance are restored by the ordinary runner.
+    Presentation, policy/checkpoint or the declared Host thinking flag may be overridden.
+    Source imports, prior delivered messages, per-message admission and read
+    allowance are restored by the ordinary runner; operational budgets stay fixed.
     The original ledger is shared; global consumed cost is never rolled back.
     """
     from milai_lab.runners.functional import message
@@ -237,6 +240,17 @@ def replay_host_message(
         raise ValueError("Host comparison requires the captured implementation version")
     if presentation not in {"current", PRESENTATION}:
         raise ValueError("Unknown Host presentation arm")
+    policy_override = None
+    if control_policy is not None:
+        if (not control_policy or set(control_policy) - {"policy", "checkpoint"}
+                or control_policy.get("policy") not in {"fixed", "fixed_context", "rules", "laya"}):
+            raise ValueError("Host method comparison changes only the policy and checkpoint")
+        settings = read_json(captured / "before/input-freeze.json")["config"]
+        if settings["memory_control"]["policy"] not in {"fixed", "fixed_context", "rules", "laya"}:
+            raise ValueError("Host method comparison requires the ordinary finite-policy executor")
+        if control_policy["policy"] == "laya" and not control_policy.get("checkpoint"):
+            raise ValueError("A learned Host method must explicitly bind its saved checkpoint")
+        policy_override = {**settings["memory_control"], **copy.deepcopy(control_policy)}
     output.mkdir(parents=True, exist_ok=False)
     started, cpu = time.perf_counter(), time.process_time()
     report: dict[str, Any] = {"status": "RUNNING", "captured_host": str(captured),
@@ -244,7 +258,10 @@ def replay_host_message(
         "original_message_status": original["status"], "automatic_retry": False,
         "prefix_model_or_tool_operations_reexecuted": None,
         "scope": "Full autonomous Host continuation from common pre-first-model state; "
-                 "read/answer behavior is newly executed, not a forced final-only readout."}
+                 "read/answer behavior is newly executed, not a forced final-only readout.",
+        **({"control_policy_override": policy_override} if policy_override is not None else {}),
+        **({"host_enable_thinking_override": host_enable_thinking}
+           if host_enable_thinking is not None else {})}
     write_json(output / "replay.json", report)
     entry_budget = None
     try:
@@ -254,6 +271,8 @@ def replay_host_message(
         entry_budget = read_json(Path(settings["budget_path"]))
         result = message(runtime, bank=row["bank"], **row["public_message"],
             replay_host_message=row, host_presentation_override=presentation,
+            control_policy_override=policy_override,
+            host_enable_thinking_override=host_enable_thinking,
             control_models=models, resume=True)
         report.update(status=result["status"], result=result)
         if result.get("frozen_pre_host_state_equal"):

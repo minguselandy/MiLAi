@@ -2569,6 +2569,7 @@ def message(
     host_snapshots: Path | None = None,
     replay_host_message: dict[str, Any] | None = None,
     host_presentation_override: str | None = None,
+    host_enable_thinking_override: bool | None = None,
 ) -> dict[str, Any]:
     freeze = frozen(root)
     workflow = {"reservation_v1": "reservation", "document_publication_v1": "document"}.get(
@@ -2601,13 +2602,17 @@ def message(
             settings["host_evidence_presentation"] = host_presentation_override
     elif host_presentation_override is not None:
         raise ValueError("HOST_PRESENTATION_OVERRIDE_REQUIRES_PRE_HOST_SNAPSHOT")
+    if host_enable_thinking_override is not None:
+        if replay_host_message is None or type(host_enable_thinking_override) is not bool:
+            raise ValueError("HOST_THINKING_OVERRIDE_REQUIRES_PRE_HOST_SNAPSHOT_AND_BOOL")
     if retrieval_step_snapshots and retrieval_snapshots is None:
         raise ValueError("CONTROL_STEP_CAPTURE_REQUIRES_RETRIEVAL_SNAPSHOTS")
     if ((retrieval_snapshots is not None or replay_retrieval is not None)
             and (not settings.get("retrieval_tool") or settings["request_mode"] != "disabled")):
         raise ValueError("FROZEN_RETRIEVAL_REQUIRES_RETRIEVAL_PROFILE")
-    if control_policy_override is not None and replay_retrieval is None:
-        raise ValueError("CONTROL_POLICY_OVERRIDE_REQUIRES_FROZEN_CALL")
+    if (control_policy_override is not None
+            and replay_retrieval is None and replay_host_message is None):
+        raise ValueError("CONTROL_POLICY_OVERRIDE_REQUIRES_FROZEN_CALL_OR_HOST")
     if previous_host_message is not None and (
             not settings.get("retrieval_tool") or settings["request_mode"] != "disabled"):
         raise ValueError("HOST_HISTORY_REQUIRES_RETRIEVAL_PROFILE")
@@ -2679,6 +2684,8 @@ def message(
         "status": "UNKNOWN",
         "capture_attempted": False,
     }
+    if host_enable_thinking_override is not None:
+        output["host_enable_thinking_override"] = host_enable_thinking_override
     if recorded_tool_schemas is not None:
         output["recorded_tool_calls"] = []
     if given_retrieval_request is not None:
@@ -2868,6 +2875,9 @@ def message(
                         branch = replay_retrieval["intervention"]
                         memory_options["control_intervention"] = FirstActionIntervention(
                             MemoryAction(**branch["first_action"]), branch["continuation_steps"])
+                elif replay_host_message is not None and control_policy_override is not None:
+                    memory_options["replay_admission_policy"] = replay_host_message[
+                        "ready_state"]["admission_policy"]
             if issubclass(memory_class, FunctionalEditMemory):
                 def dependency_read_call(
                     stage: str, messages: list[dict[str, str]], schema: dict[str, Any],
@@ -4339,6 +4349,7 @@ def message(
                 business_call_wrapper=dispatch,
                 model_tool_choice=choice_selector,
                 model_tools_provider=tools_provider,
+                model_enable_thinking=host_enable_thinking_override,
                 schema_feedback_fingerprints=not bool(settings.get("retrieval_tool")),
             )
 
@@ -4608,6 +4619,7 @@ def message(
                     benchmark_view_hook=context_hook, tool_schema_communication="shape_feedback_v1",
                     business_call_wrapper=dispatch, model_tool_choice=choice_selector,
                     model_tools_provider=tools_provider,
+                    model_enable_thinking=host_enable_thinking_override,
                     schema_feedback_fingerprints=not bool(settings.get("retrieval_tool")))
                 trace({"event": "functional_completion_feedback", **completion,
                        "candidate_answer_delivered": False})

@@ -9,6 +9,26 @@ from typing import Any
 from milai_lab.datasets.conditional_reviews import binary_label
 
 
+def instruction_negative_coverage(
+    matrix: list[dict[str, Any]], selected: list[dict[str, Any]],
+) -> dict[str, Any]:
+    """Report native instruction-negative coverage without inferring cross-condition labels."""
+    available = [r for r in matrix if binary_label(r) is False and any(
+        j['native_field'] == 'new_negatives' for j in r['metadata'].get('native_judgments', []))]
+    chosen = {r['metadata']['event_id'] for r in selected}
+    included = [r for r in available if r['metadata']['event_id'] in chosen]
+    fields = ('family', 'query_unit', 'training_event')
+    conditions = {tuple(r['metadata'][k] for k in fields) for r in available}
+    represented = {tuple(r['metadata'][k] for k in fields) for r in included}
+    return {'available_known_units': len(available), 'selected_known_units': len(included),
+        'eligible_conditions': len(conditions), 'represented_conditions': len(represented),
+        'missing_conditions': [dict(zip(fields, c, strict=True))
+                               for c in sorted(conditions - represented)],
+        'scope': 'Native new_negatives provenance with an already known negative label. '
+            'This is not a semantic-hardness audit and does not label its other condition. '
+            'Ordinary negative coverage does not imply this stratum is represented.'}
+
+
 def condition_stratified_auxiliary_panel(
     matrix: list[dict[str, Any]], pairs: list[dict[str, Any]], *, seed: int,
 ) -> dict[str, Any]:
@@ -81,6 +101,7 @@ def condition_stratified_auxiliary_panel(
     represented = {row["metadata"]["family"] for row in rows}
     return {"rows": rows, "pairs": copy.deepcopy(exposed), "slots": slots,
         "missing_condition_labels": missing,
+        "instruction_negative_coverage": instruction_negative_coverage(matrix, rows),
         "counts": {"training_slots": len(rows), "distinct_cells": len(selected),
             "source_families": len({r["metadata"]["family"] for r in matrix}),
             "families": len(represented),

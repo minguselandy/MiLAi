@@ -10,6 +10,7 @@ from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any
 
+from feedback_choices import baseline_choice, captured_decisions, decision_actions, saved_decisions
 from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.methods.memory_control_learning import decision_example
 
@@ -282,12 +283,29 @@ def main() -> None:
                              "replaces pooled/phase quotas, with no missing-slot fill")
     parser.add_argument("--prefix-allocation", type=Path,
                         help="Resolved four-slot allocation with explicit fresh request arms")
-    parser.add_argument("--branch-sampling", choices=("operations", "post-operation-bindings"),
+    parser.add_argument("--branch-sampling", choices=(
+        "operations", "post-operation-bindings", "current-decision"),
                         default="operations",
                         help="Optional seeded binding alternatives on actual post-operation states")
+    scores = parser.add_mutually_exclusive_group()
+    scores.add_argument("--decision-evaluation", type=Path,
+                        help="Closed saved-model evaluator output over the actual full-menu inputs")
+    scores.add_argument("--decision-collection", type=Path,
+                        help="Reuse complete logits and actual selections from a closed collection")
+    parser.add_argument("--decision-baseline", choices=(
+                            "raw_context", "raw_delivery", "fixed_prefix", "rules"),
+                        default="raw_context")
+    parser.add_argument("--decision-baseline-reads", type=int, default=4)
     parser.add_argument("--continuation-steps", type=int, default=2)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
+    current_decision = args.branch_sampling == "current-decision"
+    if current_decision != (args.decision_evaluation is not None
+                            or args.decision_collection is not None):
+        parser.error("Current-decision sampling requires its saved evaluation or scored collection")
+    if current_decision and (args.prefix_selection is not None
+                             or args.prefix_allocation is not None):
+        parser.error("Current-decision is a separate protocol, not a replacement prefix experiment")
     if args.prefix_selection is not None and args.prefix_allocation is not None:
         parser.error("Choose original prefix selection or explicit fresh-slot allocation")
     exact_path = args.prefix_selection or args.prefix_allocation
@@ -296,6 +314,12 @@ def main() -> None:
             or args.include or args.bindings is not None):
         parser.error("Prefix selection needs control steps and excludes quotas/manual nominations")
     started, cpu = time.perf_counter(), time.process_time()
+    decision_run: dict[str, Any] = {}
+    decisions: dict[str, dict[str, Any]] = {}
+    if args.decision_collection is not None:
+        decision_run, decisions = captured_decisions(args.decision_collection)
+    elif args.decision_evaluation is not None:
+        decision_run, decisions = saved_decisions(args.decision_evaluation)
     prefix = read_json(args.prefix_selection) if args.prefix_selection is not None else None
     allocation = read_json(args.prefix_allocation) if args.prefix_allocation is not None else None
     exact = prefix or allocation
@@ -353,7 +377,9 @@ def main() -> None:
                 entry["reason"] = "no_actual_decision"
             elif history["split"] != args.split or history["source_group"] not in args.groups:
                 entry["reason"] = "outside_declared_source_groups_or_split"
-            elif len(branch_actions(call)) < 2:
+            elif current_decision and str(path.parent.resolve()) not in decisions:
+                entry["reason"] = "full_menu_prediction_missing"
+            elif not current_decision and len(branch_actions(call)) < 2:
                 entry["reason"] = "fewer_than_two_actual_action_branches"
             else:
                 stratum: tuple[bool, ...] = call_stratum(call)
@@ -407,10 +433,23 @@ def main() -> None:
                 write_json(path, frame)
                 controlled_frames[entry["capture"]] = str(path.resolve())
     policies = []
+    decision_nominations = []
     binding_rng = random.Random(args.seed)  # noqa: S311 -- explicit data acquisition seed
     for index, entry in enumerate(selected):
         capture = entry["capture"]
-        if capture in bindings:
+        if current_decision:
+            decision = decisions[str(Path(entry["path"]).resolve())]
+            baseline = baseline_choice(calls[capture], args.decision_baseline,
+                                       args.decision_baseline_reads)
+            actions = decision_actions(calls[capture], decision["prediction"]["logits"], baseline,
+                                       bindings[capture]["actions"] if capture in bindings else [])
+            decision_nominations.append({"capture": capture,
+                "argmax": decision["prediction"]["choice"], "baseline": baseline,
+                "evaluation_index": decision["evaluation_index"], "actions": actions,
+                **({"prediction_location": decision["prediction_location"]}
+                   if "prediction_location" in decision else {}),
+                "distinct_bindings": len(actions), "has_comparison": len(actions) > 1})
+        elif capture in bindings:
             actions = nominated_actions(calls[capture], bindings[capture]["actions"])
         elif args.branch_sampling == "post-operation-bindings" and entry["control_step"]:
             actions = parameter_actions(calls[capture], binding_rng)
@@ -435,6 +474,10 @@ def main() -> None:
                 "training_event": f"{call['source_root']}/{call['bank']}/{entry['message_id']}"}
             row = decision_example({"before": call["initial_observation"],
                                     "actions": call["initial_actions"]}, metadata)
+            if current_decision:
+                scored = decisions[str(Path(entry["path"]).resolve())]["row"]
+                # Preserve the scored request/instructions too, not merely its action IDs.
+                row.update({key: copy.deepcopy(scored[key]) for key in ("state", "questions")})
             stream.write(json.dumps(row, ensure_ascii=False) + "\n")
     write_json(args.output / "selection.json", {
         "status": ("NO_EXECUTABLE_BRANCHES_PREFIX_DENOMINATORS_RETAINED"
@@ -455,6 +498,22 @@ def main() -> None:
            if exact_path is not None and prefix_cells is not None else {}),
         "binding_nominations": bindings,
         "branch_sampling": args.branch_sampling,
+        **({"decision_evaluation": (str(args.decision_evaluation.resolve())
+                                    if args.decision_evaluation is not None else None),
+            "decision_collection": (str(args.decision_collection.resolve())
+                                    if args.decision_collection is not None else None),
+            "score_origin": decision_run.get("score_origin", "saved_evaluation"),
+            "unscored_captures": decision_run.get("unscored", []),
+            "decision_checkpoint": decision_run["checkpoint"],
+            "decision_operation_state": decision_run["operation_state"],
+            "decision_baseline": args.decision_baseline,
+            "decision_baseline_reads": args.decision_baseline_reads,
+            "decision_nominations": decision_nominations,
+            "baseline_scope": ("Existing raw selector restricted to actually offered HANDOFF "
+                "bindings; no further acquisition. Not end-to-end fixed Host."
+                if args.decision_baseline == "raw_delivery" else
+                "One legal action from the declared existing policy, not end-to-end fixed Host.")}
+           if current_decision else {}),
         "selected": selected, "inventory": inventory, "states": len(selected),
         "branches": len(policies),
         "controlled_readout_frames": controlled_frames,
@@ -470,12 +529,15 @@ def main() -> None:
                       if exact is not None else
                       "Declared diagnostic nominations, then round-robin observable strata; "
                       "no answers, semantic grades or action scores used for remaining selection."),
-        "branch_selection": "Explicit binding nominations use actual offered actions. Other "
+        "branch_selection": ("Full-menu saved argmax, declared simple baseline, optional explicit "
+                            "alternatives; identical executable bindings once. Singletons retained."
+                            if current_decision else
+                            "Explicit binding nominations use actual offered actions. Other "
                             "representatives use operation opportunities, not presumed utility. "
                             "Optional post-step binding sampling chooses a kind uniformly, then "
                             "two distinct actual target/parameter bindings and a control. "
                             "For nested studies prepare the largest pool once and filter its "
-                            "reviewed rows; do not resample branches for smaller cohorts.",
+                            "reviewed rows; do not resample branches for smaller cohorts."),
         "scope": "Actual captured initial or explicitly checkpointed post-operation states only. "
                  "No reconstruction is inferred from an observation or action trace alone. "
                  "Unselected/failed/missing states remain in inventory without negative labels.",

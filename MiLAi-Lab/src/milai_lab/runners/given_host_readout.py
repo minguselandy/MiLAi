@@ -33,11 +33,13 @@ def validate_given_readout_request(request: dict[str, Any]) -> None:
 
 def given_readout_frame(
     call: dict[str, Any], result: dict[str, Any], settings: dict[str, Any],
+    *, replay: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Use only a completed supplied-request receipt and its explicit public task."""
     public = call["public_message"]
+    transport = "programmatic_given_request" if replay is None else "frozen_actual_tool_call"
     if (call["host_request_generated"] or result.get("host_request_generated") is not False
-            or result.get("request_transport") != "programmatic_given_request"
+            or result.get("request_transport") != transport
             or "given_retrieval_request" not in public):
         raise ValueError("GIVEN_READOUT_REQUIRES_SUPPLIED_REQUEST")
     validate_given_readout_request(call["request"])
@@ -46,6 +48,10 @@ def given_readout_frame(
             or RetrievalRequest.model_validate(public["given_retrieval_request"])
             != RetrievalRequest.model_validate(call["request"])):
         raise ValueError("GIVEN_READOUT_PUBLIC_REQUEST_CHANGED")
+    if replay is not None and (replay["result"] != result or (result["status"] == "COMPLETED"
+            and (not result["frozen_initial_observation_and_actions_equal"]
+                 or not result["frozen_request_and_allowance_equal"]))):
+        raise ValueError("GIVEN_BRANCH_READOUT_REQUIRES_SAME_ACTUAL_BEFORE")
     frame: dict[str, Any] = {
         "schema": "given_request_host_readout_v1", "status": "NOT_EXECUTED",
         "call_id": call["call_id"], "host_request_generated": False,
@@ -54,12 +60,21 @@ def given_readout_frame(
                  "No prior Host conversation, hidden Store, source inventory or new retrieval. "
                  "The program supplies the retrieval request; this is not autonomous tool use.",
     }
-    if call["status"] != "ORIGINAL_COMPLETED" or result["status"] != "COMPLETED":
+    if replay is not None:
+        frame.update(schema="given_request_branch_host_readout_v1",
+            original_call_status=call["status"],
+            scope="One conditional answer from the same supplied public task and this actual "
+                  "branch's returned packet. No original answer, hidden Store, prior Host "
+                  "conversation or extra retrieval. This is not autonomous Host evaluation.")
+    tool_completed = (call["status"] == "ORIGINAL_COMPLETED" if replay is None else
+                      replay["status"] == "COMPLETED")
+    if not tool_completed or result["status"] != "COMPLETED":
         return {**frame, "reason": "GIVEN_RETRIEVAL_NOT_COMPLETED"}
     receipt, = [message for message in result["messages"]
                 if message["type"] == "tool" and message["tool_call_id"] == call["call_id"]]
     packet = json.loads(receipt["content"])
-    if packet != result["retrieval_result"] or packet != call["original_result"]:
+    if (packet != result["retrieval_result"]
+            or (replay is None and packet != call["original_result"])):
         raise ValueError("GIVEN_READOUT_RETURNED_PACKET_CHANGED")
     host = VLLMConfig(**settings["host"])
     public_time = {key: public[key] for key in (
@@ -83,7 +98,8 @@ def given_readout_frame(
     return {**frame, "status": "READY", "request": request}
 
 
-def run_given_readout(captured: Path, output: Path, *, source_version: str) -> dict[str, Any]:
+def run_given_readout(captured: Path, output: Path, *, source_version: str,
+                      replay_case: Path | None = None) -> dict[str, Any]:
     """Read out the just-closed Tool result before the sequence admits later arrivals."""
     from milai_lab.runners.functional import _visibility_replay, frozen
 
@@ -96,18 +112,25 @@ def run_given_readout(captured: Path, output: Path, *, source_version: str) -> d
         "host_request_generated": False, "answer_persisted_as_source": False,
         "cpu_ledger_recorded": False,
         "http_accounting": "Actual bank's original ledger, queue and remaining message allowance.",
+        **({"replay": str(replay_case), "readout_origin": "actual_same_before_branch"}
+           if replay_case is not None else {}),
     }
     trace = Trace(output / "trace.jsonl", "given_request_host_readout")
     try:
         call = read_json(captured / "call.json")
-        runtime = Path(call["source_root"])
+        replay = read_json(replay_case / "replay.json") if replay_case is not None else None
+        if replay is not None and (Path(replay["captured_call"]).resolve() != captured.resolve()
+                                   or replay["source_version"] != source_version):
+            raise ValueError("GIVEN_BRANCH_READOUT_CAPTURE_CHANGED")
+        runtime = replay_case / "runtime" if replay_case is not None else Path(call["source_root"])
         freeze = frozen(runtime)
         if (call["source_version"]["git_commit"] != source_version
                 or freeze["source_version"] != call["source_version"]):
             raise ValueError("GIVEN_READOUT_SOURCE_VERSION_CHANGED")
-        result_path = runtime / call["host_result_path"]
-        result = read_json(result_path)
-        bank = Path(call["source_bank_root"])
+        result_path = (replay_case / "replay.json" if replay_case is not None
+                       else runtime / call["host_result_path"])
+        result = replay["result"] if replay is not None else read_json(result_path)
+        bank = runtime / Path(call["source_bank_root"]).relative_to(call["source_root"])
         with SqliteStore.from_conn_string(str(bank / "memory.sqlite")) as store:
             service = MemoryService(store, tuple(call["binding"]["bank"]),
                 call["binding"]["owner"], bank / "memory.lock", functional_contract="functional_v1")
@@ -117,8 +140,9 @@ def run_given_readout(captured: Path, output: Path, *, source_version: str) -> d
             report.update(status="NOT_EXECUTED", reason="GIVEN_READOUT_VISIBILITY_REVOKED",
                           visibility_receipt=blocked)
             return report
-        frame = given_readout_frame(call, result, freeze["config"])
-        report.update(scope=frame["scope"], original_result=str(result_path))
+        frame = given_readout_frame(call, result, freeze["config"], replay=replay)
+        report.update(scope=frame["scope"], **{
+            "original_result" if replay is None else "branch_result": str(result_path)})
         write_json(output / "frame.json", frame)
         if frame["status"] != "READY":
             report.update(status="NOT_EXECUTED", reason=frame["reason"])

@@ -1,0 +1,175 @@
+{
+  "status": "CE64_SAVED12_24_48_VERIFIED;IDLE_BEFORE_SETTLEMENT_AND_SAVED96",
+  "goal_status": "active",
+  "goal_complete": false,
+  "observed_at": "2026-10-29T04:28:41.914383+00:00",
+  "previous_progress": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/data/manifests/evidence-gap-development-progress-20261023-v188.json",
+  "plan": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261026.md",
+  "execution": "docs/MILAI_DEVELOPMENT_EXECUTION_20261026.md",
+  "previous_turn_classification": "Progress: actual saved24/48 closure and original frozen verification, original-loss term-count correction with scalar-gradient proof, exact-denominator quality/cost decomposition helper implemented and mechanically tested. No newQ model or completed attribution result inferred.",
+  "original_counts": {
+    "native_fits_started": 5,
+    "native_fits_closed": 5,
+    "native_fits_total": 9,
+    "saved_CPU_jobs_closed": 28,
+    "full_saved_selections_closed": 4,
+    "whole_selected_retention_fits_closed": 4,
+    "new_saved_policy_Host_results": 0
+  },
+  "saved_CE64_early": {
+    "12": {
+      "metrics": {
+        "answer": 0.5412946428571428,
+        "delivery": 0.6197916666666666
+      },
+      "choice_changes": 0,
+      "verification": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-saved-reload-v1/source64-continued-ce-seed0-u192-v1/update-12/verification-v1.json"
+    },
+    "24": {
+      "metrics": {
+        "answer": 0.5145089285714286,
+        "delivery": 0.5937499999999999
+      },
+      "choice_changes": 0,
+      "verification": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-saved-reload-v1/source64-continued-ce-seed0-u192-v1/update-24/verification-v1.json"
+    },
+    "48": {
+      "metrics": {
+        "answer": 0.5308779761904762,
+        "delivery": 0.5963541666666666
+      },
+      "choice_changes": 0,
+      "verification": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-saved-reload-v1/source64-continued-ce-seed0-u192-v1/update-48/verification-v1.json"
+    }
+  },
+  "live_model": null,
+  "next_original_queue": [
+    "Idle settlement using this complete pending inventory and closed48 verifier/driver residual.",
+    "Launch96, thenendpoint192; fullsavedselection and actual unique earlyold860 stillrequired.",
+    "OriginalCE128/delivery3 and completefullscope remain."
+  ],
+  "supervision_correction": {
+    "summary": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-source32-pair-ce-dev-v2/summary-v2.json",
+    "figure": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-source32-pair-ce-dev-v2/original-source32-pair-ce-stage-v3.png",
+    "known_review_judgments": 367,
+    "original_loss_direction_targets": 332,
+    "rows_with_known_reviews": 166,
+    "rows_with_directional_loss": 160,
+    "tie_only_zero_loss_rows": 6,
+    "all_unknown_rows": 26,
+    "models_metrics_selection_unchanged": true
+  },
+  "quality_cost_diagnostic_preparation": {
+    "code": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-quality-cost-diagnostic-dev-v1/code-v1",
+    "working_tests": 3,
+    "frozen_tests": 3,
+    "actual_closed_prediction_decomposition": "PENDING",
+    "tensor_proof": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-quality-cost-diagnostic-dev-v1/original-loss-eligibility-tensor-v1.json",
+    "Q_fits_still_pending": true
+  },
+  "full_remaining_scope": [
+    "Original nine fits and their real Host results.",
+    "Q-direction/Q-tie/Q-cost and encoder/soft-target controls.",
+    "Old/new coverage, new actual prefixes, compact matched fitting.",
+    "F1/F2/F3 real Host comparisons, View semantic/lifecycle results.",
+    "Auxiliary scales/seeds and actual autonomous Host main table.",
+    "Complete external LongMemEval/STATE chains and four final main figures."
+  ],
+  "accounting": {
+    "last_settlement": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-source64-continued-ce-saved24-cpu-settlement-v1.json",
+    "old_v188_pending_and_saved24_paid": true,
+    "pending_disjoint_entries_excluding_this_progress": [
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-saved-reload-v1/detached-launches/source64-continued-ce-seed0-u192-v1/update-48/launch.json",
+        "field": "cpu_seconds_pending",
+        "cpu_seconds": 0.013175950999999998
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-saved-reload-v1/detached-launches/source64-continued-ce-seed0-u192-v1/update-48/launch-verification-v1.json",
+        "field": "cpu_seconds_pending",
+        "cpu_seconds": 0.0024770729999999998
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-quality-cost-diagnostic-dev-v1/freeze-preparation-v1.json",
+        "field": "cpu_seconds_pending",
+        "cpu_seconds": 0.001419827999999998
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-quality-cost-diagnostic-dev-v1/frozen-validation-v1.json",
+        "field": "cpu_seconds_pending",
+        "cpu_seconds": 0.0008535559999999984
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-quality-cost-diagnostic-dev-v1/frozen-validation-v1.json",
+        "field": "test_cpu_seconds",
+        "cpu_seconds": 0.808964
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-quality-cost-diagnostic-dev-v1/original-loss-eligibility-tensor-v1.json",
+        "field": "cpu_seconds_pending",
+        "cpu_seconds": 2.177982258
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-quality-cost-diagnostic-dev-v1/validation-v1.json",
+        "field": "cpu_seconds_pending",
+        "cpu_seconds": 0.0029786150000000004
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-quality-cost-diagnostic-dev-v1/validation-v1.json",
+        "field": "checks.0.cpu_seconds",
+        "cpu_seconds": 0.355682
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-quality-cost-diagnostic-dev-v1/validation-v1.json",
+        "field": "checks.1.cpu_seconds",
+        "cpu_seconds": 0.8686960000000001
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-quality-cost-diagnostic-dev-v1/validation-v1.json",
+        "field": "checks.2.cpu_seconds",
+        "cpu_seconds": 0.21124299999999996
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-quality-cost-diagnostic-dev-v1/validation-v1.json",
+        "field": "checks.3.cpu_seconds",
+        "cpu_seconds": 0.6296700000000002
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-quality-cost-diagnostic-dev-v1/validation-v2.json",
+        "field": "cpu_seconds_pending",
+        "cpu_seconds": 0.0017385869999999998
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-quality-cost-diagnostic-dev-v1/validation-v2.json",
+        "field": "checks.0.cpu_seconds",
+        "cpu_seconds": 0.109091
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/saved-quality-cost-diagnostic-dev-v1/validation-v2.json",
+        "field": "checks.1.cpu_seconds",
+        "cpu_seconds": 0.27816899999999994
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-source32-pair-ce-dev-v2/supervision-units-correction-v2.json",
+        "field": "cpu_seconds_pending",
+        "cpu_seconds": 0.209595438
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-source32-pair-ce-dev-v2/rendering-v3.json",
+        "field": "cpu_seconds_pending",
+        "cpu_seconds": 4.398614921999999
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-source32-pair-ce-dev-v2/summary-v2.json",
+        "field": "cpu_seconds_pending",
+        "cpu_seconds": 0.00037353400000000175
+      }
+    ],
+    "pending_explicit_field_count": 17,
+    "unmeasured": "Interactive edits/reads, first mypy annotation correction, prior initial contrast failure CPU, monitoring/settlement overhead and historical orphan uncertainty remain unknown, not zero.",
+    "progress_processing_cpu_pending": 0.020807213
+  },
+  "no_sha_validation": true,
+  "subagents_used": false,
+  "remote_writes": false
+}

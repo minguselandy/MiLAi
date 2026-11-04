@@ -52,8 +52,12 @@ def main() -> None:
     parser.add_argument("--runner-version",
                         help="Separate collection runner version, if applicable")
     parser.add_argument("--host-site-packages", type=Path)
-    parser.add_argument("--host-readout", action="store_true",
+    readout_mode = parser.add_mutually_exclusive_group()
+    readout_mode.add_argument("--host-readout", action="store_true",
                         help="One conditional final Host answer using the original post-tool input")
+    readout_mode.add_argument("--given-readout", action="store_true",
+                        help="One answer from the supplied public task and actual branch packet; "
+                             "no reconstructed autonomous Host context")
     parser.add_argument("--continue-known-readout-failures", action="store_true",
                         help="Retain terminal incomplete Host responses with known usage, "
                              "then execute remaining cases once; never retry failed readouts")
@@ -92,6 +96,7 @@ def main() -> None:
         "runner_version": args.runner_version or args.source_version,
         "planned_positions": len(jobs), "completed": [], "automatic_retry": False,
         "host_readout": args.host_readout,
+        **({"given_readout": True} if args.given_readout else {}),
         "continue_known_readout_failures": args.continue_known_readout_failures,
         "scope": "Frozen tool comparison; optional conditional single-receipt Host readout.",
     }
@@ -122,10 +127,16 @@ def main() -> None:
                    "before_equal": result.get("frozen_initial_observation_and_actions_equal")}
             driver["completed"].append(row)
             write_json(args.output / "driver.json", driver)
-            if args.host_readout:
+            if args.host_readout or args.given_readout:
                 try:
-                    readout = run_readout(captured, case, case / "host-readout",
-                                         frames[index], source_version=args.source_version)
+                    if args.given_readout:
+                        from milai_lab.runners.given_host_readout import run_given_readout
+
+                        readout = run_given_readout(captured, case / "host-readout",
+                            source_version=args.source_version, replay_case=case)
+                    else:
+                        readout = run_readout(captured, case, case / "host-readout",
+                                             frames[index], source_version=args.source_version)
                     row["host_readout_status"] = readout["status"]
                     row["host_readout_reason"] = readout.get("reason")
                 except BaseException as error:
@@ -146,7 +157,8 @@ def main() -> None:
             print(json.dumps(row, ensure_ascii=False), flush=True)
             if result["status"] != "COMPLETED":
                 raise RuntimeError("First failed comparison retained; no automatic retry")
-        driver["status"] = ("COMPLETED_WITH_MISSING_READOUTS" if args.host_readout and any(
+        driver["status"] = ("COMPLETED_WITH_MISSING_READOUTS" if (
+            args.host_readout or args.given_readout) and any(
             row["host_readout_status"] != "COMPLETED" for row in driver["completed"])
             else "COMPLETED")
     except BaseException as error:

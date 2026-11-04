@@ -16,8 +16,11 @@ from milai_lab.harness.artifact_io import read_json, write_json
 MODEL_ENTRIES = {
     'train_bounded_laya.py', 'evaluate_bounded_laya.py', 'run_frozen_retrieval_calls.py',
     'run_view_feedback_branches.py', 'run_host_intent_retrieval.py', 'run_retrieval_factorial.py',
-    'run_frozen_host_message.py', 'run_known_budget_request.py', 'run_host_saved_cpu.py',
+    'run_frozen_host_message.py', 'run_frozen_host_messages.py',
+    'run_known_budget_request.py', 'run_host_saved_cpu.py',
     'run_lme_predictions.py', 'score_lme_predictions.py', 'run_bound_optimization_host.py',
+    'run_server_vision_probe_v1.py',
+    'run_query_format_dev32_v1.py',
 }
 
 

@@ -10,6 +10,115 @@ from retrieval_mixture import event_weights, normalized_mixture
 
 QualityMode = Literal["quality-direction", "quality-tie", "quality-cost"]
 QUALITY_MODES = ("quality-direction", "quality-tie", "quality-cost")
+ANSWER_FIRST_MASSES = {"answer": 0.80, "delivery_auxiliary": 0.20}
+
+
+def answer_first_pairs(comparisons: list[dict[str, Any]]) -> dict[str, list[dict[str, Any]]]:
+    """Mask each pair, not the state; retain original judgments and known answer ties."""
+    result: dict[str, list[dict[str, Any]]] = {key: [] for key in ANSWER_FIRST_MASSES}
+    for pair in comparisons:
+        quality = pair["basis"]["quality_before_resource_tiebreak"]
+        if quality["answer"] != "unknown":
+            result["answer"].append(pair)
+        elif quality["delivery"] != "unknown":
+            result["delivery_auxiliary"].append(pair)
+    return result
+
+
+def answer_first_weights(rows: list[dict[str, Any]], replay_weight: float,
+                         ) -> list[dict[str, float]]:
+    """Independent family/event normalization; missing mass is zero, never reassigned."""
+    masses = {**ANSWER_FIRST_MASSES, "replay": replay_weight}
+    indices: dict[str, list[int]] = {key: [] for key in masses}
+    for i, row in enumerate(rows):
+        if "feedback" not in row:
+            indices["replay"].append(i)
+        else:
+            for key, pairs in answer_first_pairs(row["feedback"]["comparisons"]).items():
+                if pairs:
+                    indices[key].append(i)
+    result = [dict.fromkeys(masses, 0.0) for _ in rows]
+    for key, positions in indices.items():
+        if not positions:
+            continue
+        local = event_weights([rows[i] for i in positions])
+        scale = len(rows) * masses[key] / len(positions)
+        for i, weight in zip(positions, local, strict=True):
+            result[i][key] = weight * scale
+    return result
+
+
+def answer_first_loss(logits: Any, keys: list[str], comparisons: list[dict[str, Any]],
+                      weights: dict[str, float], *, label_smoothing: float = 0.0) -> Any:
+    parts = answer_first_pairs(comparisons)
+    return sum(weights[key] * quality_pair_loss(
+        logits, keys, pairs, "answer" if key == "answer" else "delivery", "quality-tie",
+        label_smoothing=label_smoothing) for key, pairs in parts.items())
+
+
+def answer_first_counts(rows: list[dict[str, Any]]) -> dict[str, Any]:
+    counts: Counter[str] = Counter()
+    components: dict[str, Counter[str]] = {key: Counter() for key in ANSWER_FIRST_MASSES}
+    families: dict[str, set[str]] = {key: set() for key in components}
+    events: dict[str, set[tuple[str, Any]]] = {key: set() for key in components}
+    for row in rows:
+        if "feedback" not in row:
+            counts["replay_states"] += 1
+            continue
+        counts["feedback_states"] += 1
+        comparisons = row["feedback"]["comparisons"]
+        parts = answer_first_pairs(comparisons)
+        counts["states_with_targets"] += any(parts.values())
+        counts["unknown_pairs"] += len(comparisons) - sum(map(len, parts.values()))
+        counts["answer_unknown_pairs"] += sum(
+            p["basis"]["quality_before_resource_tiebreak"]["answer"] == "unknown"
+            for p in comparisons)
+        for key, pairs in parts.items():
+            if not pairs:
+                continue
+            target = "answer" if key == "answer" else "delivery"
+            meta = row["metadata"]
+            families[key].add(meta["family"])
+            events[key].add((meta["family"], meta.get("training_event", meta["row"])))
+            components[key]["states"] += 1
+            components[key]["pairs"] += len(pairs)
+            counts["target_pairs"] += len(pairs)
+            for pair in pairs:
+                label = pair["basis"]["quality_before_resource_tiebreak"][target]
+                field = "tie_pairs" if label == "tie" else "directional_pairs"
+                components[key][field] += 1
+                counts[field] += 1
+    return {**counts, "components": {key: {**value,
+        "families": len(families[key]), "events": len(events[key])}
+        for key, value in components.items()}}
+
+
+def score_answer_first(rows: list[dict[str, Any]], predictions: list[dict[str, Any]],
+                       ) -> dict[str, Any]:
+    """Task-only diagnostic with the training component normalization; not Host success."""
+    weights = answer_first_weights(rows, 0.0)
+    contributions = dict.fromkeys(ANSWER_FIRST_MASSES, 0.0)
+    for row, prediction, weight in zip(rows, predictions, weights, strict=True):
+        if "feedback" not in row:
+            continue
+        for key, pairs in answer_first_pairs(row["feedback"]["comparisons"]).items():
+            target = "answer" if key == "answer" else "delivery"
+            losses = []
+            for left, right, y in targets(pairs, target, "quality-tie"):
+                margin = prediction["logits"][left] - prediction["logits"][right]
+                losses.append(max(margin, 0) - y * margin + math.log1p(math.exp(-abs(margin))))
+            if losses:
+                contributions[key] += weight[key] * sum(losses) / len(losses) / len(rows)
+    counts = answer_first_counts(rows)
+    return {"mode": "answer-first", "component_masses": ANSWER_FIRST_MASSES,
+        "coverage": counts, "weighted_task_pair_loss": sum(contributions.values()),
+        "components": {key: {"weighted_loss": value, "family_event_pair_loss": (
+            value / ANSWER_FIRST_MASSES[key] if counts["components"][key].get("pairs") else None)}
+            for key, value in contributions.items()},
+        "scope": "Answer known (including tie), else known delivery auxiliary, else masked. "
+            "Pairs averaged within state, then eligible events/families independently per "
+            "component. Missing component contributes zero without reallocating mass. "
+            "No cost tiebreak, replay loss or claim of selected-action/Host quality."}
 
 
 def outcome(pair: dict[str, Any], target: str, mode: QualityMode) -> str:
@@ -88,6 +197,7 @@ def quality_counts(rows: list[dict[str, Any]], target: str, mode: QualityMode) -
 
 def quality_event_weights(
     rows: list[dict[str, Any]], target: str, mode: QualityMode, replay_weight: float,
+    *, normalize_total: bool = True,
 ) -> list[float]:
     """Retain every draw, normalize loss over eligible family/events in each component.
 
@@ -96,7 +206,9 @@ def quality_event_weights(
     A component with no known targets contributes zero, without giving its mass away.
     Q-tie and Q-cost have identical eligibility, hence identical weights.
     """
-    masses = normalized_mixture({"feedback": 1.0, "replay": replay_weight})
+    masses = {"feedback": 1.0, "replay": replay_weight}
+    if normalize_total:
+        masses = normalized_mixture(masses)
     groups: dict[str, list[int]] = {"feedback": [], "replay": []}
     for i, row in enumerate(rows):
         if "feedback" not in row:

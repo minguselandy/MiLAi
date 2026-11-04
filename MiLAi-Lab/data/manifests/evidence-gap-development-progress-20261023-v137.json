@@ -1,0 +1,217 @@
+{
+  "status": "TRAIN448_REVIEWED;LAYA_POST64_OF128;FULL_PLAN_INCOMPLETE",
+  "goal_status": "active",
+  "goal_complete": false,
+  "observed_at": "2026-10-26T20:57:20.273753+08:00",
+  "previous_progress": "data/manifests/evidence-gap-development-progress-20261023-v136.json",
+  "previous_turn_classification": "Progress: prior checkpoint had384states/1152pairs and tested development-only alias-order change; this checkpoint adds64poststates/192pairs, no source implementation or model changes.",
+  "plan": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261026.md",
+  "execution": "docs/MILAI_DEVELOPMENT_EXECUTION_20261026.md",
+  "remaining_requirements_reference": "docs/MILAI_DEVELOPMENT_EXECUTION_20261026.md#要求与验收证据",
+  "source_version": {
+    "development_parent": "7aece29d",
+    "candidate": "Uncommitted tested working-tree alias allocation change; freeze before real-model use.",
+    "frozen_feedback_method": "2a179b58 unchanged"
+  },
+  "active_processes": [],
+  "branch_execution": "Original train2285/dev142 attempts remain closed. No new actual model calls or outcome repair. Original unknown interrupted usage retained.",
+  "train_quality_reviews": {
+    "status": "TRAIN448_REVIEWED;LAYA_POST64_OF128;FULLPOOL_OPEN",
+    "reviewed_states": 448,
+    "pairs": 1344,
+    "reviewed_strata": {
+      "rules_initial": 128,
+      "rules_post": 128,
+      "laya_initial": 128,
+      "laya_post": 64
+    },
+    "source_family_cohorts": {
+      "32": {
+        "selected_states": 192,
+        "reviewed_states": 128,
+        "reviewed_strata": {
+          "rules_initial": 32,
+          "rules_post": 32,
+          "laya_initial": 32,
+          "laya_post": 32
+        },
+        "remaining_states": 64
+      },
+      "64": {
+        "selected_states": 384,
+        "reviewed_states": 256,
+        "reviewed_strata": {
+          "rules_initial": 64,
+          "rules_post": 64,
+          "laya_initial": 64,
+          "laya_post": 64
+        },
+        "remaining_states": 128
+      },
+      "128": {
+        "selected_states": 768,
+        "reviewed_states": 448,
+        "reviewed_strata": {
+          "rules_initial": 128,
+          "rules_post": 128,
+          "laya_initial": 128,
+          "laya_post": 64
+        },
+        "remaining_states": 320
+      }
+    },
+    "quality_counts": {
+      "answer": {
+        "right": 358,
+        "unknown": 468,
+        "tie": 287,
+        "left": 231
+      },
+      "delivery": {
+        "right": 418,
+        "unknown": 103,
+        "tie": 549,
+        "left": 274
+      }
+    },
+    "final_counts": {
+      "answer": {
+        "right": 433,
+        "unknown": 468,
+        "tie": 109,
+        "left": 334
+      },
+      "delivery": {
+        "right": 591,
+        "unknown": 103,
+        "tie": 180,
+        "left": 470
+      }
+    },
+    "new_chunks": [
+      "384-399",
+      "400-415",
+      "416-431",
+      "432-447"
+    ],
+    "new_states": 64,
+    "new_pairs": 192,
+    "new_cost_only_directions": 112,
+    "next_source_first_state": 448,
+    "model_calls": 0,
+    "compiled_feedback_rows": 0,
+    "ledger_recorded": false,
+    "cpu_seconds_pending": 0.065152942,
+    "scope": "Original family-order cohorts, not row-prefix cohorts. All128 originalfamilies alreadyexposed; morestates not newindependentfamilies. Author review, no blind/independent neural quality claim."
+  },
+  "dev_quality_review_states": 0,
+  "compiled_feedback_rows": 0,
+  "feedback_fits_started": 0,
+  "source_review_method": {
+    "new_states": 64,
+    "same_request_source_reuse": 59,
+    "new_request_or_frontier_reviews": 5,
+    "actual_record447": {
+      "revision": 2,
+      "unit_characters": 292,
+      "units": 1,
+      "correct_hosts": 0,
+      "hosts_returning_old_transcript": 2,
+      "failed_hosts": 1,
+      "fixed_other_packets": 0
+    },
+    "store_source_scope": "Fixture source identities literally verified; actual captured Host queries/oldanswers separately inspected andretained. Duplicatedfixture entries for447 refer to23actualsource identities, not46newsource events.",
+    "reviewer": "Current source author, not independent or blind."
+  },
+  "semantic_boundary_artifact": "artifacts/evidence-gap-20261023/feedback-branch-reviews-v2/train/semantic-boundaries-states-384-447-v1.json",
+  "development_change": {
+    "status": "IMPLEMENTED_AND_MECHANICALLY_VERIFIED;MODEL_EFFECT_UNTESTED",
+    "paths": [
+      "src/milai_lab/methods/query_structure.py",
+      "tests/unit/test_query_structure.py"
+    ],
+    "behavior": "Allocate new aliases while traversing actual capture/presentation order instead of opaque-source-ID order. Existing cached bindings remain unchanged; no text/role/time rewrite or fallback.",
+    "public_schema_API_permissions_canonical_changed": false,
+    "frozen_inputs_outputs_changed": false,
+    "regression_before_change": {
+      "test": "test_new_aliases_follow_capture_order_and_existing_aliases_stay_stable",
+      "exec_session": 95475,
+      "exit_code": 1,
+      "actual_ids": [
+        "e2",
+        "e1",
+        "e0"
+      ],
+      "expected_new_behavior_ids": [
+        "e0",
+        "e1",
+        "e2"
+      ],
+      "CPU": "unmeasured"
+    },
+    "validation": {
+      "query_structure_tests_passed": 25,
+      "related_regressions_passed": 89,
+      "skipped": 1,
+      "skip_reason": "Optional mempursuit dependency absent in test environment.",
+      "ruff": "passed",
+      "mypy": "passed one changed source module",
+      "package_boundary": "passed",
+      "tools_boundary": "passed; existing6grandfathered private dependencies unchanged",
+      "artifacts": [
+        "artifacts/evidence-gap-20261023/alias-order-query-tests-v1.json",
+        "artifacts/evidence-gap-20261023/alias-order-validation-v1.json"
+      ]
+    },
+    "actual_input_probe": {
+      "artifact": "artifacts/evidence-gap-20261023/alias-order-actual-input-v1/result.json",
+      "source_state": 352,
+      "sources": 20,
+      "candidate_order": "e0..e19 matches document0..19 capture presentation",
+      "information_equal_after_explicit_alias_resolution": true,
+      "original_response_not_reinterpreted": true,
+      "real_model_calls": 0,
+      "scripted_callbacks": 2,
+      "original_store_untouched": true
+    },
+    "limitations": "No demonstrated reduction in neural citation errors yet; fresh-cache alias behavior differs, legacy cached aliases retained. F3 extractive View baseline still not implemented.",
+    "checkpoint_note": "Unchanged since v136;114passed/1optional skip were prior validation, not rerun here. Alias code remains uncommitted/unfrozen; no neural effect or extractive View baseline claim."
+  },
+  "semantic_findings": [
+    "385 latestsession preserves disagreement whereas oldsession produces obsolete jointlyagreedIris.",
+    "389 samefullraw gives oneHost wrong mother-to-user foodattribution;403 samefullraw producesdoctor-target attribution error.",
+    "420 failedHost arm receives actualbackingvocal evidence thatsuccessfularms do notdeliver; failedHost answerunknown doesnotforce deliveryunknown.",
+    "431 actual200GB/SSD/offline/backupintentions delivered butHostfailed/incomplete; latestpromo/Tessa notacquired.",
+    "443 partialpolicyproposal context stillmisses indefinitepostponement; oldFirefox readouts remainstale.",
+    "447 bothcompletedHosts return old8turntranscript instead of current292charunit; thirdHostfailed.",
+    "Confirmedqualityties only produce112cost directions; not112task successes."
+  ],
+  "accounting": {
+    "settlement": "artifacts/evidence-gap-20261023/original-feedback-v2-reviews384-447-settlement.json",
+    "settled_cpu_seconds": 8.125888664999998,
+    "settled_fields": 15,
+    "only_expected_compute_delta": true,
+    "generation_embedding_limits_match_last_closed_dev_readout": true,
+    "new_generation_requests": 0,
+    "new_known_generation_tokens": 0,
+    "new_unknown_generation_usage": 0,
+    "unmeasured": "Semantic reading/authoring, unavailable-python probe, initialwrongtotalcount/faileddependentobserverstartup, exploratory inspections and settlement overhead remainunknown. No failedmodelretry.",
+    "progress_processing_cpu_pending": 0.0019463110000000027
+  },
+  "next_actions": [
+    "Continue source-first train448:remaining64laya post,128fixedinitial,128fixedpost plus48dev reviews.",
+    "Compile largest completepool once andderive originalsource32/64 beforeallnine192update fits and saved-model Hostevaluation.",
+    "Preserve remainingF1/F2/F3/compact/data/seed/lifecycle/external/figure requirements. Freeze testeddevelopment source separately before actualnew-model use, original2a unchanged."
+  ],
+  "no_sha_or_content_fingerprint_validation": true,
+  "no_subagents": true,
+  "no_new_model_services_or_ledger": true,
+  "no_remote_writes": true,
+  "verification": [
+    "448disjointtrainstates/1344pairs; source32=128/192,source64=256/384; neithercomplete becausefixedstrata missing.",
+    "64newstates/192pairs/112cost-only targetdirections; independentanswer/delivery unknown masks retained.",
+    "24pairs of actualdelivered sourceidentitysets matched; originalfullsource body/range verification retained.",
+    "Actual447 Store currentrevision2 hasone292charunit, neither completedHost returnsit; no fixedsiblingrecordreceipt.",
+    "15processing fields settledonce; all other ledgerfields unchanged and modelcounters match terminaldev readout."
+  ]
+}

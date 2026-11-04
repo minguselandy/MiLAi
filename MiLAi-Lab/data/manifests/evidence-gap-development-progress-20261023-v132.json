@@ -1,0 +1,185 @@
+{
+  "status": "ORIGINAL_TRAIN_AND_DEV_BRANCH_EXECUTION_CLOSED;QUALITY_REVIEW_IN_PROGRESS",
+  "goal_status": "active",
+  "goal_complete": false,
+  "observed_at": "2026-10-26T17:18:35.245654+08:00",
+  "previous_progress": "data/manifests/evidence-gap-development-progress-20261023-v131.json",
+  "previous_turn_classification": "progress: explicit resume, originalsuffix execution,12source/qualityreviews and requirements map persisted.",
+  "plan": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261026.md",
+  "execution": "docs/MILAI_DEVELOPMENT_EXECUTION_20261026.md",
+  "remaining_requirements_reference": "docs/MILAI_DEVELOPMENT_EXECUTION_20261026.md#要求与验收证据",
+  "source_version": "development7aece29d; originalbranchmethod frozen2a179b58",
+  "active_processes": [],
+  "terminal_processes": {
+    "coordinator": 2194246,
+    "child": 2194251,
+    "exec_session": 85483,
+    "exit_code": 0,
+    "both_pids_absent": true
+  },
+  "dev_branch_execution": {
+    "status": "ALL142_ORIGINAL_DEV_BRANCHES_ATTEMPTED_ONCE;FAILURES_RETAINED",
+    "states": 48,
+    "source_families": 8,
+    "branches": 142,
+    "original_policy_bindings_order_and_actual_before_equal": true,
+    "tool_status_counts": {
+      "COMPLETED": 142
+    },
+    "host_status_counts": {
+      "COMPLETED": 131,
+      "FAILED": 11
+    },
+    "host_failure_reasons": {
+      "FROZEN_READOUT_TEXT_REQUIRED": 3,
+      "FROZEN_READOUT_INCOMPLETE_FINAL_RESPONSE": 7,
+      "USER_PAUSE_INTERRUPTED": 1
+    },
+    "parts": [
+      {
+        "dispatch": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-branch-execution-dev-dispatch.json",
+        "native_status": "FAILED",
+        "branches": 36,
+        "costs": {
+          "generation_requests": 44,
+          "known_generation_tokens": 166055,
+          "unknown_generation_usage": 1,
+          "unknown_embedding_usage": 0
+        }
+      },
+      {
+        "dispatch": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-branch-execution-dev-continuation-001-dispatch.json",
+        "native_status": "COMPLETED_WITH_MISSING_READOUTS",
+        "branches": 106,
+        "costs": {
+          "generation_requests": 125,
+          "known_generation_tokens": 511138,
+          "unknown_generation_usage": 0,
+          "unknown_embedding_usage": 0
+        }
+      }
+    ],
+    "total_costs": {
+      "generation_requests": 169,
+      "known_generation_tokens": 677193,
+      "unknown_generation_usage": 1,
+      "unknown_embedding_usage": 0
+    },
+    "failed_arm35_unknown_usage_retained": true,
+    "unattempted_original_branches": 0,
+    "retries": 0,
+    "model_calls_in_review": 0,
+    "no_sha_validation": true,
+    "ledger_recorded": false,
+    "cpu_seconds_pending": 1.650241717,
+    "scope": "Full original frozen dev denominator and actual policy/before plus disjoint tool/Host ledger deltas. Nativecompletion is not correctness. No semantic dev review or compiler execution; all firstfailures retained."
+  },
+  "train_branch_execution": {
+    "states": 768,
+    "branches": 2285,
+    "tools": {
+      "COMPLETED": 2284,
+      "FAILED": 1
+    },
+    "host": {
+      "COMPLETED": 2012,
+      "FAILED": 273
+    },
+    "source": "v130 preserved originaltrain closure"
+  },
+  "feedback_four_generation_stages_to_date": {
+    "generation_requests": 4773,
+    "known_tokens": 19413970,
+    "unknown_usage_increments": 1,
+    "scope": "Priorv130 train/devcollection+trainbranches+devprefix plus originaldevsuffix125requests/511138known tokens. Does not include allhistoricalCPU/GPUtraining orotherpilots."
+  },
+  "train_quality_reviews": {
+    "states": 232,
+    "pairs": 696,
+    "unique_families": 128,
+    "strata": {
+      "rules_initial": 128,
+      "rules_post": 104
+    },
+    "source32": {
+      "reviewed": 64,
+      "selected": 192
+    },
+    "source64": {
+      "reviewed": 128,
+      "selected": 384
+    },
+    "quality_counts": {
+      "answer": {
+        "right": 167,
+        "unknown": 285,
+        "tie": 135,
+        "left": 109
+      },
+      "delivery": {
+        "right": 230,
+        "unknown": 74,
+        "tie": 261,
+        "left": 131
+      }
+    },
+    "final_counts": {
+      "answer": {
+        "right": 200,
+        "unknown": 285,
+        "tie": 50,
+        "left": 161
+      },
+      "delivery": {
+        "right": 312,
+        "unknown": 74,
+        "tie": 86,
+        "left": 224
+      }
+    },
+    "new_chunk": "artifacts/evidence-gap-20261023/feedback-branch-reviews-v2/train/final-reviews-states-208-231-v1.json",
+    "new_states": 24,
+    "new_pairs": 72,
+    "new_cost_only_tie_directions": 26,
+    "next_source_first_state": 232,
+    "author_review_not_blind": true,
+    "compiled_feedback_rows": 0,
+    "fitted_feedback_arms": 0
+  },
+  "dev_quality_review_states": 0,
+  "source_review_method": "15 exactsame-request source reviews reused with fullsourceobject equality on both frozenbeforeStores;9 differentcurrentrequests sourcefirst reviewed with actualchangedpool/recordcontent. No samefamilyanswer transfer.",
+  "semantic_findings": [
+    "210 fullcurrentpooladdsShelleydatebody; partialHANDOFFdropsbothneededbodies andHostreturns literalstringNone, nottransportnull.",
+    "211 actualretainedrecordrevision2 singleunitbody verified; Hostcopieswholethirdsession without currentrecordbinding, notexactstoredcontent success.",
+    "212 Viewconfuses spousebornbefore1935 withmarriedbefore1935; factualgraphflaw remains even withcorrectboundedanswer.",
+    "219 and221 currentlatestupdatesavailablebutomitted; knownpartialsource/capturetime doesnotjustify staleassertion.",
+    "222 answerhitsBooneCounty butcountybodydoc14notdelivered; answeranddeliverydirections keptseparate.",
+    "225 allnewpacketsomittedlatestsecondweekSepttarget; rawoldHostsummary isnotindependentexperience.",
+    "231 nativeCOMPLETED finalcontainsliteralcallsJSON, notnewexecutedretrieval; failedHost masks separate."
+  ],
+  "accounting": {
+    "settlement": "artifacts/evidence-gap-20261023/original-feedback-v2-dev-continuation001-and-reviews-through231-settlement.json",
+    "settled_cpu_seconds": 227.435032226,
+    "settled_processing_fields": 17,
+    "unique_original_ledger": true,
+    "HTTP_and_nested_CPU_not_rebilled": true,
+    "prior_interrupted_unknown_preserved": true,
+    "unmeasured": "Semantic reading/authoring/import, failed/exploratory inspections, and settlement/report editing costs outside explicit fields remain unknown.",
+    "progress_processing_cpu_pending": 0.026968144
+  },
+  "next_actions": [
+    "Reviewtrain232..255 tocomplete rulespost, thenremaininglaya/fixed_contextstrata andall48devstates.",
+    "Compilelargestpool once onlyaftercompletequalityreviews; derivesource32/64prefixes, executeallnine192updatefits andsaved-modelHostevaluation.",
+    "Preservefull F1/F2/F3, compactrealbehavior, conditionaldata/coverage/qualitycomparisons,seeds,lifecycle,externalchainandfourmainfigures."
+  ],
+  "no_sha_or_content_fingerprint_validation": true,
+  "no_subagents": true,
+  "no_new_model_services_or_ledger": true,
+  "no_remote_writes": true,
+  "new_runtime_changes": false,
+  "verification": [
+    "All142originaldevpolicies matchedexactbinding/order andactualbefore; percasetool+Hostrequest/tokendeltasreconcilebothdispatchparts.",
+    "232statechunks disjoint,696pairs; unknown/directionalqualityunchangedbycostrule.",
+    "Idleboundary ledgeronlyexpectedcomputephasechanged; no generation/embedding/unknown/limit mutation."
+  ]
+}

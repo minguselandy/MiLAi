@@ -20,16 +20,26 @@ from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any, cast
 
+from conditional_training import (
+    conditional_change_targets,
+    conditional_relative_loss,
+    conditional_training_groups,
+)
 from evaluate_bounded_laya import score_applicability_predictions, score_predictions
 from milai_lab.harness.artifact_io import read_json, read_jsonl, write_json
 from milai_lab.harness.contextual_artifacts import RunBudget, RunLimits
 from milai_lab.providers.laya_local import NativeDecision
 from quality_feedback import (
+    ANSWER_FIRST_MASSES,
     QUALITY_MODES,
     QualityMode,
+    answer_first_counts,
+    answer_first_loss,
+    answer_first_weights,
     quality_counts,
     quality_event_weights,
     quality_pair_loss,
+    score_answer_first,
     score_quality_feedback,
     validate_quality_pool,
 )
@@ -69,11 +79,13 @@ def training_stages(size: int, epochs: int, seed: int,
                     update_budget: int | None = None,
                     eval_at_updates: list[int] | None = None,
                     eval_every_updates: int | None = None,
+                    row_groups: list[list[int]] | None = None,
                     ) -> list[tuple[int, list[TrainingWindow]]]:
     """Legacy epochs or an exact budget of full16-example optimizer updates.
 
-    Budgeted updates cross pass boundaries without dropping or padding examples.
-    Half/final checkpoints are fixed in advance, not selected by development loss.
+    Legacy budgeted updates cross pass boundaries without dropping examples.
+    Optional two-row groups use exact full passes, with an unpadded final window.
+    Checkpoints are fixed in advance, not selected by development loss.
     """
     if size < 1 or epochs < 1 or (update_budget is not None and update_budget < 1):
         raise ValueError("Training requires labelled states and a positive budget")
@@ -88,6 +100,29 @@ def training_stages(size: int, epochs: int, seed: int,
                 step < 1 or step > update_budget for step in eval_at_updates):
             raise ValueError("Evaluation points must be within the optimizer-update budget")
     rng = random.Random(seed)  # noqa: S311 -- reproducible training schedule
+    if row_groups is not None:
+        if (update_budget is None
+                or sorted(i for group in row_groups for i in group) != list(range(size))
+                or any(len(group) not in (1, 2) for group in row_groups)
+                or sum(len(group) == 1 for group in row_groups) > 1
+                or update_budget != math.ceil(size / 16) * epochs):
+            raise ValueError("Grouped schedule requires exact full passes of all distinct rows")
+        grouped_windows: list[TrainingWindow] = []
+        for data_pass in range(1, epochs + 1):
+            group_order = [group for group in row_groups if len(group) == 2]
+            rng.shuffle(group_order)
+            group_order.extend(group for group in row_groups if len(group) == 1)
+            grouped_draws = [(data_pass, i) for group in group_order for i in group]
+            grouped_windows.extend(grouped_draws[start:start + 16]
+                                   for start in range(0, len(grouped_draws), 16))
+        cuts = sorted({update_budget // 2, update_budget} - {0})
+        if eval_at_updates is not None:
+            cuts = sorted({*eval_at_updates, update_budget})
+        elif eval_every_updates is not None:
+            cuts = sorted({*range(eval_every_updates, update_budget, eval_every_updates),
+                           update_budget})
+        return [(end, grouped_windows[start:end])
+                for start, end in zip([0, *cuts[:-1]], cuts, strict=True)]
     if update_budget is None:
         stages = []
         for epoch in range(1, epochs + 1):
@@ -157,11 +192,18 @@ def feedback_training_losses(
     rows: list[dict[str, Any]], feedback_target: str,
     quality_mode: QualityMode | None, replay_objective: str = "soft-ce",
     label_smoothing: float = 0.0,
+    component_weights: list[dict[str, float]] | None = None,
 ) -> Any:
     """Keep feedback supervision fixed while choosing the old-operation replay loss."""
     import torch
 
     replay = decision_loss(logits, target, mask, replay_objective)
+    if component_weights is not None:
+        return torch.stack([
+            answer_first_loss(logits[i], keys[i], row["feedback"]["comparisons"], weight,
+                              label_smoothing=label_smoothing)
+            if "feedback" in row else weight["replay"] * replay[i]
+            for i, (row, weight) in enumerate(zip(rows, component_weights, strict=True))])
     return torch.stack([
         (quality_pair_loss(logits[i], keys[i], row["feedback"]["comparisons"],
                            feedback_target, quality_mode, label_smoothing=label_smoothing)
@@ -195,6 +237,8 @@ def compute_counts(run: dict[str, Any], evaluations: dict[str, Counter[str]]) ->
                 "replay_nonzero_logit_gradient_rows"):
         if key in run:
             counts["train_" + key] = run[key]
+    for key, count in run.get("sampled_answer_first_components", {}).items():
+        counts["train_answer_first_" + key] = count
     return counts
 
 
@@ -228,12 +272,14 @@ def main() -> None:
     parser.add_argument("--feedback-target", choices=("answer", "delivery"),
                         help="Pair objective only; both targets use the same reviewed pair pool")
     parser.add_argument("--pair-supervision", default="legacy-direction",
-                        choices=("legacy-direction", *QUALITY_MODES),
+                        choices=("legacy-direction", *QUALITY_MODES, "answer-first"),
                         help="Quality controls use explicit pre-cost judgments; legacy unchanged")
     parser.add_argument("--pair-label-smoothing", type=float, default=0.0,
                         help="Quality-mode training targets only; ties stay0.5, unknowns masked")
     parser.add_argument("--replay-weight", type=float, default=0.25,
                         help="Relative loss mass of old-operation replay under the pair objective")
+    parser.add_argument("--pair-mass-mode", choices=("normalized-total", "component-sum"),
+                        help="Historical default: normalized total; answer-first: component sum")
     parser.add_argument("--replay-objective", choices=("soft-ce", "set"), default="soft-ce",
                         help="Pair replay only: target CE or likelihood of the accepted set")
     parser.add_argument("--task", choices=("bounded_reader", "memory_operation",
@@ -241,6 +287,12 @@ def main() -> None:
                         default="bounded_reader", help="Use task-specific offline decision metrics")
     parser.add_argument("--mixture", type=Path,
                         help="Component loss masses for mixed_retrieval; draws stay uniform")
+    parser.add_argument("--mixture-loss-scale", type=float, default=1.0,
+                        help="Multiply normalized component masses, e.g.1.25 for task+0.25 replay")
+    parser.add_argument("--conditional-pairs", type=Path,
+                        help="Known disjoint pairs kept in two-row microbatches over full passes")
+    parser.add_argument("--conditional-loss-weight", type=float, default=0.0,
+                        help="Relative change-pair loss; stable pairs retain unit supervision")
     parser.add_argument("--operation-state", choices=(
                             "full", "mechanical", "shared", "shared_request_text",
                             "shared_actions", "shared_actions_request_text",
@@ -270,16 +322,36 @@ def main() -> None:
     if args.pair_supervision != "legacy-direction" and (
             args.objective != "pair" or args.feedback_dev_data is None):
         parser.error("Quality supervision requires pair objective and fixed feedback development")
+    answer_first = args.pair_supervision == "answer-first"
+    if answer_first and (args.feedback_target != "answer" or args.replay_objective != "set"):
+        parser.error("Answer-first uses --feedback-target answer and --replay-objective set")
     quality_mode = (cast(QualityMode, args.pair_supervision)
-                    if args.pair_supervision != "legacy-direction" else None)
+                    if args.pair_supervision in QUALITY_MODES else None)
+    quality_supervised = quality_mode is not None or answer_first
+    mass_mode = args.pair_mass_mode or ("component-sum" if answer_first else "normalized-total")
+    if args.pair_mass_mode is not None and not quality_supervised:
+        parser.error("--pair-mass-mode applies to explicit quality supervision")
+    if answer_first and mass_mode != "component-sum":
+        parser.error("Answer-first keeps the declared component sum without total normalization")
     if not 0 <= args.pair_label_smoothing < .5:
         parser.error("Pair label smoothing must be finite and in [0,0.5)")
-    if args.pair_label_smoothing and quality_mode is None:
+    if args.pair_label_smoothing and not quality_supervised:
         parser.error("Pair label smoothing requires an explicit quality-supervision mode")
     if (args.task == "mixed_retrieval") != (args.mixture is not None):
         parser.error("mixed_retrieval requires --mixture, and other tasks do not use it")
     if args.mixture is not None and args.optimizer_updates is None:
         parser.error("The mixed recipe requires an explicit matched optimizer-update budget")
+    if (not math.isfinite(args.mixture_loss_scale) or args.mixture_loss_scale <= 0
+            or (args.mixture_loss_scale != 1.0 and args.mixture is None)):
+        parser.error("Mixture loss scale must be positive finite and requires a mixture")
+    if args.conditional_pairs is not None and (
+            args.task not in {"instruction_applicability", "mixed_retrieval"}
+            or args.objective == "pair" or args.micro_batch_size != 2
+            or args.optimizer_updates is None):
+        parser.error("Conditional grouping uses unit supervision, microbatch2 and exact updates")
+    if (not math.isfinite(args.conditional_loss_weight) or args.conditional_loss_weight < 0
+            or (args.conditional_loss_weight and args.conditional_pairs is None)):
+        parser.error("Conditional loss weight must be nonnegative finite and requires pairs")
     if any(not math.isfinite(lr) or lr <= 0 for lr in (args.encoder_lr, args.head_lr)):
         parser.error("Learning rates must be positive and finite")
     if args.feedback_dev_data is not None and args.task not in {
@@ -313,7 +385,7 @@ def main() -> None:
     dev_path = args.dev_data or args.data / "dev.jsonl"
     dev = read_jsonl(dev_path)
     feedback_dev = read_jsonl(args.feedback_dev_data) if args.feedback_dev_data is not None else []
-    if quality_mode is not None:
+    if quality_supervised:
         validate_quality_pool([*train, *feedback_dev])
     feedback_development = feedback_dev_report(feedback_dev, raw_train, dev)
     if args.feedback_dev_data is not None:
@@ -336,9 +408,15 @@ def main() -> None:
         dev = [project_applicability_row(row, args.operation_state) for row in dev]
     mixture = normalized_mixture(read_json(args.mixture)) if args.mixture is not None else None
     weights = mixture_event_weights(train, mixture) if mixture is not None else event_weights(train)
-    if quality_mode is not None:
+    if mixture is not None:
+        weights = [weight * args.mixture_loss_scale for weight in weights]
+    component_weights = answer_first_weights(train, args.replay_weight) if answer_first else None
+    if answer_first:
+        weights = [1.0] * len(train)  # Component weights already include the full loss masses.
+    elif quality_mode is not None:
         weights = quality_event_weights(train, args.feedback_target, quality_mode,
-                                        args.replay_weight)
+                                        args.replay_weight,
+                                        normalize_total=mass_mode == "normalized-total")
     elif args.objective == "pair":
         # Normalize each component by family/event, then apply the declared replay mass.
         weighted_rows = [{**row, "metadata": {**row["metadata"],
@@ -346,8 +424,18 @@ def main() -> None:
             for row in train]
         weights = mixture_event_weights(weighted_rows, {
             "feedback": 1.0, "operation_replay": args.replay_weight})
+    row_groups = None
+    change_targets: dict[tuple[int, ...], tuple[float, float]] = {}
+    if args.conditional_pairs is not None:
+        conditional_pairs = read_jsonl(args.conditional_pairs)
+        row_groups = conditional_training_groups(
+            train, conditional_pairs, args.seed)
+        if args.conditional_loss_weight:
+            change_targets = conditional_change_targets(train, conditional_pairs)
+            if not change_targets:
+                raise ValueError("Relative condition loss requires supported training change pairs")
     stages = training_stages(len(train), args.epochs, args.seed, args.optimizer_updates,
-                             args.eval_at_updates, args.eval_every_updates)
+                             args.eval_at_updates, args.eval_every_updates, row_groups)
     axis = "epoch" if args.optimizer_updates is None else "optimizer_updates"
     run = {"status": "RUNNING", "pid": os.getpid(), "data": str(args.data.resolve()),
            "base_checkpoint": str(args.checkpoint.resolve()), "seed": args.seed,
@@ -380,9 +468,23 @@ def main() -> None:
            "train_batch_attempts": 0, "train_offered_rows": 0, "train_offered_tokens": 0}
     if mixture is not None:
         run.update(loss_weighting="declared component mass, then family and event",
-                   mixture=mixture, sampling="uniform shuffled passes over labelled rows",
+                   mixture=mixture, mixture_loss_scale=args.mixture_loss_scale,
+                   sampling="uniform shuffled passes over labelled rows",
                    sampled_component_rows={}, sampled_task_rows={},
                    sampled_component_input_tokens={})
+    if row_groups is not None:
+        run.update(conditional_pairs=str(args.conditional_pairs.resolve()),
+                   sampling="shuffled two-row groups; each unit once per full pass; no padding",
+                   planned_sequence_rows=sum(len(w) for _, windows in stages for w in windows),
+                   conditional_loss_weight=args.conditional_loss_weight)
+        if args.conditional_loss_weight:
+            run.update(conditional_change_pairs=len(change_targets), conditional_pair_draws=0,
+                       conditional_pair_weighting="mean-one family weights over change pairs",
+                       conditional_loss_normalization="weighted change-pair sum divided by actual "
+                           "change-pair count per optimizer window; zero in empty windows",
+                       loss_reporting="weighted_loss_mean retains unit loss; relative contribution "
+                           "is separately reported per optimizer window")
+        write_json(args.output / "training-windows.json", stages)
     if args.objective == "pair":
         run.update(feedback_target=args.feedback_target, replay_weight=args.replay_weight,
                    feedback_pool=feedback_counts(train, args.feedback_target),
@@ -392,9 +494,11 @@ def main() -> None:
                    tie_unknown_sampling="Retained as zero-direction states in both arms",
                    sampled_feedback_states=0, sampled_replay_states=0,
                    sampled_directional_pairs=0, sampled_tie_pairs=0, sampled_unknown_pairs=0)
-    if quality_mode is not None:
-        run.update(pair_supervision=quality_mode,
-            feedback_pool=quality_counts(train, args.feedback_target, quality_mode),
+    if quality_supervised:
+        run.update(pair_supervision=args.pair_supervision,
+            feedback_pool=(answer_first_counts(train) if answer_first else
+                           quality_counts(train, args.feedback_target,
+                                          cast(QualityMode, quality_mode))),
             loss_weighting="known pairs within state; eligible family/event within fixed "
                            "feedback/replay masses; zero-target rows kept with zero weight",
             selection_rule="pure_quality[target].directional.family_macro_state_pair_accuracy; "
@@ -410,6 +514,19 @@ def main() -> None:
                                  "clipping/optimizer momentum; not per-parameter attribution")
         if args.pair_label_smoothing:
             run["pair_label_smoothing"] = args.pair_label_smoothing
+        if mass_mode == "component-sum":
+            run["pair_mass_mode"] = mass_mode
+    if answer_first:
+        run.update(answer_first_component_masses={**ANSWER_FIRST_MASSES,
+                                                 "replay": args.replay_weight},
+            sampled_answer_first_components={},
+            loss_weighting="0.80 answer-known + 0.20 delivery-answer-unknown + alpha replay; "
+                "each component normalized by eligible family/event; no total rescale",
+            tie_unknown_sampling="Pair masks within each state; known answer tie stays0.5; "
+                "delivery auxiliary only when answer unknown; both unknown have zero gradient",
+            selection_rule="Offline pair metrics nominate at most two candidates; update0 and "
+                "simple baseline included in actual full-menu fixed-dev answer-success selection. "
+                "Earliest quality tie; unexecuted choices unknown; autonomous Host separate.")
     if args.objective == "pair" and args.replay_objective == "set":
         run.update(replay_objective="set",
             replay_target_scope="Positive old-operation targets form an accepted set; target "
@@ -455,9 +572,11 @@ def main() -> None:
         write_json(args.output / "sampling.json", [
             {"event_id": r["metadata"]["event_id"], "family": r["metadata"]["family"],
              "source_row": r["metadata"]["row"], "weight": w,
+             **({"answer_first_component_weights": component_weights[index]}
+                if component_weights is not None else {}),
              **({"component": r["metadata"]["component"], "task": r["metadata"]["task"]}
                 if mixture is not None else {})}
-            for r, w in zip(train, weights, strict=True)])
+            for index, (r, w) in enumerate(zip(train, weights, strict=True))])
         decision.device = torch.device("cuda:0")
         model.to(decision.device)
         parallel = torch.nn.DataParallel(model, device_ids=[0, 1])
@@ -485,13 +604,15 @@ def main() -> None:
                 result = {target: score_feedback(rows, predictions, target)
                           for target in ("answer", "delivery")}
                 result["coverage"] = feedback_development
-                if quality_mode is not None:
+                if quality_supervised:
                     result["pure_quality"] = {target: score_quality_feedback(
                         rows, predictions, target, "quality-tie")
                         for target in ("answer", "delivery")}
                     result["quality_cost"] = {target: score_quality_feedback(
                         rows, predictions, target, "quality-cost")
                         for target in ("answer", "delivery")}
+                if quality_supervised and mass_mode == "component-sum":
+                    result["answer_first"] = score_answer_first(rows, predictions)
             elif args.task == "memory_operation":
                 from milai_lab.methods.memory_control_learning import score_operation_predictions
 
@@ -522,10 +643,14 @@ def main() -> None:
             training_mode(model, args.freeze_encoder)
             loss_total = 0.0
             offered = 0
+            condition_loss_total = 0.0
             for window in windows:
                 denominator = len(window)
                 optimizer.zero_grad(set_to_none=True)
-                for microbatch in training_microbatches(window, args.micro_batch_size):
+                microbatches = training_microbatches(window, args.micro_batch_size)
+                condition_pair_count = sum(
+                    tuple(i for _, i in micro) in change_targets for micro in microbatches)
+                for microbatch in microbatches:
                     indices, batch_items, batch_keys = [], [], []
                     for data_pass, index in microbatch:
                         if encoded_pass != data_pass:
@@ -562,30 +687,59 @@ def main() -> None:
                         batch_rows = [train[i] for i in indices]
                         ce = feedback_training_losses(
                             logits, target, mask, batch_keys, batch_rows, args.feedback_target,
-                            quality_mode, args.replay_objective, args.pair_label_smoothing)
-                        counts = (quality_counts(batch_rows, args.feedback_target, quality_mode)
+                            quality_mode, args.replay_objective, args.pair_label_smoothing,
+                            [component_weights[i] for i in indices]
+                            if component_weights is not None else None)
+                        counts: dict[str, Any] = (
+                                  answer_first_counts(batch_rows) if answer_first else
+                                  quality_counts(batch_rows, args.feedback_target, quality_mode)
                                   if quality_mode is not None else
                                   feedback_counts(batch_rows, args.feedback_target))
                         for name in ("feedback_states", "replay_states", "directional_pairs",
                                      "tie_pairs", "unknown_pairs"):
                             run["sampled_" + name] += counts.get(name, 0)
-                        if quality_mode is not None:
+                        if quality_supervised:
                             run["sampled_feedback_target_states"] += counts.get(
                                 "states_with_targets", 0)
                             run["sampled_target_pairs"] += counts.get("target_pairs", 0)
                             run["sampled_cost_only_direction_pairs"] += counts.get(
                                 "cost_only_direction_pairs", 0)
+                        if answer_first:
+                            sampled = run["sampled_answer_first_components"]
+                            for name, support in counts["components"].items():
+                                for field in ("states", "pairs", "directional_pairs", "tie_pairs"):
+                                    key = name + "_" + field
+                                    sampled[key] = sampled.get(key, 0) + support.get(field, 0)
                     else:
                         ce = decision_loss(logits, target, mask, args.objective)
                     weighted = ce * torch.tensor([weights[i] for i in indices],
                                                   device=decision.device)
                     loss = weighted.sum() / denominator
+                    condition_target = change_targets.get(tuple(indices))
+                    if condition_target is not None:
+                        direction, pair_weight = condition_target
+                        relative = conditional_relative_loss(logits, batch_keys, direction)
+                        contribution = (args.conditional_loss_weight * pair_weight * relative
+                                        / condition_pair_count)
+                        loss = loss + contribution
+                        condition_loss_total += float(contribution.detach())
+                        run["conditional_pair_draws"] += 1
+                        with (args.output / "conditional-losses.jsonl").open("a") as stream:
+                            stream.write(json.dumps({
+                                "update": run["optimizer_updates"] + 1,
+                                "events": [train[i]["metadata"]["event_id"] for i in indices],
+                                "data_pass": encoded_pass, "direction": direction,
+                                "family_weight": pair_weight,
+                                "window_change_pairs": condition_pair_count,
+                                "relative_loss": float(relative.detach()),
+                                "optimizer_contribution": float(contribution.detach()),
+                            }) + "\n")
                     if not torch.isfinite(loss):
                         raise ValueError("Non-finite decision loss")
-                    if quality_mode is not None:
+                    if quality_supervised:
                         logits.retain_grad()
                     loss.backward()
-                    if quality_mode is not None:
+                    if quality_supervised:
                         nonzero = logits.grad.detach().ne(0).any(dim=1).tolist()
                         for index, active in zip(indices, nonzero, strict=True):
                             run["nonzero_logit_gradient_rows"] += int(active)
@@ -617,6 +771,8 @@ def main() -> None:
                                   "updates": run["optimizer_updates"]}), flush=True)
             history.append({axis: checkpoint_step, "weighted_loss_mean": loss_total / offered,
                             "dev": evaluate(checkpoint_step)})
+            if args.conditional_loss_weight:
+                history[-1]["conditional_loss_optimizer_mean"] = condition_loss_total / len(windows)
             if args.feedback_dev_data is not None:
                 history[-1]["feedback-dev"] = evaluate(checkpoint_step, "feedback-dev")
             if args.objective == "soft-ce":

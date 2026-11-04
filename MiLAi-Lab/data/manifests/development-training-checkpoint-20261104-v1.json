@@ -1,0 +1,313 @@
+{
+  "status": "PAUSED_DEVELOPMENT_CHECKPOINT",
+  "date": "2026-11-04",
+  "author_review_not_independent": true,
+  "E4_main_complete_out_of32": {
+    "fixed_prefix": 18,
+    "fixed_context": 17,
+    "rules": 17,
+    "frozen_encoder_control": 14,
+    "incumbent": 13,
+    "aggregate": 19,
+    "continued_old": 17
+  },
+  "E5_primary": [
+    {
+      "condition": "raw-2048",
+      "source_families": 8,
+      "positions": 80,
+      "answer_grades": {
+        "C": 13,
+        "F": 15,
+        "Q": 32,
+        "W": 20
+      },
+      "delivery_statuses": {
+        "complete": 30,
+        "partial": 46,
+        "insufficient": 4
+      },
+      "HTTP_responses": 119,
+      "known_generation_tokens": 692730,
+      "new_unknown_usage": {
+        "generation": 0,
+        "embedding": 0
+      },
+      "whole_client_CPU_seconds": 147.29736888899998,
+      "source_artifact": "artifacts/development-training-20261102/e5-controlled-lifecycle-v1/executions/raw-2048/closeout-v1.json"
+    },
+    {
+      "condition": "extractive-2048",
+      "source_families": 8,
+      "positions": 80,
+      "answer_grades": {
+        "Q": 30,
+        "C": 19,
+        "W": 13,
+        "F": 18
+      },
+      "delivery_statuses": {
+        "complete": 35,
+        "partial": 39,
+        "insufficient": 6
+      },
+      "HTTP_responses": 132,
+      "known_generation_tokens": 772264,
+      "new_unknown_usage": {
+        "generation": 0,
+        "embedding": 0
+      },
+      "whole_client_CPU_seconds": 152.31894431999999,
+      "source_artifact": "artifacts/development-training-20261102/e5-controlled-lifecycle-v1/executions/extractive-2048/closeout-v1.json"
+    },
+    {
+      "condition": "generated-2048",
+      "source_families": 8,
+      "positions": 80,
+      "answer_grades": {
+        "C": 8,
+        "W": 23,
+        "Q": 28,
+        "F": 21
+      },
+      "delivery_statuses": {
+        "complete": 21,
+        "partial": 56,
+        "insufficient": 3
+      },
+      "HTTP_responses": 129,
+      "known_generation_tokens": 745849,
+      "new_unknown_usage": {
+        "generation": 0,
+        "embedding": 0
+      },
+      "whole_client_CPU_seconds": 150.78298160399999,
+      "source_artifact": "artifacts/development-training-20261102/e5-controlled-lifecycle-v1/executions/generated-2048/closeout-v1.json"
+    }
+  ],
+  "E5_pairs": [
+    {
+      "reference": "raw-2048",
+      "candidate": "extractive-2048",
+      "families": [
+        {
+          "family": "memops_A19",
+          "reference_complete": 4,
+          "candidate_complete": 1,
+          "difference": -3
+        },
+        {
+          "family": "memops_A32",
+          "reference_complete": 0,
+          "candidate_complete": 0,
+          "difference": 0
+        },
+        {
+          "family": "memops_B30",
+          "reference_complete": 2,
+          "candidate_complete": 3,
+          "difference": 1
+        },
+        {
+          "family": "memops_C03",
+          "reference_complete": 3,
+          "candidate_complete": 4,
+          "difference": 1
+        },
+        {
+          "family": "memops_D25",
+          "reference_complete": 0,
+          "candidate_complete": 0,
+          "difference": 0
+        },
+        {
+          "family": "memops_E08",
+          "reference_complete": 0,
+          "candidate_complete": 2,
+          "difference": 2
+        },
+        {
+          "family": "memops_E15",
+          "reference_complete": 0,
+          "candidate_complete": 2,
+          "difference": 2
+        },
+        {
+          "family": "memops_F01",
+          "reference_complete": 4,
+          "candidate_complete": 7,
+          "difference": 3
+        }
+      ],
+      "source_family_macro_difference": 0.075,
+      "descriptive_family_bootstrap95": [
+        -0.05,
+        0.1875
+      ],
+      "paired_success_transitions": {
+        "1->0": 6,
+        "1->1": 7,
+        "0->0": 55,
+        "0->1": 12
+      },
+      "cost_difference": {
+        "HTTP_responses": 13,
+        "known_generation_tokens": 79534
+      },
+      "whole_client_CPU_difference": 5.021575431000002
+    },
+    {
+      "reference": "raw-2048",
+      "candidate": "generated-2048",
+      "families": [
+        {
+          "family": "memops_A19",
+          "reference_complete": 4,
+          "candidate_complete": 4,
+          "difference": 0
+        },
+        {
+          "family": "memops_A32",
+          "reference_complete": 0,
+          "candidate_complete": 0,
+          "difference": 0
+        },
+        {
+          "family": "memops_B30",
+          "reference_complete": 2,
+          "candidate_complete": 1,
+          "difference": -1
+        },
+        {
+          "family": "memops_C03",
+          "reference_complete": 3,
+          "candidate_complete": 3,
+          "difference": 0
+        },
+        {
+          "family": "memops_D25",
+          "reference_complete": 0,
+          "candidate_complete": 0,
+          "difference": 0
+        },
+        {
+          "family": "memops_E08",
+          "reference_complete": 0,
+          "candidate_complete": 0,
+          "difference": 0
+        },
+        {
+          "family": "memops_E15",
+          "reference_complete": 0,
+          "candidate_complete": 0,
+          "difference": 0
+        },
+        {
+          "family": "memops_F01",
+          "reference_complete": 4,
+          "candidate_complete": 0,
+          "difference": -4
+        }
+      ],
+      "source_family_macro_difference": -0.0625,
+      "descriptive_family_bootstrap95": [
+        -0.1625,
+        0.0
+      ],
+      "paired_success_transitions": {
+        "1->1": 7,
+        "0->0": 66,
+        "1->0": 6,
+        "0->1": 1
+      },
+      "cost_difference": {
+        "HTTP_responses": 10,
+        "known_generation_tokens": 53119
+      },
+      "whole_client_CPU_difference": 3.485612715000002
+    },
+    {
+      "reference": "extractive-2048",
+      "candidate": "generated-2048",
+      "families": [
+        {
+          "family": "memops_A19",
+          "reference_complete": 1,
+          "candidate_complete": 4,
+          "difference": 3
+        },
+        {
+          "family": "memops_A32",
+          "reference_complete": 0,
+          "candidate_complete": 0,
+          "difference": 0
+        },
+        {
+          "family": "memops_B30",
+          "reference_complete": 3,
+          "candidate_complete": 1,
+          "difference": -2
+        },
+        {
+          "family": "memops_C03",
+          "reference_complete": 4,
+          "candidate_complete": 3,
+          "difference": -1
+        },
+        {
+          "family": "memops_D25",
+          "reference_complete": 0,
+          "candidate_complete": 0,
+          "difference": 0
+        },
+        {
+          "family": "memops_E08",
+          "reference_complete": 2,
+          "candidate_complete": 0,
+          "difference": -2
+        },
+        {
+          "family": "memops_E15",
+          "reference_complete": 2,
+          "candidate_complete": 0,
+          "difference": -2
+        },
+        {
+          "family": "memops_F01",
+          "reference_complete": 7,
+          "candidate_complete": 0,
+          "difference": -7
+        }
+      ],
+      "source_family_macro_difference": -0.1375,
+      "descriptive_family_bootstrap95": [
+        -0.3375,
+        0.0375
+      ],
+      "paired_success_transitions": {
+        "0->1": 6,
+        "1->1": 2,
+        "0->0": 55,
+        "1->0": 17
+      },
+      "cost_difference": {
+        "HTTP_responses": -3,
+        "known_generation_tokens": -26415
+      },
+      "whole_client_CPU_difference": -1.5359627160000002
+    }
+  ],
+  "remaining": [
+    "raw-1024",
+    "extractive-1024",
+    "generated-1024",
+    "final candidate seed/source confirmation",
+    "LME451 Reader/Judge",
+    "Mem2Act400",
+    "final paper and empirically justified Product changes"
+  ],
+  "model_active": false,
+  "raw_artifacts_model_files_and_logs_remain_local_ignored": true,
+  "original_ledger_unchanged_by_publication": true,
+  "no_sha_validation": true
+}

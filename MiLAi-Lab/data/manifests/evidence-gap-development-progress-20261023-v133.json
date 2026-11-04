@@ -1,0 +1,154 @@
+{
+  "status": "RULES_INITIAL_POST_REVIEW_CLOSED;LAYA_INITIAL_REVIEW_ACTIVE;FULL_FEEDBACK_LOOP_INCOMPLETE",
+  "goal_status": "active",
+  "goal_complete": false,
+  "observed_at": "2026-10-26T17:42:25.586886+08:00",
+  "previous_progress": "data/manifests/evidence-gap-development-progress-20261023-v132.json",
+  "previous_turn_classification": "progress: full142 dev attempts closed,24 source/quality states reviewed, unique-ledger closure verified.",
+  "plan": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261026.md",
+  "execution": "docs/MILAI_DEVELOPMENT_EXECUTION_20261026.md",
+  "remaining_requirements_reference": "docs/MILAI_DEVELOPMENT_EXECUTION_20261026.md#要求与验收证据",
+  "source_version": "development7aece29d; frozen branch method2a179b58 unchanged",
+  "active_processes": [],
+  "branch_execution": "Original train2285 and dev142 attempts remain closed; no rerun, model call or changed output this turn. Authoritative full closure remains v130 train/v132 dev and their original artifacts.",
+  "train_quality_reviews": {
+    "status": "RULES_INITIAL_AND_POST_ALL128_FAMILIES_REVIEWED;FIRST8_LAYA_INITIAL_REVIEWED;FULLPOOL_OPEN",
+    "reviewed_states": 264,
+    "pairs": 792,
+    "reviewed_strata": {
+      "rules_initial": 128,
+      "rules_post": 128,
+      "laya_initial": 8
+    },
+    "source_family_cohorts": {
+      "32": {
+        "selected_states": 192,
+        "reviewed_states": 72,
+        "reviewed_strata": {
+          "rules_initial": 32,
+          "rules_post": 32,
+          "laya_initial": 8
+        },
+        "remaining_states": 120
+      },
+      "64": {
+        "selected_states": 384,
+        "reviewed_states": 136,
+        "reviewed_strata": {
+          "rules_initial": 64,
+          "rules_post": 64,
+          "laya_initial": 8
+        },
+        "remaining_states": 248
+      },
+      "128": {
+        "selected_states": 768,
+        "reviewed_states": 264,
+        "reviewed_strata": {
+          "rules_initial": 128,
+          "rules_post": 128,
+          "laya_initial": 8
+        },
+        "remaining_states": 504
+      }
+    },
+    "quality_counts": {
+      "answer": {
+        "right": 188,
+        "unknown": 318,
+        "tie": 162,
+        "left": 124
+      },
+      "delivery": {
+        "right": 252,
+        "unknown": 77,
+        "tie": 312,
+        "left": 151
+      }
+    },
+    "final_counts": {
+      "answer": {
+        "right": 237,
+        "unknown": 318,
+        "tie": 59,
+        "left": 178
+      },
+      "delivery": {
+        "right": 364,
+        "unknown": 77,
+        "tie": 103,
+        "left": 248
+      }
+    },
+    "new_chunks": [
+      "232-255",
+      "256-263"
+    ],
+    "new_states": 32,
+    "new_pairs": 96,
+    "new_cost_only_directions": 52,
+    "next_source_first_state": 264,
+    "model_calls": 0,
+    "compiled_feedback_rows": 0,
+    "full_option_ce_labels_added": false,
+    "ledger_recorded": false,
+    "cpu_seconds_pending": 0.05169468799999999,
+    "scope": "Coverage and label integrity only, not independent semantic validation or model improvement. Family prefixes from unchanged original selection.groups, not row-count prefixes. All old failures retained."
+  },
+  "dev_quality_review_states": 0,
+  "compiled_feedback_rows": 0,
+  "feedback_fits_started": 0,
+  "new_semantic_findings": [
+    "233 actual current retained record revision2 is a single question-containing unit; neither obsolete first-session summary nor first-session transcript meets exact-current-content request.",
+    "234/245 correct answer hits lack necessary second-hop bodies; actual current pool has support, delivery does not.",
+    "250 same-before HANDOFF retaining both show and ownership bodies yields full historical coowner answer; dropping ownership body leaves only search intent.",
+    "256 View contains latest corrected score; Host calls a reporting correction recalibration. Older raw packet misses the correction entirely.",
+    "257 both outputs/one View turn a friend naming his own son into suggestions for the user; raw body preserves roles.",
+    "258 View adds party group size, shifts who appreciated quiet activity and changes under-three child age; no automatic gain from generated View over empty evidence.",
+    "259/260 new full stage2 source histories reviewed. A confirmed planning window is not a booked appointment; pending proposed time does not supersede current confirmed time.",
+    "261 final-answer and delivery preferences differ because a View actor error is not repeated by its Host; full raw source preserves who made the statement.",
+    "262 View loses other-person distinctions and Host generalizes one left-side seat into a preference.",
+    "263 View mixes assistant wording into a user-bound statement and adds pickup-delay possibilities; historical reference is not a current transaction credential."
+  ],
+  "source_review_method": {
+    "rules_post": {
+      "states": 24,
+      "literal_same_request_source_reuse": 19,
+      "different_request_current_pool_reviews": 5
+    },
+    "laya_initial": {
+      "states": 8,
+      "semantic_source_reuse": 6,
+      "new_stage2_frontiers": 2,
+      "cross_collector_equality": "All source fields except native event_id and capture-time observed_at literally compared. Current actual request separately inspected; capture clocks not event dates."
+    },
+    "reviewer": "Source author, not independent or blind."
+  },
+  "accounting": {
+    "settlement": "artifacts/evidence-gap-20261023/original-feedback-v2-reviews232-263-settlement.json",
+    "settled_cpu_seconds": 4.127558529,
+    "settled_fields": 10,
+    "only_expected_compute_delta": true,
+    "new_generation_requests": 0,
+    "new_known_generation_tokens": 0,
+    "new_unknown_usage": 0,
+    "unmeasured": "Semantic reading/authoring/import, failed exploratory old-schema inspection and settlement overhead remain unknown.",
+    "progress_processing_cpu_pending": 0.0008624180000000002
+  },
+  "next_actions": [
+    "Continue original laya initial at state264; remaining train504 states plus dev48 still require quality review.",
+    "Compile largest pool once after allreviews, derive original source-family32/64 subsets and run nine192-update fits, saved reload selection and actual Host evaluation.",
+    "Retain complete F1/F2/F3, compact model behavior, conditional data/coverage/quality controls, decisive seeds, lifecycle, external application chain and four main result figures."
+  ],
+  "no_sha_or_content_fingerprint_validation": true,
+  "no_subagents": true,
+  "no_new_model_services_or_ledger": true,
+  "no_remote_writes": true,
+  "new_runtime_changes": false,
+  "verification": [
+    "264 disjoint states /792pairs, source-family prefix coverage verified against unchanged selection.groups.",
+    "All original failures retained; answer/delivery unknown masks independent; directional/unknown quality untouched by cost tiebreak.",
+    "New52 cost-only directions are from232–255; first8 laya states havezero qualityties andzero cost-induced direction changes.",
+    "Ten measured processing fields settled once with onlyexpected originalledgercompute delta."
+  ]
+}

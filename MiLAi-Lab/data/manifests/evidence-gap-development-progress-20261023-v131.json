@@ -1,0 +1,171 @@
+{
+  "source_version": "7aece29d (development tree; frozen branch runner remains2a179b58)",
+  "plan": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261026.md",
+  "execution": "docs/MILAI_DEVELOPMENT_EXECUTION_20261026.md",
+  "previous_progress": "data/manifests/evidence-gap-development-progress-20261023-v130.json",
+  "observed_at": "2026-10-26T17:01:37.752750+08:00",
+  "goal_status": "active",
+  "goal_complete": false,
+  "status": "EXPLICITLY_RESUMED;ORIGINAL_DEV_SUFFIX_LIVE;TRAIN_REVIEW208_OF768",
+  "previous_turn_classification": "Previous recorded v130 paused turn made progress by sealing original train and retaining interrupted dev boundary; this turn resumes with verified process/artifact evidence.",
+  "current_turn_progress": [
+    "Read complete20261026plan and mapped full requirements; located authoritative worktree rather than modifyingoldcheckout.",
+    "Settled five previouslypending CPUfields once at verifiedidleboundary; original unknownHTTP and all noncomputeledgerfields unchanged.",
+    "Started unchanged originaldev36..141 once in newoutput; failedarm35 retained.",
+    "Added12source-first reviews and36qualitypairs; finalcostrule applied without changing unknown/directionalquality."
+  ],
+  "active_processes": [
+    {
+      "role": "pid",
+      "pid": 2194246,
+      "command": "python3 -u MiLAi-Lab/artifacts/evidence-gap-20261023/resume_feedback_dev_20261026.py "
+    },
+    {
+      "role": "child_pid",
+      "pid": 2194251,
+      "command": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/cuda-env/bin/python -u /cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/frozen-feedback-ae3950f2/train_with_declared_attention.py /cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/frozen-feedback-expansion-2a179b58/MiLAi-Lab/tools/run_frozen_retrieval_calls.py /cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-branch-preparation-v2/dev/captures /cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-dev-remaining-policies-001.json /cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-branch-execution-v2/dev-continuation-001 --source-version 2a179b58 --host-readout --continue-known-readout-failures "
+    }
+  ],
+  "exec_session": 85483,
+  "dev_suffix": {
+    "dispatch": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-branch-execution-dev-continuation-001-dispatch.json",
+    "native_status": "RUNNING",
+    "original_policy_index_range": [
+      36,
+      141
+    ],
+    "planned_branches": 106,
+    "tool_rows_observed": 62,
+    "host_status_counts": {
+      "COMPLETED": 58,
+      "FAILED": 3,
+      "PENDING": 1
+    },
+    "automatic_retry": false,
+    "preserved_original_prefix": {
+      "branches": 36,
+      "tool": {
+        "COMPLETED": 36
+      },
+      "host": {
+        "COMPLETED": 32,
+        "FAILED": 4
+      },
+      "unknown_generation_increment": 1
+    }
+  },
+  "train_reviews": {
+    "states": 208,
+    "pairs": 624,
+    "unique_families": 128,
+    "collector_strata": {
+      "rules_initial": 128,
+      "rules_post": 80
+    },
+    "next_source_first_state": 208,
+    "quality_counts": {
+      "answer": {
+        "right": 152,
+        "unknown": 264,
+        "tie": 125,
+        "left": 83
+      },
+      "delivery": {
+        "right": 223,
+        "unknown": 70,
+        "tie": 230,
+        "left": 101
+      }
+    },
+    "final_counts": {
+      "answer": {
+        "right": 180,
+        "unknown": 264,
+        "tie": 47,
+        "left": 133
+      },
+      "delivery": {
+        "right": 289,
+        "unknown": 70,
+        "tie": 74,
+        "left": 191
+      }
+    },
+    "new_chunks": [
+      "196-199",
+      "200-207"
+    ],
+    "compiled_feedback_rows": 0,
+    "fitted_arms": 0,
+    "source32_states_reviewed": 64,
+    "source32_selected_states": 192,
+    "source64_states_reviewed": 128,
+    "source64_selected_states": 384,
+    "reviewer": "Source author; not independent/blind. Seven unchanged source backgrounds reused only after literal frozenStore source-object equality, actualrequest rechecked.",
+    "semantic_observations": [
+      "199: no newREAD, samebefore HANDOFF subsets drop diagnosis orfullclinician/time; fullraw restoresanswer.",
+      "196: currentrequest missingauthorlink despiteeducationbodyelsewhereinactualpool; no crossrequest transfer.",
+      "198/204: nativeCOMPLETED ellipses retained as nonsubstantive.",
+      "203: View/Host attributes user recharge interpretation toSarah explicitstatement; morematerials not automaticallybetter.",
+      "205: correctreportedcurrentresolution doesnotcertify selfreferentialViewrule.",
+      "207: oldbooking becomeswrongcurrentanswer when latestswitch dropped; no actualcancellationreceipt inferred."
+    ]
+  },
+  "accounting": {
+    "resume_settlement": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-resume-settlement-20261026.json",
+    "resume_CPU_settled": 80.06994714800001,
+    "new_offline_processing_pending": [
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/feedback-branch-reviews-v2/train/source-batch-196-199-processing.json",
+        "field": "cpu_seconds_pending",
+        "cpu_seconds": 0.050690078
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/feedback-branch-reviews-v2/train/observed-states-196-199-v1.json",
+        "field": "cpu_seconds_pending",
+        "cpu_seconds": 0.27018300700000003
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/feedback-branch-reviews-v2/train/quality-states-196-199-v1.json",
+        "field": "cpu_seconds_pending",
+        "cpu_seconds": 0.0009791240000000014
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/feedback-branch-reviews-v2/train/final-reviews-states-196-199-v1.json",
+        "field": "cpu_seconds_pending",
+        "cpu_seconds": 0.8174418660000002
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/feedback-branch-reviews-v2/train/source-batch-200-207-processing.json",
+        "field": "cpu_seconds_pending",
+        "cpu_seconds": 0.058623443
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/feedback-branch-reviews-v2/train/observed-states-200-207-v1.json",
+        "field": "cpu_seconds_pending",
+        "cpu_seconds": 0.35830248200000003
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/feedback-branch-reviews-v2/train/quality-states-200-207-v1.json",
+        "field": "cpu_seconds_pending",
+        "cpu_seconds": 0.0014543779999999992
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/feedback-branch-reviews-v2/train/final-reviews-states-200-207-v1.json",
+        "field": "cpu_seconds_pending",
+        "cpu_seconds": 0.792598162
+      }
+    ],
+    "new_offline_CPU_pending": 2.35027254,
+    "no_ledger_writes_while_queue_live": true,
+    "unmeasured": "Initial reading, failed schema-inspection, authoring/import, orchestration outside explicit measurements, provider GPU/prices remain unknown; not zero.",
+    "progress_processing_cpu_pending": 0.022862886
+  },
+  "remaining_requirements_reference": "docs/MILAI_DEVELOPMENT_EXECUTION_20261026.md#要求与验收证据",
+  "no_sha_or_content_fingerprint_validation": true,
+  "no_subagents": true,
+  "no_new_model_services_or_ledger": true,
+  "no_remote_writes": true,
+  "new_runtime_changes": false,
+  "verification": "Literal policy prefix/suffix equality and106capturebindings passed; originalfailure retained; 208reviewstates disjoint,624pairs; non-tie quality unchanged by resource rule; gitdiffcheck passed. No model quality/overallcompletion claim."
+}

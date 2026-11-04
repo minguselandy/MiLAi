@@ -9,7 +9,7 @@ import time
 from collections import Counter
 from collections.abc import Callable
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 from analyze_operation_curve import (
     literal_file_equal,
@@ -22,11 +22,15 @@ from analyze_operation_curve import (
 from milai_lab.harness.artifact_io import read_json, read_jsonl, write_json
 from milai_lab.methods.memory_control_learning import score_operation_predictions
 from quality_feedback import (
+    ANSWER_FIRST_MASSES,
     QUALITY_MODES,
     QualityMode,
+    answer_first_counts,
+    answer_first_weights,
     choose_quality_checkpoint,
     quality_counts,
     quality_event_weights,
+    score_answer_first,
     score_quality_feedback,
     validate_quality_pool,
 )
@@ -99,14 +103,38 @@ def validate_quality_exposure(run: dict[str, Any], sampled: dict[str, int]) -> N
         raise ValueError("Instrumented logit-gradient counts exceed eligibility or disagree")
 
 
+def validate_answer_first_exposure(run: dict[str, Any], sampled: dict[str, Any]) -> None:
+    expected = {name + "_" + field: counts.get(field, 0)
+        for name, counts in sampled["components"].items()
+        for field in ("states", "pairs", "directional_pairs", "tie_pairs")}
+    if run["sampled_answer_first_components"] != expected:
+        raise ValueError("Answer/auxiliary pair exposure differs from the actual sampled rows")
+
+
+def nominate_answer_first(points: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """At most two offline nominees; update0 is a mandatory separate actual-choice control."""
+    eligible = [p for p in points if p["update"] > 0
+                and p["answer_first"]["coverage"].get("target_pairs", 0)]
+    return [{k: point[k] for k in ("update", "checkpoint")} for point in sorted(
+        eligible, key=lambda p: (p["answer_first"]["weighted_task_pair_loss"], p["update"]))[:2]]
+
+
 def analyze(plan: dict[str, Any], run_id: str, *,
             quality_mode: QualityMode | None = None,
             pair_label_smoothing: float | None = None,
-            replay_objective: str | None = None) -> dict[str, Any]:
+            replay_objective: str | None = None,
+            answer_first: bool = False, component_sum: bool = False) -> dict[str, Any]:
     spec, = [p for p in plan["plans"] if p["run_id"] == run_id]
     recipe = recipe_from_plan({**spec, "source_version": plan["source_version"]})
     root, data = Path(recipe["output"]), Path(recipe["data"])
     run = read_json(root / "run.json")
+    supervision = "answer-first" if answer_first else quality_mode
+    mass_mode = "component-sum" if answer_first or component_sum else "normalized-total"
+    if run.get("pair_mass_mode", "normalized-total") != mass_mode:
+        raise ValueError("Pair loss mass convention differs from its declared analysis")
+    if component_sum and (supervision is None or "--pair-mass-mode" not in spec["argv"]
+            or spec["argv"][spec["argv"].index("--pair-mass-mode") + 1] != "component-sum"):
+        raise ValueError("Component-sum control needs its explicit quality recipe")
     if run["status"] != "COMPLETED" or run["optimizer_updates"] != recipe[
             "planned_optimizer_updates"]:
         raise ValueError("Feedback selection requires the complete declared fit")
@@ -118,15 +146,18 @@ def analyze(plan: dict[str, Any], run_id: str, *,
               "seed", "max_len", "head_max_len", "encoder_lr", "head_lr", "batch_size",
               "planned_optimizer_updates", "freeze_encoder", "gradient_checkpointing",
               "shuffle_options", "evaluate_train")
+    if mass_mode == "component-sum":
+        recipe["pair_mass_mode"] = mass_mode
+        fields = (*fields, "pair_mass_mode")
     if any(run[k] != recipe[k] for k in fields):
         raise ValueError("Completed feedback fit differs from its frozen recipe")
-    if quality_mode is not None:
+    if supervision is not None:
         argv = spec["argv"]
-        if (quality_mode not in QUALITY_MODES or recipe["objective"] != "pair"
-                or argv[argv.index("--pair-supervision") + 1] != quality_mode
-                or run["pair_supervision"] != quality_mode):
+        if (supervision not in (*QUALITY_MODES, "answer-first") or recipe["objective"] != "pair"
+                or argv[argv.index("--pair-supervision") + 1] != supervision
+                or run["pair_supervision"] != supervision):
             raise ValueError("Quality supervision differs from the declared fit")
-        recipe["pair_supervision"] = quality_mode
+        recipe["pair_supervision"] = supervision
         recipe["device"] = "cuda"
         recipe["physical_gpus"] = [int(x) for x in spec["environment"][
             "CUDA_VISIBLE_DEVICES"].split(",")]
@@ -137,7 +168,7 @@ def analyze(plan: dict[str, Any], run_id: str, *,
         raise ValueError("Quality-supervised fit requires its declared quality selection rule")
     if pair_label_smoothing is not None:
         argv = spec["argv"]
-        if (quality_mode is None or not 0 < pair_label_smoothing < .5
+        if (supervision is None or not 0 < pair_label_smoothing < .5
                 or argv.count("--pair-label-smoothing") != 1
                 or float(argv[argv.index("--pair-label-smoothing") + 1]) != pair_label_smoothing
                 or run["pair_label_smoothing"] != pair_label_smoothing):
@@ -157,6 +188,13 @@ def analyze(plan: dict[str, Any], run_id: str, *,
         fields = (*fields, "replay_objective")
     elif run.get("replay_objective", "soft-ce") != "soft-ce":
         raise ValueError("Set replay requires its declared optimization audit")
+    if answer_first:
+        if spec["arm"] != "answer" or replay_objective != "set":
+            raise ValueError("Answer-first analysis requires answer target and accepted-set replay")
+        recipe["answer_first_component_masses"] = {**ANSWER_FIRST_MASSES, "replay": .25}
+        if run["answer_first_component_masses"] != recipe["answer_first_component_masses"]:
+            raise ValueError("Answer-first loss component masses changed")
+        fields = (*fields, "answer_first_component_masses")
     if (Path(run["data"]) != data or Path(run["base_checkpoint"]) != Path(recipe["base_checkpoint"])
             or run["evaluation_points"] != recipe["evaluation_updates"][1:]
             or not run["evaluate_initial_dev"]
@@ -171,6 +209,7 @@ def analyze(plan: dict[str, Any], run_id: str, *,
     if feedback[:len(legacy)] != legacy:
         raise ValueError("Original feedback development rows changed")
     legacy_ids = {r["metadata"]["event_id"] for r in legacy}
+    component_weights = None
     if spec["arm"] == "continued-ce":
         if any(not row["gold"] or "feedback" in row for row in train):
             raise ValueError("Continued CE must use its original labelled replacements/replay")
@@ -178,24 +217,34 @@ def analyze(plan: dict[str, Any], run_id: str, *,
     else:
         if run["feedback_target"] != spec["arm"] or run["replay_weight"] != 0.25:
             raise ValueError("Feedback target or replay loss mass changed")
-        if quality_mode is None:
+        if answer_first:
+            validate_quality_pool([*train, *feedback])
+            component_weights = answer_first_weights(train, .25)
+            weights = [1.0] * len(train)
+            pool = answer_first_counts(train)
+        elif quality_mode is None:
             weighted = [{**r, "metadata": {**r["metadata"], "component":
                          "feedback" if "feedback" in r else "operation_replay"}} for r in train]
             weights = mixture_event_weights(weighted, {"feedback": 1.0, "operation_replay": 0.25})
             pool = feedback_counts(train, spec["arm"])
         else:
             validate_quality_pool([*train, *feedback])
-            weights = quality_event_weights(train, spec["arm"], quality_mode, .25)
+            weights = quality_event_weights(train, spec["arm"], quality_mode, .25,
+                                            normalize_total=not component_sum)
             pool = quality_counts(train, spec["arm"], quality_mode)
         if run["feedback_pool"] != pool:
             raise ValueError("Feedback directional/tie/unknown support changed")
     if len(train) != run["train_states"] or len(dev) != run["dev_states"]:
         raise ValueError("Actual training/development row counts changed")
-    for row, sampled, weight in zip(train, read_json(root / "sampling.json"), weights, strict=True):
+    for index, (row, sampled, weight) in enumerate(zip(
+            train, read_json(root / "sampling.json"), weights, strict=True)):
         if (sampled["event_id"] != row["metadata"]["event_id"]
                 or sampled["family"] != row["metadata"]["family"]
                 or not math.isclose(sampled["weight"], weight, rel_tol=0, abs_tol=1e-12)):
             raise ValueError("Training identities or state/family weights changed")
+        if component_weights is not None and sampled[
+                "answer_first_component_weights"] != component_weights[index]:
+            raise ValueError("Independent answer/auxiliary/replay weights changed")
     stages = read_json(root / "training-plan.json")
     expected = training_stages(len(train), 1, recipe["seed"],
                               recipe["planned_optimizer_updates"], recipe["evaluation_updates"][1:])
@@ -213,15 +262,18 @@ def analyze(plan: dict[str, Any], run_id: str, *,
             != run["train_input_tokens"]):
         raise ValueError("Actual training draws/tokens differ from native lengths")
     if spec["arm"] != "continued-ce":
-        sampled = (feedback_counts([train[i] for _, i in draws], spec["arm"])
+        sampled = (answer_first_counts([train[i] for _, i in draws]) if answer_first else
+                   feedback_counts([train[i] for _, i in draws], spec["arm"])
                    if quality_mode is None else
                    quality_counts([train[i] for _, i in draws], spec["arm"], quality_mode))
         for k in ("feedback_states", "replay_states", "directional_pairs", "tie_pairs",
                   "unknown_pairs"):
             if run["sampled_" + k] != sampled.get(k, 0):
                 raise ValueError("Observed gradient-target exposure differs from actual draws")
-        if quality_mode is not None:
+        if supervision is not None:
             validate_quality_exposure(run, sampled)
+        if answer_first:
+            validate_answer_first_exposure(run, sampled)
     for data_pass in sorted({p for p, _ in draws}):
         orders = read_json(root / "option-orders" / f"{data_pass}.json")
         for row, order in zip(train, orders, strict=True):
@@ -256,7 +308,7 @@ def analyze(plan: dict[str, Any], run_id: str, *,
                 for target in ("answer", "delivery"):
                     validate_feedback_metric(saved[target], point[split][target])
                     validate_feedback_metric(native[split][target], point[split][target])
-                if quality_mode is not None:
+                if supervision is not None:
                     point["quality_partitions"] = feedback_partitions(
                         rows, predictions, legacy_ids, score_quality_feedback)
                     point["pure_quality"] = point["quality_partitions"]["combined"]["targets"]
@@ -266,6 +318,10 @@ def analyze(plan: dict[str, Any], run_id: str, *,
                     for name in ("pure_quality", "quality_cost"):
                         validate_quality_metric(saved[name], point[name])
                         validate_quality_metric(native[split][name], point[name])
+                if answer_first or component_sum:
+                    point["answer_first"] = score_answer_first(rows, predictions)
+                    validate_quality_metric(saved["answer_first"], point["answer_first"])
+                    validate_quality_metric(native[split]["answer_first"], point["answer_first"])
             costs[split + "_rows"] += len(predictions)
             costs[split + "_tokens"] += sum(p["input_tokens"] for p in predictions)
         checkpoint = Path(recipe["base_checkpoint"]) if update == 0 else (
@@ -276,11 +332,14 @@ def analyze(plan: dict[str, Any], run_id: str, *,
             if recorded["optimizer_updates"] != update or any(
                     recorded[k] != recipe[k] for k in fields):
                 raise ValueError("Saved checkpoint metadata differs from its declared point")
-            if quality_mode is not None:
+            if supervision is not None:
                 prefix = [train[i] for stop, windows in stages if stop <= update
                           for window in windows for _, i in window]
-                exposure = quality_counts(prefix, spec["arm"], quality_mode)
+                exposure = (answer_first_counts(prefix) if answer_first else
+                            quality_counts(prefix, spec["arm"], cast(QualityMode, quality_mode)))
                 validate_quality_exposure(recorded, exposure)
+                if answer_first:
+                    validate_answer_first_exposure(recorded, exposure)
                 for key in prior_gradients:
                     if recorded[key] < prior_gradients[key] or recorded[key] > run[key]:
                         raise ValueError("Checkpoint gradient counters are not cumulative")
@@ -304,7 +363,7 @@ def analyze(plan: dict[str, Any], run_id: str, *,
     if any(recorded_cost[k] != v for k, v in compute.items()
            if k not in ("ledger", "peak_rss_kib", "peak_cuda_allocated_bytes")):
         raise ValueError("Terminal compute does not match its original ledger entry")
-    if quality_mode is not None:
+    if supervision is not None:
         for key in ("feedback_target_states", "target_pairs", "cost_only_direction_pairs"):
             if compute["train_" + key] != run["sampled_" + key]:
                 raise ValueError("Quality target compute differs from actual sampled support")
@@ -312,14 +371,25 @@ def analyze(plan: dict[str, Any], run_id: str, *,
                     "replay_nonzero_logit_gradient_rows"):
             if compute["train_" + key] != run[key]:
                 raise ValueError("Gradient counter compute differs from the terminal run")
+    if answer_first:
+        for key, count in run["sampled_answer_first_components"].items():
+            if compute["train_answer_first_" + key] != count:
+                raise ValueError("Component exposure compute differs from the terminal run")
     targets = ("answer", "delivery") if spec["arm"] == "continued-ce" else (spec["arm"],)
     chooser = choose_feedback_checkpoint if quality_mode is None else choose_quality_checkpoint
-    selection = {target: {k: chooser(curve, target)[k]
-                          for k in ("update", "checkpoint")} for target in targets}
-    return {"status": ("TERMINAL_NATIVE_FEEDBACK_CURVE_VERIFIED;SAVED_RELOAD_SELECTION_PENDING"
+    selection = (None if answer_first else {target: {k: chooser(curve, target)[k]
+                          for k in ("update", "checkpoint")} for target in targets})
+    return {"status": ("TERMINAL_ANSWER_FIRST_CURVE_VERIFIED;ACTUAL_CHOICE_SELECTION_PENDING"
+                       if answer_first else
+                       "TERMINAL_NATIVE_FEEDBACK_CURVE_VERIFIED;SAVED_RELOAD_SELECTION_PENDING"
                        if quality_mode is None else
                        "TERMINAL_NATIVE_QUALITY_CURVE_VERIFIED;SAVED_RELOAD_SELECTION_PENDING"),
         "run_id": run_id, "recipe": recipe, "arm": spec["arm"], "curve": curve,
+        **({"pair_supervision": "answer-first", "offline_nominations": nominate_answer_first(curve),
+            "selection_rule": "At most two offline task-loss nominees; evaluate their actual "
+                "saved full-menu choices with update0/simple baseline on fixed dev. Select by "
+                "actual answer success, earliest tie. No deployment selection from pair loss."}
+           if answer_first else {}),
         **({"pair_supervision": quality_mode,
             "selection_rule": "pure quality directional family/state accuracy; "
                               "earliest tie,0 eligible",
@@ -333,9 +403,12 @@ def analyze(plan: dict[str, Any], run_id: str, *,
         "train_draws": len(draws), "train_input_tokens": run["train_input_tokens"],
         "evaluation_totals": dict(costs), "native_compute_already_recorded": compute,
         "parameter_probes": read_json(root / "parameter-probes.json"),
-        "scope": "Same original target and family/state scoring. Native GPU curve and saved FP16 "
+        "scope": ("New masked objective and component-normalized diagnostics. Offline nominees "
+                 "need saved reload and actual full-menu outcome selection; all unknowns retained."
+                 if answer_first else
+                 "Same original target and family/state scoring. Native GPU curve and saved FP16 "
                  "weights are distinct; every feedback candidate still needs CPU FP32 reload. "
-                 "No inference of Host quality or unexecuted option labels."}
+                 "No inference of Host quality or unexecuted option labels.")}
 
 
 def main() -> None:
@@ -343,9 +416,15 @@ def main() -> None:
     parser.add_argument("plan", type=Path)
     parser.add_argument("run_id")
     parser.add_argument("output", type=Path)
+    parser.add_argument("--answer-first", action="store_true")
+    parser.add_argument("--quality-mode", choices=QUALITY_MODES)
+    parser.add_argument("--component-sum", action="store_true")
+    parser.add_argument("--replay-objective", choices=("set",))
     args = parser.parse_args()
     started = time.process_time()
-    result = analyze(read_json(args.plan), args.run_id)
+    result = analyze(read_json(args.plan), args.run_id, answer_first=args.answer_first,
+                     replay_objective="set" if args.answer_first else args.replay_objective,
+                     quality_mode=args.quality_mode, component_sum=args.component_sum)
     args.output.mkdir(parents=True, exist_ok=False)
     result.update(cpu_seconds_pending=time.process_time() - started, ledger_recorded=False,
                   model_calls=0, no_sha_validation=True)

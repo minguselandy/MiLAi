@@ -1,0 +1,3621 @@
+{
+  "status": "SOURCE32_ANSWER_NATIVE_FIT_COMPLETE_VERIFIED;SOURCE64_ANSWER_RUNNING;SAVED_RELOAD_PENDING;FULL_PLAN_INCOMPLETE",
+  "goal_status": "active",
+  "goal_complete": false,
+  "observed_at": "2026-10-27T02:34:31.272382+08:00",
+  "previous_progress": "data/manifests/evidence-gap-development-progress-20261023-v145.json",
+  "previous_turn_classification": "Progress: firstfitclosed192updates/3072draws/all6points; actualper-row predictions,weights/draws/augmentation/checkpoints/nativeledger audited. SavedCPUprotocol/data/onejobdriver prepared, targetselection tooling tested;18pendingfields settledatidle; originalsource64answer started fromsameu262.",
+  "plan": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261026.md",
+  "execution": "docs/MILAI_DEVELOPMENT_EXECUTION_20261026.md",
+  "remaining_requirements_reference": "docs/MILAI_DEVELOPMENT_EXECUTION_20261026.md#要求与验收证据",
+  "source_version": {
+    "development_parent": "7aece29d",
+    "candidate": "Uncommitted/unfrozen alias-order candidate plus opt-in extractiveView builder; freeze independently before realnewmodel comparison. Original2a feedbackfit unchanged.",
+    "frozen_feedback_method": "2a179b58 unchanged"
+  },
+  "active_processes": [
+    {
+      "role": "coordinator",
+      "pid": 173458,
+      "cmdline": [
+        "python3",
+        "-u",
+        "artifacts/evidence-gap-20261023/run_original_feedback_fit_v1.py",
+        "source64-answer-seed0-u192-v1",
+        ""
+      ],
+      "verified_live": true
+    },
+    {
+      "role": "trainer",
+      "pid": 173463,
+      "cmdline": [
+        "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/cuda-env/bin/python",
+        "-u",
+        "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/frozen-feedback-ae3950f2/train_with_declared_attention.py",
+        "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/frozen-feedback-expansion-2a179b58/MiLAi-Lab/tools/train_bounded_laya.py",
+        "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-matched-v1/sources-64/feedback",
+        "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/fitting/source256-actions-full-seed0-u524-v1/checkpoints/update-262",
+        "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-fitting-v1/source64-answer-seed0-u192-v1",
+        "--budget",
+        "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+        "--compute-phase",
+        "evidence_gap_20261027_feedback_v2_source64_answer_seed0_u192_v1",
+        "--task",
+        "memory_operation",
+        "--objective",
+        "pair",
+        "--optimizer-updates",
+        "192",
+        "--eval-at-updates",
+        "12",
+        "24",
+        "48",
+        "96",
+        "192",
+        "--seed",
+        "0",
+        "--operation-state",
+        "shared_actions",
+        "--max-len",
+        "16384",
+        "--head-max-len",
+        "2048",
+        "--micro-batch-size",
+        "1",
+        "--encoder-lr",
+        "2.5e-5",
+        "--head-lr",
+        "1e-4",
+        "--shuffle-options",
+        "--gradient-checkpointing",
+        "--feedback-dev-data",
+        "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-matched-v1/sources-64/feedback/feedback-dev.jsonl",
+        "--feedback-target",
+        "answer",
+        "--replay-weight",
+        "0.25",
+        ""
+      ],
+      "verified_live": true
+    }
+  ],
+  "branch_execution": "Original train2285/dev142 remain closed; no retries/outcome repair. Newdirectneuralfeedback fit is active; originalunknowninterruptedgeneration retained.",
+  "train_quality_reviews": {
+    "status": "TRAIN768_ALL_SIX_STRATA_AND_SOURCE32_64_128_REVIEWS_COMPLETE;DEV48_STILL_OPEN",
+    "reviewed_states": 768,
+    "pairs": 2266,
+    "reviewed_branch_attempts": 2285,
+    "all_original_branch_attempts_covered_once": true,
+    "reviewed_strata": {
+      "rules_initial": 128,
+      "rules_post": 128,
+      "laya_initial": 128,
+      "laya_post": 128,
+      "fixed_context_initial": 128,
+      "fixed_context_post": 128
+    },
+    "source_family_cohorts": {
+      "32": {
+        "selected_states": 192,
+        "reviewed_states": 192,
+        "reviewed_strata": {
+          "rules_initial": 32,
+          "rules_post": 32,
+          "laya_initial": 32,
+          "laya_post": 32,
+          "fixed_context_initial": 32,
+          "fixed_context_post": 32
+        },
+        "remaining_states": 0,
+        "reviewed_pairs": 562,
+        "reviewed_branch_attempts": 569
+      },
+      "64": {
+        "selected_states": 384,
+        "reviewed_states": 384,
+        "reviewed_strata": {
+          "rules_initial": 64,
+          "rules_post": 64,
+          "laya_initial": 64,
+          "laya_post": 64,
+          "fixed_context_initial": 64,
+          "fixed_context_post": 64
+        },
+        "remaining_states": 0,
+        "reviewed_pairs": 1126,
+        "reviewed_branch_attempts": 1139
+      },
+      "128": {
+        "selected_states": 768,
+        "reviewed_states": 768,
+        "reviewed_strata": {
+          "rules_initial": 128,
+          "rules_post": 128,
+          "laya_initial": 128,
+          "laya_post": 128,
+          "fixed_context_initial": 128,
+          "fixed_context_post": 128
+        },
+        "remaining_states": 0,
+        "reviewed_pairs": 2266,
+        "reviewed_branch_attempts": 2285
+      }
+    },
+    "quality_counts": {
+      "answer": {
+        "right": 583,
+        "unknown": 758,
+        "tie": 489,
+        "left": 436
+      },
+      "delivery": {
+        "right": 628,
+        "unknown": 147,
+        "tie": 995,
+        "left": 496
+      }
+    },
+    "final_counts": {
+      "answer": {
+        "right": 734,
+        "unknown": 758,
+        "tie": 162,
+        "left": 612
+      },
+      "delivery": {
+        "right": 993,
+        "unknown": 147,
+        "tie": 293,
+        "left": 833
+      }
+    },
+    "new_chunks": [
+      "672-687",
+      "688-703",
+      "704-719",
+      "720-735",
+      "736-751",
+      "752-767"
+    ],
+    "new_states": 96,
+    "new_pairs": 264,
+    "new_cost_only_directions": 180,
+    "new_actual_branch_counts": {
+      "3": 84,
+      "2": 12
+    },
+    "new_two_branch_state_rows": [
+      681,
+      683,
+      685,
+      695,
+      697,
+      701,
+      713,
+      717,
+      721,
+      733,
+      737,
+      741
+    ],
+    "next_source_first_split": "dev",
+    "next_source_first_state": 0,
+    "dev_reviewed_states": 0,
+    "model_calls": 0,
+    "compiled_feedback_rows": 0,
+    "ledger_recorded": false,
+    "cpu_seconds_pending": 0.09728684200000001,
+    "scope": "Exact original family-order cohorts; author reviews, not independent/blind. 2285 attempts preserved, unknowns retained. Largestfullpool compilation waits for48dev reviews; no fits yet."
+  },
+  "dev_quality_review_states": 48,
+  "compiled_feedback_rows": 768,
+  "feedback_fits_started": 2,
+  "source_review_method": {
+    "split": "dev",
+    "states": 48,
+    "fully_read_new_request_pools": 11,
+    "same_request_literal_reuses": 37,
+    "new_stage2_rows": [
+      14,
+      26,
+      47
+    ],
+    "literal_current_before_and_public_query_checks": true,
+    "reviewer": "Current source author, notblind/independent",
+    "legacy16_unchanged": true
+  },
+  "semantic_boundary_artifact": "artifacts/evidence-gap-20261023/original-feedback-v2-all-reviews-closure-v1.json",
+  "development_change": {
+    "status": "IMPLEMENTED_AND_MECHANICALLY_VERIFIED;MODEL_EFFECT_UNTESTED",
+    "paths": [
+      "src/milai_lab/methods/query_structure.py",
+      "tests/unit/test_query_structure.py"
+    ],
+    "behavior": "Allocate new aliases while traversing actual capture/presentation order instead of opaque-source-ID order. Existing cached bindings remain unchanged; no text/role/time rewrite or fallback.",
+    "public_schema_API_permissions_canonical_changed": false,
+    "frozen_inputs_outputs_changed": false,
+    "regression_before_change": {
+      "test": "test_new_aliases_follow_capture_order_and_existing_aliases_stay_stable",
+      "exec_session": 95475,
+      "exit_code": 1,
+      "actual_ids": [
+        "e2",
+        "e1",
+        "e0"
+      ],
+      "expected_new_behavior_ids": [
+        "e0",
+        "e1",
+        "e2"
+      ],
+      "CPU": "unmeasured"
+    },
+    "validation": {
+      "query_structure_tests_passed": 25,
+      "related_regressions_passed": 89,
+      "skipped": 1,
+      "skip_reason": "Optional mempursuit dependency absent in test environment.",
+      "ruff": "passed",
+      "mypy": "passed one changed source module",
+      "package_boundary": "passed",
+      "tools_boundary": "passed; existing6grandfathered private dependencies unchanged",
+      "artifacts": [
+        "artifacts/evidence-gap-20261023/alias-order-query-tests-v1.json",
+        "artifacts/evidence-gap-20261023/alias-order-validation-v1.json"
+      ]
+    },
+    "actual_input_probe": {
+      "artifact": "artifacts/evidence-gap-20261023/alias-order-actual-input-v1/result.json",
+      "source_state": 352,
+      "sources": 20,
+      "candidate_order": "e0..e19 matches document0..19 capture presentation",
+      "information_equal_after_explicit_alias_resolution": true,
+      "original_response_not_reinterpreted": true,
+      "real_model_calls": 0,
+      "scripted_callbacks": 2,
+      "original_store_untouched": true
+    },
+    "limitations": "No demonstrated reduction in neural citation errors yet; fresh-cache alias behavior differs, legacy cached aliases retained. F3 extractive View baseline still not implemented.",
+    "checkpoint_note": "Prioraliasallocation remains; no neuralcitationgain claim. Newextractivebuilder separatelydocumented below; original2a fit doesnotimportthis development candidate."
+  },
+  "semantic_findings": [
+    "Dev48/140pairs/142attempts complete, 2options at41/43. Pureanswer89directions/26ties/25unknown; delivery102directions/38ties/0unknown. Finalanswer103/12/25,delivery124/16/0;36cost-onlytargetdirections notsuccesses.",
+    "Earlyprioritytracking16incidents withlateMarch/dategap vsstage2reported21days/11downgrades/5upgrades: onlylatter0.7619percalendarday,5.3333persevendayweek. Overallmislabelpercentage absentdenominator; hypothetical32percent/projections excluded.",
+    "Dev26 actualRAW currentMarcus/ChenWei/May2 andfuturewebsiteMarc separated. EarliercommentarycallingitaView corrected; actual labels alreadyuse raw.",
+    "Dev47actualcurrent6080+dining175→4135outflows/1945remainder. Allbranchesomit175; two usecurrent6080/2120, onestale6200/2240. REFRESHreturnsrawonly.",
+    "Dev23Viewoperands correctbutnodes3815/2385 wrong; actualHostFAILED answerunknown. Dev17nativeCOMPLETED emptystring notfailure repair.",
+    "Dev0/7/9/17/41 inventedyears;4Thaiactuallyvisited calleduntried;20PriyaThai tolerance assignedLena andradishaffirmationcitesassistantquestion;37nopushbackcitesassistantquestion.",
+    "GoodViews3/35/39/43 preserveactualappointments/budget; no blanketViewrejection. Fixedearlierreceipts19/27alreadyownfollowup, extraactionsnotrequiredsupportgains."
+  ],
+  "accounting": {
+    "settlement": "artifacts/evidence-gap-20261023/original-feedback-v2-source32-answer-postfit-settlement.json",
+    "settled_cpu_seconds": 180.7219824499993,
+    "settled_fields": 18,
+    "native_first_fit_cpu_already_recorded_not_rebilled": 7552.814254657001,
+    "only_expected_root_compute_delta": true,
+    "all_prior_v144_v145_F3_analysis_plan_and_first_fit_parent_fields_settled": true,
+    "native_model_generation_requests_added": 0,
+    "unknown_original_interrupted_generation_usage_retained": true,
+    "pending": "Only thisprogress field andfutureactivefit residual/orchestration; no offline settlement whilelive. Copied nativecompute/old pendingmetrics inpriorfiles alreadybilled,neverrebill.",
+    "unmeasured": "Reading/authoring/searches/reloadpreparer initialsyntaxfailure/ASTparse/setup/settlementoverhead unknown,notzero. GPUactive-seconds/monetarycost unavailable; actualwall/input/deviceforwards/peakCUDA retained.",
+    "progress_processing_cpu_pending": 0.007815666999999998
+  },
+  "next_actions": [
+    "Monitor source64answer trainer173463/coordinator173458/session65599; initializationevalthen192updates; no restartonobservationtimeout. Preservefailure, auditactualterminal beforefollowing originalsource128answer.",
+    "Complete answer sourcecurve32/64/128 andremainingCE/deliveryfits underoriginalplan. Allusecommonu262, notsource32winner. SavedCPUplan46candidatejobs sharesonebase, all6feedbackpointsperfit;old860atbase/end/selecteduniqueearly only, keepallnativeoldcurvepoints.",
+    "Implement savedCPU result verifier/selection overdeclaredjoboutputs; execute onlywhennoothermodeljob. CPUdispatcher prepared/parses only, noactualrunyet. ActualHost/oldskills/reload stillrequired.",
+    "F1/F2/F3realcomparisons,compact/conditionaldata/Qdirection-Q-tie-Q-cost/freezeencoder/coverage/seeds/originalcontrols/autonomousHost/lifecycle/external/fourfigures remain. Source32oldskilldrop isobserved tradeoff, notlicense tochange frozenremainingarms."
+  ],
+  "no_sha_or_content_fingerprint_validation": true,
+  "no_subagents": true,
+  "no_new_model_services_or_ledger": true,
+  "no_remote_writes": true,
+  "verification": [
+    "Firstnativefit192updates,3072draws,1536feedback/1536replay,15308528trainingtokens verified againstsaved schedule/lengths/weights/optionorders. Encoder/headprobes changed.",
+    "All6×(860olddev+64feedbackdev) predictions validated; actualnativecounts/metrics andold16/new48/sixstrata recomputed. Finalduplicateweightbytes equal192checkpoint, noSHA.",
+    "Nativeanswer51.798→78.720percent, oldoperation80.783→74.661percent; only8feedbackfamilies. Nativewinner192 provisional, deploymentselectionNone.",
+    "SDKsaved170F16tensors; CPUevaluatoraddsreference_compile=False andrecordsMHAfastpathFalse; coreprovider/projector/scorer literal-equal to2a. Newcombined924inputbytepreserving acrossallnine.",
+    "18explicitfields settledatverifiedidle, native7552.814254657CPU notrebilled. Thenonlysource64started, actualPIDs/nativeRUNNING confirmed.",
+    "PriorF3candidate154pass/1optionalskip unchanged andnotin2afits; no newHost/protecteddata orsource-label rewrites."
+  ],
+  "prior_quality_refinement": {
+    "artifact": "artifacts/evidence-gap-20261023/feedback-branch-reviews-v2/train/quality-refinement-453-before-resource-v1.json",
+    "state": 453,
+    "targets": 2,
+    "from": "delivery left",
+    "to": "delivery tie",
+    "timing": "Beforefinalresourceprocessing; no frozenmodeloutputs/compiledtargets changed",
+    "initial_author_snapshot_retained": true
+  },
+  "view_boundary_audit": {
+    "literal_entries": 9,
+    "split": "dev",
+    "native_completed_empty17_retained": true,
+    "interrupted11_branch2_unknown_usage_retained": true,
+    "arithmetic_view23": {
+      "actual_nodes": {
+        "n9": {
+          "evidence": [
+            "e0",
+            "e1",
+            "e2",
+            "e5"
+          ],
+          "kind": "inferred",
+          "temporal": "Current",
+          "text": "Calculated total monthly committed outflows (savings, rent, utilities, phone, groceries, transport, gym) are $3,815."
+        },
+        "n10": {
+          "evidence": [
+            "e0",
+            "e2",
+            "e3",
+            "e5"
+          ],
+          "kind": "inferred",
+          "temporal": "Current",
+          "text": "Calculated remaining balance after listed expenses and savings is $2,385."
+        }
+      },
+      "correct_outflows": 3960,
+      "correct_remainder": 2240,
+      "host_failed_answer_mask_retained": true
+    },
+    "commentary_correction": "Prior progress sentence called dev26 name-scope example a View. Actual executed branches deliver raw session3 only, no View. Corrected publicly; labels already used actual raw. Dev47 REFRESH also returns raw only."
+  },
+  "prior_rejected_refresh571": {
+    "state_row": 571,
+    "case": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-branch-execution-v2/train-source128-continuation-001/arm-1655/call-01888",
+    "trace": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-branch-execution-v2/train-source128-continuation-001/arm-1655/call-01888/runtime/banks/87abf1ee-5f18-47f3-bb15-fda8e6c4cf7d/498a5720-9a2c-4713-9976-772b18e18bdd-trace-0.jsonl",
+    "cache_rows": 0,
+    "read_operations": 0,
+    "actual_target_packet": [],
+    "native_tool_status": "COMPLETED",
+    "meaning": "Rejectedrefresh is notfailedwholetoolreplay. No budgetdeliveryrejection andno persistedView; twoSEARCH thenhandoff. Originalmodelattempt notrerun."
+  },
+  "prior_record575_menu": {
+    "candidate_index": 1,
+    "revision": 2,
+    "unit_characters": 292,
+    "available_after_search_steps": [
+      1,
+      2
+    ],
+    "available_actions": [
+      "read_1",
+      "history_1"
+    ],
+    "actual_choices": [
+      "search_0_8",
+      "search_0_16",
+      "context_0",
+      "handoff"
+    ],
+    "counterfactual_read1_executed": false,
+    "unexecuted_option_labels_added": false,
+    "interpretation": "Menuavailability separatescoverage fromactualchoice. NeedrealcounterfactualHost runbeforeclaimingchoicewouldsolve; betterViewtextalone cannotproveunopenedstoredrecordretrieval."
+  },
+  "record595_history_menu": {
+    "requested_revision": 1,
+    "current_candidate_revision": 2,
+    "actual_first_unit_characters": 355,
+    "available_history_action": "history_1",
+    "available_after_steps": [
+      1,
+      2
+    ],
+    "actual_choices": [
+      "search_0_8",
+      "search_0_16",
+      "context_0",
+      "handoff"
+    ],
+    "counterfactual_history_read_executed": false,
+    "unexecuted_labels_added": false
+  },
+  "source32_review_status": {
+    "selected_families": 32,
+    "states": 192,
+    "pairs": 562,
+    "branch_attempts": 569,
+    "all_six_strata_complete": true,
+    "compiled_or_fitted": true,
+    "scope": "Alltrain/dev reviewedandcompiled;source32/64 derivedfromoncematchedparent. Firstsource32answerfitrunning, no completedfit orHost claim."
+  },
+  "new_option_counts": {
+    "split": "dev",
+    "states": 48,
+    "three_branch_states": 46,
+    "two_branch_states": 2,
+    "two_branch_state_rows": [
+      41,
+      43
+    ],
+    "pairs": 140,
+    "unexecuted_option_labels_added": false
+  },
+  "same_before_handoff640": {
+    "restored_step": 4,
+    "original_prefix_reads": 2,
+    "prefix_reexecuted": false,
+    "max_return_tokens": 2048,
+    "new_reads": 0,
+    "new_retrieval_generation_requests": 0,
+    "new_protocol_operations": [
+      1,
+      1,
+      0
+    ],
+    "result": "Actualold/correction/unionpackets andHost74/72/72background recorded; diagnosticcase notfullF1devexperiment."
+  },
+  "author_source_reason_correction638": {
+    "artifact": "artifacts/evidence-gap-20261023/feedback-branch-reviews-v2/train/source-reason-correction-638-v1.json",
+    "labels_and_resource_fields_changed": false,
+    "initial_quality_and_final_snapshots_retained": true,
+    "correction": "n3e8 mapsJijEnIk song; n4e13 mapsNBA list. Initialexplanation misidentifiedwhichnode/bodywasmisbound."
+  },
+  "source_family_review_status": {
+    "32": {
+      "selected_states": 192,
+      "reviewed_states": 192,
+      "reviewed_strata": {
+        "rules_initial": 32,
+        "rules_post": 32,
+        "laya_initial": 32,
+        "laya_post": 32,
+        "fixed_context_initial": 32,
+        "fixed_context_post": 32
+      },
+      "remaining_states": 0,
+      "reviewed_pairs": 562,
+      "reviewed_branch_attempts": 569,
+      "compiled_or_fitted": true,
+      "compiled": true,
+      "matched_training_ready": true,
+      "fits_completed": 0
+    },
+    "64": {
+      "selected_states": 384,
+      "reviewed_states": 384,
+      "reviewed_strata": {
+        "rules_initial": 64,
+        "rules_post": 64,
+        "laya_initial": 64,
+        "laya_post": 64,
+        "fixed_context_initial": 64,
+        "fixed_context_post": 64
+      },
+      "remaining_states": 0,
+      "reviewed_pairs": 1126,
+      "reviewed_branch_attempts": 1139,
+      "compiled_or_fitted": true,
+      "compiled": true,
+      "matched_training_ready": true,
+      "fits_completed": 0
+    },
+    "128": {
+      "selected_states": 768,
+      "reviewed_states": 768,
+      "reviewed_strata": {
+        "rules_initial": 128,
+        "rules_post": 128,
+        "laya_initial": 128,
+        "laya_post": 128,
+        "fixed_context_initial": 128,
+        "fixed_context_post": 128
+      },
+      "remaining_states": 0,
+      "reviewed_pairs": 2266,
+      "reviewed_branch_attempts": 2285,
+      "compiled_or_fitted": true,
+      "compiled": true,
+      "matched_training_ready": true,
+      "fits_completed": 0
+    }
+  },
+  "prior_rejected_refreshes580_598": [
+    {
+      "state": 580,
+      "case": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-branch-execution-v2/train-source128-continuation-001/arm-1682/call-02227",
+      "target_call_id": "chatcmpl-a84495579f352b26:tool:0",
+      "cache_rows": 0,
+      "read_operations": 0,
+      "termination_reason": "intervention_handoff",
+      "selected_operations": [
+        "refresh_view",
+        "search_0_8",
+        "search_0_16"
+      ],
+      "excluded_earlier_call_ids": [],
+      "whole_tool_status": "COMPLETED"
+    },
+    {
+      "state": 598,
+      "case": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-branch-execution-v2/train-source128-continuation-001/arm-1736/call-02864",
+      "target_call_id": "chatcmpl-92a3d474360a5261:tool:0",
+      "cache_rows": 0,
+      "read_operations": 0,
+      "termination_reason": "budget_exhausted",
+      "selected_operations": [
+        "refresh_view",
+        "search_0_8"
+      ],
+      "excluded_earlier_call_ids": [
+        "chatcmpl-b633e789482abe98:tool:0"
+      ],
+      "whole_tool_status": "COMPLETED"
+    }
+  ],
+  "prior_refresh_mechanics623_626_635_655": [
+    {
+      "state_row": 623,
+      "case": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-branch-execution-v2/train-source128-continuation-001/arm-1811/call-03870",
+      "restored_control_step": 0,
+      "cache_nodes": 0,
+      "cache_rules": 0,
+      "new_reads": 0,
+      "prefix_material_rejections": 0,
+      "new_material_rejections": 0,
+      "final_packet_kinds": []
+    },
+    {
+      "state_row": 626,
+      "case": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-branch-execution-v2/train-source128-continuation-001/arm-1820/call-03994",
+      "restored_control_step": 0,
+      "cache_nodes": 0,
+      "cache_rules": 0,
+      "new_reads": 0,
+      "prefix_material_rejections": 0,
+      "new_material_rejections": 0,
+      "final_packet_kinds": []
+    },
+    {
+      "state_row": 635,
+      "case": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-branch-execution-v2/train-source128-continuation-001/arm-1847/call-04311",
+      "restored_control_step": 0,
+      "cache_nodes": 8,
+      "cache_rules": 0,
+      "new_reads": 0,
+      "prefix_material_rejections": 0,
+      "new_material_rejections": 1,
+      "final_packet_kinds": []
+    },
+    {
+      "state_row": 655,
+      "case": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-branch-execution-v2/train-source128-continuation-001/arm-1904/call-00478",
+      "restored_control_step": 4,
+      "cache_nodes": 11,
+      "cache_rules": 0,
+      "new_reads": 0,
+      "prefix_material_rejections": 1,
+      "new_material_rejections": 1,
+      "final_packet_kinds": [
+        "original_source"
+      ]
+    }
+  ],
+  "compiled_new_dev_rows": 48,
+  "combined_feedback_dev_rows": 64,
+  "feedback_fits_completed": 1,
+  "dev_quality_reviews": {
+    "states": 48,
+    "pairs": 140,
+    "branch_attempts": 142,
+    "families": 8,
+    "strata": {
+      "rules_initial": 8,
+      "rules_post": 8,
+      "laya_initial": 8,
+      "laya_post": 8,
+      "fixed_context_initial": 8,
+      "fixed_context_post": 8
+    },
+    "quality_counts": {
+      "answer": {
+        "right": 55,
+        "left": 34,
+        "unknown": 25,
+        "tie": 26
+      },
+      "delivery": {
+        "right": 55,
+        "left": 47,
+        "tie": 38
+      }
+    },
+    "final_counts": {
+      "answer": {
+        "right": 65,
+        "left": 38,
+        "unknown": 25,
+        "tie": 12
+      },
+      "delivery": {
+        "right": 70,
+        "left": 54,
+        "tie": 16
+      }
+    },
+    "cost_only_directions": 36,
+    "review_file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-compile-inputs-v1/dev-reviews.json"
+  },
+  "all_reviews_closure_artifact": "artifacts/evidence-gap-20261023/original-feedback-v2-all-reviews-closure-v1.json",
+  "prior_train_semantic_boundary_artifact": "artifacts/evidence-gap-20261023/feedback-branch-reviews-v2/train/semantic-boundaries-states-672-767-v1.json",
+  "prior_train_view_boundary_audit": {
+    "literal_entries": 6,
+    "distinct_states": 5,
+    "opened_binding_paths_resolved": true,
+    "native_semantic_view_preserved": true,
+    "positive_stored_record723": {
+      "state_row": 723,
+      "case": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-branch-execution-v2/train-source128-continuation-001/arm-2094/call-02752",
+      "actual_unit_characters": 629,
+      "actual_revision": 2,
+      "literal_unit_evidence_answer_equal": true,
+      "actual_request_equals_native_packet": true,
+      "fixed_other_receipts": 0,
+      "restored_step": 5,
+      "original_prefix_reads": 3,
+      "prefix_reexecuted": false,
+      "new_READ_attempts": 3,
+      "prefix_material_rejections": 2,
+      "new_material_rejections": 1,
+      "trace": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-branch-execution-v2/train-source128-continuation-001/arm-2094/call-02752/runtime/banks/c0363b6d-9a6f-479e-890b-cb5e98de0b69/4333ec39-3120-49dd-b2e8-16de16c48622-trace-0.jsonl",
+      "new_operations": [
+        {
+          "step": 5,
+          "selected": "history_1",
+          "result": {
+            "ok": true,
+            "status": "history_directory",
+            "id": "f48dfe4a-447f-5e72-a849-468a6f466e63",
+            "current_revision_at_snapshot": 2,
+            "revision_count": 2,
+            "revisions": [
+              1,
+              2
+            ],
+            "start": 0,
+            "omitted_count": 0,
+            "index_kind": "stored_history",
+            "source_ref": null,
+            "source_revision": null,
+            "snapshot_id": "history-7673c755-663b-412a-86fe-db2e499d2f5c",
+            "next_cursor": null,
+            "content_verification": "unchecked",
+            "business_authority": false,
+            "body_delivered": false
+          }
+        },
+        {
+          "step": 6,
+          "selected": "read_1",
+          "result": {
+            "ok": true,
+            "status": "opened",
+            "index": 1,
+            "visibility": null
+          }
+        },
+        {
+          "step": 7,
+          "selected": "read_13",
+          "result": {
+            "ok": false,
+            "status": "material_budget_exhausted",
+            "index": 13,
+            "visibility": null
+          }
+        }
+      ],
+      "meaning": "Actual closed branch directory→currentbody→budgetreject yields exact current text. No synthetic counterfactual success; directory alone delivers no body."
+    },
+    "neural_alias_candidate_used": false,
+    "frozen_response_reinterpreted_under_new_aliases": false
+  },
+  "compilation": {
+    "root": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-compiled-v1",
+    "source_version": "2a179b58",
+    "train": {
+      "status": "REVIEWED_COMMON_PAIR_POOL_NOT_FITTED",
+      "raw": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-branch-preparation-v2/train-source128/raw-selected-states.jsonl",
+      "reviews": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-compile-inputs-v1/train-reviews.json",
+      "raw_states": 768,
+      "reviewed_states": 768,
+      "unreviewed_states": 0,
+      "split": "train",
+      "host_readout_evaluation": "required",
+      "families": 128,
+      "feedback": {
+        "answer": {
+          "feedback_states": 768,
+          "states_with_direction": 649,
+          "directional_pairs": 1346,
+          "unknown_pairs": 758,
+          "tie_pairs": 162
+        },
+        "delivery": {
+          "feedback_states": 768,
+          "states_with_direction": 768,
+          "directional_pairs": 1826,
+          "unknown_pairs": 147,
+          "tie_pairs": 293
+        }
+      },
+      "model_input_unchanged": true,
+      "full_option_ce_labels_added": false,
+      "scope": "One shared pair pool; arm chooses feedback target, not a different state set.",
+      "compute": {
+        "wall_seconds": 58.73585369065404,
+        "cpu_seconds": 58.733201487
+      },
+      "ledger_recorded": false
+    },
+    "new_dev": {
+      "status": "REVIEWED_COMMON_PAIR_POOL_NOT_FITTED",
+      "raw": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-branch-preparation-v2/dev/raw-selected-states.jsonl",
+      "reviews": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-compile-inputs-v1/dev-reviews.json",
+      "raw_states": 48,
+      "reviewed_states": 48,
+      "unreviewed_states": 0,
+      "split": "dev",
+      "host_readout_evaluation": "required",
+      "families": 8,
+      "feedback": {
+        "answer": {
+          "feedback_states": 48,
+          "states_with_direction": 46,
+          "directional_pairs": 103,
+          "unknown_pairs": 25,
+          "tie_pairs": 12
+        },
+        "delivery": {
+          "feedback_states": 48,
+          "states_with_direction": 48,
+          "directional_pairs": 124,
+          "tie_pairs": 16
+        }
+      },
+      "model_input_unchanged": true,
+      "full_option_ce_labels_added": false,
+      "scope": "One shared pair pool; arm chooses feedback target, not a different state set.",
+      "compute": {
+        "wall_seconds": 3.3306202115491033,
+        "cpu_seconds": 3.330561981
+      },
+      "ledger_recorded": false
+    },
+    "combined": {
+      "status": "MAXIMUM_POOL_COMPILED_ONCE_AND_LEGACY_DEV_APPENDED_UNCHANGED",
+      "train_states": 768,
+      "new_dev_states": 48,
+      "legacy_dev_states": 16,
+      "combined_dev_states": 64,
+      "legacy_file": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-dev-final-v1/feedback.jsonl",
+      "combined_file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-compiled-v1/dev-combined64/feedback.jsonl",
+      "stable_event_identity_order": [
+        "feedback-dev/bc1b00dd-b67a-47f6-947e-fd23d90ef167/initial",
+        "feedback-dev/7e35ee39-7d8e-40a3-ac0a-d5754c9e49b7/initial",
+        "feedback-dev/aeda5635-cb2d-400f-9dea-5f9531d32290/initial",
+        "feedback-dev/12f72684-1063-4e73-b6ff-8a0c7ad14bb4/initial",
+        "feedback-dev/a02691e5-648b-4de3-8e3a-06b78feefa25/initial",
+        "feedback-dev/41af222b-9678-445b-96f9-1cb8eb22d4b7/initial",
+        "feedback-dev/f012ae52-d793-4455-bb8c-30e13135c52d/initial",
+        "feedback-dev/4243d904-29a9-4805-a2ce-e44175688b45/initial",
+        "feedback-dev/63b17902-6ef1-4ba8-96b7-ebb6390d81ce/initial",
+        "feedback-dev/62f49d13-67d7-4f0b-b84d-fd71fafd7f68/initial",
+        "feedback-dev/b4567d88-1597-4ae3-b24f-7a309f84c4bc/initial",
+        "feedback-dev/59432cb2-7700-44fc-a320-f92bd69a41ed/initial",
+        "feedback-dev/edd34421-186d-4bdc-84a2-02c4f35e9bb1/initial",
+        "feedback-dev/42238cea-4667-45b1-8e65-3b5debe62447/initial",
+        "feedback-dev/05d5e566-cd92-45e6-9910-68991457b292/initial",
+        "feedback-dev/63c8b74b-63f5-4af5-8599-9c32fd1e2b4f/initial",
+        "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-collection-v2/dev/batch-000/f7b92968-c950-48de-ba88-bf316bed15c3/step-0",
+        "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-collection-v2/dev/batch-000/e7043716-d542-48c8-94f9-2d9cfcd9afdf/step-0",
+        "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-collection-v2/dev/batch-001/fac8b183-4e45-462e-864b-9e8dbfccd47b/step-0",
+        "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-collection-v2/dev/batch-001/2e971558-9211-48da-952d-983e50d97e3a/step-0",
+        "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-collection-v2/dev/batch-002/46eeded0-eba6-48cb-a11f-501adc8de56c/step-0",
+        "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-collection-v2/dev/batch-002/48a6d42c-664c-4f15-a03a-e5c34769dccc/step-0",
+        "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-collection-v2/dev/batch-003/51b57606-0c8d-4aed-bda6-36a33a572446/step-0",
+        "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-collection-v2/dev/batch-003/c735743f-7c04-44cb-840c-ae8080c5066c/step-0",
+        "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-collection-v2/dev/batch-000/f7b92968-c950-48de-ba88-bf316bed15c3--steps--step-0004/step-4",
+        "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-collection-v2/dev/batch-000/e7043716-d542-48c8-94f9-2d9cfcd9afdf--steps--step-0006/step-6",
+        "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-collection-v2/dev/batch-001/fac8b183-4e45-462e-864b-9e8dbfccd47b--steps--step-0004/step-4",
+        "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-collection-v2/dev/batch-001/2e971558-9211-48da-952d-983e50d97e3a--steps--step-0002/step-2",
+        "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-collection-v2/dev/batch-002/46eeded0-eba6-48cb-a11f-501adc8de56c--steps--step-0002/step-2",
+        "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-collection-v2/dev/batch-002/48a6d42c-664c-4f15-a03a-e5c34769dccc--steps--step-0006/step-6",
+        "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-collection-v2/dev/batch-003/559f571d-560d-4942-857b-e7b5e747bdb6--steps--step-0004/step-4",
+        "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-collection-v2/dev/batch-003/c735743f-7c04-44cb-840c-ae8080c5066c--steps--step-0002/step-2",
+        "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-collection-v2/dev/batch-000/e0bf4b6d-3d7f-4fab-b60d-6196d77edad5/step-0",
+        "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-collection-v2/dev/batch-000/091726d8-5ceb-4d0c-916c-2917dc800944/step-0",
+        "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-collection-v2/dev/batch-001/afeb1e88-87e5-4c11-b2a6-1cf7c599c9a8/step-0",
+        "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-collection-v2/dev/batch-001/4c0c550a-87ab-45ab-aac3-3dca2c6148c4/step-0",
+        "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-collection-v2/dev/batch-002/c9981d94-479d-4611-bb8f-d9417e19e20d/step-0",
+        "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-collection-v2/dev/batch-002/2667d984-1e75-4808-84fc-b7b0f3bd68c7/step-0",
+        "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-collection-v2/dev/batch-003/7e7ba6d9-cfd9-4c7a-ae72-3b5f7304e09e/step-0",
+        "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-collection-v2/dev/batch-003/2b954791-a4ff-4b86-be0b-f1db6f446be8/step-0",
+        "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-collection-v2/dev/batch-000/e0bf4b6d-3d7f-4fab-b60d-6196d77edad5--steps--step-0001/step-1",
+        "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-collection-v2/dev/batch-000/091726d8-5ceb-4d0c-916c-2917dc800944--steps--step-0001/step-1",
+        "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-collection-v2/dev/batch-001/813756f2-2225-415c-bbd8-485c6edb5ea0--steps--step-0001/step-1",
+        "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-collection-v2/dev/batch-001/4c0c550a-87ab-45ab-aac3-3dca2c6148c4--steps--step-0001/step-1",
+        "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-collection-v2/dev/batch-002/c9981d94-479d-4611-bb8f-d9417e19e20d--steps--step-0001/step-1",
+        "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-collection-v2/dev/batch-002/2667d984-1e75-4808-84fc-b7b0f3bd68c7--steps--step-0002/step-2",
+        "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-collection-v2/dev/batch-003/7e7ba6d9-cfd9-4c7a-ae72-3b5f7304e09e--steps--step-0001/step-1",
+        "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-collection-v2/dev/batch-003/2b954791-a4ff-4b86-be0b-f1db6f446be8--steps--step-0002/step-2",
+        "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-collection-v2/dev/batch-000/924217ab-ee37-4bea-b21f-8781411193fb/step-0",
+        "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-collection-v2/dev/batch-000/c8d6ee5d-d200-4742-8291-d47be9dd9bac/step-0",
+        "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-collection-v2/dev/batch-001/644977b2-ea6a-49bc-a79a-babd1b403b79/step-0",
+        "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-collection-v2/dev/batch-001/29cc0562-9f15-4f8f-9688-52aa6ae3766a/step-0",
+        "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-collection-v2/dev/batch-002/6172defc-896c-40ad-8340-3e3387873f96/step-0",
+        "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-collection-v2/dev/batch-002/0cb45e24-405a-4e25-8354-c26b7f82e69e/step-0",
+        "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-collection-v2/dev/batch-003/cb434343-f7db-43e0-a177-efa21df6635d/step-0",
+        "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-collection-v2/dev/batch-003/9b1416d6-b472-4269-80ac-6b0fc9113cf5/step-0",
+        "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-collection-v2/dev/batch-000/924217ab-ee37-4bea-b21f-8781411193fb--steps--step-0002/step-2",
+        "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-collection-v2/dev/batch-000/c8d6ee5d-d200-4742-8291-d47be9dd9bac--steps--step-0003/step-3",
+        "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-collection-v2/dev/batch-001/644977b2-ea6a-49bc-a79a-babd1b403b79--steps--step-0001/step-1",
+        "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-collection-v2/dev/batch-001/29cc0562-9f15-4f8f-9688-52aa6ae3766a--steps--step-0003/step-3",
+        "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-collection-v2/dev/batch-002/6172defc-896c-40ad-8340-3e3387873f96--steps--step-0002/step-2",
+        "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-collection-v2/dev/batch-002/0cb45e24-405a-4e25-8354-c26b7f82e69e--steps--step-0001/step-1",
+        "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-collection-v2/dev/batch-003/cb434343-f7db-43e0-a177-efa21df6635d--steps--step-0002/step-2",
+        "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-collection-v2/dev/batch-003/3861ddf5-5bc1-4301-b2c8-8d6954d8dfe2--steps--step-0006/step-6"
+      ],
+      "train_families": 128,
+      "combined_dev_families": 8,
+      "new_inputs_gold_metadata_unchanged_except_review_status": true,
+      "legacy_bytes_unchanged": true,
+      "cohort_labels_recompiled": false,
+      "targets": {
+        "train": {
+          "answer": {
+            "feedback_states": 768,
+            "states_with_direction": 649,
+            "directional_pairs": 1346,
+            "unknown_pairs": 758,
+            "tie_pairs": 162
+          },
+          "delivery": {
+            "feedback_states": 768,
+            "states_with_direction": 768,
+            "directional_pairs": 1826,
+            "unknown_pairs": 147,
+            "tie_pairs": 293
+          }
+        },
+        "legacy-dev": {
+          "answer": {
+            "feedback_states": 16,
+            "states_with_direction": 11,
+            "unknown_pairs": 20,
+            "directional_pairs": 21,
+            "tie_pairs": 7
+          },
+          "delivery": {
+            "feedback_states": 16,
+            "states_with_direction": 16,
+            "directional_pairs": 39,
+            "tie_pairs": 6,
+            "unknown_pairs": 3
+          }
+        },
+        "new-dev": {
+          "answer": {
+            "feedback_states": 48,
+            "states_with_direction": 46,
+            "directional_pairs": 103,
+            "unknown_pairs": 25,
+            "tie_pairs": 12
+          },
+          "delivery": {
+            "feedback_states": 48,
+            "states_with_direction": 48,
+            "directional_pairs": 124,
+            "tie_pairs": 16
+          }
+        },
+        "combined-dev": {
+          "answer": {
+            "feedback_states": 64,
+            "states_with_direction": 57,
+            "unknown_pairs": 45,
+            "directional_pairs": 124,
+            "tie_pairs": 19
+          },
+          "delivery": {
+            "feedback_states": 64,
+            "states_with_direction": 64,
+            "directional_pairs": 163,
+            "tie_pairs": 22,
+            "unknown_pairs": 3
+          }
+        }
+      },
+      "model_calls": 0,
+      "ledger_recorded": false,
+      "cpu_seconds_pending": 1.2721256170000002
+    },
+    "capacity_audit": {
+      "status": "ACTUAL_TOKENIZER_ONLY_SHARED_ACTIONS_CAPACITY_MEASURED",
+      "tokenizer": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/fitting/source256-actions-full-seed0-u524-v1/checkpoints/update-262/tokenizer",
+      "projection": "shared_actions",
+      "max_len": 16384,
+      "head_max_len": 2048,
+      "splits": {
+        "train": {
+          "states": 768,
+          "max_sequence_tokens": 12130,
+          "sum_sequence_tokens": 4151442,
+          "capped_option_rows": 0,
+          "truncated_state_rows": 0,
+          "truncated_head_rows": 0,
+          "complete_binding_table_rows": 768
+        },
+        "feedback-dev": {
+          "states": 64,
+          "max_sequence_tokens": 11074,
+          "sum_sequence_tokens": 242081,
+          "capped_option_rows": 0,
+          "truncated_state_rows": 0,
+          "truncated_head_rows": 0,
+          "complete_binding_table_rows": 64
+        }
+      },
+      "model_weights_loaded": 0,
+      "model_forwards": 0,
+      "HTTP_calls": 0,
+      "ledger_recorded": false,
+      "cpu_seconds_pending": 22.21859088,
+      "wall_seconds": 19.449592733755708,
+      "source_version": "2a179b58",
+      "scope": "Frozen option_encoding with complete action table, actual tokenizer; no content fingerprints or runtime body changes. Measurement is not model evaluation."
+    },
+    "scope": "RepeatedCPUfields copiedhere arealreadysettled, notnewbillableentries. Old16bytes unchanged, no fulloptionCE gold orlabelresampling."
+  },
+  "matched_cohorts": {
+    "32": {
+      "feedback_states": 192,
+      "training_rows_each_arm": 384,
+      "original_family_prefix_verified": true,
+      "identical_parent_feedback_and_replay_replacement_rows": true,
+      "old_replay_component_counts": {
+        "operation_history": 154,
+        "complementary_evidence": 38
+      },
+      "old_replay_families": 95,
+      "control_component_counts": {
+        "operation_history": 290,
+        "complementary_evidence": 94
+      },
+      "directory": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-matched-v1/sources-32"
+    },
+    "64": {
+      "feedback_states": 384,
+      "training_rows_each_arm": 768,
+      "original_family_prefix_verified": true,
+      "identical_parent_feedback_and_replay_replacement_rows": true,
+      "old_replay_component_counts": {
+        "operation_history": 288,
+        "complementary_evidence": 96
+      },
+      "old_replay_families": 153,
+      "control_component_counts": {
+        "operation_history": 566,
+        "complementary_evidence": 202
+      },
+      "directory": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-matched-v1/sources-64"
+    },
+    "128": {
+      "feedback_states": 768,
+      "training_rows_each_arm": 1536,
+      "original_family_prefix_verified": true,
+      "identical_parent_feedback_and_replay_replacement_rows": true,
+      "old_replay_component_counts": {
+        "operation_history": 576,
+        "complementary_evidence": 192
+      },
+      "old_replay_families": 249,
+      "control_component_counts": {
+        "operation_history": 1152,
+        "complementary_evidence": 384
+      },
+      "directory": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-matched-v1/sources-128"
+    }
+  },
+  "fit_plan": "artifacts/evidence-gap-20261023/original-feedback-v2-nine-fit-plan-v1.json",
+  "active_fit": {
+    "run_id": "source64-answer-seed0-u192-v1",
+    "dispatch": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-fit-dispatch/source64-answer-seed0-u192-v1/driver.json",
+    "exec_session": 65599,
+    "parent_pid": 173458,
+    "child_pid": 173463,
+    "output": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-fitting-v1/source64-answer-seed0-u192-v1",
+    "native_status": "RUNNING",
+    "observed_optimizer_updates": 0,
+    "observed_training_draws": 0,
+    "train_states": 768,
+    "feedback_states": 384,
+    "replay_states": 384,
+    "planned_updates": 192,
+    "planned_draws": 3072,
+    "common_initialization": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/fitting/source256-actions-full-seed0-u524-v1/checkpoints/update-262",
+    "max_len": 16384,
+    "head_max_len": 2048,
+    "micro_batch": 1,
+    "effective_batch": 16,
+    "seed": 0,
+    "target": "answer",
+    "source_version": "2a179b58",
+    "only_one_model_job": true,
+    "automatic_retry": false,
+    "selection": "For each answer/delivery target, highest combined feedback-dev family macro state-pair accuracy; earliest tied update; update0eligible. CE has separately declared answer/delivery views. Report common192 and saved-reload selected validation; old16/new48 strata separate. No Host/protected-test selection.",
+    "trainer_terminal_accounting": "Trainer owns nativecompute. Noofflineledgerwrites whilelive; parent residual/orchestration pending afterterminal. Originalsource32 hasalreadyclosed, do notresume itsoldsession."
+  },
+  "extractive_view_development": {
+    "artifact": "artifacts/evidence-gap-20261023/extractive-view-dev-v1/summary-v1.json",
+    "status": "EXTRACTIVE_VIEW_IMPLEMENTED_AND_MECHANICALLY_VERIFIED;REAL_MODEL_COMPARISON_PENDING",
+    "candidate_status": "Uncommitted/unfrozen development tree; freeze separately before actualnewmodel use. Includes prior alias-order candidate, no frozen2a replacement.",
+    "configuration": {
+      "functional_and_STATE": "memory_control.view_builder=extractive",
+      "benchmark": "query_structure_builder=extractive with existing query_structure_policy",
+      "default": "generated; existing serialized cache/checkpoint fields retained when default selected",
+      "cache_policy_independent": [
+        "rebuild",
+        "version_cache",
+        "incremental"
+      ]
+    },
+    "behavior": "Quote whole selected source bodies using existing nodes/source bindings/role-report-capture metadata. No generation callback, inferred facts/rules/event dates, or question-mark filtering. Same Store, source visibility/version guards, cachecapacity andreturnbudget. Builder changes rebuild from actualsources andcannotreuse theotherbuilder cache; checkpointbuilder mismatch rejected.",
+    "paths": [
+      "src/milai_lab/methods/query_structure.py",
+      "src/milai_lab/methods/evidence_control.py",
+      "src/milai_lab/methods/evidence_reading.py",
+      "src/milai_lab/methods/functional_edit_memory.py",
+      "src/milai_lab/methods/intent_retrieval.py",
+      "src/milai_lab/runners/functional.py",
+      "src/milai_lab/runners/state_memory.py",
+      "src/milai_lab/runners/edit_benchmarks.py",
+      "tests/unit/test_extractive_view.py"
+    ],
+    "product_schema_API_permissions_canonical_changed": false,
+    "lab_config_and_opt_in_evidence_metadata_changed": true,
+    "existing_structure_schema_reused": true,
+    "validation": {
+      "unique_passed_cases": 154,
+      "optional_skipped": 1,
+      "skip": "mempursuit notinstalled",
+      "focused_final": 10,
+      "other_related_cases": 77,
+      "reader_cache_state_cases": 67,
+      "ruff": "passed",
+      "default_core_mypy": "passed1changedcoremodule in originalenvironment",
+      "qualified_mypy": "passed8changedmodules withtasklocaltypes-jsonschema onPYTHONPATH andunused-ignore-comment lintdisabled for2existing import-untyped comments. Notclaiming unmodifiedfullmypy gate.",
+      "package_boundary": "passed",
+      "tools_boundary": "passed; existing6grandfatheredprivate dependenciesunchanged"
+    },
+    "actual_source_probe": {
+      "states": [
+        4,
+        23
+      ],
+      "full_sources": 14,
+      "literal_source_and_metadata_equal": true,
+      "original_Stores_and_canonical_records_unchanged": true,
+      "evidence_only_tokens": [
+        {
+          "state": 4,
+          "extractive": 1884,
+          "raw": 1336
+        },
+        {
+          "state": 23,
+          "extractive": 1669,
+          "raw": 1124
+        }
+      ],
+      "scope": "Both are alreadyexposed dev states; copies only. Evidencearrays notfullHTTPreceipt/Hostcost. LiteralView islargerthanraw here; no compression orHostgain claim."
+    },
+    "failures_retained": [
+      "Firstlint foundmissingbracket innewtest/overlonglines; fixed before regressions.",
+      "RUF001 onintentionalChinese sourcepunctuation handledbylocaldocumentedannotation, sourceunchanged.",
+      "Testenvno pip; type-onlypackageinstalledtoignoredtaskdirectoryviasystempip, no runtimeenv changes.",
+      "Defaultwide mypy missingjsonschema stubs; firstMYPYPATH attempttreatedstubsasfirstparty. QualifiedPYTHONPATHcheck anddefaultcorecheck recordedseparately.",
+      "Firstreal-source diagnostic comparator handbuilt incomplete rawdescriptor andfailedKeyError id. v1script/partialStore/failure retained; v2 usesexistingsearch_sources source_scope descriptors/read_source_materials, no runtimefallback or originalexperimentretry."
+    ],
+    "neural_candidate_calls": 0,
+    "remaining": "F3 realHost/delivery/lifecycle comparison underdeclaredlow/highreuse andfourarrivaltypes. Allnineoriginalfits/reload/Host andotherfullplanrequirements remain."
+  },
+  "saved_reload_selections_completed": 0,
+  "feedback_Host_evaluations_completed": 0,
+  "completed_native_fits": [
+    {
+      "run_id": "source32-answer-seed0-u192-v1",
+      "terminal": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-source32-answer-terminal-v1.json",
+      "analysis": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-native-audits-v1/source32-answer-seed0-u192-v1/analysis.json",
+      "updates": 192,
+      "draws": 3072,
+      "feedback_draws": 1536,
+      "replay_draws": 1536,
+      "train_input_tokens": 15308528,
+      "curve": [
+        {
+          "update": 0,
+          "answer": 0.5179811507936508,
+          "delivery": 0.6067708333333333,
+          "old_operation": 0.807826854448818
+        },
+        {
+          "update": 12,
+          "answer": 0.7242063492063492,
+          "delivery": 0.7083333333333334,
+          "old_operation": 0.6856358148086849
+        },
+        {
+          "update": 24,
+          "answer": 0.681671626984127,
+          "delivery": 0.734375,
+          "old_operation": 0.7679348171354983
+        },
+        {
+          "update": 48,
+          "answer": 0.7666170634920635,
+          "delivery": 0.8020833333333333,
+          "old_operation": 0.7368759171072089
+        },
+        {
+          "update": 96,
+          "answer": 0.7710813492063491,
+          "delivery": 0.8593749999999999,
+          "old_operation": 0.7273449130509763
+        },
+        {
+          "update": 192,
+          "answer": 0.7872023809523809,
+          "delivery": 0.8515625,
+          "old_operation": 0.7466104910556995
+        }
+      ],
+      "in_memory_selection": {
+        "answer": {
+          "update": 192,
+          "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-fitting-v1/source32-answer-seed0-u192-v1/checkpoints/update-192"
+        }
+      },
+      "deployment_selection": null,
+      "old_operation_delta_pp": -6.121636339311842,
+      "legacy_and_new_partitions": {
+        "0": {
+          "combined": {
+            "states": 64,
+            "targets": {
+              "answer": {
+                "counts": {
+                  "unknown": 45,
+                  "directional_pairs": 124,
+                  "ordered_correctly": 65,
+                  "tie": 19
+                },
+                "target": "answer",
+                "families": 8,
+                "families_with_direction": 8,
+                "by_family": {
+                  "memops_A19": {
+                    "states_with_direction": 7,
+                    "state_pair_accuracy_mean": 0.5952380952380951,
+                    "state_pair_loss_mean": 1.4052362799074594
+                  },
+                  "memops_A32": {
+                    "states_with_direction": 8,
+                    "state_pair_accuracy_mean": 0.5625,
+                    "state_pair_loss_mean": 2.050176450667408
+                  },
+                  "memops_B30": {
+                    "states_with_direction": 6,
+                    "state_pair_accuracy_mean": 0.27777777777777773,
+                    "state_pair_loss_mean": 1.6754726176015213
+                  },
+                  "memops_C03": {
+                    "states_with_direction": 8,
+                    "state_pair_accuracy_mean": 0.375,
+                    "state_pair_loss_mean": 2.321526667229977
+                  },
+                  "memops_D25": {
+                    "states_with_direction": 7,
+                    "state_pair_accuracy_mean": 0.5238095238095238,
+                    "state_pair_loss_mean": 0.8314725887705093
+                  },
+                  "memops_E08": {
+                    "states_with_direction": 7,
+                    "state_pair_accuracy_mean": 0.5952380952380951,
+                    "state_pair_loss_mean": 1.6474106808792184
+                  },
+                  "memops_E15": {
+                    "states_with_direction": 7,
+                    "state_pair_accuracy_mean": 0.6428571428571429,
+                    "state_pair_loss_mean": 0.9636280122337967
+                  },
+                  "memops_F01": {
+                    "states_with_direction": 7,
+                    "state_pair_accuracy_mean": 0.5714285714285714,
+                    "state_pair_loss_mean": 1.7635601161046872
+                  }
+                },
+                "family_macro_state_pair_accuracy": 0.5179811507936508,
+                "family_macro_state_pair_loss": 1.582310426674322,
+                "coverage": {
+                  "feedback_states": 64,
+                  "states_with_direction": 57,
+                  "unknown_pairs": 45,
+                  "directional_pairs": 124,
+                  "tie_pairs": 19
+                },
+                "scope": "Reviewed pair ordering; average within covered state, then source family. Conditional on directional coverage, not all states or Host success."
+              },
+              "delivery": {
+                "counts": {
+                  "directional_pairs": 163,
+                  "ordered_correctly": 99,
+                  "tie": 22,
+                  "unknown": 3
+                },
+                "target": "delivery",
+                "families": 8,
+                "families_with_direction": 8,
+                "by_family": {
+                  "memops_A19": {
+                    "states_with_direction": 8,
+                    "state_pair_accuracy_mean": 0.6041666666666666,
+                    "state_pair_loss_mean": 1.180246012611731
+                  },
+                  "memops_A32": {
+                    "states_with_direction": 8,
+                    "state_pair_accuracy_mean": 0.7083333333333333,
+                    "state_pair_loss_mean": 0.7583018071408789
+                  },
+                  "memops_B30": {
+                    "states_with_direction": 8,
+                    "state_pair_accuracy_mean": 0.43749999999999994,
+                    "state_pair_loss_mean": 0.9865439074352692
+                  },
+                  "memops_C03": {
+                    "states_with_direction": 8,
+                    "state_pair_accuracy_mean": 0.4583333333333333,
+                    "state_pair_loss_mean": 2.1845474357729846
+                  },
+                  "memops_D25": {
+                    "states_with_direction": 8,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 0.6564729681099608
+                  },
+                  "memops_E08": {
+                    "states_with_direction": 8,
+                    "state_pair_accuracy_mean": 0.7916666666666666,
+                    "state_pair_loss_mean": 0.7341436408735087
+                  },
+                  "memops_E15": {
+                    "states_with_direction": 8,
+                    "state_pair_accuracy_mean": 0.6041666666666666,
+                    "state_pair_loss_mean": 0.7158236888118933
+                  },
+                  "memops_F01": {
+                    "states_with_direction": 8,
+                    "state_pair_accuracy_mean": 0.5833333333333333,
+                    "state_pair_loss_mean": 1.6415804209477454
+                  }
+                },
+                "family_macro_state_pair_accuracy": 0.6067708333333333,
+                "family_macro_state_pair_loss": 1.1072074852129965,
+                "coverage": {
+                  "feedback_states": 64,
+                  "states_with_direction": 64,
+                  "directional_pairs": 163,
+                  "tie_pairs": 22,
+                  "unknown_pairs": 3
+                },
+                "scope": "Reviewed pair ordering; average within covered state, then source family. Conditional on directional coverage, not all states or Host success."
+              }
+            }
+          },
+          "legacy": {
+            "states": 16,
+            "targets": {
+              "answer": {
+                "counts": {
+                  "unknown": 20,
+                  "directional_pairs": 21,
+                  "ordered_correctly": 7,
+                  "tie": 7
+                },
+                "target": "answer",
+                "families": 8,
+                "families_with_direction": 8,
+                "by_family": {
+                  "memops_A19": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.0,
+                    "state_pair_loss_mean": 5.415522180617993
+                  },
+                  "memops_A32": {
+                    "states_with_direction": 2,
+                    "state_pair_accuracy_mean": 0.5,
+                    "state_pair_loss_mean": 1.1871155499792425
+                  },
+                  "memops_B30": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.5,
+                    "state_pair_loss_mean": 0.5872190614159151
+                  },
+                  "memops_C03": {
+                    "states_with_direction": 2,
+                    "state_pair_accuracy_mean": 0.25,
+                    "state_pair_loss_mean": 5.2723324127461595
+                  },
+                  "memops_D25": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.0,
+                    "state_pair_loss_mean": 1.6580086199810609
+                  },
+                  "memops_E08": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.5,
+                    "state_pair_loss_mean": 4.549675260324532
+                  },
+                  "memops_E15": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.5,
+                    "state_pair_loss_mean": 0.7216735217685739
+                  },
+                  "memops_F01": {
+                    "states_with_direction": 2,
+                    "state_pair_accuracy_mean": 0.25,
+                    "state_pair_loss_mean": 3.5661556419186606
+                  }
+                },
+                "family_macro_state_pair_accuracy": 0.3125,
+                "family_macro_state_pair_loss": 2.869712781094017,
+                "coverage": {
+                  "feedback_states": 16,
+                  "states_with_direction": 11,
+                  "unknown_pairs": 20,
+                  "directional_pairs": 21,
+                  "tie_pairs": 7
+                },
+                "scope": "Reviewed pair ordering; average within covered state, then source family. Conditional on directional coverage, not all states or Host success."
+              },
+              "delivery": {
+                "counts": {
+                  "directional_pairs": 39,
+                  "ordered_correctly": 20,
+                  "tie": 6,
+                  "unknown": 3
+                },
+                "target": "delivery",
+                "families": 8,
+                "families_with_direction": 8,
+                "by_family": {
+                  "memops_A19": {
+                    "states_with_direction": 2,
+                    "state_pair_accuracy_mean": 0.41666666666666663,
+                    "state_pair_loss_mean": 2.3542492493332863
+                  },
+                  "memops_A32": {
+                    "states_with_direction": 2,
+                    "state_pair_accuracy_mean": 0.5,
+                    "state_pair_loss_mean": 1.1871155499792425
+                  },
+                  "memops_B30": {
+                    "states_with_direction": 2,
+                    "state_pair_accuracy_mean": 0.5,
+                    "state_pair_loss_mean": 0.7506291989528799
+                  },
+                  "memops_C03": {
+                    "states_with_direction": 2,
+                    "state_pair_accuracy_mean": 0.25,
+                    "state_pair_loss_mean": 3.7216277365185815
+                  },
+                  "memops_D25": {
+                    "states_with_direction": 2,
+                    "state_pair_accuracy_mean": 0.8333333333333333,
+                    "state_pair_loss_mean": 0.28023959919663194
+                  },
+                  "memops_E08": {
+                    "states_with_direction": 2,
+                    "state_pair_accuracy_mean": 0.8333333333333333,
+                    "state_pair_loss_mean": 1.5166296132069355
+                  },
+                  "memops_E15": {
+                    "states_with_direction": 2,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 0.48407634900093865
+                  },
+                  "memops_F01": {
+                    "states_with_direction": 2,
+                    "state_pair_accuracy_mean": 0.25,
+                    "state_pair_loss_mean": 3.5661556419186606
+                  }
+                },
+                "family_macro_state_pair_accuracy": 0.53125,
+                "family_macro_state_pair_loss": 1.7325903672633947,
+                "coverage": {
+                  "feedback_states": 16,
+                  "states_with_direction": 16,
+                  "directional_pairs": 39,
+                  "tie_pairs": 6,
+                  "unknown_pairs": 3
+                },
+                "scope": "Reviewed pair ordering; average within covered state, then source family. Conditional on directional coverage, not all states or Host success."
+              }
+            }
+          },
+          "new": {
+            "states": 48,
+            "targets": {
+              "answer": {
+                "counts": {
+                  "directional_pairs": 103,
+                  "ordered_correctly": 58,
+                  "unknown": 25,
+                  "tie": 12
+                },
+                "target": "answer",
+                "families": 8,
+                "families_with_direction": 8,
+                "by_family": {
+                  "memops_A19": {
+                    "states_with_direction": 6,
+                    "state_pair_accuracy_mean": 0.6944444444444443,
+                    "state_pair_loss_mean": 0.7368552964557037
+                  },
+                  "memops_A32": {
+                    "states_with_direction": 6,
+                    "state_pair_accuracy_mean": 0.5833333333333334,
+                    "state_pair_loss_mean": 2.3378634175634634
+                  },
+                  "memops_B30": {
+                    "states_with_direction": 5,
+                    "state_pair_accuracy_mean": 0.2333333333333333,
+                    "state_pair_loss_mean": 1.8931233288386426
+                  },
+                  "memops_C03": {
+                    "states_with_direction": 6,
+                    "state_pair_accuracy_mean": 0.4166666666666667,
+                    "state_pair_loss_mean": 1.3379247520579165
+                  },
+                  "memops_D25": {
+                    "states_with_direction": 6,
+                    "state_pair_accuracy_mean": 0.611111111111111,
+                    "state_pair_loss_mean": 0.6937165835687509
+                  },
+                  "memops_E08": {
+                    "states_with_direction": 6,
+                    "state_pair_accuracy_mean": 0.611111111111111,
+                    "state_pair_loss_mean": 1.163699917638333
+                  },
+                  "memops_E15": {
+                    "states_with_direction": 6,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 1.0039537606446673
+                  },
+                  "memops_F01": {
+                    "states_with_direction": 5,
+                    "state_pair_accuracy_mean": 0.7,
+                    "state_pair_loss_mean": 1.042521905779098
+                  }
+                },
+                "family_macro_state_pair_accuracy": 0.5645833333333333,
+                "family_macro_state_pair_loss": 1.2762073703183219,
+                "coverage": {
+                  "feedback_states": 48,
+                  "states_with_direction": 46,
+                  "directional_pairs": 103,
+                  "unknown_pairs": 25,
+                  "tie_pairs": 12
+                },
+                "scope": "Reviewed pair ordering; average within covered state, then source family. Conditional on directional coverage, not all states or Host success."
+              },
+              "delivery": {
+                "counts": {
+                  "directional_pairs": 124,
+                  "ordered_correctly": 79,
+                  "tie": 16
+                },
+                "target": "delivery",
+                "families": 8,
+                "families_with_direction": 8,
+                "by_family": {
+                  "memops_A19": {
+                    "states_with_direction": 6,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 0.7889116003712124
+                  },
+                  "memops_A32": {
+                    "states_with_direction": 6,
+                    "state_pair_accuracy_mean": 0.7777777777777777,
+                    "state_pair_loss_mean": 0.6153638928614243
+                  },
+                  "memops_B30": {
+                    "states_with_direction": 6,
+                    "state_pair_accuracy_mean": 0.4166666666666667,
+                    "state_pair_loss_mean": 1.0651821435960656
+                  },
+                  "memops_C03": {
+                    "states_with_direction": 6,
+                    "state_pair_accuracy_mean": 0.5277777777777778,
+                    "state_pair_loss_mean": 1.672187335524452
+                  },
+                  "memops_D25": {
+                    "states_with_direction": 6,
+                    "state_pair_accuracy_mean": 0.611111111111111,
+                    "state_pair_loss_mean": 0.7818840910810705
+                  },
+                  "memops_E08": {
+                    "states_with_direction": 6,
+                    "state_pair_accuracy_mean": 0.7777777777777777,
+                    "state_pair_loss_mean": 0.47331498342903305
+                  },
+                  "memops_E15": {
+                    "states_with_direction": 6,
+                    "state_pair_accuracy_mean": 0.5833333333333333,
+                    "state_pair_loss_mean": 0.7930728020822114
+                  },
+                  "memops_F01": {
+                    "states_with_direction": 6,
+                    "state_pair_accuracy_mean": 0.6944444444444445,
+                    "state_pair_loss_mean": 1.0000553472907736
+                  }
+                },
+                "family_macro_state_pair_accuracy": 0.6319444444444444,
+                "family_macro_state_pair_loss": 0.8987465245295303,
+                "coverage": {
+                  "feedback_states": 48,
+                  "states_with_direction": 48,
+                  "directional_pairs": 124,
+                  "tie_pairs": 16
+                },
+                "scope": "Reviewed pair ordering; average within covered state, then source family. Conditional on directional coverage, not all states or Host success."
+              }
+            }
+          },
+          "rules_initial": {
+            "states": 8,
+            "targets": {
+              "answer": {
+                "counts": {
+                  "directional_pairs": 16,
+                  "ordered_correctly": 9,
+                  "unknown": 6,
+                  "tie": 2
+                },
+                "target": "answer",
+                "families": 8,
+                "families_with_direction": 7,
+                "by_family": {
+                  "memops_A19": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 0.6641579290218732
+                  },
+                  "memops_A32": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 7.525760628803182e-05
+                  },
+                  "memops_B30": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.0,
+                    "state_pair_loss_mean": 2.077763066073404
+                  },
+                  "memops_C03": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.5,
+                    "state_pair_loss_mean": 0.9961784807190427
+                  },
+                  "memops_D25": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 0.3787004234519513
+                  },
+                  "memops_E08": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 0.7581184505942756
+                  },
+                  "memops_E15": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.3333333333333333,
+                    "state_pair_loss_mean": 3.83122895214721
+                  }
+                },
+                "family_macro_state_pair_accuracy": 0.5476190476190476,
+                "family_macro_state_pair_loss": 1.2437460799448634,
+                "coverage": {
+                  "feedback_states": 8,
+                  "states_with_direction": 7,
+                  "directional_pairs": 16,
+                  "unknown_pairs": 6,
+                  "tie_pairs": 2
+                },
+                "scope": "Reviewed pair ordering; average within covered state, then source family. Conditional on directional coverage, not all states or Host success."
+              },
+              "delivery": {
+                "counts": {
+                  "directional_pairs": 22,
+                  "ordered_correctly": 14,
+                  "tie": 2
+                },
+                "target": "delivery",
+                "families": 8,
+                "families_with_direction": 8,
+                "by_family": {
+                  "memops_A19": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 0.6641579290218732
+                  },
+                  "memops_A32": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 0.732599841581043
+                  },
+                  "memops_B30": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.5,
+                    "state_pair_loss_mean": 1.0390306455406995
+                  },
+                  "memops_C03": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.5,
+                    "state_pair_loss_mean": 0.9961784807190427
+                  },
+                  "memops_D25": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 0.3787004234519513
+                  },
+                  "memops_E08": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 0.7581184505942756
+                  },
+                  "memops_E15": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 0.5992565756416753
+                  },
+                  "memops_F01": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 0.47303513734457114
+                  }
+                },
+                "family_macro_state_pair_accuracy": 0.625,
+                "family_macro_state_pair_loss": 0.7051346854868914,
+                "coverage": {
+                  "feedback_states": 8,
+                  "states_with_direction": 8,
+                  "directional_pairs": 22,
+                  "tie_pairs": 2
+                },
+                "scope": "Reviewed pair ordering; average within covered state, then source family. Conditional on directional coverage, not all states or Host success."
+              }
+            }
+          },
+          "rules_post": {
+            "states": 8,
+            "targets": {
+              "answer": {
+                "counts": {
+                  "directional_pairs": 18,
+                  "ordered_correctly": 12,
+                  "unknown": 4,
+                  "tie": 2
+                },
+                "target": "answer",
+                "families": 8,
+                "families_with_direction": 8,
+                "by_family": {
+                  "memops_A19": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 0.5097414110801161
+                  },
+                  "memops_A32": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.16569092187947568
+                  },
+                  "memops_B30": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.3333333333333333,
+                    "state_pair_loss_mean": 0.9359901845081297
+                  },
+                  "memops_C03": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.0,
+                    "state_pair_loss_mean": 1.0124275704098415
+                  },
+                  "memops_D25": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 1.9885012917511171
+                  },
+                  "memops_E08": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.3729896767249235
+                  },
+                  "memops_E15": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.07851126480329505
+                  },
+                  "memops_F01": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 1.646442739447388
+                  }
+                },
+                "family_macro_state_pair_accuracy": 0.6666666666666666,
+                "family_macro_state_pair_loss": 0.8387868825755358,
+                "coverage": {
+                  "feedback_states": 8,
+                  "states_with_direction": 8,
+                  "directional_pairs": 18,
+                  "unknown_pairs": 4,
+                  "tie_pairs": 2
+                },
+                "scope": "Reviewed pair ordering; average within covered state, then source family. Conditional on directional coverage, not all states or Host success."
+              },
+              "delivery": {
+                "counts": {
+                  "directional_pairs": 21,
+                  "ordered_correctly": 14,
+                  "tie": 3
+                },
+                "target": "delivery",
+                "families": 8,
+                "families_with_direction": 8,
+                "by_family": {
+                  "memops_A19": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 0.5097414110801161
+                  },
+                  "memops_A32": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.16569092187947568
+                  },
+                  "memops_B30": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.3333333333333333,
+                    "state_pair_loss_mean": 0.7270529369139321
+                  },
+                  "memops_C03": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 0.3485856899224347
+                  },
+                  "memops_D25": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 1.9885012917511171
+                  },
+                  "memops_E08": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.3729896767249235
+                  },
+                  "memops_E15": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.5,
+                    "state_pair_loss_mean": 1.5221225387566673
+                  },
+                  "memops_F01": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 1.646442739447388
+                  }
+                },
+                "family_macro_state_pair_accuracy": 0.6875,
+                "family_macro_state_pair_loss": 0.9101409008095068,
+                "coverage": {
+                  "feedback_states": 8,
+                  "states_with_direction": 8,
+                  "directional_pairs": 21,
+                  "tie_pairs": 3
+                },
+                "scope": "Reviewed pair ordering; average within covered state, then source family. Conditional on directional coverage, not all states or Host success."
+              }
+            }
+          },
+          "laya_initial": {
+            "states": 8,
+            "targets": {
+              "answer": {
+                "counts": {
+                  "directional_pairs": 19,
+                  "ordered_correctly": 10,
+                  "tie": 2,
+                  "unknown": 3
+                },
+                "target": "answer",
+                "families": 8,
+                "families_with_direction": 8,
+                "by_family": {
+                  "memops_A19": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.5,
+                    "state_pair_loss_mean": 0.9657038666308538
+                  },
+                  "memops_A32": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.3333333333333333,
+                    "state_pair_loss_mean": 3.911155511386204
+                  },
+                  "memops_B30": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.3333333333333333,
+                    "state_pair_loss_mean": 3.479249120325995
+                  },
+                  "memops_C03": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.5,
+                    "state_pair_loss_mean": 1.0145733705590447
+                  },
+                  "memops_D25": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 0.28658872610422464
+                  },
+                  "memops_E08": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.3333333333333333,
+                    "state_pair_loss_mean": 3.885353126030191
+                  },
+                  "memops_E15": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.00018439373565958127
+                  },
+                  "memops_F01": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.0009414359511505232
+                  }
+                },
+                "family_macro_state_pair_accuracy": 0.5833333333333333,
+                "family_macro_state_pair_loss": 1.6929686938404154,
+                "coverage": {
+                  "feedback_states": 8,
+                  "states_with_direction": 8,
+                  "directional_pairs": 19,
+                  "tie_pairs": 2,
+                  "unknown_pairs": 3
+                },
+                "scope": "Reviewed pair ordering; average within covered state, then source family. Conditional on directional coverage, not all states or Host success."
+              },
+              "delivery": {
+                "counts": {
+                  "directional_pairs": 21,
+                  "ordered_correctly": 13,
+                  "tie": 3
+                },
+                "target": "delivery",
+                "families": 8,
+                "families_with_direction": 8,
+                "by_family": {
+                  "memops_A19": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.5,
+                    "state_pair_loss_mean": 0.9657038666308538
+                  },
+                  "memops_A32": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 0.7644039486318909
+                  },
+                  "memops_B30": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.5,
+                    "state_pair_loss_mean": 0.9953526961172164
+                  },
+                  "memops_C03": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.5,
+                    "state_pair_loss_mean": 3.683990751845666
+                  },
+                  "memops_D25": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 0.28658872610422464
+                  },
+                  "memops_E08": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 0.467550156415526
+                  },
+                  "memops_E15": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 0.4222092206596783
+                  },
+                  "memops_F01": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 0.5650835901653262
+                  }
+                },
+                "family_macro_state_pair_accuracy": 0.6041666666666666,
+                "family_macro_state_pair_loss": 1.0188603695712979,
+                "coverage": {
+                  "feedback_states": 8,
+                  "states_with_direction": 8,
+                  "directional_pairs": 21,
+                  "tie_pairs": 3
+                },
+                "scope": "Reviewed pair ordering; average within covered state, then source family. Conditional on directional coverage, not all states or Host success."
+              }
+            }
+          },
+          "laya_post": {
+            "states": 8,
+            "targets": {
+              "answer": {
+                "counts": {
+                  "directional_pairs": 19,
+                  "ordered_correctly": 7,
+                  "tie": 1,
+                  "unknown": 4
+                },
+                "target": "answer",
+                "families": 8,
+                "families_with_direction": 8,
+                "by_family": {
+                  "memops_A19": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.17117953017702595
+                  },
+                  "memops_A32": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 1.3105448784921456
+                  },
+                  "memops_B30": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.0,
+                    "state_pair_loss_mean": 2.2468054127397172
+                  },
+                  "memops_C03": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.0,
+                    "state_pair_loss_mean": 3.4948669273658695
+                  },
+                  "memops_D25": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.0,
+                    "state_pair_loss_mean": 1.2312919771886774
+                  },
+                  "memops_E08": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.0,
+                    "state_pair_loss_mean": 0.9500157125416758
+                  },
+                  "memops_E15": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.0,
+                    "state_pair_loss_mean": 1.4529249057039864
+                  },
+                  "memops_F01": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 0.6290597833693578
+                  }
+                },
+                "family_macro_state_pair_accuracy": 0.29166666666666663,
+                "family_macro_state_pair_loss": 1.435836140947307,
+                "coverage": {
+                  "feedback_states": 8,
+                  "states_with_direction": 8,
+                  "directional_pairs": 19,
+                  "tie_pairs": 1,
+                  "unknown_pairs": 4
+                },
+                "scope": "Reviewed pair ordering; average within covered state, then source family. Conditional on directional coverage, not all states or Host success."
+              },
+              "delivery": {
+                "counts": {
+                  "directional_pairs": 21,
+                  "ordered_correctly": 10,
+                  "tie": 3
+                },
+                "target": "delivery",
+                "families": 8,
+                "families_with_direction": 8,
+                "by_family": {
+                  "memops_A19": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.17117953017702595
+                  },
+                  "memops_A32": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 1.3105448784921456
+                  },
+                  "memops_B30": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.0,
+                    "state_pair_loss_mean": 2.2468054127397172
+                  },
+                  "memops_C03": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.0,
+                    "state_pair_loss_mean": 3.4948669273658695
+                  },
+                  "memops_D25": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.0,
+                    "state_pair_loss_mean": 1.2312919771886774
+                  },
+                  "memops_E08": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 0.4362458429986115
+                  },
+                  "memops_E15": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.0,
+                    "state_pair_loss_mean": 1.5510118497620409
+                  },
+                  "memops_F01": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.37960504665976297
+                  }
+                },
+                "family_macro_state_pair_accuracy": 0.41666666666666663,
+                "family_macro_state_pair_loss": 1.3526939331729815,
+                "coverage": {
+                  "feedback_states": 8,
+                  "states_with_direction": 8,
+                  "directional_pairs": 21,
+                  "tie_pairs": 3
+                },
+                "scope": "Reviewed pair ordering; average within covered state, then source family. Conditional on directional coverage, not all states or Host success."
+              }
+            }
+          },
+          "fixed_context_initial": {
+            "states": 8,
+            "targets": {
+              "answer": {
+                "counts": {
+                  "directional_pairs": 16,
+                  "ordered_correctly": 10,
+                  "tie": 4,
+                  "unknown": 4
+                },
+                "target": "answer",
+                "families": 8,
+                "families_with_direction": 7,
+                "by_family": {
+                  "memops_A19": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 0.6247425025117537
+                  },
+                  "memops_A32": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.5,
+                    "state_pair_loss_mean": 1.0776038288833563
+                  },
+                  "memops_C03": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.5,
+                    "state_pair_loss_mean": 1.5090758101162438
+                  },
+                  "memops_D25": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.0020301033746570095
+                  },
+                  "memops_E08": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 0.6918401131894223
+                  },
+                  "memops_E15": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 0.651291446870179
+                  },
+                  "memops_F01": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.5,
+                    "state_pair_loss_mean": 0.9677452009115367
+                  }
+                },
+                "family_macro_state_pair_accuracy": 0.6428571428571429,
+                "family_macro_state_pair_loss": 0.7891898579795926,
+                "coverage": {
+                  "feedback_states": 8,
+                  "states_with_direction": 7,
+                  "directional_pairs": 16,
+                  "tie_pairs": 4,
+                  "unknown_pairs": 4
+                },
+                "scope": "Reviewed pair ordering; average within covered state, then source family. Conditional on directional coverage, not all states or Host success."
+              },
+              "delivery": {
+                "counts": {
+                  "directional_pairs": 21,
+                  "ordered_correctly": 13,
+                  "tie": 3
+                },
+                "target": "delivery",
+                "families": 8,
+                "families_with_direction": 8,
+                "by_family": {
+                  "memops_A19": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.5,
+                    "state_pair_loss_mean": 0.937080326004806
+                  },
+                  "memops_A32": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 0.718423854152829
+                  },
+                  "memops_B30": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 0.6570423097188637
+                  },
+                  "memops_C03": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.5,
+                    "state_pair_loss_mean": 1.5090758101162438
+                  },
+                  "memops_D25": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 0.6075125171212633
+                  },
+                  "memops_E08": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 0.6918401131894223
+                  },
+                  "memops_E15": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 0.651291446870179
+                  },
+                  "memops_F01": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.5,
+                    "state_pair_loss_mean": 0.9677452009115367
+                  }
+                },
+                "family_macro_state_pair_accuracy": 0.6041666666666666,
+                "family_macro_state_pair_loss": 0.8425014472606429,
+                "coverage": {
+                  "feedback_states": 8,
+                  "states_with_direction": 8,
+                  "directional_pairs": 21,
+                  "tie_pairs": 3
+                },
+                "scope": "Reviewed pair ordering; average within covered state, then source family. Conditional on directional coverage, not all states or Host success."
+              }
+            }
+          },
+          "fixed_context_post": {
+            "states": 8,
+            "targets": {
+              "answer": {
+                "counts": {
+                  "directional_pairs": 15,
+                  "ordered_correctly": 10,
+                  "tie": 1,
+                  "unknown": 4
+                },
+                "target": "answer",
+                "families": 8,
+                "families_with_direction": 8,
+                "by_family": {
+                  "memops_A19": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 1.4856065393125997
+                  },
+                  "memops_A32": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.0,
+                    "state_pair_loss_mean": 7.562110107133311
+                  },
+                  "memops_B30": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.5,
+                    "state_pair_loss_mean": 0.7258088605459653
+                  },
+                  "memops_C03": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.0004263531774555453
+                  },
+                  "memops_D25": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 0.27518697954187793
+                  },
+                  "memops_E08": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.32388242674950857
+                  },
+                  "memops_E15": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.009581600607674877
+                  },
+                  "memops_F01": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 1.9684203692160567
+                  }
+                },
+                "family_macro_state_pair_accuracy": 0.6875,
+                "family_macro_state_pair_loss": 1.5438779045355562,
+                "coverage": {
+                  "feedback_states": 8,
+                  "states_with_direction": 8,
+                  "directional_pairs": 15,
+                  "tie_pairs": 1,
+                  "unknown_pairs": 4
+                },
+                "scope": "Reviewed pair ordering; average within covered state, then source family. Conditional on directional coverage, not all states or Host success."
+              },
+              "delivery": {
+                "counts": {
+                  "directional_pairs": 18,
+                  "ordered_correctly": 15,
+                  "tie": 2
+                },
+                "target": "delivery",
+                "families": 8,
+                "families_with_direction": 8,
+                "by_family": {
+                  "memops_A19": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 1.4856065393125997
+                  },
+                  "memops_A32": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.000519912431162458
+                  },
+                  "memops_B30": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.5,
+                    "state_pair_loss_mean": 0.7258088605459653
+                  },
+                  "memops_C03": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.0004263531774555453
+                  },
+                  "memops_D25": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.19870961086918915
+                  },
+                  "memops_E08": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.11314566065143918
+                  },
+                  "memops_E15": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.012545180803028707
+                  },
+                  "memops_F01": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 1.9684203692160567
+                  }
+                },
+                "family_macro_state_pair_accuracy": 0.8541666666666666,
+                "family_macro_state_pair_loss": 0.5631478108758621,
+                "coverage": {
+                  "feedback_states": 8,
+                  "states_with_direction": 8,
+                  "directional_pairs": 18,
+                  "tie_pairs": 2
+                },
+                "scope": "Reviewed pair ordering; average within covered state, then source family. Conditional on directional coverage, not all states or Host success."
+              }
+            }
+          }
+        },
+        "192": {
+          "combined": {
+            "states": 64,
+            "targets": {
+              "answer": {
+                "counts": {
+                  "unknown": 45,
+                  "directional_pairs": 124,
+                  "ordered_correctly": 97,
+                  "tie": 19
+                },
+                "target": "answer",
+                "families": 8,
+                "families_with_direction": 8,
+                "by_family": {
+                  "memops_A19": {
+                    "states_with_direction": 7,
+                    "state_pair_accuracy_mean": 0.6904761904761905,
+                    "state_pair_loss_mean": 0.8011834087228864
+                  },
+                  "memops_A32": {
+                    "states_with_direction": 8,
+                    "state_pair_accuracy_mean": 0.75,
+                    "state_pair_loss_mean": 1.0704053190583969
+                  },
+                  "memops_B30": {
+                    "states_with_direction": 6,
+                    "state_pair_accuracy_mean": 0.8333333333333334,
+                    "state_pair_loss_mean": 0.6328635701991651
+                  },
+                  "memops_C03": {
+                    "states_with_direction": 8,
+                    "state_pair_accuracy_mean": 0.6666666666666667,
+                    "state_pair_loss_mean": 1.6265916134360314
+                  },
+                  "memops_D25": {
+                    "states_with_direction": 7,
+                    "state_pair_accuracy_mean": 0.9523809523809524,
+                    "state_pair_loss_mean": 0.28618720899808453
+                  },
+                  "memops_E08": {
+                    "states_with_direction": 7,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 1.6477125042454575
+                  },
+                  "memops_E15": {
+                    "states_with_direction": 7,
+                    "state_pair_accuracy_mean": 0.8809523809523808,
+                    "state_pair_loss_mean": 0.21919618187526074
+                  },
+                  "memops_F01": {
+                    "states_with_direction": 7,
+                    "state_pair_accuracy_mean": 0.8571428571428571,
+                    "state_pair_loss_mean": 0.4783755578609773
+                  }
+                },
+                "family_macro_state_pair_accuracy": 0.7872023809523809,
+                "family_macro_state_pair_loss": 0.8453144205495325,
+                "coverage": {
+                  "feedback_states": 64,
+                  "states_with_direction": 57,
+                  "unknown_pairs": 45,
+                  "directional_pairs": 124,
+                  "tie_pairs": 19
+                },
+                "scope": "Reviewed pair ordering; average within covered state, then source family. Conditional on directional coverage, not all states or Host success."
+              },
+              "delivery": {
+                "counts": {
+                  "directional_pairs": 163,
+                  "ordered_correctly": 136,
+                  "tie": 22,
+                  "unknown": 3
+                },
+                "target": "delivery",
+                "families": 8,
+                "families_with_direction": 8,
+                "by_family": {
+                  "memops_A19": {
+                    "states_with_direction": 8,
+                    "state_pair_accuracy_mean": 0.7916666666666666,
+                    "state_pair_loss_mean": 0.5838220122335568
+                  },
+                  "memops_A32": {
+                    "states_with_direction": 8,
+                    "state_pair_accuracy_mean": 0.9166666666666666,
+                    "state_pair_loss_mean": 0.25628301492238514
+                  },
+                  "memops_B30": {
+                    "states_with_direction": 8,
+                    "state_pair_accuracy_mean": 0.9166666666666667,
+                    "state_pair_loss_mean": 0.25078970886156254
+                  },
+                  "memops_C03": {
+                    "states_with_direction": 8,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 1.8691331037341976
+                  },
+                  "memops_D25": {
+                    "states_with_direction": 8,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.10310548762038299
+                  },
+                  "memops_E08": {
+                    "states_with_direction": 8,
+                    "state_pair_accuracy_mean": 0.875,
+                    "state_pair_loss_mean": 0.768559453040923
+                  },
+                  "memops_E15": {
+                    "states_with_direction": 8,
+                    "state_pair_accuracy_mean": 0.8541666666666666,
+                    "state_pair_loss_mean": 0.22677292996307957
+                  },
+                  "memops_F01": {
+                    "states_with_direction": 8,
+                    "state_pair_accuracy_mean": 0.7916666666666666,
+                    "state_pair_loss_mean": 0.6470619732214716
+                  }
+                },
+                "family_macro_state_pair_accuracy": 0.8515625,
+                "family_macro_state_pair_loss": 0.5881909604496949,
+                "coverage": {
+                  "feedback_states": 64,
+                  "states_with_direction": 64,
+                  "directional_pairs": 163,
+                  "tie_pairs": 22,
+                  "unknown_pairs": 3
+                },
+                "scope": "Reviewed pair ordering; average within covered state, then source family. Conditional on directional coverage, not all states or Host success."
+              }
+            }
+          },
+          "legacy": {
+            "states": 16,
+            "targets": {
+              "answer": {
+                "counts": {
+                  "unknown": 20,
+                  "directional_pairs": 21,
+                  "ordered_correctly": 15,
+                  "tie": 7
+                },
+                "target": "answer",
+                "families": 8,
+                "families_with_direction": 8,
+                "by_family": {
+                  "memops_A19": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.5,
+                    "state_pair_loss_mean": 1.5136482340619501
+                  },
+                  "memops_A32": {
+                    "states_with_direction": 2,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.0034446151218003036
+                  },
+                  "memops_B30": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.0018014750625321868
+                  },
+                  "memops_C03": {
+                    "states_with_direction": 2,
+                    "state_pair_accuracy_mean": 0.5,
+                    "state_pair_loss_mean": 3.625377918495544
+                  },
+                  "memops_D25": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.04045400325134997
+                  },
+                  "memops_E08": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.0,
+                    "state_pair_loss_mean": 6.638305850758956
+                  },
+                  "memops_E15": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.0006248622688712075
+                  },
+                  "memops_F01": {
+                    "states_with_direction": 2,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 1.1293108035013515
+                  }
+                },
+                "family_macro_state_pair_accuracy": 0.7083333333333334,
+                "family_macro_state_pair_loss": 1.6191209703152944,
+                "coverage": {
+                  "feedback_states": 16,
+                  "states_with_direction": 11,
+                  "unknown_pairs": 20,
+                  "directional_pairs": 21,
+                  "tie_pairs": 7
+                },
+                "scope": "Reviewed pair ordering; average within covered state, then source family. Conditional on directional coverage, not all states or Host success."
+              },
+              "delivery": {
+                "counts": {
+                  "directional_pairs": 39,
+                  "ordered_correctly": 30,
+                  "tie": 6,
+                  "unknown": 3
+                },
+                "target": "delivery",
+                "families": 8,
+                "families_with_direction": 8,
+                "by_family": {
+                  "memops_A19": {
+                    "states_with_direction": 2,
+                    "state_pair_accuracy_mean": 0.8333333333333333,
+                    "state_pair_loss_mean": 0.50506009774637
+                  },
+                  "memops_A32": {
+                    "states_with_direction": 2,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.0034446151218003036
+                  },
+                  "memops_B30": {
+                    "states_with_direction": 2,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.0017707642253067322
+                  },
+                  "memops_C03": {
+                    "states_with_direction": 2,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 2.5792286280043997
+                  },
+                  "memops_D25": {
+                    "states_with_direction": 2,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.02018046811016933
+                  },
+                  "memops_E08": {
+                    "states_with_direction": 2,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 2.24001880691036
+                  },
+                  "memops_E15": {
+                    "states_with_direction": 2,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 0.2636213900709988
+                  },
+                  "memops_F01": {
+                    "states_with_direction": 2,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 1.1293108035013515
+                  }
+                },
+                "family_macro_state_pair_accuracy": 0.8125000000000001,
+                "family_macro_state_pair_loss": 0.8428294467113446,
+                "coverage": {
+                  "feedback_states": 16,
+                  "states_with_direction": 16,
+                  "directional_pairs": 39,
+                  "tie_pairs": 6,
+                  "unknown_pairs": 3
+                },
+                "scope": "Reviewed pair ordering; average within covered state, then source family. Conditional on directional coverage, not all states or Host success."
+              }
+            }
+          },
+          "new": {
+            "states": 48,
+            "targets": {
+              "answer": {
+                "counts": {
+                  "directional_pairs": 103,
+                  "ordered_correctly": 82,
+                  "unknown": 25,
+                  "tie": 12
+                },
+                "target": "answer",
+                "families": 8,
+                "families_with_direction": 8,
+                "by_family": {
+                  "memops_A19": {
+                    "states_with_direction": 6,
+                    "state_pair_accuracy_mean": 0.7222222222222222,
+                    "state_pair_loss_mean": 0.6824392711663757
+                  },
+                  "memops_A32": {
+                    "states_with_direction": 6,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 1.4260588870372626
+                  },
+                  "memops_B30": {
+                    "states_with_direction": 5,
+                    "state_pair_accuracy_mean": 0.8,
+                    "state_pair_loss_mean": 0.7590759892264916
+                  },
+                  "memops_C03": {
+                    "states_with_direction": 6,
+                    "state_pair_accuracy_mean": 0.7222222222222223,
+                    "state_pair_loss_mean": 0.9603295117495273
+                  },
+                  "memops_D25": {
+                    "states_with_direction": 6,
+                    "state_pair_accuracy_mean": 0.9444444444444445,
+                    "state_pair_loss_mean": 0.3271427432892069
+                  },
+                  "memops_E08": {
+                    "states_with_direction": 6,
+                    "state_pair_accuracy_mean": 0.7777777777777777,
+                    "state_pair_loss_mean": 0.8159469464932075
+                  },
+                  "memops_E15": {
+                    "states_with_direction": 6,
+                    "state_pair_accuracy_mean": 0.861111111111111,
+                    "state_pair_loss_mean": 0.2556247351429923
+                  },
+                  "memops_F01": {
+                    "states_with_direction": 5,
+                    "state_pair_accuracy_mean": 0.9333333333333332,
+                    "state_pair_loss_mean": 0.21800145960482759
+                  }
+                },
+                "family_macro_state_pair_accuracy": 0.8034722222222223,
+                "family_macro_state_pair_loss": 0.6805774429637363,
+                "coverage": {
+                  "feedback_states": 48,
+                  "states_with_direction": 46,
+                  "directional_pairs": 103,
+                  "unknown_pairs": 25,
+                  "tie_pairs": 12
+                },
+                "scope": "Reviewed pair ordering; average within covered state, then source family. Conditional on directional coverage, not all states or Host success."
+              },
+              "delivery": {
+                "counts": {
+                  "directional_pairs": 124,
+                  "ordered_correctly": 106,
+                  "tie": 16
+                },
+                "target": "delivery",
+                "families": 8,
+                "families_with_direction": 8,
+                "by_family": {
+                  "memops_A19": {
+                    "states_with_direction": 6,
+                    "state_pair_accuracy_mean": 0.7777777777777777,
+                    "state_pair_loss_mean": 0.6100759837292856
+                  },
+                  "memops_A32": {
+                    "states_with_direction": 6,
+                    "state_pair_accuracy_mean": 0.888888888888889,
+                    "state_pair_loss_mean": 0.34056248152258006
+                  },
+                  "memops_B30": {
+                    "states_with_direction": 6,
+                    "state_pair_accuracy_mean": 0.8888888888888888,
+                    "state_pair_loss_mean": 0.3337960237403144
+                  },
+                  "memops_C03": {
+                    "states_with_direction": 6,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 1.6324345956441304
+                  },
+                  "memops_D25": {
+                    "states_with_direction": 6,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.1307471607904542
+                  },
+                  "memops_E08": {
+                    "states_with_direction": 6,
+                    "state_pair_accuracy_mean": 0.9444444444444443,
+                    "state_pair_loss_mean": 0.2780730017511106
+                  },
+                  "memops_E15": {
+                    "states_with_direction": 6,
+                    "state_pair_accuracy_mean": 0.9166666666666666,
+                    "state_pair_loss_mean": 0.2144901099271065
+                  },
+                  "memops_F01": {
+                    "states_with_direction": 6,
+                    "state_pair_accuracy_mean": 0.8333333333333334,
+                    "state_pair_loss_mean": 0.48631236312817844
+                  }
+                },
+                "family_macro_state_pair_accuracy": 0.8645833333333333,
+                "family_macro_state_pair_loss": 0.503311465029145,
+                "coverage": {
+                  "feedback_states": 48,
+                  "states_with_direction": 48,
+                  "directional_pairs": 124,
+                  "tie_pairs": 16
+                },
+                "scope": "Reviewed pair ordering; average within covered state, then source family. Conditional on directional coverage, not all states or Host success."
+              }
+            }
+          },
+          "rules_initial": {
+            "states": 8,
+            "targets": {
+              "answer": {
+                "counts": {
+                  "directional_pairs": 16,
+                  "ordered_correctly": 15,
+                  "unknown": 6,
+                  "tie": 2
+                },
+                "target": "answer",
+                "families": 8,
+                "families_with_direction": 7,
+                "by_family": {
+                  "memops_A19": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.024166629893579025
+                  },
+                  "memops_A32": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.05749920400379638
+                  },
+                  "memops_B30": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.023825493248034527
+                  },
+                  "memops_C03": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.0021956562269485383
+                  },
+                  "memops_D25": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.09745601297335794
+                  },
+                  "memops_E08": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.017955541085475726
+                  },
+                  "memops_E15": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 0.3694583461201107
+                  }
+                },
+                "family_macro_state_pair_accuracy": 0.9523809523809524,
+                "family_macro_state_pair_loss": 0.08465098336447184,
+                "coverage": {
+                  "feedback_states": 8,
+                  "states_with_direction": 7,
+                  "directional_pairs": 16,
+                  "unknown_pairs": 6,
+                  "tie_pairs": 2
+                },
+                "scope": "Reviewed pair ordering; average within covered state, then source family. Conditional on directional coverage, not all states or Host success."
+              },
+              "delivery": {
+                "counts": {
+                  "directional_pairs": 22,
+                  "ordered_correctly": 22,
+                  "tie": 2
+                },
+                "target": "delivery",
+                "families": 8,
+                "families_with_direction": 8,
+                "by_family": {
+                  "memops_A19": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.024166629893579025
+                  },
+                  "memops_A32": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.020535294285683542
+                  },
+                  "memops_B30": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.012091314495392911
+                  },
+                  "memops_C03": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.0021956562269485383
+                  },
+                  "memops_D25": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.09745601297335794
+                  },
+                  "memops_E08": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.017955541085475726
+                  },
+                  "memops_E15": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.1345844155069109
+                  },
+                  "memops_F01": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.03177736164639391
+                  }
+                },
+                "family_macro_state_pair_accuracy": 1.0,
+                "family_macro_state_pair_loss": 0.04259527826421781,
+                "coverage": {
+                  "feedback_states": 8,
+                  "states_with_direction": 8,
+                  "directional_pairs": 22,
+                  "tie_pairs": 2
+                },
+                "scope": "Reviewed pair ordering; average within covered state, then source family. Conditional on directional coverage, not all states or Host success."
+              }
+            }
+          },
+          "rules_post": {
+            "states": 8,
+            "targets": {
+              "answer": {
+                "counts": {
+                  "directional_pairs": 18,
+                  "ordered_correctly": 13,
+                  "unknown": 4,
+                  "tie": 2
+                },
+                "target": "answer",
+                "families": 8,
+                "families_with_direction": 8,
+                "by_family": {
+                  "memops_A19": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 0.4106022720059297
+                  },
+                  "memops_A32": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.0738730024165176
+                  },
+                  "memops_B30": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.3333333333333333,
+                    "state_pair_loss_mean": 1.3743529463835469
+                  },
+                  "memops_C03": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.0,
+                    "state_pair_loss_mean": 4.430001026887215
+                  },
+                  "memops_D25": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.06456170488343531
+                  },
+                  "memops_E08": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.4432819633523142
+                  },
+                  "memops_E15": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.014160298726943606
+                  },
+                  "memops_F01": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 0.9764234005379026
+                  }
+                },
+                "family_macro_state_pair_accuracy": 0.7083333333333334,
+                "family_macro_state_pair_loss": 0.9734070768992258,
+                "coverage": {
+                  "feedback_states": 8,
+                  "states_with_direction": 8,
+                  "directional_pairs": 18,
+                  "unknown_pairs": 4,
+                  "tie_pairs": 2
+                },
+                "scope": "Reviewed pair ordering; average within covered state, then source family. Conditional on directional coverage, not all states or Host success."
+              },
+              "delivery": {
+                "counts": {
+                  "directional_pairs": 21,
+                  "ordered_correctly": 15,
+                  "tie": 3
+                },
+                "target": "delivery",
+                "families": 8,
+                "families_with_direction": 8,
+                "by_family": {
+                  "memops_A19": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 0.4106022720059297
+                  },
+                  "memops_A32": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.0738730024165176
+                  },
+                  "memops_B30": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.3333333333333333,
+                    "state_pair_loss_mean": 1.6282857800551167
+                  },
+                  "memops_C03": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 1.5372111863789488
+                  },
+                  "memops_D25": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.06456170488343531
+                  },
+                  "memops_E08": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.4432819633523142
+                  },
+                  "memops_E15": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.5,
+                    "state_pair_loss_mean": 0.9857722849264529
+                  },
+                  "memops_F01": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 0.9764234005379026
+                  }
+                },
+                "family_macro_state_pair_accuracy": 0.7291666666666666,
+                "family_macro_state_pair_loss": 0.7650014493195773,
+                "coverage": {
+                  "feedback_states": 8,
+                  "states_with_direction": 8,
+                  "directional_pairs": 21,
+                  "tie_pairs": 3
+                },
+                "scope": "Reviewed pair ordering; average within covered state, then source family. Conditional on directional coverage, not all states or Host success."
+              }
+            }
+          },
+          "laya_initial": {
+            "states": 8,
+            "targets": {
+              "answer": {
+                "counts": {
+                  "directional_pairs": 19,
+                  "ordered_correctly": 16,
+                  "tie": 2,
+                  "unknown": 3
+                },
+                "target": "answer",
+                "families": 8,
+                "families_with_direction": 8,
+                "by_family": {
+                  "memops_A19": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.017247875368629276
+                  },
+                  "memops_A32": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 0.4343044177685776
+                  },
+                  "memops_B30": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 2.143812653786679
+                  },
+                  "memops_C03": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.0017228908856006626
+                  },
+                  "memops_D25": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.021512517977275256
+                  },
+                  "memops_E08": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 1.2317508839607234
+                  },
+                  "memops_E15": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.11559632400398173
+                  },
+                  "memops_F01": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.029592201752578262
+                  }
+                },
+                "family_macro_state_pair_accuracy": 0.875,
+                "family_macro_state_pair_loss": 0.49944247068800574,
+                "coverage": {
+                  "feedback_states": 8,
+                  "states_with_direction": 8,
+                  "directional_pairs": 19,
+                  "tie_pairs": 2,
+                  "unknown_pairs": 3
+                },
+                "scope": "Reviewed pair ordering; average within covered state, then source family. Conditional on directional coverage, not all states or Host success."
+              },
+              "delivery": {
+                "counts": {
+                  "directional_pairs": 21,
+                  "ordered_correctly": 18,
+                  "tie": 3
+                },
+                "target": "delivery",
+                "families": 8,
+                "families_with_direction": 8,
+                "by_family": {
+                  "memops_A19": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.017247875368629276
+                  },
+                  "memops_A32": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.10711831013307954
+                  },
+                  "memops_B30": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.09921404321895344
+                  },
+                  "memops_C03": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.0,
+                    "state_pair_loss_mean": 6.927143234761486
+                  },
+                  "memops_D25": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.021512517977275256
+                  },
+                  "memops_E08": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.011190358106294852
+                  },
+                  "memops_E15": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.07727846935100517
+                  },
+                  "memops_F01": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 0.7134103126111162
+                  }
+                },
+                "family_macro_state_pair_accuracy": 0.8333333333333334,
+                "family_macro_state_pair_loss": 0.9967643901909798,
+                "coverage": {
+                  "feedback_states": 8,
+                  "states_with_direction": 8,
+                  "directional_pairs": 21,
+                  "tie_pairs": 3
+                },
+                "scope": "Reviewed pair ordering; average within covered state, then source family. Conditional on directional coverage, not all states or Host success."
+              }
+            }
+          },
+          "laya_post": {
+            "states": 8,
+            "targets": {
+              "answer": {
+                "counts": {
+                  "directional_pairs": 19,
+                  "ordered_correctly": 12,
+                  "tie": 1,
+                  "unknown": 4
+                },
+                "target": "answer",
+                "families": 8,
+                "families_with_direction": 8,
+                "by_family": {
+                  "memops_A19": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 0.9228964792543085
+                  },
+                  "memops_A32": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.3333333333333333,
+                    "state_pair_loss_mean": 1.7157710571947005
+                  },
+                  "memops_B30": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.2492131017438336
+                  },
+                  "memops_C03": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.3333333333333333,
+                    "state_pair_loss_mean": 1.326962896274596
+                  },
+                  "memops_D25": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.43943766111613547
+                  },
+                  "memops_E08": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.0,
+                    "state_pair_loss_mean": 2.9795439779297928
+                  },
+                  "memops_E15": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.5,
+                    "state_pair_loss_mean": 0.9687247850032671
+                  },
+                  "memops_F01": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.034456768291288346
+                  }
+                },
+                "family_macro_state_pair_accuracy": 0.6041666666666667,
+                "family_macro_state_pair_loss": 1.0796258408509902,
+                "coverage": {
+                  "feedback_states": 8,
+                  "states_with_direction": 8,
+                  "directional_pairs": 19,
+                  "tie_pairs": 1,
+                  "unknown_pairs": 4
+                },
+                "scope": "Reviewed pair ordering; average within covered state, then source family. Conditional on directional coverage, not all states or Host success."
+              },
+              "delivery": {
+                "counts": {
+                  "directional_pairs": 21,
+                  "ordered_correctly": 14,
+                  "tie": 3
+                },
+                "target": "delivery",
+                "families": 8,
+                "families_with_direction": 8,
+                "by_family": {
+                  "memops_A19": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 0.9228964792543085
+                  },
+                  "memops_A32": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.3333333333333333,
+                    "state_pair_loss_mean": 1.7157710571947005
+                  },
+                  "memops_B30": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.2492131017438336
+                  },
+                  "memops_C03": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.3333333333333333,
+                    "state_pair_loss_mean": 1.326962896274596
+                  },
+                  "memops_D25": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.43943766111613547
+                  },
+                  "memops_E08": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 0.9982340498633385
+                  },
+                  "memops_E15": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.013274371211638655
+                  },
+                  "memops_F01": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 1.146728176531289
+                  }
+                },
+                "family_macro_state_pair_accuracy": 0.7083333333333334,
+                "family_macro_state_pair_loss": 0.8515647241487299,
+                "coverage": {
+                  "feedback_states": 8,
+                  "states_with_direction": 8,
+                  "directional_pairs": 21,
+                  "tie_pairs": 3
+                },
+                "scope": "Reviewed pair ordering; average within covered state, then source family. Conditional on directional coverage, not all states or Host success."
+              }
+            }
+          },
+          "fixed_context_initial": {
+            "states": 8,
+            "targets": {
+              "answer": {
+                "counts": {
+                  "directional_pairs": 16,
+                  "ordered_correctly": 15,
+                  "tie": 4,
+                  "unknown": 4
+                },
+                "target": "answer",
+                "families": 8,
+                "families_with_direction": 7,
+                "by_family": {
+                  "memops_A19": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 0.4361115157961175
+                  },
+                  "memops_A32": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.00047049928694152033
+                  },
+                  "memops_C03": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.0004516952373411721
+                  },
+                  "memops_D25": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.23962870430635685
+                  },
+                  "memops_E08": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.0220264481895798
+                  },
+                  "memops_E15": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.06507323480951996
+                  },
+                  "memops_F01": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.0012143941136291982
+                  }
+                },
+                "family_macro_state_pair_accuracy": 0.9523809523809523,
+                "family_macro_state_pair_loss": 0.10928235596278371,
+                "coverage": {
+                  "feedback_states": 8,
+                  "states_with_direction": 7,
+                  "directional_pairs": 16,
+                  "tie_pairs": 4,
+                  "unknown_pairs": 4
+                },
+                "scope": "Reviewed pair ordering; average within covered state, then source family. Conditional on directional coverage, not all states or Host success."
+              },
+              "delivery": {
+                "counts": {
+                  "directional_pairs": 21,
+                  "ordered_correctly": 21,
+                  "tie": 3
+                },
+                "target": "delivery",
+                "families": 8,
+                "families_with_direction": 8,
+                "by_family": {
+                  "memops_A19": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.0019317911735775004
+                  },
+                  "memops_A32": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.12419159355459454
+                  },
+                  "memops_B30": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.009796151958226394
+                  },
+                  "memops_C03": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.0004516952373411721
+                  },
+                  "memops_D25": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.08097387618522922
+                  },
+                  "memops_E08": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.0220264481895798
+                  },
+                  "memops_E15": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.06507323480951996
+                  },
+                  "memops_F01": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.0012143941136291982
+                  }
+                },
+                "family_macro_state_pair_accuracy": 1.0,
+                "family_macro_state_pair_loss": 0.03820739815271222,
+                "coverage": {
+                  "feedback_states": 8,
+                  "states_with_direction": 8,
+                  "directional_pairs": 21,
+                  "tie_pairs": 3
+                },
+                "scope": "Reviewed pair ordering; average within covered state, then source family. Conditional on directional coverage, not all states or Host success."
+              }
+            }
+          },
+          "fixed_context_post": {
+            "states": 8,
+            "targets": {
+              "answer": {
+                "counts": {
+                  "directional_pairs": 15,
+                  "ordered_correctly": 11,
+                  "tie": 1,
+                  "unknown": 4
+                },
+                "target": "answer",
+                "families": 8,
+                "families_with_direction": 8,
+                "by_family": {
+                  "memops_A19": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.3333333333333333,
+                    "state_pair_loss_mean": 2.28361085467969
+                  },
+                  "memops_A32": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.0,
+                    "state_pair_loss_mean": 6.274435141553041
+                  },
+                  "memops_B30": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.004175750970363625
+                  },
+                  "memops_C03": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.0006429049854615574
+                  },
+                  "memops_D25": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.6666666666666666,
+                    "state_pair_loss_mean": 1.1002598584786807
+                  },
+                  "memops_E08": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.2011228644413588
+                  },
+                  "memops_E15": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.0007354221941308062
+                  },
+                  "memops_F01": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.04832053332873982
+                  }
+                },
+                "family_macro_state_pair_accuracy": 0.75,
+                "family_macro_state_pair_loss": 1.2391629163289335,
+                "coverage": {
+                  "feedback_states": 8,
+                  "states_with_direction": 8,
+                  "directional_pairs": 15,
+                  "tie_pairs": 1,
+                  "unknown_pairs": 4
+                },
+                "scope": "Reviewed pair ordering; average within covered state, then source family. Conditional on directional coverage, not all states or Host success."
+              },
+              "delivery": {
+                "counts": {
+                  "directional_pairs": 18,
+                  "ordered_correctly": 16,
+                  "tie": 2
+                },
+                "target": "delivery",
+                "families": 8,
+                "families_with_direction": 8,
+                "by_family": {
+                  "memops_A19": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 0.3333333333333333,
+                    "state_pair_loss_mean": 2.28361085467969
+                  },
+                  "memops_A32": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.0018856315509047496
+                  },
+                  "memops_B30": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.004175750970363625
+                  },
+                  "memops_C03": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.0006429049854615574
+                  },
+                  "memops_D25": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.08054119160729205
+                  },
+                  "memops_E08": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.17574964990966058
+                  },
+                  "memops_E15": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.010957883757111563
+                  },
+                  "memops_F01": {
+                    "states_with_direction": 1,
+                    "state_pair_accuracy_mean": 1.0,
+                    "state_pair_loss_mean": 0.04832053332873982
+                  }
+                },
+                "family_macro_state_pair_accuracy": 0.9166666666666666,
+                "family_macro_state_pair_loss": 0.32573555009865296,
+                "coverage": {
+                  "feedback_states": 8,
+                  "states_with_direction": 8,
+                  "directional_pairs": 18,
+                  "tie_pairs": 2
+                },
+                "scope": "Reviewed pair ordering; average within covered state, then source family. Conditional on directional coverage, not all states or Host success."
+              }
+            }
+          }
+        }
+      },
+      "parameter_probes": {
+        "encoder": {
+          "parameter": "encoder.embeddings.tok_embeddings.weight",
+          "changed_elements": 196607859
+        },
+        "head": {
+          "parameter": "head.layers.0.self_attn.in_proj_weight",
+          "changed_elements": 1769471
+        }
+      },
+      "native_compute_already_recorded": {
+        "wall_seconds": 5302.659984807484,
+        "cpu_seconds": 7552.814254657001,
+        "runs": 1,
+        "train_sequence_rows": 3072,
+        "train_input_tokens": 15308528,
+        "train_batch_forwards": 3072,
+        "train_device_forwards": 3072,
+        "train_batch_attempts": 3072,
+        "train_offered_rows": 3072,
+        "train_offered_tokens": 15308528,
+        "dev_forwards": 5160,
+        "dev_sequence_rows": 5160,
+        "dev_input_tokens": 25565598,
+        "dev_state_tokenizations": 5160,
+        "dev_state_tokens": 24179868,
+        "feedback-dev_forwards": 384,
+        "feedback-dev_sequence_rows": 384,
+        "feedback-dev_input_tokens": 1452486,
+        "feedback-dev_state_tokenizations": 384,
+        "feedback-dev_state_tokens": 1279194,
+        "train_feedback_states": 1536,
+        "train_replay_states": 1536,
+        "train_directional_pairs": 2656,
+        "train_tie_pairs": 280,
+        "train_unknown_pairs": 1560,
+        "peak_rss_kib": 5113812,
+        "peak_cuda_allocated_bytes": [
+          8790290432,
+          0
+        ],
+        "ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json"
+      },
+      "audit_processing_cpu_already_settled": true,
+      "scope": "Conditional feedback pair ordering on8exposedfamilies, notHost tasksuccess orsaveddeployment score. Oldoperation drop retained. F16storedweights; CPU FP32reload stillpending."
+    }
+  ],
+  "saved_reload_preparation": {
+    "plan": "artifacts/evidence-gap-20261023/original-feedback-v2-saved-reload-v1/plan.json",
+    "status": "DECLARED_BEFORE_FIRST_SAVED_CPU_FORWARD;NOT_DISPATCHED",
+    "conditions": {
+      "device": "cpu",
+      "visible_cuda_devices": "",
+      "threads": 4,
+      "max_len": 16384,
+      "head_max_len": 2048,
+      "operation_state": "shared_actions",
+      "reference_compile_override": false,
+      "mha_fastpath_enabled": false,
+      "loaded_weight_dtype": "torch.float32"
+    },
+    "evaluator_freeze": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/frozen-curve-analysis-with-pairs-v1/MiLAi-Lab",
+    "literal_equal_core_files": [
+      "tools/retrieval_feedback.py",
+      "src/milai_lab/providers/laya_local.py",
+      "src/milai_lab/methods/laya_memory_policy.py",
+      "src/milai_lab/memory/literal_projection.py",
+      "src/milai_lab/memory/request_text.py"
+    ],
+    "inputs": {
+      "combined": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-saved-reload-v1/inputs/dev-and-feedback.jsonl",
+      "old_operations": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-matched-v1/sources-128/feedback/dev.jsonl",
+      "feedback": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-matched-v1/sources-128/feedback/feedback-dev.jsonl",
+      "old_operation_states": 860,
+      "old_operation_labelled": 616,
+      "feedback_states": 64,
+      "legacy_feedback_states": 16,
+      "new_feedback_states": 48,
+      "feedback_families": 8,
+      "partition_ranges": {
+        "old_operations": [
+          0,
+          860
+        ],
+        "legacy_feedback": [
+          860,
+          876
+        ],
+        "new_feedback": [
+          876,
+          924
+        ]
+      },
+      "byte_equal_in_all_nine_inputs": true
+    },
+    "common_base_reuse": "One actualCPUloadedu262 prediction set is shared because all nine devpayloads/tokenizer/checkpoint/inferenceconditions areidentical. Verifyliteralprojectedinputs andconditions before reuse; no duplicateforward orcost claim.",
+    "selection": "Every0/12/24/48/96/192 candidate getsactualCPUFP32feedback predictions onidentical64states. Per-target combinedfamily/stateaccuracy, earliesttie,0eligible. CE keepsseparateanswer/deliveryselection. Original cost-tie directions/masks unchanged.",
+    "old_skill_retention": "All6 nativeGPUold-dev points remain reported. SavedCPUold860 atcommonbase,each192endpoint andeachuniqueselectedearlyupdate;0/192 reuseexistingcompletepredictions, neverreportunscheduledsavedoldcurvepoints.",
+    "storage_precision": "SDKsave_checkpoint writesmodel.state_dict values asFP16; load_checkpoint returnsmodel.float(). NativeGPUtrainingcurve andFP16stored→FP32CPUcurve differ inserialization anddevice, notanisolatedquantization experiment.",
+    "jobs_started": 0,
+    "candidate_jobs_including_shared_base": 46,
+    "conditional_retention_templates": 36,
+    "maximum_conditional_jobs_if_all_selected_early": 12,
+    "conditional_templates_are_not_all_scheduled": true,
+    "dispatcher": "artifacts/evidence-gap-20261023/run_original_feedback_saved_job_v1.py",
+    "remaining": "SavedCPUactualruns andfullinput/output/ledger verification plus saved-target selector still required; conditionalretention onlyafterverifiedselection.json. No new inference hasrun."
+  },
+  "analysis_tooling": {
+    "tool": "tools/analyze_feedback_fit.py",
+    "tests": "tests/unit/test_feedback_curve_analysis.py",
+    "tested_cases": 18,
+    "ruff": "passed afterlinewrap corrections",
+    "mypy": "passed afterCounter[str] annotation",
+    "tools_boundary": "passed; existing6grandfatheredprivate dependencies unchanged",
+    "validations": [
+      "artifacts/evidence-gap-20261023/feedback-fit-analysis-dev-v1/validation-v1.json",
+      "artifacts/evidence-gap-20261023/feedback-fit-analysis-dev-v1/validation-v2.json"
+    ],
+    "scope": "Native terminal audit/targetselection/legacy-new-phase partitions, notneuralmodelchange. Default CE two views preserved;0eligible, earliesttie, no partialselection."
+  }
+}

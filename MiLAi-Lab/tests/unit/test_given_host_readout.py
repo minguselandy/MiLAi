@@ -10,10 +10,11 @@ from langgraph.store.sqlite import SqliteStore
 from test_given_retrieval import prepared_given, source
 from test_v13_5_functional_integration import scripted
 
-from milai_lab.harness.artifact_io import read_json
+from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.memory.service import MemoryService
 from milai_lab.providers.chat_bridge import IncompleteChatResponse
 from milai_lab.runners.frozen_host_message import memory_store_values
+from milai_lab.runners.frozen_retrieval import replay_call
 from milai_lab.runners.functional import frozen, message, prepare
 from milai_lab.runners.given_host_readout import given_readout_frame, run_given_readout
 
@@ -41,6 +42,111 @@ def bank_values(call):
             call["binding"]["owner"], directory / "memory.lock",
             functional_contract="functional_v1")
         return memory_store_values(service)
+
+
+def empty_given_branch(tmp_path, monkeypatch):
+    root = declared_root(tmp_path)
+    wires = scripted(monkeypatch, lambda *_: {"role": "assistant", "content":
+        '{"answer":"The returned packet is empty; the code is not established."}'}, native=True)
+    original, captured = captured_request(root, tmp_path / "captures")
+    call = read_json(captured / "call.json")
+    handoff = next(a for a in call["initial_actions"] if a["kind"] == "HANDOFF")
+    case = tmp_path / "branch"
+    result = replay_call(captured, case, {"policy": "fixed_context"},
+        source_version="mechanical", intervention={
+            "first_action": handoff, "continuation_steps": 0})
+    assert result["status"] == "COMPLETED" and not result["retrieval_result"]["evidence"]
+    assert original["retrieval_result"]["evidence"]
+    return root, captured, case, wires
+
+
+def test_given_branch_reads_its_actual_packet_without_original_evidence_or_state_repair(
+    tmp_path, monkeypatch,
+):
+    root, captured, case, wires = empty_given_branch(tmp_path, monkeypatch)
+    call_bytes = (captured / "call.json").read_bytes()
+    original = read_json(captured / "call.json")
+    result_path = Path(original["source_root"]) / original["host_result_path"]
+    result_bytes = result_path.read_bytes()
+    output = tmp_path / "branch-readout"
+    report = run_given_readout(captured, output, source_version="mechanical", replay_case=case)
+    assert report["status"] == "COMPLETED" and len(wires) == 1
+    assert report["actual_http_attempts"] == 1
+    assert report["readout_origin"] == "actual_same_before_branch"
+    delivered = json.loads(wires[0]["messages"][1]["content"])
+    assert delivered["memory"] == read_json(case / "replay.json")["result"]["retrieval_result"]
+    assert "4312" not in json.dumps(delivered)
+    assert read_json(output / "frame.json")["schema"] == "given_request_branch_host_readout_v1"
+    assert (captured / "call.json").read_bytes() == call_bytes
+    assert result_path.read_bytes() == result_bytes
+    assert read_json(Path(frozen(root)["config"]["budget_path"])) == report["budget_after"]
+    # The original failure status must not be rewritten to manufacture a branch readout.
+    failed_original = {**original, "status": "ORIGINAL_FAILED"}
+    replay = read_json(case / "replay.json")
+    frame = given_readout_frame(failed_original, replay["result"], frozen(root)["config"],
+                                replay=replay)
+    assert frame["status"] == "READY" and frame["original_call_status"] == "ORIGINAL_FAILED"
+
+
+def test_given_branch_with_changed_before_cannot_send_a_reader_request(tmp_path, monkeypatch):
+    _, captured, case, wires = empty_given_branch(tmp_path, monkeypatch)
+    replay = read_json(case / "replay.json")
+    replay["result"]["frozen_initial_observation_and_actions_equal"] = False
+    write_json(case / "replay.json", replay)
+    with pytest.raises(ValueError, match="SAME_ACTUAL_BEFORE"):
+        run_given_readout(captured, tmp_path / "rejected", source_version="mechanical",
+                          replay_case=case)
+    assert not wires
+
+
+def test_given_branch_revocation_is_checked_in_the_actual_replay_bank(tmp_path, monkeypatch):
+    root = declared_root(tmp_path)
+    wires = scripted(monkeypatch, lambda *_: pytest.fail("Revoked branch must not call reader"))
+    original, captured = captured_request(root, tmp_path / "captures")
+    call = read_json(captured / "call.json")
+    case = tmp_path / "branch"
+    result = replay_call(captured, case, {"policy": "fixed_context"}, source_version="mechanical")
+    assert result["retrieval_result"]["evidence"]
+    bank = case / "runtime" / Path(call["source_bank_root"]).relative_to(call["source_root"])
+    with SqliteStore.from_conn_string(str(bank / "memory.sqlite")) as store:
+        service = MemoryService(store, tuple(call["binding"]["bank"]), call["binding"]["owner"],
+                                bank / "memory.lock", functional_contract="functional_v1")
+        ref = original["incoming_source_receipts"][0]["receipt"]["source_ref"]
+        handle = service.source_fragments(ref)[0]["fragment_handle"]
+        service.forget("removal", "forget", fragment_handles=[handle])
+    report = run_given_readout(captured, tmp_path / "blocked", source_version="mechanical",
+                              replay_case=case)
+    assert report["status"] == "NOT_EXECUTED"
+    assert report["reason"] == "GIVEN_READOUT_VISIBILITY_REVOKED"
+    assert not wires and report["actual_http_attempts"] == 0
+
+
+def test_given_branch_cli_keeps_known_incomplete_readout_and_moves_to_next_binding(
+    tmp_path, monkeypatch,
+):
+    root = declared_root(tmp_path)
+    _, captured = captured_request(root, tmp_path / "captures")
+    call = read_json(captured / "call.json")
+    handoff = next(a for a in call["initial_actions"] if a["kind"] == "HANDOFF")
+    replies = iter([{"role": "assistant", "content": None, "_test_finish_reason": "length"},
+                    {"role": "assistant", "content": '{"answer":"4312"}'}])
+    wires = scripted(monkeypatch, lambda *_: next(replies), native=True)
+    policies = tmp_path / "policies.json"
+    write_json(policies, [
+        {"name": "empty", "capture": captured.name, "policy": {"policy": "fixed_context"},
+         "intervention": {"first_action": handoff, "continuation_steps": 0}},
+        {"name": "raw", "capture": captured.name, "policy": {"policy": "fixed_context"}}])
+    output = tmp_path / "compared"
+    monkeypatch.setattr(sys, "argv", ["run_frozen_retrieval_calls.py", str(captured.parent),
+        str(policies), str(output), "--source-version", "mechanical", "--given-readout",
+        "--continue-known-readout-failures"])
+    runpy.run_path(str(Path(__file__).resolve().parents[2] / "tools/run_frozen_retrieval_calls.py"),
+                   run_name="__main__")
+    driver = read_json(output / "driver.json")
+    assert driver["status"] == "COMPLETED_WITH_MISSING_READOUTS"
+    assert [r["host_readout_status"] for r in driver["completed"]] == ["FAILED", "COMPLETED"]
+    assert len(wires) == 2
+    assert "answer" not in read_json(output / "arm-00/call-00000/host-readout/readout.json")
 
 
 @pytest.mark.parametrize("native", [True, False])

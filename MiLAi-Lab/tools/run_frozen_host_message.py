@@ -13,14 +13,22 @@ def main() -> None:
     parser.add_argument("--presentation", required=True,
                         choices=("current", "request_adjacent_metadata_v1"))
     parser.add_argument("--source-version", required=True)
+    parser.add_argument("--policy-config", type=Path,
+                        help="Policy/checkpoint-only method comparison on the same Host state")
+    parser.add_argument('--host-enable-thinking', action=argparse.BooleanOptionalAction,
+                        default=None, help='Host thinking factor with unchanged token/call caps')
     parser.add_argument("--host-site-packages", type=Path)
     args = parser.parse_args()
     if args.host_site_packages:
         site.addsitedir(str(args.host_site_packages))
+    from milai_lab.harness.artifact_io import read_json
     from milai_lab.runners.frozen_host_message import replay_host_message
 
     result = replay_host_message(args.captured, args.output, args.presentation,
-                                 source_version=args.source_version)
+                                 source_version=args.source_version,
+                                 control_policy=(read_json(args.policy_config)
+                                                 if args.policy_config is not None else None),
+                                 host_enable_thinking=args.host_enable_thinking)
     print(result["status"], "generation calls", result.get("generation_calls"))
     if result["status"] != "COMPLETED":
         raise RuntimeError("Original branch failure retained; no automatic retry")

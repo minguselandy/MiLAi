@@ -5,6 +5,7 @@ import pytest
 
 from milai_lab.datasets.conditional_exposure import (
     condition_stratified_auxiliary_panel,
+    instruction_negative_coverage,
     paired_auxiliary_panel,
 )
 from milai_lab.datasets.conditional_reviews import binary_label
@@ -132,6 +133,26 @@ def test_stratified_panel_rejects_dev_even_without_pairs_and_never_labels_unknow
     unknown = [r for r in rows if not r["gold"]]
     panel = condition_stratified_auxiliary_panel(unknown, [], seed=0)
     assert not panel["rows"] and panel["counts"]["unrepresented_families"] == ["f0", "f1", "f2"]
+
+
+def test_instruction_negative_coverage_is_distinct_from_ordinary_label_coverage():
+    rows, pairs = pool()
+    for row in rows:
+        meta = row['metadata']
+        meta['native_judgments'] = [{'native_field': 'new_negatives'}] if (
+            meta['event_id'].split('/')[1] == '4') else [{'native_field': 'negative_passages'}]
+    panel = condition_stratified_auxiliary_panel(rows, pairs, seed=0)
+    ordinary = [r for r in rows if r['metadata']['event_id'].split('/')[1] != '4' and r['gold']]
+    coverage = instruction_negative_coverage(rows, ordinary)
+    assert coverage['available_known_units'] == coverage['eligible_conditions'] == 3
+    assert coverage['selected_known_units'] == coverage['represented_conditions'] == 0
+    assert len(coverage['missing_conditions']) == 3
+    # Unknown opposite-condition cells retain unknown even when their origin is instructional.
+    all_known = [r for r in rows if r['gold']]
+    full = instruction_negative_coverage(rows, all_known)
+    assert full['selected_known_units'] == 3 and not full['missing_conditions']
+    assert panel['instruction_negative_coverage'] == instruction_negative_coverage(
+        rows, panel['rows'])
 
 
 @pytest.mark.parametrize("mutation", ["candidate", "query", "label"])

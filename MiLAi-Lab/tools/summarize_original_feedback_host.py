@@ -69,9 +69,9 @@ def final_provider_input(
         return missing, None
     if "attempt" not in result:
         return {**missing, "reason": "actual_attempt_identity_unavailable"}, None
-    trace = result_path.with_name(
-        result_path.name.removesuffix("-result.json") + f"-trace-{result['attempt']}.jsonl"
-    )
+    stem = result_path.name.removesuffix(
+        f"-attempt-{result['attempt']}.json").removesuffix("-result.json")
+    trace = result_path.with_name(stem + f"-trace-{result['attempt']}.jsonl")
     if not trace.exists():
         return {**missing, "reason": "actual_trace_unavailable"}, None
     final_id = messages[-1]["id"]

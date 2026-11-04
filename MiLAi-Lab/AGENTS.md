@@ -1,4 +1,5383 @@
-# LATEST: 2026-10-26 USER REQUESTED PAUSE; no experiments until explicit resume
+# USER-PAUSED TRAINING CHECKPOINT v79: 2026-11-04
+
+用户已暂停完整Nov2训练目标；不得自动恢复、启动raw1024或继续研究。用户另行明确要求“提交到github”，只执行该提交/推送任务。新授权覆盖此前no-remote限制，但不授权删除产物或上传ignored模型/原始运行日志。
+最新data/manifests/development-training-progress-20261102-v79.json；可发布摘要data/manifests/development-training-checkpoint-20261104-v1.json和docs/MILAI_DEVELOPMENT_TRAINING_CHECKPOINT_20261104.md。当前无模型进程。
+generated-2048 owner2564767/child2564772已退出，exec65809已exit0；全80首次执行与源审闭合8C/28Q/23W/21F，material21complete56partial3insufficient。full packet/author-decisions/delivered-views/View审/closeout/closeout-validation齐全；首79packet/labels及37Viewrecords逐值reconcile。不要重跑或再poll已关闭session。
+全量129HTTP=120HostTrue+9builderFalse，745849known/newunknown0，wholeclient150.782981604CPU已由owner计账。185raw ranges和37Viewoccurrences/204alias bindings全核；9实际材料refs均已审(并非都忠实)。40Toolreturns全部native匹配/实际Host收到；161ops=9REFRESH+28SEARCH+96READ+28HANDOFF，9build全交付，0USE_VIEW，52无currentretrieval。
+三2048条件完整13/19/8；来源族paired bootstrap：extractive−raw+7.5pp[-5,18.75]；generated−raw−6.25pp[-16.25,0]；generated−extractive−13.75pp[-33.75,3.75]。primary-three-comparison-v1.json已做；没有确认性优势，不是240独立样本或纯表示因果效应。
+本次全量新增validate_generated_condition.py/compare_primary_representations.py已对实际闭合产物运行通过；原paper-export/main manuscript尚未更新三条件，提交摘要记录最新结果与这一边界。
+当前pending75离线timers共45.39CPU，精确列表v79.cost.pending_commands；未结算。generated native/client成本已计，不能再计；出版/提交检查的未计CPU unknown非0。待用户明确resume时再idle结算，不能在暂停期间继续实验。
+剩余原目标：三1024条件、最终候选seed/新增来源确认、LME451→Mem2Act400、最终论文/实测有效Product。目标paused非complete；禁SHA/子代理/第二模型/第二ledger/限额重置。历史进度以下仅供恢复。
+
+# PREVIOUS TRAINING PLAN v78: 2026-11-04
+
+完整Nov2目标ACTIVE；最新data/manifests/development-training-progress-20261102-v78.json。上一轮/本轮均progress。分析短，工具推进；禁SHA/子代理/第二模型/第二ledger/限额重置/remote写。
+唯一live generated-2048 owner2564767/child2564772/exec65809，最近54/80，已/proc核live；native e5-controlled-lifecycle-execution-v1/generated-2048/driver.json。运行时不离线写账、不超时重启。
+最新prefix-review-51全审0..50，下一task51。packet/author-decisions/delivered-views/view-author-decisions/review-progress/lifecycle-operations俱全。扩prefix先核旧51packet/labels、旧32Viewrecords逐值不变再carry；若全80已退出则full绑定同样reconcile。prefix51局部8C15W18Q10F，material16complete35partial，不是整条件成绩。
+8个实际收到generated材料refs均已审，32View input occurrences/174alias bindings。旧5见v77。第6case34(occ25)刷新n6来自真user9:45 correction，n8却将旧Host30/31/32的no-pending提升当前事实，未取最终10:15拒绝。第7case37(occ26) n6将旧错误Host35 nofuture改写为beyondMay14，n7旧Hostnochange冒独立事实；coreMay14可用但原话缺。第8case45(occ27..31) n11 uncertain却断言未试japchae/radish，e6user明确radishgood；n9弱化heat遮味，其余主要节点有据。
+host-claim-view-trace-v1.json：case34实际builder17来源、case37 9来源，旧Host答复body/role/session到builder→View节点逐值绑定。case34无source-session3最终拒绝，答9:45/no-pending虽碰巧正确仍Qpartial，不能原文救View。离线观察曾TypeError把selected动作ID当对象，已按真实ID/result.report修正并记录；未改runtime/重试模型/写账。
+trial-status-error-trace-v1.json：case45实际builder7Source中e6正面radish试吃报告已在输入；输出12节点逐值等于交付View，n11却从e5助手问句造否定，45/46最终答重复。后续47/48/49也沿用；不能归因上游没交付给builder。不是错误率/反事实。
+新增task34Qpartial；35Wpartial明确无未来followup/仅past否定已知May14；36/37Fpartial缺原话。38/39Wpartial旧9:30且助手引句，38/39实际K不继承失败37的View。40/41/42Qcomplete rawsource足初始但无据Darren高耐受/绝未试原recipe及japchae；43/44Qpartial缺新foodscope。45..49Wpartial错radish未试，46..49还把生成节点当用户原话。50Fcomplete，rawuserhotel378/spreadsheet+faithfulassistant4PM/nextmorning足内容题，无需ownquote；保留截断。
+prefix51验证79HTTP=71HostTrue+8builderFalse/455266known，89raw ranges。lifecycle20当前Toolreturns全进Host，8REFRESH+12SEARCH+42READ+12HANDOFF；8build全交付、0USE_VIEW、35无当前retrieval。后续必须按actual范围重汇总，不拿prefix当full。
+当前pending44离线timers共17.89CPU，列表v78.cost.pending_commands；本轮无离线账本写。此前generated prelaunch26timers10.36CPU已结算不可重复。未计作者工作unknown非0。
+raw2048/extractive2048已全闭13/80和19/80；8族配对差+7.5pp区间[-5,18.75]未确认优势且抽取更多tokens，paper表6旧二条件已更新。E5余generated2048在跑、raw1024/extractive1024/generated1024、最终候选seed/新源确认、LME451→Mem2Act400、论文/实测有效Product仍待；不可complete。
+
+# PREVIOUS TRAINING PLAN v77: 2026-11-04
+
+目标ACTIVE；最新data/manifests/development-training-progress-20261102-v77.json。上一轮与本轮均progress。分析短、工具推进；禁SHA/子代理/第二模型/第二ledger/限额重置/remote写。
+唯一live generated-2048 owner2564767/child2564772/exec65809，最近36/80，/proc实核live。native e5-controlled-lifecycle-execution-v1/generated-2048/driver.json；模型live不离线写账、不超时重启。
+最新prefix-review-34已全审0..33；下一task34。packet/author-decisions/delivered-views/view-author-decisions/review-progress-v1.json均有。扩prefix核旧34packet+labels、旧24Viewrecords逐值不变再carry。prefix34局部8C7W12Q7F，delivery12complete22partial，不是整条件成绩。
+目前实际收到5个generated材料refs/24input occurrences/126alias bindings，全部源审。first2缺陷详v76；case20首姓名View(occ10..14)忠实区分Jan改名/Dec入职；case25第二姓名View(occ15..19) n1无据birthname、n3把朋友he错误改为user；case30就诊View(occ20..23)六节点有据但unresolved把已知日期时间医生等重复为未决。旧来源角色/报告时钟保留；全View忠实性与核心任务材料充分性分开，不能用未交付原文救错误节点。
+actor-error-trace-v1.json完整绑case25实际7个builder来源(正文角色时钟)→13个原始JSON返回节点→交付View逐值相等→Host重复user主体错误。只报告实际个案，不推错误率/反事实。未改runtime，未生成TRAIN标签。
+新增task16Fpartial；17/18Qpartial取回真实2FA但缺cleanup/ownprovider和Danielle，另无据breach/phoneupdate；19Fpartial。20/21Qcomplete加legalname；22Ccomplete明确previous/shortenedname与extractive已接受口径一致；23Qcomplete无限定historicalnicknames同raw21；24Wpartial仍Marc未取Marcus反转。25Qcomplete核心names/May2可用但重复View主体错误；26Qpartial以生成改写代用户引句且复述birth/actor；27/28/29Fpartial无原话，29另缺反转。30/31/32Ccomplete合理结合DrLiang/Riverside上下文；33Fpartial新9:45未取。
+新增validate_generated_prefix.py离线复核actual final/failed-last inputs、标签锚点、View覆盖、原始结果分期费用、HostTrue/builderFalse实际wire/capacity，已跑prefix29/31/34。prefix34共49HTTP=44HostTrue+5builderFalse，275821known。别把builderFalse误判Host配置偏移。
+prefix31 lifecycle实测10当前Tool返回全进Host，5REFRESH+5SEARCH+18READ+5HANDOFF、5build全交付、0USE_VIEW、22无当前检索。范围31非full80。show_review --since-previous新增仅在逐值一致时略去已读上一完整答案/重复当前query，保留索引提示和完整packet；新31..33实际输出已验证。
+当前pending26离线timers共8.16CPU，精确列表v77.cost.pending_commands；本轮无离线写账。此前generated prelaunch26timers10.36CPU已结算不可重计。未计作者工作unknown非0。
+raw2048和extractive2048已全闭，13/80与19/80；8族差+7.5pp区间[-5,18.75]未确认优势，paper表6已更新。E5余generated2048在跑、raw1024/extractive1024/generated1024、最终候选seed/新源确认、LME451→Mem2Act400、论文/实测有效Product仍待；目标不可complete。
+
+# PREVIOUS TRAINING PLAN v76: 2026-11-04
+
+目标ACTIVE；最新data/manifests/development-training-progress-20261102-v76.json。分析短、工具推进；禁SHA/子代理/第二模型/第二ledger/限额重置/remote写。
+唯一live generated-2048 owner2564767/child2564772/exec65809；最近19/80。native e5-controlled-lifecycle-execution-v1/generated-2048/driver.json；运行时不离线写账，不超时重启。
+最新prefix-review-16已有packet、author-decisions(0..15)、delivered-views、view-author-decisions、review-progress-v1.json；下一task16。扩prefix先核旧16packet/labels和旧10Viewrecords逐值不变，再carry。16局部4C/6W/5Q/1F不是整条件成绩。
+新bind_generated_views.py根据真实wire：generated省略builder字段；按冻结query_structure.py约定识别。节点/规则均绑Source身份元数据，scope/unresolved另审，不用全文相等检验生成改写。bind_views.py提取共用resolve_source_binding，全部旧48extractive records重新逐值比较未变，validation在generated/source-resolver-validation-v1.json，备份bind_views-before-shared-source-resolver.py。
+review_helpers.py新增generated_view_anchors，验证实际节点text/Source身份但不自动判忠实。旧extractive anchors逻辑不变。first2生成View都已审：content首View scope误把CoreFit关联工作单位，unresolved无据怀疑HR/gym同人；originals首View另将lastNovember具体为previousyear、又添加未有confirmation receipt的完成疑问。各关键联系人节点仍供初始内容题，不能用原文正确事实救View错误。
+0/1/2 Ccomplete，3/4 Wpartial旧无phone；5 Ccomplete；6 Qpartial把第三人称生成节点当用户原话；7 Fpartial截断；8/9 Wpartial新phone未取且再次误引。10/11/12 Qpartial原文Gmail/password/2FA但无cleanup，另无据breach/新绑phone；13 Wpartial明确no other provider proposed与Danielle到达矛盾；14 Qpartial缺audit/proposal；15 Wpartial只assistant recaps却明确onlypassword完成、2FA未confirmed。16起未审。
+prefix16共23HTTP=21HostTrue+2builderFalse，107197known；final/failed last inputs及capacity/wire各角色一致。未来不要强断言所有HTTP都thinkingTrue，query_structure配置本来False。10View occurrences/55alias bindings、2材料refs；历史K不算cachehit。prefix9 lifecycle2REFRESH/2交付/0USE，7无current retrieval，后续full要重绑实际范围。
+当前pending9离线计时1.92CPU，精确列表v76.cost.pending_commands；live期间未写账。v75之前26timers10.36已结算，不能重复。unmetered作者工作unknown非0。
+extractive80全闭19C30Q13W18F、material35/39/6；raw13/80。8族配对差+7.5pp区间[-5,18.75]，无确认优势且extractive更多tokens，paper表6已更新，前5表不变。新条件未闭不回填成绩。
+其后E5余raw1024/extractive1024/generated1024、最终候选三seed/新增来源确认、LME451→Mem2Act400、论文/实测有效Product仍待。详v75/原plan，目标不可complete。
+
+# PREVIOUS TRAINING PLAN v75: 2026-11-04
+
+完整Nov2目标ACTIVE；最新data/manifests/development-training-progress-20261102-v75.json。分析简短，工具推进，禁SHA/子代理/第二模型/第二ledger/限额重置/remote写。
+唯一live generated-2048 owner2564767/child2564772/exec65809；控制e5-controlled-lifecycle-v1/executions/generated-2048/driver.json，native e5-controlled-lifecycle-execution-v1/generated-2048/driver.json。初次80执行中，勿超时重启。模型live时离线只读/写artifact，不写ledger。
+extractive-2048全80源审已闭：19C/30Q/13W/18F，delivery35complete/39partial/6insufficient。11实际收到View材料全部fidelity审，48input occurrences/318节点绑定；另119raw ranges全匹配。closeout-v1.json、closeout-validation-v1.json、lifecycle-trace-validation-v1.json齐全。132HTTP/399837prompt+372427completion=772264known/newunknown0，wholeclient152.318944320CPU已计。不要重跑。
+extractive实际196ops=17REFRESH+42SEARCH+108READ+29HANDOFF；17build中11交付6预算拒绝，0USE_VIEW，57返回/56正常native匹配，case60 read_limit_exhausted单列。忠实View含旧Host问题/错误旧回答，不能提升为用户事实或最新充分性。
+raw13/80与extractive19/80的8来源族配对差+7.5pp、精确multinomial family bootstrap描述性95%[-5,18.75]pp；不是80独立样本，不是确认优势。两个条件final-arrivals均0完整，extractive多13HTTP/79534tokens。first-two-comparison-v1.json及paper表6/正文更新，前5CSV字节未改。
+本轮新增validate_extractive2048.py、compare_closed.py仅离线；26pending计时10.36CPU已在generated prelaunch-settlement-v1.json结算一次。旧21time为GNU verbose，新5为key=value；首次误解析KeyError并导致随后dispatch缺receipt，均在任何model/ledger写之前退出。prelaunch-format-reflection-v1.json保留；修正后结算成功才另行launch，非模型重试。
+当前pending离线timer0；后续新实测另存，live时不结算。unmetered作者工作unknown非0。generated实际schema待看，不可把extractive fullbody断言强加生成节点；原binder只接受extractive，需依据实际wire适配，旧extractive输出保持。
+下一：观测generated已完成prefix，绑定实际Host输入→实际View/源材料审→逐题审。全80退出后closeout再结算启动raw1024，之后extractive1024/generated1024。此前source38..等旧状态以v75为准。
+E1/E2/E3/E4已闭；E5余4条件、最终候选三seed/新增来源确认、LME451→Mem2Act400、论文/实测有效Product仍待。目标不可complete；不能将没证据的Product改动当必须交付。
+
+# PREVIOUS TRAINING PLAN v74: 2026-11-04
+
+完整Nov2目标ACTIVE；最新data/manifests/development-training-progress-20261102-v74.json。本轮extractive源审22→48、opened-Source View格式修复/7材料fidelity审、全80执行闭合与全量绑定，属progress。分析短，工具推进，禁重复长篇推测。
+当前没有模型进程。extractive-2048 owner2302518/child2302545/exec59523已正常退出，native80 COMPLETED_WITH_FAILURES，owner E5_CONDITION80_CLOSED_ACTUAL_SOURCE_REVIEW_PENDING。勿重启或再poll已关闭session；余32源审可直接离线做，未启动generated。
+extractive目录executions/extractive-2048已存在full source-review-packet-v1.json、author-decisions-v1.json(0..47)、delivered-views-v1.json、lifecycle-operations-v1.json。first48 packet和当前48标签逐值carry到full80，prefix-final-reconciliation-v1.json；不要重跑full binder/覆盖文件。下一task index48。
+全View绑定48input occurrences、318node body/metadata匹配全通过；旧prefix48的26records逐值保留(full-view-reconciliation-v1.json)。7个已审material refs的occurrence列表在root view-author-decisions-v1.json扩展，另外4个7-node View材料待语义审，首次case50/65/70/75，对应occurrences[28..32]/[33..37]/[38..42]/[43..47]。先前审查副本view-author-decisions-prefix48-v1.json保留；当前文件status明确partial，不能当全部View已审。
+重要修复：view-binding-v4曾KeyError source_locations，失败timer/脚本备份/reflection保留。真实格式e0=s0表示同包已打开原文，省略冗余locations/metadata。bind_views现用captured pre-final(失败用closed) v13_5_functional retrieval snapshot的实际material ref核结构/Source ref+revision，再与同包raw Source/range/角色/时间逐值绑定；缺失metadata只能由实际已交付原文补，不从Store假装可见。3opened绑定已验证，原5unopened records不变。新helper兼容当前格式，generated仍待实际schema检查。
+当前48任务校准：30由Q/partial改C/complete；31仍Q但material改complete；32仍F但material改complete。相同就诊叙述中唯一Dr.Liang/医院+followup摘要可合理关联，不应加同段重复门槛。原35行标签备份author-decisions-before-clinician-context-v1.json和clinician-context-consistency-v1.json在prefix-review-48，其他旧32行与原22标签未改。raw originals35/36根本无Dr.Liang字段故不变。
+新增22F/partial缺roommate；23Q/partial仅Marc且小View只是旧问题；24W/partial旧Marc反转已到且小View只是错误旧Host答。25/26/27 C/complete，26/27quote=True；28Q/complete漏May2日期的当前引句；29W/partial改回Marcus后仍劝用Marc。30/31/32如校准；33/34W/partial仍9:30。35/36/37 C/complete且36/37quote=True；38F/partial新9:45未进K；39W/partial仍9:30。40/41/42Q/complete完整View却编Lena吃辣/原版未试等；43/44Q/partial缺新食物计划；45Q/complete Darren高耐受/至少4次过强；46Q/complete quote=True但泛化他人耐受；47Q/complete只有开场句，native COMPLETED不能改F。全方法分数仍None。
+observed-capture-clock-query-v1.json：case30实际将原文captured_at作as_of并造2026/November查询，Source无年份/occurred_at。final答案未写年份不虚构final-year错误；后续实际返回有capture晚于as_of，因此不宣称硬时间过滤或因果损失。
+全80 lifecycle trace已执行：57当前Toolreturns，56正常native-result匹配(另拒绝回执待final核验)，196ops=17REFRESH/42SEARCH/108READ/29HANDOFF。17build报告，11view_opened、6material_budget_exhausted，0USE_VIEW；11当前View返回均进bound input。历史K次数不是cache hit。后续closeout需核这些边界，不以打开View证明任务正确。
+extractive模型费用已计：132HTTP/772264known/newunknown0，wholeclient152.318944320CPU(详owner driver/client phase)，不重计。raw已完整闭合13C/32Q/20W/15F、119HTTP/692730known/147.297368889CPU，不重跑。当前21pending offline timers7.59CPU见v74.cost.pending_commands，尚未结算；旧25timers16.29及更早37timers53.98/E4已计过。
+立即完成extractive task48..79与新4View fidelity审；更新root View review覆盖全部48occurrences/11material refs；然后close_condition.py extractive-2048、验证all80/actual wire/cost/trace并标注View审已闭、paper表6更新、实际idle仅settle pending timers后启动一个generated-2048。不要在源审缺口未闭时声称方法完成。
+E4七方法全闭18/17/17/14/13/19/17，未确认优势。其后E5余generated2048/raw1024/extractive1024/generated1024、final3seed/新源确认、LME451→Mem2Act400、最终论文/实测有效Product仍待，目标不可complete。禁SHA/子代理/第二模型/第二ledger/限额重置/remote写。
+
+# PREVIOUS TRAINING PLAN v72: 2026-11-04
+
+完整Nov2目标ACTIVE；最新data/manifests/development-training-progress-20261102-v72.json。本轮extractive源审4→22、原生View操作/请求路由审计与raw80操作核验，属progress。分析简短，以工具推进；禁重复长篇推测。
+唯一live E5 extractive-2048 coordinator2302518/child2302545/exec59523，最近42/80；native e5-controlled-lifecycle-execution-v1/extractive-2048/driver.json。禁第二模型/live离线写账/timeout重启。
+最新prefix-review-22/source-review-packet-v1.json和author-decisions-v1.json已审indices0..21，下一22。旧4→17→22 packet与标签逐值保持。扩prefix核旧22records完全一致再carry22标签；全80实际退出后full bind/reconcile。
+View绑定prefix22 delivered-views-v1.json仍只有同一初始View的5个历史输入occurrences(1当前交付+4K)，35node bindings=7Source×5全部literal/metadata一致；无新uniqueView。view-author-review-v1.json从prefix17逐值复制，初始scope忠实(4user/3assistant/unknown reported time)，不推当前新事实充分性。
+新增任务4W/partial旧View漏新phone/提案；5Q/partial只有work-change assistant recap无CoreFit/user-phone；6/7Q/partial用assistant当用户引句；8/9W/partial各一次检索只自身旧答，仍错无phone。10F/partial缺cleanup；11F/insufficient仅旧问题。12Q/partial仅2FA，缺Gmail/cleanup/password且unproved phone-update；13/14Q/partial明确retrieved-records范围的缺证据表达，不能完成新增提案/audit，不按全历史无提案事实断言处理。15/16W/partial明确only completed changes是security，错误排除已报告cleanup，16另引助手冒用户。17F/partial；18Q/partial去掉only但缺cleanup/Danielle且引助手；19Q/partial多取Outlook助手recap，仍缺audit/cleanup/Danielle原话。20F/insufficient未取证；21F/partial只有ChenWei/May2缺Marc。
+trace_lifecycle.py新增实际当前operation_result/Tool/Host输入核对，适用condition或prefix。prefix22有21当前Tool返回全匹配native，82operations=1REFRESH_VIEW+16SEARCH+50READ+15HANDOFF；1refresh/view_opened/build，0USE_VIEW；仅1当前View返回/被Host收到。历史K出现不能当cache hits/新delivery/成本。
+prefix22/request-routing-v1.json：19/21原生请求包含original_source，其中16有operations但0View操作；另2请求仅1有ops即refresh。执行快照runtime/src/milai_lab/methods/cache_memory_policy.py明确not-originals才走refresh/use，original_source路由原文/fallback。View仍可在菜单中；这是policy routing不是宣称动作普遍非法，不是表示本身因果效果。
+raw-2048/lifecycle-operations-v1.json及lifecycle-trace-validation-v1.json全80核验：201ops=46SEARCH/128READ/27HANDOFF，0View操作/返回，40Tool中39普通native-result逐值匹配；另1case40 read_rejected/error零操作无普通result事件，实际Tool回执保留。raw质量13C/32Q/20W/15F、材料30complete/46partial/4insufficient、119HTTP/692730known/147.297368889CPU不变且已计费。
+review_helpers支持raw source_anchors和实际literal extractive view_anchors；bind_views仅已观察query_structure/extractive schema。新View/混合metadata/generated需实际核对；不要用原文rescue给有问题View背书。当前prefix22 source/View引文验证通过，first4标签逐值不变。
+既有25timers16.29CPU、raw全部费用及更早E4已计过。当前12 pending timers2.73CPU见v72.cost.pending_commands，live禁离线ledger写，作者未测unknown。没有新模型/没有SHA/没有子代理。
+下步继续extractive index22..，并最终全80源审/View语义审/操作trace/成本closeout；其后generated2048/raw1024/extractive1024/generated1024逐一idle结算启动。final3seed/新源确认、LME451→Mem2Act400、最终论文/实测有效Product仍待，目标不可complete。禁第二ledger/限额重置/remote写。
+
+# PREVIOUS TRAINING PLAN v71: 2026-11-04
+
+完整Nov2目标ACTIVE；最新data/manifests/development-training-progress-20261102-v71.json。本轮raw80全闭/论文表6/计量核验并启动extractive，属progress。分析简短，真实工具推进，禁重复长篇推测。
+唯一live已换E5 extractive-2048 coordinator2302518/child2302545/exec59523，最近14/80；native e5-controlled-lifecycle-execution-v1/extractive-2048/driver.json。旧raw2127713/2127721退出。禁第二模型/live离线写账/timeout重启。
+raw-2048全80闭合：13C/32Q/20W/15F，delivery30complete/46partial/4insufficient，8来源族。closeout-v1.json/closeout-validation-v1.json/全80author-decisions均在executions/raw-2048；first76 packet/labels逐值reconcile到full80。15失败=14truncated+1JSON malformed，均保留。
+raw119HTTP=shared119，355146prompt+337584completion=692730known，newunknown0；当前40Toolreturns/1error，201ops/128reads/1known-ref-read/3material budgetreject。85当前original_source evidence对象，无View。重复K在内337Source范围及metadata全匹配。whole client147.297368889CPU已计一次，native local模型CPU0，wall2484.123914秒；actual Host wire/capacity均True。
+raw两流最后到达位置均0完整；这不是与其他View条件的比较或独立确认。论文table6-controlled-lifecycle.csv/evidence/manuscript与lifecycle-validation-v1.json已加入raw，其他五条件null/not_closed；前五张E4等表逐值不变，before-e5-first-actual-v1保留旧稿。勿重跑raw。
+extractive最新prefix-review-04绑定4已全部源审：0Q/complete(initial early-March被Host改mid-March)，1C/complete，2Q/complete同日期误写，3W/partial新phone已到但无current retrieval仍None。下一index4。author-decisions带view_anchors；这些不是raw_source anchors。
+首次实际View kind=query_structure,builder=extractive，7个node全文=原始7Source，source_locations含Source ref/revision，source_metadata shared+by_alias保留4user/3assistant、reported_at未知与captured_at。delivered-views-v1.json有4occurrences(1当前交付+3历史K)、28nodebindings全逐值匹配；view-author-review-v1.json评其在初始scope忠实，不证明后续任务材料足够。view-review-validation-v1实际验证通过。
+新bind_views.py CONDITION_OR_PREFIX仅支持已观察extractive query_structure，绑定actual completed-final或failed-last输入中的View，created-undelivered不算；source_roles/clock/session/ref/revision/text逐值检查。别把reported节点类型当用户事实，角色从metadata取。将来不同/混合metadata或generated schema须按实际输出适配，不靠盲默认。
+review_helpers.py现在可选view_anchors=[[message_index,evidence_index,node_id,quote]]；须已运行bind_views.py，验证实际node文本及literal full-body/metadata source绑定后写bound_view_anchors。现仅literal extractive支持；raw旧80标签未改。新增View语义fidelity另存，raw rescue不能给View背书。
+扩extractive prefix先bind_review.py --completed-prefix读实际目录，assert旧4 packet records逐值相等carry4标签，再bind_views.py新prefix，核旧View记录并继续来源/角色/时间/条件/原话审阅。全80实际退出后full bind/reconcile、全源审、Viewfidelity全审，close_condition.py；其additional_View_fidelity_review_required字段当前只检测derived存在，需在实际审计关闭后单独注明已完成，不能直接当审计通过。
+25pending timers16.29CPU已在extractive-2048/prelaunch-settlement-v1.json实际idle结算一次，raw全部HTTP/client也已计；更早37timers53.98和E4不重计。当前3新pending timers0.27CPU见v71.cost.pending_commands，live禁止离线ledger写，未测作者工作unknown。
+E4七方法全闭18/17/17/14/13/19/17，rules/head v2，未确认优势。后续E5余generated2048/raw1024/extractive1024/generated1024、final3seed/新源确认、LME451→Mem2Act400、最终论文/实测有效Product仍待，目标不可complete。禁SHA/子代理/新服务/第二ledger/限额重置/remote写。
+
+# PREVIOUS TRAINING PLAN v69: 2026-11-04
+
+完整Nov2目标ACTIVE；最新data/manifests/development-training-progress-20261102-v69.json。本轮E5源审40→62、首次工具拒绝用量核对与前60成本分区验证，属progress。分析保持简短，工具推进，禁重复长篇推测。
+唯一live E5 raw-2048 coordinator2127713/child2127721/exec68931，最近66/80；native e5-controlled-lifecycle-execution-v1/raw-2048/driver.json。禁第二模型/live离线写账/timeout重启。
+最新prefix-review-62/source-review-packet-v1.json及author-decisions-v1.json已审indices0..61(前6族全审，第7族前2)，下一index62。42→52→55→57→62 packet旧records逐值相等，旧标签沿用；扩prefix须核旧62records全相等再carry62标签；全80实际退出后ordinary full bind并reconcile。
+固定E5 C/Q/W/F及delivery complete/partial/insufficient/unknown；review_helpers.py实际Source/metadata锚定，show_review.py --compact --since-previous只省略上一个已审completed provider input的literal等值前缀，打印新system到达与新增消息。failed_last_*独立材料边界，不从失败推理修答案、不借failed Host历史。
+新增40..49饮食：40W/partial误说已吃radish未试；41/42F/partial截断；43/44W/partial仍错radish并缺新增食物/意图。45Q/complete额外从Darren说不辣推出高耐受、把未报告japchae当确定没吃；46Q/complete且quote=True(Darren朋友误称同事、泛化耐受)；47Q/complete且quote=True另无据称Darren全辣吃得开心；48F/partial缺新增butter chicken；49Q/partial缺后段gochujang/味层/未试katsu-mirin-vindaloo-餐厅计划及原话，没有谎称新店已吃。
+50Q/partial仅378hotel；51F/partial；52Q/partial新检索仅旧问答；53F/partial缺早晨独审新报告；54Q/partial再取旧无信息答复，explicit retrieved scope不能完成routine/peer-review。55F/complete: initial JSON_ACTION_MALFORMED，但user spreadsheet+378+忠实assistant4PM/次晨足够content。56F/insufficient:前轮failed不继承Hosthistory，实际只旧问题+genericassistant提示。57/58/59 Q/insufficient完成但无法作答，只有泛泛报错叙述/自身问题及旧non-answer；没有usable所问事实。
+60Q/complete：16correct/referenceP1→P3/mostly downgrades/overall%unknown均对，但初始仅lateMarch-Apr15，不该自行假设March20算27天率；明确假设故Q而非声称用户已核实分母，仍不能C。61F/complete：截断，K足够正确说明精确split/duration/rate未知，不接受前次假设为事实。其余0..39保持，见v68/v67。
+close_condition.py全80仍未运行；前60真实成本分区已验证92HTTP/504924known与native前后差相等，历史K不重计。case40的read_rejected工具错误保留且usage零操作；共3返回/1error/7operations/1known-ref-read/1budget-exhausted通过rejected-tool-summary-validation-v1.json。完整closeout须owner/child退出及80源审，然后统计8family/两流×5位置/失败/成本；derived View出现仍另需fidelity审计。
+E4七主方法全闭18/17/17/14/13/19/17，rules/head v2，main21pairs/nativeF1/图/论文已闭；未确认优势。失败材料v4全56，旧53标签/224rows保持。E5 case19内生检索案例报告保留，raw无View，不推广因果或TRAIN标签。
+prior37timers53.98CPU及E4native/client已计过；当前17pending timers8.42CPU见v69.cost.pending_commands，live不写离线ledger，未测作者工作unknown。所有首次错误保留，不引入SHA。
+raw2048完成后实际idle结算，再依序单任务extractive2048/generated2048/raw1024/extractive1024/generated1024。final3seed/新源确认、LME451→Mem2Act400、最终论文/实测有效Product仍待，目标不可complete。禁SHA/子代理/新服务/第二ledger/限额重置/remote写。
+
+# PREVIOUS TRAINING PLAN v68: 2026-11-04
+
+完整Nov2目标ACTIVE；最新data/manifests/development-training-progress-20261102-v68.json。本轮E5源审20→40与真实成本汇总函数验证，属progress。分析简短、工具推进，禁长篇重复推测。
+唯一live E5 raw-2048 coordinator2127713/child2127721/exec68931；最近50/80，native在e5-controlled-lifecycle-execution-v1/raw-2048/driver.json。禁第二模型/live离线写账/timeout重启。
+最新绑定executions/raw-2048/prefix-review-42/source-review-packet-v1.json，author-decisions-v1.json已审indices0..39(4来源族)，下一index40。21→39→42旧packet记录逐值相等并carry标签；最终full80亦须literal reconcile最新prefix。只读取返回且CAPTURED行，不借未返回答案。
+固定E5 C/Q/W/F与delivery complete/partial/insufficient/unknown，不用E4状态。review_helpers.py验证Source原文+role+时间metadata，show_review.py --compact --since-previous会在当前实际非system前缀逐值等于上一个已审completed输入时省略旧前缀，并打印新system到达信息/新增消息；失败按previous_completed_host_message找前次，不借failed答案。
+新增20..39：20C/complete；21Q/complete未经依据将Marcus/Wei称historical nicknames；22F/complete首次截断但K够且无关到达；23Q/complete同昵称缺陷；24W/partial实际已改回Marcus却仍Marc并否认future branding。25C/complete；26Q/complete且quote=True(用户引句对，但额外把Jan偏好/settled当成began job，实际firm Dec)；27Q/complete(混入assistant wording的引句)；28Q/complete(同引句问题并说未记录company names)；29W/partial仍旧Marc。30/31/32 C/complete；33/34 W/partial改到9:45后仍9:30。35Q/partial缺clinician等；36Q/partial并用assistant quote，2new检索只自身问答；37F/partial截断；38/39 W/partial更新后仍9:30、缺医生与用户引句。首20不变，详见v67。
+close_condition.py已实现但全80尚未运行。summarize_position用真实前40验证，56HTTP/299986known与原生预算首尾差相等；case39历史4Tool/current0、case36current2保持，K不重复计费。全80闭合输出8family/两流×5位置/答案与材料/失败/成本；derived evidence出现时仍需额外View fidelity审计，不因主grade完毕冒充该审计完成。
+原source-protocol C/Q/W/F应用说明review-application-note-v1.json不变：content无强制原话可用忠实assistant recap，但originals2–5必须用户原话。额外无据/非核心缺陷Q；当前必要fact明确错W。失败last-response材料独立，F不修复。
+observed-endogenous-retrieval-v1.json case19两次检索四piece全内生，原audit已到却未交付；raw无View，单案例非普遍性/因果反事实/训练标签。E4七主方法与失败材料v4/论文图全部闭合，分数18/17/17/14/13/19/17，未确认优势，不重跑。
+prior37timers53.98CPU及E4费用已原账本计过；当前11 pending timers3.43CPU见v68.cost.pending_commands，live不写离线账本。未测作者工作unknown。旧验证失败body唯一匹配已保留且metadata匹配修正通过。
+raw2048全80关闭/全审/closeout后实际idle结算，依序单任务extractive2048/generated2048/raw1024/extractive1024/generated1024；final3seed/新源确认、LME451→Mem2Act400、最终论文/实测有效Product仍待，目标不可complete。禁SHA/子代理/新服务/第二ledger/限额重置/remote写。
+
+# PREVIOUS TRAINING PLAN v67: 2026-11-04
+
+完整Nov2目标ACTIVE；最新data/manifests/development-training-progress-20261102-v67.json。本轮实际E5源审first20、失败材料边界与内生检索案例，属progress。分析简短、真实工具推进，禁长篇重复推测。
+唯一live E5 raw-2048 coordinator2127713/child2127721/exec68931；最近37/80，native在e5-controlled-lifecycle-execution-v1/raw-2048/driver.json。禁第二模型/live离线写账/timeout重启。
+E5最新绑定executions/raw-2048/prefix-review-21/source-review-packet-v1.json，author-decisions-v1.json已审indices0..19(2来源族)，下一index20。first15旧字段逐值保留，新增failed_last_*独立边界；此前first7→15全记录相等。扩prefix必须assert当前21records逐值相等再carry20标签；全80实际退出后full bind/reconcile。
+E5固定源协议C/Q/W/F与delivery complete/partial/insufficient/unknown，不用E4状态。review_helpers.py add(condition, rows)锚定actual Source与metadata；show_review.py支持--compact去重原文体，保留完整wire文件。review-application-note-v1.json明确既定标准应用：content无强制原话可用忠实assistant recap；originals positions2-5必须用户原话，不能助手冒充。
+首20：0/1/2/5 C-complete；3/4 F-partial(截断且无current retrieval，已知K旧材料缺更新)；6/7 Q-partial助手recap充用户工作变更引文；8/9 W-partial新phone已到达却仍说None且无检索。10/11 Q-complete把can-use-labels称为确认已实施系统；12 Q-complete把primary加强为only active；13/14 W-partial否认实际新增Danielle提议且无新检索；15/16 Q-partial缺cleanup，16另缺用户原话；17 Q-partial新增检索只返回自身旧答/问题+fixture助手，仍缺cleanup；18 W-partial否认新proposal；19 Q-partial未否认proposal存在但缺audit/cleanup/用户引句，only-reactive概括无据。初始安全/组织、忠实recap与额外无据断言区分，别改评分去凑结果。
+E5 binder现在对失败保留failed_last_provider_messages/input/source_material_binding/source_inventory_for_identity_only，实际last response识别材料，不修答案；completed原final字段不变。Source函数保留字面重复候选并以captured_at/observed_at及reported_at/occurred_at匹配，摄入时间不是事件日期。
+observed-endogenous-retrieval-v1.json：case19当前2次retrieve共4pieces均为内生先前Host答复/问题；新external s3t7 audit报告确在preHost Source但未进实际final input，仍Q/partial。raw无View；这是一条事后案例，不是普遍性/反事实因果收益，也不是TRAIN标签。
+E4七主方法已全闭18/17/17/14/13/19/17，rules/head v2，其余v1；main-comparison21pairs、nativeF1、完整图/论文均已闭核。agg-old+6.25pp CI[-9.375,21.875]；agg-simple+3.125pp CI[-15.625,21.875]未确认。失败材料v4 56闭，13S/30I/13U，旧53labels/224rows保留。
+prior37 offline timers53.98CPU已在raw2048/prelaunch-settlement-v1.json计过，所有E4 native/client已计。当前8 pending timers1.37CPU见v67.cost.pending_commands，live禁离线写账。未测作者工作unknown。初次body唯一匹配验证失败保留prefix-binding-reflection-v1；时间匹配修正已通过，不重跑模型。
+raw2048全80后还需完整E5 closeout/成本/连续位置和流汇总；其后依序extractive2048/generated2048/raw1024/extractive1024/generated1024，每次实际idle结算后单任务启动。final3seed/新源确认、LME451→Mem2Act400、最终论文/实测有效Product仍待，目标不可complete。禁SHA/子代理/新服务/第二ledger/限额重置/remote写。
+
+# PREVIOUS TRAINING PLAN v66: 2026-11-04
+
+完整Nov2目标ACTIVE；最新data/manifests/development-training-progress-20261102-v66.json。上一轮真实关闭E3/E4并启动E5，属progress。分析简短，工具推进；禁长篇重复推测。
+唯一live已换E5 raw-2048：coordinator2127713/child2127721/exec68931；最近9/80，native在e5-controlled-lifecycle-execution-v1/raw-2048/driver.json。旧E4 owner1796472/1796557已退出。禁第二模型/live离线写账/timeout重启。
+E4七主方法全闭：fixed-prefix18/fixed-context17/rules17(v2)/head14(v2)/inc13/aggregate19/continued-old17，分母32。old17C/5Q/7I/3F，材料18S/7I/7U；29final inputs/168ranges/unmatched0；fail2/11/31，noTool12/26。原生F1 .08283718907361787。
+old first31逐值reconcile到full32，closeout-v1/native-results-v1已完成。67HTTP/240local/307shared/235864known/unknown0；whole17351.367849420CPU(native17235.112140570+residual116.255708850)已原账本计费。
+main-comparison-v1.json/main-methods-v1.csv全7方法21pairs；aggregate-old +6.25pp CI[-9.375,21.875]，aggregate-strongest-simple +3.125pp CI[-15.625,21.875]，均未确认、无部署。plot_e4_main.py真实图已生成PNG/SVG/PDF并视检，paper export/table/manuscript/validation已同步，before-e4-complete-v1保留旧论文。
+失败材料v4全56闭合：13充分/30不足/13未知，225ranges/unmatched0，8条件256位置仍32族。旧53packet/labels与224combined rows逐值保留。新增old case2I/11S/31I；主失败/评分/F1/cost不变。
+E5六配置/owner既有准备，首raw2048已启动；余extractive2048/generated2048/raw1024/extractive1024/generated1024逐一执行。源协议source-protocol-v1.json固定C/Q/W/F及delivery complete/partial/insufficient/unknown；不是E4的五状态。必须审角色/日期/原文引句，View不能凭创建计交付。
+E5 bind_review.py实际prefix-review-07绑定7positions/5completed final inputs/22raw ranges，时间元数据全匹配；0语义标签写入。first2实际完整答案/输入已展示，但仍待评分；current first3..6尚未语义审。show_review.py输出完整实际provider历史和原始见证。
+重要反思：prefix-review-02原字段逐值保留；新增actual_source_material_binding/provider_time_sources区分exogenous_fixture/endogenous_runtime。same-sources检索到旧Host问题，正文和role匹配2个重复Source，captured_at/observed_at筛出initial；摄入时间不是事件日期。首次unique-body验证失败已保留prefix-binding-reflection-v1.json，改后prefix-review-07/prior-prefix-reconciliation-v1.json通过；v65暂存验证声明由v66替代。
+下一prefix可用bind_review.py raw-2048 --completed-prefix；读实际返回目录，旧prefix07 records必须逐值一致后才能carry评审；全80且owner/child退出后ordinary binder、最终reconcile。连续历史只承接实际完成Host消息，失败Store效果保留；不重试/修复答案。
+37pending离线timers共53.98CPU已在实际idle结算到raw2048/prelaunch-settlement-v1.json；所有E4费用不重计。当前新5timers共0.53CPU pending见v66.cost.pending_commands，live禁离线写账，未测作者工作unknown。
+E5完成后final3seed/新源确认、LME451→Mem2Act400、最终论文与实测有效Product仍待；完整目标不能complete。禁SHA/子代理/新服务/第二ledger/限额重置/remote写。
+
+# PREVIOUS TRAINING PLAN v63: 2026-11-04
+
+完整Nov2目标ACTIVE；最新data/manifests/development-training-progress-20261102-v63.json，本轮progress。分析保持简短，真实工具推进，不重复长篇推测。
+唯一live e3-continued-old-u64 coordinator1796472/child1796557/exec55558，最近25/32；禁第二模型/live离线写账/timeout重启。
+continued-old已审first25(indices0..24)，executions/e3-continued-old-u64/prefix-review-25：23实际最终输入/136Source范围/unmatched0；各旧prefix packet/binding逐值相等后原标签沿用；全臂分数仍null。
+全32关闭且owner/child退出后full bind_method.py；packet/binding.records[:25]逐值等于prefix-review-25才carry25标签，审25..31；close_method及四位置参数native评分。22HPO限定未建立且early-stop/beam有Source C/S；23SVM/LR+nbow有Source C/S；24明确扰动降BLEU而非incorporated-module退化 C/S。其余见v62，首次失败2/11保留。
+compare_methods.py已写，两组真实既有pair核验通过；只在old全闭后运行七主方法/21pairs表。paper-development-v1/plot_e4_main.py已语法检查，须完整表后真实运行/视检；未生成部分主图。rules/head用v2，其余v1。aggregate19对最强simple18 +3.125pp CI[-15.625,21.875]未确认、无部署。
+E5 bind_review.py及show_review.py已准备；source helper用32真实preHost/2031Sources核验通过，完整E5绑定和展示尚未执行。六配置/owner既有准备不重跑；实际source-prefix/角色/正文/时间、最终provider输入/历史assistant/View来源语义均需审阅。
+当前23 pending offline timers共23.13CPU，列表v63.cost.pending_commands；0新模型/0离线ledger写，未测作者工作unknown。注意另一批旧23timers23.77和aggregate所有native/client已结算，不能混淆重计。
+失败材料v3 53全闭；old关闭后扩v4 reuse v3保留旧53标签。E3/E4全闭后E5六条件、final3seed/新源确认、LME451→Mem2Act400、最终论文/实测有效Product尚待。禁SHA/子代理/新服务/第二ledger/限额重置/remote写。
+
+# PREVIOUS TRAINING PLAN v62: 2026-11-04
+
+完整Nov2目标ACTIVE；最新data/manifests/development-training-progress-20261102-v62.json，本轮progress。分析保持简短，以真实工具推进，不重复长篇推测。
+唯一live e3-continued-old-u64 coordinator1796472/child1796557/exec55558，最近22/32；禁第二模型/live离线写账/timeout重启。
+continued-old已审first22(indices0..21)，executions/e3-continued-old-u64/prefix-review-22：20实际最终输入/117Source范围/unmatched0；各旧prefix packet/binding逐值相等后原标签沿用。完整分数仍null。
+全32关闭且owner/child退出后full bind_method.py；packet/binding.records[:22]逐值等于prefix-review-22才carry22标签，继续审22..31；close_method及四参数native评分。前17沿用；新增17Q/U vector全局scope未建立，18NER三模型C，19CDA/REG C，20问卷缺与目标风格比较I/I，21限定English-only未知C/S且无English-centric断言。
+compare_methods.py已写，两组真实既有pair核验通过；只在old完整关闭后运行七主方法/21pairs表。rules/head使用v2；其余v1。aggregate19对最强simple18 +3.125pp CI[-15.625,21.875]，未确认，无部署。
+E5 bind_review.py已准备：外生到达/角色/正文/时间和实际final输入绑定，View单独语义审阅。source helper用32真实preHost/2031Sources核验通过，完整E5绑定仍未执行；E5六配置/owner既有准备不重跑。
+当前20 pending offline timers共18.42CPU，列表v62.cost.pending_commands；本轮0新模型/0离线ledger写，未测作者工作unknown。旧23timers23.77和aggregate全部native/client已结算。
+失败材料v3 53全闭；old关闭后扩v4 reuse v3并保留53旧标签。完整E3/E4后E5六臂、final3seed/新源确认、LME451→Mem2Act400、最终论文/实测有效Product尚待。禁SHA/子代理/新服务/第二ledger/限额重置/remote写。
+
+# PREVIOUS TRAINING PLAN v61: 2026-11-04
+
+完整Nov2目标ACTIVE；最新data/manifests/development-training-progress-20261102-v61.json，本轮progress。分析保持简短，以实际工具证据推进。
+唯一live e3-continued-old-u64 coordinator1796472/child1796557/exec55558，最近17/32；禁第二模型/live离线写账/timeout重启。
+continued-old源审至first17(indices0..16)，executions/e3-continued-old-u64/prefix-review-17：15实际最终输入/86Source范围/unmatched0；各旧prefix packet/binding逐值相等后原标签沿用。
+全32关闭且owner/child退出后full bind_method.py e3-continued-old-u64；full packet/binding.records[:17]须逐值等于prefix-review-17才carry17标签，继续审17..31。扩大prefix也先核旧记录，使用binder实际输出目录。
+本轮新审case9从unsupervised推出No crowdsourcing→Q/unknown；10仅supervised baseline局部而缺标准dependency baseline→I/insufficient；11截断；12完成无检索请求论文→I/insufficient，控制器未执行不归因其选择；13未来三方向C；14文本分析方法C；15English资源+本文Wikipedia桥接C；16CFILT规则和attention机制明确区分C。初9不变，暂无prefix全臂分数。
+主结果当前fixed-prefix18/fixed-context17/rules17(v2)/head14(v2)/inc13/aggregate19；aggregate对最强simple+3.125pp CI[-15.625,21.875]，未达5pp点目标也未确认；old仍待，不能称纯数据收益。
+失败材料v3已53全闭，12充分/28不足/13未知、206literal ranges；旧47packet/labels与192combined rows保留；原主final-input标签/failed答案/F1/cost不变。old关闭后追加新v4 reuse v3。
+case22 scoped未建立不强制settings段，categorical No/manual claims仍Q；case26广义prior geographic方法有效；不要将McGurk的y!=audio x加强为y也!=visual x-prime。禁以DEV源审造TRAIN标签。
+当前15 pending offline timers共13.87CPU，完整列表v61.cost.pending_commands；本轮0新模型/0离线ledger写，作者未测unknown非0。旧23timers23.77和aggregate所有native/client费用已结算，不重计。
+old关闭后闭合E3/E4比较，再E5六条件、final3seed/独立确认、LME451→Mem2Act400、最终论文/实测有效Product。完整目标未完成。禁SHA/子代理/新服务/第二ledger/限额重置/remote写。
+
+# PREVIOUS TRAINING PLAN v60: 2026-11-04
+
+完整Nov2目标ACTIVE；最新data/manifests/development-training-progress-20261102-v60.json，本轮progress。分析保持简短，以实际工具证据推进。
+唯一live e3-continued-old-u64 coordinator1796472/child1796557/exec55558，最近10/32；禁第二模型/live离线写账/timeout重启。
+continued-old源审至first9(indices0..8)，executions/e3-continued-old-u64/prefix-review-09：8实际最终输入/51Source范围/unmatched0；各旧prefix packet/binding逐值一致后原标签沿用。
+全32关闭并owner/child退出后full bind_method.py e3-continued-old-u64；full packet/binding.records[:9]须逐值等于prefix-review-09才carry9标签，继续审9..31。扩大prefix同样先核旧记录，使用binder实际输出目录。
+新增case6准确区分English例句和English-only排他性→complete/sufficient；7缺PDF page/textspan定义→incomplete/insufficient；8明确Doc2Vec/paragraph vectors并实际比较BoW→complete/sufficient。初6判断不变；不发布prefix全臂分数。
+当前主闭合fixed-prefix18/fixed-context17/rules17(v2)/head14(v2)/inc13/aggregate19；aggregate对最强simple +3.125pp CI[-15.625,21.875]，未达5pp点目标且未确认。continued-old仍待，不能称独立数据收益。
+失败材料v3已53全闭：12充分/28不足/13未知，206literal ranges；旧47packet/labels和192combined rows保留，原主final-input标签/失败答案/F1/cost不变。old关闭后才能追加新v4 reuse v3。
+case22 scoped未建立不强制settings段，categorical No/manual claims仍Q；case26广义prior geographic方法有效；McGurk可选具体phoneme须在实际packet且不能将y!=x加强为y也!=visual x-prime。禁用DEV标签做TRAIN。
+当前11 pending offline timers共10.06CPU，完整列表v60.cost.pending_commands；本轮0新模型/0离线ledger写，作者未测unknown非0。旧23timers23.77及aggregate全部费用已结算，不重计。
+continued-old后闭合E3/E4比较，再E5六条件、final3seed/独立确认、LME451→Mem2Act400、最终论文/实测有效Product。完整目标未完成。禁SHA/子代理/新服务/第二ledger/限额重置/remote写。
+
+# PREVIOUS TRAINING PLAN v59: 2026-11-04
+
+完整Nov2目标ACTIVE；最新data/manifests/development-training-progress-20261102-v59.json，本轮progress。分析保持简短，以实际工具证据推进。
+唯一live e3-continued-old-u64 coordinator1796472/child1796557/exec55558，最近6/32；禁第二模型/live离线写账/timeout重启。
+continued-old源审至first6(indices0..5)，executions/e3-continued-old-u64/prefix-review-06：5实际最终输入/31Source范围/unmatched0；02→04→06前缀packet/binding逐值一致后沿用旧标签。
+全32关闭并owner/child退出后full bind_method.py e3-continued-old-u64；full packet/binding.records[:6]须逐值等于prefix-review-06才carry6标签，继续审6..31。扩大prefix也先核旧记录，先看binder实际输出目录。
+新增case2首次JSON_ACTION_MALFORMED保留；3只有卷积/RNN概述，无WSJ最佳HMM具体系统→incomplete/insufficient；4修改target copy代替full BT的成本机制正确完整；5核心McGurk定义正确但加y既非音频亦非视觉，实际Source仅y!=x→qualified/sufficient。0C、1英语范围Q/unknown保持，不发布prefix全臂分数。
+主结果当前fixed-prefix18/fixed-context17/rules17(v2)/head14(v2)/inc13/aggregate19；aggregate对最强simple仅+3.125pp CI[-15.625,21.875]，未达5pp点目标也未确认。continued-old仍待，不能称纯新数据收益。
+失败材料补充v3已53全闭：12充分/28不足/13未知，206literal ranges；前47packet/labels和192combined rows保留。七条件last-request充分21/22/22/19/18/15/22，原主final-input标签/failed答案/F1/cost不变；需待old关闭后显式追加输出新v4并reuse v3。
+case22 scoped未建立不强制settings段，categorical No/manual claims仍Q；case26广义prior geographic方法有效。E3local14/13/init14保持。禁以DEV诊断造TRAIN标签。
+当前9 pending offline timers总8.75CPU，完整列表v59.cost.pending_commands；本轮0新模型/0离线ledger写，作者未测unknown非0。旧23timers23.77及aggregate全部native/client费用已结算，不重计。
+continued-old后闭合E3/E4比较，再E5六条件、final3seed/独立确认、LME451→Mem2Act400、最终论文/实测有效Product。完整目标未完成。禁SHA/子代理/新服务/第二ledger/限额重置/remote写。
+
+# PREVIOUS TRAINING PLAN v58: 2026-11-04
+
+完整Nov2目标ACTIVE；最新data/manifests/development-training-progress-20261102-v58.json，本轮progress。分析保持简短，以实际工具证据推进。
+唯一live e3-continued-old-u64 coordinator1796472/child1796557/exec55558，最近4/32；禁第二模型/live离线写账/timeout重启。
+continued-old first2(indices0..1)已源审，executions/e3-continued-old-u64/prefix-review-02：2实际最终输入/13Source范围/unmatched0。case0先前任务/非可比说明C；case1以购物非文本推出英语范围No→qualified/unknown。没有prefix全臂分数。
+全32关闭且owner/child退出后full bind_method.py e3-continued-old-u64；full packet/binding.records[:2]与prefix-review-02逐值一致才carry2标签，再审2..31。扩大prefix同样先核旧记录，先看实际输出目录。
+失败材料补充最新failed-material-supplement-v3：7关闭条件53失败、20重叠失败来源族、206literal ranges/unmatched0；53材料审全闭12充分/28不足/13未知。新增aggregate6失败为2充分(CFILT/1500)、3不足、1未知；原failed答案不变，未推断未执行续接必成功。
+前47packet/labels和192combined rows逐值保留，v2/v1不改。七条件末次有响应请求材料充分依次True21/False22/fixed-context22/rules19/head18/incumbent15/aggregate22；七条件224位置仍仅32来源族。主final-input标签、native F1、费用未变。
+如扩最后continued-old，prepare_failed_material.py依次显式--add-method incumbent-delivery-u16、e3-aggregate-u32、e3-continued-old-u64，输出新v4 reuse v3；不可覆盖旧packet/labels或重跑模型。v3目录show.py/review.py/close_review.py可按新目录复用。
+aggregate已19/32，6失败；vsfixed-prefix18 +3.125pp CI[-15.625,21.875]低于5pp点目标且未确认；vsinc13 +18.75pp CI[0,37.5]，vshead14 +15.625pp CI[0,31.25]，均不宣称可靠/纯数据因果优势。continued-old仍待。
+主结果当前fixed-prefix18/fixed-context17/rules17(v2)/head14(v2)/inc13/agg19；case22 scoped未建立不强制settings段，categorical No/manual claims仍Q；case26广义地理prior方法有效。E3local14/13/init14保持。
+当前7 pending offline timers共7.82CPU，完整列表v58.cost.pending_commands；本轮0新模型/0离线ledger写，作者未测unknown非0。旧23timers23.77和aggregate全部native/client费用已结算，不重计。
+continued-old后闭合E3/E4比较，再E5六条件、final3seed/独立确认、LME451→Mem2Act400、最终论文/实测有效Product。完整目标未完成。禁SHA/子代理/新服务/第二ledger/限额重置/remote写。
+
+# PREVIOUS TRAINING PLAN v57: 2026-11-04
+
+完整Nov2目标ACTIVE；最新data/manifests/development-training-progress-20261102-v57.json，本轮progress。
+唯一live E4 e3-continued-old-u64 coordinator1796472/child1796557/exec55558，最近0/32；HostTrue，同32原pre-Host快照。禁第二模型/live离线写账/timeout重启。
+旧aggregate coordinator1474567/child1474590均实际退出，exec18399 exit0。全32源审关闭：19完整/5限定/2不完整/6首次失败；材料20充分/3不足/9未知；26实际最终输入/153Source范围/unmatched0。first28 prefix packet/binding逐值等于final32后沿用原标签，最后4已审。
+aggregate root e4-main-methods-v1/executions/e3-aggregate-u32：closeout-v1.json/author-decisions-v1.json/native-results-v1.json；原生F1 .11319328752325285。case4无检索非回答I，不能归因未执行控制器。首次失败indices2/12/16/20/29/31均保留。
+aggregate vs原fixed-prefix18：gain6/21/23/24/26，loss4/5/16/31；+3.125pp CI[-15.625,21.875]，未建立优势且低于5pp点目标。vsincumbent13 +18.75pp CI[0,37.5]；vshead14 +15.625pp CI[0,31.25]，下界均未严格>0，非确认/纯数据因果结论。learned-comparisons-v1.json保存；continued-old仍待。
+aggregate实际69HTTP/241974known/unknown0，250local scorer+69HTTP=319共享准入；37tool/0tool error/35budget_exhausted，唯一未检索case4。whole client16751.650877260CPU=16637.153089473native+114.497787787residual，wall4976.386353554，全部已计，禁止重复加。
+原生评分第一次CLI漏official_evaluator位置参数，argparse执行前退出，失败timer/reflection保留；补完整参数仅运行离线评分，无模型/答案重试。
+当前其他主结果fixed-prefixTrue18、fixed-context17、rules17(v2)、head14(v2)、incumbent13(v1)。case22 scoped not-established不强制settings段，categorical No/manual claims仍Q；case26广义prior geographic范围有效。E3localagg14/old13/init14保持，不能用局部取代自主。
+失败材料补充v2仍覆盖先前6条件47失败（不含aggregate/continued-old），10充分/25不足/12未知、169literal ranges；旧35标签与160combined rows保留。后续如扩aggregate显式加incumbent后加aggregate，输出新v3 reuse v2，不能覆盖旧packet/标签。
+本轮真实idle结算23pending timers23.77CPU，凭证executions/e3-continued-old-u64/prelaunch-settlement-v1.json。当前仅2新paper timers待计0.74CPU，完整列表v57.cost.pending_commands；作者未测unknown非0，旧全部native/client费用不重计。
+论文已7闭/1待，七个native F1结果身份、aggregate调用/CPU分拆核对通过；所有区间为暴露开发的描述性区间，不作独立确认或效率主张。
+continued-old关闭后闭合E3/E4比较，再E5六条件、final3seed/独立来源确认、LME451→Mem2Act400、最终论文/实测有效Product。完整目标未完成。禁SHA/子代理/新服务/第二ledger/限额重置/remote写。
+
+# PREVIOUS TRAINING PLAN v56: 2026-11-04
+
+完整Nov2目标ACTIVE；最新data/manifests/development-training-progress-20261102-v56.json，本轮progress。
+唯一live e3-aggregate-u32 coordinator1474567/child1474590/exec18399，最近20/32；禁第二模型/live离线写账/timeout重启。
+aggregate源审至first19(indices0..18)，executions/e3-aggregate-u32/prefix-review-19：16实际最终输入/88Source范围/unmatched0。各旧prefix packet/binding逐值一致后原标签沿用。
+全32关闭、owner/child退出后full bind_method.py e3-aggregate-u32；full packet/binding.records[:19]与prefix-review-19逐值相同才carry19标签，继续审19..31。扩大prefix也先核旧记录，使用binder实际输出目录。
+本轮新增9众包从unsupervised推出categorical No→Q/unknown；10baseline C；11明确两项human eval C；12截断；13三未来方向C；14计算/定性互补C；15English有English资源+本文Wikipedia桥接C；16格式失败；17几何分析的全局否定缺完整评价范围Q/unknown；18NER三模型及神经模型GloVe/Stanford feature区分C。
+初9保持：case4完成无检索请求资料I（控制器未执行）；case5未交付ba/ga/da示例Q；case6准确scoped English-only未建立C；case7缺page/textspan信息I。暂无prefix全臂成绩。
+一次空离线命令误写BASEPY为MiLAi/Lab路径，exit127且Python未执行；记录offline-interpreter-typo-v1.json，实际源审使用既有MiLAi/MiLAi-Lab/.venv/bin/python继续，未动模型/旧结果。
+主闭合当前fixed-prefixTrue18、fixed-context17、rules17(v2)、head14(v2)、incumbent13(v1)；case22 scoped not-established不强制settings段，categorical No/manual claims仍Q；case26广义prior geographic方法有效。
+失败材料补充v2已47全闭，10充分/25不足/12未知；169literal ranges。前35标签/packet及160combined rows保留；six条件last-request充分21/22/22/19/18/15，原主final-input标签、失败答案、F1/cost不改。
+当前13 pending offline timers总12.24CPU，完整列表v56.cost.pending_commands；本轮0新模型/0离线ledger写，作者/空命令失败未测unknown非0。旧31timers29.55及incumbent全部费用已结算。
+aggregate后serial e3-continued-old-u64；再E5六条件、final3seed/独立确认、LME451→Mem2Act400、最终论文/实测有效Product。完整目标未完成。禁SHA/子代理/新服务/第二ledger/限额重置/remote写。
+
+# PREVIOUS TRAINING PLAN v55: 2026-11-04
+
+完整Nov2目标ACTIVE；最新data/manifests/development-training-progress-20261102-v55.json，本轮progress。
+唯一live E4 e3-aggregate-u32 coordinator1474567/child1474590/exec18399，最近10/32；禁第二模型/live离线写账/timeout重启。
+aggregate源审到first9(indices0..8)，目录executions/e3-aggregate-u32/prefix-review-09：8实际最终输入/39Source范围/unmatched0。05→07→09 packet/binding前缀逐值一致后原标签沿用。
+全32关闭且owner/child退出后full bind_method.py e3-aggregate-u32；full packet/binding.records[:9]须逐值等于prefix-review-09，再carry9标签，继续审9..31。扩大prefix也先核旧记录；先看binder实际输出目录。
+本轮case5 McGurk核心正确但把未交付的ba/ga/da例子归于本文→qualified/sufficient（原指南可选phoneme须在packet）；6准确说明intro不足以确定English-only、无排他性断言→complete/sufficient（只支持scoped limitation）；7仍缺PDFpage/textspan表示→incomplete/insufficient；8paragraph vectors和预处理均直接支持→complete/sufficient。
+初5保持：0C、1English-only无据Q/unknown、2首次截断、3HMM/LF-MMI完整、4无检索即请求资料I/insufficient。case4控制器未执行，不将其失败归因策略选择；未发布prefix全臂分数。
+当前有效主结果fixed-prefixTrue18、fixed-context17、rules17(v2)、head14(v2)、incumbent13(v1)。case22遵原scoped-not-established准则，不强制settings段；categorical No/manual claims仍Q。case26广义prior-geographic方法范围有效。
+失败材料补充v2已47全闭，10充分/25不足/12未知，169literal ranges；前35标签/packet和160combined rows保留。全32末次有响应请求充分True21/False22/fixed-context22/rules19/head18/incumbent15。原主final-input标签、失败答案、F1/cost不变，Source质量非续接必成功。
+当前9 pending offline timers总8.02CPU，完整列表v55.cost.pending_commands；本轮0新模型/0离线ledger写，作者未测unknown非0。旧31timers29.55及incumbent全部model/client费用已结算，不重计。
+aggregate后serial e3-continued-old-u64；再E5六条件、final3seed/独立确认、LME451→Mem2Act400、最终论文/实测有效Product。完整目标未完成。禁SHA/子代理/新服务/第二ledger/限额重置/remote写。
+
+# PREVIOUS TRAINING PLAN v54: 2026-11-04
+
+完整Nov2目标ACTIVE；最新data/manifests/development-training-progress-20261102-v54.json，本轮progress。
+唯一live E4 e3-aggregate-u32 coordinator1474567/child1474590/exec18399，最近6/32；禁第二模型/live离线写账/timeout重启。
+aggregate first5(indices0..4)已源审，executions/e3-aggregate-u32/prefix-review-05：4实际最终输入/20Source范围/unmatched0。case0完整，1英语排他性断言无据限定/unknown，2首次截断，3HMM/LF-MMI正确完整，4完成回复但0检索请求资料→不完整/insufficient（控制器尚未执行，不归因其选择）。
+全32结束并owner/child退出后full bind_method.py e3-aggregate-u32；full packet/binding.records[:5]与prefix-review-05逐值一致才carry5标签，再审5..31。扩大prefix也先核旧记录，使用binder实际输出目录。
+失败材料补充最新failed-material-supplement-v2：6已闭条件47失败轨迹、20重叠失败来源族、169literal Source范围/unmatched0；47材料源审全闭，10充分/25不足/12未知。前35packet/labels和160combined rows逐值保留，v1不改。
+新增incumbent12失败材料：1充分/7不足/4未知；其全32last-responded-input充分15，实际P仍13。六条件全32材料充分依次True21/False22/fixed-context22/rules19/head18/incumbent15。每条件32，六条件192仍只有32来源族，不是新独立样本；原主final-input标签与failed答案、native F1、成本全不变。
+producer prepare_failed_material.py已支持显式--add-method和--output/--reuse；扩展后须先逐值匹配旧record前缀才能沿用旧材料标签。future如扩aggregate，显式包含incumbent后再aggregate，输出新v3并reuse v2；不要覆盖v1/v2或重跑模型。
+当前有效主结果：fixed-prefixTrue18、fixed-context17、rules17(v2)、head14(v2)、incumbent13(v1)；E3localagg14/old13/init14不变。case22 scoped not-established不强制settings段，categorical No/manual claims仍Q；case26广义prior geographic approaches可接受，四baseline不是唯一解释。
+incumbent13C/3Q/4I/12F、87HTTP/340767known/unknown0、273local+87HTTP=360共享准入；whole15629.249612348CPU已计（native15507.519348022+res121.730264326），不得重计。head费用同下方旧记录已计。
+本轮0新模型/0离线ledger写；当前7 pending timers总6.91CPU，完整列表v54.cost.pending_commands，作者未测unknown非0。旧31timers29.55与incumbent全部model/client费用已结算。
+当前aggregate后serial e3-continued-old-u64；再E5六条件、final3seed/独立确认、LME451→Mem2Act400、最终论文/实测有效Product。完整目标未完成。禁SHA/子代理/新服务/第二ledger/限额重置/remote写。
+
+# PREVIOUS TRAINING PLAN v53: 2026-11-04
+
+完整Nov2目标ACTIVE；最新data/manifests/development-training-progress-20261102-v53.json，本轮progress。
+唯一live E4 e3-aggregate-u32 coordinator1474567/child1474590/exec18399，最近1/32；HostTrue，同32原pre-Host快照。禁第二模型/live离线写账/timeout重启。
+旧incumbent coordinator1143608/child1143626已实际退出，exec83421 exit0。全32源审关闭：13完整/3限定/4不完整/12首次失败；材料14充分/5不足/13未知；20实际最终输入/120Source范围/unmatched0。first29 prefix packet/binding逐值等于final32后沿用原标签，最后3另审。
+incumbent root e4-main-methods-v1/executions/incumbent-delivery-u16：closeout-v1.json/author-decisions-v1.json/native-results-v1.json。原生F1 .06027051387697826。case30虽正确不排名具体font，却把整体visual bundle实验说成font/typography显著预测力→qualified/sufficient；case31正确1500classifier corpus，29截断。
+incumbent vs原fixed-prefix18：gain9/24/26，loss3/4/11/13/16/18/27/30；-15.625pp CI[-34.375,3.125]，无优势。87HTTP/340767known/unknown0，273local scorer结果+87HTTP=360共享准入；56tool/3tool error/35budget_exhausted/0未检索。
+incumbent whole client15629.249612348CPU=15507.519348022native+121.730264326residual；wall5113.076466379；均已原账本计入，不可再加一次。
+35失败材料补充已语义源审闭合（先前五条件，尚不含incumbent）：failed-material-supplement-v1/closeout-v1.json/author-material-decisions-v1.json，9充分/18不足/8未知；未改原failed答案或主final-input标签。19重叠失败来源族，124literal ranges；HostFalse8轨迹9个未再送模型的Tool返回仍排除。
+补充统一last responded request的全32材料充分：fixed-prefixTrue21、False22、fixed-context22、rules19、head18。完成案例125个验证last request==原final input；其余35用补充Source审。五条件160位置仍只有32来源族。事后作者诊断非因果/独立确认，不给未执行续接赋成功分。
+当前有效其他闭合结果rules17/head14使用v2；fixed-context17、fixed-prefixTrue18；case22遵原scoped-not-established准则，不要求settings段，categorical No/manual claims仍Q。head case11已取得摘要但handoff_select_1排除实证维持selection-mechanism-v2。
+本轮真实idle结算31pending timers29.55CPU，凭证executions/e3-aggregate-u32/prelaunch-settlement-v1.json。当前仅2个新paper timers待计0.69CPU，完整列表v53.cost.pending_commands；作者未测unknown非0，旧native/client费用不重计。
+论文已6闭/2待，六个native F1结果身份核对通过；失败材料补表明确只覆盖先前五条件。后续如补全E4全部material对比，再扩展新闭合条件，旧35标签保留。
+当前aggregate后serial e3-continued-old-u64；随后E5六条件、final3seed/独立确认、LME451→Mem2Act400、最终论文/实测有效Product。完整目标未完成。禁SHA/子代理/新服务/第二ledger/限额重置/remote写。
+
+# PREVIOUS TRAINING PLAN v52: 2026-11-04
+
+完整Nov2目标ACTIVE；最新data/manifests/development-training-progress-20261102-v52.json，本轮progress。
+唯一live incumbent-delivery-u16 coordinator1143608/child1143626/exec83421，最近19/32；禁第二模型/live离线写账/timeout重启。
+incumbent源审到first18(indices0..17)，目录e4-main-methods-v1/executions/incumbent-delivery-u16/prefix-review-18：9实际最终输入/58Source范围/unmatched0；4→9→10→12→14→18前缀packet/binding逐值相等后原标签沿用。全32结束并退出后full binder核对records[:18]才carry18标签，继续审18..31。不得按旧count猜prefix目录。
+本轮新审case9承认manual annotations且scoped平台未报告→完整；10baseline完整；11/12/13截断；14研究问题/理论/跨学科完整；15English资源+本文Wikipedia桥接充分，FKGL辅助说明不被当作US语料证明；16截断、17格式失败保留。无prefix全臂分数。
+新增e4-main-methods-v1/failed-material-supplement-v1/packets-v1.json：五已闭条件35失败轨迹、19重叠来源族，全部绑定last responded provider request（不是完成的final input）；124Source范围/unmatched0，3条该请求无Tool收据。HostFalse8条轨迹共9个后续Tool返回未进入另一次provider请求，不可算作Host已读。
+失败补充仅机械绑定，semantic material review仍pending；primary失败/分数/原生F1不改，不能用生成推理补答案、不能凭range数量宣布充分。producer prepare_failed_material.py、validation-v1.json；论文新增边界补表与明确说明。后续可独立审阅这个材料补充，不要静默替换主表completed-final-input边界。
+当前有效闭合结果rules17/head14均用author-decisions-v2/closeout-v2；v1 rules16/head13仅保留初评。fixed-context17、fixed-prefixTrue18。case22 HPO遵原scoped-not-established准则，不要求settings段；categorical No/manual claims仍Q，依据case22-consistency-review-v1.json。
+head case11已取得摘要但handoff_select_1排除实证维持，selection-mechanism-v2.json；7loss failed16/31、sufficient答偏0/4、insufficient11/15、unknown27。不可给未执行alternate打分，不得以DEV诊断造TRAIN标签。
+当前21 pending offline timers16.37CPU，完整列表v52.cost.pending_commands；本轮0新模型/0离线ledger写，作者未测unknown非0。旧26timers33.61与headwholeCPU已结算，不重计。
+incumbent后serial e3-aggregate-u32/e3-continued-old-u64；之后E5六条件、final3seed/新来源确认、LME451→Mem2Act400、最终论文/有效Product。目标未完成。禁SHA/子代理/新服务/第二ledger/限额重置/remote写。
+
+# PREVIOUS TRAINING PLAN v51: 2026-11-04
+
+完整Nov2目标ACTIVE；最新data/manifests/development-training-progress-20261102-v51.json，本轮progress。
+唯一live incumbent-delivery-u16 coordinator1143608/child1143626/exec83421，最近10/32；禁第二模型/live离线写账/timeout重启。
+incumbent源审到first9(indices0..8)，目录e4-main-methods-v1/executions/incumbent-delivery-u16/prefix-review-09：5实际最终输入/32Source范围/unmatched0；前4 packet/binding逐值相等后原标签原样沿用。case4/6首次截断保留，5(McGurk)/8(paragraph vectors)完整，7缺page/textspan细节不完整。
+全32结束、owner/child退出后普通bind_method.py incumbent-delivery-u16，full packet/binding.records[:9]必须与prefix-review-09逐值相同后carry9标签，继续审9..31。过程中扩大prefix也先核对旧记录。使用binder实际输出目录，别依赖先前观察count。
+当前有效闭合结果：rules17与head14来自author-decisions-v2/closeout-v2；旧v1 rules16/head13是已保留初评，不能用于当前比较。fixed-context17、fixed-prefixTrue18不变。case22更正依据e4-main-methods-v1/case22-consistency-review-v1.json；scoped not-established回答不要求settings段，categorical No/manual-selection无据说法仍Q。
+head case11已获取摘要但handoff_select_1排除的实证保持，最新selection-mechanism-v2.json；7个loss分组failed16/31、sufficient但答偏0/4、insufficient11/15、unknown27，不能给未执行alternate打分或把DEV诊断做TRAIN标签。
+最新simple图paper-development-v1/figures-e4-simple-v2是18/17/17；论文/CSV更正已披露，旧v1与before-case22-correction-v1快照保留。所有HTTP/CPU/原生F1/首次失败未变。
+当前14 pending offline timers合计10.87CPU，完整列表v51.cost.pending_commands；本轮0新模型/0离线ledger写，作者未测unknown非0。先前26timers33.61与headwholeCPU均已结算。
+incumbent后serial e3-aggregate-u32/e3-continued-old-u64；之后E5六条件、final3seed/新来源确认、LME451→Mem2Act400、最终论文/有效Product。目标未完成。禁SHA/子代理/新服务/第二ledger/限额重置/remote写。
+
+# PREVIOUS TRAINING PLAN v50: 2026-11-04
+
+完整Nov2目标ACTIVE；最新data/manifests/development-training-progress-20261102-v50.json，本轮progress。
+唯一live incumbent-delivery-u16 coordinator1143608/child1143626/exec83421，最近8/32；prefix-review-04已有0..3源审。禁第二模型/live离线写账/timeout重启；不能重跑已结束案例。
+关键更正：case22（HPO）原指南接受明确限定在交付文本的“未建立自动调参”；不强制实验设置段落。发现rules/head初评错误加了这一要求，与更早anchor和query-format接受同类回答不一致。已统一更正这两条Q/unknown→complete/sufficient，其他带categorical No/manual-selection无据断言的旧回答仍Q。
+当前有效结果：rules17/32（原v1为16），frozen-head14/32（原v1为13），fixed-context17、fixed-prefixTrue18。rules/head使用executions/METHOD/author-decisions-v2.json和closeout-v2.json；v1全部保留，未改任何模型答案、Source、首次失败、cost、native F1。每方法另31记录逐值完全相同。
+更正依据e4-main-methods-v1/case22-consistency-review-v1.json：anchor实际4个Source正文都也在head final input，rules摘要正文也等于之前已接受的query-format材料。原E1/E2/E3 local case22均因categorical/manual claims仍Q，E3local14/13/init14不变。不是新criterion，也不是新训练标签。
+rules17C/5Q/4I/6F，material18S/5I/9U；vs18差-3.125pp CI[-18.75,12.5]。head14C/6Q/3I/9F，material16S/4I/12U；vs18差-12.5pp CI[-31.25,6.25]。均未建立优势，采用决定不变。
+head case11已取得摘要却handoff_select_1排除的实证不变；最新selection-mechanism-v2.json逐值保留v1.observed_case。现7个loss分组：failed16/31，sufficient但答偏0/4，insufficient11/15，unknown27；case22不再是loss。
+论文/CSV与simple图均已更新；图最新paper-development-v1/figures-e4-simple-v2（三simple18/17/17），v1图和before-case22-correction-v1论文快照完整保留。PNG布局和数据核过，原生F1/全部成本未改。
+head费用已计：81HTTP/282367known/unknown0，258local+81HTTP=339共享准入，whole client15865.334696268CPU=15752.752490704native+112.582205564residual，禁止重复计。
+下一步审incumbent新返回4..，实际prefix目录须先看binder输出（避免3→4竞态）；全闭后full packet/binding前缀逐值对照，再carry4标签和完成32源审。未来case22依原scoped-not-established标准，不能再次要求settings段落。
+之后serial e3-aggregate-u32/e3-continued-old-u64，再E5六条件、final3seed/独立确认/LME451→Mem2Act400/最终论文/有效Product。完整目标未完成。
+当前13 pending offline timers总10.14CPU，完整列表v50.cost.pending_commands；本轮0新模型/0离线ledger写，未测作者工作unknown非0。旧26timers33.61与headwholeCPU均已结算。
+禁SHA/子代理/新服务/第二ledger/限额重置/remote写。
+
+# PREVIOUS TRAINING PLAN v49: 2026-11-04
+
+完整Nov2目标ACTIVE；最新data/manifests/development-training-progress-20261102-v49.json，本轮progress。
+唯一live E4 incumbent-delivery-u16 coordinator1143608/child1143626/exec83421，最近4/32；禁第二模型/live离线写账/timeout重启。
+incumbent first4已源审，目录e4-main-methods-v1/executions/incumbent-delivery-u16/prefix-review-04：2实际最终输入/14Source范围/unmatched0，indices0..3。case0完整、1/2首次截断、3缺WSJ最佳HMM细节不完整；不是全臂分数。
+全32结束且owner/child退出后普通bind_method.py incumbent-delivery-u16；full packet/binding.records[:4]必须逐值等于prefix-review-04后复制4条decisions，继续审4..31。binder动态取snapshot count，必须先看实际输出目录再show；本次3→4竞态造成读取不存在03目录，失败reflection保留，成功04绑定未重跑。
+新关键闭合机制：head case11已取得1802.08636/abstract，实际未截断scorer输入含“when evaluated automatically and by humans”；step5 handoff_select_1只返回Results表引用（e1），丢弃已取得摘要e2，firstpacket预算拒绝0；最后Host输入无该句。trace/model/action/packet/source逐值绑定在frozen-encoder-control/selection-mechanism-v1.json，脚本analyze_closed_head.py。
+head case11后续再取证仅Results，最后两调用budget_exhausted且零操作。不可把该失败只归于没有搜到；没有运行alternative Host，反事实分数null；事后单案例不作发生率。不得把DEV诊断改成训练标签/改live模型。
+head八条相对锚点损失分解：执行失败16/31；材料充分但额外无据说法0/4；材料不足11/15；覆盖未知22/27。三gain23/24/26的原锚点均失败，不能孤立归因于控制器。此分析已入论文。
+head全32闭13C/7Q/3I/9F，23最终输入/117Source范围，81HTTP/258local/339共享准入，CPU15865.334696268已计且不重算。原fixed-prefix18、fixed-context17、rules16；E3localagg14/old13/init14无提拔。
+当前incumbent后继续serial e3-aggregate-u32/e3-continued-old-u64。E5六config已native无模型验证、单condition owner已绑，尚无模型执行。final3seed/独立确认/LME451→Mem2Act400/最终论文/有效Product未完成。
+当前7 pending offline timers总2.34CPU，完整列表v49.cost.pending_commands；本轮0新模型/0离线ledger写；未测作者/失败display工作未知非0。先前26timers33.61与headwholeCPU已结算。
+禁SHA/子代理/新服务/第二ledger/限额重置/remote写。
+
+# PREVIOUS TRAINING PLAN v48: 2026-11-04
+
+完整Nov2目标ACTIVE；最新data/manifests/development-training-progress-20261102-v48.json，本轮progress。
+唯一live E4 incumbent-delivery-u16 coordinator1143608/child1143626/exec83421，最近1/32；E1delivery-only-u16 checkpoint，同32原pre-Host快照、HostTrue。禁第二模型/live离线写账/timeout重启。
+旧frozen-head coordinator835690/child835695均已退出，旧session60272 exit0。全32已绑定源审：13完整/7限定/3不完整/9失败；材料15充分/4不足/13未知；23实际最终输入/117Source范围/unmatched0。
+head结果root e4-main-methods-v1/executions/frozen-encoder-control：closeout-v1.json/author-decisions-v1.json/native-results-v1.json。first28 prefix packet/binding逐值等于final32，旧标签原样沿用，最后4源审补齐；不用再审prefix。
+head对原fixed-prefix18：gain23/24/26，loss0/4/11/15/16/22/27/31；-15.625pp CI[-34.375,3.125]。无优势主张。原生F1 .08827074488939249；完整答案与原生词汇一致性分开。
+head实际81HTTP/282367known tokens/unknown0，258本地scorer results，合339共享准入；不能把339说成HTTP。49工具调用/1tool error/31budget_exhausted receipts/0未检索位置。
+head whole client15865.334696268CPU=本地模型已计15752.752490704+残差112.582205564，wall4870.001785574；三部分不能重计。首次失败indices2/6/12/16/17/21/25/29/31均保留。
+fixed-context17、rules16、fixed-prefix18与head13均闭。E3localagg14/old13/init14不提拔；当前incumbent后必须serial e3-aggregate-u32、e3-continued-old-u64，不能删掉已声明的自主比较。
+本轮实际idle已结算26 pending offline timers33.61CPU，凭证在executions/incumbent-delivery-u16/prelaunch-settlement-v1.json。当前仅3新paper timers待结算0.74CPU，完整列表v48.cost.pending_commands；作者未测未知非0。
+paper主表已5闭/3待并加入五条件原生F1；所有native receipts结果路径与源审32记录逐值一致核过。第一次离线验证误假定旧fixed-context也叫native_scoring，KeyError保留reflection/timer，按实际native_answer_results字段修检查，未重跑评分/模型或改答案。
+论文head成本明确HTTP/local准入/whole-native-residual边界；E4 simple图仍是已声明三简单方法范围，不含head，不是最终全方法图。
+E5六config已通过native无模型检查并绑定单condition owner，尚未模型执行。final3seed/独立确认/LME451→Mem2Act400/最终论文/有效Product未完成。禁SHA/子代理/新服务/第二ledger/限额重置/remote写。
+
+# PREVIOUS TRAINING PLAN v47: 2026-11-04
+
+完整Nov2目标ACTIVE；最新data/manifests/development-training-progress-20261102-v47.json，本轮progress。
+唯一live E4 frozen-head coordinator835690/child835695/exec60272，最新21/32，/proc已核；禁第二模型/live离线写账/timeout重启。
+源审已到first20（indices0..19），目录e4-main-methods-v1/executions/frozen-encoder-control/prefix-review-20：15实际最终输入/74Source范围/unmatched0。12→14→16→18→20 packet/binding前缀均逐值相等，旧作者标签原样沿用。
+全臂32结束且owner/child退出后普通bind_method.py frozen-encoder-control；将full source-review-packet.records[:20]和binding.records[:20]与prefix-review-20逐值比较，完全一致才复制20条decisions到final目录，接着审20..31。未发布prefix方法分数，不改32分母。
+新增case16截断、17JSON_ACTION_MALFORMED均首结果保留；18完整NER三模型；19有Existing Approaches解释REG的原文，CDA/REG及大类归属正确，完整。case0/4/15的限定及case7/11不足保持既有记录。
+rules32闭16C/6Q/4I/6F；fixed-context17/32、原fixed-prefix18/32；E3localagg14/old13/init14无提拔。head后仍串行incumbent-delivery-u16/e3-aggregate-u32/e3-continued-old-u64自主比较。
+paper E4 simple图PNG/SVG/PDF已核；E5六config通过无模型native检查，单condition owner已绑但未执行。LME图像probe复用、实际451Reader/Judge待内部选型，然后Mem2Act400。
+当前19 pending offline timers合计24.11CPU，v47.cost.pending_commands为完整列表；本轮0新模型/0离线ledger写，作者未测未知非0。native模型CPU已计部分从whole child扣除后只记client残差，历史费用不重复计。
+完整E4/E5/final3seed/独立确认/LME→Mem2Act/最终论文/有效Product尚未完成。禁SHA/子代理/新服务/第二ledger/限额重置/remote写。
+
+# PREVIOUS TRAINING PLAN v46: 2026-11-04
+
+完整Nov2目标ACTIVE；最新data/manifests/development-training-progress-20261102-v46.json，本轮progress。
+唯一live E4 frozen-head coordinator835690/child835695/exec60272，最新16/32，/proc已核；禁第二模型/live离线写账/timeout重启。
+源审已到first16（indices0..15），目录e4-main-methods-v1/executions/frozen-encoder-control/prefix-review-16，13实际最终输入/61Source范围/unmatched0；author-decisions-v1.json16条。前12→14→16的packet/binding逐值相等后原标签原样沿用。
+全32结束、owner/child退出后普通bind_method.py frozen-encoder-control；必须核对full source-review-packet.records[:16]和binding.records[:16]与prefix-review-16完全相等，再复制16标签到final目录，随后审indices16..31。prefix不是全臂成绩，不改32分母。
+最新case12首次JSON_ACTION_MALFORMED保留；case13三未来方向完整；case14广义分析方法有充分Source；case15只有related-work英语资源句，缺此前三简单臂均有的本文Wikipedia说明，correct language但support不足→qualified/insufficient。
+先前case0同数据集附加说法、case4target→source→back均限定；case3完整；case11材料不足。所有源审基于实际final-provider输入，Store别处证据不补答。
+新增paper-development-v1/figures-e4-simple-v1/e4-simple-development.{png,svg,pdf}，三已闭simple methods18/17/16及32全状态、成对区间、HTTPtokens、clientCPU分开展示。PNG视觉检查通过，CSV/JSON来源复核，已链接论文；无未闭学习臂分数，无完整成本优势主张。
+rules闭16C/6Q/4I/6F、fixed-context17、原fixed-prefix18；E3localagg14/old13/init14，无提拔。head后仍依次incumbent-delivery-u16/e3-aggregate-u32/e3-continued-old-u64自主比较。
+E5六条件native配置检查通过并已绑定单condition owner，尚无模型执行。LME图像probe复用，实际451Reader/Judge等内部候选确定，再Mem2Act400；final3seed/确认/最终论文/有效Product均未完成。
+当前17 pending offline timers合计21.44CPU，v46.cost.pending_commands为完整列表；本轮0模型新启动/0离线ledger写。作者未测未知非0；旧native/client/HTTP不重复计。
+禁SHA/子代理/新服务/第二ledger/限额重置/remote写。
+
+# PREVIOUS TRAINING PLAN v45: 2026-11-04
+
+完整Nov2目标ACTIVE；最新data/manifests/development-training-progress-20261102-v45.json，本轮progress。
+唯一live E4 frozen-head coordinator835690/child835695/exec60272，最近13/32，/proc已核；禁第二模型/live离线写账/timeout重启。
+本轮对已结束first12执行离线前缀源审，目录e4-main-methods-v1/executions/frozen-encoder-control/prefix-review-12：10最终输入/48Source范围/unmatched0，author-decisions-v1.json已有indices0..11。不是全臂成绩，不缩小32分母。
+bind_method.py新增--completed-prefix，仅捕获native已returned案例，独立prefix-review-N目录；普通无flag路径仍需owner/child结束和全部32。首次prefix准备因参考集未切片触发原生family相等检查，错误/timer/reflection已保留，仅修离线引用集合，未重试或修改Host。
+head全闭后必须先普通bind_method.py frozen-encoder-control，再将full source-review-packet.records[:12]与prefix.records逐值比较、full binding.records[:12]与prefix比较；完全相等后才复制12条author decisions至final目录，接着审12..31。不能重跑已执行case。
+前缀源审注意：case0多说BIBREF6在相同数据集（实际Source是MT context）→限定；case4加target→source→back无据→限定；case3HMM/LF-MMI/最终卷积比较正确；case11只有automatic metrics表引用→不完整。按原共用指南，材料/答案/执行分开。
+rules32已闭16C/6Q/4I/6F，原fixed-prefix18，fixed-context17；完整文件与成本见v44和下方。E3localagg14/old13/init14不提拔，三个学习臂自主比较仍待。
+paper已含E3local和E4简单臂；E5六配置通过native无模型检查，CacheMemoryPolicy共同控制、raw/extractive/generated×2048/1024，每80位置/8族，单condition owner已绑但未模型执行。
+LME只核对既有执行入口及历史资格；图像probe复用，不再跑。外部实际451Reader/Judge仍须等内部候选绑定，再Mem2Act400。完整目标未缩小。
+当前13 pending timers合计13.69CPU，v45.cost.pending_commands为完整列表；本轮0新模型/0离线ledger写，作者未测未知非0。历史native/client费用不重复计。
+禁SHA/子代理/新服务/第二ledger/限额重置/remote写。E5/final3seed/独立确认/外部/最终论文/有效Product尚未完成。
+
+# PREVIOUS TRAINING PLAN v44: 2026-11-04
+
+完整Nov2目标ACTIVE；最新data/manifests/development-training-progress-20261102-v44.json，本轮progress。
+唯一live E4 frozen-encoder-control coordinator835690/child835695/exec60272，最近11/32；必须核对/proc和实际产物，禁第二模型/live离线写账/timeout重启。
+rules32已源审关闭：16完整/6限定/4不完整/6失败，材料17充分/5不足/10未知；原fixed-prefixTrue18。gain21/23/24，loss3/4/16/19/22；-6.25pp CI[-21.875,9.375]。首次失败JSON_ACTION_MALFORMED三条、截断三条，均保留。
+rules26实际最终输入/74Source范围逐字绑定/unmatched0；78HTTP/242176known/unknown0，client81.009273319CPU已计。原生F1 .09943028086480636；与完整任务分开。case19混淆REG与提出的新loss；case20未调用工具即失败。
+fixed-context仍17/32、原fixed-prefix18/32；无简单基线优势主张。规则标签/closeout/native位于e4-main-methods-v1/executions/rules。
+下一步head实际结束后bind_method.py frozen-encoder-control，再show_method.py/review_helpers.add/close_method.py逐条源审；不能把共享generation_calls当HTTP，本地Laya准入另报。
+随后serial执行incumbent-delivery-u16/e3-aggregate-u32/e3-continued-old-u64；同32原pre-Host快照、HostTrue。E3局部agg14/old13/init14，不提拔但两候选自主研究比较仍须完成。
+paper-development-v1已更新E3局部14/13和E4fixed17/rules16；8自主条件中4闭合4待，未执行指标null，源路径与计数复核通过。仍非最终论文。
+E5 e5-controlled-lifecycle-v1/matrix-plan-v1.json已绑定六条件raw/extractive/generated×2048/1024；共同CacheMemoryPolicy(reads4,min_scope_overlap.35)，HostTrue，同80位置/8族，已有1次format_reproposal设置一致保留。
+E5六config均通过native functional.prepare离线检查，runtime逐字快照；run_condition.py一次仅启动一个条件，要求该condition的prelaunch-settlement-v1.json和实际idle。尚无E5模型执行；不能把40无模型probe算Host分数。
+E5固定外生Source正文/role/occurred_at/顺序；各native运行opaque refs和capture clocks映射fixture event keys，不能宣称同快照。自己的实际完整Host/tool历史持续，失败位保留且native从前一完整历史继续；Store实际副作用需源审。
+当前11 pending offline timers总12.22CPU，完整列表见v44.cost.pending_commands；本轮未写ledger/未新开模型。作者未测未知非0；所有先前HTTP/native/clientCPU不重复计。
+E5/final3seed/独立确认/LME451→Mem2Act/最终论文/有效Product仍未完成。禁SHA/子代理/新服务/第二ledger/限额重置/remote写。
+
+# PREVIOUS TRAINING PLAN v43: 2026-11-04
+
+完整Nov2目标ACTIVE；最新data/manifests/development-training-progress-20261102-v43.json，本轮progress。
+唯一live E4 frozen-encoder-control coordinator835690/child835695/exec60272，当前5/32；checkpoint E1-answer-first-head128，HostTrue，同32原pre-Host快照。禁第二模型/live离线写账/timeout重启。
+fixed-context已32全闭并源审：17完整/7限定/4不完整/4失败；原fixed-prefixTrue18。gain6/9/23/24/26，loss13/19/22/27/28/31；-3.125pp CI[-21.875,15.625]，无优势主张。
+fixed-context63HTTP/227676已知tokens/unknown0，client84.195115471CPU已计；28最终输入/104Source范围逐字匹配/unmatched0。case7截断前无检索，case20/28完成回复但未调用工具；不能归咎未执行的控制器。
+fixed-context原生F1 .07345490409，native-results-v2.json；首次flat family map不合scorer condition-map契约，保留失败输入/log，仅改离线包装，不改Host答案或主标签。
+rules已32全闭，78HTTP/242176已知/unknown0，client81.009273319CPU已计；26最终输入/74Source范围/unmatched0，尚未源审评分。
+通用离线工具root e4-main-methods-v1：bind_method.py METHOD；show_method.py METHOD indices；review_helpers.add(METHOD,...); close_method.py METHOD。规则审阅下一步从index0开始。
+绑定要求实际first wire完全等原HostTrue、原freeze/Store/catalog保持、仅policy/checkpoint改变；后续query和轨迹自主。learned generation_calls含本地Laya准入，不能误当全是HTTP。
+E3 local已闭：agg14/32，old13，init14；22新Reader/79568tokens/105Source范围已源审，当前参考仍E1delivery-u16。两E3候选自主研究条件仍需执行，未采用。
+E4剩余incumbent-delivery-u16/e3-aggregate-u32/e3-continued-old-u64已绑定learned-comparison-plan-v1，run_method.py支持全部6方法，旧fixed-prefix18/32直接复用。
+E5 model-free40工具probe已闭，非自主任务分数；完整80位置×6表示预算条件仍待。最终seed/确认/LME→Mem2Act/论文/有效Product未完成。
+本轮空闲结算fixed绑定1.83CPU与rules绑定1.91CPU；当前3pending timers=1.14CPU（fixed review-compilation/native-scoring失败/native-scoring-v2），详v43。作者未测未知非0；live禁offline写账。
+E2不采用，HostTrue保留。禁SHA/子代理/新服务/第二ledger/限额重置/remote写。
+
+# PREVIOUS TRAINING PLAN v42: 2026-11-04
+
+完整Nov2目标ACTIVE；最新data/manifests/development-training-progress-20261102-v42.json，本轮progress。
+E3两fit128/2048与两savedCPU31均闭；aggregate-u32和continued-old-u64分别270756输入tokens，CPU4/FP32条件匹配。旧saved coordinator292594及child352502已退出。
+新22完整READ绑定全闭，覆盖35待执行选择（13共享只执行一次）；22Reader首次全COMPLETED，79568已知tokens/unknown0，client62.179611548CPU已计，105Source范围已绑。
+104旧首结果及主标签逐值一致复用（101完成/3失败），missing30保留32分母；22新源审完成，无新training labels。
+E3local结果：aggregate14/32，continued-old13/32，mandatory E1delivery-u16=14/32，raw14/32。材料充分18/17/17/17。
+agg-old +3.125pp CI[0,9.375]仅case23保留init本已正确；agg-init0pp CI[-12.5,12.5]，gain19/21 loss3/11；old-init-3.125 CI[-15.625,9.375]。
+原生完整答案F1 agg .06013310987、old .05875240290，31预测/32分母，非source-grounded成功率。coarse25敏感性agg15/init15，strict21 agg13/init14；不改变无local promotion结论。
+closeout-v1.json：当前仍保留E1delivery-u16研究参考，不主张E3优势；完整自主迁移比较仍要做，未因local结果而冒充已完成。
+唯一live E4 fixed-context coordinator665238/child665339/exec66328，当前15/32，HostTrue；root e4-main-methods-v1，output e4-main-methods-execution-v1/fixed-context。禁第二模型/live离线写账/timeout重启。
+baseline-plan-v1有fixed-context/rules/frozen-head3臂；learned-comparison-plan-v1新增incumbent-delivery-u16/e3-aggregate-u32/e3-continued-old-u64研究条件，同32原pre-Host快照/预算/接口。run_method.py支持这6名，旧fixed-prefixTrue18/32直接复用。
+E5 model-free40工具probe已闭（2048/1024 extractive View8/10与2/10），不是自主Host/任务成绩；完整80位置×6表示预算条件仍待。
+paper-development-v1现有7已闭fit资源+10E3原生点；待刷新local14/13表格及后续Host。
+本轮真空闲已结算8.34CPU/6命令及2.52CPU/5命令；当前无新已测pending，作者未测未知非0。saved native3826.188677671/3610.450307491及残差20.827826744/15.613966715均已计，勿重复。
+完整E3自主迁移/E4/E5/最终3seed/确认/LME→Mem2Act/最终论文/有效Product未完成。E2不采用，HostTrue保留。禁SHA/子代理/新服务/第二ledger/限额重置/remote写。
+
+# PREVIOUS TRAINING PLAN v41: 2026-11-03
+
+完整Nov2目标ACTIVE；最新data/manifests/development-training-progress-20261102-v41.json，本轮progress。
+E3两fit全闭并联合审计：各128updates/2048draws，实际tokens10578674/10588670（差-0.0944%），所有0/16/32/64/128评价完成。旧coordinator4025804与child53384均退出。
+aggregate native6049.829366363+residual21.963801174CPU已计；continued-old native6101.340522975+residual21.633378341CPU已计，wall3484.374s。
+按预定规则提名aggregate-u32（delivery宏.9469494048、operation.7914154005）与continued-old-u64（.9547619048、.7752383454）；init .9495535714/.7788507060。均过2pp操作门槛，不是方法采用。
+两完整选模预算相同，选中前缀却为512rows/2645735tokens与1024rows/5324995tokens；实际task比较不能称同update纯数据效应。强制保留E1delivery-u16初始结果。
+唯一live savedCPU coordinator292594/child292615/exec1477，当前aggregate-u32 15/31；随后原队列continued-old-u64。新fits0。禁第二模型/live离线写账/timeout重启。
+root e3-task-dev32-v1，outputs e3-task-dev32-evaluation-v1；CPU4/FP32/shared_actions/16384-head2048，MHAfastpath及reference_compile均False；每模型270756输入tokens，最大12310/head1582，无截断。
+prepare_choices.py已备，必须两saved评价闭后执行；使用prior-outcome-registry-v1，104首结果=31raw+48E1+16ordinary+9relative，101COMPLETED/3FAILED，31actualstates/32计划族、missing30保留。只缺失完整绑定才新Reader。
+E3direct observed-Source READ覆盖缺口与1909.01515可见未交付案例保留，当前数据标签未修改。
+E5model-free40真实工具probe闭，2048/1024各extractive返回View8/10与2/10；Source前缀保真，模型/HTTP0，不是E5自主或任务分数。E4三基线96位置已备未执行。
+真空闲已一次结算17项48.51CPU（含原15项33.73+联合审计+tokenizer准备）；当前只新pending prior-outcome-binding.time.txt 2.83CPU，作者未测未知非0，当前ledger等saved入口。
+完整E3任务/Host迁移/E4/E5/最终3seed/确认/LME→Mem2Act/最终论文/有效Product未完成。E2不采用，HostTrue保留。禁SHA/子代理/新服务/第二ledger/限额重置/remote写。
+
+# PREVIOUS TRAINING PLAN v40: 2026-11-03
+
+完整Nov2目标ACTIVE；最新data/manifests/development-training-progress-20261102-v40.json，本轮progress。
+唯一live coordinator4025804/child53384/exec38583，E3 continued-old最新54/128、864draws、4487071tokens；闭合curve[0, 16, 32]。禁第二模型/live离线写账/timeout重启。
+aggregate已128/2048/10578674闭合并全审计，aggregate-analysis-v1.json绑定run/history；native6049.829366363+client残差21.963801174CPU已计。
+aggregate旧反馈方向u0 .94955357、u32 .94694940（最高非零）；未联合提名或执行savedCPU任务。两臂闭后analyze_closed.py复用aggregate审计再审对照，1非零/臂+2pp操作保留+强制update0。
+source-anchor-visibility/branch-coverage-reflection：57新菜单全有direct observed-Source READ，却仅1状态比较且tie；聚合257反馈仅2状态比较该类，2tie+1旧方向胜。1909.01515可见807字符定义未被实际两包交付，未执行动作质量仍unknown。
+本轮e5-model-free-packet-probe-v1实跑40 native milai_retrieve：固定前2旧dev族×5给定query×raw/extractive×2048/1024，无Host/Reader/生成模型，ledger不变。
+每族预分配opaque refs并克隆同一标准Store身份夹具；各条件Source正文/角色/时钟前缀逐值相同，没提前注入未来正文；实际literal cache节点/角色/日期保真。
+2048 raw/extractive：10次各，返回包tokens9080/14091，View返回0/8，控制步70/40，读操作40/10，View拒绝0/4。
+1024 raw/extractive：tokens9080/8636，View返回0/2，控制步70/76，读操作40/34，View拒绝0/10。USE_VIEW复用2次在2048全交付、1024全拒绝。
+final阶段大scope20/21 Source被拒后，实际raw读取触发小scope1/2 Source View成功返回；是范围改变非同信息压缩。不能从cache存在或较短包推出任务充分/成本优势。
+完整E5自主80位置×6条件仍未执行，controller待绑定。probe只给定query，排除标记query且无生成历史；不能替代Host历史/生成式View效果。结果已加paper-development-v1补表。
+E4三基线同32pre-Host快照/HostTrue已备96位置未执行。E2不采用；原main参考E1delivery-u16。
+前离线131.36已计；累计15pending timers=33.73CPU详v40，模型真空闲一次结算，probe嵌套14.463CPU不可再重复加；当前ledger等continued-old入口。
+完整E3任务/E4/E5/最终3seed/确认/LME→Mem2Act/最终论文/有效Product未完成。禁SHA/子代理/新服务/第二ledger/限额重置/remote写。
+
+# PREVIOUS TRAINING PLAN v39: 2026-11-03
+
+完整Nov2目标ACTIVE；最新data/manifests/development-training-progress-20261102-v39.json，本轮progress。
+E3 aggregate已COMPLETED且全曲线审计通过：128updates/2048draws/10578674tokens，0/16/32/64/128均闭。旧child4025809已退出。
+唯一live原coordinator4025804/新child53384/exec38583，已自动启动预声明continued-old；最新0/128。禁第二模型/live离线写账/timeout重启。
+aggregate native6049.829366363CPU与client残差21.963801174CPU已各计一次，wall3475.508s；两臂仍待对照闭合及实际任务，不是方法采用。
+aggregate-analysis-v1.json绑定终态run/history，联合analyze_closed.py会复用此审计，不重复计算；每臂至多1非零提名+2pp操作门槛+强制update0。
+aggregate旧反馈delivery宏方向：u0 .9495535714，u16 .6975446429，u32 .9469494048，u64 .8342261905，u128 .8766369048；仅诊断，未提名/执行savedCPU任务。
+新57反馈/56族/107pairs，139首结果；30状态所有已执行候选材料不足，23至少1完整，25可HANDOFF中7完整。55singleton只覆盖。
+新增source-anchor-visibility-v1：136参考引文实例，30控制器可见/12已选交付；30全不足状态中26无参考引文、3部分、1全部。参考引文不是充分性oracle。
+该1例1909.01515 step1：807字符原文已明确relation/gradient meta，source_fragment_6合法READ范围已提供，实际read_0与SEARCH16两包都漏掉定义。未执行READ结果仍unknown。
+branch-coverage-reflection-v1：57新菜单全有直接observed-Source READ，但仅1状态比较、1tie、0方向；聚合旧+新257反馈中68提供、2比较、2tie+1方向/1旧质量胜。不得说全训练完全无支持。
+当前两fit及标签不改；后续若任务/Host不增益，优先已存在READ参数覆盖，禁再盲加同池fit。该案例已纳入paper-development-v1开发稿。
+E4 e4-main-methods-v1三基线同32pre-Host快照/HostTrue已备，96位置未执行；E5 e5-controlled-lifecycle-v1的8族/16流/80位置源前缀与无关控制已审，执行仍待。
+前离线131.36已结算；累计12pending timers=7.97CPU详v39，只在模型真空闲后结算。当前ledger逐值等continued-old入口，作者未测未知非0。
+完整E3任务/E4/E5/最终3seed/确认/LME→Mem2Act/最终论文/有效Product未完成。E2不采用，HostTrue保留。禁SHA/子代理/新服务/第二ledger/限额重置/remote写。
+
+# PREVIOUS TRAINING PLAN v38: 2026-11-03
+
+完整Nov2目标ACTIVE；最新data/manifests/development-training-progress-20261102-v38.json，本轮progress。
+唯一live E3 coordinator4025804/child4025809/exec38583，aggregate持久化64/128、1024draws、5319858tokens；闭合curve[0, 16, 32]，之后自动continued-old。禁第二模型/live离线写账/timeout重启。
+两臂同E1delivery-u16、原E1冻结runtime、delivery/quality-tie +set replay0.25；128updates/2048draws，预计10578674/10588670tokens（差-0.0944%）。
+新57比较状态/56族/107pairs均已源审；aggregate去重457状态/96反馈族，continued-old去重400状态/40反馈族，共同457抽样槽/200replay。
+旧family/event总权重保持，但长度重采样改变事件内状态曝光；重复槽不是新来源/新标签。
+collector-diagnostic-v1：current20/57完整、baseline18/57；答案方向6/10/tie38/unknown3，交付5/9/tie42/unknown1。30状态全候选材料不足，23有完整候选；25可HANDOFF中7完整。仅TRAIN短续接诊断。
+新增paper-development-v1/manuscript.md、evidence.json、5类CSV表+训练资源补表；5已闭fit/10条件曲线点回读通过，空缺为null不作0，无E3/确认/完整成本优势主张。
+该稿是开发证据草稿，最终论文需E3/E4/E5/多seed/外部与确认结果；原图closed-development-figure-v1保持。
+E4 e4-main-methods-v1的3基线各32同pre-Host capture已绑定，96新位置未执行；HostTrue，旧fixed-prefix结果复用，主候选待E3实际任务选择。
+E5 e5-controlled-lifecycle-v1：8旧dev族/16流/80位置，184原Source与原请求保持；新增中性ID的USB位置控制，80前缀/用户引文及无关性逐族核对，标签只评分侧。待controller/6表示预算条件实际执行。
+前131.36CPU已结算；现累计8pending timers=2.73CPU，详v38，只在模型真空闲后结算。当前ledger逐值等训练入口，作者未测未知非0。
+两fit真闭后analyze_closed.py：每臂1非零提名+2pp操作保留门槛，强制update0，再savedCPU/实际首绑定/HostTrue。
+E2不采用；完整E4/E5/最终3seed/确认/LME→Mem2Act/论文/有效Product仍未完成。禁SHA/子代理/新服务/第二ledger/重置限额/remote写。
+
+# PREVIOUS TRAINING PLAN v37: 2026-11-03
+
+完整Nov2目标ACTIVE；最新data/manifests/development-training-progress-20261102-v37.json，本轮progress。
+唯一live E3 coordinator4025804/child4025809/exec38583，aggregate最新持久化32/128；闭合curve0/16，随后自动continued-old。禁第二模型/live离线写账/timeout重启。
+两臂同E1delivery-u16，原冻结E1 runtime，delivery/quality-tie +set replay0.25；128updates/2048draws；预期tokens10578674/10588670（差-0.0944%）。
+已审新56：57比较状态/107pairs，139实际首结果；remaining49编译闭合，3Reader失败保留，旧pilot-v1不得重复拼。
+collector-diagnostic-v1.json：current20/57完整，baseline18/57；答案方向当前6/基线10/tie38/unknown3，交付5/9/tie42/unknown1。这是选中TRAIN短续接诊断，非E3模型或Host收益。
+30/57所有已执行候选材料不足；23至少一个完整；25可HANDOFF中7完整。55singleton仍coverage-only。后续失败应先看取证/停止/Reader，不加同类fit。
+E4 e4-main-methods-v1/baseline-plan-v1.json与run_method.py已备：fixed-context/rules/已选frozen-head各同32原pre-Host capture，HostTrue。96新位置未执行，旧fixed-prefix结果复用。
+E5 e5-controlled-lifecycle-v1/：8旧dev族/16流/每流5请求，共80位置/条件；184原Source与原4请求逐值保持。
+新增中性ID additional-arrival/e5-added-source-01，正文USB线位置；逐族审查不改变任何被问事实，标签仅评分侧。80前缀与原用户引文映射回读通过。
+E5仍待controller绑定及raw/extractive/generated×2048/1024实际执行/源审/累计成本；无外生新Source不代表cache无变化，Host自身历史也要计入。
+前离线131.36CPU已结算；本轮新增5timer共1.47CPU待模型真空闲一次结算，作者未测未知非0，当前ledger逐值等训练入口。
+两fit真闭后run analyze_closed.py；1非零提名/臂+2pp操作保留门槛，强制update0，再savedCPU/实际任务/HostTrue。
+E2不采用；HostTrue已选；完整E4/E5/最终3seed/确认/LME→Mem2Act/论文/有效Product仍未完成。禁SHA/子代理/新服务/第二ledger/重置限额/remote写。
+
+# PREVIOUS TRAINING PLAN v36: 2026-11-03
+
+完整Nov2目标ACTIVE；最新data/manifests/development-training-progress-20261102-v36.json，本轮progress。
+E2不采用；HostTrue18/32优于False14/32开发点，保留True；E3参考E1delivery-u16，非部署优势。
+remaining48的118新分支全闭：391167已知tokens/unknown0；119首结果含1末READ复用，116COMPLETED/3FAILED。client256.003575859CPU已计。
+49实到状态/48族/352Source范围全部源审并编译：91pairs；质量前成本answer22方向/65tie/4unknown，delivery17方向/74tie。
+新56最新反馈只合pilot-v2与remaining-v1：57状态/56族/107pairs，answer27方向/75tie/5unknown，delivery21方向/85tie/1unknown。禁再拼pilot-v1。
+初始call无post-prefix计数的边界已按schema/start0处理，post仍严格校验；原失败保留，16测试/Ruff/mypy过，无模型重试。
+E3两fit已准入并串行启动：唯一live coordinator4025804/child4025809/exec38583，当前aggregate初始dev。
+root e3-matched-training-v1；output e3-fitting-v1/aggregate，闭后自动continued-old。第一次模型失败停止队列，无重试。
+同E1delivery-u16/Frozen E1 runtime，delivery/quality-tie +set replay0.25，128updates/2048draws，0/16/32/64/128。
+两臂457抽样槽：旧400逐值保持、共同200replay；最后57槽为新增反馈或长度匹配重采样旧反馈。
+aggregate457独立状态，continued-old400独立状态；旧family/event总权重保持，事件内状态曝光改变，不能说旧目标逐状态完全相同。
+预期训练tokens10578674 vs10588670（差-0.0944%）；新57各曝光4或5次，无截断。
+已保存tokenizer配置新增4字段；当前tokenizer重算1324旧train/dev/feedback长度全一致。三次离线准备失败日志保留，非训练失败。
+模型空闲一次结算15项离线131.36CPU（含前9.63和失败准备），模型费用未重计。live禁offline写账/第二模型。
+两fit真闭后执行analyze_closed.py：完整曲线审计；每臂至多1非零提名，2pp操作保留门槛；强制保留update0，再savedCPU/实际任务/HostTrue。
+后续E4/E5/最终3seed/确认/LME→Mem2Act/论文/有效Product未完成。禁SHA/子代理/新服务/第二ledger/限额重置/remote写。
+
+# PREVIOUS TRAINING PLAN v35: 2026-11-03
+
+完整Nov2目标ACTIVE；最新data/manifests/development-training-progress-20261102-v35.json，本轮progress。
+E2不采用（task两臂16/32但change1/8 vsinit6/8）；HostTrue18/32优于False14/32开发点，保留True。E3参考E1delivery-u16，非部署优势。
+新56采集全部闭：448实际决策/2713054输入tokens，56Reader首次全完成/209503已知tokens/unknown0。旧first8保持，全首轮64族。
+remaining48：384决策/2313121输入tokens，48Reader/180134已知/unknown0，wholeclient23480.678533852 CPU已计。
+选96状态，无缺失；49可比较状态（含1初始，qasper-paper-2004.01980），47singleton覆盖only；119绑定=49READ/49SEARCH/21HANDOFF。
+1原末READ首结果复用，118新绑定正在执行：唯一live coordinator3728619/child3728624/exec75911，最新55/118。
+root e3-remaining48-reached-branches-v1，闭后bind_outcomes.py，验证119结果/49states。初始状态短continuation的结果不能冒充完整策略收益。
+首批4新HANDOFF已闭、10658已知/unknown0、client14.364722301 CPU已计；20结果合并校验，保留原16首次结果。
+首批最新e3-pilot8-feedback-compiled-v2：同8状态/16pairs，旧8判断、state/questions/gold/eventIDs逐值不变；不得再拼pilot-v1重复行。
+quality-before-cost：answer5方向/10tie/1unknown；delivery4方向/11tie/1unknown，均7有目标状态。新增HANDOFF1完整/1限定/2不完整；不把便宜当更正确。
+新56共112选中状态、57比较状态、55singleton；含旧first8的8已选反馈共120状态≤128，不补剩余。
+已有新origin编译器14测试、替代规则5测试及静态检查通过；训练必须delivery/quality-tie +accepted-set replay0.25，legacy成本方向不可冒充质量方向。
+已导出closed-development-figure-v1/的PNG/SVG/PDF/CSV和data.json，系统Matplotlib无需安装，已看图；仅已闭开发结果，非最终论文/确认。
+空闲已结算pending103.92与后续11.08 CPU；当前新pending 9.63CPU（pilot增强review-binding/feedback-compilation），作者未测未知非0。live禁offline写账/第二模型。
+后续其余49状态源审编译→E3两个匹配fit→实际dev/HostTrue/E4/E5/最终3seed/确认/LME→Mem2Act/论文/有效Product。禁SHA/子代理/新服务/第二ledger/限额重置/remote写。
+
+# PREVIOUS TRAINING PLAN v34: 2026-11-03
+
+完整Nov2目标ACTIVE；最新data/manifests/development-training-progress-20261102-v34.json，本轮progress。
+唯一live E3 remaining48 coordinator3220260/child3220284/exec71836，最新31/48；v2采集config/Source/native query/checkpoint不变。禁第二模型/live offline写账。
+E2两配方不采用；HostFalse14/32 vsTrue18/32且tokens4.083倍，后续保留True原首结果。E3参考E1delivery-u16（非部署优势）。
+E3pilot8采集64真实决策/399933输入tokens，8Reader已闭；16选择状态=8singleton覆盖+8post比较；15新Reader+1末步READ原结果复用，共16结果47Source范围已绑。
+新feedback_outcomes支持same_before_first_action：逐字prefix/完整before-menu-首绑定/实际固定续接/额度/Tool和Reader包；旧HANDOFF-only约束不改。
+prepare_retrieval_feedback.py --reached-decisions支持2/3真实来源与末READ复用；14相关测试、Ruff、mypy2模块过，实际8组16结果通过。
+兼容性修正：保留legacy成本破平局标签，但quality_before_resource_tiebreak不变；E3必须继承delivery/quality-tie +set replay0.25，不能误用legacy质量成本方向。
+首批已源审并编译8行至e3-pilot8-feedback-compiled-v1：两目标均当前胜1/基线胜2/平局4/unknown1，7有目标、3方向；两侧完整各3/8，不是方法优势。
+首测试暴露legacy格式约束后已正确复用；首资源脚本CUDA env缺langchain，改用现有base env仅tokenizer，无装依赖。所有初次失败日志及成本保留。
+发现机制缺口：64决策无HANDOFF，原第三context候选全与SEARCH基线相同。v3分支计划单独声明已取材料的非空raw-delivery HANDOFF优先，仍最多3候选，无Source/状态/seed/fit额度变化。
+e3-next56-acquired-stop-v3/plan.json；原v2 live采集不改。新5测试/Ruff/mypy过。首批选择仍同16状态、输入和eventIDs逐值相同。
+e3-pilot8-reached-branches-v2已备20比较绑定：复用16旧首结果，只新增4HANDOFF未执行。旧8质量判断保留，增强训练视图完成后替换同状态行，不串接重复行。
+remaining48闭后用v3计划选状态/备分支。先在空闲结算pending，再跑4HANDOFF或其余新分支；无重跑旧结果/无拼造早期最终答案。
+本轮19项已测pending 76.88CPU，路径见v34；唯一ledger仅当前模型native compute变化，未离线写。作者工作未测未知非0。
+全E3两拟合/E4主方法/E5/最终3seed/确认/LME→Mem2Act/论文/有效Product仍待；禁SHA/子代理/新服务/第二ledger/限额重置/remote写。
+
+# PREVIOUS TRAINING PLAN v33: 2026-11-03
+
+完整Nov2目标ACTIVE；最新data/manifests/development-training-progress-20261102-v33.json，本轮progress。
+E2全闭且两配方不采用；task均16/32 vsE1delivery16初始14/32，但change1/8 vsinit6/8。E3保留E1delivery-u16研究参考。
+HostTrue/False全32闭合：False14/32 vsTrue18/32；差-12.5pp，描述性95%[-31.25,6.25]，False已知tokens1078891为True4.083倍。host-selection-v1.json保留True，原首结果不重跑。
+E3新pilot8已闭：437Sources，64实际完整菜单评分（8SEARCH/56READ/0HANDOFF），399933输入tokens，1加载，8Reader全完成/29369已知/unknown0，wholeclient4020.914472725CPU已计。
+选16实到状态：8初始singleton只计覆盖、8post比较；steps0x8/1x4/2x1/4x2/7x1，无缺失。post均currentREAD vsfixed_prefix SEARCH16，fixed_context相同，无第三binding。不要声称超越固定类型优先。
+E3pilot15新分支Reader全闭，39022已知/unknown0、client40.215307355CPU已计；另1原末步READ首结果复用，不重跑。
+e3-pilot8-reached-branches-v1/outcomes-for-review-v1.json：8组16结果、47来源范围全绑，组内Readerwire除packet外一致；质量评审/训练labels尚未完成。
+重要native语义：continuation_steps2是first之后最多2个普通决策，再有slot才forcedHANDOFF；最多4步且原剩余额度封顶。复用的末READ仅剩1slot，无后续策略动作，同budget_exhausted包。
+编译缺口：feedback_outcomes.py现仅支持closed_collector_last_decision和HANDOFF-only new_same_before_raw_delivery。需明确支持新same_before_first_action及混合终态复用，不能伪造旧replay或把早期最终答案当标签。
+唯一live remaining48 coordinator3220260/child3220284/exec71836，最新2/48，3590Sources，output e3-clean-query-collection-remaining48-v1；same E1checkpoint/CPU4/FP32/shared_actions/16384-head2048。
+collect run_collection.py remaining48已过真实pilot gate；保持固定56源码/查询/每族seed/initial-post额度及旧first8不改，64族/128状态上限不改。
+本轮离线12.67、10.06、5.05 CPU已空闲结算；当前已测pending0，未测作者工作未知非0。live禁第二模型/offline写账。
+并行只做pilot源审/新origin编译器及必要离线测试；remaining48结束后再选状态、去重、实际分支。
+E3两拟合/E4主方法/E5/最终3seed/确认/LME→Mem2Act/论文/有效Product仍待；禁SHA/子代理/新服务/第二ledger/限额重置/remote写。
+
+# PREVIOUS TRAINING PLAN v32: 2026-11-03
+
+完整Nov2目标ACTIVE；最新data/manifests/development-training-progress-20261102-v32.json，本轮progress。
+E2全闭且不采用：ordinary/relative task均16/32，init E1delivery16为14/32；各训练点change1/8 vsinit6/8。E3保留E1delivery-u16研究参考，非部署优势。
+HostTrue/False全32已闭：False14/32（14C9Q1I8F），True18/32；3胜[9,23,24]7负[3,5,10,11,18,22,31]，差-12.5pp，描述性95%[-31.25,6.25]pp。
+False260HTTP/1078891已知tokens/unknown0，True264237tokens，4.083倍；False245工具尝试/返回、24工具错误、189预算耗尽回执，8失败全为24调用cap。
+False24完成final输入/96Source范围全绑，未匹配0；client147.342208801CPU已计，nativeAnswerF1 .08938604616单列。
+comparison32-closeout-v1.json与host-selection-v1.json在e4-host-thinking-factor-v1：按预定质量优先规则保留True，原True首结果复用不重跑；这不是确认或E4主方法已完成。
+首native评分因未识别BUDGET_EXHAUSTED终态失败；score_qasper_readouts.py补显式允许该终态但不生成预测，完整分母保留。4测试/Ruff/mypy过，v1失败日志/部分产物保留，v2原文评分完成。
+唯一live E3新TRAIN pilot8 coordinator3040788/child3040794/exec48648，最新7/8；output e3-clean-query-collection-pilot8-v1，Source437。
+已实际单实例加载E1delivery-u16，CPU4/FP32/shared_actions/16384-head2048/MHAfastpathFalse/reference_compileFalse VERIFIED。旧given-v4 runtime与已验证保存评估的loader/projection/controller模块逐字一致。
+新56按原8/48固定来源/native queries/每族seed/initial-post配额，remaining48为3590Source；两份config/dispatch均在e3-next56-clean-query-v2/segments，旧first8不改，64族/128状态上限不改。
+新run_collection.py串行；remaining48需pilot实际关闭审计collection-closeout-v1.json，状态ACTUAL_PILOT8_COLLECTION_BOUND_READY_FOR_REMAINING48。
+闭后用select_reached_feedback_states.py及prepare_reached_feedback_branches.py取实际分歧/均匀post，不补缺失、不把远期最终答案当早期分支标签；singleton覆盖only。
+本轮离线CPU12.67在空闲结算，receipt E3segments/pilot8/prelaunch-settlement-v1.json；当前已测pending0，作者未测未知非0，live禁offline写账/第二模型。
+E3两拟合/E4主方法/E5/最终3seed/确认/LME→Mem2Act/论文/有效Product仍待；禁SHA/子代理/新服务/第二ledger/限额重置/remote写。
+
+# PREVIOUS TRAINING PLAN v31: 2026-11-03
+
+完整Nov2目标ACTIVE；最新data/manifests/development-training-progress-20261102-v31.json。本轮progress。
+E2全部已闭：relative u1403保存31状态+9新READ首Reader全COMPLETED，22旧首结果复用，missing30保留32分母。
+relative16/32，ordinary16/32，E1delivery16初始14/32；完整成功向量同，21/31动作同、10不同；native F1 .05452867884；新增28816已知tokens/unknown0。
+9新分支43来源范围全绑；6例加章节标题、1例补已有必要事实之外实验背景、2 observe-only最后材料内容顺序同raw。
+E2采用门槛失败：训练后各点change1/8 vsinit6/8，两臂均不采用；e2-task-selection-v1/selection-v1.json保留E1delivery-u16研究参考，非部署赢家。
+E3新56 plan已绑定collector并核其真实CPU31推理；8/48 dispatch待实现，旧first8及64族/128状态上限不改。
+HostFalse原pilot首2在位置1达24调用无答案，FAILED_RETAINED保留；原26HTTP/107048已知/unknown0、client18.879742527 CPU已计，不重跑。
+batch仅新增精确单消息cap失败可进入下一独立case；global budget/unknown仍停。6唯一行为测试working/frozen各过，Ruff/mypy过。旧runtime保留，batch-runtime-v2新工具/测试。
+未触达tail6已闭：34HTTP/132927已知/unknown0、client26.593363179CPU已计。bind_completed_pilot.py已合并canonical pilot8/results-v1及binding-v1。
+首8共6workflow COMPLETED、2BUDGET_EXHAUSTED（位置1/2），60HTTP/239975已知/unknown0、client45.473105706CPU；不是语义成功率，source-author评审待。
+唯一live remaining24 coordinator2826801/child2826825/exec72651，位置8:32，最新4/24。勿再跑pilot或tail。
+闭后运行bind_segment.py remaining24合并全32，再按原guide评审及原预定规则选HostTrue/False；没有质量依据筛掉病例。
+本轮空闲结算2.77、3.40、27.91、0.63 CPU；当前已测pending0，未测作者工作未知非0，live禁offline写账。
+E4主比较/E5/最终3seed/确认/LME→Mem2Act/论文/有效Product仍待；禁SHA/子代理/第二模型/新服务/第二ledger/限额重置/remote写。
+
+# PREVIOUS TRAINING PLAN v30: 2026-11-03
+
+完整Nov2目标ACTIVE；最新data/manifests/development-training-progress-20261102-v30.json。本轮progress。
+E2relative第二/最后fit全闭：2805updates/44868行/37502475tokens/22434batch forwards，39982conditional+4886operation，末窗口4行。
+同ordinary的抽样/选项/窗口/tokens/前向全部逐值一致，6change均一次曝光；full-analysis-v1.json通过。
+最终balanced .882834/opmacro .801401；change仍1/8、7双positive、signed4/8，init6/8。相对项未修复退化，不加第三fit。
+全curve预定提名u1403（balanced .892224/op .797866）；ordinary nominee702曝光不同，不把其task差异叫固定update的纯loss效应。
+唯一live保存CPU任务评估 coordinator2621893/child2621916/exec28277，4/31实际状态，固定32分母missing30保留。
+使用shared_actions/CPU4/FP32/16384-head2048；plan/admission/runner在e2-relative-task-dev32-v1，闭合后prepare_choices.py复用原raw+64已闭E1/E2绑定，只跑新绑定。
+旧训练1261361/1261366和观察器54492/51298均已退出。native31025.387674757 CPU与res48.295449494已计，勿重计。
+空闲已一次结算57项离线CPU270.25，receipt e2-relative-task-dev32-v1/prelaunch-settlement-v1.json；当前已测pending0，未测作者工作未知非0，live禁offline写账。
+LME图像探针原3首结果已存在且完整复核：4346已知tokens/unknown0、16.82CPU已计，Host/capacity/template与image_capacity/lme_reader源码逐值相同。
+external-reuse-audit-v1/report.json校正旧pending清单；不是新模型调用或LME成绩，不重跑/重记该探针。
+Host no-thinking8/24已准入未执行；E3新56 collector仍待实际task选择；E5新矩阵及最终3seed/确认/LME→Mem2Act/论文/有效Product仍待。
+禁SHA/子代理/第二模型/新服务/第二ledger/限额重置/remote写；完整目标不缩减。
+
+# PREVIOUS TRAINING PLAN v29: 2026-11-03
+
+完整Nov2目标ACTIVE；最新data/manifests/development-training-progress-20261102-v29.json，本轮verified_wait_and_complete_change_exposure_audit。
+唯一live E2 relative coordinator1261361/child1261366/exec35348，最新2530/2805，40480行/33855815tokens。
+全部6/6 TRAIN变化对均按既定一次曝光并核过实际loss；最后2500 loss.4462941587、优化贡献.1115735397；all-change-exposure-audit-v1.json。
+这不是新dev成绩：2104 change1/8仍是最近已闭点，最终2805训练/3068dev/64feedback及保存未闭，尚不提名。
+旧observer54492已正常退出，watch-final-exposure.time.txt CPU .11已加入pending；新只读observer51298写watch-fit-close.jsonl至模型与coordinator均退出，勿重复观察器。
+新observer计数路径已用2104真实3068/64文件验证；time仅退出后完整，届时补计CPU一次。
+累计已测pending 245.12CPU；唯一账本逐值等于fit-entry，无live offline写入。
+后续：coordinator闭合→full-analysis→单候选保存31实际状态→原首结果复用/新绑定Reader。Host no-thinking8/24已准入未跑；E3新56待collector最终绑定。
+E5历史大小/语义审计已闭，新同controller raw/extractive/generated及1024实际生命周期仍待。
+完整E3/E4/E5/最终三seed/确认/LME→Mem2Act/论文/有效Product仍待；禁SHA/子代理/第二模型/新服务/第二ledger/限额重置/remote写。
+
+# PREVIOUS TRAINING PLAN v28: 2026-11-03
+
+完整Nov2目标ACTIVE；最新data/manifests/development-training-progress-20261102-v28.json，本轮progress_and_verified_wait。
+唯一live E2 relative coordinator1261361/child1261366/exec35348，最新2393/2805，38288行/32140524tokens，变化曝光5/6。
+2373第五组relative loss1.8165988922，优化贡献.4541497231；方向/事件/权重/窗口分母逐值核过，见fifth-change-audit-v1.json。
+最后一组仍2500，尚无新的dev评估；2104 change1/8结果不变，不提名部分曲线。
+只读observer session54492至2501自动退出，记录e2-relative-training-v1/watch-final-exposure.jsonl；不要重复观察器，退出后补其time CPU一次。
+E5历史4生成输出大小诊断已落盘representation-size-v1.json：generated/literal结构tokens依次262/449、333/836、480/440、639/1122。
+literal是同输入正文的离线结构投影，没有执行新分支；计数不含返回包/来源位置/metadata/其他交付，不能推断完整1024/2048包准入或任务成绩。
+raw禁用View会改合法动作，extractive逐字引用全文，generated含真实生成成本/语义风险；同controller矩阵不自动是等已取信息的纯格式效应。新E5仍待。
+累计已测pending 245.01CPU（新增tokenizer大小分析9.30），账本仍逐值等于fit-entry；观察器计时未结束，作者未测工作未知非0。
+后续：完整curve核验→单候选保存31状态→实际绑定首结果；Host no-thinking8/24已准入未跑；E3新56待collector绑定。
+完整E3/E4/E5/最终三seed/确认/LME→Mem2Act/论文/有效Product仍待；禁SHA/子代理/第二模型/新服务/第二ledger/重置限额/remote写。
+
+# PREVIOUS TRAINING PLAN v27: 2026-11-03
+
+完整Nov2目标ACTIVE；最新data/manifests/development-training-progress-20261102-v27.json。本轮verified_wait_and_partial_curve_audit。
+唯一live E2 relative coordinator1261361/child1261366/exec35348，最新2176/2805，34816行/29308985tokens，变化曝光4/6。
+2104点已完整审计：relative balanced .887430 vs ordinary .886220；opmacro .796190 vs .786325。
+两臂change均1/8、7双positive、signed3/8；feedback answer均.620536，delivery .718750 vs .713542。
+这仍是部分曲线；后两TRAINchange2373/2500未曝光，不提名、不改训练、不追加第三fit。
+只读observer exec session54492写e2-relative-training-v1/watch-final-exposure.jsonl，达到2501自动退出；勿重复启动。其time文件仅退出后完整，届时补计CPU一次。
+累计已测pending 235.71CPU，其中本次point2104审计1.61；live ledger逐值等于fit-entry，无offline写入。
+训练后完整audit→单候选保存31状态→实际绑定结果复用/新分支。Host no-thinking8/24已准入未跑；E3新56 collector仍待最终选择。
+完整E3/E4/E5/三seed/确认/LME→Mem2Act/论文/有效Product仍待；禁SHA/子代理/第二模型/新服务/第二ledger/限额重置/remote写。
+
+# PREVIOUS TRAINING PLAN v26: 2026-11-03
+
+完整Nov2目标ACTIVE，最新data/manifests/development-training-progress-20261102-v26.json；本轮progress。
+唯一live relative E2 coordinator1261361/child1261366/exec35348，最后1587/2805，25392行/21409821tokens，变化曝光4/6。
+1403检查点已核：balanced .892224 vsordinary .887485，opmacro .797866 vs .804183；change仍1/8，7双positive，signed5/8。
+旧feedback answer .620536 vs .581473、delivery .710938 vs .674479，仍非实际任务结果；全fit未闭，不提名。
+后2TRAINchange2373/2500，live禁第二模型/offlineledger，不重启不改frozenfit。
+
+新关键发现：可用TRAIN原生new_negatives（adapter标为instruction_negative）23029单位/9540条件，当前面板仅5单位/5条件。
+现有采样先取stable-negative pair，随后负标签stratum已满足，导致几乎不再取指令负例；类平衡不是条件负例覆盖。
+这是两臂共有的曝光限制，非已证明因果，也不把native字段当语义硬度认证。当前两臂数据/次序/标签/参数均未改，不追加第三E2fit。
+conditional_exposure与prepare_stratified_conditional_stage新增来源覆盖报告（含缺失条件），选择逻辑不变；16测试+Ruff+mypy通过。
+报告e2-relative-training-v1/instruction-negative-coverage-v1.json，保留这一失败反思。
+
+E3新56已分8/48，Source437/3590，Source/请求逐字等于既定全56。按全56顺序从seed0预生成每族seed，分段/缺失不改变其他族抽样。
+select_reached_feedback_states.py已实现优先族最早全绑定分歧、其他实际post均匀抽样、initial0/缺失不补。
+prepare_reached_feedback_branches.py复用原current-decision preparer；旧59状态只读演练选16，其中8 singleton只留覆盖、8比较态16bindings。
+4选择测试、Ruff/mypy、5边界过。没有重做旧反馈、没有执行演练分支、新56仍未采集/collector未绑定。
+Host no-thinking batch已准入但未跑；E4原True18/32首失败全留。E5旧4View审查已闭，新E5矩阵仍待。
+预算等于当前fit-entry；累计pending 234.10CPU详见v26，live未写。未测作者工作未知非0。
+完整E3/E4/E5/三seed/确认/LME→Mem2Act/论文/有效Product仍待；禁SHA/子代理/新服务/第二ledger/限额重置/remote写。
+
+# PREVIOUS TRAINING PLAN v25: 2026-11-03
+
+完整Nov2目标ACTIVE，最新data/manifests/development-training-progress-20261102-v25.json；本轮progress。
+唯一live E2relative coordinator1261361/child1261366/exec35348，最后1346/2805，21536行/18194254tokens。
+真实TRAINchange已4/6：476/516/1176/1260已曝光，后两组2373/2500；不要把702的1/8当全曝光结论。
+audit_point.py支持702/1403/2104，需run推进超过该点才审；完整curve闭合后才提名。live禁第二模型/offlineledger，不重启。
+
+E5旧source-arrivals两个TRAIN族的4个真实View生成输出已补完source-author审查：28节点/2规则，3交付、1预算拒绝未交付。
+原generator输入/e别名/role已绑定，不能用Reader的e/s命名空间猜来源。发现无根据条件推论、过强日期、assistant→user归属错误；
+一次增量刷新保留旧错误并新增其他人名称归属自相矛盾。实际历史仅revision1，未返回revision2，因此不能把新未交付View归为Host使用错误。
+新报告e5-existing-view-audit-v1/report.json；未改旧输出/Host分数/训练标签，模型新增0，独立验证false。
+历史D10臂累计流成本已与真实文件对齐：8来源族×2流×4请求。view-cache20/64、631125tokens vsfixed21/64、513678tokens。
+不是纯表示对照/成本优势；generative是控制策略名，不从缺省view_builder字段猜表示。新E5仍须同条件raw/extractive/generated和1024紧预算。
+
+relative后续prepare/admit/CPUeval/choices脚本已建于e2-relative-task-dev32-v1，仅语法检查未运行；必须完整曲线，未选提前checkpoint。
+既有64分支+raw首结果可复用，missing30和旧失败保持；若无合格nominee应明确无候选，不编造模型。
+Host no-thinking batch已准入但0实际调用；E3clean56已备未采集。E4原True18/32，其他闭合结果沿用原作用域。
+预算逐字等于当前fit-entry，live未写；累计pending 188.09CPU路径见v25。未测作者/检查工作未知非0。
+完整E3/E4/E5/3seed/确认/LME→Mem2Act/论文/有效Product仍待；禁SHA/子代理/新服务/第二operationalledger/限额重置/remote写。
+
+# PREVIOUS TRAINING PLAN v24: 2026-11-03
+
+完整Nov2目标ACTIVE，最新data/manifests/development-training-progress-20261102-v24.json；本轮progress。
+唯一live E2 relative：coordinator1261361/child1261366/exec35348，最后912/2805，14592行/12405252tokens。
+实际relative pair已2/6：476 loss1.027451/contrib .256863，516 loss1.434645/contrib .358661。下一1176/1260/2373/2500。
+初始3132预测与ordinary完全相同；原进程不重启、不改frozenfit，live禁第二模型/offlineledger。
+point702已闭且验证：relative balanced .880032/op .805167；change1/8、7双positive、signed6/8。
+ordinary702 balanced .888264/op .804989，change同1/8。旧feedback answer .642361 vs .599206，delivery .736979 vs .6875；均非任务成功。
+只见2/6 TRAINchange，不能提名或宣告改进；继续完整预定一遍，E2最多第二份fit。
+
+Host no-thinking批处理已准入未跑：e4-host-thinking-factor-v1/admission-v1.json。
+新增tools/run_frozen_host_messages.py，一wrapper/worker每段共享modelcache；pilot8/remaining24 argv和case名单已绑定。
+run_segment.py负责单作业/计量；bind_segment.py核对第一请求仅thinking不同、所有请求及capacity=False、原config/额度不改。
+4批测试working与frozen均过（非8独立测试），17owner/结算/边界过，Ruff/mypy过。已知失败保留后只进未试来源；未知用量停。
+后续须等E2退出+idle一次结算；不得按单case反复装模或从reasoning修复旧失败。
+
+E0 late-choice v2已核对95真实完整binding（92Reader完成/3失败），覆盖31实际state、固定32来源。
+曾观察到完整答案的来源17，ordinary16只差case23；raw common31为13。不是全菜单上界或可部署oracle，不能当方法分数。
+继续重复拟合此晚期池的已知空间很小；E3新到达/取证状态和Host输出问题仍是主路径。
+E4原True自主anchor18/32，8首失败全留，73HTTP/264237known，NoThinking尚0调用。
+E3clean56/4027已备未采集；lighthead tie选E1head128。完整E3/E4/E5/3seed/确认/LME→Mem2Act/论文/Product仍待。
+预算逐字等于当前训练entry，live未写ledger；累计pending 187.69CPU路径见v24。未测作者工作未知非0。
+禁SHA/子代理/新服务/第二operational ledger/限额重置/remote写。
+
+# PREVIOUS TRAINING PLAN v23: 2026-11-03
+
+完整Nov2目标ACTIVE，最新data/manifests/development-training-progress-20261102-v23.json；本轮真实progress。
+E4原配置自主fixed anchor32全闭：18complete/5qualified/1incomplete/8failed；24完成final输入/96原文范围绑定。
+73HTTP/264237known/0unknown；41retrieve、10budget_exhausted、0工具error。6截断+2JSON_ACTION_MALFORMED。
+位置26首次调用工具前即8192截断；17/20正常stop但content=None。这些不能都归因检索策略；首失败全留。
+原生全答案F1 .1129058896仅重合诊断，不是作者成功率或学习优势。
+
+唯一live模型是第二且最后E2 relative：coordinator1261361/child1261366/exec35348，最后166/2805。
+已训练2656行/2269580tokens；relativepair实际0/6，首次pair在476，后516/1176/1260/2373/2500。
+同init/data/windows/options/预算，只加.25相对项。初始dev3068+feedback64实际logits逐项差0、choice差0。
+live禁第二模型/offlineledger，不重启不改frozenfit；全曲线闭后才提名，最多两份E2fit。
+
+Host enable_thinking=False单因素已声明，全部同32pre-first-Host快照，保留True原结果；尚未实际调用。
+新API/CLI和frozen runtime已备，24脚本测试在working/frozen均通过（非48独立测试），5边界通过，Ruff及限定typing通过。
+首次直接改client config触发GENERATION_ADMISSION_STATE_INCOMPATIBLE；已保留校验，改用既有逐次Host调用kwargs，不改模型身份/累计额度。
+e4-host-thinking-factor-v1/plan.json当前BATCH_DISPATCH_PENDING：须一wrapper/worker每段共享cache，不能按single_case_reference_argv逐源重复装模。
+批worker/coordinator仍待实现，只能等当前E2退出+idle结算后启动；不从reasoning提取失败答案或改原32评分。
+
+旧强冻结head96=11/32与E1head128同分，按预定tie保留128，31选择全复用零新Reader；E3clean-query-v2 56/4027已备未采集。
+E2ordinarytask16 vsinit14、change1/8 vs6/8；queryclean22 vsfixed17均保持原作用域。
+24段client85.632946348已计，offline3.78已结；新pending 139.20CPU详见v23，live勿结。未测作者工作未知非0。
+完整E3/E4/E5/最终3seed/确认/LME451→Mem2Act/论文/有效Product仍待；禁SHA/子代理/新服务/第二operationalledger/限额重置/remote写。
+
+# PREVIOUS TRAINING PLAN v22: 2026-11-03
+
+完整Nov2目标ACTIVE，最新data/manifests/development-training-progress-20261102-v22.json；本轮progress。
+旧强freeze head-set96的31state闭：11/32，与E1 head128同分，30/31全绑定相同。31首结果全复用，含2失败，Reader新增0。
+按预定tie保留E1 answer-first-head128，E4 frozen-head-policy-v1.json已绑定；不宣称完整Host优势。
+
+E4真实自主Host固定prefix anchor首8已闭：4complete/2qualified/2failed，失败位置2、6；20HTTP/79719known/0unknown。
+6个完成final输入按response-ID绑定，24原文范围核对。case2反复在budget_exhausted后取证，最终8192截断；case6一次取证后截断。
+失败不重跑/修复；这不是完整32族或学习优势。原8快照保留供各方法从同pre-first-Host比较。
+唯一live是remaining24：coordinator1185624/child1185631/exec28068，最后3/24；源位置8:32不重复首8。
+live禁第二模型/offlineledger；不因观察超时重启。脚本run_anchor.py、bind_anchor_segment.py；首8close_pilot.py闭合。
+
+离线真实绑定发现attempt-N.json和canonical result.json两种原生文件名；summarize_original_feedback_host已支持两者且仍按响应ID。
+16相关测试及Ruff/mypy通过，不回退到后续canonical答案。E4 manifest families是count的假设错误也已修；失败log保留，模型未重试。
+E3新版e3-next56-clean-query-v2：原生qas[0].question直接作为query，全部56/4027Source/公共说明其余字段逐字相同。
+旧first8和冻结dev不改；新数据包明确包含query格式修订，不单归因自身状态。CLI --given-requests显式启用，默认仍无预填query。
+适配15测试+Ruff+mypy通过；collector尚未绑定，尚未实跑新56。
+
+E2ordinary任务16/32 vsinit14；条件change1/8 vs6/8；querydiagnostic22/32 vsfixed17。这些闭合结果不因E4改写。
+relative E2准入/原生tiny验证/分析器/run_fit均已备未跑，最多第二份fit。待当前24闭合审核后idle执行。
+旧pending及新增offline18.10、pilotreview31.27已结；pilotclient30.473044216已记。当前测得pending0，未测作者工作未知非0。
+完整E3/E4/E5/最终3seed/确认/LME451→Mem2Act/论文/有效Product仍待；禁SHA/子代理/新服务/第二operationalledger/限额重置/remote写。
+
+# PREVIOUS TRAINING PLAN v21: 2026-11-03
+
+完整Nov2目标ACTIVE，最新data/manifests/development-training-progress-20261102-v21.json；本轮真实progress。
+E2 ordinary fullfit2805/44868/37502475闭，实际task32也闭：u702=16/32 vs initialization delivery16=14/32。
+3胜[10,19,21]、1负[23]；+6.25pp dev95%[-6.25,18.75]。固定prefix17、cleanquery22另作用域；无确认/部署结论。
+31保存state +16新READ均闭，15旧首结果复用，missing30固定保留；新60513known/0unknown。
+case21措辞由英语知识库断言改为研究关联+明确未知，聚合前复核为完整；更严措辞敏感性15，初判保留。
+ordinary条件change仍1/8 vs初始6/8，全6TRAINchange曝光；整体balanced提升不等于条件能力保留。
+
+唯一live模型：旧强freeze-encoder head-set u96真实31state评估，coordinator1059301/child1059331/exec7972，最后11/31。
+不要重启；live禁第二模型/offline ledger。head prepare_choices已扩展复用E1 48 +E2 16=64旧branch首结果。
+relative E2已准入未启动：同init/data/2805窗口，6change权重.25，只加相对损失。
+31CPU相关+2原生tiny+5边界+10analyzer测试通过；训练2module与analyzer1module mypy/Ruff通过。
+run_fit.py、capacity复用、native实际loss audit均已备；prelaunch settlement需idle后创建，最多第二份E2fit。
+
+query-format32闭22/32 vs原queryfixed17；8胜3负，dev95%[-3.125,34.375]，128返回段逐字核对2031Source。
+同时变Reader可见query，不能当纯检索因果。原生F1仅重合诊断，不改旧状态/标签/失败。
+E2 savedCPU3799.521916558、branchclient41.323866545已计；offline131.22和2.73已结。
+新pending 8.29CPU详见v21，live勿结。历史未知非0，不重记旧成本。
+后续E3新56请求协议需结合query诊断复核，保留旧first8；E4真实Host8+24已备未跑。
+完整E3/E4/E5/三seed/确认/LME451→Mem2Act/论文/有效Product仍待，禁SHA/子代理/新服务/第二operational ledger/限额重置/remote写。
+
+# PREVIOUS TRAINING PLAN v20: 2026-11-03
+
+全Nov2目标ACTIVE，最新data/manifests/development-training-progress-20261102-v20.json；本轮真实progress。
+E2 ordinary已完整闭合2805更新/44868行/37502475tokens，全6组TRAINchange均曝光。
+full-analysis-v1成功：update0支持change6/8，702/1403/2104/2805均1/8，后者7/8双satisfies。
+仅离线提名702；saved真实任务评估正在运行：coordinator962307/child962315/exec58404，最后23/31。
+实际固定32族保留missing30；update0复用E1delivery16结果。live禁第二模型与offline ledger，不重启。
+
+query-format32已闭合：32首次Reader均完成，作者完整22/32 vs fixedprefix17/32，8胜3负。
+配对dev95%区间[-3.125,34.375]pp；原文范围128/2031Source已逐字绑定。新增100940known/0unknown。
+query也改变Reader-visible字段，不是纯检索因果结论；不重写旧标签/状态/失败。
+
+E2relative仅准备未启动：same数据/2805窗口/6change，权重.25，已有logits相对损失；最多第二份E2fit。
+31 CPU相关测试、5边界、Ruff与实际依赖mypy通过；两个原生tiny GPU测试待idle串行。
+首个离线binder误用branch schema已按真实native schema修正并保留失败log；未重跑模型。
+旧pending161.73+fullaudit9.91=171.64已结；queryclient118.754990247、saved准备9.04已记。
+本轮新pending 114.94 CPU，路径在v20；live不结算，历史未知非0。
+E3新56guides/E4真实Host协议及旧强head31已备未跑；三seed/确认/E5/LME451→Mem2Act/论文/Product仍待。
+禁SHA/子代理/新服务/第二operational ledger/限额重置/remote写。
+
+# PREVIOUS TRAINING PLAN v19: 2026-11-03
+
+全Nov2目标ACTIVE，最新data/manifests/development-training-progress-20261102-v19.json。上一轮progress，本轮progress+verifiedwait。
+同一E2 coordinator3789446/child3789458/exec69731真实活，连续/proc＋run检查从2222推进过2500，最后2530/2805。
+训练行40480，六组TRAINchange(476/516/1176/1260/2373/2500)全已曝光，但2805finaleval尚未闭！
+不要把2104的1/8当全曝光后结论，不提名；live禁第二模型/offlineledger，不重启不改frozenfit。
+
+confirmation-precision-diagnostic-v1.json仅用closed32 dev配对5胜2负25平，var .21673387。
+正态规划近似N64 95%半宽11.4057pp，假定5pp/10pp真实增益时80%获得正95%区间约N681/171。
+不是最终方法功效保证/正式CI，也没确定确认样本数、没看新确认来源。最终方法固定后才预定来源数/顺序规则；
+不能看确认优势后不断增样到显著。正式仍来源族pairedbootstrap，Host随机性与模型seed分开。
+
+新CPU 0.05pending，累计161.73，v19含全部time路径。live未写ledger；旧307.56及旧Reader成本勿重计。
+未测检查/作者/报告未知非0。下一待原E2 final/coord退出→完整nativeaudit→idle一次结算→query32/oldhead31/
+E2候选saved与真实新binding串行；旧首结果含失败按matched_closed_bindings复用。
+E3新56/全部guides、E4完整Hostruntime/协议/reviewbinder/旧强head评估均已备未实跑，完整其余目标不缩减。
+禁SHA/子代理/新服务/第二ledger/限额重置/remote写；最终3seed/确认/LME451→Mem2Act/论文/有效Product仍待。
+
+# PREVIOUS TRAINING PLAN v18: 2026-11-03
+
+完整Nov2目标ACTIVE，最新data/manifests/development-training-progress-20261102-v18.json；上一轮progress。
+唯一原E2 coordinator3789446/child3789458/exec69731实际活，最后2207/2805updates；history0/702/1403/2104闭。
+live禁第二模型/offlineledger，不重启不改frozenfit；最后2TRAINchange2373/2500，2104仍4/6已见，不提名。
+
+point2104-analysis-v1：condfamilybalanced .8862195205/opmacro .7863251151，supported change1/8、7/8双satisfies，
+signedorder3/8，relative诊断loss .99612。feedback answer .620536/delivery .713542；stableposmacro .91379，
+stableneg .80486。全2805未闭，不是完整pair曝光后结论，actualtask/savedCPU/可选第二E2均待。
+
+closed controlled32图表已生成在controlled-dev32-evidence-v1：closed-local-results.csv及source-outcome-matrix.csv，
+closed-local-outcomes与source-outcome-matrix各PNG/SVG，两PNG已view检查。raw14/init11/delivery14/head11/fixed17，
+32全分母/失败/缺失保留，late-choice和acquisition-suffix比较分开。Head-only=frozen encoder，非head被冻结。
+160logicalpositions仅103实际readoutfiles；357953known tokens=118399+172996+66558，早已计费不重加。
+各method Reader-only用量含逻辑复用，不是完整成本/节省；这些图不算自主Host主结果或论文全部图表完成。
+
+本轮新CPU 11.87 pending，累计161.68，v18列全time文件；live没写ledger，原limits/unknown保留。
+本轮只closed结果分析/图，无runtime/model/HTTP变化，未测author/view/report未知非0。后续E2全闭→fullaudit→
+idle结算一次→query32/oldhead31/E2saved+actualbindings串行→E4完整Host/E3聚合/其余全目标。
+E3新56及guides、E4协议/runtime、reviewbinder、旧binding复用均已备但实际新实验仍待。
+禁SHA/子代理/新服务/第二ledger/限额重置/remote写；完整目标含最终3seed/新来源确认/LME451→Mem2Act/论文/有效Product。
+
+# PREVIOUS TRAINING PLAN v17: 2026-11-03
+
+完整Nov2目标ACTIVE，最新data/manifests/development-training-progress-20261102-v17.json；上一轮progress。
+唯一原E2 coordinator3789446/child3789458/exec69731真实/proc活，最后2104/2805updates，history[0, 702, 1403]。
+live禁第二模型/offlineledger，不重启不改frozenfit；最后2TRAINchange2373/2500未见。2104若未闭别提前分析/选点。
+
+新增tools/prepare_qasper_host_review.py只核实际自主Host结果：复用response-ID绑定最终provider input/current_tools/
+position_bank；保留32全分母、完整实际messages、Tool错误、缺失/failed、未匹配或derived内容，无质量标签。
+实际收到的原文片段按content/range/source_characters/role/origin绑定paperSources；多重候选身份不合并。
+给定request/条件readout不能冒充autonomous结果；Store存在不是可见性。3tests/5toolboundaries/Ruff/mypy1通过。
+e4-autonomous-host-dev32-v1/review-packet-readiness-v1核32个已有given包127ranges，仅syntheticTool封套格式验证，
+不是新的自主Host输入/质量；实际E4仍未跑。E4模型角色及旧headset新31eval仍待，复用旧绑定含失败。
+
+本轮pending新增13.10CPU，累计149.81，v17列完整time路径；live未写ledger，旧307.56勿重加。
+本轮只有分析tool和tests，无模型/HTTP调用，无运行时改动。未测author/check/report未知非0。保留原limits/unknown。
+后续原E2全闭→fullaudit→idle结算→query32/oldhead31/E2选点saved及actualnewbindings串行；再E4anchor8+24、
+同preHost完整方法replay，用新reviewbinder审新答案。E3新56/全56guides、E4runtime/protocol已备不可混称实测。
+完整E3/E4/E5/最终3seed确认/LME451→Mem2Act/论文/有效Product仍待；禁SHA/子代理/新服务/第二ledger/remote写。
+
+# PREVIOUS TRAINING PLAN v16: 2026-11-03
+
+全Nov2目标ACTIVE，最新data/manifests/development-training-progress-20261102-v16.json；上一轮progress。
+唯一原E2 coordinator3789446/child3789458/exec69731实际活，最后1895/2805updates；history0/702/1403闭。
+live禁第二模型/offlineledger，不重启，不改frozenfit。2104/2805未闭，不提名；最后2TRAINchange在2373/2500。
+
+point1403-analysis-v1权威：condfamilybalanced .8874852227/opmacro .8041827454；supported change1/8，7/8两边
+satisfies；signedorder5/8，relative diagnosticloss .84162。feedback answer .581473/delivery .674479。已见4/6change，
+剩2没见；不是全配对曝光后的最终结论。实际task/savedCPU及可选第二E2仍待，不能只凭overall metric宣布成功。
+
+e4-headset-dev32-v1准备旧强frozen-head-set96：原旧Host13/16correct vshead-soft11/16，仅旧开发候选依据。
+原924CPU确认不重跑；新31实际QASPERstate在旧/新runtime投影逐值同、与已执行E1inputs同、tokenizer同，
+capacity270756tokens/max12310；case30没真实状态仍32分母。新fit0/forward0。run_evaluation及prepare_choices已备，
+待E2idle/结算才启动，选点按plan与已闭E1head128严格11/32比较，tie留E1head。frozen encoder不等于低推理成本。
+
+prepare_e1_choice_branches新增matched_closed_bindings及可选closed绑定复用；同before/fullaction/continuation2/
+fixed_context4/Reader非memory上下文才复用。实际48分支→旧93choices全复用(85branch+8raw)，3missing保留，
+2个Reader失败在4逻辑位置仍failed。newexecution0；13tests/Ruff/mypy过。后续E2/旧head都应复用，勿重跑旧绑定。
+
+新增完整Host方法replay：functional.py允许frozen preHost选择controller，复用原admissionpolicy；
+frozen_host_message.py及run_frozen_host_message.py新增policy/checkpoint-only参数，其余预算/呈现不混改。
+默认旧present对照不变；3个ready_state/first_context/tool_catalog guards仍必须真过。工作树和新frozen同26tests
+过(native+JSON-action，脚本Host能再查询再回答)，6boundaries过。测试初错共享calls=3，实际5=3HTTP+2local
+policy reservations，现分开断言；没有改计量。functional类型桩jsonschema缺失仅CLI忽略import-untyped检查本地，
+不改repo配置；另2模块严格mypy/Ruff过。
+
+新E4冻结runtime e4-autonomous-host-dev32-v1/runtime，version local-e4-autonomous-policy-20261103-v1。
+32paper/2031Source/publictask同，fixture移除给定retrieval_request；Host自发查询。fixed-prefix anchor源按8+24
+不交叠segments已备，尚未执行；fixed_context/rules/frozenhead/main将从相同pre-first-Host快照完整自主演化。
+所有方法共同现成CUDA-env(隐藏GPU)/attention+CPU-inference wrapper/HTTPsite；无强制检索/最终Reader替代。
+E4learnedcp仍null，先actualtask选点；不要把结构tests或条件Reader叫自主Host质量。query32仍已备未跑。
+
+本轮新pending 94.22CPU，累计136.71，v16列全time文件；live未写ledger，旧307.56勿重加。
+模拟测试token不是实际generation；未测author/check/report未知非0。E3新56/全56guide已备，actualcollector还未绑。
+完整E2闭合选择、E3新状态聚合vs旧池、E4实跑、E5有据生命周期、最终3seed/来源确认、LME451→Mem2Act、论文/
+有效Product仍待。禁SHA/子代理/新服务/第二ledger/限额重置/remote写入。已运行frozen版本未改。
+
+# PREVIOUS TRAINING PLAN v15: 2026-11-03
+
+完整Nov2目标ACTIVE，最新data/manifests/development-training-progress-20261102-v15.json；上一轮progress。
+唯一原E2 coordinator3789446/child3789458/exec69731实际活，最后883/2805updates；history0,702闭。
+live禁第二模型/offlineledger，不重启，不改冻结fit。702为已闭partial，不提名；全0/702/1403/2104/2805后再选。
+
+point702-analysis-v1/behavior-diagnosis-v1权威：familybalanced .8882637653（+.1357006507），operationmacro .8049888628
+（+.0261381568）；supported changes1/8 vsinitial6/8，7/8两条件都判satisfies，signedorder6/8 vs7/8；相对loss均值
+.55454 vs.25944。stableposmacro .89655/stableneg .86378；feedback answer .599206/delivery .6875 vs.782242/.848958。
+这是原生离线分数，不是Reader答案质量。old64completebinding仅8变、56不变，类型总数同40SEARCH/19READ/5HANDOFF。
+change-exposure702-v1核实际sampling/windows：6TRAINchange仅2已见(476/516)，其余1176/1260/2373/2500；
+不要提前说完整pair曝光后仍失败或自动加loss。第二E2未排队，须全曲线/actualtask与原protocol证据。
+
+query-format-dev32-v1 plan/preflight/worker/coordinator全部已备但NOT EXECUTED；无driver/无后台waiter。
+32原precall快照2031Source原值/身份/版本保留；旧64SEARCHprefix也符合fixed4，原32closed固定前缀结局全复用含fail。
+新session后缀防覆盖，保留messageID/publiccontent/bank以便原native scorer；旧新givenrequestSources均existing规则
+排除。仅清理精确adapterquery前缀、原生问题不改。fixed4整轨迹/control8/read8/return2048保持。
+注意Readerpayload也含retrieval_request！query同时改变该字段，须报whole-pipeline query-format treatment，
+不得伪称Reader仅memory变化的纯retrieval消融。模型/system/schema/params保持，实跑后Source材料与答案分开查。
+已32真实oldwires和实际frozenimport、1隔离before的native prepare+Source不变核验；没有实际新retrieval/Reader。
+worker run_query_format_dev32_v1.py加入当前active_model_owners；12队列/计费tests过，Ruff/语法过。原frozenruntime未改。
+coordinator要求原E2 CLOSED且PID消失/owners空/prelaunch settlement文件存在后才启动，千万别在live时启动。
+准备失败日志保留：空task_context投影省略→用typedDTO；原HTTPenv无需hostsite参数。都是准备修正，非模型retry。
+
+本轮pending新增16.39CPU，累计42.49，v15列全time文件；live未写ledger，旧307.56勿重加。
+E3剩余56paper/4027Sources/133anchors所有referenceguides已闭(含ambiguity/table限制)，collector仍null未跑。
+完成E2并查query强基线再决定新E3协议，不能默改现有E3v1旧query；已有原32全部分母/原失败/原nativegold保留。
+E3真实state聚合vs继续旧池、E4自主Host、E5有据生命周期、最终3seed/来源确认、LME451→Mem2Act、论文/有效Product
+全部仍待。禁SHA/子代理/新服务/第二ledger/限额重置/remote写入；未测author/check/report未知非0。
+
+# PREVIOUS TRAINING PLAN v14: 2026-11-03
+
+全Nov2目标ACTIVE，最新data/manifests/development-training-progress-20261102-v14.json。上一轮progress。
+唯一E2原fit coordinator3789446/child3789458/exec69731实际活，最后489/2805updates、7824rows。
+原e2-unit-training-v1/driver.json＋e2-fitting-v1/ordinary-unit/run.json权威。live禁第二模型/离线ledger，不重启。
+仅partial，不提名；原frozenfit未变，第二E2未排队；整曲线→nativeaudit→savedCPU→实际task选点尚待。
+
+E3评分参考全56已闭：e3-next56-preparation-v1/author-guide-all56-v1.json及all56-reference-audit-v1.json权威。
+原TRAIN[8:64]56paper/4027Sources/133literalanchors，原前8guides逐值同；全部nativecontrols/request/source未改。
+remainingreferenceindices=[]，但这是含不确定性的guidecoverage，不是56独立事实正确答案，actualoutcomelabels0。
+collector_checkpoint=null，未启动新56/无dispatch；先实际选点后绑定。旧8+新56=64来源cap，新state112/global128。
+
+必须保留评分范围：case10 nativeNo不能否认CRF/MarMot联合POS+Morph，CNN按single-task；case35约1000h不是
+全部WSJ（正文81hWSJ/80hLibri子集/960hLibri全量/组合）；case36nativeUnanswerable仍有regularized-vs-MLE
+larger-context具体比较，不可外推全部旧架构；case54 native$1728指向pretraining表而非finetune最低成本。
+37/45/54精确数值仅native table annotation，未导出的表格数字不能补入Source或奖无据猜；12语言与30human-rater
+比较却可由实际body/caption支持。术语/总量增量/语料/输出目标争议均见各guide，actualpacket/Reader仍须review。
+不把unknown或未执行选择都判错，不删除缺失/失败家族，不改原nativegold。所有guides不进liveE2。
+
+新增CPU 1.09 pending，含v13累计26.10；v14列全部time文件。live没写ledger，旧307.56结算勿重加。
+本轮仅ignoredscoringartifacts，无runtime改动/模型调用；未测author/read/report未知非0。禁SHA/子代理/新服务/
+第二ledger/限额重置/remote写入。完整E3/E4/E5/3seeds确认/LME451→Mem2Act/论文/有效Product仍待。
+下一在idle前可准备独立query格式实测：旧诊断去adapter前缀改变24/32首位，但未实测QA；不要混改旧E1或liveE2。
+先弄清已有retrieval_request.query override和真实from-start快照，复用强fixedprefix4＋同Reader/预算，再决定E3是否
+另立clean-query协议；当前新56 v1保持旧query，未执行，不能默默改。旧局部结果不代表自主Host。
+
+# PREVIOUS TRAINING PLAN v13: 2026-11-03
+
+全Nov2目标ACTIVE，最新data/manifests/development-training-progress-20261102-v13.json，历史沿previous_progress保留。
+唯一E2原fitcoordinator3789446/child3789458/exec69731实际活，最后观察201/2805updates、3216rows。
+原e2-unit-training-v1/driver.json＋e2-fitting-v1/ordinary-unit/run.json权威；live禁第二模型与offlineledger写，不重启。
+只history0已闭，不从partial训练提名。拟合runtime未改，新analysis/基线工具只在working，第二E2未排队。
+
+initial-analysis-v1.json核3068dev＋64feedback全实际输出。conditional familybalanced .7525631146，operationmacro
+.7788507060；feedback answer .7822420635/delivery .8489583333。是同设备update0，不是训练改善。
+initial-cpu-gpu-comparison-v1.json：2208同保存权重/原输入的CPU与GPU choices全同，maxlogitdiff4.0054e-5，无新forward。
+新tools/analyze_conditional_unit_fit.py已实跑initial-only；整曲线需COMPLETED/owner退出/全5点后再跑，无partial提名。
+先按原plan族平衡unit与operation下降<=2pp筛至多1trained nominee/最早tie，mandatoryupdate0；savedCPU＋真实QASPER
+完整binding任务选点仍待，强fixedprefix控制保留。跨条件第二fit仍依普通完整结果决定。
+
+E3 next56准备在e3-next56-preparation-v1：TRAIN固定分配[8:64]首问，56paper/4027Source；加旧8恰64来源。
+新statecap112/global128；28预选priority族首个实际post argmax与fixedprefix分歧＋28uniformpost，缺口不补。
+collector_checkpoint=null，未建dispatch；须E2实际任务选点后绑定，先new8小批测成本再其余48。
+feedback_choices/prepare_view_feedback_branches新增fixed_prefix仅复用原FixedMemoryPolicy4。原59scoredstates真核：
+8initial current==fixed，51post current!=fixed；fixed与context在这59状态全部同binding，非rawsuffix上那种分歧。
+singleton保留覆盖无假tie，无理由不补替代。comparison用当前argmax＋fixedprefix＋必要distinctcontext，最多3binding，
+共同已有fixed_context4 continuation2/cap实际remaining；早期state不借原远期finalanswer当单动作结果。
+
+56原生scoringrefs固定，79matched_text/12non_text。author-guide-first8-v1.json源审前8/18literalanchors，余48待。
+注意case4FSE/regularization术语歧义(nativeNo非穷尽)，case5 1448是increment非合并total，case7params非MAC；
+当前newoutcomelabel0/modelinputchange0，所有新guides是TRAIN参考非独立确认，不进正在运行E2。
+
+19analysis＋24feedbacktests、6boundaries过，Ruff/mypy3过；异类既有controller类型推断已显式修正，非策略改动。
+本轮新实测offline 25.01 CPU pending（v13列全time文件），live未写ledger；旧307.56已结算勿重加。
+未测author/check/report未知非0。E3实际采集/聚合匹配旧池，E4自主Host，E5有据生命周期，最终3seed/新来源确认，
+LME451Reader/Judge→Mem2Act，论文/有效Product仍待。禁SHA/子代理/新服务/第二ledger/限额重置/remote写入。
+
+# PREVIOUS TRAINING PLAN v12: 2026-11-03
+
+完整Nov2目标ACTIVE，最新data/manifests/development-training-progress-20261102-v12.json；旧证据沿previous_progress路径保留。
+当前唯一模型E2 ordinary-unit：coordinator3789446/child3789458/exec69731；driver在
+artifacts/development-training-20261102/e2-unit-training-v1/driver.json，native在e2-fitting-v1/ordinary-unit。
+启动观察RUNNING/update0，不是终态；后续只查同driver/run/proc，不重启。live禁第二模型和offline ledger写。
+只有一份fit排队，第二跨条件臂未排入自动队列；原计划至多2fit，先分析普通完整曝光是否仍需跨条件项。
+
+prefix完整策略源审已闭17/32 vs原fixed_context14/32，gain[3,13,21,22,31]/loss[19,27]；23新suffix/9原轨迹复用，
+原失败保留，新23Reader全completed，66558known/newunknown0。92Source范围核验。13/31是明确新事实修复；
+其余收益涉及Reader解释/克制；原生F1 .0711084只是诊断。32族描述性bootstrap95%[-6.25,+25.0]pp，非确认。
+权威acquisition-prefix-dev32-v1/closeout-v1.json。既有fixed前缀现为更强dev对照，不宣称学习优势或迁移Product。
+
+E2入口diagnostic2208已闭/CPU4FP32/无截断/531393tokens，全input和finitefull logits核；
+正77/116负1727/2074，supported change6/8(5族macro.8667)，stablepos22/46，stableneg762/1029。
+3native冲突单列；恒负unitmacro.947但balanced.5，当前balanced.7482。不能仅用82%总体分数或宣称不响应条件。
+权威e2-entry-diagnostic-v1/analysis-v1.json；已有6/8响应，先普通pairedunit训练而不直接加相对loss。
+
+E2 frozen source local-e2-paired-unit-schedule-20261103-v1：新tools/conditional_training.py＋现有trainer两行调度；
+全部39982conditional/10000query族/19968conditions＋4886旧knownoperation replay；44868行一遍2805updates，
+最后4行，无padding或重复。10054knownpairs全同2rowmicrobatch含6change/80stablepos/9968stableneg。
+shared_actions16384/2048、selected deliveryu16 init、GPU2/3FP32、encoder5e-6/head1e-4、全参数、seed0、shuffle/
+gradcheckpoint；eval0/702/1403/2104/2805。loss conditional1＋replayset.25，跨条件0。
+traincapacity37502475tokens(max9869)，dev3068(max9905)＋feedback64(max11074)全部fit；正式运行仍原生计量。
+先闭所有点再按plan族平衡unit＋旧operation不得降>2pp筛至多1nominee/最早tie，update0保留；随后savedCPU和实际
+QASPER完整binding任务比较，不能凭离线分数宣布胜出。第二fit若需要，同init/data/windows/options/exposure/预算。
+
+38冻结tests＋1新增真实GPU入口test通过；Ruff/mypy2与6边界过。初始缺依赖/测试账本/tuplevsJSON失败保留；
+检查准备已修正，没有实验模型重试。新offline307.56CPU已prelaunch一次结算；E2entrynative1763.675672773＋
+residual15.255174512已原生计量；prefixprep.52及entryprelaunch67.532020661勿重加。未测作者/check/report未知非0。
+所有原任务E3自身TRAIN64/128state＋继续旧池、E4自主Host、E5有据生命周期、最终3seed/新来源确认、LME451/
+Mem2Act、论文/有效Product仍待。禁SHA/子代理/新服务/第二operationalledger/限额重置/远端写。旧E1不重跑。
+
+# PREVIOUS TRAINING PLAN v11: 2026-11-03
+
+完整Nov2目标ACTIVE，最新data/manifests/development-training-progress-20261102-v11.json。
+当前实际modelowners=[]，不是暂停。saved原2623353/2741551均退出，exec61877闭；三模型各31forward全闭。
+48新binding原owner2908180/child2908185退出，exec56259闭；46Reader completed/2failed，172996known tokens/newunknown0。
+不要重启任何已闭E1/native/saved/分支。所有first attempts和失败保留，旧ledger/限额不改。
+
+E1实际task-results-v1.json已闭：raw14/32、update0 11/32、delivery-u16 14/32、answer-first-head-u128 11/32。
+权威artifacts/development-training-20261102/e1-choice-branches-v1/，research-selection-v1.json只将delivery16绑定为
+后续学习研究对照；与raw主分母打平，未证明学习优势，不迁移Product。三seed/自主Host/确认未完成。
+同31状态补充比较raw13、delivery14，不替换32分母；case30无真实pre-HANDOFF但raw正确限制回答，勿当模型实测错误。
+原文源审14complete/8qualified/9incomplete/1failed；branch48全源审。80实际Reader结果用于125逻辑method位置，
+相同binding复用；不把分支当独立来源。190新返回Source范围逐值核，原before/menu/prefix/first_action/续行上限与
+Reader wire除packet外全核；3READ材料顺序/内容未变（material_budget_exhausted），不宣称新信息收益。
+
+Head与update0有30/31同binding，只在case25改变，strict任务成功没变。delivery31/31选READ，但只有13与既有
+reads5规则同binding；reads5诊断仅15结果有覆盖、16未执行，不是完整strong-baseline分数，也未加进E1主选点。
+case23新READ确实补SVM/LR事实；case3/24回答变好时旧材料已足够；case10/19额外READ后Reader反而加错细节。
+单段HANDOFF丢掉已取得必要内容，且2次Reader失败仍failed。不能继续同一静态fit并假装已有进展。
+
+评分规则：e1-task-dev32-source-review-v1/guide-clarification-v2.json在candidate分支结果源审前统一澄清case26，
+允许字面宽泛“existing approaches”的有据相关工作综述；原baseline-only敏感性保留。case25仍按原完整事件定义，
+coarse-label宽松敏感性单列：delivery15/head12，非主指标。native_answer_results原文F1仅诊断，不抽取/修复答案。
+
+新只读诊断e1-query-rank-diagnostic-v1/results-v1.json：从真实checkpoint的2031Source原值复现全部32旧候选顺序，
+只有查询去掉adapter说明前缀，24首位变化；无模型/HTTP/Store写，无gold进入ranking。
+acquisition-policy-v1.json复现32实际首次READ：FixedContext先选任意可expand_context候选，19次跳过较高排名短片段，
+23完整binding与现有FixedMemoryPolicy前缀策略不同。future-work结论已rank2，但原轨迹先context3后仍没交付结论。
+下一优先另立同before完整suffix-policy诊断：从真实pre-first-READ快照比较现有fixed vs原fixed_context，复用原结局，
+先保持query不变。不是last-action反馈，也不允许把较早state借成单动作标签。Query格式是另一因素，不混改旧E1。
+
+成本prebranch2.75与closeout133.428933066CPU已在idle各结算一次，Reader172996tokens原客户端已记，不重加。
+当前已测pending结清；后续未计量author/read/report未知非0。源审dev不进训练。
+E2普通监督须保留stratified10000-v1的39982rows/10000族/19968conditions，再按同输入曝光比较条件项；
+E3自身TRAIN64/128state首轮＋继续旧池、E4自主Host、E5有据生命周期、最终3seeds/来源族确认、LME/Mem2Act、论文/
+有效Product全部仍在原目标。无SHA/子代理/新模型服务/第二ledger/远端写入。历史快照如下。
+
+# PREVIOUS TRAINING PLAN v10: 2026-11-02
+
+完整Nov2目标ACTIVE，最新data/manifests/development-training-progress-20261102-v10.json。
+E1三native臂全COMPLETED/exit0，原1843109/2296065已消失；不要重启。analyze_e1_candidates真实全审通过，
+e1-nomination-v1/nomination.json固定delivery-only u16(.6470177)＋answer-first-head u128(.5606781)，
+mandatory update0仍原shared-u262；不是实际任务胜者。三臂均128/2048draws/10416078train tokens，1026fb/1022replay。
+
+CURRENT ONE LIVE MODEL QUEUE：e1-task-dev32-saved-plan-v1/driver.json，原exec61877、coordinator2623353、
+update0已闭31/31，delivery-only child2683861最后3/31实际forward（须按driver/proc更新），随后answer-first-head串行，
+首失败停、不retry。CPU4/FP32/shared_actions/16384/2048/compile false/fastpath false实际已确认。
+live禁止其他模型/HTTP实验及offline ledger写；冻结eval runtime为e1-three-arm-v1/runtime。
+
+公共dev32已关闭：e1-common-task-dev32-v1/driver.json，旧2494158/2494163已退出，exec43330闭。
+32全尝试/31Reader completed/1failed，118399known tokens/newunknown0。失败case25/source1909.01362保留。
+真实pre-HANDOFF31/32：case30/source1901.01010到step7 READ耗尽控制步，未到HANDOFF，不用早期/理想state替换。
+e1-common-task-dev32-panel-v1保留32分母/31完整原菜单/emptygold；容量已核max12310/head1582、无truncate或SDKmask。
+三checkpoint tokenizer实际backend/specialtokens逐值同，重要scorer/投影源码与原given-v4逐字节同；无SHA。
+原生默认8192warning不是声明16384容量失败，实际saved forward正常推进。
+
+e1-task-dev32-source-review-v1/raw-review-packet.json已绑定全32实际Reader wire/packet/答案及失败，authorlabels仍0。
+下一可在CPU队列运行时逐项源审baseline；guide在e1-dev32-scoring-v1/author-guide-v1.json。原生F1只作诊断。
+三saved全闭后用prepare_e1_choice_branches.py panel nomination evaluations output，复用完整同binding原结局含失败，
+仅执行新binding一次，fixed continuation2＋实际剩余额度、given-readout。模型实际任务选点仍pending。
+
+LME已有3真实synthetic vision/usage probe全部通过：old training-generalization.../server-vision-probe-v1/driver.json，
+已退出PID2486496/exec89432闭；3calls/4346known tokens/newunknown0，颜色全对，prompt计数313/2289/1121逐项同。
+结果lme-vision-probe-result-v1.json。不是benchmark/广泛视觉能力；451Reader/Judge仍须内部选点/seed后执行。
+已给working active_model_owners登记该实际probe脚本名，并在live期间确实识别其PID；未改变方法/服务。
+
+成本已在各idle边界一次结清：post-e1-offline-settlement-v1=641.23 CPU（此前pending＋提名）；probe client16.82；
+e1-task-dev32-saved-plan-v1/prelaunch-settlement-v1=129.811763604（common残差＋coord＋panel/capacity）。
+旧pending不再重计。当前新pending仅raw review packet preparation.time.txt实测.30CPU；其他未测author/check/report未知。
+saved各job自己记nativephase，协调器只补wholechild减native与coord残差，不重复token/账本限额不变。
+完整E2/E3/E4/E5、三seed/来源族确认、LME-V2/Mem2Act、论文/有效Product仍待。无SHA/子代理/新服务/第二ledger/远端写。
+历史快照如下。
+
+# PREVIOUS TRAINING PLAN v9: 2026-11-02
+
+完整Nov2目标ACTIVE，最新data/manifests/development-training-progress-20261102-v9.json。
+E1原coordinator1843109/exec62239；delivery-only与answer-first-full均已COMPLETED/exit0，第三臂
+answer-first-head child2296065实际live、最新64/128，history0/16/32已闭。等三臂全闭再提名，勿重启。
+live禁第二模型及offline ledger，原冻结代码/400行数据不变。新conditional补充未进入E1。
+
+公共dev32 controller已备e1-common-task-dev32-v1/run_collection_v1.py，dispatch/preflight同目录：
+32paper/32firstquestions/2031Source原值；要求整个E1闭合且coordinator消失、实际e1-nomination-v1/nomination.json、
+active_model_owners为空及prelaunch-settlement-v1.json已结算后才可手动启动。当前未启动，没有后台waiter。
+
+conditional-train-review32-instruction-v1在原随机32TRAIN族各固定首个nonempty-purpose unknown，32全源审：
+19satisfies/10not/3unknown。与原64empty-purpose合计96cells/86newknown/10reviewunknown，仍32query族，
+旧16族24author补充未并入。reviewed10000-v1全683408inputs/gold审计过：640593known/42815unjudged，
+compiled14change/80stablepositive/298300stablenegative。10新增表面change仅2有新增要求支持（内部位置、具体实例）；
+7是nativepositive错误匹配，1是bare-query relevance边界。pair-admission10000-v1单独mask8 disputed pairs为unknown，
+保留6supported changes/6query族；native矩阵与unit标签未改，不声称事实/Host正确性。
+
+真实exposure-diagnostic-v1发现paired-only最低9991pairs只有166positive/19982rows，漏32single-condition族。
+已复用原prepare_stratified_conditional_stage导出stratified10000-v1并全核：39982不同rows，20008pos/19974neg，
+覆盖全部10000query族及19968conditions每类都有目标，10054knownpairs含6change；8争议pair的端点选中0。
+所以E2须保留ordinary unit监督，不能只用paired-only制造类别退化；同窗口配对/跨条件loss/实际fit仍待诊断和选点。
+
+LME已有fa0c88ee frozen continuation/range/fullSmall快照可复用，旧901/902路径审计不重跑。
+lme-existing-workflow-reconciliation-v1.json核实际路径和未执行probe；3 synthetic vision/usage probe可在E1全idle
+并结算后串行执行，原plan在training-generalization.../server-vision-probe-plan-v1.json，原输出不存在。
+真正451 Reader/Judge仍须内部方法/seed选择后；已暴露200histories只报regression，不洗成独立确认。
+
+本轮offline324.24CPU秒pending，之前310.51仍pending，总634.75；未测author/inspection/report未知非0，nested不重加。
+完整E2/E3/E4/E5、三seed/来源族确认、LME-V2/Mem2Act、论文与有效Product增量仍待。无SHA/子代理/新服务/
+第二ledger/限额重置/模型重试/远端写入。历史快照如下。
+
+# PREVIOUS TRAINING PLAN v8: 2026-11-02
+
+完整Nov2目标ACTIVE，最新data/manifests/development-training-progress-20261102-v8.json。
+E1仍原coordinator1843109/exec62239；delivery-only已闭，answer-first-full原child2071325活、最新45/128，
+masked-head待原队列串行启动。继续实际driver/run/proc；live禁第二模型和offline ledger，冻结运行未改。
+
+e1-dev32-scoring-v1/references.json＋author-guide-v1.json已固定全32评分依据，另核40原文Source支持，
+全部与原fixture/原生archive逐值绑定。不是实际outcome标签，不进入模型输入。7题native unanswerable冲突，
+1题yes/no冲突；4题native全unanswerable，其中case20正文明确给风格方向人工评分及RMSE，不能照抄错误gold。
+case24的词重要度是归因诊断，扰动造成BLEU下降与“把重要度并入模型导致性能下降”不是同一个实验。
+缺表格、语言范围推断、未报告和不完整分别保留；原native标签未覆盖，完整32分母不改。
+
+tools/score_qasper_readouts.py直接调用已下载/检查的官方QASPER evaluator.py CLI，无动态import/新服务。
+完整Reader答案原值、全部native替代标注，FAILED/缺失整体记0，不抽取短答、不把限制说明改成Unanswerable。
+只报AnswerF1；不把bounded Source范围当官方paragraph EvidenceF1。official by-type均值本身不含missing，
+仅总体固定分母，须明确。7相关tests/Ruff/mypy1/tools边界过；实际复用原8对读出核对官方CLI一致。
+authoritative pilot-results-v2.json＋actual-audit-v2.json：current7complete/1failed，raw8complete，
+rawAnswerF1 .0898643 vs .0865452；旧authorcomplete2/8 vs3/8，排序相反，不能用tokenoverlap代主指标。
+初版动态import被边界拒绝后改为原CLI，没放宽边界；最初success-only状态假设错，已保留原closed失败不重跑。
+
+本轮新实测offline5.21CPU秒pending，之前305.30仍pending；nested不重加，未测源审/下载/报告等未知非0。
+下一三臂全闭再nativeaudit/两提名/update0保存加载及fixed32实际完整首选和source-author任务评分。
+E2/E3/E4/E5、三seed/来源族确认、LME-V2/Mem2Act、论文与有效Product增量仍待。无SHA/子代理/新ledger/
+限额重置/模型重试/远端写入，新源码未commit。历史快照如下。
+
+# PREVIOUS TRAINING PLAN v7: 2026-11-02
+
+完整Nov2目标ACTIVE，最新data/manifests/development-training-progress-20261102-v7.json。
+E1仍原coordinator1843109/exec62239；delivery-only已COMPLETED128/2048draws，协调器exit0及5点评估检查通过。
+原队列已自动启动answer-first-full child2071325，当前0/128初始评估；已闭1/3，后续masked-head未启动。
+下一读取driver/run/proc；未重启、不改冻结源码、不对partial曲线提名。live禁止第二模型及离线ledger写。
+三臂全闭再nativeaudit→两个提名→保存和实际任务选择；首臂native成功不是方法收益。
+
+新增prepare_e1_task_panel.py＋prepare_e1_choice_branches.py已完成22tests/Ruff/mypy2/两边界：
+固定32来源分母、原请求、真实最后pre-HANDOFF、完整菜单、emptygold；缺失/失败留分母。
+严格绑定两个nominees＋mandatory update0，shared_actions/16384/2048/CPU4/FP32/compile false/fastpath false。
+完整参数相同才复用原raw结局（含失败）；新绑定跨模型只执行一次，continuation2且实际剩余额度封顶。
+这些是衔接实现，真实dev32 collection/保存首选/分支/模型选择尚未执行；等整个E1队列真idle。
+
+conditional-train-review32-v1：从native10000未审TRAIN族seed0均匀选32族，排除旧16先导；每族按矩阵顺序
+前2unknown，共64已全部源审=33satisfies/24not/7unknown。57新known，原native gold/全部输入原值保留。
+reviewed10000-v1＋actual-audit-v1.json全683408cells核对：640564known/42844unjudged，
+pairs298300stable-negative/61stable-positive/4change/42844unknown。4change来自4query族，均反查另一条件
+文字支持：治疗语境、峡谷误解要求、科学证据限制、屋顶比较内容限制；不是Host/事实正确性或模型收益。
+旧24author补充未静默并入，仍在旧reviewed2048；全部64新cells恰为empty-purpose，抽样方向偏斜明确保留。
+模型calls0，E2还须实际E1选点、当前条件诊断和等输入对照，不凭4pairs或10000规模直接加loss/宣称效果。
+
+本轮新增实测offline200.70CPU秒pending（全部time文件在v7），此前v5 6.92＋v6 97.68仍pending；
+未测counterpart扫描/作者/类型样式/报告未知非0；nested不重复计费。native仍自己记账，live未写ledger。
+所有原计划E2/E3/E4/E5、三seed/来源族确认、LME-V2/Mem2Act、论文与有效Product增量仍待。
+无SHA、子代理、新服务、第二ledger、限额重置、远端写入；新源码未commit。历史快照如下。
+
+# PREVIOUS TRAINING PLAN v6: 2026-11-02
+
+目标ACTIVE，最新data/manifests/development-training-progress-20261102-v6.json。上轮是实际训练启动进展；
+本轮提名工具及conditional10000实际导出/核对为新进展，同时复核同一live句柄，未重启。
+E1仍原coordinator1843109 / delivery child1843114 / exec62239，最后实际64/128，/proc活；
+delivery→masked-full→masked-head串行不变，失败停队列不retry，live禁止另起模型/离线ledger写。
+
+analyze_e1_candidates.py已实现，3tests/Ruff/mypy过：三臂完整native审计后，只提名1delivery＋1masked
+（full/head共同指标最优、最早更新tie、剩余tie full优先），update0另保留；不以pairloss选部署赢家。
+尚未对live partial曲线运行它；保存加载、固定32实际全菜单首选及autonomous Host仍未完成。
+
+conditional-train10000-v1/native及audit-v1.json已完成：canonical新TRAIN无旧anchors前10000families，
+19968rawrows/10000basequeryunits/9968dualconditions，683408matrix/640507known/42901unjudged。
+known19968positive/620539negative；pairs298276stablenegative/32stablepositive/42901unknown/0nativechange。
+旧2048matrix/pairs/train逐值prefix保持；原生unknown未填，全部trained-export只含known。
+与dev32共享72native docids，明确共享corpus query泛化，非独立文档。已有24author训练补充保留旧reviewedview，
+未默默重标native10000。没有modelcalls；规模本身不证明条件收益，E2真实change支持仍须，不盲扩50000。
+
+新增已测offline97.68CPU秒pending（nomination tests、10000export/audit的wholecommand，nested不叠加）；
+v5 frozen-tests-v2 pending仍保留，未计量author/config/style/type/report未知非0。当前native队列自己记账。
+下一继续同句柄，闭三fit后nativeaudit→两个提名→保存和fixed32实际选择；保留完整Nov2范围，未完成不打勾。
+无SHA/子代理/新服务/第二ledger/远端写入。新源码未commit。历史快照如下。
+
+# PREVIOUS TRAINING PLAN v5: 2026-11-02
+
+目标ACTIVE，最新data/manifests/development-training-progress-20261102-v5.json及执行文档。
+E1已真实启动：coordinator1843109 / delivery child1843114，exec62239；/proc实际存活，最后16/128更新。
+初始dev860/feedback64已闭，公共answer_first诊断已实际写出；按run.json/原句柄继续观察，禁止重启。
+协调器仅串行delivery-only→answer-first-full→answer-first-head，任一失败停止且不重试。不得另启动模型。
+driver=artifacts/development-training-20261102/e1-three-arm-v1/driver.json，计划/协议/冻结runtime同目录。
+
+新feedback_outcomes＋prepare_retrieval_feedback --collected-last-decisions已编译真实8行，完整state/questions
+原值、gold仍空；collected-current与raw-delivery replay分别读真实产物，不伪造replay.json。最后一步/完整
+before/menu/实际动作/公共请求/Reader除packet外输入均绑定，失败answer保持unknown。D2也接通同一来源读出。
+qasper-feedback-compiled-v1/feedback.jsonl及feedback-compilation-audit-v1.json权威：answerknown5/aux2。
+
+e1-matched-data-v1=400同输入行：旧source32的384逐值保留＋8新feedback＋8长度/来源平衡accepted-set replay；
+200feedback/200replay，40feedbackfamilies，train/dev来源不重叠，新输入最大8469无truncate。
+三臂同shared-u262/seed0/128updates/2048draws/eval0,16,32,64,128/encoder5e-6/head1e-4/micro2/effective16；
+set replay外加.25，component-sum不重归一化；head臂只冻结encoder。旧历史默认与原9fits不改。
+运行代码/数据已冻结，勿热改；最后frozen65tensor/compiler/audit tests无skip通过，Ruff/mypy6module/边界过。
+首次baseenv测试4torch skips与格式失败保留；已使用既有CUDA环境CPU tensor验证，无新依赖/服务。
+
+protocol.json在拟合前固定：旧feedback64只提名，oldoperation860只保留检查；最多2训练候选（delivery最佳点
+＋masked full/head最佳点），共同answer-first诊断低成本选择、最早tie。另有update0与rawdelivery。
+实际主任务dev为已分配QASPER32paper各第一问，公共原文采集冻结实到final pre-HANDOFF状态，模型在完整原菜单
+选实际首选并执行，统一固定continuation/实际剩余额度；缺失/失败留在32分母。实际完整答案族宏成功选最终模型。
+fixed-task-dev32.json/config/dispatch已备NOT_EXECUTED，等整个E1队列idle后再跑，不与训练并发。
+不得把offline分数或训练启动当task效果；saved reload、实际task dev选择、autonomous Host均未完成。
+
+原v4 pending＋本轮已测编译/准备共117.694505362CPU秒已在idle一次结算，e1-three-arm-v1/prelaunch-settlement-v1。
+native各臂实时记各自phase；成功child结束后协调器只补wholechild减native的残差与coord，不重复加token/native。
+现离线pending为e1-frozen-tests-v2.time.txt的实测CPU，其他未计量author/config/check/report未知非0；live禁offline写ledger。
+完整Nov2范围仍在：首轮64新TRAIN/128实到状态上限，E2/E3对照、E4/E5、三seed/源族统计、新来源确认、
+LME-V2/Mem2Act、论文表图及有效Product增量。新源码未commit/push；禁SHA/子代理/新ledger/限额重置。
+
+# PREVIOUS TRAINING PLAN v4: 2026-11-02
+
+完整Nov2目标 ACTIVE，最新 data/manifests/development-training-progress-20261102-v4.json 和
+docs/MILAI_DEVELOPMENT_TRAINING_EXECUTION_20261102.md。当前 actual active_model_owners=[]，不是暂停。
+原compact coordinator3694163/child3694168已退出/exit0，native COMPLETED524/8384draws/45881938tokens；
+7点评估train4886/dev860/feedback16文件覆盖已核，savedCPU selection/任务收益仍pending，不能直接用compact。
+已在真实idle将v284＋前三轮已测pending＋native残差等77项一次结算1211.649290675CPU秒；phase见
+artifacts/development-training-20261102/precollector-cpu-settlement-v1.json。旧pending不再重复登记。
+
+真实新TRAIN first8 learned collection已闭：qasper-learned-first8-v1/driver.json，原owner1035117/
+child1035135已退出；8篇各第一问、835Source单位，匹配shared-u262 CPU4/FP32/16384-head2048/原attention。
+59真实完整菜单决策=8initial＋51post，59forwards/363257inputtokens；8Reader请求7completed/1incomplete-final。
+gen34031/newunknown0，wholechild4059.023073CPU秒，native load10.279081334/predict3994.521264453已实时记账。
+这是真实learner到达状态＋给定请求条件读出，不是autonomous Host。失败未从reasoning恢复。
+
+D1 --decision-collection实现并59/59 trace input/logits/actual-selected绑定，无新forward。raw_delivery
+baseline只在已有HANDOFF中调用现有原文选择器。按输入/动作固定每族last scored post，8新反馈状态。
+qasper-post-branches-v1/prepared/policies.json 的16个prospective interventions未运行，不要运行它！
+权威comparison-v2.json：复用全部8原始current结局含失败，仅新执行8raw_delivery（handoff_only）baseline。
+baseline-driver-v1已CLOSED_REVIEW_PENDING，原owner1470135/child1470146退出，全部8Reader完成，gen25834/
+newunknown0。合计新Reader16/59865tokens；原结局不重计。5纯HANDOFF对比＋3 READ-vs-stop分别报告。
+
+given_host_readout新增replay_case；run_frozen_retrieval_calls新增互斥--given-readout，实际branch packet
+＋同public task，不重构原autonomous history，不读原答案；真实branch可见性/原ledger/queue/剩余额度保留。
+method source仍frozen-v4，runner单独local-given-branch-readout-20261102-v1。given-branch-runtime-v1只overlay
+上述两文件，其余方法原样。working53tests、frozen38tests/Ruff/mypy4module/两边界pass。
+actual-pair-contracts-v1.json核全8same before/menu、actualbinding、Reader wire除packet外逐值同、baseline无取证。
+
+source-author-reviews-v1.json已全8源审（native参考、全部实际材料、两侧结局）：answer 1right/4tie/3unknown；
+delivery 2right/1left/3tie/2unknown。作者complete current2/8 vsraw3/8；非确认/非方法获胜。
+明确gain：MT评价设计问题，raw交付已有Introduction三因素→正确答案，current只交付linguistic context→未完成。
+初始化问题所有已取得材料都缺实际初始化方法，交付排序不能补材料。层/头native标注冲突、缺table数值、
+工具知识推断等保留unknown/qualified，不变成假偏好。原失败保持failed；tie不等于success。
+
+下一最直接工作：将源审编译成有明确collected-current vsreplay provenance的反馈（禁止伪造replay.json），
+保持5纯交付/3取证停止区别；只有1新纯交付answer方向，不把重复小池当泛化。随后按64新TRAIN族/128状态
+上限补有效数据并E1最多3新fits＋fixeddev实际全菜单首选选择；D3已实现未新fit。D1旧dev14缺绑定仍未执行。
+E2同输入条件对照、E3自身状态vs旧池、E4自主Host、E5有信号生命周期、三seed/源族确认/LME-V2/Mem2Act/
+论文表图/有效Product增量均未完成。旧Q/coverage/request-text整个网格不自动成为新计划前置。
+
+first8 client residual＋已测branch开发11项103.811640288CPU秒已一次结算，见first8-postcollection-cpu-settlement-v1。
+现pending仅baseline client21.650622＋coord.012133362＋paired audit5.97＝27.632755362CPU秒（v4逐字段列出）；
+后续源审/报告/早期未计量检查未知，不计0，不重加native/nested成本。新模型前在真实idle结清一次。
+所有新源码未commit/push；禁SHA、子代理、第二operationalledger、预算重置、失败重试/答案修复。
+
+# PREVIOUS TRAINING PLAN v3: 2026-11-02
+
+全11月2日计划仍 ACTIVE，最新 data/manifests/development-training-progress-20261102-v3.json 与
+docs/MILAI_DEVELOPMENT_TRAINING_EXECUTION_20261102.md。连续三轮为实质进展，不是完成宣告。
+compact 原 coordinator3694163/child3694168 实际/proc仍在，524/524更新、45881938训练tokens；
+最终u524 train4225/4886（须重新观察），native/owner仍RUNNING。禁根据更新数重启/判完成，禁第二模型
+和活跃offline ledger写。冻结运行未改。下一按Nov2新反馈循环优先级，不把旧Q/coverage/request-text
+整个待执行网格变为本轮前置；E1最多三新fit。用compact前须匹配保存核验，u262不能伪装compact。
+
+QASPER真实SDK pilot已闭：artifacts/development-training-20261102/qasper-sdk-pilot-v4/summary.json。
+固定TRAIN前2篇、各第一问；原文FixedContextPolicy，无模型/Host答案/新训练标签。61+207=268Sources，
+8真实READ全opened、8实到postREAD状态。原返回4items/1537tokens与4items/1240tokens；首个成功READ
+后各两真实HANDOFF分支，同before/menu，acquisition重执行0。保留/空交付分别434或510/56tokens。
+qasper-sdk-audit-v1.json独立只读SQLite核全部10返回Source范围、角色、未知event time。不是D5自身策略。
+原v1 namespace句点失败；v2实际READ已完成但汇总phase假设失败；v3 clone缺进程内public binding失败。
+v4从原v2第一篇快照闭合，不重跑原READ；SDK phase=resume只恢复同一持久化绑定。旧失败产物保留。
+
+通用Host runner也用history.id作namespace，故adapter真修复：只可逆转义runtime id内%与.；
+nativepaper/source_group/session/body/request/control原值不改，非哈希。真实SQLite回归red-before/green-after，
+8 QASPERtests/Ruff/mypy2module/边界通过。正式fixture用 qasper-first-tier-v4/，前v3旧runtime id有点号。
+qasper-bank-input-audit-v1.json核全部416篇只有runtime id变化且可逆/唯一；Source/问题/controls逐值不变。
+
+Promptriever纠正v2旧状态：query-family-auxiliary-protocol-v1/summary-v1.json下canonical131072分组、
+2048TRAIN/32dev及64queryconfirmation预留早已闭。新重复allocation除display prefix外全等，不算新数据，
+继续用canonical promptriever-shared-query131072-v1 IDs；见promptriever-existing-allocation-reconciliation-v1。
+新增eligible train queryfamilies26254/dev6563，但不是独立documents。旧596anchors/exclusions保留；
+已备TRAIN2048/130997nativeknown cells＋24旧author补充；10k首档尚未闭合，不重下载/不复活旧excluded512。
+
+固定新dev32全部147 unjudged已读全query/purpose/candidate并source-author补充：52T/77F/18U，
+129newknown；原2061nativeknown及2208state/questions逐值保持。输出conditional-dev32-review-v1/reviewed-v1，
+dev-only无train文件；actual-audit-v1.json权威。46stablepositive/1029stablenegative/11mixedoriginchange/18unknown。
+11change均反查，8对/5族有条件依据，另外3是native标签冲突（无出生地简介、AirlineA/B/C占位、
+总延误/取消率非机械取消），不得说11都是真条件效应。原标签不覆盖，作者判断非独立事实验证。
+恒负stable宏.957428仍高但positive0/46、change0/11，必须分层报告。未向语义评审/模型展开protected64
+内容；raw分组程序扫描的历史曝光保留。新实验模型calls0，作者评审计算未在项目账本测得。
+
+下一：待原native真终态后结算已测offline一次，复用可重载/匹配输入模型推进标准冻结capture的
+小批新TRAIN实际决策反馈与E1（交付阶段优先，64新族/128实到状态上限），D1的14dev缺分支仍须真实补齐。
+SDK机械pilot不是可直接冒充全Host/capture/D5的模型数据；用既有functional/given-readout与完整绑定执行器。
+D3代码完成未新fit；E2同数据对照、E3自身状态vs继续旧池、E4自主Host、E5有信号的生命周期、三seed、
+源族统计/确认、LME-V2/Mem2Act、论文表图和有效Product增量均未完成。
+新增实测65.405926CPU秒待idle（失败/重复allocation成本也保留，nested不叠加）；原v284pending68+self、
+v1的25.18+unknown、v2的53.557238+unknown均未改。禁SHA/子代理/远端写入/第二operationalledger。
+
+# PREVIOUS TRAINING PLAN v2: 2026-11-02
+
+全目标仍 ACTIVE。最新权威 data/manifests/development-training-progress-20261102-v2.json
+与 docs/MILAI_DEVELOPMENT_TRAINING_EXECUTION_20261102.md。上轮D1/E0和本轮D3/QASPER均实质进展。
+当前实际/proc仍 compact coordinator3694163/child3694168，RUNNING393/524，u393 train4504/4886
+（须重新观察，不从快照推终态）。原冻结源码/运行不改；禁第二模型与活跃离线ledger写。
+
+D3 已接通 quality_feedback / train_bounded_laya / analyze_feedback_fit：answer-first按pair掩码，
+0.80答案known＋0.20答案unknown的交付辅助＋外加0.25accepted-set replay，各组件独立family/event
+归一化；缺组件不转权重、unknown不生梯度。同状态可双组件。历史默认normalized total保留，
+delivery-only对照显式 --pair-mass-mode component-sum。训练/保存元数据、分组件曝光与分析已接通；
+新模式分析仅提名最多两点，不能凭pair loss选部署winner。42相关CPU tensor/旧目标/合成审计tests、
+Ruff、正确torch/Laya环境的mypy3module、边界通过。完整新native fitting仍0。
+真实旧32/64/128池384/768/1536行，答案支持166/334/680states、aux89/174/352，bothunknown26/54/94pairs。
+旧u262/answer32u192/delivery32u48的新masked dev loss1.94880/.95353/.84108，不替代E0首选无win结论。
+artifacts/development-training-20261102/d3-real-pool-v1.json 与 d3-validation-v1.json 权威。
+
+QASPER薄adapter/CLI实现，官方v0.3 train/dev已下载（无test/无SHA）。qasper-first-tier-v3/
+是当前准备：TRAIN384papers/672questions/28925Source单元；dev32/60/2031。原allocation在首次
+无标题章节失败后逐值保留，4无标题段落未删/未造标题。官方reader独立section-heading与newline→space＋strip
+证据匹配已接通，Source正文保持literal；训练matched1027/unmatched13/figure111，dev162/0/15。
+图表caption不当完整图表，多个标注的证明集合分开；unanswerable不是HANDOFF，未标注不当负例。
+7tests/Ruff/mypy2module/边界过；全部416paper literal source/问题/标注与无标签public不变性实核。
+qasper-literal-check-v2.json权威。实际Source导入/READ/post/HANDOFF/新训练均0，不能把fixture当实到状态。
+
+Promptriever重新查实：已有131072 raw intake COMPLETE，旧PID2493400实际absent，query-anchored
+grouping pending。不要从“旧2000行”重下载。65536来源图仅469eligible train组件；旧512中446、
+旧48cross-review中42进入excluded。32768面板757queryunits/3stablepositive/22557stablenegative/0change。
+10k base-query有效目标未证明。下一应使用已有intake核分组/真实条件支持与旧曝光，不盲增prefix或洗dev。
+
+下一：QASPER真实Source/READ路径与D1新TRAIN采集（最多64新族/128实到状态），匹配runtime/读出再补
+14个dev未执行绑定，复用11已闭；冻结D3＋数据后E1最多三fits（delivery-only、answer-first、freeze-encoder）。
+compact原匹配保存链按实际终态继续，E2/E3对照、自主Host/E5/三seed/确认/LME-V2/Mem2Act/论文/Product仍须。
+本轮新增modelcalls0、无权重load。新增已测53.557238CPU秒待idle（含失败tests/preparation，内嵌不重复）；
+早期检查/下载/报告CPU未知。原v284 pending68+self与v1已测25.18及unknown均保留，禁止重记/预算重置。
+无SHA/子代理/远端写入/第二ledger。本轮源码尚未commit，不把局部实现/数据准备当最终优势。
+
+# PREVIOUS TRAINING PLAN v1: 2026-11-02
+
+用户现已明确要求详细阅读并执行 jev-read-decisions-20261016/MiLAi-Lab/docs/
+MILAI_DEVELOPMENT_TRAINING_PLAN_20261102.md，继续完整目标；下方旧暂停不阻止此新授权。
+本轮权威 docs/MILAI_DEVELOPMENT_TRAINING_EXECUTION_20261102.md 与
+data/manifests/development-training-progress-20261102-v1.json。目标 ACTIVE，远未完成。
+
+当前唯一模型 compact coordinator3694163/child3694168 已实际/proc确认，RUNNING393/524，
+34428981训练tokens。冻结源码未变/未重启；继续先观察实际进程和原链。活跃期间不启动第二模型，
+不离线写唯一ledger。原v284 pending68字段＋self仍在；本轮另有25.18秒rounded实测commandCPU，
+其余早期检查/失败probe/报告CPU未测未知；内嵌analysis时间不得重复加，不新建operational账本。
+
+D1新增 current-decision 策略，读取closed saved logits＋实际input，无模型load/forward；
+提名全菜单argmax、raw_context/rules、可选完整绑定，按执行参数去重、保留singletons/observe_only，
+不改旧prefix/allocation协议。新三工具＋测试尚未commit；30相关tests/Ruff/mypy3module/边界通过。
+真实dev四batch8族16states→25bindings，7singletons，4same-kind-different-parameters states。
+artifacts/development-training-20261102/d1-dev-nominations-v2 是提名全集；11已闭可复用、14未执行，
+不能直接重跑全部25。d1-dev-comparison-plan-v1.json记录缺口，执行前仍须共同runtime/readout绑定。
+本轮新TRAIN0/HTTP0；未用dev训练。raw-selected保留原scored state/questions，goldmasked。
+
+E0 三模型同64states/8exposedfamilies闭输出审计：u262首选已有45/64、读出完成41；
+answer32u192已有42/64、读出41；delivery32u48已有46/64、读出43。基线已有47/64。
+190actualbranches/173readoutcomplete/17failed。9状态有观察到答案更好候选，4有交付更好；
+非全菜单oracle/非新policy成绩。两个旧训练候选无已知首选win，缺覆盖/unknown保留。
+e0-*-v3.json权威：same_binding与已知quality tie分开，不把旧cost tiebreak算质量。
+完整argmax/已执行子菜单/固定类型序分开。D2绝对success gain和change/stable仍欠。
+
+下一优先D3按pair答案known＋交付answerunknown掩码、独立family/event归一化；特别注意
+旧normalized_mixture不等于新0.8/0.2任务＋外加0.25replay公式。然后QASPER/条件首档，
+首轮最多64新TRAIN族/128实到状态与E1最多三新fits；现有compact原匹配链按actualterminal继续。
+E2/E3对照、E4/E5自主Host/生命周期、三seed/确认/LME-V2/Mem2Act/论文表图/Product有效增量仍须。
+禁SHA/子代理/远端写入/第二ledger；不把D1工具/E0诊断或旧九fit/208Host算完整目标完成。
+
+# HISTORICAL USER PAUSE: 2026-11-02
+
+用户已暂停持续训练优化目标。当前仅完成明确要求的 GitHub 提交；不启动后续实验。已启动训练未中断或重启。恢复目标需用户明确指令。以下进度为暂停前记录。
+
+# LATEST: 2026-11-02 goal ACTIVE; v284 compact实际128/524，F3条件读出与实验查询污染修正已验证
+
+唯一模型仍compact-source256-operation-seed0-u524-v1，协调3694163/child3694168实际活且完整cmdline==bound；owner/native RUNNING，128updates/2048draws/11241681tokens。已闭history[0, 32, 64]；禁第二模型/活跃离线ledger/重启。
+owner=BASE/compact-matched-training-dev-v1/operation-orchestration-v1/driver.json。原完整524和全部7saved/selected4886train/tokenizer/compactfeedback初始化链仍须，不据中间dev提前选点。
+closed32-64-native-audit-v2与execution-v2核完整原生train4886/dev860/feedback16每点、checkpoint配置与实际前缀暴露，未加载模型；u32=512draws/2809247tokens/train.665000001/dev.674437211 vs旧shared.656869152；u64=1024/5613239/train.763076680/dev.719656440 vs旧shared.709667598。两点feedback answer.3125/delivery.53125，均不是Host质量。
+首次header审计误把FP32训练/加载等同FP32存盘而失败，closed32-64-audit-failure-v1保留且失败CPU未测未知。SDK laya/train.py save_checkpoint用detach().half()写盘，load_checkpoint返回model.float()；原shared/新compact32/64均170F16张量。未改模型/精度协议，savedCPU仍必须；storage/device影响不隔离。
+
+新F3实现/验证=BASE/given-view-readout-dev-v1/summary-v1.json，最终runtime=code-v4/MiLAi-Lab，declared label local-given-view-readout-v4（本地snapshot标记，不冒充Git commit）。当前工作区8源码/测试文件有本轮局部改动，未commit/push。
+CLI --given-requests --given-readouts：实际Tool包＋公开任务/请求/原值时钟，一次conditional final answer；共用原ledger/queue/剩余message额度；答案不存Source/不续Host历史。复用原visibility规则，已撤销材料不重披露；不能凭空补known refs对应的历史Host知识，明确拒绝这种新reader用法。
+保留known-usage incomplete失败后可进入下一声明请求，unknown用量失败停止；不恢复reasoning/不重试。单独复制thinking flag避免为读Boolean重载tokenizer；真正发送仍完整capacity检查。
+预检v1暴露raw高复用末位4/32只返回以前的实验查询，不能拿这种污染当View收益。现在三臂统一opt-in memory_control.exclude_given_requests=true：按既有capture_context生产者标记排除实验查询的检索/观察/View输入，Store原记录保留，普通纯问句和含断言问句不删。旧缓存含排除项则重建，checkpoint绑定条件；默认false/旧冻结研究不改。
+工作89回归＋最终frozen90回归通过；ruff/package/tools边界过。三个source-scope文件默认mypy缺types-jsonschema，保留失败；复用先前official stubs的qualified strict检查过，不冒充未改默认gate。final readout scoped strict过。
+
+F3方案=BASE/view-lifecycle-probe-dev-v1/protocol-v2.json；最终dispatch-v2.json、execution-readiness-v1.json、run_one_bank_v1.py。4个人工虚构开发场景×低2/高6请求×raw/scope_quotes/generated_view三臂=96positions/24独立coldbank jobs；不是独立真实来源或自主Host证据。原320自主生命周期仍须。
+同2048返回、reads4/8additional/steps8、capacity1；View policy version_cache先全范围构建/刷新，不先做incremental/batch。读取同一来源，普通问题角色/时间/条件语义保持，源审标签在单独文件，不进runtime。
+mechanical-preflight-report-v2：全96 Tool/脚本读出完成，fake96answers+16generatedViews；三臂各32/32 whole-role-body正证书、0probe正文，scope_quotes/generated各16REFRESH+16USE；raw32READ。Source原记录和所有查询审计记录保留；fake质量/用量绝不当真实模型结果。
+最终V4全部96 wire逐值==已通过真实tokenizer容量的V3脚本wire；没有重复Tool/模型。旧v1污染结果保留为diagnostic；原v2 clocks-only投影审计保留，最终版本用共同scope修正。
+真实F3模型0，当前没有F3 owner。新single-bank owner经真实active-model guard＋独立Popen禁止的测试，不能在compact活跃时开始；还需idle prelaunch-cpu-settlement-v1.json。随后一bank一审，Source/实际View/最终input/答案和全成本分别闭合。
+
+本轮无operational ledger写；pending68字段979.606712380CPU秒＋v284自身，含原pending、本轮read-only、所有失败/成功tests、freezes、两次synthetic96和wire checks，nested不重计。当前native本体仍自己计phase，wholechild残差待闭；新dtype失败probe未测未知。
+完整goal ACTIVE：原9fit/54saved/208Host与compact30/F2pilot不重跑。Q/coverage/newprefix/aux/seed/request-text/确认/外测/原320及F3真实/四主图仍须。禁SHA/子代理/远端写入/第二operational账本（隔离机械测试账本允许）。
+
+# Previous v283
+
+# LATEST: 2026-11-02 goal ACTIVE; v283 compact仍训练，原request-text完整动作链补齐准备
+
+当前唯一模型compact-source256-operation-seed0-u524-v1；协调3694163/child3694168实际/proc活，cmdline逐值==dispatch；owner/native RUNNING，0/524updates。初始dev860/feedback16已闭核，train2082/4886继续；原protocol初始全train评估不删除。
+owner=BASE/compact-matched-training-dev-v1/operation-orchestration-v1/driver.json。活跃禁第二模型/离线ledger/重启；下一仍当前完整native→7saved→selected4886train→tokenizer→compactfeedback绑定，原顺序不变。
+
+新BASE/request-text-complete-actions-dev-v1是既有完整动作E3依赖的具体准备，不新造网格。权威native原data/manifests/training-generalization-complete-action-study-amendment-v1.json内source256-actions-request-text-seed0-u524-v1，d6a8afd3。旧不完整动作source256-request-text计划已superseded，不运行。
+native-plan-v1严格与full counterpart全argv相同，除projection/output/phase；524updates/8384draws，12288/head2048、microbatch2、同base/数据/优化/选择规则。当前native0，不能借full/compact权重绑定text生命周期。
+复用原complete-action-request-text-input-audit-v1已过的rawtrain7884/labelled4886/dev860，所有请求字段可还原、0drop/skip；maxtrain10268/dev10251。旧228.042429765CPU不重记。
+补feedback16-input-audit-v2用实际SDK仅tokenizer，16逐值还原shared请求、其余state/questions/gold/meta不变，max8089/total58258、0drop、CUDA未初始化/0weights/0forward/0HTTP。native/saved对应codec/provider bytes和projection AST一致。
+v1补查误导入新版observation_object，冻结runtime无此API，失败receipt/CPU保留；v2用冻结直接dict契约，不修改实验runtime。
+saved-plan-v1为原7points[0,32,64,128,262,393,524]各876＋实际选中4886train，最多1native+8saved=9模型jobs，全0。原未投影raw输入逐值核后复用compact prepared源文件；表示由text runtime投影，不重建数据/改label。
+closure-plan-v1绑定既有native analyzer和analyze_saved_request_text_v1组合已有check_job/verified_predictions/verified_compute/choose_checkpoint；纯审计无模型，所有7闭后primary860 old-operation macro/earliest tie含0，feedback16只diagnostic，selectedtrain未绑定。
+representation-admission-test-v2拿真实旧shared876输出，其他推理门禁全部匹配，仅表示不符而拒绝。v1曾用空rows，会同时因count失败，不能作为隔离表示证据；v1保留，v2修正此验证范围问题。
+需到实际idle admission再绑定单jobdetached ownership和cost门禁；当前只是native/saved argv和分析链准备，不称已获真实模型结果。
+
+原lifecycle5arms/16banks每臂/320positions仍actual0；full/no_view须同权重，request_text须真实此链选点。F3四到达×低高复用及原文/缓存/generated/extractive比较仍需实际证据，未被原320准备或unit tests替代。
+本轮ledger0写，pending18字段27.084511698CPU秒加v283自身；whole16wrapper已含nested，旧input audits不重计，failedprobe费用保留。
+完整goal ACTIVE，F2只两family14pilot已source/cost闭且无相关更新改善，不当功能全面达成；Q/coverage/newprefix/aux/seed/确认/外测/生命周期/四主图仍须。禁SHA/子代理/远端写入/第二账本。
+
+# Previous v282
+
+# LATEST: 2026-11-02 goal ACTIVE; v282 compact原生初始860+16核验，7saved执行绑定齐
+
+唯一模型仍compact-source256-operation-seed0-u524-v1，协调3694163/child3694168实际/proc活且完整cmdline==绑定命令；owner/native RUNNING，当前0/524updates。初始dev860/feedback16完成，train353/4886进行中；初始全train是原协议，不删以省成本。
+owner=BASE/compact-matched-training-dev-v1/operation-orchestration-v1/driver.json；native=同study/prepared-v1/operation-fit/run.json。活跃禁第二模型/离线ledger/重启。
+actual-native-input-admission-v1：实际lengths train4886/dev860/feedback16逐event/order/token==prepared compact，0state/headdrop；max9429/9433/7503。实际training-plan==原shared524/8384，sampling4886 rows/weights逐值==原。
+initial-dev-and-feedback-audit-v1用原冻结scorer从全876实际prediction复算并核native summaries。raw multilingualbase update0的oldshared operation macro.151692747129 vscompact.100737400335，860中304choice变；feedback16 answer.802083333333→.645833333333，delivery.84375→.666666666667，8choice变。
+这是起点表示敏感性，不是commonu262/训练收益/已选savedCPU/Host成功；保持完整524，不能据此提前停/反选。25个dev输入>8192实际forward成功，最大9433且0truncated；日志tokenizer8192提示不等于本declared12288溢出，不改上限或截断。
+initial-dev-observation-v1是实PID/cmdline每30sec观察，已在860dev/16feedback完成后正常关闭；不是模型完成，训练仍进行。
+
+saved-operation-execution-v1新增dispatch-v1绑定原7jobs[0,32,64,128,262,393,524]，各876=6132 planned forwards，actual0。6个checkpoint原relative按LAB坐标绝对绑定，原saved-plan-v1/closure-plan-v2 unchanged，分析必须cwdLAB。
+run_one_candidate_v1.py仅单job；先native完整524/现有native分析和operation-orchestration-v1/native-cpu-settlement-v1.json，再全局idle/output不存在/原phase未用门禁；无聚合autodispatch或retry。
+execution-preflight-v1导入现有closure并核7实际坐标通过；active-model-admission-test-v1对真实live-model边界并patch Popen独立禁止启动，通过精确assert，0输出/模型/ledger。
+audit_one_candidate_v1.py复用已有check_job/verified_predictions/verified_compute和原metrics核全876实际input/token/logits/CPUphase，输出每job verified-candidate-v1.json；nativeGPU/savedCPU差异不冒充纯serialization原因。formal selection仍所有7闭后原工具执行。
+下一继续native初始train/完整524→native closure→全7saved→olddev primary earliest tie含0→选中4886train→选中tokenizer audit→绑定feedback192；feedback现在仍unbound。
+
+本轮无离线ledger写。pending10字段1.203268095CPU秒（launch/v281self、新actual输入/初始readout/observer及saved binding/preflight/guard/readiness），加v282自身待下一idle；native整个trainer与wholechild残差另闭合，nested不加。
+F2两family14已source/cost关闭、同信息无更新改善、prompt+24.4133%，默认不采用；原F01p2失败不重试。原9fits/54saved/208Host和compact30不重跑。
+完整goal仍ACTIVE；Q/coverage/newprefix/aux/seed/确认/外测/生命周期/四主图仍须。禁SHA/子代理/远端写入/第二账本。
+
+# Previous v281
+
+# LATEST: 2026-11-02 goal ACTIVE; v281 F2同信息14已闭，matched compact操作训练524进行中
+
+当前唯一模型=compact-source256-operation-seed0-u524-v1；协调3694163 / child3694168均活，owner/native RUNNING，初始登记0/524updates。
+owner=BASE/compact-matched-training-dev-v1/operation-orchestration-v1/driver.json；native=同study/prepared-v1/operation-fit/run.json。禁第二模型/活跃离线ledger/自动重启。
+原声明native recipe保持：full524updates/8384draws、multilingualbase、soft-ce、compact_actions、FP32、12288/head2048、microbatch2、GPU2,3、MHAoff、reference_compileFalse；eval0/32/64/128/262/393/524。
+入场核1017未改Python文件逐bytes相等，3处只既有compact分支/CLI；旧fullinput/targets/weights/permutations/draws审计和10helpertests复用。prepared相对路径在runtime cwd下会错误，已显式按LAB坐标绑定绝对argv/output/cwd/PYTHONPATH，未改原prepared文件/超参，没有失败模型launch。
+新actual-wrapper --help通过；新5字段7.060280794CPU已idle结清含F2最终closure publication、新binding/preflight/readiness/inventory。当前launch/v281self pending；native ownCPU和wholechild残差闭合后分开核，不能重计。
+期待45881938训练tokens只是旧tokenizer输入审计，待actualcompute核。下一native闭合→既有closure-plan-v2 native分析→全部7savedCPU→olddev最高familymacro/earliest tie含0→选中4886train验证→选中tokenizer全input审计→再绑定feedback；不能提前用共享u262冒充compact训练初始。
+
+F2已实际8original+6metadata=14，13native完成/1截断(F01原p2)，全部source/cost闭合。权威BASE/host-presentation-dev-v1/two-family-sequence-pilot-v2-orchestration/protocol-closure-v1.json；不重跑。
+全部6实际firstprovider请求仅当前Human后缀不同；index逐字段来自原可见effects/material/toolheaders，world/context/catalog/allowance相同，0prefix重执行。每条后缀2473字符，B30+856tokens/F01+850tokens，总+5118/+24.4133%prompt。
+配对original6：C3/P2/U1，deliveryS3/P2/U1，joint3；metadata6：C3/P3，deliveryS4/P2，joint3。原formation2为C/S单列，原8合C5/P2/U1。
+两arm所有6target均0retrieve；相关变化各2/2missed，已知充分各2及无关新增各2也0calls。count-only arrivals不能判相关，别把无关0calls当语义辨别证明或强制所有请求调用。
+B30相关均沿用Marc漏现Marcus；F01相关均6200/2240漏6080/2120。此pilot无175/future6200，绝不用1945。
+metadata F01p1最终数值对，但减法6200减7项误写等于3960，fulltask答案P/交付S；原F01p2失败变完整正确不当单次因果收益。评价可另注明value-only通过，但不回改fulltaskgrade。
+原10gen58668＋配对6gen39737=16gen98405known，unknown0/embedding0；配对原6tokens45826，输出变化/失败不能归因省费。
+F2prelaunch15.681012987、原closure18.207016551、pairedclosure37.500001524CPU全部paid；v280self在后者。failed inline audit未测CPU保留unknown。
+同信息呈现不采用默认、不新增泛化check指令、不据本pilot再调暴露题。可选显式预取改变信息，须另协议且非首轮必做。
+
+原9fits/54saved/13arm208与compact30均不重跑。默认/旧grades/训练labels保持；完整Q/coverage/newprefix/aux/seed/确认/外测/生命周期/四主图仍须，goal ACTIVE。禁SHA/子代理/远端写入/第二账本。
+
+# Previous v280
+
+# LATEST: 2026-11-02 goal ACTIVE; v280 F2原8已闭，6同信息分支运行
+
+F2ROOT=BASE/host-presentation-dev-v1/two-family-sequence-pilot-v2-orchestration。当前唯一协调3667048，owner paired-orchestration/driver.json；实际child与分支进展以该driver和/proc为准，禁止重启/第二模型/活跃时离线ledger。
+原8位置7COMPLETED/1FAILED(F01p2 VLLM_CHAT_TRUNCATED)，8个实际preHost capture全部可用；原6target直接作control，不重复。all6配对在看答案前绑定，含原失败位置。
+original-capture-audit-v2.json核原prefix/world/receipts/prompt/catalog；p1/p2两family全有原文充分certificate，p3缺新相关支持，仍须语义审而非只按witness扣分。
+原10gen/58668known(prompt29932/comp28736)、unknown0/embedding0；ledger edges全核。prelaunch6字段15.681012987CPU已付含v279self；原closure7字段18.207016551CPU已付含wholechild17.733655/coord.042600513及新只读分析。失败inline audit CPU未测记unknown。
+run_presentation_branches_v1.py按paired-dispatch-v1.json串行6个实际before，仅request_adjacent_metadata_v1；known-usage provider failure保留后可继续下一声明位置，其他错误停且未执行保留，不重试。
+后续必须核实际first provider input只差当前问题metadata后缀、index全部来源于原可见context/effects/material、相同工具/世界/额度、0prefix重执行；再全14source/answer/行为/cost审计。
+F01本pilot p3应6080-3960=2120，不含后面175/future6200，不用1945；B30p3 Marcus所有场景，不含后面corporateMarc。count-only arrivals不让Host知道相关性，首次lookup不自动算不合理。
+当前paired launch/v280self CPU待记，wholechild/coordinator闭后再计，nested不重算。默认prompt/政策/训练labels未改；原9fit/208Host与compact30不重跑。
+完整goal ACTIVE，matched compact2-stage及Q/coverage/newprefix/aux/seed/确认/外测/生命周期/四主图仍需。禁SHA/子代理/远端写入/第二账本。
+
+# Previous v279
+
+# LATEST: 2026-11-02 goal ACTIVE; v279 compact30行为/source/cost已闭，下一F2同信息pilot
+
+当前无模型。compact协调3227679/worker3227765均退出，observer1982 completed；native COMPLETED_WITH_MISSING_READOUTS，30Tool完成、27Host完成/3失败全部保留，单缓存u262加载CPU4/FP32/16384-head2048/MHAoff/compileFalse VERIFIED。
+执行=BASE/compact-behavior-pilot-execution-v1；owner/分析=BASE/compact-behavior-pilot-orchestration-v1。已执行不要重跑plan或30位置。
+
+actual-analysis-execution-v1.json通过；30实际model_result.input逐值==prepared输入，实际tokens==既有native tokenizer计量，只有新trace后缀的一次HANDOFF，0新增READ/前缀重执行。
+shared88480 vscompact79201 scorer tokens，-9279/-10.4871%；scorer pipeline CPU999.230084409 vs826.515019578（已在native账内），不是等FLOPs或普遍运行时保证。
+15对全logits均变、12对有pair-order改变、4对choice/packet/Hostwire改变。shared-repeat-audit-v1对15旧shared实际记录：选择及完整score值15/15逐值相同，maxdiff0；只读旧记录，无新模型repeat。
+source-reviews-v1：shared答案C7/P3/I4/U1、交付S8/P5/I2、joint6；compact C5/P5/I3/U2、交付S7/P6/I2、joint4，均15分母。失败输入有actual provider response绑定，可独立判Tool交付，失败答案始终U。
+3失败=compact A32summary TEXT_REQUIRED、shared E15original incomplete、compact F01known_partial incomplete；不抽reasoning补答案。
+交付偏好shared1/tie14，唯一退化E08summary compact漏酒店378；无compact交付优势。4个changed-wire答案shared2/compact1/tie1；11same-wire答案compact2/tie6/unknown3，后者不是格式/策略收益。
+C03两包均S，但某些final只说要再查为I；F01stage0较小raw包含user费用＋同前缀assistant pay/savings recap，可构成充分替代链，不能机械按whole-witness2/4扣分。
+F01known_partial旧K真实可见、目标包确含assistant6080/4135/1945，但缺primary最新6080确认，按明确confirmed-current委托P；固定sibling为空且不升级为scorer知识。E15 mixedView含identifier-date/assistant→user误归，raw全仍P。
+默认不改，新compact fits0；decision-summary-v1、reviewed-pair-summary-v1和paired-results-v1.csv给完整结果，作者知道设计，非独立/盲评，非自主Host停止/新来源确认。
+
+真实30gen/139779known（prompt81888/completion57891）、unknown0、embedding0；15shared gen77751 vscompact62028含输出波动/失败，不归因成因果省费。
+load12.346208611/predict1825.745103987CPU已native入账；whole1924.690389只补残差86.599076402、coord.054509459；当前launch/v278self/机械、source、score复现、cost等12字段99.002404625CPU秒idle一次结清，cpu-settlement-v1.json。
+prelaunch15.437195295已另结；旧F1模型、old preparation、replay/readout/model/driver nested都不重计。v279只自身progress CPU待记。
+
+下一按plan7.1 StageC先执行已有F2：BASE/host-presentation-dev-v1/two-family-sequence-pilot-v2/frozen-dispatch-v2.json，实际output two-family-sequence-pilot-v2-execution仍不存在。
+plan2families B30/F01，每family4requests；2formation+6原target+6paired metadata branches=14Host位置。原target结果是control不重复；从实际before派生分支，不能造known refs或按结果挑prefix。
+fixed_context reads4、同Host prompt/模型/预算；request_adjacent_metadata_v1只重排既有可见信息，不能加正文/摘要/泛化多检查指令或强制调用。包含known-repeat/unrelated-arrival/related-change；中性p0..p3不泄露条件。
+重要既有observation_limit：count-only新来源通知不能揭示语义相关性，oracle相关性与Host当时可知分开，首次lookup不能自动判不合理。
+plan旧freeze_status是初始声明，frozen-dispatch-v2给后续精确D8命令；先读当前prompt和真实F2捕获/branch接口，复用已有冻结代码，不重新搭平台。
+
+matched compact2-stage链仍排队（compact-matched-training-dev-v1/summary-v2、closure-plan-v2），本pilot满足已声明前置行为试验，不支持直接给shared旧权重换默认格式。之后Q/coverage、新prefix、aux/seed、独立确认、外测、生命周期、四主图仍须。
+原9native/54saved/9selection/9retention＋13arm/208 source/cost已闭，OROOT/protocol-closure-v1.json权威，不重跑。完整goal ACTIVE，最新data/manifests/evidence-gap-development-progress-20261023-v279.json。
+禁SHA/子代理/远端写入/第二账本；唯一ledger仍MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json。旧F1/原Host grades和默认配置不改，source reviews不当新训练labels。
+
+# Previous v278
+
+# LATEST: 2026-11-02 goal ACTIVE; v278 compact30同权重真实pilot活跃
+
+唯一模型=compact-behavior-pilot，协调3227679 / worker3227765，owner/native RUNNING，/proc均存活；Tool记录12/30 {'COMPLETED': 12}，Host {'COMPLETED': 10, 'FAILED': 1, 'PENDING': 1}。
+owner=BASE/compact-behavior-pilot-orchestration-v1/orchestration/driver.json；native=BASE/compact-behavior-pilot-execution-v1/driver.json；inference=owner根上级inference.json。
+实际1个commonu262加载VERIFIED：CPU4/FP32/max16384-head2048/MHA关闭/reference_compileFalse，NativeDecision来自冻结functional-method-freeze-v1/code-v2 D8。
+活跃禁第二模型/离线ledger/重启；Tool completed不等于Host完成/语义正确。当前是15固定before条件×shared/compact=30，不是新训练或独立source，也不是自主Host停止。
+
+沿已有compact-behavior-pilot-v1/plan.json和30policies，没有重跑preparation/重造网格/改原plan。新执行绑定在compact-behavior-pilot-orchestration-v1/dispatch.json。
+复用既有F1 coordinator单child/wholeCPU减native Laya load/predict记账逻辑，和original-feedback-host-dev-v1/code-v2/tools/run_host_saved_cpu.py；HTTPsite仅append，环境/attention及语义参数原样。
+实际CUDAENV imports与30条双投影路径==prepared inputs、15原Host frames==prepared、唯一ledger路径检查通过：execution-preflight-v1.json，无tokenization/weights/forward/HTTP，CUDA未初始化。
+修正过的F1分析器从current-raw-tie-execution-v2/analysis-code-v2逐字节复用，按实际trace prefix字节之后的当前JSONL后缀核对，旧前缀操作不重算。
+analysis-readiness-v1.json给两个后续命令：先generic mechanical-summary-v1，再model-input-analysis-v1。新增analyze_compact_model_inputs.py已在15个既有真实shared分支上验证input/token/full scores，无新模型。
+实际native memory_control_model_result会记录input与完整logits/probabilities；闭合后须对prepared inputs和既有native tokenizer lengths逐值核对，不从config推断实际格式。pair_order_changes也要报，top choice相同不等于全排序相同。
+
+prelaunch6字段15.437195295CPU秒idle一次结清：v277self、新binding/import preflight/旧实分支分析器回归/readiness/inventory；旧preparation5.168CPU及旧F1模型工作没有重复记。
+费用=compact-behavior-pilot-orchestration-v1/prelaunch-cpu-settlement-v1.json。当前launch＋v278self待记；模型native load/predict已实时入唯一ledger，wholechild残差闭合后再补，不能叠加replay/readout/driver嵌套CPU。
+失败按原native单次协议保留，已支持known-usage incomplete final可继续下一原位置但不重试；其他错误停止，未执行仍unknown。original prefix usage是历史上下文，不是新HTTP费用。
+
+原9native/54saved/9selection/9retention＋13arm/208源审/成本已闭合，权威OROOT/protocol-closure-v1.json，不重跑；全目标仍ACTIVE。
+下一compact实际分析/源审/成本→既有matched compact链和F2同信息pilot，再Q/coverage/newprefix/aux/seeds/确认/外测/生命周期/四主图。最新data/manifests/evidence-gap-development-progress-20261023-v278.json。
+禁SHA/子代理/远端写入/第二账本；唯一ledger MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json。别打印完整input/usage巨大容器。
+
+# Previous v277
+
+# LATEST: 2026-11-02 goal ACTIVE; v277 原九训练→全208 Host协议闭合，下一compact行为pilot
+
+当前无模型进程。最后D128协调2991091/worker2991113已退出，observer1938 completed；原13 unique arms/208位置均实际执行、源审、费用闭合。
+原9native/54savedCPU/9selection/9retention重新只读核验；inspect_bindings READY与dispatch逐值相同，54 native saved statuses均COMPLETED。
+权威=artifacts/evidence-gap-20261023/original-feedback-host-execution-v1/protocol-closure-v1.json；原dispatch的BOUND_NOT_EXECUTED是历史recipe状态，不改它、不要重启原任何arm。
+root source-bound-reviews.json和summary.json已齐，全208经原冻结分析器绑定；root summary仅逐字节复制最后all208验证报告，不重复求值。
+
+OROOT/cohort-analysis-v1有host-arms.csv、host-positions.csv、initial-updated.csv、selected-checkpoint-host-links.csv、analysis.json、interpretation-and-visual-review-v1.json及original-host-cohort PNG/SVG/PDF，实际目视无裁切。
+169 native完成/39失败；答案C66/P99/I4/U39，交付S82/P86/I1/U39，joint61。失败35truncated/3malformed/1capacity，source128-answer nativeFAILED原样保留；别把unknown算错或只分成功样本。
+固定baseline C7/joint7；参数更新选点最多C7/joint6，本次暴露单轨迹没有超固定的correct/joint数，不是统计/因果优劣证明。
+初始104位置C58/joint57；更新104 C8/joint4。82更新零当前call：P55/I2/U25，无C；22有call：C8/P9/I1/U4。此队列有相关变化，不推出所有后续请求必须调用，F2充分/无关对照仍须。
+10个distinct参数更新selected checkpoints旧操作preference全低于commonbase，-8.1683至-1.60198pp；不是全动作legality或独立确认。12target views/11checkpoint不当12独立fit。
+Host全368gen/1809666known，prompt955939/completion853727、unknownusage0，localruntime34662.629382877CPU秒=child+coord+launch一次；scorer/residual是其中子集别再加。训练/collection/offline费用另列，非总money/energy。
+九fit原生research27648draws/143791144inputtokens只一次；selected prefixes不能相加且继承u262非零。别把历史training-only closure的Host_pending当当前状态，已由protocol-closure supersede。
+
+最后D128：C6/P6/U4，交付S8/P4/U4，joint6，8更新全零call；B30/C03/E08/F01更新truncated。A32初始2FA确已完成但“立即”无来源，P/S；D25对Lena/未尝试断言P/S，其他六初始C/S。
+26gen/141796known/unknown0；load6.362545872/predict788.951917244CPU已native记，whole840.717726仅补残差45.403262884；含v276pending/self/报告原型/源审/根summary publication等15字段61.372196474CPU秒idle一次结清。
+最终report/figure/interpretation/protocol+inventory5字段6.463483860CPU秒另idle结清，OROOT/cohort-report-cpu-settlement-v1.json；13arm settlement与ledger匹配，arm间HTTP边相等、全HTTP窗口和scorer delta对齐表，模型/旧账/nested不重记。
+
+下一实际任务=BASE/compact-behavior-pilot-v1/plan.json，现已核文件真实存在：8families/15conditions/30policies与positions；sameu262，仅shared_actions对象与compact_actions字符串格式，30forwards+30单次Host readouts。
+原pipeline output BASE/compact-behavior-pilot-execution-v1不存在、driver不存在，actual0；别重跑prepare_compact_behavior_pilot_v1.py或另造网格。entry=BASE/functional-method-freeze-v1/code-v2/MiLAi-Lab/tools/run_frozen_retrieval_calls.py。
+先查该plan/preparation和现有F1真实执行的wrapper/env/单owner记账；用声明attention/CPU4/FP32/max16384-head2048，HTTPsite只能append，不能套13-arm原Host runner。
+之后按compact-matched-training-dev-v1/summary-v2与closure-plan-v2 gates执行实际匹配链；F2两family14位置同信息pilot及完整Q/coverage/newprefix/aux/seed/确认/外测/生命周期/四主图仍未完成。
+完整目标ACTIVE，不把原M2子阶段闭合当full goal完成。v277无其他pending字段，仅自身progress CPU待下一idle边界计量；最新data/manifests/evidence-gap-development-progress-20261023-v277.json。
+禁SHA/子代理/远端写入/第二账本；唯一ledger仍MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json。原source review不能变成新训练labels。
+
+# Previous v276
+
+# LATEST: 2026-11-02 goal ACTIVE; v276 全队列汇总器实快照核验，最后D128 RUNNING
+
+当前original D128=source128-delivery-seed0-u192-v1-delivery-selected-u192，协调2991091 / worker2991113；RUNNING，实际进程存活，禁止第二模型/离线ledger/重启。
+owner/native=RUNNING/RUNNING，14/16记录 {'COMPLETED': 11, 'FAILED': 3}，/proc={'pid': True, 'child_pid': True}。路径/CPU4-FP32加载条件同v275；observer1938继续按实际句柄观察，窗口结束不是重启授权。
+下一仍先最后16实际来源/最终input/成本闭合，不从native完成直接给正确分；全13/208保留原失败和unknown。
+
+已新增report_original_host_cohort_v2.py（BASE下）；original-feedback-host-execution-v1/cohort-analysis-readiness-v1.json给最终command。
+用closed12 reviewed-summary实快照校验：192源审＋16未执行unknown，13 method rows、26stage rows、208position rows、12selection links；当前live arm未读。
+答案correct与joint(C且S)分开，rules6 vs4已核；所有12已闭arm计数等于closure；CE64 shared12和CE128delivery0→initialization映射不重复。
+Host runtime CPU=wholechild+coordinator+launcher；native scorer/residual列是其中子集不能再加。HTTP包括失败。training/collection/offline analysis不混作每arm Host效率。
+九fit训练上下文27648draws/143791144tokens只和既有9native记录对齐，selected prefixes/12views不累加；继承u262成本非零且另列，不声称总money/fullresearch cost。
+首次v1缺fixed/rules checkpoint字段而失败，源码/receipt保留；v2按policy=laya明确映射，通过execution-v2；没有默认填假checkpoint、改grade或模型操作。
+最终待所有arm结算和root source-bound-reviews/summary齐后运行：python3 BASE/report_original_host_cohort_v2.py OROOT/summary.json OROOT/cohort-analysis-v1。
+当前validation-v2只是开发快照，不是最终13结果；图/主表更不能代替full goal。
+
+最新data/manifests/evidence-gap-development-progress-20261023-v276.json；pending5字段＋自身：D128launch、v275self、报告验证失败/成功whole、readiness，均未离线入账。
+原Host已源审192，最后arm待审；原9native/54saved/9selection/9retention全闭。完整Q/coverage/compact/F2/F3/辅助/生命周期/确认/外测/四主图仍需，ACTIVE。
+禁SHA/子代理/远端写入/第二账本；别打印整usage/compute大容器。
+
+# Previous v275
+
+# LATEST: 2026-11-02 goal ACTIVE; v275 D64-delivery96源审闭合，最后D128-delivery192活跃
+
+唯一实际模型=source128-delivery-seed0-u192-v1-delivery-selected-u192，协调2991091 / worker2991113；owner/native RUNNING，2/16记录 {'COMPLETED': 2}，/proc均存活。
+owner=artifacts/evidence-gap-20261023/original-feedback-host-execution-v1/orchestration/source128-delivery-seed0-u192-v1-delivery-selected-u192/driver.json；native同根runs/source128-delivery-seed0-u192-v1-delivery-selected-u192/driver.json。
+CPU4/FP32/16384-head2048对应source128-delivery update192 VERIFIED load；活跃禁第二模型/离线ledger/重启。原13unique/208分母固定；这是最后一个原Host arm。
+结束先actual208 summary/packet＋逐源final-input评审＋cost/idle结算，再全13根source-bound-reviews.json和summary/整体汇总；不能仅native完成就说学习闭环已全部核好。
+
+D64-delivery96全16闭：12native完成、A19s2/D25s2/E08s0/F01s2四截断；答案C4/P8/U4、交付S7/P5/U4、joint4，6当前零retrieve。observer1925已completed。
+B30初始将January命名当Dec入职，D25编Lena吃chili banchan，E15初始假设Mar25/22days rates，三者raw足够仍P/S。
+E08两call有primary solo-morning/three-pass、peerreview/mileage/Dave，但0个378文本；答复仍把可能Sarah387变确定、February871误属Portland trip，P/P。
+E15更新不再沿估算而说N/A，但没取到明确21days/11-5仍P/P；F01更新调用后trunc未知，不恢复部分输出。
+累计reviews/through-source64-delivery-source-reviews-v1.json192，前176对象不变，全208 summary绑定通过；闭合快照16未执行从行推导。
+
+27gen/149995known/unknown0，prompt72322/completion77673，embedding0；load6.276438313/predict3038.702330079CPU已native记。
+whole3100.393063仅补残差55.414294608；launch/v274self/机械源审/协调等10字段71.935282926CPU秒idle一次结清，结算同orchestration/source64-delivery-seed0-u192-v1-delivery-selected-u96/cpu-settlement-v1.json。
+训练/nested/整child/aliases不重复。最后D128仍需source/cost；别提前以12臂归纳13臂或做checkpoint反选。
+
+原9native/54saved/9selection/9retention训练全闭；Host十二terminal源审192（含早先source128FAILED），第十三活跃。原Host闭合也不完成full goal。
+完整Q/coverage/compact/F2/F3/辅助/生命周期/确认/外测/四主图仍需；v275仅当前launch＋自身待记，最新data/manifests/evidence-gap-development-progress-20261023-v275.json。
+ACTIVE；禁SHA/子代理/远端写入/第二账本；packet仍review-tooling-v1/code-v2，禁止打印整usage/compute大容器。
+
+# Previous v274
+
+# LATEST: 2026-11-02 goal ACTIVE; v274 D32-delivery48源审闭合，D64-delivery96活跃
+
+唯一实际模型=source64-delivery-seed0-u192-v1-delivery-selected-u96，协调2878625 / worker2878628；owner/native RUNNING，1/16记录 {'COMPLETED': 1}，/proc均存活。
+owner=artifacts/evidence-gap-20261023/original-feedback-host-execution-v1/orchestration/source64-delivery-seed0-u192-v1-delivery-selected-u96/driver.json；native同根runs/source64-delivery-seed0-u192-v1-delivery-selected-u96/driver.json。
+CPU4/FP32/16384-head2048对应source64-delivery update96 VERIFIED load；活跃禁第二模型/离线ledger/重启。下一source128-delivery192，原13unique/208分母固定。
+
+D32-delivery48已16闭：14native完成、C03s2/E08s0截断；答案C6/P8/U2，交付S7/P7/U2，joint6，7当前零retrieve。observer1912已completed。
+六初始C/S；E15初始raw足够却假设Mar20/26days并称verified rates，P/S。七更新零call中C03失败U，其余六沿旧/缺新事实P；E08有新call仍P/P。
+E08更新actual raw有新routine/peer-review及确认871-mile February log/Dave12-14，但缺本人hotel378；答复把可能Sarah387变确定，又由post-Portland rechecking误连871到Portland trip。871数字本身有原文，不说捏造。
+D25初始no-established-untried新店允许，不推断japchae已试；更新all-foods/places-tried与Szechuan/katsu/mirin/已做stirfry冲突。
+累计reviews/through-source32-delivery-source-reviews-v1.json176，前160对象不变，原208 summary通过；闭合快照32未执行从行推导。完成final packets原文，不推断中间/失败全无View。
+
+25gen/111305known/unknown0，prompt63411/completion47894，embedding0；load7.336265030/predict2055.986380614CPU已native记。
+whole2110.538496只补残差47.215850356；launch/v273self/机械源审/协调等10字段63.189467082CPU秒idle一次结清，结算同orchestration/source32-delivery-seed0-u192-v1-delivery-selected-u48/cpu-settlement-v1.json。
+训练/nested/整child不重复。原Host剩当前D64及最后D128，均还需source/cost闭环，不能提前归纳全部13结果。
+
+原9native/54saved/9selection/9retention训练全闭；Host十一terminal源审176（含早先source128FAILED），第十二活跃。完整Q/coverage/compact/F2/F3/辅助/生命周期/确认/外测/四主图仍需。
+v274仅当前launch＋自身待记；最新data/manifests/evidence-gap-development-progress-20261023-v274.json。ACTIVE；禁SHA/子代理/远端写入/第二账本；原Host完成也不是full goal完成。
+
+# Previous v273
+
+# LATEST: 2026-11-02 goal ACTIVE; v273 CE128-answer48源审闭合，D32-delivery48活跃
+
+唯一实际模型=source32-delivery-seed0-u192-v1-delivery-selected-u48，协调2796752 / worker2796803；owner/native RUNNING，2/16记录 {'COMPLETED': 2}，/proc均存活。
+owner=artifacts/evidence-gap-20261023/original-feedback-host-execution-v1/orchestration/source32-delivery-seed0-u192-v1-delivery-selected-u48/driver.json；native同根runs/source32-delivery-seed0-u192-v1-delivery-selected-u48/driver.json。
+CPU4/FP32/16384-head2048对应source32-delivery update48 VERIFIED load；活跃禁第二模型/离线ledger/重启。下一source64-delivery96，再source128-delivery192，原13unique/208分母固定。
+
+CE128 answer48全16闭：14native完成、D25s2/F01s0截断；答案C5/P9/U2、交付S7/P7/U2、joint5，6当前零retrieve。observer1897已completed。
+A32初始正确区分偏好/动作、2FA在事件后而非确切日；D25完整meal/others与japchae未知保持，均C/S。E08初始把rushing说成确认fatigue因果，P/S；E15初始假设Mar24/23days rates，更新仍估计而漏21/11-5，P/S→P/P。
+C03更新虽两call，9:45实际来自中间assistant recap，缺user correction/最新10:15提案撤回，还错说无Kevin；P/P，别声称9:45字面未交付。
+F01更新有primary6080/paystub、175/future6200和assistant4135/1945聚合；逐项费用/储蓄原文未交付、初始失败无旧成功receipt，P交付。答案把3960内1500再扣，算620/445且误把175当条件，P；不要说正确聚合/当前工资缺失。
+累计reviews/through-ce128-answer-source-reviews-v1.json160，前144对象不变，原208 summary通过；闭合快照48未执行由行推导。CE128delivery0共用initialization不另跑。
+
+29gen/150128known/unknown0，prompt73152/completion76976，embedding0；load8.726363945/predict4038.313376718CPU已native记。
+whole4103.510599只补残差56.470858337；launch/v272self/机械源审/协调等10字段71.641042743CPU秒idle一次结清，结算同orchestration/source128-continued-ce-seed0-u192-v1-answer-selected-u48/cpu-settlement-v1.json。
+训练/nested/整child/alias费用不重复。新Host只剩当前D32和后续D64/D128，仍需所有源审和成本闭环。
+
+原9native/54saved/9selection/9retention训练全闭；Host十terminal源审160（含早先source128FAILED），第十一活跃。完整Q/coverage/compact/F2/F3/辅助/生命周期/确认/外测/四主图仍需。
+v273仅当前launch＋自身待记；最新data/manifests/evidence-gap-development-progress-20261023-v273.json。ACTIVE；禁SHA/子代理/远端写入/第二账本；不从暴露单轨迹反选或作因果结论。
+
+# Previous v272
+
+# LATEST: 2026-11-02 goal ACTIVE; v272 CE64-shared12源审/成本闭合，CE128-answer48活跃
+
+唯一实际模型=source128-continued-ce-seed0-u192-v1-answer-selected-u48，协调2671308 / worker2671312；owner/native RUNNING，4/16记录 {'COMPLETED': 4}，/proc均存活。
+owner=artifacts/evidence-gap-20261023/original-feedback-host-execution-v1/orchestration/source128-continued-ce-seed0-u192-v1-answer-selected-u48/driver.json；native同根runs/source128-continued-ce-seed0-u192-v1-answer-selected-u48/driver.json。
+CPU4/FP32/16384-head2048对应CE128 update48 load VERIFIED；活跃禁第二模型/离线ledger/重启。下一dispatch10/11/12为D32selected48/D64selected96/D128selected192。
+CE128 delivery0已经共用initialization那16，别额外跑；原13unique/208分母固定。
+
+CE64 shared answer/delivery12已16源审/结算，15native完成+E15s2截断；答案C4/P11/U1、交付S4/P11/U1、joint4，8个更新全部当前零retrieve。
+7个完成更新沿旧/不完整事实，失败1仍U；当前scorer没被调用时不能直接补证据，但历史交付可间接影响Host，不作训练因果结论。
+A32初始只provider/cleanup漏password/2FA；F01止3525/2675漏350/40/45；E15初始reference/recount漏后续mostly-down/时间窗。D25热度/Koku对但漏sweet-savory/后续meal对照，按覆盖P/P；初始无未试新店不作为错误。
+B30初始professional原文+assistant preference链接和ChenWei/May2足够替代首条完整witness，C/S。E08初始不附加fatigue因果/不否认存在推断，C/S；更新虽分角色仍漏新routine/peerreview/Sarah，P/P。
+累计reviews/through-ce64-shared-source-reviews-v1.json144，前128对象不变，全208 summary通过；剩余计数从行推导，闭合快照64未执行。
+
+25gen/120429known/unknown0，prompt55086/completion65343，embedding0；load8.468521652/predict1262.180694437CPU已native记。
+whole1318.470664仅补残差47.821447911；启动/v271self/机械源审/协调等10字段62.770305984CPU秒idle一次结清，结算同orchestration/source64-continued-ce-seed0-u192-v1-answer-selected-u12/cpu-settlement-v1.json。
+两target alias共用该16/费用，非两次独立trial；训练/nested/整child不重复计。
+
+原9native/54saved/9selection/9retention训练全闭；Host九terminal源审144（含早先source128FAILED），第十活跃。完整Q/coverage/compact/F2/F3/辅助/生命周期/确认/外测/四主图仍需。
+v272仅当前launch＋自身待记；最新data/manifests/evidence-gap-development-progress-20261023-v272.json。CE32耗尽loop诊断和九fit图保持，不回改旧模型/grade。
+ACTIVE；禁SHA/子代理/远端写入/第二账本；packet工具review-tooling-v1/code-v2；不要打印整usage/compute或巨型容器。
+
+# Previous v271
+
+# LATEST: 2026-11-02 goal ACTIVE; v271 CE32-delivery24源审闭合；CE64-shared12已terminal待审
+
+当前无实际模型进程。最近CE64=source64-continued-ce-seed0-u192-v1-answer-selected-u12，协调2531068 / worker2531070均退出；owner COMPLETED_WITH_NATIVE_FAILURES_RETAINED、native COMPLETED_WITH_FAILURES、wrapper COMPLETED。
+全16已记录 {'COMPLETED': 15, 'FAILED': 1}，唯一E15stage2 VLLM_CHAT_TRUNCATED保留；CPU4/FP32/16384-head2048对应CE64 update12已VERIFIED，answer/delivery两个alias只算一次16/费用。
+owner=artifacts/evidence-gap-20261023/original-feedback-host-execution-v1/orchestration/source64-continued-ce-seed0-u192-v1-answer-selected-u12/driver.json；native同根runs/source64-continued-ce-seed0-u192-v1-answer-selected-u12/driver.json。
+下一先此臂原208 summary/packet、来源/真实final-input评审与cost核对/idle settlement，不能因已经terminal就跳审或重启。之后dispatch index9 CE128 answer48，再D32/D64/D128。
+
+CE32-delivery24已16闭合/结算：15native完成、E08s0 JSON_ACTION_MALFORMED；答案C3/P12/U1，交付S5/P10/U1，joint3、6当前零call。
+A19新call仍旧/中间包，A32漏2FA，C03初始患者ID/同care上下文可作Riverside替代证据C/S，更新仍旧9:30；D25漏radish/Priya并推断Lena耐辣。
+E15初始无源39days及rates、更新假设26days而缺明确21/11-5。E08更新拿到新routine/peerreview却漏本人378并把可能Sarah387升为确定，P/P。
+E08s0六次实际retrieve：前两role/body相同，第三补4PM仍无378，后三budget_exhausted且0控制/读操作；第5/6次真实provider input已含耗尽回执。whole失败7gen/30294known，不都归因最后两次；final仍U/U。
+该诊断在reviews/source32-continued-ce-seed0-u192-v1-delivery-selected-u24/failure-loop-observation-v1.json，只是F2实证缺口，不改默认或新增训练标签。
+
+全臂33gen/132601known/unknown0，prompt90630/completion41971，embedding0；load7.409393781/predict3452.967410146CPU已native记。
+whole3517.401064仅补残差57.024260073；含v270pending/self、九fit图whole/visual、当前源审/loop/说明修正等15字段77.332420562CPU秒idle一次结清。
+结算同orchestration/source32-continued-ce-seed0-u192-v1-delivery-selected-u24/cpu-settlement-v1.json。九fit图均已付，rendering nested不重复。
+剩余数说明纠正：CE32answer闭合112→remaining96，CE32delivery闭合128→remaining80；此前三处scope prose少算16，实际208 summary和源审bytes未改。correction-v1保留前后文字；v269/v270历史copy由此更正，当前field已修。
+
+累计源审reviews/through-ce32-delivery-source-reviews-v1.json=128；CE64另16terminal待审，四臂64未执行，合208。原9训练全闭，完整Q/coverage/compact/F2/F3/辅助/生命周期/确认/外测/四图仍需。
+v271只CE64 launch＋自身待记（CE64 nativeCPU残差待核，不能漏）；最新data/manifests/evidence-gap-development-progress-20261023-v271.json。observer1861已completed。
+ACTIVE；禁SHA/子代理/远端写入/第二账本；sourcepacket仍review-tooling-v1/code-v2，禁止打印整usage/巨大容器。
+
+# Previous v270
+
+# LATEST: 2026-11-02 goal ACTIVE; v270 九fit质量/成本图已导出核验，CE32-delivery24仍活跃
+
+唯一模型仍source32-continued-ce-seed0-u192-v1-delivery-selected-u24，协调2401468 / worker2401554；owner/native RUNNING，1/16记录 {'COMPLETED': 1}，实际/proc均存活。
+路径和CPU4/FP32/16384-head2048 VERIFIED load同v269；当前observer exec1861仍需等终态/窗口后原句柄复核，不能因观察超时重启。
+活跃禁第二模型/离线ledger。闭合按原208 summary/packet→逐源final-input→cost→idle settlement；下一CE64 shared12一个unique arm。
+
+新增saved-quality-cost-diagnostic-dev-v1/figures-nine-fits-v1下answer/delivery-ordering-decomposition各PNG/SVG/PDF，plotted-data.csv逐字节同actual-saved-v4/curves.csv。
+原9fit/54points/108读数/46唯一saved jobs，12选点marker保持；每点原分=固定分母质量方向+成本tie-break贡献，全108核验。
+figures-nine-fits-execution-v1.json通过，visual-review-v1.json已实际view两图并核legend/axes/annotation/footer无裁切、SVG/PDF有效；whole6.072976348CPU秒含nested，不重复计rendering。
+图是开发诊断，8暴露family/64states/seed0，共同base，名义prefix不是独立history或等token；不含Host/训练因果/置信区间，不完成四张最终主图。
+已读plan12.3要求，不能用这两张补充图替代Q-tie/Q-cost、泛化、条件稳定和生命周期实际结果。
+
+Host七terminal arms112已源审，当前第八运行；CE32 answer48 closure与63.606009215CPU结算见v269，原9训练全闭但full goal仍需。
+v270 pending4字段＋自身：当前launch、v269self、figures whole execution、visual review；未记operational ledger。
+最新data/manifests/evidence-gap-development-progress-20261023-v270.json。ACTIVE；禁SHA/子代理/远端写入/第二账本。
+
+# Previous v269
+
+# LATEST: 2026-11-02 goal ACTIVE; v269 CE32-answer48源审/成本闭合，CE32-delivery24活跃
+
+唯一实际模型=source32-continued-ce-seed0-u192-v1-delivery-selected-u24，协调2401468 / worker2401554；owner/native RUNNING，1/16记录 {'COMPLETED': 1}，/proc均存活。
+owner=artifacts/evidence-gap-20261023/original-feedback-host-execution-v1/orchestration/source32-continued-ce-seed0-u192-v1-delivery-selected-u24/driver.json；native同根runs/source32-continued-ce-seed0-u192-v1-delivery-selected-u24/driver.json。
+实际CPU4/FP32/16384-head2048对应CE32 update24 load VERIFIED；活跃禁第二模型/离线ledger/重启。下一CE64 shared answer/delivery12，只执行一个unique arm。
+
+CE32-answer-selected48全部16闭：12native完成、B30s0/D25s2/E15s2截断＋E08s0 JSON_ACTION_MALFORMED；答案C5/P7/U4，交付S6/P6/U4，joint5，6当前零retrieve。
+A19/A32/C03/F01更新完成却复用旧事实；D25/E15更新零call但失败未知，不按潜在动作评分。A32初始只读到assistant2FA问句便错排除实际完成2FA。
+B30更新虽然缺整条早期个人偏好/May2证书，最新user同句确认May2/ChenWei与Marcus介绍、区别未来网站Marc，加原始assistant current-fullname上下文，替代链充分C/S。
+E08更新有新call仍只给旧4PM/酒店尾部，漏最新routine/peer-review/Sarah；误把user已确认spreadsheet归assistant speculation，P/P。D25原文足够但添加Lena耐辣及未报告未尝试断言，P/S。
+完成final packets均raw-only；不扩大为失败/中间轨迹没有建View。累计reviews/through-ce32-answer-source-reviews-v1.json112条，前96对象不变，全208 summary绑定通过。
+
+实际28gen/126589known/unknown0，prompt65286/completion61303，embedding0；load8.270523256/predict3623.674240738CPU已原生计。
+whole3682.225101仅补残差50.280337006；启动/v268self/源审/协调等10字段63.606009215CPU秒idle一次结清，结算同orchestration/source32-continued-ce-seed0-u192-v1-answer-selected-u48/cpu-settlement-v1.json。
+原9native/54saved/9selection/9retention训练全闭；Host七terminal arms112已审（含早先source128 FAILED），第八进行中，13unique/208和aliases保持。
+v269仅新launch＋自身待记；最新data/manifests/evidence-gap-development-progress-20261023-v269.json。完整Q/coverage/compact/F2/F3/辅助/生命周期/确认/外测/四图仍需。
+ACTIVE，禁SHA/子代理/远端写入/第二账本；不从单次暴露轨迹反选权重或作目标因果结论。
+
+# Previous v268
+
+# LATEST: 2026-11-02 goal ACTIVE; v268 source128-answer失败保留/源审闭合，CE32-answer48活跃
+
+唯一实际模型=source32-continued-ce-seed0-u192-v1-answer-selected-u48，协调2291514 / worker2291518，owner/native RUNNING；1/16记录 {'COMPLETED': 1}，/proc均存活。
+owner=artifacts/evidence-gap-20261023/original-feedback-host-execution-v1/orchestration/source32-continued-ce-seed0-u192-v1-answer-selected-u48/driver.json；native同根runs/source32-continued-ce-seed0-u192-v1-answer-selected-u48/driver.json。
+实际CPU4/FP32/16384-head2048的CE32 update48 load VERIFIED；活跃禁第二模型/离线ledger/重启。下一dispatch CE32 delivery-selected24。
+
+source128-answer-selected96全部16有记录：11native完成、4截断＋F01stage2容量失败。native FAILED/coordinator FAILED_RETAINED原样保留；最后位置失败，无未执行尾部，不重试。
+答案C4/P7/U5，交付S5/P6/U5，joint3，5当前零retrieve；累计reviews/through-source128-answer-source-reviews-v1.json共96，前80对象不变，原208分母summary通过。
+C03更新答对但仅交付中间9:45+Kevin而缺后续10:15提案/拒绝，C/P。E08原文足够但生成View错误否认assistant speculation、答案沿用，P/P。
+A32精确2FA April2/已建标签系统属unsupported；B30沿旧Marc遗漏个人Marcus/未来品牌Marc；F01初始漏350/40/45，3525/2675不是全量3960/2240。
+capacity-audit-v1.json和execution通过，原2a最后step3/111候选完整17191tokens，16384容量丢807state、head不丢；仅JSON语法compact到15188，四状态解码值/questions逐值相同。
+只tokenizer无weights/forward/新Host，不据此改原默认或补成功；既有compact-matched实验仍需真实训练/任务比较。原3个answer来源档correct7/5/4非规模因果趋势。
+
+本臂29gen/149719known/unknown0，prompt78918/completion70801，embedding0；load7.773334451/predict5029.944387040CPU已原生记。
+whole5094.311941只补残差56.594219509/coor.087416719；含v267全部pending/self、全九曲线whole、当前源审/容量tokenizer等15字段129.120014792CPU秒idle一次结清。
+结算同orchestration/source128-answer-seed0-u192-v1-answer-selected-u96/cpu-settlement-v1.json，nested/训练/整child不重复。
+
+原9native/54saved/9selection/9retention训练全闭；Host六臂96已审（含1failed terminal），第七进行中，13唯一arms/208分母和aliases保持。
+v268仅当前launch＋自身待记；最新data/manifests/evidence-gap-development-progress-20261023-v268.json。全九质量/成本读数见v267/summary-v4。
+完整Q/coverage/compact/F2/F3/辅助/生命周期/确认/外测/四图仍需，ACTIVE；禁SHA/子代理/远端写入/第二账本。
+
+# Previous v267
+
+# LATEST: 2026-11-02 goal ACTIVE; v267 原九保存曲线质量/成本全核，source128-answer96仍活跃
+
+唯一模型仍source128-answer-selected96，协调2150123 / worker2150127；owner/native RUNNING/RUNNING，3/16记录 {'COMPLETED': 2, 'FAILED': 1}。
+路径/CPU4-FP32加载条件同v266，实际进程均存活；禁第二模型/离线ledger/重启。闭合后先原208 summary和逐源/最终input审阅，再cost/idle settlement。
+
+saved-quality-cost-diagnostic-dev-v1/summary-v4.json和actual-saved-v4/analysis.json现为全9fits/54points/108targets/46唯一saved jobs，12选点视角；前8模型/11视角逐值不变。
+D128 delivery96→192 gain1.822916667pp=质量+3.90625＋成本-2.083333333；answer+.223214286=质量+1.264880952＋成本-1.041666667。
+D128 base→selected192 delivery+24.739583333=质量+24.479166667＋成本+.260416667；末点就是选点，selected→endpoint为零不作无过拟合证明。
+与D32/64不同，不能用统一成本捷径解释全部曲线；这是固定分母指标分解，不是训练因果拆分。旧偏好退化1.601981772pp另列。
+首次离线分析缺analyze_operation_curve冻结依赖，actual-saved-v4-execution.json保留失败；复用已有冻结依赖链execution-v2通过，未改公式/labels/selection或重启模型。
+活跃期间只读分析，新增0模型/0ledger；whole wrapper50.179879143包含nested analysis CPU，不再单列重计。
+
+Host五臂80源审，第六在跑；source64闭合/结算详v266；原9训练全闭不等于完整goal完成。
+v267 pending清单5字段＋自身：source128-answer launch、v266self、分析失败/成功whole、summaryv4；最新data/manifests/evidence-gap-development-progress-20261023-v267.json。
+完整Q/coverage/compact/F2/F3/辅助/生命周期/确认/外测/四图仍需，ACTIVE；禁SHA/子代理/远端写入/第二账本。
+
+# Previous v266
+
+# LATEST: 2026-11-02 goal ACTIVE; v266 原Host source64-answer闭合，source128-answer96活跃
+
+唯一实际模型=source128-answer-seed0-u192-v1-answer-selected-u96，协调2150123 / worker2150127；owner/native RUNNING，0/16记录 {}。
+owner=artifacts/evidence-gap-20261023/original-feedback-host-execution-v1/orchestration/source128-answer-seed0-u192-v1-answer-selected-u96/driver.json；native同根runs/source128-answer-seed0-u192-v1-answer-selected-u96/driver.json。
+实际CPU4/FP32/16384-head2048对应source128-answer update96 load VERIFIED，活跃禁第二模型/离线ledger/重启。下一CE32 answer-selected48按dispatch。
+
+source64-answer-selected96已16闭合：11native完成、4截断+1JSON_ACTION_MALFORMED失败保留；答案C5/P6/U5、交付S6/P5/U5、joint5、7当前零retrieve。
+A32初始漏2FA却称安全变化已列全；A19/A32/C03/D25更新完成但复用旧证据；D25初始原文充分仍推断Lena耐辣与未确认菜品未尝试。
+五未知不修补；5/16 correct vs source32 7/16和初始化4/16仅单次暴露轨迹，不能作来源扩容趋势或独立训练效应。
+reviews/through-source64-answer-source-reviews-v1.json共80，前64对象不变；本臂reviewed-summary-v1在原208分母通过。
+真实29gen/131392known/unknown0，prompt72000/completion59392，embedding0；load10.813374692/predict2377.838494821CPU已native记。
+whole2441.597558只补残差52.945688487、coor.093154361；加v265self/launch/源审等10字段65.615074915CPU秒idle一次结清。
+结算同orchestration/source64-answer-seed0-u192-v1-answer-selected-u96/cpu-settlement-v1.json；训练/wholechild/nested不重记。
+
+原9native/54saved/9selection/9retention训练全闭；Host五臂80源审，第六进行中，完整13唯一arms/208位置和alias保持。
+v266待记仅当前launch＋自身；packet工具review-tooling-v1/code-v2；禁止打印整usage/receipt/compute等未知容器或巨型key列表。
+完整Q/coverage/compact/F2/F3/辅助/生命周期/确认/外测/四图仍需，ACTIVE；禁SHA/子代理/远端写入/第二账本。
+最新data/manifests/evidence-gap-development-progress-20261023-v266.json。
+
+# Previous v265
+
+# LATEST: 2026-11-02 goal ACTIVE; v265 原Host source32-answer闭合，source64-answer96活跃
+
+唯一实际模型=original-feedback-host-execution-v1/source64-answer-seed0-u192-v1-answer-selected-u96，协调2044214 / worker2044215；owner=RUNNING native=RUNNING，
+记录4/16，状态{'COMPLETED': 4}，/proc存活{'pid': True, 'child_pid': True}。owner=同根/orchestration/source64-answer-seed0-u192-v1-answer-selected-u96/driver.json；native=同根/runs/source64-answer-seed0-u192-v1-answer-selected-u96/driver.json。
+真实CPU4/FP32对应原source64-answer update96已VERIFIED load；活跃禁第二模型/离线ledger/重启。
+闭合后核实际owner/native/inference、final-input/source/cost边；native Laya load/predict先扣wholechild再补残差，训练和nested不重记。
+
+source32-answer-selected192已16闭：15native完成/1E15stage2截断，答案C7/P8/U1，交付S10/P5/U1，joint6，5次当前无retrieve。
+A19更新获取最新回改/提案状态C/S；F01复用实际可见旧逐项原文加当前6080/175，C/S；C03新包只有中间9:45没后续提议/拒绝，虽答对仍C/P，别套fixed的替代链。
+A32把标签偏好说成已建系统，B30新增birth-name来源，E08把rushing当confirm fatigue因果，E15初始多加22-27天界限，均保留unsupported refinements，不给全对。
+累计reviews/through-source32-answer-source-reviews-v1.json共64，前48对象不变；reviews/source32-answer-seed0-u192-v1-answer-selected-u192/reviewed-summary-v1.json在208分母核绑定通过。
+实际27gen/134035known/unknown0，prompt73017/completion61018，embedding0；local已记load9.815529661、predict4122.284432211 CPU。
+whole4185.057968只补残差52.958006128/coor.089688842；含v264self/launch/源审等10字段65.920918768CPU秒idle一次结清，orchestration/source32-answer-seed0-u192-v1-answer-selected-u192/cpu-settlement-v1.json。
+相比初始化15vs11native、7vs4correct只是单次暴露轨迹差别，不隔离训练与Host噪声。
+
+原9native/54saved/9selection/9retention训练全闭；Host4臂64已源审，当前第五臂，下一source128-answer-selected96。完整208/13唯一arms与alias共享规则保持。
+v265待记仅当前launch CPU＋自身；source packet工具仍review-tooling-v1/code-v2，禁止打印整usage/receipt未知容器。
+其余Q/coverage/compact/F2/F3/辅助/生命周期/确认/外测/四图仍需；ACTIVE，禁SHA/子代理/远端写入/第二账本。
+最新data/manifests/evidence-gap-development-progress-20261023-v265.json。
+
+# Previous v264
+
+# LATEST: 2026-11-01 goal ACTIVE; v264 初始化Host16闭合，source32-answer-selected192活跃
+
+唯一实际模型=original-feedback-host-execution-v1/source32-answer-seed0-u192-v1-answer-selected-u192，协调1887048 / worker1887055；owner=RUNNING native=RUNNING，
+记录3/16，native状态{'COMPLETED': 3}，/proc存活{'pid': True, 'child_pid': True}。owner=同根/orchestration/source32-answer-seed0-u192-v1-answer-selected-u192/driver.json；native=同根/runs/source32-answer-seed0-u192-v1-answer-selected-u192/driver.json。
+实际模型已CPU4/FP32加载并VERIFIED，对应原source32-answer update192；这才是当前首个新反馈训练权重Host臂。活跃禁第二模型/离线ledger/重启。
+闭合后核owner/native/inference、实际final input/来源、serial预算边；wholechild需先减native已记Laya load/predict再补残差，原source32训练费用不重记。
+
+jev_initialization已16闭合：11 native完成/5 VLLM_CHAT_TRUNCATED；答案C4/P7/U5，交付S5/P6/U5，joint3；7次当前无retrieve。
+A19初始漏CoreFit，E15仅返回reference个案却报总数1并在更新后重复；E08否认材料含assistant推断不忠于角色；B30上下文工作称呼作为有效替代证据。
+F01更新答6080/4135/1945正确，assistant原始对话已给aggregate且用户保留预算，但确认过的逐项输入/储蓄明细未交付，按该粒度C/P，不说数字全未交付。
+实际31gen/163083known/unknown0，prompt84841/completion78242，embedding0；local已记load11.019162694、predict4126.040643559CPU秒。
+wholechild4191.831933减已记4137.059806253=残差54.772126747；coor.092258115另列。含v263self/启动/机械源审费用10字段68.409448762CPU秒idle一次结清。
+费用在orchestration/jev_initialization/cpu-settlement-v1.json；不是把整4191.8再补一遍。其CE128 delivery0 alias共用这16，不增加分母/成本。
+
+reviews/jev_initialization/source-reviews-v1、reviewed-summary-v1、cost-audit-v1、closure-summary-v1已齐；累计review文件reviews/through-jev-initialization-source-reviews-v1.json共48，前32对象不变。
+按原全208分母summary核验通过，其余160在该闭合快照unexecuted/unknown；当前第四臂进行中。源packet工具用review-tooling-v1/code-v2，不打印整usage/receipt等未知容器。
+原9native/54savedCPU/9selection/9retention训练全闭；Host3臂48已审，第四开始，下一按dispatch source64-answer-selected96。
+v264待记仅当前launchCPU＋自身；完整Q/coverage/compact/F2/F3/辅助/生命周期/确认/外测/四主图仍缺，ACTIVE；禁SHA/子代理/远端写入/第二账本。
+最新data/manifests/evidence-gap-development-progress-20261023-v264.json。
+
+# Previous v263
+
+# LATEST: 2026-11-01 goal ACTIVE; v263 原Host rules16闭合，jev_initialization活跃
+
+当前唯一实际模型=original-feedback-host-execution-v1/jev_initialization，协调1684971 / worker1684992，owner=RUNNING native=RUNNING，
+记录7/16，native状态{'COMPLETED': 5, 'FAILED': 2}，/proc存活{'pid': True, 'child_pid': True}。owner=同根/orchestration/jev_initialization/driver.json；native=同根/runs/jev_initialization/driver.json；
+inference=同根/runs/jev_initialization-inference.json，已有1个VERIFIED load（CPU4/FP32/16384-head2048）。当前已见VLLM_CHAT_TRUNCATED失败，保持原样。
+共用u262checkpoint并承载CE128 delivery0 alias；不是两次任务/费用。活跃禁第二模型/离线ledger/重启。
+结束核真实owner/native/inference与预算边，再源审/idle费用；local Laya load/predict已原生记账，wholechild减这些delta后才补残差，不双计。
+
+rules16实际14完成/2截断；答案C6/P5/I3/U2，交付S4/P9/I1/U2，joint4，7个当前无retrieve。
+A19更新后有新调用却返回Priya中间版本而漏最新Karen回改；C03生成结构加入2026，答案沿用并于stage2仍旧9:30。
+A32结构Subscribed误替Unsubscribed而Host答对；B30结构混淆Jan命名与Dec入职；E08额外节点错引assistant问句但所需原文充分，独立标记citation缺陷。
+E15stage0仅说Calling工具却实际0调用，native完成但taskI/交付I；stage2值答对但亲自核验原出处未交付，C/P，assistant提案含ID不等同primary原文。
+全部真实32review已合并reviews/through-rules-source-reviews-v1.json，prior固定16对象不改；reviews/rules/reviewed-summary-v1.json在全208分母核绑定通过。
+Rules33gen/164454known/unknown0（prompt94246、completion70208）、embedding0、无local scorer；fixed只读补充分拆prompt64074/completion70066，总134140不重计。
+wholechild40.015831/coor.096135828及当前启动/v262self/核验/源审/共享tooling等12字段54.963895923CPU秒idle一次结清，orchestration/rules/cpu-settlement-v1.json。
+
+来源packet构建已复用冻结：original-feedback-host-dev-v1/review-tooling-v1/code-v2/tools/prepare_original_host_review_packet.py，
+CLI TESTENV tool dispatch mechanical_summary source-task-rubrics arm_id output，用pipeline-v3 summary环境；仅给原对话cut/实际final-input证明，不自动给语义等级。
+validation-v2通过（旧fixed16原字段逐值相等＋rules16实际绑定），v1仅style长行失败保留且费用已结；mypy/Ruff通过。别再打印整usage/receipt/container，选明确小字段。
+
+原9native/54savedCPU/9selection/9retention训练子阶段全闭；Host32已审，第三臂进行中，全部208位置/13唯一臂保持。下一实际arm按dispatch为source32-answer-selected192。
+v263待记仅jev_initialization启动CPU＋自身；完整后续Q/coverage/compact/F2/F3/辅助/生命周期/确认/外测/四主图仍缺，ACTIVE；禁SHA/子代理/远端写入/第二账本。
+最新data/manifests/evidence-gap-development-progress-20261023-v263.json。
+
+# Previous v262
+
+# LATEST: 2026-11-01 goal ACTIVE; v262 原Host fixed_context16审阅/结算闭合，rules臂实际启动
+
+当前唯一实际模型工作=original-feedback-host-execution-v1/rules，协调1439733 / worker1439808；owner=RUNNING，native=RUNNING，
+记录15/16，native状态{'COMPLETED': 13, 'FAILED': 2}，实际/proc存活{'pid': True, 'child_pid': True}。owner=同根/orchestration/rules/driver.json；native=同根/runs/rules/driver.json。
+活跃禁第二模型/离线ledger/重启；全13臂208位置原冻结dispatch保持，按顺序下一臂jev_initialization。
+入口serial-runner-readiness-v1/code-v1/tools/run_bound_original_feedback_host.py，execution-readiness-v1.json给argv/env；actual_binding已存在，勿重复bind或用3fit优化runner。
+
+首臂fixed_context已16全部闭合：13 native completed/3 VLLM_CHAT_TRUNCATED failed；源审C7/P5/I1/U3，交付S8/P5/U3，joint7。
+reviews/fixed_context/source-reviews-v1.json、review-packet-v1.json、reviewed-summary-v1.json和cost-audit-v1.json均已验证，closure-summary-v1为短读数。
+六个stage2无当前retrieve（两失败未知）；四个完成的A19/B30/D25/F01沿旧receipt作答而遗漏/错用更新事实。不可把未执行额外READ假定会解决。
+C03 stage2虽然缺早期9:45整句证书，最新拒绝10:15并保留9:45＋旧原始上下文构成充分替代链；不能把整source证书失败当语义不充分。
+E15 stage2拿到新日期/计数但缺原用户reference ticket；ID确实在assistant提案里出现，不能声称字面缺失，也不能当原亲自核验出处。
+D25 stage0原文充分但模型编造Lena吃辣，区分交付与答案。事实只来自source conversations已声明cut，oracle operations/answer未用，仍是作者暴露开发评审非盲。
+
+fixed_context实际26gen/134140known/unknown0，embedding0，NO_SCORER_LOADED；16条message budget连续边和owner/native/globalafter相同。
+wholechild35.340864＋coor.08020726＋明确binding/launch/v261self/源审/核验等12字段47.271680511CPU秒idle一次结清，orchestration/fixed_context/cpu-settlement-v1.json。
+不重复native driver/messages/inference/provider嵌套CPU，未知开销不记0。首臂失败不重试，无隐藏推理答案提取。
+
+原9native/54savedCPU/9selection/9retention训练子阶段全闭；当前Host源审只16/208，其他方法未完成。原9闭环summary=original-nine-fit-closure-v1。
+v262待记仅rules launch CPU＋自身。全Q/coverage/compact/F2/F3/辅助/生命周期/确认/外测/四主图仍需，goal ACTIVE；禁SHA/子代理/远端写入/第二账本。
+最新data/manifests/evidence-gap-development-progress-20261023-v262.json。
+
+# Previous v261
+
+# LATEST: 2026-11-01 goal ACTIVE; v261 原九训练/保存/retention全闭，原Host首臂fixed_context实际运行
+
+唯一模型工作=original-feedback-host-execution-v1 fixed_context arm，协调1254421 / worker1254429；当前owner=COMPLETED_WITH_NATIVE_FAILURES_RETAINED，native=COMPLETED_WITH_FAILURES，
+记录16/16位置，native状态{'COMPLETED': 13, 'FAILED': 3}；这些不是任务正确率。实际/proc存活{'pid': False, 'child_pid': False}。原53→54saved已全闭。
+owner=artifacts/evidence-gap-20261023/original-feedback-host-execution-v1/orchestration/fixed_context/driver.json；
+native=同根/runs/fixed_context/driver.json；receipt/inference=同根/runs/fixed_context-inference.json。活跃禁第二模型/离线ledger/重启。
+完成需先核owner/native/inference真实终止及budget-before/after边界，再所有位置真实来源/最终provider input里retrieval receipts审阅和idle成本结算。
+owner child_cpu_pending已扣已记Laya load/predict，不双记native driver/messages/inference CPU；未知费用/未知usage不记0。
+
+最后D128 endpoint192已核，原六CPU正式选delivery192=.8541666666666666，wholefitretention通过并复用endpoint旧860，无新增重复old860。
+旧偏好.7918070367270272 vsbase .807826854448818，-1.601981772pp；不是无退化/Host质量。正式曝光3072draws/16718944tokens，继承训练另列。
+19字段64.59675677CPU秒idle一次结清，original-feedback-v2-source128-delivery-final-closure-cpu-settlement-v1.json。
+原9native/54savedCPU/9selection/9retention已全部闭合；original-nine-fit-closure-v1/summary.json与selected-checkpoint-views.csv给12选择视角/11独立checkpoint路径，非12独立fit。
+
+原pipeline-v3已实际bind到original-feedback-host-execution-v1/dispatch.json：13唯一arms/208位置，8暴露family/每arm16/单seed和一条Host轨迹，非独立确认。
+使用已冻测serial-runner-readiness-v1/code-v1/tools/run_bound_original_feedback_host.py，execution-readiness-v1.json有argv/env；先fixed_context，其后按dispatch原顺序。
+不得用3-fit优化runner伪装本9fit研究；别改冻结dispatch status来跟踪运行，实际owner/native文件为进度准据。
+当前首臂已有VLLM_CHAT_TRUNCATED失败保留，不重试不补配额。其它12臂未执行，全部208分母保持。原Host正式source reviews仍0。
+
+v261待记2字段＋自身：serial-runner-readiness-v1/actual-binding-execution-v1.json wholeCPU、execution/launches/fixed_context/launch.json CPU；此前v260全部明确已付。
+全九曝光现用original-feedback-v2-exposure-audit-v3/report-v2.json及CSV-v2（正式D128metadata合并，native计数不改）。
+这只完成原训练子阶段，完整Host/Q/coverage/compact/F2/F3/辅助seed/生命周期/确认/外测/四主图仍缺，goal ACTIVE；禁SHA/子代理/远端写入/第二账本。
+最新data/manifests/evidence-gap-development-progress-20261023-v261.json。
+
+# Previous v260
+
+# LATEST: 2026-11-01 goal ACTIVE; v260 D128 endpoint924活跃，原Host单臂执行入口已冻测
+
+唯一模型source128-delivery-seed0-u192-v1/update-192，协调525378 / worker525379，/proc活跃，当前102/924。
+原owner/native与闭环顺序同v259：单项candidate verify（verifier-tools-v2首位，ledger仅该native phase）→全六点selection→若early其old860→wholefitretention→idle settlement。
+若选192，复用已核endpoint旧860而不造重复job。原9native/53savedCPU/8selection/8retention/原Host0；活跃禁第二模型/离线ledger/重启。
+
+现有run_bound_optimization_host限定3-fit优化研究，不能拿原9臂伪装进去；新tools/run_bound_original_feedback_host.py复用其ownership/localCPU函数，
+按现有原prepare_original_feedback_host code-v3重新核真实9fit/aliases/配置/16位置分母，只运行一个child，保持无自动retry/next-arm/settlement。
+脚本替身11测试通过、Ruff和mypy通过，冻结原2a环境重复11通过，依赖模块路径已逐项验证；初次unused import/line-length失败receipt保留。
+冻结入口=original-feedback-host-dev-v1/serial-runner-readiness-v1/code-v1/tools/run_bound_original_feedback_host.py；
+execution-readiness-v1.json给coordinator argv模板/cwd/env。仍用原pipeline-v3 binding_command，必须all9实际保存/retention闭环后绑定再选dispatch唯一arm串行执行。
+actual-live-admission-v1确认当前真实worker525379被新入口阻止提前启动：无receipt/Host输出、原ledger逐字节不变；是预期准入测试，不是新Host失败样本。
+未改原2a方法/训练/默认策略，未新建生产ledger或真实模型。真实Host结果和来源审阅仍0/待执行。
+
+v260待记7字段＋自身：v259原2＋自身、新working失败style/frozen通过/真实拒绝probe/readiness四整测量。
+D128 u12非首选pair drift及九native曝光事实保持，full goal含Host/Q/coverage/compact/F2/F3/辅助/生命周期/确认/外测/四主图仍缺。
+禁SHA/子代理/远端写入/第二账本，最新data/manifests/evidence-gap-development-progress-20261023-v260.json，ACTIVE。
+
+# Previous v259
+
+# LATEST: 2026-11-01 goal ACTIVE; v259 D128四早期保存点已核，endpoint192 CPU924活跃
+
+唯一模型source128-delivery-seed0-u192-v1/update-192，协调525378 / worker525379，/proc活跃，当前26/924。
+根=artifacts/evidence-gap-20261023/original-feedback-v2-saved-reload-v1；owner=根/dispatch/source128-delivery-seed0-u192-v1/update-192/driver.json；native=根/source128-delivery-seed0-u192-v1/update-192/evaluation/run.json。
+CPU4/FP32/CUDA空/shared_actions/16384-head2048/MHA与compile关；活跃禁第二模型/离线ledger/重启。
+关闭先verifier-tools-v2首位verify_one_saved_feedback_candidate_v1.py JOB（ledger仅较driver.before新增本native phase），
+然后原全六点selection；若early才其old860，endpoint/base只能按原验证复用；最后wholefitretention与idle once settlement。若192正式选中则endpoint已含其old860，别额外造old860 job。
+
+D128 saved12/24/48/96各64已核且top-choice差0：answer .673611111/.511036706/.734126984/.757936508；delivery .71875/.591145833/.822916667/.8359375。
+12的native原分answer .680555556/delivery .7265625，与保存分不同，不能把top-choice0变化说成全排序相同。
+original-feedback-v2-source128-delivery-reload-order-audit-v1/analysis.json、execution-v1通过：12仅B30 row34 handoff-refresh_view非首选pair变序，
+native margin -0.0001010894775390625→savedCPU +0.000014781951904296875；两者首选均search_0_8，原answer/delivery质量方向均right。
+该state完全解释answer -0.694444pp、delivery -0.78125pp；24/48/96 reviewed-pair变序0。仅已闭四点，不读当前endpoint；不改label/tolerance，不隔离存储和设备原因、不推断Host影响。
+四次idle结算19.433575980/16.537516920/18.211483775/20.258178518CPU秒（7/6/6/6字段）；v258清单/自身已付。
+
+原9native closed、53savedCPU closed（实际计数）、8selection/8retention、原九臂Host0。原生192仅候选；最后完整CPU选择/retention仍缺。
+全九native曝光report在original-feedback-v2-exposure-audit-v3，54checkpoint不是54独立实验；Host现成pipeline-v3依然all9gate，不提前绑定。
+v259待记2字段＋自身：endpoint192启动、只读pair-order审计whole2.26906815CPU秒；未知交互/轮询不记0。
+完整后续目标保持active；禁SHA/子代理/远端写入/第二账本。最新data/manifests/evidence-gap-development-progress-20261023-v259.json。
+
+# Previous v258
+
+# LATEST: 2026-11-01 goal ACTIVE; v258 原九native全核验，D128 saved12 CPU活跃
+
+唯一模型source128-delivery-seed0-u192-v1/update-12，协调384781 / worker384786，/proc活跃，当前27/64。
+根=artifacts/evidence-gap-20261023/original-feedback-v2-saved-reload-v1；owner=根/dispatch/source128-delivery-seed0-u192-v1/update-12/driver.json；native=根/source128-delivery-seed0-u192-v1/update-12/evaluation/run.json。
+CPU4/FP32/CUDA空/shared_actions/16384-head2048/MHA和compile关。活跃禁第二模型/离线ledger/重启。
+结束先verifier-tools-v2首位verify_one_saved_feedback_candidate_v1.py JOB（ledger仅较driver.before新增本native phase），再idle settle_original_saved_candidate_cpu_v1.py。
+helper自动计verifier inner，wholewrapper额外只列差额。依次24/48/96/192，全六点才正式selection；若early再old860，最后wholefitretention。
+
+D128 native已192updates/3072draws/16718944tokens，原审计通过；原生delivery曲线0/12/24/48/96/192=.606770833/.7265625/.591145833/.822916667/.8359375/.854166667。
+原生候选192位于观测末端，不是正式CPU选择或全局最佳证明。旧偏好=.807826854/.745060314/.775936782/.786444276/.795530824/.791807037。
+原九native均完成核验；49savedCPU、8selection/8retention、原九臂Host0。原Host gate依然缺D128保存/retention，不因native9就提前绑定。
+9字段35.284514431CPU秒idle一次结清，含v257全部清单/自身、native audit与全九曝光whole、driver残差/协调、inventory；nativeCPU已原生计量不重复。
+结算original-feedback-v2-source128-delivery-postfit-cpu-settlement-v1.json。旧native4192082/4192083已退出，exec1665结束。
+
+全九原native曝光：original-feedback-v2-exposure-audit-v3/report.json、checkpoint-exposure.csv、execution-v1.json通过。
+54checkpoint行不是54独立实验；旧八训练计数/选择draw前缀/CSV行逐值相等，旧选点附注另核实际selection。
+D1281536反馈draw全部eligible、3652方向terms、586tie/294unknown曝光不入原pairloss；nominal反馈128/replay249/union253，不当独立历史/非零数值梯度。
+D128正式选点曝光null，完整研究/继承/selected另列。旧曝光快照全部保留。
+
+v258明确待记仅D128 saved12启动CPU＋自身。D64旧偏好-5.042438221pp事实、八已存质量成本读数与F1第三规则限制保持。
+完整Host/Q/coverage/compact/F2/F3/辅助/生命周期/确认/外测/四主图仍需，goal ACTIVE；禁SHA/子代理/远端写入/第二账本。
+最新data/manifests/evidence-gap-development-progress-20261023-v258.json。
+
+# Previous v257
+
+# LATEST: 2026-11-01 goal ACTIVE; v257 原D128 native活跃，原Host准入复核8ready/1pending
+
+唯一模型source128-delivery-seed0-u192-v1，协调4192082 / worker4192083，/proc活跃，当前updates7/192。
+原owner/native路径及闭环顺序见v256；GPU2/3、FP32、1536states、shared_actions/16384-head2048。活跃禁第二模型/离线账本/重启。
+关闭先原native审计→idle结算→saved12/24/48/96/192＋common0→原全曲线selection→所选early old860→wholefitretention。
+原9native started/8closed、49savedCPU、8selection/8retention、原九臂Host0。D64所选96旧偏好.757402472、相对base-5.042438221pp必须保留，协议核验成功不是无退化。
+
+现有original-feedback-host-dev-v1/pipeline-v3.json实际只读inspect到新binding-inspection-eight-closed-v1.json，
+eight-closed-inspection-execution-v1.json通过：真实8fit READY，唯一pending=source128-delivery-seed0-u192-v1，整体PENDING。
+未执行bind/Host；original-feedback-host-execution-v1仍不存在。现成code-v3检查选点/retention/推理条件/实际checkpoint路径，未重建管线。
+all9真正闭合后用既有binding_command、per-arm detached coordinator执行；alias按相同resolvedcheckpoint合并，保留各选择视角、不虚增任务/成本。
+原Host界限8暴露family、每unique arm16位置、最大15arms/240位置，失败/unknown/无调用/未执行全保留；新答案来源审阅与实际final input中receipt交付另判，旧collector grade不可迁移。
+
+v257待记3字段＋自身：D128启动、v256self、此次inspect whole0.130048728CPU秒。原生/模型费用仍原ledger单owner；活跃未写离线ledger。
+全计划及其他Q/coverage/compact/F2/F3/辅助/生命周期/确认/外测/四主图保持active；禁SHA/子代理/远端写入/第二账本。
+最新data/manifests/evidence-gap-development-progress-20261023-v257.json。
+
+# Previous v256
+
+# LATEST: 2026-11-01 goal ACTIVE; v256 D64整臂retention闭合，最后原D128 native活跃
+
+唯一模型source128-delivery-seed0-u192-v1，协调4192082 / worker4192083，/proc活跃，当前updates0/192。
+owner=artifacts/evidence-gap-20261023/original-feedback-v2-fit-dispatch/source128-delivery-seed0-u192-v1/driver.json；
+native=artifacts/evidence-gap-20261023/original-feedback-v2-fitting-v1/source128-delivery-seed0-u192-v1/run.json。
+原冻结2a/shared_actions/16384-head2048，1536训练states、GPU2/3、FP32；0更新可能仍initial dev，按实际文件计数观察。
+活跃禁第二模型/离线账本/重启。关闭先closure-plan-v1该run native_audit，idle settle_original_feedback_fit_cpu_v1.py，
+再原saved12/24/48/96/192＋common0全曲线selection、所选early old860、整臂retention。原all9 Host gate仍未到。
+
+D64所选96旧860单项和整臂核验通过，旧协调3526047/worker3526050已退出；exec1653只读观察自然完成。
+旧操作偏好.7574024722380783，native/CPU choice差0；commonbase .807826854448818，降低5.042438221个百分点，必须保留退化，不能把验证成功当无遗忘。
+正式delivery96=.880208333保持；核验是计算/来源/保存一致性，不是穷尽合法性或Host质量。
+12字段103.088443854CPU秒idle一次结清：v255清单/自身（含八条质量成本读数）、single inner+wrapper差额、wholefit child/parent、driver差额/协调、inventoryself；nested不重复。
+结算original-feedback-v2-source64-delivery-selected96-retention-cpu-settlement-v1.json。
+
+原9native started/8closed、49savedCPU closed、8selection/8retention、原九臂Host0。当前D128只是启动，不把原九臂或完整目标判完成。
+已有original-feedback-host-dev-v1/pipeline-v3.json待all9闭环；与已完成优化Host96/F1及未来F2/F3分开。
+八原native曝光快照仍8closed，D128旧not-executed行是启动前快照；最新live_model为准，不能把partial训练计终端曝光。
+八原saved质量/成本summary-v3保持，同8dev族1seed/非因果；原F1第三规则25不默认采用。
+
+v256明确待记仅D128 detached-launches/source128-delivery-seed0-u192-v1/launch.json CPU＋自身，所有v255明确项已付；未知交互/轮询/结算成本不记0。
+完整Q/coverage/compact/新prefix/F2/F3/辅助seed/request-text/生命周期/确认/LME/STATE与四主图仍缺；禁SHA/子代理/远端写入/第二账本。
+最新data/manifests/evidence-gap-development-progress-20261023-v256.json，goal ACTIVE。
+
+# Previous v255
+
+# LATEST: 2026-11-01 goal ACTIVE; v255 D64 selected96 old860活跃，八臂已存质量/成本读数齐备
+
+唯一模型source64-delivery-seed0-u192-v1/selected-retention-96，协调3526047 / worker3526050，/proc活跃，当前29/860。
+根=artifacts/evidence-gap-20261023/original-feedback-v2-saved-reload-v1；owner=根/dispatch/source64-delivery-seed0-u192-v1/selected-retention-96/driver.json；native同job/evaluation/run.json。
+关闭顺序同v254：verifier-tools-v2首位单项retention（ledger仅此native phase）→closure-plan-v1整臂retention→idle once settlement。
+活跃禁第二模型/离线账本/重启。原8native/48savedCPU/8selection/7retention/原Host0；D64正式选96/.880208333，非重新选点。
+
+新增saved-quality-cost-diagnostic-dev-v1/actual-saved-v3/analysis.json、curves.csv、selected-to-endpoint.csv及summary-v3.json；
+8/9原模型、48点/96目标读数、41已闭saved作业重新核验，旧七模型对象逐值相等。D128保持无结果，当前partial old860没有读取/冒充完成。
+D64 delivery 0→12：原分-1.302083pp=质量贡献-5.989583pp＋成本贡献+4.6875pp；answer -0.768849pp=质量-4.712302＋成本+3.943452。
+D64 delivery正式96→192：原分-1.5625pp=质量-0.520833＋成本-1.041667；answer -3.472222=质量-2.380952＋成本-1.091270。
+这与D32晚期质量降/成本升不同，不能统一解释为成本贡献持续升高。固定原分母相加，不相加不同支持/归一化的conditional subgroup scores。
+同8暴露dev族、1seed、11target选择视角只对应8模型；selected→end仍有开发集选点条件，非独立过拟合/机制因果证明，不改原选择或标签。
+原Q-tie/Q-cost匹配对照和真实Host仍需要；已完成优化控制不被重算成0。
+
+v255待记4字段＋自身：原selected96启动、v254self、新actual-saved-v3整wrapper49.383716434CPU秒及summary-v3处理；nested不双记，活跃未写ledger。
+全范围包括当前retention、D128及all9 Host、Q/coverage/compact/F2/F3/辅助/生命周期/确认/外测/主图保持active。
+禁SHA/子代理/远端写入/第二账本。最新data/manifests/evidence-gap-development-progress-20261023-v255.json。
+
+# Previous v254
+
+# LATEST: 2026-11-01 goal ACTIVE; v254 D64正式保存选96，selected96 old860 CPU活跃
+
+唯一模型source64-delivery-seed0-u192-v1/selected-retention-96，协调3526047 / worker3526050，/proc活跃，当前10/860。
+根=artifacts/evidence-gap-20261023/original-feedback-v2-saved-reload-v1；owner=根/dispatch/source64-delivery-seed0-u192-v1/selected-retention-96/driver.json；native=根/source64-delivery-seed0-u192-v1/selected-retention-96/evaluation/run.json。
+CPU4/FP32/CUDA空/16384-head2048/MHA与compile关。活跃禁第二模型/离线账本/重启。
+关闭必须先verifier-tools-v2首位verify_one_saved_feedback_retention_v1.py JOB（ledger只能较driver.before增加此native phase），
+再original-six-fit-readiness-v1/closure-plan-v1该run retention_audit整臂核验，再idle settle_original_saved_retention_cpu_v1.py。
+helper自动加单项verifier内层，wholewrapper仅列差额；整臂wholewrapper显式列一次，不重复nested retention.json。
+
+D64 endpoint192 CPU924已闭，answer .769345238/delivery .864583333，native/CPU反馈选择差0；endpoint旧860不能替代selected96。
+六CPU点0/12/24/48/96/192全闭后原selector正式delivery96=.8802083333333334，selection.json为准，不再仅native候选。
+formal-selected-exposure-v1.json：本轮选点1536draws/7925896tokens，full fit3072/15851792研究成本与继承u262另列。
+曝光report-v2.json/checkpoint-exposure-v2.csv在original-feedback-v2-exposure-audit-v2，仅合并正式D64选择；native计数/其余七记录不变，旧report/CSV保留。
+12明确字段53.803995883CPU秒已idle结清，含v253清单/自身、endpoint wrapper差额/inner、selection整wrapper、metadatamerge、driver差额/协调、inventoryself。
+结算original-feedback-v2-source64-delivery-endpoint-selection-cpu-settlement-v1.json。原8native closed、48savedCPU closed、8selection、7retention、原九臂Host0。
+
+v254仅新selected96 detached-launches/source64-delivery-seed0-u192-v1/selected-retention-96/launch.json CPU＋自身待记。当前old860/整臂后继续原D128，原all9 Host及全部下游完整计划保持。
+旧F1第三规则25、七臂质量成本与8native曝光事实不改，不默认采用/不改旧标签；禁SHA/子代理/远端写入/第二账本。
+最新data/manifests/evidence-gap-development-progress-20261023-v254.json。
+
+# Previous v253
+
+# LATEST: 2026-10-31 goal ACTIVE; v253 D64 saved12/24/48/96闭合，endpoint192 CPU924活跃
+
+唯一模型source64-delivery-seed0-u192-v1/update-192，协调740479 / worker740491，/proc活跃，当前27/924。
+根=artifacts/evidence-gap-20261023/original-feedback-v2-saved-reload-v1；owner=根/dispatch/source64-delivery-seed0-u192-v1/update-192/driver.json；native=根/source64-delivery-seed0-u192-v1/update-192/evaluation/run.json。
+CPU4/FP32/CUDA空/16384-head2048/MHA与compile关；活跃禁第二模型/离线账本/重启。
+关闭先verifier-tools-v2首位verify_one_saved_feedback_candidate_v1.py JOB（ledger只能较driver.before多本native phase），
+然后原全六点selection；若选early须其old860，最终整臂retention。结算helper自动加候选verifier inner，wrapper仅列差额。
+
+D64 saved12/24/48/96各64已单项核验且差异0：answer .510292659/.774305556/.796130952/.804067460，delivery .59375/.869791667/.854166667/.880208333。
+各关闭后idle一次结算19.420135730/18.656089184/16.344582048/15.645764895CPU秒（7/6/6/6字段）；v252清单/自身已付。
+原8native closed、47savedCPU closed（实际plan输出重数确认，当前1RUNNING）、7selection/7retention、原九臂Host0。96仍仅native候选，D128未执行。
+
+实际native曝光已更新original-feedback-v2-exposure-audit-v2/report.json与checkpoint-exposure.csv，8/9fit、48检查点行＋1未执行行。
+D64 full3072draws/15851792tokens；feedback1536方向draw、3636pair terms，576tie/292unknown曝光不入方向loss。
+feedback/replay/union名义family64/153/169，不当独立history或数值非零梯度。D64正式选点曝光null。
+旧七个训练计数/正式draw前缀及CSV行逐值相等。首次把旧D32的checkpoint/saved_CPU_metric附注一起做整对象相等导致失败；
+execution-v1保留，verification-v2已把共同计数与历史附注分别核原selection，全部通过，未改训练/标签/旧报告。
+
+v253明确待记3字段＋自身：endpoint192启动、exposure-v2 execution-v1失败wrapper、verification-v2。所有旧已结费用不再加；轮询/交互未知不记0。
+F1第三规则25结果保持v251并无默认采用。完整目标active，禁SHA/子代理/远端写入/第二账本。最新data/manifests/evidence-gap-development-progress-20261023-v253.json。
+
+# Previous v252
+
+# LATEST: 2026-10-31 goal ACTIVE; v252 D64原生192闭合核验，saved12 CPU活跃
+
+唯一模型source64-delivery-seed0-u192-v1/update-12，协调598796 / worker598797，/proc活跃，当前19/64。
+根=artifacts/evidence-gap-20261023/original-feedback-v2-saved-reload-v1；owner=根/dispatch/source64-delivery-seed0-u192-v1/update-12/driver.json；native=根/source64-delivery-seed0-u192-v1/update-12/evaluation/run.json。
+CPU4/FP32/CUDA空/16384-head2048/MHA与compile关；活跃禁第二模型/离线账本/重启。
+关闭先verifier-tools-v2首位verify_one_saved_feedback_candidate_v1.py JOB（ledger只能比driver.before多此native phase），再idle settle_original_saved_candidate_cpu_v1.py；
+helper自动加verification内层，测量whole wrapper仅额外列差额。之后saved24/48/96/192，全部六点CPU才正式selection，所选early old860再整臂retention。
+
+原D64训练已192updates/3072draws/15851792tokens，native audit通过；旧协调259521/worker259522已退出。
+原生delivery曲线0/12/24/48/96/192：.606770833/.59375/.869791667/.854166667/.880208333/.864583333；候选96尚非正式保存选择。
+旧偏好0/12/24/48/96/192：.807826854/.755805561/.735488666/.743163036/.757402472/.756934598；非穷尽合法性/Host质量。
+原8native closed/8started、43savedCPU closed、7selection/7retention、原九臂Host0；D128仍未执行。
+原nativeCPU7725.831648406已记；v251启动/自身、source64-delivery-native-observation-v252、native审计whole和driver差额/协调共7字段28.815317558CPU秒idle一次结清。
+结算original-feedback-v2-source64-delivery-postfit-cpu-settlement-v1.json；观察session3298/exec cell1617自然完成，勿重启。
+
+F1第三规则25闭合/源审/成本事实保持v251及current-raw-tie-execution-v2/decision-summary-v1.json；无默认采用/无旧48重标。
+v252明确待记只有D64 saved12 detached-launches/source64-delivery-seed0-u192-v1/update-12/launch.json CPU＋自身。native exposure全局report-v2仍是此前7fit快照；新增D64事实以本native audit为准，后续合并不可把旧快照当8fit已更新。
+完整目标active，禁SHA/子代理/远端写入/第二账本。最新data/manifests/evidence-gap-development-progress-20261023-v252.json。
+
+# Previous v251
+
+# LATEST: 2026-10-31 goal ACTIVE; v251 F1第三规则25全部闭合，原delivery64 native活跃
+
+唯一模型原source64-delivery-seed0-u192-v1，协调259521 / worker259522，/proc活跃。
+owner=artifacts/evidence-gap-20261023/original-feedback-v2-fit-dispatch/source64-delivery-seed0-u192-v1/driver.json；
+native=artifacts/evidence-gap-20261023/original-feedback-v2-fitting-v1/source64-delivery-seed0-u192-v1/run.json，当前updates0/192（0可能正在原initial dev）。
+原冻结2a/shared_actions/16384-head2048，768训练states，物理GPU2/3，原配方不改。
+活跃禁第二模型/离线账本/重启。关闭先原native_audit，完整saved12/24/48/96/192、六点selection、所选early old860、整臂retention，再idle结算；参original-six-fit-readiness-v1/closure-plan-v1。
+原8native started/7closed、43savedCPU closed、7selection、7retention、原九臂Host0；delivery128及完整后续计划仍缺。
+
+第三规则current-raw-tie-execution-v2已25Tool/25Host实际请求，24Host完成/1失败；旧协调203838/worker203913均退出。
+analysis-readiness-v1冻结核验通过，actual-branches-summary-v1.json；所有25source-review-v1.json/branch-grades-v1.csv、actual-cost-audit-v1.json、decision-summary-v1.json已留。
+10改选/10改wire，15同packet和wire。交付S16/P8/U1，对原规则S12/P9/I3/U1；pref候选5/tie19/unknown1，无已审阅回退。
+答案C12/P7/I3/U3，对原规则C8/P6/I6/U5；joint10对8。不能把unknown旧输出算win；改wire答案pref候选3/tie4/unknown3；
+同wire答案pref候选1/旧规则3/tie8/unknown3，均不算policy效应。12暴露family/非盲，不是独立确认或自主Host质量。
+A32 summary recovery-phone更新措辞按原粗粒度主任务保留C并另旗标无独立更新事件；known-post精确Apr2的2FA仍P。A19未显式CoreFit但全局Karen/no-phone答复按主任务C，交付仍P，细粒度限制明示。
+唯一失败TwoWiki85853p0：finish stop/contentNone，completion2820，保持unknown且无重试/隐藏reasoning答案提取。
+25gen/110006known/unknown0；prompt相对原25控制+4839，completion-10790,total-5951，不能归因省成本；无local scorer。
+wholechild54.994541＋协调.182980572及明确分析/review/启动/v250self等9字段61.872744595CPU秒idle一次结清；cpu-settlement-v1.json为准，nested不双记。
+保持显式候选，不改默认，不重标旧48。五处交付改善A32summary/E08original/MuSiQue3780p0/39246p1/TwoWiki149749p1，其中最后仍P。
+
+v251待记仅原D64 detached-launches/source64-delivery-seed0-u192-v1/launch.json CPU＋自身。原D32所选48 old860/整臂在v250闭合，.7837257788/choice差0，30字段195.379746569已付。
+完整目标active，禁SHA/子代理/远端写入/第二账本。最新data/manifests/evidence-gap-development-progress-20261023-v251.json。
+
+# Previous v250
+
+# LATEST: 2026-10-31 goal ACTIVE; v250 D32所选48 old860闭合，25第三规则真实运行中
+
+原source32-delivery selected48旧860已COMPLETED，旧协调3779225/worker3779228均消失。
+单项verification-v1及整臂retention.json通过：旧操作family_macro .7837257787676213，native/CPU choice差异0；正式delivery48/.8854166667保持。
+原7native closed/43savedCPU closed/7selection/7retention/原九臂Host0。原all9尚需delivery64/128。
+source32-selected48-retention-observation-v249.json已自然结束并计入；30明确字段195.379746569CPU秒idle一次结清，
+结算original-feedback-v2-source32-delivery-selected48-retention-cpu-settlement-v1.json，含v249清单/自身、observer、单项inner+wrapper差额、整臂whole、driver残差/协调，无双计。
+
+唯一实际模型工作改为handoff-comparison-dev-v1/current-raw-tie-execution-v2第三规则25同状态Tool/Host。
+协调203838 / worker203913，/proc活跃。owner=该目录/orchestration/driver.json；native=run/driver.json；wrapper=policy-wrapper.json。
+当前Tool已留12/25、Host已闭11/25，是动态快照，不是最终分母或成功率。
+活跃禁第二模型/离线账本/重启；失败原样保留，不补次数。普通policy_handoff，未默认采用。
+结束先用analysis-readiness-v1.json的argv/env核actual；它用analysis-code-v2/tools/summarize_current_raw_packet_tie.py。
+核原state/menu/choice/selector恢复/packet/wire/失败响应；all25语义仍需实际来源审阅，同wire回答变化不算policy收益。
+随后核原ledger gen/usage、wholechild/已记local CPU残差/协调，idle一次结算，再推进原delivery64/128。
+
+v250仅新detached-launch-v1/launch.json CPU＋自身明确待记，原v249及之前待记已结清；旧交互/结算不明费用仍未知。
+七臂质量成本新读数保持saved-quality-cost-diagnostic-dev-v1/summary-v2.json，不重选/不当Host收益。
+完整计划保持active，禁SHA/子代理/远端写入/第二账本。最新data/manifests/evidence-gap-development-progress-20261023-v250.json。
+
+# Previous v249
+
+# LATEST: 2026-10-31 goal ACTIVE; v249 原selected48 old860活跃，七臂已存预测质量/成本分解完成
+
+唯一模型source32-delivery-seed0-u192-v1/selected-retention-48，协调3779225 / worker3779228，/proc活跃，当前630/860。
+只读observer session43521每50秒记录，复用该handle；owners退出后产物artifacts/evidence-gap-20261023/source32-selected48-retention-observation-v249.json，届时补待记CPU，不先记0。
+关闭顺序仍single-retention（verifier-tools-v2首位）→whole-fit-retention→idle settlement；活跃禁第二模型/离线账本/重启。
+随后用已绑定current-raw-tie-execution-v2/execution-readiness-v2跑25第三臂；analysis-readiness-v1指定analysis-code-v2核验，语义裁决仍需实际输出。
+原7native closed/42savedCPU closed/7selection/6retention/原九臂Host0。delivery64/128和全计划保持。
+
+复用冻结quality_cost_ordering_diagnostic与原saved verifier，对7/9已闭保存曲线42点84目标读数、36独立saved jobs重核。
+报告saved-quality-cost-diagnostic-dev-v1/actual-saved-v2/analysis.json、curves.csv、selected-to-endpoint.csv及summary-v2.json。
+原source32两臂全部旧读数逐值相等；保留未执行delivery64/128；未读取当前partial old860、未加载模型、未换标签/选点。
+D32 delivery update48→192原分-1.302083pp=质量方向贡献-1.822917pp＋成本贡献+0.520833pp；
+同次answer原分-1.041667pp=质量+0.669643pp＋成本-1.711310pp，不能把两目标统一解释成同一种质量退化。
+D32 0→48交付原分+27.864583pp，质量贡献+27.604167pp、成本+0.260417pp。
+这是原分母下的算术分解，非训练因果归因；selected→end使用同开发集且有选择条件，非独立过拟合检验。
+七模型/十target选择视角不能当十独立实验；原Q/tie/cost匹配对照与真实Host仍需执行。
+
+v249待记21明确字段＋自身，另observer结束后再补；新分析whole wrapper39.846666189CPU秒包含nested，不双记。
+原辅助scale闭环代码在query-scale-verifier-dev-v1已存在并核实，未重复建设；进度内旧CE128 queue文案已纠正为当前D32。
+禁SHA/子代理/远端写入/第二账本。最新data/manifests/evidence-gap-development-progress-20261023-v249.json。
+
+# Previous v248
+
+# LATEST: 2026-10-31 goal ACTIVE; v248 原selected48 old860活跃，F1轨迹重复计数修复与第三臂核验就绪
+
+唯一模型source32-delivery-seed0-u192-v1/selected-retention-48，协调3779225 / worker3779228，/proc活跃，当前583/860。
+原owner/native与关闭顺序保持：先single-retention（verifier-tools-v2首位），再whole-fit-retention，再idle settlement；活跃禁第二模型/离线账本/重启。
+原7native closed/42savedCPU closed/7selection/6retention/原九臂Host0，当前选点48不重选。
+
+已在真实known-post旧trace前缀复现全局rglob重复计历史F1的问题。tools/summarize_handoff_comparison.py
+按captured原字节前缀后当前请求suffix核验，绑定attempt/call_id；新前置READ也算新decision，不误当history。
+实际50旧Tool重核通过，原48 core字段不变；18原helper测试+10新verifier测试=28通过，Ruff/mypy两文件通过。
+实际25原Host控制输入仍字面绑定；实际5个失败响应与provider trace/wire绑定但答案保持None，没补成功。
+新tools/summarize_current_raw_packet_tie.py逐项核25第三臂、profile/selector恢复、原菜单/预声明动作、普通终止、原包/Host wire和分母；不输出语义裁决。
+冻结使用handoff-comparison-dev-v1/current-raw-tie-execution-v2/analysis-code-v2/tools，
+analysis-readiness-v1.json提供实际第三臂关闭后的argv/env；third-arm-verifier-checks-v2和actual-failed-readout-checks-v1通过。
+analysis-code-v1及首轮style失败保留，勿覆盖历史；原第三臂execution-readiness-v2仍为实际启动准入。
+第三臂实际Tool/Host仍0，候选默认未采用；同wire答案变化不算policy收益。
+
+v248明确待记18字段＋自身：v247原11、自身、trace复现/工作验证/冻结50验证、新verifier失败+通过、5真失败响应检查六整wrapper。
+全部待idle一次结算，未知作者/监控CPU不记0。训练与完整后续范围保持，delivery64/128、原all9 Host等尚未完成。
+禁SHA/子代理/远端写入/第二账本。最新data/manifests/evidence-gap-development-progress-20261023-v248.json。
+
+# Previous v247
+
+# LATEST: 2026-10-31 goal ACTIVE; v247 selected48 old860活跃，F1第三规则候选已测绑定未执行
+
+唯一模型source32-delivery-seed0-u192-v1/selected-retention-48，协调3779225 / worker3779228，/proc活跃，当前439/860。
+原owner/native路径与关闭先single-retention→whole-fit-retention→idle结算顺序见v246，必须保持；活跃禁第二模型/离线账本/重启。
+原7native closed/42savedCPU closed/7selection/6retention/原九臂Host0。
+
+F1 tie探针：25固定已读状态/50旧分支，full-current改14(8旧exact动作/6未知)，raw-only改10(5旧exact/5未知)。
+full-current关联E15错误View交付回退，未采用。raw-only仍有B30答案变化和5个未执行动作，不能宣称收益。
+新tools/current_raw_packet_tie.py、run_current_raw_packet_tie.py是显式进程内策略扩展，退出恢复，
+仅非空all-original current在lexical主分精确并列时保留current；原默认/D8磁盘/信息/菜单/额度不改。
+无READ/无scorer/无intervention marker，普通policy_handoff。冻结D8七测试、mypy两文件/最终Ruff通过。
+
+实际第三臂仍0。用artifacts/evidence-gap-20261023/handoff-comparison-dev-v1/current-raw-tie-execution-v2/
+dispatch.json和execution-readiness-v2.json（v1 partial/path错误与style失败保留，不用）。
+25同状态帧已字面绑定，10预期改选，全部25各执行一次以保留分母/Reader变异；无新状态/家族/训练标签。
+ready记录coordinator argv模板+环境，run_third_arm_v1.py接实际当前selected48 idle settlement；
+它会核当前CPU单项/整臂retention/结算和active_model_owners，inspect已正确WAIT，不已执行/已采用。
+旧50/48结果不改，旧exact动作结果只是候选依据，不是新政策结果。实际输出需重新核before/choice/packet/wire/source/cost。
+
+v247明确待记11字段＋自身：此前2、v246self、probe/实现三轮/绑定失败+成功/准入两轮等8整wrapper，失败都保留。
+首次type问题通过明确模块绑定访问解决，不改冻结export；所有费用当前未入ledger。
+源曝/训练单位报告保持；后续delivery64/128及完整计划不缩减，原all9 Host gate独立。
+禁SHA/子代理/远端写入/第二账本。最新data/manifests/evidence-gap-development-progress-20261023-v247.json。
+
+# Previous v246
+
+# LATEST: 2026-10-31 goal ACTIVE; v246 delivery32正式选48，selected48 old860 CPU活跃
+
+唯一模型source32-delivery-seed0-u192-v1/selected-retention-48，协调3779225 / worker3779228，/proc活跃，当前23/860。
+根=artifacts/evidence-gap-20261023/original-feedback-v2-saved-reload-v1；owner=根/dispatch/source32-delivery-seed0-u192-v1/selected-retention-48/driver.json；
+native=根/source32-delivery-seed0-u192-v1/selected-retention-48/evaluation/run.json。CPU4FP32/CUDA空/shared16384/head2048/MHA与compile关。
+活跃禁第二模型/离线账本/重启。关闭先original-verifier-tools-v2首位
+verify_one_saved_feedback_retention_v1.py JOB_ID（ledger只能比driver.before增加该native phase），
+再closure-plan-v1该run retention_audit整臂核验，再idle settle_original_saved_retention_cpu_v1.py。
+helper自动计单项verifier内层，whole wrapper仅加差额；整臂wholewrapper要显式列一次，不能双记nested。
+
+endpoint192 CPU924已核验：answer .791418651/delivery .872395833，feedback choice差异0。全部六CPU点已闭，
+原selector正式delivery48=.885416667；selection.json/selection-execution-v1.json为准，不再说只是native候选。
+正式选中点本轮768draws/3827132tokens，完整fit3072/15308528研究成本和继承训练另列。
+原7native closed/42savedCPU closed/7selection/6retention/原Host0。endpoint旧860不是所选48的旧860。
+15字段77.469969783CPU已idle结清，v245所有明确项/自身已付。
+原生曝光当前report-v2/checkpoint-exposure-v2.csv只合并正式选择，旧v1快照保留；计数不变。
+
+v246待记2字段＋自身：selected48启动、exposure selection-merge-v2处理。
+本臂还需当前old860及整臂retention；delivery64/128、all9 Host与全Q/coverage/compact/F2/F3/生命周期/确认/外测/主图保持。
+已知P/S干预/可见性边界与旧4/48结果不改、不重跑、无新训练标签。
+禁SHA/子代理/远端写入/第二账本。最新data/manifests/evidence-gap-development-progress-20261023-v246.json。
+
+# Previous v245
+
+# LATEST: 2026-10-31 goal ACTIVE; v245 endpoint192 CPU924活跃，原native曝光/监督单位已对账
+
+唯一模型source32-delivery-seed0-u192-v1/update-192，协调3080958 / worker3080962，/proc活跃，当前632/924。
+原路径与顺序见v243：关闭先original-verifier-tools-v2首位候选核验（ledger只能多该native phase），
+再完整六点selection；若选early再其old860，最终整臂retention。活跃禁第二模型/离线账本/重启。
+原7native closed/41savedCPU closed/6selection/6retention/原Host0，48仍非正式部署选择。
+
+original-feedback-v2-exposure-audit-v1/report.json、checkpoint-exposure.csv 已按实际核验过的序列重建7/9 native曝光。
+原pair_loss只用left/right，ties/unknown跳过；反馈dummy-CE在训练调用处被pair_loss替换，不是另一份监督。
+answer32/64/128各1536feedback draws中方向draw1280/1264/1298，无方向256/272/238；delivery32方向1536。
+完整池384/768/1536行重复到3072draws，不当独立经验。pair臂replay名义family95/153/249，另列耦合覆盖。
+计数是loss eligibility/metadata单位，不是数值非零梯度、独立episodes或纯loss因果证明；未知保持null。
+完整研究成本与正式选中点新增曝光分列；CE128 delivery0本轮draw0不等于继承训练0；当前delivery32 selection空。
+两个未执行delivery臂保留分母。无新训练/采样/标签/选择/模型，旧配方不回填。
+
+v245明确待记7字段＋自身：前4项、v244self、native曝光整wrapper3.456283854、CSV处理0.008831696。
+候选verifier内层等未来由原helper一次计入，避免nested/whole重复。
+已知可见性边界、P/S强制HANDOFF、旧4/48结果均保持；全Q/coverage/compact/F2/F3/生命周期/确认/外测/主图未缩减。
+禁SHA/子代理/远端写入/第二账本。最新data/manifests/evidence-gap-development-progress-20261023-v245.json。
+
+# Previous v244
+
+# LATEST: 2026-10-31 goal ACTIVE; v244 endpoint192 CPU924活跃，已知信息边界已核实
+
+唯一模型source32-delivery-seed0-u192-v1/update-192，协调3080958 / worker3080962，/proc活跃，当前398/924。
+原owner/native路径、关闭先候选核验再全六点selection/early old860/整臂retention的顺序见v243，保持不变。
+活跃禁第二真实模型/离线账本/重启；观测超时不代表终止。原7native closed/41savedCPU closed/6selection/6retention/原Host0。
+
+known-sufficient-dev-v1/visibility-boundary-audit-v2.json：initial及两真实preREAD输入中的273字符问题
+在controller new_events中完整可见，Host公开输入也独立有同文；READ后同SourceRef/正文/role/origin/时间相同。
+但new_events的标记是controller_observation; Reader uses visible_evidence；不可一般推成Host可见。
+候选只有160字符截断导航excerpt，无显式source绑定；READ增加acquired/range/version/returnability。
+三观察shared投影/tokenizer最长6409，无截断/Mask替换；无模型权重/forward/Host，无新训练槽。
+收窄“多余/无收益”：仅实测无新增必要任务事实，不证明零认知价值、唯一最优停止，不补因果偏好/训练标签。
+初始审计误把内部materials池当acquired单例，失败保留；v2按实际READ index绑定成功。
+旧四/48结果、P/S干预控制、默认策略不改；不泛化成跳过问句/new_events的规则。
+
+v244明确待记4字段＋自身：endpoint launch、v243self、visibility两个整wrapper（含失败）。
+其余前期费用已付，当前不写账本。完整Q/coverage/compact/F2/F3/生命周期/外测/确认/主图范围保持。
+禁SHA/子代理/远端写入/第二账本。最新data/manifests/evidence-gap-development-progress-20261023-v244.json。
+
+# Previous v243
+
+# LATEST: 2026-10-31 goal ACTIVE; v243 delivery32 saved96已审，endpoint192 CPU924活跃
+
+唯一模型source32-delivery-seed0-u192-v1/update-192，协调3080958 / worker3080962，/proc活跃，当前14/924。
+根=artifacts/evidence-gap-20261023/original-feedback-v2-saved-reload-v1；owner=根/dispatch/source32-delivery-seed0-u192-v1/update-192/driver.json；
+native=根/source32-delivery-seed0-u192-v1/update-192/evaluation/run.json。old860＋feedback64，CPU4FP32/CUDA空/shared16384/head2048/MHA与compile关。
+活跃禁第二真实模型/离线账本/重启；观测超时不代表终止。
+关闭先original-verifier-tools-v2首位的verify_one_saved_feedback_candidate_v1.py JOB_ID，
+必须在ledger只增加此native phase时核验。然后closure-plan-v1该run的selection命令完成原全六点正式选择。
+候选结算helper自动加verifier内层，whole核验wrapper只另加差额；selection wholewrapper需明确列入一次。
+若正式选early点再跑其selected-retention old860；0/common或192只按原plan复用，整臂retention仍须核验。
+
+delivery32早期保存12/24/48/96已闭：delivery .854166667/.872395833/.885416667/.869791667，choice差异1/0/0/0。
+saved96 answer .800099206，关闭7字段17.432667777CPU已idle结清；v242所有明确待记/自身已付。
+当前仅endpoint192启动＋v243自身待记。原7native closed/41savedCPU closed/6selection/6retention/原Host0。
+48目前最高不等于正式deployment，未结束endpoint前不得偷换完整选点。
+原delivery64/128、all9 Host与全Q/coverage/compact/F2/F3/生命周期/外测/主图保持。
+已知HANDOFF控制实际P/S、标记可见，旧4/48结果与训练标签不改、不重跑；来源320public groups/77/66，无新确认admission。
+禁SHA/子代理/远端写入/第二账本。最新data/manifests/evidence-gap-development-progress-20261023-v243.json。
+
+# Previous v242
+
+# LATEST: 2026-10-31 goal ACTIVE; v242 delivery32 saved48已审，saved96 CPU活跃
+
+唯一模型source32-delivery-seed0-u192-v1/update-96，协调3042613 / worker3042615，/proc活跃，当前17/64。
+根=artifacts/evidence-gap-20261023/original-feedback-v2-saved-reload-v1；owner=根/dispatch/source32-delivery-seed0-u192-v1/update-96/driver.json；
+native=根/source32-delivery-seed0-u192-v1/update-96/evaluation/run.json。CPU4FP32/CUDA空/shared16384/head2048/MHA与compile关。
+活跃禁第二模型/离线账本/重启。关闭先original-verifier-tools-v2首位的verify_one_saved_feedback_candidate_v1.py JOB_ID，
+确保ledger仅比driver.before增加该native phase；然后idle候选结算helper。helper加verifier内层，wholewrapper仅另加残差。
+
+delivery32已闭保存12/24/48：delivery .854166667/.872395833/.885416667；choice差异1/0/0，全部原样保留。
+saved48 answer .801835317；目前最高不等于正式选点，仍待96和192全部关闭。old860 CPU保留性不提前推断。
+saved48关闭7字段18.444826006CPU已idle结清，v241所有明确待记/自身已付；当前仅saved96启动＋v242自身待记。
+原7native closed/40savedCPU closed/6selection/6retention/原Host0。96后是192 CPU924，再完整六点selection及所选early old860。
+原delivery64/128、all9 Host以及完整Q/coverage/compact/F2/F3/生命周期/外测/主图范围保持。
+初始HANDOFF真实控制P/S、干预标记可见，费用已付，不重跑、不标学习策略改善；原4/48结果和训练标签不改。
+来源暴露最新320public groups、77/66，未新admit确认。禁SHA/子代理/远端写入/第二账本。
+最新data/manifests/evidence-gap-development-progress-20261023-v242.json。
+
+# Previous v241
+
+# LATEST: 2026-10-31 goal ACTIVE; v241 delivery32 saved24已审，saved48 CPU活跃
+
+唯一模型source32-delivery-seed0-u192-v1/update-48，协调3001053 / worker3001054，/proc活跃，当前25/64。
+根=artifacts/evidence-gap-20261023/original-feedback-v2-saved-reload-v1；owner=根/dispatch/source32-delivery-seed0-u192-v1/update-48/driver.json；
+native=根/source32-delivery-seed0-u192-v1/update-48/evaluation/run.json。CPU4FP32/CUDA空/shared16384/head2048/MHA与compile关。
+活跃禁第二模型/离线账本/重启。关闭先original-verifier-tools-v2在PYTHONPATH首，
+verify_one_saved_feedback_candidate_v1.py JOB_ID（要求ledger仅比driver.before增加native phase），然后idle结算。
+settle_original_saved_candidate_cpu_v1.py已加verifier内层；whole核验wrapper仅另加残差。
+
+saved12 CPU64 .785218254 answer/.854166667 delivery，choice差异1保留；saved24 .786210317/.872395833，差异0。
+saved24关闭7字段15.329754027CPU已idle结清，v240所有明确待记/自身已付；仅saved48启动＋v241自身待记。
+原7native closed/39savedCPU closed/6selection/6retention/原Host0。正式selection仍待48/96 CPU64、192 CPU924全部关闭，
+再全六点选点和所选early old860；原delivery64/128、all9 Host及完整Q/coverage/compact/F2/F3/生命周期/外测/主图保持。
+原native48候选不等于deployment选择，已知HANDOFF控制实际P/S且费用已付不重跑，旧4/48结果与训练标签不改。
+禁SHA/子代理/远端写入/第二账本。最新data/manifests/evidence-gap-development-progress-20261023-v241.json。
+
+# Previous v240
+
+# LATEST: 2026-10-31 goal ACTIVE; v240 delivery32 saved12已核验，saved24 CPU活跃
+
+唯一模型source32-delivery-seed0-u192-v1/update-24，协调2961793 / worker2961796，/proc活跃，
+当前25/64；CPU4FP32/CUDA空/shared16384/head2048/MHA与compile关。
+根=artifacts/evidence-gap-20261023/original-feedback-v2-saved-reload-v1；owner=根/dispatch/source32-delivery-seed0-u192-v1/update-24/driver.json；
+native=根/source32-delivery-seed0-u192-v1/update-24/evaluation/run.json。活跃禁第二模型/离线账本/重启。
+关闭先original-verifier-tools-v2在PYTHONPATH首，verify_one_saved_feedback_candidate_v1.py JOB_ID。
+该核验要求ledger只比driver.before增加native phase。随后idle settle_original_saved_candidate_cpu_v1.py。
+helper自动加verifier内层；若量whole核验wrapper只另加残差，不能双记。
+
+saved12 CPU64已审：answer .785218254 /delivery .854166667；native/CPU choice差异1原样保留。
+原生点相同delivery指标不等于全部选择相同，完整CPU selection仍未做，旧860 retention不提前推断。
+7字段17.786755923CPU已idle结清，v239所有明确待记/自身已付；当前只update24启动＋v240自身待记。
+原counts7native closed/38savedCPU closed/6selection/6retention/原Host0。
+之后update48/96 CPU64、192 CPU924，完整六点selection，再按实际所选做early old860，delivery64/128与all9 Host保留。
+
+v239原delivery32 native192/3072/15308528tokens已审，native delivery最高48 .885416667但deployment仍null。
+初始HANDOFF实际控制已闭审不重跑：newREAD0/SEARCH0、K仍S、答案因manual labels新增断言判P；
+intervention_handoff对Host可见，不说学习停止改善或纯policy效应。actual-control-v2/source-review-v1为准，
+v1 verifier误标记失败保留，费用已付。原4结果/旧48分母/训练标签不变。
+来源暴露最新320public groups/77目标组件/66敏感性，未新admit确认。全Q/coverage/compact/F2/F3/生命周期/外测/主图均保留。
+禁SHA/子代理/远端写入/第二账本。最新data/manifests/evidence-gap-development-progress-20261023-v240.json。
+
+# Previous v239
+
+# LATEST: 2026-10-31 goal ACTIVE; v239 delivery32原生/初始HANDOFF闭环，首个保存CPU活跃
+
+唯一模型source32-delivery-seed0-u192-v1/update-12 CPU64，协调2923588 / worker2923595，
+/proc活跃，当前58/64，CPU4FP32/CUDA空/shared16384/head2048/MHA与compile关。
+根=artifacts/evidence-gap-20261023/original-feedback-v2-saved-reload-v1；
+owner=根/dispatch/source32-delivery-seed0-u192-v1/update-12/driver.json；native=根/source32-delivery-seed0-u192-v1/update-12/evaluation/run.json。
+关闭先original-verifier-tools-v2在PYTHONPATH首，verify_one_saved_feedback_candidate_v1.py JOB_ID；
+该核验要求ledger仅比driver.before增加native phase，任何离线账本/第二模型必须等核验后。
+再settle_original_saved_candidate_cpu_v1.py JOB_ID latest_inventory output phase；helper已加verifier内层，
+若量whole核验wrapper只加其差额。之后update24/48/96(64 each)、192(924)、全六点selection、所选early old860。
+
+原delivery32 native192/3072/15308528 tokens已审闭；原生delivery metric最高48=.8854167，底座.6067708，
+对应old preference .7837258 vs底座.8078269。native48非deployment选择，完整CPU/Host未替代。
+原counts7native closed/37savedCPU closed/6selection/6retention，原Host0；delivery64/128全保留。
+原fit postfit13字段53.840553661CPU已idle结清，原生7424.375335753CPU未重复。
+
+known-sufficient-dev-v1/initial-handoff-control-v1实际1Tool/1Host已闭，不重跑。
+actual-control-v2.json、source-review-v1.json：step0强制HANDOFF，新READ0/SEARCH0，known refs3，新包空；
+实际K仍充分，答案主要事实有支持但新增持续manual labels习惯缺来源，判P/S；不推断学习停止或Host自主不调用。
+原生标记intervention_handoff可见于Host，v1 verifier误期望policy_handoff而失败，原代码/失败保留，v2核验通过。
+未改原回执/旧四结果/原48分母/训练标签；不因partial重试。gen1/4635known/unknown0，prompt3372/comp1263，
+scorer0但client CPU7.319872、coor.178876811；关闭后6字段16.600708004CPU已结清，机械准备旧费不重记。
+
+v239当前待记仅此savedCPU launch＋v239自身。当前CPU活跃禁第二模型/离线账本/重启。
+来源暴露最新仍320public groups、77/66；完整Q/coverage/compact/F2/F3/生命周期/外测/主图范围保持。
+禁SHA/子代理/远端写入/第二账本。最新data/manifests/evidence-gap-development-progress-20261023-v239.json。
+
+# Previous v238
+
+# LATEST: 2026-10-31 goal ACTIVE; v238 原delivery32至50/192；initial HANDOFF控制已测未执行
+
+唯一模型source32-delivery-seed0-u192-v1，协调2542476 / worker2542480，/proc活跃。
+原owner/native路径见v236；不重启，活跃禁第二模型/离线账本。结束先原native_audit再idle结算，
+保存候选/正式selection/retention及delivery64/128、all9 Host完整义务保持。
+
+已知充分比较原4分支已闭审不改。另准备initial-handoff-control-v1：同一实际initial的现有合法HANDOFF，
+既有first_action机制/continuation0；同请求/额度/K/Host frame，无新状态槽/新默认/新启发式。
+2新增native/JSON机械测试＋原回归，冻结D8共11通过，Ruff通过；初始测试误判HANDOFF应调用
+取证executor，已改为当前trace真实一步选择＋零executor/READ核验，失败receipt保留，runtime未改。
+真实控制执行0/Host0/质量null，不能预标成功或说u262学会停止。
+位置=artifacts/evidence-gap-20261023/handoff-comparison-dev-v1/known-sufficient-dev-v1/initial-handoff-control-v1/
+execution-readiness-v1.json记录实际输入预检、coordinator argv模板与环境；run_control_v1.py要接
+ACTUAL_CURRENT_DELIVERY32_NATIVE_CPU_SETTLEMENT_JSON。原fit关闭、native audit通过、对应driver残差
+idle结算后可启动一次；inspect已证实当前训练活跃时不会启动。执行后仍需实际Tool/Host/source核验。
+原已知4结果/旧F1已审48分母不改；不重复真实采集，不重试控制失败来凑成功。
+
+v238明确待记8字段＋自身（含此前3、v237self、两次测试wrapper、dispatch、预检wrapper）。
+来源暴露最新仍protocol-v4/actual-v4/summary-v3；当前320public groups，77/66，无新确认admission。
+禁SHA/子代理/远端写入/第二账本；完整目标保持active。
+最新data/manifests/evidence-gap-development-progress-20261023-v238.json。
+
+# Previous v237
+
+# LATEST: 2026-10-31 goal ACTIVE; v237 来源暴露增量审计完成，原delivery32持续训练
+
+唯一真实模型source32-delivery-seed0-u192-v1，协调2542476 / worker2542480，/proc活跃；
+当前24/192，update12评估已闭入history，第24步评估中。原owner/native路径见v236。
+不要重启；活跃禁第二模型/离线账本。结束先原native audit，再idle明确费用结算，再保存候选/选择/retention。
+原全范围不缩减，6closed native/37savedCPU/6selection/6retention，delivery32是第7个started，原Host0。
+
+confirmation-source-components-dev-v1/protocol-v4.json追加已公开TwoWiki dev32(320来源位置)，
+复用code-v3，actual-v4/audit.json、summary-v3.json为当前。public histories/groups320、positions9851、
+distinct bodies5804；五种完整graph summaries逐值等于v3，native-target77、any-public敏感性66不变。
+没有新增字面候选冲突，不等于语义独立/全面未见。旧MuSiQue49和TwoWiki32/64预留逐字节未改，
+没有新确认导出/新IDs/模型admission，旧77不足96的该单池结论保留，另预留TwoWiki32/64及背景依赖不变。
+当前仅更新已记录暴露；仍需方法freeze与其他历史/auxiliary暴露对账。
+F2已存在host-presentation-dev-v1/two-family-sequence-pilot-v2/frozen-dispatch-v2.json：
+B30/F01 14 Host位置，实际0。无需重建；实际known/related/unrelated条件须依可见记录成立。
+
+v237明确待记3字段＋自身：delivery32 launch、v236self、exposure execution-v4整wrapper1.047890541CPU。
+summary-v3处理计入v237自身，actual-v4内层不重复记。禁SHA/子代理/远端写入/第二账本。
+最新data/manifests/evidence-gap-development-progress-20261023-v237.json。
+
+# Previous v236
+
+# LATEST: 2026-10-31 goal ACTIVE; v236 known四分支实测审阅，原delivery32正在训练
+
+唯一真实模型source32-delivery-seed0-u192-v1，协调2542476 / worker2542480，/proc存活，
+当前0/192 optimizer updates；cuda seed0、shared16384/head2048、3072draws原配方不改。
+owner=artifacts/evidence-gap-20261023/original-feedback-v2-fit-dispatch/source32-delivery-seed0-u192-v1/driver.json；
+native=artifacts/evidence-gap-20261023/original-feedback-v2-fitting-v1/source32-delivery-seed0-u192-v1/run.json。
+完成先closure-plan-v1该run native_audit（original-verifier-tools-v2在PYTHONPATH首），再idle结算；
+继续原saved候选/选择/retention、delivery64/128及all9 Host。原7started/6closed、CPU37、selection6、retention6、Host0。
+活跃禁第二真实模型/离线账本/重启，不因观测超时重跑。
+
+known-sufficient-dev-v1/comparison-v1四Tool/四Host均完成核验及来源审阅，无需重跑。
+actual-comparison-v1.json、source-review-v1.json：只审u262初始化，不外推到新full/head控制。
+initial rules2SEARCH+1READ，u262 1SEARCH+1READ，均读已可见问题；答案双方C、交付结合K双方S，非充分时正确早停。
+post rules selected[0]交问题，u262 handoff实际空包；双方K仍S，答案规则C/u262 P（把2FA精确日期升级为April2，原文仅after lockout）。
+post prompt3537/3372；这不是质量因果/统计提升证明。两个post ID的真实包已证实不同，取代菜单阶段的不确定。
+当前请求trace新增suffix按before字节前缀绑定，旧F1/采集前缀不重复计新动作。原F1已审48分母不改，无训练标签。
+本批generation4/19925known/unknown0，local scorer load8.745944390＋predict232.855447924CPU原生已付；
+before/after-comparison-cpu-settlement-v1.json分别8字段31.855121365、5字段28.949979912已idle结清。
+v236仅新delivery32 detached launch CPU＋v236自身待记；其余旧明确项已付。
+禁SHA/子代理/远端写入/第二账本；完整目标保持。最新data/manifests/evidence-gap-development-progress-20261023-v236.json。
+
+# Previous v235
+
+# LATEST: 2026-10-31 goal ACTIVE; v235 原CE128 CPU/整臂闭环，真实known新请求完成，无模型活跃
+
+原1833188/1833189已退出，860/860；selected48单项及整臂retention通过，native/CPU动作差异0。
+answer48/delivery0不重选，原counts6fits/37savedCPU/6selections/6retention，原Host0。
+original-feedback-v2-source128-ce-selected48-retention-cpu-settlement-v1.json已idle结清32字段152.334973490CPU，
+v234所有待记/自身、核验及原driver残差已付，不重复结算或重启原selected48。
+
+known-sufficient-dev-v1实际fresh请求完成，协调2459216/worker2459220已退出，无模型活跃。
+根=fresh-execution-v1/run.json；owner=fresh-orchestration-v1/driver.json。1 initial＋3 actual post；
+generation0且账本before/after完整相等。rules prefix search_0_8→read_0_observe→search_0_16→handoff，
+READ1，返回唯一原文是用户问题本身；实际resolved K三个先前材料仍匹配原文且覆盖四个预审任务见证。
+不是学习停止成功；新替代策略/条件Host读出/训练标签仍0。
+reached-states-v1/preparation.json按预定规则保留first initial＋last post(step3)，实际frames已准备；
+reached-inputs-v1初始是指向真实capture的symlink，post是显式delivery投影。
+容量audit已通过：max5902/head551，无截断；仅tokenizer，无模型。初始20项联合菜单与post HANDOFF分开。
+post只有handoff和handoff_select_0，均涉及唯一问题材料，不能把ID数当成质量对照证据。
+下一步绑定/运行这两个实际状态的规则与u262比较并做实际Host读出，分层报告；不要重跑fresh采集，
+不要伪造pre_final/填旧no-call/把新结果直接并进原48已审分母。之后三原delivery拟合及其余全计划继续。
+
+v235待记仅5字段＋自身：fresh-launch、owner child/coord、reached-preparation整wrapper、capacity整wrapper。
+这些尚未结算；嵌套projection/runner CPU不再加。无SHA/子代理/远端写入/第二账本。
+最新data/manifests/evidence-gap-development-progress-20261023-v235.json。
+
+# Previous v234
+
+# LATEST: 2026-10-31 goal ACTIVE; v234 新请求协调器已绑定验证，原CPU仍运行
+
+原CE128 selected48 CPU唯一模型，协调1833188 / worker1833189，/proc活跃，702/860。
+原关闭顺序不变：original-verifier-tools-v2首位，verify_one_saved_feedback_retention_v1.py JOB_ID，
+再closure-plan-v1该run的retention_audit；补整臂wrapper计时入最新progress清单，idle一次结算。
+known-sufficient-dev-v1/coordinator-plan-v1.json与coordinator-readiness-v1.json已准备；
+新tools/run_prepared_known_request.py四项子进程/合成账本测试、mypy/Ruff通过。
+实际--inspect正确检测worker，WAITING且未创建owner/native产物，实际fresh仍0。
+CPU核验结算后命令：python3 artifacts/evidence-gap-20261023/handoff-comparison-dev-v1/known-sufficient-dev-v1/launch_fresh_request_v1.py ACTUAL_SETTLEMENT_JSON。
+该协调器独立验证原CPU单项/整臂/结算后只执行原execution-readiness-v2新请求一次；
+原账本计HTTP/local scorer，whole-child扣已记local CPU，协调器自身另记；失败/unknown/未到达保留。
+不自动下一任务。实际fresh关闭后用v233已测适配核对resolved K、初始/最后真实post并生成受控frame。
+v234明确待记25字段＋v234自身；运行中禁离线账本/第二模型/重启。
+禁SHA/子代理/远端写入，完整目标不缩减。最新data/manifests/evidence-gap-development-progress-20261023-v234.json。
+
+# Previous v233
+
+# LATEST: 2026-10-31 goal ACTIVE; v233 已知原文读出适配已测，实际新请求仍0
+
+原CE128 selected48 CPU唯一模型，协调1833188 / worker1833189，当前678/860。
+原owner/native路径及关闭顺序见下方v232；仍须original-verifier-tools-v2首位，先单项再整臂retention，再idle结算。
+本轮新增tools/prepare_closed_f1_readout.py与tests/unit/test_closed_f1_readout.py；共用append_fresh_request
+抽入prepare_known_budget_readout.py。实际新request关闭后验证initial/post lineage、请求身份、
+先前delivered raw refs重新打开后的known投影、原provider wire/trace一致，再保留公开历史追加新调用。
+不伪造normal-Host pre_final，不带旧生成答案/隐藏reasoning，不把controlled读出当自主停止成功。
+working新增+回归17通过，mypy两文件/Ruff通过；冻结d8新增9通过。
+最终readiness=artifacts/evidence-gap-20261023/handoff-comparison-dev-v1/known-sufficient-dev-v1/readout-adapter-readiness-v2.json；
+code-v1/tools中已有新适配、辅助、既有frozen-v3 run_frozen_retrieval_calls副本，d8 runtime未改。
+初始身份核验遗漏given_retrieval_request与冻结测试fixture无关分析模块缺失已修正，失败产物保留。
+实际fresh仍0、协调器尚未写；执行用下方execution-readiness-v2，完成后才能用新适配生成实际frame。
+v233清单22个明确待记字段＋v233自身（四个本轮wrapper含失败、v232自身及旧17）；活跃禁离线账本。
+禁SHA/子代理/并发模型/远端写入，完整目标未缩减。最新data/manifests/evidence-gap-development-progress-20261023-v233.json。
+
+# Previous v232
+
+# LATEST: 2026-10-31 goal ACTIVE; v232 真known原文锚点/新请求已准备，原CPU运行
+
+唯一真实模型 source128-continued-ce-seed0-u192-v1/selected-retention-48，协调1833188 / worker1833189，
+/proc核实；native 606/860。根artifacts/evidence-gap-20261023/original-feedback-v2-saved-reload-v1；
+owner根/dispatch/source128-continued-ce-seed0-u192-v1/selected-retention-48/driver.json；native根/
+source128-continued-ce-seed0-u192-v1/selected-retention-48/evaluation/run.json。原CPU4FP32/16384-head2048，
+固定answer48/delivery0。活跃禁第二模型/离线账本。关闭先original-verifier-tools-v2在PYTHONPATH首，
+verify_one_saved_feedback_retention_v1.py JOB_ID -> 原CE128整臂retention -> idle明确费用一次结算。
+原九臂6拟合/36保存CPU/6选择/5整臂retention不提前改；三delivery及all9 Host仍需完成。
+
+area=artifacts/evidence-gap-20261023/handoff-comparison-dev-v1。F1全48已审，不重做：
+source-reviews-v1/all48-summary-v1.json及CSV，12曝光族24条件；joint正确+充分双方7/24。
+已知充分功能仍缺；本轮known-sufficient-dev-v1/anchor-audit-v1.json完成真实边界审计。
+锚点A32 summary/Jev closed Tool runtime＋实际成功readout：3个raw refs覆盖4任务见证，
+Source/cache/admission完整值保留，无stage-0:final/failure-final/该响应的生成Source；没有删除答案。
+这是独立F1读出不持久化答案的真实after-readout边界，不是普通Host pre_final，不能伪造closed.json。
+
+下一短模型job已绑定known-sufficient-dev-v1/execution-readiness-v2.json（v2优先）。
+用fresh-preparation-v2，中性message ID f1-fresh-a32-r1；1个baseline2048新请求，实际执行0。
+原问题/read_goal/rules策略/配置额度不变，known refs只来自实际provider可见原文；不把充分性裁决喂模型。
+execution-bank仅source_version元数据2a→实际d8，Store/cache/admission逐值相同，原closed-tool-bank保留。
+runner是既有frozen-v3 run_known_budget_request字节副本，导入实际d8；不装包、不改旧运行时。
+待原CPU核验/结算后root串行执行现成argv，需量whole-child CPU/预算before-after，不能并发。
+预定first actual initial槽（联合停止/取证诊断）＋last actual post槽若存在（HANDOFF-only），A32已有2，
+最多再2。不达到post/只有单HANDOFF则保留缺口，不伪造成模型会选择正确停止；不填原3no-call槽。
+执行后要核对实际resolved K，才可构造controlled readout：从anchor实际provider输入保留公开history/原文，
+追加显式fresh assistant call＋target占位，再用原run_readout替换真实Tool；不带原final答案。
+旧prepare_controlled_readout只接受normal-Host pre_final格式，不能喂伪造对象；新边界需明示适配。
+
+费用v232清单包括旧未记、v231self、boundary失败/成功wrapper、preparation wrapper、readiness-v1
+及neutral-ID fresh-preparation-v2 CPU；readiness-v2无新CPU字段，嵌套计时不重复。当前无ledger写入。
+普通TwoWiki192、Q/reg/覆盖/compact/aux/seed/生命周期/外测/独立确认/四主图/原9全保留。
+禁SHA/子代理/新服务/第二账本/远端写入/评估梯度；禁止整段打印usage/costmap/response_text或未知容器。
+保持简短分析，先看真实接口再行动，避免长篇假设推演。最新data/manifests/evidence-gap-development-progress-20261023-v232.json。
+
+# Previous v214（当前进度与待记清单以v232为准）
+
+# LATEST: 2026-10-30 goal ACTIVE; v214 首个CPU924继续，Host执行/汇总链已冻结验证
+
+唯一模型：full-softCE所选96 CPU确认；协调 2396171 / 评估 2396175，/proc存在。
+178/924，CPU4 FP32、CUDA空、shared_actions16384/head2048、MHA/compile关。
+Driver: artifacts/evidence-gap-20261023/training-optimization-dev-v1/dispatch/cpu/source128-answer-quality-direction-full-softce-seed0-u192-opt-v1/driver.json
+不因观测超时重启；活跃时禁第二真实模型、离线账本。结束先cpu-confirmation-readiness-v1
+对应verify，再按v214清单/自身＋whole核验CPU结算；之后head-softCE、head-set已有CPUplan，
+用launch_one_job_v2.py cpu RUN_ID启动，不重建plan、不反选GPU选点。Host仍需三CPU全通过。
+
+新host-execution-dev-v1/execution-readiness-v1.json与code-v1准备完成，未运行Host。
+启动器launch_one_arm_v1.py DISPATCH ARM仅启动一个独立协调器；run_bound_optimization_host
+先查真实模型进程，再重核三方法实际GPU/CPU证据；原九臂gate独立且未绕过。
+已只读实证调度检测器识别当前CPU PID 2396175，无Host尝试。
+原账本记录HTTP和local Laya load/predict，协调器按整child CPU扣一次已记local CPU，
+记录child_cpu_pending与协调开销；不自动结算、不加嵌套native/message/inference总CPU。
+未知HTTP计量不补零，异常/负residual不截零，失败原样保留、不自动下一臂或重试。
+
+汇总新增真实适配：独立bank=history-request、连续bank保持history；request.sources和
+各bank incoming前缀单独核对，避免丢新QA结果或跨独立请求借用来源。当前/先前声明的
+实际prefetch仅在final provider user输入原文匹配时记为可见；Tool receipts另外绑定，
+来源存在不当Host已知，参考兼容不升级semantic正确。JSONL用物理行，保留Unicode分隔符。
+11汇总/原回归＋6执行器测试通过，实际旧2a冻结环境17项再通过；3文件mypy/最终Ruff通过。
+初始样式/typing失败保留，未降门槛。原Host code-v2未修改，新summary修订见revision-note-v3。
+未来新队列使用code-v1/summarize_optimization_host.py，原9可用有记录的新summary修订，
+但原模型、任务、控制配置、评分与all9门槛不变。当前实际Host0。
+
+9明确待记字段86.446305641CPU＋v214自身＋未来CPU残差；禁止活跃时写账本，详情v214。
+三优化原生和19 GPU全闭环均选96：full Q91.9395/old66.5450；head-softCE80.3373/75.8989；
+head-set80.3373/74.9217。CPU完成0/3，不能推断Host收益；两新cohort仍等待全部CPU。
+原6/9、CPU36、选择6/9、retention5/9；原CE12848旧860、delivery三臂、全部Q/功能/compact/
+aux/种子/生命周期/外测/四图/各Host仍未完。确认64未导出、评估角色禁梯度。
+禁SHA/子代理/新服务/第二账本/远端写入。
+
+# Previous v213（当前进度与待记清单以v214为准）
+
+# LATEST: 2026-10-30 goal ACTIVE; v213 三优化臂全GPU闭环，首个CPU924实际运行
+
+唯一模型：source128-answer-quality-direction-full-softce-seed0-u192-opt-v1 所选96的CPU确认，旧860＋反馈64。
+协调 2396171 / 评估 2396175，/proc均存在；当前 25/924。
+Driver: artifacts/evidence-gap-20261023/training-optimization-dev-v1/dispatch/cpu/source128-answer-quality-direction-full-softce-seed0-u192-opt-v1/driver.json
+CPU4 FP32，CUDA空，shared_actions16384/head2048，MHA/compile关，原冻结CPU evaluator。
+活跃时禁止第二真实模型、离线账本、重启/自动重试。观测超时不代表终止。
+终止先cpu-confirmation-readiness-v1内本run的verify（frozen confirm_saved_feedback_cpu.py），
+再用v213清单/自身＋whole verifier CPU建inventory，settle_one_job_cpu_v1.py cpu RUN_ID ...。
+之后依次launch_one_job_v2.py cpu运行head-softCE、head-set；三个plan已实际prepare，不重建。
+所有CPU确认保持GPU选点不反选，需记录真实差异；三项关闭后才能绑定/运行后续Host。
+
+三原生和19保存GPU作业全部闭合，均正式选96：
+full-softCE Q.9193948412698412 /old.6654495459878018，389/616；
+head-softCE Q.8033730158730158 /old.7589886267043402，456/616；
+head-set Q.8033730158730158 /old.7492166278698416，449/616；各244masked。
+原生/保存所选旧动作差异0。GPU汇总：training-optimization-dev-v1/three-controls-gpu-summary-v1.json。
+当前保留softCE默认；set该配置未提高选点质量、旧标签更低。全参数质量/旧偏好明显取舍，
+这些开发指标不直接等于真实Host效用。CPU关闭0/3、Host0，尚不能定最终方法收益。
+
+全参数native192/3072/16718944tokens核验通过，原生CPU8285.203770067已计。
+三组选中96实际仅经历1536本轮draws/8359472tokens：反馈768行128元数据族、回放768行249族，
+反馈有方向目标516行127族。整轮3072是研究拟合成本；继承u262训练另计，不称独立经验数。
+原生三曲线补图figures-three-native-controls-v1/PNG和CSV已视觉核对，非四张最终主图完成证明。
+
+full原生12字段64.037272274CPU、192/图6字段33.930515141CPU、所选旧/整臂/CPU准备5字段
+41.447739551CPU均空闲结算；早期各项也已结算，原生/嵌套/共有基线不重复。
+所有v212显式待记已付，目前仅新CPU启动＋v213自身＋未来CPU残差待记。
+
+两个Host队列共享显式cohort binder v2；8族16继承请求(posthoc/6显式取证/原prefetch连续)
+与新TwoWiki32普通问题/320段独立解释，均等待全部CPU确认。不替代原MemOps8/原九臂Host门槛。
+确认64未导出、评估角色禁梯度；来源未知/背景共享/真实Host知识区别保持。
+原6/9拟合、CPU36、选择6/9、retention5/9；CE12848旧860、delivery三臂、全Q/功能/compact/
+aux/种子/生命周期/外测/四图/各Host队列仍未完。禁SHA/子代理/新服务/第二账本/远端写入。
+
+# Previous v212（当前进度与待记清单以v213为准）
+
+# LATEST: 2026-10-30 goal ACTIVE; v212 全参数更新133，两Host队列共用显式cohort绑定器
+
+唯一模型：source128-answer-quality-direction-full-softce-seed0-u192-opt-v1；协调 1766446 / 训练 1766447；/proc均存在。
+Driver: artifacts/evidence-gap-20261023/training-optimization-dev-v1/dispatch/fit/source128-answer-quality-direction-full-softce-seed0-u192-opt-v1/driver.json
+freeze_encoder=False、Q-direction、softCE，CUDA2,3，shared_actions16384/head2048；
+133/192、2128/3072。活跃时禁止第二模型/离线账本/重试。
+终点先closure-commands-v1对应native_audit，空闲结算后全套保存GPU，复用共同基线；
+完整选择、实际所选旧860、整臂GPU后，三唯一所选CPU924确认，再实际Host。所有旧范围保持。
+
+全参数原生已观察：12 Q.5838541667/old.7331377275；24 .8450396825/.6915257992；
+48 .8554563492/.7146865319；96 .9193948413/.6654495460。大幅反馈提升伴随旧标签下降；
+这是中途原生曲线，不是最终保存选点/Host成绩。保存12 encoder132/134张量实际改变，
+non_encoder31/36改变；仅该点范围核对，终点全部保存点仍需验证。
+
+新增ordinary dev32 Host具体队列：two-wiki-evaluation-sources-dev-v1/optimization-host-dev-v1/study-v1.json。
+32原问题/320段、每独立bank1请求，无新增取证指令、prefetch或理想View。固定上下文/rules/u262
+及3优化方法，最多6唯一臂192位置，同checkpoint在该cohort内共享执行与别名，当前Host0。
+逐位置分别记录执行、参考兼容、可用来源与实际交付/已知证据支持、成本；5未知任务全保留，
+不自动判错或强制弃答，不把Source存在当Host知识，不称官方2Wiki/独立盲审/确认成绩。
+原16请求保留性队列仍是posthoc、6QA显式取证且保留prefetch/连续条件，不能与新普通问题混称。
+
+共享binder已改为显式execution_id/dispatch_scope，冻结retention-domain-host-dev-v1/code-v2。
+4测试、mypy、Ruff通过；实际两队列检查均PENDING/0 ready，全部所选CPU确认还缺。
+GPU/CPU实际输出重核和alias规则不变，主模型/预算/推理配置逐项一致，cohort ID/任务条件分开。
+未来使用两目录各自binding-readiness-v2.json，旧v1命令仅历史、没有执行过Host。
+原九臂Host门槛不改，确认64未导出，评估角色禁止梯度；已知背景共享与source-author暴露保持。
+
+6明确待记字段5.954429622CPU＋v212自身＋未来模型残差，见v212；不重记已结算旧study创建。
+两头臂全GPU均选96：Q80.3373，softCE旧75.8989、set74.9217；不采纳set为已证改善，
+默认softCE保持，实际Host效用未证。优化原生/全GPU2/3，当前第3训练；CPU确认0、Host0。
+原6/9、CPU36、选择6/9、retention5/9；CE12848旧860、delivery三臂、全Q/功能/compact/aux/
+种子/生命周期/外测/四图/两新Host队列未完。禁SHA/子代理/新服务/第二账本/远端写入。
+
+# Previous v211（进度与待记清单以v212为准）
+
+# LATEST: 2026-10-30 goal ACTIVE; v211 两头臂全GPU闭环，全参数softCE实际运行
+
+唯一模型：source128-answer-quality-direction-full-softce-seed0-u192-opt-v1；协调 1766446 / 训练 1766447，/proc均存在。
+Driver: artifacts/evidence-gap-20261023/training-optimization-dev-v1/dispatch/fit/source128-answer-quality-direction-full-softce-seed0-u192-opt-v1/driver.json
+实际freeze_encoder=False、Q-direction、soft-ce默认回放；CUDA2,3，shared_actions16384/
+head2048，共同u262/source128/192更新/3072draws。当前7/192、
+112/3072；初始旧dev 860/860。
+仅取消matched head-softCE的冻结encoder标志，数据/预算/学习率/其他条件一致；旧Q-full
+准备别名没有实际run，不重复拟合。活跃时禁第二模型、离线账本或重试。
+终点先closure-commands-v1对应native_audit，再空闲结算，保存GPU12/24/48/96各64、192总924，
+复用共同GPU基线；完整选择后实际所选旧860/整臂GPU。三臂GPU后各唯一所选CPU924，
+使用cpu-confirmation-readiness-v1与launch_one_job_v2.py cpu RUN_ID，不反选CPU；0复用原基线。
+
+两头臂GPU正式均选96，纯质量同.8033730158730158。softCE旧.7589886267043402、456/616；
+set旧.7492166278698416、449/616；均244masked。set低.0097719988344986。两臂各六反馈点
+native/saved动作变化全0，各所选旧860变化0。当前不将set替换列为已证改进，softCE默认保持；
+只是该seed0/固定名义回放权重结果，不推断所有set目标或实际Host效用。
+GPU对比：training-optimization-dev-v1/two-head-gpu-comparison-v1.json。
+set闭环：training-optimization-dev-v1/saved-gpu/source128-answer-quality-direction-head-set-seed0-u192-opt-v1/gpu-closure-v1.json。
+优化原生2/3闭合(3已启动)，保存GPU13作业、完整选择/retention2/3，CPU确认0、Host0。
+
+set192空闲8字段36.361349298CPU；set所选96/整臂与full预检空闲6字段31.585364666CPU已付。
+所有v210显式成本及两次图渲染已结算；目前仅full-softCE启动＋v211自身＋未来残差待记。
+补充原生曲线figures-native-heads-v2/PNG与CSV已核视觉，不代替四张最终图。
+保留性Host绑定器4测试/mypy/Ruff通过，实际三方法CPU确认均未就绪；它重核actual确认输出，
+保留checkpoint别名，只生成有证据的配置，原九臂Host门槛不改。
+
+覆盖/语义发现保留：反馈/原Host均MemOps8，旧27损失8族为5authored+3MuSiQue且交集0，
+25/27 REFRESH为首次建View；旧标签不等于Host失败，未来继承16请求/最多6臂诊断待实测。
+六个继承QA请求要求先取证，prefetch/连续更新不改，不冒充统一自主调用机会测试。
+新TwoWiki32/320、来源API与参考未知/aux检查保持，确认64未导出，评估角色禁梯度。
+原6/9拟合、CPU36、选择6/9、retention5/9保持；原CE12848旧860、delivery三臂、原Host与全部
+Q/功能/compact/aux/种子/生命周期/外测/四图及新保留性诊断未完。禁SHA/子代理/新服务/第二账本/远端写入。
+
+# Previous v210（当前进度与待记清单以v211为准）
+
+# LATEST: 2026-10-30 goal ACTIVE; v210 head-set原生闭合、GPU前四点核验，192运行
+
+唯一模型：source128-answer-quality-direction-head-set-seed0-u192-opt-v1/update-192，真实GPU924（旧860＋反馈64）。
+协调 1682278 / 评估 1682279；924/924；/proc {'pid': False, 'child_pid': False}。
+Driver: artifacts/evidence-gap-20261023/training-optimization-dev-v1/dispatch/saved/source128-answer-quality-direction-head-set-seed0-u192-opt-v1/update-192/driver.json
+CUDA2/cuda:0，CPU4 FP32，shared_actions16384/head2048，TF32/MHA/compile关。
+终止先verify_saved_job_v1.py JOB_ID RUN_ID，再closure-commands对应saved_select。
+终点结算须包括v210清单/自身及whole验证/选择wrapper；仅实际所选早期旧860，然后单项/
+整臂GPU核验和summarize_gpu_optimization_arm_v1.py。原生96仍临时，192未核验不选点。
+然后启动固定full-softCE；三臂GPU后所选CPU924，之后真实Host。禁活跃时第二模型/账本/重试。
+
+head-set原生192/3072/16718944token完整核验，set元数据/五保存点encoder字节范围通过；
+反馈非零logit行1032、回放1536。原生CPU5718.337071497已记，wall3445.2109346864745秒。
+两头臂真实两遍输入/权重/排列相同，均原生暂选96；Q同.8033730159，set旧.7492166279，
+softCE旧.7589886267。固定96比较14选择变(3masked)，7接受→拒绝、0改善：
+READ→REFRESH2、HANDOFF→REFRESH3、SEARCH→REFRESH1、READ→HANDOFF1。
+set192 Q.7944444444/old.7750342998；无稳定收益证据，不改loss mass/预算/选择。
+保存12/24/48/96纯质量.5273065476/.5595486111/.8018849206/.8033730159，均已核验。
+共新原生2/3、保存GPU关闭11作业，完整GPU臂1/3，CPU确认0、Host0。
+
+保留性Host绑定器tools/bind_optimization_retention_host.py已冻结在retention-domain-host-dev-v1/code-v1。
+4测试+mypy+最终Ruff通过。它用既有confirm()重新核对实际CPU输出/成本与GPU选点，
+全部3确认后才生成配置；同checkpoint共享执行并保留别名。当前真实检查0 ready，
+head-softCE缺CPU确认；另两臂还缺完整GPU/CPU。原九臂Host门槛不改，无Host执行。
+工作流：retention-domain-host-dev-v1/binding-readiness-v1.json，未来inspection使用新输出路径。
+补充原生图：figures-native-heads-v2/native-head-replay-comparison.png，CSV同目录；
+已视觉核对并修正v1标注遮挡，不改变数据。这不算完成四张最终主图。
+
+head-set原生空闲13字段34.379983596CPU，早期四点5字段分别16.309309133/14.274067749/
+14.149693419/13.757557531CPU已结算。当前仅192启动＋图v1/v2渲染＋v210自身＋未来残差待记。
+所有v209显式待记已结算，原生/嵌套/共有基线不重复。
+旧标签下降≠Host失败，25/27旧REFRESH是首建View；当前反馈/原Host均MemOps8，损失8族
+为5authored+3MuSiQue、零交集；继承16请求诊断仍待实际执行。确认64不导出，评估角色禁梯度。
+原6/9、CPU36、选择6/9、retention5/9保持；原CE12848旧860、delivery三臂、原Host及全Q/
+功能/compact/aux/种子/生命周期/外测/四图/新保留性诊断未完。禁SHA/子代理/新服务/第二账本/远端写入。
+
+# Previous v209（当前进度与待记清单以v210为准）
+
+# LATEST: 2026-10-30 goal ACTIVE; v209 head-set更新129，保留性覆盖缺口已定位
+
+唯一模型：source128-answer-quality-direction-head-set-seed0-u192-opt-v1；协调 1419112 / 训练 1419116；/proc均存在。
+Driver: artifacts/evidence-gap-20261023/training-optimization-dev-v1/dispatch/fit/source128-answer-quality-direction-head-set-seed0-u192-opt-v1/driver.json
+当前129/192、2064/3072draws；set回放、冻结encoder、Q-direction、CUDA2,3。
+活跃时禁第二模型/离线账本/重试。终点先closure-commands-v1对应native_audit（set元数据/
+所有保存点范围），空闲结算，再保存GPU12/24/48/96及192；复用已核共同GPU924。
+完整选点/实际所选旧860/整臂GPU后full-softCE；三臂GPU后所选CPU924，不反选CPU。
+
+已实核两头臂的sampling、training-plan、lengths及option-orders/1、/2 JSON完全相同；
+仅未来执行与完整终点核验仍待。set原生0/12与softCE同，24纯质量.5595486111/old.8064063999；
+48纯质量.8018849206/old.8054298374（softCE48 old.8040093829）；中途数据不选点、不宣称收益。
+随后96点评估完成：set纯质量.8033730158730158，与softCE相同；old.7492166278698416，
+比softCE96低.0097719988344986。暂不支持稳定收益，继续固定192，不改权重/标签/规则。
+
+新覆盖发现：反馈dev64以及原Host8全为8个memops_*族；27个旧标签损失属于5 authored＋3
+MuSiQue族，交集0，不能复用当前64条反馈输出给这些新动作判质量。原旧dev共32族(14操作/18证据)。
+retention-domain-host-dev-v1/study-v1.json已保留这8份旧公开history全部16请求；固定上下文/
+rules/u262配置已准备，3优化方法须全部GPU＋所选CPU确认后实际绑定。最多6唯一臂96位置，
+同checkpoint去重保留alias。原九臂Host门槛/任务不变。该任务为观察损失后的开发诊断，非确认。
+其中6个继承QA请求本来就要求先取证；1history有实际prefetch、1请求获真实prefetch收据、
+1连续history/1来源到达请求；全部保留，不冒称统一自主调用机会测试。实际新Host0、训练标签0。
+
+更正REFRESH语义：27损失中25原来没有View槽，2已有View；7状态交付选择为空，共60个引用。
+旧2a实现的REFRESH包含首次建View；同(slot,refs,new_scope)只尝试一次；成功路径可能调用
+query_structure生成，交付trial默认保留已opened材料而非一律清空。没有执行这些反事实，
+不能断言重复刷新循环、证据丢失或Host错误。visible_evidence是工具内拟交付集合，不是Host已知。
+源代码/实际状态核对见refresh-semantics-and-domain-coverage-v1.json；未改模型/标签/操作规则。
+
+目前5明确待记字段0.678184604CPU＋v209自身＋未来模型残差；v208前显式成本已付。
+head-softCE已原生/全GPU闭环选96，Q80.3373/old75.8989，456/616；CPU/Host待。
+优化原生1/3、全GPU1/3；原6/9、CPU36、选择6/9、retention5/9；原CE12848旧860、delivery三臂、
+全部原Host/Q/功能/compact/aux/种子/生命周期/外测/四图及新覆盖诊断仍未完。
+新TwoWiki32/320、5未知保留、来源API检查、aux字面检查保持；确认64未导出，评估角色禁止梯度。
+禁SHA/指纹/子代理/新服务/第二账本/远端写入。
+
+# Previous v208（当前进度与待记清单以v209为准）
+
+# LATEST: 2026-10-30 goal ACTIVE; v208 head-softCE全GPU闭环，head-set实际运行
+
+唯一模型：source128-answer-quality-direction-head-set-seed0-u192-opt-v1；协调 1419112 / 训练 1419116，/proc均存在。
+Driver: artifacts/evidence-gap-20261023/training-optimization-dev-v1/dispatch/fit/source128-answer-quality-direction-head-set-seed0-u192-opt-v1/driver.json
+实际run为replay_objective=set、freeze_encoder=True、quality-direction；CUDA2,3，shared_actions
+16384/head2048，共同u262/source128/192更新/3072draws，只有回放目标相对head-softCE改变。
+当前0/192、0/3072；初始旧dev
+492/860，反馈0/64。
+运行中禁止第二真实模型、离线账本或自动重试。终止先closure-commands-v1对应native_audit，
+核对set运行/各checkpoint元数据、所有参数范围；再空闲成本结算、保存GPU12/24/48/96各64、
+192共924。共享已实核GPU共同基线，不重跑。完整选择后实际所选旧860/整臂GPU。
+随后full-softCE；三臂GPU后各唯一所选CPU924，不反选CPU，0复用原基线；真实Host仍待。
+
+head-softCE正式保存GPU选96，纯质量.8033730158730158。实际所选旧860已核验：
+old .7589886267043402，456/616接受、244masked；比GPU初始低.0488382277444778。
+六点反馈native/saved选择差异全0，所选旧860选择差异0。第一臂仅CPU确认/Host仍待。
+闭环：training-optimization-dev-v1/saved-gpu/source128-answer-quality-direction-head-softce-seed0-u192-opt-v1/gpu-closure-v1.json
+新优化原生1/3、保存GPU全选择/retention1/3；保存GPU关闭7作业，CPU确认0、Host0。
+GPU共同924对原CPU选择0差异、本次整项墙钟比30.23555，非通用性能或后续检查点等价保证。
+
+已反思：48→96旧27损失全选REFRESH，24单正例；不直接归因早先多正例CE冲突，也不等同
+Host失败。保存反馈原始正确pair总数未变，2族改善2族下降4族不变；tie间隔/已知loss下降，
+不支持简单的late-confidence解释。冻结规则未改，集合回放是否有效必须看真实对照结果。
+
+192及全选择空闲7字段30.053980772CPU；所选旧860/整臂空闲5字段28.576500430CPU已结算。
+原生成本/嵌套分析不重复；当前仅head-set启动＋v208自身＋未来残差待记。
+新dev32/320、27参考兼容/2限定/5未知、源API32库320Source/350片段、aux45164行次字面0
+匹配保持；不是Host/确认/完整无暴露结果。确认64未导出，评估角色禁止梯度。
+原6/9拟合、保存CPU36、完整选择6/9、retention5/9保持；原CE12848旧860、delivery三臂、
+原Host及全部Q/功能/compact/aux/种子/生命周期/外测/四图未完。禁SHA/子代理/新服务/第二账本/远端写入。
+
+# Previous v207（当前进度与待记清单以v208为准）
+
+# LATEST: 2026-10-30 goal ACTIVE; v207 首优化保存GPU前四点关闭，192运行
+
+唯一模型：source128-answer-quality-direction-head-softce-seed0-u192-opt-v1/update-192，真实保存GPU924（旧860＋反馈64）。
+协调 1352081 / 评估 1352085；719/924；/proc {'pid': True, 'child_pid': True}。
+Driver: artifacts/evidence-gap-20261023/training-optimization-dev-v1/dispatch/saved/source128-answer-quality-direction-head-softce-seed0-u192-opt-v1/update-192/driver.json
+CUDA2 / cuda:0，CPU4 FP32，shared_actions16384/head2048；TF32/MHA/compile关。
+终止先verify_saved_job_v1.py JOB_ID RUN_ID。以v207清单＋自身CPU＋whole验证wrapper
+构造inventory，再settle_one_job_cpu_v1.py saved JOB_ID INVENTORY OUTPUT PHASE。
+不要只用slim verify_and_settle_saved_candidate_v1：v207另有诊断CPU待记。
+完整六点后closure-commands的saved_select；仅实际所选早期旧860，整臂saved_retention。
+仍禁活跃时第二模型/离线账本/自动重试。然后head-set、full-softCE，三臂GPU后所选CPU924。
+
+GPU共同u262924已实际核验，并与旧CPU924逐条比较：选择变化0、旧接受变化0。
+配对前向CPU10678.3386秒/GPU326.1461秒，完整评估墙钟10707.5304/354.1371秒，
+本次墙钟比30.23555、配对比32.74096；非其他检查点等价或固定性能保证。
+保存12/24/48/96各64均已核验，纯质量分别.5273065476/.5506200397/.8018849206/.8033730159。
+192未关闭前不选点；原生96仍临时。当前保存GPU关闭5项（共同基线＋四早期），新全选择0/3。
+
+保存48→96：原始正确排序pair总数变化0；2族改善、2族下降、4族不变，按既定族/状态权重
+宏平均+0.0014880952。34个质量平局的平均绝对margin从2.32324276降至.91802382；
+已知pair loss从.84127728降至.55849879。不能把旧标签后期下降解释成tie分数越来越极端。
+旧27损失全选REFRESH、24单正例的v205结论保持；真实Host效用仍未知，不改冻结规则。
+
+共同基线空闲7字段36.14977345 CPU，12/24/48/96各5字段14.436722288/14.997827133/
+14.081703163/14.604614650 CPU已结算；原生成本不重复。只192启动＋保存反馈诊断whole
+wrapper＋v207自身＋未来192残差待记，详见v207。
+第一优化原生1/3闭合，完整保存GPU0、CPU确认0、Host0；原6/9/CPU36/选择6/9/retention5/9保持。
+新dev32/320、源API集成与参考兼容/未知、aux字面0保持；确认64未导出，评估角色禁止梯度。
+原CE12848旧860、delivery三臂、原Host及全部Q/功能/compact/aux/种子/生命周期/外测/四图未完。
+禁SHA/子代理/新服务/第二账本/远端写入。
+
+# Previous v206（进度与待记清单以v207为准）
+
+# LATEST: 2026-10-30 goal ACTIVE; v206 第一优化原生臂闭合，GPU共同基线运行
+
+唯一模型：training-optimization-dev-v1 common-base-u262，真实保存GPU924（旧860＋反馈64）。
+协调 1290731 / 评估 1290735，/proc均存在；当前 457/924。
+Driver: artifacts/evidence-gap-20261023/training-optimization-dev-v1/dispatch/saved/common-base-u262/driver.json
+CUDA物理2 / cuda:0，CPU4 FP32，shared_actions16384/head2048，TF32关、MHA关、compile关。
+活跃时禁第二模型/离线账本/重试。终止先：
+TESTENV training-optimization-dev-v1/verify_saved_job_v1.py common-base-u262 source128-answer-quality-direction-head-softce-seed0-u192-opt-v1
+该脚本自行加载本study冻结分析环境。再空闲成本结算，依次本臂保存12/24/48/96各64、192总924。
+每项先单核验再结算/下一模型。完整六点后saved_select，再实际所选早期旧860、整臂saved_retention。
+启动：launch_one_job_v1.py saved JOB_ID。成本：settle_one_job_cpu_v1.py saved JOB_ID INVENTORY OUTPUT PHASE。
+CPU确认在三臂GPU后，见cpu-confirmation-readiness-v1；全部GPU闭环前不运行CPU模式。
+
+head-softCE原生已完整核验：192更新、3072draws、16718944训练token；反馈非零logit梯度1032，
+回放1536。所有5个保存点encoder134张量字节不变。原生暂选96，不是最终保存选点。
+原生curve update: pureQ / old：0 .5421875/.8078268544；12 .5273065476/.8078268544；
+24 .5506200397/.8064063999；48 .8018849206/.8040093829；96 .8033730159/.7589886267；
+192 .7944444444/.7848433276。终点并非最佳。
+Native audit: training-optimization-dev-v1/native-audits/source128-answer-quality-direction-head-softce-seed0-u192-opt-v1/analysis.json
+原生CPU5798.778744966已账本计量；35字段175.0280778329994 CPU空闲结算，不重复原生。
+目前只有新共同GPU启动/启动核验、v206自身及未来残差待记。v205之前全部明确待记已结算。
+新优化原生1/3闭合，完整保存GPU0/3，CPU确认0，Host0。下一臂head-set，再full-softCE。
+
+v205刷新诊断保留：48→96的27旧标签损失均转REFRESH_VIEW，24单正例；早先多正例CE冲突
+不直接解释这些具体损失，旧偏好拒绝≠实际Host失败；质量平局/覆盖/实际下游仍须检验。
+来源API32库320新来源/320重放、350片段700解析、32跨库拒绝已实际通过，模型/Host0；
+仅独立集成库，不能当未来策略bank或Host已知。新dev27兼容2限定5未知、32普通问题320段、
+aux45164行次字面0匹配保持；确认64未导出，评估角色禁止梯度，完整暴露/语义/最终冻结仍待。
+原6/9拟合、保存CPU36、完整选择6/9、整臂retention5/9仍保持；原CE12848旧860、delivery三臂、
+原Host及全Q/功能/compact/aux/种子/生命周期/外测/四图均未完。禁SHA/子代理/新服务/第二账本/远端写入。
+
+# Previous v205（进度与待记清单已更新）
+
+# LATEST: 2026-10-30 goal ACTIVE; v205 head-softCE192更新完成，终点闭环待核
+
+唯一作业：source128-answer-quality-direction-head-softce-seed0-u192-opt-v1；协调 1065057 / 训练 1065060。
+Driver COMPLETED，原生 COMPLETED；/proc {'pid': False, 'child_pid': False}。
+192/192、3072/3072draws；终点旧dev 860/860、反馈 64/64。
+Driver: artifacts/evidence-gap-20261023/training-optimization-dev-v1/dispatch/fit/source128-answer-quality-direction-head-softce-seed0-u192-opt-v1/driver.json
+结束先closure-commands-v1的native_audit（全曲线/所有参数范围/账本），空闲结算后新GPU
+共同924和保存12/24/48/96各64、192共924，全六点选取及实际所选旧860/整臂GPU核验。
+然后head-set、full-softCE，再所选CPU924；0复用原基线，不反选CPU。运行中禁止第二模型、
+离线账本、重试。新成本helper settle_one_job_cpu_v1.py MODE ID INVENTORY OUTPUT PHASE；
+verification CPU由inventory显式加入，helper只加driver残差/协调CPU，须全局模型空闲。
+
+原生96纯质量.8033730158730158 /old.7589886267043402；48为.8018849206349206/.8040093828579089。
+48→96变42选择（8masked）；27接受→拒绝，2反向。27全转REFRESH_VIEW：SEARCH2/READ6/
+HANDOFF19，8族。保存96 encoder134张量全不变，non_encoder31/36变。
+24/27为单正例，48原正确选择CE正梯度0，早先多正例梯度冲突不直接解释这些损失。
+旧source_reviewed_preference拒绝不是Host失败，不直接把刷新偏好称任务能力丢失。
+反馈原始方向pair1019、质量tie489（REFRESH/HANDOFF61）、unknown758；回放正操作
+READ441/HANDOFF81/SEARCH246。计数不是梯度/因果；保留head-set/full-Q、Q-tie/soft-target/
+coverage及实际Host，未改冻结选择或加硬动作规则。详见reflection-after-native96-v1.json。
+
+新dev来源API实际通过：32隔离库、320新Source、320重放、350片段/700次解析、32跨库拒绝。
+模型/embedding/Host0，账本字面未变，所有原文重开后保持；runtime源码literal快照已留。
+报告：two-wiki-evaluation-sources-dev-v1/dev-host-binding-v1/source-roundtrip-v1/analysis.json。
+这不是未来策略bank或Host已知，不证明语义/生命周期收益。dev参考27兼容/2限定/5未知、
+32普通问题/320段、aux45164行次字面0匹配保持；确认64未导出，全部96禁止梯度。
+
+30明确待记字段142.22674687200004 CPU＋v205自身＋未来终点残差，见v205。未知不补零。
+原6/9拟合、保存CPU36、完整选择6/9、整臂retention5/9、Host0；原CE128所选48旧860、
+delivery三臂及全部Q/功能/compact/aux/种子/生命周期/外测/四图仍未完。
+禁SHA/指纹/子代理/新服务/第二账本/远端写入。
+
+# Previous v204（当前进度与待记清单以v205为准）
+
+# LATEST: 2026-10-30 goal ACTIVE; v204 head-softCE更新96，dev32普通任务已绑定
+
+唯一模型：source128-answer-quality-direction-head-softce-seed0-u192-opt-v1。
+协调 1065057 / 训练 1065060，/proc均存在；96/192、1536/3072draws。
+Driver: artifacts/evidence-gap-20261023/training-optimization-dev-v1/dispatch/fit/source128-answer-quality-direction-head-softce-seed0-u192-opt-v1/driver.json
+冻结encoder、Q-direction、softCE回放，原2a依赖＋最小overlay、CUDA2,3。
+禁止第二真实模型、活跃时离线账本写入、自动重试。终点先closure-commands-v1中native_audit，
+再新GPU共同924＋全六点，完整选择、实际所选旧860和整臂GPU；然后head-set、full-softCE。
+三臂GPU后各唯一所选CPU924，选0复用实际原基线、不反选CPU；CPU链见cpu-confirmation-readiness-v1。
+原48点：纯质量ANSWER .8018849206349206（基线.5421875）；old .8040093828579089
+（基线.807826854448818）。只是原生中途观察，不是保存选点、集合回放胜出或Host收益。
+保存12参数范围已实核：encoder134张量全不变，non_encoder36中31变；全点终止核验仍必做。
+
+TwoWiki dev32原生参考只在完整来源审阅冻结后打开。native-dev-reference-comparison-v1/
+semantic-compatibility-v1.json：27来源支持答案兼容，2原有范围限定；5未知保持。
+先前完整解释句与短参考字符串raw equality0不是语义错误。短答案提取在看过参考后进行，
+逐个绑定冻结来源解释的literal span，不能称独立盲审。原审阅字节未改，确认64答案/正文未导出。
+原生参考不替代来源未知或Host知识；没有新的操作/训练/实际Host标签。
+
+新增dev-host-binding-v1/actual-v1/histories.json：32普通原文问题、320逐字来源段落，
+5未知任务全保留，完整Source格式复用既有helper；明确移除旧采集helper强制取证前缀，
+模型输入仅原问题，无reference/support/review字段，无prefetch或理想View。2测试、mypy、
+最终Ruff和实际32/320字段/字面核对通过。offline-bindings.json供未来真实source-import收据
+逐段绑定；当前真实银行导入0、Host0，确认history0，全部禁止梯度。静态QA不是生命周期成绩。
+
+v203辅助字面检查45164行次匹配0保持，非完整无暴露/来源独立证明；既有背景依赖仍在。
+本轮24明确待记字段134.529797191 CPU＋v204自身＋未来模型残差；不重复已结算或嵌套成本。
+原6/9拟合、保存CPU36、完整选择6/9、整臂retention5/9、Host0；原CE128所选48旧860、
+delivery三臂及原自主Host明确保留。完整Q/功能/compact/aux/种子/生命周期/外测/四图未完成。
+禁SHA/指纹/子代理/新服务/第二账本/远端写入。
+
+# Previous v203（当前进度与待记清单以v204为准）
+
+# LATEST: 2026-10-30 goal ACTIVE; v203 head-softCE更新43，来源输入检查完成
+
+唯一模型：source128-answer-quality-direction-head-softce-seed0-u192-opt-v1。
+协调 1065057 / 训练 1065060，两者/proc确认存在；当前43/192、688/3072draws。
+Driver: artifacts/evidence-gap-20261023/training-optimization-dev-v1/dispatch/fit/source128-answer-quality-direction-head-softce-seed0-u192-opt-v1/driver.json
+冻结encoder，Q-direction，softCE回放；原2a依赖＋最小overlay、CUDA2,3。运行中不启动第二
+真实模型、不写离线账本、不重试。终点先closure-commands-v1的native_audit，含所有保存点
+参数冻结验证；再新GPU共同924及全六点，完整选择/实际所选旧860/整臂GPU核验。
+然后head-set、full-softCE；三臂GPU比较后每个唯一所选CPU924，不反选CPU检查点。
+CPU确认链：training-optimization-dev-v1/cpu-confirmation-readiness-v1.json；
+2测试、Ruff/mypy通过；launch_one_job_v2.py cpu RUN_ID，仅全部GPU闭环后；
+若选0复用实际原CPU基线，无新模型。v1运行协调器原样保留。真实新CPU确认0。
+
+已完成原生0/12观察：old均.807826854448818；纯质量ANSWER .5421875→.5273065476190476，
+原生24已完成：old .8064063999033634，纯质量ANSWER .5506200396825397。
+这些是未完成全曲线的早期观察，未证稳健收益，不提前选择。保存12直接字节核对encoder134张量全不变，
+non_encoder36张量中31变；最终所有点仍需核验。首次报告假定head键导致KeyError已保留，
+真实schema为non_encoder，失败CPU未知；没有模型失败/重跑。
+
+TwoWiki辅助输入字面检查已实际完成：aux512/2048/8192及query-dev32，行次2052/8184/32720/2208
+（合计45164），新96族179条完整来源记录，匹配0。code-v2及actual-v2/analysis.json位于
+two-wiki-evaluation-sources-dev-v1/auxiliary-input-boundary-v1；3测试/Ruff/mypy通过。
+首次splitlines误拆Unicode正文分隔符，复用现有read_jsonl物理行读取，数据无改动、失败/partial保留。
+辅助训练均未运行；零字面重叠不是无历史/预训练暴露或96独立来源证明。确认正文未导出，
+query-side确认64正文未打开；原背景分量、角色限制、语义/最终冻结/真实Host义务仍保留。
+
+当前16个明确待记字段120.130684924 CPU＋v203自身＋未来模型残差；详见v203。
+原生成本及上轮结算不重计，失败辅助v1 whole child+wrapper仅计一次，v2 nested+residual。
+原6/9拟合、保存CPU36、完整选择6/9、整臂retention5/9、新Host0保持。
+原CE128所选48旧860、delivery三臂、原自主Host及全Q/功能/compact/aux/生命周期/外测/四图仍未完。
+禁SHA/指纹/子代理/新服务/第二账本/远端写入。
+
+# Previous v202（进度与待记清单以v203为准）
+
+# LATEST: 2026-10-30 goal ACTIVE; v202 用户要求反思优化，head-softCE 运行
+
+用户最新指示：反思当前训练问题，自行优化改进。优先级已明确调整，原完整目标仍保留。
+唯一模型：source128-answer-quality-direction-head-softce-seed0-u192-opt-v1；协调 1065057 / 训练 1065060。
+Driver: artifacts/evidence-gap-20261023/training-optimization-dev-v1/dispatch/fit/source128-answer-quality-direction-head-softce-seed0-u192-opt-v1/driver.json
+Q-direction，冻结 encoder，soft-CE 回放，共同u262，source128，192更新/3072draws。
+物理CUDA2,3，原2a运行依赖＋最小训练overlay；禁止第二模型、离线账本写入或自动重试。
+终止先执行 closure-commands-v1.json 内本臂 native_audit（含每个保存点参数冻结核对），
+再实际共同GPU924、12/24/48/96反馈64和192总924，完整GPU曲线选点，实际所选旧860，
+整臂GPU核验后先head-set，再full-softCE；三臂GPU比较后依次所选CPU924确认（不反选CPU最优）。
+study/保存计划/启动器/核验器均在 training-optimization-dev-v1。运行前读对应计划；
+GPU新协议不能冒充旧CPU曲线。full/head softCE承接既有Q方向/冻结参数对照，不重复训练旧ID。
+
+缓存回放384多正例中372当前选对，345的softCE所选logit梯度>1e-6。
+这是缓存分数上的解析梯度，不是参数梯度或遗忘因果证明。set回放已实现，默认softCE不变；
+反馈标签/采样/权重不变。已有冻结encoder eval模式原本正确，无需再修。
+26张量＋65协议测试、7文件mypy和最终Ruff通过。三旧检查点各50 GPU探针已实际核验，
+150选择变化0、配对前向约28.742–34.261倍；仅固定样本，不称全量等价或训练/Host收益。
+
+原CE128192 CPU924已退出且原单项核验，完整选择ANSWER48/delivery0已正式确定。
+原模型6/9；保存CPU36；完整保存选择6/9；整臂retention5/9；新Host0。
+原CE128所选48旧860/整臂retention、delivery32/64/128和原九臂后Host明确延后保留。
+原始九臂冻结协议不变，所有Q/tie/cost/soft-target/覆盖/compact/aux/生命周期/外测/四图目标仍未完。
+原终点及优化准备19字段154.21546050899624 CPU、GPU探针开销15字段41.42565486399999 CPU已结算。
+当前仅新head-softCE启动＋v202自身＋未来残差待记；原生成本不重复。
+TwoWiki来源审阅保持，auxiliary-input-boundary只有protocol未执行比较，勿称完成。
+禁SHA/指纹/子代理/新服务/第二账本/远端写入；未知成本不补零。
+
+# Previous v201（当前进程、计数和优先级由v202替代）
+
+# LATEST: 2026-10-29 goal ACTIVE; v201 CE128 早期四点核验，192终点运行
+
+唯一模型：source128-continued-ce-seed0-u192-v1/update-192，原 CPU924（旧860＋反馈64）。
+协调 2397344 / 评估 2397345，独立会话 2397344；当前 16/924。
+Driver: artifacts/evidence-gap-20261023/original-feedback-v2-saved-reload-v1/dispatch/source128-continued-ce-seed0-u192-v1/update-192/driver.json
+CPU4 FP32，shared_actions16384/head2048，CUDA 空，MHA off，reference_compile False。
+运行中不启动第二模型、不写离线账本，不重启/重试。终点结束先 ORIGINAL 单项核验，
+再对0/12/24/48/96/192完整保存曲线分别选择ANSWER/delivery。原生48/0仍只是临时值，
+update0可选；仅实际唯一早期所选点做旧860，然后整臂retention核验。
+随后原delivery32/64/128；原九臂全部保存闭环后再自主Host。
+原 verifier-tools-v2 必须排首 PYTHONPATH，后接原冻结CPU依赖。
+
+保存12/24/48/96各64条全部原核验，动作选择变化均0。
+ANSWER依次 .5197172619047619 / .513516865079365 / .5412946428571428 / .5308779761904762；
+delivery依次 .578125 / .5859375 / .6041666666666666 / .5885416666666666。
+原生拟合6/9完成，保存CPU35关闭，完整保存选择/保留性5/9，新Host0。
+96空闲6字段18.548970707000144 CPU已结算，原生成本未重复计量。
+当前仅新192启动、启动核验、v201自身和未来残差待记。新TwoWiki准备及审阅成本已在
+CE128 postfit89.53114925599955 CPU结算覆盖，不要再次加入。
+CE128原生192/3072、16730492训练token、1536目标行/249元数据族及v197观测修正保持。
+初始目录861 JSON包含summary，真正逐例预测860；不要把目录文件总数算成模型前向数。
+
+TwoWiki新评估角色/来源审阅保持v196：dev32/确认64均禁止梯度训练；27来源支持、3masked、
+2pool_insufficient，不是模型结果。实际问题池44背景分量，不称96独立来源；确认正文、
+问题、答案未导出给审阅端。原8族反馈dev与当前32训练前缀分别保持，完整暴露/运行时绑定/
+最终方法冻结/真实Host尚待完成。完整Q/reg/覆盖/F1/F2/F3/compact/aux/种子/生命周期/外测/四图目标未完。
+禁SHA/指纹/子代理/第二账本/新服务/远端写入；历史未知和原128旧孤儿记录不补零。
+
+# Previous v200（当前进程、计数与待记清单已更新）
+
+# LATEST: 2026-10-29 goal ACTIVE; v200 CE128 保存前三点核验，96 运行
+
+唯一模型：source128-continued-ce-seed0-u192-v1/update-96，原 CPU64 反馈评估。
+协调 2355157 / 评估 2355159，独立会话 2355157；当前 37/64。
+Driver: artifacts/evidence-gap-20261023/original-feedback-v2-saved-reload-v1/dispatch/source128-continued-ce-seed0-u192-v1/update-96/driver.json
+CPU4 FP32，shared_actions16384/head2048，CUDA 空，MHA off，reference_compile False。
+运行中不启动第二模型、不写离线账本，不重启/重试。结束先 ORIGINAL 单项核验，
+然后192终点 old860+feedback64，完整保存曲线后才选择两个CE目标，再实际唯一早期旧860。
+原生 ANSWER48/delivery0 仅临时；update0 可选。原 verifier-tools-v2 必须排首 PYTHONPATH。
+完成整臂后继续 delivery32/64/128；原九臂全部保存闭环后再原自主 Host。
+
+保存12/24/48各64条已原核验，动作差异均0。
+ANSWER 依次 .5197172619047619 / .513516865079365 / .5412946428571428；
+delivery 依次 .578125 / .5859375 / .6041666666666666。
+48空闲6字段16.295965219000088 CPU已结算，原生成本未重复计量。
+当前仅96启动、启动核验、v200自身和未来残差待记。
+原生拟合6/9完成，保存CPU34关闭，完整保存选择/保留性5/9，新Host0。
+CE128原生及初始JSON861=860预测+summary的观测修正保持v197。
+TwoWiki新评估角色及32来源审阅保持v196：27来源支持、5未知，不是模型成绩；
+96名义组不是独立来源证明，全部禁止梯度训练，确认正文未导出。
+原8族反馈dev、当前32族训练前缀保持分别身份，完整泛化/功能/生命周期/外测/四图目标未完。
+禁SHA/指纹/子代理/第二账本/新服务/远端写入；历史未知开销和孤儿记录不补零。
+
+# Previous v199（当前进程、计数与待记清单已更新）
+
+# LATEST: 2026-10-29 goal ACTIVE; v199 CE128 saved12/24 verified, saved48 running
+
+ONE LIVE MODEL: source128-continued-ce-seed0-u192-v1/update-48 ORIGINAL CPU64.
+Coordinator2309253/evaluator2309254,detachedsession2309253; actual 29/64.
+Driver: artifacts/evidence-gap-20261023/original-feedback-v2-saved-reload-v1/dispatch/source128-continued-ce-seed0-u192-v1/update-48/driver.json
+CPU4FP32/shared_actions16384/head2048,CUDAempty,MHAoff/referencecompileFalse.
+No secondmodel/offlineledgerwhilelive;no restart/retry. Atterminal ORIGINALsingleverify first,
+then96,192endpoint924, fullsavedcurve selection, uniqueactualearlyold860,whole retention.
+NativeANSWER48/delivery0 onlyprovisional. Original verifier-tools-v2 FIRST onPYTHONPATH.
+Saved12/24 closed64each, originalverified, bothchoicechanges0.
+12 ANSWER .5197172619047619 /delivery .578125;24 .513516865079365 /.5859375.
+Idle24 sixfields16.261662348999906CPUsettled; nativecostnotrebilled. Only48launch/launchverification,
+v199self/futureresidual pending. Nativefits6/9closed,savedCPU33,fullsavedselection/retention5/9,Host0.
+CE128native/data counters and v196JSONcount correction remain asv197.
+NewTwoWiki evaluation roles/source reviews asv196; no96independence/newHostclaims ortrainingadmission.
+Fulloriginal/Q/reg/coverage/F1/F2/F3/compact/aux/seeds/Host/lifecycle/external/fourfigures goalopen.
+NoSHA/fingerprints/subagents/secondledger/newservices/remotewrites; oldunknownspreserved.
+
+# Previous v198 (live job/counts/pending inventory superseded)
+
+# LATEST: 2026-10-29 goal ACTIVE; v198 CE128 saved12 verified, saved24 running
+
+ONE LIVE MODEL: source128-continued-ce-seed0-u192-v1/update-24 ORIGINAL CPU64.
+Coordinator2268423/evaluator2268424,detachedsession2268423; actual 42/64.
+Driver: artifacts/evidence-gap-20261023/original-feedback-v2-saved-reload-v1/dispatch/source128-continued-ce-seed0-u192-v1/update-24/driver.json
+CPU4FP32/shared_actions16384/head2048,CUDAempty,MHAoff/referencecompileFalse.
+No secondmodel/offlineledgerwhilelive;no restart/retry. Atterminal ORIGINALsingleverify first,
+then idlecosts/48,96,192endpoint924; fullsavedcurve beforeCEanswer/delivery selection.
+NativeANSWER48/delivery0 provisionalonly;update0eligible. Actualselectedearlyold860 thenwhole
+retention,delivery32/64/128,originalHost afterallnineclosed. ORIGINALverifier-tools-v2 FIRST.
+
+Saved12 closed64/ORIGINALverified; ANSWER .5197172619047619,delivery .578125,choicechanges0.
+Idle6fields18.208645209999908CPU settled, native12notrebilled. Nativefits6/9closed, savedCPU32closed,
+fullsavedselection/retention5/9,Host0. Only new24launch/launchverification +v198self/futureresidual pending.
+CE128terminal/v197nativecurve andinitial860+summaryJSONcountercorrection retained.
+NewTwoWiki dev32/confirm64 source preparation and32reviews asv196:27source-supported,5unknown,
+NOT model successes/96independent histories; all96gradientprohibited,confirmationunexposed.
+Original8dev/current-prefix32TRAIN separate. Fullgoal andallsource/aux/Host/lifecycle/external scopeopen.
+NoSHA/fingerprints/subagents/secondledger/newservices/remotewrites; oldorphanunknownspreserved.
+
+# Previous v197 (live job/counts/pending inventory superseded)
+
+# LATEST: 2026-10-29 goal ACTIVE; v197 original CE128 native closed, savedCPU12 running
+
+ONE LIVE MODEL: source128-continued-ce-seed0-u192-v1/update-12 ORIGINAL CPU64 feedback.
+Coordinator2224135/evaluator2224137,detachedsession2224135; actual native 56/64.
+Driver: artifacts/evidence-gap-20261023/original-feedback-v2-saved-reload-v1/dispatch/source128-continued-ce-seed0-u192-v1/update-12/driver.json
+CPU4 FP32,shared_actions16384/head2048,CUDAempty,MHAoff/referencecompileFalse.
+No second model/offline ledger write whilelive;no restart/retry. At terminal ORIGINAL single
+candidate verifier BEFORE offline costs/next model; then24/48/96/192(old860+feedback64).
+Full saved curve FIRST, then actual unique early selectedold860 andwhole retention. Native
+ANSWER48/delivery0 onlyprovisional, update0eligible. Then delivery32/64/128 andoriginalHost.
+Original verifier-tools-v2 FIRST onPYTHONPATH, originalfrozenCPU dependenciesafterit.
+
+CE128 native COMPLETE192updates/3072draws,16730492train tokens,1536target-bearing rows,
+249metadatafamilies (not128independentSource histories; no per-example nonzerogradclaim).
+Old-operation soft-ce, not own-trajectory imitation/pure-loss control. Former1837455/1837457gone,
+exit0; original frozen auditpassed. Nativecurve (update:answer/delivery/old):
+0:.5179811508/.6067708333/.8078268544;12:.5197172619/.578125/.7505894616;
+24:.5135168651/.5859375/.7796950714;48:.5412946429/.6041666667/.7552683276;
+96:.5308779762/.5885416667/.7675781774;192:.5301339286/.5859375/.7883204818.
+Nativefits6/9closed; savedCPU31closed,fullsavedselection/retention5/9,Host0.
+Idle settlement26fields89.53114925599955 CPU; native8477.44419598 notrebilled.
+settle_original_feedback_fit_cpu_v1.py available andactualnative settlementpassed.
+Only new saved12launch+launchverification+v197self+futureCPUresidual pending.
+Observationcorrection:v196 initialJSONcount861 included summary.json; actual numericpredictions860.
+No model/result/cost change. Never use raw glob JSONcount asforwardcount.
+
+v196 TwoWiki neweval roles dev32/confirm64 andall32source-first reviews closed; source27supported,
+3masked(2,15,22),2pool_insufficient(17,27), notmodelsuccesses. Review-added3bodies boundaryclear.
+Nominal96 notindependentsources:actual96question pools44backgroundcomponents, whole179rows30.
+Confirmation bodies/questions/answers unexported; all96gradientprohibited; oldfeedback8dev and
+current-prefix32TRAIN unchanged. Full exposure/runtimebinding/finalmethodfreeze/actualHost pending.
+Summary:two-wiki-evaluation-sources-dev-v1/summary-v1.json; registry indata/manifests/evidence-gap-two-wiki-evaluation-source-reservation-20261029-v1.json.
+Original fullQ/reg/coverage/F1/F2/F3/compact/aux/seeds/Host/lifecycle/external/fourfigures remainopen.
+NoSHA/fingerprints/subagents/secondledger/newservices/remotewrites. Olderorphanuncertainty preserved.
+
+# Previous v196 (live job/counts/pending inventory superseded)
+
+# LATEST: 2026-10-29 goal ACTIVE; v196 CE128 running, new TwoWiki eval/source review prepared
+
+ONE LIVE MODEL: original source128-continued-ce-seed0-u192-v1, coordinator1837455/trainer1837457,
+detachedsession1837455, physicalCUDA[2,3]. Native 153/192 updates,2448/3072 draws, source2a179b58.
+Driver: artifacts/evidence-gap-20261023/original-feedback-v2-fit-dispatch/source128-continued-ce-seed0-u192-v1/driver.json
+Old-operation soft-ce,1536train,shared_actions16384/head2048,micro1/accum16,seed0,u262init.
+No secondmodel/offlineledgerwritewhilelive;no restart/retry. Terminal ORIGINAL native audit FIRST,
+idle exactcost settlement, all savedCPU12/24/48/96/192, complete CE selection, uniqueactualearlyold860,
+whole retention, then delivery32/64/128. Original verifier-tools-v2 FIRST on PYTHONPATH.
+Native6started/5closed, savedCPU31, complete savedselection/retention5/9, Host0. CE64 closure asv195.
+
+NEW two-wiki-evaluation-sources-dev-v1/summary-v1.json, actual-v1/allocation.json, code-v1.
+Reservation: data/manifests/evidence-gap-two-wiki-evaluation-source-reservation-20261029-v1.json.
+Official TRAIN archive only167454rows/46642nativeentity+supporttitlegroups; old80 assigned/review
+families excluded. Seed20261029 order/quotas fixed before bodies:dev32(8native4+24native2),
+confirmation64(16native4+48native2). Wholefamily boundaries,7pre-review rejections; no rerolls or
+post-quality replacements.96selectedquestions/179wholefamilyrows,max14; original largest96347
+family was NOT pre-excluded by oldroles, but normal boundary screening applies. No source edits.
+All96 are evaluation-only, gradient training prohibited. These are NOT original feedback8dev or
+current-prefix32TRAIN cohort; no new collection/scorer/Host calls. Confirmation bodies/questions/
+answers NOT exported to reviewer. Private boundary only, native answer/evidence values unused.
+
+All32dev visible pools/320paragraph positions reviewed before native answers/model outcomes.
+Frozen review: dev-source-review-complete-before-native-v1.json.27supported,3masked(indices2,15,22),
+2pool_insufficient(17,27). Supported minima20x2paragraph,3x3,4x4;29complete proof sets incltwo extra
+album alternatives.2supported casesqualified(primary-director/original-artist scope). No27successclaim.
+Unknowns include Alex Wright identity, geographic Host-knowledge bridge, multinational band scope,
+and nationality not implied by work/residence. No unknown->negative,automaticHANDOFF,taskdrop,
+source repair or cross-family knowledge transfer. All32 positions retained; source-author notindependent.
+Postreview full native+complete/qualified/partial targets adds3distinctbodies(indices15/28),
+protected/currentpublic/cross-new-family target conflicts0. No native answer comparison yet.
+
+Background dependence REMAINS:whole179row pools yield30components(largest66);actual96question
+pools44components(largest22). Actual5cross-role components touch17dev+37confirm families.
+Do NOT call96independent sources or formalconfirmation admission. Fullhistorical/auxiliary/
+pretraining exposure, finalmethod/settings freeze, semantic confirmation andactualHost results pending.
+PriorMuSiQue77/sensitivity66 census retained; newroles do not retroactively change oldsplits.
+11tests+mypy andfinalRuff passed; initial test-import formatting failure retained; literal frozen
+helpercopies verified, noSHA. Prepared data/labels are not executed branch outcomes.
+
+20explicit pending fields(62.326368364CPU)+v196self+futureCE128residual.
+Whole-child/nested copies not extras; protocol includesorder creation; summary includesreservation.
+Author reasoning/interactive overhead unknown. Noledgerwriteswhilefitlive.
+Full original/Q/reg/coverage/F1/F2/F3/compact/aux/seeds/Host/lifecycle/external/four-figure goalopen.
+NoSHA/fingerprints/subagents/secondledger/newservices/remotewrites.
+
+# Previous v195 (live counters and pending inventory superseded)
+
+# LATEST: 2026-10-29 goal ACTIVE; v195 CE64 fully closed, original CE128 native running
+
+ONE LIVE MODEL: source128-continued-ce-seed0-u192-v1 ORIGINAL2a native fit.
+Coordinator1837455 / trainer1837457, detached session1837455; CUDA physical[2,3].
+Driver: artifacts/evidence-gap-20261023/original-feedback-v2-fit-dispatch/source128-continued-ce-seed0-u192-v1/driver.json
+Output: artifacts/evidence-gap-20261023/original-feedback-v2-fitting-v1/source128-continued-ce-seed0-u192-v1
+Actual native RUNNING, optimizer0/192, draws0/3072; initial dev prediction files614.
+Actual first GPU prediction verified, not just launch receipt. Objective soft-ce (old operation
+states, NOT own-trajectory imitation),1536train,860olddev,64feedback; shared_actions16384/head2048,
+micro1/accum16,encoder unfrozen,originalu262 init,seed0,gradientcheckpointing,referencecompileFalse.
+Do not claim training updates before actual native counters advance. No second model/offlineledger
+writes while live. No restart/retry. At terminal: ORIGINAL native audit first, idle knowncost
+settlement, original saved12/24/48/96/192, full CE target selection, only actual unique earlyold860,
+whole retention. Then delivery32/64/128. Original verifier-tools-v2 FIRST on PYTHONPATH.
+
+CE64 selected12 old860 closed exit0; former1156350/1156351 absent. Original single and whole
+retention verifiers passed. Both targets select12: ANSWER .5412946428571428, delivery .6197916666666666.
+OldCPU .7303698729744793,427/616accepted,244masked; -7.745698147pp versusbase .807826854448818.
+One native/saved choice difference: index24 memops_A19 read_4->read_6, both NOT accepted;
+metric unchanged. No reselection/retry. Endpoint prior two differences and all exposure kept.
+Nativefits started6/9,closed5/9; savedCPUclosed31; full savedselection/retention5/9; Host0.
+Closure: original-feedback-v2-source64-continued-ce-retention-closure-v1.json.
+Idle settlement24 explicit fields61.2019486760021 CPU; native43119.072902167 not rebilled.
+Generic settle_original_saved_retention_cpu_v1.py now available: requires single+whole audits,
+explicit inventory, no live model, exact one ledger delta. Wholeaudit child CPU includes nested
+retention.json CPU; never bill both. Only CE128 launch+launchverification+v195 self/future residual pending.
+
+v194 confirmation census remains: primary77 target-connected components (78families/129questions),
+any-public-overlap sensitivity66, not independent Source proof; formal32+64 not achieved.
+v192 compact preparation and corrected source32 supervised332directions/160states remain.
+All original/Q/reg/coverage/F1/F2/F3/compact/aux/seeds/Host/lifecycle/external/four-figure scope open.
+Old128 endpoint staleRUNNING driver but native closed and old residual unknown remains preserved.
+No SHA/fingerprints/subagents/secondledger/newservices/remotewrites.
+
+# Previous v194 (live job/counts/pending inventory superseded)
+
+# LATEST: 2026-10-29 goal ACTIVE; v194 selected12 running, source confirmation census complete
+
+ONE LIVE MODEL: source64-continued-ce-seed0-u192-v1/selected-retention-12.
+Coordinator1156350 / evaluator1156351, detached session1156350; actual native 95/860.
+Driver: artifacts/evidence-gap-20261023/original-feedback-v2-saved-reload-v1/dispatch/source64-continued-ce-seed0-u192-v1/selected-retention-12/driver.json
+CPU4 FP32/shared_actions16384/head2048; no restart, second model or offline ledger write while live.
+After terminal: ORIGINAL single retention verifier BEFORE offline ledger writes, then whole
+retention audit, idle settlement, CE128 and delivery32/64/128. Original verifier-tools-v2 first.
+CE64 both targets select12; nativefits5/9, savedCPU30, selections5/9, wholeretentions4/9, Host0.
+Endpoint differences, original128 stale driver/unknown residual and all v193 evidence preserved.
+
+NEW confirmation-source-components-dev-v1/summary-v2.json, actual-v3/audit.json, code-v3.
+Private census4834rows/2417questions,528 old seed/target families,49 original reservations;
+current public operation fixtures288 sourcegroups. Answers/question text never accessed as
+fields or emitted; paragraph/title/native-support flags only private boundary keys; modelcalls0.
+Native target-to-any-pool graph223 components, largest266 families. After old violations/current
+native-target overlaps/reservations,77 components (78nominal families/129questions/258rows),
+74two-hop and3three-hop. Cannot supply separate32+64 components from this declared pool;
+19 short under this boundary. No new role assignment; old49 retained; no independence claim.
+All literal-pool/title graphs each connect all528. This is NOT effective sample size1, identical
+questions, or automatic corpus rejection. Current public any-body overlaps182 families versus
+native-target25; no previously boundary-clear group gains a new native-target conflict.
+Any-public-overlap sensitivity leaves66; earlier summary-v1 treated this too strongly and is
+SUPERSEDED. Primary77, sensitivity66. Broader historical/auxiliary/pretraining exposure,
+semantic independence/source quality and final method freeze remain unproven.
+5tests+mypy passed; final Ruff passed. Final line wrap AST-equal to actual unchanged code-v3.
+Initial PRIVATE-sentinel fixture/type/line failures and prior census versions retained.
+
+17 explicit pending fields (9.442032291 CPU) +v194 self +future selected12 residual.
+No ledger writes during current model. Protocol-v2/v3 creation already in wrappers; no copied
+whole-child/audit double billing. Original full plan remains open, including formal new Sources,
+Q/reg/coverage/F1/F2/F3/compact/aux/seeds/Host/lifecycle/external/four final figures.
+No SHA/fingerprints/subagents/secondledger/newservices/remotewrites.
+
+# Previous v193 (live observation and pending inventory superseded)
+
+# LATEST: 2026-10-29 goal ACTIVE; v193 CE64 saved selection closed, selected12 old860 running
+
+ONE LIVE MODEL: source64-continued-ce-seed0-u192-v1/selected-retention-12.
+Coordinator1156350 / evaluator1156351, detached session1156350; actual native 12/860.
+CPU4 FP32, shared_actions16384/head2048, CUDAempty, MHAoff/referencecompileFalse.
+Driver: artifacts/evidence-gap-20261023/original-feedback-v2-saved-reload-v1/dispatch/source64-continued-ce-seed0-u192-v1/selected-retention-12/driver.json
+No second model or offline ledger write while live. Do not restart on interruption.
+After terminal: ORIGINAL verify_one_saved_feedback_retention_v1.py BEFORE ledger writes,
+then original whole retention audit, idle settlement, CE128, delivery32/64/128.
+ORIGINAL verifier-tools-v2 FIRST on PYTHONPATH; frozen CPU runtime after it.
+
+CE64 endpoint924 closed and original single candidate + full six-point selection verified.
+Both targets select12 (earliest answer tie12/96/192): answer .5412946428571428,
+delivery .6197916666666666. Only ONE selected old860 required; now running.
+Feedback argmax changes0 at all six points. Endpoint oldCPU .7636770890958009,
+449/616 accepted,244masked; native .7649270890958009. Two READ differences:
+index85 memops_B30 accepted->accepted; index224 memops_F01 accepted->unaccepted.
+Saved-minus-native old macro -0.125pp, not an isolated quantization effect; no retry/reselection.
+Native fits5/9, actual savedCPU closed30, selections5/9, whole selected-retentions4/9, Host0.
+Old source128 endpoint driver remains staleRUNNING but native924 COMPLETE and bothPIDsabsent;
+its old parent exit/residual uncertainty remains UNKNOWN, not another live model.
+
+Idle endpoint settlement70 explicit fields495.1797013499897 CPU; native43940.522878243006
+not rebilled. Only selected12 launch + launch-verification + v193 self + future residual pending.
+Offline endpoint-difference v1 failed due native-parser/saved-layout mismatch; retained;
+v2 uses ORIGINAL verify_job and passed. Failed diagnostic CPU unknown. Metadata print later
+truncated two already-exposed old-dev records; use explicit scalar/identity fields only.
+
+v192 matchedcompact preparation, corrected source32 supervision and all prior scope remain.
+No new compact/Q/reg/coverage/aux/Host/lifecycle/external model results. Complete plan open.
+No SHA/fingerprints/subagents/secondledger/newservices/remotewrites.
+
+# Previous v192 (current process, counts and pending inventory superseded)
+
+# LATEST: 2026-10-29 goal ACTIVE; v192 CE64 endpoint running; matchedcompact pipeline prepared
+
+ONE LIVE MODEL: source64-continued-ce-seed0-u192-v1/update-192 ORIGINAL CPU924.
+Coordinator425164 / evaluator425179, detachedsession425164; actual native 753/924.
+Driver: artifacts/evidence-gap-20261023/original-feedback-v2-saved-reload-v1/dispatch/source64-continued-ce-seed0-u192-v1/update-192/driver.json
+CPU4 FP32,shared_actions16384/head2048,CUDAempty,MHAoff/referencecompileFalse.
+No secondmodel/offlineledgerwritewhilelive;no restart/retry. Afterendpoint: ORIGINALsingle
+candidateverify beforeledgerwrites,fullsavedselectbothCEtargets,actualuniqueearlyold860,
+wholeoriginalretention,thenCE128/delivery32/64/128. Native12provisionalonly.
+Nativefits5/9,savedCPUclosed29,fullsavedselection/retention4/9,Host0. v191early4metricsretained.
+
+NEW compact-matched-training-dev-v1/summary-v2.json, study-v2.json, saved-plan-v1.json,
+closure-plan-v2.json,analysis-tools-v2. Localhelpercommit1caf53d9d789d19e3161f42bc62c68627f29eb86.
+NativeoperationRuntime fromoriginald6a8afd3,feedbackRuntime fromoriginal2a,CPUevalRuntime from
+originalCPUfreeze. EachONLY3files amended:compact_actionsCLItrain/eval andprojectionJSONwhitespace
+branch;reversingeditsrecoversoriginalbytes. Sharedpaths/instructions/sampling/lossesunchanged.
+Original frozen inputs/methods unmodified. Request-text remainsseparate.
+
+Matchedcompact A: fullsource256operation524updates/8384draws,base multilingualcheckpoint,
+12288/head2048;all7savedCPUoperationprimarycandidates,thenactualselected4886train.
+B: source128originalANSWER192updates/3072draws,16384/head2048. INITNULLuntilACTUALcompact
+operationCPUselection+matchingtrain+explicitselectedtokenizerfullfeedbackaudit. Neverlabel
+oldsharedu262compact-trained. Exactoperationrecipe andtokenizer/runtime/oldfeedbackdata lineage
+checked. Baselineoldmasked64output791remainsunknown;no retry ofthat historicalgap.
+Operationraw7884/labelled4886 rows;actual8384draws/lossweights/2passes/optionsmatchoriginal;
+sharedtrainingtokens48034873reproduced,expectedcompact45881938(-4.4820%). NativeSDKall4886train,
+860dev,16oldfeedback checked;5762actualshared inputfiles equal;head/markers/targets/order/values
+unchanged,no drops/maskreplacement. Maxcompacttrain9429/dev9433/feedback7503.36one-optiondev,
+0one-optiontrain. No per-example nonzero-gradientclaim.
+Feedbackall1536train/860olddev/64feedback checked;3072draws/weights/optionsmatchoriginal128pair;
+sharedtokens16718944reproduced,expectedcompact15869414(-5.0812%).924actualshared evalinputfiles
+match;trainproofisoriginalprojection+data/native lengths/options,notinventedtraininputfiles.
+Maxcompact11232/9433/10227,no drops/maskreplacement. Actualfutureselectedtokenizer mustrecheck.
+BothauditsCPUtokenizationonly,weights/forward/network/CUDAinit0. No equaltoken/FLOPsclaim.
+
+10working+10frozen helpertests,Ruff/mypy2/toolsboundaryPASS. Native/savedusedprojection
+AST andliteralcodec/requesttext/providerbytesmatch;6CLIchecks showcompact admission.
+Originalcoreverifierscopiedunchanged; individualjobprotocolmaximum15SAVEDjobs +2NATIVEfits,
+not17jobsalreadyrun.30-position format/Hostpilot remainsfirst,allmodels/Hostresults0.
+Oldpredictor/source32/quality/LME/current32queuesnotchanged;noall-variantcompactgrid.
+Firstauditsfailedbecausebudgetedrun.epochs=None; nowuseoriginalverifier'spositiveunusedepoch
+argwithactualupdatebudget andrequireexacttraining-plan equality. Failedreceiptsretained.
+Lint/type/testfixture failuresretained;finalbindingsvalidatecorrectoperationrecipeandmetadata.
+
+64 explicitpendingfields (441.671737499 CPU) +v192progress/futureendpointresidual.
+DoNOTbillcopied closure-plan-v2.cpu_seconds_pending:originalv1measurealreadylisted;
+v2creationisin helper-freeze-v2. Noledgerwriteswhilemodelalive. Unknownoverheadsnotzeroed.
+PriorSource32quality-costreadout/correctedloss332directions160states remainasv191;
+LMEunattemptedcontinuation/current32four-slot frozenprotocols remainunexecuted.
+Fulloriginal/Q/reg/coverage/F1/F2/F3/compact/aux/seeds/Host/lifecycle/external/four-figuregoalopen.
+NoSHA/fingerprints/subagents/secondledger/newservices/remotewrites.
+
+# Previous v191 (modelprogress and pendinginventory superseded)
+
+# LATEST: 2026-10-29 goal ACTIVE; v191 CE64 early4 verified; endpoint192 running
+
+ONE LIVE MODEL: source64-continued-ce-seed0-u192-v1/update-192 ORIGINAL CPU924 (old860+feedback64).
+Coordinator425164 / evaluator425179, detachedsession425164; actual native 15/924.
+Driver: artifacts/evidence-gap-20261023/original-feedback-v2-saved-reload-v1/dispatch/source64-continued-ce-seed0-u192-v1/update-192/driver.json
+CPU4 FP32, shared_actions16384/head2048, CUDAempty, MHAoff/referencecompileFalse.
+No secondrealmodel/offlineledgerwritewhilelive. No restart/retry.
+
+CE64 earlysaved12/24/48/96 each64 closed+ORIGINALverified;feedbackargmaxchanges0.
+ANSWER .5412946428571428/.5145089285714286/.5308779761904762/.5412946428571428.
+Delivery .6197916666666666/.59375/.5963541666666666/.6041666666666666.
+Afterendpoint: ORIGINAL verify_one_saved_feedback_candidate_v1.py beforeidlecosts,
+thenfullsavedselectanswer/delivery,onlyactualuniqueselectedearlyold860,wholeretention.
+Nativebest12 isPROVISIONAL. No diagnostics oroldmetricschangeoriginalselection.
+Originalnativefits5/9,savedCPUclosed29,fullsavedselections/retention4/9,Host0.
+RemainingCE128/delivery32/64/128. ORIGINALverifier-tools-v2 FIRST onPYTHONPATH.
+96idle9fields31.904789128CPUsettled;native96notrebilled. Onlynewendpointlaunch+verification,
+v191progressandfutureendpointresidualpending. v190containsclosed96+diagnostic evidence.
+
+ACTUALsource32 savedquality/cost readout: saved-quality-cost-diagnostic-dev-v1/summary-v1.json.
+12points24targetreadouts,11uniqueoldjobs reverified;originalsourcepool/selection unchanged.
+Fixed192pair-minusCE ANSWER29.6751pp =qualitydirection28.5590+costtiebreak1.11607pp;
+delivery27.0833pp =26.8229+.260417pp. Exactoriginalstate/familydenominator,notcausaltrainingattribution.
+ANSWER quality109pairs53states8families vs cost15pairs13states7families;
+delivery139/59/8 vs24/19/7. Conditionalgroupaccuracieshavedifferentsupportandarenotadditive.
+NewQdir/Qtie/Qcost fitsstill0;notHostaccuracy/calibratedtaskprobability/independentconfirmation.
+
+SUPERVISION CORRECTION remainsimportant: Originalpair_loss SKIPS tie ANDunknown.
+Actual332directionsin160/192feedbackrows;35ties+195unknowns excluded.6tie-only+26all-unknown
+rowsremainwithoutfeedbackloss terms;192CEreplayrowsseparate.367/166areknownREVIEWjudgments,
+notoriginaltrainedtarget/statecounts. Frozenoldscalargradientproof confirms;Q-tie isdifferent.
+Correctedfigure original-source32-pair-ce-dev-v2/original-source32-pair-ce-stage-v3.png and
+summary-v2.json. Allcurves/weights/metrics/selections unchanged;priorfigures retained.
+
+LMEknownoldoverflowcompactdiagnostic/frozencontinuation andcurrent32four-slot pipelines retain
+v186/187constraints. Noactual451/current32/Hostresults inferred fromofflineproofs.
+Fulloriginal/Q/reg/coverage/F1/F2/F3/compact/aux/seeds/Host/lifecycle/external/four-figuregoalopen.
+NoSHA/fingerprints/subagents/secondledger/newservices/remotewrites.
+
+# Previous v190 (idle queue/accounting superseded)
+
+# LATEST: 2026-10-29 goal ACTIVE; v190 earlyCE64 saved4 verified; IDLE beforeendpoint
+
+CE64 saved12/24/48/96 complete+ORIGINALverified64each;allfeedbackargmaxchanges0.
+ANSWER12 .5412946428571428,24 .5145089285714286,48 .5308779761904762,96 .5412946428571428.
+Delivery .6197916666666666/.59375/.5963541666666666/.6041666666666666.
+Former96 parent370390/child370441 gone,exit0. NO live model at this checkpoint.
+NEXT settle96 usingv190 inventory;launch ORIGINAL endpoint192 old860+feedback64=924.
+FullsavedselectionONLYafterendpoint,thenactualuniqueearlyold860 andwholeoriginalretention.
+Nativefits5/9,savedCPU29,fullsavedselections/retention4/9,Host0. RemainingCE128/delivery3.
+
+NEW saved-quality-cost-diagnostic-dev-v1/summary-v1.json: ACTUAL source32 pair/CEsaved6points,
+12points24targetreadouts,11uniqueoriginalsavedjobs reverified. Sameoldlabels/selectionunchanged.
+Exactoriginalstate/familydenominator retained;originalscore=qualitydir+costtiebreak contribution.
+Fixed192 pair-minusCE ANSWER29.6751pp =quality28.5590+cost1.11607pp;
+delivery27.0833pp =quality26.8229+cost.260417pp. Thisismetricarithmetic,notcausaltrainingattribution.
+ANSWER quality109pairs/53states/8families,cost15pairs/13states/7families;
+deliveryquality139/59/8,cost24/19/7. Conditionalgroupaccuracieshavedifferentsupport,notadditive.
+OriginalANSWER quality-directionweightedmass.8814484,delivery.8489583;groupgainsnotindependent.
+Qdir/Qtie/Qcostrealtrainingstill0. No Hostaccuracy/taskcalibration/independentclaim.
+Originalpair skips35ties+195unknowncomparisons;332lossdirections/160feedbackrows,NOT367/166.
+367/166describeknownreviewjudgments.6tie-only+26unknownrowsretained;192CEreplayrowsseparate.
+Current32figure original-source32-pair-ce-dev-v2/stage-v3 andsummary-v2 containcorrection.
+
+Saved48idle21fields29.368201829CPUsettledinclallpriorhelper/correctiontests/renders.
+v190pendingonly96launch+verification,actualsaveddiaganalysis/verification/summary+self,
+then96verifier/driverresidualaddedbygenericsettler. No native/historicalrebilling.
+Originalverifier-tools-v2 FIRST onPYTHONPATH fororiginal9;newQhelperonlyforadditionalreadout.
+NoSHA/fingerprints/subagents/secondledger/newservices/remotewrites. Fullgoalscopeopen.
+
+# Previous v189 (queue/accounting and diagnostic completion superseded)
+
+# LATEST: 2026-10-29 goal ACTIVE; v189 CE64 saved48 verified; IDLE before next96
+
+OriginalCE64 saved12/24/48 allclosed64 andORIGINALverified,argmaxchanges0.
+24 metrics ANSWER.5145089285714286/delivery.59375;48 .5308779761904762/.5963541666666666.
+Former48 parent306081/child306089 gone,exit0. No live model at this checkpoint.
+NEXT: settle48 usingv189pendinginventory, thenoriginalsaved96,thenendpoint192/fullselection/
+actualselectedold860. Native12 remainsprovisional;no earlyretentionshortcut.
+Nativefits5/9,savedCPU28,fullsavedselection/retention4/9,Host0.
+
+IMPORTANT CORRECTION to v187/188 figure supervision wording:367 isKNOWN REVIEW JUDGMENTS,
+NOT originalpairloss targets. Originalfrozen pair_loss skips BOTH tie andunknown. Actualloss:
+332 directions in160/192feedbackrows;35ties+195unknowncomparisons skipped;6tie-only+26all-
+unknownrows havezero feedbackloss terms.192CEreplayrows separate.166rows hadknownreviews.
+Frozen originalscalar-gradient proof verifies tie/unknownzero loss; plannedQ-tie differs.
+No model/data/metric/checkpoint changes. Currentfigure original-source32-pair-ce-dev-v2/
+original-source32-pair-ce-stage-v3.png andsummary-v2.json; previousversions retained.
+
+New tools/quality_cost_ordering_diagnostic.py frozenin saved-quality-cost-diagnostic-dev-v1/
+code-v1;3working+3frozen tests andRuff/mypy pass. Keepsoriginalstate/familydenominators so
+quality-direction andcost-tie-break contributions addexactly. Actualsavedpredictionanalysis
+stillpending;notnewQtraining/causalattribution. Continueanalysisafter96launched.
+Newdiagnostic/correctioncostsareexplicitin v189pending,notpaidbyearliersaved24settlement.
+Genericsettler addsclosed48 verifier+driverresidual+self;donotaddtwice.
+NoSHA/fingerprints/subagents/secondledger/newservices/remotewrites. Fullgoalscopeopen.
+
+# Previous v188 (queue and supervision wording superseded)
+
+# LATEST: 2026-10-29 goal ACTIVE; v188 CE64 saved12 verified; saved24 running
+
+ONE LIVE MODEL: source64-continued-ce-seed0-u192-v1/update-24 ORIGINAL CPU feedback64.
+Coordinator241754 / evaluator241764, detachedsession241754; actual native 30/64.
+Driver: artifacts/evidence-gap-20261023/original-feedback-v2-saved-reload-v1/dispatch/source64-continued-ce-seed0-u192-v1/update-24/driver.json
+CPU4 FP32, shared_actions16384/head2048, CUDAempty, MHAoff/referencecompileFalse.
+No second real model or offline ledger write whilelive. No retry/restart.
+
+CE64 saved12 actual64 VERIFIED:ANSWER .5412946428571428,delivery .6197916666666666,
+native-vs-saved feedbackargmaxchanges0. Parent199843/child199844 gone,exit0.
+NativeCE64 all192/3072closed asv187;native12/96/192ANSWERties+delivery12 remainPROVISIONAL.
+Must finishsaved24/48/96/endpoint192,thenfullsavedselection,onlyactualuniqueearlyold860,
+wholeoriginalretentionaudit. CE128 anddelivery32/64/128 stillrequired. No native-selectionshortcut.
+Originalnativefitsclosed5/9, savedCPUclosed26, fullsavedselection/retention4/9, Host0.
+Idle6 fields19.130550633CPUsettled;native saved12notrebilled. Onlynew24launch+verification,
+v188progressandfuture24residualpending. Genericidlehelper settle_original_saved_candidate_cpu_v1.py
+usesexplicitprogresspending+self+verifiedcandidate+driverresidual; nohistorical/nestedrebilling.
+Originalverifier-tools-v2 FIRST onPYTHONPATH,thenCPUfreeze/src:tools. No newQ/reganalyzers.
+
+v187 remainsauthoritativefor source32pair-vsCE stagefigure/tables/supervisioncounts andLME
+known-overflowcompactdiagnostic;allitsknowncostspaid. Figureoriginal-source32-pair-ce-dev-v2:
+fixed192ANSWER+29.6751pp/delivery+27.0833pp,oldpreference-3.52497pp;notpure-loss/pureQ/Host.
+TargetedoldLMErows231/445 nowfitcompact15795/15910 withoutvaluesremoved;32encodedinputs,
+no model/HTTP/CUDAinit. Notall451/new-policy/Viewcoverage ormatchedcompacttraining.
+Fulloriginal/Q/reg/coverage/F1/F2/F3/compact/aux/seeds/Host/lifecycle/external/four-figure goalopen.
+NoSHA/fingerprints/subagents/newmodelservices/secondoperationalledger/remotewrites.
+
+# Previous v187 (livejob/accounting/savedcount superseded)
+
+# LATEST: 2026-10-29 goal ACTIVE; v187 CE64 native closed; saved12 running
+
+ONE LIVE MODEL: source64-continued-ce-seed0-u192-v1/update-12 ORIGINAL savedCPU64.
+Coordinator199843 / evaluator199844, detachedsession199843, native 58/64.
+Driver: artifacts/evidence-gap-20261023/original-feedback-v2-saved-reload-v1/dispatch/source64-continued-ce-seed0-u192-v1/update-12/driver.json
+CPU4 FP32, shared_actions16384/head2048, CUDAempty, MHAoff/referencecompileFalse.
+This isfirstpredeclaredfeedback64candidate, NOT selectedoldretention. No secondmodel/offline
+ledgerwritewhilelive. After12: originalcandidateverification/idlecosts,24/48/96/endpoint192,
+fullsavedselectionbothCEviews, onlyactualuniqueearlyold860,wholefitretention,thenCE128/delivery3.
+Use ORIGINAL verifier-tools-v2 first onPYTHONPATH; do not substitute working/new Q/reg helpers.
+
+CE64 native192/3072 completed,15920908traintokens,768old-operationrows/201metadatafamilies.
+Parent4009559/child4009564 gone,exit0. Originalfrozen nativeaudit VERIFIED.
+Nativecurve(u,answer,delivery,old):
+0 .5179811507936508 .6067708333333333 .807826854448818
+12 .5412946428571428 .6197916666666666 .7303698729744793
+24 .5145089285714286 .5937499999999999 .7511340821455249
+48 .5308779761904762 .5963541666666666 .7778276598592233
+96 .5412946428571428 .6041666666666666 .7608550527961031
+192 .5412946428571428 .6119791666666666 .7649270890958009
+NativeANSWER12/96/192tie=>earliest12;delivery12. PROVISIONAL only, savedfullcurve stillrequired.
+Nativefitsclosed5/9, savedCPU25, fullsavedselections/whole selectedretention4/9, Host0.
+Idle18fields51.794710866CPUsettled;nativefitnotrebilled. Onlysaved12launch+verification+
+v187progress/future residual pending. Summary original-feedback-v2-source64-continued-ce-terminal-v1.json.
+
+NEW original-source32-pair-ce-dev-v2/summary-v1.json and PNG/SVG/PDF figurestage-v2.
+TwoACTUALclosed32arms,12savedcurvepoints;fixed192 pair-minusCE originalANSWER+29.6751pp,
+delivery+27.0833pp,oldpreference-3.52497pp.8familiespositivebothmetrics;descriptive95%intervals
+[18.3408,42.3363]/[19.2708,36.4583],notselected-pointCI/seedrobustness/independentconfirmation.
+Legacy16/new48 remainseparate:ANSWER+39.5833/+27.0833pp,delivery+28.125/+26.7361pp.
+Same384rows/3072draws/192updates;pair106totalfamilyIDs vsCE137,statesANDobjectivechange.
+Pair192feedback includes166known-targetstates/26all-unknownretained,367knowncomparisons,
+195unknown;192CEreplayrows. CE384target-bearingoperationrows. No nonzero-gradient-per-rowclaim.
+NativecostCSV countscommonbaseonce;CEextra2selectedoldjobs notmisrepresentedastrainingcost.
+Initialofflineassertion wronglyrequiredsamefeedback-devPATHdespiteequalbytes;failedv1retained,
+v2excludespathprovenanceonlyandretainsdatabyte/parameterchecks. InitialfailedCPUunknown.
+One4panelstagefigure isNOTfourrequiredmainfigures;notpure-loss,pure-Q,orHostsuccess.
+
+NEW lme-known-overflow-compact-dev-v1/summary-v1.json: originala339 archivedfixed-policy
+questionrows231/445,16actualdecisionstates/32encodedshared+request_textinputs. Reproducedorignal
+length/dropmetrics,thenexistingD8compactcodec removesONLYJSONsyntaxwhitespace. Samevalues,
+Source-stringwhitespace,questions/options/limit16384/head2048.4oldoverflowinputs->0compact;
+max15795/15910 (margins589/474). No weights,forward,HTTP,CUDAinit,QAref orbodyprint.
+Defaulttokenizer8192notice isnot theexplicit16384audit; no inferenceclaimed. Onlytwo known
+failures,notall451/newpolicycoverage. Matchedcompacttraining/Host andView-prompt2overflows
+remainpending;no originals changed,oldstaticinterruptedpath501 remainsunknown.
+
+LMEexplicituntouchedcontinuation staysfa0c88ee/frozen-v1;workflow-readiness-v1 andunbound
+sharedrange256/observation4096config remain asv186. Current32four-slot0afreeze unchanged.
+Full original/Q/reg/coverage/F1/F2/F3/compact/aux/seeds/Host/lifecycle/external/four-figure goalopen.
+NoSHA/fingerprints/subagents/newmodelservices/secondoperationalledger/remotewrites.
+
+# Previous v186 (live queue/accounting/counts superseded)
+
+# LATEST: 2026-10-29 goal ACTIVE; v186 CE32 closed; original CE64 native fit running
+
+ONE LIVE MODEL: source64-continued-ce-seed0-u192-v1 ORIGINAL native fit.
+Coordinator4009559 / trainer4009564, detached session4009559. Native 12/192 optimizer updates.
+Driver: artifacts/evidence-gap-20261023/original-feedback-v2-fit-dispatch/source64-continued-ce-seed0-u192-v1/driver.json
+Output: artifacts/evidence-gap-20261023/original-feedback-v2-fitting-v1/source64-continued-ce-seed0-u192-v1
+Original2a runtime, shared_actions16384/head2048, GPU2,3, native precisionfloat32,
+soft-ce objective,768train rows,192updates/3072draws,common source256update262 initialization.
+No other real model/new service/offline ledger write while live. No restart or automatic retry.
+Launch audit initially expected name ce; actual native enumsoft-ce matches originalCE32.
+Only read-only assertion corrected; training stayed running. Failure overhead unknown, not zero.
+
+CE32 BOTH selected retentions CLOSED with ORIGINAL frozen core: ANSWER48 old=.7852116381988568,
+616known468accepted244masked, -2.261521625pp vsbase. Native/saved argmax changes0.
+Delivery24 old=.7437613327372367,448accepted/244masked,-6.406552171pp;2 native/saved changes.
+ANSWER selected48 feedback=.5403025793650793;delivery selected24=.6171875, unchanged.
+Whole-retention: original-feedback-v2-saved-reload-v1/source32-continued-ce-seed0-u192-v1/retention.json
+Closure: original-feedback-v2-source32-continued-ce-retention-closure-v1.json. Host still0.
+Former1004405/1004409 gone,exit0. Idle settled38 fields152.544998294 CPU; native48 not rebilled.
+Original native fitsstarted5/closed4 of9, savedCPU25, savedselections4, whole selectedretention4.
+Only CE64 launch+verification andv186 progress/futurefit residual currently pending.
+
+AfterCE64 native terminal: ORIGINAL frozen native analyzer/idlecosts, then saved12/24/48/96+
+endpoint192; full CPU selection independently for answer/delivery, unique selected early old860,
+whole original retention. OriginalCE128 and delivery32/64/128 follow. Keep alloriginal scopes.
+Use original-six-fit-readiness-v1/closure-plan-v1.json exact commands; verifier-tools-v2 first
+onPYTHONPATH for saved analysis. NewQ/reg/Host/LME helpers never replace original9 verification.
+OriginalHost pipeline-v2 (original-feedback-host-dev-v1) now4/9retention-ready per
+binding-inspection-v3.json; requiresall9, noactualHostfollowupyet. v185 retainsdetails.
+
+NEW lme-continuation-dev-v1/summary-v1.json and workflow-readiness-v1.json;
+frozen-v1/MiLAi-Lab, localcommitfa0c88ee0ab1bfe7cae13182143e5737d73619a2.
+Only3 existing LME runtime modules changed,1 ancestry helperadded;339runtime modules unchanged.
+Prediction --continue-unattempted: terminalFAILED v2 parent, identicalconfig/snapshot/version,
+only NOT_RUN rows. Prior failed/completed outputs staybyte-identical; original question/pool
+indices/private input/nativeprotocol retained. Reuse exact closed full-Store templates,never
+old query/answer runtime or resetoldreadallowance. Newoutput perexplicit continuation,noauto retry.
+Scoring continuation only UNSCORED_COMPLETED; never repeatfailedJudge/scoredcases/Reader.
+Combined scoring usesactual predictionowners; archivesspan onlydeclaredancestry andrestore
+originalpaths byte-identically. Full planneddenominators/unknowns andadaptedJudge scope retained.
+40working+40frozen tests,7additionalfrozenSourceRange tests,Ruff/mypy6/toolsboundary/HTTPimportsPASS.
+No actual451Reader/Judge run or newQA labels. Originalfrozenartifacts untouched.
+
+Importantinput gap: old901-path audit directlysuppliedrange256/observation4096, whole-runconfig
+hadneither. shared-input-config-unbound-v1.json adds ONLYthose2 memory_controlfields+configversion;
+all armsmustshare explicitcondition. No checkpointbound, no limitraised. OldpagedSourcescomplete:
+5295Sources/22822pages/171473908literalchars,0pagedrops. Butold901/902fixedpathsretain2controller
+overflows(rows231,445),1interruptedindex501(row250);Viewaudit2overflows,maxprompt63759.
+Thesearehistoricalinputaudits,notQA/learnedpolicyresults. UnknownoldstaticpathdoesNOTexclude
+question250fromnewfull451Readercohort. Finalmethods/seeds/representation+visionprobe stillneeded.
+Genericdiagnostic mistakenlyexpandedJSONarrays; input-display-exposure-v1 records15filesread,
+truncateddisplay/publicsourcepossibleexposure. Correctedtoexplicitstatus/scalar summaries.
+Noanswer/answer_gold/eval_function/goldkeysfoundinthatfield-nameaudit; stillnounseenclaim.
+
+Current32four-slot pipeline remains frozen0a, collection-plan-v5/current32-pipeline-v3,
+realcurrent32calls0. NewLMEcommit doesnotretrofit thatfreeze or original2a experiments.
+NoSHA/fingerprints/subagents/new model services/second operational ledger/remote writes.
+Full original/Q/reg/coverage/F1/F2/F3/compact/aux/seeds/Host/lifecycle/external/four-figure goal open.
+
+# Previous v185 (activejob/accounting/counts superseded)
+
+# LATEST: 2026-10-28 goal ACTIVE; v185 CE32 old24 closed; ANSWER48 old860 running
+
+ONE LIVE MODEL: source32-continued-ce-seed0-u192-v1/selected-retention-48 ORIGINAL CPU old860.
+Coordinator1004405 / evaluator1004409, detached session1004405, actual native 28/860.
+Driver: artifacts/evidence-gap-20261023/original-feedback-v2-saved-reload-v1/dispatch/source32-continued-ce-seed0-u192-v1/selected-retention-48/driver.json
+CPU4 FP32, shared_actions16384/head2048, CUDAempty, MHAoff/referencecompileFalse; original argv.
+No second real model or offline operational-ledger write while live. No restart/retry.
+
+DELIVERY-SELECTED24 CLOSED:860 actual old inputs/results verified with ORIGINAL frozen helpers;
+old family-macro .7437613327372367,616known/448accepted/244masked, -6.406552171pp vsbase.
+Native .7415291898800938,2 argmax changes, accepted447->448. No reselection or Host claim.
+Old305311/305313 gone,exit0. Native42354.636596631 CPU already recorded; not rebilled.
+Idle settlement112 fields310.582362371 CPU: allv184 pending/progress +newHost development,
+24 verifier/closure +real driver residual. Only new48 launch+verification andv185 progress pending.
+Original nativefits4/9, savedCPU24, fullsavedselections4/9, whole selectedretention3/9, Host0.
+
+After48 closes: ORIGINAL verifier-tools-v2 FIRST on PYTHONPATH, then CPUfreeze/src:tools.
+NEW single composer artifacts/evidence-gap-20261023/verify_one_saved_feedback_retention_v1.py
+accepts conditional_retention_jobs (old candidate-only composer does not). Use for48 BEFORE idle
+ledger settlement; requires stopped native PIDs and native-only ledger delta. Then original
+analyze_saved_feedback_fit.py retention to close BOTH24/48; only then idle costs and originalCE64.
+Preparation: original-feedback-v2-single-retention-verifier-preparation-v1.json.
+Do NOT use working/new Q/reg/Host analyzers for original9 model verification.
+
+NEW original-feedback-host-dev-v1/summary-v1.json, pipeline-v2.json, code-v2 tools-only freeze.
+Original2a runtime retained; provider/payload/literal projection bytes equal savedCPU freeze.
+prepare_original_feedback_host.py binds ALL9 original saved+retention closures, currently3ready;
+fixed_context/rules/baseJev +every declared selected feedback view. Same checkpoint/update0/CE
+aliases share one actual run.8 exposed dev families,8 continuous cold banks16 positions/arm,
+up to15 unique arms240positions. OriginalHost temperature1/thinking/JSON-action/2048cap,
+own history and no forced calls; one trajectory, no independent/noise/seed claims.
+run_host_saved_cpu.py sets process-local reference_compileFalse,checks actual CPU4/FP32,
+MHAoff/full16384/head2048; original runtime and checkpoint files unchanged. Root dispatches
+one job at a time after all9 closures; binding alone executes nothing.
+summarize_original_feedback_host.py uses distinct arm IDs and ALL planned positions. Failed
+startup/missing/unexecuted/zero-current-call cases stay separate. Source-author grades bind
+actual new answer/path and available prefix Source identities. Delivery grade separately binds
+ALL Tool receipts in actual final provider input by final response ID; Store is not Host knowledge.
+8 working+8 frozen tests,Ruff/mypy3/tools boundary/HTTP original-provider imports PASS.
+Actual legacy parser48 positions=46completed2failed15zero-current-call;46 final inputs bound,
+all46 contain retrieval receipts, including prior receipts in zero-call cases. Applicability
+and sufficiency remain ungraded. These are historical diagnostics, NOT new saved-model results.
+16 original author task criteria exactly bound to full source prefixes;184 final-prefix Source
+identities across8 families, not184 independent tasks. Rubrics stay OUT of model inputs.
+New Host results/quality labels0; broader current-method autonomous table/seeds still required.
+
+Current32 pipeline remains fresh-known-budget-dev-v1/current32-pipeline-v3.json, collection-plan-v5,
+frozen-v3 runtime0a32604e pre-final bank+max4slots; actualcurrent32 calls0. v184 has details.
+NoSHA/fingerprints/subagents/new model services/second operational ledger/remote writes.
+Full original/Q/reg/coverage/F1/F2/F3/compact/aux/seeds/Host/lifecycle/external/four-figure goal open.
+
+# Previous v184 (live queue/accounting superseded)
+
+# LATEST: 2026-10-28 goal ACTIVE; v184 old24 running; pre-final four-slot pipeline ready
+
+ONE LIVE MODEL: source32-continued-ce-seed0-u192-v1/selected-retention-24 ORIGINAL CPU old860.
+Coordinator305311 / evaluator305313 still live; native 486/860. No restart or new model.
+Driver: artifacts/evidence-gap-20261023/original-feedback-v2-saved-reload-v1/dispatch/source32-continued-ce-seed0-u192-v1/selected-retention-24/driver.json
+After24: ORIGINAL frozen single verification + idle costs, then selected-retention-48 old860.
+Only both24/48 closed permits whole CE32 retention audit. Then CE64/128 and delivery32/64/128.
+Original native fits4/9, savedCPU23, saved selections4/9, selected retention3/9, Host0.
+
+NEW summary: artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/summary-v2.json
+Final freeze: fresh-known-budget-dev-v1/frozen-v3/MiLAi-Lab;74 frozen tests, Ruff/mypy8/tools
+boundary/HTTPenv imports PASS.341 runtime modules unchanged; only frozen_host_message.py changed.
+Recording-only local commit0a32604e6b22b9d6d141dfc74df13a4d53d1f916, version metadata only.
+Actual post-completion Store contains original final-answer Source. NEW fresh requests require
+actual pre-final bank captured at decoded response hook BEFORE that answer is persisted as a
+Source. Closure binds same final response ID; absent final Source ref explicitly checked.
+Recording failure retained without replacing real Host response; no after-bank fallback.
+Old fresh frozen-v1 and preliminary-v2 retained, unexecuted; use final frozen-v3 only.
+
+Four slots FIXED before fresh attempts: eligible => original initial, READ1, fresh2048 initial,
+fresh1024 initial. Original READ2 prerequisite/provenance only, NOT fifth training row.
+Ineligible BEFORE fresh attempts => original initial/READ1/READ2 +missing fourth. Failed/missing
+fresh arms NEVER backfill READ2/later success. Reached failed initial states retain actual status.
+New collection helper matches exact first call/closed Host; outputs allocation and single-arm
+recipes without model execution. Existing branch tool --prefix-allocation exports exact slots.
+Fresh Host frames explicitly append controlled request to real pre-final provider input; original
+visible history/receipts fixed, actual branch ToolMessage substituted. One conditional final
+answer through original ledger/admission; not autonomous Host request/stopping success.
+Native+JSON-action tested. Raw known subset only; real timing differences retained.
+
+Current32 NEW collection-plan-v5.json /selection-plan-v5.json (same32families124positions,
+config-v2/histories/mapping; rules primary) and fresh-known-budget-dev-v1/current32-pipeline-v3.json:
+collect -> selector-dispatch-v3 -> prepare_known_budget_collection -> serial fresh jobs ->
+resolve four slots -> branch-dispatch-v3. Max64fresh tools,128states,384conditional branches;
+actual current32 calls/labels/Host results remain0. All32 previously operation-training-exposed.
+Old current collection/branch plans remain historical, NOT active dispatch.
+
+57 explicit fields (243.701413566 CPU seconds) +v184 progress and future24 residual pending.
+No operational ledger writes while live. Unknown old orphan/interactive overhead not zeroed.
+NoSHA/fingerprints/subagents/new model services/second operational ledger/remote writes.
+Full original/Q/reg/coverage/F1/F2/F3/compact/aux/seeds/autonomousHost/lifecycle/external/four-figure
+scope remains open. v184 is a lean incremental checkpoint; prior v183 preserves older detail.
+
+# Previous v183 (recording and current32 pipeline superseded)
+
+# LATEST: 2026-10-28 goal ACTIVE; v183 CE32 saved selections4/9; old24 running
+
+ONE LIVE MODEL: source32-continued-ce-seed0-u192-v1/selected-retention-24 ORIGINAL CPU old860.
+Detached coordinator305311 / child305313, session305311; observed 179/860.
+Driver: artifacts/evidence-gap-20261023/original-feedback-v2-saved-reload-v1/dispatch/source32-continued-ce-seed0-u192-v1/selected-retention-24/driver.json
+Output: artifacts/evidence-gap-20261023/original-feedback-v2-saved-reload-v1/source32-continued-ce-seed0-u192-v1/selected-retention-24/evaluation
+CPU4 FP32, shared_actions16384/head2048, CUDAempty, no MHA fastpath/reference compile.
+No exec session; inspect actual /proc/driver/log. No restart/second model/offline ledger write while live.
+After24 closes: original frozen single-retention verification/idle costs, then selected-retention-48
+for ANSWER. Both are required; only after both actual jobs run ORIGINAL verifier-tools-v2 retention
+audit. Then original CE64/128 and delivery32/64/128 remain. No premature retention completion.
+
+CE32 FULL SAVED CURVE CLOSED. ANSWER48=.5403025793650793; delivery24=.6171875 are actual CPU
+selections. selection.json pending_retention_updates=[24,48]. Endpoint192 answer=.4904513888888889,
+delivery=.5807291666666666,old=.781860188226394 versus native old=.7807441167978226.
+Endpoint old2 READ argmax changes: row34 memops_A32 accepted->accepted, row313 authored-partial-
+evidence-v3 unaccepted->accepted. Feedback argmax changes0. Keep device/storage distinction;
+no isolated quantization claim or rerun. Selected old24/48 metrics still pending; Host0.
+Original native fits4/9, savedCPU jobs23, full saved selections4/9, selected retention3/9.
+Former endpoint3725228/3725229 exited0. Pause/resume did not restart any detached original model.
+
+NEW fresh-known-budget-dev-v1/summary-v1.json +frozen-v1/MiLAi-Lab. Unchanged da43 runtime,
+new prepare_known_budget_requests.py /run_known_budget_request.py and8 working+8 frozen tests.
+Require first actual completed selected call, second new-Source READ, same closed Host invocation,
+full raw material visible in final provider input and bound Source ranges. No later-success fill.
+Prepare two explicit fresh request limits inside native cap, same query/goal/raw known refs; no old
+cache/read-policy rewrite. Single-arm runner clones exact closed bank, uses ordinary given-request
+API, keeps failures/call inventory and global ledger, and generates no Host answer.
+Comparator reports ALL initial-observation differences. Actual mechanical calls share known/read
+admission but also differ in source_inventory_wall_seconds; this telemetry is kept, not zeroed or
+hidden. Do NOT claim pure budget-only input equality or complete Host knowledge.
+Two fresh states if executed: max-four allocation and real conditional Host readouts still pending;
+do NOT append both to current initial/READ1/READ2 slots. Current32 real calls/states remain0.
+
+Current32 collector remains collection-plan-v4 /selection-plan-v4 with closed-host-boundary-dev-v1
+selector-dispatch-v2 /branch-dispatch-v2, da43e59f runtime. New fresh tools are preparation only;
+not yet admitted into training slots. Original D8 F1/F2 and feedback freezes unchanged.
+Fresh test initial equality failure changed interpretation: timing is a real observed difference.
+Bad known refs preserve absent initial states; no model retry. Ruff/mypy/tools boundary and HTTP
+interpreter imports pass. No actual new Host success/action-quality labels established.
+
+Idle endpoint settlement PAID32 fields136.319324055 CPU, native endpoint not rebilled.15 explicit
+selected24-launch/final-prep/diagnostic fields plus v183 progress/future24 residual remain pending.
+Older orphan OS exit/parent/exact residual remain unknown. NoSHA/fingerprints/subagents/new model
+services/second operational ledger/remote writes. Full original/Q/reg/coverage/F1/F2/F3/compact/
+newprefix/aux/seeds/Host/lifecycle/external/four-figure goal remains open.
+
+# Previous v182 (endpoint status/selection and active queue superseded)
+
+# LATEST: 2026-10-28 goal ACTIVE; v182 CE32 saved early4 verified; endpoint192 running
+
+ONE LIVE MODEL: source32-continued-ce-seed0-u192-v1/update-192 ORIGINAL saved CPU924.
+Detached coordinator3725228 / child3725229, session3725228; observed 85/924.
+Driver: artifacts/evidence-gap-20261023/original-feedback-v2-saved-reload-v1/dispatch/source32-continued-ce-seed0-u192-v1/update-192/driver.json
+Output: artifacts/evidence-gap-20261023/original-feedback-v2-saved-reload-v1/source32-continued-ce-seed0-u192-v1/update-192/evaluation
+CPU4 FP32, shared_actions16384/head2048, CUDAempty, no MHA fastpath/reference compile.
+No exec session. Verify actual /proc/driver/log; no restart/second model/offline ledger write.
+After endpoint closes: ORIGINAL verify_one_saved_feedback_candidate_v1.py with verifier-tools-v2
+first on PYTHONPATH, then fullselect both ANSWER/delivery; only actual unique selected early old860
+retention jobs, then original retention audit/idle costs. Native48/24 are NOT deployment selections.
+Then original CE64/128 and delivery32/64/128 remain. Host0, full goal incomplete.
+
+CE32 native192/3072 closed. Saved12/24/48/96 all verified64; ANSWER=.5204613095/.5095486111/
+.5403025794/.5125248016;delivery=.5807291667/.6171875/.6067708333/.5963541667;allargmax changes0.
+Endpoint old860+feedback64 still pending. Original native fits4/9, savedCPU jobs22, saved selections3/9,
+selected retention3/9. Former24/48/96 parent/child processes closed; current sole model is above.
+
+NEW closed-host-boundary-dev-v1/summary-v1.json. Local recording commits2f3356ac then da43e59f
+(Git revision metadata only). Current runtime instrumented-runtime-v2/MiLAi-Lab, version
+da43e59fd10039797a0a903afd1182395bdbff01. Original D8 F1/F2 and feedback freezes untouched.
+Decoded-response observer retains actual provider-request content/catalog tied to output message ID;
+provider reasoning omitted, original response hooks and request/response contents unchanged.
+Optional --capture-closed-host-messages captures each post-invocation bank before later arrivals.
+Actual public outcome is persisted before optional capture; capture failure is separate and stops
+without retry. No model success/known-reference/semantic sufficiency inferred by recorder.
+audit_host_witnesses.py --closed checks actual final Tool bodies against exact after-snapshot material
+receipts and Source identity/revision/visibility/role/clocks/ranges. Failed/ambiguous final context is
+unknown coverage, not a negative label. Earlier pre-Host witness audit remains available.
+
+80 frozen tests pass (recording/replay/given calls/prefix tools/old+new witness checks); HTTP interpreter
+imports and Tool wire role/name verified. Working35 capture-related +14 witness cases pass.
+Ruff/mypy/boundaries pass. Functional mypy follows installed jsonschema source because external stubs
+are absent; no suppressed error codes/package install. Fixture config_version/HTTP-client declaration
+errors retained/fixed to native contracts. Snapshot-failure regression protects completed outcomes.
+
+CURRENT new32 pipeline: current-prefix32-dev-v1/collection-plan-v4.json /selection-plan-v4.json ->
+closed-host-boundary-dev-v1/selector-dispatch-v2.json ->branch-dispatch-v2.json. Same32 source families,
+124 positions (fixed_context/rules62 each), original histories/policies, rules-primary,max4/family.
+Only initial/READ1/READ2 selectable; FOURTH condition still requires actual closed data/witness review
+and explicit matched fresh request/budget/requirement execution +actual readouts. No new32 models or
+prefix states yet. No in-progress cache/admission rewriting; no hidden additional training state.
+New recording does not certify source independence, Host understanding, state sufficiency or quality.
+
+Idle settlements paid6 fields19.083708477 CPU (saved24),21 fields103.264524938 (saved48+validation),
+23 fields106.962729552 (saved96+recording work); native model costs not rebilled.16 explicit pending
+endpoint-launch/final-recording fields plus v182 progress/future endpoint residual. Older orphan
+OS exit/parent/exact residual remain unknown. NoSHA/fingerprints/subagents/new services/second ledger/
+remote writes. Full original/Q/reg/coverage/F1/F2/F3/compact/newprefix/aux/seeds/Host/lifecycle/external/
+four-figure requirements remain; stage figure remains original-answer-saved-curves-dev-v4.
+
+# Previous v181 (queue and current32 recording pipeline superseded)
+
+# LATEST: 2026-10-28 goal ACTIVE; v181 CE32 native + saved12 closed; saved24 running
+
+ONE LIVE MODEL: source32-continued-ce-seed0-u192-v1/update-24 ORIGINAL saved CPU64.
+Detached coordinator3255617 / child3255618, session3255617; observed 30/64.
+Driver: artifacts/evidence-gap-20261023/original-feedback-v2-saved-reload-v1/dispatch/source32-continued-ce-seed0-u192-v1/update-24/driver.json
+Output: artifacts/evidence-gap-20261023/original-feedback-v2-saved-reload-v1/source32-continued-ce-seed0-u192-v1/update-24/evaluation
+CPU4 FP32, shared_actions16384/head2048, CUDAempty, no MHA fastpath/reference compile.
+No exec session; verify actual /proc/driver/native log. No restart/second model/offline ledger write.
+After24 closes: ORIGINAL verify_one_saved_feedback_candidate_v1.py with verifier-tools-v2 first on
+PYTHONPATH, then CPU freeze src/tools; idle exact settlement; saved48,96,192 next. Fullsix CPU points
+including commonbase before both target selections; unique actually-selected early old860 only.
+Then original CE64/128 and delivery32/64/128 remain. Never dispatch early retention from native selection.
+
+CE32 native CLOSED:192 updates,3072 draws,15381216 tokens,384 rows /137 old-operation families.
+Original frozen native audit verified full curve/weights/conditions/accounting. Native provisional
+ANSWER48=.5403025793650793, delivery24=.6171875. Endpoint192 ANSWER=.4904513888888889,
+delivery=.5807291666666666, old preference=.7807441167978226; not saved selection or Host results.
+Saved12 CLOSED/verified64:ANSWER=.5204613095238095, delivery=.5807291666666666,0 argmax changes.
+Original native fits4/9, savedCPU jobs19, full saved selections3/9, selected retention3/9, Host0.
+Old CE32 native PIDs2817589/2817592 and saved12 PIDs3205589/3205591 are gone.
+
+NEW query-scale-verifier-dev-v1/summary-v1.json +closure-plan-v1.json +analysis-study-v1.json.
+Analyzers frozen at analysis-freeze-v1/MiLAi-Lab atop ORIGINAL CPU scoring/projection dependencies;
+new conditional helpers overlaid, native training/evaluation freezes unchanged.29 distinct working
+tests and29 frozen tests pass; Ruff/mypy/tools boundary pass. Initial fixture failures (metadata.row,
+action_parameters) corrected to real schema, no production fallback/model retry; costs retained.
+Native aux audit verifies exact single epoch/partial batch, known train rows, option permutations,
+forward/tokens/probe counters, dev0/1 +terminal train, saved aliases and original-ledger cost.
+Aux endpoint stays fixed even if dev worsens. Probe movement is not per-example nonzero-gradient proof.
+Saved audit binds actual full inputs, options, masks, CPU FP32/length/attention, costs and aggregates.
+All7 saved operation points +their16-row feedback reads precede operation-only macro selection;0eligible.
+Semantic native/reviewed,2 clearer changes,3 native-label inconsistencies,stable+/stable-/unknown separate.
+
+Real regression of EXISTING complete operation baseline verified8384 draws/48034873 train tokens,
+34202 train+6020 dev+112 feedback native prediction files. Native selectionu262=.807826854448818
+unchanged; this is NOT a new fit or savedCPU result. Actual2208 conditional inputs preserve native147
+and reviewed100 unknowns and match all prior constant references; no new labels/model predictions.
+All512/2048/8192 native JSONL panels load.6 native audits/60 saved verifications/4 selections wired.
+New scale models still NONE; dispatcher follows declared model argv and serial terminal/ledger process.
+Original queue priority, new actual results must pass their own checks. Host/native FollowIR/formal
+Source confirmation and every other original/Q/reg/coverage/F1/F2/F3/compact/newprefix/aux/seed/lifecycle/
+external/four-figure requirement remain open. Query cohorts share corpus; old paired512 stays NOT ADMITTED.
+
+Idle settlements PAID:36 fields73.338990297 CPU (CE32 closure+new verifiers), then5 fields18.091407301
+CPU (saved12 closure). Native7629.19668866 and1942.4029045 CPU not rebilled. Two saved24 launch fields
+plus v181 progress/future saved24 residual pending. Old orphan OS exit/parent/exact residual unknown.
+Stage figure remains original-answer-saved-curves-dev-v4, three ANSWER fits only. NoSHA/fingerprints,
+subagents,new services,second operational ledger or remote writes. Full goal NOT complete.
+
+# Previous v180 (CE32 status/queue and scale-analysis wiring superseded)
+
+# LATEST: 2026-10-28 goal ACTIVE; v180 original ANSWER retention3/9 closed; CE32 running
+
+ONE LIVE MODEL: source32-continued-ce-seed0-u192-v1 ORIGINAL native fit.
+Detached coordinator2817589 / child2817592, session2817589; no exec session.
+Native snapshot updates6/192, initial old-dev outputs860/860.
+Driver: artifacts/evidence-gap-20261023/original-feedback-v2-fit-dispatch/source32-continued-ce-seed0-u192-v1/driver.json
+Output: artifacts/evidence-gap-20261023/original-feedback-v2-fitting-v1/source32-continued-ce-seed0-u192-v1
+Original2a freeze, GPU2/3 FP32, microbatch1, shared_actions16384/head2048,192 updates/3072 draws.
+Continued CE is old-operation soft-CE, not trajectory imitation;384 rows /137 actual training families.
+Verify /proc/native/driver. No restart, second model or offline ledger write while live.
+After terminal: original-six-fit-readiness-v1/closure-plan-v1.json native audit; idle exact settlement;
+original saved12/24/48/96/192 + commonbase; separate ANSWER/delivery selections and unique selected
+early old860 jobs via ORIGINAL verifier-tools-v2. Then CE64/128 and delivery32/64/128 remain.
+
+SOURCE128 selected96 old860 CLOSED and frozen verified. Old family macro75.73706433% versus
+base80.78268544% (-5.04562112pp);616 labelled accepted444 vs484,244 masked. ANSWER81.00198413%.
+Endpoint192 old78.33412102% is separate, not substituted. No retrospective selection or Host claim.
+Original fits started4/9, complete3/9; savedCPU jobs18, selections3/9, selected retention3/9, Host0.
+Former selected96 PIDs2140088/2140107 gone. Older endpoint-orphan stale driver/history remains intact;
+its OS exit/parent/exact residual remain unknown. Current sole real model is CE32 above.
+
+NEW query-auxiliary-scale-study-v1/summary-v1.json. Native8192:16357 raw rows,558959 cells,
+524241 known/34718 unknown;244344 stable pairs (29 positive),0 native changes. Exact old139641-cell
+prefix and32 author records retained; adds no new semantic labels. Reviewed524265 known/34694 unknown,
+244365 stable (40 positive)/3 mixed changes; limitations unchanged.
+Actual nested panels512/2048/8192:2052/8184/32720 distinct cells,1023/4089/16357 conditions.
+All families and existing condition positive/negative labels covered;positive loss mass=.5 at each scale.
+Native epochs1:129/512/2045 updates, final windows4/8/16, no repeat. SDK pass1 tokens479185/1944135/
+7729665; maxima531/7087/7087, no truncation; original-base/u262 inputs/markers/targets equal.
+Original operation524/8384 schedule and4886 family/event/component weights match actual baseline;
+native baseline48,034,873 tokens remain reference, not new measurement. Aux checkpoint path is terminal
+checkpoint, not checkpoints/update-N under epoch axis. Extra auxiliary compute is separate.
+
+Study-plan6 future models (3aux +3operation) and saved-plan60jobs33360forwards prepared, NONE run.
+New native/saved closure analyzer wiring still required before dispatch; original queue retains priority.
+Saved operation uses12288/2048 and original16 feedback states, not feedback-v2 16384/64-state results.
+Conditional dev2208 kept whole; only2 clearer semantic changes,3 native-label inconsistencies separate.
+Shared-doc overlap train/dev32=30/43/65; train/reserved64=10/23/64. Ordered query prefixes, not IID
+independent Sources; confirmation64 query/body/labels not exported. Old paired512 still NOT ADMITTED.
+First saved-plan authoring checked wrong config.json; corrected actual rl_agent_config.json, failure
+and inputs retained, no fallback/model retry. Its failed CPU remains unknown, not zero.
+
+Stage figure current original-answer-saved-curves-dev-v4: all3 selected old points now actual; original
+ANSWER/delivery curves, intervals/family vectors/training units unchanged. PNG/SVG/PDF visually checked.
+Still one stage figure, not four required main figures, all9/Q/Host/lifecycle/external completion.
+
+Idle settlement original-feedback-v2-source128-selected96-retention-cpu-settlement-v1.json PAID
+132 fields1189.878000481996 CPU; native41454.311288019 not rebilled. Five new launch/figure fields
+plus v180 progress/future CE32 residual pending. No SHA/fingerprints/subagents/new services/secondledger/
+remote writes. Full original/Q/reg/coverage/F1/F2/F3/compact/newprefix/aux/seeds/Host/lifecycle/external/
+four-figure goal remains open.
+
+# Previous v179 (retention status/queue/data-scale gaps superseded by v180)
+
+# LATEST: 2026-10-28 goal ACTIVE; v179 semantic dev and corrected2048 exposure ready
+
+ONE LIVE MODEL: source128-answer-seed0-u192-v1/selected-retention-96, CPU old860.
+Detached coordinator2140088 / evaluator2140107, session2140088; observed 711/860.
+Verify actual /proc, driver and native log; no restart, second model or offline ledger write.
+After actual closure: ORIGINAL verifier-tools-v2 retention audit, idle exact settlement, then
+source32-continued-ce-seed0-u192-v1 via launch_original_feedback_fit_detached_v1.py.
+Original fits3/9, saved jobs17, full selections3/9, selected retention2/9, Host0.
+
+NEW query-family-semantic-dev-v1/summary-v1.json covers dev and stratified training preparation.
+Dev review API/CLI is separate; default train entry and old freezes retained.25 working+25 frozen tests,
+Ruff/mypy/package/tools boundaries pass. All32 fixed dev query families, first unknown per condition,
+64 positions fixed before review:42 yes/5 no/17 unknown. New47 DEV targets only; no train export.
+All2208 inputs and2061 native targets unchanged; now2108 known/100 unknown cells.47 SDK items valid.
+Pairs:5 changes,999 stable (42 positive/957 negative),100 unknown. Interpretation separates:
+2 clearer textual requirements (Curry family-info exclusion, anterior-teeth requested comparisons),
+3 native-label inconsistencies (missing birthplace; combined delays/cancellations; airline placeholders).
+Never report all5 as instruction effects. Constant-negative stable macro=.95857275 but positive-stable
+and change joint scores0. Only2 clear-change families; author diagnostic, not independent confirmation.
+Confirmation64 reserved query IDs unchanged; no query/body/label packet exposed by this work.
+
+NEW query-condition-stratified-exposure-v1/train2048-panel-v1 and actual-panel-audit-v1.json.
+Old pair-only projection:8192 slots but43 positive,7 single-condition families omitted; NOT ADOPTED.
+New sampler retains rare known pairs, one stable-negative pair/query, then known positive/negative per
+actual condition; no unknown filling, dev, duplicate cells or missing-family replacement.15 working+
+15 frozen tests pass. Per-query RNG completion preserves existing prefix when appending scale families.
+Actual panel:2048 families /4089 conditions /8184 distinct cells;4092 positive /4092 negative;
+positive family-event loss mass=.5.2064 complete pairs:3 mixed changes,20 positive stable,2041 negative
+stable. Native8169/source-author15 slots; original training-label limitations unchanged.
+All SDK pass1 option permutations verified:1944135 tokens,max7087,no truncation; original base/u262
+tokenizer results equal. Existing epochs1 yields512 updates,8184 draws,last window8,no repeats.
+Explicit512-update budget would draw8192 and repeat8 in pass2; do not call that one unrepeated pass.
+Final auxiliary-scale/matched524-operation recipe and512/8192 panels still pending; no model admission.
+
+Shared-corpus query protocol and strict-source history remain separate. All65536 prior anchors/exclusions
+preserved; old paired512 remains NOT ADMITTED. New2048 training has zero old query rows. Train/dev
+document overlap43, train/reserved64 overlap23; these are not formal independent Source histories.
+107 pending explicit fields in v179 plus own progress/future retention residual. Prior117-field CPU
+settlement163.935141410 unchanged; orphan OS exit/parent/exact residual unknown. Full original/Q/reg/
+coverage/F1/F2/F3/compact/newprefix/auxiliary/seeds/Host/lifecycle/external/four-figure goal remains open.
+No SHA/fingerprints, subagents, new services, second ledger or remote writes.
+
+# Previous v178 (new dev/exposure preparation supersedes its corresponding gaps)
+
+# LATEST: 2026-10-28 goal ACTIVE; v178 query2048 data verified, model retention still running
+
+ONE LIVE MODEL: source128-answer-seed0-u192-v1/selected-retention-96, old860 CPU evaluation.
+Detached coordinator2140088 / evaluator2140107, session2140088; observed 616/860.
+Actual /proc, driver and native log are authoritative. No restart, second model or offline ledger write.
+After actual closure: ORIGINAL verifier-tools-v2 retention audit, idle exact settlement, then
+source32-continued-ce-seed0-u192-v1 via launch_original_feedback_fit_detached_v1.py.
+Saved jobs17; full selections3/9; selected retention2/9; original native fits3/9; Host0.
+
+NEW query-family-auxiliary-protocol-v1/summary-v1.json closes data preparation, NOT model admission.
+Separate shared-corpus query protocol follows plan5.1-5.3; strict source graph history unchanged.
+All65536 prior rows /596 groups retain train/dev/excluded anchors; old paired512 remains NOT ADMITTED.
+Fixed131072 public train rows: prior65536 objects equal;172 new ranges,359035218 bytes literal verified.
+Physical145224 rows,14152 stored unused tail; no unseen-source or pretraining-isolation claim.
+New query groups:26254 train /6563 dev; selected2048 train have zero prior rows and2048 base queries.
+Only2048 exported here;512/8192 curves and actual learning remain undone.
+
+Native train2048:139641 cells,130997 known targets,8644 unknown;61068 stable pairs (9 positive),0 changes.
+Native dev32:2208 cells,2061 known,147 unknown;957 stable pairs ALL negative,0 changes/positive stable.
+Constant-negative stable metric=.99985775 train /1.0 dev; not evidence of instruction understanding.
+All141849 SDK inputs complete at8192/384; max7087 train /571 dev; no weights or forwards.
+First16 new train-family author pilot:32 cells,14 yes/10 no/8 unknown;24 new targets, native unchanged.
+Reviewed train131021 rows;3 mixed changes,61089 stable (20 positive),8620 unknown. Interpretation:
+Manila temporal requirement clearer; Wexford primary-focus ambiguity; glottis information-need redirect.
+Not3 independently verified effects. Selection location-heavy, not random; no independent factual review.
+Semantic dev coverage, new sampling/matched auxiliary recipe and native FollowIR remain pending.
+
+Selected cohort native doc-ID overlap:train2048/dev32=43;train2048/confirmation64=23.
+64 confirmation query IDs reserved; no query/body/label packet exported, but shared docs may be exposed.
+These are NOT formal32/64 independent Source histories. Recorded public-page ID intersections0 is
+nonexhaustive exposure bookkeeping, not proof of unseen data. Old exclusions/labels not reactivated.
+
+74 explicit pending fields in v178 plus own progress/future retention residual. Whole child costs include
+nested preparation; no duplicate billing. Prior settlement117 fields163.935141410 CPU unchanged;
+orphan OS exit/parent/exact residual unknown. All original/Q/reg/coverage/F1/F2/F3/compact/newprefix/
+auxiliary/seed/Host/lifecycle/external/four-figure requirements remain open. No SHA/fingerprints,
+subagents, new services, second ledger or remote writes.
+
+# Previous v177 (strict-source graph and old admission findings remain valid)
+
+# LATEST: 2026-10-28 goal ACTIVE; v177 65536data verified; NEWpaired512 admission withheld
+
+ONE LIVE MODEL unchanged: source128-answer-seed0-u192-v1/selected-retention-96 savedCPUold860.
+Detachedcoordinator2140088/child2140107,session2140088;snapshot 457/860. Actual/proc/driver/log
+only; noexecsession. No restart/secondmodel/offlineledgerwrite. Afterclose ORIGINALverifier-tools-v2
+retentionaudit+idlecosts, nextoriginalfit source32-continued-ce-seed0-u192-v1 via detachedfitlauncher.
+Savedjobs17,selections3of9,retention2of9,Host0. Originalninefeedbackinputs/queue UNCHANGED.
+
+NEW promptriever-expansion-first65536-v1/summary-v1.json. Fixed65536publictrainrows,allprior32768objects
+literal-equal. Reusedold179655033bytefirstParquet;86new2MiBrangerequests0fail,179847782newbytes verified
+HTTP206/ranges/lengths+directassembledbytes. Samepinnednativereporevisionmetadata,noSHA/ETagcheck.
+Physical72612rows,7076unusedstorednewshardtail,previous3538storedfirstshardtailnowlogical;notunseenclaim.
+Dataworker2362582CLOSED;nonewmodelservice/ledger. Existingparserenv/frozenallocatorunchanged.
+
+All32768priorallocationanchors INCLUDINGexcludedgiantpreserved. Prior-only2172components exact.
+New65536graph=596components:train469(993rows/497queries),dev125(269rows/135queries),excluded2.
+Largest64264rows/32187queries inheritsoldexcluded+1506train+360devancestor groups. No sourcekeys cross
+newgroups. Rawqueries32824 notindependentsourcefamilies;2048/8192targets UNMET. No weakenededges.
+Native1,031,527docIDs,2,104,511candidateoccurrences,0docIDswithmultipletitle/textversions;0emptyqueries/
+passages;1,031,523literaltexts. ConnectionsnotexplainedawayasplaceholderIDcollision/blankkeys.
+
+CRITICAL auxiliary-exposure-dev-v1/admission-amendment-v2.json supersedesNEWpaired512readiness.
+Old512families:446nowexcluded/66train;48authorpositions42excluded/6train;old2048panelslots1848excluded/
+200train. DO NOT launchNEWpaired512aux/derivedoperationinitascurrentsource-isolatedstudy. Oldfiles,
+reviews/panel/recipesretainedhistorical,nomodelhadrun. Revisedadmission/protocolandconditionalcoverage
+needed;do notquietlycarryexcludedancestriesviaoldlabels. Original3979legacyauxplanretainsownhistorical
+scope;notrewrittenorclaimednewlyisolated. Fullgoal/dataexpansionrequirements remainOPEN.
+
+35pendingexplicitfields inv177accounting+ownprogress/future96residual. Wholedataworker/CLIchildren
+include nestedrequest/allocator costs. Byteauditst_sizecalltypo retained/fixed,no download/modelretry.
+Allthroughv172/endpointclosurepaid117fields163.935141410CPU;orphanOSexit/parent/residualunknown retained.
+Current32prefix124positionworkflow andotherQ/reg/coverage/F1/F2/F3/compact/newprefix/seeds/Host/lifecycle/
+external/fourfigures remainrequired. NoSHA/fingerprints/subagents/newservices/secondledger/remote writes.
+
+# Previous v176 (superseded auxiliary admission/data readiness/accounting; same live model)
+
+# LATEST: 2026-10-28 goal ACTIVE; v176 original6fit chain ready; units corrected; selected96 old860 RUNNING
+
+ONE LIVE MODEL unchanged: source128-answer-seed0-u192-v1/selected-retention-96 savedCPUold860.
+Detachedoriginalcoordinator2140088/child2140107,session2140088;snapshot 200/860.
+Actual/proc/driver/logauthoritative,noexecsessionhandle. No restart/secondmodel/offlineledgerwrite.
+Afterclose ORIGINALverifier-tools-v2 retentionaudit+idlecosts; nextfit source32-continued-ce-seed0-u192-v1.
+Use launch_original_feedback_fit_detached_v1.py RUN_ID; originalfitcoordinator/recipe unchanged.
+Readiness/auditcommands original-six-fit-readiness-v1/closure-plan-v1.json. Noautonext/retry.
+Savedjobs17,selections3of9,retention2of9,Host0;selected128ANSWER96oldskill stillUNKNOWN.
+
+OriginalremainingCE32/64/128then delivery32/64/128all6inputs/commands/frozen2a/commonu262/evalpoints/
+192updates/3072draws/outputabsencechecked. CEsoft-ceonoldoperationexamples;NOTnewtrajectoryimitation.
+Deliveryoriginallegacy-pairtarget/replay.30mandatorysavedjobs7080forwards;CEselectsbothanswer/delivery
+andmayrequire2selectedearlyoldpoints,delivery1;max9earlyold860jobs,actualselectiononly/dedup.
+Actualnew6fitjobs0. Detachedfitlauncher syntaxcheckedonly;firstrealadmissionmustbeverifiedfromPIDs.
+
+IMPORTANT stagefigure currentversion original-answer-saved-curves-dev-v3 (v2retained/superseded).
+32/64/128label FEEDBACKfamilies,notalltrainingfamilies. Pairreplayrows192/384/768,families95/153/249;
+trainingfamilyunions106/169/253 (overlap21/48/124). CEoldrows384/768/1536,families137/201/249.
+Bothfeedbackandreplaygrow;notpurefeedback-diversitycausaleffect. CorrectedPNG/SVG/PDF/CSVs visually
+verified;ALLnumericalcurves/selectedpoints/intervalsunchanged. Selected128oldpointstillpending.
+Currentfigureisone4panelstagefigure,notfourrequiredmainfigures/nine-arm/Hostconfirmation.
+
+Current32source-review/selector/exactbranchbridge ready,allnewcurrentmodel/Host0;fourthbudgetcondition
+requiresfreshactualknown/requestformation. Fullgoal incomplete.20pendingexplicitfields inv176accounting
+plusownprogress/future96residual. Allthroughv172+endpointclosurePAID117fields163.935141410CPU;
+orphanOSexit/parent/exactresidualunknown retained. NoSHA/fingerprints/subagents/newservices/secondledger/
+remote writes. Original9/Q/reg/coverage/F1/F2/F3/compact/newprefix/aux/seeds/autonomousHost/lifecycle/
+external/fourfigures remainrequired.
+
+# Previous v175 (superseded figure unit labels/next-fit launch guidance/accounting; same live model)
+
+# LATEST: 2026-10-28 goal ACTIVE; v175 stage figure/family diagnostics ready; selected96 old860 RUNNING
+
+ONE LIVE MODEL unchanged: source128-answer-seed0-u192-v1/selected-retention-96 savedCPUold860.
+Detachedoriginalcoordinator2140088/child2140107,session2140088;snapshot 150/860.
+Actual/proc/driver/logauthoritative,noexecsessionhandle. No restart/secondmodel/offlineledgerwrite
+whilelive. Afterclose ORIGINALverifier-tools-v2 retentionaudit,idlecosts,thenoriginalCE/delivery6fits.
+Savedjobs17,selections3of9,retention2of9,Host0. Selected128ANSWER96=.8100198413;itsoldskillunknown.
+
+NEW original-answer-saved-curves-dev-v2/summary.json +analysis.json +curves.csv +answer-by-family.csv;
+PNG/SVG/PDF original-answer-saved-curves-stage-v2 visuallyinspected. ONEstagefigure(4panels),NOTthe
+fourrequiredmainfigures orfull9arm/Q/Host/lifecycle/externalresults. All18actualsavedcurvepoints,
+8exposeddevfamilyvectors,commondevbytes/recipeidentity/masks verified;selected128oldpointpending,
+notimputedfromendpoint. OriginalfrozenANSWER/deliverytargets mayincludecosttie-breakdirections;
+notpureQorHostaccuracy.57directionalstates/124pairs;45unknown/19tie pairs.
+
+Fixed192:128minus32 +1.38889pp,descriptivepaired8familybootstrap95%[-3.10020,+7.96131]pp;
+2familiespositive/3negative/3tie,leave-one-family-outmean[-1.47392,+2.38095]pp.
+128minus64 +4.14187pp,descriptiveinterval[+.29762,+8.30853]pp;5positive/1negative/2tie.
+Noindependentconfirmation/multiplicityadjustment/training-seeduncertainty orselected-pointCIs.
+Actualtrainingtokens32/64/128=15308528/15851792/16718944,128vs32+9.21327%;same3072draws/192updates
+isNOTequalFLOPs. Selected96/192developmentresultsnotnetbenefit;retention/Host stillrequired.
+Initialanalysisrecipeassertfailedoncohort-specificfeedbackdevpaths;literaldevbytesequal verifiedbefore
+excludingthosepaths. Failure retained,no input/runtime/modelretry. Existingintervalhelperunchanged.
+
+Current32source-note bindings/actualprefixselector/exactbranchbridge ready,allnewcurrentmodel/Host0;
+fourthbudgetconditionneedsfreshactualknown/requestformation. Fullgoal remainsincomplete.
+13pendingexplicitfields inv175accounting+ownprogress/future96residual. Allthroughv172/endpointclosure
+paid117fields163.935141410CPU;orphanOSexit/parent/residualunknown retained. NoSHA/fingerprints/subagents/
+newservices/secondledger/remote writes. Original9/Q/reg/coverage/F1/F2/F3/compact/newprefix/aux/seeds/
+autonomousHost/lifecycle/external/fourfigures remainrequired.
+
+# Previous v174 (superseded stage-figure readiness and pending accounting; same live model)
+
+# LATEST: 2026-10-28 goal ACTIVE; v174 current32 source notes bound; selected96 retention RUNNING
+
+ONE LIVE MODEL unchanged: source128-answer-seed0-u192-v1/selected-retention-96 savedCPUold860.
+Detachedoriginalcoordinator2140088/child2140107;session2140088;snapshot 100/860.
+Actual/proc/driver/logauthoritative,noexecsessionhandle. No restart/secondmodel/offlineledgerwrite
+whilelive. Afterclose ORIGINALverifier-tools-v2 retentionaudit,idlecosts,thenoriginalCE/delivery6fits.
+Savedjobs17,selections3of9,retention2of9,Host0. Source128ANSWER96=.8100198413;selectedoldskillunknown.
+Endpoint192old.7833412102 doesnotreplaceselected96oldresult;no retrosel/Hostbenefitclaim.
+
+NEW current-prefix32-source-review-dev-v1/summary-v1.json.16memoryhistoriesliteral-equaltohistorical
+57-familyauthornotes;32publicprefixsource-identitylists and232claimreferenceoccurrences checked,
+368uniquescriptedmemorysources. Futurestagefactsstayinevaluatornotes,notmodelinputs.
+30corpuspools/16families:18expansionfullpoolreviews+12olderT1reviews,allhistoricalcollectionfixtures
+literal-equaltocurrenthistories;600paragraphoccurrences/indices/roles/provenance retained.
+Historicalauthorreviewonly,NOTindependentfreshsemanticverification. ActualnewHostqueries/readgoals/
+knownToolvisibility/Views/acquiredmaterial/branches stillrequire review. No newquality/actionlabels.
+
+Support-strata-v1:22/30corpuspoolshavenocompleteinheritedoriginal-questionproof. Primary16:
+7source_pool_insufficient+5historical_no_complete_proof;4complete/qualified,including2qualified.
+No replacingprimaryvariantwithbettersupportedone ordiscardingcases. Initial/READ1/READ2areexecution
+strata,notautomaticallycompletedtwo-hopproof. InsufficiencydoesnotautomaticallylabelHANDOFF.
+Full-fixture-overlap-v1 includeslatermemoryarrivals:968sourceoccurrences(user192/assistant176/tool600),
+702literalbody/role/origin/timegroups;11crossfamilysharedgroups/29literaldependencyblocks. Thisextends
+724-sourcepreflightinventorywithoutnewingestion;not29provenindependenthistories ornewmodelresults.
+
+Currentprefix32v2 stilltwo collectors124positions,primarytrainingrulesonly;selector/exactbranchbridge
+readybutactual0. Fourthsameknownbudgetconditionneedsactualfreshrequest/knownformation,notoldpolicy/
+cache rewrite. 7pendingexplicitfields inv174accounting+ownprogress/future96residual. Allthroughv172
+andendpointclosureoldfieldsPAID117fields163.935141410CPU;orphanparent/residual/OSexitunknown retained.
+Fullgoal incomplete:original9/Q/reg/coverage/F1/F2/F3/compact/newprefix/aux/seeds/autonomousHost/lifecycle/
+external/fourfigures. NoSHA/fingerprints/subagents/newservices/secondledger/remote writes.
+
+# Previous v173 (superseded source-review readiness/pending accounting; same live model)
+
+# LATEST: 2026-10-28 goal ACTIVE; v173 source128 saved selected96; selected old-retention RUNNING
+
+ONE LIVE MODEL: source128-answer-seed0-u192-v1/selected-retention-96, savedCPU old860.
+DETACHEDoriginalcoordinator parent2140088/child2140107;session2140088; snapshot 17/860.
+Noexecsessionhandle;actual/proc/driver/logauthoritative. Dispatch original-feedback-v2-saved-reload-v1/
+dispatch/source128-answer-seed0-u192-v1/selected-retention-96/driver.json. Do notrestart/admitsecondmodel/
+settleofflineCPUwhilelive. Afterclose ORIGINAL frozenverifier-tools-v2 retentionaudit,thenidlecosts,
+thenoriginalCE/deliverysixfits andallotherfullgoalwork. Savedjobs17,selections3of9,retention2of9,Host0.
+
+Source128all6savedCPUpoints CLOSED; originalANSWERrule selected96=.8100198412698413
+(+29.20386905ppbase). Endpoint192answer.8010912698412698,delivery.8854166666666666,
+oldoperation.7833412101667436 vsbase.807826854448818 (-2.44856443pp),616labelled467accepted/244masked.
+EndpointoldNOTselected96old; do notretroselbasedonoldskill/Host. 8exposeddevfamilies,notHost/netbenefit.
+Closure original-feedback-v2-source128-saved-selection-closure-v1.json; native/CPU192choicechanges0.
+
+Orphanoriginalu192child1408183 finished924withoutretry;oldparent1408159andobserver1964501gone.
+Native44646.864101632CPU/11373.006796wall,4503014inputtokens alreadychargedonce. Originaldriverstale
+RUNNING preserved. ORIGINALfrozen core verifiedallinputs/outputs/conditions/results/exactledgerdelta;
+customclosureadapter preservesunknownOSexit/parentfinalCPU/exactchildresidual,notfabricated0.
+source128-u192-orphan-observation-v1/closure-summary.json.117explicitidlefields settled163.935141410CPU,
+includingallv172pending/progress/observer+meteredverification/selection/closure. No native/nestedrebill.
+Future use launch_original_saved_job_detached_v1.py afteridle/eligibility; originalcoordinator admission,
+evalconditions andRUSAGE accounting unchanged. Currentselected96actualPID/argv/sessionverified.
+
+Budget4thcondition remainsOPEN:15oldF1statesonly1samepacketfits1024,nomenuadmissionchangeinthatcase;
+readpolicyincludesmaterial_limit andin-progresscachebindsrequest. No runtimebudgetrewrite/packetclear/
+allowancereset. Formexplicitnewrequest/messageafteractualpriorTooldelivery+knownvisibility evidence.
+Currentprefix32v2 two collectors124positions,primaryrules;exactprefix/branchbridgefrozen,actual0.
+Bodypresenceininitialcontrollernew_eventsisnotHostknowledge/newinformationgain. Fullgoal incomplete.
+
+Only3pendinglistedlaunch/closurefields inv173accounting+ownprogress+futureactive96residual pending.
+AllolderexplicitfieldsPAID. Unknownorphanparent/residualstillunknown. NoSHA/fingerprints/subagents/
+newservices/secondledger/remote writes. Original9/Q/reg/coverage/F1/F2/F3/compact/newprefix/aux/seeds/
+autonomousHost/lifecycle/external/fourfigures remainrequired.
+
+# Previous v172 (superseded model lifecycle/selection/accounting; orphan provenance retained)
+
+# LATEST: 2026-10-28 goal ACTIVE; v172 ORIGINAL evaluator live, coordinator missing
+
+ONE LIVE MODEL: ORIGINAL source128-answer-seed0-u192-v1/update-192 savedCPU924, child1408183,
+/proc start_ticks601990892, PPID1, snapshot 902/924. Originalparent1408159ABSENT;
+exec10320UNAVAILABLE. Driver.jsonstillRUNNING isSTALE, retainedunchanged. Childargvexactoriginal.
+READONLY observer1964501 detached, source128-u192-orphan-observation-v1/observer.json. No restart/
+retry/secondmodel/offlineledgerwritewhileoriginalchildlive. Lostcoordinatorcauseunknown.
+
+AFTER ACTUAL CHILD TERMINAL: follow source128-u192-orphan-observation-v1/closure-sequence.json.
+1 ORIGINALverifier-tools-v2 +verify_orphan_saved_feedback_candidate_v1.py (BEFOREledgerchanges).
+   Requirepinnedchildstopped,nativeCOMPLETED/all924outputs/results/conditions/exactledgerdelta.
+   ObservednonzeroOSexitrejects; missingexit UNKNOWN,neverassume0. Originaldriverpreserved.
+2 Originalall6pointselection,closure,thenexplicitidleCPUsettlement. UnknownoriginalparentCPU/
+   exactchildresidual NOTbillableaszero/guessedvalue. Nativecomputealreadychargednotrebilled.
+3 Ifselectedearly, use launch_original_saved_job_detached_v1.py JOB_ID fordeclaredold860 only.
+   Unchangedoriginalone-jobcoordinator retainsadmission/conditions/accounting; detachednewsession/
+   stdin/stdout only. Receiptmeanscoordinatorlaunched,notmodelstarted;inspectactualdriver/PIDs.
+Savedjobs16,selections/retention2of9,Host0;128u96best stillprovisional;originalCE/delivery6fits remain.
+
+Observerterminalkernelstatusparser verifiedusingNONMODEL childexit0and3. Newclosureadapter/launcher
+syntaxcompiledonly;no modellaunched/retried. Originalnativechildstillownswrites/results/compute/ledger.
+Observer/procCPUticks diagnostic,notexactRUSAGEreplacement. Keepunknownoriginalparent/residualusage.
+
+Returnbudgetdiagnosis return-budget-handoff-dev-v1:15existingF1states,onlyE08originalpacketfits1024,
+no existingcandidatesremovedthere. Other14selectedpacketsexceed1024. AlloriginalrequestlimitsNone.
+material_limit ispartofreadadmissionpolicy;in-progresscachebindsoriginalrequest. No runtimepatch,
+cache/policyrewrite,packetclearing orrequestboundraising. Fourthsameknownbudgetconditionrequires
+anexplicitnewrequest/messageafterrealTooldelivery+source/knownvisibilityandfreshmatchedadmission.
+Thisdiagnosis isnotnewbudgeteffect/Hostresult/completedfourthprefixcondition.
+
+110pendingexplicitfields inv172accounting plusownprogress+FINALobserverCPUwhenclosed. No ledgerwrite
+whilemodelalive. Allv165+coverageoldfields paidatv166;Native/child/nested/copy costsnotdoublebilled.
+Fullgoal NOTcomplete; original9/Q/reg/coverage/F1/F2/F3/compact/newprefix/aux/seeds/autonomousHost/
+lifecycle/external/fourfigures remain. NoSHA/fingerprints/subagents/newservices/secondledger/remote writes.
+
+# Previous v171 and first incident notice (superseded live process/closure/accounting guidance)
+
+# ACTIVE INCIDENT: original source128 saved192 child is LIVE; coordinator disappeared
+
+Observed 690/924. Original parent1408159 absent; original evaluator1408183 LIVE,
+PPID1, /proc start_ticks601990892, argv literally matches original dispatch. Exec10320 unavailable.
+DO NOT restart/retry or admit another model. DO NOT settle offline CPU while child is live.
+Original driver.json still RUNNING is stale and must remain as provenance. Native child still writes
+run/predictions/compute/ledger at original output. Watch original PID/start identity and native files.
+Incident: artifacts/evidence-gap-20261023/source128-u192-orphan-observation-v1/incident.json.
+After actual child terminal, reconcile native completion+all924rows+onlyexpectedledgerdelta using ORIGINAL
+frozen verifier-tools-v2 core. Do not fabricate parent exit0/residualCPU; unknowns stayunknown.
+Current budget-capacity development has only read code so far, no implementation/model job yet.
+
+# LATEST: 2026-10-28 goal ACTIVE; v171 exact prefix-to-branch bridge verified
+
+ONE LIVE MODEL unchanged: source128-answer-seed0-u192-v1/update-192 savedCPU924.
+Parent1408159/child1408183,exec10320;snapshot 611/924; actual/proc/run authoritative.
+Afterclose ORIGINAL frozen verifier-tools-v2 audit,all6pointselection,conditional selectedearlyold860,
+thenoriginalCE/delivery6fits. No restart/secondmodel/offlineledgerwrite whilelive. Savedjobs16,
+selection/retention2of9,Host0. Native/saved128u96best stillprovisional.
+
+NEW prefix-branch-bridge-dev-v1/summary-v1.json. Optional--prefix-selection inworking
+prepare_view_feedback_branches.py usesexactactualselector slots,oneprimarycollector/family fixedorder.
+Missing/reached-not-branchable cellsretained,noquota-fill orlater-success/other-collector substitution;
+allclosedcapturesstilllinked. Existingoperations/seededpostbinding sampler/commonfixedcontext4+
+continuation2 unchanged. Rawgoldempty;prefixmetadataoutsideinput. Legacyfrozenfilesuntouched.
+20working+20frozen tests,Ruff/mypy1/toolsboundary PASS.22packageimportswithin346filefreeze;3projection
+filesliteral-equalcurrentD8. Old2acaptureswereexportedusingOLD2a source,notnewquestioninstructions.
+Actual8oldfamilies24prefixstates/72legalbranchproposals,24selected+8missingfourthcells;allgoldempty,
+actualactions/parameters/order/commoncontinuationverified.24oldREADYsingle-callframes(0siblings),NOT
+newHostreadouts. Defaultactual2family4stateoutputsbyte/objectequaloriginal2atoolexceptcompute;8frozen
+prefixpolicy/rawfilesbyteequaland4selectionreportsequalexceptcompute. NEVERdispatchlegacyregressionpacks.
+
+current-dispatch-v1.json connectsnewcollectionv2 ->frozenselector ->exactbranchprep ->existingD8
+conditionalHostbranchrunner. Up to96current3slotstates/288branches,actualcountsunknown;fourthcondition
+stillpending. Allnewcurrentcollection/branch/Host/qualitylabels0;source/knownwitness/capacity/execution/
+grading/compile/currentcoveragefits remainrequired.
+
+IMPORTANT oldmemorybodyexposureaudit:16poststates/8families,all67acquiredrawturnoccurrencesalready
+literalininitialcontrollernew_events withsameref/role/origin/substring. Initialknownrefs0butthatdoesNOT
+proveHostknowsnothing. READchangesopened/deliverablematerial/actions;notautomaticnewcontrollertext,
+semanticinformationgain orHostknowledge. Initialeventsomitrevision =>notindependentversionproof;
+serializedfieldauditonly,notnewscorertokenvisibilityaudit. NewD8/MuSiQueexposurestillunknown.
+
+Currentprefix32 authoritativecollection-plan-v2/selection-plan-v2:fixed_context+rules124positions,
+primaryTRAINprefixesrulesonly,max4/familytotal;original32histories/724preflightSources unchanged,
+29literaldependencyblocks/458bodygroups remain. Originalfixed-onlyplanretainedNOTRUN.
+99pendingexplicitfields inv171accounting plusownprogress/future192residual;CLIwholechild includesnested
+preparationCPU. Allv165+coverageoldfields paidatv166. Fullgoal NOTcomplete. NoSHA/fingerprints/subagents/
+newservices/secondledger/remote writes. Original9/Q/reg/coverage/F1/F2/F3/compact/newprefix/aux/seeds/
+autonomousHost/lifecycle/external/fourfigures remainrequired.
+
+# Previous v170 (superseded prefix branch readiness and accounting; same live model)
+
+# LATEST: 2026-10-28 goal ACTIVE; v170 actual-prefix selector verified; collector amended before execution
+
+ONE LIVE MODEL unchanged: source128-answer-seed0-u192-v1/update-192 savedCPU924.
+Parent1408159/child1408183,exec10320;snapshot 463/924; actual/proc/run authoritative.
+Afterclose ORIGINAL frozen verifier-tools-v2 audit,all6pointselection,conditional selectedearlyold860,
+thenoriginalCE/delivery6fits. No restart/secondmodel/offlineledgerwrite whilelive. Savedjobs16,
+selection/retention2of9,Host0. Native/saved128u96best stillprovisional.
+
+NEW actual-prefix-selector-dev-v1/summary-v1.json;src/milai_lab/analysis/retrieval_prefixes.py,
+tools/select_actual_prefix_states.py. Firstactualprimarycallonly; initial,afterfirst/secondsuccessfulREAD
+addingliteralSourceintervalcoverage. Mergeoverlappingaliases;no SEARCH/failedREAD/interpretation/
+unobservedbody/repeat-as-new. MissingStorecheckpointnotreconstructedfromlatertrace;firstfailedcall
+notreplacedbylatersuccess. Publicposition failed/completed/entered-without-record/unexecuted separate.
+Fourthsameknownrequirement/returnlimit ALWAYS pendingactualreceipt+legalbinding,notimplementedhere.
+
+11working+11frozen tests,Ruff/mypy2/package/toolsboundaries PASS.346fileanalysisfreeze,14packageimports
+insidefreeze. Actualold2a8exposedfamilies*3collectors=24primaryunits,28actualcalls;24initial/24firstREAD/
+16secondREADslots;22completed/2failedpublicpositions retained. Fourfrozenreports objectequalexceptCPU.
+Theseareoldmechanicalregressioncounts,NOTnewprefix/Hostresults/independent24families orqualitylabels.
+Fourfirstanalysesfailednativecallsource_versionobject-vsdriverstringassumption; fixedfullprofilefreeze
+object+nativegitversionmetadata contract/testfixtures, no alternative-formatfallback/modelretry.
+
+CRITICAL current-prefix32 NEW authoritative collection-plan-v2.json +selection-plan-v2.json +summary-v2.json.
+Oldfixed-onlyplan.json retainedNOTRUN. Actualold8fixed_contextcalls haveoneexpandedcontextREAD andno
+secondacquisition, so addedexistingrulescollector BEFOREnewexecution. fixed_context+rules124positions
+(62each), all32families/nativevariants/originalrequests/sourceobjects unchanged. PrimaryTRAINprefixes
+fromrulesonly,max4/familyTOTAL;fixedbaselineinventoryretained,notusedtofillmissingruleslots. Configversion
+onlysharedconfigchange;nativeCLI bindsexistingpolicies,no functionalruntimechange/newscorer.
+Original46bank/724Sourcepreflight appliesunchanged;29literaldependencyblocks/458bodygroups unchanged.
+Selector frozen dispatch actual-prefix-selector-dev-v1/current-selector-dispatch-v1.json targetsnewv2.
+Actualcurrentcollection/Host/prefixstates0;fourthcondition/sourcewitness/branches/quality/currentfitspending.
+
+74pendingexplicitfields inv170accounting plusownprogress/future192residual. ChildCLI includesnested
+selectioncost;currentprefixsummaryv2costnestedinselectorsummary. Allv165+coverageoldfields paidatv166.
+Fullgoal NOTcomplete. NoSHA/fingerprints/subagents/newservices/secondledger/remote writes. Original9,
+Q/reg/coverage/F1/F2/F3/compact/newprefix/aux/seeds/autonomousHost/lifecycle/external/fourfigures remain.
+
+# Previous v169 (superseded prefix collector/selection readiness and pending accounting; same live model)
+
+# LATEST: 2026-10-28 goal ACTIVE; v169 current-prefix32 inputs and Source preflight verified
+
+ONE LIVE MODEL unchanged: source128-answer-seed0-u192-v1/update-192 savedCPU924.
+Parent1408159/child1408183,exec10320;snapshot 219/924; actual/proc/run authoritative.
+Afterclose ORIGINAL frozen verifier-tools-v2 audit,all6pointselection,conditional selectedearlyold860,
+thenoriginalCE/delivery6fits. No restart/secondmodel/offlineledgerwrite whilelive. Savedjobs16,
+selection/retention2of9,Host0. Native/saved128u96best stillprovisional.
+
+NEW current-prefix32-dev-v1/summary-v1.json.32registeredtrainfamilies:16memoryalreadyinfeedback,
+16MuSiQue2hopoutside128feedbackpool;ALL32alreadyoperationtraining-exposed. No newindependentfamilies
+claim. Fixedexistingseed0orderincludeshistoricalanchors;notunbiasedrandomcohort. Allnativevariants/
+originalrequests/sourceobjects/arrivalorder retained,62positions;fixed_context4reads/2048return on
+frozend8,config_versiononlychange. No newmodel/Host/retrieval/currentprefixstate executed.
+
+ACTUAL Sourcepreflight:46isolatedbanks,724imports/reopens,body/role/origin/session/externalkey/owner/
+unknownoccurred_at+separateobserved_at verified;111runtimeimports frozen,originalledgerunchanged.
+MemoryprimaryincomingSources importedonlyforpreflight;laterarrivals stayintheactualfixture andwere
+notexecuted. Preflightbanks never reusedasexperimentbefore orHostknown. All32historyobjects literal-equal.
+Literaloverlap:724positions=458body/role/origin/timegroups,266duplicatepositions;11groups crossfour
+MuSiQuefamilies168/372/494/606.29literaldependencyblocks,NOT29provenindependenthistories. No reselection.
+
+Prefixslots declared:primarypublicposition'sfirstactualcallinitial,first/secondsuccessfulREADadding
+actualrawSourcecoverage;missingretained,no alternate-successful-call/variantfill. Atmost4perfamily.
+Fourthsameknown+changedrequirement/returnlimit needsactualcompletedpriorToolreceipt andlegalbinding
+AFTERformation; stillpending. A/Bacquiredunitsarenotsemanticallycertifiedcomplementarity orHostknowledge.
+Actualcollection,witnessreview,slotselection,legalsamebeforebranches/Hostgrades andnewversioncoveragefits
+remainrequired;old2a116coveragecomparison staysseparate. Existing8/32devsplitsunchanged.
+
+37pendingexplicitfields inv169accounting plusownprogress/future192residual. WholeSourcepreflightchild
+10.406879CPUincludesnested46setupCPU;parent.001344288 separate. Allolderv165+coveragefields paidatv166.
+Fullgoal NOTcomplete. NoSHA/fingerprints/subagents/newservices/secondledger/remote writes. Original9,
+Q/reg/coverage/F1/F2/F3/compact/newprefix/aux/seeds/autonomousHost/lifecycle/external/fourfigures remain.
+
+# Previous v168 (superseded prefix readiness/pending accounting; same live model)
+
+# LATEST: 2026-10-28 goal ACTIVE; v168 paired auxiliary exposure prepared and audited
+
+ONE LIVE MODEL unchanged: source128-answer-seed0-u192-v1/update-192 savedCPU924.
+Parent1408159/child1408183,exec10320;snapshot 144/924; /proc/run authoritative.
+Afterclose ORIGINAL frozen verifier-tools-v2 audit,all6pointselection,conditional selectedearlyold860,
+thenoriginalCE/delivery6fits. No restart/secondmodel/offlineledgerwrite whilelive. Savedjobs16,
+selection/retention2of9,Host0. Native/saved128u96best stillprovisional.
+
+NEW auxiliary-exposure-dev-v1/summary-v1.json. Applyingexistingaux128budgettoexpanded48443knowncells
+woulddraw2048:55positive/1993negative,484families,2authorlabels;only47completestablenegativepairs,
+0completechange/stablepositive. Thisispreparationdiagnostic,notactualold3979rowauxfitresult.
+Newpuredatahelper+CLI paired_auxiliary_panel: all4knownchanges+23stablepositivepairs,oneknownpair
+perremainingquery,fillseedednegativewithoutpairreplacement.1024pairs/2048slots,512families/754queries,
+997stablenegativepairs;3unpairedqueries remaininrawsource. Onefull128updatepass seesbothsides,not
+simultaneouspairloss/equalclassweights.50positivecells,positivefamily-eventlossmass.02560221354.
+Onlymetadata.state_id addedasoriginalmatrixposition;allvisibleinputs/gold/native/reviewprovenance
+literalunchanged.4computedchangesstill2clear/1debatableDNA/1redirectedCpurpose;nottruthcertified.
+
+9working+9frozen tests,Ruff,mypy2,package/toolsboundaries PASS;3datafiles literalreproduced.
+ActualexistingSDK2048onehot/slotshuffles valid,482100tokens,max546,0clipping;unchangedoldauxdev961/max552.
+Basevsu262tokenizerbackendidentityassertinitiallyfailed:onlysavedtruncation(Nonevs48)differs.
+ReadactualSDK thenprovedall2048items/permutedIDs/markers/targets equal;no fallback/modelretry.
+FailedmechanicalCPUunknown; staticmypyannotationfailurefixed. Frozen1072codefiles,nonewtrainingruntime.
+
+Twoexistingstagecommands instudy-plan-v1.json: fixedaux128fromoriginalmultilingualbase,thenexact
+source256-actionsfull524fromaux128. Originalcomplete-actionfrozenruntime/data/order/options/lossmasses/
+schedule retained;actualbaseline8384drawplan+4886weights reproducedexact.48,034,873oldtokensreference,
+NOTnewactualmeasurement. Extraauxcompute separate/not equalFLOPs. Originaloldauxqueueunchanged.
+Actualnewaux/operationfits0; newweightsneedall7savedpointsinclnewinitialization,Host,actualgradient/
+token/costchecks. Old961dev isnotnewindependentconditionaldev. Fullgoal NOTcomplete.
+
+30pendingexplicitfields inv168accounting plusownprogress/future192residual. Wholechild/nestedCPU
+notdoublebilled;allv165+coverageoldfields paidatv166. NoSHA/fingerprints/subagents/newservices/
+secondledger/remote writes. Original9/Q/reg/coverage/F1/F2/F3/compact/newprefix/aux/seeds/autonomousHost/
+lifecycle/external/fourfigures remainrequired.
+
+# Previous v167 (superseded auxiliary readiness/pending accounting; same live model)
+
+# LATEST: 2026-10-28 goal ACTIVE; v167 compact pilot ready; second author-review batch closed
+
+ONE LIVE MODEL unchanged: source128-answer-seed0-u192-v1/update-192 savedCPU924.
+Parent1408159/child1408183,exec10320;snapshot 58/924. Actual/proc/run authoritative.
+Afterclose original frozen verifier-tools-v2 audit, all6pointselection,conditional selectedearlyold860;
+thenoriginalCE/delivery6fits. No restart/secondmodel/offlineledgerwrite whilelive. Savedjobs16,
+selection/retention2of9,Host0. Source12812/24/48/96verified;96best stillprovisional.
+
+NEW compact-behavior-pilot-v1/plan.json+preparation.json: all15frozenF1conditions/8families,
+30pairedshared_actions/compact_actions positions,adjacent/alternatingfirstarm,commonu262CPU4/16384/2048.
+Existingfrozend8runner only;originalF1recipeunchanged.15actualpayloads+frames verified,values/bindings/
+questions/order unchanged;priortokenizercapacityidentity applies. Newforward/Host0. Format sensitivity
+ofshared-trainedcheckpoint only; notcompact-trainedbenefit/full12F1/autonomousHost. Actualmodel/Host,
+matchedcompacttraining/eval andrequest-text remainpending.
+
+NEW conditional-cross-review-dev-v2/summary-v1.json: next16eligibletrainfamilies,2fixedunknowncells
+perfamily=32positions. Author15satisfies/12doesnot/5unknown;27newlabels. Combined48reviews41known/7unknown,
+48443trainingcells,3148unknown;all51591inputs/native48402golds/prior16reviews unchanged. Existingfrozen
+reviewCLI used;27newSDKtargets valid,splitfiles byteequal;no productioncodechange/repeatedunittests.
+Combined4computedchanges (native-only0):2clearnarrowedgoalexamples,1debatableDNAexplicitness/native
+negativeboundary,1Cheaderpurpose-redirectedneed. Not4cleanverifiedconditional effects. Allprovenance/
+labels preserved. Medical/historical/software/factualvalidity notindependentlyverified;noHostlabels.
+Firstselectionstr.splitlines splitliteralUnicode separator withinJSON andfailedbeforeselectionwrite;
+fixedphysicalfileiterator,no contentrepair/skips/runtimefallback. FailureCPUunknown,notzero.
+
+11pendingexplicitfields inv167accounting plusownprogress/future192residuals. Applicationwholechildand
+compactwholechildinclude nestedpreparation; do notdoublebill. Allv165andcoveragefields paid atv166.
+Fullgoal incomplete; original9/Q/reg/coverage/F1/F2/F3/compact/newprefix/aux/seeds/autonomousHost/
+lifecycle/external/fourfigures remain. NoSHA/fingerprints/subagents/newservices/secondledger/remote writes.
+
+# Previous v166 (superseded compact/review readiness and pending accounting; same live model)
+
+# LATEST: 2026-10-28 goal ACTIVE; v166 source128 early saved verified; endpoint192 RUNNING
+
+ONE LIVE MODEL: source128-answer-seed0-u192-v1/update-192 savedCPU924 (old860+feedback64).
+Parent1408159/child1408183,exec10320;snapshot 9/924. Actual/proc/run authoritative.
+Dispatch original-feedback-v2-saved-reload-v1/dispatch/source128-answer-seed0-u192-v1/update-192/driver.json.
+Afterclose ORIGINAL frozen verifier-tools-v2 audit,full6pointselection,conditional selectedearlyold860.
+No restart/secondmodel/offlineledgerwrite whilelive. Native/saved96best provisional. OriginalCE/delivery6fits
+andallHost remain. Savedjobs16;selections/retention2of9;Host0;nativeanswer3done.
+
+Source128saved12/24/48/96 ANSWER .7218501984/.7614087302/.7579365079/.8100198413;
+delivery .8072916667/.7578125000/.8411458333/.8567708333. One24argmaxchange memops_A32initial:
+native refresh_view vsCPU search_0_8,maxlogitdelta.000659585;ANSWERunchanged,delivery+0.520833pp.
+Originalexecutedpair answertie/deliverysearch. No newHostoutcome/isolatedquantizationclaim/retry.
+All4nativechild CPUrecorded once;u12/u24/u48/u96 idleexplicitsettlements 18.196069548/31.236240153/
+37.213523827/32.191000948CPU. Allpriorv165+coveragepending fields nowPAID;onlyv166/future192residual pending.
+
+NEW coverage-control-dev-v1/summary-v1.json: matched116families/3collectors,696feedback+696replay each.
+initial_only literallyrepeats348actualinitial states;initial_post uses696actualstates. Same3072indexdraws,
+1529feedback/1543replay;eligiblefeedback draws1074/1088,targetpairs2064/2135. Not equalFLOPs.
+Postslots change132request/115read_goal/95trainingevent identities;known_evidence literalchange0.
+No newevidence/knownsufficient inference. Initial/post intervention includesactualcontextdifferences.
+TwoNEW Q-directionfits commonu262/192updates,old2a+Qfreeze;unmatchedfull128Q notcontrol.
+19working+19frozen tests,Ruff/mypy3/toolsboundary PASS;7files literalreproduced,recipes/imports verified.
+Nativeauditor+savedplan10mandatoryjobs2360forwards,max2earlyold860 prepared;newfits/Host0.
+Supplementary old2a-state comparison doesNOTcomplete newbehavior6.4 or32-64newfunctionalprefix5.4.
+
+Fullgoal remains incomplete: original9+selectedretention/Host,Q3/reg/coverage/compact/F1/F2/F3/newdata/
+aux/seeds/autonomousHost/lifecycle/external/fourfigures. NoSHA/fingerprints/subagents/newmodelservices/
+secondledger/remote writes. Priorfrozen inputs/failedpositions/unknownusage remainunchanged.
+
+# Previous v165 (superseded live job, source128 early results and coverage readiness/accounting)
+
+# LATEST: 2026-10-28 goal ACTIVE; v165 source64selected retention CLOSED; source128saved12 RUNNING
+
+ONE LIVE MODEL: source128-answer-seed0-u192-v1/update-12 savedCPU64feedback.
+Parent1191763/child1191768,exec55219;snapshot 26/64. Actual/proc/run authoritative.
+Dispatch original-feedback-v2-saved-reload-v1/dispatch/source128-answer-seed0-u192-v1/update-12/driver.json.
+Afterclose ORIGINAL frozen verifier-tools-v2 candidateaudit,idlesettlement,then128u24/48/96/192;full6point
+selection+conditionalearlyold860. Nativewinner96stillprovisional. No restart/secondmodel/offlineledgerwhilelive.
+OriginalCE/delivery6fits andallHost remain. Savedjobs12;selections/retentionfits2of9;Host0;nativeanswer3done.
+
+SOURCE64selected96old860 CLOSED,oldparent519198/child519203absent,exec58778closed. Originalfrozenretention
+verified: oldfamilymacro.7261437692474619 vsbase.807826854448818 (-8.16830852pp),616labelled427accepted
+(base484),244masked. Answerselection96 at.7839781746 remains; endpointold.72073016095 separate.
+`source64-answer-seed0-u192-v1/retention.json`, `original-feedback-v2-source64-retention-closure-v1.json`.
+No retroselection/Host/netbenefit claim. Idle43fieldsettlement279.628723654CPU includes allv164pending+
+reviews+coverageinventory+retentionaudit/closure+driver37.444968923/.014366492. Native41365.454796077CPU
+alreadyrecordedNOTrebilled. Receipt original-feedback-v2-source64-selected96-retention-cpu-settlement-v1.json.
+
+NEW conditional-cross-review-dev-v1/summary-v1.json. First8eligibletrainfamilies, first2unjudgedcells each
+fixedbeforetextreview;16reviews:8satisfies,6doesnot,2unknown(ambiguouscar/HVAC). Nativecounterpart labels
+omittedfrompacket, butRootknowsdatasetconstruction; NOTindependentblind/humanor factual/softwarevalidation.
+14newknown traincells inSEPARATE reviewed512-v1; nativefiles/gold/splits untouched;known48416/unknown3175.
+Newpairedlabels:1change(Skypeautomatic-order broadquery vsnativestep-by-stepmenu requirement),13stable,
+2unknown. Mixedauthor/nativeprovenance; native-onlychanges still0. Onecase cannotproveinstructionability.
+27working+27frozen testsPASS,Ruff/mypy2/package+toolsboundaryPASS. Exactreviewbindings/quotes/native-mask/
+train-only guards; all51591serializedinputs equal,14newSDKonehotitems valid,5frozenexportfiles byteequal.
+Quotechecks areNOTsemanticoracle. Authorreasoning notseparatelymetered/notzero; no newexperimentmodel jobs.
+
+Coverageinventory coverage-control-dev-v1/availability-audit-v1.json:768feedback+768replay,128families,
+384family/collector slots allactualinitial/post;175slots and116families knownqualitydirection inbothstages.
+Matchedstudy criteria/replay/draws stillTODECLARE; no reuseunmatchedfull128baseline/new32-64prefixclaim.
+Expandedpool v164 remains1743eligibletraincomponents;2048/8192targets+broaderconditionalcoverage pending.
+Onlyv165progress andfutureactive128u12driverresidual/newexplicitwork pending. AllolderexplicitfieldsPAID;
+nested/copy/native costs notdoublebilled. NoSHA/fingerprints/subagents/newmodelservices/secondledger/remote
+writes. Fullgoal NOTcomplete; F1/F2/F3/coverage/compact/seeds/autonomousHost/lifecycle/external/figures remain.
+
+# Previous v164 (superseded live job/source64retention/accounting and review readiness)
+
+# LATEST: 2026-10-28 goal ACTIVE; v164 source64saved selected96; selected old-retention RUNNING; expanded512data verified
+
+ONE LIVE MODEL: source64-answer-seed0-u192-v1/selected-retention-96, savedCPU old860.
+Parent519198/child519203, exec58778; snapshot 588/860. Actual /proc/run authoritative.
+Dispatch original-feedback-v2-saved-reload-v1/dispatch/source64-answer-seed0-u192-v1/selected-retention-96/driver.json.
+After close ORIGINAL frozen verifier-tools-v2 retentionCLI, idle settlement; source128saved fullcurve next.
+No restart/second model/offlineledgerwrite while live. OriginalCE/delivery6fits+allHost remainrequired.
+
+Oldsource64u192parent3923544/child3923568 absent, exec45719closed exit0;924rows verified. All6CPU0/12/24/
+48/96/192 selectedANSWER96 at.7839781746031746 (+26.5997pp vsbase.5179811508). Endpointanswer.7596726190,
+delivery.8307291667, oldoperation.72073016095 vsbase.80782685445. Selected96oldmetric stillUNKNOWN;
+endpointdoesnotreplaceit orpermitretroselection. Allfeedbackargmaxchangesvsnative0; notalllogitsidentical.
+Closure original-feedback-v2-source64-saved-selection-closure-v1.json. Savedjobs11, selections2of9,
+retentionfits1of9, Host0. All3nativeanswerfitscomplete; full9planunchanged.
+
+Idle74fieldsettlement205.66659938999413CPU paid allv163priorpending+initialdataattempts/env/allocatorchecks+
+u192audit/select/closure/driverresidual41.64007961599418+coord.018524576. Native42848.154315384CPU notrebilled.
+Receipt original-feedback-v2-source64-u192-saved-cpu-settlement-v1.json. Earlierpendingflags arePAID.
+
+NEW promptriever-expansion-first32768-v1/summary-v1.json authoritative. Fixed32768publictrainrows acquired,
+old2000JSONobjects equal. Datajobsv1/v2failed(retained100rows/8MiBpartial);v3range retained130023424bytes
+thenproxy/TLSfailed;v4reused31completechunks,24new2MiB requests0fails,full179655033byteParquet parsed.
+PinnednativeGitrevision metadata,HTTP206ranges/lengths+directbytes, NO SHA/ETagdigests. PyArrow26private
+parserenv only. Physical36306rows,3538unusedstoredpublictrainrows notlogicalintake/unseenconfirmation.
+All datajobs closed; modeljobabove alone remains. Rangev4exec54155closed, no restart.
+
+Sourcegraph2172components/16410basequeryIDs:train1743families2192queries4379rows;dev428families514queries
+1026rows;oneexcludedgiant27363rows13704queries bridges600oldtrain+158olddev anchors. Old912families'
+ancestries intact;0source-keysharing acrossdistinctcomponents. Do notrenamequeriesasindependentfamilies
+oradmitolddev.2048/8192componenttargets remainUNMET. Existingraw/allocations/results untouched.
+19working+19frozen allocator tests, Ruff/mypy2files/package+toolsboundaryPASS. Actualold2000regression
+exact912/730train/182dev. Currentfrozenallocator allocation-freeze-v1/MiLAi-Lab; fullsources beforecaps.
+512eligiblewholetrainfamilyprefix:757basequeries1511rows51591cells48402known3189unknown;
+0knownchanges,stablepositive3/stablenegative22557. Constantnegative stable99.9861% isnotpurposeability.
+All nativejudgments/source/title/text/query/purpose/fullCartesiancoverage audited. SDKmax7061tokens
+at8192/head384,0clipping/maskreplace; all48402trainingitems; no modelweights/forwards.
+
+Only18laterexpansion fields listedinv164accounting +ownprogress+future selected96driverresiduals pending.
+Nestedrequest/CLIprep/componentmeasures notadditionalbills; nooffline ledgerwrite whilelive.
+Sourceexpansion/explicitcrossconditionjudgments/auxoperationbudget/nativeFollowIR andallotherfullgoal
+requirements remain; no subagents/newmodelservices/secondledger/remotewrites. Fullgoal NOT complete.
+
+# Previous v163 (superseded model job, source64selection, expansion and accounting)
+
+# LATEST: 2026-10-27 goal ACTIVE; v163 conditional union adapter/pilot verified; source64 endpoint RUNNING
+
+ONE LIVE MODEL unchanged: source64-answer-seed0-u192-v1/update-192 savedCPU924.
+Parent 3923544/child 3923568, exec45719; snapshot 627/924. Actual /proc/run authoritative.
+No restart/second model/offlineledgerwrite while live. After close ORIGINAL verifier-tools-v2 audit,
+idle settlement, all6point selection andconditional selectedearlyold860. Then128savedcurve; original
+CE/delivery6fits andallHost stillrequired. Saved jobs10; selection/retention1of9; Host0.
+
+NEW conditional-applicability-dev-v1/summary-v1.json authoritative. Dataset adapter+CLI+pair metrics
+frozen onfunctional d8codebase withonly3data-tool overrides; originalfunctional/Q/reg freezes untouched.
+Nativequery/purpose andcandidate title/text preserved; nativeIDs/provenance outside state/questions.
+Unknown goldempty, conflicting memberships separatelymasked; sameIDchangedbody/title no labeltransfer.
+Literalaliases retainnativeIDs. Existingallocations preserved, no fingerprint gates/operationlabels.
+Actualpilot fixedfirst32train groups beforecontrastcounts:74rawrows,37basequeries,74conditions;
+2379native memberships (74positive,2220ordinarynegative,85instructionnegative),2534matrixcells,
+2375known trainingcells,159unjudged. All memberships tracedonce; no dev/test reinterpretation.
+CRITICAL:1108stablepairs allNEGATIVE;0knownchangepairs/0stablepositive. Constantnegative→1.0combinedstable,
+otheraccuracyNone. Report change/stable-positive/stable-negative/unknown separately, joint correctness,
+pair→query→family aggregation. No purpose-understanding/whole-dataset-uselessness claim or fakecrosslabels.
+Broadersource growth/explicit supported crossconditionjudgments, matchedauxoperationexposure andnative
+FollowIR retrieval/p-MRR remainrequired; old349classification/pilotcannotreplace them.
+
+14working+14frozen testsPASS;Ruff/mypy3files/package+toolsboundariesPASS. ActualoldFollowIR46train rows
+objectequal; nativeSDK2534completeinputs,max563tokens at8192/head384,0clipping/maskreplace,2375trainingitems.
+Frozen5datafiles literallyequal. Coordinator usedPython3.10 andfailedStrEnum afterboth3.11childchecks
+passed; corrected3.11importverification withoutretesting/recreatingoutputs. No runtimefallback/modelretry.
+Source README failures resolvedtoofficialorionw/FollowIR master; primarycards retained, no benchmarktest
+content opened. Publictrainpreview242821/218148 confirmed inoldintakemetadata; no unseenclaim.
+
+PENDING50 explicit fields inv163accounting +ownprogress +future active192residuals. ChildCPUincludes
+nestedprep, coordinatorseparate; no native/copy/Source-nested doublebill. FailedfirstreferencefetchCPUunknown.
+No SHA/checksum/fingerprints/subagents/newservices/secondledger/remote writes. Fullgoal NOT complete.
+F1review/new4preflight,Q3,head/softcontrols readybutmodelcomparisons/newdatasets/Host/externalremainpending.
+
+# Previous v162 (superseded conditional-data readiness/accounting; live job unchanged)
+
+# LATEST: 2026-10-27 goal ACTIVE; v162 matched regularization controls frozen/tested; source64 endpoint RUNNING
+
+ONE LIVE MODEL unchanged: source64-answer-seed0-u192-v1/update-192 savedCPU924.
+Parent 3923544/child 3923568, exec45719; snapshot 301/924. Actual /proc/run authoritative.
+No restart/second model/offline ledgerwrite while live. After close ORIGINAL frozen verifier-tools-v2 audit,
+idle settlement, full6point selection and conditional selectedearly old860. Then source128 savedcurve;
+original CE/delivery6fits and allHost remain. Saved jobs10; selection/retention1of9; Host0.
+
+NEW regularization-dev-v1/summary-v1.json authoritative. Optional --pair-label-smoothing default0,
+known training y→(1-eps)y+eps(1-y); unknownskip/tie0.5/replay/weights/draws/devmetrics unchanged.
+Trigger original64 late48/96/192 margins .519/2.001/2.682 and96→192accuracydecline; descriptive8devfamilies.
+Reuses declared source128 Q-direction full baseline; two new controls only: existing freeze-encoder,
+and full-update epsilon0.05. No combinedarm/epsilon sweep/fullDPO/unknown-fraction estimate.
+Training overlay+analysis+tests frozen under regularization-dev-v1; original2a dependencies, NOTd8F3.
+Original9 andQ3 training/analyzer freezes untouched. Actual newregularization model jobs0.
+
+54 working +54 frozen CPU tensor/receipt/mechanical tests PASS; Ruff,qualifiedmypy5files,toolsboundaryPASS.
+Three Ruff linewrap failures retained/fixed; no modelretry. Primary author README/trainers/LICENSE saved
+with URLs/date, noSHA. New native audit matches exact Q baseline exceptdeclared scope/softtarget/output/
+phase and checks smoothing argv/run/everycheckpoint. Saved audit keeps epsilon identity/retention rule.
+Each nonzero saved checkpoint gets all encoder/nonencoder tensor-byte comparisons, no model load/digest.
+Head-only requires every storedencoder byte unchanged; this is savedprecision evidence, not allintermediate
+in-memory values. Realold32 helpercheck:134encoder tensors changed;31of36nonencoder changed. No newbenefit.
+Actualold32 native/savedselection/retention objectequal undernewfrozendefault. Frozen54suite uses original2a.
+`regularization-saved-reload-v1/plan.json`:10newcandidatejobs2360forwards;8conditionaltemplates/max2actual
+selectedearly old860; sharedbaseexistingactual onlyafterexact fitconditionsverified. All modelworkpending.
+
+PENDING28 disjoint fields in v162 accounting +ownprogress +future active192 residuals. Includes allv161
+pending, v161progress, regularizationreference/validation/freeze/summary; childCPU andparentCPU separated.
+Old/copied nativecompute and nested successfulSource setup neverrebilled. Ledgerunchangedwhilelive.
+F1existing8review +new4Sourcepreflight remain; actualnew4captures/knownsufficient/full12Host stillpending.
+No SHA/checksum/fingerprints/subagents/newservices/secondledger/remote writes. Fullgoal NOT complete.
+
+# Previous v161 (superseded regularization readiness/accounting; live job unchanged)
+
+# LATEST: 2026-10-27 goal ACTIVE; v161 four-corpus F1 actual Source setup preflight passed; source64 endpoint RUNNING
+
+ONE LIVE MODEL unchanged: source64-answer-seed0-u192-v1/update-192 savedCPU924.
+Parent 3923544/child 3923568, exec45719; snapshot 145/924. /proc/run authoritative.
+Original saved dispatch/checkpoint unchanged. No restart/second model/offline ledger write while live.
+After close: original frozen verifier-v2 audit, idle settlement, full6point selection, conditional early old860.
+Then source128 saved curve; original CE/delivery6fits and allHost remain. Saved jobs10/selection1of9/Host0.
+
+NEW handoff-comparison-dev-v1/four-corpus-capture-v1/summary-v1.json authoritative.
+Four nominal devfamilies, six original source-pool variants isolated in six banks. Each coldp0+repeatp1
+same literalquestion, no newarrival.12 planned messages; model/Host/retrieval execution0. Repeat≠known
+sufficient; requires actual visible prior Tool support and current evidence demands. Original questions
+explicitly say retrieve first: F1 conditional protocol, NOT F2 autonomous/no-call evaluation.
+Frozen exactargv/config/sourceobjects/order atd8; onlyconfig_version changed from currentpilot recipe.
+Before outcomes: first actual retrieval call, last actualpostcheckpoint perposition; missing/failed positions
+retained, no success/support-driven selection or retries. Perfamily≤4newconditions; no forcedView formation.
+
+ACTUAL preflight-v2: frozen config accepted,100 Source imports/reopens in6isolatedpreflightbanks verified;
+111runtime modules fromd8. No source bodies changed, no derivedrecords/prefetch/Host/known evidence.
+Original ledger unchanged. Preflightbanks never reused as realexperimentalbefore/Hostknowledge.
+Initialv1 KeyError: preflight assumed unknown occurred_at key waspresentnull. Runtime correctly omitsit.
+v2explicitly asserts no occurred_at/timestamp and retains separateobserved_at. Original20sourcefailedbank
+and failure retained; no runtimefallback/modelretry. KnownfailedsetupCPUonly, total/importtailunknown.
+100importpositions=60literalbody/role/origin/occurrence groups;40duplicategroups, MuSiQuevariants share16/18,
+TwoWiki nominalfamilies share6backgrounddocuments. Distinctbank IDs/texts do notprove statisticalindependence.
+
+PENDING13 disjoint fields in v161 accounting + ownprogress + future active192 residuals. Includes prior
+v159/v160 progress/F1review, newplan/failureanalysis/successpreflight/overlap/summary and failedsetupCPU.
+Successfulpreflight total includes six nestedsetups; never doublebill them. Nooffline settlementwhilelive.
+Existing8 semantic/menu review remains (v160); actualnew4captures/knownsufficient/full12pairedHost pending.
+No SHA/checksum/fingerprints/subagents/newservices/secondledger/remote writes. Fullgoal NOT complete.
+
+# Previous v160 (superseded corpus preparation and pending accounting; live job unchanged)
+
+# LATEST: 2026-10-27 goal ACTIVE; v160 F1 source/View/menu review complete for prepared8; source64 endpoint RUNNING
+
+ONE LIVE MODEL unchanged: source64-answer-seed0-u192-v1/update-192 savedCPU924.
+Parent 3923544/child 3923568, exec45719. Snapshot 86/924; actual /proc/run authoritative.
+Dispatch original-feedback-v2-saved-reload-v1/dispatch/source64-answer-seed0-u192-v1/update-192/driver.json.
+No restart/second model/offline ledger write while live. After terminal use ORIGINAL frozen verifier-v2,
+settle idle, select full6points, conditional selected early old860; then source128 saved curve. Original CE/
+delivery remaining6fits andallHost stillrequired. Saved jobs10; fullselection/retention1of9; Host0.
+
+NEW F1 semantic/menu evidence: handoff-comparison-dev-v1/eight-family-semantic-review-v1/summary-v1.json.
+Eight actual stage0 prefixes7sources each;24 declared positive whole-Source witnesses. Actual generated
+Views reviewed: A32 unsupported2026 eventyear; D25 Lena preference from laughter/inference strength;
+E15 ticket-as-date/assistant-to-user attribution; A19 unstated dependency rules. Keep all original Views/
+conditions unchanged. Author review, not independent blind review or evidence current extractive wins.
+15 frozen conditions/203 legal HANDOFF packet projections; original menus/state/checkpoints, literal
+body/role/clocks and2048 admission preserved; no Store writes/acquisition/Host/model branches.
+13conditions have a legal full-positive-witness packet; rules6have that certificate. Two original-request
+A19/A32 beforestates lack an acquired witness, not a menu-capacity defect. Other7 incomplete rulecerts
+are NOT semantic failures. Witness sets conservative/nonminimal; no unexecuted-option Host labels.
+F01 known-partial: actual prior Tool message3 literal-equal toknownmaterial, contains unchanged seven
+expense/savings values. Projected rule delivers6080confirmation+175dining, sufficient source support
+for1945 without later fullrecap. Prior knowledge alone stillpartial; actualHost outcome pending. One
+fixed empty sibling receipt inthisframe,14otherconditions no siblings; no later info enters policybefore.
+Four corpus actualcaptures, trueknownsufficient formation andpaired rules/Jev realHost stillpending.
+No runtime/policychange/thirdarm fromthisofflineaudit; frozen functional d8 andQ code unchanged.
+
+Pending cost: v159 accounting.progress_processing_cpu_pending + five new files packet/semantic-review/
+menu-coverage/coverage-interpretation/summary-v1.json cpu_seconds_pending + v160 ownprogress andfuture
+active192 driver residuals. No offline settlementwhilelive, ledger unchanged; earlieru96fieldsPAID.
+Exploratory frame index-as-object TypeError corrected using request.messages; no modelattempt/fallback,
+unmeasured exploration remains unknown. No SHA/checksum/fingerprints/subagents/newservices/secondledger/
+remote writes. Fullgoal NOT complete; fullmap docs/MILAI_DEVELOPMENT_EXECUTION_20261026.md, latestv160.
+
+# Previous v159 (superseded F1 review and pending accounting; live job unchanged)
+
+# LATEST: 2026-10-27 goal ACTIVE; v159 source64 early saved CPU verified; endpoint192 RUNNING
+
+ONE LIVE MODEL: source64-answer-seed0-u192-v1/update-192, savedCPU924 (old860+feedback64).
+Parent 3923544, child 3923568; dispatch `original-feedback-v2-saved-reload-v1/dispatch/source64-answer-seed0-u192-v1/update-192/driver.json`.
+Native `original-feedback-v2-saved-reload-v1/source64-answer-seed0-u192-v1/update-192/evaluation`. Actual /proc/run authoritative; no restart on lost handle,
+second model, or offline ledger write while live. Original frozen verifier-tools-v2 remains mandatory.
+After close: candidate audit, idle settlement, all six-point selection, then selected early old860 if needed.
+Native best96 is provisional. Then source128 saved curve; original CE32/64/128 and delivery32/64/128 retained.
+
+Source64 saved12/24/48/96 all verified: u12 answer=0.621900/delivery=0.705729；u24 answer=0.753472/delivery=0.838542；u48 answer=0.738095/delivery=0.807292；u96 answer=0.783978/delivery=0.822917.
+Each feedback argmax changes vs native=0; not all logits identical. Total saved jobs10; selected/retention1of9;
+Host0. Source32 selected192 and its old-skill loss unchanged. All3 native answer fits closed.
+
+Q analysis now FROZEN at quality-fit-verifier-dev-v1/frozen-analysis-v1; summary-v1.json authoritative.
+25 working +25 frozen tests PASS; Ruff/qualified mypy3files/tools boundary PASS. 25 runtime modules use
+original2a, Q training helper/module from existing frozen overlay, CPU analysis helpers from old freeze.
+Actual3 Q recipes match original128 except declared overlay/pair-mode/output/phase; actual original32
+native analysis/saved selection/retention object equality verified. d8 functional and original verifier-v2 untouched.
+Q native analyzer reconciles eligible target weights/draws, actual logit gradients, all six checkpoints and
+pure-quality/cost metrics/ledger. Zero gradient legal; no parameter attribution. Saved Q selection pure quality,
+earliest tie/0 eligible; retention cannot change choice. Q fits/models0; original nine priority unchanged.
+`quality-supervision-saved-reload-v1/plan.json`:15 new candidate jobs3540forwards, shared existing base924
+conditional reuse,12 early retention templates but max3 actual required. No autonomous dispatch/retry.
+Source32 saved pure-quality diagnostic96→192:82.1974→81.7882%, known-pair loss.8377→.9822;
+original metric77.1081→78.7202%. Post hoc legacy-model decomposition only, no Q benefit/Host significance.
+
+Source64 u12/u24/u48/u96 idle settlements paid every prior explicit pending field inclv158, Q validation/
+freeze/summary/diagnostic and candidate/driver residuals. Native CPU not duplicated. Only v159 progress
+and future active192 residual/new explicit work pending. No SHA/checksum/fingerprints/subagents/new services/
+second ledger/remote writes. Full requirement map docs/MILAI_DEVELOPMENT_EXECUTION_20261026.md.
+Goal NOT complete; F1/F2/F3/compact/new data/coverage/Q/freeze encoder/seeds/Host/lifecycle/external/four figures remain.
+
+# Previous v158 (superseded live job/accounting and Q analysis readiness)
+
+# LATEST: 2026-10-27 goal ACTIVE; v158 FIRST saved selection/retention CLOSED; source64u12 CPU RUNNING
+
+ONE LIVE MODEL: source64-answer-seed0-u192-v1/update-12 savedCPU64feedback.
+Parent3681207/child3681212,exec43123. Dispatch `original-feedback-v2-saved-reload-v1/dispatch/source64-answer-seed0-u192-v1/update-12/driver.json`;
+native `original-feedback-v2-saved-reload-v1/source64-answer-seed0-u192-v1/update-12/evaluation`.
+Verifyactual/proc/run; no restartonlosthandle/secondmodeljob/offlineledgerwritewhilelive. Nextserial64u24/
+48/96/192, full6pointselect andconditionalearlyold860 retention (nativewinner96onlyprovisional). Then128
+savedcurve. OriginalCE32/64/128+delivery32/64/128sixfits andallHost/fullgoalrequirements stillpending.
+
+SOURCE32 SAVED CURVE/SELECTION/RETENTION COMPLETE: oldu192parent3009740/child3009745absent,exec14105closed.
+All6actualCPUpoints0/12/24/48/96/192 verifiedbyfrozenverifier-tools-v2. SelectedANSWERu192 at
+.7872023809523809 vsbase.5179811507936508 (+26.922123pp). Deliveryendpoint.8515625 secondary.
+Oldoperationbase.807826854448818 ->selected.7466104910556995 (-6.121636pp),616labelled/860total; accepted
+484->440. No retroactiveselectionchange foroldskilldecline. Selectedendpointalreadyhasold860, so0extra
+retentionmodeljobs. Pairranking/operationpreference areNOTHostsuccess;8exposedfeedbackfamilies only.
+Files `<savedroot>/source32-answer-seed0-u192-v1/{selection,retention}.json` and
+`original-feedback-v2-source32-saved-selection-closure-v1.json`.6savedCPUjobsdone(common+5source32),
+1of9fitselections/retentions,0Hosteval. All3nativeanswerfitsclosed; original9fitplanunchanged.
+EndpointnativeCPU41627.573576856 alreadyrecorded, notrebilled. All5source32feedbackargmaxchangesvsnative0;
+notalllogitsidenticalclaim andnotclaimaboutalloldendpointchoices. RetentionusesactualsavedCPUoutputs.
+
+Idle72fieldsettlement240.703412427CPU includesallv157pendingfreezes/pilots+v157progress,witnessaudit/
+spec/freeze/summary,endpointaudit/select/retention/closure,parent35.196361144+coord.019506596.
+Receipt `original-feedback-v2-source32-u192-saved-cpu-settlement-v1.json`. AllolderexplicitpendingPAID.
+Onlyv158progress+future64u12parentresidual/laterexplicitwork pending. No copiedcost/wholechild doublebill.
+
+NEW analysis-only tools/audit_host_witnesses.py +tests/unit/test_host_witness_audit.py implemented.
+10testsPASS current andagainfrozen, Ruff/mypy1file/toolsboundaryPASS. `host-witness-audit-dev-v1/summary-v1.json`.
+FROZEN analyzer/tests/spec `host-witness-audit-dev-v1/frozen-v1`, importsfunctional d8runtime; d8codeunchanged.
+CLI CAPTURE WITNESS_SPEC OUTPUT --case FAMILY/pN. Sixpilot Source-witnesscases declaredbeforemodels in
+`host-presentation-dev-v1/two-family-sequence-pilot-v2/witness-specifications-v1.json` (copiedinanalysisfreeze).
+p1/p2usebasewitnesses;p3replacesoldname/pay sourcewithactualcorrection, preservesunchangedotherwitnesses.
+
+Auditorusesactualprojectedinitial_baseline_context, notunprojectedready messages orfuturetargetanswers.
+ResolvesactualvisibleToolref tosame-bankcompletedretrievalsnapshot/delivered_indices; reconstructs
+body/aliasbinding withfrozenpacketlogic; verifiesSourceidentity/revision/owner/role/origin/report+capture
+clock/context/range/text. Onlyverifiedbodyintervalscount. Storepresence,correctpriorAIanswer,Source
+locations/Viewbindings alone nevercountasrawdelivery. IdenticaltextdifferentSources distinguished.
+Revoked/non-delivered/tampered/no-body/wrongclock preventedpositivecertificate. Partialscope unions/
+deduplicatedaliases supported. RealmechanicalStore/Saver snapshotprobe passed; hidingvisibletool
+receipt whilekeepingStore makescertificateabsent. No model/network calls or runtimeSourcechanges.
+Rawwitnesscertificate isnotgeneralsemantics/quality; aView/smallercontextmaybesufficient withoutit.
+Othermaterials/incompletecoverage→review,notfailurelabel. RealF2conditionaudits/modelruns0.
+
+Functionalmethod remainslocalcommit d8c5596098d0e7e3716ba1b3a8dcd3464ff18b2e, frozen
+functional-method-freeze-v1/code-v2/MiLAi-Lab;manifest/summary authoritative.75working+75frozen tests,
+133runtime+3CLI frozenimports,16-filequalifiedmypy/boundaries verified. No remotepush; onlyanalysis/
+Q-training/docs/progress remainuncommitted. NoSHA/checksum/fingerprints/subagents/newservices/secondledger.
+Latestv158/fullrequirementmapdocs/MILAI_DEVELOPMENT_EXECUTION_20261026.md;goalnotcomplete.
+
+# Previous v157 (superseded model/selection/accounting status)
+
+
+ONE LIVE MODEL unchanged: source32-answer-seed0-u192-v1/update-192 savedCPU924(old860+feedback64).
+Parent3009740/child3009745,exec14105. Dispatch `original-feedback-v2-saved-reload-v1/dispatch/source32-answer-seed0-u192-v1/update-192/driver.json`;
+native `original-feedback-v2-saved-reload-v1/source32-answer-seed0-u192-v1/update-192/evaluation`.
+Verifyactual/proc/run; no restartonlosthandle/secondmodeljob/offlineledgerwritewhilelive. Afterclose
+frozen candidateaudit,settleidle,all6pointselect/retention. All3nativeanswerfitsclosed,5savedCPUjobsdone,
+0selections/Hosteval. 64/128savedcurves +originalCE/delivery6fits andfullgoalremainrequired.
+
+FUNCTIONAL CODE nowLOCALCOMMIT+FROZEN (supersedes older UNCOMMITTED notes for these21files):
+commit d8c5596098d0e7e3716ba1b3a8dcd3464ff18b2e, parent7aece29d.21functionalruntime/tools/tests only.
+No remote push/merge. Qtrainingtrainer+qualitymodule/tests,fit analyzers,progress/docs remainoutside
+thiscommit. Original2a andsavedCPUfreezes untouched. `functional-method-freeze-v1/manifest.json` and
+summary-v1.json authoritative. FrozenLab `functional-method-freeze-v1/code-v2/MiLAi-Lab`.
+2314committedcode/test/config/lock files exported; literalbytes unchangedaftertests. No raw/protected
+corpusfiles/modelweights copied. Productlock literal-equal. No SHA/checksumvalidation; nativeGit
+versionmetadata +literalcomparisons. Do noteditfrozenfiles; currentworktree isauthoringroot.
+
+75integratedworkingtestsPASS andsame75underactualfrozenimportsPASS.133milai_lab runtime modules +
+3usedCLI modules resolvedfromfreeze;notaccidentalworkingtreeimports. RuffPASS;qualifiedmypy16files
+PASSwithexistingTorch/jsonschema paths/unused-ignorelintqualification;package/toolsboundaryPASS,
+existing6grandfatheredprivate unchanged. Initialworkingtestcollection missedtoolsPYTHONPATH;fixedenv.
+Archivev1guardrejectedlegaltopdirectorywithoutslash;emptycode/v1failure preserved,code-v2fixed.
+Firstfrozen-test launchwrongrelativepathfailedbeforetests;resolvedabsolutelaunchpassed. No modelretry.
+
+F1all15inputs rederivedunderd8c55960: `functional-method-freeze-v1/f1-inputs-v1/preparation.json`.
+Observations/actions/request/allowance/executorcheckpoint literallyequal toearlier15auditedinputs.
+Originalcapturesandunfrozenpreparationsretained;0models/Host/labels. Entire15 repeatedunderactualF1
+CUDAenv+existingattentionwrapper andequal: f1-inputs-execution-env-v1 + f1-execution-env-verification-v1.json.
+F2HTTPenv transformers4.57.6/tokenizers0.22.2;F1CUDAenv4.52.3/0.21.4/Torch2.7.0+cu126,MHAfastpathfalse.
+Bothimportfrozencode; actualsavedpre-callprompt3074tokens inboth. Onlyspecificinputs verified,notwhole
+softwareenvironmentequivalence. No weightsloaded/forwards/HTTP inthesepreflights.
+
+ExactF2pilotcommand `host-presentation-dev-v1/two-family-sequence-pilot-v2/frozen-dispatch-v2.json`:
+source-versionFULLd8c55960,HTTPenv, frozenCLI/PYTHONPATH, currentfixed_context+history+preHost/postREAD
+captures. NOTdispatched; modeljobsserial/originalanswercurvefirst. v1dispatchcostnoteoverstatedtimer
+coverage; v2correctsunknownoriginaltail, argvunchanged. No inventedcost ormodelretry.
+F1prepared8subsetcommand/policies `functional-method-freeze-v1/f1-frozen-dispatch-v1.json` and
+f1-prepared-eight-policies-v1.json.15conditions/30branches, pairedadjacent orderalternatesfirstarm,
+sameHANDOFFmenus/shared_actions/u262CPU4/16384/2048. WrapperMHAfalse. Onlyprepared8families, NOTfull12;
+4corpusactualcaptures/sourcewitness/Viewreviews stillneeded. Do notcallsubsetcompleteF1experiment.
+
+Accounting: allolderu96boundaryfieldssettled. v157lists53disjointpendingfields (prior2pilotpreps+
+v156progress+49freeze/working/frozen/import/repreparechecks+freezesummary), plusownprocessing/future
+u192parentresidual. Freeze49fields166.675925267CPU,summary.019903051; nestedwholechild/preparation
+aggregates notadditive. Failedinitialarchive/launch/originaldispatchtail/authoring unknown,notzero.
+Originalledgerliterallyequal tou192dispatchbudget-beforewhilelive. Noofflineledgerwrites.
+
+Fullmapdocs/MILAI_DEVELOPMENT_EXECUTION_20261026.md;latestmanifestv157. Localfunctionalcommit is
+researchcode readiness, notactualF1/F2/F3benefit orProductrelease. NoSHA/fingerprints/subagents/new
+services/secondledger/remotewrites. Actualmodeljobsserial;fullgoalnotcomplete.
+
+# Previous v156 (superseded functional code freeze status; live job unchanged)
+
+
+ONE LIVE MODEL: source32-answer-seed0-u192-v1/update-192 savedCPU924(old860+feedback64).
+Parent3009740/child3009745,exec14105. Dispatch `original-feedback-v2-saved-reload-v1/dispatch/source32-answer-seed0-u192-v1/update-192/driver.json`;
+native `original-feedback-v2-saved-reload-v1/source32-answer-seed0-u192-v1/update-192/evaluation`.
+Verifyactual/proc/run; no restartonlosthandle, secondmodeljob orofflineledgerwritewhilelive.
+Afterterminal verify_one_saved_feedback_candidate_v1.py underFROZENverifier imports, settleidle,
+thenfrozenanalyze_saved_feedback_fit.py select(all6points),conditionalretention onlyifselectedearly.
+All3originalanswerfitsnativeclosed;5savedCPUjobsdone(common+32u12/24/48/96),0selections/Hosteval.
+64/128savedcurves andoriginalCE/delivery6fits stillrequired. Fullgoalnotcomplete.
+
+u96CLOSED exit0, oldparent2847661/child2847666absent.64rowsverified;answer=.7710813492063491,
+delivery=.8593749999999999,0argmaxchangesvsnative. Allinput/options/lengths/checkpoint/CPUconditions/
+summary/ledger checked. `.../source32-answer-seed0-u192-v1/update-96/verification-v1.json`.
+Idle5fieldsettlement25.210250558CPU includesv155progress,F1capacityaudit,u96audit/parentresidual14.907007893/
+coord.011193077. Receipt original-feedback-v2-source32-u96-saved-cpu-settlement-v1.json.
+Nativeu96CPU1896.701188107alreadyrecordedNOTrebilled. Allpriorpendingfields nowPAID; onlynew2pilot
+prepfields +v156processing +futureu192parentresidual/laterexplicitwork pending. No duplicatecopiedmetrics.
+
+F1 current15inputtokenizer auditDONE(no weights/forwards/HTTP): handoff-comparison-dev-v1/native-input-capacity-v1/audit.json.
+Shared_actions max11515/sum88480tokens;compact_actions max10614/sum79201; max27options. Both0state/head/
+optionclipping,15completeactiontables,literalexpandedstate equality,0SDKmask replacements. Runtimefirst
+F1 remainsdeclaredshared_actions; compactseparatestudy, no neuralgainclaim. Default8192tokenizerwarning
+retained; explicit16384/head2048 completeinputaudit passed, actualnewF1neuralforward stillpending.
+Tokenizer8.643493432CPUalreadySETTLED at u96boundary. Cudaenvwithtestsiteimports, no modelsloaded.
+
+F2 sourcepilotREADY NOTRUN: host-presentation-dev-v1/two-family-sequence-pilot-v2/plan.json.
+2alreadyexposedF1families memops_B30/F01;each4actual-sourcefrontiers:8-sourcebootstrap,0-source repeat,
+2unrelatedSources,2relatedSources. PreserveoriginalSourceobjects/order/roles/clocks andliteralquestion.
+Sourcecurrentcontrol8messages(incl2formation),pairedindex6targets;14plannedmessagepositions total.
+Samefixed_context reads4 executor/Host/defaultprompt/2048returnbudget botharms. Originalcontrolresults
+reused; don'trerunfailedoriginalposition tofillpair. Pilotisnotcomplete12-familyF1 orconfirmationstudy.
+Use --continue-host-history --capture-host-messages --capture-control-steps,sourceversionafterfreeze.
+
+RuntimeIDs neutralp0..p3; conditionnames/sourceexpectations ONLYsidecar. v1preparedIDs were semantic
+andcouldsurfaceinsideToolreceipt snapshot_id; caughtbeforeanymodelrun. v1retained, v2changesonlyrequest/
+historyIDs/configversion, notSourcebodies/question/order. No modelretry. v1CPU.004754103/v2.002931802 pending.
+Known-repeat isINTENDED, notdeclaredtrue: mustcheckactualpriorvisibleToolwitnesses/faithfulView. A correct
+prioranswer orSourcepoolpresence doesn'tproveHostknowledge. Unclear/failedformation remainsunrealized/
+unknown withfullplanneddenominator, no inventedrefs. Subsequenttargets shareactualcontrolprefix,so
+estimateper-public-messagefulltrajectory effect, notanentirealternativecontinuouslifecycle.
+
+Sourcewitnesses: B30first8 supportsMarc+ChenWei/May2(yearunknown);newDavid/Dave coworkerdoesnotchange
+requiredtwo-personintroduction;thenusercorrectionrequiresMarcus+ChenWei/May2. F01first8supports6200-
+3960=2240;brother3800notuserspay;thenuserpaycorrection6080 yields2120 withlastconfirmedexpensevalues.
+DO NOTuse1945 or175dining orfuture6200 here: remaining11Sourceswerenotintroduced. Sidecarreviewoutside
+runtimefixture. No futuregold/body givenHost. Botharrivalbatches havecount2 toavoidcount-as-labelcue.
+Crucialobservability: existingHostnoticecountonly, no body/title/relevance. Identicalcountdoesnotreveal
+relatedness; initiallookupafteruncertainarrival maybereasonable eveniforaclefindsnogain. Reportoracle
+supportchange separatelyfromex-antedecisionreasonableness; nonewrelevancehints/prefetch/summary.
+
+CurrentmethodstillUNCOMMITTED/UNFROZEN; no realF1/F2/F3Hostnewcomparisons. NoSHA/fingerprints/subagents/
+newservices/secondledger/remotewrites. Fullmapdocs/MILAI_DEVELOPMENT_EXECUTION_20261026.md;latestv156.
+
+# Previous v155 (superseded live job and pending accounting)
+
+
+ONE LIVE MODEL: source32-answer-seed0-u192-v1/update-96 savedCPU64feedback rows.
+Parent2847661/child2847666,exec13733. Dispatch `original-feedback-v2-saved-reload-v1/dispatch/source32-answer-seed0-u192-v1/update-96/driver.json`;
+native `original-feedback-v2-saved-reload-v1/source32-answer-seed0-u192-v1/update-96/evaluation`.
+Verify actual/proc/run. No restartonlosthandle; no secondmodeljob orofflineledgerwrite whilelive.
+Afteru96close/audit/settlement runu192combined924. Onlythen frozen6pointselector andconditionalold
+retention. Do notselectcurrentbestearly. All3answerfitsnativecomplete; remainingCE/delivery6fitsrequired.
+
+Commonbase924 CLOSED/VERIFIED; source32u12/u24/u48 each64 CLOSED exit0 andVERIFIED. Total4savedCPUjobs
+completed,0deployselections/0Hosteval. u12 oldparent2691829/child2691834,exec40120closed;
+u24parent2748391/child2748396,exec23695closed;u48parent2801383/child2801389,exec44561closed.
+No resume/retry. Savedsource32answer0=.5179811508,12=.7242063492,24=.6816716270,48=.7666170635;
+delivery0=.6067708333,12=.7083333333,24=.734375,48=.8020833333. All3candidateargmaxchoicechangesvsnative0;
+notalllogitsidenticalclaim. Primarymetrics are reviewedpairranking, notHostcorrectness. OldCPUretention
+currentlycommonbase only; early oldGPUcurve never substitutes forselectedCPUretention.
+Eachcandidateverification `<savedroot>/source32-answer-seed0-u192-v1/update-N/verification-v1.json`.
+One-candidateauditcomposition `verify_one_saved_feedback_candidate_v1.py JOB_ID`, importfrozen
+verifier-tools-v2 FIRST plusCPUfreeze src/tools viaPYTHONPATH, testenvPython. No neuralcalls inanalysis.
+
+Sincev154, idle settlements source32u12:10fields60.515562043CPU;u24:8fields33.247232795CPU;
+u48:3fields16.771865657CPU. Receipts `original-feedback-v2-source32-u{12,24,48}-saved-cpu-settlement-v1.json`.
+Allv154progress,Hostcapturevalidation-v3/mypy-v4/final-v1/v2/summary,candidateaudit/parentfieldsPAID.
+Earliercommonbase53fields229.559720128CPUalreadyPAID. NativeCPUalreadyrecordedNOTrebilled.
+Onlyv155progress+futureu96parentresidual/laterexplicitwork pending. Oldpendingflags/copyaggregatesnotbills.
+
+F2 PRE-FIRST-HOST CAPTURE/FULLREPLAY COMPLETE mechanically, realmodelstudyPENDING:
+`host-message-snapshot-dev-v1/summary-v1.json`.55distinctrelated testsPASS (53broad+2newfinalcases),
+final5focusedPASS. Cold/priorreceipt branches preserveStorevalues/world/messages/imports/readpolicy+
+readquota/generationallowance,actualbaselinefirstmodelwire andcatalog. Quota/context/catalogtampering
+rejectedbeforeHTTP. Newarm mayanswerdirectly whilecontrolretrieves; scriptedtest,notqualitybenefit.
+Originalprovider-timeoutunknownusage1 stayscharged innewarm; originalfailedresultbytes unchanged.
+Collector --capture-host-messages andonebranch tools/run_frozen_host_message.py bothCLItestedmockHTTP.
+No given-request/native-probe/forcedtoolchoice accepted forfirstprotocol. Matchingdeclaredsourceversion
+required. Snapshot BEFORE graph/firstHostdispatch, notF1postREAD. Existingimportcachepreservesarrival
+notice naturally. CopiesSource/Store/Saver; completeautonomousHost/tools/answer runs aftersamebefore
+verification. Globalledgerneverrewound; nofutureoriginalanswer copied. Sharedprefixmodel/tools notreexecuted.
+
+InitialwarmtestduplicateToolCallID andCLItestmissingconfig_version werefixtureerrors; fixedfixtures,
+no runtimefallback/guardweakening. Mypyinferredrows list neededexplicitannotation; solvedno behaviorchange.
+Ruff/package/toolsboundaryPASS;qualifiedmypy4filesPASSwithexistingTorch/jsonschema types/unused-ignore
+qualification. Newcodeuncommitted/unfrozen; original2a andsavedCPUevaluator freezes untouched.
+RealF2preHostbenchmarkcaptures0/modelcomparisons0; full3condition/sourcewitness formation needed.
+Commonwarm-prefix actualToolreceipts may supportknownsufficient/no-new-source repeat; verifywitnesses,
+neverlabelitfromSourceavailability orpreviousHostansweralone. No needfake/providedcall history.
+Canreuseoriginalsourcecollection ascurrentcontrol whenitisthedeclaredarm; do notretryfailedoriginal
+position justtofillpair. Fourcorpusfamiliesneednewactualcaptures; existingF1 8families15derivedinputs
+stillpreparedonly. Nativeinputcapacity preflight neededbeforeF1newmenu/scorer/compact actualuse.
+
+Fullrequirementmapdocs/MILAI_DEVELOPMENT_EXECUTION_20261026.md,latestmanifestv155. Goalnotcomplete.
+NoSHA/fingerprints/subagents/newservices/secondledger/remotewrites. Actualmodeljobsserial.
+
+# Previous v154 (superseded active job and pending costs)
+
+
+NO LIVE MODEL at this boundary: source32-answer-seed0-u192-v1/update-12 savedCPU64feedback CLOSED; verify/settle before next u24.
+Parent2691829/child2691834,exec40120. Dispatch `original-feedback-v2-saved-reload-v1/dispatch/source32-answer-seed0-u192-v1/update-12/driver.json`;
+native `original-feedback-v2-saved-reload-v1/source32-answer-seed0-u192-v1/update-12/evaluation`.
+Actual /proc/runareauthoritative. CPU4/FP32/noCUDA/MHAfalse/refcompilefalse/shared_actions16384/2048.
+No secondmodeljob oroffline settlementwhilelive. Nextserialu24/u48/u96/u192; all6points beforeselection.
+Saveddispatcherprocessguardnowincludesnewrun_frozen_host_message.py. No automaticretry.
+
+Common-base-u262 CLOSED exit0, oldparent1919923/child1919928absent;exec27787returnedcompletion.
+924actualpredictions/input/options/lengths/checkpoint/CPUconditions/summary/ledger verifiedwithfrozen
+verifier-tools-v2 verify_job. Oldoperation=.807826854448818,answer=.5179811507936508,delivery=.6067708333333333.
+ComparedtoALL3nativebasepoints:0oldoperationchoicechanges/0feedbackchoicechanges. Notalllogitidentical
+claim,notHostsuccess. Onejobshared,not9runs. Remaining6fits needinputverificationwhentheyclose.
+NativeCPU42458.072200468996/wall10707.530417338014/924forwards/4503014tokens/peakRSS5136000KiB.
+Verification `original-feedback-v2-saved-reload-v1/common-base-u262/verification-v1.json`.
+All3originalanswerfitsnativecomplete,1savedCPUjobcomplete,0savedselections/0Hosteval; CE/delivery6fits
+stillrequired. Existingfrozen original2a/CPUevaluator unchanged; fullgoalnotcomplete.
+
+Idle53fieldsettlement229.5597201280064CPU: `original-feedback-v2-common-saved-base-postfit-settlement-v1.json`.
+All45pendingv153fields +v153progress +4Hostcapturevalidation-v1/v2fields +commonbaseaudit +parent42.7975195310064/
+coord.012181798 settledONCE. Native42458.072200468996NOTrebilled. Onlyv154progress +ongoingHostvalidation-v3
+andfutureu12parentresidual/laterexplicitwork pending. Oldpendingflags/copyaggregates mustnotberebilled.
+
+F2PRE-HOST protocol implemented, focused3testsPASS; broadercheckexec88656 stillrunningatv154.
+Newrunners/frozen_host_message.py, functional.py host_snapshots/replay_host_message/presentationoverride,
+collector --capture-host-messages, onebranchtools/run_frozen_host_message.py. Completecommonbefore is
+capturedAFTERsourceimports/priorhistorybinding/admissionprep andBEFOREfirstAgent/Hostmodeldispatch.
+Storevalues(fullbanknamespace inclSources/Canonical/cache),world,rawinitialmessages,importreceipts,
+readallowance/policy,generationallowance arematchedonrestore. Seedimportmanifest naturallypreserves
+newarrivalnotice; nofakecounterrestoration. Originalbaselinemodelcontext andactualtoolcatalog checked
+beforeanynewproviderrequest; onlypresentationoverridden. Hostthenchooses/tools/answers normally.
+Originalresultfilemustbeclosed; nofutureoriginalanswer/targetreceipt copiedinto before. Originalroot
+artifacts untouched. Globalledgerconsumptionneverrolledback; prefixmodel/toolcostnotrerun whenverified.
+
+Scopeinitialprotocol: declaredsourceversion/stagedMiLAiretrieval-only,request_mode disabled,
+business_tools=[],auto toolchoice; no nativeprobe/givenrequest. CopiesactualStore/Saver viaexisting
+SQLiteonlinebackup. Broadfailure/edgecoverage andstaticchecks pendingvalidation-v3. Focusedtests cold+
+priorreceipt preservedexactfirstwire/readallowance/arrivals andallowedscripted1call directanswer vs
+scripted2call retrieval; thisismechanicalautonomytest,notF2gain. Tamperedquota/catalog rejectedbeforeHTTP.
+Initialwarmtestfailedbecausefixture reusedtoolcallIDacrossturns; nativeguardcorrect, fixedfixtureIDs,
+retainedfailure. RealF2preHostsnapshots0/modelcomparisons0. Collectsharedsemanticconditions next,
+reuseactualoriginalbaseline wherealreadythecontrol ratherthanrerunoriginaljusttofinishpair.
+
+Currentcandidate UNCOMMITTED/UNFROZEN. NoSHA/fingerprints/subagents/newmodelservices/secondledger/
+remotewrites. Fullrequirementmapdocs/MILAI_DEVELOPMENT_EXECUTION_20261026.md;latestmanifestv154.
+
+# Previous v153 (superseded active model and settlement status)
+
+
+User has resumed after UI pauses. Full development plan remains incomplete; do not pause/complete
+or restart original experiments. Previous goal turn made real code/test/evidence progress.
+
+ONE LIVE MODEL JOB: savedCPU `common-base-u262`, parent1919923/child1919928, exec27787.
+Dispatch `artifacts/evidence-gap-20261023/original-feedback-v2-saved-reload-v1/dispatch/common-base-u262/driver.json`;
+log beside it. Native output `original-feedback-v2-saved-reload-v1/common-base-u262/evaluation`.
+CPU4threads,FP32load,noCUDA,MHAfastpathfalse,referencecompilefalse,shared_actions16384/head2048.
+924rows=old860+feedback64; one commonbase result only after actual verification shared by9fits.
+Verify /proc/native run, no restart on losthandle. Native owns terminalcompute, parentresidual pending.
+No second model job or offline settlement whilelive. Continue existing one-job savedCPU dispatcher.
+
+Original128answer is CLOSED exit0, PIDs576883/576889 absent; oldexec28252 now unknown, do NOTrestart.
+192updates/3072draws=1536feedback+1536replay,16718944train tokens. All6nativeold860+feedback64points,
+options/schedules/weights/lengths/checkpoints/ledger audited byfrozenverifier-tools-v2 analyzer.
+Nativeanswer0=.5179811508,96=.8100198413,192=.8010912698; winner96 PROVISIONAL. Oldoperation192
+=.7833412102 vsbase.8078268544 (-2.44856443pp);delivery192=.8854166667. Not savedCPU/Host results.
+Nativewall5810.452909499407,CPU8095.459651788 alreadyrecorded;peakCUDA[8881265664,0].
+Analysis `original-feedback-v2-native-audits-v1/source128-answer-seed0-u192-v1/analysis.json`;
+closure `original-feedback-v2-source128-answer-terminal-v1.json`.
+Originalanswer32/64/128 allnativecomplete3of9; savedselections0/Host0. Aftercommonbase, complete3answer
+savedcurves andconditionalretention viaexistingplan/verifier. CE32/64/128 then delivery32/64/128sixfits
+stillrequired, commonu262 notanswerwinner. No change tooriginalfrozen2a recipe/splits/failures.
+
+F1 research routing IMPLEMENTED in `src/milai_lab/runners/memory_control.py`: routing=handoff_only
+wrapsexistingpolicy, preservesstate/history/readallowance andfull executorverification, restrictsonly
+policydecisionmenutoHANDOFFwithsameorder/parameters. Recordsinput/choice; soleHANDOFFskipsmodel;
+outside-menuchoice rejectedbeforeexecution. No currentselector changes or inventedREADbudget0.
+Tests `tests/unit/test_handoff_comparison.py`:43relatedpassinclactualpostREAD Storetwoarmreplay,
+noHTTP/newREAD/prefixreexecution, originalcapturesbyteunchanged. Ruff/package/toolsboundarypass.
+Mypy passes changedmodulewithexistingCUDAenvsitepackagesonPYTHONPATH toresolveactualTorchtypes;
+defaulttestenvmypyfailedmissingTorch, retained. No dependenciesinstalled/runtimeenvmodified.
+
+F1 actualofflineprojection `handoff-comparison-dev-v1/snapshot-menu-audit-v2.json`:216old2adevstates,
+177post checkpoints/8exposedfamilies.119havemultipleHANDOFF/currentexpandedmenu,alloldoptionsretained.
+9acquiredViews;7realHost-knownstates ALLsameF01requeststeps, not7independentknownconditions.
+Currentprojectionadds retrieved_scopes only; savedactualexecutor contentserializedequal, noStoreopened
+orREAD/generation/operationexecution.177originalHostframesready, includefixedsiblings;notautonomous
+stopproof. Old2alacks currentselector, sooldmenus cannotrepresentF1currentmethod. Separateprojection
+isNOTfullcurrentexecutoradmission orsemanticcoverage. Needexplicitcurrentinputformation/replaybefore
+neuraluse; do notsilentlymodifyoldfrozencaptures/checks. Need12families/source-review andactualHost.
+Firstofflineassertionfailed Python tuple/list search_attempts comparison; serializedJSONliterallyequal.
+v1failure/script preserved, v2usesliteralserializedcontract equality, noSHA. AllF1artifacts under
+`handoff-comparison-dev-v1`;summary-v1.json listsremainingwork. Currentcandidateuncommitted/unfrozen.
+
+Accounting idle settlement `original-feedback-v2-source128-answer-postfit-settlement.json`:15explicit
+fields150.07283168699965CPU (v148progress,F1tests/static/projections/failure/summary,native128audit/
+closure,parent26.635776211999655+coord.011244441). Native8095.459651788NOTrebilled. Allpriorpending
+fieldssettled; v149progress +F01source-review +v150progress +futureactiveCPUparentresidual pending. Unknowns preserved.
+Latestmanifestv153; fullrequirementmapdocs/MILAI_DEVELOPMENT_EXECUTION_20261026.md. Allconstraints
+belowremain: noSHA/fingerprints/subagents/newservices/secondledger/remotewrites; modeljobsserial.
+
+F1 source review added: `handoff-comparison-dev-v1/f01-known-partial-source-review-v1.json`.
+All7F01poststates areoneactualrequest withpreviousstage0receipt:old6200 income/baseexpenses,
+missingcurrent6080confirmation and175diningaddition, soKNOWN_PARTIAL, neverknownsufficient.
+Readallactualsource_directory roles/content; current6080 - (1850+1500+120+55+350+40+45+175)=1945.
+Future6200/otherpeoplepay/2000oneoff/inactivefreelance excluded withactualuserstatements.
+Atstep7 all3documentedsufficientuserwitnesses areacquired; currentmenu `handoff_select_1_2_4`
+containsfullsourcecontext underactual2048budget. Rulechoosesdefault `handoff`; currentreadallowance
+already0 inoriginalcapture, neverartificiallychanged. Witnesssetnotunique necessityclaim; noother
+optiongold orHostoutcome inferred. ActualnewF1executionpending. ReviewCPU.058344547 pending,
+plusv149progress.055432492 andv150progress; donotrebill settledF1summary/earlieraudits.
+
+F1 CURRENT INPUT PREPARATION nowIMPLEMENTED (v151): runners/handoff_comparison.py and
+`tools/prepare_handoff_comparison.py CAPTURE OUTPUT --source-version VERSION`. Explicitnewartifact
+schema handoff_comparison_decision_v1; copiesbefore, restoresactualexecutor, reprojectsdeliveryfields,
+regeneratesfullcurrentlegalmenu, preservesrequest/known/acquired/prefix/allowance. Noacquisition,
+policydecision,HTTP orledgerwrite duringpreparation. Originalsourcecallstatus/results retainedonly
+asprovenance; newprojection PREPARED_NOT_EXECUTED. `frozen_retrieval.replay_call` acceptsnewtype only
+withmatchingversion/routing=handoff_only andno nonHANDOFFintervention. Exactfirststate/actions and
+request/allowance checks remain; testtamperingstillfails FROZEN_RETRIEVAL_FIRST_DECISION_CHANGED.
+Completepacketbudgetcalculation extractedunchangedasintent_retrieval.delivery_packet_fits andused
+bybothliveexecutor/preparer, includingallterminationlabels andworstboundedusage.
+
+59distinctrelated testsPASS (initial58pass/1newtestfixturefailure, then4focusedpass afterfix).
+Failure assumedanotherREAD existed afterallsourceacquired; testnowusesactualprefixREAD forforbidden
+intervention. Runtimechecksnotweakened. Ruff/package/toolsboundaryPASS;qualifiedmypy4modulesPASS
+withexistingTorch+jsonschema types,unused-ignorelintoff. Firsttypechecktuplelengthfixedexplicit
+variablelengthtupleannotation. No runtimeenvironment/dependencychanges. GitdiffcheckPASS.
+ActualF01step7derivedinput `handoff-comparison-dev-v1/current-input-dev-v1/actual-input-f01-v1`:
+26originalfiles byteunchanged,27currentHANDOFFoptions incl1_2_4, onlyretrieved_scopesadded; original
+Hostrequestframe literal-equal,1fixedsiblingreceipt. Modelcalls/realoperations0. Sourceversionlabel
+`development-handoff-input-v1` isUNFROZEN; actualnewmodeluse stillneedsmethodfreeze andserialadmission.
+
+F1cohort `handoff-comparison-dev-v1/cohort12-preparation-v1/plan.json`:8originaldevhistoryfamilies+
+MuSiQue000475/000217 andTwoWiki004030/037004 =12EXPOSEDdevfamilies. Fourcorpusfamilies6originalquery
+variants copiedliterallyto new-four-source-fixture.json; noformaltsetopened/newcapturesyet. Existing8
+postsnapshots reuseratherthanrecollectingall. First2arms rules/u262currentJev, max4semanticconditions
+perfamily/96branches, thirdarmonlyafteractualgap. Do notforceconditions orknownrefsfromgold/sourcepool.
+Source-witnessreview:Spectre39246 doc6+1 identifiesfilm/USCanada374,39309lacksthatsecondparagraph;
+neverborrowbetweenvariantsoruseUK40/China246. TwoWiki004030 requires4documentedfilm/personwitnesses,
+filmArgentine!=directorUruguayan.037004hasfourrelationssupportedby2paragraphs, not4independentread
+requirements. MuSiQue000475albumlabelnotperformerlabel; sufficientartist-labelrelation unresolved.
+These are source/menu planning evidence, notnewHostoutcomes or unexecutedoptionlabels.
+
+Allv151workpending whilecommonCPUlive. Summary `handoff-comparison-dev-v1/current-input-dev-v1/summary-v1.json`
+lists12newdisjointcostfields95.897462856CPU +summary.001632521; plusv149progress,F01review,v150progress.
+Latestmanifestv151lists16prior/currentpendingfields +ownprocessing; eventualCPUparentresidualadditional.
+Do notaddcopiedpreparation_cpu_nested/summarymetrics twice; allpriorv148F1costs alreadysettled.
+
+v152 F1 existing8family inputs nowprepared: `handoff-comparison-dev-v1/existing-eight-conditions-v1/preparation.json`.
+15conditions =6original_requested/8summary_available/1known_partial.14newderivedcaptures plus1symlink
+reusingF01step7alreadycreated. All2048returnbudget,actualcheckpoint/allowance/Hostframe preserved,
+originalfilesbyteunchanged. Collector14rules/1laya;30plannedtwoarmbranches,0executed. Viewcondition
+requiresactualacquiredbody andatleastonelegalHANDOFFincludingit; availabilityNOTfaithfulness or
+Hostsuccess. Rawconditioncheckedactualread_goal.original_source andnoacquiredView. Known sufficient0;
+neverforceconditions. Still source-witness/Viewsemanticreview +4corpusactualpostcaptures/newknownstates.
+No claimraw/Viewdifferentpoststates isolatethecausaleffectofViewformation; F1armscomparewithineachstate.
+BatchCPUpreparations9.660608757 plusouterresidual5.682312335 pending; reuseF01costNOTbilledagain.
+
+F2 readcurrentactualfunctionalprompt andcurrentSTATEhookinstruction BEFOREchanginganything.
+Functionalpromptalreadyconditional; STATE RETRIEVAL_INSTRUCTIONforcesfirstretrieval beforefirst
+substantiveanswer. F2initialmain usesfunctionalHost/F1sources. AnySTATEautonomyprotocolchange mustbe
+explicit/common tobotharms, notcreditedtopresentation. No defaultprompt orruntimechange in v152.
+F2prototype `host-presentation-dev-v1/preflight-v1.json`: recoveredactualPRE-CALLHostrequest from
+vllm_response traceevent6,responseidusedonlytolocatethepriorinput. Do NOTusepost-toolreadoutframe
+forF2firstcalldecision; wouldleakfuturetarget/siblings. Original3074prompttokens exactlyreproduced.
+`candidate-request-adjacent-index.json` appendscompactliteralmetadataindextocurrentuserwirequestion:
+existingcurrent-requesteffectfields/existingarrivalcount16/oneprioractualretrievalreceiptref plus
+as-returnedroles/ranges/report+captureclocks. No sourcebodies fetched,generatedsummary,inferred
+relevance/sufficiency,hiddenAPIids orfuturetoolresults. Entireoriginalsystem/tools/history/sampling/
+limits andquestionprefix remainliteral-equal;metadataispureprojectionoforiginalvisibleJSONcontent.
+ThisREPEATS metadata, notcompressionofwholeprompt:3745tokens(+671),same65536context/8192output.
+A proposedmid-conversationSystemlayout was testedandrejectedbyactualQwentemplate withTemplateError
+"System message must be at the beginning." Rejectionartifactretained; no modelcall. Useuserwireindex
+prototype only, notnewdefault. Runtimeopt-in/error/redactionintegration andreal3condition/autonomous
+Hostcomparison remainpending; F01hereisrelatedarrival/knownpartial only. F2CPU4.262827635pending.
+
+Latestv152 lists33explicitpendingfields(excludingitsownprocessing), plusfutureCPUparentresidual;
+priorledger verifiedliterallyequal tocommonCPUdispatchbudget-before whilelive. No offline settlement.
+
+v153 F2 LIVE OPT-IN IMPLEMENTED: top-level `host_evidence_presentation=request_adjacent_metadata_v1`
+infunctional config. New `runners/host_evidence_presentation.py`, integrationinfunctional.py,
+`tests/unit/test_host_evidence_presentation.py`. Defaultomissionkeepsoldpresentation; STATEunchanged.
+Afterexistingvisibility/project_model_messages, helperreadsONLYactuallyvisibleToolMessage.content
+(milai_retrieve schema),currentalreadyemittedeffects/material. AppendscompactmetadataJSONtocopyof
+latestHumanwirequestion. Entireoriginalsystem/history/toolmessages/roles andquestionprefix stay;
+publicSource/checkpointHumanmessages doNOTaccumulatetheindex acrosscalls/turns. Hostmayanswerwithout
+retrieval; noaddedgenericadmonitions,summary,bodyREAD,Store/cache/provider access orsemanticinference.
+Copiesexistingroles/report+captureclocks,requestcapture_context/partialrange/fullcharcountwhenpresent;
+Viewshared/by_aliasmetadata+existingclocksemantics retained,notinterpretationbody. Revoked/falsebody
+markers kept. NonJSONerrors stayinfullhistory; unparsedpositions audited, noguessedreferences.
+
+33distinctrelatedtestsPASS (Hostview,oldfrozenreplay,visibility);7focusedagainafterfinalmetadatafields.
+Initial6focusedPASS. InitialRuff4formatfindingsfixedbylinewrap; no semanticfailure/relaxation.
+Ruff,package/toolsboundaryPASS;qualifiedmypy2modulesPASSwithexistingTorch/jsonschema pathandunused-
+ignorelintqualification. No newdependencies. ActualF01savedprecallwire throughlivehelper matches
+prototypecandidateFULLrequest literally;still3074→3745tokens(+671), notHostquality/costsavingproof.
+Artifacts `host-presentation-dev-v1/runtime-v1/{summary-v1.json,actual-prototype-equivalence-v1.json}`.
+Currentcandidateuncommitted/unfrozen; original2a/activeCPUfreeze untouched,realF2modelcalls0.
+
+CRITICAL F2NEXT: pre-callwire foundinsideapostREADcapture isNOTacompletepre-HostStore/admission
+checkpoint. Do notresumeF2autonomousbranch fromF1postStore/consumedreadallowance orfeedfuturetarget/
+siblingreceipts. Needactualsharedpre-Hoststate/capture ormatchedcommonprefixformation,thenactual
+Hosttools+answer/fullcost. Runtimeconfigonlyenablement isnotcompletion ofsamebeforeexperiment.
+Needrelevantchange/unrelatedarrival/knownsufficientconditions fromrealpriorreceipts; currentF01only
+partialknown/relatedarrival. ForcedfirstSTATEinstruction remainsseparateprotocol, notF2control.
+F2runtime10newcostfields47.6187825CPU +summary.000458853 pending. Latestv153 lists45pendingprior+
+currentfields plusownprocessing/futureCPUparentresidual. Neverrebillcopy metrics orwriteledgerwhilelive.
+
+# Previous v148 (superseded live process and completion status)
+
+
+User goal: execute the full `jev-read-decisions-20261016/MiLAi-Lab/docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261026.md`.
+Work in this evidence-gap development tree. No SHA/checksum/content fingerprints, subagents, new
+model services, second ledger, remote writes/merge. Keep frozen identities, failures, unknown usage
+and source splits. Avoid defensive/case-specific patches. Goal remains incomplete; no pause/stop request.
+
+ONE LIVE MODEL JOB: original source128-answer-seed0-u192-v1. Coordinator576883, trainer576889,
+exec session28252. Verify actual /proc argv/native run; no restart on timeout/lost observation.
+Dispatch `artifacts/evidence-gap-20261023/original-feedback-v2-fit-dispatch/source128-answer-seed0-u192-v1/driver.json`;
+training.log beside it. Native output `original-feedback-v2-fitting-v1/source128-answer-seed0-u192-v1`.
+At v148 RUNNING/update0 initialeval, pool768feedback+768oldreplay, sameu262/192updates/3072draws.
+Native trainer owns terminalcompute; parentresidual/orchestration pending untilterminal. Nooffline
+settlement/secondmodeljob whilelive. This is the ORIGINALlegacy arm, notnewQcontrol code.
+
+SECOND native fit source64-answer CLOSED: session65599 exit0; PIDs173458/173463 absent.192updates,
+3072draws=1536feedback+1536replay,15851792train tokens; all6×(860olddev+64feedbackdev) predictions,
+weights/schedule/options/lengths/checkpoints/ledger verified withfrozenverifier-tools-v2 analyzer.
+Nativeanswer highest96=.7839781746,192=.7596726190; oldskillbase=.8078268544→192=.7207301610
+(-8.70966935pp). Source64winner96 PROVISIONAL; savedCPU/Hostpending. Do NOTresume/retry64.
+Nativeaudit andclosure `original-feedback-v2-native-audits-v1/source64-answer-seed0-u192-v1/analysis.json`
+and `original-feedback-v2-source64-answer-terminal-v1.json`.
+
+FIRST native fit source32-answer CLOSED: session63727 exit0; PIDs4014486/4014492 absent. Do NOTresume
+or restart it.192updates/3072draws=1536feedback+1536replay,15308528traininputtokens; all6olddev860+
+feedbackdev64 evaluations complete. Actual schedule,lossweights,optionorders,lengths,predictions,
+checkpointmetadata,FP16tensorheaders andfinalduplicate literalweights verified. Both encoder/head
+parameter probes changed. Analysis `original-feedback-v2-native-audits-v1/source32-answer-seed0-u192-v1/analysis.json`;
+closure `original-feedback-v2-source32-answer-terminal-v1.json`. Nativewinner answer192 is PROVISIONAL:
+answer51.798→78.720%,delivery60.677→85.156%; oldoperation80.783→74.661% (-6.1216pp). Not Hostsuccess.
+Original8feedbackfamilies only; old16/new48/sixstrata reported separately. Savedreload/Host pending.
+
+Originalnine plan `original-feedback-v2-nine-fit-plan-v1.json` remains: source2a179b58,commonu262,
+shared_actions,max16384/head2048,encoder2.5e-5/head1e-4,micro1/effective16,trainableencoder,checkpointing,
+shuffledoptions,seed0,192updates/3072draws,0/12/24/48/96/192. Pairmeanwithinstate,replaylossmass0.25,
+feedback:replay rows1:1. Allarms samefeedbackdev64/8families andoldoperationdev860/616labelled.
+Order answer32/64/128, CE32/64/128, delivery32/64/128.3started/2nativecompleted.
+After128terminal/audit/settlement, performdeclaredsavedCPUbase/answercurves serially; remainingCE/delivery
+sixfits stillrequired inoriginalfitorder (inference interleaving doesnotchangefitorder). Alluseu262, notsource32winner. No automaticretry.
+
+SavedCPU plan PREPARED NOTRUN: `original-feedback-v2-saved-reload-v1/plan.json`. Existing
+frozen-curve-analysis-with-pairs-v1 CPUevaluator adds onlyreference_compile override/reportfields;
+provider/projector/scorer literal-equal to2a. CPU4threads,FP32load,MHAfastpathfalse,refcompilefalse,
+max16384/head2048/shared_actions. SDKsave_checkpoint writesFP16 (170tensors); loadreturnsFP32.
+Uniform64feedback atALL6candidates; oneactualbaseu262 jobsharedacross9 becauseinputs/conditions same.
+46mandatory candidatejobs total (sharedbase924 +4early64+endpoint924 perfit).36conditionalretention
+TEMPLATES are not36scheduledjobs: onlyuniqueselectedearlyupdates old860, atmost12 suchjobs across9.
+Savedoldretention atbase,192andselected;all6nativeoldcurvepoints stillreported. No selection shortcuts.
+Rootonejob dispatcher `run_original_feedback_saved_job_v1.py` remains NOTexecuted; allCPUjobs0.
+SavedCPU verifier is now IMPLEMENTED/TESTED/FROZEN: `tools/analyze_saved_feedback_fit.py`, tests
+`tests/unit/test_saved_feedback_fit.py`.22tests pass,currentandagainexactfrozenimports;Ruff/mypy/
+toolsboundarypass (4longlines wrapped, no semanticfix). Select requiresclosednativefit,all6candidate
+outputs,same64feedback/old16,actualinput/options/lengths,checkpoint/CPUconditions andoriginalledgercost.
+Combined924job summary has860replaycoverage; selector denominator isonly64feedback, not924.
+0eligible/earliesttie/CEtwotargetviews preserved. Retention verifiesselectedearlyjobs, reuses0/192 and
+sameCEselectedupdate once, reportsoldskillloss withoutretroactiveselectionchange. NoHostsuccessclaim.
+
+USE frozen `original-feedback-v2-saved-reload-v1/verifier-tools-v2/` foranalysis; CLI/environment for
+all9fits in `verifier-preparation.json`. Commands: select PLAN NATIVE_ANALYSIS OUTPUT, then retention
+PLAN NATIVE_ANALYSIS OUTPUT afterrequiredselectedearlyold860jobs. selection.json status matches
+conditionaldispatcher. Actualclosedsource32 context860old+64feedback+16legacy verified; noCPUoutput
+hasbeenverified yet. Native/Host metrics not substituted for savedmodelresults.
+Initialwhole-helper preflight FAILED: analyze_operation_curve.py differsonly inUNUSEDoperation_diagnostics
+conditional observation expansion. Usedverificationfunctionsource segments literallyequal; evaluatorhelper
+file equal. OriginalCPUfreeze unchanged, v1partialverifier-tools/failure retained, v2actualimports tested.
+Do notclaimwholehelperfileequal. `verifier-preparation-v1-failure.json` recordsfailure; failedCPUunknown.
+NoSHA/digest, no modelretry. ActualCPU/Host andallpostfitwork stillpending;completeanswer sourcecurvefirst.
+
+New `tools/analyze_feedback_fit.py` audits terminalnativepair/CE fits, target-specificselection,
+legacy/new/actualcollector-phase partitions.18tests passed;Ruff/mypy/toolsboundarypassed afterlinewrap
+andCounterannotation corrections. Incomplete/livefits rejected; CE keepsseparateanswer/deliveryviews,
+0eligible andearliesttie. NativeauditCPU alreadysettled; tooldoesnotrunmodels orwriteledger.
+
+ALL ORIGINAL NEW REVIEWS COMPLETE: train768states/2266pairs/2285attempts; dev48/140pairs/142attempts.
+Six train strata128each, dev8each. Endpoints equal all original casepaths, captures/eventIDs matched.
+Dev41/43 have two branches; no invented third branch/gold. Dev pureanswer89directions/26ties/25unknown;
+delivery102/38/0. Finalanswer103/12/25,delivery124/16/0. New36 cost-only targetdirections notsuccesses.
+Train pureanswer1019/489/758,delivery1124/995/147; finalanswer1346/162/758,delivery1826/293/147.
+Reviews are source-author judgments, not independent/blind. Original tool/Host failures remain masked.
+
+Maximum pool COMPILED ONCE via frozen2a tools: `original-feedback-v2-compiled-v1/train-source128`
+and `dev-new48`. New inputs/gold/metadata literally unchanged except reviewstatus. Original legacy16dev
+bytes appended unchanged by disjoint stableeventIDs into `dev-combined64/feedback.jsonl`;64states still
+only8 exposedfamilies. No old37W5training appended. All816newstates reviewed before compilation.
+`original-feedback-v2-all-reviews-closure-v1.json` has coverage/source boundaries; exact reviews staged
+in `original-feedback-v2-compile-inputs-v1`. Raw/quality/final copies are not additional training rows.
+
+Matched replay/replacement ONCE in `original-feedback-v2-matched-v1/sources-128` using frozen tool,
+original labelled source256 rows/native lengths/component masses. Source32/64 derived by original
+family prefixes, retaining exact parent row bytes/IDs/labels/replay/replacement. No resampling/recompile.
+32:192feedback+192replay (replay95families,154history/38complementary);64:384+384 (153families,288/96);
+128:768+768 (249families,576/192). CE rows384/768/1536. These are feedback-source cohorts, NOT total
+training exposure counts. All dev files identical bytes. Pure subset helper snapshot lives in
+`original-feedback-v2-tools-v1`; frozen2a model remains untouched. Native tokenizer audit all832newtrain+
+combineddev inputs: complete action tables, zero option/state/head clipping; max12130/11074. Tokenizer
+emitted default8192 notice; declared16384 audit passed, not proof of actual model performance.
+
+Dev findings: stage0 priority count16 has no exactduration/split; stage2row14 reports21days/11down/5up,
+so16/21calendarday and16/21*7week only there. Overallpercentage unknown; hypothetical50/32percent and
+projections excluded. Dev26 raw session3 preserves currentMarcus vs futurewebsiteMarc andChenWeiMay2.
+A commentary mistakenly called it a View; corrected, actual labels already use raw. Dev47 current6080+
+175dining requires4135outflows/1945remaining; all branches miss175, two give2120, oldpacket gives2240.
+REFRESH47 returnsrawonly. Dev23 View basefigures correct but derived3815/2385 wrong; HostFAILED retained.
+Dev17 nativeCOMPLETED emptystring retained. Years invented in0/7/9/17/41;4visitedThai calleduntried;
+20Priya→Lena andradishassistantquestion;37noPushbackassistantquestion. FaithfulViews also retained.
+
+Original generation queues closed: train2285 tools2284C/1F,Host2012C/273F; dev142 tools142C,Host131C/11F
+(3textrequired,7incompletefinal,1userinterruption atoldarm35=state11branch2). Old interruptedgeneration
+unknown1 stays charged. Never retry originals. Original4generationstages4773requests/19413970knowntokens/
+unknown1, not fullhistorical research total. Last devsuffix106exec85483 exit0, PIDs2194246/2194251 absent.
+New fit has direct neural forwards, no new Host/generation request yet. Idle Qwen/embed/reranker servers
+are infrastructure; first fit uses physicalGPU2,3 under original recipe. Do not start services.
+
+Accounting: native647772.807087196CPU/5515.6061887526885wall recordedbytrainer; peakCUDA
+[8785494528,0]bytes. Parentresidual24.673723803999565CPU/coord.009984579 included inidle20field
+settlement108.51509824499956CPU, receipt `original-feedback-v2-source64-answer-postfit-settlement.json`.
+Allpriorv146/v147/verifier/Qtensor-static-data-freeze-margin/summary/native64audit/closure/parentfields
+SETTLED. Copiednative costs andold cpu_seconds_pending flags mustnotberebilled. Onlyv148progress
+.010574354000000001CPU pending, plusfutureactive128parentresidual/orchestration. Noofflineledgerwrites
+while128runs. Originalgen/embedding/limits unchanged, interruptedunknown1 retained. GPUactive-seconds/
+prices andunmeasuredauthoring/style/setup/exploration remainunknown,notzero. NoSHA/contentfingerprints.
+
+NEW QUALITY CONTROLS implemented/prepared, NO QMODEL RUN. `tools/quality_feedback.py` andopt-in
+`--pair-supervision quality-direction|quality-tie|quality-cost` in currenttrain_bounded_laya.py.
+Legacy defaultandoriginal2a fits unchanged. Rawpre-cost quality frombasis; independentanswer/delivery
+unknown masks;0/1directions,.5ties,Qcostonlycomponentwisecostdominance onknownqualityties. Unknowns
+excludedfromstate-pairmean andeligible-family/event weights; zero-targetrows retained withweight0.
+Fixedlossmass.8feedback/.2replay;Qtie/Qcost weights/eligibility/rowpairindices same. Qdirectionless
+coverage ismethoddifference, notpureloss attribution. Actualnonzero output-logitgradientrows willbe
+recordedseparately fromeligible targets; momentum/decay canmoveparams evenwhenlogitgradient0.
+
+Actual128poolanswer: Qdirection516states/1019pairs/127targetfamilies; Qtie/Qcost680states/1508pairs/
+128families. Qcost327cost-onlydirections; allretain758unknownpairs. Delivery526vs768knownstates,
+1124vs2119targets,147unknownpairs; inheritedlegacy16delivery scope notpurematerial-only. Trainfile
+1536rows/dev64/replay unchanged, all3072planned draws preserved. Primary newstudy:3modes,source128,
+ANSWER,seed0,u262,192updates. ALL choosehighestpureQUALITYdirectionaldevfamily/stateaccuracy, earliest
+exacttie/0eligible; tieBCE/Brier andcostmetrics secondary. No loss-based orcost-based cherry-picking.
+
+33CPUtensor/data tests passed;7againwithfrozenoverlay/base2a imports andall6actualmode-targetweight
+vectors equal. Ruff/mypy/toolsboundarypassed;2existinguntypedLaya imports explicitlyannotated. Initial
+CUDAenvcollection lackedlangchain_core;existingtestsite appended forCPUtests, no packageinstall/model.
+Freeze `quality-supervision-dev-v1/frozen-training-v1` containsonlynewtrainer/loss files, importsoriginal
+2a runtime/provider/projector/tools. NoF3/compact changes inapprovedQrecipe. Study `study-plan-v1.json`,
+readiness/weights/tensorlogs/summary inquality-supervision-dev-v1. Qtrainingloop/newQpostfitverification,
+actualmodels/Host stillpending; do notdispatch beforeoriginalbaseline/serialadmission.
+
+Native margin diagnostic (same8exposedfamilies): source64 qualitydirectionabs-margin48→96→192
+.519→2.001→2.682, while96→192nativeanswer78.398→75.967%. Source32latepurequalityloss alsoincreases.
+Logitmargins notcalibratedconfidence, no causal/significanceclaim. Evidence supportsplannedfreezeencoder
+andpossibleprespecifiedepsilon.05followup iflatepatternpersists; softtarget notimplemented/run. Original
+study-plan snapshot (beforethisdiagnostic) retained, no changes toremainingoriginalnine recipes.
+
+Development candidate remains UNCOMMITTED/UNFROZEN and is NOTused by the original2a fit.
+Prior alias allocation change remains. NEW F3 extractive builder is IMPLEMENTED and mechanically
+verified: memory_control.view_builder=extractive for Host/STATE, query_structure_builder=extractive
+with existing query_structure_policy for BenchmarkRun. Defaultgenerated behavior/cache serialization
+retained. Builder independent of rebuild/version_cache/incremental policy. It quotes entire selected
+source bodies in existing nodes, with source roles/report+capture clocks, no generated facts/rules/
+eventdates orquestionmarkfilter. Uses existing Store/cachecapacity/visibility/version/returnbudget.
+Builder switch cannot reuse otherbuilder content; checkpoint mode mismatches rejected. Extra builder
+metadata/Reader provenance text appears only in the opted-in Lab packet; Product contracts unchanged.
+
+New validation:154distinct tests pass/1optionalmempursuit skip. Final10focused cases exercise mixed
+Chinese question/assertion, proposals/toolpreview, roles/clocks, cache reuse/arrivals/forgetting,
+builder switch/checkpoint, material-budget failure, nativeHost tool and fullfunctional configuration
+withoutHTTP. Other77+67regressions pass. Ruff/package/tools boundaries pass;6legacyprivate deps unchanged.
+Defaultcore mypy passes. Qualified8module mypy uses types-jsonschema4.26.0.20261006 in ignoredtaskdir
+onPYTHONPATH anddisables ONLY unused-ignore-comment lint for2existing import-untyped comments. Do not
+claim unmodifiedwide defaultmypy passed. Runtimeenv/pyproject/locks unchanged. Failedlint/setup/type
+attempts retained; no runtimevalidation weakened. All artifacts under extractive-view-dev-v1/.
+
+Real exposeddev4/23 before-Store copies,14sources: fullquote androle/report/capture metadata exact;
+originalbefore bytes andcanonicalrecords unchanged. Evidence-onlytokens extractive1884vsraw1336,
+1669vs1124: literalView islarger here, not provencompression/Hostbenefit.0neuralcandidatecalls. First
+probe's handbuilt raw comparator lackedid andfailed; partialclone/script/failure retained. v2 correctly
+uses existingsearch_sources source_scope descriptors/read_source_materials. No source/label repair or
+originalexperimentretry. Sourcecaptures remainignored/local. F3 actualHost/lifecyclecomparison pending;
+freezecandidate separately before anynewmodeluse. Summary extractive-view-dev-v1/summary-v1.json.
+
+Full requirement map `docs/MILAI_DEVELOPMENT_EXECUTION_20261026.md`; latestmanifestv148.
+Remaining: complete allninefits/savedreload/Host, F1/F2/F3, compactrealmodel, conditionaldata/coverage/
+Q-direction-Q-tie-Q-cost/seeds/originalcontrols, autonomousHost, lifecycle, externalchain/fourfigures.
+Can develop independent offline code while this fitruns, but no concurrent model experiment or settlement.
+Do not narrow goal to reviewed data or claim complete based on this checkpoint.
+
+# Historical: 2026-10-26 USER REQUESTED PAUSE; superseded by explicit resume above
 
 Goal status PAUSED. User explicitly requested stopping the current experiment and submitting
 work to GitHub. GitHub publication of the current branch is authorized; experiment continuation

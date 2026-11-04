@@ -26,10 +26,16 @@ def main() -> None:
                 stream.write(json.dumps(row, ensure_ascii=False) + "\n")
     write_json(args.output / "slots.json", panel["slots"])
     write_json(args.output / "missing-condition-labels.json", panel["missing_condition_labels"])
+    coverage_path = args.output / 'instruction-negative-coverage.json'
+    write_json(coverage_path, panel['instruction_negative_coverage'])
     for name in ["groups.json", "query-units.json"]:
         (args.output / name).write_bytes((args.source / name).read_bytes())
     report = {"status": "STRATIFIED_CONDITIONAL_TRAIN_PANEL_CREATED;NOT_FITTED",
         "source": str(args.source.resolve()), "seed": args.seed, "counts": panel["counts"],
+        "instruction_negative_coverage": {
+            k: v for k, v in panel['instruction_negative_coverage'].items()
+            if k != 'missing_conditions'},
+        "instruction_negative_coverage_file": str(coverage_path.resolve()),
         "selection": "Keep all known change and stable-positive pairs; choose one seeded "
                      "stable-negative pair per query when available; then fill one known "
                      "positive and negative per actual condition if not already represented. "

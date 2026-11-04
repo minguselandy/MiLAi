@@ -1,0 +1,362 @@
+{
+  "status": "CE32_SELECTED24_RETENTION_RUNNING;PRE_FINAL_FOUR_SLOT_CONDITIONAL_HOST_PIPELINE_FROZEN",
+  "goal_status": "active",
+  "goal_complete": false,
+  "observed_at": "2026-10-28T10:28:04.623214+00:00",
+  "snapshot_kind": "Incremental checkpoint: prior non-superseded original studies and complete requirement map remain authoritative. Avoid duplicating historical datasets into every progress file.",
+  "previous_progress": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/data/manifests/evidence-gap-development-progress-20261023-v183.json",
+  "plan": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261026.md",
+  "execution": "docs/MILAI_DEVELOPMENT_EXECUTION_20261026.md",
+  "previous_turn_classification": "Substantive progress: implemented four-slot allocation and actual fresh conditional Host framing; discovered generated final-answer Source in post-completion bank, corrected recording boundary before persistence, tested/froze updated pipeline. Original model uninterrupted.",
+  "original_counts": {
+    "native_fits_completed": 4,
+    "native_fits_total": 9,
+    "saved_CPU_jobs_closed": 23,
+    "full_saved_selections_closed": 4,
+    "selected_retention_fits_closed": 3,
+    "Host_results": 0
+  },
+  "live_model": {
+    "job_id": "source32-continued-ce-seed0-u192-v1/selected-retention-24",
+    "driver": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-saved-reload-v1/dispatch/source32-continued-ce-seed0-u192-v1/selected-retention-24/driver.json",
+    "output": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-saved-reload-v1/source32-continued-ce-seed0-u192-v1/selected-retention-24/evaluation",
+    "coordinator_pid": 305311,
+    "child_pid": 305313,
+    "pid_presence": {
+      "pid": true,
+      "child_pid": true
+    },
+    "completed_states": 486,
+    "planned_states": 860,
+    "native_status": "RUNNING",
+    "automatic_retry": false,
+    "condition": "Original frozen CPU4 FP32, max_len16384/head2048, CUDAempty, no MHA fastpath/reference compilation."
+  },
+  "queue_after_live": [
+    "Original frozen single-retention verification and idle accounting.",
+    "Run actual ANSWER-selected48 old860.",
+    "Only after both24/48 close, original verifier-tools-v2 whole CE32 retention audit.",
+    "Original CE64, CE128 and delivery32/64/128 native/saved/retention closures. No new independent model job while any real model lives."
+  ],
+  "fresh_development": {
+    "summary": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/summary-v2.json",
+    "runtime_source_version": "0a32604e6b22b9d6d141dfc74df13a4d53d1f916",
+    "freeze": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/frozen-v3/MiLAi-Lab",
+    "pipeline": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/current32-pipeline-v3.json",
+    "collection_plan": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/current-prefix32-dev-v1/collection-plan-v5.json",
+    "validation": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/frozen-validation-v3.json",
+    "frozen_tests_passed": 74,
+    "current32_real_calls": 0,
+    "current32_quality_labels": 0,
+    "closed_after_bank_assumption_superseded": true,
+    "original_frozen_model_studies_changed": false
+  },
+  "full_remaining_scope": [
+    "Original nine fits and their real Host results.",
+    "Q-direction/Q-tie/Q-cost and encoder/soft-target controls.",
+    "Old/new coverage, new actual prefixes, compact matched fitting.",
+    "F1/F2/F3 real Host comparisons, View semantic/lifecycle results.",
+    "Auxiliary scales/seeds and actual autonomous Host main table.",
+    "Complete external LongMemEval/STATE chains and four final main figures."
+  ],
+  "accounting": {
+    "last_idle_settlement": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-source32-continued-ce-saved192-cpu-settlement-v1.json",
+    "pending_disjoint_entries_excluding_this_progress": [
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-saved-reload-v1/detached-launches/source32-continued-ce-seed0-u192-v1/selected-retention-24/launch.json",
+        "field": "cpu_seconds_pending",
+        "cpu_seconds": 0.012410956999999997
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-saved-reload-v1/detached-launches/source32-continued-ce-seed0-u192-v1/selected-retention-24/launch-verification-v1.json",
+        "field": "cpu_seconds_pending",
+        "cpu_seconds": 0.0034955119999999992
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/validation-v3.json",
+        "field": "checks.0.cpu_seconds",
+        "cpu_seconds": 9.307953
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/validation-v3.json",
+        "field": "checks.1.cpu_seconds",
+        "cpu_seconds": 0.15837700000000132
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/validation-v3.json",
+        "field": "checks.2.cpu_seconds",
+        "cpu_seconds": 2.9340629999999988
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/validation-v3.json",
+        "field": "cpu_seconds_pending",
+        "cpu_seconds": 0.0017717610000000002
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/validation-v4.json",
+        "field": "checks.0.cpu_seconds",
+        "cpu_seconds": 5.910918
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/validation-v4.json",
+        "field": "checks.1.cpu_seconds",
+        "cpu_seconds": 0.06803200000000048
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/validation-v4.json",
+        "field": "cpu_seconds_pending",
+        "cpu_seconds": 0.0012123429999999977
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/frozen-validation-v1.json",
+        "field": "checks.0.cpu_seconds",
+        "cpu_seconds": 11.054797
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/frozen-validation-v1.json",
+        "field": "checks.1.cpu_seconds",
+        "cpu_seconds": 4.6832519999999995
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/frozen-validation-v1.json",
+        "field": "cpu_seconds_pending",
+        "cpu_seconds": 0.0012937639999999993
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/freeze-preparation-v1.json",
+        "field": "cpu_seconds_pending",
+        "cpu_seconds": 0.261402886
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/summary-v1.json",
+        "field": "cpu_seconds_pending",
+        "cpu_seconds": 0.0009040630000000001
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-source32-continued-ce-endpoint-diagnostic-v1.json",
+        "field": "cpu_seconds_pending",
+        "cpu_seconds": 0.476608456
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/data/manifests/evidence-gap-development-progress-20261023-v183.json",
+        "field": "accounting.progress_processing_cpu_pending",
+        "cpu_seconds": 0.040254791000000005
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/allocation-validation-v1.json",
+        "field": "checks_cpu_seconds",
+        "cpu_seconds": 7.8913199999999994
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/allocation-validation-v1.json",
+        "field": "cpu_seconds_pending",
+        "cpu_seconds": 0.0009649390000000015
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/allocation-validation-v2.json",
+        "field": "checks.0.cpu_seconds",
+        "cpu_seconds": 10.66075
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/allocation-validation-v2.json",
+        "field": "checks.1.cpu_seconds",
+        "cpu_seconds": 0.7475660000000002
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/allocation-validation-v2.json",
+        "field": "cpu_seconds_pending",
+        "cpu_seconds": 0.0025855749999999997
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/allocation-validation-v3.json",
+        "field": "checks.0.cpu_seconds",
+        "cpu_seconds": 12.262516999999999
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/allocation-validation-v3.json",
+        "field": "checks.1.cpu_seconds",
+        "cpu_seconds": 0.06790500000000055
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/allocation-validation-v3.json",
+        "field": "checks.2.cpu_seconds",
+        "cpu_seconds": 35.658524
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/allocation-validation-v3.json",
+        "field": "checks.3.cpu_seconds",
+        "cpu_seconds": 7.9137050000000055
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/allocation-validation-v3.json",
+        "field": "cpu_seconds_pending",
+        "cpu_seconds": 0.0040935780000000005
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/allocation-validation-v4.json",
+        "field": "checks.0.cpu_seconds",
+        "cpu_seconds": 16.184
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/allocation-validation-v4.json",
+        "field": "checks.1.cpu_seconds",
+        "cpu_seconds": 0.19296499999999783
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/allocation-validation-v4.json",
+        "field": "checks.2.cpu_seconds",
+        "cpu_seconds": 3.0940249999999967
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/allocation-validation-v4.json",
+        "field": "cpu_seconds_pending",
+        "cpu_seconds": 0.004577524999999999
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/allocation-validation-v5.json",
+        "field": "checks.0.cpu_seconds",
+        "cpu_seconds": 22.352719
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/allocation-validation-v5.json",
+        "field": "checks.1.cpu_seconds",
+        "cpu_seconds": 0.08304299999999953
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/allocation-validation-v5.json",
+        "field": "checks.2.cpu_seconds",
+        "cpu_seconds": 2.4234899999999975
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/allocation-validation-v5.json",
+        "field": "checks.3.cpu_seconds",
+        "cpu_seconds": 7.935206
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/allocation-validation-v5.json",
+        "field": "cpu_seconds_pending",
+        "cpu_seconds": 0.006329279
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/allocation-validation-v6.json",
+        "field": "checks.0.cpu_seconds",
+        "cpu_seconds": 9.370925
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/allocation-validation-v6.json",
+        "field": "checks.1.cpu_seconds",
+        "cpu_seconds": 0.06808300000000167
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/allocation-validation-v6.json",
+        "field": "checks.2.cpu_seconds",
+        "cpu_seconds": 2.1766609999999997
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/allocation-validation-v6.json",
+        "field": "cpu_seconds_pending",
+        "cpu_seconds": 0.0027178199999999993
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/allocation-validation-v7.json",
+        "field": "checks.0.cpu_seconds",
+        "cpu_seconds": 0.053960999999999995
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/allocation-validation-v7.json",
+        "field": "checks.1.cpu_seconds",
+        "cpu_seconds": 2.2692949999999996
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/allocation-validation-v7.json",
+        "field": "cpu_seconds_pending",
+        "cpu_seconds": 0.0012625320000000002
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/pre-final-recording-commit-v1.json",
+        "field": "checks.0.cpu_seconds",
+        "cpu_seconds": 0.007137999999999999
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/pre-final-recording-commit-v1.json",
+        "field": "checks.1.cpu_seconds",
+        "cpu_seconds": 0.015238000000000002
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/pre-final-recording-commit-v1.json",
+        "field": "checks.2.cpu_seconds",
+        "cpu_seconds": 0.06605999999999998
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/pre-final-recording-commit-v1.json",
+        "field": "checks.3.cpu_seconds",
+        "cpu_seconds": 0.0024010000000000073
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/pre-final-recording-commit-v1.json",
+        "field": "cpu_seconds_pending",
+        "cpu_seconds": 0.0015265720000000003
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/frozen-validation-v3.json",
+        "field": "checks.0.cpu_seconds",
+        "cpu_seconds": 26.951857
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/frozen-validation-v3.json",
+        "field": "checks.1.cpu_seconds",
+        "cpu_seconds": 0.4123040000000029
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/frozen-validation-v3.json",
+        "field": "checks.2.cpu_seconds",
+        "cpu_seconds": 34.643693999999996
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/frozen-validation-v3.json",
+        "field": "checks.3.cpu_seconds",
+        "cpu_seconds": 4.794998999999995
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/frozen-validation-v3.json",
+        "field": "cpu_seconds_pending",
+        "cpu_seconds": 0.021705083
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/freeze-preparation-v2.json",
+        "field": "cpu_seconds_pending",
+        "cpu_seconds": 0.225504128
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/freeze-preparation-v3.json",
+        "field": "cpu_seconds_pending",
+        "cpu_seconds": 0.2074306
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/current32-pipeline-v3.json",
+        "field": "cpu_seconds_pending",
+        "cpu_seconds": 0.0029738119999999993
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/pipeline-validation-v3.json",
+        "field": "cpu_seconds_pending",
+        "cpu_seconds": 0.0025895959999999996
+      },
+      {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/fresh-known-budget-dev-v1/summary-v2.json",
+        "field": "cpu_seconds_pending",
+        "cpu_seconds": 5.499399999999918e-05
+      }
+    ],
+    "pending_explicit_field_count": 57,
+    "pending_explicit_CPU_seconds": 243.70141356599996,
+    "operational_ledger_written_while_live": false,
+    "native_model_compute": "Recorded only by original evaluator; not included in offline pending costs.",
+    "unmeasured": "Reasoning, interactive read/edit/formatting shell overhead and uninstrumented tool orchestration remain unknown, not zero. Mechanical test child CPU is explicit and disjoint from parent processing CPU.",
+    "orphan_parent_and_exact_child_residual_CPU": "Historical original128 orphan incident remains unknown; unchanged.",
+    "progress_processing_cpu_pending": 0.03405891700000001
+  },
+  "no_sha_validation": true,
+  "subagents_used": false,
+  "remote_writes": false
+}

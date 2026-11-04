@@ -1,0 +1,184 @@
+{
+  "status": "LAYA_INITIAL40_REVIEWED;FULL_FROZEN_FEEDBACK_LEARNING_LOOP_INCOMPLETE",
+  "goal_status": "active",
+  "goal_complete": false,
+  "observed_at": "2026-10-26T18:14:44.534773+08:00",
+  "previous_progress": "data/manifests/evidence-gap-development-progress-20261023-v133.json",
+  "previous_turn_classification": "progress:32 author-reviewed states and96pairs persisted; rules strata completed and laya initial started.",
+  "plan": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261026.md",
+  "execution": "docs/MILAI_DEVELOPMENT_EXECUTION_20261026.md",
+  "remaining_requirements_reference": "docs/MILAI_DEVELOPMENT_EXECUTION_20261026.md#要求与验收证据",
+  "source_version": "development7aece29d; frozen2a179b58 method and all original outcomes unchanged",
+  "active_processes": [],
+  "branch_execution": "All original train2285/dev142 attempts remain closed. No experiment retry or additional model call. Full evidence references remain v130 train and v132 dev closure.",
+  "train_quality_reviews": {
+    "status": "RULES256_AND_LAYA_INITIAL40_REVIEWED;FULLPOOL_OPEN",
+    "reviewed_states": 296,
+    "pairs": 888,
+    "reviewed_strata": {
+      "rules_initial": 128,
+      "rules_post": 128,
+      "laya_initial": 40
+    },
+    "source_family_cohorts": {
+      "32": {
+        "selected_states": 192,
+        "reviewed_states": 96,
+        "reviewed_strata": {
+          "rules_initial": 32,
+          "rules_post": 32,
+          "laya_initial": 32
+        },
+        "remaining_states": 96
+      },
+      "64": {
+        "selected_states": 384,
+        "reviewed_states": 168,
+        "reviewed_strata": {
+          "rules_initial": 64,
+          "rules_post": 64,
+          "laya_initial": 40
+        },
+        "remaining_states": 216
+      },
+      "128": {
+        "selected_states": 768,
+        "reviewed_states": 296,
+        "reviewed_strata": {
+          "rules_initial": 128,
+          "rules_post": 128,
+          "laya_initial": 40
+        },
+        "remaining_states": 472
+      }
+    },
+    "quality_counts": {
+      "answer": {
+        "right": 228,
+        "unknown": 350,
+        "tie": 176,
+        "left": 134
+      },
+      "delivery": {
+        "right": 293,
+        "unknown": 85,
+        "tie": 347,
+        "left": 163
+      }
+    },
+    "final_counts": {
+      "answer": {
+        "right": 277,
+        "unknown": 350,
+        "tie": 65,
+        "left": 196
+      },
+      "delivery": {
+        "right": 405,
+        "unknown": 85,
+        "tie": 115,
+        "left": 283
+      }
+    },
+    "new_chunk": "264-295",
+    "new_states": 32,
+    "new_pairs": 96,
+    "new_cost_only_directions": 31,
+    "next_source_first_state": 296,
+    "model_calls": 0,
+    "compiled_feedback_rows": 0,
+    "full_option_ce_labels_added": false,
+    "ledger_recorded": false,
+    "cpu_seconds_pending": 0.07448003,
+    "scope": "Disjoint chunk and label-mask integrity/source-prefix coverage only, not independent semantic validation or measured neural gains. Preserve actual source-family grouping and original full denominator."
+  },
+  "dev_quality_review_states": 0,
+  "compiled_feedback_rows": 0,
+  "feedback_fits_started": 0,
+  "source_review_method": {
+    "new_states": 32,
+    "same_request_source_reuse": 23,
+    "different_request_or_frontier_reviews": 9,
+    "comparison": "Actual before Store source fields compared literally, with only native event identity/capture timestamp differing across collectors; actual current request inspected.",
+    "reviewer": "Source author, not independent or blind."
+  },
+  "mechanism_review": {
+    "artifact": "artifacts/evidence-gap-20261023/feedback-branch-reviews-v2/train/mechanism-states-267-268-276-289-294-v1.json",
+    "persisted_undelivered_views": [
+      {
+        "state": 267,
+        "nodes": 16,
+        "rules": 1
+      },
+      {
+        "state": 289,
+        "nodes": 10,
+        "rules": 0
+      }
+    ],
+    "known_rejected_view": {
+      "state": 276,
+      "reason": "QUERY_STRUCTURE_RULE_NODE_UNAVAILABLE",
+      "cache_entries": 0
+    },
+    "all_three_continuations": "Two SEARCH operations, zero READ, then empty HANDOFF under unchanged continuation. Known operation rejection distinct from native branch closure and Host failure.",
+    "citation_failures": [
+      {
+        "state": 268,
+        "node": "n1",
+        "claim_entity": "Linda Perry",
+        "actual_bound_document": "Xander"
+      },
+      {
+        "state": 294,
+        "nodes": [
+          "n3",
+          "n7"
+        ],
+        "claim_entities": [
+          "Vesta Williams",
+          "Roman Tam"
+        ],
+        "actual_bound_document": "Kim Carnes / Does It Make You Remember"
+      }
+    ],
+    "scope": "Saved original traces and actual SQLite cache inspected; not semantic certification of undelivered graphs or repaired outputs."
+  },
+  "semantic_findings": [
+    "265/273 View supplies unsourced year or exact dates; native capture date is not the reported event date.",
+    "267/289 empty Host delivery can coexist with a persisted generated View; construction, legal execution, delivery and task outcome remain separate.",
+    "270/272/274/284/286 fixed sibling receipts are part of original complete Host frame. Correct empty HANDOFF readout does not prove policy knew enough at that decision.",
+    "271 new selected gift/price/budget can improve despite Host misclassifying a halted alternative as rejected; preserve partial-error qualification.",
+    "275 uncertain habit start date is not a tentative proposed habit change.",
+    "277 previous misremembered user reading is not a second erroneous clinical measurement by the doctor.",
+    "279/291 correct quantities do not establish unsupplied year or exact recent numeric rate.",
+    "295 current interim duties, stale chart and pending permanent role stay separate; new project does not prove a new title."
+  ],
+  "accounting": {
+    "settlement": "artifacts/evidence-gap-20261023/original-feedback-v2-reviews264-295-settlement.json",
+    "settled_cpu_seconds": 3.509506155,
+    "settled_fields": 7,
+    "only_expected_compute_delta": true,
+    "new_generation_requests": 0,
+    "new_known_generation_tokens": 0,
+    "new_unknown_generation_usage": 0,
+    "unmeasured": "Semantic reading/authoring/import, failed/exploratory trace inspection and settlement/report editing outside explicit fields remain unknown.",
+    "progress_processing_cpu_pending": 0.0012040630000000017
+  },
+  "next_actions": [
+    "Continue source-first train state296;472 train states plus48dev still need quality review.",
+    "Compile full largest pool once, derive original source32/64 family prefixes and execute nine192-update fits, saved-reload selection and actual Host evaluation.",
+    "Preserve full F1/F2/F3, compact behavior, conditional data and quality/coverage controls, decisive seeds, lifecycle, external chain and four result figures."
+  ],
+  "no_sha_or_content_fingerprint_validation": true,
+  "no_subagents": true,
+  "no_new_model_services_or_ledger": true,
+  "no_remote_writes": true,
+  "new_runtime_changes": false,
+  "verification": [
+    "296 disjoint states/888pairs; original source32=96/192,source64=168/384,source128=296/768 verified.",
+    "All failure masks and directional/unknown quality unchanged by componentwise cost rule;31new cost-only directions are not31new successful answers.",
+    "Read-only traces distinguish return-budget rejection from invalid-rule rejection, cache presence independently checked.",
+    "Seven processing fields settled once; every non-target ledger field exactly unchanged."
+  ]
+}

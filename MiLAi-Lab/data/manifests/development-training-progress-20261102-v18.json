@@ -1,0 +1,393 @@
+{
+  "status": "ACTIVE_FULL_NOV2_PLAN;E2_POINT2104_CLOSED_FIT_RUNNING;CONTROLLED_RESULTS_ARTIFACTS_RENDERED",
+  "timestamp_utc": "2026-11-02T22:45:44.547683+00:00",
+  "goal_complete": false,
+  "previous_goal_turn_classification": "progress",
+  "plan": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/docs/MILAI_DEVELOPMENT_TRAINING_PLAN_20261102.md",
+  "previous_progress": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/data/manifests/development-training-progress-20261102-v17.json",
+  "live_model": {
+    "driver": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e2-unit-training-v1/driver.json",
+    "output": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e2-fitting-v1/ordinary-unit",
+    "coordinator_pid": 3789446,
+    "child_pid": 3789458,
+    "exec_session": 69731,
+    "owners": [
+      3789458
+    ],
+    "status": "RUNNING",
+    "observed_updates": 2207,
+    "planned_updates": 2805,
+    "observed_train_sequence_rows": 35312,
+    "observed_train_input_tokens": 29677094,
+    "history_points": [
+      0,
+      702,
+      1403,
+      2104
+    ],
+    "original_process_revalidated": true,
+    "automatic_retry": false,
+    "second_fit_queued": false,
+    "offline_ledger_writes_allowed": false
+  },
+  "point2104": {
+    "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e2-unit-training-v1/point2104-analysis-v1.json",
+    "condition_family_balanced_accuracy": 0.8862195204578752,
+    "operation_family_macro_acceptance": 0.7863251150561469,
+    "feedback_answer_family_macro_pair": 0.6205357142857143,
+    "feedback_delivery_family_macro_pair": 0.7135416666666666,
+    "comparison": {
+      "conditional_family_balanced_delta_pp": 13.365640588301563,
+      "operation_family_macro_delta_pp": 0.7474409050261532,
+      "supported_change_joint_correct": 1,
+      "both_satisfies": 7,
+      "positive_signed_margins": 3,
+      "mean_relative_softplus_diagnostic": 0.9961157509190287,
+      "known_train_changes_seen": 4,
+      "known_train_changes_total": 6
+    },
+    "stable_positive_family_macro_joint": 0.9137931034482759,
+    "stable_negative_family_macro_joint": 0.8048600928641251,
+    "nominee": null,
+    "scope": "Closed three-quarter native point only. Final2 known TRAIN changes have not appeared at this point; no saved CPU or actual task benefit claimed."
+  },
+  "closed_local_evidence_artifacts": {
+    "report": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/controlled-dev32-evidence-v1/report.json",
+    "condition_table": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/controlled-dev32-evidence-v1/closed-local-results.csv",
+    "source_matrix": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/controlled-dev32-evidence-v1/source-outcome-matrix.csv",
+    "figures": [
+      "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/controlled-dev32-evidence-v1/closed-local-outcomes.png",
+      "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/controlled-dev32-evidence-v1/closed-local-outcomes.svg",
+      "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/controlled-dev32-evidence-v1/source-outcome-matrix.png",
+      "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/controlled-dev32-evidence-v1/source-outcome-matrix.svg"
+    ],
+    "visual_inspection": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/controlled-dev32-evidence-v1/visual-inspection-v1.json",
+    "families": 32,
+    "logical_positions": 160,
+    "unique_existing_readout_files": 103,
+    "unique_known_Reader_tokens_already_recorded": 357953,
+    "strict_complete_of32": {
+      "raw_context": 14,
+      "initialization_u262": 11,
+      "delivery_u16": 14,
+      "head_only_u128": 11,
+      "fixed_prefix4": 17
+    },
+    "different_intervention_scopes_explicit": true,
+    "Reader_cost_scope": "Reader-only logical per-condition totals, including shared first outcomes. Not new ledger charges, whole pipeline cost or an efficiency claim. Missing late states have no readout; their lower observed usage is not a saving.",
+    "quality_scope": "Source-author exposed development judgments, not independent confirmation. Native F1 is separate complete-string overlap. Distinct intervention scopes shown explicitly.",
+    "new_model_calls": 0,
+    "new_labels": 0,
+    "main_autonomous_Host_table_complete": false,
+    "full_paper_figures_complete": false
+  },
+  "verification": {
+    "source_family_alignment": "All32 positions and order identical to closed source-author reports",
+    "status_and_count_alignment": "Complete counts14/11/14/11/17 verified; failed/qualified/incomplete/missing states kept",
+    "cost_binding": "103 unique actual readout files and known token total equals118399+172996+66558; logical reuse is not new billing",
+    "rendering": "Standard installed matplotlib; both PNGs visually inspected, matching SVG and CSV exports",
+    "runtime_changed_this_turn": false
+  },
+  "cost": {
+    "ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+    "new_measured_pending_cpu_this_turn": 11.870000000000001,
+    "total_measured_pending_cpu_seconds": 161.68000000000004,
+    "pending_commands": [
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e2-unit-training-v1/analysis-tests.time.txt",
+        "cpu_seconds": 1.2400000000000002,
+        "wall_seconds": 1.26
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e2-unit-training-v1/initial-analysis.time.txt",
+        "cpu_seconds": 1.28,
+        "wall_seconds": 1.29
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e2-unit-training-v1/fixed-prefix-feedback-tests.time.txt",
+        "cpu_seconds": 5.16,
+        "wall_seconds": 2.76
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e2-unit-training-v1/initial-cpu-gpu-comparison.time.txt",
+        "cpu_seconds": 1.3599999999999999,
+        "wall_seconds": 1.36
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e2-unit-training-v1/analysis-and-baseline-boundaries.time.txt",
+        "cpu_seconds": 13.82,
+        "wall_seconds": 13.84
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e3-next56-preparation-v1/preparation.time.txt",
+        "cpu_seconds": 0.42,
+        "wall_seconds": 0.43
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e3-next56-preparation-v1/recorded-binding-check.time.txt",
+        "cpu_seconds": 1.52,
+        "wall_seconds": 1.52
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e3-next56-preparation-v1/scoring-preparation.time.txt",
+        "cpu_seconds": 0.1,
+        "wall_seconds": 0.11
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e3-next56-preparation-v1/guide-compilation.time.txt",
+        "cpu_seconds": 0.11,
+        "wall_seconds": 0.11
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e3-next56-preparation-v1/guide16-compilation.time.txt",
+        "cpu_seconds": 0.14,
+        "wall_seconds": 0.14
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e3-next56-preparation-v1/guide24-compilation.time.txt",
+        "cpu_seconds": 0.13,
+        "wall_seconds": 0.14
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e3-next56-preparation-v1/guide32-compilation.time.txt",
+        "cpu_seconds": 0.1,
+        "wall_seconds": 0.1
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e3-next56-preparation-v1/guide40-compilation.time.txt",
+        "cpu_seconds": 0.09000000000000001,
+        "wall_seconds": 0.1
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e3-next56-preparation-v1/guide48-compilation.time.txt",
+        "cpu_seconds": 0.17,
+        "wall_seconds": 0.17
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e3-next56-preparation-v1/guide56-compilation.time.txt",
+        "cpu_seconds": 0.08,
+        "wall_seconds": 0.09
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e3-next56-preparation-v1/all56-reference-audit.time.txt",
+        "cpu_seconds": 0.38,
+        "wall_seconds": 0.38
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/query-format-dev32-v1/preparation.time.txt",
+        "cpu_seconds": 0.45,
+        "wall_seconds": 0.46,
+        "failure_retained": true
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/query-format-dev32-v1/preparation-v2.time.txt",
+        "cpu_seconds": 0.75,
+        "wall_seconds": 0.75,
+        "failure_retained": true
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/query-format-dev32-v1/preparation-v3.time.txt",
+        "cpu_seconds": 0.6699999999999999,
+        "wall_seconds": 0.67,
+        "failure_retained": false
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/query-format-dev32-v1/preparation-v4.time.txt",
+        "cpu_seconds": 0.65,
+        "wall_seconds": 0.66,
+        "failure_retained": false
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/query-format-dev32-v1/preflight.time.txt",
+        "cpu_seconds": 6.090000000000001,
+        "wall_seconds": 3.39,
+        "failure_retained": false
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/query-format-dev32-v1/queue-tests.time.txt",
+        "cpu_seconds": 5.74,
+        "wall_seconds": 3.14,
+        "failure_retained": false
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e2-unit-training-v1/point702-analysis.time.txt",
+        "cpu_seconds": 1.29,
+        "wall_seconds": 1.3,
+        "failure_retained": false
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e2-unit-training-v1/change-exposure702.time.txt",
+        "cpu_seconds": 0.32,
+        "wall_seconds": 0.33,
+        "failure_retained": false
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e2-unit-training-v1/point702-behavior-diagnosis.time.txt",
+        "cpu_seconds": 0.43,
+        "wall_seconds": 0.44,
+        "failure_retained": false
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e4-headset-dev32-v1/preparation.time.txt",
+        "cpu_seconds": 0.22,
+        "wall_seconds": 0.22,
+        "failure_retained": false
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e4-headset-dev32-v1/prior-projection.time.txt",
+        "cpu_seconds": 0.31,
+        "wall_seconds": 0.32,
+        "failure_retained": false
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e4-headset-dev32-v1/e1-projection.time.txt",
+        "cpu_seconds": 0.62,
+        "wall_seconds": 0.63,
+        "failure_retained": false
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e4-headset-dev32-v1/admission.time.txt",
+        "cpu_seconds": 10.37,
+        "wall_seconds": 7.93,
+        "failure_retained": false
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e4-headset-dev32-v1/reuse-tests.time.txt",
+        "cpu_seconds": 1.24,
+        "wall_seconds": 1.25,
+        "failure_retained": false
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e4-headset-dev32-v1/actual-reuse-audit.time.txt",
+        "cpu_seconds": 3.29,
+        "wall_seconds": 3.3,
+        "failure_retained": false
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e4-headset-dev32-v1/reuse-tests-v2.time.txt",
+        "cpu_seconds": 0.98,
+        "wall_seconds": 0.99,
+        "failure_retained": false
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e4-headset-dev32-v1/actual-reuse-wire-audit.time.txt",
+        "cpu_seconds": 2.9899999999999998,
+        "wall_seconds": 3.0,
+        "failure_retained": false
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e4-headset-dev32-v1/autonomous-policy-tests.time.txt",
+        "cpu_seconds": 14.89,
+        "wall_seconds": 28.73,
+        "failure_retained": true
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e4-headset-dev32-v1/autonomous-policy-tests-v2.time.txt",
+        "cpu_seconds": 15.1,
+        "wall_seconds": 30.03,
+        "failure_retained": false
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e4-autonomous-host-dev32-v1/preparation.time.txt",
+        "cpu_seconds": 5.359999999999999,
+        "wall_seconds": 2.71,
+        "failure_retained": false
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e4-autonomous-host-dev32-v1/segment-preparation.time.txt",
+        "cpu_seconds": 0.12000000000000001,
+        "wall_seconds": 0.12,
+        "failure_retained": false
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e4-autonomous-host-dev32-v1/common-environment-binding.time.txt",
+        "cpu_seconds": 0.05,
+        "wall_seconds": 0.06,
+        "failure_retained": false
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e4-autonomous-host-dev32-v1/frozen-policy-tests.time.txt",
+        "cpu_seconds": 17.029999999999998,
+        "wall_seconds": 32.1,
+        "failure_retained": false
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e4-autonomous-host-dev32-v1/boundaries.time.txt",
+        "cpu_seconds": 14.62,
+        "wall_seconds": 14.69,
+        "failure_retained": false
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e4-autonomous-host-dev32-v1/preflight.time.txt",
+        "cpu_seconds": 5.7700000000000005,
+        "wall_seconds": 3.25,
+        "failure_retained": false
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e2-unit-training-v1/point1403-analysis.time.txt",
+        "cpu_seconds": 1.26,
+        "wall_seconds": 1.27,
+        "failure_retained": false
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e4-autonomous-host-dev32-v1/review-packet-tests.time.txt",
+        "cpu_seconds": 1.62,
+        "wall_seconds": 1.63
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e4-autonomous-host-dev32-v1/review-packet-tests-v2.time.txt",
+        "cpu_seconds": 1.06,
+        "wall_seconds": 1.06
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e4-autonomous-host-dev32-v1/review-packet-actual-format.time.txt",
+        "cpu_seconds": 0.21000000000000002,
+        "wall_seconds": 0.22
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e4-autonomous-host-dev32-v1/review-tool-boundary.time.txt",
+        "cpu_seconds": 10.21,
+        "wall_seconds": 10.22
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e2-unit-training-v1/point2104-analysis.time.txt",
+        "cpu_seconds": 1.32,
+        "wall_seconds": 1.32
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/controlled-dev32-evidence-v1/render.time.txt",
+        "cpu_seconds": 5.27,
+        "wall_seconds": 2.62
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/controlled-dev32-evidence-v1/render-v2.time.txt",
+        "cpu_seconds": 5.28,
+        "wall_seconds": 2.83
+      }
+    ],
+    "ledger_written_this_turn": false,
+    "nested_compute_not_added": true,
+    "earlier_reader_costs_rebilled": false,
+    "historical_unknown_and_limits_preserved": true,
+    "unmetered_cost": "inspection, author reasoning, image review and reporting unknown not zero"
+  },
+  "next_actions": [
+    "Observe original E2 through the last2 known change-pair updates2373/2500 and final2805 closure; do not restart or choose from partial points.",
+    "After full closure run the existing complete-native analyzer, reconcile its actual exposure, and settle all pending measured CPU once at idle.",
+    "Proceed serially with prepared query-format32, prior-headset31 and E2 nominee saved/task bindings; reuse existing first outcomes including failures.",
+    "Bind and run actual E4 autonomous Host comparisons, then E3 aggregation/continued-old control and the remaining lifecycle/seeds/source confirmation/LME/Mem2Act/publication/Product requirements."
+  ],
+  "remaining": [
+    "E2 closed selection and possible matched conditional arm",
+    "E3 real new trajectories/branches/one aggregation round/continued-old-data control",
+    "E4 strong baselines and actual autonomous Host",
+    "E5 evidence-based View/lifecycle",
+    "final3seeds/source-family confirmation",
+    "LME451 Reader/Judge then Mem2Act",
+    "full paper tables/figures and only effective Product changes"
+  ],
+  "no_sha_validation": true,
+  "subagents": false,
+  "remote_written": false,
+  "Product_changed": false
+}

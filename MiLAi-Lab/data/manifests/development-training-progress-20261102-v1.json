@@ -1,0 +1,390 @@
+{
+  "status": "ACTIVE_D1_IMPLEMENTED_E0_REAL_RESULTS_D2_PARTIAL",
+  "timestamp_utc": "2026-11-02T04:27:17.603106+00:00",
+  "goal_complete": false,
+  "plan": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/docs/MILAI_DEVELOPMENT_TRAINING_PLAN_20261102.md",
+  "source": {
+    "branch": "feat/evidence-gap-development-20261023",
+    "base_commit": "b66a5024",
+    "new_code": "uncommitted_worktree",
+    "changed": [
+      "tools/prepare_view_feedback_branches.py",
+      "tools/feedback_choices.py",
+      "tools/analyze_feedback_choices.py",
+      "tests/unit/test_feedback_choices.py"
+    ]
+  },
+  "prior_evidence": {
+    "original_closure": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-host-execution-v1/protocol-closure-v1.json",
+    "native_fits": 9,
+    "saved_jobs": 54,
+    "Host_arms": 13,
+    "Host_positions": 208,
+    "scope": "Original protocol closed, not new-plan E1 or independent confirmation"
+  },
+  "live_model": {
+    "pid": 3694168,
+    "coordinator_pid": 3694163,
+    "proc_cmdline_observed": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/cuda-env/bin/python -u /cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/frozen-feedback-ae3950f2/train_with_declared_attention.py /cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/compact-matched-training-dev-v1/prepared-v1/operation-runtime/MiLAi-Lab/tools/train_bounded_laya.py /cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/nested-operation-data-v1/sources-256 /cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/models/laya-multilingual-base /cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/compact-matched-training-dev-v1/prepared-v1/operation-fit --budget /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json --task mixed_retrieval --mixture /cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/nested-operation-data-v1/sources-256/mixture.json --objective soft-ce --operation-state compact_actions --optimizer-updates 524 --eval-at-updates 32 64 128 262 393 524 --evaluate-train --shuffle-options --gradient-checkpointing --seed 0 --max-len 12288 --head-max-len 2048 --micro-batch-size 2 --encoder-lr 2.5e-5 --head-lr 1e-4 --feedback-dev-data /cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/feedback-fitting-with-dev-v1/feedback/feedback-dev.jsonl --compute-phase evidence_gap_compact_operation256_seed0_u524_v1 ",
+    "status": "RUNNING",
+    "updates": 393,
+    "planned_updates": 524,
+    "train_input_tokens": 34428981,
+    "restarted": false
+  },
+  "D1": {
+    "status": "IMPLEMENTED_TESTED_PREPARED_NOT_NEW_BRANCH_EXECUTED",
+    "families": 8,
+    "states": 16,
+    "unique_bindings": 25,
+    "singleton_states": 7,
+    "same_kind_different_parameters_states": 4,
+    "closed_bindings_reusable": 11,
+    "unexecuted_bindings": 14,
+    "new_train_families": 0,
+    "new_model_calls": 0,
+    "selection": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/d1-dev-nominations-v2/selection.json",
+    "comparison_plan": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/d1-dev-comparison-plan-v1.json"
+  },
+  "E0_D2": {
+    "status": "OBSERVED_CHOICES_AND_PRE_COST_RELATIVE_QUALITY_ONLY",
+    "reports": {
+      "base-u262": {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e0-base-u262-v3.json",
+        "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/fitting/source256-actions-full-seed0-u524-v1/checkpoints/update-262",
+        "summary": {
+          "states": 64,
+          "targets": {
+            "answer": {
+              "comparisons": {
+                "full_menu": {
+                  "counts": {
+                    "same_binding": 44,
+                    "unknown": 20
+                  },
+                  "known_states": 0,
+                  "families_with_known_comparison": 0,
+                  "conditional_family_macro_signed_preference": null
+                },
+                "executed_submenu": {
+                  "counts": {
+                    "same_binding": 46,
+                    "unknown": 17,
+                    "loss": 1
+                  },
+                  "known_states": 1,
+                  "families_with_known_comparison": 1,
+                  "conditional_family_macro_signed_preference": -1.0
+                },
+                "fixed_type_order": {
+                  "counts": {
+                    "same_binding": 44,
+                    "unknown": 18,
+                    "win": 1,
+                    "tie": 1
+                  },
+                  "known_states": 2,
+                  "families_with_known_comparison": 2,
+                  "conditional_family_macro_signed_preference": 0.5
+                }
+              },
+              "observed_improvement_space": {
+                "observed_better": 9,
+                "unknown": 31,
+                "none_observed": 24
+              }
+            },
+            "delivery": {
+              "comparisons": {
+                "full_menu": {
+                  "counts": {
+                    "same_binding": 44,
+                    "unknown": 20
+                  },
+                  "known_states": 0,
+                  "families_with_known_comparison": 0,
+                  "conditional_family_macro_signed_preference": null
+                },
+                "executed_submenu": {
+                  "counts": {
+                    "same_binding": 46,
+                    "unknown": 17,
+                    "loss": 1
+                  },
+                  "known_states": 1,
+                  "families_with_known_comparison": 1,
+                  "conditional_family_macro_signed_preference": -1.0
+                },
+                "fixed_type_order": {
+                  "counts": {
+                    "same_binding": 44,
+                    "unknown": 18,
+                    "loss": 1,
+                    "tie": 1
+                  },
+                  "known_states": 2,
+                  "families_with_known_comparison": 2,
+                  "conditional_family_macro_signed_preference": -0.5
+                }
+              },
+              "observed_improvement_space": {
+                "observed_better": 4,
+                "none_observed": 42,
+                "unknown": 18
+              }
+            }
+          },
+          "coverage": {
+            "full_menu_executed": 45,
+            "baseline_executed": 47,
+            "full_menu_readout_completed": 41
+          }
+        }
+      },
+      "answer32-u192": {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e0-answer32-u192-v3.json",
+        "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-fitting-v1/source32-answer-seed0-u192-v1/checkpoints/update-192",
+        "summary": {
+          "states": 64,
+          "targets": {
+            "answer": {
+              "comparisons": {
+                "full_menu": {
+                  "counts": {
+                    "same_binding": 34,
+                    "tie": 2,
+                    "unknown": 26,
+                    "loss": 2
+                  },
+                  "known_states": 4,
+                  "families_with_known_comparison": 2,
+                  "conditional_family_macro_signed_preference": -0.3333333333333333
+                },
+                "executed_submenu": {
+                  "counts": {
+                    "same_binding": 41,
+                    "tie": 2,
+                    "unknown": 19,
+                    "loss": 2
+                  },
+                  "known_states": 4,
+                  "families_with_known_comparison": 2,
+                  "conditional_family_macro_signed_preference": -0.3333333333333333
+                },
+                "fixed_type_order": {
+                  "counts": {
+                    "same_binding": 44,
+                    "unknown": 18,
+                    "win": 1,
+                    "tie": 1
+                  },
+                  "known_states": 2,
+                  "families_with_known_comparison": 2,
+                  "conditional_family_macro_signed_preference": 0.5
+                }
+              },
+              "observed_improvement_space": {
+                "observed_better": 9,
+                "unknown": 31,
+                "none_observed": 24
+              }
+            },
+            "delivery": {
+              "comparisons": {
+                "full_menu": {
+                  "counts": {
+                    "same_binding": 34,
+                    "tie": 2,
+                    "unknown": 25,
+                    "loss": 3
+                  },
+                  "known_states": 5,
+                  "families_with_known_comparison": 2,
+                  "conditional_family_macro_signed_preference": -0.6666666666666666
+                },
+                "executed_submenu": {
+                  "counts": {
+                    "same_binding": 41,
+                    "tie": 2,
+                    "unknown": 18,
+                    "loss": 3
+                  },
+                  "known_states": 5,
+                  "families_with_known_comparison": 2,
+                  "conditional_family_macro_signed_preference": -0.6666666666666666
+                },
+                "fixed_type_order": {
+                  "counts": {
+                    "same_binding": 44,
+                    "unknown": 18,
+                    "loss": 1,
+                    "tie": 1
+                  },
+                  "known_states": 2,
+                  "families_with_known_comparison": 2,
+                  "conditional_family_macro_signed_preference": -0.5
+                }
+              },
+              "observed_improvement_space": {
+                "observed_better": 4,
+                "none_observed": 42,
+                "unknown": 18
+              }
+            }
+          },
+          "coverage": {
+            "full_menu_executed": 42,
+            "baseline_executed": 47,
+            "full_menu_readout_completed": 41
+          }
+        }
+      },
+      "delivery32-u48": {
+        "file": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e0-delivery32-u48-v3.json",
+        "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/original-feedback-v2-fitting-v1/source32-delivery-seed0-u192-v1/checkpoints/update-48",
+        "summary": {
+          "states": 64,
+          "targets": {
+            "answer": {
+              "comparisons": {
+                "full_menu": {
+                  "counts": {
+                    "same_binding": 44,
+                    "loss": 1,
+                    "unknown": 19
+                  },
+                  "known_states": 1,
+                  "families_with_known_comparison": 1,
+                  "conditional_family_macro_signed_preference": -1.0
+                },
+                "executed_submenu": {
+                  "counts": {
+                    "same_binding": 46,
+                    "loss": 1,
+                    "unknown": 17
+                  },
+                  "known_states": 1,
+                  "families_with_known_comparison": 1,
+                  "conditional_family_macro_signed_preference": -1.0
+                },
+                "fixed_type_order": {
+                  "counts": {
+                    "same_binding": 44,
+                    "unknown": 18,
+                    "win": 1,
+                    "tie": 1
+                  },
+                  "known_states": 2,
+                  "families_with_known_comparison": 2,
+                  "conditional_family_macro_signed_preference": 0.5
+                }
+              },
+              "observed_improvement_space": {
+                "observed_better": 9,
+                "unknown": 31,
+                "none_observed": 24
+              }
+            },
+            "delivery": {
+              "comparisons": {
+                "full_menu": {
+                  "counts": {
+                    "same_binding": 44,
+                    "loss": 1,
+                    "unknown": 19
+                  },
+                  "known_states": 1,
+                  "families_with_known_comparison": 1,
+                  "conditional_family_macro_signed_preference": -1.0
+                },
+                "executed_submenu": {
+                  "counts": {
+                    "same_binding": 46,
+                    "loss": 1,
+                    "unknown": 17
+                  },
+                  "known_states": 1,
+                  "families_with_known_comparison": 1,
+                  "conditional_family_macro_signed_preference": -1.0
+                },
+                "fixed_type_order": {
+                  "counts": {
+                    "same_binding": 44,
+                    "unknown": 18,
+                    "loss": 1,
+                    "tie": 1
+                  },
+                  "known_states": 2,
+                  "families_with_known_comparison": 2,
+                  "conditional_family_macro_signed_preference": -0.5
+                }
+              },
+              "observed_improvement_space": {
+                "observed_better": 4,
+                "none_observed": 42,
+                "unknown": 18
+              }
+            }
+          },
+          "coverage": {
+            "full_menu_executed": 46,
+            "baseline_executed": 47,
+            "full_menu_readout_completed": 43
+          }
+        }
+      }
+    },
+    "pending": [
+      "absolute_answer_success_paired_gain",
+      "conditional_change_stable_correctness",
+      "execute_missing_choices_under_matched_conditions"
+    ],
+    "exposure": "64 existing dev states / 8 exposed families; not independent confirmation"
+  },
+  "tests": {
+    "pytest": "30 passed",
+    "ruff": "passed",
+    "mypy": "3 modules passed --follow-imports=silent",
+    "package_boundary": "passed",
+    "tools_boundary": "passed; existing grandfathered dependencies unchanged",
+    "full_repository_tests": "not run; unrelated",
+    "model_benefit_validation": "not completed"
+  },
+  "failure_reflection": [
+    "Full input equality initially included the separate action_bindings table; fixed by existing observation expansion plus separate exact action binding equality.",
+    "Current exports separate capture ID/path; older exports stored absolute path in capture; both native forms now read explicitly.",
+    "Initial same-binding tie counts corrected to separate identity from known quality tie; old report retained, v3 authoritative.",
+    "First D1 preparation used one collection batch; v2 uses all four real batches without fabricating absent states.",
+    "Ruff and mypy errors corrected; final focused checks pass."
+  ],
+  "remaining": {
+    "D3": "not implemented; normalize answer/delivery components separately and keep task + 0.25 replay, not normalized total",
+    "D4": "QASPER adapter and first-tier conditional data not yet verified/completed",
+    "D5_E1_E2_E3": "new TRAIN reached-state loop and at-most-three objective fits, conditional matched comparison and old-pool continuation control pending",
+    "E4_E5": "autonomous Host, lightweight/raw/extractive/generated baselines and lifecycle confirmation pending",
+    "final": "three seeds, family-paired intervals and source confirmation, LME-V2 then Mem2Act, paper tables/figures and measured Product increment pending"
+  },
+  "cost": {
+    "new_model_calls": 0,
+    "new_model_weights_loaded": 0,
+    "ledger_recorded": false,
+    "measured_command_cpu_seconds_rounded": {
+      "tests_initial": 1.09,
+      "e0_initial_v1": 3.04,
+      "tests_second": 1.27,
+      "e0_three_models_v2": 7.95,
+      "d1_batch0_v1": 0.96,
+      "d1_four_batches_v2": 1.12,
+      "e0_three_models_v3": 8.04,
+      "tests_final": 1.71
+    },
+    "measured_command_cpu_seconds_sum": 25.18,
+    "nested_analysis_cpu_not_added_again": true,
+    "unmeasured": "Read-only inspections, early failed probes, lint/type/boundary work, and report-writing CPU not instrumented; unknown, not zero. Author reasoning/token cost not available.",
+    "previous_pending": "Existing v284 pending 68 fields plus self remain untouched. No offline ledger write while compact lives."
+  },
+  "no_sha_validation": true,
+  "subagents": 0,
+  "remote_written": false,
+  "Product_changed": false
+}

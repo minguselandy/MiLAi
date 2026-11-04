@@ -40,11 +40,13 @@ def test_unreconciled_cpu_is_never_clamped_or_silently_billed(case):
 def test_process_admission_distinguishes_real_entrypoints_from_readonly_work(tmp_path):
     for pid, argv in [(70000001, ['python', 'evaluate_bounded_laya.py']),
                       (70000002, ['python', 'audit_source_selection.py']),
-                      (70000003, ['python', 'run_host_saved_cpu.py'])]:
+                      (70000003, ['python', 'run_host_saved_cpu.py']),
+                      (70000004, ['python', '/study/run_query_format_dev32_v1.py']),
+                      (70000005, ['python', '/study/prepare.py'])]:
         process = tmp_path / str(pid)
         process.mkdir()
         (process / 'cmdline').write_bytes(('\0'.join(argv) + '\0').encode())
-    assert sorted(active_model_owners(tmp_path)) == [70000001, 70000003]
+    assert sorted(active_model_owners(tmp_path)) == [70000001, 70000003, 70000004]
 
 
 def test_binding_does_not_allow_forced_calls_or_a_second_attempt(tmp_path):

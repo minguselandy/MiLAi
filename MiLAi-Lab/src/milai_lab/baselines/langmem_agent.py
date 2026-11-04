@@ -155,6 +155,7 @@ def build_agent(
     model_tool_choice: Callable[[list[BaseMessage]], Literal["auto", "required"]] | None = None,
     model_tools_provider: Callable[[RunnableConfig], Sequence[BaseTool]] | None = None,
     schema_feedback_fingerprints: bool = True,
+    model_enable_thinking: bool | None = None,
 ) -> Any:
     """Select the native or strict memory mutation contract for Host tools."""
     selected_save = read_profile("tool_save_communication", model.tool_save_communication)
@@ -351,11 +352,14 @@ def build_agent(
         # Bind the exact executable catalog; the selector cannot grant tools.
         selected = actual_tools(get_config()) if model_tools_provider is not None else tools
         choice = model_tool_choice(state["messages"]) if model_tool_choice else "auto"
-        return model.bind_tools(selected, tool_choice=choice)
+        return model.bind_tools(selected, tool_choice=choice,
+            **({"enable_thinking": model_enable_thinking}
+               if model_enable_thinking is not None else {}))
 
     prompt = system_prompt + ("\n" + environment_rules if environment_rules else "")
     return create_react_agent(
         (select_model if model_tool_choice is not None or model_tools_provider is not None
+         or model_enable_thinking is not None
          else model),
         tools=ToolNode(tools, wrap_tool_call=validate_then_execute),
         prompt=(prompt if persistent_memory_arm is None
