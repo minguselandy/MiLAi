@@ -90,6 +90,7 @@ def prepare_handoff_call(captured: Path, output: Path, *, source_version: str) -
                 view_policy=control.get("view_policy", "incremental"),
                 view_builder=control.get("view_builder", "generated"),
                 internal_views=control.get("internal_views", True),
+                exclude_given_requests=control.get("exclude_given_requests", False),
                 source_observation=SourceObservationBudget(observation_tokens, capacity.text_tokens)
                     if observation_tokens is not None else None,
                 delivery_selection=True, checkpoint=checkpoint["operations"])

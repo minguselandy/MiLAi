@@ -74,15 +74,17 @@ def coverage_alternative(call: dict[str, Any], excluded: Sequence[dict[str, Any]
                          coverage: Counter[str], seed: int) -> dict[str, Any] | None:
     """Nominate an undercovered legal READ/delivery binding from visible state only."""
     state = call['initial_observation']
-    material = bool(state['visible_evidence'] or state.get('observed_evidence')
-                    or state.get('retrieved_scopes'))
     candidates = []
     for action in call['initial_actions']:
         params = action['parameters']
         if (action['kind'] not in {'READ', 'HANDOFF'} or params.get('observe_only')
-                or 'source_observation_cursor' in params
-                or (action['kind'] == 'HANDOFF' and not material)):
+                or 'source_observation_cursor' in params):
             continue
+        if action['kind'] == 'HANDOFF':
+            delivered = (state['visible_evidence'] if not params else
+                         params.get('delivery_indices') or params.get('retrieved_scope_indices'))
+            if not delivered:
+                continue
         if any(all(action[k] == prior[k] for k in ('kind', 'target', 'parameters'))
                for prior in excluded):
             continue

@@ -125,11 +125,13 @@ def test_rules_and_scripted_scorer_replay_same_post_read_state_without_new_read(
             for p in captured.rglob("*") if p.is_file()} == saved
 
 
+@pytest.mark.parametrize('exclude_requests', [False, True])
 def test_current_input_derivation_preserves_actual_prefix_and_strict_replay_admission(
-    tmp_path, monkeypatch,
+    tmp_path, monkeypatch, exclude_requests,
 ):
     root = prepared_given(tmp_path, policy={"policy": "fixed_context", "max_control_steps": 6,
-        "delivery_selection": True, "source_observation_tokens": 300})
+        "delivery_selection": True, "source_observation_tokens": 300,
+        "exclude_given_requests": exclude_requests})
     captures = tmp_path / "captures"
     monkeypatch.setattr(httpx.Client, "send", no_http)
     original = message(root, bank="bank", owner="alice", session="host", message_id="q",

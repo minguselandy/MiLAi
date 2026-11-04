@@ -101,3 +101,16 @@ def test_parameter_coverage_uses_legal_full_bindings_and_ignores_unknown_outcome
     assert declared_alternative(record, 'parameter_coverage', coverage=coverage)[0] == direct
     # Nomination does not execute or edit any stored state.
     assert before['initial_actions'] == actions
+
+
+def test_coverage_does_not_nominate_empty_handoff_as_a_material_set_alternative(tmp_path):
+    from milai_lab.harness.artifact_io import read_json
+
+    record, actions = fixture(tmp_path, visible=True)
+    call = read_json(tmp_path / 'call.json')
+    empty = {'id': 'empty', 'kind': 'HANDOFF', 'target': 'empty packet',
+             'parameters': {'delivery_indices': []}}
+    call['initial_actions'].append(empty)
+    coverage = Counter({parameter_stratum(actions[3]): 10})
+    action = coverage_alternative(call, [record['argmax'], record['baseline']], coverage, 0)
+    assert action == actions[2]

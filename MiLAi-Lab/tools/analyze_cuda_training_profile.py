@@ -66,6 +66,7 @@ def main() -> None:
         report['arms'][precision] = {
             'fit': str(fit.resolve()), 'reload': str(reload.resolve()),
             'compute': compute, 'steady_updates': len(steady),
+            'reload_compute': read_json(reload / 'compute.json'),
             'steady_mean_update_seconds': statistics.mean(r['wall_seconds'] for r in steady),
             'steady_tokens_per_second': (sum(r['input_tokens'] for r in steady)
                                          / sum(r['wall_seconds'] for r in steady)),
