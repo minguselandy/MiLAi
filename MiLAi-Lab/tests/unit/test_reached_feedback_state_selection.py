@@ -3,7 +3,7 @@ import copy
 
 import pytest
 
-from select_reached_feedback_states import select_states
+from select_reached_feedback_states import select_parameter_states, select_states
 
 
 def row(family, step, *, index=0, alias='read'):
@@ -48,3 +48,19 @@ def test_two_initial_states_for_one_question_are_not_silently_selected():
     rows = [row('a', 0), {**row('a', 0), 'capture': 'another-call'}]
     with pytest.raises(ValueError, match='multiple initial'):
         select_states(rows, ['a'], [], 0)
+
+
+def test_parameter_selection_requires_actual_material_and_three_bindings_without_slot_fill():
+    rows = [row('a', step, index=1) for step in range(5)] + [row('b', 1, index=1)]
+    for item in rows:
+        item.update(acquired_materials=1, has_parameter_alternative=True)
+    rows[1]['acquired_materials'] = 0
+    rows[2]['has_parameter_alternative'] = False
+    rows[3]['argmax'] = {**rows[3]['baseline'], 'id': 'different-alias'}
+    actual = select_parameter_states(rows, ['a', 'b', 'missing'], 0)
+    assert [(x['family'], x['step']) for x in actual['selected']] == [('a', 4), ('b', 1)]
+    assert [c['shortfall'] for c in actual['cells']] == [1, 1, 2]
+    changed = copy.deepcopy(list(reversed(rows)))
+    for item in changed:
+        item['future_answer_quality'] = 'opposite'
+    assert select_parameter_states(changed, ['a', 'b', 'missing'], 0) == actual

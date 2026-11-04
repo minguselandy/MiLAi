@@ -80,7 +80,7 @@ def parameter_actions(call: dict[str, Any], rng: random.Random) -> list[dict[str
 
 def select_states(
     entries: list[dict[str, Any]], groups: list[str], per_group: int, seed: int,
-    include: list[str],
+    include: list[str], *, exact: bool = False,
 ) -> list[dict[str, Any]]:
     """Retain explicit diagnostic nominations, then diversify observable call contexts."""
     rng = random.Random(seed)  # noqa: S311 -- declared offline sampling
@@ -95,6 +95,9 @@ def select_states(
                      if available[key]["family"] == group]
         if len(nominated) > per_group:
             raise ValueError("Nominations exceed the declared per-source state budget")
+        if exact:
+            selected.extend(nominated)
+            continue
         used = {entry["capture"] for entry in nominated}
         buckets: dict[tuple[bool, ...], list[dict[str, Any]]] = defaultdict(list)
         for entry in entries:
@@ -267,6 +270,8 @@ def main() -> None:
     parser.add_argument("runs", nargs="+", type=Path)
     parser.add_argument("--groups", nargs="+", required=True)
     parser.add_argument("--include", action="append", default=[])
+    parser.add_argument("--exact-nominations", action="store_true",
+                        help="Export only nominated actual states; do not fill missing slots")
     parser.add_argument("--bindings", type=Path,
                         help="JSON capture -> {actions: [actual IDs], reason: ...}; "
                              "explicit source-based branch proposals, not outcome labels")
@@ -299,6 +304,8 @@ def main() -> None:
     parser.add_argument("--continuation-steps", type=int, default=2)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
+    if args.exact_nominations and args.state_quotas is not None:
+        parser.error("Exact nominations and phase quotas are alternative state protocols")
     current_decision = args.branch_sampling == "current-decision"
     if current_decision != (args.decision_evaluation is not None
                             or args.decision_collection is not None):
@@ -406,7 +413,8 @@ def main() -> None:
     elif prefix is not None:
         selected, prefix_cells = select_prefix_states(inventory, prefix, args.groups, args.split)
     elif quotas is None:
-        selected = select_states(entries, args.groups, args.per_group, args.seed, include)
+        selected = select_states(entries, args.groups, args.per_group, args.seed, include,
+                                 exact=args.exact_nominations)
     else:
         if not args.include_control_steps and any(
                 phases.get("after_operation", 0) for phases in quotas.values()):
@@ -485,6 +493,7 @@ def main() -> None:
         "groups": args.groups, "seed": args.seed,
         "split": args.split,
         "include_control_steps": args.include_control_steps,
+        "exact_nominations": args.exact_nominations,
         "per_group_maximum": (len(PREFIX_SLOTS) if exact is not None else args.per_group
                               if quotas is None else sum(
                                   n for phases in quotas.values() for n in phases.values())),

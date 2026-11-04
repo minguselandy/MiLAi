@@ -91,6 +91,14 @@ def test_small_groups_are_retained_without_repeating_states_to_fill_a_quota():
     assert select_states(entries, ["source-a", "source-b"], 6, 0, []) == entries
 
 
+def test_exact_nominations_do_not_backfill_unqualified_source_states():
+    entries = [{'capture': f'{family}-{i}', 'family': family, 'stratum': [False] * 4}
+               for family in ['a', 'b'] for i in range(3)]
+    selected = select_states(entries, ['a', 'b'], 2, 0, ['a-1'], exact=True)
+    assert [entry['capture'] for entry in selected] == ['a-1']
+    assert select_states(entries, ['a', 'b'], 2, 0, [], exact=True) == []
+
+
 def test_source_review_can_compare_different_bindings_of_one_kind():
     original = call(view=True, originals=True)
     original["initial_actions"].append(

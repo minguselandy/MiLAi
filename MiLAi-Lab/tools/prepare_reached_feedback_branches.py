@@ -80,10 +80,14 @@ def main() -> None:
     argv=[sys.executable,str(Path(__file__).with_name('prepare_view_feedback_branches.py')),
         str(collection),'--groups',*selection['families_in_segment'],
         '--split','train','--seed','0','--include-control-steps',
-        '--state-quotas',plan['state_quotas'],'--branch-sampling','current-decision',
+        '--branch-sampling','current-decision',
         '--decision-collection',str(collection),'--decision-baseline','fixed_prefix',
         '--decision-baseline-reads','4','--continuation-steps','2',
         '--bindings',str(inputs/'bindings.json'),'--output',str(args.output)]
+    if selection.get('state_selection') == 'acquired_parameter_support':
+        argv.extend(['--exact-nominations', '--per-group', '2'])
+    else:
+        argv.extend(['--state-quotas', plan['state_quotas']])
     for name in includes:
         argv.extend(['--include',name])
     with (inputs/'preparation.log').open('x') as log:
