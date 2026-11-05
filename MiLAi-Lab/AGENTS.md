@@ -1,4 +1,75 @@
-# LIVE A100 EXECUTION v22: 2026-11-06
+# LIVE A100 EXECUTION v23: 2026-11-06
+
+Full goal ACTIVE/incomplete; current and previous turns PROGRESS. Latest manifest:
+data/manifests/a100-development-progress-20261106-v23.json and execution doc.
+No SHA/checksums/content fingerprints, subagents, new services, second ledger,
+reset/refund, remote write or model/first-outcome retry. GPUs0/1/Product unchanged.
+
+ONLY LIVE actual experiment HTTP worker new32-view_cache_incremental-owner.json:
+parent3591596 / child3591601 / exec4286;169/320closed at v23. Revalidate actual
+/proc/owner/native. No learned local GPU, extra HTTP worker, native captured-case
+intervention/real Store clone or offline CPU settlement while live. Frozen runtime,
+config/data/Host unchanged. At actual terminal FIRST full bind_d_frozen_method.py
+new32-view_cache_incremental; await; THEN full audit_d_closed_sdk_states.py
+new32-view_cache_incremental. Full320 quality/Views/SDK/effects/operations/costs
+closure before manually serial new32-e3-aggregate-u32 320. Never restart lost
+handles or repoll completed baselineexec4305.
+
+INCREMENTAL PREFIX160 ALL WHOLE ANSWERS/RECEIVED VIEWS SOURCE REVIEW CLOSED:
+d-update32/reviews/new32-view_cache_incremental-prefix-0160/answer-review-closeout-v1.json
+C35/Q19/W65/F41;material39complete114partial7insufficient;jointC+complete25.
+16 correlated TRAIN-exposed generated families, not160independent/unseen/full320
+or adoption. Implementation/source author, not independent/blind. All8actualViews/
+40occurrences includingK faithful literal with original role/revision/clock fields.
+New2C01+1C02+1C04 refs each7nodes, five entire received copies equal within each ref.
+Literal faithfulness is not current coverage or Host truth. All64mid/final positions
+materialcomplete0; midC1(A02askednamesunchanged),finalC0.
+
+Full recorddicts/providerinputs/answers/Sourcebindings and Viewrecords reconciled:
+110→130(110records/20Views),130→140(130/20),140→150(140/30),150→160(150/35).
+Only then original same-method judgments reused; all anchors/Fmask revalidated.
+Baseline supplies literal body/role/origin dedup reading only, never copied grades.
+NEXT index160memops_C05 contentinitial. Extend to actual closed complete-family
+count positive%10=0 in separate folder; compare ENTIRE160records/40Views before
+copy/revalidation. Inspector --compact --since-previous --compact-view-text
+--reuse-reviewed-condition new32-view_cache. Full answers always read; never grade
+unseen/truncated output, stored-only facts or failed-turn material as later K.
+
+New judgments: B25 recurrence correction and separateTue/ThuApril times unreceived;
+five midqueries mostly questions/empty receipts, not full updates. B26 currentEugene
+differs from confirmed futurePortland; intendedAustin travel not booked/birth.
+C01 initial complete View can still yield Q for wrong shelving chronology; later
+240 stale versus260/conditional245/nonfirm210/otherperson230. C02 six initial Q/
+complete omit calculatedApril15 from ownApril18/general3dayrule; original146/147
+quotesTrue but arithmetic omitted. LaterApril14/11/writtennotice/rejectedApril22
+unreceived. C04 initial ownView complete, originals assistantrecaps missing9:30/
+ownquotes; laterApril28/unmadeApril30/resolvedENT missing. Source consistency only,
+no clinical advice or actual appointment action. No sole-controller causal claim.
+
+Prefix160 already originalledger251HTTP/1470901knownHosttokens/newunknown0/0;
+98toolattempts98returns1error,377steps371operations205READ18materialrejections
+4knownrefreads,131currentraw8Views. Full ownerCPU/SDK/effects pending.
+Receipts1..15 settled once;30closed offline timers54.16CPU pending. Failed Ruff
+included; author/untimed CPU unknown, not0. Prepared ONLY (not executed):
+settle_d_new32_incremental_idle_v16.py with offline_time_receipts.py. At true idle
+after full320 quality/SDK/actual-operation closure, execute once without GNU wrapper,
+before E3. Parser supports original GNU explicit/verbose formats and legacy nonzero
+header; original timer files unchanged. v1 read-only check failed exact binaryfloat
+equality, saved offline-time-parser-readonly-check-v1-failed.json; v2 tolerance/
+twoformat/failure-code/27pendingtimer checks and AST2 passed. Those checks untimed,
+CPU unknown; no original ledger open/write. Never GNU-wrap timer-scanning writers
+or settlement; earlier/native/model/client CPU not rebilled. v16 receipt absent.
+
+v20 optional excludedSource adapter/24isolated fixture checks unchanged; active
+runtime lacks option; real K/old-output controls0. First8 donor proofs only; native
+before/fullframe/Klookups/other E3 donors and52READ/7pools still pending after formal
+3jobs. Never given-readoutwithK or choose later cleanerA05View. Full remaining scope:
+two320/full paired family stats, controls/repairs, finalcandidate/checkpoint/scoring/
+budget/N freeze BEFORE held256papers/old64querycontents; LME451/Mem2Act400 actual
+own-policy/full-input/exposure, fullcosts and paperfigures. Testsplit/heldsemantic
+contents unopened. Goal NOT complete.
+
+# HISTORICAL A100 EXECUTION v22: 2026-11-06
 
 Full goal ACTIVE/incomplete; current/previous turns PROGRESS. Latest manifest
 data/manifests/a100-development-progress-20261106-v22.json and execution doc.
