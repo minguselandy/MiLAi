@@ -1,4 +1,93 @@
-# LIVE A100 EXECUTION v17: 2026-11-06
+# LIVE A100 EXECUTION v18: 2026-11-06
+
+Full goal ACTIVE/incomplete. Current/previous turns PROGRESS. Latest:
+data/manifests/a100-development-progress-20261106-v18.json and execution doc.
+No SHA/checksums/content fingerprints, subagents, services, second ledger, resets,
+remote writes or model/first-outcome retries. GPUs0/1/product unchanged.
+
+ONLY LIVE HTTP job new32-view_cache-owner.json, child2956519 / exec4305, 283/320
+actually closed at v18. Revalidate actual /proc/owner/native driver. No local model
+GPU. No other HTTP/offline CPU settlement or native control/Store-clone intervention
+while live. Never restart lost handles. After actual terminal FIRST
+bind_d_frozen_method.py new32-view_cache; await; THEN audit_d_closed_sdk_states.py
+new32-view_cache. Full320 whole quality/SDK/effects/CPU closure still required.
+Other new32 incremental/E3 320 each NOTEXECUTED, manually serial. Do not mutate
+runtime-d-update32/config/data/Host settings during formal jobs.
+
+PREFIX250 ALL WHOLE ANSWERS/VIEWS SOURCE REVIEW CLOSED:
+d-update32/reviews/new32-view_cache-prefix-0250/answer-review-closeout-v1.json
+C52/Q51/W94/F53; material64complete/172partial/14insufficient; jointC+complete39.
+25 correlated TRAIN-exposed generated Source families, not250independent/unseen
+tasks or full320score. All33distinct Views133occurrences/K source-fidelity reviewed.
+Literal faithful quoting is not embedded claim truth or current update coverage.
+D02 View at228/229 faithfully quotes fixtureassistant midMarch2024setupyear; user
+onlyreportedmidMarchwithoutyear. Unsupported detail belongs to embeddedSource,
+not a View-added year. Old2560x1600summary is not current1920x1200userOSrecheck.
+377HTTP/2321428knownHosttokens/newunknown0/0 alreadyoriginalledger, not rebilled;
+144toolcalls,574controlsteps/535operations/293READ/14admissionrejections/2knownrefreads;
+177currentraw/33currentViewreceipts. Full SDK/ownerCPU still pending.
+Entire first200 recorddicts/providerinputs/answers/Sourcebindings AND106Viewrecords
+literal equal prefix250; original judgments reused with all anchors/Fmask revalidated.
+Current author file250. Next index250 memops_D19 contentinitial. Extend prefix at
+actual closed complete-family cut (COUNTpositive%10=0) or await full terminal bind;
+future extension/fullclosure must compare ENTIRE250 records/133Views literally.
+Use inspect_d_review.py PREFIX INDICES --compact --since-previous --compact-view-text;
+wholeanswersalwaysprinted, no grading unseen/truncated outputs. Full bind folder
+new32-view_cache remains absent until terminal; prefixes cannot replace full/SDK closure.
+
+SEPARATE OLD-HOST-OUTPUT SEARCHABILITY CONTROL NOW FROZEN, NOTEXECUTED:
+d-update32/old-output-searchability-protocol-v1.json and
+d-update32/old-output-searchability-donor-first8-v1.json.
+Same first8 families as K protocol, baseline first content same-sources BEFORE its
+first provider dispatch, actual full first provider payload/ready-state inventory.
+7eligible actual earlier initial final Host-output Source proofs; A02initialfailed
+ineligible retained, no later/family replacement or quality filtering. No cachedView
+binds selectedoldoutput. Original currentfinal Source absent from before; no current
+finalanswer inserted. Actual prior delivered refs retained as K; full Host knowledge
+includes original history/receipts. Native Store-before equality/Klookup still pending.
+2searchabilityconditions x3frozenmethods, max48readouts preeligibility (7cells max42).
+Off arm adds ONLY proven prior final Host-output Source IDs to existing request-local
+excluded_source_refs before ranking AND EvidenceOperations Source acquisition/feed.
+All original Source values/roles/clocks/revisions/visibility/target/full Host frame
+fixed, no Source deletion/gold filter. Keep prior assistant outputs already in Host
+context: tests EXTRA tool searchability, not removal of Host knowledge.
+Native support exists MemoryService.search_sources(excluded_source_refs=...) and
+EvidenceOperations(excluded_source_refs=...). Still need a narrow controlled-runner/
+IntentRetrievalMethod adapter unioning declared refs with current bound exclusion
+for BOTH paths; no active source/runtime change made. Idle native mechanical check
+and actual first host-readouts required; NEVER given-readout with K. Conditional
+factor reported separately from formal autonomous D; current evidence remains
+observational until actual controls close. No tool/model/Store clone executed here.
+
+Actual K donor proofs remain baseline3eligible/5ineligible first8, other donors/
+native lookup/full matched3method Hostreadouts pending. A05firstrev1/fullK7refs and
+stored revision mismatch preserved; never fake clean K/given-readoutwithK.
+
+Old57 nativecoverage/reservations fromv17 unchanged, NOTEXECUTED:
+b-repair-binding-coverage-v1.json validates139old+8functional outcomes, observed
+SourceREADstates5/57,52missing. B64/C8 nativebefore intersections0.
+b-repair-remaining-observed-READ-bindings-v1.json freezes52legalbindings; existing
+functional5READ+52=57newREADcap, fixed_context reads4 continuation2/actualremaining
+budgets, suppliedrequest/noK given-readout. c-repair-acquired-pool-reservation-v1.json
+reserves7actualpools/rulesvsretainedE3handoff-only/max14readouts. Conservative33
+already(3functionalHANDOFF+24C8+6savednew)→max47of48/18of24states, not cap reset.
+Execute afterall3formalnew32jobs in serial bounded segments, retain original failures/
+allcosts, no prefix/outcome reruns, menu expansion or extra fitting. All old8three80
+and M3allseed reviews/stats closed; no bestseed/adoption claim.
+
+CPU receipts1..14 settledonce;22new closed timers48.96CPU pending atv18, no newer
+settlement. Wait trueidle; native/model/load/client notrebilled. Never GNU-wrap
+timer-scanning writers/settlement. Author/untimedCPUunknownnot0. Historicalgeneration
+unknown16/embedding1 retained; prefix250newunknown0/0; limitsunchanged.
+
+Remaining fullscope: allnew32three320/fullreviews/SDK/effects/costs, actualK and
+controlledrecirculation, reserved52READ/7acquiredpool diagnostics; finalcandidate/
+checkpoint/scoring/budget/Nfreeze BEFOREheld256QASPERpapers/old64querycontents;
+LME451Reader/Judge/Mem2Act400 actualown-policy/full-input/exposurework;
+allcosts/stats/paperfigures. Native test unopened, heldcontentsunreviewed/unexported.
+Goal NOT complete.
+
+# HISTORICAL A100 EXECUTION v17: 2026-11-06
 
 Full goal ACTIVE/incomplete. Current/previous goal turns PROGRESS. Latest:
 data/manifests/a100-development-progress-20261106-v17.json and execution doc.

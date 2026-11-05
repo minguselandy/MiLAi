@@ -6,11 +6,58 @@
 历史 worktree、原始失败与用户文档保持原状。没有使用子代理、SHA/内容指纹校验、新服务、第二账本或远端写入。
 
 本轮机器可读入口为
-[progress](../data/manifests/a100-development-progress-20261106-v17.json)。
+[progress](../data/manifests/a100-development-progress-20261106-v18.json)。
 原始数据、冻结运行时、权重、命令、计时和实际输出位于本 worktree 的 ignored
 `artifacts/a100-development-20261104/`。本记录是现有报告体系的执行摘要。
 
-## v17 当前状态（2026-11-06）：前 200 条审阅与旧绑定覆盖核清
+## v18 当前状态（2026-11-06）：前 250 条审阅闭合，冻结回流控制
+
+新组原缓存仍由同一 child2956519 / exec4305 单路运行，记录时实际关闭 283/320。
+前 250 条完整答案审阅闭合：C52/Q51/W94/F53；材料 complete64/partial172/insufficient14，
+同时满足 C 与材料 complete 的为 39 条。33 个不同 View、含历史 K 的 133 次出现，
+均已审阅原文、角色与时钟。它们来自 25 个相关的 TRAIN 暴露来源族，不能当作 250 个
+独立未见任务或完整 320 成绩。保留全部 53 个首次执行失败，另一个工程完成但只有
+开场白的回答仍按未完整满足任务判断，没有改成执行失败。
+
+前缀实际费用为 377 HTTP、2,321,428 已知 Host 总 tokens、新增未知用量 0，已经在
+原账本。当前轮累计 144 次工具调用、574 控制步、535 操作、293 READ、14 次材料准入
+拒绝、2 次 known-ref read，返回 177 份原文与 33 份 View。
+完整前 200 条记录字典、provider 输入、答案、Source 绑定和前 106 次 View 记录，与
+prefix250 逐值相等；复用原判断并重新校验锚点/Fmask，没有重新生成。
+当前审阅目录为 `new32-view_cache-prefix-0250`，下一条 index250/D19。
+
+本批进一步分开了材料忠实与内容正确：D02 的一个 View 原样引用 fixture assistant
+写下的“mid-March 2024”，而用户原报告只有 mid-March，没有年份。这个新增年份属于
+被引用的助手内容，不能归为 View 的字面改写，也不能提升为用户证词。后来的 1920×1200
+操作系统读数和用户保留指令没有送达，旧 2560×1600 摘要因此不能承担当前依据。
+礼物案例也分开选择、下单付款、发货和送达；价格相同不代表读取到了付款状态更新。
+
+计划 9.3 的旧 Host 输出可检索性因素已有独立冻结协议和实际材料证明，尚未执行控制。
+沿首 8 个预定来源族，固定 baseline 内容流 same-sources 回合在第一次 provider 请求前
+的真实 Store/完整输入。7 族具备实际初始最终 Host 输出 Source；A02 初始失败，没有
+已完成旧输出，按规则保留不合格格，不换后续回合或来源。逐值匹配实际 provider payload
+与 trace，并验证旧输出 Source 正文等于初始实际答案、角色为 assistant、当前最终输出
+尚未进入 before。既有缓存 View 均不绑定所选旧输出；准备过程没有工具/模型执行、
+原生 Store 克隆或账本写入。
+
+两种条件只改变这些实际旧输出 Source 能否进入新获取的检索池；三方法的 Source
+原值、角色、时钟、修订、可见性、目标、完整 Host 输入和预算保持相同。使用已有
+`search_sources(excluded_source_refs=...)` 与 `EvidenceOperations` 的排除边界，
+仍须补一处窄适配把同一排除集合传到检索和 Source 观察/获取两条路径，然后在真正
+空闲时核对原生 before 快照、完整 frame 与 known-reference lookup，执行条件 host-readout。
+Host 已在原上下文中的旧回答继续保留，因此它测量额外工具可检索性的作用，不能声称
+从 Host 认知中移除了旧回答。实际 K 禁止使用 given-readout。最多 8×2×3＝48 次
+readout 是资格筛选前上限，当前 7 个合格格最多 42 次；首次失败、成本和相关族均保留。
+这不替代正式自主 Host 结果，目前回流证据仍属观察。
+
+证据为 `old-output-searchability-protocol-v1.json` 与
+`old-output-searchability-donor-first8-v1.json`；完整 provider 输入保留在 ignored artifacts，
+机器可读进度只包含协议和元数据摘要。真实旧 View K 控制、其他新组两方法各 320 条、
+v17 预留的 52 READ/7 已读池补采均仍未执行，未扩大菜单或追加训练。
+成本止于 receipt14；22 个闭合离线计时共 48.96 CPU 秒待真正空闲时一次结算，
+作者/未计时 CPU 仍 unknown。完整目标继续执行，held/test 内容未打开。
+
+## v17 历史状态（2026-11-06）：前 200 条审阅与旧绑定覆盖核清
 
 新组原缓存仍是同一 child2956519 / exec4305 单路作业，记录时实际关闭 247/320。
 前 150、200 条完整答案与实际 View 均已完成来源作者审阅，保留全部首次失败：
