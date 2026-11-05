@@ -1,4 +1,81 @@
-# LIVE A100 EXECUTION v26: 2026-11-06
+# LIVE A100 EXECUTION v27: 2026-11-06
+
+Full goal ACTIVE/incomplete; current/previous turns PROGRESS. Latest manifest:
+data/manifests/a100-development-progress-20261106-v27.json and execution doc.
+No SHA/checksums/content fingerprints, subagents, new services, second ledger,
+reset/refund, remote writes or model/first-outcome retries. GPUs0/1/Product unchanged.
+
+ONLY LIVE experiment HTTP/model worker new32-e3-aggregate-u32-owner.json:
+parent28715 / child28722 / exec80986;18/320closed at snapshot. Revalidate actual
+/proc/owner/native. FP32 saved E3aggregateu32 GPU2, MHAfastpathFalse/refcompileFalse,
+one verified load. Frozen runtime/config/data/Host untouched. No extraHTTP, native
+captured-case control/realStoreclone or offlineCPUsettlement while live. Temporary
+scripted/noHTTP fixtures without realexperimentStore/originalledger access allowed.
+At actual terminal FIRST bind_d_frozen_method.py new32-e3-aggregate-u32; await;
+THEN audit_d_closed_sdk_states.py new32-e3-aggregate-u32. Full320quality/Views/SDK/
+effects/operations/costs closure then three-methodfamilystats/actualcontrols. Lost
+handle is not retry authority. Neverrepoll completedbaseline4305/incremental4286.
+
+INCREMENTAL FULL320 ALL QUALITY/VIEWS/SDK/OPERATIONS/OWNERCPU CLOSED:
+d-update32/reviews/new32-view_cache_incremental/answer-review-closeout-v1.json
+C65/Q56/W135/F64;material76complete223partial21insufficient;jointC+complete48.
+32correlatedTRAIN-exposedgeneratedfamilies, not320independent/unseen or adoption.
+Source author, not independent/blind. All128mid/finalmaterialcomplete0;midC1
+(A02namesunchanged),finalC0/64. Baseline320 C67/Q65/W121/F67;material84/222/14,
+joint53;42actualViews163occurrences. Three-methodcomparison E3pending.
+
+Incremental ownerCOMPLETEDexit0/child3591601gone/clientCPUrecorded. FullbindFIRST,
+SDKTHENbothpassed. SDK320/5563oldSourcecomparisons/256newfinalassistant/SaverEq/
+applicationsunchanged/41Viewchangedturns/statewrites0. SDK inherited reflection
+explicitly historical earliermutable-bank correction, not current audit failure.
+All300recorddicts/providerinputs/answers/Sourcebindings and117Viewrecords literally
+equal before285same-methodjudgmentreuse/anchor/Fmaskrevalidation; remaining35now
+whole-reviewed. All25actualViewrefs117occurrences/929rawranges bound/reviewed;
+E11newrefsrev1/2 and F08rev1 retained. Stored-onlyupdates receive no deliverycredit.
+
+Actualoperationauditv1 FAILED on allreturns==controllerresultevents. Readonly
+diagnosis finds60/245 actual read_limit_exhausted nativeToolMessage returns before
+controllerresultlogging. v2joinsactualIDs/literalpackets and exactzerooperation
+errors;failuretimerretained, no model/toolrerun. All690selectedIDslegal,678ops,
+369READ/54REFRESH/3USE_VIEW,180toolattempts180returns2errors,26materialrejections,
+9ordinaryknownrawrefreads;247currentraw(165exogenous82endogenous),25currentViews.
+Ordinaryrawrefs are not controlledViewKlookups. CompleteUSE_VIEWcensus200/230/265:
+initialHostcalls only, explicitKempty/no new or pendingevents, thenHANDOFF/noREAD.
+D17Fmaterial notlaterK. Final8/64query,2currentexogenousraw;no warmK-updateproof.
+
+Incrementalalreadyoriginalledger490HTTP/2873111known/newunknown0/0,
+wholechildCPU563.933311/wall9740.840519589372s/localmodelGPUinterval0 once.
+Receipt16EXECUTEDONCE at actualidle before manualE3launch:76closedoffline timers
+211.76CPU inclfailedoperationaudit/Ruff. Earlier1..15/native/model/client notrebilled;
+limits/generation/embedding unchanged. Fourclosedpost16timers1.50CPU pending,
+author/untimedCPUunknownnot0. No settlementwhileE3lives. Nextreceipt17notprepared/
+executed. NeverGNU-wrap timer-scanningwriters/settlement.
+
+E3PREFIX10 WHOLE SOURCE REVIEW CLOSED:
+d-update32/reviews/new32-e3-aggregate-u32-prefix-0010/answer-review-closeout-v1.json
+C3/Q1/W5/F1;material3complete5partial2insufficient;joint3;receivedViews0.
+OnecorrelatedTRAINfamily, not10independent/unseen/full320. Initialcontent0empty
+receipt despite5READ→globalabsenceW;additional2completeownwitnessC. Originals5
+sevenqueries onlymanager→qualifiedmissingtitleQ,6completeownwitnessC. Mid/final
+newSenior/74500/Leadplan remainpartial;content4firsttruncationretained. NEXTindex10
+A02. Bind actualcomplete-family cut in separatefolder; compare ENTIRE10recorddicts
+and0Views beforecopy originalsame-methodjudgments/allanchor/Fmaskvalidation.
+Inspector --compact --since-previous --compact-view-text --reuse-reviewed-condition
+new32-view_cache. Read wholeanswers, nevergradeunseen/truncated. Originals2–5 need
+ownquotes; completednonanswerQ notF, role/time/currentstatus separatefromfidelity.
+
+ActualK/old-outputcontrols/52READ/7pools still0. v20Sourceexclusion24fixtures/
+v24first-dispatchframe2fixtures unchanged; formal runtime LACKSnewSourceexclude.
+Afterall3formaljobs validate actualnativebefore/K/fresharrivalcontext/fullframe/
+receiptadmission, separatecontrolledruntime/config, boundedserial originalledger.
+Keepfirst8donorselection/ineligiblecells/firstViewrevision/fullHosthistory; never
+latercleanerA05revision, given-readoutwithK or genericfinal-wire forold-outputfactor.
+Full remaining: E3tail/fullclosure, three-methodfamilyanalysis, controls/repairs,
+finalcandidate/checkpoint/scoring/budget/Nfreeze BEFOREheld256papers/old64query
+contents; LME451/Mem2Act400 own-policy/full-input/exposure, allcosts/paperfigures.
+Testsplit/heldsemanticcontents unopened. GoalNOTcomplete.
+
+# HISTORICAL A100 EXECUTION v26: 2026-11-06
 
 Full goal ACTIVE/incomplete; current/previous turns PROGRESS. Latest manifest:
 data/manifests/a100-development-progress-20261106-v26.json and execution doc.
