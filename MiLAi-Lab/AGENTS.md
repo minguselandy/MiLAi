@@ -34,7 +34,7 @@ compare ENTIRE240records/67Views before copy/revalidation. Inspector --compact
 Read full answers; never grade unseen/truncated output or stored-only facts.
 Failed-turn receipts are not later completed K. Ownquotes required originals2–5.
 
-New15Viewrefs? NO: this turn adds6receivedrefs/22occurrences to prior9/45.
+This turn adds6receivedrefs/22occurrences to prior9refs/45, totaling15refs/67.
 C26:3refs/15occurrences, each7nodes; contenttwo refs share full interpretation/
 SourceIDs but different snapshots/projections, not independentfacts or proof of
 two cachegenerations. Initial correct2:00/15ClarkeRoad/panel, original206composite
