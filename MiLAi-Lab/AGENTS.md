@@ -1,4 +1,82 @@
-# LIVE A100 EXECUTION v11: 2026-11-05
+# LIVE A100 EXECUTION v12: 2026-11-06
+
+Full goal ACTIVE/incomplete. Previous/currentturnsPROGRESS. Latest:
+data/manifests/a100-development-progress-20261106-v12.json andexecutiondoc.
+NoSHA/checksums/contentfingerprints,subagents,newservices,secondledger,limitreset,
+remotewritesormodel/first-outcomeretries. GPUs0/1existingHostserviceunchanged.
+
+ONLY LIVE model/HTTP job: d-update32/old8-e3-aggregate-u32-owner.json,
+child2789465 / exec62075 atv12;GPU2FP32retainedE3seed0u32,inferenceshared_actions,
+max16384/head2048,rich/thinkingTrue,commonextractivebuilder/return2048/control8/
+additionalreads8/sharedcalls24. Revalidate actual/proc/owner/nativeDriver80.
+Neverrestartforobservationtimeout. NootherHTTPorofflineCPUsettlementwhilelive.
+AfterterminalFIRSTbind_d_frozen_method.pyold8-e3-aggregate-u32;await;THEN
+ audit_d_closed_sdk_states.pyold8-e3-aggregate-u32. Fullsource/qualityreviewsrequired.
+All3new32formal320jobsNOTEXECUTED. Noautomaticqueue. Dmain1120new+80reused.
+
+Dold8-view_cache_incremental CLOSED80(exec22180terminal),59engineeringCOMP/21FAIL;
+121HTTP/731954known/newunknown0,wholechildCPU142.015116/native0/clientpaidonce,
+no localmodelGPU. Neverrepoll/restart. All80actualinputs/arrivalprefixesbound,
+219rawranges/21receivedViewoccurrences(includingpriorK)/147literalnode+metadatamatches.
+All80immutableclosedturnSDKstatesaudited,21failedincluded:oldSources/world/application
+unchanged,59newfinalSourcesstayassistant,Savermessagesequal,10Viewchangedturns.
+OfflineauditfirstusedmutablelivecontinuousbankandfoundfutureSources;correctedto
+actualcapturedafter+closedinventory,failedtimerpreserved,0model/toolreruns.
+
+Dwhole-answerreviewsONLYindices0..4saved:C/C/Q/W/F(firstcontentfamilyA19).
+Nextindex5(originalsinitial). Toolsinspect_d_review.py CONDITION INDICES
+ --compact --since-previous, d_review_helpers.py. Sourceanchorsactualraw/Viewmetadata,
+C/Q/W/Fanddeliverycomplete/partial/insufficient/unknown,quoteobligationwhereasked.
+No full80scoreyet. index3new3arrivalsincludeconfirmedKarenphone,butHostdoesNOT
+retrieveandrestatesoldpendingphonefromactualK;final13arrivalsalsonoretrievalbefore
+firsttruncation. ThisisrealautonomousHostquery/arrival-usefailurebeforeJevcanact,
+notproofofinternalHANDOFFfailure. Count-onlyarrivalsarenotreceivedbodies.
+Originalold8cachefirst80/19CbaselineREUSED,NOTRERUN/REBILLED. AllpastSourcefacts/roles/
+clocks/failedfirstoutcomesretained. Other3new32fulljobs960positionsstillrequired.
+Actualsame-beforeKcontrolsfromfirst8newTRAINfamiliesstillrequired,realViewrefsand
+completed-finalHostwireproof;NEVERgiven-readoutwithK. New32generatedMemOpsTRAIN,
+historicalsource/trainingexposure,notunseen/natural/confirmation. Commonfrozenprotocol
+ d-update32/matrix-plan.json;do NOTmutateactiveSource/config/runtime-d-update32.
+
+M3 retainedE3replications ALL CLOSED:fitsseed1/2original128schedule/2048draws each,
+FP32two-GPUoriginalruntime/sameE1u16init;actual10549642/10607432tokens,allcuts/exports.
+Each924update0choices/logits/tokensliteralequalseed0;native+clientCPUonce,
+wholeCPU12279.603772/two-GPUjobinterval3.877508h. No bestseed/cut/fullchainseedclaim.
+Bothnew64HostjobsCLOSED(exec92739/41873terminal/lost,neverrestart),Source+SDKauditsdone.
+Seed1C33/I10/Q4/W1/F14/U2;seed2C29/I16/Q6/F11/U2. Sourceauthornotblind/independent.
+Seed0/1/2complete40/33/29of64. Perseedvsanchor25:
+ +23.4375ppCI[10.9375,35.9375],+12.5pp[-1.5625,26.5625],+6.25pp[-7.8125,21.875].
+Within-familyseedmean34vs25,+14.0625ppCI[3.125,25]conditionalonthese3fits/firstHostdraws
+andonefirstanchorperfamily. Common3/8/56sensitivitymean32vs25,+10.9375pp
+CI[.520833,21.354167].64independentSourcefamilies,NOT192sourcesorpopulationtrainingRNG.
+Bothnewwhole64answerssource-reviewed/Fmaskverified. No nativeF1substitution/adoption.
+NativefullstringF1seed0=.0894039/seed1=.1203132/seed2=.1026735separate.
+Files e3-retained-replication/{answer-review-closeout,family-comparison,native-agreement}.json.
+No more M3Host/fitreruns. Dmaychangefinalpolicy;finalconfirmationfreezeNOTdone.
+
+OriginalfiveDEV64C25/25/33/32/40,C8retainedE3learned1/8vsSimple4/8,oldA-v2C15/15,
+Bold32C13/13stayprimary. OneaccidentalArepeatneverprimary,allcostretained.
+No blindA20k/B192/256/answer-first/AtoB/extraB0B1seeds/menuexpansion.
+ExternalLMEall200historiespriorcontact,451publicqueries/29questionimagesprocessedfor
+inputdevelopment;notunseenhistoryconfirmation.22822literalpagescomplete,oldallpublic
+fixedpaths501/902stopped(pid662822missing)withonecapacityrisk. Observation2048still2
+codecdrops,losslesscompactsyntaxstill1. TheseSimpleFixedContextsurrogatepathmeasurements
+areNOTactualselected-Layafailures(simpledoesnotuseencoder);needactualown-policystates/
+sharedcompleteinputconditionbeforeexternalfreeze,notbudget/projectioncutsjusttofit.
+Mem2Act400/429sessions/16843turnsmetadata/defectsretained,fullStore/Hoststillrequired.
+Do notrerunoldvision3probeorfirstfailures. No externalmodelcallorreference-labeldisplay.
+
+CPUreceipts1..13paidonce;v13=5timers5.61CPUafterDincremental/binding/SDKidlebeforeE3.
+FutureclosedtimerspendingwhileE3Dlive;author/untimedCPUunknownnot0. No model/native/
+ownerresidualrebilling. NeverGNU-wraptimer-scanningwriteritself.
+Remainingfullscope:Dold8bothnewmethodswholequality/View/currentoperations/costaudits,
+new32all3fullHostflows+actualKcontrols/role/time/update/SDK/effects,mechanism57/24repairs
+asneeded;finalcandidate/checkpoint/scoring/budget/NfreezeBEFOREheld256paperandold64query
+confirmation;eligibleLME451Reader/Judge/Mem2Act400afteractualinput/exposureaudit;allcost/
+statistics/paperfigures. Conditional640familiesfor+5ppseedmeanplanningnotallocation/
+guarantee. Heldcontentsunexported/unreviewed,nativetestunopened. GoalNOTcomplete.
+
+# HISTORICAL A100 EXECUTION v11: 2026-11-05
 
 Full goal ACTIVE/incomplete. Previous/current goal turns PROGRESS.
 Latest data/manifests/a100-development-progress-20261105-v11.json andexecutiondoc.
