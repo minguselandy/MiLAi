@@ -1,4 +1,85 @@
-# LIVE A100 EXECUTION v23: 2026-11-06
+# LIVE A100 EXECUTION v24: 2026-11-06
+
+Full goal ACTIVE/incomplete; current/previous turns PROGRESS. Latest manifest:
+data/manifests/a100-development-progress-20261106-v24.json and execution doc.
+No SHA/checksums/content fingerprints, subagents, new services, second ledger,
+reset/refund, remote writes or model/first-outcome retries. GPUs0/1/Product unchanged.
+
+ONLY LIVE actual experiment HTTP worker new32-view_cache_incremental-owner.json:
+parent3591596 / child3591601 / exec4286;208/320closed at v24. Revalidate actual
+/proc/owner/native. No learned local GPU, extra HTTP, native captured-case control/
+real Store clone or offline CPU settlement while live. Frozen runtime/config/data/
+Host unchanged. At actual terminal FIRST full bind_d_frozen_method.py
+new32-view_cache_incremental; await; THEN full audit_d_closed_sdk_states.py
+new32-view_cache_incremental. Full320 quality/Views/SDK/effects/operations/costs
+closure before manual serial new32-e3-aggregate-u32 320. Never restart lost handles
+or repoll completed baselineexec4305.
+
+INCREMENTAL PREFIX200 ALL WHOLE ANSWERS/RECEIVED VIEWS SOURCE REVIEW CLOSED:
+d-update32/reviews/new32-view_cache_incremental-prefix-0200/answer-review-closeout-v1.json
+C40/Q28/W85/F47;material45complete143partial12insufficient;jointC+complete30.
+20 correlated TRAIN-exposed generated families, not200independent/unseen/full320
+or adoption. Source author, not independent/blind. All9actualViews/45occurrences
+includingK faithful literal with original role/revision/clocks. NewC10View7nodes,
+five entire received copies equal including failed186/189. Literal quoting does
+not certify embedded assistant claims, current coverage or correct Host use.
+All80mid/final materialcomplete0;midC1(A02namesunchanged),finalC0.
+
+ENTIRE recorddicts/providerinputs/answers/Sourcebindings and Views reconciled before
+same-method reuse/allanchors/Fmask revalidation:160→170(160records/40Views),
+170→180(170/40),180→190(180/40),190→200(190/45). No cross-method grades; baseline
+only literal body/role/origin dedup context. NEXT index200memops_C26 contentinitial.
+Extend actual closed complete-family cut positive%10=0 into separate folder;
+compare ENTIRE200records/45Views before copy/revalidation. Inspector --compact
+--since-previous --compact-view-text --reuse-reviewed-condition new32-view_cache.
+Read full answers, never grade unseen/truncated output or stored-only facts;
+failed-turn materials are not later completed K. Ownquotes required originals2–5.
+
+C05 contentflow four qualified no-context Q/insufficient; originals initial own
+flights/ref/cost complete, laterMay25 stale versusMay26/3200forbothgroundbudget.
+C07 currentSowaka can match again while oldreceipt misses dates/arrival/Takayama/
+unacceptedHoshinoya hold; no C from coincidental name. C10 initial originalView
+June14 complete but laterJune21/conditionalJune14/72completion/topicmetrics missing.
+C23 own/wife dates and planning/booking/declinedslot differ; false user-never-
+supplied-family-date claims W. Assistantwifequote and suggestedavailabilitycheck
+are not user testimony. Untimed authorwriteSyntaxError at192 occurred before any
+write; length192 verified, corrected contiguous192..199 via same validator. Failure
+report in prefix0200; author/untimedCPU unknown, no experiment/model retry.
+
+NEW FIRST-DISPATCH HOST FRAME COMPOSER, REAL CONTROLS STILL0:
+d_old_output_readout.py prepare_first_dispatch_readout uses frozen donor first
+provider wire, not pre-final/final input. Existing
+prepare_known_budget_readout.prepare_controlled_readout is the WRONG boundary
+for this factor. Reuse append_fresh_request only for appended fresh call/placeholder
+on empty message list, then prepend entire original messages unchanged; existing
+readout_batch/substitute_receipt preserve complete batch/final-only semantics.
+2isolated dictionary fixtures JSON-action/native passed, including original fields/
+reasoning field, oldHostanswer/receipts, on/offHostwire equality and final-only
+substitution. No actual donor frame intervention, Store clone/nativeK/model/ledger
+access. Report:d-update32/old-output-first-dispatch-frame-implementation-v1.json.
+Future controls still need separate frozen runtime/config with v20exclusionadapter,
+actual physicalbefore/nativeinventory/Source equivalence, nativeK/freshbinding/
+fullframe checks, actual toolreceipt and first conditionalHostreadouts after formal
+3jobs. Do not use given-readoutwithK or remove oldHostknowledge already in context.
+
+Prefix200 already originalledger310HTTP/1785739knownHosttokens/newunknown0/0;
+117toolattempts117returns1error,452steps446operations247READ21materialrejections
+4knownrefreads,161currentraw9Views. Whole ownerCPU/SDK/effects pending.
+Receipts1..15 settled once;43closed offline timers86.56CPU pending (incl failedRuff
+and framefixturecheck). Author/untimedCPU unknown not0. v16receipt absent;
+settle_d_new32_incremental_idle_v16.py prepared ONLY, execute once at true idle
+after full320 quality/SDK/operation closure, no GNU wrapper. Parser supports both
+original timer formats/legacy failure header; original timers unchanged. Never
+GNU-wrap timer-scanning writers/settlement; native/model/client not rebilled.
+
+v20Source-exclusion24fixturechecks unchanged; active formalruntime lacks option.
+ActualK/old-outputcontrols/52READ/7pools still unexecuted. All first8 cells retained,
+no later/cleanerA05View substitution. Full remaining scope: two320/pairedfamilystats,
+actual controls/repairs, finalcandidate/checkpoint/scoring/budget/N freeze BEFORE
+held256papers/old64querycontents; LME451/Mem2Act400 own-policy/full-input/exposure,
+fullcosts and paperfigures. Testsplit/heldsemanticcontents unopened. GoalNOTcomplete.
+
+# HISTORICAL A100 EXECUTION v23: 2026-11-06
 
 Full goal ACTIVE/incomplete; current and previous turns PROGRESS. Latest manifest:
 data/manifests/a100-development-progress-20261106-v23.json and execution doc.
