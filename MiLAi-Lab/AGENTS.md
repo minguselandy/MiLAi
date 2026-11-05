@@ -1,4 +1,65 @@
-# LIVE A100 EXECUTION v21: 2026-11-06
+# LIVE A100 EXECUTION v22: 2026-11-06
+
+Full goal ACTIVE/incomplete; current/previous turns PROGRESS. Latest manifest
+data/manifests/a100-development-progress-20261106-v22.json and execution doc.
+NoSHA/checksum/contentfingerprint,subagent,newservice,secondledger,reset/refund,
+remote write or model/first-outcome retry. GPUs0/1/Product/Host unchanged.
+
+ONLY LIVE actualexperimentHTTP worker new32-view_cache_incremental-owner.json:
+parent3591596/child3591601/exec4286,132/320closed atv22. Revalidate actual/proc/
+owner/native. No learnedlocalGPU, extraHTTP/nativecapturedcontrol/realStoreclone
+or offlineCPUsettlement whilelive. No frozenruntime/config/data/Host mutation.
+At actualterminal FIRST fullbind_d_frozen_method.py new32-view_cache_incremental;
+await; THEN fullaudit_d_closed_sdk_states.py new32-view_cache_incremental.
+Full320quality/Views/SDK/effects/operations/costs closure before manualserial
+new32-e3-aggregate-u32 320. Never restart lost handles or repoll baselineexec4305.
+
+INCREMENTAL PREFIX110 ALL WHOLE ANSWERS/RECEIVED VIEWS SOURCE REVIEW CLOSED:
+d-update32/reviews/new32-view_cache_incremental-prefix-0110/answer-review-closeout-v1.json
+C25/Q9/W46/F30;material24complete82partial4insufficient,jointC+complete17.
+Eleven correlated TRAIN-exposedgeneratedfamilies,not110independent/unseen/full320/
+adoption. All4actualViews/20occurrences includingK faithful literal with original
+roles/revisions/clocks. NewB05twoflowViews each7nodes/5entire-copyequal occurrences;
+initialcomplete but laterupdatesmissing. All44mid/finalmaterialcomplete0,midC1
+(A02namesunchanged),finalC0. Sourceauthor,notindependent/blind.
+ENTIRE80recorddicts/providerinputs/answers/Sourcebindings and10Viewrecords literal
+equal prefix110 before same-method80judgment reuse andallanchors/Fmaskrevalidation.
+Earlier20→80proof retained. No cross-method grades; baseline only literal body/
+role/origin dedup reading. Never grade unseen/truncated output or stored-only facts.
+
+Current110judgments saved; NEXT index110memops_B25 contentinitial. Larger actual
+closed complete-family cut positive%10=0 separatefolder; compare ENTIRE110records/
+20Views before copying/revalidating. Inspector --compact --since-previous
+--compact-view-text --reuse-reviewed-condition new32-view_cache. Ownquotesrequired
+originalsrequests2–5; assistantrecapsnotown. FailedturnmaterialnotlatercompletedK.
+
+B05 lastjointagreement differs from oneperson's latestproposal; no-queryanswers
+miss returntoElara then wifeIris/userElara dispute. Oneinitialoriginalsanswer edits
+assistantMatteo wording instead ofquoting availableownstatement (Q/complete).
+B12 original3742typo differs from actualretired3724 aftercarrierchange; merely
+proposedportback3724 notcurrent3790. Initialunqualifiedretired-typo classification
+W versus retired/incorrect phrasing explicitlyallowingmistake Q/partial; ownemail/
+weekend/currentcorrectionwitnessesmissing. B21all10W/partial: initial82000/Tue–Sat
+correction omitted, then82500/proposed85000/crosscountryapproval unreceived; final
+queryreturnsoldHost105+assistantexamrecap. Do not infer causesolelyinternalcontroller.
+
+Prefix110alreadyledger174HTTP/1021671knownHosttokens/newunknown0/0;
+68toolattempts68returns1error,273steps270operations153READ11materialrejections
+4knownrefreads,95currentraw4Views. WholeCPU/SDK/effects pending. Receipts1..15
+settledonce,18closedoffline timers32.99CPU pending;author/untimedunknownnot0.
+IncludesfailedRuff,originalverboseprefix80closetimer. Futureidleparser mustsupport
+both GNUexplicit and verboseformats; do notoverwrite/retrytimer. NeverGNU-wrap
+timer-scanning progresswriters/settlement. Native/model/client notrebilled.
+
+v20optionalacquisitionexclusionadapter24isolatedfixturetests done; formalruntime
+stilllacksoption; actualK/old-outputcontrols0. First8donors/nativebefore/fullframe/
+Klookups,52READ/7pools repairs pending afterformal3jobs. Nevergiven-readoutwithK/
+picklatercleanerA05View. Fullremainingtwo320/pairedfamilystats,actualcontrols/
+repairs,finalcandidate/checkpoint/scoring/budget/Nfreeze BEFOREheld256papers/old64
+querycontents; LME451/Mem2Act400 own-policy/fullinput/exposure,costs/paperfigures.
+Benchmarktestsplit/heldsemanticcontentsunopened. GoalNOTcomplete.
+
+# HISTORICAL A100 EXECUTION v21: 2026-11-06
 
 Full goal ACTIVE/incomplete. Current/previous turns PROGRESS. Latest:
 data/manifests/a100-development-progress-20261106-v21.json and execution doc.
