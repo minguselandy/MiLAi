@@ -6,9 +6,76 @@
 历史 worktree、原始失败与用户文档保持原状。没有使用子代理、SHA/内容指纹校验、新服务、第二账本或远端写入。
 
 本轮机器可读入口为
-[progress](../data/manifests/a100-development-progress-20261105-v8.json)。
+[progress](../data/manifests/a100-development-progress-20261105-v9.json)。
 原始数据、冻结运行时、权重、命令、计时和实际输出位于本 worktree 的 ignored
 `artifacts/a100-development-20261104/`。本记录是现有报告体系的执行摘要。
+
+## v9 当前状态：五方法已闭合，保留 E3 复现，D 仍待实现
+
+DEV64 的五方法、320 个完整答案与实际输入全部完成来源作者审阅。该作者也参与实现，
+并非盲审或独立评审。所有首结果和失败保留在每方法 64 族分母中。
+
+| 方法 | 完整答案 | 工程完成 / 失败 | HTTP | Host prompt＋completion tokens | 原生字面 Answer F1 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| fixed-prefix | 25/64 | 49/15 | 143 | 528,693 | 0.0774154 |
+| E1 u16 | 25/64 | 45/19 | 154 | 622,629 | 0.0802133 |
+| B0 u33 | 33/64 | 59/5 | 139 | 504,911 | 0.0947629 |
+| B1 u33 | 32/64 | 53/11 | 151 | 580,186 | 0.0978627 |
+| 既有 E3 aggregate u32 | 40/64 | 55/9 | 135 | 461,096 | 0.0894039 |
+
+E3 对 fixed-prefix 为 17 gains / 2 losses，+23.4375pp，描述性 95% 家族 bootstrap
+区间 [10.9375,35.9375]pp；对 B0 为 12/5，+10.9375pp，区间 [-1.5625,23.4375]pp。
+B1 对 B0 为 12/13，-1.5625pp，区间 [-17.1875,14.0625]pp。
+将三个来源解释敏感问题 3/8/56 的完整信用对所有方法同时撤去，仍保留 64 族，
+计数为 25/25/30/31/38；E3 对简单方法为 15/2，+20.3125pp，区间 [9.375,31.25]pp。
+这项事后敏感性不替代主指标，也不构成独立裁决。
+
+五方法共 722 次 HTTP、2,697,515 个已知 Host 总 tokens，新增未知用量为 0。
+全部 320 个结束状态（含 59 个失败状态）的 Store/Saver/application 已只读核对；
+每方法 4,343 个初始 Source 值保持，实际输入绑定 1,733 处原文字段且无 unmatched。
+最终 assistant Sources 是输出，不能当事实；没有 semantic-record 写入。
+原生 F1 采用实际完整回答和原生全部答案，不抽取短答案、不重写失败或 unanswerable，
+其排序与来源作者完整成功不同，不能代替主指标。
+
+所有 64 族的首个 Host provider 请求在五方法间逐字一致，但五者首轮实际检索参数列表
+完全一致的族为 0/64；因此完整轨迹包含随机 Host 查询变化，不能将端点差异孤立归因于
+控制器或新数据组成。E3 的旧 457 slots、128-update 调度、双卡 FP32 与新 B 配方的
+528 slots、66-update 调度、单卡 BF16 也不同。实际返回 Tool.content 正文均不超过 2048 tokens。
+E3 whole-child CPU 为 692.684918 秒，其中原生预测 506.823635、加载 7.990816、
+剩余客户端 177.870467 各计一次；GPU 作业区间 0.5468298 小时含 Host 等待。
+简单方法 CPU 为 203.499353 秒。较低 Host tokens 尚不能证明全成本占优。
+
+E3 仅保留为开发参考。精确 seed1/2 配方已冻结并启动：复用原冻结 runtime、数据和
+FP32 双卡 argv，仅 seed、输出目录、compute-phase 改变；每次仍为 128 更新、2048 draws，
+评测点 0/16/32/64/128，后续自主 Host 固定评估 u32，不挑最好 seed。
+这衡量同一固定 E1 u16 初始化下的训练随机性，不是完整训练链三次独立拟合。
+seed1/2 预期实际训练 tokens 分别为 10,549,642、10,607,432；实际结束后核对。
+当前 exec2604、seed1 child1638434，随后 seed2 串行；无并发 HTTP。
+
+所保留 E3 也完成 C8 原菜单诊断：8 次真实 HandoffOnly 投影后的本地 forward，
+8 个选择全部复用 30 个已有绑定中的最早首次结果，新增 Reader 调用为 0，完整答案 1/8；
+与其他学习模型相同，低于 fixed_context/rules 的 4/8。未发现应扩菜单的表达缺口。
+该诊断不等同完整自主反馈策略；可优先保留简单材料选择职责。
+
+D 的 9 个旧 post-REFRESH READ＋HANDOFF 机制探针已闭合，但可选增量策略、
+实际 old View / known-evidence 控制、旧 8 背景全流程与新加入 D 的 32 个 TRAIN 背景
+自主 Host、同信息比较仍未完成。不能从原生 View＋raw packet 推断任务提升。
+新 32 已有历史 TRAIN/来源暴露；不称未见、自然实测或独立确认。
+
+按当前 E3 对简单方法的族差值样本方差 0.2457837302，近似检测真实 +5pp 对零差异
+在双侧 5% / 80% 下约需 771 个独立族；这只是条件规划，预留 256 不保证该功效。
+最终方法、checkpoint、计分、预算与确认样本量仍须在 held 内容打开前冻结。
+当前 64 族是已曝光开发；held 256、旧 64 query 确认内容未导出/审阅，native test 未打开。
+
+成本仅用原账本：v8 在五方法结束后、C8 E3 之前结算 10 个计时命令 24.68 CPU 秒；
+v9 在 C8/复现准备完成后、复现启动前结算 2 个计时命令 1.04 CPU 秒，均只计一次。
+E3 C8 whole CPU 31.074597＝原生 15.060130＋客户端 16.014467 已另计一次；
+作者及未计时 CPU 仍为 unknown，不记 0。所有第一失败和意外 A 重复调用的成本保留。
+
+证据：`task-dev64-development-selection.json`、`task-dev64-paired-selection-progress.json`、
+`task-dev64-cost-and-entry-audit.json`、`task-dev64-all5-native-agreement.json`、
+`c-handoff8-e3-saved-choices.json`、`e3-retained-replication/{plan,driver}.json`。
+以下分包记录保留形成过程；本节与 v9 manifest 是当前状态。
 
 ## P0：已取得真实运行证据
 

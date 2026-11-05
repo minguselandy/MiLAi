@@ -1,4 +1,79 @@
-# LIVE A100 EXECUTION v8: 2026-11-05
+# LIVE A100 EXECUTION v9: 2026-11-05
+
+Full goal ACTIVE/incomplete. Current and previous goal turns PROGRESS.
+Latest: data/manifests/a100-development-progress-20261105-v9.json and execution doc.
+No SHA/checksums/content fingerprints, subagents,new services,second ledger,
+limit reset,remote writes or first-outcome/model retries. GPUs0/1 untouched.
+
+ONLY LIVE model job: e3-retained-replication/driver.json, exec2604;
+seed1 child1638434 at v9, then seed2 SERIAL on original two-GPU2/3 FP32 runtime.
+Revalidate actual owner/child/native run before action. Never restart on timeout.
+No concurrent HTTP or offline ledger settlement while fits live.
+Plan e3-retained-replication/plan.json copies actual old aggregate argv/runtime/data;
+only seed/output/compute-phase change. Each128updates/2048draws,cosine horizon128,
+all evaluations0/16/32/64/128, fixed selectedu32 for both new seeds. Do not shorten
+training to32or choose best seed/checkpoint. Same fixed E1-u16 init: training RNG
+replication,notthree independent whole chains. Newseed DEV64 Host jobs still required.
+Expected train tokens seed1=10549642,seed2=10607432. No A/B extra fits or scaling.
+
+ALL FIVE original DEV64 methods CLOSED,all320wholeanswers source-author reviewed:
+fixed-prefix C25/I11/Q9/W1/F15/U3; E1 C25/I13/Q5/F19/U2;
+B0 C33/I14/Q9/F5/U3; B1 C32/I11/Q8/F11/U2;
+E3 C40/I8/Q6/F9/U1. Source-author is implementation author,notblind/independent.
+All first failures/unknowns stay in64. All old sessions CLOSED; never repoll/restart.
+Engineering COMPLETED49/45/59/53/55 is not task success. Total722HTTP,
+2697515known Host prompt+completion tokens,newunknown0. Method totals
+528693/622629/504911/580186/461096; E3=135HTTP/9failures(5trunc+4JSON).
+1733actual literal Source ranges,0unmatched; all320Store/Saver/applicationstates
+read-only audited,including59failures.4343initial Sourcevalues per method preserved.
+No semantic records; final assistant Sources49/45/59/53/55remain assistant outputs.
+
+Paired primary E3vsanchor17gains/2losses,+23.4375pp CI[10.9375,35.9375];
+E3vsB0 12g/5l,+10.9375pp CI[-1.5625,23.4375]; B1vsB0 12g/13l,
+-1.5625pp CI[-17.1875,14.0625]. Development selection,notconfirmation/adoption.
+Common post-exposure scope sensitivity withholds C on3/8/56forALL5,keeps64:
+counts25/25/30/31/38;E3vsanchor15g/2l,+20.3125pp CI[9.375,31.25].
+Not replacement primary. Detailed source guides are post-exposure; prior wording kept.
+Source50AdditionalExperiments actuallyadds4thlevel; no true3/4contradiction.
+Official literal autonomous native F1=.0774154/.0802133/.0947629/.0978627/.0894039;
+full strings/allnativealternatives,notcomplete success. No extraction/failure rewrite.
+
+Development E3reference retained for replication/D,notfinalfreeze.
+All64first Host provider wires literal-equal across5,butall5first retrieval argument
+lists identical in0/64. Stochastic Hostquery variation prevents isolated controller/data
+causality. E3old457slots/128schedule/FP32two-GPU differs fromnewB528slots/66/BF16single.
+All actual Tool.content bodies<=2048tokens. Conditional variance .2457837302 implies
+about771independentfamilies todetecttrue+5ppvs0atnominal5%/80%;reserved256doesnot
+promise thispower. FinalNnotfrozen;do notcountseeds/statesasnewindependentfamilies.
+E3wholechild692.684918CPU,nativepredict506.823635+load7.990816,residual177.870467;
+GPUjobinterval.5468298h includesHostwait. FixedCPU203.499353. FewerHosttokensdoesnot
+establish totalcostdominance. Allmodel/native/clientcostspaidonceinoriginalledger.
+
+SelectedE3C8alsoCLOSED:8savednativeHandoffOnlyforwards,0newReadercalls;
+all8choicesreuseearliestclosedfirstoutcomesfrom30uniquepriorbindings,complete1/8.
+Simplefixed_context/rules4/8;E1/B0/B1also1/8. No menu expression gap demonstrated.
+ExactHandoffOnlymenuprojectionBEFOREencoding,originalexecutorfullmenuunchanged.
+GPUjob.00477465h,wholeCPU31.074597=native15.060130+residual16.014467,paidonce.
+
+DonlynativepostREFRESH9READ+HANDOFFprobesclosed,0newHTTP/model,View+raw9,
+rawroles3user/6assistant. OriginalSource/Viewinterpretations unchanged;native
+locator/metadata projectionverified. These do nottest clean/pendingUSE_VIEWorHostgain.
+DoptionalincrementalpolicyNOTimplemented/evaluated;actualold8and32new-to-DTRAIN
+fullflows/sameinformationcomparisonstillrequired. Reservation32=14Update+18TrajectoryOps,
+previousTRAIN/sourceexposure,no unseen/naturallyobserved/confirmationclaim.
+InspectactualoldView/knownK,commonbuilder/strongsimpleexactreusebefore3method2048freeze.
+
+Idle settlementv8:10closedtimers24.68CPU once;v9:2closedtimers1.04CPUonce beforefits.
+Earlier receipts1..7remainpaidonce. Author/untimedCPUunknown,not0. No offline settlement
+whilelivefit; futureclosedtimerspending. Original budget only,neverreset/refund/rebill.
+Remaining: retained seed1/2 all64Host/source-review,actualDold8+32 andknownEvidence,
+mechanism-based57/24repairsasneeded,finalcandidate/scoring/budget/Nfreeze BEFOREheld256
+paper+old64queryconfirmation,eligibleLME451Reader/Judge/Mem2Act400afterexposureaudit,
+allcost/statistics/paperfigures. Heldcontentsunexported/unreviewed,nativetestunopened.
+OldA-v2complete15/15andBold32complete13/13remainauthoritative;oneaccidentalArepeat
+neverprimary,allpaidcostretained. No blindA20k/B192/256/answer-first/AtoB. Do notcomplete.
+
+# HISTORICAL A100 EXECUTION v8: 2026-11-05
 
 Full goal ACTIVE and incomplete. Previous and current goal turns are PROGRESS.
 Latest: data/manifests/a100-development-progress-20261105-v8.json and execution doc.
