@@ -1,4 +1,59 @@
-# LIVE A100 EXECUTION v4: 2026-11-04
+# LIVE A100 EXECUTION v5: 2026-11-05
+
+Full user goal ACTIVE/incomplete. Current and previous goal turns PROGRESS.
+Latest data/manifests/a100-development-progress-20261105-v5.json and
+docs/MILAI_A100_DEVELOPMENT_EXECUTION_20261104.md. No SHA/fingerprints/subagents/new
+services/second ledger/limit reset/remote writes. Original user files and first outcomes retained.
+
+ONLY LIVE model jobs: B0 exec27974/child4186648 and B1 exec27802/child4186647.
+Owners b0-seed0-driver.json/b1-seed0-driver.json; revalidate actual /proc and run.json.
+Both separate GPU2/3, immutable runtime-p0, BF16/single,66updates/1056draws/5756552tokens
+each, cuts0/17/33/66. Never restart for observation timeout or missing exec handle.
+At17 oldfeedback pure-delivery .949554 -> .713170/.749851; operation .778851 ->
+.781510/.781915. Partial exposed-dev regression, no selection or unplanned training change.
+Finish fixed budgets; after BOTH normal terminal run artifacts/a100-development-20261104/
+close_b_fits.py. It audits actual closure, applies frozen nonzero-nominee/2pp operation
+guard/earliest-tie rule and prepares three saved FP32 GPU full-menu evaluations. Initial
+savedGPU31 is common to both, explicit runtime change from old CPU wording, no latency equivalence.
+
+B64 ALL384 full bindings CLOSED:358new/26original terminalREAD first outcomes reused;
+373COMPLETED/11FAILED readouts. Never retry closed branch workers/PIDs1112437/1166367.
+1613Source ranges/roles, exact first parameters/prefix/common suffix, actualReader wires
+bound. New358HTTP/1257699known/newunknown0; prefix64HTTP/237960known recorded separately.
+baseline128actual executions shared across B0/B1, not two independent collections or free cost.
+All384 actual packets delivery-reviewed:94sufficient/106partial/178insufficient/6uncertain.
+b64-delivery-author-guide.json retains per-source rationale and reference conflicts.
+NewB0 pairs9direction/117tie/2unknown; B1 23direction/103tie/2unknown,21/23favorbaseline.
+97double-tie states. Coarse delivery rubric fixed before fit, partial ties not identical
+fact sets or successful tasks. ALL256 new answer pairs UNKNOWN/full-answer review pending;
+do not infer answer labels from delivery or successful HTTP. Two528-slot panels share exact
+inputs/full menus/old400, initialization, quality-tie/component-sum/set-replay. Native length
+max11882,no state/head truncation; each slot exactly2 planned exposures. No12k-effectiveness claim.
+More parameter types alone did not create better evidence; no192/256 expansion from these counts.
+
+A actual task selection CLOSED32: raw14/initial14/A0u2104=16/A1u2104=16 complete. Both A fits
+have3gains/1loss vsinitial, +6.25pp descriptiveCI[-6.25,+18.75]; A0/A1 success indicators
+identical. New11first readouts allCOMPLETED/source-reviewed;104prior exact primary grades reused.
+One missing learned state stays in32 denominator. Artifacts a-task32-results.json,
+a-task11-author-decisions.json,a-task32-closed-choices.json. Native tokenF1 separate.
+NoA20k/extra seeds/J/adoption. Old8/new128 classification evidence unchanged; no task gain
+attributable to native-priority composition. All original first failures retained.
+
+B preparation initially failed before output/modelcalls: direct CUDA Python omitted existing
+HTTP dependency site. Same train_with_declared_attention.py initialization fixed preparation;
+failed log/timer/reflection preserved, no dependency upgrade. Idle settlementv2 billed13new
+offline timers159.4CPU ONCE before B launch, excluding v1/model/client costs. Later offline
+timers remainpending while B lives. New B owners record whole-child CPU residual once after
+deducting their own native phase only. Original singleledger remains authoritative.
+
+Still required: B full-fit/saved/full-answer/task selection, new64-source autonomous Host,
+retained comparisons' necessary seeds/scale, C new-candidate same-pool diagnosis as needed,
+D original8 plus32new natural update families, frozen confirmation, eligible LME451/Mem2Act400,
+all costs/paper figures. Reserved256 confirmation and old64 query-confirmation remain protected;
+newtaskDEV64 not yet exported/admitted. Follow frozen method/protocol/exposure rules before use.
+Do not substitute this checkpoint or coarse delivery labels for full-plan completion.
+
+# HISTORICAL A100 EXECUTION v4: 2026-11-04
 
 Goal ACTIVE/full scope unchanged. Latest data/manifests/a100-development-progress-20261104-v4.json.
 Current/previous goal turns are PROGRESS. No SHA/fingerprints/subagents/new services/second ledger/

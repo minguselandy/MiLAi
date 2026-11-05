@@ -6,7 +6,7 @@
 历史 worktree、原始失败与用户文档保持原状。没有使用子代理、SHA/内容指纹校验、新服务、第二账本或远端写入。
 
 本轮机器可读入口为
-[progress](../data/manifests/a100-development-progress-20261104-v4.json)。
+[progress](../data/manifests/a100-development-progress-20261105-v5.json)。
 原始数据、冻结运行时、权重、命令、计时和实际输出位于本 worktree 的 ignored
 `artifacts/a100-development-20261104/`。本记录是现有报告体系的执行摘要。
 
@@ -68,7 +68,7 @@ margin 为 0.0250。保留这一变化，候选选择必须核对落盘模型，
 共替换 9,535 条负例。正例、replay、公共 dev、每条件正负槽数及逐槽损失权重一致；
 保留原 row slots，使正例和 replay 的选项随机身份不随重排变化。
 stable-negative 信号同时变化，不能声称只改变了一个负例计数。
-选入覆盖已经证实；实际抽到的覆盖和 tokens 待完整训练输出，不提前当作已完成。
+选入覆盖与完整拟合中的实际抽样均已核对；实测 tokens 和覆盖见下文完整训练记录。
 
 源记录核对发现 E2 实际使用 `max_len=16384`、head 上限 `2048`、encoder LR `5e-6`，
 操作 replay 使用 accepted-set likelihood。两臂共同继承这些实际值：条件单一正目标与 CE 等价，
@@ -97,7 +97,7 @@ A1减少了A0在这组诊断上的退化，但尚未超过初始化；不能凭�
 A0/A1实际输入37,502,475/37,318,166 tokens，实际抽到原生负例条件5/9,540，
 GPU作业时间2.3430/2.3810小时；每臂22,434次单卡microbatch forward。
 窗口、选项置换、逐槽权重、完整输入、全部检查点、评测计量与原账本相应单次phase已核对。
-预定门槛下两臂均提名2104；仍需落盘行为和真实任务选择，不能将提名视为采用。
+预定门槛下两臂均提名2104；落盘行为与旧32族条件任务已闭合，自主Host和新来源确认仍待执行。
 该表为内存模型统一FP32推理，不替代新128条件家族或自主Host。
 证据为 `a-diagnostics-through-2805.json`、`a-full-fit-closeout.json`。
 
@@ -116,8 +116,22 @@ GPU作业时间2.3430/2.3810小时；每臂22,434次单卡microbatch forward。
 0.866667/0.1/0.4；“8对”不是8个独立家族。
 落盘分析见 `a-saved-evaluation-closeout.json`。当前不扩大A20k、不自动追加seeds或A→B。
 另已完成两提名模型在旧32族任务面板的31个真实完整菜单状态预测；
-按实际完整绑定、同before/续行/readout匹配复用旧首结果，11个新绑定尚待真实执行，
-缺失状态仍保留在32族分母。见 `a-task32-choices/choices.json`。
+按实际完整绑定、同before/续行/readout匹配复用旧首结果，11个新绑定现已各首次执行并完成源审；
+104个已有readout的原始主评分保持，缺失状态仍保留在32族分母。
+
+| 旧32族条件任务 | raw delivery | 初始化E1-u16 | A0-u2104 | A1-u2104 |
+| --- | ---: | ---: | ---: | ---: |
+| 完整成功 /32 | 14 | 14 | 16 | 16 |
+
+A0/A1相对初始化均为3 gains/1 loss，差值+6.25pp，来源族bootstrap描述性95%区间
+[-6.25,+18.75]pp；两臂的完整成功指示逐族相同，A1相对A0没有新增成功。
+该面板不提供native-priority的任务采用依据；A20k、更多seed和A→B均未触发。
+完整回答中的无依据“所有标注均自动完成”“明确手工调参”等扩展保留为qualified，
+没有因为核心片段正确就升级为完整成功。旧“existing approaches”的统一宽范围解释保持，
+不临时收窄成四个基线名。条件readout与自主Host分别报告。
+证据：`a-task32-closed-choices.json`、`a-task11-outcomes-for-review.json`、
+`a-task11-author-decisions.json`、`a-task32-results.json`；原生完整字符串F1单列于
+`a-task32-native-agreement.json`，没有替代完整任务指标。
 
 ## B：先补真实功能，保留原首结果
 
@@ -173,11 +187,11 @@ rules/learned在一个状态收到完全相同的packet和wire，不将其措辞
 ## 新来源的实际分配
 
 沿既有1,169篇论文allocation，扣除实际已采集的64个TRAIN家族，从既有TRAIN分配中选取新的64家族，
-保留原生问题和4,502个Source单元；当前只导出每族第一个既有问题，尚未采集reached states。
+保留原生问题和4,502个Source单元；每族使用第一个既有问题，实际reached states及分支已全部采集。
 另从parent中尚未使用的身份元数据分配新的64任务DEVELOPMENT家族，并预留256确认家族
 （185 native-dev、71 native-train），各组及旧64族核对互不交叉。
 确认正文与标注尚未导出/查看；冻结候选、规则、预算后才使用。公开预训练隔离未获认证，
-256也不是+5pp的功效保证。新128条件开发家族属于另一数据轨，仍需按真实标签资格处理。
+256也不是+5pp的功效保证。新128条件开发家族属于另一数据轨，其实际原生/复核标签结果见A节。
 证据为 `source-allocation-v1.json`；分配接续parent和实际使用记录，不直接套用历史unused计数。
 采集已准备为8＋56两个串行段，配置预检查完成且模型调用为0；见 `b64-collection-plan/plan.json`。
 释放GPU后使用现有FP32推理路径，保留关闭reference_compile的既有初始化并记录实际设备、精度和峰值显存；
@@ -195,11 +209,49 @@ reference_compile关闭；峰值allocated2.305GB、reserved7.999GB，整客户�
 argmax/baseline/alternative的状态，缺口保留。`--exact-nominations`防止准备器回填未合格状态。
 旧默认初始/后续采样保持可复现；48项相关检查通过，并在旧真实捕获上零模型调用复核16状态/48绑定。
 新首8族也选入16状态/48互异绑定，其中3个满足既有单剩余槽terminal READ复用协议，
-保留其原始首readout；45个新绑定已串行启动。
-其余56族实际选入112状态/336绑定，其中23个同样可复用首结果，313个新绑定已准备尚未执行。
+保留其原始首readout；45个新绑定现已正常退出。
+其余56族实际选入112状态/336绑定，其中23个同样复用首结果，313个新绑定也已正常退出。
 全B64达到128个合格状态、384个真实完整绑定，358个新分支与26个原始等价末READ首结果。
 B0/B1仍共用完整菜单与一次实际baseline；这些是64族而非384个独立来源。
-当前只有首45分支使用模型HTTP，其余分支和A的11个新任务绑定依次排队，不并发HTTP。
+358个新分支共358次HTTP、1,257,699已知生成tokens、新未知用量0；384个绑定中
+373个readout完成、11个首次readout失败。全部1,613个Source范围、角色、完整首动作、
+已执行前缀与共同续行、同一Reader wire中实际packet均已绑定，失败未重试。
+26个复用readout成本保留在原64族前缀采集，不再收取；baseline实际执行128次，供两面板共享。
+证据：`b64-branch-closeout.json`及两段`outcomes-for-review.json`。
+
+## B64：两监督面板已编译，配对训练进行中
+
+384份实际交付包已逐一源审，记录充分94、部分106、不足178、不确定6。
+原生标注只作来源线索：表格标题不能恢复数值，截断段落不能补全缺失实体，
+实际Queensland结论95%与原生答案96%的差异原样记录，Brier/ROC的适用范围分别保留。
+六份不确定材料来自同一“baseline”含义未决的来源，两状态比较保持unknown。
+完整回答源审尚未完成，新增两面板共256个answer比较全部保持unknown；
+交付标注没有被转换为回答成功。
+
+| 新128状态纯delivery监督 | B0 argmax↔baseline | B1 alternative↔baseline |
+| --- | ---: | ---: |
+| 方向比较 | 9（左5/右4） | 23（左2/右21） |
+| tie | 117 | 103 |
+| unknown | 2 | 2 |
+
+97个状态的两比较同时为tie，常见原因为双方都缺必要事实；tie并不表示任务成功。
+覆盖提名得到更多方向，其中21/23偏向baseline，不能据此声称提名有效或扩大192/256族。
+若下一批采集有依据，应利用真实可见请求与证据缺口改进提名，不只平衡动作类型。
+交付质量按本轮TRAIN编译时固定的充分/部分/不足粗粒度比较；同为部分的tie不表示事实集合完全相同。
+
+两臂均使用相同完整菜单、状态、旧400行、E1-u16起点及E3实际纯delivery配方：
+quality-tie、component-sum、replay accepted-set权重0.25、encoder/head LR 5e-6/1e-4、
+shared_actions、full参数、BF16单卡、micro2/窗口16。
+每臂528个slots，两次实际暴露，1,056行、66更新，预定检查点0/17/33/66，
+完整输入预算均5,756,552 tokens。最长原生输入11,882 tokens，state/head无裁剪；
+这仍不是有效12k上下文的认证。两独立作业分别使用GPU2/3，原账本短写锁保持。
+
+共同训练前评测的操作家族接受率0.778851、纯delivery方向准确率0.949554。
+首17更新时分别为操作0.781510/0.781915、方向0.713170/0.749851，存在明显旧反馈回归。
+两臂继续原66更新预算，整条曲线闭合后才按冻结规则提名，再核对落盘实际完整绑定和真实任务。
+当前没有B候选采用。实际进程和检查点以`b{0,1}-seed0-driver.json`、`run.json`和`history.json`为准。
+数据与配方见`b64-delivery-author-guide.json`、`b64-matched-training/plan.json`；
+终态审计/后续落盘菜单准备脚本为`close_b_fits.py`，须等两臂正常退出后执行。
 
 ## 失败与改进
 
@@ -221,14 +273,18 @@ B64首次启动的fixture仍是自主请求格式，给定请求入口缺少`ret
 修正为既有native-question适配器、独立given-v2数据与输出，协调器使用项目Python3.11并在计量前
 先保存实际终态；没有重试已执行任务。此次也说明“配置prepare通过”不能代替请求fixture入口兼容性验证。
 
+B64面板编译首次直接使用CUDA Python，漏用原依赖/attention wrapper，因缺少langchain_core在
+导入阶段退出，尚未创建输出或调用模型。修正为现有`train_with_declared_attention.py`后编译成功，
+未升级环境或更换backend；失败日志、计时和`b64-preparation-import-reflection.json`保持。
+
 ## 全范围剩余要求
 
 | 里程碑 | 当前证据 | 仍需执行 |
 | --- | --- | --- |
 | M0 | 两单卡32更新、统一 FP32评测与落盘重载闭合 | 后续变更若引入新风险，再定向验证 |
 | M1 | 条件覆盖修复、57状态inventory、8新绑定及源审闭合 | 其余缺失READ保持清单，结合决策空间决定必要补采，保留tie/loss/unknown |
-| M2 | A0/A1完整拟合闭合、落盘评测在跑；C8闭合；新128条件族导出；B64首8族闭合 | B64其余56族实际前缀、全部状态/共享三分支与两面板拟合；落盘/真实任务选择 |
-| M3 | 尚无新任务质量结论 | 对有信号的比较补 seed1/2；仅必要时20k或192/256规模实验 |
+| M2 | A0/A1拟合、落盘和32族条件任务闭合；C8闭合；B64完整分支与delivery面板闭合；两臂拟合中 | B配对拟合/落盘/完整回答与新来源自主Host任务选择 |
+| M3 | A1相对A0完整成功相同；B首17更新出现旧反馈回归 | 完整B任务结果有信号后才补seed1/2或192/256；A当前不扩量 |
 | M4 | 旧 E5失败保留 | View＋增量读取控制、同信息对照、新32更新来源族与自主 Host；有预算机制依据再补1024 |
 | M5 | 新64任务开发族与256确认族身份预留，尚未冻结最终候选 | 实际使用前再核曝光；冻结确认；LME451/Mem2Act400；完整成本、论文图表与可主张边界 |
 
@@ -240,11 +296,14 @@ B64首次启动的fixture仍是自主请求格式，给定请求入口缺少`ret
 `/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json`。
 两训练进程退出且无模型HTTP活动后，原v79的75项45.39CPU及本轮38项残余458.5458CPU已各结算一次；
 C已计native380.6442CPU先行扣除，P0及A拟合/重载模型成本没有重复计账。
-结算后新增的离线计时仍pending，活动模型期间不结算。B64客户端按动态模型load/predict两个phase
+2026-11-05在实际模型空闲后，新增13条离线计时共159.4CPU秒另行结算一次，见
+`idle-cost-settlement-v2.json`；此前计时和模型/客户端成本未重复收取。
+此后新增离线计时仍pending，活动模型期间不结算。B64客户端按动态模型load/predict两个phase
 扣除已计部分后记录残余，避免另一卡评测phase污染归属；未测作者工作记unknown，远端硬件/货币成本未测。
 GPU单元测试未单独测量GPU-hours，不能计为0。P0拟合/重载及C的native CPU已经记录，
 后续idle结算须从整客户端成本中扣除这些已计部分；不得重复计账。
-训练器进程内时钟不包含解释器/依赖导入及CUDA admission，这部分尚未单独计量，不填0。
+P0/A训练器进程内时钟之外的解释器/依赖导入及CUDA admission未单独计量，不填0。
+新B拟合owner测量整子进程CPU，并在终态扣除其本臂已计native CPU后仅记录客户端残余。
 实际SDK路径、安装版本和已核对的forward/导出实现另存 `runtime-environment.json`。
 本轮没有改变 Product 的公开 Schema/API、权限或 Canonical 行为；没有推送或合并。
 
