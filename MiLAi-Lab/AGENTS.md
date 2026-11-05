@@ -1,4 +1,95 @@
-# LIVE A100 EXECUTION v18: 2026-11-06
+# LIVE A100 EXECUTION v19: 2026-11-06
+
+Full goal ACTIVE/incomplete. Current/previous goal turns PROGRESS. Latest:
+data/manifests/a100-development-progress-20261106-v19.json and execution doc.
+No SHA/checksums/content fingerprints, subagents, services, second ledger, resets,
+remote writes or model/first-outcome retries. GPUs0/1/product unchanged.
+
+ONLY LIVE HTTP job is NOW new32-view_cache_incremental-owner.json:
+parent3591596 / child3591601 / exec4286, 8/320 actually closed at v19.
+Revalidate actual /proc/owner/native driver; no local learned GPU model. No other
+HTTP/native control/Store-clone intervention or offline CPU settlement while live.
+After actual terminal FIRST bind_d_frozen_method.py new32-view_cache_incremental;
+await; THEN audit_d_closed_sdk_states.py new32-view_cache_incremental. Whole320
+answer/View/Source/role/time/update/SDK/effects/cost closure required. New32 E3-u32
+320 NOTEXECUTED, manually serial after incremental closure. No automatic queue.
+Do not mutate runtime-d-update32/config/data/Host settings or restart lost handles.
+
+NEW32 ORIGINAL CACHE BASELINE ALL320 NOW FULLY CLOSED, NOT A PREFIX RESULT:
+d-update32/reviews/new32-view_cache/answer-review-closeout-v1.json
+C67/Q65/W121/F67; material84complete/222partial/14insufficient; jointC+complete53.
+Source-family macro success .209375 across32TRAIN-exposed generated families,
+2flowsx5requests each, not320independent/unseen tasks. All128mid/final updated-cut
+positions completeanswer0/materialcomplete0; no causal/adoption inference yet.
+Both baselineowner/driver terminal, exec4305 exited0, child2956519 gone; NEVER
+repoll/restart this completed job. WholeCPU571.723529 (native{} + clientresidual),
+wall9935.951884s,0localmodelGPU,480HTTP/2934163knownHosttokens/newunknown0/0,
+sharedgenerationcalls480 alreadyoriginalledger once. Remote hardware/currency unknown.
+
+After actual terminal mandatory full bind THEN full SDK audit both passed.
+All320 actual inputs/failures,883rawranges inclK and163Viewoccurrences bound.
+Entire prefix290recorddicts/providerinputs/answers/Sourcebindings AND154Viewrecords
+literally equal full320; reused290original judgments with all anchors/Fmask
+revalidated. All320wholeanswers and42distinctViews163occurrences/K sourceauthor
+reviewed (notblind/independent). Faithful quoting does not certify embedded claims,
+current coverage or Host use. Failed262View quotes old Host261's unsupported
+Boards-of-Canada preference; role remains assistant, failedView notlaterK.
+Full SDK:5578oldSourcevalue turn-comparisons preserved,253newfinalassistantSources,
+SaverEq/applicationpreserved,36Viewchangedturns,0auditstatewrites/modelcalls.
+Use immutable per-turn closedafter, never a later mutable live bank. Historical
+failed offline audit retained; no model/tool outcome rerun.
+
+Actual-operation-audit-v1.json passed all724selectedIDs in actual offered menus:
+138SEARCH/372READ/155selectedHANDOFF/59REFRESH(build),0USE_VIEW;676operationresults
+(107HANDOFF).225currentraw occurrences=118assistant107user/161exogenous64endogenous.
+213of320no current Host query;107queryingturns and45have no current exogenous RAW
+range, which does not rule out exogenous content in a current View. Don't attribute
+every autonomous failure to the internal controller. Host314 promotes assistant
+medical interpretation to doctor and denies completed transfer despite preserved
+Source roles. No new fit, menu expansion or method adoption from baseline alone.
+
+CURRENT QUALITY WORK: incremental not yet bound/reviewed at v19. Bind actual closed
+complete-family prefixes separately with bind_d_closed_prefix.py JOB COUNT; positive
+COUNT%10=0. Review wholeanswers and allactualViews with inspect_d_review.py PREFIX
+INDICES --compact --since-previous --compact-view-text. Fully reviewed baseline may
+be literal body/role/origin dedup context via --reuse-reviewed-condition
+new32-view_cache, but never copy cross-method grades. Use d_review_helpers.add/review
+under actual condition/actual anchor coordinates. Author own quotes are required in
+originals requests2-5; assistant paraphrase not own testimony. F onlyactualexecution
+failure, no converting engineering-completed nonanswers to F. New prefix/full
+extensions must compare ENTIRE earlier recorddicts/Views literally, then revalidate
+all anchors/Fmask. Never grade unseen/truncated output or stored-but-undelivered facts.
+
+CPU receipts1..15 settledonce. Receipt15 paid30closed offline timers87.78CPU at
+actual idle after baseline full quality/SDK/operations closure, before incremental
+launch. Earlier/native/model/client not rebilled; token counters/limits unchanged.
+No pending measured timers at v19; author/untimedCPUunknownnot0. Never GNU-wrap
+timer-scanning writers/settlement. No settlement while current worker lives.
+Historicalgenerationunknown16/embedding1 retained; baseline newunknown0/0.
+
+REMAINING CONTROLS/REPAIRS UNEXECUTED (see v18/v17 below):
+Actual K first8baseline3eligible/5ineligible donor proofs only; other donors/native
+lookup/fullsamebefore3methodHostframe/readouts pending. A05firstrev1/fullK7refs and
+realstoredrevision mismatch preserved. NEVER given-readoutwithK/fakecleanK.
+Old-outputsearchability protocol/donorfirst8 frozen7eligible/A02initialfailed;
+0nativecontrols/readouts. Need narrow adapter unioning proven prior final Host-output
+refs into BOTH native search ranking and EvidenceOperations acquisition/feed, idle
+Store/frame/Klookup checks and first conditionalhostreadouts after formal3jobs.
+Keep full actualHosthistory, Source values/roles/revisions/visibility/clocks/target;
+tests EXTRA tool searchability, not deletion of prior Host knowledge. No gold filter.
+Old57READcoverage5/57;52nativebindings reserved, notexecuted, existingfunctional5READ
++52=57cap. Commonfixed_context reads4 continuation2/actualremainingbudgets; original
+suppliedrequest/noK given-readout. Sevenreservedactualacquiredpools/rulesvsE3handoff-only
+max14readouts;33already→max47of48/18of24states. Retain139old/8functional/C8firstoutcomes,
+no cap reset/menu expansion/fitting. Execute boundedserial after formal3new32jobs.
+
+Fullscope still includes new32incremental/E3two320, pairedSource-family comparison,
+abovecontrols/repairs; finalcandidate/checkpoint/scoring/budget/Nfreeze BEFOREheld256
+QASPERpapers/old64querycontents; LME451Reader/Judge/Mem2Act400 actualown-policy/
+full-input/exposurework;allcosts/stats/paperfigures. Old8three80/M3allseed closures
+retained. Native test unopened, heldsemanticcontentsunreviewed/unexported. Goal NOT complete.
+
+# HISTORICAL A100 EXECUTION v18: 2026-11-06
 
 Full goal ACTIVE/incomplete. Current/previous turns PROGRESS. Latest:
 data/manifests/a100-development-progress-20261106-v18.json and execution doc.
