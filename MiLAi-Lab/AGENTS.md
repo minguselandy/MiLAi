@@ -1,4 +1,68 @@
-# LIVE A100 EXECUTION v20: 2026-11-06
+# LIVE A100 EXECUTION v21: 2026-11-06
+
+Full goal ACTIVE/incomplete. Current/previous turns PROGRESS. Latest:
+data/manifests/a100-development-progress-20261106-v21.json and execution doc.
+No SHA/checksums/content fingerprints, subagents, new services, second ledger,
+reset/refund, remote write or model/first-outcome retry. GPUs0/1/Product unchanged.
+
+ONLY LIVE actual experiment HTTP job new32-view_cache_incremental-owner.json:
+parent3591596 / child3591601 / exec4286;119/320closed at v21. Revalidate actual
+/proc/owner/native. No learned local GPU. No real captured-case intervention,
+Store clone, extra model/HTTP worker or offline CPU settlement while live.
+Temporary-fixture scripted/noexternalHTTP tests without actual Store/ledger access
+are allowed (v20 mechanics only). Never restart lost handles or mutate frozen
+runtime-d-update32/config/data/Host settings. At actual terminal FIRST full
+bind_d_frozen_method.py new32-view_cache_incremental; await; THEN full
+audit_d_closed_sdk_states.py new32-view_cache_incremental. Full320 quality/Views/
+SDK/effects/operations/costs closure before manually serial new32-E3u32 320.
+
+INCREMENTAL PREFIX80 WHOLE ANSWERS/ALL VIEWS SOURCE REVIEW CLOSED:
+d-update32/reviews/new32-view_cache_incremental-prefix-0080/answer-review-closeout-v1.json
+C22/Q7/W27/F24;material18complete/58partial/4insufficient,jointC+complete14.
+Eight correlated TRAIN-exposed generated families, not80independent/unseen tasks
+or full320/adoption. All2actualViews/10occurrences includingK faithful literal
+with original role/revision/clock metadata. Full7node B03View reviewed; all5entire
+received copies literally equal. Faithfulness is not current update coverage.
+All32mid/final positions materialcomplete0;midC1(A02askednamesunchanged),finalC0.
+
+ENTIREfirst20recorddicts/providerinputs/answers/Sourcebindings and5Viewrecords
+literal equal prefix80 before original20judgment reuse/allanchors/Fmaskrevalidation.
+Baseline is literal body/role/origin dedup context only, never cross-method grades.
+Current80decisions saved. Next index80memops_B05 contentinitial. Extend at actual
+closed complete-family count positive%10=0 into a separate folder; compare ENTIRE
+80records/10Views before copying/revalidating. Inspector --compact --since-previous
+--compact-view-text --reuse-reviewed-condition new32-view_cache. Read full answers;
+never grade unseen/truncated output, stored-only or failed-turn material as later K.
+
+Important judgments: A16 actualfailedinitial F versus current-memory nonanswers
+Q/insufficient; policy_handoff is not privacy access denial. A29 original correction
+alone can contain full72/74/100/WriteInPT support without every designated goldID;
+correct final72 still misses78scope reversal/Pedro85. A33 incorrectly turns measured
+5ft11 into stale belief and derives nonexistent measured5ft10; laterno-query persists.
+B03 original Tom report itself witnesses both manager and David title; completeness
+does not require a unique titleSource. Current/additive duty and Priya move still
+unreceived after arrivals, even though initial View is literal faithful.
+
+Prefix80alreadyoriginalledger136HTTP/785260knownHosttokens/newunknown0/0;
+59toolattempts59returns1error,229controlsteps226operations127READ11materialrejections
+4knownrefreads;77currentraw2Views. WholeownerCPU/SDK/effects remainpending.
+Receipts1..15settledonce;15closedoffline timers28.97CPU pending at v21; author/
+untimedCPUunknownnot0. IncludesfailedRuff. Oneclose-prefix80 timer is GNUverbose
+format; write_progress_v21.py supports both formats without overwriting it.
+Futureidle settlement must also parse it; NEVER GNU-wrap timer-scanning writers
+or settlement. Earlier native/model/client/closedreceipts not rebilled.
+
+v20optional excludedSource acquisition adapter+24isolatedfixture checks committed;
+active frozenruntime lacks option, actualK/old-outputcontrols0. First8incremental
+Kdonors onlyB03eligible/A16initialfailed/6noView; baselineA05/A33/B03eligible.
+Native actualbefore/fullframe/Klookup/otherE3donors and conditionalcontrols pending.
+Never given-readoutwithK or substitute latercleaner A05View. Reserved52READ/7pools
+notexecuted. Fullplan remaining includes two320/fullpairedfamily comparisons,
+controls/repairs; finalcandidate/checkpoint/scoring/budget/Nfreeze BEFOREheld256
+papers/old64querycontents; LME451/Mem2Act400 own-policy/full-input/exposurework;
+allcosts/stats/paperfigures. Testsplit/heldsemanticcontents unopened. GoalNOTcomplete.
+
+# HISTORICAL A100 EXECUTION v20: 2026-11-06
 
 Full goal ACTIVE/incomplete. Current/previous turns PROGRESS. Latest:
 data/manifests/a100-development-progress-20261106-v20.json and execution doc.
