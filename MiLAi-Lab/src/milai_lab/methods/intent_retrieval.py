@@ -111,6 +111,7 @@ class IntentRetrievalMemory(FunctionalEditMemory):
                  control_intervention: FirstActionIntervention | None = None,
                  control_delivery_selection: bool = False,
                  control_exclude_given_requests: bool = False,
+                 control_excluded_source_refs: tuple[str, ...] = (),
                  control_source_ranges: SourceRangeBudget | None = None,
                  return_envelope: Callable[[dict[str, Any]], Any] | None = None,
                  **kwargs: Any) -> None:
@@ -124,11 +125,14 @@ class IntentRetrievalMemory(FunctionalEditMemory):
         self.control_intervention = control_intervention
         self.control_delivery_selection = control_delivery_selection
         self.control_exclude_given_requests = control_exclude_given_requests
+        self.control_excluded_source_refs = control_excluded_source_refs
         self.control_source_ranges = control_source_ranges
         self.return_envelope = return_envelope
         self.policy["retrieval_interface"] = retrieval_interface
         if control_exclude_given_requests:
             self.policy["exclude_given_requests"] = True
+        if control_excluded_source_refs:
+            self.policy["excluded_source_refs"] = list(control_excluded_source_refs)
         if control_source_ranges is not None:
             self.policy["source_range_tokens"] = control_source_ranges.tokens
 
@@ -294,7 +298,13 @@ class IntentRetrievalMemory(FunctionalEditMemory):
             "known_evidence": project_packs(known, list(range(len(known))))},
             budget={"max_return_tokens": return_limit}))
 
-        excluded: tuple[str, ...] = (bound["source_ref"],)
+        # An explicit acquisition scope leaves stored Sources and prior K intact.
+        # Both ranking and Source observations below use this same boundary.
+        excluded: tuple[str, ...] = (bound["source_ref"], *self.control_excluded_source_refs)
+        if self.control_excluded_source_refs:
+            self.control_record({"event": "retrieval_declared_source_exclusion",
+                "excluded_source_refs": list(self.control_excluded_source_refs),
+                "scope": "Source acquisition only; stored values, roles and prior K unchanged."})
         if self.control_exclude_given_requests:
             # Explicit experiment queries remain in the audit Store, but are not
             # domain evidence. Ordinary questions, including mixed assertions,

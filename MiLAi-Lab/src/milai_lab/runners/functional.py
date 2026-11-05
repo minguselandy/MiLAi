@@ -2953,6 +2953,8 @@ def message(
                             "delivery_selection", False)
                         memory_options["control_exclude_given_requests"] = control.get(
                             "exclude_given_requests", False)
+                        memory_options["control_excluded_source_refs"] = tuple(control.get(
+                            "excluded_source_refs", ()))
                         if control.get("source_range_tokens") is not None:
                             from milai_lab.methods.source_ranges import SourceRangeBudget
 

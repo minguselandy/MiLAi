@@ -1,4 +1,102 @@
-# LIVE A100 EXECUTION v19: 2026-11-06
+# LIVE A100 EXECUTION v20: 2026-11-06
+
+Full goal ACTIVE/incomplete. Current/previous turns PROGRESS. Latest:
+data/manifests/a100-development-progress-20261106-v20.json and execution doc.
+No SHA/checksums/content fingerprints, subagents, new services, second experiment
+ledger, resets, remote writes or model/first-outcome retries. GPUs0/1/Product unchanged.
+
+ONLY LIVE actual experiment HTTP job new32-view_cache_incremental-owner.json:
+parent3591596 / child3591601 / exec4286,78/320closed at v20. Revalidate actual
+/proc/owner/native driver. No local learned GPU. No other real experiment model/
+HTTP/native captured-case intervention/Store clone or offline CPU settlement while
+live. Isolated temporary-fixture tests with scripted/noexternal-model-HTTP policies,
+no original ledger/real experiment Store access can run; their measured CPU stays
+pending. Never restart lost handles. After actual terminal FIRST
+bind_d_frozen_method.py new32-view_cache_incremental; await; THEN
+audit_d_closed_sdk_states.py new32-view_cache_incremental. Full320 quality/SDK/
+effects/cost closure required; frozennew32-E3u32 320 NOTEXECUTED, manually serial.
+Do not mutate runtime-d-update32/config/data/Host settings during formal jobs.
+
+INCREMENTAL PREFIX20 WHOLE ANSWERS/ALL VIEWS SOURCE REVIEW CLOSED:
+d-update32/reviews/new32-view_cache_incremental-prefix-0020/answer-review-closeout-v1.json
+C8/Q2/W6/F4; material6complete14partial,joint4;2correlatedTRAIN-exposedA01/A02
+families, not20independent/unseen tasks/full320/adoption. OneactualView5occurrences/K
+faithful literal with role/clock metadata. Entire first10recorddicts/providerinputs/
+answers/Sourcebindings AND5Viewrecords literal equal prefix20; same-method original
+judgments reused with all anchors/Fmask revalidated. Baseline used only literal
+body/role/origin dedup, NO cross-method grade copying.
+30HTTP/162928known/newunknown0/0 alreadyoriginalledger;10toolcalls,45steps/operations,
+25READ,16currentraw/1View. Full ownerCPU/SDK/effects pending.
+Next index20A05contentinitial. Bind a larger actually closed complete-family prefix
+(COUNTpositive%10=0) in a separate folder; ENTIRE20records/5Views must literally
+reconcile before copying/revalidating20judgments. Full incremental folder absent
+until terminal. Use inspect_d_review.py PREFIX INDICES --compact --since-previous
+--compact-view-text --reuse-reviewed-condition new32-view_cache. All answers full,
+never grade unseen/truncated output or stored-only facts. Explicit own quotes in
+originals requests2-5; assistant recap not user testimony. Fonlyactualexecfailure.
+
+OPTIONAL DECLARED SOURCE ACQUISITION SCOPE IMPLEMENTED, REAL CONTROLS STILL0:
+Current editable Lab src now accepts IntentRetrievalMemory.control_excluded_source_refs
+and memory_control.excluded_source_refs via functional/STATE assembly. Defaultempty;
+union declared IDs with current bound Source exclusion for BOTH native Source ranking
+and EvidenceOperations acquisition/observations. Record explicit scope in admission
+policy/trace. Stored Source values/roles/visibility and priorK/cachedViews not revoked.
+This is an acquisition control, not a privacy revoke or deletion. Actual donor protocol
+requires no selected old output bound by a retained cache View; native equivalence
+and K validation remain required before real captured-case admission.
+Files: methods/intent_retrieval.py, runners/functional.py, runners/state_memory.py,
+tests/unit/test_intent_retrieval.py. Public Host tool schema/permissions/Product/
+dependencies unchanged. Active runtime-d-update32 DOES NOT contain new option;
+formal jobs continue unchanged. Future controls need separately frozen runtime/config.
+
+24targeted isolated fixture tests PASS (2new conditions), syntax4files/Ruffv2/
+packageDAG/toolsinventory PASS. Fixtures verify oldassistant ID absent from Source
+observations/rankedranges/delivery, same-role fixtureassistant proposal/user retained,
+all3originalSourcevalues unchanged. No actualexternalmodel HTTP, originalledger write
+or actualexperimentStoreclone from these checks. Ruffv1 E501101charline failed,
+shortened and v2passed; failedtimer retained. Existing deprecation warnings retained,
+no dependency upgrade/fullrepo CI/remoteverification claim. Implementation report:
+d-update32/old-output-searchability-implementation-v1.json. These are mechanics,
+not actual captured-before/K/Host readout/quality/control-factor completion.
+
+Actual K first8incremental donor cells now ALL collected:
+known-View-incremental-donor-first8-v1.json: onlyB03eligible(initialView+completed
+finalwire+immutableprefinalinventory), A16initialfailed, A01/A02/A05/A14/A29/A33no
+initialreceivedView, allretained. No laterturn/family/quality replacement. Baseline
+A05/A33/B03eligible/5ineligible proof unchanged; otherE3donors/native lookup/full
+samebefore3methodHostcontrols pending. Keep A05baselinefirstrev1/fullK7refs and real
+storedrevision mismatch, never given-readoutwithK/picklastcompatibleView/fakecleanK.
+
+Old-output factor remains frozen first8same-sourcesbefore7eligible/A02failed;
+realcontrols/readouts0. New adapter fixture checks do not replace native actual
+beforeStore/fullproviderframe/Klookup validation, separate runtime freeze and first
+conditionalhost-readouts after formal3jobs. FullHosthistory/Source values/roles/
+visibility/clocks/target/budgets fixed; tests EXTRA tool searchability only.
+Old57READcoverage5/57;52legalnativebindings reserved, notexecuted; existingfunctional
+5READ+52=57cap. Sevenreservedactualacquiredpools/rulesvsE3handoff-only max14readouts;
+33already→max47of48/18of24states. Retain139old/8functional/C8firstoutcomes; no cap
+reset/menu expansion/extra fitting. Execute boundedserial after formal3new32jobs.
+
+Original cache new32all320 CLOSED (seev19), C67/Q65/W121/F67,material84/222/14,joint53;
+all128mid/final updated-cut completeanswer/material0. All42Views163occurrences,
+883rawranges/SDK5578oldSourcecomparisons/253newfinalassistant/SaverEq/application
+preserved.724selectedIDslegal;213no-queryturns; no sole-controller causal/adoption
+claim. Baselineexec4305terminal/child2956519gone; NEVER repoll/restart.
+Old8three80 and M3allseed reviews/stats closed and retained.
+
+Receipts1..15settledonce; v20new12closedtimers26.02CPU pending, no newer settlement
+whileworker lives. IncludesfailedRuff; native/model/client/earlierCPU not rebilled.
+Author/untimedCPUunknownnot0. Never GNU-wrap timer-scanning writers/settlement.
+Historicalgenerationunknown16/embedding1 retained, prefix20newunknown0/0;limitsunchanged.
+
+Remaining fullscope: incremental/E3two320/fullreviews/SDK/effects/costs/pairedfamily
+stats, actualK/old-output controls and52READ/7pool diagnostics; finalcandidate/
+checkpoint/scoring/budget/Nfreeze BEFOREheld256QASPERpapers/old64querycontents;
+LME451Reader/Judge/Mem2Act400 actualown-policy/full-input/exposurework;
+allcosts/stats/paperfigures. Benchmarktestsplit/heldsemanticcontents unopened.
+Goal NOT complete.
+
+# HISTORICAL A100 EXECUTION v19: 2026-11-06
 
 Post-v19 live review checkpoint: same child3591601/exec4286 verified actual config
 in /proc, native22/320closed. Separate new32-view_cache_incremental-prefix-0010

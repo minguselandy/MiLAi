@@ -78,6 +78,41 @@ def test_native_tool_call_query_only_and_rich_feedback(tmp_path):
         assert inputs[0]["state"]["task"]["query_time"] == ""
 
 
+@pytest.mark.parametrize("exclude_old_output", [False, True])
+def test_declared_source_scope_covers_search_and_observations_without_rewriting_sources(
+    tmp_path, exclude_old_output,
+):
+    with SqliteStore.from_conn_string(str(tmp_path / "db")) as store:
+        service = MemoryService(store, ("intent-test", "alice"), "alice", tmp_path / "lock",
+                                functional_contract="functional_v1")
+        user = service.capture_user("reference", "fact", "The Cedar code I reported is 4312.")
+        proposal_text = "We could review the Cedar code later; that is only a suggestion."
+        proposal = service.capture_assistant("reference", "proposal", proposal_text)
+        old_text = "My earlier answer said the Cedar code was 9999."
+        old = service.capture_assistant("host", "previous:final", old_text)
+        refs = [row["source_ref"] for row in [user, proposal, old]]
+        before = {ref: service.source(ref) for ref in refs}
+        cfg = context(service)
+        traces = []
+        memory = memory_at(service, control_record=traces.append,
+            control_excluded_source_refs=(old["source_ref"],) if exclude_old_output else ())
+        packet = memory.retrieve(cfg, "scope", RetrievalRequest(query="Cedar code"))
+        decisions = [t for t in traces if t.get("phase") == "decision_input"]
+        first = decisions[0]
+        observed_refs = {event["source_ref"] for event in first["before"]["new_events"]}
+        searched = decisions[1]
+        assert searched["before"]["last_result"]["status"] == "searched"
+        ranked_refs = {span["source_ref"] for material in searched["candidate_materials"]
+                       for span in material["source_ranges"]}
+        for visible in [observed_refs, ranked_refs]:
+            assert user["source_ref"] in visible and proposal["source_ref"] in visible
+            assert (old["source_ref"] not in visible) == exclude_old_output
+        delivered = json.dumps(packet["evidence"])
+        assert "4312" in delivered and proposal_text in delivered
+        assert (old_text not in delivered) == exclude_old_output
+        assert {ref: service.source(ref) for ref in refs} == before
+
+
 def test_delivered_reference_reopens_across_requests_and_checks_visibility(tmp_path):
     with SqliteStore.from_conn_string(str(tmp_path / "db")) as store:
         service = MemoryService(store, ("intent-test", "alice"), "alice", tmp_path / "lock",
