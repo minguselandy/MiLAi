@@ -1,4 +1,87 @@
-# LIVE A100 EXECUTION v14: 2026-11-06
+# LIVE A100 EXECUTION v15: 2026-11-06
+
+Full goal ACTIVE/incomplete. Previous/current turns PROGRESS. Latest:
+data/manifests/a100-development-progress-20261106-v15.json and execution doc.
+No SHA/checksums/content fingerprints, subagents, services, second ledger, resets,
+remote writes or model/first-outcome retries. GPUs0/1 unchanged. Product unchanged.
+
+ONLY LIVE HTTP job: new32-view_cache-owner.json, child2956519 / exec4305,
+119/320 actually closed at v15; revalidate /proc/owner/native driver. No local model GPU.
+No other HTTP or offline CPU settlement while live. Never restart for observation
+loss. After actual terminal FIRST bind_d_frozen_method.py new32-view_cache; await;
+THEN audit_d_closed_sdk_states.py new32-view_cache. All320 SDK/effects/full owner CPU
+and whole quality remain required. Othernew32 incremental/E3 320 each NOT EXECUTED,
+manual serial. Do not mutate runtime-d-update32/config/data while active.
+
+Prefix50 COMPLETE whole source review (not formal320 score):
+d-update32/reviews/new32-view_cache-prefix-0050/answer-review-closeout-v1.json
+C12/Q13/W16/F9; material9complete/33partial/8insufficient; jointC+complete6.
+5 TRAIN-exposed generated Source families x2flowsx5requests, not50unseen independent
+histories. Actual75HTTP/491235known/newunknown0/0 already billed once. 33toolcalls,
+123controlsteps/112operations/62READ/two material rejections. Whole owner CPU pending.
+All9unique literal Views45occurrences/K (A01originals5nodes;A05seven content revisions
+and one originals7nodes) fidelity manually reviewed; role/clock metadata preserved.
+Seven A05 content interpretations equal but refs/revisions remain distinct; not7facts.
+One offline raw-anchor capitalization typo fixed before saving, no model/tool replay.
+
+CURRENT REVIEW FOLDER new32-view_cache-prefix-0100:
+All100 actually closed positions bound (80engineeringCOMP/20FAIL,67Viewoccurrences/K).
+Whole first50 record dictionaries/providerinputs/answers/Sourcebindings AND45View
+occurrences literal equal prefix50; prior-prefix-review-reconciliation.json proves it.
+Reused original50 judgments and revalidated all anchors/Fmask. Current author file has
+indices0..59 saved: C14/Q16/W17/F13, material13complete/35partial/12insufficient;
+NOT full100/320 quality. Next index60 A33 contentinitial. Use
+inspect_d_review.py new32-view_cache-prefix-0100 INDICES --compact --since-previous
+--compact-view-text; d_review_helpers.py add/review same condition. Whole answers
+always printed. compact-view-text dedups only literally equal whole interpretation
+within a case; every ref/revision/metadata payload retained. No content fingerprint.
+Ten unique Views/46occurrences reviewed; remaining new prefix100 Views unreviewed.
+Failed58 one-node View verbatim quotes own no-score Host answer, raw companion binds
+endogenous assistant role/capture metadata. It supplies no requested score and is
+not proof no user score exists in Store. Failed55 had actual user72 but is not later
+completedK. Failed58 View is not final59 K. Preserve these exact boundaries.
+Next prefix/full extension must again reconcile complete earlier records/Views before
+copying author judgments, then revalidate anchors. Full terminal binding folder is
+new32-view_cache, still absent; do not replace full bind/SDK with prefix evidence.
+
+Actual K baseline first8 donor cells ALL collected:
+d-update32/known-View-baseline-donor-first8-v2.json (collector collect_d_known_view_cells.py).
+Eligible initial content receipt+completed-finalwire+pre-final inventory: A05/A33/B03.
+A02 firstinitialFAILED;A01/A14/A16/A29noactualinitialView. Retainall8cells;other donor
+methods pending. No later-turn/family replacement or outcome-grade filtering.
+A05 first selected refrev1, full Host K has7Viewrevisions; preserve actual mismatch,
+don't pick last compatible View/fakecleanK. Original final Sources absent from proposed
+pre-finalbanks. Nativeknownlookup/actual samebefore/full controlled Hostframe across
+3methods and host-readout NOT EXECUTED. NEVER given-readout with K. Preparation
+read-only, no original state/model/ledger writes. Final donor selection still pending.
+
+Role/time observations: A16 Host calls capture2026-11-05 the conversation date;
+A29 final query inserts as_of2026-11-05T17:50:00 earlier than later capture frontier.
+These are Host request/inference choices, not original report clocks or isolated
+causality proof. Separate no-query, wrong scope/cutoff, internal missing updated
+Source/old-question-answer recirculation, and unsupported Host inference. Do not
+patch active protocol or blindly retrain A/B from development outcomes.
+
+All old8 three80 reviews/comparison closed (see v14): C19/11/19, joint19/10/15;
+no old8 reruns/adoption. M3 all3 retained E3 fits/reviews/stats also closed,
+C40/33/29of64, seedmean34vsanchor25 conditional familyCI[3.125,25]pp; no bestseed.
+
+Receipts1..14 paid once; no newer settlement. v15 has10 closed timers pending8.61CPU
+(including old failed comparison and prefix binds/reconciliation); wait true idle.
+Native/model/load/client not rebilled; author/untimedCPU unknown,not0. Never GNU-wrap
+timer-scanning writers. Cumulative original ledger unknown generation16/embedding1
+retained, prefix50 newunknown0/0; Nonegenerationlimits unchanged, no resets/refunds.
+
+Full remaining: new32all3x320/fullsource/View/role/time/update/SDK/effect/cost reviews,
+actual samebeforeK controls, mechanism57/24 repairs as justified; finalcandidate/
+checkpoint/scoring/budget/N freeze BEFOREheld256QASPERpapers/old64querycontents;
+LME451 Reader/Judge/Mem2Act400 after actual own-policy full-input/exposure work,
+allcosts/stats/paperfigures. LME all200histories/451queries prior contact; oldfixedpath
+501/902stopped. Simple surrogate codec2/1drops not selected-Laya own-policy failures;
+don't cut budgets/projection to pass diagnostic. No vision probe repeat. Native test
+unopened;heldcontents unreviewed/unexported. Goal NOT complete.
+
+# HISTORICAL A100 EXECUTION v14: 2026-11-06
 
 Post-v14 live review checkpoint: same sole child2956519/exec4305, last actual65/320
 closed, still RUNNING. Pure read-only prefix binding created separate folder
