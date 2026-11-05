@@ -1,4 +1,93 @@
-# LIVE A100 EXECUTION v7: 2026-11-05
+# LIVE A100 EXECUTION v8: 2026-11-05
+
+Full goal ACTIVE and incomplete. Previous and current goal turns are PROGRESS.
+Latest: data/manifests/a100-development-progress-20261105-v8.json and execution doc.
+No SHA/checksums/content fingerprints, subagents, new services, second ledger,
+limit reset, remote writes, or retries of first model outcomes. GPUs 0/1 untouched.
+
+ONLY LIVE model HTTP job: task-dev64-method-e3-aggregate-u32-owner.json,
+child 971103 / exec 41152. Revalidate actual /proc, owner and native driver.
+GPU2 FP32, same64 actual initial Host snapshots, rich/Host thinking True.
+Never restart on observation timeout. After terminal: bind_task_dev64_method.py
+e3-aggregate-u32; await completion; THEN audit_task_dev64_state.py e3-aggregate-u32.
+No concurrent HTTP job or offline ledger settlement while this worker lives.
+
+E1, B0, B1 and anchor are CLOSED; never repoll/restart their old sessions.
+E1: 45 engineering COMPLETED /19 FAILED, 154 HTTP /622629 known tokens.
+B0: 59 engineering COMPLETED /5 FAILED, 139 HTTP /504911 known tokens.
+B1: 53 engineering COMPLETED /11 FAILED (7 truncated,4 malformed JSON),
+151 HTTP /580186 known tokens, new unknown usage0. B1 child719164/exec62348 closed.
+B1 actual final/failed-last inputs,408 literal Source ranges/0 unmatched and all64
+SDK states bound. Engineering completions are not semantic success.
+
+task-dev64/source-author-reviews.json now has ALL64 anchor, E1 and B0 full answers:
+anchor25C/11I/9Q/1W/15F/3U; E1=25C/13I/5Q/19F/2U;
+B0=33C/14I/9Q/5F/3U. ALL64 B1 answers still unreviewed; next B1 index0.
+E3 full source review follows execution. All failures and unresolved cases stay in64.
+inspect_dev64_method.py reuses only exact previously read anchor/E1 source pieces;
+it prints whole answers and every new received piece. No abbreviated-answer grading.
+
+task-dev64-paired-selection-progress.json: E1 vs anchor8 gains/8 losses,
+0pp descriptive95% family-bootstrap CI[-12.5,+12.5]. B0 vs either13 gains/5 losses,
++12.5pp CI[0,+25]. This is exposed development, one stochastic trajectory/seed0,
+not confirmation, adoption or isolated data-composition causality. Finish all5 methods.
+Source guides are post-exposure; implementation/source author is not blinded/independent.
+Clarifications3/8/56 use supported broad model/experiment/inspection scopes.
+Common sensitivity withholds C credit on those3 questions for EVERY method, keeping64:
+B0=30 vs25/25, +7.8125pp CI[-3.125,+20.3125]. Not a replacement primary metric.
+Source50 had three main levels plus an actual fourth AdditionalExperiment; earlier
+contradiction diagnosis corrected from full source, with prior guide preserved.
+No DEV facts/labels used for fitting. Original B fit files still have256 unknown answer pairs.
+
+Existing official score_qasper_readouts.py ran autonomous-host on the3 fully reviewed
+methods. task-dev64-closed3-native-agreement.json literal full-string F1:
+anchor.0774154/E1.0802133/B0.0947629. No extraction/unanswerable rewrite/failure repair;
+not task success, full native benchmark or native Evidence F1. All64 denominator retained.
+
+Anchor/E1/B0/B1 all256 closed Store/Saver/application states audited, including50 failures.
+Each preserves4343 initial Source values (4279 paper+64 task); world/application unchanged,
+Saver latest messages equal actual results. Final assistant Sources49/45/59/53 remain
+assistant outputs, not verified truth. No semantic-record writes. SDK audit scope is
+independent-paper behavior; D update correctness still requires actual lifecycle work.
+
+D native mechanism slice CLOSED: d-update32/old8-native-read-probe-closeout.json.
+9 actual post-REFRESH states from5 old backgrounds, not9 independent families.
+Original Cache policy stops at HANDOFF despite legal READs. Existing request-aware
+source_relevance nominated one captured READ per state; original frozen runtime replayed
+each once from the actual before, then HANDOFF, without prefix/model reexecution.
+All9 returned View+raw;0 material rejections;9 literal Source ranges;0 new model calls.
+Original Source values and View interpretations unchanged. Native project_packs compacts
+aliases/metadata and marks unopened support; locator/role/clock projection verified.
+Initial direct metadata comparison report retained; no read/model rerun to fix analysis.
+Raw roles3 user/6 assistant: lexical relevance is not user evidence or factual certification.
+No new Host answer or task gain. These states follow REFRESH, not clean/pending USE_VIEW.
+Optional incremental policy is NOT implemented/evaluated yet. Inspect old View/actual K,
+common builder/strong simple baseline reuse eligibility, then freeze3methods/2048/timing.
+Old8 full flows, same-information control and new32 formal comparison remain required.
+
+d-update32/source-reservation.json:32 new-to-D jointly TRAIN backgrounds,
+14Update+18TrajectoryOps, disjoint old8DEV. New32 body files not projected/opened for this
+reservation; existing training/source exposure disclosed. MemOps is generated benchmark
+dialogue, not naturally observed real-world data or independent confirmation. No held split
+reassignment. Reuse lawful reviewed cuts/roles, verify actual updates and irrelevant controls.
+
+Idle settlementv7 paid14 new closed timers59.9 CPU ONCE after B1+D probes, before E3.
+Earlier v6 paid27 timers15.05 once. B1 whole-child651.011565 CPU includes recorded
+predict446.139728/load8.718822; residual196.153015 recorded once. GPU job interval.786338h
+includes Host waits. D probes native compute already billed0, whole timers included in v7;
+copied prefix traces contain old vllm responses, not new calls. Later timers pending duringE3.
+Author/unmetered work remains unknown, not0. Original operational ledger only.
+
+Full remaining scope: B1/E3 all64 source review and complete5method/cost selection;
+actual D optional policy, old8 plus32 TRAIN flows and same-information comparison;
+mechanism-based57/24-state repairs as needed; warranted retained seeds1/2/scale;
+final candidate/checkpoint/scoring/budget freeze BEFORE held256 paper confirmation and
+old64 query confirmation; eligible LME451/Mem2Act400; all costs/paper figures.
+Old A-v2 complete15/15 and B old32 complete13/13 stay authoritative; later accidental A
+repeat never primary, all paid cost retained. C retained learned1/8 vs simple4/8 stays negative.
+Held confirmation content remains unexported/unreviewed; native test unopened. Do not complete.
+
+# HISTORICAL A100 EXECUTION v7: 2026-11-05
 
 Full goal ACTIVE/incomplete. Latest data/manifests/a100-development-progress-20261105-v7.json
 and docs/MILAI_A100_DEVELOPMENT_EXECUTION_20261104.md. No SHA/content fingerprints,
