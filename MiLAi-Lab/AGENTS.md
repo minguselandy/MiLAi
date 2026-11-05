@@ -1,4 +1,87 @@
-# LIVE A100 EXECUTION v15: 2026-11-06
+# LIVE A100 EXECUTION v16: 2026-11-06
+
+Full goal ACTIVE/incomplete. Previous/current goal turns PROGRESS. Latest:
+data/manifests/a100-development-progress-20261106-v16.json and execution doc.
+No SHA/checksums/content fingerprints, subagents, services, second ledger, resets,
+remote writes or model/first-outcome retries. GPUs0/1 unchanged, product unchanged.
+
+ONLY LIVE HTTP job remains new32-view_cache-owner.json, child2956519 / exec4305.
+174/320 actually closed at v16; revalidate /proc/owner/native driver. No local model
+GPU. No other HTTP or offline CPU settlement while live. Never restart lost handles.
+After actual terminal FIRST bind_d_frozen_method.py new32-view_cache; await; THEN
+audit_d_closed_sdk_states.py new32-view_cache. Full320 whole quality/SDK/effects/CPU
+closure required. Other new32 incremental/E3 320 each NOT EXECUTED, manual serial.
+Do not mutate runtime-d-update32/config/data while formal job lives.
+
+PREFIX100 ALL WHOLE ANSWERS/VIEWS SOURCE REVIEW CLOSED:
+d-update32/reviews/new32-view_cache-prefix-0100/answer-review-closeout-v1.json
+C23/Q25/W32/F20, material25complete/63partial/12insufficient; jointC+complete17.
+10 correlated TRAIN-exposed generated Source families, not100unseen independent
+tasks or the full320score.155HTTP/966557knownHosttokens/newunknown0/0 already paid
+once.69toolcalls,267controlsteps/248operations/136READ/6material rejections;
+72current raw/15current View receipts. Full owner CPU/SDK/effects still pending.
+All15unique extractive Views67occurrences/K reviewed faithful literal with original
+role/clock metadata. This does not certify quoted claims as true. Failed68 View
+contains2 wrong prior Host height classifications quoted as assistant; embedded
+Source-claim error explicitly recorded. No new own measurement delivered; failed68
+View not later69K. Failed58 similarly quotes old no-score Host answer. Keep original
+Source values and actual raw/View/currentK/failed-last boundaries distinct.
+
+CURRENT REVIEW FOLDER new32-view_cache-prefix-0150:
+All150 closed positions bound119engineeringCOMP/31FAIL,89Viewoccurrences/K.
+Entire first100 record dictionaries/provider inputs/answers/Sourcebindings AND67
+View occurrences literal equal prefix100; prior-prefix-review-reconciliation.json
+proves reuse.100 original judgments copied with all anchors/Fmask revalidated.
+Current author file indices0..99 only. Next index100 B21 contentinitial. Use
+inspect_d_review.py new32-view_cache-prefix-0150 INDICES --compact --since-previous
+--compact-view-text; d_review_helpers.py add/review same condition. Whole answers
+always printed. Dedup only full literal interpretation equality; all refs/revisions/
+metadata kept. No fingerprints. New22 View occurrences and50answers unreviewed.
+Future prefix/full extension must literally reconcile earlier complete records and
+Views before copying judgments, then revalidate anchors. Final whole bind folder
+new32-view_cache remains absent, don't replace full bind/SDK with prefix evidence.
+
+Actual K baseline first8 donor proofs CLOSED, not control execution:
+known-View-baseline-donor-first8-v2.json: A05/A33/B03 eligible initial content
+View+completed-finalwire+immutable pre-final inventory; A02firstFAILED;
+A01/A14/A16/A29noinitialView. All8 cells retained, other donor methods pending.
+A05 firstrefrev1/fullK7revisions; keep actual revision/scope mismatch, no picking
+last compatible View or fake clean K. Original final Sources absent from proposed
+prefinal banks. Native known lookup/same actual before/full controlled Host frame
+across3methods/host-readout NOT EXECUTED. NEVER given-readout with K.
+
+IMPORTANT remaining plan scope clarified from original9.3: old Host-output
+recirculation is currently observational/traced, NOT a completed matched toggle of
+whether old Host outputs are searchable. Prepare separately frozen controlled
+diagnostic with actual prior-output provenance, original Source roles/values and
+target/full Host frame fixed; retain failures/costs and report conditional versus
+autonomous separately. Do not mark all D factors complete from observed categories.
+No model/ledger intervention while current formal worker lives.
+Also reconcile actual binding execution coverage of old57 TRAIN missing READ and
+up-to24 acquired-set mechanism repairs per plan; B64/C8/new32 do not automatically
+close those native bindings. No blind A/B scaling or active protocol patch.
+
+All old8 three80 reviews/comparison closed:C19/11/19,joint19/10/15; no reruns/adoption.
+M3 all3retained E3 fits/reviews/stats closed:C40/33/29of64,seedmean34vsanchor25,
+conditionalfamilyCI[3.125,25]pp; no bestseed/fullchain/population RNG claim.
+
+CPU receipts1..14 paid once, no newer settlement. v16 has13 closed timers pending
+14.43CPU (previous10+closeprefix100+bindprefix150+reconcile100to150). Wait true idle;
+native/model/load/client not rebilled. Author/untimed CPU unknown,not0. Never GNU-wrap
+timer-scanning writers. Cumulative historicalunknown generation16/embedding1 retained;
+prefix100newunknown0/0. None generation limits unchanged, no resets/refunds.
+
+Remaining full scope: allnew32three320/fullquality/View/role/time/update/SDK/effect/
+costs, native actualK and controlled recirculation factors, justified57/24 repairs;
+final candidate/checkpoint/scoring/budget/N freeze BEFOREheld256QASPERpapers/old64
+querycontents; LME451Reader/Judge/Mem2Act400 after actual own-policy full-input/
+exposure work, allcosts/stats/paperfigures. LME all200histories/451queries prior
+contact; oldfixedpaths501/902 stopped. Simple surrogate codec2/1drops not actual
+selected-Laya own-policy failures; don't cut budgets/projection to pass diagnostic.
+No vision probe repeat. Native test unopened,heldcontentsunreviewed/unexported.
+Goal NOT complete.
+
+# HISTORICAL A100 EXECUTION v15: 2026-11-06
 
 Full goal ACTIVE/incomplete. Previous/current turns PROGRESS. Latest:
 data/manifests/a100-development-progress-20261106-v15.json and execution doc.
