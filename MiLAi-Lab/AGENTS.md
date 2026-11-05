@@ -1,4 +1,85 @@
-# LIVE A100 EXECUTION v12: 2026-11-06
+# LIVE A100 EXECUTION v13: 2026-11-06
+
+Full goal ACTIVE/incomplete. This and previous turns are PROGRESS.
+Latest data/manifests/a100-development-progress-20261106-v13.json and execution doc.
+No SHA/checksums/content fingerprints, subagents, new services, second ledger,
+limit resets, remote writes or model/first-outcome retries. GPUs0/1 unchanged.
+
+ONLY LIVE HTTP job: d-update32/new32-view_cache-owner.json,
+child2956519 / exec4305. Native 320 planned, 15 closed at v13; revalidate actual
+/proc/owner/driver, never restart for observation loss. Simple cache, no local learned
+GPU worker. Frozen rich/thinkingTrue/extractive/return2048/control8/reads8/calls24.
+No other HTTP or offline CPU settlement while live. After actual terminal FIRST
+bind_d_frozen_method.py new32-view_cache; await; THEN audit_d_closed_sdk_states.py
+new32-view_cache. Other new32 incremental/E3 320 each NOT EXECUTED, manual serial.
+
+Both old8 new jobs CLOSED. Never repoll/restart exec22180 or exec62075.
+old8-view_cache_incremental: all80 answers reviewed C11/Q32/W16/F21,
+material complete17/partial59/insufficient4. Original unchanged cache19C/80 reused,
+not rerun/rebilled. Source author is implementation author, not independent/blind.
+All5 unique extractive Views/21 occurrences/147 node+metadata bindings manually
+reviewed faithful literal with original roles/clocks. This is not current coverage.
+All80 immutable SDK states audited, old Sources/world/application preserved,
+59 new final outputs stay assistant, Saver equal, 10 View changed turns.
+Current trace: 24SEARCH/94READ/14REFRESH build/38HANDOFF decisions(34 results),
+0USE_VIEW; all170 selected IDs legal. 54/80 no Host retrieve;9/26 retrieving turns
+have no current exogenous raw range. Current59 raw=32assistant/27user,
+40exogenous/19endogenous. Host unsupported inference also occurs with complete K.
+Files d-update32/reviews/old8-view_cache_incremental/{answer-review-closeout-v1,
+view-author-decisions-v1,actual-operation-audit-v1,SDK-state-audit}.json.
+
+old8-e3-aggregate-u32: all80 closed60 engineeringCOMP/20FAIL,110HTTP/708416known/
+newunknown0. WholeCPU331.829985=native/load153.670087696+residual178.159897304,
+paid once; localGPU2 job interval .746116064h includes Host wait, not activeCUDA.
+All80 actual inputs/542 raw ranges roles/clocks bound; zero View receipts.
+All80 SDK states audited, old Sources/world/application unchanged,60 finalassistant
+Sources/Saver equal,0 View changed turns. Current actions27SEARCH/154READ/4HANDOFF,
+57 no-query turns. Whole answer review ONLY indices0..39 saved C13/Q8/W12/F7,
+NOT full80 score. Next index40 D25 contentinitial. Use inspect_d_review.py
+old8-e3-aggregate-u32 INDICES --compact --since-previous
+--reuse-reviewed-condition old8-view_cache_incremental. Bodies omitted only on full
+literal equality to already reviewed Sources, roles/origin kept; whole answers printed.
+d_review_helpers.py add/review persists sequential raw/View anchors and actual Fmask.
+No grade inference from engineering completion, native F1, K presence or tool counts.
+One offline anchor lowercase typo fixed before saving, no model retry.
+
+Mechanism: no-query after arrival, internal selection missing updated Source and
+recirculating own questions/old answers, and Host inference beyond received evidence
+are separate. E3 seven-read actual call still missed new Karen phone. Actual Host
+queries/endogenous histories differ across methods; not isolated controller causality.
+Do not patch active protocol or adopt incremental based on partial/perceived mechanism.
+Source Store presence does not give Host visibility. Failed-turn View is not later K.
+
+Same-before old View K controls still required from first8 new TRAIN families:
+A01/A02/A05/A14/A16/A29/A33/B03. First actual initial content View receipt with
+completed-final wire proof; max1/family, retain missing cells. Copy identical actual
+before/full Host frame to3 methods; real delivered refs/native lookup. host-readout,
+NEVER given-readout with K. No new HTTP while full job lives. New32 has historical
+TRAIN/source exposure and generated MemOps dialogue, not unseen/natural confirmation.
+
+M3 all retained fixedu32 E3 fits/Host reviews/stats CLOSED, no further reruns/seeds:
+C40/33/29 of64, seedmean34 vs anchor25, conditional familyCI[3.125,25]pp.
+Common3/8/56 sensitivity mean32vs25 CI[.520833,21.354167]pp. Same64 families,
+not192 independent Sources/fullchain seeds/population training RNG. No bestseed adoption.
+Original A/B/C negative results retained; no blind scale/answer-first/menu expansion.
+
+CPU receipts1..14 settled once. v14=5 closedtimers6.76CPU at true idle after bothold8/
+binding/SDK and before new32. Native/model/load/client costs not rebilled. Future
+timers pending while Host lives; author/untimed CPU unknown, not0. Never GNU-wrap
+timer-scanning progress/settlement writers. Failed offline work retained, no rerun.
+
+Remaining full scope: old8 E3 remaining40 reviews then paired-family/flow/stage/cost;
+new32 full3x320 Host and allSource/View/role/time/update/SDK/effect/cost audits plus
+actual K controls; mechanism57/24 repairs as justified; final candidate/checkpoint/
+scoring/budget/N freeze BEFORE held256 QASPER papers + old64 query contents;
+LME451 Reader/Judge/Mem2Act400 actual own-policy full-input/exposure audit and full
+evaluation, costs/statistics/paper figures. LME all200 histories and451 public queries
+previously contacted; old fixedpaths501/902 stopped. Simple surrogate codec2/1drops
+are not actual learned-policy failures; don't cut budgets/projection to pass diagnostic.
+No repeat vision probe. Held contents unreviewed/unexported; native test unopened.
+Goal is NOT complete.
+
+# HISTORICAL A100 EXECUTION v12: 2026-11-06
 
 Full goal ACTIVE/incomplete. Previous/currentturnsPROGRESS. Latest:
 data/manifests/a100-development-progress-20261106-v12.json andexecutiondoc.
