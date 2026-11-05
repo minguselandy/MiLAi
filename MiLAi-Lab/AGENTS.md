@@ -1,4 +1,79 @@
-# LIVE A100 EXECUTION v16: 2026-11-06
+# LIVE A100 EXECUTION v17: 2026-11-06
+
+Full goal ACTIVE/incomplete. Current/previous goal turns PROGRESS. Latest:
+data/manifests/a100-development-progress-20261106-v17.json and execution doc.
+No SHA/checksums/content fingerprints, subagents, services, second ledger, resets,
+remote writes or model/first-outcome retries. GPUs0/1 and product unchanged.
+
+ONLY LIVE HTTP job new32-view_cache-owner.json, child2956519 / exec4305, 247/320
+actually closed at v17. Revalidate actual /proc/owner/native driver. No local model
+GPU. No other HTTP or offline CPU settlement while live. Never restart lost handles.
+After actual terminal FIRST bind_d_frozen_method.py new32-view_cache; await; THEN
+audit_d_closed_sdk_states.py new32-view_cache. Full320 quality/SDK/effects/CPU closure
+required. Other new32 incremental/E3 320 each NOTEXECUTED, manually serial. Frozen
+runtime-d-update32/config/data/Host settings unchanged during formal jobs.
+
+PREFIX200 ALL WHOLE ANSWERS/VIEWS SOURCE REVIEW CLOSED:
+d-update32/reviews/new32-view_cache-prefix-0200/answer-review-closeout-v1.json
+C40/Q40/W77/F43; material55complete/131partial/14insufficient; jointC+complete34.
+20 correlated TRAIN-exposed generated Source families, not200independent/unseen
+tasks or full320score. All27unique Views106occurrences/K reviewed faithful literal
+with original role/clock metadata, not certified truth/current update coverage.
+306HTTP/1879133knownHosttokens/newunknown0/0 alreadyoriginalledger, not rebilled;
+123toolcalls,486controlsteps/453operations/249READ/12admissionrejections/2knownrefreads;
+146currentraw/27currentViewreceipts. Full SDK/ownerCPU still pending.
+Prefix150 also closed C33/Q34/W52/F31, material43/94/13, joint27,20Views89occurrences.
+Entire first150 recorddicts/providerinputs/answers/Sourcebindings AND89Viewrecords
+literal equal prefix200; original judgments reused with all anchors/Fmask revalidated.
+Current author file has200 decisions. Next index200 memops_C26 contentinitial.
+Extend prefix only after native closed count reaches intended complete-family cut;
+reconcile ENTIRE earlier records/Views before copying and revalidate anchors.
+Use inspect_d_review.py PREFIX INDICES --compact --since-previous --compact-view-text;
+whole answers always printed; no grading truncated/unseen content. Formal full bind
+folder new32-view_cache remains absent until terminal; prefix evidence cannot replace it.
+
+OLD57 B-REPAIR ACTUAL EXECUTION COVERAGE NOW RECONCILED:
+b-repair-binding-coverage-v1.json validates139 original outcomes+8functional first
+bindings against actual before/full action/prefix/common suffix/Reader wire. Only
+original1+new4=5of57states have observed-Source READ. B64selected128 and C8original8
+use other actual before captures (zero intersections), cannot close52missing states.
+b-repair-remaining-observed-READ-bindings-v1.json freezes52native legal full bindings,
+seed0/parameter coverage only, not prepared/executed. Existing functional5READ
+(4observed+1context)+52reserved=57newREAD ceiling. Supplied requests, all57 actual
+native task known_evidence arrays empty; given-readout allowed here, not autonomous.
+After all3 frozen new32 jobs, execute new bindings in bounded serial segments with
+existing --bindings/first-action + fixed_context reads4 continuation2 and actual
+remaining budgets. Never rerun139original/8functional outcomes or their prefixes.
+
+18old57states have >=2actualacquired materials and >=3nativeHANDOFF options.
+c-repair-acquired-pool-reservation-v1.json reserves7unused seed0 pools for rules vs
+retainedE3seed0-u32 handoff-only, same actual full menu/pool; max14newreadouts.
+Conservatively count3functionalHANDOFF+24C8original+6savednew=33already/11pools;
+reservation gives maximum47of48newreadouts and18of24acquiredstates. Do not reset
+caps, fill unused slots, expand menu or add fitting. No new native capture/Store clone,
+tool intervention/model/ledger writes during current formal worker. Reservation is
+not actual execution or mechanism closure; source-author whole review still required.
+
+Actual K baseline donor proofs remain3eligible/5ineligible first8 only; no native
+known lookup/full matched3method Host frame/readouts yet. A05firstrev1/fullK7refs
+revision mismatch preserved; never given-readoutwithK or fake clean K. OldHost-output
+recirculation remains observational; plan9.3 matched searchability toggle still needs
+separate frozen native-provenance control preserving Source roles/values/target/frame.
+All old8three80/M3allseed reviews/stats closed, no reruns/bestseed adoption.
+
+CPU receipts1..14 settled once;18new closed timers33.31CPU pending at v17, no newer
+settlement. Wait true idle; native/model/load/client not rebilled. Never GNU-wrap
+timer-scanning writers/settlement. Author/untimedCPUunknownnot0. Historicalgeneration
+unknown16/embedding1 retained; prefix200newunknown0/0; limits unchanged.
+
+Remaining fullscope: allnew32three320/fullreviews/SDK/effects/costs, actualK and
+controlledrecirculation factors, reserved52READ/7acquiredpool diagnostics; final
+candidate/checkpoint/scoring/budget/Nfreeze BEFOREheld256QASPERpapers/old64query
+contents; LME451Reader/Judge/Mem2Act400 actualown-policy/full-input/exposure work;
+allcosts/stats/paperfigures. Native test unopened, held contents unreviewed/unexported.
+Goal NOT complete.
+
+# HISTORICAL A100 EXECUTION v16: 2026-11-06
 
 Full goal ACTIVE/incomplete. Previous/current goal turns PROGRESS. Latest:
 data/manifests/a100-development-progress-20261106-v16.json and execution doc.
