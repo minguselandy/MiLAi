@@ -1,4 +1,73 @@
-# LIVE A100 EXECUTION v13: 2026-11-06
+# LIVE A100 EXECUTION v14: 2026-11-06
+
+Full goal ACTIVE/incomplete. Current/previous goal turns PROGRESS. Latest:
+data/manifests/a100-development-progress-20261106-v14.json and execution doc.
+No SHA/checksums/content fingerprints, subagents, services, second ledger, resets,
+remote writes, model retries or first-outcome replacement. GPUs0/1 unchanged.
+
+ONLY LIVE HTTP job remains new32-view_cache owner child2956519 / exec4305,
+56/320 closed at v14; revalidate /proc/owner/native driver. No local learned GPU.
+Never restart a lost observation handle. No other HTTP or offline CPU settlement.
+After actual terminal FIRST bind_d_frozen_method.py new32-view_cache; await; THEN
+audit_d_closed_sdk_states.py new32-view_cache. Full320 reviews/audits still needed.
+Other new32 incremental/E3 320 each NOT EXECUTED, manual serial, frozen protocol.
+
+OLD8 ALL THREE FULL80 ANSWERS/MATERIAL/VIEWS/SDK/COST CLOSED, no more old8 reruns:
+original cache C19/Q30/W13/F18, incremental C11/Q32/W16/F21,
+E3 C19/Q21/W20/F20. Material complete/partial/insufficient35/39/6,17/59/4,38/42/0.
+Supplementary C-and-complete-material19/10/15, not replacement primary score.
+E3 C-but-partial cases64/70/72/73: faithful fixture assistant11/5 or1500savings
+recap supports correct content, original user witness absent; role stays assistant.
+Explicit originals flows cannot substitute assistant quotes. All final-update16
+positions per method have0 complete material; answer correctness alone not update gain.
+E3 zero received View; incremental5unique/21occurrences/147nodes faithful literal.
+All closed states include failures, preserve Sources/world/application, new final
+outputs assistant and Saver equal. Details in old8 method review directories.
+
+Paired8 Source families,2flowsx5requests each, all first failures retained.
+d-update32/old8-family-comparison-v1.json:20k Random0 familybootstrap indices499/19499.
+Incremental-cache=-10pp CI[-30,6.25], E3-cache=0pp[-15,15], E3-incremental=+10pp
+[1.25,18.75]. Conditional descriptive small-N/dev/source-author nonblind, no adoption.
+All16 initial first HTTP wires equal pairwise;0/16 first retrieval args equal pairwise.
+Queries differ before internal actions; no isolated controller causality.
+Declared Source role/content/order/event clocks equal; native runtime IDs/observed_at
+ingestion clocks differ. First offline comparison wrongly asserted entire captured
+objects equal; fixed explicit field audit, failed timer retained, no model/tool replay.
+
+Actual HTTP132/121/110, known Host tokens772264/731954/708416,
+wholeCPU152.31894432/142.015116/331.829985 already paid once. E3 sharedcalls295=
+110HTTP+185localpolicy choices, not295HTTP. Local GPU job interval .746116064h includes
+waits. Lower known Hosttokens is not full-cost efficiency; remote hardware/currency unknown.
+No new fit/adoption from D. Existing M3 all3seed reviews/stats remain closed (see v13).
+
+Actual K control preparation only PARTIAL, no control executed:
+d-update32/known-View-baseline-donor-prefix-v1.json, inspected at54 closed positions.
+First8 TRAIN families fixed A01/A02/A05/A14/A16/A29/A33/B03. Baseline first6 cells:
+A01/A14/A16/A29 no actual initial View;A02 firstinitialFAILED;A05 firstViewrev1 has
+actual receipt + completed-final Hostwire + immutable pre-final inventory proof,
+original final Source absent. Full A05 input contains7 View revisions. Keep first
+receipt and actual revision/scope mismatch; do not pick last compatible View or fake
+clean K. Last2baseline cells/latermethod donor cells pending. Preserve all ineligible
+cells, no later-turn/alternate-family substitution. Final donor selection/native
+known-reference lookup/same actual before/full frame across3methods/host-readout
+NOT EXECUTED. NEVER given-readout with K. No model/ledger writes during preparation.
+
+Receipts1..14 paid once; v14 receipt6.76CPU historical idle. Five new closed timers
+pending3.28CPU atv14: E3reviewclose,comparisonv1failed/v2/v3,knownViewprefix.
+Wait for true idle; no settlement while Host lives. Native/model/load/client not
+rebilled. Author/untimed CPU unknown, not0. Never GNU-wrap timer-scanning writers.
+
+Remaining full scope: new32 all3x320 actual Host with whole Source/View/role/time/
+update/SDK/effect/cost reviews, real same-beforeK controls, mechanism57/24 repairs
+as justified; final candidate/checkpoint/scoring/budget/N freeze before held256
+QASPER papers/old64query contents; LME451 Reader/Judge/Mem2Act400 after actual
+own-policy full-input/exposure work, all costs/stats/paper figures. LME all200
+histories/451queries prior contact; old fixedpath501/902 stopped. Surrogate codec
+2/1drops not actual selected-Laya failures; don't cut budgets/projection to fit.
+No vision probe repeat. Native test unopened, held contents unreviewed/unexported.
+Goal NOT complete.
+
+# HISTORICAL A100 EXECUTION v13: 2026-11-06
 
 Full goal ACTIVE/incomplete. This and previous turns are PROGRESS.
 Latest data/manifests/a100-development-progress-20261106-v13.json and execution doc.
