@@ -1,4 +1,83 @@
-# LIVE A100 EXECUTION v5: 2026-11-05
+# LIVE A100 EXECUTION v6: 2026-11-05
+
+Full goal ACTIVE/incomplete; current and previous turns PROGRESS.
+Latest data/manifests/a100-development-progress-20261105-v6.json and execution doc.
+No SHA/content fingerprints/subagents/new services/second ledger/limit reset/remote writes.
+
+ONLY LIVE model HTTP job: task-dev64-method-incumbent-delivery-u16-owner.json,
+child411692/exec74634. Revalidate actual /proc and its native driver; never restart for
+observation timeout. E1-u16, actual autonomous Host/64 initial snapshots, GPU2 FP32, rich,
+no supplied query/final-only Reader. No concurrent HTTP job.
+Anchor64 CLOSED(exec94073 terminal):49engineeringCOMPLETED/15FAILED, NOT49task-success.
+143HTTP/528693known/newunknown0. All64actual initial snapshots bound;49completed-final +15
+failed-last-responded inputs,252literalSource ranges/0unmatched. Quality remainspending.
+task-dev64/learned-method-plan.json binds four methods. E1incumbent running; after terminal
+bind full inputs/state/cost and run B0-u33/B1-u33/E3-aggregate-u32 serially using
+run_task_dev64_method.py. Never restart closed anchor56/PID223167.
+Methods/protocol were frozen BEFORE newDEV64 body export: fixed-prefix, E1-u16, B0-u33,
+B1-u33, old E3-aggregate-u32 research reference. See task-dev64/plan.json/protocol-before-body-export.json.
+All64(4279Source units) now DEVELOPMENT exposed, not confirmation. Native-dev container parsing
+disclosed; only selected64 projected/semantically inspected.256confirmation and old64query-confirmation
+remain held; no native test opened. Final method/checkpoint/scoring/limits freeze still required.
+
+Pilot8 anchor CLOSED normally/exec39580 terminal:5engineeringCOMPLETED/3FAILED, NOT5task-success.
+20HTTP/84582known/newunknown0. Three VLLM_CHAT_TRUNCATED first results retained, no retries.
+Actual5completed-final +3failed-last-responded provider inputs bound,32literalSource ranges,
+0unmatched. Failed-last inputs do not become completed finals/answers; no reasoning reconstruction.
+Successful results report0semantic receipts; failed format omits that field, so failed state
+effects remainSDK-audit pending, notzero. Admission and full completed/failed review packets saved.
+Offline analyzer initially assumed conditional/success-only fields and8completed finals;
+three failed logs/timers retained, corrected using existing E4 failed-input convention,0modelretries.
+
+B0/B1 fits CLOSED66/1056rows/5756552tokens each, exec27974/27802 terminal; never repoll/restart.
+GPU reservation .534955/.540089hours; CPU3072.901/3097.578, native+residual recorded once.
+Both frozen-rule nominees33. Oldfeedback pure delivery u0=.949554; B0u33=.941741/u66=.910491;
+B1u33=.842039/u66=.749107; operation guards pass. b-full-fit-closeout.json actual counters,
+shared inputs/old400/slot weights and initialization checked. No adoption/extra training.
+Saved GPU menus(initial/B0/B1) CLOSED93states/exec24935, Bnew5bindings CLOSED/exec86663.
+Source-author task32: raw14/initial14/B0=13/B1=13; each1gain/2loss vsinitial, −3.125pp
+CI[-15.625,+6.25]. B1vsB0=1gain/1loss,0pp CI[-9.375,+9.375]. All missing/first failures retained.
+Use b-task32-results.json; no192/256/extra seeds/adoption from this old exposed panel.
+
+IMPORTANT FIRST-OUTCOME CORRECTION: previous A index omitted22 closed E3 bindings.
+One of11 additional A HTTP attempts repeated an earlier E3 binding/identical packet and
+returned a better stochastic answer. Both attempts and all cost retained; earlier E3 qualified
+answer is primary. Authoritative a-task32-results-v2.json/a-task32-closed-choices-v2.json:
+raw14/initial14/A0=15/A1=15, not superseded16/16. Each3gains/2losses vsinitial,+3.125pp
+CI[-9.375,+15.625]; A0/A1 success indicators identical. NoA20k/seeds/J/adoption.
+task-first-outcome-registry-v2.json reconciles105nonraw+31raw first bindings before Bnew5.
+Never reuse the later unnecessary A repeat for primary scores, nor refund/drop its paid cost.
+Native literal F1 A-v2/B separate; no full-answer shortcut from HTTP/packet sufficiency.
+
+B64 TRAIN material review all384 closed unchanged. Complete ANSWER review prefix22families/
+132outcomes now saved in b64-answer-author-reviews.json and b64-answer-review-prefix.json;
+next family index22, remaining42. All failed pairs stayunknown; partial prefix not full64.
+Actual closed pure-delivery fitting files retain ALL256new answer comparisons unknown.
+Do not retroactively modify fit data. Supplied64 TRAIN requests had generic read_goal and0
+required_points; actual autonomous pilot8 issued12queries,9goals/21points/3omittedgoals.
+request-interface-diagnosis.json is unmatched interface evidence, not a cause of B's same-protocol
+old32 regression. Any justified collection repair uses real autonomous TRAIN requests/known
+evidence, not these DEV states, and reuses existing request-aware baselines/executor.
+
+Retained-model C8 diagnosis now CLOSED: GPU3 saved24 choices, exact production
+HandoffOnlyPolicy input projection checked. Executor fullmenu remains54-or-other actualactions,
+policy filtersHANDOFF BEFOREencoding; no full-menu argmax/posthoc mask substitution.
+Initial/B0/B1 each1/8complete, originalsimples4each. Only6new terminal HANDOFF bindings
+executed via existing saved-choice first-action intervention,0continuation/READ;5readouts
+COMPLETED/1FAILED retained. Actual packets/wires/Source ranges and source-author review bound.
+No menu expansion/adoption. c-handoff8-retained-model-results.json authoritative; exec70272
+and exec35858 CLOSED, never restart. Offline preparation first wrongly assumed captured
+executor menu was alreadyHANDOFF-only; corrected before model calls using actual routing code.
+
+Idle settlementsv3/v4/v5 billed new5.63/14.99/5.10CPU seconds once. Later timers pending while
+incumbent64 lives. Model/client native CPU never rebilled. Original ledger only. B0/B1/E3 new64
+Host methods are PREPARED NOT EXECUTED, not completed outcomes.
+Still full-scope remaining: new64 all methods/Source-author/state/task/cost selection;42TRAIN
+answer reviews; C retained-model acquired-set diagnosis/actual missing repairs as needed;
+D original8 plus32new natural update families; warranted seeds/scale, held freeze/confirmation,
+eligible LME451/Mem2Act400, all costs/paper. Do not call goal complete from this checkpoint.
+
+# HISTORICAL A100 EXECUTION v5: 2026-11-05
 
 Full user goal ACTIVE/incomplete. Current and previous goal turns PROGRESS.
 Latest data/manifests/a100-development-progress-20261105-v5.json and
