@@ -6,11 +6,67 @@
 历史 worktree、原始失败与用户文档保持原状。没有使用子代理、SHA/内容指纹校验、新服务、第二账本或远端写入。
 
 本轮机器可读入口为
-[progress](../data/manifests/a100-development-progress-20261105-v10.json)。
+[progress](../data/manifests/a100-development-progress-20261105-v11.json)。
 原始数据、冻结运行时、权重、命令、计时和实际输出位于本 worktree 的 ignored
 `artifacts/a100-development-20261104/`。本记录是现有报告体系的执行摘要。
 
-## v10 当前状态：D 可选路径已实现，原生工具切片闭合，正式 Host 待执行
+## v11 当前状态：两次复现拟合和 Host 已闭合，D 正式流程运行中
+
+E3 seed1/2 均按原始 FP32 双卡配方完成 128 更新、2048 draws、全部评测点和导出。
+实际训练输入为 10,549,642 / 10,607,432 tokens，总计 21,157,074；两作业 whole-child CPU
+合计 12,279.603772 秒、两卡作业区间合计 3.877508 小时，原生与客户端剩余分别只计一次。
+每个新 seed 的 860 dev＋64 feedback-dev 初始首选、logits 与输入 tokens 均与 seed0 逐值一致；
+数据、初始化、完整长度、调度、窗口和原配方字段已核对。这是固定 E1 初始化的训练随机性复现。
+
+两个固定 u32 的 DEV64 自主 Host 作业也已各完成 64 个首次轨迹：
+
+| 方法 | 工程完成 / 失败 | HTTP | 已知 Host 总 tokens | 原文字面范围 | 来源作者完整答案 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| E3 seed0 u32（原参考） | 55/9 | 135 | 461,096 | 380 | 40/64 |
+| E3 seed1 u32 | 50/14 | 138 | 540,229 | 351 | 33/64 |
+| E3 seed2 u32 | 53/11 | 147 | 490,699 | 248 | 待审阅 |
+
+新两作业用量未知新增均为 0，全部完成／失败实际输入与 Source 范围已绑定，无 unmatched；
+128 个 Store/Saver/application 状态均已只读审计，原 Source 值保持，新增输出仍是 assistant 来源。
+seed1 全部答案等级为 C33/I10/Q4/W1/F14/U2，失败和未知都在 64 分母。
+seed0 到 seed1 的差异显示单次开发结果有波动，不能挑最好 seed；训练 RNG 和随机 Host 生成也同时变化。
+来源作者参与实现，并非盲审或独立评审。seed2 全部答案及按来源族聚合的 seed 比较仍待完成。
+原生完整字符串 Answer F1 分别为 0.0894039 / 0.1203132 / 0.1026735，排序与完整成功不同，
+继续独立报告，不抽取短答案、重写 unanswerable 或修复失败。
+
+D 已启动 `old8-view_cache_incremental` 的 80 个连续 Host 位置，child2599138 / exec22180；
+它是当前唯一 HTTP 工作进程，不并发启动其他作业。另四个 D 正式作业未执行。
+原缓存基线保留其已有 80 个首次结果及 19 个完整答案，不重新生成或重新计费。
+新增 32 族 histories 的 schema 元数据在正式运行前与既有 `host_intent_stream_histories_v1` 对齐，
+原元数据副本保留，公共问题与 Source 内容未改变；五份实际 native config/input freeze 和位置数通过验证。
+完整 1120 个新位置、实际旧 View K 控制、角色时间、更新、材料和 Host 质量审阅仍为必要工作。
+
+外评记录已按实际文件重新核对。LME 的 200 个 Small 历史全部有先前接触，后续输入开发已处理
+全部 451 个公共问题和 29 张问题图像，旧 42 个手工问题 ID 清单不能当未接触边界。
+22,822 个原文页面的覆盖检查已结束；另一个全公共问题固定路径检查实际只完成 501/902，
+还有 1 个部分启动和 400 个未启动位置，pid662822 已不存在，不能把 stale RUNNING 当仍运行或完成。
+其中 row231 的一个完整检查路径有两步超过控制器输入上限。
+
+对这个已知状态使用当前已有 observation2048/range256、完整原始库，机械复核仍有两步溢出；
+对同一八个状态使用既有 compact JSON 仅减少语法空格，所有状态值和完整动作可逐值还原，
+但仍有一步溢出。这些均为 0 模型／0 评分标签的输入检查。
+该轨迹由简单 FixedContext 策略产生，简单策略本身不调用 Laya 编码器；因此这是潜在学习输入风险，
+不是已经观察到所选 Laya 的两次失败。需要实际 own-policy 状态与完整输入协议核验，
+不能只为使诊断通过而缩短预算、截菜单或静默更换推理投影。当前复现和 D 的投影均未改变。
+Mem2Act 的 400 任务、429 sessions、16843 turns 及元数据缺口保留；旧 33 个回归数是测试，
+不代表 33 个已执行的原生发布任务。正式 Store 摄入、Host 和指标仍待最终冻结后执行。
+
+闲置结算 v10/v11/v12 分别一次支付 78.39 / 89.77 / 4.18 CPU 秒；
+原拟合、预测、加载和 owner 剩余 CPU 均未重计。作者及未计时工作仍是 unknown。
+没有新服务、第二账本、子代理、SHA 校验或远端写入。此前暂停／恢复丢失的旧 PTY 句柄
+通过实际 owner、driver 和 /proc 核对为已结束，没有以句柄丢失为由重跑模型。
+
+证据：`e3-retained-replication/{fit-closeout,answer-review-closeout,native-agreement}.json`、
+`d-update32/old8-view_cache_incremental-owner.json`、`external-metadata-readiness-reconciliation.json`、
+`lme-known-overflow-observation2048/audit.json` 与 `lme-known-overflow-compact-length-comparison.json`。
+完整目标仍未完成；以下 v10 及更早段落为历史记录。
+
+## v10 历史状态：D 可选路径已实现，原生工具切片闭合，正式 Host 待执行
 
 E3 seed1 已正常结束全部 128 更新、2048 draws、最终评测与导出，训练输入为
 10,549,642 tokens；whole-child CPU 6086.632939 秒中，原生 6058.777763 与剩余客户端
