@@ -1,4 +1,77 @@
-# LIVE A100 EXECUTION v24: 2026-11-06
+# LIVE A100 EXECUTION v25: 2026-11-06
+
+Full goal ACTIVE/incomplete; current/previous turns PROGRESS. Latest manifest:
+data/manifests/a100-development-progress-20261106-v25.json and execution doc.
+No SHA/checksums/content fingerprints, subagents, new services, second ledger,
+reset/refund, remote writes or model/first-outcome retries. GPUs0/1/Product unchanged.
+
+ONLY LIVE actual experiment HTTP worker new32-view_cache_incremental-owner.json:
+parent3591596 / child3591601 / exec4286;252/320closed at v25. Revalidate actual
+/proc/owner/native. No learned local GPU, extra HTTP worker, native captured-case
+control/real Store clone or offline CPU settlement while live. Frozen runtime,
+config/data/Host unchanged. At actual terminal FIRST full bind_d_frozen_method.py
+new32-view_cache_incremental; await; THEN full audit_d_closed_sdk_states.py
+new32-view_cache_incremental. Full320 quality/Views/SDK/effects/operations/costs
+closure before manual serial new32-e3-aggregate-u32 320. Never restart lost handles
+or repoll completed baselineexec4305. Temporary scripted/noexternalHTTP fixtures
+without real experiment Store/ledger access remain allowed; none new this turn.
+
+INCREMENTAL PREFIX240 ALL WHOLE ANSWERS/RECEIVED VIEWS SOURCE REVIEW CLOSED:
+d-update32/reviews/new32-view_cache_incremental-prefix-0240/answer-review-closeout-v1.json
+C48/Q40/W99/F53;material55complete169partial16insufficient;jointC+complete37.
+24 correlated TRAIN-exposed generated families, not240independent/unseen/full320
+or adoption. Source author, not independent/blind. All15actualreceivedViewrefs/
+67occurrences includingK faithful literal with original role/revision/clocks.
+All96mid/final materialcomplete0;midC1(A02namesunchanged),finalC0.
+
+ENTIRE recorddicts/providerinputs/answers/Sourcebindings and Viewrecords equal
+before same-method reuse/allanchors/Fmask validation:200→210(200records/45Views),
+210→220(210/60),220→230(220/60),230→240(230/65). No cross-method grades; baseline
+only literal body/role/origin dedup reading. NEXT index240memops_D18 contentinitial.
+Extend actual closed complete-family count positive%10=0 in separate folder;
+compare ENTIRE240records/67Views before copy/revalidation. Inspector --compact
+--since-previous --compact-view-text --reuse-reviewed-condition new32-view_cache.
+Read full answers; never grade unseen/truncated output or stored-only facts.
+Failed-turn receipts are not later completed K. Ownquotes required originals2–5.
+
+New15Viewrefs? NO: this turn adds6receivedrefs/22occurrences to prior9/45.
+C26:3refs/15occurrences, each7nodes; contenttwo refs share full interpretation/
+SourceIDs but different snapshots/projections, not independentfacts or proof of
+two cachegenerations. Initial correct2:00/15ClarkeRoad/panel, original206composite
+own+assistantquote Q/complete; later3:00/onlyproposed4:00 unreceived.
+D02:1ref/5occurrences, actualViewrevision2 preserved (Source revisions1). Own
+specspage2560x1600/purchasecard complete atinitial; later1920x1200OSrechecks missing.
+UserOSsetuparoundmidMarch has noyear in this View; no physicalpanel/coverage claim.
+D17:2refs/2occurrences onlyfailed230lastinput, materialcomplete but notlaterK.
+231/232/233onlyquestions Q/insufficient,234F/insufficient. Originalflow assistant
+Firefoxsetup+ownSafari partial; laterEdge/homeChrome/Outlookoverride/postponedChrome
+missing. Quoting Sources faithfully does not certify current answer or effects.
+C29: missing45olive/other-task/orderstates; laterdefinitiveoldchoice W. Final214
+omits paid/shipping without oppositepaymentclaim Q;219globalnoothergift/shipping
+report W. Accurate providedownquotes216/217 can beTrue while answer/materialpartial.
+
+Prefix240 already originalledger369HTTP/2130596knownHosttokens/newunknown0/0;
+137toolattempts137returns1error,524steps515operations281READ25materialrejections
+4knownrefreads,186currentraw15Views. Full ownerCPU/SDK/effects pending.
+Receipts1..15 settled once;55closed offline timers126.38CPU pending, incl failedRuff.
+Author/untimedCPU unknown not0. v16receipt absent; prepared
+settle_d_new32_incremental_idle_v16.py only execute once at trueidle after full320
+quality/SDK/actualoperations closure, no GNU wrapper. Parser supports both original
+formats/legacy failure header; raw timers unchanged. Never GNU-wrap timer-scanning
+writers/settlement; native/model/client/earlier CPU not rebilled.
+
+v20optionalSourceexclusion24fixtures/v24first-dispatchcomposer2fixtures unchanged;
+no new code/test reruns here. RealK/old-outputcontrols/52READ/7pools0. Original8donor
+cells retained, E3donors/nativebefore/K/fullframe/fresharrivalcontext still pending
+after formal3jobs. prepare_pair is raw-only, not a ViewK preparer; do not silently
+substitute cleanerA05revision/laterstate or given-readoutwithK. Old-outputfactor
+must use firstdispatchframe composer, not generic pre-final/finalwire helper.
+Full remaining scope: incremental tail/full320closure and E3new320, pairedfamilystats,
+actual controls/repairs, finalcandidate/checkpoint/scoring/budget/N freeze BEFORE
+held256papers/old64querycontents; LME451/Mem2Act400 own-policy/full-input/exposure,
+fullcosts and paperfigures. Testsplit/heldsemanticcontents unopened. GoalNOTcomplete.
+
+# HISTORICAL A100 EXECUTION v24: 2026-11-06
 
 Full goal ACTIVE/incomplete; current/previous turns PROGRESS. Latest manifest:
 data/manifests/a100-development-progress-20261106-v24.json and execution doc.
