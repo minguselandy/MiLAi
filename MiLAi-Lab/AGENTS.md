@@ -1,4 +1,75 @@
-# LIVE A100 EXECUTION v6: 2026-11-05
+# LIVE A100 EXECUTION v7: 2026-11-05
+
+Full goal ACTIVE/incomplete. Latest data/manifests/a100-development-progress-20261105-v7.json
+and docs/MILAI_A100_DEVELOPMENT_EXECUTION_20261104.md. No SHA/content fingerprints,
+subagents,new services,second ledger,limit reset,remote writes or first-outcome retries.
+
+ONLY LIVE model HTTP job: task-dev64-method-b1-u33-owner.json,
+child719164/exec62348. Revalidate actual/proc/owner/native driver; never restart for timeout.
+B1-u33 uses GPU2FP32,64actual autonomous common initial Host snapshots,rich/HostthinkingTrue.
+No concurrent HTTP job. After normal terminal FIRST bind_task_dev64_method.py b1-u33;
+await completion, THEN audit_task_dev64_state.py b1-u33. Only then start E3-aggregate-u32
+serially via run_task_dev64_method.py. E3 remains PREPARED/NOT_EXECUTED,not adopted.
+Do not parallelize the binder and state audit: the latter consumes the emitted result map.
+
+E1 CLOSED64(exec74634/child411692gone):45engineeringCOMPLETED/19FAILED,
+15VLLM_CHAT_TRUNCATED+4JSON_ACTION_MALFORMED.154HTTP/622629known/newunknown0;
+321literalSource ranges/0unmatched,fullfinal+failed-last inputs bound. No model retry.
+B0 CLOSED64(exec16745/child580934gone):59engineeringCOMPLETED/5VLLM_CHAT_TRUNCATED,
+139HTTP/504911known/newunknown0;372literalSource ranges/0unmatched,full inputs bound.
+Neither45nor59is task success. Never repoll/restart closed owners or old anchor64.
+
+Anchor/E1/B0 all192closed Store/Saver/application states READ-ONLY AUDITED,
+including39failed states. Each preserves4343initial Source values(4279paper+64task),
+world/application unchanged,Saverlatest checkpoint messages exactly match actualresults.
+New final assistant Sources49/45/59 have correct role/origin/content; no semantic records.
+Writer input mappings/journals/Saverchanges explicitly retained,not semantic commits.
+Failure receipt-field absence is no longer used as a zero-effect proof. This independent-paper
+audit does not replace D's actual updates/View/business mechanism study.
+Native sources() derives formation_status; literal rawrow/export equality initially failed.
+Corrected to the actual projection; failed timer retained. Installed serializer default kept.
+
+task-dev64/source-author-reviews.json: ALL64fixed-prefix full answers/source guides reviewed:
+25C/11I/9Q/1W/15F/3U,complete25/64,all failures/unknowns retained in64denominator.
+Incumbent E1 indices0..31reviewed:11C/7I/3Q/10F/1U; nextindex32,NO full64score yet.
+ALL64B0 answers still unreviewed. Use inspect_dev64_method.py METHOD INDICES for full answers
+and all actual Source content; it only reuses exact already-read anchor pieces by literal equality.
+Generic scoring froze before selectedbody export; source guides authored after anchor/E1execution,
+reviewer is implementation/source author,not blind/independent. Source27guide coverage clarified
+after actual erroranalysis supplied2more category names;10label completeness rule unchanged.
+close_task_dev64_review.py reconciles actual failed statuses/unknown masks and pending methods.
+
+B64 ALL384TRAIN first answers reviewed in b64-answer-review-full.json:
+107C/199I/60Q/1W/11F/6U. Answer B0L19/R12/T85/U12;B1L10/R32/T72/U14.
+b64-postfit-quality-diagnosis.json: NO known delivery/answer left-right reversals;
+23/25answer directions occur inside coarse delivery ties.27Canswers have proxyPmaterials,
+mainly supported broad-question alternatives versus extra proxy inventories. B1has3directional
+answer preferences on literal-equal packets,generation variation not new material benefit.
+All256new answer targets in the ACTUAL CLOSED66update Bfits remainUNKNOWN; fitfiles untouched.
+No automatic answer-first rerun,192/256expansion,seeds or adoption from this diagnostic.
+
+D source preflight: d-update32/source-reservation.json reserves32new-to-DjointTRAIN
+backgrounds(14Update+18TrajectoryOps),disjoint old8DEV. New32bodyfiles not opened/projected
+for this reservation; old known8fixture JSON parsed for identities. Historical TRAIN/source/
+training exposure explicitly disclosed; MemOps is generated benchmark dialogue,not natural
+observed real-world data or independent confirmation. No calibration/test reassignment.
+Nextinspect old8actuallegal acquired-state menus,then freeze3methods/requesttiming/2048budget,
+reuse existing reviewed native cuts/roles and verify actual updates. D NOTEXECUTED.
+
+Idle settlementv6:27newclosed offline timers15.05CPU charged ONCE at E1/B0idle beforeB1.
+Original ledger only. E1wholechild587.1393CPU/B0wholechild697.7689CPU; native+load phases
+deducted before client residual173.3448/177.4153,eachonce. GPUjobintervals.731988/.564241h
+include Host waits. Any later timers staypending whileB1live; author/unmeteredCPU unknown,not0.
+
+Keep earlier FIRST-OUTCOME correction: authoritative A-v2 raw14/initial14/A0=15/A1=15;
+B old32raw14/initial14/B0=13/B1=13. One accidental later A repeat neverprimary; allcostretained.
+Cretained models each1/8versus simple4/8; no menu expansion. Fullscope still remaining:
+newDEV64all5methods/answers/nativeF1/cost/familyselection; Dold8+32TRAINnew-to-study;
+actual mechanism-based remaining repairs; warranted replication; finalfreeze BEFORE held256
+paperconfirmation andold64queryconfirmation; eligibleLME451/Mem2Act400; complete costs/paper.
+Heldconfirmation contents remain unexported/unreviewed; native test unopened. Do not complete goal.
+
+# HISTORICAL A100 EXECUTION v6: 2026-11-05
 
 Full goal ACTIVE/incomplete; current and previous turns PROGRESS.
 Latest data/manifests/a100-development-progress-20261105-v6.json and execution doc.
