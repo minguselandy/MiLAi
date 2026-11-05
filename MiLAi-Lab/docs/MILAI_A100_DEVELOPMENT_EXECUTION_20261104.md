@@ -6,11 +6,73 @@
 历史 worktree、原始失败与用户文档保持原状。没有使用子代理、SHA/内容指纹校验、新服务、第二账本或远端写入。
 
 本轮机器可读入口为
-[progress](../data/manifests/a100-development-progress-20261105-v9.json)。
+[progress](../data/manifests/a100-development-progress-20261105-v10.json)。
 原始数据、冻结运行时、权重、命令、计时和实际输出位于本 worktree 的 ignored
 `artifacts/a100-development-20261104/`。本记录是现有报告体系的执行摘要。
 
-## v9 当前状态：五方法已闭合，保留 E3 复现，D 仍待实现
+## v10 当前状态：D 可选路径已实现，原生工具切片闭合，正式 Host 待执行
+
+E3 seed1 已正常结束全部 128 更新、2048 draws、最终评测与导出，训练输入为
+10,549,642 tokens；whole-child CPU 6086.632939 秒中，原生 6058.777763 与剩余客户端
+27.855176 各计一次，两卡作业区间共 1.925072 小时。seed2 已串行启动（child1861976，
+exec2604），目标 128 更新、2048 draws、10,607,432 tokens，尚未结束。
+两个固定 u32 的 DEV64 Host 作业已在 `e3-retained-replication/host-plan.json` 预定，
+还未执行。原五方法的 25/25/33/32/40 结果与 C8 负结果保持，不挑最好 seed。
+
+新增可选 `view_cache_incremental` 保留原 `view_cache`。它仅在用途、对象、时间范围匹配时
+复用 View；已验证实际交付引用且 View 内容、revision、时间和完整位置表匹配时，可以省去
+重复返回。混合 K 投影若省略了位置表，可能仍重复 View，不虚构已知身份。
+该缓存路径每个实际调用最多补一条合法 Source READ，再由既有完整 packet 额度决定交付。
+显式 `original_source` 请求继续使用已有 reads4 路径；USE_VIEW 不确认或清除 pending arrivals。
+词覆盖只作导航，询问、旧建议和 assistant 输出仍保留原角色，不当已证实事实。
+
+实现中发现新路径在时间不匹配后落回旧 Cache，可能再次 USE_VIEW；已改为合法刷新或原文获取。
+原生 schema 允许字符串 read_goal，代码按该实际接口处理；同一策略对象也会按实际工具调用
+重置增量上限。6 项新原生检查与 48 项既有相关检查通过，1 项既有 MemPursuit 测试因包缺失跳过；
+Ruff、包 DAG 和 tools Product 依赖清单通过。保留首次测试失败与计时，不升级依赖，不声称完整 CI。
+
+预定 8 个旧背景的初始 content 工具切片中，7 个有实际捕获，B30 没有该捕获，保留缺位，
+没有换成后续轮次或另一流程。7 个实际请求从原 before、菜单和额度执行一次可选策略，
+没有新模型调用或 Host 回答。它们都从无 View / 无 K 状态开始，属于真实冷启动工具机制，
+尚未验证实际暖缓存 USE_VIEW 或 K 复用。共 13 次 READ：5 个缓存路径各 1 次，
+2 个显式原文路径各 4 次；返回 3 个 View＋raw packet、9 处字面 Source 范围，
+其中角色为 7 assistant / 2 user。原 Source 值保持，extractive 节点逐字绑定原文，
+返回 View 结构与实际持久化结构一致。E15 有一次 View 超预算，原文单独交付成功；
+这只是 packet 机制，不能当任务成功，也不自动触发整个 1024 矩阵。
+
+D 三方法协议已在新增 32 族正文投影前冻结：共用最强旧表示 extractive View，
+保持 Host thinking=True、rich 接口、2048 返回、24 共享调用、8 控制步和 8 additional reads。
+旧 8 族的缓存基线代码及七份共享执行器/Host 文件与原 E5 冻结版本逐字一致，
+可以复用原 extractive2048 的 80 个首次结果及其失败和成本；19/80 优于旧 raw13/80、generated8/80。
+新两策略仍须在旧 8 族完整运行 160 个位置，新 32 族三方法须运行 960 个位置；
+总计 1120 个新自主 Host 位置，加 80 个已有基线，共 1200 个正式位置。
+`d-update32/matrix-plan.json` 的五个新作业均未执行；训练仍占用 GPU 2/3，不并发启动 HTTP。
+
+新增 32 个 TRAIN 背景的 64 条连续流程和每方法 320 个请求已闭合来源准备。
+29 份先前来源合同按文件匹配复用，A02/C02/D02 三份由当前作者完整阅读各 24 个原生对话 turn 后编写。
+768 个对话 turn 仅供离线来源审阅，实际 Host 最终原生前缀为 736 个不同 Source，
+在最后用户 cut 后的 assistant turn 不进入 Host；另有每流程一条明确构造的 USB 位置干扰。
+原角色、内容、顺序和所有前缀用户证据均已绑定；Host histories 不含原生 answer、operation、difficulty 标签。
+原生 JSON 容器已解析，包括共存元数据字节；没有把该字节访问说成零，只投影对话角色与正文。
+中间自然批次 A02 对所问工作名称字段无关，其他 31 族涉及增补、更正、适用范围、状态或不确定性，
+不能统称无关，也不是 31 个相同的数值翻转。USB 控制按各自请求审阅了无关性，包括笔记本配件情形。
+这些背景已有 TRAIN/来源暴露，MemOps 是生成的 benchmark 对话，不是新未见数据或自然实测。
+
+实际同 before / 已知旧 View 的 Host 控制仍未运行：预定前 8 个新增 TRAIN 背景，
+每族最多一个有真实 View 交付引用和 completed-final Host wire 证据的状态，缺位保留。
+三方法使用同一完整受控 Host frame、实际 K 和新来源，经 native delivered-snapshot 查验，
+使用 host-readout；不能用带 K 的 given-readout，也不能将连续聊天等同于声明了已知 View。
+这类条件控制与完整自主流程分开报告。
+
+新 D 计时、测试和原生工具切片计时共 69.29 CPU 秒尚待训练结束后一次结算，
+原生切片已计入账本的 CPU 为 0；作者及未计时工作仍是 unknown，不记 0。
+所有原模型、原基线和既有成本保留；没有第二账本、服务、审核 Agent、SHA 校验或远端写入。
+
+证据：`d-update32/{protocol-before-body-projection,old8-state-and-baseline-audit,source-author-contracts,`
+`new32-histories,new32-source-requirements,new32-source-preservation,matrix-plan,`
+`optional-native-initial-slice-closeout}.json`。以下 v9 及更早段落保留为历史形成记录。
+
+## v9 历史状态：五方法已闭合，保留 E3 复现，D 仍待实现
 
 DEV64 的五方法、320 个完整答案与实际输入全部完成来源作者审阅。该作者也参与实现，
 并非盲审或独立评审。所有首结果和失败保留在每方法 64 族分母中。

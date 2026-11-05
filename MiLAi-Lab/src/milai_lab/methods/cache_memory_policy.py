@@ -2,14 +2,16 @@
 from __future__ import annotations
 
 import json
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Any
 
 from milai_lab.memory.retrieval import _lexical_tokens
 from milai_lab.methods.evidence_selection import (
+    coverage,
     interpretation_handoff,
     interpretation_only,
     original_evidence_action,
+    original_terms,
     pending_content,
     request_terms,
     view_request_context,
@@ -129,3 +131,119 @@ class CacheMemoryPolicy:
             if any(item["kind"] == "original_source" for item in acquired):
                 return handoff
         return FixedContextMemoryPolicy(self.reads).choose(state, actions)
+
+
+@dataclass
+class IncrementalCacheMemoryPolicy(CacheMemoryPolicy):
+    """Optional request-local cache route with a bounded raw-source supplement.
+
+    Matching retains the original purpose/object/time scope checks. Pending
+    arrivals stay pending when an old View is used; a lexical READ nomination is
+    navigation, not a judgment that the arrival updates or verifies a fact. The
+    executor supplies every binding and admits the final complete packet.
+    """
+
+    incremental_reads: int = 1
+    _state: MemoryControlState | None = field(default=None, init=False, repr=False)
+    _initial_refs: set[str] | None = field(default=None, init=False, repr=False)
+    _reads_chosen: int = field(default=0, init=False, repr=False)
+    _view_attempted: bool = field(default=False, init=False, repr=False)
+    _refresh_chosen: bool = field(default=False, init=False, repr=False)
+
+    def choose(self, state: MemoryControlState, actions: list[MemoryAction]) -> str:
+        if self._state is not state:
+            self._state = state
+            self._initial_refs = None
+            self._reads_chosen = 0
+            self._view_attempted = self._refresh_chosen = False
+        goal_value = state.task.get("read_goal")
+        goal = goal_value if isinstance(goal_value, dict) else {}
+        if "original_source" in goal.get("evidence", []):
+            return super().choose(state, actions)
+        views = [view for view in state.views if view["visibility"] == "visible"]
+        compatible = [view for view in views if _request_context({
+            "retrieval_request": view.get("retrieval_request")}) == _request_context(state.task)
+            and view.get("query_time") == state.task["query_time"]]
+        view = max(compatible or views, key=lambda item: text_overlap(state.task["request"],
+            str(item.get("built_for", "")) + " " + str(item.get("scope", ""))), default=None)
+        matching = view is not None and view in compatible and text_overlap(
+            state.task["request"], str(view.get("built_for", "")) + " "
+            + str(view.get("scope", ""))) >= self.min_scope_overlap
+        if self._initial_refs is None:
+            self._initial_refs = (set(view["pending_events"]) if matching and view is not None
+                                  else {event["source_ref"] for event in state.new_events})
+        if not matching:
+            refresh = next((action for action in actions if action.kind == "REFRESH_VIEW"
+                and (view is None or action.parameters.get("slot") == view["slot"])), None)
+            if refresh is not None:
+                self._view_attempted = self._refresh_chosen = True
+                return refresh.id
+            return FixedContextMemoryPolicy(self.reads).choose(state, actions)
+        assert view is not None
+        if interpretation_only(state.task):
+            return super().choose(state, actions)
+        # Known evidence has already passed the native delivered-snapshot check.
+        # Require the actual locator table, not just a revision number or text match.
+        known_view = any(item["kind"] == "query_structure"
+            and item.get("revision") == view["revision"]
+            and item.get("query_time") == view["query_time"]
+            and item.get("interpretation") == view.get("interpretation")
+            and item.get("source_locations") == view["source_bindings"]
+            for item in state.task.get("known_evidence", []))
+        if not known_view and not self._view_attempted:
+            use = next((action for action in actions if action.kind == "USE_VIEW"
+                        and action.target == view["id"]), None)
+            if use is not None:
+                self._view_attempted = True
+                return use.id
+        events = {event["source_ref"]: event for event in state.new_events
+                  if event["source_ref"] in self._initial_refs
+                  and event.get("capture_context") != "given_retrieval_request"}
+        needs = request_terms(state.task)
+        context = json.dumps({"request": state.task["request"], "read_goal": goal},
+                             ensure_ascii=False)
+
+        def read_score(action: MemoryAction) -> tuple[float, float, int]:
+            text = events[action.parameters["observed_source"]["source_ref"]]["content"]
+            return (coverage(set(_lexical_tokens(text)), needs),
+                    text_overlap(context, text), -len(text))
+
+        reads = [action for action in actions if action.kind == "READ"
+                 and action.parameters.get("observed_source", {}).get("source_ref") in events
+                 and (state.observed_materials is None or action.parameters.get("observe_only"))]
+        if self._reads_chosen < self.incremental_reads and reads:
+            read = max(reads, key=read_score)
+            if read_score(read)[:2] > (0.0, 0.0):
+                self._reads_chosen += 1
+                return read.id
+        pending_count = view.get("pending_event_count", len(view["pending_events"]))
+        if pending_count > len(view["pending_events"]) and not self._refresh_chosen:
+            refresh = next((action for action in actions if action.kind == "REFRESH_VIEW"
+                            and action.parameters.get("slot") == view["slot"]), None)
+            if refresh is not None:
+                self._view_attempted = self._refresh_chosen = True
+                return refresh.id
+        observed = {int(item["label"][1:]): item for item in [
+            *state.visible_evidence, *(state.observed_evidence or [])]}
+        current = [int(item["label"][1:]) for item in state.visible_evidence]
+        retrieved = {item["item_index"]: item["evidence"] for item in state.retrieved_scopes or []}
+        raw = {index for index, item in {**observed, **retrieved}.items()
+               if item["kind"] == "original_source"}
+        view_indices = {index for index, item in observed.items()
+                        if item["kind"] == "query_structure"}
+        known_terms: set[str] = set()
+        for item in state.task.get("known_evidence", []):
+            known_terms.update(original_terms(item))
+
+        def delivery_score(action: MemoryAction) -> tuple[bool, bool, float, int]:
+            indices = action.parameters.get("delivery_indices", current)
+            narrowed = action.parameters.get("retrieved_scope_indices", [])
+            packet = [retrieved[index] if index in narrowed else observed[index]
+                      for index in indices]
+            terms = known_terms.union(*(original_terms(item) for item in packet))
+            return (bool(raw.intersection(indices)),
+                    not known_view and bool(view_indices.intersection(indices)),
+                    coverage(terms, needs), -len(json.dumps(packet, ensure_ascii=False)))
+
+        return max((action for action in actions if action.kind == "HANDOFF"),
+                   key=delivery_score).id

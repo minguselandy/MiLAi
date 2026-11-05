@@ -10,7 +10,7 @@ from typing import Any
 
 from milai_lab.harness.contextual_artifacts import RunBudget
 from milai_lab.memory.retrieval import SemanticRetriever
-from milai_lab.methods.cache_memory_policy import CacheMemoryPolicy
+from milai_lab.methods.cache_memory_policy import CacheMemoryPolicy, IncrementalCacheMemoryPolicy
 from milai_lab.methods.evidence_reading import project_pack
 from milai_lab.methods.laya_memory_policy import (
     ACTION_BOUND_PROJECTIONS,
@@ -94,6 +94,9 @@ def memory_policy(
                                  config.get("expand_context", False))
     if kind == "view_cache":
         return CacheMemoryPolicy(config.get("reads", 4), config.get("min_scope_overlap", 0.35))
+    if kind == "view_cache_incremental":
+        return IncrementalCacheMemoryPolicy(config.get("reads", 4),
+            config.get("min_scope_overlap", 0.35), config.get("incremental_reads", 1))
     if kind == "mempursuit":
         if config.get("pool_order") != "mempursuit":
             raise ValueError("MEMPURSUIT_POLICY_REQUIRES_ITS_SELECTED_POOL")

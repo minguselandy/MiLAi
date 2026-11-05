@@ -1,4 +1,95 @@
-# LIVE A100 EXECUTION v9: 2026-11-05
+# LIVE A100 EXECUTION v10: 2026-11-05
+
+Full goal ACTIVE/incomplete; current and previous turns PROGRESS. Latest:
+data/manifests/a100-development-progress-20261105-v10.json and execution doc.
+No SHA/checksums/content fingerprints,subagents,newservices,secondledger,limitreset,
+remote writes or first-outcome/model retries. GPUs0/1 untouched. Product unchanged.
+
+ONLY LIVE model process: exact E3replication owner e3-retained-replication/driver.json,
+exec2604; seed2 child1861976 atv10, originalFP32two-GPU2/3runtime. Revalidate actual
+owner/proc/native run. Never restart for timeout. No HTTP or offlineCPUsettlement
+while fit lives. Seed1 CLOSED128updates/2048draws/10549642tokens,allcuts/export;
+wholechild6086.632939CPU=native6058.777763+residual27.855176,paidonce;
+two-GPUjobinterval1.925072h. Seed2target128/2048/10607432tokens,notyetclosed.
+Exactoldargv onlyseed/output/phasechanged;cosinehorizon128,evaluations0/16/32/64/128.
+Fixedu32forbothnewseeds. SameE1u16init,notthreeindependentfullchains.
+e3-retained-replication/host-plan.json freezes2new64Hostjobs,NOTEXECUTED.
+Afterbothfitsclose:pendingclosedCPUsettlementonce,thenserialHostjobs,binding/full
+source-answerreviews/nativeF1/SDKstate/cost. No bestseed/cutselection or oldbaseline rerun.
+
+Original DEV64 ALL5 CLOSED,all320wholeanswers/sourceauthorreviewed:
+anchor25C/E125C/B033C/B132C/E340C of64. Failures/Uallretained.
+E3vsanchor17g/2l,+23.4375pp CI[10.9375,35.9375];developmentonly,authornotblind/
+independent. Native literalF1differs;E3retainedreference,notadopted/finalfreeze.
+722HTTP/2697515knownHostprompt+completiontokens/newunknown0. All320Store/Saver/
+applicationstatesaudited,Sourcevaluespreserved;1733literalranges/0unmatched.
+AllfirstHostproviderwiresequal;stochasticqueriesvary,nocontroller/datacausalityisolation.
+C8selectedE3C1/8(simple4/8),8savedforwards0Readercalls,oldfirstresultsreused.
+OldA-v2C15/15andBold32C13/13stayprimary;oneaccidentalArepeatneverprimary,allcostretained.
+No blindA20k/B192/256/answer-first/AtoB or extraB0/B1seeds.
+
+D optional view_cache_incremental IMPLEMENTED in cache_memory_policy.py/factory/CLI;
+originalCachefunctions/7sharedexecutorHostfilesliteral-equaltooriginalE5runtime.
+Reuseonlymatchedpurpose/object/time;actualknownViewmayomitduplicationwhenfull
+locators/revision/time/interpretationmatch. Nativeknownreflookupstillrequired.
+MixedKprojectioncanomitlocators=>conservativeViewrepeat,neverfakeknownidentity.
+Onecache-routeSourceREADsupplementperactualtoolcall,original_sourcegoalretainsold
+reads4route. USE_VIEWdoesnotacknowledgependingarrivals;roles/clocksnottruthcertification.
+Scopebug(delegatingtime-mismatchbacktooldCache)fixedtolegalrefresh/originalacquisition.
+Stringread_goalvalid;boundedstate resetsperactualMemoryControlState/call.
+6newnative+48existingrelatedtestsPASS,1existingMemPursuitskip(packageunavailable).
+Ruff0.16.3/packageDAG/toolsProductinventoryPASS;no fullrepoCIclaim.
+Failed test/timer evidence retained; no model retries or dependency upgrades.
+
+D real optional-policy INITIAL slice CLOSED:
+d-update32/optional-native-initial-slice-closeout.json.8predeclaredoldfamilies,
+7earliestactualinitialcontenttoolcalls;B30hasnocapturecell,keptunavailable,notreplaced.
+All7startwithoutView/K;thisisnotwarmUSE_VIEWoractualKreuse.13READs=5cache-route
+one-read+2explicit-original4readcalls;3View+rawpackets,9literalranges(7assistant/2user).
+OriginalSourcevaluesunchanged,extractivenodesliteral,returnedViewsboundtopersisted
+structures. E15oneViewbudgetrejectionrescuedbyraw-only.0newHTTP/localmodelcalls/Host
+answers,nativeCPUalreadybilled0. NewGNUtimerpendingonce;copiedoldtracesnotnewcalls.
+No Hostgain/factuality/generalizationclaim. Prior9postREFRESHprobesremainseparate.
+
+D3method/2048protocol BEFOREnew32bodyprojection frozen:
+d-update32/protocol-before-body-projection.json andmatrix-plan.json.
+CommonextractiveViewbuilder,strongestoldrepresentation19/80vsraw13/generated8;
+view_cache/view_cache_incremental/E3u32seed0,sameHostthinkingTrue/rich/source/timing/
+24sharedcalls/8control/8additionalreads. Originalold8closed80cachefirstoutcomeseligible
+forreuseandNOTrebilled. Onlynew2policiesold8=160positions;new32all3=960;1120newformal
+positions+80reused=1200total. All5newHostjobsNOTEXECUTED;no automatic queue.
+Runtime-d-update32frozen/current3productionfilesliteral-equal. Do notmixwithruntime-b64.
+
+New32sourceprepCLOSED64streams/320requestspermethod;32TRAIN,newtoDonly,
+historicalsource/trainingexposure/generatedMemOpsdialogue,notunseen/natural/confirmation.
+29priorfile-matchedcontractsreused+3currentfull24turnreviews(A02/C02/D02).
+All768nativedialogueturnsprojectedoffline;Hostfinalnativeprefix736distinctSources,
+lastassistantturnexcluded;oneexplicitUSB-locationcontrolperstream. Originalroles/
+values/orderandalluserwitnesscutssafelybound;no nativeanswer/operation/difficultyfields
+inHosthistories. SharednativeJSONbytesparsed,notclaimedzerometadatabyteIO.
+NaturalintermediateA02target-irrelevant,other31relevantadditions/corrections/scope/status/
+uncertainty,not31simplevalueflips. Constructedcontrolirrelevanceauthor-reviewedbyquery,
+includinglaptopcase;no blindlyall-irrelevantmiddlebatches. Authornotblind/independent.
+Sources/contracts/requirements/histories/preservationin d-update32/*.json.
+
+Dactualsame-beforeKcontrolstillNOTEXECUTED:predeclaredfirst8newTRAINfamilies,atmost
+1actualViewreceiptwithcompleted-finalHostwireproofperfamily;ineligiblecellskept.
+NativevalidatedactualViewrefsandidenticalfullcontrolledHostframesacross3methods;
+host-readout,NEVERgiven-readoutwithK. Keepconditionalcontrolsseparatefromautonomousflows.
+ContinuingHosthistoryisnotproofoldViewdeclaredknown;alloldgeneratedcapturedKwasempty.
+Onebudgetrejectiondoesnotautomaticallytrigger1024matrixbeforeHosteffectisknown.
+
+Costreceipts1..9alreadypaidonce;v8=24.68CPU/v9=1.04CPU. Atv10newclosedGNUtimers
+69.29CPUremainpendingwhilefitseed2lives;newauthor/untimedCPUunknown,not0.
+NeverGNU-wraptimer-scanningwriteritself. Native/model/ownerclientCPUdeductonce.
+Fullremaining:closeE3seed2andnewseed128Hosttrajectories/reviews;D1120newformalpositions+
+actualKcontrols/fullstate/quality/cost;mechanism-based57/24repairsasneeded;finalmethod/
+checkpoint/scoring/budget/NfreezeBEFOREheld256paper+old64queryconfirmation;eligible
+LME451Reader/Judge/Mem2Act400afterexposureaudit;allcost/statistics/paperfigures.
+ConditionalN771fordetectingtrue+5ppvs0isplanning,notallocationorguarantee. Heldcontents
+unexported/unreviewed,nativetestunopened. Goalremainsactive;simplemethodsmaywin.
+
+# HISTORICAL A100 EXECUTION v9: 2026-11-05
 
 Full goal ACTIVE/incomplete. Current and previous goal turns PROGRESS.
 Latest: data/manifests/a100-development-progress-20261105-v9.json and execution doc.
