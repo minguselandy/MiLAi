@@ -6,11 +6,51 @@
 历史 worktree、原始失败与用户文档保持原状。没有使用子代理、SHA/内容指纹校验、新服务、第二账本或远端写入。
 
 本轮机器可读入口为
-[progress](../data/manifests/a100-development-progress-20261106-v41.json)。
+[progress](../data/manifests/a100-development-progress-20261106-v42.json)。
 原始数据、冻结运行时、权重、命令、计时和实际输出位于本 worktree 的 ignored
 `artifacts/a100-development-20261104/`。本记录是现有报告体系的执行摘要。
 
-## v41 当前状态（2026-11-06）：72篇指南，来源可答性按冻结任务统一处理
+## v42 当前状态（2026-11-06）：256基线完整绑定，主E3已实际启动
+
+确认基线两段均实际退出0、父子进程消失、整客户端成本记一次。全部256首次
+自主轨迹保留，原生COMPLETED216/FAILED40，不等于216任务成功。实际590HTTP/
+1,985,393已知Host tokens，新增unknown0/0；共有baseline只按一次实际执行计费。
+剩余248整子进程781.31931CPU和parent0.189366797CPU已付，native本地模型0。
+
+全248绑定和全256合并均实际退出0（44683/20326已drain，勿复查句柄）：
+1,012段实际原文逐字匹配，19,188次既有Source比较；18,932个完整Source加
+256个当前user Source均逐值绑定初始Store。Store/Saver/Source/world/应用
+检查通过，无语义或业务写入。前64的cases/results/review/失败输入/Store
+效果完整record与全量相等，两段review除明确全局index外与全256记录相等。
+
+真实空闲时，15条新增闭合GNU计时共24.54CPU在v22记一次，包含失败前缀v1，
+limits/gen/requests/embedding不变，未重收native/owner/parent/以前费用。
+随即启动冻结的主比较E3seed0/aggregate/u32，owner父2687557/子2687558，
+实际/proc命令已核对。快照18/256结束，状态{'COMPLETED': 16, 'FAILED': 2}，
+并非任务评分。一个实际GPU2/cuda:0模型加载已VERIFIED：FP32、threads4、
+max16384/head2048、MHAfastpath/referencecompile关闭，冻结runtime-b64和
+原DEV64预算/Host设置不变。没有新拟合、baseline重跑、输入裁剪或自动重试。
+secondary seed1/2实际仍0；主worker存活期间不离线结算或启动第二实验。
+另已逐值核对原清单前8个首结果的实际第一次provider请求：整个请求dict
+与共享baseline相等，保留首次失败；这不表示响应或后续内生查询相同。
+全256对应核对及实际Source/SDK/所有NN输入审计仍待。
+
+Source指南现到前112篇，新增72..111先于对应语义方法答案审阅，原指南
+逐值保留。前32整答案/实际材料的判定已逐条与全256最终记录相等绑定：
+C19/I6/W1/F6，材料S21/P5/I6；这32条均nativeDEV，不外推全256。pilot8
+主判C5/I2/W1；共同收紧来源/问题范围[0,6,7]时C2、分母8保持，后续对四
+方法同样处理。原provisional notes保留；完整Source数值缺失时的精确限制
+符合原任务条件，宽泛encoder问题接受有据的文档及逐句表示创新，不强制
+唯一实现清单。完整256歧义清单、材料case26范围和全1024评分仍待，Source
+作者非独立/盲审。标签不进入runtime或训练，不据此调候选/权重/预算/N。
+
+证据：final-confirmation-v1/anchor-all256-binding-v1.json、anchor-first32-source-
+author-review-reconciliation-v1.json、source-author-task-guides-prefix112-v1.json、
+e3-aggregate-u32/learned-owner-v1.json、e3-aggregate-u32-inference-v1.json、
+idle-cost-settlement-v22.json。最新first32合并及primary首8请求核对计时在v22后pending，活动期间
+不结算；未测作者/检查/launch/cleanup CPU保持unknown非0。完整M5仍在执行。
+
+## v41 历史状态（2026-11-06）：72篇指南，来源可答性按冻结任务统一处理
 
 唯一基线worker父2223256/子2223258仍运行，本快照170/248已结束，
 原生状态{'COMPLETED': 138, 'FAILED': 32}；首8不重跑，三个学习方法
@@ -2319,7 +2359,7 @@ View后继续READ的功能切片，再固定三方法、2048预算与同一来�
 改为当前原文短标签或`support_not_opened`，并拆分共享metadata。现已分别验证解释文本不变和
 定位/角色/时钟投影一致，旧比较报告保留，没有重跑读取或模型。
 
-## 全范围剩余要求（按v41证据更新）
+## 全范围剩余要求（按v42证据更新）
 
 | 里程碑 | 当前证据 | 仍需执行 |
 | --- | --- | --- |
@@ -2328,7 +2368,7 @@ View后继续READ的功能切片，再固定三方法、2048预算与同一来�
 | M2 | A/B主拟合、B64 384结果、C8/新7池14格、DEV64五方法与来源/输入审阅闭合 | 不扩菜单或拟合；将完整负结果纳入最终结论 |
 | M3 | E3固定初始化下三训练RNG种子u32/DEV64与家族统计闭合 | 不选最好seed、不自动扩A20k/B192/额外种子；最终采用依完整开发与确认结果 |
 | M4 | 旧8/新32三方法全部正式流程、K9及旧输出42控制/审阅/完整输入/成本闭合 | 保持因子解释边界；与B/C诊断合并开发结论，不把最终更新失败归为单一原因 |
-| M5 | 256家族/4方法/1024首次轨迹已冻结；18,932 Source在冻结后导出，基线运行、前64机械审计及72指南/部分整答复核完成 | 全量基线合并、三学习方法、完整确认QA/统计；旧64查询资格；合格LME451 Reader/Judge、Mem2Act400自身策略/完整输入；全成本/论文图表 |
+| M5 | 全256基线/Source/状态/实际输入已绑定，主E3实际运行；112指南/前32整答复核与全量一致；v22空闲计时闭合 | 完成三学习方法、完整1024确认QA/统计；旧64查询资格；合格LME451 Reader/Judge、Mem2Act400自身策略/完整输入；全成本/论文图表 |
 
 所有规模和 seed 扩展遵循原计划的信号条件，不把多问题、状态、重复或 seed 当作新来源。
 最终允许简单方法获胜；局部 loss、动作准确率和材料覆盖不能代替来源族宏平均 Host 完整成功。

@@ -1,4 +1,91 @@
-# LIVE A100 EXECUTION v41: 2026-11-06
+# LIVE A100 EXECUTION v42: 2026-11-06
+
+FullgoalACTIVE/incomplete; current/previous turnsPROGRESS. Latestmanifest
+ data/manifests/a100-development-progress-20261106-v42.json (compactdelta→v41→v40
+ →v39). Lastcheckpoint7deb6976. NoSHA/checksums/contentfingerprints/subagents/
+newservices/secondledger/reset/refund/remotewrites/Productchanges/model-or-first-
+outcome retries. GPUs0/1 unchanged. ROOT=artifacts/a100-development-20261104.
+
+ONLYLIVE actualexperiment NOW PRIMARYCONFIRM E3seed0/aggregate/u32:
+ROOT/final-confirmation-v1/e3-aggregate-u32/learned-owner-v1.json, parent2687557/
+child2687558 actual/proccommandsverified. BoundedDETACHED/noexecsession/noqueue.
+Nativeexecution-e3-aggregate-u32/driver.json snapshot18/256closed, revalidate
+actualstatus/proc. NOTtaskC. OneGPU2/cuda:0cachedmodel VERIFIED FP32threads4/
+max16384head2048/MHAfastpathFalse/referencecompileFalse (TF32falsewrapper).
+NativeDecisionmodulefrozenruntime-b64/src/.../laya_local.py; actualmodel_loads1.
+primary-first8-initial-provider-equality-v1.json ACTUALPASS: wholefirstprovider
+requestdicts equalsharedanchorforfirst8(originalorder/includesfailures), no
+response/laterendogenousqueryequalityclaim. ENTIREprefixrecords needreconcile
+withfull256futureaudit. No newmodelcalls/ledgerwrites. FullSourceSDK/NNinput
+checksremain, notcompletedbyfirstwireequality.
+OwnerclientCPUFalsewhilelive. NoofflineCPUsettlement/secondModel/HTTPworker.
+Ownerrecordswholechild-minus-native+parentonceatrealexit, artifactvalidationafter
+billing. Ifunexpected/capacity/unknownfirstfailurehaltsbatch, KEEPfirstoutcome;
+inspectthenonlynever-attemptedcellsundernewrecord, nevercropK/menu/Source/task/
+horizon,compact/quantizetopass orretrythemodel. Seeds1/2 actual0.
+
+ANCHOR ALL256 ACTUALLYCLOSED/BOUND. remaining248ownerparent2223256child2223258
+exit0/procgone/clientpaid; pilot8likewise2179670/2179671gone. Fullbinder248
+actualexit0/session44683drained; combiner256actualexit0/session20326drained;
+NEVERrepoll them oroldprefix32539success/85230failed. Noanchor reruns.
+anchor-all256-binding-v1.json:216nativeCOMPLETED/40FAILED,1012literalrawranges/
+19188wholeoldSourcecomparisons,all18932wholeSourceunits+256currentuserSources
+boundinitialStore. Store/Saver/Source/world/app unchanged exceptnativeallowed
+operationalnamespaces/last_binding_phase and216propernewfinalassistantSources;
+semantic/business0. ENTIREprefix64cases/results/review/failures/Storeeffects
+literalEQUALfull248, all256reviewequaloriginalsegments exceptglobalindex.
+Outputsanchor-all256-cases/results/review-input/failed-last-inputs/binding-v1.json.
+Actualbaseline590HTTP1985393known/newunknown0/0, sharedbaselinepaidONCE.
+remaining248wholechild781.31931CPU+parent.189366797 paidonce/native{}/model0;
+pilotwhole35.360213+parent.118245314paidonce. NativeCOMPLETEDnotqualitysuccess.
+
+Source-specificguides FIRST112 in final-confirmation-v1/source-author-task-guides-
+prefix112-v1.json. New72..111beforecorrespondingsemanticanswerreview; original
+guidesliteralunchanged. Generalrules/method/N/budgetprefreeze1ebe965e; all256
+nativeSourcebasisbeforefirstmodel, sourceauthorNOTblind/independent; do not
+claimallguides-before-allanswers. Source-scope-rubric-application-before-learned-
+v1.json appliesEXISTINGpubliccondition (fullSourceunavailable→preciselimitation
+cancomplete; extantanswerbutnotretrieved→incomplete). Samecommonsensitivity
+all4/all256denominators; originalfull-stringnativeF1separate, no labelsinpolicy.
+
+PILOT8 scopeadjudicationNOWFINAL inpilot8/anchor-source-author-decisions-v1.json:
+C5/I2/W1,matS5/I3; commonSource/question-scopewithhold[0,6,7]→C2/8(all8kept).
+Originalprovisionalnotesretained:0I/P→C/SbecauseexactfiguresabsentinfullSource
+andpublicconditionexplicit;7pending→C/Sbecauseactualabstractdoc+sentence
+encoderadaptationanswersbroadquestionwithoutmandatoryCLS/interval/positionlist.
+Applythissamecriterion/sensitivitytoall4, notbestmethodselection.
+anchor-first32-source-author-review-reconciliation-v1.json allENTIRErecords
+literallyequalfinalall256exceptdeclaredglobalindex: C19/I6/W1/F6,matS21/P5/I6,
+all32nativeDEV, NOTfullcohortestimate. Includesearlierglobal8..19 +new20..27
+(C5/F3) +28..31(C3/I1). Source-guidesprecededtheseanswers. NativeNoqualitychecks
+case22contradictedbyactualfiltering→supportedYes; case28bestrankdifferenttracks
+notsharedabsoluteF1;29comparisonnamesonlymissingtable→preciselimitation;30
+maskedformula≠noextantverbalFIR/EGLmethod. Case26material-scopePpendingcommon
+sensitivity. Full256ambiguityinventory/wholeall1024QA/statsstillPENDING.
+
+IDLE22 ACTUALLYPAIDONCE15closedtimers24.54CPUafterfullanchorbinder/combine and
+actualnoentryprocess; includesfailedprefixv1, export/pilotbinder/guides/QA/full
+binders. limits/gen/requests/embedunchanged, allprior/native/owner/parentnotrebilled.
+Receipt idle-cost-settlement-v22.json. Newreconcile-first32+primaryfirst8-wiretimersAFTER22PENDING
+whileprimaryLIVE. NeverGNUwraptimerscanner/writer/settlement. Untimedauthor/
+inspection/launch/cleanup/settlementCPUunknownnot0. Historicalunknown15/1kept,
+onlynewclosedbaselineunknown0/0claimed.
+
+NEXT verifycurrentprimaryactualstatus/proc; do notlaunchanotherjobwhilelive.
+Continueguides112..255/wholebaseline32..255, prepare/reuseunchangedDEV64 learned
+Source/actual-first-wire/SDK/Store/Saver/View/allfiniteNNinput/action/costaudits.
+Nativeguardrejectsstate/headtruncationbeforeforward; actualallinputproofstill
+required. Secondaryfrozenjobsready fromsame256initialsnapshots, afterprimary
+actualterminal/paid/procgone, inspectanyfailurebeforecontinuingunexecutedcells.
+N256families/1024firsttrajectories, 3fixed-E1-inittrainingRNGseedsNOTfullchain
+variance/not1024independent; no bestheldseed/update/N/model/budget/scorerreselect/
+adoption. NativeTEST+old64reservedquerysemanticsSTILLUNOPENED; old64sourcesexposed.
+Old64eligibility, eligibleLME451ReaderJudge/Mem2Act400ownpolicy/fullinput/native
+budget/scoring, allcost/statistics/finalfigures/paperremain. AllLME200histories/
+451queries29imagesdevelopmentexposed; old902fixedpaths501complete1partial400
+unrun notownpolicy/no rerun. FullgoalNOTcomplete; B-C/D-K/formal/M3closedbelow.
+
+# HISTORICAL A100 EXECUTION v41: 2026-11-06
 
 FullgoalACTIVE/incomplete; current/previous turnsPROGRESS. Latestmanifest
  data/manifests/a100-development-progress-20261106-v41.json (compactdelta→v40→v39);
