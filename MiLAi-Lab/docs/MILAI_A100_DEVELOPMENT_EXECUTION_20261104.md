@@ -6,11 +6,43 @@
 历史 worktree、原始失败与用户文档保持原状。没有使用子代理、SHA/内容指纹校验、新服务、第二账本或远端写入。
 
 本轮机器可读入口为
-[progress](../data/manifests/a100-development-progress-20261106-v38.json)。
+[progress](../data/manifests/a100-development-progress-20261106-v39.json)。
 原始数据、冻结运行时、权重、命令、计时和实际输出位于本 worktree 的 ignored
 `artifacts/a100-development-20261104/`。本记录是现有报告体系的执行摘要。
 
-## v38 当前状态（2026-11-06）：B/C完整审阅闭合，预留确认协议已冻结
+## v39 当前状态（2026-11-06）：确认所选256已在冻结后导出，基线未执行248族运行中
+
+冻结记录先提交1ebe965e，然后才用既有QASPER source-only adapter导出256个
+所选论文家族/18,932个Source单元，nativeDEV185/TRAIN71。保留所有标题/段落/
+caption和首个原生问题，模型history没有检索query或答案/证据标签，离线
+native替代标注与Source引用单列。解析了共享dev/train容器，不能声称未读取
+任何其他字节；仅投影所选语义，nativeTEST未打开，old64保留查询亦未打开。
+模型首次调用前，256个原生替代答案及字面Source证据basis已独立绑定；它是
+离线依据，不冒充完整来源作者task guide或独立盲审。
+
+确认fixed-prefix首8族实际一次完成8条完整自主Host轨迹，19HTTP/54,908已知
+Host tokens、新增unknown0/0。实际最终输入/32段原文/609次完整Source比较/
+Store/Saver/应用表均核对通过，新增8条正确标assistant的最终Source，没有
+语义记录或业务写入。8个原生COMPLETED尚不等于8个任务成功，质量待审。
+整子进程35.360213CPU、parent至计量点0.118245314CPU已记一次，模型加载0。
+
+按原预定清单启动从未执行的248族，唯一实际worker父2223256/子2223258。
+快照10/248闭合，状态按实际driver/进程重新核对；原首8不重跑、不重收。
+完整DEV64配置、24共享生成额度、2048返回/观察、range256与Host8192不变，
+原生train/dev混合通过不指定split过滤处理，不伪造all枚举。三个学习方法
+仍未执行，后续各从同一实际pre-first-Host Store/Saver开始，总N1024冻结不变。
+活动期间不离线结算或启动第二实验worker；新导出/首8审计CPU计时在v21后pending。
+
+进度检查意外显示了两个首8基线答案，因此完整来源作者guides不能声称全部
+在答案前写成、也不能声称blind。通用评分、方法/预算/N在语义导出前已冻结，
+原生标注/字面证据basis在模型前已绑定；后续Source专属解释不得随方法结果
+改变判据或候选。完整确认QA/统计、合格外评、全成本和论文图表仍未完成。
+
+证据：final-confirmation-v1/source-export-closeout-v1.json、
+source-review-guide-basis-before-model-v1.json、pilot8/anchor-native-binding-v1.json、
+remaining248/anchor-owner-v1.json及冻结后的实际执行目录。完整目标保持ACTIVE。
+
+## v38 历史状态（2026-11-06）：B/C完整审阅闭合，预留确认协议已冻结
 
 66格完整新答案、实际packet、全文任务依据均逐条读过，按同一来源作者规则
 完成裁定，没有把旧标签复制给新答案，也没有使用新增模型/Judge或训练。

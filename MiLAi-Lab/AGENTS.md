@@ -1,4 +1,84 @@
-# LIVE A100 EXECUTION v38: 2026-11-06
+# LIVE A100 EXECUTION v39: 2026-11-06
+
+FullgoalACTIVE/incomplete; current/previous turnsPROGRESS. Latestmanifest
+ data/manifests/a100-development-progress-20261106-v39.json /executiondoc.
+NoSHA/checksums/contentfingerprints/subagents/newservices/secondledger/reset/
+refund/remotewrites/Productchanges/firstoutcome-or-model retries. GPUs0/1 unchanged.
+
+ONLY LIVE actualHTTPexperiment CONFIRMATION ANCHOR remaining248:
+ROOT/final-confirmation-v1/remaining248/anchor-owner-v1.json,
+parent2223256 /child2223258 actual/proccommands verified. Detached boundedowner,
+no unifiedexecsession. Snapshot10/248closed; revalidateactualNativeStatus/proc.
+Output final-confirmation-v1/execution-fixed-prefix-remaining248/driver.json.
+OwnerCPUclientFalsewhilelive; originalbeforebudget saved, meterswholechildnative
+residual+parentonceatterminal. No offlineCPUsettlement/secondactualModel/HTTPjob
+whilelive; neverrestartlostobservation. AlloldB/C/D/K/formal/fitoutcomes CLOSED.
+
+FINALFREEZE actualBEFOREheldsemanticexport atcommit1ebe965e:
+final-confirmation-v1/protocol-before-held-export.json /inherited-DEV64-config.json.
+Methods FIXED-prefix(policyfixed,NOTfixed_context), primaryE3seed0aggregateu32,
+secondaryalready-completedfixed-E1-inittrainRNGseed1/2u32. N256papers/4methods=
+1024FIRSTfullautonomous trajectories, 256familiesNOT1024independent. Native185DEV/
+71TRAIN, allallocatedsourceIDs/firstnativequestion, nooutcomeselection. ExactDEV64
+runtime-b64/config/Hostprompt/projection;24sharedcalls(HTTP+local), policyreads4/
+additional8/control8/return2048/obs2048/range256/max16384head2048/Host8192. GPU2FP32/
+MHAfastpathFalse/referencecompileFalse/TF32False. No givenquery/forcedretrieval/
+fixedReader/SourceKmenu/taskcrop/compact/quantizetopass/newseedfitting orheldreselect.
+Latestconditionalpower~640planningnotN/powerguarantee; N256fixedallpositionsF/Ukept.
+
+Held256 semantics NOW EXPORTED AFTER FREEZE, notunopenedanymore:
+source-export-closeout-v1.json, histories.json/references.json;18,932Sourceunits,
+allheadings/paragraphs/captions/bodies/roles/order retained, nativeTESTnotopened,
+old64reservedquerysemanticsstillunopened. Shareddev/traincontainersparsed, byte-
+no-contactnotclaimed, onlyselected256semanticsprojected. source-onlyhistories
+requestkeysid/content ONLY, noGold/annotations/retrievalrequest. Offline native
+alternatives+literal Sourceevidencebasis BEFOREfirstmodel:
+source-review-guide-basis-before-model-v1.json (NOTfinalsourceauthorguides).
+Two pilotanswersdisplayedbyprogresslog beforefullsource-specificguides; disclose
+notblind/notallguides-before-allanswers, no method/scorer/budget/Nchangefromthem.
+
+CONFIRMATION PILOT8 ACTUALLY CLOSED/AUDITED, NEVERrerun:
+pilot8/anchor-owner-v1.json status
+COMPLETED_AUTONOMOUS_ANCHOR_SEGMENT_PENDING_SOURCE_SDK_QUALITY_REVIEW, exit0,
+parent2179670/child2179671gone/clientCPUpaid.8nativeCOMPLETED NOT8taskC.
+19HTTP54908known/newunknown0/0, wholechildCPU35.360213+parent.118245314paidonce,
+localmodels0. binder `bind_final_confirmation_anchor.py pilot8` actualexit0:
+pilot8/anchor-native-binding-v1.json;32literalrawranges/609oldSourcecomparisons/
+allStore/SaverSource/world/apps unchanged except allowedlast_binding_phase and
+8propernewfinalassistantSources;0semantic/businesswrites. Actualcompletedfinal
+providerinputs allbound. anchor-cases-v1/results/review-input-v1 also saved.
+
+AT remaining248 actualterminal FIRSTverifyownerexit/status/clientCPU/procgone.
+Run `bind_final_confirmation_anchor.py remaining248` under frozenruntime-b64src/
+tools/ROOT+HTTPPython; awaitactualexit0. Then aggregate EXACTpilot8+remaining248
+cases/results/binding into256inallocationorder WITHOUT rerun/rebindpilotmodel.
+Threelearningmethodsactual0. Reuse frozenHost replay entry fromexisting
+`task-dev64/learned-method-plan.json`, sameactualpre-firstHostsnapshots,3cached
+GPU2FP32jobsserial forseed0/1/2. Do notcopy a later final answer into initialinput.
+NativeReaderfirstfailures/capacityF/U kept; unknown stops/no retry. Sharedbaseline
+costoneactualexecution, not3repeatcalls. Full1024Source/actualinput/SDK/finiteNN/
+View/role/time/wholeanswer/material/perseed/within-familymean/nativeF1/stats/cost
+remaining; primaryseed0fixed, nobestconfirmationseed/update/source/budgetselection.
+
+B/C66wholeQA+audit+caps fullyclosed atv38: Bnew15/52completevsretained18,2partial
+answergains5losses39ties6unknown/delivery0gains4losses47ties1unknown. C7rules3/7
+vsE32/7,heading-onlysensitivity2/7both;47of48/18of24caps nofill. No newtraining/
+fits/menu/adoption. ROOT/b-c-repair-full-closeout-v1.json /quality-closeout and
+finalsource-author-decisions supersedeprovisionalnotes. SourceAuthornotblind.
+D/K/formal/M3fixedinit3RNGseed evidence closed asbelow. NoautomaticA20k/B192/AtoB.
+Idle21ACTUALLYpaid4timers7.81CPUonce/allGNUthrough21paid; export/pilot audit newer
+GNUtimerspendingwhileLIVE. NeverGNU-wraptimer-scanningwriter/settlement, never
+rebillnative/model/client/parent/earlier. Untimedauthor/launch/cleanupunknownnot0.
+
+M5remaining: frozenconfirmexecution/wholeQA/stats, old64queryeligibilitypanel,
+LME451Reader/Judge/Mem2Act400 ownpolicy/fullinput/exposure/inheritedbudgets/
+scoring, fullcost/finalfigures/paper. AllLME200histories/451queries29imagesalready
+DEVELOPMENTexposed, not independentunseenconfirmation; row231surrogate2dropsnot
+actualchosenE3failures/donotshrinktofit. Mem2Act400GivenTool/341sourcecomponents
+notindependentusers/transactions; missing-session/schemaerrorskept/no goldfilter.
+NativeTESTsemanticcontentsunopened. FullgoalNOTcomplete. Historicalstatesbelow.
+
+# HISTORICAL A100 EXECUTION v38: 2026-11-06
 
 FullgoalACTIVE/incomplete; current/previous turnsPROGRESS. Latestmanifest
  data/manifests/a100-development-progress-20261106-v38.json /executiondoc.
