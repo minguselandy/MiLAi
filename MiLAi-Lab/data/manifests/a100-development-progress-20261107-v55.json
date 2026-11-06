@@ -1,5 +1,5 @@
 {
-  "status": "ACTIVE_SEED1_QA104_LME_FIRST42_RETAINED_STORAGE_FOLLOWER_EXIT0_TAIL409_REGISTERED",
+  "status": "ACTIVE_SEED1_QA104_ONE_LME_CONTINUATION003_AND_CPU_STORAGE_FOLLOWER_IDLE29_PAID",
   "timestamp_utc": "2026-11-06T20:30:05.243810+00:00",
   "goal_status": "active",
   "goal_complete": false,
@@ -145,16 +145,19 @@
       450
     ],
     "next_unattempted_count": 409,
-    "next_actual_dispatched": false,
+    "next_actual_dispatched": true,
     "automatic_queue": false,
-    "whole451_audit_scoring_archive_closed": false
+    "whole451_audit_scoring_archive_closed": false,
+    "actual_running_continuation003_snapshot": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/stages-lme-v1/fixed-prefix-prediction451-v1-continuation-003-running-snapshot-v1.json",
+    "actual_running_parent_pid": 536181,
+    "actual_running_child_pid": 536184
   },
   "costs": {
-    "last_actual_idle_paid": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v28.json",
+    "last_actual_idle_paid": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v29.json",
     "idle27_commands": 71,
     "idle27_CPU_seconds": 18.560000000000002,
     "new_offline_timers_after27": "All122 closed timers paid once at idle28; after28 amendment timers pending next actual eligible idle.",
-    "live_segment_whole_CPU_HTTP_and_unknown_usage": "Continuation002 actual exit1 whole child220.73360300000002+parent.180903884 paid once. Storage follower exit0/cost pending; no model worker live before explicit003 launch.",
+    "live_segment_whole_CPU_HTTP_and_unknown_usage": "Continuation003 model worker and CPU-only storage follower now live; whole costs pending actual exits. No offline settlement while model worker lives.",
     "first_LME_child_and_parent_already_paid_once": true,
     "native_model_whole_client_parent_or_idle1_to27_rebilled": false,
     "unmetered_author_inspection_launch_cleanup_settlement_CPU": "unknown_not_zero",
@@ -164,7 +167,12 @@
     "idle28_CPU_seconds": 323.24999999999994,
     "separate_Source_setup_CPU_paid_once": 1244.593596831,
     "source_nested_CPU_rebilled": false,
-    "new_offline_timers_after28": "Pending actual idle29 once-only; storage follower002 whole child16.027667+parent.026376141 also pending separate original-ledger phase."
+    "new_offline_timers_after28": "All37 closed after28 timers paid at actual idle29, plus separate storage002 whole CPU16.054043141. Newafter29 amendment/review timers pending next eligible idle.",
+    "idle29_commands": 37,
+    "idle29_CPU_seconds": 5.540000000000002,
+    "separate_storage002_CPU_paid_once": 16.054043141,
+    "idle29_first_settlement_IO_boundary_failure": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle29-first-settlement-io-boundary-reflection-v1.json",
+    "idle29_failed_settler_CPU": "unknown_not_zero; failure before ledger open/charge, retained and corrected at Path boundary."
   },
   "remaining": {
     "semantic_of1024": 408,
@@ -206,7 +214,7 @@
     "restore_requirement": "Optional native per-step replay must call frozen v2 restore_control(original logical path) first. Existing full451 Source/SDK/NN/Reader audit and paired first-call replay use before archives/root call and do not read step/control.json.",
     "follower_protocol": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-lme-lossless-storage-follower-v3/protocol-before-follower-execution-v3.json",
     "follower_contract": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/lme-storage-follower-terminal-owner-contract-v3.json",
-    "follower_next_actual_dispatched": false,
+    "follower_next_actual_dispatched": true,
     "follower_scope": "One named segment only, terminal files only, pure CPU/no model/HTTP/ledger. Complete child and parent CPU deferred to actual idle. No automatic next model segment.",
     "disk_available_GiB_snapshot": 118,
     "actual_follower_owner": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/fixed-prefix-prediction451-v1-continuation-002-storage-v3-owner.json",
@@ -221,7 +229,11 @@
     "total_completed_control_checkpoint_archives": 252,
     "follower_complete_whole_child_CPU_seconds": 16.027667,
     "follower_parent_CPU_seconds_through_receipt": 0.026376141,
-    "follower_CPU_paid": false,
-    "follower_next_plan": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/fixed-prefix-prediction451-v1-continuation-003-storage-v3-plan.json"
+    "follower_CPU_paid": true,
+    "follower_next_plan": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/fixed-prefix-prediction451-v1-continuation-003-storage-v3-plan.json",
+    "follower_actual_idle29_CPU_paid_once": 16.054043141,
+    "next_actual_follower_owner": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/fixed-prefix-prediction451-v1-continuation-003-storage-v3-owner.json",
+    "next_actual_follower_parent_pid": 537304,
+    "next_actual_follower_child_pid": 537305
   }
 }

@@ -13,14 +13,17 @@ newunknown0/0. First42 now39COMP/3ReaderF/409NOTRUN; failed7/39/41 retained.
 Row41 againlength8192/contentNone,prompt6668/reserved15372<65536,error0,
 not inputoverflow/unknown. Previousfirst40 whole dicts equal, no retries.
 Only untouched42..450409 explicitly registered as continuation003, check-only
-readyTrue; NOT LAUNCHED yet. Require actualidle29 before explicit nextlaunch.
+readyTrue. ACTUALLY LAUNCHED aftercommit42cdd299+idle29: parent536181/
+child536184 RUNNING/clientCPUFalse, actual/proccommands verified. Snapshot
+active42,39COMP/3F/1PREPARING/408NOTRUN; first42 whole dicts unchanged.
 Full451audit/native score/Judge/scoreaudit/archive remain pending.
 
 CPU-only storagefollower002 ACTUALLY EXITED0; parent483037/child483038 absent,
 rows40/41 both complete full-byte reconstruction before raw removal;252total
 checkpoints now archived. Complete child16.027667CPU+parent.026376141 pending
-idle29 separatephase, no models/HTTP/ledger. Same frozen follower code now
-has a separate one-named-segment003 plan, NOTLAUNCHED. Basearchive outside
+idle29 separatephase PAID16.054043141, no models/HTTP/ledger. Same frozen
+follower code has ACTUAL named-segment003 parent537304/child537305
+RUNNING_CPU_STORAGE_ONLY, both/proccommands verified. Basearchive outside
 case/output trees; preserve dependencies. Optional per-step replay must use
 frozenv2 restore_control; existingfull451audit/pairedrootfirstcall do notread
 step/control.json. Never share mutableSQLite/Source/input/queue.
@@ -35,7 +38,10 @@ statistics/perseed/within-family3seedmean/nativeDEV185TRAIN71 pending.
 Mem2Act common429session16843turn Source bank actualexit0/fullverified/CPU
 paidonce1244.593596831 atidle28. Actual400x2=0, final execution/capture/
 shared-first-Host/catalog/audits/adaptedmetrics protocol still required.
-idle1..28 paid, newafter28 timers +storage002CPU pendingidle29. No nested/
+idle1..29 paid. Actualidle29:37closedtimers5.540000000000002CPU +storage002
+16.054043141 paidonce. Newafter29 timers pending. Firstsettler29 failed before
+ledger open from str/Path mismatch; corrected Path boundary/reflection kept,
+failedsettlerCPU unknown_not_zero. No nested/
 native/client/parent/oldcost rebill. Unmeteredauthor/inspection/launch/cleanup/
 settlementCPU unknown_not_zero; no offline settlement while modelworkerlive.
 
