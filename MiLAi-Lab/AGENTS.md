@@ -1,4 +1,99 @@
-# LIVE A100 EXECUTION v29: 2026-11-06
+# LIVE A100 EXECUTION v30: 2026-11-06
+
+Full goal ACTIVE/incomplete; current/previous turns PROGRESS. Latest manifest:
+data/manifests/a100-development-progress-20261106-v30.json and execution doc.
+No SHA/checksums/content fingerprints, subagents, services, second ledger,
+reset/refund, remote writes or model/first-outcome retries. GPUs0/1/Product unchanged.
+
+ONLY LIVE experiment HTTP/model worker new32-e3-aggregate-u32-owner.json:
+parent28715 / child28722 / exec80986;145/320closed at snapshot. Revalidate actual
+/proc/owner/native. FP32savedE3u32 GPU2/MHAfastpathFalse/refcompileFalse/oneverified
+load. Frozenruntime/config/data/Host unchanged. NoextraHTTP/nativecapturedcontrols/
+realStoreclones/offlineCPUsettlementwhilelive. Isolatedscripted/noHTTPfixtures with
+norealexperimentStore/originalledgeraccessallowed, none new. At actualterminal
+FIRSTfullbind_d_frozen_method.py new32-e3-aggregate-u32;await actualexit0;THEN
+audit_d_closed_sdk_states.py new32-e3-aggregate-u32. Full320quality/Views/SDK/effects/
+ops/costclosure then familycomparison/controls. Losthandle not retryauthority;
+neverrepollcompletedbaseline4305/incremental4286.
+
+E3PREFIX120 WHOLE SOURCE REVIEW CLOSED:
+d-update32/reviews/new32-e3-aggregate-u32-prefix-0120/answer-review-closeout-v1.json
+C36/Q20/W39/F25;material41complete76partial3insufficient;joint26;receivedViews0.
+12correlatedTRAIN-exposedfamilies,not120independent/unseen/full320/adoption.
+Sourceauthor,notindependent/blind. Allfirstfailures/actuallastrespondedinputskept.
+ENTIRE80→90,90→100,100→110,110→120recorddicts/providerinputs/answers/Sourcebindings/
+allViews literallyequal before same-methodreuse/allanchors/Fmaskvalidation.
+NEXTindex120B26. Separateactualcomplete-familycut;compare ENTIRE120records/allViews
+beforecopy/revalidate. Inspector --compact --since-previous --compact-view-text
+--reuse-reviewed-condition new32-view_cache. Readwholeanswers,nevergradeunseen/
+truncated; originals2–5needownquotesnotassistant, F iffactualexecfailed.
+
+B05initialjointIris corecorrect, butdefiniteElara-backupranknotownconfirmed and
+Kevinownchildnames not user-childproposals. LaterjointElara/currentwifeIris-only
+proposalnotaccepted unreceived. B12manyqueries onlyonephonecorrection; rawknownref1
+notcontrolledViewK. Mistyped3742notpreviouslyactive/retired; later3790active/3724only
+proposedportback/formtypo/travelcovermissingcontactunreceived. B21initialrole/82000/
+TueSat/activeconsult/futureOCScorrect; contentownOCSgapmaterialpartialversusoriginal
+complete. Mid82500/final85000unconfirmed/fallrequestapprovalunreceived. B25specific
+2nd4thFri governsambiguousbiweeklylabel, not14daycalendar; original116/117robotics
+quoteassistantunlabelledQ/complete. AprilTue5pm/Thuoldtime/everyFri/pianodiscontinued/
+climbingunconfirmed/Mayproposal/Ethan/artshowunreceived. No realcalendar/HR/contact
+action, medicaladvice or currencyjurisdiction/year/timezoneinferred.
+
+PREFIX120author save FAILEDliteralissuequote113 (wrongturnwording), no batchwrite,
+old110judgments preserved. I wronglycalleddependentclosev1afterauthorfailed, and it
+failedlen110; failedtimerretained. Proofauthor-literal-quote-and-dependent-close-failure-v1.json.
+Onlyactualissuequote corrected/no grade ormodelresultchange; author-v2exit0 confirmed
+THENseparateclose-v2passed. KeepfailedauthorCPUunknownnot0, failedclose-v1timer.
+Do not proceed toANY dependentwrite/close unless previouscommandactualexit0;
+yield10000doesnotbyitselfprove success. Earlierprefix50prematurereconcilefailure
+retained (seev29), no defensivefilefallback or model/toolretry.
+
+ROOT/audit_d_finite_decision_inputs.py ran READONLY on actualprefix120:
+finite-decision-input-audit-v1.json:274actualforwards,0new;tokens2521..9126,total
+1597256already-native-counted;437sharedcalls=163HTTP+274local,not437HTTP.
+Allactualpayloads equalfrozen shared_actions projection; decode literal_tables_v1
+before comparing: completebefore/allactiontargets/parameters/order/head/logit/prob
+IDs and selectedresult equalnative. AlltruncatedFalse. NativeDecisionstrictguard
+rejectssequence/headtruncationbeforeforward(max16384/head2048);probabilitiesuncalibrated.
+No model load/retokenization/forward/HTTP/realStore/ledgeraccess. Scopedofferednative
+observation/menu, NOTcompletebankdelivery/Hosttruth/full320/externalLMEfeasibility.
+Read-onlyfirstinspectorKeyError0 duequestionsdictnotlist and encodedtable!=list
+retainedasreflection/untimedCPUunknown; decodeprovesliteral equality.
+At full320 repeat audit on fullpacket once if useful; do not rerun prefix audit.
+
+All3first8Viewdonorprooffilescollected (pureJSON,realcontrols0):baselineA05/A33/B03
+eligible,1failed/4noView;incrementalB03eligible,1failed/6noView;E3all8completed/noView.
+24methodcells/4eligiblecells/3families, max1actualbefore/family×3→atmost9conditional
+readoutsbeforefurthernativeeligibility.5nocandidatefamilies retained. Notfinaldonor
+selection/nativeKlookup/Storeclone/fresharrival/fullframeproof; keepA05firstrev1,
+fullHosthistory/siblingreceipts, no laterturn/family/cleanerrevisionfill or givenKreadout.
+52READ preparercontract reviewedonly:2or3legalnominatedIDs required; explicitbindings/
+exactnominations/operations route hasNO first-action branch-samplingvalue. Afterformal
+close nominatefrozennewREAD+alreadyexecutedoriginalcomparisonbinding,filterpolicies
+toONLYnewREAD;neverrerunoldnomination/addpadding. fixed_contextreads4/continuation2/
+actualremainingcaps/emptyKgivenreadout;57statecap old139+functional8 retained. C7pools
+rulesvsE3handoff-only max14new→47of48/18of24states reserved/unexecuted.
+
+Baseline320C67/Q65/W121/F67,material84/222/14,joint53;42Views163occurrences.
+Incremental320C65/Q56/W135/F64,material76/223/21,joint48;25Views117occurrences/
+929rawranges. Bothfullquality/SDK/ops/ownerCPUclosed,seev27–29;don'trerun/rebill.
+Preparedcompare_d_new32.py(all3full320closures,32family20kseed0bootstrap) and
+settle_d_new32_E3_idle_v17.py(all3closure+comparison+actualidle,diffafter1..16)
+NOTEXECUTED;receipt17ABSENT.46closedpost16timers35.63CPU pending inclfailedclose/
+earlierreconcile/author-v2/audit;authoruntimedCPUunknownnot0. NoofflineCPUsettlement
+whileE3lives;nativeHTTP/local-modelcostcontinuesinoriginalledgeronce. NeverGNU-wrap
+timer-scanningwriters/actualsettlement. v16paid76timers211.76CPUonce beforeE3launch.
+
+ActualK/old-output/52READ/7poolcontrols0. v20Sourceexclusion24fixtures/v24firstframe
+2fixturesunchanged;formalruntimeLACKSnewSourceexclude. Afterformalclosure validate
+nativebefore/K/fresharrival/fullHostframe/receipt/separatecontrolledruntime/config.
+Fullremaining:E3tail/fullclosure,3methodstats,controls/repairs,finalcandidate/checkpoint/
+scoring/budget/Nfreeze BEFOREheld256papers/old64querycontents;LME451/Mem2Act400
+own-policy/full-input/exposure,allcosts/paperfigures. Testsplit/heldsemanticcontents
+unopened. GoalNOTcomplete.
+
+# HISTORICAL A100 EXECUTION v29: 2026-11-06
 
 Full goal ACTIVE/incomplete; current/previous turns PROGRESS. Latest manifest:
 data/manifests/a100-development-progress-20261106-v29.json and execution doc.
