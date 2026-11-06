@@ -20,15 +20,18 @@ clientCPU paidonce1690.013888+parent.158571701,16HTTP75048known,newunknown0/0.
 First58 now54COMP/4ReaderF/393NOTRUN; failed7/39/41/57 retained. Row57 again
 length8192/contentNone,prompt2917/reserved11621<65536,error0; not inputoverflow
 or unknown. Previousfirst42 whole dicts equal. Only untouched58..450393
-explicitly registered as continuation004, check-only readyTrue; NOTLAUNCHED
-yet. Need actualidle30 then explicit nextlaunch. No automated model queue.
+explicitly registered as continuation004, check-only readyTrue; ACTUALLY
+LAUNCHED aftercommit52edccb2+idle30: parent714659/child714676
+RUNNING/clientCPUFalse. Both actual/proccommands verified; first58 whole
+dicts equal previous, snapshot active58. No automated model queue.
 Full451audit/native score/Judge/scoreaudit/archive still pending.
 
 CPU storage003 ACTUALLY EXITED0; parent537304/child537305 absent. All16rows
 42..57 stored, total58closedcases/348fullcheckpoints, complete originalbyte
 reconstruction before raw removal. Complete child112.91779500000001+parent
-.027143931 pending separateidle30phase. One-named004 plan reuses unchanged
-frozenv3code, NOTLAUNCHED. Preserve sharedbase outside case/output trees;
+.027143931 PAID idle30 separatephase112.94493893100001. One-named004
+follower ACTUALLY RUNNING parent715656/child715657, actual/proccommands
+verified, pureCPU/no modelHTTPledger. Preserve sharedbase outside case/output trees;
 optional per-step replay frozenv2 restore_control, whole451audit/pairedroot
 firstcall do notread step/control.json. Never share mutableSQLite/Source/input.
 
@@ -50,7 +53,9 @@ Actual400x2 remains0; final boundedowner/full400audits/earliest-resultfinalizer/
 executionprotocol/publicprojection/actualruns/scoreaudits/archive required.
 
 Mem2Act common429sessions16843turn Source bank alreadyverified/paid1244.593596831
-atidle28. idle1..29 paid; allafter29 closedtimers and storage003CPU pending30.
+atidle28. idle1..30 paid; actualidle30 paid62closedtimers86.49000000000005
+CPU+storage003112.94493893100001 once. Newafter30 timers pendingnextidle.
+No offlineCPU settlement while active model714659/714676 lives.
 No nested/native/client/parent/earlier rebill. Unmetered author/inspection/
 launch/cleanup/settlementCPU unknown_not_zero. No offline billing whilemodel
 workerlive. All earlierM0-M4/B-C/D-K/fits/internal1024/audits/nativeF1 retained.
