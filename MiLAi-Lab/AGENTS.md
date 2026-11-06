@@ -1,4 +1,83 @@
-# LIVE A100 EXECUTION v37: 2026-11-06
+# LIVE A100 EXECUTION v38: 2026-11-06
+
+FullgoalACTIVE/incomplete; current/previous turnsPROGRESS. Latestmanifest
+ data/manifests/a100-development-progress-20261106-v38.json /executiondoc.
+NoSHA/checksums/contentfingerprints/subagents/newservices/secondledger/reset/
+refund/remote writes/Productchanges/model-or-first-outcome retries. GPUs0/1 unchanged.
+NO LIVE EXPERIMENT WORKER. B52/C14 actualexit0/procgone/clientCPUpaid, FULL66QA NOW
+CLOSED. NeverrerunB52/C14/oldD/K/formal/fitfirstoutcomes. Older terminalhandles
+97372/56584/91793/73035/13151 alreadydrained, neverrepoll; D22539lost/childgone
+notrestartauthority. Gitv37=83fab890; v36=749494a0;v35=680bb90f.
+
+B/C FULLCLOSE:
+ROOT/b-c-repair-full-closeout-v1.json /quality-closeout-v1.json /
+source-author-decisions-v1.json /quality-review-input-v1.json. All66wholeanswers/
+packets/fulltaskwitnesses read, actualbindings/invariants audited. Provisional
+first4..all66notes retained but superseded by FINALsource-author-decisions-v1.
+B52 complete15/qualified9/incomplete23/incorrect1/failed4; materialS17/I34/U1.
+Retainedoriginal18complete; answer2left/5right/39tie/6unknown, delivery0left/
+4right/47tie/1unknown.0completegains3losses/−5.769ppCI[-13.462,0]52TRAINfamilies.
+Originaloldjudgments reusedONLYforexactoldoutcomes identity, nevernewanswers.
+FSEunknownmaskpreserved; firstfailuresunknownanswercomparisonnotnegative.
+BactualREADopened/delivered52,57/57oldstates56families coverage,159rawranges/
+3829Sourcecomparisons/appsunchanged/0semanticorbusinesswrites. Functional5+52=57cap.
+C7rules3/7vsE3 2/7,20kRandom0CI E3-rules[-42.857,0]pp. Heading-only human-eval
+existencecase62 sensitivity rules2/7E3 2/7, all7kept. AnswerRulesleft2/tie3/
+unknown2, deliveryleft1/tie6.14HANDOFFnoacquisition/18rawranges/1222Sourcecomps/
+appsunchanged;7actualNNinputs3837..5127sum32401allcomplete. Source-authornotblind,
+notindependent/unseen/no newmenu/fit/adoption. ActualnewC14/reuse0→47of48/18of24pools,
+neverfillremainingquota. Allfirst6Readerfailurespreserved.
+
+CostsNative/ownersalreadypaidB52HTTP194966known+ C14HTTP58076known=66/253042known,
+newunknown0/0. BwholeCPU115.64851+parent.08460277;Cwhole56.893255 (native/load
+12.543705536+residual44.349549464)+parent.221215714. GPUjob.102402046h includes
+Hostwait,notpureCUDA. Idle21ACTUALLYSETTLEDONCE4closedtimers7.81CPU after fullQA/
+protocolfreeze, allGNUthrough21paid; owners/native/model/parent/earliernotrebilled.
+Author/untimed/launch/cleanupCPUunknownnot0. NeverGNU-wraptimer-scanningwriter or
+actualsettlement. No furtherB/Clabels/newtrainrows/fits needed.
+
+FINAL CONFIRMATION PROTOCOL NOW ACTUALLY FROZEN BEFORE HELD SEMANTICS:
+final-confirmation-v1/protocol-before-held-export.json,
+inherited-DEV64-config.json. Actualheldbodies/annotations/old64querysemanticcontents
+STILLUNOPENED atfreeze; nativeTESTunopened. Allocation256metadataonly (185DEV71TRAIN),
+all256used onefirstnativequestion/paper.4METHODS/1024firstautonomous trajectories:
+fixed-prefix policyFIXED (NOTfixed_context), primaryE3seed0aggregateu32, secondary
+alreadycompletedfixed-E1-initializationtrainingRNGseed1/2u32. No bestseed/update
+selection or extra fitting. OriginalDEV64exact config/runtime-b64/prompt/budgets;
+source_version local-a100-final-confirmation-20261106-v1. Host24sharedcalls/8192out,
+policyreads4/additional8/control8/return2048/obs2048/range256/fullinput16384head2048,
+GPU2FP32/MHAfastpathFalse/referencecompileFalse/TF32False. Sharedbaselinecaptured
+actualpre-firstHostStore/Saveronce/paper; replay3learningpolicies fromit. No given
+retrievalquery/fixedReader/GoldSourcefilter/SourceKmenutaskcrop/compactprojection/
+quantize-to-pass or firstoutcome retry. FirstcapacityfailuresF/unknownretained.
+Primaryfulltasksuccessmacro256; C/I/Q/W/F/U andmaterialseparate; officialnative
+literalF1fullstrings separate.20kRandom0familybootstrap/strata/perseed/within-family
+3seedmean.256families NOT768/1024independent. N256preallocated, latestconditional
+variance.20389660493827158→~640familieshypothetical+5ppplanning, notpowerguarantee.
+Historical771notcurrentrequirement. No heldout-driven N/model/scorer/budgetchanges.
+PositiveadvantageCI>0;atleast+5needs lower>=5pp; no automaticadoption.
+
+NEXT read actual existing prepare_task_dev64.py (foundvia rg), reuse adapter to
+exportONLYselected256 AFTERthisfreeze. Native-dev/trainarchive parsing byteaccess
+mustbedisclosed; projectonlyselectedsemantics, nativeTESTneveropen. Preserveevery
+selectedpaperheading/paragraph/caption; no unavailabletable-cell repair. Build
+sourceguidesfrom fullselectedsource/nativeannotation before methodanswers when
+feasible, generalrubricalreadyfixed. Baselinepilot8actualfirst thenneverattempted248,
+remaining3methodsreplayexactinitialsnapshots. One bounded serialowner/originalledger.
+Sourcearchiveexport, actual1024, fullQA/SDK/Source/app/View/input/cost/stats remain.
+
+OriginalplanM5 externalLME451Reader/Judge/Mem2Act400 ownpolicy/fullinput/exposure/
+budgets/inheritedscoring stillrequired. AllLME200Smallhistories/451queries+29images
+wereDEVELOPMENTcontacted, notunseenhistoryconfirmation. Knownrow231twoSourceinput
+codec dropsarefixed_contextsurrogates, NOTselectedE3ownpolicyfailures; do notshrink
+budget/horizon/menu orswitchcompact tofit. Mem2Act400GivenTool/341components not
+independentusers/transactions; retainmissing-session/schemaerrors/no goldfilter.
+Old64reservedquerysemanticsnowmayopenonlyunderfreeze+actualeligibilityscope,
+notextraindependentpapers. Fullcost/stats/finalfigures/paper and external/confirm
+actualexecution NOT complete. NoautomaticA20k/B192/extraseeds/AtoB/newmenus.
+FullgoalNOTcomplete. Historicalstatesbelow.
+
+# HISTORICAL A100 EXECUTION v37: 2026-11-06
 
 Fullgoal ACTIVE/incomplete; current/previous turnsPROGRESS. Latestmanifest
  data/manifests/a100-development-progress-20261106-v37.json and executiondoc.
