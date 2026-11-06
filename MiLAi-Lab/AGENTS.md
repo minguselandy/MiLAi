@@ -1,4 +1,86 @@
-# LIVE A100 EXECUTION v49: 2026-11-07
+# LIVE A100 EXECUTION v50: 2026-11-07
+
+Full original763-line goal ACTIVE/incomplete; current/previous turns PROGRESS.
+Latest data/manifests/a100-development-progress-20261107-v50.json ->v49;
+previous checkpoint eea31413. ROOT=artifacts/a100-development-20261104,
+F=ROOT/final-confirmation-v1,E=ROOT/external-own-policy-v1.
+No subagents, SHA/checksums/fingerprints, services/second operational ledger,
+reset/refund, remote/Product writes, first-outcome/model retries/reselection.
+GPUs0/1 unchanged; retain full Source/K/menu/tasks/horizon, no compact/crop/
+quantization to force passage. No GNU wrapper around timer scanners, settlers
+or launchers. No offlineCPU settlement/second modelHTTPworker while one lives.
+
+LME INITIAL ACTUAL FIRST FAILURE NOW CLOSED: parent18071/child18073 ABSENT,
+owner FAILED_RETAINED/exit1/clientCPUTrue.7COMPLETED, row7FAILED_READING,
+443nativeNOT_RUN.8HTTP39934known,newunknown0/0;legacy15gen/1embed unchanged.
+Wholechild1640.3464529999999CPU +parent.14274347 paidonce originalledger,
+no native CPU previously charged; no local model loads/GPU2kernel claim.
+Reader row7: one actual response finish_reason=length, completion8192 at
+frozen outputcap,contentNone. Prompt3751,totalreserved12455<65536,
+estimateerror0,two actual images: not input overflow or transport/unknownusage.
+Raw response retained, no conversion to UNKNOWN/negativegold, no retry row7.
+Reflection E/stages-lme-v1/fixed-prefix-prediction451-v1-first-reader-failure-reflection.json.
+
+EXPLICIT TAIL PREPARED, NOT LAUNCHED at this checkpoint:
+E/stages-lme-v1/fixed-prefix-prediction451-v1-continuation-001-plan.json
+443 indices8..450 only. Registration/check-only actual0/readyTrue.
+Unchanged frozen code/Host/Reader/budget8192/thinking/images/Source/method/N;
+existing full pool template reused. No automatic queue. Launch only after
+current idleCPU closure; use unique continuation-001-owner.log console file
+(frozen plan's inherited base owner_log is unused by owner). Never overwrite
+original owner log. Full451 audit/scoring/archive still pending. If first error
+recurs, actual exit/paid/procsabsent/reflection then only remainingNOT_RUN.
+Keep all earlier firstresult whole dicts via finalizer earliest-ancestor check.
+Full451 nativeFAILED is valid coverage if every position attempted; never
+rewrite native status or rerun last failed cell. Finalized aliases outsidecase trees.
+
+PRIMARY QUALITY FIRST184 NOW literal-bound full256audit:
+F/e3-aggregate-u32/first184-source-author-review-reconciliation-v1.json.
+C98/I27/W10/F45/U4; materialS110/P63/I11;nativeDEV184.
+Prior96 whole records unchanged; all raw outcomes and failures literal-bound.
+U unresolved gets noC, not automatically confirmed false. No partial-panel
+extrapolation/adoption. Baseline all256 C149/I52/W15/F40, common122C71/
+same256denominator unchanged. Native all4 official full-string F1/bootstrap
+unchanged v49; NOT taskC. Remaining584semantic=primary184..25572+seed1/2 512.
+All4mainC/material/common122/20kfamilyCI,strata/perseed/within-familymean pending.
+
+COMMON GUIDE101 ADDENDUM: Source2003.13032/section-9-paragraph-1 explicitly
+joint NER+supporting RE training, with RE results not published. Old NER-only
+guide too narrow. F/source-author-guide-101-joint-re-training-addendum-v1.json
+appliesall4; oldguide/results literal retained. Afterbaseline101review and
+primary101answer/material exposure, beforeprimary101manual label and future
+seed1/2review. Primary101C/S; baseline101F/S unchanged. Therefore aggregate
+guides_preceded_corresponding_semantic_answer_review False. Authornotblind.
+Commonmask101False and entirev2 122true/134false unchanged. Guide82 unchanged.
+
+MEM2ACT separate experiment runtime ROOT/runtime-mem2act-catalog-capture-v1:
+1262files compared, ONLY functional.py one-line guard refusal removed;
+default/Product/currentLME runtime-b64 unchanged. Existing capture-only tool
+recorder/given-request exclusion/first-state and catalog checks retained.
+Installed mock contract E/mem2act-catalog-capture-contract-v1/verification.json
+actual0/session94327 DRAINED NEVER REPOLL: whole firstproviderwire/Store/Saver/
+context/catalog equal;8oldSourcecomparisons;34originalcapturefiles byteequal;
+world/semanticwrites0; no prefix replay.6mockproviderrequests +1suppliedhandoff
+stub,sharedcounts3/4. NO weights,realmodelHTTP/businesscalls/operationalledger/
+secondpersistentbudget. Uses synthetic in-memory RunBudget counter/legacy
+ownership: NOT actual ledger lease/NNquality/400tasks validation. Actual400x2
+still requires protocol/inputfreeze, full429sessions16843turns sharedbank,
+catalogcapture, serial owners/audits and adaptedmetrics, not authorTA/leaderboard.
+
+COST idle1..26 paidonce. InitialLME wholeclient/parent paid as above.
+ACTUAL idle27 paid once:71closedGNUtimers18.560000000000002CPU at no-worker gap;
+every owner exit/paid/procsabsent checked, generation/limits/embedding and prior
+compute unchanged; no native/wholeclient/parent/earlier rebill. GNUtime must NOT wrap scanner/settler/launcher. Subsequent writer/launch
+audit timers remain pending until next actual idle. Unmetered author/inspection/
+launch/cleanup/settlement CPU unknown_not_zero, not free.
+
+All original M0-M4/B-C/D-K fits, internal1024 outcomes/fullNN/Source/wire audits
+and all4nativeF1 closures remain in v49 ancestors. No redo. Old64reserved query
+and nativeTEST semantics unopened; old64Source exposed. External fullresults,
+remaining584semantic, fullSource-View/ops/costs, standalonefigures/paper/results
+and full763-line requirementaudit still required. Fullgoal NOT complete.
+
+# HISTORICAL A100 EXECUTION v49: 2026-11-07
 
 Full goal ACTIVE/incomplete; previous/current turns PROGRESS.
 
