@@ -1,4 +1,71 @@
-# LIVE A100 EXECUTION v50: 2026-11-07
+# LIVE A100 EXECUTION v51: 2026-11-07
+
+Full original763-line goal ACTIVE/incomplete. Current/previous turns PROGRESS.
+Latest data/manifests/a100-development-progress-20261107-v51.json ->v50;
+previous checkpoint a205f6ca. ROOT=artifacts/a100-development-20261104,
+F=ROOT/final-confirmation-v1,E=ROOT/external-own-policy-v1.
+No subagents/SHA/checksums/fingerprints/services/second operational ledger/
+reset/refund/remote/Product writes/first-outcome retries or favorable reselection.
+GPUs0/1 unchanged. Retain fullSource/K/menu/tasks/horizon; no compact/crop/
+quantization to force passage. GNUtime NEVER wrap scanners/settlers/launchers.
+
+ONLY LIVE actual worker remains LME continuation001 owner183645/child183647,
+both /proccommands verified; RUNNING/clientCPUFalse, no execsession/queue.
+E/stages-lme-v1/fixed-prefix-prediction451-v1-continuation-001-owner.json.
+Snapshot driver RUNNING/active11, cases {'COMPLETED': 10, 'FAILED_READING': 1, 'PREPARING_INPUT': 1, 'NOT_RUN': 439}.
+This is unfinished coverage, not whole451 audit/score/accuracy. Fixed model_loads[].
+First8 whole inherited recorddicts equal original. Original firstjob parent18071/
+child18073 ABSENT/exit1/clientCPU paid;7COMP,row7ReaderF,443NOTRUN. That F is
+length8192/contentNone with known usage,not input overflow. No retry/UNKNOWN
+conversion/negativegold. Only untouched8..450 were explicitly launched after
+commit88356ac0 and actualidle27. Unique console log, running snapshots retained.
+If new native error: wait actual exit/paid/procsabsent, inspect/reflect then only
+explicit remainingNOTRUN; no automatic queue/retry. Do not relaunch for stale
+PREPARING. All451attempted nativeFAILED may close coverage without status rewrite.
+Full final earliest-ancestor binding/audit/native score/audit/archive still required.
+While live: NO second actual model/HTTP worker or offlineCPU settlement.
+
+PRIMARY WHOLE QUALITY FIRST208 literal-bound:
+F/e3-aggregate-u32/first208-source-author-review-reconciliation-v1.json.
+C115/I31/W10/F48/U4, materialS122/P75/I11; nativeDEV185/TRAIN23.
+Previous184 entire recorddicts unchanged, all208 equal raw full256audit results;
+failures and all actually received non-system text retained/read. U noC, not
+automatically confirmed false. Sourceauthor notblind/independent. Guide101joint
+NER+supportRE addendum timing disclosed in v50: afterbaseline101review and
+primary101answer/material exposure; aggregate guides-before False. Sameall4,
+oldguides retained, common122v2 maskunchanged/101False; guide82 unchanged.
+Remaining560semantic=primary208..25548 +seed1/seed2 256each. Do not inheritlabels.
+All4mainC/material/common122/full256denoms/gainsloss/perseed/within-familymean/
+paired20kfamilyCI/native strata remain pending. Partial prefix not extrapolated.
+Baselineall256 C149/stressC71 and all4official full-string nativeF1/bootstrap
+unchanged v49/v50. NativeF1 NOT taskC; no adoption/newfit/seed or N reselection.
+
+Mem2Act separate catalog-capture runtime and installed mock contract CLOSED
+as v50: one guard-line change only outsideProduct/runtime-b64; firstwire/full
+Store/Saver/context/catalog equal,8oldSourcecomparisons,34capturefiles byteequal,
+world/semantic0.6mockresponses+1suppliedhandoffstub sharedcalls3/4, no weights/
+realmodelHTTP/business/operationalledger/secondpersistentbudget. Not operational
+lease or NNquality/400task proof. Contract94327 DRAINED NEVER REPOLL. Actual
+400x2 still requires frozen full released inputs/protocol/capture/serial owners/
+audits/adapted metrics,429sessions16843turns commonbank, no authorTA claim.
+
+COST actualidle27:71closedtimers18.560000000000002CPU paidonce originalledger.
+OriginalLMEwholechild1640.3464529999999 +parent.14274347 paidonce separately.
+All native/internal fullclient/parent/idle1..27 unchanged. New after27 docs/
+review timers pending next actual no-worker gap. Never settle while live.
+Unmetered author/inspection/launch/cleanup/settlement CPU unknown_not_zero.
+
+NEXT continue primary208..255 full-answer/actual-material review, then both
+secondary seeds, alongside this one LME worker. Existing full input/Source/
+code/budget/Reader/Judge protocols retained; no outputbudget/thinking changes
+to repair failed first outcomes. No repeated old402/902 surrogates/probes.
+Old64reserved queries/nativeTEST semantics unopened; old64Source exposed.
+All original M0-M4/B-C/D-K/fits/internal1024/audits/F1 closures remain unchanged
+in v50 ancestors. External fullresults, remaining560semantics, fullSource-View/
+ops/costs, standalonefigures/paper/results/full763-line audit still required.
+Fullgoal NOT complete.
+
+# HISTORICAL A100 EXECUTION v50: 2026-11-07
 
 Full original763-line goal ACTIVE/incomplete; current/previous turns PROGRESS.
 
