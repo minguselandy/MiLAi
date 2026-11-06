@@ -6,11 +6,60 @@
 历史 worktree、原始失败与用户文档保持原状。没有使用子代理、SHA/内容指纹校验、新服务、第二账本或远端写入。
 
 本轮机器可读入口为
-[progress](../data/manifests/a100-development-progress-20261106-v44.json)。
+[progress](../data/manifests/a100-development-progress-20261106-v45.json)。
 原始数据、冻结运行时、权重、命令、计时和实际输出位于本 worktree 的 ignored
 `artifacts/a100-development-20261104/`。本记录是现有报告体系的执行摘要。
 
-## v44 当前状态（2026-11-06）：主实验全256真实审计通过，seed1运行，256指南/80基线/16学习整答
+## v45 当前状态（2026-11-06）：全256共同歧义清单、112基线/32主方法整答、两方法全文F1
+
+Source/问题范围逐篇清单覆盖全部256，固定122个共同敏感性标记；四方法均在这些位置不给
+confirmed-C信用，但每个方法仍保留全部256分母，主评分/材料等级/原生替代标注不变。
+类别重叠计15项语言边界、41项可用Source缺失细节、82项范围/单位/描述层级。正文明确可答
+而原标注含unanswerable的2/76/130/132/152/234/249不会被一律剔除。清单在基线80/主方法16
+语义审阅之后形成，作者非盲审/独立，不能说来源专属判据完全预注册，也不按方法收益挑掩码。
+此前baseline26/59与primary6材料待决项均最终P、首失败F不变；旧pending记录保留，
+由单独的共同裁定receipt明确终结。
+
+完整一致性验证发现清单v1写入错误：122个预先声明的索引正确，但defaultdict读取会插入键，
+导致逐条布尔值全true。失败验证退出1和原v1均保留；v2从显式类别列表生成标记，已核对
+122true/134false且逐条等于原声明集合，未重新选择任何案例或规则。错误布尔尚未用于
+计算敏感性分数，现有主评分/材料/原生F1/模型结果保持；失败计时在下次实际空闲记一次。
+
+Source指南82原先漏列了正文明确称作baseline的NearestNumber剂量规则和RandomTop3频率规则。
+现在按原有“接受有据的连贯原问题回答”规则加入这组替代，四方法一致使用，不强制唯一
+QA-PGNet原生答案。原指南保持，加注在baseline82答案审阅之后、对应学习答案审阅之前，
+新增记录如实披露此时序；共同122标记未改变。所有原256指南/809整段原始证据保持。
+
+基线前112整答和全部实际收到文本完成阅读/逐项绑定：C67/I21/W6/F18，材料S70/P23/I19；
+旧96记录完整保持（经96也保持旧80）。主方法前32为C17/I3/W4/F8，材料S24/P7/I1，
+旧16完整保持，均nativeDEV前缀，不外推总体或继承另一个方法的标签。具体错误分别回到
+明确正文核对：primary26把未来US地域监测误作当前数据集；primary30混淆本文平方范数和
+先前未平方EGL；baseline103把同一方intro→discussion的覆盖变化误作减去对手值。
+
+两个已结束方法各自全部256原始首结果的官方全文AnswerF1已计算并逐字串绑定：
+fixed-prefix为0.0981909306413507，primary为0.08804209206295316，主方法点差
+−1.0148838578397545F1点。这是原生token-overlap指标，完整Source作者任务评分仍未闭合。
+所有完成答案保持全文；40/52首次失败显式空串计零，且总分与既有官方missing处理完全相等。
+不摘取答案片段、不改写成unanswerable、不修复失败；类型分组遵循官方best-reference归类
+并包含失败空串，不冒充固定独立类型面板。没有把Source范围当原生整段EvidenceF1。
+执行会话15529/46317均实际退出0并drain；无模型/HTTP调用和账本写入。
+
+seed1仍为唯一实验worker，父3168683/子3168737实际命令核对，快照121/256，
+原生{'COMPLETED': 97, 'FAILED': 24}，clientCPU尚未结算。冻结GPU2FP32单缓存和预算保持；seed2实际0，
+主256全部机械/NN输入/Source审计和共有baseline闭合证明沿v44保持。v23后新离线计时
+pending，活动期间没有写离线CPU成本。已准备v24脚本但未执行：等seed1真实退出/费用闭合/
+进程消失，完成全256审计和原生全文F1后，再实际空闲结算新计时一次并启动冻结seed2。
+未测作者/检查/启动/清理/结算CPU仍unknown非0。
+
+证据：common-source-question-scope-inventory-all256-v2.json、
+common-material-scope-adjudication-pending-cases-v1.json、source-author-guide-82-naive-baselines-addendum-v1.json、
+anchor-first112-source-author-review-reconciliation-v1.json、
+e3-aggregate-u32/first32-source-author-review-reconciliation-v1.json、
+native-answer-f1-first2-methods-closeout-v1.json，均在final-confirmation-v1下。
+全部1024语义评分/四方法配对统计、两随机种子完整审计成本、LME451/Mem2Act400和论文仍待，
+不据前缀或原生F1调整候选/预算/N。完整目标持续执行。
+
+## v44 历史状态（2026-11-06）：主实验全256真实审计通过，seed1运行，256指南/80基线/16学习整答
 
 主E3seed0/aggregate/u32实际退出0，父2687557/子2687558均已消失，保留204原生完成/
 52首次失败，不等于204任务成功。实际591HTTP、2,214,052已知Host tokens，新增unknown0/0；

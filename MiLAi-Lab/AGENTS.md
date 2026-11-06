@@ -1,4 +1,98 @@
-# LIVE A100 EXECUTION v44: 2026-11-06
+# LIVE A100 EXECUTION v45: 2026-11-06
+
+FullgoalACTIVE/incomplete; current/previous turnsPROGRESS. Latestmanifest
+data/manifests/a100-development-progress-20261106-v45.json compactdelta→v44.
+Lastcheckpoint091783a2. NoSHA/checksums/contentfingerprints/subagents/newservices/
+secondledger/reset/refund/remotewrites/Productchanges/model-or-first-outcome
+retries. GPUs0/1unchanged. ROOT=artifacts/a100-development-20261104.
+
+ONLYLIVE actualexperiment still frozenSECONDARYseed1/u32 owner
+final-confirmation-v1/e3-aggregate-seed1-u32/learned-owner-v1.json parent
+3168683/child3168737 actual/proccommandsverified. Snapshot121/256closed,
+statuses{'COMPLETED': 97, 'FAILED': 24},clientCPUFalse. OnecachedVERIFIEDGPU2/cuda0FP32threads4/
+max16384head2048/MHAFalse/referencecompileFalse/TF32Falsewrapper. Detachedbounded,
+noexecsession/queue/retry. Seed2actual0. NeverofflineCPUsettle/startsecondmodel/
+HTTPworkerwhilelive. Unexpectedhalt→KEEPfirstoutcomes,inspect,andonlyunattempted
+underexplicitnewplan;nevercropSource/K/menu/task/horizon,compact/quantizetopass.
+
+PrimaryE3seed0all256 owner2687557/child2687558exit0/procsgone/CPUpaid;204COMP52F.
+FULLaudit20554DRAINEDNEVERrepoll,19188wholeSourcecomps1513literalranges,
+256firstrequestdictseqanchor,allprefix16recorddictseqfull;2036NNforwards/
+12747290tokens3477..9483 completefiniteuntruncated,SEARCH343READ1675HANDOFF18.
+Store/Saver/world/apps unchangedsemanticbusiness0;actual591HTTP2214052known/new
+unknown0/0,legacy15/1retained. Details/costs v44 unchanged. Sharedbaseline
+all256216COMP40F/590HTTP1985393known unchanged; NEVERrerun.
+
+CommonALL256Source/questionscopeinventory NOWACTUAL:
+final-confirmation-v1/common-source-question-scope-inventory-all256-v2.json.
+122flaggedfamilies (overlap categories15language/41unavailabledetail/82scope),
+same4methods;CONSERVATIVEstress setsCcredit0forflaggedpositions,ALL256denoms
+KEPT. Maingrades/materials/nativealtsUNCHANGED. Sourceexplicitanswers2/76/130/
+132/152/234/249notblanketexcludedbecauseofnativeunanswerable. Inventoryafter
+baseline80/primary16semanticreview,sourceauthorNOTblind/independent; neverclaim
+fullypreregisteredsource-specificjudgments orchoosebestmaskafterresults.
+IMPORTANTv1recordbooleansWRONG(allTrue)despitecorrectdeclared122indices:
+full256verificationverify-progress-v45.time.txtFAILEDexit1retained. Cause
+defaultdictreadinsertedkeysbeforemembershiptest. v2usesexplicitcategorylists;
+122true134false andeachboolean=originaldeclaredset; NOmembership/rule/Nchange,
+NOsensitivityscorescomputedfrombadflags. v1retainednotusedforscoring. Reflection
+common-scope-inventory-v1-boolean-failure-reflection-v1.json; failedtimerMUST
+beincludedonceinnextidle24. Main/material/nativeF1/modelresultsunchanged.
+
+Common-material-scope-adjudication-pending-cases-v1.json FINALbaseline26/59and
+primary6materialP/qualityFunchanged;originalpendingmetadataretainedhistorically,
+separatereceiptfinalizesit. Samecriterionforallfuturemethods.
+
+ALL256originalSourceguides809wholewitnessesunchanged. NewADDITIVEguide82
+source-author-guide-82-naive-baselines-addendum-v1.json: explicitNearestNumber
+dosage/RandomTop3frequency naivebaselines besideQA-PGNet. Initialguideomitted
+them; addedAFTERbaseline82answerreview,BEFOREcorrespondinglearned82semantic
+reviews,appliesALL4notuniquegoldstring. Originalguideliteralretained/no mask
+change; rendererandbothmanualbindersattachthisaddendumfor82. Newbaseline
+80..87filetimingflagFALSEandexplicitaddendum-after-answermetadata,nofalse
+all-guides-before-answersclaim.
+
+BaselineWHOLEfirst112 reconciled final256: C67/I21/W6/F18,matS70/P23/I19.
+Prior96entirerecorddictsliteralunchanged(andprior80through96),allnativeDEV.
+PRIMARYWHOLEfirst32 C17/I3/W4/F8,matS24/P7/I1;prior16entiredictsequal.
+Fulloriginalanswers/allactualnon-systemcontentread,othermethodlabelsnotinherited.
+No prefixpopulationclaim/adoption. Incorrectprimary26futureUSmonitoring→current
+dataexclusiveEnglish andprimary30unsquared→own squaredgradientnormareW;
+baseline103selfcoveragedropcomparesintro→discussionnotopponents→W.
+ExplicitSourceprosechecked;maskedformulaisnotlicenseforinventedoperands.
+
+OFFICIALnativeFULLanswerF1 ALL256forfirst2DONE(no fragment/answerrepair):
+fixed-prefix .0981909306413507 (216completed40failedempty),
+primary .08804209206295316 (204completed52failedempty), delta−1.0148838578397545
+F1points,NOTtaskC/superiorityclaim. NativeDEV185/TRAIN71meansinreports.
+native-answer-f1-first2-methods-closeout-v1.json andpermethodreports/predictions.
+score_final_confirmation_native.py usesfrozenread_host_answers plusinspected
+cachedofficialevaluator fromtask-dev64-all5-native-agreement.json. Complete
+originalfinalstringsliteralequalactualrecords;everyfirstfailureexplicitempty/
+F1zero;overalltotalexactlyequalexistingofficialmissing-predictiontreatment.
+Bytypeusesofficialbest-reference-typeassignmentINCLUDINGfailedemptypositions;
+notindependentfixedtypes. NoEvidenceF1fromrawranges. Selectedconfirmation256,
+notfullnativebenchmark. Actual15529/46317bothdrainedNEVERrepoll/model0/ledger0.
+
+Idle1..23alreadyPAIDonce; AFTER23NEWtimersPENDINGwhile seed1lives. Unmetered
+author/inspection/launch/cleanup/settlementCPUunknownnot0. PreparedNOTEXECUTED
+settle_confirmation_seed1_idle_v24.py ASTvalid. Atactualseed1terminal/exit0/
+CPUpaid/procsgone: audit_final_confirmation_learned.py e3-aggregate-seed1-u32 256
+uniqueGNUtimer→actualexit0; score_final_confirmation_native.py samemethod
+uniqueGNUtimer→actualexit0; settleNEWclosedtimersv24onceWITHOUTGNUwrapper;
+thenlaunchfrozenseed2owner. No automaticqueue/native/wholeclient/parentrebill.
+
+NEXT allremainingquality baseline112..255/primary32..255/secondaryall512;
+full2secondaryactualtrajectories/audits/nativeF1/costs;samecommon122maskall4,
+all256denominators;paired20kseed0familybootstrap/native strata/perseed/within-
+familymean. N256NOT1024independent/trainingRNGconditionalcommonE1init. No best
+heldseed/N/update/checkpoint/scorer/budgetreselection. Old64reservedqueries/
+nativeTESTSTILLUNOPENED;old64Sourcebodiesexposed. LME451ReaderJudge/Mem2Act400
+actualownpolicy/fullinput/nativebudgets/scoring/fullcost/finalfigurespaper
+remain. AllLME200histories451queries29imagesDEVELOPMENTexposed,nohistory-
+disjointSmall/Mediumclaim. FullgoalNOTcomplete.
+
+# HISTORICAL A100 EXECUTION v44: 2026-11-06
 
 FullgoalACTIVE/incomplete; current/previous turnsPROGRESS. Latestmanifest
 data/manifests/a100-development-progress-20261106-v44.json compactdelta→v43.
