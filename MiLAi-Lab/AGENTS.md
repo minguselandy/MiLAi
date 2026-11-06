@@ -1,4 +1,82 @@
-# LIVE A100 EXECUTION v43: 2026-11-06
+# LIVE A100 EXECUTION v44: 2026-11-06
+
+FullgoalACTIVE/incomplete; current/previous turnsPROGRESS. Latestmanifest
+data/manifests/a100-development-progress-20261106-v44.json compactdelta→v43.
+Lastcheckpoint51c42dd2. NoSHA/checksums/contentfingerprints/subagents/newservices/
+secondledger/reset/refund/remotewrites/Productchanges/model-or-first-outcome
+retries. GPUs0/1unchanged. ROOT=artifacts/a100-development-20261104.
+
+PRIMARY E3seed0/aggregate/u32 ALL256 NOW TERMINAL: owner2687557/child2687558
+actualexit0/bothprocsABSENT/clientCPUpaid.204nativeCOMP52firstF,NOTtaskC.
+591HTTP/2214052known,newunknown0/0; legacyunknown15/1kept. Wholechild
+2635.191604CPU =native1939.9386650790111+load8.10247759799995+residual
+687.150461322989; parent.110969492CPU paidonce. GPU2job2.135474490351561h
+includesHostwait,NOTactivekernelhours. No model/first-outcome retry.
+
+PRIMARY FULL256 AUDIT actualexit0/session20554DRAINED NEVERrepoll:
+e3-aggregate-u32/audit-all256-v1/.19188wholeoldSourcecomps/1513literalraw
+ranges+role/origin/captured/reportedclockchecks;Store/Saver/world/apps
+unchanged,semantic/business0.256ENTIREfirstproviderrequestdictseqsharedanchor.
+ALLprefix16review/state/wire/failed/finite/forcedrecorddicts eq full256.
+2036actualNNforwards/12747290inputtokens,3477..9483; completeactualbefore/
+legalbindings/menuhead/logit/probIDorder/argmaxmatch,finite,alltruncFalse.
+ActualSEARCH343/READ1675/HANDOFF18,forcedsingle0. No model/tokenizerreplay/
+newHTTP/ledgerwrite. This provesactualobservedfullstateandmenu,notall-bank
+delivery/semantictruth/effective16kcontext.216/40baselinefullbindingunchanged.
+
+Actualidle23 PAID29newclosedGNUtimers44.680000000000014CPU once; prior1..22/
+native/wholeclient/parentnotrebilled,limits/gen/requests/embedunchanged.
+Scriptsettle_confirmation_primary_idle_v23.py actual0/noGNUwrapper.
+After23timers PENDING while currentworkerlives; unmeteredauthor/inspection/
+launch/cleanup/settlementCPUunknownnot0.
+
+ONLYLIVE actualexperiment NOW frozenSECONDARYseed1/u32:
+final-confirmation-v1/e3-aggregate-seed1-u32/learned-owner-v1.json parent
+3168683/child3168737 actual/proccommandsverified. Snapshot30/256closed,
+statuses{'COMPLETED': 25, 'FAILED': 5},clientCPUFalse. OnecachedmodelVERIFIEDGPU2/cuda0FP32threads4/
+max16384head2048/MHAFalse/referencecompileFalse/TF32Falsewrapper. Actual
+seed1launchrequiredprimaryfullaudit+actualidle23. Detachedbounded/noexecsession/
+automaticqueue. Seed2actual0. Neverofflinecostsettle/startsecondmodelHTTP
+workerwhilelive. Unexpectedhalt→retainfirstoutcomes,inspect,andonlyunattempted
+cellsunderexplicitnewplan;neverSource/K/menu/task/horizoncrop/compact/quantize.
+Atactualseed1fullterminal/procsgone/CPUpaid runfullauditorMETHOD256 withunique
+GNUtimer,thenactualidleunpaidcostsonce,nextfrozenseed2. No baselinererun.
+
+Sourceguides ALL256 (185nativeDEV/71nativeTRAIN)NOWBOUND:
+source-author-task-guides-prefix256-v1.json +
+source-author-guides-all256-closeout-v1.json;809wholeliteralSourcewitness
+units,allfamily/question/indexbindings;prior144literalunchanged. NativeTRAIN
+is originalsplit,notstudy-training; study256stillconfirmation. General
+rubric/method/N/budgets prefrozen1ebe965e;notallguidesbeforeallanswers/model
+execution,SourceauthorNOTblind/independent. No annotation-onlytablecells into
+Source,allunavailablefactskeeppreciselimitations.190manualrulesvsautomatic
+assignments,191questionfalsepremisejointQA/scoringvsseparategenerators,
+234CNNexplicitthirdfamily,253480naturalnesssubjectsnotglobaltotal.
+CommonALL256scopeinventory/sensitivitySTILLPENDING,notdonebyguides.
+
+BaselineWHOLEfirst80reconciled final256 records: C49/I16/W4/F11,matS49/P17/I14,
+allnativeDEV;prior64literalunchanged. PRIMARYWHOLEfirst16 now reviewed and
+literalboundauditedrecords: C10/I2/W2/F2,matS11/P5,allnativeDEV. Sourceauthor
+NOTindependent/blind; noothermethodlabels inherited. No partialpanelestimate/
+adoption. Primary8correcttaskIDsbutwrongOne-classgloss→W; fullSourceexplicit
+Ordinalclassification; baseline8correctOrdinalchecked. NativefailurekeptF
+evenwithgoodmaterial. FullSourceunavailable→accuratescopedlimitcancomplete;
+notretrievingextantfacts→I; acceptcoherentsupportedliteralanswer,nouniquegold
+checklist. case26/59/primary6materialcommonscopepending. NativeoriginalFULL
+stringF1separate/notrunyet. Read-onlyrendererprovider_requestKeyErrorfixed
+afteractualschemainspection(actual_last_provider_messages),unmeteredCPU
+unknown/no modelmutation; reflectionretainedinprimaryqualityspec0..7.
+
+NEXT allquality/audits/stats/all4commonSource-scopeinventory; currentseed1then
+seed2serialfull256. N256/1024firsttrajectories NOT1024independent; no bestheld
+seed/N/update/checkpoint/scorer/budgetreselection.20kseed0familybootstrap,
+native strata,perseed/within-familymean,trainingRNGconditionalcommonE1init.
+Old64reservedquerysemantics/nativeTESTSTILLUNOPENED;old64Sourcebodiesexposed.
+LME451ReaderJudge/Mem2Act400ownpolicy/fullinput/nativebudgets/scoring/fullcost/
+figures/finalpaperremain; all200LMEhistories451queries29imagesDEVELOPMENT
+exposed,nohistory-disjointSmall/Mediumclaim. FullgoalNOTcomplete.
+
+# HISTORICAL A100 EXECUTION v43: 2026-11-06
 
 FullgoalACTIVE/incomplete; previous/current turnsPROGRESS. Latestmanifest
  data/manifests/a100-development-progress-20261106-v43.json compactdelta→v42→

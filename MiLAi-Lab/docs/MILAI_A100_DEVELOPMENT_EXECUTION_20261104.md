@@ -6,11 +6,52 @@
 历史 worktree、原始失败与用户文档保持原状。没有使用子代理、SHA/内容指纹校验、新服务、第二账本或远端写入。
 
 本轮机器可读入口为
-[progress](../data/manifests/a100-development-progress-20261106-v43.json)。
+[progress](../data/manifests/a100-development-progress-20261106-v44.json)。
 原始数据、冻结运行时、权重、命令、计时和实际输出位于本 worktree 的 ignored
 `artifacts/a100-development-20261104/`。本记录是现有报告体系的执行摘要。
 
-## v43 当前状态（2026-11-06）：学习轨迹前16真实状态/NN输入审计通过，144指南/48整答
+## v44 当前状态（2026-11-06）：主实验全256真实审计通过，seed1运行，256指南/80基线/16学习整答
+
+主E3seed0/aggregate/u32实际退出0，父2687557/子2687558均已消失，保留204原生完成/
+52首次失败，不等于204任务成功。实际591HTTP、2,214,052已知Host tokens，新增unknown0/0；
+legacy15/1不抹去。整子进程2,635.191604CPU已扣原生预测/加载成本后结算残余和parent一次，
+GPU2作业区间2.135474490351561h包含Host等待，不当作CUDA活跃时间。
+
+全256只读审计实际退出0（20554已drain）：19,188次旧Source逐值比较，1,513段原文及角色/
+origin/捕获和报告时钟匹配，Store/Saver/world/应用表保持、语义/业务写入0。256个首次
+provider请求完整dict均等于共享baseline；前16完整review/state/wire/失败/finite/forced
+记录与全量对应项相等。2,036次实际NN前向、12,747,290输入tokens已计原生成本；长度
+3477–9483，完整before/全部合法绑定/决策头及logit/prob/argmax逐值通过，truncated全false。
+实际SEARCH343/READ1675/HANDOFF18。没有重新加载、tokenize、推理或审计HTTP。
+这些证明实际观察状态/菜单完整，不证明所有Source交付、答案正确或16k有效上下文。
+
+真实空闲v23一次结算29条新闭合GNU计时共44.680000000000014CPU，未重收native/owner/
+parent/以前费用。随后启动已冻结seed1/u32，父3168683/子3168737实际/proc已核对；
+快照30/256，原生{'COMPLETED': 25, 'FAILED': 5}，一个VERIFIED GPU2 FP32缓存加载，seed2实际0。
+没有baseline重跑、候选/预算/N重选、自动重试或第二实验worker。seed1活动期间新增离线计时
+pending；未测作者/检查/launch/cleanup/settlement CPU仍unknown非0。
+
+Source专属指南已到全部256篇（nativeDEV185/TRAIN71），809个整段原始Source证据逐值绑定，
+旧144指南保持；全部256在本研究仍是confirmation。新增解释包括手工定义模式规则与自动赋值、
+释义评分/QA联合训练与候选生成器预训练、正文明确的第三类CNN架构，以及480名附加自然性
+评测受试者不等于全研究唯一人数。指南并非全部早于执行/所有答案，作者非独立/盲审；
+共同全256 Source/问题歧义清单和敏感性仍待，不靠native标注补缺表格。
+
+基线前80完整答案/实际材料与全256逐项关联，C49/I16/W4/F11，材料S49/P17/I14；
+主方法前16整答C10/I2/W2/F2，材料S11/P5，均是nativeDEV前缀，不外推总体。
+各方法分别读整答和全部实际收到材料，不继承另一方法标签。主方法case8把Ordinal
+Classification写成One-class，改变任务形式而记W；同例baseline正确Ordinal已核对。
+精确可答性/范围沿冻结通则，完整Source有事实但没取到仍I；首次失败仍F。材料case26/59/
+primary6及共同敏感性保持pending。原始全文nativeF1、全1024语义评分/统计/外部验证和论文
+仍待，不因机械审计或前缀结果采用模型。一次只读显示脚本错用baseline失败输入schema，
+检查真实键后改读actual_last_provider_messages；未改实验或重试，未测CPU不写0。
+
+证据：final-confirmation-v1/e3-aggregate-u32/audit-all256-v1/、
+source-author-guides-all256-closeout-v1.json、anchor-first80-source-author-review-reconciliation-v1.json、
+e3-aggregate-u32/first16-source-author-review-reconciliation-v1.json、idle-cost-settlement-v23.json。
+完整M5和原目标仍在执行。
+
+## v43 历史状态（2026-11-06）：学习轨迹前16真实状态/NN输入审计通过，144指南/48整答
 
 主E3seed0/u32仍由父2687557/子2687558原进程运行，快照150/256已结束，
 原生状态{'COMPLETED': 115, 'FAILED': 35}，不是任务评分。GPU2 FP32缓存加载仍为
