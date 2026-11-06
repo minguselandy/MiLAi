@@ -1,0 +1,473 @@
+{
+  "status": "ACTIVE_ALL4_NATIVE_F1_AND_INPUT_AUDITS_CLOSED_PRIMARY_QA96_LME_PROTOCOL_FROZEN_READY_NOT_DISPATCHED",
+  "timestamp_utc": "2026-11-06T18:07:17.009664+00:00",
+  "goal_status": "active",
+  "goal_complete": false,
+  "current_goal_turn_classification": "progress",
+  "previous_goal_turn_classification": "progress",
+  "previous_manifest": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/data/manifests/a100-development-progress-20261107-v48.json",
+  "previous_checkpoint_commit": "741ab1b1",
+  "unchanged_full_scope": "Original763-line plan/M5 remains; N256families/1024first trajectories and original frozen methods/checkpoints/Host/budgets/full Source/runtime/scoring unchanged. M0-M4/B-C/D-K/fits/seed training closures remain in v48 ancestors.",
+  "seed2_closed": {
+    "owner": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/e3-aggregate-seed2-u32/learned-owner-v1.json",
+    "actual_owner_receipt": {
+      "status": "COMPLETED_FIRST_LEARNED_CONFIRMATION_JOB_QUALITY_AND_FULL_AUDITS_PENDING",
+      "pid": 3666509,
+      "plan": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/e3-aggregate-seed2-u32/learned-execution-plan-v1.json",
+      "name": "e3-aggregate-seed2-u32",
+      "positions": 256,
+      "automatic_retry": false,
+      "client_CPU_recorded": true,
+      "child_pid": 3666510,
+      "started_epoch": 1793979809.361017,
+      "exit_code": 0,
+      "whole_child_CPU_seconds": 2398.03001,
+      "wall_seconds": 8258.279234327376,
+      "already_recorded_native_CPU": {
+        "dynamic_memory_laya": 1728.1082746413886,
+        "dynamic_memory_laya_load": 8.301686305000203
+      },
+      "client_CPU_residual": 661.6200490536112,
+      "shared_generation_admissions": 616,
+      "native_known_generation_tokens": 2187880,
+      "new_unknown_usage": {
+        "generation": 0,
+        "embedding": 0
+      },
+      "one_GPU2_job_interval_hours": 2.293966455008421,
+      "GPU_interval_scope": "Whole child reservation including Host waits; not active CUDA kernel time.",
+      "client_compute_phase": "a100-final-confirmation-20261106-v1-e3-aggregate-seed2-u32-whole-client-residual-and-parent",
+      "parent_CPU_seconds_through_billing": 0.127463247,
+      "unmetered_launch_cleanup_author_CPU": "unknown_not_zero",
+      "first_outcomes_closed": 256,
+      "actual_HTTP_responses": 616,
+      "known_HTTP_tokens": 2187880
+    },
+    "both_processes_absent": true,
+    "full_audit_actual_exit": 0,
+    "full_audit_session_drained_never_repoll": 86527,
+    "audit": {
+      "status": "ALL256_NATIVE_STATE_SOURCE_SAVER_APPLICATION_FIRST_WIRE_AND_FINITE_INPUTS_AUDITED_QUALITY_PENDING",
+      "method": "e3-aggregate-seed2-u32",
+      "positions": 256,
+      "full_planned_positions": 256,
+      "native_statuses": {
+        "COMPLETED": 195,
+        "FAILED": 61
+      },
+      "completed_final_inputs": 195,
+      "failed_last_inputs": 61,
+      "whole_existing_Source_comparisons": 19188,
+      "literal_Source_ranges": 962,
+      "raw_Source_role_origin_capture_and_reported_clock_checks": 962,
+      "first_provider_requests_literal_equal": 256,
+      "unmatched_ranges": 0,
+      "actual_HTTP_responses_already_native_paid": 616,
+      "known_HTTP_tokens_already_native_paid": 2187880,
+      "selected_native_action_kinds": {
+        "SEARCH": 548,
+        "READ": 1260,
+        "HANDOFF": 163
+      },
+      "actual_NN_forwards": 1971,
+      "all_actual_NN_inputs_complete_and_untruncated": true,
+      "Source_Saver_Store_world_and_application_invariants": true,
+      "semantic_or_business_writes": 0,
+      "prefix_entire_records_require_full_reconciliation": false,
+      "whole_quality": "PENDING_NOT_NATIVE_COMPLETION",
+      "new_model_calls": 0,
+      "ledger_opened_or_written": false,
+      "no_sha_validation": true
+    },
+    "finite_input_summary": {
+      "projection": "shared_actions",
+      "all_actual_truncated_false": true,
+      "all_decoded_complete_state_bindings_and_menu_heads_literal_equal": true,
+      "recorded_model_forwards": 1971,
+      "minimum_actual_input_tokens": 3454,
+      "maximum_actual_input_tokens": 9704,
+      "sum_actual_input_tokens_already_native_recorded": 11790893,
+      "new_model_forwards": 0,
+      "new_model_loads": 0
+    },
+    "native_F1_actual_exit": 0,
+    "native_F1_session_drained_never_repoll": 72549
+  },
+  "native_all4": {
+    "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/native-answer-f1-all4-methods-closeout-v1.json",
+    "methods": {
+      "fixed-prefix": {
+        "report": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/native-answer-f1-fixed-prefix-v1.json",
+        "Answer F1": 0.0981909306413507,
+        "positions": 256,
+        "actual_completed_answers": 216,
+        "first_failed_empty_positions": 40,
+        "native_partition_strata": {
+          "dev": {
+            "positions": 185,
+            "Answer F1": 0.0972221874536791
+          },
+          "train": {
+            "positions": 71,
+            "Answer F1": 0.10071512063739638
+          }
+        },
+        "all_original_completed_strings_and_failed_empty_jsonl_records_literal_equal": true
+      },
+      "e3-aggregate-u32": {
+        "report": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/native-answer-f1-e3-aggregate-u32-v1.json",
+        "Answer F1": 0.08804209206295316,
+        "positions": 256,
+        "actual_completed_answers": 204,
+        "first_failed_empty_positions": 52,
+        "native_partition_strata": {
+          "dev": {
+            "positions": 185,
+            "Answer F1": 0.08723387799739968
+          },
+          "train": {
+            "positions": 71,
+            "Answer F1": 0.09014800195207132
+          }
+        },
+        "all_original_completed_strings_and_failed_empty_jsonl_records_literal_equal": true
+      },
+      "e3-aggregate-seed1-u32": {
+        "report": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/native-answer-f1-e3-aggregate-seed1-u32-v1.json",
+        "Answer F1": 0.08179025700801325,
+        "positions": 256,
+        "actual_completed_answers": 205,
+        "first_failed_empty_positions": 51,
+        "native_partition_strata": {
+          "dev": {
+            "positions": 185,
+            "Answer F1": 0.09293156442740273
+          },
+          "train": {
+            "positions": 71,
+            "Answer F1": 0.05276008978847731
+          }
+        },
+        "all_original_completed_strings_and_failed_empty_jsonl_records_literal_equal": true
+      },
+      "e3-aggregate-seed2-u32": {
+        "report": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/native-answer-f1-e3-aggregate-seed2-u32-v1.json",
+        "Answer F1": 0.08255053543397148,
+        "positions": 256,
+        "actual_completed_answers": 195,
+        "first_failed_empty_positions": 61,
+        "native_partition_strata": {
+          "dev": {
+            "positions": 185,
+            "Answer F1": 0.0895578296450144
+          },
+          "train": {
+            "positions": 71,
+            "Answer F1": 0.06429209277139478
+          }
+        },
+        "all_original_completed_strings_and_failed_empty_jsonl_records_literal_equal": true
+      }
+    },
+    "paired_native_statistics": {
+      "all256": {
+        "families": 256,
+        "bootstrap_draws": 20000,
+        "seed": 0,
+        "interval": "two-sided percentile95",
+        "shared_family_draws_across_all4_contrasts": true,
+        "comparisons": {
+          "e3-aggregate-u32": {
+            "native_F1_difference": -0.01014883857839749,
+            "native_F1_point_difference": -1.014883857839749,
+            "native_F1_point_CI95": [
+              -2.3448953371475114,
+              0.33227116588488315
+            ],
+            "F1_increased_families": 86,
+            "F1_decreased_families": 107,
+            "F1_tied_families": 63
+          },
+          "e3-aggregate-seed1-u32": {
+            "native_F1_difference": -0.01640067363333737,
+            "native_F1_point_difference": -1.640067363333737,
+            "native_F1_point_CI95": [
+              -3.160023097141319,
+              -0.1449774691819524
+            ],
+            "F1_increased_families": 84,
+            "F1_decreased_families": 111,
+            "F1_tied_families": 61
+          },
+          "e3-aggregate-seed2-u32": {
+            "native_F1_difference": -0.015640395207379202,
+            "native_F1_point_difference": -1.5640395207379203,
+            "native_F1_point_CI95": [
+              -2.889107950453542,
+              -0.300397993402931
+            ],
+            "F1_increased_families": 74,
+            "F1_decreased_families": 112,
+            "F1_tied_families": 70
+          },
+          "within-family-three-seed-mean": {
+            "native_F1_difference": -0.014063302473038022,
+            "native_F1_point_difference": -1.4063302473038022,
+            "native_F1_point_CI95": [
+              -2.568302549443964,
+              -0.24789305037585868
+            ],
+            "F1_increased_families": 91,
+            "F1_decreased_families": 120,
+            "F1_tied_families": 45
+          }
+        }
+      },
+      "native_dev185": {
+        "families": 185,
+        "bootstrap_draws": 20000,
+        "seed": 0,
+        "interval": "two-sided percentile95",
+        "shared_family_draws_across_all4_contrasts": true,
+        "comparisons": {
+          "e3-aggregate-u32": {
+            "native_F1_difference": -0.009988309456279359,
+            "native_F1_point_difference": -0.9988309456279358,
+            "native_F1_point_CI95": [
+              -2.6864157035029477,
+              0.7351913044580355
+            ],
+            "F1_increased_families": 63,
+            "F1_decreased_families": 76,
+            "F1_tied_families": 46
+          },
+          "e3-aggregate-seed1-u32": {
+            "native_F1_difference": -0.004290623026276289,
+            "native_F1_point_difference": -0.4290623026276289,
+            "native_F1_point_CI95": [
+              -2.18862357132071,
+              1.3756216436654056
+            ],
+            "F1_increased_families": 71,
+            "F1_decreased_families": 73,
+            "F1_tied_families": 41
+          },
+          "e3-aggregate-seed2-u32": {
+            "native_F1_difference": -0.007664357808664653,
+            "native_F1_point_difference": -0.7664357808664652,
+            "native_F1_point_CI95": [
+              -2.315362838877589,
+              0.7849220962615888
+            ],
+            "F1_increased_families": 58,
+            "F1_decreased_families": 80,
+            "F1_tied_families": 47
+          },
+          "within-family-three-seed-mean": {
+            "native_F1_difference": -0.007314430097073432,
+            "native_F1_point_difference": -0.7314430097073432,
+            "native_F1_point_CI95": [
+              -2.1191362384728465,
+              0.7060999520458838
+            ],
+            "F1_increased_families": 72,
+            "F1_decreased_families": 84,
+            "F1_tied_families": 29
+          }
+        }
+      },
+      "native_train71": {
+        "families": 71,
+        "bootstrap_draws": 20000,
+        "seed": 0,
+        "interval": "two-sided percentile95",
+        "shared_family_draws_across_all4_contrasts": true,
+        "comparisons": {
+          "e3-aggregate-u32": {
+            "native_F1_difference": -0.010567118685325021,
+            "native_F1_point_difference": -1.056711868532502,
+            "native_F1_point_CI95": [
+              -2.945038457864144,
+              0.6286674471072179
+            ],
+            "F1_increased_families": 23,
+            "F1_decreased_families": 31,
+            "F1_tied_families": 17
+          },
+          "e3-aggregate-seed1-u32": {
+            "native_F1_difference": -0.04795503084891906,
+            "native_F1_point_difference": -4.795503084891906,
+            "native_F1_point_CI95": [
+              -7.662868854579119,
+              -2.322979251788733
+            ],
+            "F1_increased_families": 13,
+            "F1_decreased_families": 38,
+            "F1_tied_families": 20
+          },
+          "e3-aggregate-seed2-u32": {
+            "native_F1_difference": -0.03642302786600162,
+            "native_F1_point_difference": -3.6423027866001623,
+            "native_F1_point_CI95": [
+              -6.090420026180985,
+              -1.5740812837255438
+            ],
+            "F1_increased_families": 16,
+            "F1_decreased_families": 32,
+            "F1_tied_families": 23
+          },
+          "within-family-three-seed-mean": {
+            "native_F1_difference": -0.03164839246674857,
+            "native_F1_point_difference": -3.1648392466748567,
+            "native_F1_point_CI95": [
+              -5.136046748123308,
+              -1.4777543952435024
+            ],
+            "F1_increased_families": 19,
+            "F1_decreased_families": 36,
+            "F1_tied_families": 16
+          }
+        }
+      }
+    },
+    "scope": "Native full-string answer F1 only, not Source-author whole-task C, material sufficiency or native evidence F1. Paired changes and CIs are F1 points, not binary task-success pp. Fixed256families;3seeds are averaged within each family, not768/1024independent samples. Each stratum uses fixedseed0/20000draws; common draws across contrasts. Training RNG conditional on commonE1init; no full-chain variance claim.",
+    "primary_not_reselected": true,
+    "main_all4_whole_task_C_not_closed": true,
+    "adopted": false
+  },
+  "baseline_quality_unchanged": {
+    "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/anchor-all256-source-author-quality-closeout-v1.json",
+    "positions": 256,
+    "C": 149,
+    "common122_stress_C": 71,
+    "denominator_each": 256,
+    "source_author_not_blind_or_independent": true
+  },
+  "primary_quality": {
+    "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/e3-aggregate-u32/first96-source-author-review-reconciliation-v1.json",
+    "positions": 96,
+    "new_since_v48": 16,
+    "quality_counts": {
+      "C": 50,
+      "W": 7,
+      "I": 12,
+      "F": 24,
+      "U": 3
+    },
+    "material_counts": {
+      "S": 63,
+      "P": 28,
+      "I": 5
+    },
+    "native_strata": {
+      "dev": 96
+    },
+    "prior80_record_dicts_literal_equal": true,
+    "main_unverified_claims_not_automatically_known_factual_errors": true,
+    "cases81_82": "Commercial permission from industrial-research wording and naive-baseline attribution of generic54.28/37.13 scores are unverified U/noC, not declared known false. Baseline82 reread: no such numeric attribution, oldC unchanged."
+  },
+  "external_LME_frozen": {
+    "protocol": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-lme-v1/protocol-before-input-copy-v1.json",
+    "status": "LME451_METHODS_INPUT_IDENTITY_BUDGETS_NATIVE_READER_SCORING_AND_SERIAL_ORDER_FROZEN_NOT_ADMITTED_OR_DISPATCHED",
+    "source_version": "local-a100-lme-native451-20261107-v1",
+    "code_files_literal_bound": 1135,
+    "complete_input_copy": {
+      "passed": true,
+      "status": "ALL_COMPLETE_SMALL_INPUT_FILES_LITERAL_COPIED_AFTER_PROTOCOL_FREEZE_NOT_POLICY_ADMISSION",
+      "protocol": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-lme-v1/protocol-before-input-copy-v1.json",
+      "original_snapshot": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/external/lme-v2-small-snapshot-v1",
+      "snapshot": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-lme-v1/complete-small-snapshot",
+      "files": 5129,
+      "bytes": 720860646,
+      "questions": 451,
+      "trajectories": 200,
+      "native_haystack_pools": 2,
+      "states_and_source_screenshots": 5095,
+      "question_images": 29,
+      "total_image_files": 5124,
+      "all_file_names_and_entire_bytes_equal": true,
+      "physical_JSONL_records": true,
+      "native_answer_or_eval_function_values_accessed_for_selection_or_online_input": false,
+      "program_parse_scope": "Raw JSON objects parsed structurally for counts/IDs/haystack membership; public image presence counted. No answer/eval_function access, semantic labels or reference values displayed. No byte-level no-contact claim.",
+      "new_model_or_HTTP_calls": 0,
+      "ledger_opened_or_written": false,
+      "no_sha_validation": true
+    },
+    "stage_order": [
+      "fixed-prefix-prediction451-v1",
+      "fixed-prefix-scoring451-v1",
+      "fixed-prefix-archive451-v1",
+      "primary-seed0-u32-prediction451-v1",
+      "primary-seed0-u32-scoring451-v1",
+      "primary-seed0-u32-archive451-v1"
+    ],
+    "native_methods_budget_Reader_Judge_scoring_and_exposure_frozen": true,
+    "capacity_clarification": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-lme-v1/capacity-terminology-clarification-v1.json",
+    "capacity_scope": "16384 total finite sequence INCLUDING head;2048 head cap within total,not extra.",
+    "owner": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-lme-v1/own_external_lme_stage_v1.py",
+    "first_plan": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/stages-lme-v1/fixed-prefix-prediction451-v1-plan.json",
+    "finalizer": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-lme-v1/finalize_external_lme_stage_v1.py",
+    "explicit_untouched_continuation_registration": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-lme-v1/register_external_lme_continuation_v1.py",
+    "audit_entry_contract": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-lme-v1/execution-audit-entrypoints-contract-v1.json",
+    "contract_scope": "Installed ABI, complete native SQLite archive/reconstruction, real8NNtrace records,3459rawSourcevalues, native full packet body/role/clock/alias projection and two delivered images. Actual451policy/Source/scoring audits remain future.",
+    "no_automatic_queue_or_first_outcome_retry": true,
+    "final_native_FAILED_with_all451_attempted_accepted_without_rewriting_status": true,
+    "unattempted_tail_rejected_from_finalized_alias_and_only_explicit_continuation": true,
+    "new_external_tasks_dispatched_at_this_checkpoint": 0,
+    "Mem2Act": "Full400GivenTool still required separately; recorded-tool-catalog/shared-first-input adapter not complete. No task/bank/metadata-hole reduction."
+  },
+  "offline_failure_reflection": {
+    "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/source-sdk-contract-message-schema-failure-v1.json",
+    "failed_timer": "check-readonly-sdk-source-body-projection-real-packet-v1.time.txt",
+    "actual_exit": 1,
+    "cause": "Fixture used provider role keys on native LangGraph typed messages.",
+    "correction": "Use full-audited actual provider messages, no conversion/model retry or result change.",
+    "corrected_v2_actual_exit": 0,
+    "failed_timer_included_in_idle25": true
+  },
+  "costs": {
+    "last_actual_idle_paid": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v25.json",
+    "new_closed_timers_paid": 106,
+    "CPU_seconds_paid": 118.97999999999998,
+    "all3failed_after24_timers_retained_paid_once": true,
+    "generation_limits_embedding_unchanged": true,
+    "native_whole_client_parent_prior_CPU_not_rebilled": true,
+    "after25_timers": "New progress/verification/prelaunch work still pending until next actual idle boundary.",
+    "unmetered_author_inspection_launch_cleanup_CPU": "unknown_not_zero",
+    "legacy_unknown_generation_embedding": [
+      15,
+      1
+    ],
+    "next_actual_prelaunch_idle_paid": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v26.json",
+    "after25_new_closed_timers_paid": 4,
+    "after25_CPU_paid": 0.5
+  },
+  "remaining": {
+    "semantic_of1024": 672,
+    "primary_indices": [
+      96,
+      255
+    ],
+    "seed1_semantic_reviewed": 0,
+    "seed2_semantic_reviewed": 0,
+    "main_C_statistics": "All4C/I/Q/W/F/U+material/common122stress full256denominators; paired gains/losses/20kseed0family CI/nativeDEV-TRAIN/perseed/within-family3seed mean. N256not1024, commonE1init conditional training RNG.",
+    "external": "Execute frozen LME451Reader/Judge with actual per-stage full Source/SDK/archive/control/Reader-wire/native-score audits; then full Mem2Act400 own-policy/full input/native-adapted scoring. One actual model/HTTP worker, first failures retained.",
+    "other": "Old64reserved queries/nativeTEST semantics remain unopened; Source-View/ops/fullcost analysis, standalone final figures/paper/results and full plan requirement audit."
+  },
+  "guardrails": {
+    "no_sha_checksums_fingerprints": true,
+    "no_subagents": true,
+    "no_services_second_ledger_reset_refund": true,
+    "no_model_first_outcome_retries_or_reselection": true,
+    "no_remote_Product_changes": true,
+    "GPUs0_1_unchanged": true,
+    "no_Source_K_menu_task_horizon_crop_compact_quantize_to_pass": true
+  },
+  "offline_progress_verification_failure": {
+    "reflection": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/progress-v49-verifier-path-failure-reflection.json",
+    "failed_timer": "verify-progress-v49.time.txt",
+    "corrected_v2_actual_exit": 0,
+    "failed_timer_paid_once_idle26": true,
+    "experiment_or_native_scores_changed": false
+  }
+}

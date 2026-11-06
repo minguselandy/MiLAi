@@ -1,4 +1,109 @@
-# LIVE A100 EXECUTION v48: 2026-11-07
+# LIVE A100 EXECUTION v49: 2026-11-07
+
+Full goal ACTIVE/incomplete; previous/current turns PROGRESS.
+Latest data/manifests/a100-development-progress-20261107-v49.json ->v48.
+Previous checkpoint741ab1b1. ROOT=artifacts/a100-development-20261104,
+F=ROOT/final-confirmation-v1, E=ROOT/external-own-policy-v1.
+No subagents, SHA/checksum/fingerprints, new services/second ledger/reset/refund,
+remote/Product writes, first-outcome/model retries/reselection. GPUs0/1 unchanged.
+No Source/K/menu/task/horizon crop, compact projection or quantization to pass.
+
+SEED2 ALL256 NOW CLOSED: owner3666509/child3666510 actualexit0/procsABSENT/
+clientCPU paid.195nativeCOMP61firstF,616HTTP2187880known,newunknown0/0.
+Wholechild2398.03001CPU -native1728.1082746413886-load8.301686305000203
+=residual661.6200490536112 +parent.127463247 paid once.
+GPU2child interval2.293966455008421h includes Reader/Host wait,not kernel time.
+Fullaudit86527actual0 DRAINED NEVER REPOLL:
+19188oldSourcecomp/962literalranges+roles/origin/capture/reportclock,
+256wholefirstproviderrequests equalsharedanchor; Store/Saver/world/apps invariant,
+semantic/business0.1971NN/11790893actualinputtokens3454..9704,complete before/
+allofferedbindings/head/logit-probIDorder/argmax finite,truncFalse.
+SEARCH548READ1260HANDOFF163. No new inference/tokenization/HTTP in audit.
+NativeF1session72549actual0 DRAINED NEVER REPOLL.
+
+ALL4 native literal full-string AnswerF1/paired20kseed0familybootstrap NOW CLOSED:
+F/native-answer-f1-all4-methods-closeout-v1.json.
+fixed.0981909306413507,primary.08804209206295316,
+seed1.08179025700801325,seed2.08255053543397148.
+Primary-nativeF1 pointdiff -1.014883857839749,CI[-2.3448953371475114,.33227116588488315].
+Within-family3seed mean -1.4063302473038022,CI[-2.568302549443964,-.24789305037585868].
+These are F1 points,NOT whole-task C success pp. NativeDEV185/TRAIN71/perseed
+reported; N256not768/1024independent. Training RNG conditional commonE1init.
+No positive advantage/adoption or best-seed/stratum reselection.
+
+Baseline all256 quality unchanged C149/I52/W15/F40;S150/P75/I31,
+common122stressC71/same256denominator.
+Primary FIRST96 now C50/I12/W7/F24/U3; S63/P28/I5,DEV96.
+F/e3-aggregate-u32/first96-source-author-review-reconciliation-v1.json;
+prior80WHOLErecorddictsliteralunchanged. Cases81commercialpermission and82score
+attribution U/noC: unverified Source claims,not declared known false. Baseline82
+reread,has no numeric attribution; oldC unchanged. Addendum82sameall4before this
+learned review. No label inheritance/blind-author claim. Remaining672 semantic:
+primary96..255,seed1all256,seed2all256; all4mainC/material/common122/paired CI still
+required. USE common-source-question-scope-inventory-all256-v2 only122true134false.
+
+LME PROTOCOL FROZEN BEFORE full inputcopy, not yet dispatched at checkpoint:
+E/frozen-lme-v1/protocol-before-input-copy-v1.json.
+1135codefiles direct-byte bound;5129completeinputfiles720860646bytes literal equal,
+451questions/200trajectories/5095source states+screenshots/29questionimages=
+5124TOTAL images (not5124source plus29). Raw JSON structurally parsed afterfreeze;
+no answer/eval_function selection/online use or values displayed.
+Inherited budgets/Host unchanged except common config_version metadata; fixed vs
+laya/frozenprimaryseed0u32. Total sequence16384 INCLUDING head,headcap2048 within;
+original phrase state+head clarified in capacity-terminology-clarification-v1.json.
+Native own-policy given retrieval ->fixedReader/Judge, NOT autonomous Host.
+All200Small/451queries/29images development-exposed,no history-disjoint claim.
+Six SERIAL stages fixed prediction/audit/score/archive then primary likewise.
+No automatic queue. Each initial451plan E/stages-lme-v1/*-plan.json.
+Frozen owner E/frozen-lme-v1/own_external_lme_stage_v1.py --check-only
+then explicit detached launch only after actual gates. Whole-child-minus-native+
+parent once even failed; same original ledger/queue. Full451nativeFAILED is valid
+first-outcome closure if allattempted; never rewrite toCOMPLETED/retrylastF.
+Explicit continuation registration only native NOT_RUN/UNSCORED_COMPLETED after
+actual prior exit/paid/procsabsent/reflection; no rerun attempted cells.
+Finalize aliases once, compare entire each finalrecord to earliestattempted
+ancestor; only then next stage. Aliases outsidecase/template trees.
+
+Actual readonly audit entrypoints now ROOT/audit_external_lme_predictions_v1.py
+and audit_external_lme_scoring_v1.py; E/frozen-lme-v1/
+execution-audit-entrypoints-contract-v1.json binds5analysis-code references and
+componentproofs. Full actual451audits remain future. Existing native SQLite
+backup/archive/restore7files121794392bytes equal; real8NNtrace records equal prior
+fullaudit;3459oldSourcevalues invariant/one native projection; entire realpacket
+Source body/role/origin/clock/sharedalias regeneratedread-only; retainedLME
+context5items/2images equal. No models/tokenizers/HTTP/ledger writes.
+One fixturetest FAILEDexit1: native LangGraph result.messages has no provider role.
+Corrected to audited actual_final_provider_messages, v2exit0; no result/model
+retry. Reflection E/source-sdk-contract-message-schema-failure-v1.json.
+Failedtimer included idle25. Do not mix message schemas or fake missing evidence.
+
+ACTUAL IDLE25 NOW PAID ONCE:106closed GNUtimers118.97999999999998CPU.
+Includes both v47first184failuretimers and new SourceSDKfixturefailure (3failed).
+All generation/limits/embedding unchanged,native/wholeclient/parent/prior1..24
+notrebilled. settle_confirmation_seed2_idle_v25.py actual0,NOT GNUwrapped.
+After25prelaunch4closedtimers were paid once at actualidle26,including verifyv49
+path-type failure; original reports/metrics/protocol unchanged, correctedv2exit0.
+ROOT/progress-v49-verifier-path-failure-reflection.json.
+Scanner/settler neverGNUwrapped; any later timers pending at next idle.
+Unmetered author/inspection/launch/cleanup/settlementCPU unknown,not0.
+Legacyunknown15gen/1embed kept.
+
+NEXT: commit/verify frozenLMEprotocol/auditors andprogress; actual ownercheck gates,
+settle newly closed after25timers at a real idle boundary, explicitly launch ONE
+fixed-prefix LME451prediction owner. Native stops at first error: inspect/retain,
+register only untouchedtail under unchangedrecipe; noautomaticretry/queue.
+During external modelworker, continue remaining672semantic QA/readonly analysis;
+no offlineCPU settlement/secondmodelHTTPworker. Native stage Source/SDK/role/
+clock/image/NN/Reader-wire audit before scoring; native scoring audit before
+archive/finalizer/next method. Do not interpret component proofs as451readiness
+or accuracy. Mem2Act400 still requires recorded-tool-catalog/shared-first-input
+adapter; incompatible QASPERpreHostreplay notused. Full429sessions/16843turns/
+metadataholes retained; adaptedmetrics notauthorTA/leaderboard/transactions.
+Old64reserved query/nativeTEST semantics stillunopened,old64Sourceexposed.
+FullSource-View/ops/cost analysis, final standalonefigures/paper/results and
+full763-line requirementaudit remain. Fullgoal NOT complete.
+
+# HISTORICAL A100 EXECUTION v48: 2026-11-07
 
 Full goal ACTIVE/incomplete. Previous/current turns PROGRESS.
 Latest manifest data/manifests/a100-development-progress-20261107-v48.json
