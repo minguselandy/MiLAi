@@ -6,11 +6,64 @@
 历史 worktree、原始失败与用户文档保持原状。没有使用子代理、SHA/内容指纹校验、新服务、第二账本或远端写入。
 
 本轮机器可读入口为
-[progress](../data/manifests/a100-development-progress-20261106-v36.json)。
+[progress](../data/manifests/a100-development-progress-20261106-v37.json)。
 原始数据、冻结运行时、权重、命令、计时和实际输出位于本 worktree 的 ignored
 `artifacts/a100-development-20261104/`。本记录是现有报告体系的执行摘要。
 
-## v36 当前状态（2026-11-06）：缺失52 READ正在首次执行，前12格机械绑定完成
+## v37 当前状态（2026-11-06）：52 READ/7池首次执行及机械审计完成，66格质量待审
+
+当前没有活动实验worker。B52 owner和C7 owner均实际退出码0、父子进程消失，
+客户端CPU已记一次。B52实际52次HTTP/194,966已知Host tokens，48次原生COMPLETED/
+4次首次FAILED；C7实际14次HTTP/58,076已知tokens，12次COMPLETED/2次首次FAILED。
+新增unknown均0/0。没有重试首次失败，没有把完成字符串当任务成功。
+
+B完整52绑定实际exit0，整个前12记录字典与完整52前缀逐值一致。52条新READ
+均opened且所选范围进入实际Reader，159段原文按全文范围/角色/clock绑定。
+3,829次完整前后Source比较与应用表一致，语义/业务写入0。原有5个覆盖状态
+加新52个，旧57状态/56家族的 observed-Source READ执行覆盖达到57/57；新增
+功能READ5＋本次52＝57预算上限。旧139/功能8首结果未重跑，52个保留比较的
+Reader wire在packet之外逐值相同。B整子进程115.64851CPU、parent至计量点
+0.08460277CPU各计一次，新增native模型CPU为空，没有启用GPU。
+
+C固定7个原已获材料池完成真实Store准备，全部Store值保留、7格观察字段
+实际无变化；HANDOFF原完整参数和顺序12/17/8/18/13/4/17保持，未扩菜单或
+重跑前缀。14格实际均只执行一个合法HANDOFF，没有新取证。18段交付原文、
+1,222次Source比较和应用表一致，语义/业务写入0；七个Reader对在packet外
+逐值一致。没有旧完整绑定及整个Reader wire同时相同的结果可复用，实际
+复用0、新增14读出，累计47/48、18/24状态，不填剩余额度。
+
+C的7次实际E3 forward逐条核对完整state、原HANDOFF参数/头ID/顺序、logits/
+probabilities/选择与预检一致，3,837–5,127 tokens，总32,401已由native计量，
+无截断。GPU2FP32一次VERIFIED加载，MHAfastpath/TF32/referencecompileFalse。
+NativeDecision仍来自未改runtime-c-handoff8；早期C8没有GPUutility，复用
+后来D的通用进程wrapper，未添加运行时文件或改变策略算法。C整子进程
+56.893255 CPU＝已计load/predict12.543705536＋残余44.349549464，parent
+0.221215714另计一次。GPU作业区间0.102402046小时包括Host等待，不是纯CUDA。
+
+初版v37快照writer仍要求C7处于RUNNING，而读取时该作业已经完成，断言在
+写文件之前停止。随后核对实际owner/进程/原生终态，按完成状态记录；没有
+模型、Source、账本或首结果改动。另一次只读检查误假定早期C8包含GPUwrapper，
+按实际文件清单改用已有Dutility。未测检查/作者/launch/cleanup CPU记unknown，
+非0。真实空闲v20仅将7条新增闭合准备/绑定/预检计时46.83CPU记一次；此前
+20份结算、模型/native/客户端/parent费用不重复，limits/生成/请求/embedding未改。
+
+下一步是完整66格的来源作者答案/材料审阅及配对胜负/tie/unknown。B的48次
+原生完成及C的12次完成都还不是完整成功数；来源字面绑定、打开/交付完成、
+状态无副作用和完整模型输入分别成立，不能代替语义质量。沿旧已曝光TRAIN
+任务/全文依据审阅新答案，不从旧结果复制标签，不增加拟合/状态/重复。
+仅使用这批已曝光来源的审查包和实际before，冻结前不打开全量rawQASPER中
+可能含held/reserved的语义。held256/old64查询/原生TEST语义仍未打开。
+
+完整目标继续：质量及开发结论闭合后，冻结最终候选/权重/评分/预算/N，再
+做合格确认与LME451/Mem2Act400自身策略、完整输入、曝光、全成本/统计/论文
+图表。D/K/三训练RNG种子负结果和解释范围均保留；没有SHA校验、子代理、
+新服务、第二账本、退款、Product或远端变更。
+
+证据：b-repair-read52-full-binding-v1.json、coverage-closeout-v1.json、
+c-repair7-native-v1/mechanical-source-input-audit-v1.json、两个owner、
+idle-cost-settlement-v20.json；实际packet/wire/trace和Source副本保持ignored。
+
+## v36 历史状态（2026-11-06）：缺失52 READ正在首次执行，前12格机械绑定完成
 
 v35旧输出42格/来源作者审阅/实际输入与成本已闭合并提交680bb90f。
 本轮将52个冻结动作转换为原有双提名准备：每状态新READ加首个已执行旧比较。
@@ -2115,13 +2168,13 @@ View后继续READ的功能切片，再固定三方法、2048预算与同一来�
 改为当前原文短标签或`support_not_opened`，并拆分共享metadata。现已分别验证解释文本不变和
 定位/角色/时钟投影一致，旧比较报告保留，没有重跑读取或模型。
 
-## 全范围剩余要求（按v35证据更新）
+## 全范围剩余要求（按v37证据更新）
 
 | 里程碑 | 当前证据 | 仍需执行 |
 | --- | --- | --- |
 | M0 | 双独立单卡/P0精度、统一FP32与落盘复验闭合 | 后续实际新风险再定向验证 |
-| M1 | 原生负例覆盖、旧57状态与8功能首结果闭合；缺失52 READ绑定已冻结 | 原生准备并仅执行52条新READ，保留139旧/8功能结果、tie/loss/unknown；不补旧比较 |
-| M2 | A/B主拟合、B64 384结果、C8、DEV64全部五方法与完整来源审阅已闭合 | 7个冻结已获材料池的rules/E3 handoff-only首结果，最多14新读出；不扩菜单/拟合 |
+| M1 | 原生负例覆盖、旧57状态与8功能首结果闭合；缺失52 READ绑定已冻结 | 52条新READ及57/57执行覆盖、完整机械绑定已完成；仍需全52答案/材料审阅及原配对，保留tie/loss/unknown |
+| M2 | A/B主拟合、B64 384结果、C8、DEV64全部五方法与完整来源审阅已闭合 | 7池rules/E3首14格及全部Source/输入审计已完成；仍需完整14质量/配对，不扩菜单或拟合 |
 | M3 | E3固定初始化下三训练RNG种子u32/DEV64与家族统计闭合 | 不选最好seed、不自动扩A20k/B192/额外种子；最终采用依完整开发与确认结果 |
 | M4 | 旧8/新32三方法全部正式流程、K9及旧输出42控制/审阅/完整输入/成本闭合 | 保持因子解释边界；与B/C诊断合并开发结论，不把最终更新失败归为单一原因 |
 | M5 | held256仅身份预留，语义未开；LME历史曝光及完整输入风险已登记 | 冻结候选/权重/评分/预算/N后确认；合格LME451 Reader/Judge、Mem2Act400自身策略/完整输入；全成本/统计/论文图表 |

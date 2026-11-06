@@ -1,4 +1,82 @@
-# LIVE A100 EXECUTION v36: 2026-11-06
+# LIVE A100 EXECUTION v37: 2026-11-06
+
+Fullgoal ACTIVE/incomplete; current/previous turnsPROGRESS. Latestmanifest
+ data/manifests/a100-development-progress-20261106-v37.json and executiondoc.
+NoSHA/checksums/contentfingerprints/subagents/newservices/secondledger/reset/
+refund/remote writes/Productchanges/first-outcome-or-model retries. GPUs0/1 unchanged.
+
+NO LIVE EXPERIMENT WORKER. B52 parent1437174/child1437175 and C7 parent1585110/
+child1585188 actualexit0/procgone/clientCPUpaid. Native52/14 firstoutcomes CLOSED.
+Do not rerun them or repoll terminal97372/56584/91793/73035; older D22539lost/
+child1294423gone neverrestart. BCLI activefield remainslastcase atterminal,
+notaproof ofliveness. CdriveractiveNone; inferenceCOMPLETED, oneGPU2loadverified.
+
+B52 COMPLETE MECHANICAL COVERAGE, QA PENDING:
+b-repair-read52-full-binding-v1.json, coverage-closeout-v1.json, owner-v1.json.
+Full52bind actualexit0; ENTIREprefix12dicts equal full52first12.52 READopened/
+selectedrangeactuallyReaderdelivered,159rawranges literalbody/role/clockbound,
+3829wholeSourcebefore/aftercomparisons/appsunchanged/no semanticorbusinesswrites.
+Actualfullfirstaction/before/0prefixrerun/fixed_context4/2steps/nativecaps/
+Readerwireequaloutsidepacket toretainedoriginalcomparison verified. Old5unique+
+new52=57/57oldstates56TRAINfamilies; functional5newREAD+52=57newREADcap.
+Exact52/104nominations onlynew52executed; original139/8functional neverrerun.
+48nativeCOMPLETED/4firstReaderFAILED knownusage retained, NOT48tasksuccesses.
+52HTTP194966known/newunknown0/0; wholechildCPU115.64851/native{}+parentthrough
+billing.08460277 paidonce. NoGPU/localmodel forB. Full52 answer/material/source
+semantic QA and paired direction/tie/unknown REMAIN, no oldgradesinherited.
+
+C7native14 COMPLETE MECHANICAL SOURCE/INPUT AUDIT, QA PENDING:
+c-repair7-native-v1/mechanical-source-input-audit-v1.json/owner-v1.json/plan/
+execution-v1.7realStorepreps, completevaluesunchanged, changedobsfields[]all7,
+fulloriginalHANDOFFmenus12/17/8/18/13/4/17 equal. No newmenu/prefixrerun/acquisition.
+14actualchoices alllegalHANDOFF;18rawranges/1222Sourcecomparisons/appsunchanged/
+no semanticorbusinesswrites.7pairedReaderwires literallyequaloutsidepacket.
+7actualE3NNinputs3837..5127/sum32401 complete state/allHANDOFFbindings/head/
+logit/probIDorder/choice equalpreflight, truncFalse. GPU2FP32oneVERIFIEDload,
+MHAfastpath/TF32/referencecompileFalse. Unchangedruntime-c-handoff8NativeDecision;
+genericGPUutility fromfrozenD (earlyC8hadonlyCPUutility), no runtimefileadded.
+14newReaderHTTP58076known/newunknown0/0,12COMPLETED/2firstFAILED kept. Strict
+oldfullbinding+entireReaderwire match found0reuse; no laterbestanswerselection.
+Cumulativeacquiredreadouts47of48/pools18of24. DoNOTfillunusedquota oraddfits.
+WholechildCPU56.893255=native/load12.543705536+residual44.349549464, parentthrough
+billing.221215714 paidonce. GPUjobinterval.102402046h includesHostwait,notpureCUDA.
+
+Idle20 ACTUALLY SETTLED ONCE7closedtimers46.83CPU afternativeB/Cactualterminal and
+mechanicalaudits, whileQAstillpending. AllGNUthrough20paid; owners/model/native/
+parent/earliernotrebilled, limits/gen/requests/embeddingunchanged. Untimedauthor/
+launch/cleanup/inspection/recoveryCPUunknownnot0. NeverGNU-wraptimer-scanning
+writer/actualsettlement. Currentv37writerfirstassertedRUNNINGafterC7already
+terminal; stoppedbeforeanyfilemutation, actualterminal thenrecorded. Reflection
+progress-v37-live-snapshot-race-v1.json; missingC8GPUutilityinspectionfailure in
+Cplan. No experiment outcome retry from either read-only/precondition failure.
+
+NEXT FULL SOURCE-AUTHOR QA OF66NEW FIRST OUTCOMES +RETAINED COMPARISONS:
+B52actualpublicquestion/entireactualpacket/answer/material/sourcewitnesses and
+oldfirstcomparison; C14rules/E3samepool actualpacket/answer. AllSource/wiresbound,
+notsemanticgrades. Preserve6Readerfailures F; answercomparisonunknownwhenexecution
+fails, delivery independentlyknownonlywithsourceproof. No successfrom opened/
+delivered/nonempty/nativeCOMPLETED; emptyor'...'COMPLETED areQ/nonanswers.
+No copyingoldlabels to newanswers, no gold/qualityselection/extraModel/retry.
+Useful OLD TRAIN ONLY reviewpaths (inspectschemasfirst):
+OLD=evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102
+ e3-pilot8-reached-branches-v2/augmented-reviews-v1.json, outcomes-for-review-v1.json
+ e3-origin-compiler-v1/pilot-reviews-v1.json (retainedpilot source judgments)
+ e3-remaining48-reached-branches-v1/review-input-v1.json, reviews-v1.json,
+ outcomes-for-review-v1.json. Oldremainingreviews.records49haveoutcomes/comparisons;
+review-input.states actualschema notyetinspected. Reuse source-groundedtask
+expectations/oldoutcomes identityonly, NEVERnewgrades. NativebeforeSourceSQL and
+old57source-onlyfixtures alreadyTRAINexposed. DoNOTloadglobalrawQASPER/train/dev/
+testfiles thatcouldincludeheld256/reservedsemanticcontents beforefinalfreeze.
+
+Then B/Cquality/comparison/coverage/costclosure, finalcandidate/checkpoint/scoring/
+budget/Nfreeze BEFOREheld256paper/old64querysemanticcontents(stillUNOPENED),
+eligibleLME451Reader/Judge/Mem2Act400 actualownpolicy/fullinput/exposure, fullcost/
+stats/figures/paper. NativeTESTsemanticcontentsunopened; oldLMEdevelopmentexposure
+notunseenconfirmation. NoautomaticA20k/B192/extraseeds/AtoB/newmenus. Doldoutput42/
+K9/formal3methods andM3fixedinitthreeRNGseed negativeevidence preserved below.
+Fullgoal NOT complete. Previousv36snapshotcommit749494a0; v35closure680bb90f.
+
+# HISTORICAL A100 EXECUTION v36: 2026-11-06
 
 Fullgoal ACTIVE/incomplete; current/previous turns PROGRESS. Latestmanifest
  data/manifests/a100-development-progress-20261106-v36.json / executiondoc.
