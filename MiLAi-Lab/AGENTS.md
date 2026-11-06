@@ -1,4 +1,94 @@
-# LIVE A100 EXECUTION v30: 2026-11-06
+# LIVE A100 EXECUTION v31: 2026-11-06
+
+Full goal ACTIVE/incomplete; current/previous turns PROGRESS. Latest manifest:
+data/manifests/a100-development-progress-20261106-v31.json and execution doc.
+No SHA/checksums/content fingerprints, subagents, services, second ledger,
+reset/refund, remote writes or model/first-outcome retries. GPUs0/1/Product unchanged.
+
+ONLY LIVE experiment HTTP/model worker new32-e3-aggregate-u32-owner.json:
+parent28715 / child28722 / exec80986;211/320closed at snapshot. Revalidate actual
+/proc/owner/native. FP32savedE3u32 GPU2/MHAfastpathFalse/refcompileFalse/oneverified
+load. Frozenruntime/config/data/Host unchanged. NoextraHTTP/nativecapturedcontrols/
+realStoreclones/offlineCPUsettlementwhilelive. Isolatedscripted/noHTTPfixtures with
+norealexperimentStore/originalledgeraccessallowed,none new. At actual terminal FIRST
+run `bind_d_frozen_method.py new32-e3-aggregate-u32`; await actual exit0; THEN run
+`audit_d_closed_sdk_states.py new32-e3-aggregate-u32`. Full320quality/Views/SDK/effects/
+ops/costclosure then familycomparison/controls. Losthandle not retryauthority;
+neverrepollcompletedbaseline4305/incremental4286.
+
+E3PREFIX170 WHOLE SOURCE REVIEW CLOSED:
+d-update32/reviews/new32-e3-aggregate-u32-prefix-0170/answer-review-closeout-v1.json
+C55/Q29/W55/F31;material69complete98partial3insufficient;joint45;receivedViews0.
+17correlatedTRAIN-exposedfamilies,not170independent/unseen/full320/adoption.
+Sourceauthor,notindependent/blind. Engineering139COMP31FAIL;allfirstfailureskept.
+Mid34C1/materialcomplete1;final34C0/complete0. ENTIRE120oldrecorddicts/providerinputs/
+answers/Sourcebindings/all0Viewrecords literallyequal new170prefix beforesame-method
+judgmentreuse/allanchor/Fmaskchecks. No intermediateprefix/model/tooloutcome reruns
+orcrossmethodgrades. NEXTindex170C07. Separateactualcomplete-familycut;compare
+ENTIRE170records/allViews beforecopy/revalidation. Inspector --compact
+--since-previous --compact-view-text --reuse-reviewed-condition new32-view_cache.
+Readwholeanswers,nevergradeunseen/truncated;originals2–5ownquotesnotassistant;
+F iffactualexecfailed. ActualK+newreceivedrequiredcorewitnesses,notuniqueGoldSourceID.
+
+B26initialcities/roles/movesandnovisitplancorrect; laterEugenecompleted/futurePortland/
+SeptemberAustinintentionnotbooked/unbornsecondchildunreceived. C01initialfirm240/
+plannedinstallationcorrect; potentialcousinleadnotexistingpriceQ andunlabelledasst
+quote137Q/complete. New260/DIYMay10/conditional245/nonfirm210/others230unreceived.
+C02initial141/142transparentgrant15calculationC;145/146/147omittedgrant15despite
+completeownmaterialQ (providedownquotescanTrue). Midgrant14/target11/writtennotice/
+rejectedgrant22versuslease22/otherprogram18unreceived;noactualsendorlegalverification.
+C04oldDrTanunderpositiveunmade-proposalcategoryQ, combineddiscontinuedcareheading
+withaccuratebodyC. InitialcurrentGI/diagnosis/ENT/friendcorecomplete; no roomfrom
+endoscopy/yearinference. NewApr28booked/Apr30proposalnotmade/sinusresolved/friendMay5
+unreceived. C05initialMay18–25/IKXR47/640perpersonflightscorecorrect;165onlydateslice
+Qpartial,166newownrefadequatecompleteflighttaskwithoutunaskedhotelGoldID. 167extra
+assistantpenciling-as-resolutionquoteQ. NewMay26/3200groundfortwoexcludingflights/
+May28rejectedproposal/partnersleave≠booking/friendsMay24unreceived;168queryonly
+addsownFaroeabandonment, notdate/budget. No actualairline/electrical/appointment/
+Storeforgeteffect, recommendations or medicaladvice.
+
+Inheritedfinite_decision_input_audit is ONLYfirst120/274actualforwards,NOT170:
+literalnativebefore/fullactiontargets/params/order/head/logit/probIDs/choice decoded
+equal, input2521..9126/1597256tokensalready-native-counted,437shared=163HTTP+274local,
+truncatedFalse.0newmodel/HTTP/Store/ledgeraccess. No prefixauditrepeat or inference
+aboutfullbankdelivery/Hosttruth/externalLMEfeasibility. Full320auditpendingafterbind.
+Priorprefix50prematurereconcilefailure andprefix120wrongissuequote/dependentclose
+failure retained (seev29/30);norepeatthisturn. ANYdependentwrite/close onlyafter
+previouscommandactualexit0,notjustreturnedhandle/yieldtimeout. Keepfailedtimers/
+unmeteredauthorCPUunknown,no defensivefilefallback or model/toolretry.
+
+All3first8Viewdonorproofscollected:baselineA05/A33/B03eligible(1failed4noView),
+incrementalB03eligible(1failed6noView),E3all8completed/noView.24methodcells/4eligible/
+3Sourcefamilies;max1before/family×3→atmost9conditionalreadoutsbeforefurthernative
+eligibility.5nocandidatefamiliesretained. NativeK/freshbefore/frame/controls0;
+keepA05firstrev1/fullHosthistory/siblingreceipts,no laterturn/family/cleanerrevision
+fill or given-readoutwithK.52READ preparercontractreviewonly:2or3legalnominatedIDs,
+explicitbindings/exactnominations/operationsroute(NO first-actionvalue);newfrozenREAD
+and alreadyexecutedoriginalcomparisonnomination,filterpoliciestoONLYnewREAD,nooldretry/
+padding. fixed_contextreads4/continuation2/actualremainingcaps/emptyKgivenreadout;
+57statecap old139+functional8 retained.C7poolsrulesvsE3handoff-only max14new→47of48/
+18of24states reserved/unexecuted. Actual52preparations/READs/Hostreadouts0.
+
+Baseline320C67/Q65/W121/F67,material84/222/14,joint53;42Views163occurrences.
+Incremental320C65/Q56/W135/F64,material76/223/21,joint48;25Views117occurrences/
+929rawranges. Bothfullquality/SDK/ops/ownerCPUclosed,don'trerun/rebill. Prepared
+compare_d_new32.py(all3full320closures,32family20kseed0bootstrap) and
+settle_d_new32_E3_idle_v17.py(all3closure+comparison+actualidle,diffafter1..16)
+NOTEXECUTED;receipt17ABSENT.49closedpost16timers42.00CPU pending;authoruntimedCPU
+unknownnot0. NoofflineCPUsettlementwhileE3lives;nativeHTTP/local-modelcostcontinues
+originalledgeronce. NeverGNU-wraptimer-scanningwriters/actualsettlement.
+v16paid76timers211.76CPUonce beforeE3launch,earliernative/model/clientnotrebilled.
+
+ActualK/old-output/52READ/7poolcontrols0. v20Sourceexclusion24fixtures/v24firstframe
+2fixturesunchanged;formalruntimeLACKSnewSourceexclude. Afterformalclosure validate
+nativebefore/K/fresharrival/fullHostframe/receipt/separatecontrolledruntime/config.
+Fullremaining:E3tail/fullclosure,3methodstats,controls/repairs,finalcandidate/checkpoint/
+scoring/budget/Nfreeze BEFOREheld256papers/old64querycontents;LME451/Mem2Act400
+own-policy/full-input/exposure,allcosts/paperfigures. Heldconfirmation/reservednative
+testsemanticcontentsunopened;historicalLMEexposureisdevelopment,notunseenconfirmation.
+GoalNOTcomplete.
+
+# HISTORICAL A100 EXECUTION v30: 2026-11-06
 
 Full goal ACTIVE/incomplete; current/previous turns PROGRESS. Latest manifest:
 data/manifests/a100-development-progress-20261106-v30.json and execution doc.
