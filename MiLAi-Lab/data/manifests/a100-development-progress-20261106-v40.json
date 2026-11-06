@@ -1,0 +1,194 @@
+{
+  "status": "ACTIVE_FULL_PLAN_CONFIRMATION_ANCHOR_RUNNING_PREFIX64_BOUND_SOURCE_GUIDES60_AND_ADDITIONAL12_WHOLE_REVIEWS",
+  "timestamp_utc": "2026-11-06T10:25:39.394434+00:00",
+  "goal_complete": false,
+  "goal_status": "active",
+  "current_goal_turn_classification": "progress",
+  "previous_goal_turn_classification": "progress",
+  "plan": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_2XA100_40GB_20261104.md",
+  "worktree": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104",
+  "branch": "feat/a100-development-20261104",
+  "previous_manifest": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/data/manifests/a100-development-progress-20261106-v39.json",
+  "snapshot_scope": "Current state plus exact references to unchanged prior development evidence. Prior manifest and all original first outcomes retained; avoid duplicating its 914324-byte historical payload.",
+  "previous_checkpoint_commit": "eb689cd0",
+  "closed_development_evidence": {
+    "M0_M4_status": "Closed as scoped in v39; not independent confirmation or adoption.",
+    "v39": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/data/manifests/a100-development-progress-20261106-v39.json",
+    "direct_closeouts": [
+      "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/b-c-repair-full-closeout-v1.json",
+      "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/b-c-repair-quality-closeout-v1.json",
+      "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/b-c-repair-source-author-decisions-v1.json",
+      "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/d-controls-v1/old-output/old-output-control-closeout-v1.json",
+      "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/d-controls-v1/known-View/known-View-control-closeout-v1.json",
+      "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v21.json"
+    ]
+  },
+  "processes": {
+    "sole_actual_experimental_worker": {
+      "owner": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/remaining248/anchor-owner-v1.json",
+      "status": "RUNNING",
+      "parent_pid": 2223256,
+      "child_pid": 2223258,
+      "actual_parent_child_commands": {
+        "pid": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/http-env/bin/python /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/own_final_confirmation_anchor.py /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/remaining248/anchor-execution-plan-v1.json",
+        "child_pid": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/cuda-env/bin/python -u /cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/frozen-feedback-ae3950f2/train_with_declared_attention.py /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/runtime-b64/tools/run_host_saved_gpu.py /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/remaining248/anchor-inference-v1.json /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/runtime-b64/tools/run_host_intent_retrieval.py /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/inherited-DEV64-config.json /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/remaining248/histories.json /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/execution-fixed-prefix-remaining248 --source-version local-a100-final-confirmation-20261106-v1 --policies fixed --interfaces rich --continue-host-history --capture-control-steps --capture-host-messages --capture-closed-host-messages --host-site-packages /cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/http-env/lib/python3.11/site-packages"
+      },
+      "driver": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/execution-fixed-prefix-remaining248/driver.json",
+      "native_status": "RUNNING",
+      "planned_positions": 248,
+      "closed_positions_at_snapshot": 148,
+      "native_statuses_at_snapshot": {
+        "COMPLETED": 119,
+        "FAILED": 29
+      },
+      "client_CPU_recorded": false,
+      "detached_bounded_owner": true,
+      "automatic_retry": false
+    },
+    "other_three_learning_methods_actual": 0
+  },
+  "confirmation_freeze": {
+    "protocol": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/protocol-before-held-export.json",
+    "actual_prefreeze_commit": "1ebe965e",
+    "frozen_methods": [
+      "fixed-prefix policy=fixed",
+      "primary E3 aggregate seed0 update32",
+      "secondary fixed-E1-initialization training-RNG seed1 update32",
+      "secondary fixed-E1-initialization training-RNG seed2 update32"
+    ],
+    "families": 256,
+    "native_strata": {
+      "dev": 185,
+      "train": 71
+    },
+    "total_first_autonomous_trajectories": 1024,
+    "source_units": 18932,
+    "method_checkpoint_budget_N_or_general_scoring_changed": false,
+    "source_export_after_freeze": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/source-export-closeout-v1.json",
+    "native_test_semantics_opened": false,
+    "old64_reserved_query_semantics_opened": false,
+    "learned_inference": "GPU2 FP32; complete state/menu/head; max16384/head2048; MHA fastpath/reference compile/TF32 false; no input shrinking or compact/quantize-to-pass."
+  },
+  "prefix64_readonly_audit": {
+    "status": "FIRST_AUTONOMOUS_ANCHOR_SEGMENT_PROVIDER_INPUT_SOURCE_STORE_SAVER_APP_AND_COST_BOUND_QUALITY_PENDING",
+    "segment": "remaining248",
+    "positions": 64,
+    "native_statuses": {
+      "COMPLETED": 55,
+      "FAILED": 9
+    },
+    "completed_final_inputs": 55,
+    "failed_last_inputs": 9,
+    "literal_Source_ranges": 256,
+    "unmatched_ranges": 0,
+    "existing_Source_comparisons": 4561,
+    "new_public_assistant_Sources": 55,
+    "actual_HTTP_already_paid": 143,
+    "known_Host_tokens_already_paid": 489826,
+    "all_prefix_response_token_totals_known": true,
+    "per_result_generation_embedding_unknown_usage_deltas": [
+      0,
+      0
+    ],
+    "immutable_completed_prefix_requires_full_reconciliation": true,
+    "source_author_whole_quality": "PENDING_NOT_NATIVE_COMPLETION",
+    "new_model_calls": 0,
+    "ledger_opened_or_written": false,
+    "native_test_opened": false,
+    "no_sha_validation": true
+  },
+  "prefix64_binding_file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/remaining248/prefix64-anchor-native-binding-v2.json",
+  "prefix64_failure": {
+    "first_audit_actual_exit": 1,
+    "cause": "Assumed full provider-event usage_confirmed field exists in thinner native result.usage aggregation.",
+    "reflection": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/remaining248/prefix64-audit-v1-failure-reflection.json",
+    "correction": "v2 validates actual integer response totals and unchanged per-result generation/embedding unknown_usage, retaining all Source/Store/Saver/app/provider checks.",
+    "corrected_audit_actual_exit": 0,
+    "model_or_first_outcome_retries": 0,
+    "full248_reconciliation_still_required": true
+  },
+  "source_author_guides": {
+    "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/source-author-task-guides-prefix60-v1.json",
+    "completed_source_specific_guides": 60,
+    "native_Source_evidence_basis_before_first_model_for_all256": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/source-review-guide-basis-before-model-v1.json",
+    "source_author_not_blind_or_independent": true,
+    "timing": "General rules/methods/N/budgets before held export; native evidence basis before model. Source guides after baseline execution began, mostly before corresponding semantic answer review. Pilot progress had exposed answers; no all-guides-before-all-answers claim.",
+    "issues_retained": "Missing numeric table cells, native-vs-body mentions significance and partial quality-control conflicts, language-inference limits, authors versus prior-work/other-team roles, corpus versus training/evaluation units. No injection into model inputs."
+  },
+  "whole_answer_review": {
+    "pilot8_notes": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/pilot8/anchor-source-author-review-notes-v1.json",
+    "pilot8_source_scope_finalization": "Still provisional, including numeric availability and broad encoder novelty.",
+    "additional12_file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/remaining248/anchor-source-author-reviewed-global8-to19-v1.json",
+    "additional12_quality": {
+      "C": 6,
+      "I": 3,
+      "F": 3
+    },
+    "additional12_material": {
+      "S": 7,
+      "P": 2,
+      "I": 3
+    },
+    "additional12_positions": "global8..19 in original allocation; not a full-cohort performance estimate",
+    "first20_whole_answers_and_all_received_non_system_materials_read": true,
+    "full256_quality_closed": false,
+    "all4methods_scored": false,
+    "actual_F11_material_S_explanation": "First provider failure remains F, but actual received review-gap passage establishes one permitted alternative limitation; answer and delivery are separate."
+  },
+  "prepared_not_executed": {
+    "aggregation": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/combine_final_confirmation_anchor.py",
+    "aggregation_requirements": "Actual terminal/paid/absent owners; entire prefix64 cases/results/review/failure/Store effects equal full248; exact original256 allocation; all18932 Source units plus actual current user Source bound to initial Store; no baseline rerun.",
+    "learned_owner": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/own_final_confirmation_learned.py",
+    "preparation": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/learned-owned-execution-preparation-v1.json",
+    "actual_learning_trajectories": 0,
+    "automatic_queue_created": false,
+    "syntax_parsed": true,
+    "early_failure_CPU_handling": "Owner records observed whole-child native residual and parent before artifact validation; no automatic retry.",
+    "actual_post_terminal_validation_pending": true
+  },
+  "cost": {
+    "original_ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+    "last_actual_idle_settlement": 21,
+    "through_idle21_timers_already_paid_once": true,
+    "current_prefix_audit_timers_pending": {
+      "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/bind-confirmation-anchor-remaining248-prefix64-v1.time.txt": {
+        "user_seconds": 2.71,
+        "system_seconds": 0.27,
+        "actual_exit_code": 1,
+        "settled_in_ledger": false
+      },
+      "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/bind-confirmation-anchor-remaining248-prefix64-v2.time.txt": {
+        "user_seconds": 2.59,
+        "system_seconds": 0.17,
+        "actual_exit_code": 0,
+        "settled_in_ledger": false
+      }
+    },
+    "other_newer_export_pilot_audit_timers": "Still pending; discover exact unpaid paths at an actual idle boundary.",
+    "live_worker_offline_settlement_performed": false,
+    "native_model_owner_or_previous_costs_rebilled": false,
+    "unknown_usage_scope": "Closed prefix64 adds zero generation/embedding unknown_usage. Historical ledger unknowns are retained, not declared zero.",
+    "unmetered_author_inspection_launch_cleanup_CPU": "unknown_not_zero"
+  },
+  "next_actions": [
+    "Continue guides60..255 and whole-answer/material reviews, retaining all native alternative/source conflicts under the frozen common rubric.",
+    "At actual remaining248 terminal verify exit/status/CPU/parent+child absence. Run bind_final_confirmation_anchor.py remaining248, await actual exit0; run prepared combine_final_confirmation_anchor.py and await actual exit0.",
+    "Only while all experimental workers are absent settle genuinely unpaid closed GNU timers once in the original ledger, without GNU-time wrapping the timer scanner or settlement.",
+    "Run the three already prepared frozen learned jobs serially on GPU2 from exact256 pre-first-Host snapshots; no baseline rerun. Actual unexpected/capacity/unknown failures retained; inspect before any never-attempted-only continuation.",
+    "Finish all1024 quality/Source/actual complete-input/SDK/app/View/cost checks, native full-string F1 and paired family bootstrap/strata/per-seed/within-family seed mean. No best-seed selection or adoption from a partial panel.",
+    "Old64 query eligibility panel, eligible LME451 Reader/Judge and Mem2Act400 actual own-policy/full-input/native scoring, final full-cost statistics/figures/paper remain. LME200 histories/451 queries/29 images already development-exposed; no unseen-history claim."
+  ],
+  "verification": {
+    "prefix64_audit_v2_actual_exit": 0,
+    "literal_Source_ranges": 256,
+    "whole_existing_Source_comparisons": 4561,
+    "unmatched_ranges": 0,
+    "semantic_or_business_writes": 0,
+    "script_syntax": "Prepared combiner and learned owner parsed; gates deliberately not executed while baseline lives.",
+    "production_test_suite": "Not rerun: this turn changes only offline artifacts and progress documentation, with no production/runtime implementation edits."
+  },
+  "no_sha_validation": true,
+  "subagents": 0,
+  "remote_written": false,
+  "Product_changed": false
+}
