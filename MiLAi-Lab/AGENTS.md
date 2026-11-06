@@ -1,4 +1,85 @@
-# LIVE A100 EXECUTION v34: 2026-11-06
+# LIVE A100 EXECUTION v35: 2026-11-06
+
+Fullgoal ACTIVE/incomplete; current/previous turns PROGRESS. Latestmanifest
+data/manifests/a100-development-progress-20261106-v35.json and executiondoc.
+NoSHA/checksums/contentfingerprints, subagents, newservices, secondledger,
+reset/refund, remote writes or first-outcome/model retries. GPUs0/1/Product unchanged.
+
+NO LIVE experimental worker. Old-output factor NOW CLOSED:
+ROOT/d-controls-v1/old-output/old-output-control-closeout-v1.json, comparison,
+reviews-v1 Source/answer/operations/completeinputs. Fixedfirst8/7eligible actual
+states x2conditions x3methods=42firstoutcomes. A02 originalinitialfailed stays
+ineligible6of48inventory; no laterturn/family replacement. Actual40nativeTool/
+Hostinputs,2A05full7K completeinputcapacityF remainin42denominator.
+All14baselineToolfirstresults reused later, neverreexecuted. Collectorv1failed
+after5actualtools onwrongcontainercount;4Krefs canprojectto3containers. Full
+project_packs equality+actualKreads nowverified. V2reused5/ranonlynew9 exit0.
+CollectorsCPU17.417007535+30.033362399 paidoriginalledgeronce; neverrebill.
+
+Old-output runtime-d-old-output-v1 frozen separately, ONLY3existingSourceexclude
+adapterfiles changed fromformalruntime, formalruntime untouched. ON/OFFcomplete
+actualfirstproviderrequestdicts literallyequal, fulloldHostanswers/receipts/K
+and originaloptions retained. OFFexcludesonlyprovenoldinitialfinalSourceID in
+bothsearchcorpus/rank and observation/opening; no deletion/role/rev/clock/
+visibility/gold/keywordfilter. CurrentfreshcontrolledSourceexclusioncommon.
+Native7Storepreps/14conditions/Klookup done. Sourceobservationalbudget2args
+failure retained; originalA01commonbank reused, noidentityreset.
+
+A05full7K initialstatetokens20096/19335 woulddrop4342/3563 at16384;2learned
+structuralF/unknown, zeroModel/Tool/Hostdispatch forthosecells; noK/menu/budget
+reduction. Other12learnedtrajectories actual93forwards 4141..9795tokens/sum643723,
+allcompletebefore/K/parameters/menu/head/logit/probIDorder/choiceequal/truncFalse.
+225legalselections REFRESH33 SEARCH36 READ116 HANDOFF40;211opresults inclHANDOFF26;
+K118. OffoldSourceabsentallactualcontrollerstates/actions/freshpackets; ONold
+Sourcefreshdelivery6cells via4rawranges/2Viewnodes.476wholeoldSourcecomparisons
+unchanged/nativeSourcesprojectionread-only/appsunchanged/nocanonicalorbusinesswrites.
+49actualHostViewocc/16exactwholepayloads/9componentViews fullybound/reviewed.
+
+Quality C22/Q7/W4/F9; materialcomplete27/partial13/unknown2.7Hostknownusage
+incompletefirstresponses retainedF;2capacityF. COMPLETED text'...'/empty areQ
+nonanswers, notexecutionF orsuccess. A16fourW retainsshortdegree/missesaccepted
+fulltranscripttitle.5secondaryQ preserveprimaryfactsbutinventKevinclinic/
+Tomchartprovenance; explicitquotes/rationales retained, sourceauthornotblind.
+PerON/OFFC: cache4/4,inc4/6,E3 2/2 (7families each). ON-minusOFF0/-28.5714/0pp,
+20kRandom0familyCI cache/E3[-42.857,42.857],inc[-57.143,0]. Notgeneralcausalharm/
+benefit/adoption/confirmation; fullpriorHostknowledge retained andgeneration
+seednotmatched. Not42independent; A05capacityF neverdropped.
+
+Originalownerparent1294416andexec22539 LOST duringrun; originalchild1294423
+continued, native42/inferenceCOMPLETED and/procgone independentlyobserved.
+No newexperimentowner/restart. owner-v1 status
+COMPLETED_NATIVE_ARTIFACTS_AND_PROCESS_TERMINAL_EXIT_CODE_UNOBSERVED;
+exit_codeNone, neverclaimexit0. Observer79406 actualexit0; originalchildnative
+completion/processgone supports closure. Do notrepoll22539/79406/13992/99838/
+35461/27250/88582. Interruptedparent/observation/recovery receipts preserved.
+ObservedchildCPU>=199.51 paidonce =native/load116.4836978450121+
+residual83.02630215498789; lostparent/unobservedcleanup/recovery/authorCPU
+unknownnot0. GPUlaunch-to-observedterminalupperbound .307077718h includesHostwait,
+notactiveCUDA.40HTTP343013known/newunknown0/0;shared133=93local+40readout,notHTTP.
+Idle19 ACTUALLY SETTLED ONCE10closedtimers47.67CPU inclfailure/nominations; all
+GNUthrough19paid, earlier/native/collectors/clientnotrebilled;limits/gen/requests/
+embedding unchanged. NeverGNU-wrap timer-scanning writer/actualsettlement.
+
+NEXT Bfrozen52READs/C7pools actualnativepreparation/execution0. Puremetadata
+nominations done: b-repair-read52-nominations-v1.json +nomination-proof-v1.json.
+2legalbindings/state=newfrozenREAD+firstalreadyexecutedoriginalcomparison.
+Runexisting prepare_view_feedback_branches atactualidle with --bindings,
+--exact-nominations --include-control-steps --branch-sampling operations, pergroup1.
+Inspectall104completepreparedbindings; emitONLYnew52READexecutionpolicies,
+NEVER executeoldcomparisonagain/addpadding. Original suppliedrequest/emptyK,
+fixed_contextreads4/continuation2/actualremainingcaps/given-readoutonly.
+Functional5newREAD+52=57newREADcap; old57uniqueREADcoveragecurrently5, notclosedby
+otherB64/C8beforestates. Preserve139old/8functional outcomes; oneHTTP/modelowner/
+originalledger. C7rulesvsretainedE3handoff-only max14new→47of48/18of24states,
+no menu expansion/extra fitting.
+
+Then finalcandidate/checkpoint/scoring/budget/Nfreeze BEFOREheld256papers/
+old64querysemantics; eligibleLME451Reader/Judge andMem2Act400 actualownpolicy/
+fullinput/exposure, fullcost/figures/paper. Held/reservednativeTestsemanticcontents
+UNOPENED; historicalLMEdevelopmentexposure notunseenconfirmation. Noautomatic
+A20k/B192/extraseeds/AtoB. FullgoalNOTcomplete. Previousformal/Khistorybelow.
+
+# HISTORICAL A100 EXECUTION v34: 2026-11-06
 
 Full goal ACTIVE/incomplete; previous/current turns PROGRESS. Latest manifest:
 data/manifests/a100-development-progress-20261106-v34.json and execution doc.
