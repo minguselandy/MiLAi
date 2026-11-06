@@ -1,4 +1,60 @@
-# LIVE A100 EXECUTION v55: 2026-11-07
+# LIVE A100 EXECUTION v56: 2026-11-07
+
+Full original763-line goal ACTIVE/incomplete; current/previous turns PROGRESS.
+Latest data/manifests/a100-development-progress-20261107-v56.json ->v55;
+previous checkpointa4cfb668. ROOT/F/E same. No subagents/SHA/checksums/
+fingerprints/services/secondledger/reset/refund/remote/Product writes/
+model-first-outcome retry/reselection. GPUs0/1 unchanged; fullSource/K/menu/
+tasks/horizon retained. No GNU wrapper on scanner/settler/launcher.
+
+SEED1 first128 whole quality bound: C70/I21/W5/F25/U7;materialS74/P47/I7,
+nativeDEV128. Old104 entire records unchanged. No labels inherited/partial
+panel extrapolation; authornotblind/independent. Common256guides+82/101/231
+timing asv55. Remaining384=seed1 128..255128 +seed2all256. Baseline149/stress71,
+primary148/stress79/same256/all4nativeF1 unchanged. All4mainC/material/common122/
+20kfamilyCI/perseed/within-family3seedmean/nativeDEV185TRAIN71 pending.
+
+Extra Source110 review:33originalpaper Source bodies,5SVM passages allrelation/
+event extraction, no Source-established SVM-as-NER-method addition; gradeU/S,
+not claim SVMNER impossible/knownfalse. Governing full-source110-svm-event-
+scope-review-v3.json. Priorv1 misread episode metadata;v2 included storedhost
+final output, neither used asSourceauthority. Readonlyinspection timer v3
+failed BLOB/str matching; actual JSON decode and original Source filter fixed,
+oldfailure retained/pendingcost, no model/outcome retry or DB/ledger mutation.
+
+ONLY MODELHTTPWORKER LME continuation003 parent536181/child536184 RUNNING/
+clientCPUFalse, both actual/proccommands verified. Snapshot active47,
+{'COMPLETED': 44, 'FAILED_READING': 3, 'PREPARING_INPUT': 1, 'NOT_RUN': 403}. First42 whole records equal previous; failures7/39/41
+retained, no retry/budget/thinking/prompt/image/Source changes. All1135frozen
+codebindings stilldirectbyteequal. Snapshot continuation003-running-snapshot-v2.
+Never restart for PREPARING or lostexecsession; boundedowner detached/noqueue.
+At newfirsterror wait actualexit/billing/procsabsent, reflect then onlyexplicit
+nativeNOT_RUNtail. Full451FAILED canclosecoverage onlyifallattempted.
+
+CPU-only storagefollower003 parent537304/child537305 RUNNING_CPU_STORAGE_ONLY,
+actualcommands verified; terminal rows[42, 43, 44, 45, 46] stored. Total47closedcases/
+282wholecheckpoints archived with complete streamed byte reconstruction before
+rawremoval. Full immutable base outside case/output trees; preserve archive
+dependencies. Optional per-step replay must use frozenv2 restore_control;
+whole451audit/pairedrootfirstcall do notread step/control.json. No model/HTTP/
+ledger writes/automaticnextsegment or mutableSQLite/Source/input/queue sharing.
+Complete child/parentCPU pending actualexit then eligibleidle, not livebilling.
+
+Mem2Act common429session16843turn Source bank actualexit0/fullverified/CPU
+paidonce1244.593596831 atidle28. Actual400x2=0, final execution/capture/shared
+firstHost/catalog/audits/adaptedmetrics protocol and execution stillrequired.
+idle1..29 paid. idle29 37timers5.54CPU+storage00216.054043141 once; initial
+settler str/Path failure before ledgeropen retained/fixed, CPUunknownnotzero.
+Newafter29 timers including readonlySource110failedinspection pendingnextidle.
+No offlineCPU settlement while modelworkerlive; never double nested/native/
+client/parent/oldcosts. Unmetered author/inspection/launch/cleanup/settleunknown.
+
+All M0-M4/B-C/D-K/fits/internal1024/full audits/nativeF1 retained. Old64reserved
+queries/nativeTESTsemantics unopened;old64Sourceexposed. Full451x2/400x2,
+384semantic/all4stats, Source-View/ops/fullcosts/figures/paper/results/full763-
+line audit remain. Fullgoal NOT complete.
+
+# HISTORICAL A100 EXECUTION v55: 2026-11-07
 
 Full original763-line goal ACTIVE/incomplete; current/previous turns PROGRESS.
 Latest data/manifests/a100-development-progress-20261107-v55.json ->v54,
