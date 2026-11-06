@@ -1,4 +1,88 @@
-# LIVE A100 EXECUTION v33: 2026-11-06
+# LIVE A100 EXECUTION v34: 2026-11-06
+
+Full goal ACTIVE/incomplete; previous/current turns PROGRESS. Latest manifest:
+data/manifests/a100-development-progress-20261106-v34.json and execution doc.
+NoSHA/checksums/content fingerprints, subagents, services, secondledger, reset/
+refund, remote writes or model/first-outcome retries. GPU0/1/Product unchanged.
+
+NO LIVE experiment worker. All3formalnew32full320/stats/v17closed (v33).
+NativeK control ROOT/d-controls-v1/known-View is NOW CLOSED:
+known-View-control-closeout-v1.json; reviews-v1 contains actualinput/Source/View
+binding, wholeanswer sourceauthor judgments and operations/finite-input audit.
+Owner-v1/v2 FAILED_RETAINED/clientCPUpaid; owner-v3 COMPLETEDexit0/clientCPUpaid,
+parent902514/child902520gone/exec61348drainedonce. NEVERrepoll/restart61348,
+failed48045/51141, formal80986/baseline4305/incremental4286.
+
+Actual fixed3families A05/A33/B03 x3methods =9FIRST cells retained:
+C0/Q4/W4/F1; materialpartial8/unknown1.8actualHostreadoutsCOMPLETED, one A05
+baseline PREFLIGHT TemplateError/0HTTP staysF/noanswer/noactualproviderinput.
+No current Host material credit from its prepared/rejected packet. Sourceauthor,
+notindependent/blind;3relatedTRAINfamilies,not9independent/unseen. No general
+zero-effect/equivalence/adoption claim. Full3methodvalidHostframe onlyA33/B03;
+A05inc/E3samevalidframe; failedbaselineA05notapolicy-attributableHostloss.
+
+Native preparation3realStoreclones/3directKlookups/newSources12/8/8, chosenbaseline
+firstView byalreadydeclaredmethodorder, no extra incrementalB03state/familyfill.
+A05selectedrev1versuscurrentcache7retained. ExplicitKonefirstref; fulloldHost
+7/1/1siblingreceipts/history retained, not a completeHost-knowledge claim.
+All9nativefirsttooloutcomesCOMPLETED, knownrefs admitted1each. FirstbaselineA05
+tool execution-v1 reused WITHOUT reexecution. Nativeadmission/checks notfixtures.
+165wholebefore/afterSourcevaluecomparisons identical, sources()derivedprojection
+read-onlyequal, allapplicationtables equal/no semanticrecords/businesswrites.
+21actualHostViewoccurrences/10unique plus2componentViews sourcebound/reviewed;
+onecomponentViewunsent(noHostcredit). Faithful literal roles/clocks != current
+coverage/underlyingtruth. E3recovers3A/interimdutiesbutmisseslease/3C/Priyamove/
+homeheight. Oldendogenouspublicquestion oftenreturned, not a new user fact.
+
+All52choiceslegal:REFRESH7/SEARCH9/READ27/HANDOFF9;48opresults(HANDOFF5),K9.
+24actualE3forwards:9361..13552tokens,sum287238already-native-counted, no truncation;
+completebefore/params/menu/head/logit/probIDs/order/choice literalmatched.
+Frozenruntime-d-update32/source/Host budgets unchanged; GPU2FP32oneverifiedload.
+8HTTP/75003knownHosttokens/newunknown0/0.33freshsharedadmissionreservations=
+24local+9readoutslots, NOT33HTTP; onepreflight slot0→1 consumed/notrefunded.
+Wholechildrenv1+v2+v3CPU144.33048alreadyPaid (native/load86.856223484+
+client57.474256516), parentoverhead phases in originalledger. DeclaredGPUjobinterval
+0.060981818h includesfailedjobimports/simplearms/Hostwait,notactiveCUDA/currency.
+Idle18 ACTUALLY SETTLED ONCE16closedtimers46.74CPU includingfailuresteps; original
+limits/generation/requests/embedding unchanged, native/failed-owner/client/earlier
+costs notrebilled. Allmeasuredclosedtimers through18 paid; author/untimedCPUunknown
+not0. NEVER GNU-wrap timer-scanning writers/settlement or rerun17/18.
+
+Failures/corrections retained, not hidden or retried:
+CUDA-onlyimportmissingLangGraph beforestate→Hostenvnativeprep/combineddepsadmitted.
+V1frameexpectedpublic omitted nativegiven_retrieval_request; actualtoolretained,
+strictschemafixed. V2systemmiddle rejectedQwen template beforeHTTP; firstHostF
+neverresent. V3onlyunexecutedcells: nativecontext appended after entireexisting
+firstsystemtext, otheroldmessages/provideroptions literal unchanged; backend
+tokenizerpreflight before sends. Originalv1/v2code/results/costs retained.
+Read-onlybinder failures: sources() adds formation_status versusrawStore; known
+zeroHTTPpreflight has no tracefile; history.sources0 omitted initialincoming7.
+Fixed with actualnativeprojection/explicitnofilecase/alreadywhole-boundinitial
+Source declarations+entireactualvalue equality. No missing-file fallback, no
+crossmethodgrades, Sourcefacts/roles/modelinputs/outcomes unchanged. Awaitactual
+exit0 before dependent mutation/close; allfailtimers/untimedunknown retained.
+
+NEXT old-output factor ACTUAL0, then frozen52READ/7pools ACTUAL0. Fixedfirst8/
+7eligibleold-outputstates, no laterturn/family/qualityfill. SeparateSourceexclude
+runtime/config needed: formalruntime LACKS v20option. Existing24Sourceexclude/
+2firstdispatchframefixtures are not nativeproof. Preserve completeactualfirst
+providerwire/oldHostanswers/receipts/K; exclusion ONLY provenoldassistantfinal
+SourceIDs in acquisition/ranking AND observation/opening, no deletion/role/rev/
+clock/visibility/gold/keywordfilter. FreshnativeStore/K/binding/actualpacket/
+backendtemplate/capacity proof BEFORE firstreadout. Nevergiven-readoutwithK.
+OneactualHTTP/modelworker/originalledger; retainfirstfailures, no automaticretry.
+
+52frozenREADs:57statecap incl5functional, 2or3legalnominations viaexactoperations
+route, frozennewREAD+alreadyexecutedoriginalcomparison; executeONLYnewREAD, no
+oldretry/padding. fixed_contextreads4/continuation2/actualremainingcaps, original
+publicrequest/emptyKgiven-readout. C7rulesvsE3handoff-only max14new→47of48/
+18of24states, no menu expansion/fitting. All139old/8functional/C8outcomes kept.
+Then finalcandidate/checkpoint/scoring/budget/Nfreeze BEFOREheld256papers/
+old64querycontents; eligibleLME451Reader/Judge andMem2Act400 own-policy/full-input/
+exposure, fullcost/figures/paper. Held/reservednativeTestsemanticcontentsunopened;
+historicalLMEdevelopmentexposure not unseenconfirmation. FullgoalNOTcomplete.
+
+# HISTORICAL A100 EXECUTION v33: 2026-11-06
 
 Full goal ACTIVE/incomplete; current/previous turns PROGRESS. Latest manifest:
 data/manifests/a100-development-progress-20261106-v33.json and execution doc.
