@@ -1,4 +1,88 @@
-# LIVE A100 EXECUTION v32: 2026-11-06
+# LIVE A100 EXECUTION v33: 2026-11-06
+
+Full goal ACTIVE/incomplete; current/previous turns PROGRESS. Latest manifest:
+data/manifests/a100-development-progress-20261106-v33.json and execution doc.
+No SHA/checksums/content fingerprints, subagents, new services, second ledger,
+reset/refund, remote writes or model/first-outcome retries. GPUs0/1/Product unchanged.
+
+NO LIVE experiment HTTP/model worker. All3 new32 formal methods FULL320 CLOSED.
+E3 owner parent28715/child28722 COMPLETEDexit0/client_CPU_recordedTrue, proc gone;
+exec80986 drained ONCE terminalexit0, NEVER repoll/restart it or baseline4305/
+incremental4286. Actual terminal order followed: fullbind FIRSTexit0; immutableSDK
+SECONDexit0; then ENTIRE310recorddicts/all0Views literallyequal full320 before
+same-method savedjudgment reuse/allanchors/Fmaskvalidation. Last10 fully read.
+
+E3 FULL320: C95/Q68/W99/F58; material133complete183partial4insufficient; joint80.
+32 correlated TRAIN-exposed generated families, not320 independent/unseen/blind;
+source-author review. Mid64 C2/materialcomplete2; final64 C0/materialcomplete0.
+Actual receivedViews0; SDK320/5590oldSourcecomparisons/new262finalassistant/
+SaverEq/appsunchanged/Viewchanged0/statewrites0. Stored/created/unsent is not evidence.
+All784selectedIDs legal: SEARCH109 READ653 HANDOFF22;782ops(20HANDOFFresults),
+127toolattempts/returns,2materialrejects,7ordinaryknownrawrefreads. NoUSE/REFRESH.
+551currentoriginal_source packs:459exogenous92endogenous,role293user258assistant;
+224noquery/4queryingpositionsnocurrentexogenousraw. Binding2228rawranges inclK.
+Full finite-input audit784actualforwards,0forced/new;2521..9208tokens,
+sum4604680already-native-counted, alltruncatedFalse. Complete nativebefore/
+bindings/params/menuorder/head/logit/probIDs/choice decoded literal match. Notfull
+Sourcebankdelivery, Hosttruth or externalLME/Mem2Act capacity/adoption proof.
+
+All3 new32 comparison EXECUTED:
+d-update32/new32-family-comparison-v1.json. BaselineC67/joint53, incrementalC65/
+joint48, E3C95/joint80. E3-cache+8.75pp CI[2.5,15.3125], E3-inc+9.375pp
+[2.5,16.25], inc-cache-0.625pp[-5.3125,4.375].20kRandom0familybootstrap32clusters,
+conditional descriptive development only. Gains/losses E3-cache56/28,E3-inc58/28,
+inc-cache32/34. All64initialHTTPwirespairwiseliteral equal,0/64first retrieval
+argument batches equal, missing1/3/1 retained. Laterqueries/endogenousstates differ,
+notcontrollercausal/heldconfirmation/adoption. All3final64 C0/materialcomplete0.
+
+E3already-paid costs:442HTTP/2738589knownHosttokens/newunknown0/0;
+shared1226=442HTTP+784local,not1226HTTP. WholechildCPU1349.57159=
+native671.7736632380402+load7.74331965+client670.0546071119597. GPU2FP32 one
+verifiedload, jobinterval2.726773272h includesHostwait,wall9816.383780s. No rebilling.
+v17 ACTUALLY SETTLED ONCE at verifiedidle after fullclosures/comparison:
+99closedtimers172.83CPU, including3failedcommands; original limits/generation/
+requests/embedding unchanged, earlier/native/model/client notrebilled. Allclosed
+measuredtimers through17 paid; author/untimedCPU UNKNOWNnot0. Never GNU-wrap
+timer-scanning writers/settlement. Do not rerun v17/oldsettlements.
+
+D21author batchv1 rejected wrong266anchorShopliftersat9,3; entireold260 preserved.
+Actual9,3 is assistantfocus recap, no friendfilm received. Wholeanswers/materials
+rechecked:265/266explicitavailable-context gapsQ;267COMPLETEDintro-onlyQnotF.
+v2savedexit0 THENclose; failureproof and failedtimer retained. Read-onlycostinspector
+mistook idle_settlements dict forlist (TypeErrorslice), no mutation, CPUunknown.
+Use actualschemas; do not import another flow/method's receipt. Earlierprefix50/
+120failures retained. Await actualexit0 before ANY dependent mutation/close.
+
+NEXT actual native controls/repairs, now formalclosure/v17gates satisfied:
+KnownView fixedfirst8 inventories24methodcells/4eligiblecells/3familiesA05/A33/B03,
+maxoneactualbefore/family x3→atmost9conditionalreadouts before nativeeligibility.
+Native donor selection/Store/fullHostframe/freshintermediatearrivals/Klookup still0.
+Keep A05 firstViewrev1 and mismatch/fullHosthistory/siblingreceipts, no cleanerlater
+revision/turn/family fill, never given-readout with K. ExistingRAWbudgetpreparer and
+oldCPUcoordinator do not implement ViewK/newarrival/A100admission; reviewed source
+contract in known-View-existing-entrypoint-contract-review-v1.json. Native
+functional.message supports incoming_sources + given_retrieval_request. Use it
+under explicit controlled request contract; validate actual delivered snapshot refs.
+
+Old-output first8/7eligible factor actual0. Preserve entireactualfirstHTTPwire/old
+answers/receipts/K and on-offwire equality, exclusion ONLY Sourceacquisition. Freeze
+separate controlledruntime/config because formalruntime LACKS v20Sourceexclude.
+v20Sourceexclude24fixtures/v24firstframe2fixtures unchanged; nativebefore/K/fresh
+binding/receipt/final-onlyreadout proof required, originalledger/serial boundedjobs.
+52frozenREAD bindings/7acquiredpools still UNEXECUTED:57stateREADcap incl5functional;
+2or3legalnominations required, exactoperationsroute;nominatefrozennewREAD plus
+alreadyexecutedoriginalcomparison,filter execution toONLYnewREAD,no oldretry/padding.
+fixed_contextreads4/continuation2/actualremainingcaps, originalpublicrequests/emptyK
+given-readout. C7rulesvsE3handoff-only max14new→47of48/18of24states, no menu expansion/
+new fitting. All139old/8functional/C8outcomes retained. OneactualHTTP/modelworker.
+
+Full remaining: nativecontrols/repairs, finalcandidate/checkpoint/scoring/budget/N
+freeze BEFORE held256papers/old64query contents; eligibleLME451Reader/Judge and
+Mem2Act400 own-policy/full-input/exposure; fullcost/figures/paper. Held/reserved
+nativeTest semantic contents unopened; historicalLME development exposure is not
+unseenconfirmation. Full goal NOT complete.
+
+# HISTORICAL A100 EXECUTION v32: 2026-11-06
 
 Full goal ACTIVE/incomplete; current/previous turns PROGRESS. Latest manifest:
 data/manifests/a100-development-progress-20261106-v32.json and execution doc.
