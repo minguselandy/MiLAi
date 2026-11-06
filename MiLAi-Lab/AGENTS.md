@@ -1,4 +1,81 @@
-# LIVE A100 EXECUTION v51: 2026-11-07
+# LIVE A100 EXECUTION v52: 2026-11-07
+
+Full original763-line goal ACTIVE/incomplete; current/previous turns PROGRESS.
+Latest data/manifests/a100-development-progress-20261107-v52.json ->v51;
+previous checkpoint85dc74c1. ROOT=artifacts/a100-development-20261104,
+F=ROOT/final-confirmation-v1,E=ROOT/external-own-policy-v1.
+No subagents/SHA/checksum/fingerprints/services/second operational ledger/
+reset/refund/remote/Product writes/model-first-outcome retries/reselection.
+GPUs0/1 unchanged; fullSource/K/menu/tasks/horizon retained. No crop/compact/
+quantization to force passage. No GNU wrappers around scanners/settlers/launchers.
+
+PRIMARY ALL256 SEMANTIC QUALITY NOW CLOSED:
+F/e3-aggregate-u32/all256-source-author-quality-closeout-v1.json, backed by
+first256-source-author-review-reconciliation-v1.json. C148/I39/Q0/W13/F52/U4;
+materialS149/P92/I15/U0. Main148/256=.578125. Common fixed122 stress withholds
+69C ->79/256=.30859375, same256denominator, NOT134unflagged denominator.
+NativeDEV185 C98/I28/W10/F45/U4,S110/P64/I11,stress49/185;
+TRAIN71 C50/I11/W3/F7,S39/P28/I4,stress30/71. All rawfirstresults/52failures/
+lastproviderbindings retained; prior208 whole records unchanged through256.
+U getsnoC, not automatically knownfalse. Not nativeCOMPLETED/materialS truth.
+Authornotblind/independent, aggregate guides-before False due disclosed timing.
+Baselineall256 main149/stress71 unchanged. Descriptive main delta-.390625pp,
+stress+3.125pp are NOT all4 CI/seedmean/advantage/adoption. Nativeall4 official
+full-string F1/bootstrap unchanged v49/v50,NOT taskC. Remaining512semantic:
+seed1/seed2 all256 each. All4sameN256/mainC/material/common122/20kfamilyCI/
+gainsloss/perseed/native strata/within-family3seedmean still required.
+
+COMMON231 CLARIFICATION F/common-source-question231-vader-input-scope-clarification-v1.json:
+literal unnamed-lexicon question also permits actual VADER sentence-score
+input integration. Baseline231 names DepecheMood/GloVe/CNN but no integration
+->oldI/P unchanged. Primary231 explains actual VADER input ->C/P unchanged.
+Primary label bound before reading oldbaseline231 for consistency. This receipt
+is AFTER both231manual reviews, BEFORE secondaryseed231reviews; notblind/prereg.
+Originalguide/mask231False unchanged, sameall4. Renderer/futurelearnedbinder
+print/attach clarification. Guide82/101 addenda and commonv2 122true134false
+unchanged.101jointNER/supportRE addendum after primaryanswer/material exposure
+timing still disclosed; do not rewrite originalguide/history or native outcomes.
+
+ONLY LIVE actual worker remains LME continuation001 parent183645/child183647,
+both/proccommandsverified. RUNNING/clientCPUFalse/noexecsession/noqueue.
+E/stages-lme-v1/fixed-prefix-prediction451-v1-continuation-001-owner.json.
+Snapshot active18, cases {'COMPLETED': 17, 'FAILED_READING': 1, 'PREPARING_INPUT': 1, 'NOT_RUN': 432}, localmodel_loads[].
+First8 whole inheriteddicts equal original. Originalrow7length8192/contentNone
+failure and7complete retained; initialparent18071/child18073 absent/exit1/paid.
+Explicit tail8..450 launched aftercommit88356ac0+idle27; no attemptedrowretry.
+No second modelHTTPworker or offlineCPU settlement while alive. Do not
+relaunch for PREPARING/status observation timeouts. Native first error stops:
+wait actualexit/billing/procsabsent, inspect/reflect then onlyexplicitNOT_RUN
+tail. Full451 nativeFAILED validcoverage if allattempted, no status rewrite.
+Full Source/SDK/role/time/image/NN/Reader audit ->native score/Judge ->scoreaudit
+->archive/finalizer earliest-ancestor whole records, then nextmethod. No autoqueue.
+Current incompletecoverage not certified451/accuracy/semantictruth/unseenSmall.
+
+MEM2ACT mock catalogcapture contract asv50, actual400x2still0. Separate runtime
+oneguard-line extension outsideProduct/runtime-b64; firstwire/Store/Saver/
+context/catalog equal;8oldSourcecomparisons/34capturefilesbyteequal/world0/
+semantic0.6mockresponses+1suppliedhandoffstub sharedcounts3/4; no realmodelHTTP/
+weights/business/operationalledger/secondpersistentbudget. Not operational
+lease/NNaccuracy/400task proof.94327DRAINED NEVER REPOLL. Requires frozen full
+429sessions16843turns sharedbank/catalog own-policy serial execution/audits/
+adaptedmetrics; no authorTA or leaderboard/independent-user claim.
+
+COST actualidle27 paid71closedtimers18.560000000000002CPU once originalledger.
+InitialLMEwholechild1640.3464529999999+parent.14274347 paidonce separately.
+After27new docs/review/closeout timers pending next actual no-worker gap.
+Never settle whilelive. Native/client/parent/old1..27 not rebilled. Unmetered
+author/inspection/launch/cleanup/settlement CPU unknown_not_zero. Live segment
+wholeCPU/HTTP/unknownusage not final until actualexit, do not inferzero.
+
+NEXT secondaryseed1 then seed2 complete whole-answer/actual-material review
+with common82/101/231 rules, alongside sole LME worker. All originalM0-M4/
+B-C/D-K/fits/internal1024/fullSource-wire-NN audits/nativeF1 closures retained
+in ancestors; no redo of old42probe/old902fixedcontextsurrogate. Old64reserved
+queries/nativeTEST semantics unopened; old64Source exposed. Full external
+results,remaining512semantics, Source-View/ops/fullcosts, standalonefigures/
+paper/results/full763-line requirementaudit remain. Fullgoal NOT complete.
+
+# HISTORICAL A100 EXECUTION v51: 2026-11-07
 
 Full original763-line goal ACTIVE/incomplete. Current/previous turns PROGRESS.
 Latest data/manifests/a100-development-progress-20261107-v51.json ->v50;

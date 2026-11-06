@@ -1,0 +1,164 @@
+{
+  "status": "ACTIVE_PRIMARY_ALL256_QUALITY_CLOSED_SECONDARY512_PENDING_ONE_LME_TAIL_RUNNING",
+  "timestamp_utc": "2026-11-06T19:16:56.847112+00:00",
+  "goal_status": "active",
+  "goal_complete": false,
+  "current_goal_turn_classification": "progress",
+  "previous_goal_turn_classification": "progress",
+  "previous_manifest": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/data/manifests/a100-development-progress-20261107-v51.json",
+  "previous_checkpoint_commit": "85dc74c1",
+  "unchanged_full_scope": "Original763-line goal/M5 remains ACTIVE. M0-M4/B-C/D-K/fits/internal1024 first trajectories/audits/native all4 AnswerF1/costs remain in v51 and ancestors. No first-outcome retries, new fits, method/seed/N/scorer/budget selection, adoption or unseen-external claim.",
+  "primary_quality_closed": {
+    "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/e3-aggregate-u32/all256-source-author-quality-closeout-v1.json",
+    "positions": 256,
+    "new_since_v51": 48,
+    "quality_counts": {
+      "C": 148,
+      "I": 39,
+      "Q": 0,
+      "W": 13,
+      "F": 52,
+      "U": 4
+    },
+    "material_counts": {
+      "S": 149,
+      "P": 92,
+      "I": 15,
+      "U": 0
+    },
+    "main_C": 148,
+    "main_C_rate": 0.578125,
+    "common122_stress_C": 79,
+    "common122_stress_C_rate": 0.30859375,
+    "denominator_each": 256,
+    "main_C_withheld_in_common_stress": 69,
+    "native_partition_strata": {
+      "dev": {
+        "positions": 185,
+        "quality_counts": {
+          "C": 98,
+          "W": 10,
+          "I": 28,
+          "F": 45,
+          "U": 4
+        },
+        "material_counts": {
+          "S": 110,
+          "P": 64,
+          "I": 11
+        },
+        "main_C": 98,
+        "common_stress_C": 49,
+        "common_stress_flagged": 94
+      },
+      "train": {
+        "positions": 71,
+        "quality_counts": {
+          "C": 50,
+          "I": 11,
+          "F": 7,
+          "W": 3
+        },
+        "material_counts": {
+          "S": 39,
+          "P": 28,
+          "I": 4
+        },
+        "main_C": 50,
+        "common_stress_C": 30,
+        "common_stress_flagged": 28
+      }
+    },
+    "prior208_whole_records_literal_unchanged_through256": true,
+    "all256_whole_first_answers_and_failed_provider_bindings_retained": true,
+    "official_full_string_native_AnswerF1_unchanged": {
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/native-answer-f1-e3-aggregate-u32-v1.json",
+      "value": 0.08804209206295316,
+      "scope": "Official full-string token overlap; first52 failures explicit empty/zero. Not whole-task C or independent factuality."
+    },
+    "source_author_not_blind_or_independent": true,
+    "guides_preceded_all_corresponding_semantic_answer_review": false,
+    "U_noC_not_automatically_confirmed_factual_error": true
+  },
+  "baseline_unchanged": {
+    "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/anchor-all256-source-author-quality-closeout-v1.json",
+    "main_C": 149,
+    "common122_stress_C": 71,
+    "denominator_each": 256
+  },
+  "descriptive_two_method_counts_only": {
+    "primary_minus_baseline_main_C_pp": -0.390625,
+    "primary_minus_baseline_common122_stress_C_pp": 3.125,
+    "all4_main_C_CI_seedmean_or_adoption_closed": false,
+    "no_choice_of_more_favorable_main_or_stress_score": true
+  },
+  "common_question231_scope_clarification": {
+    "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/common-source-question231-vader-input-scope-clarification-v1.json",
+    "scope": "Literal unnamed-lexicon question also accepts actual VADER sentence-score input integration; simply naming DepecheMood/GloVe/CNN without explaining integration is incomplete.",
+    "timing": "After both baseline231 and primary231 manual reviews, before both secondary case231 semantic reviews; primary label was bound before inspecting baseline231 annotation for consistency.",
+    "same_all4": true,
+    "baseline_I_P_primary_C_P_unchanged": true,
+    "original_guide_records_and_common_mask231_false_unchanged": true,
+    "renderer_and_future_learned_binder_attach_clarification": true,
+    "fully_preregistered_or_blind_claim": false
+  },
+  "actual_external_process": {
+    "snapshot": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/stages-lme-v1/fixed-prefix-prediction451-v1-continuation-001-running-snapshot-v3.json",
+    "owner": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/stages-lme-v1/fixed-prefix-prediction451-v1-continuation-001-owner.json",
+    "pid": 183645,
+    "child_pid": 183647,
+    "status": "RUNNING",
+    "client_CPU_recorded": false,
+    "driver_status": "RUNNING",
+    "active_row": 18,
+    "native_cases": {
+      "COMPLETED": 17,
+      "FAILED_READING": 1,
+      "PREPARING_INPUT": 1,
+      "NOT_RUN": 432
+    },
+    "actual_process_commands_verified": true,
+    "first8_whole_dicts_literal_equal_original": true,
+    "first_row7_failure_retried_or_rewritten": false,
+    "local_model_loads": 0,
+    "automatic_queue_second_model_HTTP_worker_or_new_service": false,
+    "whole451_audit_scoring_archive_closed": false,
+    "given_retrieval_fixed_Reader_not_autonomous_Host_or_unseen_Small": true
+  },
+  "costs": {
+    "last_actual_idle_paid": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v27.json",
+    "idle27_commands": 71,
+    "idle27_CPU_seconds": 18.560000000000002,
+    "new_offline_timers_after27": "Pending next actual no-worker gap; never settle while live tail worker exists.",
+    "live_segment_whole_CPU_HTTP_and_unknown_usage": "Not final until actual exit; no zero-cost inference.",
+    "first_LME_child_and_parent_already_paid_once": true,
+    "native_model_whole_client_parent_or_idle1_to27_rebilled": false,
+    "unmetered_author_inspection_launch_cleanup_settlement_CPU": "unknown_not_zero",
+    "offline_settlement_during_live_worker": false
+  },
+  "unchanged_v50_closures": {
+    "initial_LME_first8_and_length_failure": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/stages-lme-v1/fixed-prefix-prediction451-v1-first-reader-failure-reflection.json",
+    "Mem2Act_catalog_mock_only": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/mem2act-catalog-capture-contract-v1/verification.json",
+    "actual_Mem2Act_released_tasks": 0,
+    "native_all4_F1": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/native-answer-f1-all4-methods-closeout-v1.json",
+    "baseline_quality": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/anchor-all256-source-author-quality-closeout-v1.json"
+  },
+  "remaining": {
+    "semantic_of1024": 512,
+    "primary_semantic_reviewed": 256,
+    "seed1_semantic_reviewed": 0,
+    "seed2_semantic_reviewed": 0,
+    "statistics": "All4full256 taskC/material/common122/gains-losses/paired20kfamilyCI/perseed/nativeDEV185-TRAIN71/within-family3seedmean.",
+    "external": "LME451x2 actual predictions/Source-SDK-role-clock-images-NN-Reader wire audit/native scoring/Judge/audit/archive. Mem2Act400x2 protocol/full429sessions16843turns/catalog shared-first-input/own-policy execution/audits/adapted metrics; no authorTA/leaderboard claim.",
+    "other": "Old64reserved-query eligibility/nativeTEST unopened; old64Source exposed. Full Source-View/operations/costs/standalone figures/final paper/results/full763-line requirement audit."
+  },
+  "guardrails": {
+    "no_sha_checksums_fingerprints": true,
+    "no_subagents": true,
+    "no_services_second_ledger_reset_refund": true,
+    "no_model_first_outcome_retries_or_reselection": true,
+    "no_remote_Product_changes": true,
+    "GPUs0_1_unchanged": true,
+    "no_Source_K_menu_task_horizon_crop_compact_quantize_to_pass": true
+  }
+}
