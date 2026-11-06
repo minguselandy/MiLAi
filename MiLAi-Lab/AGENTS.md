@@ -1,4 +1,99 @@
-# LIVE A100 EXECUTION v46: 2026-11-06
+# LIVE A100 EXECUTION v47: 2026-11-07
+
+Full goal ACTIVE/incomplete. This and previous turns are PROGRESS.
+Latest manifest: data/manifests/a100-development-progress-20261107-v47.json
+(delta to v46). Previous checkpoint c05ff49c.
+ROOT=artifacts/a100-development-20261104; F=ROOT/final-confirmation-v1.
+No subagents, SHA/checksum/content fingerprints, new services, second ledger,
+reset/refund, remote/Product writes, first-outcome/model retries or reselection.
+GPUs0/1 unchanged. Keep all failed outcomes and exact original protocol.
+
+ONLY LIVE actual experiment: frozen SECONDARY seed2/u32.
+F/e3-aggregate-seed2-u32/learned-owner-v1.json parent3666509/child3666510;
+actual /proc commands checked. Snapshot 63/256, statuses {'COMPLETED': 51, 'FAILED': 12},
+client_CPU_recordedFalse; one VERIFIED GPU2/cuda0 FP32 threads4 model cache,
+max16384/head2048, MHAfastpathFalse/reference_compileFalse/TF32False.
+Detached bounded owner, no exec session or automatic queue. Never start another
+model/HTTP worker or settle offline CPU while it lives. Unexpected halt:
+retain all attempts; inspect; only untouched positions under an explicit plan.
+Never crop Source/K/menu/task/horizon, compact or quantize to force passage.
+
+Primary seed0 and seed1 full256 closed/audited/paid unchanged v46.
+Primary204COMP52F/591HTTP2214052known,2036NN/12747290tokens3477..9483;
+seed1205COMP51F/565HTTP2136058known,1959NN/12353161tokens3636..9706.
+Each all256 first provider request dict equals shared anchor; complete actual
+before/legal bindings/head/finite logits/probs/order/argmax, all truncatedFalse.
+All Source/Store/Saver/world/apps invariant, semantic/business writes0.
+Native COMPLETE is not task C. No all-bank-delivery or effective16k proof.
+Native full-answer F1 all256 first3 unchanged:
+fixed .0981909306413507, primary .08804209206295316, seed1 .08179025700801325.
+Complete first strings and all first failures retained; seed0 remains primary.
+Drained audit23103/20554 and F1 3163/15529/46317: NEVER repoll.
+
+Baseline whole first200 now C114/I40/W12/F34; material S119/P52/I29;
+nativeDEV185/TRAIN15. F/anchor-first200-source-author-review-reconciliation-v1.json.
+Previous168 WHOLE record dicts literally unchanged.
+Primary whole first80 now C41/I11/W7/F20/U1; material S52/P23/I5; nativeDEV80.
+F/e3-aggregate-u32/first80-source-author-review-reconciliation-v1.json.
+Previous64 WHOLE records literally unchanged. New48 outcomes individually read:
+whole answers and ALL actual received non-system content; labels not inherited.
+Source author is not blind/independent; prefixes are not population results.
+744 of1024 semantic results remain: baseline200..255, primary80..255,
+seed1all256 and seed2all256. No best seed/N/update/checkpoint/scorer/budget changes.
+
+USE ONLY F/common-source-question-scope-inventory-all256-v2.json:
+122true/134false, same cases for all4 methods, full256 denominator each.
+Main/material/native alternatives unchanged; v1 bad booleans remain historical.
+Source-specific guides/mask not fully preregistered/blind. Guide82 addendum and
+earlier material adjudication/timing remain unchanged v46. Unresolved language
+exclusivity U gets no C but is not automatically a known false factual claim.
+
+New offline prefix reconciler initially exited1 twice, both timers RETAINED:
+reconcile-confirmation-first184-quality-v1.time.txt: pilot8 uses its original
+whole_actual_answer_and_all_received_packets_read field, not newer field;
+v2.time.txt: six old failure bindings at global8..31 retain local=global-8 index.
+v3 actual0 now validates those exact schemas/offsets then compares every other
+field; prior records/grades/raw outcomes unchanged. Reflection:
+F/first184-review-reconciliation-failures-reflection-v1.json.
+Reconciler ROOT/reconcile_final_confirmation_quality_prefix.py also closed
+baseline192/200 and primary80 with actual0. Do not invent permissive fallbacks.
+
+External preparation now concrete but NOT frozen/admitted/dispatched:
+ROOT/external-own-policy-v1/preparation-v1.json; two literal inherited draft
+configs differ ONLY policy/checkpoint (fixed vs frozen primary seed0u32).
+Both native LME code files copied/whole-byte equal prior inspected copies.
+No new question/history/reference values, model load/call, HTTP or ledger write.
+LME is actual own-policy retrieval followed by native fixed Reader/Judge,
+separate from autonomous Host. All451/200Small histories/29question images
+have disclosed development contact. Old902fixed_context paths are not E3 proof.
+Mem2Act uses full429sessions/16843turns/400GivenTool, capture-only business.
+IMPORTANT existing QASPER pre-Host capture rejects recorded_tool_schemas:
+do NOT reuse unchanged for Mem2Act. Freeze a concrete shared-bank/catalog/
+provider-frame/capture protocol first. Native thin Mem2Act CLI splitlines must
+use existing artifact_io physical JSONL reader. Adapted strict/parameter/JSON
+BLEU1 metrics are not verified author TA/leaderboard or real business effects.
+No new vision probe/old stopped audit restart or input-budget retuning.
+
+Idle1..24 all PAID ONCE. Idle24:98new closed timers66.59999999999998CPU,
+96exit0/2exit1. ALL after24 timers remain pending during live seed2, including
+both NEW first184 failure timers; next idle25 NOT prepared/executed.
+Never GNU-time-wrap timer scanner or settlement. Unmetered author/inspection/
+launch/cleanup/settlement CPU unknown, not0. Legacy unknown15gen/1embed kept.
+At actual seed2 terminal exit0/CPU paid/both procs gone:
+audit_final_confirmation_learned.py e3-aggregate-seed2-u32 256, then
+score_final_confirmation_native.py e3-aggregate-seed2-u32, unique GNU timers,
+wait actual0 each. Reconcile all4 native outcomes; settle only new closed timers
+once at actual idle25. Then only one explicitly frozen external job.
+
+Full scope remains: all1024 semantic QA; all4 common122 sensitivity and paired
+20k seed0 family bootstrap/DEV-TRAIN strata/perseed/within-family3seed mean.
+N256 not768/1024 independent; commonE1 init means conditional training RNG.
+Old64reserved query semantics/nativeTEST still unopened, old64Source exposed.
+LME451Reader/Judge, Mem2Act400 actual workflows/full input/native-adapted scoring,
+complete costs/ops/Source-View analysis, final standalone figures/paper and
+full763-line requirement audit remain. Full goal NOT complete.
+
+# HISTORICAL A100 EXECUTION v46: 2026-11-06
 
 FullgoalACTIVE/incomplete; current/previous turnsPROGRESS. Latestmanifest
 data/manifests/a100-development-progress-20261106-v46.json compactdelta→v45.

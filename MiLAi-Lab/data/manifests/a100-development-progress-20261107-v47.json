@@ -1,0 +1,285 @@
+{
+  "status": "ACTIVE_SEED2_RUNNING_BASELINE_QA200_PRIMARY_QA80_EXTERNAL_DRAFTS_NOT_DISPATCHED",
+  "timestamp_utc": "2026-11-06T16:15:45.724338+00:00",
+  "goal_status": "active",
+  "goal_complete": false,
+  "current_goal_turn_classification": "progress",
+  "previous_goal_turn_classification": "progress",
+  "previous_manifest": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/data/manifests/a100-development-progress-20261106-v46.json",
+  "previous_checkpoint_commit": "c05ff49c",
+  "unchanged_scope": "The original full763-line plan/M5 remains. Methods/checkpoints/N256families/1024first trajectories, Host, budgets, full Source/input/runtime/scoring and common122 stress membership are unchanged. Prior M0-M4/B-C/D-K/seed replication/native audits and full costs remain in v46 and ancestors.",
+  "processes": {
+    "sole_actual_experiment": {
+      "name": "e3-aggregate-seed2-u32",
+      "owner": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/e3-aggregate-seed2-u32/learned-owner-v1.json",
+      "actual_owner_receipt": {
+        "status": "RUNNING",
+        "pid": 3666509,
+        "plan": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/e3-aggregate-seed2-u32/learned-execution-plan-v1.json",
+        "name": "e3-aggregate-seed2-u32",
+        "positions": 256,
+        "automatic_retry": false,
+        "client_CPU_recorded": false,
+        "child_pid": 3666510,
+        "started_epoch": 1793979809.361017
+      },
+      "actual_processes": {
+        "pid": {
+          "pid": 3666509,
+          "exists": true,
+          "command": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/http-env/bin/python /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/own_final_confirmation_learned.py /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/e3-aggregate-seed2-u32/learned-execution-plan-v1.json"
+        },
+        "child_pid": {
+          "pid": 3666510,
+          "exists": true,
+          "command": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/cuda-env/bin/python -u /cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/frozen-feedback-ae3950f2/train_with_declared_attention.py /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/runtime-b64/tools/run_host_saved_gpu.py /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/e3-aggregate-seed2-u32-inference-v1.json /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/runtime-b64/tools/run_frozen_host_messages.py /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/anchor-all256-cases-v1.json /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/execution-e3-aggregate-seed2-u32 --budget /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json --source-version local-a100-final-confirmation-20261106-v1 --presentation current --host-enable-thinking --policy-config /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/e3-aggregate-seed2-u32-policy.json --continue-known-host-failures --host-site-packages /cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/http-env/lib/python3.11/site-packages"
+        }
+      },
+      "closed_at_snapshot": 63,
+      "planned_positions": 256,
+      "native_statuses_at_snapshot": {
+        "COMPLETED": 51,
+        "FAILED": 12
+      },
+      "model_cache_entries": 1,
+      "actual_cached_model_loads": [
+        {
+          "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/e3-retained-replication/seed-2/checkpoints/update-32",
+          "device": "cuda:0",
+          "visible_cuda_devices": "2",
+          "threads": 4,
+          "max_len": 16384,
+          "head_max_len": 2048,
+          "loaded_weight_dtype": "torch.float32",
+          "mha_fastpath_enabled": false,
+          "reference_compile_override": false,
+          "status": "VERIFIED"
+        }
+      ],
+      "native_completion_is_not_task_quality": true,
+      "detached_bounded_owner": true,
+      "automatic_queue_or_retry": false,
+      "no_offline_CPU_ledger_settlement_while_live": true
+    }
+  },
+  "baseline_whole_quality": {
+    "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/anchor-first200-source-author-review-reconciliation-v1.json",
+    "positions": 200,
+    "new_since_v46": 32,
+    "quality_counts": {
+      "C": 114,
+      "W": 12,
+      "I": 40,
+      "F": 34
+    },
+    "material_counts": {
+      "S": 119,
+      "I": 29,
+      "P": 52
+    },
+    "native_strata": {
+      "dev": 185,
+      "train": 15
+    },
+    "prior168_record_dicts_literal_equal": true,
+    "all_reviewed_whole_results_equal_final256_except_declared_global_index": true,
+    "full256_quality_closed": false,
+    "source_author_not_blind_or_independent": true,
+    "partial_prefix_not_population_effect": true
+  },
+  "primary_whole_quality": {
+    "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/e3-aggregate-u32/first80-source-author-review-reconciliation-v1.json",
+    "positions": 80,
+    "new_since_v46": 16,
+    "quality_counts": {
+      "C": 41,
+      "W": 7,
+      "I": 11,
+      "F": 20,
+      "U": 1
+    },
+    "material_counts": {
+      "S": 52,
+      "P": 23,
+      "I": 5
+    },
+    "native_strata": {
+      "dev": 80
+    },
+    "prior64_record_dicts_literal_equal": true,
+    "all_reviewed_whole_results_literal_equal_full256_audit": true,
+    "full256_quality_closed": false,
+    "source_author_not_blind_or_independent": true,
+    "partial_prefix_not_population_effect": true,
+    "other_method_labels_inherited": false
+  },
+  "common_scoring": {
+    "inventory": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/common-source-question-scope-inventory-all256-v2.json",
+    "fixed_flags_true_false": [
+      122,
+      134
+    ],
+    "same_4methods_all256_denominators": true,
+    "main_material_native_references_unchanged": true,
+    "source_specific_rules_not_fully_preregistered_or_blind": true,
+    "v1_bad_booleans_not_used": true,
+    "main_uncertainty_not_counted_as_known_factual_failure": true,
+    "guide82_addendum_and_earlier_material_adjudication": "Unchanged v46 receipts; original/addendum timing remains disclosed."
+  },
+  "offline_reconciliation_failures": {
+    "reflection": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/first184-review-reconciliation-failures-reflection-v1.json",
+    "failed_timers": [
+      "reconcile-confirmation-first184-quality-v1.time.txt",
+      "reconcile-confirmation-first184-quality-v2.time.txt"
+    ],
+    "both_actual_exit_codes": [
+      1,
+      1
+    ],
+    "correction": "Use original pilot8's explicit full-reading fields and require historical local index=global-8 for both complete results and six failed-provider bindings at global8..31, comparing every other field literally. No permissive fallback, regrade or old-record rewrite.",
+    "successful_closed_timer": "reconcile-confirmation-first184-quality-v3.time.txt",
+    "new_reconciler": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/reconcile_final_confirmation_quality_prefix.py",
+    "first_model_outcomes_or_labels_changed": false,
+    "both_failures_retained_and_pending_once_at_idle25": true
+  },
+  "external_preparation": {
+    "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/preparation-v1.json",
+    "final_protocol_frozen": false,
+    "models_or_HTTP_dispatched": 0,
+    "drafts": {
+      "fixed_prefix": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/draft-fixed-prefix-config.json",
+      "primary_seed0_u32": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/draft-primary-seed0-u32-config.json",
+      "inherited_config": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/inherited-DEV64-config.json",
+      "actual_config_differences": {
+        "checkpoint": {
+          "fixed": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e1-fitting-v1/delivery-only/checkpoints/update-16",
+          "primary": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e3-fitting-v1/aggregate/checkpoints/update-32"
+        },
+        "policy": {
+          "fixed": "fixed",
+          "primary": "laya"
+        }
+      },
+      "secondary_confirmation_seed_reselection": false,
+      "ordinary_return_tokens": 2048,
+      "additional_reads": 8,
+      "shared_generation_limit_per_message": 24,
+      "queue_limits": {
+        "requests": 600,
+        "reserved_tokens": 8000000
+      },
+      "shared_control_except_policy_checkpoint": {
+        "max_control_steps": 8,
+        "reads": 4,
+        "routing": "feedback",
+        "view_capacity": 1,
+        "state_projection": "shared_actions",
+        "delivery_selection": true,
+        "max_len": 16384,
+        "head_max_len": 2048,
+        "device": "cuda:0",
+        "threads": 4,
+        "view_builder": "generated",
+        "view_policy": "version_cache",
+        "internal_views": false,
+        "exclude_given_requests": true,
+        "source_observation_tokens": 2048,
+        "source_range_tokens": 256
+      },
+      "host_and_capacity": {
+        "host": {
+          "base_url": "http://127.0.0.1:7860/v1/",
+          "model": "Qwen3.6-35B-A3B-FP8",
+          "temperature": 1,
+          "max_tokens": 8192,
+          "timeout": 180,
+          "tool_mode": "json_action",
+          "max_calls": 24,
+          "enable_thinking": true
+        },
+        "capacity": {
+          "model": "Qwen3.6-35B-A3B-FP8",
+          "tokenizer_path": "/cra/qwen36-35B",
+          "context_tokens": 65536,
+          "output_tokens": 8192,
+          "batch_source_tokens": 6000,
+          "safety_tokens": 512,
+          "source_message_overhead_tokens": 32,
+          "related_reserve_tokens": 0,
+          "schema_reserve_tokens": 0,
+          "enable_thinking": true
+        }
+      },
+      "scope": "Project-inherited Host/controller allowances, not the upstream paper's default model/token-budget reproduction. Draft metadata still carries the literal inherited config_version; final experiment identifier and execution/binding protocol remain to freeze."
+    },
+    "native_LME_protocol_files_literal_equal_prior_inspected_copy": 2,
+    "important_integration_findings": [
+      "LME uses actual own-policy retrieval with a separate native fixed Reader/Judge; label it separately from autonomous Host outcomes.",
+      "Existing QASPER pre-Host capture/replay rejects recorded_tool_schemas, so Mem2Act cannot use it unchanged. Shared initial-bank/catalog/provider binding needs a concrete experiment adapter.",
+      "Mem2Act's current thin CLI uses splitlines; use already-frozen physical JSONL reader without changing released bytes.",
+      "LME451 retains all200Small prior-exposed histories and public451/29image input-development exposure. Old902fixed paths were a stopped fixed_context surrogate, not E3 capacity/quality proof.",
+      "Mem2Act400 keeps all429sessions and known lineage/schema holes; metrics are explicitly adapted, not author TA/leaderboard or real business success."
+    ],
+    "new_question_history_reference_values_opened": false,
+    "runtime_or_Product_changed": false,
+    "old_probe_or_stopped_audit_repeated": false
+  },
+  "native_full_answer_F1": {
+    "first3_closeout": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/native-answer-f1-first3-methods-closeout-v1.json",
+    "unchanged_first3_all256": {
+      "fixed-prefix": 0.0981909306413507,
+      "e3-aggregate-u32": 0.08804209206295316,
+      "e3-aggregate-seed1-u32": 0.08179025700801325
+    },
+    "seed2": "Pending actual terminal and full audit",
+    "not_whole_task_C_or_adoption_and_no_best_seed_selection": true
+  },
+  "cost_accounting": {
+    "original_ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+    "last_paid_idle": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v24.json",
+    "last_paid_new_closed_timers": 98,
+    "last_paid_CPU_seconds": 66.59999999999998,
+    "all_after24_new_closed_timers": "Pending; include both new failed reconciliation timers. Do not GNU-time-wrap scanner/settlement.",
+    "offline_ledger_written_this_turn": false,
+    "idle25_prepared_or_executed": false,
+    "live_seed2_whole_child_minus_native_and_parent": "Owner bills once at actual exit; currently unpaid/live.",
+    "unmetered_author_inspection_launch_cleanup_settlement_CPU": "unknown_not_zero",
+    "legacy_unknown_generation_embedding_preserved": [
+      15,
+      1
+    ],
+    "closed_pending_snapshot": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/progress-v47-offline-cost-pending-snapshot.json",
+    "closed_pending_timers_at_snapshot": 42,
+    "closed_pending_CPU_seconds_at_snapshot": 6.500000000000001,
+    "closed_pending_actual_exit_counts_at_snapshot": {
+      "0": 40,
+      "1": 2
+    }
+  },
+  "remaining": {
+    "baseline_semantic_positions": [
+      200,
+      255
+    ],
+    "primary_semantic_positions": [
+      80,
+      255
+    ],
+    "seed1_semantic_reviewed": 0,
+    "seed2_semantic_reviewed": 0,
+    "unreviewed_of1024": 744,
+    "all4_quality_and_native_statistics": "Common122 stress with full256 denominators; C/I/Q/W/F/U and materials separate; gains/losses,20000drawseed0paired family bootstrap,nativeDEV/TRAIN strata,each fixed seed and within-family3seed mean,N256not1024independent; commonE1 initialization conditions training-RNG inference.",
+    "seed2_terminal_next": "Actual exit0/CPU paid/both procs absent, audit_final_confirmation_learned.py seed2 256 then native fullF1, reconcile all4native outcomes, actual idle25 settlement once. Unexpected halt retains all attempted first outcomes; only explicit untouched-tail plan.",
+    "external": "Concrete protocol/config/input/capture/budget/scoring/owner freeze, then LME451Reader/Judge and Mem2Act400actual own-policy workflows; no automatic queue, gold filter, budget/input retuning or new probe.",
+    "other_full_goal": "Old64reserved query eligibility boundary/nativeTEST unopened; Source-View/ops/fullcost analysis, standalone final figures, paper/results and requirement-by-requirement full-plan completion audit."
+  },
+  "guardrails": {
+    "no_sha_checksums_or_content_fingerprints": true,
+    "no_subagents": true,
+    "no_services_or_second_ledger": true,
+    "no_reset_refund_retry_or_reselection": true,
+    "no_remote_or_Product_changes": true,
+    "GPUs0_1_unchanged": true,
+    "no_Source_K_menu_task_horizon_crop_compact_quantize_to_pass": true
+  }
+}
