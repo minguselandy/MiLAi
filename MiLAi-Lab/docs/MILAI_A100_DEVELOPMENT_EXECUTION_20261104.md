@@ -6,11 +6,56 @@
 历史 worktree、原始失败与用户文档保持原状。没有使用子代理、SHA/内容指纹校验、新服务、第二账本或远端写入。
 
 本轮机器可读入口为
-[progress](../data/manifests/a100-development-progress-20261106-v45.json)。
+[progress](../data/manifests/a100-development-progress-20261106-v46.json)。
 原始数据、冻结运行时、权重、命令、计时和实际输出位于本 worktree 的 ignored
 `artifacts/a100-development-20261104/`。本记录是现有报告体系的执行摘要。
 
-## v45 当前状态（2026-11-06）：全256共同歧义清单、112基线/32主方法整答、两方法全文F1
+## v46 当前状态（2026-11-06）：seed1全256审计/全文F1/成本闭合，seed2已启动，168基线/64主方法整答
+
+seed1/u32实际退出0，父3168683/子3168737均消失，保留205原生完成/51首次失败，不等于
+205任务成功。实际565HTTP、2,136,058已知tokens、新增unknown0/0；整子进程
+2546.614015CPU扣原生预测/加载后结算残余642.7612959579988和parent0.092552207一次。
+GPU2作业区间2.123723988920295h包含Host等待，不作为CUDA活跃时间。
+
+全256只读审计实际退出0（23103已drain）：19,188次旧Source比较、1,388段原文及角色/
+origin/捕获与报告时钟匹配，Store/Saver/world/应用表保持，语义/业务写入0。256个首次
+provider请求完整dict等于共有baseline。1,959次真实NN前向、12,353,161输入tokens，
+3636–9706tokens，完整before/全部合法绑定/决策头及logit/prob/argmax逐项通过，
+有限且truncated全false；实际SEARCH381/READ1561/HANDOFF17。没有重新推理/tokenize/
+HTTP调用；完整实际观察/菜单不等于全部Source交付、答案正确或16k有效上下文。
+
+seed1原生全文AnswerF1为0.08179025700801325（nativeDEV185为0.09293156442740273，
+nativeTRAIN71为0.05276008978847731）。前三个已结束条件各自全256汇总已逐字串绑定：
+fixed-prefix0.0981909306413507、primary0.08804209206295316、seed1上述值。
+完整首答案不提取片段，51失败显式空串计零；官方原函数和完整分母保持。
+原生token-overlap不是Source作者任务完成度，也未据此重选主seed或某个有利stratum；
+主比较仍是冻结seed0，四方法完整统计仍待。
+
+真实空闲v24一次结算98条新闭合GNU计时共66.59999999999998CPU，包括
+verify-progress-v45和primary-first48-reconcile-v1两条退出1的失败计时；96条退出0。
+未重收native/整客户端/parent/以前1..23费用，limits/gen/requests/embedding不变。
+随后按冻结计划启动seed2/u32，父3666509/子3666510实际/proc已核对，
+快照9/256，原生{'COMPLETED': 8, 'FAILED': 1}，一个VERIFIED GPU2FP32缓存加载。当前只有该
+实验worker，活动期间v24后的新离线计时pending，未测作者/检查/启动/清理/结算仍unknown非0。
+
+基线前168整答C97/I31/W10/F30，材料S104/P38/I26；主方法前64为
+C34/I7/W7/F15/U1，材料S45/P15/I4，均nativeDEV前缀，不外推总体。主方法62的排他英语
+断言无法由现有Source确认，保留U/noC而不宣称实际数据必然非英语。旧前缀记录完整保持，
+各方法独立读整答和实际材料。主first48合并曾因case45手填的额外敏感性备注与固定集合不符
+退出1；保持共同122集合和F/S不动，修正备注，保留v1/失败计时并生成v2。显示工具现直接
+输出固定成员资格，减少重复手填；这不是模型重跑或按结果调整敏感性案例。
+
+共同清单继续使用scope-inventory-all256-v2：122true/134false、四方法同例、分母各256，
+主评分/材料/原生替代标注不改。v1错误布尔仍保留且不计分，前期材料待决项仍由共同
+receipt终结。Source作者非盲审/独立，指南/加注时序沿v45披露。全部1024语义评分、四方法
+配对统计、seed2全审计/成本、LME451/Mem2Act400实际原生流程、图表论文和完整完成审计仍待。
+
+证据在final-confirmation-v1下：e3-aggregate-seed1-u32/audit-all256-v1/、
+native-answer-f1-first3-methods-closeout-v1.json、anchor-first168-source-author-review-reconciliation-v1.json、
+e3-aggregate-u32/first64-source-author-review-reconciliation-v1.json；idle-cost-settlement-v24.json在ROOT。
+完整目标持续执行，没有子代理、新服务、第二账本、SHA校验、远端或Product写入。
+
+## v45 历史状态（2026-11-06）：全256共同歧义清单、112基线/32主方法整答、两方法全文F1
 
 Source/问题范围逐篇清单覆盖全部256，固定122个共同敏感性标记；四方法均在这些位置不给
 confirmed-C信用，但每个方法仍保留全部256分母，主评分/材料等级/原生替代标注不变。
