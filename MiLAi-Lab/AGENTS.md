@@ -1,6 +1,13 @@
 # LIVE A100 EXECUTION v50: 2026-11-07
 
 Full original763-line goal ACTIVE/incomplete; current/previous turns PROGRESS.
+
+ACTUAL POST-COMMIT TAIL LAUNCH: only live experiment is continuation001 owner
+183645/child183647, both /proccommandsverified;RUNNING/clientCPUFalse.
+E/stages-lme-v1/fixed-prefix-prediction451-v1-continuation-001-owner.json.
+Actual driver inherited first8 WHOLEdicts equal original; model_loads[].
+Unique console log and running-snapshot-v1.json retained. Commit88356ac0 and
+actualidle27 precede this explicit launch. No second worker/offline settlement.
 Latest data/manifests/a100-development-progress-20261107-v50.json ->v49;
 previous checkpoint eea31413. ROOT=artifacts/a100-development-20261104,
 F=ROOT/final-confirmation-v1,E=ROOT/external-own-policy-v1.
@@ -21,7 +28,7 @@ estimateerror0,two actual images: not input overflow or transport/unknownusage.
 Raw response retained, no conversion to UNKNOWN/negativegold, no retry row7.
 Reflection E/stages-lme-v1/fixed-prefix-prediction451-v1-first-reader-failure-reflection.json.
 
-EXPLICIT TAIL PREPARED, NOT LAUNCHED at this checkpoint:
+EXPLICIT TAIL originally prepared below; actual launch recorded above:
 E/stages-lme-v1/fixed-prefix-prediction451-v1-continuation-001-plan.json
 443 indices8..450 only. Registration/check-only actual0/readyTrue.
 Unchanged frozen code/Host/Reader/budget8192/thinking/images/Source/method/N;

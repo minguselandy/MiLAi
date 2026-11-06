@@ -1,5 +1,5 @@
 {
-  "status": "ACTIVE_PRIMARY_QA184_LME_FIRST8_RETAINED_EXPLICIT_UNTOUCHED443_PRELAUNCH",
+  "status": "ACTIVE_PRIMARY_QA184_LME_FIRST8_RETAINED_ONE_EXPLICIT_UNTOUCHED443_TAIL_RUNNING",
   "timestamp_utc": "2026-11-06T18:53:39.202690+00:00",
   "goal_status": "active",
   "goal_complete": false,
@@ -132,7 +132,7 @@
     "owner_check_actual_exit": 0,
     "owner_check_ready": true,
     "automatic_retry_or_queue": false,
-    "actual_dispatched": false,
+    "actual_dispatched": true,
     "recipe_change": null,
     "original_earliest8_preserved": true,
     "existing_complete_pool_template_reused_by_frozen_native_code": true,
@@ -209,5 +209,55 @@
     "GPUs0_1_unchanged": true,
     "no_Source_K_menu_task_horizon_crop_compact_quantize_to_pass": true
   },
-  "progress_verification": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/verify-progress-v50.json"
+  "progress_verification": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/verify-progress-v50.json",
+  "actual_external_process": {
+    "timestamp_utc": "2026-11-06T18:56:56.314151+00:00",
+    "status": "ONE_FROZEN_EXPLICIT_UNTOUCHED_LME_TAIL_RUNNING",
+    "owner": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/stages-lme-v1/fixed-prefix-prediction451-v1-continuation-001-owner.json",
+    "actual_owner_receipt": {
+      "status": "RUNNING",
+      "name": "fixed-prefix-prediction451-v1-continuation-001",
+      "pid": 183645,
+      "plan": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/stages-lme-v1/fixed-prefix-prediction451-v1-continuation-001-plan.json",
+      "positions": 451,
+      "automatic_retry": false,
+      "automatic_queue": false,
+      "client_CPU_recorded": false,
+      "validated_stage_terminal": false,
+      "child_pid": 183647,
+      "started_epoch": 1793991363.4639072
+    },
+    "actual_process_commands": {
+      "pid": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/http-env/bin/python /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-lme-v1/own_external_lme_stage_v1.py /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/stages-lme-v1/fixed-prefix-prediction451-v1-continuation-001-plan.json ",
+      "child_pid": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/cuda-env/bin/python -u /cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/frozen-feedback-ae3950f2/train_with_declared_attention.py /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/runtime-b64/tools/run_host_saved_gpu.py /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/stages-lme-v1/fixed-prefix-prediction451-v1-continuation-001-inference.json /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-lme-v1/run_lme_with_actual_policy_capture.py /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-lme-v1/fixed-prefix-config.json /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-lme-v1/complete-small-snapshot /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-lme-v1/native-protocol /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/stages-lme-v1/fixed-prefix-prediction451-v1-continuation-001-output --source-version local-a100-lme-native451-20261107-v1 --site-packages /cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/http-env/lib/python3.11/site-packages --site-packages /cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/image-reader-pillow-overlay-v1 --continue-unattempted /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/stages-lme-v1/fixed-prefix-prediction451-v1-output "
+    },
+    "driver_status": "RUNNING",
+    "active_row": 8,
+    "native_cases": {
+      "COMPLETED": 7,
+      "FAILED_READING": 1,
+      "PREPARING_INPUT": 1,
+      "NOT_RUN": 442
+    },
+    "inherited_first8_whole_dicts_literal_equal": true,
+    "inherited_rows": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "local_model_loads": [],
+    "actual_idle27_paid": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v27.json",
+    "prelaunch_checkpoint": "88356ac0",
+    "automatic_queue_or_first_outcome_retry": false,
+    "offline_CPU_settlement_during_worker": false,
+    "new_service": false,
+    "goal_complete": false,
+    "no_sha_validation": true
+  },
+  "actual_external_process_snapshot": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/stages-lme-v1/fixed-prefix-prediction451-v1-continuation-001-running-snapshot-v1.json"
 }
