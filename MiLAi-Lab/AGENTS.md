@@ -1,4 +1,50 @@
-# LIVE A100 EXECUTION v54: 2026-11-07
+# LIVE A100 EXECUTION v55: 2026-11-07
+
+Full original763-line goal ACTIVE/incomplete; current/previous turns PROGRESS.
+Latest data/manifests/a100-development-progress-20261107-v55.json ->v54,
+previous checkpointbf1ffd32. ROOT/F/E asv54. No subagents/SHA/checksums/
+fingerprints/services/secondledger/reset/refund/remote/Product writes/
+model-first-outcome retry/reselection. GPUs0/1 unchanged; fullSource/K/menu/
+tasks/horizon retained. No GNU wrapper on scanner/settler/launcher.
+
+LME continuation002 ACTUALLY EXITED1; parent482027/child482029 absent,
+clientCPU paidonce220.73360300000002+parent.180903884,2HTTP17342known,
+newunknown0/0. First42 now39COMP/3ReaderF/409NOTRUN; failed7/39/41 retained.
+Row41 againlength8192/contentNone,prompt6668/reserved15372<65536,error0,
+not inputoverflow/unknown. Previousfirst40 whole dicts equal, no retries.
+Only untouched42..450409 explicitly registered as continuation003, check-only
+readyTrue; NOT LAUNCHED yet. Require actualidle29 before explicit nextlaunch.
+Full451audit/native score/Judge/scoreaudit/archive remain pending.
+
+CPU-only storagefollower002 ACTUALLY EXITED0; parent483037/child483038 absent,
+rows40/41 both complete full-byte reconstruction before raw removal;252total
+checkpoints now archived. Complete child16.027667CPU+parent.026376141 pending
+idle29 separatephase, no models/HTTP/ledger. Same frozen follower code now
+has a separate one-named-segment003 plan, NOTLAUNCHED. Basearchive outside
+case/output trees; preserve dependencies. Optional per-step replay must use
+frozenv2 restore_control; existingfull451audit/pairedrootfirstcall do notread
+step/control.json. Never share mutableSQLite/Source/input/queue.
+
+SEED1 first104 full quality bound: C59/I15/W3/F22/U5;materialS61/P37/I6,DEV104.
+Old64 whole records unchanged, no inheritedlabels/partial extrapolation.
+Remaining408 =seed1 104..255152 +seed2all256. Common82/101/231 guide timing
+asv54, authornotblind/independent. Baselineall256 C149/stress71, primaryC148/
+stress79/same256/all4nativeF1 unchanged. All4mainC/material/common122/family
+statistics/perseed/within-family3seedmean/nativeDEV185TRAIN71 pending.
+
+Mem2Act common429session16843turn Source bank actualexit0/fullverified/CPU
+paidonce1244.593596831 atidle28. Actual400x2=0, final execution/capture/
+shared-first-Host/catalog/audits/adaptedmetrics protocol still required.
+idle1..28 paid, newafter28 timers +storage002CPU pendingidle29. No nested/
+native/client/parent/oldcost rebill. Unmeteredauthor/inspection/launch/cleanup/
+settlementCPU unknown_not_zero; no offline settlement while modelworkerlive.
+
+All earlierM0-M4/B-C/D-K/fits/internal1024/audits/nativeF1 retained. Old64
+reservedqueries/nativeTESTsemantics unopened; old64Source exposed. External
+fullresults,408semantic/all4stats, Source-View/ops/fullcosts/figures/paper/
+results/full763-line audit remain. Fullgoal NOT complete.
+
+# HISTORICAL A100 EXECUTION v54: 2026-11-07
 
 Full original763-line goal ACTIVE/incomplete; current/previous turns PROGRESS.
 Latest data/manifests/a100-development-progress-20261107-v54.json ->v53;
