@@ -1,0 +1,78 @@
+{
+  "status": "ACTIVE_CONFIRMATION_ANCHOR_RUNNING_SOURCE_GUIDES72_COMMON_SOURCE_SCOPE_APPLICATION_RECORDED",
+  "timestamp_utc": "2026-11-06T10:36:13.915761+00:00",
+  "goal_complete": false,
+  "goal_status": "active",
+  "current_goal_turn_classification": "progress",
+  "previous_goal_turn_classification": "progress",
+  "previous_manifest": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/data/manifests/a100-development-progress-20261106-v40.json",
+  "previous_checkpoint_commit": "0ef56799",
+  "evidence_scope": "Current delta; all v40 prefix64 bindings, additional12 whole reviews, prepared full256 combiner/three learned owners, v39 and earlier closed development evidence remain referenced unchanged.",
+  "processes": {
+    "sole_actual_experiment": {
+      "owner": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/remaining248/anchor-owner-v1.json",
+      "parent_pid": 2223256,
+      "child_pid": 2223258,
+      "actual_commands": {
+        "pid": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/http-env/bin/python /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/own_final_confirmation_anchor.py /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/remaining248/anchor-execution-plan-v1.json",
+        "child_pid": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/cuda-env/bin/python -u /cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/frozen-feedback-ae3950f2/train_with_declared_attention.py /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/runtime-b64/tools/run_host_saved_gpu.py /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/remaining248/anchor-inference-v1.json /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/runtime-b64/tools/run_host_intent_retrieval.py /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/inherited-DEV64-config.json /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/remaining248/histories.json /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/execution-fixed-prefix-remaining248 --source-version local-a100-final-confirmation-20261106-v1 --policies fixed --interfaces rich --continue-host-history --capture-control-steps --capture-host-messages --capture-closed-host-messages --host-site-packages /cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/http-env/lib/python3.11/site-packages"
+      },
+      "status": "RUNNING",
+      "closed_positions_at_snapshot": 170,
+      "planned_positions": 248,
+      "native_statuses_at_snapshot": {
+        "COMPLETED": 138,
+        "FAILED": 32
+      },
+      "client_CPU_recorded": false,
+      "automatic_retry": false
+    },
+    "other_three_learning_methods_actual": 0
+  },
+  "source_specific_guides": {
+    "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/source-author-task-guides-prefix72-v1.json",
+    "positions": 72,
+    "new_since_v40": 12,
+    "new_global60_to71_answers_semantically_reviewed_before_guide": false,
+    "all_whole_witnesses_literal_equal_to_selected_fixture": true,
+    "all_prior60_guide_records_literal_unchanged": true,
+    "source_author_not_blind_or_independent": true,
+    "native_Source_basis_before_first_model_for256": true
+  },
+  "common_rubric_application": {
+    "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/source-scope-rubric-application-before-learned-v1.json",
+    "frozen_rule_changed": false,
+    "public_task_condition": "If full available Source cannot establish an answer, explain the limitation; missing extant evidence from only the acquired packet is different.",
+    "sensitivity": "Use the same Source-projection/question ambiguity treatment for all methods, keep all256 denominators; full ambiguity inventory pending remaining Source guides.",
+    "new_examples": "Native unanswerable contradicts explicit SGNS/fastText systems in case60; native no foreign training data confuses target-language LM tuning with downstream zero-shot in case63; case68 broader NLP transfer is potential/future, not empirically established.",
+    "native_F1": "Original full answer strings and original annotations, separate from Source-supported task quality; no gold or guide content passed to policy."
+  },
+  "guide_writer_improvement": {
+    "helper": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/extend_final_confirmation_guides.py",
+    "specification": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/source-author-guide-extension-68-to71-v1.json",
+    "actual_helper_exit": 0,
+    "prior_inline_syntax_failure": "Colon in tuple prose specification; actual exit1 at parse before any output/model/Source/ledger mutation. Untimed CPU unknown, not zero.",
+    "correction": "Manually reviewed prose data in JSON, one small original-Source binding helper instead of repeating embedded prose/code loops. No new runtime capability or model retry.",
+    "timer": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/extend-confirmation-source-guides-68-to71-v1.time.txt",
+    "measured_CPU_seconds_pending": 0.24
+  },
+  "cost": {
+    "original_ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+    "last_idle_settlement": 21,
+    "new_GNU_timers_after21": "Pending actual worker idle; failed prefix audit v1 and successful v2/helper all retained.",
+    "offline_settlement_while_worker_live": false,
+    "earlier_or_native_model_owner_cost_rebilled": false,
+    "unmetered_author_inspection_launch_cleanup_CPU": "unknown_not_zero"
+  },
+  "next_actions": [
+    "Continue guides72..255 and full Source/whole-answer reviews; first20 baseline whole answers read but pilot scope/final all256 labels still unfinished.",
+    "At remaining248 actual terminal, verify exit0/ownerCPU/parent+child absence. Execute existing full native binder then prepared full256 combiner, each await actual exit0; entire prefix64 records must match full248 and all18932 initial Source units must bind.",
+    "At actual idle settle only unpaid closed timers once in original ledger without wrapping the scanner/settlement in GNU time; then run the already frozen primaryseed0 and secondaryseed1/2 GPU2 FP32 jobs serial from exact pre-first-Host snapshots.",
+    "Preserve first failures and complete-input capacities. No baseline/model retry, Source/K/menu/task/horizon reduction, compact projection or quantize-to-pass. Any unexpected failure stops; only inspected never-attempted cells may continue.",
+    "Full1024 QA/SDK/Source/actual-input/View/operations/native F1/family statistics/cost, old64 query eligibility, eligible LME451 Reader/Judge and Mem2Act400 own-policy/full-input/native scoring, final figures/paper remain. No confirmation-driven method/checkpoint/budget/N selection or adoption."
+  ],
+  "no_sha_validation": true,
+  "subagents": 0,
+  "remote_written": false,
+  "Product_changed": false
+}

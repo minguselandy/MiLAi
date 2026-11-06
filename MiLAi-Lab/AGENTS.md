@@ -1,4 +1,58 @@
-# LIVE A100 EXECUTION v40: 2026-11-06
+# LIVE A100 EXECUTION v41: 2026-11-06
+
+FullgoalACTIVE/incomplete; current/previous turnsPROGRESS. Latestmanifest
+ data/manifests/a100-development-progress-20261106-v41.json (compactdelta→v40→v39);
+lastcommit0ef56799. V40fullconstraints/paths below stillapply exceptliveprogress/
+guidecount. NoSHA/checksums/contentfingerprints/subagents/newservices/secondledger/
+reset/refund/remotewrites/Productchanges/model-or-first-outcome retries. GPUs0/1 unchanged.
+
+ONLYLIVE experiment stillconfirmation fixed-prefix remaining248 ownerparent2223256/
+child2223258, actualproccommandsverified, snapshot170/248terminal. Detachedbounded
+owner/noexecsession. driveroriginal248; pilot8neverrerun;3learnedactual0. CPUFalse
+whilelive; noofflinecostsettlement/secondmodelorHTTPjob. Neverrestartlostobservation.
+
+Sourceguides nowFIRST72 inROOT/final-confirmation-v1/source-author-task-guides-
+prefix72-v1.json; source60..71beforecorrespondingsemanticanswerreview, prior60
+literalunchanged. Source-scope-rubric-application-before-learned-v1.json applies
+EXISTINGpubliccondition/generalrules, notnewmethod-specificscorer: fullSource
+unavailablefact→preciselyscopedlimitationcancomplete; fullSourcehasanswerbut
+packetmisses→incomplete. Sameambiguitysensitivityall4/all256denominatorskept.
+NativeF1onfullstrings/originalannotationsseparate. SourceauthorNOTblind/independent.
+Cases60nativeUnanswerablevsSGNS/fastText,63noTargetLabels≠noForeignLMtraining,
+68potentialnaturalNLPgeneralization≠empiricalvalidation,67namesonlymissingtable
+explicitinguides. No answerlabels/runtimegoldinjection/method-N-budgetchanges.
+
+Guideinlinewriterparsefailedcolonfortuplebeforemutation; newlean
+extend_final_confirmation_guides.py +JSONspec source-author-guide-extension-
+68-to71-v1.json actualexit0; sourceguides72built/allliteralwitnessesverified.
+NewGNUtimer extend-confirmation-source-guides-68-to71-v1.time.txt .24CPU PENDING;
+faileduntimedwriter/author/inspectionCPUunknownnot0. Idle21allpaidonce; neverGNU
+wraptimerscanner/settlement; noofflineledgerwriteswhileworkerLIVE.
+
+V40prefix64auditEXIT0 (32539drainedneverrepoll), failedv185230drainedneverrepoll,
+wholeSourceStoreSaverappsbound256ranges/4561Sourcecomps/143HTTP489826known;
+ENTIREprefix64recorddictsMUSTequalfull248atclosure. Extra12wholeQA(global8..19)
+C6/I3/F3,matS7/P2/I3 onlypartial; pilot8scopefinalizationpending.20wholeanswers
+read≠20finalgrades. Do not extrapolate tofull256quality.
+
+At actual248terminal exit0/ownerCPUpaid/bothprocsgone: mainbinderremaining248
+thenpreparedcombine_final_confirmation_anchor.py, awaiteachactualexit0. Exact
+all256allocation/18932initialwholeSource+userSourcebindings/outputrecordequality.
+Onlyactualidle settleunpaidtimersonce. Thenpreparedown_final_confirmation_learned.py
+withprimaryseed0/secondaryseed1/2plansserialGPU2FP32onecacheeach, samefullinitial
+Hoststate/runtime-b64/budget/prompt. GatesASTparsednotexecuted, noautomaticqueue.
+Do notclaimfullbindpassed. Nativecompleteinputcapacityrejectsbeforesilenttruncation;
+noSourceKmenutask/horizoncrop, compact/quantizetopass orfirstfailureretry.
+
+Sourceexportafterfreezecommit1ebe965e, all256nativebasisbeforefirstmodel.
+N256families/1024firsttrajectoriesnotindependent1024, no bestheldseed/update/N
+selection/adoption. NativeTEST+old64querysemanticsSTILLUNOPENED; old64sourcesalready
+exposed. Fullconfirm3learners/fullQA/SDK/actualinput/stats/cost, old64eligibility,
+LME451ReaderJudge/Mem2Act400ownpolicy/fullinput/inheritednativebudgets/scoring,
+figures/paperremain. AllLME200histories451queries29imagesdevelopmentexposed.
+FullgoalNOTcomplete; details/closedB-C/D-K/formal/M3 evidencebelow.
+
+# HISTORICAL A100 EXECUTION v40: 2026-11-06
 
 FullgoalACTIVE/incomplete; current/previous turnsPROGRESS. Latestmanifest
  data/manifests/a100-development-progress-20261106-v40.json, compactcurrentstate
