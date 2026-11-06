@@ -1,4 +1,92 @@
-# LIVE A100 EXECUTION v28: 2026-11-06
+# LIVE A100 EXECUTION v29: 2026-11-06
+
+Full goal ACTIVE/incomplete; current/previous turns PROGRESS. Latest manifest:
+data/manifests/a100-development-progress-20261106-v29.json and execution doc.
+No SHA/checksums/content fingerprints, subagents, services, second ledger,
+reset/refund, remote writes or model/first-outcome retries. GPUs0/1/Product unchanged.
+
+ONLY LIVE experiment HTTP/model worker new32-e3-aggregate-u32-owner.json:
+parent28715 / child28722 / exec80986;85/320closed at snapshot. Revalidate actual
+/proc/owner/native. FP32savedE3u32 GPU2/MHAfastpathFalse/refcompileFalse/oneverified
+load. Frozenruntime/config/data/Host untouched. NoextraHTTP/nativecapturedcontrol/
+realStoreclone/offlineCPUsettlementwhilelive. Isolatedscripted/noHTTPfixtures with
+norealexperimentStore/originalledgeraccess allowed, none thisturn. At actualterminal
+FIRSTfullbind_d_frozen_method.py new32-e3-aggregate-u32;await actualexit;THEN
+audit_d_closed_sdk_states.py new32-e3-aggregate-u32. Full320quality/Views/SDK/effects/
+operations/costclosure then three-methodfamilycomparison/controls. Losthandle not
+retryauthority. Neverrepollcompletedbaseline4305/incremental4286.
+
+E3PREFIX80 WHOLE SOURCE REVIEW CLOSED:
+d-update32/reviews/new32-e3-aggregate-u32-prefix-0080/answer-review-closeout-v1.json
+C26/Q11/W27/F16;material29complete48partial3insufficient;joint19;receivedViews0.
+EightcorrelatedTRAIN-exposedfamilies,not80independent/unseen/full320/adoption.
+Sourceauthor,notindependent/blind. Mid16 C1/materialcomplete1;final16 C0/complete0.
+Allfirstfailures and actuallastrespondedinputs retained. ENTIRE40→50,50→60,60→70,
+70→80recorddicts/providerinputs/answers/Sourcebindings/allViews literalreconciled
+beforesame-methodreuse/allanchor/Fmaskvalidation. No crossmethodgrades.
+NEXTindex80B05. Separateactualcomplete-familycut;compare ENTIRE80records/allViews
+beforecopy/revalidation. Inspector --compact --since-previous --compact-view-text
+--reuse-reviewed-condition new32-view_cache. Readwholeanswers;nevergradeunseen/
+truncated;originals2–5ownquotesnotassistant;F iffactualexecfailed.
+
+PREFIX50offlinev1reconcileFAILEDbecausebindexecstillrunning. Nojudgmentwrite
+occurred;awaitedsession75074bindsuccess,thenv2reconcilepassed. Preservefailureproof
+reconciliation-dispatch-failure-v1.json and v1timerexit1. Future offlinebinds use
+yield10000/actualexit check beforedependentmutation;do not startreconcile fromjust
+a returned sessionhandle. No model/toolrerun or defensivefilefallback introduced.
+
+A16meritmissingretrievedgapQ versusglobalnotstoredW. Failed45ownextendedtitle
+notlaterK;JSON_ACTION_MALFORMED nottruncation. Matchinglatershorttitledoesnotfix
+wrongonlyComputerSciencecorrectionhistory. FinalqueryrecirculatesoldHost/questions.
+A29initial74wrongvscorrected72;midreported78rubricthenfinalEU-onlyscope→72;correct
+finalvaluewithglobalhistorydenialW. No universalroleauthorityrule. Failed55noSource
+insufficient/57malformedcompleteK/58truncatedpartial kept. A33clinicoldmeasurement
+correctbuthomemorningbarefoot5ft11.25omissionQ;finalnonepredictionWagainstreported
+5ft11.5future. No clinicprotocol/treatmentclaimentitledtruth. B03continuingofficial
+SeniorTechnicalLead/TomVPcorrectbutadditiveinterimduty/PriyaApril11move/finalpending
+proposalnotdelivered;Wforcurrentstatusdenial. Initialextra chartcategory/secondary
+other-titleabsenceQ retained;allowninitialcorematerialcomplete. Misplacedknownrefs
+inside read_goal actualknown_reference_reads0, notcontrollednativeKlookup.
+
+ALL3FIRST8VIEWDONOR CELL INVENTORIES NOW COLLECTED (pureJSONproof,realcontrols0):
+d-update32/known-View-all3-first8-cell-inventory-v1.json
+baseline A05/A33/B03eligible,1initialfailed/4noView;incremental B03eligible,
+1initialfailed/6noView;E3all8initialcompletedbutnoactualreceivedView.
+24methodcells/4eligiblemethodcells only3Sourcefamilies, B03duplicate not newfamily/
+secondstate.5familieswithoutcandidate retained. Atmost9conditionalmethodreadouts
+beforefurthernativeeligibility undermax1before/family×3methods;notfinalselection/
+actualKlookup/Storeclone/fresharrival/fullframe/controlgain. Neverreplacewithlater
+turn/family/cleanerrevision;keepA05firstrev1. No given-readoutwithK;fullHosthistory/
+siblingreceipts fixed.
+
+Remaining52READ existingpreparercontract reviewed,notexecuted:
+ROOT/b-repair-existing-preparer-contract-review-v1.json. nominated_actionsrequires
+2or3legalIDs;--branch-sampling hasoperations/post-operation-bindings/current-decision,
+NO first-action value. Afterformal3close useexactnominations/explicitbindings ofnew
+frozenREADplusalreadyexecutedoriginalsame-beforecomparisonbinding. Filterprepared
+policiestoonlynewREAD;neverrerunoldnomination/addpaddingcontrol. fixed_contextreads4/
+continuation2/actualremainingcaps and emptyK given-readout unchanged. Actual52native
+preparations/READs/Hostreadouts0;old139+functional8 retained,57statecap. C7pools
+rulesvsE3handoff-only max14new→47of48/18of24statecap remainreserved/unexecuted.
+
+Baseline320C67/Q65/W121/F67,material84/222/14,joint53;42Views163occurrences.
+Incremental320C65/Q56/W135/F64,material76/223/21,joint48;25Views117occurrences/
+929rawranges. Bothfullquality/SDK/ops/ownerCPUclosed;seev27/28details,don'trerun/
+rebill. Preparedcompare_d_new32.py requiresall3full320closures,32family20kseed0
+bootstrap,primaryC separatematerial/joint;notexecuted. Preparedsettle_d_new32_E3_idle_v17.py
+requiresall3closure+familycomparison+actualidle,differentialafter1..16,neverGNUwrap;
+NOTEXECUTED/receipt17ABSENT.31closedpost16timers15.41CPU pending inclfailedreconcile;
+authoruntimedCPUunknownnot0. No settlementwhileE3lives. v16settled76timers211.76once.
+
+ActualK/old-output/52READ/7poolcontrols0. v20Sourceexclusion24fixtures/v24firstframe
+2fixturesunchanged;formalruntimeLACKSnewSourceexclude. Afterformalclosure validate
+nativebefore/K/fresharrival/fullHostframe/receiptandseparatecontrolledruntime/config.
+Fullremaining:E3tail/fullclosure,3methodstats,controls/repairs,finalcandidate/checkpoint/
+scoring/budget/Nfreeze BEFOREheld256papers/old64querycontents;LME451/Mem2Act400
+own-policy/full-input/exposure,allcosts/paperfigures. Testsplit/heldsemanticcontents
+unopened. GoalNOTcomplete.
+
+# HISTORICAL A100 EXECUTION v28: 2026-11-06
 
 Full goal ACTIVE/incomplete; current/previous turns PROGRESS. Latest manifest:
 data/manifests/a100-development-progress-20261106-v28.json and execution doc.
