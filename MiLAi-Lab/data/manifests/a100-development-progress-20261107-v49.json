@@ -1,5 +1,5 @@
 {
-  "status": "ACTIVE_ALL4_NATIVE_F1_AND_INPUT_AUDITS_CLOSED_PRIMARY_QA96_LME_PROTOCOL_FROZEN_READY_NOT_DISPATCHED",
+  "status": "ACTIVE_ALL4_NATIVE_CLOSED_PRIMARY_QA96_ONE_FROZEN_LME_BASELINE451_RUNNING",
   "timestamp_utc": "2026-11-06T18:07:17.009664+00:00",
   "goal_status": "active",
   "goal_complete": false,
@@ -413,7 +413,7 @@
     "no_automatic_queue_or_first_outcome_retry": true,
     "final_native_FAILED_with_all451_attempted_accepted_without_rewriting_status": true,
     "unattempted_tail_rejected_from_finalized_alias_and_only_explicit_continuation": true,
-    "new_external_tasks_dispatched_at_this_checkpoint": 0,
+    "new_external_tasks_dispatched_at_this_checkpoint": "One full451first-prediction stage launched, no terminal task assumed from preparation",
     "Mem2Act": "Full400GivenTool still required separately; recorded-tool-catalog/shared-first-input adapter not complete. No task/bank/metadata-hole reduction."
   },
   "offline_failure_reflection": {
@@ -469,5 +469,49 @@
     "corrected_v2_actual_exit": 0,
     "failed_timer_paid_once_idle26": true,
     "experiment_or_native_scores_changed": false
+  },
+  "actual_external_process": {
+    "timestamp_utc": "2026-11-06T18:13:13.695212+00:00",
+    "status": "ONE_ACTUAL_FROZEN_LME_BASELINE_PREDICTION_WORKER_RUNNING",
+    "owner": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/stages-lme-v1/fixed-prefix-prediction451-v1-owner.json",
+    "actual_owner_receipt": {
+      "status": "RUNNING",
+      "name": "fixed-prefix-prediction451-v1",
+      "pid": 18071,
+      "plan": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/stages-lme-v1/fixed-prefix-prediction451-v1-plan.json",
+      "positions": 451,
+      "automatic_retry": false,
+      "automatic_queue": false,
+      "client_CPU_recorded": false,
+      "validated_stage_terminal": false,
+      "child_pid": 18073,
+      "started_epoch": 1793988681.3707962
+    },
+    "actual_processes": {
+      "pid": {
+        "pid": 18071,
+        "command": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/http-env/bin/python /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-lme-v1/own_external_lme_stage_v1.py /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/stages-lme-v1/fixed-prefix-prediction451-v1-plan.json"
+      },
+      "child_pid": {
+        "pid": 18073,
+        "command": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/cuda-env/bin/python -u /cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/frozen-feedback-ae3950f2/train_with_declared_attention.py /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/runtime-b64/tools/run_host_saved_gpu.py /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/stages-lme-v1/fixed-prefix-prediction451-v1-inference.json /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-lme-v1/run_lme_with_actual_policy_capture.py /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-lme-v1/fixed-prefix-config.json /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-lme-v1/complete-small-snapshot /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-lme-v1/native-protocol /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/stages-lme-v1/fixed-prefix-prediction451-v1-output --source-version local-a100-lme-native451-20261107-v1 --site-packages /cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/http-env/lib/python3.11/site-packages --site-packages /cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/image-reader-pillow-overlay-v1"
+      }
+    },
+    "driver": {
+      "status": "RUNNING",
+      "planned_positions": 451,
+      "active_row": 0,
+      "native_status_counts": {
+        "PREPARING_INPUT": 1,
+        "NOT_RUN": 450
+      }
+    },
+    "inference_status": "RUNNING",
+    "local_model_loads": [],
+    "automatic_queue_or_retry": false,
+    "new_service": false,
+    "offline_CPU_settlement_during_worker": false,
+    "goal_complete": false,
+    "no_sha_validation": true
   }
 }

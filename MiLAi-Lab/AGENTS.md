@@ -1,6 +1,20 @@
 # LIVE A100 EXECUTION v49: 2026-11-07
 
 Full goal ACTIVE/incomplete; previous/current turns PROGRESS.
+
+ACTUAL POST-COMMIT LAUNCH: only live experiment is now LME fixed-prefix451
+prediction owner18071/child18073, both/proccommandsverified.
+E/stages-lme-v1/fixed-prefix-prediction451-v1-owner.json RUNNING/clientCPUFalse;
+driver451/currentactive0, no terminal result inferred from
+PREPARING_INPUT. Frozen baseline has0local-model loads; normal initial full
+Store/image setup may be slow. Detached bounded owner, noexecsession/queue.
+Do not relaunch merely for stale progress/observation timeout. Native first
+error stops; preserve/bill and inspect, then only explicit untouchedtail.
+While alive: no second model/HTTP worker or offlineCPU settlement. Continue
+672semantic reviews/readonlyanalysis. Initial job plan and frozen protocol
+committed3843f9b4 BEFORE this launch. Current raw before snapshots archived
+losslessly against full templates; never crop original Source or inputs.
+
 Latest data/manifests/a100-development-progress-20261107-v49.json ->v48.
 Previous checkpoint741ab1b1. ROOT=artifacts/a100-development-20261104,
 F=ROOT/final-confirmation-v1, E=ROOT/external-own-policy-v1.
@@ -88,9 +102,8 @@ Scanner/settler neverGNUwrapped; any later timers pending at next idle.
 Unmetered author/inspection/launch/cleanup/settlementCPU unknown,not0.
 Legacyunknown15gen/1embed kept.
 
-NEXT: commit/verify frozenLMEprotocol/auditors andprogress; actual ownercheck gates,
-settle newly closed after25timers at a real idle boundary, explicitly launch ONE
-fixed-prefix LME451prediction owner. Native stops at first error: inspect/retain,
+NEXT: monitor the one actual LME baseline worker above; do not duplicate launch.
+Prelaunch commit/real ownergate/idle26 have completed. Native stops at first error: inspect/retain,
 register only untouchedtail under unchangedrecipe; noautomaticretry/queue.
 During external modelworker, continue remaining672semantic QA/readonly analysis;
 no offlineCPU settlement/secondmodelHTTPworker. Native stage Source/SDK/role/
