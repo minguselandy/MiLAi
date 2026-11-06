@@ -58,7 +58,7 @@ Unmetered author/inspection/launch/cleanup/settlement CPU unknown_not_zero.
 NEXT continue primary208..255 full-answer/actual-material review, then both
 secondary seeds, alongside this one LME worker. Existing full input/Source/
 code/budget/Reader/Judge protocols retained; no outputbudget/thinking changes
-to repair failed first outcomes. No repeated old402/902 surrogates/probes.
+to repair failed first outcomes. No repeat of old42 probe or old902 fixed-context surrogate.
 Old64reserved queries/nativeTEST semantics unopened; old64Source exposed.
 All original M0-M4/B-C/D-K/fits/internal1024/audits/F1 closures remain unchanged
 in v50 ancestors. External fullresults, remaining560semantics, fullSource-View/
