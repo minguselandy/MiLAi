@@ -1,4 +1,76 @@
-# LIVE A100 EXECUTION v31: 2026-11-06
+# LIVE A100 EXECUTION v32: 2026-11-06
+
+Full goal ACTIVE/incomplete; current/previous turns PROGRESS. Latest manifest:
+data/manifests/a100-development-progress-20261106-v32.json and execution doc.
+No SHA/checksums/content fingerprints, subagents, services, second ledger,
+reset/refund, remote writes or model/first-outcome retries. GPUs0/1/Product unchanged.
+
+ONLY LIVE HTTP/model worker new32-e3-aggregate-u32-owner.json:
+parent28715 / child28722 / exec80986;262/320closed at snapshot. Revalidate actual
+/proc/owner/native. Frozen config/runtime/data/Host unchanged, FP32savedE3u32GPU2,
+one verified model load. No extra HTTP/native captured controls/real Store clones/
+offline CPU settlement while live. At actual terminal FIRST run
+`bind_d_frozen_method.py new32-e3-aggregate-u32`; await actual exit0; THEN
+`audit_d_closed_sdk_states.py new32-e3-aggregate-u32`; await actual exit0.
+Full320 quality/Views/SDK/effects/ops/finite-input/ownerCPU closure then prepared
+familycomparison and idle v17. Lost handle not retry authority; never repoll
+completed baseline4305/incremental4286. Receipt17 ABSENT.
+
+E3 PREFIX240 WHOLE SOURCE REVIEW CLOSED:
+d-update32/reviews/new32-e3-aggregate-u32-prefix-0240/answer-review-closeout-v1.json
+C73/Q44/W78/F45; material97complete140partial3insufficient; joint60; receivedViews0.
+24 correlated TRAIN-exposed generated families, not240 independent/unseen/blind.
+195COMP45FAIL, all first outcomes retained. Mid48 C1/materialcomplete1, final48
+C0/complete0. ENTIRE170recorddicts/providerinputs/answers/Sourcebindings/all0Views
+literallyequal new220, then ENTIRE220equal new240 before saved same-method reuse
+and all anchor/Fmask checks. Prefix220 separately closed C65/Q42/W71/F42,
+material85/132/3,joint52. No cross-method grades or hidden-tail inference.
+NEXT index240/D18. Bind next actual complete-family prefix; await actual exit0
+before reconcile ENTIRE240/allViews. Inspector --compact --since-previous
+--compact-view-text --reuse-reviewed-condition new32-view_cache. Read whole actual
+answers; never grade truncated/unseen. Failed last input is not later K, stored/
+created but unsent material gets no delivery credit. Originals2–5 own quotes.
+
+C07 initial Tawaraya/June correct; new SowakaJune20–25/June19gap/Hoshinoya hold/
+lateOctober tentative Takayama largely unreceived;178 own earlier research arrives.
+C10 overall65–68 incorrectly labelled topic scores180/181Q;186missing datequoteQ,
+187C. Later bookedJune21 versus conditionalJune14/72%/topic68-73-76 unreceived;
+36days/87hours only assumed plan. C23 runtime2026 cannot imply2027expiry190W;
+actual ownSept14,2025/wifeMarch7,2026; June2025 derives stated pre-expiry buffer.
+Son estimate/earlyMay/declinedApril11/notbookedMay unreceived. C26 initial200–202
+Cpartial because2pm own correction absent, accurate assistant recap present;
+205Ccomplete;206/207unlabelled assistant confirmationQ. Later3pm/4pmpending absent.
+C29 optional45olive missingQ; Emily wrap is for Mom,not herself;213possible switch
+omissionQ,not completed change. Final actualpaid65/shipsinthreedays unreceivedW.
+D02 initial own correction/purchase/warranty complete,226edited thinkabout→thinkof
+insidequoteQ; later own1920x1200 instruction/PSREF dispute/oldemail absent. D17
+initial own defaults/setupcomplete,237assistant IT promise under ownpolicyQ;
+later workEdge/homeChrome/nontransferredFirefoxsetup/Chrome rollout postponed absent.
+No world product/passport/exam validation or actual service/device/calendar effects.
+
+Inherited finite-input audit ONLY120positions/274actualforwards, NOT240; full320
+audit once after full binding, no prefix repeat. All7new author batches/2closures
+actualexit0 confirmed sequentially. Read-only manifest inspector assumed keyD and
+failed KeyError; actual keyD_optional_incremental used, no state/grade mutation,
+unmeteredCPUunknown. Oversized manifest display not grading evidence. Prior prefix50
+premature reconcile/prefix120wrongliteralquote+dependentclose failures retained.
+Never proceed to dependent mutation/close merely because an exec returned a handle.
+
+62 closed post16 timers62.25CPU pending, including failures; author/untimedCPU
+unknown not0. Writer/timer scanner not GNU-wrapped. No ledger settlement while live.
+v16 paid76timers211.76CPU once; native HTTP/local-model costs continue originalledger.
+Baseline/incremental full320 closed C67/65,joint53/48; do not rerun/rebill.
+ActualK/old-output/52READ/7pool controls0. All3first8View inventories4eligiblecells/
+3families/max9conditionalreadouts before further native eligibility, no later donor
+substitution. Sourceexclusion/frame fixtures unchanged, formalruntime lacks new
+exclude option. Prepared compare_d_new32.py/v17 remain gated by full320/actualidle.
+Full remaining: E3tail/fullclosure/stats, native controls/repairs, final candidate/
+checkpoint/scoring/budget/N freeze BEFORE held256papers/old64query contents;
+eligible LME451/Mem2Act400 own-policy/full-input/exposure, fullcost/figures/paper.
+Held/reserved native test semantic contents unopened; historicalLME development
+exposure is not unseen confirmation. Full goal NOT complete.
+
+# HISTORICAL A100 EXECUTION v31: 2026-11-06
 
 Full goal ACTIVE/incomplete; current/previous turns PROGRESS. Latest manifest:
 data/manifests/a100-development-progress-20261106-v31.json and execution doc.
