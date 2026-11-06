@@ -6,11 +6,46 @@
 历史 worktree、原始失败与用户文档保持原状。没有使用子代理、SHA/内容指纹校验、新服务、第二账本或远端写入。
 
 本轮机器可读入口为
-[progress](../data/manifests/a100-development-progress-20261106-v35.json)。
+[progress](../data/manifests/a100-development-progress-20261106-v36.json)。
 原始数据、冻结运行时、权重、命令、计时和实际输出位于本 worktree 的 ignored
 `artifacts/a100-development-20261104/`。本记录是现有报告体系的执行摘要。
 
-## v35 当前状态（2026-11-06）：旧输出检索性首42格闭合，52 READ/7池仍待执行
+## v36 当前状态（2026-11-06）：缺失52 READ正在首次执行，前12格机械绑定完成
+
+v35旧输出42格/来源作者审阅/实际输入与成本已闭合并提交680bb90f。
+本轮将52个冻结动作转换为原有双提名准备：每状态新READ加首个已执行旧比较。
+现有exact-nominations入口实际准备52状态/104个完整合法绑定，完整核对后，
+执行清单只保留52个新READ，未补状态、菜单或旧比较调用。原runtime-b-functional8、
+原生replay/given-readout未改变，全部52before仍使用原连续账本。
+
+唯一活动实验为父进程1437174、子进程1437175，实际/proc命令已核对，
+快照时41/52读出有终态，工具记录42/52；完整质量尚未评分。作业按原
+supplied-request/emptyK、fixed_context reads4/continuation2与原实际剩余额度执行，
+不是自主Host。用量已知的首次未完成响应保持失败，仅继续未执行格。
+
+前12个结果已核对完整首动作、已执行前缀未重跑、共同续行、真实回包/Reader输入，
+与各自保留旧比较的wire在packet之外逐值一致。12个新READ均实际opened且所选范围
+进入实际Reader输入，35段原文逐字/角色/clock绑定；728次完整Source比较与
+应用表一致，没有语义记录或业务写入。该段11次读出COMPLETED/1次首响应FAILED，
+不把读取/交付完成当答案成功；未知/质量标签没有从旧结果回填。
+
+为避免上轮监控父进程中断，有限的52格owner改为独立会话启动并将输出写文件，
+仍是单次有限作业，不是新服务/重试平台。owner在启动前保存原账本快照，终态
+以实际子进程rusage扣已计native后记录剩余CPU一次。活动期间不做离线结算；
+新增准备/前缀绑定计时保持pending。未触及GPUs0/1或启用本地学习模型。
+
+C的7个冻结已获材料池与既有单数入口prepare_handoff_comparison.py已核对，
+实际Store准备/模型/Host仍为0。仅在B52实际终态、客户端计量完成及空闲后，
+进行原生F1准备、HANDOFF完整菜单相等与实际准备输入容量检查，再做rules/E3
+handoff-only，最多14个新读出、累计47/48和18/24状态。一次只读检索误写复数
+路径，已依据实际rg结果纠正，未导致状态、模型或账本变更，未测CPU为unknown。
+
+完整目标继续：B52全审/覆盖与C7之后，才冻结候选、权重、评分、预算、N并打开
+预留确认语义；LME451/Mem2Act400自身策略/完整输入/曝光、全成本和论文图表仍待。
+活动证据为b-repair-read52-owner-v1.json、execution-plan-v1.json、execution-v1/、
+prefix-12-binding-v1.json及c-repair-existing-native-preparer-contract-v1.json。
+
+## v35 历史状态（2026-11-06）：旧输出检索性首42格闭合，52 READ/7池仍待执行
 
 本轮完成固定7个原生 before 的14条件准备、14个首次原缓存工具结果、40次
 实际 Host 读出、93次学习模型 forward、42格完整质量/来源/View/操作/输入审阅

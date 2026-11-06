@@ -1,4 +1,72 @@
-# LIVE A100 EXECUTION v35: 2026-11-06
+# LIVE A100 EXECUTION v36: 2026-11-06
+
+Fullgoal ACTIVE/incomplete; current/previous turns PROGRESS. Latestmanifest
+ data/manifests/a100-development-progress-20261106-v36.json / executiondoc.
+NoSHA/checksums/contentfingerprints/subagents/newservices/secondledger/reset/
+refund/remote writes/Productchanges/model-or-first-outcome retries. GPUs0/1 unchanged.
+
+ONLY LIVE actualHTTPworker B52: owner parent1437174 / child1437175.
+ROOT/b-repair-read52-owner-v1.json RUNNING; actual/proccommands verified. Owner
+is bounded detached onejob; launch-v1/ownerlog/plan and originalbudget-before
+snapshot saved. No unifiedexecsession needed; NEVERrestartif observationlost.
+Snapshot terminalreadouts 41/52, tools42/52; revalidateactualnotthissnapshot.
+Owner bills wholechildrusage/native delta/client+parentCPU once atterminal;
+client_CPU_recordedFalsewhilelive. No offlineCPUsettlement/C7nativeprep/model.
+
+B52native preparation DONE52states/104fulllegalbindings; executable recipe only
+52newREADs. Old52comparisonnominations NEVERreexecuted. Fixed frozenreservation
+35range/17full, old57/56TRAINstates, original139/functional8 retained. Exactly
+originalsuppliedrequest/emptyK/fixed_contextreads4/continuation2/native remaining
+caps/given-readout. Runtime-b-functional8 unchanged; currentprepareronlyexisting
+exact-nominations option preventsfill. All52sameoriginalledgerpaths confirmed.
+ExistingCLI --continue-known-readout-failures: retainfirstknownusageF, execute
+ONLYunexecutedcells. Unexpected/tool/unknown failure stops; noauto retry/reset.
+
+PREFIX12 binding actualexit0 (exec41788terminal,neverrepoll):
+b-repair-read52-prefix-12-binding-v1.json.12actualREADs opened/delivered,35rawranges
+literalrole/clockmatched, 728fullbefore/afterSourcecomparisons/appsunchanged/
+no semanticorbusinesswrites. Each completefirstaction/frozenbefore/prefixnotrerun/
+fixedsuffix/actualproviderwire verified; savedoriginalReaderwire literallyequal
+outsidepacket.11COMPLETED+1FAILEDfirstreadout. QA/View/material labels PENDING,
+no oldgradesinherited andopening/deliverynotQAcomplete. Do not settleprefix
+CPUwhileworkerAlive; newGNUtimersafter19pending.
+
+AT ACTUAL B52 terminal: verify ownerexit/status/clientCPUrecorded and /procgone.
+Run `bind_b_repair_read52.py 52` under frozenB8src/tools/ROOT andHTTPPython,
+awaitactualexit0. Reconcile entire12prefixrecorddicts literal equalfull52 before
+savedreviewreuse. Then whole Source/actualpacket/View/answer quality, retained
+firstcomparisons, SDK/app/Source effects/ops/coverage andcostclosure. OldSource
+READcoverage5/57+new52→57onlyaftervalidated; newREADbudget5functional+52=57cap.
+No otherfamily/state/extraModelretry/fitting/quota fill.
+
+C7 contract/census ONLY, realStore/model/Host0:
+c-repair-existing-native-preparer-contract-v1.json. Actualnative singular entry
+runtime-c-handoff8/tools/prepare_handoff_comparison.py; helper literalcurrentequal.
+After B52actualterminal/clientpaid/idle prepare7fixedpools, preserve complete
+executorcheckpoint/pool/task/K/nav/allowance; only4existingdeliveryprojectionfields
+maychange; compare HANDOFFfullbindings to original (no expansion). Preflight
+actualprepared shared_actions completeHANDOFFdecisioninputs max16384/head2048
+beforeE3 load/forward. Sameactualpool/menu rules/E3u32handoff-only; conditional
+emptyKgiven-readout, max14new→47of48/18of24states, literalearliestreusewhenvalid,
+neverbudgetfill. Sourceauthornotindependent; oldC8alllearned1/8vssimple4/8 retained.
+Pluralfilenameinspectionfailure correctedfromactualrg result beforemutation;
+untimedCPUunknown. Do not executeC7whileB52live.
+
+Doldoutput42/K9/formal32allmethods CLOSED (v35commit680bb90f). DoldoutputC22Q7W4F9
+/material27complete13partial2unknown/40HTTP343013known/93local/sum643723tokens,
+wholechildCPUobserved>=199.51, originalparentexitstatusunobserved preserved.
+Formerexec22539missing/originalchild1294423gone; NEVERrepoll/restart. AllGNU
+throughidle19paidonce10timers47.67CPU, native/collector/client/earliernotrebilled.
+AlloldSource/Hostknowledge retained; no uniquecausal/adoption/confirmationclaim.
+Historicalv35fullclosurebelow. Do not GNU-wraptimer-scanningwriter/settlement.
+
+Fullgoal remaining: finishB52/C7, finalcandidate/checkpoint/scoring/budget/Nfreeze
+BEFOREheld256papers/old64querysemanticcontents (stillUNOPENED), eligibleLME451
+Reader/Judge/Mem2Act400 actualownpolicy/fullinput/exposure, fullcost/stats/figures/
+paper. NativeTESTsemanticcontentsunopened; historicalLMEdevelopmentexposednot
+unseenconfirmation. NoautomaticA20k/B192/extraseeds/AtoB. FullgoalNOTcomplete.
+
+# HISTORICAL A100 EXECUTION v35: 2026-11-06
 
 Fullgoal ACTIVE/incomplete; current/previous turns PROGRESS. Latestmanifest
 data/manifests/a100-development-progress-20261106-v35.json and executiondoc.
