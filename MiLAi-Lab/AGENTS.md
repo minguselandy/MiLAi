@@ -1,4 +1,98 @@
-# LIVE A100 EXECUTION v42: 2026-11-06
+# LIVE A100 EXECUTION v43: 2026-11-06
+
+FullgoalACTIVE/incomplete; previous/current turnsPROGRESS. Latestmanifest
+ data/manifests/a100-development-progress-20261106-v43.json compactdelta→v42→
+ earlierclosedproofs. Lastcheckpointbfebd46f. ROOT=artifacts/a100-development-20261104.
+NoSHA/checksums/contentfingerprints/subagents/newservices/secondledger/reset/
+refund/remotewrites/Productchanges/model-or-first-outcome retries. GPUs0/1 unchanged.
+
+ONLYLIVE actualexperiment PRIMARYCONFIRM E3seed0/aggregate/u32 owner
+final-confirmation-v1/e3-aggregate-u32/learned-owner-v1.json parent2687557 /
+child2687558 actual/procverified, detachedbounded/noexecsession/noautomaticqueue.
+Snapshot150/256closed, statuses{'COMPLETED': 115, 'FAILED': 35}; revalidateactualowner/
+driver/proc NOTsemanticgrades. Model_loads1VERIFIEDGPU2/cuda0FP32threads4/
+max16384head2048/MHAfastpathFalse/referencecompileFalse (TF32falsewrapper).
+OwnerCPUFalsewhilelive; neverofflineCPUsettle/startanotherModelorHTTPworker.
+Ifunexpected/capacity/unknownfailurehaltsKEEPfirstoutcomes; inspectandonly
+never-attemptedcellsunderexplicitnewrecord. NeverSource/K/menu/task/horizon
+crop,compact/quantizetopass ormodel/first-outcome retry. Seeds1/2actual0.
+
+PRIMARY FIRST16 AUDIT NOW ACTUALexit0: e3-aggregate-u32/audit-prefix16-v1/.
+Session10488drainedNEVERrepoll.14nativeCOMP/2F,1051wholeSourcebefore-aftercomps,
+98literalrawranges+role/origin/capture/reportedclockchecks, Store/Saver/world/
+appsunchanged/semanticbusiness0. First16wholeinitialproviderrequestdictseq
+sharedanchor; first8recorddictseqpreviousfirst8wireproof.128actualNNforwards/
+815069inputtokens,4102..9310tokens; decodedENTIREbefore/fullactionbindings/
+head/logit/probIDorder/selectedargmaxliteralchecked, finitevalues, alltruncFalse.
+SEARCH19/READ109 areactualops; configreads4notaninferredactualopcount.
+36HTTP121977knownalreadynativepaid; no model/tokenizerreplay orledgerwrite.
+ScopeONLY16completeactualOBSERVEDstate/fulllegalmenu/head, notall-bankdelivery/
+semantictruth/effective16kcontext/full256proof.
+
+Preparedaudit_final_confirmation_learned.py METHOD COUNT (frozenruntime-b64src/
+tools/ROOT+HTTPPython). Actualprefix16runused16, no fixedmodelreload. At full256
+actualownerexit0/CPUpaid/bothprocsgone, run
+`audit_final_confirmation_learned.py e3-aggregate-u32 256` with
+uniqueGNUtimer andawaitactualexit0. FullbranchenforcesHTTP/token/newunknown
+equality+ENTIREprefix16 review/state/first-wire/failed/finite/forcedrecords
+literalequalfullcorrespondingrecords. Genericfullauditforlaterseeds. Codefull
+branchpreparednotyetexecuted; do notclaimfullpassed.
+
+SourceguidesNOW FIRST144: final-confirmation-v1/source-author-task-guides-
+prefix144-v1.json, new112..143beforecorrespondingsemanticmethodanswerreview,
+prior112literalunchanged. Generalrubric/method/N/budgets PREFREEZE1ebe965e,
+all256nativeSourcebasisbeforefirstmodel; authorNOTblind/independent, notall
+guides-before-allanswers. New issues: surveypriorresources≠owndatasets;18
+propagandatechniquesexplicitheadings; NUS2.6ppdifferenttestsimulators not
+trainmethoddelta; MCScript13percentisannotation-nonagreement notunanswerable;
+270/280Mvs20M scopedLatvian13.5–14x notalllanguages; analyticgold-feature
+annotation≠originalanswerrepair; hiddenNERtasktablelabelsnotSourcefacts.
+
+BaselineWHOLE first48checked/reconciled finalall256:
+anchor-first48-source-author-review-reconciliation-v1.json C29/I11/W1/F7,
+matS31/P9/I8, all48nativeDEV, notcohortestimate. Prior32wholejudgments unchanged.
+New32..39 C7/I1(matS6/P1/I1),40..47 C3/I4/F1(matS4/P3/I1). Readallwhole
+answers/non-systemactualreceipts; Sourceguidesprecededsemanticreview. Model
+gradesnotinheritedfrombaseline. Commonscope/sensitivityinventoryALL256pending/
+case26materialPscopepending, denominatorall256kept. OnlysupportedSourcefacts,
+notuniquegoldID/string; fullSourceunavailable→accuratescopelimitationcan
+complete, not-retrievingextantfacts→incomplete.33groupdirectionsinfullpaper
+notdelivered→I;41ARC-onlymisses3benchmarks→I;44priorBIBREF26identityexistsbut
+notretrieved→I;46Bernoulli-onlymisses3baselines→I;47manycorrectcomparatorsbut
+missesmainmultitask/Trianglefamilies→I.32recorded41hoursvalidscopedsize;
+34supportedqualhigher/comparable/fastercomparison(notcreditednumericmargin);
+38Ccorrectsourcelimit/matPpartialsetup;40scopedSimpleQuestions/noextra
+reported+carefullimitation;42classrankmissingtablelimit andgains≠absoluterank;
+43full12MOOCevalscopewithnolanguageclaim. Allscopeambiguities SAME4methods,
+nevermethodgainsselection. SourceauthorNOTindependent/blind.
+
+v42ALL256BASELINECLOSED/BOUNDunchanged:216COMP40F,590HTTP1985393known/new
+unknown0/0;1012rawranges/19188oldSourcecomps/all18932wholeunits+256userSources
+initialbound/StoreSaverappsunchanged0semanticbusiness. Entireprefix64full248
+andallsegment/all256reviewrecordsequalexceptglobalindex. NEVERrerunbaseline.
+Ownerremaining2482223256/2223258gone/exit0/clientpaid; pilots2179670/2179671gone.
+Oldbinders44683/20326/prefix32539/failed85230drainedneverrepoll.
+
+Idle22andallpriorGNUalreadypaidonce15timers24.54CPU; rootnewtimersAFTER22
+PENDINGwhileprimaryLIVE, noofflineledgerwrite. NeverGNUwraptimerscanner/writer/
+settlement. Native load/predictcostsalreadyrecorded, ownerwillsubtractfrom
+wholechildandbillresidual+parentonceatactualexit. Untimedauthor/inspection/
+launch/cleanup/settlementCPUunknownnot0. Legacyunknown15/1kept; closednew
+resultunknownunchanged, notglobalunknown0.
+
+NEXT continueguides144..255/baselineQA48..255/all3learnerQA, fullNativeSource/
+SDK/actualNN/rolesclocks/View/ops/cost/nativefullstringF1/paired20kfamily
+bootstrap/strata/perseed/within-familymean. Atprimaryactualterminalfullaudit
+thenactualidleunpaidcostsonce, frozenfinished-RNGseed1/2u32serialsame256before.
+N256/1024firsttrajectories NOT1024independent; fixedE1inittrainingRNGnot
+wholechainvariance; no bestheldseed/N/checkpoint/scorer/budgetreselect/adoption.
+Old64querysemantics+nativeTESTSTILLUNOPENED; old64sourcesexposed. Eligible
+LME451ReaderJudge/Mem2Act400ownpolicy/fullinput/nativebudgets/scoring/fullcost/
+finalfigurespaperremain. AllLME200histories451queries29imagesDEVELOPMENTexposed;
+old902fixedpath501COMP1partial400unrun notownpolicy/donotrepeatprobes/pages.
+FullgoalNOTcomplete. AlloldB-C/D-K/formal/M3closedpriorv42below.
+
+# HISTORICAL A100 EXECUTION v42: 2026-11-06
 
 FullgoalACTIVE/incomplete; current/previous turnsPROGRESS. Latestmanifest
  data/manifests/a100-development-progress-20261106-v42.json (compactdelta→v41→v40
