@@ -17,8 +17,11 @@ not input overflow/transport/unknown. Originalfirst8 whole dicts unchanged,
 both row7/39 first failures retained, no retry or UNKNOWN/negativegold.
 Reflection and continuation002 plan registered/check-only readyTrue:
 E/stages-lme-v1/fixed-prefix-prediction451-v1-continuation-002-plan.json.
-ONLY untouched40..450411 eligible; NOT ACTUALLY LAUNCHED at this checkpoint.
-Need actualidle28 then explicit model launch, no automatic queue.
+ONLY untouched40..450411 eligible. ACTUALLY LAUNCHED aftercommit62953f26
+and idle28: modelparent482027/child482029, RUNNING/clientCPUFalse. Both actual
+/proccommands verified; snapshot active40,38COMP/2F/1PREPARING/410NOTRUN,
+first40 whole dicts equal previous. E/stages-lme-v1/continuation002 named
+owner/plan/output and running-snapshot-v1.json. No automatic queue.
 
 STORAGE FIX ACTUALLY CLOSED, not input reduction:240 step/control.json
 checkpoints across first40,77754447334 originalbytes ->161670265 literal
@@ -33,7 +36,8 @@ Optional native per-step replay MUST restore_control(logicalpath) using frozen
 v2 helper first; full451audit/pairedfirstcall replay do not read step/control.
 Sorted full-line direct byte equality, no content hashes/fingerprints. Both
 same-case/cross-case complete restore contracts actual0. One-named-segment
-pureCPU follower frozenv3+terminal-owner contract actual0, NOTLAUNCHED yet;
+pureCPU follower frozenv3+terminal-owner contract actual0, ACTUALLY LAUNCHED:
+parent483037/child483038, RUNNING_CPU_STORAGE_ONLY, both/proccommands verified;
 it stores terminalcases only, measures completeCPU, no models/HTTP/ledger/
 automatic next model segment. Do not edit its frozen code while live.
 
@@ -43,8 +47,8 @@ E/prepared-mem2act-common-bank-v1/full-source-verification.json passed all
 occurrence/objectref. Fullcommon bank, no gold filtering/query/reference use,
 SDK4.52.3/.21.4;0modelsHTTP/business/semantic/prefetch/ledger. Actual400x2=0,
 NOT final400execution protocol or shared-first-Host/catalog/accuracy proof.
-Complete wholechild1244.53287CPU+parent.060726831 pending idle28 once-only
-originalledger sourcephase; nested workerCPU never add again. Frozeninputs/
+Complete wholechild1244.53287CPU+parent.060726831 PAID idle28 once-only
+originalledger sourcephase1244.593596831; nested workerCPU never add again. Frozeninputs/
 all1137bindings unchanged. Final prediction/capture/audit/scoring/owner
 protocol, real400x2 and adaptedmetrics remain required.
 
@@ -55,7 +59,9 @@ Author notblind/independent. Remaining448 =seed1 64..255192 +seed2all256.
 Baselineall256 C149/stress71; primary C148/stress79/same256; all4nativeF1
 unchanged. All4mainC/material/common122/familyCI/perseed/mean pending.
 
-COST idle1..27 paid, after27 closedtimers and finite storage pendingidle28.
+COST idle1..28 paid. Actualidle28:122closedtimers323.24999999999994CPU;
+separate source1244.593596831 paidonce. New after28 timers pending nextidle.
+No offlineCPU settlement while current modelparent482027/child482029 live.
 SourcecompleteCPU separate once-only phase; no duplicate nested/native/
 wholeclient/parent/old1..27 charges. No offline ledger settlement during
 actual modelHTTPworker; unmetered author/inspection/launch/cleanup/settle

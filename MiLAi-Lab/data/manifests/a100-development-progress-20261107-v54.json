@@ -1,5 +1,5 @@
 {
-  "status": "ACTIVE_SEED1_QA64_SOURCE_FULLY_VERIFIED_LME_FIRST40_RETAINED_LOSSLESS_STORAGE_CLOSED_TAIL411_REGISTERED",
+  "status": "ACTIVE_SEED1_QA64_SOURCE_VERIFIED_PAID_ONE_LME_CONTINUATION002_AND_CPU_STORAGE_FOLLOWER",
   "timestamp_utc": "2026-11-06T20:16:05.206802+00:00",
   "goal_status": "active",
   "goal_complete": false,
@@ -87,7 +87,7 @@
     "actual_child_pid": 324885,
     "prepared_sources_snapshot": 16843,
     "all16843_Source_verification_pending": false,
-    "CPU_recorded_in_original_ledger": false,
+    "CPU_recorded_in_original_ledger": true,
     "actual_status": "FULL_429_SESSION_16843_TURN_SOURCE_BANK_PREPARED_VERIFIED_NOT_TASK_EXECUTION",
     "actual_exit_code": 0,
     "full_Source_verification": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/prepared-mem2act-common-bank-v1/full-source-verification.json",
@@ -107,7 +107,8 @@
     "actual_processes_absent": true,
     "whole_child_CPU_seconds": 1244.53287,
     "parent_CPU_seconds_through_receipt": 0.060726831,
-    "cost_state": "Complete parent/child cost retained, pending once-only original-ledger idle28; nested worker CPU not added again."
+    "cost_state": "Actual idle28 separate source phase paid once1244.593596831CPU including parent; no nested worker CPU added again.",
+    "actual_cost_settlement": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/mem2act-source-preparation-v1-cost-settlement.json"
   },
   "LME_existing_worker": {
     "owner": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/stages-lme-v1/fixed-prefix-prediction451-v1-continuation-001-owner.json",
@@ -143,22 +144,29 @@
       450
     ],
     "next_unattempted_count": 411,
-    "next_actual_dispatched": false,
+    "next_actual_dispatched": true,
     "automatic_queue": false,
     "whole451_audit_scoring_archive_closed": false,
-    "given_retrieval_fixed_Reader_not_autonomous_Host_or_unseen_Small": true
+    "given_retrieval_fixed_Reader_not_autonomous_Host_or_unseen_Small": true,
+    "actual_running_continuation002_snapshot": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/stages-lme-v1/fixed-prefix-prediction451-v1-continuation-002-running-snapshot-v1.json",
+    "actual_running_parent_pid": 482027,
+    "actual_running_child_pid": 482029
   },
   "costs": {
-    "last_actual_idle_paid": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v27.json",
+    "last_actual_idle_paid": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v28.json",
     "idle27_commands": 71,
     "idle27_CPU_seconds": 18.560000000000002,
-    "new_offline_timers_after27": "All actual closed after27 timers pending idle28, including failed commands if any and finite storage; no GNU wrapper on scanner/settler/launcher.",
-    "live_segment_whole_CPU_HTTP_and_unknown_usage": "Continuation001 actual exit1 and whole child3375.9150750000003CPU +parent.19004935 paid once;32HTTP130410known,newunknown0/0. Source1244.53287CPU +parent.060726831 pending separate source phase at idle28.",
+    "new_offline_timers_after27": "All122 closed timers paid once at idle28; after28 amendment timers pending next actual eligible idle.",
+    "live_segment_whole_CPU_HTTP_and_unknown_usage": "Continuation002 and CPU-only storage follower now live; whole cost pending actual exits. Continuation001 and source preparation closed/paid; do not settle offlineCPU while model worker lives.",
     "first_LME_child_and_parent_already_paid_once": true,
     "native_model_whole_client_parent_or_idle1_to27_rebilled": false,
     "unmetered_author_inspection_launch_cleanup_settlement_CPU": "unknown_not_zero",
     "offline_settlement_during_live_worker": false,
-    "continuation001_actual_client_CPU_paid_once": true
+    "continuation001_actual_client_CPU_paid_once": true,
+    "idle28_commands": 122,
+    "idle28_CPU_seconds": 323.24999999999994,
+    "separate_Source_setup_CPU_paid_once": 1244.593596831,
+    "source_nested_CPU_rebilled": false
   },
   "remaining": {
     "semantic_of1024": 448,
@@ -200,8 +208,11 @@
     "restore_requirement": "Optional native per-step replay must call frozen v2 restore_control(original logical path) first. Existing full451 Source/SDK/NN/Reader audit and paired first-call replay use before archives/root call and do not read step/control.json.",
     "follower_protocol": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-lme-lossless-storage-follower-v3/protocol-before-follower-execution-v3.json",
     "follower_contract": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/lme-storage-follower-terminal-owner-contract-v3.json",
-    "follower_next_actual_dispatched": false,
+    "follower_next_actual_dispatched": true,
     "follower_scope": "One named segment only, terminal files only, pure CPU/no model/HTTP/ledger. Complete child and parent CPU deferred to actual idle. No automatic next model segment.",
-    "disk_available_GiB_snapshot": 118
+    "disk_available_GiB_snapshot": 118,
+    "actual_follower_owner": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/fixed-prefix-prediction451-v1-continuation-002-storage-v3-owner.json",
+    "actual_follower_parent_pid": 483037,
+    "actual_follower_child_pid": 483038
   }
 }
