@@ -1,4 +1,64 @@
-# LIVE A100 EXECUTION v56: 2026-11-07
+# LIVE A100 EXECUTION v57: 2026-11-07
+
+Full original763-line goal ACTIVE/incomplete; current/previous turns PROGRESS.
+Latest data/manifests/a100-development-progress-20261107-v57.json ->v56;
+previous checkpoint8301b7ad. ROOT/F/E same. No subagents/SHA/checksums/
+fingerprints/services/secondledger/reset/refund/remote/Product writes/
+model-first-outcome retries/reselection. GPUs0/1 unchanged;fullSource/K/menu/
+tasks/horizon retained. No GNU wrapper on scanner/settler/launcher.
+
+SEED1 first160 full quality: C85/I27/W5/F34/U9,materialS89/P62/I9,DEV160.
+Old128 whole records unchanged; authornotblind/independent, no inheritedlabels
+or prefix extrapolation. Extra128 full170originalpaper Source regression
+check confirms both valence/dominance, no grade from missing snippet alone.
+Remaining352=seed1 160..25596 +seed2all256. Baseline149/stress71, primary148/
+stress79/same256/all4nativeF1 unchanged; all4mainC/material/common122/20kfamily
+CI/perseed/within-family3seedmean/nativeDEV185TRAIN71 pending.
+
+LME continuation003 ACTUALLY EXITED1; parent536181/child536184 absent,
+clientCPU paidonce1690.013888+parent.158571701,16HTTP75048known,newunknown0/0.
+First58 now54COMP/4ReaderF/393NOTRUN; failed7/39/41/57 retained. Row57 again
+length8192/contentNone,prompt2917/reserved11621<65536,error0; not inputoverflow
+or unknown. Previousfirst42 whole dicts equal. Only untouched58..450393
+explicitly registered as continuation004, check-only readyTrue; NOTLAUNCHED
+yet. Need actualidle30 then explicit nextlaunch. No automated model queue.
+Full451audit/native score/Judge/scoreaudit/archive still pending.
+
+CPU storage003 ACTUALLY EXITED0; parent537304/child537305 absent. All16rows
+42..57 stored, total58closedcases/348fullcheckpoints, complete originalbyte
+reconstruction before raw removal. Complete child112.91779500000001+parent
+.027143931 pending separateidle30phase. One-named004 plan reuses unchanged
+frozenv3code, NOTLAUNCHED. Preserve sharedbase outside case/output trees;
+optional per-step replay frozenv2 restore_control, whole451audit/pairedroot
+firstcall do notread step/control.json. Never share mutableSQLite/Source/input.
+
+MEM2ACT new execution ENTRY PREPARATION snapshot, NOTFINAL400protocol:
+E/mem2act-execution-entry-preparation-v1.json,4literalcode snapshots.
+Public-only400projection afterfuturefreeze; full prepared-bank fixednativeHost
+capture; primarysame-first-Host native replay policy/checkpoint only; separate
+native adapted offline metrics, no reference access inside predictions.
+Full-bank new per-case IO contract v2 ACTUALEXIT0:16843original Sources perarm,
+33686whole Source comparisons, fullfirstproviderwire/Store/Saver/context/
+catalog equality, originalpreparedbank+capturebytes unchanged. EvalSDK4.52.3/
+.21.4.6syntheticresponses+1suppliedhandoffstub,0realmodelsHTTP/business/
+operationalledger, no secondpersistentbudget. Not old8Source mock rerun,
+actual400execution/NNquality/operationallease proof. v1fixture failed before
+Hostdispatch from copied original limits versus fixturecounter; corrected
+copied fixture budget_before only, originaltemplate/ledger unchanged, failure
+timer+reflection retained.36790/43103 sessions DRAINED neverrepoll.
+Actual400x2 remains0; final boundedowner/full400audits/earliest-resultfinalizer/
+executionprotocol/publicprojection/actualruns/scoreaudits/archive required.
+
+Mem2Act common429sessions16843turn Source bank alreadyverified/paid1244.593596831
+atidle28. idle1..29 paid; allafter29 closedtimers and storage003CPU pending30.
+No nested/native/client/parent/earlier rebill. Unmetered author/inspection/
+launch/cleanup/settlementCPU unknown_not_zero. No offline billing whilemodel
+workerlive. All earlierM0-M4/B-C/D-K/fits/internal1024/audits/nativeF1 retained.
+Old64reservedqueries/nativeTESTsemantics unopened;old64Sourceexposed. Full
+externalresults,352semantics/all4stats, Source-View/ops/fullcosts/figures/paper/
+results/full763-line audit remain. Fullgoal NOT complete.
+
+# HISTORICAL A100 EXECUTION v56: 2026-11-07
 
 Full original763-line goal ACTIVE/incomplete; current/previous turns PROGRESS.
 Latest data/manifests/a100-development-progress-20261107-v56.json ->v55;
