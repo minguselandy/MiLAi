@@ -1,6 +1,15 @@
 # LIVE A100 EXECUTION v53: 2026-11-07
 
 Full original763-line goal ACTIVE/incomplete; current/previous turns PROGRESS.
+
+ACTUAL POST-COMMIT SOURCE-ONLY CPU LAUNCH: parent324883/child324885,
+both/proccommands verified; IMPORTING_FULL_RELEASED_SOURCE_HISTORY,
+prepared1792/16843 at snapshot. E/mem2act-source-preparation-v1-owner.json
+and worker-report.json. SDK4.52.3/.21.4 verified, realmodelHTTP/business0, no
+GPU visible/ledger mutation. FullSource audit pending, cost not yet final/paid.
+Do not duplicate/restart for unchanged128-step progress. Pure CPU setup may
+overlap sole LME modelHTTPworker; it is not another modelHTTPworker. Actual
+LME snapshot active28: {'COMPLETED': 27, 'FAILED_READING': 1, 'PREPARING_INPUT': 1, 'NOT_RUN': 422}.
 Latest data/manifests/a100-development-progress-20261107-v53.json ->v52;
 previous checkpoint5a566e23. ROOT=artifacts/a100-development-20261104,
 F=ROOT/final-confirmation-v1,E=ROOT/external-own-policy-v1.
@@ -27,7 +36,7 @@ tail after actual prior exit/paid/procsabsent/reflection. Full451 nativeFAILED
 may close coverage if everyposition attempted, never rewrite native status.
 No second inference/HTTP worker or offlineCPU settlement while LME alive.
 
-MEM2ACT CPU SOURCE PREPARATION NOW FROZEN, NOT LAUNCHED at checkpoint:
+MEM2ACT CPU SOURCE PREPARATION FROZEN; actual launch recorded above:
 E/frozen-mem2act-source-preparation-v1/protocol-before-release-copy-v1.json
 and E/mem2act-source-preparation-v1-plan.json.1137code/resource files direct
 bytebound;2complete raw inputfiles8039404bytes literalcopy AFTER protocol.

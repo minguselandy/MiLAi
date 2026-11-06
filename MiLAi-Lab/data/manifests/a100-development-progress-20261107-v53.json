@@ -1,5 +1,5 @@
 {
-  "status": "ACTIVE_SEED1_QA16_MEM2ACT_FULL_SOURCE_CPU_PREPARATION_FROZEN_PRELAUNCH",
+  "status": "ACTIVE_SEED1_QA16_ONE_LME_HTTP_WORKER_AND_PURE_CPU_FULL_MEM2ACT_SOURCE_SETUP",
   "timestamp_utc": "2026-11-06T19:33:44.663299+00:00",
   "goal_status": "active",
   "goal_complete": false,
@@ -76,9 +76,17 @@
     "CUDA_VISIBLE_DEVICES": "",
     "model_network_business_constructors_or_operations_forbidden": true,
     "operational_ledger_mutated_or_second_persistent_budget_created": false,
-    "actual_dispatched": false,
+    "actual_dispatched": true,
     "accounting": "Parent measures complete child RUSAGE including import/failure. Source/setup receipt CPU is nested, never added twice. No ledger write in parent/worker; settle once only after actual exit at an eligible idle. No GNU launcher wrapper.",
-    "overlap_scope": "May overlap the sole LME model/HTTP worker because it is Source-only CPU preparation with all model/network operations forbidden, not a second inference worker or new service."
+    "overlap_scope": "May overlap the sole LME model/HTTP worker because it is Source-only CPU preparation with all model/network operations forbidden, not a second inference worker or new service.",
+    "actual_owner": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/mem2act-source-preparation-v1-owner.json",
+    "actual_worker_report": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/mem2act-source-preparation-v1-worker-report.json",
+    "running_snapshot": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/mem2act-source-preparation-v1-running-snapshot-v1.json",
+    "actual_parent_pid": 324883,
+    "actual_child_pid": 324885,
+    "prepared_sources_snapshot": 1792,
+    "all16843_Source_verification_pending": true,
+    "CPU_recorded_in_original_ledger": false
   },
   "LME_existing_worker": {
     "snapshot": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/stages-lme-v1/fixed-prefix-prediction451-v1-continuation-001-running-snapshot-v3.json",
@@ -88,12 +96,12 @@
     "status": "RUNNING",
     "client_CPU_recorded": false,
     "driver_status": "RUNNING",
-    "active_row": 18,
+    "active_row": 28,
     "native_cases": {
-      "COMPLETED": 17,
+      "COMPLETED": 27,
       "FAILED_READING": 1,
       "PREPARING_INPUT": 1,
-      "NOT_RUN": 432
+      "NOT_RUN": 422
     },
     "actual_process_commands_verified": true,
     "first8_whole_dicts_literal_equal_original": true,
