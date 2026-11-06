@@ -1,4 +1,76 @@
-# LIVE A100 EXECUTION v52: 2026-11-07
+# LIVE A100 EXECUTION v53: 2026-11-07
+
+Full original763-line goal ACTIVE/incomplete; current/previous turns PROGRESS.
+Latest data/manifests/a100-development-progress-20261107-v53.json ->v52;
+previous checkpoint5a566e23. ROOT=artifacts/a100-development-20261104,
+F=ROOT/final-confirmation-v1,E=ROOT/external-own-policy-v1.
+No subagents/SHA/checksums/fingerprints/services/second operational ledger/
+reset/refund/remote/Product writes/first-outcome retries/favorable reselection.
+GPUs0/1 unchanged; fullSource/K/menu/tasks/horizon retained, no crop/compact/
+quantization to pass. No GNU wrappers around scanners/settlers/launchers.
+
+SEED1 SEMANTIC FIRST16 now F/e3-aggregate-seed1-u32/
+first16-source-author-review-reconciliation-v1.json: C7/I4/W1/F3/U1,
+materialS8/P4/I4,nativeDEV16. Prior8whole records unchanged, each actual full
+result/failure bound to full256audit, no inherited labels or prefix extrapolation.
+All256guides and common82/101/231 additions preceded this method's semantic
+review, NOT all model runs/other answers. Authornotblind/independent. Source
+body/role/clock mechanical audits and nativeF1 unchanged. Remaining496semantic
+=seed1 16..255240 +seed2all256. Baseline C149/stress71; primaryall256 C148/
+I39/W13/F52/U4,S149/P92/I15,stress79/same256 unchanged. All4statistics pending.
+
+LME remains sole actual model/HTTP worker, continuation001 parent183645/
+child183647, noexecsession/queue. Recheck /proc commands/owner/driver for live
+progress. Originalfirst8 whole dicts retained incl row7length8192/contentNone
+ReaderF; no retry or budget/thinking/image/Source changes. Only nativeNOTRUN
+tail after actual prior exit/paid/procsabsent/reflection. Full451 nativeFAILED
+may close coverage if everyposition attempted, never rewrite native status.
+No second inference/HTTP worker or offlineCPU settlement while LME alive.
+
+MEM2ACT CPU SOURCE PREPARATION NOW FROZEN, NOT LAUNCHED at checkpoint:
+E/frozen-mem2act-source-preparation-v1/protocol-before-release-copy-v1.json
+and E/mem2act-source-preparation-v1-plan.json.1137code/resource files direct
+bytebound;2complete raw inputfiles8039404bytes literalcopy AFTER protocol.
+QAfile notparsed/displayed, no gold filtering. This is SOURCE-ONLY freeze,
+NOT final400execution protocol. Prepare all429sessions16843turns as one full
+initialbank for everyquery, through unchanged native history_sources and
+prepare_history_bank. Originalturnfields retained except offline perturn
+source_id in onlineprojection; rawfullfiles kept. Nativeuser/assistant origins,
+tool_calls originalrole insidebody/tool capture, occurred_at/object_refNone,
+observed_at captureclocknot historical occurrence; audit all16843literal bodies.
+No stored revisions/prefetch/semantic records/business/model/HTTP/ledger mutation.
+CPU worker blocks socket connections and model/client constructors. CUDA visible
+devices empty. Use evaluationCUDAinterpreter transformers4.52.3/tokenizers.21.4
+BEFORE appending HTTPsite (which has4.57.6/.22.2); other nativeSDK versions same.
+Source parent measures wholechildRUSAGE includingimports/failure, cost deferred
+to eligible originalledger idle; nested SourceCPU never summed again. No GNU
+launcher wrapper. This pure CPU Source setup may overlap sole LME inference;
+it is not a second modelHTTPworker or newservice. Need actual pid/exit/source
+audit/costclosure before claiming ready; actual400x2 remain0, final prediction/
+capture/audit/scoring/serial-owner freeze and execution still required.
+
+Prior Mem2Act catalog mock contract94327 DRAINED NEVER REPOLL; no rerun.
+Existing runtime oneguard-line extension stays outsideProduct/runtime-b64.
+Current Sourceprep freezes separate byte-identical runtime; do not edit bound
+ROOT/prepare_mem2act_full_history_source_bank_v1.py or owner/runtime while live.
+Fixed/primary configs inherit Host/24sharedcalls/read4/control8/additional8/
+return2048/obs2048/range256/menu16/max16384inclhead2048; only commonversion
+metadata and primarypolicy/checkpoint differ. Capture-only intents/adapted
+metrics later, not authorTA/leaderboard/independent-user evidence.
+
+COST idle1..27 and initialLMEwholechild/parent already paidonce; after27timers
+pending next actual no-model-worker idle. Never bill live LME or unfinished
+SourceprepCPU, never double count nested/fullclient/parent/oldtimers. Source
+parent will retain separate complete CPU cost pending actual exit/settlement.
+Unmetered author/inspection/launch/cleanup/settlement CPU unknown_not_zero.
+
+All M0-M4/B-C/D-K/fits/internal1024 audits/nativeF1 closures retained unchanged
+in v52ancestors. Old64reserved queries/nativeTEST semantics unopened,old64Source
+exposed. Full external451x2/400x2, remaining496semantic/all4stats, Source-View/
+ops/fullcosts, standalonefigures/paper/results/full763-line audit remain.
+Fullgoal NOT complete.
+
+# HISTORICAL A100 EXECUTION v52: 2026-11-07
 
 Full original763-line goal ACTIVE/incomplete; current/previous turns PROGRESS.
 Latest data/manifests/a100-development-progress-20261107-v52.json ->v51;

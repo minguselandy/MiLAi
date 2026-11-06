@@ -1,0 +1,137 @@
+{
+  "status": "ACTIVE_SEED1_QA16_MEM2ACT_FULL_SOURCE_CPU_PREPARATION_FROZEN_PRELAUNCH",
+  "timestamp_utc": "2026-11-06T19:33:44.663299+00:00",
+  "goal_status": "active",
+  "goal_complete": false,
+  "current_goal_turn_classification": "progress",
+  "previous_goal_turn_classification": "progress",
+  "previous_manifest": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/data/manifests/a100-development-progress-20261107-v52.json",
+  "previous_checkpoint_commit": "5a566e23",
+  "unchanged_full_scope": "Original763-line goal/M5 remains ACTIVE. Baseline/primary full256 quality, all1024 first native trajectories/full audits/native F1, allM0-M4/B-C/D-K/fits and costs unchanged in v52 ancestors. No score-driven seed/N/budget/scorer selection or adoption.",
+  "secondary_seed1_quality": {
+    "file": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/final-confirmation-v1/e3-aggregate-seed1-u32/first16-source-author-review-reconciliation-v1.json",
+    "positions": 16,
+    "quality_counts": {
+      "C": 7,
+      "F": 3,
+      "W": 1,
+      "U": 1,
+      "I": 4
+    },
+    "material_counts": {
+      "S": 8,
+      "P": 4,
+      "I": 4
+    },
+    "native_strata": {
+      "dev": 16
+    },
+    "prior8_whole_records_literal_equal": true,
+    "source_author_not_blind_or_independent": true,
+    "common256_source_guides_82_101_231_preceded_this_method_semantic_review": true,
+    "not_all_guides_preceded_model_execution_or_other_method_answers": true,
+    "labels_inherited_or_partial_panel_extrapolated": false
+  },
+  "Mem2Act_CPU_Source_preparation": {
+    "protocol": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-source-preparation-v1/protocol-before-release-copy-v1.json",
+    "plan": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/mem2act-source-preparation-v1-plan.json",
+    "frozen_code_resource_files_literal_bound": 1137,
+    "complete_input_copy": {
+      "passed": true,
+      "protocol_preceded_input_copy": true,
+      "files": [
+        {
+          "source": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/external/mem2act-protocol-v1/release/Mem2ACT_conversation.jsonl",
+          "frozen": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-source-preparation-v1/release/Mem2ACT_conversation.jsonl",
+          "bytes": 7345243
+        },
+        {
+          "source": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/external/mem2act-protocol-v1/release/qa_dataset.jsonl",
+          "frozen": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-source-preparation-v1/release/qa_dataset.jsonl",
+          "bytes": 694161
+        }
+      ],
+      "bytes": 8039404,
+      "all_file_bytes_literal_equal": true,
+      "QA_or_reference_values_parsed_or_displayed": false,
+      "model_HTTP_or_ledger_writes": 0,
+      "no_sha_validation": true
+    },
+    "only_common_config_version_metadata_changed_from_inherited_fixed": true,
+    "final400_execution_protocol_frozen": false,
+    "actual_released_tasks_executed": 0,
+    "purpose": "Prepare every429released session/16843turns through unchanged native Source capture, for one common initial bank used by all400queries per method. No gold-source filtering or history reduction.",
+    "future_methods": "Inherited fixed versus already-chosen primaryS0u32 only policy/checkpoint changes; actual shared-first-Host/catalog execution and audits still pending.",
+    "SDK_versions": {
+      "langmem": "0.0.30",
+      "langgraph": "1.1.10",
+      "langchain-core": "1.6.5",
+      "langgraph-checkpoint-sqlite": "2.0.11",
+      "transformers": "4.52.3",
+      "tokenizers": "0.21.4",
+      "httpx": "0.28.1"
+    },
+    "environment_reason": "HTTP environment has transformers4.57.6/tokenizers0.22.2; actual evaluation CUDA environment has4.52.3/0.21.4. Pin latter before appending common HTTP packages so the prepared freeze matches actual evaluation SDK.",
+    "CPU_only": true,
+    "CUDA_VISIBLE_DEVICES": "",
+    "model_network_business_constructors_or_operations_forbidden": true,
+    "operational_ledger_mutated_or_second_persistent_budget_created": false,
+    "actual_dispatched": false,
+    "accounting": "Parent measures complete child RUSAGE including import/failure. Source/setup receipt CPU is nested, never added twice. No ledger write in parent/worker; settle once only after actual exit at an eligible idle. No GNU launcher wrapper.",
+    "overlap_scope": "May overlap the sole LME model/HTTP worker because it is Source-only CPU preparation with all model/network operations forbidden, not a second inference worker or new service."
+  },
+  "LME_existing_worker": {
+    "snapshot": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/stages-lme-v1/fixed-prefix-prediction451-v1-continuation-001-running-snapshot-v3.json",
+    "owner": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/stages-lme-v1/fixed-prefix-prediction451-v1-continuation-001-owner.json",
+    "pid": 183645,
+    "child_pid": 183647,
+    "status": "RUNNING",
+    "client_CPU_recorded": false,
+    "driver_status": "RUNNING",
+    "active_row": 18,
+    "native_cases": {
+      "COMPLETED": 17,
+      "FAILED_READING": 1,
+      "PREPARING_INPUT": 1,
+      "NOT_RUN": 432
+    },
+    "actual_process_commands_verified": true,
+    "first8_whole_dicts_literal_equal_original": true,
+    "first_row7_failure_retried_or_rewritten": false,
+    "local_model_loads": 0,
+    "automatic_queue_second_model_HTTP_worker_or_new_service": false,
+    "whole451_audit_scoring_archive_closed": false,
+    "given_retrieval_fixed_Reader_not_autonomous_Host_or_unseen_Small": true
+  },
+  "costs": {
+    "last_actual_idle_paid": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v27.json",
+    "idle27_commands": 71,
+    "idle27_CPU_seconds": 18.560000000000002,
+    "new_offline_timers_after27": "Pending next actual no-worker gap; never settle while live tail worker exists.",
+    "live_segment_whole_CPU_HTTP_and_unknown_usage": "Not final until actual exit; no zero-cost inference.",
+    "first_LME_child_and_parent_already_paid_once": true,
+    "native_model_whole_client_parent_or_idle1_to27_rebilled": false,
+    "unmetered_author_inspection_launch_cleanup_settlement_CPU": "unknown_not_zero",
+    "offline_settlement_during_live_worker": false
+  },
+  "remaining": {
+    "semantic_of1024": 496,
+    "seed1_indices": [
+      16,
+      255
+    ],
+    "seed2_semantic_reviewed": 0,
+    "statistics": "All4full256 mainC/material/common122/gains-losses/paired20kfamilyCI/perseed/native strata/within-family3seedmean pending.",
+    "external": "LME451x2 actual prediction/audit/native scoring/Judge/scoring audit/archive; Mem2Act400x2 final freeze, full Source bank, actual shared-first-catalog own-policy execution/audits/adapted metrics.",
+    "other": "Old64reserved-query eligibility/nativeTEST unopened; old64Source exposed. Full Source-View/operations/costs/standalone figures/final paper/results/full763-line requirement audit."
+  },
+  "guardrails": {
+    "no_sha_checksums_fingerprints": true,
+    "no_subagents": true,
+    "no_services_second_ledger_reset_refund": true,
+    "no_model_first_outcome_retries_or_reselection": true,
+    "no_remote_Product_changes": true,
+    "GPUs0_1_unchanged": true,
+    "no_Source_K_menu_task_horizon_crop_compact_quantize_to_pass": true
+  }
+}
