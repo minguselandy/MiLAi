@@ -1,4 +1,60 @@
-# LIVE A100 EXECUTION v74: 2026-11-07
+# LIVE A100 EXECUTION v75: 2026-11-07
+
+Full original763-line goal ACTIVE/incomplete; current/previous turn PROGRESS.
+Latest data/manifests/a100-development-progress-20261107-v75.json ->v74;
+previous checkpointbc411065. ROOT/F/E/Q64 same; detailedv74/v73below.
+No subagents/SHA/fingerprints/services/secondledger/reset/refund/remote/
+Productwrites/model-first-outcome retry/reselection/crop/compact/quantize.
+OneactualmodelHTTPworker; GPUs0/1untouched, learnerGPU2FP32/threads4/
+MHAFalse/refcompileFalse/TF32False. Noofflineledgeropen/write whilelive,
+noGNUtimer scanner/settler/launcher. Native/whole/parent/nested/oldcost never
+addedtwice; unmeteredunknownnotzero. Do noteditboundentry/runtime.
+
+ONLY MODELHTTPWORKER LME009 parent3528533/child3528534 RUNNING/
+clientCPUFalse,actual/procverified,active178,
+{'COMPLETED': 169, 'FAILED_READING': 9, 'PREPARING_INPUT': 1, 'NOT_RUN': 272}. First177wholeeq008; ReaderF7/39/41/57/68/118/
+164/173/176retained. OnlyoriginalNOT_RUN177..450=274. Noautoqueue/execsession/
+model/recipe/thinking/Source/images/capchange. At newfirsterror waitactual
+exit/billing/procsabsent, inspectraw/reflect, explicitlyregisterONLYnative
+NOT_RUNtail. Whole451audit/nativeJudge/scoreaudit/archive requiresall
+attempted; actualnativeFAILED canbevalidfullcoveragewithoutstatusrewrite.
+008parent3487195/child3487220 actualexit1/paid/gone; first177=168COMP/
+9ReaderF. New176/ce9aa3511HTTPprompt6748/out8192/total14940,length/Nonefinal,
+reserved15452<65536,noinputoverflow,newunknown0/0. Segment3HTTP26686known,
+wholechild346.151932+parent.173800023 already nativepaidonce.
+Storage008 parent3488423/child3488424 exit0/gone/paididle38 whole
+21.959670000000003+.025061559=21.984731559000004CPU,rows174..176.
+CPUstorage009 parent3530245/child3530246 followsONLY009;
+actual/procverified,total178closedcases/1068checkpoints wholebyteeq.
+Keepimmutablebase outsidecasetrees+frozenv2optionalpersteprestore. Whole451
+sourceaudit/pairedrootfirstcall doesnotreadstep/control. No storage model/
+HTTP/ledger/autonext, wholeCPU pendingactualexit+idle.
+
+Idle1..38paidonce;38=6closedtimers.24CPU+storage00821.984731559000004CPU;
+native008/oldcostnotrebilled. Post38progress timerspendingnextactualidle,
+LME009/storagewholecostpendingexit. Staticknowncost cutoffv74remainsbefore
+LME007(afterQ64/idle36),notupdatedtoinclude007/008/live009. Exact123own
+phases+20nativeedges, knownNEWpaidCPU87091.84096111101,Hostknown25368797,
+olddebt45.39excluded,newunknown0,embeddingstateunchanged, allreproduction
+fields equalexcepttimestamp. Notfullprojectcost/GPUbusytime/$.
+
+AllQ64actual3x4333 firstoutputs/fullinput-head-argmax-untruncated audits/
+native4066known267unknown unchangedlabels/paired64query20kCI/independent
+scoreverification/reports/PNG-PDF CLOSED. PrimaryA1-A0-5.368524pp CI
+[-7.760889,-3.163341],bothaboveinitial,notHostC/pMRR/Sourceindependence;
+0judgedchanges->changeaccuracyUNAVAILABLEnot0. NoA20k/J/newfit/selection/
+adoption. Native64semanticsOPENEDafterfreeze; nativeTESTUNOPENED.
+Reviewer THISASSISTANT,notindependenthuman/originalauthors; oldC/labels/
+firstanswers unchanged. Internal1024 HostC149/148/131/115,stress71/79/62/57,
+S150/149/139/103,F40/52/51/61+allpairedstats/ops/cost/repro/qualityfigs/
+initial763line73unitaudit andD960SourceView/knownView9/oldoutput42syntheses
+closed. OldoutputlostparentCPU/lowerbound199.51kept. Mem2Actactual400x2=0,
+final1147bindings/full429sessions16843bank/public400unchanged/allLME451x2
+fullclosuresrequiredsameownerlock. Fullgoalactual451x2/400x2/finalallproject
+costs/overallfigures/finalpaper/finalcompletionauditremain. NOTcomplete or
+blocked; keepwholeoriginalscope. Previousfailureisnotreasonforrerun.
+
+# HISTORICAL A100 EXECUTION v74: 2026-11-07
 
 Full original763-line goal ACTIVE/incomplete; current/previous turn PROGRESS.
 Latest data/manifests/a100-development-progress-20261107-v74.json ->v73;
