@@ -1,4 +1,51 @@
-# LIVE A100 EXECUTION v77: 2026-11-07
+# LIVE A100 EXECUTION v78: 2026-11-07
+
+Full original763-line goal ACTIVE/incomplete; current PROGRESS, previous VERIFIED_WAIT.
+Latest data/manifests/a100-development-progress-20261107-v78.json ->v77;
+previous checkpointbcc59c95. ROOT/F/E/Q64 same; full prior detail below.
+No subagents/SHA/fingerprints/services/secondledger/reset/refund/remote/Productwrites/
+model-first-outcome retries/reselection/crop/compact/quantize. One actual modelHTTPworker.
+GPUs0/1untouched; learnerGPU2FP32/threads4/MHAFalse/refcompileFalse/TF32False.
+No offlineledgeropen/write whilemodel live; scanner/settler/launcher never GNUwrapped.
+Native/whole/parent/nested/oldcost neverdouble-add, unmetered CPUunknown_not_zero.
+Do not edit1135LME/1147Mem2Act/7Q64bound code/runtime/models.
+
+ONLY MODELHTTPWORKER LME012 parent3875079/child3875081 RUNNING/clientCPUFalse,
+actual/proc verified, active214, {'COMPLETED': 202, 'FAILED_READING': 12, 'PREPARING_INPUT': 1, 'NOT_RUN': 236}.
+Only native NOT_RUN213..450=238; first213 whole dict equal011. Reader failures
+7/39/41/57/68/118/164/173/176/204/207/212 retained; no retry/UNKNOWN/negativegold/recipechange.
+011parent3799450/child3799452 actualexit1/nativepaid/gone, first213=201COMP/12F.
+New212/01f6e679 web/pool0001 oneHTTP prompt5851/out8192/total14043,length/contentNone,
+reserved14555<65536/noinputoverflow/newunknown0/0. Segment5HTTP30400known,
+wholechild847.1021000000001+parent.151164293 already nativepaid once.
+Longfirstwebpool preparation was actualCPU/read-writeverified, then nativeREADING;
+no restart/shortenedSource. Storage011parent3799603/child3799611 actualexit0/gone/
+paid41, rows208..212, whole38.539376000000004+.027166551=38.566542551000005CPU.
+Storage012parent3875207/child3875216 actual/proc verified follows ONLY012.
+Total213closed cases/1278checkpoints wholebyteeq. Keep BOTH
+pool0000/pool0001 immutable bases outsidecasetrees; optionalperstep replay frozenv2
+restore_control(original logicalpath) first. Whole451 Sourceaudit/pairedfirstcall
+doesn'treadstepcontrol. At next firsterror/fullclosure inspectnative raw, waitactual
+model/storageexit+paid/gone, reflect then explicitly registerONLYnative NOT_RUNtail.
+No autoqueue/restart. Full451audit/nativeJudge/scoreaudit/archive pending.
+
+Idle1..41paidonce;41=8timers1.2CPU including publication checkexit1 and
+storage01138.566542551000005CPU, no old/native rebill. Post41progress timer pending
+nextactualidle. Knownpaid staticcutoff stays before007(afterQ64/idle36),
+87091.84096111101CPU/25368797Hostknown tokens, not currentallproject/GPUbusy/$.
+
+Internal4panel PNG/PDF (PNGviewed, PDFsamefigure/notseparatelyrendered), eighttraining
+worksheet6062updates96968draws108769579traintokens134189058recordedevaltokens,
+nativeCPU41674.642654265/GPUinterval9.841170150880545h alreadypaid components;
+not additionaltotalcost. UnknownE3padding/reserved/stages/TF32 andP0AouterCPUkept.
+Reviewer THISexecutionassistant not independenthuman/originalpaperauthors.
+All1024quality/stats/ops/cost,Q64all12999metrics/audits,D960+K9+oldoutput42closed.
+Q64A1-A0-5.368524pp; noA20k/B192/J/newfit/reselection/adoption/nativeTESTopening.
+Full LME451x2 audit/nativeJudge/scoreaudit/archive, Mem2Act400x2actual0,
+finalallprojectcost/finalpaper/finaloverallfigures/final763lineaudit INCOMPLETE.
+Goal NOT complete/blocked. Keep original full scope.
+
+# HISTORICAL A100 EXECUTION v77: 2026-11-07
 
 Full original763-line goal ACTIVE/incomplete; current/previous turns PROGRESS.
 Latest data/manifests/a100-development-progress-20261107-v77.json ->v76;
