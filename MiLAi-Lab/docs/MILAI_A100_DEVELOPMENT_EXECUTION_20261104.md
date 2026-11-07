@@ -6,11 +6,27 @@
 历史 worktree、原始失败与用户文档保持原状。没有使用子代理、SHA/内容指纹校验、新服务、第二账本或远端写入。
 
 本轮机器可读入口为
-[progress](../data/manifests/a100-development-progress-20261107-v66.json)。
+[progress](../data/manifests/a100-development-progress-20261107-v67.json)。
 原始数据、冻结运行时、权重、命令、计时和实际输出位于本 worktree 的 ignored
 `artifacts/a100-development-20261104/`。本记录是现有报告体系的执行摘要。
 
-## v66 当前状态（2026-11-07）：原生操作/交付/推理成本报告完成，LME006运行
+## v67 当前状态（2026-11-07）：原计划763行证据审计初版，LME006继续
+
+[原计划逐项审计](MILAI_A100_PLAN_REQUIREMENT_AUDIT_20261107.md)将全部763行归入73个
+标题/要求单元，并绑定原文及实际证据。完整UTF-8/逐单元行范围/不重不漏、紧凑版
+与完整记录及全部证据路径检查通过；不按行覆盖率宣布科研成功或整体目标完成。
+A20k/B192/J按原计划有信号门槛未触发；两个metadata只读schema假设失败的原计时
+与反思均保留，不以默认空值掩盖证据缺失或改变实验状态。
+
+内部四方法256×4质量、家族区间、操作/Source交付/推理成本、复现与图表保持v66。
+完整目标仍需LME451×2、Mem2Act400×2、旧64保留query资格、其余Source/View与全项目
+成本、最终论文/整体图表及最终完成审计五组工作。保留query/nativeTEST语义仍未打开。
+LME006父2889923/子2889928存活，active127、{'COMPLETED': 121, 'FAILED_READING': 6, 'PREPARING_INPUT': 1, 'NOT_RUN': 323}；
+首119整dict与005相同，六个Reader失败保留。纯CPU存储累计127案例/
+762检查点逐字节一致；全部post32新计时等待真实空闲窗口，活动模型期间不离线结算。
+完整763行目标持续执行，尚未完成。
+
+## v66 历史状态（2026-11-07）：原生操作/交付/推理成本报告完成，LME006运行
 
 原生1024个首结果的Source、完整操作绑定、实际wire材料、用量和完整推理CPU普查
 已形成[详细报告](MILAI_A100_CONFIRMATION256_OPERATIONS_COST_20261107.md)与

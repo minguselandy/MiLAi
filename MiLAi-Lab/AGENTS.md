@@ -1,4 +1,58 @@
-# LIVE A100 EXECUTION v66: 2026-11-07
+# LIVE A100 EXECUTION v67: 2026-11-07
+
+Full original763-line goal ACTIVE/incomplete; this/previous turn PROGRESS.
+Latest data/manifests/a100-development-progress-20261107-v67.json ->v66;
+previous checkpointa8e71c81. ROOT/F/E unchanged; all v66 details below.
+No subagents/SHA/checksums/fingerprints/services/secondledger/reset/refund/
+remote/Product writes/model-first-outcome retries/reselection. No Source/
+K/menu/task/horizoncrop/compact/quantize. GPUs0/1 untouched, GPU2 FP32/
+threads4/MHAFalse/refcompileFalse/TF32False for learner. No GNU-time on
+scanner/settler/launcher. One actual modelHTTPworker only; no offlinebill
+whilelive. Native/owner/nested/oldcost neverrebill; unknowncostnotzero.
+
+NEW original763-line requirement INITIALaudit mappedall73units, literal
+UTF8 original+perunitlines gapless/unique, actualevidencepaths/compactfull
+eq/localreportlinks passed. Tracked data/manifests/a100-plan-requirements-
+audit-20261107-v1.json and docs/MILAI_A100_PLAN_REQUIREMENT_AUDIT_20261107.md;
+ignored original-plan-requirements-audit-v1.json retains wholeoriginal.
+This is NOT finalcompletionaudit or goalcompletion. ConditionalA20k/B192/J
+nottriggered bynegativeA/Btaskresults, notunconditionalmissingruns.
+5requiredopengroups: LME451x2;Mem2Act400x2;old64reservedqueryeligibility/
+applicableprotocol;globalSource-View/ops/fullprojectcosts;finalpaper/results/
+overallfigures/finalrequirementaudit. Old64Sourceexposed; reservedquery/native
+TESTsemantics stillunopened. AnewDEV128metadata excludedold32/reserved64
+areCOUNTvalues, notIDsets. Do notinfereligibilityfromcounts.
+Retainedread-onlyprefails: v46removedoldsource_reservations key (useactual
+v30schemaforhistoricalmilestones), reserved-countlen(int) assumption
+(inspectactualtypes/counts). Both failedtimers/reflections retainedpending
+nextidle; no model/Source/ledgerstate changes. No genericfallbacklayer.
+
+ALL1024semanticquality/paired20kfamilyCI/nativeDEV185TRAIN71 and internal
+operation/Source-delivery/inferencecost/reports/reproductions/qualityPNG/PDF
+closed asv66. C149/148/131/115,common122stress71/79/62/57,S150/149/139/103,
+F40/52/51/61; noadoption/seedselection. Guide/Source/timing/nonblindlimits
+retained. HTTP590/591/565/616,tokens1985393/2214052/2136058/2187880;
+NN0/2036/1959/1971,wholechild+parentCPU816.987135111/2635.302573492/
+2546.706567207/2398.157473247,NN/loadnestednotdouble-added. All15wire
+errors classified5enum/10precontrolreadlimit. HistoricalA oneunnecessary
+repeat kept/costpaid and earlierfirstanswerrestored, notprojectneverretry.
+
+ONLY MODELHTTPWORKER LME006 parent2889923/child2889928 RUNNING/
+clientCPUFalse; actual/proccommandsverified, active127,
+{'COMPLETED': 121, 'FAILED_READING': 6, 'PREPARING_INPUT': 1, 'NOT_RUN': 323}. First119wholeequal005; failures7/39/41/57/68/118
+retained. Noautoqueue/execsession/recipechange/retry. At newfirsterror wait
+actualexit/billing/procsabsent,reflect,explicitnativeNOT_RUNtailonly.
+CPUstorage006 parent2891035/child2891050 followsONLY006;
+total127closedcases/762checkpoints wholebyteverified.
+Keepimmutablebase outsidecasetrees and frozenv2optionalpersteprestore;
+no storage modelHTTPledger/autonext. Costs pendingactualexit+idle.
+Idle1..32paid; idle32=307timers72.4899999999999CPU plusstorage005whole
+348.14992905400004CPU. Allpost32timerspendingnextactualidle.
+Mem2Actfinal1147bindings/full429sessions16843turnbank/public400 unchanged,
+Sourceverifiedpaid,actual400x2=0,allLMEfullclosuresrequiredsameownerlock.
+Do notedit boundRootentry/runtime. Fullgoal NOTcomplete.
+
+# HISTORICAL A100 EXECUTION v66: 2026-11-07
 
 Full original763-line goal ACTIVE/incomplete; this/previous turn PROGRESS.
 Latest data/manifests/a100-development-progress-20261107-v66.json ->v65;
