@@ -1,4 +1,70 @@
-# LIVE A100 EXECUTION v73: 2026-11-07
+# LIVE A100 EXECUTION v74: 2026-11-07
+
+Full original763-line goal ACTIVE/incomplete; current/previous turn PROGRESS.
+Latest data/manifests/a100-development-progress-20261107-v74.json ->v73;
+previous checkpoint5ffeb0ec. ROOT/F/E/Q64 same, v73fulldetailsbelow.
+No subagents/SHA/fingerprints/services/secondledger/reset/refund/remote/
+Productwrites/model-first-outcome retry/reselection/crop/compact/quantize.
+One actualmodelHTTPworker. GPUs0/1untouched;learnerGPU2FP32/4threads/
+MHAFalse/refcompileFalse/TF32False. Noofflineledgeropen/write whilelive;
+noGNUtimer scanner/settler/launcher. Whole/native/parent/nested/oldcost not
+addedtwice; unmeteredunknownnotzero. Do noteditboundentry/runtime.
+
+ONLY MODELHTTPWORKER LME008 parent3487195/child3487220 RUNNING/
+clientCPUFalse,actual/procverified,active174,
+{'COMPLETED': 166, 'FAILED_READING': 8, 'PREPARING_INPUT': 1, 'NOT_RUN': 276}. First174wholeeq007; earlierReaderF7/39/41/57/68/
+118/164/173retained. NativeoriginalNOT_RUN174..450=277only; noautoqueue/
+execsession/retry/cap/Source/imagechange. At newfirsterror waitactualexit/
+billing/procsabsent, inspectraw/reflect,explicitnativeNOT_RUNtailonly.
+007actualexit1/CPU paid/gone: parent3389690/child3389708, first174=
+166COMP/8ReaderF. New173/ccf29914 1HTTP prompt4863/out8192/total13055,
+length/contentNone,reserved13567<65536,noinputoverflow,newunknown0/0.
+Segment9HTTP37246known,child975.735959+parent.181641316 nativepaidonce.
+Storage007 parent3390962/child3390963exit0/gone/paid37whole62.620116737CPU
+=62.593889+.026227737,rows165..173. CPUstorage008 parent3488423/
+child3488424 followsONLY008,actualverified; total174closedcases/
+1044checkpoints wholebyteeq. Keepimmutablebase outsidecasetrees and
+frozenv2optionalpersteprestore. No storage modelHTTPledger/autonextsegment.
+Whole451audit/nativeJudge/scoreaudit/archive stillrequiresall451attempted,
+notallCOMP; givenretrievalnotautonomousHost/unseenSmall. PrimaryLMEafter
+fixedfullclosure; Mem2Actactual400x2=0/final1147bindings/full429sessions16843
+bank/public400same/allLME451x2closuresrequired sameownerlock.
+
+NEW EXACT STATIC COST CUTOFF beforeLME007 dispatch(afterQ64/idle36):123own
+A100phasesCPU76824.09398469047 inclcarriedoldv79debt45.39; +20explicit
+nativeowner/closededges exactlymatchgenericdelta10313.136976420552.
+KnownNEWgoalpaidCPU87091.84096111101=24.19217804475306CPUhours,notcurrent
+livelog/wholeprojecttotal/GPUbusytime/$; ownP04phasesincludedonce. Earliest
+newB/Cfunctionalbudgetrev48733 baseline; nonownchangedonlydynamicLaya/load.
+Hostknown/chargedtoken delta25368797,newunknown0,embeddingstateunchanged;
+old15generation/1embeddingunknownretained. Reserve counterdelta5767not
+misnamedactualsuccessfulHTTP/localNN. Namedresiduals +genericnative once,
+never wholechild+nativeagain. Lostoldoutputparent/cleanupunknown kept.
+Q64nestednative prep/inferenceCPU timings separatefromwholechild: permodel
+NNinferencewall~106.5..106.9sec vswholejob~527..539sec; remainder load/
+fullStatecheckpointserialization/IO/other notindependentlysplit, notclaimed
+Encoderlatency. Do notre-runfirstoutputs forperformance. Data/manifests/
+a100-known-paid-cost-cutoff-20261107-v1.json, docs/MILAI_A100_KNOWN_COST_
+CUTOFF_20261107.md, tools/reconcile_a100_known_paid_cost_cutoff.py; actual
+trackedreproduction allfieldsequalexcepttimestamp verified. No liveledger
+read/write/SHA/newcharge/refund. FULL cost remainsafterexternalactualjobs.
+
+Idle1..37paidonce;37=22closedtimers2.98CPU+storage00762.620116737CPU,
+no native007/oldrebill. Allpost37timers pendingnexteligibleactualidle;
+LME008/storagecostpendingactualexit. NativeQ64all3x4333/native64/20kstats/
+sourceinputaudit/independentreconcile/PNG-PDF/report CLOSED asv73. Balanced
+initial66.50876/A085.31144/A179.94292%; A1-A0-5.368524pp CI[-7.760889,
+-3.163341],notHostC/pMRR/Sourceindependent,unknownmasksunchanged,0judged
+changeaccuracyUNAVAILABLE. Nonewfit/A20k/J/reselection/adoption. Native64
+semanticsOPENED afterfreeze; nativeTESTUNOPENED. Reviewer THISASSISTANT,
+notindependenthuman/originalauthors, existingC/labels/answers unchanged.
+Internal1024 Hostquality C149/148/131/115,stress71/79/62/57,S150/149/139/103,
+F40/52/51/61+pairedstats/ops/cost/repro/qualityfigs/initial763line73unitaudit
+andD960SourceView/knownView9/oldoutput42synthesesclosed. Fullgoal actual
+451x2/400x2/finalallprojectcosts/overallfigures/finalpaper/finalcompletion
+requirementaudit remain. NOTcomplete orblocked; keepfulloriginalscope.
+
+# HISTORICAL A100 EXECUTION v73: 2026-11-07
 
 Full original763-line goal ACTIVE/incomplete; current/previous turn PROGRESS.
 Latest data/manifests/a100-development-progress-20261107-v73.json ->v72;

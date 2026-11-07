@@ -6,11 +6,28 @@
 历史 worktree、原始失败与用户文档保持原状。没有使用子代理、SHA/内容指纹校验、新服务、第二账本或远端写入。
 
 本轮机器可读入口为
-[progress](../data/manifests/a100-development-progress-20261107-v73.json)。
+[progress](../data/manifests/a100-development-progress-20261107-v74.json)。
 原始数据、冻结运行时、权重、命令、计时和实际输出位于本 worktree 的 ignored
 `artifacts/a100-development-20261104/`。本记录是现有报告体系的执行摘要。
 
-## v73 当前状态（2026-11-07）：旧64三模型全指标闭合，LME007恢复
+## v74 当前状态（2026-11-07）：静态已付成本精确核对，LME008运行
+
+[已付可观测成本截止报告](MILAI_A100_KNOWN_COST_CUTOFF_20261107.md)以LME007启动前
+静态副本为终点，123具名phase＋20实际native归属边的10313.136976秒通用增量完全
+相等；排除旧v79债务后新目标已付CPU87091.840961秒。Host known差25368797tokens，
+reserve计数差5767不冒充成功HTTP数；旧未知与embedding状态保持。完整child/native
+不重复相加，尚运行/后续/未测费用不算零。源码实际复现除时间戳外逐字段相同，无
+live账本读写、新charge或SHA；这仍不是完整项目最终总成本。
+
+LME007实际退出1/原生计量/进程消失，首174为166COMP/8ReaderF。173单次响应输出
+8192到顶、content为空，prompt4863、无输入溢出/新增未知；所有首失败保留。存储
+九案例关闭、整CPU62.620116737秒和22个post36计时2.98CPU秒在真实idle37一次支付。
+随后显式启动008，仅原生未尝试174至450共277项，父3487195/子3487220确认
+存活，active174、{'COMPLETED': 166, 'FAILED_READING': 8, 'PREPARING_INPUT': 1, 'NOT_RUN': 276}；首174整dict相同。CPU存储仅跟随008，
+累计174案例/1044检查点逐字节一致。Q64全12999指标/审计闭合保持；完整
+外部两方法、全项目最终成本与论文/图表/完成审计等尚未完成，目标继续执行。
+
+## v73 历史状态（2026-11-07）：旧64三模型全指标闭合，LME007恢复
 
 [旧64原生条件结果](MILAI_A100_RESERVED64_NATIVE_RESULTS_20261107.md)已完成3×4333首输出、
 完整输入/head/有限argmax/无截断全量审计、原生评分与逐格独立复算。balanced族宏
