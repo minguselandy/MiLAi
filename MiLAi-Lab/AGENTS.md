@@ -1,4 +1,112 @@
-# LIVE A100 EXECUTION v64: 2026-11-07
+# LIVE A100 EXECUTION v66: 2026-11-07
+
+Full original763-line goal ACTIVE/incomplete; this/previous turn PROGRESS.
+Latest data/manifests/a100-development-progress-20261107-v66.json ->v65;
+previous checkpointd225e599. ROOT/F/E same. No subagents/SHA/checksums/
+fingerprints/services/secondledger/reset/refund/remote/Product writes/model
+first-outcome retries/reselection. GPUs0/1 unchanged;fullSource/K/menu/task/
+horizon retained. No GNU wrapper scanner/settler/launcher.
+
+ALL1024quality/4x256paired20kfamily stats/qualityPNG-PDF/report/reproduction
+closed asv64. C149/148/131/115,stress71/79/62/57,S150/149/139/103,
+F40/52/51/61; noadoption/seedselection. Mainprimary-.390625pp CI[-7.421875,
+6.640625],3seedwithin-familymean-6.9010416667 CI[-12.5,-1.171875].
+F/source-author-quality-all4-methods-closeout-v1.json; tracked quality
+results/analysis/docs/figures allpassed and preserved. Samefixed122/full256,
+authornotblind/independent and guide82/101/231 timing limitations remain.
+
+NEW internal1024native operation/Source-delivery/inclusiveinferencecost
+publication DONE. Tracked data/manifests/a100-confirmation256-operations-
+cost-20261107-v1.json, tools/analyze_a100_confirmation256_operations_cost.py,
+docs/MILAI_A100_CONFIRMATION256_OPERATIONS_COST_20261107.md.
+Fulltrackedcodereproduction wholeJSON equals original excepttimestamp.
+HTTP590/591/565/616,tokens1985393/2214052/2136058/2187880,NN0/2036/1959/1971,
+wholechild+measuredparentCPU816.987135111/2635.302573492/2546.706567207/
+2398.157473247. NN/load nested, neverdouble-add. OriginalSource18932units/
+8491230chars pergroup wholebody/role/origin same. READselection/opening/
+budgetrejection/handoff/receivedmaterial separate. Final/failed-last
+receipts alloriginal_source, noView, notallinitial/historymaterialabsence.
+All15wiretoolmessages withoutnative retrieval-result event fullyclassified:
+5enumerrors(toolnotexecuted),10read-limitrejections(precontrol,zerosteps).
+No hiddenpacketloss, inferredsuccess orretries. Readonlyschema pre-readv2
+str/dictfailure retained/reflected; v3correctnativepath, timerpaid32.
+
+ONLY MODELHTTPWORKER LME006 parent2889923/child2889928 RUNNING/
+clientCPUFalse,actual/proccommandsverified,active122,
+{'COMPLETED': 116, 'FAILED_READING': 6, 'PREPARING_INPUT': 1, 'NOT_RUN': 328}. First119wholeequal005; ReaderF7/39/41/57/68/118
+retained. Only originalnativeNOT_RUNtail119..450; noautoqueue/execsession/
+recipe/thinking/Source/images/capchange. At newfirsterror waitactualexit/
+billing/procsabsent,reflect,thenexplicitnativeNOT_RUNtailonly.
+005exit1actualpaid child5395.0342120000005+parent.338231375,50HTTP230226
+known,newunknown0/0; row1181HTTPprompt4745/out8192/total12937,lengthNonefinal,
+noinputoverflow; notUNKNOWN/negativegold. Storage005exit0gone/paididle32.
+CPUstorage006 parent2891035/child2891050 followsONLY006,
+no modelHTTPledger/automaticnextsegment; CPU pendingactualexit+idle.
+Total121closedcases/726checkpoints wholebyteverified.
+Keepimmutablebase outsidecasetrees; optionalperstep frozenv2restore before
+replay. Whole451audit/pairedrootfirstcall do notread step/control.
+
+Idle1..32PAIDONCE. Idle32=307closedtimers72.4899999999999CPU + separate
+storage005whole348.14992905400004CPU. Newpost32classification/publication/
+reproduction/verification/progress timers pendingnexteligibleidle.
+Neverofflinebillwhilemodelalive; nevernative/client/nested/oldcostrebill.
+Unmeteredauthor/inspection/launch/cleanup/settleCPU unknownnotzero.
+Mem2Actfinal1147bindings/full429sessions16843turnbank/public400 unchanged,
+Sourcepaid,actual400x2=0; allLME451x2 fullclosures required bysameownerlock.
+Old64reserved-query/nativeTESTsemanticsunopened,old64Sourceexposed.
+Full externalresults/otherSource-View/ops/fullprojectcosts/overallfigures/
+finalpaper/results/full763-lineaudit remain. Fullgoal NOTcomplete.
+
+# HISTORICAL A100 EXECUTION v65: 2026-11-07
+
+Full original763-line goal ACTIVE/incomplete; this/previous turn PROGRESS.
+Latest data/manifests/a100-development-progress-20261107-v65.json ->v64;
+previous checkpointd225e599. ROOT/F/E unchanged. No subagents/SHA/checksums/
+fingerprints/services/secondledger/reset/refund/remote/Product writes/model
+first-outcome retries/reselection. GPUs0/1 unchanged;fullSource/K/menu/task/
+horizon retained. No GNU wrapper scanner/settler/launcher.
+
+ALL1024quality/4x256family20kstats/PNG/PDF/report/trackedcode reproduction
+closed asv64. Main149/148/131/115,stress71/79/62/57,S150/149/139/103,
+F40/52/51/61; noadoption/seedselection. Fullnew operations/Source-delivery/
+inferencecost census F/operations-source-delivery-inference-cost-all4-v1.json
+actualexit0. HTTP590/591/565/616,tokens1985393/2214052/2136058/2187880,
+NN0/2036/1959/1971; wholechild+parentCPU816.987135111/2635.302573492/
+2546.706567207/2398.157473247. Sourcebody/role/origin equality and full
+common native-return/wirepacket equality passed; unmatched wire3/6/3/3
+need exacterrorclassification beforepublication. READselection/opening/
+budgetrejection/actualhandoff/receivedranges independent. No SourceView
+material appeared in final/failed-last receipts (alloriginal_source),
+not proof allinitial/historymaterial absent. Fullreportpublication next.
+Readonlyschema pre-readv2 failedstr-vs-dict, reflected beforemodel/ledger;
+v3directnativepath successful, failedtimerretained, notzero/free.
+
+LME005 parent2465168/child2465173 ACTUALEXIT1/paidonce/gone, nativeFAILED,
+first119=113COMP/6ReaderF,NOT_RUN332. Newrow118/qid8e21c6e5 1HTTP,
+prompt4745/output8192/total12937,finishlength/contentNone,noinputoverflow,
+knownusage/newunknown0/0. First69wholeoldrecords unchanged, failures
+7/39/41/57/68/118 retained; no retry/UNKNOWN/negativegold orrecipechange.
+Segment50HTTP/230226known,child5395.0342120000005+parent0.338231375
+already nativepaidonce. Storage005 parent2466074/child2466075 ACTUALEXIT0/
+gone, rows69..118=50 closed; whole348.123234+0.026695054 CPU pendingidle32.
+Total119closedcases/714controlcheckpoints wholebyteverified. Keepimmutable
+base outsidecasetrees, frozenv2restore optionalperstep before replay.
+NO MODELHTTPWORKER LIVE at thischeckpoint. Explicitmodel006plan registered
+ONLYnativeNOT_RUN119..450=332, frozencheck-onlyreadyTrue/1135bindings.
+CPUstorage006protocol/plan also registered4samecodebindings, notlaunched.
+After latestactualidle32 paid, explicitlylaunch006 then boundedstorage006;
+neverautomaticqueue/retry. Mem2Actfinal1147bindings/full429sessions16843
+turnbank/public400 unchanged, actual400x2=0, fullLME451x2closures required.
+
+COST idle1..31paid; allpost31timers actualclosed incl schemafailure,
+all4stats/reproduction/figures/census/006prep/progresspendingidle32 plus
+separatestorage005wholeCPU348.149929054. Neverrebillnative005 child/
+parent/nested/oldcost. Unmeteredauthor/inspection/launch/cleanup/settleCPU
+unknownnotzero. Old64reservedquery/nativeTESTunopened,old64Sourceexposed.
+Full externalresults/otherSource-View/ops/fullprojectcosts/overallfigures/
+paper/results/full763-lineaudit remain. Fullgoal NOTcomplete.
+
+# HISTORICAL A100 EXECUTION v64: 2026-11-07
 
 Full original763-line goal ACTIVE/incomplete; this/previous turn PROGRESS.
 Latest data/manifests/a100-development-progress-20261107-v64.json ->v63;
