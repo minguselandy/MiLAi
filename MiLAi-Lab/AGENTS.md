@@ -1,4 +1,61 @@
-# LIVE A100 EXECUTION v59: 2026-11-07
+# LIVE A100 EXECUTION v60: 2026-11-07
+
+Full original763-line goal ACTIVE/incomplete; current/previous turns PROGRESS.
+Latest data/manifests/a100-development-progress-20261107-v60.json ->v59;
+previous checkpointf3313922. ROOT/F/E same. No subagents/SHA/checksums/
+fingerprints/services/secondledger/reset/refund/remote/Product writes/
+model-first-outcome retries/reselection. GPUs0/1 unchanged;fullSource/K/menu/
+tasks/horizon retained. No GNU wrapper on scanner/settler/launcher.
+
+SEED1 ALL256 SEMANTIC QUALITY CLOSED:
+F/e3-aggregate-seed1-u32/all256-source-author-quality-closeout-v1.json,
+C131/I53/Q0/W9/F51/U12,materialS139/P105/I12/U0. Main131/256;
+common122stress withholds69C ->62/256. DEV185 C97/I34/W6/F37/U11,
+S102/P73/I10,stress43/185; TRAIN71 C34/I19/W3/F14/U1,S37/P32/I2,
+stress19/71. All31previousprefix record dicts literal unchanged, raw full
+answers/failed bindings/guides/mask/families equal. All82/101/231 additions
+predate seed1 semanticreview but not all modelruns/other-method answers;
+authornotblind/independent, no inheritedlabels/retry. Extra229 full63Source
+shows ISOLATION designed as comparison baseline, does not establish extra
+claim previousmodel;U/S retains correct6comparator core without inventing
+the opposite historical fact. Earlier110/128/167/182 originalSource reviews
+unchanged. Remaining256=seed2all256; all4 mainC/material/common122, paired
+20kfamilyCI, perseed/within-family3seedmean/nativeDEV185TRAIN71 still pending.
+Baseline149/stress71,primary148/stress79/all4nativeF1 unchanged. No adoption.
+
+ONLY MODELHTTPWORKER LME005 parent2465168/child2465173 RUNNING/clientCPUFalse,
+both/proccommandsverified; snapshot active85, {'COMPLETED': 80, 'FAILED_READING': 5, 'PREPARING_INPUT': 1, 'NOT_RUN': 365}.
+First69 whole records equal004; prior failures7/39/41/57/68 retained. No
+autoqueue/execsession/modelretry/recipe/thinking/Source/image changes.
+At newfirsterror wait actualexit/billing/procsabsent, reflect, then explicit
+nativeNOT_RUNtail only. Whole451audit/nativeJudge/scoreaudit/archive remain;
+givenretrieval is notautonomousHost/unseenSmall. CPU storage005 parent
+2466074/child2466075 onlynamed005, stored rows[69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84];
+total85closedcases/510completecheckpoints wholebyteverified.
+Keep immutableexternalbase and optional perstep restore frozenv2 before
+native replay. Whole451audit/pairedrootfirstcall do not read step/control.
+No modelHTTPledger/automaticnextsegment. AllCPU pending actualexit+idle.
+
+MEM2ACT final1147bindings/public400 frozen asv58; actual400x2still0.
+Full429sessions16843turn bank verified/paid1244.593596831idle28, full
+query/schema projection/no onlinegold.7no sources/16no match/3partial/
+11missingIDs/1schemamismatch/341components retained. Historical Source
+exposure disclosed. Actual owner waits allLME451x2 prediction/score/archive
+closures under same stage lock. Keep bound entry/runtime sources unchanged;
+actual400firstHost/Source/SDK/catalog/NN audits/adaptedmetrics/scoreaudits/
+post-pairedscorearchives still required. No authorTA/leaderboard claim.
+
+COST idle1..31paid, idle31 13timers22.32CPU+storage00481.819887883once.
+Allafter31timers incl fullseed1closeout pending nextactualidle. Never settle
+offline whilemodelworkerlive or double native/client/parent/nested/oldcost.
+Author/inspection/patch-rejection/launch/cleanup/settle unmeteredunknownnotzero.
+One AddFile patch-header typo rejected before anywrite, corrected Add File;
+no model/native/ledger effect. All historicalclosures unchanged. Old64
+reserved-query/nativeTESTsemantics unopened,old64Sourceexposed. Externalfull
+results/seed2all256/all4stats/Source-View/ops/fullcosts/figures/paper/results/
+full763-lineaudit remain. Fullgoal NOT complete.
+
+# HISTORICAL A100 EXECUTION v59: 2026-11-07
 
 Full original763-line goal ACTIVE/incomplete; current/previous turns PROGRESS.
 Latest data/manifests/a100-development-progress-20261107-v59.json ->v58;
