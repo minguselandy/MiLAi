@@ -6,11 +6,39 @@
 历史 worktree、原始失败与用户文档保持原状。没有使用子代理、SHA/内容指纹校验、新服务、第二账本或远端写入。
 
 本轮机器可读入口为
-[progress](../data/manifests/a100-development-progress-20261107-v57.json)。
+[progress](../data/manifests/a100-development-progress-20261107-v58.json)。
 原始数据、冻结运行时、权重、命令、计时和实际输出位于本 worktree 的 ignored
 `artifacts/a100-development-20261104/`。本记录是现有报告体系的执行摘要。
 
-## v57 当前状态（2026-11-07）：seed1前160，全库Mem2Act接线通过，第四次Reader首失败保留
+## v58 当前状态（2026-11-07）：Mem2Act完整协议/400公有输入冻结，第五次LME首失败保留
+
+Mem2Act完整执行协议已冻结，1147代码/资源逐字节绑定；协议之后从此前已披露的
+Source-only快照复制完整两文件8039404字节，再投影400原query/schema，全部整dict
+相同，预测输入不含参考call/来源lineage/complexity。保留7无声明来源、16无匹配、
+3部分缺失、11缺失ID及1schema/reference名称不匹配，不删项修补或gold过滤。
+共同429会话16843回合库保持，341来源会话组件不当独立用户；不声称全历史字节未接触。
+
+完整400只读Source/SDK/角色时钟/Store/Saver/目录/provider/NN审计、串行owner、最早
+整首结果finalizer、独立改编评分/整payload审计、配对评分后无损归档入口均已实现并
+冻结。owner复用LME同一stage锁，必须等LME两方法全预测/评分/归档实际闭合；最终
+check-only真实返回未就绪，因此Mem2Act未启动，实际400×2为0。固定400全审须先于
+主方法同首Host回放，基线runtime须留到主方法及两方法全审/评分审计之后才归档。
+
+新增只读组件实际退出0：全16843 Source固定fixture及16844首Host前Source、1份实际
+SDKpacket重建、Store/Saver/world/apps一致；另以8次既有真实NN/55257输入tokens核对
+完整before/菜单/绑定/头/finite argmax和ID顺序，合成观察中断边界也保留完整数据。
+无新NN/分词/HTTP/账本或真实400项；已有fullbank IO合成接线与真实NN效果证明分开。
+Actual owner/cost/audit/metrics/archive须实际执行，不能由组件通过代替。
+
+LME004已真实退出1，整子1171.674556CPU与parent0.254696611已计一次；11HTTP64100
+已知tokens、新增unknown0/0。当前64完成、5首失败、382未尝试，索引68同类8192
+输出上限/最终正文为空，prompt5707/预留14411<65536，误差0，非输入溢出。前58整dict
+保持，所有首69结果/失败保留，只登记69–450为005，当前尚未启动。CPU存储004也
+已退出0、11项处理完成，累计69案例/414检查点完整字节核对；81.793699+0.026188883
+CPU及after30全部闭合计时待idle31。seed1语义仍前160，余352；全量四方法主统计、
+外部实际结果、完整成本/图表/论文与763行要求审计继续执行。
+
+## v57 历史状态（2026-11-07）：seed1前160，全库Mem2Act接线通过，第四次Reader首失败保留
 
 seed1前160整答/全部实际文本逐条审阅并绑定：C85/I27/W5/F34/U9，材料S89/P62/I9，
 DEV160，旧128整记录不改。余352语义，未继承标签或外推前缀；四方法全量主C/材料/

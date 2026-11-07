@@ -1,4 +1,73 @@
-# LIVE A100 EXECUTION v57: 2026-11-07
+# LIVE A100 EXECUTION v58: 2026-11-07
+
+Full original763-line goal ACTIVE/incomplete; current/previous turns PROGRESS.
+Latest data/manifests/a100-development-progress-20261107-v58.json ->v57;
+previous checkpoint85af7565. ROOT/F/E same. No subagents/SHA/checksums/
+fingerprints/services/secondledger/reset/refund/remote/Product writes/
+model-first-outcome retries/reselection. GPUs0/1 unchanged;fullSource/K/menu/
+tasks/horizon retained. No GNU wrapper on scanner/settler/launcher.
+
+MEM2ACT FINAL400x2 EXECUTION PROTOCOL NOW FROZEN:
+E/frozen-mem2act-v1/protocol-before-public-task-projection-v1.json.
+1147code/resource files directbytebound; raw2files8039404 copied AFTER this
+protocol from earlier disclosed Source-only snapshot. Actual public400 query/
+schema projection passed allwhole dicts; no gold/ref/lineage onlinefields.
+All400 retained:7no declared sources,16no matched,3partial,11missingIDs,
+1schema/reference name mismatch,341components NOTindependentusers. Full
+429sessions16843turn bank remains common. No historical-unseen byte/semantic
+claim. Projection used no modelHTTP/business/ledger. Actual400x2 remains0.
+
+Full400 readonly audit, boundedserial owner, earliest-whole-first-result
+finalizer, separate adaptedscore+payload audit and post-paired-score lossless
+archive entries implemented/frozen. Same stage lock as LME, all actualLME451x2
+prediction/score/archive closures required before model launch. Actual final
+owner check-only returns readyFalse PRIOR_LME_EXTERNAL_STAGE_NOT_CLOSED,
+not started. No autoqueue or alternate runtime/newmodel. Fixed full400
+Source/SDK/catalog/provider audit must precede primary pairedreplay; all400
+first Host captures must be replayable. Do NOT archive baseline runtimes before
+primary+bothfullaudits+scoreaudits. Final frozen entries/sourcebindings must
+stay unchanged while used; any later readonly-analysis fixes get explicit
+evidence/version without task rerun. No authorTA/leaderboard claim.
+
+New readonly component contracts actual0: full16843 Source fixed fixture,
+16844pre-first rows,1nativeSDKpacket, Store/Saver/world/apps equality;8retained
+actualinternalNN outputs55257tokens fullbefore/menu/bindings/head/finiteargmax/
+IDorder, plus synthetic before/after-return interruption boundaries. No new
+NN/tokenizer/HTTP/ledger or actual400 task in these checks. Sessions3815/72558
+DRAINED neverrepoll. Prior fullbank IO v2 passed33686Sources/firstwire equality,
+v1fixturebudget failure remains retained, allSource preparation paidatidle28.
+
+LME004 ACTUALLY EXITED1; parent714659/child714676 absent, clientCPU paidonce
+1171.674556+parent.254696611,11HTTP64100known,newunknown0/0. First69 now64COMP/
+5ReaderF/382NOTRUN; failures7/39/41/57/68 retained. Row68 againlength8192/
+contentNone,prompt5707/reserved14411<65536,error0. Priorfirst58 whole equal.
+Only untouched69..450382 explicitly registered as005, check-onlyreadyTrue,
+NOTLAUNCHED. Need actualidle31 before explicitlaunch; no automated queue.
+Whole451audit/nativeJudge/score/archive remain, not accuracy certification.
+
+CPU storage004 ACTUALLY EXITED0; parent715656/child715657 absent. All11rows
+58..68 stored,69closedcases/414fullcheckpoints, wholebyte reconstruction
+verified before raw removal. Complete child81.793699+parent.026188883 pending
+idle31 separatephase. One-named005 plan samefrozenv3code, NOTLAUNCHED.
+Preserve sharedbase outside case/output trees. Optional per-step replay must
+use frozenv2 restore_control; whole451audit/pairedrootfirstcall do notread
+step/control.json. Never share mutableSQLite/Source/input/queue.
+
+SEED1 semantic stillfirst160 C85/I27/W5/F34/U9,materialS89/P62/I9,DEV160;
+old128 whole equal. Remaining352=seed1 160..25596 +seed2all256. Authornotblind/
+independent, no inheritedlabels/prefix extrapolation. Baseline149/stress71,
+primary148/stress79/same256/all4nativeF1 unchanged. All4mainC/material/common122/
+familyCI/perseed/within-family3seedmean/nativeDEV185TRAIN71 pending.
+idle1..30 paid; after30 newclosedtimers+storage004CPU pending31. No nested/
+native/client/parent/earlier rebill; unmeteredauthor/inspection/launch/cleanup/
+settlement unknownnotzero. Never offlinebill whilemodelworkerlive.
+
+AllM0-M4/B-C/D-K/fits/internal1024/audits/nativeF1 retained. Old64reserved
+queries/nativeTESTsemantics unopened;old64Sourceexposed. Actualexternalfull
+results,352semantics/all4stats, Source-View/ops/fullcosts/figures/paper/results/
+full763-line audit remain. Fullgoal NOT complete.
+
+# HISTORICAL A100 EXECUTION v57: 2026-11-07
 
 Full original763-line goal ACTIVE/incomplete; current/previous turns PROGRESS.
 Latest data/manifests/a100-development-progress-20261107-v57.json ->v56;
