@@ -1,4 +1,66 @@
-# LIVE A100 EXECUTION v71: 2026-11-07
+# LIVE A100 EXECUTION v72: 2026-11-07
+
+Full original763-line goal ACTIVE/incomplete; current/previous turn PROGRESS.
+Latest data/manifests/a100-development-progress-20261107-v72.json ->v71;
+previous checkpoint02684fee. ROOT/F/E/Q64 same; v71/v70/v69details below.
+No subagents/SHA/fingerprints/services/secondledger/reset/refund/remote/
+Productwrites/model-first-outcome retry/reselection/crop/compact/quantize.
+Oneactualmodelworker, GPUs0/1untouched;GPU2FP32/4threads/MHAFalse/
+refcompileFalse/TF32False. Noofflineledgeropen/write whilelive. NoGNUtimer
+scanner/settler/launcher; nested/model/owner/oldcost neverrebill,unknownnot0.
+
+ONLY ACTUAL MODEL WORKER Q64A1 parent3341898/child3341903 RUNNING/
+clientCPUFalse,actual/procverified,native{'COMPLETED': 2226, 'RETURNED_PENDING_VALIDATION': 1, 'NOT_RUN': 2106} active2226.
+Q64/stages/reserved64-a1-prediction-v1-owner.json; detachednoexecsession.
+ActualinferenceVERIFIED; HTTP0/goldnotloaded. Initial4333+A04333 nativeCOMP,
+allfullinput/head/finiteargmax/truncFalseaudits PASSED, actualexit0/paid/gone.
+Initialparent3257111/child3257116 wholeCPU547.449487+.222153077=
+547.671640077;A0parent3300729/child3300733whole543.132255+.17002964=
+543.30228464. Each1052118inputtokens/4333forwards, all4333tokensperposequal.
+GPU2jobintervals.14980148817360814/.14958052642979763hours inclload/IO.
+NO effectscoresyet. AfterA1actualexit/wholeCPU paid/procsabsent, runfrozen
+Q64/frozen-v1/bootstrap_reserved64_native_sdk_v1.py HTTP_SITE
+Q64/frozen-v1/audit_score_reserved64_native_v1.py PROTOCOL audit --ownerA1
+withCUDAPY/PYTHONPATH runtime-b64/src:runtime-b64/tools/CUDA_VISIBLE_DEVICES
+empty forpureCPU audit. Then samefrozenentry PROTOCOL score (no--owner)
+ONLYafterall3fullaudits. Nativeknownlabels/unknownmasks stayunchanged.
+Then independentall3pred/scorerreconcile andconditionalquery64pairedreport,
+notHostC/pMRR/Sourceindependentclaim. No weights/scorer/7boundRootentry edits.
+Native64semanticprojectionOPENED afterfreeze; nativeTESTstillUNOPENED.
+Source/answersC materialauthorreview =THISASSISTANT, notindependenthuman.
+Q64all4333incl267unjudged,64queryfam,4066nativeknown,1884stable/267unknown/
+0change (changeaccuracyUNAVAILABLEnot0),3preselectedE1u16/A0u2104/A1u2104.
+7new+1135basebindings,18weight2034760045bytes byteeq. No autoqueue/retry.
+
+LME006closed165=158COMP/7ReaderF, NativeCPU+storagepaid33/procsgone.
+Explicit007ONLYnativeNOT_RUN165..450=286 registerednotlaunched. Newbounded
+storage007plan+protocol prepared4samecodebindings, notlaunched; followONLY007
+AFTERactual007ownerRUNNING/procverified. No LMEmodelworkerlive now. Resume007
+originalrecipe afterQ64closedstages/eligibleidle; thenfull451audit/native
+ReaderJudge/scoreaudit/archive, primaryLME; Mem2Actactual400x2=0/final1147
+bindings/full429sessions16843bank/public400same/allLMEfullclosuresrequired.
+Idle1..35paidonce:35=5timers4.69CPU, A0nativewholecost notrebilled.
+Post35LME007storageprep/progress timers pendingnextactualidle, A1costpending
+exit. Need ordinaryscore/audits/sourceNative closure beforeidle36/launch007.
+
+NEW controlsynthesis docs/MILAI_A100_D_KNOWN_VIEW_OLD_OUTPUT_CONTROLS_20261107.md
+and data/manifests/a100-D-knownView-old-output-control-synthesis-20261107-v1.json.
+KnownView9=3Sourcefamiliesx3methods,8actualHTTP/1baselineA05preflight0HTTP
+kept; gradesC0/Q4/W4/F1,21Viewoccurrences10payloads. Notall3correctedHost
+frames matchedforA05; no retry. Oldoutput42=7familiesx3methodsx2,40HTTP,
+2capacitypreflightcellskept,gradesC22/F9/Q7/W4,49Viewoccurrences16payloads.
+ExistingHostknowledge/messagesremaincommon; changesonlyextraSourceacquisition;
+HostgenerationseedUNMATCHED. Lostparentmonitor didnotrestartexperiment:
+CPUchildknownlower199.51 inclnative/load116.4836978450121+residual83.02630215498789;
+lostparent/unobservedcleanupunknown, nofakeexit0. No regrade/calls/ledgerwrite.
+Dnew32all960SourceView/ops synthesis also done:42/25/0receivedrefs,163/117/0
+occurrences inclK, USE_VIEW0/3/0,REFRESH59/54/0. FaithfulViewcanbestale,
+E3localgain NOTView-reuse evidence. Internal1024quality/stats/ops/cost/repro/
+qualityfigs/initial763line73unitaudit remainclosed; fullgoalnotcomplete.
+Full actualQ64/all451x2/400x2/globalcosts/overallfigs/finalpaper/finalaudit
+remain, keepwholeoriginalscope. No Goalcomplete frompreparation orpartial.
+
+# HISTORICAL A100 EXECUTION v71: 2026-11-07
 
 Full original763-line goal ACTIVE/incomplete; current/previous turn PROGRESS.
 Latest data/manifests/a100-development-progress-20261107-v71.json ->v70;

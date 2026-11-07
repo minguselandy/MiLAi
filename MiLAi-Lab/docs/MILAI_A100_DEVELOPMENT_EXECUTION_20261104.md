@@ -6,11 +6,25 @@
 历史 worktree、原始失败与用户文档保持原状。没有使用子代理、SHA/内容指纹校验、新服务、第二账本或远端写入。
 
 本轮机器可读入口为
-[progress](../data/manifests/a100-development-progress-20261107-v71.json)。
+[progress](../data/manifests/a100-development-progress-20261107-v72.json)。
 原始数据、冻结运行时、权重、命令、计时和实际输出位于本 worktree 的 ignored
 `artifacts/a100-development-20261104/`。本记录是现有报告体系的执行摘要。
 
-## v71 当前状态（2026-11-07）：旧64初始模型全4333审计通过，A0实际运行
+## v72 当前状态（2026-11-07）：旧64初始与A0全审计关闭，A1实际运行
+
+初始/A0各4333原生完成、完整输入/head/有限logits/argmax无截断全审计通过，真实
+退出0/CPU付费/进程消失。两者逐格input_tokens相同、各1052118tokens；A0完整
+child＋parent为543.30228464CPU秒，未重复计量。idle35一次支付5个关闭计时4.69秒后，
+显式启动唯一A1父3341898/子3341903，{'COMPLETED': 2226, 'RETURNED_PENDING_VALIDATION': 1, 'NOT_RUN': 2106}，条件VERIFIED。
+效果统计仍待A1真实关闭与审计之后，三模型统一离线评分；LME007尚未启动。
+
+[已知View与旧输出控制综合](MILAI_A100_D_KNOWN_VIEW_OLD_OUTPUT_CONTROLS_20261107.md)
+保留9＋42首格、预检失败、Host随机生成未匹配、旧输出父监测缺失及199.51CPU已知
+下界，不臆造退出码/零清理开销，不把小TRAIN诊断外推一般性因果结论。新32的960项
+Source/View/操作综合保持v71，无新调用或改标签。LME007及仅跟随该段存储计划准备
+未启动；完整外部、旧64剩余实际评测与全项目交付仍继续，目标尚未完成。
+
+## v71 历史状态（2026-11-07）：旧64初始模型全4333审计通过，A0实际运行
 
 初始模型4333格全部原生完成、实际退出0/整段CPU547.671640077秒一次支付、父子
 进程消失；完整4333输入、head、有限logits/argmax/无截断审计通过。真实idle34支付
