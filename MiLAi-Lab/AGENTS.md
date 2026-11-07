@@ -1,4 +1,56 @@
-# LIVE A100 EXECUTION v61: 2026-11-07
+# LIVE A100 EXECUTION v62: 2026-11-07
+
+Full original763-line goal ACTIVE/incomplete; current/previous turns PROGRESS.
+Latest data/manifests/a100-development-progress-20261107-v62.json ->v61;
+previous checkpointa92fec3e. ROOT/F/E same. No subagents/SHA/checksums/
+fingerprints/services/secondledger/reset/refund/remote/Product writes/
+model-first-outcome retries/reselection. GPUs0/1 unchanged;fullSource/K/menu/
+tasks/horizon retained. No GNU wrapper on scanner/settler/launcher.
+
+SEED1 ALL256 CLOSED unchanged: C131/I53/Q0/W9/F51/U12;S139/P105/I12/U0,
+main131/stress62 same256. DEV185C97/I34/W6/F37/U11,S102/P73/I10,stress43;
+TRAIN71C34/I19/W3/F14/U1,S37/P32/I2,stress19. Baseline149/stress71,
+primary148/stress79/all4nativeF1 unchanged. No seedselection/adoption.
+SEED2 FIRST96 now literalbound: C46/I24/W5/F18/U3;materialS38/P51/I7,
+nativeDEV96. All prior8..88whole recorddicts unchanged. No inheritedlabels/
+partial extrapolation; allcommon256guides/82/101/231 predateseed2semantic
+review but notall modelruns/otheranswers; authornotblind/independent.
+Extra41 scannedall84originalSource: explicitAristoReasoningChallenge,
+not answer's Abstraction/ReasoningCorpus; W/P, no outsideacronymrepair.
+Extra27 unresolvedGoogleTranslate attributionU/S unchanged. 56answer
+explicitly distinguishes327dialoguecharacters from45821HLAparentpool,
+valid scoped literal-dataset alternative. 81industrialresearch/access
+conditions do notestablishcommerciallicense:U/S, notknownprohibition.
+Remaining160=seed2indices96..255. Fullseed2closeout/all4mainC/material/
+common122/gainsloss/perseed/within-family3seedmean/20kpairedfamilyCI/native
+DEV185TRAIN71 stillpending. Commonmask/frozen256denom unchanged.
+
+ONLY MODELHTTPWORKER LME005 parent2465168/child2465173 RUNNING/clientCPUFalse,
+actual/proccommandsverified; active94, {'COMPLETED': 89, 'FAILED_READING': 5, 'PREPARING_INPUT': 1, 'NOT_RUN': 356}.
+First69wholeequal004, earlier7/39/41/57/68ReaderF retained. No modelretry/
+autoqueue/execsession/recipe/thinking/Source/image changes. At newfirsterror
+wait actualexit/billing/procsabsent,reflect, then explicitnativeNOT_RUNtail.
+Whole451audit/nativeJudge/scoreaudit/archive required; givenretrieval is
+notautonomousHost/unseenSmall. CPU storage005 parent2466074/child2466075
+one segmentonly, storedrows[69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93]; total94cases/
+564completecheckpoints wholebyteverified. Keep externalimmutablebase,
+optionalpersteprestore frozenv2 before replay; whole451audit/pairedrootfirst
+call do notread step/control. No modelHTTPledger/automaticnextsegment;
+allCPU pendingactualexit+idle. No Source/DB/historycrop.
+
+MEM2ACT final1147bindings/public400/full429sessions16843turnbank frozen,
+verified/paid asv61. Actual400x2still0; allLME451x2 actualprediction/score/
+archiveclosures required bysameownerlock. Do notedit boundentry/runtime.
+ActualfirstHost/Source/SDK/catalog/NN audits/adaptedmetrics/scoreaudits/
+post-pairedscorearchive evidence remains. No authorTA/leaderboardclaim.
+COST idle1..31paid;allpost31timers incl seed2first96/Source41/progress pending
+nextactualidle. Neverofflinebillwhilemodelalive or double native/client/
+parent/nested/oldcost. Unmeteredauthor/inspection/launch/cleanup/settleCPU
+unknownnotzero. Old64reserved-query/nativeTESTsemantics unopened,
+old64Sourceexposed. Full externalresults/160semantic/all4stats/Source-View/
+ops/fullcosts/figures/paper/results/full763-lineaudit remain. NOT complete.
+
+# HISTORICAL A100 EXECUTION v61: 2026-11-07
 
 Full original763-line goal ACTIVE/incomplete; current/previous turns PROGRESS.
 Latest data/manifests/a100-development-progress-20261107-v61.json ->v60;
