@@ -1,4 +1,56 @@
-# LIVE A100 EXECUTION v67: 2026-11-07
+# LIVE A100 EXECUTION v68: 2026-11-07
+
+Full original763-line goal ACTIVE/incomplete; this/previous turn PROGRESS.
+Latest data/manifests/a100-development-progress-20261107-v68.json ->v67;
+previous checkpoint913c7c57. ROOT/F/E same; detailedv67/v66 below.
+No subagents/SHA/checksums/fingerprints/services/secondledger/reset/refund/
+remote/Product writes/model-first-outcome retry/reselection/crop/compact/
+quantization. GPUs0/1 unchanged; one modelHTTPworker; no liveofflinebill.
+No GNUtimer scanner/settler/launcher. Unknowncostnotzero, nestedneverrebill.
+
+NEW reserved64 metadata: original native shared-corpus query protocol,
+64uniquegroups allnativedev/new_query_family,127newrows(63x2+1x1),prior
+rows0/prioranchors0/newDEV128overlap0. All64wholerecords parent+reservation
+literal equal. data/manifests/a100-reserved64-query-metadata-qualification-
+20261107-v1.json; docs/MILAI_A100_RESERVED64_QUERY_SCOPE_20261107.md.
+Semantics/labels remainUNOPENED; nativeTESTunopened. NOT64newdocuments/
+independentSourcehistories,notHost256confirmation. EvalNOTADMITTED: next
+must bind appropriatefixedsavedmodels/nativeconditional input+targetmask/
+scoring before protectedsemanticprojection; separateconditionalsecondary
+estimand fromautonomousHost. Nativeweaknegatives/unknownmask preserved,
+no arbitraryfixed-prefix-as-binarybaseline. No A20k/B192/J triggered.
+Parentmetadata path from a-newdev128-groups.json -> allocated131072-v1/
+groups.json; sibling confirmation64-reservation-v1.json, confirmation-
+reservation-exposure-v1.json, protocol.json, conditional-dev32-audit-v1.json.
+Parentgroups33413:26723train/6688dev/2excluded, no confirmationsplit;
+reserved64 is explicitsubset of nativedev. Do not inferIDsfromcounts.
+
+NEW docs/MILAI_A100_DEVELOPMENT_RESULTS_DRAFT_20261107.md integrates
+P0/A/B/C/D/frozen256/cost/exposure/retainedfailure+losslessstorage. INTERNAL
+DRAFT, notfinalpaper. Numeric tables deriveclosedartifacts; allpaths passed.
+Primaryseed0 predates secondaryseed outcomes, explicit; Source-author not
+blind/independent, common122afterbaseline80/primary16, guide82/101/231
+timinglimits unchanged. C149/148/131/115;stress71/79/62/57,S150/149/139/103,
+F40/52/51/61, noadoption. All1024quality/stats/ops/costreports/reproductions/
+PNG-PDF and initial763line73unitaudit closed asv67, notfullgoalcompletion.
+
+ONLY MODELHTTPWORKER LME006 parent2889923/child2889928 RUNNING/
+clientCPUFalse;actual/proccommandsverified,active135,
+{'COMPLETED': 129, 'FAILED_READING': 6, 'PREPARING_INPUT': 1, 'NOT_RUN': 315}. First119wholeequal005; firstReaderF7/39/41/57/68/
+118 retained. NativeNOT_RUNtailonly, noautoqueue/execsession/recipechange.
+At newfirsterror waitactualexit/billing/procsabsent,inspectraw,reflect,
+explicitnativeNOT_RUNtailonly. CPUstorage006 parent2891035/child2891050
+followsONLY006; total135closedcases/810checkpoints wholebyteverified.
+Keepimmutablebase+frozenv2optionalrestore; noSource/DB/activefile changes.
+Idle1..32paidonce;32=307timers72.4899999999999CPU+storage005348.14992905400004.
+Allpost32timers inclmetadata/audit/draft pendingnextactualeligibleidle.
+Mem2Actfinal1147bindings/full429sessions16843turnbank/public400 unchanged,
+Sourceverifiedpaid,actual400x2=0; allLMEfullclosuresrequiredsameownerlock.
+Full external451x2/400x2/native+adaptedscoreaudits/archives, old64evalcontract,
+globalSource-View/ops/allprojectcosts/finalpaper/overallfigures/finalaudit
+remain. Fullgoal NOTcomplete; do not narrow or markcompletefromthisdraft.
+
+# HISTORICAL A100 EXECUTION v67: 2026-11-07
 
 Full original763-line goal ACTIVE/incomplete; this/previous turn PROGRESS.
 Latest data/manifests/a100-development-progress-20261107-v67.json ->v66;

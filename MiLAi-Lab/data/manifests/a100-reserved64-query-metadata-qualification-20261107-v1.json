@@ -1,0 +1,996 @@
+{
+  "status": "RESERVED64_EXACT_METADATA_MEMBERSHIP_VERIFIED_SHARED_CORPUS_QUERY_SCOPE_ONLY_EVALUATION_PROTOCOL_PENDING",
+  "timestamp_utc": "2026-11-07T07:45:44.398376+00:00",
+  "evidence_checkpoint": "913c7c57",
+  "native_reservation": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/query-family-auxiliary-protocol-v1/confirmation64-reservation-v1.json",
+  "native_parent_allocation": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/query-family-auxiliary-protocol-v1/allocated131072-v1/groups.json",
+  "native_exposure_record": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/query-family-auxiliary-protocol-v1/confirmation-reservation-exposure-v1.json",
+  "native_query_family_protocol": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/evidence-gap-20261023/query-family-auxiliary-protocol-v1/protocol.json",
+  "reserved_query_families": 64,
+  "all64_whole_metadata_records_literal_equal_parent": true,
+  "native_split_counts": {
+    "dev": 64
+  },
+  "allocation_basis_counts": {
+    "new_query_family": 64
+  },
+  "native_new_rows": 127,
+  "native_rows_per_query_family": {
+    "2": 63,
+    "1": 1
+  },
+  "prior_anchor_groups": 0,
+  "prior_rows": 0,
+  "newDEV128_query_family_overlap": 0,
+  "metadata_records": [
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00193",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        78571,
+        78572
+      ],
+      "base_query_ids": [
+        "1006177"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00199",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        124832,
+        124833
+      ],
+      "base_query_ids": [
+        "1006390"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00204",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        103562,
+        103563
+      ],
+      "base_query_ids": [
+        "1006514"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00207",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        127846,
+        127847
+      ],
+      "base_query_ids": [
+        "1006588"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00210",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        103896,
+        103897
+      ],
+      "base_query_ids": [
+        "1006663"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00211",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        108402,
+        108403
+      ],
+      "base_query_ids": [
+        "1006682"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00212",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        82405,
+        82406
+      ],
+      "base_query_ids": [
+        "1006702"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00217",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        130838,
+        130839
+      ],
+      "base_query_ids": [
+        "1006925"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00218",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        122949,
+        122950
+      ],
+      "base_query_ids": [
+        "1006941"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00225",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        97226,
+        97227
+      ],
+      "base_query_ids": [
+        "1007159"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00234",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        101136,
+        101137
+      ],
+      "base_query_ids": [
+        "1007522"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00247",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        84020,
+        84021
+      ],
+      "base_query_ids": [
+        "1007731"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00252",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        94991,
+        94992
+      ],
+      "base_query_ids": [
+        "100782"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00257",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        95955,
+        95956
+      ],
+      "base_query_ids": [
+        "1007900"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00272",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        74988,
+        74989
+      ],
+      "base_query_ids": [
+        "1008358"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00274",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        123998,
+        123999
+      ],
+      "base_query_ids": [
+        "1008450"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00276",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        109341,
+        109342
+      ],
+      "base_query_ids": [
+        "1008500"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00278",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        97568,
+        97569
+      ],
+      "base_query_ids": [
+        "100857"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00280",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        107947,
+        107948
+      ],
+      "base_query_ids": [
+        "1008628"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00289",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        101722,
+        101723
+      ],
+      "base_query_ids": [
+        "1009098"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00293",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        110136,
+        110137
+      ],
+      "base_query_ids": [
+        "1009214"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00304",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        85783,
+        85784
+      ],
+      "base_query_ids": [
+        "100958"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00313",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        129263,
+        129264
+      ],
+      "base_query_ids": [
+        "1009869"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00317",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        90781,
+        90782
+      ],
+      "base_query_ids": [
+        "1010070"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00318",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        71671,
+        71672
+      ],
+      "base_query_ids": [
+        "1010147"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00319",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        75889,
+        75890
+      ],
+      "base_query_ids": [
+        "1010181"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00328",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        88051,
+        88052
+      ],
+      "base_query_ids": [
+        "101049"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00334",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        109566,
+        109567
+      ],
+      "base_query_ids": [
+        "1010620"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00339",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        127984,
+        127985
+      ],
+      "base_query_ids": [
+        "1010687"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00340",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        80788,
+        80789
+      ],
+      "base_query_ids": [
+        "1010689"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00345",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        72306,
+        72307
+      ],
+      "base_query_ids": [
+        "1011015"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00348",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        103774,
+        103775
+      ],
+      "base_query_ids": [
+        "1011099"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00353",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        66125,
+        66126
+      ],
+      "base_query_ids": [
+        "1011377"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00357",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        97230,
+        97231
+      ],
+      "base_query_ids": [
+        "1011539"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00360",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        112082,
+        112083
+      ],
+      "base_query_ids": [
+        "1011670"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00370",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        108470,
+        108471
+      ],
+      "base_query_ids": [
+        "1011928"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00371",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        65629,
+        65630
+      ],
+      "base_query_ids": [
+        "1011936"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00377",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        82849,
+        82850
+      ],
+      "base_query_ids": [
+        "1012051"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00378",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        69978,
+        69979
+      ],
+      "base_query_ids": [
+        "1012058"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00380",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        117278,
+        117279
+      ],
+      "base_query_ids": [
+        "1012153"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00381",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        104622,
+        104623
+      ],
+      "base_query_ids": [
+        "1012273"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00382",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        68290,
+        68291
+      ],
+      "base_query_ids": [
+        "1012286"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00384",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        71948
+      ],
+      "base_query_ids": [
+        "1012425"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 1
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00386",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        126468,
+        126469
+      ],
+      "base_query_ids": [
+        "1012512"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00388",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        99166,
+        99167
+      ],
+      "base_query_ids": [
+        "1012557"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00394",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        101682,
+        101683
+      ],
+      "base_query_ids": [
+        "1012636"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00395",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        105718,
+        105719
+      ],
+      "base_query_ids": [
+        "1012740"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00399",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        101172,
+        101173
+      ],
+      "base_query_ids": [
+        "1012841"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00408",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        117972,
+        117973
+      ],
+      "base_query_ids": [
+        "1013151"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00410",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        120915,
+        120916
+      ],
+      "base_query_ids": [
+        "1013226"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00415",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        123288,
+        123289
+      ],
+      "base_query_ids": [
+        "101333"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00423",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        91628,
+        91629
+      ],
+      "base_query_ids": [
+        "1013458"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00426",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        75823,
+        75824
+      ],
+      "base_query_ids": [
+        "1013563"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00427",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        74414,
+        74415
+      ],
+      "base_query_ids": [
+        "1013594"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00428",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        118236,
+        118237
+      ],
+      "base_query_ids": [
+        "1013677"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00434",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        118780,
+        118781
+      ],
+      "base_query_ids": [
+        "1013835"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00442",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        128597,
+        128598
+      ],
+      "base_query_ids": [
+        "1013979"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00446",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        120796,
+        120797
+      ],
+      "base_query_ids": [
+        "1014087"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00450",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        74990,
+        74991
+      ],
+      "base_query_ids": [
+        "1014182"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00456",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        123362,
+        123363
+      ],
+      "base_query_ids": [
+        "1014492"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00461",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        88670,
+        88671
+      ],
+      "base_query_ids": [
+        "1014797"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00465",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        93495,
+        93496
+      ],
+      "base_query_ids": [
+        "1014905"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00468",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        127329,
+        127330
+      ],
+      "base_query_ids": [
+        "1015047"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    },
+    {
+      "source_group": "promptriever-shared-query131072-v1-family-00472",
+      "split": "dev",
+      "allocation_basis": "new_query_family",
+      "rows": [
+        120526,
+        120527
+      ],
+      "base_query_ids": [
+        "1015267"
+      ],
+      "prior_anchor_groups": [],
+      "prior_rows": 0,
+      "new_rows": 2
+    }
+  ],
+  "scope": "Shared-corpus base-query-family conditional relevance protocol; not64new documents/Source histories, not autonomousHost256paper confirmation or LME/Mem2Act. Native weak negatives/unknown masks and actual complete input/scoring contract must be preserved if later evaluated. ID-only metadata and prior nonexhaustive documentation intersections do not certify absent pretraining/website exposure.",
+  "evaluation_admitted": false,
+  "pending": "Prospectively bind appropriate fixed saved models, original native conditional input/target masks and scoring before projecting protected query/label semantics. Clarify the secondary conditional estimand separately from retained autonomousHost comparison; no model or first-outcome retry, newfit/seed/budget/scorer selection or independentSource claim.",
+  "A20k_B192_J_triggered": false,
+  "reserved_query_body_or_label_semantics_opened": false,
+  "native_TEST_semantics_opened": false,
+  "new_model_HTTP_calls": 0,
+  "ledger_opened_or_written": false,
+  "no_sha_validation": true,
+  "goal_complete": false
+}
