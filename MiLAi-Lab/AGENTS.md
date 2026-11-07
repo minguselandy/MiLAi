@@ -41,14 +41,18 @@ LME004 ACTUALLY EXITED1; parent714659/child714676 absent, clientCPU paidonce
 1171.674556+parent.254696611,11HTTP64100known,newunknown0/0. First69 now64COMP/
 5ReaderF/382NOTRUN; failures7/39/41/57/68 retained. Row68 againlength8192/
 contentNone,prompt5707/reserved14411<65536,error0. Priorfirst58 whole equal.
-Only untouched69..450382 explicitly registered as005, check-onlyreadyTrue,
-NOTLAUNCHED. Need actualidle31 before explicitlaunch; no automated queue.
+Only untouched69..450382 explicitly registered as005, check-onlyreadyTrue;
+ACTUALLY LAUNCHED aftercommit4f0a0671+idle31 parent2465168/child2465173
+RUNNING/clientCPUFalse, actual/proccommands verified; first69whole records
+equal previous, snapshot active69. No automated queue.
 Whole451audit/nativeJudge/score/archive remain, not accuracy certification.
 
 CPU storage004 ACTUALLY EXITED0; parent715656/child715657 absent. All11rows
 58..68 stored,69closedcases/414fullcheckpoints, wholebyte reconstruction
 verified before raw removal. Complete child81.793699+parent.026188883 pending
-idle31 separatephase. One-named005 plan samefrozenv3code, NOTLAUNCHED.
+idle31 separatephase PAID81.819887883. One-named005 samefrozenv3code ACTUALLY
+RUNNING parent2466074/child2466075, both/proccommands verified, pureCPU
+no modelHTTPledger writes.
 Preserve sharedbase outside case/output trees. Optional per-step replay must
 use frozenv2 restore_control; whole451audit/pairedrootfirstcall do notread
 step/control.json. Never share mutableSQLite/Source/input/queue.
@@ -58,7 +62,9 @@ old128 whole equal. Remaining352=seed1 160..25596 +seed2all256. Authornotblind/
 independent, no inheritedlabels/prefix extrapolation. Baseline149/stress71,
 primary148/stress79/same256/all4nativeF1 unchanged. All4mainC/material/common122/
 familyCI/perseed/within-family3seedmean/nativeDEV185TRAIN71 pending.
-idle1..30 paid; after30 newclosedtimers+storage004CPU pending31. No nested/
+idle1..31 paid; actualidle31:13closedtimers22.32CPU +storage00481.819887883
+paidonce. Newafter31 timers pendingnextidle. No offlineCPU settlement while
+model2465168/2465173 lives. No nested/
 native/client/parent/earlier rebill; unmeteredauthor/inspection/launch/cleanup/
 settlement unknownnotzero. Never offlinebill whilemodelworkerlive.
 
