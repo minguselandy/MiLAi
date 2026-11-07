@@ -1,4 +1,64 @@
-# LIVE A100 EXECUTION v69: 2026-11-07
+# LIVE A100 EXECUTION v70: 2026-11-07
+
+Full original763-line goal ACTIVE/incomplete; current/previous turn PROGRESS.
+Latest data/manifests/a100-development-progress-20261107-v70.json ->v69;
+previous checkpointe1f0fad9. ROOT/F/E/Q64 same. No subagents/SHA/checksums/
+fingerprints/services/secondledger/reset/refund/remote/Product writes/model
+first-outcome retry/reselection/inputcrop/compact/quantize. Oneactualmodel
+HTTPworker. No offlineledger open/write whilelive; no GNUtimer scanner/
+settler/launcher; native/owner/nested/oldcost notdouble-add, unknownnotzero.
+
+ONLY ACTUAL MODEL WORKER NOW Q64INITIAL parent3257111/child3257116
+RUNNING/clientCPUFalse,actual/procverified, native{'COMPLETED': 2673, 'RETURNED_PENDING_VALIDATION': 1, 'NOT_RUN': 1659},active2673.
+Q64/stages/reserved64-initial-prediction-v1-owner.json; detachednoexecsession.
+Actualwrapperload VERIFIED GPU2/cuda0/FP32/threads4/max16384/head2048/
+MHAFalse/refcompileFalse/TF32False. HTTP0/goldnotloaded. SameE/single-lme-
+stage.lock. All4333cells incl267unjudged, fixed64queryfamilies. Seev69full
+protocol:7new+1135basecodebindings,18weights2034760045bytes byteeq;3models
+preselectedE1u16/A0u2104/A1u2104,no newfit/seed/checkpoint/scorer/adoption.
+Q64/frozen-v1 entries IMMUTABLE; don'tedit7boundRootentries either.
+No autocontinue/queue. Afteractualexit+wholeCPU paid+procsabsent, runfrozen
+audit_score_reserved64_native_v1.py PROTOCOL audit --owner ACTUAL_OWNER.
+Then explicitlylauncha0afterlatesteligibleidle, audit; thena1/audit;
+offline score ONLYafterall3fullaudits. Childnogold/ledger; parentwhole
+RUSAGE+measuredparent once. Anyfirsterrorretainraw/checkcause; no rerun.
+OnlynativeNOT_RUNtail after actualclosedowner+reflection; started/returned
+pending requiremanualmetadatareconciliation withoutNN. Native64projection
+afterfreeze nowOPENED, nativeTESTunopened. 0judgedchangepairs ->change
+accuracyUNAVAILABLE, not0. NotHostC/pMRR/64independentSourcehistories.
+
+LME006 ACTUALEXIT1/paid/gone parent2889923 child2889928. First165 native
+158COMP/7ReaderF, failures7/39/41/57/68/118/164retained. New164/c35bfeed
+1HTTP prompt6677/out8192/total14869,length/contentNone,reserved15381<65536,
+noinputoverflow,newunknown0/0. Segment46HTTP210993known,wholechild
+4843.141971+parent.157064708 already nativepaidonce. First119wholeeq005.
+Storage006 parent2891035/child2891050 exit0/gone/PAIDidle33,
+rows119..164, whole325.639676+.028621828=325.668297828CPU.
+Total165closedcases/990checkpoints wholebyteverified, keepimmutablebase
+outsidecasetrees+frozenv2optionalrestore. LME007 explicitlyregisteredONLY
+nativeNOT_RUN165..450=286; NO LME007OWNER/autoqueue/storage007yet.
+AfterQ64(or anexplicitclosed-stagechoice), resume007samefrozenrecipe,
+then full451audit/nativeJudge/scoreaudit/archive; thenprimaryLME. Mem2Act
+actual400x2=0,final1147bindings/full429sessions16843bank/public400 unchanged,
+allLME451x2closures required bysameownerlock. Do noteditboundentry/runtime.
+
+Idle1..33paidonce. 33=41timers46.81CPU+storage006whole325.668297828.
+Allpost33newpublication/progress timers pendingnextactualidle, Q64whole
+costpendingexit. Newreadonlycostcensus 1309uniquetimers/40uniquephases,
+CPUoffline2381.225772438033/Source1244.593596831/storage884.637096837;
+prior-v79debt45.39 separately, Cnative380.64422756196655 deductedonce.
+Reportnotfullprojecttotal andnotnewledger. docs/MILAI_A100_CLOSED_COST_
+EVIDENCE_20261107.md plusdata/manifests/a100-closed-offline-cost-evidence-
+20261107-v1.json. Census/settler/launcherCPUunmeteredunknownnotzero.
+REVIEW PROVENANCE clarified: Source-guided authorreview is THISASSISTANT,
+notindependenthuman/originalpaperauthor/盲审/multireviewer. Replacedcurrent
+report人工 wording; no C/material/firstresult changes. NativeF1/nativeQ64
+labels/externaloriginalJudges separate. C149/148/131/115,stress71/79/62/57,
+S150/149/139/103,F40/52/51/61; full1024stats/ops/repro/figs/audit remain.
+Fullgoal actualQ64/451x2/400x2/globalSourceView-ops/allprojectcosts/finalpaper/
+overallfigures/finalrequirementaudit remains. Fullgoal NOTcomplete.
+
+# HISTORICAL A100 EXECUTION v69: 2026-11-07
 
 Full original763-line goal ACTIVE/incomplete; current/previous turn PROGRESS.
 Latest data/manifests/a100-development-progress-20261107-v69.json ->v68;
