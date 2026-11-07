@@ -1,0 +1,214 @@
+{
+  "status": "D_NEW32_ALL960_EXISTING_SOURCE_VIEW_OPERATION_AND_ORIGIN_EVIDENCE_SYNTHESIZED",
+  "comparison": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/d-update32/new32-family-comparison-v1.json",
+  "families": 32,
+  "positions_each": 320,
+  "methods": {
+    "view_cache": {
+      "complete": 67,
+      "material_complete": 84,
+      "complete_and_material_complete": 53,
+      "selected_kinds": {
+        "SEARCH": 138,
+        "READ": 372,
+        "HANDOFF": 155,
+        "REFRESH_VIEW": 59
+      },
+      "operation_result_kinds": {
+        "SEARCH": 138,
+        "READ": 372,
+        "HANDOFF": 107,
+        "REFRESH_VIEW": 59
+      },
+      "View_build_report_actions": {
+        "build": 59
+      },
+      "current_original_ranges_by_role": {
+        "assistant": 118,
+        "user": 107
+      },
+      "current_original_ranges_by_origin_group": {
+        "exogenous_fixture": 161,
+        "endogenous_runtime": 64
+      },
+      "unique_received_View_refs": 42,
+      "View_occurrences_including_historical_K": 163,
+      "existing_author_View_fidelity_counts": {
+        "faithful_literal_with_original_role_and_clock_metadata": 42
+      },
+      "actual_current_Host_retrieval_absent": 213,
+      "retrieval_without_current_exogenous_range": 45,
+      "all_existing_Source_turn_comparisons_preserved": 5578,
+      "new_completed_assistant_Sources": 253,
+      "View_namespace_changed_turns": 36,
+      "native_read_admission_errors_before_controller_event": 0,
+      "actual_native_current_costs": {
+        "HTTP_responses": 480,
+        "known_generation_tokens": 2934163,
+        "shared_generation_calls": 480,
+        "new_unknown_usage": {
+          "generation": 0,
+          "embedding": 0
+        },
+        "current_tool_counts": {
+          "tool_attempts": 179,
+          "tool_returns": 179
+        },
+        "current_reported_tool_usage": {
+          "control_steps": 724,
+          "operations": 676,
+          "read_operations": 372,
+          "material_budget_rejections": 17,
+          "known_reference_reads": 2
+        },
+        "current_returned_evidence_kinds": {
+          "original_source": 225,
+          "query_structure": 42
+        },
+        "current_tool_usage_unreported_receipts": 0
+      },
+      "review": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/d-update32/reviews/new32-view_cache/answer-review-closeout-v1.json",
+      "SDK_audit": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/d-update32/reviews/new32-view_cache/SDK-state-audit.json",
+      "operation_audit": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/d-update32/reviews/new32-view_cache/actual-operation-audit-v1.json"
+    },
+    "view_cache_incremental": {
+      "complete": 65,
+      "material_complete": 76,
+      "complete_and_material_complete": 48,
+      "selected_kinds": {
+        "SEARCH": 105,
+        "READ": 369,
+        "HANDOFF": 159,
+        "REFRESH_VIEW": 54,
+        "USE_VIEW": 3
+      },
+      "operation_result_kinds": {
+        "SEARCH": 105,
+        "READ": 369,
+        "HANDOFF": 147,
+        "REFRESH_VIEW": 54,
+        "USE_VIEW": 3
+      },
+      "View_build_report_actions": {
+        "build": 54
+      },
+      "current_original_ranges_by_role": {
+        "user": 119,
+        "assistant": 128
+      },
+      "current_original_ranges_by_origin_group": {
+        "exogenous_fixture": 165,
+        "endogenous_runtime": 82
+      },
+      "unique_received_View_refs": 25,
+      "View_occurrences_including_historical_K": 117,
+      "existing_author_View_fidelity_counts": {
+        "faithful_literal_with_original_role_and_clock_metadata": 25
+      },
+      "actual_current_Host_retrieval_absent": 209,
+      "retrieval_without_current_exogenous_range": 38,
+      "all_existing_Source_turn_comparisons_preserved": 5563,
+      "new_completed_assistant_Sources": 256,
+      "View_namespace_changed_turns": 41,
+      "native_read_admission_errors_before_controller_event": 2,
+      "actual_native_current_costs": {
+        "HTTP_responses": 490,
+        "known_generation_tokens": 2873111,
+        "shared_generation_calls": 490,
+        "new_unknown_usage": {
+          "generation": 0,
+          "embedding": 0
+        },
+        "current_tool_counts": {
+          "tool_attempts": 180,
+          "tool_returns": 180,
+          "tool_errors": 2
+        },
+        "current_reported_tool_usage": {
+          "control_steps": 690,
+          "operations": 678,
+          "read_operations": 369,
+          "material_budget_rejections": 26,
+          "known_reference_reads": 9
+        },
+        "current_returned_evidence_kinds": {
+          "original_source": 247,
+          "query_structure": 25
+        },
+        "current_tool_usage_unreported_receipts": 0
+      },
+      "review": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/d-update32/reviews/new32-view_cache_incremental/answer-review-closeout-v1.json",
+      "SDK_audit": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/d-update32/reviews/new32-view_cache_incremental/SDK-state-audit.json",
+      "operation_audit": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/d-update32/reviews/new32-view_cache_incremental/actual-operation-audit-v1.json"
+    },
+    "e3-aggregate-u32": {
+      "complete": 95,
+      "material_complete": 133,
+      "complete_and_material_complete": 80,
+      "selected_kinds": {
+        "SEARCH": 109,
+        "READ": 653,
+        "HANDOFF": 22
+      },
+      "operation_result_kinds": {
+        "SEARCH": 109,
+        "READ": 653,
+        "HANDOFF": 20
+      },
+      "View_build_report_actions": {},
+      "current_original_ranges_by_role": {
+        "user": 293,
+        "assistant": 258
+      },
+      "current_original_ranges_by_origin_group": {
+        "exogenous_fixture": 459,
+        "endogenous_runtime": 92
+      },
+      "unique_received_View_refs": 0,
+      "View_occurrences_including_historical_K": 0,
+      "existing_author_View_fidelity_counts": {},
+      "actual_current_Host_retrieval_absent": 224,
+      "retrieval_without_current_exogenous_range": 4,
+      "all_existing_Source_turn_comparisons_preserved": 5590,
+      "new_completed_assistant_Sources": 262,
+      "View_namespace_changed_turns": 0,
+      "native_read_admission_errors_before_controller_event": 0,
+      "actual_native_current_costs": {
+        "HTTP_responses": 442,
+        "known_generation_tokens": 2738589,
+        "shared_generation_calls": 1226,
+        "new_unknown_usage": {
+          "generation": 0,
+          "embedding": 0
+        },
+        "current_tool_counts": {
+          "tool_attempts": 127,
+          "tool_returns": 127
+        },
+        "current_reported_tool_usage": {
+          "control_steps": 784,
+          "operations": 782,
+          "read_operations": 653,
+          "material_budget_rejections": 2,
+          "known_reference_reads": 7
+        },
+        "current_returned_evidence_kinds": {
+          "original_source": 551
+        },
+        "current_tool_usage_unreported_receipts": 0
+      },
+      "review": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/d-update32/reviews/new32-e3-aggregate-u32/answer-review-closeout-v1.json",
+      "SDK_audit": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/d-update32/reviews/new32-e3-aggregate-u32/SDK-state-audit.json",
+      "operation_audit": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/d-update32/reviews/new32-e3-aggregate-u32/actual-operation-audit-v1.json"
+    }
+  },
+  "scope": "Reconciles existing full320 Source-guided author reviews and actual per-turn SDK/operation audits; no new judgments or execution. Same exogenous Source content/roles/order, not all actual initial wires/controller states equal. All32family/10requests clustered; not320independentSource histories.",
+  "reviewer": "Implementation assistant, Source-guided; not independent human/blind/multiple-reviewer verification.",
+  "interpretation": "Faithful literal old View can be stale for updated task. E3 has no received View, no USE_VIEW/REFRESH_VIEW in this actual cohort; local gain cannot be attributed to learning View reuse or View+incremental combination. Zero selection alone does not establish what menus offered. Source role/identity preservation is not factual truth; endogenous questions/Host answers remain distinct from exogenous arrivals.",
+  "whole_existing_judgments_inputs_and_first_outcomes_unchanged": true,
+  "all_actual_old_Source_values_preserved": true,
+  "new_model_HTTP_or_tool_executions": 0,
+  "ledger_opened_or_written": false,
+  "no_sha_validation": true,
+  "goal_complete": false
+}

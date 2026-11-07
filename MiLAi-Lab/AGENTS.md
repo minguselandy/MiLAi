@@ -1,4 +1,53 @@
-# LIVE A100 EXECUTION v70: 2026-11-07
+# LIVE A100 EXECUTION v71: 2026-11-07
+
+Full original763-line goal ACTIVE/incomplete; current/previous turn PROGRESS.
+Latest data/manifests/a100-development-progress-20261107-v71.json ->v70;
+previous checkpoint6ee8db0a. ROOT/F/E/Q64 same; v70/v69detailbelow.
+No subagents/SHA/fingerprints/services/secondledger/reset/refund/remote/
+Productwrites/model-first-outcome retry/reselection/crop/compact/quantize.
+Oneactualmodelworker, GPUs0/1untouched,GPU2FP32/4threads/MHAFalse/
+refcompileFalse/TF32False. No offlineledgeropen/write whilelive. No GNUtimer
+scanner/settler/launcher; costsnested/oldneverrebill, unknownnotzero.
+
+ONLY MODEL WORKER Q64A0 parent3300729/child3300733 RUNNING/
+clientCPUFalse;actual/proc verified, native{'COMPLETED': 1546, 'FORWARD_STARTED': 1, 'NOT_RUN': 2786} active1546.
+Q64/stages/reserved64-a0-prediction-v1-owner.json. Detachednoexecsession.
+ActualinferenceVERIFIED; HTTP0/goldnotloaded. Initial4333/4333 nativeCOMP,
+actualexit0/paid/gone parent3257111/child3257116. Frozenfull4333audit passed
+allnativeinputs==original, completehead/finiteargmax/truncFalse, no modelrerun.
+Initialnativeinputtokens1052118,wholechild547.449487+parent.222153077
+=547.671640077CPU paidonce,GPU2interval.14980148817360814h inclload/IO.
+No effectscoringyet. A1notlaunched. AfterA0actualexit/paid/procsabsent:
+runfrozen audit_score_reserved64_native_v1.py PROTOCOL audit --ownerA0;
+settleeligibleidle35; explicitlylaunchA1; audit; ONLYthenfrozen scoreall3.
+No automaticqueue, no source/gold/scorer/weights changes. Q64contract7+1135
+bindings/3models/4333allcells incl267unjudged/64queryfam/0change pairs same.
+Native64semanticprojectionOPENED afterfreeze, nativeTESTUNOPENED. Mustnot
+edit7boundRootentries orfrozenfiles. Source-authorreview =THISASSISTANT,
+notindependenthuman/originalpaperauthors; labels/firstoutcomes unchanged.
+
+LME006closed165=158COMP/7ReaderF, nativeCPUpaid/storagespaid33/procsgone.
+Explicit007ONLYNOT_RUN165..450=286 registerednotlaunched,nofollower007yet.
+No LMEworkerlive; resumeoriginalfrozenLMEafterdeclaredQ64closedsegments.
+Mem2Actactual400x2=0; final1147bindings/full429sessions16843bank/public400
+same, allLMEfullclosuresrequired bysameownerlock. FullgoalnotonlyQ64.
+Idle1..34paid;34=10timers3.89CPU, no nativeinitialrebill. Newpost34DView/
+progress timers and currentA0wholecost pendingnextactualexit/eligibleidle.
+
+NEW Dnew32Source/View/ops synthesis all960 existingreview+SDK+operations
+reconciled, no newexecution/grade. Cache42refs163occurrences,incremental25/
+117,E3zero/zero inclK. USE_VIEW selections0/3/0;REFRESH59/54/0; E3current
+rawranges459exogenous/92endogenous. LiteralfaithfulView canbestale, role
+identityisnotfactualauthority; E3localgain NOTView-reuse evidence, norzero
+selection proofmenu offered. Currentroleusercanbeendogenousquery,assistant
+oldanswer remainsassistant. Nativeerrorsbeforecontroller eventskept, not
+lostsuccess. data/manifests/a100-D-new32-Source-View-operation-synthesis-
+20261107-v1.json, docs/MILAI_A100_D_SOURCE_VIEW_OPERATIONS_20261107.md.
+Internalfull1024quality/stats/ops/cost/repro/figs/763lineinitialaudit same.
+FullQ64,451x2,400x2/globalSourceView-ops/allprojectcosts/finalpaper/overall
+figures/finalrequirementaudit remain. Fullgoal NOTcomplete.
+
+# HISTORICAL A100 EXECUTION v70: 2026-11-07
 
 Full original763-line goal ACTIVE/incomplete; current/previous turn PROGRESS.
 Latest data/manifests/a100-development-progress-20261107-v70.json ->v69;

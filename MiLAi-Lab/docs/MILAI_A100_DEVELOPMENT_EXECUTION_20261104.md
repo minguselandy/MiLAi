@@ -6,11 +6,25 @@
 历史 worktree、原始失败与用户文档保持原状。没有使用子代理、SHA/内容指纹校验、新服务、第二账本或远端写入。
 
 本轮机器可读入口为
-[progress](../data/manifests/a100-development-progress-20261107-v70.json)。
+[progress](../data/manifests/a100-development-progress-20261107-v71.json)。
 原始数据、冻结运行时、权重、命令、计时和实际输出位于本 worktree 的 ignored
 `artifacts/a100-development-20261104/`。本记录是现有报告体系的执行摘要。
 
-## v70 当前状态（2026-11-07）：LME006关闭、idle33已付，旧64初始模型实际运行
+## v71 当前状态（2026-11-07）：旧64初始模型全4333审计通过，A0实际运行
+
+初始模型4333格全部原生完成、实际退出0/整段CPU547.671640077秒一次支付、父子
+进程消失；完整4333输入、head、有限logits/argmax/无截断审计通过。真实idle34支付
+10个关闭离线计时3.89CPU秒后，显式启动A0父3300729/子3300733，
+{'COMPLETED': 1546, 'FORWARD_STARTED': 1, 'NOT_RUN': 2786}，加载条件VERIFIED。A1未启动，效果指标尚未计算；须A0/A1
+各自全量预测审计后，三模型才一起离线计分。LME007未尝试尾部仍登记未运行。
+
+[D的Source/View/操作综合](MILAI_A100_D_SOURCE_VIEW_OPERATIONS_20261107.md)保留三方法
+全960项已有审阅与实际审计：收到View引用42/25/0、含K出现163/117/0，USE_VIEW
+0/3/0、REFRESH59/54/0。忠实旧View可能过时；E3这组开发收益不能当作View复用
+学习证据，Source role/身份也不等同事实权威。既有标签与首结果不改，无新模型/工具
+执行。完整外部、其余SourceView/成本综合及最终论文/图表/审计仍继续，目标未完成。
+
+## v70 历史状态（2026-11-07）：LME006关闭、idle33已付，旧64初始模型实际运行
 
 LME006实际退出1、原生CPU/HTTP付费且进程消失；首165项158COMP/7ReaderF，164单次
 输出8192到顶、content为空，prompt6677，无输入溢出/新增未知用量，所有失败保留。
