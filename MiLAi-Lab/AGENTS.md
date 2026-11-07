@@ -1,4 +1,51 @@
-# LIVE A100 EXECUTION v75: 2026-11-07
+# LIVE A100 EXECUTION v76: 2026-11-07
+
+Full original763-line goal ACTIVE/incomplete; current turn PROGRESS, previous VERIFIED_WAIT.
+Latest data/manifests/a100-development-progress-20261107-v76.json ->v75;
+previous checkpoint2296437a. ROOT/F/E/Q64 same; old detailed records below.
+No subagents/SHA/fingerprints/services/secondledger/reset/refund/remote/Productwrites/
+model-first-outcome retries/reselection/crop/compact/quantize. One actual modelHTTPworker.
+GPUs0/1untouched; learnerGPU2FP32/threads4/MHAFalse/refcompileFalse/TF32False.
+No offline ledger open/write while model live; scanner/settler/launcher never GNUwrapped.
+Native/whole/parent/nested/oldcost never double-add; unmetered CPU unknown_not_zero.
+Do not edit1135bound LME entries/runtime or1147Mem2Act/7Q64frozen entries/models.
+
+ONLY MODELHTTPWORKER LME010 parent3762632/child3762633 RUNNING/clientCPUFalse,
+actual/proc verified, active206, {'COMPLETED': 196, 'FAILED_READING': 10, 'PREPARING_INPUT': 1, 'NOT_RUN': 244}.
+Only native untouched205..450=246; first205 complete dict equal009. Reader failures
+7/39/41/57/68/118/164/173/176/204 retained; no retry/UNKNOWN/negativegold/recipechange.
+009 parent3528533/child3528534 actualexit1/nativepaid/gone, first205=195COMP/10F.
+New204/f35bac4a oneHTTP prompt4751/out8192/total12943,length/contentNone,
+reserved13455<65536/noinputoverflow/newunknown0/0. Segment28HTTP148299known,
+wholechild3005.792088+parent.172908675 already nativepaid once.
+Storage009 parent3530245/child3530246 actualexit0/gone, rows177..204,
+whole189.34644699999998+.027941963=189.37438896299997 CPU paididle39.
+Storage010 parent3762771/child3762776 follows ONLY010, actual/procverified.
+Total206 closed cases/1236 checkpoints wholebyteeq receipts.
+Keep immutablebase outsidecase trees; optional perstep native replay needs frozenv2
+restore_control(original logicalpath). Whole451 sourceaudit/pairedfirstcall doesn'treadstepcontrol.
+At firstnewerror/fullclosure inspectnative raw, wait actual model/storage exit+paid/gone,
+reflect then explicitly register ONLY native NOT_RUN tail; no autoqueue/restart.
+
+Idle1..39paidonce;39=6closedtimers4.89CPU +storage009189.37438896299997CPU;
+native009/oldcost not rebilled. Post39figurepublication/progress timers pending next actualidle.
+Static knownpaid cutoff stays before007(afterQ64/idle36),87091.84096111101CPU/
+25368797knownHosttokens, not live current/allproject total/GPUbusy/$.
+
+NEW internaloverall figure docs/MILAI_A100_CLOSED_INTERNAL_OVERVIEW_20261107.md,
+PNG/PDF+manifest+tools/plot_a100_closed_internal_overview.py. DEV64all7,
+CONF256all4,D32x10all3,Q64all3+bothconstants; originalC recount/existingnative scores
+reconciled, first/layout numeric JSON wholeequal. PNG visually inspected; samefigure
+PDFheader/EOF/1page checked, no separate PDF rendering (pdfinfo unavailable127).
+No labels/masks/firstresults/modelchanges or new modelHTTPledger calls. Reviewer
+THIS execution assistant, not independent human/originalpaper authors. No pooled score.
+All1024quality/stats/ops/cost and Q64all12999native metrics/audits/figs remainclosed;
+A1-A0-5.368524pp, noA20k/J/newfit/adoption. D960+knownView9+oldoutput42synthesesclosed.
+Full LME451x2 audit/nativeJudge/scoreaudit/archive and Mem2Act400x2actual0 remain,
+finalallprojectcost/finalpaper/finaloverallfigures/final763line audit incomplete.
+Goal NOT complete/blocked. No nativeTEST semantics opened. Keep full original scope.
+
+# HISTORICAL A100 EXECUTION v75: 2026-11-07
 
 Full original763-line goal ACTIVE/incomplete; current/previous turn PROGRESS.
 Latest data/manifests/a100-development-progress-20261107-v75.json ->v74;
