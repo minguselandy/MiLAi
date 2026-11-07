@@ -1,4 +1,67 @@
-# LIVE A100 EXECUTION v72: 2026-11-07
+# LIVE A100 EXECUTION v73: 2026-11-07
+
+Full original763-line goal ACTIVE/incomplete; current/previous turn PROGRESS.
+Latest data/manifests/a100-development-progress-20261107-v73.json ->v72;
+previous checkpoint2c66c3c4. ROOT/F/E/Q64 same. No subagents/SHA/fingerprints/
+services/secondledger/reset/refund/remote/Productwrites/model-first-outcome
+retry/reselection/crop/compact/quantize. OneactualmodelHTTPworker, GPUs0/1
+untouched, learnerGPU2FP32/4threads/MHAFalse/refcompileFalse/TF32False.
+No offlineledgeropen/write whilelive;no GNUtimer scanner/settler/launcher.
+Whole/native/parent/nested/oldcost neverdouble-add, unknownnotzero.
+
+Q64 ALL3ACTUALMODELS/12999FIRSTOUTPUTS/INPUT-HEAD-ARGMAX-UNTRUNCATED AUDITS/
+FROZENNATIVE SCORING/INDEPENDENT RECONCILIATION/PUBLICATION/PNG-PDF CLOSED.
+Initial/A0/A1 each4333COMP, actualexit0/wholeCPU paid/procsgone.
+Initial547.449487+.222153077=547.671640077; A0543.132255+.17002964=
+543.30228464; A1535.756401+.180854323=535.937255323; total1626.91118004CPU.
+Each1052118tokens/all4333tokenvectorsliteral equal,total3156354tokens.
+Balancednativefamilymacro initial.6650875986728706,A0.853114447743328,
+A1.7994292058838623. PRIMARYA1-A0=-5.368524185946579pp CI95
+[-7.760888865998726,-3.1633406363897616],higher14/lower45/tied5queryfamilies.
+A0-init+18.8026849070 CI[15.2702725360,22.2280860452];A1-init+13.4341607211
+CI[9.5817419511,17.1628937258]. Fixed64shared-corpusqueryfamilybootstrap
+20kseed0,notSourceindependence/HostC/pMRR/causaltruth. Native127positive/
+3939negative knownlabels weakmembership;267unknowncells allpredicted, masks
+kept. 1884stable/267unknown/0judgedchange ->changeaccuracyUNAVAILABLEnot0.
+Bothconstantsbalanced50%,rawconstantnegative~96.87% highlightsimbalance,
+notselectedwinner. STOPA20k/J unchanged,no newfit/seed/scorer/adoption.
+Source-body/querysemanticsNOW OPENED afterprotocolfreeze; nativeTESTUNOPENED.
+Q64/all3-native-conditional-metrics-closeout-v1.json + independent-native-
+score-reconciliation-v1.json +results-publication-verification-v1.json.
+Tracked data/manifests/a100-reserved64-native-results-20261107-v1.json,
+docs/MILAI_A100_RESERVED64_NATIVE_RESULTS_20261107.md,docs/figures/PNG-PDF.
+No Q64model workremains. Immutable7Rootentries/frozenprotocol/weights kept.
+
+ONLY MODELHTTPWORKER NOW LME007 parent3389690/child3389708 RUNNING/
+clientCPUFalse,actual/procverified,active167,
+{'COMPLETED': 160, 'FAILED_READING': 7, 'PREPARING_INPUT': 1, 'NOT_RUN': 283}. First165wholeeq006; earlierReaderF7/39/41/57/68/
+118/164 retained, no retries/UNKNOWN/negativegold/recipe/capchanges.
+At newfirsterror waitactualexit/billing/procsabsent,inspectraw/reflect,
+explicitnativeNOT_RUNtailonly. Noautoqueue/execsession. Full451audit/native
+ReaderJudge/scoreaudit/archive requireallpositionsattempted; givenretrieval
+isnotautonomousHost/unseenSmall. PrimaryLMEafterfixedfullclosure; Mem2Act
+actual400x2=0/final1147bindings/full429sessions16843bank/public400unchanged,
+allLME451x2closures requiredsameownerlock. Do noteditboundentry/runtime.
+CPUstorage007 parent3390962/child3390963 followsONLY007;
+currenttotal167closedcases/1002checkpoints wholebyteverified.
+Keepimmutablebase outsidecasetrees/frozenv2optionalpersteprestore. Whole451
+sourceaudit/pairedrootfirstcall doesnotreadstep/control. No storageHTTP/
+model/ledger/automaticnextsegment;wholeCPU pendingactualexit+idle.
+
+Idle1..36paidonce. 36=6timers8.51CPU; all3Q64nativewholecost notrebilled.
+Post36scientificQ64publication/plot/verification/progress timers pendingnext
+actualeligibleidle, LME007andstoragecostpendingactualexit. Previous33
+41timers46.81+storage006325.668297828;34=10timers3.89;35=5timers4.69.
+Revieweridentity THISASSISTANT,notindependenthuman/originalpaperauthors;
+SourceauthorC/material labels notchanged, NativeF1/nativeQ64/externalJudges
+separate. Internal1024C149/148/131/115,stress71/79/62/57,S150/149/139/103,
+F40/52/51/61 +allfamily20kstats/ops/cost/repro/qualityfigs/initial763line73
+unitaudit remain. Dnew32all960SourceView/ops+KnownView9/oldoutput42syntheses
+closed asv72, lostparentCPU oldoutput unknown/lowerbound kept.
+Fullgoal stillactualLME451x2/Mem2Act400x2/allprojectcosts/overallfigures/
+finalpaper/results/finalrequirementaudit, NOTcomplete. Keeporiginalscope.
+
+# HISTORICAL A100 EXECUTION v72: 2026-11-07
 
 Full original763-line goal ACTIVE/incomplete; current/previous turn PROGRESS.
 Latest data/manifests/a100-development-progress-20261107-v72.json ->v71;

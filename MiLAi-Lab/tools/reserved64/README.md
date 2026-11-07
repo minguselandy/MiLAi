@@ -21,7 +21,7 @@ literal code are also retained in the protocol artifact.
 Transformers 4.52.3 and Tokenizers 0.21.4 before appending the existing HTTP/graph
 dependency site. It uses existing installed packages, with no dependency upgrade.
 
-Preparation and verification have completed. No prediction owner has launched.
+All three fixed models have now completed all 4,333 first predictions each, full audits, native scoring, and independent score reconciliation. Original stage/launch artifacts remain unchanged.
 Each fixed-model segment must be launched explicitly after the shared
 model/HTTP worker lock, actual process exit, and cost gates pass; there is no
 automatic next-model queue or first-outcome retry. The native prediction entry
@@ -32,3 +32,5 @@ offline scoring waits for all three full audits.
 
 See the [current scope report](../../docs/MILAI_A100_RESERVED64_QUERY_SCOPE_20261107.md)
 and [preparation record](../../data/manifests/a100-reserved64-native-protocol-preparation-20261107-v1.json).
+
+See the [closed native results](../../docs/MILAI_A100_RESERVED64_NATIVE_RESULTS_20261107.md).
