@@ -6,11 +6,33 @@
 历史 worktree、原始失败与用户文档保持原状。没有使用子代理、SHA/内容指纹校验、新服务、第二账本或远端写入。
 
 本轮机器可读入口为
-[progress](../data/manifests/a100-development-progress-20261107-v68.json)。
+[progress](../data/manifests/a100-development-progress-20261107-v69.json)。
 原始数据、冻结运行时、权重、命令、计时和实际输出位于本 worktree 的 ignored
 `artifacts/a100-development-20261104/`。本记录是现有报告体系的执行摘要。
 
-## v68 当前状态（2026-11-07）：旧64元数据核验与内部研究草案完成
+## v69 当前状态（2026-11-07）：旧64原生条件合同冻结，4333格全输入准备完成
+
+先冻结初始E1/u16、A0/u2104、A1/u2104既定权重、7新＋1135既有代码绑定及评分，
+再投影64保留query语义。18个权重文件2034760045字节复制后逐字节相同，无SHA。
+127原始行→4333条件×候选格（4066 known、267 unjudged），全部公开预测输入与
+原生完整state/questions相同；原始127行字节、native矩阵/掩码和所有输入全量复算通过。
+1884 stable/267 unknown/0 change，变化准确率不可用。NativeTEST语义仍未打开。
+
+[合同与范围](MILAI_A100_RESERVED64_QUERY_SCOPE_20261107.md)、
+[准备摘要](../data/manifests/a100-reserved64-native-protocol-preparation-20261107-v1.json)及
+[六个入口](../tools/reserved64/README.md)已保存。已有8744预测契约与原生评分字段相同；
+CUDA/HTTP包路径导入失败已保留并按既有先固定SDK、后追加HTTP依赖的方式修正。
+三模型计划已登记，实际预测0；准入因LME006存活被拒，不并行启动第二model worker。
+所有4333格含unknown均保留，每模型全量审计后进入下一个，三者完成后离线评分；
+这是共享语料次级条件指标，不是HostC/FollowIR或独立Source确认，不触发新拟合。
+
+LME006父2889923/子2889928确认存活，active161、{'COMPLETED': 155, 'FAILED_READING': 6, 'PREPARING_INPUT': 1, 'NOT_RUN': 289}；
+首119完整dict相同、原六Reader失败保留。CPU存储累计161案例/
+966检查点逐字节一致，post32全部离线计时待真实空闲窗口，活动模型期间不读写账本。
+内部四方法全量质量/统计/操作成本与计划初审保持；完整外部、实际旧64评测、全项目
+综合及最终论文/图表/审计仍执行，完整763行目标未完成。
+
+## v68 历史状态（2026-11-07）：旧64元数据核验与内部研究草案完成
 
 [旧64保留query范围](MILAI_A100_RESERVED64_QUERY_SCOPE_20261107.md)核实64组完整元数据
 与原分配相同，均原生dev/new_query_family，127条新行，无prior rows/anchor，

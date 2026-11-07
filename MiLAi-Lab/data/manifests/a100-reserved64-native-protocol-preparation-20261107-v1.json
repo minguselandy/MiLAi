@@ -1,0 +1,98 @@
+{
+  "status": "RESERVED64_NATIVE_CONDITIONAL_PROTOCOL_FROZEN_FULL_SOURCE_INPUTS_VERIFIED_THREE_STAGES_REGISTERED_NOT_LAUNCHED",
+  "protocol": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/reserved-query64-confirmation-v1/protocol-before-reserved-semantic-projection-v1.json",
+  "freeze": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/reserved-query64-confirmation-v1/freeze-preparation-v1.json",
+  "preparation": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/reserved-query64-confirmation-v1/prepared-inputs-v1.json",
+  "full_source_verification": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/reserved-query64-confirmation-v1/full-source-input-and-mask-verification-v1.json",
+  "models": [
+    {
+      "name": "initial",
+      "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/reserved-query64-confirmation-v1/models/initial",
+      "original_checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e1-fitting-v1/delivery-only/checkpoints/update-16",
+      "selection": "Exact saved reference previously chosen in the original seven-evaluation plan, not selected using reserved64 semantics or final confirmation results."
+    },
+    {
+      "name": "a0",
+      "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/reserved-query64-confirmation-v1/models/a0",
+      "original_checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/a0-seed0/checkpoints/update-2104",
+      "selection": "Exact saved reference previously chosen in the original seven-evaluation plan, not selected using reserved64 semantics or final confirmation results."
+    },
+    {
+      "name": "a1",
+      "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/reserved-query64-confirmation-v1/models/a1",
+      "original_checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/a1-seed0/checkpoints/update-2104",
+      "selection": "Exact saved reference previously chosen in the original seven-evaluation plan, not selected using reserved64 semantics or final confirmation results."
+    }
+  ],
+  "primary_model_contrast": "a1-minus-a0; initial is the preexisting common E1/u16 reference",
+  "scope": "Prospective secondary conditional-representation evaluation using original preselected A references and native published candidate memberships. Ordinary hard-negative membership is weak evidence, not independent factuality. Masks unchanged; not FollowIR p-MRR/retrieval ranking, Host task C, new documents, autonomousHost256 confirmation, or LME/Mem2Act. Does not trigger A20k/B192/J, new fits/seeds/checkpoint/scorer/adoption selection.",
+  "native_counts": {
+    "allocated_families": 64,
+    "native_rows": 127,
+    "query_units": 64,
+    "multiple_condition_query_units": 63,
+    "matrix_cells": 4333,
+    "cell_status": {
+      "known": 4066,
+      "unjudged": 267
+    },
+    "comparison_kind": {
+      "unknown": 267,
+      "stable": 1884
+    },
+    "unknown_reason": {
+      "missing_cross_condition_judgment": 267
+    }
+  },
+  "positions_per_model": 4333,
+  "planned_total_native_decisions": 12999,
+  "actual_model_predictions": 0,
+  "families": 64,
+  "native_raw_rows": 127,
+  "all64_primary_balanced_support_present": true,
+  "no_judged_native_change_pairs": true,
+  "native_change_accuracy_available": false,
+  "all127_raw_rows_whole_byte_equal": true,
+  "all4333_native_inputs_targets_masks_literal_equal": true,
+  "new_code_bindings": 7,
+  "inherited_code_bindings": 1135,
+  "checkpoint_files_whole_bytes_compared": 18,
+  "checkpoint_bytes_copied": 2034760045,
+  "published_code_literal_equal_frozen": [
+    "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/tools/reserved64/prepare_reserved64_native_inputs_v1.py",
+    "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/tools/reserved64/run_reserved64_native_predictions_v1.py",
+    "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/tools/reserved64/reserved64_protocol_common_v1.py",
+    "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/tools/reserved64/own_reserved64_native_stage_v1.py",
+    "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/tools/reserved64/audit_score_reserved64_native_v1.py",
+    "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/tools/reserved64/bootstrap_reserved64_native_sdk_v1.py"
+  ],
+  "registered_plans": [
+    "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/reserved-query64-confirmation-v1/stages/reserved64-initial-prediction-v1-plan.json",
+    "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/reserved-query64-confirmation-v1/stages/reserved64-a0-prediction-v1-plan.json",
+    "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/reserved-query64-confirmation-v1/stages/reserved64-a1-prediction-v1-plan.json"
+  ],
+  "native_semantics_projected_after_freeze": true,
+  "native_TEST_semantics_opened": false,
+  "gold_not_in_prediction_input": true,
+  "original_metric_support_contract": {
+    "primary": "Unchanged original family_macro_balanced_accuracy across fixed64 query families, a1-minus-a0. If native support lacks either label in any family, this primary is unavailable; do not drop/replace family or select another primary.",
+    "secondary": "Original native applicability known-mask accuracy/confusion/familymacro; native change/stable/unknown joint pairs; initial comparisons. Both constant satisfies/does_not_satisfy references separately, no best-constant selection.",
+    "failures": "Every first failed known cell incorrect under the original known-cell denominator, invalid metric-only sentinel never a fake prediction. Known pair with failed endpoint incorrect, unknown pair no accuracy or negative gold. Pair change rate among completed pairs separately; exact unchanged native pair metrics when all outputs valid.",
+    "statistics": "20000 common paired bootstrap draws, seed0, fixed64 query families, unadjusted percentile95; conditional on fixed fits/shared corpus/native labels, not independent Source histories or full-chain seed uncertainty."
+  },
+  "known_admission_result": {
+    "ready": false,
+    "reason": "EXISTING_EXTERNAL_MODEL_HTTP_WORKER_LIVE",
+    "owner": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/stages-lme-v1/fixed-prefix-prediction451-v1-continuation-006-owner.json",
+    "pid": 2889923
+  },
+  "scorer_contract": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/reserved64-native-scorer-existing128-contract-v2.json",
+  "dependency_reflection": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/reserved64-contract-v1-dependency-reflection-v1.json",
+  "source_document_and_native_labels_not_independently_reviewed": true,
+  "adopted": false,
+  "new_fits": 0,
+  "new_model_HTTP_calls": 0,
+  "ledger_opened_or_written": false,
+  "no_sha_validation": true,
+  "goal_complete": false
+}

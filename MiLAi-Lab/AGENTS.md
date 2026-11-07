@@ -1,4 +1,71 @@
-# LIVE A100 EXECUTION v68: 2026-11-07
+# LIVE A100 EXECUTION v69: 2026-11-07
+
+Full original763-line goal ACTIVE/incomplete; current/previous turn PROGRESS.
+Latest data/manifests/a100-development-progress-20261107-v69.json ->v68;
+previous checkpoint2c7474ca. ROOT/F/E same. No subagents/SHA/checksums/
+fingerprints/services/secondledger/reset/refund/remote/Product writes/model
+first-outcome retries/reselection/crop/compact/quantize. GPUs0/1 untouched;
+learnerGPU2FP32/4threads/MHAFalse/refcompileFalse/TF32False. One actualmodel
+HTTPworker only; noofflineledger open/write whilelive. No GNUtimer around
+scanner/settler/launcher. Wholecost notnested/oldrebill, unknownnotzero.
+
+NEW Q64=ROOT/reserved-query64-confirmation-v1. Protocol/code/models/native
+scoring FROZEN BEFORE reservedsemanticprojection. 7new+1135inherited code
+bindings,18checkpoint files2034760045bytes copied+wholebytecompared.
+Originalpreselected initialE1u16/A0u2104/A1u2104, primaryA1-A0, no newfit/
+bestcheckpoint/seed/adoption/A20k/B192/J. NotE3-vs-fixed-prefix Hosttask.
+64shared-corpusqueryfamilies(allnativedev),127rawrows ->4333nativecells:
+4066known/267unjudged,1884stablepairs/267unknownpairs/0judgedchanges.
+All127originalUTF8rows wholebyteeq; fullmatrix/goldmask/publicstate+question
+exactrebuilt. Unknowncells allpredicted, no labelrepair orcross-negativefill.
+All64bothlabels ->originalfamilybalancedmetric defined. Changejointaccuracy
+UNAVAILABLE, not0. 20kpairedseed0queryfamilyCI planned; no64newSourceclaim.
+Protected64SEMANTICS NOW PROJECTED afterfreeze; nativeTESTstillUNOPENED.
+Historicalmetadata/permethodFalseflags retained asbeforeprojection records.
+
+Q64/protocol-before-reserved-semantic-projection-v1.json,
+prepared-inputs-v1.json,full-source-input-and-mask-verification-v1.json.
+Native inputs Q64/native-inputs-v1/public-inputs.jsonl (ONLYindex/family/
+payloadstate/questions); originaloffline matrix/pairs separate.
+All3plans inQ64/stages/reserved64-{initial,a0,a1}-prediction-v1-plan.json.
+Actualmodelpredictions0; noownerexists. --check-onlyinitial readyFalse:
+existingLME006actualpid2889923live. Must waitactualmodel+storageexit,
+paywholeeligibleidle, thenexplicitinitial ->fullpredaudit ->a0 ->audit ->a1
+->audit ->nativeoffline score. SameE/single-lme-stage.lock and originalledger.
+NO GNUlauncher/autonextqueue/retry. OnlynativeNOT_RUNtail afteractualclosed
+owner/rawreflection; started/returnedpendingrows mustreconcilewithoutNN.
+Childnogold/HTTP/ledger; parentwholeRUSAGE+measuredparent onceafterrealexit.
+Entry/owner/audits inQ64/frozen-v1, DO NOTedit7boundRootentries/frozenfiles.
+SDKbootstrap importsCUDAtransformers4.52.3/tokenizers.21.4 thenappends
+HTTP_SITE; noPYTHONPATH HTTP-firstshadowing. Contractv1pureCPUfailedmissing
+langchain_core beforeweights/protectedsemantics; reflectionretained/v2
+actual8744oldDEV128nativepreds pairfields exactunchangedpassed,noforwards.
+Public6byte-identical entrycopies tools/reserved64/ withREADME; summary
+data/manifests/a100-reserved64-native-protocol-preparation-20261107-v1.json.
+Scope docs andinternalresearchdraft updated, notfinalpaper/goalcomplete.
+
+ALL1024Hostquality/4x256pairedfamily20kstats/ops/Source-delivery/inferencecost
+reports/reproductions/qualityPNG-PDF/initial763line73unitaudit remainclosed.
+C149/148/131/115,common122stress71/79/62/57,S150/149/139/103,F40/52/51/61,
+noadoption. Authornotblind/independent/guide+masktiminglimits retained.
+
+ONLY MODELHTTPWORKER LME006 parent2889923/child2889928 RUNNING/
+clientCPUFalse;actual/procverified,active161,
+{'COMPLETED': 155, 'FAILED_READING': 6, 'PREPARING_INPUT': 1, 'NOT_RUN': 289}. First119wholeeq005; ReaderF7/39/41/57/68/118
+retained. At newfirsterror waitactualexit/billing/procsabsent,inspectraw,
+reflect, explicitlyregisternativeNOT_RUNtail (or interleavedeclaredQ64only
+afterallactualworker/costgates). No modelchange/inputcrop/outputcapchange.
+CPUstorage006 parent2891035/child2891050 followsONLY006,
+total161closedcases/966checkpoints wholebyteverified.
+Keepimmutablebase outsidecasetrees, frozenv2optionalpersteprestore.
+Idle1..32paidonce (32=307timers72.49CPU+storage005348.14992905400004CPU);
+ALLpost32timersinclQ64prep pendingnextactualeligibleidle. Mem2Actfinal1147
+bindings/full429sessions16843turnbank/public400 unchanged,actual400x2=0,
+allLMEfullclosures required. Fullgoal external451x2/400x2,actualQ64,
+globalSource-View/ops/allprojectcosts/finalpaper/overallfigures/finalaudit
+remain. Fullgoal NOTcomplete. Follow wholeoriginalscope, notonlyQ64.
+
+# HISTORICAL A100 EXECUTION v68: 2026-11-07
 
 Full original763-line goal ACTIVE/incomplete; this/previous turn PROGRESS.
 Latest data/manifests/a100-development-progress-20261107-v68.json ->v67;
