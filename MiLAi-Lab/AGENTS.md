@@ -1,4 +1,58 @@
-# LIVE A100 EXECUTION v63: 2026-11-07
+# LIVE A100 EXECUTION v64: 2026-11-07
+
+Full original763-line goal ACTIVE/incomplete; this/previous turn PROGRESS.
+Latest data/manifests/a100-development-progress-20261107-v64.json ->v63;
+previous checkpoint12ced806. ROOT/F/E same. No subagents/SHA/checksums/
+fingerprints/services/secondledger/reset/refund/remote/Product writes/
+model-first-outcome retries/reselection. GPUs0/1 unchanged;fullSource/K/menu/
+tasks/horizon retained. No GNU wrapper on scanner/settler/launcher.
+
+ALL1024individual semanticreviews NOW CLOSED, no more seed2reviewpending.
+F/source-author-quality-all4-methods-closeout-v1.json and tracked results
+data/manifests/a100-confirmation256-quality-results-20261107-v1.json.
+MainC baseline149/primary148/seed1131/seed2115,common122stress71/79/62/57,
+materialS150/149/139/103,firstF40/52/51/61,allfull256denom.
+Seed2full C115/I64/Q0/W9/F61/U7,S103/P129/I24/U0; DEV185C87/stress40,
+TRAIN71C28/stress17. All old8..248recorddicts wholeequal.
+All4main/material/stress/gainsloss/nativeDEV185TRAIN71/paired20kfamilyCI/
+perseed/within-family3seedmean CLOSED. Primarymain-0.390625pp CI[-7.421875,
+6.640625],g40/l41/t175; primary stress+3.125 CI[-1.171875,7.421875].
+3seedwithin-familymain-6.9010416667 CI[-12.5,-1.171875],stress-1.953125
+CI[-5.3385416667,1.4322916667],materialS-7.6822916667
+CI[-13.0208333333,-2.34375]. Fixed256families, not768/1024independent.
+Authornotblind/independent, common122afterbaseline80/primary16, guide
+82/101/231 exposuretiming retained. NativeF1 unchanged, nottaskC.
+No adoption/seedselection/fits/N/budget/scorer/maskchange. Historical
+permethod closeouts all4=False remain historical; newglobalreceipt closes.
+Tracked docs/MILAI_A100_CONFIRMATION256_RESULTS_20261107.md, analysis
+tools/analyze_a100_confirmation256_quality.py, PNG/PDF docs/figures/.
+Actualtrackedcodereproduction wholeJSONequals original excepttimestamp;
+exactFractioncensus/compactallstats/localpaths/visualfigure passed.
+
+ONLY MODELHTTPWORKER LME005 parent2465168/child2465173
+RUNNING/clientCPUFalse,actual/proccommandsverified,active117,
+{'COMPLETED': 112, 'FAILED_READING': 5, 'PREPARING_INPUT': 1, 'NOT_RUN': 333}. First69wholeequal004; 7/39/41/57/68ReaderF
+retained. No retry/autonextqueue/execsession/thinking/Source/imagechange.
+At newfirsterror waitactualexit/billing/procsabsent,reflect,explicitnative
+NOT_RUNtailonly. Whole451audit/nativeJudge/scoreaudit/archive required;
+givenretrieval notautonomousHost/unseenSmall.
+CPUstorage005 parent2466074/child2466075 followsONLY005;
+total117closedcases/702checkpoints wholebyteverified.
+Keep immutablebase outsidecasetrees; optionalpersteprestore frozenv2 before
+replay. Whole451audit/pairedrootfirstcall do notread step/control.
+No storage modelHTTPledger/automaticnextsegment, CPU pendingactualexit+idle.
+
+MEM2ACT final1147bindings/public400/full429sessions16843turnbank unchanged;
+Sourceverifiedpaid, actual400x2still0. AllLME451x2prediction/score/archive
+closures required bysameownerlock. Do notedit boundentry/runtime.
+COST idle1..31paid; allpost31timers incl all4stats/reproduction/figures/
+progress pendingnextactualeligibleidle. Neverofflinebillwhilemodelalive,
+doublebillnative/client/parent/nested/oldcost; unmeteredcostunknownnotzero.
+Old64reserved-query/nativeTESTsemanticsunopened,old64Sourceexposed.
+Full externalresults/Source-View/ops/fullcosts/overallfigures/paper/results/
+requirement-by-requirement763-lineaudit remain. Fullgoal NOT complete.
+
+# HISTORICAL A100 EXECUTION v63: 2026-11-07
 
 Full original763-line goal ACTIVE/incomplete; current/previous turns PROGRESS.
 Latest data/manifests/a100-development-progress-20261107-v63.json ->v62;
