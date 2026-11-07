@@ -1,4 +1,57 @@
-# LIVE A100 EXECUTION v62: 2026-11-07
+# LIVE A100 EXECUTION v63: 2026-11-07
+
+Full original763-line goal ACTIVE/incomplete; current/previous turns PROGRESS.
+Latest data/manifests/a100-development-progress-20261107-v63.json ->v62;
+previous checkpoint2ebf1296. ROOT/F/E same. No subagents/SHA/checksums/
+fingerprints/services/secondledger/reset/refund/remote/Product writes/
+model-first-outcome retries/reselection. GPUs0/1 unchanged;fullSource/K/menu/
+tasks/horizon retained. No GNU wrapper on scanner/settler/launcher.
+
+SEED2 FIRST160 now wholeliteralbound: C77/I38/W6/F33/U6;materialS69/P77/I14,
+nativeDEV160. All prior8..152whole recorddicts unchanged. Remain96=indices
+160..255, no fullseed2quality closeout/all4mainC/material/common122/gainsloss/
+perseed/within-family3seedmean/20kpairedfamilyCI/nativeDEV185TRAIN71 yet.
+Guides82/101/231 beforethismethodsemanticreview but notallmodelruns/other
+answers; authornotblind/independent, nolabelinheritance/partialextrapolation.
+Common122mask/frozen256denom unchanged. NewfullSource reviews:100all69
+records do not resolve MAS/Masked-and-Split expansion;103all43 do not
+establish within-introduction abandonment-count feature;105all44 describe
+POS tagging as possible while coreference/Louvain explicitlyperformed.
+All3U for extraunverifiedclaims, notknownoppositefacts; rawfirstanswers/
+guides/olderlabels unchanged. Source27/41previousreviews retained. 101
+joint auxiliaryRE explicitlyimplemented/nopublishedREscore ->C/S.
+SEED1ALL256 unchanged C131/I53/Q0/W9/F51/U12;S139/P105/I12/U0,
+main131/stress62 same256. DEV185C97/I34/W6/F37/U11,S102/P73/I10,stress43;
+TRAIN71C34/I19/W3/F14/U1,S37/P32/I2,stress19. Baseline149/stress71,
+primary148/stress79/all4nativeF1 unchanged. No seedselection/adoption.
+
+ONLY MODELHTTPWORKER LME005 parent2465168/child2465173 RUNNING/clientCPUFalse,
+actual/proccommandsverified; active100, {'COMPLETED': 95, 'FAILED_READING': 5, 'PREPARING_INPUT': 1, 'NOT_RUN': 350}.
+First69wholeequal004, earlier7/39/41/57/68ReaderF retained. No modelretry/
+autoqueue/execsession/recipe/thinking/Source/image changes. At newfirsterror
+wait actualexit/billing/procsabsent,reflect, then explicitnativeNOT_RUNtail.
+Whole451audit/nativeJudge/scoreaudit/archive required; givenretrieval is
+notautonomousHost/unseenSmall. CPU storage005 parent2466074/child2466075
+one segmentonly, storedrows[69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99]; total100cases/
+600completecheckpoints wholebyteverified. Keep externalimmutablebase,
+optionalpersteprestore frozenv2 before replay; whole451audit/pairedrootfirst
+call do notread step/control. No modelHTTPledger/automaticnextsegment;
+allCPU pendingactualexit+idle. No Source/DB/historycrop.
+
+MEM2ACT final1147bindings/public400/full429sessions16843turnbank frozen,
+verified/paid asv62. Actual400x2still0; allLME451x2 actualprediction/score/
+archiveclosures required bysameownerlock. Do notedit boundentry/runtime.
+ActualfirstHost/Source/SDK/catalog/NN audits/adaptedmetrics/scoreaudits/
+post-pairedscorearchive evidence remains. No authorTA/leaderboardclaim.
+COST idle1..31paid;allpost31timers incl seed2first160/Source100/103/105/
+progress pendingnextactualidle. Neverofflinebillwhilemodelalive or double
+native/client/parent/nested/oldcost. Unmeteredauthor/inspection/launch/
+cleanup/settleCPU unknownnotzero. Old64reserved-query/nativeTESTsemantics
+unopened,old64Sourceexposed. Full externalresults/96semantic/all4stats/
+Source-View/ops/fullcosts/figures/paper/results/full763-lineaudit remain.
+Fullgoal NOT complete.
+
+# HISTORICAL A100 EXECUTION v62: 2026-11-07
 
 Full original763-line goal ACTIVE/incomplete; current/previous turns PROGRESS.
 Latest data/manifests/a100-development-progress-20261107-v62.json ->v61;
