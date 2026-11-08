@@ -1,4 +1,44 @@
-# LIVE A100 EXECUTION v110: 2026-11-08 (Asia/Shanghai)
+# LIVE A100 EXECUTION v111: 2026-11-08 (Asia/Shanghai)
+
+Full original763-line goal ACTIVE/incomplete; current PROGRESS, previous VERIFIED_WAIT.
+Latest data/manifests/a100-development-progress-20261108-v111.json; previous a100-development-progress-20261108-v110.json, checkpointf51c0786.
+ROOT/F/E/Q64 same; frozen protocol/source-version/phase batch IDs stay20261107.
+No subagents/SHA/fingerprints/services/secondledger/reset/refund/remote/Productwrites/
+first-outcome retries/reselection/crop/compact/quantize. One actual modelHTTPworker.
+GPUs0/1untouched; learnerGPU2FP32/threads4/MHAFalse/refcompileFalse/TF32False.
+No offlineledgeropen/write whilelive; scanner/settler/launcher never GNUwrapped.
+Native/whole/parent/nested/oldcost neverdouble-add; unmeteredCPUunknown_not_zero.
+Do not edit1135LME/1147Mem2Act/7Q64bound code/runtime/models.
+
+ONLY MODELHTTPWORKER LME046 parent3994707/child3994708 RUNNING/clientCPUFalse,
+actual/procverified, active430, {'COMPLETED': 384, 'FAILED_READING': 46, 'PREPARING_INPUT': 1, 'NOT_RUN': 20}.
+Only native NOT_RUN430..450=21, first430whole dict equal045.
+Reader failures 7/39/41/57/68/118/164/173/176/204/207/212/224/227/236/237/241/248/250/264/265/269/271/289/297/302/303/326/339/345/347/351/355/356/365/366/371/372/380/395/396/404/409/410/417/429 retained.
+Retained Reader length content states: {'absent_final': 45, 'present_truncated_final': 1}; partial text remains FAILED/unscored.
+045parent3914671/child3914672 actualexit1/nativepaid/gone, first430=384COMP/46F.
+New429/ee75b921 oneHTTPprompt4883/out8192/total13075,length/absent_final/0chars,reserved13587<65536;
+no inputoverflow/newunknown0/0/retry/UNKNOWN/negativegold/recipechange.
+Segment12HTTP/88936known, child719.259853+parent0.158619168 nativepaidonce.
+Storage045parent3914806/child3914808 exit0/gone/paid75, rows418..429, whole62.816627000000004+0.027642586=62.844269586CPU.
+Storage046parent3994836/child3994837 actual/procverified follows ONLY046.
+Total430cases/2580checkpoints wholebyteeq; keepBOTHpool0000/pool0001 immutablebases outsidecases.
+Optionalperstep replay frozenv2restore_control first; whole451audit/pairedfirstcall doesn'treadstepcontrol.
+At firstnewerror/fullclosure inspectnative raw, waitactual model/storageexit+paid/gone,
+reflect then explicitly registerONLYnative NOT_RUNtail. No autoqueue/restart. Full451audit/nativeJudge pending.
+
+Idle1..75paidonce;75=4timers0.31CPU+storage04562.844269586CPU; no native/oldrebill.
+Post75publication check/writer timers pendingnextactualidle. Metadata publisher v2 reads native values/raw content; no numeric substitutions.
+Use ROOT/reflect_closed_lme_reader_length_segment_v2.py for future length failures; v1 empty-only assumption was rejected on043.
+Absent and partial responses both remain native failures; frozen cap/thinking/runtime unchanged.
+prepare_verify_lme044_idle73_v1.py has specific043/row410 partial-content checks; do not blindly rename those historical checks for future segments.
+settle_lme_closed_storage_idle_v73.py also has one-off043 v1-timer checks; use a generic prior settler template for later idles.
+Static knownpaid cutoff before007 unchanged,87091.84096111101CPU/25368797Hostknown tokens; not currentallprojecttotal.
+All1024quality/stats/ops/cost,Q64all12999metrics/audits,D960+K9+oldoutput42,4panelPNG/PDF/eightfitworksheet closed unchanged.
+Reviewer THISexecutionassistant not independenthuman/originalauthors. No newfit/adopt/nativeTESTopening.
+Full LME451x2/Mem2Act400x2actual0,finalallprojectcost/finalpaper/finaloverallfigures/final763lineaudit INCOMPLETE;
+goal NOTcomplete/blocked. Keep original full scope.
+
+# HISTORICAL A100 EXECUTION v110: 2026-11-08 (Asia/Shanghai)
 
 Full original763-line goal ACTIVE/incomplete; current PROGRESS, previous PROGRESS.
 Latest data/manifests/a100-development-progress-20261108-v110.json; previous a100-development-progress-20261108-v109.json, checkpoint83c87de9.
