@@ -1,4 +1,50 @@
-# LIVE A100 EXECUTION v116: 2026-11-08 (Asia/Shanghai)
+# LIVE A100 EXECUTION v117: 2026-11-08 (Asia/Shanghai)
+
+Full original763-line goal ACTIVE/incomplete; current PROGRESS, previous VERIFIED_WAIT.
+Latest data/manifests/a100-development-progress-20261108-v117.json; previous v116, checkpoint0d8aa2bb.
+ROOT/F/E/Q64 same; frozen protocol/source-version/phase batch IDs stay20261107.
+No subagents/SHA/fingerprints/services/secondledger/reset/refund/remote/Productwrites/
+first-outcome retries/reselection/crop/compact/quantize. One actual modelHTTPworker maximum.
+GPUs0/1untouched; learnerGPU2FP32/threads4/MHAFalse/refcompileFalse/TF32False.
+No offlineledgeropen/write while a model/HTTP worker is live; scanner/settler/launcher never GNUwrapped.
+Native/whole/parent/nested/oldcost neverdouble-add; unmeteredCPUunknown_not_zero.
+Do not edit1135LME/1147Mem2Act/7Q64bound code/runtime/models.
+
+Fixed-prefix FULL451 prediction+mechanicalSource audit CLOSED and frozenfinalizer alias created:
+401COMPLETED/50FAILED_READING; all451wholefirstdicts earliest across51collections. 49absent/1truncated failures
+remainFAILED/unscored,501chars on043row410 retained. No Reader retry/UNKNOWN/negativegold/recipechange.
+Audit actualexit0/gone: Sourcecomparisons9364144, snapshots3157, SDK451entirecontexts/Reader451entirewires eq,
+NN0/inputtokens0/rejections0/newmodel_tokenizer_HTTP0. This is Source/input fidelity, not answer truth.
+ROOT/verify-lme-fixed-source-audit-closed-v1.json; E/finalized-lme-v1/fixed-prefix-prediction451-v1-closure.json.
+GNUfullauditCPU3827.69/wall5111.32, Sourceaudit+finalizer+verification+v116writer4timers
+3827.9900000000002CPU paidonce idle81. No storage/native/oldrebill. Auditlaunchreceipt status paidclosed.
+
+All451cases/2706control checkpoints remain byteeq; keep BOTH pool0000/pool0001 immutable bases outside case trees.
+Optional step-control replay uses frozenv2 restore_control; preserve bases through native case archiving.
+
+ONLY MODELHTTPWORKER fixed-prefix-scoring451-v1 parent341568/child341673 RUNNING/clientCPUFalse.
+Actual named /proc commands verified; active133, {'COMPLETED': 128, 'UNSCORED_FAILED_READING': 50, 'UNSCORED_COMPLETED': 273}; Reader_regeneratedFalse.
+Plan E/stages-lme-v1/fixed-prefix-scoring451-v1-plan.json; owner/log/output sameprefix.
+Explicitlaunchreceipt sameprefix-explicit-launch.json; running-snapshot-v1.json saved outside cases.
+Child CUDAempty/threads4/noLocalModel; existing Host unchanged. Native required Judge calls only, no autoqueue/retry.
+50 Reader failures remain UNSCORED_FAILED_READING with scoreNone; full451 denominators/missing bounds retained.
+On first actual FAILED_SCORING inspect original judge/call/request/response and cause, wait actual owner exit+CPUpaid/gone;
+then explicit frozen register_external_lme_continuation_v1.py initial=fixed-prefix-scoring451-v1 serial1
+ONLY native UNSCORED_COMPLETED positions, never failed Judge retries. Reader-length reflection helpers are not scoring helpers.
+On full scoring closure run frozen audit-code-reference/audit_external_lme_scoring_v1.py OWNER, verify all451Native scores/
+firstReader/Judge wires/aggregate bounds offline, finalize, then frozen fixed-prefix-archive451-v1. Primary451 same sequence next.
+Do not start primary or Mem2Act before prerequisites; Mem2Act requires all6LMEclosures. No model-first-outcome reselection.
+
+Idle1..81paidonce;81=4timers3827.9900000000002CPU; auditwhole counted once, no storage/native/ancestorrebill.
+Post81v117writer pending next actual no-model idle82. Never open offlineledger while scoring live.
+Scoring nativeowner bills wholechild-minus-native+parent after actual exit; never GNUwrap that owner.
+Static knownpaid cutoff before007 unchanged87091.84096111101CPU/25368797Hostknown tokens; not currentallprojecttotal.
+All1024quality/stats/ops/cost,Q64all12999metrics/audits,D960+K9+oldoutput42,4panelPNG/PDF/eightfitworksheet closed unchanged.
+Reviewer THISexecutionassistant not independenthuman/originalauthors. No newfit/adopt/nativeTESTopening.
+Full fixed451scoreaudit/archive+primary451prediction/scoring/audits/archive,Mem2Act400x2actual0,
+finalallcost/paper/figures/final763audit INCOMPLETE; goal NOTcomplete/blocked. Keep original full scope.
+
+# HISTORICAL A100 EXECUTION v116: 2026-11-08 (Asia/Shanghai)
 
 Full original763-line goal ACTIVE/incomplete; current PROGRESS, previous PROGRESS.
 Latest data/manifests/a100-development-progress-20261108-v116.json; previous v115, checkpoint42df9128.
