@@ -6,11 +6,34 @@
 历史 worktree、原始失败与用户文档保持原状。没有使用子代理、SHA/内容指纹校验、新服务、第二账本或远端写入。
 
 本轮机器可读入口为
-[progress](../data/manifests/a100-development-progress-20261109-v131.json)。
+[progress](../data/manifests/a100-development-progress-20261109-v132.json)。
 原始数据、冻结运行时、权重、命令、计时和实际输出位于本 worktree 的 ignored
 `artifacts/a100-development-20261104/`。本记录是现有报告体系的执行摘要。
 
-## v131 当前状态（2026-11-09，Asia/Shanghai）：Reader首失败保留与完整计量关闭，仅未尝试尾部运行
+## v132 当前状态（2026-11-09，Asia/Shanghai）：Reader首失败保留与完整计量关闭，仅未尝试尾部运行
+
+第216/05cce9b3原生Reader单次HTTP以length结束，输出8192
+tokens、final=absent_final；prompt5216/total13408/
+reserved13920<65536，无输入溢出/新unknown。
+全部首失败保留FAILED/scoreNone，没有修改thinking/cap/Source或补成UNKNOWN/负gold。
+已关闭217整首结果逐项等于12段最早祖先；本段
+72NN/input484522、9ReaderHTTP/
+73008known、72真实before归档、
+9案例/63control原字节比对全部对齐。
+模型父子实际退出/消失/原生CPU已记，完整子604.505711＋父0.160704083CPU，
+NN/load已含其中；GPU2job区间0.22776995009147666h包含IO/Reader等待，非kernel忙碌时间。
+idle95真实空闲支付4新增关闭计时10.53CPU，存储
+62.49400030699999CPU另计，原65native client phases已核对且不重计。
+
+显式登记/check-only并启动primary-seed0-u32-prediction451-v1-continuation-012，仅234原生NOT_RUN，前序首结果整dict保持。
+模型父2376460/子2376461与CPU存储父2376602/子2376603实际存活；
+cuda0/GPU2FP32/16384/2048/threads4/MHAFalse/refcompileFalse加载通过。当前active217、{'FAILED_RETRIEVING': 2, 'COMPLETED': 205, 'FAILED_READING': 10, 'PREPARING_INPUT': 1, 'NOT_RUN': 233}，
+新存储0案例/0control检查点。原1141绑定/科学配置/
+checkpoint/seed/预算/Source与输出首结果均未变。运行时不读写离线账本，本进度计时等待实际下一idle。
+全451覆盖及Source/NN/SDK/Reader/评分审计、归档、Mem2Act400×2、最终全成本/论文/图表/763完成审计仍未完成；
+原1..9逐步物理快照缺口按真实Source/Store/trace/SDK/Reader证据披露，不伪造或重跑。
+
+## v131 历史状态（2026-11-09，Asia/Shanghai）：Reader首失败保留与完整计量关闭，仅未尝试尾部运行
 
 第207/fa504f5e原生Reader单次HTTP以length结束，输出8192
 tokens、final=absent_final；prompt5187/total13379/
