@@ -6,11 +6,39 @@
 历史 worktree、原始失败与用户文档保持原状。没有使用子代理、SHA/内容指纹校验、新服务、第二账本或远端写入。
 
 本轮机器可读入口为
-[progress](../data/manifests/a100-development-progress-20261108-v121.json)。
+[progress](../data/manifests/a100-development-progress-20261108-v122.json)。
 原始数据、冻结运行时、权重、命令、计时和实际输出位于本 worktree 的 ignored
 `artifacts/a100-development-20261104/`。本记录是现有报告体系的执行摘要。
 
-## v121 当前状态（2026-11-08，Asia/Shanghai）：主方法实际68次NN通过输入核验，快照观察缺口保留并停止扩展
+## v122 当前状态（2026-11-08，Asia/Shanghai）：观察回调组合已实际恢复快照与字节存储，主方法441未尝试尾部运行
+
+无模型探针直接执行原functional的observer赋值AST、原verify_replay与原RetrievalRecorder：旧覆盖问题复现，
+组合后先验证再记录，初始/逐步文件实际写出，验证失败阻止记录，作用域结束恢复类行为。未改1138旧绑定。
+执行v3新增3绑定至1141；仅观察接线/精确serial2协议桥接/明确缺口的审计修订，模型、数据、Source、
+checkpoint/seed、完整配置/预算、thinking、cap、评分和原451分母均未变。
+
+已保留1..9的补审计实际通过：每条全部13837个原有Store值逐项等于恢复的完整baseline-before，
+Source/角色/时钟/身份/权限/lifecycle/应用不变，只新增声明的检索/准入/exposure派生键。
+68实际NN/input459461的完整状态/菜单/payload/head/有限argmax/未截断与原生计数一致，
+8实际原生SDK交付上下文、8完整Reader请求及答案原文相符。第9条末READ无操作结果/无Reader保持失败。
+这些9条的实际逐步物理Store/Saver字节快照仍不可用，没有伪造；审计资格明确按真实Source/Store/trace/SDK/
+Reader证据列示，10..450仍要求原完整实际capture/snapshot审计。首0的严格加载失败Source核验继续保留。
+
+idle85真实空闲一次支付9条关闭计时47.34CPU（含失败反思v1），失败存储001整CPU0.133648045另计。
+旧模型426.852512653及其NN/load、归档与旧存储不再加。显式启动002仅未尝试10..450共441条，
+父874577/子874598实际存活、cuda:0/GPU2 FP32/16384/2048/4线程加载通过。
+当前active19、{'FAILED_RETRIEVING': 2, 'COMPLETED': 17, 'PREPARING_INPUT': 1, 'NOT_RUN': 431}；首0..9整记录保持。
+第一对实际完成调用10/11已有16完整before归档/14control检查点全原字节比较及16NN完整输入核验通过，
+原回放请求/额度/首观测/完整菜单相等标记保持；实际CPU跟随器父878698/子878704存活，
+已处理9案例/63检查点，保留primary不可变base。
+本轮首对核验及进度writer等待实际idle86，运行时不读写离线账本。原生model/HTTP/CPU/GPU区间均等实际退出。
+
+Mem2Act只读静态路径核查：既有frozen_host_message已将policy/checkpoint合并完整memory_control，
+primary进入host replay而不是retrieval replay覆盖分支，1147原绑定完整；这两处LME故障不要求修改其原接线。
+没有实际400任务/模型输入证明，仍须all6LME闭合后执行原门槛。完整主方法451审计/评分/归档、
+Mem2Act400×2、全项目成本/论文/图表/763行完成审计仍未完成，目标保持ACTIVE。
+
+## v121 历史状态（2026-11-08，Asia/Shanghai）：主方法实际68次NN通过输入核验，快照观察缺口保留并停止扩展
 
 执行v2已冻结1138字节相同比对绑定，原1135未改；完整配置修正、严格v1→v2未尝试尾部桥接、
 首失败0的3458完整Source/baseline-before/应用/trace审计均已通过。idle84在实际无worker窗口

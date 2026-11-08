@@ -1,4 +1,62 @@
-# LIVE A100 EXECUTION v121: 2026-11-08 (Asia/Shanghai)
+# LIVE A100 EXECUTION v122: 2026-11-08 (Asia/Shanghai)
+
+Original763-line goal ACTIVE/incomplete; current PROGRESS, previous PROGRESS. No genuine blocker.
+Latest data/manifests/a100-development-progress-20261108-v122.json; previousv121, checkpoint8dad318b. ROOT/F/E/Q64 unchanged.
+Batch/protocol/source-version identifiers stay20261107. No subagents/SHA/fingerprints/services/secondledger/reset/refund/
+remote/Productwrites/first-outcome retries/reselection/crop/quantize. OneactualmodelHTTPworker maximum.
+HostGPU0/1unchanged; learnerGPU2/cuda0FP32threads4/MHAFalse/refcompileFalse/TF32False.
+No offlineledgeraccess/write while any actual modelHTTP/native-owned stage live. Scanner/settler/launcher neverGNUwrap.
+Native/whole/parent/nested/oldcost neverdouble-add; unmeteredauthor/inspection/launch/cleanup CPUunknown_not_zero.
+Preserve1141LME bindings (1138old+3newobservationv3),1147Mem2Act/7Q64bindings; newfixes needexplicitnewrevision.
+
+ONLY MODELHTTPWORKER primary-seed0-u32-prediction451-v1-continuation-002:
+parent874577/child874598actual/procverified RUNNING/clientCPUFalse,active19,{'FAILED_RETRIEVING': 2, 'COMPLETED': 17, 'PREPARING_INPUT': 1, 'NOT_RUN': 431}.
+InitialnativeNOT_RUN10..450=441 only. All first0..9whole dicts equal001:old0loadF,1..8COMP,9explicitinterruption.
+Plan/owner/log E/stages-lme-v1/primary-seed0-u32-prediction451-v1-continuation-002-*; preflight/explicit-launch receipts saved.
+Actualcuda0/GPU2FP32/max16384/head2048/thread4/MHAFalse/refcompileFalse VERIFIED. No cap/thinking/seed/model/sourcechanges.
+CPU-only namedstorage002 parent878698/child878704actualverifiedRUNNING; processed9cases/
+63checkpoints. E/primary-seed0-u32-prediction451-v1-continuation-002-storage-v3-*.
+ReuseE/lme-primary-control-storage-v2-bases +closed-case-receipts; retain allcreatedpoolbases outsidecases (pool1maynotyetexist).
+Keep BOTH oldfixedpoolbases too. Fullbytescomparedbeforeclosedcontrolremoval, no activeSource/DB/modelinput changes.
+Neverrestart livejob forobservationtimeout. At firstnativefailure/fullclose inspectactualraw, waitmodel+storage actualexit/paid/gone,
+reflect, settleonlynewknownclosedGNU+deferredstorage once ateligibleidle86, registeronlynativeNOT_RUNtail. No autoqueue/retry.
+Readerlengthabsent/partial remainsFAILEDunscored; failed0/9/completedfirsts neverrerun. Use actualv3protocol/frozenowner,
+not fixed-prefix publisher templates. Metadata reflection must use actualtrace, interruptedqueries lack success-only fields.
+
+V3 protocol E/frozen-lme-observation-execution-v3/protocol-before-only-native-untouched-primary441-v3.json.
+tools/run_a100_lme_with_actual_policy_capture_v3.py composes verifierFIRST+originalRecorder via scopedobserverassignment;
+fullconfigfixv2 stays. Actualfunctional assignmentAST/verifier/recorder no-model fixture passed andrestoresclass behavior.
+tools/own_a100_lme_observation_v3.py reusesv1admission/billing/validation; EXACTv2-001->v3-002serial2bridge, thennormalv3continuations.
+Canonicalsourceversion/aliases/closurepaths/stageorder andoldinitialoutputancestrybase unchanged; finalizerv1reusable.
+All science fields/configs/checkpoint/seed/prompt/thinking/budgets/SDK projection unchanged. No actualtaskrepeat.
+Sourceauditor E/frozen-lme-observation-execution-v3/audit_a100_lme_predictions_execution_v3.py OWNER afterALL451terminalclosure.
+It retains strict0branch; explicit1..9realtrace/Source/Store/SDK/Reader audit; originalfullactualcapture/snapshot path for10..450.
+Use CUDAPY4.52.3/tokenizers.21.4 FIRST, HTTP_SITE appendedlast, PYTHONPATH v3folder+oldv1audit-code-reference+runtime/src/tools+ROOT
+andimageoverlay, CUDAemptythreads4. Frozenoldfixed bootstrap hashardcoded050/entry; do not blindlyrename/reuse.
+
+ROOT/verify-primary-observer-gap-rows1to9-v3.json ACTUALPASSED:each9all13837preexistingStorevalues equalscompletebaselinebefore,
+allSource/role/clock/identity/scope/permission/lifecycle/apps unchanged; onlyspecificderivedretrieval/read-admission/exposurecacheadded.
+All68actualNN/input459461 completebefore/menu/payload/headIDs/finiteargmax/noTrunc/nativetotalsequal;8wholeSDKcontexts/
+Readerrequests/answerstrings equal. Physical per-step Store/Saver bytes for1..9NEVEREXISTED, proof unavailableanddisclosed;
+neverfabricatecapture/relabelreconstructedstate. No narrowedSource/input/permission scope or case dropping. SemanticQA notproven.
+ROOT/verify-primary002-first-real-captures-v3.json PASSED firstreal10/11:16fullbeforearchives/14controlbytes/16NN,
+alloriginalreplayequalflags andcompletecall.layout preserved. Storagefollower nowworks. Full451audit/scorestillPENDING.
+
+Idle1..85paidonce;85=9GNUtimers47.34CPU +failedstorage001.133648045separate. Oldmodel001426.852512653
+includesNN74.80637742194813/load7.513192891000017alreadycharged; originalstorage.064661018paid84; noneaddedagain.
+Post85firstrealcaptureverification/v122writer pendingactualidle86. Currentmodel002native/wholeminusnative/parent/GPUinterval/
+HTTPunknown-cost and storage002wholecost awaitactualexit. NeverGNUwrap owneror interleaveofflineledger.
+
+Fixed451ALL3closures+Source/scoreaudits remainclosed401COMP/50ReaderF,75correct/401subset,250validUNKNOWN,
+full451bounds[75/451,125/451],nativeCompleteMetricNone; allfirst451earliest51ancestryeq. Archive1965.505107002nativeonce.
+Mem2Actstaticinspection ROOT/mem2act-frozen-path-inspection-after-lme-observer-v3.json:1147bindings unchanged,
+hostreplaymergesfullconfig anddoesnotenterreplay_retrievalobserveroverride; no revisionneededforthesetwofaults.
+ThisisSTATIConly,400x2actual0 andall6LMEclosures gate remains. Fullprimary451coverage/Source+scoreaudits/scoring/archive,
+Mem2Act400x2,finalallcost/paper/figures/final763completionaudit INCOMPLETE; goalstayACTIVE, notcomplete/blocked.
+Allinternal1024/Q6412999/D960+K9+old42/fourpanel/eightfitworksheets unchangedclosed; reviewerTHISassistantnotindependenthuman.
+No newfit/adopt/nativeTESTopening. Staticknownpaidcutoff87091.84096111101CPU/25368797Hosttokens before007 NOTcurrenttotal.
+
+# HISTORICAL A100 EXECUTION v121: 2026-11-08 (Asia/Shanghai)
 
 Original763-line goal ACTIVE/incomplete; current PROGRESS, previous PROGRESS. No genuine blocker.
 Latest data/manifests/a100-development-progress-20261108-v121.json; previousv120, checkpoint0e052cb5. ROOT/F/E/Q64 same.
