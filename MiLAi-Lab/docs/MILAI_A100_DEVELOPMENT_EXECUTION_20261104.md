@@ -6,11 +6,29 @@
 历史 worktree、原始失败与用户文档保持原状。没有使用子代理、SHA/内容指纹校验、新服务、第二账本或远端写入。
 
 本轮机器可读入口为
-[progress](../data/manifests/a100-development-progress-20261108-v117.json)。
+[progress](../data/manifests/a100-development-progress-20261108-v118.json)。
 原始数据、冻结运行时、权重、命令、计时和实际输出位于本 worktree 的 ignored
 `artifacts/a100-development-20261104/`。本记录是现有报告体系的执行摘要。
 
-## v117 当前状态（2026-11-08，Asia/Shanghai）：全451机械审计通过，原生评分运行
+## v118 当前状态（2026-11-08，Asia/Shanghai）：固定前缀全451评分审计关闭，CPU归档运行
+
+原生评分实际退出0/父子进程消失/原生完整CPU已计量，401项COMPLETED、50项UNSCORED_FAILED_READING。
+无Judge失败，Reader未重新生成。130实际JudgeHTTP/174230known tokens，子35.715858＋父0.157451301CPU
+已原生一次计量，新unknown0/0。冻结全451评分审计实际退出0，401原生分数、130完整Judge请求、
+Reader原文、原生规则/汇总及缺失分母逐项核对通过，没有新模型/tokenizer/HTTP调用；评分别名已finalize。
+
+401已评分项中原生规则判定正确75项，有效模型UNKNOWN回答250项。条件子集原生overall=75/401
+（18.7032%）；50Reader失败未变成UNKNOWN或负gold，全451缺失边界为[75/451,125/451]
+（16.6297%至27.7162%），native_complete_cohort_metrics仍None，不能当作完整组精确分数。
+这是本地声明Reader/Judge下的benchmark原生口径，不是自主Host或原论文模型复现，也不是独立用户证据。
+
+评分审计/finalizer/核验/v117进度4条关闭计时5.17CPU秒在真实idle82一次支付。
+冻结CPU归档已显式启动，父424962/子424964实际存活，索引{'ARCHIVED': 42, 'ARCHIVING': 1, 'PENDING': 408}。
+保留完整模板及固定偏移字节块，原始预测/评分首结果保持；两pool不可变controlbase仍在案例树外。
+归档全451与完整成本关闭后才finalize并进入主方法451相同流程；Mem2Act400×2、最终全成本/
+论文/整体图表及763行完成审计仍未完成。
+
+## v117 历史状态（2026-11-08，Asia/Shanghai）：全451机械审计通过，原生评分运行
 
 冻结审计已实际退出0/进程消失：451问题ID及原生状态逐项相同，9,364,144次Source比对、3157完整
 归档快照、451原生SDK上下文、451完整Reader请求核对通过；固定前缀NN0/输入token0，未产生新模型、

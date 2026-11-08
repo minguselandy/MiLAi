@@ -1,4 +1,48 @@
-# LIVE A100 EXECUTION v117: 2026-11-08 (Asia/Shanghai)
+# LIVE A100 EXECUTION v118: 2026-11-08 (Asia/Shanghai)
+
+Full original763-line goal ACTIVE/incomplete; current PROGRESS, previous PROGRESS.
+Latest data/manifests/a100-development-progress-20261108-v118.json; previous v117, checkpoint6745d421.
+ROOT/F/E/Q64 same; frozen protocol/source-version/phase batch IDs stay20261107.
+No subagents/SHA/fingerprints/services/secondledger/reset/refund/remote/Productwrites/
+first-outcome retries/reselection/crop/compact/quantize. One actual modelHTTPworker maximum.
+GPUs0/1untouched; learnerGPU2FP32/threads4/MHAFalse/refcompileFalse/TF32False.
+No offlineledgeropen/write while modelHTTP or a native-owned stage is live; preserve its compute-delta accounting.
+Scanner/settler/launcher never GNUwrapped; native/whole/parent/nested/oldcost neverdouble-add; unmeteredCPUunknown_not_zero.
+Do not edit1135LME/1147Mem2Act/7Q64bound code/runtime/models.
+
+Fixed451 prediction+Sourceaudit+native scoring+scoreaudit+bothfinalizers CLOSED; first401COMP/50ReaderF unchanged.
+Source comparisons9364144/snapshots3157/SDK451/Reader451wholewires; NN0/untruncated/sourcevalues audit passed.
+Native scoring owner parent341568/child341673 actualexit0/nativepaid/gone/validatedTrue:
+401COMPLETED/50UNSCORED_FAILED_READING,0JudgeF. No Reader regen/retry/UNKNOWN repair/negativegold.
+130JudgeHTTP/174230known tokens; child35.715858+parent.157451301 nativepaidonce,newunknown0/0.
+Score audit401scores/130wholeJudge requests/firstReader strings/native aggregate/missing bounds passed offline0calls.
+Proof ROOT/verify-lme-fixed-native-scoring-closed-v1.json; bothfixedprediction/scores aliases and closure receipts exist.
+Native correct75/401conditional subset=18.7032%;250validUNKNOWNanswers. Full451bounds[75/451,125/451]
+=[16.6297%,27.7162%],complete_cohort_metricsNone; no full-cohort point score, not independentHost/paper reproduction.
+50ReaderF remainunscored;49absent/1truncated with501chars on043row410 retained. Allfirst451dicts earliest ancestryeq.
+
+NO EXPERIMENTAL MODELHTTPWORKER. ONLY LIVE native-owned CPU fixed-prefix-archive451-v1:
+parent424962/child424964 RUNNING/clientCPUFalse,actual/procverified. Index {'ARCHIVED': 42, 'ARCHIVING': 1, 'PENDING': 408}.
+Plan/owner/log E/stages-lme-v1/fixed-prefix-archive451-v1-*; explicit-launch.json saved.
+Index E/finalized-lme-v1/fixed-prefix-predictions/case-archives/index.json,451planned;
+archive originaloutcomeschangedFalse, preserve all predictions/scoring and paired replay material.
+KeepBOTHpool0000/pool0001 immutablecontrolbases outside case trees; optionalstepcontrol uses frozenv2restore_control.
+NeverGNUwrap nativearchiveowner. After actualexit/full451index/nativeCPUpaid/gone, frozenfinalizer OWNERarchive
+then explicit preselected primary-seed0-u32-prediction451-v1 only after all required gates/closures.
+No autoqueue/retry; observation timeout does not stop a job. Do not restart a live archive solely for time.
+No offlineledger whilearchive live: its owner subtracts native compute delta; external writes would corrupt attribution.
+
+Idle1..82paidonce;82=4timers5.17CPU; no native/scoring/Sourceaudit/storage/ancestorrebill.
+Post82v118writer waits for actual eligibleidle83. Nativearchive records child-minus-native+parent once after exit.
+Primary451 samefullprediction/Sourceaudit/finalizer/scoring/scoreaudit/finalizer/archive sequence; then Mem2Act400x2.
+Mem2Act requires all6LMEclosures. Never reselectseed/recipe/Source due current scores.
+Static knownpaid cutoff before007 unchanged87091.84096111101CPU/25368797Hostknown tokens; not currentallprojecttotal.
+All1024quality/stats/ops/cost,Q64all12999metrics/audits,D960+K9+oldoutput42,4panelPNG/PDF/eightfitworksheet unchanged.
+Reviewer THISexecutionassistant not independenthuman/originalauthors; no newfit/adopt/nativeTESTopening.
+Full fixed451archive+primary451prediction/scoring/audits/archive,Mem2Act400x2actual0,
+finalallcost/paper/figures/final763audit INCOMPLETE; goal NOTcomplete/blocked. Keep original full scope.
+
+# HISTORICAL A100 EXECUTION v117: 2026-11-08 (Asia/Shanghai)
 
 Full original763-line goal ACTIVE/incomplete; current PROGRESS, previous VERIFIED_WAIT.
 Latest data/manifests/a100-development-progress-20261108-v117.json; previous v116, checkpoint0d8aa2bb.
