@@ -1,4 +1,64 @@
-# LIVE A100 EXECUTION v120: 2026-11-08 (Asia/Shanghai)
+# LIVE A100 EXECUTION v121: 2026-11-08 (Asia/Shanghai)
+
+Original763-line goal ACTIVE/incomplete; current PROGRESS, previous PROGRESS. No genuine blocker.
+Latest data/manifests/a100-development-progress-20261108-v121.json; previousv120, checkpoint0e052cb5. ROOT/F/E/Q64 same.
+Frozen protocol/source-version/phase batch IDs stay20261107. No subagents/SHA/fingerprints/services/
+secondledger/reset/refund/remote/Productwrites/first-outcome retries/reselection/crop/quantize.
+One actual modelHTTPworker max; HostGPU0/1untouched, learnerGPU2FP32threads4/MHAFalse/refcompileFalse/TF32False.
+No offlineledger while any actual native-owned/modelHTTPworker live. Scanner/settler/launcher neverGNUwrap.
+Native/whole/parent/nested/oldcost neverdouble-add; author/unmeteredinspection/launch/cleanup CPUunknown_not_zero.
+Preserve ALL1138LME execution-v2 bindings (includesoriginal1135),1147Mem2Act/7Q64bound files. New fixes need newrevision.
+
+NO LIVE MODELHTTP/STORAGE WORKER. Fixed451 ALL3closures+Source/scoreaudits unchangedclosed:
+401COMP/50ReaderF,75correct/401subset,250validUNKNOWN,full451bounds[75/451,125/451],completeMetricNone.
+Allfirst451earliest51ancestryeq; bothfixedcontrolbases/templates and451archives preserved. ArchiveCPU1965.505107002
+nativeonce. Closed report/census8aae5880 remainsvalid; no newfit/adopt/nativeTESTopening.
+
+EXECUTIONv2 FROZEN E/frozen-lme-execution-wiring-v2/protocol-after-retained-initial-load-failure-before-untouched-primary-v2.json,
+1138bindings=1135original+3newadapter/owner/auditor; exactmethodconfigs/Source/checkpoint/seed/prompt/thinking/budgets/scoring unchanged.
+tools/own_a100_lme_execution_v2.py reusesv1admission/billing/validation, strict initialv1->v2serial1 bridge;
+tools/audit_a100_lme_predictions_execution_v2.py strictretained0Sourceaudit; correctedcompleteconfigadapter fromv120.
+Actualretained0Sourceproof ROOT/verify-primary-retained-load-failure-source-v2.json:3458fullSource/baselinebefore/apps/traceeq,
+no fabricatedcapture/NN/Reader. Full451audit NOTyetclosed. Idle1..84paidonce;84=7GNUtimers13.29CPU +separateoldstorage.064661018.
+
+Primarycontinuation001 parent673576/child673577 ACTUALCLOSED exit-2/nativepaid/gone/validatedFalse:
+first10 =8COMPLETED(rows1..8)/2FAILED_RETRIEVING(0originalcpuloadF,9explicitinterruption)/441NOT_RUN10..450.
+ActualGPU2/cuda0FP32/max16384/head2048/threads4/MHAFalse/refcompileFalse loadVERIFIED. 68NN/input459461,
+completeactualbefore/allactions/payload/headIDs/finiteprob-logits/argmax/noTrunc auditpassed andnativecountersmatch68/459461.
+8ReaderHTTP/35372known/0Judge/newunknown0/0. Actualmaxinput mayexceed8192; warningretained,not effectivecontextproof.
+Wholechild426.59694+parent.255572653=426.852512653 nativeonce includesNN74.80637742194813/load7.513192891000017;
+neveraddcomponentsagain. Model.cfg/data/seed neverselectedusingcurrentoutputs; allfirst0..9whole recordsretained.
+
+NEW FAILURE: functional.message installsRetrievalRecorder then replacesmemory.retrieval_observer withverify_replay
+(runtimefunctional.py3116..3169). Verificationruns butactualcaptures/steps for1..9nevercreated; storage001correctlyassertscontrols.
+CPUstorage parent676747/child676748 actualexit1/gone/processed0, whole.10894199999999998+parent.024706045
+=.13364804499999998pendingidle85. Do not charge oldoriginalstorage.064661018 again (paid84).
+SignalONEexplicitSIGINT duringretrievalrow9(noReader yet) to stop confirmedrecordingloss, NOT observationtimeout/retry.
+ROOT/primary001-instrumentation-stop-request-v1.json. All68actualNNoutputs/inputs present including4onrow9;
+lastrow9READ selected hasnooperation_result, cannotclaimsuccessfulREAD or Reader9. Reader0/9absent.
+Reflection ROOT/reflect-primary001-observer-overwrite-v2.json passed; v1metadatareflectionfailedbeforeledger because
+interrupted9lacks success-onlyqueryequalityfield. BothGNUtimersretained/pending85; v2comparesfullactualfirsttrace/actions.
+No synthesizedcall.json/steps. FullSource/SDK/Reader recoveryaudit for1..9stillrequired; rawperstepStore/Saverbytes unavailable,
+must disclose, neverrelabelfabricatedsnapshot asactual or weakenrequiredSource/input/permissionproof to forcepass.
+
+NEXT read ROOT/primary-observation-execution-v3-next-actions.json. Freeze observation-onlyv3 adapter composing original
+verifierFIRST+originalrecorder onallnativeevents, withactual observer-installation no-model fixture BEFORE nexttask.
+Keep1138oldbindings unchanged. Newv3owner strictEXACTpreviousv2continuation001->v3continuation002serial2 bridge;
+keepoldinitialoutputasancestrybase/canonicalaliases/closures/sourceversion. Only441nativeNOT_RUN10..450 mayexecute.
+Newfull451auditor: retainstrict0branch, exactwhitelistknown1..9 realtrace+wholeSource/actualSDK/Reader recovery(withmissing
+physical-step scopehonest), unchangedoriginalfullcapture/snapshot/NN/sourceguards for10..450. No retrials0..9.
+At actualidle85 payonlyclosedpost84GNUtimers(includingfailedreflectionv1/passv2/v121writer/futurev3prep)+failedstorage.133648045;
+native426.852512653/NN/load/archive/oldphases not rebilled. Scanner/settler/launcher unGNU.
+Then explicit check-only+launchcorrected441 withnamedunchanged4-codeCPUfollower(primary-onlybases/receipts), verify FIRST
+actualnewcall hascall.json/before-archive.json/realsteps-controls andalloriginalequality/NNconditions. No autoqueue/retry.
+InspectMem2Actadapterforpartialoverride/observerpaths BEFOREfirst400cohort; preserve1147oldbindings. All6LMEclosuresrequired.
+
+Fullprimary451coverage/Source+native scoreaudits/scoring/archive,Mem2Act400x2actual0,finalallcost/paper/figures/763audit
+stillINCOMPLETE. Allinternal1024/Q6412999/D960+K9+old42/fourpanel/eightfitworksheets unchangedclosed;
+reviewerTHISexecutionassistant notindependenthuman. Staticknownpaidcutoff87091.84096111101CPU/25368797Hosttokens before007
+NOTcurrenttotal. GoalstayACTIVE, notcomplete/blocked. Preservefullscope.
+
+# HISTORICAL A100 EXECUTION v120: 2026-11-08 (Asia/Shanghai)
 
 Original763-line goal ACTIVE/incomplete; current PROGRESS, previous PROGRESS. No genuine blocker.
 Latest data/manifests/a100-development-progress-20261108-v120.json; previousv119, checkpoint8aae5880.

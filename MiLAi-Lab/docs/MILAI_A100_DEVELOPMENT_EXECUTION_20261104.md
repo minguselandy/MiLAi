@@ -6,11 +6,39 @@
 历史 worktree、原始失败与用户文档保持原状。没有使用子代理、SHA/内容指纹校验、新服务、第二账本或远端写入。
 
 本轮机器可读入口为
-[progress](../data/manifests/a100-development-progress-20261108-v120.json)。
+[progress](../data/manifests/a100-development-progress-20261108-v121.json)。
 原始数据、冻结运行时、权重、命令、计时和实际输出位于本 worktree 的 ignored
 `artifacts/a100-development-20261104/`。本记录是现有报告体系的执行摘要。
 
-## v120 当前状态（2026-11-08，Asia/Shanghai）：固定451三阶段关闭，主方法首条接线失败保留，配置探针通过
+## v121 当前状态（2026-11-08，Asia/Shanghai）：主方法实际68次NN通过输入核验，快照观察缺口保留并停止扩展
+
+执行v2已冻结1138字节相同比对绑定，原1135未改；完整配置修正、严格v1→v2未尝试尾部桥接、
+首失败0的3458完整Source/baseline-before/应用/trace审计均已通过。idle84在实际无worker窗口
+一次支付7条关闭计时13.29CPU，另支付原零案例存储0.064661018CPU，旧模型/归档未重计。
+
+显式continuation001实际载入cuda:0/GPU2、FP32、16384/2048、4线程、MHAFalse/refcompileFalse；
+1..8条首次完成。完整68次实际NN/input459461与原生计数逐项相符，完整before/菜单/payload/
+head ID顺序、有限logits与概率/argmax/无截断核验通过。8实际ReaderHTTP/35372known tokens、
+0Judge、newunknown0/0；不由此宣称正确答案或超过8192的有效语义能力。
+
+CPU跟随器对缺少control快照正确退出1，发现functional.message先安装RetrievalRecorder后以
+verify_replay覆盖observer；原回放验证仍执行，但1..9的实际capture/逐步快照未生成。
+这不是可重跑首结果的理由。为了停止扩大缺口，在第9条检索且Reader未开始时显式SIGINT；
+父673576/子673577实际退出-2/消失/原生CPU关闭，8COMP/2FAILED_RETRIEVING/441NOT_RUN。
+首0保持原加载失败，首1..8完整结果及中断9保持原样；68个NN全部已有完整trace，无缺失forward。
+子426.59694＋父0.255572653CPU已付，包含NN74.80637742194813与load7.513192891000017，不能重复加。
+存储父676747/子676748退出1/消失/处理0条，整CPU0.13364804499999998等待实际idle85。
+
+反思工具v1因中断9缺少成功路径query字段退出1，发生在账本访问前；其原计时保留。
+v2改为直接逐完整dict比较真实trace首before/actions与基线call，已通过，没有新模型或HTTP。
+ROOT/reflect-primary001-observer-overwrite-v2.json保留首10整记录、68输入核验及全部费用边界。
+不能把未存在的实际逐步物理快照补成“已捕获”。Source/SDK/Reader全量追溯仍需补齐，并明确
+这些9条的逐步原始Store/Saver字节快照证明不可用；其余441应在观察回调组合修正后按原完整协议捕获。
+下一步ROOT/primary-observation-execution-v3-next-actions.json：保持1138旧绑定，冻结观察修订/
+真实回调安装无模型探针与完整审计补充，idle85计量后只执行未尝试10..450，不重跑0..9。
+当前无实际worker、无真实阻塞。主方法全451、Mem2Act400×2及最终全成本/论文/图表/763完成审计仍未完成。
+
+## v120 历史状态（2026-11-08，Asia/Shanghai）：固定451三阶段关闭，主方法首条接线失败保留，配置探针通过
 
 固定归档实际退出0/父子进程消失/451全部ARCHIVED，冻结finalizer及关闭核验通过。
 案例逻辑原字节138,163,243,297，归档4,359,462,529字节，完整模板及两pool不可变base另行保留。
