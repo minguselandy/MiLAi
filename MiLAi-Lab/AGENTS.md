@@ -1,4 +1,50 @@
-# LIVE A100 EXECUTION v115: 2026-11-08 (Asia/Shanghai)
+# LIVE A100 EXECUTION v116: 2026-11-08 (Asia/Shanghai)
+
+Full original763-line goal ACTIVE/incomplete; current PROGRESS, previous PROGRESS.
+Latest data/manifests/a100-development-progress-20261108-v116.json; previous v115, checkpoint42df9128.
+ROOT/F/E/Q64 same; frozen protocol/source-version/phase batch IDs stay20261107.
+No subagents/SHA/fingerprints/services/secondledger/reset/refund/remote/Productwrites/
+first-outcome retries/reselection/crop/compact/quantize. One actual modelHTTPworker maximum.
+GPUs0/1untouched; learnerGPU2FP32/threads4/MHAFalse/refcompileFalse/TF32False.
+No offlineledgeropen/write while a model/HTTP worker is live; scanner/settler/launcher never GNUwrapped.
+Native/whole/parent/nested/oldcost neverdouble-add; unmeteredCPUunknown_not_zero.
+Do not edit1135LME/1147Mem2Act/7Q64bound code/runtime/models.
+
+NO EXPERIMENTAL MODEL/HTTP WORKER. Fixed-prefix FULL451 first outcomes CLOSED:
+401COMPLETED/50FAILED_READING; all451 whole dict equal earliest ancestry across51 collections.
+050parent4097652/child4097729 actualexit0/nativepaid/gone/validatedfullTrue.
+Last438..450=13newCOMP,13HTTP/78151known; child704.727325+parent.206916022 nativepaidonce.
+49absent/1truncated Reader failures all nativeFAILED/unscored; preserve501chars on043row410.
+No retries/UNKNOWN/negativegold/recipechange/newunknown0/0. No extra continuation exists or is needed.
+Code1135byteeq; Source/SDK/Reader wires/input audit is NOT yet closed; quality scores not established.
+Storage050parent4097793/child4097794 exit0/gone/paid80,
+rows438..450, whole65.278713+0.026569144=65.305282144CPU.
+All451cases/2706checkpoints wholebyteeq; keepBOTHpool0000/pool0001 immutablebases outsidecases.
+Optionalperstep replay frozenv2restore_control first; whole451audit/pairedfirstcall doesn'treadstepcontrol.
+
+ONLY LIVE TASK: CPU-only frozen full451Source audit, GNUtimepid4318/child4319.
+Actual named /proc commands verified. ROOT/lme-fixed-prefix-full451-source-audit-v1-launch.json,
+sameprefix.log/.time.txt; bootstrap ROOT/run_frozen_fixed_prefix_source_audit_v1.py.
+CUDAempty/threads4; CUDAPYtransformers4.52.3/tokenizers.21.4 FIRST, HTTP_SITE appended last.
+Frozen entry E/frozen-lme-v1/audit-code-reference/audit_external_lme_predictions_v1.py OWNER050.
+No model/tokenizerforward/Reader/Judge/HTTP/ledger writes; audit fullCPU pendingactualexit, no autoqueue/retry.
+Next inspect actual PID/log/time/gate; observation timeout never means job stopped. Never restart solely for slow observation.
+On actual pass/knownGNUexit: settle only newly closed timers; frozenfinalizer OWNER050 after audit gate;
+then fixed-prefix-scoring451-v1 only after required closure/audit gates. Native failed Readers stay unscored.
+Do not score or claim Source audit passed before full gate. Then scoreaudit/finalize/archive, primary451 same sequence.
+
+Idle1..80paidonce;80=3timers5.67CPU+storage05065.305282144CPU; no native/oldrebill.
+Sourceaudit liveGNUtimer and this progress writer pending eligible idle81 after actual exits; never settle a live timer.
+First unmetered settler80 call failed Path typing before ledger access/write; corrected only author utility; CPUunknown_not_zero.
+Keep reflect_closed_lme_reader_length_segment_v2.py for future length failures; absent/partial stayFAILED.
+Fixed-prefix continuation publishers/templates are not the generic full-audit/scoring workflow.
+Static knownpaid cutoff before007 unchanged87091.84096111101CPU/25368797Hostknown tokens; not currentallprojecttotal.
+All1024quality/stats/ops/cost,Q64all12999metrics/audits,D960+K9+oldoutput42,4panelPNG/PDF/eightfitworksheet closed unchanged.
+Reviewer THISexecutionassistant not independenthuman/originalauthors. No newfit/adopt/nativeTESTopening.
+Full LME primary451prediction+both451scoring/audits/archive,Mem2Act400x2actual0,finalallcost/paper/figures/final763audit INCOMPLETE;
+goal NOTcomplete/blocked. Keep original full scope.
+
+# HISTORICAL A100 EXECUTION v115: 2026-11-08 (Asia/Shanghai)
 
 Full original763-line goal ACTIVE/incomplete; current PROGRESS, previous PROGRESS.
 Latest data/manifests/a100-development-progress-20261108-v115.json; previous a100-development-progress-20261108-v114.json, checkpoint1a635f6b.
