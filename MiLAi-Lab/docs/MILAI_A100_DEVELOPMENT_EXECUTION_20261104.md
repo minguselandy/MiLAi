@@ -6,11 +6,35 @@
 历史 worktree、原始失败与用户文档保持原状。没有使用子代理、SHA/内容指纹校验、新服务、第二账本或远端写入。
 
 本轮机器可读入口为
-[progress](../data/manifests/a100-development-progress-20261108-v119.json)。
+[progress](../data/manifests/a100-development-progress-20261108-v120.json)。
 原始数据、冻结运行时、权重、命令、计时和实际输出位于本 worktree 的 ignored
 `artifacts/a100-development-20261104/`。本记录是现有报告体系的执行摘要。
 
-## v119 当前状态（2026-11-08，Asia/Shanghai）：固定451原生操作/用量成本报告关闭，CPU归档运行
+## v120 当前状态（2026-11-08，Asia/Shanghai）：固定451三阶段关闭，主方法首条接线失败保留，配置探针通过
+
+固定归档实际退出0/父子进程消失/451全部ARCHIVED，冻结finalizer及关闭核验通过。
+案例逻辑原字节138,163,243,297，归档4,359,462,529字节，完整模板及两pool不可变base另行保留。
+所有451首结果整dict仍等于51段最早祖先；原生指标/50Reader失败、451存储收据/2706控制检查点及
+1135旧代码绑定保持。归档完整子1965.312778＋父0.192329002CPU已原生支付一次，嵌套index CPU不再加。
+idle83在真实无模型窗口支付9条新增关闭计时6.91CPU，并核对53个native owner原账本记录。
+
+主方法通过冻结check-only并显式启动后，首row0/01307e07在构造校验失败：原适配器只传policy/checkpoint，
+而functional.message将override当完整memory_policy配置，导致cpu/8192/默认full投影，偏离声明的
+cuda:0/16384/shared_actions。首观测与完整菜单仍逐dict相同，零实际NN/Reader/Judge/HTTP，
+row0保留FAILED_RETRIEVING/unscored，450条仍NOT_RUN；父571114/子571116实际退出1/消失，
+完整子28.212299＋父0.144564571CPU已付，其中7.042261228999905 load CPU已包含，不重复相加。
+原生result中的generation_calls1为本地控制准入，不是HTTP；owner实际shared admission0。
+CPU存储父573235/子573238退出0/消失/处理0案例，整CPU0.064661018等待实际idle84。
+
+[修订适配器源码](../tools/run_a100_lme_with_actual_policy_capture_v2.py)仅改为传入原先冻结的完整memory_control，
+没有编辑原1135绑定文件。实际memory_policy工厂的配置探针复现旧默认值并验证完整配置构造参数，
+不加载模型/forward/tokenizer/HTTP/业务或账本写入；这不冒充修正后实际NN已运行。
+下一步需冻结明确execution-v2协议/owner桥接及完整Source审计补充：保留row0捕获前失败的真实缺项，
+不能伪造call.json/输入/评分；其余450按原完整审计。实际idle84成本关闭后只续行原生未尝试1..450，
+不重跑row0。具体入口ROOT/primary-execution-wiring-v2-next-actions.json。当前无实际实验worker，无真实阻塞。
+主方法全451、Mem2Act400×2、最终全成本/论文/图表/原763行完成审计仍未完成。
+
+## v119 历史状态（2026-11-08，Asia/Shanghai）：固定451原生操作/用量成本报告关闭，CPU归档运行
 
 [固定前缀结果报告](MILAI_A100_LME_FIXED_NATIVE_RESULTS_20261108.md)与紧凑manifest/分析代码已形成，
 研究草案已纳入401已评分中75正确、50Reader失败未评分、250有效UNKNOWN及全451缺失边界。

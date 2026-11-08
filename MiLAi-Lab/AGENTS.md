@@ -1,4 +1,57 @@
-# LIVE A100 EXECUTION v119: 2026-11-08 (Asia/Shanghai)
+# LIVE A100 EXECUTION v120: 2026-11-08 (Asia/Shanghai)
+
+Original763-line goal ACTIVE/incomplete; current PROGRESS, previous PROGRESS. No genuine blocker.
+Latest data/manifests/a100-development-progress-20261108-v120.json; previousv119, checkpoint8aae5880.
+ROOT/F/E/Q64 same; frozen protocol/source-version/batch IDs stay20261107. No subagents/SHA/fingerprints/
+newservices/secondledger/reset/refund/remote/Productwrites/first-outcome retries/reselection/crop/quantize.
+One actual modelHTTPworker max; GPU0/1 untouched, learnerGPU2FP32threads4/MHAFalse/refcompileFalse/TF32False.
+No offlineledger while any actual native-owned stage/modelHTTP live. Scanner/settler/launcher neverGNUwrap.
+Native/whole/parent/nested/oldcost neverdouble-add; unmeteredauthor/inspection/launch/cleanup CPUunknown_not_zero.
+Keep all1135LME/1147Mem2Act/7Q64 original bound files unchanged; fixes need explicit new execution revision.
+
+NO LIVE MODELHTTP/STORAGE WORKER. Fixed451 ALL3 prediction/scoring/archive closures FINALIZED:
+401COMP/50ReaderF,75correct/401subset,250validUNKNOWN,full451bounds[75/451,125/451],completeMetricNone.
+Allfirst451whole dicts earliest51ancestry;49absent/1partial501char preservedunscored. Bothfixedcontrolbases retained.
+Archive parent424962/child424964 actualexit0/paid/gone/validated451;138163243297logicalbytes/4359462529archivebytes
+plusalltemplates/bases preserved. Whole1965.312778+parent.192329002CPU nativeonce; nestedindex1936.748889572notadd.
+ROOT/verify-lme-fixed-archive-closed-v1.json passed all451files/templates/2706controlreceipts/1135literalbindings.
+Idle1..83paid;83=9GNUtimers6.91CPU. 53nativeownerphasecharges separately reconciled, neverrebilled.
+
+PRIMARY initial failed at row0/01307e07 before NN/HTTP. Parent571114/child571116 actualexit1/nativepaid/gone,
+Primary statuses1FAILED_RETRIEVING/450NOT_RUN. No Reader/Judge, actualNN0/HTTP0/newunknown0/0.
+Firstobservation/alllegalactions wholeeq baseline. Nativegeneration_calls1 is localcontrol admission, sharedactual0.
+Wholechild28.212299+parent.144564571paid includesnativeCPUload7.042261228999905; do notaddloadagain.
+Actualmodel_load cpu/max8192/FP32/MHAFalse failedguard; intended config cuda0/max16384/head2048/shared_actions.
+Cause: original replay adapter policy_override onlypolicy/checkpoint, functional.message consumes entireconfig,
+so memory_policy falls back cpu/8192/full. Preserve failedrow0/unscored, rawresult/trace/query/inference exactly.
+Reflection ROOT/reflect-lme-primary-load-wiring-failure-v1.json. Storage parent573235/child573238 actualexit0/gone,
+zero processedcases, CPU.037912+.026749018=.064661018pendingidle84, not an omitted successfulcase.
+
+NEW tools/run_a100_lme_with_actual_policy_capture_v2.py is ONE config-assembly correction:
+policy=copy.deepcopy(after['memory_control']). Original frozen file NOTedited. Configs/checkpoint/seed/prompt/
+Source/budget/thinking/caps unchanged. ROOT/probe-lme-policy-override-wiring-v2.json passed actualpolicyfactory
+with probe constructor: olddefaults reproduced/newdeclareddevice-length-projection passed;0realmodel/NN/HTTP.
+Corrected actual load/forward is NOTyetproven. No corrected native tail launched or revision protocol frozen yet.
+
+NEXT REQUIRED: read ROOT/primary-execution-wiring-v2-next-actions.json for exact scoped implementation.
+Freeze explicit execution-v2 supplement inheriting1135oldbindings plusnewadapter/owner/audit entries. Newowner
+reuses frozenv1 admission/billing/validation; only strict initial-v1->v2 bridge at continuation001 for450NOT_RUN.
+Keep originalinitialoutput as ancestrybase +canonical aliases/closures/sourceversion; no oldplan/byte rewriting.
+Newaudit must explicitly verify retained pre-capture failure0 (no call.json/mutation_receipts key), completeSource/
+restoredbaselinebefore/applicationtables/rawtrace/entirefirstbefore+actions; no fabricatedcapture/Reader/input.
+Other450retain original full Source/NN/SDK/Reader audit. Finalizer v1 can be reused unchanged with newprotocol.
+After newrevision/probe gates, settle actualidle84 only newGNUtimers +zero-case storageCPU, not model/archivecost.
+Then explicit register/check-only and launch ONLY nativeNOT_RUN1..450, namedCPUfollower with unchanged4storage
+codebindings and primary-onlybases/receipts. Reusepreparedprimary storageplan as metadata template. Neverretryrow0.
+Inspect Mem2Act adapter for same override issue BEFORE its firstactualcohort; preserve1147oldboundentries and
+use explicit execution-only revision if required. All6LME canonicalclosures remainprerequisite.
+
+Fullprimary451Source/scoreaudits/native scoring/archive,Mem2Act400x2actual0,finalallcost/paper/figures/763audit
+stillINCOMPLETE. Allinternal1024/Q6412999/D960+K9+old42/4panel/eightfitworksheet unchangedclosed.
+ReviewerTHISexecutionassistant notindependenthuman; no adopt/newfit/nativeTESTopening. Staticknownpaidcutoff
+87091.84096111101CPU/25368797Hosttokens before007 NOTcurrenttotal. GoalstayACTIVE, notcomplete/blocked.
+
+# HISTORICAL A100 EXECUTION v119: 2026-11-08 (Asia/Shanghai)
 
 Original763-line goal ACTIVE/incomplete; current PROGRESS, previous PROGRESS. No genuine blocker.
 Latest data/manifests/a100-development-progress-20261108-v119.json; previousv118, checkpoint6a33e7e0.
