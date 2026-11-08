@@ -1,4 +1,39 @@
-# LIVE A100 EXECUTION v107: 2026-11-08 (Asia/Shanghai)
+# LIVE A100 EXECUTION v108: 2026-11-08 (Asia/Shanghai)
+
+Full original763-line goal ACTIVE/incomplete; current PROGRESS, previous PROGRESS.
+Latest data/manifests/a100-development-progress-20261108-v108.json; previous a100-development-progress-20261108-v107.json, checkpoint67fe62c2.
+ROOT/F/E/Q64 same; frozen protocol/source-version/phase batch IDs stay20261107.
+No subagents/SHA/fingerprints/services/secondledger/reset/refund/remote/Productwrites/
+first-outcome retries/reselection/crop/compact/quantize. One actual modelHTTPworker.
+GPUs0/1untouched; learnerGPU2FP32/threads4/MHAFalse/refcompileFalse/TF32False.
+No offlineledgeropen/write whilelive; scanner/settler/launcher never GNUwrapped.
+Native/whole/parent/nested/oldcost neverdouble-add; unmeteredCPUunknown_not_zero.
+Do not edit1135LME/1147Mem2Act/7Q64bound code/runtime/models.
+
+ONLY MODELHTTPWORKER LME043 parent3792792/child3792836 RUNNING/clientCPUFalse,
+actual/procverified, active410, {'COMPLETED': 367, 'FAILED_READING': 43, 'PREPARING_INPUT': 1, 'NOT_RUN': 40}.
+Only native NOT_RUN410..450=41, first410whole dict equal042.
+Reader failures 7/39/41/57/68/118/164/173/176/204/207/212/224/227/236/237/241/248/250/264/265/269/271/289/297/302/303/326/339/345/347/351/355/356/365/366/371/372/380/395/396/404/409 retained.
+042parent3755037/child3755038 actualexit1/nativepaid/gone, first410=367COMP/43F.
+New409/d886b018 oneHTTPprompt4053/out8192/total12245,length/None,reserved12757<65536;
+no inputoverflow/newunknown0/0/retry/UNKNOWN/negativegold/recipechange.
+Segment5HTTP/28286known, child306.908389+parent0.151728595 nativepaidonce.
+Storage042parent3755169/child3755173 exit0/gone/paid72, rows405..409, whole27.633753+0.028280041=27.662033040999997CPU.
+Storage043parent3792924/child3792925 actual/procverified follows ONLY043.
+Total410cases/2460checkpoints wholebyteeq; keepBOTHpool0000/pool0001 immutablebases outsidecases.
+Optionalperstep replay frozenv2restore_control first; whole451audit/pairedfirstcall doesn'treadstepcontrol.
+At firstnewerror/fullclosure inspectnative raw, waitactual model/storageexit+paid/gone,
+reflect then explicitly registerONLYnative NOT_RUNtail. No autoqueue/restart. Full451audit/nativeJudge pending.
+
+Idle1..72paidonce;72=4timers0.32CPU+storage04227.662033040999997CPU; no native/oldrebill.
+Post72progress timer pendingnextactualidle. Metadata publisher reads native values; no numeric substitutions.
+Static knownpaid cutoff before007 unchanged,87091.84096111101CPU/25368797Hostknown tokens; not currentallprojecttotal.
+All1024quality/stats/ops/cost,Q64all12999metrics/audits,D960+K9+oldoutput42,4panelPNG/PDF/eightfitworksheet closed unchanged.
+Reviewer THISexecutionassistant not independenthuman/originalauthors. No newfit/adopt/nativeTESTopening.
+Full LME451x2/Mem2Act400x2actual0,finalallprojectcost/finalpaper/finaloverallfigures/final763lineaudit INCOMPLETE;
+goal NOTcomplete/blocked. Keep original full scope.
+
+# HISTORICAL A100 EXECUTION v107: 2026-11-08 (Asia/Shanghai)
 
 Full original763-line goal ACTIVE/incomplete; current PROGRESS, previous PROGRESS.
 Latest data/manifests/a100-development-progress-20261108-v107.json; previous a100-development-progress-20261108-v106.json, checkpointa6d7fb17.
