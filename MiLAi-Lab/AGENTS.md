@@ -1,4 +1,39 @@
-# LIVE A100 EXECUTION v96: 2026-11-08 (Asia/Shanghai)
+# LIVE A100 EXECUTION v97: 2026-11-08 (Asia/Shanghai)
+
+Full original763-line goal ACTIVE/incomplete; current PROGRESS, previous VERIFIED_WAIT.
+Latest data/manifests/a100-development-progress-20261108-v97.json; previous a100-development-progress-20261108-v96.json, checkpoint94511791.
+ROOT/F/E/Q64 same; frozen protocol/source-version/phase batch IDs stay20261107.
+No subagents/SHA/fingerprints/services/secondledger/reset/refund/remote/Productwrites/
+first-outcome retries/reselection/crop/compact/quantize. One actual modelHTTPworker.
+GPUs0/1untouched; learnerGPU2FP32/threads4/MHAFalse/refcompileFalse/TF32False.
+No offlineledgeropen/write whilelive; scanner/settler/launcher never GNUwrapped.
+Native/whole/parent/nested/oldcost neverdouble-add; unmeteredCPUunknown_not_zero.
+Do not edit1135LME/1147Mem2Act/7Q64bound code/runtime/models.
+
+ONLY MODELHTTPWORKER LME032 parent3372988/child3372989 RUNNING/clientCPUFalse,
+actual/procverified, active352, {'COMPLETED': 320, 'FAILED_READING': 32, 'PREPARING_INPUT': 1, 'NOT_RUN': 98}.
+Only native NOT_RUN352..450=99, first352whole dict equal031.
+Reader failures 7/39/41/57/68/118/164/173/176/204/207/212/224/227/236/237/241/248/250/264/265/269/271/289/297/302/303/326/339/345/347/351 retained.
+031parent3342656/child3342657 actualexit1/nativepaid/gone, first352=320COMP/32F.
+New351/8da5c407 oneHTTPprompt5889/out8192/total14081,length/None,reserved14593<65536;
+no inputoverflow/newunknown0/0/retry/UNKNOWN/negativegold/recipechange.
+Segment4HTTP/25847known, child253.567257+parent0.136523741 nativepaidonce.
+Storage031parent3342789/child3342793 exit0/gone/paid61, rows348..351, whole21.509458+0.026570844=21.536028843999997CPU.
+Storage032parent3373120/child3373121 actual/procverified follows ONLY032.
+Total352cases/2112checkpoints wholebyteeq; keepBOTHpool0000/pool0001 immutablebases outsidecases.
+Optionalperstep replay frozenv2restore_control first; whole451audit/pairedfirstcall doesn'treadstepcontrol.
+At firstnewerror/fullclosure inspectnative raw, waitactual model/storageexit+paid/gone,
+reflect then explicitly registerONLYnative NOT_RUNtail. No autoqueue/restart. Full451audit/nativeJudge pending.
+
+Idle1..61paidonce;61=6timers0.41000000000000003CPU+storage03121.536028843999997CPU; no native/oldrebill.
+Post61progress timer pendingnextactualidle. Metadata publisher reads native values; no numeric substitutions.
+Static knownpaid cutoff before007 unchanged,87091.84096111101CPU/25368797Hostknown tokens; not currentallprojecttotal.
+All1024quality/stats/ops/cost,Q64all12999metrics/audits,D960+K9+oldoutput42,4panelPNG/PDF/eightfitworksheet closed unchanged.
+Reviewer THISexecutionassistant not independenthuman/originalauthors. No newfit/adopt/nativeTESTopening.
+Full LME451x2/Mem2Act400x2actual0,finalallprojectcost/finalpaper/finaloverallfigures/final763lineaudit INCOMPLETE;
+goal NOTcomplete/blocked. Keep original full scope.
+
+# HISTORICAL A100 EXECUTION v96: 2026-11-08 (Asia/Shanghai)
 
 Full original763-line goal ACTIVE/incomplete; current PROGRESS, previous PROGRESS.
 Latest data/manifests/a100-development-progress-20261108-v96.json; previous a100-development-progress-20261108-v95.json, checkpoint1854d07a.
