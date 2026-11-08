@@ -6,11 +6,26 @@
 历史 worktree、原始失败与用户文档保持原状。没有使用子代理、SHA/内容指纹校验、新服务、第二账本或远端写入。
 
 本轮机器可读入口为
-[progress](../data/manifests/a100-development-progress-20261108-v108.json)。
+[progress](../data/manifests/a100-development-progress-20261108-v109.json)。
 原始数据、冻结运行时、权重、命令、计时和实际输出位于本 worktree 的 ignored
 `artifacts/a100-development-20261104/`。本记录是现有报告体系的执行摘要。
 
-## v108 当前状态（2026-11-08，Asia/Shanghai）：042关闭，043续行未尝试尾部
+## v109 当前状态（2026-11-08，Asia/Shanghai）：043关闭，044续行未尝试尾部
+
+043实际退出1/原生已计量/父子进程消失，首411=367COMP/44ReaderF。
+410/dae9f7e9单次输出8192到顶、包含截断正文（501字符），prompt3105/总11297/reserved11809<65536，无输入溢出/新增未知。
+本段1HTTP/11297known tokens，子118.244413＋父0.146243822CPU已原生计量。
+存储1案例整CPU6.462519707与5个实际关闭计时0.41CPU秒在真实idle73一次支付，native/旧费用不重计。
+首失败保持，未改cap、thinking、模型或完整输入。全部数值从原生记录与回执读取。
+length响应即便含部分正文仍保留原生失败；未提取片段评分。累计失败正文状态：{'absent_final': 43, 'present_truncated_final': 1}。
+
+显式启动044仅未尝试411至450共40项，父3861230/子3861231实际存活，active411、{'COMPLETED': 367, 'FAILED_READING': 44, 'PREPARING_INPUT': 1, 'NOT_RUN': 39}；首411整dict相同。
+CPU存储只跟随044，累计411案例/2466检查点保留完整字节，两pool不可变base保持在案例树外。
+冻结批次标识20261107保留，执行时间记录当前UTC与Asia/Shanghai。
+全451预测/评分/审计未关闭；内部总体图、训练工作表、1024确认及Q64指标保持。
+完整LME451×2/Mem2Act400×2、全成本、最终论文/整体图表与763行完成审计仍未完成。
+
+## v108 历史状态（2026-11-08，Asia/Shanghai）：042关闭，043续行未尝试尾部
 
 042实际退出1/原生已计量/父子进程消失，首410=367COMP/43ReaderF。
 409/d886b018单次输出8192到顶、正文为空，prompt4053/总12245/reserved12757<65536，无输入溢出/新增未知。
