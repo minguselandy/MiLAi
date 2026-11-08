@@ -6,11 +6,28 @@
 历史 worktree、原始失败与用户文档保持原状。没有使用子代理、SHA/内容指纹校验、新服务、第二账本或远端写入。
 
 本轮机器可读入口为
-[progress](../data/manifests/a100-development-progress-20261108-v118.json)。
+[progress](../data/manifests/a100-development-progress-20261108-v119.json)。
 原始数据、冻结运行时、权重、命令、计时和实际输出位于本 worktree 的 ignored
 `artifacts/a100-development-20261104/`。本记录是现有报告体系的执行摘要。
 
-## v118 当前状态（2026-11-08，Asia/Shanghai）：固定前缀全451评分审计关闭，CPU归档运行
+## v119 当前状态（2026-11-08，Asia/Shanghai）：固定451原生操作/用量成本报告关闭，CPU归档运行
+
+[固定前缀结果报告](MILAI_A100_LME_FIXED_NATIVE_RESULTS_20261108.md)与紧凑manifest/分析代码已形成，
+研究草案已纳入401已评分中75正确、50Reader失败未评分、250有效UNKNOWN及全451缺失边界。
+全451Reader/130Judge原始usage独立复算、52个关闭owner完整CPU核对和报告链接检查通过，
+没有新模型/HTTP、Source/首结果改写或账本读取/写入。
+
+实际Reader451HTTP/2,866,515known tokens，Judge130HTTP/174,230known tokens；50Reader失败的
+657,582tokens属于Reader子集。51段预测完整子CPU＋已测父CPU38,088.242489秒，评分35.873309秒，
+都已原生支付一次。完整CPU包含复制/捕获等，不是纯推理；本地NN/加载0，HostGPU时间未知。
+902SEARCH/1804READ/451HANDOFF、3157决策/2706操作返回逐完整绑定核对；嵌套计时不重复叠加。
+
+仅CPU原生归档父424962/子424964实际存活，索引{'ARCHIVED': 243, 'ARCHIVING': 1, 'PENDING': 207}；没有模型/HTTPworker。
+保持两pool不可变base；归档退出/全451索引/完整CPU关闭后finalize，再显式启动预选主seed0-u32。
+post82已关闭分析/文档计时等待实际idle83，归档运行时不动账本以免污染其compute-delta归属。
+主方法451全预测/Source与评分审计/归档、Mem2Act400×2、最终全成本/论文/图表/763行完成审计仍未完成。
+
+## v118 历史状态（2026-11-08，Asia/Shanghai）：固定前缀全451评分审计关闭，CPU归档运行
 
 原生评分实际退出0/父子进程消失/原生完整CPU已计量，401项COMPLETED、50项UNSCORED_FAILED_READING。
 无Judge失败，Reader未重新生成。130实际JudgeHTTP/174230known tokens，子35.715858＋父0.157451301CPU

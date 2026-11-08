@@ -1,4 +1,44 @@
-# LIVE A100 EXECUTION v118: 2026-11-08 (Asia/Shanghai)
+# LIVE A100 EXECUTION v119: 2026-11-08 (Asia/Shanghai)
+
+Original763-line goal ACTIVE/incomplete; current PROGRESS, previous PROGRESS. No genuine blocker.
+Latest data/manifests/a100-development-progress-20261108-v119.json; previousv118, checkpoint6a33e7e0.
+ROOT/F/E/Q64 same; frozen protocol/source-version/phase batch IDs stay20261107.
+No subagents/SHA/fingerprints/services/secondledger/reset/refund/remote/Productwrites/
+first-outcome retries/reselection/crop/compact/quantize. One actual modelHTTPworker maximum.
+GPUs0/1untouched; learnerGPU2FP32/threads4/MHAFalse/refcompileFalse/TF32False.
+No offlineledgeropen/write while a modelHTTP or native-owned stage is live; protect compute-delta attribution.
+Scanner/settler/launcher neverGNUwrapped. Native/whole/parent/nested/oldcost neverdouble-add;
+author/unmeteredinspection/launch/cleanup CPUunknown_not_zero. Do not edit1135LME/1147Mem2Act/7Q64bound entries.
+
+Fixed451 prediction/Sourceaudit/scoring/scoreaudit/finalizers CLOSED:401COMP/50ReaderF,75correct/401subset,
+250validUNKNOWN; full451missingbounds[75/451,125/451],native_complete_cohort_metricsNone.
+Allfirst451whole dicts earliest across51predictioncollections;49absent/1partial501char Reader failures retainedunscored.
+New docs/MILAI_A100_LME_FIXED_NATIVE_RESULTS_20261108.md + a100-lme-fixed-native-results-20261108-v1.json;
+tools/analyze_a100_lme_fixed_native_operations_cost.py executed exit0, all451Reader/130Judge rawusage independently
+recomputed,52closedownerCPU reconciled,reportlinks pass. ROOT/lme-fixed-native-results-publication-verification-v1.json.
+Reader451HTTP/2866515known;Judge130HTTP/174230known;failedReader50/657582known is includedsubset.
+51predictionwholechild+parent38088.242488523996CPU; scoring35.873309301CPU already paidonce.
+NN/load0,902SEARCH/1804READ/451HANDOFF,3157decisions/2706operationresults; completeCPU includescopy/capture,
+not pureinference/HostserverGPU/$ or fullprojectcost. Sourceprep/audit/archive/training/author outside subtotal.
+Researchdraft now includes fixednative result with subset/missingbounds/exposure limitations; no 2method comparison yet.
+
+NO MODELHTTPWORKER. ONLY native-owned CPU fixed-prefix-archive451-v1 RUNNING:
+parent424962/child424964 actual/procverified/clientCPUFalse; index{'ARCHIVED': 243, 'ARCHIVING': 1, 'PENDING': 207}.
+Plan/owner/log E/stages-lme-v1/fixed-prefix-archive451-v1-*; bothimmutablepoolbases preserved outsidecases.
+Neverrestart livejob solely due observationtime. No offlineledger whilearchive live.
+After actualexit/full451index/nativeCPUpaid/gone: frozenfinalizer archiveowner then eligibleidle83
+only closednewGNUtimers, no archive/native/storagewhole rebill; explicitly preselected primary-seed0-u32 only
+after preceding3fixedclosures and check-only gates. No autoqueue/retry.
+Idle1..82paidonce; post82v118check/writer+census/publication/rawverification+v119writer pending actualidle83.
+
+Primary451 samefullSourceaudit/finalizer/scoring/scoreaudit/finalizer/archive required; Mem2Actall400x2actual0
+requiresall6LMEclosures. Full finalallcost/paper/figures/final763completionaudit still INCOMPLETE.
+Allinternal1024/Q64all12999/D960+K9+old42/fourpanelPNG-PDF/eightfitworksheet unchangedclosed;
+reviewerTHISexecutionassistant not independenthuman/originalauthors. No newfit/adopt/nativeTESTopening.
+Knownpaidcutoff87091.84096111101CPU/25368797Hosttokens is static before007, not currenttotal.
+Goal must stayACTIVE, not complete/blocked; preserve full scope.
+
+# HISTORICAL A100 EXECUTION v118: 2026-11-08 (Asia/Shanghai)
 
 Full original763-line goal ACTIVE/incomplete; current PROGRESS, previous PROGRESS.
 Latest data/manifests/a100-development-progress-20261108-v118.json; previous v117, checkpoint6745d421.
