@@ -56,6 +56,12 @@ Mem2Act400x2,finalallcost/paper/figures/final763completionaudit INCOMPLETE; goal
 Allinternal1024/Q6412999/D960+K9+old42/fourpanel/eightfitworksheets unchangedclosed; reviewerTHISassistantnotindependenthuman.
 No newfit/adopt/nativeTESTopening. Staticknownpaidcutoff87091.84096111101CPU/25368797Hosttokens before007 NOTcurrenttotal.
 
+Additional closed-position full Source path audit PASSED (not full451):
+ROOT/verify-primary002-first-closed-full-audit-path-v3.json; compact data/manifests/a100-primary-case10-full-source-path-20261108-v1.json.
+Exact frozen audit loop body AST unchanged, only iteration input realclosed10;31122Sourcecomparisons/8actualbefore restores/
+8NN/1wholeSDK/1Reader passed, no gate promoted/newcalls/ledgeraccess. Source state/head/menu audit not semanticQA.
+Both new GNU audit/publication timers await actualidle86; native model/storage remain separately live-owned.
+
 # HISTORICAL A100 EXECUTION v121: 2026-11-08 (Asia/Shanghai)
 
 Original763-line goal ACTIVE/incomplete; current PROGRESS, previous PROGRESS. No genuine blocker.
