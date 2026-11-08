@@ -6,11 +6,26 @@
 历史 worktree、原始失败与用户文档保持原状。没有使用子代理、SHA/内容指纹校验、新服务、第二账本或远端写入。
 
 本轮机器可读入口为
-[progress](../data/manifests/a100-development-progress-20261108-v86.json)。
+[progress](../data/manifests/a100-development-progress-20261108-v87.json)。
 原始数据、冻结运行时、权重、命令、计时和实际输出位于本 worktree 的 ignored
 `artifacts/a100-development-20261104/`。本记录是现有报告体系的执行摘要。
 
-## v86 当前状态（2026-11-08，Asia/Shanghai）：019/020关闭，021续行未尝试尾部
+## v87 当前状态（2026-11-08，Asia/Shanghai）：021关闭，022续行未尝试尾部
+
+021实际退出1/原生已计量/父子进程消失，首270=248COMP/22ReaderF。269/3c0c1b19单次
+输出8192到顶、正文为空，prompt5947/总14139/reserved14651<65536，无输入溢出/新增未知。
+4HTTP33920known tokens，子237.293114＋父0.156536366CPU已原生计量；存储4案例整CPU
+21.870740091与4个实际关闭计时0.31CPU秒在真实idle51一次支付。native/旧费用不重计，
+首失败保持，未改cap、thinking、模型或完整输入。
+
+显式启动022仅未尝试270至450共181项，父2820151/子2820159实际存活，
+active271、{'COMPLETED': 249, 'FAILED_READING': 22, 'PREPARING_INPUT': 1, 'NOT_RUN': 179}；首270整dict相同。CPU存储只跟随022，累计271案例/
+1626检查点保留完整字节，两pool不可变base保持在案例树外。
+冻结批次标识20261107保留，执行时间记录当前UTC与Asia/Shanghai。
+全451预测/评分/审计未关闭；内部总体图、训练工作表、1024确认及Q64指标保持。
+完整LME451×2/Mem2Act400×2、全成本、最终论文/整体图表与763行完成审计仍未完成。
+
+## v86 历史状态（2026-11-08，Asia/Shanghai）：019/020关闭，021续行未尝试尾部
 
 实际执行时间按Asia/Shanghai与UTC同时记录；冻结协议、source-version及计量phase沿用原
 20261107批次标识。原020运行状态草稿未执行或发布；新日期下重新核验发现该段已经终止，
