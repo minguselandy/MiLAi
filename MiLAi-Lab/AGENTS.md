@@ -1,4 +1,59 @@
-# LIVE A100 EXECUTION v122: 2026-11-08 (Asia/Shanghai)
+# LIVE A100 EXECUTION v123: 2026-11-08 (Asia/Shanghai)
+
+Original763-line goal ACTIVE/incomplete; current PROGRESS, previous VERIFIED_WAIT. No genuine blocker.
+Latest data/manifests/a100-development-progress-20261108-v123.json; previousv122, checkpoint2c5147b9. ROOT/F/E/Q64 unchanged.
+Batch/protocol/source-version/phase IDs stay20261107. No subagents/SHA/fingerprints/services/secondledger/reset/refund/
+remote/Productwrites/first-outcome retries/reselection/crop/quantize. OneactualmodelHTTPworker maximum.
+HostGPU0/1untouched; learnerGPU2/cuda0FP32threads4/MHAFalse/refcompileFalse/TF32False. NeverGNUwrap owner/scanner/settler/launcher.
+No offlineledgeraccess/write while modelHTTP or native-owned stage live. Native/whole/parent/nested/oldcost neverdouble-add;
+author/unmeteredinspection/launch/cleanup CPUunknown_not_zero. Preserve1141LME/1147Mem2Act/7Q64boundfiles; newfixneedsnewrevision.
+
+ONLY MODELHTTPWORKER primary-seed0-u32-prediction451-v1-continuation-003:
+parent1153163/child1153165actual/procverifiedRUNNING/clientCPUFalse,active52,{'FAILED_RETRIEVING': 2, 'COMPLETED': 49, 'FAILED_READING': 1, 'PREPARING_INPUT': 1, 'NOT_RUN': 398}.
+Onlyinitial402nativeNOT_RUN49..450; previousfirst49whole dicts unchanged. Same1141observationv3/configs/model/seed/checkpoint/
+Source/query/fullmenu/SDK/prompt/thinking/budgets/caps/scoring. Plan/owner/log E/stages-lme-v1/primary-seed0-u32-prediction451-v1-continuation-003-*.
+Preflight/explicit-launch saved, loadedcuda0/GPU2FP32/max16384/head2048/thread4/MHAFalse/refcompileFalse VERIFIED.
+CPUstorage003 parent1159147/child1159148actualRUNNING, processed3cases/
+21checkpoints; E/primary-seed0-u32-prediction451-v1-continuation-003-storage-v3-*.
+Useprimary-onlylme-primary-control-storage-v2-bases +closed-case-receipts; keepallcreatedpoolbases outsidecases,
+pool1maynotyetexist. Keep BOTH oldfixedbases too. Closedcontrols fullbytecomparedbeforelossless rawremoval.
+At firstactualnativefailure/fullclose inspectraw, waitmodel+storage actualexit/paid/gone, reflect andsettleonlynewclosedGNU+
+storage ateligibleidle87; registerONLYnativeNOT_RUNtail usingACTUALv3protocol/frozenowner. No autoqueue/retry.
+ObservephysicalnamedPIDs, timeoutdoesnotstopjob. Neverretryfailed0/9/48 orcompletedfirsts, neverrenamefailureUNKNOWN/negativegold.
+
+002CLOSED:parent874577/child874598 actualexit1/nativepaid/gone/validatedFalse. first49=46COMP/2FAILED_RETRIEVING(0/9)/
+1FAILED_READING48. 48/3a2e9368 singleHTTP length/out8192/contentNone, prompt3335/total11527/reserved12039<65536,
+actualpromptestimateerror0/newunknown0/0; rawfirstretainedunscored. Reflection ROOT/reflect-primary002-reader-length-row48-v1.json.
+ROOT/verify-primary002-closed-before003-idle86-v1.json passed first49earliest3wholeeq,312actualNN/input2176872complete/
+finiteheadargmax/noTrunc andnativecountereq,39ReaderHTTP/183109known,312actualfullbeforearchives/273controlcheckpoints.
+Storage002parent878698/child878704actualexit0/gone/39rows10..48,312.576486+parent.027158906=312.603644906CPU paid86once.
+Model002whole3200.977528+parent.180046645=3201.157574645CPU nativeonce includesNN375.57629894989077/load8.291268228999797;
+doNOTaddcomponentsagain. GPU2job1.0427041608082235h includesIO/Readerwait,notkernelbusy/HostGPUtime/$.
+Idle1..86paid;86=7closedGNUtimers58.23CPU +separatestorage312.603644906. All56closednativeclientphasesreconciledonce.
+Post86v123writer+laterordinaryverification pendingactualidle87. Live003native/wholeminusnative/parent/HTTP/GPUinterval/unknown
+andstorage003wholeCPU awaitactualexit. Metadata scanner/settler/launcher stayunGNU; no ledgerwhilelive.
+
+V3 protocol E/frozen-lme-observation-execution-v3/protocol-before-only-native-untouched-primary441-v3.json unchanged.
+Owner tools/own_a100_lme_observation_v3.py normalv3continuationsserial3 onward; strictoldv2->v3serial2bridge onlyalreadyclosed002.
+Canonicalaliases/closures/sourceversion/stageorder +oldinitialoutputancestrybase unchanged; finalizerv1reusable.
+Full451Sourceauditor protocol.prediction_source_audit_entry = frozen audit_a100_lme_predictions_execution_v3.py OWNER afterfull
+451terminalnativeclosure. CUDAPYtransformers4.52.3/tokenizers.21.4 FIRST, appendHTTP_SITE last, CUDAemptythreads4,
+PYTHONPATHv3folder+oldv1audit-code-reference+runtime/src/tools+ROOT+imageoverlay. Do notblindlyreusefixed050bootstrap.
+Allfirst0..9keep:0preloadFstrictSourceproof3458;1..9Source/entireStore13837values/read-onlyderivedcache/68NN459461/
+8SDK/8Reader auditPASSED. OriginalphysicalperstepStore/Saverbytes for1..9neverexisted, proofunavailableanddisclosed,
+neverfabricate/relabelreconstructedcapture. New10..450fullrealcapture/snapshotpath. No reductionofSource/input/permissionscope.
+Firstreal10/11proof16before/14controls/16NN passed. Additionalexactfrozenclosedcase10fullSourcepath31122comparisons/
+8restores8NN1SDK1Reader passed, nofull451gate; compact a100-primary-case10-full-source-path-20261108-v1.json, timerspaid86.
+
+Fixed451ALL3closures+Source/scoreaudits closed401COMP/50ReaderF,75correct/401subset,250validUNKNOWN,
+full451bounds[75/451,125/451],completeMetricNone; first451earliest51ancestryeq,oldfixedbases+archives retained.
+Mem2Actstaticpath1147bindingsunchanged, fullconfigmergedinhostreplay/noobserveroverwritebranch; actual400x2still0,
+all6LMEcanonicalclosuresrequired. Fullprimary451coverage/Source+scoreaudits/scoring/archive,Mem2Act400x2,finalallcost/
+paper/figures/final763completionaudit stillINCOMPLETE. Allinternal1024/Q6412999/D960+K9+old42/fourpanel/eightfitworksheets
+unchangedclosed; reviewerTHISassistantnotindependenthuman. No newfit/adopt/nativeTESTopening. Staticknownpaidcutoff
+87091.84096111101CPU/25368797Hosttokens before007 NOTcurrenttotal. GoalstayACTIVE, notcomplete/blocked.
+
+# HISTORICAL A100 EXECUTION v122: 2026-11-08 (Asia/Shanghai)
 
 Original763-line goal ACTIVE/incomplete; current PROGRESS, previous PROGRESS. No genuine blocker.
 Latest data/manifests/a100-development-progress-20261108-v122.json; previousv121, checkpoint8dad318b. ROOT/F/E/Q64 unchanged.
