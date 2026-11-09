@@ -95,3 +95,14 @@ python3 tools/reconcile_a100_cost_through_lme_closed.py \
 ```
 
 Mem2Act400×2、最终完整项目成本、论文/图表及原763行逐项完成审计仍未完成，目标继续。
+
+后续使用[最终静态成本衔接入口](../tools/reconcile_a100_final_known_cost.py)。当前只执行了
+`--preflight-only`：核对这份静态截止点，列出尚缺的两方法closure/Source/score及800归档门禁，
+没有计算Mem2Act成本，也没有打开活动账本。真正汇总必须等这些门禁全部通过、原owner退出
+支付、实际idle138及后续普通/失败计时付款，再显式传入当时保存的账本副本和最后idle编号。
+
+入口按全部实际owner祖先核对原生/整child/残差/已测parent，将新增具名phase严格分成原生
+client与普通付款；逐张回执排除旧计时并保留非零退出。不会把NN/加载再次加到整child上，
+也不会把旧156772秒或共享baseline重复加入。报告自己的计时与后续出版CPU位于输入快照
+之后，仍需下一实际idle处理；未测作者/settler/清理、HostGPU忙时和金额继续保留未知。
+最终结果仍是明确时点的已测已付范围，不能把未知成本填成零后称完整真实成本已知。
