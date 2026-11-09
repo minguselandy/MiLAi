@@ -6,11 +6,32 @@
 历史 worktree、原始失败与用户文档保持原状。没有使用子代理、SHA/内容指纹校验、新服务、第二账本或远端写入。
 
 本轮机器可读入口为
-[progress](../data/manifests/a100-development-progress-20261109-v176.json)。
+[progress](../data/manifests/a100-development-progress-20261109-v177.json)。
 原始数据、冻结运行时、权重、命令、计时和实际输出位于本 worktree 的 ignored
 `artifacts/a100-development-20261104/`。本记录是现有报告体系的执行摘要。
 
-## v176 当前状态（2026-11-09，Asia/Shanghai）：Mem2Act全400继续，原生首失败保留，完整审计的失败元数据路径已修复
+## v177 当前状态（2026-11-09，Asia/Shanghai）：LME关闭后的已付成本截止点精确核对，Mem2Act全400继续
+
+[静态成本报告](MILAI_A100_KNOWN_COST_THROUGH_LME_20261109.md)与机器manifest已发布，并经重执行whole dict
+（仅timestamp除外）一致验证。读取的是Mem2Act启动前保留的budget-before快照，未打开正在变化的原始账本。
+当前目标截至LME全部六阶段/idle137关闭已测已付156,772.304695CPU秒（43.547862CPU小时）及30,712,462已知Host tokens；
+不把CPU小时称GPU小时/金额，也不把这份截止量称完整真实项目成本。
+
+较旧LME007前新增295具名phases：99个LME原生client残差/父CPU51,591.727529秒、101次离线付款8,992.05秒、
+95个独立存储整child/父CPU4,621.371547秒；另有实际原生NN/加载通用增量4,475.314659秒。全部增加69,680.463734秒，
+每个phase互斥且有实际owner/回执，所有新增phase与两项通用变动均已解释。新99原生整child/父CPU56,067.042188秒
+已经包含NN/load，不能重复叠加。465个原始GNU timer逐项一致、含10次非零退出；旧20条native归属边重新读取实际来源。
+106个LME原生client闭合/支付核对，最早7段已在旧截止量中，不再补加。旧v79债务45.39秒只排除一次，P0只计一次。
+
+当前实际Mem2Act固定400父328495/子328497存活，native{'COMPLETED': 16, 'FAILED': 7, 'HOST_RUNNING': 1, 'NOT_RUN': 376}、active23；
+该运行和所有post137普通计时不在截止量中，费用待原生owner退出/合格idle138。全400 Source/Store/Saver/SDK/Host审计
+使用已冻结v2观察审计（原1147科学绑定不变+1observer），完成0/失败2真实全路径已通过，不替代全400门槛。
+原生FAILED继续保留，不更改Source/模型/预算/方法、不重试失败或补成成功。本轮成本报告/核对代码与失败措辞检查计时保留。
+
+Mem2Act400×2完整首结果、适配评分/审计/归档、最终全项目成本/论文/图表及原763行逐项完成审计仍未完成，目标active。
+作者/启动/清理未测CPU、旧输出丢失父监测和Host GPU忙时/货币等未知保持，不填零；未离线访问原始运行账本。
+
+## v176 历史状态（2026-11-09，Asia/Shanghai）：Mem2Act全400继续，原生首失败保留，完整审计的失败元数据路径已修复
 
 固定前缀400实际父328495/子328497仍运行，native{'COMPLETED': 6, 'FAILED': 3, 'HOST_RUNNING': 1, 'NOT_RUN': 390}、active9。已出现的原生失败
 为IncompleteChatResponse/provider_protocol/VLLM_CHAT_TRUNCATED，新增unknown0/0；原冻结known_native_failure分支继续未运行

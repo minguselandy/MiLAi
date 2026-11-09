@@ -1,4 +1,65 @@
-# LIVE A100 EXECUTION v176: 2026-11-09 (Asia/Shanghai)
+# LIVE A100 EXECUTION v177: 2026-11-09 (Asia/Shanghai)
+
+Original763-line goal ACTIVE/incomplete; current PROGRESS, previous PROGRESS. No genuine blocker.
+Latest data/manifests/a100-development-progress-20261109-v177.json; previousv176/checkpoint66f0e2f4. ROOT/F/E/Q64 unchanged.
+Batch/protocol/source-version/phase IDs stay20261107. No subagents/SHA/fingerprints/services/secondledger/reset/refund/
+remote/Productwrites/first-outcome retries/reselection/crop/quantize. OneactualmodelHTTPworker maximum.
+HostGPU0/1untouched; learnerGPU2/cuda0FP32threads4/MHAFalse/refcompileFalse/TF32False. Preserve1141LME/1147Mem2Act scientificbindings,
+plus1 frozen observation-only v2auditor. NeverGNUwrap owner/scanner/settler/launcher; ordinary audits/writers uniqueGNUtimers.
+NO offlineledgeraccess/write while native-owned stage live. Native/whole/parent/nested/oldcost neverdouble-add; authorunmeteredCPUunknown_not_zero.
+
+ONLY LIVE MODELHTTPWORKER Mem2Act fixed-prefix-prediction400-v1:parent328495/child328497actualverifiedRUNNING/CPUFalse.
+E/stages-mem2act-v1/fixed-prefix-prediction400-v1-{plan,owner}.json/.log/-owner.log; native{'COMPLETED': 16, 'FAILED': 7, 'HOST_RUNNING': 1, 'NOT_RUN': 376},active23.
+FULL400originalquery/schema/full429sessions16843turnSource. Originalfrozenplan/owner/protocol-before-public-task-projection-v1.json unchanged,
+sourceversionlocal-a100-mem2act-native400-20261107-v1. All6LMEclosure/Sourcepaidgone/publicprojection/idle137 gatedlaunch.
+Fixedfunctional.message capturesrealpre-firstHost; primarylaterreplay_host_message mergesfullconfig+override,noLMEobserveroverwrite.
+No business execution/queue/retry. ActualnamedPIDs; timeoutNOTtermination. Noofflineledger while live; whole-minus-native+parent atactualexit.
+KnownIncompleteChatResponse/provider_protocol orFUNCTIONAL_FORMAT_REPROPOSAL_EXHAUSTED withknownusage cannextnativeuntouchedrow;
+doNOTretry FAILED/promote partialproposal. Otherfailurewaitownerpaidgone/reflect/explicitNOT_RUNtail,notLMEReaderhelpers.
+FAILED_WRAPPER retainsreturned-native-result-before-wrapper-failure.json; reconcilemetadatawithout rerun.
+
+OBSERVATION AUDITv2 FROZEN: E/frozen-mem2act-audit-execution-v2/observation-protocol-before-audit-v2.json;
+actualentry E/frozen-mem2act-audit-execution-v2/audit_mem2act_predictions_execution_v2.py, trackedtool sameentirebytes.
+Originalv1actualFAILEDrow2 auditKeyError memory_mutation_receipts success-onlyfield; failedtimerretained. Exactly3audit-only changes,
+inverse restoresentireoriginalauditor; completedstillnative[], failedfieldabsencerecordedpresentFalse/valueNone,NOTimputedempty/success.
+AllfullSource/Store/Saver/roles/body/clock/permissions/app/world/SDK/Hostinput/NN and400paidgonegates unchanged; original1147bindings+1observer.
+Actualcompleted0/failed2 audit_case passed33686initial/33688preFirstSource/Store/Saver/SDK/Host; ROOT/verify-mem2act-first-completed-and-native-failed-Source-v2.json,
+NOTfull400gate. Afteractual400ownerpaidgone invokev2entry ORIGINALprotocol,predictions,owner,ORIGINALcanonicalfullauditoutput.
+CUDAPYtransformers4.52.3/tokenizers.21.4FIRST; PYTHONPATHoldfrozenMemfolder+runtime/src/tools,appendprotocol.site_packagesafterSDKimports.
+Full400fixedsnapshotsreplayable+sourceaudit+originalfinalizer beforeprimary400; bothadaptedscore/fullaudits/archive mandatory.
+Adaptedscorer retainsALLproposals inclFAILED forintentmetrics; completed_strict_call_match requiresCOMPLETED, neverrepairfailedcompletion.
+NotoriginalpaperTA/leaderboard/400independentusers; full800 actualfirsts required.
+
+NEW COST CLOSED SNAPSHOT: docs/MILAI_A100_KNOWN_COST_THROUGH_LME_20261109.md;
+data/manifests/a100-known-paid-cost-through-lme-20261109-v1.json; tools/reconcile_a100_cost_through_lme_closed.py.
+ROOT/known-cost-through-LME-publication-verification-v1.json passedwhole-reproductioneqexcepttimestamp/allpublishednumbers/295phases+2generic.
+Actualsnapshot Mem2Act fixed400-budget-before.json atprelaunch(afteridle137), NOTliveledger. KnownnewgoalCPU156772.30469547494sec/
+43.5478624154097CPUh,Hostknown30712462tokens. ExcludesliveMem2Act/post137/unmetered/lostparent/HostGPU/$/historicalbaseamortization.
+DO NOTsumthiswithold87091.840961: newdelta69680.46373436392=99nativeclientresidparent51591.72752861613+
+genericNNload4475.3146589998705+101idle8992.05+95storage4621.3715467480015. Alladded295namedphase coverageexact,all106LMEownerspaidgone,
+465GNUtimers incl10failed no duplicate vsprior1..36,old20genericedges rereadactual;P0once/oldv79debt45.39excludedonce.
+FullLME1164HTTP/6111718known partiallyinsideoldcutoff; newlyafteroldcutoff999admissions/5343665known. Reserve6766notautomaticallyallHTTP/NN.
+Knownsnapshotnewunknown0,legacy15gen/1embed preserved;currentMem2Actunknown awaitexit. No ledgerwrite/rebill/reset/refund/secondledger.
+Idle1..137PAID; allpost137v175-v177 writers,v1failedSourceaudit/v2freeze+actual2caseaudits/currentcostreport/verificationtimers pendingidle138.
+
+LME BOTH451 ALL6canonicalclosures CLOSED/paid/gone; fullSource/scoreaudits,wholefirsteqearliest51/nativearchives/bases preserved.
+Primary451archive138107744264original/4360471443archivebytes,441primarycontrolcases/3085checks,fourimmutablebases;
+whole+parent1966.239173116CPU paidonce,indexnestedNOTadded. Fixedarchive1965.505107002already paid.
+LMEprimary73/401/254UNKNOWN/50unscored(2retr+48Reader),fixed75/401/250UNKNOWN/50ReaderF; completecohortmetricNone.
+369common primary67/fixed70,g14/l17/t338;full451diffbounds[-52/451,48/451],no superiority/queryiidCI/failedgoldimputation.
+READ3060selected/2017opened/22observed/1021budgetreject;522SEARCH/521searched;12HANDOFF/11delivery_selected/1directexit;
+3592opresults/449packets/437budget_exhausted/1885Sourceitems. ActualLMErow9lastunreturnedSEARCH,NOTREAD;2earlierREADopened,
+oldfrozenauditREADfield misnameskind,newtrace/nativechoice correction documented,originalsunchanged.
+PrimaryHTTP583/3070973known vsfixed581/3040745;NN3594/25070604/173923heads/51loads inclCPUfail+50CUDA.
+Predwhole+parent32309.461795555002CPU,score40.002333217 includesNN/load;CUDAinvocation11.529464607478845h includesIO/Readerwait,
+notGPUbusy/encoderlatency/HostGPU/$/fullprojecttotal. EarlyLME1..9physicalstepbytesNEVERgenerated/disclosed/unavailable;notfabricatedbyarchives.
+PNG2800x2000viewed/layoutfixed,PDFsamefigure/1page/notseparatelyrendered;invocationcost/subsetnumbers notcompletecohort/fullprojecttotal.
+
+Remaining Mem2Act400x2fullcoverage/audits/score/archive,finalallprojectcost/paper/figures/final763requirementaudit INCOMPLETE.
+Internal1024/Q6412999/D960+K9+old42/fourpanel/eightfit unchangedclosed; reviewerTHISassistantnotindependenthuman.
+No newfit/adopt/nativeTESTopening. GoalstayACTIVE, notcomplete/blocked, preservefullscope.
+
+# HISTORICAL A100 EXECUTION v176: 2026-11-09 (Asia/Shanghai)
 
 Original763-line goal ACTIVE/incomplete; current PROGRESS, previous PROGRESS. No genuine blocker.
 Latest data/manifests/a100-development-progress-20261109-v176.json; previousv175/checkpoint9fc5730d. ROOT/F/E/Q64 unchanged.
