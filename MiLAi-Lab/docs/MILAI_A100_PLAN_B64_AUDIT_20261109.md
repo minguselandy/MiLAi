@@ -8,6 +8,8 @@ argmax↔baseline与alternative↔同baseline。原曲线提名均u33；旧32条
 
 本报告只关闭B64这一范围；早期功能8、57状态READ修复、C/D和全763行审计仍需
 各自证据。当前Mem2Act400×2未由本报告完成，没有重跑模型或修改原始数据。
+后续[B修复与C逐项审计](MILAI_A100_PLAN_B_REPAIR_C_AUDIT_20261109.md)已另行核对早期功能8、
+旧57状态修复及C8/7池的16项要求；D与全763行完成审计仍需各自证据。
 [机器凭据](../data/manifests/a100-plan-B64-audit-20261109-v1.json)保存具体要求、原文与原始路径。
 
 ![B64实际监督、后审答案与自主Host开发结果](figures/a100-plan-B64-evidence-20261109-v1.png)
@@ -157,5 +159,5 @@ Mem2Act原生owner期间离线读写账本，也不重新收取原生训练/采�
 - [原计划A逐项审计](MILAI_A100_PLAN_A_AUDIT_20261109.md)
 - [整体执行状态](MILAI_A100_DEVELOPMENT_EXECUTION_20261104.md)
 
-Mem2Act400×2、早期B修复/C/D等其余具体要求、最终全项目成本/论文图表与全763行
+Mem2Act400×2、D等其余具体要求、最终全项目成本/论文图表与全763行
 逐项完成审计仍未关闭；不能从本B64局部通过推断整个目标完成。

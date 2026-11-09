@@ -6,11 +6,37 @@
 历史 worktree、原始失败与用户文档保持原状。没有使用子代理、SHA/内容指纹校验、新服务、第二账本或远端写入。
 
 本轮机器可读入口为
-[progress](../data/manifests/a100-development-progress-20261109-v180.json)。
+[progress](../data/manifests/a100-development-progress-20261109-v181.json)。
 原始数据、冻结运行时、权重、命令、计时和实际输出位于本 worktree 的 ignored
 `artifacts/a100-development-20261104/`。本记录是现有报告体系的执行摘要。
 
-## v180 当前状态（2026-11-09，Asia/Shanghai）：B64共享分支/监督/拟合/首任务16项证据关闭，Mem2Act全400继续
+## v181 当前状态（2026-11-09，Asia/Shanghai）：B功能8/57修复与C的16项证据关闭，Mem2Act全400继续
+
+[B修复与C逐项证据和图](MILAI_A100_PLAN_B_REPAIR_C_AUDIT_20261109.md)已发布，16项原文/实际证据绑定。
+旧139首结果与functional8保留；新增52个READ全部打开并交付范围，旧57状态执行覆盖5→57。
+functional5READ＋52补采＝57/57额度；Source角色/正文/时钟/应用保持。原验证器只改报告去向复现，
+C8只排除动态CPU字段；66份实际答案/packet/完整Source指南准备输入逐字复现，52个旧判断完整不变。
+
+C8固定已读池/原菜单，fixed_context/rules各4/8，原learned及保存initial/B0/B1/E3各1/8。
+32个保存NN完整before/原HANDOFF投影/有限head与最早真实generation-request结果核对；仅六个新绑定执行一次，
+E3八个结果全部复用、零新Reader。补7池rules3/7、E3 2/7，保守heading敏感性2/7各；7完整NN输入32401tokens。
+池预算是functional3＋C8原8＋补7＝18/24；集合readout是3＋24＋保存6＋补14＝47/48，余1不填。
+
+B52新完整成功15/52、保留18/52，答案2部分gain/5loss/39tie/6unknown；完整g0/l3，差−5.7692pp/族区间[-13.4615,0]。
+C7 E3−rules差−14.2857pp/7族区间[-42.8571,0]。失败保持答案比较unknown与完整成功分母，歧义不补负gold。
+实施者Source审阅非独立/盲审；C/B来源族重叠，不称66个独立确认任务。无菜单表达缺口证明、新拟合/扩菜单/凑配额/采用。
+
+这一范围104个新增首分支原已付HTTP104/已知tokens387713，95完成/9失败，7233次完整Source值比较/259原文piece。
+原生NN/load/整child/父CPU不重计；这些不是当前全项目成本。本轮首版C8审计误把六个首动作干预送入F1验证器，
+实际失败后按原24F1/后6干预分别核对，未造事件/重跑；失败计时保留。PNG3000×1240实际查看修复legend/footer后通过，
+PDF同图单页未另行渲染，研究草案同步。v180已记录发布NameError及仅header恢复，本v181不重写其原证据。
+
+当前Mem2Act父328495/子328497实际存活，native{'COMPLETED': 170, 'FAILED': 57, 'HOST_RUNNING': 1, 'NOT_RUN': 172}、active227，首失败保留/newunknown0/0。
+全400owner实际退出/支付后仍需冻结v2完整Source/Store/Saver/SDK/Host审计及原定稿，再PRIMARY400、两方法评分归档。
+禁止原生运行期离线读写原账本；post137全部普通/失败/图表/报告CPU等待实际idle138。
+D具体要求、Mem2Act800真实首结果、全项目成本/论文图表/全763行最终完成审计仍未关闭，完整目标active、无真实阻塞。
+
+## v180 历史状态（2026-11-09，Asia/Shanghai）：B64共享分支/监督/拟合/首任务16项证据关闭，Mem2Act全400继续
 
 [B64逐项合同与三面板图](MILAI_A100_PLAN_B64_AUDIT_20261109.md)已发布，16项原文行/实际证据绑定，不把此局部范围当作
 早期功能8/57修复/C/D或全763行完成。64TRAIN家族/128实际state，每组3个完整互异合法绑定；原NN完整before/全菜单/
