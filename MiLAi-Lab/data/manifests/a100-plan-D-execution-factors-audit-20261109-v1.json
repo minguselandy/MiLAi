@@ -1,0 +1,97 @@
+{
+  "passed": true,
+  "status": "PARTIAL_ORIGINAL_D_EXECUTION_SOURCE_FACTOR_EVIDENCE_AUDITED_CONTROLS_AND_FULL_REQUIREMENTS_REMAIN",
+  "timestamp_utc": "2026-11-09T10:55:29.332185+00:00",
+  "execution_audit": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/original-plan-D-existing-execution-v4/summary.json",
+  "factor_audit": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/original-plan-D-factors-v1/summary.json",
+  "actual_new_native_jobs": 5,
+  "actual_new_native_positions": 1120,
+  "old8_new_policy_positions": 160,
+  "new32_all3_positions": 960,
+  "old8_baseline80_reused_not_reexecuted": true,
+  "immutable_Store_Source_Saver_and_application_turns_checked": 1120,
+  "old_Source_value_comparisons": 19292,
+  "new_completed_assistant_Sources": 890,
+  "E3_full_actual_input_audits": {
+    "old8-e3-aggregate-u32": {
+      "bound_positions": 80,
+      "actual_model_forwards": 185,
+      "all_actual_head_values_finite": true,
+      "full_before_entire_ordered_menu_native_projection_no_truncation_verified": true,
+      "actual_input_tokens": 1051651,
+      "actual_minimum_input_tokens": 3809,
+      "actual_maximum_input_tokens": 8352,
+      "original_validator_historical_formal_planned_positions_field": 320,
+      "actual_bound_positions_used_in_current_summary": true
+    },
+    "new32-e3-aggregate-u32": {
+      "bound_positions": 320,
+      "actual_model_forwards": 784,
+      "all_actual_head_values_finite": true,
+      "full_before_entire_ordered_menu_native_projection_no_truncation_verified": true,
+      "actual_input_tokens": 4604680,
+      "actual_minimum_input_tokens": 2521,
+      "actual_maximum_input_tokens": 9208,
+      "original_validator_historical_formal_planned_positions_field": 320,
+      "actual_bound_positions_used_in_current_summary": true
+    }
+  },
+  "original_new32_family_comparison_reproduced_except_dynamic_CPU": true,
+  "new32_method_complete": {
+    "view_cache": 67,
+    "view_cache_incremental": 65,
+    "e3-aggregate-u32": 95
+  },
+  "E3_REFRESH_VIEW_offered_new32": 779,
+  "E3_REFRESH_VIEW_selected_new32": 0,
+  "E3_USE_VIEW_offered_new32": 0,
+  "all3_incremental_USE_VIEW_initial_no_new_pending_events_no_supplemental_READ": true,
+  "source_only_families": 32,
+  "source_only_native_objects": 768,
+  "source_contracts": {
+    "prior29": 29,
+    "new_author3": 3
+  },
+  "streams": 64,
+  "requests_per_stream": 5,
+  "factor_positions_per_method": {
+    "initial": 64,
+    "no_new_exogenous_Source": 64,
+    "one_constructed_task_irrelevant_Source": 64,
+    "native_intermediate_arrivals": 64,
+    "native_final_arrivals": 64
+  },
+  "task_irrelevant_arrival_is_one_constructed_note_not_history_scale_curve": true,
+  "no_future_support_or_scoring_fields_in_Host_input": true,
+  "source_author_not_independent_or_blind": true,
+  "observed_validation_differences": {
+    "SDK": [
+      "historical audit_reflection text",
+      "one additional audit_reflection_scope note"
+    ],
+    "operations": [
+      "three older reports predate exact zero-error receipt fields",
+      "CPU timing and the added explanatory scope suffix"
+    ],
+    "all_original_scientific_fields_literal_preserved": true,
+    "original_reports_not_modified": true,
+    "new_legacy_receipt_fields_independently_validated": true,
+    "closed_prior_successful_readonly_component_outputs_reused": 7,
+    "actual_missing_component_validators_in_final_process": 6,
+    "failed_GNU_timers_retained": 3
+  },
+  "original_finite_validator_old8_historical_formal_planned_positions320_retained_but_actual_bound_positions80_used": true,
+  "required_remaining": {
+    "known_View9_and_old_output42_controls_concrete_audit": true,
+    "old8_functional_slice_and_postView_probe_scope_reconciliation": true,
+    "D_requirement_by_requirement_report": true,
+    "full800Mem2Act_and_final_project_deliverables": true
+  },
+  "whole_D_requirements_audit_complete": false,
+  "full763_line_completion_proven": false,
+  "original_inputs_labels_models_or_firsts_changed": false,
+  "new_model_tokenizer_GPU_HTTP_business_or_original_ledger_calls": 0,
+  "CPU_pending_actual_idle138": true,
+  "no_sha_validation": true,
+  "goal_complete": false
+}

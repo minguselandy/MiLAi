@@ -34,6 +34,12 @@ PDF同图单页未另行渲染，研究草案同步。v180已记录发布NameErr
 当前Mem2Act父328495/子328497实际存活，native{'COMPLETED': 170, 'FAILED': 57, 'HOST_RUNNING': 1, 'NOT_RUN': 172}、active227，首失败保留/newunknown0/0。
 全400owner实际退出/支付后仍需冻结v2完整Source/Store/Saver/SDK/Host审计及原定稿，再PRIMARY400、两方法评分归档。
 禁止原生运行期离线读写原账本；post137全部普通/失败/图表/报告CPU等待实际idle138。
+D执行与分因素已另有[部分补充核对](MILAI_A100_PLAN_D_EXECUTION_FACTORS_20261109.md)：五个新任务1120真实轮的不可变
+Store/Source/Saver/应用/实际回执通过；969个已存NN完整输入/head有限值/无截断核对。32native来源、64流程×5轮、
+五份冻结配置与标签不进入Host输入核对；无关控制只是一条构造Source，非历史规模曲线。E3 REFRESH可选779次未选择，
+增量3次USE均initial后直接HANDOFF，无追加READ。三次报告版本元数据比较失败保留，7份已过只读输出复用、仅补剩余6入口。
+known-View9/旧输出42、旧8功能/探针与D整包逐项合同仍需继续，本补充不宣布D或整个计划完成。
+
 D具体要求、Mem2Act800真实首结果、全项目成本/论文图表/全763行最终完成审计仍未关闭，完整目标active、无真实阻塞。
 
 ## v180 历史状态（2026-11-09，Asia/Shanghai）：B64共享分支/监督/拟合/首任务16项证据关闭，Mem2Act全400继续

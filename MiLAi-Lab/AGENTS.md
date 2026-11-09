@@ -53,7 +53,22 @@ All295newphases+2generic/106LMEowners/465GNUtimersincl10failed/20oldgenericedges
 Idle1..137PAID; ALLpost137 ordinarytimers inclv175-v181/cost/P0/A/B64/BrepairC/v2Source/failedC8/plots/reports/v180failedwriter+headerrecovery awaitactualidle138.
 No offlineledgerwhileMemlive; no recharging old104HTTP/nativeNN/load/wholeparent. Author/HostGPUbusy/$/lostparent remainunknown.
 
-Next independent work D concreteoriginalplanrequirements/fullscopeaudit, then finalcost/paper/figures/all763 afterMem2Act800done.
+ADDITIONAL D EXECUTION/FACTOR PARTIAL AUDIT passed: docs/MILAI_A100_PLAN_D_EXECUTION_FACTORS_20261109.md;
+data/manifests/a100-plan-D-execution-factors-audit-20261109-v1.json. Tools audit_a100_plan_d_existing_execution.py,audit_a100_plan_d_factors.py.
+ROOT/original-plan-D-existing-execution-v4/summary.json andoriginal-plan-D-factors-v1/summary.json. Five newDjobs1120actualturns
+(old8new160/new32all3960),reuseoldbaseline80notnew. AllimmutableStore/Source/Saver/app/Toolreceipts checked;
+E3old8actual80/185NN1051651tokensmax8352, new32actual320/784NN4604680max9208;all969fullbefore/menu/headfinite/noTrunc.
+Originalfiniteold8formal_planned_positions320historicalfieldretained,butactualbound80used. Source32nativeobjects/all64flows/5cuts/label-freeHosthistories
+reprojected;prior29+newauthor3contracts. Fiveconfigsinput-freezeEq. Threefactorsseparate:oneconstructedcablearrivalisnotascalingcurve;
+native middle arrivals include status/scope/corrections,notallirrelevantorvalueflips. REFRESHoffered779/E3selected0,USE_VIEWnotinE3ownmenus;
+incremental3USEallinitial/noNewPending/thenHANDOFF/noREAD. New32comparisonwholeEqexceptCPU,67/65/95C,notcontrollercausalproof.
+ThreefailedDtimers v1-v3retained:SDKlegacyhistoricalnarrative/scope and3olderoperationreportzero-errorreceiptfields.
+AlloriginalscientificfieldsEq/newreceiptfactsvalidated;v4explicitlyreuses7closedv3readonlyreports/executesremaining6,notSource/firstretries.
+ALLnewDtimerspending138. DscopeNOTfullyclosed: knownView9/oldOutput42/source/View/quality/frames/orphancost controls andold8functional/probe
+needconcretereconciliation,thenDrequirementsreport. DoNOTdirectlyreexecute Sourcebinders:theyopenSqliteStore normalRW forprojection;
+useSQLite mode=ro/equivalent pure recordedbindingfunctions for currentrevalidation. Ops/finite knownView usesruntime-d-update32;
+oldOutput usesruntime-d-old-output-v1 in a FRESH process (modulepathassert). Originalnormalbinders notrunthisturn/no snapshotswritten.
+Next Dconcretecontrols/old8slice/probe/fullrequirements, then finalcost/paper/figures/all763 afterMem2Act800done.
 RemainingMem2Act400x2fullcoverage/audits/score/archive andfinalglobaldeliverables INCOMPLETE. GoalACTIVE,notcomplete/blocked.
 
 # HISTORICAL A100 EXECUTION v180: 2026-11-09 (Asia/Shanghai)
