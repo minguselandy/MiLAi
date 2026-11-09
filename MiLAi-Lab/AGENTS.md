@@ -1,4 +1,51 @@
-# LIVE A100 EXECUTION v171: 2026-11-09 (Asia/Shanghai)
+# LIVE A100 EXECUTION v172: 2026-11-09 (Asia/Shanghai)
+
+Original763-line goal ACTIVE/incomplete; current PROGRESS, previous VERIFIED_WAIT. No genuine blocker.
+Latest data/manifests/a100-development-progress-20261109-v172.json; checkpointaf9dbfe1(previousv171). ROOT/F/E/Q64 unchanged.
+Batch/protocol/source-version/phase IDs stay20261107. No subagents/SHA/fingerprints/services/secondledger/reset/refund/
+remote/Productwrites/first-outcome retries/reselection/crop/quantize. OneactualmodelHTTPworker maximum.
+HostGPU0/1untouched; learnerGPU2/cuda0FP32threads4/MHAFalse/refcompileFalse/TF32False. Preserve1141LME/1147Mem2Act/7Q64bindings.
+NeverGNUwrap owner/scanner/settler/launcher. Ordinary audits/writers uniqueGNUtimers. No offlineledgeraccess/write while modelHTTP/native-owned stage live.
+Native/whole/parent/nested/oldcost neverdouble-add; author/unmeteredinspection/preflight/launch/cleanup/settlement CPUunknown_not_zero.
+
+ONLY MODELHTTPWORKER primary-seed0-u32-scoring451-v1:parent123881/child123883 actualverifiedRUNNING/CPUFalse,
+active245,native{'UNSCORED_FAILED_RETRIEVING': 2, 'COMPLETED': 229, 'UNSCORED_FAILED_READING': 48, 'UNSCORED_COMPLETED': 172}. E/stages-lme-v1/primary-seed0-u32-scoring451-v1-{plan,owner}.json/.log/-owner.log.
+Exactly originalv1frozen native scoring plan; Source/prompt/HostJudge model/cap8192/thinkingTrue/budgets/method/seed/checkpoint unchanged.
+Plan.protocol=original E/frozen-lme-v1/protocol-before-input-copy-v1.json and original frozen_owner_entry. Diskplan wholeequalsoriginal;
+v3embeddedscoring/archiveplans onlyprotocolpathdiff. DoNOTrewritefrozenplan or infer v3 owner necessary for scoring.
+Sourcefull451gate and predictioncanonicalclosure passed; latestactualidle135closed/paid beforeexplicitcheck-only+launch. No autoqueue/retry.
+Reader answers neverregenerated. Fifty firstfailed predictions remainUNSCORED_FAILED_* withinN451; validUNKNOWN followsnative rule.
+IfJudge firstfailure/scoreclosed inspectactual rawusage/finish/content, waitactualownerexit/CPU/gone. DoNOTuseReader-tail reflectionhelper.
+Onlyexplicit frozenv1 scoring continuation of UNSCORED_COMPLETED may run afterclosed/reflection/costgate; neverretryFAILED_SCORING.
+Needall451scorefirstcoverage/whole-score+actualJudge-wire audit then frozenfinalizer; nativefailed scores stayunscored/full451bounds.
+
+Primary prediction ALL451firsts CLOSED:401COMP/2retrF0,9/48ReaderF;allwholeequalearliest51ancestry.
+Alias E/finalized-lme-v1/primary-seed0-u32-predictions and primary-seed0-u32-prediction451-v1-closure.json CLOSED.
+FullSourceaudit CLOSED exit0/actualPID3936291+GNU3936290gone, toolsession29355COMPLETED. ROOT/lme-primary-full451-source-audit-v3-launch.json paidTrue.
+GNU4366.58CPU/wall5408.0;10,285,695Sourcecomparisons/3536before-restores/449SDK/449wholeReaderwires,
+3594NN/25,070,604untruncatedinputtokens,0newmodel/tokenizer/HTTP/ledgeraccess. FULL451Sourcegate PASSED; notQAtruth.
+Proof ROOT/verify-lme-primary-source-audit-closed-v3.json passed IDs/status/counts/inputs/restores/Sourceflags/closure/1141bindings.
+Root0strictpreloadFSourcebranch. Retained1..9 all13837preexistingStorevalues/Source/role/body/origin/clock/identity/permission/lifecycle/apps
+unchanged,onlyderivedcacheadded;68NN459461/8SDK/8Reader proven. Their physicalperstepStore/Saverbytes NEVER existed,
+unavailableandexplicitlydisclosed; availability=False, no fabricatedsnapshot. Rows10..450 originalactualfullcapture/snapshot path unchanged/passed.
+All48Readerlength/out8192/knownusage retainFAILED/scoreNone,47None+row258str10 partial norescue. All first failures nevergold.
+Primary441actualstoragecases10..450/3085controlbytechecks + ALLcreatedprimary/fixedimmutablebases/templates retained outsidecases.
+No filesofactivejobs may be removed. Primary archive pendingnativeSource+scoregates and paidactualexit.
+
+Idle1..135PAID. Latest4closedGNUtimers4367.0CPU includesentireaudit/finalizer/closeout/v171writeronce; noNN/load/native/model/storagerebill.
+All104closednativeclientphasesreconciled. Currentnative scoring whole-minus-native+parent chargesonlyactualexit; v172writer/laterordinary
+timers awaitactualeligibleidle136. UnmeteredauthorCPUunknown_not_zero. DoNOTsettle/readledgeroffline while scoreworkerlive.
+
+Useactualprotocol.frozen_finalizer_entry, canonicalaliases/sourceversion/stageorder and originalinitialancestrybase. Native scoring/scoreaudit/
+finalize/archive/fullcostclosure, Mem2Act400x2 all6LMEcanonicalclosures, finalallcost/paper/figures/final763completionaudit INCOMPLETE.
+Fixed451 ALL3closures/source+scoreaudits closed401COMP/50ReaderF,75correct/401subset,250validUNKNOWN,full451bounds[75/451,125/451],
+nativeCompleteMetricNone;451firstearliest51wholeeq;fixedReaderpartial501charsstaysfailed. Neverrerun.
+Mem2Act1147staticfullconfigmerged/noobserveroverwrite;actual400x2still0, all6LMEcanonicalclosuresrequired.
+Allinternal1024/Q6412999/D960+K9+old42/fourpanel/eightfitworksheets unchangedclosed; reviewerTHISassistantnotindependenthuman.
+No newfit/adopt/nativeTESTopening. Staticpaidcutoff87091.84096111101CPU/25368797Hosttokens before007 NOTcurrenttotal.
+GoalstayACTIVE, notcomplete/blocked, preservefullscope.
+
+# HISTORICAL A100 EXECUTION v171: 2026-11-09 (Asia/Shanghai)
 
 Original763-line goal ACTIVE/incomplete; current PROGRESS, previous PROGRESS. No genuine blocker.
 Latest data/manifests/a100-development-progress-20261109-v171.json; checkpointf62a4870(previousv170). ROOT/F/E/Q64 unchanged.
