@@ -731,5 +731,111 @@
   "CPU_pending_actual_idle138": true,
   "no_sha_validation": true,
   "goal_complete": false,
-  "audit_model_state_count_metadata_correction": "Three saved models,31states each,93actualbindings; raw outputs and numerical metrics unchanged."
+  "audit_model_state_count_metadata_correction": "Three saved models,31states each,93actualbindings; raw outputs and numerical metrics unchanged.",
+  "task_comparator_clarification_20261109": {
+    "actual_source": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/task-dev64-development-selection.json",
+    "B0_minus_common_initialization": {
+      "paired_source_families": 64,
+      "gains": 13,
+      "losses": 5,
+      "ties": 46,
+      "delta": 0.125,
+      "family_bootstrap_95_percent": [
+        0.0,
+        0.25
+      ],
+      "draws": 20000,
+      "analysis_seed": 0,
+      "source_families_with_unresolved_either_side": [
+        "qasper-paper-1910.05603",
+        "qasper-paper-1610.09225",
+        "qasper-paper-1704.04452"
+      ],
+      "scope": "Descriptive exposed-development family bootstrap for confirmed complete answers. Unresolved grades receive no C credit and remain explicit in64; they are not declared known failures. One first trajectory per method, not expected stochastic quality. This panel selects candidates and is not independent confirmation.",
+      "scope_sensitivity": {
+        "same64denominator": true,
+        "gains": 10,
+        "losses": 5,
+        "delta": 0.078125,
+        "family_bootstrap_95_percent": [
+          -0.03125,
+          0.203125
+        ],
+        "withheld_positions_for_every_method": [
+          3,
+          8,
+          56
+        ]
+      }
+    },
+    "B1_minus_common_initialization": {
+      "paired_source_families": 64,
+      "gains": 16,
+      "losses": 9,
+      "ties": 39,
+      "delta": 0.109375,
+      "family_bootstrap_95_percent": [
+        -0.046875,
+        0.265625
+      ],
+      "draws": 20000,
+      "analysis_seed": 0,
+      "source_families_with_unresolved_either_side": [
+        "qasper-paper-1910.05603",
+        "qasper-paper-1704.04452"
+      ],
+      "scope": "Descriptive exposed-development family bootstrap for confirmed complete answers. Unresolved grades receive no C credit and remain explicit in64; they are not declared known failures. One first trajectory per method, not expected stochastic quality. This panel selects candidates and is not independent confirmation.",
+      "scope_sensitivity": {
+        "same64denominator": true,
+        "gains": 15,
+        "losses": 9,
+        "delta": 0.09375,
+        "family_bootstrap_95_percent": [
+          -0.046875,
+          0.234375
+        ],
+        "withheld_positions_for_every_method": [
+          3,
+          8,
+          56
+        ]
+      }
+    },
+    "coverage_minus_current_nomination": {
+      "paired_source_families": 64,
+      "gains": 12,
+      "losses": 13,
+      "ties": 39,
+      "delta": -0.015625,
+      "family_bootstrap_95_percent": [
+        -0.171875,
+        0.140625
+      ],
+      "draws": 20000,
+      "analysis_seed": 0,
+      "source_families_with_unresolved_either_side": [
+        "qasper-paper-1910.05603",
+        "qasper-paper-1610.09225",
+        "qasper-paper-1704.04452"
+      ],
+      "scope": "Descriptive exposed-development family bootstrap for confirmed complete answers. Unresolved grades receive no C credit and remain explicit in64; they are not declared known failures. One first trajectory per method, not expected stochastic quality. This panel selects candidates and is not independent confirmation.",
+      "scope_sensitivity": {
+        "same64denominator": true,
+        "gains": 12,
+        "losses": 11,
+        "delta": 0.015625,
+        "family_bootstrap_95_percent": [
+          -0.125,
+          0.15625
+        ],
+        "withheld_positions_for_every_method": [
+          3,
+          8,
+          56
+        ]
+      }
+    },
+    "interpretation": "Do not conflate no stable coverage-vs-current improvement with proven no benefit of pure-delivery learning. No new answer-first fit is automatically mandated by a condition whose pure-delivery-failure premise is unproven; original fixed final candidate and results remain unchanged.",
+    "original_firsts_labels_models_or_metrics_changed": false
+  }
 }

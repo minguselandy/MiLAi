@@ -6,11 +6,37 @@
 历史 worktree、原始失败与用户文档保持原状。没有使用子代理、SHA/内容指纹校验、新服务、第二账本或远端写入。
 
 本轮机器可读入口为
-[progress](../data/manifests/a100-development-progress-20261109-v182.json)。
+[progress](../data/manifests/a100-development-progress-20261109-v183.json)。
 原始数据、冻结运行时、权重、命令、计时和实际输出位于本 worktree 的 ignored
 `artifacts/a100-development-20261104/`。本记录是现有报告体系的执行摘要。
 
-## v182 当前状态（2026-11-09，Asia/Shanghai）：D的18项具体合同/控制/首质量/成本审计关闭，Mem2Act全400继续
+## v183 当前状态（2026-11-09，Asia/Shanghai）：完整763行当前证据/来源冻结/剩余工作对照，Mem2Act全400继续
+
+[全原计划当前证据与剩余交付](MILAI_A100_PLAN_CURRENT_EVIDENCE_20261109.md)保留完整763行UTF-8与73章节，
+精确归入671不重叠文本块（438非空）、8命令/结构代码块和所有shell变量/训练参数；不计算完成比例，不以覆盖/文件存在推断完成。
+P0/A/B64/B修复C/D的78项已审合同及实际Source分配/冻结、内部1024、Q6412999、LME两451六个已付关闭按实际来源逐条绑定。
+旧v66初审待办保留历史，LME/Q64/D不再被当前清单错写pending。7个明确工作组仍需Mem固定400/fullaudit/finalizer、primary400、
+两方法评分/归档、实际idle后最终成本、最终论文/总体图、最后763行完成审计；工作组不是7个等权要求。
+
+新来源/冻结复核重建真实parent allocation次序及旧TRAIN64/B64_64/旧DEV32/DEV64/CONF256全部论文集合无交叉，
+unusedDev前64为开发，其余Dev/Train原顺序取确认185/71。协议08:29:45UTC早于08:51:30语义导出，native依据在第一baseline模型前。
+同一冻结native纯exporter复算256完整histories/refs与18932Source单元逐字相同，只读train/dev，未开nativeTEST；
+共享容器字节接触、公共预训练/作者非盲、后baseline80/primary16形成122mask及82/101/231指南时序的限制保持，未追认为全部预注册。
+
+E3 seed1/2完整argv只改seed/output/phase，45run字段/长度/原始E1起点匹配，原FP32两GPU128更新/2048draw，预选u32但计满128成本。
+三seed不是完整训练链三次独立初始化；原64族差值重算样本方差0.2038966049，+5pp规划约640族，实际冻结N256无功效保证/结果扩N。
+源分区dev/train与研究角色分开，确认owner/256实际首顺序/policy/argv/原失败保持；5个既有科学对象逐dict不变。
+
+B解释澄清：B0/B1对共同E1初始化是+12.5pp/[0,+25]与+10.9375pp/[−4.6875,+26.5625]，B1−B0是−1.5625pp/[−17.1875,+14.0625]。
+不能将无稳定coverage-vs-current优势概括为已证pure-delivery无任何任务改善，也不能只凭粗材料tie中有答案差异自动触发新objective。
+原不自动扩量/组合/新fit与固定primaryseed0u32/不采用保持；不据确认负结果回改这几个比较。
+
+新增两复核入口实际运行通过并按repoRuff检查通过，CJK报告长字符串断行保持AST字面值；实际Python3.11环境使用未升级。
+说明中的不存在参数一度混入命令要求，改为仅AST核对真实训练代码块，错误计时保留；缺失Ruff二进制wrapper与格式/断行失败也保留。
+Native Mem2Act父328495/子328497实际存活，native{'COMPLETED': 236, 'FAILED': 73, 'HOST_RUNNING': 1, 'NOT_RUN': 90}/active309，首FAILED/newunknown0/0保持。
+完整目标ACTIVE、当前及前轮progress、无真实阻塞。post137所有普通/失败/图表/报告计时待实际idle138，活动原账本未读写。
+
+## v182 历史状态（2026-11-09，Asia/Shanghai）：D的18项具体合同/控制/首质量/成本审计关闭，Mem2Act全400继续
 
 [D逐项报告与三面板图](MILAI_A100_PLAN_D_AUDIT_20261109.md)覆盖18项原文要求，含复用baseline80的1200自主首轮、1120新执行，
 1086既有NN完整before/全菜单/有限head/无截断，Source/Saver/应用与控制/探针共21362次完整Source值比较。
