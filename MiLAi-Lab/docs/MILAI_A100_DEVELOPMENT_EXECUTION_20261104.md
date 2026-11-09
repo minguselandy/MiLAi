@@ -6,11 +6,29 @@
 历史 worktree、原始失败与用户文档保持原状。没有使用子代理、SHA/内容指纹校验、新服务、第二账本或远端写入。
 
 本轮机器可读入口为
-[progress](../data/manifests/a100-development-progress-20261109-v184.json)。
+[progress](../data/manifests/a100-development-progress-20261109-v185.json)。
 原始数据、冻结运行时、权重、命令、计时和实际输出位于本 worktree 的 ignored
 `artifacts/a100-development-20261104/`。本记录是现有报告体系的执行摘要。
 
-## v184 当前状态（2026-11-09，Asia/Shanghai）：Mem2Act原衔接顺序/完整配置/引用图核对，尚未派发后续任务
+## v185 当前状态（2026-11-09，Asia/Shanghai）：论文方法/13协议暴露表、内部图范围更正与已关闭D捕获无损存储
+
+[结果草案](MILAI_A100_DEVELOPMENT_RESULTS_DRAFT_20261107.md)新增方法图、完整投影/训练/评分语义、13行来源与暴露表；
+全部原结果段逐字保留，Mem2Act尚无全量指标。内部总览v2四面板行与数值完全同v1，旧v1保持；
+只按D18更正首次Provider完整dict均匹配、后续参数/轨迹不同，脚注将LME改为已闭合。新PNG已实际查看。
+
+[已关闭D捕获无损存储](MILAI_A100_CLOSED_D_CAPTURE_STORAGE_20261109.md)处理实际磁盘0普通可用/约35GB含root预留的约束。
+五个已关闭原生D作业10个捕获树26,643,763,892原字节→637,562,898归档字节，
+逐字节重建比较成功才移除raw。另实际整树restore/逐511,095,747字节与mode/mtime验证；
+原driver/首结果/Source/标签/模型不变，emptybase/全部归档保持。D原路径复查前须先restore；未触碰Mem/LME快照或worker。
+归档/验证为普通CPU，费用待实际idle138；与当前Mem并行，时长不作受控延迟效果比较。
+
+[最终静态成本入口](../tools/reconcile_a100_final_known_cost.py)仅执行preflight，仍等全800/Source/score/archive与保存的实际idle后快照。
+全部owner祖先/普通及失败计时互斥计量，不把native/load/whole重复相加；未测CPU/GPU忙时/金额保持未知。
+当前固定400原父328495/子328497实际存活，native{'COMPLETED': 276, 'FAILED': 88, 'HOST_RUNNING': 1, 'NOT_RUN': 35}/active364，无重试/重选/新业务。
+先实际全400支付退出→原canonical alias→冻结v2全审计→实际idle138普通CPU→原primary400；均未提前派发。
+全原763行目标ACTIVE/本轮与前轮PROGRESS，无真实阻塞；5个保护科学对象逐dict相同，剩余全800/成本/论文图表/最后全计划审计继续。
+
+## v184 历史状态（2026-11-09，Asia/Shanghai）：Mem2Act原衔接顺序/完整配置/引用图核对，尚未派发后续任务
 
 [原协议收尾操作卡与比较预检](MILAI_A100_MEM2ACT_CLOSEOUT_HANDOFF_20261109.md)已整理明确10条argv/环境，全部PREPARED_NOT_DISPATCHED。
 原1147代码＋冻结观察器1完整字节、SDK4.52.3/.21.4及actual completed0/failed2/最后closed三份捕获context/catalog/schema与完整控制配置核对。

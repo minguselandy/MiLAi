@@ -1,4 +1,46 @@
-# LIVE A100 EXECUTION v184: 2026-11-09 (Asia/Shanghai)
+# LIVE A100 EXECUTION v185: 2026-11-09 (Asia/Shanghai)
+
+Original763-line goal ACTIVE/incomplete,currentPROGRESS/previousPROGRESS,no genuineblocker. Latestdata/manifests/a100-development-progress-20261109-v185.json.
+Previousv184/checkpoint52d1d863;currentpapercommit43bb1ca8/finalcostpreparation52d1d863. ROOT/F/E/Q64unchanged.
+NO subagents/SHA/fingerprints/services/secondledger/reset/refund/remote/Productwrites/firstretry/reselection/crop/quantize.
+OneactualmodelHTTPworker ONLY Memfixed400 parent328495/child328497actualnamedalive,statusRUNNING/CPUFalse.
+Native{'COMPLETED': 276, 'FAILED': 88, 'HOST_RUNNING': 1, 'NOT_RUN': 35}/active364;all429sessions16843turnfullSource/400queryschemas/local-a100-mem2act-native400-20261107-v1 unchanged.
+NO offline originalledgerread/write while nativeownedworker lives;ordinaryCPUuniqueGNU,owners/scanners/settlers/launchersNEVERGNUwrapped.
+Waitactualforegroundexitbeforedependentmutation/commit.Native/whole/residual/parent/load NEVERdoubleadd;unknownauthor/cleanupCPUunknown_not_zero.
+CUDAPY4.52.3/.21.4FIRST,appendHTTPsiteLAST;HostGPU0/1unchanged,learnerGPU2/cuda0FP32threads4/MHAFalse/refcompileFalse/TF32False.
+Frozen1141LME/1147Mem+1observerv2bindingsunchanged;protocol/sourceversion/phaseIDs20261107. No autoqueue/business execution.
+
+NEW paper13protocolcohort/exposuretable+methodsdiagram inserted;existingdraftoutsideinsertionliteralEq. Not13independentdatasets/noMemmetrics filled.
+docs/MILAI_A100_DEVELOPMENT_RESULTS_DRAFT_20261107.md;publica100-paper-methods-exposure-20261109-v1.json.
+Internaloverviewv2publica100-closed-internal-overview-20261109-v2.json/numericall4rowsEqv1/v1retained.
+DfirstProviderdictsall16/16old8 and64/64new32threepairsEq;latertoolargs0/trajectoriesdiffer/HostRNGunmatched. LMEclosedfootercorrected.
+ROOT/paper-methods-and-internal-scope-publication-verification-v1.jsonpassed;actualnewPNGviewed,PDFsameexportnotseparaterendered.
+
+ACTUAL STORAGE: /craordinaryavailable0/rootfree~35GB promptedlosslessarchive ONLY10capturetreesof5CLOSEDDjobs.
+Tooltools/archive_a100_closed_D_captures.py;ROOT/closed-D-capture-storage-v1/closeout.jsonandrestore-roundtrip-verification-v1.jsonpassed.
+All26,643,763,892originalfilebytes->637,562,898archivebytes;everyreconstructedbyteEqbefore rawremove.
+Actualonewholecapturetree native restore 511,095,747bytes/4462files/mode/mtimeverified;ownRAMtempcleanedafterpass.
+ALLarchives+immutable-empty-base MUSTretain. ORIGINAL D capturepaths temporarilyarchived: restore_case torecordedoriginalpath BEFOREoptionalDreinspection/finalnative763checks.
+No Ddriver/reviews/labels/models/scientificSourcevalues/Mem/LMEtrees/snapshotschanged. MemfixedreplaycapturesNOTarchivedbeforeprimary.
+DocMILAI_A100_CLOSED_D_CAPTURE_STORAGE_20261109.md/publica100-closed-D-capture-storage-20261109-v1.json giveexactrestoremetadata.
+ArchiveordinaryGNUCPUonly/coexecfixed,no nativebilling;allcostpending138,not uncontrolledlatencysuperiority. No foregroundarchiveworker remains.
+
+Finalknowncosttooltools/reconcile_a100_final_known_cost.pyRuffpassed;ROOT/final-known-cost-preflight-v1.jsonPREFLIGHTONLY/nopostMemcostcomputed.
+Futureactualbranchrequiresall800closure/Source/score/archive+explicitSAVEDnonliveledgercopy+actualidleN>=138;allownerancestors/oldtimerexclusion/failedcostonce.
+KnownpreMempaid156772.30469547494CPU/30712462Hosttokens remainsstaticcutoffnotfullcost. Idle1..137paid;ALLpost137ordinary/failed/paper/Dstorage await138.
+PreparedROOT/settle_mem2act_fixed_before_primary_idle138_v1.pyUNWRAPPED/NOTDISPATCHED;requiresactualfixedcanonicalclosure/fullaudit/paidgone/no primary andclosedDarchive/knownclosedtimers.
+functionsstore mem2act_idle138_settlement_command holdsUNWRAPPEDfuturecmd. No originalledgeropenedthisturn.
+
+NEXT: observeoriginalspecificfixed400PIDs. Actualall400terminal+ownerpaid+bothgone FIRSToriginalcanonicalalias/closure THENfrozenv2full400audit ofalias/originalscienceprotocol/output.
+All400Source/Store/Saver/role/body/clock/permission/app/SDK/Host/NN/replaygates unchanged. FAILEDabsent successreceipt remainsFalse/Noneunknown,successfulstillliteral[].
+Afteractualauditexit+allordinaryCPUclosed,executeactualidle138settleronce;thenoriginalprimary400ownerexplicitUNWRAPPED. functionsstoremem2act_original_closeout_commands has10commands.
+Afterprimaryactual400paidgone alias->fullaudit->bothadaptedscores/scoreaudits->originallosslessarchives;do notarchivefixedbeforepairedreplay.
+PrimaryreplaymergesFULLmemory_controlwithonlypolicy/checkpointoverride. Failedintentnotcompletedstrict;notpaperTA/leaderboard/400independentusers.
+Common429sessionbank/reference341componentsnotindependentexperiments,noIID/componentCI. Unexpectedfailureactualpaidgone/reflect/ORIGINALNOT_RUNtailonly.
+FAILED_WRAPPERretainreturnedNative/reconcilemetadatawithoutnative rerun. Preserveactualunknowns/nativefirsts.
+All5protectedscienceobjects literalEq. Full800/finalcost/overallfigures/finalpaper/final763audit REQUIRED;donotnarroworcompleteoriginalgoalfromthispublication.
+
+# HISTORICAL A100 EXECUTION v184: 2026-11-09 (Asia/Shanghai)
 
 Original763-line goal ACTIVE/incomplete;currentPROGRESS/previousPROGRESS;no genuineblocker.
 Latestdata/manifests/a100-development-progress-20261109-v184.json;previousv183/checkpointa3785604. ROOT/F/E/Q64unchanged.
