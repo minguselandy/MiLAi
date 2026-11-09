@@ -1,0 +1,83 @@
+{
+  "passed": true,
+  "status": "NATIVE_LME_BOUNDS_COMMON_SUBSET_OPERATIONS_AND_INVOCATION_COST_FIGURE",
+  "timestamp_utc": "2026-11-09T04:34:26.170429+00:00",
+  "source": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/data/manifests/a100-lme-native-comparison-20261109-v1.json",
+  "png": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/docs/figures/a100-lme-native-comparison-20261109-v1.png",
+  "pdf": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/docs/figures/a100-lme-native-comparison-20261109-v1.pdf",
+  "all_planned_missing_bounds": {
+    "primary": [
+      0.16186252771618626,
+      0.2727272727272727
+    ],
+    "fixed": [
+      0.1662971175166297,
+      0.2771618625277162
+    ]
+  },
+  "common_scored": {
+    "count": 369,
+    "gains": 14,
+    "losses": 17,
+    "ties": 338,
+    "primary_correct": 67,
+    "fixed_correct": 70,
+    "primary_minus_fixed": -0.008130081300813009,
+    "conditional_on_both_methods_successfully_scored": true
+  },
+  "READ_selected_opened_refused_by_method": {
+    "fixed": [
+      1804,
+      1804,
+      0
+    ],
+    "primary": [
+      3060,
+      2017,
+      1021
+    ]
+  },
+  "invocation_CPU_hours_by_method": {
+    "fixed": 10.5900321660625,
+    "primary": 8.985962257992222
+  },
+  "table_cells": [
+    [
+      "Known HTTP tokens (M)",
+      "3.041",
+      "3.071"
+    ],
+    [
+      "Whole client CPU (h)",
+      "10.590",
+      "8.986"
+    ],
+    [
+      "Local NN calls",
+      "0",
+      "3,594"
+    ],
+    [
+      "Local NN input tokens (M)",
+      "0.000",
+      "25.071"
+    ],
+    [
+      "Model loads",
+      "0",
+      "51"
+    ]
+  ],
+  "confidence_intervals_or_full_cohort_point_estimates_invented": false,
+  "all_project_costs_complete": false,
+  "PNG_visual_inspection_pending": false,
+  "layout_revision": 2,
+  "new_model_Reader_Judge_or_HTTP_calls": 0,
+  "ledger_opened_or_written": false,
+  "no_sha_validation": true,
+  "goal_complete": false,
+  "PNG_visually_inspected_by_execution_assistant": true,
+  "PNG_visual_inspection": "Actual2800x2000 image viewed; footer and panel notes separated after layout revision2; labels and conditional denominators legible.",
+  "PDF_same_figure_export_and_single_page_structure_verified": true,
+  "PDF_separately_rendered_or_visually_inspected": false
+}

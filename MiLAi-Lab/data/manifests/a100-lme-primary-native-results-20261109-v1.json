@@ -1,0 +1,332 @@
+{
+  "status": "PRIMARY451_FIRST_PREDICTION_AND_NATIVE_SCORING_OPERATIONS_COST_CENSUS_CLOSED",
+  "method": "primary-seed0-u32",
+  "planned_positions": 451,
+  "prediction_status_counts": {
+    "FAILED_RETRIEVING": 2,
+    "COMPLETED": 401,
+    "FAILED_READING": 48
+  },
+  "scoring_status_counts": {
+    "UNSCORED_FAILED_RETRIEVING": 2,
+    "COMPLETED": 401,
+    "UNSCORED_FAILED_READING": 48
+  },
+  "native_aggregate": {
+    "planned": 451,
+    "scored": 401,
+    "unscored": 50,
+    "status_counts": {
+      "UNSCORED_FAILED_RETRIEVING": 2,
+      "COMPLETED": 401,
+      "UNSCORED_FAILED_READING": 48
+    },
+    "correct_scored": 73,
+    "valid_model_UNKNOWN_answers": 254,
+    "native_complete_cohort_metrics": null,
+    "native_scored_subset_metrics": {
+      "overall": {
+        "overall_full_set": 0.18204488778054864,
+        "overall_non_abstention_only": 0.21232876712328766,
+        "overall_abstention_only": 0.10091743119266056,
+        "count_all_questions": 401,
+        "count_non_abstention": 292,
+        "count_abstention": 109
+      },
+      "non_abstention_by_category": {
+        "static": {
+          "count": 123,
+          "pct_correct": 0.17073170731707318,
+          "pct_answered_wrong": 0.10569105691056911,
+          "pct_unknown": 0.7235772357723578
+        },
+        "dynamic": {
+          "count": 83,
+          "pct_correct": 0.21686746987951808,
+          "pct_answered_wrong": 0.08433734939759036,
+          "pct_unknown": 0.6987951807228916
+        },
+        "procedure": {
+          "count": 60,
+          "pct_correct": 0.2,
+          "pct_answered_wrong": 0.35,
+          "pct_unknown": 0.45
+        },
+        "gotchas": {
+          "count": 26,
+          "pct_correct": 0.4230769230769231,
+          "pct_answered_wrong": 0.5384615384615384,
+          "pct_unknown": 0.038461538461538464
+        }
+      },
+      "abstention_by_category": {
+        "static-abs": {
+          "count": 47,
+          "pct_correct": 0.1276595744680851,
+          "pct_answered_wrong": 0.1276595744680851,
+          "pct_unknown": 0.7446808510638298
+        },
+        "dynamic-abs": {
+          "count": 38,
+          "pct_correct": 0.10526315789473684,
+          "pct_answered_wrong": 0.10526315789473684,
+          "pct_unknown": 0.7894736842105263
+        },
+        "procedure-abs": {
+          "count": 24,
+          "pct_correct": 0.041666666666666664,
+          "pct_answered_wrong": 0.375,
+          "pct_unknown": 0.5833333333333334
+        }
+      },
+      "combined_abstention_by_category": {
+        "static": {
+          "count": 170,
+          "pct_correct": 0.1588235294117647,
+          "pct_answered_wrong": 0.11176470588235295,
+          "pct_unknown": 0.7294117647058823
+        },
+        "dynamic": {
+          "count": 121,
+          "pct_correct": 0.18181818181818182,
+          "pct_answered_wrong": 0.09090909090909091,
+          "pct_unknown": 0.7272727272727273
+        },
+        "procedure": {
+          "count": 84,
+          "pct_correct": 0.15476190476190477,
+          "pct_answered_wrong": 0.35714285714285715,
+          "pct_unknown": 0.4880952380952381
+        }
+      },
+      "abstention_overall": {
+        "count": 109,
+        "pct_correct": 0.10091743119266056,
+        "pct_answered_wrong": 0.1743119266055046,
+        "pct_unknown": 0.7247706422018348
+      }
+    },
+    "all_planned_score_bounds": [
+      0.16186252771618626,
+      0.2727272727272727
+    ],
+    "scope": "Unscored program/Judge failures are not negative labels or invented UNKNOWN answers. A valid model UNKNOWN is scored by the original benchmark rule. Subset metrics are conditional, not a full-cohort score. Shared histories and repeated seeds do not create independent source families."
+  },
+  "Reader": {
+    "actual_HTTP_attempts": 449,
+    "prompt_tokens": 1714211,
+    "completion_tokens": 1180332,
+    "total_tokens": 2894543,
+    "provider_response_wall_seconds": 8004.270360472612,
+    "whole_call_wall_seconds": 8408.784268243238,
+    "call_CPU_seconds_nested": 152.87923998899933,
+    "status_counts": {
+      "COMPLETED": 401,
+      "FAILED": 48
+    },
+    "finish_reason_counts": {
+      "stop": 401,
+      "length": 48
+    },
+    "absent_final_content": 47,
+    "present_final_content": 402,
+    "max_total_reserved_tokens": 16771,
+    "context_tokens": 65536,
+    "actual_prompt_estimate_error_tokens": 0,
+    "new_unknown_generation_or_embedding_usage": 0
+  },
+  "failed_Readers": {
+    "actual_HTTP_attempts": 48,
+    "prompt_tokens": 249195,
+    "completion_tokens": 393216,
+    "total_tokens": 642411,
+    "provider_response_wall_seconds": 2605.216462926939,
+    "whole_call_wall_seconds": 2646.53893612884,
+    "call_CPU_seconds_nested": 22.919642484999812,
+    "status_counts": {
+      "FAILED": 48
+    },
+    "finish_reason_counts": {
+      "length": 48
+    },
+    "absent_final_content": 47,
+    "present_final_content": 1,
+    "max_total_reserved_tokens": 16060,
+    "context_tokens": 65536,
+    "actual_prompt_estimate_error_tokens": 0,
+    "new_unknown_generation_or_embedding_usage": 0
+  },
+  "Judge": {
+    "actual_HTTP_attempts": 134,
+    "prompt_tokens": 66985,
+    "completion_tokens": 109445,
+    "total_tokens": 176430,
+    "provider_response_wall_seconds": 720.1821272736415,
+    "whole_call_wall_seconds": 747.2222741562873,
+    "call_CPU_seconds_nested": 21.762393540000005,
+    "status_counts": {
+      "COMPLETED": 134
+    },
+    "finish_reason_counts": {
+      "stop": 134
+    },
+    "absent_final_content": 0,
+    "present_final_content": 134,
+    "max_total_reserved_tokens": 10093,
+    "context_tokens": 65536,
+    "actual_prompt_estimate_error_tokens": 0,
+    "new_unknown_generation_or_embedding_usage": 0
+  },
+  "selected_action_counts": {
+    "SEARCH": 522,
+    "READ": 3060,
+    "HANDOFF": 12
+  },
+  "operation_kind_status_counts": {
+    "SEARCH:searched": 521,
+    "READ:opened": 2017,
+    "READ:material_budget_exhausted": 1021,
+    "HANDOFF:delivery_selected": 11,
+    "READ:observed": 22
+  },
+  "HANDOFF_delivery_selected_results": 11,
+  "selected_READ_without_operation_result_not_opened_Source": 0,
+  "selected_SEARCH_without_operation_result_not_executed": 1,
+  "termination_reason_counts": {
+    "budget_exhausted": 437,
+    "policy_handoff": 12
+  },
+  "native_retrieval_usage_counts": {
+    "control_steps": 3590,
+    "known_reference_reads": 0,
+    "material_budget_rejections": 1021,
+    "operations": 3589,
+    "read_operations": 3058
+  },
+  "returned_packet_evidence_kind_counts": {
+    "original_source": 1885
+  },
+  "returned_retrieval_packets": 449,
+  "owner_totals": {
+    "prediction": {
+      "segments": 51,
+      "whole_child_CPU_seconds": 32301.454650999996,
+      "measured_parent_CPU_seconds": 8.007144554999998,
+      "whole_child_plus_measured_parent_CPU_seconds": 32309.461795555002,
+      "actual_owner_wall_seconds_sum": 41546.90530141257,
+      "native_CPU_already_included": 4475.3146589998705,
+      "native_CPU_components_already_included": {
+        "dynamic_memory_laya": 4139.53828435787,
+        "dynamic_memory_laya_load": 335.77637464200006
+      }
+    },
+    "scoring": {
+      "segments": 1,
+      "whole_child_CPU_seconds": 39.818996,
+      "measured_parent_CPU_seconds": 0.183337217,
+      "whole_child_plus_measured_parent_CPU_seconds": 40.002333217,
+      "actual_owner_wall_seconds_sum": 766.8558426667005,
+      "native_CPU_already_included": 0,
+      "native_CPU_components_already_included": {}
+    }
+  },
+  "actual_NN_forwards": 3594,
+  "local_NN_input_tokens": 25070604,
+  "local_decision_head_scalar_scores": 173923,
+  "local_model_loads": 51,
+  "declared_GPU2_job_interval_hours": 11.540807103978523,
+  "verified_cuda_model_invocation_interval_hours": 11.529464607478845,
+  "CPU_condition_mismatch_loads": 1,
+  "GPU_scope": "Invocation/reservation interval includes copy, capture, client IO and Reader waits; not GPU busy time or encoder latency. Initial failed model loaded on CPU despite declared GPU environment and is reported separately.",
+  "Host_GPU_busy_hours": null,
+  "retained_physical_step_snapshot_gap_positions": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "missing_capture_or_snapshot_fabricated": false,
+  "frozen_audit_metadata_correction": {
+    "row": 9,
+    "actual_final_unreturned_action_kind": "SEARCH",
+    "historical_field_name": "last_selected_READ_without_result_is_not_success",
+    "historical_READ_wording_supported_by_actual_trace": false,
+    "actual_complete_bindings_inputs_first_outcomes_or_frozen_audit_edited": false
+  },
+  "scope": "Closed primary prediction and scoring invocation costs only. Whole child CPU includes native model/load/client/capture work; do not add nested/native/residual CPU again. Source preparation, offline audits, archive, training and unmetered author work are outside this subtotal. Reading already archived trace members for rows1..9 does not create missing original per-step snapshots. This report never opens the ledger and can run while native archive progresses. Small input was known development exposure; not autonomous Host, unseen Small/Medium or original-paper model reproduction.",
+  "unmetered_author_inspection_launch_cleanup_CPU": "unknown_not_zero",
+  "original_first_outcomes_rewritten": false,
+  "new_model_or_HTTP_calls": 0,
+  "ledger_opened_or_written": false,
+  "no_sha_validation": true,
+  "goal_complete": false,
+  "timestamp_utc": "2026-11-09T04:29:41.585795+00:00",
+  "full_private_census": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/lme-primary-native-operations-cost-census-v1.json",
+  "analyzer": "tools/analyze_a100_lme_primary_native_operations_cost.py",
+  "Source_fidelity_audit": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/verify-lme-primary-source-audit-closed-v3.json",
+  "native_score_audit": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/verify-lme-primary-native-scoring-closed-v1.json",
+  "offline_census_failure_reflection": {
+    "passed": true,
+    "status": "OFFLINE_CENSUS_ENVIRONMENT_AND_OPERATION_METADATA_ASSUMPTIONS_CORRECTED_FROM_ACTUAL_TRACE",
+    "failures_retained": [
+      {
+        "timer": {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/analyze-lme-primary-native-operations-cost-v1.time.txt",
+          "wall_seconds": 0.28,
+          "CPU_seconds": 0.24,
+          "time_format": "GNU_time_verbose_original_preserved",
+          "known_exit_code": 1
+        },
+        "reason": "System Python3.10 imported package StrEnum; use existing HTTP Python3.11."
+      },
+      {
+        "timer": {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/analyze-lme-primary-native-operations-cost-v2.time.txt",
+          "wall_seconds": 41.08,
+          "CPU_seconds": 40.93,
+          "time_format": "GNU_time_verbose_original_preserved",
+          "known_exit_code": 1
+        },
+        "reason": "Assumed all12 HANDOFF choices lacked operation results; actual11 delivery_selected plus1 direct exit."
+      },
+      {
+        "timer": {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/analyze-lme-primary-native-operations-cost-v3.time.txt",
+          "wall_seconds": 40.37,
+          "CPU_seconds": 40.37,
+          "time_format": "GNU_time_verbose_original_preserved",
+          "known_exit_code": 1
+        },
+        "reason": "Inherited READ wording for row9's unfinished selection; original trace proves SEARCH, with2 earlier opened READ results."
+      }
+    ],
+    "exact_original_trace_probe": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/inspect-primary-gap-operation-pairing-v1.json",
+    "actual_missing_operation_kinds": {
+      "HANDOFF": 1,
+      "SEARCH": 1
+    },
+    "interrupted_SEARCH_row": 9,
+    "row9_earlier_opened_READ_results": 2,
+    "row9_unreturned_READ_selections": 0,
+    "frozen_audit_metadata_correction": {
+      "row": 9,
+      "actual_final_unreturned_action_kind": "SEARCH",
+      "historical_field_name": "last_selected_READ_without_result_is_not_success",
+      "historical_READ_wording_supported_by_actual_trace": false,
+      "actual_complete_bindings_inputs_first_outcomes_or_frozen_audit_edited": false
+    },
+    "frozen_runtime_or_audit_or_native_first_record_changed": false,
+    "experimental_retry_or_new_model_HTTP": false,
+    "failure_CPU_pending_next_actual_idle": true,
+    "ledger_opened_or_written": false,
+    "no_sha_validation": true
+  },
+  "native_prediction_and_score_CPU_already_paid_once": true,
+  "new_report_CPU_pending_actual_idle": true,
+  "full_external_comparison_and_all_project_costs_complete": false
+}

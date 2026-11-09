@@ -6,11 +6,37 @@
 历史 worktree、原始失败与用户文档保持原状。没有使用子代理、SHA/内容指纹校验、新服务、第二账本或远端写入。
 
 本轮机器可读入口为
-[progress](../data/manifests/a100-development-progress-20261109-v173.json)。
+[progress](../data/manifests/a100-development-progress-20261109-v174.json)。
 原始数据、冻结运行时、权重、命令、计时和实际输出位于本 worktree 的 ignored
 `artifacts/a100-development-20261104/`。本记录是现有报告体系的执行摘要。
 
-## v173 当前状态（2026-11-09，Asia/Shanghai）：主模型原生评分、全量审计与定稿关闭，归档运行中
+## v174 当前状态（2026-11-09，Asia/Shanghai）：两方法原生评分比较、完整操作/调用成本及图表已核对，主归档继续
+
+[完整LME比较报告](MILAI_A100_LME_NATIVE_COMPARISON_20261109.md)与紧凑primary/comparison manifests已经生成并与
+完整普查重新执行的whole dict（仅timestamp除外）逐项一致。全451主方法73/401、固定75/401；共同完成369条为67/369
+与70/369，gains14/losses17/ties338，条件差−0.8130pp。全451差值缺失边界[−52/451,48/451]，不报告完整组点分数
+或把共享历史query当独立Source区间。已曝光Small、给定query Reader/Judge而非自主Host的限制保持。
+
+主方法完整3594NN/25,070,604输入tokens/173,923候选head标量；51次加载含初始CPU条件失败和50次已验证CUDA加载。
+READ选择3060、实际opened2017/observed22/材料预算拒绝1021；449完整packet中437以budget_exhausted结束，返回1885个
+original_source材料项。521次SEARCH实际返回、11次HANDOFF delivery_selected分别计量；未将选择数当成功打开数。
+第9条原始trace最后选择实际是SEARCH，无操作返回，先前两次READ确有opened。旧冻结审计字段名中的READ措辞不受
+实际trace支持，新更正经完整trace与原生NN choice交叉核对；未改原冻结审计、绑定、Source、模型输入或首结果。
+离线统计三次失败的计时与反思全部保留，修正环境/统计假设后通过，不重跑原生任务。
+
+主方法Reader449/Judge134，共583实际HTTP/3,070,973已知tokens；固定581/3,040,745，没有HTTP tokens节省。
+完整预测child+parent32309.461795555002CPU秒与评分40.002333217CPU秒均已付且包含NN/load，不再加嵌套计时；
+仅为调用小计，Source准备/离线审计/存储归档/训练与未计作者成本另行全项目汇总。50个已验证CUDA调用区间11.529465小时
+包含IO/Reader等待，不称GPU忙碌或纯encoder时间。早期1..9未生成物理逐步快照的缺口继续披露。
+
+PNG/PDF四面板图已生成；实际2800×2000 PNG已查看并修复底部注释重叠，所有数字/分母与原始比较逐项一致；
+PDF来自同一figure、单页结构通过，未单独渲染PDF。首次HTTP环境缺matplotlib失败计时保留，使用既有系统环境，无新包。
+当前仅主方法CPU归档父197219/子197222实际运行，index{'ARCHIVED': 347, 'ARCHIVING': 1, 'PENDING': 103}；禁止原生owner存活期间离线访问账本。
+等待归档实际退出/入账/逐条索引与base核对/定稿，再于idle137一次支付本轮全部闭合普通计时（含失败），不重计原生费用。
+
+Mem2Act400×2、最终全成本/论文/图表及原763行逐项完成审计仍未完成；目标保持active，未触发重选或新拟合。
+
+## v173 历史状态（2026-11-09，Asia/Shanghai）：主模型原生评分、全量审计与定稿关闭，归档运行中
 
 原生评分owner实际exit0/已支付/父子消失；全451位置覆盖401评分完成、2检索失败未评分、48读取失败未评分，
 没有FAILED_SCORING。冻结评分审计逐项复核401整份首次Reader字符串、134整份实际Judge请求/原生判分规则和完整汇总，

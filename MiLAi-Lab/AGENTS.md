@@ -1,4 +1,57 @@
-# LIVE A100 EXECUTION v173: 2026-11-09 (Asia/Shanghai)
+# LIVE A100 EXECUTION v174: 2026-11-09 (Asia/Shanghai)
+
+Original763-line goal ACTIVE/incomplete; current PROGRESS, previous PROGRESS. No genuine blocker.
+Latest data/manifests/a100-development-progress-20261109-v174.json; previousv173/checkpointa977f1fb. ROOT/F/E/Q64 unchanged.
+Batch/protocol/source-version/phase IDs stay20261107. No subagents/SHA/fingerprints/services/secondledger/reset/refund/
+remote/Productwrites/first-outcome retries/reselection/crop/quantize. OneactualmodelHTTPworker maximum.
+HostGPU0/1untouched; learnerGPU2/cuda0FP32threads4/MHAFalse/refcompileFalse/TF32False. Preserve1141LME/1147Mem2Act/7Q64bindings.
+NeverGNUwrap owner/scanner/settler/launcher. Ordinary audits/writers uniqueGNUtimers; no offlineledgeraccess/write while native-owned stage live.
+Native/whole/parent/nested/oldcost neverdouble-add; author/unmeteredinspection/preflight/launch/cleanup/settlement CPUunknown_not_zero.
+
+ONLY LIVE NATIVE WORKER CPU ARCHIVE primary-seed0-u32-archive451-v1:parent197219/child197222 actualverifiedRUNNING/CPUFalse.
+E/stages-lme-v1/primary-seed0-u32-archive451-v1-{plan,owner}.json/.log/-owner.log.
+Output E/finalized-lme-v1/primary-seed0-u32-predictions/case-archives/index.json; native{'ARCHIVED': 347, 'ARCHIVING': 1, 'PENDING': 103}.
+Originalv1frozen plan/owner, all5precedes+Source/scoregates+idle136 closed before explicitcheck/launch. No GNU owner wrapper/queue/retry.
+PollactualnamedPIDs/index; timeout NOTtermination. No offlineledgeraccess while live. Archive payswhole-minus-native+parent at actualexit.
+Every reconstructedbytecompared before case removal; retain ALLtemplates/primaryimmutablebases and BOTHfixedpoolbases.
+Afteractualexit0/paid/gone verify451index/bytes/earliestfirsts/bases, originalfrozenfinalizer primary-case-archives alias/closure;
+then close ordinarytimers once at actualidle137 before explicit Mem2Act. All6LMEcanonicalclosures mandatory; actual400x2still0.
+
+PRIMARY+FIXED full451native score/Source/input/SDK/Reader/Judgewire audits and prediction+scorecanonicalclosures CLOSED.
+Primary401COMP/2unscoredretrF0,9/48unscoredReaderF; correct73/401,254validUNKNOWN,full451bounds[73/451,123/451].
+Fixed401COMP/50ReaderF;75correct/250UNKNOWN,full451bounds[75/451,125/451]; all3fixedcanonicalclosures closed.
+Native completecohortmetricNone forboth.369bothscored/32primaryonly/32fixedonly/18neither; primary67/fixed70,g14/l17/t338,
+conditionalsubsetdiff-3/369; full451differencebounds[-52/451,48/451]. No superiority, queryiid CI or failedUNKNOWN/gold imputation.
+Primary134JudgeHTTP/176430known/0newunknown,whole39.818996+parent.183337217paidonce,nested32.77832466 NOTadded.
+Bothwholefirst451records equalearliest51ancestry; noReaderregeneration/reselection/retry.
+
+NEW CLOSED: docs/MILAI_A100_LME_NATIVE_COMPARISON_20261109.md; publicprimary/comparison/figure manifests20261109v1,
+tools/analyze_a100_lme_primary_native_operations_cost.py, analyze_a100_lme_native_comparison.py, plot_a100_lme_native_comparison.py.
+ROOT/lme-primary-native-comparison-publication-verification-v1.json passed fullcensus+comparison reproductionwholeeqexcepttimestamp,
+allpublishednumbers/451bounds/369coverage/3594NN25070604inputs173923heads/PNG2800x2000+PDF1page. ActualPNGviewed/layoutfixed;
+PDFsamefigure/notseparatelyrendered. Draft+fixedreport linksupdated. Invocationsubtotal NOTfullprojectcost.
+ActualprimaryREAD3060selected/2017opened/22observed/1021materialbudgetreject;522SEARCHselected/521searched;
+12HANDOFF/11delivery_selected/1directexit.3592operationresults,449packets/437budget_exhausted/1885original_sourceitems.
+IMPORTANT CORRECTION actualrow9lastunreturnedselection SEARCH, NOTREAD. Earlierrow9twoREADopened.
+Oldfrozenauditfield last_selected_READ_without_result_is_not_success misnameskind; actualtrace+nativeNNchoice proveSEARCH.
+Originalaudit/Source/completebindings/NNinputs/firsts unchanged. Newcorrection publicmanifest+reflection+proof; never propagate oldREADwording.
+PrimaryHTTP583/3070973known vsfixed581/3040745; primaryNN3594/25070604/51loads inclinitialCPU mismatch+50verifiedCUDA.
+Primarypredictionwhole+parent32309.461795555002CPU;score40.002333217;NN4139.53828435787+load335.776374642 alreadyincluded.
+50verifiedCUDAinvocationinterval11.529464607478845h includescopy/capture/IO/Readerwait,notGPUbusy/encoderlatency/HostGPU/$.
+
+FullSourceaudit paididle135/gone:10285695Sourcecomparisons/3536restores/449SDK/Readerwires/3594NN25070604inputs.
+Retained1..9 all13837Storevalues/Source/role/body/origin/clock/identity/permissions/lifecycle/apps unchanged,onlyderivedcache.
+PhysicalstepStore/Saverbytes1..9 NEVERgenerated/unavailable/disclosed, notfabricated bylatercasearchives. Rows10..450fullactualsnapshotpath,
+441storagecases/3085controlbytechecks. Reader48length8192:47None+row258str10partial stayFAILED/unscored.
+
+Idle1..136PAID,105nativephasesreconciled. AllnewGNUtimers incl3failedcensus,failedplotenv,failedpublicationpathcheck,
+reproductions/report/PNG-PDF/v173-v174writers pendingactualidle137 afterarchiveexit. No native/NN/load/Source/storage rebill.
+Mem2Act1147staticfullconfigmerge/noobserveroverwrite; all6LMEgate then400x2fullSource/input/Hostwire/score/archive mandatory.
+Finalallcost/paper/figures/final763requirementaudit INCOMPLETE. Internal1024/Q6412999/D960+K9+old42/fourpanel/eightfit unchangedclosed,
+reviewerTHISassistantnotindependenthuman. No newfit/adopt/nativeTESTopening; staticpaidcutoff before007 NOTcurrenttotal.
+GoalstayACTIVE, notcomplete/blocked, preservefullscope.
+
+# HISTORICAL A100 EXECUTION v173: 2026-11-09 (Asia/Shanghai)
 
 Original763-line goal ACTIVE/incomplete; current PROGRESS, previous PROGRESS. No genuine blocker.
 Latest data/manifests/a100-development-progress-20261109-v173.json; previousv172/checkpointfd31b1fa. ROOT/F/E/Q64 unchanged.
