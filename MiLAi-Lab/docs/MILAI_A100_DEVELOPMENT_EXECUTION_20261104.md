@@ -6,11 +6,35 @@
 历史 worktree、原始失败与用户文档保持原状。没有使用子代理、SHA/内容指纹校验、新服务、第二账本或远端写入。
 
 本轮机器可读入口为
-[progress](../data/manifests/a100-development-progress-20261109-v177.json)。
+[progress](../data/manifests/a100-development-progress-20261109-v178.json)。
 原始数据、冻结运行时、权重、命令、计时和实际输出位于本 worktree 的 ignored
 `artifacts/a100-development-20261104/`。本记录是现有报告体系的执行摘要。
 
-## v177 当前状态（2026-11-09，Asia/Shanghai）：LME关闭后的已付成本截止点精确核对，Mem2Act全400继续
+## v178 当前状态（2026-11-09，Asia/Shanghai）：原计划P0/运行时12项具体证据已核对，Mem2Act全400继续
+
+原763行计划已完整重读，当前UTF8全文与初审保存文本逐字一致。新增[P0运行时逐项审计](MILAI_A100_PLAN_RUNTIME_P0_AUDIT_20261109.md)
+将12项具体要求绑定到原文行与实际证据；不把该局部通过当成763行全目标完成。流式核对原47,866行，重现冻结训练器
+gold-present筛选得到44,868条可训练行，原2998无目标记录保留。P0所选512条完整dict逐项等于原可训练源记录，432条件＋80操作，
+121完整pair同micro2；相同seed/初始化/窗口16/选项置换，各真实32更新/256device-forwards，未重复训练。
+
+读取2048个初始/末尾TRAIN、128个DEV及1024个实际保存重载结果；head ID顺序/finite argmax/无截断/整份model输入检查通过。
+原冻结decision_loss对留存logits作FP32 CPU归约，不是新模型forward；初末未加权诊断loss与动态weighted training loss分别记录。
+两臂所有模型参数实测F32，BF16只包forward、原SDK返回F32logits，backward/评测在该autocast外；Torch/TF32/sdpa/设备与原始run核对。
+170个F16导出tensor头和F32重载已核对，BF16原第177条翻转保留，不以落盘后更好答案替换原输出。
+
+此前工作表未列出的设备free其实已有：FP32原compute结束时18,608,291,840 bytes、BF16为19,396,820,992 bytes；直接引用
+mem_get_info，非从allocated/reserved峰值反推。峰值覆盖所有32更新，前4更新仍计成本，后28更新均值比2.344645135。
+旧unit-test摘要记61通过，但原GNU timer没有退出码字段，保持unknown，不补造exit0；真实GPU证据独立核对。当前只读GPU-L清单
+补存，不冒充历史利用率。旧E3缺失TF32/reserved/stage字段不由P0推造。
+
+Mem2Act父328495/子328497仍实际存活，native{'COMPLETED': 68, 'FAILED': 19, 'HOST_RUNNING': 1, 'NOT_RUN': 312}、active87；所有已见FAILED均由原生knownfailure
+分支保留且新增unknown0/0，未重跑或提升partial意图为完整成功。全400 owner退出/支付后，冻结v2 Source/Store/Saver/SDK/Host审计
+与原始定稿门槛仍必要，之后primary400及两方法适配评分/归档。禁止运行期离线访问原始账本。
+
+LME六阶段、既有内部科学结果与静态已付成本截止量保持；本轮审计/失败/报告等普通计时待实际idle138。
+Mem2Act400×2、最终全项目成本/论文/图表和原763行完整逐项完成审计仍未完成，目标active、无真实阻塞。
+
+## v177 历史状态（2026-11-09，Asia/Shanghai）：LME关闭后的已付成本截止点精确核对，Mem2Act全400继续
 
 [静态成本报告](MILAI_A100_KNOWN_COST_THROUGH_LME_20261109.md)与机器manifest已发布，并经重执行whole dict
 （仅timestamp除外）一致验证。读取的是Mem2Act启动前保留的budget-before快照，未打开正在变化的原始账本。
