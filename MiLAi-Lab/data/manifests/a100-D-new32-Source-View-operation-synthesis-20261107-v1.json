@@ -202,7 +202,7 @@
       "operation_audit": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/d-update32/reviews/new32-e3-aggregate-u32/actual-operation-audit-v1.json"
     }
   },
-  "scope": "Reconciles existing full320 Source-guided author reviews and actual per-turn SDK/operation audits; no new judgments or execution. Same exogenous Source content/roles/order, not all actual initial wires/controller states equal. All32family/10requests clustered; not320independentSource histories.",
+  "scope": "Reconciles existing full320 Source-guided author reviews and actual per-turn SDK/operation audits; no new judgments or execution. Same exogenous Source content/roles/order and all64initial Provider request dicts matched in every method pair. Actual runtime Source identities/capture clocks, later tool arguments/controller states/endogenous histories differ. All32family/10requests clustered; not320independentSource histories.",
   "reviewer": "Implementation assistant, Source-guided; not independent human/blind/multiple-reviewer verification.",
   "interpretation": "Faithful literal old View can be stale for updated task. E3 has no received View, no USE_VIEW/REFRESH_VIEW in this actual cohort; local gain cannot be attributed to learning View reuse or View+incremental combination. Zero selection alone does not establish what menus offered. Source role/identity preservation is not factual truth; endogenous questions/Host answers remain distinct from exogenous arrivals.",
   "whole_existing_judgments_inputs_and_first_outcomes_unchanged": true,
@@ -210,5 +210,19 @@
   "new_model_HTTP_or_tool_executions": 0,
   "ledger_opened_or_written": false,
   "no_sha_validation": true,
-  "goal_complete": false
+  "goal_complete": false,
+  "initial_Provider_wire_clarification_20261109": {
+    "proof": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/original-plan-D-initial-Provider-wires-v2.json",
+    "all_old8_initial_pairs_equal": [
+      16,
+      16
+    ],
+    "all_new32_initial_pairs_equal": [
+      64,
+      64
+    ],
+    "first_tool_argument_batches_equal": 0,
+    "explanation": "Earlier broad wording that D initial Provider wires were not all equal is unsupported. Actual first Provider request dicts are all equal within each predeclared initial flow position. Actual runtime Source IDs/capture clocks and subsequent tool arguments/endogenous histories differ; distinguish those from initial Provider input. Fair autonomous initial information is matched, while later reached-state/controller causality and matched Host RNG are not established.",
+    "original_numeric_results_or_firsts_changed": false
+  }
 }

@@ -6,11 +6,38 @@
 历史 worktree、原始失败与用户文档保持原状。没有使用子代理、SHA/内容指纹校验、新服务、第二账本或远端写入。
 
 本轮机器可读入口为
-[progress](../data/manifests/a100-development-progress-20261109-v181.json)。
+[progress](../data/manifests/a100-development-progress-20261109-v182.json)。
 原始数据、冻结运行时、权重、命令、计时和实际输出位于本 worktree 的 ignored
 `artifacts/a100-development-20261104/`。本记录是现有报告体系的执行摘要。
 
-## v181 当前状态（2026-11-09，Asia/Shanghai）：B功能8/57修复与C的16项证据关闭，Mem2Act全400继续
+## v182 当前状态（2026-11-09，Asia/Shanghai）：D的18项具体合同/控制/首质量/成本审计关闭，Mem2Act全400继续
+
+[D逐项报告与三面板图](MILAI_A100_PLAN_D_AUDIT_20261109.md)覆盖18项原文要求，含复用baseline80的1200自主首轮、1120新执行，
+1086既有NN完整before/全菜单/有限head/无截断，Source/Saver/应用与控制/探针共21362次完整Source值比较。
+1200原作者record逐字复现、1996原文锚点/805View锚点/419次Host收到View（含K）绑定；旧8 C19/11/19、新32 C67/65/95保持。
+E3新32 REFRESH可选779而未选、自身无USE菜单/收到View；增量3USE均initial/noNewPending→HANDOFF/0READ，不能归因学会复用。
+
+240首次Provider请求按真实preHost前缀/结果路径绑定，234decoded输出ID回调一致，6首不完整响应无decoded回调、不补造。
+旧8三对均16/16、新32均64/64首次Provider完整dict相同；首次检索参数却均0匹配。早期“首请求未全部相同”歧义明确更正，
+原数字/Source/首结果未变。后续SourceID/捕获钟、控制state/内生历史与Host随机生成未匹配，保持描述性与机制归因边界。
+
+known-View9（HTTP8/known75003）C0/F1/W4/Q4，首A05模板预检未发HTTP、消耗槽保留；完整3方法matched frame仅A33/B03，
+A05只有增量/E3匹配。旧输出第一8族inventory48、A02资格不足6保留，余7族42格HTTP40/known343013，C22/F9/Q7/W4；
+2个七K完整容量输入不裁/不forward/无Host，保留分母。对照保留相同已知Host旧消息，只切换额外检索，未匹配Host生成seed。
+两控制49实际SDK Source投影以SQLite mode=ro/query_only完成，641 Source比较，117完整NN；原closeouts/七族配对与成本逐字复现。
+成本只读既有preMem预算副本，未打开活动原账本。旧输出child已观察下界199.51，parent/cleanup unknown_not_zero、exit None保持。
+
+初始工具切片7/8缺B30不换，3View+raw；post-generated-View9跨5背景均READ+HANDOFF，无新Host答案或生成View事实正确证明。
+32TRAIN Source-only768原对象/64×5实际时间线/29旧+3作者合同与5冻结配置通过；无关因素仅0→1构造会话，不主张多规模增长。
+原2048预算拒绝17/26/2保持，未因计数自动1024/历史矩阵或采用。Source作者仍实施助手/非独立盲审。
+
+本轮旧标签词汇/Python3.10StrEnum/未知CPU类型/恢复共享计数/首未decoded回调观察失败和图v1重叠均保留/修正，不改原首结果。
+最终PNG3000×1240实际查看，PDF同图单页、未另行渲染，研究草案和早期初始wire解释同步澄清。
+Native Mem2Act父328495/子328497实际存活，native{'COMPLETED': 210, 'FAILED': 65, 'HOST_RUNNING': 1, 'NOT_RUN': 124}、active275，已见失败newunknown0/0、未重试或提升partial intent。
+其400实际退出/支付后仍需冻结v2全量Source/Store/Saver/SDK/Host审计和原定稿，再PRIMARY400/两方法评分归档。
+post137所有普通/失败/图表/报告CPU待实际idle138；全项目成本/论文/图表与全部763行最终完成审计仍未完成。目标active，当前与前轮均progress。
+
+## v181 历史状态（2026-11-09，Asia/Shanghai）：B功能8/57修复与C的16项证据关闭，Mem2Act全400继续
 
 [B修复与C逐项证据和图](MILAI_A100_PLAN_B_REPAIR_C_AUDIT_20261109.md)已发布，16项原文/实际证据绑定。
 旧139首结果与functional8保留；新增52个READ全部打开并交付范围，旧57状态执行覆盖5→57。

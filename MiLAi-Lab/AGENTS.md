@@ -1,4 +1,75 @@
-# LIVE A100 EXECUTION v181: 2026-11-09 (Asia/Shanghai)
+# LIVE A100 EXECUTION v182: 2026-11-09 (Asia/Shanghai)
+
+Original763-line goal ACTIVE/incomplete; current PROGRESS, previous PROGRESS;no genuine blocker.
+Latest data/manifests/a100-development-progress-20261109-v182.json; previousv181/checkpoint20d34347. ROOT/F/E/Q64 unchanged.
+NO subagents/SHA/fingerprints/services/secondledger/reset/refund/remote/Productwrites/firstoutcome retry/reselection/crop/quantize.
+One actual modelHTTPworker. HostGPU0/1untouched; learnerGPU2/cuda0FP32threads4/MHAFalse/refcompileFalse/TF32False.
+Frozen batch/protocol/source-version/phase IDs stay20261107;1141LME/1147Mem2Act+1observerv2bindings preserved.
+NO offline ORIGINAL ledger read/write while native-owned modelHTTP/archive stage lives. Ordinary audits/writers uniqueGNUtimers;
+NEVERGNUwrap owner/scanner/settler/launcher. Wait actualforegroundexit before dependentmutation/commit.
+Native/load/whole/residual/parent/previouscost neverdouble-add. Author/launch/cleanup/lostparentCPUunknown_not_zero.
+Scope searches, ignoredartifactsuse--no-ignore; JSONL iteratephysicalfilelines,not splitlines onSource.
+
+ONLY LIVE MODELHTTPWORKER Mem2Act fixed-prefix-prediction400-v1 parent328495/child328497 verifiedRUNNING/CPUFalse.
+E/stages-mem2act-v1 fixed-prefix-prediction400-v1 plan/owner/output unchanged;native{'COMPLETED': 210, 'FAILED': 65, 'HOST_RUNNING': 1, 'NOT_RUN': 124},active275.
+FULL400originalqueries/toolschemas/full429sessions16843turnSource;local-a100-mem2act-native400-20261107-v1.
+No business execution/retry/reselection/autoqueue; actualnamedPIDs,timeoutnottermination. KeepfirstFAILED/partialintents.
+KnownIncompleteChatResponse/provider_protocol orFORMAT_REPROPOSAL_EXHAUSTED withknownusage cannextuntouchednative row.
+Otherfailure wait actualownerpaidgone/reflect/explicitNOT_RUNtail via ORIGINALMem2Act helpers,notLMEReadercontinuation.
+FAILED_WRAPPER retainsreturned-native-result-before-wrapper-failure.json,metadatareconcilewithoutnative rerun.
+After400actualpaidgone frozen-mem2act-audit-execution-v2/audit_mem2act_predictions_execution_v2.py ORIGINALprotocol/predictions/owner/ORIGINALdeclaredauditpath.
+Exactly3observer-onlychanges inverseoriginalsource;completedreceiptsstill[],failedabsentfieldFalse/Noneunknown. Original1147+1observer.
+AllfullSource/Store/Saver/roles/body/clock/permission/app/world/SDK/Hostinput/NN/400paidgone gates unchanged. Actualcompleted0+failed2 Source33686/33688only,NOTfull400gate.
+CUDAPY4.52.3/tokenizers.21.4FIRST; originalfrozenMemfolder/runtime/src/tools,appendHTTPsiteLAST,notshadowing. SystemPython3.10cannotimportnativeStrEnum.
+Originalfixed400finalizerafterfullaudit,thenPRIMARY400 capturedfirstHost fullconfigmerge+policy/checkpointoverride(notLMEobserverbug).
+Both400 fullaudits/adaptedscores/archive required;FAILEDproposalsretainedintentmetrics,completed_strictrequiresCOMPLETED.
+NotoriginalpaperTA/leaderboard/400independentusers; whole-minus-native+measuredparentCPUonceafteractualexit.
+
+NEW D18CONCRETE AUDIT: docs/MILAI_A100_PLAN_D_AUDIT_20261109.md; publica100-plan-D-audit/figure-20261109-v1.json.
+ROOT/original-plan-D-report-figure-verification-v1.json; 18Dscopeobligations,NOTall763. OriginalUTF8same.
+PriorDpartialtools execution/factors passed: ROOT/original-plan-D-existing-execution-v4/summary.json,factors-v1/summary.json.
+Newtools audit_a100_plan_d_controls.py,quality.py,control_closeouts.py,native_probes.py,initial_wires.py andplot_a100_plan_d_evidence.py.
+Newprivateoutputs: original-plan-D-known-View-controls-v1/summary.json,old-output-controls-v1/summary.json,
+quality-and-baseline80-v2/summary.json,control-closeouts-v3/summary.json,native-probes-v2/summary.json,initial-Provider-wires-v2.json.
+1200actualautonomousfirsts=1120new+80originalbaselinereuse;allimmutableStore/Source/Saver/world/appchecked. Total21362Sourcevaluecomparisonsincludescontrols641/probes156.
+Original1200authorrecordsliteralEq/1996rawanchors/805Viewanchors/419HostViewoccurrences(inclK) role/clock/revision/bodybound;notfacttruth/currentcoverage.
+Old8C19/11/19per80, new32C67/65/95per320. FullNNinputs1086=old8E3185+new32784+K24+oldOutput93,allfinite/fullbefore/menu/noTrunc.
+Old8finitelegacyformal_planned_positions320preservedbutactualbound80used. E3new32REFRESHoffered779/selected0,ownUSEnotpresent/noViewreceived;
+incremental3USEallinitial/noNewPending→HANDOFF,noREAD. NotlearnedViewreuseadvantage. Familybootstrapold8/new32keptseparate,nopooledqueryiidclaim.
+CRITICAL INITIAL-WIRE CLARIFICATION:actual240firstProviderrequestsboundpreHostprefix/resultpath;234decodedcallbackIDs/nativeAImatch,6firstincompleteundecodedcallbacksNOTfabricated.
+All3methodpairs old8initial16/16,new32initial64/64requestdictsEq; firsttoolargumentbatches0matched. Earlierbroadfirst-wire-unequalwordingcorrectedindocs/newmetadata;
+originalnumericcomparisonsunchanged. RuntimeSourceIDs/captureclocks/latercontrollerstates/endogenoushistories/HostRNGremainunmatched;notcontrollercausalproof.
+K9:actualSDKSource9/165values,HTTP8known75003/NN24inputs287238;C0/F1/W4/Q4. A05baselinefirstTemplateError/noHTTP/admissionslotkept;
+matched3methodframesonlyA33/B03,A05incremental/E3only. HostViews21/unique10,unsentcomponentView1noHostcredit. NativeKrefrevisionsadmitted.
+OldOutputfirst8inventory48,ineligibleA02noinitialcompleteoldoutput6kept;eligible42/7families,HTTP40known343013/NN93inputs643723;
+2A05full7Kstate20096/19335tokensnotadmitted16384,zeroNN/tool/Hostnotcropped. C22/F9/Q7/W4,material27/13/U2. AllknownHostmessages/receiptskeptbothconditions;
+onlyadditionalSourceacquisitiontoggled,offrefabsentstate/actions/newpacket. Hostgenerationseedunmatched. No generaloldoutputharm/benefit/adopt.
+Controls49nativeSourceSDKprojectionsthroughSQLite mode=ro/query_only verifiedexistingSchema/is_setupTrue(noDDL);locksnewauditdir,DBchanges0/allStoreEq.
+DoNOTdirectlyrunoriginalSourcebinders(normalRW); ASTpurebindingfunctions+actualSDKro used. CurrentcontrolauditsSource/nativeinputscriptsread-only.
+KcloseoutreplayedusingEXISTINGfrozenpreMem budgetsnapshot,notliveledger;originaldictEq. Oldcloseout+7familystatsdictEq; no rebill.
+Kwholechild144.33048includesnative86.856223+residual57.474257. OldOutputobservedchildLOWERBOUND199.51includesnative116.483698+residual83.026302;
+baselinecollector47.450369934separatealreadyPaid. Parent/cleanup literalunknown_not_zero,exitNone. GPUintervalincludeswaits,notactivecompute/$.
+Optionalnativeinitial7/8missingB30noalternate,3View+raw; generatedpostView9/5backgroundsallREAD+HANDOFF,nativeprefixcachedstructure/metadataEq,NOnewHostanswers.
+Nativeprobe generation_callscounterincludesrestoredprefix1/2;keptEqcapturedBefore,notreset0;actualusage/tracedlocal/HTTPdelta0.
+D32TRAINnative768objects/29prior+3Sourceauthorcontracts/64flows5cuts/5configsinput-freezeEq; nofuturewitness/labelsHostinput.
+Irrelevantfactoronly0→1constructedcablesession,notmultiscalegrowth. Relevantmiddlearrivalsnotallirrelevant/valueflips. Budgetrejections2048=17/26/2;
+countsnotautomatic1024/historicalmatrixtrigger,nofit/menu/seeds/adoption. SourceauthorTHISassistant/notindependenthuman/blind.
+PNG3000x1240actuallyviewedafterv1annotationoverlapfixv2,PDFsamefigure1page/notrendered;draftupdated. Allnewfailedtimerskept:
+quality-v1legacyViewlabel;costclose-v1Python3.10StrEnum/v2unknownCPUtype;probe-v1restoredcounter;initialwire-v1undecodedcallback. EarlierDexec-v1..v3metadataversionfailuresalso kept.
+
+P0/A/B64/Bfunctional8/old57READrepair/C priorconcretescoped audits closed,notall763. Internal1024/Q6412999/eightfits/fourpanel all5scienceobjectsEq.
+BothLME451 all6canonicalpredictionSource/score/archiveclosurespaidgone;earliest51firstsretained;no reruns. CompletecohortmetricNone,
+fixed75vsprimary73/401scored;369common67vs70,full451diffbounds[-52/451,48/451],no superiority/queryiidCI/failedgoldimputation.
+Earlyprimary1..9physicalstepsnapshotsNEVERgenerated/unavailable/disclosed,notfabricated;new10..450fullpathpassed. row9lastunreturnedSEARCH,notoldmisnamedREAD.
+PREMEM knownpaidcutoffafteridle137156772.30469547494CPU/43.5478624154097CPUh/30712462Hostknown,NOTcurrenttruefullprojectcost.
+Idle1..137PAID;ALLpost137ordinary/failed/timing/report/figureCPUv175-v182andcurrentD awaitactualidle138. v180failedwriter/headerrecoverykept.
+NoofflineoriginalledgerwhileMemlive;no oldnative/NN/load/whole/parent/baseline/storage recharges. Author/HostGPUbusy/$/lostparentunknown.
+
+NEXT independentwork full763requirements completion-evidence reconciliation/globalremainingdeliverables whileMemfixed400continues.
+Thenactual400paidgone fullSourceaudit/finalizer/PRIMARY400/bothscorearchive, actualidle138+allprojectcost/finalpaper/figures/final763audit.
+No model/retrieval/Hostfirstreruns tofillquotas. OriginalfullgoalACTIVE/notcomplete/blocked;no newfit/adopt/nativeTESTopening.
+
+# HISTORICAL A100 EXECUTION v181: 2026-11-09 (Asia/Shanghai)
 
 Original763-line goal ACTIVE/incomplete; current PROGRESS, previous PROGRESS; no genuine blocker.
 Latest data/manifests/a100-development-progress-20261109-v181.json; previousv180/checkpoint135603da. ROOT/F/E/Q64 unchanged.

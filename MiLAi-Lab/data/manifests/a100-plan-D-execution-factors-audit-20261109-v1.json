@@ -93,5 +93,23 @@
   "new_model_tokenizer_GPU_HTTP_business_or_original_ledger_calls": 0,
   "CPU_pending_actual_idle138": true,
   "no_sha_validation": true,
-  "goal_complete": false
+  "goal_complete": false,
+  "subsequent_D_scope_audit": {
+    "manifest": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/data/manifests/a100-plan-D-audit-20261109-v1.json",
+    "report": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/docs/MILAI_A100_PLAN_D_AUDIT_20261109.md",
+    "initial_Provider_wire_clarification": {
+      "proof": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/original-plan-D-initial-Provider-wires-v2.json",
+      "all_old8_initial_pairs_equal": [
+        16,
+        16
+      ],
+      "all_new32_initial_pairs_equal": [
+        64,
+        64
+      ],
+      "first_tool_argument_batches_equal": 0,
+      "explanation": "Earlier broad wording that D initial Provider wires were not all equal is unsupported. Actual first Provider request dicts are all equal within each predeclared initial flow position. Actual runtime Source IDs/capture clocks and subsequent tool arguments/endogenous histories differ; distinguish those from initial Provider input. Fair autonomous initial information is matched, while later reached-state/controller causality and matched Host RNG are not established.",
+      "original_numeric_results_or_firsts_changed": false
+    }
+  }
 }
