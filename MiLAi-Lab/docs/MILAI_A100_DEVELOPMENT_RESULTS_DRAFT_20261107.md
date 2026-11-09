@@ -139,6 +139,29 @@ CPU报告native与whole/residual/parent的包含关系，已付一次的成本�
 reserved或分阶段计时及未观察父/清理保持未知。最终全项目成本要等Mem2Act与post137
 普通/失败计时在实际idle后闭合，不能从目前已知截止量声称实用成本优势。
 
+## 相关机制与本轮贡献的证据范围
+
+原计划的六项机制来源重新核对了作者论文/会议版本及公开项目资料。下表第三列是本研究
+依据已闭合执行作出的对应解释，不是原作者对MiLAi的评价；不同算法、模型、预算和benchmark
+上的百分比不合并。ICLR页面/PDF抓取超时后使用Promptriever公开v1全文及会议检索元数据，
+不声称预印本与会议PDF逐字一致。[来源版本与本地材料索引](../data/manifests/a100-paper-related-mechanisms-20261110-v1.json)
+保留版本、核对范围和本轮实际证据；没有执行外部项目安装/下载/校验脚本或修改冻结配方。
+
+| 来源 | 原研究的相关机制 | 本轮实际对应及边界 |
+|---|---|---|
+| [Promptriever](https://arxiv.org/html/2409.11136v1) | 用实例级instruction训练检索器，使同一query在不同相关性要求下检索。 | Host用途/证据/对象时间/K/预算进入完整绑定条件；A只测试原生负例覆盖处理，单目标set与CE等价，不是Promptriever重训或新loss。 |
+| [STITCH](https://aclanthology.org/2026.findings-acl.584/) | 以主题scope、事件类型、关键实体类型构造contextual intent，过滤并排序上下文相容记忆。 | 借鉴条件化检索的问题定义；本轮保持既有Host公开接口，Source身份/权限准入与相关性标签分别记录，原STITCH指标不转作MiLAi结果。 |
+| [EMem / EMem-G](https://aclanthology.org/2026.findings-emnlp.924/) | 用带实体、时间和source-turn归属的事件/事实EDU作检索单元，结合稠密检索/LLM过滤；图版本另用关联传播。 | 区分完整Source、派生View和实际交付；字节/角色/时钟相同不证明生成View语义完整或事实正确，也不等价于EDU方案。 |
+| [FlexA-Mem](https://arxiv.org/html/2610.33274v1) | 保留不可变raw与关联记录，在预算内渲染时间线并恢复raw、excerpt或原文pieces。 | 存储完整性、预算内交付、NN完整投影是三种不同约束；本轮实际packet由原SDK预算决定，关闭产物无损归档不属于prompt压缩或策略收益。 |
+| [Memory-R2](https://arxiv.org/html/2605.21768v1) | 局部rerollout从相同中间memory state比较操作，并与全轨迹GRPO目标结合。 | B64同before/完整参数分支借鉴可比状态；本轮是材料反馈监督，不是LoGo-GRPO或联合extractor-manager RL。自主后续历史与Host随机性不由同初态自动配对。 |
+| [Memory at Scale](https://arxiv.org/html/2605.07313v2) | 固定query/证据/答案，增加无关完整session，并对已完成轨迹事后计算memory-call预算、尾部负担和可靠性边界。 | D的0→1构造无关会话仅是最小因素测试，没有重现多规模曲线；本轮硬generation准入包含依赖NN，不能换名论文的事后memory-call B或Pass@B。 |
+
+本轮可复核的增量是把完整条件/参数的真实暴露、同before局部干预、实际交付、原始失败和
+完整自主Host任务分别落在同一来源与计量链上，再用预冻结来源与保存seed检查开发信号。
+这些证据允许定位“提供/选择/打开/交付/使用”的差异；不能只由某一层通过推断任务收益。
+当前冻结确认未支持预定学习策略的稳定完整成功优势，外部已曝光复验也不提供独立用户泛化。
+最终Mem2Act两方法适配评分及全项目成本仍待闭合，本文不提出新objective、尺度扩量或采用结论。
+
 ## P0与条件负例路线A
 
 两精度各512条合法TRAIN行、32次更新，前4次仍计成本，后28次测稳态。
@@ -266,10 +289,13 @@ wire Tool错误全部逐项保留：5条参数枚举拒绝，10条控制循环�
 它不修改Source/SQLite、活跃文件、NN输入或首结果，不计作策略质量收益，也不使用SHA门禁。
 
 [LME六阶段关闭后的已付截止量](MILAI_A100_KNOWN_COST_THROUGH_LME_20261109.md)已从启动前静态快照
-逐项复核：当前目标已测已付156,772.304695CPU秒（43.547862CPU小时）及30,712,462已知Host tokens。
+逐项复核：该历史截止点已测已付156,772.304695CPU秒（43.547862CPU小时）及30,712,462已知Host tokens。
 较原LME007前新增295具名phases，由99原生client、101离线付款、95独立存储互斥解释，另核对两项
 通用NN/加载增量；失败及既有成本只计实际一次。当前Mem2Act与快照后离线/报告费用、作者/丢失父监测/
 Host GPU忙时等未知仍单列，这不是完整真实项目成本，也不是GPU小时或货币费用。
+固定400及其全Source审计、155项已闭合普通计时在idle138付款后，启动primary前的静态已付参照
+为178,100.221432 CPU秒、35,272,283已知Host tokens；来自保存的budget-before副本。
+这份参照不含正在运行的primary、post138出版分析及未测部分，不离线打开活动原账本。
 
 ## 暴露、评分与尚未完成的工作
 
@@ -293,8 +319,10 @@ Reader/Judge不属于自主Host或未见Small/Medium确认。两方法全451首�
 主方法3594NN/25,070,604完整输入tokens及51次加载的真实开销全部保留；不把更多选择
 或Source忠实等同更好答案。早期1..9物理逐步快照缺口和第9条旧READ字段实际为SEARCH
 的元数据更正明确披露。两方法归档已闭合，全项目成本继续；调用小计不替代全部成本。
-Mem2Act完整429会话/16,843轮Source和公有400任务投影已验证，但实际两方法全量
-尚未闭合，固定前缀全400条已按冻结协议启动；GivenTool、适配strict-call/value-F1等也不能称为原作者TA或leaderboard复现。
+Mem2Act固定400首执行已实际闭合（299执行完成、101失败保留），原canonical alias与冻结v2全量Source审计
+均exit0，400真实首次Host快照全部可重放；[关闭凭据](MILAI_A100_MEM2ACT_FIXED400_NATIVE_RESULTS_20261109.md)记录
+完整429会话/16,843轮Source及原query/schema。原primary400已启动，实际两方法全量仍未闭合。
+原生执行状态不等于任务严格正确，GivenTool及适配strict-call/value-F1不称原作者TA或leaderboard复现。
 不把组件I/O/模型探针当作451×2或400×2任务结果。
 
 旧64保留query与新128条件DEV无交集；已在三套预选模型与原生评分合同冻结后，
