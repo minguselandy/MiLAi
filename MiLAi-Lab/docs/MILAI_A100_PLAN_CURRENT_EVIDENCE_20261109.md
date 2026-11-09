@@ -7,7 +7,8 @@
 
 上一版v66初审的待办已经过时，但原件保持。当前P0/A/B64/B修复/C/D共78项具体合同已有实际
 审计，LME两451的六个原生关闭及旧64保留query评测也已闭合；Mem2Act800真实首结果、最终
-全项目成本与论文/整体图表仍未齐。不得由标题、文件存在或绿色检查反推全目标完成。
+全项目成本与论文/整体图表仍未齐。v186新增的实际闭合证据见[固定400全量审计](MILAI_A100_MEM2ACT_FIXED400_NATIVE_RESULTS_20261109.md)：
+fixed400/全Source已通过、idle138已付，原primary400现实际运行；原671块机器索引保留其v183时点，不由本状态更新宣布763行完成。不得由标题、文件存在或绿色检查反推全目标完成。
 
 ## 新核对的来源分组、冻结与训练随机性
 
@@ -61,34 +62,38 @@ D的0→1构造无关会话是最小因素测试，不是多规模历史增长�
 首次Provider请求实际在各方法对旧8为16/16、新32为64/64匹配，后续检索参数均0匹配，
 这里沿用D18审计后的准确表述，避免把两类请求混淆。
 
-## 当前明确必须完成的七个工作组
+## 七个工作组的当前状态与剩余交付
 
 这是工作组划分，不是七个等权要求。全部原计划仍在范围内，最终审计还需逐项复验。
 
 | 工作组 | 当前状态 | 必须满足的实际结束条件 |
 |---|---|---|
-| MEM-FIXED | ACTIVE_REQUIRED | 固定Mem2Act400所有原始首结果、实际owner退出/支付、完整Source/Store/Saver/SDK/Host审计及原定稿 |
-| MEM-PRIMARY | REQUIRED_AFTER_FIXED_FULL_AUDIT | 预定primary400由真实同一pre-first-Host快照完整配置覆盖运行，全量原生Source/输入/首结果审计 |
+| MEM-FIXED | CLOSED_NATIVE_AND_FULL_SOURCE_V186 | 实际400首结果/owner支付退出/最早canonical closure/冻结v2全Source已闭合；299 COMPLETED与101 FAILED保留，400快照全可重放 |
+| MEM-PRIMARY | ACTIVE_REQUIRED_V186 | 原owner已启动，GPU2 FP32预定u32实际load验证；仍需全400首结果、支付退出及完整Source/NN/Host审计 |
 | MEM-SCORE | REQUIRED_AFTER_PREDICTIONS | 两方法400适配评分、原生失败保留、评分审计、范围/暴露/分组与比较 |
 | MEM-ARCHIVE | REQUIRED_AFTER_AUDITS | 两方法400原始Source/状态/输入/首结果/评分/日志可重建归档及原生关闭 |
-| FINAL-COST | REQUIRED_AFTER_ACTUAL_IDLE | 实际idle138及之后普通/失败CPU、Mem2Act原生/whole/parent/存储差额一次计量，最终全项目已知与未知成本 |
+| FINAL-COST | REQUIRED_AFTER_ACTUAL_PRIMARY_CLOSE | idle138已付155普通计时/3105.55CPU；primary与post138待后续实际idle闭合，最终已知/未知全项目成本仍需汇总 |
 | FINAL-PAPER | REQUIRED_AFTER_EXTERNAL_CLOSE | 完整内外部/冻结确认的最终论文与结果包、总体图表、能主张/不能主张的结论 |
 | FINAL-AUDIT | REQUIRED_FINAL | 以最终实际状态重新完成全763行要求/命令/门禁/交付物逐项审计，不能用本执行中清单宣布完成 |
 
-当前Mem2Act固定400的原父/子实际进程存活，本次快照为{'COMPLETED': 226, 'FAILED': 72, 'HOST_RUNNING': 1, 'NOT_RUN': 101}。
-只核对原owner/driver和真实named PID，不因等待超时重启。该状态随原进程推进，见最新progress。
-先等待实际400首结果与owner退出/支付，按原协议先创建最早首记录的规范别名/closure，
-再用冻结v2审计该别名的完整Source/Store/Saver/角色/时钟/权限/应用/SDK/Host输入，之后才是primary400。
-[原衔接操作卡](MILAI_A100_MEM2ACT_CLOSEOUT_HANDOFF_20261109.md)明确了这个顺序；这七组不能由小面板、静态manifest
-或原探针代替。失败不重试、不把partial intent提升为完成，adapted指标不冒充原论文TA。
+当前固定400原父328495/子328497已实际退出、exit0、owner支付；原canonical别名之后的
+冻结v2全400Source审计也实际exit0，完成初始6737200/pre-first6737600 Source比较、426 SDK packet
+重建，400真实首次快照全部可重放。原primary400父2793546/子2793571已显式启动，完整原
+memory_control合并仅覆盖policy/checkpoint，GPU2/cuda0 FP32/threads4/max16384/head2048实际load验证。
+运行状态随原driver推进，见[最新v186](../data/manifests/a100-development-progress-20261109-v186.json)。
+只核对真实named PID，不因超时重启；primary完成后仍按原alias→全Source/NN审计→两方法
+适配评分/审计→最后无损归档。失败保留、不将partial intent提升为完成，尚无全800任务指标。
+[原衔接操作卡](MILAI_A100_MEM2ACT_CLOSEOUT_HANDOFF_20261109.md)保留原流程与实际SDK顺序；
+这些工作组不能由小面板、静态manifest或load回执代替。
 
 LME已不是待执行：两方法各451，六个原生prediction/score/archive关闭实际exit0/支付/进程消失。
 每方法50个未评分首失败仍在完整451分母，cohort metric不可用，不补负gold、不按共同完成子集
 声称优势。早期primary1至9物理step快照未生成的限制保留；归档不创造那些缺失字节。
 旧64保留query三模型12999首输出/完整输入/原生评分已闭合，Source共享语料与query家族资格分别解释。
 
-已知已付成本只到idle137后/preMem：156772.30469547494 CPU秒、30712462已知Host tokens。
-不是当前或最终全项目成本；post137普通/失败/作者分析的计量边界及正在运行native段仍要处理。
+历史LME截止点（idle137后/preMem）的已知已付成本为156772.30469547494 CPU秒、30712462已知Host tokens。
+不是当前或最终全项目成本；v186中启动primary前的静态已付参照为178100.221431642CPU/35272283已知Host tokens，
+另有当前primary、post138出版分析与未测范围。idle138只支付一次，历史截止量不重加。
 不离线打开活动原账本，不把native/load/whole/residual/parent/旧存储或共享baseline重复加账。
 未测作者/启动/丢失父/Host GPU忙时/货币成本保持unknown_not_zero或明确未知。
 

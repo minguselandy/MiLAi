@@ -167,7 +167,7 @@
   "source_values_labels_firsts_models_and_scientific_protocols_changed": false,
   "Mem2Act_snapshots_and_current_worker_untouched": true,
   "model_HTTP_business_or_original_ledger_calls": 0,
-  "ordinary_GNU_CPU_pending_next_actual_idle": true,
+  "ordinary_GNU_CPU_pending_next_actual_idle": false,
   "no_sha_validation": true,
   "full763_line_completion_proven": false,
   "goal_complete": false,
@@ -178,5 +178,7 @@
   "original_file_mode_and_mtime_ns_roundtrip_passed": true,
   "free_space_snapshot_includes_concurrent_Mem2Act_progress_not_a_controlled_storage_benchmark": true,
   "coexecuted_with_original_Mem2Act_fixed_native_worker": true,
-  "tool": "tools/archive_a100_closed_D_captures.py"
+  "tool": "tools/archive_a100_closed_D_captures.py",
+  "actual_ordinary_CPU_settlement": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v138.json",
+  "ordinary_archive_audit_report_CPU_paid_once_at_actual_idle138": true
 }

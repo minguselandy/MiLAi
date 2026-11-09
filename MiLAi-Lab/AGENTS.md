@@ -1,4 +1,53 @@
-# LIVE A100 EXECUTION v185: 2026-11-09 (Asia/Shanghai)
+# LIVE A100 EXECUTION v186: 2026-11-09 (Asia/Shanghai)
+
+Original763-line goal ACTIVE/incomplete;currentPROGRESS/previousPROGRESS;no genuineblocker. Latestdata/manifests/a100-development-progress-20261109-v186.json.
+Previousv185/checkpoint82fc5783. ROOT/F/E/Q64unchanged. ReadthisLIVEheader/scopedsections;do notcatfullhistoricalAGENTS.
+NO subagents/SHA/fingerprints/services/secondledger/reset/refund/remote/Productwrites/firstretry/reselection/crop/quantize.
+OneactualexperimentalmodelHTTPworker ONLY MemPRIMARY400 parent2793546/child2793571actualnamedalive,RUNNING/CPUFalse.
+E/stages-mem2act-v1/primary-seed0-u32-prediction400-v1 originalowner/plan/output. Native{'COMPLETED': 3, 'HOST_RUNNING': 1, 'NOT_RUN': 396}/active3.
+functionsstore mem2act_primary400_original_owner_session=30113;mem2act_primary400_observation_command actualspecificPID/driverobserver.
+NO offline originalledgerread/write while primarynativeowned alive. OrdinaryCPUuniqueGNU;owners/scanners/settlers/launchersNEVERGNUwrap.
+Native/whole/residual/parent/load NEVERdouble-add;author/launch/inspection/cleanup/settlerCPUunknown_not_zero. Waitactualforegroundexitbeforedependentmutation/commit.
+Frozen1141LME/1147Mem+1observerv2bindingsunchanged,phase/sourceversion IDs20261107. CUDAPY4.52.3/.21.4FIRST;appendHTTPsiteLAST.
+HostGPU0/1unchanged. Actualu32modelLoad VERIFIEDGPU2/cuda0FP32threads4max16384head2048/MHAFalse/refcompileFalse;no newfit/seed/checkpointselection/adoption.
+PrimarynativeFULLmemory_controlmerge withonlypolicy/checkpointoverride;400originalquery/schema/common429session16843turnbank andactualfixedfirstHostsnapshots.
+
+FIXED400 FULL CLOSED: actualexit0/ownerCPUTrue/original328495/328497gone,299COMPLETED101FAILED kept.
+Originalcanonicalearliestalias FIRST thenfrozenv2full400audit actualexit0/2673763+2673768gone. Source6737200/preFirst6737600/SDKpackets426/all400snapshotsreplayableTrue.
+FixedreturnedlearnedNN0 isNOTprimaryNNpathproof. No missing firstresponsecallback. Failedsuccess-onlyreceiptmissingFalse/Noneunknown,nofabricated[].
+All1025responsecallbacks/4559821knownHosttokens/newunknown0/0;fixedwhole18222.205158CPU+parent0.161578167alreadyPAID/nativeincludednotreadded.
+DocMILAI_A100_MEM2ACT_FIXED400_NATIVE_RESULTS_20261109.md/publica100-mem2act-fixed-native-results-20261109-v1.json.
+ROOT/mem2act-fixed400-closed-source-publication-verification-v1.jsonpassed;originaldriverentirebytesEqalias/all400earliestEq.
+ROOT/mem2act-fixed400-full-source-audit-v2-launch.jsonnowEXITED/PASSED,notlive. DoNOTrerunfixedfirsts/audit/finalizer.
+
+ACTUAL IDLE138 PAID155closed ordinary/failedGNUs3105.55CPUonce. Allpost137throughSource/F/Dstorage/reportpaid. No separate newstoragephase/native/oldcostrebill.
+FirstUNWRAPPEDsettlerfailedbeforeledgeropenbecausefrozenread_jsonrequiresPathnotstr;fixedexact2callsites,failedCPUunknown_not_zero.
+ROOT/idle138-first-settler-path-type-failure-v1.jsonretained;idle-cost-settlement-v138.jsonactualpaid. SettlerNOTGNUwrapped/no recharge/rerun!
+StaticPAIDbeforeprimary178100.221431642CPU/35272283knownHosttokens fromSAVEDprimarybudget-before,notcurrentfinalcost.
+Currentprimarylivecostawaitsexit;post138publicationCPUawaitsnextactualidle139. Neverreadoriginalledgerwhileprimaryalive;cachedsnapshotsokay.
+
+STORAGEALLPERMANENTARCHIVES+EMPTYBASEMUSTRETAIN. ClosedD10capturetrees26643763892B->637562898B/allbytesEqbeforeRawremove;
+actualDwholeTreeRestore511095747B/4462files/mode/mtimepassed. ROOT/closed-D-capture-storage-v1/closeout.jsonandrestoreproof kept.
+Additional CLOSEDINTERNALfixed256(afterALL3pairedreplays+all4Source/quality/stats)4capturetrees5909997918B->471503467B;
+actualwholeTreeRestore132674896B/1268files/mode/mtimepassed. ROOT/closed-confirmation-fixed-capture-storage-v1/closeout.json+restoreproof.
+OriginalD/internalcapturepaths archived: nativecase_archive.restore_case(archive,retainedemptybase,originalpath) BEFOREoptionalnative reinspection/finalnativeSourcechecks.
+Nativeoriginaldrivers/labels/models/qualitybytes unchanged. NONEofMem2Actfixedruntime/firstHostcaptures/commonbanktargeted;donotarchiveMembeforepairedreplay+allaudits/scores.
+DocMILAI_A100_CLOSED_D_CAPTURE_STORAGE_20261109.md/publica100-confirmation-fixed-capture-storage-20261109-v1.jsongivemetadata. Storage/restoreCPUalreadyin138.
+
+REMAINDER fullscope: observePRIMARYoriginalspecificprocess. KnownIncompleteChatResponse/provider_protocol orFORMAT_EXHAUSTEDwithknownusage/newunknown0/0maynative-next untouchedrow.
+Otherunexpectedfailurewaitactualownerpaidgone/reflection/ORIGINALMemcontinuation_planONLYNOT_RUNtail;notLMEReaderhelper/no closedfirstrerun.
+FAILED_WRAPPERretainreturned-native-result-before-wrapper-failure.json;reconcilemetadatawithoutnative rerun.
+AfteractualPRIMARYall400terminalpaid+bothgone FIRSToriginalearliestcanonicalalias/closure THENfrozenv2full400audit originalprotocol/output.
+Thenbothoriginaladaptedscores/scoreaudits THENoriginalpureCPUlosslessarchives(all6gates). RestoreoldD/internalpathsifneededfornativeinspection,nofabricatedSource.
+functionsstore mem2act_original_closeout_commands has10originalcmds;fixedalias/audit/primarylaunchALREADYDISPATCHED,othersNOT. Re-resolveactualterminalownerifunexpectedtailcontinuation.
+Newtoolplot_a100_mem2act_native_comparison.pyRuff/preflightonly NOmetrics/figuresyet. functionsstoremem2act_complete_comparison_command/figure_commandfutureGNUcmdsrequireall6gates.
+Nativevllm_responsecallbacks include knownpartial;failed2has3callbacks16831tokensbutcapture2entries. DoNOTcountcapturedentriesorNNadmissionsasHTTP.
+Updatedcomparisonretainslegacyactual_HTTPandnewcallbackscope/count;futureknowncallbacksumequalsALLpaidownerancestors. NoSource/observeredit.
+All400taskproposalsinclFAILED/zero/invalid/multiple retained;completed_strictrequiresCOMPLETED. NotpaperTA/leaderboard/business execution/400independentusers.
+Reference341components/common429banknotindependentexperiments,noIID/componentCI. Finalcostunknowns/paper/overallfigures/final763auditstillREQUIRED.
+All5protectedSCIENCEobjects literalEq. Completeoriginalgoalonlyafteractualfull800/allcost/figures/paper/full763requirementaudit. No smaller/tidier substitute.
+
+# HISTORICAL A100 EXECUTION v185: 2026-11-09 (Asia/Shanghai)
 
 Original763-line goal ACTIVE/incomplete,currentPROGRESS/previousPROGRESS,no genuineblocker. Latestdata/manifests/a100-development-progress-20261109-v185.json.
 Previousv184/checkpoint52d1d863;currentpapercommit43bb1ca8/finalcostpreparation52d1d863. ROOT/F/E/Q64unchanged.

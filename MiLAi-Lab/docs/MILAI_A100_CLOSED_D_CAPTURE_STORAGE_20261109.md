@@ -22,7 +22,7 @@ primary仍必须沿原400实际快照重放。现有工具的原路径在归档�
 可选D复查或最后全计划原生复验前，先通过原生restore_case恢复对应目录，再执行原审计。
 
 归档器是普通CPU命令，与原Mem2Act固定worker并行，无模型/HTTP/业务或账本调用；
-归档/验证及本轮其他普通/失败GNU计时待实际idle138付一次，不另加native/whole存储phase。
+归档/验证及本轮其他已闭合普通/失败GNU计时已在实际idle138付一次，不另加native/whole存储phase。
 操作前后的实际磁盘余量另存于机器凭据；同时Mem2Act仍有真实写盘，因此不把两次余量差
 当作受控压缩性能或因果延迟比较。未测编排/启动/清理CPU保留unknown_not_zero。
 
@@ -42,3 +42,17 @@ restore_case(Path(row["archive"]), Path(row["base"]), Path(row["original"]))
 
 恢复仅重建字节，不重跑Host、前缀或模型。保存归档可再次重建；恢复所需空间要在实际执行前
 核对。Mem2Act全800、两方法Source/评分/归档、最终成本/论文图表及全763行完成审计仍待闭合。
+
+## 已关闭内部确认的额外捕获存储
+
+Mem2Act主阶段的完整base/结果尺寸参照约37.4GiB，实际总余量约43.6GiB；
+为后续轨迹和记录留足空间，已将**内部**固定256的pilot8/remaining248两作业4个捕获树另行
+无损保存。此前全部3套学习策略的256快照重放、4方法Source/质量/统计均已关闭。
+5,909,997,918原字节保存为471,503,467归档字节，
+全部重建逐字节相同才移除raw；另实际恢复132,674,896字节、
+1268文件并核对mode/mtime，原driver和质量manifest字节保持。
+
+[额外4树凭据](../data/manifests/a100-confirmation-fixed-capture-storage-20261109-v1.json)保留全部原路径、
+归档、独立empty base和恢复记录；复查前沿同一restore_case接口恢复。这里未处理Mem2Act
+固定400的任何runtime/首次Host捕获，原400主策略重放资料仍完整可用。新增存储/恢复CPU
+属于普通GNU计时，已在实际idle138付款；没有新模型/业务调用或离线账本访问。

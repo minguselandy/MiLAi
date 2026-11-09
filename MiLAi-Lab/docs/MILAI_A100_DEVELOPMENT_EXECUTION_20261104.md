@@ -6,11 +6,34 @@
 历史 worktree、原始失败与用户文档保持原状。没有使用子代理、SHA/内容指纹校验、新服务、第二账本或远端写入。
 
 本轮机器可读入口为
-[progress](../data/manifests/a100-development-progress-20261109-v185.json)。
+[progress](../data/manifests/a100-development-progress-20261109-v186.json)。
 原始数据、冻结运行时、权重、命令、计时和实际输出位于本 worktree 的 ignored
 `artifacts/a100-development-20261104/`。本记录是现有报告体系的执行摘要。
 
-## v185 当前状态（2026-11-09，Asia/Shanghai）：论文方法/13协议暴露表、内部图范围更正与已关闭D捕获无损存储
+## v186 当前状态（2026-11-09，Asia/Shanghai）：Mem2Act固定400及全量Source闭合、idle138支付，原primary400实际运行
+
+[固定全400与全量审计](MILAI_A100_MEM2ACT_FIXED400_NATIVE_RESULTS_20261109.md)实际exit0/owner支付/父子消失，
+299 COMPLETED、101 FAILED保留；先原canonical alias后冻结v2审计，400最早完整记录与原driver字节相同。
+Source初始6,737,200/pre-first6,737,600比较、SDK packet426、400实际快照全可重放。固定无学习forward，NN数0不冒充primary证据。
+原响应回调1025/known tokens4,559,821/newunknown0/0，整child18222.205158CPU＋parent0.161578167已付一次。
+原生状态不是任务严格正确，适配分数仍待原两方法全Source完成后执行；未更名原论文TA或丢失败。
+
+实际idle138付155普通/失败计时3105.55CPU，native/whole/load/parent不重计。首结算在账本打开前因str/Path接口错误失败，
+已按原harness调用边界修正并留记录；失败UNWRAPPED settler CPU unknown_not_zero，不补造计时、不重置/退款。
+额外4棵已关闭内部fixed256捕获5,909,997,918原字节→471,503,467归档字节，逐字节验证后释放，
+实际恢复132674896字节/1268文件含mode/mtime通过；原driver/质量文件字节不变，所有Mem固定快照未动。此普通CPU已在138内付一次。
+
+原primary400 owner已明确启动，无GNU wrapper/自动队列，父2793546/子2793571真实named进程存活。
+原u32 checkpoint GPU2/cuda0 FP32/threads4/max16384/head2048、MHA/compile关闭真实load VERIFIED，
+仅policy/checkpoint覆盖且完整memory_control合并。当前native{'COMPLETED': 3, 'HOST_RUNNING': 1, 'NOT_RUN': 396}/active3；原Source/query/schema/Host/budget/SDK/phase保持。
+主阶段当前运行后不再离线打开原账本；其native/whole/parent只等实际退出一次计量，新publication CPU待idle139。
+启动前静态已付参照178100.221431642CPU/knownHost35,272,283，不含正在运行primary或后续/未知成本。
+
+新Mem图入口Ruff/preflight通过，尚无全800指标/图；失败2实际3响应回调16831tokens但2捕获条目，计量名称明确，冻结v2字段不改。
+后续primary400实际paidgone→原alias→全Source/NN→两方法适配评分/审计→原归档→实际cost/论文图表/最后763行审计。
+5个保护科学对象逐dict相同，原763行目标ACTIVE、本轮与前轮PROGRESS，无真实阻塞，不以固定400或GPU load当全目标完成。
+
+## v185 历史状态（2026-11-09，Asia/Shanghai）：论文方法/13协议暴露表、内部图范围更正与已关闭D捕获无损存储
 
 [结果草案](MILAI_A100_DEVELOPMENT_RESULTS_DRAFT_20261107.md)新增方法图、完整投影/训练/评分语义、13行来源与暴露表；
 全部原结果段逐字保留，Mem2Act尚无全量指标。内部总览v2四面板行与数值完全同v1，旧v1保持；
