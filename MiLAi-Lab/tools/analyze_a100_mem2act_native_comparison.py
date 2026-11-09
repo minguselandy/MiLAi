@@ -11,6 +11,23 @@ def read(path: Path | str) -> dict:
     return json.loads(Path(path).read_text())
 
 
+def verify_earliest_primary_prefix(protocol: dict, driver: dict) -> dict:
+    checkpoint_path = (
+        Path(protocol["stage_directory"]).parent.parent
+        / "mem2act-primary-first100-earliest-case-records-v1.json"
+    )
+    checkpoint = read(checkpoint_path)
+    assert driver["method"] == "primary"
+    assert len(checkpoint["records"]) == 100
+    assert checkpoint["records"] == driver["cases"][:100]
+    assert all(row["status"] in ("COMPLETED", "FAILED") for row in checkpoint["records"])
+    return {
+        "checkpoint": str(checkpoint_path),
+        "first100_entire_earliest_case_records_literal_equal": True,
+        "scope": "Saved running-stage earliest prefix; no new task, retry, score or all400 gate.",
+    }
+
+
 def reference_components(
     coverage: dict, references: list[dict], sessions: list[dict]
 ) -> list[list[str]]:
@@ -70,6 +87,9 @@ def summarize_method(protocol: dict, method: str) -> dict:
     assert audit["passed"] and score_audit["passed"] and closure["passed"]
     scores = read(protocol[method + "_scores"])
     driver = read(Path(protocol[method + "_predictions"]) / "driver.json")
+    earliest_prefix = (
+        verify_earliest_primary_prefix(protocol, driver) if method == "primary" else None
+    )
     assert driver["method"] == scores["method"] == audit["method"] == method
     assert driver["planned_positions"] == len(driver["cases"]) == len(scores["records"]) == 400
     assert audit["positions"] == score_audit["positions"] == 400
@@ -147,6 +167,7 @@ def summarize_method(protocol: dict, method: str) -> dict:
         "actual_owner_ancestry_including_retained_failures": (
             closure["ancestor_owners_oldest_first"]
         ),
+        "saved_running_stage_earliest_primary_prefix": earliest_prefix,
         "credits": credits,
     }
 

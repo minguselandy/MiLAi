@@ -127,6 +127,17 @@ SEARCH1/READ7；没有据此给出任务成功、View复用或全400NN路径结�
 字段仍为缺失/None未知，未造空或升级完成。没有新模型/Tokenizer/GPU forward/HTTP/账本调用，
 CPU待实际idle139。原400任务继续，最终完整400审计的owner支付退出门禁保持。
 
+## 原主阶段最早100条运行中检查点（2026-11-10）
+
+[最早100条检查点](../data/manifests/a100-mem2act-primary-first100-execution-checkpoint-20261110-v1.json)保存
+原400 loop的rows0..99完整case dict、原顺序/qa_id、76 COMPLETED和24 FAILED；与正在推进的
+原driver前缀逐字段相同。副本在ignored产物中保留，最终400 canonical alias需保持这一最早前缀。
+最终比较器已接入同一完整dict核对，并实际对当前driver验证通过；正式分支还须满足原两方法
+closure/完整Source/scoreaudit门禁，前缀检查不能单独通过全量比较。
+检查点只冻结已发生记录，不重跑、重排或给首结果新评分，原worker继续处理原400任务。
+实际父2793546/子2793571仍存活，Native成本待owner退出；没有打开活动原账本。
+不能由该100条前缀或两例NN机制预检宣布全400/全800审计、评分、归档或完整计划已完成。
+
 ## 全量指标闭合后的图表入口
 
 [绘图入口](../tools/plot_a100_mem2act_native_comparison.py)已完成结构预检，当前没有生成
