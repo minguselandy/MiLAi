@@ -16280,6 +16280,62 @@
         "embedding": 0
       },
       "native_first_retry_or_partial_proposal_promoted": false
+    },
+    {
+      "row": 10,
+      "qa_id": "qa_011",
+      "native_result": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/stages-mem2act-v1/fixed-prefix-prediction400-v1-output/cases/0010/runtime/banks/77079f18-e47f-4bd6-b195-4b9a94a16907/fce80d99-fb01-4b98-b444-e7cb2b9534ff-result.json",
+      "native_status": "FAILED",
+      "error_type": "IncompleteChatResponse",
+      "error": "VLLM_CHAT_TRUNCATED",
+      "generation_calls": 2,
+      "new_unknown_usage": {
+        "generation": 0,
+        "embedding": 0
+      },
+      "native_first_retry_or_partial_proposal_promoted": false
+    },
+    {
+      "row": 17,
+      "qa_id": "qa_018",
+      "native_result": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/stages-mem2act-v1/fixed-prefix-prediction400-v1-output/cases/0017/runtime/banks/77079f18-e47f-4bd6-b195-4b9a94a16907/8ae10b42-1b17-416e-92e3-c2118ac3d12f-result.json",
+      "native_status": "FAILED",
+      "error_type": "IncompleteChatResponse",
+      "error": "VLLM_CHAT_TRUNCATED",
+      "generation_calls": 2,
+      "new_unknown_usage": {
+        "generation": 0,
+        "embedding": 0
+      },
+      "native_first_retry_or_partial_proposal_promoted": false
+    },
+    {
+      "row": 20,
+      "qa_id": "qa_021",
+      "native_result": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/stages-mem2act-v1/fixed-prefix-prediction400-v1-output/cases/0020/runtime/banks/77079f18-e47f-4bd6-b195-4b9a94a16907/78b81e79-dd8e-4fbf-966e-39a18df0e187-result.json",
+      "native_status": "FAILED",
+      "error_type": "IncompleteChatResponse",
+      "error": "VLLM_CHAT_TRUNCATED",
+      "generation_calls": 3,
+      "new_unknown_usage": {
+        "generation": 0,
+        "embedding": 0
+      },
+      "native_first_retry_or_partial_proposal_promoted": false
+    },
+    {
+      "row": 22,
+      "qa_id": "qa_023",
+      "native_result": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/stages-mem2act-v1/fixed-prefix-prediction400-v1-output/cases/0022/runtime/banks/77079f18-e47f-4bd6-b195-4b9a94a16907/b99eb7c1-70f8-43c7-ae4e-9d12655c731e-result.json",
+      "native_status": "FAILED",
+      "error_type": "IncompleteChatResponse",
+      "error": "VLLM_CHAT_TRUNCATED",
+      "generation_calls": 1,
+      "new_unknown_usage": {
+        "generation": 0,
+        "embedding": 0
+      },
+      "native_first_retry_or_partial_proposal_promoted": false
     }
   ],
   "Mem2Act_native_failure_observational_audit_execution_v2": {
