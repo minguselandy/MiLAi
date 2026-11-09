@@ -36,6 +36,109 @@ checkpoint、预算与256来源族后的完整自主Host确认中，主seed相�
 交互自然分化。全部原始Source/状态、角色、时钟、应用与未截断的有限NN投影另有
 全量审计。采集时钟不作为事实发生时间；编码上限或成功执行不代表有效16k上下文。
 
+## 方法、执行层与来源分母
+
+Host表达当前用途、证据要求、对象/时间、已知材料和预算；记忆工具在原公开边界内构造
+合法完整取证菜单。Laya对实际可见state和完整动作参数打分，策略选择READ、USE_VIEW、
+REFRESH_VIEW或HANDOFF。合法是执行准入，不是正确性标签。Source完整bank可用、控制器
+实际观察、已经读取、实际交付和Host最终收到的材料分别记录，不能以其中一层代替另一层。
+
+```mermaid
+flowchart LR
+    H[Host用途/证据/对象时间/K/预算] --> G[原版本/权限/引用准入]
+    G --> M[完整合法菜单与参数]
+    M --> P[固定策略或Laya打分]
+    P --> E[既有读取/复用/刷新/交付执行器]
+    S[Source角色/时钟/修订/权限] --> E
+    V[派生View及Source绑定] --> E
+    E --> R[预算内实际Tool packet]
+    R --> F[Host继续并结束原任务]
+    E -. TRAIN实际分支材料反馈 .-> T[家族/事件加权监督与replay]
+    T --> W[原目标的真实拟合]
+    W -. 下一预定候选 .-> P
+    F -. 原首整答/失败及原生指标 .-> Q[离线评测/来源审阅]
+```
+
+图中TRAIN反馈与评测路径分开：已关闭拟合和候选构造不接收确认/外部答案或评分标签。
+Source作者材料与整答判断不等于独立人类真值，后来评测不回填已关闭训练。共享的实际
+baseline分支或预first-Host快照仅按发生的一次执行计量；不同state/seed/生成不增加独立来源。
+
+单次有限决策的完整投影包括原Host条件、实际before及全部合法完整绑定，head ID与目标
+随选项置换同步变化。无单独为显存裁掉K/菜单、静默截断或量化。配置max16384/head2048
+表示构造上限与原生guard，不证明encoder在超过原8192配置时有有效长上下文语义能力。
+记录的“完整输入”仅指该次真实可见控制器投影，不表示全部bank原文都进入NN或送达Host。
+
+已知证据K只取真实之前交付的locator/修订，并经原生查验；不能用更晚cache修订替换旧K。
+引用/Source身份与role/clock忠实不认证底层事实，旧Host输出继续归属assistant。Scope匹配、
+pending、新到达、重复/询问/撤销/历史查询与当前事实更正不混同，不将所有新Source一律刷新。
+
+离线条件诊断评估条件标签/unknown和完整argmax；同before短程及handoff-only评估实际局部
+干预。显式given-readout只适用原host_request_generated=False且K空的捕获，输入为公开任务
+加实际packet；full host-readout保留完整原post-tool frame。二者都不冒充完整自主Host轨迹。
+自主比较则由真实pre-first-Host Store/Saver/context/catalog开始，Host自行请求证据和结束任务；
+只覆盖预定policy/checkpoint，后续检索参数和实际轨迹允许分化，不强塞同一动作串。
+
+### 数据角色、实验层与不能相加的分母
+
+各行的实际来源与冻结配置见[方法及暴露机器表](../data/manifests/a100-paper-methods-exposure-20261109-v1.json)。
+
+| 队列 | 分组单位 | 实际或明确计划规模 | 研究层/用途 | 暴露与边界 |
+|---|---|---|---|---|
+| P0 | 合法TRAIN行/完整条件pair | 每精度512行、32更新 | 性能/数值/导出诊断 | TRAIN；profile模型不进入正式初始化 |
+| A-10k | 原生query家族、其所有条件整体归属 | 每臂39982条件＋4886已知操作replay | TRAIN组成处理 | 共享语料/原生标签与unknown保持 |
+| A新128 | query家族 | 每模型8744矩阵格、三模型26232保存首输出 | 条件诊断/候选选择 | 与TRAIN/旧32/保留64 query家族不交叉，语料可共享 |
+| 旧32任务 | 论文来源族 | 条件readout/完整绑定研究面板 | 开发筛选 | 给定任务＋实际packet，不当作新来源自主Host确认 |
+| B64 | 新增TRAIN论文来源族/实际reached state | 384首绑定＝358新执行＋26原终止READ复用 | TRAIN监督支持比较 | B0/B1监督来自相同实际分支；非等采集槽位效率实验 |
+| B修复/C | 旧TRAIN实际状态/已获得材料池 | 旧57READ覆盖补齐，集合保守18池/47新readout | 条件机制定位 | 全部原首失败/unknown保持，不以工具成功代替整答 |
+| 自主DEV64 | 论文来源族 | 每方法64首轨迹；实际pre-first-Host快照配对 | 方法/checkpoint选择 | 已曝光，不是独立确认 |
+| D更新 | 来源演进链，2流程×5请求同簇 | 3方法×(80＋320)＝1200首轮，含baseline80复用 | 自主更新开发 | 生成benchmark对话、实施者Source合同；非自然观察/40新确认 |
+| D条件控制 | 固定已知View/旧输出的真实before | 9与42首格；旧输出原48inventory中6不具备干预资格 | 同信息条件机制 | 共同Host历史保持，Host随机生成未配对；非51个独立用户 |
+| 冻结确认256 | 整篇论文来源族 | 4方法各256首轨迹；原生DEV185/TRAIN71另列 | 预冻结后的新研究来源确认 | 固定E1初始化；共享容器字节/预训练与Source作者非盲限制保留 |
+| 保留64条件 | 共享语料上的query家族 | 127原行→4333格/模型，三模型12999首输出 | 预冻结原生条件次级评测 | 4066known/267unjudged，0已判change对，语料并非未见 |
+| LME | 已曝光Small查询/共享历史 | 两方法各451，Reader后原生Judge | 外部给定query检索＋固定Reader复验 | Known development-exposed Small:451 public queries sharing200 histories across two Source pools; not451 independent users, unseen Small/Medium or original-paper model reproduction. |
+| Mem2Act | 公有GivenTool任务/一个完整common bank | 两方法各400；每例同完整429session/16843turn bank | 外部自主记忆调用与适配指标复验 | 缺失引用/schema异常全保留；共享bank可跨引用检索 |
+
+表中13行是不同协议的来源/执行说明，不是13个独立数据集，数量不跨表合并。
+源分区native train/dev与研究TRAIN/DEVELOPMENT/CONFIRMATION分别记录；同paper、会话
+或演进链及同query所有变体整体归属。数据新于某个研究阶段不等于语料未见、自然观察、
+独立用户或公共预训练隔离。Mem2Act一行仍在执行，未由本方法表新增任何任务结果。
+
+### 固定运行配置、训练与评分语义
+
+自主内部Host使用既有Qwen3.6-35B-A3B-FP8、thinking=True、temperature=1，
+上下文65536、输出8192，单消息24共享generation admission、每检索8控制步/策略reads4，
+额外reads8、返回2048。共享admission包括本地policy等依赖生成，不直接称24次HTTP。
+LME和Mem2Act沿各自冻结原生适配器/每任务额度，不将不同协议的预算抹平为同一矩阵。
+后续冻结推理为GPU2/cuda0、FP32、4线程，reference compile/MHA fastpath/TF32关闭；
+Host服务GPU0/1与模型/thinking未改动。
+
+新单卡训练P0/A/B保持FP32参数和优化器状态；BF16臂用autocast做声明的forward、关键损失
+归约FP32，P0还保留FP32对照。完整条件pair留在同一次micro2 forward，窗口16原分母保持。A按真实E2配方，
+conditional单目标set与CE等价，operation replay仍是accepted-set；B按真实E3纯delivery/
+quality-tie/component-sum与replay .25。额外E3 seed1/2保持其原FP32两GPU配方及同一E1
+初始化、128更新/固定u32评测，不与新BF16两臂混称纯数据效果或完整训练链三seed。
+
+Host主C是Source支持的整任务完整成功；Q/I/W/F/U不给C，U不自动宣布事实错误。材料充分/
+部分/不足/未知独立，原生COMPLETED仅为执行状态。QASPER native answer F1保留完整原字符串，
+首失败按原生空预测计分，不抽取修复片段。LME native Reader/Judge的UNKNOWN、未评分失败
+与完整分母保持；Mem2Act适配strict intent、completed strict、value-F1及JSON-BLEU1分列，
+不借原作者TA/leaderboard命名。正确intent不修复失败Host，多个提议不挑最好一个。
+
+内部确认按来源族宏平均、配对增减/差值和20,000次seed0家族bootstrap报告，三seed先族内
+均值再抽样，来源N仍256。D每来源10请求同簇，旧8与新32分开；保留64是query家族条件
+重采样，不是文档历史泛化。LME共同已评分子集与全451缺失界分开。Mem2Act共享bank及
+引用图不提供400用户或341组件独立性，不计算IID或组件独立性CI。
+
+公共Source作者知道其他方法答案，既有122共同敏感性掩码/82、101、231补充的披露时序
+不追认为预注册。所有原标签、首失败、指南和范围限制保持；CI不估计作者标注误差、公共
+预训练接触或完整训练链/Host总体随机性。primary、checkpoint、预算和N均未用确认/外部
+结果重选。+5pp是规划目标，不能替代区间支持的优势或自动采用条件。
+
+CPU报告native与whole/residual/parent的包含关系，已付一次的成本不因复核或共享数据
+重复加账。GPU job区间包含准备/加载/IO/Host等待，不等kernel忙时；原SDK缺失padding、
+reserved或分阶段计时及未观察父/清理保持未知。最终全项目成本要等Mem2Act与post137
+普通/失败计时在实际idle后闭合，不能从目前已知截止量声称实用成本优势。
+
 ## P0与条件负例路线A
 
 两精度各512条合法TRAIN行、32次更新，前4次仍计成本，后28次测稳态。

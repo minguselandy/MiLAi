@@ -67,8 +67,13 @@ def build_panels(root, lab):
 
     update_path = lab / "data/manifests/a100-D-new32-Source-View-operation-synthesis-20261107-v1.json"
     update = read(update_path)
+    wire_source = lab / "data/manifests/a100-plan-D-audit-20261109-v1.json"
+    wires = read(wire_source)["initial_Provider_wire_correction"]
+    assert wires["passed"]
+    assert wires["all_three_method_pairs_new32_first_Provider_wires_equal64_of64"]
+    assert wires["first_tool_argument_batches_equal_zero_in_all_pairs"]
     update_rows = []
-    update_sources = []
+    update_sources = [str(wire_source)]
     for method, label, color in [("view_cache", "View cache", "#737b86"),
                                   ("view_cache_incremental", "Cache + incremental", "#7a9bb8"),
                                   ("e3-aggregate-u32", "E3 seed0", "#197e78")]:
@@ -112,7 +117,7 @@ def build_panels(root, lab):
         dict(id="update32", title="C  Update trajectories: development", subtitle="32 families x 10 requests | task C / 320",
              metric="implementation-assistant Source-reviewed complete task success", rows=update_rows,
              sources=[str(update_path), *update_sources],
-             scope="32 clusters, not 320 independent sources; descriptive because first HTTP inputs are not all literal equal. E3 received no View in this panel."),
+             scope="32 clusters, not 320 independent sources. All three method pairs have equal first Provider request dicts for all64 requests; retrieval arguments and later trajectories differ and Host generation RNG is unmatched. E3 received no View in this panel."),
         dict(id="reserved64", title="D  Reserved native conditional queries", subtitle="64 query families | native balanced accuracy",
              metric="native family macro balanced accuracy", rows=native_rows,
              sources=[str(native_path)], constant_reference_percent=constants,
@@ -155,7 +160,7 @@ def render(panels, prefix):
                     ha="center", fontsize=9, color="#656b75")
     fig.text(.03, .065, "Task C labels: Source-guided review by the implementation assistant; not blind or independent human evaluation.",
              fontsize=10, color="#4b5563")
-    fig.text(.03, .035, "No pooled score, cross-panel significance test or winner selection. LME / Mem2Act and final project costs remain open.",
+    fig.text(.03, .035, "No pooled score, cross-panel significance test or winner selection. LME is closed; Mem2Act and final project costs remain open.",
              fontsize=10, color="#4b5563")
     fig.savefig(prefix.with_suffix(".png"), dpi=180)
     fig.savefig(prefix.with_suffix(".pdf"))

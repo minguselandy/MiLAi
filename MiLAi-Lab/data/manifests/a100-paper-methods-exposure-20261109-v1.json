@@ -1,0 +1,191 @@
+{
+  "passed": true,
+  "status": "PAPER_METHODS_EXECUTION_LAYERS_AND13_COHORT_EXPOSURE_ROWS_BOUND_TO_EXISTING_ARTIFACTS_MEM2ACT_PENDING",
+  "timestamp_utc": "2026-11-09T13:33:45.557600+00:00",
+  "study_rows": [
+    {
+      "study": "P0",
+      "unit": "合法TRAIN行/完整条件pair",
+      "independent_N_claim": "非科研来源N",
+      "planned_or_actual_size": "每精度512行、32更新",
+      "methods": "FP32/BF16短测",
+      "role": "性能/数值/导出诊断",
+      "exposure": "TRAIN；profile模型不进入正式初始化",
+      "closed_results": true
+    },
+    {
+      "study": "A-10k",
+      "unit": "原生query家族、其所有条件整体归属",
+      "independent_N_claim": "10000 query家族；非10000独立文档",
+      "planned_or_actual_size": "每臂39982条件＋4886已知操作replay",
+      "methods": "legacy/native-priority",
+      "role": "TRAIN组成处理",
+      "exposure": "共享语料/原生标签与unknown保持",
+      "closed_results": true
+    },
+    {
+      "study": "A新128",
+      "unit": "query家族",
+      "independent_N_claim": "128 DEVELOPMENT query家族",
+      "planned_or_actual_size": "每模型8744矩阵格、三模型26232保存首输出",
+      "methods": "初始/A0/A1",
+      "role": "条件诊断/候选选择",
+      "exposure": "与TRAIN/旧32/保留64 query家族不交叉，语料可共享",
+      "closed_results": true
+    },
+    {
+      "study": "旧32任务",
+      "unit": "论文来源族",
+      "independent_N_claim": "32已曝光DEV来源，缺状态仍留分母",
+      "planned_or_actual_size": "条件readout/完整绑定研究面板",
+      "methods": "原始/初始化/A0/A1/B0/B1等已预选参考",
+      "role": "开发筛选",
+      "exposure": "给定任务＋实际packet，不当作新来源自主Host确认",
+      "closed_results": true
+    },
+    {
+      "study": "B64",
+      "unit": "新增TRAIN论文来源族/实际reached state",
+      "independent_N_claim": "64论文、128状态；384不是独立来源N",
+      "planned_or_actual_size": "384首绑定＝358新执行＋26原终止READ复用",
+      "methods": "argmax/baseline/coverage并集，共享baseline",
+      "role": "TRAIN监督支持比较",
+      "exposure": "B0/B1监督来自相同实际分支；非等采集槽位效率实验",
+      "closed_results": true
+    },
+    {
+      "study": "B修复/C",
+      "unit": "旧TRAIN实际状态/已获得材料池",
+      "independent_N_claim": "旧57状态及C8/7池相关，非新增独立来源",
+      "planned_or_actual_size": "旧57READ覆盖补齐，集合保守18池/47新readout",
+      "methods": "实际READ替代、fixed/rules/保存模型HANDOFF",
+      "role": "条件机制定位",
+      "exposure": "全部原首失败/unknown保持，不以工具成功代替整答",
+      "closed_results": true
+    },
+    {
+      "study": "自主DEV64",
+      "unit": "论文来源族",
+      "independent_N_claim": "64 DEVELOPMENT",
+      "planned_or_actual_size": "每方法64首轨迹；实际pre-first-Host快照配对",
+      "methods": "强简单/初始/B0/B1/E3与追加种子",
+      "role": "方法/checkpoint选择",
+      "exposure": "已曝光，不是独立确认",
+      "closed_results": true
+    },
+    {
+      "study": "D更新",
+      "unit": "来源演进链，2流程×5请求同簇",
+      "independent_N_claim": "旧8 DEV与新32既有TRAIN分列",
+      "planned_or_actual_size": "3方法×(80＋320)＝1200首轮，含baseline80复用",
+      "methods": "cache/一次增量简单路径/E3",
+      "role": "自主更新开发",
+      "exposure": "生成benchmark对话、实施者Source合同；非自然观察/40新确认",
+      "closed_results": true
+    },
+    {
+      "study": "D条件控制",
+      "unit": "固定已知View/旧输出的真实before",
+      "independent_N_claim": "known-View3族；旧输出7可识别族",
+      "planned_or_actual_size": "9与42首格；旧输出原48inventory中6不具备干预资格",
+      "methods": "3方法及额外旧输出Source检索开/关",
+      "role": "同信息条件机制",
+      "exposure": "共同Host历史保持，Host随机生成未配对；非51个独立用户",
+      "closed_results": true
+    },
+    {
+      "study": "冻结确认256",
+      "unit": "整篇论文来源族",
+      "independent_N_claim": "256 CONFIRMATION，不是768/1024",
+      "planned_or_actual_size": "4方法各256首轨迹；原生DEV185/TRAIN71另列",
+      "methods": "fixed-prefix/E3 seed0/1/2预选u32",
+      "role": "预冻结后的新研究来源确认",
+      "exposure": "固定E1初始化；共享容器字节/预训练与Source作者非盲限制保留",
+      "closed_results": true
+    },
+    {
+      "study": "保留64条件",
+      "unit": "共享语料上的query家族",
+      "independent_N_claim": "64 query家族，不增加文档/历史N",
+      "planned_or_actual_size": "127原行→4333格/模型，三模型12999首输出",
+      "methods": "初始/A0/A1固定保存模型",
+      "role": "预冻结原生条件次级评测",
+      "exposure": "4066known/267unjudged，0已判change对，语料并非未见",
+      "closed_results": true
+    },
+    {
+      "study": "LME",
+      "unit": "已曝光Small查询/共享历史",
+      "independent_N_claim": "451 query共享200历史；非451用户",
+      "planned_or_actual_size": "两方法各451，Reader后原生Judge",
+      "methods": "固定前缀/primary seed0",
+      "role": "外部给定query检索＋固定Reader复验",
+      "exposure": "Known development-exposed Small:451 public queries sharing200 histories across two Source pools; not451 independent users, unseen Small/Medium or original-paper model reproduction.",
+      "closed_results": true
+    },
+    {
+      "study": "Mem2Act",
+      "unit": "公有GivenTool任务/一个完整common bank",
+      "independent_N_claim": "400任务、341引用组件均非独立用户",
+      "planned_or_actual_size": "两方法各400；每例同完整429session/16843turn bank",
+      "methods": "固定策略/primary seed0，捕获业务intent不执行业务",
+      "role": "外部自主记忆调用与适配指标复验",
+      "exposure": "缺失引用/schema异常全保留；共享bank可跨引用检索",
+      "closed_results": false
+    }
+  ],
+  "source_manifests": [
+    "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/data/manifests/a100-plan-runtime-p0-audit-20261109-v1.json",
+    "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/data/manifests/a100-plan-A-audit-20261109-v1.json",
+    "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/data/manifests/a100-plan-B64-audit-20261109-v1.json",
+    "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/data/manifests/a100-plan-B-repair-C-audit-20261109-v1.json",
+    "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/data/manifests/a100-plan-D-audit-20261109-v1.json",
+    "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/data/manifests/a100-plan-allocation-freeze-audit-20261109-v1.json",
+    "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/data/manifests/a100-reserved64-native-results-20261107-v1.json",
+    "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/data/manifests/a100-lme-native-comparison-20261109-v1.json"
+  ],
+  "common_internal_Host": {
+    "model": "Qwen3.6-35B-A3B-FP8",
+    "enable_thinking": true,
+    "temperature": 1,
+    "max_output_tokens": 8192,
+    "shared_message_call_allowance": 24,
+    "control_steps": 8,
+    "reads": 4,
+    "material_return_cap": 2048
+  },
+  "common_internal_budgets": {
+    "shared_generation_admission_per_message": 24,
+    "control_steps_per_retrieval": 8,
+    "policy_reads": 4,
+    "additional_reads_per_message": 8,
+    "return_tokens": 2048,
+    "source_observation_tokens": 2048,
+    "source_range_tokens": 256,
+    "source_top_k": 16,
+    "semantic_top_k": 16,
+    "native_complete_input_max_len": 16384,
+    "head_max_len": 2048,
+    "Host_context_tokens": 65536,
+    "Host_output_tokens": 8192,
+    "maximum_shared_generation_admissions_for1024": 24576,
+    "admission_scope": "Maximum allocation, not actual HTTP. Includes local policy forwards and any dependency generation; READ/search CPU and Host/API usage measured separately. Original continuous ledger only, no reset/refund/second budget."
+  },
+  "inference": {
+    "device": "cuda:0",
+    "visible_device": "2",
+    "precision": "float32",
+    "threads": 4,
+    "reference_compile": false,
+    "MHA_fastpath": false,
+    "TF32": false
+  },
+  "pending_Mem2Act_metrics_not_filled": true,
+  "final_costs_not_claimed_complete": true,
+  "all_existing_labels_masks_metrics_models_sources_and_firsts_changed": false,
+  "new_model_tokenizer_GPU_HTTP_business_or_original_ledger_calls": 0,
+  "CPU_pending_actual_idle138": true,
+  "no_sha_validation": true,
+  "full763_line_completion_proven": false,
+  "goal_complete": false
+}

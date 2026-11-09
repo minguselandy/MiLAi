@@ -1,19 +1,19 @@
 # MiLAi A100：已关闭内部结果总览
 
 这张图汇集已关闭的内部任务与条件评测，供最终论文整合使用。完整计划仍在执行：
-LME/Mem2Act全量结果、全项目成本与最终逐项审计未关闭。
+LME两451及全部六个原生阶段已关闭；Mem2Act、全项目成本与最终逐项审计未关闭。
 
-![已关闭内部结果总览](figures/a100-closed-internal-overview-20261107-v1.png)
+![已关闭内部结果总览](figures/a100-closed-internal-overview-20261109-v2.png)
 
-[PDF](figures/a100-closed-internal-overview-20261107-v1.pdf) ·
-[数值与来源](../data/manifests/a100-closed-internal-overview-20261107-v1.json) ·
+[PDF](figures/a100-closed-internal-overview-20261109-v2.pdf) ·
+[数值与来源](../data/manifests/a100-closed-internal-overview-20261109-v2.json) ·
 [绘图入口](../tools/plot_a100_closed_internal_overview.py)
 
 | 面板 | 分母与指标 | 必须保留的解释范围 |
 |---|---|---|
 | A：自主Host开发 | 每方法64个来源族；完整任务C/64 | 全部已暴露DEVELOPMENT；展示原五方法及两套追加E3训练seed，不重新选择胜者。E3与B训练配方、u32/u33切点不同，不能当作单一训练因素对照。 |
 | B：冻结自主Host确认 | 每方法256个来源族；完整任务C/256 | seed0仍是预先固定的主参考，三个保存拟合全部展示。原生DEV185/TRAIN71与研究CONFIRMATION角色分开；三seed共享E1初始化，并非完整训练链独立复现。 |
-| C：更新轨迹开发 | 每方法32族×10请求；完整任务C/320 | 独立聚合单位是32族；首HTTP输入未全部逐dict相同，比较为条件描述性结果。E3本面板实际未接收View，不能将收益归因于View复用或增量组合。 |
+| C：更新轨迹开发 | 每方法32族×10请求；完整任务C/320 | 聚合单位是32族；三个方法对的首次Provider请求均64/64逐dict相同，后续工具参数与轨迹分化，Host生成随机性未配对。E3本面板实际未接收View，不能将收益归因于View复用或增量组合。 |
 | D：旧64保留条件query | 64 query族的原生宏均衡准确率 | 共享语料；不是64个新Source历史或Host成功率。4066 known格计分，267 unjudged保留，零已判定change对；两种constant均为50%。三固定模型与评分合同先冻结，未新拟合或重选。 |
 
 A/B/C的C标签来自本次实施助手按Source进行的实现作者审阅，没有独立人类、盲审或
@@ -27,6 +27,9 @@ A/B/C的C标签来自本次实施助手按Source进行的实现作者审阅，�
 [D更新综合](MILAI_A100_D_SOURCE_VIEW_OPERATIONS_20261107.md)与
 [旧64原生结果](MILAI_A100_RESERVED64_NATIVE_RESULTS_20261107.md)。本图不替代各报告的
 配对统计、材料充分性、原生F1、操作与成本结果，也不支持部署采用或普遍优势主张。
+
+本版只更正D首次Provider输入说明和LME关闭状态；四面板所有行、计数和百分比与旧v1逐字段相同，旧v1保留。
+D的实际绑定证据见[D18复核](MILAI_A100_PLAN_D_AUDIT_20261109.md)；初始请求相同不表示后续控制器状态或Host生成随机性配对。
 
 绘图入口从原逐项开发/确认/更新审阅记录重新统计C，并与既有关闭汇总核对；
 原生条件面板从已独立复算的原生分族评分读取，并核对64族平均和constant参考。
