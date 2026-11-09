@@ -111,6 +111,24 @@ GPU job区间与Host等待、本地NN、whole/parent、归档/存储和最后项
 当前所有prepared动作仍未派发。完整目标还需要fixed400闭合、primary400、两方法全审计/评分/归档，
 实际空闲后费用结算、最终论文图表与全763行完成审计；不从本文或预检passed推断它们已完成。
 
+## 全量指标闭合后的图表入口
+
+[绘图入口](../tools/plot_a100_mem2act_native_comparison.py)已完成结构预检，当前没有生成
+Mem2Act指标或图片。真正分支要求上述六个closure/Source/score门禁全通过，以及比较器的
+全800主分支结果；再从两套原400评分逐项复核计数、task-macro F1/JSON-BLEU1和配对增减。
+图中完成且严格匹配、任意Host状态的严格intent、原生执行状态和适配重叠指标分别展示，
+没有IID/组件独立性CI，也不冒充原论文TA或实际业务执行结果。
+
+预测费用面板只显示原生响应回调、已知tokens、实际返回NN决策/输入及全部ancestor的
+整child＋已测parent CPU。固定采集与主策略重放有不同记录开销；它们不是受控延迟对照，
+native/load已经包含在整child中。后续评分、归档、准备与完整项目成本仍在独立范围。
+
+原completed0和IncompleteChatResponse失败2实际均有3个vllm_response/usage条目，
+已知tokens分别9424、16831；Host捕获的delivered_model_requests条目却分别为3、2。
+因此图与新比较元数据明确标为“响应回调”，保留错误/partial回调；不能以捕获条目数漏计
+失败成本，也不能把共享generation准入数换名HTTP。冻结v2中旧decoded_provider_responses
+字段逐字保留，未因此改变观察器、首结果、Source或400门禁。这两个例子的核对不证明全400。
+
 - [核对与准备源码](../tools/prepare_a100_mem2act_closeout_handoff.py)
 - [未来全量比较器](../tools/analyze_a100_mem2act_native_comparison.py)
 - [完整计划当前证据](MILAI_A100_PLAN_CURRENT_EVIDENCE_20261109.md)

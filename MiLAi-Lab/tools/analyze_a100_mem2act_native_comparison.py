@@ -96,6 +96,9 @@ def summarize_method(protocol: dict, method: str) -> dict:
     successes = sum(row["completed_strict_call_match"] for row in credits.values())
     assert successes == scores["completed_strict_call_matches"]
     assert scores["completed_strict_call_match_rate"] == successes / 400
+    response_callbacks = sum(row["decoded_provider_responses"] for row in audit["records"])
+    known_tokens = sum(row["known_HTTP_tokens"] for row in audit["records"])
+    assert known_tokens == sum(ancestor["known_generation_tokens"] for ancestor in owners)
     return {
         "method": method,
         "positions": 400,
@@ -114,8 +117,16 @@ def summarize_method(protocol: dict, method: str) -> dict:
             row["native_status"] == "FAILED" and row["metrics"]["strict_call_match"]
             for row in credits.values()
         ),
-        "actual_HTTP": sum(row["decoded_provider_responses"] for row in audit["records"]),
-        "known_Host_tokens": sum(row["known_HTTP_tokens"] for row in audit["records"]),
+        "actual_HTTP": response_callbacks,
+        "provider_response_callbacks_recorded": response_callbacks,
+        "provider_response_callback_scope": (
+            "Native vllm_response events, including known error/partial responses. "
+            "Not delivered_model_requests or shared generation admissions; "
+            "an independent network transmission count is not established by this field. "
+            "The existing frozen audit field decoded_provider_responses is retained verbatim."
+        ),
+        "known_Host_tokens": known_tokens,
+        "known_tokens_equal_all_actual_paid_owner_ancestors": True,
         "actual_returned_NN_predictions": audit["returned_NN_predictions_audited"],
         "actual_returned_NN_input_tokens": sum(
             row["control"]["actual_returned_input_tokens"] for row in audit["records"]
