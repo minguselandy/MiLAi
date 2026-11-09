@@ -1,0 +1,42 @@
+{
+  "passed": true,
+  "status": "A_FIXED_ROW_EXPOSURE_CHANGED_PAIR_SUPPORT_AND_FIRST_TASK_OUTCOMES_FIGURE",
+  "timestamp_utc": "2026-11-09T08:43:19.909063+00:00",
+  "source_manifest": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/data/manifests/a100-plan-A-audit-20261109-v1.json",
+  "PNG": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/docs/figures/a100-plan-A-evidence-20261109-v1.png",
+  "PDF": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/docs/figures/a100-plan-A-evidence-20261109-v1.pdf",
+  "positive_rows_each": 20008,
+  "native_negative_rows": [
+    5,
+    9540
+  ],
+  "other_negative_rows": [
+    19969,
+    10434
+  ],
+  "stable_negative_pairs": [
+    9968,
+    433
+  ],
+  "stable_positive_pairs_each": 80,
+  "change_pairs_each": 6,
+  "task32_complete": [
+    14,
+    14,
+    15,
+    15
+  ],
+  "actual_PNG_size": [
+    3000,
+    1240
+  ],
+  "PNG_visual_inspection_pending": false,
+  "complete_project_or_causal_single_factor_effect_proven": false,
+  "new_model_HTTP_or_original_ledger_calls": 0,
+  "no_sha_validation": true,
+  "goal_complete": false,
+  "PNG_actual_visual_inspection_passed": true,
+  "PNG_visual_scope": "Viewed actual3000x1240 PNG; legend/footer overlap and right-note clipping corrected before publication.",
+  "PDF_same_matplotlib_figure_and_single_page_structure_verified": true,
+  "PDF_separately_rendered_or_visually_inspected": false
+}

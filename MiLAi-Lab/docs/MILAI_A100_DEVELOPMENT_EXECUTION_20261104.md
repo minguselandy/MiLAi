@@ -6,11 +6,38 @@
 历史 worktree、原始失败与用户文档保持原状。没有使用子代理、SHA/内容指纹校验、新服务、第二账本或远端写入。
 
 本轮机器可读入口为
-[progress](../data/manifests/a100-development-progress-20261109-v178.json)。
+[progress](../data/manifests/a100-development-progress-20261109-v179.json)。
 原始数据、冻结运行时、权重、命令、计时和实际输出位于本 worktree 的 ignored
 `artifacts/a100-development-20261104/`。本记录是现有报告体系的执行摘要。
 
-## v178 当前状态（2026-11-09，Asia/Shanghai）：原计划P0/运行时12项具体证据已核对，Mem2Act全400继续
+## v179 当前状态（2026-11-09，Asia/Shanghai）：A路线16项具体合同与首结果已核对，Mem2Act全400继续
+
+[A路线逐项审计与图](MILAI_A100_PLAN_A_AUDIT_20261109.md)已绑定原计划行号/实际数据；按原准备提交b3d7cbef源码重放
+683,408个矩阵cell和341,209关系，legacy/native-priority所有rows/pairs/slots/覆盖/缺mask清单逐字相等。原面板20,008正例、
+19,974负例/19,968条件、6个change pair端点、80个stable-positive保持；原生new_negatives实际选入/抽到5→9540，9535个
+同条件已知负例替换，完整stable-negative9968→433。因此不把组成处理解释为唯一改变native-negative数量。
+
+原混合47866行/44868已知目标，全部正例、7884raw replay与共同DEV保持；实际Native sampling权重含mixture0.8/0.2、scale1.25
+并逐槽相等，state ID/选项RNG一致；派生pair和训练分组允许变化。两臂真实同起点单卡BF16/full参数，44868恰遍历一次/
+2805更新/末窗口4行，输入tokens37502475/37318166、padding61754792/63310836，未伪称等tokens/FLOPs。
+真实CLI set按原E2保留：全部39982条件singleton与CE等价，操作replay沿原accepted-set，relative0，不以模板字面替代真实配方。
+
+原0/702/1403/2104/2805全曲线及2pp操作guard复算后仍各提名u2104；新增128族三模型26232完整输入/head/标签视图复算一致，
+原生change0、Source作者change2分别保留。62个实际before/全合法菜单/NN choice/完整binding与答案核对；31实际state按family
+身份连回32分母，missing-state不删除。任务首结果raw14/32、initial14/32、A0=A1=15/32，g0/l0/t32仅属已曝光条件readout。
+历史一次更好重跑的actual intervention/packet及除PID/计量快照外字段再次逐字核对，主比较保留较早E3结果和两次原费用。
+原不扩20k、不补A seeds、不运行J/部署采用的决定保持；无新训练或模型/HTTP/账本调用。
+
+PNG三面板3000×1240已实际查看，图例/页脚及右注释布局已修复；PDF同figure导出、单页结构核对，未另行渲染PDF。
+数据/评测审计5次失败（scale取数、padded字段来源、Unicode拆行、31/32身份映射、计量信封比较）计时保留，均按实际
+源码/字段/完整内容修正审计，未改历史Source/标签/模型/首结果。研究草案同步补入关系支持/预算交换及停止范围。
+
+当前Mem2Act父328495/子328497实际存活，native{'COMPLETED': 119, 'FAILED': 40, 'HOST_RUNNING': 1, 'NOT_RUN': 240}、active159；已见FAILED保留且新unknown0/0。
+全400退出/支付后，冻结v2完整Source/Store/Saver/SDK/Host审计与原finalizer仍需执行，之后primary400/适配评分/归档。
+运行期间不离线访问原始账本，本轮普通CPU审计/失败/报告/图表/v179writer等待实际idle138，不重计已付训练/原生费用。
+原763行其余逐项审核、Mem2Act400×2、最终全项目成本/论文/图表仍未完成；目标active，无真实阻塞。
+
+## v178 历史状态（2026-11-09，Asia/Shanghai）：原计划P0/运行时12项具体证据已核对，Mem2Act全400继续
 
 原763行计划已完整重读，当前UTF8全文与初审保存文本逐字一致。新增[P0运行时逐项审计](MILAI_A100_PLAN_RUNTIME_P0_AUDIT_20261109.md)
 将12项具体要求绑定到原文行与实际证据；不把该局部通过当成763行全目标完成。流式核对原47,866行，重现冻结训练器

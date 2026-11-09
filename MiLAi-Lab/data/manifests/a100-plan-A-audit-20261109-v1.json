@@ -1,0 +1,704 @@
+{
+  "passed": true,
+  "status": "ORIGINAL_PLAN_A_CONCRETE_DATA_FIT_EVALUATION_AND_STOP_OBLIGATIONS_AUDITED",
+  "timestamp_utc": "2026-11-09T08:37:36.216043+00:00",
+  "original_plan": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_2XA100_40GB_20261104.md",
+  "obligations": [
+    {
+      "id": "A-01",
+      "original_plan_lines": [
+        235,
+        237,
+        239
+      ],
+      "original_literal_lines": [
+        "位置：`datasets/conditional_exposure.py::condition_stratified_auxiliary_panel`、`tools/prepare_stratified_conditional_stage.py`。",
+        "建议为现有选择函数增加一个采样模式，并在 prepare 入口暴露拟议参数 `--negative-selection legacy|native-priority`，默认仍为 legacy。该参数当前不存在；实现后可以用同一代码生成两臂，原策略保留为对照，不通过修改全局默认后冒充已经重建原面板。",
+        "当前顺序先为每 query 选稳定负例 pair，再为尚缺标签的条件补行；稳定负例已经占满多数负例位置，原生 `new_negatives` 几乎未被采入。诊断统计已经实现，缺的是实际选择组成改变。[采样实现][R11]"
+      ],
+      "requirement": "实际新增显式negative-selection模式，默认legacy保留；按准备提交原代码重放两臂",
+      "assessment": "PROVED_IN_STATED_A_DEVELOPMENT_SCOPE"
+    },
+    {
+      "id": "A-02",
+      "original_plan_lines": [
+        202,
+        206,
+        245,
+        216
+      ],
+      "original_literal_lines": [
+        "- **TRAIN：**原生标签、真实操作分支与材料集合反馈用于拟合。正常在 TRAIN 中提名和执行，不会自动变成 DEV。",
+        "同一论文、会话或来源演进链作为整体分组。同一原生 query 及其全部条件变体也整体分组，不能跨 TRAIN/DEVELOPMENT/CONFIRMATION；共享语料上的 query 家族划分不等同于未见文档泛化。问题改写、不同状态、不同 seed 和多次 Host 生成不增加独立来源数。现有业务来源权限、版本与 known_evidence 引用语义保持不变。",
+        "1. 保持现有已知标签、unknown mask、10k 家族及条件身份。",
+        "语言改写可以增加表述鲁棒性，但不能冒充新的材料事实或新独立任务。时间、对象、来源要求的标签应来自原生标注或有依据的 TRAIN 比较；不把未标注条件补成正/负。"
+      ],
+      "requirement": "合法TRAIN、已知标签/未知mask、家族与条件身份及原始Source输入保持",
+      "assessment": "PROVED_IN_STATED_A_DEVELOPMENT_SCOPE"
+    },
+    {
+      "id": "A-03",
+      "original_plan_lines": [
+        241,
+        246,
+        247
+      ],
+      "original_literal_lines": [
+        "**容量约束必须明确：**19,974 个负例行对应 19,968 个实际条件，仅有 6 个超出“一条件一负例”的额外槽。不能既保留每条件原有 stable-negative 端点，又额外加入 9,540 个条件负例而声称总行数不变。",
+        "2. 保留全部 20,008 正例，以及 6 个已确认 TRAIN change pairs 的必要端点。",
+        "3. 保持每实际条件至少一条已知负例、19,974 总负例预算、家族/条件总权重。"
+      ],
+      "requirement": "保留原20,008正例和6个change pair端点；19,974负例/19,968条件/6额外槽",
+      "assessment": "PROVED_IN_STATED_A_DEVELOPMENT_SCOPE"
+    },
+    {
+      "id": "A-04",
+      "original_plan_lines": [
+        248,
+        249
+      ],
+      "original_literal_lines": [
+        "4. 主要通过同条件替换负例，最大化具备合法原生 instruction negative 的条件覆盖，目标是 9,540 个可覆盖条件；约束冲突时报告实际缺口。",
+        "5. 在余量中保留能完整形成的 stable-negative 关系，再补普通负例。"
+      ],
+      "requirement": "同实际条件替换9,535负例，原生new_negatives覆盖实测5→9,540",
+      "assessment": "PROVED_IN_STATED_A_DEVELOPMENT_SCOPE"
+    },
+    {
+      "id": "A-05",
+      "original_plan_lines": [
+        251,
+        253
+      ],
+      "original_literal_lines": [
+        "稳定负例端点与完整 stable pairs 数量可能变化，这是本次采样组成处理的一部分。不能宣称唯一变化是 native negative 数量、其他所有 pair 信号完全相同。不能为了达到目标加行、伪造另一侧标签或删除 unknown。",
+        "导出后继续使用实际保留端点形成 conditional pairs，沿既有同窗口分组；不把只有一侧已知的材料构造成条件翻转样本。"
+      ],
+      "requirement": "不把native覆盖作为唯一变化；稳定负例关系与实际派生pair分别记录",
+      "assessment": "PROVED_IN_STATED_A_DEVELOPMENT_SCOPE"
+    },
+    {
+      "id": "A-06",
+      "original_plan_lines": [
+        247,
+        260,
+        261,
+        584
+      ],
+      "original_literal_lines": [
+        "3. 保持每实际条件至少一条已知负例、19,974 总负例预算、家族/条件总权重。",
+        "| 正例、query 家族、来源权重 | 固定 | 固定 |",
+        "| 条件行＋操作 replay | 39,982＋4,886 | 相同总数，负例端点按上述规则替换 |",
+        "`MILAI_A_DATA` 必须是包含 train/dev 等既有格式的完整 mixed 面板，含对应 replay；`MILAI_A_PAIRS` 是该面板实际保留的 pair 文件。mixture、loss scale、初始化与 state projection 从原 E2 记录绑定；若其值不同于模板示例的学习率/长度/projection，两臂一并继承真实配置并写明。完整 44,868 行与 1 次遍历时才使用 2,805 更新。"
+      ],
+      "requirement": "同槽state ID、正例/replay/DEV内容、家族事件权重与选项RNG保持",
+      "assessment": "PROVED_IN_STATED_A_DEVELOPMENT_SCOPE"
+    },
+    {
+      "id": "A-07",
+      "original_plan_lines": [
+        259,
+        264,
+        271,
+        584
+      ],
+      "original_literal_lines": [
+        "| 初始化 | 同一 E2 原始起点，取已有 run.json 记录 | 相同 |",
+        "| 参数范围、精度、微批 | 相同 | 相同 |",
+        "两臂均用本轮同一种单卡运行时重跑，历史 FP32/双卡结果只作背景，不能直接与新 BF16 臂构成“只改数据”的因果对照。",
+        "`MILAI_A_DATA` 必须是包含 train/dev 等既有格式的完整 mixed 面板，含对应 replay；`MILAI_A_PAIRS` 是该面板实际保留的 pair 文件。mixture、loss scale、初始化与 state projection 从原 E2 记录绑定；若其值不同于模板示例的学习率/长度/projection，两臂一并继承真实配置并写明。完整 44,868 行与 1 次遍历时才使用 2,805 更新。"
+      ],
+      "requirement": "同真实E2原初始化、单卡/BF16/full参数、同超参，两臂均真实重训",
+      "assessment": "PROVED_IN_STATED_A_DEVELOPMENT_SCOPE"
+    },
+    {
+      "id": "A-08",
+      "original_plan_lines": [
+        262,
+        263,
+        269,
+        584
+      ],
+      "original_literal_lines": [
+        "| objective | 现有普通 unit soft-CE | 相同 |",
+        "| conditional relative weight | `0.0` | `0.0` |",
+        "原有相对项 0.25 已经试过。首轮保持其为 0，不将新采样与新目标同时混入。",
+        "`MILAI_A_DATA` 必须是包含 train/dev 等既有格式的完整 mixed 面板，含对应 replay；`MILAI_A_PAIRS` 是该面板实际保留的 pair 文件。mixture、loss scale、初始化与 state projection 从原 E2 记录绑定；若其值不同于模板示例的学习率/长度/projection，两臂一并继承真实配置并写明。完整 44,868 行与 1 次遍历时才使用 2,805 更新。"
+      ],
+      "requirement": "如实记录set flag；条件singleton与CE等价、操作replay原accepted-set及relative0保持",
+      "assessment": "PROVED_IN_STATED_A_DEVELOPMENT_SCOPE"
+    },
+    {
+      "id": "A-09",
+      "original_plan_lines": [
+        265,
+        266,
+        267,
+        427
+      ],
+      "original_literal_lines": [
+        "| 完整遍历 | 1 次，2,805 更新，末窗口 4 行 | 相同 |",
+        "| checkpoint | 0、702、1,403、2,104、2,805 | 相同 |",
+        "| 实际训练 tokens | 如实报告 | 尽量对齐长度，但不伪称等 FLOPs |",
+        "不能同时声称“每个样本等暴露”“总更新等量”“总 tokens 等量”“FLOPs 等量”，除非实际数据与计算确实满足。先报告真实值，不为制造表面匹配重复无信息样本。"
+      ],
+      "requirement": "每臂44,868真实draw/2,805更新/末4行，真实tokens/padding与预定切点完整记录",
+      "assessment": "PROVED_IN_STATED_A_DEVELOPMENT_SCOPE"
+    },
+    {
+      "id": "A-10",
+      "original_plan_lines": [
+        275,
+        277,
+        446
+      ],
+      "original_literal_lines": [
+        "报告条件家族宏平均、正/负分项、已知变化与稳定条件的联合正确率、实际负例抽样覆盖、完整操作行为以及真实 Host 小面板。旧 8 对继续作回归诊断，不承担确认。",
+        "建议增加 128 个新的 DEVELOPMENT 条件家族，目标覆盖已知变化与稳定关系；两侧标签必须有依据，达不到目标就报告实际数量，不凑标签。适用性变化与操作变化分别统计。",
+        "checkpoint 选择规则在运行前确定，至少保留 update0、强简单方法与候选；不按最终确认结果换 checkpoint 或选最好 seed。"
+      ],
+      "requirement": "完整曲线与2pp操作guard重算，u2104提名遵循预定开发规则，不以最终确认重选",
+      "assessment": "PROVED_IN_STATED_A_DEVELOPMENT_SCOPE"
+    },
+    {
+      "id": "A-11",
+      "original_plan_lines": [
+        275,
+        277,
+        459
+      ],
+      "original_literal_lines": [
+        "报告条件家族宏平均、正/负分项、已知变化与稳定条件的联合正确率、实际负例抽样覆盖、完整操作行为以及真实 Host 小面板。旧 8 对继续作回归诊断，不承担确认。",
+        "建议增加 128 个新的 DEVELOPMENT 条件家族，目标覆盖已知变化与稳定关系；两侧标签必须有依据，达不到目标就报告实际数量，不凑标签。适用性变化与操作变化分别统计。",
+        "`--host-readout` 使用原完整 Host post-tool frame；`--given-readout` 是显式任务＋packet 的条件评测，且有第 13.5 节的输入限制；二者不能混为自主 Host 结果。LME/Mem2Act 已曝光部分仅作开发或复验；冻结模型不能消除之前的数据暴露。"
+      ],
+      "requirement": "新128开发家族/原生与作者标签分开、26,232保存首输出完整输入/head核对",
+      "assessment": "PROVED_IN_STATED_A_DEVELOPMENT_SCOPE"
+    },
+    {
+      "id": "A-12",
+      "original_plan_lines": [
+        275,
+        277,
+        216
+      ],
+      "original_literal_lines": [
+        "报告条件家族宏平均、正/负分项、已知变化与稳定条件的联合正确率、实际负例抽样覆盖、完整操作行为以及真实 Host 小面板。旧 8 对继续作回归诊断，不承担确认。",
+        "建议增加 128 个新的 DEVELOPMENT 条件家族，目标覆盖已知变化与稳定关系；两侧标签必须有依据，达不到目标就报告实际数量，不凑标签。适用性变化与操作变化分别统计。",
+        "语言改写可以增加表述鲁棒性，但不能冒充新的材料事实或新独立任务。时间、对象、来源要求的标签应来自原生标注或有依据的 TRAIN 比较；不把未标注条件补成正/负。"
+      ],
+      "requirement": "旧8只作已曝光回归；新128原生change0/作者change2如实报告，不凑标签",
+      "assessment": "PROVED_IN_STATED_A_DEVELOPMENT_SCOPE"
+    },
+    {
+      "id": "A-13",
+      "original_plan_lines": [
+        275,
+        459,
+        645
+      ],
+      "original_literal_lines": [
+        "报告条件家族宏平均、正/负分项、已知变化与稳定条件的联合正确率、实际负例抽样覆盖、完整操作行为以及真实 Host 小面板。旧 8 对继续作回归诊断，不承担确认。",
+        "`--host-readout` 使用原完整 Host post-tool frame；`--given-readout` 是显式任务＋packet 的条件评测，且有第 13.5 节的输入限制；二者不能混为自主 Host 结果。LME/Mem2Act 已曝光部分仅作开发或复验；冻结模型不能消除之前的数据暴露。",
+        "只有原本采用显式 supplied request、`host_request_generated=false` 且 `known_evidence_refs` 为空的 capture，才可使用 `--given-readout`。自主 Host frame 缺失时保留不可读出状态，不自动切换实验协议；带既有证据的受控请求沿已有 controlled Host frame 配合 `--host-readout` 执行。两种 readout 互斥。准备步骤生成 selection/policies/captures，只有运行步骤才实际执行操作与 readout。共同 budget 及版本由现有捕获和配置承接。[给定请求 readout][R13]"
+      ],
+      "requirement": "两臂62完整before/全菜单/真实NN绑定与31实际state按family连回32分母",
+      "assessment": "PROVED_IN_STATED_A_DEVELOPMENT_SCOPE"
+    },
+    {
+      "id": "A-14",
+      "original_plan_lines": [
+        323,
+        489,
+        499
+      ],
+      "original_literal_lines": [
+        "沿用 family/event 总权重，避免一个状态因产生更多 pair 就获得更大总损失质量。保留失败首结果，不靠重试选择更好答案。",
+        "已有公开探针结果不因旧清单写 pending 就重复执行；原评测任务的失败首结果保留。Host/Reader/Judge 沿用现有来源和评分机制，不新增多层审核 Agent。",
+        "形式相同的比较遵循同一计量范围。共享 baseline 分支的采集成本只按实际执行计一次，并明确用于哪些面板；不把共享数据当免费或重复独立证据。"
+      ],
+      "requirement": "最早首结果保留；历史一次多余重跑和两次成本保留、较好后答不进主比较",
+      "assessment": "PROVED_IN_STATED_A_DEVELOPMENT_SCOPE"
+    },
+    {
+      "id": "A-15",
+      "original_plan_lines": [
+        275,
+        477,
+        481
+      ],
+      "original_literal_lines": [
+        "报告条件家族宏平均、正/负分项、已知变化与稳定条件的联合正确率、实际负例抽样覆盖、完整操作行为以及真实 Host 小面板。旧 8 对继续作回归诊断，不承担确认。",
+        "主指标为 Host 完整成功的来源族宏平均；配对报告 gains/losses、差值与家族 bootstrap 区间。持续更新同一来源的多轮请求按簇处理；训练 seeds 分别报告并可在族内聚合。",
+        "可将点估计 +5pp 设为有实际意义的目标，但它不是自动采用标准。声称存在优势需要区间支持正差异；声称至少 +5pp 则需相应下界支持。开发面板区间跨零既不证明胜出，也不证明零作用。"
+      ],
+      "requirement": "已曝光32族条件readout保留失败/缺state，A0/A1同15/32、配对g0/l0/t32",
+      "assessment": "PROVED_IN_STATED_A_DEVELOPMENT_SCOPE"
+    },
+    {
+      "id": "A-16",
+      "original_plan_lines": [
+        279,
+        516,
+        517,
+        421
+      ],
+      "original_literal_lines": [
+        "若只有辅助分类改善，A 作为条件表示修复保留；是否进入最终训练链取决于真实动作与 Host 效果。A 未形成可解释条件响应时，先检查输入和标签再决定扩 20k，不靠增加 epochs 重复同一问题。",
+        "- A 的负例覆盖改善但条件响应没有改善：保留结果，检查标签与输入，不直接扩 20k 或加新 loss。",
+        "- A 只改善辅助分类：不自动进入最终方法，继续 B 的真实动作主线。",
+        "J 只在 A 的条件能力有依据、B 的任务能力也有信号时进行。A 只改善辅助指标时，不自动把 A checkpoint 作为 B 起点。"
+      ],
+      "requirement": "无可解释任务响应增益，不扩20k/额外Aseed/J，不部署采用",
+      "assessment": "PROVED_IN_STATED_A_DEVELOPMENT_SCOPE"
+    }
+  ],
+  "data_audit": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/original-plan-A-sampling-training-v1.json",
+  "evaluation_audit": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/original-plan-A-evaluation-stop-v1.json",
+  "analyzers": [
+    "tools/audit_a100_plan_a_sampling_training.py",
+    "tools/audit_a100_plan_a_evaluation_stop.py"
+  ],
+  "data": {
+    "passed": true,
+    "status": "ORIGINAL_PLAN_A_SAMPLING_SOURCE_SLOT_WEIGHTS_AND_MATCHED_FULL_FITS_RECONCILED",
+    "original_data_preparation_commit": "b3d7cbef",
+    "original_sampler_source_path": "MiLAi-Lab/src/milai_lab/datasets/conditional_exposure.py",
+    "original_sampler_default_legacy": true,
+    "source_matrix": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/conditional-train-review32-instruction-v1/pair-admission10000-v1/matrix.jsonl",
+    "source_matrix_rows": 683408,
+    "source_label_counts": {
+      "True": 20020,
+      "False": 620573,
+      "None": 42815
+    },
+    "source_matrix_and_unknown_masks_not_modified": true,
+    "panels": {
+      "a0": {
+        "mode": "legacy",
+        "counts": {
+          "training_slots": 39982,
+          "distinct_cells": 39982,
+          "negative_replacements": 0,
+          "source_families": 10000,
+          "families": 10000,
+          "unrepresented_families": [],
+          "query_units": 10000,
+          "source_conditions": 19968,
+          "conditions": 19968,
+          "positive_slots": 20008,
+          "negative_slots": 19974,
+          "complete_known_pairs": 10054,
+          "comparison_kind": {
+            "stable": 10048,
+            "change": 6
+          },
+          "stable_positive_pairs": 80,
+          "stable_negative_pairs": 9968,
+          "label_provenance_slots": {
+            "known": 39927,
+            "source_author_reviewed": 55
+          }
+        },
+        "coverage": {
+          "available_known_units": 23029,
+          "selected_known_units": 5,
+          "eligible_conditions": 9540,
+          "represented_conditions": 5,
+          "scope": "Native new_negatives provenance with an already known negative label. This is not a semantic-hardness audit and does not label its other condition. Ordinary negative coverage does not imply this stratum is represented."
+        },
+        "missing_native_negative_conditions": 9535,
+        "selected_pairs_by_kind": {
+          "stable": 10048,
+          "change": 6
+        },
+        "all_rows_pairs_slots_missing_masks_and_coverage_equal_replayed_original_sampler": true
+      },
+      "a1": {
+        "mode": "native-priority",
+        "counts": {
+          "training_slots": 39982,
+          "distinct_cells": 39982,
+          "negative_replacements": 9535,
+          "source_families": 10000,
+          "families": 10000,
+          "unrepresented_families": [],
+          "query_units": 10000,
+          "source_conditions": 19968,
+          "conditions": 19968,
+          "positive_slots": 20008,
+          "negative_slots": 19974,
+          "complete_known_pairs": 519,
+          "comparison_kind": {
+            "stable": 513,
+            "change": 6
+          },
+          "stable_positive_pairs": 80,
+          "stable_negative_pairs": 433,
+          "label_provenance_slots": {
+            "known": 39927,
+            "source_author_reviewed": 55
+          }
+        },
+        "coverage": {
+          "available_known_units": 23029,
+          "selected_known_units": 9540,
+          "eligible_conditions": 9540,
+          "represented_conditions": 9540,
+          "scope": "Native new_negatives provenance with an already known negative label. This is not a semantic-hardness audit and does not label its other condition. Ordinary negative coverage does not imply this stratum is represented."
+        },
+        "missing_native_negative_conditions": 0,
+        "selected_pairs_by_kind": {
+          "stable": 513,
+          "change": 6
+        },
+        "all_rows_pairs_slots_missing_masks_and_coverage_equal_replayed_original_sampler": true
+      }
+    },
+    "all_prepared_rows_pairs_slots_and_coverage_equal_original_sampler_replay": true,
+    "mixed_raw_rows_each": 47866,
+    "mixed_known_rows_each": 44868,
+    "raw_unknown_replay_rows_retained": 2998,
+    "pure_conditional_slots": 39982,
+    "preserved_positive_rows": 20008,
+    "preserved_raw_replay_rows": 7884,
+    "preserved_known_replay_rows": 4886,
+    "actual_negative_replacements_within_same_condition": 9535,
+    "negative_budget": 19974,
+    "actual_conditions": 19968,
+    "negative_extra_slots": 6,
+    "all_required6_change_pairs_and_their_endpoints_unchanged": true,
+    "stable_positive_pairs_each": 80,
+    "stable_negative_pairs": {
+      "a0": 9968,
+      "a1": 433
+    },
+    "all_model_input_and_gold_provenance_literal_equal_selected_source_rows": true,
+    "all_common_dev_bytes_equal": true,
+    "per_slot_loss_weights_recomputed_and_equal_actual_native_sampling": true,
+    "all_actual_option_orders_equal": true,
+    "mixture": {
+      "conditional": 0.8,
+      "operation": 0.2
+    },
+    "mixture_loss_scale": 1.25,
+    "actual_component_loss_masses": {
+      "conditional": 1.0,
+      "operation": 0.25
+    },
+    "actual_training_schedules_equal": false,
+    "schedule_scope": "Derived pair relations and optimizer grouping can change as declared; all actual rows/draw budgets, per-slot weights, state IDs and option RNG are preserved. Do not claim only native-negative count changed.",
+    "original_E2_native_run": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e2-fitting-v1/ordinary-unit/run.json",
+    "actual_objective_flag": "set",
+    "CE_equivalence_scope": "All39982 conditional targets are singleton binary labels, so set likelihood equals ordinary CE there. Original operation replay keeps its accepted-set objective. Actual set flag is reported, not renamed soft-ce.",
+    "conditional_singleton_targets_verified": 39982,
+    "arms": {
+      "a0": {
+        "native_run": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/a0-seed0/run.json",
+        "native_compute": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/a0-seed0/compute.json",
+        "actual_driver": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/a0-seed0-driver.json",
+        "physical_GPU": "2",
+        "precision": "bf16",
+        "parameter_dtype": "float32",
+        "optimizer_updates": 2805,
+        "actual_draws": 44868,
+        "actual_input_tokens": 37502475,
+        "actual_padded_tokens": 61754792,
+        "last_window_rows": 4,
+        "actual_padded_tokens_source": "Native run.json and sum of every update-profile row; not inferred from compute.json.",
+        "native_CPU_seconds": 11110.194332096999,
+        "native_wall_seconds": 8434.87831990514,
+        "native_GPU_interval_hours": 2.343021755529205,
+        "native_derived_condition_pairs": 10054,
+        "exposed_native_negative_units": 5,
+        "sampler_counts": {
+          "training_slots": 39982,
+          "distinct_cells": 39982,
+          "negative_replacements": 0,
+          "source_families": 10000,
+          "families": 10000,
+          "unrepresented_families": [],
+          "query_units": 10000,
+          "source_conditions": 19968,
+          "conditions": 19968,
+          "positive_slots": 20008,
+          "negative_slots": 19974,
+          "complete_known_pairs": 10054,
+          "comparison_kind": {
+            "stable": 10048,
+            "change": 6
+          },
+          "stable_positive_pairs": 80,
+          "stable_negative_pairs": 9968,
+          "label_provenance_slots": {
+            "known": 39927,
+            "source_author_reviewed": 55
+          }
+        },
+        "all44868_rows_exposed_once": true,
+        "all_per_slot_actual_loss_weights_equal": true,
+        "mixture": {
+          "conditional": 0.8,
+          "operation": 0.2
+        },
+        "mixture_loss_scale": 1.25
+      },
+      "a1": {
+        "native_run": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/a1-seed0/run.json",
+        "native_compute": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/a1-seed0/compute.json",
+        "actual_driver": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/a1-seed0-driver.json",
+        "physical_GPU": "3",
+        "precision": "bf16",
+        "parameter_dtype": "float32",
+        "optimizer_updates": 2805,
+        "actual_draws": 44868,
+        "actual_input_tokens": 37318166,
+        "actual_padded_tokens": 63310836,
+        "last_window_rows": 4,
+        "actual_padded_tokens_source": "Native run.json and sum of every update-profile row; not inferred from compute.json.",
+        "native_CPU_seconds": 11333.849931993002,
+        "native_wall_seconds": 8571.690696814097,
+        "native_GPU_interval_hours": 2.3810251935594717,
+        "native_derived_condition_pairs": 519,
+        "exposed_native_negative_units": 9540,
+        "sampler_counts": {
+          "training_slots": 39982,
+          "distinct_cells": 39982,
+          "negative_replacements": 9535,
+          "source_families": 10000,
+          "families": 10000,
+          "unrepresented_families": [],
+          "query_units": 10000,
+          "source_conditions": 19968,
+          "conditions": 19968,
+          "positive_slots": 20008,
+          "negative_slots": 19974,
+          "complete_known_pairs": 519,
+          "comparison_kind": {
+            "stable": 513,
+            "change": 6
+          },
+          "stable_positive_pairs": 80,
+          "stable_negative_pairs": 433,
+          "label_provenance_slots": {
+            "known": 39927,
+            "source_author_reviewed": 55
+          }
+        },
+        "all44868_rows_exposed_once": true,
+        "all_per_slot_actual_loss_weights_equal": true,
+        "mixture": {
+          "conditional": 0.8,
+          "operation": 0.2
+        },
+        "mixture_loss_scale": 1.25
+      }
+    },
+    "new_training_model_tokenizer_HTTP_business_or_original_ledger_calls": 0,
+    "full_A_evaluation_and_stop_decisions_audited_here": false,
+    "full763_line_completion_proven": false,
+    "no_sha_validation": true,
+    "goal_complete": false
+  },
+  "evaluation": {
+    "passed": true,
+    "status": "ORIGINAL_PLAN_A_CURVES_SAVED_FULL_INPUTS_LABEL_VIEWS_EARLIEST_TASK_OUTCOMES_AND_STOP_RULES_RECONCILED",
+    "curves": {
+      "a0": {
+        "points": [
+          {
+            "update": 0,
+            "family_macro_balanced_accuracy": 0.7525631145748596,
+            "operation_family_macro_acceptance": 0.7788507060058854
+          },
+          {
+            "update": 702,
+            "family_macro_balanced_accuracy": 0.8903893883951046,
+            "operation_family_macro_acceptance": 0.8019430443614707
+          },
+          {
+            "update": 1403,
+            "family_macro_balanced_accuracy": 0.8851068830931809,
+            "operation_family_macro_acceptance": 0.798606240793155
+          },
+          {
+            "update": 2104,
+            "family_macro_balanced_accuracy": 0.8950394644591783,
+            "operation_family_macro_acceptance": 0.7937536157544776
+          },
+          {
+            "update": 2805,
+            "family_macro_balanced_accuracy": 0.8859594530454965,
+            "operation_family_macro_acceptance": 0.8036419641860933
+          }
+        ],
+        "nominee": {
+          "update": 2104,
+          "family_macro_balanced_accuracy": 0.8950394644591783,
+          "operation_family_macro_acceptance": 0.7937536157544776
+        },
+        "predeclared2pp_operation_guard_passed": true
+      },
+      "a1": {
+        "points": [
+          {
+            "update": 0,
+            "family_macro_balanced_accuracy": 0.7525631145748596,
+            "operation_family_macro_acceptance": 0.7788507060058854
+          },
+          {
+            "update": 702,
+            "family_macro_balanced_accuracy": 0.820530222685641,
+            "operation_family_macro_acceptance": 0.801919052380561
+          },
+          {
+            "update": 1403,
+            "family_macro_balanced_accuracy": 0.8285997928062341,
+            "operation_family_macro_acceptance": 0.7829874248079289
+          },
+          {
+            "update": 2104,
+            "family_macro_balanced_accuracy": 0.8458115438172463,
+            "operation_family_macro_acceptance": 0.7994134918142387
+          },
+          {
+            "update": 2805,
+            "family_macro_balanced_accuracy": 0.824375907014648,
+            "operation_family_macro_acceptance": 0.8005186734306295
+          }
+        ],
+        "nominee": {
+          "update": 2104,
+          "family_macro_balanced_accuracy": 0.8458115438172463,
+          "operation_family_macro_acceptance": 0.7994134918142387
+        },
+        "predeclared2pp_operation_guard_passed": true
+      }
+    },
+    "new_development_families": 128,
+    "native_matrix_cells_each": 8744,
+    "total_saved_new128_first_predictions_verified": 26232,
+    "entire_saved_model_inputs_and_finite_argmax_heads_equal": true,
+    "native_known_gold_and_source_author_supplements_separate": true,
+    "supplemental_reviewed_cells": 16,
+    "supplemental_known_labels": 12,
+    "no_overlap_with_A_TRAIN_old32_or_reserved64_query_families": true,
+    "new128_native_change_pairs": 0,
+    "new128_source_author_change_pairs": 2,
+    "predeclared_curve_nominees_each": 2104,
+    "checkpoint_source_selection": "Original frozen dev-family balanced metric, earliest tie,2pp operation guard; not selected by final confirmation or best seed.",
+    "saved_prediction_reuse_across_label_views": true,
+    "old8_scope": "Exposed Source-author-supported regression diagnostics, not new confirmation.",
+    "actual_full_before_all_bindings_NN_choice_reconciled": 62,
+    "actual_task_binding_origin_counts": {
+      "closed_matched_branch": 50,
+      "closed_a_task11_branch": 10,
+      "closed_raw_collection": 2
+    },
+    "reused_empty_parameter_HANDOFF_raw_outcome_explicitly_verified": true,
+    "task32_manual_Source_review_complete_counts": {
+      "raw_delivery": 14,
+      "initial": 14,
+      "a0": 15,
+      "a1": 15
+    },
+    "task32_A1_minus_A0": {
+      "gains": 0,
+      "losses": 0,
+      "ties": 32,
+      "difference": 0.0,
+      "exposed_family_bootstrap_interval": [
+        0.0,
+        0.0
+      ]
+    },
+    "raw_task_denominator32_missing_state_retained": true,
+    "historical_one_unnecessary_repeat_retained_and_excluded_from_primary": true,
+    "historical_repeat_entire_actual_intervention_and_return_packet_reread_literal_equal": true,
+    "historical_repeat_only_process_identity_and_distinct_accounting_snapshots_differ": true,
+    "compact_actual_state_indices_joined_to_full32_panel_by_family_identity": true,
+    "current_task_labels_reannotated_or_claimed_independent_human": false,
+    "A20k_extra_A_seeds_J_or_deployment_adoption_triggered": false,
+    "training_from_DEV_or_TEST": false,
+    "scope": "Source/data and numerical reconciliation of actual saved first outputs; conditional readouts and author labels remain development exposure, not autonomous Host, unseen corpus, independent human scoring or a proof of zero population effect. Current Mem2Act unaffected.",
+    "new_model_tokenizer_GPU_HTTP_business_or_original_ledger_calls": 0,
+    "no_sha_validation": true,
+    "full763_line_completion_proven": false,
+    "goal_complete": false
+  },
+  "saved_model_summary": {
+    "initial": {
+      "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e1-fitting-v1/delivery-only/checkpoints/update-16",
+      "actual_saved_predictions": 8744,
+      "native_family_macro_balanced_accuracy": 0.6617980445997222,
+      "native_change_pairs": 0,
+      "Source_author_change_pairs": 2,
+      "Source_author_change_joint_accuracy": 0.5,
+      "old8_supported_change_summary": {
+        "pairs": 8,
+        "query_units_with_judged_pairs": 5,
+        "families_with_judged_pairs": 5,
+        "family_macro_query_pair_joint_accuracy": 0.8666666666666666,
+        "prediction_change_rate": 0.75
+      }
+    },
+    "a0": {
+      "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/a0-seed0/checkpoints/update-2104",
+      "actual_saved_predictions": 8744,
+      "native_family_macro_balanced_accuracy": 0.8837658263643736,
+      "native_change_pairs": 0,
+      "Source_author_change_pairs": 2,
+      "Source_author_change_joint_accuracy": 0.0,
+      "old8_supported_change_summary": {
+        "pairs": 8,
+        "query_units_with_judged_pairs": 5,
+        "families_with_judged_pairs": 5,
+        "family_macro_query_pair_joint_accuracy": 0.1,
+        "prediction_change_rate": 0.125
+      }
+    },
+    "a1": {
+      "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/a1-seed0/checkpoints/update-2104",
+      "actual_saved_predictions": 8744,
+      "native_family_macro_balanced_accuracy": 0.8388008319612196,
+      "native_change_pairs": 0,
+      "Source_author_change_pairs": 2,
+      "Source_author_change_joint_accuracy": 0.0,
+      "old8_supported_change_summary": {
+        "pairs": 8,
+        "query_units_with_judged_pairs": 5,
+        "families_with_judged_pairs": 5,
+        "family_macro_query_pair_joint_accuracy": 0.4,
+        "prediction_change_rate": 0.625
+      }
+    }
+  },
+  "failure_reflection": [
+    {
+      "timer": "audit-original-plan-A-sampling-training-v1.time.txt",
+      "cause": "Auditor omitted actual common mixture_loss_scale1.25; use original run and apply it to recorded slot weights, not modify the data."
+    },
+    {
+      "timer": "audit-original-plan-A-sampling-training-v2.time.txt",
+      "cause": "padded tokens are stored in run.json and every update-profile row, not compute.json. Read actual source field, never fill0."
+    },
+    {
+      "timer": "audit-original-plan-A-evaluation-stop-v1.time.txt",
+      "cause": "Unicode splitlines split valid JSON string separators. Use original file-line iteration; source text unchanged."
+    },
+    {
+      "timer": "audit-original-plan-A-evaluation-stop-v2.time.txt",
+      "cause": "31 actual state indices differ from full32 panel due missing state. Join by literal family identity; no row dropped or shifted by hand."
+    },
+    {
+      "timer": "audit-original-plan-A-evaluation-stop-v3.time.txt",
+      "cause": "Entire replay envelope includes different PID and distinct budget snapshots; actual intervention, packet and every other result field are literal equal. Keep accounting separate rather than fake identical costs."
+    }
+  ],
+  "new_training_model_tokenizer_HTTP_business_or_original_ledger_calls": 0,
+  "original_models_sources_labels_or_firsts_changed": false,
+  "full763_line_completion_proven": false,
+  "audit_report_CPU_pending_actual_idle138": true,
+  "no_sha_validation": true,
+  "goal_complete": false
+}
