@@ -6,11 +6,40 @@
 历史 worktree、原始失败与用户文档保持原状。没有使用子代理、SHA/内容指纹校验、新服务、第二账本或远端写入。
 
 本轮机器可读入口为
-[progress](../data/manifests/a100-development-progress-20261109-v179.json)。
+[progress](../data/manifests/a100-development-progress-20261109-v180.json)。
 原始数据、冻结运行时、权重、命令、计时和实际输出位于本 worktree 的 ignored
 `artifacts/a100-development-20261104/`。本记录是现有报告体系的执行摘要。
 
-## v179 当前状态（2026-11-09，Asia/Shanghai）：A路线16项具体合同与首结果已核对，Mem2Act全400继续
+## v180 当前状态（2026-11-09，Asia/Shanghai）：B64共享分支/监督/拟合/首任务16项证据关闭，Mem2Act全400继续
+
+[B64逐项合同与三面板图](MILAI_A100_PLAN_B64_AUDIT_20261109.md)已发布，16项原文行/实际证据绑定，不把此局部范围当作
+早期功能8/57修复/C/D或全763行完成。64TRAIN家族/128实际state，每组3个完整互异合法绑定；原NN完整before/全菜单/
+finite argmax、有界共同续行、真实前缀字节、1613份原文role/origin/range和同state除actualpacket外完整Reader wire逐项核对。
+实际384首结果=358新执行+26原终止单槽READ复用，373Reader完成/11失败；128baseline只执行一次用于两监督面板。
+
+原Source材料等级在成本之前导出B0 left5/right4/tie117/unknown2、B1 left2/right21/tie103/unknown2，全部128新row按原编译器
+逐字复现。全部256新answer目标在已关闭拟合中仍unknown；旧400原样（200既有feedback＋200操作replay），总528为328反馈+
+200replay，实际质量权重1/.25及全部Native sampling一致。逐窗口/逐更新及两pass option-order核对每slot恰抽2次，共1056draw/
+66更新/5756552输入tokens/6878474padding，两臂模型可见state/questions/gold/metadata完全相同，只有比较监督不同。
+普通B路径没有条件A式training-windows副本，不造记录；实际冻结循环消费原training-plan，行数/tokens/目标计数交叉一致。
+
+0/17/33/66原始DEV860/feedbackDEV64预测和完整diagnostics重算，924个初始完整logits/token序列一致，预定纯delivery+2ppguard
+仍提名u33。3保存模型各31state共93个完整输入/NN绑定与最早32族答案核对，missing-state保留；B0=B1旧32为13/32，
+raw/initial14/32。新64自主Host为fixed25/initial25/B033/B132/E3ref40；B1−B0 g12/l13/t39，−1.5625pp/族区间[-17.1875,+14.0625]pp。
+
+384首答案后审C107/I199/F11/Q60/W1/U6，材料tie内出现23/25个答案方向，literal相同packet比较4/13组且可有首答案差异；
+已知材料/答案方向反转0，27个C在粗材料S以下。完整binding不同仍属不同原分支，不挑最好答案、不把后审标签回填已关训练。
+原不扩192/256、额外Bseed、目标重训或部署采用决定保持。Source作者仍为实施助手/非独立盲审；开发不等确认。
+
+实际3000×1240 PNG已查看并修复页脚重叠，图中实际材料监督/仅后审答案/自主开发分开，PDF同图单页结构核对、未另行渲染。
+两次审计失败与模型/状态计数字段更正计时保留，均为审计取数/比较层修正，不改Source/原始训练/首结果。研究草案同步更新。
+
+当前Mem2Act父328495/子328497实际存活，native{'COMPLETED': 149, 'FAILED': 51, 'HOST_RUNNING': 1, 'NOT_RUN': 199}、active200；已见FAILED原样保留，newunknown0/0。
+全400owner退出/支付后仍需冻结v2完整Source/Store/Saver/SDK/Host审计及原定稿，再运行primary400/两方法评分归档。
+禁止运行期离线访问原始账本；post137全部普通CPU/失败/报告/图表/v180writer待实际idle138，不重计已付原生/训练费用。
+原763行其余具体要求、Mem2Act400×2、最终全项目成本/论文/图表与完成审计仍未完成，目标active、无真实阻塞。
+
+## v179 历史状态（2026-11-09，Asia/Shanghai）：A路线16项具体合同与首结果已核对，Mem2Act全400继续
 
 [A路线逐项审计与图](MILAI_A100_PLAN_A_AUDIT_20261109.md)已绑定原计划行号/实际数据；按原准备提交b3d7cbef源码重放
 683,408个矩阵cell和341,209关系，legacy/native-priority所有rows/pairs/slots/覆盖/缺mask清单逐字相等。原面板20,008正例、

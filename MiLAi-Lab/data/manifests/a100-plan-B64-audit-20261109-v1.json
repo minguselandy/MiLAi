@@ -1,0 +1,735 @@
+{
+  "passed": true,
+  "status": "B64_CONCRETE_SHARED_BRANCH_SUPERVISION_MATCHED_FIT_AND_STOP_OBLIGATIONS_AUDITED",
+  "timestamp_utc": "2026-11-09T09:41:26.087731+00:00",
+  "original_plan": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_2XA100_40GB_20261104.md",
+  "obligations": [
+    {
+      "id": "B64-01",
+      "original_plan_lines": [
+        223,
+        285,
+        287,
+        303
+      ],
+      "original_literal_lines": [
+        "| B-64 | 新增 64 个 TRAIN 来源族，每族先 2 状态 | 最多 128 状态、每状态并集至多 3 分支，即 384 分支 | 第一批可训练参数/集合反馈 |",
+        "复用 `feedback_choices.py::decision_actions`、`prepare_view_feedback_branches.py --bindings` 和 reached wrapper。当前 wrapper 的 `branch_alternative` 主要为 `fixed_context / acquired_raw_delivery`；增加一项小型覆盖策略，从实际菜单中选欠覆盖的合法参数类型。",
+        "首轮候选层可包括 observed-Source fragment/full READ、另一必要范围、互补来源、已有 HANDOFF 子集。按固定 seed、真实可见字段和覆盖统计选择；不看 gold、不按题目 ID 或已知错误措辞选规则。",
+        "核心配对面板的资格在执行前确定：argmax、baseline、alternative 三个完整绑定互异。其余保留覆盖 inventory，可用于另行探索，但不伪造 self-pair 或 tie。当前 reached compiler 要求 2–3 个真实 origins，不能直接将只有一个 origin 的状态当有效比较。"
+      ],
+      "requirement": "64合法TRAIN家族/128实际state、3个完整互异合法绑定及执行前资格",
+      "assessment": "PROVED_IN_STATED_B64_SCOPE"
+    },
+    {
+      "id": "B64-02",
+      "original_plan_lines": [
+        295,
+        309,
+        311
+      ],
+      "original_literal_lines": [
+        "在固定 reached state、before、请求、完整菜单、collector 版本和续行规则下，执行：argmax、简单 baseline、覆盖 alternative 的去重并集。现有上限为三个。",
+        "使用现有 first-action intervention，首步按实际菜单绑定执行；后续使用相同策略规则与剩余预算，允许动作随读到的新证据变化。首轮可继承现有 fixed_context、reads4、首步后最多两个普通控制决策再 HANDOFF 的机制协议。",
+        "“相同后续策略”不是硬套相同动作串。短程结果要在自主 Host 中另行检验，不能直接外推长程收益。"
+      ],
+      "requirement": "同真实before/请求/完整菜单、前缀不重做、有界共同续行实际核对",
+      "assessment": "PROVED_IN_STATED_B64_SCOPE"
+    },
+    {
+      "id": "B64-03",
+      "original_plan_lines": [
+        287,
+        295,
+        299
+      ],
+      "original_literal_lines": [
+        "首轮候选层可包括 observed-Source fragment/full READ、另一必要范围、互补来源、已有 HANDOFF 子集。按固定 seed、真实可见字段和覆盖统计选择；不看 gold、不按题目 ID 或已知错误措辞选规则。",
+        "在固定 reached state、before、请求、完整菜单、collector 版本和续行规则下，执行：argmax、简单 baseline、覆盖 alternative 的去重并集。现有上限为三个。",
+        "- 两面板的模型输入仍保留同一完整菜单，只改变实际比较监督。"
+      ],
+      "requirement": "128完整NN输入/head/argmax与baseline规则重算，不以gold构造候选",
+      "assessment": "PROVED_IN_STATED_B64_SCOPE"
+    },
+    {
+      "id": "B64-04",
+      "original_plan_lines": [
+        297,
+        298,
+        299
+      ],
+      "original_literal_lines": [
+        "- B0 面板只编译 argmax↔baseline。",
+        "- B1 面板只编译 alternative↔baseline。",
+        "- 两面板的模型输入仍保留同一完整菜单，只改变实际比较监督。"
+      ],
+      "requirement": "B0 argmax↔baseline、B1 alternative↔同baseline，模型输入全菜单相同",
+      "assessment": "PROVED_IN_STATED_B64_SCOPE"
+    },
+    {
+      "id": "B64-05",
+      "original_plan_lines": [
+        227,
+        300,
+        301,
+        499
+      ],
+      "original_literal_lines": [
+        "这些分支上限不含取得 reached states 的前缀采集成本，也不等于模型/API 调用数。三个分支可形成多个 pair，但它们共享状态与执行结果，不是多个独立实验。",
+        "- baseline 的实际结果可共享，总采集成本只记实际发生的一次，并明确共享范围；不能把两个面板当两个独立数据集来源。",
+        "- 三分支采集不是两个原有分支的等成本替代；该实验回答监督支持范围是否有效，不直接证明采集效率优势。",
+        "形式相同的比较遵循同一计量范围。共享 baseline 分支的采集成本只按实际执行计一次，并明确用于哪些面板；不把共享数据当免费或重复独立证据。"
+      ],
+      "requirement": "384实际分支=358新执行+26原终止READ复用，128baseline只执行一次、前缀成本不免费",
+      "assessment": "PROVED_IN_STATED_B64_SCOPE"
+    },
+    {
+      "id": "B64-06",
+      "original_plan_lines": [
+        317,
+        318,
+        319,
+        320,
+        321,
+        323
+      ],
+      "original_literal_lines": [
+        "| 实际质量左/右更好 | 保留成本比较之前的方向标签 | 计各自真实结果 |",
+        "| 两侧质量相同 | 保留 tie，不自动视为成功 | 各自可能都成功或都失败 |",
+        "| 未执行或无法判定 | unknown，不标成负例 | 未完成按既定任务协议保留分母 |",
+        "| Reader 执行失败 | 沿当前协议，answer 比较保持 unknown；delivery 可独立已知 | Host 完整成功分母中保留失败 |",
+        "| 质量相同但成本不同 | 质量仍是 tie；成本另记 | 质量与全成本并列报告 |",
+        "沿用 family/event 总权重，避免一个状态因产生更多 pair 就获得更大总损失质量。保留失败首结果，不靠重试选择更好答案。"
+      ],
+      "requirement": "Source作者材料方向/tie/unknown在资源之前，失败首结果和答案unknown保留",
+      "assessment": "PROVED_IN_STATED_B64_SCOPE"
+    },
+    {
+      "id": "B64-07",
+      "original_plan_lines": [
+        303,
+        323,
+        350
+      ],
+      "original_literal_lines": [
+        "核心配对面板的资格在执行前确定：argmax、baseline、alternative 三个完整绑定互异。其余保留覆盖 inventory，可用于另行探索，但不伪造 self-pair 或 tie。当前 reached compiler 要求 2–3 个真实 origins，不能直接将只有一个 origin 的状态当有效比较。",
+        "沿用 family/event 总权重，避免一个状态因产生更多 pair 就获得更大总损失质量。保留失败首结果，不靠重试选择更好答案。",
+        "普通 pair sampler 的更新预算可按 `U=ceil(E×N_slots/16)` 规划，实际末尾可能多抽至多 15 行，必须记录真实 draws；不能声称精确 E 次遍历。两臂用相同的 slot 预算；重复旧行只作匹配 replay，不记新增独立信息。"
+      ],
+      "requirement": "128新反馈逐字重编译、旧400原样、family/event真实权重与未知状态保留",
+      "assessment": "PROVED_IN_STATED_B64_SCOPE"
+    },
+    {
+      "id": "B64-08",
+      "original_plan_lines": [
+        340,
+        342,
+        588,
+        610
+      ],
+      "original_literal_lines": [
+        "两臂共用同一合法初始化、相同 replay、相同训练目标与预算。建议机制首轮继承 E3 的纯 delivery 监督设置，以区分新增监督支持的作用；实际 answer/Host 结果仍是候选选择的主要依据，不能因 delivery 更高就采用。",
+        "具体目标参数从 E3 已保存 run.json 读取并列入新 run，不能只按脚本默认值猜测。基础候选可用当前保留的 E1-delivery-only-u16；E3 aggregate-u32 作为已知研究候选另报，不默认为已采用部署模型。",
+        "同样在 P0 完成后使用；纯 delivery 监督的具体质量模式、平滑和 replay 目标应从原 E3 记录绑定，不能把下面变量当已知固定值。",
+        "现有 quality modes 是 `quality-direction / quality-tie / quality-cost`，还存在独立的 answer-first。主质量比较保留成本之前的标签；不让 quality-cost 把成本差异伪装成质量增益。若原 E3 还声明 pair-mass-mode 等值，同样完整继承。"
+      ],
+      "requirement": "同原E3起点/目标/argv、delivery quality-tie/component-sum/replay .25及set继承",
+      "assessment": "PROVED_IN_STATED_B64_SCOPE"
+    },
+    {
+      "id": "B64-09",
+      "original_plan_lines": [
+        264,
+        340,
+        419
+      ],
+      "original_literal_lines": [
+        "| 参数范围、精度、微批 | 相同 | 相同 |",
+        "两臂共用同一合法初始化、相同 replay、相同训练目标与预算。建议机制首轮继承 E3 的纯 delivery 监督设置，以区分新增监督支持的作用；实际 answer/Host 结果仍是候选选择的主要依据，不能因 delivery 更高就采用。",
+        "A 和 B 先各两次完整拟合，共四次主拟合；P0 是短程测量。只有需要保留的主比较补配对 seed1/2。若 A、B 都保留，核心上限为 12 次完整拟合，不含可选扩量/组合。C、D 优先复用模型和执行工具，避免为每个评测条件另训模型。"
+      ],
+      "requirement": "两臂同单卡/BF16/full参数、同完整输入/预算/seed而非旧历史直接对照",
+      "assessment": "PROVED_IN_STATED_B64_SCOPE"
+    },
+    {
+      "id": "B64-10",
+      "original_plan_lines": [
+        347,
+        350,
+        352,
+        437
+      ],
+      "original_literal_lines": [
+        "| 新 64 家族面板 | 建议 2 次实际数据暴露起点，最多 4 次作为后续独立比较 | 按总预算的 1/4、1/2、最终点预定 |",
+        "普通 pair sampler 的更新预算可按 `U=ceil(E×N_slots/16)` 规划，实际末尾可能多抽至多 15 行，必须记录真实 draws；不能声称精确 E 次遍历。两臂用相同的 slot 预算；重复旧行只作匹配 replay，不记新增独立信息。",
+        "例如，若实际保留旧池 400 个 slots，并得到 128 个核心配对新状态，则每臂 N=528；2 次暴露对应 1,056 draws、66 更新。这只是条件明确的算术示例；核心三绑定资格不足时按真实 N 计算，不能为凑 128 伪造比较或把重复行计成独立状态。",
+        "| B 两臂训练 | 给定真实 N、暴露次数后计算 U | 长度、实际 draws、全菜单 tokens、最佳 checkpoint 行为 |"
+      ],
+      "requirement": "528slot/1056实际draw/66更新，逐槽实际两次、相同窗口/选项RNG及tokens",
+      "assessment": "PROVED_IN_STATED_B64_SCOPE"
+    },
+    {
+      "id": "B64-11",
+      "original_plan_lines": [
+        427,
+        444,
+        446
+      ],
+      "original_literal_lines": [
+        "不能同时声称“每个样本等暴露”“总更新等量”“总 tokens 等量”“FLOPs 等量”，除非实际数据与计算确实满足。先报告真实值，不为制造表面匹配重复无信息样本。",
+        "分别记录训练随机性、采集随机性和 Host 生成重复。若 A→B 只改变 B seed，而 A 固定，应写“固定 A 初始化下的三次 B 拟合”；要声称完整训练链三 seed，就让对应 A/B 两阶段都按预定 seed 运行。",
+        "checkpoint 选择规则在运行前确定，至少保留 update0、强简单方法与候选；不按最终确认结果换 checkpoint 或选最好 seed。"
+      ],
+      "requirement": "原0/17/33/66真实曲线、预定纯delivery与2ppguard重算u33，非最终确认重选",
+      "assessment": "PROVED_IN_STATED_B64_SCOPE"
+    },
+    {
+      "id": "B64-12",
+      "original_plan_lines": [
+        311,
+        340,
+        459,
+        477,
+        479
+      ],
+      "original_literal_lines": [
+        "“相同后续策略”不是硬套相同动作串。短程结果要在自主 Host 中另行检验，不能直接外推长程收益。",
+        "两臂共用同一合法初始化、相同 replay、相同训练目标与预算。建议机制首轮继承 E3 的纯 delivery 监督设置，以区分新增监督支持的作用；实际 answer/Host 结果仍是候选选择的主要依据，不能因 delivery 更高就采用。",
+        "`--host-readout` 使用原完整 Host post-tool frame；`--given-readout` 是显式任务＋packet 的条件评测，且有第 13.5 节的输入限制；二者不能混为自主 Host 结果。LME/Mem2Act 已曝光部分仅作开发或复验；冻结模型不能消除之前的数据暴露。",
+        "主指标为 Host 完整成功的来源族宏平均；配对报告 gains/losses、差值与家族 bootstrap 区间。持续更新同一来源的多轮请求按簇处理；训练 seeds 分别报告并可在族内聚合。",
+        "并列报告材料完整、实际操作与参数、原文与角色时间保持、失败类型及全成本。允许多条成功路径，不以唯一偏好动作定义全部成功。"
+      ],
+      "requirement": "31实际菜单与32分母、5新首绑定和64自主Host另行计分；材料不替代完整成功",
+      "assessment": "PROVED_IN_STATED_B64_SCOPE"
+    },
+    {
+      "id": "B64-13",
+      "original_plan_lines": [
+        323,
+        489,
+        499
+      ],
+      "original_literal_lines": [
+        "沿用 family/event 总权重，避免一个状态因产生更多 pair 就获得更大总损失质量。保留失败首结果，不靠重试选择更好答案。",
+        "已有公开探针结果不因旧清单写 pending 就重复执行；原评测任务的失败首结果保留。Host/Reader/Judge 沿用现有来源和评分机制，不新增多层审核 Agent。",
+        "形式相同的比较遵循同一计量范围。共享 baseline 分支的采集成本只按实际执行计一次，并明确用于哪些面板；不把共享数据当免费或重复独立证据。"
+      ],
+      "requirement": "最早原绑定答案沿用、较好A重复不使用、预算/失败/unknown不删",
+      "assessment": "PROVED_IN_STATED_B64_SCOPE"
+    },
+    {
+      "id": "B64-14",
+      "original_plan_lines": [
+        317,
+        320,
+        321,
+        354
+      ],
+      "original_literal_lines": [
+        "| 实际质量左/右更好 | 保留成本比较之前的方向标签 | 计各自真实结果 |",
+        "| Reader 执行失败 | 沿当前协议，answer 比较保持 unknown；delivery 可独立已知 | Host 完整成功分母中保留失败 |",
+        "| 质量相同但成本不同 | 质量仍是 tie；成本另记 | 质量与全成本并列报告 |",
+        "如果新的完整参数数据已经产生明确 answer/delivery 分歧，而纯 delivery 学习仍不能改善任务，再在同一新数据上比较已实现的 answer-first 与 delivery 目标。它是有新证据依据的目标检验，不默认再跑全部旧配方。"
+      ],
+      "requirement": "384答案后审只作材料/目标诊断，不回填关闭拟合或把成本方向当质量",
+      "assessment": "PROVED_IN_STATED_B64_SCOPE"
+    },
+    {
+      "id": "B64-15",
+      "original_plan_lines": [
+        477,
+        481,
+        518
+      ],
+      "original_literal_lines": [
+        "主指标为 Host 完整成功的来源族宏平均；配对报告 gains/losses、差值与家族 bootstrap 区间。持续更新同一来源的多轮请求按簇处理；训练 seeds 分别报告并可在族内聚合。",
+        "可将点估计 +5pp 设为有实际意义的目标，但它不是自动采用标准。声称存在优势需要区间支持正差异；声称至少 +5pp 则需相应下界支持。开发面板区间跨零既不证明胜出，也不证明零作用。",
+        "- B 分支大量双 tie：保留 tie，检查是否选到了有决策空间的状态、短程续行是否掩盖差异；下一批调整协议，不删除旧 tie。"
+      ],
+      "requirement": "64族配对差值/区间、97双tie及答案随机性按实际保留，不声称采集效率",
+      "assessment": "PROVED_IN_STATED_B64_SCOPE"
+    },
+    {
+      "id": "B64-16",
+      "original_plan_lines": [
+        224,
+        225,
+        354,
+        508,
+        518
+      ],
+      "original_literal_lines": [
+        "| B-192 | 累计 192 个新增来源族，每族 2–4 状态 | 累计 384–768 状态、至多 1,152–2,304 分支 | 扩充真实状态与条件覆盖 |",
+        "| B-256 | 累计 256 个新增来源族，每族 2–4 状态 | 累计 512–1,024 状态、至多 1,536–3,072 分支 | 最终主要数据规模候选 |",
+        "如果新的完整参数数据已经产生明确 answer/delivery 分歧，而纯 delivery 学习仍不能改善任务，再在同一新数据上比较已实现的 answer-first 与 delivery 目标。它是有新证据依据的目标检验，不默认再跑全部旧配方。",
+        "| M3 | 入选比较 seed1/2、20k 或 192/256 的必要规模实验 | 新来源和随机性支持继续投入 |",
+        "- B 分支大量双 tie：保留 tie，检查是否选到了有决策空间的状态、短程续行是否掩盖差异；下一批调整协议，不删除旧 tie。"
+      ],
+      "requirement": "B1无任务优势，不扩192/256、额外Bseed/改目标拟合或部署采用",
+      "assessment": "PROVED_IN_STATED_B64_SCOPE"
+    }
+  ],
+  "private_audits": {
+    "branches": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/original-plan-B-actual-branches-v1.json",
+    "training": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/original-plan-B-labels-training-v1.json",
+    "evaluation": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/original-plan-B-evaluation-stop-v1.json"
+  },
+  "branch": {
+    "passed": true,
+    "status": "B64_ALL384_FIRST_BINDINGS_FULL_BEFORE_NN_SOURCE_RANGES_READER_WIRES_AND_SHARED_BASELINE_RECONCILED",
+    "actual_branch_runtime": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/runtime-c-handoff8",
+    "families": 64,
+    "states": 128,
+    "bindings": 384,
+    "all128_NN_inputs_full_before_and_entire_head_order_finite_argmax_verified": true,
+    "all128_triads_distinct_complete_legal_bindings": true,
+    "all_actual_prefix_boundaries_and_bounded_continuations_checked": true,
+    "all_source_role_origin_body_character_ranges_literal_bound": true,
+    "actual_source_range_pieces": 1613,
+    "all_Reader_request_dicts_equal_except_actual_delivered_packet_within_state": true,
+    "native_readout_status_counts": {
+      "COMPLETED": 373,
+      "FAILED": 11
+    },
+    "alternative_kinds": {
+      "READ": 90,
+      "HANDOFF": 38
+    },
+    "origin_counts": {
+      "same_before_first_action": 358,
+      "closed_collector_last_decision": 26
+    },
+    "new_HTTP": 358,
+    "reused_original_terminal_READ_first_results": 26,
+    "shared_baseline_actual_outcomes": 128,
+    "baseline_results_not_collected_twice_for_two_panels": true,
+    "new_HTTP_cost_by_segment": {
+      "pilot8": {
+        "new_HTTP": 45,
+        "known_generation_tokens": 157021,
+        "prompt_tokens": 67687,
+        "completion_tokens": 89334,
+        "new_unknown_usage": 0,
+        "readout_failures": {
+          "FROZEN_READOUT_INCOMPLETE_FINAL_RESPONSE": 2
+        },
+        "client_CPU_seconds_already_recorded": 113.569297,
+        "inclusive_job_wall_seconds": 719.4885524539277,
+        "source_families": 8,
+        "states": 16,
+        "Source_ranges": 201
+      },
+      "remaining56": {
+        "new_HTTP": 313,
+        "known_generation_tokens": 1100678,
+        "prompt_tokens": 481113,
+        "completion_tokens": 619565,
+        "new_unknown_usage": 0,
+        "readout_failures": {
+          "FROZEN_READOUT_INCOMPLETE_FINAL_RESPONSE": 9
+        },
+        "client_CPU_seconds_already_recorded": 726.688318,
+        "inclusive_job_wall_seconds": 4863.123939893208,
+        "source_families": 56,
+        "states": 112,
+        "Source_ranges": 1412
+      }
+    },
+    "new_known_generation_tokens": 1257699,
+    "prefix_collection_cost_receipt": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/b64-full-collection-reconciliation.json",
+    "prefix_and26_reused_results_not_free_or_recharged": true,
+    "scope": "Actual three-branch supervised support comparison with one shared baseline. Different full bindings with identical packets remain distinct executed branches. Complete Source packet ranges/roles/origins, actual before/menu/NN and trace-prefix/continuation/Reader-wire checked; not a new independent semantic review or a claim of equal-cost collector efficiency.",
+    "new_model_tokenizer_GPU_HTTP_business_or_original_ledger_calls": 0,
+    "original_inputs_labels_or_first_results_changed": false,
+    "full763_line_completion_proven": false,
+    "no_sha_validation": true,
+    "goal_complete": false
+  },
+  "training": {
+    "passed": true,
+    "status": "B64_RAW_QUALITY_REVIEWS_COMPILED_PANELS_INHERITED_RECIPE_AND_ACTUAL_TWO_DRAW_MATCHED_FITS_RECONCILED",
+    "actual_training_runtime": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/runtime-p0",
+    "Source_guide": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/b64-delivery-author-guide.json",
+    "source_families": 64,
+    "reached_states": 128,
+    "actual_bindings": 384,
+    "shared_actual_baseline_outcomes": 128,
+    "raw_before_and_full_menus_inputs_gold_metadata_identical_between_panels": true,
+    "all_actual_supervision_rows_literal_equal_recompiled": true,
+    "new_delivery_counts": {
+      "b0": {
+        "tie": 117,
+        "right": 4,
+        "left": 5,
+        "unknown": 2
+      },
+      "b1": {
+        "tie": 103,
+        "right": 21,
+        "left": 2,
+        "unknown": 2
+      }
+    },
+    "quality_labels_derived_before_resource_tiebreak_from_Source_author_grades": true,
+    "resource_records_checked": 512,
+    "wire_token_resource_counts_are_existing_original_counts_not_retokenized": true,
+    "all256_new_answer_comparisons_remain_unknown_in_closed_actual_fit_data": true,
+    "old400_rows_literal_preserved": true,
+    "old400_composition": {
+      "existing_feedback": 200,
+      "operation_replay": 200
+    },
+    "new128_feedback_rows": 128,
+    "full528_composition": {
+      "feedback": 328,
+      "operation_replay": 200
+    },
+    "actual_loss_weight_masses": {
+      "feedback": 1.0,
+      "operation_replay": 0.25
+    },
+    "all528_per_slot_native_weights_equal": true,
+    "same_real_optimizer_schedule_and_option_orders": true,
+    "original_E3_recipe": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/e3-fitting-v1/aggregate/run.json",
+    "actual_original_argv_inheritance_replayed_before_device_budget_changes": true,
+    "actual_objective": "pair",
+    "actual_target": "delivery",
+    "actual_quality_mode": "quality-tie",
+    "actual_pair_mass_mode": "component-sum",
+    "actual_replay_objective": "set",
+    "actual_two_full_exposures_each_slot_verified": true,
+    "arms": {
+      "b0": {
+        "native_run": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/b0-seed0/run.json",
+        "native_compute": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/b0-seed0/compute.json",
+        "native_driver": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/b0-seed0-driver.json",
+        "physical_GPU": "2",
+        "actual_slot_count": 528,
+        "actual_draws": 1056,
+        "actual_draws_per_slot": 2,
+        "actual_passes": 2,
+        "optimizer_updates": 66,
+        "actual_train_input_tokens": 5756552,
+        "actual_train_padded_input_tokens": 6878474,
+        "max_actual_sequence_tokens": 11882,
+        "native_CPU_seconds": 3053.692197958,
+        "native_wall_seconds": 1917.5264803888276,
+        "native_GPU_interval_hours": 0.5326462445524521,
+        "pure_delivery_quality_counts": {
+          "new128": {
+            "feedback_states": 128,
+            "states_with_targets": 126,
+            "target_pairs": 126,
+            "tie_pairs": 117,
+            "directional_pairs": 9,
+            "unknown_pairs": 2
+          },
+          "all528": {
+            "feedback_states": 328,
+            "states_with_targets": 324,
+            "target_pairs": 660,
+            "directional_pairs": 338,
+            "unknown_pairs": 38,
+            "tie_pairs": 322,
+            "replay_states": 200
+          }
+        },
+        "sampled_quality_counts": {
+          "feedback_states": 656,
+          "states_with_targets": 648,
+          "target_pairs": 1320,
+          "directional_pairs": 676,
+          "unknown_pairs": 76,
+          "tie_pairs": 644,
+          "replay_states": 400
+        },
+        "sampled_feedback_states": 656,
+        "sampled_operation_replay_states": 400,
+        "sampled_unknown_pairs": 76,
+        "unknown_state_slots_preserved_in_draws": true,
+        "actual_loss_recipe_inherits_original_E3_argv": true,
+        "schedule_evidence": "Original training-plan is consumed directly by frozen executed trainer; per-update rows/tokens, two option-order passes and actual sampled quality counters independently reconcile. B ordinary sampler has no separate conditional training-windows copy.",
+        "no_cost_only_quality_direction_pairs": true
+      },
+      "b1": {
+        "native_run": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/b1-seed0/run.json",
+        "native_compute": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/b1-seed0/compute.json",
+        "native_driver": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/b1-seed0-driver.json",
+        "physical_GPU": "3",
+        "actual_slot_count": 528,
+        "actual_draws": 1056,
+        "actual_draws_per_slot": 2,
+        "actual_passes": 2,
+        "optimizer_updates": 66,
+        "actual_train_input_tokens": 5756552,
+        "actual_train_padded_input_tokens": 6878474,
+        "max_actual_sequence_tokens": 11882,
+        "native_CPU_seconds": 3078.9243623390003,
+        "native_wall_seconds": 1937.8633939437568,
+        "native_GPU_interval_hours": 0.5382953872065991,
+        "pure_delivery_quality_counts": {
+          "new128": {
+            "feedback_states": 128,
+            "states_with_targets": 126,
+            "target_pairs": 126,
+            "tie_pairs": 103,
+            "directional_pairs": 23,
+            "unknown_pairs": 2
+          },
+          "all528": {
+            "feedback_states": 328,
+            "states_with_targets": 324,
+            "target_pairs": 660,
+            "directional_pairs": 352,
+            "unknown_pairs": 38,
+            "tie_pairs": 308,
+            "replay_states": 200
+          }
+        },
+        "sampled_quality_counts": {
+          "feedback_states": 656,
+          "states_with_targets": 648,
+          "target_pairs": 1320,
+          "directional_pairs": 704,
+          "unknown_pairs": 76,
+          "tie_pairs": 616,
+          "replay_states": 400
+        },
+        "sampled_feedback_states": 656,
+        "sampled_operation_replay_states": 400,
+        "sampled_unknown_pairs": 76,
+        "unknown_state_slots_preserved_in_draws": true,
+        "actual_loss_recipe_inherits_original_E3_argv": true,
+        "schedule_evidence": "Original training-plan is consumed directly by frozen executed trainer; per-update rows/tokens, two option-order passes and actual sampled quality counters independently reconcile. B ordinary sampler has no separate conditional training-windows copy.",
+        "no_cost_only_quality_direction_pairs": true
+      }
+    },
+    "missing_B_training_windows_duplicate_not_fabricated": true,
+    "scope": "Existing200feedback+200operation replay plus128new reached feedback. Same full inputs and actual two complete passes; only declaration of compared argmax/baseline versus alternative/samebaseline changes. All new answer targets remain unknown. Source-author material tiers and pair directions are not full task success or independent human labels; postfit answer review cannot backfill actual training labels.",
+    "new_training_model_tokenizer_GPU_HTTP_business_or_original_ledger_calls": 0,
+    "original_data_labels_models_or_firsts_changed": false,
+    "B_evaluation_stop_and_final763_completion_proven_here": false,
+    "no_sha_validation": true,
+    "goal_complete": false
+  },
+  "evaluation": {
+    "passed": true,
+    "status": "B_SAVED_U33_NOMINATION_POSTFIT_ONLY_ANSWER_LABELS_AND_FIRST_TASK_STOP_EVIDENCE_RECONCILED",
+    "curves": {
+      "b0": {
+        "points": [
+          {
+            "update": 0,
+            "operation_family_macro_acceptance": 0.7788507060058854,
+            "pure_delivery_direction_accuracy": 0.9495535714285713
+          },
+          {
+            "update": 17,
+            "operation_family_macro_acceptance": 0.7815102738300331,
+            "pure_delivery_direction_accuracy": 0.7131696428571429
+          },
+          {
+            "update": 33,
+            "operation_family_macro_acceptance": 0.7867320617794024,
+            "pure_delivery_direction_accuracy": 0.9417410714285713
+          },
+          {
+            "update": 66,
+            "operation_family_macro_acceptance": 0.7856544755725058,
+            "pure_delivery_direction_accuracy": 0.9104910714285714
+          }
+        ],
+        "nominee": {
+          "update": 33,
+          "operation_family_macro_acceptance": 0.7867320617794024,
+          "pure_delivery_direction_accuracy": 0.9417410714285713
+        },
+        "nonzero_nominee_and2pp_operation_guard_recomputed": true
+      },
+      "b1": {
+        "points": [
+          {
+            "update": 0,
+            "operation_family_macro_acceptance": 0.7788507060058854,
+            "pure_delivery_direction_accuracy": 0.9495535714285713
+          },
+          {
+            "update": 17,
+            "operation_family_macro_acceptance": 0.7819148455115442,
+            "pure_delivery_direction_accuracy": 0.7498511904761905
+          },
+          {
+            "update": 33,
+            "operation_family_macro_acceptance": 0.775426662328154,
+            "pure_delivery_direction_accuracy": 0.8420386904761904
+          },
+          {
+            "update": 66,
+            "operation_family_macro_acceptance": 0.7740027262764606,
+            "pure_delivery_direction_accuracy": 0.7491071428571429
+          }
+        ],
+        "nominee": {
+          "update": 33,
+          "operation_family_macro_acceptance": 0.775426662328154,
+          "pure_delivery_direction_accuracy": 0.8420386904761904
+        },
+        "nonzero_nominee_and2pp_operation_guard_recomputed": true
+      }
+    },
+    "original924_initial_full_input_token_sequences_logits_and_argmax_equal": true,
+    "postfit_all384_first_answer_grades": {
+      "C": 107,
+      "I": 199,
+      "F": 11,
+      "Q": 60,
+      "W": 1,
+      "U": 6
+    },
+    "complete_answers_below_coarse_material_S": 27,
+    "postfit_labels_never_backfilled_to_closed_training_data": true,
+    "literal_same_packet_pairs": {
+      "b0": 4,
+      "b1": 13
+    },
+    "known_direction_reversals": {
+      "b0": 0,
+      "b1": 0
+    },
+    "actual_saved_task32_binding_checks": 93,
+    "task32_binding_origin_counts": {
+      "closed_matched_branch": 73,
+      "closed_raw_collection": 15,
+      "closed_a_task11_branch": 5
+    },
+    "task32_Source_author_complete": {
+      "raw_delivery": 14,
+      "initial": 14,
+      "b0": 13,
+      "b1": 13
+    },
+    "task32_families": 32,
+    "missing_state_retained": true,
+    "new_task32_first_answers": 5,
+    "later_A_better_repeat_excluded": true,
+    "autonomous64_first_outcome_source_review_counts": {
+      "fixed-prefix": 25,
+      "incumbent-delivery-u16": 25,
+      "b0-u33": 33,
+      "b1-u33": 32,
+      "e3-aggregate-u32": 40
+    },
+    "B1_minus_B0_autonomous64": {
+      "gains": 12,
+      "losses": 13,
+      "ties": 39,
+      "delta": -0.015625,
+      "family_bootstrap_95_percent": [
+        -0.171875,
+        0.140625
+      ],
+      "draws": 20000,
+      "analysis_seed": 0
+    },
+    "B192_256_extra_B_seeds_or_adoption_triggered": false,
+    "scope": "Numerical and identity reconciliation of existing Source-author labels and first outputs. Feedback-dev selection is not autonomous success; old32 readouts are exposed/conditional. DEV64 is development selection, not independent confirmation. Same packet with different full bindings witnesses first-generation variation, not a best-answer resample. No independent human relabeling.",
+    "new_training_model_tokenizer_GPU_HTTP_business_or_original_ledger_calls": 0,
+    "original_Source_labels_models_or_firsts_changed": false,
+    "full763_line_completion_proven": false,
+    "no_sha_validation": true,
+    "goal_complete": false,
+    "actual_saved_models": 3,
+    "actual_saved_full_before_menu_binding_choices_per_model": 31
+  },
+  "postfit_panel_summary": {
+    "b0": {
+      "cross": {
+        "T_delivery__T_answer": 84,
+        "R_delivery__R_answer": 3,
+        "T_delivery__U_answer": 10,
+        "T_delivery__L_answer": 14,
+        "T_delivery__R_answer": 9,
+        "R_delivery__T_answer": 1,
+        "L_delivery__L_answer": 5,
+        "U_delivery__U_answer": 2
+      },
+      "same_packet_answer_comparisons": {
+        "U": 1,
+        "T": 3
+      },
+      "same_packet_pairs": 4,
+      "answer_counts": {
+        "T": 85,
+        "R": 12,
+        "U": 12,
+        "L": 19
+      },
+      "delivery_counts": {
+        "T": 117,
+        "R": 4,
+        "L": 5,
+        "U": 2
+      },
+      "known_direction_reversals": 0,
+      "answer_directions_inside_coarse_delivery_ties": 23
+    },
+    "b1": {
+      "cross": {
+        "T_delivery__T_answer": 71,
+        "R_delivery__R_answer": 16,
+        "T_delivery__R_answer": 16,
+        "T_delivery__U_answer": 7,
+        "T_delivery__L_answer": 9,
+        "L_delivery__U_answer": 1,
+        "L_delivery__L_answer": 1,
+        "R_delivery__U_answer": 4,
+        "U_delivery__U_answer": 2,
+        "R_delivery__T_answer": 1
+      },
+      "same_packet_answer_comparisons": {
+        "T": 8,
+        "L": 1,
+        "U": 2,
+        "R": 2
+      },
+      "same_packet_pairs": 13,
+      "answer_counts": {
+        "T": 72,
+        "R": 32,
+        "U": 14,
+        "L": 10
+      },
+      "delivery_counts": {
+        "T": 103,
+        "R": 21,
+        "L": 2,
+        "U": 2
+      },
+      "known_direction_reversals": 0,
+      "answer_directions_inside_coarse_delivery_ties": 25
+    }
+  },
+  "analyzers": [
+    "tools/audit_a100_plan_b_branches.py",
+    "tools/audit_a100_plan_b_labels_training.py",
+    "tools/audit_a100_plan_b_evaluation_stop.py"
+  ],
+  "failure_reflection": [
+    {
+      "timer": "audit-original-plan-B-labels-training-v1.time.txt",
+      "reason": "Ordinary B sampler records original consumed training-plan and actual update counters; no A-style conditional training-windows copy exists. Verified actual loop/counters/two passes rather than create a fake duplicate."
+    },
+    {
+      "timer": "audit-original-plan-B-evaluation-stop-v1.time.txt",
+      "reason": "Native pair-objective dev history also includes reviewed_branch_pairs. Recompute the complete actual metric record, including this field, rather than compare a partial summary."
+    }
+  ],
+  "historical_early_functional8_and57_state_repair_C_D_and_final_audit_not_proven_by_B64_subset": true,
+  "new_training_model_tokenizer_HTTP_business_or_original_ledger_calls": 0,
+  "original_Source_models_labels_or_firsts_changed": false,
+  "full763_line_completion_proven": false,
+  "CPU_pending_actual_idle138": true,
+  "no_sha_validation": true,
+  "goal_complete": false,
+  "audit_model_state_count_metadata_correction": "Three saved models,31states each,93actualbindings; raw outputs and numerical metrics unchanged."
+}
