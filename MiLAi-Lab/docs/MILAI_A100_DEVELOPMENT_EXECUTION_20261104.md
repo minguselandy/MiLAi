@@ -6,11 +6,33 @@
 历史 worktree、原始失败与用户文档保持原状。没有使用子代理、SHA/内容指纹校验、新服务、第二账本或远端写入。
 
 本轮机器可读入口为
-[progress](../data/manifests/a100-development-progress-20261109-v170.json)。
+[progress](../data/manifests/a100-development-progress-20261109-v171.json)。
 原始数据、冻结运行时、权重、命令、计时和实际输出位于本 worktree 的 ignored
 `artifacts/a100-development-20261104/`。本记录是现有报告体系的执行摘要。
 
-## v170 当前状态（2026-11-09，Asia/Shanghai）：Reader首失败保留与完整计量关闭，仅未尝试尾部运行
+## v171 当前状态（2026-11-09，Asia/Shanghai）：主模型451条首次覆盖关闭，冻结全量Source审计运行中
+
+主模型原生451位置全部形成首次终态：401 COMPLETED、2 FAILED_RETRIEVING、48 FAILED_READING。
+451问题ID顺序与冻结输入一致，每个整首记录逐项等于51段最早祖先。检索失败0/9和全部读取首失败原样保留，
+读取失败包含47份无final、1份第258条10字符截断final；均保持FAILED/scoreNone，不补成完成结果或gold。
+最后050段仅处理434..450的17个未运行位置，全部完成；136次实际NN/input941198、
+136份完整before、17次ReaderHTTP/118116known、原始控制字节比对均通过。
+主模型10..450共441个真实存储案例/3085control检查点全部保留逐字节比对凭据，
+所有已创建primary与fixed不可变base保留。原1..9物理逐步快照缺口按原始Source/Store/trace/SDK/Reader证据披露，未补造。
+
+模型与存储父子实际退出/消失；最后模型完整子952.916411＋父0.168800828CPU，
+NN/load已含其中，不重复加入。idle134支付3项新增已关闭计时23.79CPU及独立存储
+99.34595313300001CPU，104个原生client phases全部核对一次。现无模型/HTTP实验worker。
+
+冻结v3全451审计已实际运行：审计PID3936291、GNU time PID3936290，工具session29355；
+CPU-only/threads4/native SDK4.52.3/tokenizers0.21.4。入口取实际协议prediction_source_audit_entry，原1141绑定及
+Source/input/permission检查范围不变，逐一恢复真实before并重建完整SDK交付和Reader请求。全451审计gate尚未通过，
+不能将首次完成数当作QA正确率。审计与本writer完整CPU等待实际退出及下一个eligible idle；此阶段不读写离线账本。
+
+主模型预测/评分/归档canonical closures、native Judge与完整评分审计、Mem2Act400×2、最终全成本/论文/图表及
+原763行逐项完成审计仍未完成。内部1024/Q64/D960及控制、训练/四面板图等闭合结果保持，不新增拟合/重选/采用，native TEST未打开。
+
+## v170 历史状态（2026-11-09，Asia/Shanghai）：Reader首失败保留与完整计量关闭，仅未尝试尾部运行
 
 第433/f078f429原生Reader单次HTTP以length结束，输出8192
 tokens、final=absent_final；prompt4044/total12236/

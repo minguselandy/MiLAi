@@ -1,4 +1,53 @@
-# LIVE A100 EXECUTION v170: 2026-11-09 (Asia/Shanghai)
+# LIVE A100 EXECUTION v171: 2026-11-09 (Asia/Shanghai)
+
+Original763-line goal ACTIVE/incomplete; current PROGRESS, previous PROGRESS. No genuine blocker.
+Latest data/manifests/a100-development-progress-20261109-v171.json; checkpointf62a4870(previousv170). ROOT/F/E/Q64 unchanged.
+Batch/protocol/source-version/phase IDs stay20261107. No subagents/SHA/fingerprints/services/secondledger/reset/refund/
+remote/Productwrites/first-outcome retries/reselection/crop/quantize. OneactualmodelHTTPworker maximum.
+HostGPU0/1untouched; learnerGPU2/cuda0FP32threads4/MHAFalse/refcompileFalse/TF32False. Preserve1141LME/1147Mem2Act/7Q64bindings.
+NeverGNUwrap owner/scanner/settler/launcher. Ordinary audits/writers use uniqueGNUtimers; no offlineledgeraccess/write while any modelHTTP/native-owned stage live.
+Native/whole/parent/nested/oldcost neverdouble-add; author/unmeteredinspection/launch/cleanup CPUunknown_not_zero.
+
+NO MODELHTTPWORKER. Primary ALL451 firsts CLOSED:401COMPLETED/2FAILED_RETRIEVING/48FAILED_READING.
+Latest model E/stages-lme-v1/primary-seed0-u32-prediction451-v1-continuation-050-owner.json exit0/validatedTrue/CPUTrue/actualgone.
+Every wholefirstrecord equals earliest51 ancestry and all451 qid order equals frozen input; proof ROOT/verify-primary-full451-before-source-audit-v1.json.
+RetainedretrievalF0/9 unchanged; Reader48length/out8192/knownusage,47None+row258str10 chars staysFAILED/unscored; no rescue/retry.
+Last050 only17 untouched434..450 allCOMPLETED;136NN/input941198,136realbefore,17ReaderHTTP/118116known.
+Nativewhole952.916411+parent0.168800828 includesNN/load; GPUjobinterval includesIO/Readerwait,notGPUbusy/$.
+CPUstorage050 actualexit0/gone/paididle134 whole+parent99.34595313300001. Primary441realcases10..450/
+3085controlbytechecks, ALL created primarybases and BOTHfixedpoolbases/templates retained outsidecases.
+Idle1..134paid; latest3GNUtimers23.79CPU+separatestorage; all104nativeclientphasesreconciled,neverrebilled.
+Currentaudit/v171writer/laterGNUtimers await actualclosedexit and nexteligibleidle135. No costsettlement while CPUauditlive.
+
+ONLY LIVE WORKER CPU SOURCE AUDIT: ROOT/lme-primary-full451-source-audit-v3-launch.json.
+Actual auditor PID3936291, GNUtimePID3936290, foreground exec session29355; actualnamedcommandsverifiedlive.
+Timer ROOT/lme-primary-full451-source-audit-v3.time.txt; log sameprefix.log. No model/tokenizer/HTTP or ledgeraccess.
+Poll actualprocess/session; timeoutisNOTtermination. Full451gate notpassed yet; audit-full-cohort-v1 created onlyafterall451checks.
+Bootstrap ROOT/run_frozen_primary_full451_source_audit_v3.py OWNER; entry from ACTUAL protocol.prediction_source_audit_entry.
+V3protocol E/frozen-lme-observation-execution-v3/protocol-before-only-native-untouched-primary441-v3.json unchanged.
+CUDAPY4.52.3/tokenizers.21.4FIRST; appendHTTP_SITE last. CUDAemptythreads4; PYTHONPATHv3folder+
+oldv1audit-code-reference+runtime/src/tools+ROOT+imageoverlay. Oldfixedbootstrap hardcodesv1entry,doNOTblindrename.
+Auditor retains strict0preloadFSourcebranch; rows1..9 all13837preexistingStorevalues/Source/role/clock/scope/permissions/lifecycle/apps
+unchanged,onlyderivedcacheadded;68NN459461/8SDK/8Reader evidence. Their physicalperstepStore/Saverbytes NEVER existed,
+unavailableanddisclosed; neverfabricate. Rows10..450 unchangedfullactualcapture/snapshot audit. No narrowedSource/inputscope.
+Sourcecase10frozenloop31122comparisons/8restores8NN1SDK1Reader alreadypassed; notfull451gate.
+
+AFTER actual auditexit0/gone and full451Sourcegate passed: inspectallrecords/counts, finalizeprimaryprediction through unchanged
+frozenfinalizer/canonicalalias/sourceversion/stageorder and originalinitialancestrybase. Pay closed audit/finalizer/proof/writerCPU
+once at actualidle before explicitnativeJudge scoring. Sourceaudit isNOTQAtruth; failednativefirsts stayunscored/full451bounds.
+Native scoring, fullscoreaudit/finalize, archive/fullcostclosure pending. DoNOTrunReader-tail reflection/nextplan helper on fullclosed451.
+Lastwholecoverage authorproof ROOT/verify_primary_full451_before_source_audit_v1.py; exactidle134settler alreadyexecuted,
+neverrerun/rebill. Its proof/environment import check passed with0newcalls; sourcecodebindings remain1141.
+
+Fixed451 ALL3 canonicalclosures+Source/scoreaudits closed401COMP/50ReaderF,75correct/401subset,250validUNKNOWN,
+full451bounds[75/451,125/451],nativeCompleteMetricNone;451firstearliest51wholeeq; fixedReaderpartial501charsstaysfailed.
+Mem2Act1147staticpathfullconfigmerged/noobserveroverwrite;actual400x2still0, all6LMEcanonicalclosuresrequired.
+FullprimarySource/NN/SDK/Reader/scoreaudits/scoring/finalization/archive,Mem2Act400x2,finalallcost/paper/figures/final763completionaudit
+INCOMPLETE. Allinternal1024/Q6412999/D960+K9+old42/fourpanel/eightfitworksheets unchangedclosed; reviewerTHISassistantnotindependenthuman.
+No newfit/adopt/nativeTESTopening. Staticpaidcutoff87091.84096111101CPU/25368797Hosttokens before007 NOTcurrenttotal.
+GoalstayACTIVE, notcomplete/blocked, preservefullscope.
+
+# HISTORICAL A100 EXECUTION v170: 2026-11-09 (Asia/Shanghai)
 
 Original763-line goal ACTIVE/incomplete; current PROGRESS, previous VERIFIED_WAIT. No genuine blocker.
 Latest data/manifests/a100-development-progress-20261109-v170.json; previousv169, checkpoint409a62f0. ROOT/F/E/Q64 unchanged.
