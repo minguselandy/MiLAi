@@ -6,11 +6,33 @@
 历史 worktree、原始失败与用户文档保持原状。没有使用子代理、SHA/内容指纹校验、新服务、第二账本或远端写入。
 
 本轮机器可读入口为
-[progress](../data/manifests/a100-development-progress-20261109-v175.json)。
+[progress](../data/manifests/a100-development-progress-20261109-v176.json)。
 原始数据、冻结运行时、权重、命令、计时和实际输出位于本 worktree 的 ignored
 `artifacts/a100-development-20261104/`。本记录是现有报告体系的执行摘要。
 
-## v175 当前状态（2026-11-09，Asia/Shanghai）：LME六阶段全部关闭并结清，Mem2Act固定前缀全400条启动
+## v176 当前状态（2026-11-09，Asia/Shanghai）：Mem2Act全400继续，原生首失败保留，完整审计的失败元数据路径已修复
+
+固定前缀400实际父328495/子328497仍运行，native{'COMPLETED': 6, 'FAILED': 3, 'HOST_RUNNING': 1, 'NOT_RUN': 390}、active9。已出现的原生失败
+为IncompleteChatResponse/provider_protocol/VLLM_CHAT_TRUNCATED，新增unknown0/0；原冻结known_native_failure分支继续未运行
+后续位置，没有重试FAILED，没有把部分工具提议改记成功。原native模型/方法/Source/菜单/预算/firsts保持原样。
+
+实际第2条FAILED native返回没有成功路径才有的memory_mutation_receipts字段。原冻结全量auditor在该字段上实际KeyError
+exit1，失败GNU计时保留；未改变原失败返回或给缺失字段填空列表。新增冻结观察审计v2只作3处精确修改：成功结果仍需
+原始[]；失败结果记录字段实际存在性/原值或缺失未知；增加这份证据及revision元数据。原完整Source/Store/Saver/角色/
+正文/时钟/权限/应用/世界/SDK/Host输入/NN检查及全400/owner退出支付条件全部保留，反向替换恢复原auditor全文一致。
+原科学协议及1147 native代码字节绑定不变，额外1个观察auditor source/frozen字节相等；未改native计划或重启worker。
+
+实际已关闭COMPLETED0与FAILED2已通过同一冻结v2 audit_case完整路径：原始Source33686项、pre-first33688项，
+Store/Saver/world/app/SDK/Host检查通过，字段缺失继续按未知/FAILED保留。这只是2条实际路径证据，不是全400完成或语义
+评分。紧凑凭据[audit execution v2](../data/manifests/a100-mem2act-native-failure-audit-execution-20261109-v2.json)与可复核
+[完整审计代码](../tools/audit_a100_mem2act_predictions_execution_v2.py)已保存。全400实际退出/入账/消失后，使用实际v2 frozen entry、原科学protocol、
+原声明canonical full-audit输出路径执行全量检查；随后原finalizer及primary400门槛保持，不以部分探针替代。
+
+LME两方法六阶段/原生首结果/Source和评分审计/归档及已测成本闭合状态保持；当前禁止离线访问账本。
+v175/v176 writer、首次审计失败、v2冻结与2条实际完整审计费用留待实际idle138。Mem2Act400×2、最终全项目成本/论文/
+图表和原763行逐项完成审计仍未完成；目标active，无真实阻塞。
+
+## v175 历史状态（2026-11-09，Asia/Shanghai）：LME六阶段全部关闭并结清，Mem2Act固定前缀全400条启动
 
 主归档原生owner实际exit0/已支付/父子消失，451个native条目全部ARCHIVED。冻结finalizer已创建
 primary-seed0-u32-case-archives canonical alias/closure；归档原始病例138,107,744,264 bytes、压缩文件4,360,471,443 bytes，

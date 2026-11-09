@@ -1,0 +1,53 @@
+{
+  "passed": true,
+  "status": "MEM2ACT_NATIVE_FAILURE_RECEIPT_METADATA_AUDIT_V2_FROZEN_ACTUAL_TWO_CASE_SOURCE_PATH_VERIFIED",
+  "timestamp_utc": "2026-11-09T05:04:35.942149+00:00",
+  "original_scientific_protocol": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/protocol-before-public-task-projection-v1.json",
+  "original_scientific_code_bindings_unchanged": 1147,
+  "additional_observational_code_bindings": 1,
+  "original_native_execution_protocol_method_Source_model_checkpoint_cap_budget_menu_score_or_firsts_changed": false,
+  "observational_revision": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-audit-execution-v2/observation-protocol-before-audit-v2.json",
+  "frozen_audit_entry": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-audit-execution-v2/audit_mem2act_predictions_execution_v2.py",
+  "published_audit_code": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/tools/audit_a100_mem2act_predictions_execution_v2.py",
+  "published_code_entire_bytes_equal_actual_frozen_auditor": true,
+  "exact_original_audit_replacements": 3,
+  "inverse_replacements_restore_entire_original_auditor": true,
+  "native_failure": {
+    "row": 2,
+    "qa_id": "qa_003",
+    "status": "FAILED",
+    "error_type": "IncompleteChatResponse",
+    "error": "VLLM_CHAT_TRUNCATED",
+    "native_success_only_mutation_receipt_field_present": false,
+    "absent_field_inferred_empty_or_success": false,
+    "new_unknown_usage": {
+      "generation": 0,
+      "embedding": 0
+    },
+    "actual_first_failure_rerun": false
+  },
+  "completed_results_still_require_literal_empty_mutation_receipts": true,
+  "full_Source_Store_Saver_permissions_roles_clocks_bodies_application_world_SDK_Host_input_and_NN_scope_unchanged": true,
+  "actual_positions_audited": [
+    0,
+    2
+  ],
+  "actual_native_statuses": [
+    "COMPLETED",
+    "FAILED"
+  ],
+  "original_Source_initial_values_compared": 33686,
+  "original_pre_first_Source_values_compared": 33688,
+  "native_SDK_packets_reconstructed": 2,
+  "decoded_provider_responses": 6,
+  "mechanical_real_case_proof": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/verify-mem2act-first-completed-and-native-failed-Source-v2.json",
+  "full400_gate_passed": false,
+  "full400_owner_actual_exit_paid_gone_and_all400_complete_audit_still_required": true,
+  "semantic_scores_or800_task_completion_proven": false,
+  "native_first_records_modified_or_reselected": false,
+  "existing_original_native400_worker_not_interrupted": true,
+  "new_model_tokenizer_HTTP_business_or_ledger_calls": 0,
+  "ordinary_audit_and_writer_CPU_pending_actual_idle138": true,
+  "no_sha_validation": true,
+  "goal_complete": false
+}
