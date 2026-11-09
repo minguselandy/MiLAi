@@ -187,5 +187,13 @@
   "CPU_pending_actual_idle138": true,
   "no_sha_validation": true,
   "full763_line_completion_proven": false,
-  "goal_complete": false
+  "goal_complete": false,
+  "runtime_possible_operation_kinds": [
+    "SEARCH",
+    "READ",
+    "USE_VIEW",
+    "REFRESH_VIEW",
+    "HANDOFF"
+  ],
+  "operation_scope_20261110": "Runtime type, not all operations offered in every cohort/state. Actual primary first0/failed4 each selected SEARCH1/READ7; no metric or causal View-learning claim."
 }

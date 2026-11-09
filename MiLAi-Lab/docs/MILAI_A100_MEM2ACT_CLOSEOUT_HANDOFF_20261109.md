@@ -1,8 +1,9 @@
 # Mem2Act全400结束后的原协议衔接与比较准备
 
-目前只有固定400原实验在运行。本文核对了原1147份科学代码＋1份冻结观察器的完整文件字节、
-既有SDK版本与三个真实已关闭首例的完整控制配置；**没有运行任何后续命令、primary、评分或归档**。
-这不是全400Source审计通过或全800任务完成的证明。
+最初准备时核对了原1147份科学代码＋1份冻结观察器的完整文件字节、SDK版本与三个实际捕获；
+该准备记录保留。v186已按原顺序完成固定400 canonical alias及冻结v2全量Source审计，
+400实际快照全部可重放，idle138已付；原primary400现实际运行。两方法评分/归档及完整目标仍未闭合。
+[固定400关闭凭据](MILAI_A100_MEM2ACT_FIXED400_NATIVE_RESULTS_20261109.md)与[最新v186](../data/manifests/a100-development-progress-20261109-v186.json)记录已发生状态。
 [机器凭据和全部10条明确argv/环境](../data/manifests/a100-mem2act-closeout-handoff-20261109-v1.json)保留可复核执行入口。
 
 ## 先规范别名，再做全400审计
@@ -36,41 +37,42 @@ observer覆盖错误。三个例子的核对不能替代最终所有400快照可
 再把HTTP依赖路径追加到后面，不用HTTP4.57遮蔽Native版本。
 
 父owner沿实际既有HTTP Python3.11运行，primary子argv仍是原CUDAPY/attention wrapper/GPU2方案。
-当前owner的--check-only也会在admission里读取原账本，因此固定400活着时**不运行该命令**。
-本文只读固定协议、owner/driver、实际进程和快照；活动原账本没有被打开。
+owner的--check-only会在admission里读取原账本，因此任何原生实验worker存活时均不运行该离线检查。
+准备与并行CPU检查只读固定协议、owner/driver、实际进程和快照；idle138仅在原固定及审计全部实际退出后的空闲时结算。
 
-## 已准备的原始执行入口
+## 原始执行入口及当前执行状态
 
-以下是顺序与计量类型，完整shell quoting和环境保存在机器凭据。每条均标PREPARED_NOT_DISPATCHED，
-没有自动后台队列；执行前必须核查实际上一阶段门禁。普通CPU命令用各自未占用GNU计时文件，
+以下是原顺序与计量类型，完整shell quoting和环境保存在最初机器凭据；其PREPARED状态是准备时点。
+当前1/2已闭合、3实际运行、4–10未派发。没有自动后台队列；下一步须核查实际门禁。
+普通CPU命令用各自未占用GNU计时文件，
 native owner不能套GNU计时，等实际退出后按whole−native＋已测parent一次计量。
 
-| 顺序 | 明确动作 | 计量范围 |
-|---:|---|---|
-| 1 | fixed-earliest-first400-canonical-alias | ordinary GNU CPU timer; no native/model/residual rebill |
-| 2 | fixed-full400-frozen-observer-v2-audit | ordinary GNU CPU timer; exact original audit output path |
-| 3 | primary400-original-owner-explicit-launch | native owner UNWRAPPED; native plus whole residual/parent once at actual exit |
-| 4 | primary-earliest-first400-canonical-alias | ordinary GNU CPU timer; no native/model/residual rebill |
-| 5 | primary-full400-frozen-observer-v2-audit | ordinary GNU CPU timer; exact original audit output path |
-| 6 | fixed-all400-adapted-score | ordinary GNU CPU timer; no model/HTTP/business/ledger calls |
-| 7 | fixed-all400-adapted-score-audit | ordinary GNU CPU timer; every original proposal and metric payload checked |
-| 8 | primary-all400-adapted-score | ordinary GNU CPU timer; no model/HTTP/business/ledger calls |
-| 9 | primary-all400-adapted-score-audit | ordinary GNU CPU timer; every original proposal and metric payload checked |
-| 10 | both400-original-lossless-archives-after-all-gates | ordinary GNU CPU timer; script and archive_case have no ledger accounting |
+| 顺序 | 明确动作 | 计量范围 | 当前执行状态 |
+|---:|---|---|---|
+| 1 | fixed-earliest-first400-canonical-alias | ordinary GNU CPU timer; no native/model/residual rebill | CLOSED_ACTUAL_EXIT0 |
+| 2 | fixed-full400-frozen-observer-v2-audit | ordinary GNU CPU timer; exact original audit output path | CLOSED_ACTUAL_EXIT0 |
+| 3 | primary400-original-owner-explicit-launch | native owner UNWRAPPED; native plus whole residual/parent once at actual exit | RUNNING_ORIGINAL_OWNER |
+| 4 | primary-earliest-first400-canonical-alias | ordinary GNU CPU timer; no native/model/residual rebill | NOT_DISPATCHED |
+| 5 | primary-full400-frozen-observer-v2-audit | ordinary GNU CPU timer; exact original audit output path | NOT_DISPATCHED |
+| 6 | fixed-all400-adapted-score | ordinary GNU CPU timer; no model/HTTP/business/ledger calls | NOT_DISPATCHED |
+| 7 | fixed-all400-adapted-score-audit | ordinary GNU CPU timer; every original proposal and metric payload checked | NOT_DISPATCHED |
+| 8 | primary-all400-adapted-score | ordinary GNU CPU timer; no model/HTTP/business/ledger calls | NOT_DISPATCHED |
+| 9 | primary-all400-adapted-score-audit | ordinary GNU CPU timer; every original proposal and metric payload checked | NOT_DISPATCHED |
+| 10 | both400-original-lossless-archives-after-all-gates | ordinary GNU CPU timer; script and archive_case have no ledger accounting | NOT_DISPATCHED |
 
-固定规范别名命令：
+固定规范别名原命令留档（已经闭合）：
 
 ```bash
 env PYTHONPATH=/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1:/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/runtime/src:/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/runtime/tools PYTHONDONTWRITEBYTECODE=1 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 /cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/http-env/bin/python /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/finalize_external_mem2act_predictions_v1.py /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/stages-mem2act-v1/fixed-prefix-prediction400-v1-owner.json /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/fixed-prefix-predictions /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/fixed-prefix-prediction400-v1-closure.json
 ```
 
-固定完整400观察器命令（使用原输出路径；普通CPU需加唯一GNU计时）：
+固定完整400观察器原命令留档（已经闭合；原输出路径和唯一GNU计时）：
 
 ```bash
 env PYTHONPATH=/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1:/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/runtime/src:/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/runtime/tools PYTHONDONTWRITEBYTECODE=1 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 /cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/cuda-env/bin/python -u -c 'import json,runpy,sys,transformers,tokenizers; assert transformers.__version__=='"'"'4.52.3'"'"'; assert tokenizers.__version__=='"'"'0.21.4'"'"'; protocol=json.load(open('"'"'/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/protocol-before-public-task-projection-v1.json'"'"')); sys.path.extend(protocol['"'"'site_packages'"'"']); entry=sys.argv[1]; sys.argv=sys.argv[1:]; runpy.run_path(entry,run_name='"'"'__main__'"'"')' /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-audit-execution-v2/audit_mem2act_predictions_execution_v2.py /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/protocol-before-public-task-projection-v1.json /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/fixed-prefix-predictions /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/stages-mem2act-v1/fixed-prefix-prediction400-v1-owner.json /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/fixed-prefix-full400-audit-v1.json
 ```
 
-实际全部门禁满足后的primary原owner命令（**不加GNUwrapper**）：
+全部门禁满足后已实际启动的primary原owner命令（**不加GNUwrapper**）：
 
 ```bash
 env PYTHONPATH=/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1:/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/runtime/src:/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/runtime/tools PYTHONDONTWRITEBYTECODE=1 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 /cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/http-env/bin/python -u /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/own_external_mem2act_stage_v1.py /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/stages-mem2act-v1/primary-seed0-u32-prediction400-v1-plan.json
@@ -108,8 +110,22 @@ prepared common base必须留在所有case/档案目录之外。实际primary尚
 原归档脚本及archive_case没有native ledger计量，属于普通CPU命令，实际结束后按唯一GNU计时结算。
 GPU job区间与Host等待、本地NN、whole/parent、归档/存储和最后项目总成本分开，不重计。
 
-当前所有prepared动作仍未派发。完整目标还需要fixed400闭合、primary400、两方法全审计/评分/归档，
-实际空闲后费用结算、最终论文图表与全763行完成审计；不从本文或预检passed推断它们已完成。
+固定400及其全Source已实际闭合，原primary400正在运行。完整目标仍需primary400全量首结果和
+完整Source/NN审计、两方法适配评分/评分审计、原无损归档、后续实际idle费用、最终论文图表与
+全763行完成审计；不能由已关闭固定阶段或两个主阶段样例推断全目标完成。
+
+## 主阶段首个完成/失败例的实际NN接线检查（2026-11-10）
+
+[两例机制凭据](../data/manifests/a100-mem2act-primary-native-mechanism-preflight-20261110-v1.json)仅检查
+原primary最早COMPLETED row0与最早FAILED row4，不按任务正确性挑例。使用未改的冻结v2
+audit_case与只读原SDK，全部33686初始/33688首次Host前Source值、Store/Saver/应用、
+2个原SDK packet、首次Provider请求和完整控制配置合并检查通过；原case/result字节保持。
+
+两例各8次返回NN决策，合计16次、101840输入tokens；每次完整before/合法菜单绑定、
+head ID顺序、有限logits/probability、argmax和未截断均经实际记录核对。各例实际选择为
+SEARCH1/READ7；没有据此给出任务成功、View复用或全400NN路径结论。失败4的成功专用receipt
+字段仍为缺失/None未知，未造空或升级完成。没有新模型/Tokenizer/GPU forward/HTTP/账本调用，
+CPU待实际idle139。原400任务继续，最终完整400审计的owner支付退出门禁保持。
 
 ## 全量指标闭合后的图表入口
 

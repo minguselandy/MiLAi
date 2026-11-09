@@ -39,8 +39,8 @@ checkpoint、预算与256来源族后的完整自主Host确认中，主seed相�
 ## 方法、执行层与来源分母
 
 Host表达当前用途、证据要求、对象/时间、已知材料和预算；记忆工具在原公开边界内构造
-合法完整取证菜单。Laya对实际可见state和完整动作参数打分，策略选择READ、USE_VIEW、
-REFRESH_VIEW或HANDOFF。合法是执行准入，不是正确性标签。Source完整bank可用、控制器
+合法完整取证菜单。Laya对实际可见state和完整动作参数打分，策略按当次合法菜单选择SEARCH、READ、
+USE_VIEW、REFRESH_VIEW或HANDOFF。合法是执行准入，不是正确性标签。Source完整bank可用、控制器
 实际观察、已经读取、实际交付和Host最终收到的材料分别记录，不能以其中一层代替另一层。
 
 ```mermaid
@@ -48,7 +48,7 @@ flowchart LR
     H[Host用途/证据/对象时间/K/预算] --> G[原版本/权限/引用准入]
     G --> M[完整合法菜单与参数]
     M --> P[固定策略或Laya打分]
-    P --> E[既有读取/复用/刷新/交付执行器]
+    P --> E[既有检索/读取/复用/刷新/交付执行器]
     S[Source角色/时钟/修订/权限] --> E
     V[派生View及Source绑定] --> E
     E --> R[预算内实际Tool packet]

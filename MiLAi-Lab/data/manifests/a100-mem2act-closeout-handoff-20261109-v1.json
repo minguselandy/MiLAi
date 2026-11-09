@@ -482,5 +482,15 @@
     "reason": "First observer used only matched session indices. Frozen components use all declared source IDs, including missing IDs, and every source ID in matched full released sessions. The observer now independently reconstructs that exact declared/full-session graph. Frozen341components and400cohort unchanged; no missing-reference repair or independence claim."
   },
   "Ruff_current_new_tools_passed": true,
-  "ordinary_CPU_pending_actual_idle138": true
+  "ordinary_CPU_pending_actual_idle138": true,
+  "actual_execution_update_20261110": {
+    "evidence": "a100-development-progress-20261109-v186.json",
+    "fixed_canonical_and_full_Source_steps1_2": "CLOSED_ACTUAL_EXIT0",
+    "primary_original_owner_step3": "RUNNING_AT_V186_AND_CURRENT_OBSERVATION",
+    "steps4_to10": "NOT_DISPATCHED",
+    "original_prepared_commands_preserved_as_historical": true,
+    "partial_primary_preflight": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/data/manifests/a100-mem2act-primary-native-mechanism-preflight-20261110-v1.json",
+    "partial_preflight_is_not_all400_gate": true,
+    "original_protocol_or_firsts_changed": false
+  }
 }
