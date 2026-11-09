@@ -6,11 +6,31 @@
 历史 worktree、原始失败与用户文档保持原状。没有使用子代理、SHA/内容指纹校验、新服务、第二账本或远端写入。
 
 本轮机器可读入口为
-[progress](../data/manifests/a100-development-progress-20261109-v172.json)。
+[progress](../data/manifests/a100-development-progress-20261109-v173.json)。
 原始数据、冻结运行时、权重、命令、计时和实际输出位于本 worktree 的 ignored
 `artifacts/a100-development-20261104/`。本记录是现有报告体系的执行摘要。
 
-## v172 当前状态（2026-11-09，Asia/Shanghai）：主模型全451 Source审计与预测定稿关闭，原生评分运行中
+## v173 当前状态（2026-11-09，Asia/Shanghai）：主模型原生评分、全量审计与定稿关闭，归档运行中
+
+原生评分owner实际exit0/已支付/父子消失；全451位置覆盖401评分完成、2检索失败未评分、48读取失败未评分，
+没有FAILED_SCORING。冻结评分审计逐项复核401整份首次Reader字符串、134整份实际Judge请求/原生判分规则和完整汇总，
+未新增Reader/Judge/模型/HTTP调用。134次Judge实际已知tokens176430，无新unknown；原生whole child CPU39.818996秒加
+parent0.183337217秒只支付一次，nested32.77832466秒不再叠加。完整451首预测仍整份等于51段最早祖先。
+
+原冻结finalizer已创建primary-seed0-u32-scores alias/closure。主方法正确73/401=18.2045%，合法UNKNOWN254，
+完整451点估计不可用，缺失结果上下界[73/451,123/451]=[16.1863%,27.2727%]。固定前缀75/401=18.7032%，
+两方法缺失位置不同，此处不能用子集点差宣称优越性。后续将按共同qid和Source群组核对比较范围，失败仍未评分。
+早期1..9真实物理逐步快照缺口继续披露；不更改既有Source/input/permission审计结论的适用范围。
+
+idle136将v172writer/评分审计/定稿/closeout四项已关闭GNU计时共5.29CPU秒支付一次，105个已关闭原生
+client phases核对通过，不重计Source/NN/load/模型/存储。原生主方法归档现在实际运行：父197219/子197222，
+index{'ARCHIVED': 20, 'ARCHIVING': 1, 'PENDING': 430}；冻结程序逐字节比对重建结果后移除病例目录，保留模板和所有公共不可变控制基底，不使用SHA。
+归档实际退出/入账/索引与保留基底核对、canonical归档定稿及完整操作/成本比较仍待完成。
+
+Mem2Act400×2、最终全成本/论文/图表和原763行逐项完成审计仍未完成。当前无model/HTTP worker；归档原生owner存活期间
+不离线访问账本，不启动另一原生实验。内部已闭合科学结果保持不变，不新增拟合/重选/采用，native TEST未打开。
+
+## v172 历史状态（2026-11-09，Asia/Shanghai）：主模型全451 Source审计与预测定稿关闭，原生评分运行中
 
 冻结全量审计实际exit0/父子消失，通过451位置：10,285,695次原始Source比对、3536次完整before恢复、
 449份完整SDK交付与449份Reader请求逐项一致；3594次实际NN/25,070,604输入tokens、head顺序/finite argmax/

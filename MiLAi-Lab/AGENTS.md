@@ -1,4 +1,47 @@
-# LIVE A100 EXECUTION v172: 2026-11-09 (Asia/Shanghai)
+# LIVE A100 EXECUTION v173: 2026-11-09 (Asia/Shanghai)
+
+Original763-line goal ACTIVE/incomplete; current PROGRESS, previous PROGRESS. No genuine blocker.
+Latest data/manifests/a100-development-progress-20261109-v173.json; previousv172/checkpointfd31b1fa. ROOT/F/E/Q64 unchanged.
+Batch/protocol/source-version/phase IDs stay20261107. No subagents/SHA/fingerprints/services/secondledger/reset/refund/
+remote/Productwrites/first-outcome retries/reselection/crop/quantize. OneactualmodelHTTPworker maximum.
+HostGPU0/1untouched; learnerGPU2/cuda0FP32threads4/MHAFalse/refcompileFalse/TF32False. Preserve1141LME/1147Mem2Act/7Q64bindings.
+NeverGNUwrap owner/scanner/settler/launcher. Ordinary audits/writers uniqueGNUtimers. No offlineledgeraccess/write while native-owned stage live.
+Native/whole/parent/nested/oldcost neverdouble-add; author/unmeteredinspection/preflight/launch/cleanup/settlement CPUunknown_not_zero.
+
+ONLY LIVE NATIVE WORKER CPU ARCHIVE primary-seed0-u32-archive451-v1:parent197219/child197222 actualverifiedRUNNING/CPUFalse.
+E/stages-lme-v1/primary-seed0-u32-archive451-v1-{plan,owner}.json/.log/-owner.log; output E/finalized-lme-v1/primary-seed0-u32-predictions/case-archives/index.json.
+Native index {'ARCHIVED': 20, 'ARCHIVING': 1, 'PENDING': 430}. Originalv1frozen plan entireequalsprotocol.initial_stage_plans. Original frozen_owner_entry; no GNU wrapper.
+FullSource/scoregates+5precedingclosures passed/paid/gone and actualidle136 before explicit check-only+launch. No queue/retry/newmodel/HTTP.
+Poll actualnamedPIDs/index; observationtimeout NOTtermination. WholeCPU/parent paidonlyactualexit. Do not offline-read/writeledger while live.
+Archive requires every reconstructedbytecompared before removing case, retains ALLtemplates/primarypoolbases and BOTHfixedpoolbases.
+Afteractualexit0/paid/gone inspect451index/bytes/firsts/bases, originalfrozenfinalizer creates primary-case-archives alias/closure.
+Then all6LMEclosures+nextactualidle137 gates for Mem2Act400x2; no automaticqueue. Fullnativeprimaryops/cost/comparisonreport stillpending.
+
+Primary native SCORE CLOSED exit0/paid/gone parent123881/child123883,401COMP/2UNSCORED_FAILED_RETRIEVING/48UNSCORED_FAILED_READING.
+NoFAILED_SCORING. Unchanged frozen audit passed401wholeReaderstrings/134wholeJudgewires/nativeaggregate/full451missingbounds.
+Proof ROOT/verify-lme-primary-native-scoring-closed-v1.json. Canonicalprimary-scores alias/closure CLOSED via originalfrozenfinalizer.
+Correct73/401=.18204488778054864;254validUNKNOWN; nativecompletecohortmetricNone; full451bounds[73/451,123/451].
+134actualJudgeHTTP/176430known,finish{'stop': 134},newunknown0/0.
+Nativewhole39.818996+parent.183337217 paidONCE; nested32.77832466 NOTadded. Readeranswers andearliest51wholefirsts unchanged.
+Fixed401COMP/50ReaderF/75correct/250UNKNOWN/full451bounds[75/451,125/451]; all3fixedcanonicalclosures closed. Differentmissingpositions,
+no subset superiorityclaim or inventedfailedUNKNOWN/negativegold. PrimaryReader48length8192:47None+row258str10partial stayFAILED/unscored.
+
+Primary prediction all451firsts canonicalclosure CLOSED:401COMP/2retrF0,9/48ReaderF; allwholeequalearliest51ancestry.
+FullSourceaudit closedexit0/paididle135/gone.10,285,695Sourcecomparisons/3536before-restores/449SDK/449wholeReaderwires,
+3594NN/25,070,604untruncatedinputtokens/headfiniteargmax; no newcalls/ledger. NotQAtruth.
+Root0strictpreloadFSourcebranch. Retained1..9 all13837preexistingStorevalues/Source/role/body/origin/clock/identity/permission/lifecycle/apps
+unchanged,onlyderivedcache;68NN459461/8SDK/8Reader proven. PhysicalperstepStore/Saverbytes NEVERexisted/unavailable/disclosed.
+All451physicalavailabilityFalse, neverfabricate. Rows10..450 originalactualsnapshotpath unchanged/passed;441storagecases/3085controlbytechecks.
+
+Idle1..136PAID. Latest4closedGNUtimers5.29CPU,105nativeclientphasesreconciled,NOTrecharged. v173writer/laterordinarytimers deferactualidle137.
+No offlineledgeraccess while archive/live model; authorunmeteredCPUunknown_not_zero. Scoring/Sourceaudit/fixedarchive/NN/load/oldstorage NOTrebilled.
+Mem2Act1147staticfullconfigmerged/noobserveroverwrite; actual400x2still0. Requiresall6LMEcanonicalclosures/actualpaidgone/fullSourceandscoregates.
+Remaining primaryarchive/fullops-cost-report,Mem2Act400x2,finalallcost/paper/figures/final763requirementaudit INCOMPLETE.
+Allinternal1024/Q6412999/D960+K9+old42/fourpanel/eightfitworksheets unchangedclosed; reviewerTHISassistantnotindependenthuman.
+No newfit/adopt/nativeTESTopening. Staticpaidcutoff87091.84096111101CPU/25368797Hosttokens before007 NOTcurrenttotal.
+GoalstayACTIVE, notcomplete/blocked, preservefullscope.
+
+# HISTORICAL A100 EXECUTION v172: 2026-11-09 (Asia/Shanghai)
 
 Original763-line goal ACTIVE/incomplete; current PROGRESS, previous VERIFIED_WAIT. No genuine blocker.
 Latest data/manifests/a100-development-progress-20261109-v172.json; checkpointaf9dbfe1(previousv171). ROOT/F/E/Q64 unchanged.
