@@ -77,8 +77,9 @@ D的0→1构造无关会话是最小因素测试，不是多规模历史增长�
 
 当前Mem2Act固定400的原父/子实际进程存活，本次快照为{'COMPLETED': 226, 'FAILED': 72, 'HOST_RUNNING': 1, 'NOT_RUN': 101}。
 只核对原owner/driver和真实named PID，不因等待超时重启。该状态随原进程推进，见最新progress。
-先等待实际400首结果与owner退出/支付，再用冻结v2进行完整Source/Store/Saver/角色/时钟/
-权限/应用/SDK/Host输入审计和原定稿，之后才是primary400；这七组不能由小面板、静态manifest
+先等待实际400首结果与owner退出/支付，按原协议先创建最早首记录的规范别名/closure，
+再用冻结v2审计该别名的完整Source/Store/Saver/角色/时钟/权限/应用/SDK/Host输入，之后才是primary400。
+[原衔接操作卡](MILAI_A100_MEM2ACT_CLOSEOUT_HANDOFF_20261109.md)明确了这个顺序；这七组不能由小面板、静态manifest
 或原探针代替。失败不重试、不把partial intent提升为完成，adapted指标不冒充原论文TA。
 
 LME已不是待执行：两方法各451，六个原生prediction/score/archive关闭实际exit0/支付/进程消失。

@@ -1,0 +1,486 @@
+{
+  "passed": true,
+  "status": "FROZEN_MEM2ACT_EXPLICIT_CLOSEOUT_COMMANDS_AND_ACTUAL_CAPTURE_CONFIGS_VERIFIED",
+  "timestamp_utc": "2026-11-09T13:12:22.166008+00:00",
+  "original_protocol": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/protocol-before-public-task-projection-v1.json",
+  "original_scientific_code_bindings_literal_equal": 1147,
+  "additional_frozen_observer_binding_literal_equal": 1,
+  "SDK_versions": {
+    "langmem": "0.0.30",
+    "langgraph": "1.1.10",
+    "langchain-core": "1.6.5",
+    "langgraph-checkpoint-sqlite": "2.0.11",
+    "transformers": "4.52.3",
+    "tokenizers": "0.21.4",
+    "httpx": "0.28.1"
+  },
+  "actual_closed_capture_config_checks": [
+    {
+      "row": 0,
+      "native_status": "COMPLETED",
+      "actual_capture": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/stages-mem2act-v1/fixed-prefix-prediction400-v1-output/first-host-captures/0000/606021a8-f73f-434d-880f-d779ce0b4af9",
+      "initial_context_and_catalog_available": true,
+      "actual_control_keys_preserved": [
+        "checkpoint",
+        "delivery_selection",
+        "device",
+        "exclude_given_requests",
+        "head_max_len",
+        "internal_views",
+        "max_control_steps",
+        "max_len",
+        "policy",
+        "reads",
+        "routing",
+        "source_observation_tokens",
+        "source_range_tokens",
+        "state_projection",
+        "threads",
+        "view_builder",
+        "view_capacity",
+        "view_policy"
+      ],
+      "override_changes": [
+        "checkpoint",
+        "policy"
+      ],
+      "complete_control_merge_preserves_all_other_keys": true
+    },
+    {
+      "row": 2,
+      "native_status": "FAILED",
+      "actual_capture": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/stages-mem2act-v1/fixed-prefix-prediction400-v1-output/first-host-captures/0002/253d7b07-8c99-4074-aa19-0e3e41687e0a",
+      "initial_context_and_catalog_available": true,
+      "actual_control_keys_preserved": [
+        "checkpoint",
+        "delivery_selection",
+        "device",
+        "exclude_given_requests",
+        "head_max_len",
+        "internal_views",
+        "max_control_steps",
+        "max_len",
+        "policy",
+        "reads",
+        "routing",
+        "source_observation_tokens",
+        "source_range_tokens",
+        "state_projection",
+        "threads",
+        "view_builder",
+        "view_capacity",
+        "view_policy"
+      ],
+      "override_changes": [
+        "checkpoint",
+        "policy"
+      ],
+      "complete_control_merge_preserves_all_other_keys": true
+    },
+    {
+      "row": 324,
+      "native_status": "COMPLETED",
+      "actual_capture": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/stages-mem2act-v1/fixed-prefix-prediction400-v1-output/first-host-captures/0324/ca3efe38-7e64-4d3d-abe4-693ccb0f23e5",
+      "initial_context_and_catalog_available": true,
+      "actual_control_keys_preserved": [
+        "checkpoint",
+        "delivery_selection",
+        "device",
+        "exclude_given_requests",
+        "head_max_len",
+        "internal_views",
+        "max_control_steps",
+        "max_len",
+        "policy",
+        "reads",
+        "routing",
+        "source_observation_tokens",
+        "source_range_tokens",
+        "state_projection",
+        "threads",
+        "view_builder",
+        "view_capacity",
+        "view_policy"
+      ],
+      "override_changes": [
+        "checkpoint",
+        "policy"
+      ],
+      "complete_control_merge_preserves_all_other_keys": true
+    }
+  ],
+  "canonical_alias_then_full_audit_is_original_serial_order": true,
+  "previous_audit_before_alias_instruction_corrected_without_protocol_change": true,
+  "primary_actual_merge_implementation_preserves_full_config": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/runtime/src/milai_lab/runners/frozen_host_message.py",
+  "actual_native_fixed_counts_at_observation": {
+    "COMPLETED": 249,
+    "FAILED": 76,
+    "HOST_RUNNING": 1,
+    "NOT_RUN": 74
+  },
+  "actual_fixed_owner_and_child_named_processes_alive": true,
+  "full400_fixed_closeout_ready": false,
+  "primary400_launch_ready": false,
+  "original_native_owner_check_only_not_executed_because_it_reads_live_ledger": true,
+  "commands": [
+    {
+      "name": "fixed-earliest-first400-canonical-alias",
+      "argv": [
+        "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/http-env/bin/python",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/finalize_external_mem2act_predictions_v1.py",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/stages-mem2act-v1/fixed-prefix-prediction400-v1-owner.json",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/fixed-prefix-predictions",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/fixed-prefix-prediction400-v1-closure.json"
+      ],
+      "environment": {
+        "PYTHONPATH": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1:/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/runtime/src:/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/runtime/tools",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "HF_HUB_OFFLINE": "1",
+        "TRANSFORMERS_OFFLINE": "1",
+        "TOKENIZERS_PARALLELISM": "false",
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4"
+      },
+      "shell_command_for_explicit_review": "env PYTHONPATH=/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1:/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/runtime/src:/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/runtime/tools PYTHONDONTWRITEBYTECODE=1 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 /cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/http-env/bin/python /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/finalize_external_mem2act_predictions_v1.py /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/stages-mem2act-v1/fixed-prefix-prediction400-v1-owner.json /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/fixed-prefix-predictions /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/fixed-prefix-prediction400-v1-closure.json",
+      "required_actual_gates": [
+        "all400 terminal native firsts",
+        "actual owner CPU paid and PIDs gone"
+      ],
+      "metering": "ordinary GNU CPU timer; no native/model/residual rebill",
+      "dispatch_status": "PREPARED_NOT_DISPATCHED"
+    },
+    {
+      "name": "fixed-full400-frozen-observer-v2-audit",
+      "argv": [
+        "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/cuda-env/bin/python",
+        "-u",
+        "-c",
+        "import json,runpy,sys,transformers,tokenizers; assert transformers.__version__=='4.52.3'; assert tokenizers.__version__=='0.21.4'; protocol=json.load(open('/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/protocol-before-public-task-projection-v1.json')); sys.path.extend(protocol['site_packages']); entry=sys.argv[1]; sys.argv=sys.argv[1:]; runpy.run_path(entry,run_name='__main__')",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-audit-execution-v2/audit_mem2act_predictions_execution_v2.py",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/protocol-before-public-task-projection-v1.json",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/fixed-prefix-predictions",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/stages-mem2act-v1/fixed-prefix-prediction400-v1-owner.json",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/fixed-prefix-full400-audit-v1.json"
+      ],
+      "environment": {
+        "PYTHONPATH": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1:/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/runtime/src:/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/runtime/tools",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "HF_HUB_OFFLINE": "1",
+        "TRANSFORMERS_OFFLINE": "1",
+        "TOKENIZERS_PARALLELISM": "false",
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4"
+      },
+      "shell_command_for_explicit_review": "env PYTHONPATH=/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1:/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/runtime/src:/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/runtime/tools PYTHONDONTWRITEBYTECODE=1 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 /cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/cuda-env/bin/python -u -c 'import json,runpy,sys,transformers,tokenizers; assert transformers.__version__=='\"'\"'4.52.3'\"'\"'; assert tokenizers.__version__=='\"'\"'0.21.4'\"'\"'; protocol=json.load(open('\"'\"'/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/protocol-before-public-task-projection-v1.json'\"'\"')); sys.path.extend(protocol['\"'\"'site_packages'\"'\"']); entry=sys.argv[1]; sys.argv=sys.argv[1:]; runpy.run_path(entry,run_name='\"'\"'__main__'\"'\"')' /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-audit-execution-v2/audit_mem2act_predictions_execution_v2.py /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/protocol-before-public-task-projection-v1.json /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/fixed-prefix-predictions /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/stages-mem2act-v1/fixed-prefix-prediction400-v1-owner.json /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/fixed-prefix-full400-audit-v1.json",
+      "required_actual_gates": [
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/fixed-prefix-prediction400-v1-closure.json",
+        "actual all400 canonical first records",
+        "owner paid and PIDs gone"
+      ],
+      "metering": "ordinary GNU CPU timer; exact original audit output path",
+      "dispatch_status": "PREPARED_NOT_DISPATCHED"
+    },
+    {
+      "name": "primary400-original-owner-explicit-launch",
+      "argv": [
+        "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/http-env/bin/python",
+        "-u",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/own_external_mem2act_stage_v1.py",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/stages-mem2act-v1/primary-seed0-u32-prediction400-v1-plan.json"
+      ],
+      "environment": {
+        "PYTHONPATH": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1:/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/runtime/src:/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/runtime/tools",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "HF_HUB_OFFLINE": "1",
+        "TRANSFORMERS_OFFLINE": "1",
+        "TOKENIZERS_PARALLELISM": "false",
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4"
+      },
+      "shell_command_for_explicit_review": "env PYTHONPATH=/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1:/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/runtime/src:/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/runtime/tools PYTHONDONTWRITEBYTECODE=1 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 /cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/http-env/bin/python -u /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/own_external_mem2act_stage_v1.py /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/stages-mem2act-v1/primary-seed0-u32-prediction400-v1-plan.json",
+      "required_actual_gates": [
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/prepared-public-inputs/public-projection-verification.json",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/fixed-prefix-prediction400-v1-closure.json",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/fixed-prefix-full400-audit-v1.json",
+        "all400 fixed first Host snapshots replayable",
+        "no live experimental model/HTTP worker"
+      ],
+      "metering": "native owner UNWRAPPED; native plus whole residual/parent once at actual exit",
+      "dispatch_status": "PREPARED_NOT_DISPATCHED"
+    },
+    {
+      "name": "primary-earliest-first400-canonical-alias",
+      "argv": [
+        "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/http-env/bin/python",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/finalize_external_mem2act_predictions_v1.py",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/stages-mem2act-v1/primary-seed0-u32-prediction400-v1-owner.json",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/primary-seed0-u32-predictions",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/primary-seed0-u32-prediction400-v1-closure.json"
+      ],
+      "environment": {
+        "PYTHONPATH": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1:/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/runtime/src:/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/runtime/tools",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "HF_HUB_OFFLINE": "1",
+        "TRANSFORMERS_OFFLINE": "1",
+        "TOKENIZERS_PARALLELISM": "false",
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4"
+      },
+      "shell_command_for_explicit_review": "env PYTHONPATH=/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1:/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/runtime/src:/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/runtime/tools PYTHONDONTWRITEBYTECODE=1 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 /cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/http-env/bin/python /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/finalize_external_mem2act_predictions_v1.py /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/stages-mem2act-v1/primary-seed0-u32-prediction400-v1-owner.json /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/primary-seed0-u32-predictions /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/primary-seed0-u32-prediction400-v1-closure.json",
+      "required_actual_gates": [
+        "all400 terminal native firsts",
+        "actual owner CPU paid and PIDs gone"
+      ],
+      "metering": "ordinary GNU CPU timer; no native/model/residual rebill",
+      "dispatch_status": "PREPARED_NOT_DISPATCHED"
+    },
+    {
+      "name": "primary-full400-frozen-observer-v2-audit",
+      "argv": [
+        "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/cuda-env/bin/python",
+        "-u",
+        "-c",
+        "import json,runpy,sys,transformers,tokenizers; assert transformers.__version__=='4.52.3'; assert tokenizers.__version__=='0.21.4'; protocol=json.load(open('/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/protocol-before-public-task-projection-v1.json')); sys.path.extend(protocol['site_packages']); entry=sys.argv[1]; sys.argv=sys.argv[1:]; runpy.run_path(entry,run_name='__main__')",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-audit-execution-v2/audit_mem2act_predictions_execution_v2.py",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/protocol-before-public-task-projection-v1.json",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/primary-seed0-u32-predictions",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/stages-mem2act-v1/primary-seed0-u32-prediction400-v1-owner.json",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/primary-seed0-u32-full400-audit-v1.json"
+      ],
+      "environment": {
+        "PYTHONPATH": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1:/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/runtime/src:/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/runtime/tools",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "HF_HUB_OFFLINE": "1",
+        "TRANSFORMERS_OFFLINE": "1",
+        "TOKENIZERS_PARALLELISM": "false",
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4"
+      },
+      "shell_command_for_explicit_review": "env PYTHONPATH=/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1:/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/runtime/src:/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/runtime/tools PYTHONDONTWRITEBYTECODE=1 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 /cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/cuda-env/bin/python -u -c 'import json,runpy,sys,transformers,tokenizers; assert transformers.__version__=='\"'\"'4.52.3'\"'\"'; assert tokenizers.__version__=='\"'\"'0.21.4'\"'\"'; protocol=json.load(open('\"'\"'/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/protocol-before-public-task-projection-v1.json'\"'\"')); sys.path.extend(protocol['\"'\"'site_packages'\"'\"']); entry=sys.argv[1]; sys.argv=sys.argv[1:]; runpy.run_path(entry,run_name='\"'\"'__main__'\"'\"')' /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-audit-execution-v2/audit_mem2act_predictions_execution_v2.py /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/protocol-before-public-task-projection-v1.json /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/primary-seed0-u32-predictions /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/stages-mem2act-v1/primary-seed0-u32-prediction400-v1-owner.json /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/primary-seed0-u32-full400-audit-v1.json",
+      "required_actual_gates": [
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/primary-seed0-u32-prediction400-v1-closure.json",
+        "actual all400 canonical first records",
+        "owner paid and PIDs gone"
+      ],
+      "metering": "ordinary GNU CPU timer; exact original audit output path",
+      "dispatch_status": "PREPARED_NOT_DISPATCHED"
+    },
+    {
+      "name": "fixed-all400-adapted-score",
+      "argv": [
+        "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/cuda-env/bin/python",
+        "-u",
+        "-c",
+        "import json,runpy,sys,transformers,tokenizers; assert transformers.__version__=='4.52.3'; assert tokenizers.__version__=='0.21.4'; protocol=json.load(open('/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/protocol-before-public-task-projection-v1.json')); sys.path.extend(protocol['site_packages']); entry=sys.argv[1]; sys.argv=sys.argv[1:]; runpy.run_path(entry,run_name='__main__')",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/score_closed_mem2act_predictions_v1.py",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/protocol-before-public-task-projection-v1.json",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/fixed-prefix-predictions",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/fixed-prefix-full400-audit-v1.json",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/fixed-prefix-adapted-scores-v1.json"
+      ],
+      "environment": {
+        "PYTHONPATH": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1:/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/runtime/src:/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/runtime/tools",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "HF_HUB_OFFLINE": "1",
+        "TRANSFORMERS_OFFLINE": "1",
+        "TOKENIZERS_PARALLELISM": "false",
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4"
+      },
+      "shell_command_for_explicit_review": "env PYTHONPATH=/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1:/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/runtime/src:/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/runtime/tools PYTHONDONTWRITEBYTECODE=1 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 /cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/cuda-env/bin/python -u -c 'import json,runpy,sys,transformers,tokenizers; assert transformers.__version__=='\"'\"'4.52.3'\"'\"'; assert tokenizers.__version__=='\"'\"'0.21.4'\"'\"'; protocol=json.load(open('\"'\"'/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/protocol-before-public-task-projection-v1.json'\"'\"')); sys.path.extend(protocol['\"'\"'site_packages'\"'\"']); entry=sys.argv[1]; sys.argv=sys.argv[1:]; runpy.run_path(entry,run_name='\"'\"'__main__'\"'\"')' /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/score_closed_mem2act_predictions_v1.py /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/protocol-before-public-task-projection-v1.json /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/fixed-prefix-predictions /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/fixed-prefix-full400-audit-v1.json /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/fixed-prefix-adapted-scores-v1.json",
+      "required_actual_gates": [
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/fixed-prefix-full400-audit-v1.json",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/primary-seed0-u32-full400-audit-v1.json"
+      ],
+      "metering": "ordinary GNU CPU timer; no model/HTTP/business/ledger calls",
+      "dispatch_status": "PREPARED_NOT_DISPATCHED"
+    },
+    {
+      "name": "fixed-all400-adapted-score-audit",
+      "argv": [
+        "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/cuda-env/bin/python",
+        "-u",
+        "-c",
+        "import json,runpy,sys,transformers,tokenizers; assert transformers.__version__=='4.52.3'; assert tokenizers.__version__=='0.21.4'; protocol=json.load(open('/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/protocol-before-public-task-projection-v1.json')); sys.path.extend(protocol['site_packages']); entry=sys.argv[1]; sys.argv=sys.argv[1:]; runpy.run_path(entry,run_name='__main__')",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/audit_mem2act_scores_v1.py",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/protocol-before-public-task-projection-v1.json",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/fixed-prefix-predictions",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/fixed-prefix-adapted-scores-v1.json",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/fixed-prefix-adapted-score-audit-v1.json"
+      ],
+      "environment": {
+        "PYTHONPATH": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1:/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/runtime/src:/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/runtime/tools",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "HF_HUB_OFFLINE": "1",
+        "TRANSFORMERS_OFFLINE": "1",
+        "TOKENIZERS_PARALLELISM": "false",
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4"
+      },
+      "shell_command_for_explicit_review": "env PYTHONPATH=/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1:/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/runtime/src:/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/runtime/tools PYTHONDONTWRITEBYTECODE=1 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 /cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/cuda-env/bin/python -u -c 'import json,runpy,sys,transformers,tokenizers; assert transformers.__version__=='\"'\"'4.52.3'\"'\"'; assert tokenizers.__version__=='\"'\"'0.21.4'\"'\"'; protocol=json.load(open('\"'\"'/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/protocol-before-public-task-projection-v1.json'\"'\"')); sys.path.extend(protocol['\"'\"'site_packages'\"'\"']); entry=sys.argv[1]; sys.argv=sys.argv[1:]; runpy.run_path(entry,run_name='\"'\"'__main__'\"'\"')' /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/audit_mem2act_scores_v1.py /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/protocol-before-public-task-projection-v1.json /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/fixed-prefix-predictions /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/fixed-prefix-adapted-scores-v1.json /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/fixed-prefix-adapted-score-audit-v1.json",
+      "required_actual_gates": [
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/fixed-prefix-adapted-scores-v1.json",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/fixed-prefix-full400-audit-v1.json"
+      ],
+      "metering": "ordinary GNU CPU timer; every original proposal and metric payload checked",
+      "dispatch_status": "PREPARED_NOT_DISPATCHED"
+    },
+    {
+      "name": "primary-all400-adapted-score",
+      "argv": [
+        "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/cuda-env/bin/python",
+        "-u",
+        "-c",
+        "import json,runpy,sys,transformers,tokenizers; assert transformers.__version__=='4.52.3'; assert tokenizers.__version__=='0.21.4'; protocol=json.load(open('/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/protocol-before-public-task-projection-v1.json')); sys.path.extend(protocol['site_packages']); entry=sys.argv[1]; sys.argv=sys.argv[1:]; runpy.run_path(entry,run_name='__main__')",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/score_closed_mem2act_predictions_v1.py",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/protocol-before-public-task-projection-v1.json",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/primary-seed0-u32-predictions",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/primary-seed0-u32-full400-audit-v1.json",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/primary-seed0-u32-adapted-scores-v1.json"
+      ],
+      "environment": {
+        "PYTHONPATH": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1:/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/runtime/src:/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/runtime/tools",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "HF_HUB_OFFLINE": "1",
+        "TRANSFORMERS_OFFLINE": "1",
+        "TOKENIZERS_PARALLELISM": "false",
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4"
+      },
+      "shell_command_for_explicit_review": "env PYTHONPATH=/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1:/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/runtime/src:/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/runtime/tools PYTHONDONTWRITEBYTECODE=1 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 /cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/cuda-env/bin/python -u -c 'import json,runpy,sys,transformers,tokenizers; assert transformers.__version__=='\"'\"'4.52.3'\"'\"'; assert tokenizers.__version__=='\"'\"'0.21.4'\"'\"'; protocol=json.load(open('\"'\"'/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/protocol-before-public-task-projection-v1.json'\"'\"')); sys.path.extend(protocol['\"'\"'site_packages'\"'\"']); entry=sys.argv[1]; sys.argv=sys.argv[1:]; runpy.run_path(entry,run_name='\"'\"'__main__'\"'\"')' /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/score_closed_mem2act_predictions_v1.py /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/protocol-before-public-task-projection-v1.json /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/primary-seed0-u32-predictions /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/primary-seed0-u32-full400-audit-v1.json /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/primary-seed0-u32-adapted-scores-v1.json",
+      "required_actual_gates": [
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/fixed-prefix-full400-audit-v1.json",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/primary-seed0-u32-full400-audit-v1.json"
+      ],
+      "metering": "ordinary GNU CPU timer; no model/HTTP/business/ledger calls",
+      "dispatch_status": "PREPARED_NOT_DISPATCHED"
+    },
+    {
+      "name": "primary-all400-adapted-score-audit",
+      "argv": [
+        "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/cuda-env/bin/python",
+        "-u",
+        "-c",
+        "import json,runpy,sys,transformers,tokenizers; assert transformers.__version__=='4.52.3'; assert tokenizers.__version__=='0.21.4'; protocol=json.load(open('/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/protocol-before-public-task-projection-v1.json')); sys.path.extend(protocol['site_packages']); entry=sys.argv[1]; sys.argv=sys.argv[1:]; runpy.run_path(entry,run_name='__main__')",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/audit_mem2act_scores_v1.py",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/protocol-before-public-task-projection-v1.json",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/primary-seed0-u32-predictions",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/primary-seed0-u32-adapted-scores-v1.json",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/primary-seed0-u32-adapted-score-audit-v1.json"
+      ],
+      "environment": {
+        "PYTHONPATH": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1:/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/runtime/src:/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/runtime/tools",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "HF_HUB_OFFLINE": "1",
+        "TRANSFORMERS_OFFLINE": "1",
+        "TOKENIZERS_PARALLELISM": "false",
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4"
+      },
+      "shell_command_for_explicit_review": "env PYTHONPATH=/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1:/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/runtime/src:/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/runtime/tools PYTHONDONTWRITEBYTECODE=1 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 /cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/cuda-env/bin/python -u -c 'import json,runpy,sys,transformers,tokenizers; assert transformers.__version__=='\"'\"'4.52.3'\"'\"'; assert tokenizers.__version__=='\"'\"'0.21.4'\"'\"'; protocol=json.load(open('\"'\"'/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/protocol-before-public-task-projection-v1.json'\"'\"')); sys.path.extend(protocol['\"'\"'site_packages'\"'\"']); entry=sys.argv[1]; sys.argv=sys.argv[1:]; runpy.run_path(entry,run_name='\"'\"'__main__'\"'\"')' /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/audit_mem2act_scores_v1.py /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/protocol-before-public-task-projection-v1.json /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/primary-seed0-u32-predictions /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/primary-seed0-u32-adapted-scores-v1.json /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/primary-seed0-u32-adapted-score-audit-v1.json",
+      "required_actual_gates": [
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/primary-seed0-u32-adapted-scores-v1.json",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/primary-seed0-u32-full400-audit-v1.json"
+      ],
+      "metering": "ordinary GNU CPU timer; every original proposal and metric payload checked",
+      "dispatch_status": "PREPARED_NOT_DISPATCHED"
+    },
+    {
+      "name": "both400-original-lossless-archives-after-all-gates",
+      "argv": [
+        "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/cuda-env/bin/python",
+        "-u",
+        "-c",
+        "import json,runpy,sys,transformers,tokenizers; assert transformers.__version__=='4.52.3'; assert tokenizers.__version__=='0.21.4'; protocol=json.load(open('/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/protocol-before-public-task-projection-v1.json')); sys.path.extend(protocol['site_packages']); entry=sys.argv[1]; sys.argv=sys.argv[1:]; runpy.run_path(entry,run_name='__main__')",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/archive_closed_mem2act_cases_v1.py",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/protocol-before-public-task-projection-v1.json",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/case-archives"
+      ],
+      "environment": {
+        "PYTHONPATH": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1:/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/runtime/src:/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/runtime/tools",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "HF_HUB_OFFLINE": "1",
+        "TRANSFORMERS_OFFLINE": "1",
+        "TOKENIZERS_PARALLELISM": "false",
+        "OMP_NUM_THREADS": "4",
+        "MKL_NUM_THREADS": "4"
+      },
+      "shell_command_for_explicit_review": "env PYTHONPATH=/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1:/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/runtime/src:/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/runtime/tools PYTHONDONTWRITEBYTECODE=1 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 /cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/cuda-env/bin/python -u -c 'import json,runpy,sys,transformers,tokenizers; assert transformers.__version__=='\"'\"'4.52.3'\"'\"'; assert tokenizers.__version__=='\"'\"'0.21.4'\"'\"'; protocol=json.load(open('\"'\"'/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/protocol-before-public-task-projection-v1.json'\"'\"')); sys.path.extend(protocol['\"'\"'site_packages'\"'\"']); entry=sys.argv[1]; sys.argv=sys.argv[1:]; runpy.run_path(entry,run_name='\"'\"'__main__'\"'\"')' /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/archive_closed_mem2act_cases_v1.py /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/protocol-before-public-task-projection-v1.json /cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/case-archives",
+      "required_actual_gates": [
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/fixed-prefix-prediction400-v1-closure.json",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/primary-seed0-u32-prediction400-v1-closure.json",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/fixed-prefix-full400-audit-v1.json",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/primary-seed0-u32-full400-audit-v1.json",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/fixed-prefix-adapted-score-audit-v1.json",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/primary-seed0-u32-adapted-score-audit-v1.json"
+      ],
+      "metering": "ordinary GNU CPU timer; script and archive_case have no ledger accounting",
+      "dispatch_status": "PREPARED_NOT_DISPATCHED"
+    }
+  ],
+  "commands_executed_by_preparation": 0,
+  "automatic_queue_or_background_dispatch_created": false,
+  "owner_resolution": "Commands bind the original current plans. Re-resolve the actual terminal owner if an unexpected failure requires an explicitly reflected NOT_RUN continuation. Never rerun or replace any already closed native first outcome.",
+  "archive_scope": "Original archive_case compares every reconstructed byte before raw removal. Archive only after both primary replay and all six Source/score/closure gates. Retain the immutable complete common base and first-capture metadata.",
+  "new_model_tokenizer_GPU_HTTP_business_or_original_ledger_calls": 0,
+  "original_Source_plans_models_labels_or_firsts_changed": false,
+  "CPU_pending_actual_idle138": true,
+  "no_sha_validation": true,
+  "full763_line_completion_proven": false,
+  "goal_complete": false,
+  "full_private_preflight": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/mem2act-original-closeout-handoff-v3.json",
+  "reference_lineage_preflight": {
+    "timestamp_utc": "2026-11-09T13:10:48.463301+00:00",
+    "protocol": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/frozen-mem2act-v1/protocol-before-public-task-projection-v1.json",
+    "released_tasks": 400,
+    "common_bank_sessions": 429,
+    "reference_lineage_components": 341,
+    "reference_lineage_component_size_counts": {
+      "1": 291,
+      "2": 45,
+      "4": 2,
+      "5": 1,
+      "3": 2
+    },
+    "all400_components_rederived_from_declared_IDs_and_full_released_session_metadata": true,
+    "missing_declared_IDs_retained_in_lineage_not_dropped_as_unmatched": true,
+    "offline_Source_coverage_counts_retained": {
+      "qa": 400,
+      "sessions": 429,
+      "no_declared_sources": 7,
+      "no_matched_sessions": 16,
+      "partially_missing_sources": 3,
+      "missing_source_ids": 11,
+      "schema_name_mismatches": 1,
+      "source_components": 341
+    },
+    "shared_common_bank_is_not400_independent_users_or341_independent_experiments": true,
+    "query_iid_or_component_independence_confidence_interval_computed": false,
+    "original_Source_tasks_labels_or_firsts_changed": false,
+    "new_model_tokenizer_GPU_HTTP_business_or_original_ledger_calls": 0,
+    "no_sha_validation": true,
+    "full763_line_completion_proven": false,
+    "goal_complete": false,
+    "passed": true,
+    "status": "REFERENCE_LINEAGE_AND_FROZEN_COMPARISON_INPUT_PREFLIGHT_ONLY",
+    "pending_actual_required_gates": [
+      "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/fixed-prefix-prediction400-v1-closure.json",
+      "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/primary-seed0-u32-prediction400-v1-closure.json",
+      "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/fixed-prefix-full400-audit-v1.json",
+      "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/primary-seed0-u32-full400-audit-v1.json",
+      "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/fixed-prefix-adapted-score-audit-v1.json",
+      "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/primary-seed0-u32-adapted-score-audit-v1.json"
+    ],
+    "actual_all800_first_predictions_or_scores_certified": false,
+    "actual_task_metrics_computed": false
+  },
+  "comparison_analyzer": "tools/analyze_a100_mem2act_native_comparison.py",
+  "preparation_analyzer": "tools/prepare_a100_mem2act_closeout_handoff.py",
+  "comparison_complete_metric_branch_not_executed_before_actual_800_audited_firsts": true,
+  "lineage_failure_reflection": {
+    "timer": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/preflight-mem2act-native-comparison-lineage-v1.time.txt",
+    "reason": "First observer used only matched session indices. Frozen components use all declared source IDs, including missing IDs, and every source ID in matched full released sessions. The observer now independently reconstructs that exact declared/full-session graph. Frozen341components and400cohort unchanged; no missing-reference repair or independence claim."
+  },
+  "Ruff_current_new_tools_passed": true,
+  "ordinary_CPU_pending_actual_idle138": true
+}

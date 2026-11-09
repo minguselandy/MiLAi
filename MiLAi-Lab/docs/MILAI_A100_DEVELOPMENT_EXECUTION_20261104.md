@@ -6,11 +6,33 @@
 历史 worktree、原始失败与用户文档保持原状。没有使用子代理、SHA/内容指纹校验、新服务、第二账本或远端写入。
 
 本轮机器可读入口为
-[progress](../data/manifests/a100-development-progress-20261109-v183.json)。
+[progress](../data/manifests/a100-development-progress-20261109-v184.json)。
 原始数据、冻结运行时、权重、命令、计时和实际输出位于本 worktree 的 ignored
 `artifacts/a100-development-20261104/`。本记录是现有报告体系的执行摘要。
 
-## v183 当前状态（2026-11-09，Asia/Shanghai）：完整763行当前证据/来源冻结/剩余工作对照，Mem2Act全400继续
+## v184 当前状态（2026-11-09，Asia/Shanghai）：Mem2Act原衔接顺序/完整配置/引用图核对，尚未派发后续任务
+
+[原协议收尾操作卡与比较预检](MILAI_A100_MEM2ACT_CLOSEOUT_HANDOFF_20261109.md)已整理明确10条argv/环境，全部PREPARED_NOT_DISPATCHED。
+原1147代码＋冻结观察器1完整字节、SDK4.52.3/.21.4及actual completed0/failed2/最后closed三份捕获context/catalog/schema与完整控制配置核对。
+原replay实现合并完整memory_control，仅policy/checkpoint改变；不重演旧LME observer覆盖。两个新入口Ruff检查通过。
+
+**顺序按原serial_order纠正**：实际400 owner终止/支付/父子消失后，先原finalizer规范最早首记录别名/closure，
+再对规范别名执行冻结v2全400Source/Store/Saver/角色/时钟/权限/应用/SDK/Host/NN审计，原科学protocol及原输出路径保持。
+之前活动说明将两步写反，现按原文改正，不修改冻结协议/Source/预算/模型/首结果。Primary仍须两个gate都passed及400实际快照可重放。
+Owner --check-only内部也读原账本，当前fixed活着时未运行；后续explicit owner不套GNU wrapper，普通CPU命令各自计时，无自动队列。
+
+新增比较器只做preflight：独立重建400引用图，按声明SourceIDs（包括缺失）＋命中完整session的所有原始ID连接，
+原341组件尺寸291×1/45×2/2×3/2×4/1×5保持。首次观察器只按matched session编号误分组而失败，已改观察逻辑，未修补缺失来源或过滤400。
+429session/16843turn commonbank可能跨引用读取，不是400用户或341独立实验，未来不算IID/组件独立性CI。
+真正400指标分支须等两方法closure/fullSource/scoreaudit六门禁，当前没有800指标结论；所有zero/invalid/multiple/failed提议保留，
+completed_strict仍须COMPLETED。CPU比较沿所有原owner祖先（含失败段）汇总，不只报最后tail、不把native/load再加一次。
+
+原归档只在两方法重放/Source/评分都通过后，逐字节重建比较成功再删除对应raw，保留完整common base及捕获/首结果元数据。
+脚本不记账，属普通CPU而非nativeowner；现未归档、未新模型/HTTP/业务或原账本调用。
+Native固定400父328495/子328497实际存活，native{'COMPLETED': 252, 'FAILED': 78, 'HOST_RUNNING': 1, 'NOT_RUN': 69}/active330，首FAILED/newunknown0/0原样保留。
+全目标ACTIVE，当前与前轮progress，无真实阻塞；七个未完成工作组仍需真实闭合，post137普通/失败/准备/报告CPU待实际idle138。
+
+## v183 历史状态（2026-11-09，Asia/Shanghai）：完整763行当前证据/来源冻结/剩余工作对照，Mem2Act全400继续
 
 [全原计划当前证据与剩余交付](MILAI_A100_PLAN_CURRENT_EVIDENCE_20261109.md)保留完整763行UTF-8与73章节，
 精确归入671不重叠文本块（438非空）、8命令/结构代码块和所有shell变量/训练参数；不计算完成比例，不以覆盖/文件存在推断完成。
