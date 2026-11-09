@@ -327,6 +327,10 @@
     "no_sha_validation": true
   },
   "native_prediction_and_score_CPU_already_paid_once": true,
-  "new_report_CPU_pending_actual_idle": true,
-  "full_external_comparison_and_all_project_costs_complete": false
+  "new_report_CPU_pending_actual_idle": false,
+  "full_external_comparison_and_all_project_costs_complete": false,
+  "actual_report_CPU_settlement": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/idle-cost-settlement-v137.json",
+  "primary_archive_finalization_pending": false,
+  "primary_archive_closeout": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/verify-lme-primary-archive-closed-v1.json",
+  "all_six_LME_stage_closures_closed": true
 }

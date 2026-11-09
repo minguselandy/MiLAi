@@ -6,11 +6,32 @@
 历史 worktree、原始失败与用户文档保持原状。没有使用子代理、SHA/内容指纹校验、新服务、第二账本或远端写入。
 
 本轮机器可读入口为
-[progress](../data/manifests/a100-development-progress-20261109-v174.json)。
+[progress](../data/manifests/a100-development-progress-20261109-v175.json)。
 原始数据、冻结运行时、权重、命令、计时和实际输出位于本 worktree 的 ignored
 `artifacts/a100-development-20261104/`。本记录是现有报告体系的执行摘要。
 
-## v174 当前状态（2026-11-09，Asia/Shanghai）：两方法原生评分比较、完整操作/调用成本及图表已核对，主归档继续
+## v175 当前状态（2026-11-09，Asia/Shanghai）：LME六阶段全部关闭并结清，Mem2Act固定前缀全400条启动
+
+主归档原生owner实际exit0/已支付/父子消失，451个native条目全部ARCHIVED。冻结finalizer已创建
+primary-seed0-u32-case-archives canonical alias/closure；归档原始病例138,107,744,264 bytes、压缩文件4,360,471,443 bytes，
+每个重建字节均在移除病例目录前由原生冻结程序直接比对。完整child+parent1966.239173116CPU秒已付一次，
+index嵌套CPU不再叠加。451整首预测仍等于51段最早祖先，全部评分/失败/metrics未改写；所有模板及两方法四个
+不可变控制基底保留。主441个控制存储病例/3085检查点、Source/Reader/Judge已闭合证据和1141/1147代码字节绑定核对通过。
+早期1..9未生成物理逐步快照的缺口未补造，第9条最后未返回动作实际SEARCH的元数据更正继续保留。
+
+两方法prediction/score/archive共六个canonical闭合凭据均通过、对应owner实际已退出/支付/消失。
+idle137一次支付19项新增闭合GNU计时共186.17000000000002CPU秒，含失败统计/绘图/验证、报告/图表/复算及v173/v174writer；
+106个原生LME client phases核对通过，未重计原生NN/load/Source/存储/归档。报告CPU状态及研究草案同步更新。
+
+Mem2Act固定前缀完整400条已由原冻结own_external_mem2act_stage_v1.py显式启动：父328495/子328497
+实际存活，native{'COMPLETED': 2, 'HOST_RUNNING': 1, 'NOT_RUN': 397}、active2。每条使用完整429会话/16,843轮Source template与原始query/tool schema，
+记录真实pre-first-Host快照供之后primary共享；不执行业务工具，不变方法/预算/Source/模型或动作菜单，无自动queue/retry。
+模型/HTTP只有这一个实际实验worker；运行期间禁止离线访问账本。实际whole/client/parent与HTTP/unknown用量待owner退出一次核算。
+
+固定400全首覆盖、Source/input/SDK/首Provider请求完整审计与定稿后，才可运行primary400；随后完整适配评分/审计/归档。
+最终全项目成本、论文/图表和原763行逐项完成审计仍未完成；目标active。v175writer和之后普通计时留待实际idle138。
+
+## v174 历史状态（2026-11-09，Asia/Shanghai）：两方法原生评分比较、完整操作/调用成本及图表已核对，主归档继续
 
 [完整LME比较报告](MILAI_A100_LME_NATIVE_COMPARISON_20261109.md)与紧凑primary/comparison manifests已经生成并与
 完整普查重新执行的whole dict（仅timestamp除外）逐项一致。全451主方法73/401、固定75/401；共同完成369条为67/369

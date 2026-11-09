@@ -1,4 +1,55 @@
-# LIVE A100 EXECUTION v174: 2026-11-09 (Asia/Shanghai)
+# LIVE A100 EXECUTION v175: 2026-11-09 (Asia/Shanghai)
+
+Original763-line goal ACTIVE/incomplete; current PROGRESS, previous PROGRESS. No genuine blocker.
+Latest data/manifests/a100-development-progress-20261109-v175.json; previousv174/checkpointe34c64d3. ROOT/F/E/Q64 unchanged.
+Batch/protocol/source-version/phase IDs stay20261107. No subagents/SHA/fingerprints/services/secondledger/reset/refund/
+remote/Productwrites/first-outcome retries/reselection/crop/quantize. OneactualmodelHTTPworker maximum.
+HostGPU0/1untouched; learnerGPU2/cuda0FP32threads4/MHAFalse/refcompileFalse/TF32False. Preserve1141LME/1147Mem2Act/7Q64bindings.
+NeverGNUwrap owner/scanner/settler/launcher. Ordinary audits/writers uniqueGNUtimers; no offlineledgeraccess/write while native-owned stage live.
+Native/whole/parent/nested/oldcost neverdouble-add; author/unmeteredinspection/preflight/launch/cleanup/settlement CPUunknown_not_zero.
+
+ONLY LIVE MODELHTTPWORKER Mem2Act fixed-prefix-prediction400-v1:parent328495/child328497actualverifiedRUNNING/CPUFalse.
+E/stages-mem2act-v1/fixed-prefix-prediction400-v1-{plan,owner}.json/.log/-owner.log; explicit-launch/preflight besideplan.
+Native{'COMPLETED': 2, 'HOST_RUNNING': 1, 'NOT_RUN': 397},active2; plannedFULL400 originalqueries/schemas, freshfull429sessions16843turnSourcepercase.
+OriginalE/frozen-mem2act-v1/own_external_mem2act_stage_v1.py; wholeplan literalequalsinitialprotocol,1147codebindings.
+Originalprotocol-before-public-task-projection-v1.json unchanged; sourceversionlocal-a100-mem2act-native400-20261107-v1.
+All6LMEcanonicalclosures/Sourcepaidgone/publicprojection/fullsourceverification and latestactualidle137 passed beforeexplicitcheck-only+launch.
+Actualfunctional.message fixed recordsrealpre-firstHostsnapshots; laterprimaryreplay_host_message overridesonlyfrozenpolicy/checkpoint;
+staticfullconfigmerge/noLMEobserveroverwrite verified. No businessexecution/new service/automaticqueue/retry.
+ObserveactualnamedPIDs/driver; timeout NOTtermination. Noofflineledgeraccess while live. Nativeowner whole-minus-native+parentonceat exit.
+KnownnativeIncompleteChatResponse/provider_protocol orFUNCTIONAL_FORMAT_REPROPOSAL_EXHAUSTED withknownusage maynextrow underfrozenloop,
+notretryfailed. Otherfailurestop: inspectactualrawfirst/usage/cost, waitownerexit/paid/gone, reflect andexplicit nativeNOT_RUNtailonly.
+FAILED_WRAPPER retainsreturned-native-result-before-wrapper-failure.json; reconcilemetadatawithout rerunningnativefirst.
+DoNOTuseLMEReader-tailhelper. Need full400Source/Storepermissions/application/input/SDK4.52/firstProviderwireaudit,all400fixedsnapshotsreplayable,
+frozenfinalizationbefore primary400. Then bothadaptedscore/fullscoreaudits/archive required; components not400proof.
+
+LME BOTH451 ALL6canonicalprediction/score/archiveclosures CLOSED/paid/gone. ROOT/verify-lme-primary-archive-closed-v1.json passed451archives,
+138107744264originalbytes/4360471443archivebytes,allfirst451wholeeqearliest51,templates/fourimmutablebases,441primarycases/3085controlchecks,
+1141primary/1147Mem2Actliteralcodebindings,actualzeroHTTP/unknown. Nativearchivewhole+parent1966.239173116CPU paidonce, indexnestedNOTadded.
+Fixedarchivewhole+parent1965.505107002CPU previouslypaid; no replay/model/NN/load/oldstorage/archive re-bill.
+Idle1..137PAID; latest19closedGNUtimers186.17000000000002CPU includesfailedcensus/plot/pathcheck andreport/figure/reproductions/v173-v174writers.
+All106nativeLMEclientphasesreconciled,NOTrecharged. v175writer/laterordinarytimers awaitactualidle138; no offlineledgerwhileMem2Actlive.
+
+CLOSED reports: docs/MILAI_A100_LME_NATIVE_COMPARISON_20261109.md; compactprimary/comparison/figure manifests20261109v1;
+ROOT/lme-primary-native-comparison-publication-verification-v1.json allcensus/comparisonreproductionwholeeqexcepttimestamp,
+PNG2800x2000actualviewed/layoutfixed,PDFsamefigure/1page/notseparatelyrendered. CPUreportpaid137,archivependingFalse.
+Primary73/401/254UNKNOWN/50unscored(2retr+48Reader),fixed75/401/250UNKNOWN/50ReaderF; nativecompletecohortmetricNone.
+369common primary67/fixed70,g14/l17/t338,diff-3/369 conditional; full451differencebounds[-52/451,48/451]. No superiority/queryiidCI/failedgoldimputation.
+PrimaryREAD3060selected/2017opened/22observed/1021budgetreject;522SEARCHselected/521searched;12HANDOFF/11delivery_selected/1directexit;
+3592operationresults/449packets/437budget_exhausted/1885original_sourceitems. Actualrow9lastunreturnedSEARCH,NOTREAD;2earlierREADopened.
+Oldfrozenauditfield last_selected_READ_without_result_is_not_success misnameskind; newmetadata+actualtrace/nativechoice correction,originalsunchanged.
+PrimaryHTTP583/3070973known vsfixed581/3040745; primaryNN3594/25070604/173923headscalars/51loads inclinitialCPUfail+50verifiedCUDA.
+Predictionwhole+parent32309.461795555002CPU,score40.002333217 includesNN4139.53828435787/load335.776374642; neveraddnestedagain.
+50verifiedCUDAinvocationinterval11.529464607478845h includesIO/Readerwait,notGPUbusy/encoderlatency/HostGPU/$/fullprojecttotal.
+FullSourceaudit10285695comparisons/3536restores/449SDK+Readerwires/3594NNpassedunderhonestphysicalscope;1..9physicalsnapshotsNEVERgenerated,
+unavailable/disclosed,notfabricatedbyarchives. 13837Storevalues/Source/role/clock/permissions/appschecksretained. Rows10..450actualsnapshots passed.
+Reader48length8192:47None+row258str10partial stayFAILED/unscored; fixedpartial501alsofailed. No nativefirstretry/reselection.
+
+Remaining Mem2Act400x2fullfirstcoverage/audits/score/archive,finalallprojectcost/paper/figures/final763requirementaudit INCOMPLETE.
+Internal1024/Q6412999/D960+K9+old42/fourpanel/eightfit unchangedclosed; reviewerTHISassistantnotindependenthuman.
+No newfit/adopt/nativeTESTopening; staticpaidcutoff before007 NOTcurrenttotal. GoalstayACTIVE, notcomplete/blocked, preservefullscope.
+
+# HISTORICAL A100 EXECUTION v174: 2026-11-09 (Asia/Shanghai)
 
 Original763-line goal ACTIVE/incomplete; current PROGRESS, previous PROGRESS. No genuine blocker.
 Latest data/manifests/a100-development-progress-20261109-v174.json; previousv173/checkpointa977f1fb. ROOT/F/E/Q64 unchanged.
