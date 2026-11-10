@@ -172,7 +172,15 @@ def main() -> None:
             p["delivery"] in {"left", "right"} for p in feedback["feedback"]["comparisons"]
         ):
             matched.append(feedback)
-            sft.append(base)
+            paired_sft = copy.deepcopy(base)
+            paired_sft["metadata"].update(
+                collection_state_id=base["metadata"]["state_id"],
+                state_id=feedback["metadata"]["state_id"],
+                row=feedback["metadata"]["row"],
+            )
+            # The trainer seeds option permutations by state_id. Match that seed as
+            # well as the actual before/menu, while retaining the collection origin.
+            sft.append(paired_sft)
     args.output.mkdir(parents=True, exist_ok=False)
     for name, records in (
         ("raw-feedback", compiled),
