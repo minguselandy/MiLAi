@@ -1,4 +1,58 @@
-# LIVE scalable evidence phase 3: 2026-11-11
+# LIVE scalable evidence phase 4: 2026-11-11
+
+Full v2 user goal ACTIVE/incomplete; previous/current turns PROGRESS. No subagents/SHA/fingerprints,
+new services, Product/API/permission/Canonical changes, remote push or automatic retry.
+Latest docs/MILAI_SCALABLE_EVIDENCE_EXECUTION_20261111.md, manifest scalable-evidence-progress-20261111-v4.json.
+All new artifacts /data/milai-experiments/20261111-scalable-evidence; /cra ordinary space exhausted.
+Current code4bab6388. Live op10k uses already-loaded cececfb7 trainer; new aux-dev feature is only for36k.
+
+LIVE op10k: exec33781,parent468717,child468718,physicalGPU3;lastobserved208/945 RUNNING.
+LIVE op36k: exec52995,parent769162,child769163,physicalGPU2;3390updates/108450draws/3passes.
+36k may still be preparing before run.json exists; actual named /proc is authoritative. Never restart
+on observation timeout. Exactargv in s1-op10k-seed0-v1-owner.json / s1-op36k-seed0-v1-owner.json.
+Same original E1/u16 init, BF16/batch32/warmup-cosine; original paper fast/full dev retained.
+36k additionally uses musique-public-dev-v2/states.jsonl (30oldDEVfamilies688states/423labels).
+Nominal30k tier is complete36150-row population, not a falsely labelled30000 file. Preserve all inputs.
+
+CLOSED original303 fits exec36680/PIDs4189632/4189633 gone exit0. Large9606draws/62441307tokens,
+repeat9696draws/61819154tokens;notexactFLOPs. Familymacro fullDEV at101/202/303:
+large.4824424/.4861401/.468283;repeat.4300885/.4077445/.4077445. Paper full480states/278labels/28groups.
+CLOSED autonomousHost exec3251/10293, CPUu101 vsGPU2u303, all40first positions(5conditions*DEV8).
+Rules reused once. Corecomplete rules/large101/repeat101/large303/repeat303=3/3/2/3/1;
+strictsupported=2/3/2/2/1;firstfailures=2/3/2/4/1. SourceRootreviewnonblind/nonindependent.
+All28completed finalinputs response-ID bound/literalSource matched;failedcompletedframesnotfabricated.
+WSJ:both largepoints deliveractualresultparagraph+correctHost;bothrepeats onlyheading+unableanswer.
+Bounded observed capability chain, not broad/superior-to-rules claim. Length/support/attribution faults remain.
+Artifacts s1-autonomous-dev8-review-v1 (author-review/native-agreement), owner files preserve costs.
+Model+Host own costs not rebilled. No matched initialHostRNG;withincheckpoint device matched,acrossnot.
+
+CLOSED native pool:3418variants/1820questions/283nativeTRAINgroups/279target-titleclusters, inherited
+TRAIN+question/target/pool/title boundaries. Onebank perfamily;eachrequest its owncontext mask.
+Public retrieve cold thenfirstactualdeliveredref -> known-first, no gold intoK/no crossvariant leak.
+Firstpilot384states176labels/max8849/no trunc. Source annotations v4 credit ONLY executed SEARCH
+bindings with actual useful candidate scope;128pilot targetsets corrected fromclosed traces,NOreexecution.
+Oldpilot-v1retained;usemusique-public-pilot-v2 plus4closedshards. Allcollectionexec34897 drained.
+op36k-v1:71512raw/36150fit/1004nativegroups/1000clusters/912labelledclusters;35362unknownremain.
+Exact10070-row parentprefix. Compiler normalizes bysource_cluster,keepsnative_family; neverinflatesvariants.
+Conditional groups are constructed from real receipts, not natural Host understanding/independenttrials.
+Rawpublic replay/toolbindings outside online state. Nativeunanswerable remainsunknown,notautomaticSTOP.
+OldDEV30 keptDEV;rawnormalizedDEV lackedoptionalanswer_aliases -> null,firstfailure retained.
+Newconfirmation96 still METADATA ONLY. Mainqasper andnativeDEV separate;no public-heldout renaming.
+
+CLOSED oneTRAINfamily GPUdiagnostic exec10513:large303cold/known28/88,26/88;repeat30/88,23/88.
+Notheldoutgeneralization or causalKreasoning (menus/prefixes differ). No newmodelclaim fromthispanel.
+16relatedtests(inclrealGPUresume+auxdev),Ruff/packagepass;toolsboundarysame6oldLMEimports.
+Newmeasurednativecollection/annotationCPU4324.644584391 recordedonce. Owner/native/scorer eval phases
+bill themselves;unmeasuredtest/author/failedprepare/officialchildCPUunknown_not_zero.
+
+NEXT: observe10k/36k originalprocesses; realTRAIN feedback vscontinuedSFT fromselected S1 states,
+constraineddelivery/actualK, own-state aggregation andcontinuous-memory/View experiments. Existing
+I2seed all8packets identicalfixed-current; no conditional-method superiority. Need broader Host,
+repeated seeds,newconfirmation96/full costs before fullgoal completion. Do not retrain oldsmallpools
+justtooccupyGPU. Do not let historical Mem2Act/full-audit/per-command-accounting logs blocknewwork.
+Read current scoped header, not fullhistorical AGENTS below.
+
+# HISTORICAL scalable evidence phase 3: 2026-11-11
 
 Full user v2 plan ACTIVE/incomplete. Previous/current turns PROGRESS. No subagents/SHA/fingerprints,
 new services, Product/API/permission/Canonical changes, remote push or automatic retries.
