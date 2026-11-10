@@ -1,4 +1,64 @@
-# LIVE scalable evidence phase 5: 2026-11-11
+# LIVE scalable evidence phase 6: 2026-11-11
+
+Full v2 user goal ACTIVE/incomplete. Previous/current goal turns PROGRESS, no blocker.
+No subagents, SHA/content fingerprints, services/Product/API/permission/Canonical changes or push.
+Read this scoped header and latest execution doc; do not read the whole historical log.
+Root artifacts /data/milai-experiments/20261111-scalable-evidence, /cra ordinary space full.
+Latest code7a97a50e; progress-v6.json and manifest scalable-evidence-progress-20261111-v6.json.
+
+LIVE original op10k exec33781 child468718(parent468717),GPU3,loadedcececfb7,last365/945.
+Firstpass u315 fullDEV115/278,macro.44729501649 vs3k u101133/278,.4824424. Interim, keep laterpoints.
+LIVE original op36k exec52995 child769163(parent769162),GPU2,loaded4bab6388,last25/3390.
+Initial fast/aux evaluations and firstoptionorders done; now actualGPU optimization. Never restart
+on stale run.json/timeouts; actual/proc+owner+outputs authoritative. Originalfull36150rows retained.
+LIVE TRAIN160 exec31902 owner818840 child818846 CPUFP32,loaded17269285,last32families142states85
+terminalpackets. Originalowner will bill wholechild CPU once at closure; do not doublebillNativeDecision.
+LIVE directI2 first16 readouts exec68555 child953553,41actualpackets16terminalstates,nonebudgetforced.
+Prepared i2-learner-terminal-first16-v1; outputs i2-learner-terminal-first16-readouts-v1.
+Readouts reuse exact old fullwire where available, including failures. New calls/reused outcomes separate.
+Next DIRECT terminal segment offset16; targetfirst64families. Do not confuse with oldinitial/post segments.
+
+CLOSED legacy short-rollout first8: prefix2 exec94170 and families2to8 exec50832 fullydrained.
+Total16states40unique firstreadouts:34complete6lengthfailed,177748known tokens0newunknown.
+First2 semanticreviewed;next6 onlyreferenceproxy compiled, semantic review stillpending.
+Legacy common Rules often READ observe_only then forced plainHANDOFF. Empty packet can be caused
+by that terminal rule. Keep original outcomes but do NOT promote it as general learner/rules superiority.
+Families2to8 witness manifest:1directionstate2directionpairs1tie21unknown;not semanticHostlabels.
+
+CLOSED terminal mechanism: prepared s2-reached-train160-prefix2-rules-terminal-v1(exec86463),
+readouts sameprefix-rules-terminal-readouts-v1(exec12354) exit0/drained. Sameoriginalbefore/menu/
+nominations/acquisition bindings;9changed fullwires+1exactwire reused.9newHTTP40157known tokens,
+2lengthfailures;10positionsinclreuse:0complete-supported,6incomplete,2wrongtarget,2failed.
+Rules terminal loses correctCAISparagraph toabstract, or returnsSNIPS+acknowledgment ->wrongtarget.
+Notqualityimprovement; Root source review nonblind/nonindependent at s2-prefix2-rules-terminal-author-
+review-v1.json. Review-compiled s2-prefix2-rules-terminal-reviewed-v1 has no known directions.
+5ceb111d explicitly supports current/rules terminal; fullwire reuse keeps firstfailure, no retry.
+Do not mix current/rules/directHANDOFF feedback targets silently; compiler records rollout metadata.
+DirectI2 now uses already-executed learner terminal alternatives, ORIGINAL FULL ONLINE MENU inrows,
+only executedHANDOFF pairs supervised; no sharedsuffix overriding firstchoice, no newnativeexec/Storecopy.
+Collector_actual label is not automatically argmax whenbudgetforced; first16has0forced, futurekeepflag.
+
+603d5ab5 optional --reuse-training-tokens for FUTURE jobs only. SDKalreadyreuses stateIDs during
+permutations; newhelper shares audit/item state tokenization and question/option tokens viaSDK.
+64actual36k inputs3624..10445tokens,13..89options,0trunc,exactaudit/items/initial+3permutation encodings.
+CPUprep+3permutations median3.519->1.075s,3.274x;NOT end-to-end/GPU speedup. tokenizercalls28320->211.
+Benchmark training-token-reuse-benchmark-v2.json;v1wrongcheckpointrootfailedbeforemeasurement,retained.
+22CPUrelatedtests pass9broadGPUtests skipped there;2targetedrealCUDA cache/resume tests pass,
+legacy/cache finalFP32parameters equal.13feedbacktests+1fullmenubinding pass.Ruff/packagepass;
+toolsboundarysame6oldLMEimports. No livejob runtime/data altered by these edits.
+
+PENDING COST WRITE exec57897 is waiting on original HTTP budgetlock for6 measuredpreparationphases,
+27.603084699 CPU seconds. Receipt phase6-preparation-compute-v1.json recorded:false until done.
+Do not rerun billing! Poll samehandle/check receipt after activeHost releaseslock. Host runners and
+learnerowner bill themselves;author/tests/firstbenchmarkfailure CPUunknown_not_zero.
+NEXT: close directI2first16, review actualpackets and retain allfailures, nextterminal16..64; grow
+meaningful feedback and matchedSFT/pair fromcommonS1. Finish10k/36k, actualK/constrainedI2, own-state
+comparison, continuous-source/View, decisiveseeds,newconfirmation96 andfullquality/cost/generalization.
+Old D has1200exposed positions and32TRAIN generatedMemOps backgrounds (docs/MILAI_A100_PLAN_D_AUDIT_
+20261109.md; artifacts/.../d-update32/new32-histories.json); reuse evidence where applicable, not as
+newS1 Viewlearning/naturalhistory. Avoid repeating oldaudit as a prerequisite. Fullgoalnotcomplete.
+
+# HISTORICAL scalable evidence phase 5: 2026-11-11
 
 Full v2 user goal ACTIVE/incomplete. This turn is PROGRESS, no blocker. No subagents,
 SHA/content fingerprints, service changes, Product/API/permission/Canonical changes or push.
