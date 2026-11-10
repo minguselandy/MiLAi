@@ -1,0 +1,292 @@
+{
+  "status": "PHASE7_PROGRESS_FULL_GOAL_ACTIVE",
+  "observed_at_utc": "2026-11-10T22:57:45.798120+00:00",
+  "code_commit": "8a85f350",
+  "previous": "/data/milai-experiments/20261111-scalable-evidence/progress-v6.json",
+  "no_sha_validation": true,
+  "active_jobs": [
+    {
+      "name": "s1-op10k-seed0-v1",
+      "loaded_source_commit": "cececfb7",
+      "pid": 468718,
+      "status": "RUNNING",
+      "optimizer_updates": 680,
+      "planned_optimizer_updates": 945
+    },
+    {
+      "name": "s1-op36k-seed0-v1",
+      "loaded_source_commit": "4bab6388",
+      "pid": 769163,
+      "status": "RUNNING",
+      "optimizer_updates": 325,
+      "planned_optimizer_updates": 3390
+    },
+    {
+      "name": "s1-learner-train160-v1",
+      "loaded_source_commit": "17269285",
+      "pid": 818846,
+      "status": "RUNNING",
+      "completed_families": 121,
+      "planned_families": 160,
+      "raw_states": 546,
+      "branch_packets": 168
+    },
+    {
+      "name": "s1-op10k-u630-autonomous-dev8-v1",
+      "parent_pid": 1363440,
+      "pid": 1363448,
+      "status": "RUNNING",
+      "completed_positions": 2,
+      "planned_positions": 8,
+      "detached": true,
+      "plan": "/data/milai-experiments/20261111-scalable-evidence/s1-op10k-u630-autonomous-dev8-plan-v1/plan.json"
+    }
+  ],
+  "direct_I2_first16": {
+    "source_families": 16,
+    "states": 16,
+    "unique_results": 41,
+    "new_calls": 40,
+    "reused": 1,
+    "new_known_generation_tokens": 178162,
+    "new_unknown_usage": 0,
+    "source_review": {
+      "answer_status": {
+        "incomplete": 23,
+        "complete": 4,
+        "incorrect": 2,
+        "execution_failed": 3,
+        "unknown": 9
+      },
+      "material_status": {
+        "insufficient": 25,
+        "sufficient": 6,
+        "unknown": 10
+      },
+      "source_families": 16,
+      "unique_readouts": 41
+    },
+    "by_policy": {
+      "collector_actual": {
+        "positions": 16,
+        "answer_status": {
+          "incomplete": 8,
+          "complete": 3,
+          "execution_failed": 1,
+          "unknown": 4
+        },
+        "material_status": {
+          "insufficient": 8,
+          "sufficient": 4,
+          "unknown": 4
+        },
+        "strict_supported_complete": 3
+      },
+      "rules": {
+        "positions": 16,
+        "answer_status": {
+          "incomplete": 10,
+          "complete": 2,
+          "unknown": 2,
+          "execution_failed": 2
+        },
+        "material_status": {
+          "insufficient": 10,
+          "sufficient": 3,
+          "unknown": 3
+        },
+        "strict_supported_complete": 2
+      },
+      "coverage": {
+        "positions": 14,
+        "answer_status": {
+          "incomplete": 8,
+          "incorrect": 2,
+          "unknown": 4
+        },
+        "material_status": {
+          "insufficient": 10,
+          "unknown": 3,
+          "sufficient": 1
+        },
+        "strict_supported_complete": 0
+      }
+    },
+    "semantic_feedback": {
+      "answer": {
+        "feedback_states": 16,
+        "states_with_direction": 2,
+        "unknown_pairs": 31,
+        "directional_pairs": 4,
+        "tie_pairs": 1
+      },
+      "delivery": {
+        "feedback_states": 16,
+        "states_with_direction": 2,
+        "unknown_pairs": 30,
+        "directional_pairs": 4,
+        "tie_pairs": 2
+      }
+    },
+    "witness_feedback": {
+      "answer": {
+        "feedback_states": 16,
+        "states_with_direction": 0,
+        "unknown_pairs": 36
+      },
+      "delivery": {
+        "feedback_states": 16,
+        "states_with_direction": 3,
+        "unknown_pairs": 28,
+        "directional_pairs": 6,
+        "tie_pairs": 2
+      }
+    },
+    "fixed_current_matches": {
+      "collector_actual": 16,
+      "rules": 5,
+      "coverage": 0
+    },
+    "literal_source_range_bindings": 72,
+    "official_f1": {
+      "collector_actual": 0.06875229985503031,
+      "rules": 0.04420232504082007,
+      "coverage": 0.06585889915212445
+    },
+    "scope": "TRAIN only, Root nonblind/nonindependent source review. Collector actual equals plain/current16/16. No learning gain or delivery-selection superiority over fixed-current proven. Reference-span coverage and task sufficiency differ in both directions; compound-task missing baseline numbers retained as incomplete.",
+    "artifacts": {
+      "review": "/data/milai-experiments/20261111-scalable-evidence/i2-learner-terminal-first16-author-review-v1.json",
+      "semantic": "/data/milai-experiments/20261111-scalable-evidence/i2-learner-terminal-first16-semantic-v1",
+      "witness": "/data/milai-experiments/20261111-scalable-evidence/i2-learner-terminal-first16-witness-v1",
+      "scoring": "/data/milai-experiments/20261111-scalable-evidence/i2-learner-terminal-first16-native-scoring-v1"
+    }
+  },
+  "matched_objective_preparation": {
+    "artifact": "/data/milai-experiments/20261111-scalable-evidence/i2-first16-matched-objective-data-v1",
+    "new_states": 2,
+    "replay_states": 2,
+    "rows_each_arm": 4,
+    "new_source_families": 2,
+    "model_inputs_sampling_ids_replay_and_weights_equal": true,
+    "normalized_new_mass": 0.8,
+    "normalized_replay_mass": 0.2,
+    "model_fits": 0,
+    "scope": "This tiny common-support prefix validates data construction, not research-scale S2 or feedback benefit."
+  },
+  "next_direct_I2": {
+    "families16to32": {
+      "status": "CLOSED_WITH5_LENGTH_FAILURES",
+      "results": 44,
+      "new_generation_tokens": 180106,
+      "semantic_review": "pending",
+      "witness": "/data/milai-experiments/20261111-scalable-evidence/i2-learner-terminal-families16to32-witness-v1"
+    },
+    "families32to64": {
+      "planned_positions": 83,
+      "original_process_lost_after_known_responses": 31,
+      "known_prefix_tokens": 112202,
+      "one_orphan_reservation": 9841,
+      "unknown_usage_increment": 1,
+      "untouched_tail": 51,
+      "sealed_prefix": "/data/milai-experiments/20261111-scalable-evidence/i2-learner-terminal-families32to64-orphan-prefix-v1",
+      "continuation": "/data/milai-experiments/20261111-scalable-evidence/i2-learner-terminal-families32to64-continued-v1",
+      "scope": "No replay of31 closed outcomes or unresolved reserved slot. Continuation reuses32 positions and executes51 previously untouched positions. Original results, stale run record and ledger reservation preserved.",
+      "status": "COMPLETED_WITH_FAILURES",
+      "complete_positions": 75,
+      "failed_positions_including_orphan": 8,
+      "reused_positions": 32,
+      "new_calls": 51,
+      "new_known_generation_tokens": 214966,
+      "new_unknown_increment": 0
+    }
+  },
+  "acquisition_feedback": {
+    "policy": "FixedContextMemoryPolicy(reads=4)",
+    "continuation_decisions": 4,
+    "terminal_handoff": "same policy on actual HANDOFF menu",
+    "within_original_remaining_slots": true,
+    "first16": {
+      "states": 32,
+      "actual_bindings": 77,
+      "new_host_calls": 73,
+      "reused_readouts": 4,
+      "known_generation_tokens": 244597,
+      "new_unknown_usage": 0,
+      "failed_readouts": 2,
+      "semantic_review": "pending",
+      "native_witness_directional_states": 5,
+      "literal_source_range_bindings": 277,
+      "prepared": "/data/milai-experiments/20261111-scalable-evidence/m2-fixed-context-train160-first16-v1",
+      "readouts": "/data/milai-experiments/20261111-scalable-evidence/m2-fixed-context-train160-first16-readouts-v1"
+    },
+    "families16to48": {
+      "status": "PREPARED_NOT_READ_OUT",
+      "families": 32,
+      "states": 64,
+      "actual_packets": 155,
+      "prepared": "/data/milai-experiments/20261111-scalable-evidence/m2-fixed-context-train160-families16to48-v1"
+    },
+    "scope": "Declared exploration changes common policy/horizon versus old2-step rules. Keep conditions separate, no clean one-factor improvement claim. Choice proposals and source selection never inspect answer labels."
+  },
+  "process_recovery": {
+    "learner": "/data/milai-experiments/20261111-scalable-evidence/s1-learner-train160-orphan-observation-v1.json",
+    "collector_restarted": false,
+    "lost_parent_cpu": "unknown, observed child CPU lower bound retained",
+    "new_readout_baseline_and_attempt_boundaries_persisted": true,
+    "new_tail_detached_from_interactive_session": true,
+    "service_restart": false
+  },
+  "tests": {
+    "related_passed": 17,
+    "actual_same_input_data_preparation": true,
+    "actual64state155packet_preparation": true,
+    "ruff": "pass",
+    "package_boundary": "pass",
+    "tools_boundary": "six unchanged old LME dynamic-import findings"
+  },
+  "compute": {
+    "phase6_receipt_recorded": true,
+    "phase7_receipt": "/data/milai-experiments/20261111-scalable-evidence/phase7-preparation-compute-v1.json",
+    "phase7_measured_cpu_recorded": 42.442148015,
+    "pending_measured_paths": [
+      "/data/milai-experiments/20261111-scalable-evidence/i2-learner-terminal-families32to64-v1/run.json",
+      "/data/milai-experiments/20261111-scalable-evidence/m2-fixed-context-train160-first16-witness-v1/manifest.json",
+      "/data/milai-experiments/20261111-scalable-evidence/m2-fixed-context-train160-first16-native-scoring-v1/summary.json",
+      "/data/milai-experiments/20261111-scalable-evidence/m2-fixed-context-train160-families16to48-v1/run.json"
+    ],
+    "unmeasured": "author/tests/original lost readout process CPU and lost learner parent/startup/tail unknown, not zero"
+  },
+  "remaining": [
+    "Finish original10k/36k trajectories and original learner160 child; never restart active processes",
+    "Finish detached I2 remaining51 and retain orphan unknown; source-review second16 and tail32 outcomes",
+    "Review closed M2first16 and read out prepared next32; grow real known feedback toward the full planned support",
+    "Fit adequate matched feedback/continued-SFT comparisons from declared common S1; tiny4row prepared prefix is not that comparison",
+    "Continue actualK/constrained evidence and continuousSource/View experiments, source-conditioned learning beyond current empty-K slice",
+    "Decisive seeds, fixed new-source confirmation96 and complete task/cost/generalization interpretation remain unproven"
+  ],
+  "external_changes": {
+    "Product_API_permissions_Canonical": false,
+    "remote_push": false,
+    "services_restarted": false
+  },
+  "second_pass_10k": {
+    "counts": {
+      "labelled": 278,
+      "accepted": 113,
+      "handoff_outside_reviewed_preference": 36,
+      "masked": 202
+    },
+    "family_macro_acceptance": 0.43216604823747684,
+    "strata": {
+      "reference_acquisition": {
+        "labelled": 203,
+        "accepted": 81
+      },
+      "reference_preserving_handoff": {
+        "labelled": 75,
+        "accepted": 32
+      }
+    }
+  },
+  "autonomous_dev_probe_scope": "Exploratory10k-u630 nominee after acquisition/handoff tradeoff; same original8DEV questions/Source/CPU FP32, prior baselines reused, HostRNGunmatched. Main10k continues to945; this is not new confirmation."
+}

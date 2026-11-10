@@ -1,4 +1,82 @@
-# LIVE scalable evidence phase 6: 2026-11-11
+# LIVE scalable evidence phase 7: 2026-11-11
+
+Full user v2 goal ACTIVE/incomplete. This and prior goal work are PROGRESS; no blocker.
+No subagents, SHA/fingerprint validation, service restart, Product/API/permission/Canonical changes or push.
+Use current scoped header and execution doc, not the full historical log. Artifacts remain
+/data/milai-experiments/20261111-scalable-evidence (R); /cra ordinary space full.
+Code8a85f350; progress-v7.json and manifest scalable-evidence-progress-20261111-v7.json.
+
+LIVE original10k child468718 parent468717 GPU3 loadedcececfb7, last680/945. u630fullDEV113/278,
+macro.4321660482 vsu315115/278,.4472950165;acquisition68->81,handoff47->32,interimnotHostquality.
+LIVE original36k child769163 parent769162 GPU2 loaded4bab6388, last325/3390.
+LIVE originalTRAIN160 child818846 CPUFP32 loaded17269285, last120families541states;64terminalfamilies
+yield168actualpackets. Parent818840 is GONE, original owner JSON stale. DO NOT RESTART CHILD.
+New observation s1-learner-train160-orphan-observation-v1.json records27974.8 processCPU lowerbound.
+At child terminal, bill its run.compute once under original compute phase if absent; parent/startup/
+tail CPU unknown, not reconstructed wholechild. Original parent planned billing will not occur.
+Old exec handles may now be unknown. Revalidate actual/proc argv and artifacts before any action.
+
+ORIGINAL I2tail exec35561/PID1176464 GONE after31 closed responses, no finally/exit code.
+Output i2-learner-terminal-families32to64-readouts-v1 retained verbatim. Exact ledger reconciliation
+against last autonomous u303-repeat budget-after +6closed runs +31trace receipts proves112202known
+tokens and ONE9841-token unknown reservation for case012/packet0. Unknown count15->16 retained.
+Server queue/running gauges observed0; no service restart. Unknown slot NEVER retried or refunded.
+Sealed prefix i2-learner-terminal-families32to64-orphan-prefix-v1 has31original outcomes +1observer-
+closed unknown failure, not completion of full83. Original unclosed readout record stays unchanged.
+CLOSED detached continuation PID1259964 gone, output i2-learner-terminal-families32to64-continued-v1,
+owner sameprefix-owner.json.83logical positions=75completed8failed(incl1orphan);32reused+51newcalls,
+214966newknown tokens0newunknown. Keep original1unknown/9841reserve in aggregate; do not erase it.
+New runner8a85 persists generation baseline and pre-client-call boundary (not ack). No live I2 job.
+LIVE detached autonomous Host u630: parent1363440 child1363448, owner
+s1-op10k-u630-autonomous-dev8-owner-v1.json; outputs s1-op10k-u630-autonomous-dev8-v1, last2/8.
+Plan s1-op10k-u630-autonomous-dev8-plan-v1. Same original8DEV questions,CPUFP32/threads4,oldbaselines
+reused once,HostRNGunmatched. Exploratory nominee dueREAD/HANDOFF tradeoff,not bestoffline score.
+Owner wholechildCPU subtracts native dynamic_memory_laya/load before once-only residual billing.
+Do not run another Host owner before closure; no givenrequests/nativeprobe/perstateStore copies.
+
+CLOSED first16 directI2 exec68555 drained:41unique results=40new+1reused,178162newknown,0newunknown.
+Root nonblind/nonindependent review complete at i2-learner-terminal-first16-author-review-v1.json:
+4complete-supported unique,23incomplete,2incorrect,3failed,9unknown. Materials6sufficient25insufficient10unknown.
+Collector_actual3/16 complete-supported;rules2/16;coverage0/14 (2singletons, no padded alternatives).
+Collector actual equals plain/current16/16; no learned selection advantage over fixed-current proved.
+Semantic feedback2direction states,4directionpairs eachanswer/delivery;delivery2ties30unknown.
+Witness proxy3states6directions, NOT interchangeable. QuaSP truncated reference still adequate;
+StyleEQ alternate paragraph adequate;HPAC full reference only answers difficulty, missing baseline
+numbers. Native contradictions/unanchored negatives/unanswerability retain uncertainty, not automaticSTOP.
+72literal source-range/role/origin/time bindings pass. FullnativeF1 collector.06875/rules.04420/
+coverage.06586 on different support14; EvidenceF1 uninterpreted. All raw answers/failures kept.
+
+CLOSED next16 I2 exec7421:families16to32-readouts-v1,44results5lengthfail,180106known0newunknown.
+Only witness compiled so far (1directionstate2pairs); semantic review pending. Do not duplicate these.
+First64 I2prepared segments arefirst16,16to32,32to64; tail83 now uses interrupted+continued provenance.
+
+CLOSED M2 fixedcontext first16 prep/readouts exec1968/64577:32states77positions,73newcalls4reused,
+2lengthfailures244597newknown0unknown; semantic review pending, witness5directionstates8pairs4ties.
+277literal source ranges bound; nativeF1 learner.05649/fixedcontext.05482/coverage.03826 is not taskquality.
+cfcca21e optional fixed_context baseline+continuation,4decisions,terminal policy within original slots;
+keep separate from old2step rules/current/rules-terminal. Firstnomination and state sampling outcome-blind.
+M2 families16to48 prep exec99833 handle lost, actualPID1210334 observed running then gone; runCOMPLETED
+and64states/155cases-packets verified (64cases,155packets). No Host calls yet, no known exit code.
+Next M2 source offset48. Do not rerun prepared/native packets to recover a tool handle.
+
+prepare_same_state_feedback_fit.py matches new before/menu/source/event/option seed +same old replay,
+and exactly equal family/event/component weights: normalized new.8/replay.2. Artifact
+i2-first16-matched-objective-data-v1 has2new+2replay rows/arm, NOT FITTED/NOT formal S2 completion.
+Rejects accidental mixing of rollout conditions. New helpers/tests17pass; Ruff/packagepass,
+toolsboundarysame6oldLMEdynamicimports. Full training/scorer inputs kept; no SHA.
+Phase6cost exec57897 nowCLOSED/paid27.603084699 CPU. Phase7 receipt paid42.442148015 once.
+Unpaid measured: I2tail32preparation, M2first16witness+native scoring, M2next32preparation.
+Lost original I2process CPU unknown. Host/fits selfbill, original learner will need manual closure
+as above. No second ledger; original reservation remains charged, not zero.
+
+NEXT: finish original10k/36k/learner160; close detached tail51; review I2second16/tail32 and M2first16;
+readout prepared M2next32, extend real support and fit adequate matched SFT/pair. Keep tiny2state data
+as pipeline evidence only. Need actualK/constrained learning (MuSiQue receipts already real), continuous
+Source/View, own-state comparison, decisive seeds, fixed newconfirmation96/full costs/generalization.
+OldD1200 exposed/generatedMemOps results can be reused as baselines, not newS1 View learning or natural
+history confirmation. Do not substitute engineering or one TRAIN success for the full goal.
+
+# HISTORICAL scalable evidence phase 6: 2026-11-11
 
 Full v2 user goal ACTIVE/incomplete. Previous/current goal turns PROGRESS, no blocker.
 No subagents, SHA/content fingerprints, services/Product/API/permission/Canonical changes or push.
