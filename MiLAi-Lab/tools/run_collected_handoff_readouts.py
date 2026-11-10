@@ -113,6 +113,9 @@ def main() -> None:
     with http_budget_scope(settings) as budget:
         assert budget is not None
         generation_before = dict(budget.state["generation"])
+        run["generation_before"] = generation_before
+        run["generation_requests_before"] = budget.state["generation_requests"]
+        write_json(args.output / "run.json", run)
         try:
             capacity = HostCapacity(settings["capacity"])
             with VLLMClient(
@@ -173,6 +176,9 @@ def main() -> None:
                             else:
                                 record["new_generation"] = True
                                 run["chat_invocations"] += 1
+                                record["dispatch_phase"] = "before_client_call_not_provider_ack"
+                                write_json(path, record)
+                                write_json(args.output / "run.json", run)
                                 response = client.chat(
                                     request["messages"],
                                     response_format=request["response_format"],
