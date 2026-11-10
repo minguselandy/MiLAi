@@ -3,14 +3,27 @@
 完整目标仍在执行。依据用户指定的
 [实验计划](/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_2XA100_40GB_20261104.md)，
 从其指定的 `6c49bf05` 创建 `feat/a100-development-20261104`。
-历史 worktree、原始失败与用户文档保持原状。没有使用子代理、SHA/内容指纹校验、新服务、第二账本或远端写入。
+历史 worktree、原始失败与用户文档保持原状。实验开发期间没有使用子代理、SHA/内容指纹校验、新服务或第二账本；
+2026-11-10 用户另行明确要求将开发与实验进度提交到 GitHub，本次按该授权发布。
 
 本轮机器可读入口为
-[progress](../data/manifests/a100-development-progress-20261109-v186.json)。
+[progress](../data/manifests/a100-development-progress-20261110-v187.json)。
 原始数据、冻结运行时、权重、命令、计时和实际输出位于本 worktree 的 ignored
 `artifacts/a100-development-20261104/`。本记录是现有报告体系的执行摘要。
 
-## v186 当前状态（2026-11-09，Asia/Shanghai）：Mem2Act固定400及全量Source闭合、idle138支付，原primary400实际运行
+## v187 当前状态（2026-11-10，Asia/Shanghai）：两套Mem2Act400首执行均已退出，发布开发与实验检查点
+
+[本次完整检查点](MILAI_A100_DEVELOPMENT_CHECKPOINT_20261110.md)综合前次开发/训练、内部确认、
+LME和Mem2Act证据。原primary400现在294 COMPLETED/106 FAILED，fixed保持299/101；
+两方法原owner均exit0/CPU已记录/全终态验证通过，原父子进程均不存在。
+两套400顺序及qa_id配对一致，保存的最早100条primary完整case记录与最终driver前缀逐字段相同。
+未启动新实验、评分、归档或账本操作；已有实现与原首结果保持。
+
+Primary canonical alias/全400 Source与NN审计、两方法评分与评分审计、原无损归档尚未生成。
+这些门禁及全项目实际费用、最终图表论文、最后763行审计继续待完成；原生COMPLETED不等于任务正确。
+本次按用户明确授权提交GitHub进度，不合并或宣告全实验完成。v186及以下为各自时点的历史记录。
+
+## v186 历史状态（2026-11-09，Asia/Shanghai）：Mem2Act固定400及全量Source闭合、idle138支付，原primary400实际运行
 
 [固定全400与全量审计](MILAI_A100_MEM2ACT_FIXED400_NATIVE_RESULTS_20261109.md)实际exit0/owner支付/父子消失，
 299 COMPLETED、101 FAILED保留；先原canonical alias后冻结v2审计，400最早完整记录与原driver字节相同。

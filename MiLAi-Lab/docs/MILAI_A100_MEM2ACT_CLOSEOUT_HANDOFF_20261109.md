@@ -24,6 +24,14 @@ checkpoint、初次结果和门禁没有改变。alias创建仅复制相同drive
 若出现意外失败/FAILED_WRAPPER，先保留Native return、等待真实owner退出支付，反思并处理
 元数据或仅原NOT_RUN尾部；命令中的最终owner必须按实际continuation祖先重解，不能盲用旧owner重跑。
 
+## 2026-11-10 发布时点更新
+
+[v187检查点](MILAI_A100_DEVELOPMENT_CHECKPOINT_20261110.md)已核对原primary400退出：
+294 COMPLETED/106 FAILED，exit0/CPU已记录/全终态验证通过，原父子进程均不存在。
+保存的最早100条完整case记录与最终driver前缀逐字段相同。
+下文“3实际运行”及已记录前缀进展为历史时点；现在顺序3已原生关闭，4–10仍未派发或生成产物。
+原alias→全400审计→两方法评分/审计→最后归档的顺序保持，不能将本次进度发布当这些门禁通过。
+
 ## 实际输入、环境与原门禁
 
 检查了真实completed0、failed2和本次最后closed例的实际pre-first-Host捕获：公开完整query/schema、

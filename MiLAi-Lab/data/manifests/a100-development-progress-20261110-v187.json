@@ -1,0 +1,231 @@
+{
+  "schema": "milai-a100-development-publication-checkpoint-v1",
+  "status": "BOTH_MEM2ACT400_NATIVE_FIRST_OUTCOMES_CLOSED_PRIMARY_FULL_AUDIT_AND_SCORES_PENDING",
+  "timestamp_utc": "2026-11-10T12:58:16.267851+00:00",
+  "execution_timezone": "Asia/Shanghai",
+  "branch": "feat/a100-development-20261104",
+  "previous_manifest": "data/manifests/a100-development-progress-20261109-v186.json",
+  "previous_checkpoint_commit": "48b9c155570a604bd457b742b709e496fda35519",
+  "publication_requested_by_user": true,
+  "publication_scope": "Review previous conversations and local existing evidence; publish a progress checkpoint without new experiment execution or merge.",
+  "original763_line_experiment_goal_complete": false,
+  "goal_complete": false,
+  "experiment_pause_resume_or_restart_performed": false,
+  "current_report": "docs/MILAI_A100_DEVELOPMENT_CHECKPOINT_20261110.md",
+  "mem2act": {
+    "methods": {
+      "fixed": {
+        "status": "CLOSED_NATIVE_MEM2ACT400_FIRST_OUTCOMES_RETAINED",
+        "exit_code": 0,
+        "client_CPU_recorded": true,
+        "validated_stage_terminal": true,
+        "positions": 400,
+        "automatic_retry": false,
+        "automatic_queue": false,
+        "whole_child_CPU_seconds": 18222.205158,
+        "parent_CPU_seconds_through_billing": 0.161578167,
+        "already_recorded_native_CPU": {},
+        "known_generation_tokens": 4559821,
+        "shared_generation_admissions": 1025,
+        "new_unknown_usage": {
+          "generation": 0,
+          "embedding": 0
+        },
+        "GPU2_job_interval_hours": null,
+        "unmetered_launch_cleanup_author_CPU": "unknown_not_zero",
+        "owner": "artifacts/a100-development-20261104/external-own-policy-v1/stages-mem2act-v1/fixed-prefix-prediction400-v1-owner.json",
+        "driver": "artifacts/a100-development-20261104/external-own-policy-v1/stages-mem2act-v1/fixed-prefix-prediction400-v1-output/driver.json",
+        "driver_status": "COMPLETED_WITH_FAILURES",
+        "native_status_counts": {
+          "COMPLETED": 299,
+          "FAILED": 101
+        },
+        "all400_rows_in_original_order": true,
+        "original_processes": {
+          "pid": {
+            "pid": 328495,
+            "exists_at_observation": false
+          },
+          "child_pid": {
+            "pid": 328497,
+            "exists_at_observation": false
+          }
+        },
+        "native_status_is_not_task_quality": true,
+        "whole_child_includes_native_load_and_decision_CPU": true,
+        "shared_generation_admissions_is_not_HTTP_or_response_callback_count": true
+      },
+      "primary": {
+        "status": "CLOSED_NATIVE_MEM2ACT400_FIRST_OUTCOMES_RETAINED",
+        "exit_code": 0,
+        "client_CPU_recorded": true,
+        "validated_stage_terminal": true,
+        "positions": 400,
+        "automatic_retry": false,
+        "automatic_queue": false,
+        "whole_child_CPU_seconds": 12154.361424,
+        "parent_CPU_seconds_through_billing": 0.280344148,
+        "already_recorded_native_CPU": {
+          "dynamic_memory_laya_load": 9.210952584000097,
+          "dynamic_memory_laya": 2807.6887303200783
+        },
+        "known_generation_tokens": 5308357,
+        "shared_generation_admissions": 1068,
+        "new_unknown_usage": {
+          "generation": 0,
+          "embedding": 0
+        },
+        "GPU2_job_interval_hours": 8.664538661883368,
+        "unmetered_launch_cleanup_author_CPU": "unknown_not_zero",
+        "owner": "artifacts/a100-development-20261104/external-own-policy-v1/stages-mem2act-v1/primary-seed0-u32-prediction400-v1-owner.json",
+        "driver": "artifacts/a100-development-20261104/external-own-policy-v1/stages-mem2act-v1/primary-seed0-u32-prediction400-v1-output/driver.json",
+        "driver_status": "COMPLETED_WITH_FAILURES",
+        "native_status_counts": {
+          "COMPLETED": 294,
+          "FAILED": 106
+        },
+        "all400_rows_in_original_order": true,
+        "original_processes": {
+          "pid": {
+            "pid": 2793546,
+            "exists_at_observation": false
+          },
+          "child_pid": {
+            "pid": 2793571,
+            "exists_at_observation": false
+          }
+        },
+        "native_status_is_not_task_quality": true,
+        "whole_child_includes_native_load_and_decision_CPU": true,
+        "shared_generation_admissions_is_not_HTTP_or_response_callback_count": true
+      }
+    },
+    "all400_pairwise_qa_ids_same_original_order": true,
+    "fixed_canonical_closure_passed": true,
+    "fixed_full400_Source_audit_passed": true,
+    "fixed_all400_first_Host_snapshots_replayable": true,
+    "primary_earliest100": {
+      "private_records": "artifacts/a100-development-20261104/mem2act-primary-first100-earliest-case-records-v1.json",
+      "record_count": 100,
+      "native_status_counts": {
+        "COMPLETED": 76,
+        "FAILED": 24
+      },
+      "complete_case_dicts_literal_equal_final_driver_prefix": true,
+      "must_remain_equal_in_future_canonical_alias": true
+    },
+    "pending_original_followups": [
+      {
+        "original_command": "primary-earliest-first400-canonical-alias",
+        "expected_output": "artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/primary-seed0-u32-prediction400-v1-closure.json",
+        "exists_at_observation": false,
+        "executed_in_this_publication": false
+      },
+      {
+        "original_command": "primary-full400-frozen-observer-v2-audit",
+        "expected_output": "artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/primary-seed0-u32-full400-audit-v1.json",
+        "exists_at_observation": false,
+        "executed_in_this_publication": false
+      },
+      {
+        "original_command": "fixed-all400-adapted-score",
+        "expected_output": "artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/fixed-prefix-adapted-scores-v1.json",
+        "exists_at_observation": false,
+        "executed_in_this_publication": false
+      },
+      {
+        "original_command": "fixed-all400-adapted-score-audit",
+        "expected_output": "artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/fixed-prefix-adapted-score-audit-v1.json",
+        "exists_at_observation": false,
+        "executed_in_this_publication": false
+      },
+      {
+        "original_command": "primary-all400-adapted-score",
+        "expected_output": "artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/primary-seed0-u32-adapted-scores-v1.json",
+        "exists_at_observation": false,
+        "executed_in_this_publication": false
+      },
+      {
+        "original_command": "primary-all400-adapted-score-audit",
+        "expected_output": "artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/primary-seed0-u32-adapted-score-audit-v1.json",
+        "exists_at_observation": false,
+        "executed_in_this_publication": false
+      },
+      {
+        "original_command": "both400-original-lossless-archives-after-all-gates",
+        "expected_output": "artifacts/a100-development-20261104/external-own-policy-v1/finalized-mem2act-v1/case-archives",
+        "exists_at_observation": false,
+        "executed_in_this_publication": false
+      }
+    ],
+    "both400_complete_audited_scored_comparison_available": false,
+    "native_terminal_counts_are_not_semantic_or_business_execution_results": true
+  },
+  "existing_development_training_and_results": [
+    {
+      "scope": "P0 FP32/BF16, A0/A1, B0/B1, E3 seed1/2 eight measured training jobs; no upstream E1/seed0 rerun",
+      "report": "docs/MILAI_A100_CLOSED_TRAINING_COMPUTE_20261107.md"
+    },
+    {
+      "scope": "P0/A/B64/B-repair/C/D 78 concrete audited contracts and original763-line remaining scope",
+      "report": "docs/MILAI_A100_PLAN_CURRENT_EVIDENCE_20261109.md"
+    },
+    {
+      "scope": "Four fixed methods each256;1024 retained first outcomes and author Source-based quality review;no adopted learned quality advantage",
+      "report": "docs/MILAI_A100_CONFIRMATION256_RESULTS_20261107.md"
+    },
+    {
+      "scope": "Closed internal development/confirmation/update/query panels with separate denominators and exposure limits",
+      "report": "docs/MILAI_A100_CLOSED_INTERNAL_OVERVIEW_20261107.md"
+    },
+    {
+      "scope": "Both LME451 prediction,score,archive stages closed;six total;each50 first failures remain unscored",
+      "report": "docs/MILAI_A100_LME_NATIVE_COMPARISON_20261109.md"
+    },
+    {
+      "scope": "Partial paper,methods,exposure and closed internal/LME figures;final Mem2Act/full cost/paper incomplete",
+      "report": "docs/MILAI_A100_DEVELOPMENT_RESULTS_DRAFT_20261107.md"
+    }
+  ],
+  "remaining_after_native_predictions": [
+    "Primary canonical alias/closure preserving all earliest first records",
+    "Primary frozen-v2 full400 Source/Store/Saver/SDK/Host/NN audit",
+    "Both original adapted scores and per-case score audits",
+    "Original lossless archives after all six closure/Source/score gates",
+    "Full800 comparison and figures after actual gates",
+    "Actual idle settlement and final whole-project known/unknown costs",
+    "Final paper and original763-line requirement completion audit"
+  ],
+  "cost_scope": {
+    "original_continuous_ledger_opened_or_written": false,
+    "owner_closed_costs_read_only": true,
+    "whole_native_residual_parent_or_history_rebilled": false,
+    "final_project_cost_recomputed": false,
+    "ordinary_publication_GNU_CPU": "Pending next actual authorized idle settlement; unique timing files retained locally.",
+    "unmetered_early_inspection_author_launch_cleanup_CPU": "unknown_not_zero"
+  },
+  "publication_checks": {
+    "both_original_owners_terminal_paid_and_processes_absent": true,
+    "both_original400_rows_and_pairwise_qa_ids_verified": true,
+    "primary_earliest100_complete_case_records_literal_equal": true,
+    "fixed_existing_canonical_and_full_Source_gates_passed": true,
+    "later_expected_outputs_absent": true,
+    "new_JSON_and_report_relative_links_passed": true,
+    "new_report_local_link_count": 9,
+    "existing_report_path_count": 6,
+    "root_Product_Lab_Archive_boundary_check_passed": true,
+    "Lab_active_package_DAG_facade_and_import_boundary_check_passed": true,
+    "Lab_boundary_verified_with_existing_Python311_environment": true,
+    "initial_system_Python310_boundary_import_failed_StrEnum_before_scan": true,
+    "full_unit_PostgreSQL_model_or_final_Source_score_gates_run_in_publication": false
+  },
+  "boundaries": {
+    "changed_scope": "Lab documentation,AGENTS and compact progress manifest only",
+    "product_archive_or_implementation_source_changed": false,
+    "public_Schema_API_permissions_Canonical_behavior_changed": false,
+    "raw_Source_requests_logs_databases_models_or_weights_published": false
+  },
+  "new_experimental_model_HTTP_GPU_business_calls": 0,
+  "subagents_used": false,
+  "sha_or_content_fingerprint_validation_used": false
+}

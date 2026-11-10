@@ -1,4 +1,35 @@
-# LIVE A100 EXECUTION v186: 2026-11-09 (Asia/Shanghai)
+# LIVE A100 PUBLICATION CHECKPOINT v187: 2026-11-10 (Asia/Shanghai)
+
+The current user explicitly requests reviewing prior development/experiment progress and publishing to GitHub.
+Publish this checkpoint on the existing feat/a100-development-20261104 branch; no merge is requested.
+This supersedes the historical no-remote instruction for this publication only.
+Current summary: docs/MILAI_A100_DEVELOPMENT_CHECKPOINT_20261110.md.
+Current compact manifest: data/manifests/a100-development-progress-20261110-v187.json.
+The original763-line experiment goal remains incomplete. This checkpoint does not pause, resume,
+restart, autoqueue or complete that goal. No subagents/SHA/fingerprints/new services/second ledger.
+
+READ-ONLY ACTUAL OBSERVATION: both original Mem2Act400 prediction owners are now CLOSED,
+exit0/client_CPU_recorded/validated_stage_terminal true, both original parents and children absent.
+Fixed299 COMPLETED/101FAILED; primary294 COMPLETED/106FAILED, all400 terminal in each original order.
+The saved primary first100 complete case dicts remain literal equal to final driver rows0..99,
+76COMPLETED/24FAILED. No first retry, reselection or result rewriting.
+Primary whole-child CPU12154.361424 plus measured parent0.280344148 already recorded by owner;
+native load/decision CPU is INCLUDED, never re-add. Known generation tokens5308357/newunknown0/0.
+shared_generation_admissions1068 is not an HTTP/response-callback count.
+No original continuous-ledger read/write or new model/GPU/business/experimental HTTP calls in this review.
+
+Fixed canonical closure/full400 frozen-v2 Source audit remain passed. Primary canonical closure/full400
+Source/NN audit and both scores/score audits/lossless archives remain absent at this observation.
+Do not infer all800 audited/scored from execution terminal counts. Completed native status is not quality.
+Future authorized execution retains original alias THEN full400 audit THEN both adapted scores/audits
+THEN original lossless archives; all6 gates before full comparison/figure. Preserve earliest100 prefix,
+all failed firsts, common429 session/16843turn bank and frozen1147+observer1 identities.
+All permanent archives/empty bases must remain; restore archived oldD/internal captures before native checks.
+Final actual idle costs, full project known/unknown costs, paper/overall figures and763-line audit remain required.
+Unmetered author/launch/cleanup CPU remains unknown_not_zero; publication CPU awaits actual idle settlement.
+The v186 header and all earlier running snapshots below are historical, not current process state.
+
+# HISTORICAL A100 EXECUTION v186: 2026-11-09 (Asia/Shanghai)
 
 Original763-line goal ACTIVE/incomplete;currentPROGRESS/previousPROGRESS;no genuineblocker. Latestdata/manifests/a100-development-progress-20261109-v186.json.
 Previousv185/checkpoint82fc5783. ROOT/F/E/Q64unchanged. ReadthisLIVEheader/scopedsections;do notcatfullhistoricalAGENTS.
