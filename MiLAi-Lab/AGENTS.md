@@ -1,4 +1,54 @@
-# LIVE scalable evidence phase 2: 2026-11-11
+# LIVE scalable evidence phase 3: 2026-11-11
+
+Full user v2 plan ACTIVE/incomplete. Previous/current turns PROGRESS. No subagents/SHA/fingerprints,
+new services, Product/API/permission/Canonical changes, remote push or automatic retries.
+Current code2039a7d0; LIVE main fits still frozen cececfb7 and original op3k inputs. Do not hot-change them.
+Latest docs/MILAI_SCALABLE_EVIDENCE_EXECUTION_20261111.md and
+ data/manifests/scalable-evidence-progress-20261111-v3.json. Root artifacts remain
+ /data/milai-experiments/20261111-scalable-evidence (persistent; /cra ordinary space exhausted).
+
+LIVE original303-update comparison: exec36680,parent4189631, children4189632 (op3k/GPU2),
+4189633 (repeat32/GPU3). Last observed bothRUNNING/u151. Revalidate actual/proc commands and outputs;
+timeout is not termination and does not authorize restart. s1-main-comparison-v1.json has original argv.
+Atu101 full480dev/278labels/28labelled families: op3k133accepted/macro.4824424, repeat113/.4300885.
+These are interim reference-preference metrics, not Host success; continue202/303 as planned.
+
+CLOSED op10k data:10070fit/16833rawstates,721TRAIN papers/646labelled. Original3202fit lines are literal
+prefix. Fixed dev semantics/order/labels identical; only offline state_id reindexed in new copied dev.
+Future command references ORIGINAL op3k fast128/full480 paths. Actual NEW337TRAIN families,
+1005new-family requests plus429new questions on203existing families. Do NOT count those203 as new families.
+All203actual Source banks reused; no new SQLite copies. New confirmation96 METADATA ONLY preserved,
+no reserved-body/answer export. Original nativeTRAIN researchCONFIRMATION71 remains excluded.
+Raw6764unknown retained;1now-labelled =>6763remainingunknown. Material-vs-observed compiler correction
+replayed only4affected TRAIN requests/32actualstates:1previouslyunknown ->6legalHANDOFFtargets;
+NO prior nonempty label changed and NO live file/result rewritten. New row appended after old fit prefix.
+New supervision_version=reference_witness_v2_observed_delivery. Old v1 running scope remains explicit.
+
+I2 DEV8 CLOSED: prep exec12839 exit0,readout exec78318 exit0; PIDs40326/73516 gone.
+24actualfirstpackets/readouts:23readoutCOMPLETED/1rules-lengthfailure;91757known generationtokens,newunknown0.
+Full literal F1 base.0630973/I2.0708920/rules.0812272. Root nonblind source review corecomplete3/4/3;
+strict supportedcomplete3/2/3;2uncertain native-reference cases each. No significant/wider gain claim.
+I2 selects current/all8/8, EXACT same packets as fixed-current; not conditional complementarity or
+advantage over that simple control. Useful material restoration in one why-question, partial structure
+information in another; absent acquisition cannot be fixed by selection. Never train on these DEV reviews.
+Artifacts i2-dev8-comparison-v2, i2-dev8-readouts-v1, i2-dev8-scoring-v1/author-review-v1.json.
+CPU selector1168.802965536 and readout3.155293599 already natively billed once; new closed expansion/
+label/scorer-parent CPU521.713220618 also recorded once. Official scorer childCPU, authorship/tests and
+initial syntax failure remain unmeasured, not zero. No old historical cost settlement prerequisite.
+
+READY NOT EXECUTED: s1-op10k-seed0-v1-plan.json:10070rows,3passes,945updates,30210draws, same original
+E1/u16 initializer, LR/schedule, fixed original dev; checkpoints158/315/630/945. Use only a free allocated
+research GPU after observing current jobs. No automatic followup queue created.
+NEXT: continue main curves + run10k; actually evaluate selected S1 models in Host tasks; expand30k
+with lawful MuSiQue/native groups and keep role boundaries. Existing source-pool expansion protocol is
+at training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/source-pool/expansion-protocol-v1.json
+(3978 inherited TRAIN rows, prior128 selected new groups; do not treat all nativeTRAIN as eligible).
+I2 next TRAIN feedback should cover constrained budgets/actual Host-known evidence and acquisition,
+with fixed-current/rules controls. Need formal feedback comparison, own/continuous states, seeds and
+new-source confirmation/full cost before goal completion.26related tests+real replays pass;Ruff/package
+pass;tools boundary same6preexisting LME dynamic imports. Read scoped headers, not full historical log.
+
+# HISTORICAL scalable evidence phase 2: 2026-11-11
 
 User goal remains the full 20261111 v2 plan in sibling jev-read-decisions-20261016/MiLAi-Lab/docs.
 Previous/current goal turns PROGRESS. No subagents, SHA/fingerprints, service changes or remote push.
