@@ -1,4 +1,43 @@
-# LIVE scalable evidence plan v2 execution: 2026-11-11
+# LIVE scalable evidence phase 2: 2026-11-11
+
+User goal remains the full 20261111 v2 plan in sibling jev-read-decisions-20261016/MiLAi-Lab/docs.
+Previous/current goal turns PROGRESS. No subagents, SHA/fingerprints, service changes or remote push.
+New plan supersedes historical repeated-audit/per-command-accounting prerequisites below.
+Active code for current fits: cececfb7 (not the later documentation HEAD). Do not modify live data.
+Latest report: docs/MILAI_SCALABLE_EVIDENCE_EXECUTION_20261111.md (phase2 at top).
+Latest manifest: data/manifests/scalable-evidence-progress-20261111-v2.json.
+Artifacts: /data/milai-experiments/20261111-scalable-evidence; /cra ordinary space remains exhausted.
+
+LIVE original S1 main comparison: exec36680, parent4189631, children4189632 (s1-op3k/GPU2),
+4189633 (s1-repeat32/GPU3). Revalidate actual /proc command and per-run run.json; never restart
+on an observation timeout. Exact argv/status: s1-main-comparison-v1.json in artifact root.
+Both planned303 updates, common E1-u16 initialization/BF16/LR/scheduler/fast128/full480 dev.
+Large3202 rows, three exact passes9606draws; repeated small254 rows9696draws (0.94% difference).
+Save checkpoints51/101/202/303; full dev101/202/303; FP32/optimizer/RNG recovery every100 and stages.
+Do not report results as completed before actual processes exit. No automatic retry or followup queue.
+
+CLOSED all source collectors and both startup fits (exec45766 and15188 exit0, original PIDs gone).
+TRAIN384paper families5376rawstates ->3202fit states/324labelled families;2174unknowns retained.
+Labels2668reference acquisition/534reference-preserving handoff; stages488initial/405postSEARCH/
+2309postREAD. Different32DEV families480states/278labelled; fixed fast128/78labelled.
+Native reference witness is a proxy, not exhaustive semantic proof or Host success. No gold in inputs.
+Actual same-pool packets TRAIN330/DEV179, still NO new Host calls. No Store-per-state copies.
+Startup S1:254draws/8updates, fast25->25/78; I2seed:256draws/8updates, fast25->28/78.
+I2 used3 existing feedback states+32replay, not the formal S1-to-S2 comparison. Both saved full recovery.
+Recovery real CUDA continuous vs stop2/3 then resume6: FP32 model,optimizer,scheduler,RNG/options equal;
+no old draw/token rebilling.57 related tests passed, Ruff/package boundary passed. No full-repo tests.
+Collection first import and owner-namespace failures retained, corrected before Source collection.
+Known measured collection CPU321.162817275s recorded once; startup fits bill themselves. Author/tests/
+initial-import/preparation CPU unknown, not zero. No ledger mutations outside proper lock/owned scope.
+
+Next useful work while long fits run: prepare actual I2 learned selection + held-source Host comparison,
+expand lawful independent-source population for10k/30k, and retain full dev/new-source roles. Existing
+closed packet-only readouts are conditional mechanism evidence, not autonomous Host evidence.
+Full goal still ACTIVE/incomplete: main curves, real Host benefits, larger scales, chosen conditional/
+own-state/continuous-memory experiments, seed repeats/new-source confirmation/cost scope remain.
+No Product/API/permission/Canonical changes. Read scoped current sections, not full historical log.
+
+# HISTORICAL scalable evidence phase 1: 2026-11-11
 
 Current user goal is the full `MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261111_2XA10040GB_v2.md`
 in the sibling jev-read-decisions-20261016/MiLAi-Lab/docs directory. Execute on this A100

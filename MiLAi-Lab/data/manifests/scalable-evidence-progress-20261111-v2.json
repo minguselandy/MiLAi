@@ -1,0 +1,172 @@
+{
+  "status": "OP3K_RELEASED_RECOVERY_VERIFIED_S1_SCALE_COMPARISON_RUNNING",
+  "goal_complete": false,
+  "no_sha_validation": true,
+  "code_commit": "cececfb7",
+  "previous_goal_turn": "progress",
+  "current_goal_turn": "progress",
+  "operation_shard": {
+    "status": "FIXED_OPERATION_SHARD_RELEASED",
+    "no_sha_validation": true,
+    "train_collections": [
+      "/data/milai-experiments/20261111-scalable-evidence/operation-pilot-v3",
+      "/data/milai-experiments/20261111-scalable-evidence/operation-new-a-v1",
+      "/data/milai-experiments/20261111-scalable-evidence/operation-new-b-v1",
+      "/data/milai-experiments/20261111-scalable-evidence/operation-replay-v1"
+    ],
+    "dev_collection": "/data/milai-experiments/20261111-scalable-evidence/operation-dev-v1",
+    "train_source_families": 384,
+    "train_labelled_families": 324,
+    "train_raw_states": 5376,
+    "train_fit_states": 3202,
+    "train_unknown_states_retained_in_collections": 2174,
+    "dev_families": 32,
+    "dev_fast_states": 128,
+    "dev_full_states": 480,
+    "train_labels": {
+      "reference_acquisition": 2668,
+      "reference_preserving_handoff": 534
+    },
+    "train_stages": {
+      "initial": 488,
+      "post_search": 405,
+      "post_read": 2309
+    },
+    "supervision_scope": "Reference-witness operation preferences, not exhaustive semantic proofs or measured Host success",
+    "selection": "Completed family order, then known supervision; fast dev uses evenly spaced states in every family without outcome or predicted-score selection"
+  },
+  "actual_train_branch_packets": 330,
+  "actual_dev_branch_packets": 179,
+  "new_Host_calls": 0,
+  "startup_fits": {
+    "s1-startup32": {
+      "status": "COMPLETED",
+      "output": "/data/milai-experiments/20261111-scalable-evidence/s1-startup32-fit-v1",
+      "updates": 8,
+      "draws": 254,
+      "tokens": 1619304,
+      "stage_seconds": {
+        "prepare": 17.392565838061273,
+        "evaluation": 99.36244476027787,
+        "training": 143.7927286438644,
+        "save": 11.098404005169868
+      },
+      "cpu_seconds": 391.221298128,
+      "initial_fast_dev": {
+        "labelled": 78,
+        "accepted": 25,
+        "masked": 50
+      },
+      "final_fast_dev": {
+        "labelled": 78,
+        "accepted": 25,
+        "masked": 50
+      },
+      "recovery_state_bytes": 3861590128,
+      "scope": "Startup exploration; fast-dev operation preference only, not Host success or the formal M2 comparison."
+    },
+    "i2-startup": {
+      "status": "COMPLETED",
+      "output": "/data/milai-experiments/20261111-scalable-evidence/i2-startup-fit-v1",
+      "updates": 8,
+      "draws": 256,
+      "tokens": 1091319,
+      "stage_seconds": {
+        "prepare": 9.214737369678915,
+        "evaluation": 100.77338667213917,
+        "training": 69.26071876753122,
+        "save": 11.837661568075418
+      },
+      "cpu_seconds": 256.66546832700004,
+      "initial_fast_dev": {
+        "labelled": 78,
+        "accepted": 25,
+        "masked": 50
+      },
+      "final_fast_dev": {
+        "labelled": 78,
+        "accepted": 28,
+        "masked": 50,
+        "handoff_outside_reviewed_preference": 3
+      },
+      "recovery_state_bytes": 3861553648,
+      "scope": "Startup exploration; fast-dev operation preference only, not Host success or the formal M2 comparison."
+    }
+  },
+  "recovery_validation": {
+    "continuous_vs_interrupted": "FP32 parameters, optimizer, scheduler, torch CPU/CUDA RNG, option permutations equal in real CUDA tests",
+    "interruptions_at_updates": [
+      2,
+      3
+    ],
+    "total_updates": 6,
+    "sample_exposure": 48,
+    "continuation_billing_excludes_previous_draws": true,
+    "full_dev_points_tested": [
+      3,
+      6
+    ],
+    "epochs_with_unpadded_tails": true
+  },
+  "tests": {
+    "related_tests": 57,
+    "real_GPU_cases": true,
+    "ruff": "passed",
+    "active_package_boundary": "passed",
+    "full_repository_or_PostgreSQL": "not run"
+  },
+  "failures_retained": [
+    {
+      "stage": "operation-pilot-v1",
+      "error": "ImportError for nonexistent parameter_alternative; use existing coverage_alternative",
+      "source_banks_created": 0
+    },
+    {
+      "stage": "operation-pilot-v2",
+      "error": "MemoryService owner/namespace mismatch before Source capture",
+      "output": "/data/milai-experiments/20261111-scalable-evidence/operation-pilot-v2"
+    },
+    {
+      "stage": "operation-pilot-v3",
+      "status": "COMPLETED",
+      "states": 32,
+      "labelled_states": 24
+    }
+  ],
+  "remaining": [
+    "Observe the original 303-update runs and evaluate all declared curve points; do not restart on a polling timeout",
+    "Actual I2 learned handoff and held-source Host comparisons, then broaden natural TRAIN feedback",
+    "10k/30k independent-source expansion and scale curves",
+    "Conditional/own-state and continuous-memory selected experiments, decisive seed repeats, new-source confirmation and full-cost/generalization conclusions"
+  ],
+  "scope": "Reference witness preferences are not exhaustive semantic proofs. Unknown source states remain recorded. Same-update comparison has 9606 vs9696 planned draws and must report actual tokens; not exact FLOP matching.",
+  "main_comparison": {
+    "status": "RUNNING",
+    "pid": 4189631,
+    "source_commit": "cececfb7",
+    "no_sha_validation": true,
+    "automatic_retry": false,
+    "large_planned_draws": 9606,
+    "small_planned_draws": 9696,
+    "updates_each": 303,
+    "comparison": "New-source coverage versus small-pool repeat at equal updates and common scheduler. Draws differ by90 (0.94%); actual tokens and length mix must be reported. Large arm retains exact three full passes, including tails. Not exact FLOP matching.",
+    "first_outcomes_preserved": true,
+    "jobs": [
+      {
+        "name": "s1-op3k",
+        "pid": 4189632,
+        "exists_in_proc": true,
+        "observed_run_status": "RUNNING",
+        "observed_updates": 0
+      },
+      {
+        "name": "s1-repeat32",
+        "pid": 4189633,
+        "exists_in_proc": true,
+        "observed_run_status": "RUNNING",
+        "observed_updates": 0
+      }
+    ],
+    "command_manifest": "/data/milai-experiments/20261111-scalable-evidence/s1-main-comparison-v1.json"
+  }
+}
