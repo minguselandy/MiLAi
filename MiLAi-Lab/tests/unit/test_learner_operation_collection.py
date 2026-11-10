@@ -6,6 +6,7 @@ from types import SimpleNamespace
 from collect_qasper_operation_states import collect_paper
 from collected_handoff import replay_collected_prefix
 from milai_lab.methods.laya_memory_policy import payload_actions
+from prepare_collected_operation_feedback import execute_branch, select_events
 
 
 def test_learner_choice_budget_handoff_and_mid_prefix_replay(tmp_path):
@@ -71,3 +72,22 @@ def test_learner_choice_budget_handoff_and_mid_prefix_replay(tmp_path):
     ):
         assert state.project() == target["before"]
         assert [a.id for a in operations.actions(state)] == [a["id"] for a in target["actions"]]
+        saved = operations.checkpoint()
+        observation = operations.source_pages.budget
+        read = next(a for a in operations.actions(state) if a.kind == "READ")
+        result = execute_branch(operations, target["before"], read, 1, 2)
+        assert result["trace"][0]["selected"] == read.id
+        assert operations.opened
+        operations.restore_checkpoint(saved, observation)
+        stop = next(
+            a for a in operations.actions(state) if a.kind == "HANDOFF" and not a.parameters
+        )
+        stopped = execute_branch(operations, target["before"], stop, 1, 2)
+        assert len(stopped["trace"]) == 1 and not operations.opened
+        assert saved == operations.checkpoint()
+    selected = select_events(events, 0)
+    assert [e["step"] for e in selected] == [0, 1]
+    # Changing downstream success cannot change nomination; forced last states remain excluded.
+    for event in events:
+        event["result"] = {"ok": False, "status": "unrelated_outcome"}
+    assert [e["step"] for e in select_events(events, 0)] == [0, 1]

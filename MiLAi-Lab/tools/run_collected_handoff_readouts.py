@@ -46,7 +46,8 @@ def main() -> None:
         "status": "RUNNING",
         "pid": os.getpid(),
         "prepared": str(args.prepared.resolve()),
-        "planned_families": len(cases),
+        "planned_families": len({case["family"] for case in cases}),
+        "planned_states": len(cases),
         "planned_unique_packets": sum(len(case["branches"]) for case in cases),
         "planned_policy_positions": sum(len(case["choices"]) for case in cases),
         "closed_readouts": 0,
@@ -132,7 +133,9 @@ def main() -> None:
                             )
                             write_json(path, record)
                         for policy in branch["policies"]:
-                            paths.setdefault(policy, {})[case["family"]] = str(path.resolve())
+                            paths.setdefault(policy, {})[case.get("case_key", case["family"])] = (
+                                str(path.resolve())
+                            )
                         run["closed_readouts"] += 1
                         run["failed_readouts"] += record["status"] != "COMPLETED"
                         write_json(args.output / "readout-paths.json", paths)
