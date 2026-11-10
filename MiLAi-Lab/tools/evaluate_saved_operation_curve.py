@@ -9,7 +9,12 @@ import time
 from pathlib import Path
 from typing import Any
 
-from analyze_operation_curve import choose_checkpoint, operation_diagnostics, validate_prediction
+from analyze_operation_curve import (
+    choose_checkpoint,
+    operation_diagnostics,
+    read_predictions,
+    validate_prediction,
+)
 from milai_lab.harness.artifact_io import read_json, read_jsonl, write_json
 from milai_lab.methods.laya_memory_policy import project_operation_payload
 from retrieval_feedback import score_feedback
@@ -132,7 +137,7 @@ def run_saved_curve(analysis: dict[str, Any], output: Path,
                 "feedback-dev": {name: score_feedback(feedback, predictions[len(dev):], name)
                                  for name in ("answer", "delivery")} if feedback else {},
                 "compute_already_recorded": verified_compute(target, recipe, phase, predictions)}
-            old = [read_json(root / "dev" / str(update) / f"{i}.json") for i in range(len(dev))]
+            old = read_predictions(root / "dev" / str(update), dev, lengths["dev"])
             changed = [i for i, (left, right) in enumerate(zip(old, primary, strict=True))
                        if left["choice"] != right["choice"]]
             point["in_memory_gpu_vs_saved_cpu"] = {

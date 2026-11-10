@@ -78,12 +78,18 @@ def choose_checkpoint(points: list[dict[str, Any]]) -> dict[str, Any]:
 
 def read_predictions(folder: Path, rows: list[dict[str, Any]],
                      lengths: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    actual_indices = sorted(int(p.stem) for p in folder.glob("*.json") if p.stem.isdigit())
+    shard = folder / "predictions.jsonl"
+    if shard.exists():
+        records = read_jsonl(shard)
+        actual_indices = [record["row"] for record in records]
+    else:
+        actual_indices = sorted(int(p.stem) for p in folder.glob("*.json") if p.stem.isdigit())
+        records = [read_json(folder / f"{index}.json") for index in actual_indices]
     if actual_indices != list(range(len(rows))):
         raise ValueError("Prediction coverage is incomplete or differs from the declared row order")
     predictions = []
     for index, (row, length) in enumerate(zip(rows, lengths, strict=True)):
-        result = read_json(folder / f"{index}.json")
+        result = records[index]
         validate_prediction(row, result, length)
         predictions.append(result)
     return predictions

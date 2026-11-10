@@ -84,6 +84,56 @@ def test_group_budget_does_not_pad_drop_or_repeat_units():
             training_stages(35, 1, 0, budget, row_groups=groups)
 
 
+def test_batch32_length_buckets_keep_all_pairs_and_tail_with_original_loss_mass():
+    rows, pairs = training_pool()
+    groups = conditional_training_groups(rows, pairs, 0)
+    windows = [window for _, stage in training_stages(
+        35, 2, 0, 4, row_groups=groups, batch_rows=32) for window in stage]
+    assert [len(window) for window in windows] == [32, 3, 32, 3]
+    lengths = [3 + (i * 13) % 101 for i in range(35)]
+    targets = conditional_change_targets(rows, pairs)
+    for window in windows:
+        microbatches = training_microbatches(window, 8, lengths, paired=True)
+        assert Counter(draw for micro in microbatches for draw in micro) == Counter(window)
+        before_pairs = [tuple(i for _, i in window[j:j + 2])
+                        for j in range(0, len(window), 2)]
+        after_pairs = [tuple(i for _, i in micro[j:j + 2]) for micro in microbatches
+                       for j in range(0, len(micro), 2)]
+        assert Counter(before_pairs) == Counter(after_pairs)
+        assert sum(targets[pair][1] for pair in before_pairs if pair in targets) == sum(
+            targets[pair][1] for pair in after_pairs if pair in targets)
+    ordinary = [window for _, stage in training_stages(35, 3, 0, batch_rows=32)
+                for window in stage]
+    assert [len(window) for window in ordinary] == [32, 3] * 3
+    assert len([draw for window in ordinary for draw in window]) == 105
+
+
+def test_two_condition_pairs_in_one_forward_have_same_gradients_as_separate_pairs():
+    torch = pytest.importorskip("torch")
+    logits = torch.tensor([[1., 0.], [.2, .7], [.6, -.1], [0., .4]], requires_grad=True)
+    keys = [["satisfies", "does_not_satisfy"]] * 4
+    combined = sum(conditional_relative_loss(logits[i:i + 2], keys[i:i + 2], direction)
+                   * weight / 2 for i, direction, weight in ((0, 1., .5), (2, -1., 1.5)))
+    combined.backward()
+    separate = logits.detach().clone().requires_grad_(True)
+    for i, direction, weight in ((0, 1., .5), (2, -1., 1.5)):
+        (conditional_relative_loss(separate[i:i + 2], keys[i:i + 2], direction)
+         * weight / 2).backward()
+    torch.testing.assert_close(logits.grad, separate.grad)
+
+
+def test_adaptive_microbatches_shrink_long_groups_without_dropping_or_splitting_them():
+    window = [(1, i) for i in range(11)]
+    lengths = [100, 200, 1000, 500, 8000, 9000, 50, 60, 3000, 4000, 10]
+    batches = training_microbatches(window, 8, lengths, paired=True,
+                                   padded_token_target=16000)
+    assert Counter(draw for batch in batches for draw in batch) == Counter(window)
+    for start in range(0, 10, 2):
+        assert any((1, start) in batch and (1, start + 1) in batch for batch in batches)
+    assert next(batch for batch in batches if (1, 4) in batch) == [(1, 4), (1, 5)]
+    assert all(len(batch) <= 8 for batch in batches)
+
+
 def test_relative_targets_balance_change_families_without_stable_or_extra_exposures():
     rows, pairs = training_pool()
     pairs[0]['family'] = 'rare'
@@ -131,8 +181,9 @@ def test_relative_loss_moves_both_conditions_and_is_option_order_invariant(direc
 
 @pytest.mark.parametrize('condition_weight', [0., .25])
 @pytest.mark.parametrize('parallel_mode,precision', [('legacy-dp', 'float32'), ('single', 'bf16')])
+@pytest.mark.parametrize('microbatch', [2, 4])
 def test_native_grouped_unit_fit_uses_exact_rows_and_scaled_component_weights(
-    tmp_path, monkeypatch, condition_weight, parallel_mode, precision,
+    tmp_path, monkeypatch, condition_weight, parallel_mode, precision, microbatch,
 ):
     torch = pytest.importorskip("torch")
     transformers = pytest.importorskip("transformers")
@@ -176,14 +227,20 @@ def test_native_grouped_unit_fit_uses_exact_rows_and_scaled_component_weights(
         '--mixture', str(data / 'mixture.json'), '--mixture-loss-scale', '1.25',
         '--conditional-pairs', str(data / 'pairs.jsonl'), '--epochs', '1',
         '--conditional-loss-weight', str(condition_weight),
-        '--optimizer-updates', '1', '--eval-at-updates', '1', '--micro-batch-size', '2',
+        '--optimizer-updates', '1', '--eval-at-updates', '1', '--micro-batch-size', str(microbatch),
         '--max-len', '256', '--head-max-len', '96', '--shuffle-options',
-        '--parallel-mode', parallel_mode, '--precision', precision])
+        '--parallel-mode', parallel_mode, '--precision', precision,
+        *(['--effective-batch-rows', '32', '--length-bucketed-microbatches',
+           '--eval-batch-size', '4', '--log-every-updates', '25'] if microbatch == 4 else [])])
     train_bounded_laya.main()
     run = read_json(output / 'run.json')
     assert run['status'] == 'COMPLETED' and run['optimizer_updates'] == 1
     assert run['train_sequence_rows'] == run['planned_sequence_rows'] == 4
-    assert run['train_batch_forwards'] == 2
+    assert run['train_batch_forwards'] == 4 // microbatch
+    if microbatch == 4:
+        assert (output / 'dev/1/predictions.jsonl').exists()
+        compute = read_json(output / 'compute.json')
+        assert compute['dev_state_tokenizations'] == 1
     assert run['conditional_loss_weight'] == condition_weight
     assert run['sampled_component_rows'] == {'a': 2, 'b': 2}
     sampling = read_json(output / 'sampling.json')

@@ -1,3 +1,34 @@
+# LIVE scalable evidence plan v2 execution: 2026-11-11
+
+Current user goal is the full `MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261111_2XA10040GB_v2.md`
+in the sibling jev-read-decisions-20261016/MiLAi-Lab/docs directory. Execute on this A100
+worktree (matching the plan baseline), not the October worktree that only holds the user plan.
+User authorizes training/data/prototype execution. No subagents or SHA/content-fingerprint checks.
+New plan supersedes historical per-command accounting, repeated audit/approval prerequisites.
+Preserve original permissions, provenance, research roles, first outcomes and shared services.
+Historical Mem2Act closeout below is NOT a serial prerequisite for new learning.
+
+Current report: docs/MILAI_SCALABLE_EVIDENCE_EXECUTION_20261111.md.
+Compact evidence: data/manifests/scalable-evidence-progress-20261111-v1.json.
+Actual new artifacts: /data/milai-experiments/20261111-scalable-evidence (persistent /data;
+/cra has no ordinary free space). Do not delete original data/models/archives to make room.
+All five engineering fits CLOSED exit0; eval profile CLOSED; no queued training/Host task.
+Last paired processes 4055544/4055545 terminal (exec78882 closed). Revalidate before next launch.
+Both baseline and adaptive v2: 512 rows,32 updates,639380 effective tokens, same training plan,
+weights, option permutations and lengths. Training1.178x/eval1.282x/wall1.156x. FP32 cached
+64-row eval1.347x,0 choice/binding changes,maxlogiterror1.04e-5. These are engineering results.
+
+Source population released384TRAIN papers/672requests:256 new relative to prior128 operation
+families;32 inheriteddev families;0 new operation labels so far. I2 seed reuses8TRAIN actual
+same-pool states:3 states/6 directional delivery pairs,4 positive ties,12 unknown pairs; not fitted.
+Unknowns retained; first small seed is not new Host/generalization evidence. Next: actual TRAIN
+SEARCH/READ/post-state collection toward3k and I2 collection/fit; E4 resumable state/warmup;
+10k/30k curves and real held-source Host comparison. Full objective ACTIVE/incomplete.
+73 related tests passed (real GPU cases included); Ruff/package boundary/diffcheck passed.
+Tools boundary reports6 pre-existing dynamic-import findings in the untouched LME owner helpers.
+No Product/API/schema/permissions/Canonical changes, service restarts or remote publication.
+Read this header and relevant source, not the full historical AGENTS log below.
+
 # LIVE A100 PUBLICATION CHECKPOINT v187: 2026-11-10 (Asia/Shanghai)
 
 The current user explicitly requests reviewing prior development/experiment progress and publishing to GitHub.

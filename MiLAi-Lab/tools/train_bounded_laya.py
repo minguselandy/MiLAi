@@ -62,9 +62,36 @@ from train_laya_matched import audit
 TrainingWindow = list[tuple[int, int]]  # (data pass, row index)
 
 
-def training_microbatches(window: TrainingWindow, size: int) -> list[TrainingWindow]:
+def training_microbatches(window: TrainingWindow, size: int,
+                          lengths: list[int] | None = None,
+                          paired: bool = False,
+                          padded_token_target: int | None = None) -> list[TrainingWindow]:
     """Partition one optimizer window without changing its examples or loss denominator."""
-    return [window[start:start + size] for start in range(0, len(window), size)]
+    if size < 1 or (paired and size % 2):
+        raise ValueError("Conditional pairs require an even microbatch size")
+    width = 2 if paired else 1
+    groups = [window[start:start + width] for start in range(0, len(window), width)]
+    if lengths is not None:
+        groups.sort(key=lambda group: max(lengths[index] for _, index in group))
+    # The only singleton in a paired window is its final tail. Keep it last,
+    # so sorting cannot shift the boundaries of any following pair.
+    if paired:
+        groups = [group for group in groups if len(group) == 2] + [
+            group for group in groups if len(group) == 1]
+    microbatches: list[TrainingWindow] = []
+    current: TrainingWindow = []
+    for group in groups:
+        trial = [*current, *group]
+        exceeds_tokens = (padded_token_target is not None and lengths is not None
+                          and max(lengths[i] for _, i in trial) * len(trial)
+                          > padded_token_target)
+        if current and (len(trial) > size or exceeds_tokens):
+            microbatches.append(current)
+            current = []
+        current.extend(group)
+    if current:
+        microbatches.append(current)
+    return microbatches
 
 
 def training_forward(model: Any, parallel: Any, batch: dict[str, Any], device: Any,
@@ -86,14 +113,16 @@ def training_stages(size: int, epochs: int, seed: int,
                     eval_at_updates: list[int] | None = None,
                     eval_every_updates: int | None = None,
                     row_groups: list[list[int]] | None = None,
+                    batch_rows: int = 16,
                     ) -> list[tuple[int, list[TrainingWindow]]]:
-    """Legacy epochs or an exact budget of full16-example optimizer updates.
+    """Full epochs or an exact budget of fixed-size optimizer updates.
 
     Legacy budgeted updates cross pass boundaries without dropping examples.
     Optional two-row groups use exact full passes, with an unpadded final window.
     Checkpoints are fixed in advance, not selected by development loss.
     """
-    if size < 1 or epochs < 1 or (update_budget is not None and update_budget < 1):
+    if (size < 1 or epochs < 1 or batch_rows < 1
+            or (update_budget is not None and update_budget < 1)):
         raise ValueError("Training requires labelled states and a positive budget")
     if eval_at_updates is not None and eval_every_updates is not None:
         raise ValueError("Specify evaluation points or an interval, not both")
@@ -108,10 +137,11 @@ def training_stages(size: int, epochs: int, seed: int,
     rng = random.Random(seed)  # noqa: S311 -- reproducible training schedule
     if row_groups is not None:
         if (update_budget is None
+                or batch_rows % 2
                 or sorted(i for group in row_groups for i in group) != list(range(size))
                 or any(len(group) not in (1, 2) for group in row_groups)
                 or sum(len(group) == 1 for group in row_groups) > 1
-                or update_budget != math.ceil(size / 16) * epochs):
+                or update_budget != math.ceil(size / batch_rows) * epochs):
             raise ValueError("Grouped schedule requires exact full passes of all distinct rows")
         grouped_windows: list[TrainingWindow] = []
         for data_pass in range(1, epochs + 1):
@@ -119,8 +149,8 @@ def training_stages(size: int, epochs: int, seed: int,
             rng.shuffle(group_order)
             group_order.extend(group for group in row_groups if len(group) == 1)
             grouped_draws = [(data_pass, i) for group in group_order for i in group]
-            grouped_windows.extend(grouped_draws[start:start + 16]
-                                   for start in range(0, len(grouped_draws), 16))
+            grouped_windows.extend(grouped_draws[start:start + batch_rows]
+                                   for start in range(0, len(grouped_draws), batch_rows))
         cuts = sorted({update_budget // 2, update_budget} - {0})
         if eval_at_updates is not None:
             cuts = sorted({*eval_at_updates, update_budget})
@@ -134,17 +164,18 @@ def training_stages(size: int, epochs: int, seed: int,
         for epoch in range(1, epochs + 1):
             order = list(range(size))
             rng.shuffle(order)
-            stages.append((epoch, [[(epoch, i) for i in order[start:start + 16]]
-                                   for start in range(0, size, 16)]))
+            stages.append((epoch, [[(epoch, i) for i in order[start:start + batch_rows]]
+                                   for start in range(0, size, batch_rows)]))
         return stages
     draws: TrainingWindow = []
     data_pass = 0
-    while len(draws) < update_budget * 16:
+    while len(draws) < update_budget * batch_rows:
         data_pass += 1
         order = list(range(size))
         rng.shuffle(order)
         draws.extend((data_pass, i) for i in order)
-    windows = [draws[i:i + 16] for i in range(0, update_budget * 16, 16)]
+    windows = [draws[i:i + batch_rows]
+               for i in range(0, update_budget * batch_rows, batch_rows)]
     cuts = sorted({update_budget // 2, update_budget} - {0})
     if eval_at_updates is not None:
         cuts = sorted({*eval_at_updates, update_budget})
@@ -262,7 +293,7 @@ def main() -> None:
                         help="Optional allocator share; legacy-dp defaults to0.75, single to1")
     parser.add_argument("--epochs", type=int, default=4)
     parser.add_argument("--optimizer-updates", type=int,
-                        help="Use this exact update budget with full16-example windows")
+                        help="Exact update budget with full effective-batch windows")
     evaluation = parser.add_mutually_exclusive_group()
     evaluation.add_argument("--eval-at-updates", type=int, nargs="+")
     evaluation.add_argument("--eval-every-updates", type=int)
@@ -270,7 +301,19 @@ def main() -> None:
     parser.add_argument("--head-lr", type=float, default=1e-4)
     parser.add_argument("--freeze-encoder", action="store_true")
     parser.add_argument("--micro-batch-size", type=int, choices=(1, 2, 4, 8, 16), default=4,
-                        help="Per-forward rows; effective optimizer windows remain16 examples")
+                        help="Maximum per-forward rows within an optimizer window")
+    parser.add_argument("--effective-batch-rows", type=int, default=16)
+    parser.add_argument("--length-bucketed-microbatches", action="store_true",
+                        help="Group lengths within each update window, keeping pairs atomic")
+    parser.add_argument("--log-every-updates", type=int, default=1,
+                        help="Aggregate synchronized timing and progress over this many updates")
+    parser.add_argument("--microbatch-padded-token-target", type=int,
+                        help="Shrink long microbatches; an atomic pair can exceed this soft target")
+    parser.add_argument("--eval-batch-size", type=int, default=1,
+                        help="Native evaluation rows per forward; cached SDK encoding when >1")
+    parser.add_argument("--cache-evaluation", action="store_true",
+                        help="Reuse native evaluation tokens across checkpoints, including batch1")
+    parser.add_argument("--eval-precision", choices=("float32", "bf16"), default="float32")
     parser.add_argument("--dev-data", type=Path,
                         help="Common development labels/inputs independent of the training recipe")
     parser.add_argument("--feedback-dev-data", type=Path,
@@ -321,6 +364,16 @@ def main() -> None:
     parser.add_argument("--gradient-checkpointing", action="store_true",
                         help="Recompute encoder activations during backward to reduce memory")
     args = parser.parse_args()
+    if args.log_every_updates < 1:
+        parser.error("Log interval must be positive")
+    if args.microbatch_padded_token_target is not None and (
+            args.microbatch_padded_token_target < 1 or not args.length_bucketed_microbatches):
+        parser.error("Positive microbatch token target requires length grouping")
+    batched_evaluation = args.cache_evaluation or args.eval_batch_size != 1
+    if args.eval_batch_size < 1 or (batched_evaluation and args.backend != "native"):
+        parser.error("Batched/cached evaluation requires native backend and positive batch size")
+    if args.eval_precision != "float32" and not batched_evaluation:
+        parser.error("Explicit BF16 evaluation requires batched/cached evaluation")
     if args.precision == "bf16" and args.parallel_mode != "single":
         parser.error("BF16 uses the single-device path; legacy DataParallel remains FP32")
     if args.memory_fraction is not None and not 0 < args.memory_fraction <= 1:
@@ -361,9 +414,10 @@ def main() -> None:
         parser.error("Mixture loss scale must be positive finite and requires a mixture")
     if args.conditional_pairs is not None and (
             args.task not in {"instruction_applicability", "mixed_retrieval"}
-            or args.objective == "pair" or args.micro_batch_size != 2
+            or args.objective == "pair" or args.micro_batch_size % 2
+            or args.effective_batch_rows % 2
             or args.optimizer_updates is None):
-        parser.error("Conditional grouping uses unit supervision, microbatch2 and exact updates")
+        parser.error("Conditional grouping uses unit supervision, even batches and exact updates")
     if (not math.isfinite(args.conditional_loss_weight) or args.conditional_loss_weight < 0
             or (args.conditional_loss_weight and args.conditional_pairs is None)):
         parser.error("Conditional loss weight must be nonnegative finite and requires pairs")
@@ -374,7 +428,8 @@ def main() -> None:
         parser.error("Feedback development evaluates memory-operation inputs")
     try:
         training_stages(1, args.epochs, args.seed, args.optimizer_updates,
-                        args.eval_at_updates, args.eval_every_updates)
+                        args.eval_at_updates, args.eval_every_updates,
+                        batch_rows=args.effective_batch_rows)
     except ValueError as error:
         parser.error(str(error))
     import torch
@@ -459,7 +514,8 @@ def main() -> None:
             if not change_targets:
                 raise ValueError("Relative condition loss requires supported training change pairs")
     stages = training_stages(len(train), args.epochs, args.seed, args.optimizer_updates,
-                             args.eval_at_updates, args.eval_every_updates, row_groups)
+                             args.eval_at_updates, args.eval_every_updates, row_groups,
+                             args.effective_batch_rows)
     axis = "epoch" if args.optimizer_updates is None else "optimizer_updates"
     run = {"status": "RUNNING", "pid": os.getpid(), "data": str(args.data.resolve()),
            "base_checkpoint": str(args.checkpoint.resolve()), "seed": args.seed,
@@ -481,7 +537,13 @@ def main() -> None:
            "planned_optimizer_updates": sum(len(windows) for _, windows in stages),
            "checkpoint_axis": axis, "dev_source": str(dev_path.resolve()),
            "batch_size": args.micro_batch_size,
-           "gradient_accumulation": 16 // args.micro_batch_size,
+           "eval_batch_size": args.eval_batch_size,
+           "cache_evaluation": batched_evaluation, "eval_precision": args.eval_precision,
+           "effective_batch_rows": args.effective_batch_rows,
+           "length_bucketed_microbatches": args.length_bucketed_microbatches,
+           "log_every_updates": args.log_every_updates,
+           "microbatch_padded_token_target": args.microbatch_padded_token_target,
+           "gradient_accumulation": math.ceil(args.effective_batch_rows / args.micro_batch_size),
            "max_len": args.max_len, "head_max_len": args.head_max_len, "train_states": len(train),
            "dev_states": len(dev), "encoder_lr": args.encoder_lr, "head_lr": args.head_lr,
            "freeze_encoder": args.freeze_encoder, "objective": args.objective,
@@ -614,6 +676,7 @@ def main() -> None:
         if skipped or len(items) != len(train):
             raise ValueError(f"Invalid training items: {skipped}")
         encoded = [encode_item(tok, item, args.max_len, args.head_max_len) for item in items]
+        encoded_lengths = [len(item["ids"]) for item in encoded]
         option_orders: list[list[int] | None] = [None] * len(items)
         write_json(args.output / "sampling.json", [
             {"event_id": r["metadata"]["event_id"], "family": r["metadata"]["family"],
@@ -640,19 +703,35 @@ def main() -> None:
         steps = run["planned_optimizer_updates"]
         scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, steps, eta_min=1e-6)
 
+        evaluation_cache: dict[str, Any] = {}
+
         def evaluate(epoch: int, split: str = "dev") -> dict[str, Any]:
             synchronize()
             eval_started = time.perf_counter()
             model.eval()
             predictions = []
             rows = evaluation_rows[split]
-            for index, row in enumerate(rows):
-                payload = {k: row[k] for k in ("state", "questions")}
+            if batched_evaluation:
                 previous_counts = dict(decision.counters)
-                predictions.append(decision.predict(payload))
+                if split not in evaluation_cache:
+                    evaluation_cache[split] = decision.prepare_batch(rows)
+                predictions = decision.predict_prepared(
+                    evaluation_cache[split], args.eval_batch_size, precision=args.eval_precision)
                 evaluation_counts[split].update({
                     k: v - previous_counts[k] for k, v in decision.counters.items()})
-                write_json(args.output / split / str(epoch) / f"{index}.json", predictions[-1])
+                destination = args.output / split / str(epoch) / "predictions.jsonl"
+                destination.parent.mkdir(parents=True, exist_ok=True)
+                with destination.open("w") as stream:
+                    for index, prediction in enumerate(predictions):
+                        stream.write(json.dumps({"row": index, **prediction}) + "\n")
+            else:
+                for index, row in enumerate(rows):
+                    payload = {k: row[k] for k in ("state", "questions")}
+                    previous_counts = dict(decision.counters)
+                    predictions.append(decision.predict(payload))
+                    evaluation_counts[split].update({
+                        k: v - previous_counts[k] for k, v in decision.counters.items()})
+                    write_json(args.output / split / str(epoch) / f"{index}.json", predictions[-1])
             if split == "feedback-dev":
                 result = {target: score_feedback(rows, predictions, target)
                           for target in ("answer", "delivery")}
@@ -695,19 +774,27 @@ def main() -> None:
         encoded_pass = 0
         for checkpoint_step, windows in stages:
             training_mode(model, args.freeze_encoder)
-            loss_total = 0.0
+            loss_total = torch.zeros((), device=device)
             offered = 0
             condition_loss_total = 0.0
-            for window in windows:
-                synchronize()
-                update_started, update_cpu = time.perf_counter(), time.process_time()
-                prior_tokens = run["train_input_tokens"]
-                prior_padded_tokens = run["train_padded_input_tokens"]
+            for window_index, window in enumerate(windows):
+                if window_index % args.log_every_updates == 0:
+                    synchronize()
+                    update_started, update_cpu = time.perf_counter(), time.process_time()
+                    prior_tokens = run["train_input_tokens"]
+                    prior_padded_tokens = run["train_padded_input_tokens"]
+                    prior_rows = run["train_sequence_rows"]
+                    prior_updates = run["optimizer_updates"]
                 denominator = len(window)
                 optimizer.zero_grad(set_to_none=True)
-                microbatches = training_microbatches(window, args.micro_batch_size)
+                microbatches = training_microbatches(
+                    window, args.micro_batch_size,
+                    encoded_lengths if args.length_bucketed_microbatches else None,
+                    paired=row_groups is not None,
+                    padded_token_target=args.microbatch_padded_token_target)
                 condition_pair_count = sum(
-                    tuple(i for _, i in micro) in change_targets for micro in microbatches)
+                    tuple(i for _, i in micro[start:start + 2]) in change_targets
+                    for micro in microbatches for start in range(0, len(micro), 2))
                 for microbatch in microbatches:
                     indices, batch_items, batch_keys = [], [], []
                     for data_pass, index in microbatch:
@@ -725,6 +812,7 @@ def main() -> None:
                                 encoded = [encode_item(tok, item, args.max_len, args.head_max_len,
                                            option_order=order) for item, order in zip(
                                                items, option_orders, strict=True)]
+                                encoded_lengths = [len(item["ids"]) for item in encoded]
                                 write_json(args.output / "option-orders" / f"{data_pass}.json",
                                            option_orders)
                             encoded_pass = data_pass
@@ -774,10 +862,15 @@ def main() -> None:
                     weighted = ce * torch.tensor([weights[i] for i in indices],
                                                   device=decision.device)
                     loss = weighted.sum() / denominator
-                    condition_target = change_targets.get(tuple(indices))
-                    if condition_target is not None:
+                    for pair_start in range(0, len(indices), 2):
+                        pair_indices = indices[pair_start:pair_start + 2]
+                        condition_target = change_targets.get(tuple(pair_indices))
+                        if condition_target is None:
+                            continue
                         direction, pair_weight = condition_target
-                        relative = conditional_relative_loss(logits, batch_keys, direction)
+                        relative = conditional_relative_loss(
+                            logits[pair_start:pair_start + 2],
+                            batch_keys[pair_start:pair_start + 2], direction)
                         contribution = (args.conditional_loss_weight * pair_weight * relative
                                         / condition_pair_count)
                         loss = loss + contribution
@@ -786,7 +879,7 @@ def main() -> None:
                         with (args.output / "conditional-losses.jsonl").open("a") as stream:
                             stream.write(json.dumps({
                                 "update": run["optimizer_updates"] + 1,
-                                "events": [train[i]["metadata"]["event_id"] for i in indices],
+                                "events": [train[i]["metadata"]["event_id"] for i in pair_indices],
                                 "data_pass": encoded_pass, "direction": direction,
                                 "family_weight": pair_weight,
                                 "window_change_pairs": condition_pair_count,
@@ -804,7 +897,7 @@ def main() -> None:
                             run["nonzero_logit_gradient_rows"] += int(active)
                             component = "feedback" if "feedback" in train[index] else "replay"
                             run[component + "_nonzero_logit_gradient_rows"] += int(active)
-                    loss_total += float(weighted.sum().detach())
+                    loss_total += weighted.sum().detach()
                     offered += len(indices)
                     run["train_sequence_rows"] += len(indices)
                     if mixture is not None:
@@ -826,29 +919,35 @@ def main() -> None:
                 optimizer.step()
                 scheduler.step()
                 run["optimizer_updates"] += 1
-                synchronize()
-                update_seconds = time.perf_counter() - update_started
-                stage_seconds["training"] += update_seconds
-                with (args.output / "update-profile.jsonl").open("a") as stream:
-                    stream.write(json.dumps({
-                        "update": run["optimizer_updates"], "rows": denominator,
-                        "input_tokens": run["train_input_tokens"] - prior_tokens,
-                        "padded_input_tokens": (run["train_padded_input_tokens"]
-                                                - prior_padded_tokens),
-                        "wall_seconds": update_seconds,
-                        "cpu_seconds": time.process_time() - update_cpu,
-                    }) + "\n")
-                write_json(args.output / "run.json", run)
-                print(json.dumps({"data_pass": encoded_pass,
-                                  "updates": run["optimizer_updates"]}), flush=True)
-            history.append({axis: checkpoint_step, "weighted_loss_mean": loss_total / offered,
+                if ((window_index + 1) % args.log_every_updates == 0
+                        or window_index == len(windows) - 1):
+                    synchronize()
+                    update_seconds = time.perf_counter() - update_started
+                    stage_seconds["training"] += update_seconds
+                    with (args.output / "update-profile.jsonl").open("a") as stream:
+                        stream.write(json.dumps({
+                            "update": run["optimizer_updates"],
+                            "first_update": prior_updates + 1,
+                            "updates": run["optimizer_updates"] - prior_updates,
+                            "rows": run["train_sequence_rows"] - prior_rows,
+                            "input_tokens": run["train_input_tokens"] - prior_tokens,
+                            "padded_input_tokens": (run["train_padded_input_tokens"]
+                                                    - prior_padded_tokens),
+                            "wall_seconds": update_seconds,
+                            "cpu_seconds": time.process_time() - update_cpu,
+                        }) + "\n")
+                    write_json(args.output / "run.json", run)
+                    print(json.dumps({"data_pass": encoded_pass,
+                                      "updates": run["optimizer_updates"]}), flush=True)
+            loss_mean = float(loss_total) / offered
+            history.append({axis: checkpoint_step, "weighted_loss_mean": loss_mean,
                             "dev": evaluate(checkpoint_step)})
             if args.conditional_loss_weight:
                 history[-1]["conditional_loss_optimizer_mean"] = condition_loss_total / len(windows)
             if args.feedback_dev_data is not None:
                 history[-1]["feedback-dev"] = evaluate(checkpoint_step, "feedback-dev")
             if args.objective == "soft-ce":
-                history[-1]["weighted_ce_mean"] = loss_total / offered
+                history[-1]["weighted_ce_mean"] = loss_mean
             if args.evaluate_train and (
                     not args.train_eval_final_only or checkpoint_step == stages[-1][0]):
                 history[-1]["train"] = evaluate(checkpoint_step, "train")

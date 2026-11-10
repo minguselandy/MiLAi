@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from analyze_operation_curve import analyze, choose_checkpoint, recipe_from_plan
+from analyze_operation_curve import analyze, choose_checkpoint, read_predictions, recipe_from_plan
 from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.methods.memory_control_learning import score_operation_predictions
 from retrieval_feedback import feedback_dev_report, score_feedback
@@ -133,6 +133,23 @@ def test_complete_curve_selects_macro_not_micro_and_earliest_tie(tmp_path):
     assert result["curve"][0]["feedback-dev"]["delivery"]["family_macro_state_pair_accuracy"] == 0
     assert result["deployment_selection"] is None and result["training_draws_verified"] == 64
     assert all(c["tensor_dtypes"] == {"F16": 1} for c in result["saved_checkpoints"])
+
+
+def test_ordered_prediction_shard_preserves_legacy_coverage_and_rejects_reordering(tmp_path):
+    recipe = complete_fixture(tmp_path)
+    root = Path(recipe["output"])
+    rows = [json.loads(line) for line in (Path(recipe["data"]) / "dev.jsonl").open()]
+    lengths = read_json(root / "lengths.json")["dev"]
+    folder = root / "dev/2"
+    expected = read_predictions(folder, rows, lengths)
+    shard = folder / "predictions.jsonl"
+    records = [{"row": i, **prediction} for i, prediction in enumerate(expected)]
+    shard.write_text("".join(json.dumps(record) + "\n" for record in records))
+    actual = read_predictions(folder, rows, lengths)
+    assert [{k: v for k, v in record.items() if k != "row"} for record in actual] == expected
+    shard.write_text("".join(json.dumps(record) + "\n" for record in reversed(records)))
+    with pytest.raises(ValueError, match="coverage"):
+        read_predictions(folder, rows, lengths)
 
 
 def test_initialization_is_eligible_without_claiming_a_learning_gain():
