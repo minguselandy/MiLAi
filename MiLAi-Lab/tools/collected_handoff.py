@@ -31,6 +31,7 @@ def replay_collected_prefix(
     settings: dict[str, Any],
     capacity: HostCapacity,
     on_state: Callable[..., None] | None = None,
+    target_step: int | None = None,
 ) -> Iterator[tuple[EvidenceOperations, MemoryControlState]]:
     """Reexecute the recorded READ prefix once, without copying or repairing the Store.
 
@@ -108,6 +109,14 @@ def replay_collected_prefix(
                 )
             if on_state is not None:
                 on_state(operations, state, actions, event)
+            if target_step is not None and event["step"] == target_step:
+                if (
+                    state.project() != branch["before"]
+                    or [asdict(a) for a in actions] != branch["actions"]
+                ):
+                    raise ValueError("Selected reached state differs from its saved full menu")
+                yield operations, state
+                return
             action = next(a for a in actions if a.id == event["selected"])
             if action.kind == "HANDOFF":
                 if (
@@ -123,4 +132,6 @@ def replay_collected_prefix(
                     "Actual prefix result changed; do not repair the saved first outcome"
                 )
             state.last_result = {"action": asdict(action), **actual}
-        raise ValueError("The recorded prefix has no terminal HANDOFF")
+        raise ValueError(
+            "The recorded prefix did not reach the requested state or terminal HANDOFF"
+        )

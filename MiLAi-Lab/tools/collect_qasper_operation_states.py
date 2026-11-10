@@ -1,7 +1,8 @@
 """Collect real source-backed operation prefixes; native evidence is offline supervision.
 
 One immutable Source bank per paper, ordinary request-local executor state, and
-at most three actual same-pool HANDOFF packets. No model calls or Store-per-state copies.
+at most three actual same-pool HANDOFF packets. Optional frozen learner collection;
+no Store-per-state copies.
 """
 
 from __future__ import annotations
@@ -25,6 +26,7 @@ from milai_lab.memory.reader_projection import merge_source_ranges
 from milai_lab.memory.service import MemoryService
 from milai_lab.methods.evidence_control import EvidenceOperations, controlled_reader_packet
 from milai_lab.methods.evidence_reading import build_evidence_packs
+from milai_lab.methods.laya_memory_policy import operation_payload
 from milai_lab.methods.memory_control import MemoryAction, MemoryControlState, RulesMemoryPolicy
 from milai_lab.methods.memory_control_learning import decision_example
 from milai_lab.methods.source_observations import SourceObservationBudget
@@ -154,6 +156,7 @@ def collect_paper(
     seed: int,
     append: Any,
     source_bank: Path | None = None,
+    predict: Any = None,
 ) -> dict[str, Any]:
     root.mkdir(parents=True, exist_ok=False)
     bank = source_bank or root
@@ -281,7 +284,7 @@ def collect_paper(
                         "source_version": "qasper-v0.3",
                         "trace": str(trace.resolve()),
                         "source_bank_root": str(bank.resolve()),
-                        "collector": "fixed_lexical_read_prefix",
+                        "collector": "frozen_learner" if predict else "fixed_lexical_read_prefix",
                         "stage": (
                             "initial" if step == 0 else "post_search" if step == 1 else "post_read"
                         ),
@@ -300,8 +303,19 @@ def collect_paper(
                     }
                 labels[label_status] += 1
                 append("states", row)
+                if predict is not None:
+                    # Only the ordinary online observation and full menu enter inference.
+                    # Native references and all supervision metadata remain offline.
+                    event["prediction"] = predict(
+                        operation_payload(state, actions, "shared_actions")
+                    )
+                    if event["prediction"]["choice"] not in {a.id for a in actions}:
+                        raise ValueError("Collector selected a binding outside the actual menu")
                 if step == max_steps - 1:
                     action = next(a for a in actions if a.kind == "HANDOFF" and not a.parameters)
+                    event["forced_budget_handoff"] = True
+                elif predict is not None:
+                    action = next(a for a in actions if a.id == event["prediction"]["choice"])
                 else:
                     action = next((a for a in actions if a.kind == "SEARCH"), None)
                     if action is None:
@@ -419,6 +433,9 @@ def main() -> None:
     parser.add_argument("--families", type=int)
     parser.add_argument("--max-steps", type=int, default=8)
     parser.add_argument("--branch-families", type=int, default=64)
+    parser.add_argument("--collector-checkpoint", type=Path)
+    parser.add_argument("--collector-device", default="cpu")
+    parser.add_argument("--requests-per-family", type=int)
     parser.add_argument(
         "--reuse-source-collections",
         type=Path,
@@ -432,6 +449,8 @@ def main() -> None:
     histories = histories[
         args.offset : None if args.families is None else args.offset + args.families
     ]
+    if args.requests_per_family is not None:
+        histories = [dict(h, requests=h["requests"][: args.requests_per_family]) for h in histories]
     controls = {(c["source_group"], c["request_id"]): c for c in read_jsonl(args.controls)}
     source_banks = {
         h["source_group"]: collection / "banks" / h["id"]
@@ -464,6 +483,10 @@ def main() -> None:
         "Host_calls": 0,
         "automatic_retry": False,
         "reused_source_families": sum(h["source_group"] in source_banks for h in histories),
+        "collector_checkpoint": str(args.collector_checkpoint.resolve())
+        if args.collector_checkpoint
+        else None,
+        "collector_device": args.collector_device if args.collector_checkpoint else None,
     }
 
     def append(kind: str, row: dict[str, Any]) -> None:
@@ -483,6 +506,22 @@ def main() -> None:
             stream.write(json.dumps(row, ensure_ascii=False) + "\n")
 
     try:
+        predict = None
+        if args.collector_checkpoint is not None:
+            import torch
+
+            from milai_lab.providers.laya_local import NativeDecision
+
+            torch.set_num_threads(4)
+            torch.backends.mha.set_fastpath_enabled(False)
+            decision = NativeDecision(args.collector_checkpoint, 16384, 2048, args.collector_device)
+            decision.model.encoder.config.reference_compile = False
+
+            def predict(payload: dict[str, Any]) -> dict[str, Any]:
+                result = decision.predict(payload)
+                run["model_calls"] += 1
+                return result
+
         for index, history in enumerate(histories):
             run["active_family"] = history["source_group"]
             write_json(args.output / "run.json", run)
@@ -497,6 +536,7 @@ def main() -> None:
                 seed=args.offset + index,
                 append=append,
                 source_bank=source_banks.get(history["source_group"]),
+                predict=predict,
             )
             run["completed_families"] += 1
             write_json(args.output / "run.json", run)
