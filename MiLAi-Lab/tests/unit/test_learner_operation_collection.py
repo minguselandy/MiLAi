@@ -109,3 +109,12 @@ def test_learner_choice_budget_handoff_and_mid_prefix_replay(tmp_path):
         ]
         assert len(selected["trace"]) == 3
         assert selected["trace"][-1]["selected"] != "handoff"
+        operations.restore_checkpoint(saved, operations.source_pages.budget)
+        fixed = execute_branch(
+            operations, initial["before"], search, 0, 1, "policy", "fixed_context"
+        )
+        assert operations.opened and len(fixed["trace"]) <= 3
+        middle = fixed["trace"][1]
+        actual = next(a for a in middle["actions"] if a["id"] == middle["selected"])
+        assert actual["kind"] == "READ" and not actual["parameters"].get("observe_only")
+        assert fixed["trace"][0]["before"] == initial["before"]

@@ -19,6 +19,7 @@ from milai_lab.harness.artifact_io import read_json, read_jsonl, write_json
 from milai_lab.methods.evidence_control import controlled_reader_packet
 from milai_lab.methods.memory_control import (
     FirstActionIntervention,
+    FixedContextMemoryPolicy,
     MemoryAction,
     MemoryControlState,
     RulesMemoryPolicy,
@@ -29,20 +30,26 @@ from milai_lab.providers.contextual_capacity import HostCapacity
 from milai_lab.runners.given_host_readout import given_packet_request
 
 
-def baseline(event: dict[str, Any]) -> str:
-    return RulesMemoryPolicy(reads=4).choose(
+def continuation_policy(name: str) -> Any:
+    return {"rules": RulesMemoryPolicy, "fixed_context": FixedContextMemoryPolicy}[name](reads=4)
+
+
+def baseline(event: dict[str, Any], policy_name: str = "rules") -> str:
+    return continuation_policy(policy_name).choose(
         MemoryControlState(**copy.deepcopy(event["before"])),
         [MemoryAction(**a) for a in event["actions"]],
     )
 
 
-def select_events(events: list[dict[str, Any]], family_index: int) -> list[dict[str, Any]]:
+def select_events(
+    events: list[dict[str, Any]], family_index: int, policy_name: str = "rules"
+) -> list[dict[str, Any]]:
     """Initial plus one real post state, without consulting native labels or branch results."""
     initial = [e for e in events if e["step"] == 0]
     if len(initial) != 1:
         raise ValueError("This collection requires exactly one native request per family")
     post = [e for e in events if e["step"] > 0 and not e.get("forced_budget_handoff")]
-    disagreement = [e for e in post if e["prediction"]["choice"] != baseline(e)]
+    disagreement = [e for e in post if e["prediction"]["choice"] != baseline(e, policy_name)]
     if family_index % 2 and disagreement:
         return [initial[0], disagreement[0]]
     if post:
@@ -50,10 +57,12 @@ def select_events(events: list[dict[str, Any]], family_index: int) -> list[dict[
     return initial
 
 
-def nominate(event: dict[str, Any], coverage: Counter[str], seed: int) -> dict[str, str]:
+def nominate(
+    event: dict[str, Any], coverage: Counter[str], seed: int, policy_name: str = "rules"
+) -> dict[str, str]:
     choices = {
         "learner": full_menu_choice(event["actions"], event["prediction"]["logits"]),
-        "rules": baseline(event),
+        policy_name: baseline(event, policy_name),
     }
     chosen = [a for a in event["actions"] if a["id"] in choices.values()]
     for action in chosen:
@@ -77,11 +86,12 @@ def execute_branch(
     step: int,
     continuation_steps: int,
     terminal_handoff: str = "rules",
+    policy_name: str = "rules",
 ) -> dict[str, Any]:
     """Keep the finite allowance; let the shared policy select acquired material at the boundary."""
     state = MemoryControlState(**copy.deepcopy(before))
     remaining = before["budget"]["remaining_control_steps"]
-    policy = RulesMemoryPolicy(reads=4)
+    policy = continuation_policy(policy_name)
 
     class TerminalPolicy:
         def choose(self, current: MemoryControlState, actions: list[MemoryAction]) -> str:
@@ -91,26 +101,28 @@ def execute_branch(
                 if elapsed > continuation_steps
                 else actions
             )
-            return policy.choose(current, offered)
+            terminal = RulesMemoryPolicy(reads=4) if terminal_handoff == "rules" else policy
+            return (terminal if elapsed > continuation_steps else policy).choose(current, offered)
 
-    if terminal_handoff not in {"current", "rules"}:
+    if terminal_handoff not in {"current", "rules", "policy"}:
         raise ValueError("Declare current-packet or shared-policy terminal HANDOFF")
     result = run_memory_control(
         state,
-        TerminalPolicy() if terminal_handoff == "rules" else policy,
+        TerminalPolicy() if terminal_handoff != "current" else policy,
         operations,
         max_steps=step + remaining,
         start_step=step,
         # In rules mode the wrapper enforces the short boundary with a legal HANDOFF
         # choice. Do not let the legacy intervention discard observation-only material.
         intervention=FirstActionIntervention(
-            action, remaining if terminal_handoff == "rules" else continuation_steps
+            action, remaining if terminal_handoff != "current" else continuation_steps
         ),
     )
     first = result["trace"][0]
     if first["before"] != before or first["selected"] != action.id:
         raise ValueError("Branch changed the actual before or nominated binding")
     result["terminal_handoff"] = terminal_handoff
+    result["continuation_policy"] = policy_name
     return result
 
 
@@ -122,8 +134,14 @@ def main() -> None:
     parser.add_argument("--families", type=int, required=True)
     parser.add_argument("--continuation-steps", type=int, default=2)
     parser.add_argument(
+        "--continuation-policy",
+        choices=("rules", "fixed_context"),
+        default="rules",
+        help="Declared baseline nomination and shared continuation policy",
+    )
+    parser.add_argument(
         "--terminal-handoff",
-        choices=("current", "rules"),
+        choices=("current", "rules", "policy"),
         default="rules",
         help="Shared policy selects among actual HANDOFF bindings at the short boundary",
     )
@@ -155,11 +173,13 @@ def main() -> None:
         "selected_states": 0,
         "comparison_states": 0,
         "packets": 0,
-        "continuation_policy": "RulesMemoryPolicy(reads=4)",
+        "continuation_policy": type(continuation_policy(args.continuation_policy)).__name__
+        + "(reads=4)",
+        "nomination_baseline": args.continuation_policy,
         "continuation_steps": args.continuation_steps,
         "terminal_handoff": args.terminal_handoff,
         "selection": "Initial plus one actual non-forced post state; even family positions seeded "
-        "uniform, odd positions earliest learner/rules disagreement with uniform fallback. "
+        "uniform; odd positions use earliest learner/baseline disagreement, else uniform. "
         "Missing posts remain missing; no outcome/native-label selection.",
         "no_sha_validation": True,
         "Host_calls": 0,
@@ -174,7 +194,7 @@ def main() -> None:
             root = args.collection / "banks" / history["id"]
             request = history["requests"][0]
             events = read_jsonl(root / f"{request['id']}-operations.jsonl")
-            selected = select_events(events, family_index)
+            selected = select_events(events, family_index, args.continuation_policy)
             cells.append(
                 {
                     "family": history["source_group"],
@@ -185,7 +205,7 @@ def main() -> None:
             )
             for event in selected:
                 event_id = f"{history['source_group']}/{request['id']}/step-{event['step']}"
-                choices = nominate(event, coverage, len(rows))
+                choices = nominate(event, coverage, len(rows), args.continuation_policy)
                 row = decision_example(
                     event,
                     {
@@ -239,6 +259,7 @@ def main() -> None:
                             event["step"],
                             args.continuation_steps,
                             args.terminal_handoff,
+                            args.continuation_policy,
                         )
                         packet = controlled_reader_packet(
                             operations.reader_evidence(), "collection"
