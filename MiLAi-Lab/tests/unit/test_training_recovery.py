@@ -149,6 +149,8 @@ def test_real_cuda_trainer_resumes_midstage_or_before_evaluation_exactly(
                 "2",
                 "--full-dev-data",
                 str(data / "dev.jsonl"),
+                "--aux-dev-data",
+                str(data / "dev.jsonl"),
                 "--full-dev-at",
                 "3",
                 "6",
@@ -197,6 +199,8 @@ def test_real_cuda_trainer_resumes_midstage_or_before_evaluation_exactly(
     assert (resumed / "dev/0").is_symlink()
     assert [point["optimizer_updates"] for point in history if "full-dev" in point] == [3, 6]
     assert (resumed / "full-dev/6/predictions.jsonl").is_file()
+    assert all("aux-dev" in point for point in history)
+    assert (resumed / "aux-dev/0").is_symlink()
     actual = json.loads((resumed / "compute.json").read_text())
     assert actual["train_sequence_rows"] == (6 - stop) * 8  # No old CPU/token re-billing.
     assert json.loads((resumed / "run.json").read_text())["train_sequence_rows"] == 48

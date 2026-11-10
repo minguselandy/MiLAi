@@ -346,6 +346,8 @@ def main() -> None:
                         help="Full fixed development panel, separate from the frequent fast panel")
     parser.add_argument("--full-dev-at", type=int, nargs="+",
                         help="Checkpoint-axis values for full dev; defaults to the final point")
+    parser.add_argument("--aux-dev-data", type=Path,
+                        help="Separate development domain evaluated at every declared point")
     parser.add_argument("--feedback-dev-data", type=Path,
                         help="Separate source-disjoint answer/delivery evaluation for all arms")
     parser.add_argument("--seed", type=int, default=0)
@@ -509,6 +511,7 @@ def main() -> None:
     dev_path = args.dev_data or args.data / "dev.jsonl"
     dev = read_jsonl(dev_path)
     full_dev = read_jsonl(args.full_dev_data) if args.full_dev_data is not None else []
+    aux_dev = read_jsonl(args.aux_dev_data) if args.aux_dev_data is not None else []
     feedback_dev = read_jsonl(args.feedback_dev_data) if args.feedback_dev_data is not None else []
     if quality_supervised:
         validate_quality_pool([*train, *feedback_dev])
@@ -538,6 +541,13 @@ def main() -> None:
             full_dev = [project_mixed_row(row, args.operation_state) for row in full_dev]
         elif args.task == "instruction_applicability":
             full_dev = [project_applicability_row(row, args.operation_state) for row in full_dev]
+    if aux_dev:
+        if args.task == "memory_operation":
+            aux_dev = [project_operation_payload(row, args.operation_state) for row in aux_dev]
+        elif args.task == "mixed_retrieval":
+            aux_dev = [project_mixed_row(row, args.operation_state) for row in aux_dev]
+        elif args.task == "instruction_applicability":
+            aux_dev = [project_applicability_row(row, args.operation_state) for row in aux_dev]
     mixture = normalized_mixture(read_json(args.mixture)) if args.mixture is not None else None
     weights = mixture_event_weights(train, mixture) if mixture is not None else event_weights(train)
     if mixture is not None:
@@ -602,6 +612,8 @@ def main() -> None:
            "full_passes": args.full_passes,
            "full_dev_source": str(args.full_dev_data.resolve()) if args.full_dev_data else None,
            "full_dev_states": len(full_dev), "full_dev_at": full_dev_at if full_dev else [],
+           "aux_dev_source": str(args.aux_dev_data.resolve()) if args.aux_dev_data else None,
+           "aux_dev_states": len(aux_dev),
            "batch_size": args.micro_batch_size,
            "eval_batch_size": args.eval_batch_size,
            "cache_evaluation": batched_evaluation, "eval_precision": args.eval_precision,
@@ -732,6 +744,8 @@ def main() -> None:
         evaluation_rows = {"train": train, "dev": dev}
         if args.full_dev_data is not None:
             evaluation_rows["full-dev"] = full_dev
+        if args.aux_dev_data is not None:
+            evaluation_rows["aux-dev"] = aux_dev
         if args.feedback_dev_data is not None:
             evaluation_rows["feedback-dev"] = feedback_dev
         lengths = {split: audit(rows, tok, args.max_len, args.head_max_len)
@@ -783,7 +797,8 @@ def main() -> None:
             "parallel_mode", "micro_batch_size", "effective_batch_rows",
             "length_bucketed_microbatches", "microbatch_padded_token_target", "max_len",
             "head_max_len", "gradient_checkpointing", "scheduler", "warmup_fraction",
-            "warmup_max_updates", "lr_floor_ratio", "full_passes", "full_dev_data", "full_dev_at")
+            "warmup_max_updates", "lr_floor_ratio", "full_passes", "full_dev_data", "full_dev_at",
+            "aux_dev_data")
         contract = {"recipe": {key: str(value.resolve()) if isinstance(value, Path) else value
                     for key in recipe_fields if (value := getattr(args, key)) is not None},
                     "data_event_ids": [row["metadata"]["event_id"] for row in train],
@@ -865,6 +880,8 @@ def main() -> None:
                    [] if args.skip_initial_dev else [{axis: 0, "dev": evaluate(0)}])
         if args.feedback_dev_data is not None and not args.skip_initial_dev and resumed is None:
             history[0]["feedback-dev"] = evaluate(0, "feedback-dev")
+        if args.aux_dev_data is not None and not args.skip_initial_dev and resumed is None:
+            history[0]["aux-dev"] = evaluate(0, "aux-dev")
         if args.evaluate_train and not args.train_eval_final_only and resumed is None:
             if not history:
                 history.append({axis: 0})
@@ -1099,6 +1116,8 @@ def main() -> None:
                 history[-1]["feedback-dev"] = evaluate(checkpoint_step, "feedback-dev")
             if args.full_dev_data is not None and checkpoint_step in full_dev_at:
                 history[-1]["full-dev"] = evaluate(checkpoint_step, "full-dev")
+            if args.aux_dev_data is not None:
+                history[-1]["aux-dev"] = evaluate(checkpoint_step, "aux-dev")
             if args.objective == "soft-ce":
                 history[-1]["weighted_ce_mean"] = loss_mean
             if args.evaluate_train and (

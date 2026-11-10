@@ -363,10 +363,12 @@ def main() -> None:
         (r["source_group"], r["request_id"]): r
         for r in read_jsonl(args.population / "controls.jsonl")
     }
+    population = read_json(args.population / "population.json")
+    cluster_namespace = population.get("cluster_namespace", "musique-target-component")
     clusters = {
-        family: f"musique-target-component-{i:05d}"
+        family: f"{cluster_namespace}-{i:05d}"
         for i, group in enumerate(
-            read_json(args.population / "population.json")["target_title_clusters"]
+            population["target_title_clusters"]
         )
         for family in group
     }

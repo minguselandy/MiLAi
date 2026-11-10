@@ -24,7 +24,7 @@ from prepare_operation_source_expansion import (
 
 
 def export_family(
-    family: str, records: list[dict[str, Any]]
+    family: str, records: list[dict[str, Any]], *, split: str = "train"
 ) -> tuple[dict[str, Any], list[dict[str, Any]]]:
     """Literal paragraph reuse does not turn native variants into independent sources."""
     keys: dict[tuple[str, str], str] = {}
@@ -75,13 +75,13 @@ def export_family(
             {
                 "schema": "source_reference_witness_v1",
                 "source_group": family,
-                "split": "train",
+                "split": split,
                 "request_id": request_id,
                 "native_source_row": metadata["row"],
                 "native_question_id": source["id"],
                 "native_answerable": source["answerable"],
                 "native_answer": source["answer"],
-                "native_answer_aliases": source["answer_aliases"],
+                "native_answer_aliases": source.get("answer_aliases"),
                 "reference_proofs": [[[identifier] for identifier in support]]
                 if source["answerable"] and support
                 else [],
@@ -93,7 +93,7 @@ def export_family(
     return {
         "id": family,
         "source_group": family,
-        "split": "train",
+        "split": split,
         "continuous": False,
         "source_version": "musique-full-v1.0-native-context",
         "dataset": "musique",

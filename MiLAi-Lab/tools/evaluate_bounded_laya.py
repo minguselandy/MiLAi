@@ -108,6 +108,8 @@ def main() -> None:
     parser.add_argument("--compute-phase", help="Distinct phase in the original shared ledger")
     parser.add_argument("--threads", type=int, default=4)
     parser.add_argument("--device", default="cpu")
+    parser.add_argument("--batch-size", type=int, default=1,
+                        help="Native rows per forward; preserve per-row input/output artifacts")
     parser.add_argument("--max-len", type=int, default=4096)
     parser.add_argument("--head-max-len", type=int, default=384)
     parser.add_argument("--disable-reference-compile", action="store_true",
@@ -122,6 +124,8 @@ def main() -> None:
                             "compact_actions", "compact_actions_request_text"),
                         default="full")
     args = parser.parse_args()
+    if args.batch_size < 1:
+        parser.error("Evaluation batch size must be positive")
     import torch
 
     torch.set_num_threads(args.threads)
@@ -144,6 +148,7 @@ def main() -> None:
            "checkpoint": str(args.checkpoint.resolve()), "device": args.device,
            "visible_cuda_devices": os.environ.get("CUDA_VISIBLE_DEVICES"),
            "threads": args.threads, "max_len": args.max_len,
+           "batch_size": args.batch_size,
            "head_max_len": args.head_max_len, "completed_states": 0, "planned_states": len(rows),
            "task": args.task, "operation_state": args.operation_state,
            "reference_compile_override": False if args.disable_reference_compile else None,
@@ -173,16 +178,21 @@ def main() -> None:
         if args.disable_reference_compile:
             model.model.encoder.config.reference_compile = False
         run["loaded_weight_dtype"] = str(next(model.model.parameters()).dtype)
-        for index, row in enumerate(rows):
-            payload = {k: row[k] for k in ("state", "questions")}
-            write_json(args.output / "calls" / str(index) / "input.json", payload)
-            prediction = model.predict(payload)
-            write_json(args.output / "calls" / str(index) / "output.json", prediction)
-            predictions.append(prediction)
-            run["completed_states"] += 1
+        for start in range(0, len(rows), args.batch_size):
+            payloads = [{k: row[k] for k in ("state", "questions")}
+                        for row in rows[start:start + args.batch_size]]
+            for offset, payload in enumerate(payloads):
+                write_json(args.output / "calls" / str(start + offset) / "input.json", payload)
+            batch_predictions = ([model.predict(payloads[0])] if args.batch_size == 1 else
+                                 model.predict_batch(payloads, args.batch_size))
+            for offset, prediction in enumerate(batch_predictions):
+                write_json(args.output / "calls" / str(start + offset) / "output.json", prediction)
+                predictions.append(prediction)
+                run["completed_states"] += 1
             write_json(args.output / "run.json", run)
             print(json.dumps({"completed": len(predictions), "planned": len(rows),
-                              "input_tokens": prediction["input_tokens"]}), flush=True)
+                              "input_tokens": sum(p["input_tokens"] for p in batch_predictions)}),
+                  flush=True)
         if cuda_index is not None:
             torch.cuda.synchronize(cuda_index)
             run["cuda_synchronized_completion"] = True
