@@ -19,13 +19,13 @@ def reviewed_relation(left: str, right: str, target: str) -> str:
     Two incomplete packets may differ greatly. Failures, qualified answers and
     unknown material judgments retain unknown quality, rather than a negative/tie.
     """
-    positive, negative = ("complete", "incomplete") if target == "answer" else (
-        "sufficient", "insufficient")
+    positive, negatives = ("complete", {"incomplete", "incorrect"}) if target == "answer" else (
+        "sufficient", {"insufficient"})
     if left == right == positive:
         return "tie"
-    if (left, right) == (positive, negative):
+    if left == positive and right in negatives:
         return "left"
-    if (left, right) == (negative, positive):
+    if left in negatives and right == positive:
         return "right"
     return "unknown"
 

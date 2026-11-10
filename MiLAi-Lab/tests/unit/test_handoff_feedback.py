@@ -12,6 +12,10 @@ def test_partial_quality_and_failed_readout_remain_unknown():
     assert reviewed_relation("unknown", "sufficient", "delivery") == "unknown"
     assert reviewed_relation("complete", "failed", "answer") == "unknown"
     assert reviewed_relation("complete", "complete", "answer") == "tie"
+    assert reviewed_relation("complete", "incorrect", "answer") == "left"
+    assert reviewed_relation("incorrect", "complete", "answer") == "right"
+    assert reviewed_relation("incorrect", "incorrect", "answer") == "unknown"
+    assert reviewed_relation("incorrect", "incomplete", "answer") == "unknown"
 
 
 def test_actual_binding_dedup_keeps_original_inputs_and_unknown_alternatives():
