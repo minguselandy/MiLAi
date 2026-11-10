@@ -393,6 +393,8 @@ def main() -> None:
                         help="Omit unchanged base-checkpoint evaluation; retain its prior results")
     parser.add_argument("--shuffle-options", action="store_true",
                         help="Resample option slots and matching targets each training epoch")
+    parser.add_argument("--reuse-training-tokens", action="store_true",
+                        help="Reuse SDK tokens across audit, preparation and option permutation")
     parser.add_argument("--gradient-checkpointing", action="store_true",
                         help="Recompute encoder activations during backward to reduce memory")
     parser.add_argument("--scheduler", choices=("legacy-cosine", "warmup-cosine"),
@@ -748,18 +750,30 @@ def main() -> None:
             evaluation_rows["aux-dev"] = aux_dev
         if args.feedback_dev_data is not None:
             evaluation_rows["feedback-dev"] = feedback_dev
-        lengths = {split: audit(rows, tok, args.max_len, args.head_max_len)
-                   for split, rows in evaluation_rows.items()}
+        codec_rows = ([encoding_row(row) for row in train]
+                      if args.objective == "pair" else train)
+        training_tok = tok
+        if args.reuse_training_tokens:
+            from training_token_reuse import prepare_training_rows
+
+            train_lengths, items, skipped, encoded, training_tok = prepare_training_rows(
+                tok, codec_rows, args.max_len, args.head_max_len)
+            lengths = {"train": train_lengths, **{
+                split: audit(rows, tok, args.max_len, args.head_max_len)
+                for split, rows in evaluation_rows.items() if split != "train"}}
+            run["training_token_reuse"] = training_tok.counters
+        else:
+            lengths = {split: audit(rows, tok, args.max_len, args.head_max_len)
+                       for split, rows in evaluation_rows.items()}
         write_json(args.output / "lengths.json", lengths)
         if any(r["state_tokens_dropped"] or r["head_tokens_dropped"]
                for records in lengths.values() for r in records):
             raise ValueError("Complete-input audit failed")
-        codec_rows = ([encoding_row(row) for row in train]
-                      if args.objective == "pair" else train)
-        items, skipped = items_from_rows(tok, codec_rows, args.max_len, args.head_max_len)
+        if not args.reuse_training_tokens:
+            items, skipped = items_from_rows(tok, codec_rows, args.max_len, args.head_max_len)
+            encoded = [encode_item(tok, item, args.max_len, args.head_max_len) for item in items]
         if skipped or len(items) != len(train):
             raise ValueError(f"Invalid training items: {skipped}")
-        encoded = [encode_item(tok, item, args.max_len, args.head_max_len) for item in items]
         encoded_lengths = [len(item["ids"]) for item in encoded]
         option_orders: list[list[int] | None] = [None] * len(items)
         write_json(args.output / "sampling.json", [
@@ -804,6 +818,8 @@ def main() -> None:
                     "data_event_ids": [row["metadata"]["event_id"] for row in train],
                     "weights": weights, "stages": stages,
                     "dev_source": str(dev_path.resolve())}
+        if args.reuse_training_tokens:
+            contract["recipe"]["reuse_training_tokens"] = True
         resumed = (restore_training_state(args.resume_training_state, model, optimizer, scheduler,
                                           contract=contract)
                    if args.resume_training_state else None)
@@ -892,7 +908,8 @@ def main() -> None:
         if resumed is not None:
             option_rng.setstate(resumed["option_rng"])
             encoded_pass, option_orders = resumed["encoded_pass"], resumed["option_orders"]
-            encoded = [encode_item(tok, item, args.max_len, args.head_max_len, option_order=order)
+            encoded = [encode_item(training_tok, item, args.max_len, args.head_max_len,
+                                   option_order=order)
                        for item, order in zip(items, option_orders, strict=True)]
             encoded_lengths = [len(item["ids"]) for item in encoded]
             previous = Path(resumed["output"])
@@ -968,9 +985,10 @@ def main() -> None:
                                         shuffle_rng = random.Random(state_seed)  # noqa: S311
                                     option_orders.append(draw_option_order(
                                         item, shuffle_rng, ("choice",)))
-                                encoded = [encode_item(tok, item, args.max_len, args.head_max_len,
-                                           option_order=order) for item, order in zip(
-                                               items, option_orders, strict=True)]
+                                encoded = [
+                                    encode_item(training_tok, item, args.max_len,
+                                                args.head_max_len, option_order=order)
+                                    for item, order in zip(items, option_orders, strict=True)]
                                 encoded_lengths = [len(item["ids"]) for item in encoded]
                                 write_json(args.output / "option-orders" / f"{data_pass}.json",
                                            option_orders)

@@ -47,8 +47,9 @@ def test_warmup_and_cosine_preserve_per_group_lr_ratios():
 
 
 @pytest.mark.parametrize("stop", [2, 3])
+@pytest.mark.parametrize("token_reuse", [False, True])
 def test_real_cuda_trainer_resumes_midstage_or_before_evaluation_exactly(
-    tmp_path, monkeypatch, stop
+    tmp_path, monkeypatch, stop, token_reuse
 ):
     torch = pytest.importorskip("torch")
     transformers = pytest.importorskip("transformers")
@@ -114,7 +115,7 @@ def test_real_cuda_trainer_resumes_midstage_or_before_evaluation_exactly(
     budget = tmp_path / "budget.json"
     budget.write_text(json.dumps(RunBudget(RunLimits(), budget).state))
 
-    def run(name, *extra):
+    def run(name, *extra, use_reuse=token_reuse):
         output = tmp_path / name
         monkeypatch.setattr(
             sys,
@@ -169,6 +170,7 @@ def test_real_cuda_trainer_resumes_midstage_or_before_evaluation_exactly(
                 "2",
                 "--save-training-state-every",
                 "2",
+                *(["--reuse-training-tokens"] if use_reuse else []),
                 *extra,
             ],
         )
@@ -180,6 +182,12 @@ def test_real_cuda_trainer_resumes_midstage_or_before_evaluation_exactly(
     assert json.loads((first / "run.json").read_text())["status"] == "INTERRUPTED"
     resumed = run("resumed", "--resume-training-state", str(first / "recovery/training-state.pt"))
     baseline = torch.load(continuous / "recovery/training-state.pt", weights_only=False)
+    if token_reuse and stop == 2:
+        uncached = run("uncached", use_reuse=False)
+        old = torch.load(uncached / "recovery/training-state.pt", weights_only=False)
+        assert all(torch.equal(value, old["model"][key])
+                   for key, value in baseline["model"].items())
+        assert baseline["progress"]["option_orders"] == old["progress"]["option_orders"]
     recovered = torch.load(resumed / "recovery/training-state.pt", weights_only=False)
     assert all(
         torch.equal(value, recovered["model"][key]) for key, value in baseline["model"].items()
