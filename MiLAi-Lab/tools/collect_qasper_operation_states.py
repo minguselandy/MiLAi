@@ -95,15 +95,14 @@ def reference_preferences(
     """Annotated-proof acquisition/delivery preferences, not exhaustive semantic negatives."""
     if not proofs:
         return [], "unknown_textual_reference"
-    covered = covered_sources(list(operations.opened.values()), mapping, lengths)
-    if complete(proofs, covered):
-        accepted = [
-            a.id
-            for a in actions
-            if a.kind == "HANDOFF"
-            and complete(proofs, covered_sources(handoff_items(a, operations), mapping, lengths))
-        ]
+    accepted = [
+        a.id for a in actions if a.kind == "HANDOFF"
+        and complete(proofs, covered_sources(handoff_items(a, operations), mapping, lengths))
+    ]
+    if accepted:
         return accepted, "reference_preserving_handoff"
+    # Acquisition and current delivery differ when a READ exceeds the packet budget.
+    covered = covered_sources(list(operations.observed.values()), mapping, lengths)
     accepted = []
     for action in actions:
         if action.kind == "SEARCH":
@@ -144,8 +143,10 @@ def collect_paper(
     branches: bool,
     seed: int,
     append: Any,
+    source_bank: Path | None = None,
 ) -> dict[str, Any]:
     root.mkdir(parents=True, exist_ok=False)
+    bank = source_bank or root
     observation = SourceObservationBudget(2048, capacity.text_tokens)
     ranges = SourceRangeBudget(
         256,
@@ -159,28 +160,36 @@ def collect_paper(
         "split": history["split"],
         "requests": [],
         "source_units": len(history["sources"]),
+        "source_bank_root": str(bank.resolve()),
+        "existing_Source_bank_reused": source_bank is not None,
     }
-    with SqliteStore.from_conn_string(str(root / "memory.sqlite")) as store:
+    with SqliteStore.from_conn_string(str(bank / "memory.sqlite")) as store:
         service = MemoryService(
             store,
             ("scalable-evidence", history["id"], "collector"),
             "collector",
-            root / "lock",
+            bank / "lock",
             functional_contract="functional_v1",
         )
-        mapping, lengths = {}, {}
-        for source in history["sources"]:
-            receipt = service.capture_tool(
-                source["session_id"],
-                source["event_key"],
-                source["origin"],
-                source["content"],
-                None,
-                occurred_at=source["occurred_at"],
-            )
-            ref = receipt["source_ref"]
-            mapping[ref] = source["original_event_id"]
-            lengths[ref] = len(source["content"])
+        if source_bank is not None:
+            saved = read_json(bank / "source-map.json")
+            mapping, lengths = saved["mapping"], saved["source_lengths"]
+            if set(mapping.values()) != {s["original_event_id"] for s in history["sources"]}:
+                raise ValueError("Existing Source bank belongs to different native source units")
+        else:
+            mapping, lengths = {}, {}
+            for source in history["sources"]:
+                receipt = service.capture_tool(
+                    source["session_id"],
+                    source["event_key"],
+                    source["origin"],
+                    source["content"],
+                    None,
+                    occurred_at=source["occurred_at"],
+                )
+                ref = receipt["source_ref"]
+                mapping[ref] = source["original_event_id"]
+                lengths[ref] = len(source["content"])
         write_json(root / "source-map.json", {"mapping": mapping, "source_lengths": lengths})
         for request_index, request in enumerate(history["requests"]):
             query = request["content"].removeprefix(QUESTION_PROMPT_PREFIX)
@@ -261,12 +270,14 @@ def collect_paper(
                         "task": "memory_operation",
                         "source_version": "qasper-v0.3",
                         "trace": str(trace.resolve()),
+                        "source_bank_root": str(bank.resolve()),
                         "collector": "fixed_lexical_read_prefix",
                         "stage": (
                             "initial" if step == 0 else "post_search" if step == 1 else "post_read"
                         ),
                         "supervision_scope": "Native complete-text annotation witness preference; "
                         "not exhaustive alternative proofs, runtime sufficiency or Host success",
+                        "supervision_version": "reference_witness_v2_observed_delivery",
                         "reference_proofs": [
                             [sorted(group) for group in proof] for proof in proofs
                         ],
@@ -398,6 +409,13 @@ def main() -> None:
     parser.add_argument("--families", type=int)
     parser.add_argument("--max-steps", type=int, default=8)
     parser.add_argument("--branch-families", type=int, default=64)
+    parser.add_argument(
+        "--reuse-source-collections",
+        type=Path,
+        nargs="+",
+        default=[],
+        help="Use existing immutable paper banks for additional native questions",
+    )
     args = parser.parse_args()
     started, cpu = time.perf_counter(), time.process_time()
     histories = read_json(args.histories)["histories"]
@@ -405,6 +423,11 @@ def main() -> None:
         args.offset : None if args.families is None else args.offset + args.families
     ]
     controls = {(c["source_group"], c["request_id"]): c for c in read_jsonl(args.controls)}
+    source_banks = {
+        h["source_group"]: collection / "banks" / h["id"]
+        for collection in args.reuse_source_collections
+        for h in read_json(collection / "sources.json")["histories"]
+    }
     if not histories or any(h["split"] not in {"train", "dev"} for h in histories):
         raise ValueError("Collection requires an existing TRAIN/development source allocation")
     settings = read_json(args.config)["entrypoints"]["functional"]
@@ -430,6 +453,7 @@ def main() -> None:
         "model_calls": 0,
         "Host_calls": 0,
         "automatic_retry": False,
+        "reused_source_families": sum(h["source_group"] in source_banks for h in histories),
     }
 
     def append(kind: str, row: dict[str, Any]) -> None:
@@ -462,6 +486,7 @@ def main() -> None:
                 branches=args.offset + index < args.branch_families,
                 seed=args.offset + index,
                 append=append,
+                source_bank=source_banks.get(history["source_group"]),
             )
             run["completed_families"] += 1
             write_json(args.output / "run.json", run)

@@ -31,6 +31,32 @@ def validate_given_readout_request(request: dict[str, Any]) -> None:
         raise ValueError("GIVEN_READOUT_CANNOT_RECONSTRUCT_PRIOR_HOST_KNOWLEDGE")
 
 
+def given_packet_request(public: dict[str, Any], retrieval_request: dict[str, Any],
+                         packet: dict[str, Any], settings: dict[str, Any]) -> dict[str, Any]:
+    """Build the existing conditional readout wire for an actual delivered packet.
+
+    The caller owns the execution receipt and Source visibility. This function
+    does not retrieve, add knowledge or reconstruct a prior Host conversation.
+    """
+    validate_given_readout_request(retrieval_request)
+    host = VLLMConfig(**settings["host"])
+    public_time = {key: public[key] for key in (
+        "occurred_at", "query_time", "calendar_context", "query_calendar_context") if key in public}
+    return {
+        "model": host.model, "temperature": host.temperature, "max_tokens": host.max_tokens,
+        "chat_template_kwargs": {"enable_thinking": settings["capacity"].get(
+            "enable_thinking", False)},
+        "messages": [{"role": "system", "content": settings["system_prompt"]},
+            {"role": "user", "content": json.dumps({
+                "request": public["content"], "retrieval_request": retrieval_request,
+                "memory": packet,
+                **({"public_request_time": public_time} if public_time else {})},
+                ensure_ascii=False)}],
+        "response_format": {"type": "json_schema", "json_schema": {
+            "name": "answer", "schema": copy.deepcopy(ANSWER_SCHEMA)}},
+    }
+
+
 def given_readout_frame(
     call: dict[str, Any], result: dict[str, Any], settings: dict[str, Any],
     *, replay: dict[str, Any] | None = None,
@@ -76,25 +102,7 @@ def given_readout_frame(
     if (packet != result["retrieval_result"]
             or (replay is None and packet != call["original_result"])):
         raise ValueError("GIVEN_READOUT_RETURNED_PACKET_CHANGED")
-    host = VLLMConfig(**settings["host"])
-    public_time = {key: public[key] for key in (
-        "occurred_at", "query_time", "calendar_context", "query_calendar_context") if key in public}
-    request = {
-        "model": host.model, "temperature": host.temperature, "max_tokens": host.max_tokens,
-        # The frozen settings have already been validated. Actual dispatch still
-        # constructs HostCapacity and checks the whole wire; no tokenizer load
-        # is needed merely to copy this flag and its defined default.
-        "chat_template_kwargs": {"enable_thinking": settings["capacity"].get(
-            "enable_thinking", False)},
-        "messages": [{"role": "system", "content": settings["system_prompt"]},
-            {"role": "user", "content": json.dumps({
-                "request": public["content"], "retrieval_request": call["request"],
-                "memory": packet,
-                **({"public_request_time": public_time} if public_time else {})},
-                ensure_ascii=False)}],
-        "response_format": {"type": "json_schema", "json_schema": {
-            "name": "answer", "schema": copy.deepcopy(ANSWER_SCHEMA)}},
-    }
+    request = given_packet_request(public, call["request"], packet, settings)
     return {**frame, "status": "READY", "request": request}
 
 

@@ -8,7 +8,7 @@ from collections import Counter
 from pathlib import Path
 from typing import Any
 
-from milai_lab.harness.artifact_io import read_json, write_json
+from milai_lab.harness.artifact_io import read_json, read_jsonl, write_json
 
 
 def completed_rows(root: Path, limit: int | None = None) -> list[dict[str, Any]]:
@@ -39,18 +39,26 @@ def main() -> None:
     parser.add_argument("--dev-collection", type=Path, required=True)
     parser.add_argument("--train-families", type=int)
     parser.add_argument("--fast-dev-states", type=int, default=128)
+    parser.add_argument(
+        "--newly-supervised",
+        type=Path,
+        help="Known targets for previously unknown recorded states; append after old fit rows",
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     raw = []
     families: set[str] = set()
+    events: set[str] = set()
     for root in args.train_collections:
         remaining = None if args.train_families is None else args.train_families - len(families)
         if remaining == 0:
             break
         rows = completed_rows(root, remaining)
         own = {row["metadata"]["family"] for row in rows}
-        if own & families:
-            raise ValueError("A training family was supplied in multiple collection slices")
+        new_events = {row["metadata"]["event_id"] for row in rows}
+        if events & new_events or len(new_events) != len(rows):
+            raise ValueError("An operation event was repeated across collection slices")
+        events.update(new_events)
         families.update(own)
         raw.extend(rows)
     dev = completed_rows(args.dev_collection)
@@ -65,6 +73,28 @@ def main() -> None:
     if args.train_families is not None and len(families) != args.train_families:
         raise ValueError("The requested completed-family prefix is not yet available")
     train = [row for row in raw if row["gold"]]
+    additions = []
+    if args.newly_supervised is not None:
+        by_event = {row["metadata"]["event_id"]: row for row in raw}
+        additions = read_jsonl(args.newly_supervised)
+        ids = [row["metadata"]["event_id"] for row in additions]
+        if len(set(ids)) != len(ids):
+            raise ValueError("New supervision repeats a recorded state")
+        for row in additions:
+            old = by_event[row["metadata"]["event_id"]]
+            if (
+                old["gold"]
+                or not row["gold"]
+                or any(row[k] != old[k] for k in ("state", "questions"))
+            ):
+                raise ValueError(
+                    "New supervision must preserve the actual input of an unknown state"
+                )
+            row["metadata"].update(
+                source_collection=old["metadata"]["source_collection"],
+                source_state_id=old["metadata"]["source_state_id"],
+            )
+        train.extend(additions)
     for index, row in enumerate([*train, *dev]):
         row["metadata"]["state_id"] = index
     # Round-robin evenly spaced within each family; cover initial and late prefixes.
@@ -94,7 +124,10 @@ def main() -> None:
             "train_labelled_families": len({row["metadata"]["family"] for row in train}),
             "train_raw_states": len(raw),
             "train_fit_states": len(train),
-            "train_unknown_states_retained_in_collections": len(raw) - len(train),
+            "train_unknown_states_retained_in_collections": sum(not r["gold"] for r in raw),
+            "newly_supervised_states": len(additions),
+            "remaining_unknown_states": len(raw) - len(train),
+            "new_supervision_source": str(args.newly_supervised) if args.newly_supervised else None,
             "dev_families": len(groups),
             "dev_fast_states": len(panel),
             "dev_full_states": len(dev),
