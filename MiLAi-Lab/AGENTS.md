@@ -1,4 +1,57 @@
-# LIVE scalable evidence phase 4: 2026-11-11
+# LIVE scalable evidence phase 5: 2026-11-11
+
+Full v2 user goal ACTIVE/incomplete. This turn is PROGRESS, no blocker. No subagents,
+SHA/content fingerprints, service changes, Product/API/permission/Canonical changes or push.
+Read this scoped header and latest execution doc, not the entire historical log.
+Artifacts remain /data/milai-experiments/20261111-scalable-evidence; /cra ordinary space full.
+Latest code2306a4f2; latest progress-v5.json and manifest scalable-evidence-progress-20261111-v5.json.
+
+LIVE op10k exec33781, parent468717 child468718, physicalGPU3, last283/945 updates,
+already-loaded cececfb7 code. LIVE op36k exec52995, parent769162 child769163, physicalGPU2,
+loaded4bab6388; lengths.json exists, still preparing before first optimizer update at last check.
+Always inspect actual /proc and owner/run files. No timeout or stale progress permits restart.
+
+LIVE learner TRAIN160 exec31902, owner818840 child818846, CPU FP32/4 threads, loaded17269285.
+Plan s1-learner-train160-v1-plan.json; owner same name-owner.json; original shared budget bills
+whole child CPU once at closure. Last8 families37 states21 HANDOFF packets. Do not rebill NativeDecision.
+Uses S1 op3k/u101; exploratory choice based on exposed DEV8 strict supported outcomes, not optimum.
+First160 existing expanded TRAIN papers, first native question; no original3k family overlap,
+but these are in10k population. Reuses all original source banks; fixed lexical traces retained.
+New optional learner collector records exact prediction and actual choice; forced last HANDOFF marked.
+
+CLOSED prefix2 branch prep exec68477 and first readouts exec94170 (drained, exit0):
+s2-reached-train160-prefix2-v1, -readouts-v1. 2 families4 states10 unique actual bindings12 policy
+positions;10completed0failed,44373 known generationtokens,0newunknown. Same full binding shares one
+readout. Source Root review nonblind/nonindependent:1complete+supported,9truthful incomplete.
+CAIS actual learned READ delivers dataset paragraph -> correct speaker-system domain; rules empty,
+alternate abstract lacksdomain. WoZ collection question remains unresolved across all5 unique packets.
+2directional +6unknown pairs each answer/delivery;only1directional state. No newfeedback model fitted.
+WITNESS and SEMANTIC separate: use s2-reached-train160-prefix2-{witness,reviewed}-v2.
+V1 kept;V2 only aligns matched SFT state_id (controls option shuffle) with pair state_id, retaining
+original collection_state_id. Actual before/menu/gold/labels unchanged. Both-insufficient nottie.
+Author review s2-reached-train160-prefix2-author-review-v1.json; native scoring folder sameprefix.
+
+LIVE next readouts exec50832 for s2-reached-train160-families2to8-readouts-v1;
+preparation families2to8-v1 CLOSED exec10469 exit0,6families12states30actualpackets.
+Next feedback collection segment starts at offset8, never repeats the first8 families.
+prepare_collected_operation_feedback.py selects real initial/post states with fixed half uniform,
+half earliest learner/rules disagreement; no labels/outcomes. Replays exact before in originalbank,
+current/rules/undercovered full bindings, common RulesMemoryPolicy(reads4),2continuation decisions
+within original remaining slots. Conditional supplied-request readout, emptyK, not autonomousHost.
+Compiler binds first outcomes and optionally source semantic review; preserves matched SFT inputs.
+Native-reference witness is proxy, not semantic sufficiency; failed answer staysunknown.
+
+14 latest tests+3 prior native-reference tests, actual prefixreplay/input/samplingID checks pass.
+Ruff/packagepass; toolsboundary same6old LME imports. s2-prefix2-compute-v1.json records3.022273867
+CPU seconds once for prep+4compiles. Prefix2 Host selfbilled. Next6 prep CPU not yet recorded;
+record once with later stage, Hostreadout/learnerowner must not be double billed. Review/tests/native
+scorer subprocess CPU unmeasured notzero. No automatic retries/followup queue installed.
+NEXT: finish activefits+TRAIN160, close next30readouts and compile known feedback; grow toward300+
+states, preserve real shortfalls. Fit matched new-source SFT/pair from same S1 start once adequate.
+Then constrained/known I2, own-state comparison, continuous-source/View application, decisive seeds,
+newconfirmation96 and fullquality/cost/generalization. No fullgoalcompletion from this tiny TRAIN slice.
+
+# HISTORICAL scalable evidence phase 4: 2026-11-11
 
 Full v2 user goal ACTIVE/incomplete; previous/current turns PROGRESS. No subagents/SHA/fingerprints,
 new services, Product/API/permission/Canonical changes, remote push or automatic retry.
