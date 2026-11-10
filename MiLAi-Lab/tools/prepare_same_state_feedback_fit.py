@@ -189,7 +189,8 @@ def main() -> None:
             "no_sha_validation": True,
             "scope": "Identical state/menu/source/option-shuffle and replay. Targets differ: "
             "reviewed branch pairs versus reference-witness SFT. Restricted common support and "
-            "upstream unknowns stay explicit. A small prefix is data preparation, not a full S2 study.",
+            "upstream unknowns stay explicit. "
+            "A small prefix is data preparation, not a full S2 study.",
             "compute": {
                 "cpu_seconds": time.process_time() - cpu,
                 "wall_seconds": time.perf_counter() - started,
