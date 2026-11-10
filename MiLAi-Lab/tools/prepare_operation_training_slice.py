@@ -16,7 +16,10 @@ def completed_rows(root: Path, limit: int | None = None) -> list[dict[str, Any]]
     count = run["completed_families"] if limit is None else min(limit, run["completed_families"])
     histories = read_json(root / "sources.json")["histories"][:count]
     expected = sum(
-        sum(r["states"] for r in read_json(root / "banks" / h["id"] / "report.json")["requests"])
+        sum(
+            r.get("states", 0)
+            for r in read_json(root / "banks" / h["id"] / "report.json")["requests"]
+        )
         for h in histories
     )
     rows = []
@@ -38,6 +41,11 @@ def main() -> None:
     parser.add_argument("--train-collections", type=Path, nargs="+", required=True)
     parser.add_argument("--dev-collection", type=Path, required=True)
     parser.add_argument("--train-families", type=int)
+    parser.add_argument(
+        "--parent-data",
+        type=Path,
+        help="Retain an earlier fixed fit file as the exact prefix of this data version",
+    )
     parser.add_argument("--fast-dev-states", type=int, default=128)
     parser.add_argument(
         "--newly-supervised",
@@ -95,6 +103,33 @@ def main() -> None:
                 source_state_id=old["metadata"]["source_state_id"],
             )
         train.extend(additions)
+    native_families = set(families)
+    for row in [*raw, *dev, *additions]:
+        cluster = row["metadata"].get("source_cluster")
+        if cluster and cluster != row["metadata"]["family"]:
+            row["metadata"]["native_family"] = row["metadata"]["family"]
+            row["metadata"]["family"] = cluster
+    families = {row["metadata"]["family"] for row in raw}
+    if families & {row["metadata"]["family"] for row in dev}:
+        raise ValueError("A shared-source cluster overlaps training and development")
+    parent_count = 0
+    if args.parent_data is not None:
+        parent = read_jsonl(args.parent_data / "train.jsonl")
+        current = {row["metadata"]["event_id"]: row for row in train}
+        parent_ids = {row["metadata"]["event_id"] for row in parent}
+        if len(parent_ids) != len(parent):
+            raise ValueError("Parent fit contains repeated event IDs")
+        for row in parent:
+            candidate = current[row["metadata"]["event_id"]]
+            if (
+                any(candidate[k] != row[k] for k in ("state", "questions", "gold"))
+                or candidate["metadata"]["family"] != row["metadata"]["family"]
+            ):
+                raise ValueError(
+                    "Nested fit cannot change an earlier input, target or source cluster"
+                )
+        train = [*parent, *[row for row in train if row["metadata"]["event_id"] not in parent_ids]]
+        parent_count = len(parent)
     for index, row in enumerate([*train, *dev]):
         row["metadata"]["state_id"] = index
     # Round-robin evenly spaced within each family; cover initial and late prefixes.
@@ -121,6 +156,9 @@ def main() -> None:
             "train_collections": [str(p.resolve()) for p in args.train_collections],
             "dev_collection": str(args.dev_collection.resolve()),
             "train_source_families": len(families),
+            "train_native_source_groups": len(native_families),
+            "parent_data": str(args.parent_data) if args.parent_data else None,
+            "parent_fit_rows_retained_as_prefix": parent_count,
             "train_labelled_families": len({row["metadata"]["family"] for row in train}),
             "train_raw_states": len(raw),
             "train_fit_states": len(train),

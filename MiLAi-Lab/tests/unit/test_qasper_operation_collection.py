@@ -46,6 +46,7 @@ def test_partial_ranges_and_selective_handoff_keep_reference_witness():
     assert covered_sources([material("ra", 0, 5)], mapping, lengths) == set()
     assert covered_sources([material("ra", 0, 5), material("ra", 5, 10)], mapping, lengths) == {"a"}
     operations = SimpleNamespace(
+        known_materials=[],
         opened={0: material("ra"), 1: material("rb")},
         observed={0: material("ra"), 1: material("rb")},
     )
@@ -63,9 +64,14 @@ def test_partial_ranges_and_selective_handoff_keep_reference_witness():
 
 def test_already_observed_support_can_be_handed_off_even_if_default_delivery_missed_it():
     mapping, lengths = {"ra": "a", "rb": "b"}, {"ra": 10, "rb": 10}
-    operations = SimpleNamespace(opened={0: material("ra")},
-                                 observed={0: material("ra"), 1: material("rb")})
-    actions = [MemoryAction("current", "HANDOFF", "current"),
-               MemoryAction("select_b", "HANDOFF", "selected", {"delivery_indices": [1]})]
+    operations = SimpleNamespace(
+        known_materials=[],
+        opened={0: material("ra")},
+        observed={0: material("ra"), 1: material("rb")},
+    )
+    actions = [
+        MemoryAction("current", "HANDOFF", "current"),
+        MemoryAction("select_b", "HANDOFF", "selected", {"delivery_indices": [1]}),
+    ]
     accepted, status = reference_preferences(actions, operations, [[{"b"}]], mapping, lengths)
     assert accepted == ["select_b"] and status == "reference_preserving_handoff"

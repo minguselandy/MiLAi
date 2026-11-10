@@ -38,6 +38,8 @@ def reference_proofs(control: dict[str, Any]) -> list[list[set[str]]]:
     Keep alternative annotations separate. Unanswerable, figures and unmatched
     annotations cannot establish complete textual proofs or force a stop label.
     """
+    if control.get("schema") == "source_reference_witness_v1":
+        return [[set(group) for group in proof] for proof in control["reference_proofs"]]
     proofs = []
     for annotation in control["annotations"]:
         evidence = annotation["evidence"]
@@ -91,21 +93,29 @@ def reference_preferences(
     proofs: list[list[set[str]]],
     mapping: dict[str, str],
     lengths: dict[str, int],
+    search_preferences: set[str] | None = None,
 ) -> tuple[list[str], str]:
     """Annotated-proof acquisition/delivery preferences, not exhaustive semantic negatives."""
     if not proofs:
         return [], "unknown_textual_reference"
+    known = covered_sources(operations.known_materials, mapping, lengths)
     accepted = [
-        a.id for a in actions if a.kind == "HANDOFF"
-        and complete(proofs, covered_sources(handoff_items(a, operations), mapping, lengths))
+        a.id
+        for a in actions
+        if a.kind == "HANDOFF"
+        and complete(
+            proofs, known | covered_sources(handoff_items(a, operations), mapping, lengths)
+        )
     ]
     if accepted:
         return accepted, "reference_preserving_handoff"
     # Acquisition and current delivery differ when a READ exceeds the packet budget.
-    covered = covered_sources(list(operations.observed.values()), mapping, lengths)
+    covered = known | covered_sources(list(operations.observed.values()), mapping, lengths)
     accepted = []
     for action in actions:
-        if action.kind == "SEARCH":
+        if action.kind == "SEARCH" and (
+            search_preferences is None or action.id in search_preferences
+        ):
             # Source discovery is a structural prerequisite, not a sufficiency judgment.
             accepted.append(action.id)
         if action.kind != "READ" or action.parameters.get("observe_only"):
