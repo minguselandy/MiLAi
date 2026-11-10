@@ -58,6 +58,12 @@ from retrieval_mixture import (
     score_mixed_predictions,
 )
 from train_laya_matched import audit
+from training_recovery import (
+    TrainingInterruption,
+    make_scheduler,
+    restore_training_state,
+    save_training_state,
+)
 
 TrainingWindow = list[tuple[int, int]]  # (data pass, row index)
 
@@ -114,6 +120,7 @@ def training_stages(size: int, epochs: int, seed: int,
                     eval_every_updates: int | None = None,
                     row_groups: list[list[int]] | None = None,
                     batch_rows: int = 16,
+                    full_passes: bool = False,
                     ) -> list[tuple[int, list[TrainingWindow]]]:
     """Full epochs or an exact budget of fixed-size optimizer updates.
 
@@ -135,6 +142,23 @@ def training_stages(size: int, epochs: int, seed: int,
                 step < 1 or step > update_budget for step in eval_at_updates):
             raise ValueError("Evaluation points must be within the optimizer-update budget")
     rng = random.Random(seed)  # noqa: S311 -- reproducible training schedule
+    if full_passes and row_groups is None and update_budget is not None:
+        if update_budget != math.ceil(size / batch_rows) * epochs:
+            raise ValueError("Full-pass update budget must include each unpadded epoch tail")
+        exact: list[TrainingWindow] = []
+        for data_pass in range(1, epochs + 1):
+            order = list(range(size))
+            rng.shuffle(order)
+            exact.extend([[(data_pass, i) for i in order[start:start + batch_rows]]
+                          for start in range(0, size, batch_rows)])
+        cuts = sorted({update_budget // 2, update_budget} - {0})
+        if eval_at_updates is not None:
+            cuts = sorted({*eval_at_updates, update_budget})
+        elif eval_every_updates is not None:
+            cuts = sorted({*range(eval_every_updates, update_budget, eval_every_updates),
+                           update_budget})
+        return [(end, exact[start:end])
+                for start, end in zip([0, *cuts[:-1]], cuts, strict=True)]
     if row_groups is not None:
         if (update_budget is None
                 or batch_rows % 2
@@ -294,6 +318,8 @@ def main() -> None:
     parser.add_argument("--epochs", type=int, default=4)
     parser.add_argument("--optimizer-updates", type=int,
                         help="Exact update budget with full effective-batch windows")
+    parser.add_argument("--full-passes", action="store_true",
+                        help="With explicit updates, retain every unpadded epoch tail")
     evaluation = parser.add_mutually_exclusive_group()
     evaluation.add_argument("--eval-at-updates", type=int, nargs="+")
     evaluation.add_argument("--eval-every-updates", type=int)
@@ -316,6 +342,10 @@ def main() -> None:
     parser.add_argument("--eval-precision", choices=("float32", "bf16"), default="float32")
     parser.add_argument("--dev-data", type=Path,
                         help="Common development labels/inputs independent of the training recipe")
+    parser.add_argument("--full-dev-data", type=Path,
+                        help="Full fixed development panel, separate from the frequent fast panel")
+    parser.add_argument("--full-dev-at", type=int, nargs="+",
+                        help="Checkpoint-axis values for full dev; defaults to the final point")
     parser.add_argument("--feedback-dev-data", type=Path,
                         help="Separate source-disjoint answer/delivery evaluation for all arms")
     parser.add_argument("--seed", type=int, default=0)
@@ -363,7 +393,22 @@ def main() -> None:
                         help="Resample option slots and matching targets each training epoch")
     parser.add_argument("--gradient-checkpointing", action="store_true",
                         help="Recompute encoder activations during backward to reduce memory")
+    parser.add_argument("--scheduler", choices=("legacy-cosine", "warmup-cosine"),
+                        default="legacy-cosine")
+    parser.add_argument("--warmup-fraction", type=float, default=0.03)
+    parser.add_argument("--warmup-max-updates", type=int, default=200)
+    parser.add_argument("--lr-floor-ratio", type=float, default=0.1)
+    parser.add_argument("--save-training-state-every", type=int, default=0,
+                        help="Save FP32/optimizer/RNG/sampler state every N updates and stage end")
+    parser.add_argument("--resume-training-state", type=Path,
+                        help="Resume a local training-state.pt into a new output directory")
+    parser.add_argument("--stop-after-updates", type=int,
+                        help="Explicit update-boundary interruption with recovery state")
     args = parser.parse_args()
+    if (not 0 <= args.warmup_fraction < 1 or args.warmup_max_updates < 0
+            or not 0 <= args.lr_floor_ratio <= 1 or args.save_training_state_every < 0
+            or (args.stop_after_updates is not None and args.stop_after_updates < 1)):
+        parser.error("Invalid warmup, recovery interval, interruption point or LR floor")
     if args.log_every_updates < 1:
         parser.error("Log interval must be positive")
     if args.microbatch_padded_token_target is not None and (
@@ -463,6 +508,7 @@ def main() -> None:
     train = [r for r in raw_train if r["gold"] or (args.objective == "pair" and "feedback" in r)]
     dev_path = args.dev_data or args.data / "dev.jsonl"
     dev = read_jsonl(dev_path)
+    full_dev = read_jsonl(args.full_dev_data) if args.full_dev_data is not None else []
     feedback_dev = read_jsonl(args.feedback_dev_data) if args.feedback_dev_data is not None else []
     if quality_supervised:
         validate_quality_pool([*train, *feedback_dev])
@@ -485,6 +531,13 @@ def main() -> None:
 
         train = [project_applicability_row(row, args.operation_state) for row in train]
         dev = [project_applicability_row(row, args.operation_state) for row in dev]
+    if full_dev:
+        if args.task == "memory_operation":
+            full_dev = [project_operation_payload(row, args.operation_state) for row in full_dev]
+        elif args.task == "mixed_retrieval":
+            full_dev = [project_mixed_row(row, args.operation_state) for row in full_dev]
+        elif args.task == "instruction_applicability":
+            full_dev = [project_applicability_row(row, args.operation_state) for row in full_dev]
     mixture = normalized_mixture(read_json(args.mixture)) if args.mixture is not None else None
     weights = mixture_event_weights(train, mixture) if mixture is not None else event_weights(train)
     if mixture is not None:
@@ -515,7 +568,11 @@ def main() -> None:
                 raise ValueError("Relative condition loss requires supported training change pairs")
     stages = training_stages(len(train), args.epochs, args.seed, args.optimizer_updates,
                              args.eval_at_updates, args.eval_every_updates, row_groups,
-                             args.effective_batch_rows)
+                             args.effective_batch_rows, args.full_passes)
+    full_dev_at = args.full_dev_at or [stages[-1][0]]
+    if args.full_dev_at is not None and (args.full_dev_data is None
+            or not set(full_dev_at) <= {step for step, _ in stages}):
+        parser.error("Full development points must be declared checkpoints with --full-dev-data")
     axis = "epoch" if args.optimizer_updates is None else "optimizer_updates"
     run = {"status": "RUNNING", "pid": os.getpid(), "data": str(args.data.resolve()),
            "base_checkpoint": str(args.checkpoint.resolve()), "seed": args.seed,
@@ -531,11 +588,20 @@ def main() -> None:
            "tf32_cudnn": torch.backends.cudnn.allow_tf32,
            "reference_compile": False,
            "gradient_checkpointing": args.gradient_checkpointing,
+           "scheduler": args.scheduler, "warmup_fraction": args.warmup_fraction,
+           "warmup_max_updates": args.warmup_max_updates, "lr_floor_ratio": args.lr_floor_ratio,
+           "save_training_state_every": args.save_training_state_every,
+           "resume_training_state": (str(args.resume_training_state.resolve())
+                                     if args.resume_training_state else None),
            "forward_count_scope": "Logical model calls; activation recomputation is in time cost",
            "backend": args.backend, "task": args.task, "operation_state": args.operation_state,
            "epochs": args.epochs if args.optimizer_updates is None else None,
            "planned_optimizer_updates": sum(len(windows) for _, windows in stages),
+           "planned_sequence_rows": sum(len(window) for _, windows in stages for window in windows),
            "checkpoint_axis": axis, "dev_source": str(dev_path.resolve()),
+           "full_passes": args.full_passes,
+           "full_dev_source": str(args.full_dev_data.resolve()) if args.full_dev_data else None,
+           "full_dev_states": len(full_dev), "full_dev_at": full_dev_at if full_dev else [],
            "batch_size": args.micro_batch_size,
            "eval_batch_size": args.eval_batch_size,
            "cache_evaluation": batched_evaluation, "eval_precision": args.eval_precision,
@@ -544,6 +610,7 @@ def main() -> None:
            "log_every_updates": args.log_every_updates,
            "microbatch_padded_token_target": args.microbatch_padded_token_target,
            "gradient_accumulation": math.ceil(args.effective_batch_rows / args.micro_batch_size),
+           "gradient_accumulation_scope": "Nominal minimum; actual tail/token batches vary",
            "max_len": args.max_len, "head_max_len": args.head_max_len, "train_states": len(train),
            "dev_states": len(dev), "encoder_lr": args.encoder_lr, "head_lr": args.head_lr,
            "freeze_encoder": args.freeze_encoder, "objective": args.objective,
@@ -632,6 +699,7 @@ def main() -> None:
     decision: NativeDecision
     evaluation_counts: dict[str, Counter[str]] = defaultdict(Counter)
     stage_seconds: Counter[str] = Counter()
+    segment_start_counts: dict[str, int] = {}
 
     def synchronize() -> None:
         for index in device_ids:
@@ -662,6 +730,8 @@ def main() -> None:
             model.encoder.gradient_checkpointing_enable(
                 gradient_checkpointing_kwargs={"use_reentrant": False})
         evaluation_rows = {"train": train, "dev": dev}
+        if args.full_dev_data is not None:
+            evaluation_rows["full-dev"] = full_dev
         if args.feedback_dev_data is not None:
             evaluation_rows["feedback-dev"] = feedback_dev
         lengths = {split: audit(rows, tok, args.max_len, args.head_max_len)
@@ -701,7 +771,36 @@ def main() -> None:
         optimizer = torch.optim.AdamW(optimizer_groups(
             model, args.encoder_lr, args.head_lr, args.freeze_encoder), weight_decay=0.01)
         steps = run["planned_optimizer_updates"]
-        scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, steps, eta_min=1e-6)
+        scheduler = make_scheduler(optimizer, steps, warmup_fraction=args.warmup_fraction,
+            warmup_max_updates=args.warmup_max_updates, floor_ratio=args.lr_floor_ratio,
+            mode=args.scheduler)
+        # Ordinary version paths and row IDs identify the fixed data; no digest gate.
+        recipe_fields = ("data", "checkpoint", "seed", "epochs", "optimizer_updates",
+            "task", "operation_state", "objective", "feedback_target", "pair_supervision",
+            "pair_label_smoothing", "replay_weight", "replay_objective", "pair_mass_mode",
+            "mixture", "mixture_loss_scale", "conditional_pairs", "conditional_loss_weight",
+            "encoder_lr", "head_lr", "freeze_encoder", "shuffle_options", "precision",
+            "parallel_mode", "micro_batch_size", "effective_batch_rows",
+            "length_bucketed_microbatches", "microbatch_padded_token_target", "max_len",
+            "head_max_len", "gradient_checkpointing", "scheduler", "warmup_fraction",
+            "warmup_max_updates", "lr_floor_ratio", "full_passes", "full_dev_data", "full_dev_at")
+        contract = {"recipe": {key: str(value.resolve()) if isinstance(value, Path) else value
+                    for key in recipe_fields if (value := getattr(args, key)) is not None},
+                    "data_event_ids": [row["metadata"]["event_id"] for row in train],
+                    "weights": weights, "stages": stages,
+                    "dev_source": str(dev_path.resolve())}
+        resumed = (restore_training_state(args.resume_training_state, model, optimizer, scheduler,
+                                          contract=contract)
+                   if args.resume_training_state else None)
+        if resumed is not None:
+            for key, value in resumed["run"].items():
+                if (key.startswith(("train_", "sampled_")) or key in {
+                        "optimizer_updates", "data_passes_started", "conditional_pair_draws",
+                        "nonzero_logit_gradient_rows", "feedback_nonzero_logit_gradient_rows",
+                        "replay_nonzero_logit_gradient_rows"}):
+                    run[key] = value
+            segment_start_counts = compute_counts(run, {})
+            run["resumed_at_update"] = run["optimizer_updates"]
 
         evaluation_cache: dict[str, Any] = {}
 
@@ -762,29 +861,72 @@ def main() -> None:
             stage_seconds["evaluation"] += time.perf_counter() - eval_started
             return result
 
-        history = [] if args.skip_initial_dev else [{axis: 0, "dev": evaluate(0)}]
-        if args.feedback_dev_data is not None and not args.skip_initial_dev:
+        history = (resumed["history"] if resumed is not None else
+                   [] if args.skip_initial_dev else [{axis: 0, "dev": evaluate(0)}])
+        if args.feedback_dev_data is not None and not args.skip_initial_dev and resumed is None:
             history[0]["feedback-dev"] = evaluate(0, "feedback-dev")
-        if args.evaluate_train and not args.train_eval_final_only:
+        if args.evaluate_train and not args.train_eval_final_only and resumed is None:
             if not history:
                 history.append({axis: 0})
             history[0]["train"] = evaluate(0, "train")
         write_json(args.output / "history.json", history)
         option_rng = random.Random(args.seed + 10000)  # noqa: S311 -- independent of row order
         encoded_pass = 0
-        for checkpoint_step, windows in stages:
+        if resumed is not None:
+            option_rng.setstate(resumed["option_rng"])
+            encoded_pass, option_orders = resumed["encoded_pass"], resumed["option_orders"]
+            encoded = [encode_item(tok, item, args.max_len, args.head_max_len, option_order=order)
+                       for item, order in zip(items, option_orders, strict=True)]
+            encoded_lengths = [len(item["ids"]) for item in encoded]
+            previous = Path(resumed["output"])
+            # Reuse completed evaluation points without replay or writing into old runs.
+            for point in history:
+                for split in evaluation_rows:
+                    source = previous / split / str(point[axis])
+                    if source.exists():
+                        target = args.output / split / str(point[axis])
+                        target.parent.mkdir(parents=True, exist_ok=True)
+                        target.symlink_to(source.resolve(), target_is_directory=True)
+            for name in ("option-orders", "checkpoints"):
+                if (previous / name).exists():
+                    (args.output / name).mkdir(exist_ok=True)
+                    for source in (previous / name).iterdir():
+                        (args.output / name / source.name).symlink_to(
+                            source.resolve(), target_is_directory=source.is_dir())
+
+        def save_recovery(stage_index: int, window_index: int, stage_loss: Any,
+                          stage_offered: int, condition_sum: float) -> None:
+            synchronize()
+            saving = time.perf_counter()
+            save_training_state(args.output / "recovery/training-state.pt", model,
+                optimizer, scheduler, contract=contract, progress={
+                    "stage_index": stage_index, "window_index": window_index,
+                    "stage_loss": float(stage_loss), "stage_offered": stage_offered,
+                    "condition_sum": condition_sum, "run": run, "history": history,
+                    "encoded_pass": encoded_pass, "option_orders": option_orders,
+                    "option_rng": option_rng.getstate(), "output": str(args.output.resolve())})
+            stage_seconds["save"] += time.perf_counter() - saving
+
+        for stage_index, (checkpoint_step, windows) in enumerate(stages):
+            if resumed is not None and stage_index < resumed["stage_index"]:
+                continue
+            partial = (resumed if resumed is not None and stage_index == resumed["stage_index"]
+                       else {})
             training_mode(model, args.freeze_encoder)
-            loss_total = torch.zeros((), device=device)
-            offered = 0
-            condition_loss_total = 0.0
-            for window_index, window in enumerate(windows):
-                if window_index % args.log_every_updates == 0:
+            loss_total = torch.tensor(partial.get("stage_loss", 0.0), device=device)
+            offered = partial.get("stage_offered", 0)
+            condition_loss_total = partial.get("condition_sum", 0.0)
+            profile_open = False
+            for window_index in range(partial.get("window_index", 0), len(windows)):
+                window = windows[window_index]
+                if not profile_open:
                     synchronize()
                     update_started, update_cpu = time.perf_counter(), time.process_time()
                     prior_tokens = run["train_input_tokens"]
                     prior_padded_tokens = run["train_padded_input_tokens"]
                     prior_rows = run["train_sequence_rows"]
                     prior_updates = run["optimizer_updates"]
+                    profile_open = True
                 denominator = len(window)
                 optimizer.zero_grad(set_to_none=True)
                 microbatches = training_microbatches(
@@ -919,8 +1061,11 @@ def main() -> None:
                 optimizer.step()
                 scheduler.step()
                 run["optimizer_updates"] += 1
+                recovery_due = (args.save_training_state_every > 0
+                    and run["optimizer_updates"] % args.save_training_state_every == 0)
+                interrupt_due = run["optimizer_updates"] == args.stop_after_updates
                 if ((window_index + 1) % args.log_every_updates == 0
-                        or window_index == len(windows) - 1):
+                        or window_index == len(windows) - 1 or recovery_due or interrupt_due):
                     synchronize()
                     update_seconds = time.perf_counter() - update_started
                     stage_seconds["training"] += update_seconds
@@ -939,6 +1084,12 @@ def main() -> None:
                     write_json(args.output / "run.json", run)
                     print(json.dumps({"data_pass": encoded_pass,
                                       "updates": run["optimizer_updates"]}), flush=True)
+                    profile_open = False
+                if recovery_due or interrupt_due:
+                    save_recovery(stage_index, window_index + 1, loss_total,
+                                  offered, condition_loss_total)
+                if interrupt_due:
+                    raise TrainingInterruption()
             loss_mean = float(loss_total) / offered
             history.append({axis: checkpoint_step, "weighted_loss_mean": loss_mean,
                             "dev": evaluate(checkpoint_step)})
@@ -946,6 +1097,8 @@ def main() -> None:
                 history[-1]["conditional_loss_optimizer_mean"] = condition_loss_total / len(windows)
             if args.feedback_dev_data is not None:
                 history[-1]["feedback-dev"] = evaluate(checkpoint_step, "feedback-dev")
+            if args.full_dev_data is not None and checkpoint_step in full_dev_at:
+                history[-1]["full-dev"] = evaluate(checkpoint_step, "full-dev")
             if args.objective == "soft-ce":
                 history[-1]["weighted_ce_mean"] = loss_mean
             if args.evaluate_train and (
@@ -960,19 +1113,30 @@ def main() -> None:
             if args.eval_at_updates is not None or args.eval_every_updates is not None:
                 destination = args.output / "checkpoints" / f"update-{checkpoint_step}"
             save_model(config, destination)
+            if args.save_training_state_every:
+                save_recovery(stage_index + 1, 0, 0.0, 0, 0.0)
+            resumed = None
         changes = {key: {"parameter": name, "changed_elements": int((
             parameters[name].detach().cpu() != before[key]).sum())} for key, name in probes.items()}
         write_json(args.output / "parameter-probes.json", changes)
+        config = {**decision.config, "max_len": args.max_len, "head_max_len": args.head_max_len,
+                  "temperature": [1.0, 1.0, 1.0], "temperature_by_options": {}, "fine_tuned": True,
+                  "training": {"milai_reader": {**run, axis: stages[-1][0]}}}
         save_model(config, args.output / "checkpoint")
         run["status"] = "COMPLETED"
+    except TrainingInterruption:
+        run["status"] = "INTERRUPTED"
     except BaseException as error:
         run.update(status="FAILED", error_type=type(error).__name__, error=str(error))
         raise
     finally:
         synchronize()
+        segment_counts = compute_counts(run, evaluation_counts)
+        for key, value in segment_start_counts.items():
+            segment_counts[key] -= value
         measures = {"wall_seconds": time.perf_counter() - started,
                     "cpu_seconds": time.process_time() - cpu, "runs": 1,
-                    **compute_counts(run, evaluation_counts)}
+                    **segment_counts}
         write_json(args.output / "compute.json", {**measures,
             "peak_rss_kib": resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,
             "stage_wall_seconds": dict(stage_seconds),
