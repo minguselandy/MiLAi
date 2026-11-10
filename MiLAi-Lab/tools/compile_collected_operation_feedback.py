@@ -83,6 +83,11 @@ def main() -> None:
     args = parser.parse_args()
     started, cpu = time.perf_counter(), time.process_time()
     preparation = read_json(args.prepared / "run.json")
+    rollout = {
+        "policy": preparation["continuation_policy"],
+        "steps": preparation["continuation_steps"],
+        "terminal_handoff": preparation.get("terminal_handoff", "current"),
+    }
     readout_run = read_json(args.readouts / "run.json")
     if (
         preparation["status"] != "COMPLETED"
@@ -155,6 +160,7 @@ def main() -> None:
                     raise ValueError("Semantic review differs from the bound first outcome")
                 reviews[branch["action"]["id"]] = review
         feedback = compile_case(row, bound, reviews)
+        feedback["metadata"]["feedback_rollout"] = rollout
         compiled.append(feedback)
         review_inputs.append(
             {
@@ -198,6 +204,7 @@ def main() -> None:
             "prepared": str(args.prepared.resolve()),
             "readouts": str(args.readouts.resolve()),
             "reviews": str(args.reviews) if args.reviews else None,
+            "rollout": rollout,
             "states": len(compiled),
             "families": len({r["metadata"]["family"] for r in compiled}),
             "matched_states": len(matched),

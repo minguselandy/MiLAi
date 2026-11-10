@@ -76,20 +76,41 @@ def execute_branch(
     action: MemoryAction,
     step: int,
     continuation_steps: int,
+    terminal_handoff: str = "rules",
 ) -> dict[str, Any]:
-    """Reuse the normal finite controller and its actual remaining allowance."""
+    """Keep the finite allowance; let the shared policy select acquired material at the boundary."""
     state = MemoryControlState(**copy.deepcopy(before))
+    remaining = before["budget"]["remaining_control_steps"]
+    policy = RulesMemoryPolicy(reads=4)
+
+    class TerminalPolicy:
+        def choose(self, current: MemoryControlState, actions: list[MemoryAction]) -> str:
+            elapsed = remaining - current.budget["remaining_control_steps"]
+            offered = (
+                [a for a in actions if a.kind == "HANDOFF"]
+                if elapsed > continuation_steps
+                else actions
+            )
+            return policy.choose(current, offered)
+
+    if terminal_handoff not in {"current", "rules"}:
+        raise ValueError("Declare current-packet or shared-policy terminal HANDOFF")
     result = run_memory_control(
         state,
-        RulesMemoryPolicy(reads=4),
+        TerminalPolicy() if terminal_handoff == "rules" else policy,
         operations,
-        max_steps=step + before["budget"]["remaining_control_steps"],
+        max_steps=step + remaining,
         start_step=step,
-        intervention=FirstActionIntervention(action, continuation_steps),
+        # In rules mode the wrapper enforces the short boundary with a legal HANDOFF
+        # choice. Do not let the legacy intervention discard observation-only material.
+        intervention=FirstActionIntervention(
+            action, remaining if terminal_handoff == "rules" else continuation_steps
+        ),
     )
     first = result["trace"][0]
     if first["before"] != before or first["selected"] != action.id:
         raise ValueError("Branch changed the actual before or nominated binding")
+    result["terminal_handoff"] = terminal_handoff
     return result
 
 
@@ -100,6 +121,12 @@ def main() -> None:
     parser.add_argument("--offset", type=int, default=0)
     parser.add_argument("--families", type=int, required=True)
     parser.add_argument("--continuation-steps", type=int, default=2)
+    parser.add_argument(
+        "--terminal-handoff",
+        choices=("current", "rules"),
+        default="rules",
+        help="Shared policy selects among actual HANDOFF bindings at the short boundary",
+    )
     args = parser.parse_args()
     started, cpu = time.perf_counter(), time.process_time()
     collection_run = read_json(args.collection / "run.json")
@@ -130,6 +157,7 @@ def main() -> None:
         "packets": 0,
         "continuation_policy": "RulesMemoryPolicy(reads=4)",
         "continuation_steps": args.continuation_steps,
+        "terminal_handoff": args.terminal_handoff,
         "selection": "Initial plus one actual non-forced post state; even family positions seeded "
         "uniform, odd positions earliest learner/rules disagreement with uniform fallback. "
         "Missing posts remain missing; no outcome/native-label selection.",
@@ -210,6 +238,7 @@ def main() -> None:
                             action,
                             event["step"],
                             args.continuation_steps,
+                            args.terminal_handoff,
                         )
                         packet = controlled_reader_packet(
                             operations.reader_evidence(), "collection"

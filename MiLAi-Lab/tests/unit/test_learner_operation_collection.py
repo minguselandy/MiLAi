@@ -91,3 +91,21 @@ def test_learner_choice_budget_handoff_and_mid_prefix_replay(tmp_path):
     for event in events:
         event["result"] = {"ok": False, "status": "unrelated_outcome"}
     assert [e["step"] for e in select_events(events, 0)] == [0, 1]
+
+    initial = {**events[0], "event_id": "paper/q/step-0"}
+    with replay_collected_prefix(tmp_path, history, initial, settings, capacity, target_step=0) as (
+        operations,
+        state,
+    ):
+        saved = operations.checkpoint()
+        search = next(a for a in operations.actions(state) if a.kind == "SEARCH")
+        legacy = execute_branch(operations, initial["before"], search, 0, 1, "current")
+        assert operations.observed and not operations.opened
+        operations.restore_checkpoint(saved, operations.source_pages.budget)
+        selected = execute_branch(operations, initial["before"], search, 0, 1, "rules")
+        assert operations.opened
+        assert [e["selected"] for e in legacy["trace"][:-1]] == [
+            e["selected"] for e in selected["trace"][:-1]
+        ]
+        assert len(selected["trace"]) == 3
+        assert selected["trace"][-1]["selected"] != "handoff"

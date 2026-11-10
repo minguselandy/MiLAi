@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import shutil
 import time
 from pathlib import Path
 from typing import Any
@@ -30,17 +31,51 @@ def parse_readout(response: dict[str, Any]) -> dict[str, Any]:
     return {"status": "COMPLETED", "answer": parsed["answer"]}
 
 
+def reusable_readout(
+    case: dict[str, Any],
+    branch: dict[str, Any],
+    prior: list[tuple[Path, dict[str, Any], dict[str, Any]]],
+) -> tuple[Path, dict[str, Any]] | None:
+    """Reuse a closed first outcome only for the identical actual conditional Host wire."""
+    for path, record, wire in prior:
+        if (
+            record["status"] in {"COMPLETED", "FAILED"}
+            and record["family"] == case["family"]
+            and record["event_id"] == case["event_id"]
+            and record["action"] == branch["action"]
+            and wire == branch["readout_request"]
+        ):
+            return path, record
+    return None
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("prepared", type=Path)
     parser.add_argument("output", type=Path)
     parser.add_argument("--compute-phase", required=True)
+    parser.add_argument(
+        "--reuse-readouts",
+        type=Path,
+        help="Reuse earlier first outcomes only where complete Host wires match",
+    )
     args = parser.parse_args()
     prepared = read_json(args.prepared / "run.json")
     if prepared["status"] != "COMPLETED":
         raise ValueError("Finish the actual finite decisions and packet execution first")
     settings = read_json(Path(prepared["config"]))["entrypoints"]["functional"]
     cases = read_json(args.prepared / "cases.json")
+    prior = []
+    if args.reuse_readouts:
+        if read_json(args.reuse_readouts / "run.json")["status"] not in {
+            "COMPLETED",
+            "COMPLETED_WITH_FAILURES",
+        }:
+            raise ValueError("Reuse requires a closed first-readout matrix")
+        previous = read_json(args.reuse_readouts / "readout-paths.json")
+        for path in sorted({p for entries in previous.values() for p in entries.values()}):
+            record = read_json(Path(path))
+            prior.append((Path(path), record, read_json(Path(record["request"]))))
     args.output.mkdir(parents=True, exist_ok=False)
     run = {
         "status": "RUNNING",
@@ -53,6 +88,8 @@ def main() -> None:
         "closed_readouts": 0,
         "failed_readouts": 0,
         "chat_invocations": 0,
+        "reused_readouts": 0,
+        "reuse_source": str(args.reuse_readouts.resolve()) if args.reuse_readouts else None,
         "response_callbacks": 0,
         "error_callbacks": 0,
         "automatic_retry": False,
@@ -110,7 +147,31 @@ def main() -> None:
                         try:
                             if not branch["execution_result"]["ok"]:
                                 record.update(status="NOT_EXECUTED", reason="HANDOFF_FAILED")
+                            elif (reused := reusable_readout(case, branch, prior)) is not None:
+                                previous_path, previous_record = reused
+                                record.update(
+                                    {
+                                        key: previous_record[key]
+                                        for key in ("status", "answer", "reason", "error", "usage")
+                                        if key in previous_record
+                                    }
+                                )
+                                record.update(
+                                    reused_from=str(previous_path.resolve()), new_generation=False
+                                )
+                                response_path = previous_path.parent / "response.json"
+                                if response_path.exists():
+                                    shutil.copyfile(response_path, destination / "response.json")
+                                run["reused_readouts"] += 1
+                                trace(
+                                    {
+                                        "event": "readout_reused",
+                                        "original": str(previous_path),
+                                        "request": str(destination / "request.json"),
+                                    }
+                                )
                             else:
+                                record["new_generation"] = True
                                 run["chat_invocations"] += 1
                                 response = client.chat(
                                     request["messages"],
