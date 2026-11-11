@@ -1,17 +1,17 @@
-# LIVE scalable evidence phase38: 2026-11-12
+# LIVE scalable evidence phase39: 2026-11-12
 
 Goal ACTIVE/incomplete; progress, no blocker. KEEP ANALYSIS SHORT, tools/actions first.
 Never emit Source_Metadata word loops or unbounded JSON/history/budget.compute output.
 No SHA/content fingerprints/subagents/Product/API/permission/Canonical changes/service restart/push.
 Actual /proc argv + owner + artifacts govern; never restart stale run.json/lost handle/lock wait.
-R=/data/milai-experiments/20261111-scalable-evidence. Latest progress-v38/doc phase38.
+R=/data/milai-experiments/20261111-scalable-evidence. Latest progress-v39/doc phase39.
 
-LIVE HTTP qasper-confirm96-s3-own-readouts-v1 owner1948359 child1948360 latest5/96,0fail.
+LIVE HTTP qasper-confirm96-s3-own-readouts-v1 owner1948359 child1948360 latest46/96,3fail.
 CLOSED scale first96 owner1842885/1842886:91complete5fail. Baseline96complete0fail.
 S3-old96 NOTSTARTED. No confirmationquality inspection/scoring untilall4firstsclosed.
 Whole Reader HTTP/ledger lease exclusive; no competing HTTP/new billing. Native fit may wait
 at final selfbilling; NEVER kill/restart it. Let pending billing finish before next Reader launch.
-LIVE GPU3 m2-first160-adequate-cost-seed0-v1 owner1941204 child1941205 latest9/51.
+LIVE GPU3 m2-first160-adequate-cost-seed0-v1 owner1941204 child1941205 latest34/51.
 Same450rows/131feedback+319replay/S1u101/seed0/fullparameters/LR/schedule/51updates1632draws as
 closed m2-first160-feedback-seed0-v1 quality-tie control. Only94TRAINdeliveryties become observed
 cost directions, afterboth sufficientmaterial/complete supportedanswers and actual4costvector
@@ -26,6 +26,25 @@ READY cost DEV64: m2-first160-adequate-cost-dev64-plan-v1.json,
 run_adequate_cost_dev64_score_v1.py onlyafterfitownerclosed. Thenprepare actualchoices/packets,
 reusecanonicalphysicalfirsts from headunion plus new head2, transfer existing judgments. Only
 new bindings need newfirsts. Do not infer taskbenefit from pairfit/READ count. No automatic queue.
+
+
+CLOSED fitresource table closed-fit-resource-table-v1/{summary.json,jobs.json,jobs.csv}:28top-level nativefits,27complete1failed,21research2startup5engineering; nativeCPU237841.053942. Notfullgoal/ledgeradditive orGPUbusy; currentcostfit excludedwhilelive. Script assemble_closed_fit_resources_v1.py, measuredprepCPU pending.
+CLOSED phase39 costjoin m6-adapted-resource-quality-v1/summary.json +per-position.json:
+160unique actualfirsts,nonoverlappingmessageledgerrevisions,allreceiptknownGen match0issues,
+all8nativeCPU+paidresidual=wholechild. Ref/replay C17/22, Gen702309/665290, appCPU401.189/355.430,
+jobwall2381.741/2654.298, fit+appCPU1340.364/1299.960. KnownGen+5.56pct,appCPU+12.87pct,
+jobwall-10.27pct notoverallbenefit; CPUexcludescommonS1/data/HostGPU/unmeasuredparents.
+NewfitCPU alsoalreadyselfbilled, no ledgerwrite. Costjoin2.143477424CPU pending.
+adequate-cost-existing-model-train-diagnostic-v1.json: originalfull/headboth41/94 costpairsordered.
+On18HANDOFF>READ originalfullselectedwinner0/loser1/outside17; head8/4/6. Outsidepairunknown,
+notwrong. SavedactualTRAINpredictions, no newNN/Host orDEVbenefit. Newcostfitu17full87/278,
+originalfullfeedbacku17=89; do notearlystop/changefinalu51fromthis.
+READY postcostscore: run_owned_plan_v1.py adequate-cost-dev32-choices-v1,
+planreferenceshead-only-existing-dev-packet-union-v1(198native), scorersadequate_cost/fullfeedback/SFT
+plusfixedbaseline. Onlyaftercostendpointscoreractualclosed. NativecollectorNOselfbilling, wholechild
+mustrecordonce afterclose (do notsubtractnonexistentnativeCPU). Firstcache now
+adequate-cost-existing-dev-first-cache-v1=151canonicalfirsts (old149+2headfirsts),0newcalls;
+cacheprep.033501543CPU pending. Useexactbinding/event/wirereuse, no firstretry.
 
 CLOSED head-only DEV full chain: head-only-dev32-closed-comparison-v1/summary.json.
 109actualpackets,107firsts reused +2newcompleted;3oldfailures preserved. Teacher2 +107transferred
@@ -50,7 +69,7 @@ v2section16 requires experience/method -> fullaction -> delivery/appropriate sto
 benefit -> generalizationscope. Negative checklistclosure is not goal completion. Current overall
 improvement unproved. Need cost DEV/confirmation/repeats/Source8review/LME/wholecost synthesis.
 No ledgerwrite while Readeractive; phase36 settlements alreadyPAID once; no duplicate residuals.
-/data had16GB available before this fit; do not deletefirsts/selectedmodels. Reconstructible caches
+/data latest11GB available during this fit; do not deletefirsts/selectedmodels. Reconstructible caches
 only if actualdiskneed. ExistingallocationsGPU2/3~3513MiB not ours; neverkillthem.
 
 Fulladapted m6-adapted-full16-comparison-v1.json sourceC17/Q21/W28/F14 vsreplayC22/Q16/W23/F19.
