@@ -79,6 +79,22 @@ def test_ties_and_unknown_states_remain_in_both_matched_sampling_plans():
     assert loss.item() == 0 and logits.grad.tolist() == [0, 0, 0, 0]
 
 
+def test_explicit_reviewed_tie_has_half_target_without_pressuring_unknown_options():
+    torch = pytest.importorskip("torch")
+    row = example()
+    logits = torch.tensor([2.0, 0.0, 1000.0, -float("inf")], requires_grad=True)
+    loss = pair_loss(logits, ["read", "handoff", "refresh"],
+                     row["feedback"]["comparisons"], "answer", include_ties=True)
+    expected = torch.nn.functional.binary_cross_entropy_with_logits(
+        torch.tensor(2.0), torch.tensor(0.5))
+    assert loss.item() == pytest.approx(expected.item())
+    loss.backward()
+    assert logits.grad[0].item() == pytest.approx(torch.sigmoid(torch.tensor(2.0)).item() - .5)
+    assert logits.grad[1].item() == pytest.approx(-logits.grad[0].item())
+    assert logits.grad[2:].tolist() == [0, 0]
+    assert row["feedback"]["comparisons"][1]["answer"] == "unknown"
+
+
 def test_codec_targets_do_not_change_saved_labels_or_model_inputs():
     row = example()
     saved = copy.deepcopy(row)

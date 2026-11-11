@@ -100,8 +100,9 @@ def feedback_dev_report(
 
 def pair_loss(
     logits: Any, keys: list[str], comparisons: list[dict[str, Any]], target: str,
+    *, include_ties: bool = False,
 ) -> Any:
-    """Mean over reviewed directional pairs in one state; ties/unknowns add no direction."""
+    """Mean reviewed-pair loss; opt-in quality ties use0.5, unknowns stay masked."""
     import torch
     import torch.nn.functional as functional
 
@@ -109,7 +110,11 @@ def pair_loss(
     terms = []
     for pair in comparisons:
         outcome = pair[target]
-        if outcome in {"tie", "unknown"}:
+        if outcome == "unknown" or (outcome == "tie" and not include_ties):
+            continue
+        if outcome == "tie":
+            margin = logits[positions[pair["left"]]] - logits[positions[pair["right"]]]
+            terms.append((functional.softplus(margin) + functional.softplus(-margin)) / 2)
             continue
         winner, loser = ((pair["left"], pair["right"]) if outcome == "left"
                          else (pair["right"], pair["left"]))

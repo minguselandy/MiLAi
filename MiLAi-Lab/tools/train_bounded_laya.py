@@ -254,6 +254,7 @@ def feedback_training_losses(
     quality_mode: QualityMode | None, replay_objective: str = "soft-ce",
     label_smoothing: float = 0.0,
     component_weights: list[dict[str, float]] | None = None,
+    include_reviewed_ties: bool = False,
 ) -> Any:
     """Keep feedback supervision fixed while choosing the old-operation replay loss."""
     import torch
@@ -269,7 +270,8 @@ def feedback_training_losses(
         (quality_pair_loss(logits[i], keys[i], row["feedback"]["comparisons"],
                            feedback_target, quality_mode, label_smoothing=label_smoothing)
          if quality_mode is not None else
-         pair_loss(logits[i], keys[i], row["feedback"]["comparisons"], feedback_target))
+         pair_loss(logits[i], keys[i], row["feedback"]["comparisons"], feedback_target,
+                   include_ties=include_reviewed_ties))
         if "feedback" in row else replay[i]
         for i, row in enumerate(rows)])
 
@@ -362,6 +364,9 @@ def main() -> None:
                         help="Quality controls use explicit pre-cost judgments; legacy unchanged")
     parser.add_argument("--pair-label-smoothing", type=float, default=0.0,
                         help="Quality-mode training targets only; ties stay0.5, unknowns masked")
+    parser.add_argument("--include-reviewed-ties", action="store_true",
+                        help="Direct observed pair labels: include explicit quality ties at0.5; "
+                             "unknowns masked, no invented resource tiebreak")
     parser.add_argument("--replay-weight", type=float, default=0.25,
                         help="Relative loss mass of old-operation replay under the pair objective")
     parser.add_argument("--pair-mass-mode", choices=("normalized-total", "component-sum"),
@@ -436,6 +441,9 @@ def main() -> None:
         parser.error("Pair feedback requires an explicit matched optimizer-update budget")
     if args.replay_objective != "soft-ce" and args.objective != "pair":
         parser.error("--replay-objective applies only to pair training")
+    if args.include_reviewed_ties and (
+            args.objective != "pair" or args.pair_supervision != "legacy-direction"):
+        parser.error("--include-reviewed-ties applies to direct observed pair supervision")
     if args.pair_supervision != "legacy-direction" and (
             args.objective != "pair" or args.feedback_dev_data is None):
         parser.error("Quality supervision requires pair objective and fixed feedback development")
@@ -670,6 +678,11 @@ def main() -> None:
                    tie_unknown_sampling="Retained as zero-direction states in both arms",
                    sampled_feedback_states=0, sampled_replay_states=0,
                    sampled_directional_pairs=0, sampled_tie_pairs=0, sampled_unknown_pairs=0)
+        if args.include_reviewed_ties:
+            run.update(include_reviewed_ties=True,
+                loss_weighting="feedback:replay mass 1:alpha, then family/event; "
+                               "mean known quality pairs including tie0.5 within each state",
+                tie_unknown_sampling="Reviewed quality ties train at0.5; unknown pairs stay masked")
     if quality_supervised:
         run.update(pair_supervision=args.pair_supervision,
             feedback_pool=(answer_first_counts(train) if answer_first else
@@ -820,6 +833,8 @@ def main() -> None:
                     "dev_source": str(dev_path.resolve())}
         if args.reuse_training_tokens:
             contract["recipe"]["reuse_training_tokens"] = True
+        if args.include_reviewed_ties:
+            contract["recipe"]["include_reviewed_ties"] = True
         resumed = (restore_training_state(args.resume_training_state, model, optimizer, scheduler,
                                           contract=contract)
                    if args.resume_training_state else None)
@@ -1013,7 +1028,8 @@ def main() -> None:
                             logits, target, mask, batch_keys, batch_rows, args.feedback_target,
                             quality_mode, args.replay_objective, args.pair_label_smoothing,
                             [component_weights[i] for i in indices]
-                            if component_weights is not None else None)
+                            if component_weights is not None else None,
+                            include_reviewed_ties=args.include_reviewed_ties)
                         counts: dict[str, Any] = (
                                   answer_first_counts(batch_rows) if answer_first else
                                   quality_counts(batch_rows, args.feedback_target, quality_mode)
