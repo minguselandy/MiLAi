@@ -1,4 +1,60 @@
-# LIVE scalable evidence phase 15: 2026-11-11
+# LIVE scalable evidence phase16: 2026-11-11
+
+Fullv2goal ACTIVE/incomplete, PROGRESS,no blocker. No subagents,SHA/contentfingerprints,
+Product/API/permission/Canonical changes,service restarts orpush. Preservefirsts/unknowns/Source roles.
+KeepanalysisSHORT: concrete tools/actions, no endlessspeculation. R=/data/milai-experiments/20261111-scalable-evidence.
+Latestprogress-v16.json and manifest scalable-evidence-progress-20261111-v16.json; docphase16.
+/proc actualargv+owner+artifacts governliveness, neverrestart fromstalerunJSON/lostexeccell.
+
+LIVE original36k owner769162 child769163 GPU2 latest1580/3390, unchanged3exactpasses.
+LIVE seed1large owner2963709 child2963710 GPU3 latest76/303, s1-op3k-seed1-v1.
+Afterlargecloses launch prepared s1-repeat32-seed1-v1-plan.json; noautoqueue. Seed2stillpending.
+LIVE M6continuousfirst4 owner3061646 child3061650, m6-s1u1130-continuous-families0to4-v1.
+Use driver.json (notrun.json) andactualowner. Planned20positions4TRAINfamiliesA01,A02,A05,A14,
+5requests each; A01fivepositionsclosed:3complete-supported,1lengthfailure,1finalstale. a01-source-author-review-v1.json
+bindsactualSourcearrivals/providerwitnesses. Onlyinitialretrieval(2HTTP,7NN),noneafter; laterfailure
+andstalenesscannotbechargedtoanuncalledcontroller. NativecontinuesownlastCOMPLETEDhistory.
+Checkactualcurrentstate. Original frozenruntime-d-update32; public configderived
+fromoldcache: onlypolicy=laya/checkpoint36k-u1130/configlabelchanged. JSON-action transport,
+CPUFP32/4, max16384/2048, 8controlsteps, extractiveViews. Entry disablesreferencecompileonly.
+Freshownbanks andactualincoming_sources/previous_host_message; noarrivalnotice, noforcedTool.
+First16originalcontentfamilies prepared80positions total in m6-continuous16-plan-v1, 4finitebatches.
+Old3baseline80positionseach bound in existing-baseline-positions.json. GeneratedMemOpsTRAIN,
+notnatural/unseenconfirmation. No benefitclaimuntil fulltrajectory sourcegrading/cost.
+Owner launcher: python3 R/run_owned_plan_v1.py m6-s1u1130-continuous-families4to8-v1 (etc),
+ONLYafteractiveHTTPownerterminal; do notoverlap. Plans+entryscripts ready; noautomaticretry.
+Eachactualretrievalcall beforecaptured once, nocontrol-stepStorecopies. Wholechild/nativeCPUoverlap.
+
+CLOSED M4DEV32 semanticcomparison: m4-dev32-closed-comparison-v1/summary.json.
+Teacherfixed_context/own_states/fixed_states33/33/34of64; hybridRoot32/32/34.
+Sourcepairedown-fixed differences-.015625 CI[-.046875,0], hybrid-.03125 CI[-.078125,0].
+SourcebootstrapexcludesHostRNG/judge/seeduncertainty. No own-stateadvantageestablished.
+Original88firstjudgments transferred viafamily/event/fullaction/status/answer/providerwire canonical
+reused_from chains; only14newoutcomes10states newlyjudged. Newteacher48712knownGen0unknown,
+all10closed4masked. NewRootfixedspots0/3/6/9,5outcomes, sourceambiguityunknown.
+M4teacher-only andhybridseparate; fixedbaseline33/32matchespriorM2comparison. 3uniqueHostfails;
+methodfailedfixed_context2/own1/fixed2. NoDEVtrainingexports, nofullmanualgradingclaim.
+
+CLOSED TRAINfamilies64..95teacher64states159outcomes,0unresolved28masked,412206knownGen0unknown.
+m2-families64to96-teacher-and-spots-v1 hasRootpositions1/32fiveoutcomes; featuretypes single-model
+versuspaper-level ambiguity masks3teacherpositives. Real tSNE vsfeatureconstruction relationretained.
+Compiled m2-fixed-context-families64to96-semantic-v1:deliveryknown30/answer28,directional8each.
+Cumulative96TRAINsources192rawstates:80deliveryknown76answerknown;27/25directional.
+m2-first96-supervision-summary-v1.json; notadequateformalS2, no additionaltinyfitlaunched.
+NextTRAIN96..127prepared: m2-fixed-context-train160-families96to128-v1,64states159nativepackets,
+noStore/modelrerun. R/run_m2_fixed_context_train160_families96to128_readouts_v1.py READY NOTLAUNCHED.
+AftercurrentM6first4closes, launchthis159batchbefore moreM6. AllunstartedTRAINendpoints1171.
+
+phase16-compute-v1.json PAID14independentprepCPU220.913003149. Excludesallselfbilledmodel/Host/
+reader/teacher phases andoverlappingM6wholechild. UnmeasuredRoot/tests/import/launchunknownnotzero.
+No trackedproductcodechangedthisphase; artifactscripts syntax andactualbindings/semanticcompiler
+verified. Priorcode71b4e488 andtrainingef970f8a unchanged; prior22archive/Hosttests andRuffpassed.
+
+NEXT: closefirst4M6/sourcegrade then nextTRAIN159, alternatefiniteblocks tofinish16continuoussources;
+expandadequateS2, thenactualpostS2aggregation. Finishseed1large/repeat, decisive seed2, main36k3390.
+NeedactualSource/Viewrole/time learning, newconfirmation96/fullcost/generalization. Goalremainactive.
+
+# HISTORICAL scalable evidence phase 15: 2026-11-11
 
 Full v2 goal ACTIVE/incomplete, this turn PROGRESS,no blocker. No subagents,SHA/contentfingerprints,
 Product/API/permission/Canonical changes,service restarts orpush. Preservefirsts/unknowns/Source roles.

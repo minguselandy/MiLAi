@@ -1,0 +1,419 @@
+{
+  "status": "PHASE16_PROGRESS_FULL_GOAL_ACTIVE",
+  "observed_at_utc": "2026-11-11T06:57:59.258213+00:00",
+  "previous": "/data/milai-experiments/20261111-scalable-evidence/progress-v15.json",
+  "no_sha_validation": true,
+  "active_jobs": [
+    {
+      "name": "s1-op36k-seed0-v1",
+      "owner_pid": 769162,
+      "child_pid": 769163,
+      "actual_argv_checked": true,
+      "owner_status": "RUNNING",
+      "status": "RUNNING",
+      "optimizer_updates": 1580,
+      "planned_optimizer_updates": 3390
+    },
+    {
+      "name": "s1-op3k-seed1-v1",
+      "owner_pid": 2963709,
+      "child_pid": 2963710,
+      "actual_argv_checked": true,
+      "owner_status": "RUNNING",
+      "status": "RUNNING",
+      "optimizer_updates": 76,
+      "planned_optimizer_updates": 303
+    },
+    {
+      "name": "m6-s1u1130-continuous-families0to4-v1",
+      "owner_pid": 3061646,
+      "child_pid": 3061650,
+      "actual_argv_checked": true,
+      "owner_status": "RUNNING",
+      "status": "RUNNING",
+      "planned_positions": 20,
+      "active": {
+        "history": "memops_A02-d-update32-v1-content",
+        "policy": "laya",
+        "interface": "rich",
+        "profile": "laya",
+        "request": "same-sources"
+      },
+      "closed_positions": 6
+    }
+  ],
+  "M4_DEV32_comparison": "/data/milai-experiments/20261111-scalable-evidence/m4-dev32-closed-comparison-v1/summary.json",
+  "M4_results": {
+    "teacher_only": {
+      "by_method": {
+        "fixed_context": {
+          "positions": 64,
+          "complete_supported": 33,
+          "failed": 2,
+          "answer_status": {
+            "unknown": 19,
+            "complete": 33,
+            "incomplete": 12
+          },
+          "material_status": {
+            "unknown": 16,
+            "sufficient": 34,
+            "insufficient": 14
+          }
+        },
+        "own_states": {
+          "positions": 64,
+          "complete_supported": 33,
+          "failed": 1,
+          "answer_status": {
+            "unknown": 19,
+            "complete": 33,
+            "incomplete": 12
+          },
+          "material_status": {
+            "unknown": 17,
+            "sufficient": 33,
+            "insufficient": 14
+          }
+        },
+        "fixed_states": {
+          "positions": 64,
+          "complete_supported": 34,
+          "failed": 2,
+          "answer_status": {
+            "unknown": 18,
+            "complete": 34,
+            "incomplete": 12
+          },
+          "material_status": {
+            "unknown": 14,
+            "sufficient": 34,
+            "insufficient": 16
+          }
+        }
+      },
+      "paired_source_differences": {
+        "own_states-fixed_states/complete_supported": {
+          "difference": -0.015625,
+          "source_bootstrap_95pct": [
+            -0.046875,
+            0.0
+          ],
+          "scope": "32 resampled Source clusters; excludes Host RNG, teacher error and training seed uncertainty"
+        },
+        "own_states-fixed_states/material_sufficient": {
+          "difference": -0.015625,
+          "source_bootstrap_95pct": [
+            -0.046875,
+            0.0
+          ],
+          "scope": "32 resampled Source clusters; excludes Host RNG, teacher error and training seed uncertainty"
+        },
+        "own_states-fixed_context/complete_supported": {
+          "difference": 0.0,
+          "source_bootstrap_95pct": [
+            -0.09375,
+            0.078125
+          ],
+          "scope": "32 resampled Source clusters; excludes Host RNG, teacher error and training seed uncertainty"
+        },
+        "own_states-fixed_context/material_sufficient": {
+          "difference": -0.015625,
+          "source_bootstrap_95pct": [
+            -0.109375,
+            0.078125
+          ],
+          "scope": "32 resampled Source clusters; excludes Host RNG, teacher error and training seed uncertainty"
+        },
+        "fixed_states-fixed_context/complete_supported": {
+          "difference": 0.015625,
+          "source_bootstrap_95pct": [
+            -0.0625,
+            0.09375
+          ],
+          "scope": "32 resampled Source clusters; excludes Host RNG, teacher error and training seed uncertainty"
+        },
+        "fixed_states-fixed_context/material_sufficient": {
+          "difference": 0.0,
+          "source_bootstrap_95pct": [
+            -0.09375,
+            0.078125
+          ],
+          "scope": "32 resampled Source clusters; excludes Host RNG, teacher error and training seed uncertainty"
+        }
+      }
+    },
+    "source_author_corrected": {
+      "by_method": {
+        "fixed_context": {
+          "positions": 64,
+          "complete_supported": 32,
+          "failed": 2,
+          "answer_status": {
+            "complete": 32,
+            "unknown": 18,
+            "incomplete": 14
+          },
+          "material_status": {
+            "sufficient": 35,
+            "unknown": 14,
+            "insufficient": 15
+          }
+        },
+        "own_states": {
+          "positions": 64,
+          "complete_supported": 32,
+          "failed": 1,
+          "answer_status": {
+            "complete": 32,
+            "unknown": 20,
+            "incomplete": 12
+          },
+          "material_status": {
+            "sufficient": 33,
+            "unknown": 17,
+            "insufficient": 14
+          }
+        },
+        "fixed_states": {
+          "positions": 64,
+          "complete_supported": 34,
+          "failed": 2,
+          "answer_status": {
+            "complete": 34,
+            "unknown": 19,
+            "incomplete": 11
+          },
+          "material_status": {
+            "sufficient": 35,
+            "unknown": 15,
+            "insufficient": 14
+          }
+        }
+      },
+      "paired_source_differences": {
+        "own_states-fixed_states/complete_supported": {
+          "difference": -0.03125,
+          "source_bootstrap_95pct": [
+            -0.078125,
+            0.0
+          ],
+          "scope": "32 resampled Source clusters; excludes Host RNG, teacher error and training seed uncertainty"
+        },
+        "own_states-fixed_states/material_sufficient": {
+          "difference": -0.03125,
+          "source_bootstrap_95pct": [
+            -0.078125,
+            0.0
+          ],
+          "scope": "32 resampled Source clusters; excludes Host RNG, teacher error and training seed uncertainty"
+        },
+        "own_states-fixed_context/complete_supported": {
+          "difference": 0.0,
+          "source_bootstrap_95pct": [
+            -0.09375,
+            0.09375
+          ],
+          "scope": "32 resampled Source clusters; excludes Host RNG, teacher error and training seed uncertainty"
+        },
+        "own_states-fixed_context/material_sufficient": {
+          "difference": -0.03125,
+          "source_bootstrap_95pct": [
+            -0.125,
+            0.046875
+          ],
+          "scope": "32 resampled Source clusters; excludes Host RNG, teacher error and training seed uncertainty"
+        },
+        "fixed_states-fixed_context/complete_supported": {
+          "difference": 0.03125,
+          "source_bootstrap_95pct": [
+            -0.046875,
+            0.109375
+          ],
+          "scope": "32 resampled Source clusters; excludes Host RNG, teacher error and training seed uncertainty"
+        },
+        "fixed_states-fixed_context/material_sufficient": {
+          "difference": 0.0,
+          "source_bootstrap_95pct": [
+            -0.078125,
+            0.078125
+          ],
+          "scope": "32 resampled Source clusters; excludes Host RNG, teacher error and training seed uncertainty"
+        }
+      }
+    }
+  },
+  "M4_new_teacher": {
+    "status": "COMPLETED",
+    "closed_states": 10,
+    "unresolved_states": 0,
+    "masked_teacher_candidates": 4,
+    "generation_delta": {
+      "charged_tokens": 48712,
+      "known_tokens": 48712,
+      "unknown_usage": 0
+    },
+    "compute": {
+      "cpu_seconds": 1.5076640659999994,
+      "wall_seconds": 141.70772688277066,
+      "runs": 1
+    }
+  },
+  "M2_TRAIN64_teacher": {
+    "status": "COMPLETED",
+    "closed_states": 64,
+    "unresolved_states": 0,
+    "masked_teacher_candidates": 28,
+    "generation_delta": {
+      "charged_tokens": 412206,
+      "known_tokens": 412206,
+      "unknown_usage": 0
+    },
+    "compute": {
+      "cpu_seconds": 5.803427949,
+      "wall_seconds": 1075.0450857458636,
+      "runs": 1
+    }
+  },
+  "M2_available96_sources": {
+    "status": "AVAILABLE192_COMPARISON_STATES",
+    "source_split": "train",
+    "raw_families": 96,
+    "parts": [
+      {
+        "source": "/data/milai-experiments/20261111-scalable-evidence/m2-fixed-context-first16-semantic-v2",
+        "files": {
+          "raw-feedback.jsonl": {
+            "states": 32,
+            "families": 16
+          },
+          "delivery-known-fit.jsonl": {
+            "states": 15,
+            "families": 11
+          },
+          "answer-known-fit.jsonl": {
+            "states": 13,
+            "families": 10
+          },
+          "delivery-fit.jsonl": {
+            "states": 6,
+            "families": 6
+          },
+          "answer-fit.jsonl": {
+            "states": 4,
+            "families": 4
+          }
+        }
+      },
+      {
+        "source": "/data/milai-experiments/20261111-scalable-evidence/m2-fixed-context-families16to48-semantic-v1",
+        "files": {
+          "raw-feedback.jsonl": {
+            "states": 64,
+            "families": 32
+          },
+          "delivery-known-fit.jsonl": {
+            "states": 24,
+            "families": 16
+          },
+          "answer-known-fit.jsonl": {
+            "states": 24,
+            "families": 16
+          },
+          "delivery-fit.jsonl": {
+            "states": 11,
+            "families": 10
+          },
+          "answer-fit.jsonl": {
+            "states": 11,
+            "families": 10
+          }
+        }
+      },
+      {
+        "source": "/data/milai-experiments/20261111-scalable-evidence/m2-fixed-context-families48to64-semantic-teacher-v1",
+        "files": {
+          "raw-feedback.jsonl": {
+            "states": 32,
+            "families": 16
+          },
+          "delivery-known-fit.jsonl": {
+            "states": 11,
+            "families": 7
+          },
+          "answer-known-fit.jsonl": {
+            "states": 11,
+            "families": 7
+          },
+          "delivery-fit.jsonl": {
+            "states": 2,
+            "families": 2
+          },
+          "answer-fit.jsonl": {
+            "states": 2,
+            "families": 2
+          }
+        }
+      },
+      {
+        "source": "/data/milai-experiments/20261111-scalable-evidence/m2-fixed-context-families64to96-semantic-v1",
+        "files": {
+          "raw-feedback.jsonl": {
+            "states": 64,
+            "families": 32
+          },
+          "delivery-known-fit.jsonl": {
+            "states": 30,
+            "families": 21
+          },
+          "answer-known-fit.jsonl": {
+            "states": 28,
+            "families": 19
+          },
+          "delivery-fit.jsonl": {
+            "states": 8,
+            "families": 8
+          },
+          "answer-fit.jsonl": {
+            "states": 8,
+            "families": 8
+          }
+        }
+      }
+    ],
+    "total_states": {
+      "raw-feedback.jsonl": 192,
+      "delivery-known-fit.jsonl": 80,
+      "answer-known-fit.jsonl": 76,
+      "delivery-fit.jsonl": 27,
+      "answer-fit.jsonl": 25
+    },
+    "scope": "Fixed continuation, actualfirstoutcomes; mixed teacher/source-author spots explicitly retained per part. Known targets include truepositive ties; unknowns masked. No new fit launched; expand toward adequately scaled S2."
+  },
+  "M2_next_readouts_prepared": {
+    "source": "/data/milai-experiments/20261111-scalable-evidence/m2-fixed-context-train160-families96to128-v1",
+    "families": 32,
+    "states": 64,
+    "packets": 159,
+    "status": "PREPARED_NOT_LAUNCHED",
+    "remaining_all_TRAIN_endpoints_unstarted": 1171
+  },
+  "M6_continuous16_plan": "/data/milai-experiments/20261111-scalable-evidence/m6-continuous16-plan-v1/manifest.json",
+  "M6_scope": "Old generated MemOps TRAIN; first16 content families, actual5requestchronology, ownbanks/View/Hosthistoryfromempty. Frozen original runtime and JSON-action transport; new36k/u1130policy config, no arrivalnotice. First4-family batch running; old three baseline arms80positions each bound, not rerun. No whole-path benefit inferred yet.",
+  "cost_settlement": "/data/milai-experiments/20261111-scalable-evidence/phase16-compute-v1.json",
+  "remaining": [
+    "Close first4continuousM6 then nextTRAIN159firstoutcomes; alternate finite batches without HTTP overlap. Complete16familycontinuous comparison and actual Source/View learning.",
+    "Expand adequate realfeedback versus SFT, currently192rawcomparisonstates but80known delivery/76answer only; no prefix96tinyfit launched.",
+    "Finishseed1large, then preplannedrepeat; decisive seed2 and full36k3390remain.",
+    "S3postS2 trajectory aggregation, frozennewconfirmation96, fullcost and generalization remain."
+  ],
+  "scope": "Teacher-only and Root hybrid views both nonindependent; sourcebootstrap excludes HostRNG/teacher/seed uncertainty. Unknowns and firstfailures retained. No Product/API/permission/Canonical changes, no service restart/push, no subagents.",
+  "M6_first_closed_source": "/data/milai-experiments/20261111-scalable-evidence/m6-s1u1130-continuous-families0to4-v1/a01-source-author-review-v1.json",
+  "M6_first_closed_source_grades": [
+    "complete_supported",
+    "complete_supported",
+    "complete_supported",
+    "execution_failed",
+    "incorrect_stale"
+  ]
+}
