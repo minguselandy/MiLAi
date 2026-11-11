@@ -5,10 +5,12 @@ import json
 
 import pytest
 
+from milai_lab.harness.artifact_io import write_json
 from milai_lab.runners.given_host_readout import (
     given_packet_request,
     receipt_conditioned_packet_request,
 )
+from prepare_receipt_conditioned_readouts import prepare_case
 
 
 def fixture():
@@ -63,3 +65,32 @@ def test_empty_known_baseline_uses_same_prompt_without_consuming_parent_material
     payload = json.loads(wire["messages"][1]["content"])
     assert payload["known_evidence"] == []
     assert "UNREFERENCED_SECRET_ANSWER" not in json.dumps(wire)
+
+
+def test_learned_comparison_keeps_original_parent_knowledge_not_its_own_cold_output(tmp_path):
+    request, parent, known, settings = fixture()
+    parent_path = tmp_path / "original-cold-receipt.json"
+    write_json(parent_path, parent)
+    bank = tmp_path / "banks" / "family"
+    bank.mkdir(parents=True)
+    action = {"id": "handoff", "kind": "HANDOFF", "target": "current", "parameters": {}}
+    for condition in ("cold", "known-first"):
+        incoming = copy.deepcopy(request)
+        if condition == "cold":
+            incoming["task_context"]["known_evidence_refs"] = []
+        write_json(bank / f"q-{condition}-receipt.json", {
+            "request": incoming,
+            "packet": {"ok": True, "evidence": [{"label": "e0", "evidence": [
+                {"content": "LEARNED_CURRENT_PACKET"}]}]},
+            "known_reference_parent_receipt": str(parent_path),
+        })
+        (bank / f"q-{condition}-operations.jsonl").write_text(json.dumps({
+            "phase": "decision_output", "actions": [action], "selected": "handoff"}) + "\n")
+    case = prepare_case(tmp_path, {"id": "family", "source_group": "family", "split": "dev",
+        "requests": [{"id": "q", "content": "question"}]}, settings, len)
+    inputs = [json.loads(b["readout_request"]["messages"][1]["content"])
+              for b in case["branches"]]
+    assert inputs[0]["known_evidence"] == []
+    assert inputs[1]["known_evidence"] == inputs[2]["known_evidence"] == [known]
+    assert case["branches"][1]["condition_provenance"]["known_items_receipt"] == str(parent_path)
+    assert inputs[0]["memory"] == inputs[1]["memory"]

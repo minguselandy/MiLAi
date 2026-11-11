@@ -1,4 +1,61 @@
-# LIVE scalable evidence phase 9: 2026-11-11
+# LIVE scalable evidence phase 10: 2026-11-11
+
+Full v2 goal ACTIVE/incomplete, meaningful progress, no blocker. No subagents, SHA/content
+fingerprints, Product/API/permission/Canonical changes, service restarts or push. Keep first
+outcomes/unknowns and originalSource roles. R=/data/milai-experiments/20261111-scalable-evidence.
+Code3c92d091/3af7b87b; progress-v10.json/manifest scalable-evidence-progress-20261111-v10.json.
+Read current header/doc, not huge old audit history. Actual /proc argv+owner+artifacts authoritative;
+lost exec handles or stale run.json never authorize restarting live jobs.
+
+LIVE original36k owner769162 child769163 GPU2 loaded4bab6388,665/3390. Original curve unchanged.
+LIVE budgetoperation-v3 owner1773518 child1773519 GPU3 loadedae97ea17,33/99. u17 fastDEV42/78 vs43
+initial; auxbudget115/288 unchanged,macro.48485 vs.49053. Continue unchanged, not real-feedbackM2.
+LIVE I1 learned36k/u565 native owner1843816 child1843824 CPUFP32/4threads loaded3af7b87b;
+i1-learned36k-u565-public-dev8-v1,planned16requests/8DEVfamilies,latest3requests/12modelcalls.
+Originalbanks reused, same fixedlexical parentK for bothmethods, not eachmodel own coldK. Raw
+known/cold same8 firstquestions. No gold loaded. StageCPU pending until close, notselfbilled.
+Run.json only advances afterclosedrequests; predictions/trace can advance whilecounterstale.
+LIVE M2 families48to64 readouts owner1858854 child1858877,latest10/77closed0fail;
+m2-fixed-context-train160-families48to64-readouts-v1,32states16families. Actualprep subset from
+completedfamilies48to160, no native reexecution, whole original224state rows retained for indices.
+After this77,96families471packets remainuntouched. Earlier232M2 outcomes stillneedsemanticreview.
+Reader selfbills, no automaticfuturequeue. Do not duplicate/restart firstoutcomes.
+
+CLOSED I1 fixedlexical explicitK8: i1-receipt-conditioned-dev8-prepared-v1/readouts-v1 (fullnames
+prefixsame),owner1832788 child1832789 exit0;24/24completed0transportfail,88412knownGen0unknown,
+CPU2.396526731/wall225.714645076 alreadybilled. author-review at
+i1-receipt-conditioned-dev8-review-v1/author-review-v1.json, Rootnonblind/nonindependent.
+Conditions cold,known_with_cold_packet,known_with_conditioned_packet; same explicitreaderprompt,
+Kexactly1 actualreferenceditem,8/8literalmatchesnativeknowninput. Oldfreshreader guard preserved.
+Allthree1/8complete-supported. Spectre K+newpacket correctlygives374, butcoldalreadycontainsboth,
+so no taskgain. ConditionedNeilYoung onlypromisesretrieval(noactualtool); conditionalUS bareanswer
+omitsgeographiclimitation. Cold+Kdirectorassertionoutsideevidence retained. Recordlabelquestion
+underspecified: actualnamedalbumArista vsnativeanotherLouReedalbumWarner/Vertigo; uncertain,
+notautomaticallywrong/pairlabel. Supportedlimitation isnotretrievalsuccess. All24actualanswerskept.
+
+New receipt_conditioned_packet_request uses referencedactualitems only, separateK/currentmemory,
+no inventedassistant/toolhistory. prepare_receipt_conditioned_readouts.py supports explicit original
+known_reference_parent_receipt for learnedoutputs, not their owncold. rollout_public_known_conditions
+uses original publicStore namespace and masks/givenrequest exclusions, no extraStore. After16native
+requests close, prepare/execute learnedsame8 explicitKreadouts, then compare actual material/answers.
+Preliminaryfirstfamily learnedknown repeatsMyanmar andstops; do notinfer successfromoffline .80.
+
+s1-op36k-u565-cold-known-diagnostics-v1.json: cold344raw214labels90->176accepted,macro.42385->.82328;
+known344raw209labels91->165accepted,macro.43036->.80357. SameoldexposedDEV, source-referenceproxy.
+29 relevant tests across scopedruns passed (4newreceiptcondition cases),Ruff/packageboundarypass;
+toolsboundary unchanged6oldLMEfindings. ParentKtestadded after nativeownerlaunch, no livecodepatch.
+
+Costs: phase9-preparation-compute-v1.json alreadycontainsall16listedpreps includingbudgetDEV32,
+budgetoperationdata,tailI2compile. Do notrebill them. Phase10pendingmeasuredpreps: I1prepared/run.json
+and M2families48to64subset/run.json; group with nativeI1 CPU onclose. Author/tests/import/launcher
+unknownnotzero. Originalorphan9841reserve andlostlearnerparent remainunknown, priorrecordsuntouched.
+
+Next: finish36k/99fit, actualI1learnedreadout, budgetheld-sourcechoices/packets/Host. ReviewM2and
+continuebounded471endpoints, adequateactualfeedback vscontinuedSFTfit withfullsupport/matched
+controls distinct. ContinuousSource/View,own-statecomparison,decisiveseeds,newconfirmation96,
+fulltask/cost/generalization remain. Nevermarkfullgoalcompletefromengineering orsmallDEVprototype.
+
+# HISTORICAL scalable evidence phase 9: 2026-11-11
 
 Full user v2 goal ACTIVE/incomplete; previous/current work PROGRESS, no blocker.
 No subagents, SHA/fingerprints, services/Product/API/permission/Canonical changes or push.

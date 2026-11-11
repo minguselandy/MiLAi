@@ -1,0 +1,171 @@
+{
+  "status": "PHASE10_PROGRESS_FULL_GOAL_ACTIVE",
+  "observed_at_utc": "2026-11-11T01:30:01.932065+00:00",
+  "previous": "/data/milai-experiments/20261111-scalable-evidence/progress-v9.json",
+  "code_commits": [
+    "3c92d091",
+    "3af7b87b"
+  ],
+  "no_sha_validation": true,
+  "active_jobs": [
+    {
+      "name": "s1-op36k-seed0-v1",
+      "loaded_code": "4bab6388",
+      "owner_pid": 769162,
+      "child_pid": 769163,
+      "actual_argv_checked": true,
+      "status": "RUNNING",
+      "optimizer_updates": 665,
+      "planned_optimizer_updates": 3390
+    },
+    {
+      "name": "i2-budget-operations-seed0-v3",
+      "loaded_code": "ae97ea17",
+      "owner_pid": 1773518,
+      "child_pid": 1773519,
+      "actual_argv_checked": true,
+      "status": "RUNNING",
+      "optimizer_updates": 33,
+      "planned_optimizer_updates": 99
+    },
+    {
+      "name": "i1-learned36k-u565-public-dev8-v1",
+      "loaded_code": "3af7b87b",
+      "owner_pid": 1843816,
+      "child_pid": 1843824,
+      "actual_argv_checked": true,
+      "status": "RUNNING",
+      "closed_requests": 3,
+      "model_calls": 12
+    },
+    {
+      "name": "m2-fixed-context-train160-families48to64-readouts-v1",
+      "loaded_code": "3af7b87b",
+      "owner_pid": 1858854,
+      "child_pid": 1858877,
+      "actual_argv_checked": true,
+      "status": "RUNNING",
+      "closed_readouts": 10,
+      "failed_readouts": 0
+    }
+  ],
+  "I1_explicit_receipt_condition": {
+    "prepared": "/data/milai-experiments/20261111-scalable-evidence/i1-receipt-conditioned-dev8-prepared-v1",
+    "readouts": "/data/milai-experiments/20261111-scalable-evidence/i1-receipt-conditioned-dev8-readouts-v1",
+    "review": "/data/milai-experiments/20261111-scalable-evidence/i1-receipt-conditioned-dev8-review-v1/author-review-v1.json",
+    "families": 8,
+    "role": "previously exposed DEV",
+    "requests": 8,
+    "actual_first_readouts": 24,
+    "failed_readouts": 0,
+    "conditions": [
+      "cold",
+      "known_with_cold_packet",
+      "known_with_conditioned_packet"
+    ],
+    "all8_known_items_literal_equal_native_condition": true,
+    "semantic_counts": {
+      "cold": {
+        "supported_limitation": 5,
+        "complete_supported": 1,
+        "qualified_underspecified_target": 1,
+        "qualified_query_based_country": 1
+      },
+      "known_with_cold_packet": {
+        "qualified_unsupported_external_answer": 1,
+        "complete_supported": 1,
+        "supported_limitation": 4,
+        "qualified_underspecified_target": 1,
+        "qualified_query_based_country": 1
+      },
+      "known_with_conditioned_packet": {
+        "supported_limitation": 4,
+        "complete_supported": 1,
+        "non_answer_future_retrieval_statement": 1,
+        "qualified_underspecified_target": 1,
+        "unsupported_bare_country": 1
+      }
+    },
+    "strict_complete_supported_answers": {
+      "cold": 1,
+      "known_with_cold_packet": 1,
+      "known_with_conditioned_packet": 1
+    },
+    "new_generation_delta": {
+      "charged_tokens": 88412,
+      "known_tokens": 88412,
+      "unknown_usage": 0
+    },
+    "reader_compute_already_recorded": {
+      "cpu_seconds": 2.396526731,
+      "wall_seconds": 225.71464507561177,
+      "runs": 1
+    },
+    "reviewer": "Root source author, nonblind, nonindependent",
+    "conclusion": "One source-supported complete answer per condition. Successful K-plus-new-packet combination on Spectre without an accuracy gain. First outcomes preserved, including semantic non-answer and ungrounded additions. No demonstrated conditional retrieval benefit in this panel."
+  },
+  "native36k_cold_known": "/data/milai-experiments/20261111-scalable-evidence/s1-op36k-u565-cold-known-diagnostics-v1.json",
+  "learned_I1_execution": {
+    "path": "/data/milai-experiments/20261111-scalable-evidence/i1-learned36k-u565-public-dev8-v1",
+    "planned_requests": 16,
+    "planned_families": 8,
+    "checkpoint": "s1-op36k-seed0-v1/checkpoints/update-565",
+    "device": "CPU float32,4 threads",
+    "original_Source_banks_reused": true,
+    "known_parent": "Same actual lexical cold first item for baseline and learned methods, not each model own cold output",
+    "Host_readouts": "Not yet started for learned outputs",
+    "compute": "Measured child stage to settle once on completion; currently pending"
+  },
+  "budget_fit_first_point": {
+    "update": 17,
+    "old_fast_dev": {
+      "initial_accepted": 43,
+      "current_accepted": 42,
+      "labelled": 78
+    },
+    "budget_dev": {
+      "initial_accepted": 115,
+      "current_accepted": 115,
+      "labelled": 288,
+      "raw": 512,
+      "initial_macro": 0.4905303030303031,
+      "current_macro": 0.4848484848484848
+    },
+    "interpretation": "No first-point improvement; continue unchanged99-update plan. Reference proxy only, not real-feedback M2"
+  },
+  "M2_increment": {
+    "original_preparation": "/data/milai-experiments/20261111-scalable-evidence/m2-fixed-context-train160-families48to160-v1",
+    "subset": "/data/milai-experiments/20261111-scalable-evidence/m2-fixed-context-train160-families48to64-v1",
+    "families": 16,
+    "states": 32,
+    "packets": 77,
+    "actual_native_reexecutions": 0,
+    "remaining_untouched_families": 96,
+    "remaining_unstarted_packets_after_this_batch": 471,
+    "semantic_review": "Earlier232 first endpoints still awaiting semantic reviews; current77 readout active"
+  },
+  "validation": {
+    "tests": "29 relevant cases passed across scoped invocations, including4 new receipt-condition cases",
+    "ruff": "pass",
+    "package_boundary": "pass",
+    "tools_boundary": "prior six findings in untouched oldLME owners; no claim of full tools boundary pass",
+    "no_Product_API_permission_Canonical_changes": true,
+    "no_service_restart_or_push": true
+  },
+  "cost_scope": {
+    "reader_already_billed": true,
+    "preparation_pending": [
+      "/data/milai-experiments/20261111-scalable-evidence/i1-receipt-conditioned-dev8-prepared-v1/run.json",
+      "/data/milai-experiments/20261111-scalable-evidence/m2-fixed-context-train160-families48to64-v1/run.json"
+    ],
+    "previous16_preparations": "Already all in phase9-preparation-compute-v1.json; do not rebill budgetDEV32/data or tailI2",
+    "unmeasured": "Authorship/tests/import/launcher CPU unknown, not zero"
+  },
+  "remaining": [
+    "Complete original36k and99-update budget operation learning curves",
+    "Close learned16 actual cold/known requests then explicitly conditioned Host readout on same8DEV and fixed parentK",
+    "Review existingM2 branches, execute remaining471 endpoints in bounded batches and fit adequately supported feedback vs continuedSFT",
+    "Use budget checkpoint actual held-source decisions/packets and Host outcomes",
+    "ContinuousSource/View, matched own-state learning, decisive seeds, frozen newconfirmation96 and full cost/generalization remain incomplete"
+  ]
+}
