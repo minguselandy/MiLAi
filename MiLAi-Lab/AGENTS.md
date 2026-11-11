@@ -1,31 +1,42 @@
-# LIVE scalable evidence phase41: 2026-11-12
+# LIVE scalable evidence phase42: 2026-11-12
 
 Goal ACTIVE/incomplete; progress, no blocker. KEEP ANALYSIS SHORT, tools/actions first.
 No Source_Metadata loops/unboundedJSON/history/budget.compute/nestedusage-capacity dumps.
 No SHA/contentfingerprints/subagents/Product/API/permission/Canonicalchanges/service restart/push.
 Actual /procargv + owner + artifacts govern; neverrestartstaleJSON/losthandle/lockwait.
-R=/data/milai-experiments/20261111-scalable-evidence. Latestprogress-v41/docphase41.
+R=/data/milai-experiments/20261111-scalable-evidence. Latestprogress-v42/docphase42.
 
-LIVE LME GPU3 lme-small32-s1u1130-v1-continuation-v2 owner2418781 child2418783.
-Lastverified6COMPLETED/1FAILED_RETRIEVING(row0)/24NOT_RUN/1PREPARING_INPUT(active7); revalidate.
-Originallme-small32-s1u1130-v1 owner2276859/2276860failedPILbeforeanyquestion,all32NOT_RUN,
-wholeCPU11.300262pending/noNNorHost. continuation-v1 owner2290213/2290214failedrow0duringimage
-bindingafterSourceimport, wholeCPU804.242474pending/noNNorHost. Do notrerunrow0 ordeletefirsts.
-Currentv2explicitlycontinues31unattempted, reusesalreadycompletedSourceimports incloldbankreport.
-SourcecodeFIX91b3f707: optional--asset-root inrun_lme_predictions/predict_cohort; strictasset_path
-boundaryunchanged. Imagesfromoriginalcomplete-small-snapshotroot, metadatafromthin32snapshot.
-Sourceimports savedbeforeimagebinding; legacytemplate/banks/*/retrieval-setup.json canrecover
-completedSourceimports. Rebindimagesfromdeclaredtrajectories withoutreimportorpreviousquery.
-21targetedLMEtests/Ruff/diff/packageDAGPASS. Toolsboundarysame6oldunresolveddynamicimports.
-PillowfixusesexistingPython3.11overlayBEFORETransformersfirstimport viaPYTHONPATH:
+LIVE LME GPU3 lme-small32-s2feedbacku51-v1 owner2624347 child2624350.
+LatestRUNNING firstpoolbuild,active0 PREPARING_INPUT1/NOT_RUN31; revalidateactual/proc+artifacts.
+SamefixedS2u51nominee/source/Host/imageRoot; no postconfirmationselection. No otherlivejobs.
+S1 firstnominee ALLCLOSED finalroot lme-small32-s1u1130-v1-continuation-v4:
+29COMPLETED,failedrow0RETRIEVING and27/29READING; all32attempted. No rerolls, onlytailsv3/v4.
+Native scorer lme-small32-s1u1130-scores-v1 CLOSED29scored/7correct/3unscored;32bounds[7/32,10/32].
+No full32metric claim; validmodelUNKNOWN scoredbyoriginalnativeprotocol, notexecutionfailure.
+S1 archive owner2624346/2624349 CLOSED32; index atfinalroot/case-archives/index.json.
+9534863887originalbytes ->301831679archivebytes, exactliteralreconstructionbeforecasecopyremoval.
+Templates/predictions/scores/allfirsts retained; use restore_lme_case forlaterStore review.
+Do notrerunclosedS1predictions/score orsilentlyrestoreallruntimes.
+Sourcecode91b3f707: explicit--asset-root, sameoriginalcomplete-small-snapshot assets, strict
+asset_pathboundaryunchanged; sourceimports retainedbeforemedia binding andlegacybankreportreused.
+21targetedtests/Ruff/diff/packageDAG passed;toolsboundarysame6oldLMEimports. No envupgrade.
+Pillowoverlay mustbevisiblebeforeTransformers import viaPYTHONPATH:
 /cra/memory/mx_memory/MiLAi-worktrees/training-generalization-20261021/MiLAi-Lab/artifacts/generalization-20261021/image-reader-pillow-overlay-v1
-No install/upgrade/servicechange. Sameunstartedsecondnomineeandscoringplanscarryoverlay.
-Second lme-small32-s2feedbacku51-v1 NOTSTARTED, nowhas--asset-root andsourcecommit91b3f707.
-Firstscorer lme-small32-s1u1130-scores-v1 currentlypointscontinuation-v2; updateiflatercontinuation.
-Requireall32attemptedbeforescore, keepfailedfirsts/NOT_RUNtails; exactrules/nativeJudge onlyafter
-predictionsclose. Finiteexplicitjobs run_owned_plan_v1.py NAME, noautoqueue/retry. 32existingqueries,
-2full100trajectorybanks, NOT32independentSources/full451/newblind. No ledgerwriteswhileappactive.
-Allfits/confirmationjobsclosed. GPU2freeexceptexisting3513MiBnotours. /data~8.7GBfree, monitoractualneed.
+Secondprediction/scoringplans includeoverlay/assetRoot; ifS2fails, retainfailedcases andonly
+explicitlycontinueNOT_RUNtail afteractualownerterminal. UpdateS2scoreractualcontinuationroot.
+No scoreuntilall32attempted. Nativeexactrules/Judge; no regeneration. Two100trajectorybanks,
+not32independentSources/full451/newblind. No automaticqueue/retry. No ledgerwriteswhileS2active.
+Closedrecoveryfiles7sparsified byGNUfallocate --dig-holes, logicalbytes/sizes/pathspreserved,
+~9.12GiB freed, inferencecheckpoints/firsts untouched. closed-recovery-sparse-{pilot,release}-v1.json.
+S1archive alsofreesspace; /data last~16GiBfreebeforefullarchiveclosure. Monitoractualspace.
+S1predictioncosts lme-small32-s1-first-prediction-costs-v1.json: whole2707.792099 minusnativepaid
+220.026953465=2487.765145535CPU UNPAID. IncludesPIL11.300262 andSourcebind804.242474; NEVERadd
+thoseinitialfailuresagain.31ReaderHTTP/160668knownGen selfbilled; ReaderCPU isinsidewhole residual.
+Latestpendinginventory phase42-unbilled-inventory-v2.json includesS1score/archiverwhole andmeasured
+costfit/M6Mu whole-minus-native/preps/sparseCPU. READ_ONLY/notpaid; S2residualstillpending.
+plan-execution-audit-v1.json isDRAFT/incomplete;16requirements/groups linkedactualevidence.
+NextfinishS2prediction/nativeJudge; compareactualquestionIDs withS1/historicalfixedfirsts; settle
+unpaidclosedcosts once; finalreport/audit. LocalSource12chain exists, globalstablegainunproved.
 
 CONFIRMATION CLOSED:384firstcalls370complete14fail;fixed96/0,scale91/5,own90/6,old93/3.
 32predeclaredsecondcalls31complete1fail(oldSource12). Allfirsts unchanged, no best-of-two.
@@ -72,7 +83,7 @@ full/SFT33/31/32/33; originalhybrid32/34/32/32; pairedSource32/33/33/31. Apparen
 inconsistentgrading. Futureexactphysicalfirstreuseprioritizepaired_source_reviewed-reviews.json.
 No newcostfitplanned; costu51train75/94vs41costpairs, butactualDEVprimary33vs33. Seephase40.
 PAIDphase40eightpreps9.498731941once. PENDINGcostDEVnativewhole47.639341, LMEfirsttwofailed
-whole11.300262+804.242474(allNOselfbill, do notplusnested), recentanalysis/score/plots. Current
+whole11.300262+804.242474 arecontainedinS1predictionresidual, NOTadditive, recentanalysis/score/plots. Current
 LMEwhole overlapsnativecomponents: reconcileafterclose. UntimedRoot/parent/testsunknown.
 NEXT finishLMEbothfixednominees/nativeJudge, settleclosedcosts onceatappgap, finalglobalreport/
 requirementsaudit. §16localchainnowexists, stableaggregateadvantageunproved; GoalNOTcomplete

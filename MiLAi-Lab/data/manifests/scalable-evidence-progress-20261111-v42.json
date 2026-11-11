@@ -1,0 +1,252 @@
+{
+  "status": "PHASE42_PROGRESS_LME_FIRST_NOMINEE_PREDICTION_SCORING_ARCHIVE_CLOSED_SECOND_NOMINEE_ACTIVE",
+  "observed_at_utc": "2026-11-11T23:50:14.754674+00:00",
+  "previous": "/data/milai-experiments/20261111-scalable-evidence/progress-v41.json",
+  "no_sha_validation": true,
+  "active_jobs": [
+    {
+      "name": "lme-small32-s2feedbacku51-v1",
+      "owner_pid": 2624347,
+      "child_pid": 2624350,
+      "owner_status": "RUNNING",
+      "driver_status": "RUNNING",
+      "actual_process_alive": true,
+      "actual_argv_matches": true,
+      "active_row": 0,
+      "case_status_counts": {
+        "NOT_RUN": 31,
+        "PREPARING_INPUT": 1
+      }
+    }
+  ],
+  "first_LME_nominee": {
+    "final_prediction_root": "/data/milai-experiments/20261111-scalable-evidence/lme-small32-s1u1130-v1-continuation-v4",
+    "attempted_positions": 32,
+    "completed_predictions": 29,
+    "retained_failed_rows": [
+      0,
+      27,
+      29
+    ],
+    "failure_scope": "row0sourceimagebindingbeforeReader;row27/29LME_INCOMPLETE_FINAL_RESPONSE. Onlyunattemptedtailscontinued; no originalfirstretries. InitializationPILfailureallNOT_RUNalso retained.",
+    "scoring": {
+      "planned": 32,
+      "scored": 29,
+      "unscored": 3,
+      "status_counts": {
+        "UNSCORED_FAILED_RETRIEVING": 1,
+        "COMPLETED": 29,
+        "UNSCORED_FAILED_READING": 2
+      },
+      "correct_scored": 7,
+      "valid_model_UNKNOWN_answers": 16,
+      "native_complete_cohort_metrics": null,
+      "native_scored_subset_metrics": {
+        "overall": {
+          "overall_full_set": 0.2413793103448276,
+          "overall_non_abstention_only": 0.23809523809523808,
+          "overall_abstention_only": 0.25,
+          "count_all_questions": 29,
+          "count_non_abstention": 21,
+          "count_abstention": 8
+        },
+        "non_abstention_by_category": {
+          "static": {
+            "count": 10,
+            "pct_correct": 0.1,
+            "pct_answered_wrong": 0.2,
+            "pct_unknown": 0.7
+          },
+          "dynamic": {
+            "count": 4,
+            "pct_correct": 0.5,
+            "pct_answered_wrong": 0.25,
+            "pct_unknown": 0.25
+          },
+          "procedure": {
+            "count": 5,
+            "pct_correct": 0.2,
+            "pct_answered_wrong": 0.4,
+            "pct_unknown": 0.4
+          },
+          "gotchas": {
+            "count": 2,
+            "pct_correct": 0.5,
+            "pct_answered_wrong": 0.5,
+            "pct_unknown": 0.0
+          }
+        },
+        "abstention_by_category": {
+          "static-abs": {
+            "count": 1,
+            "pct_correct": 1.0,
+            "pct_answered_wrong": 0.0,
+            "pct_unknown": 0.0
+          },
+          "dynamic-abs": {
+            "count": 5,
+            "pct_correct": 0.2,
+            "pct_answered_wrong": 0.0,
+            "pct_unknown": 0.8
+          },
+          "procedure-abs": {
+            "count": 2,
+            "pct_correct": 0.0,
+            "pct_answered_wrong": 0.0,
+            "pct_unknown": 1.0
+          }
+        },
+        "combined_abstention_by_category": {
+          "static": {
+            "count": 11,
+            "pct_correct": 0.18181818181818182,
+            "pct_answered_wrong": 0.18181818181818182,
+            "pct_unknown": 0.6363636363636364
+          },
+          "dynamic": {
+            "count": 9,
+            "pct_correct": 0.3333333333333333,
+            "pct_answered_wrong": 0.1111111111111111,
+            "pct_unknown": 0.5555555555555556
+          },
+          "procedure": {
+            "count": 7,
+            "pct_correct": 0.14285714285714285,
+            "pct_answered_wrong": 0.2857142857142857,
+            "pct_unknown": 0.5714285714285714
+          }
+        },
+        "abstention_overall": {
+          "count": 8,
+          "pct_correct": 0.25,
+          "pct_answered_wrong": 0.0,
+          "pct_unknown": 0.75
+        }
+      },
+      "all_planned_score_bounds": [
+        0.21875,
+        0.3125
+      ],
+      "scope": "Unscored program/Judge failures are not negative labels or invented UNKNOWN answers. A valid model UNKNOWN is scored by the original benchmark rule. Subset metrics are conditional, not a full-cohort score. Shared histories and repeated seeds do not create independent source families."
+    },
+    "prediction_costs": "/data/milai-experiments/20261111-scalable-evidence/lme-small32-s1-first-prediction-costs-v1.json",
+    "native_CPU_already_paid": 220.02695346510882,
+    "prediction_unpaid_residual_CPU": 2487.7651455348914,
+    "scope": "7correct/29scored,3unscored;full32bounds[7/32,10/32], notfull32accuracy. Same2sharedbanks, no independentSourceCI."
+  },
+  "archive": {
+    "index": "/data/milai-experiments/20261111-scalable-evidence/lme-small32-s1u1130-v1-continuation-v4/case-archives/index.json",
+    "status": "COMPLETED",
+    "archived_cases": 32,
+    "original_case_bytes": 9534863887,
+    "archive_bytes": 301831679,
+    "whole_child_CPU_pending": 139.541236,
+    "scope": "Existinglosslesscommon-basearchive. Everyreconstructedfile comparedliterallybeforecasecopiesremoved; templates,predictions,scores,denominators,originalfailuresretained. No SHA. Restore viarestore_lme_case iflaterneeded."
+  },
+  "storage_sparse_release": {
+    "pilot": {
+      "path": "/data/milai-experiments/20261111-scalable-evidence/m2-prefix48-feedback-seed0-v2/recovery/training-state.pt",
+      "closed_run_status": "COMPLETED",
+      "logical_bytes_unchanged": 3861575920,
+      "allocated_bytes_before": 3861581824,
+      "allocated_bytes_after": 2422890496,
+      "freed_bytes": 1438691328,
+      "wall_seconds": 8.164689058437943,
+      "operation": "GNU fallocate --dig-holes; deallocates allocated zero ranges without modifying readable bytes",
+      "no_sha_validation": true
+    },
+    "six_more": {
+      "status": "COMPLETED",
+      "operation": "GNU fallocate --dig-holes on closed recovery files only; zero-range deallocation preserves readable bytes and paths",
+      "no_sha_validation": true,
+      "selected_inference_checkpoints_touched": false,
+      "first_outcomes_touched": false,
+      "pilot": "/data/milai-experiments/20261111-scalable-evidence/closed-recovery-sparse-pilot-v1.json",
+      "records": [
+        {
+          "run": "m2-prefix48-continued-sft-seed0-v1",
+          "path": "/data/milai-experiments/20261111-scalable-evidence/m2-prefix48-continued-sft-seed0-v1/recovery/training-state.pt",
+          "logical_bytes_unchanged": 3861578928,
+          "allocated_before": 3861585920,
+          "allocated_after": 2424479744,
+          "freed_bytes": 1437106176,
+          "child_cpu_seconds": 3.853234,
+          "wall_seconds": 3.8660400519147515
+        },
+        {
+          "run": "m2-first160-feedback-seed0-v1",
+          "path": "/data/milai-experiments/20261111-scalable-evidence/m2-first160-feedback-seed0-v1/recovery/training-state.pt",
+          "logical_bytes_unchanged": 3861636016,
+          "allocated_before": 3861643264,
+          "allocated_after": 2509099008,
+          "freed_bytes": 1352544256,
+          "child_cpu_seconds": 4.09341,
+          "wall_seconds": 4.116013251245022
+        },
+        {
+          "run": "m2-first160-continued-sft-seed0-v1",
+          "path": "/data/milai-experiments/20261111-scalable-evidence/m2-first160-continued-sft-seed0-v1/recovery/training-state.pt",
+          "logical_bytes_unchanged": 3861643952,
+          "allocated_before": 3861651456,
+          "allocated_after": 2513403904,
+          "freed_bytes": 1348247552,
+          "child_cpu_seconds": 3.399171,
+          "wall_seconds": 3.4186492590233684
+        },
+        {
+          "run": "m2-first160-adequate-cost-seed0-v1",
+          "path": "/data/milai-experiments/20261111-scalable-evidence/m2-first160-adequate-cost-seed0-v1/recovery/training-state.pt",
+          "logical_bytes_unchanged": 3861639152,
+          "allocated_before": 3861651456,
+          "allocated_after": 2509258752,
+          "freed_bytes": 1352392704,
+          "child_cpu_seconds": 3.1651390000000004,
+          "wall_seconds": 3.1917546736076474
+        },
+        {
+          "run": "s3-first319-old-s1-states-seed0-v1",
+          "path": "/data/milai-experiments/20261111-scalable-evidence/s3-first319-old-s1-states-seed0-v1/recovery/training-state.pt",
+          "logical_bytes_unchanged": 3861594352,
+          "allocated_before": 3861602304,
+          "allocated_after": 2430427136,
+          "freed_bytes": 1431175168,
+          "child_cpu_seconds": 2.153287,
+          "wall_seconds": 2.1685259006917477
+        },
+        {
+          "run": "s3-first319-own-states-seed0-v1",
+          "path": "/data/milai-experiments/20261111-scalable-evidence/s3-first319-own-states-seed0-v1/recovery/training-state.pt",
+          "logical_bytes_unchanged": 3861594096,
+          "allocated_before": 3861598208,
+          "allocated_after": 2430996480,
+          "freed_bytes": 1430601728,
+          "child_cpu_seconds": 2.625108,
+          "wall_seconds": 2.6396664856001735
+        }
+      ],
+      "freed_bytes": 8352067584,
+      "compute": {
+        "cpu_seconds": 19.296935976,
+        "wall_seconds": 19.40396680496633
+      },
+      "scope": "Preserves all recovery byte streams, file sizes/paths and inference checkpoints; no archive/deletion/rerun, no SHA/content fingerprints. CPU pending stage ledger, no write during live LME."
+    },
+    "scope": "Closed recovery files only; GNU fallocate --dig-holes deallocatesallocatedzero ranges withoutchangingreadablebytes,filesizesorpaths. No inferencecheckpoint/firstoutcome deletion. About9.12GiBfreed;nohash/fingerprintvalidation. PilotCPUunknown, sixfilebatchCPUmeasured."
+  },
+  "unpaid_inventory": {
+    "path": "/data/milai-experiments/20261111-scalable-evidence/phase42-unbilled-inventory-v2.json",
+    "stages": 27,
+    "cpu_seconds": 2815.0544223928905,
+    "recorded": false,
+    "scope": "Do notbillduringactiveS2. IncludesS1predictionresidualwhichALREADYcontains11.300262+804.242474failedinitializerCPU; no additionagain. CurrentS2residual/score stillpending."
+  },
+  "draft_audit": "/data/milai-experiments/20261111-scalable-evidence/plan-execution-audit-v1.json",
+  "audit_scope": "16planrequirements/groups mappedtoactualevidence. Notacompletionclaim: externalS2/scoring/cost/finalreport remain. Conditionaloptionalexpansionsnotfabricated. Section16boundednewSourcechain retained; no stableaggregateadvantage claim.",
+  "validation": "Actualterminalowners beforeexplicitv3/v4unattemptedcontinuations andscore/archive. All32attempted beforeNative scoring; no Readerregeneration. Archive32closed withliteralreconstruction; storageoperationlogicalbytes/pathssame andselectedmodel/firstrecordsuntouched. No newtrackedruntimecode since91b3f707.",
+  "next": [
+    "ContinueS2full32 prediction, preservingfirstfailures withonlyexplicitunattemptedcontinuations afteractualterminal",
+    "RunS2nativeJudge afterall32attempted; reconcileactualquestionmatcheswithhistoricalfixedbaseline andS1, no SourceCI across32shared-bankquestions",
+    "Settleunpaidclosedscopesonceatappgap; finishglobalcost/researchreport andrequirementcompletionaudit"
+  ],
+  "boundaries": "GoalACTIVE/incomplete. NoSHA/contentfingerprints/subagents/Product/API/permission/Canonicalchange/service restart/push. No postconfirmationtraining/modelselection. No automaticqueue/retry."
+}
