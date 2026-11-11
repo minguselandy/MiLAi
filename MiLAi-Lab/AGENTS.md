@@ -1,4 +1,52 @@
-# LIVE scalable evidence phase24: 2026-11-11
+# LIVE scalable evidence phase25: 2026-11-11
+
+GoalACTIVE/incomplete, PROGRESS,noblocker. No subagents/SHA/contentfingerprints/Product/API/permission/
+Canonical changes,service restarts orpush. Preservefirsts/unknowns/roles. KEEPANALYSISSHORT; stop
+speculative/repetitive prose andact. R=/data/milai-experiments/20261111-scalable-evidence.
+Latestprogress-v25/manifestv25/docphase25. Actual/proc+owner+artifacts governliveness; no staleJSON/
+losthandle restarts. Noautoqueue. Fullgoalnotcomplete.
+
+LIVE main36k owner769162 child769163 GPU2 latest2560/3390.
+LIVE seed2large owner3905047 child3905048 GPU3,303updates andfull101/202/303124/111/105closed.
+Actualwchan locks_lock_inode_wait: nativefinalbilling waitingoriginalledger heldbyteacher. NOTfailure;
+doNOTrestart/kill orclaimownerclosed. OnceactualownerCOMPLETED/procgone run_s1_repeat32_seed2_v1.py.
+LIVE paper63teacher owner124439 child124440,
+m2-fixed-context-families128to160-teacher-v1 latest8/63closed7masked (revalidate). Source153firsts
+already146complete7fails533200knownGen0unknown. Afterteachercloses compile
+m2-fixed-context-families128to160-semantic-teacher-v1 usingprepared
+m2-fixed-context-train160-families128to160-v2 andreadouts...families128to160-readouts-v2.
+Thenexecute R/prepare_m2_first160_feedback_sft_data_v1.py viaCUDA-env wrapper(noGPUforpreparation),
+notHTTPenv audit(whichlackslaya). Uses6semanticparts, raw319comparisons160sources,shared319oldreplay.
+
+CLOSEDnewpublic129teacher32states:1unresolved48masked278245knownGen0unknown.
+Rootnewfixedgrid0/9/16/25=15actualoutcomes reviewedindependently,
+m2-public-query-once-author-spots-v1/{author-spots,reviews,differences}. MockTurtlecreator nowactually
+insearch/newcoveragepackets, fatherstillmissing; oldcoveragefragment6stilloutsideknowledge. SQL/MySQL
+ambiguous; Jamaica/Ghanarequiredfactsstillmissing.15fielddifferencesvsfirstteacher (nonindependent).
+Compiled m2-public-train16-query-once-primary-semantic-v1 with --primary-support:
+2known delivery/2knownanswer,0direction each. Rawall129 +primary96bindings preserved; no taskgain.
+m2-public-query-once-primary-closeout-v1.json. Stopmore samecohortsmallvariants absentnewinformation;
+retainfunctionalquerypreservation result/negativeevidence, notenoughformalS2.
+
+PLANSTART319: v2requires300-600actualcomparisonstates, NOT300knownlabels. Don'taddthatgate.
+m2-first160-opportunity-and-sft-inventory-v1 verifies319rawinputs,160families,201nativeSFTtargets;
+SFTtotal520with319replay. Feedbackknownfirst128108, last63pending; effectivecountsseparatelyreport.
+R/prepare_m2_first160_feedback_sft_data_v1.py READY pendinglastsemanticfile,output
+m2-first160-feedback-sft-data-v1. Proposedplansready
+m2-first160-feedback-seed0-v1-plan.json / m2-first160-continued-sft-seed0-v1-plan.json:
+sameS1u101init,51updates1632draws,eval9/17/34/51,full17/34/51, BF16batch32/micro8/padded8192,
+LR1e-5/1e-4, cosine/replay.25,ties.5 maskedunknown; same319replay. Cyclic draws,notexactfullpasses/
+FLOPs. Finaldata manifest mustconfirmcounts/51updates beforelaunch; bothGPUs currentlyoccupied.
+Noautomaticfitqueue. First319batch shouldfitavailabletargets withoutwaitingall859laterfirsts.
+
+Next: finishpaper63teacher/compilepaireddata, launchrepeatseed2afterlargeclose, thenpairedS2/SFT
+whenGPUavailable. Expand859newpaperfirsts and8continuousfamilies inparallelwithfitting. Needactual
+postS2aggregation/SourceViewlearning,main3390/newconfirmation96/fullcost/generalization. Reference
+Source/View125notfitted/unbiasedsemanticdataset. PublicSFT32raw12labels20unknown matchesinputs.
+Currentnewpairedplan/data prepCPU pending; selfbilledreader/teacher/training notaddedagain,
+unmeasuredauthor/tests/analysisunknown. PackagePASS/toolsold6LMEdynamicimports unchanged.
+
+# HISTORICAL scalable evidence phase24: 2026-11-11
 
 FullgoalACTIVE/incomplete, PROGRESS,noblocker. No subagents/SHA/contentfingerprints/Product/API/
 permission/Canonical changes,service restarts orpush. Preservefirsts/unknowns/roles. KEEPANALYSIS
