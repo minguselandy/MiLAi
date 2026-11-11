@@ -1,0 +1,401 @@
+{
+  "status": "PHASE17_PROGRESS_FULL_GOAL_ACTIVE",
+  "observed_at_utc": "2026-11-11T07:31:19.962529+00:00",
+  "previous": "/data/milai-experiments/20261111-scalable-evidence/progress-v16.json",
+  "no_sha_validation": true,
+  "active_jobs": [
+    {
+      "name": "s1-op36k-seed0-v1",
+      "owner_pid": 769162,
+      "child_pid": 769163,
+      "actual_argv_checked": true,
+      "owner_status": "RUNNING",
+      "status": "RUNNING",
+      "optimizer_updates": 1680,
+      "planned_optimizer_updates": 3390
+    },
+    {
+      "name": "s1-op3k-seed1-v1",
+      "owner_pid": 2963709,
+      "child_pid": 2963710,
+      "actual_argv_checked": true,
+      "owner_status": "RUNNING",
+      "status": "RUNNING",
+      "optimizer_updates": 176,
+      "planned_optimizer_updates": 303
+    },
+    {
+      "name": "m2-fixed-context-train160-families96to128-readouts-v1",
+      "owner_pid": 3143208,
+      "child_pid": 3143209,
+      "actual_argv_checked": true,
+      "owner_status": "RUNNING",
+      "status": "RUNNING",
+      "closed_readouts": 62,
+      "failed_readouts": 2,
+      "chat_invocations": 63,
+      "planned_families": 32
+    },
+    {
+      "name": "s1-learned36k-u1130-public-train16-v1",
+      "owner_pid": 3203682,
+      "child_pid": 3203683,
+      "actual_argv_checked": true,
+      "owner_status": "RUNNING",
+      "status": "RUNNING",
+      "closed_requests": 1,
+      "model_calls": 3,
+      "completed_families": 0,
+      "planned_families": 16
+    }
+  ],
+  "M6_first4_continuous": {
+    "status": "FIRST4_CONTINUOUS_SOURCE_PATHS_CLOSED_AND_SOURCE_REVIEWED",
+    "source_split": "train",
+    "natural_history": false,
+    "independent_evaluation": false,
+    "conditions": [
+      {
+        "condition": "new32-view_cache",
+        "positions": 20,
+        "families": 4,
+        "answer_grades": {
+          "C": 6,
+          "F": 4,
+          "W": 5,
+          "Q": 5
+        },
+        "delivery_status": {
+          "partial": 13,
+          "insufficient": 4,
+          "complete": 3
+        },
+        "complete_by_family": {
+          "memops_A01": 2,
+          "memops_A02": 0,
+          "memops_A05": 1,
+          "memops_A14": 3
+        },
+        "relevant_update_positions": 7,
+        "relevant_update_answer_grades": {
+          "W": 5,
+          "F": 2
+        },
+        "generation_delta": {
+          "charged_tokens": 245840,
+          "known_tokens": 245840,
+          "unknown_usage": 0
+        },
+        "native_compute_cpu_deltas": {},
+        "cost_scope": "Exact source message ledger deltas, not extra cost to add again. Native CPU only here; whole-driver residual must be reported separately."
+      },
+      {
+        "condition": "new32-view_cache_incremental",
+        "positions": 20,
+        "families": 4,
+        "answer_grades": {
+          "C": 10,
+          "W": 6,
+          "F": 4
+        },
+        "delivery_status": {
+          "complete": 3,
+          "partial": 17
+        },
+        "complete_by_family": {
+          "memops_A01": 3,
+          "memops_A02": 4,
+          "memops_A05": 1,
+          "memops_A14": 2
+        },
+        "relevant_update_positions": 7,
+        "relevant_update_answer_grades": {
+          "W": 6,
+          "F": 1
+        },
+        "generation_delta": {
+          "charged_tokens": 175511,
+          "known_tokens": 175511,
+          "unknown_usage": 0
+        },
+        "native_compute_cpu_deltas": {},
+        "cost_scope": "Exact source message ledger deltas, not extra cost to add again. Native CPU only here; whole-driver residual must be reported separately."
+      },
+      {
+        "condition": "new32-e3-aggregate-u32",
+        "positions": 20,
+        "families": 4,
+        "answer_grades": {
+          "W": 5,
+          "C": 7,
+          "F": 6,
+          "Q": 2
+        },
+        "delivery_status": {
+          "insufficient": 2,
+          "complete": 4,
+          "partial": 14
+        },
+        "complete_by_family": {
+          "memops_A01": 1,
+          "memops_A02": 3,
+          "memops_A05": 0,
+          "memops_A14": 3
+        },
+        "relevant_update_positions": 7,
+        "relevant_update_answer_grades": {
+          "W": 3,
+          "F": 4
+        },
+        "generation_delta": {
+          "charged_tokens": 170738,
+          "known_tokens": 170738,
+          "unknown_usage": 0
+        },
+        "native_compute_cpu_deltas": {
+          "dynamic_memory_laya": 50.64168272004463,
+          "dynamic_memory_laya_load": 7.743319650000103
+        },
+        "cost_scope": "Exact source message ledger deltas, not extra cost to add again. Native CPU only here; whole-driver residual must be reported separately."
+      },
+      {
+        "condition": "s1-op36k-u1130",
+        "positions": 20,
+        "families": 4,
+        "answer_grades": {
+          "C": 11,
+          "F": 4,
+          "W": 4,
+          "Q": 1
+        },
+        "delivery_status": {
+          "complete": 9,
+          "partial": 11
+        },
+        "complete_by_family": {
+          "memops_A01": 3,
+          "memops_A02": 3,
+          "memops_A05": 2,
+          "memops_A14": 3
+        },
+        "relevant_update_positions": 7,
+        "relevant_update_answer_grades": {
+          "F": 3,
+          "W": 4
+        },
+        "generation_delta": {
+          "charged_tokens": 155178,
+          "known_tokens": 155178,
+          "unknown_usage": 0
+        },
+        "native_compute_cpu_deltas": {
+          "dynamic_memory_laya": 2031.6571154990233,
+          "dynamic_memory_laya_load": 6.163266910999937
+        },
+        "cost_scope": "Exact source message ledger deltas, not extra cost to add again. Native CPU only here; whole-driver residual must be reported separately."
+      }
+    ],
+    "new_run": {
+      "HTTP_responses": 25,
+      "model_predictions": 36,
+      "retrieval_calls": 5,
+      "selected_operations": {
+        "SEARCH": 5,
+        "READ": 27,
+        "HANDOFF": 4
+      },
+      "USE_VIEW_offered_states": 0,
+      "REFRESH_VIEW_offered_states": 36,
+      "later_retrieval_calls": 1,
+      "relevant_update_retrieval_calls": 0,
+      "whole_child_cost_receipt": "/data/milai-experiments/20261111-scalable-evidence/phase17-compute-v1.json"
+    },
+    "execution_cost_caveat": "New learned run CPU FP32/4, old E3 configured CUDA:0; native CPU seconds are not matched hardware cost and cannot establish cost improvement. Cache arms use CPU rules. Total generation tokens exclude local inference and do not imply total compute gain.",
+    "source_scope": "First4originalTRAINcontentfamilies, same5exogenousrequests/arrivals perpolicy, ownhistory/View paths. Oldbaselinefirsts not rerun. Remaining12families not completed. Content C does not promote assistant recap to original user witness; actual-role delivery separate.",
+    "interpretation": "Newmodel11/20 complete vs prior incremental10/20, rawE3 7/20, cache6/20 is a fourSource descriptive slice, not stablegain: no successful relevant-update answer among7 positions and no new retrieval at any of those7relevant-update positions. One extra retrieval occurred on A14same-sources (six modelpredictions) without new exogenous facts. Newmodel never created/used aView and neverhadUSE_VIEWoffered, so this alone does not test reuse choice. Need actualViewbefore branches and latercontinuousfamilies. Host RNG and grading nonindependence remain.",
+    "no_sha_validation": true
+  },
+  "M6_owner": {
+    "argv": [
+      "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/cuda-env/bin/python",
+      "-u",
+      "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/frozen-feedback-ae3950f2/train_with_declared_attention.py",
+      "/data/milai-experiments/20261111-scalable-evidence/m6-s1u1130-continuous-families0to4-v1-entry.py"
+    ],
+    "cwd": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/runtime-d-update32",
+    "environment": {
+      "PYTHONPATH": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/runtime-d-update32/src:/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/runtime-d-update32/tools",
+      "CUDA_VISIBLE_DEVICES": "",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "TOKENIZERS_PARALLELISM": "false",
+      "HF_HUB_OFFLINE": "1",
+      "TRANSFORMERS_OFFLINE": "1"
+    },
+    "planned_cases": 20,
+    "source_role": "Old generated MemOps TRAIN; first16 content families in original order, four finite batches",
+    "capture_source_version": "local-a100-development-D-update32-20261105-v1",
+    "native_runtime": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/runtime-d-update32",
+    "entry_script": "/data/milai-experiments/20261111-scalable-evidence/m6-s1u1130-continuous-families0to4-v1-entry.py",
+    "scope": "Fresh own continuous banks, unchanged five chronological requests/family and external arrivals; old frozen runner with public laya/checkpoint config. CPU FP32/4, compile disabled. Generated MemOps TRAIN, exposed DEV research use; not natural or unseen confirmation. Original JSON-action transport/Host settings preserved. No metadata-arrival prompt. Capture each actual retrieval before once, not every control step.",
+    "launch_after": "Active HTTP job terminal; distinct finite batch, no automatic queue",
+    "automatic_retry": false,
+    "no_sha_validation": true,
+    "planned_families": 4,
+    "status": "COMPLETED",
+    "pid": 3061646,
+    "child_pid": 3061650,
+    "exit_code": 0,
+    "owner_wall_seconds": 1264.414632334374,
+    "child_cpu_seconds": 2096.005846,
+    "cost_scope": "Whole child overlaps native functional self-billed operations; not additive. Residual requires reconciliation."
+  },
+  "M6_view6_branches": {
+    "status": "30_BOUND_BRANCHES_PREPARED_NOT_EXECUTED",
+    "families": 5,
+    "states": 6,
+    "branches": 30,
+    "common_continuation_branches": 18,
+    "separate_mechanism_branches": 12,
+    "frames_ready": 6,
+    "no_SHA_validation": true,
+    "no_model_or_HTTP_calls": true,
+    "source_split": "train",
+    "training_label_scope": "Only samecontinuation distinctfirstactions can form feedback; immediatehandoff arms separate. No inferred semantic label fromoperationname/ref coverage.",
+    "compute": {
+      "cpu_seconds": 0.22472901200000006,
+      "wall_seconds": 0.23516921885311604
+    }
+  },
+  "M6_view6_next_execution_plan": "/data/milai-experiments/20261111-scalable-evidence/m6-view6-actual-branches-v1-plan.json",
+  "M6_view6_restoration": {
+    "status": "SIX_ACTUAL_VIEW_TOOL_BEFORES_RESTORED",
+    "metadata_index": {
+      "files": 179,
+      "restored_bytes": 51745159,
+      "archive": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/closed-D-capture-storage-v1/new32-view_cache-frozen-retrieval-calls.tar.gz",
+      "base": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/closed-D-capture-storage-v1/immutable-empty-base",
+      "destination": "/data/milai-experiments/20261111-scalable-evidence/m6-cache-tool-metadata-v1",
+      "no_sha_validation": true
+    },
+    "selected_restore": {
+      "files": 189,
+      "restored_bytes": 40986626,
+      "archive": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/closed-D-capture-storage-v1/new32-view_cache-frozen-retrieval-calls.tar.gz",
+      "base": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/artifacts/a100-development-20261104/closed-D-capture-storage-v1/immutable-empty-base",
+      "destination": "/data/milai-experiments/20261111-scalable-evidence/m6-view6-tool-captures-v1",
+      "no_sha_validation": true
+    },
+    "source_families": 5,
+    "states": 6,
+    "scope": "All six previously recorded initial USE_VIEW opportunities in old generated MemOps TRAIN content flows. Only call.json andbefore; no postoperation snapshots or Source/Host recollection. No labels or HTTP/model calls.",
+    "compute": {
+      "cpu_seconds": 93.463300394,
+      "wall_seconds": 93.59009688347578
+    },
+    "no_sha_validation": true
+  },
+  "M6_more_view_opportunities": {
+    "status": "AVAILABLE_ACTUAL_VIEW_OPPORTUNITIES_NO_NEW_EXECUTION",
+    "initial_calls_with_USE_VIEW": 25,
+    "unique_family_flow_stage_cells": 17,
+    "source_families": 11,
+    "selection": "First chronologically captured actual call in each family/flow/public-stage cell; no output or quality selection. Same-source variants not independent families.",
+    "source_split": "train",
+    "no_sha_validation": true
+  },
+  "public_TRAIN16_collection_plan": "/data/milai-experiments/20261111-scalable-evidence/s1-learned36k-u1130-public-train16-v1-plan.json",
+  "public_TRAIN16_scope": "32actual supplied cold/fixed-original-K requests; first16TRAINnativefamilies ofclosedshard0, firstnativevariant each, u1130frozenbeforeoutcomes, CPUFP32/4. NoHost ornewSourcecopies, variantcontextrestrictions retained. No S2/postS2/generalization claim; wholechildcostunbilled untilclose.",
+  "seed1_first_full_dev": {
+    "optimizer_updates": 101,
+    "weighted_loss_mean": 1.1263205364251592,
+    "dev": {
+      "counts": {
+        "labelled": 78,
+        "accepted": 39,
+        "handoff_outside_reviewed_preference": 11,
+        "masked": 50
+      },
+      "strata": {
+        "reference_acquisition": {
+          "labelled": 58,
+          "accepted": 26
+        },
+        "reference_preserving_handoff": {
+          "labelled": 20,
+          "accepted": 13
+        }
+      },
+      "selected_operations": {
+        "SEARCH": {
+          "selected": 22,
+          "accepted": 22
+        },
+        "READ": {
+          "selected": 32,
+          "accepted": 4
+        },
+        "HANDOFF": {
+          "selected": 24,
+          "accepted": 13
+        }
+      },
+      "families": 27,
+      "family_macro_acceptance": 0.5092592592592593,
+      "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+    },
+    "full-dev": {
+      "counts": {
+        "labelled": 278,
+        "accepted": 107,
+        "handoff_outside_reviewed_preference": 58,
+        "masked": 202
+      },
+      "strata": {
+        "reference_acquisition": {
+          "labelled": 203,
+          "accepted": 57
+        },
+        "reference_preserving_handoff": {
+          "labelled": 75,
+          "accepted": 50
+        }
+      },
+      "selected_operations": {
+        "SEARCH": {
+          "selected": 42,
+          "accepted": 42
+        },
+        "READ": {
+          "selected": 128,
+          "accepted": 15
+        },
+        "HANDOFF": {
+          "selected": 108,
+          "accepted": 50
+        }
+      },
+      "families": 28,
+      "family_macro_acceptance": 0.40551239435168007,
+      "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+    }
+  },
+  "seed2_prepared_not_launched": [
+    "/data/milai-experiments/20261111-scalable-evidence/s1-op3k-seed2-v1-plan.json",
+    "/data/milai-experiments/20261111-scalable-evidence/s1-repeat32-seed2-v1-plan.json"
+  ],
+  "replication_launcher_order": [
+    "s1-op3k-seed1-v1 (active)",
+    "s1-repeat32-seed1-v1",
+    "s1-op3k-seed2-v1",
+    "s1-repeat32-seed2-v1"
+  ],
+  "cost_settlement": "/data/milai-experiments/20261111-scalable-evidence/phase17-compute-v1.json",
+  "new_CPU_recorded": 206.16791713397748,
+  "remaining": [
+    "CloseactiveTRAIN159, compileactualwitness and semanticteacher; remaining1012TRAINendpointsnotyetstarted beyondactivebatch. First96feedbackhas80known delivery/76answer, inadequateformalS2.",
+    "Runprepared6Viewstates30branches afterHTTPownerterminal; same-continuation18 versus12mechanism-only separate. Newinventory25USE_VIEWcalls /17family-flow-stagecells /11TRAINfamilies includesmultiplecalls andoriginalquote requests; not25independentfamilies.",
+    "Finishremaining12continuousfamilies; currentfirst4all7relevantupdatesfailedorwrong, no taskgain claim. Need Source/View feedbacklearning and actualpostS2aggregation.",
+    "Finishpairedseed1, preparedseed2, original36k3390, frozennewconfirmation96 and fullcost/generalization."
+  ],
+  "scope": "No Product/API/permission/Canonical changes, no service restart/push/subagents/SHA. Content correctness versus Source-role delivery separate; actualfirstfailures/unknowns retained. NewCPU vs historicalE3 CUDA means hardwarecostunmatched."
+}

@@ -1,4 +1,66 @@
-# LIVE scalable evidence phase16: 2026-11-11
+# LIVE scalable evidence phase17: 2026-11-11
+
+Fullv2goal ACTIVE/incomplete, PROGRESS,no blocker. No subagents,SHA/contentfingerprints,
+Product/API/permission/Canonical changes,service restarts orpush. Preservefirsts/unknowns/Source roles.
+KeepanalysisSHORT, concrete toolactions, no longspeculation. R=/data/milai-experiments/20261111-scalable-evidence.
+Latestprogress-v17.json andmanifest scalable-evidence-progress-20261111-v17.json; docphase17.
+Actual/proc argv+owner+artifacts governliveness; neverrestart fromstalerunJSON/losthandle.
+
+LIVE36k owner769162 child769163 GPU2,latest1680/3390, unchangedloaded4bab6388.
+LIVE3kseed1 owner2963709 child2963710 GPU3 latest176/303. u101fullDEV107/278,macro.4055124,
+vsseed0u101133/.4824424. Continuecurve, no reselect/earlystop. Preparedthreeownedlaunchers:
+run_s1_repeat32_seed1_v1.py AFTERlarge1; run_s1_op3k_seed2_v1.py AFTERrepeat1;
+run_s1_repeat32_seed2_v1.py AFTERlarge2. Eachchecksitsactualpredecessor terminal; noautomaticqueue.
+Allsamefrozenfiles/init/recipe. Seed2plansnewprepared; noneexecuted. Repeat9696draws vslarge9606.
+LIVE TRAIN159 owner3143208 child3143209, m2-fixed-context-train160-families96to128-readouts-v1,
+latest62closed2failed63invocations(inflight);64states32TRAINsources. Afteritcloses, compilewitness
+andsemanticteacher; sourceprepared m2-fixed-context-train160-families96to128-v1. Others1012endpoints
+unstarted, not1171onceactive159reserved. Do notcallactivepartlyclosed allsupervision.
+LIVE publicMuSiQueTRAIN16 owner3203682 child3203683, s1-learned36k-u1130-public-train16-v1,
+latest1closedrequest3modelcalls.32cold/fixed-original-K suppliedrequests,first16TRAINnativefamilies
+ofclosed musique-public-shard-0-v1, firstrequest each, originalbanksreuse,variantcontextrestriction
+preserved. CPUFP32/4,noGPU/noHost/noSourcecopies. Sameu1130frozenbeforeoutcomes. NotpostS2,
+notgeneralization. Toolrollout_public_known_conditions.py DOESNOTselfbill; newownerwait4wholechild
+CPU settleonceafterclose, doNOTaddnestedrun.compute. Nativebankturnwrites aredeclaredexistingpath.
+
+CLOSED M6first4 owner3061646 child3061650 exit0,20positions16completed4firstlengthfailures.
+m6-continuous-first4-review-v1/{actual-inputs.json,author-decisions-v1.json,summary.json}.
+NewS1C11/Q1/W4/F4; originalcacheC6/Q5/W5/F4,incrementalC10/W6/F4,oldE3C7/Q2/W5/F6.
+ALLfourmethods0C/7relevant-updatepositions. Newpolicy0retrieval atthose7; A14same-sources DID
+retrieveonce(6NN), so DO NOTsay no retrievalafterinitialoverall. Actual25HTTP36NN5retrievals;
+5SEARCH27READ4HANDOFF, USE_VIEWoffered0,REFRESHoffered36,noneViewcreated/used. No stablegain.
+ContentC vsoriginal-role deliveryseparate: A02faithfulassistantrecapC butownmanager/correction
+witnessmissing =>partialmaterial. OtherfirstthreeA01/A05/A14 originalwitnessesreceived;A05same
+QfromZIP/unitmisclassifiedassistant-only. Unknown/failed neverimputed. Rootnonblind/nonindependent.
+Newgen155178known0unknown; oldcache245840,incremental175511,E3170738. NewCPUFP32vsoldE3CUDA,
+so nativeCPUtiming hardwareunmatched, tokensnot totalcostgain. Wholechild2096.005846CPU,
+1264.414632wall. Remaining12continuousfamilies plansready, noautoqueue.
+
+READYNOTEXECUTED: m6-view6-actual-branches-v1-plan.json, launchgeneric
+python3 R/run_owned_plan_v1.py m6-view6-actual-branches-v1 AFTERHTTPownerterminal.
+Originalfrozenruntime usesrun_frozen_retrieval_calls.py --host-readout --continue-known-readout-failures.
+Actual6beforeStates/5TRAINfamilies restored m6-view6-tool-captures-v1 (189files40986626bytes),
+179rootcallmetadata separately m6-cache-tool-metadata-v1. NoSHA/fullarchive/Sourceprefixrerun.
+m6-view6-branches-plan-v1 has30arms: percase USE/REFRESH/SEARCHsamefixed_context4continuation
+18arms eligiblefirstactionfeedback; additionalUSE/REFRESHimmediatehandoff12mechanism-only,
+nevermergeasduplicateactionlabels. SixactualpostToolHostframesREADY; otherbatchreceiptsfixed,
+onlytargetreplaced, singlefinalanswer. Conditionalmechanism, notautonomouscounterfactualtrajectory.
+Expandedmetadata m6-expanded-view-opportunity-inventory-v1.json:25USE_VIEWcalls ->17first
+family/flow/stagecells,11families; includeslatercallswithinsameHostbatch andoriginal-quote flows.
+Earlier6selectionnarrower, notall25; don'tinflateindependentSources. Only6capturesrestored.
+
+phase17-compute-v1 PAID: 3M6wholechild-minus-proven-nativeCPU residual112.479887728,
+restore+branchprep93.688029406=206.167917134newCPU. No duplicatednative/fullchild.
+BindinganalysisCPUhistory pending m6-continuous-first4-review-v1/binding-compute-history.jsonl;
+otherunmeasuredRoot/analysis/import/launchunknownnotzero. No trackedproductcodechanges;
+actual6frames, originalSourcearrivals, roles, nativefirsts andartifactscript syntaxverified.
+
+NEXT: closeTRAIN159, compilewitness/teacher, runView30 andremaining12continuous; finishpublicTRAIN16
+andpreparebroad actualfeedbackwithoutassigningwholepolicy qualitytoanunexecutedfirstaction.
+NeedadequateS2 (currentlyonly192raw/80deliveryknown76answerknown),actualpostS2aggregation,
+seed1/seed2/main36k,newconfirmation96/fullcost/generalization. Goalremainactive.
+
+# HISTORICAL scalable evidence phase16: 2026-11-11
 
 Fullv2goal ACTIVE/incomplete, PROGRESS,no blocker. No subagents,SHA/contentfingerprints,
 Product/API/permission/Canonical changes,service restarts orpush. Preservefirsts/unknowns/Source roles.
