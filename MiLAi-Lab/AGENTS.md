@@ -32,7 +32,7 @@ phase12-i1-i2-author-review-v1 contains separatepanels, no pooling/autonomouscla
 CLOSED TRAIN new177 GPUcollector owner2022459 child2022460 exit0:776states456fit,177terminalstates438
 packets. Own337 total1488raw873fit235labelledfamilies615unknown: s1-learner-train337-operation-data-v1.
 Sameexpanded337TRAIN firstquestions; old160CPU/new177CUDA devices explicit, notpure speed study.
-CLOSED DEV32 GPUcollector owner2082862 child2082863 (verify owneractualPID),130raw76labels,DEVonly.
+CLOSED DEV32 GPUcollector owner2082862 child2082863,130raw76labels,DEVonly.
 Bothreuseoriginalbanks; wholechild CPU725.592111/132.050306 NOW PAID phase12-compute-v1; don'tadd
 native tool707.878/117.833 overlappingtimers. GPUjob intervals446.631/79.716, notkernel compute.
 CLOSED m2-fixed-context-train177-all-v1 owner2092257 child2092258:354states859packets,0NN/Host.
@@ -64,7 +64,7 @@ packets. Prep --split dev, compiler --evaluation-only preservesroleandexportsno 
 states/37readouts closed34complete3fail; teacher16closed0unresolved13masked,102631knownGen.
 Two finalu15 native scorers64each CLOSED GPU3FP32batch2:
 m2-prefix48-feedback-dev64-scores-v1 and m2-prefix48-continued_sft-dev64-scores-v1; catalog
-m2-prefix48-dev64-scorers-v1.json. Master2245244 children2245245/2247857 ended, notlive.
+m2-prefix48-dev64-scorers-v1.json. Master2245244 children2245252/2247857 ended, notlive.
 e64d3587 prepare_scored_operation_readouts.py usesfullargmax, exactinput/completebindings, existing
 execute_branch+prefix, noStorecopy. It reusesactualsamebindings andexecutesmissingonly.3tests pass.
 
