@@ -30,8 +30,29 @@ from milai_lab.providers.contextual_capacity import HostCapacity
 from milai_lab.runners.given_host_readout import given_packet_request
 
 
+class QueryOnceContextPolicy(FixedContextMemoryPolicy):
+    """Keep an executed first query's pool instead of replacing it during a short rollout."""
+
+    def __init__(self, reads: int = 4) -> None:
+        super().__init__(reads=reads)
+        self.searched = False
+
+    def choose(self, state: MemoryControlState, actions: list[MemoryAction]) -> str:
+        self.searched |= bool(
+            state.last_result and state.last_result.get("action", {}).get("kind") == "SEARCH"
+        )
+        offered = [a for a in actions if a.kind != "SEARCH"] if self.searched else actions
+        selected = super().choose(state, offered)
+        self.searched |= next(a for a in offered if a.id == selected).kind == "SEARCH"
+        return selected
+
+
 def continuation_policy(name: str) -> Any:
-    return {"rules": RulesMemoryPolicy, "fixed_context": FixedContextMemoryPolicy}[name](reads=4)
+    return {
+        "rules": RulesMemoryPolicy,
+        "fixed_context": FixedContextMemoryPolicy,
+        "query_once_context": QueryOnceContextPolicy,
+    }[name](reads=4)
 
 
 def baseline(event: dict[str, Any], policy_name: str = "rules") -> str:
@@ -136,7 +157,7 @@ def main() -> None:
     parser.add_argument("--continuation-steps", type=int, default=2)
     parser.add_argument(
         "--continuation-policy",
-        choices=("rules", "fixed_context"),
+        choices=("rules", "fixed_context", "query_once_context"),
         default="rules",
         help="Declared baseline nomination and shared continuation policy",
     )

@@ -40,6 +40,11 @@ def main() -> None:
     parser.add_argument("--families", type=int, required=True)
     parser.add_argument("--offset", type=int, default=0)
     parser.add_argument(
+        "--continuation-policy",
+        choices=("fixed_context", "query_once_context"),
+        default="fixed_context",
+    )
+    parser.add_argument(
         "--known-query-only",
         action="store_true",
         help="Execute only the largest offered search from the actual first known item; "
@@ -81,7 +86,7 @@ def main() -> None:
         "new_model_calls": 0,
         "Host_calls": 0,
         "new_supplied_query_events": 0,
-        "continuation_policy": "FixedContextMemoryPolicy(reads=4)",
+        "continuation_policy": args.continuation_policy,
         "continuation_steps": 4,
         "terminal_handoff": "policy",
         "no_sha_validation": True,
@@ -89,7 +94,7 @@ def main() -> None:
         "known_query_only": args.known_query_only,
         "readout_scope": (
             "Actual public initial cold/fixed-receipt-K observation/menu and saved model input. "
-            "Same EvidenceOperations and four-step fixed_context continuation as paper feedback. "
+            "Same EvidenceOperations, declared four-step continuation and policy HANDOFF. "
             "Replay work counters restored separately from actual measured cost, as existing "
             "collected_handoff; no Source data or original labels changed. Core operation packet, "
             "not a rerun of full public-message/admission history. Explicit referenced prior K "
@@ -313,7 +318,13 @@ def main() -> None:
                             MemoryAction(**a) for a in event["actions"] if a["id"] == action_id
                         )
                         result = execute_branch(
-                            operations, event["before"], action, 0, 4, "policy", "fixed_context"
+                            operations,
+                            event["before"],
+                            action,
+                            0,
+                            4,
+                            "policy",
+                            args.continuation_policy,
                         )
                         packet = controlled_reader_packet(
                             operations.reader_evidence(), "collection"
