@@ -117,8 +117,11 @@ def score_mixed_predictions(
     tasks: dict[str, list[tuple[dict[str, Any], dict[str, Any]]]] = defaultdict(list)
     components: dict[str, list[tuple[dict[str, Any], dict[str, Any]]]] = defaultdict(list)
     for row, prediction in zip(rows, predictions, strict=True):
-        tasks[row["metadata"]["task"]].append((row, prediction))
-        components[row["metadata"]["component"]].append((row, prediction))
+        task = row["metadata"]["task"]
+        tasks[task].append((row, prediction))
+        # A fixed single-task development panel need not define training mixtures.
+        # This changes reporting groups only; fitting still requires explicit masses.
+        components[row["metadata"].get("component", task)].append((row, prediction))
 
     def score(pairs: list[tuple[dict[str, Any], dict[str, Any]]]) -> dict[str, Any]:
         group_rows, group_predictions = zip(*pairs, strict=True)

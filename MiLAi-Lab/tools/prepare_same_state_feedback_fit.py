@@ -183,7 +183,8 @@ def main() -> None:
             "training_conditions": {
                 "feedback": "objective pair, legacy-direction, delivery, replay set, "
                 "replay weight0.25; normalized total component mass",
-                "continued-sft": "objective set; supplied mixture.json; loss scale1",
+                "continued-sft": "task mixed_retrieval (all row tasks memory_operation); "
+                "objective set; supplied mixture.json; loss scale1",
             },
             "new_model_calls": 0,
             "no_sha_validation": True,

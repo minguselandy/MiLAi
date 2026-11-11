@@ -103,3 +103,19 @@ def test_mixed_metrics_do_not_merge_applicability_and_operation_success():
     assert scores["by_task"]["instruction_applicability"]["counts"] == {
         "labelled": 1, "correct": 0}
     assert set(scores) == {"by_task", "by_component", "scope"}
+
+
+def test_fixed_operation_dev_without_training_component_keeps_original_metrics():
+    from milai_lab.methods.memory_control_learning import score_operation_predictions
+
+    rows = [example("a", "dev-a", split="dev"),
+            example("b", "dev-b", split="dev", masked=True)]
+    for row in rows:
+        row["metadata"]["task"] = "memory_operation"
+    before = copy.deepcopy(rows)
+    predictions = [{"choice": "read"}, {"choice": "handoff"}]
+    expected = score_operation_predictions(rows, predictions)
+    actual = score_mixed_predictions(rows, predictions)
+    assert actual["by_task"]["memory_operation"] == expected
+    assert actual["by_component"] == {"memory_operation": expected}
+    assert rows == before and expected["counts"] == {"labelled": 1, "accepted": 1, "masked": 1}
