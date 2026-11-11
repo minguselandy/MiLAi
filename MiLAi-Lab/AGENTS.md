@@ -1,4 +1,54 @@
-# LIVE scalable evidence phase23: 2026-11-11
+# LIVE scalable evidence phase24: 2026-11-11
+
+FullgoalACTIVE/incomplete, PROGRESS,noblocker. No subagents/SHA/contentfingerprints/Product/API/
+permission/Canonical changes,service restarts orpush. Preservefirsts/unknowns/roles. KEEPANALYSIS
+SHORT AND TOOL-DRIVEN, not repetitive speculation. R=/data/milai-experiments/20261111-scalable-evidence.
+Latestprogress-v24/manifestv24/docphase24. /procactualargv+owner+artifacts authoritative;
+neverrestart staleJSON/losthandle. Noautoqueue.
+
+LIVE main36k owner769162 child769163 GPU2 latest2535/3390.
+LIVE largeseed2 owner3905047 child3905048 GPU3 latest252/303; thenpreparedrepeatseed2.
+LIVE newpublic129teacher owner69140 child69141 (PIDs wrapped),
+m2-public-train16-query-once-129-teacher-v1 latest16/32closed27masked. SameQwennotindependent,
+K-aware6ef691e0. Bound m2-public-train16-query-once129-bound-v1 (129outcomes32states16families).
+CLOSEDmissing17 owner38560 child38561:15complete2failed82753knownGen0unknown. No firstreruns.
+Verified m2-public-query-once-matched112-v1.json: allold112fullbindingshavenewprotocolfirsts;
+17new-protocolcoverageexplorations remainextra. Not129independentstates; before/menus32unchanged.
+
+PLANALIGNMENT: rereadv2sections7/8/14. Do NOTadd300KNOWN-label prerequisite. Startup300-600 means
+actualcomparisonstates; fitvalidtargets, reporteffectivecounts separately, don'tinflateunknowns.
+First160paper319actualcomparisons isnextpairedS2/SFTbatch (320selected,oneuncompared omitted).
+R/prepare_m2_first160_feedback_sft_data_v1.py READYNOTEXECUTED; requireslast63semanticfile
+m2-fixed-context-families128to160-semantic-teacher-v1. Usesfirst6papersemanticparts,319rawopportunities,
+same319source/lengthmatchedoldreplay, sameS1u101init. Updatescomputedfromactualmaxarmrows*3/batch32,
+notarbitrary15. Effectivefeedback/SFTtargets differandmustreport. GPUcurrentlyoccupied; don'tqueuefit.
+Paperlast153closed/bound m2-fixed-context-train160-families128to160-witness-v2,146complete7failed,
+533200knownGen. Teacher63READY run_m2_fixed_context_families128to160_teacher_v1.py; launchafterpublic
+129teachercloses. Thencompilepapersemantic63 andbuild319paireddata withoutwaitingall859newendpoints.
+
+PRIMARYSUPPORT constraintv2 firststates<=3bindings: m2-public-query-once-primary-support-v1.json
+chosenbefore newteacher judgments,32states96primarybindings. Learner +broadmax16requestbaseline
+(dedup), known-materialquery whenK, originalfrozencoverageREAD; coldremaining slot originalqueryparam.
+All129firstoutcomes retained; extraactions diagnostic, no outcome-basedwinnerselection.
+R/compile_bound_semantic_feedback_v1.py now --primary-support PATH optional:
+raw-feedback=allactual129relations, primary-feedback=declaredsubset, fitexportsuseprimary only.
+Readsactualpreparedcontinuationmetadata. Oldcloseddata regression m2-public-train16-old-protocol-
+primary-check-v1:32inputs unchanged,atmost3pairs/3actions perprimary; oldknown3delivery2answer unchanged.
+Fornew129semantic use --primary-support. Do notsubstituteoldfixed-contextlabels. Newqueryonceprotocol
+mustremainseparate; firstquerypool preservation eac54b85, frozen nominations49591f2f.
+
+ExistingpublicreferenceSFT m2-public-train16-matched-reference-sft-v1:32raw12labels20unknown,
+exactinput/stateIDs matchfeedback. Nativewitness only, notlabelsfromteacher. Mayservepubliccomponent
+control later; no inventedgold. Source/Viewmixed125states32TRAINfamilies (106READ10REFRESH9HANDOFF)
+actualstepsverified/capacity0trunc,max10636, NOTFITTED, initialbiasedreferenceproxy notsemanticoptimality.
+
+NEXT: closepublic129teacher/source-spots/primarycompile, thenpaper63teacher/compile/buildpaired319.
+Afterseed2pair orfreeGPU startdeclaredpairedS2/SFT whileexpand859newpaperendpoints. Last8continuous
+families andactualSource/Viewlearning/postS2aggregation remain. Finishmain3390/seed2,newconfirmation96,
+fullcost/generalization. Don'tredefinegoalcomplete arounddata/compiler success. Selfbilledstagesnotadded
+again; newerprep/analysisCPU pending, author/tests/unmeasuredunknown. Toolsold6LMEdynamicimports remain.
+
+# HISTORICAL scalable evidence phase23: 2026-11-11
 
 FullgoalACTIVE/incomplete, PROGRESS,noblocker. No subagents/SHA/contentfingerprints/Product/API/
 permission/Canonical changes,service restarts orpush. Preservefirsts/unknowns/roles. KEEPANALYSIS
