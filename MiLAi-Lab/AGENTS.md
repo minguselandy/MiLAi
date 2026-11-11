@@ -1,4 +1,4 @@
-# LIVE scalable evidence phase33: 2026-11-12
+# LIVE scalable evidence phase34: 2026-11-12
 
 GoalACTIVE/incomplete; PROGRESS, noblocker. STOP REPETITIVE ANALYSIS/Source_Metadata WORD LOOPS.
 Use short reasoning, tools/actions; no speculative architecture paragraphs. NeverdumpunboundedJSON,
@@ -6,12 +6,12 @@ rawone-linehistories orbudget.compute. NoSHA/contentfingerprints/subagents/Produ
 Canonicalchanges/service restart/push. Actual/procargv+owner+outputs govern; neverrestartstalestatus,
 losthandle/timeout/lockwait. R=/data/milai-experiments/20261111-scalable-evidence. Latestv31/docphase31.
 
-LIVE GPU3/HTTP m6-adapted-continued-replay-families8to12-v1 owner1628857 child1628859 latest14/20.
-GPU2free. Reference8..12 CLOSED20/source-reviewedC1/Q8/W6/F5. Currentreplay8..12 thenreplay12..16/reference12..16.
+LIVE GPU3/HTTP m6-adapted-continued-replay-families12to16-v1 owner1681664 child1681666 latest14/20.
+GPU2free. Both8..12 CLOSED/source-reviewed. Currentreplay12..16 thenreference12..16 (lastbatch).
 Confirmation all4wholepolicies CLOSED96each: fixed0NN,scale414NN,S3own406NN,S3old367NN,0truncated/Host.
 qasper-confirmation96-policy-closeout-v1.json. Reader384firsts NOTSTARTED; no answers/scoresyet.
 No otherHTTPjobs whileapplicationactive. Noautomaticqueue/firstretry. Nativebilling maywait; don'trestart.
-Latestprogress-v33/docphase33; finalS1figure s1-all-closed-learning-curves-v1/curves.png+pdf+source-data,
+Latestprogress-v34/docphase34; finalS1figure s1-all-closed-learning-curves-v1/curves.png+pdf+source-data,
 all3seeds/scales/closedpoints, rendered/viewed. Earlierthrough-u2260figure historical.
 
 NEWCONFIRMATION IS NO LONGER METADATA ONLY:
@@ -66,12 +66,19 @@ SOURCEVIEW APPLICATION ORDER (8finiteGPU3blocks, sameHost/Source/chronology):
  2 m6-adapted-continued-replay-families0to4-v1 CLOSED16complete4fail, reviewed
  3 m6-adapted-continued-replay-families4to8-v1 CLOSED20/source-reviewed
  4 m6-adapted-source-reference-families4to8-v1 CLOSED20/source-reviewed
- 5 source-reference8to12 CLOSED20/source-reviewed,6 continued-replay8to12 LIVE above,
- 7 continued-replay12to16 NOTSTARTED,8 source-reference12to16 NOTSTARTED.
- Third4source reviewin m6-adapted-source-reference-families8to12-v1-review/author-decisions-v1.json:
- C1/Q8/W6/F5. Replaythird4boundprefix, B05Q/F/Q/W/W andB12Q/Q/Q/W/W saved; B21first4C/C/F/F
- inspected butNOTyetstored, B21final/B25 requireactualclosure/read. Binderready
- bind_m6_adapted_continued_replay_families8to12_v1.py, rebindclosedpositions beforefinishingreview.
+ 5 source-reference8to12 CLOSED20/source-reviewed,6 continued-replay8to12 CLOSED20/source-reviewed,
+ 7 continued-replay12to16 LIVE above,8 source-reference12to16 NOTSTARTED.
+ Third4bothclosed/source-reviewed in m6-adapted-{source-reference,continued-replay}-families8to12-v1-review.
+ m6-adapted-third4-comparison-v1.json andm6-adapted-first12-comparison-v1.json:
+ cumulative60positions/12sources sourceC13/Q16/W21/F10 vsreplayC19/Q9/W17/F15, no netgain.
+ Last4replaybinder bind_m6_adapted_continued_replay_families12to16_v1.py prepared/executedpartial.
+ Reviewdir m6-adapted-continued-replay-families12to16-v1-review: B26CC CWW,C01QFQWW saved;
+ C02first3QQF inspectednotstored; stillreadactualC02last2 andC04afterclosure. Reference12to16
+ notstarted; itsbinderalreadycreated, no oldlabeltransfer. No unexecutedgrades.
+ Confirmation resource-only qasper-confirmation96-retrieval-resources-v1.json all4closed: control
+ decisions579/414/406/367, READselected387/222/214/175, packettokens121914/65075/61188/52127.
+ Actualoperationstatuses separate, no Readeranswers/quality/fullcostclaim. Fixedpolicyreads4 means
+ successfulmaterial target, notexactly384READattempts; failedattempts retained.
  Read-onlypaid-scalable-compute-inventory-v1.json:116paidnamedphases315995.089CPU, NOTfulltotal.
  adapted-app-closed-residual-inventory-v1.json:5closedruns267.267821CPU residualNOTPAID; rebuildafter
  all8close andpayonce. Nativeappbudgetdelta vswholechild, no whole+native duplication.
