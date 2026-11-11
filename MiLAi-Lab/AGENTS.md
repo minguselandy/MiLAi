@@ -1,4 +1,4 @@
-# LIVE scalable evidence phase32: 2026-11-12
+# LIVE scalable evidence phase33: 2026-11-12
 
 GoalACTIVE/incomplete; PROGRESS, noblocker. STOP REPETITIVE ANALYSIS/Source_Metadata WORD LOOPS.
 Use short reasoning, tools/actions; no speculative architecture paragraphs. NeverdumpunboundedJSON,
@@ -6,12 +6,12 @@ rawone-linehistories orbudget.compute. NoSHA/contentfingerprints/subagents/Produ
 Canonicalchanges/service restart/push. Actual/procargv+owner+outputs govern; neverrestartstalestatus,
 losthandle/timeout/lockwait. R=/data/milai-experiments/20261111-scalable-evidence. Latestv31/docphase31.
 
-LIVE GPU3/HTTP m6-adapted-source-reference-families8to12-v1 owner1586713 child1586714 latest14/20.
-GPU2free. Currentreference8..12 thencontinued-replay8..12,continued-replay12..16,source-reference12..16.
+LIVE GPU3/HTTP m6-adapted-continued-replay-families8to12-v1 owner1628857 child1628859 latest14/20.
+GPU2free. Reference8..12 CLOSED20/source-reviewedC1/Q8/W6/F5. Currentreplay8..12 thenreplay12..16/reference12..16.
 Confirmation all4wholepolicies CLOSED96each: fixed0NN,scale414NN,S3own406NN,S3old367NN,0truncated/Host.
 qasper-confirmation96-policy-closeout-v1.json. Reader384firsts NOTSTARTED; no answers/scoresyet.
 No otherHTTPjobs whileapplicationactive. Noautomaticqueue/firstretry. Nativebilling maywait; don'trestart.
-Latestprogress-v32/docphase32; finalS1figure s1-all-closed-learning-curves-v1/curves.png+pdf+source-data,
+Latestprogress-v33/docphase33; finalS1figure s1-all-closed-learning-curves-v1/curves.png+pdf+source-data,
 all3seeds/scales/closedpoints, rendered/viewed. Earlierthrough-u2260figure historical.
 
 NEWCONFIRMATION IS NO LONGER METADATA ONLY:
@@ -66,9 +66,18 @@ SOURCEVIEW APPLICATION ORDER (8finiteGPU3blocks, sameHost/Source/chronology):
  2 m6-adapted-continued-replay-families0to4-v1 CLOSED16complete4fail, reviewed
  3 m6-adapted-continued-replay-families4to8-v1 CLOSED20/source-reviewed
  4 m6-adapted-source-reference-families4to8-v1 CLOSED20/source-reviewed
- 5 source-reference8to12 LIVE above,6 continued-replay8to12 NOTSTARTED,
+ 5 source-reference8to12 CLOSED20/source-reviewed,6 continued-replay8to12 LIVE above,
  7 continued-replay12to16 NOTSTARTED,8 source-reference12to16 NOTSTARTED.
- Fullnames/order in m6-adapted-continuous16-plan-v1/manifest.json, launchrun_owned_plan_v1.py NAME
+ Third4source reviewin m6-adapted-source-reference-families8to12-v1-review/author-decisions-v1.json:
+ C1/Q8/W6/F5. Replaythird4boundprefix, B05Q/F/Q/W/W andB12Q/Q/Q/W/W saved; B21first4C/C/F/F
+ inspected butNOTyetstored, B21final/B25 requireactualclosure/read. Binderready
+ bind_m6_adapted_continued_replay_families8to12_v1.py, rebindclosedpositions beforefinishingreview.
+ Read-onlypaid-scalable-compute-inventory-v1.json:116paidnamedphases315995.089CPU, NOTfulltotal.
+ adapted-app-closed-residual-inventory-v1.json:5closedruns267.267821CPU residualNOTPAID; rebuildafter
+ all8close andpayonce. Nativeappbudgetdelta vswholechild, no whole+native duplication.
+ qasper-confirmation96-source-review-panel-v1.json holds8predeclaredreferencecases beforeanswers;
+ no scores/answers yet. No model/prompt/selection changes. SourceGoalnotcompleted.
+Fullnames/order in m6-adapted-continuous16-plan-v1/manifest.json, launchrun_owned_plan_v1.py NAME
  afterpriorownerterminal/procgone. No newarrivalnotice/forcedtools/Sourcebody/rolechanges, nofirstreruns.
  Second4reviews m6-adapted-{source-reference,continued-replay}-families4to8-v1-review closed;
  m6-adapted-second4-comparison-v1.json sourceC3/Q3/W9/F5 vsreplayC5/Q4/W6/F5, HTTP39/26,

@@ -1,0 +1,50 @@
+{
+  "status": "PHASE33_PROGRESS_THIRD_REFERENCE_APPLICATION_REVIEWED_MATCHED_REPLAY_RUNNING_COST_SCOPES_INVENTORIED",
+  "observed_at_utc": "2026-11-11T19:26:40.865548+00:00",
+  "previous": "/data/milai-experiments/20261111-scalable-evidence/progress-v32.json",
+  "active_jobs": [
+    {
+      "name": "m6-adapted-continued-replay-families8to12-v1",
+      "owner_pid": 1628857,
+      "child_pid": 1628859,
+      "process_alive": true,
+      "actual_argv_checked": true,
+      "owner_status": "RUNNING",
+      "run_status": "RUNNING",
+      "closed_positions": 14,
+      "active": {
+        "history": "memops_B21-d-update32-v1-content",
+        "policy": "laya",
+        "interface": "rich",
+        "profile": "laya",
+        "request": "final-arrivals"
+      }
+    }
+  ],
+  "third_reference_review": {
+    "directory": "/data/milai-experiments/20261111-scalable-evidence/m6-adapted-source-reference-families8to12-v1-review",
+    "closed_positions": 20,
+    "families": 4,
+    "answer_grades": {
+      "C": 1,
+      "Q": 8,
+      "W": 6,
+      "F": 5
+    },
+    "scope": "Rootsource-grounded/nonblind/nonindependent. InitialB05agencyclaimqualified, B12typo-versusretired distinction, B21missingconsultingrole, B25correctionversusactualschedulechange. Laterupdateslargelystale; no traininglabels."
+  },
+  "third_replay_review": "Boundclosedprefix, B05/B12reviewfiles written; B21firstfour inspected, finalB21/B25pendingactualclosure. Do notgradeunexecutedpositions.",
+  "confirmation_review_panel": "/data/milai-experiments/20261111-scalable-evidence/qasper-confirmation96-source-review-panel-v1.json",
+  "confirmation_review_scope": "EightpredeclaredSourcepositions preparedwithoriginalreferencesBEFOREReaderanswers. No modelanswers/grades orselectionchange. No confirmationfirstreadouts yet.",
+  "paid_phase_inventory": "/data/milai-experiments/20261111-scalable-evidence/paid-scalable-compute-inventory-v1.json",
+  "closed_app_residual_inventory": "/data/milai-experiments/20261111-scalable-evidence/adapted-app-closed-residual-inventory-v1.json",
+  "cost_scope": "Read-onlypaid116milai_scalable_*phases315995.089CPU identified, notfullstudyCPU. Nativeapplicationdynamic_memory_* andpendingwhole/residualscopes separate. Fiveclosedadaptedappowners residual267.267821CPU identifiedbutNOTPAID, no ledgerwriteswhileHTTPactive. Recomputecompletefinalinventory andrecordonce. No doubleaddingcontainednative andwholeCPU.",
+  "next": [
+    "Finishmatchedthird4 thenrunreplay12to16/source-reference12to16 aspredeclared; completeallSourcejudgments",
+    "Confirmation384firstreadouts/32preplannedrepeats/nativeF1/source8spotpanel afterHTTPfree; no modelorprotocoltuning",
+    "LME32fixednominees/nativeJudgechain, fullcost/generalization/finalreport stillrequired"
+  ],
+  "validation": "No runtimecodechanges. ClosedSourceanswers/materials inspected; paidledgerprefixinventory andclosedowner-native residualdifferences read-only. Existing30tests/Ruff/packagePASS/tools6oldfindings retained.",
+  "no_sha_validation": true,
+  "boundaries": "Firstfailuresunknownsrolespreserved. No subagents/Product/API/permission/Canonicalchanges/service restart/push. GoalACTIVE/incomplete."
+}
