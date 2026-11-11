@@ -76,3 +76,15 @@ def test_teacher_sees_rotated_material_and_answers_without_actions_or_policy_nam
     assert bindings["candidate-0"] is branches[1]
     assert "policies" not in json.dumps(actual) and "action" not in json.dumps(actual)
     assert actual["offline_reference_annotations"] == [{"free_form_answer": "Cedar"}]
+
+
+def test_actual_item_citation_suffix_is_not_treated_as_invented_source_prose():
+    payload, reviews = fixture()
+    payload["candidates"][0]["delivered_evidence"][0]["label"] = "e0"
+    reviews["reviews"][0]["evidence_quotes"] = ["Cedar is the code. [e0]"]
+    parsed = parse_review(json.dumps(reviews), payload)
+    assert parsed["reviews"][0]["answer_status"] == "complete"
+    assert parsed["reviews"][0]["evidence_quotes"] == ["Cedar is the code. [e0]"]
+    reviews["reviews"][0]["evidence_quotes"] = ["Cedar is the code. [e1]"]
+    parsed = parse_review(json.dumps(reviews), payload)
+    assert parsed["reviews"][0]["material_status"] == "unknown"

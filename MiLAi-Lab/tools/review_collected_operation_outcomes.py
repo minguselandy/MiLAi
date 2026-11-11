@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 import time
 from pathlib import Path
 from typing import Any
@@ -19,6 +20,8 @@ from milai_lab.runners.contextual_scoring import _judge
 
 RUBRIC = """You are an offline training-data teacher reviewing actual retrieval outcomes.
 Judge each candidate on the original question, its delivered evidence, and its first answer.
+The input answer_status is only transport status: COMPLETED means an answer was received,
+not that it is correct or complete. Assign semantic answer_status independently.
 Reference annotations are fallible offline context, NOT material delivered to the candidate.
 Accept semantically sufficient alternative passages and equivalent answers. A reference label
 does not establish that the delivered material supports it. If the task/reference is ambiguous,
@@ -87,11 +90,9 @@ def parse_review(content: str, payload: dict[str, Any]) -> dict[str, Any]:
     masked = 0
     for review in reviews:
         candidate = candidates[review["candidate"]]
-        bodies = [s["content"] for item in candidate["delivered_evidence"]
-                  for s in item["evidence"]]
         quotes = review["evidence_quotes"]
         issues = []
-        if any(not any(quote in body for body in bodies) for quote in quotes):
+        if any(not delivered_quote(quote, candidate["delivered_evidence"]) for quote in quotes):
             issues.append("quote_absent_from_this_candidate")
         if review["material_status"] == "sufficient" and not quotes:
             issues.append("sufficiency_without_delivered_quote")
@@ -109,6 +110,24 @@ def parse_review(content: str, payload: dict[str, Any]) -> dict[str, Any]:
             masked += 1
             review["masked_teacher_judgments"] = issues
     return {"format_error": False, "reviews": reviews, "masked_candidates": masked}
+
+
+def delivered_quote(quote: str, evidence: list[dict[str, Any]]) -> bool:
+    """Accept literal body text, including a separate trailing actual item citation.
+
+    The original quote stays unchanged in the receipt. A citation suffix is not
+    source prose; removing it is allowed only if the remaining literal text is
+    actually present in that cited delivered item, not in a reference annotation.
+    """
+    if any(quote in source["content"] for item in evidence for source in item["evidence"]):
+        return True
+    citation = re.search(r"\s*(?:\[(e\d+)\]|\((e\d+)\))\s*$", quote)
+    if citation is None:
+        return False
+    literal = quote[:citation.start()].rstrip()
+    label = citation.group(1) or citation.group(2)
+    return bool(literal) and any(literal in source["content"] for item in evidence
+        if item.get("label") == label for source in item["evidence"])
 
 
 def main() -> None:
