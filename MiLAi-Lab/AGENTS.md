@@ -1,4 +1,60 @@
-# LIVE scalable evidence phase 14: 2026-11-11
+# LIVE scalable evidence phase 15: 2026-11-11
+
+Full v2 goal ACTIVE/incomplete, this turn PROGRESS,no blocker. No subagents,SHA/contentfingerprints,
+Product/API/permission/Canonical changes,service restarts orpush. Preservefirsts/unknowns/Source roles.
+R=/data/milai-experiments/20261111-scalable-evidence. Relevantcode71b4e488; trainingef970f8a.
+progress-v15.json/manifest scalable-evidence-progress-20261111-v15.json. KeepreasoningSHORT and
+perform concrete tools; no extended speculative analysis. Actual/proc+owner+artifacts authoritative,
+neverrestart onstaleJSON/lostexec handle. Readcurrentheader/doc ratherthan hugeoldhistory.
+
+LIVE original36k owner769162 child769163 GPU2 loaded4bab6388,latest1505/3390.
+LIVE seed1large owner2963709 child2963710 GPU3 s1-op3k-seed1-v1,latest0/303 initialsetup/eval.
+Dataop-3k-v1 (3202fit), sameBASEe1delivery/u16, BF16set/shared_actions,batch32,micro8/padded8192,
+3fullpasses9606draws,303updates,51/101/202/303 checkpoints,fullpaper101/202/303. Seed1 newshuffle/
+dropout, ordinarytokenreuse+recovery101 declaredengineering addition; no newlabels/confirmation.
+Repeat control s1-repeat32-seed1-v1-plan.json PREPARED NOT LAUNCHED;254old op-startup32,303updates
+9696draws, sameinit/recipe/checkpoints,fullpassesfalse. Launchafterlargecloses, noautoqueue.
+LIVE nextTRAIN teacher owner2983627 child2983628,
+m2-fixed-context-families64to96-teacher-v1,64states159outcomes32TRAINsources;latest4closed0unresolved
+3masked. Firstoutcomes fromclosed159reader, sameQwenteacher nonindependent. Selfbills.
+
+CLOSED M4actualDEV reader owner2958103 child2958112, m4-dev32-comparison-readouts-v1,
+64states32sources102logicaloutcomes,14newHost88canonicalfirstsreused includingfailures,3uniqueFAILED,
+51445knownGen0unknown.13newnative89reusednative: one previouslyexecuted nativepacket had no prior
+Host response, hence14newcalls legitimate. Do notrerollold88. Evalonly bound m4-dev32-comparison-
+witness-v1. m4-dev32-new-teacher-inputs-v1 has14newoutcomes/10states +reused-outcomes.json88.
+Needannotateonlynew14 afterHTTPownerfree, transferpriorjudgmentsbycanonicalreused_from chains and
+actualfamily/event/action/wire, preservingunknowns/failures. PriorM2first37teacher +first8new7teacher +
+remaining24teacher/Rootspots available; completecache m2-dev32-closed-readout-cache-v1 has123firsts.
+M4sourcepacketunion m2-dev32-executed-packet-union-v1 has175actualnativepackets. BothM4fits/scorers
+closed andselfbilled. No material/Host advantageclaim untilactualnew14reviewandcomparison.
+
+CLOSED M6notice owner2899654 child2899655, m6-s1u1130-view5-arrival-notice-v1:4completed1lengthfail.
+execution-summary-v1.json bindsactualfirstproviderwire todeclarednotice-wirebefore/after, no source
+bodies/gold/relevance/forcedtool sequence. Sameactualbefore/policy, EXPLICITextra-informationcondition,
+notpurescorerbenefit ornatural/newconfirmation. Originalno-noticefirsts unchanged.
+A05lengthfailedbeforecontroller;C01SEARCH+7READ stillstale240/shelved;C23no newretrievalstillmissing
+wifeexpiry;D19READsource_fragment6/4+HANDOFF stillstale2TB/noofflinepriorities;D21SEARCH+7READ gives
+RAM/focusbutmissesShoplifters/friend scope. Author-review-v1.json:1failure3incorrectstale/scope1incomplete.
+C01actualpacket oldassistant220/240 echoes, olduser240,3pastquestions andthirdpartylead, notnew260.
+D19actualpacket oldassistant2TBsummary+unrelatedUSBline,not200GB/SSD/offlineupdates. Allneededupdates
+werepresentinactualbefore. Moretooluse didnotestablishtaskbenefit. Rootnonblind/nonindependent, HostRNG
+unmatched. NoViewoperationsobserved. No silentcase-specificfilters orSource-rolepromotion.
+Oldno-notice: m6-s1u1130-view5-autonomous-v1 summaryv2 correctsattempt-pathtracebug;4nonewretrieval
+(qualifiedA05, staleC01/D19, missingC23),D21actual8decisions thenlengthfailure. SourceViewer6offline
+choices allSEARCH; continuous trajectories beyondsingleactualrestoredmessage/family stillunproved.
+
+Costs: reader/teacher/nativefunctional/scorer/fit phases selfmeter; phase12-compute-v1 alreadyPAID
+large prep+collector stages. Restore155files28112487bytes, laterunion/preps andentry residuals need
+measuredgroup settlement; neveraddwholechild/nested/nativeCPU twice. UnknownRoot/tests/import/
+launch/syntaxCPUunknownnotzero. No newcode/tests thisphase; prior22archive/Hosttests andRuffpassed.
+
+NEXT: M4new14annotation + full32Source comparison, nextTRAIN64teacherclosure, expand1171untouched
+TRAINendpoints/adequateS2. Finishseed1large thenrepeat; seed2decisive comparisonstillrequired.
+Finish36k3390. M6needsactualSource/Viewcontinuous role/time/updatelearning and broadertasks, not
+metadata-notice tuning. Newconfirmation96/fullquality/cost/generalization notdone. Goalremainactive.
+
+# HISTORICAL scalable evidence phase 14: 2026-11-11
 
 Full v2 goal ACTIVE/incomplete, PROGRESS, no blocker. No subagents, SHA/content fingerprints,
 Product/API/permission/Canonical changes, service restarts or push. Keep first failures/unknowns/
