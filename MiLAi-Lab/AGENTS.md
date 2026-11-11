@@ -1,4 +1,70 @@
-# LIVE scalable evidence phase 12: 2026-11-11
+# LIVE scalable evidence phase 13: 2026-11-11
+
+Full v2 goal ACTIVE/incomplete, previous/current turn PROGRESS, no blocker. No subagents, SHA/content
+fingerprints, Product/API/permission/Canonical changes, service restart or push. Preserve first
+outcomes/unknowns/Source roles. R=/data/milai-experiments/20261111-scalable-evidence. Read scoped
+header/doc; do not reread huge audit history. Keep reasoning brief and act from tools, not prolonged
+speculation. Actual/proc argv+owner+artifacts authoritative; never restart on staleJSON/losthandle.
+progress-v13.json/manifest scalable-evidence-progress-20261111-v13.json. Relevantcodeunchangedfromphase12.
+
+LIVE original36k owner769162 child769163 GPU2 loaded4bab6388,latest1280/3390.
+LIVE M4fixed owner2626000 child2626002 GPU3 m4-fixed-states-seed0-v1,latest55/165; sameprepared
+M4data/hyperparameters asown,165updates5238draws. No earlystop/hotchanges.
+LIVE TRAIN next32 reader owner2690908 child2690914,
+m2-fixed-context-train160-families64to96-readouts-v1,latest31/159closed0fail.64states32families,
+no native rerun, actual subsetfromoldremaining112originalpreparation. Afterthisbatch1171TRAIN packets
+remainunstarted. Reader selfbills; nextblocks/teacher must waitactualHTTPownerterminal, noautoqueue.
+
+CLOSED M4own165 owner2383876 child2383878 exit0; m4-own-closed-curve-v1.json. Finalpaper125/278
+macro.46780947;newown-reachedDEV39/76 macro.57878788 vsinitial36/.5621212. Fullpaper1/2passes135/118.
+CPU5260.003593981,wall3780.784732687 alreadyselfbilled. Train2513.838/eval1033.028/save179.140.
+Controlstillrunning: noown-stateadvantageclaim. Data873new+873sharedreplay/arm,235labelledfamilies,
+fixed870unique+3repeats explicit, full-sourceopportunities337, sameweights/init/3passes.
+
+CLOSED remaining24 DEV readouts owner2528022 child2528023,79/79complete0fail,260195knownGen0unknown.
+Bound m2-prefix48-dev-families8to32-comparison-witness-v1 --evaluation-only, nofitexports.
+Teacher m2-prefix48-dev-remaining24-teacher-v1 owner2626001 child2626003 CLOSED48states79outcomes,
+0unresolved16masked,249672knownGen0unknown,CPU4.875858254/wall635.887572401 alreadyselfbilled.
+Root fixed-gridspots1,13,25,37 (4states10outcomes) beforeinspectingteacherlabels, nonblind/nonindependent.
+Doc2Vecframeworkanswersvalid;PV-DBOWextra specificity; styletransfer actualhumanrubric answersdespite
+nativeunanswerable. Broad approaches queries haveconflicting/underspecifiedscope, keptunknown.
+Files m2-prefix48-dev-remaining24-review-v1 and m2-dev-remaining24-author-spot-selection-v1.json.
+
+ALL32 DEV comparison CLOSED: m2-prefix48-dev32-closed-comparison-v1/summary.json with2separateviews.
+Teacher-only supportedcomplete fixed/feedback/SFT33/32/31 of64; source-author-corrected32/34/32.
+Everymethod2firstfailpositions/64. Correctedview=fullfirst8Root +remaining24teacher/4stateRootspots,
+NOTuniformindependentmanualgrading. Unknownsnotfalse, completecounts lowerbounds. Sourcebootstrap
+feedback-ruleteacher -.015625 CI[-.078125,.046875]; feedback-SFT .015625[-.046875,.078125]. Corrected
+both .03125[0,.078125]. IntervalsexcludeHostRNG,annotationandmodelseeduncertainty. No stablebenefit,
+comparisonchangeswithreviewview. Nocheckpointreselections. First8 andall priorfirstresponses kept.
+
+M6smallnewactualinputdiagnostic: m6-recorded-view-opportunities-v1. OldDnew32view_cache contentflows
+only; actuallaterpublicrequest step0 offeringUSE_VIEW. Across32TRAINsourcefamilies, only6states/
+5families found (3additional-arrival,3intermediate-arrivals);missingopportunitiesnotfabricated.
+Actualbefore/actions fromtrace, noSource/Storecopy oroldarchive restoration; goldempty. Generated
+MemOps background, notnatural/newconfirmation. Sequence lengths7521/9152/3378/8392/2884/6869 allfit
+16384with0drop; tokenizer8192defaultwarning retained. All6scorable, source refs/K retainedliterally.
+CLOSED m6-s1-op36k-u1130-view6-scores-v1 CPUFP32/4threads owner2654066 child2654067,6full-menu
+predictions. AllchooseSEARCHquery_fromrequestlimit16; oldcacheactual5REFRESH/1SEARCH. Noactualnew
+Tool/Hostexecution, no inference thatSEARCHwrongorViewwillneverbeused. Evaluatorselfbills. Diagnostic
+s1-u1130-diagnostic-v1.json stillsayscloseoutpendingfromearlierobservation; actualrun nowCOMPLETED.
+Needfunctional/continuouscurrent-modelSource/View evidence, notjustofflineactiontypes.
+Old D captures are archived (docs/MILAI_A100_CLOSED_D_CAPTURE_STORAGE_20261109.md); don'trecollect
+onmissingrawpaths. Oldunarchivedtracefiles provideactualbefore/actions. Bankmapping bank-index.json;
+trace functional_capture.receipt.episode_id givesstage, corresponding*-result.json hasmessage_id.
+Do not restoreentireoldtrees orrunauditsasprerequisite; useexistingrunner/receipt paths forsmallneededwork.
+
+COST: oldphase12receipt alreadypaid twoGPUcollectorwholeCPU725.592111/132.050306 and12preps
+1952.376813448. Newremaining24witness, M6preparation, nextTRAINsubset measuredpreps pendingnextgroup;
+new reader/teacher/scorer/fit phases selfbilled, don'tduplicate. Author/tests/unmeasuredCPU unknownnotzero.
+No codechange thisphase; lastunchanged scored-action test unnecessarilyrerun2passed, no newcoverageclaim.
+
+NEXT: continue TRAIN159firstoutcomes thenteacher andbroaderS2; full337TRAINnative674states1639packets
+prepared butmostnotHostjudged. FinishM4fixed andactualheld-source comparison, original36k3390.
+M6actualcurrent-modelSource/View execution, sufficientS2, decisive seeds,newconfirmation96/fullcost/
+generalization remain. SmallprefixDEV and6offlineViewchoices do NOT completefullgoal.
+
+# HISTORICAL scalable evidence phase 12: 2026-11-11
 
 Full user v2 goal ACTIVE/incomplete; this turn PROGRESS, no blocker. No subagents, SHA/content
 fingerprints, Product/API/permission/Canonical changes, service restarts or push. Keep first failures,
