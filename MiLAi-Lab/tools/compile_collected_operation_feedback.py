@@ -188,8 +188,13 @@ def main() -> None:
             # well as the actual before/menu, while retaining the collection origin.
             sft.append(paired_sft)
     args.output.mkdir(parents=True, exist_ok=False)
+    full_fit = {target: [r for r in compiled if any(
+        p[target] in {"left", "right"} for p in r["feedback"]["comparisons"])]
+        for target in ("answer", "delivery")}
     for name, records in (
         ("raw-feedback", compiled),
+        ("delivery-fit", full_fit["delivery"]),
+        ("answer-fit", full_fit["answer"]),
         ("matched-feedback", matched),
         ("matched-sft", sft),
     ):
@@ -208,6 +213,9 @@ def main() -> None:
             "states": len(compiled),
             "families": len({r["metadata"]["family"] for r in compiled}),
             "matched_states": len(matched),
+            "full_directional_fit_states": {target: len(rows) for target, rows in full_fit.items()},
+            "fit_scope": "Full pair views retain new supervision even where reference-witness SFT "
+            "has no label. Matched views are a separate common-support objective control.",
             "readout_status": dict(
                 Counter(b["readout_status"] for r in review_inputs for b in r["branches"])
             ),
