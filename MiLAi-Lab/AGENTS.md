@@ -1,4 +1,55 @@
-# LIVE scalable evidence phase25: 2026-11-11
+# LIVE scalable evidence phase26: 2026-11-11
+
+GoalACTIVE/incomplete, PROGRESS,noblocker. No subagents/SHA/contentfingerprints/Product/API/permission/
+Canonical changes,service restarts orpush. Preservefirsts/unknowns/roles. KEEPANALYSISSHORT; previous
+turns emitted repetitive speculation, wasting tokens. Tools/actions first. R=/data/milai-experiments/
+20261111-scalable-evidence. Latestprogress-v26/manifestv26/docphase26. Actual/procargv+owner+artifacts
+areauthoritative; neverrestart staleJSON/losthandle. Noautoqueue, no goalcompletionclaim.
+
+LIVE main36k owner769162 child769163 GPU2 latest2635/3390 unchangedoriginal.
+LIVE first319S2feedback owner192644 child192645 GPU3,
+m2-first160-feedback-seed0-v1 latest9/51 (evalcheckpointpossiblyinprogress). Newdata450rows=
+131knownfeedback+319sharedoldreplay,90newlabelledfamilies. SameS1u101base,deliverypair,ties.5,
+new/replaylossmass.8/.2, BF16batch32/micro8/padded8192,51updates1632draws, eval9/17/34/51,
+full17/34/51. No successclaim yet. Nativefitselfbills; no duplicatewholeCPU.
+NEXTGPU afterfeedbackactuallyCOMPLETED/procgone launch:
+ python3 R/run_m2_first160_owned_fit_v1.py m2-first160-continued-sft-seed0-v1 3 m2-first160-feedback-seed0-v1
+OnlyafterSFTcloses startfrozen run_s1_repeat32_seed2_v1.py (GPU3checkalsoSFTclosed; itslegacy
+predecessorassertion checksseed2largeonly). Newexecutionorderexplicit m2-first160-execution-order-v1.json.
+SFTsame51updates/init/319replay,520rows=201newreference+319replay,112labelledfamilies. Commonknown
+feedback/SFT96states. Differenttargetcoverage, cyclicdrawsnotexactpasses/FLOPs. PlansDATA_VERIFIED.
+
+CLOSEDseed2large owner3905047 child3905048 afterteacherreleasedledger.303updates9606draws,
+full101/202/303124/111/105. s1-op3k-seed2-closed-curve-v1.json. SelfbilledCPU10441.637581068,
+nativewall6916.576445264;ownerwall7622.153758852includeswait. Notadditive. Repeatseed2unstarted,
+frozenplan willrunaftershortS2/SFTpair; no data/init/recipechange orcheckpointreselection.
+
+CLOSEDpaper63teacher owner124439 child124440:63states0unresolved40masked381419knownGen0unknown.
+m2-fixed-context-families128to160-semantic-teacher-v1:delivery23known6direction,answer23/6.
+DATAREADY m2-first160-feedback-sft-data-v1/manifest.json:319rawcomparisons160sources, actualcounts
+above, common96, bothshared319oldreplay, allrawmodelinputs preserved; unknowns notinfit. R/prepare_
+m2_first160_feedback_sft_data_v1.py executedsuccessfully viaCUDAwrapper noGPU; no extra300known gate.
+Formalfirstbatchfitsavailablelabels at319actualcomparisons; notcompletedS2evaluation orwholegoal.
+
+LIVE newTRAINfirst16 owner195467 child195468,
+m2-fixed-context-train177-families0to16-readouts-v1 latest23closed1failed (78planned).
+Prepared m2-fixed-context-train177-families0to16-v1:16families32states78packets. Oldfirst32batch
+splitintotwo78blocks toreducewholejobledgerhold. Remaining16READY m2-fixed-context-train177-
+families16to32-v1 /run_m2_fixed_context_train177_families16to32_readouts_v1.py.
+DO NOTlauncholdfamilies0to32whole156reader, first16alreadydispatched. Otherbatches32..64 etc
+unchanged; totaloriginalnew177unstarted781endpoints excludingactive78. No nativeSource/modelreruns.
+Afterreadercloses compilewitness/teacher asneeded; continueboundedblocks andremaining8continuous
+sources. AvoidstartinglongHTTPlease nearfitfinalbilling; ifwaiting, neverrestart livefit.
+
+Nextgoalwork: finishpaired51curves, actualDEVchoices/readouts, actualpostS2stateaggregation;
+expandnew177feedback andSource/Viewlearning. Source/Viewreference125(32TRAINfamilies)actualsteps/
+capacitychecked butnotfitted/semanticoptimality. Publicnewqueryonce129primary2known/0direction each,
+no taskgain, stopuninformativesamecohortvariants. PublicreferenceSFT32raw12labels verifiedsameinputs.
+Remainingrepeatseed2/main3390/newconfirmation96/fullcost/generalization. NoSourceView/newconfirmation
+success inferredfromcompiler/trainingstart. UpdatedpreparationCPU pending; selfbilledstagesnotreadded,
+unmeasuredauthor/tests/analysisunknown. PackagePASS/toolsold6LMEdynamicimports unchanged.
+
+# HISTORICAL scalable evidence phase25: 2026-11-11
 
 GoalACTIVE/incomplete, PROGRESS,noblocker. No subagents/SHA/contentfingerprints/Product/API/permission/
 Canonical changes,service restarts orpush. Preservefirsts/unknowns/roles. KEEPANALYSISSHORT; stop
