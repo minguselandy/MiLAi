@@ -1,4 +1,86 @@
-# LIVE scalable evidence phase17: 2026-11-11
+# LIVE scalable evidence phase18: 2026-11-11
+
+Fullv2goal ACTIVE/incomplete, PROGRESS,no blocker. No subagents,SHA/contentfingerprints,
+Product/API/permission/Canonical changes,service restarts orpush. Preservefirsts/unknowns/Source roles.
+KEEPANALYSISSHORT. Lastturn wasted much time on repeated speculation; perform tools/actions, do not
+rethink entire architecture between calls. R=/data/milai-experiments/20261111-scalable-evidence.
+Currentprogress-v18.json/manifest scalable-evidence-progress-20261111-v18.json/docphase18.
+Code6ef691e0 (teacherexplicitK),40610764 (publicinitialcorefeedback),0cecfd92 (knownqueryextension).
+/proc actualargv+owner+artifacts governliveness, neverrestart staleJSON/losthandle.
+
+LIVE main36k owner769162 child769163 GPU2 latest2155/3390 unchangedloaded4bab6388.
+CLOSED large3kseed1 owner2963709 child2963710,303updates9606draws62441307tokens;
+full101/202/303107/95/107of278,macro.405512/.368085/.406775 vsseed0133/132/126.
+s1-op3k-seed1-closed-curve-v1.json. SelfbilledCPU10411.266908799/wall6931.725204183.
+LIVE repeatseed1 owner3451501 child3451502 GPU3 latest227/303. SameBase/files/seed/recipe,
+9696drawsplanned. Afterclose run_s1_op3k_seed2_v1.py, thenrun_s1_repeat32_seed2_v1.py;
+preparedplans/launchers checkactualpredecessor terminal, noautoqueue, no checkpointreselection.
+LIVE public112teacher owner3786273 child3786274, m2-public-train16-all112-teacher-v1,
+latest5/32closed4masked. SameQwenoffline teacher notindependent; K-aware6ef691e0, coldRUBRIC
+literallyunchanged. Compiledinput m2-public-train16-all112-bound-v1. Mustfinishsemanticcompilation
+from32boundrawstates/reviews WITHOUT QASPER-specificcollection lookup. No newpublicfit yet.
+
+CLOSED newpaperTRAIN96..127: reader159,7fails, teacher64states159reviews0unresolved33masked,
+382945knownGen0unknown. m2-fixed-context-families96to128-semantic-teacher-v1:delivery28known/
+9direction,answer27/7. m2-first128-supervision-summary-v1:128sources256comparisons,108deliveryknown,
+103answerknown,36/32directional. Heterogeneousteacher-only/Rootspottedparts explicitlyretained.
+Nextpaperlast32 READYNOTLAUNCHED m2-fixed-context-train160-families128to160-v2:64selected,
+63comparisonstates,153packets; run_m2_fixed_context_train160_families128to160_readouts_v2.py.
+Originalv1preparationassertionfailed(emptydestination +failure.json retained). Missing exportedcase
+qasper-paper-1801.07804/question-0/step-2 hasplain/select-noneHANDOFF; no fabricatedpair.
+CORRECTION: original337paperfamilies674selected/673actualcomparisonstates/1639packets, not674
+comparisons. New177354comparisons859packetsremainunstarted, pluslast32153=1012originalendpoints.
+
+CLOSED publicnative16TRAIN owner3203682 child3203683:32cold/known requests124NN, noHost,
+oldbanks/variantcontext/fixedoriginallexicalfirstreceiptK. WholeCPU8459.07786/wall2240.266873 PAID
+phase18-closed-compute-v1. Native toolnotselfbilling; nestedrun.compute NOTaddedagain.
+Publicsame-statecoreprep: m2-public-train-first2-initial-v4(4states12packets),
+m2-public-train-families2to8-initial-v1(12/36),m2-public-train-families8to16-initial-v1(16/48).
+Merged m2-public-train16-initial-v1=32actualstates16families96packets; statesmetadatareindexed,
+state/questions/fullbindingsunchanged. UsesexistingEvidenceOperations, fixed_context4/policyHoff,
+actualoriginalinitialmodelbefore/fullmenu; restoresonlysource_feed_rows/timingworkcounters.
+Not fullpublicmessage/admission replay, no resourceallowance enlargement. No newSourcecopies,
+no NN/Host inprep. PriorfullAPIattemptfailedbecauseexcludedgivenqueryfeedrowschanged; twoquery
+Sourceevents retained(no domainbodychange). v2/v3 serializationtypefailures retained. v4fixeduses
+memory.functional_state.canonical (STRING), notharnesscanonical(BYTES). NoSourcequeriesaddedv4.
+CLOSED public96reader m2-public-train16-initial-readouts-v1:96firsts7fails383393knownGen0unknown.
+CLOSED extra16reader m2-public-train16-known-query-readouts-v1 owner3734224 child3734225:
+16firsts0fails54075knownGen0unknown. Original96untouched. Extra16onlyactualknown_material index0
+largestofferedlimit16 queries, allstates structuralnomination, no outcome/goldselection. Samebefore/
+menu/fixedK; extendsoriginal16knownstates, ZEROnewindependentstates. Actualquery isknownbody,
+not synthesizedhiddenanswer. m2-public-train16-known-query-extra-v1/extension-bindings.json.
+All112/32statesbound m2-public-train16-all112-bound-v1 (rawfeedbackallunknown untilreviews).
+R/bind_public_feedback_results_v1.py validatesactualfirstfamily/event/fullaction/wire, combines
+extras; readout-paths.json schema isPOLICY -> EVENT -> PATH, notevent ->action. Initialbindererror
+beforeoutputs retainedintranscript, no rerunHost. Usespure compile_case, no fitexports.
+Referencecontext m2-public-train16-reference-context-v1.json fromoriginalnative_source_row,16
+entries7answerable9missing. Rawquestion equalsactualretrievalquery; publictask hasexistinggeneric
+instructionprefix, preserveboth. Firstscaffoldcomparisonassertionrecordedinreferenceartifact.
+Reference neverenteredruntime. DirectQASPERcompiler expectscollection.controls/states anddoes
+NOTworkforpublicrollout; useboundraw32 +reviews tocompileknown/directional withoutfabricatingSFTgold.
+
+CLOSED View30 owner3317944 child3317945:26Hostcompleted4failed, allbefore/menuchecksTrue.
+m6-view6-source-review-v1/{source-author-records.json,summary.json}:C3/Q6/W17/F4, common18
+C2/Q3/W10/F3, immediate12C1/Q3/W7/F1. AllC onlyunchangedA05withcorrectcommonpriorcontext.
+299846knownGen0unknown,13materialbudgetrejections,4refresh-onlyemptypackets. C01refreshnot
+admitted; continuation returnsrepeatedpublicquestions. C23extractiveView quotesoldassistantfalse
+nofamilyexpiry +question/USB, notwifeexpiry. D19/D21stale ormissingrequiredscopes. No repairgain.
+Do notinferqualityfromREFRESH name orcreatedview; do notautomaticallyconvertC/Q/W/Ftofitlabels.
+AllCase0originaluserwitnesses inactualHostcontext; othersneededcurrentwitnessesmissing (see
+structuredrecords). Rootnonblind/nonindependent. Conditionalotherbatchreceipts fixed, notautonomous.
+Wholechild90.888835CPU/906.179915wall PAIDphase18; actualmessageinterval nativeCPUdelta0.
+Remaining12continuousfamiliesstillpending; oldfirst4resultsphase17 unchanged.
+
+Validation11teacher+Kreceipt testsPASS, actual112nativebranches bound, RuffPASS/packagePASS;
+toolsboundary same6legacyLMEdynamicimports, no newfinding. Newprep/failedprototype/derivedanalysis
+measuredCPU pending, authors/tests/unmeasuredunknownnotzero. phase17/18closedcomputes alreadyPAID.
+
+NEXT: closepublicteacher32, source-spot/compilefullknown/directional32, thenpaperlast153/new859
+andremaining12continuous. NeedactualSource/Viewrole/timelearning (notonlyuntrainedpolicy tests),
+adequateS2/SFT, postS2aggregation, seed1/seed2/main36k, newconfirmation96/fullcost/generalization.
+Do notkeepinventingmetadata-onlyvariants orclaimfullgoalcomplete. KeepanalysisSHORT.
+
+# HISTORICAL scalable evidence phase17: 2026-11-11
 
 Fullv2goal ACTIVE/incomplete, PROGRESS,no blocker. No subagents,SHA/contentfingerprints,
 Product/API/permission/Canonical changes,service restarts orpush. Preservefirsts/unknowns/Source roles.
