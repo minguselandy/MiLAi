@@ -5,7 +5,7 @@ import json
 
 import pytest
 
-from review_collected_operation_outcomes import parse_review, teacher_input
+from review_collected_operation_outcomes import RUBRIC, parse_review, teacher_input, teacher_rubric
 
 
 def fixture():
@@ -88,3 +88,34 @@ def test_actual_item_citation_suffix_is_not_treated_as_invented_source_prose():
     reviews["reviews"][0]["evidence_quotes"] = ["Cedar is the code. [e1]"]
     parsed = parse_review(json.dumps(reviews), payload)
     assert parsed["reviews"][0]["material_status"] == "unknown"
+
+
+def test_explicit_prior_item_can_support_an_empty_new_packet_but_not_another_candidate():
+    payload, reviews = fixture()
+    original = payload["candidates"][0].pop("delivered_evidence")
+    payload["candidates"][0].update(known_evidence=original, delivered_evidence=[])
+    reviews["reviews"][1].update(material_status="sufficient",
+                                 evidence_quotes=["Cedar is the code."])
+    parsed = parse_review(json.dumps(reviews), payload)
+    assert parsed["reviews"][0]["answer_status"] == "complete"
+    assert parsed["reviews"][0]["material_status"] == "sufficient"
+    assert parsed["reviews"][1]["material_status"] == "unknown"
+    assert parsed["reviews"][1]["answer_status"] == "unknown"
+
+
+def test_only_explicit_known_items_change_teacher_context_and_cold_rubric_is_unchanged():
+    known = [{"label": "e0", "evidence": [{"role": "user", "content": "Cedar is the code."}]}]
+    wire = {"memory": {"evidence": []}, "known_evidence": known}
+    branch = {"readout_request": {"messages": [{}, {"content": json.dumps(wire)}]},
+              "readout_status": "COMPLETED", "answer": "Cedar"}
+    case = {"question": "What code?", "branches": [branch],
+            "native_control": {"annotations": [{"answer": {"free_form_answer": "Cedar"}}]}}
+    payload, _ = teacher_input(case, 0)
+    assert payload["candidates"][0]["known_evidence"] == known
+    assert payload["candidates"][0]["delivered_evidence"] == []
+    assert teacher_rubric(payload) != RUBRIC
+    wire["known_evidence"] = []
+    branch["readout_request"]["messages"][1]["content"] = json.dumps(wire)
+    cold, _ = teacher_input(case, 0)
+    assert "known_evidence" not in cold["candidates"][0]
+    assert teacher_rubric(cold) == RUBRIC
