@@ -191,10 +191,15 @@ def main() -> None:
     full_fit = {target: [r for r in compiled if any(
         p[target] in {"left", "right"} for p in r["feedback"]["comparisons"])]
         for target in ("answer", "delivery")}
+    known_fit = {target: [r for r in compiled if any(
+        p[target] in {"left", "right", "tie"} for p in r["feedback"]["comparisons"])]
+        for target in ("answer", "delivery")}
     for name, records in (
         ("raw-feedback", compiled),
         ("delivery-fit", full_fit["delivery"]),
         ("answer-fit", full_fit["answer"]),
+        ("delivery-known-fit", known_fit["delivery"]),
+        ("answer-known-fit", known_fit["answer"]),
         ("matched-feedback", matched),
         ("matched-sft", sft),
     ):
@@ -214,6 +219,10 @@ def main() -> None:
             "families": len({r["metadata"]["family"] for r in compiled}),
             "matched_states": len(matched),
             "full_directional_fit_states": {target: len(rows) for target, rows in full_fit.items()},
+            "full_known_fit_states": {target: len(rows) for target, rows in known_fit.items()},
+            "known_fit_scope": "Include already established positive-quality ties at target0.5; "
+                               "unknown and failed comparisons are not converted into ties. "
+                               "Directional views and strict shared-SFT support remain separate.",
             "fit_scope": "Full pair views retain new supervision even where reference-witness SFT "
             "has no label. Matched views are a separate common-support objective control.",
             "readout_status": dict(
