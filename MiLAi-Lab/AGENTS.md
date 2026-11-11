@@ -1,4 +1,4 @@
-# LIVE scalable evidence phase36: 2026-11-12
+# LIVE scalable evidence phase37: 2026-11-12
 
 GoalACTIVE/incomplete; PROGRESS, noblocker. STOP REPETITIVE ANALYSIS/Source_Metadata WORD LOOPS.
 Use short reasoning, tools/actions; no speculative architecture paragraphs. NeverdumpunboundedJSON,
@@ -6,15 +6,15 @@ rawone-linehistories orbudget.compute. NoSHA/contentfingerprints/subagents/Produ
 Canonicalchanges/service restart/push. Actual/procargv+owner+outputs govern; neverrestartstalestatus,
 losthandle/timeout/lockwait. R=/data/milai-experiments/20261111-scalable-evidence. Latestv31/docphase31.
 
-LIVE HTTP qasper-confirm96-scale36k-readouts-v1 owner1842885 child1842886 latest15/96,0fail.
+LIVE HTTP qasper-confirm96-scale36k-readouts-v1 owner1842885 child1842886 latest64/96,3fail.
 CLOSED fixed-contextfirst96 owner1765940/1765942:96complete0fail; no qualityscores/answerinspectionyet.
 GPU2/3free. Do NOTstartotherHTTP/ledgerchanges whileReaderholdslease. NextatHTTPgap canrunhead-only
 DEV2newcalls thennextconfirmationS3-own96; all4firstconditionsmustclosebeforeconfirmation scoring/repeats.
 No automaticqueue/retry. Actual/proc+owner+artifacts govern, neverrestartstaleJSON/losthandle.
 CLOSED head-only owner1740131/1740175:51updates1632draws,full17/34/51all133/278;train45/62pairs
 vsfullfeedback59/62. head-only-closed-curve-v1.json. Actualencoderprobe0changed/headprobe1769469.
-Existingfreeze_encoder ALSOencoder.eval/dropoutoff; headhastransformerparams. EarliergenericMLP
-statementcorrectedinhead-only-single-change-plan-check-v1.json. SingleCLIprocedure, notpureparameter/
+Existingfreeze_encoder ALSOencoder.eval/dropoutoff; actualmodelpathhastransformerheadANDMLPscorer.
+EarlierMLP-only/alternative-branchwordingincomplete, corrected inhead-only-single-change-plan-check-v1.json. SingleCLIprocedure, notpureparameter/
 dropout-matchedcontrol. No livecode/datachange orconfirmationnomineechanges.
 CLOSED head-onlyDEVscore64 via run_head_only_dev64_score_v1.py; master
 m2-first160-head-only-dev64-v1-owner.json, outputm2-first160-head-only-dev64-scores-v1.
@@ -22,10 +22,16 @@ head-only-dev32-choices-v1 COMPLETED109nativepackets,0newnative. Reuseinventory1
 2newHostfirstsneeded. ReaderREADY run_head_only_dev32_readouts_v1.py /head-only-dev32-comparison-readouts-v1.
 Currentunion head-only-existing-dev-packet-union-v1=198, cache head-only-existing-dev-first-cache-v1=149.
 Native/readoutjudgment transfer shouldincludeS3closedteacher/hybridreviews first, thenolderones; no reroll.
+head-only-dev64-choice-profile-v1.json:head-only64/64FULLchoices sameasoriginalS1u101learner;
+20differentfromfullfeedback,16fromSFT,21fromfixed. Thisispreservationofinitialchoices, notnew
+learneddecisiongain. No action-identityinferencefromaggregate133counts. Need2actualnewfirsts asplanned.
+LMEscoreplans READY lme-small32-native-scoring-plans-v1.json (no predictionsyet); actualprediction
+continuationroot mayneedupdatebeforelaunch. Requireall32attempted, retainNOT_RUNtail untilactuallyrun,
+neverregenerateReader. NativeJudge/exactrules preservefailedscoring/nulls, no independentSourceCI.
 GoalACTIVE/incomplete. v2section16requiresclear experience/method->action->delivery/stop->task/fullcost
 benefit->generalizationscope chain, notchecklistclosure. Confirmation andexternalchainpending; overall
 improvementnotyetproved. Currenttargetedcontrol usesONLYoldTRAIN/development, no confirmationtuning.
-Latestprogress-v36/docphase36. All160adaptedapplicationsclosed/source-reviewed, no liveapplication.
+Latestprogress-v37/docphase37. All160adaptedapplicationsclosed/source-reviewed, no liveapplication.
 
 Fulladapted m6-adapted-full16-comparison-v1.json sourceC17/Q21/W28/F14 vsreplayC22/Q16/W23/F19.
 Source-complete difference-.0625 CI[-.25,.125] conditionalonRootjudgments; both0C on31relevantupdates.

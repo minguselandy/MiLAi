@@ -1,0 +1,112 @@
+{
+  "status": "PHASE37_PROGRESS_HEAD_ONLY_FULLCHOICE_PRESERVATION_IDENTIFIED_SCALE_CONFIRMATION_READER_LIVE",
+  "observed_at_utc": "2026-11-11T20:32:08.304508+00:00",
+  "previous": "/data/milai-experiments/20261111-scalable-evidence/progress-v36.json",
+  "no_sha_validation": true,
+  "active_jobs": [
+    {
+      "name": "qasper-confirm96-scale36k-readouts-v1",
+      "owner_pid": 1842885,
+      "child_pid": 1842886,
+      "owner_status": "RUNNING",
+      "run_status": "RUNNING",
+      "actual_argv_checked": true,
+      "process_alive": true,
+      "closed_readouts": 64,
+      "failed_readouts": 3
+    }
+  ],
+  "head_only_full_choice_profile": {
+    "status": "ACTUAL_FIXED_MENU_CHOICES_CLOSED_TASK_READOUTS_PENDING",
+    "states": 64,
+    "source_families": 32,
+    "action_kinds": {
+      "fixed_context": {
+        "SEARCH": 32,
+        "READ": 31,
+        "HANDOFF": 1
+      },
+      "head_only": {
+        "SEARCH": 32,
+        "HANDOFF": 7,
+        "READ": 25
+      },
+      "full_feedback": {
+        "SEARCH": 31,
+        "READ": 32,
+        "HANDOFF": 1
+      },
+      "continued_sft": {
+        "SEARCH": 32,
+        "HANDOFF": 5,
+        "READ": 27
+      }
+    },
+    "paired_choices": {
+      "head_only-full_feedback": {
+        "equal_full_choices": 44,
+        "different": 20
+      },
+      "head_only-continued_sft": {
+        "equal_full_choices": 48,
+        "different": 16
+      },
+      "head_only-fixed_context": {
+        "equal_full_choices": 43,
+        "different": 21
+      },
+      "head_only-original_S1_u101": {
+        "equal_full_choices": 64,
+        "different": 0
+      }
+    },
+    "scope": "FullbindingIDs withinidenticalactualbefore/menu, actionkindaggregationnotquality. Stableacceptancecounts donot implysamefullchoices. No newNN/Host/confirmationuse.",
+    "no_sha_validation": true
+  },
+  "head_architecture_correction": {
+    "status": "SINGLE_OPTIMIZATION_CHANGE_PLAN_CHECKED",
+    "changed_nonsemantic_argv_positions": [
+      6,
+      10
+    ],
+    "added_flag": "--freeze-encoder",
+    "same_data_init_seed_update_draw_schedule_loss_replay": true,
+    "physicalGPU": "fullfeedback3 vshead-only2, sameA100class; differentbackwardcompute",
+    "confirmation_changed": false,
+    "no_sha_validation": true,
+    "existing_flag_semantics": "optimizer_groups disablesencoderparametergradients/excludesoptimizerstate; training_mode also setsfrozenencoder.eval (dropoutoff). HeadMLP remainsintrainmode. Thus singleCLIupdatescopeprocedure, notpureparameter-only/dropout-matchedcontrast.",
+    "local_model_evidence": "ActualDecisionModel path contains transformer self.head followedbyMLP self.scorer; nonencoderoptimizerincludesboth. Actualparameterprobe head.layers.0.self_attn.in_proj_weight changed1769469, encoderprobe0. EarlierMLP-only description wasincomplete, notanalternativecheckpointbranch. No scalar-only explanation forunchangedargmax.",
+    "code_or_live_fit_changed": false,
+    "actual_parameter_probes": {
+      "encoder": {
+        "parameter": "encoder.embeddings.tok_embeddings.weight",
+        "changed_elements": 0
+      },
+      "head": {
+        "parameter": "head.layers.0.self_attn.in_proj_weight",
+        "changed_elements": 1769469
+      }
+    },
+    "actual_old_DEV_choice_evidence": "/data/milai-experiments/20261111-scalable-evidence/head-only-dev64-choice-profile-v1.json",
+    "choice_result": "All64head-onlychoices equaltheoriginalS1u101actuallearnerchoices. Differencesfromfullfeedback20/64 andcontinuedSFT16/64 arepreservationofinitialchoices here, notnewdecisiongain."
+  },
+  "head_only_interpretation": "Head-only64/64actualfullchoices equaloriginalS1u101; differsfromfullfeedback20/64 andcontinuedSFT16/64. Preservesinitialpolicy onthispanel, notnewdecisioncapability. ActualtransformerheadplusMLPscorer bothinmodelpath; earlierMLP-only/alternative-branchdescription corrected. Frozenencoderalsoeval/dropoutoff. No fit/code/data/confirmationchange.",
+  "LME_scoring_plans": {
+    "plans": [
+      "lme-small32-s1u1130-scores-v1",
+      "lme-small32-s2feedbacku51-scores-v1"
+    ],
+    "launcher": "run_owned_plan_v1.py NAME afteractualpredictionclosure",
+    "scope": "Readyonly; no predictions/Judgecalls yet. Adaptactualcontinuationroot asneeded, no firstretry ornewmodelselection.",
+    "no_sha_validation": true
+  },
+  "LME_scope": "Predictionsnotyetstarted. Scoringmustwaitall32originalpositionsactuallyattempted; explicitcontinuationsretainfirsts/unattemptedtails andactualancestry. No Readerregeneration orsilentmissing-cohortcompletion.",
+  "next": [
+    "WhenScale96Readerownerterminal/procgone runhead-onlyDEV2newfirsts; transfer107priorjudgments andannotateonlynewcases",
+    "ContinueconfirmationS3own96/S3old96 then32predeclaredrepeats andclosedmatrixnativeF1/Source8spotreview",
+    "RunLME32twofixednominees/nativeJudge, finishwholecost andability-improvement/generalizationscope evaluation"
+  ],
+  "validation": "Readactualsame-menucompletebindingchoices, notinferredfromaggregateaccuracy. InstalledSDKDecisionModel constructor/forward andactualparameterprobes inspected. PreparednativeLMEscoringplans only, no newmodel/HTTPcalls fromthatpreparation. Existingtest/boundarystatus unchanged.",
+  "cost_scope": "No newledgerwriteswhileReaderactive; previousphase36settlements remainonce-only. Newpreparation/analysisCPUunmeasuredunknown; nativeReadersselfbill.",
+  "boundaries": "NoSHA/contentfingerprints/subagents/Product/API/permission/Canonicalchanges/service restart/push. Firstfailuresunknownsrolespreserved, fullgoalACTIVE/incomplete."
+}
