@@ -1,37 +1,57 @@
-# LIVE scalable evidence phase37: 2026-11-12
+# LIVE scalable evidence phase38: 2026-11-12
 
-GoalACTIVE/incomplete; PROGRESS, noblocker. STOP REPETITIVE ANALYSIS/Source_Metadata WORD LOOPS.
-Use short reasoning, tools/actions; no speculative architecture paragraphs. NeverdumpunboundedJSON,
-rawone-linehistories orbudget.compute. NoSHA/contentfingerprints/subagents/Product/API/permission/
-Canonicalchanges/service restart/push. Actual/procargv+owner+outputs govern; neverrestartstalestatus,
-losthandle/timeout/lockwait. R=/data/milai-experiments/20261111-scalable-evidence. Latestv31/docphase31.
+Goal ACTIVE/incomplete; progress, no blocker. KEEP ANALYSIS SHORT, tools/actions first.
+Never emit Source_Metadata word loops or unbounded JSON/history/budget.compute output.
+No SHA/content fingerprints/subagents/Product/API/permission/Canonical changes/service restart/push.
+Actual /proc argv + owner + artifacts govern; never restart stale run.json/lost handle/lock wait.
+R=/data/milai-experiments/20261111-scalable-evidence. Latest progress-v38/doc phase38.
 
-LIVE HTTP qasper-confirm96-scale36k-readouts-v1 owner1842885 child1842886 latest64/96,3fail.
-CLOSED fixed-contextfirst96 owner1765940/1765942:96complete0fail; no qualityscores/answerinspectionyet.
-GPU2/3free. Do NOTstartotherHTTP/ledgerchanges whileReaderholdslease. NextatHTTPgap canrunhead-only
-DEV2newcalls thennextconfirmationS3-own96; all4firstconditionsmustclosebeforeconfirmation scoring/repeats.
-No automaticqueue/retry. Actual/proc+owner+artifacts govern, neverrestartstaleJSON/losthandle.
-CLOSED head-only owner1740131/1740175:51updates1632draws,full17/34/51all133/278;train45/62pairs
-vsfullfeedback59/62. head-only-closed-curve-v1.json. Actualencoderprobe0changed/headprobe1769469.
-Existingfreeze_encoder ALSOencoder.eval/dropoutoff; actualmodelpathhastransformerheadANDMLPscorer.
-EarlierMLP-only/alternative-branchwordingincomplete, corrected inhead-only-single-change-plan-check-v1.json. SingleCLIprocedure, notpureparameter/
-dropout-matchedcontrol. No livecode/datachange orconfirmationnomineechanges.
-CLOSED head-onlyDEVscore64 via run_head_only_dev64_score_v1.py; master
-m2-first160-head-only-dev64-v1-owner.json, outputm2-first160-head-only-dev64-scores-v1.
-head-only-dev32-choices-v1 COMPLETED109nativepackets,0newnative. Reuseinventory107physicalfirstmatches,
-2newHostfirstsneeded. ReaderREADY run_head_only_dev32_readouts_v1.py /head-only-dev32-comparison-readouts-v1.
-Currentunion head-only-existing-dev-packet-union-v1=198, cache head-only-existing-dev-first-cache-v1=149.
-Native/readoutjudgment transfer shouldincludeS3closedteacher/hybridreviews first, thenolderones; no reroll.
-head-only-dev64-choice-profile-v1.json:head-only64/64FULLchoices sameasoriginalS1u101learner;
-20differentfromfullfeedback,16fromSFT,21fromfixed. Thisispreservationofinitialchoices, notnew
-learneddecisiongain. No action-identityinferencefromaggregate133counts. Need2actualnewfirsts asplanned.
-LMEscoreplans READY lme-small32-native-scoring-plans-v1.json (no predictionsyet); actualprediction
-continuationroot mayneedupdatebeforelaunch. Requireall32attempted, retainNOT_RUNtail untilactuallyrun,
-neverregenerateReader. NativeJudge/exactrules preservefailedscoring/nulls, no independentSourceCI.
-GoalACTIVE/incomplete. v2section16requiresclear experience/method->action->delivery/stop->task/fullcost
-benefit->generalizationscope chain, notchecklistclosure. Confirmation andexternalchainpending; overall
-improvementnotyetproved. Currenttargetedcontrol usesONLYoldTRAIN/development, no confirmationtuning.
-Latestprogress-v37/docphase37. All160adaptedapplicationsclosed/source-reviewed, no liveapplication.
+LIVE HTTP qasper-confirm96-s3-own-readouts-v1 owner1948359 child1948360 latest5/96,0fail.
+CLOSED scale first96 owner1842885/1842886:91complete5fail. Baseline96complete0fail.
+S3-old96 NOTSTARTED. No confirmationquality inspection/scoring untilall4firstsclosed.
+Whole Reader HTTP/ledger lease exclusive; no competing HTTP/new billing. Native fit may wait
+at final selfbilling; NEVER kill/restart it. Let pending billing finish before next Reader launch.
+LIVE GPU3 m2-first160-adequate-cost-seed0-v1 owner1941204 child1941205 latest9/51.
+Same450rows/131feedback+319replay/S1u101/seed0/fullparameters/LR/schedule/51updates1632draws as
+closed m2-first160-feedback-seed0-v1 quality-tie control. Only94TRAINdeliveryties become observed
+cost directions, afterboth sufficientmaterial/complete supportedanswers and actual4costvector
+componentwise dominance. 69states53families,18HANDOFF>READ. Old62directions/63unknown/48remaining
+ties unchanged; state/questions/metadata/gold/order/replay exactequal. Original data untouched.
+No runtimecodechange oronline gate. Derived dataset m2-first160-adequate-observed-cost-data-v1.
+prepare_m2_adequate_cost_feedback_v1.py verifiedactual bindings/reviews/wires/costs;3.895060918CPU
+pendingstagebill. One stochasticfirst/fixedcontext4/coarsequality; NOTexpected/fullcostlabel.
+Finalu51 fixedbeforefit. Original fullfeedback control reused, no redundant fit. Confirmation
+nominees unchanged, no confirmationoutcome used. Native fit selfbills; wholechild overlaps.
+READY cost DEV64: m2-first160-adequate-cost-dev64-plan-v1.json,
+run_adequate_cost_dev64_score_v1.py onlyafterfitownerclosed. Thenprepare actualchoices/packets,
+reusecanonicalphysicalfirsts from headunion plus new head2, transfer existing judgments. Only
+new bindings need newfirsts. Do not infer taskbenefit from pairfit/READ count. No automatic queue.
+
+CLOSED head-only DEV full chain: head-only-dev32-closed-comparison-v1/summary.json.
+109actualpackets,107firsts reused +2newcompleted;3oldfailures preserved. Teacher2 +107transferred
+judgments,0conflicts. Rootbothnewspots in head-only-dev32-transferred-reviews-v1/author-new-spots.json;
+hyperparameter nativeunanswerable: fixedsettings do not establish automaticoptimization capability,
+material/answerunknown, supportedhonestlimitation. 1500training vs100test sentences complete.
+Teacher fixed/head/full/SFT=33/32/32/33; Root hybrid32/32/32/32. Head-full0 CI[-.0625,.0625],
+32Sourceclusters conditionalonjudgments, no RNG/teacher/seed uncertainty correction.
+Head64/64fullchoices equal originalS1u101. Preservedinitialchoices, no newdecision/taskgain.
+Actualmodel transformerheadANDMLPscorer; existingfreezealsoencoder.eval/dropoutoff.
+No newDEVtraininglabels. Nativehead fit/scorer/Reader/teacher selfbilled; compiler/prep costs pending.
+
+Confirmation scoring/repeats remainREADY, notrun: score_confirmation96_firsts_v1.py,
+score_confirmation96_repeats_v1.py (new), bind_confirmation96_review_panel_v1.py (new).
+All4firsts required before scoring/repeatlaunch. Repeats original8positions x4methods=32,
+no reuse-readouts, no best-of-two/firstreplacement. Newbinder prepares actual8Source/32conditions,
+Rootnonblind/nonindependent/notoriginalpaperauthor, no training/modelselection. Syntaxchecked only.
+LME32 predictions/nativeJudge READYNOTSTARTED; two fixed nominees36ku1130/S2u51, existing2banks,
+not32independentSources/full451. Keepfirstfailures andexplicitunattemptedcontinuations.
+
+v2section16 requires experience/method -> fullaction -> delivery/appropriate stop -> task/fullcost
+benefit -> generalizationscope. Negative checklistclosure is not goal completion. Current overall
+improvement unproved. Need cost DEV/confirmation/repeats/Source8review/LME/wholecost synthesis.
+No ledgerwrite while Readeractive; phase36 settlements alreadyPAID once; no duplicate residuals.
+/data had16GB available before this fit; do not deletefirsts/selectedmodels. Reconstructible caches
+only if actualdiskneed. ExistingallocationsGPU2/3~3513MiB not ours; neverkillthem.
 
 Fulladapted m6-adapted-full16-comparison-v1.json sourceC17/Q21/W28/F14 vsreplayC22/Q16/W23/F19.
 Source-complete difference-.0625 CI[-.25,.125] conditionalonRootjudgments; both0C on31relevantupdates.
@@ -51,7 +71,7 @@ NEWCONFIRMATION IS NO LONGER METADATA ONLY:
  qasper-new-confirmation96-source-v1 exported96questions/7847literalSourceunits, splitconfirmation,
  controls.jsonl annotationsofflineonly. Do NOTfit/retune usingthese orfutureoutputs.
  Firstbaseinitializer qasper-new-confirmation96-base-banks-v1 FAILED_FIRST_RETAINED beforeSourceimport:
- oldcollectorCLI rejectsconfirmationrole. WholeCPU4.435663pending, no bodybankscreated/noNN/Host.
+ oldcollectorCLI rejectsconfirmationrole. WholeCPU4.435663PAIDphase36, no bodybankscreated/noNN/Host.
  NewSource-only initialize_confirmation96_banks_v2.py callscollect_paper withEMPTYwitnessschema,
  neveropenscontrols; qasper-new-confirmation96-base-banks-v2 CLOSED96initialbanks,0NN/Host. Maintains
  confirmationrole, no relabeltoDEV/TRAIN. SingleforcedemptyHANDOFF onlyinitialization, NOTbaseline.
@@ -74,7 +94,7 @@ CLOSEDconfirmation qasper-confirm96-fixed-context-policy-v1:96,0NN/Host;
  Readerplans READYNOTSTARTED qasper-confirmation96-readout-plans-v1.json; launcher
  python3 R/run_confirmation96_readouts_v1.py NAME (explicitwhenHTTPfreeandpolicyclosed).
  Sourcepreparedrun contains96cases oneactualwhole-policybranch, event_id policyqualified.
- Confirmationbaseline96firstsCLOSED, scale96ACTIVE. Do NOTinspect/scorequalityuntilall4firstconditionsclosed; no tuning. NativeF1scorer binds bycase_key/realwire;
+ Confirmationbaseline96 andscale96firstsCLOSED; S3own96ACTIVE. Do NOTinspect/scorequalityuntilall4firstconditionsclosed; no tuning. NativeF1scorer binds bycase_key/realwire;
  do NOTreuseoldsame-pool handoff scorer withoutadapting assumptions. Officialevaluator at
  /cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/
  development-training-20261102/e1-dev32-scoring-v1/official-evaluator.py. It assigns0tomissingpredictions
@@ -99,8 +119,8 @@ SOURCEVIEW APPLICATION ORDER (8finiteGPU3blocks, sameHost/Source/chronology):
  cumulative60positions/12sources sourceC13/Q16/W21/F10 vsreplayC19/Q9/W17/F15, no netgain.
  Alllast4reviewfilescomplete; replayC3/Q7/W6/F4, referenceC4/Q5/W7/F4. C04referenceinitialhonest
  no-informationQ, incompletepartialQ later, finalwrongdate/diagnosisW; noSource-supportedC inferred.
-Head-onlyactualDEV native/scoreclosed, Readerpending2newfirsts asabove. Existingquality-cost
-fieldcodewasnotchanged/no costfit; costprofile diagnosticonly. No post-confirmation modelselection.
+Head-onlyactualDEV fullchainCLOSED; newcostfeedbackfit live asabove. Existingquality-cost
+fieldcodewasnotchanged; originalcostprofile diagnostic retained, derived94pair fit live asabove. No post-confirmation modelselection.
  Confirmation resource-only qasper-confirmation96-retrieval-resources-v1.json all4closed: control
  decisions579/414/406/367, READselected387/222/214/175, packettokens121914/65075/61188/52127.
  Actualoperationstatuses separate, no Readeranswers/quality/fullcostclaim. Fixedpolicyreads4 means

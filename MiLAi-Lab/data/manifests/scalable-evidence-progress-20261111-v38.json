@@ -1,0 +1,344 @@
+{
+  "status": "PHASE38_PROGRESS_HEAD_ONLY_TASK_CONTROL_CLOSED_QUALIFIED_COST_FEEDBACK_FIT_AND_S3_CONFIRMATION_LIVE",
+  "observed_at_utc": "2026-11-11T20:46:58.355851+00:00",
+  "previous": "/data/milai-experiments/20261111-scalable-evidence/progress-v37.json",
+  "no_sha_validation": true,
+  "active_jobs": [
+    {
+      "name": "qasper-confirm96-s3-own-readouts-v1",
+      "owner_pid": 1948359,
+      "child_pid": 1948360,
+      "owner_status": "RUNNING",
+      "run_status": "RUNNING",
+      "actual_argv_checked": true,
+      "process_alive": true,
+      "closed_readouts": 11,
+      "failed_readouts": 0
+    },
+    {
+      "name": "m2-first160-adequate-cost-seed0-v1",
+      "owner_pid": 1941204,
+      "child_pid": 1941205,
+      "owner_status": "RUNNING",
+      "run_status": "RUNNING",
+      "actual_argv_checked": true,
+      "process_alive": true,
+      "optimizer_updates": 9,
+      "planned_optimizer_updates": 51
+    }
+  ],
+  "head_only_dev_closed": {
+    "summary": "/data/milai-experiments/20261111-scalable-evidence/head-only-dev32-closed-comparison-v1/summary.json",
+    "source_families": 32,
+    "actual_states": 64,
+    "actual_packets": 109,
+    "new_first_Host_calls": 2,
+    "reused_physical_firsts": 107,
+    "preserved_failed_firsts": 3,
+    "new_teacher_states": 2,
+    "transferred_judgments": 107,
+    "transfer_conflicts": 0,
+    "teacher_view": {
+      "by_method": {
+        "fixed_context": {
+          "positions": 64,
+          "complete_supported": 33,
+          "failed": 2,
+          "answer_status": {
+            "unknown": 19,
+            "complete": 33,
+            "incomplete": 12
+          },
+          "material_status": {
+            "unknown": 16,
+            "sufficient": 34,
+            "insufficient": 14
+          }
+        },
+        "head_only": {
+          "positions": 64,
+          "complete_supported": 32,
+          "failed": 1,
+          "answer_status": {
+            "unknown": 20,
+            "complete": 32,
+            "incomplete": 12
+          },
+          "material_status": {
+            "unknown": 17,
+            "sufficient": 33,
+            "insufficient": 14
+          }
+        },
+        "full_feedback": {
+          "positions": 64,
+          "complete_supported": 32,
+          "failed": 2,
+          "answer_status": {
+            "unknown": 21,
+            "complete": 32,
+            "incomplete": 11
+          },
+          "material_status": {
+            "unknown": 18,
+            "sufficient": 32,
+            "insufficient": 14
+          }
+        },
+        "continued_sft": {
+          "positions": 64,
+          "complete_supported": 33,
+          "failed": 1,
+          "answer_status": {
+            "unknown": 22,
+            "complete": 33,
+            "incomplete": 9
+          },
+          "material_status": {
+            "unknown": 19,
+            "sufficient": 33,
+            "insufficient": 12
+          }
+        }
+      },
+      "paired_source_differences": {
+        "head_only-full_feedback/complete_supported": {
+          "difference": 0.0,
+          "source_bootstrap_95pct": [
+            -0.078125,
+            0.078125
+          ],
+          "scope": "32 resampled Source clusters; excludes Host RNG, teacher error and training seed uncertainty"
+        },
+        "head_only-full_feedback/material_sufficient": {
+          "difference": 0.015625,
+          "source_bootstrap_95pct": [
+            -0.0625,
+            0.09375
+          ],
+          "scope": "32 resampled Source clusters; excludes Host RNG, teacher error and training seed uncertainty"
+        },
+        "head_only-continued_sft/complete_supported": {
+          "difference": -0.015625,
+          "source_bootstrap_95pct": [
+            -0.078125,
+            0.046875
+          ],
+          "scope": "32 resampled Source clusters; excludes Host RNG, teacher error and training seed uncertainty"
+        },
+        "head_only-continued_sft/material_sufficient": {
+          "difference": 0.0,
+          "source_bootstrap_95pct": [
+            -0.078125,
+            0.078125
+          ],
+          "scope": "32 resampled Source clusters; excludes Host RNG, teacher error and training seed uncertainty"
+        },
+        "head_only-fixed_context/complete_supported": {
+          "difference": -0.015625,
+          "source_bootstrap_95pct": [
+            -0.09375,
+            0.0625
+          ],
+          "scope": "32 resampled Source clusters; excludes Host RNG, teacher error and training seed uncertainty"
+        },
+        "head_only-fixed_context/material_sufficient": {
+          "difference": -0.015625,
+          "source_bootstrap_95pct": [
+            -0.09375,
+            0.0625
+          ],
+          "scope": "32 resampled Source clusters; excludes Host RNG, teacher error and training seed uncertainty"
+        }
+      }
+    },
+    "Root_hybrid_view": {
+      "by_method": {
+        "fixed_context": {
+          "positions": 64,
+          "complete_supported": 32,
+          "failed": 2,
+          "answer_status": {
+            "complete": 32,
+            "unknown": 18,
+            "incomplete": 14
+          },
+          "material_status": {
+            "sufficient": 35,
+            "unknown": 14,
+            "insufficient": 15
+          }
+        },
+        "head_only": {
+          "positions": 64,
+          "complete_supported": 32,
+          "failed": 1,
+          "answer_status": {
+            "complete": 32,
+            "unknown": 19,
+            "incomplete": 13
+          },
+          "material_status": {
+            "sufficient": 34,
+            "unknown": 16,
+            "insufficient": 14
+          }
+        },
+        "full_feedback": {
+          "positions": 64,
+          "complete_supported": 32,
+          "failed": 2,
+          "answer_status": {
+            "complete": 32,
+            "unknown": 19,
+            "incomplete": 13
+          },
+          "material_status": {
+            "sufficient": 33,
+            "unknown": 16,
+            "insufficient": 15
+          }
+        },
+        "continued_sft": {
+          "positions": 64,
+          "complete_supported": 32,
+          "failed": 1,
+          "answer_status": {
+            "complete": 32,
+            "unknown": 21,
+            "incomplete": 11
+          },
+          "material_status": {
+            "sufficient": 33,
+            "unknown": 18,
+            "insufficient": 13
+          }
+        }
+      },
+      "paired_source_differences": {
+        "head_only-full_feedback/complete_supported": {
+          "difference": 0.0,
+          "source_bootstrap_95pct": [
+            -0.0625,
+            0.0625
+          ],
+          "scope": "32 resampled Source clusters; excludes Host RNG, teacher error and training seed uncertainty"
+        },
+        "head_only-full_feedback/material_sufficient": {
+          "difference": 0.015625,
+          "source_bootstrap_95pct": [
+            -0.046875,
+            0.078125
+          ],
+          "scope": "32 resampled Source clusters; excludes Host RNG, teacher error and training seed uncertainty"
+        },
+        "head_only-continued_sft/complete_supported": {
+          "difference": 0.0,
+          "source_bootstrap_95pct": [
+            -0.046875,
+            0.046875
+          ],
+          "scope": "32 resampled Source clusters; excludes Host RNG, teacher error and training seed uncertainty"
+        },
+        "head_only-continued_sft/material_sufficient": {
+          "difference": 0.015625,
+          "source_bootstrap_95pct": [
+            -0.03125,
+            0.0625
+          ],
+          "scope": "32 resampled Source clusters; excludes Host RNG, teacher error and training seed uncertainty"
+        },
+        "head_only-fixed_context/complete_supported": {
+          "difference": 0.0,
+          "source_bootstrap_95pct": [
+            -0.0625,
+            0.0625
+          ],
+          "scope": "32 resampled Source clusters; excludes Host RNG, teacher error and training seed uncertainty"
+        },
+        "head_only-fixed_context/material_sufficient": {
+          "difference": -0.015625,
+          "source_bootstrap_95pct": [
+            -0.078125,
+            0.03125
+          ],
+          "scope": "32 resampled Source clusters; excludes Host RNG, teacher error and training seed uncertainty"
+        }
+      }
+    },
+    "source_review": "Both newfirsts inspected. Hyperparameter question nativeunanswerable: reported fixedsettings do not establish automaticoptimization capability; honestlimitation supported, material/answer unknown. Othercase1500training vs100test sentences complete. Two teacherfield corrections, no newTRAINlabels.",
+    "interpretation": "AllfourRoot-hybrid methods32/64complete_supported; headminusfull0,SourceCI[-.0625,.0625]. Headfullchoices equalinitialS1u101 on64/64. No newdecision/taskgain; preservesinitialbehavior. Existingfreezealsoencoder.eval/dropoutoff."
+  },
+  "confirmation_scale_firsts_closed": {
+    "status": "COMPLETED_WITH_FAILURES",
+    "closed_readouts": 96,
+    "failed_readouts": 5,
+    "chat_invocations": 96,
+    "reused_readouts": 0,
+    "generation_delta": {
+      "charged_tokens": 325892,
+      "known_tokens": 325892,
+      "unknown_usage": 0
+    }
+  },
+  "confirmation_status": "Baseline96closed0fails; scale96closed5fails; S3own96live; S3old96notstarted. Fullmatrixqualitynotinspected/scored. Fourmodels andfirst/repetition/sourcepanelprotocol unchanged.",
+  "new_cost_feedback": {
+    "status": "DERIVED_TRAIN_TIEBREAKS_READY",
+    "original_data": "/data/milai-experiments/20261111-scalable-evidence/m2-first160-feedback-sft-data-v1/feedback/train.jsonl",
+    "diagnostic_source": "/data/milai-experiments/20261111-scalable-evidence/m2-first160-quality-qualified-cost-profile-v1.json",
+    "rows": 450,
+    "feedback_rows": 131,
+    "unchanged_replay_rows": 319,
+    "changed_pairs": 94,
+    "changed_states": 69,
+    "changed_families": 53,
+    "action_relations": {
+      "READ > SEARCH": 21,
+      "READ > READ": 47,
+      "HANDOFF > READ": 18,
+      "SEARCH > READ": 6,
+      "HANDOFF > HANDOFF": 2
+    },
+    "delivery_before": {
+      "unknown": 63,
+      "left": 48,
+      "tie": 142,
+      "right": 14
+    },
+    "delivery_after": {
+      "unknown": 63,
+      "left": 91,
+      "right": 65,
+      "tie": 48
+    },
+    "model_inputs_metadata_gold_order_equal": true,
+    "source_split": "train",
+    "raw_data_overwritten": false,
+    "confirmation_used": false,
+    "comparison": "Reuse closed original full-feedback seed0 as the matched quality-tie control. Same 450 rows, 319 replay, S1u101 initialization, full-parameter scope, 51 updates/1632 draws, LR, seed, eval schedule and replay mass. Only these 94 delivery ties become observed-cost directions. No new runtime rule.",
+    "nomination": "Final update51 fixed before fitting; actual full-binding DEV comparison and same first-result Reader protocol, not confirmation nominee selection.",
+    "limitations": "Outcome-selected adequate coarse classes from nonindependent teacher/Root reviews; one stochastic first per branch and fixed-context4 continuation. No expected-cost or whole-cost superiority label; failed/inadequate ties remain unchanged. Costs are offline supervision, absent from online inputs.",
+    "no_sha_validation": true,
+    "compute": {
+      "cpu_seconds": 3.895060918,
+      "wall_seconds": 4.204682679846883
+    }
+  },
+  "cost_fit_scope": "Same450rows/131feedback/319replay/S1u101/seed0/fullparameter/51updates/1632draws/schedule asclosed originalfullfeedback. Only94deliveryties rewritten inderiveddata afterbothadequate/supported andactual4costvector verified. Original62directions andunknowns unchanged. Extraofflinecostmetadata notinmodelstate/questions. Historicalcontrol reused, no secondredundantfit. GPU3; finalu51fixedbeforefitting, no confirmationnomineechange.",
+  "prepared_analysis": {
+    "repeat_comparison": "/data/milai-experiments/20261111-scalable-evidence/score_confirmation96_repeats_v1.py",
+    "source_panel_binding": "/data/milai-experiments/20261111-scalable-evidence/bind_confirmation96_review_panel_v1.py",
+    "cost_endpoint_score_plan": "/data/milai-experiments/20261111-scalable-evidence/m2-first160-adequate-cost-dev64-plan-v1.json",
+    "cost_endpoint_score_launcher": "/data/milai-experiments/20261111-scalable-evidence/run_adequate_cost_dev64_score_v1.py",
+    "status": "Prepared andsyntaxchecked, notexecuted; dependencies actualclosedownersrequired"
+  },
+  "next": [
+    "ContinueS3own96 toterminal; afterHTTPleaseclear andpendingfitbilling settled launchS3old96",
+    "Aftercostfitcloses scorefixedu51onDEV64, bindactualchoices/packets andreusecanonicalfirsts/judgments; executeonlypreviouslyunattemptedbindings",
+    "Afterfourconfirmationfirstconditionsclose runnativeF1,32predeclaredseparate seconddraws and8Sourceactualpacket/answerreviews",
+    "RunLME32twofixednominees andnativeJudge; finishfullcost/generalization andability-improvementchain"
+  ],
+  "validation": "Derivedcost94pairfullbindings/actualfirstrecords/qualityreviews/requestwires/fourcostcomponents verified againstTRAIN; rawstate/questions/metadata/gold/order/replay equal, noSHA. Headactualreadouts compiledDEVonly,107judgments transferred0conflicts,2newteacher/source reviews andSourcebootstrap closed. No trackedruntimecodechange ornewfull-suite tests.",
+  "cost_scope": "NativeReaders/teachers/fit selfbill; newderiveddataprep3.895060918CPU andothermeasuredofflinepreps pendingstagebilling afterHTTPidle. No wholechild/native doublecount. Unmeasuredauthor/test/importCPU unknown; no wall-asGPUbusy orfullcostclaim.",
+  "boundaries": "GoalACTIVE/incomplete. NoSHA/contentfingerprints/subagents/Product/API/permission/Canonical changes/service restart/push. FirstfailuresunknownsSource rolespreserved; no confirmationtuning."
+}
