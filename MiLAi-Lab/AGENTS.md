@@ -1,4 +1,53 @@
-# LIVE scalable evidence phase21: 2026-11-11
+# LIVE scalable evidence phase22: 2026-11-11
+
+FullgoalACTIVE/incomplete. PreviousPROGRESS,no blocker. No subagents/SHA/contentfingerprints/
+Product/API/permission/Canonical changes, service restarts orpush. Preservefirsts/unknowns/roles.
+KEEPANALYSISSHORT: lengthy repeated Source/architecture speculation haswastedmillionsoftokens.
+Useactualtools/results andfinitework. R=/data/milai-experiments/20261111-scalable-evidence.
+Latestprogress-v22/manifestv22/docphase22. /proc actualargv+owner+artifacts governliveness;
+neverrestart staleJSON/losthandle. Noautoqueue.
+
+LIVE main36k owner769162 child769163 GPU2 latest2435/3390.
+LIVE seed2large owner3905047 child3905048 GPU3 latest176/303; afterclose preparedrepeatseed2.
+LIVE paperlast153 owner4096435 child4096436,
+m2-fixed-context-train160-families128to160-readouts-v2 latest89closed2failed.
+Afterclose compilewitness output m2-fixed-context-train160-families128to160-witness-v2
+(prepared m2-fixed-context-train160-families128to160-v2). Teacher63plan+launcher nowready
+m2-fixed-context-families128to160-teacher-v1 (63states153outcomes32sources) butNOTSTARTED.
+NextHTTPpriority missing17newpublicbindings (seephase21below), thenunion129teacher/paperteacher.
+No restart basedonstale counters. Allthreeactualprocesses checkedlive.
+
+NewSource/View referenceinventory m6-all-collectors-reference-candidates-v1:
+3closedcollectors,480contentpositions1132actualsteps,172candidate steps32TRAINfamilies;
+110READ30REFRESH30HANDOFF2USE_VIEW. Immediatevisible/Kliteralwholebody+role gains andactualterminal
+referencepreservingHoff. NOTautomaticsemanticquality/optimality; privatequeryscope mustmatch.
+Scope-reviewedE3 broadqueries; excludeinventoryindices102/103/104(B26visit-only) and138(D17workplace-
+only) whose gainsreferencebroaderpublicfacts. Remaining106READ actualsteps combinedwithprior19
+View/Hoff demonstrations -> m6-mixed-reference-operations-v1,125states32TRAINfamilies:
+106READ10REFRESH_VIEW9HANDOFF. states.jsonl/provenance.json/manifest.json. Existingactualbefore/
+menu/action/role/timepreserved, positive-onlyoutcome-selectedreferenceproxy. Otheractionsunjudged.
+No Source/model/Hostcalls, NO FIT. Mostlyinitialstates, notadequateupdate-boundarydata/unbiasedcorpus.
+capacity.json125states0trunc,max10636 atdeclared16384/2048. No modelinference orsuccessclaim.
+MeasurednewCPU inventory3.190763168/prep.2644238/audit4.33976117 PENDING ledger afterHTTPidle;
+Rootscope-review/tests/unmeasuredunknownnotzero. No trackedproductcodechange thisphase.
+Scripts R/inventory_m6_reference_steps_all_collectors_v1.py,prepare_m6_mixed_reference_slice_v1.py,
+audit_m6_mixed_reference_v1.py. Onlymetadata/data artifacts new; originalclosedfirsts unchanged.
+
+Criticalpriorcorrection remains: old/newpublic112same32before/menu, only95samefirstbindings because
+coveragecounter/seedreset at3oldchunks vs1newchunk. Missing17oldREADs executednewqueryonce protocol,
+checks andreaderplanREADYNOTSTARTED. run_m2_public_train16_query_once_missing17_readouts_v1.py.
+Thenbindnew112+extra17 to129/32states viaR/bind_public_feedback_results_v1.py, old112pairedsubset
+exists; neverclaimall112earliermatched or17newindependentstates. Updateknown-awareteacherplan
+inputs/count129 beforelaunch. Oldfixed112labels diagnosticseparate; newqueryonce112firstsclosed
+110complete2failed391356knownGen0unknown. Code49591f2f freezesnomination-source, defaultunchanged.
+
+Remaining:paper153+new177sixbatches859 firsts (new177NONEstarted),last8continuousfamilies,
+actualSource/Viewtraining notjustreferenceinventory, sufficientS2/SFT/postS2aggregation,
+seed2pair/main3390,newconfirmation96/fullcost/generalization. Currentpaper128semantic256states
+108deliveryknown103answerknown, notenoughformalS2. Newsource125notstandaloneuniversalrefreshfit.
+PackagePASS/toolsold6LMEdynamicimports unchanged. Do notmarkgoalcomplete fromengineering/data prep.
+
+# HISTORICAL scalable evidence phase21: 2026-11-11
 
 GoalACTIVE/incomplete, PROGRESS,noblocker. No subagents/SHA/contentfingerprints/Product/API/permission/
 Canonical changes,service restarts orpush. Preservefirsts/unknowns/roles. KEEPANALYSISSHORT: stop

@@ -1,0 +1,110 @@
+{
+  "status": "PHASE22_PROGRESS_FULL_GOAL_ACTIVE",
+  "observed_at_utc": "2026-11-11T11:49:05.979217+00:00",
+  "previous": "/data/milai-experiments/20261111-scalable-evidence/progress-v21.json",
+  "no_sha_validation": true,
+  "active_jobs": [
+    {
+      "name": "s1-op36k-seed0-v1",
+      "owner_pid": 769162,
+      "child_pid": 769163,
+      "actual_argv_checked": true,
+      "owner_status": "RUNNING",
+      "status": "RUNNING",
+      "optimizer_updates": 2435,
+      "planned_optimizer_updates": 3390
+    },
+    {
+      "name": "s1-op3k-seed2-v1",
+      "owner_pid": 3905047,
+      "child_pid": 3905048,
+      "actual_argv_checked": true,
+      "owner_status": "RUNNING",
+      "status": "RUNNING",
+      "optimizer_updates": 176,
+      "planned_optimizer_updates": 303
+    },
+    {
+      "name": "m2-fixed-context-train160-families128to160-readouts-v2",
+      "owner_pid": 4096435,
+      "child_pid": 4096436,
+      "actual_argv_checked": true,
+      "owner_status": "RUNNING",
+      "status": "RUNNING",
+      "closed_readouts": 89,
+      "failed_readouts": 2
+    }
+  ],
+  "all_collectors_reference_candidates": {
+    "status": "ACTUAL_CONTENT_FLOW_REFERENCE_CANDIDATES_NOT_TRAIN_LABELS",
+    "positions": 480,
+    "candidate_steps": 172,
+    "families": 32,
+    "counts": {
+      "actual_decision_steps": 1132,
+      "REFRESH_VIEW": 30,
+      "HANDOFF": 30,
+      "USE_VIEW": 2,
+      "READ": 110
+    },
+    "stage_counts": {
+      "initial": 148,
+      "intermediate-arrivals": 4,
+      "same-sources": 14,
+      "additional-arrival": 6
+    },
+    "collector_counts": {
+      "new32-view_cache": 34,
+      "new32-view_cache_incremental": 28,
+      "new32-e3-aggregate-u32": 110
+    },
+    "source_split": "train",
+    "new_model_or_Host_calls": 0,
+    "fit_exports_written": false,
+    "no_sha_validation": true,
+    "scope": "Actualrecordedsteps; direct/literal-view source-role bodycoverage only. Privatequerymaybenarrowerthanpubliccriterion. Need explicit scope mapping; no blanketpositive/negative/semanticoptimality. SameSource/multiplecollectors notindependentfamilies.",
+    "compute": {
+      "cpu_seconds": 3.1907631679999997,
+      "wall_seconds": 6.48261509463191
+    }
+  },
+  "mixed_source_reference_slice": {
+    "status": "MIXED_ACTUAL_REFERENCE_SLICE_NOT_FITTED",
+    "states": 125,
+    "families": 32,
+    "operation_labels": {
+      "REFRESH_VIEW": 10,
+      "HANDOFF": 9,
+      "READ": 106
+    },
+    "source_split": "train",
+    "natural_histories": false,
+    "new_model_or_Host_calls": 0,
+    "no_sha_validation": true,
+    "scope": "Actualhistoricalsteps fromsharedsourcefamilies. Positive-onlyoutcome-selected reference-witness demonstrations, notanunbiasedcorpus orsemantic optimality. No unusedaction negatives/qualityties, no evaluation/generalizationcredit. Mostlyinitialstates, updatecoverage andcounterfactualfeedback stillinsufficient. Notfitted; original researchrolesunchanged.",
+    "compute": {
+      "cpu_seconds": 0.2644238,
+      "wall_seconds": 0.2644576895982027
+    }
+  },
+  "mixed_source_capacity": {
+    "states": 125,
+    "truncated_states": 0,
+    "max_sequence_tokens": 10636,
+    "scope": "Actualmodel codec capacity only, notsemanticvalidity ortraininggain. FirstHTTP-env invocation lackedlaya module andmade no model/HTTPcalls; this usesexistingCUDA SDK env withnoCUDAdevices.",
+    "compute": {
+      "cpu_seconds": 4.33976117,
+      "wall_seconds": 4.459765614010394
+    }
+  },
+  "paper63_teacher_plan": "/data/milai-experiments/20261111-scalable-evidence/m2-fixed-context-families128to160-teacher-v1-plan.json",
+  "missing17_reader_plan": "/data/milai-experiments/20261111-scalable-evidence/m2-public-train16-query-once-missing17-readouts-v1-plan.json",
+  "scope": "Newreference125actualsteps, noSource/model/Hostreruns andno fit. Scope-reviewedpartialreference positives only, notsemanticoptimality ornewindependentSourcefamilies; preservesTRAINroles. Currentnativejobsconfirmedlive, no restart.",
+  "remaining": [
+    "Finishpaper153 andstartmissing17newprotocolHostfirsts; merge129/32states, retain exactold112pairedsubset andallfirstfailures.",
+    "Annotate/compilepaper63 andnewpublic129; continue859newpaperfirsts and8remainingcontinuousfamilies.",
+    "Source/View125referenceexamples mostlyinitial, insufficientaloneforupdatepolicy; needdiversecontrolledfeedback/held-outapplicationevidence.",
+    "Finishseed2pair/main3390, adequateS2/SFT/postS2aggregation, frozennewconfirmation96/fullcost/generalization."
+  ],
+  "cost_scope": "Newinventory3.190763168CPU,sliceprep.2644238,audit4.33976117 measuredpending. No selfbilledtraining/reader/teacher duplicate; author/scope-review/unmeasured unknown."
+}
