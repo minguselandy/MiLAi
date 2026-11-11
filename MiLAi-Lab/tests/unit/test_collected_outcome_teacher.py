@@ -39,11 +39,14 @@ def test_offline_reference_or_other_candidate_cannot_supply_a_delivered_quote():
     payload, reviews = fixture()
     reviews["reviews"][1].update(material_status="sufficient",
                                  evidence_quotes=["Cedar is the code."])
-    with pytest.raises(ValueError, match="absent from this candidate"):
-        parse_review(json.dumps(reviews), payload)
+    parsed = parse_review(json.dumps(reviews), payload)
+    assert parsed["reviews"][1]["material_status"] == "unknown"
+    assert parsed["reviews"][0]["answer_status"] == "complete"
+    assert parsed["masked_candidates"] == 1
     reviews["reviews"][1]["evidence_quotes"] = []
-    with pytest.raises(ValueError, match="actual delivered quote"):
-        parse_review(json.dumps(reviews), payload)
+    parsed = parse_review(json.dumps(reviews), payload)
+    assert parsed["reviews"][1]["material_status"] == "unknown"
+    assert parsed["reviews"][0]["material_status"] == "sufficient"
 
 
 def test_duplicate_missing_candidate_or_unsupported_completion_is_unresolved():
@@ -53,8 +56,9 @@ def test_duplicate_missing_candidate_or_unsupported_completion_is_unresolved():
     with pytest.raises(ValueError, match="exactly once"):
         parse_review(json.dumps(missing), payload)
     reviews["reviews"][0]["answer_support"] = "qualified"
-    with pytest.raises(ValueError, match="supported by sufficient"):
-        parse_review(json.dumps(reviews), payload)
+    parsed = parse_review(json.dumps(reviews), payload)
+    assert parsed["reviews"][0]["answer_status"] == "unknown"
+    assert parsed["reviews"][0]["material_status"] == "sufficient"
 
 
 def test_teacher_sees_rotated_material_and_answers_without_actions_or_policy_names():

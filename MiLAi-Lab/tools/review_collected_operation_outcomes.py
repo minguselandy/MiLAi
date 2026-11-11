@@ -84,22 +84,31 @@ def parse_review(content: str, payload: dict[str, Any]) -> dict[str, Any]:
     reviews = parsed["reviews"]
     if len(reviews) != len(candidates) or {r["candidate"] for r in reviews} != set(candidates):
         raise ValueError("Teacher review must cover each actual candidate exactly once")
+    masked = 0
     for review in reviews:
         candidate = candidates[review["candidate"]]
         bodies = [s["content"] for item in candidate["delivered_evidence"]
                   for s in item["evidence"]]
         quotes = review["evidence_quotes"]
+        issues = []
         if any(not any(quote in body for body in bodies) for quote in quotes):
-            raise ValueError("Teacher quote is absent from this candidate's delivered evidence")
+            issues.append("quote_absent_from_this_candidate")
         if review["material_status"] == "sufficient" and not quotes:
-            raise ValueError("Sufficient-material judgment needs an actual delivered quote")
+            issues.append("sufficiency_without_delivered_quote")
+        if issues:
+            review.update(material_status="unknown", answer_status="unknown",
+                          answer_support="unknown")
         if candidate["answer_status"] != "COMPLETED":
             review.update(answer_status="unknown", answer_support="unknown")
         if review["answer_status"] == "complete" and (
             review["material_status"] != "sufficient" or review["answer_support"] != "supported"
         ):
-            raise ValueError("Complete answer must be supported by sufficient delivered material")
-    return {"format_error": False, "reviews": reviews}
+            review["answer_status"] = "unknown"
+            issues.append("completion_without_sufficient_supported_evidence")
+        if issues:
+            masked += 1
+            review["masked_teacher_judgments"] = issues
+    return {"format_error": False, "reviews": reviews, "masked_candidates": masked}
 
 
 def main() -> None:
@@ -115,6 +124,7 @@ def main() -> None:
     args.output.mkdir(parents=True, exist_ok=False)
     run = {"status": "RUNNING", "pid": os.getpid(), "compiled": str(args.compiled.resolve()),
         "planned_states": len(cases), "closed_states": 0, "unresolved_states": 0,
+        "masked_teacher_candidates": 0,
         "reviewer": "Existing local Qwen Host model as offline training teacher",
         "independent_evaluation": False, "judge_attempts": 1, "no_sha_validation": True,
         "scope": "Offline teacher supervision only; no online controller or Host inputs changed.",
@@ -149,6 +159,7 @@ def main() -> None:
                     write_json(folder / "judgment.json", result)
                     if result["status"] != "SCORED":
                         run["unresolved_states"] += 1
+                    run["masked_teacher_candidates"] += result.get("masked_candidates", 0)
                     for review in result.get("reviews", []):
                         branch = bindings[review["candidate"]]
                         records.append({**review, "family": case["family"],
