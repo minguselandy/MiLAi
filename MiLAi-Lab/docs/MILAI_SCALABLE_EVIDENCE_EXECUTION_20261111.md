@@ -1,6 +1,22 @@
 # 2026-11-11：规模化证据学习 v2 执行记录
 
-## 最新状态：阶段35，160位置应用关闭，确认首次读出与更新范围对照运行
+## 最新状态：阶段36，确认基线首读出关闭，冻结编码器对照进入实际比较
+
+**完整目标继续执行。** 确认基线96个首次读出已正常关闭，0次传输失败；这不是质量结论。规模模型的96个首读出已启动。尚未检查确认答案或计算确认分数，四个候选与协议保持冻结，后续仍需两个S3条件及预定32次重复。
+
+冻结编码器对照完成51更新、1,632次draw。完整参考DEV在u17／34／51均为133/278；训练方向pair正确45/62，而原全参数反馈臂为59/62。编码器探针0元素改变，头部探针1,769,469元素改变。实际头部含transformer参数，并非仅标量校准；更正了此前对SDK另一分支的泛化描述。
+
+现有`--freeze-encoder`同时冻结编码器参数并置encoder为eval态，关闭其dropout，头部保持训练态。因此这是单一CLI更新范围流程对照，不是dropout严格匹配的纯参数因素对照。聚合接受数不变不证明动作完全不变，仍需实际完整绑定与任务读出。固定u51的64状态评分已完成；109个比较包全部有既有原生执行，107个物理首读出可精确复用，仅需2个新首读出，待HTTP空隙执行。没有把该开发模型加入确认候选或使用确认数据训练。
+
+已将Source/View参考诊断、完整应用结果与工作量放在同一[PNG](/data/milai-experiments/20261111-scalable-evidence/source-adaptation-closed-figures-v1/comparison.png)／[PDF](/data/milai-experiments/20261111-scalable-evidence/source-adaptation-closed-figures-v1/comparison.pdf)中，附source-data.json并检查渲染。图明确62个参考状态与每臂80个相关应用位置的分母，工作量比值不是完整成本。
+
+在读出作用域空闲时，一次性结算6个已关闭确认初始化／策略采集整child（含初始化首失败）和7项明确测量准备，共1,284.837513 CPU秒；另结算8个新应用作业去掉已计原生部分后的427.486468 CPU秒。没有把部分盘点再次加到完整盘点，也没有重复加训练、Reader、教师和原生应用CPU。其他未测作者／测试／导入成本仍未知。
+
+本阶段没有改运行代码。实际开关、参数探针、argv单项差异、完整绑定／请求复用以及图表已核对，未重复无关全仓测试。仍需确认完整矩阵、更新范围对照的任务结果、LME32、预定重复／来源抽检和最终成本／泛化链；不以实验关闭代替第16节的能力改进链。SHA持续禁用，无Product/API/权限/Canonical修改、服务重启或推送。
+
+阶段36：[manifest](../data/manifests/scalable-evidence-progress-20261111-v36.json)、[冻结编码器闭合曲线](/data/milai-experiments/20261111-scalable-evidence/head-only-closed-curve-v1.json)、[开关实际语义](/data/milai-experiments/20261111-scalable-evidence/head-only-single-change-plan-check-v1.json)、[去重结算](/data/milai-experiments/20261111-scalable-evidence/phase36-closed-compute-v1.json)。
+
+## 阶段35记录：160位置应用关闭，确认首次读出与更新范围对照运行
 
 **完整目标继续执行。** 两臂16来源、各80位置的应用已全部执行并按来源评阅：参考适配C17／Q21／W28／F14，重放对照C22／Q16／W23／F19。来源平均完整回答差为−0.0625，条件于当前评阅的来源重采样区间[−0.25,+0.125]；不消除Host随机性、训练seed或评阅偏差。两臂在31个改变目标事实的位置均无完整回答，未建立总体应用收益。
 
