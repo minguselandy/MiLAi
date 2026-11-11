@@ -1,4 +1,66 @@
-# LIVE scalable evidence phase20: 2026-11-11
+# LIVE scalable evidence phase21: 2026-11-11
+
+GoalACTIVE/incomplete, PROGRESS,noblocker. No subagents/SHA/contentfingerprints/Product/API/permission/
+Canonical changes,service restarts orpush. Preservefirsts/unknowns/roles. KEEPANALYSISSHORT: stop
+repetitive speculative Source/architecture prose; do concrete tools andreadactualevidence.
+R=/data/milai-experiments/20261111-scalable-evidence. Latestprogress-v21/manifestv21/docphase21.
+Actual/proc argv+owner+artifacts governliveness; neverrestart staleJSON/losthandle. Noautoqueue.
+
+LIVE main36k owner769162 child769163 GPU2 latest2385/3390, originalunchanged.
+LIVE largeseed2 owner3905047 child3905048 GPU3 latest151/303; thenrun_s1_repeat32_seed2_v1.py.
+LIVE paperlast153 owner4096435 child4096436,
+m2-fixed-context-train160-families128to160-readouts-v2, latest39closed1failed. Sourcepreparedv2
+64selected/63comparisons153packets; uncomparableplain/select-none state notfabricated.
+After153closes compilewitness+teacherlater, andrunbelowmissing17beforeannotatingnewpublicprotocol.
+
+CLOSED queryonce112 owner4002617 child4002618:110completed2failed391356knownGen0unknown.
+Bound m2-public-train16-query-once-bound-v1. Oldfixedcontext112 untouched. Newteacher32plan ready
+m2-public-train16-query-once-teacher-v1 but DO NOTLAUNCH untilmissing17 merged/newinputs updated.
+IMPORTANTCORRECTION: old/new32before/fullmenus same, butonly95firstbindings identical;17coverage
+READnominations differ becauseoldprep3chunks resetcounter/seed, newprep single32statesequence.
+Learner/fixed/knownquery same; no all112causalcontinuation comparison. m2-public-query-once-support-
+proxy-v1.json hasmatched95/unmatched17each; fullparagraphcoverage isONLYproxy, notsemanticquality.
+Firstcomparisonanalysis KeyError exposedmismatch; noHostrerun. Keepall existingfirsts.
+Code49591f2f adds --nomination-source (fullbefore/menu checked; emptychoices explicitlyunselected).
+Actual17missingoldbindings nowexecutedunderquery_once_context:
+ m2-public-train16-frozen-missing-nominations-v1 (selection)
+ m2-public-train16-query-once-missing17-v1 (17states/17packets,10families, ZEROnewindependentstates)
+ checks.json matchesoldactions, absentfromnew112, <=1SEARCH.
+READYNOTSTARTED run_m2_public_train16_query_once_missing17_readouts_v1.py /sameplan.
+Afteritcloses bindbasequeryonce112 +extra17 with R/bind_public_feedback_results_v1.py to129outcomes/
+32states. Fullold112 pairedsubset thenexists; new17previouslyexploredcoverageactions staydistinct.
+Known-awareteacher mustannotateunion129 once, notjustoldplan112. Updateplaninputs/counts beforelaunch.
+GenericR/compile_bound_semantic_feedback_v1.py readsactualpreparedcontinuationmetadata; noQASPER
+lookup/fabricatedSFTgold. Oldfixed-public3known/2known remainsdiagnostic separateprotocol.
+
+NewreadonlySource/View data: m6-immediate-witness-gains-v1/records.json maps34actualsteps20families,
+32REFRESH/2READ,17content17originals; literalwholebody+role gains in actualnextdecisionvisible/K,
+notnavigationorlabelbyactionname. Publicgoal/privatequeryscope reviewrequired, noautoqualitylabels.
+Selectedcontent10broadquery families (indices6,15,16,22,23,25,27,29,32,33) manuallyscopechecked;
+excludeA05narrowrelatives/assistant/absence/exactquote branches withmismatchedreferenceobligations.
+m6-reference-acquisition-train10-v1 has10actualpositiveREFRESHwitnessacquisitionexamples.
+m6-reference-operations-train10-v1 hasthese10 plus9actualnextHANDOFF retaininganoriginalauthor
+supportset interminalpacket+actualK.19states/10families, outcome-selected TRAIN, NOTsemantic
+optimality/completeHostsuccess; otheractionsunjudged. Smallone-operationbiasedslice, DONOTfitit
+alone orunconditionallyrefresh. No newmodel/Host/Sourcecopy. capacity.json19/0trunc,max10636;
+SDK usesdeclared16384/2048; firstHTTP-env audit lackedlaya, correctedexistingCUDA SDK noGPU/noModel.
+Originalproofscripts R/inventory_m6_immediate_witness_gains_v1.py,prepare_m6_reference_acquisition_
+slice_v1.py,extend_m6_reference_handoff_v1.py. InitialPathstrbug inlatter correctedbeforeoutput.
+Actualhistoricalsourceprovenance/roles/timeprefix preserved. This beginsreferenceexperience,
+NOTfullSource/Viewlearningcompletion. No fitlaunched.
+
+phase21-selected-compute-v1 PAID7preps21.885936856CPU andM6second4residual83.880362928CPU.
+m6-families4to8-cost-reconciliation-v1 nowrecordedtrue. Native/wholeCPU notdoublecounted.
+Otheroldpendingpreps/author/tests/unmeasuredCPU remainpending/unknown. New19slice auditCPU included
+inselectedsettlement; latermissing17preparation isnewpending.
+
+Still: paper128semantic256states108deliveryknown103answerknown; SourceS2notadequate. After153,
+new177sixbatches859 ready, NONESTARTED. Continuousfirst8closed40positions newC16 vsinc15,
+no stablegain; last8families8..12/12..16 ready. Source/Viewrole/timelearning andpostS2aggregation
+notdone. Seed1largesmallweak/mixed; seed2pair/main3390/newconfirmation96/fullcost/generalization
+pending. First96confirmation bodies/answers stillunconsumed. KeepanalysisSHORT.
+
+# HISTORICAL scalable evidence phase20: 2026-11-11
 
 FullgoalACTIVE/incomplete. PROGRESS,no blocker. No subagents/SHA/contentfingerprints/Product/API/
 permission/Canonical changes,service restarts orpush. Preservefirsts/unknowns/roles. KEEPANALYSIS

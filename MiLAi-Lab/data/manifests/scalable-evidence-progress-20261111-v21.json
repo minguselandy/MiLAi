@@ -1,0 +1,1092 @@
+{
+  "status": "PHASE21_PROGRESS_FULL_GOAL_ACTIVE",
+  "observed_at_utc": "2026-11-11T11:38:37.020766+00:00",
+  "previous": "/data/milai-experiments/20261111-scalable-evidence/progress-v20.json",
+  "no_sha_validation": true,
+  "code_commit": "49591f2f",
+  "active_jobs": [
+    {
+      "name": "s1-op36k-seed0-v1",
+      "owner_pid": 769162,
+      "child_pid": 769163,
+      "actual_argv_checked": true,
+      "owner_status": "RUNNING",
+      "status": "RUNNING",
+      "optimizer_updates": 2385,
+      "planned_optimizer_updates": 3390
+    },
+    {
+      "name": "s1-op3k-seed2-v1",
+      "owner_pid": 3905047,
+      "child_pid": 3905048,
+      "actual_argv_checked": true,
+      "owner_status": "RUNNING",
+      "status": "RUNNING",
+      "optimizer_updates": 151,
+      "planned_optimizer_updates": 303
+    },
+    {
+      "name": "m2-fixed-context-train160-families128to160-readouts-v2",
+      "owner_pid": 4096435,
+      "child_pid": 4096436,
+      "actual_argv_checked": true,
+      "owner_status": "RUNNING",
+      "status": "RUNNING",
+      "closed_readouts": 39,
+      "failed_readouts": 1
+    }
+  ],
+  "query_once112_closed": {
+    "status": "COMPLETED_WITH_FAILURES",
+    "pid": 4002618,
+    "prepared": "/data/milai-experiments/20261111-scalable-evidence/m2-public-train16-query-once-all112-v1",
+    "planned_families": 16,
+    "planned_states": 32,
+    "planned_unique_packets": 112,
+    "planned_policy_positions": 112,
+    "closed_readouts": 112,
+    "failed_readouts": 2,
+    "chat_invocations": 112,
+    "reused_readouts": 0,
+    "reuse_source": null,
+    "response_callbacks": 112,
+    "error_callbacks": 0,
+    "automatic_retry": false,
+    "no_sha_validation": true,
+    "answer_persisted_as_source": false,
+    "scope": "Actual public initial cold/fixed-receipt-K observation/menu and saved model input. Same EvidenceOperations, declared four-step continuation and policy HANDOFF. Replay work counters restored separately from actual measured cost, as existing collected_handoff; no Source data or original labels changed. Core operation packet, not a rerun of full public-message/admission history. Explicit referenced prior K plus current real acquired packet, not autonomous Host.",
+    "generation_before": {
+      "charged_tokens": 448482279,
+      "known_tokens": 447857114,
+      "unknown_usage": 16
+    },
+    "generation_requests_before": 90672,
+    "active": "/data/milai-experiments/20261111-scalable-evidence/m2-public-train16-query-once-readouts-v1/case-031/packet-2/readout.json",
+    "compute": {
+      "cpu_seconds": 8.091830318,
+      "wall_seconds": 1471.8945255866274,
+      "runs": 1
+    },
+    "generation_delta": {
+      "charged_tokens": 391356,
+      "known_tokens": 391356,
+      "unknown_usage": 0
+    }
+  },
+  "query_once112_bound": "/data/milai-experiments/20261111-scalable-evidence/m2-public-train16-query-once-bound-v1",
+  "paired_nomination_correction": {
+    "status": "ACTUAL_MATCHED_BINDING_SUPPORT_PROXY_NOT_SEMANTIC_SUCCESS",
+    "common_full_bindings": 95,
+    "old_only_bindings": 17,
+    "new_only_bindings": 17,
+    "all112bindings_identical": false,
+    "views": {
+      "legacy_fixed_context": {
+        "outcomes": 112,
+        "failed": 7,
+        "answerable_all_supports": 0,
+        "matched_answerable_all_supports": 0
+      },
+      "query_once_context": {
+        "outcomes": 112,
+        "failed": 2,
+        "answerable_all_supports": 0,
+        "matched_answerable_all_supports": 0
+      }
+    },
+    "matched_changed": [
+      {
+        "event_id": "musique-family-000045/native-row-1645/cold/step-0",
+        "action": "search_0_16",
+        "native_answerable": true,
+        "old": 1,
+        "new": 2,
+        "available": 3
+      },
+      {
+        "event_id": "musique-family-000045/native-row-1645/cold/step-0",
+        "action": "search_0_8",
+        "native_answerable": true,
+        "old": 1,
+        "new": 2,
+        "available": 3
+      },
+      {
+        "event_id": "musique-family-000050/native-row-1977/cold/step-0",
+        "action": "search_0_16",
+        "native_answerable": false,
+        "old": 0,
+        "new": 1,
+        "available": 1
+      },
+      {
+        "event_id": "musique-family-000050/native-row-1977/cold/step-0",
+        "action": "search_0_8",
+        "native_answerable": false,
+        "old": 0,
+        "new": 1,
+        "available": 1
+      }
+    ],
+    "unmatched_old": [
+      {
+        "event_id": "musique-family-000028/native-row-1/cold/step-0",
+        "family": "musique-family-000028",
+        "action": {
+          "id": "source_fragment_6",
+          "kind": "READ",
+          "target": "observed source 6 fragment as original Reader evidence",
+          "parameters": {
+            "observed_source": {
+              "source_ref": "source-c76f8f2c-3235-43be-bd94-ed33c7a9e932",
+              "source_revision": 1,
+              "start": 0,
+              "end": 797
+            }
+          }
+        },
+        "policies": [
+          "coverage"
+        ],
+        "native_answerable": true,
+        "available_supports": 2,
+        "covered": 1,
+        "all_available": false,
+        "status": "COMPLETED"
+      },
+      {
+        "event_id": "musique-family-000032/native-row-39101/cold/step-0",
+        "family": "musique-family-000032",
+        "action": {
+          "id": "source_fragment_0",
+          "kind": "READ",
+          "target": "observed source 0 fragment as original Reader evidence",
+          "parameters": {
+            "observed_source": {
+              "source_ref": "source-abfb28c1-f8d1-425f-9af1-3604a66efe21",
+              "source_revision": 1,
+              "start": 0,
+              "end": 257
+            }
+          }
+        },
+        "policies": [
+          "coverage"
+        ],
+        "native_answerable": false,
+        "available_supports": 1,
+        "covered": 1,
+        "all_available": true,
+        "status": "COMPLETED"
+      },
+      {
+        "event_id": "musique-family-000032/native-row-39101/known-first/step-0",
+        "family": "musique-family-000032",
+        "action": {
+          "id": "source_fragment_3",
+          "kind": "READ",
+          "target": "observed source 3 fragment as original Reader evidence",
+          "parameters": {
+            "observed_source": {
+              "source_ref": "source-b5f28876-2b02-4c0b-919e-0d179f40e593",
+              "source_revision": 1,
+              "start": 0,
+              "end": 374
+            }
+          }
+        },
+        "policies": [
+          "coverage"
+        ],
+        "native_answerable": false,
+        "available_supports": 1,
+        "covered": 1,
+        "all_available": true,
+        "status": "COMPLETED"
+      },
+      {
+        "event_id": "musique-family-000045/native-row-1645/cold/step-0",
+        "family": "musique-family-000045",
+        "action": {
+          "id": "source_fragment_1",
+          "kind": "READ",
+          "target": "observed source 1 fragment as original Reader evidence",
+          "parameters": {
+            "observed_source": {
+              "source_ref": "source-1b3088cc-207b-4d50-85c6-c0a4b121cc4c",
+              "source_revision": 1,
+              "start": 0,
+              "end": 815
+            }
+          }
+        },
+        "policies": [
+          "coverage"
+        ],
+        "native_answerable": true,
+        "available_supports": 3,
+        "covered": 2,
+        "all_available": false,
+        "status": "COMPLETED"
+      },
+      {
+        "event_id": "musique-family-000045/native-row-1645/known-first/step-0",
+        "family": "musique-family-000045",
+        "action": {
+          "id": "source_fragment_5",
+          "kind": "READ",
+          "target": "observed source 5 fragment as original Reader evidence",
+          "parameters": {
+            "observed_source": {
+              "source_ref": "source-6ee05d00-11da-4d21-9c81-d6ffb16f39d9",
+              "source_revision": 1,
+              "start": 0,
+              "end": 629
+            }
+          }
+        },
+        "policies": [
+          "coverage"
+        ],
+        "native_answerable": true,
+        "available_supports": 3,
+        "covered": 1,
+        "all_available": false,
+        "status": "COMPLETED"
+      },
+      {
+        "event_id": "musique-family-000049/native-row-419/cold/step-0",
+        "family": "musique-family-000049",
+        "action": {
+          "id": "source_fragment_0",
+          "kind": "READ",
+          "target": "observed source 0 fragment as original Reader evidence",
+          "parameters": {
+            "observed_source": {
+              "source_ref": "source-70080f3c-521c-468f-b299-56b9c3f051c9",
+              "source_revision": 1,
+              "start": 0,
+              "end": 413
+            }
+          }
+        },
+        "policies": [
+          "coverage"
+        ],
+        "native_answerable": true,
+        "available_supports": 2,
+        "covered": 1,
+        "all_available": false,
+        "status": "COMPLETED"
+      },
+      {
+        "event_id": "musique-family-000049/native-row-419/known-first/step-0",
+        "family": "musique-family-000049",
+        "action": {
+          "id": "source_fragment_4",
+          "kind": "READ",
+          "target": "observed source 4 fragment as original Reader evidence",
+          "parameters": {
+            "observed_source": {
+              "source_ref": "source-974a38fd-e227-4afd-bd59-247534e79760",
+              "source_revision": 1,
+              "start": 0,
+              "end": 198
+            }
+          }
+        },
+        "policies": [
+          "coverage"
+        ],
+        "native_answerable": true,
+        "available_supports": 2,
+        "covered": 1,
+        "all_available": false,
+        "status": "COMPLETED"
+      },
+      {
+        "event_id": "musique-family-000050/native-row-1977/cold/step-0",
+        "family": "musique-family-000050",
+        "action": {
+          "id": "source_fragment_6",
+          "kind": "READ",
+          "target": "observed source 6 fragment as original Reader evidence",
+          "parameters": {
+            "observed_source": {
+              "source_ref": "source-5741c768-cb95-4e17-8ded-d9ad35410b7d",
+              "source_revision": 1,
+              "start": 0,
+              "end": 586
+            }
+          }
+        },
+        "policies": [
+          "coverage"
+        ],
+        "native_answerable": false,
+        "available_supports": 1,
+        "covered": 0,
+        "all_available": false,
+        "status": "COMPLETED"
+      },
+      {
+        "event_id": "musique-family-000050/native-row-1977/known-first/step-0",
+        "family": "musique-family-000050",
+        "action": {
+          "id": "source_fragment_1",
+          "kind": "READ",
+          "target": "observed source 1 fragment as original Reader evidence",
+          "parameters": {
+            "observed_source": {
+              "source_ref": "source-ee71ef49-0a69-42e9-9b62-16df3d5f321c",
+              "source_revision": 1,
+              "start": 0,
+              "end": 681
+            }
+          }
+        },
+        "policies": [
+          "coverage"
+        ],
+        "native_answerable": false,
+        "available_supports": 1,
+        "covered": 0,
+        "all_available": false,
+        "status": "COMPLETED"
+      },
+      {
+        "event_id": "musique-family-000056/native-row-13311/cold/step-0",
+        "family": "musique-family-000056",
+        "action": {
+          "id": "source_fragment_3",
+          "kind": "READ",
+          "target": "observed source 3 fragment as original Reader evidence",
+          "parameters": {
+            "observed_source": {
+              "source_ref": "source-97e8ab7d-affd-4a10-bee8-3b3f50b4b694",
+              "source_revision": 1,
+              "start": 0,
+              "end": 167
+            }
+          }
+        },
+        "policies": [
+          "coverage"
+        ],
+        "native_answerable": false,
+        "available_supports": 1,
+        "covered": 1,
+        "all_available": true,
+        "status": "COMPLETED"
+      },
+      {
+        "event_id": "musique-family-000056/native-row-13311/known-first/step-0",
+        "family": "musique-family-000056",
+        "action": {
+          "id": "source_fragment_4",
+          "kind": "READ",
+          "target": "observed source 4 fragment as original Reader evidence",
+          "parameters": {
+            "observed_source": {
+              "source_ref": "source-b8b29b3d-b083-4551-9a8d-a623c3f5c9e8",
+              "source_revision": 1,
+              "start": 0,
+              "end": 325
+            }
+          }
+        },
+        "policies": [
+          "coverage"
+        ],
+        "native_answerable": false,
+        "available_supports": 1,
+        "covered": 1,
+        "all_available": true,
+        "status": "COMPLETED"
+      },
+      {
+        "event_id": "musique-family-000060/native-row-3806/cold/step-0",
+        "family": "musique-family-000060",
+        "action": {
+          "id": "source_fragment_3",
+          "kind": "READ",
+          "target": "observed source 3 fragment as original Reader evidence",
+          "parameters": {
+            "observed_source": {
+              "source_ref": "source-d9b4a2d4-0cb9-4af6-b01c-c22815b6e6bc",
+              "source_revision": 1,
+              "start": 0,
+              "end": 564
+            }
+          }
+        },
+        "policies": [
+          "coverage"
+        ],
+        "native_answerable": true,
+        "available_supports": 2,
+        "covered": 1,
+        "all_available": false,
+        "status": "COMPLETED"
+      },
+      {
+        "event_id": "musique-family-000068/native-row-4480/cold/step-0",
+        "family": "musique-family-000068",
+        "action": {
+          "id": "source_fragment_0",
+          "kind": "READ",
+          "target": "observed source 0 fragment as original Reader evidence",
+          "parameters": {
+            "observed_source": {
+              "source_ref": "source-bfb7af63-3a3c-4d8b-9502-36db099acec3",
+              "source_revision": 1,
+              "start": 0,
+              "end": 298
+            }
+          }
+        },
+        "policies": [
+          "coverage"
+        ],
+        "native_answerable": false,
+        "available_supports": 0,
+        "covered": 0,
+        "all_available": false,
+        "status": "COMPLETED"
+      },
+      {
+        "event_id": "musique-family-000074/native-row-13702/cold/step-0",
+        "family": "musique-family-000074",
+        "action": {
+          "id": "source_fragment_7",
+          "kind": "READ",
+          "target": "observed source 7 fragment as original Reader evidence",
+          "parameters": {
+            "observed_source": {
+              "source_ref": "source-cadc4ad3-b4f0-4c54-80a7-c097bdc34a98",
+              "source_revision": 1,
+              "start": 0,
+              "end": 527
+            }
+          }
+        },
+        "policies": [
+          "coverage"
+        ],
+        "native_answerable": false,
+        "available_supports": 0,
+        "covered": 0,
+        "all_available": false,
+        "status": "FAILED"
+      },
+      {
+        "event_id": "musique-family-000074/native-row-13702/known-first/step-0",
+        "family": "musique-family-000074",
+        "action": {
+          "id": "source_fragment_4",
+          "kind": "READ",
+          "target": "observed source 4 fragment as original Reader evidence",
+          "parameters": {
+            "observed_source": {
+              "source_ref": "source-71e1dffd-70a8-4fcd-812c-f8847f7c9b42",
+              "source_revision": 1,
+              "start": 0,
+              "end": 324
+            }
+          }
+        },
+        "policies": [
+          "coverage"
+        ],
+        "native_answerable": false,
+        "available_supports": 0,
+        "covered": 0,
+        "all_available": false,
+        "status": "COMPLETED"
+      },
+      {
+        "event_id": "musique-family-000079/native-row-4359/cold/step-0",
+        "family": "musique-family-000079",
+        "action": {
+          "id": "source_fragment_0",
+          "kind": "READ",
+          "target": "observed source 0 fragment as original Reader evidence",
+          "parameters": {
+            "observed_source": {
+              "source_ref": "source-7f70d177-6916-43f8-8b38-5d4665073dbb",
+              "source_revision": 1,
+              "start": 0,
+              "end": 1223
+            }
+          }
+        },
+        "policies": [
+          "coverage"
+        ],
+        "native_answerable": true,
+        "available_supports": 2,
+        "covered": 1,
+        "all_available": false,
+        "status": "COMPLETED"
+      },
+      {
+        "event_id": "musique-family-000079/native-row-4359/known-first/step-0",
+        "family": "musique-family-000079",
+        "action": {
+          "id": "source_fragment_1",
+          "kind": "READ",
+          "target": "observed source 1 fragment as original Reader evidence",
+          "parameters": {
+            "observed_source": {
+              "source_ref": "source-46840708-c50d-4bb8-bcdc-313382e63b54",
+              "source_revision": 1,
+              "start": 0,
+              "end": 665
+            }
+          }
+        },
+        "policies": [
+          "coverage"
+        ],
+        "native_answerable": true,
+        "available_supports": 2,
+        "covered": 1,
+        "all_available": false,
+        "status": "FAILED"
+      }
+    ],
+    "unmatched_new": [
+      {
+        "event_id": "musique-family-000028/native-row-1/cold/step-0",
+        "family": "musique-family-000028",
+        "action": {
+          "id": "source_fragment_3",
+          "kind": "READ",
+          "target": "observed source 3 fragment as original Reader evidence",
+          "parameters": {
+            "observed_source": {
+              "source_ref": "source-83e0f538-50f1-49e5-99b5-b98e353133e7",
+              "source_revision": 1,
+              "start": 0,
+              "end": 282
+            }
+          }
+        },
+        "policies": [
+          "coverage"
+        ],
+        "native_answerable": true,
+        "available_supports": 2,
+        "covered": 1,
+        "all_available": false,
+        "status": "COMPLETED"
+      },
+      {
+        "event_id": "musique-family-000032/native-row-39101/cold/step-0",
+        "family": "musique-family-000032",
+        "action": {
+          "id": "source_fragment_1",
+          "kind": "READ",
+          "target": "observed source 1 fragment as original Reader evidence",
+          "parameters": {
+            "observed_source": {
+              "source_ref": "source-d2d8f147-b3a4-45f3-b870-de0d6bc78418",
+              "source_revision": 1,
+              "start": 0,
+              "end": 811
+            }
+          }
+        },
+        "policies": [
+          "coverage"
+        ],
+        "native_answerable": false,
+        "available_supports": 1,
+        "covered": 1,
+        "all_available": true,
+        "status": "COMPLETED"
+      },
+      {
+        "event_id": "musique-family-000032/native-row-39101/known-first/step-0",
+        "family": "musique-family-000032",
+        "action": {
+          "id": "source_fragment_5",
+          "kind": "READ",
+          "target": "observed source 5 fragment as original Reader evidence",
+          "parameters": {
+            "observed_source": {
+              "source_ref": "source-7dcfbc89-838b-4425-b70e-ade57b3cc92b",
+              "source_revision": 1,
+              "start": 0,
+              "end": 269
+            }
+          }
+        },
+        "policies": [
+          "coverage"
+        ],
+        "native_answerable": false,
+        "available_supports": 1,
+        "covered": 1,
+        "all_available": true,
+        "status": "COMPLETED"
+      },
+      {
+        "event_id": "musique-family-000045/native-row-1645/cold/step-0",
+        "family": "musique-family-000045",
+        "action": {
+          "id": "source_fragment_0",
+          "kind": "READ",
+          "target": "observed source 0 fragment as original Reader evidence",
+          "parameters": {
+            "observed_source": {
+              "source_ref": "source-d824f91e-418a-4e8c-b854-827ccfe4d46d",
+              "source_revision": 1,
+              "start": 0,
+              "end": 259
+            }
+          }
+        },
+        "policies": [
+          "coverage"
+        ],
+        "native_answerable": true,
+        "available_supports": 3,
+        "covered": 1,
+        "all_available": false,
+        "status": "COMPLETED"
+      },
+      {
+        "event_id": "musique-family-000045/native-row-1645/known-first/step-0",
+        "family": "musique-family-000045",
+        "action": {
+          "id": "source_fragment_8",
+          "kind": "READ",
+          "target": "observed source 8 fragment as original Reader evidence",
+          "parameters": {
+            "observed_source": {
+              "source_ref": "source-cc10da3f-092f-4c31-a60f-a65a698e5004",
+              "source_revision": 1,
+              "start": 0,
+              "end": 307
+            }
+          }
+        },
+        "policies": [
+          "coverage"
+        ],
+        "native_answerable": true,
+        "available_supports": 3,
+        "covered": 2,
+        "all_available": false,
+        "status": "COMPLETED"
+      },
+      {
+        "event_id": "musique-family-000049/native-row-419/cold/step-0",
+        "family": "musique-family-000049",
+        "action": {
+          "id": "source_fragment_1",
+          "kind": "READ",
+          "target": "observed source 1 fragment as original Reader evidence",
+          "parameters": {
+            "observed_source": {
+              "source_ref": "source-17c9f4d8-ed26-482f-b04f-a4ff5f080561",
+              "source_revision": 1,
+              "start": 0,
+              "end": 625
+            }
+          }
+        },
+        "policies": [
+          "coverage"
+        ],
+        "native_answerable": true,
+        "available_supports": 2,
+        "covered": 1,
+        "all_available": false,
+        "status": "COMPLETED"
+      },
+      {
+        "event_id": "musique-family-000049/native-row-419/known-first/step-0",
+        "family": "musique-family-000049",
+        "action": {
+          "id": "source_fragment_1",
+          "kind": "READ",
+          "target": "observed source 1 fragment as original Reader evidence",
+          "parameters": {
+            "observed_source": {
+              "source_ref": "source-17c9f4d8-ed26-482f-b04f-a4ff5f080561",
+              "source_revision": 1,
+              "start": 0,
+              "end": 625
+            }
+          }
+        },
+        "policies": [
+          "coverage"
+        ],
+        "native_answerable": true,
+        "available_supports": 2,
+        "covered": 1,
+        "all_available": false,
+        "status": "COMPLETED"
+      },
+      {
+        "event_id": "musique-family-000050/native-row-1977/cold/step-0",
+        "family": "musique-family-000050",
+        "action": {
+          "id": "source_fragment_2",
+          "kind": "READ",
+          "target": "observed source 2 fragment as original Reader evidence",
+          "parameters": {
+            "observed_source": {
+              "source_ref": "source-eb8b56bc-9ade-4a8f-a6be-78285598ff1b",
+              "source_revision": 1,
+              "start": 0,
+              "end": 275
+            }
+          }
+        },
+        "policies": [
+          "coverage"
+        ],
+        "native_answerable": false,
+        "available_supports": 1,
+        "covered": 1,
+        "all_available": true,
+        "status": "COMPLETED"
+      },
+      {
+        "event_id": "musique-family-000050/native-row-1977/known-first/step-0",
+        "family": "musique-family-000050",
+        "action": {
+          "id": "source_fragment_4",
+          "kind": "READ",
+          "target": "observed source 4 fragment as original Reader evidence",
+          "parameters": {
+            "observed_source": {
+              "source_ref": "source-a1ea39aa-9a3f-444d-aef0-0a2ac98c12c1",
+              "source_revision": 1,
+              "start": 0,
+              "end": 1076
+            }
+          }
+        },
+        "policies": [
+          "coverage"
+        ],
+        "native_answerable": false,
+        "available_supports": 1,
+        "covered": 1,
+        "all_available": true,
+        "status": "COMPLETED"
+      },
+      {
+        "event_id": "musique-family-000056/native-row-13311/cold/step-0",
+        "family": "musique-family-000056",
+        "action": {
+          "id": "source_fragment_2",
+          "kind": "READ",
+          "target": "observed source 2 fragment as original Reader evidence",
+          "parameters": {
+            "observed_source": {
+              "source_ref": "source-641188fe-6581-423a-9292-43ba86c7657c",
+              "source_revision": 1,
+              "start": 0,
+              "end": 616
+            }
+          }
+        },
+        "policies": [
+          "coverage"
+        ],
+        "native_answerable": false,
+        "available_supports": 1,
+        "covered": 1,
+        "all_available": true,
+        "status": "COMPLETED"
+      },
+      {
+        "event_id": "musique-family-000056/native-row-13311/known-first/step-0",
+        "family": "musique-family-000056",
+        "action": {
+          "id": "source_fragment_2",
+          "kind": "READ",
+          "target": "observed source 2 fragment as original Reader evidence",
+          "parameters": {
+            "observed_source": {
+              "source_ref": "source-641188fe-6581-423a-9292-43ba86c7657c",
+              "source_revision": 1,
+              "start": 0,
+              "end": 616
+            }
+          }
+        },
+        "policies": [
+          "coverage"
+        ],
+        "native_answerable": false,
+        "available_supports": 1,
+        "covered": 1,
+        "all_available": true,
+        "status": "COMPLETED"
+      },
+      {
+        "event_id": "musique-family-000060/native-row-3806/cold/step-0",
+        "family": "musique-family-000060",
+        "action": {
+          "id": "source_full_7",
+          "kind": "READ",
+          "target": "observed source 7 full as original Reader evidence",
+          "parameters": {
+            "observed_source": {
+              "source_ref": "source-d1d0d280-e272-4a67-b1f8-acb47e3e09c2",
+              "source_revision": 1,
+              "start": 0,
+              "end": 947
+            }
+          }
+        },
+        "policies": [
+          "coverage"
+        ],
+        "native_answerable": true,
+        "available_supports": 2,
+        "covered": 1,
+        "all_available": false,
+        "status": "COMPLETED"
+      },
+      {
+        "event_id": "musique-family-000068/native-row-4480/cold/step-0",
+        "family": "musique-family-000068",
+        "action": {
+          "id": "source_fragment_3",
+          "kind": "READ",
+          "target": "observed source 3 fragment as original Reader evidence",
+          "parameters": {
+            "observed_source": {
+              "source_ref": "source-20ec7ecc-0ece-4fa4-a79d-fbd9dc0a6a42",
+              "source_revision": 1,
+              "start": 0,
+              "end": 692
+            }
+          }
+        },
+        "policies": [
+          "coverage"
+        ],
+        "native_answerable": false,
+        "available_supports": 0,
+        "covered": 0,
+        "all_available": false,
+        "status": "COMPLETED"
+      },
+      {
+        "event_id": "musique-family-000074/native-row-13702/cold/step-0",
+        "family": "musique-family-000074",
+        "action": {
+          "id": "source_fragment_1",
+          "kind": "READ",
+          "target": "observed source 1 fragment as original Reader evidence",
+          "parameters": {
+            "observed_source": {
+              "source_ref": "source-d1052d50-d5fd-4abf-b0b6-26a30f0afae9",
+              "source_revision": 1,
+              "start": 0,
+              "end": 694
+            }
+          }
+        },
+        "policies": [
+          "coverage"
+        ],
+        "native_answerable": false,
+        "available_supports": 0,
+        "covered": 0,
+        "all_available": false,
+        "status": "COMPLETED"
+      },
+      {
+        "event_id": "musique-family-000074/native-row-13702/known-first/step-0",
+        "family": "musique-family-000074",
+        "action": {
+          "id": "source_fragment_8",
+          "kind": "READ",
+          "target": "observed source 8 fragment as original Reader evidence",
+          "parameters": {
+            "observed_source": {
+              "source_ref": "source-e5e3e9cc-95a3-425d-b45a-416728893743",
+              "source_revision": 1,
+              "start": 0,
+              "end": 465
+            }
+          }
+        },
+        "policies": [
+          "coverage"
+        ],
+        "native_answerable": false,
+        "available_supports": 0,
+        "covered": 0,
+        "all_available": false,
+        "status": "COMPLETED"
+      },
+      {
+        "event_id": "musique-family-000079/native-row-4359/cold/step-0",
+        "family": "musique-family-000079",
+        "action": {
+          "id": "source_fragment_4",
+          "kind": "READ",
+          "target": "observed source 4 fragment as original Reader evidence",
+          "parameters": {
+            "observed_source": {
+              "source_ref": "source-cfd36b59-1695-4752-bc8f-66ecd73b0ab0",
+              "source_revision": 1,
+              "start": 0,
+              "end": 486
+            }
+          }
+        },
+        "policies": [
+          "coverage"
+        ],
+        "native_answerable": true,
+        "available_supports": 2,
+        "covered": 1,
+        "all_available": false,
+        "status": "COMPLETED"
+      },
+      {
+        "event_id": "musique-family-000079/native-row-4359/known-first/step-0",
+        "family": "musique-family-000079",
+        "action": {
+          "id": "source_fragment_0",
+          "kind": "READ",
+          "target": "observed source 0 fragment as original Reader evidence",
+          "parameters": {
+            "observed_source": {
+              "source_ref": "source-7f70d177-6916-43f8-8b38-5d4665073dbb",
+              "source_revision": 1,
+              "start": 0,
+              "end": 1223
+            }
+          }
+        },
+        "policies": [
+          "coverage"
+        ],
+        "native_answerable": true,
+        "available_supports": 2,
+        "covered": 1,
+        "all_available": false,
+        "status": "COMPLETED"
+      }
+    ],
+    "scope": "Same32before/fullmenus; learner/baseline/knownquery choices retainbindings. CoverageREADnomination differed becauseoldprep used3chunks andnewprep one32state sequence, resettingcoveragecounter/seed differently. Comparecontinuations only oncommonfullbindings, neverattributeall112difference tocontinuation alone. Literalwholeparagraph proxy only; no semanticlabels, absentrequiredsupportsnotrepaired, RootHostRNGunmatched.",
+    "no_sha_validation": true
+  },
+  "missing17_native_checked": "/data/milai-experiments/20261111-scalable-evidence/m2-public-train16-query-once-missing17-v1/checks.json",
+  "missing17_reader_plan": "/data/milai-experiments/20261111-scalable-evidence/m2-public-train16-query-once-missing17-readouts-v1-plan.json",
+  "missing17_Host_started": false,
+  "view_reference_inventory": {
+    "status": "ACTUAL_IMMEDIATE_WHOLE_WITNESS_GAINS_INVENTORIED",
+    "actual_calls": 179,
+    "positive_gain_steps": 34,
+    "families": 20,
+    "operation_counts": {
+      "REFRESH_VIEW": 32,
+      "READ": 2
+    },
+    "flow_counts": {
+      "content": 17,
+      "originals": 17
+    },
+    "source_split": "train",
+    "no_sha_validation": true,
+    "new_model_or_Host_calls": 0,
+    "fit_exports_written": false,
+    "scope": "Existingactualbefore/nextdecisionvisible evidence plusactualK; literalwholebodyandrole coverage ofauthorreferencewitnesses. Navigationobservations alone are notdelivery. Selectedaction only, otheractions unjudged. Notsemantic fullsufficiency, optimality or fullHostsuccess; publicgoal/privatequeryscope must stillbechecked beforeSFT use.",
+    "compute": {
+      "cpu_seconds": 2.608121618,
+      "wall_seconds": 4.06786304153502
+    }
+  },
+  "view_reference_operations": {
+    "status": "ACTUAL_REFERENCE_OPERATION_SLICE_NOT_FITTED",
+    "states": 19,
+    "families": 10,
+    "REFRESH_VIEW_acquisition_states": 10,
+    "HANDOFF_reference_preserving_states": 9,
+    "source_split": "train",
+    "no_sha_validation": true,
+    "new_model_or_Host_calls": 0,
+    "scope": "Same10TRAINfamilies asmanuallyscope-reviewedacquisition. ActualnextHANDOFF onlywhen originalterminalpacket plusactualK retainsatleastoneauthor supportset byliteralbody/role. Smallbiaseddemonstrations, no negative/tie manufacture andno generalization or semanticqualityclaim. Mustnotfitasstandaloneuniversalrefresh policy.",
+    "compute": {
+      "cpu_seconds": 0.39821202200000005,
+      "wall_seconds": 0.3982353750616312
+    }
+  },
+  "view_reference_capacity": {
+    "states": 19,
+    "truncated_states": 0,
+    "max_sequence_tokens": 10636,
+    "scope": "Actualmodel codec capacity only, notsemanticvalidity ortraininggain. FirstHTTP-env invocation lackedlaya module andmade no model/HTTPcalls; this usesexistingCUDA SDK env withnoCUDAdevices.",
+    "compute": {
+      "cpu_seconds": 2.305688805,
+      "wall_seconds": 2.303312632255256
+    }
+  },
+  "selected_cost_settlement": {
+    "recorded": true,
+    "preparation_phase": "milai_scalable_phase21_selected_preparation_20261111_v1",
+    "sources": [
+      {
+        "path": "/data/milai-experiments/20261111-scalable-evidence/m2-train177-reader-batches-v1.json",
+        "cpu_seconds": 12.38102682
+      },
+      {
+        "path": "/data/milai-experiments/20261111-scalable-evidence/s1-learning-curves-through-u2260-v1/manifest.json",
+        "cpu_seconds": 2.011205729
+      },
+      {
+        "path": "/data/milai-experiments/20261111-scalable-evidence/m6-immediate-witness-gains-v1/manifest.json",
+        "cpu_seconds": 2.608121618
+      },
+      {
+        "path": "/data/milai-experiments/20261111-scalable-evidence/m6-reference-acquisition-train10-v1/manifest.json",
+        "cpu_seconds": 0.08454202900000002
+      },
+      {
+        "path": "/data/milai-experiments/20261111-scalable-evidence/m6-reference-acquisition-train10-v1/capacity.json",
+        "cpu_seconds": 2.097139833
+      },
+      {
+        "path": "/data/milai-experiments/20261111-scalable-evidence/m6-reference-operations-train10-v1/manifest.json",
+        "cpu_seconds": 0.39821202200000005
+      },
+      {
+        "path": "/data/milai-experiments/20261111-scalable-evidence/m6-reference-operations-train10-v1/capacity.json",
+        "cpu_seconds": 2.305688805
+      }
+    ],
+    "preparation_compute": {
+      "cpu_seconds": 21.885936856,
+      "runs": 7
+    },
+    "residual_phase": "milai_scalable_m6_continuous4to8_whole_minus_native_20261111_v1",
+    "residual_CPU": 83.88036292782681,
+    "scope": "Only these7measuredindependentpreparations andpreviouslyunbilledM6two-childresidual. Native/Host/training/teacher selfbill notduplicated. Otherolderpendingpreps/author/tests/unmeasuredCPU remainpendingorunknown."
+  },
+  "scope": "Query-once old/new112share32before/menu butonly95firstbindings; 17coveragechoices changed withsamplingchunk boundaries. Missing oldbindings prepared innewcontinuation tocompletepairedcomparison; nofirsts rerolled andnoextra independentstates. Source/View19referenceexamples aresmallbiasedTRAINdemonstrations, notsemanticquality, optimality, Hostsuccess orfittedpolicy.",
+  "remaining": [
+    "Afterpaper153closes, runmissing17Hostfirsts, bindnew129outcomes/32states withexact112pairedsubset; annotateknown-awareteacher andcompileprotocol-specificsemanticfeedback.",
+    "Continue859preparednewpaperendpoints and8continuousfamilies. Source/Viewreference19notstandalonepolicytraining; needdiverseadequateD/feedbackexperience.",
+    "Finishseed2pair/main3390, adequateS2/SFT/postS2aggregation,newconfirmation96/fullcost/generalization."
+  ],
+  "verification": {
+    "ruff": "passed",
+    "real_frozen_nomination_branches": 17,
+    "nomination_source_checks_before_full_menu": "unchangedliteralbefore/menu andactualactionmembership",
+    "capacity_audit": "19states0truncation,max10636,declared16384/2048; no modelinference claim"
+  }
+}
