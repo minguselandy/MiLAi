@@ -1,32 +1,63 @@
-# LIVE scalable evidence phase39: 2026-11-12
+# LIVE scalable evidence phase40: 2026-11-12
 
-Goal ACTIVE/incomplete; progress, no blocker. KEEP ANALYSIS SHORT, tools/actions first.
-Never emit Source_Metadata word loops or unbounded JSON/history/budget.compute output.
-No SHA/content fingerprints/subagents/Product/API/permission/Canonical changes/service restart/push.
-Actual /proc argv + owner + artifacts govern; never restart stale run.json/lost handle/lock wait.
-R=/data/milai-experiments/20261111-scalable-evidence. Latest progress-v39/doc phase39.
+Goal ACTIVE/incomplete; progress, no blocker. KEEP ANALYSIS SHORT; tools/actions first.
+No Source_Metadata wordloops/unboundedJSON/history/budget.compute outputs. Never print nested
+usage/capacity orrawone-linehistories; selectknownscalarfields orboundedtext.
+No SHA/contentfingerprints/subagents/Product/API/permission/Canonicalchanges/service restart/push.
+Actual /procargv + owner + artifacts govern; neverrestartstaleJSON/losthandles/lockwait.
+R=/data/milai-experiments/20261111-scalable-evidence. Latestprogress-v40/docphase40.
 
-LIVE HTTP qasper-confirm96-s3-own-readouts-v1 owner1948359 child1948360 latest46/96,3fail.
-CLOSED scale first96 owner1842885/1842886:91complete5fail. Baseline96complete0fail.
-S3-old96 NOTSTARTED. No confirmationquality inspection/scoring untilall4firstsclosed.
-Whole Reader HTTP/ledger lease exclusive; no competing HTTP/new billing. Native fit may wait
-at final selfbilling; NEVER kill/restart it. Let pending billing finish before next Reader launch.
-LIVE GPU3 m2-first160-adequate-cost-seed0-v1 owner1941204 child1941205 latest34/51.
-Same450rows/131feedback+319replay/S1u101/seed0/fullparameters/LR/schedule/51updates1632draws as
-closed m2-first160-feedback-seed0-v1 quality-tie control. Only94TRAINdeliveryties become observed
-cost directions, afterboth sufficientmaterial/complete supportedanswers and actual4costvector
-componentwise dominance. 69states53families,18HANDOFF>READ. Old62directions/63unknown/48remaining
-ties unchanged; state/questions/metadata/gold/order/replay exactequal. Original data untouched.
-No runtimecodechange oronline gate. Derived dataset m2-first160-adequate-observed-cost-data-v1.
-prepare_m2_adequate_cost_feedback_v1.py verifiedactual bindings/reviews/wires/costs;3.895060918CPU
-pendingstagebill. One stochasticfirst/fixedcontext4/coarsequality; NOTexpected/fullcostlabel.
-Finalu51 fixedbeforefit. Original fullfeedback control reused, no redundant fit. Confirmation
-nominees unchanged, no confirmationoutcome used. Native fit selfbills; wholechild overlaps.
-READY cost DEV64: m2-first160-adequate-cost-dev64-plan-v1.json,
-run_adequate_cost_dev64_score_v1.py onlyafterfitownerclosed. Thenprepare actualchoices/packets,
-reusecanonicalphysicalfirsts from headunion plus new head2, transfer existing judgments. Only
-new bindings need newfirsts. Do not infer taskbenefit from pairfit/READ count. No automatic queue.
+LIVE finalHTTP qasper-confirm96-s3-old-readouts-v1 owner2099264 child2099265 latest24/96,0fail.
+CLOSED S3own owner1948359/1948360:90complete6fail. Baseline96complete0fail,scale91complete5fail.
+No confirmationanswers/quality inspected; waitall4firstsclosed, thennativeF1/Source8binder/repeats.
+GPU2/3free exceptotherexisting~3513MiBallocations, neverkillthose. WholeReaderHTTP/ledgerlease
+exclusive. No newbilling/otherHTTP whileactive. No automaticqueue/retry.
 
+CLOSED costfit owner1941204/1941205, m2-first160-adequate-cost-seed0-v1 u51.
+Same450rows131feedback+319replay/S1u101/seed0/fullparameter/51updates1632draws/8668371tokens
+asoriginalfullfeedback, only94adequate observedcosttie targets changed(69states53families).
+NativeCPU2307.371363778,wall1847.793398205,selfbilled. adequate-cost-closed-fit-v1/summary.json:
+fullDEV87/129/120of278 atu17/34/51 vscontrol89/117/110;initial133. Costpairs75/94vs41/94,
+originalquality56/62vs59/62. HANDOFFcostpairs18:16ordered,4selectedwinner vs10/0. 55/131TRAIN
+fullchoiceschanged. No expected/fullcost orHostbenefit inferred. Frozenfinalu51, confirmationunchanged.
+CostDEV64score CLOSED owner2062162/2062163; native113packets CLOSED owner2066757/2066758,
+6new/107reused,0Host. Originalnativeunion198, firstcache151beforecost, actualcostreadout106reuse+7new
+(6complete1fail),113total4fail. Readerowner2072821; teacher7owner2087490/2087491 closed,
+106judgmenttransfers0conflicts. Neednotrerunanyofthese. Sourceinitialspots0/3/6 done.
+ActualcostDEVchoices SEARCH26 READ36 HANDOFF2;fullfeedback31/32/1. Costdiff14/64vsfull,
+24/64vsoriginalS1u101. No overallstopping/Hostgain. No newfitcurrentlyplanned.
+
+IMPORTANT PAIRED SOURCE REVIEW CORRECTION:
+Latest adequate-cost-dev32-closed-comparison-v2/summary.json retains3views:
+teacher fixed/cost/full/SFT33/31/32/33;initialhybrid32/34/32/32;pairedSource32/33/33/31.
+Initial34vs32 apparentcostadvantage wasgrading-sensitive andDISAPPEARS inprimarycostvsfull.
+Reviewall10branchesat4hybrid-discordantstates,7recordsupdated; file
+adequate-cost-dev32-transferred-reviews-v1/paired-discordance-source-reviews-v1.json.
+Crowdsourcing1710.07960 samecontentset/honestabsence getsunknownall, notcostcomplete.
+Styletransfer1903.11283 bothactualpackets+answershave100sentencehumanassessment/fivequestions,
+bothcomplete despite nativeunanswerable. CMV1909.01362 genericmoderatoraction missesactualRule2
+comment-removallabelrestriction; applysameearliercriteriontoall3branches =>incomplete.
+McGurk1906.01040 bothSource-supporteddefinition/mechanism; costunknown contradictedownpositive
+teacher rationale andliteralSource =>bothcomplete. ReviewRootnonblind/nonindependent/notpaperhuman,
+outcome-selected4states notall-stateaudit. Previousviews andrawfirsts preserved, no TRAINlabels.
+All64cost/fullCindicatorsnowidentical =>conditionalCI[0,0], NOTcertainty/nojudge-RNG-seeduncertainty.
+If futurejudgmentreuse needed, latest paired_source_reviewed-reviews.json takespriority for exact
+physicalfirsts, thenpriorhybrid; do notsilentlyreintroduceknowninconsistencies. No costfullpolicynew
+experiment launched; do notexpand solelybecause obsolete34vs32 lookedpositive.
+
+READY nextconfirmation tools: score_confirmation96_firsts_v1.py,
+bind_confirmation96_review_panel_v1.py, run_confirmation96_repeat2_readouts_v1.py NAME
+(four8draws, originalpositions0,12,...84), then score_confirmation96_repeats_v1.py.
+All4firstowners mustactuallyclose; noanswerextraction, officialmissing=0alongsideconditional/bounds,
+Root8Sourceactualpacketreviews nonblind/nonindependent; no newnomination/model/prompt/cohortchange.
+LME32twofixednominees36ku1130/S2u51/nativeJudge READYNOTSTARTED. Two100trajectorybanks,
+not32independentSources/full451/newblind. Preservefailedfirsts/explicitunattemptedcontinuations.
+
+PAID phase40-closed-preparation-compute-v1.json:8measuredprepsCPU9.498731941, exactlyonce.
+NewPENDING costDEVnativewholechild47.639341CPU (toolNOselfbill; don'taddnestedrunCPU), later
+inventory/witness/transferpreps pendingnextstage. Nativefit/scorer/Reader/teacher selfbilled.
+No ledgerwritewhilefinalReaderactive; unmeasuredauthor/parent/testsunknown, notzero.
+v2§16capabilitychain stillunproved; finishconfirmation/externalchain/fullcost/generalizationsynthesis.
 
 CLOSED fitresource table closed-fit-resource-table-v1/{summary.json,jobs.json,jobs.csv}:28top-level nativefits,27complete1failed,21research2startup5engineering; nativeCPU237841.053942. Notfullgoal/ledgeradditive orGPUbusy; currentcostfit excludedwhilelive. Script assemble_closed_fit_resources_v1.py, measuredprepCPU pending.
 CLOSED phase39 costjoin m6-adapted-resource-quality-v1/summary.json +per-position.json:
@@ -39,7 +70,7 @@ adequate-cost-existing-model-train-diagnostic-v1.json: originalfull/headboth41/9
 On18HANDOFF>READ originalfullselectedwinner0/loser1/outside17; head8/4/6. Outsidepairunknown,
 notwrong. SavedactualTRAINpredictions, no newNN/Host orDEVbenefit. Newcostfitu17full87/278,
 originalfullfeedbacku17=89; do notearlystop/changefinalu51fromthis.
-READY postcostscore: run_owned_plan_v1.py adequate-cost-dev32-choices-v1,
+CLOSED phase40; historical preparation ref: run_owned_plan_v1.py adequate-cost-dev32-choices-v1,
 planreferenceshead-only-existing-dev-packet-union-v1(198native), scorersadequate_cost/fullfeedback/SFT
 plusfixedbaseline. Onlyaftercostendpointscoreractualclosed. NativecollectorNOselfbilling, wholechild
 mustrecordonce afterclose (do notsubtractnonexistentnativeCPU). Firstcache now
