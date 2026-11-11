@@ -1,4 +1,69 @@
-# LIVE scalable evidence phase 7: 2026-11-11
+# LIVE scalable evidence phase 8: 2026-11-11
+
+Full v2 user goal ACTIVE/incomplete. This/prior goal work PROGRESS, no blocker. No subagents,
+SHA/fingerprints, service restart, Product/API/permission/Canonical change or remote push.
+Latest code7fc46755, progress-v8.json and manifest scalable-evidence-progress-20261111-v8.json.
+Read current scoped header/doc, not historical log. R=/data/milai-experiments/20261111-scalable-evidence.
+All old exec handles may be lost; actual/proc argv+owner+artifacts authoritative, never restart on timeout.
+
+LIVE original10k child468718 parent468717 GPU3 loadedcececfb7,last855/945.
+LIVE original36k child769163 parent769162 GPU2 loaded4bab6388,last500/3390.
+LIVE budget512 scorer child1503718 detached CPU4/FP32, output i2-budget512-terminal64-s1u101-scores-v1,
+last58/64. Entry evaluate_bounded_laya unchanged from4bab6388; checkout797e3f5e at launch, unrelated
+compiler edit present then. Full64 inputs, full menus, no gold to model. Eval self-bills CPU phase.
+LIVE M2 reader child1544515 detached, m2-fixed-context-train160-families16to48-readouts-v1,
+64states/32sources/155packets, last94closed2failed7reused. One HTTP owner at a time. Self-bills.
+
+CLOSED original learner160 child818846 GONE, parent818840 previouslylost, no restart:
+160families712rawstates417labelledfit/112labelledfamilies295unknown;712modelcalls;160originalbanksreused.
+First64terminalfamilies168actualpackets. s1-learner-train160-operation-data-v1 published, not S3fit.
+Native closeout s1-learner-train160-native-closeout-v1.json: toolCPU45334.658237122996,
+wall11595.1309666764. WholechildCPU/exitcode unavailable; lowerbound27974.8 is not additive.
+UNPAID originalphase milai_scalable_learner_train160_20261111_v1: when ledger free, bill child tool
+timer once if absent; lostparent/startup/tail unknown. Original owner JSON remains stale history.
+
+CLOSED autonomous10k/u630 owner1363440 child1363448 exit0,compute_recorded true.8positions7completed
+1lengthfailure; core3/8 strict2/8,2uncertain2incomplete.12tools61310knownGen0newunknown/embedding.
+Root nonblind source review s1-op10k-u630-autonomous-dev8-review-v1/author-review-v1.json;
+all7actual finalframes bound, ranges match. WSJ retainsHMM;cheap-techniquewhy losesexplanation;
+McGurk corecorrect but third-onlydefinition too narrow;paragraph/line structure improves partially,
+stillmissingPDFpage segmentation. NativefullstringF1.07433623. No overallgain over3k-u101 core3/strict3.
+Sameold8DEV/CPUFP32,HostRNGunmatched;exploratoryu630 nomination dueREAD/handoff tradeoff.
+
+CLOSED I2second16 semantic review now complete: families16to32-author-review-v1.json,
+44unique:2complete-supported27incomplete1incorrect5failed9unknown;materials3sufficient30insufficient11unknown.
+Collector1/16,rules1/16,coverage0/14 complete-supported.2delivery-directionstates3pairs,0answerdirections.
+BOTH newdelivery states lack staticSFT labels, matched_states=0. Keep validfullfeedback anyway.
+7fc46755 compiler exports full delivery-fit/answer-fit plus separate matched objective views.
+First16 recompiled semantic-v2 (same originallabels). Combined i2-semantic-first32-v1:
+32raw families/states,4delivery-fit states,2answer-fit,2matched. NOT FITTED/NOT fullS2 completion.
+Same-state matching is only controlled diagnostic, not a gate that discards additional supervision.
+I2tail32 continued matrix83 closed (75complete8failed incl1orphan), semantic review stillpending.
+Original31known112202 +1unknown9841 reservation preserved;51untouched calls214966known,0newunknown.
+All oldI2+newcontinued sources indexed read-only in i2-closed64-readout-cache-v1 for exact-wire reuse.
+
+CLOSED fixed-prefix budget pair64: i2-fixed-prefix-budget{2048,512}-train64-v1;512raw states each,
+192/170actualHANDOFF packets,CPU25.812433912/23.649749378,0model/Host calls. Same64source/question
+objects,64/64same acquisition bindings and acquired Source scopes; original bank reuse, no DBcopies.
+2048:11offeredreference-positive/current11/nominated11.512:10offered/current6/nominated6.
+4positive legal choices missed by old3 nominations; this is offline coverage diagnosis, not gold
+selection. Frozen S1u101 scoring all64 terminal states now; record fullargmax separately from
+conditional bestHANDOFF, do not claim autonomousstop from a forced delivery comparison.
+No numericbudget field in private model state; constraints affect menus/results. No budgetreasoning
+or128independent-source/semantic-success claim. Comparison i2-budget-pair64-comparison-v1.json.
+
+M2first16 fixedcontext77 readouts closed; its semantic review pending. Next32reader active above.
+Need extend M2 from source offset48 (prepared next32alreadyexecuted native; no duplicate replays).
+11relatedtests+actualdata checks,Ruff pass; package priorpass,tools same6old LME dynamic imports.
+Phase6/phase7 prep receipts paid. UNPAID new measured artifacts: learner timer, budgetpair,
+semantic compiles, Host binding/native-score, M2/I2 late preparation/scoring. Score/reader/Hostowner
+native phases selfbill; do not doublecount. Authorship/tests/unmeasured subprocess/startups unknown.
+NEXT: finish10k/36k; close64CPU nominations, execute newselected packets via originalbank/prefix and
+then read them out with unchanged first-result rules. Continue source reviews, grow fullfeedback
+and adequate common-S1 SFT/pair studies. ActualK/constrainedI2, continuousSource/View, own-state
+comparison, decisive seeds,newconfirmation96 and finalcost/generalization remain incomplete.
+
+# HISTORICAL scalable evidence phase 7: 2026-11-11
 
 Full user v2 goal ACTIVE/incomplete. This and prior goal work are PROGRESS; no blocker.
 No subagents, SHA/fingerprint validation, service restart, Product/API/permission/Canonical changes or push.

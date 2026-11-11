@@ -1,0 +1,277 @@
+{
+  "status": "PHASE8_PROGRESS_FULL_GOAL_ACTIVE",
+  "observed_at_utc": "2026-11-11T00:22:06.320907+00:00",
+  "code_commit": "7fc46755",
+  "previous": "/data/milai-experiments/20261111-scalable-evidence/progress-v7.json",
+  "no_sha_validation": true,
+  "active_jobs": [
+    {
+      "name": "s1-op10k-seed0-v1",
+      "source_note": "Main loaded trainer commits exact; new helper code unchanged across documentation-only commits",
+      "code": "cececfb7",
+      "pid": 468718,
+      "status": "RUNNING",
+      "optimizer_updates": 855,
+      "planned_optimizer_updates": 945
+    },
+    {
+      "name": "s1-op36k-seed0-v1",
+      "source_note": "Main loaded trainer commits exact; new helper code unchanged across documentation-only commits",
+      "code": "4bab6388",
+      "pid": 769163,
+      "status": "RUNNING",
+      "optimizer_updates": 500,
+      "planned_optimizer_updates": 3390
+    },
+    {
+      "name": "i2-budget512-terminal64-s1u101-scores-v1",
+      "source_note": "An unrelated compiler full-fit export edit was uncommitted at launch; it is not imported by this scorer.",
+      "code": "797e3f5e at launch; evaluator entrypoint unchanged from4bab6388",
+      "pid": 1503718,
+      "status": "RUNNING",
+      "completed_states": 58,
+      "planned_states": 64
+    },
+    {
+      "name": "m2-fixed-context-train160-families16to48-readouts-v1",
+      "source_note": "Main loaded trainer commits exact; new helper code unchanged across documentation-only commits",
+      "code": "7fc46755",
+      "pid": 1544515,
+      "status": "RUNNING",
+      "planned_states": 64,
+      "closed_readouts": 94,
+      "planned_unique_packets": 155,
+      "failed_readouts": 2,
+      "reused_readouts": 7
+    }
+  ],
+  "autonomous_10k_u630": {
+    "status": "CLOSED_FIRST8_AND_SOURCE_REVIEW",
+    "summary": {
+      "positions": 8,
+      "task_resolution": {
+        "complete": 3,
+        "uncertain": 2,
+        "execution_failed": 1,
+        "incomplete": 2
+      },
+      "strict_supported_success": 2,
+      "answer_support": {
+        "supported": 5,
+        "qualified": 2,
+        "unscored": 1
+      },
+      "known_generation_tokens": 61310,
+      "unknown_generation_usage": 0,
+      "known_embedding_tokens": 0,
+      "unknown_embedding_usage": 0,
+      "tool_attempts": 12,
+      "tool_returns": 12,
+      "tool_errors": 0,
+      "bound_completed_final_inputs": 7
+    },
+    "native_full_string_F1": 0.07433622896790373,
+    "review": "/data/milai-experiments/20261111-scalable-evidence/s1-op10k-u630-autonomous-dev8-review-v1/author-review-v1.json",
+    "scope": "Same fixed8DEV sources as prior arms,CPUFP32 matched to3k-u101/repeat-u101,HostRNGnotmatched. Exploratory u630 nomination after offline acquisition/handoff tradeoff. No general superiority or final-model claim.",
+    "observation": "Core3/8, strict2/8: no overall improvement over earlier3k-u101 core3/strict3. WSJ retained; cheap-technique mechanism regresses to abstract-only; McGurk core restored but third-sound generalization too strong; corpus structure improves partially but still lacks PDF page segmentation.",
+    "cpu_owner_recorded": true
+  },
+  "learner_collection": {
+    "status": "COMPLETED_ORIGINAL_CHILD",
+    "families": 160,
+    "raw_states": 712,
+    "reference_fit_states": 417,
+    "labelled_families": 112,
+    "unknown_states": 295,
+    "model_calls": 712,
+    "reused_source_banks": 160,
+    "terminal_family_prefix": 64,
+    "terminal_packets": 168,
+    "measured_tool_cpu_seconds": 45334.658237122996,
+    "measured_wall_seconds": 11595.1309666764,
+    "exit_code": null,
+    "whole_child_cpu_seconds": null,
+    "compute_recorded": false,
+    "closeout": "/data/milai-experiments/20261111-scalable-evidence/s1-learner-train160-native-closeout-v1.json",
+    "fit_data": "/data/milai-experiments/20261111-scalable-evidence/s1-learner-train160-operation-data-v1",
+    "scope": "Original child finished without restart after parent loss. Use child tool timer once; parent/startup/whole-child tail unknown. Reference-proxy fit view is not semantic feedback."
+  },
+  "I2_second16_semantic": {
+    "review": "/data/milai-experiments/20261111-scalable-evidence/i2-learner-terminal-families16to32-author-review-v1.json",
+    "summary": {
+      "source_families": 16,
+      "unique_readouts": 44,
+      "answer_status": {
+        "incomplete": 27,
+        "unknown": 9,
+        "execution_failed": 5,
+        "complete": 2,
+        "incorrect": 1
+      },
+      "material_status": {
+        "insufficient": 30,
+        "unknown": 11,
+        "sufficient": 3
+      }
+    },
+    "by_policy": {
+      "collector_actual": {
+        "positions": 16,
+        "answer_status": {
+          "incomplete": 11,
+          "unknown": 3,
+          "complete": 1,
+          "execution_failed": 1
+        },
+        "material_status": {
+          "insufficient": 10,
+          "unknown": 4,
+          "sufficient": 2
+        },
+        "strict_supported_complete": 1
+      },
+      "rules": {
+        "positions": 16,
+        "answer_status": {
+          "incomplete": 10,
+          "unknown": 3,
+          "complete": 1,
+          "execution_failed": 1,
+          "incorrect": 1
+        },
+        "material_status": {
+          "insufficient": 11,
+          "unknown": 4,
+          "sufficient": 1
+        },
+        "strict_supported_complete": 1
+      },
+      "coverage": {
+        "positions": 14,
+        "answer_status": {
+          "incomplete": 8,
+          "unknown": 3,
+          "execution_failed": 3
+        },
+        "material_status": {
+          "insufficient": 11,
+          "unknown": 3
+        },
+        "strict_supported_complete": 0
+      }
+    },
+    "feedback": {
+      "answer": {
+        "feedback_states": 16,
+        "states_with_direction": 0,
+        "unknown_pairs": 40,
+        "tie_pairs": 1
+      },
+      "delivery": {
+        "feedback_states": 16,
+        "states_with_direction": 2,
+        "unknown_pairs": 37,
+        "directional_pairs": 3,
+        "tie_pairs": 1
+      }
+    },
+    "full_directional_fit_states": {
+      "answer": 0,
+      "delivery": 2
+    },
+    "matched_states": 0,
+    "scope": "2 delivery-direction states have no static-SFT labels. Full feedback retained separately; shared-support objective controls cannot discard new effective supervision. Source Root review nonblind/nonindependent."
+  },
+  "I2_semantic_prefix32": {
+    "status": "SEMANTIC_FEEDBACK_PREFIX32_COMPILED_NOT_FITTED",
+    "sources": [
+      "/data/milai-experiments/20261111-scalable-evidence/i2-learner-terminal-first16-semantic-v2",
+      "/data/milai-experiments/20261111-scalable-evidence/i2-learner-terminal-families16to32-semantic-v1"
+    ],
+    "counts": {
+      "raw-feedback": {
+        "states": 32,
+        "families": 32
+      },
+      "delivery-fit": {
+        "states": 4,
+        "families": 4
+      },
+      "answer-fit": {
+        "states": 2,
+        "families": 2
+      },
+      "matched-feedback": {
+        "states": 2,
+        "families": 2
+      },
+      "matched-sft": {
+        "states": 2,
+        "families": 2
+      }
+    },
+    "rollout": {
+      "policy": "none: actual terminal HANDOFF alternatives",
+      "steps": 0,
+      "terminal_handoff": "nominated_binding"
+    },
+    "new_model_calls": 0,
+    "no_sha_validation": true,
+    "scope": "32 actual TRAIN source families. Full delivery fit preserves all4 directional states; only2 have matched original SFT labels. These are different support/coverage conditions, not interchangeable objective comparisons. All32 raw states and unknowns retained. No training or generalized benefit claimed."
+  },
+  "budget_conditions": {
+    "status": "BOTH_ACTUAL_COLLECTIONS_CLOSED",
+    "limits": [
+      2048,
+      512
+    ],
+    "families": 64,
+    "trajectories": 128,
+    "raw_states_each": 512,
+    "same_sources_questions_and_acquisition_scopes": true,
+    "same_prefix_binding_families": 64,
+    "reference_diagnostics": {
+      "2048": {
+        "offered_positive": 11,
+        "current_positive": 11,
+        "nominated_positive": 11
+      },
+      "512": {
+        "offered_positive": 10,
+        "current_positive": 6,
+        "nominated_positive": 6
+      }
+    },
+    "comparison": "/data/milai-experiments/20261111-scalable-evidence/i2-budget-pair64-comparison-v1.json",
+    "model_nomination": "All64 budget512 terminal states are scored with frozen S1u101 using full menus; labels never enter model inputs or subset selection. Full argmax and conditional HANDOFF rank must remain distinct.",
+    "scope": "Return budget changes legal menus/results; no explicit numeric budget feature in original private state. Do not claim numerical-budget reasoning, semantic task success, or128 independent sources."
+  },
+  "validation": {
+    "recent_related_tests": 11,
+    "actual_full_feedback_retention_beyond_SFT_support": true,
+    "actual64paired_source_prefixes": true,
+    "actual160source_fit_compilation": true,
+    "actual7completedHost_final_inputs_bound": true,
+    "ruff": "pass",
+    "package_boundary": "previous pass, no new runtime dependency changes",
+    "tools_boundary": "six unchanged old LME dynamic-import findings"
+  },
+  "pending_compute": [
+    "Original learner child tool timer45334.658237122996 under original phase; parent gone, do not add observed lower bound",
+    "Paired budget collections25.812433912 and23.649749378 CPU seconds, no Host calls",
+    "New semantic compilation/binding/native-scoring measured receipts; unmeasured author/tests remain unknown",
+    "Budget512 scorer and active M2 reader self-bill; do not add again"
+  ],
+  "remaining": [
+    "Finish original10k/36k curves; 10k full3pass and36k milestones not complete",
+    "Review I2tail32 and M2first16/next32 actual outcomes; close active155 reader",
+    "Close64 model nominations, execute newly nominated HANDOFF only from original acquired pools, retain all source order and masks",
+    "Grow full semantic feedback; train adequate shared-S1 controls and separately identify added-support benefit",
+    "ActualK/complementarity, continuingSource/View, own-state comparison, decisive seeds, frozen newconfirmation96 and whole task/cost scope remain unproven"
+  ],
+  "external_changes": {
+    "Product_API_permissions_Canonical": false,
+    "remote_push": false,
+    "services_restarted": false
+  }
+}
