@@ -1,0 +1,225 @@
+{
+  "status": "PHASE31_PROGRESS_CONFIRMATION_PROTOCOL_AND_SOURCES_FIXED_FULLPOLICY_COLLECTION_ACTIVE_ADAPTED_APPS_CONTINUE",
+  "observed_at_utc": "2026-11-11T18:57:42.717554+00:00",
+  "previous": "/data/milai-experiments/20261111-scalable-evidence/progress-v30.json",
+  "active_jobs": [
+    {
+      "name": "m6-adapted-source-reference-families4to8-v1",
+      "owner_pid": 1524917,
+      "child_pid": 1524919,
+      "process_alive": true,
+      "actual_argv_checked": true,
+      "owner_status": "RUNNING",
+      "run_status": "RUNNING",
+      "completed_families": null,
+      "closed_positions": 11,
+      "model_calls": null
+    },
+    {
+      "name": "qasper-confirm96-s3-own-policy-v1",
+      "owner_pid": 1548539,
+      "child_pid": 1548540,
+      "process_alive": true,
+      "actual_argv_checked": true,
+      "owner_status": "RUNNING",
+      "run_status": "RUNNING",
+      "completed_families": 20,
+      "closed_positions": null,
+      "model_calls": 83
+    }
+  ],
+  "no_sha_validation": true,
+  "new_code": {
+    "commit": "6a7512a1",
+    "path": "MiLAi-Lab/tools/collect_qasper_policy_packets.py",
+    "behavior": "Existingrun_memory_control executesfullboundedpolicy atinitialSourceobservation; actualfullbindings/packets/predictioninputs saved, no forcedlaststepHANDOFF, no goldorannotationfile read. Originalcollect defaults unchanged.",
+    "validation": {
+      "checks": [
+        {
+          "run": "policy-rollout-dev-smoke-fixed-v1",
+          "steps": 6,
+          "kinds": [
+            "SEARCH",
+            "READ",
+            "READ",
+            "READ",
+            "READ",
+            "HANDOFF"
+          ],
+          "model_calls": 0,
+          "termination": "policy_handoff",
+          "packet_tokens": 852,
+          "untruncated": true
+        },
+        {
+          "run": "policy-rollout-dev-smoke-learned-v1",
+          "steps": 4,
+          "kinds": [
+            "SEARCH",
+            "READ",
+            "READ",
+            "HANDOFF"
+          ],
+          "model_calls": 4,
+          "termination": "policy_handoff",
+          "packet_tokens": 530,
+          "untruncated": true
+        }
+      ],
+      "status": "ACTUAL_OLD_DEV_FIXED_AND_LEARNED_POLICY_PROBES_PASSED",
+      "scope": "RealoriginalSourcebank, completeboundactions, modelinputonlystate/questions, noHost/goldpassed/modelselection. Existingrun_memory_control suppliesnativebudgettermination; noforcedlaststepHANDOFF.",
+      "no_sha_validation": true
+    },
+    "tests": "30passed: memory_control,memory_control_baselines,collected_handoff_readouts; Ruff/diff/packageboundaryPASS; toolsboundarysame6oldLMEdynamicimports."
+  },
+  "confirmation_protocol": "/data/milai-experiments/20261111-scalable-evidence/qasper-new-confirmation96-v1-protocol.json",
+  "confirmation_source_export": {
+    "status": "CONFIRMATION_SOURCES_EXPORTED_AFTER_MODEL_PROTOCOL_FREEZE",
+    "protocol": "/data/milai-experiments/20261111-scalable-evidence/qasper-new-confirmation96-v1-protocol.json",
+    "source_archive": "/cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/development-training-20261102/qasper-native-v03/qasper-train-dev-v0.3.tgz",
+    "families": 96,
+    "questions": 96,
+    "source_units": 7847,
+    "native_split": "train",
+    "research_role": "confirmation",
+    "source_split": "confirmation",
+    "training_allowed": false,
+    "selection": "All96reservedIDs/originalorder,firstnativequestion; noanswerability/outcomefilter",
+    "no_sha_validation": true,
+    "models_or_Host_calls": 0,
+    "scope": "Sourcebodiesliteral fromnativepapertext/captions; originalannotations separateofflinecontrols, notonlineinputs. Futuremodel/prompt/selection changes basedonconfirmation prohibited; firstfailures retained.",
+    "compute": {
+      "cpu_seconds": 0.9763320129999999,
+      "wall_seconds": 0.9764009527862072
+    }
+  },
+  "confirmation_initializer": {
+    "first_failure_owner": "/data/milai-experiments/20261111-scalable-evidence/qasper-new-confirmation96-base-banks-v1-owner.json",
+    "first_failure": "ExistingTRAIN/DEVcollector rejectedconfirmationrole beforeSourceimport, no Sourcebankcreated, wholeCPU4.435663 retainedpending",
+    "closed_source_only_v2": "/data/milai-experiments/20261111-scalable-evidence/qasper-new-confirmation96-base-banks-v2/run.json",
+    "role": "confirmation, neverrelabeledtoTRAIN/DEV",
+    "annotations_read": false,
+    "Host_calls": 0,
+    "model_calls": 0,
+    "scope": "Existingcollectorhelper withemptywitnessschema onlyinitializesSources andinitialobservation. OneforcedemptyHANDOFF isinitialization, notbaseline."
+  },
+  "confirmation_closed_policies": {
+    "qasper-confirm96-fixed-context-policy-v1": {
+      "status": "COMPLETED",
+      "completed_families": 96,
+      "model_calls": 0,
+      "truncated_model_inputs": 0,
+      "Host_calls": 0,
+      "compute": {
+        "cpu_seconds": 33.136977859,
+        "wall_seconds": 33.284121399745345
+      },
+      "whole_child_cpu_seconds": 38.554228,
+      "owner_wall_seconds": 37.21609247010201
+    },
+    "qasper-confirm96-scale36k-policy-v1": {
+      "status": "COMPLETED",
+      "completed_families": 96,
+      "model_calls": 414,
+      "truncated_model_inputs": 0,
+      "Host_calls": 0,
+      "compute": {
+        "cpu_seconds": 431.23532651200003,
+        "wall_seconds": 252.06780518498272
+      },
+      "whole_child_cpu_seconds": 450.126327,
+      "owner_wall_seconds": 257.9940351517871
+    }
+  },
+  "confirmation_pending_policies": [
+    "qasper-confirm96-s3-own-policy-v1",
+    "qasper-confirm96-s3-old-policy-v1"
+  ],
+  "confirmation_readout_plans": "/data/milai-experiments/20261111-scalable-evidence/qasper-confirmation96-readout-plans-v1.json",
+  "confirmation_scope": "96reservedSourceIDs, primaryscale3390-vs-fixed andsecondaryS3own21-vs-oldS1control21 fixedBEFOREcontentexport. NativeSourcebodiesnowexported, no longer metadataonly. Firstnativequestion/all96retained, no answerabilityfilter. 384firstreadouts+32preplannedrepeats onpositions0/12/24/36/48/60/72/84; no outcome-basedretry. Fullcoldgivenquerypolicy+packetReader, notautonomousbusiness orpretrainingisolation. No tuning/model/promptselection fromconfirmation. No Hostanswers orconfirmation scores yet.",
+  "SourceView_first4_application_review": {
+    "status": "FIRST4_ADAPTED_APPLICATION_PAIRS_SOURCE_REVIEWED",
+    "families": 4,
+    "positions_each": 20,
+    "conditions": {
+      "source-reference": {
+        "answer_grades": {
+          "C": 9,
+          "W": 6,
+          "Q": 5
+        },
+        "delivery_status": {
+          "complete": 13,
+          "partial": 7
+        },
+        "HTTP": 27,
+        "NN": 47,
+        "retrievals": 6,
+        "selected_operations": {
+          "SEARCH": 6,
+          "READ": 40,
+          "HANDOFF": 1
+        },
+        "generation_delta": {
+          "charged_tokens": 137412,
+          "known_tokens": 137412,
+          "unknown_usage": 0
+        },
+        "relevant_update_grades": {
+          "W": 6,
+          "Q": 1
+        },
+        "review": "/data/milai-experiments/20261111-scalable-evidence/m6-adapted-source-reference-families0to4-v1-review/author-decisions-v1.json"
+      },
+      "continued-replay": {
+        "answer_grades": {
+          "C": 12,
+          "W": 4,
+          "F": 4
+        },
+        "delivery_status": {
+          "complete": 9,
+          "partial": 11
+        },
+        "HTTP": 24,
+        "NN": 28,
+        "retrievals": 4,
+        "selected_operations": {
+          "SEARCH": 4,
+          "READ": 20,
+          "HANDOFF": 4
+        },
+        "generation_delta": {
+          "charged_tokens": 137831,
+          "known_tokens": 137831,
+          "unknown_usage": 0
+        },
+        "relevant_update_grades": {
+          "W": 4,
+          "F": 3
+        },
+        "review": "/data/milai-experiments/20261111-scalable-evidence/m6-adapted-continued-replay-families0to4-v1-review/author-decisions-v1.json"
+      }
+    },
+    "scope": "Fixedfirst4of16, noearlystop/selection. Rootexecutionagent nonblind/nonindependent source-groundedreview; sameGPU3/Host butRNGunmatched. CompleteSourcewitnesspresence diagnosticnotautomaticquality. No traininglabels."
+  },
+  "SourceView_application_order": [
+    "m6-adapted-source-reference-families0to4-v1",
+    "m6-adapted-continued-replay-families0to4-v1",
+    "m6-adapted-continued-replay-families4to8-v1",
+    "m6-adapted-source-reference-families4to8-v1",
+    "m6-adapted-source-reference-families8to12-v1",
+    "m6-adapted-continued-replay-families8to12-v1",
+    "m6-adapted-continued-replay-families12to16-v1",
+    "m6-adapted-source-reference-families12to16-v1"
+  ],
+  "SourceView_closed_unreviewed": "m6-adapted-continued-replay-families4to8-v1 closed20positions; compareaftermatchedsource-reference4to8closes",
+  "cost_scope": "Newwholepolicy/Sourceinitializerowners doNOTselfbill; wholechildCPU pendingonce, nestedrun.compute includednotadditive. Applications/nativeReader/evaluator selfbill; ownerwholeminusnative residual pending. No originalbudgetnewledger; tests/author/importcpuunknown. Previousphase30/29settlementsunchanged.",
+  "next": [
+    "Finish96S3ownthenS3oldpolicy onGPU2, noHost; no automaticqueue",
+    "ContinueSourceViewGPU3/HTTP8finiteblocks andsource-groundedreview; nextsource-reference8to12 aftercurrentreference4to8terminal",
+    "RunconfirmationfirstReader matrix andpredeclaredrepetitionseparately whenHTTPfree, thennativefullrawanswerF1 andsource-groundedreview; keepfailures/unscored separate",
+    "LME32fixednominees, finalS1figures, fullstudyaccounting/generalization stillrequired"
+  ],
+  "boundaries": "NoSHA/contentfingerprints/subagents/Product/API/permission/Canonicalchanges/service restart/push. Firstfailuresunknownsrolespreserved; goalACTIVE/incomplete."
+}
