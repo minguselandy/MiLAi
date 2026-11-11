@@ -1,4 +1,81 @@
-# LIVE scalable evidence phase 10: 2026-11-11
+# LIVE scalable evidence phase 11: 2026-11-11
+
+Full v2 goal ACTIVE/incomplete, this turn PROGRESS, no blocker. No subagents, SHA/content
+fingerprints, Product/API/permission/Canonical changes, service restart or push. Keep actual first
+failures/unknowns/Source roles. R=/data/milai-experiments/20261111-scalable-evidence. Codebea2d06e;
+progress-v11.json/manifest scalable-evidence-progress-20261111-v11.json. Read current header/doc.
+Actual /proc argv+owner+artifacts govern live status, never restart from staleJSON/lostexec handle.
+
+LIVE original36k owner769162 child769163 GPU2 loaded4bab6388,latest765/3390 unchanged.
+LIVE budgetoperationv3 owner1773518 child1773519 GPU3 loadedae97ea17,latest66/99 unchanged.
+LIVE phase11-i1-learned8-i2-budget1-readouts-v1 owner1962906 child1962913 loaded04138fe3,
+latest11/27closed0fail. Prepared=phase11-i1-learned8-i2-budget1-prepared-v2: first8cases24I1 learned
+fixed-original-K cold/known reads, lastcase3I2 conditionalHANDOFF. Report panelsSEPARATELY, no pooled
+quality/autonomousclaim. Originalwiresexact. Configpaths differonlyconfig_version, everyother
+functionalsettingequal. Firstprepared-v1failure retained,0calls; v2normal. Reader selfbills.
+
+CLOSED I1 learned36k/u565 native owner1843816 child1843824 exit0,16requests/8DEV/65modelcalls,
+399668inputtokens. CPU4746.404502737/wall1293.141515327 NOW PAID originalphase via phase11-compute-v1.
+Original8banks reused; sameKfromfixedlexicalparent forbothmethods. i1-learned36k-u565-dev8-prepared-v1
+and i1-learned36k-u565-dev8-binding-v1.json bindall24callerconditions. Packetsshorter, notcost/quality
+benefit yet. Learnedrecordlabelcase obtainsLulu; firstknowncase instead rereadsMyanmar. Allfirstoutputs.
+OriginalfixedI1reader24 alreadyclosed/reviewed:1/8strictcompleteeachcondition,Rootnonblindnonindependent.
+
+CLOSED addedM2families48to64 readouts owner1858854 child1858877,77logical75complete2fail,
+268046knownGen0unknown,CPU5.715887131/wall1032.678719265 alreadyselfbilled. CumulativeM2 now128states,
+64sources309logicalpackets closed; remaining96sources471actualpreparedpackets unstarted. Noautoqueue.
+New boundwitness files families16to48-witness-v1 and families48to64-witness-v1 underm2-fixed-context-
+train160 prefix;64/32states,6/2proxy directionalstates. Do nottreatproxyasactualHostsemanticlabels.
+
+CLOSED first16M2 teacher: m2-fixed-context-first16-teacher-v2 owner1924714 child1924715 exit0,
+32states77results,191980knownGen0unknown,CPU3.153771575/wall499.408340474 selfbilled.
+V1owner1891646 child1891649 exited1 HTTP_OWNER_BUSY beforeanyclientcall; closeout-v1/log retained,
+runJSONstaleRUNNING historical only. No retry, actualv2 launchedafterM2readerclosed.
+Newreview_collected_operation_outcomes.py reusesexisting _judge ONLY(neverlegacydigestgate),
+1attempt/state, neutralrotatedcandidateIDs, actualdeliveredmaterial+firstanswer andfallibleoffline
+references. SameQwenasHost, trainingteacherNOTindependent. Rawv2prompt loaded8d48e09c; later04138fe3
+transport-statusclarification NOT retroactivelyapplied. Teacher rawresponses/failedfirstoutcomeskept.
+
+Teacherparse-v2 masked18candidatejudgments. 04138fe3 recognizes terminal[eN]/(eN) citations only
+whenremainingliteralquote existsinTHAT actualitem; reparse SAME32firstresponses recovered2,16still
+maskedunknown. No newHTTP. m2-first16-teacher-parse-and-spots-v1 holds teacher-reviews.json andmerged
+reviews.json. Root targeted6states/14outcomes selectedBEFOREteacheroutputs, nonblindnonindependent,
+notrandomerrorrate. Author_spots0,3,7,12,26,28. Differences9records includeparser-maskedones andsemantic
+qualification, not9independentteachererrors. CAISdomaincompletevsabstractgap;QuaSPqualitativehow
+sufficientdespitemissingformula;StyleEQalternativeprovesbaseline;HPACfullreference lacksnumericpart;
+WoZnegativeunanchored;factualitymaterialusefulbutnativeNo-featureconflict/answerqualificationretained.
+Mergedmaterials28sufficient36insufficient13unknown;answers27complete32incomplete18unknown.
+
+m2-fixed-context-first16-semantic-v2 isnewS2data NOT FITTED:32rawstates,delivery6directionstates9pairs,
+answer4directionstates7pairs;12knownpositivequalityties pertask. Newknown-fit views retain15delivery
+states/11families and13answerstates/10families;unknowns/failures notconvertedtoties. Oldraw/direction/
+matched filesliterallyidentical semantic-v1. Strictmatched-SFT support5states separatefromfullfeedback.
+Compilerbea2d06e emits bothdirection andknown(tie0.5)views.15statesstilltoo smallforadequateformalS2;
+expand actualusefulfeedback andsourceexperience, do notfitonlytinystrictcommon-supportsubsetasmain.
+
+I2budgetu33 auxiliary122/288 vsinitial115,macro.51042 vs.49053;oldfast36/78 vs43,fullpaper122/278.
+At32heldDEVterminals eachbudget,conditional=current31/32 at2048 and32/32 at512;fullargmaxHANDOFF19/18.
+i2-budget-v3-u33-terminal-dev32-nominations-v1.json. Existingactualauxlogits reused; exportedscorer
+inputs i2-budget2048-dev32-u33-reused-scores-v1 areexplicit deterministic reconstruction ofactual
+fixeddata+declaredprojection, NOT newlycapturedinferenceframes. Initialwrongmoduleimport failedbefore
+anyoutput/call, notedinrun. prepare_scored tool executed1newHANDOFF/reused64actualpackets,0newmodelcalls:
+i2-budget2048-dev32-u33-scored-packets-v1. DifferenceonlyMcGurkfamily1906.01040, caption245tokens vs
+rules365/current1870, fullargmaxREAD. Threeconditionalpackets nowreaderfinalcase8;selectedonchoice
+beforeoutcome, notoverall32qualitytest. Originalnewcapture/actions/inputs preserved.
+
+Costs phase11-compute-v1.json PAID I1native4746.404502737 plus10pendingpreps12.517685440.
+Do NOT rebill priorphase9/phase11sources orselfbilledteacher/readers/trainers. Newsemantic-v2 compiler
+CPU1.032074038 pendingnextgroup. UnmeasuredRoot/tests/import/launcher/failedprepCPU unknownnotzero.
+Newteacher5tests/existingfeedback2pass, realdirectionviewequalitypass,Ruff/packageboundarypass;
+toolsboundary still6untouchedoldLMEfindings. Nonewremoteactions.
+
+NEXT: close/source-review separateI1/I2DEVpanels; continue99/3390fits; moreteacherlabels foralready
+closed remaining96M2states plus471notyetread endpoints, thenadequateactualfeedbackvscontinuedSFT.
+Keepteacheridentity/rootspotlimits, fullknown ties vsdirectional/common-support controls explicit.
+ContinuousSource/View, own-statelearning comparison, decisiveseeds, newconfirmation96 andfullquality/
+cost/generalization remainunproved. OverallgoalnotcompletefromsmallDEVsignal orengineering.
+
+# HISTORICAL scalable evidence phase 10: 2026-11-11
 
 Full v2 goal ACTIVE/incomplete, meaningful progress, no blocker. No subagents, SHA/content
 fingerprints, Product/API/permission/Canonical changes, service restarts or push. Keep first

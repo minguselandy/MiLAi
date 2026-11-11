@@ -1,0 +1,198 @@
+{
+  "status": "PHASE11_PROGRESS_FULL_GOAL_ACTIVE",
+  "observed_at_utc": "2026-11-11T01:59:00.982906+00:00",
+  "previous": "/data/milai-experiments/20261111-scalable-evidence/progress-v10.json",
+  "code_commits": [
+    "8b9a880d",
+    "8d48e09c",
+    "04138fe3",
+    "bea2d06e"
+  ],
+  "no_sha_validation": true,
+  "active_jobs": [
+    {
+      "name": "s1-op36k-seed0-v1",
+      "loaded_code": "4bab6388",
+      "owner_pid": 769162,
+      "child_pid": 769163,
+      "actual_argv_checked": true,
+      "status": "RUNNING",
+      "optimizer_updates": 765,
+      "planned_optimizer_updates": 3390
+    },
+    {
+      "name": "i2-budget-operations-seed0-v3",
+      "loaded_code": "ae97ea17",
+      "owner_pid": 1773518,
+      "child_pid": 1773519,
+      "actual_argv_checked": true,
+      "status": "RUNNING",
+      "optimizer_updates": 66,
+      "planned_optimizer_updates": 99
+    },
+    {
+      "name": "phase11-i1-learned8-i2-budget1-readouts-v1",
+      "loaded_code": "04138fe3",
+      "owner_pid": 1962906,
+      "child_pid": 1962913,
+      "actual_argv_checked": true,
+      "status": "RUNNING",
+      "closed_readouts": 11,
+      "failed_readouts": 0
+    }
+  ],
+  "I1_learned_native_closed": {
+    "requests": 16,
+    "families": 8,
+    "model_calls": 65,
+    "compute": {
+      "cpu_seconds": 4746.404502737,
+      "wall_seconds": 1293.1415153266862,
+      "forwards": 65,
+      "sequence_rows": 65,
+      "input_tokens": 399668,
+      "state_tokenizations": 65,
+      "state_tokens": 349798,
+      "padded_input_tokens": 399668
+    },
+    "compute_recorded": true,
+    "receipt_source": "/data/milai-experiments/20261111-scalable-evidence/i1-learned36k-u565-public-dev8-v1",
+    "comparison_binding": "/data/milai-experiments/20261111-scalable-evidence/i1-learned36k-u565-dev8-binding-v1.json",
+    "prepared": "/data/milai-experiments/20261111-scalable-evidence/i1-learned36k-u565-dev8-prepared-v1",
+    "same_fixed_original_K_all8": true,
+    "Host_status": "24 first readouts now running in combined execution batch, panel reported separately"
+  },
+  "M2_added_endpoints_closed": {
+    "families": 16,
+    "states": 32,
+    "logical_readouts": 77,
+    "completed": 75,
+    "failed": 2,
+    "new_generation_delta": {
+      "charged_tokens": 268046,
+      "known_tokens": 268046,
+      "unknown_usage": 0
+    },
+    "compute_already_recorded": {
+      "cpu_seconds": 5.715887131,
+      "wall_seconds": 1032.6787192653865,
+      "runs": 1
+    },
+    "remaining_unstarted_families": 96,
+    "remaining_unstarted_packets": 471,
+    "total_M2_closed_states": 128,
+    "total_M2_closed_logical_readouts": 309
+  },
+  "M2_teacher": {
+    "first_failure": "/data/milai-experiments/20261111-scalable-evidence/m2-fixed-context-first16-teacher-v1-closeout.json",
+    "first_failure_reason": "HTTP_OWNER_BUSY before any client call, actual exit1, retained",
+    "closed_run": "/data/milai-experiments/20261111-scalable-evidence/m2-fixed-context-first16-teacher-v2",
+    "states": 32,
+    "families": 16,
+    "actual_results": 77,
+    "generation_delta": {
+      "charged_tokens": 191980,
+      "known_tokens": 191980,
+      "unknown_usage": 0
+    },
+    "compute_already_recorded": {
+      "cpu_seconds": 3.153771575,
+      "wall_seconds": 499.40834047365934,
+      "runs": 1
+    },
+    "reviewer": "Same local Qwen as Host, offline training teacher; not independent evaluation",
+    "policy_identities_hidden": true,
+    "original_parser_masked": 18,
+    "citation_reparse_masked": 16,
+    "recovered_without_HTTP": 2,
+    "raw_first_responses_preserved": true,
+    "root_targeted_spots": {
+      "states": 6,
+      "outcomes": 14,
+      "not_random_or_independent": true,
+      "compared_record_differences": 9
+    },
+    "author_and_teacher_material_counts": {
+      "unknown": 13,
+      "sufficient": 28,
+      "insufficient": 36
+    },
+    "author_and_teacher_answer_counts": {
+      "unknown": 18,
+      "complete": 27,
+      "incomplete": 32
+    },
+    "source": "/data/milai-experiments/20261111-scalable-evidence/m2-first16-teacher-parse-and-spots-v1"
+  },
+  "M2_semantic_data": {
+    "path": "/data/milai-experiments/20261111-scalable-evidence/m2-fixed-context-first16-semantic-v2",
+    "full_directional_fit_states": {
+      "answer": 4,
+      "delivery": 6
+    },
+    "full_known_fit_states": {
+      "answer": 13,
+      "delivery": 15
+    },
+    "known_delivery_families": 11,
+    "known_answer_families": 10,
+    "matched_SFT_states": 5,
+    "feedback": {
+      "answer": {
+        "feedback_states": 32,
+        "states_with_direction": 4,
+        "unknown_pairs": 39,
+        "directional_pairs": 7,
+        "tie_pairs": 12
+      },
+      "delivery": {
+        "feedback_states": 32,
+        "states_with_direction": 6,
+        "unknown_pairs": 37,
+        "directional_pairs": 9,
+        "tie_pairs": 12
+      }
+    },
+    "directional_views_literal_equal_v1": true,
+    "fitted": false,
+    "scope": "Meaningful positive-quality ties retained; unknown/failed outcomes not made into ties. Full-feedback and strict old-SFT common support remain separate.15 known delivery states is not adequate formalS2."
+  },
+  "I2_budget_u33_actual_nomination": {
+    "panel_families_per_budget": 32,
+    "conditional_equals_current": {
+      "2048": 31,
+      "512": 32
+    },
+    "full_argmax_handoff": {
+      "2048": 19,
+      "512": 18
+    },
+    "nomination_artifact": "/data/milai-experiments/20261111-scalable-evidence/i2-budget-v3-u33-terminal-dev32-nominations-v1.json",
+    "scores_reused": "/data/milai-experiments/20261111-scalable-evidence/i2-budget2048-dev32-u33-reused-scores-v1",
+    "score_scope": "Actual original auxDEV logits; input files are explicit deterministic reconstruction of declared actual data projection, not newly captured inference calls",
+    "actual_new_Handoff_packets": 1,
+    "actual_reused_packets": 64,
+    "packet_artifact": "/data/milai-experiments/20261111-scalable-evidence/i2-budget2048-dev32-u33-scored-packets-v1",
+    "disagreement_probe": "/data/milai-experiments/20261111-scalable-evidence/i2-budget2048-u33-disagreement-dev1-v1",
+    "probe_selection": "All1 conditional-vs-current disagreement before Host outcomes; no pooled32-case task claim",
+    "probe": "McGurk definition: learned245 serialized packet tokens caption vs rules365 vs current1870. Full argmax is READ, so conditional HANDOFF only. Material sufficiency/Host outcome not yet claimed."
+  },
+  "validation": {
+    "new_teacher_tests": 5,
+    "existing_feedback_tests": 2,
+    "ruff": "pass",
+    "package_boundary": "pass",
+    "tools_boundary": "six preexisting oldLME findings unchanged",
+    "external_change": "No Product/API/permissions/Canonical changes, service restart, SHA gate or push"
+  },
+  "compute_record": "/data/milai-experiments/20261111-scalable-evidence/phase11-compute-v1.json",
+  "additional_unsettled_measured_CPU": "/data/milai-experiments/20261111-scalable-evidence/m2-fixed-context-first16-semantic-v2/manifest.json",
+  "unmeasured": "Author/tests/import/launcher and first preparation failure CPU unknown, not zero",
+  "remaining": [
+    "Close and source-review the two separate DEV panels (24 learnedI1,3 conditionalI2) without pooling or autonomous claims",
+    "Continue original36k3390 and budget99 updates; preserve all curve points",
+    "Extend semantic teacher supervision over already closed further96 M2 states and remaining471 raw endpoints; enlarge independent useful feedback, do not stop at15known states",
+    "Train adequately supported real feedback vs continuedSFT from declared common initialization; report full known ties and strict matched support separately",
+    "ContinuousSource/View, own-state comparison, decisive seeds, frozen newconfirmation96, fulltask/cost/generalization still incomplete"
+  ]
+}
