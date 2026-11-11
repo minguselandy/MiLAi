@@ -1,0 +1,122 @@
+{
+  "status": "PHASE19_PROGRESS_FULL_GOAL_ACTIVE",
+  "observed_at_utc": "2026-11-11T10:44:17.964617+00:00",
+  "previous": "/data/milai-experiments/20261111-scalable-evidence/progress-v18.json",
+  "no_sha_validation": true,
+  "code_commit": "eac54b85",
+  "active_jobs": [
+    {
+      "name": "s1-op36k-seed0-v1",
+      "owner_pid": 769162,
+      "child_pid": 769163,
+      "actual_argv_checked": true,
+      "owner_status": "RUNNING",
+      "status": "RUNNING",
+      "optimizer_updates": 2260,
+      "planned_optimizer_updates": 3390
+    },
+    {
+      "name": "s1-op3k-seed2-v1",
+      "owner_pid": 3905047,
+      "child_pid": 3905048,
+      "actual_argv_checked": true,
+      "owner_status": "RUNNING",
+      "status": "RUNNING",
+      "optimizer_updates": 0,
+      "planned_optimizer_updates": 303
+    },
+    {
+      "name": "m6-s1u1130-continuous-families4to8-continuation-v1",
+      "owner_pid": 3911869,
+      "child_pid": 3911870,
+      "actual_argv_checked": true,
+      "owner_status": "RUNNING",
+      "status": "RUNNING",
+      "active": {
+        "history": "memops_A16-d-update32-v1-content",
+        "policy": "laya",
+        "interface": "rich",
+        "profile": "laya",
+        "request": "additional-arrival"
+      },
+      "new_completed": 1,
+      "closed_positions": 2
+    }
+  ],
+  "seed1_paired_closed": "/data/milai-experiments/20261111-scalable-evidence/s1-seed1-paired-closed-curves-v1.json",
+  "old_public_semantics": {
+    "status": "BOUND_SEMANTIC_FEEDBACK_COMPILED_NOT_FITTED",
+    "bound": "/data/milai-experiments/20261111-scalable-evidence/m2-public-train16-all112-bound-v1",
+    "reviews": "/data/milai-experiments/20261111-scalable-evidence/m2-public-train16-author-spots-v1/reviews.json",
+    "source_split": "train",
+    "states": 32,
+    "families": 16,
+    "full_directional_fit_states": {
+      "delivery": 1,
+      "answer": 1
+    },
+    "full_known_fit_states": {
+      "delivery": 3,
+      "answer": 2
+    },
+    "known_families": {
+      "delivery": 3,
+      "answer": 2
+    },
+    "feedback": {
+      "delivery": {
+        "feedback_states": 32,
+        "states_with_direction": 1,
+        "unknown_pairs": 138,
+        "directional_pairs": 2,
+        "tie_pairs": 4
+      },
+      "answer": {
+        "feedback_states": 32,
+        "states_with_direction": 1,
+        "unknown_pairs": 139,
+        "directional_pairs": 2,
+        "tie_pairs": 3
+      }
+    },
+    "outcome_status": {
+      "COMPLETED": 105,
+      "FAILED": 7
+    },
+    "no_sha_validation": true,
+    "SFT_labels_synthesized": false,
+    "scope": "Already-bound firstoutcomes, knownpositive ties retained, missing/failed/ambiguous judgments unknown. No corpus-specific collection lookup, no invented referenceSFT or generalizationclaim. Coldcurrentmaterial versusknown+current material targets declared inmetadata.",
+    "compute": {
+      "cpu_seconds": 0.5304582489999999,
+      "wall_seconds": 0.5305303288623691
+    }
+  },
+  "source_spots": "/data/milai-experiments/20261111-scalable-evidence/m2-public-train16-author-spots-v1/author-spots.json",
+  "spot_differences": "/data/milai-experiments/20261111-scalable-evidence/m2-public-train16-author-spots-v1/differences.json",
+  "continuation_finding": "Actual K-query was followed by search_0_8 onoriginalrequest, replacingpool. Originaloldcontinuationoutcomes retained; theirlabels do notidentify effectofK-query alone.",
+  "new_continuation": "Explicitquery_once_context leavesdefaultunchanged; afteractualfirstSEARCH chooseREAD/HANDOFF only. A forcedREAD may befollowedbyoneSEARCH. 9tests passed,112realnativebranches verified<=1search andsameoriginalbefore/menu.",
+  "new_native_prepared": "/data/milai-experiments/20261111-scalable-evidence/m2-public-train16-query-once-all112-v1",
+  "new_readout_plan": "/data/milai-experiments/20261111-scalable-evidence/m2-public-train16-query-once-readouts-v1-plan.json",
+  "new_readouts_started": false,
+  "M6_interruption": {
+    "prior": "/data/milai-experiments/20261111-scalable-evidence/m6-s1u1130-continuous-families4to8-v1",
+    "closed_initial_firsts": 1,
+    "initial_status": "FAILED",
+    "error": "HTTP_OWNER_BUSY atnextsame-sources beforehttp_budget_scope entered, beforecapture/provider/budgetreservation",
+    "evidence": "Onlyinitialattemptfile exists; native stackfunctional.py2719 isenter_context beforeentry_budget/persist_result; failedownerterminal.",
+    "continuation": "/data/milai-experiments/20261111-scalable-evidence/m6-s1u1130-continuous-families4to8-continuation-v1",
+    "scope": "Originalruntime/banks, firstfailedinitialkept, noinitialSource/importorHostrerun. Continue19undispatchedpositions; previouscompletedHosthistoryempty forfirstfamily. Newdriver retainsold errorfield as historicalinheritance; currentstatus/proc authoritative."
+  },
+  "verification": {
+    "query_once_tests": 9,
+    "ruff": "passed",
+    "actualnative_query_preservation": 112,
+    "resource_allowances_increased": false
+  },
+  "remaining": [
+    "Closecontinuous4..8 then executequery-once112firstreadouts; keepoldfixed-context112semanticlabels asseparateprotocol, notextra independentstates orrerolledfirsts.",
+    "Compile newsemanticfeedback afteractualresults, expandlast32paper153/new177859 withoutcountingunknowns asvalidS2.",
+    "Continue remaining8continuousfamilies andactualSource/Viewlearning; finishseed2pair/main36k3390, sufficientS2/SFT/postS2aggregation, newconfirmation96/fullcost/generalization."
+  ],
+  "cost_scope": "Training/reader/teacher selfbilling notduplicated. Newnativepreps,semanticcompilation,failed/resumedM6whole-minus-native residual pending; author/tests/unmeasured remainunknown."
+}

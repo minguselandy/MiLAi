@@ -1,4 +1,73 @@
-# LIVE scalable evidence phase18: 2026-11-11
+# LIVE scalable evidence phase19: 2026-11-11
+
+FullgoalACTIVE/incomplete. LastturnPROGRESS. No subagents/SHA/contentfingerprints/Product/API/
+permission/Canonical changes,service restarts orpush. Preservefirsts/unknowns/roles. KEEPANALYSIS
+SHORT: previous turns spent enormous tokens repeating speculative architecture; useactualtools.
+R=/data/milai-experiments/20261111-scalable-evidence; latestprogress-v19/manifestv19/docphase19.
+Actual/proc argv+owner+artifacts governliveness; neverrestart staleJSON/losthandle.
+
+LIVE main36k owner769162 child769163 GPU2 latest2260/3390 (newfull/auxeval maystillrunning).
+CLOSEDrepeatseed1 owner3451501 child3451502,303updates9696draws61827773tokens, selfbilled
+CPU10388.079861377/wall6801.312269642. Full101/202/303108/102/102,macro.420438/.403077/.403077.
+Largeseed1full107/95/107,finalmacro.406775. Seed1weak/mixedadvantagevsseed0, notstablegain.
+s1-seed1-paired-closed-curves-v1.json. No checkpointreselection.
+LIVE seed2large owner3905047 child3905048 GPU3 s1-op3k-seed2-v1,latest0/303setup/eval.
+Afteritactuallycloses launch run_s1_repeat32_seed2_v1.py (planready). Noautoqueue.
+
+CLOSEDpublicteacher32/112. Rootfixedgrid0/9/16/25=14outcomes,12fielddifferences saved
+m2-public-train16-author-spots-v1/{author-spots.json,reviews.json,differences.json}.
+MissingJamaicacurrency/Ghanaspeaker evidence =>insufficient; MockTurtle extras useoutsideknowledge;
+SQLvsMySQLambiguous reference=>unknown, notnativeanswer-stringcompletion.
+Compiled m2-public-train16-fixed-context-semantic-v1:deliveryknown3/answerknown2, direction1each.
+R/compile_bound_semantic_feedback_v1.py operatesboundraw/reviews withoutQASPERcollectionlookup;
+no fabricatedSFTgold. Itnowreadsactualprepared.run.continuation_policy fornewprotocolmetadata.
+Oldpublicfixed_contextlabels keptdiagnostic/separate; don'tclaimadequateS2 orpoolwithnewprotocol.
+
+IMPORTANT actualcontinuationfinding: originalfixed_context follows firstSEARCH (evenknown_material)
+with search_0_8 onoriginalquestion, replacingpool. Thusold112cannotisolateK-query value.
+Code eac54b85 adds OPTIONALquery_once_context inexistingofflinefeedbacktools, defaultsunchanged.
+AfteractualSEARCH retainpool, chooseREAD/HANDOFF; firstREAD maythenbe followedbyoneSEARCH.
+Tests9PASS,RuffPASS. No resourceallowancegrowth. Actual112newnativebranches samebefore/fullmenu,
+all<=1SEARCH, known firstquery preserved. Newdata:
+ m2-public-train16-query-once-main-v1=32states96branches
+ m2-public-train16-query-once-extra-v1=16existingknownstates16branches
+ m2-public-train16-query-once-all112-v1=merged32states112branches, checks.json proof.
+READYNOTSTARTED m2-public-train16-query-once-readouts-v1-plan.json,
+run_m2_public_train16_query_once_readouts_v1.py. LaunchafteractiveM6HTTPownerterminal.
+Old112firstoutcomes neveroverwritten; newcontinuationseparateexperimentalcondition, not newSources.
+
+M6batch4..8 originalowner3869051 (seeownerfile child), m6-s1u1130-continuous-families4to8-v1
+FAILED_FIRST_RETAINED HTTP_OWNER_BUSY afterA16initialFAILED lengthfirst. Nextsame-sources had
+NOattempt/result; source stackfunctional.py2719 entershttp_budget_scope BEFORE entry_budget,
+sourcecapture/providerdispatch. Onlyinitialattemptfile exists. Originalfaileddriver/logkept.
+LIVE continuation owner3911869 child3911870,
+m6-s1u1130-continuous-families4to8-continuation-v1, latest2totalclosed/1new, activeA16additional.
+Originalruntime/banks stay at m6-s1u1130-continuous-families4to8-v1/laya; newdriveronly incontinuation.
+R/run_m6_continuous4to8_continuation_entry_v1.py skipsoneexistinginitial, loadsretrieval-setup,
+continues19UNDISPATCHEDpositions. NoinitialSource/Hostreplay. InitialFAILED meansno previouscompleted
+Hostmessage forfirstfamily. Newdriver inheritsold error='HTTP_OWNER_BUSY' asstalehistoricalfield;
+status/proc/currentresults govern, doNOTrestart for thatfield. Originalfirstfailure retained.
+Nativefitterfinalbilling causedshortledgercontention; do not launchsimultaneousHTTPjobs.
+Newcontinuationoriginalruntime messagefirsts nowprogressing, noautomaticretry.
+
+Paperlast32 source m2-fixed-context-train160-families128to160-v2:64selected63comparisons153packets,
+readerlauncher READYNOTSTARTED. Original337paper source supply674selected673comparisons1639packets.
+New177354states859packetsunstarted; totalremainingoriginal1012. Paper128 reviewed256states,
+108deliveryknown103answerknown36/32directional. Needscale actualknownfeedback beforeformalS2.
+Publicconditional16families isTRAIN, notgeneralization (7answerable9missing support variants).
+
+Costs: previousphase17/18closedCPUsettled. Newsemantic/nativequery-once preparationCPU andold
+failedM6+continuationwhole-minus-native residual pending. Selfbilledtraining/Host/teacher notaddedtwice.
+Genericownedplan wait4 CPU overlaps native; subtractonlyactualowned-message nativephases.
+Unmeasuredauthor/tests/importsunknownnotzero. Newtests9, earlierteacher/K11passed; packagePASS,
+toolsboundaryold6LMEdynamicimports unchanged (notallgreen).
+
+NEXT: inspectmain2260curve; finishM6remaining19 andsource-grade withoutreroll, thenquery-once112
+Hostreadouts/known-awareteacher; scale153+859paperfirsts, continuelast8continuousfamilies and
+Source/Viewrole/timelearning. Finishseed2pair/main36k, sufficientS2/SFT/postS2aggregation,
+newconfirmation96/fullcost/generalization. Fullgoalnotcomplete. Keepanalysisbrief.
+
+# HISTORICAL scalable evidence phase18: 2026-11-11
 
 Fullv2goal ACTIVE/incomplete, PROGRESS,no blocker. No subagents,SHA/contentfingerprints,
 Product/API/permission/Canonical changes,service restarts orpush. Preservefirsts/unknowns/Source roles.
