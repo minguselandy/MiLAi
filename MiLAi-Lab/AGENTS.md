@@ -1,4 +1,70 @@
-# LIVE scalable evidence phase 8: 2026-11-11
+# LIVE scalable evidence phase 9: 2026-11-11
+
+Full user v2 goal ACTIVE/incomplete; previous/current work PROGRESS, no blocker.
+No subagents, SHA/fingerprints, services/Product/API/permission/Canonical changes or push.
+Read scoped current header/doc, not old audit history. R=/data/milai-experiments/20261111-scalable-evidence.
+Codeae97ea17; progress-v9.json/manifest scalable-evidence-progress-20261111-v9.json.
+
+CLOSED original10k child468718/parent468717 exit0,945updates30210draws196237134tokens.
+FullpaperDEV315/630/945 accepted115/113/113 of278,macro.447295/.432166/.428623;allpointsretained.
+cpu31316.376633332,wall20072.181828411296 alreadybilled. s1-op10k-closed-curve-v1.json.
+LIVE original36k child769163 parent769162 GPU2,loaded4bab6388,last615/3390.
+Halfpass565 aux-nativeDEV688rows423labelled29labelledfamilies(30raw),181->341 accepted,
+macro.42261->.80819. Reference-operation signal only, notHostsuccess/final36k; cold/known masks kept.
+
+LIVE exploratory budget fit v3 owner1773518 child1773519 GPU3,loadedae97ea17,99updates planned,
+output i2-budget-operations-seed0-v3;initialeval/preparing at last check. Verify actual/proc, no restart
+on timeout/stalerun. v3 all1052trainrows stillmemory_operation,CLI taskmixed_retrieval for componentweights.
+Data i2-budget-operation-data-v1:64rawTRAINfamilies1024raw526fit/43labelledfamilies +526oldreplay,
+3passes3156draws99updates;new/replay normalizedmass.8/.2. Init original3k/u101.
+DEV32 separate families512budget states plusoriginalpaperfast/full. Extra reference-witness data/compute,
+NOT realHostfeedback M2 or isolatedloss benefit. No explicit numericbudget field in private policy state.
+V1 parserfailure mixturewithmemory_operation,0model/updates; retainedowner/log.
+V2 launcher sent before preparation wrote script,0nativejob; retainedlog, corrected only aftercompletion.
+V2 native failed at initialdev reporting KeyError component,0updates. Original128predictions kept;
+i2-budget-v2-initial-evaluation-recovery-v1.json rescored unchanged. v3 initial128choices/logits exactlyequal.
+ae97ea17 reporting fallback groups fixedDEV bytask ifcomponentabsent; fitting stillrequires explicitmasses.
+All2172train/dev projections equal mixed-vs-operation; no changedmodelinput/labels/mass.
+
+CLOSED budget512 S1u101 CPUscorer1503718,all64 fullmenus; selfbilled. ConditionalbestHANDOFF=plain/current
+64/64;fullargmaxHANDOFF35/64. i2-budget512-scored-packets64-v1:106uniqueproposedpackets all reusednative,
+0newpacketexec/Host calls. Four offeredpositive alternatives stillmissed. Do not launch identical
+model-vs-current Host comparisons as newmethod benefit. New c4330617 helper can execute genuinelynew
+full-menu-scored HANDOFF inoriginalbank, keepingfullargmax/conditionalrank separate;6tests pass.
+Budget pair64 actualsameSource/query/acquisitionbindings/scopes preserved;2048has11offered/current11,
+512has10offered/current6. Counts are reference proxies, notsemantic success or128independentfamilies.
+
+CLOSED all64 directI2 semantic reviews: i2-semantic-first64-v1 and3source review files.
+168logical results:24complete88incomplete5incorrect16failed33unknown2qualified. One failedslot is
+original orphan reserved9841,not a receivedresponse. Materials33sufficient95insufficient40unknown.
+Strictsupported positions collector13/64,rules9/64,coverage5/57;sourceauthorRoot nonblind/nonindependent.
+Full delivery-fit8states/8families,answer-fit5,matchedSFT-support4;64rawstates retained. NOT FITTED.
+Do not reduce fullnewfeedback to matchedsubset or call this adequateformalS2. Scope/ambiguity retained.
+Tail32 detailed note: rules legal-corpus and RNNLM answers have corecomplete but qualification; source
+minimum-token US-county subset selectedalone yields a complete answer whilecurrentomitscriterion.
+Retained orphan case012/packet0 isFAILEDunknown,neverretry/refund. Previous31known +51untouched calls
+remainseparatecostprovenance; no otherSource roles/firstoutcomes edited.
+
+CLOSED allM2 nativepreparations160families320states780packets: first16=32/77,16to48=64/155,
+48to160=224/548. AlloriginalS1reachedstates, fixed_context4 continuation andpolicyterminalwithinbudget.
+First77Hostclosed73new4reused2fail244597known;next155closed145new10reused5fail496813known,0newunknown.
+Their semanticreview stillpending. Remaining548preparednotreadout; no automaticHTTP queue.
+Nativepreparation owner1651507 is closed; no exec handle needed. Never reexecute completednative packets.
+
+CLOSED learner160 own child818846 no restart:712raw417fit/112labelledfamilies295unknown;data published.
+Its measuredchild-toolCPU45334.658237122996 NOW PAID underoriginalphase. Lostparent/startup/tail/
+wholechild exactCPU andexitcode unknown; earlier27974.8lowerbound NOT additive. Closeoutupdated.
+Phase9-preparation-compute-v1.json PAID963.032527889CPU for16pendingmeasuredprep/compile/scorephases.
+Selfbilledmodel/Host/fit phases excluded. Unmeasuredauthor/tests/import/launcher failures remainunknown.
+
+Next: finish36k andexploratory99fit; evaluateactualheld-sourcebudget behavior/material/Host outcomes,
+retain proxyvssemantic andfullsupportvsmatched controls. ReviewM2existing232outcomes andgenerate548
+untouched endpoints in resource-bounded groups; trainadequaterealfeedbackfromdeclaredcommonS1.
+Prioritize actualK/nativeconditional validation after36k signal; freshpacket-only reader must notfake
+Hostknowncontext. NeedcontinuousSource/View,own-statecomparison,decisiveseeds,newconfirmation96 and
+fulltask/cost/generalization. No fullgoalcompletion fromengineering or tinyTRAIN successes.
+
+# HISTORICAL scalable evidence phase 8: 2026-11-11
 
 Full v2 user goal ACTIVE/incomplete. This/prior goal work PROGRESS, no blocker. No subagents,
 SHA/fingerprints, service restart, Product/API/permission/Canonical change or remote push.
