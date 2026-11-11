@@ -1,6 +1,22 @@
 # 2026-11-11：规模化证据学习 v2 执行记录
 
-## 最新状态：阶段31，确认方案先固定，完整策略取证已启动
+## 最新状态：阶段32，确认四条件取证关闭，应用结果继续累积
+
+**完整目标继续执行。** 四个冻结确认条件各96篇的完整策略取证均已关闭：fixed_context无NN，规模模型414次NN，S3新状态406次、旧状态367次；均无输入截断，尚未调用Host作答。384个首次读出入口已准备。预先声明的8个来源位置、四条件共32次重复也已绑定原实际包，逐项确认请求和包完全相同，不重跑取证、不根据结果挑重试。
+
+确认评分器已准备，但没有在确认集上运行。它使用保留的原生QASPER函数，对完整原答评分，要求四个条件首矩阵全部关闭。旧DEV上的逐来源汇总已与原生函数相符。报告将同时保留官方“缺失预测计0”的完整F1、完成子集F1、缺失结果边界和主／次配对来源区间；不会把传输失败解释成语义错误，不以answer-only接口的空evidence字段声称Evidence F1，也不截取有利答案片段。
+
+Source/View应用第二组四来源已完成来源评阅：参考适配臂C3／Q3／W9／F5，对照C5／Q4／W6／F5；前者39次HTTP、63次NN、23次检索，后者26／41／6。更多检索没有补齐A16学历标题、A29分数修正、A33新测量或B03职责／团队变更。A33参考臂初始材料较完整，但后续仍缺相关更新；这些细分观察不能替代整条任务结果。
+
+累计前八来源40位置：参考适配C12／Q8／W15／F5，对照C17／Q4／W10／F9；15个相关更新位置均无完整回答。第三组参考臂正在执行，随后按预定顺序完成匹配对照及最后四来源，不因当前小前缀结果改模型、来源或提前停止。Root是本执行代理做非盲、非独立来源评阅，失败和未知项保留，未生成训练标签。
+
+全部S1预定学习点已导出为[PNG](/data/milai-experiments/20261111-scalable-evidence/s1-all-closed-learning-curves-v1/curves.png)和[PDF](/data/milai-experiments/20261111-scalable-evidence/s1-all-closed-learning-curves-v1/curves.pdf)，附source-data.json。图覆盖三个种子、3k／10k／36k、MuSiQue及来源配对区间；坐标使用完整范围，明确参考指标与Host任务的区别，已检查渲染。
+
+本阶段没有修改受版本管理的运行代码。评分／重复入口语法、实际包与请求对应以及旧DEV评分公式一致性已检查；没有重复无关测试。新增初始化、策略采集、图表及应用残余CPU待阶段汇总；原生已计部分不重复相加。仍需完成应用后八来源、确认首读出／预定重复与评分、LME32任务链，以及总成本和泛化报告。SHA持续禁用，无Product/API/权限/Canonical修改、服务重启、推送或子代理。
+
+阶段32：[manifest](../data/manifests/scalable-evidence-progress-20261111-v32.json)、[确认策略关闭记录](/data/milai-experiments/20261111-scalable-evidence/qasper-confirmation96-policy-closeout-v1.json)、[预定重复](/data/milai-experiments/20261111-scalable-evidence/qasper-confirmation96-repeat2-plans-v1.json)、[适配前八来源](/data/milai-experiments/20261111-scalable-evidence/m6-adapted-first8-comparison-v1.json)。
+
+## 阶段31记录：确认方案先固定，完整策略取证已启动
 
 **完整目标继续执行。** 在导出预留正文之前，已固定96篇新研究确认论文、每篇原顺序第一个问题，以及四个条件：fixed_context（4次READ）、36k预定终点u3390、S3新状态u21、S3旧状态对照u21。主比较为规模模型对简单基线，次比较为S3两臂。各模型已实际关闭，确认数据没有用于拟合或选点；不会依据确认结果改模型、提示词、样本或检查点。
 
