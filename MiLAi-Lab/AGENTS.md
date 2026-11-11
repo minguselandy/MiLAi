@@ -1,4 +1,4 @@
-# LIVE scalable evidence phase34: 2026-11-12
+# LIVE scalable evidence phase35: 2026-11-12
 
 GoalACTIVE/incomplete; PROGRESS, noblocker. STOP REPETITIVE ANALYSIS/Source_Metadata WORD LOOPS.
 Use short reasoning, tools/actions; no speculative architecture paragraphs. NeverdumpunboundedJSON,
@@ -6,13 +6,23 @@ rawone-linehistories orbudget.compute. NoSHA/contentfingerprints/subagents/Produ
 Canonicalchanges/service restart/push. Actual/procargv+owner+outputs govern; neverrestartstalestatus,
 losthandle/timeout/lockwait. R=/data/milai-experiments/20261111-scalable-evidence. Latestv31/docphase31.
 
-LIVE GPU3/HTTP m6-adapted-continued-replay-families12to16-v1 owner1681664 child1681666 latest14/20.
-GPU2free. Both8..12 CLOSED/source-reviewed. Currentreplay12..16 thenreference12..16 (lastbatch).
-Confirmation all4wholepolicies CLOSED96each: fixed0NN,scale414NN,S3own406NN,S3old367NN,0truncated/Host.
-qasper-confirmation96-policy-closeout-v1.json. Reader384firsts NOTSTARTED; no answers/scoresyet.
-No otherHTTPjobs whileapplicationactive. Noautomaticqueue/firstretry. Nativebilling maywait; don'trestart.
-Latestprogress-v34/docphase34; finalS1figure s1-all-closed-learning-curves-v1/curves.png+pdf+source-data,
-all3seeds/scales/closedpoints, rendered/viewed. Earlierthrough-u2260figure historical.
+LIVE HTTP qasper-confirm96-fixed-context-readouts-v1 owner1765940 child1765942 latest38/96,0fail.
+LIVE GPU2 m2-first160-feedback-head-only-seed0-v1 owner1740131 child1740175 latest34/51,
+freeze_encoder True; exactoriginal450rows/S1u101/seed0/51updates1632draws/ties/replay.25. Onlyencoder
+frozen perv2section16targetedregularization aftertrainpairfitbutnoDEVgain; no confirmationdata used,
+NOTaddedtofrozenconfirmationnominees. U17paper133/278macro.4824424, continuefixed51.
+GPU3free, butHTTPexclusiveReaderactive; no LME/otherReader concurrently. Nativefitfinalbillingmay
+wait; neverrestart/kill. All160SourceViewadaptedapplicationpositions CLOSED andsource-reviewed.
+Latestprogress-v35/docphase35. OriginalfullGoalINCOMPLETE: v2section16requiresaclearexperience/method
+->action->delivery/stop->Hostorfullcostbenefit->generalizationscope chain, notjustchecklistclosure.
+No stableoverallgain established; do notdeclarecomplete merelyfromnegativeexperimentclosure.
+
+Fulladapted m6-adapted-full16-comparison-v1.json sourceC17/Q21/W28/F14 vsreplayC22/Q16/W23/F19.
+Source-complete difference-.0625 CI[-.25,.125] conditionalonRootjudgments; both0C on31relevantupdates.
+SourceHTTP122/NN196/retrieval45 vs103/155/23; noREFRESH/USEchoice. Rootnonblind/nonindependent,
+RNGunmatched/generated/exposed. LocalC01first3C vsQ/F/Q withactualstatuswitnessdifference isoneSource
+mechanism/example only, notglobalcausalproof. All4newsourcebatchreviewdirs containauthor-decisions-v1.
+FinalS1figure s1-all-closed-learning-curves-v1 PNG/PDF/source-data, allclosedprescheduledpoints.
 
 NEWCONFIRMATION IS NO LONGER METADATA ONLY:
  qasper-new-confirmation96-v1-protocol.json fixed BEFOREreservedcontentexport.96reservedIDs,
@@ -48,7 +58,7 @@ CLOSEDconfirmation qasper-confirm96-fixed-context-policy-v1:96,0NN/Host;
  Readerplans READYNOTSTARTED qasper-confirmation96-readout-plans-v1.json; launcher
  python3 R/run_confirmation96_readouts_v1.py NAME (explicitwhenHTTPfreeandpolicyclosed).
  Sourcepreparedrun contains96cases oneactualwhole-policybranch, event_id policyqualified.
- No confirmationHostanswers/scores yet. SubsequentnativeF1scorer mustbind bycase_key/realwire;
+ Confirmationbaselineanswersbeinggenerated, do NOTinspect/scorefirstmatrix untilall4conditionsclosed; no tuning. NativeF1scorer binds bycase_key/realwire;
  do NOTreuseoldsame-pool handoff scorer withoutadapting assumptions. Officialevaluator at
  /cra/memory/mx_memory/MiLAi-worktrees/evidence-gap-development-20261023/MiLAi-Lab/artifacts/
  development-training-20261102/e1-dev32-scoring-v1/official-evaluator.py. It assigns0tomissingpredictions
@@ -67,14 +77,16 @@ SOURCEVIEW APPLICATION ORDER (8finiteGPU3blocks, sameHost/Source/chronology):
  3 m6-adapted-continued-replay-families4to8-v1 CLOSED20/source-reviewed
  4 m6-adapted-source-reference-families4to8-v1 CLOSED20/source-reviewed
  5 source-reference8to12 CLOSED20/source-reviewed,6 continued-replay8to12 CLOSED20/source-reviewed,
- 7 continued-replay12to16 LIVE above,8 source-reference12to16 NOTSTARTED.
+ 7 continued-replay12to16 CLOSED20/source-reviewed,8 source-reference12to16 CLOSED20/source-reviewed.
  Third4bothclosed/source-reviewed in m6-adapted-{source-reference,continued-replay}-families8to12-v1-review.
  m6-adapted-third4-comparison-v1.json andm6-adapted-first12-comparison-v1.json:
  cumulative60positions/12sources sourceC13/Q16/W21/F10 vsreplayC19/Q9/W17/F15, no netgain.
- Last4replaybinder bind_m6_adapted_continued_replay_families12to16_v1.py prepared/executedpartial.
- Reviewdir m6-adapted-continued-replay-families12to16-v1-review: B26CC CWW,C01QFQWW saved;
- C02first3QQF inspectednotstored; stillreadactualC02last2 andC04afterclosure. Reference12to16
- notstarted; itsbinderalreadycreated, no oldlabeltransfer. No unexecutedgrades.
+ Alllast4reviewfilescomplete; replayC3/Q7/W6/F4, referenceC4/Q5/W7/F4. C04referenceinitialhonest
+ no-informationQ, incompletepartialQ later, finalwrongdate/diagnosisW; noSource-supportedC inferred.
+Targetedhead-onlyfinalDEV plan m2-first160-head-only-dev64-plan-v1.json andscorerscatalogready,
+notlaunched, needsfiniteowner afterfitclosed. Comparehead_only/full_feedback/continued_sft +fixed;
+existing193packetunion/144firstcache andallS3newfirsts canextend reuse, no rerolls. No newencoder
+regularization beyond--freeze-encoder, currentfrozenconfirmationmodels/data/prompt remainunchanged.
  Confirmation resource-only qasper-confirmation96-retrieval-resources-v1.json all4closed: control
  decisions579/414/406/367, READselected387/222/214/175, packettokens121914/65075/61188/52127.
  Actualoperationstatuses separate, no Readeranswers/quality/fullcostclaim. Fixedpolicyreads4 means
