@@ -39,6 +39,12 @@ def main() -> None:
     parser.add_argument("output", type=Path)
     parser.add_argument("--families", type=int, required=True)
     parser.add_argument("--offset", type=int, default=0)
+    parser.add_argument(
+        "--known-query-only",
+        action="store_true",
+        help="Execute only the largest offered search from the actual first known item; "
+        "extend existing same-state comparisons without rerunning their other actions",
+    )
     args = parser.parse_args()
     start, cpu = time.perf_counter(), time.process_time()
     original = read_json(args.collection / "run.json")
@@ -80,6 +86,7 @@ def main() -> None:
         "terminal_handoff": "policy",
         "no_sha_validation": True,
         "automatic_retry": False,
+        "known_query_only": args.known_query_only,
         "readout_scope": (
             "Actual public initial cold/fixed-receipt-K observation/menu and saved model input. "
             "Same EvidenceOperations and four-step fixed_context continuation as paper feedback. "
@@ -128,7 +135,8 @@ def main() -> None:
                         supplied | {ref for ref, native in mapping.items() if native not in allowed}
                     )
                 )
-                for condition in ["cold", "known-first"]:
+                conditions = ["known-first"] if args.known_query_only else ["cold", "known-first"]
+                for condition in conditions:
                     receipt = read_json(collected / f"{public['id']}-{condition}-receipt.json")
                     events = read_jsonl(collected / f"{public['id']}-{condition}-operations.jsonl")
                     event = copy.deepcopy(
@@ -161,7 +169,23 @@ def main() -> None:
                     projected = project_operation_payload(row, "shared_actions")
                     assert pred["input"] == {k: projected[k] for k in ["state", "questions"]}
                     rows.append(row)
-                    choices = nominate(event, coverage, len(rows) - 1, "fixed_context")
+                    if args.known_query_only:
+                        searches = [
+                            a
+                            for a in event["actions"]
+                            if a["kind"] == "SEARCH"
+                            and a["parameters"].get("query_from") == "known_material"
+                            and a["parameters"].get("index") == 0
+                        ]
+                        if not searches:
+                            raise ValueError("Actual state offers no first-known-item query")
+                        choices = {
+                            "known_query": max(searches, key=lambda a: a["parameters"]["limit"])[
+                                "id"
+                            ]
+                        }
+                    else:
+                        choices = nominate(event, coverage, len(rows) - 1, "fixed_context")
                     request = RetrievalRequest.model_validate(receipt["request"])
                     resolver = IntentRetrievalMemory(
                         service,
