@@ -66,7 +66,8 @@ def predict_cohort(
         "continued_from": str(continue_from.resolve()) if continue_from is not None else None,
         "inherited_rows": [] if parent is None else
             [c["row"] for c in parent["cases"] if c["status"] != "NOT_RUN"],
-        "scope": "Full Small input cohort, native haystacks, unchanged questions/images. "
+        "scope": "Complete supplied Small snapshot cohort, native haystacks, "
+                 "unchanged questions/images. "
                  "Textual controller and multimodal fixed Reader; no gold-based filtering. "
                  "Each question has its own Store clone; same loaded controller pool across banks."}
     write_json(output/"driver.json", driver)
