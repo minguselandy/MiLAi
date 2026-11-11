@@ -1,0 +1,338 @@
+{
+  "status": "PHASE28_PROGRESS_FIRST319_FEEDBACK_CLOSED_MATCHED_SFT_RUNNING_FULL_GOAL_ACTIVE",
+  "observed_at_utc": "2026-11-11T13:27:53.331291+00:00",
+  "previous": "/data/milai-experiments/20261111-scalable-evidence/progress-v27.json",
+  "no_sha_validation": true,
+  "active_jobs": [
+    {
+      "name": "s1-op36k-seed0-v1",
+      "owner_pid": 769162,
+      "child_pid": 769163,
+      "actual_argv_checked": true,
+      "owner_status": "RUNNING",
+      "status": "RUNNING",
+      "optimizer_updates": 2750,
+      "closed_positions": null
+    },
+    {
+      "name": "m2-first160-continued-sft-seed0-v1",
+      "owner_pid": 316007,
+      "child_pid": 316008,
+      "actual_argv_checked": true,
+      "owner_status": "RUNNING",
+      "status": "RUNNING",
+      "optimizer_updates": 17,
+      "closed_positions": null
+    },
+    {
+      "name": "m6-s1u1130-continuous-families8to12-continuation-v1",
+      "owner_pid": 320353,
+      "child_pid": 320359,
+      "actual_argv_checked": true,
+      "owner_status": "RUNNING",
+      "status": "RUNNING",
+      "new_completed": 7,
+      "prior_interruption": {
+        "error_type": "HttpOwnershipError",
+        "error": "HTTP_OWNER_BUSY"
+      },
+      "closed_positions": 8
+    }
+  ],
+  "feedback_arm_closed": {
+    "status": "FEEDBACK_ARM_CLOSED_MATCHED_SFT_RUNNING",
+    "run": "/data/milai-experiments/20261111-scalable-evidence/m2-first160-feedback-seed0-v1",
+    "optimizer_updates": 51,
+    "row_draws": 1632,
+    "input_tokens": 8668371,
+    "padded_input_tokens": 8675756,
+    "full_dev": [
+      {
+        "update": 17,
+        "counts": {
+          "labelled": 278,
+          "accepted": 89,
+          "masked": 202,
+          "handoff_outside_reviewed_preference": 2
+        },
+        "family_macro_acceptance": 0.3603735054627912
+      },
+      {
+        "update": 34,
+        "counts": {
+          "labelled": 278,
+          "accepted": 117,
+          "handoff_outside_reviewed_preference": 35,
+          "masked": 202
+        },
+        "family_macro_acceptance": 0.43951311585240155
+      },
+      {
+        "update": 51,
+        "counts": {
+          "labelled": 278,
+          "accepted": 110,
+          "handoff_outside_reviewed_preference": 23,
+          "masked": 202
+        },
+        "family_macro_acceptance": 0.4109687435580293
+      }
+    ],
+    "fast_dev": [
+      {
+        "update": 0,
+        "counts": {
+          "labelled": 78,
+          "accepted": 43,
+          "handoff_outside_reviewed_preference": 15,
+          "masked": 50
+        }
+      },
+      {
+        "update": 9,
+        "counts": {
+          "labelled": 78,
+          "accepted": 34,
+          "masked": 50
+        }
+      },
+      {
+        "update": 17,
+        "counts": {
+          "labelled": 78,
+          "accepted": 32,
+          "masked": 50
+        }
+      },
+      {
+        "update": 34,
+        "counts": {
+          "labelled": 78,
+          "accepted": 39,
+          "handoff_outside_reviewed_preference": 8,
+          "masked": 50
+        }
+      },
+      {
+        "update": 51,
+        "counts": {
+          "labelled": 78,
+          "accepted": 37,
+          "handoff_outside_reviewed_preference": 6,
+          "masked": 50
+        }
+      }
+    ],
+    "train_pair_ordering": {
+      "unknown": 63,
+      "directional_pairs": 62,
+      "ordered_correctly": 59,
+      "tie": 142
+    },
+    "compute": {
+      "wall_seconds": 1858.4100123234093,
+      "cpu_seconds": 2343.325877936,
+      "runs": 1,
+      "train_sequence_rows": 1632,
+      "train_input_tokens": 8668371,
+      "train_batch_forwards": 1479,
+      "train_device_forwards": 1479,
+      "train_batch_attempts": 1479,
+      "train_offered_rows": 1632,
+      "train_offered_tokens": 8668371,
+      "dev_forwards": 160,
+      "dev_sequence_rows": 640,
+      "dev_input_tokens": 4130745,
+      "dev_state_tokenizations": 128,
+      "dev_state_tokens": 723793,
+      "dev_padded_input_tokens": 4164080,
+      "full-dev_forwards": 360,
+      "full-dev_sequence_rows": 1440,
+      "full-dev_input_tokens": 9526458,
+      "full-dev_state_tokenizations": 480,
+      "full-dev_state_tokens": 2782154,
+      "full-dev_padded_input_tokens": 9547020,
+      "train_eval_forwards": 113,
+      "train_eval_sequence_rows": 450,
+      "train_eval_input_tokens": 2385739,
+      "train_eval_state_tokenizations": 450,
+      "train_eval_state_tokens": 2075189,
+      "train_eval_padded_input_tokens": 2395044,
+      "train_feedback_states": 476,
+      "train_replay_states": 1156,
+      "train_directional_pairs": 222,
+      "train_tie_pairs": 521,
+      "train_unknown_pairs": 223,
+      "peak_rss_kib": 6610312,
+      "stage_wall_seconds": {
+        "prepare": 26.0420123655349,
+        "evaluation": 980.0665000053123,
+        "training": 667.567649002187,
+        "save": 182.0263216206804
+      },
+      "gpu_hours": 0.5162250034231692,
+      "peak_cuda_allocated_bytes": [
+        10088806400
+      ],
+      "peak_cuda_reserved_bytes": [
+        38187040768
+      ],
+      "final_cuda_free_total_bytes": [
+        [
+          19581370368,
+          42404806656
+        ]
+      ],
+      "ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json"
+    },
+    "owner_wall_seconds": 1922.2564877169207,
+    "scope": "Single-arm closed data, not paired result or Host benefit. Train59/62correct ordering isfitdiagnostic only. Allprescheduledpointsretained. Ownerwall includes ledgerwait andisnotaddedtonativecost; native selfbilling.",
+    "no_sha_validation": true
+  },
+  "next32_teacher_closed": {
+    "status": "COMPLETED",
+    "pid": 263965,
+    "compiled": "/data/milai-experiments/20261111-scalable-evidence/m2-fixed-context-train177-families0to16-witness-v1",
+    "planned_states": 32,
+    "closed_states": 32,
+    "unresolved_states": 0,
+    "masked_teacher_candidates": 17,
+    "source_split": "train",
+    "training_labels_allowed": true,
+    "reviewer": "Existing local Qwen Host model as offline training teacher",
+    "independent_evaluation": false,
+    "judge_attempts": 1,
+    "no_sha_validation": true,
+    "scope": "Offline teacher supervision only; no online controller or Host inputs changed.",
+    "prepared": "/data/milai-experiments/20261111-scalable-evidence/m2-fixed-context-train177-families0to16-v1",
+    "readouts": "/data/milai-experiments/20261111-scalable-evidence/m2-fixed-context-train177-families0to16-readouts-v1",
+    "generation_before": {
+      "charged_tokens": 450414380,
+      "known_tokens": 449789215,
+      "unknown_usage": 16
+    },
+    "compute": {
+      "cpu_seconds": 3.484604861,
+      "wall_seconds": 527.5307605788112,
+      "runs": 1
+    },
+    "generation_delta": {
+      "charged_tokens": 205801,
+      "known_tokens": 205801,
+      "unknown_usage": 0
+    }
+  },
+  "next32_semantic": {
+    "status": "BOUND_BRANCH_FEEDBACK_COMPILED_NOT_FITTED",
+    "evaluation_only": false,
+    "source_split": "train",
+    "training_exports_written": true,
+    "prepared": "/data/milai-experiments/20261111-scalable-evidence/m2-fixed-context-train177-families0to16-v1",
+    "readouts": "/data/milai-experiments/20261111-scalable-evidence/m2-fixed-context-train177-families0to16-readouts-v1",
+    "reviews": "/data/milai-experiments/20261111-scalable-evidence/m2-fixed-context-train177-families0to16-teacher-v1/reviews.json",
+    "rollout": {
+      "policy": "FixedContextMemoryPolicy(reads=4)",
+      "steps": 4,
+      "terminal_handoff": "policy"
+    },
+    "states": 32,
+    "families": 16,
+    "matched_states": 3,
+    "full_directional_fit_states": {
+      "answer": 4,
+      "delivery": 4
+    },
+    "full_known_fit_states": {
+      "answer": 13,
+      "delivery": 13
+    },
+    "known_fit_scope": "Include already established positive-quality ties at target0.5; unknown and failed comparisons are not converted into ties. Directional views and strict shared-SFT support remain separate.",
+    "fit_scope": "Full pair views retain new supervision even where reference-witness SFT has no label. Matched views are a separate common-support objective control.",
+    "readout_status": {
+      "COMPLETED": 77,
+      "FAILED": 1
+    },
+    "feedback": {
+      "answer": {
+        "feedback_states": 32,
+        "states_with_direction": 4,
+        "unknown_pairs": 35,
+        "tie_pairs": 19,
+        "directional_pairs": 6
+      },
+      "delivery": {
+        "feedback_states": 32,
+        "states_with_direction": 4,
+        "unknown_pairs": 35,
+        "tie_pairs": 19,
+        "directional_pairs": 6
+      }
+    },
+    "no_sha_validation": true,
+    "new_model_calls": 0,
+    "scope": "Native-witness proxy and semantic review use separate versions. Both-incomplete and missing judgments stay unknown. Same-input SFT is retained on shared directional support; no fitted model or generalization claim.",
+    "compute": {
+      "cpu_seconds": 1.0665648499999998,
+      "wall_seconds": 1.0666164187714458
+    }
+  },
+  "source_view_adaptation": {
+    "manifest": "/data/milai-experiments/20261111-scalable-evidence/m6-adaptation-train16-pair-v1/manifest.json",
+    "status": "DATA_AND_FINITE_PLANS_READY_NOT_FITTED",
+    "new_reference_states": 63,
+    "new_reference_families": 16,
+    "new_reference_action_kinds": {
+      "READ": 56,
+      "REFRESH_VIEW": 4,
+      "HANDOFF": 3
+    },
+    "excluded_continuous_families": 16,
+    "reserved_aux_reference_states": 62,
+    "rows_each_arm": 126,
+    "shared_old_replay_rows": 63,
+    "control_replacement_rows": 63,
+    "exact_passes": 3,
+    "updates": 12,
+    "draws": 378,
+    "base": "s1-op36k-seed0-v1/update-1130",
+    "plans": [
+      "/data/milai-experiments/20261111-scalable-evidence/m6-adaptation-source-reference-seed0-v1-plan.json",
+      "/data/milai-experiments/20261111-scalable-evidence/m6-adaptation-continued-replay-seed0-v1-plan.json"
+    ],
+    "owner_entry": "/data/milai-experiments/20261111-scalable-evidence/run_m6_adaptation_owned_fit_v1.py",
+    "scope": "Mostlyinitial outcome-selected reference demonstrations, notsemanticfeedback/universalrefreshpolicy. Original32TRAINfamily125rows preserved;continuous16excludedfromthisfitonly, notunseen/blind. Samebase/rows/schedule; differentindependentexperienceandtokens, notFLOPsmatched. No modeljobstarted."
+  },
+  "continuous_third4": {
+    "first_owner": "/data/milai-experiments/20261111-scalable-evidence/m6-s1u1130-continuous-families8to12-v1-owner.json",
+    "first_owner_status": "FAILED_FIRST_RETAINED",
+    "retained_first_position": "B05initialCOMPLETED",
+    "interruption": "HTTP_OWNER_BUSY beforesecondmessagelease/admission/provider, verifiedoneactualattemptonly",
+    "continuation": "/data/milai-experiments/20261111-scalable-evidence/m6-s1u1130-continuous-families8to12-continuation-v1",
+    "runtime": "/data/milai-experiments/20261111-scalable-evidence/m6-s1u1130-continuous-families8to12-v1/laya",
+    "remaining_positions_at_start": 19,
+    "scope": "Sameoriginalbanks andactualsuccessfulHostpredecessor; firstpositionnotrerun. Failedowner anditscostretained. Staleerror movedtoprior_interruption innewdriveronly."
+  },
+  "partial_source_review": {
+    "file": "/data/milai-experiments/20261111-scalable-evidence/m6-continuous-families8to12-review-v1/author-first-family-v1.json",
+    "reviewed_positions": 5,
+    "family": "memops_B05",
+    "answer_grades": [
+      "Q",
+      "Q",
+      "C",
+      "W",
+      "W"
+    ],
+    "reviewer": "Root source-author nonblind/nonindependent",
+    "finding": "FirstactualIrisanswercarriedforward, no laterretrieval afterjointreturntoElara/middle/timing/newspousaldisagreement. Datesfromcapturemetadata mispromoted tohistoricaleventdates. Nottraininglabels."
+  },
+  "next": [
+    "FinishmatchedSFT51 thenfixedu51DEVchoices/actualtaskcomparison",
+    "GPU3 shortendpointscoring/S3 thenfrozenrepeatseed2; SourceViewpaired12updatesreadyafterresourcespermit, no automaticqueue",
+    "Finishthird4continuous andremainingfour; sourceauthorreviewallpositions, next78TRAINfirstswhenHTTPfree",
+    "Main36k3390, actualS3aggregation, SourceViewlearning/application, selectednewconfirmation96/externalchain/fullcost/generalization stillrequired"
+  ],
+  "cost_scope": "NativefitCPU2343.325877936/wall1858.410012323 selfbilled; ownerwall1922.256487717 includeswait, notadditive. TeacherCPU3.484604861/wall527.530760579 and205801knownGentokens0unknown selfbilled. M6wholechild483.137337 firstowner overlapsnative, combinecontinuation/minusnativeatcloseout. Source63preparation andsemanticcompilation measuredCPU pendingstageaggregate; unmeasured author/import/testCPUunknown.",
+  "validation": "No trackedruntimechange. Actualclosed78firstbindings+32semanticcompiler completed. Sourcepair usesexistingmatched_old_rows/mixtureweighting, 16excludedfamilies disjoint, 0.8/.2masses asserted, finiteowner syntaxchecked. No broadtests rerun; existingpackagePASS/tools6oldLMEissues unchanged.",
+  "boundaries": "NoSHA/contentfingerprints/subagents/Product/API/permission/Canonical/service restart/push. Originalfirstsunknownsroles preserved."
+}

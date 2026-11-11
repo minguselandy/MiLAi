@@ -1,48 +1,63 @@
-# LIVE scalable evidence phase27: 2026-11-11
+# LIVE scalable evidence phase28: 2026-11-11
 
-FullgoalACTIVE/incomplete, progress/noblocker. KEEPANALYSISSHORT and tool-driven. No subagents,
-SHA/contentfingerprints/Product/API/permission/Canonicalchanges/service restarts/push. Preservefirsts,
-unknowns/roles. /proc actualargv+owner+artifacts govern; neverrestart staleJSON/losthandle orledgerwait.
-R=/data/milai-experiments/20261111-scalable-evidence. Latestprogress-v27/docphase27. Noautoqueue.
+FullgoalACTIVE/incomplete, PROGRESS/noblocker. KEEPANALYSISSHORT/tool-driven. No subagents/SHA/
+contentfingerprints/Product/API/permission/Canonicalchanges/service restart/push. Preservefirsts,
+unknowns/roles; actual/procargv+owner+outputs govern. Neverrestartstalemanifest/losthandle/ledgerwait.
+R=/data/milai-experiments/20261111-scalable-evidence; progress-v28/docphase28. Noautomaticqueue.
 
-LIVE original36k owner769162 child769163 GPU2 latest2685/3390, unchanged loaded4bab6388.
-LIVE first319feedback owner192644 child192645 GPU3 latest49/51, fullu17/u34=89/117of278,
-macro.360373505/.439513116. Finish51; do notinferHostgain orstopfromreferencecurve.
-AFTERactualownerCOMPLETED/procgone launchmatchedSFT:
- python3 R/run_m2_first160_owned_fit_v1.py m2-first160-continued-sft-seed0-v1 3 m2-first160-feedback-seed0-v1
-SameS1u101/init51updates1632draws319replay, feedback450rows131newknown vsSFT520/201newreference.
-Differenttargetcoverage, notpureloss/FLOPscomparison. First319support42direction89tieonly188unknown;
-62directionpairs have noHANDOFF>READ. ProfileR/m2-first160-feedback-support-profile-v1.json.
+LIVE main36k owner769162 child769163 GPU2 latest2750/3390 original4bab6388.
+CLOSED first319feedback owner192644 child192645:51updates1632draws8668371tokens,
+fullu17/34/51=89/117/110of278, macro.360373505/.439513116/.410968744. Train59/62directionpairsordered;
+notHostgain. R/m2-first160-feedback-closed-curve-v1.json. NativeCPU2343.325877936/wall1858.410012323
+selfbilled; ownerwall1922.256487717includeslockwait, notadditive. Finalu51fixed, no bestpointselection.
+LIVE matchedSFT owner316007 child316008 GPU3, m2-first160-continued-sft-seed0-v1 latest17/51.
+SameS1u101init/51updates1632draws319replay; SFT520rows201new vsfeedback450/131new. Notpureloss/FLOPs.
 
-CLOSED newTRAINfirst16reader owner195467 child195468:78firsts77complete1fail,265128knownGen0unknown,
-CPU5.927939915/wall1028.315475069 selfbilled. Compiled
-m2-fixed-context-train177-families0to16-witness-v1 (32states16families).
-LIVE teacher owner263964 child263965, m2-fixed-context-train177-families0to16-teacher-v1,
-latest13/32,0unresolved5masked. Onceclosed compile semantic viaexisting
- tools/compile_collected_operation_feedback.py PREPARED READOUTS SEMANTIC --reviews TEACHER/reviews.json
-Prepared=R/m2-fixed-context-train177-families0to16-v1; readouts samewith-readouts-v1;
-output m2-fixed-context-train177-families0to16-semantic-teacher-v1. Teacher sameQwen/nonindependent.
-Next78 READY run_m2_fixed_context_train177_families16to32_readouts_v1.py. Neverlaunchold0..32whole156.
-Othernew177 batchesunchanged, unstarted781endpoints. AvoidlongHTTPlease nearfitbilling.
+CLOSED newTRAINfirst16reader78firsts77complete1fail265128knownGen, teacher32closed0unresolved17masked,
+205801knownGen0unknown CPU3.484604861/wall527.530760579selfbilled. Compiled
+m2-fixed-context-train177-families0to16-semantic-teacher-v1:delivery13known4direction,answer13/4.
+Don'tappendtoactivefit. Next78READY run_m2_fixed_context_train177_families16to32_readouts_v1.py;
+neverlaunchold0..32whole156. Unstartednew177 remaining781endpoints. WholeHTTPjobsnonblockingexclusive.
 
-READYNOTLAUNCHED afterpairedfits:
-- run_m2_first160_dev64_score_pair_v1.py bothu51/GPU3,64oldDEVmenus32families.
-  m2-first160-dev64-scorers-v1.json; m2-first160-existing-dev-packet-union-v1=188actualpackets,
-  m2-first160-existing-dev-first-cache-v1=137canonicalphysicalfirsts (includesfailures).
-  prepare_scored_operation_readouts.py union scorers newoutput, thenreader --reuse-readouts cache.
-- run_s3_first319_collection_v1.py NAME, NAME=s3-after-first160-feedback-train32-v1 or
-  s3-after-first160-continued-sft-train32-v1. Samefrozen32TRAINsourcefirstquestions/banks,8steps,
-  16fromS2sourcepool+16outsidecurrentS2fit, <=256NN/arm,noHost. Notnewconfirmation/notyetS3data.
-  OwnerschosenGPU3,verifyGPUfree manually; noautomaticqueue. CollectorNOselfbilling: wholechildCPU
-  once, notplusnestedrun.compute. Bothlauncherssyntaxchecked, nojobsstarted.
-- frozen run_s1_repeat32_seed2_v1.py stillrequired afterpairedS2/SFT (verifySFTclosed also;
-  legacylauncher'spredecessor checkonlyseed2large). Shortendpointscoring/S3canprecedelongrepeat;
-  no seed2recipe/data/init/checkpointchange, recordactualexecutionorder.
-Remaining8continuousfamilies plansready run_owned_plan_v1.py m6-s1u1130-continuous-families8to12-v1
-then12to16, onlyHTTPownerterminal. Source/View125referencestatesnotfitted. Publicqueryonceprimary
-2known0direction each, nonewrepetitivesamecohortvariants. Main3390,newconfirmation96,SourceViewlearning,
-fullcost/generalization unfinished. MeasurednewprepCPU pending; nativefit/readers/teachersselfbill.
-No trackedruntimechangesphase27, previouspackagePASS/tools6oldLMEissues unchanged.
+LIVE third4continuous continuation owner320353 child320359:
+m6-s1u1130-continuous-families8to12-continuation-v1, latest8/20positions(7new), originalruntime
+R/m6-s1u1130-continuous-families8to12-v1/laya. Originalowner302207 child302208 FAILED_FIRST_RETAINED
+HTTP_OWNER_BUSY afterB05initialCOMPLETED; nextsame-sources failedbeforelease/admission/provider.
+Verifiedoneactualattemptonly, resumed19unattemptedpositionsinsamebanks/actualsuccessfulHosthistory;
+firstnotrerun. Newdriverprior_interruption recordsoldfailure separately. Noautomaticretry.
+OriginalwholechildCPU483.137337 overlapsnative; atcloseout combinebothownersminusnative once.
+Binder ready/executedpartial R/bind_m6_continuous_families8to12_v1.py (canrebindclosedpositions).
+R/m6-continuous-families8to12-review-v1/author-first-family-v1.json: RootB05five Q/Q/C/W/W,
+partialdelivery each, nonblind/nonindependent; no newretrieval atupdates, staleIris/middle/timing/disagreement.
+RemainingB12/B21/B25 mustreadactualSourcecriteria/provider/answers thenjudge, notlabeltransfer.
+Fourth4families12to16 planready via run_owned_plan_v1.py, onlyafterHTTPpriorclosed; DON'Tstarta
+per-messageM6job nearfitfinalbilling (causespre-leaseownershipfailure). Closefit/scorersfirst ifnearend.
+
+READY afterSFT: run_m2_first160_dev64_score_pair_v1.py (fixedu51bothGPU3); then
+prepare_scored_operation_readouts.py m2-first160-existing-dev-packet-union-v1
+m2-first160-dev64-scorers-v1.json NEWOUTPUT. Union188actualpackets64states32oldDEVfamilies,
+firstcache m2-first160-existing-dev-first-cache-v1 has137physicalfirsts includingfailures.
+Reader --reuse-readouts cache; onlynewcompletebindings execute/read. No newconfirmationyet.
+S3READY run_s3_first319_collection_v1.py NAME; NAME=s3-after-first160-feedback-train32-v1 or
+s3-after-first160-continued-sft-train32-v1. Bothu51, same32TRAIN(first16S2pool+16outsidefit),
+firstquestions,8steps<=256NN each,originalbanks/noHost. NotyetS3data. Collectorsnotselfbilled;
+wholechildCPU once, notplusnested. VerifyGPU3free. Shortscorepair/S3 beforelongfrozenrepeatseed2
+reasonable; run_s1_repeat32_seed2_v1.py required andmustcheckSFT/collectorsclosed too.
+
+Source/View actuallearning READYNOTFITTED:
+m6-adaptation-train16-pair-v1/manifest.json generatedby prepare_m6_adaptation_train16_v1.py.
+Original125reference rows preserved; continuous16families excluded fromthisadaptation ONLY.
+Trainother16=63refs(READ56/REFRESH4/HANDOFF3), reserved62auxrefs. Eacharm126rows shared63oldreplay;
+control63otheroldrows, sourcearm63newrefs. Same36ku1130,3exactpasses378draws12updates,eval4/8/12,
+fullpaperonly12,aux62atallpoints,new/replaymass.8/.2. Mostlyinitialoutcome-selectedrefs, notsemantic
+optimality/natural/unseen/universalrefresh. Two plans m6-adaptation-source-reference-seed0-v1 and
+m6-adaptation-continued-replay-seed0-v1; launcher run_m6_adaptation_owned_fit_v1.py NAME GPU PREDECESSOR.
+No automaticqueue, aftercurrentS2/SFT/S3/repeat2 resourcespermit. No actor/template/Sourcebody changes.
+
+Stillrequired: SFTclosed/actualDEVtaskpair, actualpostS2aggregation,SourceViewfit/application,
+continuousremainingpositions,repeatseed2,main3390,newconfirmation96/externalchain/fullcost/generalization.
+No trackedruntimechangephase28; finiteownersyntax andactualdatacompilationdone. ExistingpackagePASS/
+tools6oldLMEissuesunchanged. PrepCPUstageaggregatepending; unmeasuredauthor/import/testCPUunknown.
 
 # HISTORICAL scalable evidence phase26: 2026-11-11
 
