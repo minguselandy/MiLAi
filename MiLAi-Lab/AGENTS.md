@@ -1,79 +1,101 @@
-# LIVE scalable evidence phase29: 2026-11-11
+# LIVE scalable evidence phase30: 2026-11-12
 
-FullgoalACTIVE/incomplete, PROGRESS/noblocker. KEEPANALYSISSHORT/tool-driven. NeverdumpunboundedJSON,
-especiallyrawone-linehistory orbudget.compute! Useexplicitfields/counts orboundedJSONslice. NoSHA/
-contentfingerprints/subagents/Product/API/permission/Canonicalchanges/service restart/push. Preserve
-firsts/unknowns/roles. Actual/procargv+owner+outputs govern; neverrestartstalemanifest/losthandle/lockwait.
-R=/data/milai-experiments/20261111-scalable-evidence; progress-v29/docphase29. Noautomaticqueue.
+FullgoalACTIVE/incomplete; PROGRESS, noblocker. Userpaused/resumed; no jobsrestarted. KEEPANALYSIS
+SHORT AND ACTION-DRIVEN: stop repeated speculative architecture/Source_Metadata prose. Neverprint
+unboundedJSON/rawone-linehistories/budget.compute; useexplicitfields/counts/boundedstrings. NoSHA/
+contentfingerprints/subagents/Product/API/permission/Canonicalchanges/service restart/push.
+Preservefirstfailures/unknowns/roles; /procactualargv+owner+outputs govern, neverrestartstalemanifest/
+losthandle/ledgerwait. R=/data/milai-experiments/20261111-scalable-evidence. Latestprogress-v30/docphase30.
 
-LIVE main36k owner769162 child769163 GPU2 latest2860/3390 original4bab6388.
-LIVE frozenrepeatseed2 owner466662 child466663 GPU3 s1-repeat32-seed2-v1 latest25/303.
-Seed2large alreadyclosedfull124/111/105. Repeatolddata/init/recipeunchanged afterS2/SFT/S3shortjobs.
-LIVE last4continuous owner474551 child474552 m6-s1u1130-continuous-families12to16-v1,
-latest10/20 atC02initial. FamiliesB26/C01/C02/C04. Don'tlaunchotherHTTPjobs whileactive; per-message
-ownershipNONBLOCKING. AvoidnewM6runsnearfitfinalbilling (preleaseHTTP_OWNER_BUSY), neverrestartlivefits.
+ALLTRAINFITS CURRENTLYCLOSED, GPU2free, GPU3usedbyapplicationbelow. HTTPexclusive NONBLOCKING;
+noautomaticqueue. Don'tstartanotherHTTPjob ormetadata settlementwhileapplicationactive. Avoidnew
+per-messageappsnearfit/evaluatorfinalbilling; priorHTTP_OWNER_BUSYfirsts preserved, notrerolled.
+LIVE m6-adapted-continued-replay-families0to4-v1 owner1356536 child1356537, latest10/20 atA05initial.
+CLOSED m6-adapted-source-reference-families0to4-v1 owner1327061 child1327062:20transportCOMPLETED,
+qualityNOTYETREVIEWED. BothGPU3 FP32/4threads/compileoff, sameHost/Sourcefixtures, ownfreshhistories.
+Next explicitorder in m6-adapted-continuous16-plan-v1/manifest.json:
+ source-reference0..4(CLOSED), continued-replay0..4(LIVE), continued-replay4..8, source-reference4..8,
+ source-reference8..12, continued-replay8..12, continued-replay12..16, source-reference12..16.
+Launch eachfiniteplan via python3 R/run_owned_plan_v1.py NAME onlyafterprioractualterminal/procgone.
+Noautoqueue. 2x16sourcesx5messages=160newpositions. Source-role/external-arrivals/Hostprompt unchanged;
+no arrivalnotice/forcedtool. OldCPUu1130isdescriptivehistory; newGPUarmsmatched. Needbindactualoutputs/
+sourcecriteria/roles andRootreview (Rootisthisagent, NOToriginalpaperwriter/humanindependentreviewer).
 
-CLOSED first319pairedfits:
- m2-first160-feedback-seed0-v1 andm2-first160-continued-sft-seed0-v1, both51updates1632draws.
- full17/34/51feedback89/117/110, SFT122/122/124of278;macrofinal.410968744/.459106370.
- feedbacktokens8668371/CPU2343.325877936/wall1858.410012323;
- SFT8481040/CPU2407.566450492/wall1887.929807968. Selfbill, ownerwallnotadditive.
- R/m2-first160-paired-closed-curves-v1.json. Differenttargetcoverage131feedback/201SFT, notpureloss/FLOPs.
-CLOSED actualDEV64sameS1reachedstates32sources/fixedcontext4:
- m2-first160-dev32-choices-v1 104packets5newnative99reuse;
- m2-first160-dev32-comparison-readouts-v1 7newHost97canonicalfirstreuseinclfails;
- newteacher7closed0unresolved, transferred97judgments0conflicts in
- m2-first160-dev32-transferred-reviews-v1. Rootfixednewcase0/3/6 reviewed: Doc2Vecunchanged,
- CDA/REGactualmaterialresolvesnativeannotationconflict; languagelistcaseunknown.4fieldchanges preserved.
- m2-first160-dev32-closed-comparison-v1/summary.json teacherfixed/feedback/SFT33/32/33;
- sourcehybrid32/32/32. Feedback-SFTsourcebootstrap0[-.078125,.078125]; excludesRNG/teacher/seederror.
- Unknownnotwrong, noautonomous/newconfirmation/stablegain. Don'tautomaticallyexpand781remaining
- sameprotocolTRAINendpoints absentnewstate/mechanismsignal; supplyretained, v2conditionalexpansionintact.
- NewTRAIN0..16semanticteacher closed13known4directioneach, notaddedtoactivefits.
+CLOSED original36k owner769162/769163:3390updates,108450draws,736843704tokens,736946291padded.
+ s1-op36k-closed-curve-v1.json. Paper1130/2260/3390=129/131/132of278, macro.4740/.4939/.5058.
+ Mu0/565/1130/2260/3390=181/341/319/315/318of423. Mixedscale/conditions notpureN, noearlypointreselection.
+ CPU113179.775526301/nativewall73406.478895732, train69007.69481859=>10677.70tokens/s, eval2.99%.
+ Selfbilled; jobintervalnotGPUbusytime. Finalactualinputlengthstrata file s1-op36k-final-length-strata-v1:
+ paper<=8k124/258,>8k8/20; Mu307/395,11/28; no truncation, difficulty/sourcecompositionconfounded.
+CLOSED repeatseed2 owner466662/466663 full101/202/30386/110/113; CPU10031.792264401/wall6647.568335833,
+9696draws61805449tokens. All3seed finalpairedcounts large/repeat126/104,107/102,105/113.
+ s1-three-seed-final-paired-reference-comparison-v1.json Source-meandelta.0062905844,
+ sourceCI[-.0520833,.0610119], jointseed/Source descriptiveCI[-.0726461,.0858135].28labelledSources,
+ not84independentsources; no stableexpansionadvantage/Hostclaim.
 
-CLOSED bothactualS3collections32TRAIN(first16S2pool+16outsidefit), nativebanks/firstquestions/8steps:
- s3-after-first160-feedback-train32-v1 owner445402 child445403:185raw108ref,185NN,
- wholeCPU198.821504 wall119.934686558 (pending once,no selfbill/no nestedaddition).
- s3-after-first160-continued-sft-train32-v1 owner455445 child455446:141raw85ref,141NN,
- wholeCPU158.561494 wall100.191091496 pending.
- R/s3-first319-two-actor-collection-closeout-v1.json hasoldS1same32=138raw92ref;
- ALLownreferencefamilieshaveoldS1refs. NextprepareoneS3learninground withsameSource-family exposure
- usingactualpostS2refs vsoldS1reached refs, sameinit/oldreplay/budget. CanreuseM4matchedsampler.
- Source32fixture s3-first319-fixed-train32-plan-v1; oldS1roots s1-learner-train160-v1 and
- s1-learner-train177-cuda-v1. Don'tconcatenateacrossactorsbyevent_id: IDs canreferdifferentinputs.
- Currentcollections NOTcompletedS3aggregation/fit; explicitactorprovenance/uniqueIDs needed.
+CLOSED S3oneactualreferenceaggregation pair:
+ s3-first319-source-matched-state-data-v1 32opportunities/23labelledfamilies,108newrows each,
+ own108unique vsoldS1 87unique+21repeats,108sharedoldreplay=>216rows,3exactpasses648draws21updates.
+ SameS2feedbacku51base,lossnew/replay.8/.2, actorqualifiedeventIDs preserveoriginalstate/questions.
+ ReferenceSFTnotnewsemanticfeedback, differentlengths/uniquestates notpureactor/FLOPs.
+ s3-first319-own-states-seed0-v1 owner986625/986626:full7/21=123/121of278;
+ s3-first319-old-s1-states-seed0-v1 owner1068211/1068212:118/124. Bothselfbilled.
+ s3-first319-paired-closed-curves-v1.json.
+CLOSED S3DEV: fixed/commonu51/ownu21/oldS1u21 atsame64oldS1-reachedDEVstates32families, fixedcontext4.
+ ScoresGPU2bothnewmodels (reassignedbeforepredictions), oldcommonu51scoresreused. Nativeunion193,
+ physicalfirstcache144; actualchoices108packets5newnative103reuse, readouts5newHost103firstreuse.
+ Teacher5closed,103priorjudgments transferred0conflicts. Rootfixed0/2/4 reviewed5statusfields:
+ honestmissingbaseline-models/trainingcorpus answers remainincomplete butsupported; Doc2Veccomplete.
+ s3-first319-dev32-closed-comparison-v1/summary.json teacher33/32/30/29, Roothybrid32/32/32/31.
+ No netgain vsinitial/fixed, noautonomous/newconfirmation; Rootnonblind/nonindependent.
 
-CLOSED third4M6 original302207/302208 thencontinuation320353/320359: originalB05initialsuccessful,
- nextpreleaseHTTP_OWNER_BUSY hadnoattempt/admission/provider; 19unattempted continuedsamebanks/history.
- m6-continuous-families8to12-review-v1 all20Rootreviewed C3/Q5/W9/F3,8relevantupdatesallW;
- 27HTTP53NN7retrieval169165knownGen0unknown. B12middle/B25finalretrievedbutmissedcurrentwitnesses.
- B25finalactualpacket3assistantSources(includingownwrongprioranswer)+3repeateduserquestions.
- Rolesretained; notnewauthoritativefacts. R/m6-first12-continuous-comparison-v1.json:
- newC19/Q10/W20/F11 vs cache16/14/18/12, inc17/4/22/17, oldE3 17/9/19/15. Nonblind/nonindependent,
- repeatedpositions/RNGunmatched/oldE3CUDAnewCPU. Remaininglast4needsactualreview; binder8to12reusable
- byreplacingnames+driver_root(original12to16driver, unlessactualinterruptionhappens). No fabricatedretry.
+CLOSED SourceViewpaired12fits:
+ m6-adaptation-source-reference-seed0-v1 owner1121193/1121194 GPU2;
+ m6-adaptation-continued-replay-seed0-v1 owner1152285/1152286 GPU3.
+ Data m6-adaptation-train16-pair-v1:63refs other16TRAIN(READ56/REFRESH4/HANDOFF3),continuous16excluded
+ ONLYfromthisadaptation. Both126rows378draws12updates/36ku1130base,63sharedreplay. Positive-only
+ mostlyinitial/outcome-selected refs, notsemanticoptimality/natural/unseen/universalrefresh.
+ m6-adaptation-paired-closed-curves-v1.json: aux62reference0/4/8/12 source25/31/38/37,
+ replay25/30/28/27; fixed12paper124/278 vs131/278. No u8cherry-pick.
+ MuSiQuefixedu12retention evaluators CLOSED; m6-adaptation-source-reference-musique-dev-v1 and
+ m6-adaptation-continued-replay-musique-dev-v1/results.json (NOTsummary.json): source322/423 macro.76724 vsreplay316/423 .74957.
+ Referenceproficiency notapplicationgain. Bothnativeevaluatorsselfbill; wholeowner overlaps.
 
-READYNOTFITTED SourceView: m6-adaptation-train16-pair-v1,63refs other16TRAINfamilies
- (READ56/REFRESH4/HANDOFF3), excludescontinuous16onlyfromthisfit, notunseen. Reserved62auxrefs.
- Source/reference vscontinuedoldreplay each126rows shared63oldreplay,36ku1130base,3exactpasses378draws,
- 12updates eval4/8/12/fullpaper12. run_m6_adaptation_owned_fit_v1.py NAME GPU PREDECESSOR;
- NAME=m6-adaptation-source-reference-seed0-v1 or m6-adaptation-continued-replay-seed0-v1.
- AftercurrentGPUjobspermit, noqueue; limitedpositiveoutcome-selectedmostlyinitialrefs notoptimality.
+CLOSED originalu1130continuousall16/80:
+ m6-full16-continuous-comparison-v1.json newC25/Q16/W28/F11; cache23/18/23/16;
+ inc24/8/29/19;oldE3 25/12/24/19. Allfour0C on31target-changingpositions. ExcludeA02middle ONLY:
+ originalcriterion saysjob-sheet additions don'tchangeaskedemployer/department/manager (notA05).
+ New105HTTP180NN26retrieval; selectedSEARCH25/READ138/HANDOFF17; REFRESHoffered179/chosen0,
+ USE_VIEWoffered0. Rootreviewall80 nonblind/generatedTRAIN; RNGunmatched/oldE3CUDA-newCPU.
+ Last4source decisions in m6-continuous-families12to16-review-v1 all20transportCOMPLETE,C6/Q6/W8/F0.
+ Genericbinding template bind_m6_continuous_families12to16_v1.py fornewappblocks mustpointactualnew
+ condition/runtime+driver andoriginal4-sourcefixture; don'tblindlytransferoldgrades.
 
-READYNOTEXECUTED externalLME32: lme-existing-small32-transfer-v1 thin snapshot/nativequestions/images
- fulltwo100-trajectorybanks,16enterprise+16web; not32independentsources/newblind/full451result.
- Fixednominees36ku1130 andfeedbacku51, beforeanynewLMEoutcome; historicalbaselinefirstsbound, noretry.
- Plans lme-small32-s1u1130-v1 / lme-small32-s2feedbacku51-v1 via run_owned_plan_v1.py NAME whenGPU3/HTTPfree.
- Native32fullchainplanned(currentrunner+fixedmultimodalReader+nativescore), notyetexecuted. Current
- lme_evaluation.py onlyscopewordingchanged tocompleteSUPPLIEDsnapshot; Ruff/diffPASS, nobehaviorchange.
- OldLME451x2closed, oldMem2Act400x2nativeclosedbutprimaryscoreunclosed; don'trestartoldwholeexperiments.
- Newconfirmation96metadataonly in qasper-expanded-population-v1/population.json, no bodies/answersused.
+READYNOTRUN externalLME32: lme-existing-small32-transfer-v1 full2x100trajectorybanks,16enterprise+
+16web existingquestions/images. Not32independentSources/full451/newblind. Nominees36ku1130 and
+S2feedbacku51 fixedbeforeanynewLMEoutcome. Historicalfixedfirstsbound. Plans lme-small32-s1u1130-v1 /
+lme-small32-s2feedbacku51-v1 via run_owned_plan_v1.py NAME whenGPU3/HTTPfree. Nativefullquery/Reader/
+nativescorechain pending. OldLME451x2closed; oldMem2Actnative400x2closed,butprimaryscoreunclosed,
+notnewtrainingprerequisite. Freshconfirmation96metadataonly qasper-expanded-population-v1/population.json;
+no reservedbodies/answersconsumed. Needfinalnomination/protocol beforeactualconfirmation.
 
-PAIDphase29-selected-compute-v1:7specifiedpreps127.13412266CPU +M6third4residual74.035163867CPU;
- third4whole4567.581365-minusnative4493.546201133. Don'trebillthese. NewS3whole357.382998pending;
- currentDEVnative stages selfbill; binder/otherpreps separatelypending, authors/import/testsunknown.
- StillrequiredS3fit,SourceViewfit/application,lastcontinuous,repeatseed2/main3390,newexternalchain,
- confirmation96/fullcost/generalization. ExistingpackagePASS/tools6oldLMEissuesunchanged.
+DiagnosticONLY m2-first160-quality-qualified-cost-profile-v1.json:138coarseadequate/supportedpairs,
+94observedresource+HosttotalParetopairs69states53families incl18HANDOFF>READ. Singlefirst/fixedcontext4,
+notexpected/fullCPU/GPUcost; rawqualitylabelsUNCHANGED,no newcostfit/codepatch. Existingquality-cost
+entryinquality_feedback.py alreadyexists; don'treinvent. Interruptedanalysisproposedoptionalflag but
+NO PATCH WAS APPLIED. PriorS2pairactualDEVRoothybrid32/32/32 remainsno feedbackgain; unstarted781
+sameprotocolTRAINendpoints areavailable supply, notautomaticextensionabsentnewsignal.
+
+Figures closed-learning-and-application-figures-v1 paired-feedback/continuous16 PNG/PDF +source-data,
+renderedandviewed; reference278labels/28Sources vsreadouts64/32denominators explicit. NeedfinalS1
+curves export later(oldthroughu2260figure remainshistorical).
+PAIDphase30-selected-compute-v1:8preps/renderings60.687101714CPU +bothS3whole357.382998CPU(326NN)
++last4M6residual53.729765848. Don'trebill. Phase29paid7preps127.13412266+third4residual74.035163867.
+NewS3DEVunion/readerbinding/teacher transfer, laterretentionowner residual, apps, author/import/test
+costs pending/unknown; nativefit/evaluators/readers/teachersselfbill. FirstsettlementPath/stringerror
+occurredbeforeledger, correctedonce. No trackedruntimechangesphase30, data/metrics/figure checks;
+priorpackagePASS/tools6oldLMEissues unchanged. No goalcompletionclaim: apps/LME32/confirmation96/
+fullcost-generalization report remain.
 
 # HISTORICAL scalable evidence phase26: 2026-11-11
 
