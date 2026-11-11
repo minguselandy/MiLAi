@@ -174,6 +174,38 @@ def test_method_branch_cannot_change_limits_or_leave_learned_weights_unbound(
     assert len(wires) == 1
 
 
+def test_cache_origin_can_use_declared_learned_policy_without_changing_host_boundary(
+    tmp_path, monkeypatch,
+):
+    root = capture_root(tmp_path)
+    freeze = read_json(root / 'input-freeze.json')
+    freeze['config']['memory_control'].update(policy='view_cache', view_builder='extractive')
+    write_json(root / 'input-freeze.json', freeze)
+    wires = scripted(monkeypatch, lambda *_: {'role': 'assistant', 'content': 'Done.'}, native=True)
+    snapshots = tmp_path / 'snapshots'
+    original = message(root, bank='bank', owner='alice', session='host', message_id='q',
+                       content='Acknowledge.', incoming_sources=[source()],
+                       host_snapshots=snapshots)
+    assert original['status'] == 'COMPLETED'
+
+    class UnusedDecision:
+        def __init__(self, *args, **kwargs):
+            self.counters = {'forwards': 0}
+
+        def predict(self, payload):
+            pytest.fail('This acknowledgement should not request memory')
+
+    monkeypatch.setitem(sys.modules, 'torch', SimpleNamespace(set_num_threads=lambda _: None))
+    monkeypatch.setattr('milai_lab.runners.memory_control.NativeDecision', UnusedDecision)
+    captured, = snapshots.iterdir()
+    branch = replay_host_message(captured, tmp_path / 'learned', 'current',
+        source_version=VERSION, control_policy={'policy': 'laya', 'checkpoint': 'stub'})
+    assert branch['status'] == 'COMPLETED'
+    assert all(branch[k] for k in ('frozen_pre_host_state_equal',
+        'frozen_host_baseline_context_equal', 'frozen_host_tool_catalog_equal'))
+    assert wires[0] == wires[1]
+
+
 @pytest.mark.parametrize("prior_receipt", [False, True])
 def test_complete_branch_restores_pre_host_state_arrivals_and_allowance_without_future_leak(
     tmp_path, monkeypatch, prior_receipt,

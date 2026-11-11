@@ -168,3 +168,59 @@ def restore_case(archive_path: Path, base: Path, destination: Path) -> Path:
             os.chmod(target, row["mode"])
             os.utime(target, ns=(row["mtime_ns"], row["mtime_ns"]))
     return destination
+
+
+def restore_case_files(
+    archive_path: Path, base: Path, destination: Path, names: list[str],
+) -> dict[str, Any]:
+    """Restore selected recorded files without expanding unrelated cases or databases.
+
+    A selected file may share payload with an unselected file. Resolve that
+    reference inside the archive, but write only the requested original paths.
+    The immutable archive/base and unselected files are never changed.
+    """
+    if any(Path(name).is_absolute() or ".." in Path(name).parts for name in names):
+        raise ValueError("Selected archive paths must stay inside the restored case")
+    _files(base)
+    destination.mkdir(parents=True, exist_ok=False)
+    with tarfile.open(archive_path) as archive:
+        member = archive.extractfile("case-blocks.json")
+        assert member is not None
+        with member:
+            manifest = json.load(member)
+        if manifest["schema"] != "case_blocks_v1" or manifest["block_bytes"] != BLOCK_BYTES:
+            raise ValueError("Unsupported case block archive format")
+        rows = {row["path"]: row for row in manifest["files"]}
+        written = 0
+        for name in dict.fromkeys(names):
+            row = rows[name]
+            payload_row = row
+            visited = set()
+            while "same_as" in payload_row:
+                target = payload_row["same_as"]
+                if target in visited:
+                    raise ValueError("Cyclic archive file reference")
+                visited.add(target)
+                payload_row = rows[target]
+            if (Path(payload_row["path"]).is_absolute()
+                    or ".." in Path(payload_row["path"]).parts):
+                raise ValueError("Archive base references must remain inside the base")
+            if (payload_row["base_size"] is not None
+                    and (base / payload_row["path"]).stat().st_size != payload_row["base_size"]):
+                raise ValueError("Required case base has a different file size")
+            payload = (archive.extractfile(payload_row["payload"])
+                       if "payload" in payload_row else io.BytesIO())
+            assert payload is not None
+            target = destination / name
+            target.parent.mkdir(parents=True, exist_ok=True)
+            with payload, target.open("wb") as output:
+                for block in _blocks(payload_row, base, payload):
+                    output.write(block)
+            if target.stat().st_size != row["size"]:
+                raise ValueError("Selected archive file has incomplete recorded bytes")
+            os.chmod(target, row["mode"])
+            os.utime(target, ns=(row["mtime_ns"], row["mtime_ns"]))
+            written += row["size"]
+    return {"files": len(set(names)), "restored_bytes": written,
+            "archive": str(archive_path), "base": str(base),
+            "destination": str(destination), "no_sha_validation": True}

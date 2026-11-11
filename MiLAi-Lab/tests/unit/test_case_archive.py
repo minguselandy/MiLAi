@@ -6,7 +6,12 @@ import tarfile
 
 import pytest
 
-from milai_lab.harness.case_archive import BLOCK_BYTES, archive_case, restore_case
+from milai_lab.harness.case_archive import (
+    BLOCK_BYTES,
+    archive_case,
+    restore_case,
+    restore_case_files,
+)
 
 
 def contents(root):
@@ -77,3 +82,33 @@ def test_restore_requires_the_retained_base_and_a_fresh_destination(tmp_path):
     (base / "unchanged").write_bytes(b"different size")
     with pytest.raises(ValueError, match="base has a different file size"):
         restore_case(archive, base, tmp_path / "wrong-base")
+
+
+def test_selective_restore_resolves_unselected_shared_payload_without_copying_other_cases(tmp_path):
+    base, case = tmp_path / "base", tmp_path / "case"
+    base.mkdir()
+    case.mkdir()
+    (case / "a-original").write_bytes(b"literal shared data")
+    (case / "selected").mkdir()
+    (case / "selected/copy").write_bytes(b"literal shared data")
+    (case / "unrelated").write_bytes(b"unneeded case")
+    archive = tmp_path / "cases.tar.gz"
+    archive_case(case, archive, base)
+    report = restore_case_files(archive, base, tmp_path / "selected-output", ["selected/copy"])
+    assert contents(tmp_path / "selected-output") == {"selected/copy": b"literal shared data"}
+    assert report["files"] == 1 and report["restored_bytes"] == 19
+    assert archive.exists() and not contents(base)
+
+
+def test_selective_restore_keeps_unchanged_base_blocks(tmp_path):
+    base, case = tmp_path / "base", tmp_path / "case"
+    base.mkdir()
+    (base / "db").write_bytes(b"A" * BLOCK_BYTES + b"B" * BLOCK_BYTES)
+    shutil.copytree(base, case)
+    expected = b"A" * BLOCK_BYTES + b"changed"
+    (case / "db").write_bytes(expected)
+    archive = tmp_path / "case.tar.gz"
+    archive_case(case, archive, base)
+    restore_case_files(archive, base, tmp_path / "restored", ["db"])
+    assert (tmp_path / "restored/db").read_bytes() == expected
+    assert (base / "db").read_bytes() == b"A" * BLOCK_BYTES + b"B" * BLOCK_BYTES

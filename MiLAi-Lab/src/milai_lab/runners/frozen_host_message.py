@@ -243,10 +243,14 @@ def replay_host_message(
     policy_override = None
     if control_policy is not None:
         if (not control_policy or set(control_policy) - {"policy", "checkpoint"}
-                or control_policy.get("policy") not in {"fixed", "fixed_context", "rules", "laya"}):
+                or control_policy.get("policy") not in {
+                    "fixed", "fixed_context", "rules", "laya",
+                    "view_cache", "view_cache_incremental"}):
             raise ValueError("Host method comparison changes only the policy and checkpoint")
         settings = read_json(captured / "before/input-freeze.json")["config"]
-        if settings["memory_control"]["policy"] not in {"fixed", "fixed_context", "rules", "laya"}:
+        if settings["memory_control"]["policy"] not in {
+                "fixed", "fixed_context", "rules", "laya",
+                "view_cache", "view_cache_incremental"}:
             raise ValueError("Host method comparison requires the ordinary finite-policy executor")
         if control_policy["policy"] == "laya" and not control_policy.get("checkpoint"):
             raise ValueError("A learned Host method must explicitly bind its saved checkpoint")
