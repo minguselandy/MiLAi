@@ -15,6 +15,8 @@ def main() -> None:
     parser.add_argument("--source-version", required=True)
     parser.add_argument("--continue-unattempted", type=Path,
                         help="Closed failed prediction collection; preserve every prior attempt")
+    parser.add_argument("--asset-root", type=Path,
+                        help="Released image root when cohort metadata is stored separately")
     parser.add_argument("--site-packages", action="append", type=Path, default=[],
                         help="Declared HTTP/Pillow sites; preserve the selected interpreter first")
     args = parser.parse_args()
@@ -30,7 +32,8 @@ def main() -> None:
     torch.backends.mha.set_fastpath_enabled(False)
     result = predict_cohort(args.config, args.snapshot, args.upstream, args.output,
                             source_version=args.source_version,
-                            continue_from=args.continue_unattempted)
+                            continue_from=args.continue_unattempted,
+                            asset_root=args.asset_root)
     print({"status": result["status"], "positions": result["planned_positions"]})
 
 

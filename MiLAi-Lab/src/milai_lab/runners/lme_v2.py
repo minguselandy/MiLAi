@@ -71,19 +71,40 @@ class LmeMemoryBackend:
                 assets.extend(images)
             setup = prepare_history_bank(self.template, bank=self.bank, owner=self.owner, history={
                 "source_group": "lme-v2-declared-haystack", "sources": sources})
-            self.media = bind_media(assets, setup["sources"], self.data_root)
+            # Source ingestion is complete even if a later image locator cannot be bound.
             write_json(self.output / "source-setup.json", setup)
+            self.media = bind_media(assets, setup["sources"], self.data_root)
             write_json(self.output / "bound-images.json", self.media)
             self.ledger = Path(frozen(self.template)["config"]["budget_path"])
             write_json(self.output / "budget-before.json", read_json(self.ledger))
+
+    @staticmethod
+    def source_setup_path(previous: Path) -> Path | None:
+        """Locate completed Source imports, including runs that failed before image binding."""
+        saved = previous / "source-setup.json"
+        if saved.is_file():
+            return saved
+        # Earlier runners saved the completed import report only inside the single bank.
+        reports = list((previous / "template/banks").glob("*/retrieval-setup.json"))
+        return reports[0] if len(reports) == 1 else None
 
     def reuse_closed_template(self, previous: Path) -> None:
         """Copy the original full corpus for new, unattempted questions, without old queries."""
         import shutil
 
         with self.overhead():
-            setup = read_json(previous / "source-setup.json")
-            self.media = read_json(previous / "bound-images.json")
+            setup_path = self.source_setup_path(previous)
+            if setup_path is None:
+                raise ValueError("No completed Source import report to reuse")
+            setup = read_json(setup_path)
+            if (previous / "bound-images.json").is_file():
+                self.media = read_json(previous / "bound-images.json")
+            else:
+                if not self.trajectories:
+                    raise ValueError("Rebinding images requires the declared native trajectories")
+                assets = [asset for trajectory in self.trajectories.values()
+                          for asset in trajectory_sources(trajectory)[1]]
+                self.media = bind_media(assets, setup["sources"], self.data_root)
             shutil.copytree(previous / "template", self.template)
             write_json(self.output / "source-setup.json", setup)
             write_json(self.output / "bound-images.json", self.media)
@@ -91,6 +112,8 @@ class LmeMemoryBackend:
             write_json(self.output / "budget-before.json", read_json(self.ledger))
             write_json(self.output / "continuation-template.json", {
                 "original_backend": str(previous.resolve()),
+                "source_import_report": str(setup_path.resolve()),
+                "asset_bindings_rebuilt": not (previous / "bound-images.json").is_file(),
                 "scope": "Original closed haystack identity/Store retained. No previous question "
                          "runtime, answer, allowance or query cache is reused. Copied source-setup "
                          "costs are historical; this backend measures only the new copy overhead."})

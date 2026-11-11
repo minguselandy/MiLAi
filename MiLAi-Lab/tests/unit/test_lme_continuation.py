@@ -9,11 +9,84 @@ from test_lme_archives import files
 from test_lme_evaluation import fixture, response
 from test_lme_protocol import UPSTREAM
 
-from milai_lab.harness.artifact_io import read_json, write_json
+from milai_lab.harness.artifact_io import read_json, read_jsonl, write_json
 from milai_lab.providers.chat_bridge import IncompleteChatResponse
 from milai_lab.providers.contextual_capacity import HostCapacity
 from milai_lab.runners.lme_archives import archive_lme_cases, restore_lme_case
 from milai_lab.runners.lme_evaluation import predict_cohort, score_cohort
+
+
+def test_separate_asset_root_keeps_failed_first_and_reuses_completed_source_imports(
+    tmp_path, monkeypatch
+):
+    import base64
+
+    from milai_lab.datasets.longmemeval_v2 import asset_path
+
+    snapshot = fixture(tmp_path, monkeypatch)
+    assets = tmp_path / "released-assets"
+    (assets / "screens").mkdir(parents=True)
+    (assets / "questions").mkdir()
+    image_bytes = b"unchanged released image; mocked Reader does not decode it"
+    (assets / "screens/0.png").write_bytes(image_bytes)
+    (assets / "questions/2.png").write_bytes(image_bytes)
+    (snapshot / "screens").symlink_to(assets / "screens", target_is_directory=True)
+    (snapshot / "questions").symlink_to(assets / "questions", target_is_directory=True)
+    trajectories = read_jsonl(snapshot / "trajectories.jsonl")
+    trajectories[0]["states"][0]["screenshot"] = "screens/0.png"
+    (snapshot / "trajectories.jsonl").write_text(
+        "".join(json.dumps(row) + "\n" for row in trajectories))
+    questions = read_jsonl(snapshot / "questions.jsonl")
+    questions[2]["image"] = "questions/2.png"
+    (snapshot / "questions.jsonl").write_text(
+        "".join(json.dumps(row) + "\n" for row in questions))
+    original, continued = tmp_path / "original", tmp_path / "continued"
+    with pytest.raises(ValueError, match="inside its declared data root"):
+        predict_cohort(tmp_path / "settings.json", snapshot, UPSTREAM, original,
+            source_version="mechanical", capacity_factory=HostCapacity,
+            transport=httpx.MockTransport(lambda _: pytest.fail("No Reader before image binding")))
+    assert [row["status"] for row in read_json(original / "driver.json")["cases"]] == [
+        "FAILED_RETRIEVING", "NOT_RUN", "NOT_RUN"]
+    backend = original / "memory/pool-0000"
+    # Reproduce the earlier artifact layout: the import report survived only inside the bank.
+    (backend / "source-setup.json").unlink()
+    setup = read_json(next(backend.glob("template/banks/*/retrieval-setup.json")))
+    before = files(original)
+    wires = []
+
+    def reader(request):
+        payload = json.loads(request.content)
+        wires.append(payload)
+        assert "Public request number 0" not in request.content.decode()
+        assert "REFERENCE_ONLY_FOR_JUDGE" not in request.content.decode()
+        if len(wires) == 2:
+            images = [part["image_url"]["url"] for message in payload["messages"]
+                      if isinstance(message["content"], list) for part in message["content"]
+                      if part["type"] == "image_url"]
+            # The original query image survives; Source images attach only when actually read.
+            assert images
+            assert all(base64.b64decode(image.split(",", 1)[1]) == image_bytes for image in images)
+        return response("\\boxed{blue}")
+
+    result = predict_cohort(tmp_path / "settings.json", snapshot, UPSTREAM, continued,
+        source_version="mechanical", capacity_factory=HostCapacity,
+        transport=httpx.MockTransport(reader), continue_from=original, asset_root=assets)
+    assert result["asset_root"] == str(assets.resolve())
+    assert result["status"] == "COMPLETED_WITH_RETAINED_FAILURES" and len(wires) == 2
+    assert result["inherited_rows"] == [0]
+    assert [row["status"] for row in result["cases"]] == [
+        "FAILED_RETRIEVING", "COMPLETED", "COMPLETED"]
+    recovered = continued / "memory/pool-0000"
+    assert read_json(recovered / "source-setup.json") == setup
+    assert read_json(recovered / "continuation-template.json")["asset_bindings_rebuilt"] is True
+    media = list(read_json(recovered / "bound-images.json").values())
+    assert len(media) == 1 and media[0]["original_event_id"] == "a/state-0"
+    assert Path(media[0]["image"]) == assets / "screens/0.png"
+    assert Path(media[0]["image"]).read_bytes() == image_bytes
+    assert files(original) == before
+    assert files(backend / "template") == files(recovered / "template")
+    with pytest.raises(ValueError, match="inside its declared data root"):
+        asset_path(assets, "../settings.json")
 
 
 def test_prediction_continuation_keeps_failed_case_and_reuses_exact_original_haystack(

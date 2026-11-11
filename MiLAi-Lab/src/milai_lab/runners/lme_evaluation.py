@@ -39,6 +39,7 @@ def predict_cohort(
     capacity_factory: Callable[[dict[str, Any]], HostCapacity] = ImageHostCapacity,
     transport: httpx.BaseTransport | None = None,
     continue_from: Path | None = None,
+    asset_root: Path | None = None,
 ) -> dict[str, Any]:
     """Every question once, using only its unchanged public query/image and native haystack."""
     parent = None
@@ -53,12 +54,15 @@ def predict_cohort(
         if not any(c["status"] == "NOT_RUN" for c in parent["cases"]):
             raise ValueError("No unattempted prediction positions; failed cases are not retried")
         parents = prediction_roots(continue_from)
+    assets = (asset_root if asset_root is not None else
+              Path(parent.get("asset_root", snapshot)) if parent is not None else snapshot)
     output.mkdir(parents=True, exist_ok=False)
     started, cpu = time.perf_counter(), time.process_time()
     nested_cpu = 0.0
     driver: dict[str, Any] = {"schema": "lme_prediction_cohort_v2",
         "status": "RUNNING", "pid": os.getpid(),
         "source_version": source_version, "snapshot": str(snapshot.resolve()),
+        "asset_root": str(assets.resolve()),
         "output": str(output.resolve()), "automatic_retry": False,
         "runtime": {"python": sys.version, "transformers": transformers.__version__,
                     "interpreter": sys.executable},
@@ -132,22 +136,23 @@ def predict_cohort(
             driver["active_row"] = case["row"]
             case["status"] = "PREPARING_INPUT"
             write_json(output/"driver.json", driver)
-            query, query_image = public_question(row, snapshot)
+            query, query_image = public_question(row, assets)
             case["status"] = "RETRIEVING"
             pool = tuple(haystacks[row["id"]])
             child_cpu = time.process_time()
             try:
                 if pool not in backends:
-                    memory = LmeMemoryBackend(output/"configuration.json", snapshot,
+                    memory = LmeMemoryBackend(output/"configuration.json", assets,
                         output/"memory"/pools[pool], source_version=source_version)
                     memory.models = models
+                    for identity in pool:
+                        memory.insert(trajectories[identity])
                     previous = next((p/"memory"/pools[pool] for p in parents
-                                     if (p/"memory"/pools[pool]/"template").is_dir()), None)
+                                     if (p/"memory"/pools[pool]/"template").is_dir()
+                                     and LmeMemoryBackend.source_setup_path(
+                                         p/"memory"/pools[pool]) is not None), None)
                     if previous is not None:
                         memory.reuse_closed_template(previous)
-                    else:
-                        for identity in pool:
-                            memory.insert(trajectories[identity])
                     backends[pool] = memory
                 memory = backends[pool]
                 memory.queries = case["pool_index"]
