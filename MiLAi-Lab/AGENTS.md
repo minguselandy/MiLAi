@@ -1,4 +1,50 @@
-# LIVE scalable evidence phase26: 2026-11-11
+# LIVE scalable evidence phase27: 2026-11-11
+
+FullgoalACTIVE/incomplete, progress/noblocker. KEEPANALYSISSHORT and tool-driven. No subagents,
+SHA/contentfingerprints/Product/API/permission/Canonicalchanges/service restarts/push. Preservefirsts,
+unknowns/roles. /proc actualargv+owner+artifacts govern; neverrestart staleJSON/losthandle orledgerwait.
+R=/data/milai-experiments/20261111-scalable-evidence. Latestprogress-v27/docphase27. Noautoqueue.
+
+LIVE original36k owner769162 child769163 GPU2 latest2685/3390, unchanged loaded4bab6388.
+LIVE first319feedback owner192644 child192645 GPU3 latest49/51, fullu17/u34=89/117of278,
+macro.360373505/.439513116. Finish51; do notinferHostgain orstopfromreferencecurve.
+AFTERactualownerCOMPLETED/procgone launchmatchedSFT:
+ python3 R/run_m2_first160_owned_fit_v1.py m2-first160-continued-sft-seed0-v1 3 m2-first160-feedback-seed0-v1
+SameS1u101/init51updates1632draws319replay, feedback450rows131newknown vsSFT520/201newreference.
+Differenttargetcoverage, notpureloss/FLOPscomparison. First319support42direction89tieonly188unknown;
+62directionpairs have noHANDOFF>READ. ProfileR/m2-first160-feedback-support-profile-v1.json.
+
+CLOSED newTRAINfirst16reader owner195467 child195468:78firsts77complete1fail,265128knownGen0unknown,
+CPU5.927939915/wall1028.315475069 selfbilled. Compiled
+m2-fixed-context-train177-families0to16-witness-v1 (32states16families).
+LIVE teacher owner263964 child263965, m2-fixed-context-train177-families0to16-teacher-v1,
+latest13/32,0unresolved5masked. Onceclosed compile semantic viaexisting
+ tools/compile_collected_operation_feedback.py PREPARED READOUTS SEMANTIC --reviews TEACHER/reviews.json
+Prepared=R/m2-fixed-context-train177-families0to16-v1; readouts samewith-readouts-v1;
+output m2-fixed-context-train177-families0to16-semantic-teacher-v1. Teacher sameQwen/nonindependent.
+Next78 READY run_m2_fixed_context_train177_families16to32_readouts_v1.py. Neverlaunchold0..32whole156.
+Othernew177 batchesunchanged, unstarted781endpoints. AvoidlongHTTPlease nearfitbilling.
+
+READYNOTLAUNCHED afterpairedfits:
+- run_m2_first160_dev64_score_pair_v1.py bothu51/GPU3,64oldDEVmenus32families.
+  m2-first160-dev64-scorers-v1.json; m2-first160-existing-dev-packet-union-v1=188actualpackets,
+  m2-first160-existing-dev-first-cache-v1=137canonicalphysicalfirsts (includesfailures).
+  prepare_scored_operation_readouts.py union scorers newoutput, thenreader --reuse-readouts cache.
+- run_s3_first319_collection_v1.py NAME, NAME=s3-after-first160-feedback-train32-v1 or
+  s3-after-first160-continued-sft-train32-v1. Samefrozen32TRAINsourcefirstquestions/banks,8steps,
+  16fromS2sourcepool+16outsidecurrentS2fit, <=256NN/arm,noHost. Notnewconfirmation/notyetS3data.
+  OwnerschosenGPU3,verifyGPUfree manually; noautomaticqueue. CollectorNOselfbilling: wholechildCPU
+  once, notplusnestedrun.compute. Bothlauncherssyntaxchecked, nojobsstarted.
+- frozen run_s1_repeat32_seed2_v1.py stillrequired afterpairedS2/SFT (verifySFTclosed also;
+  legacylauncher'spredecessor checkonlyseed2large). Shortendpointscoring/S3canprecedelongrepeat;
+  no seed2recipe/data/init/checkpointchange, recordactualexecutionorder.
+Remaining8continuousfamilies plansready run_owned_plan_v1.py m6-s1u1130-continuous-families8to12-v1
+then12to16, onlyHTTPownerterminal. Source/View125referencestatesnotfitted. Publicqueryonceprimary
+2known0direction each, nonewrepetitivesamecohortvariants. Main3390,newconfirmation96,SourceViewlearning,
+fullcost/generalization unfinished. MeasurednewprepCPU pending; nativefit/readers/teachersselfbill.
+No trackedruntimechangesphase27, previouspackagePASS/tools6oldLMEissues unchanged.
+
+# HISTORICAL scalable evidence phase26: 2026-11-11
 
 GoalACTIVE/incomplete, PROGRESS,noblocker. No subagents/SHA/contentfingerprints/Product/API/permission/
 Canonical changes,service restarts orpush. Preservefirsts/unknowns/roles. KEEPANALYSISSHORT; previous
