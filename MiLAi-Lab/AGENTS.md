@@ -1,4 +1,76 @@
-# LIVE scalable evidence phase 13: 2026-11-11
+# LIVE scalable evidence phase 14: 2026-11-11
+
+Full v2 goal ACTIVE/incomplete, PROGRESS, no blocker. No subagents, SHA/content fingerprints,
+Product/API/permission/Canonical changes, service restarts or push. Keep first failures/unknowns/
+Source roles. R=/data/milai-experiments/20261111-scalable-evidence. Code71b4e488 (selected restore,
+cache-origin Host replay). progress-v14.json/manifest scalable-evidence-progress-20261111-v14.json.
+Keep analysis SHORT, tool-driven; do not speculate at length. Actual/proc argv+owner+artifacts govern
+liveness, never restart from staleJSON or a losthandle. Read current header/doc, not huge old audits.
+
+LIVE original36k owner769162 child769163 GPU2,latest1480/3390; unchangedloaded4bab6388.
+LIVE M6 arrival-notice owner2899654 child2899655, m6-s1u1130-view5-arrival-notice-v1,
+latestactiveD21/4closed of5. Original frozen runtime-d-update32 viaCPUFP32/4threads; firstprovider
+wireonly appends actualincomingSource count/roles. No bodies/gold/relevanceclaim/forcedtoolsequence.
+Nativebaselinecontextcheck happens BEFORE presentation; actualproviderwire intentionallychanged,
+notice-wire.json retainsbefore/after. Metadata-only check passed; firstdrysyntaxerror no calls retained.
+Sameactual5before/policy asno-notice; newcondition not retry orpuremodelgain. Originalfirstskept.
+LIVE/possiblyclosed M4comparison prep owner2947946 (child inowner JSON), m4-dev32-comparison-prepared-v1.
+Input m2-dev32-executed-packet-union-v1 (175actualpackets),scorers m4-dev64-scorers-v1.json,
+all32DEV64states. Reusesexistingfullbindings, onlynewactions executed. CheckactualstatusbeforeHost.
+No M4 comparisonHost launched yet; usecache m2-dev32-closed-readout-cache-v1 (123canonicalfirsts,
+includingfailures), not reroll oldoutcomes. Sharedcontinuationfixed_context4.
+
+CLOSED M4both165. m4-paired-closed-curves-v1.json: own/fixed fullpaper125/121 of278;ownreachedDEV39/40
+of76;tokens30577824/30610548. Sameinitial128choices/logits, allcurvepoints kept; no stablewinner.
+M4own/fixed finalu165 scorers64each CLOSED afterledgerwait; master2910786,lastchild2929295, no restart.
+Names m4-own-dev64-scores-v1 and m4-fixed-dev64-scores-v1. Selfbilled. GPU3nowfree afterbothscorers.
+
+CLOSED TRAIN families64to96 reader owner2690908 child2690914,159logical157completed2failed,
+509730knownGen0unknown, selfbilled. m2-fixed-context-train160-families64to96-witness-v1 compiled,
+64states32sources; semanticteacher NOT started yet. NextTRcohorts: old96..160 andnew177,1171packets
+unstarted. Native674states1639TRAINpackets across337sourcefamilies alreadyprepared; needeffective
+feedbackandadequateS2, notjustnativepreparation. NoautoHTTPqueue; waitactualownerclose.
+
+M6actualrestore: m6-view5-captures-v1,5TRAINgeneratedMemOps families,oneactualpre-Hostcapture/family
+(firsteligibleA05,C01,C23,D19,D21, D21secondopportunitynotduplicated). 155files28112487bytes restored
+host.json+before only via newrestore_case_files; resolvesoutside-selectedsame_as payload without
+expandingothercases. Originalarchive/base unchanged, noSHA.22relatedtests pass. No newbenchmarkdata.
+Current wrapper acceptsview_cache/view_cache_incremental origins, stillonlypolicy/checkpointoverride;
+actualhistorical execution uses ORIGINAL frozenfunctional.message directly (notcurrentruntime).
+Entry R/run_m6_view5_native_host_entry_v1.py; originalDsource_version matchesactualruntimepath.
+Per-instance NativeDecision init disablesreference_compile,CPU4FP32/MHAoff; codec/predictor unchanged.
+
+CLOSED M6 no-notice owner2816118 child2816120, m6-s1u1130-view5-autonomous-v1:
+4transportcomplete,1lengthfailed. Allbefore/context/catalog equal actualoriginals. First4 no NEW
+retrieval/controllercalls (historicalToolmessages notnewactivity). D21:SEARCHlimit16,READ3/2/1/0/
+source_fragment6/read4,HANDOFF;8decisions+2HTTP thenVLLM_CHAT_TRUNCATED.0newViewoperations.
+execution-summary-v1.json MISCOUNTEDtrace becausehost_result_path isattempt-N.json notresult;
+execution-summary-v2.json correctsactualtraceprefix, originalerroneousdiagnostic retained.
+Rootsourceauthorreview author-review-v1.json: A05qualified (ZIP/move-in wronglyassistant-only);
+C01stale240/shelved vsadmitted260/DIYMay10; C23falselynofamilyexpiry vswifeMarch7,2026;
+D19stale2TB vsadmitted200GB/4TBSSD/offlinepriorities;D21firstfailure. Allactualwitnessbodies present
+in native ready_state. Sourceauthornonblind/nonindependent. Fouruncalledcontrollercases areHost
+retrieval-use/freshness/authorityfailures, notevidenceofwrongLayaaction. NoViewbenefitclaim.
+
+Notice entry R/run_m6_view5_arrival_notice_entry_v1.py uses process-local VLLMClient.chat first-call
+presentation only, originalfrozenruntimeunchanged. Publicincoming_sourcesmetadata source, notgold.
+Partialfirst3: A05failed beforecontroller;C01retrieved8decisions butstillansweredstale240;C23no
+retrievalandstillmissingwife. D19/D21 pendinglastcheck; reviewFULLactualfirstswhenclosed.
+Do not silentlyrelaxlabels orretry tosuccess. NewSource metadata isadditionalinfo, explicitlyseparate.
+Source/View continuing trajectories beyondone restoredmessage/family STILL REQUIRED; no fakehistory.
+
+COST: previousphase12settlementalreadyrecorded; newrestore/union/remaining24witness/nextTRsubset and
+nativeHost entry residual needoverlap-aware grouping whenledgerfree. Nativefunctional.message and
+scorers/readers/trainers billtheirstages; wholechild/nestedCPU isoverlapping, notadditive. Unmeasured
+Root/tests/launch/syntaxfailure CPUunknownnotzero. No package boundary change beyond2existingfiles;
+22narrowtests/Ruffpassed, broadboundarynotrerunthisphase. Toolsold6LMEfindings unchangedknown.
+
+NEXT: closeM6notice source reviewandactualinputdelta; M4newfullbindingDEVHostcompare with123cache;
+startteacher forclosed159TRAIN thenresume1171untouchedendpoints/adequatefullfeedbacklearning.
+Finish36k3390; source-familyseedrepeats/newconfirmation96/fullquality/cost/generalization remain.
+No fullgoalcompletion fromtiny prefixes, offlineViewchoices ortransportsuccess.
+
+# HISTORICAL scalable evidence phase 13: 2026-11-11
 
 Full v2 goal ACTIVE/incomplete, previous/current turn PROGRESS, no blocker. No subagents, SHA/content
 fingerprints, Product/API/permission/Canonical changes, service restart or push. Preserve first

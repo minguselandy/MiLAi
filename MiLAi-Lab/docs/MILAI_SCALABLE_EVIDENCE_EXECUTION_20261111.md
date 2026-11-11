@@ -1,6 +1,34 @@
 # 2026-11-11：规模化证据学习 v2 执行记录
 
-## 最新状态：阶段 13，32来源M2开发闭合与真实View机会诊断
+## 最新状态：阶段 14，真实View历史续跑与Host更新感知实验
+
+**完整目标仍在执行。** M4两臂都完成165更新，原36k继续。新增32个TRAIN来源的159次读出已闭合：157完成、2失败，509,730已知生成tokens、unknown为0；实际分支已绑定，语义标注待继续。
+
+M4自身／固定采集器两臂终点完整论文DEV为125／121（均278标签），实际learner到达DEV为39／40（均76标签），两个面板方向不同。实际输入tokens为30,577,824／30,610,548，初始128条选择与logit相同。全部曲线保留，不能仅凭一个终点认定自身状态优势。两个终点模型已各完成64个共同DEV菜单评分；已将此前175个真实原生包和123个首Host结果建立复用索引，不重新执行已有绑定。新M4实际动作比较正在准备。
+
+### 从实际历史继续，而非重建假想对话
+
+`71b4e488`为现有归档增加选择性恢复，并允许现有Host续跑入口从cache策略状态切换到明确绑定的学习策略。22项归档／完整Host续跑测试通过，原预算修改拒绝规则保持。实际只恢复5个来源各一个初始捕获的155个文件、28,112,487字节；未展开无关捕获、after状态或重跑旧前缀。
+
+实际执行使用原冻结的`functional.message`，保留原Source、已有Host消息、首模型上下文、工具目录和准入额度，仅把策略／checkpoint设为36k/u1130。模型为CPU FP32、4线程、16384/2048，关闭每实例reference compile；冻结执行器与原归档未改。每个来源只建立一条工作分支，不为每个内部状态复制Store。
+
+5个首结果为4完成、1长度失败，初始状态、基线上下文和目录均验证一致。**前4个没有发生新的取证调用**，不能把历史对话中的Tool消息算作当前调用。最后D21实际执行SEARCH、6个READ和HANDOFF，再遇到Provider长度失败，未发生新View操作。
+
+依据原时间切片的来源标准核对，所有所需用户见证都在对应ready state中：A05核心地址正确，但将用户也明确提供的ZIP／搬入日期归作assistant-only，保留限定；C01仍回答旧240及搁置状态，漏当前260与DIY计划；C23错误否认家人护照到期信息；D19仍回答旧2TB，漏降回200GB、SSD及离线优先级。不能把这三个未调用控制器的错误归因于其动作选择，也不能把生成完成当任务成功。
+
+第一次执行摘要误把`host_result_path`一律按result文件解析，漏计当前trace；实际字段是attempt文件路径。v2按真实attempt身份修正，错误摘要保留，原结果未改。
+
+### 单独检验Source到达通知
+
+实际首Host上下文保留旧回答，却没有展示本轮新提交Source的数量。因此另设**附加信息条件**：同一真实before、同一模型／控制策略，仅在首个Provider请求的当前用户消息末尾追加实际`incoming_sources`数量和角色计数。没有加入正文、答案、相关性判断或固定工具顺序。
+
+在真实已保存的Provider输入上验证，只有该条消息增加元信息，原消息对象不变，第二次调用不再追加。新条件独立运行，原5个首结果完整保留。它测试Host更新感知，不是纯scorer能力比较；原基线上下文校验在呈现变换之前，实际Provider输入的差异明确记录。当前新条件仍在运行，不能提前声称改善。
+
+继续完成通知条件的来源评阅、M4实际DEV比较、充分规模S2、原36k后续遍次、持续请求而非单个恢复消息的Source/View验证、多seed、新确认96及完整成本／泛化。SHA校验仍禁用，无Product/API/权限/Canonical改变、服务重启或推送。
+
+阶段14：[manifest](../data/manifests/scalable-evidence-progress-20261111-v14.json)、[M4两臂曲线](/data/milai-experiments/20261111-scalable-evidence/m4-paired-closed-curves-v1.json)、[View历史首结果](/data/milai-experiments/20261111-scalable-evidence/m6-s1u1130-view5-autonomous-v1/execution-summary-v2.json)、[来源评阅](/data/milai-experiments/20261111-scalable-evidence/m6-s1u1130-view5-autonomous-v1/author-review-v1.json)、[通知条件](/data/milai-experiments/20261111-scalable-evidence/m6-s1u1130-view5-arrival-notice-v1-plan.json)。
+
+## 阶段 13记录：32来源M2开发闭合与真实View机会诊断
 
 **完整目标继续执行。** 原36k最近1280/3390更新；M4自身状态臂已正常完成165更新，固定采集器臂已在相同GPU3与原配方下开始，最近55/165。下一批32个TRAIN来源的159次首次读出正在执行。
 
