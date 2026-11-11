@@ -132,6 +132,7 @@ def main() -> None:
     parser.add_argument("output", type=Path)
     parser.add_argument("--offset", type=int, default=0)
     parser.add_argument("--families", type=int, required=True)
+    parser.add_argument("--split", choices=("train", "dev"), default="train")
     parser.add_argument("--continuation-steps", type=int, default=2)
     parser.add_argument(
         "--continuation-policy",
@@ -155,8 +156,8 @@ def main() -> None:
         raise ValueError("Select only a closed family prefix from the actual learner collection")
     histories = read_json(args.collection / "sources.json")["histories"]
     histories = histories[args.offset : args.offset + args.families]
-    if any(h["split"] != "train" or len(h["requests"]) != 1 for h in histories):
-        raise ValueError("Feedback requires one original request per declared TRAIN family")
+    if any(h["split"] != args.split or len(h["requests"]) != 1 for h in histories):
+        raise ValueError("Feedback requires one original request per declared source-role family")
     settings = read_json(Path(collection_run["config"]))["entrypoints"]["functional"]
     controls = {
         (c["source_group"], c["request_id"]): c
@@ -170,6 +171,7 @@ def main() -> None:
         "config": collection_run["config"],
         "collector_checkpoint": collection_run["collector_checkpoint"],
         "families": len(histories),
+        "split": args.split,
         "selected_states": 0,
         "comparison_states": 0,
         "packets": 0,
@@ -210,7 +212,7 @@ def main() -> None:
                     event,
                     {
                         "family": history["source_group"],
-                        "split": "train",
+                        "split": history["split"],
                         "row": len(rows),
                         "state_id": len(rows),
                         "event_id": event_id,

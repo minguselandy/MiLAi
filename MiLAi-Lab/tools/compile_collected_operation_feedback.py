@@ -80,6 +80,8 @@ def main() -> None:
     parser.add_argument("readouts", type=Path)
     parser.add_argument("output", type=Path)
     parser.add_argument("--reviews", type=Path)
+    parser.add_argument("--evaluation-only", action="store_true",
+                        help="Require DEV roles and export feedback-dev instead of fit rows")
     args = parser.parse_args()
     started, cpu = time.perf_counter(), time.process_time()
     preparation = read_json(args.prepared / "run.json")
@@ -123,7 +125,8 @@ def main() -> None:
     compiled, review_inputs, sft, matched = [], [], [], []
     for case in cases:
         row = rows[case["state_index"]]
-        if row["metadata"]["event_id"] != case["event_id"] or row["metadata"]["split"] != "train":
+        if (row["metadata"]["event_id"] != case["event_id"]
+                or row["metadata"]["split"] != ("dev" if args.evaluation_only else "train")):
             raise ValueError("Feedback state identity or research role changed")
         bound = []
         reviews = None if review_source is None else {}
@@ -194,7 +197,7 @@ def main() -> None:
     known_fit = {target: [r for r in compiled if any(
         p[target] in {"left", "right", "tie"} for p in r["feedback"]["comparisons"])]
         for target in ("answer", "delivery")}
-    for name, records in (
+    exports = (
         ("raw-feedback", compiled),
         ("delivery-fit", full_fit["delivery"]),
         ("answer-fit", full_fit["answer"]),
@@ -202,7 +205,8 @@ def main() -> None:
         ("answer-known-fit", known_fit["answer"]),
         ("matched-feedback", matched),
         ("matched-sft", sft),
-    ):
+    ) if not args.evaluation_only else (("raw-feedback", compiled), ("feedback-dev", compiled))
+    for name, records in exports:
         with (args.output / f"{name}.jsonl").open("w") as stream:
             for row in records:
                 stream.write(json.dumps(row, ensure_ascii=False) + "\n")
@@ -211,6 +215,9 @@ def main() -> None:
         args.output / "manifest.json",
         {
             "status": "BOUND_BRANCH_FEEDBACK_COMPILED_NOT_FITTED",
+            "evaluation_only": args.evaluation_only,
+            "source_split": "dev" if args.evaluation_only else "train",
+            "training_exports_written": not args.evaluation_only,
             "prepared": str(args.prepared.resolve()),
             "readouts": str(args.readouts.resolve()),
             "reviews": str(args.reviews) if args.reviews else None,
