@@ -95,8 +95,9 @@ def main() -> None:
         "automatic_retry": False,
         "no_sha_validation": True,
         "answer_persisted_as_source": False,
-        "scope": "Conditional public task plus actual packet with empty known refs; "
-        "not autonomous Host conversation or business execution",
+        "scope": prepared.get("readout_scope", "Conditional public task plus actual packet "
+                              "with empty known refs; not autonomous Host conversation "
+                              "or business execution"),
     }
     write_json(args.output / "run.json", run)
     started, cpu = time.perf_counter(), time.process_time()
@@ -141,6 +142,8 @@ def main() -> None:
                             "packet_tokens": branch["body_tokens"],
                             "answer": None,
                             "request": str((destination / "request.json").resolve()),
+                            **({"condition_provenance": branch["condition_provenance"]}
+                               if "condition_provenance" in branch else {}),
                         }
                         path = destination / "readout.json"
                         run["active"] = str(path.resolve())

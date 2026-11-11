@@ -39,6 +39,44 @@ def given_packet_request(public: dict[str, Any], retrieval_request: dict[str, An
     does not retrieve, add knowledge or reconstruct a prior Host conversation.
     """
     validate_given_readout_request(retrieval_request)
+    return _packet_request(public, retrieval_request, packet, settings)
+
+
+def receipt_conditioned_packet_request(
+    public: dict[str, Any], retrieval_request: dict[str, Any],
+    packet: dict[str, Any], settings: dict[str, Any],
+    prior_receipts: list[dict[str, Any]],
+) -> dict[str, Any]:
+    """Construct explicit known material from the referenced actual receipt items.
+
+    This is a supplied experimental condition, not reconstructed Host history.
+    The caller retains receipt provenance and visibility. Unreferenced items from
+    an earlier packet never enter the wire, even when they answer the question.
+    """
+    request = RetrievalRequest.model_validate(retrieval_request)
+    known = []
+    for reference in request.task_context.known_evidence_refs:
+        ref = reference.model_dump(mode="json")
+        matches = [item for receipt in prior_receipts for item in receipt["packet"]["evidence"]
+                   if item.get("ref") == ref]
+        if not matches:
+            raise ValueError("KNOWN_READOUT_MISSING_REFERENCED_RECEIPT_ITEM")
+        if any(item != matches[0] for item in matches[1:]):
+            raise ValueError("KNOWN_READOUT_CONFLICTING_RECEIPT_ITEMS")
+        known.append(copy.deepcopy(matches[0]))
+    return _packet_request(public, retrieval_request, packet, settings, condition={
+        "known_evidence": known,
+        "evidence_use": "known_evidence contains previously supplied evidence items. "
+                        "memory contains the current retrieval result. Use both to answer "
+                        "the request, and explain any limitation in the available evidence.",
+    })
+
+
+def _packet_request(
+    public: dict[str, Any], retrieval_request: dict[str, Any],
+    packet: dict[str, Any], settings: dict[str, Any],
+    *, condition: dict[str, Any] | None = None,
+) -> dict[str, Any]:
     host = VLLMConfig(**settings["host"])
     public_time = {key: public[key] for key in (
         "occurred_at", "query_time", "calendar_context", "query_calendar_context") if key in public}
@@ -49,7 +87,7 @@ def given_packet_request(public: dict[str, Any], retrieval_request: dict[str, An
         "messages": [{"role": "system", "content": settings["system_prompt"]},
             {"role": "user", "content": json.dumps({
                 "request": public["content"], "retrieval_request": retrieval_request,
-                "memory": packet,
+                "memory": packet, **(condition or {}),
                 **({"public_request_time": public_time} if public_time else {})},
                 ensure_ascii=False)}],
         "response_format": {"type": "json_schema", "json_schema": {
