@@ -1,6 +1,23 @@
 # 2026-11-11：规模化证据学习 v2 执行记录
 
-## 最新状态：阶段22，扩充实际Source/View参考经验
+## 最新状态：阶段23，论文首结果闭合与同状态SFT参考
+
+**完整目标继续执行。** 最后32个原论文来源的153个首读出已经关闭：146完成、7失败，533,200已知生成tokens、unknown为0。实际结果已绑定为63个比较状态，未补造第64个无原分支的状态。读出自计CPU10.494692秒、墙钟2,154.176037秒，不重复加账。
+
+补齐旧动作提名的17个新条件首读出已启动。它们关闭后将与新条件既有112结果合成32状态的129结果，并标出其中与旧协议配对的112项；129结果教师计划已更新输入目录和计数。当前仍未关闭，不提前报告新的语义收益。
+
+公开反馈的SFT参考对照也已准备：在同32个实际learner初始状态上，用原生参考见证及真实known回执组织监督，SEARCH只依据已执行的完整查询／limit结果记参考进展。得到12个有参考标签状态、20个未知状态；输入、问题和用于选项置换的state_id与反馈侧逐条一致。没有从教师答案反推SFT标签，也没有把缺失支持转换成应当停止。两种目标可用标签不同，不能称为纯损失函数对照。
+
+125条Source/View参考示范进一步回溯到实际步骤：每条输入／完整菜单、所选动作、动作绑定与成功执行记录均匹配。这个验证只支持“确有这些执行和参考见证”，不提升为语义最优、无偏样本或泛化收益；示范仍未拟合。
+
+两项训练继续：36k保留原3390更新计划，seed2大池之后再执行已准备的小池对照。新确认96尚未使用。后续仍需129结果和论文63状态的语义评阅、859个新论文端点、8条连续路径、实际Source/View学习、充分规模S2／SFT与S2后聚合，以及完整成本／泛化结论。
+
+SHA校验持续禁用，无Product/API/权限/Canonical修改、服务重启、推送或子代理。新SFT准备成本已测待结算，验证／作者等未测成本保留未知。
+
+阶段23：[manifest](../data/manifests/scalable-evidence-progress-20261111-v23.json)、[同状态SFT参考](/data/milai-experiments/20261111-scalable-evidence/m2-public-train16-matched-reference-sft-v1/manifest.json)、[输入对应检查](/data/milai-experiments/20261111-scalable-evidence/m2-public-train16-matched-reference-sft-v1/input-alignment.json)、[实际步骤核对](/data/milai-experiments/20261111-scalable-evidence/m6-mixed-reference-operations-v1/actual-step-checks.json)。
+
+
+## 阶段22记录：扩充实际Source/View参考经验
 
 **完整目标继续执行。** 三项原作业均核对为实际进程存活：36k继续原3390更新，seed2大池继续303更新，最后32个原论文来源153个首读出继续执行。未因观察等待或状态文件更新时间而重启。
 

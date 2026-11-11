@@ -1,4 +1,54 @@
-# LIVE scalable evidence phase22: 2026-11-11
+# LIVE scalable evidence phase23: 2026-11-11
+
+FullgoalACTIVE/incomplete, PROGRESS,noblocker. No subagents/SHA/contentfingerprints/Product/API/
+permission/Canonical changes,service restarts orpush. Preservefirsts/unknowns/roles. KEEPANALYSIS
+SHORT; use tools, avoid endless speculative Source prose. R=/data/milai-experiments/20261111-scalable-evidence.
+Latestprogress-v23/manifestv23/docphase23. /procactualargv+owner+artifacts authoritative,
+neverrestart staleJSON/losthandle. Noautoqueue.
+
+LIVE main36k owner769162 child769163 GPU2 latest2500/3390.
+LIVE largeseed2 owner3905047 child3905048 GPU3 latest227/303, thenpreparedrepeatseed2launcher.
+CLOSEDpaperlast153 owner4096435 child4096436:146completed7failed533200knownGen0unknown,
+CPU10.494691809/wall2154.176036714 selfbilled. Bound m2-fixed-context-train160-families128to160-
+witness-v2.63comparisonstates32sources,64selectedraw; no fabricatedmissingstate. Teacher63plan
+m2-fixed-context-families128to160-teacher-v1 READYNOTSTARTED.
+LIVE missing17reader owner38560 child38561 (PIDwrappednormally),
+m2-public-train16-query-once-missing17-readouts-v1,latest10closed2failed. No existingfirstrerun.
+Afterclose bindnew112+17 with R/bind_public_feedback_results_v1.py:
+ baseprepared m2-public-train16-query-once-all112-v1
+ basereader m2-public-train16-query-once-readouts-v1
+ refs m2-public-train16-reference-context-v1.json
+ output m2-public-train16-query-once129-bound-v1
+ --extra-prepared m2-public-train16-query-once-missing17-v1
+ --extra-readouts m2-public-train16-query-once-missing17-readouts-v1
+ThenREADY run_m2_public_train16_query_once129_teacher_v1.py /plan
+m2-public-train16-query-once-129-teacher-v1 (129outcomes32states16families).
+Old112pairedsubset mustbeexplicit; 17previouslynewcoverageactions remainexploratory. Branch
+policies coverage names canoverlap; bind byactualevent+fullaction+wire, notpolicynametoidentifypairedset.
+Oldfixedcontext112 labels diagnosticseparate, no cross-protocoloutcome replacement.
+
+NEW SFTcounterpart m2-public-train16-matched-reference-sft-v1:
+all-states.jsonl32actualinitialstates, train.jsonl12native-reference-labelled/20unknown.
+Uses existingreference_preferences +observed_search_preferences onORIGINALactuallearner events,
+originalpopulationcontrols/source-map, actualknown materials. OnlyexecutedSEARCHbindingcredited;
+otherqueries remainunjudged. Same state/questions andstate_id asfeedback confirmedinput-alignment.json.
+No newexecution/model/Host orlabelsfromsemanticanswers. Differenttargets/supportavailability not
+purelosscomparison. Script R/prepare_public_reached_reference_sft_v1.py; measuredCPU pending.
+This canserve publiccomponent referenceSFT control whenadequateS2data ready; don'tinventSFTgold.
+
+M6mixedreference125actualsteps bound to successfulactualactions andsameinputs in
+m6-mixed-reference-operations-v1/actual-step-checks.json (R/verify_m6_reference_slice_actual_steps_v1.py).
+No newfit. Already125states32TRAINfamilies=106READ10REFRESH9HANDOFF, positive-onlyreferenceproxy,
+mostlyinitial; no semanticoptimality/Hostsuccess/generalizationclaim. Otheractionsunjudged.
+Source/Viewupdates stillneedactualdiverselearning, notjustvalidreferenceinventory.
+
+NEXT: finishmissing17, union129teacher thenpaper63teacher; advance859new177paperendpoints and8
+continuousfamilies. NeedadequateS2/SFT/postS2aggregation, Source/Viewlearning, seed2pair/main3390,
+newconfirmation96/fullcost/generalization. All new177sixreaderbatches stillNOTSTARTED.
+ReferenceSFTprep/actual-stepverification/newerprepCPU pending; selfbilledreaders/teachers/trainers
+notaddedagain; author/tests/unmeasuredunknownnotzero. PackagePASS/toolsold6LMEdynamicimports unchanged.
+
+# HISTORICAL scalable evidence phase22: 2026-11-11
 
 FullgoalACTIVE/incomplete. PreviousPROGRESS,no blocker. No subagents/SHA/contentfingerprints/
 Product/API/permission/Canonical changes, service restarts orpush. Preservefirsts/unknowns/roles.
