@@ -26,6 +26,8 @@ def prepare_case(collection: Path, history: dict[str, Any], settings: dict[str, 
     bank = collection / "banks" / history["id"]
     paths = {c: bank / f"{public['id']}-{c}-receipt.json" for c in ("cold", "known-first")}
     receipts = {c: read_json(p) for c, p in paths.items()}
+    parent_path = Path(receipts["known-first"].get("known_reference_parent_receipt", paths["cold"]))
+    parent = read_json(parent_path)
     actions = {}
     for condition in receipts:
         events = read_jsonl(bank / f"{public['id']}-{condition}-operations.jsonl")
@@ -49,7 +51,7 @@ def prepare_case(collection: Path, history: dict[str, Any], settings: dict[str, 
         receipt = receipts[packet_condition]
         request = receipts[request_condition]["request"]
         wire = receipt_conditioned_packet_request(
-            public, request, receipt["packet"], settings, [receipts["cold"]])
+            public, request, receipt["packet"], settings, [parent])
         case["choices"][name] = actions[packet_condition]["id"]
         case["branches"].append({
             "policies": [name], "action": actions[packet_condition],
@@ -59,7 +61,7 @@ def prepare_case(collection: Path, history: dict[str, Any], settings: dict[str, 
             "readout_request": wire,
             "condition_provenance": {
                 "condition": name, "current_packet_receipt": str(paths[packet_condition]),
-                "known_items_receipt": str(paths["cold"]),
+                "known_items_receipt": str(parent_path),
                 "known_evidence_refs": request["task_context"]["known_evidence_refs"],
                 "native_retrieval_request": receipt["request"],
                 "reader_retrieval_request": request,
