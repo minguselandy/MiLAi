@@ -140,10 +140,15 @@ def main() -> None:
     preparation = read_json(Path(manifest["prepared"]) / "run.json")
     settings = read_json(Path(preparation["config"]))["entrypoints"]["functional"]
     cases = read_json(args.compiled / "review-inputs.json")
+    roles = {case["native_control"]["split"] for case in cases}
+    if len(roles) != 1 or not roles <= {"train", "dev"}:
+        raise ValueError("Keep training and development annotation batches separate")
+    source_split = next(iter(roles))
     args.output.mkdir(parents=True, exist_ok=False)
     run = {"status": "RUNNING", "pid": os.getpid(), "compiled": str(args.compiled.resolve()),
         "planned_states": len(cases), "closed_states": 0, "unresolved_states": 0,
         "masked_teacher_candidates": 0,
+        "source_split": source_split, "training_labels_allowed": source_split == "train",
         "reviewer": "Existing local Qwen Host model as offline training teacher",
         "independent_evaluation": False, "judge_attempts": 1, "no_sha_validation": True,
         "scope": "Offline teacher supervision only; no online controller or Host inputs changed.",
@@ -187,7 +192,8 @@ def main() -> None:
                             "review_origin": "offline_model_teacher_not_independent"})
                     run["closed_states"] += 1
                     write_json(args.output / "reviews.json", {"reviewer": run["reviewer"],
-                        "independent_evaluation": False, "records": records})
+                        "independent_evaluation": False, "source_split": source_split,
+                        "training_labels_allowed": source_split == "train", "records": records})
                     write_json(args.output / "run.json", run)
                     print(json.dumps({k: run[k] for k in (
                         "closed_states", "planned_states", "unresolved_states")}), flush=True)
