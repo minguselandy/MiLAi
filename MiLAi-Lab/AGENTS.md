@@ -1,4 +1,63 @@
-# LIVE scalable evidence phase19: 2026-11-11
+# LIVE scalable evidence phase20: 2026-11-11
+
+FullgoalACTIVE/incomplete. PROGRESS,no blocker. No subagents/SHA/contentfingerprints/Product/API/
+permission/Canonical changes,service restarts orpush. Preservefirsts/unknowns/roles. KEEPANALYSIS
+SHORT AND CONCRETE. Do notspendthousandsoftokens repeating speculative architecture/Source prose.
+R=/data/milai-experiments/20261111-scalable-evidence. Latestprogress-v20/manifestv20/docphase20.
+Actual/proc+owner+artifacts governliveness; neverrestart staleJSON/losthandles. Noautoqueue.
+
+LIVE main36k owner769162 child769163 GPU2 latest2310/3390. u2260fullclosed131/278 macro.49388335,
+aux315/423 macro.75215517; u1130paper129/aux319. Continueoriginal3390. Do notclaimHostgain.
+LIVE large3kseed2 owner3905047 child3905048 GPU3 latest76/303; thenpreparedrepeat2launcher.
+CLOSEDseed1pair previousphase:large107/95/107 vsrepeat108/102/102; finalmacros.406775/.403077.
+LIVE query-once112reader owner4002617 child4002618,
+m2-public-train16-query-once-readouts-v1, latest23closed1failed. Prepared m2-public-train16-
+query-once-all112-v1 (same32states16families112nativebranches), all<=1SEARCH proofchecks.json.
+Oldfixed_context112 firsts/labels remainseparate: theyreplacedK-querypool withoriginalsearch_0_8.
+Codeeac54b85 optionalquery_once_context leavesdefaultsunchanged. 9tests/Ruffpassed.
+Afterreadercloses use R/bind_public_feedback_results_v1.py withpreparedALL112+reader+references
+m2-public-train16-reference-context-v1.json; noextraargs neededbecauseall112alreadyoneprep.
+Thenknown-awareteacher6ef691e0. Genericsemanticcompiler R/compile_bound_semantic_feedback_v1.py
+readsactualpreparedcontinuationmetadata. Don'tuseQASPERcollectionlookup ormixold/newprotocol.
+
+CLOSED M6second4 total20firsts(C5/Q4/W7/F4), m6-continuous-families4to8-review-v1.
+Actual-inputs/author-decisions/summary filesboundoriginalruntime andnewcontinuationdriver.
+183540knownGen0unknown,29HTTP57NN9retrievals. B03finalretrievaladdsDavidinterimdutybutwrongPriya/
+missingproposal/stalechart =>W. Otherupdates stale ormissing. Secondbatch8updatepositions0C.
+OldinitialA16FAILED keptonce. Originalfailedowner3869051; continuationowner3911869 child3911870
+COMPLETED; currentRootruntime remainsm6-s1u1130-continuous-families4to8-v1/laya. Continuation
+outputdriverin...-continuation-v1. HTTP_OWNER_BUSY waspredispatch, notadditionalfailedanswer.
+Wholechildtwoowners4169.993792 minusnative4086.113429072 =>83.880362928CPU PENDING originalledger.
+m6-families4to8-cost-reconciliation-v1.json recordedfalse; don'tdoublecountinitial orwhole/native.
+Combined m6-first8-continuous-comparison-v1.json:40positions newC16/Q5/W11/F8, cacheC12/Q9/W12/F7,
+incC15/Q3/W11/F11,E3C11/Q5/W15/F9. Nonblind/nonindependent, HostRNGunmatched, CPUvsCUDA costnotmatched.
+Remaining8continuousfamilies8..12/12..16 plansready, noautonomousnewtrajectorybenefit established.
+
+s1-learning-curves-through-u2260-v1/{curves.png,curves.pdf,source-data.json,manifest.json} exported
+andvisuallychecked. Onlyclosedpoints, same0..1axes; full36k/seed2ongoing, referenceDEVnotHostquality.
+R/plot_s1_curves_u2260_v1.py reproducible. PlotCPU pending, no newmodel/Hostcalls.
+
+New177 supplybatched m2-train177-reader-batches-v1.json:6finiteparts32/32/32/32/32/17families,
+64/64/64/64/64/34states,156/155/158/156/155/79packets=354/859. Eachprepared
+m2-fixed-context-train177-families{begin}to{end}-v1; eachreaderplan/launcher ready, NONESTARTED.
+R/run_m2_fixed_context_train177_families0to32_readouts_v1.py isfirst. PreparationCPU12.38102682pending.
+NoSource/model/prefixrerun. Lastoriginal32 stillready m2-fixed-context-train160-families128to160-v2,
+64selected63comparisons153packets. Originalpaper337 supply674selected673comparisons1639packets.
+Paper128 semantic256states108deliveryknown103answerknown36/32directional (notadequateS2).
+Oldpublic32fixedcontext semanticonly3deliveryknown2answerknown; helddiagnostic aftercontinuationfix.
+
+Diagnostic m6-view6-initial-witness-visibility-v1.json:actualSourceobservation visibility by literal
+full/leadingbody+role. C01middle1/3,D19middle0/5,D21middle4/7witnessesvisible; eachofferspageaction.
+A05extra0/3,C23extra0/4,D21extra0/4 withnopage; priorView/HostK orotherStoredSources maycover.
+This isNOTsemantic quality, permission, fullStoreabsence orautomaticoptimalactionlabel.
+
+NEXT: closequeryonce112/annotate/compileeffectivefeedback; executepaper153thennew177859;
+finish8continuousfamilies andactualSource/Viewlearning; seed2pair/main3390,adequateS2/SFT,
+postS2aggregation,newconfirmation96/fullcost/generalization. Source-role/temporaltrainingnotproved.
+Measurablependingpreps/analysis/remainderCPU settleafterHTTPownerterminal. Selfbilled stagesnotadded
+again; unmeasuredauthor/tests/importsunknownnotzero. PackagePASS, toolsold6LMEdynamicimports remain.
+
+# HISTORICAL scalable evidence phase19: 2026-11-11
 
 FullgoalACTIVE/incomplete. LastturnPROGRESS. No subagents/SHA/contentfingerprints/Product/API/
 permission/Canonical changes,service restarts orpush. Preservefirsts/unknowns/roles. KEEPANALYSIS

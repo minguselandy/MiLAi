@@ -1,0 +1,445 @@
+{
+  "status": "PHASE20_PROGRESS_FULL_GOAL_ACTIVE",
+  "observed_at_utc": "2026-11-11T11:09:40.987255+00:00",
+  "previous": "/data/milai-experiments/20261111-scalable-evidence/progress-v19.json",
+  "no_sha_validation": true,
+  "active_jobs": [
+    {
+      "name": "s1-op36k-seed0-v1",
+      "owner_pid": 769162,
+      "child_pid": 769163,
+      "actual_argv_checked": true,
+      "owner_status": "RUNNING",
+      "status": "RUNNING",
+      "optimizer_updates": 2310,
+      "planned_optimizer_updates": 3390
+    },
+    {
+      "name": "s1-op3k-seed2-v1",
+      "owner_pid": 3905047,
+      "child_pid": 3905048,
+      "actual_argv_checked": true,
+      "owner_status": "RUNNING",
+      "status": "RUNNING",
+      "optimizer_updates": 76,
+      "planned_optimizer_updates": 303
+    },
+    {
+      "name": "m2-public-train16-query-once-readouts-v1",
+      "owner_pid": 4002617,
+      "child_pid": 4002618,
+      "actual_argv_checked": true,
+      "owner_status": "RUNNING",
+      "status": "RUNNING",
+      "closed_readouts": 23,
+      "failed_readouts": 1
+    }
+  ],
+  "main_u2260_closed_evaluation": {
+    "optimizer_updates": 2260,
+    "weighted_loss_mean": 0.14461464276452282,
+    "dev": {
+      "counts": {
+        "labelled": 78,
+        "accepted": 47,
+        "handoff_outside_reviewed_preference": 8,
+        "masked": 50
+      },
+      "strata": {
+        "reference_acquisition": {
+          "labelled": 58,
+          "accepted": 34
+        },
+        "reference_preserving_handoff": {
+          "labelled": 20,
+          "accepted": 13
+        }
+      },
+      "selected_operations": {
+        "SEARCH": {
+          "selected": 22,
+          "accepted": 22
+        },
+        "READ": {
+          "selected": 35,
+          "accepted": 12
+        },
+        "HANDOFF": {
+          "selected": 21,
+          "accepted": 13
+        }
+      },
+      "families": 27,
+      "family_macro_acceptance": 0.5956790123456791,
+      "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+    },
+    "full-dev": {
+      "counts": {
+        "labelled": 278,
+        "accepted": 131,
+        "handoff_outside_reviewed_preference": 36,
+        "masked": 202
+      },
+      "strata": {
+        "reference_acquisition": {
+          "labelled": 203,
+          "accepted": 86
+        },
+        "reference_preserving_handoff": {
+          "labelled": 75,
+          "accepted": 45
+        }
+      },
+      "selected_operations": {
+        "SEARCH": {
+          "selected": 42,
+          "accepted": 42
+        },
+        "READ": {
+          "selected": 155,
+          "accepted": 44
+        },
+        "HANDOFF": {
+          "selected": 81,
+          "accepted": 45
+        }
+      },
+      "families": 28,
+      "family_macro_acceptance": 0.4938833487940631,
+      "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+    },
+    "aux-dev": {
+      "counts": {
+        "masked": 265,
+        "labelled": 423,
+        "accepted": 315,
+        "handoff_outside_reviewed_preference": 21
+      },
+      "strata": {
+        "reference_acquisition": {
+          "labelled": 377,
+          "accepted": 297
+        },
+        "reference_preserving_handoff": {
+          "labelled": 46,
+          "accepted": 18
+        }
+      },
+      "selected_operations": {
+        "SEARCH": {
+          "selected": 55,
+          "accepted": 55
+        },
+        "READ": {
+          "selected": 329,
+          "accepted": 242
+        },
+        "HANDOFF": {
+          "selected": 39,
+          "accepted": 18
+        }
+      },
+      "families": 29,
+      "family_macro_acceptance": 0.7521551724137931,
+      "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+    }
+  },
+  "learning_curves": {
+    "status": "CURVES_EXPORTED_FROM_CLOSED_POINTS",
+    "plot": "/data/milai-experiments/20261111-scalable-evidence/s1-learning-curves-through-u2260-v1/curves.png",
+    "pdf": "/data/milai-experiments/20261111-scalable-evidence/s1-learning-curves-through-u2260-v1/curves.pdf",
+    "source_data": "/data/milai-experiments/20261111-scalable-evidence/s1-learning-curves-through-u2260-v1/source-data.json",
+    "full36k_complete": false,
+    "seed2_complete": false,
+    "no_sha_validation": true,
+    "compute": {
+      "cpu_seconds": 2.011205729,
+      "wall_seconds": 1.3753104265779257
+    }
+  },
+  "new177_finite_batches": {
+    "status": "SIX_FINITE_TRAIN177_BATCHES_PREPARED_NOT_STARTED",
+    "parts": [
+      {
+        "prepared": "/data/milai-experiments/20261111-scalable-evidence/m2-fixed-context-train177-families0to32-v1",
+        "reader": "m2-fixed-context-train177-families0to32-readouts-v1",
+        "families": 32,
+        "states": 64,
+        "packets": 156
+      },
+      {
+        "prepared": "/data/milai-experiments/20261111-scalable-evidence/m2-fixed-context-train177-families32to64-v1",
+        "reader": "m2-fixed-context-train177-families32to64-readouts-v1",
+        "families": 32,
+        "states": 64,
+        "packets": 155
+      },
+      {
+        "prepared": "/data/milai-experiments/20261111-scalable-evidence/m2-fixed-context-train177-families64to96-v1",
+        "reader": "m2-fixed-context-train177-families64to96-readouts-v1",
+        "families": 32,
+        "states": 64,
+        "packets": 158
+      },
+      {
+        "prepared": "/data/milai-experiments/20261111-scalable-evidence/m2-fixed-context-train177-families96to128-v1",
+        "reader": "m2-fixed-context-train177-families96to128-readouts-v1",
+        "families": 32,
+        "states": 64,
+        "packets": 156
+      },
+      {
+        "prepared": "/data/milai-experiments/20261111-scalable-evidence/m2-fixed-context-train177-families128to160-v1",
+        "reader": "m2-fixed-context-train177-families128to160-readouts-v1",
+        "families": 32,
+        "states": 64,
+        "packets": 155
+      },
+      {
+        "prepared": "/data/milai-experiments/20261111-scalable-evidence/m2-fixed-context-train177-families160to177-v1",
+        "reader": "m2-fixed-context-train177-families160to177-readouts-v1",
+        "families": 17,
+        "states": 34,
+        "packets": 79
+      }
+    ],
+    "source_split": "train",
+    "no_sha_validation": true,
+    "new_model_calls": 0,
+    "new_Host_calls": 0,
+    "compute": {
+      "cpu_seconds": 12.38102682,
+      "wall_seconds": 12.381308218464255
+    }
+  },
+  "M6_second4_closed": {
+    "status": "SECOND4_CONTINUOUS_PATHS_CLOSED_AND_SOURCE_REVIEWED",
+    "source_split": "train",
+    "natural_history": false,
+    "conditions": [
+      {
+        "condition": "new32-view_cache",
+        "positions": 20,
+        "families": 4,
+        "answer_grades": {
+          "W": 7,
+          "Q": 4,
+          "C": 6,
+          "F": 3
+        },
+        "delivery_status": {
+          "partial": 11,
+          "complete": 9
+        },
+        "update_position_grades": {
+          "W": 4,
+          "Q": 2,
+          "F": 2
+        },
+        "generation_delta": {
+          "charged_tokens": 177624,
+          "known_tokens": 177624,
+          "unknown_usage": 0
+        }
+      },
+      {
+        "condition": "new32-view_cache_incremental",
+        "positions": 20,
+        "families": 4,
+        "answer_grades": {
+          "F": 7,
+          "Q": 3,
+          "C": 5,
+          "W": 5
+        },
+        "delivery_status": {
+          "partial": 10,
+          "insufficient": 4,
+          "complete": 6
+        },
+        "update_position_grades": {
+          "Q": 1,
+          "F": 4,
+          "W": 3
+        },
+        "generation_delta": {
+          "charged_tokens": 216328,
+          "known_tokens": 216328,
+          "unknown_usage": 0
+        }
+      },
+      {
+        "condition": "new32-e3-aggregate-u32",
+        "positions": 20,
+        "families": 4,
+        "answer_grades": {
+          "Q": 3,
+          "W": 10,
+          "F": 3,
+          "C": 4
+        },
+        "delivery_status": {
+          "partial": 14,
+          "complete": 6
+        },
+        "update_position_grades": {
+          "W": 7,
+          "Q": 1
+        },
+        "generation_delta": {
+          "charged_tokens": 180707,
+          "known_tokens": 180707,
+          "unknown_usage": 0
+        }
+      },
+      {
+        "condition": "s1-op36k-u1130",
+        "positions": 20,
+        "families": 4,
+        "answer_grades": {
+          "F": 4,
+          "W": 7,
+          "C": 5,
+          "Q": 4
+        },
+        "delivery_status": {
+          "insufficient": 1,
+          "partial": 10,
+          "complete": 9
+        },
+        "update_position_grades": {
+          "W": 6,
+          "Q": 2
+        },
+        "generation_delta": {
+          "charged_tokens": 183540,
+          "known_tokens": 183540,
+          "unknown_usage": 0
+        }
+      }
+    ],
+    "actual_HTTP_responses": 29,
+    "actual_model_predictions": 57,
+    "retrieval_calls": 9,
+    "late_retrievals": [
+      {
+        "family": "memops_A16",
+        "request": "same-sources",
+        "calls": 1
+      },
+      {
+        "family": "memops_B03",
+        "request": "same-sources",
+        "calls": 2
+      },
+      {
+        "family": "memops_B03",
+        "request": "final-arrivals",
+        "calls": 1
+      }
+    ],
+    "selected_operations": {
+      "SEARCH": 8,
+      "READ": 46,
+      "HANDOFF": 3
+    },
+    "scope": "20unique logicalpositions includesoriginalfailedA16initial exactlyonce and19laterfirstattempts. One pre-lease HTTP_OWNER_BUSY didnotproduceananswer/capture; itsfailedownerretained. B03finalretrievaladdsoneusefulfactbutdoesnotcompletetask. WholechildtimersneedbothownersminusactualnativeCPU, neverdoublecountreusedinitial. OldE3CUDA/newCPU, Rootnonblind/nonindependent, no stablegain claim.",
+    "no_sha_validation": true
+  },
+  "M6_first8_comparison": {
+    "status": "8SOURCE40POSITION_COMPARISON_CLOSED",
+    "conditions": [
+      {
+        "condition": "new32-view_cache",
+        "families": 8,
+        "positions": 40,
+        "answer_grades": {
+          "C": 12,
+          "F": 7,
+          "W": 12,
+          "Q": 9
+        },
+        "generation_delta": {
+          "charged_tokens": 423464,
+          "known_tokens": 423464,
+          "unknown_usage": 0
+        }
+      },
+      {
+        "condition": "new32-view_cache_incremental",
+        "families": 8,
+        "positions": 40,
+        "answer_grades": {
+          "C": 15,
+          "W": 11,
+          "F": 11,
+          "Q": 3
+        },
+        "generation_delta": {
+          "charged_tokens": 391839,
+          "known_tokens": 391839,
+          "unknown_usage": 0
+        }
+      },
+      {
+        "condition": "new32-e3-aggregate-u32",
+        "families": 8,
+        "positions": 40,
+        "answer_grades": {
+          "W": 15,
+          "C": 11,
+          "F": 9,
+          "Q": 5
+        },
+        "generation_delta": {
+          "charged_tokens": 351445,
+          "known_tokens": 351445,
+          "unknown_usage": 0
+        }
+      },
+      {
+        "condition": "s1-op36k-u1130",
+        "families": 8,
+        "positions": 40,
+        "answer_grades": {
+          "C": 16,
+          "F": 8,
+          "W": 11,
+          "Q": 5
+        },
+        "generation_delta": {
+          "charged_tokens": 338718,
+          "known_tokens": 338718,
+          "unknown_usage": 0
+        }
+      }
+    ],
+    "source_summaries": [
+      "/data/milai-experiments/20261111-scalable-evidence/m6-continuous-first4-review-v1/summary.json",
+      "/data/milai-experiments/20261111-scalable-evidence/m6-continuous-families4to8-review-v1/summary.json"
+    ],
+    "source_split": "train",
+    "natural_history": false,
+    "scope": "Allfirst40positions retained; 8remainingfamilies notdone. Contentgrading Rootnonblind/nonindependent, HostRNGunmatched, oldE3CUDA/newCPU costsunmatched. Correctcountalone doesnotestablish task/maintenancegain.",
+    "no_sha_validation": true
+  },
+  "M6_actual_witness_visibility": "/data/milai-experiments/20261111-scalable-evidence/m6-view6-initial-witness-visibility-v1.json",
+  "pending_M6_residual_cost": {
+    "recorded": false,
+    "whole_child_CPU_two_processes": 4169.993791999999,
+    "already_recorded_native": {
+      "dynamic_memory_laya": 4073.4001982021728,
+      "dynamic_memory_laya_load": 12.713230869999734
+    },
+    "residual_CPU_to_record": 83.88036292782681,
+    "scope": "20uniqueactualmessagefirsts; initial failedonlyonce. Includes bothterminal childprocesses, excludesdoubleaddingfirstresult presentincontinuationdriver. Pendingoriginalledger settlement afterHTTPownerterminal."
+  },
+  "query_once_readouts": "RUNNING112firstoutcomes afterM6second4terminal; oldfixed_context112untouched. No newqualityclaim untilclosedreview.",
+  "remaining": [
+    "Closequery_once112, bindandknown-aware semanticreview, retain newcontinuationversion separately.",
+    "Executealreadypreparedlast32paper153 andnew177sixbatches859; theseareunstarted andnotcountedasnewfeedback.",
+    "Finishlast8continuousfamilies, Source/Viewlearning, adequateS2/SFTandpostS2aggregation.",
+    "Finishseed2pair/main36k3390; frozennewconfirmation96/fullcost/generalization stillpending."
+  ],
+  "scope": "Only actualclosedpoints plotted. EightSourcecontinuouscomparison nonblind/nonindependent, stochasticHostunmatched; originalE3CUDA/newCPU notmatchedcost. NoProduct/API/permission/Canonical change/service restart/push/subagents."
+}
