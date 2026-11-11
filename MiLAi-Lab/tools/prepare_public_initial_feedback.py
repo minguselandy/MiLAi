@@ -40,6 +40,11 @@ def main() -> None:
     parser.add_argument("--families", type=int, required=True)
     parser.add_argument("--offset", type=int, default=0)
     parser.add_argument(
+        "--nomination-source",
+        type=Path,
+        help="Reuse complete declared choices from an existing same-before preparation",
+    )
+    parser.add_argument(
         "--continuation-policy",
         choices=("fixed_context", "query_once_context"),
         default="fixed_context",
@@ -51,6 +56,13 @@ def main() -> None:
         "extend existing same-state comparisons without rerunning their other actions",
     )
     args = parser.parse_args()
+    if args.nomination_source and args.known_query_only:
+        parser.error("Choose frozen nominations or the known-query extension, not both")
+    nominations = (
+        {c["event_id"]: c for c in read_json(args.nomination_source / "cases.json")}
+        if args.nomination_source
+        else {}
+    )
     start, cpu = time.perf_counter(), time.process_time()
     original = read_json(args.collection / "run.json")
     assert args.offset + args.families <= original["completed_families"]
@@ -92,6 +104,7 @@ def main() -> None:
         "no_sha_validation": True,
         "automatic_retry": False,
         "known_query_only": args.known_query_only,
+        "nomination_source": str(args.nomination_source) if args.nomination_source else None,
         "readout_scope": (
             "Actual public initial cold/fixed-receipt-K observation/menu and saved model input. "
             "Same EvidenceOperations, declared four-step continuation and policy HANDOFF. "
@@ -174,7 +187,17 @@ def main() -> None:
                     projected = project_operation_payload(row, "shared_actions")
                     assert pred["input"] == {k: projected[k] for k in ["state", "questions"]}
                     rows.append(row)
-                    if args.known_query_only:
+                    if args.nomination_source:
+                        frozen = nominations[event_id]
+                        if (
+                            frozen["before"] != event["before"]
+                            or frozen["actions"] != event["actions"]
+                        ):
+                            raise ValueError("Frozen nomination belongs to a different before/menu")
+                        choices = copy.deepcopy(frozen["choices"])
+                        if not set(choices.values()) <= {a["id"] for a in event["actions"]}:
+                            raise ValueError("Frozen nomination has an unavailable action")
+                    elif args.known_query_only:
                         searches = [
                             a
                             for a in event["actions"]
@@ -191,6 +214,10 @@ def main() -> None:
                         }
                     else:
                         choices = nominate(event, coverage, len(rows) - 1, "fixed_context")
+                    if not choices:
+                        rows.pop()
+                        run.setdefault("unselected_nomination_states", []).append(event_id)
+                        continue
                     request = RetrievalRequest.model_validate(receipt["request"])
                     resolver = IntentRetrievalMemory(
                         service,
