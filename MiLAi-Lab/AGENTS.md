@@ -1,4 +1,101 @@
-# LIVE scalable evidence phase 11: 2026-11-11
+# LIVE scalable evidence phase 12: 2026-11-11
+
+Full user v2 goal ACTIVE/incomplete; this turn PROGRESS, no blocker. No subagents, SHA/content
+fingerprints, Product/API/permission/Canonical changes, service restarts or push. Keep first failures,
+unknowns and Source roles. R=/data/milai-experiments/20261111-scalable-evidence. Latest relevant code
+caa5e8ae; training ef970f8a; scored-operation e64d3587; role-preserving prep/compiler5ebec703.
+progress-v12.json/manifest scalable-evidence-progress-20261111-v12.json. Read current header/doc only.
+Verify actual/proc argv+owner+artifacts, never restart from staleJSON or lostexec handles.
+
+LIVE original36k owner769162 child769163 GPU2 loaded4bab6388,latest1180/3390.
+Fullpass1130 closed: paperfull129/278 macro.4740324; nativeaux319/423 macro.7560345 vs565341/.80819.
+Do not stop/restart/hotchange due decline. All original3passes and failures preserved.
+LIVE M4own owner2383876 child2383878 GPU3, m4-own-states-seed0-v1,latest135/165, fullpasses5238draws.
+Data m4-source-matched-state-data-v1, own/fixed plans bothready. Fixed arm NOT LAUNCHED; launch only
+when own terminal andchildgone. Both sameS1u101,873new+873sharedreplay,3passes165updates,28/55/110/165.
+Same235labelledSource families/counts/lossweights, fixed870unique+3explicit repeats, own873unique;
+newtokens5113723 vs5124631 (~.2%). NotS2semantic orpost-S2DAgger. Own1passpaper135/278,2pass118;
+aux own-reachedDEV42/76 both1/2passes vsinitial36. Waitfullcurve/control, no winnerclaim.
+LIVE remainingM2DEV24 reader owner2528022 child2528023,
+m2-prefix48-dev-families8to32-comparison-readouts-v1,latest56/79closed0fail.48states24sources,
+19newnative/60reusednative packets. AllHostfirsts; samefrozenfinalu15 models and64scorers. Selfbills.
+
+CLOSED budgetSFT99 i2-budget-operations-seed0-v3:3156draws20006106tokens. Aux0/17/33/66/99 accepted
+115/115/122/121/112 of288; fullpaper33/66/99=122/115/117 of278. CPU5316.548564025/wall3904.694975647
+selfbilled. i2-budget-operations-closed-curve-v1.json. Finalconditional=current31/32 at2048,28/32 at512;
+fullargmaxHANDOFF25/21. Newu33McGurkprobe source material sufficientall3;core3,strictqualification
+retained for third wording. No overallquality/costadvantage fromthatoneconditionalcase.
+I1learned24 closed23complete1lengthfail;strict1/8eachcondition=samefixedbaseline. Moreunsupported
+claims/nonanswers. Hostprompt30932 vsfixed55114;total85213 vs88412,plusnativeCPU4746alreadypaid.
+phase12-i1-i2-author-review-v1 contains separatepanels, no pooling/autonomousclaim.
+
+CLOSED TRAIN new177 GPUcollector owner2022459 child2022460 exit0:776states456fit,177terminalstates438
+packets. Own337 total1488raw873fit235labelledfamilies615unknown: s1-learner-train337-operation-data-v1.
+Sameexpanded337TRAIN firstquestions; old160CPU/new177CUDA devices explicit, notpure speed study.
+CLOSED DEV32 GPUcollector owner2082862 child2082863 (verify owneractualPID),130raw76labels,DEVonly.
+Bothreuseoriginalbanks; wholechild CPU725.592111/132.050306 NOW PAID phase12-compute-v1; don'tadd
+native tool707.878/117.833 overlappingtimers. GPUjob intervals446.631/79.716, notkernel compute.
+CLOSED m2-fixed-context-train177-all-v1 owner2092257 child2092258:354states859packets,0NN/Host.
+TotalM2nativeTRAIN337sources674states1639packets;TRAINHostclosed128states309packets;1330packets/
+273families unstarted (old96/471 +new177/859). Needboundedfirstendpoint batches andmorevalidfeedback.
+
+CLOSED nextteachers: m2-fixed-context-families16to48-teacher-v1 (64states155outcomes,1unresolved,
+27maskedcandidates,402396knownGen0unknown), Rootfixed-grid4states10spots; merged/source notes in
+m2-families16to48-teacher-and-spots-v1. Semantic m2-fixed-context-families16to48-semantic-v1:
+24known delivery/answer,11directioneach. Last16teacher m2-fixed-context-families48to64-teacher-v1
+32states77outcomes0unresolved24masked; m2-fixed-context-families48to64-semantic-teacher-v1 has11known/
+2direction each, teacher-only. Combined64TRAIN128states now50known delivery48knownanswer,19/17direction.
+SameQwenteacher/Host, notindependent. Rawjudgments, invalidquotes andunknowns preserved, no extra regrade.
+
+CLOSED first realS2fits: m2-prefix48-feedback-seed0-v2 andm2-prefix48-continued-sft-seed0-v1,
+15updates480draws each,fullavailable39feedback(27families) vs61SFT(34families),same96collection
+opportunities48rawSource families/shared96oldreplay/commonS1u101,normalizednew/replay.8/.2.
+m2-available-first48-data-v1 preparedby R/prepare_m2_available_prefix_v1.py. Commonknown support29;
+notisolatedloss, notadequateformalS2. Firstfeedbackv1CLI rejected redundantquality-only pair-mass-mode,
+0model/updates. v2removesflag; existingdirectpair weightsalready normalized. Failurepreserved.
+ef970f8a adds opt-in --include-reviewed-ties using explicit0.5 BCE; unknownsmasked, olddefaultunchanged;
+recoverycontractrecordsflagonlywhenenabled. Actualfeedbacksampled129ties/78unknownmasked.27tests pass.
+Initial128choices/logits identicalbotharms. Tokens2615293 vs2513993;finalpaper92/278 vs123/278,
+macro.36628 vs.45417;allpoints retained. CPU1056.912/987.227,wall947.421/915.301 alreadyselfbilled.
+m2-prefix48-closed-curves-v1.json. Currentdata unchangedafterlast16teacher; nohot labelswap.
+
+DEV counterpart: s1-learner-dev32-cuda-v1 +m2-fixed-context-dev32-v1 gives64reachedstates149original
+packets. Prep --split dev, compiler --evaluation-only preservesroleandexportsno fitfiles.16first8
+states/37readouts closed34complete3fail; teacher16closed0unresolved13masked,102631knownGen.
+Two finalu15 native scorers64each CLOSED GPU3FP32batch2:
+m2-prefix48-feedback-dev64-scores-v1 and m2-prefix48-continued_sft-dev64-scores-v1; catalog
+m2-prefix48-dev64-scorers-v1.json. Master2245244 children2245245/2247857 ended, notlive.
+e64d3587 prepare_scored_operation_readouts.py usesfullargmax, exactinput/completebindings, existing
+execute_branch+prefix, noStorecopy. It reusesactualsamebindings andexecutesmissingonly.3tests pass.
+
+CLOSED first8trainedmodelcomparison: m2-prefix48-dev-first8-comparison-prepared-v1/readouts-v1
+(fullprefixes asactualdirs),16states28logicalpackets7newnative21reused;7newHost21closedfirstoutcomes
+reusedincludingfailures,37676knownGen0unknown,4unique failures. Only7newoutcomes/5states annotated
+m2-prefix48-dev-first8-new-teacher-v1:22284knownGen,0masked;prior21judgments transferredbyexactbound
+firstresults (notrerolled). Rootsource review in m2-prefix48-dev-first8-comparison-review-v1:
+strict complete fixed/feedback/SFT6/7/6 of16,core7/8/7;material sufficient8/16each;2failpositions each.
+Eightinitialstates shareoneoutcomeacrossmethods;8poststatesvary. Differenceatadequatepackets with
+firstgenerationfailures,notprovenmaterialgain. BothlearnedaddKaldi butmissother2models (partialonly).
+English-onlynativecontradictionsunknown;Germanstructuregenericmentionincomplete;sharedWSJcorecorrect
+butunsupporteddegreequalified. Unknownsnotassertedfalse;8correlatedsources,unmatchedHostRNG,
+Rootnonblind/nonindependent. Expandoriginalremaining24 alreadyrunning, notsource-cherrypicking.
+
+Costs phase12-compute-v1 PAID above2nativewholechildren plus12preps1952.376813448CPU. Itincludes
+phase11pendingsemantic-v2, M4data, fullnew177prep, DEV32prep, first8DEVwitness andfirst8newcomparison
+prep/witness. Don'trebillself-meteredfits/scorers/teachers/readers. Remaining24comparisonprep CPU
+andlaternewpreps pendingnextgroup; author/tests/import/firstCLI failures unknownnotzero.
+PackageboundaryPASS; toolsboundarysame6oldLMEfindings (checkedagain), no newfindings/no fullgreenclaim.
+
+NEXT: close remaining24DEVmodelreadouts andsource-basedevaluation; firsttrainedprefix isprovisional,
+fullS2 stillneedsbroaderusefulfeedback. FinishM4own165 then launchplannedfixed165 withsame settings;
+finishoriginal36k3390. ResumeTRAIN1330untouchedendpoints in boundedbatches, preservefirst/unknown.
+CurrentmodelSource/View work, decisiveseeds,newconfirmation96/fullquality/cost/generalization remain.
+D baseline assets located at LAB/artifacts/a100-development-20261104/d-update32/new32-histories.json:
+64flows=32TRAINfamilies(content/originals),5requests each, arrivalsinrequest.incoming_sources, initial
+history.sources empty; old1200results exposed/generatedMemOps, notnatural/newS1Viewlearning. Readold
+D audit doc onlyforusableevidence; do notrerunoldfullaudit asprerequisite. Fullgoalnotcomplete.
+
+# HISTORICAL scalable evidence phase 11: 2026-11-11
 
 Full v2 goal ACTIVE/incomplete, this turn PROGRESS, no blocker. No subagents, SHA/content
 fingerprints, Product/API/permission/Canonical changes, service restart or push. Keep actual first
