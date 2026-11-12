@@ -109,7 +109,9 @@ Shard2[16,32] scoreCLOSED1362activeweak,cumulativeNew8109;2671states10159packets
 5225scored4934unscored6366references,16active rawfamilies. InventoryatR; noformal10ksamplingyet.
 Shard2[32,38] scoreCLOSED569activeweak,cumulativeNew8678;1142states4334packets,
 2180scored2154unscored2550references,6active rawfamilies. Entireshard2=3004active/5943opportunities.
-GPU2queue nowshard3[0,16] childPID2801459; previousscorePID2742712maywaitnativeledger.
+Shard3[0,16] scoreCLOSED792activeweak,cumulativeNew9470;1558states5891packets,
+3010scored2881unscored4188references,15active rawfamilies. InventoryatR.
+GPU2queue nowshard3[16,32] childPID2889561; previousscorePID2801459maywaitnativeledger.
 ALL20branchinputs CLOSED:22613actualstates85907packets,44037eligible native-refpackets;
 283rawfamilies279groups, no duplicateeventIDs orbetween-blockrawfamily overlap.
 expansion-all-branch-input-inventory-v1.json; inputrow/packetcountsactuallyread, notonlymanifest.
