@@ -116,3 +116,17 @@ def test_legal_stop_nomination_is_opt_in_and_keeps_complete_binding(monkeypatch)
     selected = preparation.nominate(event, Counter(), 0, include_legal_handoff=True)
     assert set(selected.values()) == {"read", "stop"}
     assert selected["legal_stop"] == "stop"
+
+
+def test_incremental_case_stream_keeps_completed_bindings_between_full_snapshots(tmp_path):
+    import json
+
+    from prepare_collected_operation_feedback import append_completed_case
+
+    cases = [{"event_id": "f/q0/0", "branches": [{"action": {"id": "a"}, "text": "A\u2028B"}]},
+             {"event_id": "f/q1/0", "branches": [], "status": "SINGLETON_NOT_EXECUTED"}]
+    for case in cases:
+        append_completed_case(tmp_path, case)
+    with (tmp_path / "completed-cases.jsonl").open() as stream:
+        assert [json.loads(line) for line in stream] == cases
+    assert not (tmp_path / "cases.json").exists()

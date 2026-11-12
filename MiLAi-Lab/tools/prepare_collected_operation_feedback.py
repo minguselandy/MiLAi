@@ -113,6 +113,12 @@ def request_units(histories: list[dict[str, Any]], offset: int = 0) -> list[tupl
             for index, history in enumerate(histories, offset) for request in history["requests"]]
 
 
+def append_completed_case(output: Path, case: dict[str, Any]) -> None:
+    """One compact shard stream retains completed first executions between snapshots."""
+    with (output / "completed-cases.jsonl").open("a") as stream:
+        stream.write(json.dumps(case, ensure_ascii=False, separators=(",", ":")) + "\n")
+
+
 def execute_branch(
     operations: Any,
     before: dict[str, Any],
@@ -170,6 +176,8 @@ def main() -> None:
     parser.add_argument("--continuation-steps", type=int, default=2)
     parser.add_argument("--include-legal-handoff", action="store_true",
                         help="Add an unselected legal current-packet stop, up to four bindings")
+    parser.add_argument("--snapshot-every", type=int, default=16,
+                        help="Full cases.json snapshots; completed cases append immediately")
     parser.add_argument(
         "--continuation-policy",
         choices=("rules", "fixed_context", "query_once_context"),
@@ -183,6 +191,8 @@ def main() -> None:
         help="Shared policy selects among actual HANDOFF bindings at the short boundary",
     )
     args = parser.parse_args()
+    if args.snapshot_every < 1:
+        parser.error("Snapshot interval must be positive")
     started, cpu = time.perf_counter(), time.process_time()
     collection_run = read_json(args.collection / "run.json")
     if (
@@ -217,6 +227,8 @@ def main() -> None:
         + "(reads=4)",
         "nomination_baseline": args.continuation_policy,
         "include_legal_handoff": args.include_legal_handoff,
+        "snapshot_every": args.snapshot_every,
+        "incremental_cases": "completed-cases.jsonl",
         "continuation_steps": args.continuation_steps,
         "terminal_handoff": args.terminal_handoff,
         "selection": "Initial plus one actual non-forced post state; even family positions seeded "
@@ -280,6 +292,7 @@ def main() -> None:
                 if len(set(choices.values())) < 2:
                     case["status"] = "SINGLETON_NOT_EXECUTED"
                     cases.append(case)
+                    append_completed_case(args.output, case)
                     continue
                 phase_wall, phase_cpu = time.perf_counter(), time.process_time()
                 source_map = read_json(root / "source-map.json")
@@ -351,19 +364,17 @@ def main() -> None:
                     reconstruction_and_branch_wall_seconds=time.perf_counter() - phase_wall,
                 )
                 cases.append(case)
+                append_completed_case(args.output, case)
                 run.update(
                     selected_states=len(rows),
                     comparison_states=sum(bool(c["branches"]) for c in cases),
                     packets=sum(len(c["branches"]) for c in cases),
                 )
                 write_json(args.output / "run.json", run)
-                write_json(args.output / "cases.json", [c for c in cases if c["branches"]])
-                print(
-                    json.dumps(
-                        {k: run[k] for k in ("selected_states", "comparison_states", "packets")}
-                    ),
-                    flush=True,
-                )
+                if len(cases) % args.snapshot_every == 0:
+                    write_json(args.output / "cases.json", [c for c in cases if c["branches"]])
+                    print(json.dumps({k: run[k] for k in (
+                        "selected_states", "comparison_states", "packets")}), flush=True)
         run["status"] = "COMPLETED"
     except BaseException as error:
         run.update(status="FAILED", error_type=type(error).__name__, error=str(error))
