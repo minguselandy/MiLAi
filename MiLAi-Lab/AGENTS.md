@@ -1,6 +1,6 @@
 # ACTIVE Reader utility v3: phase14 formal scale data continuation (2026-11-13)
 
-Goal ACTIVE/incomplete. Current milestone PROGRESS: finite formal10k/repeated3k data owner launched in dependency wait. Full user v3 objective remains.
+Goal ACTIVE/incomplete. Current milestone PROGRESS: allshard2scores closed, cumulative8678newactiveweakstates. Full user v3 objective remains.
 R=/data/milai-experiments/20261112-reader-utility.
 Read data/manifests/reader-utility-progress-20261112-v3.json and
 docs/MILAI_READER_UTILITY_EXECUTION_20261112.md. KEEP ANALYSIS SHORT; act on files/processes.
@@ -103,8 +103,10 @@ Inventoryexpansion-shard2-families0to16-closed-inventory-v1.json; 2130states8133
 waitallplannedblocks+dependencybalancedselection andQ/actualDEVassessment.
 Shard2[16,32] scoreCLOSED1362activeweak,cumulativeNew8109;2671states10159packets,
 5225scored4934unscored6366references,16active rawfamilies. InventoryatR; noformal10ksamplingyet.
-GPU2queue scores shard2[32,38] childPID2742712; previousscorePID2603228maywaitnativeledger.
-CPUprepare nowshard3[32,48]; revalidateowners forcurrentstep.
+Shard2[32,38] scoreCLOSED569activeweak,cumulativeNew8678;1142states4334packets,
+2180scored2154unscored2550references,6active rawfamilies. Entireshard2=3004active/5943opportunities.
+GPU2queue nowshard3[0,16] childPID2801459; previousscorePID2742712maywaitnativeledger.
+CPUprepare nowshard3[64,80]; revalidateowners forcurrentstep.
 48to59oldscorePID2105067 completedscoring, maywaitnativeledger; do notrestart.
 LIVE remaining-expansion-scoring-owner-v1 PID2039219/session73793 runs
 16remainingblocks seriallyGPU2. ClosednativeScoremaywaitledgerafterweightsrelease; driverreaps
