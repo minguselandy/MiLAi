@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import argparse
 import fcntl
+import gc
 import json
 import os
 import resource
@@ -223,8 +224,17 @@ def main() -> None:
             "peak_rss_kib": resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,
             **cuda_peaks,
             "ledger": str(args.budget)})
+        # Finished inference must not reserve a GPU while a long Host batch owns the ledger.
+        model = None
+        gc.collect()
+        if cuda_index is not None:
+            torch.cuda.empty_cache()
+        run["ledger_recorded"] = False
+        write_json(args.output / "run.json", run)
+        waiting = time.perf_counter()
         with args.budget.with_name("budget.json.http-owner.lock").open("a+b") as lease:
             fcntl.flock(lease, fcntl.LOCK_EX)
+            run["ledger_wait_wall_seconds"] = time.perf_counter() - waiting
             budget = RunBudget(RunLimits(**read_json(args.budget)["limits"]), args.budget)
             phase = args.compute_phase or {
                 "bounded_reader": "laya_reader_prefix",
@@ -234,6 +244,8 @@ def main() -> None:
                 "instruction_applicability": "laya_candidate_applicability",
             }[args.task]
             budget.record_compute(phase, measures)
+        run["ledger_recorded"] = True
+        run["process_wall_seconds_including_ledger_wait"] = time.perf_counter() - started
         write_json(args.output / "run.json", run)
 
 

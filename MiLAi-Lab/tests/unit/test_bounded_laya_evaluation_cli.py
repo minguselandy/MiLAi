@@ -1,6 +1,7 @@
 """Check exported-checkpoint evaluation wiring with a model stub and isolated test ledger."""
 import json
 import sys
+import weakref
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -28,9 +29,11 @@ def test_operation_evaluator_projects_public_input_and_uses_operation_metrics(
     data.write_text(json.dumps(rows[0], ensure_ascii=False) + "\n")
     budget.write_text(json.dumps(RunBudget(RunLimits(), budget).state))
     observed = []
+    references = []
 
     class StubDecision:
         def __init__(self, checkpoint, max_len, head_max_len, device):
+            references.append(weakref.ref(self))
             self.model = SimpleNamespace(
                 parameters=lambda: iter([SimpleNamespace(dtype="float32")]),
                 encoder=SimpleNamespace(config=SimpleNamespace(reference_compile=None)))
@@ -45,6 +48,15 @@ def test_operation_evaluator_projects_public_input_and_uses_operation_metrics(
             return {"choice": "finish", "input_tokens": 10}
 
     monkeypatch.setattr(evaluate_bounded_laya, "NativeDecision", StubDecision)
+    record_compute = RunBudget.record_compute
+
+    def record_after_release(self, phase, measures):
+        assert references and all(reference() is None for reference in references)
+        closed = json.loads((output / "run.json").read_text())
+        assert closed["status"] == "COMPLETED" and closed["ledger_recorded"] is False
+        return record_compute(self, phase, measures)
+
+    monkeypatch.setattr(RunBudget, "record_compute", record_after_release)
     monkeypatch.setattr(sys, "argv", ["evaluate_bounded_laya", str(data),
         str(tmp_path / "checkpoint"), str(output), "--budget", str(budget),
         "--task", "memory_operation", "--operation-state", projection,
@@ -66,6 +78,7 @@ def test_operation_evaluator_projects_public_input_and_uses_operation_metrics(
     assert run["status"] == "COMPLETED" and run["completed_states"] == 1
     assert run["task"] == "memory_operation" and run["operation_state"] == projection
     assert run["reference_compile_override"] is (False if disable_compile else None)
+    assert run["ledger_recorded"] and run["ledger_wait_wall_seconds"] >= 0
     assert json.loads(budget.read_text())["compute"]["test_exported_operations"]["forwards"] == 1
 
 
