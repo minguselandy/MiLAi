@@ -44,6 +44,8 @@ def main() -> None:
     histories = histories[args.offset:args.offset + args.families]
     if len(histories) != args.families:
         raise ValueError("Requested source-family prefix is unavailable")
+    if request_limit:
+        histories = [dict(h, requests=h["requests"][:request_limit]) for h in histories]
     settings = read_json(args.config)["entrypoints"]["functional"]
     capacity = HostCapacity(settings["capacity"])
     ranges = SourceRangeBudget(256, capacity.text_tokens, lambda text: capacity.tokenizer(

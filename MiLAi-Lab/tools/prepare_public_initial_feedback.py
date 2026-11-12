@@ -30,7 +30,28 @@ from milai_lab.methods.source_observations import SourceObservationBudget
 from milai_lab.methods.source_ranges import SourceRangeBudget
 from milai_lab.providers.contextual_capacity import HostCapacity
 from milai_lab.runners.given_host_readout import receipt_conditioned_packet_request
-from prepare_collected_operation_feedback import execute_branch, nominate
+from prepare_collected_operation_feedback import append_completed_case, execute_branch, nominate
+
+
+def replay_public_to_step(operations, state, events, target_step):
+    """Reexecute the actual prefix rather than initialize an executor from an ideal post-state."""
+    decisions = [e for e in events if e.get("phase") == "decision_output"]
+    outcomes = {e["step"]: e for e in events if e.get("phase") == "operation_result"}
+    for event in decisions:
+        state.budget = copy.deepcopy(event["before"]["budget"])
+        actions = operations.actions(state)
+        if state.project() != event["before"] or [asdict(a) for a in actions] != event["actions"]:
+            raise ValueError("Actual public prefix no longer matches recorded state/menu")
+        if event["step"] == target_step:
+            return state
+        action = next(a for a in actions if a.id == event["selected"])
+        if action.kind == "HANDOFF":
+            raise ValueError("Requested post-state lies beyond an actual terminal HANDOFF")
+        result = operations.execute(action, state)
+        if result != outcomes[event["step"]]["result"]:
+            raise ValueError("Actual public prefix outcome changed")
+        state.last_result = {"action": asdict(action), **result}
+    raise ValueError("Requested public post-state was not reached")
 
 
 def main() -> None:
@@ -39,6 +60,12 @@ def main() -> None:
     parser.add_argument("output", type=Path)
     parser.add_argument("--families", type=int, required=True)
     parser.add_argument("--offset", type=int, default=0)
+    parser.add_argument("--requests-per-family", type=int, default=1,
+                        help="Original request prefix; zero means all")
+    parser.add_argument("--target-step", type=int, default=0)
+    parser.add_argument("--continuation-steps", type=int, default=4)
+    parser.add_argument("--include-legal-handoff", action="store_true")
+    parser.add_argument("--snapshot-every", type=int, default=16)
     parser.add_argument(
         "--nomination-source",
         type=Path,
@@ -56,6 +83,10 @@ def main() -> None:
         "extend existing same-state comparisons without rerunning their other actions",
     )
     args = parser.parse_args()
+    if min(args.requests_per_family, args.target_step, args.continuation_steps) < 0:
+        parser.error("Request/step limits must be nonnegative")
+    if args.snapshot_every < 1:
+        parser.error("Snapshot interval must be positive")
     if args.nomination_source and args.known_query_only:
         parser.error("Choose frozen nominations or the known-query extension, not both")
     nominations = (
@@ -99,15 +130,19 @@ def main() -> None:
         "Host_calls": 0,
         "new_supplied_query_events": 0,
         "continuation_policy": args.continuation_policy,
-        "continuation_steps": 4,
+        "continuation_steps": args.continuation_steps,
+        "nomination_baseline": args.continuation_policy,
+        "requests_per_family": args.requests_per_family,
+        "target_step": args.target_step,
+        "include_legal_handoff": args.include_legal_handoff,
         "terminal_handoff": "policy",
         "no_sha_validation": True,
         "automatic_retry": False,
         "known_query_only": args.known_query_only,
         "nomination_source": str(args.nomination_source) if args.nomination_source else None,
         "readout_scope": (
-            "Actual public initial cold/fixed-receipt-K observation/menu and saved model input. "
-            "Same EvidenceOperations, declared four-step continuation and policy HANDOFF. "
+            "Actual public reached cold/fixed-receipt-K observation/menu and saved model input. "
+            "Same EvidenceOperations, declared bounded continuation and policy HANDOFF. "
             "Replay work counters restored separately from actual measured cost, as existing "
             "collected_handoff; no Source data or original labels changed. Core operation packet, "
             "not a rerun of full public-message/admission history. Explicit referenced prior K "
@@ -116,8 +151,16 @@ def main() -> None:
     }
     write_json(args.output / "run.json", run)
     try:
+        collected_limit = original.get("requests_per_family", 1)
+        units = []
         for history in histories:
-            public = history["requests"][0]
+            available = (history["requests"][:collected_limit] if collected_limit
+                         else history["requests"])
+            requested = (available[:args.requests_per_family]
+                         if args.requests_per_family else available)
+            units.extend((history, request) for request in requested)
+        run["planned_native_requests"] = len(units)
+        for history, public in units:
             source = Path(original["collection"]) / "banks" / history["id"]
             collected = args.collection / "banks" / history["id"]
             mapping = read_json(source / "source-map.json")["mapping"]
@@ -157,19 +200,26 @@ def main() -> None:
                 for condition in conditions:
                     receipt = read_json(collected / f"{public['id']}-{condition}-receipt.json")
                     events = read_jsonl(collected / f"{public['id']}-{condition}-operations.jsonl")
-                    event = copy.deepcopy(
-                        next(
-                            e
-                            for e in events
-                            if e.get("phase") == "decision_output" and e["step"] == 0
-                        )
-                    )
-                    pred = read_jsonl(collected / f"{public['id']}-{condition}-predictions.jsonl")[
-                        0
-                    ]
+                    initial = next(e for e in events
+                                   if e.get("phase") == "decision_output" and e["step"] == 0)
+                    model_events = [e for e in events if e.get("phase") == "decision_output"
+                                    and e.get("selection_mode") == "policy"]
+                    predictions = read_jsonl(
+                        collected / f"{public['id']}-{condition}-predictions.jsonl")
+                    if len(model_events) != len(predictions):
+                        raise ValueError("Public model receipts do not align with policy decisions")
+                    found = next(((e, p) for e, p in zip(model_events, predictions, strict=True)
+                                  if e["step"] == args.target_step), None)
+                    if found is None:
+                        run.setdefault("unreached_or_forced_states", []).append({
+                            "family": history["source_group"], "request_id": public["id"],
+                            "condition": condition, "target_step": args.target_step})
+                        continue
+                    event, pred = copy.deepcopy(found)
                     event["prediction"] = pred["prediction"]
                     assert event["selected"] == pred["prediction"]["choice"]
-                    event_id = f"{history['source_group']}/{public['id']}/{condition}/step-0"
+                    event_id = (f"{history['source_group']}/{public['id']}/{condition}/"
+                                f"step-{args.target_step}")
                     row = decision_example(
                         event,
                         {
@@ -213,7 +263,8 @@ def main() -> None:
                             ]
                         }
                     else:
-                        choices = nominate(event, coverage, len(rows) - 1, "fixed_context")
+                        choices = nominate(event, coverage, len(rows) - 1,
+                                           args.continuation_policy, args.include_legal_handoff)
                     if not choices:
                         rows.pop()
                         run.setdefault("unselected_nomination_states", []).append(event_id)
@@ -226,7 +277,7 @@ def main() -> None:
                         control_policy=FixedContextMemoryPolicy(reads=4),
                     )
                     known = resolver._known_materials(request)
-                    state = MemoryControlState(**copy.deepcopy(event["before"]))
+                    state = MemoryControlState(**copy.deepcopy(initial["before"]))
                     limit = state.budget["max_return_tokens"]
                     key = "retrieval:" + json.dumps(
                         [public["id"], args.collection.name + "/" + condition, "actual-retrieval"],
@@ -279,7 +330,7 @@ def main() -> None:
                         fits_materials=partial(
                             delivery_packet_fits,
                             key,
-                            steps=event["before"]["budget"]["remaining_control_steps"],
+                            steps=initial["before"]["budget"]["remaining_control_steps"],
                             known_count=len(known),
                             return_limit=limit,
                             return_tokens=lambda value: capacity.text_tokens(canonical(value)),
@@ -293,7 +344,7 @@ def main() -> None:
                         delivery_selection=True,
                     )
                     actual_budget = copy.deepcopy(state.budget)
-                    original_budget = event["before"]["budget"]
+                    original_budget = initial["before"]["budget"]
                     changed = {
                         k
                         for k in set(actual_budget) | set(original_budget)
@@ -304,12 +355,13 @@ def main() -> None:
                     )
                     state.budget = copy.deepcopy(original_budget)
                     actions = operations.actions(state)
-                    assert state.project() == event["before"], (
+                    assert state.project() == initial["before"], (
                         "Source or actual initial state changed"
                     )
-                    assert [asdict(a) for a in actions] == event["actions"], (
+                    assert [asdict(a) for a in actions] == initial["actions"], (
                         "Actual full menu changed"
                     )
+                    state = replay_public_to_step(operations, state, events, args.target_step)
                     saved = operations.checkpoint()
                     observation = (
                         operations.source_pages.budget if operations.source_pages else None
@@ -321,6 +373,7 @@ def main() -> None:
                         "event_id": event_id,
                         "case_key": event_id,
                         "request_id": public["id"],
+                        "step": args.target_step,
                         "condition": condition,
                         "native_source_row": public["native_source_row"],
                         "state_index": len(rows) - 1,
@@ -330,6 +383,8 @@ def main() -> None:
                         "branches": [],
                         "restored_replay_budget": {
                             "actual_reconstruction": actual_budget,
+                            "original_initial_observation": initial["before"]["budget"],
+                            "target_step": args.target_step,
                             "original_model_observation": event["before"]["budget"],
                             "scope": (
                                 "Same recorded work-counter restoration as collected_handoff. "
@@ -348,8 +403,8 @@ def main() -> None:
                             operations,
                             event["before"],
                             action,
-                            0,
-                            4,
+                            args.target_step,
+                            args.continuation_steps,
                             "policy",
                             args.continuation_policy,
                         )
@@ -392,10 +447,12 @@ def main() -> None:
                             }
                         )
                     cases.append(case)
+                    append_completed_case(args.output, case)
                     run.update(
                         comparison_states=len(cases), packets=sum(len(x["branches"]) for x in cases)
                     )
-                    write_json(args.output / "cases.json", cases)
+                    if len(cases) % args.snapshot_every == 0:
+                        write_json(args.output / "cases.json", cases)
                     (args.output / "states.jsonl").write_text(
                         "".join(json.dumps(x, ensure_ascii=False) + "\n" for x in rows)
                     )
@@ -418,6 +475,9 @@ def main() -> None:
         )
         raise
     finally:
+        write_json(args.output / "cases.json", cases)
+        (args.output / "states.jsonl").write_text(
+            "".join(json.dumps(x, ensure_ascii=False) + "\n" for x in rows))
         run["compute"] = {
             "cpu_seconds": time.process_time() - cpu,
             "wall_seconds": time.perf_counter() - start,
