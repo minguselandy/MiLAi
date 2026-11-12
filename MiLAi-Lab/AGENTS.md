@@ -1,4 +1,4 @@
-# ACTIVE Reader utility v3: phase07 expansion and Q running (2026-11-13)
+# ACTIVE Reader utility v3: phase08 expansion and Q running (2026-11-13)
 
 Goal ACTIVE/incomplete. Previous/current turns PROGRESS. Full user v3 objective remains.
 R=/data/milai-experiments/20261112-reader-utility.
@@ -76,9 +76,10 @@ expansion-main-pilot-preparation-owner-v1 PID1566417/session45624 CLOSED, donotr
 SHARD0 blocksprepared: first16=1289states4851packets2554eligible;16to32=853states3223packets1673eligible;
 32to48=1847states6955packets;48to59=1652states6287packets3292eligible.
 First16score CLOSED2554known2297unscored,672activeweak;16to32scoreCLOSED440activeweak.
-Withpilot69 =>1181newactiveclosed. expansion-available17-data-v1 has741active17sourcesDATAONLY.
-LIVE GPU2score32to48 PID2020278/session30217, expansion-shard0-families32to48-scores-fp32-cache-v1.
-LIVE remaining-expansion-scoring-owner-v1 PID2039219/session73793 waitscurrent32to48score then
+32to48score CLOSED870activeweak. Withpilot69 =>2051newactiveclosed. expansion-available17-data-v1 has741active17sourcesDATAONLY.
+32to48scorePID2020278/session30217 completed scoring, maywaitledger.
+GPU2remaining-expansion-scoring queue now scores48to59; revalidateownerchildPID.
+LIVE remaining-expansion-scoring-owner-v1 PID2039219/session73793 runs
 16remainingblocks seriallyGPU2. ClosednativeScoremaywaitledgerafterweightsrelease; driverreaps
 pendingbookkeeperswithoutdoublebilling. ChecksactualGPUused<=8192MiB, Qfitprioritybeforeeachblock.
 DO NOT manually launchduplicateGPU2scoring oncecurrentcloses; thisqueueownsnextschedule.
@@ -139,13 +140,18 @@ zero overlap old1169Train/DevIDs andknownmetadataSource-IDscan. NoSource/control
 Finalmethods/metrics/repeatsfreeze beforeexport. No publicpretraining/unknownexternalhistoryisolation.
 
 Budget oneexistingledger. NativeTeacher/scorer/trainer/Reader/reviewer selfbill; CPUcompile/prep,
-collector/nativeF1/profiles/analyses doNOT. Phase02PAID38scopes12057.449CPU;phase03..07pending.
+collector/nativeF1/profiles/analyses doNOT. Phase02PAID38scopes12057.449CPU;phase03..08pending.
 Do notdoublebillnativecompute vswholechild/residual. NeverwriteledgerwhileownedHost/modelslive.
 Root/imports/tests/networkpartlyunmeasured, notzero. Storagephase06closedrecovery6filessparse
 freed7.84GiB; phase07additional9closedrecoveriesfreed11.17GiB. Logicalbytes/inode/pathretained; inferenceweights/firsts untouched. NoSHA.
 Previous30closedfinalweightaliases shared17.99GiBfreed; functionalrecoverieslosslesslyarchived.
 Monitordisk aslargebranchfilesgrow; neverdeleteevidence ormutatefrozenlinkedweights.
 Ufigureformal-U-reference-curves-v1 includesPNG/PDF/CSV, allprescheduledpoints, visuallychecked.
+4ae97cd8 summarize_trajectory_outcomes.py joinsactualreadoutidentities, retainsunknown/failures,
+sourcebootstrap+unknownbounds;4summary/bindingtestsPASS. RealDEVreviewsstillpending.
+Storagephase08compressed22closedcompleted-cases.jsonl streams to samepath.jsonl.gz, every
+decompressedbytecompared, freed2.19GiB. Finalcases/states/run andallfirstHostoutcomesunchanged.
+Restoregziptooriginalpath ifincrementalstreamneeded; noSHA. Seephase08-closed-branch-stream-compression-v1.
 Currentgoalremaining:Q+actualDEVHost,10k/repeat,ownstate,decisiveseeds,newconfirmation,
 autonomous/naturalcontinuousView/update,cost/statistical/mechanism synthesis. Notcomplete.
 Priorv2below CLOSED/HISTORICAL, notqueues/reusablefreshconfirmation.

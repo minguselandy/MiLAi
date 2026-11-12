@@ -34,7 +34,8 @@
     "alias_prefix_teacher": "ed39c43c",
     "public_snapshot_interval": "793dd0be",
     "checkpointed_cleanup_regression": "3df6188c",
-    "scale_comparison": "2d79ef13"
+    "scale_comparison": "2d79ef13",
+    "trajectory_outcome_summary": "4ae97cd8"
   },
   "formal_U": {
     "protocol": "/data/milai-experiments/20261112-reader-utility/formal-main3k-uq-protocol-v1.json",
@@ -254,7 +255,7 @@
       "/data/milai-experiments/20261112-reader-utility/expansion-shard0-families16to32-preparation-owner-v1.json",
       "/data/milai-experiments/20261112-reader-utility/expansion-shard0-families32to48-preparation-owner-v1.json"
     ],
-    "closed_additional_active_states": 1181,
+    "closed_additional_active_states": 2051,
     "available17_compilation": "/data/milai-experiments/20261112-reader-utility/expansion-available17-data-v1/run.json",
     "scale_comparison_preview": "/data/milai-experiments/20261112-reader-utility/scale-available17-preview-v1/run.json",
     "common_input_observation": "/data/milai-experiments/20261112-reader-utility/scale-available17-preview-v1/common-input-observation.json",
@@ -338,7 +339,7 @@
     "Prepare fixed train diagnostic probe if useful; do not repeatedly evaluate all7452training rows solely for bookkeeping.",
     "New confirmation and autonomous/natural continuous View application lines remain required; no overall completion claim."
   ],
-  "phase": 7,
+  "phase": 8,
   "signal_diagnostic": {
     "canonical110": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-vs-semantic110-diagnostic-v1.json",
     "author_spots": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-semantic-disagreement-spots-v1.json",
@@ -384,7 +385,8 @@
     "conditional_scope": "64same-statecomparisons206packets; oldcollector3k/u101, separatefrom96actualwholetrajectorytaskprotocol.",
     "pre_Q_trajectory_comparison": "/data/milai-experiments/20261112-reader-utility/formal-task-dev96-pre-Q-trajectory-comparison-v1.json",
     "first_four_reader_owner": "/data/milai-experiments/20261112-reader-utility/formal-task-dev96-first-four-owner-v1.json",
-    "review_plan": "/data/milai-experiments/20261112-reader-utility/formal-task-dev96-review-plan-v1.json"
+    "review_plan": "/data/milai-experiments/20261112-reader-utility/formal-task-dev96-review-plan-v1.json",
+    "summary_tool": "tools/summarize_trajectory_outcomes.py"
   },
   "I2_public": {
     "prepared": "/data/milai-experiments/20261112-reader-utility/i2-public-dev8-terminal-short-v1/run.json",
@@ -461,5 +463,13 @@
     "reference_figure_visually_inspected": true,
     "ruff": "passed",
     "git_diff_check": "passed"
+  },
+  "phase08_storage": "/data/milai-experiments/20261112-reader-utility/phase08-closed-branch-stream-compression-v1.json",
+  "phase08_validation": {
+    "outcome_summary_and_binding_tests": 4,
+    "ruff": "passed",
+    "git_diff_check": "passed",
+    "closed_incremental_streams": 22,
+    "decompressed_bytes_equal_original": true
   }
 }
