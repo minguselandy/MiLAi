@@ -49,6 +49,7 @@ def main() -> None:
     counts: Counter[str] = Counter()
     results: list[dict[str, Any]] = []
     stage_seconds: dict[str, float] = {}
+    teacher = None
     write_json(args.output / "run.json", run)
     try:
         if args.device.startswith("cuda"):
@@ -137,6 +138,11 @@ def main() -> None:
             torch.cuda.synchronize(args.device)
             run["peak_cuda_allocated_bytes"] = torch.cuda.max_memory_allocated(args.device)
             run["peak_cuda_reserved_bytes"] = torch.cuda.max_memory_reserved(args.device)
+        # A shared HTTP ledger lease can outlive scoring. Release model allocations before
+        # waiting for that existing lease so the next finite GPU job can use the device.
+        teacher = None
+        if args.device.startswith("cuda") and torch.cuda.is_initialized():
+            torch.cuda.empty_cache()
         measures = {"wall_seconds": time.perf_counter() - started,
                     "cpu_seconds": time.process_time() - cpu, "runs": 1, **counts}
         run["compute"] = measures
