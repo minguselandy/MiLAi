@@ -21,7 +21,8 @@
     "training_gpu_release": "3d09c327",
     "balanced_replay": "287cedec",
     "multi_request_public_rollout": "998fbfee",
-    "actual_live_U_source": "287cedec"
+    "actual_live_U_source": "287cedec",
+    "public_actual_post_state": "152a43cd"
   },
   "formal_U": {
     "protocol": "/data/milai-experiments/20261112-reader-utility/formal-main3k-uq-protocol-v1.json",
@@ -52,7 +53,55 @@
     "initial128_dev_logits_identical": true,
     "initial_dev_reference_accepted": 46,
     "initial_dev_reference_labelled": 78,
-    "scope": "Production supervision-package comparison with explicit unequal supervision coverage. Frozen U labels are first68 reviewed opportunities; future Q labels never mutate U data. Do not call this pure loss isolation or claim a task gain from training/Teacher metrics."
+    "scope": "Production supervision-package comparison with explicit unequal supervision coverage. Frozen U labels are first68 reviewed opportunities; future Q labels never mutate U data. Do not call this pure loss isolation or claim a task gain from training/Teacher metrics.",
+    "interim140": {
+      "u0": {
+        "fast_dev": {
+          "labelled": 78,
+          "accepted": 44,
+          "handoff_outside_reviewed_preference": 14,
+          "masked": 50
+        },
+        "full_dev": {
+          "labelled": 584,
+          "accepted": 263,
+          "handoff_outside_reviewed_preference": 137,
+          "masked": 408
+        },
+        "full_dev_source_macro": 0.4899980791214557
+      },
+      "u1": {
+        "fast_dev": {
+          "labelled": 78,
+          "accepted": 29,
+          "handoff_outside_reviewed_preference": 4,
+          "masked": 50
+        },
+        "full_dev": {
+          "labelled": 584,
+          "accepted": 209,
+          "handoff_outside_reviewed_preference": 71,
+          "masked": 408
+        },
+        "full_dev_source_macro": 0.38961156087779464
+      }
+    },
+    "live": {
+      "u0": {
+        "pid": 1169498,
+        "status": "RUNNING",
+        "last_reported_updates": 215,
+        "planned_updates": 420,
+        "source_commit": "287cedec"
+      },
+      "u1": {
+        "pid": 1169499,
+        "status": "RUNNING",
+        "last_reported_updates": 215,
+        "planned_updates": 420,
+        "source_commit": "287cedec"
+      }
+    }
   },
   "replay_correction": {
     "old_prepared_unfitted_data": "/data/milai-experiments/20261112-reader-utility/formal-main3k-data-v1/run.json",
@@ -88,7 +137,18 @@
     "new42_labels": "/data/milai-experiments/20261112-reader-utility/main3k-new64to128-semantic42-labels-v2/manifest.json",
     "new42_known_delivery": 20,
     "new42_known_answer": 20,
-    "remaining": "490states in predeclared later blocks, then same actual-known Q pool for both U endpoints. First68 sampling used older BF16 scores; later blocks use explicit FP32/deadband, no first-result repair."
+    "remaining": "490states in predeclared later blocks, then same actual-known Q pool for both U endpoints. First68 sampling used older BF16 scores; later blocks use explicit FP32/deadband, no first-result repair.",
+    "all600_opportunities_selected": true,
+    "finite_continuation_owner": "/data/milai-experiments/20261112-reader-utility/finish_selected_q_blocks_v2-owner.json",
+    "finite_continuation_pid": 1325952,
+    "active92": "/data/milai-experiments/20261112-reader-utility/main3k-new128to256-semantic92-readouts-v2/run.json",
+    "active92_last_observation": {
+      "status": "RUNNING",
+      "pid": 1306490,
+      "closed_readouts": 74,
+      "failed_readouts": 8,
+      "planned_unique_packets": 308
+    }
   },
   "K_diagnostic": {
     "input": "/data/milai-experiments/20261112-reader-utility/known-evidence-train16-input-v1/run.json",
@@ -118,7 +178,12 @@
     "readouts": "/data/milai-experiments/20261112-reader-utility/i2-complementary-dev8-short-readouts-v2/run.json",
     "sources": 8,
     "executed_bindings": 47,
-    "scope": "Full/rules/common-model plus first offered legal A/B/A+B/empty. All materials already acquired, no gold selection, no invented over-budget union. Complementarity is to be measured, not presumed. Short answer protocol separate from earlier long-answer firsts."
+    "scope": "Full/rules/common-model plus first offered legal A/B/A+B/empty. All materials already acquired, no gold selection, no invented over-budget union. Complementarity is to be measured, not presumed. Short answer protocol separate from earlier long-answer firsts.",
+    "status": "CLOSED_47_FIRSTS_4_FAILED",
+    "native": "/data/milai-experiments/20261112-reader-utility/i2-complementary-dev8-short-native-v2/summary.json",
+    "author_review": "/data/milai-experiments/20261112-reader-utility/i2-complementary-dev8-short-native-v2/author-source-review-v1.json",
+    "observed_union_only_sufficiency": 0,
+    "model_full_exact_packet_matches": 8
   },
   "scale_extension": {
     "pilot": "/data/milai-experiments/20261112-reader-utility/expansion-public-multi-request-pilot-v1/run.json",
@@ -128,7 +193,15 @@
     "model_calls": 19,
     "source_family_count": 1,
     "device": "CPU",
-    "scope": "Common saved model real multi-request trial. Not10k. Existing source context masks and original lexical first receipt K retained; newly generated cold output never substitutes for K. Next extend public branch preparation beyond first request/initial-only states."
+    "scope": "Common saved model real multi-request trial. Not10k. Existing source context masks and original lexical first receipt K retained; newly generated cold output never substitutes for K. Next extend public branch preparation beyond first request/initial-only states.",
+    "post_step1": "/data/milai-experiments/20261112-reader-utility/expansion-public-post1-pilot-v1/run.json",
+    "post_step4": "/data/milai-experiments/20261112-reader-utility/expansion-public-post4-pilot-v1/run.json",
+    "pilot_scoring_input": "/data/milai-experiments/20261112-reader-utility/expansion-public-post-pilot-input-v1/run.json",
+    "post_states": 6,
+    "post_packets": 22,
+    "post_packets_with_reliable_native_references": 0,
+    "production_plan": "/data/milai-experiments/20261112-reader-utility/expansion-public-production-plan-v1.json",
+    "production_status": "PREPARED_NOT_LAUNCHED"
   },
   "application_source_inventory": {
     "artifact": "/data/milai-experiments/20261112-reader-utility/natural-application-source-options-v1.json",
@@ -206,5 +279,33 @@
     "Prepare10k public multi-request/post-state branch experience from actual eligible TRAIN contexts; initial-only exporter is not enough, preserve original known receipts and native visibility.",
     "Prepare fixed train diagnostic probe if useful; do not repeatedly evaluate all7452training rows solely for bookkeeping.",
     "New confirmation and autonomous/natural continuous View application lines remain required; no overall completion claim."
-  ]
+  ],
+  "phase": 4,
+  "signal_diagnostic": {
+    "canonical110": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-vs-semantic110-diagnostic-v1.json",
+    "author_spots": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-semantic-disagreement-spots-v1.json",
+    "joint_directional_material_pairs": 88,
+    "agree": 67,
+    "oppose": 21,
+    "opposed_empty_no_K_winners": 15,
+    "scope": "Selected TRAIN signal analysis; reviewer correlation and ambiguous native annotations retained; no task gain or causal bias attribution."
+  },
+  "natural_application_preparation": {
+    "source_inspection": "/data/milai-experiments/20261112-reader-utility/natural-realtalk-inspection-v1/source-inspection.json",
+    "prepared": "/data/milai-experiments/20261112-reader-utility/natural-realtalk-continuous10-plan-v1/manifest.json",
+    "histories": 10,
+    "participant_components": 3,
+    "natural_messages": 8944,
+    "native_questions": 100,
+    "all_native_references_arrived": 57,
+    "status": "PREPARED_NOT_RUN",
+    "scope": "Evaluation-only natural messages with explicitly staged native QA timing. Not32independentTRAINhistories or whole native benchmark. No silent alias/image/annotation repair.",
+    "dolphin_first_download_failure": "/data/milai-experiments/20261112-reader-utility/natural-dolphin-inspection-v1/download-first-failure.json"
+  },
+  "phase04_validation": {
+    "targeted_public_SQLite_tests": 2,
+    "ruff": "passed",
+    "git_diff_check": "passed",
+    "cost": "Native jobs self-bill. New nonnative preparations/analyses and previousphase03 pending; no settlement while live model/Host scopes exist. Root/network/tool costs partly unmeasured."
+  }
 }

@@ -1,52 +1,77 @@
-# ACTIVE Reader utility v3: phase03 formal U running (2026-11-12)
+# ACTIVE Reader utility v3: phase04 formal U and Q annotations running (2026-11-12)
 
 Goal ACTIVE/incomplete; previous/current turns PROGRESS. Full original v3 objective unchanged.
-R=/data/milai-experiments/20261112-reader-utility. Read current
+R=/data/milai-experiments/20261112-reader-utility. Read existing
  data/manifests/reader-utility-progress-20261112-v3.json and docs/MILAI_READER_UTILITY_EXECUTION_20261112.md.
-KEEP ANALYSIS SHORT. Use current processes/files, no metadata wordloops or repeated plans.
-No SHA/content fingerprints/subagents/Product/API/permission/Canonical changes/service restarts/push.
+KEEP ANALYSIS SHORT. No SHA/content fingerprints/subagents/Product/API/permissions/Canonical/
+default-strategy changes/service restarts/push. Original userDrive prototype obtained;12testsPASS.
 
-LIVE formal U0 PID1169498/session55981 GPU2 and U1 PID1169499/session95185 GPU3. Last70/420each,
-1680primary+560replay exposures. Source287cedec frozen in memory; later998fbfee onlypubliccollector.
-Common initial128DEV logits EXACT equal, accepted46/78. Do not restart from slow preparation/log gaps.
-Data formal-main3k-data-v2:3356main/698sources,3355weak vs37semantic active;4096old replay/857sources.
-The unfitted v1 dataset had only110replay after overlaps and was superseded before fitting. Actual
-3356*3=10068primary+3356replay,420updates;curve70/140/280/420;fullDEV140/420. Both24k/checkpointing/
-unfusedAdamW/BF16 student. Teacher fullFP32/deadband1e-4; oldBF16 drift retained but not formalfit.
-Protocol formal-main3k-uq-protocol-v1.json, engineering choice separate. No pureloss claim.
-FullDEV formal-development96-v1:96exposedDEV sources/992states/584labels,max9460,no trunc/train overlap.
-Never use old confirmation for new selection. Later Q labels NEVER mutate frozen U data.
+LIVE formal U0 PID1169498/session55981 GPU2; U1 PID1169499/session95185 GPU3.
+Lastreported190/420; actual source287cedec frozen. Revalidate, do notrestart duringeval/save/loggap.
+Common initial128DEV logits EXACT equal46/78. At140 fastU0=44/78,U1=29/78;
+full96DEV992states584labels U0=263/584 macro.4900,U1=209/584 macro.3896.
+Reference preferences only; keep planned420 endpoints, no earlyresult retuning.
+Data formal-main3k-data-v2:3356main698sources,3355weak vs37semantic active;4096old replay857sources.
+Unfittedv1 only110replay superseded BEFOREfitting. Each10068primary+3356replay420updates.
+24k/checkpoint/unfusedAdamW/BF16student. TeacherFP32/SDPA/TF32off/deadband1e-4.
+Curves70/140/280/420,fullDEV140/420. LaterQ NEVER mutates frozenU.
+FullDEV old32+exposedDEVELOPMENT64; noTRAINoverlap,truncation0,max9460tokens.
+Actual full-menu DEV execution remains pending; referencepanel is nottasksuccess.
 
-LIVE I2 complementary short Reader PID1203337/session93985, latest46/47closed4failed. Revalidate.
-Actual47bindings:full/rules/commonmodel/legalA/B/A+B/empty,8acquiredpools; semantic gain unproved.
-Semantic TRAIN20+48+42 CLOSED110reviewed;57delivery-known/52answer-known. Q target600review
-opportunities predefined as20+48+42+92+59+133+68+138; actualknown targets separate, no failed retries.
-NEXTafterI2HTTPlease: prepare/run semantic92 new128to256 usingFP32/deadband1e-4, thenothers.
-Public multi-request CPU pilot CLOSED4conditions/2nativequeries/1family19NN. Code998fbfee supports
---requests-per-family0=all; original lexical receipt K and per-native-context exclusions retained.
-10k branch preparation still needs multi-request/post-state support (old public feedback initial-only).
-Known evidence:32states16families,42/96packets scorable,7jointfamilies6bestchanges; notcausal.
-Stableh0/h2:36states120bindings,16bestchanges,identicalHANDOFFmaxdelta3.05e-5; noHostbenefitclaim.
+LIVE semantic92 Reader PID1306490/session20619; last67/308firsts7failed. Revalidate.
+Finite continuation finish_selected_q_blocks_v2.py PID1325952/session22201 waits92closure then
+bind/review/compile92, followed59+133+68+138 blocks alreadyselected. OwnerJSON atR; no retries.
+Do notlaunch duplicateHTTP work competing with thisserialpipeline. All600 opportunitiesselected;
+only110closedreviewed,57delivery-known52answer-known sofar. Qpool16quality+16replay3passes,
+weakoff,newoptimizers botharms fromfixedUendpoints; countsactualknown, not600reviewcalls.
+First68samplingoldBF16, subsequentFP32. Failures/maskedquotes remainunknown.
 
-Native refs8e68dd2a; I2legal subsets5563f08a; training GPU-release3d09c327; replay287cedec; public998fbfee.
-Tests15+2+3+20GPU+2pass;Ruff/packagepass;tools same6legacy unresolvedLMEimports.
-Teacher/finished trainer releaseGPU before shared ledger wait, terminal data may precede process exit;
-check ledger_recorded and/proc. Never double-bill native scorer/train/Reader/Teacher/I2prep.
-Last phase02 receipt PAID38scopes12057.449CPU. New nonnative profiles/preps/compilers/publicpilot pending;
-root/imports/tests/serverGPU/money unmeasured. No settlement while owned model jobs live.
+I2 CLOSED47firsts4failed. i2-complementary-dev8-short-native-v2 summary+author-source-review-v1.
+NativeF1 full/commonmodel.24427 rules.23155 A.26429 B.22329 AB.20907 empty.00595.
+Model8/8samefullpacket. Rootnonblind/nonindependent sourcecheckfull4complete+1partial,
+rules3,A2,B3,AB2; zeroAB-onlysufficiency. No uniquelearnedbenefit. Natural multihop poolsnext.
+CanonicalFP32vssemantic110: material88directional67agree21oppose;15opposedweakwinners
+areemptywithnoK. Some native/reviewerambiguity; no causalparameter-memoryclaim, no labelrewrite.
+Artifacts canonical-fp32-vs-semantic110-diagnostic-v1 and disagreement-spots-v1.
 
-Prototype downloaded from userDrive,original12CPU tests and loss/gradient comparisonPASS.
-Invalid additional-v1 858empty-bank states retained/excluded; corrected203source collection1784states.
-All721QASPER sources collected7896actualstates;h2 actual3765 comparisons;fullFP32 scores closed.
-Storage:30closed identical final aliases shared,17.99GiB freed; never mutate linked frozen weights.
-Two function64 recovery dirs archived losslessly under closed-functional-recovery-archives-v1;
-restore_case_archive.py archive empty-base original-recovery restoresexactbytes. All firsts retained.
+Public multi-request code998fbfee; actualpost-prefix152a43cd committed,test2+RuffPASS.
+CPU pilot4conditions2nativequeries1family19NN. Post1=4states15branches;post4=2states7branches,
+2unreached explicit.6states22actualpackets but0reliable native refs (missing-support contexts),
+so pilotprovesexecution, notutilitytargets. Inputexpansion-public-post-pilot-input-v1.
+Productionplan expansion-public-production-plan-v1 PREPAREDNOTLAUNCHED:5originalMuSiQuebanks
+pilot-v2+shards0..3,3418nativevariants283banks279dependencygroups; preserveTRAIN/context/K.
+Proposedtargetsteps0/1/2/4,h2query_once_context, actualmissing remainmissing.
+QueryOnce policy is branch-local existingimplementation; do notsilentlychangepre-search semantics.
+WaitforU GPUrelease; prioritizeactualDEV64S1collector/prep/scorers ononeGPU,
+publicproduction/FP32scoring onother. Fixed3k pool3356 retained; <=6644newactive states target.
+Actuallyavailableexisting sourcegroups<1500; reportactual, neverrelabelvariantsindependent.
 
-Remaining:finishU/Q+actualDEV,10k/repeat,ownstate,seeds,newconfirmation,autonomousHost and
-continuous/natural View/update applications,cost/statistical/mechanism synthesis. AMA nativeTEST not
-TRAIN,REALTALK10overlappingparticipantconversations not32independent;Dolphin identity/chronology
-unverified. Natural source options onlymetadata research, not actualapplicationcompletion.
-Old v2 below CLOSED/HISTORICAL, not live queues or reusable blind confirmation.
+Natural REALTALK10files downloaded;8944literalhumanmessages,10speakers only3participantgroups.
+natural-realtalk-continuous10-plan-v1 PREPAREDNOTRUN:100nativequestions evenlyspaced nativeindices,
+tenstagedsessionprefixarrivals perhistory; only57allnativecitationsarrived. QA timing isexplicit
+evaluationadaptation, notnaturallyoccurringrequests/fullbenchmark. AllDEV, noTRAIN/newblindclaim.
+Question/answername mismatch(Kate/Emi),missingrefs/images retained. No nativeanswers/derived
+sessionevents/imagecaptionsonline. Literal localtimestamps preserved, no inventedUTC.
+Existing run_host_intent_retrieval supportscontinuous+incoming_sources+autonomousHost; doNOTuse
+legacyrun_milai_application_v25(SHAguards). Runtime/config/methodfreeze and actualapplicationspending.
+DolphinTask1download FAILEDtimeout,partial retained and firstrecordinspected; noidentity/chronology
+fromthatderivedrecord. See natural-dolphin-inspection-v1/download-first-failure.json; no hiddenretry.
+
+Budget singleexistingledger. Scorer/trainer/Reader/reviewer/I2modelprep self-bill; CPU-onlynativeF1,
+compiler/prep/profiles/publiccollector doNOT. Phase02PAID38scopes12057.449CPU; phase03/04non-native
+pending, no settlement whileownedmodel/Hostlive. Do notdoublecountwholechild vsnativephases.
+Queueowner recordswholechildtime; residualreconcile later. Root/network/tests/toolcostspartunknown.
+Teacher/trainerreleaseGPU beforeledgerwait; terminaldata canprecedeprocessexit.
+Storage last13GiBordinaryfree; monitoratomiccheckpointpeaks.30closedidenticalfinalaliaseshardlinked,
+17.99GiBfreed; nevermutatefrozenlinkedweights. Functionalrecoverieslosslesslyarchived withrestoretool.
+
+Priorfacts: all721QASPERTRAINsources1884questions7896actualstates,3765h2comparisons,all8FP32closed.
+858emptybankstatesfromadditional-v1 retained/excluded; corrected203sources1784states.
+Kdiagnostic32states16families42/96scorable;7jointfamilies6Teacherbestchanges, notcausal.
+h0/h2stable36states120bindings16bestchanges, identicalHANDOFFmaxdelta3.05e-5.
+Remaining:finishU/Q+actualDEV,10k/repeat,ownstate,decisiveseeds,newconfirmation/autonomousHost/
+naturalcontinuousView/update,cost/uncertainty/mechanismsynthesis. Goal notcomplete.
+Oldv2 below CLOSED/HISTORICAL, never restart its queues or use oldconfirmations asfresh.
 
 # FINAL scalable evidence research execution: phase44, 2026-11-12
 
