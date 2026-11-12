@@ -242,6 +242,7 @@ def test_gpu_native_trainer_keeps_weak_only_rows_and_component_counts(
         "--component-windows", "--main-rows-per-window", "2", "--effective-batch-rows", "3",
         "--epochs", "2", "--optimizer-updates", "2", "--eval-at-updates", "1",
         "--micro-batch-size", "1", "--parallel-mode", "single", "--precision", "bf16",
+        "--gradient-checkpointing",
         "--shuffle-options", "--max-len", "512", "--head-max-len", "128",
         "--replay-objective", "set", "--save-training-state-every", "1",
         *(["--feedback-target", "delivery", "--include-reviewed-ties"]
