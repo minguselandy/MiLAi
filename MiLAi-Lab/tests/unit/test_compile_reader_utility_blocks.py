@@ -76,3 +76,18 @@ def test_repeated_state_version_is_not_silently_repeated_as_new_experience(tmp_p
     with pytest.raises(ValueError, match='Repeated event version'):
         compile_reader_utility_data.main()
     assert not (tmp_path / 'output').exists()
+
+
+def test_replay_sampling_covers_sources_and_events_without_repetition():
+    rows = []
+    for family, size in [('large', 30), ('small', 3), ('tiny', 1)]:
+        for i in range(size):
+            row = state(f'{family}/q{i}')
+            row['metadata']['training_event'] = i % 3
+            rows.append(row)
+    selected = compile_reader_utility_data.balanced_replay(rows, 7, 0)
+    assert selected == compile_reader_utility_data.balanced_replay(rows, 7, 0)
+    assert len({row['metadata']['event_id'] for row in selected}) == 7
+    assert {row['metadata']['family'] for row in selected[:3]} == {'large', 'small', 'tiny'}
+    assert len({row['metadata']['training_event'] for row in selected
+                if row['metadata']['family'] == 'large'}) == 3

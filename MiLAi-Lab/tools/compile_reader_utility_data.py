@@ -5,7 +5,9 @@ import argparse
 import copy
 import json
 import math
+import random
 import time
+from collections import defaultdict, deque
 from pathlib import Path
 
 from milai_lab.harness.artifact_io import read_json, read_jsonl, write_json
@@ -17,6 +19,39 @@ from outcome_distillation import (
     mixed_windows,
 )
 from retrieval_feedback import validate_feedback
+
+
+def balanced_replay(rows: list[dict], count: int, seed: int) -> list[dict]:
+    """Select real old rows without replacement, round-robin by family then native event."""
+    if count < 1 or count > len(rows):
+        raise ValueError("Replay quota must fit the available original labelled rows")
+    rng = random.Random(seed)  # noqa: S311 -- declared data preparation seed
+    families = defaultdict(lambda: defaultdict(list))
+    for row in rows:
+        meta = row["metadata"]
+        families[meta["family"]][meta.get("training_event", meta["event_id"])].append(row)
+    names = sorted(families)
+    rng.shuffle(names)
+    queues = {}
+    for name in names:
+        groups = list(families[name].values())
+        rng.shuffle(groups)
+        for group in groups:
+            rng.shuffle(group)
+        queues[name] = deque(deque(group) for group in groups)
+    selected = []
+    while len(selected) < count:
+        for name in names:
+            events = queues[name]
+            if not events:
+                continue
+            group = events.popleft()
+            selected.append(group.popleft())
+            if group:
+                events.append(group)
+            if len(selected) == count:
+                break
+    return selected
 
 
 def main() -> None:
@@ -35,6 +70,8 @@ def main() -> None:
                         help="Use the same declared numerical deadband as the student trainer")
     parser.add_argument("--passes", type=int, default=3)
     parser.add_argument("--seed", type=int, default=0)
+    parser.add_argument("--replay-rows", type=int,
+                        help="Source/event-balanced frozen subset of the existing operation pool")
     args = parser.parse_args()
     if not math.isfinite(args.utility_flat_tolerance) or args.utility_flat_tolerance < 0:
         parser.error("Utility deadband must be finite and nonnegative")
@@ -100,6 +137,9 @@ def main() -> None:
               and r["metadata"]["event_id"] not in primary_ids]
     if any(r["metadata"]["split"] != "train" for r in replay):
         raise ValueError("Replay must retain research TRAIN role")
+    replay_available = len(replay)
+    if args.replay_rows is not None:
+        replay = balanced_replay(replay, args.replay_rows, args.seed)
     rows.extend(replay)
     for index, row in enumerate(rows):
         row["metadata"]["source_state_id"] = row["metadata"].get("state_id")
@@ -121,6 +161,10 @@ def main() -> None:
         "replay": str(args.replay.resolve()), "main_states": main_count,
         "main_families": len(main_families),
         "replay_states": len(replay), "passes": args.passes, "seed": args.seed,
+        "available_replay_states": replay_available,
+        "replay_families": len({row["metadata"]["family"] for row in replay}),
+        "replay_selection": "family/event round-robin without replacement"
+                            if args.replay_rows is not None else "all available labelled rows",
         "planned_windows": len(windows),
         "primary_exposures": sum(is_main(rows[i]) for w in windows for _, i in w),
         "replay_exposures": sum(not is_main(rows[i]) for w in windows for _, i in w),
