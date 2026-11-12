@@ -255,7 +255,7 @@
       "/data/milai-experiments/20261112-reader-utility/expansion-shard0-families16to32-preparation-owner-v1.json",
       "/data/milai-experiments/20261112-reader-utility/expansion-shard0-families32to48-preparation-owner-v1.json"
     ],
-    "closed_additional_active_states": 3874,
+    "closed_additional_active_states": 4457,
     "available17_compilation": "/data/milai-experiments/20261112-reader-utility/expansion-available17-data-v1/run.json",
     "scale_comparison_preview": "/data/milai-experiments/20261112-reader-utility/scale-available17-preview-v1/run.json",
     "common_input_observation": "/data/milai-experiments/20261112-reader-utility/scale-available17-preview-v1/common-input-observation.json",
@@ -267,7 +267,7 @@
     "closed_active_raw_families": 58,
     "remaining_active_new_state_target": 3734,
     "closed_collection_inventory": "/data/milai-experiments/20261112-reader-utility/expansion-closed-collection-inventory-v1.json",
-    "latest_closed_score_inventory": "/data/milai-experiments/20261112-reader-utility/expansion-shard1-first16-closed-inventory-v1.json"
+    "latest_closed_score_inventory": "/data/milai-experiments/20261112-reader-utility/expansion-shard1-families16to32-closed-inventory-v1.json"
   },
   "application_source_inventory": {
     "artifact": "/data/milai-experiments/20261112-reader-utility/natural-application-source-options-v1.json",
