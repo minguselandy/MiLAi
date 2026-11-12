@@ -81,7 +81,8 @@ First16score CLOSED2554known2297unscored,672activeweak;16to32scoreCLOSED440activ
 expansion-pilot-and-shard0-closed-inventory-v1:5794opportunities60rawfamilies58activefamilies,
 no duplicateeventIDs; remainingnewactive target3734. No partialformal10kfit. expansion-available17-data-v1 has741active17sourcesDATAONLY.
 32to48scorePID2020278/session30217 completed scoring, maywaitledger.
-GPU2remaining-expansion-scoring queue now scores shard1[0,16], childPID2195290; revalidate.
+Shard1[0,16] scoreCLOSED964activeweak,cumulativeNew3874;closed-inventory-v1 atR.
+GPU2remaining-expansion-scoring queue now scores shard1[16,32], childPID2294749; revalidate.
 48to59oldscorePID2105067 completedscoring, maywaitnativeledger; do notrestart.
 LIVE remaining-expansion-scoring-owner-v1 PID2039219/session73793 runs
 16remainingblocks seriallyGPU2. ClosednativeScoremaywaitledgerafterweightsrelease; driverreaps
