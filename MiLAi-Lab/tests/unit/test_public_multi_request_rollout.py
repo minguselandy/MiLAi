@@ -111,6 +111,7 @@ def test_all_requests_reuse_original_k_and_preserve_context(tmp_path, monkeypatc
             if case['request_id'] == history['requests'][0]['id']:
                 assert 'HIDDEN_BETA_PREMISE' not in json.dumps(branch['packet'])
     rows = [json.loads(line) for line in (terminal / 'states.jsonl').open()]
+    assert len(rows) == len(cases)
     assert {r['metadata']['split'] for r in rows} == {split}
     # New saved-model nominations may choose a different legal delivery without
     # inventing a new state or changing this conditional test into acquisition.

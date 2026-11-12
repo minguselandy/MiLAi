@@ -488,9 +488,8 @@ def main() -> None:
                     )
                     if len(cases) % args.snapshot_every == 0:
                         write_json(args.output / "cases.json", cases)
-                    (args.output / "states.jsonl").write_text(
-                        "".join(json.dumps(x, ensure_ascii=False) + "\n" for x in rows)
-                    )
+                    with (args.output / "states.jsonl").open("a") as stream:
+                        stream.write(json.dumps(row, ensure_ascii=False) + "\n")
                     write_json(args.output / "run.json", run)
                     print(
                         json.dumps(
