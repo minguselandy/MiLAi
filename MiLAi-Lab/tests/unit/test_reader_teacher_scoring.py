@@ -13,7 +13,7 @@ from milai_lab.providers.reader_teacher_scoring import (
 )
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "tools"))
-from prepare_reader_utility import qasper_references
+from prepare_reader_utility import native_references, qasper_references
 
 
 def test_selective_logits_equal_full_causal_cross_entropy_with_left_padding():
@@ -105,3 +105,12 @@ def test_no_is_not_missing_and_conflicting_or_unanswerable_targets_remain_unknow
     for annotations in ([annotation(yes_no=False), annotation(yes_no=True)],
                         [annotation(unanswerable=True)], [annotation()]):
         assert qasper_references({"annotations": annotations}) == []
+
+
+def test_native_reference_adapter_keeps_aliases_and_masks_missing_support_contexts():
+    control = {"schema": "source_reference_witness_v1", "native_answerable": True,
+               "native_answer": "Alpha", "native_answer_aliases": ["A", "Alpha"]}
+    assert native_references(control) == ["Alpha", "A"]
+    control["native_answerable"] = False
+    assert native_references(control) == []
+    assert native_references({"annotations": [annotation(yes_no=False)]}) == ["No"]

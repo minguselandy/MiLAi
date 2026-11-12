@@ -39,13 +39,29 @@ def qasper_references(control: dict[str, Any]) -> list[str]:
     return refs
 
 
-def export_prepared(prepared: Path) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+def native_references(control: dict[str, Any]) -> list[str]:
+    """Decode the declared offline answer schema without changing any runtime input."""
+    if "annotations" in control:
+        return qasper_references(control)
+    if control.get("schema") == "source_reference_witness_v1":
+        if control.get("native_answerable") is not True:
+            return []  # A hidden answer is not a valid target for a missing-support context.
+        answers = [control["native_answer"], *control.get("native_answer_aliases", [])]
+        if any(not isinstance(a, str) or not a.strip() for a in answers):
+            raise ValueError("Native answer alternatives must be nonempty strings")
+        return list(dict.fromkeys(a.strip() for a in answers))
+    raise ValueError("Declare a supported offline native-reference schema")
+
+
+def export_prepared(prepared: Path, controls_path: Path | None = None
+                    ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     """Use IDs, actual full bindings and existing packet records, without content hashes."""
     run = read_json(prepared / "run.json")
     if run["status"] != "COMPLETED":
         raise ValueError("Scoring input requires a completed branch preparation")
-    collection_run = read_json(Path(run["collection"]) / "run.json")
-    controls_path = Path(collection_run["controls"])
+    if controls_path is None:
+        collection_run = read_json(Path(run["collection"]) / "run.json")
+        controls_path = Path(collection_run["controls"])
     controls = {(c["source_group"], c["request_id"]): c for c in read_jsonl(controls_path)}
     rows = read_jsonl(prepared / "states.jsonl")
     records, states = [], []
@@ -59,7 +75,7 @@ def export_prepared(prepared: Path) -> tuple[list[dict[str, Any]], list[dict[str
         if control["split"] != "train":
             raise ValueError("Reference research role differs from the training source")
         bindings = {a.id: asdict(a) for a in payload_actions(row)}
-        refs = qasper_references(control)
+        refs = native_references(control)
         states.append(row)
         for branch_index, branch in enumerate(case["branches"]):
             action = branch["action"]
@@ -84,11 +100,13 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("output", type=Path)
     parser.add_argument("--prepared", type=Path, nargs="+", required=True)
+    parser.add_argument("--controls", type=Path,
+                        help="Explicit existing offline native controls for derived collections")
     args = parser.parse_args()
     started, cpu = time.perf_counter(), time.process_time()
     all_records, all_states, seen = [], [], set()
     for path in args.prepared:
-        records, states = export_prepared(path)
+        records, states = export_prepared(path, args.controls)
         for row in states:
             identity = row["metadata"]["event_id"]
             if identity in seen:
@@ -103,6 +121,7 @@ def main() -> None:
                 stream.write(json.dumps(row, ensure_ascii=False) + "\n")
     write_json(args.output / "run.json", {
         "status": "COMPLETED", "prepared": [str(p.resolve()) for p in args.prepared],
+        "explicit_controls": str(args.controls.resolve()) if args.controls else None,
         "states": len(all_states), "families": len({r["family"] for r in all_records}),
         "packets": len(all_records),
         "packets_with_native_references": sum(bool(r["references"]) for r in all_records),

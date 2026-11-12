@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import copy
+import math
 import random
 import time
 from collections import Counter, defaultdict
@@ -12,10 +13,12 @@ from typing import Any
 from feedback_choices import parameter_stratum
 from milai_lab.harness.artifact_io import read_json, read_jsonl, write_json
 from milai_lab.runners.given_host_readout import separate_answer_fields
+from outcome_distillation import observed_utility
 
 
 def select_semantic_states(cases: list[dict[str, Any]], scores: list[dict[str, Any]],
-                           count: int, seed: int) -> list[tuple[dict[str, Any], str]]:
+                           count: int, seed: int,
+                           flat_tolerance: float = 1e-6) -> list[tuple[dict[str, Any], str]]:
     """50% source-stratified random, 25% Teacher/learner disagreement, rest undercovered.
 
     This selects costly offline annotations, not online actions. All candidate bindings
@@ -39,13 +42,13 @@ def select_semantic_states(cases: list[dict[str, Any]], scores: list[dict[str, A
     used = {c["event_id"] for c, _ in selected}
     utilities: dict[str, dict[str, float]] = defaultdict(dict)
     for score in scores:
-        if score["score_known"]:
+        if observed_utility(score):
             utilities[score["event_id"]][score["action"]["id"]] = score["mean_logprob"]
     disagreements = []
     for case in stratified:
         values = utilities[case["event_id"]]
         learner = case["choices"]["learner"]
-        if learner in values and max(values.values()) > values[learner] + 1e-6:
+        if learner in values and max(values.values()) > values[learner] + flat_tolerance:
             disagreements.append(case)
     for case in disagreements:
         if len(selected) >= count // 2 + count // 4:
@@ -73,7 +76,10 @@ def main() -> None:
     parser.add_argument("output", type=Path)
     parser.add_argument("--states", type=int, required=True)
     parser.add_argument("--seed", type=int, default=0)
+    parser.add_argument("--utility-flat-tolerance", type=float, default=1e-6)
     args = parser.parse_args()
+    if not math.isfinite(args.utility_flat_tolerance) or args.utility_flat_tolerance < 0:
+        parser.error("Utility deadband must be finite and nonnegative")
     started, cpu = time.perf_counter(), time.process_time()
     original = read_json(args.prepared / "run.json")
     score_run = read_json(args.scores.parent / "run.json")
@@ -86,7 +92,8 @@ def main() -> None:
             Path(s["packet_ref"]["path"]).resolve() != (args.prepared / "cases.json").resolve()
             for s in scores):
         raise ValueError("Sampling scores must belong to these executed packet records")
-    selected = select_semantic_states(cases, scores, args.states, args.seed)
+    selected = select_semantic_states(cases, scores, args.states, args.seed,
+                                      args.utility_flat_tolerance)
     output = []
     for case, reason in selected:
         case = copy.deepcopy(case)
@@ -100,6 +107,8 @@ def main() -> None:
     write_json(args.output / "run.json", {**original, "status": "COMPLETED",
         "original_preparation": str(args.prepared.resolve()), "scores": str(args.scores.resolve()),
         "seed": args.seed, "selected_states": len(output),
+        "utility_flat_tolerance": args.utility_flat_tolerance,
+        "scoring_configuration": score_run.get("scoring_configuration"),
         "comparison_states": len(output),
         "families": len({c["family"] for c in output}),
         "packets": sum(len(c["branches"]) for c in output),
