@@ -25,7 +25,15 @@
     "public_actual_post_state": "152a43cd",
     "public_terminal_deliveries": "aa0e2f12",
     "saved_evaluator_release": "3bad33dc",
-    "actual_DEV_trajectory_endpoints": "71a677ee"
+    "actual_DEV_trajectory_endpoints": "71a677ee",
+    "frozen_terminal_nominations": "796e3934",
+    "cross_trajectory_review": "bbf42295",
+    "residual_GPU_graph_cleanup": "857067c0",
+    "dependency_group_weights": "79d7264f",
+    "public_append_states": "73748278",
+    "alias_prefix_teacher": "ed39c43c",
+    "public_snapshot_interval": "793dd0be",
+    "checkpointed_cleanup_regression": "3df6188c"
   },
   "formal_U": {
     "protocol": "/data/milai-experiments/20261112-reader-utility/formal-main3k-uq-protocol-v1.json",
@@ -92,18 +100,43 @@
     "live": {
       "u0": {
         "pid": 1169498,
-        "status": "RUNNING",
-        "last_reported_updates": 355,
+        "status": "COMPLETED",
+        "last_reported_updates": 420,
         "planned_updates": 420,
-        "source_commit": "287cedec"
+        "source_commit": "287cedec",
+        "ledger_recorded": true
       },
       "u1": {
         "pid": 1169499,
-        "status": "RUNNING",
-        "last_reported_updates": 330,
+        "status": "COMPLETED",
+        "last_reported_updates": 420,
         "planned_updates": 420,
-        "source_commit": "287cedec"
+        "source_commit": "287cedec",
+        "ledger_recorded": true
       }
+    },
+    "closed_comparison": "/data/milai-experiments/20261112-reader-utility/formal-U-closed-reference-comparison-v1.json",
+    "saved_precision_observation": "/data/milai-experiments/20261112-reader-utility/formal-U-export-precision-observation-v1.json",
+    "actual_sampled_main_targets": {
+      "u0": 111,
+      "u1": 10065
+    },
+    "actual_input_tokens_each": 75634904,
+    "fast_dev_final": {
+      "u0": 44,
+      "u1": 34,
+      "labelled": 78
+    },
+    "full_reference_dev_final": {
+      "u0": 266,
+      "u1": 218,
+      "labelled": 584,
+      "source_macro_difference": -0.10705266955266955,
+      "paired_bootstrap95": [
+        -0.16818181818181818,
+        -0.04917027417027417
+      ],
+      "scope": "In-memory referencepreferences, notHosttaskperformance"
     }
   },
   "replay_correction": {
@@ -134,9 +167,9 @@
   "semantic_Q": {
     "planned_review_opportunities": 600,
     "allocation": "/data/milai-experiments/20261112-reader-utility/formal-main3k-uq-protocol-v1.json",
-    "reviewed_opportunities_closed": 110,
-    "known_delivery_states_closed": 57,
-    "known_answer_states_closed": 52,
+    "reviewed_opportunities_closed": 202,
+    "known_delivery_states_closed": 105,
+    "known_answer_states_closed": 95,
     "new42_labels": "/data/milai-experiments/20261112-reader-utility/main3k-new64to128-semantic42-labels-v2/manifest.json",
     "new42_known_delivery": 20,
     "new42_known_answer": 20,
@@ -153,7 +186,8 @@
       "planned_unique_packets": 308
     },
     "quality_preview_110": "/data/milai-experiments/20261112-reader-utility/quality110-data-preview-v1/run.json",
-    "quality_preparation_script": "/data/milai-experiments/20261112-reader-utility/prepare_formal_quality_data_v1.py"
+    "quality_preparation_script": "/data/milai-experiments/20261112-reader-utility/prepare_formal_quality_data_v1.py",
+    "active59": "/data/milai-experiments/20261112-reader-utility/main3k-new256to337-semantic59-readouts-v2/run.json"
   },
   "K_diagnostic": {
     "input": "/data/milai-experiments/20261112-reader-utility/known-evidence-train16-input-v1/run.json",
@@ -206,7 +240,16 @@
     "post_packets": 22,
     "post_packets_with_reliable_native_references": 0,
     "production_plan": "/data/milai-experiments/20261112-reader-utility/expansion-public-production-plan-v1.json",
-    "production_status": "FINITE_GPU3_QUEUE_WAITING_FOR_U_RELEASE"
+    "production_status": "GPU3_PRODUCTION_RUNNING",
+    "first_production_input": "/data/milai-experiments/20261112-reader-utility/expansion-main-pilot-input-v1/run.json",
+    "first_production_data": "/data/milai-experiments/20261112-reader-utility/expansion-main-pilot-data-v1/run.json",
+    "first_production_active_states": 69,
+    "first16_input": "/data/milai-experiments/20261112-reader-utility/expansion-shard0-first16-input-v1/run.json",
+    "first16_scoring": "/data/milai-experiments/20261112-reader-utility/expansion-shard0-first16-scores-fp32-cache-v1/run.json",
+    "preparing_next_blocks": [
+      "/data/milai-experiments/20261112-reader-utility/expansion-shard0-families16to32-preparation-owner-v1.json",
+      "/data/milai-experiments/20261112-reader-utility/expansion-shard0-families32to48-preparation-owner-v1.json"
+    ]
   },
   "application_source_inventory": {
     "artifact": "/data/milai-experiments/20261112-reader-utility/natural-application-source-options-v1.json",
@@ -285,7 +328,7 @@
     "Prepare fixed train diagnostic probe if useful; do not repeatedly evaluate all7452training rows solely for bookkeeping.",
     "New confirmation and autonomous/natural continuous View application lines remain required; no overall completion claim."
   ],
-  "phase": 5,
+  "phase": 6,
   "signal_diagnostic": {
     "canonical110": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-vs-semantic110-diagnostic-v1.json",
     "author_spots": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-semantic-disagreement-spots-v1.json",
@@ -325,7 +368,10 @@
     "Host_calls": 0,
     "learner_collection_plans": "/data/milai-experiments/20261112-reader-utility/formal-task-dev96-collect-plans-v1.json",
     "conditional_old32_h2": "/data/milai-experiments/20261112-reader-utility/formal-dev32-common-h2-v1/run.json",
-    "conditional_scope": "64same-statecomparisons206packets; oldcollector3k/u101, separatefrom96actualwholetrajectorytaskprotocol."
+    "conditional_scope": "64same-statecomparisons206packets; oldcollector3k/u101, separatefrom96actualwholetrajectorytaskprotocol.",
+    "pre_Q_trajectory_comparison": "/data/milai-experiments/20261112-reader-utility/formal-task-dev96-pre-Q-trajectory-comparison-v1.json",
+    "first_four_reader_owner": "/data/milai-experiments/20261112-reader-utility/formal-task-dev96-first-four-owner-v1.json",
+    "review_plan": "/data/milai-experiments/20261112-reader-utility/formal-task-dev96-review-plan-v1.json"
   },
   "I2_public": {
     "prepared": "/data/milai-experiments/20261112-reader-utility/i2-public-dev8-terminal-short-v1/run.json",
@@ -342,8 +388,9 @@
     "dependent_owner": "/data/milai-experiments/20261112-reader-utility/i2-public-after-q-owner-v2.json"
   },
   "post_U_GPU_owners": {
-    "2": "/data/milai-experiments/20261112-reader-utility/post-u-gpu2-owner-v1.json",
-    "3": "/data/milai-experiments/20261112-reader-utility/post-u-gpu3-owner-v1.json"
+    "2": "/data/milai-experiments/20261112-reader-utility/post-u-gpu2-owner-v2.json",
+    "3": "/data/milai-experiments/20261112-reader-utility/post-u-gpu3-owner-v1.json",
+    "2_old_superseded_before_first_job": "/data/milai-experiments/20261112-reader-utility/post-u-gpu2-owner-v1.json"
   },
   "new_confirmation_reservation": {
     "reservation": "/data/milai-experiments/20261112-reader-utility/new-confirmation-source-reservation-v1/reservation.json",
@@ -363,5 +410,30 @@
     "ruff": "passed",
     "git_diff_check": "passed",
     "cost": "NewCPUpreps/collectors/analyses and earlierphase03/04pending; model jobs selfbill. FirstI2startupfailureCPUunmeasured, notzero. No ledgerwriteswhilelive."
+  },
+  "alias_prefix_scoring": {
+    "protocol": "/data/milai-experiments/20261112-reader-utility/teacher-scoring-numerical-protocol-v3-alias-prefix.json",
+    "same579packets": "/data/milai-experiments/20261112-reader-utility/alias-prefix-full-pilot-comparison-v1.json",
+    "diverse12sources": "/data/milai-experiments/20261112-reader-utility/alias-cache-diverse12-comparison-v1.json",
+    "max_observed_packet_mean_difference": 2.9063224792125197e-05,
+    "max_observed_token_difference": 0.000209808349609375,
+    "known_masks_and_comparison_directions_unchanged": true,
+    "scoring_wall_ratio": 3.87725999642433,
+    "whole_job_wall_ratio": 3.521887750354673,
+    "scope": "NewexplicitFP32backend for newexpansion only; oldUdata/fits untouched; limitedequivalence/throughput, nottaskbenefit."
+  },
+  "phase06_storage": "/data/milai-experiments/20261112-reader-utility/phase06-closed-recovery-sparse-v1.json",
+  "phase06_validation": {
+    "GPU_cleanup_with_exact_resume": 2,
+    "GPU_cleanup_with_gradient_checkpointing": 2,
+    "mixture_compiler_math": 30,
+    "teacher_scoring": 12,
+    "cross_trajectory_binding": 2,
+    "public_nomination_and_union": 5,
+    "public_append": 2,
+    "ruff": "passed",
+    "git_diff_check": "passed",
+    "native_fits": "BothU420closedandselfbilled; ledgerwaitreported; no nativebillduplication",
+    "pending_costs": "Phase03through06nonnativepreparation/analysis/profile/storagepending; root/imports/tests/networkpartlyunmeasured."
   }
 }
