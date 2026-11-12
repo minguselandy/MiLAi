@@ -1,6 +1,6 @@
-# ACTIVE Reader utility v3: phase08 expansion and Q running (2026-11-13)
+# ACTIVE Reader utility v3: phase09 shard0 scoring closed; Q and expansion running (2026-11-13)
 
-Goal ACTIVE/incomplete. Previous/current turns PROGRESS. Full user v3 objective remains.
+Goal ACTIVE/incomplete. Previous turn VERIFIED_WAIT; current milestone PROGRESS. Full user v3 objective remains.
 R=/data/milai-experiments/20261112-reader-utility.
 Read data/manifests/reader-utility-progress-20261112-v3.json and
 docs/MILAI_READER_UTILITY_EXECUTION_20261112.md. KEEP ANALYSIS SHORT; act on files/processes.
@@ -76,9 +76,12 @@ expansion-main-pilot-preparation-owner-v1 PID1566417/session45624 CLOSED, donotr
 SHARD0 blocksprepared: first16=1289states4851packets2554eligible;16to32=853states3223packets1673eligible;
 32to48=1847states6955packets;48to59=1652states6287packets3292eligible.
 First16score CLOSED2554known2297unscored,672activeweak;16to32scoreCLOSED440activeweak.
-32to48score CLOSED870activeweak. Withpilot69 =>2051newactiveclosed. expansion-available17-data-v1 has741active17sourcesDATAONLY.
+32to48score CLOSED870activeweak. 48to59score CLOSED859activeweak. Withpilot69 =>2910newactiveclosed.
+expansion-pilot-and-shard0-closed-inventory-v1:5794opportunities60rawfamilies58activefamilies,
+no duplicateeventIDs; remainingnewactive target3734. No partialformal10kfit. expansion-available17-data-v1 has741active17sourcesDATAONLY.
 32to48scorePID2020278/session30217 completed scoring, maywaitledger.
-GPU2remaining-expansion-scoring queue now scores48to59; revalidateownerchildPID.
+GPU2remaining-expansion-scoring queue now scores shard1[0,16], childPID2195290; revalidate.
+48to59oldscorePID2105067 completedscoring, maywaitnativeledger; do notrestart.
 LIVE remaining-expansion-scoring-owner-v1 PID2039219/session73793 runs
 16remainingblocks seriallyGPU2. ClosednativeScoremaywaitledgerafterweightsrelease; driverreaps
 pendingbookkeeperswithoutdoublebilling. ChecksactualGPUused<=8192MiB, Qfitprioritybeforeeachblock.
@@ -140,7 +143,7 @@ zero overlap old1169Train/DevIDs andknownmetadataSource-IDscan. NoSource/control
 Finalmethods/metrics/repeatsfreeze beforeexport. No publicpretraining/unknownexternalhistoryisolation.
 
 Budget oneexistingledger. NativeTeacher/scorer/trainer/Reader/reviewer selfbill; CPUcompile/prep,
-collector/nativeF1/profiles/analyses doNOT. Phase02PAID38scopes12057.449CPU;phase03..08pending.
+collector/nativeF1/profiles/analyses doNOT. Phase02PAID38scopes12057.449CPU;phase03..09pending.
 Do notdoublebillnativecompute vswholechild/residual. NeverwriteledgerwhileownedHost/modelslive.
 Root/imports/tests/networkpartlyunmeasured, notzero. Storagephase06closedrecovery6filessparse
 freed7.84GiB; phase07additional9closedrecoveriesfreed11.17GiB. Logicalbytes/inode/pathretained; inferenceweights/firsts untouched. NoSHA.
@@ -1814,7 +1817,7 @@ Read current scoped header, not fullhistorical AGENTS below.
 
 # HISTORICAL scalable evidence phase 3: 2026-11-11
 
-Full user v2 plan ACTIVE/incomplete. Previous/current turns PROGRESS. No subagents/SHA/fingerprints,
+Full user v2 plan ACTIVE/incomplete. Previous turn VERIFIED_WAIT; current milestone PROGRESS. No subagents/SHA/fingerprints,
 new services, Product/API/permission/Canonical changes, remote push or automatic retries.
 Current code2039a7d0; LIVE main fits still frozen cececfb7 and original op3k inputs. Do not hot-change them.
 Latest docs/MILAI_SCALABLE_EVIDENCE_EXECUTION_20261111.md and
@@ -9373,7 +9376,7 @@ full763-line requirementaudit remain. Fullgoal NOT complete.
 
 # HISTORICAL A100 EXECUTION v48: 2026-11-07
 
-Full goal ACTIVE/incomplete. Previous/current turns PROGRESS.
+Full goal ACTIVE/incomplete. Previous turn VERIFIED_WAIT; current milestone PROGRESS.
 Latest manifest data/manifests/a100-development-progress-20261107-v48.json
 (delta to v47); previous checkpoint fc61b77b.
 ROOT=artifacts/a100-development-20261104; F=ROOT/final-confirmation-v1.
@@ -12081,7 +12084,7 @@ Goal NOT complete.
 
 # HISTORICAL A100 EXECUTION v15: 2026-11-06
 
-Full goal ACTIVE/incomplete. Previous/current turns PROGRESS. Latest:
+Full goal ACTIVE/incomplete. Previous turn VERIFIED_WAIT; current milestone PROGRESS. Latest:
 data/manifests/a100-development-progress-20261106-v15.json and execution doc.
 No SHA/checksums/content fingerprints, subagents, services, second ledger, resets,
 remote writes or model/first-outcome retries. GPUs0/1 unchanged. Product unchanged.

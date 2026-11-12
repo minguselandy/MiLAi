@@ -1,7 +1,7 @@
 {
   "status": "ACTIVE_INCOMPLETE",
   "goal_turn_classification": "progress",
-  "previous_turn_classification": "progress",
+  "previous_turn_classification": "verified_wait",
   "plan": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261112_2XA10040GB_v3.md",
   "artifact_root": "/data/milai-experiments/20261112-reader-utility",
   "prior_progress": "reader-utility-progress-20261112-v2.json",
@@ -255,12 +255,17 @@
       "/data/milai-experiments/20261112-reader-utility/expansion-shard0-families16to32-preparation-owner-v1.json",
       "/data/milai-experiments/20261112-reader-utility/expansion-shard0-families32to48-preparation-owner-v1.json"
     ],
-    "closed_additional_active_states": 2051,
+    "closed_additional_active_states": 2910,
     "available17_compilation": "/data/milai-experiments/20261112-reader-utility/expansion-available17-data-v1/run.json",
     "scale_comparison_preview": "/data/milai-experiments/20261112-reader-utility/scale-available17-preview-v1/run.json",
     "common_input_observation": "/data/milai-experiments/20261112-reader-utility/scale-available17-preview-v1/common-input-observation.json",
     "remaining_preparation_owner": "/data/milai-experiments/20261112-reader-utility/remaining-expansion-preparation-owner-v1.json",
-    "remaining_scoring_owner": "/data/milai-experiments/20261112-reader-utility/remaining-expansion-scoring-owner-v1.json"
+    "remaining_scoring_owner": "/data/milai-experiments/20261112-reader-utility/remaining-expansion-scoring-owner-v1.json",
+    "closed_inventory": "/data/milai-experiments/20261112-reader-utility/expansion-pilot-and-shard0-closed-inventory-v1.json",
+    "closed_opportunity_states": 5794,
+    "closed_raw_families": 60,
+    "closed_active_raw_families": 58,
+    "remaining_active_new_state_target": 3734
   },
   "application_source_inventory": {
     "artifact": "/data/milai-experiments/20261112-reader-utility/natural-application-source-options-v1.json",
@@ -339,7 +344,7 @@
     "Prepare fixed train diagnostic probe if useful; do not repeatedly evaluate all7452training rows solely for bookkeeping.",
     "New confirmation and autonomous/natural continuous View application lines remain required; no overall completion claim."
   ],
-  "phase": 8,
+  "phase": 9,
   "signal_diagnostic": {
     "canonical110": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-vs-semantic110-diagnostic-v1.json",
     "author_spots": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-semantic-disagreement-spots-v1.json",
