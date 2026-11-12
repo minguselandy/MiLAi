@@ -1,6 +1,6 @@
-# ACTIVE Reader utility v3: phase15 all branch inputs closed (2026-11-13)
+# ACTIVE Reader utility v3: phase16 closed CPU cost scopes (2026-11-13)
 
-Goal ACTIVE/incomplete. Current milestone PROGRESS: all20branchinputs closed andlater68Reader closed; teacheractive. Full user v3 objective remains.
+Goal ACTIVE/incomplete. Current milestone PROGRESS:111closedCPUscopes reconciled, shard3[16,32]scoresclosed9721active. Full user v3 objective remains.
 R=/data/milai-experiments/20261112-reader-utility.
 Read data/manifests/reader-utility-progress-20261112-v3.json and
 docs/MILAI_READER_UTILITY_EXECUTION_20261112.md. KEEP ANALYSIS SHORT; act on files/processes.
@@ -111,7 +111,9 @@ Shard2[32,38] scoreCLOSED569activeweak,cumulativeNew8678;1142states4334packets,
 2180scored2154unscored2550references,6active rawfamilies. Entireshard2=3004active/5943opportunities.
 Shard3[0,16] scoreCLOSED792activeweak,cumulativeNew9470;1558states5891packets,
 3010scored2881unscored4188references,15active rawfamilies. InventoryatR.
-GPU2queue nowshard3[16,32] childPID2889561; previousscorePID2801459maywaitnativeledger.
+Shard3[16,32] scoreCLOSED251activeweak,cumulativeNew9721;496states1883packets,
+960scored923unscored1225references,15active rawfamilies. InventoryatR.
+GPU2queue nowshard3[32,48] childPID2916642; previousscorePID2889561maywaitnativeledger.
 ALL20branchinputs CLOSED:22613actualstates85907packets,44037eligible native-refpackets;
 283rawfamilies279groups, no duplicateeventIDs orbetween-blockrawfamily overlap.
 expansion-all-branch-input-inventory-v1.json; inputrow/packetcountsactuallyread, notonlymanifest.
@@ -190,7 +192,12 @@ NEWCONFIRMATION reservationonly: officialQASPERTEST416IDs, fixedseed20261112 sel
 zero overlap old1169Train/DevIDs andknownmetadataSource-IDscan. NoSource/controls/modelcallsyet.
 Finalmethods/metrics/repeatsfreeze beforeexport. No publicpretraining/unknownexternalhistoryisolation.
 
-Budget oneexistingledger. NativeTeacher/scorer/trainer/Reader/reviewer selfbill; CPUcompile/prep,
+Budget oneexistingledger. closed-cpu-queue-cost-inventory-v1.json PREPARED_UNPAID:
+7closedowners111childscopes46975.766221CPU; coveredartifactCPU46167.58185985alreadyincluded.
+NEVERaddboth; covered_artifact_receipt listswhatfuturecostscanner mustexclude ifusingwholechild.
+BothpreviouspaidphaseCPUentries readbackmatch; no overlap withthese111scopes. Thisispartial
+CPUaccounting(includesGPU-backedcollectors), notfullstudy/GPUcost; noledgerwrite.
+NativeTeacher/scorer/trainer/Reader/reviewer selfbill; CPUcompile/prep,
 collector/nativeF1/profiles/analyses doNOT. Phase02PAID38scopes12057.449CPU;phase03..10pending.
 Do notdoublebillnativecompute vswholechild/residual. NeverwriteledgerwhileownedHost/modelslive.
 Root/imports/tests/networkpartlyunmeasured, notzero. Storagephase06closedrecovery6filessparse
