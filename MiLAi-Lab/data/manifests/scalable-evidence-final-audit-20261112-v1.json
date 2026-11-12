@@ -1,0 +1,297 @@
+{
+  "status": "FINAL_RESEARCH_EXECUTION_REQUIREMENTS_VERIFIED",
+  "observed_at_utc": "2026-11-12T00:54:43.103057+00:00",
+  "plan": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261111_2XA10040GB_v2.md",
+  "goal_achieved": true,
+  "items": [
+    {
+      "id": "E0_E1_actual_profile_and_batched_encoding",
+      "plan_sections": [
+        "0.3.1",
+        "4.E0",
+        "4.E1",
+        "4.E6"
+      ],
+      "state": "verified",
+      "evidence": [
+        "/data/milai-experiments/20261111-scalable-evidence/eval-profile-v2/comparison.json",
+        "/data/milai-experiments/20261111-scalable-evidence/eval-profile-v2/profile.txt",
+        "/data/milai-experiments/20261111-scalable-evidence/eval-profile-v2/batch-trace.json"
+      ],
+      "finding": "64actualFP32inputs,ABBA,allchoices/fullkeys/inputtokens equal; maxlogiterror1.0312e-5. CUDAkernelprofile/tablepresent. Cachedbatch1.347x,includingfirstencoding1.282x.",
+      "limits": "Onlymeasuredworkload; notall-jobGPUbusy orHostquality claim."
+    },
+    {
+      "id": "E2_E3_matched_execution_and_new_recipe",
+      "plan_sections": [
+        "4.E2",
+        "4.E3",
+        "5",
+        "8.2"
+      ],
+      "state": "verified",
+      "evidence": [
+        "/data/milai-experiments/20261111-scalable-evidence/engineering-training-v1.json",
+        "/data/milai-experiments/20261111-scalable-evidence/engineering-training-v2.json",
+        "/data/milai-experiments/20261111-scalable-evidence/train-baseline-v2/compute.json",
+        "/data/milai-experiments/20261111-scalable-evidence/train-adaptive-v2/compute.json",
+        "/data/milai-experiments/20261111-scalable-evidence/training-token-reuse-benchmark-v2.json"
+      ],
+      "finding": "Matchedtwo-concurrent-job training1.178x/eval1.282x/whole1.156x; fixedmicro4negative retained. Tokenreuse3.274x preprocessing64lengthquantiles/3permutations exact. Newbatch32/micro8/token8192/BF16/warmupcosine actuallyused.",
+      "limits": "1.5xengineering targetnotfullymet/notahardgate; newbatchrecipe separatedfromoldrecipe."
+    },
+    {
+      "id": "E4_resume",
+      "plan_sections": [
+        "4.E4",
+        "13",
+        "15.2"
+      ],
+      "state": "verified_with_test_scope",
+      "evidence": [
+        "/data/milai-experiments/20261111-scalable-evidence/token-reuse-recovery-tests-v1",
+        "/data/milai-experiments/20261111-scalable-evidence/training-token-reuse-benchmark-v2.json",
+        "/data/milai-experiments/20261111-scalable-evidence/s1-op36k-seed0-v1/recovery/training-state.pt"
+      ],
+      "finding": "RealCUDA small-model interruption/resume equality tested forFP32parameters/optimizer/scheduler/RNG/optionorder; actuallongfitrecoveryartifactretained.",
+      "limits": "Testedequalitydoesnotclaimallkernelsbitwiseequivalence; no stoppedjobsrestartedfromstalehandles."
+    },
+    {
+      "id": "B_nested_operation_data",
+      "plan_sections": [
+        "0.3.2",
+        "6",
+        "7.1",
+        "8.S1"
+      ],
+      "state": "verified_with_scope",
+      "evidence": [
+        "/data/milai-experiments/20261111-scalable-evidence/op-3k-v1/manifest.json",
+        "/data/milai-experiments/20261111-scalable-evidence/op-10k-v1/manifest.json",
+        "/data/milai-experiments/20261111-scalable-evidence/op-36k-v1/manifest.json"
+      ],
+      "finding": "3202/10070/36150fitstates;384/721/1000familyclusters,1004nativegroupsatlargest;rawunknowns retained,finalremainingunknown35362. Parent10070prefix retained. ActualSource/reachedstates andfullbindings, reference-supervision scope explicit.",
+      "limits": "Scalealsoaddsdomains/conditions;notpureN. FastDEV128/full480 smallerthanrecommendedlargefastpanel; only278labels28labelledfamilies. NoindependentSourceinflation."
+    },
+    {
+      "id": "M1_M1b_learning_curves_and_seeds",
+      "plan_sections": [
+        "8.3",
+        "9.M1",
+        "9.M1b",
+        "9.2",
+        "9.5",
+        "11.5"
+      ],
+      "state": "executed_no_stable_source_advantage",
+      "evidence": [
+        "/data/milai-experiments/20261111-scalable-evidence/s1-op36k-closed-curve-v1.json",
+        "/data/milai-experiments/20261111-scalable-evidence/s1-three-seed-final-paired-reference-comparison-v1.json",
+        "/data/milai-experiments/20261111-scalable-evidence/s1-all-closed-learning-curves-v1/curves.pdf"
+      ],
+      "finding": "3/10/36kscales through3passes;36k3390updates108450draws736843704tokens. All3matched3k-vsrepeatfinal303seedsclosed;Sourceavgdelta.00629CI[-.05208,.06101]. Mu retention and>8k stratareported.",
+      "limits": "Approxdrawmatching, notstrictFLOPs; seed/Sourceuncertaintyseparate. No peakcheckpointreplacingfrozenfinals."
+    },
+    {
+      "id": "C_S2_real_feedback_and_SFT",
+      "plan_sections": [
+        "0.3.3",
+        "7",
+        "8.S2",
+        "9.M2",
+        "14.batch2"
+      ],
+      "state": "executed_no_task_gain",
+      "evidence": [
+        "/data/milai-experiments/20261111-scalable-evidence/m2-first160-feedback-sft-data-v1/manifest.json",
+        "/data/milai-experiments/20261111-scalable-evidence/m2-first160-paired-closed-curves-v1.json",
+        "/data/milai-experiments/20261111-scalable-evidence/m2-first160-feedback-support-profile-v1.json",
+        "/data/milai-experiments/20261111-scalable-evidence/m2-first160-dev32-closed-comparison-v1/summary.json"
+      ],
+      "finding": "319actualcomparisonstates160TRAINsources/780packets;131knownfeedbackstates90sources vs201referenceSFTstates112sources,shared319replay,51updates1632draws. ActualDEV64/32Sources closed.",
+      "limits": "Notpureloss comparison, supportdiffers. Unknownsnotnegative; no mechanical2k-5kexpansion absentstableusefulness;781same-formatunstartedendpointsremainavailable, notexecutedclaims."
+    },
+    {
+      "id": "M4_S3_state_aggregation",
+      "plan_sections": [
+        "8.S3",
+        "9.M4",
+        "14.batch2"
+      ],
+      "state": "verified_one_round_with_local_transfer",
+      "evidence": [
+        "/data/milai-experiments/20261111-scalable-evidence/m4-dev32-closed-comparison-v1/summary.json",
+        "/data/milai-experiments/20261111-scalable-evidence/s3-first319-source-matched-state-data-v1/manifest.json",
+        "/data/milai-experiments/20261111-scalable-evidence/s3-first319-paired-closed-curves-v1.json",
+        "/data/milai-experiments/20261111-scalable-evidence/s3-first319-dev32-closed-comparison-v1/summary.json",
+        "/data/milai-experiments/20261111-scalable-evidence/qasper-confirmation96-source12-mechanism-v2.json"
+      ],
+      "finding": "Initialown-vsfixedcollectorcomparison andonepostS2source-matchedreferenceaggregationroundclosed. Own108unique vsold87+21repeats,23labelledfamilies/108sharedreplay/648draws/u21. NewSource12 actualcapabilitychain verified.",
+      "limits": "NoaggregateDEV/confirmation superiority; Source12onecase, seeduncertainty. Additionalroundsoptional, notusedtotuneconfirmation."
+    },
+    {
+      "id": "I2_delivery_and_budget_prototype",
+      "plan_sections": [
+        "0.3.4",
+        "9.M5",
+        "10.I2",
+        "14.batch0",
+        "17"
+      ],
+      "state": "executed_functional_prototype_no_unique_task_gain",
+      "evidence": [
+        "/data/milai-experiments/20261111-scalable-evidence/i2-dev8-comparison-v2",
+        "/data/milai-experiments/20261111-scalable-evidence/i2-budget-pair64-comparison-v1.json",
+        "/data/milai-experiments/20261111-scalable-evidence/i2-budget-operations-seed0-v3/run.json",
+        "/data/milai-experiments/20261111-scalable-evidence/i2-budget-v3-baseline-equivalence-v1.json"
+      ],
+      "finding": "Actualsame-acquired-poolHANDOFF training/budgetcontrol andHostcomparison. Final99updatefitclosed; a repaired-backtranslationwitness case remainsdescriptive becauseall8finalpacketsmatchtheall-deliverybaseline.",
+      "limits": "No uniqueconditional-learning oroverallHostgainclaimed; retainedfailures/baselineequivalence, no extraSourceaccess."
+    },
+    {
+      "id": "I1_remaining_evidence_query_prototype",
+      "plan_sections": [
+        "10.I1",
+        "10.7",
+        "17"
+      ],
+      "state": "executed_functional_repair_sparse_feedback",
+      "evidence": [
+        "/data/milai-experiments/20261111-scalable-evidence/m2-public-query-once-primary-closeout-v1.json",
+        "/data/milai-experiments/20261111-scalable-evidence/m2-public-query-once-matched112-v1.json",
+        "/data/milai-experiments/20261111-scalable-evidence/m2-public-train16-query-once-primary-semantic-v1"
+      ],
+      "finding": "Realpriorreceipts/K andknown-awarequerypreservation;129actualbranches/32states,96prespecifiedprimaryslots. Old/newinitial112shared95bindings,missing17executedundernewprotocol.",
+      "limits": "Only2known/0directionprimaryfeedback; no strongerfit/Hostclaim. Noquery-specificrules; defaultprotocolunchanged."
+    },
+    {
+      "id": "M6_I4_continuous_Source_View",
+      "plan_sections": [
+        "6.D",
+        "9.M6",
+        "10.I4",
+        "11.1"
+      ],
+      "state": "executed_no_continuous_task_gain",
+      "evidence": [
+        "/data/milai-experiments/20261111-scalable-evidence/m6-full16-continuous-comparison-v1.json",
+        "/data/milai-experiments/20261111-scalable-evidence/m6-adaptation-paired-closed-curves-v1.json",
+        "/data/milai-experiments/20261111-scalable-evidence/m6-adapted-full16-comparison-v1.json",
+        "/data/milai-experiments/20261111-scalable-evidence/m6-adapted-resource-quality-v1/summary.json",
+        "/data/milai-experiments/20261111-scalable-evidence/m6-target-update-opportunities-v2/summary.json"
+      ],
+      "finding": "Original80positionsplusmatchedadapted80/arm across16Sources and5requests, ownhistories. 63Source-reference TRAINstates vsmatchedreplay. Final17vs22complete;0C/31relevantupdatesboth. Actualcapture242/242;Hostinvocationopportunities4vs2.",
+      "limits": "Generated/exposedSources; not200-500naturalindependenttrajectories. Honestactualavailability/scope, noartificialcounts orforcingREFRESH. CannotattributeallHost-bypassfailurestoJev."
+    },
+    {
+      "id": "M7_frozen_confirmation_and_repeat",
+      "plan_sections": [
+        "5.3",
+        "9.M7",
+        "11.4",
+        "11.5",
+        "14.batch4"
+      ],
+      "state": "verified_no_stable_aggregate_advantage",
+      "evidence": [
+        "/data/milai-experiments/20261111-scalable-evidence/qasper-new-confirmation96-v1-protocol.json",
+        "/data/milai-experiments/20261111-scalable-evidence/qasper-confirmation96-firsts-native-score-v1/summary.json",
+        "/data/milai-experiments/20261111-scalable-evidence/qasper-confirmation96-repeat-comparison-v2/summary.json",
+        "/data/milai-experiments/20261111-scalable-evidence/qasper-confirmation96-source-review-v1/reviews.json"
+      ],
+      "finding": "96study-untrainedpapers,fourpre-frozenmodels,384firstcalls370complete14fail plus32predesignedrepeats31complete1fail. FullrawnativeF1/Sourcepairedintervals/missingbounds and8Source-groundedreview closed.",
+      "limits": "Notpretrainingisolation/officialleaderboard. Rootnotindependent or guaranteedblind. BothmainCIsinclude0; no postconfirmationtuning/sampleexpansion."
+    },
+    {
+      "id": "section16_capability_chain",
+      "plan_sections": [
+        "16"
+      ],
+      "state": "verified_local_chain_scope_limited",
+      "evidence": [
+        "/data/milai-experiments/20261111-scalable-evidence/qasper-confirmation96-source12-mechanism-v2.json"
+      ],
+      "finding": "Own-vsoldS3 first3modelinputs/menuequal;READ8vsHANDOFF obtainscurrent-workFreebasewitness. Own/36kcorrectsupportedHostanswersinbothplanned draws, fixedmissingwitness,oldnonanswer/failure. Newstudy-disjointSource, genericpolicy/data treatment.",
+      "limits": "OnlyoneSource inpredeclaredpanel, notstablepopulation/seedadvantage/fullcostclaim/autonomousbusiness. Full96null/negative evidence retained."
+    },
+    {
+      "id": "external_native_task_chain",
+      "plan_sections": [
+        "11.2",
+        "14.batch4"
+      ],
+      "state": "verified_closed_with_retained_failures",
+      "evidence": [
+        "/data/milai-experiments/20261111-scalable-evidence/lme-small32-closed-comparison-v1/summary.json",
+        "/data/milai-experiments/20261111-scalable-evidence/lme-small32-s1u1130-scores-v1/metrics.json",
+        "/data/milai-experiments/20261111-scalable-evidence/lme-small32-s2feedbacku51-scores-v1/metrics.json"
+      ],
+      "finding": "Both32positions fullyattempted andnative-scoredwherepredictioncompleted;S1 7/29with3unscored,S2 5/30with2unscored,historicalfixed5/29with3unscored. Missingbounds/common-questionpairsreported, actualReaderparametersmatch; both32casearchivesclosed. No stabletransferclaim.",
+      "limits": "Twofull100trajectorysharedbanks;32questions not32independentSources/full451/newblind. ValidUNKNOWN native-scored; failuresunscored, neverregenerated."
+    },
+    {
+      "id": "cost_accounting_and_figures",
+      "plan_sections": [
+        "12",
+        "13"
+      ],
+      "state": "verified_measured_scopes_settled_unknowns_explicit",
+      "evidence": [
+        "/data/milai-experiments/20261111-scalable-evidence/closed-fit-resource-table-v2/summary.json",
+        "/data/milai-experiments/20261111-scalable-evidence/qasper-confirmation96-firsts-resources-v1.json",
+        "/data/milai-experiments/20261111-scalable-evidence/m6-adapted-resource-quality-v1/summary.json",
+        "/data/milai-experiments/20261111-scalable-evidence/phase36-closed-compute-v1.json",
+        "/data/milai-experiments/20261111-scalable-evidence/phase40-closed-preparation-compute-v1.json",
+        "/data/milai-experiments/20261111-scalable-evidence/phase44-closed-compute-v1.json",
+        "/data/milai-experiments/20261111-scalable-evidence/closed-study-cost-synthesis-v1.json"
+      ],
+      "finding": "Namedpending32measuredscopes settledonce5,067.006707CPU inoriginalledger; localmodelCPU deductedfromwholechildren. Nativefit/application/confirmation/Reader/score/archive knownscopetables andPNG/PDF/source-data saved. No activejob ormeasuredpendingstage fromthedeclaredinventory.",
+      "limits": "No complete-costadvantageclaim. Untimedauthor/test/parent/import andHost-serverGPU/energy/currencyunknown, notzero. NamedphaseCPU/components overlap andarenotaddedintoa fabricatedwhole-goaltotal."
+    },
+    {
+      "id": "conditional_options_not_automatic_requirements",
+      "plan_sections": [
+        "4.E5",
+        "8.S0",
+        "8.6",
+        "9.X1-X3",
+        "10.I3-I7",
+        "14"
+      ],
+      "state": "not_automatically_required",
+      "finding": "S0extra30k-100k,50koperationexpansion,2k-5kfeedbackexpansion,extraS3rounds,RL/LoRA/I5-I7areconditional/optionaldesigns. Actualsignals/availability do notauthorizepostconfirmationtuning; nofabricatedcompletion.",
+      "limits": "Do notclaimallhypotheseswon, alloptionimplemented, or natural200-500Sourcecoverage. Preservefinitecompletedmainline andlocalchain."
+    },
+    {
+      "id": "boundaries_and_final_report",
+      "plan_sections": [
+        "3",
+        "13",
+        "17",
+        "19"
+      ],
+      "state": "verified_with_declared_limits",
+      "finding": "Finalreport coversengineering,data,allmainfit/control/exploration/continuous/confirmation/externalresults,costcontainment,negativefindingsandlocalizednewSourcechain. Code91b3f707tested21cases;Ruff/packageDAG pass;6oldtoolsboundaryfindingsremainunchanged. No Product/API/permission/Canonical/service/push change.",
+      "limits": "Researchexecutioncompletion, notproductionreadiness orstableaggregatealgorithmicadvantage. HistoricaloldMem2Actprimary-score/archivework remainsprior-scope debt, notrewrittenasnewcompletion.",
+      "evidence": [
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/docs/MILAI_SCALABLE_EVIDENCE_RESEARCH_REPORT_20261112.md",
+        "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/docs/MILAI_SCALABLE_EVIDENCE_EXECUTION_20261111.md"
+      ]
+    }
+  ],
+  "remaining_required": [],
+  "no_sha_validation": true,
+  "final_report": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/docs/MILAI_SCALABLE_EVIDENCE_RESEARCH_REPORT_20261112.md",
+  "interpretation": "Completestheauthorizedfinite development/researchplanwithactualengineering/data/learning/exploration/taskchainsandoneboundednewSourcecapabilitychain. Doesnotredefine successasstablemeanadvantage: theaggregatehypotheseswere testedandremainunproved/negative. Conditionaldesignoptions andnaturaltrajectoryshortfall disclosed, notclaimedexecuted. No postconfirmationtuning.",
+  "final_checks": {
+    "both_external32_attempted": true,
+    "both_native_scoring_phases_closed": true,
+    "both32_case_archives_closed": true,
+    "Reader_parameters_matched": true,
+    "Source12_identical_input_divergence_rechecked": true,
+    "S3_lineage_confirmation_overlap_zero": true,
+    "last_settlement_matches_original_ledger": true,
+    "report_local_links_resolve": true,
+    "no_newcode_since_tested91b3f707": true
+  }
+}
