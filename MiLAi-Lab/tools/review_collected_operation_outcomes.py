@@ -79,7 +79,8 @@ def teacher_input(case: dict[str, Any], index: int) -> tuple[dict[str, Any], dic
     for key, branch in bindings.items():
         wire = json.loads(branch["readout_request"]["messages"][1]["content"])
         candidate = {"candidate": key, "delivered_evidence": wire["memory"]["evidence"],
-                     "answer_status": branch["readout_status"], "answer": branch["answer"]}
+                     "answer_status": branch["readout_status"],
+                     "answer": branch.get("answer_fields", branch["answer"])}
         if wire.get("known_evidence"):
             candidate["known_evidence"] = wire["known_evidence"]
         candidates.append(candidate)

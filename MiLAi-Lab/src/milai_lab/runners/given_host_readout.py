@@ -24,6 +24,34 @@ from milai_lab.runners.frozen_host_readout import execute_readout_request
 ANSWER_SCHEMA = {"type": "object", "properties": {"answer": {"type": "string"}},
                  "required": ["answer"], "additionalProperties": False}
 
+SEPARATE_ANSWER_SCHEMA = {
+    "type": "object", "additionalProperties": False,
+    "properties": {"answer": {"type": "string"}, "explanation": {"type": "string"},
+                   "evidence": {"type": "array", "items": {"type": "string"}}},
+    "required": ["answer", "explanation", "evidence"],
+}
+
+
+def separate_answer_fields(request: dict[str, Any]) -> dict[str, Any]:
+    """A declared experimental format, before inference; never extract a favorable answer.
+
+    The actual request, retrieved packet, K, model and capacity remain unchanged. Native
+    agreement reads the fixed answer field; semantic review sees all returned fields.
+    """
+    result = copy.deepcopy(request)
+    result["messages"][0]["content"] += (
+        "\nFor this readout use the supplied answer/explanation/evidence JSON schema. "
+        "Put the direct answer only in answer: for yes/no requests use Yes or No; for "
+        "names, quantities or lists supply the complete requested items. For reasoning or "
+        "comparison questions preserve every requested part. Put supporting explanation "
+        "in explanation and evidence quotations or citations in evidence, not in answer. "
+        "If the available evidence cannot establish an answer, state that briefly in answer "
+        "and explain the limitation separately. Do not infer missing facts."
+    )
+    result["response_format"] = {"type": "json_schema", "json_schema": {
+        "name": "answer_separate_v1", "schema": copy.deepcopy(SEPARATE_ANSWER_SCHEMA)}}
+    return result
+
 
 def validate_given_readout_request(request: dict[str, Any]) -> None:
     """A fresh packet-only reader cannot stand in for a Host with prior evidence."""

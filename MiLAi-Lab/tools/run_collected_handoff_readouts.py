@@ -19,22 +19,24 @@ from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
 from milai_lab.runners.given_host_readout import ANSWER_SCHEMA
 
 
-def parse_readout(response: dict[str, Any]) -> dict[str, Any]:
+def parse_readout(response: dict[str, Any], schema: dict[str, Any] | None = None) -> dict[str, Any]:
     choice = response["choices"][0]
     if choice["finish_reason"] != "stop":
         return {"status": "FAILED", "answer": None, "reason": choice["finish_reason"]}
     try:
         parsed = json.loads(choice["message"]["content"])
-        jsonschema.validate(parsed, ANSWER_SCHEMA)
+        jsonschema.validate(parsed, schema if schema is not None else ANSWER_SCHEMA)
     except (ValueError, TypeError, jsonschema.ValidationError) as error:
         return {"status": "FAILED", "answer": None, "reason": type(error).__name__}
-    return {"status": "COMPLETED", "answer": parsed["answer"]}
+    return {"status": "COMPLETED", "answer": parsed["answer"],
+            **({"answer_fields": parsed} if schema is not None and schema != ANSWER_SCHEMA else {})}
 
 
 def reusable_readout(
     case: dict[str, Any],
     branch: dict[str, Any],
     prior: list[tuple[Path, dict[str, Any], dict[str, Any]]],
+    *, share_identical_packets: bool = False,
 ) -> tuple[Path, dict[str, Any]] | None:
     """Reuse a closed first outcome only for the identical actual conditional Host wire."""
     for path, record, wire in prior:
@@ -42,7 +44,7 @@ def reusable_readout(
             record["status"] in {"COMPLETED", "FAILED"}
             and record["family"] == case["family"]
             and record["event_id"] == case["event_id"]
-            and record["action"] == branch["action"]
+            and (share_identical_packets or record["action"] == branch["action"])
             and wire == branch["readout_request"]
         ):
             return path, record
@@ -54,6 +56,9 @@ def main() -> None:
     parser.add_argument("prepared", type=Path)
     parser.add_argument("output", type=Path)
     parser.add_argument("--compute-phase", required=True)
+    parser.add_argument("--share-identical-packets", action="store_true",
+                        help="Share the first identical full Host wire within the same event, "
+                             "including different actually executed action bindings")
     parser.add_argument(
         "--reuse-readouts",
         type=Path,
@@ -65,6 +70,13 @@ def main() -> None:
         raise ValueError("Finish the actual finite decisions and packet execution first")
     settings = read_json(Path(prepared["config"]))["entrypoints"]["functional"]
     cases = read_json(args.prepared / "cases.json")
+    unique_wires = 0
+    for case in cases:
+        wires: list[dict[str, Any]] = []
+        for branch in case["branches"]:
+            if branch["readout_request"] not in wires:
+                wires.append(branch["readout_request"])
+        unique_wires += len(wires)
     prior = []
     if args.reuse_readouts:
         if read_json(args.reuse_readouts / "run.json")["status"] not in {
@@ -84,12 +96,14 @@ def main() -> None:
         "planned_families": len({case["family"] for case in cases}),
         "planned_states": len(cases),
         "planned_unique_packets": sum(len(case["branches"]) for case in cases),
+        "planned_unique_host_wires": unique_wires,
         "planned_policy_positions": sum(len(case["choices"]) for case in cases),
         "closed_readouts": 0,
         "failed_readouts": 0,
         "chat_invocations": 0,
         "reused_readouts": 0,
         "reuse_source": str(args.reuse_readouts.resolve()) if args.reuse_readouts else None,
+        "share_identical_packets": args.share_identical_packets,
         "response_callbacks": 0,
         "error_callbacks": 0,
         "automatic_retry": False,
@@ -153,12 +167,16 @@ def main() -> None:
                         try:
                             if not branch["execution_result"]["ok"]:
                                 record.update(status="NOT_EXECUTED", reason="HANDOFF_FAILED")
-                            elif (reused := reusable_readout(case, branch, prior)) is not None:
+                            elif (reused := reusable_readout(
+                                    case, branch, prior,
+                                    share_identical_packets=args.share_identical_packets)
+                                  ) is not None:
                                 previous_path, previous_record = reused
                                 record.update(
                                     {
                                         key: previous_record[key]
-                                        for key in ("status", "answer", "reason", "error", "usage")
+                                        for key in ("status", "answer", "answer_fields", "reason",
+                                                    "error", "usage")
                                         if key in previous_record
                                     }
                                 )
@@ -190,7 +208,9 @@ def main() -> None:
                                     ],
                                 )
                                 write_json(destination / "response.json", response)
-                                record.update(parse_readout(response), usage=response.get("usage"))
+                                record.update(parse_readout(response,
+                                    request["response_format"]["json_schema"]["schema"]),
+                                    usage=response.get("usage"))
                         except BaseException as error:
                             record.update(
                                 status="FAILED", reason=type(error).__name__, error=str(error)
@@ -202,6 +222,9 @@ def main() -> None:
                                 cpu_seconds=time.process_time() - process,
                             )
                             write_json(path, record)
+                        if (args.share_identical_packets
+                                and record["status"] in {"COMPLETED", "FAILED"}):
+                            prior.append((path, record, request))
                         for policy in branch["policies"]:
                             paths.setdefault(policy, {})[case.get("case_key", case["family"])] = (
                                 str(path.resolve())

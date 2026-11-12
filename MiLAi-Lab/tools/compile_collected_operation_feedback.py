@@ -150,6 +150,7 @@ def main() -> None:
                 "readout": str(path.resolve()),
                 "readout_status": record["status"],
                 "answer": record["answer"],
+                **({"answer_fields": record["answer_fields"]} if "answer_fields" in record else {}),
                 "usage": record.get("usage"),
                 "reference_proof_complete": branch["reference_proof_complete"]
                 if branch["execution_result"]["ok"]
