@@ -1,6 +1,6 @@
 # ACTIVE Reader utility v3: phase18 independent cost scopes (2026-11-13)
 
-Goal ACTIVE/incomplete. Current milestone PROGRESS:81independentcostscopes reconciled;10264newactiveweakstates. Full user v3 objective remains.
+Goal ACTIVE/incomplete. Current milestone PROGRESS:shard3[64,80]scoresclosed;10632newactiveweakstates. Full user v3 objective remains.
 R=/data/milai-experiments/20261112-reader-utility.
 Read data/manifests/reader-utility-progress-20261112-v3.json and
 docs/MILAI_READER_UTILITY_EXECUTION_20261112.md. KEEP ANALYSIS SHORT; act on files/processes.
@@ -118,7 +118,9 @@ Shard3[32,48] scoreCLOSED324activeweak,cumulativeNew10045;628states2398packets,
 1244scored1154unscored1736references,15active rawfamilies. InventoryatR; notformal10kselected.
 Shard3[48,64] scoreCLOSED219activeweak,cumulativeNew10264;396states1516packets,
 845scored671unscored1434references,13active rawfamilies. InventoryatR.
-GPU2queue nowshard3[64,80] childPID2982400; previousscorePID2953468maywaitnativeledger.
+Shard3[64,80] scoreCLOSED368activeweak,cumulativeNew10632;707states2698packets,
+1419scored1279unscored3821references,16active rawfamilies. InventoryatR.
+GPU2queue nowshard3[80,96] childPID3024996; previousscorePID2982400maywaitnativeledger.
 ALL20branchinputs CLOSED:22613actualstates85907packets,44037eligible native-refpackets;
 283rawfamilies279groups, no duplicateeventIDs orbetween-blockrawfamily overlap.
 expansion-all-branch-input-inventory-v1.json; inputrow/packetcountsactuallyread, notonlymanifest.
