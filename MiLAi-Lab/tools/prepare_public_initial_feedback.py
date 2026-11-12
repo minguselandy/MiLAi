@@ -95,9 +95,10 @@ def main() -> None:
         parser.error("Snapshot interval must be positive")
     if args.nomination_source and args.known_query_only:
         parser.error("Choose frozen nominations or the known-query extension, not both")
-    if args.terminal_deliveries and (args.nomination_source or args.known_query_only
-                                    or args.target_step or args.continuation_steps):
-        parser.error("Terminal deliveries require --continuation-steps 0 and no other selection")
+    if args.terminal_deliveries and (args.known_query_only or args.target_step
+                                    or args.continuation_steps):
+        parser.error("Terminal deliveries require --continuation-steps 0 "
+                     "and terminal state selection")
     nominations = (
         {c["event_id"]: c for c in read_json(args.nomination_source / "cases.json")}
         if args.nomination_source
@@ -253,7 +254,22 @@ def main() -> None:
                     projected = project_operation_payload(row, "shared_actions")
                     assert pred["input"] == {k: projected[k] for k in ["state", "questions"]}
                     rows.append(row)
-                    if args.terminal_deliveries:
+                    if args.nomination_source:
+                        frozen = nominations[event_id]
+                        if (
+                            frozen["before"] != event["before"]
+                            or frozen["actions"] != event["actions"]
+                        ):
+                            raise ValueError("Frozen nomination belongs to a different before/menu")
+                        choices = copy.deepcopy(frozen["choices"])
+                        if not set(choices.values()) <= {a["id"] for a in event["actions"]}:
+                            raise ValueError("Frozen nomination has an unavailable action")
+                        if args.terminal_deliveries and any(
+                            a["kind"] != "HANDOFF" for a in event["actions"]
+                            if a["id"] in choices.values()
+                        ):
+                            raise ValueError("Conditional delivery cannot nominate acquisition")
+                    elif args.terminal_deliveries:
                         delivery_actions = [MemoryAction(**a) for a in event["actions"]
                                             if a["kind"] == "HANDOFF"]
                         choices = {"collector_delivery": event["selected"],
@@ -266,16 +282,6 @@ def main() -> None:
                         choices.update(complementary_deliveries(delivery_actions, tuple(
                             item["item_index"] for item in event["before"]["observed_materials"]
                             if item["selected"])))
-                    elif args.nomination_source:
-                        frozen = nominations[event_id]
-                        if (
-                            frozen["before"] != event["before"]
-                            or frozen["actions"] != event["actions"]
-                        ):
-                            raise ValueError("Frozen nomination belongs to a different before/menu")
-                        choices = copy.deepcopy(frozen["choices"])
-                        if not set(choices.values()) <= {a["id"] for a in event["actions"]}:
-                            raise ValueError("Frozen nomination has an unavailable action")
                     elif args.known_query_only:
                         searches = [
                             a

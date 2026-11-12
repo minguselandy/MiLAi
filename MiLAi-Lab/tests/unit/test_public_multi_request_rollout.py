@@ -112,3 +112,22 @@ def test_all_requests_reuse_original_k_and_preserve_context(tmp_path, monkeypatc
                 assert 'HIDDEN_BETA_PREMISE' not in json.dumps(branch['packet'])
     rows = [json.loads(line) for line in (terminal / 'states.jsonl').open()]
     assert {r['metadata']['split'] for r in rows} == {split}
+    # New saved-model nominations may choose a different legal delivery without
+    # inventing a new state or changing this conditional test into acquisition.
+    nominations = tmp_path / 'nominations'
+    nominations.mkdir()
+    for case in cases:
+        handoffs = [a for a in case['actions'] if a['kind'] == 'HANDOFF']
+        case['choices']['new_saved_delivery'] = handoffs[-1]['id']
+    write_json(nominations / 'cases.json', cases)
+    selected = tmp_path / 'new-selected-deliveries'
+    monkeypatch.setattr(sys, 'argv', ['prepare', str(output), str(selected), '--families', '1',
+        '--requests-per-family', '0', '--terminal-deliveries', '--continuation-steps', '0',
+        '--split', split, '--nomination-source', str(nominations)])
+    preparation.main()
+    new_cases = json.loads((selected / 'cases.json').read_text())
+    for before, after in zip(cases, new_cases, strict=True):
+        assert before['before'] == after['before'] and before['actions'] == after['actions']
+        branch = next(b for b in after['branches'] if 'new_saved_delivery' in b['policies'])
+        assert branch['action']['id'] == before['choices']['new_saved_delivery']
+        assert branch['actual_before_and_full_menu_equal']
