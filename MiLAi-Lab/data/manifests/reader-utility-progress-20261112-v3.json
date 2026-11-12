@@ -172,13 +172,13 @@
   "semantic_Q": {
     "planned_review_opportunities": 600,
     "allocation": "/data/milai-experiments/20261112-reader-utility/formal-main3k-uq-protocol-v1.json",
-    "reviewed_opportunities_closed": 394,
-    "known_delivery_states_closed": 215,
-    "known_answer_states_closed": 190,
+    "reviewed_opportunities_closed": 462,
+    "known_delivery_states_closed": 253,
+    "known_answer_states_closed": 222,
     "new42_labels": "/data/milai-experiments/20261112-reader-utility/main3k-new64to128-semantic42-labels-v2/manifest.json",
     "new42_known_delivery": 20,
     "new42_known_answer": 20,
-    "remaining": "206 preselected opportunities remain unclosed as labels: current later68 teacher, then original-new256 semantic138 readouts/review. Final Q only after all600. Initial first68 sampling used older BF16; later blocks FP32/deadband. No failed-first repair.",
+    "remaining": "138 preselected opportunities remain: final original-new256 semantic138 first readouts and review. Compile one actual-known Q pool only after all600 close; initial first68 sampling was older BF16 and later blocks FP32/deadband. Preserve all failed firsts and unknown labels.",
     "all600_opportunities_selected": true,
     "finite_continuation_owner": "/data/milai-experiments/20261112-reader-utility/finish_selected_q_blocks_v2-owner.json",
     "finite_continuation_pid": 1325952,
@@ -203,7 +203,7 @@
       "reused_readouts": 3,
       "automatic_retry": false
     },
-    "current_stage": "main3k-original-replay128-semantic68 teacher",
+    "current_stage": "main3k-original-new256-semantic138 readouts",
     "fit_and_DEV_owner": "/data/milai-experiments/20261112-reader-utility/formal-Q-fit-and-dev-owner-v1.json",
     "fit_and_DEV_process": {
       "pid": 2573854,
@@ -211,7 +211,7 @@
       "status_at_launch": "WAITING_FOR_Q_DATA_AND_PLANS",
       "fits_launched_at_observation": 0
     },
-    "closed_labels_inventory": "/data/milai-experiments/20261112-reader-utility/semantic-Q-closed394-inventory-v1.json",
+    "closed_labels_inventory": "/data/milai-experiments/20261112-reader-utility/semantic-Q-closed462-inventory-v1.json",
     "closed133_labels": {
       "manifest": "/data/milai-experiments/20261112-reader-utility/main3k-additional203-semantic133-labels-v2/manifest.json",
       "known_delivery": 72,
@@ -229,7 +229,17 @@
       "chat_invocations": 227,
       "reused_readouts": 1,
       "automatic_retry": false
-    }
+    },
+    "closed_later68_labels": {
+      "manifest": "/data/milai-experiments/20261112-reader-utility/main3k-original-replay128-semantic68-labels-v2/manifest.json",
+      "known_delivery": 38,
+      "known_answer": 32,
+      "directional_delivery": 28,
+      "directional_answer": 18,
+      "masked_teacher_candidates": 42,
+      "unresolved_review_states": 0
+    },
+    "active_final138": "/data/milai-experiments/20261112-reader-utility/main3k-original-new256-semantic138-readouts-v2/run.json"
   },
   "K_diagnostic": {
     "input": "/data/milai-experiments/20261112-reader-utility/known-evidence-train16-input-v1/run.json",
@@ -292,7 +302,7 @@
       "/data/milai-experiments/20261112-reader-utility/expansion-shard0-families16to32-preparation-owner-v1.json",
       "/data/milai-experiments/20261112-reader-utility/expansion-shard0-families32to48-preparation-owner-v1.json"
     ],
-    "closed_additional_active_states": 9721,
+    "closed_additional_active_states": 10045,
     "available17_compilation": "/data/milai-experiments/20261112-reader-utility/expansion-available17-data-v1/run.json",
     "scale_comparison_preview": "/data/milai-experiments/20261112-reader-utility/scale-available17-preview-v1/run.json",
     "common_input_observation": "/data/milai-experiments/20261112-reader-utility/scale-available17-preview-v1/common-input-observation.json",
@@ -304,7 +314,7 @@
     "closed_active_raw_families": 58,
     "remaining_active_new_state_target": 0,
     "closed_collection_inventory": "/data/milai-experiments/20261112-reader-utility/expansion-closed-collection-inventory-v3.json",
-    "latest_closed_score_inventory": "/data/milai-experiments/20261112-reader-utility/expansion-shard3-families16to32-closed-inventory-v1.json",
+    "latest_closed_score_inventory": "/data/milai-experiments/20261112-reader-utility/expansion-shard3-families32to48-closed-inventory-v1.json",
     "closed_inventory_scope": "closed_inventory, closed_opportunity_states, closed_raw_families and closed_active_raw_families describe pilot plus shard0 only; latest_closed_score_inventory and closed_additional_active_states include later shard1 blocks.",
     "closed_collection_counts": {
       "raw_source_families": 283,
@@ -315,7 +325,7 @@
       "actual_forward_input_tokens": 184439379,
       "Host_calls": 0
     },
-    "available_states_above_new_target": 3077,
+    "available_states_above_new_target": 3401,
     "formal_sampling_status": "NOT_SELECTED: first availability exceeds6644 new states, but final selection waits all planned blocks and dependency-group-balanced sampling; E2 fits still require Q/actualDEV signal assessment.",
     "formal_data_owner": "/data/milai-experiments/20261112-reader-utility/formal-scale-data-owner-v1.json",
     "formal_data_process": {
@@ -390,7 +400,7 @@
     "Prepare fixed train diagnostic probe if useful; do not repeatedly evaluate all7452training rows solely for bookkeeping.",
     "New confirmation and autonomous/natural continuous View application lines remain required; no overall completion claim."
   ],
-  "phase": 16,
+  "phase": 17,
   "signal_diagnostic": {
     "canonical110": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-vs-semantic110-diagnostic-v1.json",
     "author_spots": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-semantic-disagreement-spots-v1.json",
