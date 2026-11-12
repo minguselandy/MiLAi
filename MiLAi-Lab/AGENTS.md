@@ -1,6 +1,6 @@
-# ACTIVE Reader utility v3: phase14 formal scale data continuation (2026-11-13)
+# ACTIVE Reader utility v3: phase15 all branch inputs closed (2026-11-13)
 
-Goal ACTIVE/incomplete. Current milestone PROGRESS: all5publiccollections closed,283rawfamilies279groups3418native. Full user v3 objective remains.
+Goal ACTIVE/incomplete. Current milestone PROGRESS: all20branchinputs closed andlater68Reader closed; teacheractive. Full user v3 objective remains.
 R=/data/milai-experiments/20261112-reader-utility.
 Read data/manifests/reader-utility-progress-20261112-v3.json and
 docs/MILAI_READER_UTILITY_EXECUTION_20261112.md. KEEP ANALYSIS SHORT; act on files/processes.
@@ -48,8 +48,9 @@ semantic-Q-closed394-inventory-v1.json.133labels72delivery61answer(57/45directio
 59Reader CLOSED195firsts15failed;59Teacher1unresolved;38delivery34answer targets(28/21directional).
 92reader CLOSED308firsts21failed;92labels48delivery43answer,36/27directional.
 133Reader CLOSED451firsts25failed,448chatcalls+3exactwirereuses; teacherPID2495693closed.
-LIVE finish_selected_q_blocks_v2.py PID1325952/session22201 currentlylater68ReaderPID2639401,
-228plannedpackets,then138; all600selectedbeforeoutcomes. Revalidateowner forlatestchild.
+Later68Reader CLOSED228firsts20failed,227chatcalls+1exactwirereuse; PID2639401exited.
+LIVE finish_selected_q_blocks_v2.py PID1325952/session22201 currentlylater68teacherPID2887716,
+then138firsts/review; all600selectedbeforeoutcomes. Closedlabels still394; revalidateowner.
 First68samplingoldBF16, latercanonicalFP32. Failedfirsts/maskedquotes notrerolled.
 Qdataadapterprepare_formal_quality_data_v1.py handlesCOMPLETED_WITH_UNRESOLVED; preview110 has
 57quality53sources+4096replay,171+171exposures11updates,NOFIT. FinalQonlyafter600closed,
@@ -109,13 +110,15 @@ Shard2[16,32] scoreCLOSED1362activeweak,cumulativeNew8109;2671states10159packets
 Shard2[32,38] scoreCLOSED569activeweak,cumulativeNew8678;1142states4334packets,
 2180scored2154unscored2550references,6active rawfamilies. Entireshard2=3004active/5943opportunities.
 GPU2queue nowshard3[0,16] childPID2801459; previousscorePID2742712maywaitnativeledger.
-CPUprepare nowshard3[64,80]; revalidateowners forcurrentstep.
+ALL20branchinputs CLOSED:22613actualstates85907packets,44037eligible native-refpackets;
+283rawfamilies279groups, no duplicateeventIDs orbetween-blockrawfamily overlap.
+expansion-all-branch-input-inventory-v1.json; inputrow/packetcountsactuallyread, notonlymanifest.
 48to59oldscorePID2105067 completedscoring, maywaitnativeledger; do notrestart.
 LIVE remaining-expansion-scoring-owner-v1 PID2039219/session73793 runs
 16remainingblocks seriallyGPU2. ClosednativeScoremaywaitledgerafterweightsrelease; driverreaps
 pendingbookkeeperswithoutdoublebilling. ChecksactualGPUused<=8192MiB, Qfitprioritybeforeeachblock.
 DO NOT manually launchduplicateGPU2scoring oncecurrentcloses; thisqueueownsnextschedule.
-LIVE remaining-expansion-preparation-owner-v1 PID1904773/session44401,16finiteblocks:
+CLOSED remaining-expansion-preparation-owner-v1 PID1904773/session44401,16finiteblocks:
 shard0[48,59], shard1(58)/2(38)/3(127) in16familyprefixes. Revalidatecurrentblock.
 First16owner/session33205,16to32owner/session25294,32to48owner/session13620 allCLOSED.
 GPU3producerandCPUpreparerretainonlyactualclosedfamilyprefixes; no fabricatedunreachedstates.
@@ -202,11 +205,10 @@ Storagephase10compressed17additionalclosedincrementalstreams, directbyteverifica
 phase10-closed-branch-stream-compression-v1.json. Finalcases/states andfirstoutcomesunchanged.
 Storagephase12 compressed14additionalclosedincrementalstreams, exactdecompressedbytecompare,
 freed1.51GiB. phase12-closed-branch-stream-compression-v1.json; finals/firstsunchanged.
-LIVE remaining-closed-stream-compression-owner-v1 PID2706424/session50739,
-script compress_remaining_closed_streams_v1.py: finitecompanion untilpreparationownercloses.
-CompressnewCOMPLETEDincrementalstreams only, directdecompressedbytecomparisonbeforeunlink,
-finalcases/states retained. Initial9streamsfreed1.16GiB; revalidateownerforlatestcount.
-DO NOT runanothercompressor concurrently. Monitorincludesstorageowner. CPUcostpending, notnativebilled.
+CLOSED remaining-closed-stream-compression-owner-v1 PID2706424/session50739,
+script compress_remaining_closed_streams_v1.py exitedwithpreparationclosure:38streams2.45GiBfreed.
+Directdecompressedbytecomparisonbeforeunlink, finalcases/states retained; archivesverifiedpresent.
+Noactivecompressor remains. Monitorincludesclosedstorageowner. CPUcostpending, notnativebilled.
 Currentgoalremaining:Q+actualDEVHost,10k/repeat,ownstate,decisiveseeds,newconfirmation,
 autonomous/naturalcontinuousView/update,cost/statistical/mechanism synthesis. Notcomplete.
 Priorv2below CLOSED/HISTORICAL, notqueues/reusablefreshconfirmation.

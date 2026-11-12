@@ -178,7 +178,7 @@
     "new42_labels": "/data/milai-experiments/20261112-reader-utility/main3k-new64to128-semantic42-labels-v2/manifest.json",
     "new42_known_delivery": 20,
     "new42_known_answer": 20,
-    "remaining": "206 preselected review opportunities remain: current original-replay128 semantic68 then original-new256 semantic138. The first initial68 opportunities used older BF16 sampling; these later blocks use declared FP32/deadband. Compile one actual-known Q pool only after all600 close; preserve failed firsts and unknown labels.",
+    "remaining": "206 preselected opportunities remain unclosed as labels: current later68 teacher, then original-new256 semantic138 readouts/review. Final Q only after all600. Initial first68 sampling used older BF16; later blocks FP32/deadband. No failed-first repair.",
     "all600_opportunities_selected": true,
     "finite_continuation_owner": "/data/milai-experiments/20261112-reader-utility/finish_selected_q_blocks_v2-owner.json",
     "finite_continuation_pid": 1325952,
@@ -203,7 +203,7 @@
       "reused_readouts": 3,
       "automatic_retry": false
     },
-    "current_stage": "main3k-original-replay128-semantic68 readouts",
+    "current_stage": "main3k-original-replay128-semantic68 teacher",
     "fit_and_DEV_owner": "/data/milai-experiments/20261112-reader-utility/formal-Q-fit-and-dev-owner-v1.json",
     "fit_and_DEV_process": {
       "pid": 2573854,
@@ -221,7 +221,15 @@
       "masked_teacher_candidates": 92,
       "unresolved_review_states": 0
     },
-    "active_later68": "/data/milai-experiments/20261112-reader-utility/main3k-original-replay128-semantic68-readouts-v2/run.json"
+    "active_later68": "/data/milai-experiments/20261112-reader-utility/main3k-original-replay128-semantic68-readouts-v2/run.json",
+    "closed_later68_readouts": {
+      "status": "COMPLETED_WITH_FAILURES",
+      "closed_readouts": 228,
+      "failed_readouts": 20,
+      "chat_invocations": 227,
+      "reused_readouts": 1,
+      "automatic_retry": false
+    }
   },
   "K_diagnostic": {
     "input": "/data/milai-experiments/20261112-reader-utility/known-evidence-train16-input-v1/run.json",
@@ -326,6 +334,16 @@
       "active_states": 3004,
       "raw_families": 38,
       "active_raw_families": 37
+    },
+    "branch_preparation_status": "ALL_TWENTY_BRANCH_INPUTS_CLOSED",
+    "all_branch_input_inventory": "/data/milai-experiments/20261112-reader-utility/expansion-all-branch-input-inventory-v1.json",
+    "all_branch_input_counts": {
+      "opportunity_states": 22613,
+      "packets": 85907,
+      "packets_with_native_references_from_export": 44037,
+      "raw_families": 283,
+      "known_dependency_groups": 279,
+      "duplicate_event_ids": 0
     }
   },
   "application_source_inventory": {
@@ -363,7 +381,7 @@
     "Prepare fixed train diagnostic probe if useful; do not repeatedly evaluate all7452training rows solely for bookkeeping.",
     "New confirmation and autonomous/natural continuous View application lines remain required; no overall completion claim."
   ],
-  "phase": 14,
+  "phase": 15,
   "signal_diagnostic": {
     "canonical110": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-vs-semantic110-diagnostic-v1.json",
     "author_spots": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-semantic-disagreement-spots-v1.json",
@@ -579,7 +597,10 @@
     "session": 50739,
     "initial_closed_streams": 9,
     "initial_freed_allocated_bytes": 1247105024,
-    "scope": "Finite companion to remaining preparation queue. Only completed incremental streams; exact restored byte comparison, final cases/states retained. Stops when preparation owner completes or stops. Native first outcomes and models unchanged; no SHA."
+    "scope": "Finite companion to remaining preparation queue. Only completed incremental streams; exact restored byte comparison, final cases/states retained. Stops when preparation owner completes or stops. Native first outcomes and models unchanged; no SHA.",
+    "final_status": "COMPLETED",
+    "final_closed_streams": 38,
+    "final_freed_allocated_bytes": 2630381568
   },
   "phase14_validation": {
     "driver_syntax": "passed",
