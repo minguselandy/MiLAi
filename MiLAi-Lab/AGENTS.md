@@ -1,6 +1,6 @@
 # ACTIVE Reader utility v3: phase12 finite Q continuation (2026-11-13)
 
-Goal ACTIVE/incomplete. Current milestone PROGRESS: finite Q fit/DEV/readout/review owners launched in dependency wait. Full user v3 objective remains.
+Goal ACTIVE/incomplete. Current milestone PROGRESS:133review+labels closed, cumulative394opportunities215delivery190answer. Full user v3 objective remains.
 R=/data/milai-experiments/20261112-reader-utility.
 Read data/manifests/reader-utility-progress-20261112-v3.json and
 docs/MILAI_READER_UTILITY_EXECUTION_20261112.md. KEEP ANALYSIS SHORT; act on files/processes.
@@ -42,12 +42,14 @@ author12sourcepositions0,8,...88(allmethods/failures). bbf42295groupsactualendpo
 sameHANDOFFids cannotmerge differenttrajectories; nofictionalsharedbefore. Reviewnonindependent.
 Conditionalold32h2 CLOSED64states206packets usesold3k/u101collector,separatefromactual96tasks.
 
-Q annotations: closed261opportunities(20+48+42+92+59),143delivery-known129answer-known.
+Q annotations: closed394opportunities(20+48+42+92+59+133),215delivery-known190answer-known.
+semantic-Q-closed394-inventory-v1.json.133labels72delivery61answer(57/45directional);
+133teacherclosed0unresolvedstates,92maskedcandidates retainedunknown (not92states).
 59Reader CLOSED195firsts15failed;59Teacher1unresolved;38delivery34answer targets(28/21directional).
 92reader CLOSED308firsts21failed;92labels48delivery43answer,36/27directional.
-133Reader CLOSED451firsts25failed,448chatcalls+3exactwirereuses; teacherPID2495693 active.
-LIVE finish_selected_q_blocks_v2.py PID1325952/session22201 currently133teacher,
-then68/138; all600selectedbeforeoutcomes. Revalidateowner forlatestchild.
+133Reader CLOSED451firsts25failed,448chatcalls+3exactwirereuses; teacherPID2495693closed.
+LIVE finish_selected_q_blocks_v2.py PID1325952/session22201 currentlylater68ReaderPID2639401,
+228plannedpackets,then138; all600selectedbeforeoutcomes. Revalidateowner forlatestchild.
 First68samplingoldBF16, latercanonicalFP32. Failedfirsts/maskedquotes notrerolled.
 Qdataadapterprepare_formal_quality_data_v1.py handlesCOMPLETED_WITH_UNRESOLVED; preview110 has
 57quality53sources+4096replay,171+171exposures11updates,NOFIT. FinalQonlyafter600closed,
@@ -99,7 +101,8 @@ Shard2[0,16] scoreCLOSED1073activeweak,cumulativeNew6747 (103above6644target).
 Inventoryexpansion-shard2-families0to16-closed-inventory-v1.json; 2130states8133packets,
 4128scored4005unknown4402reference sequences,15active rawfamilies. Noformal10ksampling/fit yet;
 waitallplannedblocks+dependencybalancedselection andQ/actualDEVassessment.
-GPU2queue waitsnextpreparedshard2[16,32]; previousscorePID2489433maywaitnativeledger, revalidate.
+GPU2queue scores shard2[16,32] childPID2603228; previousscorePID2489433maywaitnativeledger.
+CPUprepare nowshard2[32,38]; revalidateowners forcurrentstep.
 48to59oldscorePID2105067 completedscoring, maywaitnativeledger; do notrestart.
 LIVE remaining-expansion-scoring-owner-v1 PID2039219/session73793 runs
 16remainingblocks seriallyGPU2. ClosednativeScoremaywaitledgerafterweightsrelease; driverreaps

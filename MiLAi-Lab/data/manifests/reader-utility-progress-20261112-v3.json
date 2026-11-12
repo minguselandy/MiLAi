@@ -171,13 +171,13 @@
   "semantic_Q": {
     "planned_review_opportunities": 600,
     "allocation": "/data/milai-experiments/20261112-reader-utility/formal-main3k-uq-protocol-v1.json",
-    "reviewed_opportunities_closed": 261,
-    "known_delivery_states_closed": 143,
-    "known_answer_states_closed": 129,
+    "reviewed_opportunities_closed": 394,
+    "known_delivery_states_closed": 215,
+    "known_answer_states_closed": 190,
     "new42_labels": "/data/milai-experiments/20261112-reader-utility/main3k-new64to128-semantic42-labels-v2/manifest.json",
     "new42_known_delivery": 20,
     "new42_known_answer": 20,
-    "remaining": "339 review opportunities remain after 261 closed labels: 133 currently in teacher review, followed by preselected 68 and 138. All 600 use one actual-known Q pool for both fixed U endpoints. First68 sampling used older BF16 scores; later blocks use FP32/deadband. No first-result repair.",
+    "remaining": "206 preselected review opportunities remain: current original-replay128 semantic68 then original-new256 semantic138. The first initial68 opportunities used older BF16 sampling; these later blocks use declared FP32/deadband. Compile one actual-known Q pool only after all600 close; preserve failed firsts and unknown labels.",
     "all600_opportunities_selected": true,
     "finite_continuation_owner": "/data/milai-experiments/20261112-reader-utility/finish_selected_q_blocks_v2-owner.json",
     "finite_continuation_pid": 1325952,
@@ -202,14 +202,25 @@
       "reused_readouts": 3,
       "automatic_retry": false
     },
-    "current_stage": "main3k-additional203-semantic133 teacher review",
+    "current_stage": "main3k-original-replay128-semantic68 readouts",
     "fit_and_DEV_owner": "/data/milai-experiments/20261112-reader-utility/formal-Q-fit-and-dev-owner-v1.json",
     "fit_and_DEV_process": {
       "pid": 2573854,
       "session": 39922,
       "status_at_launch": "WAITING_FOR_Q_DATA_AND_PLANS",
       "fits_launched_at_observation": 0
-    }
+    },
+    "closed_labels_inventory": "/data/milai-experiments/20261112-reader-utility/semantic-Q-closed394-inventory-v1.json",
+    "closed133_labels": {
+      "manifest": "/data/milai-experiments/20261112-reader-utility/main3k-additional203-semantic133-labels-v2/manifest.json",
+      "known_delivery": 72,
+      "known_answer": 61,
+      "directional_delivery": 57,
+      "directional_answer": 45,
+      "masked_teacher_candidates": 92,
+      "unresolved_review_states": 0
+    },
+    "active_later68": "/data/milai-experiments/20261112-reader-utility/main3k-original-replay128-semantic68-readouts-v2/run.json"
   },
   "K_diagnostic": {
     "input": "/data/milai-experiments/20261112-reader-utility/known-evidence-train16-input-v1/run.json",
