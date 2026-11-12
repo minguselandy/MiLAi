@@ -10,18 +10,35 @@ from typing import Any
 from milai_lab.harness.artifact_io import read_json, write_json
 
 
-def generation_stage(event: dict[str, Any]) -> str:
+def generation_stage(event: dict[str, Any], transport: str | None = None) -> str:
     schema = event["request"].get("response_format", {}).get("json_schema", {}).get("schema", {})
     if "nodes" in schema.get("properties", {}):
         return "view_generation"
     if "choice" in schema.get("properties", {}):
         return "control_generation"
-    choice = event["receipt"]["choices"][0]
-    if choice["finish_reason"] == "length":
+    choices = event["receipt"].get("choices")
+    if not isinstance(choices, list) or not choices or not isinstance(choices[0], dict):
+        return "unparsed_host_response"
+    choice = choices[0]
+    if choice.get("finish_reason") == "length":
         return "host_incomplete"
+    native = transport == "native" if transport is not None else bool(event["request"].get("tools"))
+    if native:
+        message = choice.get("message")
+        if not isinstance(message, dict):
+            return "unparsed_host_response"
+        calls = message.get("tool_calls")
+        if calls and choice.get("finish_reason") == "tool_calls":
+            return "host_request"
+        if (not calls and choice.get("finish_reason") == "stop"
+                and isinstance(message.get("content"), str) and message["content"].strip()):
+            return "host_completion"
+        return "unparsed_host_response"
     try:
         response = json.loads(choice["message"]["content"])
     except (json.JSONDecodeError, TypeError):
+        return "unparsed_host_response"
+    if not isinstance(response, dict):
         return "unparsed_host_response"
     return "host_completion" if "answer" in response else "host_request"
 
@@ -87,7 +104,7 @@ def summarize(roots: list[Path], reviews: list[dict[str, Any]]) -> dict[str, Any
                 if event.get("event") != "vllm_response":
                     continue
                 stage = ("embedding" if event["path"] == "embeddings"
-                         else generation_stage(event))
+                         else generation_stage(event, driver["transport"]))
                 for target in (stages, row_stages):
                     target[stage].update(requests=1, tokens=event["usage"]["total_tokens"],
                                          http_wall_seconds=event["wall_seconds"])
@@ -122,6 +139,9 @@ def summarize(roots: list[Path], reviews: list[dict[str, Any]]) -> dict[str, Any
             "known_generation_tokens": tokens, "known_embedding_tokens": embedding_tokens,
             "model_outcomes_rewritten": False,
             "semantic_review_kind": "author_source_review_not_independent_judgment",
+            "stage_scope": "Generation stages describe request/answer attempts, not semantic "
+                           "success or successful tool execution. Truncated View/controller "
+                           "generation retains its original stage; Host truncation is separate.",
             "cost_note": "Stage HTTP wall is nested inside retrieval/message wall; "
                          "do not sum twice."}
 
