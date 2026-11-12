@@ -83,3 +83,36 @@ def test_query_once_continuation_can_search_after_an_observed_source_first_read(
     assert policy.choose(state, actions) == "search"
     state.last_result = {"action": {"kind": "SEARCH"}}
     assert policy.choose(state, actions) == "handoff"
+
+
+def test_multiple_requests_stay_in_the_original_source_family():
+    from prepare_collected_operation_feedback import request_units, select_events
+
+    histories = [{"source_group": "paper-a", "requests": [{"id": "q0"}, {"id": "q1"}]},
+                 {"source_group": "paper-b", "requests": [{"id": "q0"}]}]
+    units = request_units(histories, 4)
+    assert [(i, h["source_group"], q["id"]) for i, h, q in units] == [
+        (4, "paper-a", "q0"), (4, "paper-a", "q1"), (5, "paper-b", "q0")]
+    for i, _, request in units:
+        initial = {"step": 0, "request_id": request["id"]}
+        assert select_events([initial], i) == [initial]
+    with pytest.raises(ValueError, match="family, request_id"):
+        select_events([{"step": 0}, {"step": 0}], 0)
+
+
+def test_legal_stop_nomination_is_opt_in_and_keeps_complete_binding(monkeypatch):
+    from collections import Counter
+
+    import prepare_collected_operation_feedback as preparation
+
+    event = {"before": {}, "prediction": {"logits": {"read": 2., "stop": 1.}},
+             "actions": [{"id": "read", "kind": "READ", "target": "source",
+                          "parameters": {"observed_source": {"start": 4, "end": 8}}},
+                         {"id": "stop", "kind": "HANDOFF", "target": "actual packet",
+                          "parameters": {}}]}
+    monkeypatch.setattr(preparation, "baseline", lambda *args: "read")
+    monkeypatch.setattr(preparation, "coverage_alternative", lambda *args: None)
+    assert set(preparation.nominate(event, Counter(), 0).values()) == {"read"}
+    selected = preparation.nominate(event, Counter(), 0, include_legal_handoff=True)
+    assert set(selected.values()) == {"read", "stop"}
+    assert selected["legal_stop"] == "stop"

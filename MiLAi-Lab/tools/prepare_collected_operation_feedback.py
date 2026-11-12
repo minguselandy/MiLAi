@@ -68,7 +68,7 @@ def select_events(
     """Initial plus one real post state, without consulting native labels or branch results."""
     initial = [e for e in events if e["step"] == 0]
     if len(initial) != 1:
-        raise ValueError("This collection requires exactly one native request per family")
+        raise ValueError("Select events for one (family, request_id) with exactly one initial")
     post = [e for e in events if e["step"] > 0 and not e.get("forced_budget_handoff")]
     disagreement = [e for e in post if e["prediction"]["choice"] != baseline(e, policy_name)]
     if family_index % 2 and disagreement:
@@ -79,7 +79,8 @@ def select_events(
 
 
 def nominate(
-    event: dict[str, Any], coverage: Counter[str], seed: int, policy_name: str = "rules"
+    event: dict[str, Any], coverage: Counter[str], seed: int, policy_name: str = "rules",
+    include_legal_handoff: bool = False,
 ) -> dict[str, str]:
     choices = {
         "learner": full_menu_choice(event["actions"], event["prediction"]["logits"]),
@@ -97,7 +98,19 @@ def nominate(
     if alternate is not None:
         choices["coverage"] = alternate["id"]
         coverage[parameter_stratum(alternate)] += 1
+    if include_legal_handoff and len(set(choices.values())) < 4:
+        handoff = next((a for a in event["actions"]
+                        if a["kind"] == "HANDOFF" and not a["parameters"]), None)
+        if handoff is not None and handoff["id"] not in choices.values():
+            choices["legal_stop"] = handoff["id"]
+            coverage[parameter_stratum(handoff)] += 1
     return choices
+
+
+def request_units(histories: list[dict[str, Any]], offset: int = 0) -> list[tuple[Any, ...]]:
+    """Keep every original request within its source family; never merge initial events."""
+    return [(index, history, request)
+            for index, history in enumerate(histories, offset) for request in history["requests"]]
 
 
 def execute_branch(
@@ -155,6 +168,8 @@ def main() -> None:
     parser.add_argument("--families", type=int, required=True)
     parser.add_argument("--split", choices=("train", "dev"), default="train")
     parser.add_argument("--continuation-steps", type=int, default=2)
+    parser.add_argument("--include-legal-handoff", action="store_true",
+                        help="Add an unselected legal current-packet stop, up to four bindings")
     parser.add_argument(
         "--continuation-policy",
         choices=("rules", "fixed_context", "query_once_context"),
@@ -177,8 +192,9 @@ def main() -> None:
         raise ValueError("Select only a closed family prefix from the actual learner collection")
     histories = read_json(args.collection / "sources.json")["histories"]
     histories = histories[args.offset : args.offset + args.families]
-    if any(h["split"] != args.split or len(h["requests"]) != 1 for h in histories):
-        raise ValueError("Feedback requires one original request per declared source-role family")
+    if any(h["split"] != args.split for h in histories):
+        raise ValueError("Feedback requires the declared source-role families")
+    units = request_units(histories, args.offset)
     settings = read_json(Path(collection_run["config"]))["entrypoints"]["functional"]
     controls = {
         (c["source_group"], c["request_id"]): c
@@ -192,6 +208,7 @@ def main() -> None:
         "config": collection_run["config"],
         "collector_checkpoint": collection_run["collector_checkpoint"],
         "families": len(histories),
+        "requests": len(units),
         "split": args.split,
         "selected_states": 0,
         "comparison_states": 0,
@@ -199,6 +216,7 @@ def main() -> None:
         "continuation_policy": type(continuation_policy(args.continuation_policy)).__name__
         + "(reads=4)",
         "nomination_baseline": args.continuation_policy,
+        "include_legal_handoff": args.include_legal_handoff,
         "continuation_steps": args.continuation_steps,
         "terminal_handoff": args.terminal_handoff,
         "selection": "Initial plus one actual non-forced post state; even family positions seeded "
@@ -213,14 +231,14 @@ def main() -> None:
     cases, rows, cells = [], [], []
     coverage: Counter[str] = Counter()
     try:
-        for family_index, history in enumerate(histories, args.offset):
+        for family_index, history, request in units:
             root = args.collection / "banks" / history["id"]
-            request = history["requests"][0]
             events = read_jsonl(root / f"{request['id']}-operations.jsonl")
             selected = select_events(events, family_index, args.continuation_policy)
             cells.append(
                 {
                     "family": history["source_group"],
+                    "request_id": request["id"],
                     "actual_states": len(events),
                     "selected_steps": [e["step"] for e in selected],
                     "missing_post": len(selected) < 2,
@@ -228,7 +246,8 @@ def main() -> None:
             )
             for event in selected:
                 event_id = f"{history['source_group']}/{request['id']}/step-{event['step']}"
-                choices = nominate(event, coverage, len(rows), args.continuation_policy)
+                choices = nominate(event, coverage, len(rows), args.continuation_policy,
+                                   args.include_legal_handoff)
                 row = decision_example(
                     event,
                     {
