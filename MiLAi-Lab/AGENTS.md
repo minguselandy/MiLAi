@@ -1,6 +1,6 @@
 # ACTIVE Reader utility v3: phase14 formal scale data continuation (2026-11-13)
 
-Goal ACTIVE/incomplete. Current milestone PROGRESS: allshard2scores closed, cumulative8678newactiveweakstates. Full user v3 objective remains.
+Goal ACTIVE/incomplete. Current milestone PROGRESS: all5publiccollections closed,283rawfamilies279groups3418native. Full user v3 objective remains.
 R=/data/milai-experiments/20261112-reader-utility.
 Read data/manifests/reader-utility-progress-20261112-v3.json and
 docs/MILAI_READER_UTILITY_EXECUTION_20261112.md. KEEP ANALYSIS SHORT; act on files/processes.
@@ -76,12 +76,15 @@ NativeHTTP owner FAILSFAST, doesnotqueue. Do NOTlaunchcompetingHostwork.
 LIVE run_i2_after_q_annotation_v2 PID1458340/session16943 waitsfullQqueuethen62firstsinto-v2.
 AfterI2 the96taskfirst-fourqueue starts. Alloldfirstfailuresretained.
 
-EXPANSION GPU3: post-u-gpu3-owner-v1 PID1481397/session17387 ownsall5collections:
+EXPANSION GPU3: post-u-gpu3-owner-v1 PID1481397/session17387 CLOSEDall5collections:
 musique-public-pilot-v2 thenshards0..3,3418nativevariants283banks279knowndependencygroups.
 Shard0 CLOSED59families1730conditions;shard1 CLOSED58families1668conditions7188NN.
 Shard2 CLOSED38families899native1798conditions7768NN; latestclosedcollectioninventory-v2:
 156rawfamilies153known groups2622native5244conditions22404NN0Host.
-Currentlyshard3 childPID2545032; revalidateproducerowner. Originalshard3=127families796native.
+Shard3 CLOSED127families796native1592conditions7205NN; child2545032+parent1481397exited.
+Finalcollectioninventory-v3:283rawfamilies279groups3418native6836conditions29609NN,
+184439379actualinputtokens,0Host; all5jobexitcodes0, originalfamilyIDs unique.
+PhysicalGPU3 nowonlyshared3513MiB; QfitownerwaitsfinalQdata, no new job needed tofillGPU.
 Originalnativecontextmasks andoriginallexicalreceiptK retained, nevernewmodelcoldoutputK.
 Firstproductionpilot CLOSED24requests48conditions193NN; step0/1/2/4 =>153states579packets,
 266scored313unscored;69activeweakstates1family. expansion-main-pilot-data-v1 isDATAONLY.
