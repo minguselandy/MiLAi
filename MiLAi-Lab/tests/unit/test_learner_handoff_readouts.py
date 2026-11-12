@@ -56,6 +56,11 @@ def test_full_menu_and_forced_actual_action_are_not_relabelled_as_learned_choice
     assert result["choices"]["collector_actual"] == "handoff" and "learner" not in result["choices"]
     assert [a["id"] for a in result["actions"]] == ["read", "handoff", "empty"]
     assert "read" in row["questions"]["next"]["criteria"]
+    actual = module.bind_terminal(row, branch, event, {"id": "q", "content": "task"}, {},
+                                  len, 0, actual_only=True)
+    assert actual["choices"] == {"collector_actual": "handoff"}
+    assert actual["forced_budget_handoff"] and len(actual["branches"]) == 1
+    assert actual["branches"][0]["action"] == asdict(actions[1])
     wrong = copy.deepcopy(branch)
     wrong["results"][1]["action"]["parameters"]["delivery_indices"] = [0]
     with pytest.raises(ValueError, match="binding"):

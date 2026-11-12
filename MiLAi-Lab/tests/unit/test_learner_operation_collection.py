@@ -154,3 +154,25 @@ def test_missing_reused_database_fails_before_sqlite_can_create_an_empty_bank(tm
     with pytest.raises(FileNotFoundError, match="database is absent"):
         resolve_source_bank(tmp_path)
     assert not (tmp_path / "memory.sqlite").exists()
+
+
+def test_explicit_fixed_context_collector_executes_ordinary_policy_without_model(tmp_path):
+    history = {"id": "p", "source_group": "p", "split": "dev", "sources": [{
+        "session_id": "p", "event_key": "body", "origin": "reference_document",
+        "occurred_at": None, "original_event_id": "offline-proof",
+        "content": "Alpha leads to Beta."}],
+        "requests": [{"id": "q", "content": "Where does Alpha lead?"}]}
+    controls = {"q": {"schema": "source_reference_witness_v1", "reference_proofs": []}}
+    capacity = SimpleNamespace(text_tokens=len, tokenizer=lambda text, **_: {
+        "offset_mapping": [(i, i + 1) for i in range(len(text))]})
+    rows = []
+    collect_paper(history, controls, tmp_path / 'p', capacity,
+                  {"ordinary_material_tokens": 8192}, max_steps=8, branches=True, seed=0,
+                  append=lambda kind, row: rows.append((kind, row)),
+                  baseline_policy="fixed_context")
+    events = [json.loads(line) for line in (tmp_path / 'p/q-operations.jsonl').open()]
+    assert len(events) < 8 and events[-1]['selected'].startswith('handoff')
+    assert not any('prediction' in e for e in events)
+    assert all(r['metadata']['collector'] == 'baseline_fixed_context'
+               for kind, r in rows if kind == 'states')
+    assert any(kind == 'branches' and r['results'][0]['packet']['evidence'] for kind, r in rows)

@@ -13,7 +13,7 @@ from milai_lab.harness.artifact_io import read_json, read_jsonl, write_json
 from milai_lab.methods.memory_control import MemoryAction, MemoryControlState, RulesMemoryPolicy
 from milai_lab.methods.memory_control_learning import decision_example
 from milai_lab.providers.contextual_capacity import HostCapacity
-from milai_lab.runners.given_host_readout import given_packet_request
+from milai_lab.runners.given_host_readout import given_packet_request, separate_answer_fields
 
 
 def bind_terminal(
@@ -24,6 +24,7 @@ def bind_terminal(
     settings: dict[str, Any],
     token_count: Any,
     state_index: int,
+    actual_only: bool = False,
 ) -> dict[str, Any]:
     """Retain the original full online menu; supervise only actually executed HANDOFF choices."""
     expected = decision_example(event, {})
@@ -42,14 +43,18 @@ def bind_terminal(
             MemoryControlState(**copy.deepcopy(branch["before"])), offered
         ),
     }
+    if actual_only:
+        choices = {"collector_actual": event["selected"]}
+    actual_results = [b for b in branch["results"]
+                      if not actual_only or b["action"]["id"] == event["selected"]]
     alternatives = [
-        b["action"]["id"] for b in branch["results"] if b["action"]["id"] not in choices.values()
+        b["action"]["id"] for b in actual_results if b["action"]["id"] not in choices.values()
     ]
     if len(alternatives) > 1:
         raise ValueError("The collection protocol allows at most one coverage alternative")
     if alternatives:
         choices["coverage"] = alternatives[0]
-    if set(choices.values()) != {b["action"]["id"] for b in branch["results"]}:
+    if set(choices.values()) != {b["action"]["id"] for b in actual_results}:
         raise ValueError("Nominated terminal alternatives differ from actual executed packets")
     case = {
         "family": branch["family"],
@@ -65,7 +70,7 @@ def bind_terminal(
         "forced_budget_handoff": event.get("forced_budget_handoff", False),
         "prefix_reexecuted_for_reconstruction": False,
     }
-    for actual in branch["results"]:
+    for actual in actual_results:
         if actual["action"] not in event["actions"] or actual["action"]["kind"] != "HANDOFF":
             raise ValueError("Actual HANDOFF binding is absent from the original full menu")
         case["branches"].append(
@@ -98,6 +103,10 @@ def main() -> None:
     parser.add_argument("output", type=Path)
     parser.add_argument("--families", type=int, default=64)
     parser.add_argument("--offset", type=int, default=0)
+    parser.add_argument("--split", choices=("train", "dev"), default="train")
+    parser.add_argument("--actual-only", action="store_true",
+                        help="Read the actual complete trajectory endpoint, retaining forced stops")
+    parser.add_argument("--separate-answer-fields", action="store_true")
     args = parser.parse_args()
     started, cpu = time.perf_counter(), time.process_time()
     original = read_json(args.collection / "run.json")
@@ -105,8 +114,8 @@ def main() -> None:
         raise ValueError("Select only closed source-family prefixes")
     histories = read_json(args.collection / "sources.json")["histories"]
     histories = histories[args.offset : args.offset + args.families]
-    if any(h["split"] != "train" or len(h["requests"]) != 1 for h in histories):
-        raise ValueError("This first I2 slice uses one native question per TRAIN source family")
+    if any(h["split"] != args.split or len(h["requests"]) != 1 for h in histories):
+        raise ValueError("Use one native question per source family with the declared split")
     families = {h["source_group"]: h for h in histories}
     selected = []
     with (args.collection / "branches.jsonl").open() as stream:
@@ -147,8 +156,13 @@ def main() -> None:
                 settings,
                 capacity.text_tokens,
                 index,
+                actual_only=args.actual_only,
             )
         )
+    if args.separate_answer_fields:
+        for case in cases:
+            for branch in case["branches"]:
+                branch["readout_request"] = separate_answer_fields(branch["readout_request"])
     args.output.mkdir(parents=True, exist_ok=False)
     write_json(args.output / "cases.json", cases)
     with (args.output / "states.jsonl").open("w") as stream:
@@ -161,6 +175,9 @@ def main() -> None:
             "collection": str(args.collection.resolve()),
             "config": original["config"],
             "collector_checkpoint": original["collector_checkpoint"],
+            "source_split": args.split,
+            "actual_only": args.actual_only,
+            "answer_format_version": "answer_separate_v1" if args.separate_answer_fields else None,
             "families": len(cases),
             "selected_states": len(cases),
             "packets": sum(len(c["branches"]) for c in cases),

@@ -27,7 +27,12 @@ from milai_lab.memory.service import MemoryService
 from milai_lab.methods.evidence_control import EvidenceOperations, controlled_reader_packet
 from milai_lab.methods.evidence_reading import build_evidence_packs
 from milai_lab.methods.laya_memory_policy import operation_payload
-from milai_lab.methods.memory_control import MemoryAction, MemoryControlState, RulesMemoryPolicy
+from milai_lab.methods.memory_control import (
+    FixedContextMemoryPolicy,
+    MemoryAction,
+    MemoryControlState,
+    RulesMemoryPolicy,
+)
 from milai_lab.methods.memory_control_learning import decision_example
 from milai_lab.methods.source_observations import SourceObservationBudget
 from milai_lab.methods.source_ranges import SourceRangeBudget
@@ -173,6 +178,7 @@ def collect_paper(
     append: Any,
     source_bank: Path | None = None,
     predict: Any = None,
+    baseline_policy: str = "lexical",
 ) -> dict[str, Any]:
     root.mkdir(parents=True, exist_ok=False)
     bank = resolve_source_bank(source_bank) if source_bank is not None else root
@@ -274,6 +280,8 @@ def collect_paper(
                 source_observation=observation,
             )
             trace = root / f"{request['id']}-operations.jsonl"
+            policy = {"lexical": None, "fixed_context": FixedContextMemoryPolicy(reads=4),
+                      "rules": RulesMemoryPolicy(reads=4)}[baseline_policy]
             labels, chosen = Counter(), []
             for step in range(max_steps):
                 state.budget.update(
@@ -300,7 +308,9 @@ def collect_paper(
                         "source_version": "qasper-v0.3",
                         "trace": str(trace.resolve()),
                         "source_bank_root": str(bank.resolve()),
-                        "collector": "frozen_learner" if predict else "fixed_lexical_read_prefix",
+                        "collector": ("frozen_learner" if predict else
+                                      "fixed_lexical_read_prefix" if policy is None else
+                                      "baseline_" + baseline_policy),
                         "stage": (
                             "initial" if step == 0 else "post_search" if step == 1 else "post_read"
                         ),
@@ -332,6 +342,9 @@ def collect_paper(
                     event["forced_budget_handoff"] = True
                 elif predict is not None:
                     action = next(a for a in actions if a.id == event["prediction"]["choice"])
+                elif policy is not None:
+                    selected = policy.choose(state, actions)
+                    action = next(a for a in actions if a.id == selected)
                 else:
                     action = next((a for a in actions if a.kind == "SEARCH"), None)
                     if action is None:
@@ -451,6 +464,8 @@ def main() -> None:
     parser.add_argument("--branch-families", type=int, default=64)
     parser.add_argument("--collector-checkpoint", type=Path)
     parser.add_argument("--collector-device", default="cpu")
+    parser.add_argument("--baseline-policy", choices=("lexical", "fixed_context", "rules"),
+                        default="lexical", help="Explicit simple policy when no model is supplied")
     parser.add_argument("--requests-per-family", type=int)
     parser.add_argument(
         "--reuse-source-collections",
@@ -460,6 +475,8 @@ def main() -> None:
         help="Use existing immutable paper banks for additional native questions",
     )
     args = parser.parse_args()
+    if args.collector_checkpoint and args.baseline_policy != "lexical":
+        parser.error("Choose a model collector or an explicit simple policy")
     started, cpu = time.perf_counter(), time.process_time()
     histories = read_json(args.histories)["histories"]
     histories = histories[
@@ -503,6 +520,7 @@ def main() -> None:
         if args.collector_checkpoint
         else None,
         "collector_device": args.collector_device if args.collector_checkpoint else None,
+        "baseline_policy": args.baseline_policy if not args.collector_checkpoint else None,
     }
 
     def append(kind: str, row: dict[str, Any]) -> None:
@@ -553,6 +571,7 @@ def main() -> None:
                 append=append,
                 source_bank=source_banks.get(history["source_group"]),
                 predict=predict,
+                baseline_policy=args.baseline_policy,
             )
             run["completed_families"] += 1
             write_json(args.output / "run.json", run)
