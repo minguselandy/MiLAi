@@ -302,7 +302,7 @@
       "/data/milai-experiments/20261112-reader-utility/expansion-shard0-families16to32-preparation-owner-v1.json",
       "/data/milai-experiments/20261112-reader-utility/expansion-shard0-families32to48-preparation-owner-v1.json"
     ],
-    "closed_additional_active_states": 11200,
+    "closed_additional_active_states": 11486,
     "available17_compilation": "/data/milai-experiments/20261112-reader-utility/expansion-available17-data-v1/run.json",
     "scale_comparison_preview": "/data/milai-experiments/20261112-reader-utility/scale-available17-preview-v1/run.json",
     "common_input_observation": "/data/milai-experiments/20261112-reader-utility/scale-available17-preview-v1/common-input-observation.json",
@@ -314,7 +314,7 @@
     "closed_active_raw_families": 58,
     "remaining_active_new_state_target": 0,
     "closed_collection_inventory": "/data/milai-experiments/20261112-reader-utility/expansion-closed-collection-inventory-v3.json",
-    "latest_closed_score_inventory": "/data/milai-experiments/20261112-reader-utility/expansion-shard3-families96to112-closed-inventory-v1.json",
+    "latest_closed_score_inventory": "/data/milai-experiments/20261112-reader-utility/expansion-shard3-families112to127-closed-inventory-v1.json",
     "closed_inventory_scope": "closed_inventory, closed_opportunity_states, closed_raw_families and closed_active_raw_families describe pilot plus shard0 only; latest_closed_score_inventory and closed_additional_active_states include later shard1 blocks.",
     "closed_collection_counts": {
       "raw_source_families": 283,
@@ -325,8 +325,8 @@
       "actual_forward_input_tokens": 184439379,
       "Host_calls": 0
     },
-    "available_states_above_new_target": 4556,
-    "formal_sampling_status": "NOT_SELECTED: first availability exceeds6644 new states, but final selection waits all planned blocks and dependency-group-balanced sampling; E2 fits still require Q/actualDEV signal assessment.",
+    "available_states_above_new_target": 4842,
+    "formal_sampling_status": "COMPLETED_FIXED_SEED0_10000_PRIMARY_NOT_FITTED",
     "formal_data_owner": "/data/milai-experiments/20261112-reader-utility/formal-scale-data-owner-v1.json",
     "formal_data_process": {
       "pid": 2768620,
@@ -334,7 +334,8 @@
       "status_at_launch": "WAITING_FOR_ALL_TWENTY_SCORE_BLOCKS",
       "canonical_score_blocks": 20,
       "data_target": "/data/milai-experiments/20261112-reader-utility/formal-scale10k-vs-repeat3k-data-v1",
-      "model_fitting_launched": false
+      "model_fitting_launched": false,
+      "final_status": "COMPLETED_FORMAL_SCALE_DATA_NOT_FITTED"
     },
     "closed_shard2_score_counts": {
       "opportunity_states": 5943,
@@ -354,7 +355,47 @@
       "raw_families": 283,
       "known_dependency_groups": 279,
       "duplicate_event_ids": 0
-    }
+    },
+    "all_score_inventory": "/data/milai-experiments/20261112-reader-utility/expansion-all-scores-inventory-v1.json",
+    "canonical_scoring_status": "ALL_TWENTY_CLOSED_NATIVE_BOOKKEEPING_SEPARATE",
+    "formal_data": {
+      "base_primary_states": 3356,
+      "available_active_new_states": 11486,
+      "selected_new_states": 6644,
+      "expanded_primary_states": 10000,
+      "expanded_raw_families": 967,
+      "expanded_dependency_groups": 963,
+      "shared_replay_states": 4096,
+      "schedules": {
+        "expanded": {
+          "passes": 3,
+          "updates": 1250,
+          "primary_exposures": 30000,
+          "replay_exposures": 10000
+        },
+        "repeat": {
+          "passes": 9,
+          "updates": 1259,
+          "primary_exposures": 30204,
+          "replay_exposures": 10068
+        }
+      },
+      "repeat_over_expanded_primary_exposure_ratio": 1.0068,
+      "run": "/data/milai-experiments/20261112-reader-utility/formal-scale10k-vs-repeat3k-data-v1/run.json",
+      "common_input_observation": "/data/milai-experiments/20261112-reader-utility/formal-scale10k-vs-repeat3k-data-v1/common-input-observation.json",
+      "capacity": "/data/milai-experiments/20261112-reader-utility/formal-scale10k-vs-repeat3k-data-v1/capacity-check-v1/run.json",
+      "planned_token_work": "/data/milai-experiments/20261112-reader-utility/formal-scale10k-vs-repeat3k-data-v1/planned-token-work-v1.json",
+      "old_U_replay_comparison": "/data/milai-experiments/20261112-reader-utility/formal-scale10k-vs-repeat3k-data-v1/old-U-replay-comparison-v1.json"
+    },
+    "boundary_failures": {
+      "packets": 53,
+      "raw_families": 2,
+      "event_states": 14,
+      "reason": "token_crosses_answer_boundary",
+      "policy": "One failed native alias makes packet score unknown; retain successful alias records but do not repair mean or rescore."
+    },
+    "E2_three_fresh_U_plans": "/data/milai-experiments/20261112-reader-utility/formal-E2-three-arm-data-and-U-plans-v1.json",
+    "E2_same_pass_baseline_required": true
   },
   "application_source_inventory": {
     "artifact": "/data/milai-experiments/20261112-reader-utility/natural-application-source-options-v1.json",
@@ -397,7 +438,7 @@
     "A": "Finish stable FP32 scoring diagnostics, semantic/source review and meaningful I2/K/long-input evaluation. Original prototype and original12tests now obtained and verified.",
     "F4_F5": "Scale multi-request actual sources; add h=0 stratum, legal stop diagnostics, actual K and complementary A/B/A+B conditions; do not count duplicate sources independently.",
     "B_E0_E1": "Both U420 fits closed and self-billed; continue preselected600 Q review opportunities, compile actual-known pool and fit both fixed U endpoints. Actual full-menu source/native/Host evaluation and model nomination pending.",
-    "C_E2": "~10k distinct experience versus 3k repeated with approximate compute matching; one own-state round; decisive seed1/2 replication.",
+    "C_E2": "Fresh E2 base3k3pass, expanded10k3pass and base3k9pass using same new replay/permutation IDs and commonS1, then sameQ; data/plans ready but fitting waitsQ/actualDEVassessment. OldUreplay differs, and checkpoint420 of9pass is not a separate3pass schedule. Oneown-state round and decisive seed replication remain.",
     "D_E4": "Freeze new confirmation sources/candidates/short-answer format/budgets/repeat subset before outcomes; actual full-menu and native task scoring.",
     "applications": "New natural histories initial ~32 if available, autonomous Host and continuous View/update line; distinguish invocation from control; retain failures.",
     "synthesis": "Five result layers, clustered paired uncertainty, full measured cost/unknown scopes, mechanism and counterexamples; conditional minimal Product recommendation only."
@@ -410,7 +451,7 @@
     "Prepare fixed train diagnostic probe if useful; do not repeatedly evaluate all7452training rows solely for bookkeeping.",
     "New confirmation and autonomous/natural continuous View application lines remain required; no overall completion claim."
   ],
-  "phase": 18,
+  "phase": 19,
   "signal_diagnostic": {
     "canonical110": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-vs-semantic110-diagnostic-v1.json",
     "author_spots": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-semantic-disagreement-spots-v1.json",
@@ -637,5 +678,15 @@
     "new_output_absent_before_launch": true,
     "actual_process_cmdline_verified": true,
     "scope": "Finite data-only driver launched in dependency wait, not a finished dataset or fitted comparison. Existing compiler and common-input verification execute only after all20 closed blocks."
+  },
+  "phase19_case_storage": {
+    "manifest": "/data/milai-experiments/20261112-reader-utility/phase19-closed-expansion-case-archives-v1/manifest.json",
+    "status": "COMPLETED",
+    "files": 80,
+    "freed_allocated_bytes": 13368143872,
+    "restore_entry": "/data/milai-experiments/20261112-reader-utility/phase19-closed-expansion-case-archives-v1/restore.py",
+    "actual_restore_CLI_validation": "/data/milai-experiments/20261112-reader-utility/phase19-closed-expansion-case-archives-v1/restore-cli-validation.json",
+    "restore_before_following_original_packet_ref_paths": true,
+    "scope": "Only80closed expansion step case JSONs archived after all scores/data close. Full bytes/mode/mtime retained; states,packets,scores,training data,Source banks,models andHost firsts kept directly available."
   }
 }

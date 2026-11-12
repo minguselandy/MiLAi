@@ -1,6 +1,6 @@
-# ACTIVE Reader utility v3: phase18 independent cost scopes (2026-11-13)
+# ACTIVE Reader utility v3: phase19 formal scale data ready (2026-11-13)
 
-Goal ACTIVE/incomplete. Current milestone PROGRESS:shard3[96,112]scoresclosed;11200newactiveweakstates. Full user v3 objective remains.
+Goal ACTIVE/incomplete. Current milestone PROGRESS: all20scores+formal10kdata closed, E2threearmplans ready, casearchives verified. Full user v3 objective remains.
 R=/data/milai-experiments/20261112-reader-utility.
 Read data/manifests/reader-utility-progress-20261112-v3.json and
 docs/MILAI_READER_UTILITY_EXECUTION_20261112.md. KEEP ANALYSIS SHORT; act on files/processes.
@@ -124,13 +124,18 @@ Shard3[80,96] scoreCLOSED116activeweak,cumulativeNew10748;219states842packets,
 450scored392unscored839references,16active rawfamilies. InventoryatR.
 Shard3[96,112] scoreCLOSED452activeweak,cumulativeNew11200;864states3308packets,
 1741scored1567unscored2798references,16active rawfamilies. InventoryatR.
-GPU2queue nowFINALshard3[112,127] childPID3089206; previousscorePID3039841maywaitnativeledger.
+FINALshard3[112,127] scoreCLOSED286activeweak,cumulativeNew11486;527states2022packets,
+1104scored918unscored3145references,15active rawfamilies. ALL20canonicalSCORES CLOSED.
+expansion-all-scores-inventory-v1:85907packets43984scored41923unknown,65312actualrefsequences,
+36614350processedvs54717436logicalrefinputtokens. 41870noeligible refs,53tokenboundaryfailures
+across2families14states: all-alias mean withheld, successfulaliasrecordsretained, no rescore.
+remaining-expansion-scoring-owner-v1 PID2039219/session73793 nowWAITING_NATIVE_BOOKKEEPING,
+no forward work remains. Checkowner; oldscorerchildrenmayliveonlywaitingledger, do notrestart.
 ALL20branchinputs CLOSED:22613actualstates85907packets,44037eligible native-refpackets;
 283rawfamilies279groups, no duplicateeventIDs orbetween-blockrawfamily overlap.
 expansion-all-branch-input-inventory-v1.json; inputrow/packetcountsactuallyread, notonlymanifest.
 48to59oldscorePID2105067 completedscoring, maywaitnativeledger; do notrestart.
-LIVE remaining-expansion-scoring-owner-v1 PID2039219/session73793 runs
-16remainingblocks seriallyGPU2. ClosednativeScoremaywaitledgerafterweightsrelease; driverreaps
+remaining-expansion-scoring-owner-v1 completed all16remainingblocks seriallyGPU2. ClosednativeScoremaywaitledgerafterweightsrelease; driverreaps
 pendingbookkeeperswithoutdoublebilling. ChecksactualGPUused<=8192MiB, Qfitprioritybeforeeachblock.
 DO NOT manually launchduplicateGPU2scoring oncecurrentcloses; thisqueueownsnextschedule.
 CLOSED remaining-expansion-preparation-owner-v1 PID1904773/session44401,16finiteblocks:
@@ -150,12 +155,18 @@ contains4097expandedmain vs3356repeat, shared4096replay, NOFIT/NOT10K. Expanded3
 primary vsrepeat4passes13424(+9.22pct), so onlypipelinepreview; formal10k yields9repeatpasses
 30204vs30000exposures(+.68pct), actualtokens/FLOPs/augmentationcyclesstilldifferent.
 Actualpreviewcommon-input-observation.json provesunchangedbaseinputs/targets andexactshared
-replayrows/IDs;2newtests+originalcompilerchecksPASS. BothfreshE2fitsfromcommonS1, notcontinueU.
-LIVE formal-scale-data-owner-v1 PID2768620/session31574 waitsall20canonicalscoreblocks,
-then existingprepare_reader_scale_comparison.py buildsformal-scale10k-vs-repeat3k-data-v1:
-3356base+6644new, seed0 dependency/eventbalanced,4096sharedreplay, explicit3/9passes.
-Script prepare_formal_scale_after_scores_v1.py verifiescommoninput/target/replay/IDs directly.
-DATAONLY, nofit/autolaunch; do notmanuallyduplicateformaldatawhileownerlive.
+replayrows/IDs;2newtests+originalcompilerchecksPASS. AllfreshE2fitsfromcommonS1, notcontinueU. THREE Ufitsrequired; seeformalE2plansbelow.
+CLOSED formal-scale-data-owner-v1 PID2768620/session31574, no fit.
+formal-scale10k-vs-repeat3k-data-v1 READY:3356base+6644selectedfrom11486new, seed0,
+10000main967rawfamilies963knowngroups+4096sharedreplay. Commoninput/target/replay/IDsverified.
+Expanded3passes1250updates30000main10000replay; repeat9passes1259updates30204main10068replay.
+Capacityaudit14096expanded/7452repeat sequences,0state/headtokensdropped,max10476/9639.
+Plannedcanonicaltokens241314753vs228957845 (repeat5.12pctless), notactualpadded/FLOPs.
+OldUreplayoverlaponly1663/4096 anddifferentpermutationIDs: cannotreuseoldUasexactE2baseline.
+formal-E2-three-arm-data-and-U-plans-v1.json PREPAREDNOTLAUNCHED: freshbase3k3pass420,
+expanded10k3pass1250,repeat3k9pass1259, allcommonS1+newsharedreplaythen sameactualQ.
+Each hasformal-e2-*-seed0-v1-plan.json, noautolaunch. Update420of9passcosine isnot3passfit.
+DefaultU1utilityrecipe retained pendingQ/actualDEVassessment; anyamendmentmustbeexplicitbeforefit.
 Do notblindlyfitE2beforeQ/actualDEV signalassessment:261TRAINdiag223materialdirectionpairs
 163agree60oppose,38opposedempty/noK;17/190qualitytieshaveweakgap>.5. Existinglabelsunchanged.
 canonical-fp32-vs-semantic261-diagnostic-v1.json; nonindependentsampledTRAIN, notaccuracy.
@@ -238,6 +249,20 @@ Noactivecompressor remains. Monitorincludesclosedstorageowner. CPUcostpending, n
 Currentgoalremaining:Q+actualDEVHost,10k/repeat,ownstate,decisiveseeds,newconfirmation,
 autonomous/naturalcontinuousView/update,cost/statistical/mechanism synthesis. Notcomplete.
 Priorv2below CLOSED/HISTORICAL, notqueues/reusablefreshconfirmation.
+
+
+IMPORTANT phase19 case archival after allscores+formaldata CLOSED:80 expansion step cases.json
+files nowstored in R/phase19-closed-expansion-case-archives-v1/*.tar.gz, freed12.45GiB,
+allbytesverified; actualselectedrestorebytecomparison andrestoreCLI size/mode/mtime PASS.
+Originalcases.json pathsABSENT. States/packets/scores/train/Sourcebanks/models/Hostfirsts remainraw.
+BEFOREreading an archivedpacket_ref.path or rerunning a tool needingthosecases, run:
+python3 R/phase19-closed-expansion-case-archives-v1/restore.py <exact-block-directory-name>
+(example expansion-shard3-families0to16-step2-h2-v1). Restoresoriginalpath withoutmodels/SHA,
+refusesexistingtarget. Keepmanifest, immutable-empty-base andfrozen case_archive.py witharchives.
+ArchivalPID3257382/session47308 CLOSED80; noactivearchiver. Ordinary/datafree~18GiB atclosure.
+Capacity/tokenwork/replaycomparison/E2plan/archival costs are NEW after the81scope snapshot,
+notalreadysettled; theirreceipts retainCPU. GoalstillrequiresQ/actualDEV, threeE2fits+Q,ownstate,
+worthwhiledecisiveseeds,newconfirmation,natural/autonomousView/application andfinalcost synthesis.
 
 # FINAL scalable evidence research execution: phase44, 2026-11-12
 
