@@ -71,7 +71,7 @@ def main() -> None:
                              "forced or unreached terminal states remain missing")
     parser.add_argument("--continuation-steps", type=int, default=4)
     parser.add_argument("--include-legal-handoff", action="store_true")
-    parser.add_argument("--snapshot-every", type=int, default=16)
+    parser.add_argument("--snapshot-every", type=int, default=128)
     parser.add_argument(
         "--nomination-source",
         type=Path,
@@ -145,6 +145,8 @@ def main() -> None:
         "requests_per_family": args.requests_per_family,
         "target_step": args.target_step,
         "terminal_deliveries": args.terminal_deliveries,
+        "snapshot_every": args.snapshot_every,
+        "incremental_cases": "completed-cases.jsonl",
         "include_legal_handoff": args.include_legal_handoff,
         "terminal_handoff": "policy",
         "no_sha_validation": True,
