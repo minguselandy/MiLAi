@@ -1,0 +1,159 @@
+{
+  "status": "ACTIVE_INCOMPLETE",
+  "goal_turn_classification": "progress",
+  "plan": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261112_2XA10040GB_v3.md",
+  "worktree": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab",
+  "artifact_root": "/data/milai-experiments/20261112-reader-utility",
+  "baseline": "closed v2 study; old confirmation remains exposed",
+  "code_versions": {
+    "scoring_and_training": "51724699",
+    "multi_request_and_stop_collection": "c6fbe127"
+  },
+  "constraints": {
+    "sha_validation": false,
+    "content_fingerprints": false,
+    "subagents": false,
+    "product_changes": false,
+    "service_restarts": false,
+    "remote_push": false,
+    "confirmation_retuning": false
+  },
+  "completed_evidence": {
+    "teacher_scoring": "/data/milai-experiments/20261112-reader-utility/function64-scores-v2/run.json",
+    "data": "/data/milai-experiments/20261112-reader-utility/function64-train-v1/run.json",
+    "i2_actual_packets": "/data/milai-experiments/20261112-reader-utility/i2-prefit-dev8-v1/run.json",
+    "tests": {
+      "focused_and_regression_passed": 67,
+      "legacy_joint_gpu_tests_skipped": 9,
+      "additional_collection_tests_passed": 11,
+      "gpu_component_training_and_exact_resume": "Both objectives passed on physical GPU3 with tiny native model. Not real task benefit.",
+      "ruff": "PASS",
+      "package_boundary": "PASS",
+      "tools_boundary": "Same six legacy dynamic imports; no new findings"
+    },
+    "model_teacher": "existing local MemSifter/Qwen3 4B; not deployed Qwen3.6-35B Host; direct-answer template with explicit empty reasoning",
+    "functional_data": {
+      "sources": 64,
+      "states": 128,
+      "executed_branches": 309,
+      "scored_packets": 284,
+      "unknown_packets": 25,
+      "utility_active_states": 117,
+      "semantic_delivery_active_states": 50,
+      "continuation": "inherited fixed_context h=4 for initial wiring only; new h=2 collection underway"
+    },
+    "diagnostic": {
+      "jointly_scored_semantic_pairs": 214,
+      "directional": 26,
+      "direction_agreement": 18,
+      "ties": 42,
+      "unknown": 146,
+      "max_teacher_input_tokens": 2055,
+      "scope": "Descriptive TRAIN comparison, not proof of sufficiency or independent validation"
+    },
+    "functional_fits": "/data/milai-experiments/20261112-reader-utility/function64-fit-comparison-v1.json",
+    "functional_saved_model_reader_chain": "/data/milai-experiments/20261112-reader-utility/function64-dev4-readouts-v1/run.json",
+    "functional_dev_bound_results": "/data/milai-experiments/20261112-reader-utility/function64-dev4-bound-v1/manifest.json",
+    "i2_closed_readouts": "/data/milai-experiments/20261112-reader-utility/i2-prefit-dev8-readouts-v1/run.json",
+    "h2_branches": "/data/milai-experiments/20261112-reader-utility/h2-train64-branches-v1/run.json",
+    "h2_scores": "/data/milai-experiments/20261112-reader-utility/h2-train64-scores-v1/run.json",
+    "h2_legal_stop_diagnostics": "/data/milai-experiments/20261112-reader-utility/h2-stop-diagnostic-v1.json",
+    "first_multi_request_collection": "/data/milai-experiments/20261112-reader-utility/main3k-new64-multi-request-v1/run.json",
+    "first_multi_request_comparison_block": "/data/milai-experiments/20261112-reader-utility/main3k-new64-block00-h2-v1/run.json",
+    "closed_preparation_cost": "/data/milai-experiments/20261112-reader-utility/phase01-closed-preparation-compute-v1.json",
+    "functional_fit_results": {
+      "updates_per_arm": 16,
+      "primary_exposures_per_arm": 384,
+      "replay_exposures_per_arm": 128,
+      "input_tokens_per_arm": 2691363,
+      "fast_dev_labelled_states": 78,
+      "common_base_reference_accepted": 46,
+      "u0_reference_accepted": 33,
+      "u1_reference_accepted": 24,
+      "u0_changed_full_menu_choices": 42,
+      "u1_changed_full_menu_choices": 60,
+      "between_arm_changed_choices": 30,
+      "max_training_input_tokens": 8764,
+      "scope": "Functional fits; both fast reference DEV regressions retained. No task or scientific win claim."
+    },
+    "functional_reader_transport": {
+      "distinct_packets": 16,
+      "completed": 14,
+      "failed": 2,
+      "new_calls": 7,
+      "reused_firsts": 9,
+      "method_completed_of_8": {
+        "fixed_context": 6,
+        "u0": 7,
+        "u1": 8
+      },
+      "scope": "Execution/transport only, not task quality."
+    },
+    "h2_counts": {
+      "sources": 64,
+      "states": 128,
+      "packets": 423,
+      "scored_packets": 389,
+      "unknown_packets": 34,
+      "scored_legal_stop_states": 118,
+      "stop_at_least_as_high_as_all_acquisitions": 34,
+      "some_acquisition_above_stop": 84
+    },
+    "new_main_data": {
+      "closed_sources": 64,
+      "raw_actual_states": 628,
+      "first16_source_comparison_states": 80,
+      "first16_source_branches": 268,
+      "role": "Main3k production; distinct from inherited h4 functional and old-collector h2 diagnostics. Do not merge duplicate event versions."
+    },
+    "main3k-new64-block00-scores-v1": "/data/milai-experiments/20261112-reader-utility/main3k-new64-block00-scores-v1/run.json"
+  },
+  "current_jobs": [
+    {
+      "name": "main3k-new64to128-multi-request-v1",
+      "pid": 202888,
+      "exec_session": 64018,
+      "gpu": 2,
+      "last_verified_families": 8,
+      "last_verified_status": "RUNNING",
+      "last_verified_counts": {
+        "completed_families": 46,
+        "raw_states": 414
+      }
+    },
+    {
+      "name": "main3k-new64-block01-h2-v1",
+      "pid": 202889,
+      "exec_session": 10615,
+      "last_verified_states": 48,
+      "last_verified_status": "RUNNING",
+      "last_verified_counts": {
+        "selected_states": 125,
+        "packets": 418
+      }
+    }
+  ],
+  "required_remaining": {
+    "A": "Source-grounded/native evaluation of functional task chain and I2; additional K, format and representative long-input diagnostics. Fits and saved-model tool-to-Reader wiring are closed.",
+    "F4_F5": "Scale multi-request actual sources; add h=0 stratum, legal stop diagnostics, actual K and complementary A/B/A+B conditions; do not count duplicate sources independently.",
+    "B_E0_E1": "Produce ~3k scored states in blocks, matched U0/U1 3 passes plus same Q correction; fixed learning curves/DEV; compare scoring costs and semantic bias.",
+    "C_E2": "~10k distinct experience versus 3k repeated with approximate compute matching; one own-state round; decisive seed1/2 replication.",
+    "D_E4": "Freeze new confirmation sources/candidates/short-answer format/budgets/repeat subset before outcomes; actual full-menu and native task scoring.",
+    "applications": "New natural histories initial ~32 if available, autonomous Host and continuous View/update line; distinguish invocation from control; retain failures.",
+    "synthesis": "Five result layers, clustered paired uncertainty, full measured cost/unknown scopes, mechanism and counterexamples; conditional minimal Product recommendation only."
+  },
+  "known_limitations": [
+    "Original attachment prototype not found locally; new independent implementation of plan equations; its claimed original 12 tests were not rerun.",
+    "First teacher startup failed before CUDA initialization; retained function64-scores-v1; corrected v2 completed. Initial startup CPU unmeasured.",
+    "Teacher scores retain 8 of 26 directional disagreements with existing semantic reviews; no score-only winner claim.",
+    "Functional I2 common model currently selects the same full packet as full-delivery baseline in all 8 cases; rules produce distinct packets. No unique learned benefit established.",
+    "Data filesystem recovered about 2.85 GB through lossless zero-extent sparsification of the two new closed recovery files; paths/logical bytes retained, no historical deletion.",
+    "Both functional fits regress on the exposed reference fast DEV: 46/78 common base to U0 33/78 and U1 24/78; final Teacher-supported subset fit is not full-menu or task success."
+  ],
+  "pending_costs": [
+    "functional DEV feedback compiler CPU 0.270027769 s (manifest receipt), not in paid phase01",
+    "new active jobs after close; native teacher self-bills, collector/branch jobs do not",
+    "tests/root work and first startup unmeasured; do not report zero"
+  ],
+  "completion_claim": false
+}

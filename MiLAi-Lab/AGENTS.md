@@ -1,3 +1,29 @@
+# ACTIVE Reader utility v3: 2026-11-12 phase01
+
+Goal ACTIVE/incomplete; last turn PROGRESS. Full v3 objective unchanged. User plan is in
+jev-read-decisions-20261016/MiLAi-Lab/docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261112_2XA10040GB_v3.md.
+R=/data/milai-experiments/20261112-reader-utility. Read current
+data/manifests/reader-utility-progress-20261112-v1.json and docs/MILAI_READER_UTILITY_EXECUTION_20261112.md.
+Code51724699 scorer/trainer; c6fbe127 multi-request/optional legal stop. No SHA/content
+fingerprints/subagents/Product/API/permission/Canonical changes/service restarts/push.
+CLOSED functional fits U0/U1 16 updates each, same384main+128replay and2691363tokens, saved models.
+Fast reference DEV common46/78 ->U0 33/78,U1 24/78; no benefit claim. Teacher117 vs semantic50
+active main states. Functional4Source/8state/16packet Reader chain CLOSED14completed2historicalfailed,
+7newcalls9reusedfirsts. Source semantic/native evaluation remains. I2prefit8 CLOSED16 reusedfirsts,
+15complete1oldfailure; model packets same as full delivery. All firsts retained.
+Old-collector h2 diagnostic CLOSED128states/423branches/389scores/34unknown; not main3k version.
+Main3k common36k multi-request first64Sources CLOSED628states; first16Source branch block CLOSED80/268.
+LIVE latest verified: next64Source collector PID202888/session64018 GPU2; remaining48Source branch
+block PID202889/session10615 CPU. First80state Teacher completed; verify its scores/run.json. Revalidate
+actual /proc and run.json; never restart from a stale note or observation timeout.
+All prior functional fit/eval/reader handles terminal. Phase01 closed prep873.559CPU paid once;
+DEV compiler0.270027769CPU pending. Native teacher/fit/I2/Reader self-bill; collectors/branch prep
+need whole closed CPU settlement, never additive with native measures. Sparse new closed recoveries
+retained paths/logical bytes, freed~2.85GB. Old v2 below CLOSED, all its queues historical.
+Next: finish first main3k blocks; expand337new+203additional original TRAIN source groups and
+MuSiQue as needed, not row renaming; retain family grouping. Complete3k U-Q,10k/repeat/own-state,
+key seeds,new confirmation,natural continuous Host/View use,costs. Functional closure is not goal closure.
+
 # FINAL scalable evidence research execution: phase44, 2026-11-12
 
 Current authorized v2 research execution is CLOSED; finalaudit verifiesrequiredwork, no liveownedjobs.
