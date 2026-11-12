@@ -307,7 +307,16 @@
       "Host_calls": 0
     },
     "available_states_above_new_target": 1465,
-    "formal_sampling_status": "NOT_SELECTED: first availability exceeds6644 new states, but final selection waits all planned blocks and dependency-group-balanced sampling; E2 fits still require Q/actualDEV signal assessment."
+    "formal_sampling_status": "NOT_SELECTED: first availability exceeds6644 new states, but final selection waits all planned blocks and dependency-group-balanced sampling; E2 fits still require Q/actualDEV signal assessment.",
+    "formal_data_owner": "/data/milai-experiments/20261112-reader-utility/formal-scale-data-owner-v1.json",
+    "formal_data_process": {
+      "pid": 2768620,
+      "session": 31574,
+      "status_at_launch": "WAITING_FOR_ALL_TWENTY_SCORE_BLOCKS",
+      "canonical_score_blocks": 20,
+      "data_target": "/data/milai-experiments/20261112-reader-utility/formal-scale10k-vs-repeat3k-data-v1",
+      "model_fitting_launched": false
+    }
   },
   "application_source_inventory": {
     "artifact": "/data/milai-experiments/20261112-reader-utility/natural-application-source-options-v1.json",
@@ -344,7 +353,7 @@
     "Prepare fixed train diagnostic probe if useful; do not repeatedly evaluate all7452training rows solely for bookkeeping.",
     "New confirmation and autonomous/natural continuous View application lines remain required; no overall completion claim."
   ],
-  "phase": 13,
+  "phase": 14,
   "signal_diagnostic": {
     "canonical110": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-vs-semantic110-diagnostic-v1.json",
     "author_spots": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-semantic-disagreement-spots-v1.json",
@@ -561,5 +570,12 @@
     "initial_closed_streams": 9,
     "initial_freed_allocated_bytes": 1247105024,
     "scope": "Finite companion to remaining preparation queue. Only completed incremental streams; exact restored byte comparison, final cases/states retained. Stops when preparation owner completes or stops. Native first outcomes and models unchanged; no SHA."
+  },
+  "phase14_validation": {
+    "driver_syntax": "passed",
+    "canonical_block_arguments": 20,
+    "new_output_absent_before_launch": true,
+    "actual_process_cmdline_verified": true,
+    "scope": "Finite data-only driver launched in dependency wait, not a finished dataset or fitted comparison. Existing compiler and common-input verification execute only after all20 closed blocks."
   }
 }

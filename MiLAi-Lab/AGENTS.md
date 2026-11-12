@@ -1,6 +1,6 @@
-# ACTIVE Reader utility v3: phase13 native Host cost classification (2026-11-13)
+# ACTIVE Reader utility v3: phase14 formal scale data continuation (2026-11-13)
 
-Goal ACTIVE/incomplete. Current milestone PROGRESS: shard2[16,32]scores closed, cumulative8109newactiveweakstates. Full user v3 objective remains.
+Goal ACTIVE/incomplete. Current milestone PROGRESS: finite formal10k/repeated3k data owner launched in dependency wait. Full user v3 objective remains.
 R=/data/milai-experiments/20261112-reader-utility.
 Read data/manifests/reader-utility-progress-20261112-v3.json and
 docs/MILAI_READER_UTILITY_EXECUTION_20261112.md. KEEP ANALYSIS SHORT; act on files/processes.
@@ -128,6 +128,11 @@ primary vsrepeat4passes13424(+9.22pct), so onlypipelinepreview; formal10k yields
 30204vs30000exposures(+.68pct), actualtokens/FLOPs/augmentationcyclesstilldifferent.
 Actualpreviewcommon-input-observation.json provesunchangedbaseinputs/targets andexactshared
 replayrows/IDs;2newtests+originalcompilerchecksPASS. BothfreshE2fitsfromcommonS1, notcontinueU.
+LIVE formal-scale-data-owner-v1 PID2768620/session31574 waitsall20canonicalscoreblocks,
+then existingprepare_reader_scale_comparison.py buildsformal-scale10k-vs-repeat3k-data-v1:
+3356base+6644new, seed0 dependency/eventbalanced,4096sharedreplay, explicit3/9passes.
+Script prepare_formal_scale_after_scores_v1.py verifiescommoninput/target/replay/IDs directly.
+DATAONLY, nofit/autolaunch; do notmanuallyduplicateformaldatawhileownerlive.
 Do notblindlyfitE2beforeQ/actualDEV signalassessment:261TRAINdiag223materialdirectionpairs
 163agree60oppose,38opposedempty/noK;17/190qualitytieshaveweakgap>.5. Existinglabelsunchanged.
 canonical-fp32-vs-semantic261-diagnostic-v1.json; nonindependentsampledTRAIN, notaccuracy.
