@@ -1,0 +1,210 @@
+{
+  "status": "ACTIVE_INCOMPLETE",
+  "goal_turn_classification": "progress",
+  "previous_turn_classification": "progress",
+  "plan": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261112_2XA10040GB_v3.md",
+  "artifact_root": "/data/milai-experiments/20261112-reader-utility",
+  "prior_progress": "reader-utility-progress-20261112-v2.json",
+  "constraints": {
+    "sha_validation": false,
+    "content_fingerprints": false,
+    "subagents": false,
+    "product_changes": false,
+    "service_restarts": false,
+    "remote_push": false,
+    "confirmation_retuning": false
+  },
+  "completion_claim": false,
+  "code_versions": {
+    "native_refs_and_sampling_deadband": "8e68dd2a",
+    "complementary_deliveries": "5563f08a",
+    "training_gpu_release": "3d09c327",
+    "balanced_replay": "287cedec",
+    "multi_request_public_rollout": "998fbfee",
+    "actual_live_U_source": "287cedec"
+  },
+  "formal_U": {
+    "protocol": "/data/milai-experiments/20261112-reader-utility/formal-main3k-uq-protocol-v1.json",
+    "engineering_choice": "/data/milai-experiments/20261112-reader-utility/formal-main3k-engineering-choice-v1.json",
+    "data": "/data/milai-experiments/20261112-reader-utility/formal-main3k-data-v2/run.json",
+    "main_states": 3356,
+    "main_sources": 698,
+    "opportunity_states": 3765,
+    "inactive_opportunities": 409,
+    "active_primary_targets": {
+      "u0_delivery": 37,
+      "u1_utility": 3355
+    },
+    "old_replay_pool": 4096,
+    "old_replay_sources": 857,
+    "available_old_labelled_replay_rows": 33667,
+    "primary_passes": 3,
+    "primary_exposures_each": 10068,
+    "replay_exposures_each": 3356,
+    "planned_updates_each": 420,
+    "curve_updates": [
+      70,
+      140,
+      280,
+      420
+    ],
+    "initialization": "fixed S1/36k final",
+    "initial128_dev_logits_identical": true,
+    "initial_dev_reference_accepted": 46,
+    "initial_dev_reference_labelled": 78,
+    "scope": "Production supervision-package comparison with explicit unequal supervision coverage. Frozen U labels are first68 reviewed opportunities; future Q labels never mutate U data. Do not call this pure loss isolation or claim a task gain from training/Teacher metrics."
+  },
+  "replay_correction": {
+    "old_prepared_unfitted_data": "/data/milai-experiments/20261112-reader-utility/formal-main3k-data-v1/run.json",
+    "reason": "The old319 pool lost main-event overlaps, leaving110rows. Before fitting, chose4096 real old36k rows, family/event round-robin without replacement and without main-event overlap. Both arms share the exact pool and24:8draw plan."
+  },
+  "development": {
+    "manifest": "/data/milai-experiments/20261112-reader-utility/formal-development96-v1/manifest.json",
+    "capacity": "/data/milai-experiments/20261112-reader-utility/formal-development96-v1/capacity.json",
+    "sources": 96,
+    "states": 992,
+    "labelled_states": 584,
+    "max_tokens": 9460,
+    "state_and_head_tokens_dropped": 0,
+    "train_overlap": 0,
+    "scope": "Existing32 plus already exposed DEVELOPMENT64; historical confirmation roles unchanged. Reference acceptance, not Host success or new blind validation."
+  },
+  "profile": {
+    "artifact": "/data/milai-experiments/20261112-reader-utility/student-window-profile-v1.json",
+    "tested_settings": 5,
+    "chosen_target": 24576,
+    "checkpointing": true,
+    "fused_adamw": false,
+    "warm_8k_tokens_per_second": 12712.022738462512,
+    "warm_24k_tokens_per_second": 16356.64490982158,
+    "scope": "Common actual3windows, first warmup then2measured; no retained model or quality claim. Fused16k tested, untested combination not adopted. Dropout remains enabled; only logical workload/targets/windows matched."
+  },
+  "semantic_Q": {
+    "planned_review_opportunities": 600,
+    "allocation": "/data/milai-experiments/20261112-reader-utility/formal-main3k-uq-protocol-v1.json",
+    "reviewed_opportunities_closed": 110,
+    "known_delivery_states_closed": 57,
+    "known_answer_states_closed": 52,
+    "new42_labels": "/data/milai-experiments/20261112-reader-utility/main3k-new64to128-semantic42-labels-v2/manifest.json",
+    "new42_known_delivery": 20,
+    "new42_known_answer": 20,
+    "remaining": "490states in predeclared later blocks, then same actual-known Q pool for both U endpoints. First68 sampling used older BF16 scores; later blocks use explicit FP32/deadband, no first-result repair."
+  },
+  "K_diagnostic": {
+    "input": "/data/milai-experiments/20261112-reader-utility/known-evidence-train16-input-v1/run.json",
+    "scores": "/data/milai-experiments/20261112-reader-utility/known-evidence-train16-scores-fp32-v1/run.json",
+    "analysis": "/data/milai-experiments/20261112-reader-utility/known-evidence-train16-diagnostic-v1.json",
+    "sources": 16,
+    "states": 32,
+    "packets": 96,
+    "native_references_available_packets": 42,
+    "jointly_scorable_sources": 7,
+    "teacher_best_full_binding_changes": 6,
+    "scope": "Existing actual MuSiQue cold/known-first receipts with native context boundaries; native missing-support contexts unscored, not negatives. Menus/support can differ, so not causal K-only or learned/Host benefit. Legacy h4, separate from main h2."
+  },
+  "horizon_diagnostic": {
+    "analysis": "/data/milai-experiments/20261112-reader-utility/immediate-vs-h2-new8-diagnostic-fp32-v2.json",
+    "sources": 8,
+    "states": 36,
+    "bindings": 120,
+    "teacher_best_changes": 16,
+    "same_handoff_max_abs_delta": 3.0517578125e-05,
+    "mean_acquisition_delta": 0.31333477195881987,
+    "scope": "Stable FP32 comparison of actual h0/h2 outcomes; extra execution cost differs, not a Host quality or independent-source win."
+  },
+  "I2": {
+    "actual_packets": "/data/milai-experiments/20261112-reader-utility/i2-complementary-dev8-v1/run.json",
+    "prospective_format": "/data/milai-experiments/20261112-reader-utility/i2-complementary-dev8-short-v2/run.json",
+    "readouts": "/data/milai-experiments/20261112-reader-utility/i2-complementary-dev8-short-readouts-v2/run.json",
+    "sources": 8,
+    "executed_bindings": 47,
+    "scope": "Full/rules/common-model plus first offered legal A/B/A+B/empty. All materials already acquired, no gold selection, no invented over-budget union. Complementarity is to be measured, not presumed. Short answer protocol separate from earlier long-answer firsts."
+  },
+  "scale_extension": {
+    "pilot": "/data/milai-experiments/20261112-reader-utility/expansion-public-multi-request-pilot-v1/run.json",
+    "source": "/data/milai-experiments/20261111-scalable-evidence/musique-public-shard-0-v1",
+    "native_requests": 2,
+    "cold_known_conditions_completed": 4,
+    "model_calls": 19,
+    "source_family_count": 1,
+    "device": "CPU",
+    "scope": "Common saved model real multi-request trial. Not10k. Existing source context masks and original lexical first receipt K retained; newly generated cold output never substitutes for K. Next extend public branch preparation beyond first request/initial-only states."
+  },
+  "application_source_inventory": {
+    "artifact": "/data/milai-experiments/20261112-reader-utility/natural-application-source-options-v1.json",
+    "scope": "Primary-source feasibility only. AMA is native test, never silently TRAIN; REALTALK has10overlapping-participant conversations, not32independent families; Dolphin derived data need original identity/chronology verification. None claimed as executed applications."
+  },
+  "current_jobs": [
+    {
+      "name": "formal-u-u0-seed0-v1",
+      "pid": 1169498,
+      "exec_session": 55981,
+      "gpu": 2,
+      "process_live_verified": true,
+      "status": "RUNNING",
+      "observed_counts": {
+        "optimizer_updates": 70,
+        "sampled_main_rows": 1680,
+        "sampled_main_active_rows": 15,
+        "sampled_window_replay_rows": 560
+      }
+    },
+    {
+      "name": "formal-u-u1-seed0-v1",
+      "pid": 1169499,
+      "exec_session": 95185,
+      "gpu": 3,
+      "process_live_verified": true,
+      "status": "RUNNING",
+      "observed_counts": {
+        "optimizer_updates": 70,
+        "sampled_main_rows": 1680,
+        "sampled_main_active_rows": 1680,
+        "sampled_window_replay_rows": 560
+      }
+    },
+    {
+      "name": "i2-complementary-dev8-short-readouts-v2",
+      "pid": 1203337,
+      "exec_session": 93985,
+      "gpu": null,
+      "process_live_verified": true,
+      "status": "COMPLETED_WITH_FAILURES",
+      "observed_counts": {
+        "closed_readouts": 47,
+        "failed_readouts": 4
+      }
+    }
+  ],
+  "checks": {
+    "native_reference_and_sampling_tests": 15,
+    "complementary_tests": 2,
+    "balanced_compiler_tests": 3,
+    "real_GPU_component_training_and_exact_resume_tests": 20,
+    "public_multi_request_and_context_tests": 2,
+    "ruff": "PASS",
+    "package_boundary": "PASS",
+    "tools_boundary": "Same6preexisting unresolved LME dynamic imports; no new findings"
+  },
+  "costs": {
+    "last_paid_receipt": "/data/milai-experiments/20261112-reader-utility/phase02-closed-compute-v1.json",
+    "new_unbilled_scopes": "Profiles, development preparation/collection/capacity, known-input export, compilers/data-v1/v2, I2 format prep, public CPU pilot and diagnostics; native scorer/U/Reader/Teacher/I2 preparation self-bill, do not add twice. Do not settle live model scopes."
+  },
+  "required_remaining": {
+    "A": "Finish stable FP32 scoring diagnostics, semantic/source review and meaningful I2/K/long-input evaluation. Original prototype and original12tests now obtained and verified.",
+    "F4_F5": "Scale multi-request actual sources; add h=0 stratum, legal stop diagnostics, actual K and complementary A/B/A+B conditions; do not count duplicate sources independently.",
+    "B_E0_E1": "U0/U1 running420updates, prescheduled curves and common Q still to close. Continue600 reviewed opportunities; actual known counts remain separate. Actual full-menu/source/native/Host evaluation and model nomination pending.",
+    "C_E2": "~10k distinct experience versus 3k repeated with approximate compute matching; one own-state round; decisive seed1/2 replication.",
+    "D_E4": "Freeze new confirmation sources/candidates/short-answer format/budgets/repeat subset before outcomes; actual full-menu and native task scoring.",
+    "applications": "New natural histories initial ~32 if available, autonomous Host and continuous View/update line; distinguish invocation from control; retain failures.",
+    "synthesis": "Five result layers, clustered paired uncertainty, full measured cost/unknown scopes, mechanism and counterexamples; conditional minimal Product recommendation only."
+  },
+  "next_actions": [
+    "Poll live U jobs without restart; retain25update logging cadence. Full DEV at140/420, no stopping on small-panel fluctuation.",
+    "Continue predeclared semantic92/59/133/68/138 blocks after I2 Host lease, using canonical FP32 scores and1e-4sample deadband; no mutation of frozen Udata.",
+    "Finish I2 readouts/native/source checks. Verify completed public CPU pilot receipts.",
+    "Prepare10k public multi-request/post-state branch experience from actual eligible TRAIN contexts; initial-only exporter is not enough, preserve original known receipts and native visibility.",
+    "Prepare fixed train diagnostic probe if useful; do not repeatedly evaluate all7452training rows solely for bookkeeping.",
+    "New confirmation and autonomous/natural continuous View application lines remain required; no overall completion claim."
+  ]
+}
