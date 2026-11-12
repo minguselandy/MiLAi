@@ -144,6 +144,22 @@ def no_refresh(*_: Any) -> Any:
     raise RuntimeError("This source-only collection has no generated View operation")
 
 
+def resolve_source_bank(root: Path) -> Path:
+    """Follow existing reuse receipts to the actual database, never create an alias DB."""
+    current, seen = root.resolve(), set()
+    while current not in seen:
+        seen.add(current)
+        report = current / "report.json"
+        target = (Path(read_json(report).get("source_bank_root", str(current))).resolve()
+                  if report.exists() else current)
+        if target == current:
+            if not (current / "memory.sqlite").is_file():
+                raise FileNotFoundError(f"Reused Source database is absent: {current}")
+            return current
+        current = target
+    raise ValueError("Cyclic source_bank_root reuse receipts")
+
+
 def collect_paper(
     history: dict[str, Any],
     controls: dict[str, dict[str, Any]],
@@ -159,7 +175,7 @@ def collect_paper(
     predict: Any = None,
 ) -> dict[str, Any]:
     root.mkdir(parents=True, exist_ok=False)
-    bank = source_bank or root
+    bank = resolve_source_bank(source_bank) if source_bank is not None else root
     observation = SourceObservationBudget(2048, capacity.text_tokens)
     ranges = SourceRangeBudget(
         256,

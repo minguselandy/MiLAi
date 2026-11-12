@@ -12,7 +12,7 @@ from typing import Any
 
 from langgraph.store.sqlite import SqliteStore
 
-from collect_qasper_operation_states import no_refresh
+from collect_qasper_operation_states import no_refresh, resolve_source_bank
 from milai_lab.harness.artifact_io import read_json, read_jsonl
 from milai_lab.memory.service import MemoryService
 from milai_lab.methods.evidence_control import EvidenceOperations, controlled_reader_packet
@@ -40,7 +40,7 @@ def replay_collected_prefix(
     Source revocation/revision or changed observations fail the actual replay.
     """
     root = collection / "banks" / history["id"]
-    bank = Path(read_json(root / "report.json").get("source_bank_root", str(root)))
+    bank = resolve_source_bank(root)
     request_id = branch["event_id"].rsplit("/", 2)[1]
     events = read_jsonl(root / f"{request_id}-operations.jsonl")
     mapping = read_json(root / "source-map.json")["mapping"]

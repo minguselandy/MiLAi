@@ -3,7 +3,9 @@
 import json
 from types import SimpleNamespace
 
-from collect_qasper_operation_states import collect_paper
+import pytest
+
+from collect_qasper_operation_states import collect_paper, resolve_source_bank
 from collected_handoff import replay_collected_prefix
 from milai_lab.methods.laya_memory_policy import payload_actions
 from prepare_collected_operation_feedback import execute_branch, select_events
@@ -118,3 +120,37 @@ def test_learner_choice_budget_handoff_and_mid_prefix_replay(tmp_path):
         actual = next(a for a in middle["actions"] if a["id"] == middle["selected"])
         assert actual["kind"] == "READ" and not actual["parameters"].get("observe_only")
         assert fixed["trace"][0]["before"] == initial["before"]
+
+
+def test_second_generation_source_reuse_reads_original_sqlite_without_empty_alias(tmp_path):
+    history = {"id": "paper", "source_group": "paper", "split": "train", "sources": [{
+        "session_id": "paper", "event_key": "body", "origin": "reference_document",
+        "occurred_at": None, "original_event_id": "original-body",
+        "content": "Alpha evidence is present in the original Source database."}],
+        "requests": [{"id": "q", "content": "What is alpha evidence?"}]}
+    controls = {"q": {"schema": "source_reference_witness_v1", "reference_proofs": []}}
+    capacity = SimpleNamespace(text_tokens=len, tokenizer=lambda text, **_: {
+        "offset_mapping": [(i, i + 1) for i in range(len(text))]})
+    settings = {"ordinary_material_tokens": 8192}
+    original, first, second = [tmp_path / name / "banks/paper"
+                               for name in ("original", "first", "second")]
+    for root, source in ((original, None), (first, original), (second, first)):
+        collect_paper(history, controls, root, capacity, settings, max_steps=2, branches=False,
+                      seed=0, append=lambda *_: None, source_bank=source)
+        with (root / "q-operations.jsonl").open() as stream:
+            events = [json.loads(line) for line in stream]
+        assert events[0]["before"]["new_events"]
+        assert events[1]["before"]["pending_candidates"]
+    assert resolve_source_bank(second) == original.resolve()
+    assert not (first / "memory.sqlite").exists() and not (second / "memory.sqlite").exists()
+    initial = {**events[0], "event_id": "paper/q/step-0"}
+    with replay_collected_prefix(tmp_path / "second", history, initial, settings, capacity,
+                                 target_step=0) as (operations, state):
+        assert state.project() == initial["before"]
+        assert any(a.kind == "READ" for a in operations.actions(state))
+
+
+def test_missing_reused_database_fails_before_sqlite_can_create_an_empty_bank(tmp_path):
+    with pytest.raises(FileNotFoundError, match="database is absent"):
+        resolve_source_bank(tmp_path)
+    assert not (tmp_path / "memory.sqlite").exists()
