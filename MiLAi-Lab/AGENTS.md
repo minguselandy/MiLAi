@@ -95,7 +95,11 @@ Shard1[0,16] scoreCLOSED964activeweak,cumulativeNew3874;closed-inventory-v1 atR.
 Shard1[16,32] scoreCLOSED583activeweak,cumulativeNew4457;inventoryatR.
 Shard1[32,48] scoreCLOSED652activeweak,cumulativeNew5109;inventoryatR.
 Shard1[48,58] scoreCLOSED565activeweak,cumulativeNew5674;inventoryatR. Remainingtarget970.
-GPU2remaining-expansion-scoring queue now scores shard2[0,16], childPID2489433; revalidate.
+Shard2[0,16] scoreCLOSED1073activeweak,cumulativeNew6747 (103above6644target).
+Inventoryexpansion-shard2-families0to16-closed-inventory-v1.json; 2130states8133packets,
+4128scored4005unknown4402reference sequences,15active rawfamilies. Noformal10ksampling/fit yet;
+waitallplannedblocks+dependencybalancedselection andQ/actualDEVassessment.
+GPU2queue waitsnextpreparedshard2[16,32]; previousscorePID2489433maywaitnativeledger, revalidate.
 48to59oldscorePID2105067 completedscoring, maywaitnativeledger; do notrestart.
 LIVE remaining-expansion-scoring-owner-v1 PID2039219/session73793 runs
 16remainingblocks seriallyGPU2. ClosednativeScoremaywaitledgerafterweightsrelease; driverreaps
