@@ -1,6 +1,6 @@
-# ACTIVE Reader utility v3: phase11 continuous outcome summaries (2026-11-13)
+# ACTIVE Reader utility v3: phase12 finite Q continuation (2026-11-13)
 
-Goal ACTIVE/incomplete. Current milestone PROGRESS: continuous Host outcome summary implemented and verified. Full user v3 objective remains.
+Goal ACTIVE/incomplete. Current milestone PROGRESS: finite Q fit/DEV/readout/review owners launched in dependency wait. Full user v3 objective remains.
 R=/data/milai-experiments/20261112-reader-utility.
 Read data/manifests/reader-utility-progress-20261112-v3.json and
 docs/MILAI_READER_UTILITY_EXECUTION_20261112.md. KEEP ANALYSIS SHORT; act on files/processes.
@@ -34,6 +34,9 @@ post-u-gpu2-owner-v2 PID1611088/session49562 CLOSEDall3collections+binders, node
 LIVE formal-task-dev96-first-four-owner-v1 PID1625376/session99980 waitsI2then4firstreadout/nativeF1
 chains in fixed orderfixed_context/common_s1/u0/u1. No duplicateHTTP jobs.
 Q0/Q1actualtrajectories/readouts stillpending, reservedpathsformal-q-u0/1-seed0-v1/checkpoint.
+LIVE formal-task-dev96-Q-and-review-owner-v1 PID2573961/session1897 waitsfirstfour+QGPUowner,
+thenQ0/Q1firstreadout/nativeF1, sixmethodgroupedreview(width2) andprimaryu1q-u0qsummary.
+Script run_formal_task_dev96_Q_and_review_v1.py. Do notlaunchcompetingHTTPchain.
 Reviewplanformal-task-dev96-review-plan-v1 fixedprimaryu1q-u0q, methodgroups2,
 author12sourcepositions0,8,...88(allmethods/failures). bbf42295groupsactualendpointreadouts;
 sameHANDOFFids cannotmerge differenttrajectories; nofictionalsharedbefore. Reviewnonindependent.
@@ -53,7 +56,11 @@ NevermutatefrozenU withlaterlabels. First600 reviewopportunities !=600targets.
 LIVE prepare_Q_after_annotations_v1.py PID1952434/session5970, formal-Q-data-and-plans-owner-v1,
 waitsall600thencompilesformal-quality600-data-v1 andformal-q-u0/1-seed0-v1-plan.json.
 Planupdatesactualknown,16:16,3passes,0.5/1/2/3curves,fullDEV1pass/final. NOFITautolaunch.
-GPU2scoringqueue yieldsprioritywhenQplansready; RootmustlaunchQonactuallyfreeGPU(s).
+GPU2scoringqueue yieldsprioritywhenQplansready. LIVE formal-Q-fit-and-dev-owner-v1
+PID2573854/session39922 waitsdata/plans, launchesQ0GPU2afteryield andQ1GPU3afterproducerclosed,
+checksactualused<=8192MiB. Script run_formal_Q_and_dev_v1.py thencollectsbothQDEV onGPU3
+afterfitsclosed+released, leavingGPU2scoringfree; pendingnativefitbookkeepingreapedseparately.
+RootmustNOTduplicateQfits orQDEV now: finiteownerownslaunch. Currentfits0; revalidateowner.
 
 I2QASPER CLOSED47firsts4failed; full/commonmodel8/8samepacket, nolearneduniquebenefit.
 NativeF1 full.24427 rules.23155,A.26429,B.22329,AB.20907,empty.00595.

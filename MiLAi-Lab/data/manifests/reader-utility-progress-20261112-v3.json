@@ -202,7 +202,14 @@
       "reused_readouts": 3,
       "automatic_retry": false
     },
-    "current_stage": "main3k-additional203-semantic133 teacher review"
+    "current_stage": "main3k-additional203-semantic133 teacher review",
+    "fit_and_DEV_owner": "/data/milai-experiments/20261112-reader-utility/formal-Q-fit-and-dev-owner-v1.json",
+    "fit_and_DEV_process": {
+      "pid": 2573854,
+      "session": 39922,
+      "status_at_launch": "WAITING_FOR_Q_DATA_AND_PLANS",
+      "fits_launched_at_observation": 0
+    }
   },
   "K_diagnostic": {
     "input": "/data/milai-experiments/20261112-reader-utility/known-evidence-train16-input-v1/run.json",
@@ -323,7 +330,7 @@
     "Prepare fixed train diagnostic probe if useful; do not repeatedly evaluate all7452training rows solely for bookkeeping.",
     "New confirmation and autonomous/natural continuous View application lines remain required; no overall completion claim."
   ],
-  "phase": 11,
+  "phase": 12,
   "signal_diagnostic": {
     "canonical110": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-vs-semantic110-diagnostic-v1.json",
     "author_spots": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-semantic-disagreement-spots-v1.json",
@@ -372,7 +379,13 @@
     "pre_Q_trajectory_comparison": "/data/milai-experiments/20261112-reader-utility/formal-task-dev96-pre-Q-trajectory-comparison-v1.json",
     "first_four_reader_owner": "/data/milai-experiments/20261112-reader-utility/formal-task-dev96-first-four-owner-v1.json",
     "review_plan": "/data/milai-experiments/20261112-reader-utility/formal-task-dev96-review-plan-v1.json",
-    "summary_tool": "tools/summarize_trajectory_outcomes.py"
+    "summary_tool": "tools/summarize_trajectory_outcomes.py",
+    "Q_readouts_and_six_method_review_owner": "/data/milai-experiments/20261112-reader-utility/formal-task-dev96-Q-and-review-owner-v1.json",
+    "Q_readouts_and_review_process": {
+      "pid": 2573961,
+      "session": 1897,
+      "status_at_launch": "WAITING_FOR_PRE_Q_FIRSTS_AND_Q_COLLECTIONS"
+    }
   },
   "I2_public": {
     "prepared": "/data/milai-experiments/20261112-reader-utility/i2-public-dev8-terminal-short-v1/run.json",
@@ -510,5 +523,11 @@
     "git_diff_check": "passed",
     "actual_natural_Host_calls": 0,
     "scope": "Synthetic unit cases validate binding/denominator/missing-reference/grouping semantics; actual natural application still pending frozen checkpoint and HTTP capacity."
+  },
+  "phase12_execution": {
+    "Q_GPU_driver": "/data/milai-experiments/20261112-reader-utility/run_formal_Q_and_dev_v1.py",
+    "Q_HTTP_driver": "/data/milai-experiments/20261112-reader-utility/run_formal_task_dev96_Q_and_review_v1.py",
+    "scope": "Finite exact existing plans only. Q0 GPU2 after scorer yield, Q1 GPU3 after public producer closure; actual free memory checked. Both Q DEV collections GPU3 after fixed fits close and release, native bookkeeping separate. Q first readouts wait prior four methods; grouping and primary follow predeclared review plan. Parent does not retry, refit, export TRAIN labels or open new confirmation.",
+    "validation": "Both scripts parsed; targets absent at launch; exact /proc cmdlines and waiting owners verified; no Q model launched yet."
   }
 }
