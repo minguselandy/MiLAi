@@ -1,6 +1,6 @@
-# ACTIVE Reader utility v3: phase10 continued expansion and Q (2026-11-13)
+# ACTIVE Reader utility v3: phase11 continuous outcome summaries (2026-11-13)
 
-Goal ACTIVE/incomplete. Current milestone PROGRESS: shard1 scoring closed and133Reader advanced to review. Full user v3 objective remains.
+Goal ACTIVE/incomplete. Current milestone PROGRESS: continuous Host outcome summary implemented and verified. Full user v3 objective remains.
 R=/data/milai-experiments/20261112-reader-utility.
 Read data/manifests/reader-utility-progress-20261112-v3.json and
 docs/MILAI_READER_UTILITY_EXECUTION_20261112.md. KEEP ANALYSIS SHORT; act on files/processes.
@@ -143,6 +143,11 @@ preview CLOSED0NN/0Host atnatural-realtalk-native-config-v1/manifest.json. OldM6
 newconfigexplicitnative+matchedownershipclientmode. Productionappmustusefreshper-methodbanks,
 finalcheckpoint/protocolstilltofreeze. Do notclaimbootstrapasautonomousHostexecution.
 Dolphinpartialdownloadfirstfailure retained, nofakedidentity/chronology.
+f7740256 adds tools/summarize_continuous_host_outcomes.py for future naturalHost results.
+Explicit method/root/profile keepssame-policy S1/new separate; fullfixture positionsretainfailed/unexecuted.
+Source reviews bind exactfirstanswer; future/missingrefs masklocaltextoverlap, notnegative labels.
+Groupmeans firstequalhistories thenparticipantcomponents;3groupsonlydescriptive, unknownboundsretained.
+3newtests+2existingtrajectorysummarytestsPASS; RuffPASS. NO actualnaturalHostrun yet.
 
 NEWCONFIRMATION reservationonly: officialQASPERTEST416IDs, fixedseed20261112 selects256,
 zero overlap old1169Train/DevIDs andknownmetadataSource-IDscan. NoSource/controls/modelcallsyet.

@@ -35,7 +35,8 @@
     "public_snapshot_interval": "793dd0be",
     "checkpointed_cleanup_regression": "3df6188c",
     "scale_comparison": "2d79ef13",
-    "trajectory_outcome_summary": "4ae97cd8"
+    "trajectory_outcome_summary": "4ae97cd8",
+    "continuous_host_outcome_summary": "f7740256"
   },
   "formal_U": {
     "protocol": "/data/milai-experiments/20261112-reader-utility/formal-main3k-uq-protocol-v1.json",
@@ -314,7 +315,7 @@
     "Prepare fixed train diagnostic probe if useful; do not repeatedly evaluate all7452training rows solely for bookkeeping.",
     "New confirmation and autonomous/natural continuous View application lines remain required; no overall completion claim."
   ],
-  "phase": 10,
+  "phase": 11,
   "signal_diagnostic": {
     "canonical110": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-vs-semantic110-diagnostic-v1.json",
     "author_spots": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-semantic-disagreement-spots-v1.json",
@@ -337,7 +338,9 @@
     "scope": "Evaluation-only natural messages with explicitly staged native QA timing. Not32independentTRAINhistories or whole native benchmark. No silent alias/image/annotation repair.",
     "dolphin_first_download_failure": "/data/milai-experiments/20261112-reader-utility/natural-dolphin-inspection-v1/download-first-failure.json",
     "native_source_bootstrap": "/data/milai-experiments/20261112-reader-utility/natural-realtalk-native-config-v1/manifest.json",
-    "native_bootstrap_only_no_Host": true
+    "native_bootstrap_only_no_Host": true,
+    "outcome_summary_tool": "tools/summarize_continuous_host_outcomes.py",
+    "outcome_summary_scope": "Offline only, not an application execution. Full declared denominator; separate method labels for same-policy checkpoints; source review bound to exact first answer; future/missing native evidence has no reference-overlap target; equal histories within participant groups, then equal groups. No automatic success inference from text overlap; no training export."
   },
   "phase04_validation": {
     "targeted_public_SQLite_tests": 2,
@@ -491,5 +494,13 @@
     }
   ],
   "historical_jobs_snapshot_scope": "Early U70 snapshot retained as historical evidence only; not current process state.",
-  "current_job_monitor": "/data/milai-experiments/20261112-reader-utility/observe_jobs_v1.py"
+  "current_job_monitor": "/data/milai-experiments/20261112-reader-utility/observe_jobs_v1.py",
+  "phase11_validation": {
+    "continuous_outcome_tests": 3,
+    "existing_trajectory_summary_tests": 2,
+    "ruff": "passed",
+    "git_diff_check": "passed",
+    "actual_natural_Host_calls": 0,
+    "scope": "Synthetic unit cases validate binding/denominator/missing-reference/grouping semantics; actual natural application still pending frozen checkpoint and HTTP capacity."
+  }
 }
