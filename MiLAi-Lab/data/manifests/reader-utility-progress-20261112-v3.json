@@ -176,23 +176,32 @@
     "new42_labels": "/data/milai-experiments/20261112-reader-utility/main3k-new64to128-semantic42-labels-v2/manifest.json",
     "new42_known_delivery": 20,
     "new42_known_answer": 20,
-    "remaining": "490states in predeclared later blocks, then same actual-known Q pool for both U endpoints. First68 sampling used older BF16 scores; later blocks use explicit FP32/deadband, no first-result repair.",
+    "remaining": "339 review opportunities remain after 261 closed labels: 133 currently in teacher review, followed by preselected 68 and 138. All 600 use one actual-known Q pool for both fixed U endpoints. First68 sampling used older BF16 scores; later blocks use FP32/deadband. No first-result repair.",
     "all600_opportunities_selected": true,
     "finite_continuation_owner": "/data/milai-experiments/20261112-reader-utility/finish_selected_q_blocks_v2-owner.json",
     "finite_continuation_pid": 1325952,
     "active92": "/data/milai-experiments/20261112-reader-utility/main3k-new128to256-semantic92-readouts-v2/run.json",
     "active92_last_observation": {
-      "status": "RUNNING",
+      "status": "COMPLETED_WITH_FAILURES",
       "pid": 1306490,
-      "closed_readouts": 172,
-      "failed_readouts": 15,
-      "planned_unique_packets": 308
+      "planned_unique_packets": 308,
+      "closed_readouts": 308,
+      "failed_readouts": 21
     },
     "quality_preview_110": "/data/milai-experiments/20261112-reader-utility/quality110-data-preview-v1/run.json",
     "quality_preparation_script": "/data/milai-experiments/20261112-reader-utility/prepare_formal_quality_data_v1.py",
     "active59": "/data/milai-experiments/20261112-reader-utility/main3k-new256to337-semantic59-readouts-v2/run.json",
     "active133": "/data/milai-experiments/20261112-reader-utility/main3k-additional203-semantic133-readouts-v2/run.json",
-    "final_data_and_plans_owner": "/data/milai-experiments/20261112-reader-utility/formal-Q-data-and-plans-owner-v1.json"
+    "final_data_and_plans_owner": "/data/milai-experiments/20261112-reader-utility/formal-Q-data-and-plans-owner-v1.json",
+    "closed133_readouts": {
+      "status": "COMPLETED_WITH_FAILURES",
+      "closed_readouts": 451,
+      "failed_readouts": 25,
+      "chat_invocations": 448,
+      "reused_readouts": 3,
+      "automatic_retry": false
+    },
+    "current_stage": "main3k-additional203-semantic133 teacher review"
   },
   "K_diagnostic": {
     "input": "/data/milai-experiments/20261112-reader-utility/known-evidence-train16-input-v1/run.json",
@@ -255,7 +264,7 @@
       "/data/milai-experiments/20261112-reader-utility/expansion-shard0-families16to32-preparation-owner-v1.json",
       "/data/milai-experiments/20261112-reader-utility/expansion-shard0-families32to48-preparation-owner-v1.json"
     ],
-    "closed_additional_active_states": 5109,
+    "closed_additional_active_states": 5674,
     "available17_compilation": "/data/milai-experiments/20261112-reader-utility/expansion-available17-data-v1/run.json",
     "scale_comparison_preview": "/data/milai-experiments/20261112-reader-utility/scale-available17-preview-v1/run.json",
     "common_input_observation": "/data/milai-experiments/20261112-reader-utility/scale-available17-preview-v1/common-input-observation.json",
@@ -265,56 +274,15 @@
     "closed_opportunity_states": 5794,
     "closed_raw_families": 60,
     "closed_active_raw_families": 58,
-    "remaining_active_new_state_target": 3734,
+    "remaining_active_new_state_target": 970,
     "closed_collection_inventory": "/data/milai-experiments/20261112-reader-utility/expansion-closed-collection-inventory-v1.json",
-    "latest_closed_score_inventory": "/data/milai-experiments/20261112-reader-utility/expansion-shard1-families32to48-closed-inventory-v1.json"
+    "latest_closed_score_inventory": "/data/milai-experiments/20261112-reader-utility/expansion-shard1-families48to58-closed-inventory-v1.json",
+    "closed_inventory_scope": "closed_inventory, closed_opportunity_states, closed_raw_families and closed_active_raw_families describe pilot plus shard0 only; latest_closed_score_inventory and closed_additional_active_states include later shard1 blocks."
   },
   "application_source_inventory": {
     "artifact": "/data/milai-experiments/20261112-reader-utility/natural-application-source-options-v1.json",
     "scope": "Primary-source feasibility only. AMA is native test, never silently TRAIN; REALTALK has10overlapping-participant conversations, not32independent families; Dolphin derived data need original identity/chronology verification. None claimed as executed applications."
   },
-  "current_jobs": [
-    {
-      "name": "formal-u-u0-seed0-v1",
-      "pid": 1169498,
-      "exec_session": 55981,
-      "gpu": 2,
-      "process_live_verified": true,
-      "status": "RUNNING",
-      "observed_counts": {
-        "optimizer_updates": 70,
-        "sampled_main_rows": 1680,
-        "sampled_main_active_rows": 15,
-        "sampled_window_replay_rows": 560
-      }
-    },
-    {
-      "name": "formal-u-u1-seed0-v1",
-      "pid": 1169499,
-      "exec_session": 95185,
-      "gpu": 3,
-      "process_live_verified": true,
-      "status": "RUNNING",
-      "observed_counts": {
-        "optimizer_updates": 70,
-        "sampled_main_rows": 1680,
-        "sampled_main_active_rows": 1680,
-        "sampled_window_replay_rows": 560
-      }
-    },
-    {
-      "name": "i2-complementary-dev8-short-readouts-v2",
-      "pid": 1203337,
-      "exec_session": 93985,
-      "gpu": null,
-      "process_live_verified": true,
-      "status": "COMPLETED_WITH_FAILURES",
-      "observed_counts": {
-        "closed_readouts": 47,
-        "failed_readouts": 4
-      }
-    }
-  ],
   "checks": {
     "native_reference_and_sampling_tests": 15,
     "complementary_tests": 2,
@@ -332,7 +300,7 @@
   "required_remaining": {
     "A": "Finish stable FP32 scoring diagnostics, semantic/source review and meaningful I2/K/long-input evaluation. Original prototype and original12tests now obtained and verified.",
     "F4_F5": "Scale multi-request actual sources; add h=0 stratum, legal stop diagnostics, actual K and complementary A/B/A+B conditions; do not count duplicate sources independently.",
-    "B_E0_E1": "U0/U1 running420updates, prescheduled curves and common Q still to close. Continue600 reviewed opportunities; actual known counts remain separate. Actual full-menu/source/native/Host evaluation and model nomination pending.",
+    "B_E0_E1": "Both U420 fits closed and self-billed; continue preselected600 Q review opportunities, compile actual-known pool and fit both fixed U endpoints. Actual full-menu source/native/Host evaluation and model nomination pending.",
     "C_E2": "~10k distinct experience versus 3k repeated with approximate compute matching; one own-state round; decisive seed1/2 replication.",
     "D_E4": "Freeze new confirmation sources/candidates/short-answer format/budgets/repeat subset before outcomes; actual full-menu and native task scoring.",
     "applications": "New natural histories initial ~32 if available, autonomous Host and continuous View/update line; distinguish invocation from control; retain failures.",
@@ -479,5 +447,49 @@
     "closed_incremental_streams": 22,
     "decompressed_bytes_equal_original": true
   },
-  "phase10_storage": "/data/milai-experiments/20261112-reader-utility/phase10-closed-branch-stream-compression-v1.json"
+  "phase10_storage": "/data/milai-experiments/20261112-reader-utility/phase10-closed-branch-stream-compression-v1.json",
+  "historical_jobs_snapshot": [
+    {
+      "name": "formal-u-u0-seed0-v1",
+      "pid": 1169498,
+      "exec_session": 55981,
+      "gpu": 2,
+      "process_live_verified": true,
+      "status": "RUNNING",
+      "observed_counts": {
+        "optimizer_updates": 70,
+        "sampled_main_rows": 1680,
+        "sampled_main_active_rows": 15,
+        "sampled_window_replay_rows": 560
+      }
+    },
+    {
+      "name": "formal-u-u1-seed0-v1",
+      "pid": 1169499,
+      "exec_session": 95185,
+      "gpu": 3,
+      "process_live_verified": true,
+      "status": "RUNNING",
+      "observed_counts": {
+        "optimizer_updates": 70,
+        "sampled_main_rows": 1680,
+        "sampled_main_active_rows": 1680,
+        "sampled_window_replay_rows": 560
+      }
+    },
+    {
+      "name": "i2-complementary-dev8-short-readouts-v2",
+      "pid": 1203337,
+      "exec_session": 93985,
+      "gpu": null,
+      "process_live_verified": true,
+      "status": "COMPLETED_WITH_FAILURES",
+      "observed_counts": {
+        "closed_readouts": 47,
+        "failed_readouts": 4
+      }
+    }
+  ],
+  "historical_jobs_snapshot_scope": "Early U70 snapshot retained as historical evidence only; not current process state.",
+  "current_job_monitor": "/data/milai-experiments/20261112-reader-utility/observe_jobs_v1.py"
 }

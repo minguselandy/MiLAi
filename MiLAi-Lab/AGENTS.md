@@ -1,6 +1,6 @@
 # ACTIVE Reader utility v3: phase10 continued expansion and Q (2026-11-13)
 
-Goal ACTIVE/incomplete. Previous turn VERIFIED_WAIT; current milestone PROGRESS. Full user v3 objective remains.
+Goal ACTIVE/incomplete. Current milestone PROGRESS: shard1 scoring closed and133Reader advanced to review. Full user v3 objective remains.
 R=/data/milai-experiments/20261112-reader-utility.
 Read data/manifests/reader-utility-progress-20261112-v3.json and
 docs/MILAI_READER_UTILITY_EXECUTION_20261112.md. KEEP ANALYSIS SHORT; act on files/processes.
@@ -42,7 +42,8 @@ Conditionalold32h2 CLOSED64states206packets usesold3k/u101collector,separatefrom
 Q annotations: closed261opportunities(20+48+42+92+59),143delivery-known129answer-known.
 59Reader CLOSED195firsts15failed;59Teacher1unresolved;38delivery34answer targets(28/21directional).
 92reader CLOSED308firsts21failed;92labels48delivery43answer,36/27directional.
-LIVE finish_selected_q_blocks_v2.py PID1325952/session22201 currently133ReaderPID2005123,
+133Reader CLOSED451firsts25failed,448chatcalls+3exactwirereuses; teacherPID2495693 active.
+LIVE finish_selected_q_blocks_v2.py PID1325952/session22201 currently133teacher,
 then68/138; all600selectedbeforeoutcomes. Revalidateowner forlatestchild.
 First68samplingoldBF16, latercanonicalFP32. Failedfirsts/maskedquotes notrerolled.
 Qdataadapterprepare_formal_quality_data_v1.py handlesCOMPLETED_WITH_UNRESOLVED; preview110 has
@@ -84,7 +85,8 @@ no duplicateeventIDs; remainingnewactive target3734. No partialformal10kfit. exp
 Shard1[0,16] scoreCLOSED964activeweak,cumulativeNew3874;closed-inventory-v1 atR.
 Shard1[16,32] scoreCLOSED583activeweak,cumulativeNew4457;inventoryatR.
 Shard1[32,48] scoreCLOSED652activeweak,cumulativeNew5109;inventoryatR.
-GPU2remaining-expansion-scoring queue now scores shard1[48,58], childPID2431495; revalidate.
+Shard1[48,58] scoreCLOSED565activeweak,cumulativeNew5674;inventoryatR. Remainingtarget970.
+GPU2remaining-expansion-scoring queue now scores shard2[0,16], childPID2489433; revalidate.
 48to59oldscorePID2105067 completedscoring, maywaitnativeledger; do notrestart.
 LIVE remaining-expansion-scoring-owner-v1 PID2039219/session73793 runs
 16remainingblocks seriallyGPU2. ClosednativeScoremaywaitledgerafterweightsrelease; driverreaps
