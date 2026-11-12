@@ -5,7 +5,7 @@ import argparse
 import fcntl
 import json
 import time
-from collections import Counter
+from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any
 
@@ -30,11 +30,15 @@ def main() -> None:
     parser.add_argument("--max-length", type=int, required=True)
     parser.add_argument("--batch-size", type=int, default=4)
     parser.add_argument("--padded-token-target", type=int, default=16384)
+    parser.add_argument("--share-alias-prefix", action="store_true",
+                        help="Explicit FP32 DynamicCache backend for same-packet answer aliases")
     parser.add_argument("--budget", type=Path, required=True)
     parser.add_argument("--compute-phase", required=True)
     args = parser.parse_args()
     if min(args.max_length, args.batch_size, args.padded_token_target) < 1:
         parser.error("Capacity and batch limits must be positive")
+    if args.share_alias_prefix and args.precision != "float32":
+        parser.error("The alias-prefix numerical comparison is declared for FP32 only")
     import torch
 
     torch.backends.cuda.matmul.allow_tf32 = False
@@ -44,17 +48,23 @@ def main() -> None:
     started, cpu = time.perf_counter(), time.process_time()
     run: dict[str, Any] = {"status": "RUNNING", "data": str(args.data.resolve()),
         "teacher": str(args.model.resolve()), "template_version": TEMPLATE_VERSION,
-        "backend": "transformers-selective-logits-sdpa", "precision": args.precision,
+        "backend": ("transformers-selective-logits-sdpa-alias-prefix" if args.share_alias_prefix
+                    else "transformers-selective-logits-sdpa"), "precision": args.precision,
         "device": args.device, "max_length": args.max_length,
         "ledger_recorded": False,
         "batch_size": args.batch_size, "padded_token_target": args.padded_token_target,
         "no_sha_validation": True, "automatic_retry": False,
         "aggregation": "arithmetic_mean_of_per_reference_mean_logprob",
+        "share_alias_prefix": args.share_alias_prefix,
+        "token_scope": "input_tokens counts actual model token processing; "
+                       "reference_input_tokens counts all complete reference sequences",
         "semantic_meaning": "weak_answer_predictability_not_sufficiency"}
     configuration = {"backend": run["backend"], "precision": args.precision,
                      "tf32_matmul": False, "tf32_cudnn": False,
                      "template_version": TEMPLATE_VERSION,
-                     "aggregation": run["aggregation"], "numerical_protocol": "likelihood-v2"}
+                     "aggregation": run["aggregation"], "numerical_protocol": (
+                         "likelihood-v3-alias-prefix" if args.share_alias_prefix
+                         else "likelihood-v2")}
     run["scoring_configuration"] = configuration
     run["torch_version"] = torch.__version__
     counts: Counter[str] = Counter()
@@ -100,26 +110,45 @@ def main() -> None:
         work.sort(key=lambda item: len(item[2].input_ids))
         stage_seconds["input_preparation"] = time.perf_counter() - stage_start
         batches: list[list[Any]] = []
+        cached_groups = []
+        if args.share_alias_prefix:
+            by_packet = defaultdict(list)
+            for item in work:
+                by_packet[item[0]].append(item)
+            cached_groups = [group for group in by_packet.values() if len(group) > 1]
+            work = [group[0] for group in by_packet.values() if len(group) == 1]
         for item in work:
             if (not batches or len(batches[-1]) >= args.batch_size
                     or (len(batches[-1]) + 1) * len(item[2].input_ids) > args.padded_token_target):
                 batches.append([])
             batches[-1].append(item)
         stage_start = time.perf_counter()
-        for number, batch in enumerate(batches):
+        for number, (batch, shared) in enumerate([
+            *((b, False) for b in batches), *((b, True) for b in cached_groups)
+        ]):
             # A CUDA/model error aborts the job. Capacity/boundary errors above stay sample-local.
-            scores = teacher.score([item[2] for item in batch])
+            if shared:
+                scores, actual = teacher.score_aliases([item[2] for item in batch],
+                    batch_size=args.batch_size, padded_token_target=args.padded_token_target)
+                counts["input_tokens"] += actual["processed_input_tokens"]
+                counts["padded_input_tokens"] += actual["processed_padded_input_tokens"]
+                counts["batch_forwards"] += (actual["cache_prefix_forwards"]
+                                             + actual["cache_suffix_forwards"])
+                counts["shared_alias_packet_groups"] += 1
+            else:
+                scores = teacher.score([item[2] for item in batch])
+                counts["input_tokens"] += sum(len(item[2].input_ids) for item in batch)
+                counts["padded_input_tokens"] += (
+                    max(len(item[2].input_ids) for item in batch) * len(batch))
+                counts["batch_forwards"] += 1
             for (i, j, sequence), token_scores in zip(batch, scores, strict=True):
                 results[i]["references"][j].update(
                     score_known=True, mean_logprob=sum(token_scores) / len(token_scores),
                     answer_token_count=len(token_scores), token_logprobs=token_scores,
                     input_token_count=len(sequence.input_ids))
-                counts["input_tokens"] += len(sequence.input_ids)
+                counts["reference_input_tokens"] += len(sequence.input_ids)
                 counts["answer_tokens"] += len(token_scores)
                 counts["scoring_sequences"] += 1
-            counts["padded_input_tokens"] += (
-                max(len(item[2].input_ids) for item in batch) * len(batch))
-            counts["batch_forwards"] += 1
             # One append per batch preserves completed target scores if a later batch fails.
             with (args.output / "reference-scores.jsonl").open("a") as stream:
                 for i, j, _ in batch:

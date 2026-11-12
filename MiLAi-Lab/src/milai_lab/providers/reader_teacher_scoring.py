@@ -141,3 +141,71 @@ class TransformersReaderTeacher:
         with torch.inference_mode():
             output = self.model(**batch, use_cache=False, return_dict=True)
             return target_logprobs(output.logits, targets, mask)
+
+    def score_aliases(self, sequences: list[AnswerSequence], *, batch_size: int = 4,
+                      padded_token_target: int = 8192
+                      ) -> tuple[list[list[float]], dict[str, int]]:
+        """Share one exact packet prefix while scoring every original answer token.
+
+        This explicitly selected backend uses DynamicCache, never a content fingerprint.
+        Cache replication is bounded by the same padded-token budget as ordinary scoring.
+        """
+        import torch
+        from transformers.cache_utils import DynamicCache
+
+        if not sequences or min(batch_size, padded_token_target) < 1:
+            raise ValueError("Require aliases and positive cache batch limits")
+        prefix = sequences[0].input_ids[:sequences[0].answer_start]
+        if not prefix or any(s.answer_start < 1 or s.answer_tokens < 1
+                             or s.input_ids[:s.answer_start] != prefix
+                             for s in sequences):
+            raise ValueError("Alias scoring requires the same exact nonempty token prefix")
+        answers = [s.input_ids[s.answer_start:] for s in sequences]
+        work = {"cache_prefix_forwards": 1, "cache_suffix_forwards": 0,
+                "processed_input_tokens": len(prefix), "processed_padded_input_tokens": len(prefix)}
+        with torch.inference_mode():
+            ids = torch.tensor([prefix], dtype=torch.long, device=self.device)
+            initial = self.model(input_ids=ids, attention_mask=torch.ones_like(ids),
+                position_ids=torch.arange(len(prefix), device=self.device)[None, :],
+                logits_to_keep=1, use_cache=True, return_dict=True)
+            if not isinstance(initial.past_key_values, DynamicCache):
+                raise ValueError("Declared alias-prefix backend requires DynamicCache")
+            first = torch.tensor([[a[0]] for a in answers], device=self.device)
+            results = target_logprobs(initial.logits.expand(len(answers), -1, -1), first,
+                                     torch.ones_like(first, dtype=torch.bool))
+            active = [i for i, answer in enumerate(answers) if len(answer) > 1]
+            longest = max(len(s.input_ids) - 1 for s in sequences)
+            limit = min(batch_size, max(1, padded_token_target // longest))
+            pad = self.tokenizer.pad_token_id
+            if pad is None:
+                pad = self.tokenizer.eos_token_id
+            for offset in range(0, len(active), limit):
+                indices = active[offset:offset + limit]
+                # The original prefix remains immutable across suffix batches.
+                cache = DynamicCache.from_legacy_cache(initial.past_key_values.to_legacy_cache())
+                cache.batch_repeat_interleave(len(indices))
+                width = max(len(answers[i]) - 1 for i in indices)
+                suffix = torch.full((len(indices), width), pad, dtype=torch.long,
+                                    device=self.device)
+                targets = torch.zeros_like(suffix)
+                mask = torch.zeros_like(suffix, dtype=torch.bool)
+                for j, i in enumerate(indices):
+                    answer = answers[i]
+                    length = len(answer) - 1
+                    suffix[j, :length] = torch.tensor(answer[:-1], device=self.device)
+                    targets[j, :length] = torch.tensor(answer[1:], device=self.device)
+                    mask[j, :length] = True
+                attention = torch.cat([torch.ones((len(indices), len(prefix)), dtype=torch.long,
+                                                 device=self.device), mask.long()], dim=1)
+                output = self.model(input_ids=suffix, attention_mask=attention,
+                    position_ids=torch.arange(len(prefix), len(prefix) + width,
+                                              device=self.device)[None, :].expand(len(indices), -1),
+                    past_key_values=cache, logits_to_keep=width, use_cache=True, return_dict=True)
+                values = target_logprobs(output.logits, targets, mask)
+                for i, scores in zip(indices, values, strict=True):
+                    results[i].extend(scores)
+                work["cache_suffix_forwards"] += 1
+                work["processed_input_tokens"] += sum(len(answers[i]) - 1 for i in indices)
+                work["processed_padded_input_tokens"] += suffix.numel()
+                del output, cache
+            return results, work

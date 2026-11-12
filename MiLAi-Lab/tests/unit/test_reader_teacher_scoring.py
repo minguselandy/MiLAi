@@ -1,11 +1,13 @@
 """Answer boundary, causal shift, padding and actual packet-only scoring."""
 import sys
 from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 
 from milai_lab.providers.reader_teacher_scoring import (
     AnswerSequence,
+    TransformersReaderTeacher,
     answer_batch,
     encode_answer,
     target_logprobs,
@@ -37,6 +39,33 @@ def test_selective_logits_equal_full_causal_cross_entropy_with_left_padding():
                 logits.float(), ids[0, sequence.answer_start:], reduction="none")
             torch.testing.assert_close(torch.tensor(scores[row]), expected, atol=1e-6, rtol=1e-6)
     assert selected.shape == (2, 3, 31)  # Never projects the complete prompt vocabulary tensor.
+
+
+@pytest.mark.parametrize("batch_size,token_budget", [(1, 32), (4, 8), (4, 64)])
+def test_alias_cache_preserves_first_token_suffix_padding_and_repeated_prefix_batches(
+    batch_size, token_budget,
+):
+    torch = pytest.importorskip("torch")
+    from transformers import Qwen3Config, Qwen3ForCausalLM
+
+    torch.manual_seed(4)
+    teacher = object.__new__(TransformersReaderTeacher)
+    teacher.device = "cpu"
+    teacher.tokenizer = SimpleNamespace(pad_token_id=0, eos_token_id=1)
+    teacher.model = Qwen3ForCausalLM(Qwen3Config(
+        vocab_size=31, hidden_size=16, intermediate_size=32, num_hidden_layers=2,
+        num_attention_heads=2, num_key_value_heads=1, head_dim=8)).eval()
+    sequences = [AnswerSequence([1, 2, 3, *answer], 3)
+                 for answer in ([4], [5, 6], [7, 8, 9, 10], [11, 12, 13], [14, 15])]
+    expected = teacher.score(sequences)
+    actual, work = teacher.score_aliases(sequences, batch_size=batch_size,
+                                        padded_token_target=token_budget)
+    for first, second in zip(expected, actual, strict=True):
+        torch.testing.assert_close(torch.tensor(first), torch.tensor(second), atol=1e-6, rtol=1e-6)
+    assert work['processed_input_tokens'] == 10  # Three prefix tokens + seven answer predecessors.
+    assert work['cache_prefix_forwards'] == 1
+    with pytest.raises(ValueError, match='exact nonempty token prefix'):
+        teacher.score_aliases([sequences[0], AnswerSequence([1, 3, 2, 4], 3)])
 
 
 def test_probability_uses_full_vocabulary_not_top_k_or_prompt_tokens():
