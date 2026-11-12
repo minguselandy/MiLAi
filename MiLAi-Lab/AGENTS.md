@@ -1,28 +1,53 @@
-# ACTIVE Reader utility v3: 2026-11-12 phase01
+# ACTIVE Reader utility v3: phase02 (2026-11-12)
 
-Goal ACTIVE/incomplete; last turn PROGRESS. Full v3 objective unchanged. User plan is in
-jev-read-decisions-20261016/MiLAi-Lab/docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261112_2XA10040GB_v3.md.
-R=/data/milai-experiments/20261112-reader-utility. Read current
-data/manifests/reader-utility-progress-20261112-v1.json and docs/MILAI_READER_UTILITY_EXECUTION_20261112.md.
-Code51724699 scorer/trainer; c6fbe127 multi-request/optional legal stop. No SHA/content
-fingerprints/subagents/Product/API/permission/Canonical changes/service restarts/push.
-CLOSED functional fits U0/U1 16 updates each, same384main+128replay and2691363tokens, saved models.
-Fast reference DEV common46/78 ->U0 33/78,U1 24/78; no benefit claim. Teacher117 vs semantic50
-active main states. Functional4Source/8state/16packet Reader chain CLOSED14completed2historicalfailed,
-7newcalls9reusedfirsts. Source semantic/native evaluation remains. I2prefit8 CLOSED16 reusedfirsts,
-15complete1oldfailure; model packets same as full delivery. All firsts retained.
-Old-collector h2 diagnostic CLOSED128states/423branches/389scores/34unknown; not main3k version.
-Main3k common36k multi-request first64Sources CLOSED628states; first16Source branch block CLOSED80/268.
-LIVE latest verified: next64Source collector PID202888/session64018 GPU2; remaining48Source branch
-block PID202889/session10615 CPU. First80state Teacher completed; verify its scores/run.json. Revalidate
-actual /proc and run.json; never restart from a stale note or observation timeout.
-All prior functional fit/eval/reader handles terminal. Phase01 closed prep873.559CPU paid once;
-DEV compiler0.270027769CPU pending. Native teacher/fit/I2/Reader self-bill; collectors/branch prep
-need whole closed CPU settlement, never additive with native measures. Sparse new closed recoveries
-retained paths/logical bytes, freed~2.85GB. Old v2 below CLOSED, all its queues historical.
-Next: finish first main3k blocks; expand337new+203additional original TRAIN source groups and
-MuSiQue as needed, not row renaming; retain family grouping. Complete3k U-Q,10k/repeat/own-state,
-key seeds,new confirmation,natural continuous Host/View use,costs. Functional closure is not goal closure.
+Goal ACTIVE/incomplete; previous/current turns PROGRESS. Full user v3 plan unchanged.
+R=/data/milai-experiments/20261112-reader-utility. Current authority:
+data/manifests/reader-utility-progress-20261112-v2.json and docs/MILAI_READER_UTILITY_EXECUTION_20261112.md.
+No SHA/content fingerprints/subagents/Product/API/permission/Canonical changes/service restarts/push.
+KEEP ANALYSIS SHORT, act on current artifacts; do not loop over metadata or dump whole histories.
+
+Original prototype now obtained from user Drive, preserved at R/original-prototype; original12CPU
+tests PASS and nonflatKL/pair gradient comparison exact. Do not keep reporting it missing.
+Code17d2f508 short answer/semantic sample;2e475b02 incremental branch snapshots;ca656693 transitive
+Source-bank resolution/native metrics;f1c0a67b multi-block compiler;b60a256d stable scoring;218f19e2 docs.
+CRITICAL: actual identical-packet BF16 scores drift up to0.24748 with batching, headFP32 still0.13914;
+fullFP32 max0.00004578. Formal Teacher must use --precision float32 and matching1e-4 utility deadband.
+See R/teacher-scoring-numerical-protocol-v2.json. Preserve all prior BF16 scores/fits; do NOT fit formal
+main3k on those or interpret oldh0/h2 ranking differences as pure horizon value. Student staysBF16.
+F32 block00/block01 CLOSED. LIVE latest: new64to128 FP32 PID910395/session54640 GPU2; new128to256
+FP32 PID910396/session42802 GPU3; semantic48 reviewer PID915570/session22506.
+new64to128 score data now closed, PID910395 only waits ledger with GPU released. New256to337 FP32
+scorer PID946541 now runs on GPU2; use manifest and /proc. Revalidate every process/session.
+Scorer can finish immutable scores and release GPU before waiting on shared HTTP ledger; a live
+bookkeeping process is not a reason to restart. ledger_recorded/process_wall fields clarify newer jobs.
+
+All QASPER source collection CLOSED:721 unique TRAIN papers/1884nativequestions/7896actualstates.
+All h2 branch prep CLOSED3765comparisons of3768opportunities, no fabricated singleton branches.
+Additional-v1 reused alias dirs as SQLite and got empty banks:858states RETAINED/EXCLUDED by
+R/additional-source-reuse-v1-exclusion.json. Corrected additional203-multi-request-v2 CLOSED1784states,
+h2-v2 CLOSED858states/2900branches. Resolve existing source_bank_root receipts transitively, never
+create a missing alias database. No new-source337 banks affected. Repeated paper queries remain grouped.
+20semantic TRAIN states CLOSED:8delivery-known/7answer-known,6/4directional;66Readerfirsts7lengthfailed,
+11teacher candidates masked; no independent judge claim. Semantic48 Reader CLOSED164firsts15failed;
+reviewer live above. Compile its reviews when closed. Raw/short answer protocols never retro-repair old F1.
+
+Storage CLOSED: two functional recovery directories archived losslessly with existing case_archive;
+R/closed-functional-recovery-archives-v1/results.json +immutable-empty-base restore every byte to
+original recovery path. Inference models/raw firsts retained.30same-run identical final weight aliases
+share hardlinks, release17.99GiB, all paths/content kept; plan records old alias metadata. Do not mutate
+closed inference weights in place. Storage startup error retained, no original file changed by failure.
+Phase02 PAID38closed nonselfbilled scopes12057.449CPU once. Native scores/fits/Reader/Teacher/I2 excluded.
+New probes/compilers after settlement pending; root/tests/imports/serverGPU/money unknown, notzero.
+
+NEXT: finish FP32 all main3k blocks incl new256to337/additional203v2/original-replay128/original-new256;
+assemble closed immutable blocks with --active-main-only --utility-flat-tolerance 1e-4, retain semantic-
+only rows. Freeze formal U0/U1/Q and actual support counts before new DEV; do not make waiting for all
+manual-style review a new gate. Continue real semantic sample toward600, actual known counts separate.
+Original3k->10k/repeat/own-state/seeds/newconfirmation/autonomousHost/naturalView line all remain.
+MuSiQue K probe exists old m2-public-train16-query-once-main-v1 (32states16families,cold/known-first,h4);
+needs native-reference adapter, not QASPER controls. Population3418variants/1820questions/283TRAIN
+families preserves native context visibility. Existing BEAM/CUPID described synthetic, not natural logs.
+Old v2 entries below are CLOSED/HISTORICAL, never live queues or new confirmation data.
 
 # FINAL scalable evidence research execution: phase44, 2026-11-12
 

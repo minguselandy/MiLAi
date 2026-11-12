@@ -1,0 +1,193 @@
+{
+  "status": "ACTIVE_INCOMPLETE",
+  "goal_turn_classification": "progress",
+  "previous_turn_classification": "progress",
+  "plan": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261112_2XA10040GB_v3.md",
+  "artifact_root": "/data/milai-experiments/20261112-reader-utility",
+  "prior_progress": "reader-utility-progress-20261112-v1.json",
+  "constraints": {
+    "sha_validation": false,
+    "content_fingerprints": false,
+    "subagents": false,
+    "product_changes": false,
+    "service_restarts": false,
+    "remote_push": false,
+    "confirmation_retuning": false
+  },
+  "completion_claim": false,
+  "code_versions": {
+    "answer_format_and_semantic_sampling": "17d2f508",
+    "incremental_branch_output": "2e475b02",
+    "source_bank_resolution_and_native_metrics": "ca656693",
+    "block_compilation": "f1c0a67b",
+    "stable_teacher_and_explicit_execution": "b60a256d",
+    "prototype_equivalence_and_configuration_records": "218f19e2"
+  },
+  "prototype": {
+    "original_archive": "/data/milai-experiments/20261112-reader-utility/original-prototype/MILAI_TRAINING_IMPLEMENTATION_20261112.zip",
+    "original_tests_log": "/data/milai-experiments/20261112-reader-utility/original-prototype/original-tests-current-environment.txt",
+    "comparison": "/data/milai-experiments/20261112-reader-utility/original-prototype/integration-comparison-v1.json",
+    "original_cpu_tests_passed": 12,
+    "original_source_preserved": true,
+    "implemented_nonflat_kl_and_gradient_max_error": 0.0,
+    "pair_loss_and_gradient_match": true,
+    "scope": "Original tests run unchanged on torch2.7.0 CPU; integration adds numerical deadband, actual action alignment and full-window component scheduling.",
+    "missing_attachment_resolved": true
+  },
+  "data": {
+    "unique_QASPER_TRAIN_sources": 721,
+    "original_native_requests": 1884,
+    "valid_actual_collector_states": 7896,
+    "selected_comparison_opportunities": 3768,
+    "actually_executed_comparison_states": 3765,
+    "source_production_plan": "/data/milai-experiments/20261112-reader-utility/main3k-source-production-plan-v1.json",
+    "invalid_first_additional_states_excluded": 858,
+    "invalid_firsts": "/data/milai-experiments/20261112-reader-utility/additional-source-reuse-v1-exclusion.json",
+    "corrected_additional_collection": "/data/milai-experiments/20261112-reader-utility/main3k-additional203-multi-request-v2",
+    "corrected_additional_states": 1784,
+    "all_source_collection_and_h2_execution_closed": true,
+    "scope": "Repeated source visits and queries remain grouped by original paper; 721, not924, unique sources. Bad v1 empty-bank firsts retained and never admitted as valid main data."
+  },
+  "teacher_numerics": {
+    "protocol": "/data/milai-experiments/20261112-reader-utility/teacher-scoring-numerical-protocol-v2.json",
+    "observed_bf16_identical_input_max_delta": 0.24747848510742188,
+    "bf16_decoder_fp32_head_delta": 0.13913536071777344,
+    "float32_delta": 4.57763671875e-05,
+    "formal_precision": "float32",
+    "formal_flat_tolerance": 0.0001,
+    "student_precision": "bf16",
+    "old_bf16_scores_and_functional_fits": "Retained earlier configuration; not overwritten and not canonical formal utility targets.",
+    "fp32_closed_blocks": [
+      "main3k-new64-block00-scores-fp32-v2",
+      "main3k-new64-block01-scores-fp32-v2"
+    ],
+    "horizon_probe": "/data/milai-experiments/20261112-reader-utility/immediate-vs-h2-new8-diagnostic-v1.json",
+    "horizon_interpretation": "h0 executed36states/120bindings; BF16 same-HANDOFF drift confounds the recorded18ranking changes. Re-score both depth strata in FP32 before interpreting value."
+  },
+  "semantic_feedback": {
+    "first20_readouts": "/data/milai-experiments/20261112-reader-utility/main3k-new64-block00-semantic20-readouts-v1/run.json",
+    "first20_labels": "/data/milai-experiments/20261112-reader-utility/main3k-new64-block00-semantic20-labels-v1/manifest.json",
+    "reviewed_states": 20,
+    "reviewed_sources": 15,
+    "known_delivery_states": 8,
+    "known_answer_states": 7,
+    "delivery_directional_states": 6,
+    "answer_directional_states": 4,
+    "first20_reader_failures": 7,
+    "masked_teacher_candidates": 11,
+    "next48_readouts_closed": "/data/milai-experiments/20261112-reader-utility/main3k-new64-block01-semantic48-readouts-v1/run.json",
+    "next48_states": 48,
+    "next48_sources": 40,
+    "next48_packets": 164,
+    "next48_reader_failures": 15,
+    "format": "answer_separate_v1, all fields retained for semantic review; native metrics read answer only",
+    "sampling_scope": "First68 TRAIN annotation states sampled with recorded50/25/25 quotas using earlier BF16 scores, before discovering numerical drift. Their actual semantic labels remain valid independent supervision; future selection uses declared FP32 configuration. Non-independent same Host reviewer; source checks remain required."
+  },
+  "native_functional_metrics": {
+    "artifact": "/data/milai-experiments/20261112-reader-utility/function64-dev4-native-v1/summary.json",
+    "sources": 4,
+    "states": 8,
+    "answer_F1_missing_zero": {
+      "fixed_context": 0.04426683635422419,
+      "u0": 0.04721419534887756,
+      "u1": 0.04437286182276849
+    },
+    "scope": "Literal legacy long answer field, not repaired short answers, not semantic success or a significant method comparison."
+  },
+  "i2": {
+    "native_metrics": "/data/milai-experiments/20261112-reader-utility/i2-prefit-dev8-native-v1/summary.json",
+    "same_full_packet_in_all_8_sources": true,
+    "full_answer_F1": 0.0708919924742904,
+    "rules_answer_F1": 0.08122719587187659,
+    "rules_first_failure": 1,
+    "scope": "No unique learned delivery benefit established; no source-grounded quality ranking from lexical F1 alone. Ignore native Evidence F1 generated from empty paragraph predictions."
+  },
+  "storage": {
+    "recovery_plan": "/data/milai-experiments/20261112-reader-utility/functional-recovery-archive-plan-v1.json",
+    "recovery_archives": "/data/milai-experiments/20261112-reader-utility/closed-functional-recovery-archives-v1/results.json",
+    "restore_entry": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/tools/restore_case_archive.py",
+    "empty_base": "/data/milai-experiments/20261112-reader-utility/closed-functional-recovery-archives-v1/immutable-empty-base",
+    "weights_sharing": "/data/milai-experiments/20261112-reader-utility/closed-final-weight-sharing-results-v1.json",
+    "closed_identical_weight_aliases": 30,
+    "released_weight_GiB": 17.98877716064453,
+    "scope": "Lossless, direct byte comparison only; no SHA. All inference paths/content retained via hardlinks within closed runs, configs unchanged. Two functional FP32 optimizer/RNG states retained in restorable archives; raw recovery directories removed only after existing archive helper checked every restored byte. Failed startup invocation made no archive and changed no recovery data.",
+    "ordinary_free_GiB_at_phase02": 22.88
+  },
+  "checks": {
+    "phase02_focused_tests": 49,
+    "block_compiler_tests": 2,
+    "latest_teacher_loss_compiler_tests": 28,
+    "latest_GPU_tests_skipped": 2,
+    "original_tests": 12,
+    "ruff": "PASS",
+    "package_boundary": "PASS",
+    "tools_boundary": "Same6preexisting unresolved LME dynamic imports; no new findings."
+  },
+  "current_jobs": [
+    {
+      "name": "main3k-new64to128-scores-fp32-v2",
+      "pid": 910395,
+      "exec_session": 54640,
+      "gpu": 2,
+      "data_status": "COMPLETED_WITH_FAILURES",
+      "process_live_verified": true,
+      "last_observed": {
+        "ledger_recorded": false
+      }
+    },
+    {
+      "name": "main3k-new128to256-scores-fp32-v2",
+      "pid": 910396,
+      "exec_session": 42802,
+      "gpu": 3,
+      "data_status": "RUNNING",
+      "process_live_verified": true,
+      "last_observed": {
+        "ledger_recorded": false
+      }
+    },
+    {
+      "name": "main3k-new64-block01-semantic48-teacher-v1",
+      "pid": 915570,
+      "exec_session": 22506,
+      "resource": "shared Host",
+      "data_status": "RUNNING",
+      "process_live_verified": true,
+      "last_observed": {
+        "closed_states": 28,
+        "unresolved_states": 0
+      }
+    },
+    {
+      "name": "main3k-new256to337-scores-fp32-v2",
+      "pid": 946541,
+      "exec_session": 89590,
+      "gpu": 2,
+      "process_live_verified": true
+    }
+  ],
+  "resource_accounting": {
+    "closed_phase02": "/data/milai-experiments/20261112-reader-utility/phase02-closed-compute-v1.json",
+    "closed_scopes_paid_once": 38,
+    "cpu_seconds_paid_once": 12057.449083421003,
+    "scope": "Native scorer/train/Reader/semantic-Teacher/I2 self-bill; excluded from this settlement. Some newer jobs/probes/compilation remain pending. Unknown root/tests/imports/serverGPU/money remain unknown."
+  },
+  "next_actions": [
+    "Revalidate live jobs by /proc/session; score remaining main3k blocks in FP32: new256to337, additional203-input-v2, original-replay128, original-new256. Never admit failed additional-v1 or mix BF16 target versions.",
+    "After semantic48 Teacher closes, compile its actual reviews using answer_fields; preserve failed firsts and unknowns. Continue source-stratified annotation toward about600 reviewed states and report actual known targets.",
+    "Use compile_reader_utility_data.py --additional-block ... --active-main-only --utility-flat-tolerance 1e-4 to freeze the union of weak/semantic support; actual mainN determines exact3passes/24:8windows. Do not call the old531-row BF16 readiness prefix a formal dataset.",
+    "Freeze paired U0/U1 production comparison from common S1/36k, same main/replay windows; report semantic availability vs weak coverage. Same Q correction later, predeclared curves0.5/1/2/3passes, no confirmation tuning.",
+    "Run remaining representative long-input/throughput and Teacher presentation/K diagnostics; root/source review of task chain and I2 still needed.",
+    "MuSiQue K diagnostic metadata found at old m2-public-train16-query-once-main-v1:32actualstates16families,cold/known-first,legacyh4. Scoring exporter needs an explicit native-reference adapter; do not treat it as QASPER controls. MuSiQue population metadata:3418nativevariants/1820questions/283TRAINfamilies, native visible-context boundaries must remain.",
+    "Natural history inventory found existing BEAM/CUPID described as generated/simulated; do not relabel them as natural. Full autonomous Host/View/update application line remains required."
+  ],
+  "required_remaining": {
+    "A": "Finish stable FP32 scoring diagnostics, semantic/source review and meaningful I2/K/long-input evaluation. Original prototype and original12tests now obtained and verified.",
+    "F4_F5": "Scale multi-request actual sources; add h=0 stratum, legal stop diagnostics, actual K and complementary A/B/A+B conditions; do not count duplicate sources independently.",
+    "B_E0_E1": "Complete canonical FP32 main3k data and prespecified paired U->Q experiment; candidate execution data now exists. Full semantic correction/data signal accounting/native Host evaluation still incomplete.",
+    "C_E2": "~10k distinct experience versus 3k repeated with approximate compute matching; one own-state round; decisive seed1/2 replication.",
+    "D_E4": "Freeze new confirmation sources/candidates/short-answer format/budgets/repeat subset before outcomes; actual full-menu and native task scoring.",
+    "applications": "New natural histories initial ~32 if available, autonomous Host and continuous View/update line; distinguish invocation from control; retain failures.",
+    "synthesis": "Five result layers, clustered paired uncertainty, full measured cost/unknown scopes, mechanism and counterexamples; conditional minimal Product recommendation only."
+  }
+}
