@@ -284,7 +284,7 @@
       "/data/milai-experiments/20261112-reader-utility/expansion-shard0-families16to32-preparation-owner-v1.json",
       "/data/milai-experiments/20261112-reader-utility/expansion-shard0-families32to48-preparation-owner-v1.json"
     ],
-    "closed_additional_active_states": 6747,
+    "closed_additional_active_states": 8109,
     "available17_compilation": "/data/milai-experiments/20261112-reader-utility/expansion-available17-data-v1/run.json",
     "scale_comparison_preview": "/data/milai-experiments/20261112-reader-utility/scale-available17-preview-v1/run.json",
     "common_input_observation": "/data/milai-experiments/20261112-reader-utility/scale-available17-preview-v1/common-input-observation.json",
@@ -296,7 +296,7 @@
     "closed_active_raw_families": 58,
     "remaining_active_new_state_target": 0,
     "closed_collection_inventory": "/data/milai-experiments/20261112-reader-utility/expansion-closed-collection-inventory-v2.json",
-    "latest_closed_score_inventory": "/data/milai-experiments/20261112-reader-utility/expansion-shard2-families0to16-closed-inventory-v1.json",
+    "latest_closed_score_inventory": "/data/milai-experiments/20261112-reader-utility/expansion-shard2-families16to32-closed-inventory-v1.json",
     "closed_inventory_scope": "closed_inventory, closed_opportunity_states, closed_raw_families and closed_active_raw_families describe pilot plus shard0 only; latest_closed_score_inventory and closed_additional_active_states include later shard1 blocks.",
     "closed_collection_counts": {
       "raw_source_families": 156,
@@ -306,7 +306,7 @@
       "model_calls": 22404,
       "Host_calls": 0
     },
-    "available_states_above_new_target": 103,
+    "available_states_above_new_target": 1465,
     "formal_sampling_status": "NOT_SELECTED: first availability exceeds6644 new states, but final selection waits all planned blocks and dependency-group-balanced sampling; E2 fits still require Q/actualDEV signal assessment."
   },
   "application_source_inventory": {
