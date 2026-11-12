@@ -1,6 +1,6 @@
-# ACTIVE Reader utility v3: phase17 final Q annotation block (2026-11-13)
+# ACTIVE Reader utility v3: phase18 independent cost scopes (2026-11-13)
 
-Goal ACTIVE/incomplete. Current milestone PROGRESS:462Qopportunitiesclosed253delivery222answer;10045newactiveweakstates. Full user v3 objective remains.
+Goal ACTIVE/incomplete. Current milestone PROGRESS:81independentcostscopes reconciled;10264newactiveweakstates. Full user v3 objective remains.
 R=/data/milai-experiments/20261112-reader-utility.
 Read data/manifests/reader-utility-progress-20261112-v3.json and
 docs/MILAI_READER_UTILITY_EXECUTION_20261112.md. KEEP ANALYSIS SHORT; act on files/processes.
@@ -116,7 +116,9 @@ Shard3[16,32] scoreCLOSED251activeweak,cumulativeNew9721;496states1883packets,
 960scored923unscored1225references,15active rawfamilies. InventoryatR.
 Shard3[32,48] scoreCLOSED324activeweak,cumulativeNew10045;628states2398packets,
 1244scored1154unscored1736references,15active rawfamilies. InventoryatR; notformal10kselected.
-GPU2queue nowshard3[48,64] childPID2953468; previousscorePID2916642maywaitnativeledger.
+Shard3[48,64] scoreCLOSED219activeweak,cumulativeNew10264;396states1516packets,
+845scored671unscored1434references,13active rawfamilies. InventoryatR.
+GPU2queue nowshard3[64,80] childPID2982400; previousscorePID2953468maywaitnativeledger.
 ALL20branchinputs CLOSED:22613actualstates85907packets,44037eligible native-refpackets;
 283rawfamilies279groups, no duplicateeventIDs orbetween-blockrawfamily overlap.
 expansion-all-branch-input-inventory-v1.json; inputrow/packetcountsactuallyread, notonlymanifest.
@@ -200,6 +202,12 @@ Budget oneexistingledger. closed-cpu-queue-cost-inventory-v1.json PREPARED_UNPAI
 NEVERaddboth; covered_artifact_receipt listswhatfuturecostscanner mustexclude ifusingwholechild.
 BothpreviouspaidphaseCPUentries readbackmatch; no overlap withthese111scopes. Thisispartial
 CPUaccounting(includesGPU-backedcollectors), notfullstudy/GPUcost; noledgerwrite.
+closed-independent-cpu-cost-inventory-v1.json also PREPARED_UNPAID:81scopes2605.798850515CPU,
+separatefrom111inventory; includes8closedbound/label children ofliveQowner. Their27.257920924
+manifestCPUalreadyincluded; useownerpath+stage_index identities, do notaddmanifestagain.
+I2terminal-short run.compute copiedfromoriginalpreparation, excluded; separatewitnessdiagnostic
+timerincluded. Priorpaid/native/coveredentries explicitlyexcluded. Laternewscopesnotincluded.
+BothinventoriescombinedknownunpaidCPU49581.565071515, notfullstudy/GPUcost; noledgerwrites.
 NativeTeacher/scorer/trainer/Reader/reviewer selfbill; CPUcompile/prep,
 collector/nativeF1/profiles/analyses doNOT. Phase02PAID38scopes12057.449CPU;phase03..10pending.
 Do notdoublebillnativecompute vswholechild/residual. NeverwriteledgerwhileownedHost/modelslive.
