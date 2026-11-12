@@ -29,8 +29,13 @@ def main() -> None:
     parser.add_argument("--families", type=int, default=8)
     parser.add_argument("--offset", type=int, default=0)
     parser.add_argument("--max-steps", type=int, default=8)
+    parser.add_argument("--requests-per-family", type=int,
+                        help="Original request prefix per family; default1, zero means all")
     parser.add_argument("--device", default="cpu")
     args = parser.parse_args()
+    request_limit = 1 if args.requests_per_family is None else args.requests_per_family
+    if request_limit < 0:
+        parser.error("Request limit must be nonnegative")
     started, cpu = time.perf_counter(), time.process_time()
     original = read_json(args.collection / "run.json")
     if original["status"] != "COMPLETED":
@@ -50,6 +55,9 @@ def main() -> None:
         "config": str(args.config.resolve()), "checkpoint": str(args.checkpoint.resolve()),
         "device": args.device, "precision": "float32", "projection": "shared_actions",
         "planned_families": len(histories), "completed_families": 0, "closed_requests": 0,
+        "requests_per_family": request_limit,
+        "planned_native_requests": sum(len(h["requests"][:request_limit]) if request_limit
+                                       else len(h["requests"]) for h in histories),
         "model_calls": 0, "Host_calls": 0, "no_sha_validation": True, "automatic_retry": False,
         "source_bank_reuse": True, "new_Source_copies": 0,
         "scope": "Frozen model public rollouts. Both models use the original lexical collector's "
@@ -66,65 +74,70 @@ def main() -> None:
         decision = NativeDecision(args.checkpoint, 16384, 2048, args.device)
         decision.model.encoder.config.reference_compile = False
         for history in histories:
-            request = history["requests"][0]
-            bank = args.collection / "banks" / history["id"]
             output = args.output / "banks" / history["id"]
             output.mkdir(parents=True, exist_ok=False)
-            mapping = read_json(bank / "source-map.json")["mapping"]
-            allowed = set(request.get("source_event_ids", mapping.values()))
-            excluded = tuple(ref for ref, native in mapping.items() if native not in allowed)
-            with SqliteStore.from_conn_string(str(bank / "memory.sqlite")) as store:
-                service = MemoryService(store, ("public-operation-collection", history["id"],
-                    "collector"), "collector", bank / "lock", functional_contract="functional_v1")
-                for condition in ("cold", "known-first"):
-                    original_receipt = bank / f"{request['id']}-{condition}-receipt.json"
-                    incoming = read_json(original_receipt)["request"]
-                    turn = f"{args.output.name}/{condition}"
-                    source = service.capture_user(request["id"], turn, request["content"],
-                                                  capture_context="given_retrieval_request")
-                    service.bind_public_turn(request["id"], turn, source["source_ref"],
-                                             config_version=args.output.name, phase="start")
-                    cfg = {"configurable": {"user_id": "collector", "v13_session": request["id"],
-                        "v13_turn_id": turn, "v13_config_version": args.output.name}}
-                    trace = output / f"{request['id']}-{condition}-operations.jsonl"
-                    scores = output / f"{request['id']}-{condition}-predictions.jsonl"
+            requests = history["requests"][:request_limit] if request_limit else history["requests"]
+            for request in requests:
+                bank = args.collection / "banks" / history["id"]
+                mapping = read_json(bank / "source-map.json")["mapping"]
+                allowed = set(request.get("source_event_ids", mapping.values()))
+                excluded = tuple(ref for ref, native in mapping.items() if native not in allowed)
+                with SqliteStore.from_conn_string(str(bank / "memory.sqlite")) as store:
+                    service = MemoryService(store, ("public-operation-collection", history["id"],
+                        "collector"), "collector", bank / "lock",
+                        functional_contract="functional_v1")
+                    for condition in ("cold", "known-first"):
+                        original_receipt = bank / f"{request['id']}-{condition}-receipt.json"
+                        incoming = read_json(original_receipt)["request"]
+                        turn = f"{args.output.name}/{condition}"
+                        source = service.capture_user(request["id"], turn, request["content"],
+                                                      capture_context="given_retrieval_request")
+                        service.bind_public_turn(request["id"], turn, source["source_ref"],
+                                                 config_version=args.output.name, phase="start")
+                        cfg = {"configurable": {"user_id": "collector",
+                            "v13_session": request["id"],
+                            "v13_turn_id": turn, "v13_config_version": args.output.name}}
+                        trace = output / f"{request['id']}-{condition}-operations.jsonl"
+                        scores = output / f"{request['id']}-{condition}-predictions.jsonl"
 
-                    def record(event: dict, trace: Path = trace) -> None:
-                        with trace.open("a") as stream:
-                            stream.write(json.dumps(event, ensure_ascii=False) + "\n")
+                        def record(event: dict, trace: Path = trace) -> None:
+                            with trace.open("a") as stream:
+                                stream.write(json.dumps(event, ensure_ascii=False) + "\n")
 
-                    def predict(payload: dict, scores: Path = scores) -> dict:
-                        result = decision.predict(payload)
-                        run["model_calls"] += 1
-                        with scores.open("a") as stream:
-                            stream.write(json.dumps({"input": payload, "prediction": result},
-                                                    ensure_ascii=False) + "\n")
-                        return result
+                        def predict(payload: dict, scores: Path = scores) -> dict:
+                            result = decision.predict(payload)
+                            run["model_calls"] += 1
+                            with scores.open("a") as stream:
+                                stream.write(json.dumps({"input": payload, "prediction": result},
+                                                        ensure_ascii=False) + "\n")
+                            return result
 
-                    memory = IntentRetrievalMemory(service, capacity.text_tokens,
-                        interface_version="I2", material_limit=settings["ordinary_material_tokens"],
-                        read_limit=args.max_steps + 1, source_access="independent_v1",
-                        source_tokenization="unicode_v1", source_top_k=16,
-                        evidence_policy="question_pack_v1",
-                        control_policy=LayaMemoryPolicy(predict, "shared_actions"),
-                        control_steps=args.max_steps, control_record=record,
-                        control_internal_views=False, control_delivery_selection=True,
-                        control_source_observation_tokens=2048, control_source_ranges=ranges,
-                        control_excluded_source_refs=excluded, control_exclude_given_requests=True)
-                    packet = memory.retrieve(cfg, "actual-retrieval",
-                                             RetrievalRequest.model_validate(incoming))
-                    write_json(output / f"{request['id']}-{condition}-receipt.json", {
-                        "request": incoming, "packet": packet, "Host_executed": False,
-                        "native_context_source_ids": sorted(allowed),
-                        "original_Source_bank": str(bank.resolve()),
-                        "known_reference_parent_receipt": str((bank /
-                            f"{request['id']}-cold-receipt.json").resolve()),
-                    })
-                    run["closed_requests"] += 1
-                    run["active_family"] = history["source_group"]
-                    write_json(args.output / "run.json", run)
-                    print(json.dumps({k: run[k] for k in (
-                        "active_family", "closed_requests", "model_calls")}), flush=True)
+                        memory = IntentRetrievalMemory(service, capacity.text_tokens,
+                            interface_version="I2",
+                            material_limit=settings["ordinary_material_tokens"],
+                            read_limit=args.max_steps + 1, source_access="independent_v1",
+                            source_tokenization="unicode_v1", source_top_k=16,
+                            evidence_policy="question_pack_v1",
+                            control_policy=LayaMemoryPolicy(predict, "shared_actions"),
+                            control_steps=args.max_steps, control_record=record,
+                            control_internal_views=False, control_delivery_selection=True,
+                            control_source_observation_tokens=2048, control_source_ranges=ranges,
+                            control_excluded_source_refs=excluded,
+                            control_exclude_given_requests=True)
+                        packet = memory.retrieve(cfg, "actual-retrieval",
+                                                 RetrievalRequest.model_validate(incoming))
+                        write_json(output / f"{request['id']}-{condition}-receipt.json", {
+                            "request": incoming, "packet": packet, "Host_executed": False,
+                            "native_context_source_ids": sorted(allowed),
+                            "original_Source_bank": str(bank.resolve()),
+                            "known_reference_parent_receipt": str((bank /
+                                f"{request['id']}-cold-receipt.json").resolve()),
+                        })
+                        run["closed_requests"] += 1
+                        run["active_family"] = history["source_group"]
+                        write_json(args.output / "run.json", run)
+                        print(json.dumps({k: run[k] for k in (
+                            "active_family", "closed_requests", "model_calls")}), flush=True)
             run["completed_families"] += 1
         run["status"] = "COMPLETED"
     except BaseException as error:
