@@ -1,7 +1,7 @@
 {
   "status": "ACTIVE_INCOMPLETE",
   "goal_turn_classification": "progress",
-  "previous_turn_classification": "verified_wait",
+  "previous_turn_classification": "progress",
   "plan": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261112_2XA10040GB_v3.md",
   "artifact_root": "/data/milai-experiments/20261112-reader-utility",
   "prior_progress": "reader-utility-progress-20261112-v2.json",
@@ -346,7 +346,7 @@
     "Prepare fixed train diagnostic probe if useful; do not repeatedly evaluate all7452training rows solely for bookkeeping.",
     "New confirmation and autonomous/natural continuous View application lines remain required; no overall completion claim."
   ],
-  "phase": 9,
+  "phase": 10,
   "signal_diagnostic": {
     "canonical110": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-vs-semantic110-diagnostic-v1.json",
     "author_spots": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-semantic-disagreement-spots-v1.json",
@@ -478,5 +478,6 @@
     "git_diff_check": "passed",
     "closed_incremental_streams": 22,
     "decompressed_bytes_equal_original": true
-  }
+  },
+  "phase10_storage": "/data/milai-experiments/20261112-reader-utility/phase10-closed-branch-stream-compression-v1.json"
 }

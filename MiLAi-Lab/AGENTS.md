@@ -1,4 +1,4 @@
-# ACTIVE Reader utility v3: phase09 shard0 scoring closed; Q and expansion running (2026-11-13)
+# ACTIVE Reader utility v3: phase10 continued expansion and Q (2026-11-13)
 
 Goal ACTIVE/incomplete. Previous turn VERIFIED_WAIT; current milestone PROGRESS. Full user v3 objective remains.
 R=/data/milai-experiments/20261112-reader-utility.
@@ -147,7 +147,7 @@ zero overlap old1169Train/DevIDs andknownmetadataSource-IDscan. NoSource/control
 Finalmethods/metrics/repeatsfreeze beforeexport. No publicpretraining/unknownexternalhistoryisolation.
 
 Budget oneexistingledger. NativeTeacher/scorer/trainer/Reader/reviewer selfbill; CPUcompile/prep,
-collector/nativeF1/profiles/analyses doNOT. Phase02PAID38scopes12057.449CPU;phase03..09pending.
+collector/nativeF1/profiles/analyses doNOT. Phase02PAID38scopes12057.449CPU;phase03..10pending.
 Do notdoublebillnativecompute vswholechild/residual. NeverwriteledgerwhileownedHost/modelslive.
 Root/imports/tests/networkpartlyunmeasured, notzero. Storagephase06closedrecovery6filessparse
 freed7.84GiB; phase07additional9closedrecoveriesfreed11.17GiB. Logicalbytes/inode/pathretained; inferenceweights/firsts untouched. NoSHA.
@@ -159,6 +159,8 @@ sourcebootstrap+unknownbounds;4summary/bindingtestsPASS. RealDEVreviewsstillpend
 Storagephase08compressed22closedcompleted-cases.jsonl streams to samepath.jsonl.gz, every
 decompressedbytecompared, freed2.19GiB. Finalcases/states/run andallfirstHostoutcomesunchanged.
 Restoregziptooriginalpath ifincrementalstreamneeded; noSHA. Seephase08-closed-branch-stream-compression-v1.
+Storagephase10compressed17additionalclosedincrementalstreams, directbyteverification,freed2.02GiB;
+phase10-closed-branch-stream-compression-v1.json. Finalcases/states andfirstoutcomesunchanged.
 Currentgoalremaining:Q+actualDEVHost,10k/repeat,ownstate,decisiveseeds,newconfirmation,
 autonomous/naturalcontinuousView/update,cost/statistical/mechanism synthesis. Notcomplete.
 Priorv2below CLOSED/HISTORICAL, notqueues/reusablefreshconfirmation.
