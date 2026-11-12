@@ -54,7 +54,8 @@ def main() -> None:
             identities.add(event)
         rows.extend(block)
         block_records.append({"states": str(states_path.resolve()),
-                              "scores": str(scores_path.resolve()), "rows": len(block)})
+                              "scores": str(scores_path.resolve()), "rows": len(block),
+                              "scoring_configuration": score_run.get("scoring_configuration")})
     original_count = len(rows)
     original_families = {r["metadata"]["family"] for r in rows}
     semantic = {}

@@ -1,7 +1,8 @@
 """Executed-subset utility KL and explicit main/replay optimizer windows.
 
-Independent implementation of the v3 plan's equations. The attachment prototype was
-not present in this checkout; no claim is made that its original tests were rerun.
+Integration of the v3 equations, cross-checked against the retained standalone
+prototype on non-flat KL losses/gradients and reviewed pairs. Numerical deadbands,
+actual-action alignment and optimizer-window scheduling are integration additions.
 """
 from __future__ import annotations
 
