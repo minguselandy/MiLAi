@@ -1,4 +1,4 @@
-# ACTIVE Reader utility v3: phase04 formal U and Q annotations running (2026-11-12)
+# ACTIVE Reader utility v3: phase05 actual task DEV and dependent GPU work (2026-11-12)
 
 Goal ACTIVE/incomplete; previous/current turns PROGRESS. Full original v3 objective unchanged.
 R=/data/milai-experiments/20261112-reader-utility. Read existing
@@ -7,18 +7,23 @@ KEEP ANALYSIS SHORT. No SHA/content fingerprints/subagents/Product/API/permissio
 default-strategy changes/service restarts/push. Original userDrive prototype obtained;12testsPASS.
 
 LIVE formal U0 PID1169498/session55981 GPU2; U1 PID1169499/session95185 GPU3.
-Lastreported190/420; actual source287cedec frozen. Revalidate, do notrestart duringeval/save/loggap.
+Lastreported330/420; actual source287cedec frozen. Revalidate, do notrestart duringeval/save/loggap.
 Common initial128DEV logits EXACT equal46/78. At140 fastU0=44/78,U1=29/78;
 full96DEV992states584labels U0=263/584 macro.4900,U1=209/584 macro.3896.
+At280 fastU0=44/78,U1=30/78; no additionalfullDEV until420.
 Reference preferences only; keep planned420 endpoints, no earlyresult retuning.
 Data formal-main3k-data-v2:3356main698sources,3355weak vs37semantic active;4096old replay857sources.
 Unfittedv1 only110replay superseded BEFOREfitting. Each10068primary+3356replay420updates.
 24k/checkpoint/unfusedAdamW/BF16student. TeacherFP32/SDPA/TF32off/deadband1e-4.
 Curves70/140/280/420,fullDEV140/420. LaterQ NEVER mutates frozenU.
 FullDEV old32+exposedDEVELOPMENT64; noTRAINoverlap,truncation0,max9460tokens.
-Actual full-menu DEV execution remains pending; referencepanel is nottasksuccess.
+Actualown-trajectoryDEV96 protocol PREPARED atformal-task-dev96-input-v1. Fixed_context4
+CLOSED96sources581states287executeddeliverybranches; actualterminal96packets,2forcedstops.
+Readerinputformal-task-dev96-fixed-context-readout-input-v1 ready, noHostyet. Methodsfixedcontext,
+commonS1,U0,U1,U0Q,U1Q; fullmenus/max8steps/samecapacity/shortanswer. Conditionalh2diagnostic
+formal-dev32-common-h2-v1 CLOSED64states206packets, old3k/u101collector, not36kcommontrajectory.
 
-LIVE semantic92 Reader PID1306490/session20619; last67/308firsts7failed. Revalidate.
+LIVE semantic92 Reader PID1306490/session20619; last165/308firsts14failed. Revalidate.
 Finite continuation finish_selected_q_blocks_v2.py PID1325952/session22201 waits92closure then
 bind/review/compile92, followed59+133+68+138 blocks alreadyselected. OwnerJSON atR; no retries.
 Do notlaunch duplicateHTTP work competing with thisserialpipeline. All600 opportunitiesselected;
@@ -34,17 +39,35 @@ CanonicalFP32vssemantic110: material88directional67agree21oppose;15opposedweakwi
 areemptywithnoK. Some native/reviewerambiguity; no causalparameter-memoryclaim, no labelrewrite.
 Artifacts canonical-fp32-vs-semantic110-diagnostic-v1 and disagreement-spots-v1.
 
+NEW I2public8: aa0e2f12 terminaldeliveries+explicitDEV preservesfullmenu/role/K. Helperuses
+actualfullHANDOFF asA+B onlywhenopenedmembership EXACTLYpair; legalaliasomissionwasfixed.
+16states62packets;12ABcomparisons,2union-onlynativewitness. Rootspotfilmidentity+374IMAXclear;
+artistlabel/time/albumcaseambiguous. NoHostsuccessyet. Preparedi2-public-dev8-terminal-short-v1.
+FirstReaderstartupPID1428636/session77152 EXIT1 HTTP_OWNER_BUSY,0Host/0packetattempts,
+retainedi2-public-dev8-terminal-short-readouts-v1 FAILED_FIRST_RETAINED. NOTwaiting/live.
+Dependentrun_i2_after_q_annotation_v2.py PID1458340/session16943 waitsfullQqueue thenlaunches
+readouts-v2 once. NativeHTTP ownership FAILSFAST, notqueuing: neverlaunchcompetingHostjobs.
+
+Qdataadapterprepare_formal_quality_data_v1.py actualpreview110=>57quality53sources+4096replay,
+3passes171+171exposures11updates, NOFIT. quality110-data-preview-v1. Finalonlyafter600closed;
+allowCOMPLETED_WITH_UNRESOLVED reviews, unknownrows staymasked; no utility copiedintoQ.
+
 Public multi-request code998fbfee; actualpost-prefix152a43cd committed,test2+RuffPASS.
 CPU pilot4conditions2nativequeries1family19NN. Post1=4states15branches;post4=2states7branches,
 2unreached explicit.6states22actualpackets but0reliable native refs (missing-support contexts),
 so pilotprovesexecution, notutilitytargets. Inputexpansion-public-post-pilot-input-v1.
-Productionplan expansion-public-production-plan-v1 PREPAREDNOTLAUNCHED:5originalMuSiQuebanks
+Productionplan expansion-public-production-plan-v1 QUEUEDWAITINGU:5originalMuSiQuebanks
 pilot-v2+shards0..3,3418nativevariants283banks279dependencygroups; preserveTRAIN/context/K.
 Proposedtargetsteps0/1/2/4,h2query_once_context, actualmissing remainmissing.
 QueryOnce policy is branch-local existingimplementation; do notsilentlychangepre-search semantics.
-WaitforU GPUrelease; prioritizeactualDEV64S1collector/prep/scorers ononeGPU,
-publicproduction/FP32scoring onother. Fixed3k pool3356 retained; <=6644newactive states target.
+LIVE finite post-u-gpu2-owner-v1 PID1481285/session15019 andgpu3ownerPID1481397/session17387
+waitUcompletion/cleanup thenactualGPUused<=6144MiB. GPU2runscommonS1,U0,U1actualDEV96
+trajectories+terminalbinders; GPU3runsall5publicproductioncollections. DO NOTlaunchduplicate
+GPUworkwhenUfinishes; theseownersalreadyclaimnextschedule. Code71a677ee; fixedbaseline5tests.
+Savedscorer3bad33dc releasesmodelbeforeledgerwait,5tests; firstactualGPUsavedscorestillpending. Fixed3k pool3356 retained; <=6644newactive states target.
 Actuallyavailableexisting sourcegroups<1500; reportactual, neverrelabelvariantsindependent.
+Nextafterpublicfamilyprefixclosed: prepareactualsteps0/1/2/4, exportnativecontrols, FP32score
+onGPU2afteritsDEVqueuecompletes; main10k/repeatrecipe andactualknownQcountsnotinvented.
 
 Natural REALTALK10files downloaded;8944literalhumanmessages,10speakers only3participantgroups.
 natural-realtalk-continuous10-plan-v1 PREPAREDNOTRUN:100nativequestions evenlyspaced nativeindices,
@@ -57,12 +80,18 @@ legacyrun_milai_application_v25(SHAguards). Runtime/config/methodfreeze and actu
 DolphinTask1download FAILEDtimeout,partial retained and firstrecordinspected; noidentity/chronology
 fromthatderivedrecord. See natural-dolphin-inspection-v1/download-first-failure.json; no hiddenretry.
 
+NEWCONFIRMATION identityreservation new-confirmation-source-reservation-v1: officialnativeTEST
+archive3865061bytes,416IDs, fixedseed20261112 selects256; old1169Train/DevIDs overlap0.
+Knownprojectallocation/population/protocol/histories/manifest/source-map scan0hits. OnlyIDs
+projected; rawarchive retained, noSource/controls/modelcalls. Finalmethod/metric/repeatfreeze
+stillrequired; do notfit/retuneonTEST. Publicpretraining/unknownexternalexposure notcertified.
+
 Budget singleexistingledger. Scorer/trainer/Reader/reviewer/I2modelprep self-bill; CPU-onlynativeF1,
-compiler/prep/profiles/publiccollector doNOT. Phase02PAID38scopes12057.449CPU; phase03/04non-native
+compiler/prep/profiles/publiccollector doNOT. Phase02PAID38scopes12057.449CPU; phase03/04/05non-native
 pending, no settlement whileownedmodel/Hostlive. Do notdoublecountwholechild vsnativephases.
 Queueowner recordswholechildtime; residualreconcile later. Root/network/tests/toolcostspartunknown.
 Teacher/trainerreleaseGPU beforeledgerwait; terminaldata canprecedeprocessexit.
-Storage last13GiBordinaryfree; monitoratomiccheckpointpeaks.30closedidenticalfinalaliaseshardlinked,
+Storage last12GiBordinaryfree; monitoratomiccheckpointpeaks.30closedidenticalfinalaliaseshardlinked,
 17.99GiBfreed; nevermutatefrozenlinkedweights. Functionalrecoverieslosslesslyarchived withrestoretool.
 
 Priorfacts: all721QASPERTRAINsources1884questions7896actualstates,3765h2comparisons,all8FP32closed.

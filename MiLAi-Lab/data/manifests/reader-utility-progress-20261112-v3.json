@@ -22,7 +22,10 @@
     "balanced_replay": "287cedec",
     "multi_request_public_rollout": "998fbfee",
     "actual_live_U_source": "287cedec",
-    "public_actual_post_state": "152a43cd"
+    "public_actual_post_state": "152a43cd",
+    "public_terminal_deliveries": "aa0e2f12",
+    "saved_evaluator_release": "3bad33dc",
+    "actual_DEV_trajectory_endpoints": "71a677ee"
   },
   "formal_U": {
     "protocol": "/data/milai-experiments/20261112-reader-utility/formal-main3k-uq-protocol-v1.json",
@@ -90,14 +93,14 @@
       "u0": {
         "pid": 1169498,
         "status": "RUNNING",
-        "last_reported_updates": 215,
+        "last_reported_updates": 355,
         "planned_updates": 420,
         "source_commit": "287cedec"
       },
       "u1": {
         "pid": 1169499,
         "status": "RUNNING",
-        "last_reported_updates": 215,
+        "last_reported_updates": 330,
         "planned_updates": 420,
         "source_commit": "287cedec"
       }
@@ -145,10 +148,12 @@
     "active92_last_observation": {
       "status": "RUNNING",
       "pid": 1306490,
-      "closed_readouts": 74,
-      "failed_readouts": 8,
+      "closed_readouts": 172,
+      "failed_readouts": 15,
       "planned_unique_packets": 308
-    }
+    },
+    "quality_preview_110": "/data/milai-experiments/20261112-reader-utility/quality110-data-preview-v1/run.json",
+    "quality_preparation_script": "/data/milai-experiments/20261112-reader-utility/prepare_formal_quality_data_v1.py"
   },
   "K_diagnostic": {
     "input": "/data/milai-experiments/20261112-reader-utility/known-evidence-train16-input-v1/run.json",
@@ -201,7 +206,7 @@
     "post_packets": 22,
     "post_packets_with_reliable_native_references": 0,
     "production_plan": "/data/milai-experiments/20261112-reader-utility/expansion-public-production-plan-v1.json",
-    "production_status": "PREPARED_NOT_LAUNCHED"
+    "production_status": "FINITE_GPU3_QUEUE_WAITING_FOR_U_RELEASE"
   },
   "application_source_inventory": {
     "artifact": "/data/milai-experiments/20261112-reader-utility/natural-application-source-options-v1.json",
@@ -280,7 +285,7 @@
     "Prepare fixed train diagnostic probe if useful; do not repeatedly evaluate all7452training rows solely for bookkeeping.",
     "New confirmation and autonomous/natural continuous View application lines remain required; no overall completion claim."
   ],
-  "phase": 4,
+  "phase": 5,
   "signal_diagnostic": {
     "canonical110": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-vs-semantic110-diagnostic-v1.json",
     "author_spots": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-semantic-disagreement-spots-v1.json",
@@ -307,5 +312,56 @@
     "ruff": "passed",
     "git_diff_check": "passed",
     "cost": "Native jobs self-bill. New nonnative preparations/analyses and previousphase03 pending; no settlement while live model/Host scopes exist. Root/network/tool costs partly unmeasured."
+  },
+  "formal_actual_task_DEV": {
+    "protocol": "/data/milai-experiments/20261112-reader-utility/formal-task-dev96-input-v1/manifest.json",
+    "fixed_context": "/data/milai-experiments/20261112-reader-utility/formal-task-dev96-fixed-context-v1/run.json",
+    "fixed_context_readout_input": "/data/milai-experiments/20261112-reader-utility/formal-task-dev96-fixed-context-readout-input-v1/run.json",
+    "source_count": 96,
+    "native_questions": 96,
+    "baseline_actual_states": 581,
+    "baseline_actual_endpoints": 96,
+    "baseline_forced_stops": 2,
+    "Host_calls": 0,
+    "learner_collection_plans": "/data/milai-experiments/20261112-reader-utility/formal-task-dev96-collect-plans-v1.json",
+    "conditional_old32_h2": "/data/milai-experiments/20261112-reader-utility/formal-dev32-common-h2-v1/run.json",
+    "conditional_scope": "64same-statecomparisons206packets; oldcollector3k/u101, separatefrom96actualwholetrajectorytaskprotocol."
+  },
+  "I2_public": {
+    "prepared": "/data/milai-experiments/20261112-reader-utility/i2-public-dev8-terminal-short-v1/run.json",
+    "native_witness": "/data/milai-experiments/20261112-reader-utility/i2-public-dev8-terminal-short-v1/native-witness-diagnostic.json",
+    "author_premise_check": "/data/milai-experiments/20261112-reader-utility/i2-public-dev8-terminal-short-v1/author-premise-check-v1.json",
+    "states": 16,
+    "sources": 8,
+    "packets": 62,
+    "states_with_AB_comparison": 12,
+    "union_only_native_witness": 2,
+    "semantic_caution": "One cleartwo-premisefilm/countcase; otherartistlabelquestiontime/albumambiguous. NoHostoutcomesyet, no newmodelselectionclaim.",
+    "retained_first_startup_failure": "/data/milai-experiments/20261112-reader-utility/i2-public-dev8-terminal-short-readouts-v1/run.json",
+    "failure_Host_calls": 0,
+    "dependent_owner": "/data/milai-experiments/20261112-reader-utility/i2-public-after-q-owner-v2.json"
+  },
+  "post_U_GPU_owners": {
+    "2": "/data/milai-experiments/20261112-reader-utility/post-u-gpu2-owner-v1.json",
+    "3": "/data/milai-experiments/20261112-reader-utility/post-u-gpu3-owner-v1.json"
+  },
+  "new_confirmation_reservation": {
+    "reservation": "/data/milai-experiments/20261112-reader-utility/new-confirmation-source-reservation-v1/reservation.json",
+    "known_exposure_scan": "/data/milai-experiments/20261112-reader-utility/new-confirmation-source-reservation-v1/known-project-exposure-scan.json",
+    "native_test_papers": 416,
+    "reserved": 256,
+    "prior_train_dev_overlap": 0,
+    "known_metadata_ID_matches": 0,
+    "Source_exported": false,
+    "model_calls": 0,
+    "scope": "Identityreservation only; finalmethods/metrics/repeats stilltofreeze beforeexperimentexport. Notpretraining orunknownexternalhistoryisolation."
+  },
+  "phase05_validation": {
+    "public_and_complementary": 6,
+    "saved_evaluator": 5,
+    "collector_and_terminal_binding": 5,
+    "ruff": "passed",
+    "git_diff_check": "passed",
+    "cost": "NewCPUpreps/collectors/analyses and earlierphase03/04pending; model jobs selfbill. FirstI2startupfailureCPUunmeasured, notzero. No ledgerwriteswhilelive."
   }
 }
