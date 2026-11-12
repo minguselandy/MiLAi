@@ -42,6 +42,7 @@ def main() -> None:
         "teacher": str(args.model.resolve()), "template_version": TEMPLATE_VERSION,
         "backend": "transformers-selective-logits-sdpa", "precision": args.precision,
         "device": args.device, "max_length": args.max_length,
+        "ledger_recorded": False,
         "batch_size": args.batch_size, "padded_token_target": args.padded_token_target,
         "no_sha_validation": True, "automatic_retry": False,
         "aggregation": "arithmetic_mean_of_per_reference_mean_logprob",
@@ -147,11 +148,18 @@ def main() -> None:
                     "cpu_seconds": time.process_time() - cpu, "runs": 1, **counts}
         run["compute"] = measures
         run["stage_wall_seconds"] = stage_seconds
+        run["compute_wall_scope"] = (
+            "Model load, input preparation, scoring and cleanup; before ledger wait")
         write_json(args.output / "run.json", run)
+        ledger_wait_started = time.perf_counter()
         with args.budget.with_name("budget.json.http-owner.lock").open("a+b") as lease:
             fcntl.flock(lease, fcntl.LOCK_EX)
+            run["ledger_wait_wall_seconds"] = time.perf_counter() - ledger_wait_started
             budget = RunBudget(RunLimits(**read_json(args.budget)["limits"]), args.budget)
             budget.record_compute(args.compute_phase, measures)
+        run["ledger_recorded"] = True
+        run["process_wall_seconds_including_ledger_wait"] = time.perf_counter() - started
+        write_json(args.output / "run.json", run)
 
 
 if __name__ == "__main__":
