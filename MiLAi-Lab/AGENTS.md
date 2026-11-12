@@ -73,7 +73,7 @@ expansion-shard0-first16-input-v1. LIVE GPU2scorerPID1847042/session92419:
 expansion-shard0-first16-scores-fp32-cache-v1. Itreleasesweightsbeforeledgerwait;
 closedscorefiles canprecedeprocessend. Checkrun/compute, no duplicatefitting/scoring.
 LIVE CPUpreps:
- expansion-shard0-families16to32-preparation-owner-v1 PID1850651/session25294
+ expansion-shard0-families16to32-preparation-owner-v1 PID1850651/session25294 CLOSED
  expansion-shard0-families32to48-preparation-owner-v1 PID1850780/session13620.
 Each4steps+inputexport. First16ownerPID1773029/session33205 CLOSED.
 73748278appendsstatesinsteadrewritingeachprefix;793dd0be snapshotdefault128 pluscompleted-cases
