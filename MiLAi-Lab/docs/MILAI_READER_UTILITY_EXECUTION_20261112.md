@@ -214,3 +214,5 @@ shard1最后来源48–58评分已关闭：4,085包中2,144成功、1,941无可�
 两条有限接续进程已启动并通过实际`/proc`命令行核实，当前均在等待依赖，Q拟合尚未开始。`run_formal_Q_and_dev_v1.py`等待全部600审阅机会关闭、共享Q数据及两份正式计划生成，再依既有计划启动Q0/GPU2和Q1/GPU3；GPU2须由评分队列让出，GPU3须完成公共来源采集，两者均检查实际剩余显存。两个固定Q终点关闭并释放后，96来源实际DEV轨迹及终点绑定统一在GPU3执行，使GPU2评分可恢复。原生训练记账仍由训练器完成，允许释放显存后的进程继续等待共享账本，父进程整体CPU不能重复相加。owner为`formal-Q-fit-and-dev-owner-v1.json`。
 
 `run_formal_task_dev96_Q_and_review_v1.py`等待既有四方法首次读出链和Q采集完成，然后执行Q0/Q1各96个首次读出、原生F1、六方法按预定两两分组的来源评审，以及u1q−u0q主要比较汇总。命令复用现有工具和先前声明，失败首次及unresolved判断保留，不自动重试，不导出TRAIN标签，不执行新确认。owner为`formal-task-dev96-Q-and-review-owner-v1.json`。两脚本语法、未使用目标路径和实际等待进程已核对；这些接续作业的存在不代表后续拟合或任务结果已经完成。
+
+本阶段另将14份已关闭增量JSONL无损压缩，并逐字节解压核对，释放1.51GiB；最终cases/states、首次结果和推理权重保持，原增量字节可由同路径gzip恢复。未处理活动文件，未做SHA/内容指纹校验；记录为`phase12-closed-branch-stream-compression-v1.json`。

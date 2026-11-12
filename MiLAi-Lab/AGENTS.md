@@ -177,6 +177,8 @@ decompressedbytecompared, freed2.19GiB. Finalcases/states/run andallfirstHostout
 Restoregziptooriginalpath ifincrementalstreamneeded; noSHA. Seephase08-closed-branch-stream-compression-v1.
 Storagephase10compressed17additionalclosedincrementalstreams, directbyteverification,freed2.02GiB;
 phase10-closed-branch-stream-compression-v1.json. Finalcases/states andfirstoutcomesunchanged.
+Storagephase12 compressed14additionalclosedincrementalstreams, exactdecompressedbytecompare,
+freed1.51GiB. phase12-closed-branch-stream-compression-v1.json; finals/firstsunchanged.
 Currentgoalremaining:Q+actualDEVHost,10k/repeat,ownstate,decisiveseeds,newconfirmation,
 autonomous/naturalcontinuousView/update,cost/statistical/mechanism synthesis. Notcomplete.
 Priorv2below CLOSED/HISTORICAL, notqueues/reusablefreshconfirmation.
