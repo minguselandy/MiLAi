@@ -292,3 +292,9 @@ shard3来源96–112评分已关闭：864机会状态、3,308包中1,741评分�
 磁盘普通余量约5.2GiB时，对已关闭且独立数据已编译的80份扩量step cases.json做可恢复归档。使用现有case_blocks_v1与保留空base，硬链接暂存不复制额外原始数据，全部重建字节直接对照后才移除原case文件；权限和mtime保留。实际恢复的字节对照及按原路径恢复CLI检查通过，全部80归档存在，释放12.45GiB，普通余量约18GiB。记录、冻结恢复实现与入口位于`phase19-closed-expansion-case-archives-v1/`。状态、packet、score、训练数据、原Source库、模型和Host首次结果保持直接可读。
 
 这些80个cases.json原路径现在需要先恢复，再由依赖原packet_ref的工具读取：`python3 /data/milai-experiments/20261112-reader-utility/phase19-closed-expansion-case-archives-v1/restore.py <完整block目录名>`；例如`expansion-shard3-families0to16-step2-h2-v1`。恢复不会调用模型、不做SHA，已有目标不会被覆盖；归档、manifest、immutable-empty-base和冻结case_archive.py须一起保留。归档进程已正常退出。新编译、容量、计划及归档CPU记录尚不在前述81范围快照内，后续统一核对。整体实验仍未完成。
+
+## 第二十阶段：全部Q首次读出关闭
+
+最后138机会的466个首次读出已结束，保留33个失败；461次实际chat调用、5次完全相同wire复用分列。8个预定批次合计600审阅机会、2,018读出位置、143个失败读出、2,004实际调用，全部first结果保留且无自动重试。核对见`semantic-Q-all600-first-readouts-inventory-v1.json`；初始68与后续采样/格式历史仍分列，不能把这些TRAIN读出当独立任务成功或600个质量目标。最终138状态语义评审已启动，已闭合标签仍为462机会、253材料目标、222答案目标。
+
+共享HTTP阶段释放后，20个规范评分作业的原生计量均已写入既有账本，队列内16个子进程全部exit0、parent正常退出，4个更早规范作业也报告ledger_recorded=True。闭合记录`expansion-native-score-bookkeeping-closure-v1.json`确认20,055.138016313 CPU秒已由原生作业计量，仅作只读核对，不再加入手工待结算总量。这不等于独立准备/分析/存储成本已经结算。Q与整体实验继续执行。

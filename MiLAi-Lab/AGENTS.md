@@ -1,6 +1,6 @@
-# ACTIVE Reader utility v3: phase19 formal scale data ready (2026-11-13)
+# ACTIVE Reader utility v3: phase20 all Q first readouts closed (2026-11-13)
 
-Goal ACTIVE/incomplete. Current milestone PROGRESS: all20scores+formal10kdata closed, E2threearmplans ready, casearchives verified. Full user v3 objective remains.
+Goal ACTIVE/incomplete. Current milestone PROGRESS: all600Qfirsts closed; final138teacher active; all20native scores settled. Full user v3 objective remains.
 R=/data/milai-experiments/20261112-reader-utility.
 Read data/manifests/reader-utility-progress-20261112-v3.json and
 docs/MILAI_READER_UTILITY_EXECUTION_20261112.md. KEEP ANALYSIS SHORT; act on files/processes.
@@ -50,8 +50,11 @@ semantic-Q-closed462-inventory-v1.json.133labels72delivery61answer(57/45directio
 133Reader CLOSED451firsts25failed,448chatcalls+3exactwirereuses; teacherPID2495693closed.
 Later68Reader CLOSED228firsts20failed,227chatcalls+1exactwirereuse; PID2639401exited.
 Later68teacher CLOSED68states0unresolved,42maskedcandidatesretainedunknown; labels38delivery32answer,
-28/18directional. LIVE finish_selected_q_blocks_v2.py PID1325952/session22201 currentlyfinal138
-ReaderPID2959498,466plannedpackets,then138review; all600selectedbeforeoutcomes. Revalidateowner.
+28/18directional. Final138Reader CLOSED466firsts33failed,461chatcalls+5exactwirereuses;
+PID2959498exited. ALL600opportunityfirsts CLOSED2018positions143failed2004actualcalls.
+semantic-Q-all600-first-readouts-inventory-v1.json. Closedlabels still462(253delivery222answer).
+LIVE finish_selected_q_blocks_v2.py PID1325952/session22201 final138teacherPID3453242,
+thenlabels; all600selectedbeforeoutcomes. Revalidateowner.
 First68samplingoldBF16, latercanonicalFP32. Failedfirsts/maskedquotes notrerolled.
 Qdataadapterprepare_formal_quality_data_v1.py handlesCOMPLETED_WITH_UNRESOLVED; preview110 has
 57quality53sources+4096replay,171+171exposures11updates,NOFIT. FinalQonlyafter600closed,
@@ -129,8 +132,9 @@ FINALshard3[112,127] scoreCLOSED286activeweak,cumulativeNew11486;527states2022pa
 expansion-all-scores-inventory-v1:85907packets43984scored41923unknown,65312actualrefsequences,
 36614350processedvs54717436logicalrefinputtokens. 41870noeligible refs,53tokenboundaryfailures
 across2families14states: all-alias mean withheld, successfulaliasrecordsretained, no rescore.
-remaining-expansion-scoring-owner-v1 PID2039219/session73793 nowWAITING_NATIVE_BOOKKEEPING,
-no forward work remains. Checkowner; oldscorerchildrenmayliveonlywaitingledger, do notrestart.
+remaining-expansion-scoring-owner-v1 PID2039219/session73793 COMPLETEDand exited;16childrenexit0.
+All20canonicalscore runs ledger_recorded=True, including4earlierjobs. NativeCPU20055.138016313
+alreadyselfbilled; no manualrebill. expansion-native-score-bookkeeping-closure-v1.json.
 ALL20branchinputs CLOSED:22613actualstates85907packets,44037eligible native-refpackets;
 283rawfamilies279groups, no duplicateeventIDs orbetween-blockrawfamily overlap.
 expansion-all-branch-input-inventory-v1.json; inputrow/packetcountsactuallyread, notonlymanifest.

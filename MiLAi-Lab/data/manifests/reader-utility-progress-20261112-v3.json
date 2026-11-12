@@ -178,7 +178,7 @@
     "new42_labels": "/data/milai-experiments/20261112-reader-utility/main3k-new64to128-semantic42-labels-v2/manifest.json",
     "new42_known_delivery": 20,
     "new42_known_answer": 20,
-    "remaining": "138 preselected opportunities remain: final original-new256 semantic138 first readouts and review. Compile one actual-known Q pool only after all600 close; initial first68 sampling was older BF16 and later blocks FP32/deadband. Preserve all failed firsts and unknown labels.",
+    "remaining": "Final138 review and labels still pending. All600 opportunity first-readouts closed, but only462 opportunities have closed labels (253delivery,222answer). CommonQ data/fits only after final labels close; failedfirsts and unknowns retained.",
     "all600_opportunities_selected": true,
     "finite_continuation_owner": "/data/milai-experiments/20261112-reader-utility/finish_selected_q_blocks_v2-owner.json",
     "finite_continuation_pid": 1325952,
@@ -203,7 +203,7 @@
       "reused_readouts": 3,
       "automatic_retry": false
     },
-    "current_stage": "main3k-original-new256-semantic138 readouts",
+    "current_stage": "main3k-original-new256-semantic138 teacher",
     "fit_and_DEV_owner": "/data/milai-experiments/20261112-reader-utility/formal-Q-fit-and-dev-owner-v1.json",
     "fit_and_DEV_process": {
       "pid": 2573854,
@@ -239,7 +239,22 @@
       "masked_teacher_candidates": 42,
       "unresolved_review_states": 0
     },
-    "active_final138": "/data/milai-experiments/20261112-reader-utility/main3k-original-new256-semantic138-readouts-v2/run.json"
+    "active_final138": "/data/milai-experiments/20261112-reader-utility/main3k-original-new256-semantic138-readouts-v2/run.json",
+    "closed_final138_readouts": {
+      "status": "COMPLETED_WITH_FAILURES",
+      "closed_readouts": 466,
+      "failed_readouts": 33,
+      "chat_invocations": 461,
+      "reused_readouts": 5,
+      "automatic_retry": false
+    },
+    "all600_first_readouts_inventory": "/data/milai-experiments/20261112-reader-utility/semantic-Q-all600-first-readouts-inventory-v1.json",
+    "all600_first_readout_counts": {
+      "opportunities": 600,
+      "readouts": 2018,
+      "failed_readouts": 143,
+      "actual_chat_invocations": 2004
+    }
   },
   "K_diagnostic": {
     "input": "/data/milai-experiments/20261112-reader-utility/known-evidence-train16-input-v1/run.json",
@@ -357,7 +372,7 @@
       "duplicate_event_ids": 0
     },
     "all_score_inventory": "/data/milai-experiments/20261112-reader-utility/expansion-all-scores-inventory-v1.json",
-    "canonical_scoring_status": "ALL_TWENTY_CLOSED_NATIVE_BOOKKEEPING_SEPARATE",
+    "canonical_scoring_status": "ALL_TWENTY_CLOSED_AND_NATIVE_LEDGER_RECORDED",
     "formal_data": {
       "base_primary_states": 3356,
       "available_active_new_states": 11486,
@@ -395,7 +410,8 @@
       "policy": "One failed native alias makes packet score unknown; retain successful alias records but do not repair mean or rescore."
     },
     "E2_three_fresh_U_plans": "/data/milai-experiments/20261112-reader-utility/formal-E2-three-arm-data-and-U-plans-v1.json",
-    "E2_same_pass_baseline_required": true
+    "E2_same_pass_baseline_required": true,
+    "native_score_bookkeeping_closure": "/data/milai-experiments/20261112-reader-utility/expansion-native-score-bookkeeping-closure-v1.json"
   },
   "application_source_inventory": {
     "artifact": "/data/milai-experiments/20261112-reader-utility/natural-application-source-options-v1.json",
@@ -451,7 +467,7 @@
     "Prepare fixed train diagnostic probe if useful; do not repeatedly evaluate all7452training rows solely for bookkeeping.",
     "New confirmation and autonomous/natural continuous View application lines remain required; no overall completion claim."
   ],
-  "phase": 19,
+  "phase": 20,
   "signal_diagnostic": {
     "canonical110": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-vs-semantic110-diagnostic-v1.json",
     "author_spots": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-semantic-disagreement-spots-v1.json",
