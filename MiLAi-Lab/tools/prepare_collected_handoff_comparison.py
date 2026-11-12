@@ -26,10 +26,16 @@ from milai_lab.providers.laya_local import NativeDecision
 from milai_lab.runners.given_host_readout import given_packet_request
 
 
-def complementary_deliveries(actions: list[MemoryAction]) -> dict[str, str]:
+def complementary_deliveries(actions: list[MemoryAction],
+                            opened_indices: tuple[int, ...] | None = None) -> dict[str, str]:
     """First offered legal A/B/A+B, without reading reference answers or inventing a bundle."""
     offered = {tuple(a.parameters["delivery_indices"]): a.id for a in actions
                if a.kind == "HANDOFF" and set(a.parameters) == {"delivery_indices"}}
+    # The executor omits a selected-subset alias when it is the unchanged full packet.
+    # Reuse the actual legal HANDOFF only with its exact recorded opened membership.
+    full = next((a for a in actions if a.kind == "HANDOFF" and not a.parameters), None)
+    if opened_indices is not None and full is not None:
+        offered.setdefault(opened_indices, full.id)
     singles = [key[0] for key in offered if len(key) == 1]
     for i, left in enumerate(singles):
         for right in singles[i + 1:]:
@@ -162,7 +168,9 @@ def main() -> None:
                 choices["full_delivery"] = next(
                     a.id for a in actions if a.kind == "HANDOFF" and not a.parameters)
             if args.include_complementary_subsets:
-                choices.update(complementary_deliveries(actions))
+                choices.update(complementary_deliveries(actions, tuple(
+                    item["item_index"] for item in branch["before"]["observed_materials"]
+                    if item["selected"])))
             case = {
                 "family": branch["family"],
                 "event_id": branch["event_id"],

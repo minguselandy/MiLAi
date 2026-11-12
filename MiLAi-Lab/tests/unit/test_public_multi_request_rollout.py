@@ -3,6 +3,8 @@ import json
 import sys
 from types import SimpleNamespace
 
+import pytest
+
 import prepare_public_initial_feedback as preparation
 import rollout_public_known_conditions as rollout
 from collect_public_reference_states import collect_history
@@ -12,7 +14,8 @@ from milai_lab.methods.laya_memory_policy import payload_actions
 from prepare_musique_operation_sources import export_family
 
 
-def test_all_requests_reuse_original_k_and_preserve_context(tmp_path, monkeypatch):
+@pytest.mark.parametrize("split", ["train", "dev"])
+def test_all_requests_reuse_original_k_and_preserve_context(tmp_path, monkeypatch, split):
     a = {"idx": 0, "title": "Alpha", "paragraph_text": "Alpha leads to Beta.",
          "is_supporting": True}
     b = {"idx": 1, "title": "Beta", "paragraph_text": "HIDDEN_BETA_PREMISE gives Gamma.",
@@ -22,6 +25,7 @@ def test_all_requests_reuse_original_k_and_preserve_context(tmp_path, monkeypatc
         "answerable": answerable, "answer": "Gamma", "answer_aliases": []}}
         for i, (paragraphs, answerable) in enumerate((([a], False), ([a, b], True)))]
     history, controls = export_family("family", records)
+    history['split'] = split
     capacity = SimpleNamespace(text_tokens=len, tokenizer=lambda text, **_: {
         "offset_mapping": [(i, i + 1) for i in range(len(text))]})
     collection = tmp_path / 'collection'
@@ -45,9 +49,16 @@ def test_all_requests_reuse_original_k_and_preserve_context(tmp_path, monkeypatc
             inputs.append(payload)
             actions = payload_actions(payload)
             before = observation_object(payload['state'])
-            choice = (next(a for a in actions if a.kind == 'SEARCH')
-                      if before['last_result'] is None else
-                      next(a for a in actions if a.kind == 'HANDOFF' and not a.parameters))
+            last = before['last_result']
+            if last is None:
+                choice = next(a for a in actions if a.kind == 'SEARCH')
+            elif last['action']['kind'] == 'SEARCH':
+                choice = next((a for a in actions if a.id.startswith('read_')),
+                              next(a for a in actions if a.id == 'handoff'))
+            elif last['action']['id'] == 'read_0' and any(a.id == 'read_1' for a in actions):
+                choice = next(a for a in actions if a.id == 'read_1')
+            else:
+                choice = next(a for a in actions if a.kind == 'HANDOFF' and not a.parameters)
             return {'choice': choice.id,
                     'logits': {a.id: float(a.id == choice.id) for a in actions}}
 
@@ -59,8 +70,11 @@ def test_all_requests_reuse_original_k_and_preserve_context(tmp_path, monkeypatc
     rollout.main()
     run = json.loads((output / 'run.json').read_text())
     assert run['completed_families'] == 1 and run['closed_requests'] == 4
-    assert run['planned_native_requests'] == 2 and len(inputs) == 8
-    assert all('HIDDEN_BETA_PREMISE' not in json.dumps(p) for p in inputs[:4])
+    assert run['planned_native_requests'] == 2 and len(inputs) > 8
+    for condition in ('cold', 'known-first'):
+        first = output / 'banks' / history['id'] / (
+            history['requests'][0]['id'] + '-' + condition + '-predictions.jsonl')
+        assert 'HIDDEN_BETA_PREMISE' not in first.read_text()
     for request in history['requests']:
         known = json.loads((output / 'banks' / history['id'] /
                             f"{request['id']}-known-first-receipt.json").read_text())
@@ -71,7 +85,7 @@ def test_all_requests_reuse_original_k_and_preserve_context(tmp_path, monkeypatc
     prepared = tmp_path / 'post-state-branches'
     monkeypatch.setattr(sys, 'argv', ['prepare', str(output), str(prepared), '--families', '1',
         '--requests-per-family', '0', '--target-step', '1', '--continuation-steps', '2',
-        '--continuation-policy', 'query_once_context', '--include-legal-handoff'])
+        '--continuation-policy', 'query_once_context', '--include-legal-handoff', '--split', split])
     preparation.main()
     cases = json.loads((prepared / 'cases.json').read_text())
     assert len(cases) == 4 and {c['step'] for c in cases} == {1}
@@ -82,3 +96,19 @@ def test_all_requests_reuse_original_k_and_preserve_context(tmp_path, monkeypatc
         original = next(e for e in events if e.get('phase') == 'decision_output' and e['step'] == 1)
         assert case['before'] == original['before'] and case['actions'] == original['actions']
         assert all(b['actual_before_and_full_menu_equal'] for b in case['branches'])
+    terminal = tmp_path / 'terminal-deliveries'
+    monkeypatch.setattr(sys, 'argv', ['prepare', str(output), str(terminal), '--families', '1',
+        '--requests-per-family', '0', '--terminal-deliveries', '--continuation-steps', '0',
+        '--split', split])
+    preparation.main()
+    cases = json.loads((terminal / 'cases.json').read_text())
+    assert len(cases) == 4 and all(c['source_split'] == split for c in cases)
+    assert any({'material_a', 'material_b', 'material_a_b'} <= set(c['choices']) for c in cases)
+    for case in cases:
+        for branch in case['branches']:
+            assert branch['action']['kind'] == 'HANDOFF'
+            assert branch['actual_before_and_full_menu_equal']
+            if case['request_id'] == history['requests'][0]['id']:
+                assert 'HIDDEN_BETA_PREMISE' not in json.dumps(branch['packet'])
+    rows = [json.loads(line) for line in (terminal / 'states.jsonl').open()]
+    assert {r['metadata']['split'] for r in rows} == {split}

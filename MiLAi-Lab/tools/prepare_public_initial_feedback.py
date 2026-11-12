@@ -1,4 +1,4 @@
-"""Replay actual public initial states through existing EvidenceOperations, with fixed receipt K."""
+"""Replay actual public reached states through EvidenceOperations, with fixed receipt K."""
 
 import argparse
 import copy
@@ -24,12 +24,14 @@ from milai_lab.methods.memory_control import (
     FixedContextMemoryPolicy,
     MemoryAction,
     MemoryControlState,
+    RulesMemoryPolicy,
 )
 from milai_lab.methods.memory_control_learning import decision_example
 from milai_lab.methods.source_observations import SourceObservationBudget
 from milai_lab.methods.source_ranges import SourceRangeBudget
 from milai_lab.providers.contextual_capacity import HostCapacity
 from milai_lab.runners.given_host_readout import receipt_conditioned_packet_request
+from prepare_collected_handoff_comparison import complementary_deliveries
 from prepare_collected_operation_feedback import append_completed_case, execute_branch, nominate
 
 
@@ -63,6 +65,10 @@ def main() -> None:
     parser.add_argument("--requests-per-family", type=int, default=1,
                         help="Original request prefix; zero means all")
     parser.add_argument("--target-step", type=int, default=0)
+    parser.add_argument("--split", choices=("train", "dev"), default="train")
+    parser.add_argument("--terminal-deliveries", action="store_true",
+                        help="Compare only legal deliveries at an actual learner HANDOFF; "
+                             "forced or unreached terminal states remain missing")
     parser.add_argument("--continuation-steps", type=int, default=4)
     parser.add_argument("--include-legal-handoff", action="store_true")
     parser.add_argument("--snapshot-every", type=int, default=16)
@@ -89,6 +95,9 @@ def main() -> None:
         parser.error("Snapshot interval must be positive")
     if args.nomination_source and args.known_query_only:
         parser.error("Choose frozen nominations or the known-query extension, not both")
+    if args.terminal_deliveries and (args.nomination_source or args.known_query_only
+                                    or args.target_step or args.continuation_steps):
+        parser.error("Terminal deliveries require --continuation-steps 0 and no other selection")
     nominations = (
         {c["event_id"]: c for c in read_json(args.nomination_source / "cases.json")}
         if args.nomination_source
@@ -109,7 +118,7 @@ def main() -> None:
     histories = read_json(args.collection / "sources.json")["histories"][
         args.offset : args.offset + args.families
     ]
-    assert len(histories) == args.families and all(h["split"] == "train" for h in histories)
+    assert len(histories) == args.families and all(h["split"] == args.split for h in histories)
     args.output.mkdir(exist_ok=False)
     cases = []
     rows = []
@@ -120,7 +129,7 @@ def main() -> None:
         "collection": str(args.collection.resolve()),
         "config": original["config"],
         "collector_checkpoint": original["checkpoint"],
-        "source_split": "train",
+        "source_split": args.split,
         "families": len(histories),
         "comparison_states": 0,
         "packets": 0,
@@ -134,6 +143,7 @@ def main() -> None:
         "nomination_baseline": args.continuation_policy,
         "requests_per_family": args.requests_per_family,
         "target_step": args.target_step,
+        "terminal_deliveries": args.terminal_deliveries,
         "include_legal_handoff": args.include_legal_handoff,
         "terminal_handoff": "policy",
         "no_sha_validation": True,
@@ -208,23 +218,29 @@ def main() -> None:
                         collected / f"{public['id']}-{condition}-predictions.jsonl")
                     if len(model_events) != len(predictions):
                         raise ValueError("Public model receipts do not align with policy decisions")
+                    target_step = args.target_step
+                    if args.terminal_deliveries:
+                        terminal = next((e for e in model_events if any(
+                            a["id"] == e["selected"] and a["kind"] == "HANDOFF"
+                            for a in e["actions"])), None)
+                        target_step = terminal["step"] if terminal else None
                     found = next(((e, p) for e, p in zip(model_events, predictions, strict=True)
-                                  if e["step"] == args.target_step), None)
+                                  if e["step"] == target_step), None)
                     if found is None:
                         run.setdefault("unreached_or_forced_states", []).append({
                             "family": history["source_group"], "request_id": public["id"],
-                            "condition": condition, "target_step": args.target_step})
+                            "condition": condition, "target_step": target_step})
                         continue
                     event, pred = copy.deepcopy(found)
                     event["prediction"] = pred["prediction"]
                     assert event["selected"] == pred["prediction"]["choice"]
                     event_id = (f"{history['source_group']}/{public['id']}/{condition}/"
-                                f"step-{args.target_step}")
+                                f"step-{target_step}")
                     row = decision_example(
                         event,
                         {
                             "family": history["source_group"],
-                            "split": "train",
+                            "split": args.split,
                             "row": len(rows),
                             "state_id": len(rows),
                             "event_id": event_id,
@@ -237,7 +253,20 @@ def main() -> None:
                     projected = project_operation_payload(row, "shared_actions")
                     assert pred["input"] == {k: projected[k] for k in ["state", "questions"]}
                     rows.append(row)
-                    if args.nomination_source:
+                    if args.terminal_deliveries:
+                        delivery_actions = [MemoryAction(**a) for a in event["actions"]
+                                            if a["kind"] == "HANDOFF"]
+                        choices = {"collector_delivery": event["selected"],
+                            "rules": RulesMemoryPolicy(reads=4).choose(
+                                MemoryControlState(**copy.deepcopy(event["before"])),
+                                delivery_actions)}
+                        full = next((a for a in delivery_actions if not a.parameters), None)
+                        if full is not None:
+                            choices["full_delivery"] = full.id
+                        choices.update(complementary_deliveries(delivery_actions, tuple(
+                            item["item_index"] for item in event["before"]["observed_materials"]
+                            if item["selected"])))
+                    elif args.nomination_source:
                         frozen = nominations[event_id]
                         if (
                             frozen["before"] != event["before"]
@@ -361,7 +390,7 @@ def main() -> None:
                     assert [asdict(a) for a in actions] == initial["actions"], (
                         "Actual full menu changed"
                     )
-                    state = replay_public_to_step(operations, state, events, args.target_step)
+                    state = replay_public_to_step(operations, state, events, target_step)
                     saved = operations.checkpoint()
                     observation = (
                         operations.source_pages.budget if operations.source_pages else None
@@ -369,11 +398,11 @@ def main() -> None:
                     parent = read_json(Path(receipt["known_reference_parent_receipt"]))
                     case = {
                         "family": history["source_group"],
-                        "source_split": "train",
+                        "source_split": args.split,
                         "event_id": event_id,
                         "case_key": event_id,
                         "request_id": public["id"],
-                        "step": args.target_step,
+                        "step": target_step,
                         "condition": condition,
                         "native_source_row": public["native_source_row"],
                         "state_index": len(rows) - 1,
@@ -384,7 +413,7 @@ def main() -> None:
                         "restored_replay_budget": {
                             "actual_reconstruction": actual_budget,
                             "original_initial_observation": initial["before"]["budget"],
-                            "target_step": args.target_step,
+                            "target_step": target_step,
                             "original_model_observation": event["before"]["budget"],
                             "scope": (
                                 "Same recorded work-counter restoration as collected_handoff. "
@@ -403,7 +432,7 @@ def main() -> None:
                             operations,
                             event["before"],
                             action,
-                            args.target_step,
+                            target_step,
                             args.continuation_steps,
                             "policy",
                             args.continuation_policy,

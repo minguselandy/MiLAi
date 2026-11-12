@@ -18,3 +18,11 @@ def test_legal_union_and_empty_control_use_actual_ids_not_array_positions():
 def test_nonfitting_union_is_never_fabricated_and_single_material_is_not_complementary():
     assert complementary_deliveries([action("a", [1]), action("b", [2])]) == {}
     assert complementary_deliveries([action("a", [1])]) == {}
+
+
+def test_full_packet_is_a_union_only_when_recorded_opened_membership_matches():
+    actions = [MemoryAction("full", "HANDOFF", "opened evidence", {}), action("a", [1]),
+               action("b", [2]), action("empty", [])]
+    assert complementary_deliveries(actions, (1, 2)) == {
+        "material_a": "a", "material_b": "b", "material_a_b": "full", "empty_delivery": "empty"}
+    assert complementary_deliveries(actions, (1, 2, 3)) == {}
