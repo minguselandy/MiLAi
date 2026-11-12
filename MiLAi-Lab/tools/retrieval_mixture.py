@@ -8,10 +8,13 @@ from typing import Any
 
 
 def event_weights(rows: list[dict[str, Any]]) -> list[float]:
-    keys = [(r["metadata"]["family"],
-             r["metadata"].get("training_event", r["metadata"]["row"])) for r in rows]
+    # Shared-support families may declare an offline dependency group without
+    # relabelling their actual Source identity or merging unrelated native events.
+    keys = [(r["metadata"].get("dependency_group", r["metadata"]["family"]),
+             (r["metadata"]["family"],
+              r["metadata"].get("training_event", r["metadata"]["row"]))) for r in rows]
     counts = Counter(keys)
-    events: dict[str, set[int | str]] = defaultdict(set)
+    events: dict[str, set[tuple[str, int | str]]] = defaultdict(set)
     for family, event in counts:
         events[family].add(event)
     return [len(rows) / len(events) / len(events[family]) / counts[family, event]
@@ -67,7 +70,7 @@ def combine_components(components: list[dict[str, Any]]) -> tuple[
             if identity in seen:
                 raise ValueError("Duplicate task example in the mixture")
             seen.add(identity)
-            previous = family_splits.setdefault(family, split)
+            previous = family_splits.setdefault(metadata.get("dependency_group", family), split)
             if previous != split:
                 raise ValueError("A source family crosses training and development")
             metadata.update(task=task, component=name)

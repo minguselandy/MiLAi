@@ -21,6 +21,35 @@ from outcome_distillation import (
 from retrieval_feedback import validate_feedback
 
 
+def dependency_groups(groups: list[list[str]]) -> dict[str, str]:
+    """Use existing shared-source relations; never rewrite actual family/action bindings."""
+    parent: dict[str, str] = {}
+
+    def root(name: str) -> str:
+        parent.setdefault(name, name)
+        if parent[name] != name:
+            parent[name] = root(parent[name])
+        return parent[name]
+
+    for group in groups:
+        if not group or any(not isinstance(name, str) or not name for name in group):
+            raise ValueError("Source dependency groups require original nonempty identity strings")
+        for name in group:
+            left, right = sorted((root(group[0]), root(name)))
+            parent[right] = left
+    return {name: root(name) for name in parent}
+
+
+def annotate_dependencies(rows: list[dict], groups: dict[str, str]) -> None:
+    for row in rows:
+        meta = row["metadata"]
+        if meta["family"] in groups:
+            group = groups[meta["family"]]
+            if meta.get("dependency_group", group) != group:
+                raise ValueError("Declared source dependency group changed")
+            meta["dependency_group"] = group
+
+
 def balanced_replay(rows: list[dict], count: int, seed: int) -> list[dict]:
     """Select real old rows without replacement, round-robin by family then native event."""
     if count < 1 or count > len(rows):
@@ -29,7 +58,9 @@ def balanced_replay(rows: list[dict], count: int, seed: int) -> list[dict]:
     families = defaultdict(lambda: defaultdict(list))
     for row in rows:
         meta = row["metadata"]
-        families[meta["family"]][meta.get("training_event", meta["event_id"])].append(row)
+        group = meta.get("dependency_group", meta["family"])
+        event = (meta["family"], meta.get("training_event", meta["event_id"]))
+        families[group][event].append(row)
     names = sorted(families)
     rng.shuffle(names)
     queues = {}
@@ -72,6 +103,8 @@ def main() -> None:
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--replay-rows", type=int,
                         help="Source/event-balanced frozen subset of the existing operation pool")
+    parser.add_argument("--source-clusters", type=Path,
+                        help="Existing shared_family_clusters manifest or list of source groups")
     args = parser.parse_args()
     if not math.isfinite(args.utility_flat_tolerance) or args.utility_flat_tolerance < 0:
         parser.error("Utility deadband must be finite and nonnegative")
@@ -95,6 +128,10 @@ def main() -> None:
                               "scoring_configuration": score_run.get("scoring_configuration")})
     original_count = len(rows)
     original_families = {r["metadata"]["family"] for r in rows}
+    definitions = read_json(args.source_clusters) if args.source_clusters else []
+    groups = dependency_groups(definitions["shared_family_clusters"]
+                               if isinstance(definitions, dict) else definitions)
+    annotate_dependencies(rows, groups)
     semantic = {}
     for path in args.semantic:
         for row in read_jsonl(path):
@@ -137,6 +174,7 @@ def main() -> None:
               and r["metadata"]["event_id"] not in primary_ids]
     if any(r["metadata"]["split"] != "train" for r in replay):
         raise ValueError("Replay must retain research TRAIN role")
+    annotate_dependencies(replay, groups)
     replay_available = len(replay)
     if args.replay_rows is not None:
         replay = balanced_replay(replay, args.replay_rows, args.seed)
@@ -160,9 +198,14 @@ def main() -> None:
         "utility_flat_tolerance": args.utility_flat_tolerance,
         "replay": str(args.replay.resolve()), "main_states": main_count,
         "main_families": len(main_families),
+        "main_dependency_groups": len({r["metadata"].get(
+            "dependency_group", r["metadata"]["family"]) for r in rows if is_main(r)}),
+        "source_clusters": str(args.source_clusters.resolve()) if args.source_clusters else None,
         "replay_states": len(replay), "passes": args.passes, "seed": args.seed,
         "available_replay_states": replay_available,
         "replay_families": len({row["metadata"]["family"] for row in replay}),
+        "replay_dependency_groups": len({r["metadata"].get(
+            "dependency_group", r["metadata"]["family"]) for r in replay}),
         "replay_selection": "family/event round-robin without replacement"
                             if args.replay_rows is not None else "all available labelled rows",
         "planned_windows": len(windows),

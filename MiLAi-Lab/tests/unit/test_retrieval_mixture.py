@@ -85,6 +85,21 @@ def test_loss_mass_is_component_then_family_then_event():
     assert mixture_event_weights(rows[:10], {"op": 1}) == event_weights(rows[:10])
 
 
+def test_dependency_group_balances_shared_sources_without_merging_event_id_aliases():
+    rows = [{"metadata": {"family": family, "row": 0}} for family in ['a', 'a', 'b', 'c']]
+    assert event_weights(rows) == pytest.approx([2/3, 2/3, 4/3, 4/3])
+    for row in rows[:3]:
+        row['metadata']['dependency_group'] = 'shared-support'
+    assert event_weights(rows) == [0.5, 0.5, 1.0, 2.0]
+    assert [r['metadata']['family'] for r in rows] == ['a', 'a', 'b', 'c']
+    a, b = example('train', 'a'), example('dev', 'b', split='dev')
+    for row in (a, b):
+        row['metadata']['dependency_group'] = 'shared-support'
+    with pytest.raises(ValueError, match='crosses training and development'):
+        combine_components([{'name': 'op', 'task': 'memory_operation',
+                             'loss_weight': 1, 'rows': [a, b]}])
+
+
 def test_mixed_metrics_do_not_merge_applicability_and_operation_success():
     data, _ = combine_components([
         {"name": "op", "task": "memory_operation", "loss_weight": 1,

@@ -38,7 +38,10 @@ def block(path, rows, active):
     return states, score_path
 
 
-def test_closed_blocks_keep_semantic_only_support_and_record_inactive(tmp_path, monkeypatch):
+@pytest.mark.parametrize("clusters", [False, True])
+def test_closed_blocks_keep_semantic_only_support_and_record_inactive(
+    tmp_path, monkeypatch, clusters,
+):
     rows = [state('a/q0'), state('b/q0'), state('c/q0')]
     first = block(tmp_path / 'first', rows[:1], [True])
     second = block(tmp_path / 'second', rows[1:], [False, False])
@@ -53,9 +56,11 @@ def test_closed_blocks_keep_semantic_only_support_and_record_inactive(tmp_path, 
     replay_path = tmp_path / 'replay.jsonl'
     replay_path.write_text(json.dumps(replay) + '\n')
     output = tmp_path / 'output'
+    grouping = tmp_path / 'clusters.json'
+    grouping.write_text(json.dumps({'shared_family_clusters': [['a', 'b']]}))
     monkeypatch.setattr(sys, 'argv', ['compile', *map(str, first), str(replay_path), str(output),
         '--additional-block', *map(str, second), '--semantic', str(review_path),
-        '--active-main-only'])
+        '--active-main-only', *(['--source-clusters', str(grouping)] if clusters else [])])
     compile_reader_utility_data.main()
     result = [json.loads(line) for line in (output / 'train.jsonl').read_text().splitlines()]
     assert [r['metadata']['event_id'] for r in result] == ['a/q0', 'b/q0', 'replay/q0']
@@ -63,6 +68,8 @@ def test_closed_blocks_keep_semantic_only_support_and_record_inactive(tmp_path, 
     assert all(result[i][k] == rows[i][k] for i in (0, 1) for k in ('state', 'questions'))
     report = json.loads((output / 'run.json').read_text())
     assert report['original_opportunity_states'] == 3 and report['main_states'] == 2
+    assert report['main_dependency_groups'] == (1 if clusters else 2)
+    assert report['main_families'] == 2
     assert report['active_primary_states'] == {'pair': 1, 'utility-kl': 1}
     assert report['inactive_opportunities'] == 1 and report['primary_exposures'] == 6
     assert json.loads((output / 'inactive-opportunities.json').read_text())[0]['event_id'] == 'c/q0'
@@ -91,3 +98,16 @@ def test_replay_sampling_covers_sources_and_events_without_repetition():
     assert {row['metadata']['family'] for row in selected[:3]} == {'large', 'small', 'tiny'}
     assert len({row['metadata']['training_event'] for row in selected
                 if row['metadata']['family'] == 'large'}) == 3
+
+
+def test_shared_support_groups_are_transitive_without_source_identity_changes():
+    groups = compile_reader_utility_data.dependency_groups([['b', 'c'], ['a', 'b'], ['d']])
+    assert groups == {'a': 'a', 'b': 'a', 'c': 'a', 'd': 'd'}
+    rows = [state('b/q0'), state('z/q0')]
+    original = copy.deepcopy(rows)
+    compile_reader_utility_data.annotate_dependencies(rows, groups)
+    assert rows[0]['metadata']['dependency_group'] == 'a'
+    assert rows[0]['metadata']['family'] == 'b'
+    assert rows[1] == original[1]
+    assert all(r[k] == o[k] for r, o in zip(rows, original, strict=True)
+               for k in ('state', 'questions', 'gold'))
