@@ -26,6 +26,22 @@ from milai_lab.providers.laya_local import NativeDecision
 from milai_lab.runners.given_host_readout import given_packet_request
 
 
+def complementary_deliveries(actions: list[MemoryAction]) -> dict[str, str]:
+    """First offered legal A/B/A+B, without reading reference answers or inventing a bundle."""
+    offered = {tuple(a.parameters["delivery_indices"]): a.id for a in actions
+               if a.kind == "HANDOFF" and set(a.parameters) == {"delivery_indices"}}
+    singles = [key[0] for key in offered if len(key) == 1]
+    for i, left in enumerate(singles):
+        for right in singles[i + 1:]:
+            union = next((key for key in offered if len(key) == 2 and set(key) == {left, right}),
+                         None)
+            if union is not None:
+                return {"material_a": offered[(left,)], "material_b": offered[(right,)],
+                        "material_a_b": offered[union],
+                        **({"empty_delivery": offered[()]} if () in offered else {})}
+    return {}
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("collection", type=Path)
@@ -38,6 +54,8 @@ def main() -> None:
     parser.add_argument("--compute-phase", required=True)
     parser.add_argument("--include-full-delivery", action="store_true",
                         help="Also execute the legal unchanged all-visible-material HANDOFF")
+    parser.add_argument("--include-complementary-subsets", action="store_true",
+                        help="Execute first legal acquired-material A/B/A+B and empty control")
     args = parser.parse_args()
     import torch
 
@@ -98,6 +116,7 @@ def main() -> None:
         "collection": str(args.collection.resolve()),
         "config": str(args.config.resolve()),
         "automatic_retry": False,
+        "complementary_subsets": args.include_complementary_subsets,
     }
     write_json(args.output / "run.json", run)
     predictions = {}
@@ -142,6 +161,8 @@ def main() -> None:
             if args.include_full_delivery:
                 choices["full_delivery"] = next(
                     a.id for a in actions if a.kind == "HANDOFF" and not a.parameters)
+            if args.include_complementary_subsets:
+                choices.update(complementary_deliveries(actions))
             case = {
                 "family": branch["family"],
                 "event_id": branch["event_id"],
