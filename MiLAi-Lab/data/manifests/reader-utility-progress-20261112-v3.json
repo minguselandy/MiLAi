@@ -172,13 +172,13 @@
   "semantic_Q": {
     "planned_review_opportunities": 600,
     "allocation": "/data/milai-experiments/20261112-reader-utility/formal-main3k-uq-protocol-v1.json",
-    "reviewed_opportunities_closed": 462,
-    "known_delivery_states_closed": 253,
-    "known_answer_states_closed": 222,
+    "reviewed_opportunities_closed": 600,
+    "known_delivery_states_closed": 331,
+    "known_answer_states_closed": 293,
     "new42_labels": "/data/milai-experiments/20261112-reader-utility/main3k-new64to128-semantic42-labels-v2/manifest.json",
     "new42_known_delivery": 20,
     "new42_known_answer": 20,
-    "remaining": "Final138 review and labels still pending. All600 opportunity first-readouts closed, but only462 opportunities have closed labels (253delivery,222answer). CommonQ data/fits only after final labels close; failedfirsts and unknowns retained.",
+    "remaining": "Annotation complete. Both matched Qfits running from fixed U endpoints; actual task DEV, E2threefits+Q, ownstate, seeds, confirmation and natural/autonomous application work remain.",
     "all600_opportunities_selected": true,
     "finite_continuation_owner": "/data/milai-experiments/20261112-reader-utility/finish_selected_q_blocks_v2-owner.json",
     "finite_continuation_pid": 1325952,
@@ -203,7 +203,7 @@
       "reused_readouts": 3,
       "automatic_retry": false
     },
-    "current_stage": "main3k-original-new256-semantic138 teacher",
+    "current_stage": "ALL_LABELS_CLOSED_Q_FITS_RUNNING",
     "fit_and_DEV_owner": "/data/milai-experiments/20261112-reader-utility/formal-Q-fit-and-dev-owner-v1.json",
     "fit_and_DEV_process": {
       "pid": 2573854,
@@ -211,7 +211,7 @@
       "status_at_launch": "WAITING_FOR_Q_DATA_AND_PLANS",
       "fits_launched_at_observation": 0
     },
-    "closed_labels_inventory": "/data/milai-experiments/20261112-reader-utility/semantic-Q-closed462-inventory-v1.json",
+    "closed_labels_inventory": "/data/milai-experiments/20261112-reader-utility/semantic-Q-all600-closed-label-inventory-v1.json",
     "closed133_labels": {
       "manifest": "/data/milai-experiments/20261112-reader-utility/main3k-additional203-semantic133-labels-v2/manifest.json",
       "known_delivery": 72,
@@ -254,6 +254,51 @@
       "readouts": 2018,
       "failed_readouts": 143,
       "actual_chat_invocations": 2004
+    },
+    "closed_final138_labels": {
+      "manifest": "/data/milai-experiments/20261112-reader-utility/main3k-original-new256-semantic138-labels-v2/manifest.json",
+      "known_delivery": 78,
+      "known_answer": 71,
+      "directional_delivery": 60,
+      "directional_answer": 48,
+      "masked_teacher_candidates": 82,
+      "unresolved_review_states": 2
+    },
+    "formal_quality_data": {
+      "run": "/data/milai-experiments/20261112-reader-utility/formal-quality600-data-v1/run.json",
+      "primary_states": 331,
+      "source_families": 287,
+      "inactive_opportunities": 269,
+      "known_events_outside_frozen_U_active_pool": 14,
+      "replay_rows": 4096,
+      "passes": 3,
+      "main_rows_per_window": 16,
+      "replay_rows_per_window": 16,
+      "optimizer_updates_each": 63,
+      "curve_updates": [
+        11,
+        21,
+        42,
+        63
+      ],
+      "full_dev_updates": [
+        21,
+        63
+      ],
+      "primary_exposures_each": 993,
+      "replay_exposures_each": 993,
+      "weak_loss": false
+    },
+    "startup_observation": "/data/milai-experiments/20261112-reader-utility/formal-Q-startup-observation-v1.json",
+    "fits_launched": {
+      "u0": {
+        "pid": 3604433,
+        "physical_gpu": 2
+      },
+      "u1": {
+        "pid": 3604437,
+        "physical_gpu": 3
+      }
     }
   },
   "K_diagnostic": {
@@ -467,7 +512,7 @@
     "Prepare fixed train diagnostic probe if useful; do not repeatedly evaluate all7452training rows solely for bookkeeping.",
     "New confirmation and autonomous/natural continuous View application lines remain required; no overall completion claim."
   ],
-  "phase": 20,
+  "phase": 21,
   "signal_diagnostic": {
     "canonical110": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-vs-semantic110-diagnostic-v1.json",
     "author_spots": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-semantic-disagreement-spots-v1.json",
@@ -536,7 +581,8 @@
     "semantic_caution": "One cleartwo-premisefilm/countcase; otherartistlabelquestiontime/albumambiguous. NoHostoutcomesyet, no newmodelselectionclaim.",
     "retained_first_startup_failure": "/data/milai-experiments/20261112-reader-utility/i2-public-dev8-terminal-short-readouts-v1/run.json",
     "failure_Host_calls": 0,
-    "dependent_owner": "/data/milai-experiments/20261112-reader-utility/i2-public-after-q-owner-v2.json"
+    "dependent_owner": "/data/milai-experiments/20261112-reader-utility/i2-public-after-q-owner-v2.json",
+    "actual_firsts_running": "/data/milai-experiments/20261112-reader-utility/i2-public-dev8-terminal-short-readouts-v2/run.json"
   },
   "post_U_GPU_owners": {
     "2": "/data/milai-experiments/20261112-reader-utility/post-u-gpu2-owner-v2.json",

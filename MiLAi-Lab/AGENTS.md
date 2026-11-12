@@ -1,6 +1,6 @@
-# ACTIVE Reader utility v3: phase20 all Q first readouts closed (2026-11-13)
+# ACTIVE Reader utility v3: phase21 matched Q fits running (2026-11-13)
 
-Goal ACTIVE/incomplete. Current milestone PROGRESS: all600Qfirsts closed; final138teacher active; all20native scores settled. Full user v3 objective remains.
+Goal ACTIVE/incomplete. Current milestone PROGRESS: all600labels closed331delivery293answer; bothQfitsrunning63updates. Full user v3 objective remains.
 R=/data/milai-experiments/20261112-reader-utility.
 Read data/manifests/reader-utility-progress-20261112-v3.json and
 docs/MILAI_READER_UTILITY_EXECUTION_20261112.md. KEEP ANALYSIS SHORT; act on files/processes.
@@ -42,32 +42,26 @@ author12sourcepositions0,8,...88(allmethods/failures). bbf42295groupsactualendpo
 sameHANDOFFids cannotmerge differenttrajectories; nofictionalsharedbefore. Reviewnonindependent.
 Conditionalold32h2 CLOSED64states206packets usesold3k/u101collector,separatefromactual96tasks.
 
-Q annotations: closed462opportunities(20+48+42+92+59+133+68),253delivery-known222answer-known.
-semantic-Q-closed462-inventory-v1.json.133labels72delivery61answer(57/45directional);
-133teacherclosed0unresolvedstates,92maskedcandidates retainedunknown (not92states).
-59Reader CLOSED195firsts15failed;59Teacher1unresolved;38delivery34answer targets(28/21directional).
-92reader CLOSED308firsts21failed;92labels48delivery43answer,36/27directional.
-133Reader CLOSED451firsts25failed,448chatcalls+3exactwirereuses; teacherPID2495693closed.
-Later68Reader CLOSED228firsts20failed,227chatcalls+1exactwirereuse; PID2639401exited.
-Later68teacher CLOSED68states0unresolved,42maskedcandidatesretainedunknown; labels38delivery32answer,
-28/18directional. Final138Reader CLOSED466firsts33failed,461chatcalls+5exactwirereuses;
-PID2959498exited. ALL600opportunityfirsts CLOSED2018positions143failed2004actualcalls.
-semantic-Q-all600-first-readouts-inventory-v1.json. Closedlabels still462(253delivery222answer).
-LIVE finish_selected_q_blocks_v2.py PID1325952/session22201 final138teacherPID3453242,
-thenlabels; all600selectedbeforeoutcomes. Revalidateowner.
-First68samplingoldBF16, latercanonicalFP32. Failedfirsts/maskedquotes notrerolled.
-Qdataadapterprepare_formal_quality_data_v1.py handlesCOMPLETED_WITH_UNRESOLVED; preview110 has
-57quality53sources+4096replay,171+171exposures11updates,NOFIT. FinalQonlyafter600closed,
-sameactualknownpool,newoptimizerbothfixedUexports,16quality+16replay,3passes,weakoff.
-NevermutatefrozenU withlaterlabels. First600 reviewopportunities !=600targets.
-LIVE prepare_Q_after_annotations_v1.py PID1952434/session5970, formal-Q-data-and-plans-owner-v1,
-waitsall600thencompilesformal-quality600-data-v1 andformal-q-u0/1-seed0-v1-plan.json.
-Planupdatesactualknown,16:16,3passes,0.5/1/2/3curves,fullDEV1pass/final. NOFITautolaunch.
-GPU2scoringqueue yieldsprioritywhenQplansready. LIVE formal-Q-fit-and-dev-owner-v1
-PID2573854/session39922 waitsdata/plans, launchesQ0GPU2afteryield andQ1GPU3afterproducerclosed,
-checksactualused<=8192MiB. Script run_formal_Q_and_dev_v1.py thencollectsbothQDEV onGPU3
-afterfitsclosed+released, leavingGPU2scoringfree; pendingnativefitbookkeepingreapedseparately.
-RootmustNOTduplicateQfits orQDEV now: finiteownerownslaunch. Currentfits0; revalidateowner.
+Q ANNOTATIONS ALL600 CLOSED:20+48+42+92+59+133+68+138 opportunities.
+Known delivery331/answer293; directional249/189. semantic-Q-all600-closed-label-inventory-v1.json.
+Final138Reader466firsts33failed461chat+5reuse; teacher138closed2unresolved82maskedcandidates.
+All600firsts2018positions143failed2004actualcalls; failedfirsts/unknowns preserved, no retries.
+Initialfirst68samplingolderBF16; laterFP32/deadband. FrozenU data/models NOT changed.
+finish_selected_q_blocks_v2-owner PID1325952/session22201 COMPLETED/exited.
+formal-Q-data-and-plans-owner-v1 PID1952434/session5970 COMPLETED/exited.
+formal-quality600-data-v1:331deliveryquality rows287sources,269inactive,14known events outside
+oldUactivepool;4096sharedUreplay. 3passes,16quality+16replay windows,993+993exposures,63updates.
+Pairdelivery+positive-qualityties,weakoff,newoptimizer/scheduler from each fixedU FP16export.
+LIVE formal-Q-fit-and-dev-owner-v1 PID2573854/session39922 owns both fits and laterQDEV:
+Q0 child3604433 physicalGPU2, Q1 child3604437 physicalGPU3, both RUNNING. DO NOT duplicate/restart.
+Plans formal-q-u0/u1-seed0-v1-plan.json, curves11/21/42/63, fullDEV21/63.
+Actualargvsameexceptinit/output/phase/device; actualsampling.json andalllengths.json equal.
+Train4427max9639,DEV128max9087,fullDEV992max9460; zero state/head truncation both.
+formal-Q-startup-observation-v1: at11 each176activequality+176replay; proxyfast Q0=25/78
+from44/78, Q1=36/78from34/78. Do notstop orchoose oninterimsmallproxy; actualHostresults pending.
+Later observed both21updates336+336; fullDEV record at21 maystill be evaluating; revalidate.
+After Qfixedmodels close/release, finiteowner collects both96actualQDEV onGPU3, reapsnative
+fitbookkeeping separately. Qactualreadout/review owner2573961/session1897 thenfollows pre-Q chain.
 
 I2QASPER CLOSED47firsts4failed; full/commonmodel8/8samepacket, nolearneduniquebenefit.
 NativeF1 full.24427 rules.23155,A.26429,B.22329,AB.20907,empty.00595.
@@ -78,7 +72,8 @@ aa0e2f12 handles fullHANDOFF alias onlywhenopenedmembershipexactlyA+B;796e3934pe
 learnedterminalnominations; stillconditionaldelivery, notfull-menuacquisitionclaim.
 FirstpublicReaderPID1428636/session77152 FAILED HTTP_OWNER_BUSY before0calls, retainedv1.
 NativeHTTP owner FAILSFAST, doesnotqueue. Do NOTlaunchcompetingHostwork.
-LIVE run_i2_after_q_annotation_v2 PID1458340/session16943 waitsfullQqueuethen62firstsinto-v2.
+LIVE run_i2_after_q_annotation_v2 PID1458340/session16943 nowRUNNING public62firsts-v2,
+childPID3603151. OriginalHTTP_OWNER_BUSY v1 startup remainsretained; no competingHTTPwork.
 AfterI2 the96taskfirst-fourqueue starts. Alloldfirstfailuresretained.
 
 EXPANSION GPU3: post-u-gpu3-owner-v1 PID1481397/session17387 CLOSEDall5collections:
@@ -250,7 +245,7 @@ CLOSED remaining-closed-stream-compression-owner-v1 PID2706424/session50739,
 script compress_remaining_closed_streams_v1.py exitedwithpreparationclosure:38streams2.45GiBfreed.
 Directdecompressedbytecomparisonbeforeunlink, finalcases/states retained; archivesverifiedpresent.
 Noactivecompressor remains. Monitorincludesclosedstorageowner. CPUcostpending, notnativebilled.
-Currentgoalremaining:Q+actualDEVHost,10k/repeat,ownstate,decisiveseeds,newconfirmation,
+Currentgoalremaining:finishQ+actualDEVHost,threefreshE2Ufits+sameQ,ownstate,decisiveseeds,newconfirmation,
 autonomous/naturalcontinuousView/update,cost/statistical/mechanism synthesis. Notcomplete.
 Priorv2below CLOSED/HISTORICAL, notqueues/reusablefreshconfirmation.
 
