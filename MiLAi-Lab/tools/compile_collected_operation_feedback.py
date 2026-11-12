@@ -80,6 +80,8 @@ def main() -> None:
     parser.add_argument("readouts", type=Path)
     parser.add_argument("output", type=Path)
     parser.add_argument("--reviews", type=Path)
+    parser.add_argument("--utility-scores", type=Path,
+                        help="Optional closed offline scores; semantic labels remain separate")
     parser.add_argument("--evaluation-only", action="store_true",
                         help="Require DEV roles and export feedback-dev instead of fit rows")
     args = parser.parse_args()
@@ -191,6 +193,10 @@ def main() -> None:
             # well as the actual before/menu, while retaining the collection origin.
             sft.append(paired_sft)
     args.output.mkdir(parents=True, exist_ok=False)
+    if args.utility_scores is not None:
+        from outcome_distillation import attach_utilities
+
+        compiled = attach_utilities(compiled, read_jsonl(args.utility_scores))
     full_fit = {target: [r for r in compiled if any(
         p[target] in {"left", "right"} for p in r["feedback"]["comparisons"])]
         for target in ("answer", "delivery")}
@@ -221,6 +227,7 @@ def main() -> None:
             "prepared": str(args.prepared.resolve()),
             "readouts": str(args.readouts.resolve()),
             "reviews": str(args.reviews) if args.reviews else None,
+            "utility_scores": str(args.utility_scores.resolve()) if args.utility_scores else None,
             "rollout": rollout,
             "states": len(compiled),
             "families": len({r["metadata"]["family"] for r in compiled}),

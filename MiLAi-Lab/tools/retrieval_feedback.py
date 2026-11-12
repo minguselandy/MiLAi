@@ -72,9 +72,10 @@ def validate_feedback(row: dict[str, Any]) -> None:
 
 def encoding_row(row: dict[str, Any]) -> dict[str, Any]:
     """Uniform dummy targets satisfy the SDK codec, never the preference objective."""
-    if "feedback" not in row:
+    if "feedback" not in row and "utility" not in row:
         return row
-    validate_feedback(row)
+    if "feedback" in row:
+        validate_feedback(row)
     keys = row["questions"]["next"]["criteria"]
     return {**row, "gold": {"next": {"probabilities": {k: 1 / len(keys) for k in keys}}}}
 

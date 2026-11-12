@@ -29,6 +29,18 @@ from evaluate_bounded_laya import score_applicability_predictions, score_predict
 from milai_lab.harness.artifact_io import read_json, read_jsonl, write_json
 from milai_lab.harness.contextual_artifacts import RunBudget, RunLimits
 from milai_lab.providers.laya_local import NativeDecision
+from outcome_distillation import (
+    align_utilities,
+    is_main,
+    mixed_windows,
+    normalized_micro_loss,
+    score_utility_predictions,
+    utility_distillation,
+    window_normalizers,
+)
+from outcome_distillation import (
+    component_weights as outcome_component_weights,
+)
 from quality_feedback import (
     ANSWER_FIRST_MASSES,
     QUALITY_MODES,
@@ -121,6 +133,7 @@ def training_stages(size: int, epochs: int, seed: int,
                     row_groups: list[list[int]] | None = None,
                     batch_rows: int = 16,
                     full_passes: bool = False,
+                    explicit_windows: list[TrainingWindow] | None = None,
                     ) -> list[tuple[int, list[TrainingWindow]]]:
     """Full epochs or an exact budget of fixed-size optimizer updates.
 
@@ -141,6 +154,17 @@ def training_stages(size: int, epochs: int, seed: int,
         if eval_at_updates is not None and any(
                 step < 1 or step > update_budget for step in eval_at_updates):
             raise ValueError("Evaluation points must be within the optimizer-update budget")
+    if explicit_windows is not None:
+        if update_budget != len(explicit_windows) or row_groups is not None or full_passes:
+            raise ValueError("Explicit component windows require their exact update budget")
+        cuts = sorted({update_budget // 2, update_budget} - {0})
+        if eval_at_updates is not None:
+            cuts = sorted({*eval_at_updates, update_budget})
+        elif eval_every_updates is not None:
+            cuts = sorted({*range(eval_every_updates, update_budget, eval_every_updates),
+                           update_budget})
+        return [(end, explicit_windows[start:end])
+                for start, end in zip([0, *cuts[:-1]], cuts, strict=True)]
     rng = random.Random(seed)  # noqa: S311 -- reproducible training schedule
     if full_passes and row_groups is None and update_budget is not None:
         if update_budget != math.ceil(size / batch_rows) * epochs:
@@ -302,6 +326,9 @@ def compute_counts(run: dict[str, Any], evaluations: dict[str, Counter[str]]) ->
             counts["train_" + key] = run[key]
     for key, count in run.get("sampled_answer_first_components", {}).items():
         counts["train_answer_first_" + key] = count
+    for key in ("main_rows", "main_active_rows", "window_replay_rows"):
+        if "sampled_" + key in run:
+            counts["train_" + key] = run["sampled_" + key]
     return counts
 
 
@@ -356,7 +383,14 @@ def main() -> None:
     parser.add_argument("--max-len", type=int, default=4096)
     parser.add_argument("--head-max-len", type=int, default=384)
     parser.add_argument("--backend", choices=("native", "linear"), default="native")
-    parser.add_argument("--objective", choices=("soft-ce", "set", "pair"), default="soft-ce")
+    parser.add_argument("--objective", choices=("soft-ce", "set", "pair", "utility-kl"),
+                        default="soft-ce")
+    parser.add_argument("--teacher-temperature", type=float, default=.5)
+    parser.add_argument("--student-temperature", type=float, default=1.)
+    parser.add_argument("--utility-flat-tolerance", type=float, default=1e-6)
+    parser.add_argument("--component-windows", action="store_true",
+                        help="Exact primary passes plus common replay; normalize each window")
+    parser.add_argument("--main-rows-per-window", type=int, default=24)
     parser.add_argument("--feedback-target", choices=("answer", "delivery"),
                         help="Pair objective only; both targets use the same reviewed pair pool")
     parser.add_argument("--pair-supervision", default="legacy-direction",
@@ -439,8 +473,8 @@ def main() -> None:
         parser.error("Pair feedback uses memory_operation and a positive finite replay weight")
     if args.objective == "pair" and args.optimizer_updates is None:
         parser.error("Pair feedback requires an explicit matched optimizer-update budget")
-    if args.replay_objective != "soft-ce" and args.objective != "pair":
-        parser.error("--replay-objective applies only to pair training")
+    if args.replay_objective != "soft-ce" and args.objective not in {"pair", "utility-kl"}:
+        parser.error("--replay-objective applies only to pair or utility training")
     if args.include_reviewed_ties and (
             args.objective != "pair" or args.pair_supervision != "legacy-direction"):
         parser.error("--include-reviewed-ties applies to direct observed pair supervision")
@@ -453,6 +487,19 @@ def main() -> None:
     quality_mode = (cast(QualityMode, args.pair_supervision)
                     if args.pair_supervision in QUALITY_MODES else None)
     quality_supervised = quality_mode is not None or answer_first
+    if args.objective == "utility-kl" and not args.component_windows:
+        parser.error("Utility KL requires --component-windows for complete-window normalization")
+    if args.component_windows and (
+            args.objective not in {"pair", "utility-kl"} or args.task != "memory_operation"
+            or quality_supervised or args.optimizer_updates is None or args.full_passes
+            or not 0 < args.main_rows_per_window < args.effective_batch_rows
+            or not math.isfinite(args.replay_weight) or args.replay_weight <= 0):
+        parser.error("Component windows use memory_operation pair/utility, explicit updates, "
+                     "and positive primary/replay rows and loss coefficient")
+    if (any(not math.isfinite(t) or t <= 0 for t in
+            (args.teacher_temperature, args.student_temperature))
+            or not math.isfinite(args.utility_flat_tolerance) or args.utility_flat_tolerance < 0):
+        parser.error("Utility temperatures must be positive finite; flat tolerance nonnegative")
     mass_mode = args.pair_mass_mode or ("component-sum" if answer_first else "normalized-total")
     if args.pair_mass_mode is not None and not quality_supervised:
         parser.error("--pair-mass-mode applies to explicit quality supervision")
@@ -517,7 +564,8 @@ def main() -> None:
     args.output.mkdir(parents=True, exist_ok=False)
     started, cpu = time.perf_counter(), time.process_time()
     raw_train = read_jsonl(args.data / "train.jsonl")
-    train = [r for r in raw_train if r["gold"] or (args.objective == "pair" and "feedback" in r)]
+    train = [r for r in raw_train if r["gold"] or (args.objective == "pair" and "feedback" in r)
+             or (args.component_windows and is_main(r))]
     dev_path = args.dev_data or args.data / "dev.jsonl"
     dev = read_jsonl(dev_path)
     full_dev = read_jsonl(args.full_dev_data) if args.full_dev_data is not None else []
@@ -563,7 +611,10 @@ def main() -> None:
     if mixture is not None:
         weights = [weight * args.mixture_loss_scale for weight in weights]
     component_weights = answer_first_weights(train, args.replay_weight) if answer_first else None
-    if answer_first:
+    if args.component_windows:
+        weights = outcome_component_weights(train, args.objective, args.feedback_target,
+                                            args.include_reviewed_ties, args.utility_flat_tolerance)
+    elif answer_first:
         weights = [1.0] * len(train)  # Component weights already include the full loss masses.
     elif quality_mode is not None:
         weights = quality_event_weights(train, args.feedback_target, quality_mode,
@@ -588,7 +639,11 @@ def main() -> None:
                 raise ValueError("Relative condition loss requires supported training change pairs")
     stages = training_stages(len(train), args.epochs, args.seed, args.optimizer_updates,
                              args.eval_at_updates, args.eval_every_updates, row_groups,
-                             args.effective_batch_rows, args.full_passes)
+                             args.effective_batch_rows, args.full_passes,
+                             mixed_windows(train, args.epochs, args.seed,
+                                 args.main_rows_per_window,
+                                 args.effective_batch_rows - args.main_rows_per_window)
+                             if args.component_windows else None)
     full_dev_at = args.full_dev_at or [stages[-1][0]]
     if args.full_dev_at is not None and (args.full_dev_data is None
             or not set(full_dev_at) <= {step for step, _ in stages}):
@@ -728,6 +783,27 @@ def main() -> None:
     stage_seconds: Counter[str] = Counter()
     segment_start_counts: dict[str, int] = {}
 
+    if args.component_windows:
+        for key in ("feedback_states", "replay_states", "directional_pairs",
+                    "tie_pairs", "unknown_pairs"):
+            run.pop("sampled_" + key, None)
+        run.pop("feedback_pool", None)
+        run.update(component_windows=True, main_rows_per_window=args.main_rows_per_window,
+                   replay_rows_per_window=args.effective_batch_rows - args.main_rows_per_window,
+                   teacher_temperature=args.teacher_temperature,
+                   student_temperature=args.student_temperature,
+                   utility_flat_tolerance=args.utility_flat_tolerance,
+                   loss_weighting="active family/event component sum per full optimizer window",
+                   sampling="exact primary passes crossing boundaries; independent replay cycles",
+                   component_loss_mass={"main": 1., "replay": args.replay_weight},
+                   primary_passes=args.epochs,
+                   active_main_states=sum(is_main(r) and w > 0
+                                          for r, w in zip(train, weights, strict=True)),
+                   active_replay_states=sum(not is_main(r) and w > 0
+                                            for r, w in zip(train, weights, strict=True)),
+                   sampled_main_rows=0, sampled_main_active_rows=0,
+                   sampled_window_replay_rows=0, zero_target_windows=0)
+
     def synchronize() -> None:
         for index in device_ids:
             torch.cuda.synchronize(index)
@@ -764,7 +840,7 @@ def main() -> None:
         if args.feedback_dev_data is not None:
             evaluation_rows["feedback-dev"] = feedback_dev
         codec_rows = ([encoding_row(row) for row in train]
-                      if args.objective == "pair" else train)
+                      if args.objective in {"pair", "utility-kl"} else train)
         training_tok = tok
         if args.reuse_training_tokens:
             from training_token_reuse import prepare_training_rows
@@ -825,7 +901,8 @@ def main() -> None:
             "length_bucketed_microbatches", "microbatch_padded_token_target", "max_len",
             "head_max_len", "gradient_checkpointing", "scheduler", "warmup_fraction",
             "warmup_max_updates", "lr_floor_ratio", "full_passes", "full_dev_data", "full_dev_at",
-            "aux_dev_data")
+            "aux_dev_data", "component_windows", "main_rows_per_window",
+            "teacher_temperature", "student_temperature", "utility_flat_tolerance")
         contract = {"recipe": {key: str(value.resolve()) if isinstance(value, Path) else value
                     for key in recipe_fields if (value := getattr(args, key)) is not None},
                     "data_event_ids": [row["metadata"]["event_id"] for row in train],
@@ -842,6 +919,7 @@ def main() -> None:
             for key, value in resumed["run"].items():
                 if (key.startswith(("train_", "sampled_")) or key in {
                         "optimizer_updates", "data_passes_started", "conditional_pair_draws",
+                        "zero_target_windows",
                         "nonzero_logit_gradient_rows", "feedback_nonzero_logit_gradient_rows",
                         "replay_nonzero_logit_gradient_rows"}):
                     run[key] = value
@@ -897,6 +975,10 @@ def main() -> None:
                 if args.objective == "pair":
                     result["reviewed_branch_pairs"] = score_feedback(
                         rows, predictions, args.feedback_target)
+                if args.component_windows:
+                    result["weak_utility"] = score_utility_predictions(
+                        rows, predictions, args.teacher_temperature,
+                        args.student_temperature, args.utility_flat_tolerance)
             elif args.task == "instruction_applicability":
                 result = score_applicability_predictions(rows, predictions)
             elif args.task == "mixed_retrieval":
@@ -968,6 +1050,11 @@ def main() -> None:
             profile_open = False
             for window_index in range(partial.get("window_index", 0), len(windows)):
                 window = windows[window_index]
+                normalizers = (window_normalizers(window, train, weights)
+                               if args.component_windows else None)
+                if normalizers is not None and not any(normalizers.values()):
+                    run["zero_target_windows"] += 1
+                    continue  # No AdamW decay, scheduler step or fictitious update.
                 if not profile_open:
                     synchronize()
                     update_started, update_cpu = time.perf_counter(), time.process_time()
@@ -1022,7 +1109,28 @@ def main() -> None:
                                               args.precision)
                     mask = batch["marker_mask"].to(decision.device)
                     target = batch["target"].to(decision.device)
-                    if args.objective == "pair":
+                    if args.component_windows:
+                        batch_rows = [train[i] for i in indices]
+                        replay = decision_loss(logits, target, mask, args.replay_objective)
+                        if args.objective == "utility-kl":
+                            scores, known = align_utilities(batch_rows, batch_keys, logits)
+                            main_loss = utility_distillation(
+                                logits, scores, known, args.teacher_temperature,
+                                args.student_temperature, args.utility_flat_tolerance).per_state
+                        else:
+                            main_loss = torch.stack([pair_loss(
+                                logits[j], batch_keys[j],
+                                row.get("feedback", {}).get("comparisons", []),
+                                args.feedback_target, include_ties=args.include_reviewed_ties)
+                                for j, row in enumerate(batch_rows)])
+                        main_mask = torch.tensor([is_main(r) for r in batch_rows],
+                                                 device=decision.device)
+                        ce = torch.where(main_mask, main_loss, replay)
+                        run["sampled_main_rows"] += sum(is_main(r) for r in batch_rows)
+                        run["sampled_main_active_rows"] += sum(
+                            is_main(train[i]) and weights[i] > 0 for i in indices)
+                        run["sampled_window_replay_rows"] += sum(not is_main(r) for r in batch_rows)
+                    elif args.objective == "pair":
                         batch_rows = [train[i] for i in indices]
                         ce = feedback_training_losses(
                             logits, target, mask, batch_keys, batch_rows, args.feedback_target,
@@ -1055,6 +1163,9 @@ def main() -> None:
                     weighted = ce * torch.tensor([weights[i] for i in indices],
                                                   device=decision.device)
                     loss = weighted.sum() / denominator
+                    if normalizers is not None:
+                        loss = normalized_micro_loss(ce, indices, train, weights,
+                                                     normalizers, args.replay_weight)
                     for pair_start in range(0, len(indices), 2):
                         pair_indices = indices[pair_start:pair_start + 2]
                         condition_target = change_targets.get(tuple(pair_indices))
@@ -1090,7 +1201,8 @@ def main() -> None:
                             run["nonzero_logit_gradient_rows"] += int(active)
                             component = "feedback" if "feedback" in train[index] else "replay"
                             run[component + "_nonzero_logit_gradient_rows"] += int(active)
-                    loss_total += weighted.sum().detach()
+                    loss_total += (loss.detach() * denominator if normalizers is not None
+                                   else weighted.sum().detach())
                     offered += len(indices)
                     run["train_sequence_rows"] += len(indices)
                     if mixture is not None:
@@ -1141,7 +1253,7 @@ def main() -> None:
                                   offered, condition_loss_total)
                 if interrupt_due:
                     raise TrainingInterruption()
-            loss_mean = float(loss_total) / offered
+            loss_mean = float(loss_total) / offered if offered else 0.
             history.append({axis: checkpoint_step, "weighted_loss_mean": loss_mean,
                             "dev": evaluate(checkpoint_step)})
             if args.conditional_loss_weight:

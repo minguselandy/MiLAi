@@ -36,6 +36,8 @@ def main() -> None:
     parser.add_argument("--families", type=int, default=8)
     parser.add_argument("--device", default="cpu")
     parser.add_argument("--compute-phase", required=True)
+    parser.add_argument("--include-full-delivery", action="store_true",
+                        help="Also execute the legal unchanged all-visible-material HANDOFF")
     args = parser.parse_args()
     import torch
 
@@ -101,6 +103,11 @@ def main() -> None:
     predictions = {}
     try:
         for name, checkpoint in (("base", args.base), ("i2", args.trained)):
+            if name == "i2" and checkpoint.resolve() == args.base.resolve():
+                predictions[name] = predictions["base"]
+                run["scorers"][name] = {"checkpoint": str(checkpoint.resolve()),
+                                         "reused_scorer": "base", "new_forwards": 0}
+                continue
             phase_start, phase_cpu = time.perf_counter(), time.process_time()
             decision = NativeDecision(checkpoint, 16384, 2048, args.device)
             decision.model.encoder.config.reference_compile = False
@@ -132,6 +139,9 @@ def main() -> None:
             choices["rules"] = RulesMemoryPolicy(reads=4).choose(
                 MemoryControlState(**copy.deepcopy(branch["before"])), actions
             )
+            if args.include_full_delivery:
+                choices["full_delivery"] = next(
+                    a.id for a in actions if a.kind == "HANDOFF" and not a.parameters)
             case = {
                 "family": branch["family"],
                 "event_id": branch["event_id"],
