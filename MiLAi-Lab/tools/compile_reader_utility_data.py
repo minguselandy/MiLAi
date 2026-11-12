@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import copy
 import json
+import math
 import time
 from pathlib import Path
 
@@ -30,9 +31,13 @@ def main() -> None:
     parser.add_argument("--active-main-only", action="store_true",
                         help="Keep the union of usable utility and actual semantic support; "
                              "report all original opportunities separately")
+    parser.add_argument("--utility-flat-tolerance", type=float, default=1e-6,
+                        help="Use the same declared numerical deadband as the student trainer")
     parser.add_argument("--passes", type=int, default=3)
     parser.add_argument("--seed", type=int, default=0)
     args = parser.parse_args()
+    if not math.isfinite(args.utility_flat_tolerance) or args.utility_flat_tolerance < 0:
+        parser.error("Utility deadband must be finite and nonnegative")
     started, cpu = time.perf_counter(), time.process_time()
     blocks = [(args.states, args.scores), *args.additional_block]
     rows, identities, block_records = [], set(), []
@@ -78,7 +83,7 @@ def main() -> None:
     if args.active_main_only:
         eligible = []
         for row in rows:
-            if any(active_support(row, objective, target, True, 1e-6)
+            if any(active_support(row, objective, target, True, args.utility_flat_tolerance)
                    for objective, target in (("utility-kl", None), ("pair", "delivery"),
                                               ("pair", "answer"))):
                 eligible.append(row)
@@ -111,6 +116,7 @@ def main() -> None:
         "blocks": block_records, "original_opportunity_states": original_count,
         "original_opportunity_families": len(original_families),
         "active_main_only": args.active_main_only, "inactive_opportunities": len(excluded),
+        "utility_flat_tolerance": args.utility_flat_tolerance,
         "replay": str(args.replay.resolve()), "main_states": main_count,
         "main_families": len(main_families),
         "replay_states": len(replay), "passes": args.passes, "seed": args.seed,
@@ -118,7 +124,8 @@ def main() -> None:
         "primary_exposures": sum(is_main(rows[i]) for w in windows for _, i in w),
         "replay_exposures": sum(not is_main(rows[i]) for w in windows for _, i in w),
         "active_primary_states": {objective: sum(is_main(r) and w > 0 for r, w in
-            zip(rows, component_weights(rows, objective, "delivery", True, 1e-6), strict=True))
+            zip(rows, component_weights(rows, objective, "delivery", True,
+                                        args.utility_flat_tolerance), strict=True))
             for objective in ("pair", "utility-kl")},
         "no_sha_validation": True, "student_inputs_unchanged": True,
         "compute": {"wall_seconds": time.perf_counter() - started,

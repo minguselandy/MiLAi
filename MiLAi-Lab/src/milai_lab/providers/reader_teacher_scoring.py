@@ -112,7 +112,7 @@ def target_logprobs(logits: Any, targets: Any, mask: Any,
 class TransformersReaderTeacher:
     """A local frozen causal LM explicitly supporting selective logit positions."""
 
-    def __init__(self, model_path: str, device: str, precision: str = "bf16") -> None:
+    def __init__(self, model_path: str, device: str, precision: str = "float32") -> None:
         import torch
         from transformers import AutoModelForCausalLM, AutoTokenizer
 

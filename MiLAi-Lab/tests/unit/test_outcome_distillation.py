@@ -10,6 +10,7 @@ import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "tools"))
 from outcome_distillation import (
+    active_support,
     align_utilities,
     attach_utilities,
     component_weights,
@@ -46,6 +47,19 @@ def test_subset_kl_matches_manual_distribution_and_detaches_teacher():
     torch.testing.assert_close(result.per_state[0], expected)
     result.per_state.sum().backward()
     assert scores.grad is None and logits.grad[0, 2] == 0 and logits.grad[0, 0] < 0
+
+
+def test_explicit_unexecuted_score_stays_outside_both_gradient_and_window_support():
+    torch = pytest.importorskip("torch")
+    sample = row(0)
+    sample["utility"]["candidates"].append({"action": {"id": "other"},
+        "score_known": True, "mean_logprob": float("nan"), "execution_status": "failed"})
+    logits = torch.tensor([[0., 0., 30.]], requires_grad=True)
+    scores, known = align_utilities([sample], [["read", "stop", "other"]], logits)
+    utility_distillation(logits, scores, known).per_state.sum().backward()
+    assert known.tolist() == [[True, True, False]] and logits.grad[0, 2] == 0
+    sample["utility"]["candidates"][1]["execution_status"] = "not_executed"
+    assert not active_support(sample, "utility-kl", None, False, 1e-6)
 
 
 @pytest.mark.parametrize("known,scores", [

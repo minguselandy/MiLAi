@@ -25,7 +25,8 @@ def main() -> None:
     parser.add_argument("model", type=Path)
     parser.add_argument("output", type=Path)
     parser.add_argument("--device", default="cuda:0")
-    parser.add_argument("--precision", choices=("bf16", "float32"), default="bf16")
+    parser.add_argument("--precision", choices=("bf16", "float32"), default="float32",
+                        help="FP32 avoids observed BF16 batch-dependent likelihood drift")
     parser.add_argument("--max-length", type=int, required=True)
     parser.add_argument("--batch-size", type=int, default=4)
     parser.add_argument("--padded-token-target", type=int, default=16384)
@@ -35,6 +36,9 @@ def main() -> None:
     if min(args.max_length, args.batch_size, args.padded_token_target) < 1:
         parser.error("Capacity and batch limits must be positive")
     import torch
+
+    torch.backends.cuda.matmul.allow_tf32 = False
+    torch.backends.cudnn.allow_tf32 = False
 
     args.output.mkdir(parents=True, exist_ok=False)
     started, cpu = time.perf_counter(), time.process_time()
@@ -47,6 +51,12 @@ def main() -> None:
         "no_sha_validation": True, "automatic_retry": False,
         "aggregation": "arithmetic_mean_of_per_reference_mean_logprob",
         "semantic_meaning": "weak_answer_predictability_not_sufficiency"}
+    configuration = {"backend": run["backend"], "precision": args.precision,
+                     "tf32_matmul": False, "tf32_cudnn": False,
+                     "template_version": TEMPLATE_VERSION,
+                     "aggregation": run["aggregation"], "numerical_protocol": "likelihood-v2"}
+    run["scoring_configuration"] = configuration
+    run["torch_version"] = torch.__version__
     counts: Counter[str] = Counter()
     results: list[dict[str, Any]] = []
     stage_seconds: dict[str, float] = {}
@@ -66,9 +76,9 @@ def main() -> None:
         work = []
         for i, row in enumerate(records):
             result = {k: row[k] for k in ("event_id", "family", "research_split", "action",
-                      "packet_ref", "reference_set_id", "continuation")}
+                      "packet_ref", "reference_set_id", "continuation", "execution_status")}
             result.update(score_known=False, references=[], teacher=run["teacher"],
-                          template_version=TEMPLATE_VERSION)
+                          template_version=TEMPLATE_VERSION, scoring_configuration=configuration)
             results.append(result)
             if row["execution_status"] != "completed":
                 result["failure"] = "branch_not_completed"

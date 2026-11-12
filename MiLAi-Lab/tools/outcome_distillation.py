@@ -69,7 +69,8 @@ def attach_utilities(rows: list[dict[str, Any]],
         if len({s["action"]["id"] for s in candidates}) != len(candidates):
             raise ValueError("Repeated scored binding within one event")
         reference = candidates[0]["reference_set_id"]
-        configuration = [(s["teacher"], s["template_version"], s["continuation"])
+        configuration = [(s["teacher"], s["template_version"], s["continuation"],
+                          s.get("scoring_configuration"))
                          for s in candidates]
         if any(config != configuration[0] for config in configuration):
             raise ValueError("Utility candidates must share the same scoring/continuation protocol")
@@ -78,7 +79,7 @@ def attach_utilities(rows: list[dict[str, Any]],
                     or bindings.get(score["action"]["id"]) != score["action"]
                     or score["reference_set_id"] != reference):
                 raise ValueError("Utility differs from the event, full action or reference set")
-            if score["score_known"] and not math.isfinite(score["mean_logprob"]):
+            if observed_utility(score) and not math.isfinite(score["mean_logprob"]):
                 raise ValueError("Known utility must be finite")
         row["utility"] = {"event_id": meta["event_id"], "candidates": candidates,
                           "semantic_meaning": "weak_answer_predictability_not_sufficiency"}
@@ -101,7 +102,7 @@ def align_utilities(rows: list[dict[str, Any]], keys: list[list[str]],
             key = candidate["action"]["id"]
             if key not in positions:
                 raise ValueError("Scored action is missing from the actual encoded menu")
-            if candidate["score_known"]:
+            if observed_utility(candidate):
                 scores[i, positions[key]] = candidate["mean_logprob"]
                 known[i, positions[key]] = True
     return scores, known
@@ -111,13 +112,19 @@ def is_main(row: dict[str, Any]) -> bool:
     return "utility" in row or "feedback" in row
 
 
+def observed_utility(candidate: dict[str, Any]) -> bool:
+    """Legacy scores filtered failed executions; new records retain that status explicitly."""
+    return (candidate["score_known"]
+            and candidate.get("execution_status", "completed") == "completed")
+
+
 def active_support(row: dict[str, Any], objective: str, feedback_target: str | None,
                    include_ties: bool, flat_tolerance: float) -> bool:
     if not is_main(row):
         return bool(row["gold"])
     if objective == "utility-kl":
         scores = [c["mean_logprob"] for c in row.get("utility", {}).get("candidates", [])
-                  if c["score_known"]]
+                  if observed_utility(c)]
         return len(scores) >= 2 and max(scores) - min(scores) > flat_tolerance
     known = {"left", "right", "tie"} if include_ties else {"left", "right"}
     return any(p[feedback_target] in known for p in row.get("feedback", {}).get("comparisons", []))
