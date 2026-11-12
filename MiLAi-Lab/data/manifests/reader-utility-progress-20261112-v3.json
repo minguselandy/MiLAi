@@ -36,7 +36,8 @@
     "checkpointed_cleanup_regression": "3df6188c",
     "scale_comparison": "2d79ef13",
     "trajectory_outcome_summary": "4ae97cd8",
-    "continuous_host_outcome_summary": "f7740256"
+    "continuous_host_outcome_summary": "f7740256",
+    "native_Host_cost_stages": "fe29a56b"
   },
   "formal_U": {
     "protocol": "/data/milai-experiments/20261112-reader-utility/formal-main3k-uq-protocol-v1.json",
@@ -343,7 +344,7 @@
     "Prepare fixed train diagnostic probe if useful; do not repeatedly evaluate all7452training rows solely for bookkeeping.",
     "New confirmation and autonomous/natural continuous View application lines remain required; no overall completion claim."
   ],
-  "phase": 12,
+  "phase": 13,
   "signal_diagnostic": {
     "canonical110": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-vs-semantic110-diagnostic-v1.json",
     "author_spots": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-semantic-disagreement-spots-v1.json",
@@ -543,5 +544,14 @@
     "scope": "Finite exact existing plans only. Q0 GPU2 after scorer yield, Q1 GPU3 after public producer closure; actual free memory checked. Both Q DEV collections GPU3 after fixed fits close and release, native bookkeeping separate. Q first readouts wait prior four methods; grouping and primary follow predeclared review plan. Parent does not retry, refit, export TRAIN labels or open new confirmation.",
     "validation": "Both scripts parsed; targets absent at launch; exact /proc cmdlines and waiting owners verified; no Q model launched yet."
   },
-  "phase12_storage": "/data/milai-experiments/20261112-reader-utility/phase12-closed-branch-stream-compression-v1.json"
+  "phase12_storage": "/data/milai-experiments/20261112-reader-utility/phase12-closed-branch-stream-compression-v1.json",
+  "phase13_validation": {
+    "native_and_json_action_cost_stage_tests": 6,
+    "continuous_outcome_tests": 3,
+    "trajectory_outcome_tests": 2,
+    "ruff": "passed",
+    "git_diff_check": "passed",
+    "scope": "Offline classification and ledger token reconciliation on unit fixtures; no model calls, no existing outcomes or ledger totals changed. Real natural application remains pending.",
+    "initial_test_environment_error": "Missing langchain_core with bare CUDA environment; rerun using existing HTTP site packages, no installation."
+  }
 }
