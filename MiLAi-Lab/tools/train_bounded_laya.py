@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import argparse
 import fcntl
+import gc
 import json
 import math
 import os
@@ -1305,12 +1306,19 @@ def main() -> None:
         # keep completed training parameters and Adam moments resident on the GPU.
         cleanup_started = time.perf_counter()
         try:
+            # The final microbatch can keep autograd/checkpoint graphs alive even after
+            # model parameters move to CPU. Drop those local roots before ledger waiting.
+            logits = mask = target = ce = weighted = loss = batch = None
+            replay = main_loss = scores = known = main_mask = None
+            relative = contribution = loss_total = None
             if optimizer is not None:
                 optimizer.zero_grad(set_to_none=True)
                 optimizer.state.clear()
             if model is not None:
                 model.to("cpu")
+            gc.collect()
             torch.cuda.empty_cache()
+            run["final_cuda_allocated_bytes"] = [torch.cuda.memory_allocated(i) for i in device_ids]
         except RuntimeError as error:
             run["device_cleanup_error"] = str(error)
         stage_seconds["cleanup"] += time.perf_counter() - cleanup_started

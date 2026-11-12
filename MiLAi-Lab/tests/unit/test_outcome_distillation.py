@@ -221,6 +221,21 @@ def test_gpu_native_trainer_keeps_weak_only_rows_and_component_counts(
     (data / "dev.jsonl").write_text(json.dumps(dev) + "\n")
     budget = tmp_path / "budget.json"  # Isolated tiny test ledger.
     budget.write_text(json.dumps(RunBudget(RunLimits(), budget).state))
+    # Initialize persistent CUDA BLAS workspaces before checking per-fit allocations.
+    for dtype in (torch.float32, torch.bfloat16):
+        left = torch.ones((16, 16), device="cuda", dtype=dtype, requires_grad=True)
+        right = torch.ones((16, 16), device="cuda", dtype=dtype, requires_grad=True)
+        product = left @ right
+        product.sum().backward()
+        del left, right, product
+    allocated_before = torch.cuda.memory_allocated()
+    record_compute = RunBudget.record_compute
+
+    def record_after_gpu_release(self, phase, measures):
+        assert torch.cuda.memory_allocated() == allocated_before
+        return record_compute(self, phase, measures)
+
+    monkeypatch.setattr(RunBudget, "record_compute", record_after_gpu_release)
     output = tmp_path / "run"
     monkeypatch.setattr(sys, "argv", ["train_bounded_laya", str(data), str(base), str(output),
         "--budget", str(budget), "--task", "memory_operation", "--objective", objective,
