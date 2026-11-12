@@ -1,6 +1,6 @@
 # ACTIVE Reader utility v3: phase13 native Host cost classification (2026-11-13)
 
-Goal ACTIVE/incomplete. Current milestone PROGRESS: nativeHost offlinecoststageclassification fixed and tested. Full user v3 objective remains.
+Goal ACTIVE/incomplete. Current milestone PROGRESS: finite closed-stream compression running alongside remaining preparation. Full user v3 objective remains.
 R=/data/milai-experiments/20261112-reader-utility.
 Read data/manifests/reader-utility-progress-20261112-v3.json and
 docs/MILAI_READER_UTILITY_EXECUTION_20261112.md. KEEP ANALYSIS SHORT; act on files/processes.
@@ -190,6 +190,11 @@ Storagephase10compressed17additionalclosedincrementalstreams, directbyteverifica
 phase10-closed-branch-stream-compression-v1.json. Finalcases/states andfirstoutcomesunchanged.
 Storagephase12 compressed14additionalclosedincrementalstreams, exactdecompressedbytecompare,
 freed1.51GiB. phase12-closed-branch-stream-compression-v1.json; finals/firstsunchanged.
+LIVE remaining-closed-stream-compression-owner-v1 PID2706424/session50739,
+script compress_remaining_closed_streams_v1.py: finitecompanion untilpreparationownercloses.
+CompressnewCOMPLETEDincrementalstreams only, directdecompressedbytecomparisonbeforeunlink,
+finalcases/states retained. Initial9streamsfreed1.16GiB; revalidateownerforlatestcount.
+DO NOT runanothercompressor concurrently. Monitorincludesstorageowner. CPUcostpending, notnativebilled.
 Currentgoalremaining:Q+actualDEVHost,10k/repeat,ownstate,decisiveseeds,newconfirmation,
 autonomous/naturalcontinuousView/update,cost/statistical/mechanism synthesis. Notcomplete.
 Priorv2below CLOSED/HISTORICAL, notqueues/reusablefreshconfirmation.
