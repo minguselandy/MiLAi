@@ -1,13 +1,13 @@
-# LIVE scalable evidence phase42: 2026-11-12
+# LIVE scalable evidence phase43: 2026-11-12
 
 Goal ACTIVE/incomplete; progress, no blocker. KEEP ANALYSIS SHORT, tools/actions first.
 No Source_Metadata loops/unboundedJSON/history/budget.compute/nestedusage-capacity dumps.
 No SHA/contentfingerprints/subagents/Product/API/permission/Canonicalchanges/service restart/push.
 Actual /procargv + owner + artifacts govern; neverrestartstaleJSON/losthandle/lockwait.
-R=/data/milai-experiments/20261111-scalable-evidence. Latestprogress-v42/docphase42.
+R=/data/milai-experiments/20261111-scalable-evidence. Latestprogress-v43; docphase42 plusglobalreportDRAFT.
 
 LIVE LME GPU3 lme-small32-s2feedbacku51-v1 owner2624347 child2624350.
-LatestRUNNING firstpoolbuild,active0 PREPARING_INPUT1/NOT_RUN31; revalidateactual/proc+artifacts.
+LatestRUNNING active4, counts{'COMPLETED': 4, 'NOT_RUN': 27, 'PREPARING_INPUT': 1}; revalidateactual/proc+artifacts.
 SamefixedS2u51nominee/source/Host/imageRoot; no postconfirmationselection. No otherlivejobs.
 S1 firstnominee ALLCLOSED finalroot lme-small32-s1u1130-v1-continuation-v4:
 29COMPLETED,failedrow0RETRIEVING and27/29READING; all32attempted. No rerolls, onlytailsv3/v4.
@@ -37,6 +37,13 @@ costfit/M6Mu whole-minus-native/preps/sparseCPU. READ_ONLY/notpaid; S2residualst
 plan-execution-audit-v1.json isDRAFT/incomplete;16requirements/groups linkedactualevidence.
 NextfinishS2prediction/nativeJudge; compareactualquestionIDs withS1/historicalfixedfirsts; settle
 unpaidclosedcosts once; finalreport/audit. LocalSource12chain exists, globalstablegainunproved.
+
+Newphase43: globalreportDRAFT docs/MILAI_SCALABLE_EVIDENCE_RESEARCH_REPORT_20261112.md,
+explicitlyin-progress/externalS2+cost+finalauditpending. plan-execution-audit-v1.json maps16groups,
+actualengineeringtrace/data/fit/taskevidencechecked. compare_lme_small32_closed_v1.py READYNOTRUN,
+requiresbothnativecohorts/scoresclosed; question-IDpaired/common-scored+missingbounds, no32SourceCI.
+No newruntimecode/tests/model/HTTPcalls fromthispreparation, noledgerwrite. Do notmarkGoalcomplete
+fromdraft ornewSource12casealone whileexternalchain/cost/finalaudit remains.
 
 CONFIRMATION CLOSED:384firstcalls370complete14fail;fixed96/0,scale91/5,own90/6,old93/3.
 32predeclaredsecondcalls31complete1fail(oldSource12). Allfirsts unchanged, no best-of-two.

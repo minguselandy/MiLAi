@@ -1,0 +1,38 @@
+{
+  "status": "PHASE43_PROGRESS_GLOBAL_REPORT_DRAFT_AND_PLAN_AUDIT_LME_SECOND_NOMINEE_LIVE",
+  "observed_at_utc": "2026-11-12T00:05:21.506424+00:00",
+  "previous": "/data/milai-experiments/20261111-scalable-evidence/progress-v42.json",
+  "no_sha_validation": true,
+  "active_jobs": [
+    {
+      "name": "lme-small32-s2feedbacku51-v1",
+      "owner_pid": 2624347,
+      "child_pid": 2624350,
+      "owner_status": "RUNNING",
+      "driver_status": "RUNNING",
+      "actual_process_alive": true,
+      "actual_argv_matches": true,
+      "active_row": 4,
+      "case_status_counts": {
+        "COMPLETED": 4,
+        "NOT_RUN": 27,
+        "PREPARING_INPUT": 1
+      }
+    }
+  ],
+  "new_artifacts": {
+    "research_report_draft": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/docs/MILAI_SCALABLE_EVIDENCE_RESEARCH_REPORT_20261112.md",
+    "completion_audit_draft": "/data/milai-experiments/20261111-scalable-evidence/plan-execution-audit-v1.json",
+    "paired_external_comparison_script": "/data/milai-experiments/20261111-scalable-evidence/compare_lme_small32_closed_v1.py"
+  },
+  "draft_scope": "Report coverscompletedengineering/data/S1/S2/S3/I1/I2/M6/confirmation/localSource12chain, nullresults andlimits. Explicitlyin-progress, notgoalcompletion. Audit16requirements/groups: pendingS2nativechain,closedcostsettlement,finalsynthesis/decision. Conditionaloptionalexpansionsnotfabricated.",
+  "comparison_scope": "Preparednotrun: same32questionIDs, historicalfixedfirsts vsS1u1130 andS2u51. Common-scoredpairs/wins/losses/allplannedmissingbounds anddomainbankdescriptives. NoSourceCIacross32questionssharingtwo100trajectorybanks. Requiresbothcohorts/scorersactuallyterminal.",
+  "verified_evidence": "Read actualABBA64comparison flags/allchoices equal andCUDAprofile5.087s,3/10/36kmanifestcounts,closedfit/task summaries andoriginalplan executionrecords. No additionalmodel/HTTPcalls fromaudit/reportpreparation.",
+  "cost_scope": "Existingphase42-unbilled-inventory-v2 remainsnotpaid whileS2active. FirstS1predictionresidual alreadycontainsbothinitialfailures; archivewholealreadyinpendinginventory. No duplicatebilling. Author/reportprepCPUunknown, notzero.",
+  "next": [
+    "ContinueactualS2job; onlyexplicitunattemptedcontinuationsafterterminaliffailed",
+    "Scoreafterall32attempted, thenexecutecompare_lme_small32_closed_v1.py",
+    "Closecostresiduals andfinalreport/audit; goalstillACTIVE/incomplete"
+  ],
+  "boundaries": "NoSHA/fingerprints/subagents/Product/API/permission/Canonicalchange/service restart/push/postconfirmationtraining orselection. Actualfirstfailuresunknowns retained."
+}
