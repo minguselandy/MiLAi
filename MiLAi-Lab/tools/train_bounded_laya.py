@@ -814,6 +814,8 @@ def main() -> None:
         checkpoint_writer(model, tok, config, str(destination))
         stage_seconds["save"] += time.perf_counter() - save_started
 
+    model: Any = None
+    optimizer: Any = None
     try:
         if args.backend == "linear":
             from linear_reader_classifier import LinearDecision, save_linear_checkpoint
@@ -1299,6 +1301,19 @@ def main() -> None:
         segment_counts = compute_counts(run, evaluation_counts)
         for key, value in segment_start_counts.items():
             segment_counts[key] -= value
+        # Checkpoints/recovery are already persisted. A long shared HTTP lease must not
+        # keep completed training parameters and Adam moments resident on the GPU.
+        cleanup_started = time.perf_counter()
+        try:
+            if optimizer is not None:
+                optimizer.zero_grad(set_to_none=True)
+                optimizer.state.clear()
+            if model is not None:
+                model.to("cpu")
+            torch.cuda.empty_cache()
+        except RuntimeError as error:
+            run["device_cleanup_error"] = str(error)
+        stage_seconds["cleanup"] += time.perf_counter() - cleanup_started
         measures = {"wall_seconds": time.perf_counter() - started,
                     "cpu_seconds": time.process_time() - cpu, "runs": 1,
                     **segment_counts}
@@ -1310,8 +1325,12 @@ def main() -> None:
             "peak_cuda_reserved_bytes": [torch.cuda.max_memory_reserved(i) for i in device_ids],
             "final_cuda_free_total_bytes": [list(torch.cuda.mem_get_info(i)) for i in device_ids],
             "ledger": str(args.budget)})
+        run["ledger_recorded"] = False
+        write_json(args.output / "run.json", run)
+        waiting = time.perf_counter()
         with args.budget.with_name("budget.json.http-owner.lock").open("a+b") as lease:
             fcntl.flock(lease, fcntl.LOCK_EX)
+            run["ledger_wait_wall_seconds"] = time.perf_counter() - waiting
             budget = RunBudget(RunLimits(**read_json(args.budget)["limits"]), args.budget)
             backend = "laya" if args.backend == "native" else "linear"
             phase = args.compute_phase or {
@@ -1321,6 +1340,8 @@ def main() -> None:
                 "bounded_reader": f"{backend}_reader_ce",
             }[args.task]
             budget.record_compute(phase, measures)
+        run["ledger_recorded"] = True
+        run["process_wall_seconds_including_ledger_wait"] = time.perf_counter() - started
         write_json(args.output / "run.json", run)
 
 
