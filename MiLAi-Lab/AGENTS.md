@@ -68,7 +68,8 @@ AfterI2 the96taskfirst-fourqueue starts. Alloldfirstfailuresretained.
 
 EXPANSION GPU3: post-u-gpu3-owner-v1 PID1481397/session17387 ownsall5collections:
 musique-public-pilot-v2 thenshards0..3,3418nativevariants283banks279knowndependencygroups.
-Shard0 CLOSED59families1730conditions. Currentlyshard1childPID1936190; revalidate.
+Shard0 CLOSED59families1730conditions;shard1 CLOSED58families1668conditions7188NN.
+Currentlyshard2 childPID2224762; revalidateproducerowner. Closedcollectioninventory-v1atR.
 Originalnativecontextmasks andoriginallexicalreceiptK retained, nevernewmodelcoldoutputK.
 Firstproductionpilot CLOSED24requests48conditions193NN; step0/1/2/4 =>153states579packets,
 266scored313unscored;69activeweakstates1family. expansion-main-pilot-data-v1 isDATAONLY.

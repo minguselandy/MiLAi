@@ -1,7 +1,7 @@
 {
   "status": "ACTIVE_INCOMPLETE",
   "goal_turn_classification": "progress",
-  "previous_turn_classification": "verified_wait",
+  "previous_turn_classification": "progress",
   "plan": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261112_2XA10040GB_v3.md",
   "artifact_root": "/data/milai-experiments/20261112-reader-utility",
   "prior_progress": "reader-utility-progress-20261112-v2.json",
@@ -245,7 +245,7 @@
     "post_packets": 22,
     "post_packets_with_reliable_native_references": 0,
     "production_plan": "/data/milai-experiments/20261112-reader-utility/expansion-public-production-plan-v1.json",
-    "production_status": "SHARD0_CLOSED_SHARD1_RUNNING",
+    "production_status": "PILOT_SHARD0_SHARD1_CLOSED_SHARD2_RUNNING",
     "first_production_input": "/data/milai-experiments/20261112-reader-utility/expansion-main-pilot-input-v1/run.json",
     "first_production_data": "/data/milai-experiments/20261112-reader-utility/expansion-main-pilot-data-v1/run.json",
     "first_production_active_states": 69,
@@ -265,7 +265,8 @@
     "closed_opportunity_states": 5794,
     "closed_raw_families": 60,
     "closed_active_raw_families": 58,
-    "remaining_active_new_state_target": 3734
+    "remaining_active_new_state_target": 3734,
+    "closed_collection_inventory": "/data/milai-experiments/20261112-reader-utility/expansion-closed-collection-inventory-v1.json"
   },
   "application_source_inventory": {
     "artifact": "/data/milai-experiments/20261112-reader-utility/natural-application-source-options-v1.json",
