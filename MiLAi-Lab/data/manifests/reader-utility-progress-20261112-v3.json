@@ -558,6 +558,24 @@
         "pid": 1109746,
         "status": "WAITING_FOR_E2_COLLECTIONS_AND_NATURAL_FIRSTS",
         "scope": "PostQfixed/declaredselectedmethods, firstreadout+native+sourceTeacher+primary/secondarysummary. Usesfull96expectedreferenceandretainedbasefailuremanifest;95baseactualReadercalls, notfake96. Native-summarycompileridentitychecked. No confirmation."
+      },
+      "expanded_U_closed": {
+        "run": "/data/milai-experiments/20261112-reader-utility/formal-e2-expanded10k3pass-seed0-v1/run.json",
+        "updates": 1250,
+        "primary_exposures": 30000,
+        "active_primary_exposures": 29997,
+        "replay_exposures": 10000,
+        "train_input_tokens": 241314753,
+        "train_padded_input_tokens": 247797294,
+        "native_ledger_recorded": true,
+        "training_wall_seconds": 16853.916433302686,
+        "preledger_wall_seconds": 18381.856768903323,
+        "native_cpu_seconds": 22357.741105405,
+        "full_reference_macro": {
+          "417": 0.4917193736998932,
+          "1250": 0.4550294222372144
+        },
+        "scope": "FixedUterminal retained; Qinitializer remainsfixedfinal despitehigherintermediateproxy. Actualtaskresults pending. Adoptedprocess exitcode/wholeCPU unknown, nativecompute/ledgerclosed, no refit."
       }
     }
   },

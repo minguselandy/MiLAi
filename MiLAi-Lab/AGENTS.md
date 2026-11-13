@@ -25,6 +25,10 @@ NEWdetachedE2HTTPowner1109746: E2-task-firsts-and-review-owner-v1.json waitsE2v2
 naturalv5firsts. Thenfixed/selectedE2firsts/native/sourceJudge andprimaryexpanded-base,
 secondaryexpanded-repeat summaries. Full96reference/failure args included;95actualbasecases+1failure.
 DO NOTstartcompetingHTTPfinalsourcegraderwhilethisowner/naturalownsdispatch; coordinateexplicitly.
+ExpandedE2U CLOSED1250,30000main29997active+10000replay,241314753input/247797294paddedtokens,
+nativeledgertrue; training16853.916s,preledger18381.857s,nativeCPU22357.741s. Adoptedexitcodeunknown.
+Fullreference macro417=.491719 vs1250=.455029; keepallcurves,fixedUfinalQinitializer unchanged.
+ExpandedQ child1274092onGPU2running; repeatU867555onGPU3running. Revalidateactualprogress.
 E2v2PID866950 stillownsGPUchains; ownv2PID876751 waitsGPU2. StoragecurrentPIDs/restorepathsbelow.
 Monitor --live mustpointnaturalv5 andincludeE2HTTPowner; readactualPIDs, notonlystatefiles.
 Freshconfirmation/justifiedseeds/fullcost/finalsynthesis stillincomplete; doNOTcompletegoal.
