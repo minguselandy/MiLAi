@@ -54,3 +54,41 @@ def test_explicit_collection_failure_keeps_task_without_inventing_a_branch():
         group_endpoints({"a": [endpoint("a", 2)], "b": [b]}, expected=[reference],
                         failures=[failure])
 
+
+@pytest.mark.parametrize("split", ["dev", "test"])
+def test_complete_panel_keeps_native_role_and_full_task_denominator(tmp_path, monkeypatch, split):
+    import json
+
+    from prepare_trajectory_outcome_review import main
+
+    def save(path, value):
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(json.dumps(value))
+
+    config = tmp_path / "config.json"
+    save(config, {"entrypoints": {"functional": {}}})
+    methods = {}
+    for name in ["a", "b"]:
+        compiled, prepared, readout = [tmp_path / (name + suffix)
+                                       for suffix in ["-compiled", "-prepared", "-firsts"]]
+        case = endpoint(name, 1)
+        case["native_control"]["split"] = split
+        save(compiled / "review-inputs.json", [case])
+        save(compiled / "manifest.json", {"evaluation_only": True, "source_split": split,
+            "prepared": str(prepared), "readouts": str(readout)})
+        save(prepared / "run.json", {"actual_only": True, "config": str(config)})
+        save(readout / "run.json", {"status": "COMPLETED"})
+        methods[name] = str(compiled)
+    index, output = tmp_path / "methods.json", tmp_path / "grouped"
+    save(index, methods)
+    monkeypatch.setattr("sys.argv", ["group", str(index), str(output),
+                                    "--evaluation-split", split])
+    main()
+    manifest = json.loads((output / "manifest.json").read_text())
+    assert manifest["source_split"] == split
+    assert manifest["training_labels_allowed"] is False
+    assert manifest["expected_tasks"] == [{"family": "paper", "native_question_id": "native-q"}]
+    assert manifest["collection_failures"] == []
+    cases = json.loads((output / "review-inputs.json").read_text())
+    assert cases[0]["native_control"]["split"] == split
+

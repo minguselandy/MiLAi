@@ -466,6 +466,15 @@ def collect_paper(
     return report
 
 
+def validate_source_roles(histories: list[dict], test_evaluation: bool = False) -> None:
+    roles = {history["split"] for history in histories}
+    if test_evaluation:
+        if roles != {"test"}:
+            raise ValueError("Explicit TEST evaluation requires only declared test sources")
+    elif not roles or not roles <= {"train", "dev"}:
+        raise ValueError("Collection requires TRAIN/DEV or explicit TEST evaluation")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("histories", type=Path)
@@ -481,6 +490,8 @@ def main() -> None:
     parser.add_argument("--baseline-policy", choices=("lexical", "fixed_context", "rules"),
                         default="lexical", help="Explicit simple policy when no model is supplied")
     parser.add_argument("--requests-per-family", type=int)
+    parser.add_argument("--test-evaluation", action="store_true",
+                        help="Preserve declared TEST identities for actual-endpoint evaluation")
     parser.add_argument("--actual-terminal-only", action="store_true",
                         help="In branched families retain only the actual terminal packet, "
                              "without counterfactual rule/coverage nominations")
@@ -507,8 +518,9 @@ def main() -> None:
         for collection in args.reuse_source_collections
         for h in read_json(collection / "sources.json")["histories"]
     }
-    if not histories or any(h["split"] not in {"train", "dev"} for h in histories):
-        raise ValueError("Collection requires an existing TRAIN/development source allocation")
+    validate_source_roles(histories, args.test_evaluation)
+    if args.test_evaluation and not args.actual_terminal_only:
+        parser.error("TEST evaluation requires --actual-terminal-only")
     settings = read_json(args.config)["entrypoints"]["functional"]
     capacity = HostCapacity(settings["capacity"])
     args.output.mkdir(parents=True, exist_ok=False)
@@ -533,6 +545,8 @@ def main() -> None:
         "Host_calls": 0,
         "automatic_retry": False,
         "actual_terminal_only": args.actual_terminal_only,
+        "test_evaluation": args.test_evaluation,
+        "training_labels_allowed": any(h["split"] == "train" for h in histories),
         "reused_source_families": sum(h["source_group"] in source_banks for h in histories),
         "collector_checkpoint": str(args.collector_checkpoint.resolve())
         if args.collector_checkpoint

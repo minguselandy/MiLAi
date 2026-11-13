@@ -160,17 +160,20 @@ def main() -> None:
     settings = read_json(Path(preparation["config"]))["entrypoints"]["functional"]
     cases = read_json(args.compiled / "review-inputs.json")
     roles = {case["native_control"]["split"] for case in cases}
-    if len(roles) != 1 or not roles <= {"train", "dev"}:
-        raise ValueError("Keep training and development annotation batches separate")
+    if len(roles) != 1 or not roles <= {"train", "dev", "test"}:
+        raise ValueError("Keep TRAIN/DEV/TEST annotation batches separate")
     source_split = next(iter(roles))
+    if source_split == "test" and (not manifest.get("evaluation_only")
+                                  or manifest.get("source_split") != "test"):
+        raise ValueError("TEST review requires an explicit evaluation-only TEST compiler")
     args.output.mkdir(parents=True, exist_ok=False)
     run = {"status": "RUNNING", "pid": os.getpid(), "compiled": str(args.compiled.resolve()),
         "planned_states": len(cases), "closed_states": 0, "unresolved_states": 0,
         "masked_teacher_candidates": 0,
         "source_split": source_split, "training_labels_allowed": source_split == "train",
-        "reviewer": "Existing local Qwen Host model as offline training teacher",
+        "reviewer": "Existing local Qwen Host model as offline source reviewer",
         "independent_evaluation": False, "judge_attempts": 1, "no_sha_validation": True,
-        "scope": "Offline teacher supervision only; no online controller or Host inputs changed.",
+        "scope": "Offline source review; labels allowed only for TRAIN. Online inputs unchanged.",
         "prepared": manifest["prepared"], "readouts": manifest["readouts"]}
     records = []
     write_json(args.output / "run.json", run)

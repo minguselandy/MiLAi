@@ -133,10 +133,11 @@ def test_incremental_case_stream_keeps_completed_bindings_between_full_snapshots
 
 
 @pytest.mark.parametrize("explicit_controls", [False, True])
-@pytest.mark.parametrize("evaluation_only,changed_original", [(True, False), (False, False),
-                                                           (False, True)])
+@pytest.mark.parametrize("evaluation_only,changed_original,evaluation_split", [
+    (True, False, "dev"), (False, False, "dev"), (False, True, "dev"), (True, False, "test")])
 def test_closed_dev_binding_keeps_native_controls_and_failed_first_without_train_export(
-        tmp_path, monkeypatch, explicit_controls, evaluation_only, changed_original):
+        tmp_path, monkeypatch, explicit_controls, evaluation_only, changed_original,
+        evaluation_split):
     import json
 
     from compile_collected_operation_feedback import main
@@ -148,7 +149,7 @@ def test_closed_dev_binding_keeps_native_controls_and_failed_first_without_train
     prepared, readouts, collection, output = [tmp_path / x for x in (
         "prepared", "readouts", "collection", "output")]
     controls = tmp_path / "original-controls.jsonl"
-    split = "dev" if evaluation_only else "train"
+    split = evaluation_split if evaluation_only else "train"
     control = {"source_group": "f", "request_id": "q", "split": split,
                "native_answerable": False, "native_answer": "Original answer",
                "native_answer_aliases": ["Alias"]}
@@ -179,7 +180,7 @@ def test_closed_dev_binding_keeps_native_controls_and_failed_first_without_train
     save(readouts / "run.json", {"status": "COMPLETED_WITH_FAILURES", "prepared": str(prepared)})
     argv = ["compile", str(prepared), str(readouts), str(output)]
     if evaluation_only:
-        argv += ["--evaluation-only"]
+        argv += ["--evaluation-only", "--evaluation-split", evaluation_split]
     if explicit_controls:
         argv += ["--controls", str(controls)]
     monkeypatch.setattr("sys.argv", argv)
@@ -197,5 +198,17 @@ def test_closed_dev_binding_keeps_native_controls_and_failed_first_without_train
     assert manifest["controls"] == str(controls.resolve())
     assert manifest["training_exports_written"] is (not evaluation_only)
     assert manifest["source_matched_sft_constructed"] is (not evaluation_only)
-    assert (output / "feedback-dev.jsonl").is_file() is evaluation_only
+    assert manifest["source_split"] == split
+    assert (output / "feedback-dev.jsonl").is_file() is (evaluation_only and split == "dev")
+    assert (output / "feedback-test.jsonl").is_file() is (split == "test")
     assert (output / "delivery-known-fit.jsonl").exists() is (not evaluation_only)
+
+
+def test_test_role_cannot_request_training_exports(tmp_path, monkeypatch):
+    from compile_collected_operation_feedback import main
+
+    monkeypatch.setattr("sys.argv", ["compile", "missing-input", "missing-firsts",
+                                    str(tmp_path / "out"), "--evaluation-split", "test"])
+    with pytest.raises(SystemExit):
+        main()
+    assert not (tmp_path / "out").exists()

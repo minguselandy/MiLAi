@@ -86,8 +86,13 @@ def main() -> None:
     parser.add_argument("--utility-scores", type=Path,
                         help="Optional closed offline scores; semantic labels remain separate")
     parser.add_argument("--evaluation-only", action="store_true",
-                        help="Require DEV roles and export feedback-dev instead of fit rows")
+                        help="Require evaluation roles and export no training-fit rows")
+    parser.add_argument("--evaluation-split", choices=("dev", "test"), default="dev",
+                        help="Keep the native evaluation role; TEST is not development")
     args = parser.parse_args()
+    if args.evaluation_split == "test" and not args.evaluation_only:
+        parser.error("TEST binding requires --evaluation-only")
+    source_split = args.evaluation_split if args.evaluation_only else "train"
     started, cpu = time.perf_counter(), time.process_time()
     preparation = read_json(args.prepared / "run.json")
     rollout = {
@@ -134,8 +139,10 @@ def main() -> None:
     for case in cases:
         row = rows[case["state_index"]]
         if (row["metadata"]["event_id"] != case["event_id"]
-                or row["metadata"]["split"] != ("dev" if args.evaluation_only else "train")):
+                or row["metadata"]["split"] != source_split):
             raise ValueError("Feedback state identity or research role changed")
+        if controls[case["family"], case["request_id"]]["split"] != source_split:
+            raise ValueError("Native control and actual state have different research roles")
         bound = []
         reviews = None if review_source is None else {}
         for branch in case["branches"]:
@@ -218,7 +225,8 @@ def main() -> None:
         ("answer-known-fit", known_fit["answer"]),
         ("matched-feedback", matched),
         ("matched-sft", sft),
-    ) if not args.evaluation_only else (("raw-feedback", compiled), ("feedback-dev", compiled))
+    ) if not args.evaluation_only else (
+        ("raw-feedback", compiled), ("feedback-" + source_split, compiled))
     for name, records in exports:
         with (args.output / f"{name}.jsonl").open("w") as stream:
             for row in records:
@@ -229,7 +237,7 @@ def main() -> None:
         {
             "status": "BOUND_BRANCH_FEEDBACK_COMPILED_NOT_FITTED",
             "evaluation_only": args.evaluation_only,
-            "source_split": "dev" if args.evaluation_only else "train",
+            "source_split": source_split,
             "training_exports_written": not args.evaluation_only,
             "source_matched_sft_constructed": not args.evaluation_only,
             "prepared": str(args.prepared.resolve()),

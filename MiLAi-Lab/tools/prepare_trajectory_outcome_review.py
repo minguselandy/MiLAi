@@ -1,4 +1,4 @@
-"""Group actual DEV trajectory endpoints for method-hidden source-grounded review."""
+"""Group actual DEV/TEST endpoints for method-hidden source-grounded review."""
 from __future__ import annotations
 
 import argparse
@@ -13,10 +13,13 @@ from milai_lab.harness.artifact_io import read_json, write_json
 def group_endpoints(methods: dict[str, list[dict[str, Any]]], width: int = 2,
                     expected: list[dict[str, Any]] | None = None,
                     failures: list[dict[str, Any]] | None = None,
+                    evaluation_split: str = "dev",
                     ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     """Align native tasks, retaining distinct trajectories even when action IDs are equal."""
     if not methods or width < 1:
         raise ValueError("Require methods and a positive fixed review group width")
+    if evaluation_split not in {"dev", "test"}:
+        raise ValueError("Only DEV/TEST endpoint review is supported")
     names = list(methods)
     anchor = expected if expected is not None else methods[names[0]]
     identities = [(c["family"], c["native_control"]["native_question_id"]) for c in anchor]
@@ -59,9 +62,9 @@ def group_endpoints(methods: dict[str, list[dict[str, Any]]], width: int = 2,
         for reference, case in zip(anchor, cases, strict=True):
             if (case["native_control"] != reference["native_control"]
                     or case["question"] != reference["question"]
-                    or case["native_control"]["split"] != "dev"
+                    or case["native_control"]["split"] != evaluation_split
                     or (len(case["branches"]) != 1 and not case.get("collection_failure"))):
-                raise ValueError("Require actual single DEV endpoints with the same public task")
+                raise ValueError("Require single declared DEV/TEST endpoints with the same task")
     grouped, bindings = [], {}
     for index, reference in enumerate(anchor):
         family, question = identities[index]
@@ -96,6 +99,7 @@ def main() -> None:
                         help="Ordered method -> closed endpoint compiler folder")
     parser.add_argument("output", type=Path)
     parser.add_argument("--methods-per-group", type=int, default=2)
+    parser.add_argument("--evaluation-split", choices=("dev", "test"), default="dev")
     parser.add_argument("--expected-reference", type=Path,
                         help="Closed reference folder defining the full planned task order")
     parser.add_argument("--collection-failures", type=Path,
@@ -108,9 +112,9 @@ def main() -> None:
         manifest = read_json(directory / "manifest.json")
         prepared = Path(manifest["prepared"])
         preparation = read_json(prepared / "run.json")
-        if (not manifest["evaluation_only"] or manifest["source_split"] != "dev"
+        if (not manifest["evaluation_only"] or manifest["source_split"] != args.evaluation_split
                 or preparation.get("actual_only") is not True):
-            raise ValueError("Review only closed actual DEV endpoints, never training comparisons")
+            raise ValueError("Review only declared DEV/TEST endpoints, never training comparisons")
         readout = Path(manifest["readouts"])
         if read_json(readout / "run.json")["status"] not in {
                 "COMPLETED", "COMPLETED_WITH_FAILURES"}:
@@ -135,7 +139,11 @@ def main() -> None:
                 or histories[position]["source_group"] != failure["family"]
                 or receipt["offset"] + position != failure["original_position"]):
             raise ValueError("Collection failure does not match the actual stopped first attempt")
-    cases, bindings = group_endpoints(methods, args.methods_per_group, expected, failures)
+    cases, bindings = group_endpoints(methods, args.methods_per_group, expected, failures,
+                                      args.evaluation_split)
+    # Complete matched panels already define their full denominator. Explicit reference
+    # plus failures is needed only when an actual endpoint is missing.
+    task_reference = expected if expected is not None else next(iter(methods.values()))
     args.output.mkdir(parents=True, exist_ok=False)
     write_json(args.output / "review-inputs.json", cases)
     write_json(args.output / "origin-bindings.json", bindings)
@@ -143,14 +151,14 @@ def main() -> None:
         "status": "CLOSED_ENDPOINTS_GROUPED_NOT_REVIEWED",
         "prepared": next(iter(preparations.values())), "preparations": preparations,
         "compilers": compilers,
-        "readouts": readouts, "methods": list(methods), "source_split": "dev",
+        "readouts": readouts, "methods": list(methods), "source_split": args.evaluation_split,
         "evaluation_only": True, "training_labels_allowed": False,
         "methods_per_group": args.methods_per_group, "review_groups": len(cases),
         "actual_endpoints": len(bindings), "no_sha_validation": True,
         "collection_failures": failures,
         "expected_tasks": ([{"family": c["family"],
                             "native_question_id": c["native_control"]["native_question_id"]}
-                            for c in expected] if expected is not None else None),
+                            for c in task_reference]),
         "scope": "Cross-trajectory task review, not same-state pair supervision. Original actions, "
                  "events and failed first answers remain distinct. Review labels join by the "
                  "actual readout path using origin-bindings.json; repeated action IDs are valid. "

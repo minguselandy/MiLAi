@@ -2,6 +2,8 @@
 
 from types import SimpleNamespace
 
+import pytest
+
 import collect_qasper_operation_states as collector
 from collect_qasper_operation_states import (
     complete,
@@ -17,6 +19,15 @@ def material(ref, start=0, end=10):
         "kind": "original_source",
         "source_ranges": [{"source_ref": ref, "source_revision": 1, "start": start, "end": end}],
     }
+
+
+def test_test_sources_require_explicit_evaluation_and_cannot_mix_with_dev():
+    collector.validate_source_roles([{"split": "train"}, {"split": "dev"}])
+    collector.validate_source_roles([{"split": "test"}], test_evaluation=True)
+    with pytest.raises(ValueError, match="explicit TEST"):
+        collector.validate_source_roles([{"split": "test"}])
+    with pytest.raises(ValueError, match="only declared test"):
+        collector.validate_source_roles([{"split": "test"}, {"split": "dev"}], True)
 
 
 def test_native_alternatives_unmatched_and_unanswerable_do_not_create_false_proofs():

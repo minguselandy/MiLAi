@@ -169,11 +169,12 @@ def main() -> None:
     started, cpu = time.perf_counter(), time.process_time()
     manifest = read_json(args.grouped / "manifest.json")
     run = read_json(args.reviewed / "run.json")
-    if (manifest.get("source_split") != "dev"
+    if (manifest.get("source_split") not in {"dev", "test"}
             or manifest.get("training_labels_allowed") is not False
+            or run.get("source_split") != manifest["source_split"]
             or run["status"] not in {"COMPLETED", "COMPLETED_WITH_UNRESOLVED"}
             or Path(run["compiled"]).resolve() != args.grouped.resolve()):
-        raise ValueError("Require the closed DEV review of this grouped endpoint matrix")
+        raise ValueError("Require the closed DEV/TEST review of this grouped endpoint matrix")
     result = summarize(read_json(args.grouped / "review-inputs.json"),
         read_json(args.grouped / "origin-bindings.json"),
         read_json(args.reviewed / "reviews.json")["records"], tuple(args.primary), args.seed,
@@ -192,6 +193,7 @@ def main() -> None:
             manifest.get("collection_failures", []), tuple(args.primary), args.seed)
     args.output.mkdir(parents=True, exist_ok=False)
     write_json(args.output / "summary.json", {**result, "status": "CLOSED_TASK_REVIEW_COMPARISON",
+        "source_split": manifest["source_split"], "training_labels_allowed": False,
         "grouped": str(args.grouped.resolve()), "reviewed": str(args.reviewed.resolve()),
         "reviewer_independent": False, "no_sha_validation": True,
         "compute": {"cpu_seconds": time.process_time() - cpu,

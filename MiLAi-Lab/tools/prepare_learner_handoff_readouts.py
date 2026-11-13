@@ -100,13 +100,15 @@ def main() -> None:
     parser.add_argument("output", type=Path)
     parser.add_argument("--families", type=int, default=64)
     parser.add_argument("--offset", type=int, default=0)
-    parser.add_argument("--split", choices=("train", "dev"), default="train")
+    parser.add_argument("--split", choices=("train", "dev", "test"), default="train")
     parser.add_argument("--actual-only", action="store_true",
                         help="Read the actual complete trajectory endpoint, retaining forced stops")
     parser.add_argument("--separate-answer-fields", action="store_true")
     args = parser.parse_args()
     started, cpu = time.perf_counter(), time.process_time()
     original = read_json(args.collection / "run.json")
+    if args.split == "test" and (not original.get("test_evaluation") or not args.actual_only):
+        raise ValueError("TEST readouts require explicit actual-only TEST collection")
     if args.offset + args.families > original["completed_families"]:
         raise ValueError("Select only closed source-family prefixes")
     histories = read_json(args.collection / "sources.json")["histories"]
@@ -188,7 +190,7 @@ def main() -> None:
             "Host_calls": 0,
             "no_sha_validation": True,
             "scope": "Actual same-pool packets already executed during learner collection. "
-            "Original complete online menus remain in training inputs. Prefix costs belong to the "
+            "Original complete online menus remain in stored states. Prefix costs belong to the "
             "collector, not charged again. Conditional empty-K readouts, not autonomous Host.",
             "compute": {
                 "cpu_seconds": time.process_time() - cpu,
