@@ -25,8 +25,49 @@ def endpoint_status(transport: str, review: dict | None) -> str:
     return "unknown"
 
 
+def native_panel(expected_tasks: list[dict], metrics: dict[str, dict], failures: list[dict],
+                 primary: tuple[str, str], seed: int) -> dict:
+    """Extend actual official scores only by declared pre-Reader failure positions."""
+    families = {r["family"] for r in expected_tasks}
+    if len(families) != len(expected_tasks):
+        raise ValueError("Native family means require one declared task per source here")
+    missing = defaultdict(set)
+    for failure in failures:
+        if (failure["status"] != "collection_failed" or failure["method"] not in metrics
+                or failure["family"] not in families
+                or failure["family"] in missing[failure["method"]]):
+            raise ValueError("Invalid native collection-failure coverage")
+        missing[failure["method"]].add(failure["family"])
+    methods = {}
+    for method, metric in metrics.items():
+        actual = metric["source_means"]
+        if (set(actual) != families - missing[method]
+                or metric["states"] != len(actual) or metric["sources"] != len(actual)):
+            raise ValueError("Native scores do not cover exactly the actual nonfailed sources")
+        scores = {**actual, **{family: 0.0 for family in missing[method]}}
+        methods[method] = {"planned_sources": len(families), "actual_reader_positions": len(actual),
+            "retained_collection_failures": len(missing[method]),
+            "actual_reader_status_counts": metric["status_counts"],
+            "source_macro_answer_f1_missing_zero": statistics.mean(scores.values()),
+            "source_scores": scores}
+    left, right = primary
+    diffs = [methods[left]["source_scores"][f] - methods[right]["source_scores"][f]
+             for f in sorted(families)]
+    rng = random.Random(seed)  # noqa: S311 -- declared descriptive source bootstrap
+    draws = sorted(statistics.mean(rng.choices(diffs, k=len(diffs))) for _ in range(10000))
+    return {"methods": methods, "primary": {"left": left, "right": right,
+        "paired_source_mean_difference": statistics.mean(diffs),
+        "source_bootstrap95": [draws[249], draws[9749]]},
+        "scope": "Actual official answer-field scores retained. Declared collection failures "
+                 "before any Reader call contribute missing=0 to the full planned denominator; "
+                 "no fictitious prediction or HTTP failure is created. Conditional native scorer "
+                 "artifacts remain unchanged. Source judgments and failure causes stay separate."}
+
+
 def summarize(cases: list[dict], bindings: dict, reviews: list[dict],
-              primary: tuple[str, str], seed: int = 0) -> dict:
+              primary: tuple[str, str], seed: int = 0,
+              collection_failures: list[dict] | None = None,
+              expected_tasks: list[dict] | None = None) -> dict:
     by_readout = {}
     for review in reviews:
         path = review["readout"]
@@ -53,6 +94,27 @@ def summarize(cases: list[dict], bindings: dict, reviews: list[dict],
                 "review_present": path in by_readout})
     if seen != set(bindings):
         raise ValueError("Actual endpoint coverage differs from the provenance map")
+    positions = {(method, row["family"], row["native_question_id"])
+                 for method, rows in methods.items() for row in rows}
+    if len(positions) != sum(map(len, methods.values())):
+        raise ValueError("Repeated actual first task position")
+    for failure in collection_failures or []:
+        identity = failure["method"], failure["family"], failure["native_question_id"]
+        if (identity in positions or failure.get("status") != "collection_failed"
+                or failure.get("readout") is not None
+                or failure.get("actual_terminal_action") is not None):
+            raise ValueError("Invalid or repeated collection-failure position")
+        positions.add(identity)
+        methods[failure["method"]].append({"method": failure["method"],
+            "family": failure["family"], "native_question_id": failure["native_question_id"],
+            "original_event_id": None, "actual_action": None, "readout": None,
+            "transport_status": "NOT_INVOKED", "answer_status": "collection_failed",
+            "review_present": False, "collection_failure": failure})
+    if expected_tasks is not None:
+        expected = {(r["family"], r["native_question_id"]) for r in expected_tasks}
+        if any({(r["family"], r["native_question_id"]) for r in rows} != expected
+               for rows in methods.values()):
+            raise ValueError("Every method must retain the entire planned task denominator")
     metrics, values = {}, {}
     for method, rows in methods.items():
         groups = defaultdict(list)
@@ -88,6 +150,9 @@ def summarize(cases: list[dict], bindings: dict, reviews: list[dict],
                  "reviews and qualified judgments remain unknown; failures remain failures. "
                  "Bootstrap conditions on the nonindependent judgments and this source panel. "
                  "Unknown limits do not certify reviewer truth or training-seed variance. "
+                 "Explicit collection failures retain planned positions with no fabricated "
+                 "action/packet/Reader call; they count as uncompleted pipeline positions, "
+                 "not semantic negatives. "
                  "Native F1 remains a separate result, and no training labels are exported."}
 
 
@@ -98,6 +163,8 @@ def main() -> None:
     parser.add_argument("output", type=Path)
     parser.add_argument("--primary", nargs=2, required=True)
     parser.add_argument("--seed", type=int, default=0)
+    parser.add_argument("--native-summaries", type=Path,
+                        help="Method -> actual official native summary.json for this same compiler")
     args = parser.parse_args()
     started, cpu = time.perf_counter(), time.process_time()
     manifest = read_json(args.grouped / "manifest.json")
@@ -109,7 +176,20 @@ def main() -> None:
         raise ValueError("Require the closed DEV review of this grouped endpoint matrix")
     result = summarize(read_json(args.grouped / "review-inputs.json"),
         read_json(args.grouped / "origin-bindings.json"),
-        read_json(args.reviewed / "reviews.json")["records"], tuple(args.primary), args.seed)
+        read_json(args.reviewed / "reviews.json")["records"], tuple(args.primary), args.seed,
+        manifest.get("collection_failures"), manifest.get("expected_tasks"))
+    if args.native_summaries:
+        paths = read_json(args.native_summaries)
+        if set(paths) != set(manifest["methods"]) or not manifest.get("expected_tasks"):
+            raise ValueError("Native panel must use all declared methods and full reference tasks")
+        native = {}
+        for method, path in paths.items():
+            scored = read_json(Path(path))
+            if Path(scored["compiled"]).resolve() != Path(manifest["compilers"][method]):
+                raise ValueError("Native scores came from another actual endpoint compiler")
+            native[method] = scored["metrics"]["collector_actual"]
+        result["native_panel"] = native_panel(manifest["expected_tasks"], native,
+            manifest.get("collection_failures", []), tuple(args.primary), args.seed)
     args.output.mkdir(parents=True, exist_ok=False)
     write_json(args.output / "summary.json", {**result, "status": "CLOSED_TASK_REVIEW_COMPARISON",
         "grouped": str(args.grouped.resolve()), "reviewed": str(args.reviewed.resolve()),

@@ -36,3 +36,21 @@ def test_native_task_or_role_cannot_be_silently_relabelled():
     with pytest.raises(ValueError, match="DEV"):
         group_endpoints({"a": [a], "b": [wrong]})
 
+
+def test_explicit_collection_failure_keeps_task_without_inventing_a_branch():
+    reference = endpoint("reference", 1)
+    b = endpoint("b", 3)
+    failure = {"method": "a", "family": "paper", "native_question_id": "native-q",
+               "native_control": reference["native_control"], "status": "collection_failed",
+               "readout": None, "actual_terminal_action": None}
+    cases, bindings = group_endpoints({"a": [], "b": [b]}, expected=[reference],
+                                      failures=[failure])
+    assert len(cases) == 1 and len(cases[0]["branches"]) == 1
+    assert set(bindings) == {"/b/first.json"}
+    assert "before" not in cases[0]
+    with pytest.raises(ValueError, match="explicit collection failure"):
+        group_endpoints({"a": [], "b": [b]}, expected=[reference])
+    with pytest.raises(ValueError, match="cannot replace"):
+        group_endpoints({"a": [endpoint("a", 2)], "b": [b]}, expected=[reference],
+                        failures=[failure])
+
