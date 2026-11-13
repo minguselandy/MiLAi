@@ -1,3 +1,23 @@
+# CURRENT phase40: frozen confirmation controller-work summary CLOSED; S1firsts RUNNING
+
+Goal ACTIVE/incomplete. KEEP ANALYSIS VERY SHORT. R=/data/milai-experiments/20261112-reader-utility.
+No SHA/content fingerprints/subagents/Product/default/servicechanges/push. No TESTretuning orfirstreplacement.
+LatestHTTP3538727 common_s1firsts child327791 stillRUNNING (lastpoll119/256,6fail; recheckcurrentowner).
+Author96/128DONE forfixed/expanded/rules; ONLYcommon_s132pending. Samephase39helpers/protocol/positions.
+NEWconfirmation-controller-work-v1/summary.json +source-work.csv fromclosed1024actualtrajectories;
+5481states/traceevents andallterminalHANDOFFbindings verified. No Readeranswers/nativeannotations used.
+Orderedfixed/expanded/rules/S1:SEARCH256/255/256/256;READ1034/855/992/553;HANDOFF256each.
+Rules992READallobserve_only,256parameterizedHANDOFFs; expanded5parameterizedHANDOFFs.
+Forcedbudgetstops5/14/0/2. SerializedterminalpacketJSONtoken totals307693/239505/160035/160695,
+means1201.93/935.57/625.14/627.71; notpuretext/fullHostprompt. FixedcreatesSourcebanks, othersreuse256,
+so rawcollectorlatencies notfairmethodcomparison. Operationwallnested, notmodelGPU/CPU cost.
+Exactpreparedfullwireequal:expanded-S124sources,expanded-rules2,rules-S11,fixedversusothers0.
+Orderedmaterialtext equalityexpanded-rules3otherssameaswire. No retroactivefirstcoalescing/best-of-two.
+Existingclosedcostscopes alreadycovercollector/prep; summarycopiestimers notrebilling. Thisanalysis0calls.
+StillneedS1firsts/author32,full4sourcegrade/native,authoragreement,128second/source/native/stability,
+finalHTTP/stabilitycostscope andreport/audit. Waiters3763322/3838848/3939766 remainactive.
+No moreDEVdiagnostics orper-shellaccounting. Do NOTmarkcomplete untilrequiredclosuresverified.
+
 # CURRENT phase39: rules256 FIRSTS/native/author32 CLOSED; commonS1firsts RUNNING
 
 Goal ACTIVE/incomplete. KEEP ANALYSIS VERY SHORT. R=/data/milai-experiments/20261112-reader-utility.

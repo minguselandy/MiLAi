@@ -710,7 +710,7 @@
     "Queued216settlement3838848then123settlement3939766. FinalconfirmationHTTP/stability costscope andunknownscope disclosure; no per-shell accountingproject.",
     "Finish five-layer report andplan-basedcompletionaudit afteractualallremainingclosures; no TESTretuning/seedstabilityclaim."
   ],
-  "phase": 39,
+  "phase": 40,
   "signal_diagnostic": {
     "canonical110": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-vs-semantic110-diagnostic-v1.json",
     "author_spots": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-semantic-disagreement-spots-v1.json",
@@ -2035,6 +2035,38 @@
     "author96_total_unique_firsts": true,
     "author_literal_support_quotes_verified_at_each_append": true,
     "TEST_role_no_training_exports_preserved": true,
+    "no_sha_validation": true
+  },
+  "confirmation_controller_work": {
+    "artifact": "/data/milai-experiments/20261112-reader-utility/confirmation-controller-work-v1/summary.json",
+    "per_source_csv": "/data/milai-experiments/20261112-reader-utility/confirmation-controller-work-v1/source-work.csv",
+    "sources_each": 256,
+    "actual_states_all_methods": 5481,
+    "READ_counts": {
+      "fixed_context": 1034,
+      "expanded10k_final": 855,
+      "rules": 992,
+      "common_s1": 553
+    },
+    "terminal_packet_json_token_totals": {
+      "fixed_context": 307693,
+      "expanded10k_final": 239505,
+      "rules": 160035,
+      "common_s1": 160695
+    },
+    "rules_observe_only_READs": 992,
+    "rules_parameterized_HANDOFFs": 256,
+    "expanded_parameterized_HANDOFFs": 5,
+    "expanded_S1_exact_prepared_request_matches": 24,
+    "scope": "ClosedTESTtrajectories descriptiveonly, noanswers/annotations consumed. Nestedtimers notrebilled, fixedbankcreation makescollectorlatency comparisonunfair. Tokens areoriginalserializedpacket JSONcounter, notfullHostprompt orpureevidencetext. No quality/causalclaim orretuning."
+  },
+  "phase40_validation": {
+    "all1024_terminal_bindings_match_actual_trace_HANDOFF": true,
+    "all5481_state_trace_event_counts_match": true,
+    "same_frozen256_source_order_each_method": true,
+    "TEST_roles_preserved": true,
+    "no_reader_outcomes_or_native_annotations_used_in_behavior_summary": true,
+    "no_new_model_or_Host_calls": true,
     "no_sha_validation": true
   }
 }
