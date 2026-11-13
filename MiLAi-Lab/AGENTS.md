@@ -1,3 +1,44 @@
+# CURRENT phase31: all14 fits/DEV CLOSED; signal600 and E0 local probe CLOSED
+
+Goal ACTIVE/incomplete. KEEP ANALYSIS VERY SHORT. R=/data/milai-experiments/20261112-reader-utility.
+No SHA/content fingerprints/subagents/Product/default changes/service restarts/push.
+All3E2 U+Q+DEV andbothown U83+Q63+DEV CLOSED. EverypostQ nominationselected63, noextra21firsts.
+E2owner866950 andown876751 completed; no researchfit active. E2HTTP1731112 andownHTTP1900301
+stillwaitnaturalfirsts. Fullbase96denominator keeps95actualendpoints+1collectionfailure unchanged.
+NaturalCURRENTv6owner1731111 RUNNING common_s1 first100, child2189585 onGPU3; Q1follows.
+Firstoflast4recoveryarchivesclosed, ordinary16GiBadmissionwassatisfied atS1launch; no model restart.
+NEWfinite4recoveryarchive2173169: phase31-closed-final-four-recovery-archives-v1; lastE2repeatU/Q
+andownU/Q only, alreadyclosednative/DEV/previousstorage. Inferenceweightsraw, byteverifiedall.
+Restore:python3 <archive-dir>/restore.py <run-name>. Keepemptybase/frozenhelper/archives/manifest.
+Phase30CURRENT10recoveryarchive CLOSED, freed5.691284GiB; prior2/remaining8 CPU scopesseparate.
+Newfitstorage876752 CLOSEDall10; naturalDBarchive1818134 stillwaits remainingclosed snapshots.
+Finalfitcostformal-fit-costs-all14-v1 CLOSED14,nativeledgerexactmatch; no rebill.
+Totals819510075input/842198086paddedtokens,CPU91915.137455s,trainingwall58437.094641s,
+evalwall14117.381749s,preledgerwall76711.047044s;21.308624allocation-proxydeviceh NOTactivekernels.
+PNG/PDF/CSV formal-fit-work-figure-v1 created/PNGviewed; owncolumns onlyaddedcontinuations.
+Signalall600 CLOSED canonical-fp32-vs-semantic600-diagnostic-v1:481sources2462pairs; exactstate/menu/
+fullaction/packet/continuation matched; prior261 reproducedexactly. Materialjointdirection523:
+375agree148oppose,82opposedweakwinners emptywithoutK. Sourceconditionalagreement.700885 CI
+[.644004,.753640],218sources; answer276/382,.720809 CI[.661272,.778421],173sources.
+SelectedTRAIN, semanticteacherfallible anddifferentmodel; no causality/populationaccuracy claim.
+178completednatural actualfinalsystemprompts ALLcontainliteralwholedeclaredprompt including
+answer_separate_v1. natural-answer-format-wire-observation-v1.json; no omittedpromptexplanation,
+no claim whycompliancefailed orrepair. Originalformatfailures retained.
+NEWsameTeacherE0probe CLOSED onGPU2afterownqueue: same-teacher-mode-probe-v1;
+9lengthquantileTRAINpackets8sources,exactpublicprefix,4BFP32/SDPA TF32off. Score3.833317s,
+generate91.752618s BUTall9hit256tokencap, extendedanalysis notcompletedshortanswers.
+No equivalentoutput speedup/wholepipelinequalityclaim; originaloutputsretained,noretries.
+NativeCPU127.468623/wall113.316810 ledgerverified; localNNcounts NOTHTTPtokens.
+interpretation-v1.json clarifies rawgeneration_prefix_has_reference_text=False meansno OFFLINE
+annotationfields supplied; sourceevidencemaycontainanswerwords. CodefieldnamingfixwasNOTapplied:
+prelaunchguard detectedalreadyRUNNING andstoppedbeforeanyedit. No resultrewrite.
+New E2/ownauthor protocol formal-E2-ownstate-author12-protocol-v1.json frozenBEFOREfirsts:
+same12sourceindices0,8,...88 x5newmethods=60bindings, ALLpending. OriginalQ1author12reuseunchanged.
+Authornotblind/independent, alreadyknowsDEV; notnewreferenceisolation orreplacementmainmetric.
+Livingreport docs/MILAI_READER_UTILITY_RESULTS_20261113.md expandedwithE0/signal/K/horizon/policycost.
+Remainingnaturalfirst200/sourcegrade/author40/View,E2/ownHTTP/author60,confirmationprotocol+256,
+justifiedseedreplicationdecision/fullcosts/finalreport. Do NOTcompletegoal.
+
 # CURRENT phase30: TEST role path; baseline grading CLOSED; all U fits CLOSED
 
 Goal ACTIVE/incomplete. KEEP ANALYSIS VERY SHORT. R=/data/milai-experiments/20261112-reader-utility.
