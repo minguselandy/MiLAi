@@ -1,3 +1,28 @@
+# CURRENT phase38: expanded256 FIRSTS/native/author32 CLOSED; rulesfirsts RUNNING
+
+Goal ACTIVE/incomplete. KEEP ANALYSIS VERY SHORT. R=/data/milai-experiments/20261112-reader-utility.
+No SHA/content fingerprints/subagents/Product/default/servicechanges/push. No TESTretuning orfirstreplacement.
+ConfirmationHTTP3538727 nowRUNNING rulesfirsts child75749; latest21/256,0failed. Thencommon_s1.
+Expanded10k_final first256CLOSED246completed10lengthfail atoriginalpositions1,37,51,64,70,115,159,190,
+224,237. CompiledTESTevaluationonly,no fitexports. NativeF1full256missingzero=.31036991120373775.
+Firsts888881known/chargedtokens,unknownusage0,nativeCPU19.860242597/wall3652.1487958813086.
+Closure new-confirmation-expanded10k_final-closure-v1.json. Fullsourceprimary stillPENDINGall4firsts.
+EXPANDED AUTHOR32DONE:complete8/incomplete13/unknown8/incorrect1/failure2 (positions1,70).
+Materialsufficient8/insufficient18/unknown6. new-confirmation-expanded10k_final-author32-closure-v1.json.
+Combined new-confirmation-author32-source-review-v1.json now64/128. Fixed32unchangedcomplete10,
+incomplete12/unknown8/incorrect1/failure1; fixednativeF1.34210006976819124,255/1lengthfailure.
+Authorhaspriorfixedsourceexposure,nonindependent/unblinded; no qualitycomparison orlabelreplacement.
+DO NOTREDO fixed/expanded author. Remainingrules32 andcommon_s132 aftereachfullboundcloses.
+Helpers show_confirmation_author_panel_v1.py POS... (PANEL_METHODS), append_confirmation_author_review_v1.py
+JSONstdin; aliases=(methodindex+position//8)%4, joinsnativefamily/questionID. No nativegoldjudging.
+Positions1,11,23,26,39,40,55,59,70,74,80,94,102,110,116,123,131,143,146,155,165,171,182,191,
+196,201,210,221,226,239,246,250. Exactquotes requiredforcomplete, failedfirstsretained.
+Waitersstability3763322,216settlement3838848,123settlement3939766 stillwaiting/live. Monitorterminal
+oldPIDs excludedfrom--live toavoidreusefalsepositives. Do notrestartmissingterminaljobs.
+Remainingrules/S1first512/full4source/native, author64, second128/source/native/stability,
+finalconfirmedHTTP/stabilitycostscope, finalreport/audit. No moreDEVdiagnostics orper-shellcostwork.
+AllE1/E2/own/natural/diagnostics remainclosed; no seedrobustnessclaim. Do NOTmarkgoalcomplete.
+
 # CURRENT phase37: fixed confirmation256 FIRSTS/native CLOSED; author32 DONE
 
 Goal ACTIVE/incomplete. KEEP ANALYSIS VERY SHORT. Localdate2026-11-14;R=/data/milai-experiments/20261112-reader-utility.
