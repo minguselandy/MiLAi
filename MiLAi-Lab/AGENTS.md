@@ -1,3 +1,32 @@
+# CURRENT phase41: ALL1024firsts/native +AUTHOR128 CLOSED; sourcegrade512 RUNNING
+
+Goal ACTIVE/incomplete. KEEP ANALYSIS VERY SHORT. R=/data/milai-experiments/20261112-reader-utility.
+No SHA/content fingerprints/subagents/Product/default/servicechanges/push. No TESTretuning/firstreplacement.
+ConfirmationHTTP3538727 nowfullsourcegrade child572646, planned512groups, latest48closed0unresolved.
+All4x256firsts CLOSED983completed41failed, allfailureslength; 1024newcalls/no crossmethodresponse reuse.
+All983completed have originalanswer/explanation/evidence fields, no repaired/favorableextractedanswers.
+NativeF1full256missingzero fixed.34210006976819124/expanded.31036991120373775/rules.24333534239645516/
+S1.3005590870465532; complete/fail255/1,246/10,244/12,238/18. Fullsourceprimary stillPENDING.
+Allfirstgenerationknown/charged3501683tokens,unknownusage0. new-confirmation-firsts-all1024-closure-v1.json.
+S1closure new-confirmation-common_s1-closure-v1.json:864294tokens,CPU19.627097543/wall3990.52243345.
+S1failedpositions12,34,53,60,80,109,121,125,129,151,155,166,191,202,208,212,224,226.
+AUTHORALL128DONE; DO NOTREDO anymethod. new-confirmation-author32-source-review-v1.json CLOSED,
+new-confirmation-all128-author-closure-v1.json. Same32sourcesx4, not128independent. Allbindings/quotes
+verified. Nonindependent/unblinded/priorcrossmethodsourceexposure, interpretivecompleteness notgold.
+Fixedcomplete10/incomplete12/unknown8/incorrect1/failure1;expanded8/13/8/1/2;rules7/14/7/2/2;
+S1complete8/incomplete15/unknown4/incorrect1/failure4. S1material sufficient10:2sufficientfail155/226.
+S1authorfail80/155/191/226. Allmethod-specificsourcequotes and firststatuses keptunchanged.
+NEWauthoragreementwaiter611414 new-confirmation-author-agreement-owner-v1.json waitsoriginalprimary
+summaryfile, thencompare_confirmation_author_teacher_v1.py =>new-confirmation-author-teacher-agreement-v1.json.
+Actual128author/event/action/nativeidentity checks passed withCUDApython+http site. No newmodelcalls.
+Useexistingendpoint_status, preserveunknown/masks/failures; binaryagreement notaccuracy. No labelreplacement.
+Waitersstability3763322,216settlement3838848,123settlement3939766 alive/waiting. Monitorincludesnewowner.
+OriginalHTTP automaticallyfinishes512sourcegroups and3comparisons, then128preselectedsecondReadercalls/
+source/native. Stabilitythenqueuedcostsettlements; remainingfinalHTTP/authoranalysis/stabilitycosts separate.
+Remainingfullsourcequality/nativepairedsummaries, authoragreement, second128/stability, finalcost/report/
+figures andplan-completionaudit. No moreDEVdiagnostics/per-shellaccounting orseedrobustnessclaims.
+Allpriortraining/natural/diagnostics closed. Do NOTmarkcomplete untilactualremainingclosuresverified.
+
 # CURRENT phase40: frozen confirmation controller-work summary CLOSED; S1firsts RUNNING
 
 Goal ACTIVE/incomplete. KEEP ANALYSIS VERY SHORT. R=/data/milai-experiments/20261112-reader-utility.
