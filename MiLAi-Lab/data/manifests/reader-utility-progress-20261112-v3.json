@@ -1,6 +1,6 @@
 {
   "status": "ACTIVE_INCOMPLETE",
-  "goal_turn_classification": "progress",
+  "goal_turn_classification": "PROGRESS",
   "previous_turn_classification": "progress",
   "plan": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261112_2XA10040GB_v3.md",
   "artifact_root": "/data/milai-experiments/20261112-reader-utility",
@@ -37,7 +37,8 @@
     "scale_comparison": "2d79ef13",
     "trajectory_outcome_summary": "4ae97cd8",
     "continuous_host_outcome_summary": "f7740256",
-    "native_Host_cost_stages": "fe29a56b"
+    "native_Host_cost_stages": "fe29a56b",
+    "native_DEV_explicit_controls_eval_only": "86ea0d16"
   },
   "formal_U": {
     "protocol": "/data/milai-experiments/20261112-reader-utility/formal-main3k-uq-protocol-v1.json",
@@ -178,7 +179,7 @@
     "new42_labels": "/data/milai-experiments/20261112-reader-utility/main3k-new64to128-semantic42-labels-v2/manifest.json",
     "new42_known_delivery": 20,
     "new42_known_answer": 20,
-    "remaining": "Annotation complete. Both matched Qfits running from fixed U endpoints; actual task DEV, E2threefits+Q, ownstate, seeds, confirmation and natural/autonomous application work remain.",
+    "remaining": "Both Q fits and six actual DEV trajectories closed. First readouts, source review and task synthesis continue; E2, own-state, justified replication, new confirmation and applications remain.",
     "all600_opportunities_selected": true,
     "finite_continuation_owner": "/data/milai-experiments/20261112-reader-utility/finish_selected_q_blocks_v2-owner.json",
     "finite_continuation_pid": 1325952,
@@ -203,13 +204,14 @@
       "reused_readouts": 3,
       "automatic_retry": false
     },
-    "current_stage": "ALL_LABELS_CLOSED_Q_FITS_RUNNING",
+    "current_stage": "FITS_AND_ACTUAL_DEV_TRAJECTORIES_CLOSED_TASK_FIRSTS_IN_PROGRESS",
     "fit_and_DEV_owner": "/data/milai-experiments/20261112-reader-utility/formal-Q-fit-and-dev-owner-v1.json",
     "fit_and_DEV_process": {
       "pid": 2573854,
       "session": 39922,
       "status_at_launch": "WAITING_FOR_Q_DATA_AND_PLANS",
-      "fits_launched_at_observation": 0
+      "fits_launched_at_observation": 0,
+      "current_status": "COMPLETED"
     },
     "closed_labels_inventory": "/data/milai-experiments/20261112-reader-utility/semantic-Q-all600-closed-label-inventory-v1.json",
     "closed133_labels": {
@@ -299,6 +301,48 @@
         "pid": 3604437,
         "physical_gpu": 3
       }
+    },
+    "closed_fit_comparison": "/data/milai-experiments/20261112-reader-utility/formal-Q-closed-reference-comparison-v1.json",
+    "closed_fits": {
+      "optimizer_updates_each": 63,
+      "active_primary_exposures_each": 993,
+      "replay_exposures_each": 993,
+      "train_input_tokens_each": 12739957,
+      "train_padded_tokens_each": 13039993,
+      "ledger_recorded_each": true,
+      "full_reference": {
+        "states": 992,
+        "all_state_selected_kinds": {
+          "u0": {
+            "SEARCH": 89,
+            "READ": 638,
+            "HANDOFF": 265
+          },
+          "u1": {
+            "SEARCH": 64,
+            "READ": 708,
+            "HANDOFF": 220
+          }
+        },
+        "changes": {
+          "both_reference_accepted": 170,
+          "changed_complete_action": 362,
+          "same_kind_different_binding": 222,
+          "same_kind_target_or_parameters_changed": 222,
+          "neither_reference_accepted": 323,
+          "u0_only_reference_accepted": 43,
+          "kind_changed": 140,
+          "u1_only_reference_accepted": 48
+        },
+        "reference_labelled_sources": 77,
+        "paired_source_macro_Q1_minus_Q0": -0.031475000468506965,
+        "bootstrap95": [
+          -0.09966454901519836,
+          0.03325345289631004
+        ],
+        "scope": "In-memory finalreferenceevaluationonfixed992states; notsaved-exportwholepolicyHostresults. Conditionalonfalliblenativewitnesslabels, nottasksuccess, purelossisolation orindependentconfirmation."
+      },
+      "interpretation": "Reference acceptance is not actual supported task success."
     }
   },
   "K_diagnostic": {
@@ -496,23 +540,22 @@
     }
   },
   "required_remaining": {
-    "A": "Finish stable FP32 scoring diagnostics, semantic/source review and meaningful I2/K/long-input evaluation. Original prototype and original12tests now obtained and verified.",
+    "A": "Original prototype12tests and both I2 native/source checks closed. Preserve K/horizon/long-input diagnostics and failures; synthesize their limits with main task results.",
     "F4_F5": "Scale multi-request actual sources; add h=0 stratum, legal stop diagnostics, actual K and complementary A/B/A+B conditions; do not count duplicate sources independently.",
-    "B_E0_E1": "Both U420 fits closed and self-billed; continue preselected600 Q review opportunities, compile actual-known pool and fit both fixed U endpoints. Actual full-menu source/native/Host evaluation and model nomination pending.",
+    "B_E0_E1": "U/Q fixed fits and full-panel nominations closed; complete six actual DEV firsts, grouped review, planned12source author check and task/cost assessment. No task superiority inferred from reference labels.",
     "C_E2": "Fresh E2 base3k3pass, expanded10k3pass and base3k9pass using same new replay/permutation IDs and commonS1, then sameQ; data/plans ready but fitting waitsQ/actualDEVassessment. OldUreplay differs, and checkpoint420 of9pass is not a separate3pass schedule. Oneown-state round and decisive seed replication remain.",
     "D_E4": "Freeze new confirmation sources/candidates/short-answer format/budgets/repeat subset before outcomes; actual full-menu and native task scoring.",
     "applications": "New natural histories initial ~32 if available, autonomous Host and continuous View/update line; distinguish invocation from control; retain failures.",
     "synthesis": "Five result layers, clustered paired uncertainty, full measured cost/unknown scopes, mechanism and counterexamples; conditional minimal Product recommendation only."
   },
   "next_actions": [
-    "Poll live U jobs without restart; retain25update logging cadence. Full DEV at140/420, no stopping on small-panel fluctuation.",
-    "Continue predeclared semantic92/59/133/68/138 blocks after I2 Host lease, using canonical FP32 scores and1e-4sample deadband; no mutation of frozen Udata.",
-    "Finish I2 readouts/native/source checks. Verify completed public CPU pilot receipts.",
-    "Prepare10k public multi-request/post-state branch experience from actual eligible TRAIN contexts; initial-only exporter is not enough, preserve original known receipts and native visibility.",
-    "Prepare fixed train diagnostic probe if useful; do not repeatedly evaluate all7452training rows solely for bookkeeping.",
-    "New confirmation and autonomous/natural continuous View application lines remain required; no overall completion claim."
+    "Finish existing six-method DEV readout/review owners; no competing HTTP or retries. Author-check preselected12 sources across all methods.",
+    "Assess weak signal against actual source/task outcomes before launching prepared E2threefreshU+sameQ; manage disk with recoverable closed-artifact storage.",
+    "Execute one own-state round and worthwhile decisive replication based on development evidence.",
+    "Freeze new confirmation candidates, metrics, budgets and repeat subset before export/outcomes; execute natural/autonomous Host and continuous View applications.",
+    "Synthesize five result layers, source-cluster paired uncertainty and deduplicated measured cost; goal remains incomplete."
   ],
-  "phase": 21,
+  "phase": 22,
   "signal_diagnostic": {
     "canonical110": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-vs-semantic110-diagnostic-v1.json",
     "author_spots": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-semantic-disagreement-spots-v1.json",
@@ -554,7 +597,6 @@
     "baseline_actual_states": 581,
     "baseline_actual_endpoints": 96,
     "baseline_forced_stops": 2,
-    "Host_calls": 0,
     "learner_collection_plans": "/data/milai-experiments/20261112-reader-utility/formal-task-dev96-collect-plans-v1.json",
     "conditional_old32_h2": "/data/milai-experiments/20261112-reader-utility/formal-dev32-common-h2-v1/run.json",
     "conditional_scope": "64same-statecomparisons206packets; oldcollector3k/u101, separatefrom96actualwholetrajectorytaskprotocol.",
@@ -567,6 +609,28 @@
       "pid": 2573961,
       "session": 1897,
       "status_at_launch": "WAITING_FOR_PRE_Q_FIRSTS_AND_Q_COLLECTIONS"
+    },
+    "trajectory_status": "ALL_SIX_CLOSED",
+    "readout_status": "FIRST_FOUR_QUEUE_RUNNING_U0_AT_PHASE22_SNAPSHOT; Q_CHAIN_FOLLOWS",
+    "closed_native_at_snapshot": {
+      "fixed_context": {
+        "states": 96,
+        "sources": 96,
+        "status_counts": {
+          "COMPLETED": 95,
+          "FAILED": 1
+        },
+        "source_macro_answer_f1_missing_zero": 0.32798214349175525
+      },
+      "common_s1": {
+        "states": 96,
+        "sources": 96,
+        "status_counts": {
+          "COMPLETED": 91,
+          "FAILED": 5
+        },
+        "source_macro_answer_f1_missing_zero": 0.24205157372822636
+      }
     }
   },
   "I2_public": {
@@ -578,11 +642,42 @@
     "packets": 62,
     "states_with_AB_comparison": 12,
     "union_only_native_witness": 2,
-    "semantic_caution": "One cleartwo-premisefilm/countcase; otherartistlabelquestiontime/albumambiguous. NoHostoutcomesyet, no newmodelselectionclaim.",
+    "semantic_caution": "Old u565 acquired pools; collector/full identical in all16. One cold film-premise/count union case; known-film K already makes A sufficient but A first failed. Album/artist label remains ambiguous. Native F1 and full-premise source success differ. No unique learned delivery benefit or new-U/Q result.",
     "retained_first_startup_failure": "/data/milai-experiments/20261112-reader-utility/i2-public-dev8-terminal-short-readouts-v1/run.json",
     "failure_Host_calls": 0,
     "dependent_owner": "/data/milai-experiments/20261112-reader-utility/i2-public-after-q-owner-v2.json",
-    "actual_firsts_running": "/data/milai-experiments/20261112-reader-utility/i2-public-dev8-terminal-short-readouts-v2/run.json"
+    "status": "CLOSED_FIRSTS_NATIVE_AND_AUTHOR_SOURCE_REVIEW",
+    "actual_firsts_closed": "/data/milai-experiments/20261112-reader-utility/i2-public-dev8-terminal-short-readouts-v2/run.json",
+    "closed_readouts": 62,
+    "failed_firsts": 6,
+    "native_summary": "/data/milai-experiments/20261112-reader-utility/i2-public-dev8-native-v2/summary.json",
+    "author_source_review": "/data/milai-experiments/20261112-reader-utility/i2-public-dev8-native-v2/author-source-review-v1.json",
+    "bound_evaluation_only": "/data/milai-experiments/20261112-reader-utility/i2-public-dev8-terminal-bound-v2",
+    "source_reviewed_states": 16,
+    "source_reviewed_physical_bindings": 62,
+    "common_AB_states": 12,
+    "common_AB_native_positive_states": 5,
+    "common_AB_native_positive_families": 3,
+    "common_AB_answer_f1": {
+      "collector_actual": 0.41333333333333333,
+      "full_pool": 0.41333333333333333,
+      "AB": 0.4,
+      "A": 0.2,
+      "B": 0,
+      "rules": 0,
+      "empty": 0
+    },
+    "common_AB_complete_supported": {
+      "collector_actual": 2,
+      "full_pool": 2,
+      "AB": 2,
+      "A": 0,
+      "B": 0,
+      "rules": 0,
+      "empty": 0
+    },
+    "clear_cold_union_only_case": 1,
+    "collector_full_same_wire": 16
   },
   "post_U_GPU_owners": {
     "2": "/data/milai-experiments/20261112-reader-utility/post-u-gpu2-owner-v2.json",
@@ -750,5 +845,20 @@
     "actual_restore_CLI_validation": "/data/milai-experiments/20261112-reader-utility/phase19-closed-expansion-case-archives-v1/restore-cli-validation.json",
     "restore_before_following_original_packet_ref_paths": true,
     "scope": "Only80closed expansion step case JSONs archived after all scores/data close. Full bytes/mode/mtime retained; states,packets,scores,training data,Source banks,models andHost firsts kept directly available."
+  },
+  "checkpoint_nomination": {
+    "rule": "/data/milai-experiments/20261112-reader-utility/formal-UQ-reference-checkpoint-nomination-rule-v1.json",
+    "result": "/data/milai-experiments/20261112-reader-utility/formal-UQ-reference-checkpoint-nomination-result-v1.json",
+    "all_selected_fixed_terminal": true,
+    "additional_checkpoints": 0,
+    "disclosure": "Explicit full-panel interpretation/Q application recorded after fits, before Q full values inspection; earlier U values and Q fast values already exposed. Not a new pretraining preregistration."
+  },
+  "phase22_validation": {
+    "native_DEV_binder_tests": 20,
+    "ruff_pass": true,
+    "Q_reference_comparison_closed": true,
+    "checkpoint_nominations_closed": true,
+    "I2_all62_firsts_source_reviewed": true,
+    "no_sha_validation": true
   }
 }

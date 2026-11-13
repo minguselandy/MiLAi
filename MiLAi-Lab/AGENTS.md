@@ -1,3 +1,30 @@
+# ACTIVE Reader utility v3: phase22 Q closed; actual task firsts ongoing (2026-11-13)
+
+Goal ACTIVE/incomplete. Latest code86ea0d16; phase22 updates progress/docs below. No subagents/SHA.
+R=/data/milai-experiments/20261112-reader-utility. Read current monitor before acting.
+Q0/Q1 CLOSED63, each993activequality+993replay,12739957inputtokens, native ledger true.
+formal-Q-closed-reference-comparison-v1.json: full584labelled/77sources Q0=213,macro.41134;
+Q1=218,macro.37987; pairedQ1-Q0=-.031475 CI[-.099665,.033253], reference only, not task success.
+362/992actions differ:140kind222samekindtarget/parameters. All six actualDEV trajectories CLOSED.
+formal-UQ-reference-checkpoint-nomination-result-v1: all four U/Q nominations=fixedterminal,
+no extra checkpoint needed. Rule postfit/full-panel interpretation exposure explicitly disclosed.
+QGPUowner2573854/session39922 COMPLETED/exited; do not restart either fit or collections.
+pre-Q readerowner1625376/session99980 latest u0-readouts child3847397; REVALIDATE.
+fixed_context firsts95completed1failed nativeF1.327982; common_s1=91/5 nativeF1.242052;
+not source-supported success. Q/taskreview owner2573961/session1897 awaits firstfour thenQfirsts,
+then sixgroupedreview. No competing HTTP. Author12sourcepositions0,8,...88 pending.
+I2PUBLIC CLOSED all62firsts6failed; explicit original controls binder fixed86ea0d16,20testsPASS.
+Bound i2-public-dev8-terminal-bound-v2; officialnative i2-public-dev8-native-v2/summary.json;
+all16states/62bindings source-reviewed author-source-review-v1.json (nonblind/nonindependent).
+CommonAB12states,5nativepositivepositions/3families:full/collectorF1.41333,AB.4,A.2,other0.
+Only1clear coldunion-only materialcase (Spectre UKpremise+374count); knownKalreadyA-sufficient,
+Afirstfailed. Album/artist/labeltime ambiguous; othermissingchains/unsupportedclaims retained.
+Collector/full samewire16/16, no learneduniquebenefit. Wholepremise successfull/AB2/12,A0.
+E2 three fresh U+sameQ NOTLAUNCHED; await actualDEV assessment and adequate disk.
+Storage currently reclaim_closed_UQ_storage_v1.py session61000: closedfinalweights directbyte
+hardlink + recoveries fallocate--dig-holes, logicalbytespreserved. Checkphase22-closed-UQ-storage-v1.
+The older phase21 material below is historical where superseded by this current section.
+
 # ACTIVE Reader utility v3: phase21 matched Q fits running (2026-11-13)
 
 Goal ACTIVE/incomplete. Current milestone PROGRESS: all600labels closed331delivery293answer; bothQfitsrunning63updates. Full user v3 objective remains.
