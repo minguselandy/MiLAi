@@ -612,7 +612,7 @@
       "status_at_launch": "WAITING_FOR_PRE_Q_FIRSTS_AND_Q_COLLECTIONS"
     },
     "trajectory_status": "ALL_SIX_CLOSED",
-    "readout_status": "FIRST_FOUR_QUEUE_RUNNING_U0_AT_PHASE22_SNAPSHOT; Q_CHAIN_FOLLOWS",
+    "readout_status": "U0_CLOSED96_WITH8FAILED; U1_RUNNING; Q_CHAIN_FOLLOWS",
     "closed_native_at_snapshot": {
       "fixed_context": {
         "states": 96,
@@ -631,6 +631,15 @@
           "FAILED": 5
         },
         "source_macro_answer_f1_missing_zero": 0.24205157372822636
+      },
+      "u0": {
+        "states": 96,
+        "sources": 96,
+        "status_counts": {
+          "COMPLETED": 88,
+          "FAILED": 8
+        },
+        "source_macro_answer_f1_missing_zero": 0.18513176516163823
       }
     },
     "all_six_trajectory_comparison": "/data/milai-experiments/20261112-reader-utility/formal-task-dev96-all-six-trajectory-comparison-v1.json",
@@ -638,13 +647,15 @@
       "path": "/data/milai-experiments/20261112-reader-utility/formal-task-dev12-author-source-review-v1.json",
       "planned_sources": 12,
       "planned_bindings": 72,
-      "reviewed_at_snapshot": 24,
+      "reviewed_at_snapshot": 36,
       "closed_method_panels": [
         "fixed_context",
-        "common_s1"
+        "common_s1",
+        "u0"
       ],
       "scope": "Preselected source positions; manual implementation-agent source review, method-hidden display but nonindependent and not fully blind. Remaining four methods await actual firsts."
-    }
+    },
+    "identical_wire_first_variation_diagnostic": "/data/milai-experiments/20261112-reader-utility/formal-task-dev96-identical-wire-first-variation-v1.json"
   },
   "I2_public": {
     "prepared": "/data/milai-experiments/20261112-reader-utility/i2-public-dev8-terminal-short-v1/run.json",
@@ -911,6 +922,8 @@
     "session": 59678,
     "planned_recoveries": 23,
     "status": "RUNNING",
-    "scope": "Closed v2 optimizer/FP32/RNG recovery directories archived losslessly after reconstructed-byte comparison. Inference models/firsts/source banks unchanged; restore original recovery before any future resume. Frozen helper/empty base retained; no SHA."
+    "scope": "Closed v2 optimizer/FP32/RNG recovery directories archived losslessly after reconstructed-byte comparison. Inference models/firsts/source banks unchanged; restore original recovery before any future resume. Frozen helper/empty base retained; no SHA.",
+    "restore_validation": "/data/milai-experiments/20261112-reader-utility/phase22-closed-historical-recovery-archives-v1/restore-validation-v1.json",
+    "restore_validation_status_at_snapshot": "RUNNING_SESSION69813"
   }
 }

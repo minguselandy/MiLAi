@@ -3,11 +3,17 @@
 R=/data/milai-experiments/20261112-reader-utility. Goal ACTIVE/incomplete.
 Latest progress includes all-six trajectory comparison:Q0/Q1 actual493/517states,5/7forced,
 85157/93565packet tokens, nativewholewitness10/9 with25unknown each; not semantic success.
-Author formalDEV12source panel partial24/72 bindings (fixed_context/common_s1 all12 complete).
+Author formalDEV12source panel partial36/72 bindings (fixed_context/common_s1/u0 all12 complete).
 Artifact formal-task-dev12-author-source-review-v1.json; manually read full packets and answers.
 Displayaliases rotate but not independent/blind. append_author_task_review_v1.py binds exact
 readout/action and validates literalquotes; show_author_task_panel_v1.py prints selectedpositions.
-Still must review U0/U1/Q0/Q1 on positions0,8,...88 after their actualfirsts close.
+Still must review U1/Q0/Q1 on positions0,8,...88 after their actualfirsts close.
+U0firsts CLOSED96,8failed,nativeF1.185131765; pre-Qowner1625376 nowU1 child3956247.
+Identical-wire diagnostic formal-task-dev96-identical-wire-first-variation-v1: S1/U0share39exact
+requests;16nativeF1different,meanabsoluteDelta.0760721,completed39/37. Posthocpolicy-chosen
+subgroup, notprospectiverepeatpanel, noaveraging/replacementofprimaryfirsts or learningclaim.
+Historicalrestorevalidation session69813 running: actualfirstS1recovery restoredtoisolatedtmpfs,
+metadata+torchdeserializationcheck, thenonlytestduplicate removed. Revalidateoutput JSON.
 Qreference PNG/PDF/CSV at formal-Q-reference-curves-v1; viewed correct; nottaskclaim.
 GPU2 NOWOWNED ownstate-q1-shard0-first16-owner-v1 PID3944666/session8407, child3944671atlaunch.
 Protocol fixedQ1 endpoint on originalTRAIN shard0 first16families195nativequestions390cold/K.
