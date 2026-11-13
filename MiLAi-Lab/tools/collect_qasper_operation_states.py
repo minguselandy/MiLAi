@@ -380,6 +380,16 @@ def collect_paper(
                         action = next(
                             a for a in actions if a.kind == "HANDOFF" and not a.parameters
                         )
+                # Persist the computed binding before optional analysis or execution can fail.
+                # This is a decision record, never proof that the operation completed.
+                with (root / f"{request['id']}-selected-actions.jsonl").open("a") as stream:
+                    stream.write(json.dumps({
+                        "event_id": row["metadata"]["event_id"], "step": step,
+                        "state_id": row["metadata"].get("state_id"), "action": asdict(action),
+                        "prediction": event.get("prediction"),
+                        "forced_budget_handoff": event.get("forced_budget_handoff", False),
+                        "scope": "Selected before execution; actual completion remains in "
+                                 "the separate operations trace."}, ensure_ascii=False) + "\n")
                 if action.kind == "HANDOFF" and branches:
                     saved, before = operations.checkpoint(), state.project()
                     handoffs = [a for a in actions if a.kind == "HANDOFF"]
