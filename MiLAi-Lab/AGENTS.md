@@ -16,6 +16,8 @@ E2 LIVE owner148212/session82607 formal-E2-three-chains-owner-v1.json.
 GPU2expanded10k3passU PID148218; GPU3freshbase3k3passU PID148221. Plansunchangedactualcounts.
 Finitequeues: GPU2expandedU+Q+actualDEV; GPU3baseU+Q+DEV thenrepeat3k9passU+Q+DEV.
 All3initS1,newoptimizers,exactsharedE2data/replay; Qactual331/63updates allsame.
+formal-E2-startup-observation-v1: initial128choices/logits identical(maxDelta0); bothobserved50updates
+1200main+400replay, base9074913tokens vs expanded9643675. Onlystartup, notqualityresult.
 formal-E2-launch-assessment-v1.json retainsboundedscale/exposuretest afterallnative/author/public8
 assessment; fullsemanticteacherstillrunningexplicitlydisclosed. No scale-as-validity inference.
 PostQ tasknomination: fixed63 plusatmostadditional21 byfull96reference macro,earliesttie; notfastpeak.
