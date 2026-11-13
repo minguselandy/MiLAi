@@ -16,7 +16,8 @@ from outcome_distillation import active_support, attach_utilities, is_main, mixe
 
 def match_states(old: list[dict], own: list[dict], replay_pool: list[dict],
                  groups: dict[str, str], seed: int = 0, passes: int = 3,
-                 tolerance: float = 1e-4) -> tuple[dict[str, list[dict]], dict]:
+                 tolerance: float = 1e-4, exclude_replay_overlap: bool = False
+                 ) -> tuple[dict[str, list[dict]], dict]:
     pools, counts, opportunities, requests = {}, {}, {}, {}
     for name, rows in (("old", old), ("own", own)):
         rows = copy.deepcopy(rows)
@@ -63,8 +64,12 @@ def match_states(old: list[dict], own: list[dict], replay_pool: list[dict],
     if not replay or any(r["metadata"]["split"] != "train" for r in replay):
         raise ValueError("Require the same nonempty original TRAIN replay pool")
     replay_ids = [r["metadata"]["event_id"] for r in replay]
-    if len(replay_ids) != len(set(replay_ids)) or primary_ids.intersection(replay_ids):
+    overlap = sorted(primary_ids.intersection(replay_ids))
+    if len(replay_ids) != len(set(replay_ids)) or (overlap and not exclude_replay_overlap):
         raise ValueError("Shared replay has duplicates or overlaps selected primary events")
+    replay = [r for r in replay if r["metadata"]["event_id"] not in primary_ids]
+    if not replay:
+        raise ValueError("No original replay remains after declared overlap exclusion")
     annotate_dependencies(replay, groups)
     for index, row in enumerate(replay, n):
         row["metadata"].update(matched_parent_state_id=row["metadata"].get("state_id"),
@@ -85,7 +90,10 @@ def match_states(old: list[dict], own: list[dict], replay_pool: list[dict],
         "raw_families": len({r["metadata"]["family"] for r in selected["old"]}),
         "dependency_groups": len({r["metadata"].get("dependency_group", r["metadata"]["family"])
                                   for r in selected["old"]}),
-        "strata": matched, "shared_replay_rows": len(replay), "passes": passes,
+        "strata": matched, "original_replay_rows": len(replay_ids),
+        "excluded_primary_replay_overlap": overlap,
+        "replay_overlap_exclusion_enabled": exclude_replay_overlap,
+        "shared_replay_rows": len(replay), "passes": passes,
         "seed": seed, "tolerance": tolerance, "schedules": schedules,
         "scope": "Common active source/native-event/condition support only. Each stratum uses "
                  "the smaller active count, selected without replacement or score-magnitude "
@@ -104,6 +112,9 @@ def main() -> None:
     parser.add_argument("--source-clusters", type=Path, required=True)
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--passes", type=int, default=3)
+    parser.add_argument("--exclude-primary-replay-overlap", action="store_true",
+                        help="Exclude the selected primary union from both replay pools; "
+                             "report excluded original events, without replacement")
     args = parser.parse_args()
     t, cpu = time.perf_counter(), time.process_time()
     rows, configs, blocks = {}, [], {}
@@ -119,7 +130,8 @@ def main() -> None:
         raise ValueError("Old and own states require the same scoring configuration")
     groups = dependency_groups(read_json(args.source_clusters)["shared_family_clusters"])
     arms, report = match_states(rows["old"], rows["own"], read_jsonl(args.replay), groups,
-                                args.seed, args.passes)
+                                args.seed, args.passes,
+                                exclude_replay_overlap=args.exclude_primary_replay_overlap)
     args.output.mkdir(exist_ok=False, parents=True)
     for name, arm in arms.items():
         directory = args.output / name

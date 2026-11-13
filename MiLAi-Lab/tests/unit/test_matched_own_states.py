@@ -61,3 +61,15 @@ def test_failed_scoring_wrong_roles_duplicate_events_and_replay_overlap_rejected
     collision = row(old[0]["metadata"]["event_id"])
     with pytest.raises(ValueError, match="overlaps"):
         match_states(old, own, [collision], {})
+
+
+def test_declared_replay_exclusion_uses_both_primary_arms_without_refilling():
+    old, own = [state("a", 0)], [state("a", 1)]
+    collisions = [r["metadata"]["event_id"] for r in [*old, *own]]
+    replay = [*(row(event) for event in collisions), row("replay/q")]
+    arms, report = match_states(old, own, replay, {}, exclude_replay_overlap=True)
+    assert report["original_replay_rows"] == 3 and report["shared_replay_rows"] == 1
+    assert report["excluded_primary_replay_overlap"] == sorted(collisions)
+    assert arms["old"][-1] == arms["own"][-1]
+    assert arms["old"][-1]["state"] == replay[-1]["state"]
+    assert report["schedules"]["old"] == report["schedules"]["own"]
