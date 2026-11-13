@@ -1,3 +1,29 @@
+# CURRENT phase39: rules256 FIRSTS/native/author32 CLOSED; commonS1firsts RUNNING
+
+Goal ACTIVE/incomplete. KEEP ANALYSIS VERY SHORT. R=/data/milai-experiments/20261112-reader-utility.
+No SHA/content fingerprints/subagents/Product/default/servicechanges/push. No TESTretuning orfirstreplacement.
+ConfirmationHTTP3538727 nowRUNNING common_s1firsts child327791; latest17/256,1failed. Lastfirstmethod,
+thenautomaticall4sourcegrade/summaries,128secondreadouts/source/native. No competingHTTP/restart.
+RULESfirst256CLOSED244completed12lengthfail positions34,45,54,72,78,80,90,131,142,222,235,238.
+CompiledTESTevaluationonly,no fitexports. NativeF1full256missingzero=.24333534239645516.
+Firsts883049known/chargedtokens,unknownusage0,nativeCPU19.169952648/wall4113.240784252994.
+new-confirmation-rules-closure-v1.json. Fullsourceprimary remainsPENDING.
+RULES AUTHOR32DONE:complete7/incomplete14/unknown7/incorrect2/failure2 (positions80,131);
+material sufficient7/insufficient19/unknown6. new-confirmation-rules-author32-closure-v1.json.
+Combined new-confirmation-author32-source-review-v1.json now96/128, alluniqueactualfirstreadouts.
+DO NOTREDO fixed/expanded/rulesauthor. Onlyremainingcommon_s132 afteritsfullboundcloses.
+Fixed32complete10/incomplete12/unknown8/incorrect1/failure1; expanded32complete8/incomplete13/
+unknown8/incorrect1/failure2. Nonindependent/unblinded/priorothermethodsourceexposure; authornotgold.
+Allliteralquotes/identity/samplepositions checked. No automaticlabelreplacement.
+Helpers show_confirmation_author_panel_v1.py POS... (PANEL_METHODS),append_confirmation_author_review_v1.py
+JSONstdin; aliases=(methodindex+position//8)%4; methodindicesfixed0,expanded1,rules2,S13.
+Positions1,11,23,26,39,40,55,59,70,74,80,94,102,110,116,123,131,143,146,155,165,171,182,191,
+196,201,210,221,226,239,246,250. Joinnativefamily/questionID; no nativegoldjudging.
+Waitersstability3763322,216settlement3838848,123settlement3939766 waiting/live; no costwriteyet.
+RemainingS1first256,full4source/native,author32+agreement,second128/source/native/stability,
+finalHTTP/stabilitycostscope/report/audit. No moreDEVdiagnostics/per-shellcostwork orseedrobustnessclaims.
+AllpriorE1/E2/own/naturalclosed. Do NOTmarkcomplete untilactualrequiredremainingworkclosed.
+
 # CURRENT phase38: expanded256 FIRSTS/native/author32 CLOSED; rulesfirsts RUNNING
 
 Goal ACTIVE/incomplete. KEEP ANALYSIS VERY SHORT. R=/data/milai-experiments/20261112-reader-utility.

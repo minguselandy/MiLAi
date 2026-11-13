@@ -704,13 +704,13 @@
     "synthesis": "Five result layers, clustered paired uncertainty, full measured cost/unknown scopes, mechanism and counterexamples; conditional minimal Product recommendation only."
   },
   "next_actions": [
-    "MonitorconfirmationHTTP3538727, nowruleschild75749; common_s1 follows. No retries/retuning.",
-    "Authorfixed32+expanded32DONE=64. Remainingrules/S1each32whenitsboundcloses. Sameprotocol/positions/helpers.",
-    "All4firsts close thenautomaticfullsource/native summaries and128seconds/source/native; stability3763322 follows.",
-    "Queued216settlement3838848 then123settlement3939766. FinalconfirmationHTTP/stability costs andunknownscope disclosure, notper-shell accountingproject.",
-    "Finish fullauthor128 agreement, five-layer synthesis andrequirement audit afteractualconfirmation/repeat closure; no seedstabilityclaim."
+    "MonitorconfirmationHTTP3538727, nowcommon_s1child327791. Lastfirstmethod, thenautomaticall4sourcegrades/summaries.",
+    "Authorfixed/expanded/rules32eachDONE=96. Remainingcommon_s132whenboundcloses; samehelpers/protocol/positions.",
+    "Afterfullsourcegrade, automatic128secondcalls/source/native; stability3763322follows. Author/automatedagreement afterall128andfullsourcegradeclosed.",
+    "Queued216settlement3838848then123settlement3939766. FinalconfirmationHTTP/stability costscope andunknownscope disclosure; no per-shell accountingproject.",
+    "Finish five-layer report andplan-basedcompletionaudit afteractualallremainingclosures; no TESTretuning/seedstabilityclaim."
   ],
-  "phase": 38,
+  "phase": 39,
   "signal_diagnostic": {
     "canonical110": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-vs-semantic110-diagnostic-v1.json",
     "author_spots": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-semantic-disagreement-spots-v1.json",
@@ -1829,7 +1829,7 @@
     "repeat_tool": "tools/prepare_fixed_source_repeat.py",
     "repeat_tool_commit": "6d1ef075",
     "scope": "Actualfullmenus andsingleterminalpacket per256source/method. Firsts andfixedsecondReadercalls separate; fullwireunchanged,no controllerrepeat,no --reuse-readouts. Source/cost/author/stabilityclosure stillrequired.",
-    "HTTP_stage_at_snapshot": "new-confirmation256-rules-firsts-v1",
+    "HTTP_stage_at_snapshot": "new-confirmation256-common_s1-firsts-v1",
     "fixed_firsts_closed_at_snapshot": 256,
     "fixed_firsts_failed_at_snapshot": 1,
     "stability_tool": "tools/summarize_fixed_source_repeats.py",
@@ -1838,7 +1838,7 @@
     "stability_pid": 3763322,
     "stability_status": "WAITING_FOR_CONFIRMATION_FIRST_AND_SECOND_READOUTS",
     "author_protocol": "/data/milai-experiments/20261112-reader-utility/new-confirmation-author32-protocol-v1.json",
-    "author_closed_at_snapshot": 64,
+    "author_closed_at_snapshot": 96,
     "author_review": "/data/milai-experiments/20261112-reader-utility/new-confirmation-author32-source-review-v1.json",
     "fixed_author_closure": "/data/milai-experiments/20261112-reader-utility/new-confirmation-fixed_context-author32-closure-v1.json",
     "fixed_context_closed": {
@@ -1901,10 +1901,40 @@
     },
     "expanded_author_closure": "/data/milai-experiments/20261112-reader-utility/new-confirmation-expanded10k_final-author32-closure-v1.json",
     "rules_snapshot": {
+      "status": "COMPLETED_WITH_FAILURES",
+      "closed_firsts": 256,
+      "completed_firsts": 244,
+      "failed_firsts": 12,
+      "failure_reason_counts": {
+        "length": 12
+      },
+      "closure": "/data/milai-experiments/20261112-reader-utility/new-confirmation-rules-closure-v1.json",
+      "native_F1_missing_zero": 0.24333534239645516,
+      "known_generation_tokens": 883049,
+      "unknown_usage": 0,
+      "native_firsts_compute": {
+        "cpu_seconds": 19.169952648,
+        "wall_seconds": 4113.240784252994
+      },
+      "author_answer_counts": {
+        "complete": 7,
+        "incomplete": 14,
+        "unknown": 7,
+        "incorrect": 2,
+        "execution_failure": 2
+      },
+      "author_material_counts": {
+        "sufficient": 7,
+        "insufficient": 19,
+        "unknown": 6
+      }
+    },
+    "rules_author_closure": "/data/milai-experiments/20261112-reader-utility/new-confirmation-rules-author32-closure-v1.json",
+    "common_s1_snapshot": {
       "status": "RUNNING",
-      "child_pid": 75749,
-      "closed_firsts": 21,
-      "failed_firsts": 0
+      "child_pid": 327791,
+      "closed_firsts": 17,
+      "failed_firsts": 1
     }
   },
   "phase34_validation": {
@@ -1994,6 +2024,15 @@
     "all10failed_firsts_length_retained": true,
     "expanded_author32_exact_preselected_positions_and_unique_readouts_verified": true,
     "author64_total_no_duplicate_firsts": true,
+    "author_literal_support_quotes_verified_at_each_append": true,
+    "TEST_role_no_training_exports_preserved": true,
+    "no_sha_validation": true
+  },
+  "phase39_validation": {
+    "rules256firsts_closed_native256_denominator_verified": true,
+    "all12failed_firsts_length_retained": true,
+    "rules_author32_exact_preselected_positions_verified": true,
+    "author96_total_unique_firsts": true,
     "author_literal_support_quotes_verified_at_each_append": true,
     "TEST_role_no_training_exports_preserved": true,
     "no_sha_validation": true
