@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import random
 import statistics
 import time
@@ -10,6 +11,13 @@ from pathlib import Path
 
 from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.scorers.answers import answer_values, score_normalized_em_f1_v1
+
+
+def unique_object(pairs: list[tuple]) -> dict:
+    result = dict(pairs)
+    if len(result) != len(pairs):
+        raise ValueError("Repeated JSON field in final answer")
+    return result
 
 
 def group_values(rows: list[dict], field: str) -> dict[str, float]:
@@ -25,7 +33,10 @@ def group_values(rows: list[dict], field: str) -> dict[str, float]:
 
 
 def summarize(fixture: dict, controls: list[dict], runs: dict[str, tuple[dict, str]],
-              reviews: list[dict], primary: tuple[str, str], seed: int = 0) -> dict:
+              reviews: list[dict], primary: tuple[str, str], seed: int = 0,
+              answer_format: str = "literal") -> dict:
+    if answer_format not in {"literal", "answer_separate_v1"}:
+        raise ValueError("Unknown prospectively declared answer format")
     expected = {}
     for history in fixture["histories"]:
         arrived = len(history["sources"])
@@ -75,12 +86,32 @@ def summarize(fixture: dict, controls: list[dict], runs: dict[str, tuple[dict, s
                     raise ValueError("Unknown source-review outcome")
             semantic = (review["outcome"] if review else "unknown") if complete else status
             arrived = control["all_native_references_arrived"]
+            score_answer, format_valid = answer if complete else "", None
+            answer_fields = None
+            if answer_format == "answer_separate_v1" and complete:
+                # Only the whole declared JSON response is parsed. No fence stripping,
+                # substring extraction, repair or fallback to explanatory prose.
+                try:
+                    fields = json.loads(answer, object_pairs_hook=unique_object)
+                except (ValueError, TypeError):
+                    fields = None
+                format_valid = (
+                    isinstance(fields, dict)
+                    and set(fields) == {"answer", "explanation", "evidence"}
+                    and isinstance(fields["answer"], str)
+                    and isinstance(fields["explanation"], str)
+                    and isinstance(fields["evidence"], list)
+                    and all(isinstance(item, str) for item in fields["evidence"]))
+                answer_fields = fields if format_valid else None
+                score_answer = fields["answer"] if format_valid else ""
             # Missing/future native citations cannot establish the currently answerable target.
             # This diagnostic is deliberately not called the benchmark's official metric.
-            overlap = (score_normalized_em_f1_v1(answer if complete else "",
+            overlap = (score_normalized_em_f1_v1(score_answer,
                        answer_values(control["native_answer"])) if arrived else None)
             row = {"method": method, "history": key[0], "request": key[1], **declared,
                    "status": status, "answer": answer, "execution_complete": int(complete),
+                   "answer_format": answer_format, "answer_format_valid": format_valid,
+                   "answer_fields": answer_fields, "scored_answer": score_answer,
                    "semantic_outcome": semantic, "review": review,
                    "observed_supported": int(semantic == "supported"),
                    "possible_supported": int(complete and semantic in {"supported", "unknown"}),
@@ -102,6 +133,8 @@ def summarize(fixture: dict, controls: list[dict], runs: dict[str, tuple[dict, s
             "dependency_groups": len(group_metrics["execution_complete"]),
             "status_counts": dict(Counter(r["status"] for r in method_rows)),
             "semantic_counts": dict(Counter(r["semantic_outcome"] for r in method_rows)),
+            "answer_format_failures": sum(r["answer_format_valid"] is False
+                                          for r in method_rows),
             "reference_overlap_positions": sum(
                 r["all_native_references_arrived"] for r in method_rows),
             "group_metrics": group_metrics,
@@ -115,7 +148,8 @@ def summarize(fixture: dict, controls: list[dict], runs: dict[str, tuple[dict, s
     diffs = [a["observed_supported"][g] - b["observed_supported"][g] for g in groups]
     rng = random.Random(seed)  # noqa: S311 -- descriptive dependency-group bootstrap
     draws = sorted(statistics.mean(rng.choices(diffs, k=len(diffs))) for _ in range(10000))
-    return {"methods": methods, "positions": rows, "primary": {
+    return {"methods": methods, "positions": rows, "answer_format": answer_format,
+        "primary": {
         "left": left, "right": right, "dependency_groups": len(groups),
         "observed_supported_difference": statistics.mean(diffs),
         "descriptive_group_bootstrap95": [draws[249], draws[9749]],
@@ -131,6 +165,9 @@ def summarize(fixture: dict, controls: list[dict], runs: dict[str, tuple[dict, s
                  "citations have arrived; it does not prove semantic support or implement an "
                  "official benchmark score. Group bootstrap is descriptive, especially with "
                  "only three participant components; it does not measure reviewer or seed error. "
+                 "When answer_separate_v1 was declared before execution, only its strict "
+                 "answer field enters text overlap; malformed completed outputs score as "
+                 "missing and retain their raw text, execution status and semantic review. "
                  "This report does not export training labels or reconcile cost receipts."}
 
 
@@ -144,6 +181,8 @@ def main() -> None:
     parser.add_argument("--reviews", type=Path)
     parser.add_argument("--primary", nargs=2, required=True)
     parser.add_argument("--seed", type=int, default=0)
+    parser.add_argument("--answer-format", choices=("literal", "answer_separate_v1"),
+                        default="literal", help="Format declared in every run before inference")
     args = parser.parse_args()
     started, cpu = time.perf_counter(), time.process_time()
     fixture, runs, roots = read_json(args.fixture), {}, {}
@@ -155,11 +194,15 @@ def main() -> None:
             raise ValueError("Compared runs must use the declared common fixture")
         if not (path / f"{profile}-config.json").is_file():
             raise ValueError("Selected profile was not prepared in this run")
+        if args.answer_format == "answer_separate_v1":
+            recipe = read_json(path / f"{profile}-config.json")["entrypoints"]["functional"]
+            if "answer_separate_v1" not in recipe.get("system_prompt", ""):
+                raise ValueError("Separate answer format was not declared in the run config")
         runs[method] = read_json(path / "driver.json"), profile
         roots[method] = str(path.resolve())
     result = summarize(fixture, read_json(args.controls), runs,
                        read_json(args.reviews) if args.reviews else [],
-                       tuple(args.primary), args.seed)
+                       tuple(args.primary), args.seed, args.answer_format)
     args.output.mkdir(parents=True, exist_ok=False)
     write_json(args.output / "summary.json", {**result, "run_roots": roots,
         "fixture": str(args.fixture.resolve()), "offline_controls": str(args.controls.resolve()),

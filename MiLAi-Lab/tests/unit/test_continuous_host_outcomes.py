@@ -1,5 +1,6 @@
 """Continuous comparisons retain future evidence, failures and shared participants."""
 import copy
+import json
 
 import pytest
 
@@ -54,3 +55,54 @@ def test_grouping_does_not_count_shared_histories_or_longer_histories_as_indepen
     rows += [{"source_group": "shared", "history": "long", "value": 0}] * 9
     rows += [{"source_group": "other", "history": "third", "value": 1}]
     assert group_values(rows, "value") == {"shared": .5, "other": 1}
+
+
+def test_declared_answer_field_excludes_correct_reference_in_explanation():
+    fixture, controls, driver = inputs()
+    raw = json.dumps({"answer": "Friday", "explanation": "The source says Tuesday.",
+                      "evidence": ["Tuesday"]})
+    driver["completed"][0]["answer"] = raw
+    runs = {"new": (driver, "laya"), "s1": (driver, "laya")}
+    review = {"method": "new", "history": "h", "request": "now", "answer": raw,
+              "outcome": "incorrect"}
+    result = summarize(fixture, controls, runs, [review], ("new", "s1"),
+                       answer_format="answer_separate_v1")
+    row = result["positions"][0]
+    assert row["answer"] == raw and row["scored_answer"] == "Friday"
+    assert row["reference_overlap_f1"] == 0 and row["answer_format_valid"]
+    assert row["semantic_outcome"] == "incorrect"
+    assert result["positions"][1]["reference_overlap_f1"] is None
+
+
+@pytest.mark.parametrize("raw", [
+    '```json\n{"answer":"Tuesday","explanation":"","evidence":[]}\n```',
+    '{"answer":"Friday","answer":"Tuesday","explanation":"","evidence":[]}',
+    '{"answer":"Tuesday","explanation":"","evidence":[5]}',
+    '{"answer":"Tuesday"}',
+])
+def test_invalid_declared_format_retains_first_text_without_favorable_fallback(raw):
+    fixture, controls, driver = inputs()
+    driver["completed"][0]["answer"] = raw
+    result = summarize(fixture, controls,
+                       {"new": (driver, "laya"), "s1": (driver, "laya")}, [],
+                       ("new", "s1"), answer_format="answer_separate_v1")
+    row = result["positions"][0]
+    assert row["execution_complete"] == 1 and row["answer"] == raw
+    assert row["answer_format_valid"] is False and row["answer_fields"] is None
+    assert row["reference_overlap_f1"] == 0 and row["semantic_outcome"] == "unknown"
+    assert result["methods"]["new"]["answer_format_failures"] == 1
+
+
+def test_declared_answer_field_preserves_empty_valid_answer_and_correct_short_answer():
+    fixture, controls, driver = inputs()
+    empty = copy.deepcopy(driver)
+    empty["completed"][0]["answer"] = json.dumps(
+        {"answer": "", "explanation": "Unavailable", "evidence": []})
+    driver["completed"][0]["answer"] = json.dumps(
+        {"answer": "Tuesday", "explanation": "Exact date", "evidence": ["Tuesday"]})
+    result = summarize(fixture, controls,
+                       {"new": (driver, "laya"), "s1": (empty, "laya")}, [],
+                       ("new", "s1"), answer_format="answer_separate_v1")
+    assert result["positions"][0]["reference_overlap_f1"] == 1
+    assert result["positions"][2]["reference_overlap_f1"] == 0
+    assert result["positions"][2]["answer_format_valid"] is True
