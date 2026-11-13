@@ -50,7 +50,9 @@
     "bounded_natural_source_screen": "08468807",
     "continuous_source_grade": "b99914c6",
     "continuous_view_work": "d673435e",
-    "explicit_TEST_evaluation_roles": "8e343290"
+    "explicit_TEST_evaluation_roles": "8e343290",
+    "reserved_TEST_exporter": "8e7ffb87",
+    "eligible_context_review_diagnostic": "df30c61c"
   },
   "formal_U": {
     "protocol": "/data/milai-experiments/20261112-reader-utility/formal-main3k-uq-protocol-v1.json",
@@ -582,7 +584,11 @@
       },
       "current_owner": "/data/milai-experiments/20261112-reader-utility/formal-E2-three-chains-owner-v2.json",
       "HTTP_owner": "/data/milai-experiments/20261112-reader-utility/E2-task-firsts-and-review-owner-v2.json",
-      "current_status": "ALL_THREE_U_Q_DEV_CLOSED_ALL_SELECTED63_TASK_FIRSTS_PENDING"
+      "current_status": "ALL_THREE_FITS_DEV_FIRSTS_NATIVE_SOURCE_REVIEWS_CLOSED",
+      "primary_summary": "/data/milai-experiments/20261112-reader-utility/formal-E2-task-dev96-primary-summary-v1/summary.json",
+      "secondary_summary": "/data/milai-experiments/20261112-reader-utility/formal-E2-task-dev96-repeat_secondary-summary-v1/summary.json",
+      "native_full96": "/data/milai-experiments/20261112-reader-utility/formal-E2-native-firsts-full96-v1.json",
+      "figure": "/data/milai-experiments/20261112-reader-utility/formal-E2-task-results-figure-v1/manifest.json"
     }
   },
   "application_source_inventory": {
@@ -662,19 +668,19 @@
     "A": "Original prototype12tests and both I2 native/source checks closed. Preserve K/horizon/long-input diagnostics and failures; synthesize their limits with main task results.",
     "F4_F5": "Multi-request, actualK and h0/h2/stop diagnostics implemented/scored; synthesize limits with learner/task evidence. Kmenus differ, teacherargmax changes notisolatedKcausality orHostgain. No duplicate-family inflation.",
     "B_E0_E1": "E1U/Q fixed/selected reference points,actual576firsts,officialF1,fullTeacher andauthor72sourcecheck closed. Summarizecosts/mechanism withnoadvantage/equivalenceclaim; laterfinalsynthesis stillneeded.",
-    "C_E2": "AllE2/ownU/Q/DEVclosed, allpostQnominate63. Queued actualfirsts/native/source review pending. Completepreselected E2/ownauthor60; decide meaningfulseedreplication fromtask/mechanismevidence.",
+    "C_E2": "E2seed0fits/DEV/native/source/author36closed: no stableprimarysourcegain, auxiliaryF1higher. Ownfirsts/source/author24 stillrunning/pending. Decide warrantedseedreplication and finalconfirmationcandidate from all task/mechanism evidence, not proxy orF1alone.",
     "D_E4": "Freeze new confirmation sources/candidates/short-answer format/budgets/repeat subset before outcomes; actual full-menu and native task scoring.",
-    "applications": "Baseline200 and S1100firsts closed, S1author20/work/616NNtrace audit closed. Q1firsts ongoing; Q1author11of20done. Await full400sourcegrade, remainingQ1View/format/work andauthor9. SameprimaryQ1-S1, allfailedfirsts and formatfailures retained.",
+    "applications": "All400naturalfirsts andauthor80/View/menu/modelwork closed. OriginalS1/Q1sourcegrade179responses waits ownHTTP; thenoneexplicitall400eligible-context diagnostic, withalloriginalgrades retained. Fullprimarysourcecomparison and version/rater sensitivitystillpending.",
     "synthesis": "Five result layers, clustered paired uncertainty, full measured cost/unknown scopes, mechanism and counterexamples; conditional minimal Product recommendation only."
   },
   "next_actions": [
-    "Monitor currentnatural stableowner-v6revision7 PID2420785/Q1child2420790 andsnapshotarchive1818134. No newfit active. Nativecapacitynowcurrent-process16GiB, no repeatedfirsts.",
-    "FinishQ1authorremaining9 via bind_closed_natural_author_positions_v1.py q1; donot regradealreadywrittenfiles. S1author20 andbaseline40 closed. Fullsourcegraderusesseparatestandardbindings later.",
-    "WhenQ1firstsclose,E2HTTP1731112 automaticallyruns3fixedmethods, ownHTTP1900301follows2methods plusoriginalQ1, thennaturalfinalreview1840387. CompletepreselectedE2/ownauthor60 ontheiractualfirsts.",
-    "Freeze finalconfirmation candidate/primarymetric/budget after completeDEVtaskresults; source32repeat/32author IDs alreadyfrozen. NoTESTSourceexportorcalls yet.",
-    "FinishQ1work/all400comparison, justifiedreplicationdecision andfullstagecosts/unknownscopes/finalreport; keepgoalactive."
+    "OwnHTTPowner1900301 isrunning afterE2closed; complete preselectedownauthor24 with show_E2_own_author_panel_v1.py and append_E2_own_author_review_v1.py. E2author36alreadydone; neverrepeat asnewbindings.",
+    "Naturaloriginalfinalreview1840387 waitsownHTTP; projecteddiagnostic2829033 waitsoriginalnaturalreview. KeepHTTPserialized. FutureconfirmationHTTPmustwait/coordinatewithprojecteddiagnostic; GPUpreparationcanproceedafterfullprotocolfreeze.",
+    "Assess primarysource results plusauthorcases andnativeauxiliary; decide justifiedreplication withoutclaimingE2supported-answergain fromF1. Freeze oneconfirmationprimary andmethods/budgets;256IDs/32repeat/32authorfixed, TESTnotexported.",
+    "Use explicitTESTexporter onlyafterfullprotocolfreeze; actualmenus/firsts/native/sourceevaluation andpreselectedrepeat/author confirmation remain required.",
+    "Finish completecost/overlap/unknownscopes, original-versus-projectedmeasurementreport, andfinalfive-layer synthesis; goal ACTIVE_INCOMPLETE."
   ],
-  "phase": 32,
+  "phase": 33,
   "signal_diagnostic": {
     "canonical110": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-vs-semantic110-diagnostic-v1.json",
     "author_spots": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-semantic-disagreement-spots-v1.json",
@@ -715,7 +721,7 @@
     "natural_messages": 8944,
     "native_questions": 100,
     "all_native_references_arrived": 57,
-    "status": "BASELINE200_AND_S1_100_CLOSED_Q1_FIRSTS_RUNNING",
+    "status": "ALL400_FIRSTS_AND_AUTHOR80_CLOSED_AUTOMATED_LEARNED_REVIEWS_PENDING",
     "scope": "Evaluation-only natural messages with explicitly staged native QA timing. Not32independentTRAINhistories or whole native benchmark. No silent alias/image/annotation repair.",
     "dolphin_first_download_failure": "/data/milai-experiments/20261112-reader-utility/natural-dolphin-inspection-v1/download-first-failure.json",
     "native_source_bootstrap": "/data/milai-experiments/20261112-reader-utility/natural-realtalk-native-config-v1/manifest.json",
@@ -845,13 +851,13 @@
       "child_pid": 2420790,
       "run": "/data/milai-experiments/20261112-reader-utility/natural-realtalk-autonomous-json-q1-v2",
       "planned_positions": 100,
-      "status": "RUNNING",
+      "status": "COMPLETED_ALL400_FIRSTS",
       "capacity_handoff": "/data/milai-experiments/20261112-reader-utility/natural-idle-Q1-capacity-handoff-v1.json",
       "scope": "Stableownerpathv6 nowrunsv7coordinator. Baseline200 andS1100reused unchanged. Same16GiBadmission margin measuredascurrentprocessallocatable space (rootf_bfree/nonrootf_bavail), filesystemreserve untouched. Allfrozen method/budget/source/Host settings unchanged."
     },
     "common_s1_closure": "/data/milai-experiments/20261112-reader-utility/natural-common_s1-closure-v1.json",
     "common_s1_work": "/data/milai-experiments/20261112-reader-utility/natural-common_s1-view-work-v1/summary.json",
-    "opportunity_inventory": "/data/milai-experiments/20261112-reader-utility/natural-first-three-opportunity-inventory-v1/summary.json",
+    "opportunity_inventory": "/data/milai-experiments/20261112-reader-utility/natural-all-four-opportunity-inventory-v1/summary.json",
     "common_s1_model_audit": "/data/milai-experiments/20261112-reader-utility/natural-common_s1-model-trace-audit-v1/summary.json",
     "learned_author_review": {
       "S1_status": "CLOSED20",
@@ -863,12 +869,27 @@
         "unknown": 6,
         "incorrect": 1
       },
-      "Q1_status": "PARTIAL11_OF20",
+      "Q1_status": "CLOSED20",
       "Q1_records": "/data/milai-experiments/20261112-reader-utility/natural-author-source-review-v1/learned",
       "closed_binding_inputs": "/data/milai-experiments/20261112-reader-utility/natural-author-closed-bindings-v1",
       "binding_helper": "/data/milai-experiments/20261112-reader-utility/bind_closed_natural_author_positions_v1.py",
       "append_helper": "/data/milai-experiments/20261112-reader-utility/append_natural_author_judgment_v1.py",
-      "scope": "Onlypreselected2/7closedfirsts. Separateauthorfiles avoidcolliding withwaitingfullsourcegraderstandardoutputs. Allactualcompletedcontexts boundbyexistingexactbinder; failedfirsts nograde. Authornotblind/independent; originalbaseline40unchanged."
+      "scope": "Onlypreselected2/7closedfirsts. Separateauthorfiles avoidcolliding withwaitingfullsourcegraderstandardoutputs. Allactualcompletedcontexts boundbyexistingexactbinder; failedfirsts nograde. Authornotblind/independent; originalbaseline40unchanged.",
+      "Q1_artifact": "/data/milai-experiments/20261112-reader-utility/natural-author-source-review-v1/q1-20.json",
+      "all80_status": "CLOSED"
+    },
+    "q1_closure": "/data/milai-experiments/20261112-reader-utility/natural-q1-closure-v1.json",
+    "all_author80": "/data/milai-experiments/20261112-reader-utility/natural-author-source-review-v1/all80.json",
+    "termination_inventory": "/data/milai-experiments/20261112-reader-utility/natural-all-four-control-terminations-v1/summary.json",
+    "q1_model_audit": "/data/milai-experiments/20261112-reader-utility/natural-q1-model-trace-audit-v1/summary.json",
+    "source_review_diagnostic_v2": {
+      "protocol": "/data/milai-experiments/20261112-reader-utility/natural-eligible-context-review-protocol-v2.json",
+      "prepared": "/data/milai-experiments/20261112-reader-utility/natural-eligible-context-review-inputs-v2/manifest.json",
+      "owner": "/data/milai-experiments/20261112-reader-utility/natural-eligible-context-review-owner-v2.json",
+      "pid": 2829033,
+      "status": "WAITING_FOR_ORIGINAL_V1_REVIEW_CLOSURE",
+      "primary_replacement": false,
+      "scope": "Onecomplete400 diagnostic after originalgrades.357completedpayloads preserve allquote-eligible top-leveluser/toolcontents andallselectedsources;43failedfirsts retained.178oldbaseline defaultrequestwires byte-identical. Allauthor80alreadyknown, notheldout/independent. No per-casebestgrade or thirdrevision."
     }
   },
   "phase04_validation": {
@@ -1113,7 +1134,16 @@
     "sampling_freeze": "/data/milai-experiments/20261112-reader-utility/new-confirmation-source-sampling-freeze-v1.json",
     "second_Host_sources": 32,
     "author_sources": 32,
-    "full_method_protocol_frozen": false
+    "full_method_protocol_frozen": false,
+    "exporter": {
+      "tool": "tools/prepare_reserved_qasper_confirmation.py",
+      "status": "READY_TESTED_ON_SYNTHETIC_DATA_ONLY",
+      "required_protocol_status": "FROZEN_BEFORE_CONFIRMATION_SOURCE_EXPORT",
+      "source_commit": "8e7ffb87",
+      "tests_passed": 14,
+      "actual_TEST_Source_exported": false,
+      "model_calls": 0
+    }
   },
   "phase05_validation": {
     "public_and_complementary": 6,
@@ -1148,7 +1178,7 @@
     "native_fits": "BothU420closedandselfbilled; ledgerwaitreported; no nativebillduplication",
     "pending_costs": "Phase03through06nonnativepreparation/analysis/profile/storagepending; root/imports/tests/networkpartlyunmeasured."
   },
-  "execution_local_date": "2026-11-13",
+  "execution_local_date": "2026-11-14",
   "phase07_storage": "/data/milai-experiments/20261112-reader-utility/phase07-closed-recovery-sparse-v1.json",
   "phase07_validation": {
     "scale_comparison_tests": 2,
@@ -1448,10 +1478,12 @@
     "pid": 1818134,
     "closed_snapshots_at_snapshot": 578,
     "freed_payload_allocated_bytes_at_snapshot": 16800792576,
-    "status": "RESUMED_UNARCHIVED_CLOSED_SNAPSHOTS",
+    "status": "COMPLETED",
     "restore": "python3 <archive-dir>/restore.py <run-output-name> <capture-UUID> <snapshot-dir-name>",
     "scope": "Onlyclosedbefore/final-input/afterdatabase snapshotdirs byteverifiedthenarchived. Host/closed/pre-final-store JSON, actualresults/traces andliveprimarybanks stayraw. Continuefinite3JSONjobs/400positions. Restoreonlybeforecounterfactualsnapshotuse; source-reviewbinderneedsnoDBrestore.",
-    "continuation": "/data/milai-experiments/20261112-reader-utility/natural-snapshot-archive-continuation-v1.json"
+    "continuation": "/data/milai-experiments/20261112-reader-utility/natural-snapshot-archive-continuation-v1.json",
+    "closed_snapshots": 1157,
+    "freed_payload_allocated_bytes": 31636615168
   },
   "phase27_validation": {
     "collector_terminal_group_summary_tests_passed": 12,
@@ -1570,12 +1602,14 @@
   },
   "formal_E2_ownstate_author_review": {
     "protocol": "/data/milai-experiments/20261112-reader-utility/formal-E2-ownstate-author12-protocol-v1.json",
-    "status": "PRESELECTED_BEFORE_FIRSTS_NOT_YET_REVIEWED",
+    "status": "E2_36_CLOSED_OWN24_PENDING",
     "sources": 12,
     "new_bindings": 60,
     "existing_Q1_bindings_reused": 12,
     "independent": false,
-    "blinded": false
+    "blinded": false,
+    "artifact": "/data/milai-experiments/20261112-reader-utility/formal-E2-ownstate-author12-source-review-v1.json",
+    "E2_agreement": "/data/milai-experiments/20261112-reader-utility/formal-E2-author-teacher-agreement-v1.json"
   },
   "phase31_validation": {
     "full600_packet_state_action_joins_verified": true,
@@ -1596,6 +1630,76 @@
     "same_current_origins_and_arrival_prefixes_verified_for_completed_author_samples": true,
     "coordinator_idle_before_Q1_handoff": true,
     "all_downstream_owners_revalidated_live": true,
+    "no_sha_validation": true
+  },
+  "phase33_E2_results": {
+    "complete_supported_counts": {
+      "base3k3pass": 37,
+      "expanded10k3pass": 36,
+      "repeat3k9pass": 35
+    },
+    "unknown_counts": {
+      "base3k3pass": 21,
+      "expanded10k3pass": 32,
+      "repeat3k9pass": 28
+    },
+    "primary_difference": -0.010416666666666666,
+    "primary_source_bootstrap95": [
+      -0.11458333333333333,
+      0.09375
+    ],
+    "primary_unknown_bounds": [
+      -0.22916666666666666,
+      0.3229166666666667
+    ],
+    "secondary_difference": 0.010416666666666666,
+    "secondary_source_bootstrap95": [
+      -0.09375,
+      0.125
+    ],
+    "secondary_unknown_bounds": [
+      -0.28125,
+      0.34375
+    ],
+    "native_F1_full96": {
+      "base3k3pass": 0.2497053640074508,
+      "expanded10k3pass": 0.3315592560823119,
+      "repeat3k9pass": 0.2513091768129132
+    },
+    "native_primary_difference": 0.08185389207486113,
+    "native_primary_bootstrap95": [
+      0.012519838395244499,
+      0.1532176994249887
+    ],
+    "native_secondary_difference": 0.08025007926939877,
+    "native_secondary_bootstrap95": [
+      0.016170250482511635,
+      0.14830649731025355
+    ],
+    "review_groups": 192,
+    "unresolved_groups": 1,
+    "returned_candidate_records": 285,
+    "masked_candidates": 74,
+    "author_complete_counts": {
+      "base3k3pass": 4,
+      "expanded10k3pass": 5,
+      "repeat3k9pass": 5
+    },
+    "author_binary_disagreements": 6,
+    "scope": "Main source-success hasno establishedadvantage despitehigherauxiliaryF1. SharedHost/reviewermodel, singletrainingseed, firstHostcalls, data/domain/conditionandtokenworkdifferences retained. Base95actualendpoints+1collectionfailurealwaysfull96."
+  },
+  "phase33_validation": {
+    "reserved_exporter_and_qasper_tests_passed": 14,
+    "source_grade_binding_outcome_tests_passed": 19,
+    "ruff_pass": true,
+    "diff_check_pass": true,
+    "all357_projection_grounding_content_invariants_pass": true,
+    "all178_baseline_default_request_wires_identical": true,
+    "Q1_full_menu_choice_matches": 708,
+    "Q1_input_truncations": 0,
+    "all80_natural_author_bindings_closed": true,
+    "E2_author36_closed_and_exact_firsts_compared": true,
+    "E2_PNG_visually_checked": true,
     "no_sha_validation": true
   }
 }

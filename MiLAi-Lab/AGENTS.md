@@ -1,3 +1,47 @@
+# CURRENT phase33: natural400/author80 CLOSED; E2 main CLOSED; ownHTTP RUNNING
+
+Goal ACTIVE/incomplete. KEEP ANALYSIS VERY SHORT. Localdate2026-11-14. R=/data/milai-experiments/20261112-reader-utility.
+No SHA/content fingerprints/subagents/Product/default changes/service restarts/push.
+NaturalALL400firsts CLOSED: fixed94/6fail,cache84/16,S190/10,Q189/11;357completedALLinnerformatfail.
+Stableowner-v6 revision7 PID2420785 completed; nofirsts rerun. Q1closure natural-q1-closure-v1.json.
+AuthorALL80 CLOSED natural-author-source-review-v1/all80.json; baseline/S1/Q1recordsunchanged.
+Supportedcounts fixed2/cache0/S12/Q11; Q1 8incomplete3incorrect7unknown1failure. Nonblind/nonindependent.
+Q1actualNN708 calls5193340tokens0truncations; all708choices matchfullmenulogits/decisions.
+Q1menus697offeredREFRESH,0Viewchosen; READ513vsS1391; budgetendings43vs14;8parameterizedHANDOFFreturns.
+Neither parameterizedchoices nor additionalreads provegain. natural-all-four-control-terminations-v1.
+Q1generationknown/charged1920902,unknown0. RuntimeLayaCPU843.051/wall483.538; load7.244683/5.979752.
+Nesteddriver/control/modeltimesNOTadditive. natural-q1-model-trace-audit-v1/runtime-ledger-deltas-v1.json.
+NaturalDBsnapshotarchive CLOSED1157,freed29.463894GiB;samephase26restoreCLI,allrawreviewJSON retained.
+E2FIRSTS/native/source CLOSED, owner1731112completed. All3postQfixed63,noextra21.
+Full96primarysupported base37/expanded36/repeat35; unknown21/32/28. Base95Reader+1retainedcollectionfail.
+Expanded-base=-1/96,95CI[-.114583,.09375],unknownbounds[-.229167,.322917]. Expanded-repeat=+1/96,
+95CI[-.09375,.125],unknownbounds[-.28125,.34375]. No primarysourceadvantage established.
+Nativefull96F1 .249705/.331559/.251309; expanded-base+.081854 CI[.012520,.153218],
+expanded-repeat+.080250 CI[.016170,.148306]. Auxiliarygain isNOTprimaryqualitygain/seedrobustness.
+Teacher192groups,1unresolved,285records74masked. formal-E2-task-dev96-{primary,repeat_secondary}-summary-v1.
+FigurePNG/PDF/CSV formal-E2-task-results-figure-v1 created/PNGviewed.
+E2 AUTHOR36 COMPLETE in formal-E2-ownstate-author12-source-review-v1.json (totalplanned60).
+Allpositions0,8,...88 for3E2methods done; completecounts4/5/5. Agreement6/36binarydifferences;
+formal-E2-author-teacher-agreement-v1.json. Ownold/ownnew24bindings stillPENDING, notE2again.
+Helpers show_E2_own_author_panel_v1.py POS... withPANEL_METHODS env, append_E2_own_author_review_v1.py
+JSONstdin. Five-methodalias=(methodindex+position//8)%5. Joinnativefamily/questionID, notactualindex
+(baseonly95)! Rootnotblind; E1sourcesalreadyseen. Quotechecksagainstactualprovidedpacket.
+OWN HTTP1900301 nowRUNNING. Afteritsclosure originalnaturalgrader1840387 runsS1/Q1 thenall400summary.
+NEWFINITE measurementdiagnostic: code df30c61c --context-projection eligible. DefaultORIGINALwire
+unchanged (178realbaseline requests exactlyreproduced). All357eligibleuser/toolcontexts andselected
+sourcespreserved; onlytop-levelsystem/assistantmessages omitted, candidatefieldrenamed.19tests/RuffPASS.
+Protocol natural-eligible-context-review-protocol-v2.json; prepared natural-eligible-context-review-inputs-v2.
+Owner2829033 waitsoriginalnaturalv1closure, then357responsesonce/43failedfirstsretained, summary+comparison.
+No originalgrades replaced, no percasebestgrade, author80alreadyknown NOTheldout, no thirditeration.
+FutureconfirmationHTTPmustwait/coordinatethisexplicitround. GPUworkindependentafterprotocolfreeze.
+Newcode8e7ffb87 tools/prepare_reserved_qasper_confirmation.py: requiresfullprotocolstatus
+FROZEN_BEFORE_CONFIRMATION_SOURCE_EXPORT, reservation/sampling paths,methods>=4,oneprimary,
+primary_metric,answer_format answer_separate_v1,host_config,source_count. PreservesTEST,firstnative
+question/order, annotationsoffline,no fitexports.14testsPASS onSYNTHETICdata; realTESTNOTexported.
+Need ownprimary+author24; decide warrantedseeds and finalconfirmationmethods/primary/budgets;
+execute reserved256 plus32secondHost and32author acrossfrozenmethods. Fullcost/statistics/finalreport
+andnaturalv1/v2measurementclosure stillpending. Do NOTmarkgoalcomplete.
+
 # CURRENT phase32: S1natural100 CLOSED; Q1firsts RUNNING; source-author71/80 so far
 
 Goal ACTIVE/incomplete. KEEP ANALYSIS VERY SHORT. R=/data/milai-experiments/20261112-reader-utility.
