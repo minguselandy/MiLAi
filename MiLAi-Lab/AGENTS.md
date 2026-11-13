@@ -12,8 +12,9 @@ U0firsts CLOSED96,8failed,nativeF1.185131765; pre-Qowner1625376 nowU1 child39562
 Identical-wire diagnostic formal-task-dev96-identical-wire-first-variation-v1: S1/U0share39exact
 requests;16nativeF1different,meanabsoluteDelta.0760721,completed39/37. Posthocpolicy-chosen
 subgroup, notprospectiverepeatpanel, noaveraging/replacementofprimaryfirsts or learningclaim.
-Historicalrestorevalidation session69813 running: actualfirstS1recovery restoredtoisolatedtmpfs,
-metadata+torchdeserializationcheck, thenonlytestduplicate removed. Revalidateoutput JSON.
+Historicalrestorevalidation session69813 CLOSED/PASS: actualS1/36krecovery restoredtoisolatedtmpfs,
+size/mode/mtime matched; fullPyTorch model/optimizer/scheduler/RNG/progress deserialized.
+Onlytestduplicate removed. archive-dir/restore-validation-v1.json;193.636CPU/191.234wall seconds.
 Qreference PNG/PDF/CSV at formal-Q-reference-curves-v1; viewed correct; nottaskclaim.
 GPU2 NOWOWNED ownstate-q1-shard0-first16-owner-v1 PID3944666/session8407, child3944671atlaunch.
 Protocol fixedQ1 endpoint on originalTRAIN shard0 first16families195nativequestions390cold/K.

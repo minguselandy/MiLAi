@@ -924,6 +924,6 @@
     "status": "RUNNING",
     "scope": "Closed v2 optimizer/FP32/RNG recovery directories archived losslessly after reconstructed-byte comparison. Inference models/firsts/source banks unchanged; restore original recovery before any future resume. Frozen helper/empty base retained; no SHA.",
     "restore_validation": "/data/milai-experiments/20261112-reader-utility/phase22-closed-historical-recovery-archives-v1/restore-validation-v1.json",
-    "restore_validation_status_at_snapshot": "RUNNING_SESSION69813"
+    "restore_validation_status_at_snapshot": "PASSED_REAL_S1_36K_RECOVERY_METADATA_AND_PYTORCH_DESERIALIZATION"
   }
 }
