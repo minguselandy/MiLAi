@@ -1,3 +1,27 @@
+# CURRENT phase37: fixed confirmation256 FIRSTS/native CLOSED; author32 DONE
+
+Goal ACTIVE/incomplete. KEEP ANALYSIS VERY SHORT. Localdate2026-11-14;R=/data/milai-experiments/20261112-reader-utility.
+No SHA/content fingerprints/subagents/Product/default/servicechanges/push. No TESTretuning orfirstreplacement.
+ConfirmationHTTP3538727 nowRUNNING expanded10k_finalfirsts child4043552, lastsnapshot15/256,1lengthfail
+atposition1. Actualnewfirsts retained; noretry. Rules/S1followinoriginalorder.
+FIXEDcontext first256CLOSED255completed1lengthfailoriginalposition116; compiledTESTevaluation-only,
+notrainexports; nativeF1full256missingzero=.34210006976819124. Firstsgeneration865459known/charged,
+unknownusage0, nativeCPU20.333639253/wall3075.1250420380384. Fullsourcegraderwaitsall4firsts.
+FIXED AUTHOR32ALLDONE new-confirmation-fixed_context-author32-closure-v1.json;
+new-confirmation-author32-source-review-v1.json now32/128. Complete10/incomplete12/unknown8/incorrect1/
+executionfailure1. Materialsufficient11/insufficient15/unknown6. Exactfrozenpositions andliteralquotes
+checked; failed116retained. Nonindependent/unblinded, authorisnotgold. Do NOTredo fixed32.
+Remainingauthor96 = expanded/rules/S1each32, whenitsfullboundcloses. Samehelpers/protocol, aliases
+(methodindex+position//8)%4, bindnativefamily/questionID. Neverreadnativeannotations tograde.
+Samples: 1,11,23,26,39,40,55,59,70,74,80,94,102,110,116,123,131,143,146,155,165,171,182,191,
+196,201,210,221,226,239,246,250. Fullfirsts/repeats/sourcegradequeuedunchanged.
+Waitersstability3763322, prior216settlement3838848,later123settlement3939766 alive. Allremainwaiting.
+Monitor --live nowexcludes terminalCOMPLETED/CLOSED/SUPERSEDED/FAILED owner statuses, since oldchildPID
+may be transientlyreused; actualcurrentHTTP cmdline verified. No processes killed/restarted.
+Remaining: other768firsts/fullsource/native, author96, fixed128seconds/stability, finalcostscope/report/audit.
+Previousphase36learning-info/typecontrols alreadyCLOSED, do notredo oraddnewdiagnosticswhilewaiting.
+Do NOTmarkcomplete. Sourcequality, nativeF1, authorinterpretation andseeduncertaintyremainseparate.
+
 # CURRENT phase36: learning-information and DEV type/binding controls CLOSED
 
 Goal ACTIVE/incomplete. KEEP ANALYSIS VERY SHORT. Localdate2026-11-14;R=/data/milai-experiments/20261112-reader-utility.
