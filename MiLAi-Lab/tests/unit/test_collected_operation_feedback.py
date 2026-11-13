@@ -130,3 +130,72 @@ def test_incremental_case_stream_keeps_completed_bindings_between_full_snapshots
     with (tmp_path / "completed-cases.jsonl").open() as stream:
         assert [json.loads(line) for line in stream] == cases
     assert not (tmp_path / "cases.json").exists()
+
+
+@pytest.mark.parametrize("explicit_controls", [False, True])
+@pytest.mark.parametrize("evaluation_only,changed_original", [(True, False), (False, False),
+                                                           (False, True)])
+def test_closed_dev_binding_keeps_native_controls_and_failed_first_without_train_export(
+        tmp_path, monkeypatch, explicit_controls, evaluation_only, changed_original):
+    import json
+
+    from compile_collected_operation_feedback import main
+
+    def save(path, value):
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(json.dumps(value))
+
+    prepared, readouts, collection, output = [tmp_path / x for x in (
+        "prepared", "readouts", "collection", "output")]
+    controls = tmp_path / "original-controls.jsonl"
+    split = "dev" if evaluation_only else "train"
+    control = {"source_group": "f", "request_id": "q", "split": split,
+               "native_answerable": False, "native_answer": "Original answer",
+               "native_answer_aliases": ["Alias"]}
+    controls.write_text(json.dumps(control) + "\n")
+    save(collection / "run.json", {} if explicit_controls else {"controls": str(controls)})
+    row = {"gold": {}, "state": {}, "questions": {"next": {"criteria": {"a": "HANDOFF"}}},
+           "metadata": {"event_id": "f/q/0", "family": "f", "split": split,
+                        "state_id": 0, "row": 0}}
+    prepared.mkdir()
+    (prepared / "states.jsonl").write_text(json.dumps(row) + "\n")
+    if not evaluation_only:
+        original = {**row, "state": {"changed": True}} if changed_original else row
+        (collection / "states.jsonl").write_text(json.dumps(original) + "\n")
+    action = {"id": "a", "kind": "HANDOFF", "target": "actual packet", "parameters": {}}
+    wire = {"messages": [{"role": "user", "content": "Original question"}]}
+    save(prepared / "cases.json", [{"state_index": 0, "event_id": "f/q/0", "family": "f",
+        "request_id": "q", "case_key": "case", "before": {"task": {"request": "Original question"}},
+        "branches": [{"policies": ["full"], "action": action, "readout_request": wire,
+                      "reference_proof_complete": None, "execution_result": {"ok": True}}]}])
+    save(prepared / "run.json", {"status": "COMPLETED", "collection": str(collection),
+        "continuation_policy": "fixed_context", "continuation_steps": 0})
+    path = readouts / "first.json"
+    request = readouts / "request.json"
+    save(request, wire)
+    save(path, {"event_id": "f/q/0", "family": "f", "action": action,
+                "request": str(request), "status": "FAILED", "answer": None})
+    save(readouts / "readout-paths.json", {"full": {"case": str(path)}})
+    save(readouts / "run.json", {"status": "COMPLETED_WITH_FAILURES", "prepared": str(prepared)})
+    argv = ["compile", str(prepared), str(readouts), str(output)]
+    if evaluation_only:
+        argv += ["--evaluation-only"]
+    if explicit_controls:
+        argv += ["--controls", str(controls)]
+    monkeypatch.setattr("sys.argv", argv)
+    if changed_original:
+        with pytest.raises(ValueError, match="actual model input"):
+            main()
+        assert not output.exists()
+        return
+    main()
+    bound = json.loads((output / "review-inputs.json").read_text())[0]
+    assert bound["native_control"] == control
+    assert bound["branches"][0]["readout_status"] == "FAILED"
+    assert bound["branches"][0]["readout"] == str(path.resolve())
+    manifest = json.loads((output / "manifest.json").read_text())
+    assert manifest["controls"] == str(controls.resolve())
+    assert manifest["training_exports_written"] is (not evaluation_only)
+    assert manifest["source_matched_sft_constructed"] is (not evaluation_only)
+    assert (output / "feedback-dev.jsonl").is_file() is evaluation_only
+    assert (output / "delivery-known-fit.jsonl").exists() is (not evaluation_only)

@@ -79,6 +79,9 @@ def main() -> None:
     parser.add_argument("prepared", type=Path)
     parser.add_argument("readouts", type=Path)
     parser.add_argument("output", type=Path)
+    parser.add_argument("--controls", type=Path,
+                        help="Explicit original native controls for collections without a "
+                             "controls field; native schema is retained unchanged")
     parser.add_argument("--reviews", type=Path)
     parser.add_argument("--utility-scores", type=Path,
                         help="Optional closed offline scores; semantic labels remain separate")
@@ -104,20 +107,23 @@ def main() -> None:
     paths = read_json(args.readouts / "readout-paths.json")
     collection = Path(preparation["collection"])
     collection_run = read_json(collection / "run.json")
+    controls_path = args.controls or Path(collection_run["controls"])
     controls = {
         (c["source_group"], c["request_id"]): c
-        for c in read_jsonl(Path(collection_run["controls"]))
+        for c in read_jsonl(controls_path)
     }
-    # Read only completed selected events, even while later collection families are running.
-    selected_ids = {case["event_id"] for case in cases}
     original = {}
-    with (collection / "states.jsonl").open() as stream:
-        for line in stream:
-            value = json.loads(line)
-            if value["metadata"]["event_id"] in selected_ids:
-                original[value["metadata"]["event_id"]] = value
-                if len(original) == len(selected_ids):
-                    break
+    if not args.evaluation_only:
+        # The shared SFT training view needs the original labelled model input.
+        # DEV outcome binding does not construct this training-only comparison.
+        selected_ids = {case["event_id"] for case in cases}
+        with (collection / "states.jsonl").open() as stream:
+            for line in stream:
+                value = json.loads(line)
+                if value["metadata"]["event_id"] in selected_ids:
+                    original[value["metadata"]["event_id"]] = value
+                    if len(original) == len(selected_ids):
+                        break
     review_source = read_json(args.reviews) if args.reviews else None
     supplied = (
         {}
@@ -177,22 +183,22 @@ def main() -> None:
                 "branches": bound,
             }
         )
-        base = original[case["event_id"]]
-        if base["state"] != row["state"] or base["questions"] != row["questions"]:
-            raise ValueError("Source-matched SFT example changed the actual model input")
-        if base["gold"] and any(
-            p["delivery"] in {"left", "right"} for p in feedback["feedback"]["comparisons"]
-        ):
-            matched.append(feedback)
-            paired_sft = copy.deepcopy(base)
-            paired_sft["metadata"].update(
-                collection_state_id=base["metadata"]["state_id"],
-                state_id=feedback["metadata"]["state_id"],
-                row=feedback["metadata"]["row"],
-            )
-            # The trainer seeds option permutations by state_id. Match that seed as
-            # well as the actual before/menu, while retaining the collection origin.
-            sft.append(paired_sft)
+        if not args.evaluation_only:
+            base = original[case["event_id"]]
+            if base["state"] != row["state"] or base["questions"] != row["questions"]:
+                raise ValueError("Source-matched SFT example changed the actual model input")
+            if base["gold"] and any(
+                p["delivery"] in {"left", "right"} for p in feedback["feedback"]["comparisons"]
+            ):
+                matched.append(feedback)
+                paired_sft = copy.deepcopy(base)
+                paired_sft["metadata"].update(
+                    collection_state_id=base["metadata"]["state_id"],
+                    state_id=feedback["metadata"]["state_id"],
+                    row=feedback["metadata"]["row"],
+                )
+                # Match permutation seeds and the actual before/menu for shared SFT.
+                sft.append(paired_sft)
     args.output.mkdir(parents=True, exist_ok=False)
     if args.utility_scores is not None:
         from outcome_distillation import attach_utilities
@@ -225,8 +231,10 @@ def main() -> None:
             "evaluation_only": args.evaluation_only,
             "source_split": "dev" if args.evaluation_only else "train",
             "training_exports_written": not args.evaluation_only,
+            "source_matched_sft_constructed": not args.evaluation_only,
             "prepared": str(args.prepared.resolve()),
             "readouts": str(args.readouts.resolve()),
+            "controls": str(controls_path.resolve()),
             "reviews": str(args.reviews) if args.reviews else None,
             "utility_scores": str(args.utility_scores.resolve()) if args.utility_scores else None,
             "rollout": rollout,
