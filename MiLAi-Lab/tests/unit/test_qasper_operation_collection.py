@@ -2,6 +2,7 @@
 
 from types import SimpleNamespace
 
+import collect_qasper_operation_states as collector
 from collect_qasper_operation_states import (
     complete,
     covered_sources,
@@ -75,3 +76,14 @@ def test_already_observed_support_can_be_handed_off_even_if_default_delivery_mis
     ]
     accepted, status = reference_preferences(actions, operations, [[{"b"}]], mapping, lengths)
     assert accepted == ["select_b"] and status == "reference_preserving_handoff"
+
+
+def test_actual_terminal_does_not_invoke_unused_counterfactual_nominations(monkeypatch):
+    def forbidden(*args, **kwargs):
+        raise AssertionError("Counterfactual rule must not block actual endpoint")
+
+    monkeypatch.setattr(collector.RulesMemoryPolicy, "choose", forbidden)
+    monkeypatch.setattr(collector, "coverage_alternative", forbidden)
+    actual = MemoryAction("actual", "HANDOFF", "actual acquired range",
+                          {"delivery_indices": [6], "retrieved_scope_indices": [6]})
+    assert collector.terminal_nominations(actual, None, [actual], {}, 0, True) == ["actual"]

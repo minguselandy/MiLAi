@@ -149,6 +149,25 @@ def no_refresh(*_: Any) -> Any:
     raise RuntimeError("This source-only collection has no generated View operation")
 
 
+def terminal_nominations(action: MemoryAction, state: MemoryControlState,
+                         handoffs: list[MemoryAction], before: dict[str, Any], seed: int,
+                         actual_only: bool = False) -> list[str]:
+    """An actual endpoint does not depend on an unrequested counterfactual policy."""
+    if actual_only:
+        return [action.id]
+    rule_id = RulesMemoryPolicy(reads=4).choose(state, handoffs)
+    selected = list(dict.fromkeys([action.id, rule_id]))
+    coverage: Counter[str] = Counter()
+    for key in selected:
+        coverage[parameter_stratum(next(asdict(a) for a in handoffs if a.id == key))] += 1
+    alternative = coverage_alternative(
+        {"initial_observation": before, "initial_actions": [asdict(a) for a in handoffs]},
+        [asdict(a) for a in handoffs if a.id in selected], coverage, seed)
+    if alternative is not None:
+        selected.append(alternative["id"])
+    return selected
+
+
 def resolve_source_bank(root: Path) -> Path:
     """Follow existing reuse receipts to the actual database, never create an alias DB."""
     current, seen = root.resolve(), set()
@@ -179,6 +198,7 @@ def collect_paper(
     source_bank: Path | None = None,
     predict: Any = None,
     baseline_policy: str = "lexical",
+    actual_terminal_only: bool = False,
 ) -> dict[str, Any]:
     root.mkdir(parents=True, exist_ok=False)
     bank = resolve_source_bank(source_bank) if source_bank is not None else root
@@ -363,24 +383,8 @@ def collect_paper(
                 if action.kind == "HANDOFF" and branches:
                     saved, before = operations.checkpoint(), state.project()
                     handoffs = [a for a in actions if a.kind == "HANDOFF"]
-                    rule_id = RulesMemoryPolicy(reads=4).choose(state, handoffs)
-                    selected = list(dict.fromkeys([action.id, rule_id]))
-                    coverage: Counter[str] = Counter()
-                    for key in selected:
-                        coverage[
-                            parameter_stratum(next(asdict(a) for a in handoffs if a.id == key))
-                        ] += 1
-                    alternative = coverage_alternative(
-                        {
-                            "initial_observation": before,
-                            "initial_actions": [asdict(a) for a in handoffs],
-                        },
-                        [asdict(a) for a in handoffs if a.id in selected],
-                        coverage,
-                        seed + request_index,
-                    )
-                    if alternative is not None:
-                        selected.append(alternative["id"])
+                    selected = terminal_nominations(action, state, handoffs, before,
+                                                     seed + request_index, actual_terminal_only)
                     branch_rows = []
                     for key in selected:
                         branch_state = MemoryControlState(**copy.deepcopy(before))
@@ -467,6 +471,9 @@ def main() -> None:
     parser.add_argument("--baseline-policy", choices=("lexical", "fixed_context", "rules"),
                         default="lexical", help="Explicit simple policy when no model is supplied")
     parser.add_argument("--requests-per-family", type=int)
+    parser.add_argument("--actual-terminal-only", action="store_true",
+                        help="In branched families retain only the actual terminal packet, "
+                             "without counterfactual rule/coverage nominations")
     parser.add_argument(
         "--reuse-source-collections",
         type=Path,
@@ -515,6 +522,7 @@ def main() -> None:
         "model_calls": 0,
         "Host_calls": 0,
         "automatic_retry": False,
+        "actual_terminal_only": args.actual_terminal_only,
         "reused_source_families": sum(h["source_group"] in source_banks for h in histories),
         "collector_checkpoint": str(args.collector_checkpoint.resolve())
         if args.collector_checkpoint
@@ -572,6 +580,7 @@ def main() -> None:
                 source_bank=source_banks.get(history["source_group"]),
                 predict=predict,
                 baseline_policy=args.baseline_policy,
+                actual_terminal_only=args.actual_terminal_only,
             )
             run["completed_families"] += 1
             write_json(args.output / "run.json", run)

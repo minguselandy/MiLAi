@@ -37,14 +37,11 @@ def bind_terminal(
     ):
         raise ValueError("Collected terminal alternatives must match the actual full-menu state")
     offered = [MemoryAction(**a) for a in branch["actions"]]
-    choices = {
-        "collector_actual": event["selected"],
-        "rules": RulesMemoryPolicy(reads=4).choose(
+    choices = {"collector_actual": event["selected"]}
+    if not actual_only:
+        choices["rules"] = RulesMemoryPolicy(reads=4).choose(
             MemoryControlState(**copy.deepcopy(branch["before"])), offered
-        ),
-    }
-    if actual_only:
-        choices = {"collector_actual": event["selected"]}
+        )
     actual_results = [b for b in branch["results"]
                       if not actual_only or b["action"]["id"] == event["selected"]]
     alternatives = [
