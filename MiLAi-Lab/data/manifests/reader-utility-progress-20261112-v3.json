@@ -676,7 +676,23 @@
       "status": "WAITING_FOR_CONFIRMATION_HTTP_AND_STABILITY_CLOSURE",
       "scope": "Three priorinventories only. Currentreceipts andcoveredpaths revalidated; knownphase01/02paid overlaps excluded. Laterwork andunmeasuredscopes separate. Wall sum includesoneexplicitwait, notelapsedstudytime."
     },
-    "orchestration_counter_observation": "/data/milai-experiments/20261112-reader-utility/goal-orchestration-counter-observation-v1.json"
+    "orchestration_counter_observation": "/data/milai-experiments/20261112-reader-utility/goal-orchestration-counter-observation-v1.json",
+    "later123": {
+      "child_inventory": "/data/milai-experiments/20261112-reader-utility/later-closed-child-cost-inventory-v2.json",
+      "independent_inventory": "/data/milai-experiments/20261112-reader-utility/later-independent-cost-inventory-v1.json",
+      "reconciliation": "/data/milai-experiments/20261112-reader-utility/reconciled-later123-cost-scopes-v1.json",
+      "scopes": 123,
+      "child_scopes": 47,
+      "independent_scopes": 76,
+      "failed_child_scopes": 1,
+      "cpu_seconds": 32811.74431177999,
+      "sum_recorded_scope_wall_seconds": 69977.10018235352,
+      "settlement_owner": "/data/milai-experiments/20261112-reader-utility/later123-compute-settlement-owner-v1.json",
+      "settlement_pid": 3939766,
+      "status": "WAITING_FOR_PRIOR216_SETTLEMENT_AFTER_CONFIRMATION",
+      "ledger_written": false,
+      "scope": "Disjointfromprior216. Includesfailedprocess andoneexitedwaiter measuredprefix; archive epochs separate, inheritedv2analysis timer excluded, fullfitcost analysischild replacesnestedsummary timer. Wallincludeswait/overlap, notelapsedstudytime. Nativeoverhead/unmeasuredtails/root/serviceGPUunknown. ActiveconfirmationHTTP/stability andfuturework excluded."
+    }
   },
   "required_remaining": {
     "A": "Original prototype12tests and both I2 native/source checks closed. Preserve K/horizon/long-input diagnostics and failures; synthesize their limits with main task results.",
@@ -691,7 +707,7 @@
     "MonitorconfirmationHTTP3538727 andpreserveallfirsts. No competingHTTP/restarts/retuning.",
     "Onceeachmethodbound closes, reviewits32frozenauthor sources using show_confirmation_author_panel_v1.py andappend_confirmation_author_review_v1.py; planned128.",
     "Queueautomatically completesallfirsts/source/native andfixedsecond128/source/native; stability3763322 then216scope settlement3838848.",
-    "Close remainingmeasuredcost/overlap inventory andunknowncostdisclosure; fullfive-layer synthesis andcompletionaudit stillrequired."
+    "CloseconfirmationHTTP/stability costs andfinalmeasuredscope/unknowncost disclosure afterqueuesfinish; do notcreate per-shell accountingproject. 216then123settlements queued. Five-layer synthesis andcompletionaudit stillrequired."
   ],
   "phase": 35,
   "signal_diagnostic": {
@@ -1813,7 +1829,7 @@
     "repeat_tool_commit": "6d1ef075",
     "scope": "Actualfullmenus andsingleterminalpacket per256source/method. Firsts andfixedsecondReadercalls separate; fullwireunchanged,no controllerrepeat,no --reuse-readouts. Source/cost/author/stabilityclosure stillrequired.",
     "HTTP_stage_at_snapshot": "new-confirmation256-fixed_context-firsts-v1",
-    "fixed_firsts_closed_at_snapshot": 87,
+    "fixed_firsts_closed_at_snapshot": 116,
     "fixed_firsts_failed_at_snapshot": 0,
     "stability_tool": "tools/summarize_fixed_source_repeats.py",
     "stability_tool_commit": "e5508afd",

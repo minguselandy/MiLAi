@@ -1,5 +1,14 @@
 # CURRENT phase35: natural diagnostic CLOSED; confirmation firsts RUNNING
 
+ADDITIONALCOSTUPDATE:47laterclosedchild scopesCPU5004.970247 (includes1failedprocess),76independent
+measurementsCPU27806.77406478. Joined123CPU32811.74431178, wallsum69977.10018235includeswait/overlap.
+reconciled-later123-cost-scopes-v1.json disjointfromprior216. Native/inheritedv2/nestedtimers excluded;
+oneexitedoldstoragewaiter lastrecordedprefix includedaslowerbound, unobservedtailnotzero.
+Settlementwaiter3939766 later123-compute-settlement-owner-v1.json waitsHTTP/stabilityANDprior216settlement,
+thenlease/idempotentphase/readback. NOLEDGERWRITEYET. ConfirmationHTTPfirstfixedlatest116/256,0failed.
+RemainingcostfocusONLYconfirmationHTTP/stability closedstages plusfinalscope disclosure, NOTper-shell
+accountingproject. Allcurrentfilescommitted; root author128 still0, waitforclosedmethodbound.
+
 Goal ACTIVE/incomplete. KEEP ANALYSIS VERY SHORT. Localdate2026-11-14.
 R=/data/milai-experiments/20261112-reader-utility. No SHA/content fingerprints/subagents/
 Product/default changes/service restarts/push. All previous closedresults andfrozenprotocols retained.
