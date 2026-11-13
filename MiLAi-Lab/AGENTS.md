@@ -1,3 +1,35 @@
+# CURRENT phase29: final source grader live; author40 and baseline View work closed
+
+Goal ACTIVE/incomplete. KEEP ANALYSIS VERY SHORT. R=/data/milai-experiments/20261112-reader-utility.
+No SHA/content fingerprints/subagents/Product/default changes/service restarts/push.
+Code b99914c6 final source grader: actual raw first answer + exact original source and actual Host input;
+24 tests PASS. Capacity/format/quote failures unknown; screened subset is not absence proof.
+Current baseline-grade owner1731110/child1731113; 200positions/178actualresponses/22failedfirsts.
+Natural CURRENT v6 owner1731111 waits this grade then E2GPU3; existing baseline200 not rerun.
+E2 HTTP CURRENT v2 owner1731112 waits naturalv6 firsts+E2 fits/DEV. Prior v5/v1 idle owners
+superseded before dispatch; handoff evidence baseline-source-grade-http-handoff-v1.json.
+Own HTTP owner1836373 waits own fits/DEV +E2 HTTP; primary own-final minus matched-old-final,
+secondary original Q1 first96 reused unchanged. Fixed/selected DEV only. Full96 denominators.
+Natural final-review owner1840387 waits naturalv6, binds/assembles S1/Q1 payloads then waits ownHTTP;
+source-grade remaining200 once and summarize400. Author40/View/cost still remain after that queue.
+Monitor observe_jobs_v1.py --live updated to all CURRENT owners. No competing HTTP dispatch.
+E2 base/expanded U+Q+DEV closed; both postQ nominate fixed63. Repeat U867555 still running GPU3.
+Own old83/Q63/DEV96 closed, selected63; own U1737866 running GPU2, thenQ63/DEV.
+Author preselected baseline40 CLOSED at natural-author-source-review-v1/baseline40.json.
+fixed:2supported8incomplete1incorrect7unknown2executionfailure; cache:0/9/1/7/3.
+Root author not independent; no native gold/Teacher labels. Keyword nonmatch never proves absence.
+Pachinko explicit completion was missed; Latte dog vs beverage counterexample retained.
+Code d673435e tools/summarize_continuous_view_work.py;2tests/Ruff PASS. Actual baseline200 analyzed:
+cache129REFRESH builds +14USE_VIEW all143material_budget_exhausted,0successfulViewdelivery.
+Builder elapsed4.321865s nested in62.468747operation and128.815875retrieval wall; NEVERsum.
+Fixed/cache alreadybilled generation tokens1705106/1817574, unknownusage0. No netbenefit claim.
+View revisions persist despite rejected delivery; count cost even when operation ok=False.
+Baselinework natural-baseline-view-work-v1; run same tool on learned bindings after closure.
+Snapshot archive old720462 gone; resumed detached1818134 from578records, no duplicate archives.
+Audit natural-snapshot-archive-continuation-v1.json preserves previouscost/state. Same restoreCLI/base.
+Disk ~13GiB while activefits; natural threshold16GiB. New-fit archive876752 handles closedfits afterDEV.
+Fresh confirmation, justified replication, all costs/statistics/final report incomplete. Do NOTcomplete.
+
 # CURRENT phase28: source screening CLOSED; E2HTTP waiting; naturalv5 current
 
 Goal ACTIVE/incomplete. KEEP ANALYSIS VERY SHORT. R=/data/milai-experiments/20261112-reader-utility.
