@@ -1,3 +1,55 @@
+# CURRENT phase25: E2 FITS RUNNING; all6 firsts/author72 closed; fullteacher ongoing
+
+Goal ACTIVE/incomplete. R=/data/milai-experiments/20261112-reader-utility.
+KEEP ANALYSIS VERY SHORT. No SHA/contentfingerprints/subagents/Product/default changes/service restart/push.
+Latestcode6b7faae3; sampler0c9ba3e1 +explicitoverlap06ed4f92; format107af748.
+Read observe_jobs_v1.py --live forcompactactualstatus andprocess existence. PIDcounterwrapped;
+newPIDs arelow, oldhighPIDs canstillbealive. Neverrestartfromtimeout/statefilealone.
+FORMAL6firsts allCLOSED576; nativeF1 fixed.327982,S1.242052,U0.185132,U1.199899,Q0.236308,Q1.235431.
+Failures1/5/8/4/4/1. formal-task-dev96-native-and-author-summary-v1.json: Q1-Q0=-.00087736,
+sourcepairedCI[-.0619226,.0601072], auxiliarynotprimarysource-success/equivalence/seedclaim.
+Author12sourcepositions0,8,...88 x6 ALL72CLOSED manualactualsource/answerbindings. Complete-supported
+counts5/4/3/5/6/5. Nonindependent. formal-task-dev12-author-source-review-v1.json. Do notreviewagain.
+LIVE formalDEVQ/reviewowner2573961/session1897 teacherchild16405; all-six-teacher288groups running.
+No competingHTTP. Main96source-supported metric/summaries stillpending; compareauthorsonceclosed.
+E2 LIVE owner148212/session82607 formal-E2-three-chains-owner-v1.json.
+GPU2expanded10k3passU PID148218; GPU3freshbase3k3passU PID148221. Plansunchangedactualcounts.
+Finitequeues: GPU2expandedU+Q+actualDEV; GPU3baseU+Q+DEV thenrepeat3k9passU+Q+DEV.
+All3initS1,newoptimizers,exactsharedE2data/replay; Qactual331/63updates allsame.
+formal-E2-launch-assessment-v1.json retainsboundedscale/exposuretest afterallnative/author/public8
+assessment; fullsemanticteacherstillrunningexplicitlydisclosed. No scale-as-validity inference.
+PostQ tasknomination: fixed63 plusatmostadditional21 byfull96reference macro,earliesttie; notfastpeak.
+Ucurves/weightskept, E2actualtaskcandidatespostQonly. HTTPfirsts/reviews notinGPUowner, stillneedqueue.
+ResourceguardremainingoutputreserveU11GiB/Q8GiB+2buffer; naturalGPU3priority viaowner flag.
+NATURALv1waiter4015399/session56657 SUPERSEDEDbefore0calls/outputdirs, deliberateexit143.
+LIVEv2owner148719/session95767 samefrozen4methods/100requests/configs, waitsformalHTTPthenownscore,
+disk16GiB; learnedGPU3stagesalso waitE2.gpu3_reserved. No firsts yet, no sharedservice restart.
+Ownstatecollect+4branches+FP32score CLOSED, nativeledgerclosure revalidate butownerCOMPLETED.
+1303states4948packets2566known2382unknown,3595actualrefs2002319tokens;674activeweak.
+Matchedv1FAILED beforeoutput onrealreplayoverlap; retainownerlog/27.294794CPU. No modelrerun.
+Matchedv2CLOSED data/capacity:657main eachold/own,16raw/groups,4056sharedreplay (40selected-union
+IDs excludedfromoriginal4096, norefill),83updates1971+657. Old/ownactiveavailable672/674.
+Protocolownstate-matched-followup-protocol-v2.json; dataownstate-matched-data-v2.
+Capacityold/ownmax10476/10478,0state/headdrop; plannedtokens16183785/16254459 notactual/FLOPs.
+CommonQ1alreadyexposedoriginalreplay; notunseen-sourceclaim. Matchedownstatefits NOTLAUNCHED.
+Publicweak8sourcepanel CLOSED31manualbindingsbeforeunmask:25insufficient6unknown,0unambiguousfull.
+Only3states/12packets scored,other5states19packets correctlymasked. Nissedal partiallinkcandidate
+loses.08646logprob toirrelevantpack; NinthGate3countries andSQL/MySQLpremise ambiguous.
+public-weak8-source-panel-v1/unmasked-summary-v1.json. SmallTRAINdiag, no populationaccuracy orlabelsrewrite.
+STORAGE: originalhistorical23recoveries CLOSED,freed11341807616bytes; restoreentryphase22...below.
+CurrentU/Q12nonterminal modelweights NOWARCHIVED losslessly atphase25-closed-intermediate-weight-deltas-v1.
+Fixedfinalweights stayraw. Saved6488535040payloadbytes. Fulloriginalbyte roundtrip verified beforedelete;
+firstrealrestoredfile matchedoriginalRAMbytes. Toaccessintermediate, first:
+python3 R/phase25-closed-intermediate-weight-deltas-v1/restore.py formal-q-u1-seed0-v1 update-42
+LIVEhistorical59intermediateweightsarchive PID107977/session90717 at
+R/phase25-historical-intermediate-weight-deltas-v1. Same restoreCLI withoriginalrun/update names.
+Keepimmutable-final-base.safetensors hardlinks +delta.gz+sidecarJSON+frozenhelper; nevermutatebases.
+Alllogicalbytes retained; noquantization/fingerprints. 3storage testsPASS; sampler24PASS2GPUskip.
+AdditionalclosedownerCPUinventory24scopes3727.968919unpaid excludesnative/priorcovered, notwholecost.
+Failedmatchedv1,newmatchedv2,othernewanalysis/storage/roottime stillseparate, notzero.
+Priorsectionsbelow historicalwhere superseded. Goal E2/ownfits/natural/newconfirmation/justifiedseeds/
+fullcost/statisticalsynthesis stillincomplete; do NOT markcomplete.
+
 # CURRENT phase24: natural queue frozen; own-state collection closed; Q firsts ongoing
 
 Goal ACTIVE/incomplete. R=/data/milai-experiments/20261112-reader-utility. Latestcode107af748.

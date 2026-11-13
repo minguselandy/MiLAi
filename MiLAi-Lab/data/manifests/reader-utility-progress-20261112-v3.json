@@ -39,7 +39,10 @@
     "continuous_host_outcome_summary": "f7740256",
     "native_Host_cost_stages": "fe29a56b",
     "native_DEV_explicit_controls_eval_only": "86ea0d16",
-    "continuous_declared_answer_field": "107af748"
+    "continuous_declared_answer_field": "107af748",
+    "matched_own_state_sampler": "0c9ba3e1",
+    "explicit_shared_overlap_exclusion": "06ed4f92",
+    "lossless_weight_deltas": "6b7faae3"
   },
   "formal_U": {
     "protocol": "/data/milai-experiments/20261112-reader-utility/formal-main3k-uq-protocol-v1.json",
@@ -502,7 +505,27 @@
     },
     "E2_three_fresh_U_plans": "/data/milai-experiments/20261112-reader-utility/formal-E2-three-arm-data-and-U-plans-v1.json",
     "E2_same_pass_baseline_required": true,
-    "native_score_bookkeeping_closure": "/data/milai-experiments/20261112-reader-utility/expansion-native-score-bookkeeping-closure-v1.json"
+    "native_score_bookkeeping_closure": "/data/milai-experiments/20261112-reader-utility/expansion-native-score-bookkeeping-closure-v1.json",
+    "E2_execution": {
+      "assessment": "/data/milai-experiments/20261112-reader-utility/formal-E2-launch-assessment-v1.json",
+      "owner": "/data/milai-experiments/20261112-reader-utility/formal-E2-three-chains-owner-v1.json",
+      "pid": 148212,
+      "session": 82607,
+      "status": "FIRST_TWO_U_FITS_RUNNING",
+      "fits_at_launch": {
+        "expanded10k3pass": {
+          "pid": 148218,
+          "physical_gpu": 2
+        },
+        "base3k3pass": {
+          "pid": 148221,
+          "physical_gpu": 3
+        }
+      },
+      "finite_queue": "GPU2 expandedU+sameQ+DEV; GPU3 base3passU+sameQ+DEV thenrepeat9passU+sameQ+DEV. EachQfixed63 plusfullpanel21/63nomination atmostoneadditionalactualDEV. Allfixedendpoints/curvesretained.",
+      "selection_scope": "Launchafter allnative96firsts and72authorsourcebindings/public8diagnostic; full96semanticteacherstillrunning. No superiority/equivalence/puresizeclaim; finalmodelselection waitsfullresults.",
+      "HTTP_firsts": "Not partofthisGPUqueue; stillrequired after actualDEVcollections and coordinatedHTTPavailability."
+    }
   },
   "application_source_inventory": {
     "artifact": "/data/milai-experiments/20261112-reader-utility/natural-application-source-options-v1.json",
@@ -539,6 +562,13 @@
       "inherited_preparation_measure_excluded": 1,
       "ledger_written": false,
       "scope": "Snapshot of independently recorded nonnative CPU scopes; excludes prior paid/native/111 covered scopes. Contains8closed subprocesses from the still-live annotation parent; their manifest compute is nested. Inherited I2 short-format preparation cost excluded; separate diagnostic timer included. Not complete study cost."
+    },
+    "additional_closed_owner_inventory": {
+      "path": "/data/milai-experiments/20261112-reader-utility/additional-closed-owner-cpu-cost-inventory-v1.json",
+      "scopes": 24,
+      "cpu_seconds": 3727.968919,
+      "ledger_written": false,
+      "scope": "Additional closed successfulchildren excludingnative/priorcoverage. Failedmatchedv1CPU, latermatchedv2children/newindependentanalysis/storage notincluded; notwhole-study cost."
     }
   },
   "required_remaining": {
@@ -551,13 +581,13 @@
     "synthesis": "Five result layers, clustered paired uncertainty, full measured cost/unknown scopes, mechanism and counterexamples; conditional minimal Product recommendation only."
   },
   "next_actions": [
-    "Complete existing Q0/Q1 DEV firsts and all-six groupedreview; authorcheck remainingQ0/Q1 atsame12sources. Firstfour closed.",
-    "Close ownstate fourbranch/input/FP32score queue; inspect meaningful active targets and pairedold-state overlap before matchedfit. No refit fromcollection alone.",
-    "Assess actualDEV andsignalmechanism before preparedE2threefreshU+sameQ. Check natural owner GPU3 reservation anddisk; no conflicting GPUjobs.",
-    "Natural4method100request application owner is livewaiting formalHTTPclosure/ownstateclosure/disk/GPU; finish400source reviews, plannedauthor80checks, Viewoperations andcost afterfirsts. No forcedretrieval.",
-    "Freeze finalnewconfirmation candidates/metrics/budgets/repeat subset beforeexport; then complete decisive justified replication, fullconfirmation and cost/statistical synthesis."
+    "Finish existing all-six DEV groupedteacher andsummaries; compare72authorbindings withoutrewritingfirsts. All576nativefirsts andauthorpanel areclosed.",
+    "Monitor E2nativefits andfiniteQ/DEVstages; preservefixedendpoints andfull-panel nomination. Do notduplicate GPU2/3fits; GPU3reservedforE2untilitschaincloses.",
+    "Plan/execute ownstate matched657vs657 continuations fromsameQ1 withsameQ afteravailableGPU andclosedDEVassessment; data/capacityready, nofit yet.",
+    "Naturalv2waiter ownsnextHTTPapplicationfirsts afterformalreview/ownscoreclosure/disk; learnedstageswaitE2GPU3priority. Buildactual400source reviews, planned80authorbindings, View/costs afterfirsts.",
+    "Coordinate E2actualDEVreadout/review queue afterfits/collections andexistingHTTPowner; thenfreeze finalconfirmation methods/metrics/budgets/repeats beforeexport. Decisivereplication andfinalcost/statistics remain."
   ],
-  "phase": 24,
+  "phase": 25,
   "signal_diagnostic": {
     "canonical110": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-vs-semantic110-diagnostic-v1.json",
     "author_spots": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-semantic-disagreement-spots-v1.json",
@@ -566,7 +596,16 @@
     "oppose": 21,
     "opposed_empty_no_K_winners": 15,
     "scope": "Selected TRAIN signal analysis; reviewer correlation and ambiguous native annotations retained; no task gain or causal bias attribution.",
-    "canonical261": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-vs-semantic261-diagnostic-v1.json"
+    "canonical261": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-vs-semantic261-diagnostic-v1.json",
+    "public_fixed8_source_review": {
+      "protocol": "/data/milai-experiments/20261112-reader-utility/public-weak8-source-panel-v1/protocol.json",
+      "summary": "/data/milai-experiments/20261112-reader-utility/public-weak8-source-panel-v1/unmasked-summary-v1.json",
+      "states": 8,
+      "packets": 31,
+      "known_score_states": 3,
+      "known_score_packets": 12,
+      "scope": "Manualsourcejudgments before scoreunmasking; fiveunknown-reference states remainmasked. Three scoredcases include onepartialfact preference mismatch andtwo ambiguouspremises. No populationaccuracy/automaticlabelrepair."
+    }
   },
   "natural_application_preparation": {
     "source_inspection": "/data/milai-experiments/20261112-reader-utility/natural-realtalk-inspection-v1/source-inspection.json",
@@ -585,9 +624,9 @@
     "outcome_summary_scope": "Offline only, not an application execution. Full declared denominator; separate method labels for same-policy checkpoints; source review bound to exact first answer; future/missing native evidence has no reference-overlap target; equal histories within participant groups, then equal groups. No automatic success inference from text overlap; no training export.",
     "frozen_application_protocol": "/data/milai-experiments/20261112-reader-utility/natural-realtalk-application-plan-v1/protocol.json",
     "finite_application_owner": {
-      "path": "/data/milai-experiments/20261112-reader-utility/natural-realtalk-application-owner-v1.json",
-      "pid": 4015399,
-      "session": 56657,
+      "path": "/data/milai-experiments/20261112-reader-utility/natural-realtalk-application-owner-v2.json",
+      "pid": 148719,
+      "session": 95767,
       "status_at_snapshot": "WAITING_FOR_FORMAL_DEV_HTTP_CLOSURE",
       "methods": [
         "fixed_context",
@@ -610,7 +649,9 @@
         "16GiBdisk",
         "GPU3<=8192MiB forlearnedstages"
       ],
-      "not_executed_yet": true
+      "not_executed_yet": true,
+      "superseded_waiter": "/data/milai-experiments/20261112-reader-utility/natural-realtalk-application-owner-v1.json",
+      "replacement_scope": "v1waswaiting with0stages/noapplicationoutputdirs; exited143 after deliberateSIGTERM beforeanycalls. v2samefrozenmethods/configs/outputs plus explicitE2gpu3_reserved priority; no service restart orfirstretry."
     }
   },
   "phase04_validation": {
@@ -642,7 +683,7 @@
       "status_at_launch": "WAITING_FOR_PRE_Q_FIRSTS_AND_Q_COLLECTIONS"
     },
     "trajectory_status": "ALL_SIX_CLOSED",
-    "readout_status": "PRE_Q_FOUR_CLOSED; Q0_FIRSTS_RUNNING",
+    "readout_status": "ALL_SIX_FIRSTS_NATIVE_AND_AUTHOR72_CLOSED; GROUPED_TEACHER_RUNNING",
     "closed_native_at_snapshot": {
       "fixed_context": {
         "states": 96,
@@ -679,6 +720,24 @@
           "FAILED": 4
         },
         "source_macro_answer_f1_missing_zero": 0.19989864285618741
+      },
+      "u0q": {
+        "states": 96,
+        "sources": 96,
+        "status_counts": {
+          "COMPLETED": 92,
+          "FAILED": 4
+        },
+        "source_macro_answer_f1_missing_zero": 0.23630842646426423
+      },
+      "u1q": {
+        "states": 96,
+        "sources": 96,
+        "status_counts": {
+          "COMPLETED": 95,
+          "FAILED": 1
+        },
+        "source_macro_answer_f1_missing_zero": 0.23543106483971302
       }
     },
     "all_six_trajectory_comparison": "/data/milai-experiments/20261112-reader-utility/formal-task-dev96-all-six-trajectory-comparison-v1.json",
@@ -686,16 +745,20 @@
       "path": "/data/milai-experiments/20261112-reader-utility/formal-task-dev12-author-source-review-v1.json",
       "planned_sources": 12,
       "planned_bindings": 72,
-      "reviewed_at_snapshot": 48,
+      "reviewed_at_snapshot": 72,
       "closed_method_panels": [
         "fixed_context",
         "common_s1",
         "u0",
-        "u1"
+        "u1",
+        "u0q",
+        "u1q"
       ],
-      "scope": "Preselected source positions; manual implementation-agent source review, method-hidden display but nonindependent and not fully blind. Remaining four methods await actual firsts."
+      "scope": "Preselected source positions; manual implementation-agent source review, method-hidden display but nonindependent and not fully blind. Remaining four methods await actual firsts.",
+      "status": "CLOSED_NONINDEPENDENT_AUTHOR_PANEL"
     },
-    "identical_wire_first_variation_diagnostic": "/data/milai-experiments/20261112-reader-utility/formal-task-dev96-identical-wire-first-variation-v1.json"
+    "identical_wire_first_variation_diagnostic": "/data/milai-experiments/20261112-reader-utility/formal-task-dev96-identical-wire-first-variation-v1.json",
+    "native_and_author_summary": "/data/milai-experiments/20261112-reader-utility/formal-task-dev96-native-and-author-summary-v1.json"
   },
   "I2_public": {
     "prepared": "/data/milai-experiments/20261112-reader-utility/i2-public-dev8-terminal-short-v1/run.json",
@@ -926,7 +989,7 @@
     "no_sha_validation": true
   },
   "own_state_round": {
-    "status": "COLLECTION_CLOSED_BRANCH_PREPARATION_RUNNING",
+    "status": "COLLECTION_BRANCHES_SCORES_AND_MATCHED_DATA_CLOSED_NO_FIT",
     "protocol": "/data/milai-experiments/20261112-reader-utility/ownstate-q1-shard0-first16-protocol-v1.json",
     "owner": "/data/milai-experiments/20261112-reader-utility/ownstate-q1-shard0-first16-owner-v1.json",
     "pid": 3944666,
@@ -967,6 +1030,38 @@
         "q1": 0.5548999309539795
       },
       "scope": "Fixed firstnativequestion/condition postsearch32TRAINpairs, rawactualruntimefields. No normalization/removal for inference, no training, no task conclusion. Not general invariance."
+    },
+    "score_run": "/data/milai-experiments/20261112-reader-utility/ownstate-q1-shard0-first16-scores-fp32-cache-v1/run.json",
+    "opportunity_states": 1303,
+    "packets": 4948,
+    "known_scores": 2566,
+    "unknown_scores": 2382,
+    "known_reference_sequences": 3595,
+    "scorer_actual_input_tokens": 2002319,
+    "active_weak_states": 674,
+    "matched_data": {
+      "protocol": "/data/milai-experiments/20261112-reader-utility/ownstate-matched-followup-protocol-v2.json",
+      "data": "/data/milai-experiments/20261112-reader-utility/ownstate-matched-data-v2/run.json",
+      "capacity": "/data/milai-experiments/20261112-reader-utility/ownstate-matched-data-v2/capacity-check-v1/run.json",
+      "owner": "/data/milai-experiments/20261112-reader-utility/ownstate-matched-data-owner-v2.json",
+      "status": "CLOSED_NOT_FITTED",
+      "main_each": 657,
+      "old_available": 672,
+      "own_available": 674,
+      "sources_each": 16,
+      "groups_each": 16,
+      "shared_replay": 4056,
+      "excluded_replay_overlap": 40,
+      "updates_each": 83,
+      "primary_exposures_each": 1971,
+      "replay_exposures_each": 657,
+      "planned_canonical_tokens": {
+        "old": 16183785,
+        "own": 16254459
+      },
+      "retained_first_failure": "/data/milai-experiments/20261112-reader-utility/ownstate-matched-data-owner-v1.json",
+      "failed_first_child_cpu_seconds": 27.294794,
+      "scope": "Same nativeevent/condition quotas, minactive counts, source-balanced loss. Fulloriginalinputs/targets retained; no refill after shared replay exclusion. PriorQ1initializeralready saw originalreplay; notunseen-source/generalizationclaim."
     }
   },
   "phase22_UQ_storage": {
@@ -981,10 +1076,12 @@
     "pid": 3932751,
     "session": 59678,
     "planned_recoveries": 23,
-    "status": "RUNNING",
+    "status": "COMPLETED",
     "scope": "Closed v2 optimizer/FP32/RNG recovery directories archived losslessly after reconstructed-byte comparison. Inference models/firsts/source banks unchanged; restore original recovery before any future resume. Frozen helper/empty base retained; no SHA.",
     "restore_validation": "/data/milai-experiments/20261112-reader-utility/phase22-closed-historical-recovery-archives-v1/restore-validation-v1.json",
-    "restore_validation_status_at_snapshot": "PASSED_REAL_S1_36K_RECOVERY_METADATA_AND_PYTORCH_DESERIALIZATION"
+    "restore_validation_status_at_snapshot": "PASSED_REAL_S1_36K_RECOVERY_METADATA_AND_PYTORCH_DESERIALIZATION",
+    "closed_recoveries": 23,
+    "freed_bytes": 11341807616
   },
   "phase24_validation": {
     "continuous_answer_format_and_cost_tests_passed": 15,
@@ -992,5 +1089,28 @@
     "diff_check_pass": true,
     "ownstate_crossed_real_GPU_probe_closed": true,
     "no_sha_validation": true
+  },
+  "phase25_validation": {
+    "matched_data_and_math_tests_passed": 24,
+    "GPU_regressions_skipped_unchanged_trainer": 2,
+    "weight_delta_tests_passed": 3,
+    "actual_643835524_byte_storage_probe_roundtrip": true,
+    "actual_first_U_checkpoint_restore_compared_all_original_bytes": true,
+    "ruff_pass": true,
+    "diff_check_pass": true,
+    "no_sha_validation": true
+  },
+  "phase25_weight_storage": {
+    "current_UQ": "/data/milai-experiments/20261112-reader-utility/phase25-closed-intermediate-weight-deltas-v1/manifest.json",
+    "current_UQ_status": "COMPLETED",
+    "archived_current_intermediate_weights": 12,
+    "current_weight_payload_allocated_bytes_saved": 6488535040,
+    "historical": "/data/milai-experiments/20261112-reader-utility/phase25-historical-intermediate-weight-deltas-v1/manifest.json",
+    "historical_pid": 107977,
+    "historical_session": 90717,
+    "planned_historical_weights": 59,
+    "status": "HISTORICAL_FINITE_ARCHIVE_RUNNING",
+    "restore": "python3 <appropriate-archive-directory>/restore.py <run-directory-name> <update-directory-name>",
+    "scope": "Each rawintermediateweight removedonlyafter completebyteverification anddurable sidecar. Allfixedterminalweights remainraw andanchored byretainedhardlinks. Keepbases/deltas/sidecars/frozenhelper. Noquantization/SHA; restorebeforefutureintermediateaccess."
   }
 }
