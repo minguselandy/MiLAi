@@ -53,7 +53,8 @@
     "explicit_TEST_evaluation_roles": "8e343290",
     "reserved_TEST_exporter": "8e7ffb87",
     "eligible_context_review_diagnostic": "df30c61c",
-    "fixed_source_second_readout_preparation": "6d1ef075"
+    "fixed_source_second_readout_preparation": "6d1ef075",
+    "fixed_source_repeat_stability_summary": "e5508afd"
   },
   "formal_U": {
     "protocol": "/data/milai-experiments/20261112-reader-utility/formal-main3k-uq-protocol-v1.json",
@@ -663,7 +664,19 @@
       "phases": 96,
       "scope": "Already-paid study-prefixed bookkeeping only; genericruntime/active/future/unpaid scopes excluded. Not wholeprojectuniqueCPU orwalltotal.14fitentries matched, noledgerwrite."
     },
-    "common_s1_runtime_deltas": "/data/milai-experiments/20261112-reader-utility/natural-common_s1-model-trace-audit-v1/runtime-ledger-deltas-v1.json"
+    "common_s1_runtime_deltas": "/data/milai-experiments/20261112-reader-utility/natural-common_s1-model-trace-audit-v1/runtime-ledger-deltas-v1.json",
+    "reconciled216": {
+      "artifact": "/data/milai-experiments/20261112-reader-utility/reconciled-prior-closed-cost-scopes-v4/summary.json",
+      "scopes": 216,
+      "cpu_seconds": 53309.533990515,
+      "sum_recorded_scope_wall_seconds": 44320.26397436019,
+      "ledger_written": false,
+      "settlement_owner": "/data/milai-experiments/20261112-reader-utility/closed216-compute-settlement-owner-v1.json",
+      "settlement_pid": 3838848,
+      "status": "WAITING_FOR_CONFIRMATION_HTTP_AND_STABILITY_CLOSURE",
+      "scope": "Three priorinventories only. Currentreceipts andcoveredpaths revalidated; knownphase01/02paid overlaps excluded. Laterwork andunmeasuredscopes separate. Wall sum includesoneexplicitwait, notelapsedstudytime."
+    },
+    "orchestration_counter_observation": "/data/milai-experiments/20261112-reader-utility/goal-orchestration-counter-observation-v1.json"
   },
   "required_remaining": {
     "A": "Original prototype12tests and both I2 native/source checks closed. Preserve K/horizon/long-input diagnostics and failures; synthesize their limits with main task results.",
@@ -671,17 +684,16 @@
     "B_E0_E1": "E1U/Q fixed/selected reference points,actual576firsts,officialF1,fullTeacher andauthor72sourcecheck closed. Summarizecosts/mechanism withnoadvantage/equivalenceclaim; laterfinalsynthesis stillneeded.",
     "C_E2": "E1/E2/own seed0fits/task/source/author closure complete. No decisiveprimarysupportedgain established; no additional seedfits launched andno stabilityclaim. PreserveF1/source divergence andrater-context sensitivity; reassess any claim ofseedrobustness onlywithfixedrecipe evidence, neverconfirmationretuning.",
     "D_E4": "Fourmethods/strongfixedprimary/hostbudgets/fixed32repeat+32author frozen.256TESTsources exported and1024trajectories closed. Executequeued1024firsts,128secondreadouts/source/native/stability andauthor128; no retune orsampleextension.",
-    "applications": "Original400sourcegrade andauthor80/allwork closed with majorinstrumentlimitations. Onefrozeneligible-context diagnostic running; reportbothversions andauthor80 comparison withoutper-casebestgrade orprimaryreplacement.",
+    "applications": "All400firsts, originalsourcegrade, eligiblecontext diagnostic andauthor80 CLOSED. Neitherautomaticversion recovers anyvalidatedsupportedlabels, including5authorpositives. Reportinstrumentlimitations; no thirdrevision orprimaryreplacement.",
     "synthesis": "Five result layers, clustered paired uncertainty, full measured cost/unknown scopes, mechanism and counterexamples; conditional minimal Product recommendation only."
   },
   "next_actions": [
-    "Monitoreligible-contextdiagnostic2829033/child3554056. ConfirmationHTTP3538727 waitsitsclosure; TESTcollections3450626areCOMPLETED, notrestartmissingPID. No researchtrainingfit active.",
-    "Afterdiagnostic closes,confirmationHTTP executesfrozen4x256firsts/source/native and4x32secondReadercalls. Prepareauthor128 onlyonpreselectedsources, retainfirstfailures andexactpacketbindings.",
-    "Completefirst-vs-second stability report on the same32sources/method, separatingHostoutputvariation andsource-rater effects. No best-of-two or controllerresampling.",
-    "Finish allmeasuredstagecosts with overlap/unknownscope, sourceprimary/nativeauxiliary andreviewer sensitivity synthesis; no unstableprimarygain orseedrobustness claim without evidence.",
-    "KeepgoalACTIVE_INCOMPLETE untilconfirmationfirsts/repeats/author128/measurementdiagnostic/finalreport complete."
+    "MonitorconfirmationHTTP3538727 andpreserveallfirsts. No competingHTTP/restarts/retuning.",
+    "Onceeachmethodbound closes, reviewits32frozenauthor sources using show_confirmation_author_panel_v1.py andappend_confirmation_author_review_v1.py; planned128.",
+    "Queueautomatically completesallfirsts/source/native andfixedsecond128/source/native; stability3763322 then216scope settlement3838848.",
+    "Close remainingmeasuredcost/overlap inventory andunknowncostdisclosure; fullfive-layer synthesis andcompletionaudit stillrequired."
   ],
-  "phase": 34,
+  "phase": 35,
   "signal_diagnostic": {
     "canonical110": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-vs-semantic110-diagnostic-v1.json",
     "author_spots": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-semantic-disagreement-spots-v1.json",
@@ -888,9 +900,17 @@
       "prepared": "/data/milai-experiments/20261112-reader-utility/natural-eligible-context-review-inputs-v2/manifest.json",
       "owner": "/data/milai-experiments/20261112-reader-utility/natural-eligible-context-review-owner-v2.json",
       "pid": 2829033,
-      "status": "RUNNING",
+      "status": "COMPLETED_FIXED_MEASUREMENT_DIAGNOSTIC_NO_PRIMARY_REPLACEMENT",
       "primary_replacement": false,
-      "scope": "Onecomplete400 diagnostic after originalgrades.357completedpayloads preserve allquote-eligible top-leveluser/toolcontents andallselectedsources;43failedfirsts retained.178oldbaseline defaultrequestwires byte-identical. Allauthor80alreadyknown, notheldout/independent. No per-casebestgrade or thirdrevision."
+      "scope": "Onecomplete400 diagnostic after originalgrades.357completedpayloads preserve allquote-eligible top-leveluser/toolcontents andallselectedsources;43failedfirsts retained.178oldbaseline defaultrequestwires byte-identical. Allauthor80alreadyknown, notheldout/independent. No per-casebestgrade or thirdrevision.",
+      "closure": "/data/milai-experiments/20261112-reader-utility/natural-eligible-context-diagnostic-closure-v2.json",
+      "unresolved": 11,
+      "masked": 214,
+      "validated_supported": 0,
+      "category_changes": 114,
+      "author_supported_still_unknown": 5,
+      "known_generation_tokens": 7181796,
+      "third_revision": false
     },
     "source_review_original_v1": {
       "status": "COMPLETED_ALL400_WITH_UNRESOLVED",
@@ -1784,14 +1804,24 @@
     "collection_status": "COMPLETED_FROZEN_TEST_TRAJECTORIES_NO_HOST_FIRSTS",
     "HTTP_owner": "/data/milai-experiments/20261112-reader-utility/new-confirmation256-HTTP-owner-v1.json",
     "HTTP_pid": 3538727,
-    "HTTP_status": "WAITING_FOR_ELIGIBLE_NATURAL_DIAGNOSTIC_CLOSURE",
+    "HTTP_status": "RUNNING",
     "repeat_sources": 32,
     "repeat_positions": 128,
     "author_sources": 32,
     "author_bindings": 128,
     "repeat_tool": "tools/prepare_fixed_source_repeat.py",
     "repeat_tool_commit": "6d1ef075",
-    "scope": "Actualfullmenus andsingleterminalpacket per256source/method. Firsts andfixedsecondReadercalls separate; fullwireunchanged,no controllerrepeat,no --reuse-readouts. Source/cost/author/stabilityclosure stillrequired."
+    "scope": "Actualfullmenus andsingleterminalpacket per256source/method. Firsts andfixedsecondReadercalls separate; fullwireunchanged,no controllerrepeat,no --reuse-readouts. Source/cost/author/stabilityclosure stillrequired.",
+    "HTTP_stage_at_snapshot": "new-confirmation256-fixed_context-firsts-v1",
+    "fixed_firsts_closed_at_snapshot": 87,
+    "fixed_firsts_failed_at_snapshot": 0,
+    "stability_tool": "tools/summarize_fixed_source_repeats.py",
+    "stability_tool_commit": "e5508afd",
+    "stability_owner": "/data/milai-experiments/20261112-reader-utility/new-confirmation-stability-owner-v1.json",
+    "stability_pid": 3763322,
+    "stability_status": "WAITING_FOR_CONFIRMATION_FIRST_AND_SECOND_READOUTS",
+    "author_protocol": "/data/milai-experiments/20261112-reader-utility/new-confirmation-author32-protocol-v1.json",
+    "author_closed_at_snapshot": 0
   },
   "phase34_validation": {
     "fixed_repeat_related_tests_passed": 28,
@@ -1810,5 +1840,14 @@
     "ownstate_PNG_visually_checked": true,
     "no_sha_validation": true
   },
-  "evidence_layer_inventory": "/data/milai-experiments/20261112-reader-utility/closed-DEV-evidence-layer-inventory-v1/summary.json"
+  "evidence_layer_inventory": "/data/milai-experiments/20261112-reader-utility/closed-DEV-evidence-layer-inventory-v1/summary.json",
+  "phase35_validation": {
+    "repeat_stability_related_tests_passed": 9,
+    "ruff_pass": true,
+    "diff_check_pass": true,
+    "natural_diagnostic400_closed": true,
+    "prior216_scopes_revalidated": true,
+    "TEST_native_question_ids_unique": 256,
+    "no_sha_validation": true
+  }
 }

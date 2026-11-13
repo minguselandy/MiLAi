@@ -110,7 +110,9 @@ Q1有708次本地模型结果，全部与完整菜单及实际选择相符；5,1
 
 原版400位置来源评审已经关闭，四方法均没有supported标签通过全部校验；S1有68 unknown、11 incorrect、11 incomplete，Q1为67、16、6，另各10／11执行失败。原版Q1−S1已验证标签差为0，退化bootstrap[0,0]不能支持等效结论；三依赖组未知识别范围[−68.61,+66.94]个百分点。作者80中已确认的受支持例子说明“零个通过校验标签”不等于“真实成功为零”。[原版全400结果](/data/milai-experiments/20261112-reader-utility/natural-all-four-source-outcome-summary-v1/summary.json)
 
-另冻结的一次全400位置评审输入诊断已开始：只移除原引用规则不允许作为依据的顶层system/assistant消息，完整保留所有user/tool内容、原来源和候选回答，并明确标记候选回答字段。357个完成上下文逐项验证不丢失任何原可引用内容，178个既有基线默认评审请求也逐字复现。新版每位置只尝试一次、单独报告，不按位置择优、不替换主标签；设计时作者80已知，不能称独立或留出验证。原版全部关闭后才启动此轮，不与其他HTTP阶段竞争。[诊断协议](/data/milai-experiments/20261112-reader-utility/natural-eligible-context-review-protocol-v2.json)
+另冻结的一次全400位置评审输入诊断已完成：只移除原引用规则不允许作为依据的顶层system/assistant消息，完整保留所有user/tool内容、原来源和候选回答，并明确标记候选回答字段。357个完成上下文逐项验证不丢失任何原可引用内容，178个既有基线默认评审请求也逐字复现。新版每位置只尝试一次、单独报告，不按位置择优、不替换主标签；设计时作者80已知，不能称独立或留出验证。[诊断协议](/data/milai-experiments/20261112-reader-utility/natural-eligible-context-review-protocol-v2.json)
+
+该诊断仍未恢复可用的正判断：357个完成回答中11个评审未决、214个被校验屏蔽，四方法依然没有supported标签通过校验；作者的5个支持例子在两个版本中均为unknown。114个分类发生变化，但不能视作准确率提高。投影版Q1−S1仍为0，未知识别范围[−54.44,+63.61]个百分点；退化bootstrap[0,0]仍不能证明等效。本轮使用7,181,796已知/扣额tokens、CPU47.585秒、wall4,860.799秒，已原生记账。按事前约束不启动第三轮；自然线的自动质量度量存在严重限制，控制/成本证据和作者样本分开报告。[诊断闭合与局限](/data/milai-experiments/20261112-reader-utility/natural-eligible-context-diagnostic-closure-v2.json)
 
 证据：[冻结应用协议](/data/milai-experiments/20261112-reader-utility/natural-realtalk-application-plan-v2/protocol.json)、[基线来源评审闭合及局限](/data/milai-experiments/20261112-reader-utility/natural-baseline-source-review-closure-v1.json)、[人工40绑定](/data/milai-experiments/20261112-reader-utility/natural-author-source-review-v1/baseline40.json)、[实际View工作量](/data/milai-experiments/20261112-reader-utility/natural-baseline-view-work-v1/summary.json)。
 
@@ -124,10 +126,12 @@ Q1有708次本地模型结果，全部与完整菜单及实际选择相符；5,1
 
 已另保存96个`milai_reader_utility_`已付费阶段的逐项清单，并再次核对其中14个拟合阶段。这一前缀不涵盖全部通用运行时、当前/未来Host阶段及未结算CPU工作，因此清单中的账面合计不是完整、去重后的项目总成本。[已记账阶段快照](/data/milai-experiments/20261112-reader-utility/paid-study-phase-inventory-v1/summary.json)
 
+三个既有待结算清单中的216个关闭范围已重新核对到原始回执，合计CPU53,309.534秒。父子分开计量、单阶段对象和早期按目录名记录的已付范围已按实际格式处理；未发现这些范围彼此、已核对的phase01/02已付范围或其覆盖子计时的重复；原生自记账排除仍依既有清单和owner标记。其记录wall之和44,320.264秒包含一个明确等待范围，不是项目经过时间。结算器等待确认HTTP和稳定性汇总关闭后才按单一阶段记录，并读回核对、防止重复记录。后续工作及未知成本仍另列。[216范围核对](/data/milai-experiments/20261112-reader-utility/reconciled-prior-closed-cost-scopes-v4/summary.json)
+
 预留256个新原生TEST来源身份，与已知TRAIN/DEV分配及已扫描项目元数据无交集；不声称隔离公开预训练。32来源第二次Host读出和32来源人工样本均已按身份事前固定，所有方法使用同一抽样位置，首答不被第二次替换。
 
 在查看确认任务结果之前，已冻结四方法：强固定上下文、原规则、共同S1、原定10k＋Q固定终点。候选是待检验的主路线，未称为DEV赢家；E4唯一主比较固定为10k＋Q减强固定上下文，S1和规则作为次比较，早期E1/E2/自身状态主比较不变。主要指标仍为完整受支持首次答案，原生F1为辅助。当前DEV未确立决定性主要质量增益，因此未追加seed1/2拟合，也不作训练seed稳定性声明；任何后续固定配方复现均不能改变确认候选、N、预算、提示或首结果。方案保留温度1、8,192输出上限、65,536上下文、2,048材料tokens、8控制步、空初始K及真实全菜单。[冻结确认协议](/data/milai-experiments/20261112-reader-utility/new-confirmation-protocol-v1.json)
 
-真实TEST随后已按冻结顺序导出，每来源取原生首题，答案/标注留在离线controls；没有训练样本导出。四方法各256条实际轨迹均已关闭，实际状态数固定1,546、规则1,504、S1 1,065、10k候选1,366；预算强制终止分别5、0、2、14。此时尚无确认集Reader结果，不能根据这些轨迹统计改选模型。Reader队列将在自然评审诊断关闭后执行1,024个首次及预定128个第二次读出，所有失败和第二次结果分开保留。[确认轨迹闭合](/data/milai-experiments/20261112-reader-utility/new-confirmation256-collection-closure-v1.json)
+真实TEST随后已按冻结顺序导出，每来源取原生首题，答案/标注留在离线controls；没有训练样本导出。四方法各256条实际轨迹均已关闭，实际状态数固定1,546、规则1,504、S1 1,065、10k候选1,366；预算强制终止分别5、0、2、14。轨迹统计没有用于改选模型。自然评审诊断关闭后，确认Reader已按原队列开始固定上下文方法首次，随后继续其余方法及预定128个第二次读出；所有失败和第二次结果分开保留。[确认轨迹闭合](/data/milai-experiments/20261112-reader-utility/new-confirmation256-collection-closure-v1.json)
 
-最终报告还需关闭自然评审诊断，执行冻结的新来源首次、重复子集及作者128绑定，并完成五层统计、完整已测成本和未测范围；训练seed不确定性仍须明确处理。代码运行成功或负结果完整留存都不自动意味着方法有增益；没有产品默认、权限、Canonical或服务配置迁移。
+最终报告还需完成冻结的新来源首次、重复子集及作者128绑定，并完成五层统计、完整已测成本和未测范围；训练seed不确定性仍须明确处理。稳定性汇总入口已通过9项相关测试：核对实际两次请求/动作与原生任务一致，按同32来源分别汇总首答和第二次结果，保留失败，不best-of-two、不把来源数翻倍。实际稳定性结果仍等待调用完成。代码运行成功或负结果完整留存都不自动意味着方法有增益；没有产品默认、权限、Canonical或服务配置迁移。

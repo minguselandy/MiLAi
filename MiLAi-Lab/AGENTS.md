@@ -1,3 +1,33 @@
+# CURRENT phase35: natural diagnostic CLOSED; confirmation firsts RUNNING
+
+Goal ACTIVE/incomplete. KEEP ANALYSIS VERY SHORT. Localdate2026-11-14.
+R=/data/milai-experiments/20261112-reader-utility. No SHA/content fingerprints/subagents/
+Product/default changes/service restarts/push. All previous closedresults andfrozenprotocols retained.
+Naturaleligible diagnostic CLOSED400:357responses/43failedfirsts;11unresolved214masked0validatedsupported.
+114categories changed; all5authorpositive cases stillunknown. No thirdrevision/primaryreplacement.
+Closure natural-eligible-context-diagnostic-closure-v2.json; native7181796tokens CPU47.5845/wall4860.799paid.
+ConfirmationHTTP3538727 RUNNING fixed_contextfirsts; last snapshot87/256closed,0failed,child3853160.
+All1024controllertrajectories alreadyCLOSED; no modelselection orretune fromTEST.
+Frozen methods/order fixed_context,expanded10k_final,rules,common_s1; primaryexpanded-minus-fixed.
+Queueautomatically runs1024firsts/source/native then128fixed32secondreadouts/source/native.
+Newrepeatstability codee5508afd tools/summarize_fixed_source_repeats.py,9relatedtests/RuffPASS.
+Checksidenticalrequest/action/event/nativequestion, preservesfailedfirsts; no best-of-two/Ndoubling.
+Waiter3763322 new-confirmation-stability-owner-v1.json runsafterHTTPterminal; sourcegrade transitions
+includejudgecontext/sampling, notpureHostvariance. Full256primary staysseparatefrom32repeatpanel.
+Author128PENDING; protocol new-confirmation-author32-protocol-v1.json. Helpers
+show_confirmation_author_panel_v1.py POS... (PANEL_METHODS env), append_confirmation_author_review_v1.py
+JSONstdin. Joinsnativefamily/questionID; aliases=(methodIndex+position//8)%4. Onlyclosedboundinputs,
+literalquotechecks; nonblind/nonindependent. Nativeannotations excludedfromdisplay. Do notredoDEVauthor.
+Prior216unpaidclosedscopes revalidated exactreceipts andoverlap:CPU53309.533990515,
+recordedwallsum44320.26397436019 includesonewait, notelapsedstudytime. Artifact
+reconciled-prior-closed-cost-scopes-v4/summary.json. v1-v3failedattempts preserved, unknownCPU notzero.
+Settlementwaiter3838848 closed216-compute-settlement-owner-v1.json waitsHTTPANDstabilityclosure,
+thenexistingledgerlease/readback/idempotence. NOTYETPAID. Latercost/storage/root/server separate.
+Goalcounterobservation snapshot tokens7723719/time128751seconds opaqueorchestration, notHost/CPU/GPU.
+Remainingconfirmationfirsts/source/native/repeatstability/author128, latermeasuredcost/overlap and
+unknownscope disclosures, finalreport/audit. No seedstabilityclaim, no addedseeds/TESTretuning.
+Do NOTmarkgoalcomplete. Allolderphaseblocks belowhistorical, supersededbythisblock/currentowners.
+
 # CURRENT phase34: own/main DEV CLOSED; confirmation256 frozen and trajectories CLOSED
 
 Goal ACTIVE/incomplete. KEEP ANALYSIS VERY SHORT. Localdate2026-11-14. R=/data/milai-experiments/20261112-reader-utility.
