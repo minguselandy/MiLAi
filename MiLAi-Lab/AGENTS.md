@@ -1,3 +1,48 @@
+# CURRENT phase34: own/main DEV CLOSED; confirmation256 frozen and trajectories CLOSED
+
+Goal ACTIVE/incomplete. KEEP ANALYSIS VERY SHORT. Localdate2026-11-14. R=/data/milai-experiments/20261112-reader-utility.
+No SHA/content fingerprints/subagents/Product/default changes/service restarts/push.
+AllE1/E2/ownseed0fits/DEV firsts/source/author audits CLOSED. Ownold/ownsourcecomplete36/33 of96,
+own-old=-.03125 CI[-.135417,.072917],unknownbounds[-.333333,.1875]; nativeF1.283560/.241373,
+difference-.042187 CI[-.096218,.010384]. Noownstategain established. Authorown24 CLOSED5/12each,
+4/24binarydisagreements. formal-E2-ownstate-author12-source-review-v1.json nowALL60CLOSED.
+Do NOTre-reviewE2/own asnewbindings. OriginalQ1author12 reusedunchanged.
+SameQ1Readerfirst96 rejudgedintheownbatch has37complete versusE1's32; no answer/modelchanged.
+formal-Q1-rejudgment-context-sensitivity-v1.json keepsboth; differentgroups/othercandidates/draws,
+notidenticaljudgeinputs orpuresamplingnoise. Do notrankmodels bycross-batch counts asfixedtruth.
+Ownfigureformal-ownstate-task-results-figure-v1 PNG/PDF/CSVcreated/PNGviewed.
+Evidence-layer aggregate closed-DEV-evidence-layer-inventory-v1; sufficiency isnot tasksuccess.
+Naturaloriginalv1 ALL400sourcegrades CLOSED, validatedsupported0forall, Q1-S1observed0/bootstrap[0,0]
+NOTequivalence. Unknown3groupidentification[-.686111,.669444]. Author80unchangedshows5supported.
+CURRENTeligible-contextdiagnostic owner2829033/child3554056 RUNNING, onefixedall400round,
+357actualresponses43failedfirsts, no originalgrade replacement or thirdrevision. HTTPexclusive.
+CONFIRMATION FULLPROTOCOL FROZEN new-confirmation-protocol-v1.json BEFORE realTESTexport:
+methods orderedfixed_context,expanded10k_final,rules,common_s1; E4PRIMARYexpanded-minus-strongfixed.
+Candidate isprespecifiedfocal10k+Qfixed63 seed0, NOTaDEVwinner. PriorE1/E2/ownprimariesunchanged.
+No additionalseeds launchedonDEV because no decisiveprimarysourcegain; noseedstabilityclaim.
+Any laterfixedrecipe replication cannotchangecandidate,N,prompt/budget/firsts orselectbestseed.
+256originalreservedTEST IDs,firstnativequestion each,32repeat+32author frozenidentitysamples retained.
+Newexporter8e7ffb87 used; new-confirmation256-input-v1 CLOSED256, testroles/annotationsoffline,
+no fitexports. Officialtest evaluator bytes equal existingv0.3 evaluator, noSHA.
+All4x256actualtrajectories CLOSED under owner3450626 (terminal; absentPID isNORMAL):
+fixed1546states/5forced;rules1504/0;S11065/2;expanded1366/14. BothNNfullmenus/executednonforced
+choicesverified:1065+1366 calls,6347447+8465349inputtokens,0truncations. NoReaderoutcomesyet.
+new-confirmation256-collection-closure-v1.json, new-confirmation256-controller-trace-check-v1.json.
+CURRENTconfirmationHTTPwaiter3538727 at new-confirmation256-HTTP-owner-v1.json waitsdiagnosticv2
+COMPLETED_FIXED_MEASUREMENT_DIAGNOSTIC_NO_PRIMARY_REPLACEMENT. Then1024firsts/source/native,
+128plannedsecondReadercalls/source/native. Do NOTstartcompetingHTTP orchangefrozenmethods.
+Script run_confirmation256_HTTP_v1.py; collectionplans new-confirmation256-<method>-plan-v1.json.
+Newcode6d1ef075 tools/prepare_fixed_source_repeat.py: closedfirstmatrix + frozensampling, exactwire/
+action/event, remapsONLYcase.state_index; originalstates/requests unchanged, failedfirsts included.
+No --reuse-readouts on secondcalls.28relatedtests/RuffPASS; actualDEV32inputcopy check retained2
+failedfirsts andissued0calls (engineeringonly, NOTthe requiredTESTrepeat).
+RulesDEVcompatibility probe onalreadyexposedoldfailedsource completed6actions,0model/Hostcalls;
+actualHANDOFFselect16_12 succeeded. branch-families1 isabsolute,so0branchpacketsrecorded; it only
+checksroute, NOTpacket-preparation/testoutcomes. Realconfirmationusesbranch-families256offset0.
+Remainingconfirmation1024firsts,128secondreadouts/stability,author128(32sourcesx4), diagnosticclosure,
+fullcost/overlap/unknownscopes andfinalreport. Allcurrentmodels/checkpoints frozen, no retuning.
+Do NOTmarkgoalcomplete; donotclaimsource/nativeF1agreement orindependentreview/seedrobustness.
+
 # CURRENT phase33: natural400/author80 CLOSED; E2 main CLOSED; ownHTTP RUNNING
 
 Goal ACTIVE/incomplete. KEEP ANALYSIS VERY SHORT. Localdate2026-11-14. R=/data/milai-experiments/20261112-reader-utility.

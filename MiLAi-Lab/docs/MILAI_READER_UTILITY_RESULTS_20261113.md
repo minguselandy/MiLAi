@@ -74,9 +74,15 @@ E2三臂均从共同S1重新开始，使用新冻结的共同replay：3,356×3�
 
 ![E2首次任务结果与不确定性](/data/milai-experiments/20261112-reader-utility/formal-E2-task-results-figure-v1/E2-task-results.png)
 
-自身状态比较每臂657个匹配主状态、4,056 replay，从同一Q1固定终点继续83更新，再同Q63。它复用原TRAIN来源，不能称新来源泛化；匹配与replay重叠排除改变了可比较条件，须保留覆盖范围。两臂全部拟合与各96来源DEV均已关闭，均提名Q63；新状态U实际输入16,254,459 tokens。两臂任务首答正在执行，尚未完成。主要比较为新状态减匹配旧状态，原Q1首次只作另外的次比较。
+自身状态比较每臂657个匹配主状态、4,056 replay，从同一Q1固定终点继续83更新，再同Q63。它复用原TRAIN来源，不能称新来源泛化；匹配与replay重叠排除改变了可比较条件，须保留覆盖范围。两臂拟合、96来源DEV、首次Reader与来源评审均已关闭，均提名Q63；新状态U实际输入16,254,459 tokens。
 
-在E2及自身状态首答之前，已固定沿用E1的12个来源位置，对三个E2终点及两个自身状态终点共60个新绑定作作者复核；原Q1的12作者绑定只复用一次。E2的36绑定现已完成，完整受支持计数为4／5／5；与自动评审有6/36个完整支持二分类分歧。它们包含引用屏蔽和语义解释差异，作者不是独立真值。自身状态24绑定仍待完成。作者已看过这些DEV来源，非独立且未盲化，结果作为补充核对。[作者样本协议](/data/milai-experiments/20261112-reader-utility/formal-E2-ownstate-author12-protocol-v1.json)、[E2作者对照](/data/milai-experiments/20261112-reader-utility/formal-E2-author-teacher-agreement-v1.json)
+旧状态／自身状态续训分别得到36/96和33/96个完整受支持答案，差−3.125个百分点，95%来源区间[−13.54,+7.29]，未知识别范围[−33.33,+18.75]个百分点。Reader失败1／3，未决29／21；原生F1为0.283560／0.241373，差−0.042187，区间[−0.096218,+0.010384]。尚未建立自身状态续训优势。预定作者24绑定也已完成，两臂各5/12完整受支持，与自动二分类有4/24项不同，不以作者替换主标签。[自身状态主比较](/data/milai-experiments/20261112-reader-utility/formal-ownstate-task-dev96-primary-summary-v1/summary.json)、[作者对照](/data/milai-experiments/20261112-reader-utility/formal-ownstate-author-teacher-agreement-v1.json)
+
+原Q1的96条首次答案未重跑，但在自身状态评审分组中重新判断后，完整支持计数从E1的32变成37。新旧分组、同组候选和评审采样不同，不能将这种变化归为模型进步或纯采样噪声，也不能跨评审批次按计数宣布赢家。原E1标签完整保留。[同一首次的重评敏感性](/data/milai-experiments/20261112-reader-utility/formal-Q1-rejudgment-context-sensitivity-v1.json)
+
+![自身状态对照实际任务结果](/data/milai-experiments/20261112-reader-utility/formal-ownstate-task-results-figure-v1/ownstate-task-results.png)
+
+在E2及自身状态首答之前，已固定沿用E1的12个来源位置，对三个E2终点及两个自身状态终点共60个新绑定作作者复核；现已全部完成，原Q1的12作者绑定只复用一次。E2完整受支持计数为4／5／5，与自动评审有6/36个完整支持二分类分歧。它们包含引用屏蔽和语义解释差异，作者不是独立真值。作者已看过这些DEV来源，非独立且未盲化，结果作为补充核对。[作者样本协议](/data/milai-experiments/20261112-reader-utility/formal-E2-ownstate-author12-protocol-v1.json)、[E2作者对照](/data/milai-experiments/20261112-reader-utility/formal-E2-author-teacher-agreement-v1.json)
 
 ## 自然应用与View
 
@@ -102,7 +108,9 @@ Q1的预定20个作者绑定也已关闭：1 supported、8 incomplete、3 incorr
 
 Q1有708次本地模型结果，全部与完整菜单及实际选择相符；5,193,340输入tokens、0原生输入截断。697个菜单提供REFRESH_VIEW，仍无View选择。其513次READ多于S1的391次，预算耗尽终止43次对14次；8次执行了参数化HANDOFF，但没有同一已读池的配对干预可将它们解释为质量收益。Q1运行时模型CPU843.051秒/wall483.538秒，加载CPU7.245秒/wall5.980秒；generation tokens为1,920,902，unknown usage增量0。完整400位置来源评审尚待关闭。[Q1闭合记录](/data/milai-experiments/20261112-reader-utility/natural-q1-closure-v1.json)、[实际终止原因](/data/milai-experiments/20261112-reader-utility/natural-all-four-control-terminations-v1/summary.json)
 
-另冻结了一次全400位置的评审输入诊断：只移除原引用规则不允许作为依据的顶层system/assistant消息，完整保留所有user/tool内容、原来源和候选回答，并明确标记候选回答字段。357个完成上下文逐项验证不丢失任何原可引用内容，178个既有基线默认评审请求也逐字复现。原版仍按原输入执行并保留，新版每位置只尝试一次、单独报告，不按位置择优、不替换主标签；设计时作者80已知，不能称独立或留出验证。该诊断等待原评审关闭后才调用模型。[诊断协议](/data/milai-experiments/20261112-reader-utility/natural-eligible-context-review-protocol-v2.json)
+原版400位置来源评审已经关闭，四方法均没有supported标签通过全部校验；S1有68 unknown、11 incorrect、11 incomplete，Q1为67、16、6，另各10／11执行失败。原版Q1−S1已验证标签差为0，退化bootstrap[0,0]不能支持等效结论；三依赖组未知识别范围[−68.61,+66.94]个百分点。作者80中已确认的受支持例子说明“零个通过校验标签”不等于“真实成功为零”。[原版全400结果](/data/milai-experiments/20261112-reader-utility/natural-all-four-source-outcome-summary-v1/summary.json)
+
+另冻结的一次全400位置评审输入诊断已开始：只移除原引用规则不允许作为依据的顶层system/assistant消息，完整保留所有user/tool内容、原来源和候选回答，并明确标记候选回答字段。357个完成上下文逐项验证不丢失任何原可引用内容，178个既有基线默认评审请求也逐字复现。新版每位置只尝试一次、单独报告，不按位置择优、不替换主标签；设计时作者80已知，不能称独立或留出验证。原版全部关闭后才启动此轮，不与其他HTTP阶段竞争。[诊断协议](/data/milai-experiments/20261112-reader-utility/natural-eligible-context-review-protocol-v2.json)
 
 证据：[冻结应用协议](/data/milai-experiments/20261112-reader-utility/natural-realtalk-application-plan-v2/protocol.json)、[基线来源评审闭合及局限](/data/milai-experiments/20261112-reader-utility/natural-baseline-source-review-closure-v1.json)、[人工40绑定](/data/milai-experiments/20261112-reader-utility/natural-author-source-review-v1/baseline40.json)、[实际View工作量](/data/milai-experiments/20261112-reader-utility/natural-baseline-view-work-v1/summary.json)。
 
@@ -116,6 +124,10 @@ Q1有708次本地模型结果，全部与完整菜单及实际选择相符；5,1
 
 已另保存96个`milai_reader_utility_`已付费阶段的逐项清单，并再次核对其中14个拟合阶段。这一前缀不涵盖全部通用运行时、当前/未来Host阶段及未结算CPU工作，因此清单中的账面合计不是完整、去重后的项目总成本。[已记账阶段快照](/data/milai-experiments/20261112-reader-utility/paid-study-phase-inventory-v1/summary.json)
 
-预留256个新原生TEST来源身份，与已知TRAIN/DEV分配及已扫描项目元数据无交集；不声称隔离公开预训练。已仅按身份固定32来源第二次Host读出和32来源人工样本，所有最终方法使用同一抽样位置，首答不被第二次替换。最终方法、唯一主要比较、答案格式与预算尚待完整DEV结果后冻结，之后才导出Source。当前没有进行确认集模型调用。
+预留256个新原生TEST来源身份，与已知TRAIN/DEV分配及已扫描项目元数据无交集；不声称隔离公开预训练。32来源第二次Host读出和32来源人工样本均已按身份事前固定，所有方法使用同一抽样位置，首答不被第二次替换。
 
-最终报告还需关闭自身状态和自然应用的剩余来源评审，决定是否值得做主要比较seed1/2复现，执行冻结的新来源确认及重复子集，并完成五层统计、完整已测成本和未测范围。代码运行成功或负结果完整留存都不自动意味着方法有增益；没有产品默认、权限、Canonical或服务配置迁移。
+在查看确认任务结果之前，已冻结四方法：强固定上下文、原规则、共同S1、原定10k＋Q固定终点。候选是待检验的主路线，未称为DEV赢家；E4唯一主比较固定为10k＋Q减强固定上下文，S1和规则作为次比较，早期E1/E2/自身状态主比较不变。主要指标仍为完整受支持首次答案，原生F1为辅助。当前DEV未确立决定性主要质量增益，因此未追加seed1/2拟合，也不作训练seed稳定性声明；任何后续固定配方复现均不能改变确认候选、N、预算、提示或首结果。方案保留温度1、8,192输出上限、65,536上下文、2,048材料tokens、8控制步、空初始K及真实全菜单。[冻结确认协议](/data/milai-experiments/20261112-reader-utility/new-confirmation-protocol-v1.json)
+
+真实TEST随后已按冻结顺序导出，每来源取原生首题，答案/标注留在离线controls；没有训练样本导出。四方法各256条实际轨迹均已关闭，实际状态数固定1,546、规则1,504、S1 1,065、10k候选1,366；预算强制终止分别5、0、2、14。此时尚无确认集Reader结果，不能根据这些轨迹统计改选模型。Reader队列将在自然评审诊断关闭后执行1,024个首次及预定128个第二次读出，所有失败和第二次结果分开保留。[确认轨迹闭合](/data/milai-experiments/20261112-reader-utility/new-confirmation256-collection-closure-v1.json)
+
+最终报告还需关闭自然评审诊断，执行冻结的新来源首次、重复子集及作者128绑定，并完成五层统计、完整已测成本和未测范围；训练seed不确定性仍须明确处理。代码运行成功或负结果完整留存都不自动意味着方法有增益；没有产品默认、权限、Canonical或服务配置迁移。
