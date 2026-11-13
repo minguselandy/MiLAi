@@ -1,5 +1,9 @@
 # CURRENT phase41: ALL1024firsts/native +AUTHOR128 CLOSED; sourcegrade512 RUNNING
 
+REPORTCLEANUP:RESULTSreportE4nowonecurrentoverview with4methodfirst/native,controller andauthor tables
+generatedfromclosedartifacts. Removedstale"otherfirsts/authorpending"snapshotparagraphs; historicalexecutionlog
+retained. Naturalall400sourcegradestatus correctedtoclosed. StillINCOMPLETE; sourceprimary/repeats pending.
+
 Goal ACTIVE/incomplete. KEEP ANALYSIS VERY SHORT. R=/data/milai-experiments/20261112-reader-utility.
 No SHA/content fingerprints/subagents/Product/default/servicechanges/push. No TESTretuning/firstreplacement.
 ConfirmationHTTP3538727 nowfullsourcegrade child572646, planned512groups, latest48closed0unresolved.
