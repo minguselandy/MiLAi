@@ -1,3 +1,31 @@
+# CURRENT phase23: one own-state round active; firsts and storage ongoing
+
+R=/data/milai-experiments/20261112-reader-utility. Goal ACTIVE/incomplete.
+Latest progress includes all-six trajectory comparison:Q0/Q1 actual493/517states,5/7forced,
+85157/93565packet tokens, nativewholewitness10/9 with25unknown each; not semantic success.
+Author formalDEV12source panel partial24/72 bindings (fixed_context/common_s1 all12 complete).
+Artifact formal-task-dev12-author-source-review-v1.json; manually read full packets and answers.
+Displayaliases rotate but not independent/blind. append_author_task_review_v1.py binds exact
+readout/action and validates literalquotes; show_author_task_panel_v1.py prints selectedpositions.
+Still must review U0/U1/Q0/Q1 on positions0,8,...88 after their actualfirsts close.
+Qreference PNG/PDF/CSV at formal-Q-reference-curves-v1; viewed correct; nottaskclaim.
+GPU2 NOWOWNED ownstate-q1-shard0-first16-owner-v1 PID3944666/session8407, child3944671atlaunch.
+Protocol fixedQ1 endpoint on originalTRAIN shard0 first16families195nativequestions390cold/K.
+SameS1 prefix and originallexicalreceiptK/nativecontextmask; predeclared sourceorder, existing
+aggregateweakcounts exposed, no taskwinnerselection. Finitecollect -> steps0/1/2/4h2 -> input ->
+canonicalFP32cachedscore. No fitting orHTTPfirsts inthisqueue. Do notduplicate oruseGPU2untilreleased.
+Own-state fitting/equal-size matchedselection stillpending DEVassessment; E2threeU+Q notlaunched.
+UQclosed storage:6.3522377GiBfreed acrossv1partial+v2closed. v1overstrictmtimeassertion stopped
+AFTERfirstrecoverylogicalzeroextents deallocated; size/inodeunchanged, originalmtimeunrecorded.
+v2processedremaining3 preservingmtime. Frozenfinalweightaliases directbyteverified/hardlinked.
+HistoricalrecoveryarchiveACTIVE PID3932751/session59678, planned23closedv2recoveries.
+R/phase22-closed-historical-recovery-archives-v1/manifest.json. Each originalrecovery path removed
+ONLYafter existing case_blocks_v1 reconstructs and comparesallbytes. Inferenceweights/resultsstay.
+Restore before optimizerresume:python3 <archive-dir>/restore.py <original-run-directory-name>.
+Keepfrozenhelper+emptybase+archives+manifest. FirstS1/36krecoveryalreadyarchived; REVALIDATEprogress.
+Current monitor observe_jobs_v1.py nowincludes ownstate/archive andactualfirstcounts.
+Older phase22/21 sections below are historical where superseded. No SHA/subagents/restarts/push.
+
 # ACTIVE Reader utility v3: phase22 Q closed; actual task firsts ongoing (2026-11-13)
 
 Goal ACTIVE/incomplete. Latest code86ea0d16; phase22 updates progress/docs below. No subagents/SHA.

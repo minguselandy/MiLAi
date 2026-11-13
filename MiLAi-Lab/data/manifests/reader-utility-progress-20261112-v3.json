@@ -343,7 +343,8 @@
         "scope": "In-memory finalreferenceevaluationonfixed992states; notsaved-exportwholepolicyHostresults. Conditionalonfalliblenativewitnesslabels, nottasksuccess, purelossisolation orindependentconfirmation."
       },
       "interpretation": "Reference acceptance is not actual supported task success."
-    }
+    },
+    "reference_figure": "/data/milai-experiments/20261112-reader-utility/formal-Q-reference-curves-v1/summary.json"
   },
   "K_diagnostic": {
     "input": "/data/milai-experiments/20261112-reader-utility/known-evidence-train16-input-v1/run.json",
@@ -550,12 +551,12 @@
   },
   "next_actions": [
     "Finish existing six-method DEV readout/review owners; no competing HTTP or retries. Author-check preselected12 sources across all methods.",
-    "Assess weak signal against actual source/task outcomes before launching prepared E2threefreshU+sameQ; manage disk with recoverable closed-artifact storage.",
+    "Assess actual DEV and weak-signal mechanism before E2 fits. GPU2 reserved by one own-state collection/branch/score round; disk archives ongoing. Do not start a competing GPU2 job.",
     "Execute one own-state round and worthwhile decisive replication based on development evidence.",
     "Freeze new confirmation candidates, metrics, budgets and repeat subset before export/outcomes; execute natural/autonomous Host and continuous View applications.",
     "Synthesize five result layers, source-cluster paired uncertainty and deduplicated measured cost; goal remains incomplete."
   ],
-  "phase": 22,
+  "phase": 23,
   "signal_diagnostic": {
     "canonical110": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-vs-semantic110-diagnostic-v1.json",
     "author_spots": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-semantic-disagreement-spots-v1.json",
@@ -631,6 +632,18 @@
         },
         "source_macro_answer_f1_missing_zero": 0.24205157372822636
       }
+    },
+    "all_six_trajectory_comparison": "/data/milai-experiments/20261112-reader-utility/formal-task-dev96-all-six-trajectory-comparison-v1.json",
+    "author_source_review": {
+      "path": "/data/milai-experiments/20261112-reader-utility/formal-task-dev12-author-source-review-v1.json",
+      "planned_sources": 12,
+      "planned_bindings": 72,
+      "reviewed_at_snapshot": 24,
+      "closed_method_panels": [
+        "fixed_context",
+        "common_s1"
+      ],
+      "scope": "Preselected source positions; manual implementation-agent source review, method-hidden display but nonindependent and not fully blind. Remaining four methods await actual firsts."
     }
   },
   "I2_public": {
@@ -860,5 +873,44 @@
     "checkpoint_nominations_closed": true,
     "I2_all62_firsts_source_reviewed": true,
     "no_sha_validation": true
+  },
+  "own_state_round": {
+    "status": "COLLECTION_RUNNING_NO_FIT",
+    "protocol": "/data/milai-experiments/20261112-reader-utility/ownstate-q1-shard0-first16-protocol-v1.json",
+    "owner": "/data/milai-experiments/20261112-reader-utility/ownstate-q1-shard0-first16-owner-v1.json",
+    "pid": 3944666,
+    "session": 8407,
+    "child_pid_at_launch": 3944671,
+    "physical_gpu": 2,
+    "collector": "fixed primary Q1 endpoint",
+    "raw_families": 16,
+    "native_requests": 195,
+    "conditions_per_request": 2,
+    "old_comparator": "same source/request prefix collected by common S1",
+    "branch_steps": [
+      0,
+      1,
+      2,
+      4
+    ],
+    "horizon": 2,
+    "next_finite_stages": "four branch preparations, shared native controls, canonical FP32 alias-prefix Teacher score",
+    "no_fit_launched": true,
+    "scope": "TRAIN reuse, same original lexical K and native masks; not new confirmation or autonomous Host. Equal-size matching and fit decisions remain after DEV assessment."
+  },
+  "phase22_UQ_storage": {
+    "partial_first": "/data/milai-experiments/20261112-reader-utility/phase22-closed-UQ-storage-v1.json",
+    "remaining_closed": "/data/milai-experiments/20261112-reader-utility/phase22-closed-UQ-storage-v2.json",
+    "total_freed_bytes": 6820663296,
+    "scope": "Final checkpoint weight aliases directly byte-compared and hardlinked; closed recovery zero extents deallocated, logical contents retained. First fallocate changed mtime and triggered overstrict assertion after size/inode preserved. First original mtime was not saved; later operations explicitly preserve metadata. Failure retained; no repeated operation on first recovery."
+  },
+  "phase23_historical_recovery_archives": {
+    "manifest": "/data/milai-experiments/20261112-reader-utility/phase22-closed-historical-recovery-archives-v1/manifest.json",
+    "restore_entry": "/data/milai-experiments/20261112-reader-utility/phase22-closed-historical-recovery-archives-v1/restore.py",
+    "pid": 3932751,
+    "session": 59678,
+    "planned_recoveries": 23,
+    "status": "RUNNING",
+    "scope": "Closed v2 optimizer/FP32/RNG recovery directories archived losslessly after reconstructed-byte comparison. Inference models/firsts/source banks unchanged; restore original recovery before any future resume. Frozen helper/empty base retained; no SHA."
   }
 }
