@@ -1,7 +1,7 @@
 {
   "status": "ACTIVE_INCOMPLETE",
   "goal_turn_classification": "PROGRESS",
-  "previous_turn_classification": "progress",
+  "previous_turn_classification": "PROGRESS",
   "plan": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261112_2XA10040GB_v3.md",
   "artifact_root": "/data/milai-experiments/20261112-reader-utility",
   "prior_progress": "reader-utility-progress-20261112-v2.json",
@@ -38,7 +38,8 @@
     "trajectory_outcome_summary": "4ae97cd8",
     "continuous_host_outcome_summary": "f7740256",
     "native_Host_cost_stages": "fe29a56b",
-    "native_DEV_explicit_controls_eval_only": "86ea0d16"
+    "native_DEV_explicit_controls_eval_only": "86ea0d16",
+    "continuous_declared_answer_field": "107af748"
   },
   "formal_U": {
     "protocol": "/data/milai-experiments/20261112-reader-utility/formal-main3k-uq-protocol-v1.json",
@@ -550,13 +551,13 @@
     "synthesis": "Five result layers, clustered paired uncertainty, full measured cost/unknown scopes, mechanism and counterexamples; conditional minimal Product recommendation only."
   },
   "next_actions": [
-    "Finish existing six-method DEV readout/review owners; no competing HTTP or retries. Author-check preselected12 sources across all methods.",
-    "Assess actual DEV and weak-signal mechanism before E2 fits. GPU2 reserved by one own-state collection/branch/score round; disk archives ongoing. Do not start a competing GPU2 job.",
-    "Execute one own-state round and worthwhile decisive replication based on development evidence.",
-    "Freeze new confirmation candidates, metrics, budgets and repeat subset before export/outcomes; execute natural/autonomous Host and continuous View applications.",
-    "Synthesize five result layers, source-cluster paired uncertainty and deduplicated measured cost; goal remains incomplete."
+    "Complete existing Q0/Q1 DEV firsts and all-six groupedreview; authorcheck remainingQ0/Q1 atsame12sources. Firstfour closed.",
+    "Close ownstate fourbranch/input/FP32score queue; inspect meaningful active targets and pairedold-state overlap before matchedfit. No refit fromcollection alone.",
+    "Assess actualDEV andsignalmechanism before preparedE2threefreshU+sameQ. Check natural owner GPU3 reservation anddisk; no conflicting GPUjobs.",
+    "Natural4method100request application owner is livewaiting formalHTTPclosure/ownstateclosure/disk/GPU; finish400source reviews, plannedauthor80checks, Viewoperations andcost afterfirsts. No forcedretrieval.",
+    "Freeze finalnewconfirmation candidates/metrics/budgets/repeat subset beforeexport; then complete decisive justified replication, fullconfirmation and cost/statistical synthesis."
   ],
-  "phase": 23,
+  "phase": 24,
   "signal_diagnostic": {
     "canonical110": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-vs-semantic110-diagnostic-v1.json",
     "author_spots": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-semantic-disagreement-spots-v1.json",
@@ -581,7 +582,36 @@
     "native_source_bootstrap": "/data/milai-experiments/20261112-reader-utility/natural-realtalk-native-config-v1/manifest.json",
     "native_bootstrap_only_no_Host": true,
     "outcome_summary_tool": "tools/summarize_continuous_host_outcomes.py",
-    "outcome_summary_scope": "Offline only, not an application execution. Full declared denominator; separate method labels for same-policy checkpoints; source review bound to exact first answer; future/missing native evidence has no reference-overlap target; equal histories within participant groups, then equal groups. No automatic success inference from text overlap; no training export."
+    "outcome_summary_scope": "Offline only, not an application execution. Full declared denominator; separate method labels for same-policy checkpoints; source review bound to exact first answer; future/missing native evidence has no reference-overlap target; equal histories within participant groups, then equal groups. No automatic success inference from text overlap; no training export.",
+    "frozen_application_protocol": "/data/milai-experiments/20261112-reader-utility/natural-realtalk-application-plan-v1/protocol.json",
+    "finite_application_owner": {
+      "path": "/data/milai-experiments/20261112-reader-utility/natural-realtalk-application-owner-v1.json",
+      "pid": 4015399,
+      "session": 56657,
+      "status_at_snapshot": "WAITING_FOR_FORMAL_DEV_HTTP_CLOSURE",
+      "methods": [
+        "fixed_context",
+        "view_cache_incremental",
+        "common_s1",
+        "q1"
+      ],
+      "primary": [
+        "q1",
+        "common_s1"
+      ],
+      "planned_positions_each": 100,
+      "histories": 10,
+      "dependency_groups": 3,
+      "answer_format": "answer_separate_v1",
+      "GPU3_reservation": "Only when learned model stage actually running; check owner.gpu3_reserved before E2 GPU3 launch",
+      "waits": [
+        "formalDEVsixmethodHTTPownerCOMPLETED",
+        "ownstatecollection-and-scoreownerCOMPLETED",
+        "16GiBdisk",
+        "GPU3<=8192MiB forlearnedstages"
+      ],
+      "not_executed_yet": true
+    }
   },
   "phase04_validation": {
     "targeted_public_SQLite_tests": 2,
@@ -612,7 +642,7 @@
       "status_at_launch": "WAITING_FOR_PRE_Q_FIRSTS_AND_Q_COLLECTIONS"
     },
     "trajectory_status": "ALL_SIX_CLOSED",
-    "readout_status": "U0_CLOSED96_WITH8FAILED; U1_RUNNING; Q_CHAIN_FOLLOWS",
+    "readout_status": "PRE_Q_FOUR_CLOSED; Q0_FIRSTS_RUNNING",
     "closed_native_at_snapshot": {
       "fixed_context": {
         "states": 96,
@@ -640,6 +670,15 @@
           "FAILED": 8
         },
         "source_macro_answer_f1_missing_zero": 0.18513176516163823
+      },
+      "u1": {
+        "states": 96,
+        "sources": 96,
+        "status_counts": {
+          "COMPLETED": 92,
+          "FAILED": 4
+        },
+        "source_macro_answer_f1_missing_zero": 0.19989864285618741
       }
     },
     "all_six_trajectory_comparison": "/data/milai-experiments/20261112-reader-utility/formal-task-dev96-all-six-trajectory-comparison-v1.json",
@@ -647,11 +686,12 @@
       "path": "/data/milai-experiments/20261112-reader-utility/formal-task-dev12-author-source-review-v1.json",
       "planned_sources": 12,
       "planned_bindings": 72,
-      "reviewed_at_snapshot": 36,
+      "reviewed_at_snapshot": 48,
       "closed_method_panels": [
         "fixed_context",
         "common_s1",
-        "u0"
+        "u0",
+        "u1"
       ],
       "scope": "Preselected source positions; manual implementation-agent source review, method-hidden display but nonindependent and not fully blind. Remaining four methods await actual firsts."
     },
@@ -886,7 +926,7 @@
     "no_sha_validation": true
   },
   "own_state_round": {
-    "status": "COLLECTION_RUNNING_NO_FIT",
+    "status": "COLLECTION_CLOSED_BRANCH_PREPARATION_RUNNING",
     "protocol": "/data/milai-experiments/20261112-reader-utility/ownstate-q1-shard0-first16-protocol-v1.json",
     "owner": "/data/milai-experiments/20261112-reader-utility/ownstate-q1-shard0-first16-owner-v1.json",
     "pid": 3944666,
@@ -907,7 +947,27 @@
     "horizon": 2,
     "next_finite_stages": "four branch preparations, shared native controls, canonical FP32 alias-prefix Teacher score",
     "no_fit_launched": true,
-    "scope": "TRAIN reuse, same original lexical K and native masks; not new confirmation or autonomous Host. Equal-size matching and fit decisions remain after DEV assessment."
+    "scope": "TRAIN reuse, same original lexical K and native masks; not new confirmation or autonomous Host. Equal-size matching and fit decisions remain after DEV assessment.",
+    "collection_run": "/data/milai-experiments/20261112-reader-utility/ownstate-q1-shard0-first16-collection-v1/run.json",
+    "closed_collection_comparison": "/data/milai-experiments/20261112-reader-utility/ownstate-q1-vs-s1-closed-collection-comparison-v2.json",
+    "closed_conditions": 390,
+    "model_calls": 1709,
+    "actual_input_tokens": 10668681,
+    "Host_calls": 0,
+    "comparison_caution": "Same request/K/source visibility but runtime telemetry differs in model inputs. Exact full packet equality0 includes run-specific snapshot IDs; ordered literal Source texts equal139/390. No source/task superiority claim.",
+    "runtime_field_probe": {
+      "protocol": "/data/milai-experiments/20261112-reader-utility/ownstate-runtime-fields-probe-v1/protocol.json",
+      "summary": "/data/milai-experiments/20261112-reader-utility/ownstate-runtime-fields-probe-v1/summary.json",
+      "eligible_pairs": 32,
+      "new_inference_rows": 128,
+      "runtime_field_choice_changes_each_model": 0,
+      "checkpoint_choice_changes_on_old_and_new_inputs": 7,
+      "max_abs_logit_change": {
+        "s1": 0.8736692667007446,
+        "q1": 0.5548999309539795
+      },
+      "scope": "Fixed firstnativequestion/condition postsearch32TRAINpairs, rawactualruntimefields. No normalization/removal for inference, no training, no task conclusion. Not general invariance."
+    }
   },
   "phase22_UQ_storage": {
     "partial_first": "/data/milai-experiments/20261112-reader-utility/phase22-closed-UQ-storage-v1.json",
@@ -925,5 +985,12 @@
     "scope": "Closed v2 optimizer/FP32/RNG recovery directories archived losslessly after reconstructed-byte comparison. Inference models/firsts/source banks unchanged; restore original recovery before any future resume. Frozen helper/empty base retained; no SHA.",
     "restore_validation": "/data/milai-experiments/20261112-reader-utility/phase22-closed-historical-recovery-archives-v1/restore-validation-v1.json",
     "restore_validation_status_at_snapshot": "PASSED_REAL_S1_36K_RECOVERY_METADATA_AND_PYTORCH_DESERIALIZATION"
+  },
+  "phase24_validation": {
+    "continuous_answer_format_and_cost_tests_passed": 15,
+    "ruff_pass": true,
+    "diff_check_pass": true,
+    "ownstate_crossed_real_GPU_probe_closed": true,
+    "no_sha_validation": true
   }
 }

@@ -1,3 +1,36 @@
+# CURRENT phase24: natural queue frozen; own-state collection closed; Q firsts ongoing
+
+Goal ACTIVE/incomplete. R=/data/milai-experiments/20261112-reader-utility. Latestcode107af748.
+Previousgoalturn PROGRESS. No SHA/subagents/Product/default changes/service restart/push.
+Pre-Q first-fourowner1625376/session99980 COMPLETED/exited. U1firsts96/4failed nativeF1.199898643.
+Q/readoutowner2573961/session1897 nowQ0firsts child4037054 (REVALIDATE), thenQ1andall6reviews.
+Author12sourcepanel48/72 bindings closed: fixed_context/common_s1/u0/u1. RemainingQ0/Q1.
+Use PANEL_METHODS=u0q oru1q show_author_task_panel_v1.py positions0,8,...88, thenmanualappend
+with exact sourcequotes. Nonindependent implementation-agent review, no automatic judgments.
+Ownstatecollector3944671 CLOSED390conditions/195native/16rawfamilies,1709NN10668681tokens0Host.
+Owner3944666/session8407 active4stepbranchprep, theninput+GPU2FP32score; donotduplicate.
+ownstate-q1-vs-s1-closed-collection-comparison-v2.json: S1prefix1706NN10639320tokens vsQ11709;
+policyhandoff367vs381,budgetstop23vs9, no qualityclaim. OrderedliteralSourcetextsame139/390.
+Wholepackets0identical includesrun-specificsnapshotrefs; rawmodelinputs0identical includes
+budget.source_inventory_wall_seconds/source_feed_rows. Request/K/nativevisibility exactlyequal.
+Runtime-fieldcrossedprobe CLOSED32eligiblepostsearchTRAINpairs,4freshcells=128rowsGPU3.
+Bothmodels0/32choiceschangedbyactualruntimefields; checkpointsdiffer7/32onbothinputversions.
+Logitsmaxshift.873669/.554900 -> NOTgeneralinvariance. Rawactualinputsunchanged, nottraining.
+ProbeGPU3released. Artifactownstate-runtime-fields-probe-v1;74.079CPU/59.051wall,nonselfbilled.
+Naturalapplicationprotocol FROZENbeforeappoutcomes, natural-realtalk-application-plan-v1/protocol.json.
+Fourmethods fixed_context/view_cache_incremental/common_s1/fixedQ1,100requests each,10histories
+but3participantgroups. PrimaryQ1-S1. SeparatefromlaterE2/freshconfirmationselection; Q1notclaimedbest.
+FinalnativeHostanswer promptanswer_separate_v1; offlineparsewholetypedJSONonly,noextrafields or
+repeatedkeys, nofences/repair/proseextraction. Failedformatretainsraw/status/review, textscoremissing.
+15continuous+costtestsPASS,RuffPASS. Defaultliteralbehavior preserved; noProduct/runtimechange.
+LIVE naturalowner4015399/session56657 waitsformalDEVreviewowner +ownstatescoreclosure +16GiBdisk;
+thenfixed/cachejob, S1job,Q1job. GPU3reserved ONLYlearnedstages, checkowner.gpu3_reserved beforeE2.
+Explicitnative,continuehistory,captureclosedHost; noforcedcalls/givenrequests, noperstepsnapshots.
+All400actualsource reviews and80preselectedauthorbindings(positions2/7perhistory/method),
+View/cumulativecost stillrequired AFTERruns. No sourceoutcomesyet or TRAINlabels. No competingHTTP.
+Historicalarchive3932751/session59678 stillRUNNING23recoveries; revalidatemanifest. Restorerulebelow.
+Read latestprogressmanifest and monitor. Older phase23/22 sections below historical ifsuperseded.
+
 # CURRENT phase23: one own-state round active; firsts and storage ongoing
 
 R=/data/milai-experiments/20261112-reader-utility. Goal ACTIVE/incomplete.
