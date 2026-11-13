@@ -43,7 +43,10 @@
     "matched_own_state_sampler": "0c9ba3e1",
     "explicit_shared_overlap_exclusion": "06ed4f92",
     "lossless_weight_deltas": "6b7faae3",
-    "continuous_exact_source_review_binding": "7a9d359e"
+    "continuous_exact_source_review_binding": "7a9d359e",
+    "actual_only_terminal_collection": "6d20579c",
+    "preexecution_selection_logging": "365bd8cd",
+    "retained_collection_failure_denominators": "3bda68a6"
   },
   "formal_U": {
     "protocol": "/data/milai-experiments/20261112-reader-utility/formal-main3k-uq-protocol-v1.json",
@@ -509,10 +512,10 @@
     "native_score_bookkeeping_closure": "/data/milai-experiments/20261112-reader-utility/expansion-native-score-bookkeeping-closure-v1.json",
     "E2_execution": {
       "assessment": "/data/milai-experiments/20261112-reader-utility/formal-E2-launch-assessment-v1.json",
-      "owner": "/data/milai-experiments/20261112-reader-utility/formal-E2-three-chains-owner-v1.json",
-      "pid": 148212,
-      "session": 82607,
-      "status": "FIRST_TWO_U_FITS_RUNNING",
+      "owner": "/data/milai-experiments/20261112-reader-utility/formal-E2-three-chains-owner-v2.json",
+      "pid": 866950,
+      "session": null,
+      "status": "EXPANDED_ADOPTED_RUNNING_REPEAT9PASS_RUNNING_BASE_UQ_CLOSED",
       "fits_at_launch": {
         "expanded10k3pass": {
           "pid": 148218,
@@ -527,7 +530,28 @@
       "selection_scope": "Launchafter allnative96firsts and72authorsourcebindings/public8diagnostic; full96semanticteacherstillrunning. No superiority/equivalence/puresizeclaim; finalmodelselection waitsfullresults.",
       "HTTP_firsts": "Not partofthisGPUqueue; stillrequired after actualDEVcollections and coordinatedHTTPavailability.",
       "startup_observation": "/data/milai-experiments/20261112-reader-utility/formal-E2-startup-observation-v1.json",
-      "initial_fast128_logits_identical": true
+      "initial_fast128_logits_identical": true,
+      "fits_at_snapshot": {
+        "expanded10k3pass": {
+          "pid": 148218,
+          "physical_gpu": 2,
+          "adopted": true
+        },
+        "repeat3k9pass": {
+          "pid": 867555,
+          "physical_gpu": 3
+        }
+      },
+      "base_DEV": {
+        "prepared": "/data/milai-experiments/20261112-reader-utility/formal-task-dev96-e2_base3k3pass_final-readout-input-v1/run.json",
+        "closed_actual_endpoints": 95,
+        "planned_sources": 96,
+        "retained_collection_failure": "/data/milai-experiments/20261112-reader-utility/e2-base-retained-collection-failure-v1.json",
+        "failed_source": "qasper-paper-2002.08795",
+        "original_position": 63,
+        "continuation_owner": "/data/milai-experiments/20261112-reader-utility/e2-base-dev-remaining-owner-v1.json",
+        "scope": "63closedprefix untouched; failedsource notrerun; onlyunexecutedsourcepositions64..95 collected. No firstterminalaction orReader packet inventedforfailedsource."
+      }
     }
   },
   "application_source_inventory": {
@@ -578,19 +602,19 @@
     "A": "Original prototype12tests and both I2 native/source checks closed. Preserve K/horizon/long-input diagnostics and failures; synthesize their limits with main task results.",
     "F4_F5": "Scale multi-request actual sources; add h=0 stratum, legal stop diagnostics, actual K and complementary A/B/A+B conditions; do not count duplicate sources independently.",
     "B_E0_E1": "E1U/Q fixed/selected reference points,actual576firsts,officialF1,fullTeacher andauthor72sourcecheck closed. Summarizecosts/mechanism withnoadvantage/equivalenceclaim; laterfinalsynthesis stillneeded.",
-    "C_E2": "Fresh E2 base3k3pass, expanded10k3pass and base3k9pass using same new replay/permutation IDs and commonS1, then sameQ; data/plans ready but fitting waitsQ/actualDEVassessment. OldUreplay differs, and checkpoint420 of9pass is not a separate3pass schedule. Oneown-state round and decisive seed replication remain.",
+    "C_E2": "E2U/Q/DEVfinitequeue active; basechainclosedwith95actualendpoints+1retainedcollectionfailure. Expandedongoingadoptedfit, repeat9passrunning. E2HTTPfirsts/reviews+nativefull96failure-aware summary stillneeded. Ownmatched83+Q63twochainqueueawaitsGPU2; notfittedyet. Decisivereplicationconditionalonresults.",
     "D_E4": "Freeze new confirmation sources/candidates/short-answer format/budgets/repeat subset before outcomes; actual full-menu and native task scoring.",
     "applications": "New natural histories initial ~32 if available, autonomous Host and continuous View/update line; distinguish invocation from control; retain failures.",
     "synthesis": "Five result layers, clustered paired uncertainty, full measured cost/unknown scopes, mechanism and counterexamples; conditional minimal Product recommendation only."
   },
   "next_actions": [
-    "Monitor E2nativeU/Q/actualDEV queue; baseUclosed420 andbaseQrunning, expandedUcontinues. Preserveallfirsts andfixedfullpanelnomination.",
-    "Ownstate657pairedcontinuationqueue waitsE2GPU2release; sameQafterboth, thenactualDEV. Do notlaunchduplicateGPUjobs.",
-    "NaturalJSONactionv2 firstscontinue withoriginalsources/ownbanks; native400failure retainedandnotrelabelled ascontrollerfailure. First4innerformatfailures arenot repaired.",
-    "Implement/run boundedofflineSource screening+exactactualHost/sourceanswer review aftercoordinatedHTTPavailability; sourcechunks117prepared, final400grades/author80checks/Viewcosts stillpending.",
-    "Coordinate E2/ownactualDEVfirsts+reviews withnaturalHTTPowner; freeze finalnewconfirmation candidates/metrics/budgets/repeat subset beforeexport; justifieddecisivereplication andfinalcost/statistics remain."
+    "Monitor currentE2v2, naturalv4, ownstatev2 andnewstoragev2, notstoppedpredecessors; compact monitor --live. Do notrestart adoptedexpandedPID148218.",
+    "E2HTTPqueue mustcompile/read actual95base cases andkeep1collection-stagefailure inall96primarydenominators. Use prepare_trajectory_outcome_review --expected-reference <fixed_context-bound-v1> --collection-failures <e2-base-retained-collection-failure-v1.json>. Summary --native-summaries validatesactualcompilerandaddsdeclaredmissing0, nofakeReadercall.",
+    "Naturalbaseline200firstsclosed. Preparetheir exactsource-reviewpackets; implementbounded117Sourcechunk screening andfinalsource/Host reviews undercoordinatedHTTPownership, withselectionuncertainty andformatfailuresretained. S1/Q1waitE2GPU3.",
+    "OwnstatefitqueuewaitsE2GPU2andthenexecutesboth83+63andDEV. Laterfirsts/reviewsstillneeded.",
+    "Freeze finalnewconfirmation candidates/metrics/budgets/repeat subset beforeexport; finish justifiedseedreplication andallmeasured-cost/unknown-scope/statisticalfinalsynthesis."
   ],
-  "phase": 26,
+  "phase": 27,
   "signal_diagnostic": {
     "canonical110": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-vs-semantic110-diagnostic-v1.json",
     "author_spots": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-semantic-disagreement-spots-v1.json",
@@ -627,11 +651,11 @@
     "outcome_summary_scope": "Offline only, not an application execution. Full declared denominator; separate method labels for same-policy checkpoints; source review bound to exact first answer; future/missing native evidence has no reference-overlap target; equal histories within participant groups, then equal groups. No automatic success inference from text overlap; no training export.",
     "frozen_application_protocol": "/data/milai-experiments/20261112-reader-utility/natural-realtalk-application-plan-v1/protocol.json",
     "finite_application_owner": {
-      "path": "/data/milai-experiments/20261112-reader-utility/natural-realtalk-application-owner-v3.json",
-      "pid": 303814,
-      "session": 73477,
-      "child_pid": 303818,
-      "status_at_snapshot": "RUNNING_JSON_ACTION_BASELINES",
+      "path": "/data/milai-experiments/20261112-reader-utility/natural-realtalk-application-owner-v4.json",
+      "pid": 876750,
+      "session": null,
+      "child_pid": null,
+      "status_at_snapshot": "WAITING_FOR_E2_GPU3_PRIORITY",
       "transport": "json_action",
       "methods": [
         "fixed_context",
@@ -656,7 +680,18 @@
         281
       ],
       "first4_format_valid": 0,
-      "scope": "Freshdeclaredtransportversion; nativefailedfirst staysseparate. Strictnestedanswerformat failures retained, norepair or favorableextraction. Primaryactualresponse/sourcequality stillrequiresreview."
+      "scope": "200JSONactionbaselinefirstsretained; 6JSON_ACTION_MALFORMED and16VLLM_CHAT_TRUNCATED. S1/Q1notstarted. SamefrozenJSONprotocol/configs/outputs, norepeatofcompletedorfailedfirsts.",
+      "inherited_firsts": 200,
+      "baseline_status_counts": {
+        "fixed_context": {
+          "COMPLETED": 94,
+          "FAILED": 6
+        },
+        "view_cache_incremental": {
+          "COMPLETED": 84,
+          "FAILED": 16
+        }
+      }
     },
     "native_first_failure": "/data/milai-experiments/20261112-reader-utility/natural-realtalk-application-plan-v2/retained-native-first-failure.json",
     "native_status": "FAILED_FIRST_RETAINED_AUTO_TOOL_CHOICE_NOT_ENABLED_SERVER",
@@ -1160,9 +1195,9 @@
     },
     "fit_queue": {
       "protocol": "/data/milai-experiments/20261112-reader-utility/ownstate-two-chain-fit-protocol-v1.json",
-      "owner": "/data/milai-experiments/20261112-reader-utility/ownstate-two-chains-owner-v1.json",
-      "pid": 478474,
-      "session": 19947,
+      "owner": "/data/milai-experiments/20261112-reader-utility/ownstate-two-chains-owner-v2.json",
+      "pid": 876751,
+      "session": null,
       "status": "WAITING_FOR_E2_GPU2_CHAIN",
       "GPU": 2,
       "scope": "One old/own matched continuation each83updates fromsameQ1 thencommonQ63 andactual96DEV; atmostoneadditionalpostQfullpanelnomination. No HTTPfirsts inthisqueue. No repeatedrecollectionloop."
@@ -1227,11 +1262,38 @@
     "no_sha_validation": true
   },
   "phase26_new_fit_storage": {
-    "manifest": "/data/milai-experiments/20261112-reader-utility/phase26-closed-new-fit-storage-v1/manifest.json",
-    "pid": 505362,
-    "session": 67544,
+    "manifest": "/data/milai-experiments/20261112-reader-utility/phase27-closed-new-fit-storage-v2/manifest.json",
+    "pid": 876752,
+    "session": null,
     "planned_closed_fits": 10,
     "status": "WAITING_FOR_CLOSED_FITS_AND_THEIR_DEV",
-    "scope": "Finite6E2+4own fits. Requireoriginalnativechildexit0 inownerreceipt andsamearmfixed/selectedDEVclosure beforearchivinganyweight. Finalweights stayraw; recoveryonlyzeroextentdeallocation withmtimepreserved. PreventsremovingnominatedcheckpointbeforeactualDEV."
+    "scope": "Finite6E2+4own fits. Requireoriginalnativechildexit0 inownerreceipt andsamearmfixed/selectedDEVclosure beforearchivinganyweight. Finalweights stayraw; recoveryonlyzeroextentdeallocation withmtimepreserved. PreventsremovingnominatedcheckpointbeforeactualDEV.",
+    "closed_fits": [
+      "formal-e2-base3k3pass-seed0-v1",
+      "formal-e2-base3k3pass-q-seed0-v1"
+    ]
+  },
+  "coordinator_continuation": {
+    "audit": "/data/milai-experiments/20261112-reader-utility/coordinator-exit-and-continuation-audit-v1.json",
+    "cause": "Oldcoordinatorprocessesverifiedabsent; exitcauseunrecorded. Expandedtrainingchild148218remainedliveandwasadopted, neverrefitted.",
+    "new_coordinators_detached": true,
+    "scope": "Completedstages/firsts retained. Adoptednonchildfit exitcode/wholechildCPU unavailable; no inventedexit0, nativecompute/ledger remainsauthoritative."
+  },
+  "phase27_natural_snapshot_storage": {
+    "manifest": "/data/milai-experiments/20261112-reader-utility/phase26-natural-closed-snapshot-archives-v1/manifest.json",
+    "pid": 720462,
+    "session": 15177,
+    "closed_snapshots_at_snapshot": 578,
+    "freed_payload_allocated_bytes_at_snapshot": 16800792576,
+    "status": "WAITING_FOR_MORE_CLOSED_POSITIONS",
+    "restore": "python3 <archive-dir>/restore.py <run-output-name> <capture-UUID> <snapshot-dir-name>",
+    "scope": "Onlyclosedbefore/final-input/afterdatabase snapshotdirs byteverifiedthenarchived. Host/closed/pre-final-store JSON, actualresults/traces andliveprimarybanks stayraw. Continuefinite3JSONjobs/400positions. Restoreonlybeforecounterfactualsnapshotuse; source-reviewbinderneedsnoDBrestore."
+  },
+  "phase27_validation": {
+    "collector_terminal_group_summary_tests_passed": 12,
+    "ruff_pass": true,
+    "diff_check_pass": true,
+    "actual_tail32_collection_and95endpoint_binding_closed": true,
+    "no_sha_validation": true
   }
 }

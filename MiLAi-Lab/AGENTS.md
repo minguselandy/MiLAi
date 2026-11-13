@@ -1,3 +1,48 @@
+# CURRENT phase27: coordinators adopted/recovered; baseDEV95 +1failure; loops ACTIVE
+
+Goal ACTIVE/incomplete. KEEP ANALYSIS VERY SHORT. R=/data/milai-experiments/20261112-reader-utility.
+No SHA/contentfingerprints/subagents/Product/default changes/sharedservice restarts/push.
+Oldcoordinators148212(E2),303814(naturalv3),478474(own),505362(storage) wereactuallyabsent;
+oldtoolhandlesunknown. CauseNOTrecorded. Do notblameobservationtimeout orrefitlivechildren.
+coordinator-exit-and-continuation-audit-v1.json freezesoldstates. Expanded148218 PPID1 remainedlive.
+CURRENT E2v2 detachedPID866950; formal-E2-three-chains-owner-v2.json adopts148218,noNNrestart.
+GPU2expandedU ongoing; GPU3repeat9passU PID867555 running. BaseU420/baseQ63closedledgertrue.
+OriginalbaseDEVcollector FAILEDafter63closedfamilies, sourceindex63=qasper-paper-2002.08795,
+KeyError1 inUNREQUESTEDcounterfactualRules nomination (stale retrieved_scopes afterSEARCH).
+No Product/defaultpolicy changed: new --actual-terminal-only skipsunusedrules/coverageafterlearner
+choice, preservingfullNNmenu/inputs. prepare_learner_handoff_readouts --actual-only also skipsRules.
+6d20579c; 365bd8cd also logs selectedcompletebinding beforeoptional analysis/execution canfail;
+selectionlog is NOTexecutionproof. Originalfailedlastprediction wasnotpersisted, doNOTinventit.
+Recovery e2-base-dev-remaining-owner-v1 CLOSED:63prefixunchanged,failedfamilyNOTretried,
+onlypreviouslyunexecutedindices64..95 collected once (actual-only), composite95actualendpoints:
+formal-task-dev96-e2_base3k3pass_final-closed95-v2 -> original*-readout-input-v1 (95cases).
+Failuremanifest e2-base-retained-collection-failure-v1.json retainsfull96denominator. NoHostcall yet.
+IMPORTANTE2evaluation: groupwith --expected-reference R/formal-task-dev96-fixed_context-bound-v1
+--collection-failures R/e2-base-retained-collection-failure-v1.json. 3bda68a6 retainscollection_failed
+withaction/packet/readoutNone, transportNOT_INVOKED. Noempty/dummyHANDOFF invented.
+Summary --native-summaries <method->officialsummary.json map> usesactual95scoresplusmissing0
+onfull96, checkscompilerprovenance; original95nativeartifact unchanged. 12relatedtestsPASS,RuffPASS.
+BuildfutureE2HTTPqueue withtheseoptions; donot silentlycompare95base vs96others/dropfailedsource.
+CurrentE2v2futurecollectors automatically --actual-terminal-only. PostQnominationrules unchanged.
+Adoptedfit completionusesnativeartifact+actualPIDexit; nonchildexitcode/wholeCPU UNAVAILABLE,
+neverinventexit0. Inheritedoldcompletedstages taggedoriginalowner; donotdoublecountcosts.
+CURRENT NATURALv4 detachedPID876750 waitingE2GPU3; owner-v4.json, sameJSONactionprotocolv2.
+BaselineJSON200firsts CLOSED: fixed94completed6failed; cache84completed16failed. Errors6JSONmalformed
+and16truncated; allretained. No repeats. S1/Q1notstarted. Nativefirst400errorseparate asbelow.
+CURRENTOWNv2 detachedPID876751 waitsE2v2GPU2chainclosure,657matched83+Q63twoarms thenDEV.
+Currentnewfitstoragev2 detachedPID876752 atphase27-closed-new-fit-storage-v2; baseU/Qalreadyprocessed,
+waitsotherclosednativefits+samearmDEV. Allfixedfinalroots stayraw; restorearchivednominationsifneeded.
+NaturalDBsnapshots consumed22GiB. LIVEarchivePID720462/session15177 at
+phase26-natural-closed-snapshot-archives-v1:578closedbefore/final-input/afterdirs alreadyarchived,
+freed16800792576payloadbytes; waitsremainingS1/Q1closedpositions. Host.json/closed.json/pre-final-store
+JSON,firstresults/traces/liveprimarybanks RAW; source-reviewbinderdoesnotneedDBrestore.
+Restorecounterfactualsnapshot:python3 <archive-dir>/restore.py <run-output-name> <captureUUID> <snapshot>.
+Keepemptybase+frozenhelper+archives+manifest. Actualper-byteverificationbeforeoriginaldir removal.
+All578baselineclosures retained; no app rerunforstorage. Disk was14GiB, recovered>30GiB.
+Update monitor --live tocurrentowners. E1/source-audit/natural-source117chunkdetailsbelow remainvalid.
+Source-screening/final400reviews/author80/Viewcosts notrun; E2/ownHTTPfirsts,confirmation,justifiedseeds,
+fullcost/statisticalsynthesis incomplete. Do NOT markgoalcomplete.
+
 # CURRENT phase26: E1 CLOSED; natural JSON-action actualrun; E2/own queues active
 
 Goal ACTIVE/incomplete. R=/data/milai-experiments/20261112-reader-utility.
