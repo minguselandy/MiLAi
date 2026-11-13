@@ -1,3 +1,44 @@
+# CURRENT phase32: S1natural100 CLOSED; Q1firsts RUNNING; source-author71/80 so far
+
+Goal ACTIVE/incomplete. KEEP ANALYSIS VERY SHORT. R=/data/milai-experiments/20261112-reader-utility.
+No SHA/content fingerprints/subagents/Product/default changes/service restarts/push.
+NATURAL STABLEownerpath natural-realtalk-application-owner-v6.json nowcoordinatorREVISION7:
+PID2420785, script run_natural_realtalk_application_v7.py, Q1child2420790 GPU3 running.
+Old1731111verifiedidleWAITING_FOR_APPLICATION_DISK afterS1100closed, noactivechild/Q1dir.
+Audit natural-idle-Q1-capacity-handoff-v1.json. Same16GiBmargin nowactualcurrent-processcapacity:
+rootf_bfree/nonrootf_bavail, nofilesystemreserve change; ordinary15.08GiB versusroot40.09GiB.
+Originalbaseline200+S1100 reusedunchanged; oldcompletedstages retainedininherited_stage_records.
+E2HTTP1731112/ownHTTP1900301/finalnatural1840387 stillLIVEwaitingcorrectstableownerpath.
+S1 CLOSED100:90completed10failed(9truncated1JSONmalformed), all90inneranswerformatfailed.
+Closure natural-common_s1-closure-v1.json. Wholefirstresponses stillsemanticallyreviewed, no repair.
+S1work natural-common_s1-view-work-v1:616decisions,116SEARCH391READ109HANDOFF,123retrievalreturns;
+noViewselected. 597actualmenus offeredREFRESH_VIEW, so distinguishopportunity fromchoice.
+ActualNNtraceaudit natural-common_s1-model-trace-audit-v1:616modelresults match616complete menus
+andloggedchoices,4353620inputtokens,0truncations,oneactualS1modelload. Genericselection_mode=policy
+is NOTabsenceofNN. TraceCPU695.397/wall404.824 nested; originalruntimeledgerdeltas dynamic_memory_laya
+CPU698.702/wall408.130,loadCPU7.018631/wall5.864333, alreadybilled NOTaddtogether/driverCPU.
+S1known/chargedgeneration1795859tokens,unknownusage0;driverCPU1446.192/wall3569.127includesnestedwork.
+Naturalfirst-three-opportunity-inventory-v1: fixed/cache/S1positionswithretrievalreturn96/98/91;
+no-return includes noinvocation orpre-returnfailure, notcontrollerrefusal/taskquality.
+NATURAL AUTHOR: baseline40unchanged, common_s1-20.json CLOSED (2supported9incomplete1incorrect
+6unknown2executionfailure). Learnedindividualrecords natural-author-source-review-v1/learned.
+Q1author11alreadywritten:history0q2incorrect/q7failure;h1q2incomplete/q7incomplete;
+h2q2incomplete/q7unknown;h3q2incomplete/q7unknown;h4q2supported/q7incorrect;h5q2incorrect.
+RemainingQ1author9 (h5q7,h6/7/8/9 both2/7). DO NOTre-reviewexistingfiles asnewindependentwork.
+Helpers R/bind_closed_natural_author_positions_v1.py common_s1|q1 and
+R/append_natural_author_judgment_v1.py JSONspec. UseCUDApython+declaredattentionwrapper for binder.
+Closedinputs natural-author-closed-bindings-v1/<method>-<historyindex02d>-<requestindex>.json.
+Binder onlyalreadyclosedpreselectedfirsts, reuses exactresponseID/finalcontext/originalprefixchecks;
+separatefromqueuedstandardfullsourcebindings, so no collision. Sources/actualanswers neverrewritten.
+S1Pachinko andAlchemistdate supportedactualHost+original. Q1denialsofPachinko completion/gardening/
+NebraaspriorCOVID explicitlycontradictcurrentoriginals. Allotherauthorclaims needliteralwitness/unknown.
+All14fits/DEV/nativecosts closed; 4lastrecoveries nowarchivedclosed freed2.251968GiB. Samephase31
+restoreCLI; inferenceweightsraw. NaturalDBarchive1818134 continuesclosedpositions only.
+Paid-study-phase-inventory-v1 contains96paidprefixedphases,NOTwholeprojectcost; genericruntime/
+active/future/unpaid work separate. Do NOTsum nestedCPU or call unknownservice/rootcostzero.
+RemainingQ1firsts/author9/work,full400sourcegrade;E2/ownHTTP+author60;confirmationfreeze/256/32repeat;
+justifiedreplicationdecision/fullcost/finalreport. Do NOTcompletegoal.
+
 # CURRENT phase31: all14 fits/DEV CLOSED; signal600 and E0 local probe CLOSED
 
 Goal ACTIVE/incomplete. KEEP ANALYSIS VERY SHORT. R=/data/milai-experiments/20261112-reader-utility.

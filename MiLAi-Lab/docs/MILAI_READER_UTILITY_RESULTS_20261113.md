@@ -70,7 +70,7 @@ E2三臂均从共同S1重新开始，使用新冻结的共同replay：3,356×3�
 
 当前应用使用10条公开自然消息历史、8,944条原消息，每方法100个按到达切点安排的问题。共享参与者仅形成3个依赖组，不能把100请求或10历史当作独立来源数量；请求由评价安排，不是原参与者真实发问，且不是完整原生基准。
 
-现有服务拒绝首次native-auto工具请求，原失败及未知用量保留，服务未重启。另用已有JSON-action协议执行自主工具/答案选择，不强制调用。两个基线200位置已关闭：固定94完成/6失败，增量缓存84完成/16失败。HTTP完成不是语义成功；未遵循内层答案格式的原文保持格式失败，不补字段或抽取有利短答。
+现有服务拒绝首次native-auto工具请求，原失败及未知用量保留，服务未重启。另用已有JSON-action协议执行自主工具/答案选择，不强制调用。两个基线200位置和共同S1的100位置已关闭：固定94完成/6失败，增量缓存84完成/16失败，S1为90完成/10失败。S1失败包括9次输出截断和1次JSON-action格式错误；其90个完成回答也全部未遵循内层三字段格式。HTTP完成不是语义成功，原文不补字段、不抽取有利短答。Q1仍在运行。
 
 基线200位置的自动来源评审已关闭：22个执行失败不虚构语义标签；178个回答中7个评审未决（6个容量超限、1个输出截断），101个判断被引用/字段规则屏蔽。最终固定方法为71 unknown、13 incorrect、10 incomplete；缓存为48、24、12，没有自动supported判断通过校验。这不是“真实成功为零”：人工已核实至少两条有原文且Host实际可见的回答，被不一致的grounding/resolution字段屏蔽为unknown。筛选未选中也不证明历史中不存在。
 
@@ -80,7 +80,11 @@ E2三臂均从共同S1重新开始，使用新冻结的共同replay：3,356×3�
 
 预定请求位置2/7×10历史的基线人工40绑定已完成：固定2 supported、8 incomplete、1 incorrect、7 unknown、2执行失败；缓存0、9、1、7、3。作者未盲化且非独立，关键词搜索只定位证据，不作为缺失证明。Pachinko读完记录的遗漏、Latte饮料与宠物混淆、提问日期与实际消息日期不符均有原始证据。
 
-缓存方法实际执行129次View构建与14次复用，143次全部返回材料预算不足，没有成功View交付。原实现先写入View再检查交付容量，因此构建成本不能记为零。构建elapsed 4.321865秒嵌套在62.468747秒操作和128.815875秒检索wall中，不能相加。本面板尚不支持View净收益主张；剩余S1/Q1、完整400位置评审和作者40仍待完成。
+S1的同位置20个作者绑定也已关闭：2 supported、9 incomplete、1 incorrect、6 unknown、2执行失败。Pachinko与推荐《The Alchemist》的日期回答同时有原文和实际Host输入支持；另一些回答漏掉已存在的兄弟共同兴趣、过去感染Covid的记录，或将“没有检索到”扩大为“没有提及”。此处未知与不完整的边界受题意和覆盖限制影响，作者不是真值；不从20个绑定推断整体方法优势。[S1闭合记录](/data/milai-experiments/20261112-reader-utility/natural-common_s1-closure-v1.json)、[S1作者20](/data/milai-experiments/20261112-reader-utility/natural-author-source-review-v1/common_s1-20.json)
+
+缓存方法实际执行129次View构建与14次复用，143次全部返回材料预算不足，没有成功View交付。原实现先写入View再检查交付容量，因此构建成本不能记为零。构建elapsed 4.321865秒嵌套在62.468747秒操作和128.815875秒检索wall中，不能相加。S1在597个实际决策点获得REFRESH_VIEW选项，零次选择View操作；它的616个本地模型结果均与随后记录的完整菜单和实际选择一致，输入4,353,620 tokens、原生截断标志均为false，没有从泛化的selection_mode=policy字段猜测模型是否运行。
+
+固定／缓存／S1分别在96／98／91个位置出现检索返回，总返回117／192／123次；没有返回包含未调用和返回前失败，不能直接当作Host拒绝调用。S1的运行时模型计量为CPU698.702秒、wall408.130秒，另一次模型加载CPU7.019秒、wall5.864秒；它们嵌套于控制、检索及driver计时，不能与父时间重复相加。S1已记账generation tokens为1,795,859，unknown usage增量0。本面板尚不支持View净收益主张；Q1、完整400位置评审和作者剩余20仍待完成。[菜单机会](/data/milai-experiments/20261112-reader-utility/natural-first-three-opportunity-inventory-v1/summary.json)、[实际模型核对](/data/milai-experiments/20261112-reader-utility/natural-common_s1-model-trace-audit-v1/summary.json)、[运行时账本差额](/data/milai-experiments/20261112-reader-utility/natural-common_s1-model-trace-audit-v1/runtime-ledger-deltas-v1.json)
 
 证据：[冻结应用协议](/data/milai-experiments/20261112-reader-utility/natural-realtalk-application-plan-v2/protocol.json)、[基线来源评审闭合及局限](/data/milai-experiments/20261112-reader-utility/natural-baseline-source-review-closure-v1.json)、[人工40绑定](/data/milai-experiments/20261112-reader-utility/natural-author-source-review-v1/baseline40.json)、[实际View工作量](/data/milai-experiments/20261112-reader-utility/natural-baseline-view-work-v1/summary.json)。
 
@@ -91,6 +95,8 @@ E2三臂均从共同S1重新开始，使用新冻结的共同replay：3,356×3�
 ![14个关闭拟合的实际训练工作量](/data/milai-experiments/20261112-reader-utility/formal-fit-work-figure-v1/fit-work.png)
 
 短Q阶段的评价约占各自账前wall的42.5%–45.0%，10k U约5.4%；不能把所有阶段统称评价开销很小。数据准备、前缀采集、分支、Teacher、Host、来源评审、存储和未测根进程工作仍须另列。已有非原生成本清单尚未最终结算，不能与包含其子过程的父进程时间重复相加。
+
+已另保存96个`milai_reader_utility_`已付费阶段的逐项清单，并再次核对其中14个拟合阶段。这一前缀不涵盖全部通用运行时、当前/未来Host阶段及未结算CPU工作，因此清单中的账面合计不是完整、去重后的项目总成本。[已记账阶段快照](/data/milai-experiments/20261112-reader-utility/paid-study-phase-inventory-v1/summary.json)
 
 预留256个新原生TEST来源身份，与已知TRAIN/DEV分配及已扫描项目元数据无交集；不声称隔离公开预训练。已仅按身份固定32来源第二次Host读出和32来源人工样本，所有最终方法使用同一抽样位置，首答不被第二次替换。最终方法、唯一主要比较、答案格式与预算尚待完整DEV结果后冻结，之后才导出Source。当前没有进行确认集模型调用。
 

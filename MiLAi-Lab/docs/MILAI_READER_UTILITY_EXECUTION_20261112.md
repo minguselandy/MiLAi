@@ -497,3 +497,16 @@ E2三个固定终点和自身状态两个固定终点的实际Host首答尚未�
 初始10份关闭当前恢复目录的无损归档完成，释放5.691284GiB；新拟合中间权重存储也已完成全部10拟合，但普通可用空间15.9534GiB仍略低于自然采集原定16GiB。没有降低该条件或重启自然等待器。仅将最后4份已经完成拟合/DEV/前序存储的E2重复U/Q与自身状态U/Q恢复目录纳入同一字节验证归档，PID2173169、`phase31-closed-final-four-recovery-archives-v1`。推理权重和首次保持原位，恢复入口仍为`python3 <archive-dir>/restore.py <run-name>`。原自然v6 owner1731111会在空间满足后自行继续。确认集没有导出或调用，完整任务结果及最终报告仍未闭合。
 
 最后4恢复目录中首份随后归档关闭，原自然v6等待器在达到普通空间16GiB且E2释放GPU3后，已实际启动共同S1的100个首次位置，子进程2189585；Q1按同冻结协议接续。原基线200首次不重跑，HTTP依赖队列保持。运行期间后续归档临时文件会使可用空间变化，入场阈值与实际采集预算均未修改。
+
+
+## 第三十二阶段：S1自然首次闭合与Q1接续
+
+共同S1的100个自然首次位置已关闭，90完成/10失败（9次VLLM_CHAT_TRUNCATED、1次JSON_ACTION_MALFORMED），90个完成回答均未通过既定内层三字段格式；原文保持不变。实际100个driver/result关联核对后，统计616决策输入、116 SEARCH、391 READ、109 HANDOFF选择及123个检索返回。597个实际菜单提供REFRESH_VIEW，S1零次选择View，不能将没有选择解释为没有机会。其616个实际memory_control_model_result与随后完整动作表和选择全部一致，4,353,620输入tokens、0原生截断、只加载一次共同S1模型；selection_mode统一叫policy并不意味着未使用NN。证据为`natural-common_s1-closure-v1.json`、`natural-common_s1-view-work-v1`、`natural-common_s1-model-trace-audit-v1`。
+
+按每个原始结果budget_before/after核对通用运行时计量，S1 dynamic_memory_laya为CPU698.701998秒/wall408.129519秒，加载为CPU7.018631秒/wall5.864333秒；这些已在运行时记账，也嵌套于driver CPU1,446.192098秒/wall3,569.127050秒，不能再次相加。S1 generation已知/扣额tokens均1,795,859，unknown usage增量0。固定/缓存/S1的有检索返回位置96/98/91、总返回117/192/123次，无返回包括未调用和返回前失败，不直接归因于控制器拒绝。具体菜单/选择模式见`natural-first-three-opportunity-inventory-v1`。
+
+预定作者复核利用已关闭的单个首次记录，与剩余请求运行并行，但不读取移动中的上下文。辅助绑定复用既有response ID、最终provider输入与回答前原Source前缀逐字验证，文件放在独立`natural-author-closed-bindings-v1`，不占用等待中的全量来源评审输出目录。S1的20绑定完成：2 supported、9 incomplete、1 incorrect、6 unknown、2执行失败。Pachinko与Alchemist日期有原文及Host实际输入支持；其余来源不足、问题日期冲突、假设与真实动作、过度否认均分别记录。作者未盲化/非独立，不能从小样本计数推断方法优势。Q1的前11预定绑定也已复核并逐份写入`natural-author-source-review-v1/learned`，尚余9个。
+
+Q1启动前，原协调器1731111在S1100关闭、子进程已退出、Q1输出目录尚不存在时，因普通用户空间15.08GiB小于16GiB继续等待；当前root进程实际仍可分配约40.09GiB。保留完整旧owner/stage记录后，在稳定`owner-v6.json`路径交接至revision7/PID2420785，仍要求16GiB余量，但按当前执行身份的f_bfree/f_bavail测量，不修改文件系统预留配置。相同模型、提示、预算、来源和JSON-action协议继续，基线200及S1100不重跑；旧已完成阶段记录显式保留在inherited_stage_records。Q1已实际启动子进程2420790，E2HTTP、ownHTTP及最终自然评审等待器均复核仍存活且沿用同稳定路径。交接证据`natural-idle-Q1-capacity-handoff-v1.json`。
+
+最后4份关闭恢复目录的无损归档已完成，释放2.251968GiB，所有推理终点仍直接可读；optimizer恢复须按phase31入口先重建。另整理96个已付费研究前缀阶段为`paid-study-phase-inventory-v1`并核对14正式拟合，不写账本；通用运行时、未结算、活动/未来阶段不全在此前缀，不能把其账面合计称为完整去重项目成本。完整400来源评审、E2/自身状态首答和作者60、新确认、适当复现及最终统计仍待关闭。
