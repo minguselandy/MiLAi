@@ -772,7 +772,15 @@
       "builder_nested_seconds": 4.3218650771304965,
       "scope": "Built revisions/cost exist despite rejected delivery; never count rejected View as delivered, or sum nested times. No net-benefit claim."
     },
-    "final_review_queue": "/data/milai-experiments/20261112-reader-utility/natural-final-review-and-summary-owner-v1.json"
+    "final_review_queue": "/data/milai-experiments/20261112-reader-utility/natural-final-review-and-summary-owner-v1.json",
+    "author_automated_comparison": {
+      "owner": "/data/milai-experiments/20261112-reader-utility/natural-baseline-author-comparison-owner-v1.json",
+      "output": "/data/milai-experiments/20261112-reader-utility/natural-baseline-author-teacher-agreement-v1.json",
+      "status": "WAITING_FOR_BASELINE_GRADES",
+      "author_blinded": false,
+      "both_reviewers_independent": false,
+      "scope": "Same40firstanswers; source-witness author judgments versus unmodified automated outcomes. Earlier reference exposure not excluded. Structured-field mistakes/quote masks distinguished from semantic disagreement. Unknown never becomes incorrect."
+    }
   },
   "phase04_validation": {
     "targeted_public_SQLite_tests": 2,

@@ -18,6 +18,10 @@ Own old83/Q63/DEV96 closed, selected63; own U1737866 running GPU2, thenQ63/DEV.
 Author preselected baseline40 CLOSED at natural-author-source-review-v1/baseline40.json.
 fixed:2supported8incomplete1incorrect7unknown2executionfailure; cache:0/9/1/7/3.
 Root author not independent; no native gold/Teacher labels. Keyword nonmatch never proves absence.
+Author not blinded; earlier reference exposure not excluded. Comparison waiter1876059 waits baseline
+grade closure then writes natural-baseline-author-teacher-agreement-v1.json; labels never rewritten.
+At least2manual supported examples auto-masked due inconsistent resolution/grounding fields,
+despite actual source quotes in Host context. Unknown is not incorrect or evidence of zero real success.
 Pachinko explicit completion was missed; Latte dog vs beverage counterexample retained.
 Code d673435e tools/summarize_continuous_view_work.py;2tests/Ruff PASS. Actual baseline200 analyzed:
 cache129REFRESH builds +14USE_VIEW all143material_budget_exhausted,0successfulViewdelivery.
