@@ -53,7 +53,10 @@ def validate_chunk(chunk: dict) -> None:
 
 def parse_screen(content: str, chunk: dict) -> dict:
     parsed = json.loads(content)
-    jsonschema.validate(parsed, SCHEMA)
+    try:
+        jsonschema.validate(parsed, SCHEMA)
+    except jsonschema.ValidationError as error:
+        raise ValueError("Invalid screening response schema") from error
     validate_chunk(chunk)
     queries = {q["request"]: q for q in chunk["eligible_questions"]}
     rows = parsed["selections"]
