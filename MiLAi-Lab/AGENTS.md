@@ -1,3 +1,44 @@
+# CURRENT phase30: TEST role path; baseline grading CLOSED; all U fits CLOSED
+
+Goal ACTIVE/incomplete. KEEP ANALYSIS VERY SHORT. R=/data/milai-experiments/20261112-reader-utility.
+No SHA/content fingerprints/subagents/Product/default changes/service restarts/push.
+Newcode8e343290 explicitTEST evaluation: collector --test-evaluation --actual-terminal-only;
+prepare_learner_handoff_readouts --split test --actual-only; compiler --evaluation-only
+--evaluation-split test; grouper --evaluation-split test. Test remains test, no training-fit exports.
+43relatedtests/Ruff PASS; actual192existingDEVfirsts/96sources regrouped with0newcalls.
+Complete panels now retain expected_tasks evenwithoutcollectionfailures; neededownHTTPnative summary.
+OwnHTTP old1836373 idle/nochild/nofirsts; fixedloneexpected-referenceargument, stableownerpathv1
+now revision2 PID1900301, script run_ownstate_task_firsts_after_E2_v2.py. Idlehandoff audited.
+Naturalv6 still1731111; E2HTTPv2 still1731112; finalnatural1840387 unchangeddependencies.
+Baselinegrade CLOSED200:178actualresponses22executionfailures;7unresolved(6capacity1truncated),
+101masked, fixedunknown71/incorrect13/incomplete10, cache48/24/12. NOsupportedgrades survived.
+This is NOTzero true success:2manualsupported samples have inconsistent automated fields.
+All178completedanswers failedinneranswerformat. Rawresponses retained; no repairs/retries.
+Cost4067025known/chargedtokens,unknownusage0,CPU25.084905/wall3529.570086,nativeledger verified.
+natural-baseline-source-review-closure-v1.json and natural-baseline-reviewed-outcomes-v1.
+Secondarycache-fixed observedlabeldifference0/bootstrap[0,0] is degenerate and NOT equivalence;
+unknown3groupidentification[-.713889,.491667]. Full400primary remainsQ1-S1.
+Author40comparison CLOSED at natural-baseline-author-teacher-agreement-v1.json; no labels replaced.
+E2repeatU867555 CLOSED1259,30204main30195active10068replay,228957845traininputtokens,ledgertrue.
+RepeatQ1958705 nowGPU3; ownU1737866 CLOSED83/1971main657replay16254459tokens ledgertrue.
+OwnQ1948874 nowGPU2. Nativefitcost14 finalwaiter1975201 waits E2/own GPUowners close.
+Currentclosed10fitcostsnapshot formal-fit-costs-partial10-v1 matches nativeledger, no rebill.
+Current naturalwait is DISK (<16GiB) thenE2GPU3; inspect actual process/status, no duplicate launch.
+NEW storage CURRENT detached2009483 phase30-closed-current-recovery-archives-v1, only10enumerated CLOSED
+optimizer/FP32/RNG recoveries, all already processed by priorstorage; inference checkpointsRAW.
+Restore:python3 <archive-dir>/restore.py <run-name>. Keepemptybase/frozenhelper/archives/manifest.
+Exact allbyte reconstruction verifiedbefore removal; no activefit or sourcebank touched.
+First2archivesclosed; old1963051wasidleWAITING_FOR_ARCHIVE_DISK. Handoffreceipt phase30-recovery-
+archive-idle-capacity-handoff-v1.json. Currentv2 resumesonly8, preservesoldCPU separately,5GiB
+headroomusesactualroot f_bfree(nonroot f_bavail); filesystemreserveconfig/natural16GiB unchanged.
+Existingnewfitstorage876752 and naturalDBarchive1818134 stillactive; monitorcurrentowners.
+Source-only confirmation samplingfreeze new-confirmation-source-sampling-freeze-v1.json:
+256IDs,32secondHost sources seed20261113,32author sources seed20261114(1per8-IDstratum).
+Allfinalmethods samepositions. FULLMETHOD/METRIC/BUDGETfreeze stillpending; NOtestSourceexport/calls.
+Living report docs/MILAI_READER_UTILITY_RESULTS_20261113.md created, explicitlyincomplete.
+E2/own taskresults,naturalremaining200/author40/View,confirmation,justifiedreplication/fullcosts
+andfinalsynthesis stillincomplete. Do NOTcompletegoal.
+
 # CURRENT phase29: final source grader live; author40 and baseline View work closed
 
 Goal ACTIVE/incomplete. KEEP ANALYSIS VERY SHORT. R=/data/milai-experiments/20261112-reader-utility.
