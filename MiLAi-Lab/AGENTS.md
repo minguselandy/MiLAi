@@ -1,3 +1,27 @@
+# CURRENT phase36: learning-information and DEV type/binding controls CLOSED
+
+Goal ACTIVE/incomplete. KEEP ANALYSIS VERY SHORT. Localdate2026-11-14;R=/data/milai-experiments/20261112-reader-utility.
+No SHA/content fingerprints/subagents/Product/default/servicechanges/push. No TESTretuning orfirstreplacement.
+ConfirmationHTTP3538727/child3853160 stilllive, fixed_contextfirsts latest153/256closed1failed(reasonlength),
+all1024controllertrajectories alreadyclosed. Fullqueue unchanged. Needauthor128, firstsource/native,
+second128/source/native, stability thenqueued216+123costsettlements. No authorcases yet, waitclosedbound.
+Newlearning-information-efficiency-v1:20addedTRAINblocks283rawsources279groups,22613states85907packets,
+43984scored41923unknown,36614350actualTeachertokens,11486activestates =>.313702states/1000tokens.
+All600semantic481sources,2018readoutrecords143failed1875complete,2004calls14reuse;331knownQdelivery
+states287sources,249directional82positiveties. All2462pairs material540directional468tie1454unknown;
+answer393/423/1646. Pair/readout/source denominators distinct. No beneficial-allaction discoveryrateclaim.
+NewDEV-type-order-binding-controls-v1:POSTHOC992fixedDEVstates96sources,584reference-labelled77sources.
+All6HANDOFF/READ/SEARCHorders withoriginalmenu-firsttypebinding reported, noselection. Source macro
+HANDOFFfirst=.19501 bothorders,READfirst=0both (source_page_next all992),SEARCH>HANDOFF>READ=.468383,
+SEARCH>READ>HANDOFF=.273372. U0/U1/Q0/Q1macro.498023/.390970/.411345/.379870.
+Samepredictedtype firstmenucontrols.380450/.260132/.288893/.234699; uniformexpected
+.308262/.204930/.240723/.185561. Typebinding information conditionalonfixedstates andfalliblenativeproxy,
+notHostgain/policyrollout/casualisolation. InmemoryfinalFP32predictions, no newsavedmodelinference.
+Bothdiagnostics0newmodel/Hostcalls; assertionsmatch20scorecosts,8feedbacktotals,992fullmenupredictions,
+originalU0266/U1218accepted. ScriptsR/summarize_learning_information_v1.py,analyze_DEV_type_order_v1.py.
+Reportupdatedsupervisiondenominators/typecontrols/separatematerialsufficiency andclosedE2/ownstatus.
+Do notredo these orclosegoalbeforeconfirmation/author/stability/cost/finalaudit. No newseeds claimed.
+
 # CURRENT phase35: natural diagnostic CLOSED; confirmation firsts RUNNING
 
 ADDITIONALCOSTUPDATE:47laterclosedchild scopesCPU5004.970247 (includes1failedprocess),76independent

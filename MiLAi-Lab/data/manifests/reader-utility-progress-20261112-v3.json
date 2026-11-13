@@ -709,7 +709,7 @@
     "Queueautomatically completesallfirsts/source/native andfixedsecond128/source/native; stability3763322 then216scope settlement3838848.",
     "CloseconfirmationHTTP/stability costs andfinalmeasuredscope/unknowncost disclosure afterqueuesfinish; do notcreate per-shell accountingproject. 216then123settlements queued. Five-layer synthesis andcompletionaudit stillrequired."
   ],
-  "phase": 35,
+  "phase": 36,
   "signal_diagnostic": {
     "canonical110": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-vs-semantic110-diagnostic-v1.json",
     "author_spots": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-semantic-disagreement-spots-v1.json",
@@ -1864,6 +1864,52 @@
     "natural_diagnostic400_closed": true,
     "prior216_scopes_revalidated": true,
     "TEST_native_question_ids_unique": 256,
+    "no_sha_validation": true
+  },
+  "learning_information": {
+    "artifact": "/data/milai-experiments/20261112-reader-utility/learning-information-efficiency-v1/summary.json",
+    "expanded_production_sources": 283,
+    "known_dependency_groups": 279,
+    "opportunity_states": 22613,
+    "executed_packets": 85907,
+    "scored_packets": 43984,
+    "active_states": 11486,
+    "actual_teacher_input_tokens": 36614350,
+    "active_states_per1000_input_tokens": 0.31370214137353253,
+    "selected_Q_opportunities": 600,
+    "Q_sources": 481,
+    "readout_records": 2018,
+    "failed_readouts": 143,
+    "chat_invocations": 2004,
+    "reused_records": 14,
+    "known_delivery_states": 331,
+    "known_delivery_sources": 287,
+    "directional_delivery_states": 249,
+    "scope": "Actualclosedproduction/semantic inputs, no new calls; state/source/pair/readout/token denominators separate. Candidatebeneficialaction discoveryrate not identifiablewithout exhaustiveactionoracle; no suchclaim."
+  },
+  "DEV_type_binding_controls": {
+    "artifact": "/data/milai-experiments/20261112-reader-utility/DEV-type-order-binding-controls-v1/summary.json",
+    "status": "CLOSED_POSTHOC_DEV_ONLY",
+    "states": 992,
+    "sources": 96,
+    "reference_labelled_states": 584,
+    "reference_labelled_sources": 77,
+    "fixed_type_orders": 6,
+    "model_source_macro": {
+      "u0": 0.49802313487378425,
+      "u1": 0.3909704653211147,
+      "q0": 0.41134466183167484,
+      "q1": 0.37986966136316785
+    },
+    "scope": "All6observedtype permutations, originalmenu-first binding, plusmodeltype-preserving first/uniform controls. No modelcalls/actualrollout/TESTchanges. Conditionalnativewitnessproxy, notHostsuccess orcausal/confirmatorysuperiority."
+  },
+  "phase36_validation": {
+    "all20_canonical_score_compute_receipts_match": true,
+    "all8_label_feedback_totals_match_original600_comparison": true,
+    "Reader_counts_2018_143_2004_14_match": true,
+    "all992_prediction_rows_and_complete_action_menus_match": true,
+    "U0_U1_reference_acceptance_266_218_reproduced": true,
+    "no_new_model_or_Host_calls": true,
     "no_sha_validation": true
   }
 }
