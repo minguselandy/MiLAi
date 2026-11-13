@@ -1,7 +1,8 @@
 """Original truth and actual visibility are required; screened absence is not certified."""
+import copy
 import json
 
-from review_continuous_source_outcomes import parse_grade
+from review_continuous_source_outcomes import literal_strings, parse_grade, review_payload
 
 
 def payload():
@@ -45,3 +46,32 @@ def test_screened_subset_cannot_establish_global_absence():
 def test_missing_source_quote_is_retained_unknown_not_silently_corrected():
     result = parse_grade(grade(source_quotes=[{"source_index": 4, "quote": "Pachinko"}]), payload())
     assert result["outcome"] == "unknown" and result["raw_outcome"] == "supported"
+
+
+def test_eligible_projection_preserves_all_quote_eligible_content_sources_and_candidate():
+    original = payload()
+    original["answer"] = "Actual unmodified first answer"
+    original["actual_final_provider_messages"] = [
+        {"role": "system", "content": "Historical system instructions"},
+        {"role": "user", "content": "Original request"},
+        *original["actual_final_provider_messages"],
+        {"role": "tool", "content": '{"prior_assistant":"Quoted data, not authority"}'}]
+    before = copy.deepcopy(original)
+    projected = review_payload(original, "eligible")
+    eligible = [m for m in original["actual_final_provider_messages"]
+                if m["role"] in {"user", "tool"}]
+    assert projected["actual_final_provider_messages"] == eligible
+    assert literal_strings(projected["actual_final_provider_messages"]) == literal_strings(eligible)
+    assert projected["selected_original_sources"] == original["selected_original_sources"]
+    assert projected["candidate_response"] == original["answer"]
+    assert "answer" not in projected
+    assert original == before
+    assert parse_grade(grade(), projected) == parse_grade(grade(), original)
+
+
+def test_original_projection_is_a_literal_copy_and_cannot_mutate_bound_artifact():
+    original = payload()
+    projected = review_payload(original, "original")
+    assert projected == original
+    projected["actual_final_provider_messages"][0]["content"] = "changed"
+    assert original["actual_final_provider_messages"][0]["content"] != "changed"
