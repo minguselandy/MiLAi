@@ -1,3 +1,34 @@
+# CURRENT phase28: source screening CLOSED; E2HTTP waiting; naturalv5 current
+
+Goal ACTIVE/incomplete. KEEP ANALYSIS VERY SHORT. R=/data/milai-experiments/20261112-reader-utility.
+No SHA/contentfingerprints/subagents/Product/defaultchanges/sharedservicerestart/push.
+Sourcecode08468807 tools/screen_continuous_sources.py: offlineoriginal-indexselection,thinkingOFF,
+actualsource_index valuesvalidatedagainstchunk andqueryarrivalcut. Existing _judge transportonly,
+NOTlegacy digest paths. 11source-screen/source-bindingtestsPASS,RuffPASS.
+natural-source-screening-v1 CLOSED117chunks/673query-chunkpairs,5invalidchunksmasked,
+647validatedqueries:189selected457none1unknown. 1620657known/chargedtokens,unknownusage0,
+nativeCPU13.8253/wall738.88 alreadyselfbilled. No retries, no answers/grades/onlinechanges.
+noneisNOTsourceabsenceproof; screeningcanmissfacts. Native fullsources/rawresponses kept.
+Exactclosedbaseline sourcebindings CLOSED: natural-json-{fixed_context,view_cache_incremental}-
+source-review-v1. All200positions retained,178completedactualfinalcontexts matchedpre-finaloriginal
+prefix,22executionfailures. ActualHostvisibility andStorepresence remainseparate.
+natural-screened-baseline-review-inputs-v1 PREPAREDNOTGRADED: selectedoriginals +2adjacentmessages
+(clippedatcut) +exactfullydeliveredOriginalbodymatches +actualfinalHostmessages. No source rewriting.
+Maxpayloadonly97656tokens,9above50000; rubric/schema/outputreserve notincluded. Needboundedfinal
+source/Hostreview, unknownonunresolvedcoverage/capacity, neverclipfactsorcallnoneanabsenceproof.
+All400semanticgrades,preselectedauthor80(requestpositions2/7perhistory/method),Viewcostsstillpending.
+Naturalv4PID876750wasidlebeforeS1/Q1,200baselinefirstsclosed; handoffrecordnatural-v4-idle-handoff-
+record-v1.json. Replacedbeforeanyremainingcall toaddexplicitSource-screeningHTTPdependency.
+CURRENTnaturalv5 detachedPID1022802, owner-v5.json; sourceScanclosed, nowwaitsE2GPU3.
+SameJSONactionprotocolv2, nofirstretries orPromptrepair. Inneranswerformatfailures retained.
+NEWdetachedE2HTTPowner1109746: E2-task-firsts-and-review-owner-v1.json waitsE2v2models/DEV +all
+naturalv5firsts. Thenfixed/selectedE2firsts/native/sourceJudge andprimaryexpanded-base,
+secondaryexpanded-repeat summaries. Full96reference/failure args included;95actualbasecases+1failure.
+DO NOTstartcompetingHTTPfinalsourcegraderwhilethisowner/naturalownsdispatch; coordinateexplicitly.
+E2v2PID866950 stillownsGPUchains; ownv2PID876751 waitsGPU2. StoragecurrentPIDs/restorepathsbelow.
+Monitor --live mustpointnaturalv5 andincludeE2HTTPowner; readactualPIDs, notonlystatefiles.
+Freshconfirmation/justifiedseeds/fullcost/finalsynthesis stillincomplete; doNOTcompletegoal.
+
 # CURRENT phase27: coordinators adopted/recovered; baseDEV95 +1failure; loops ACTIVE
 
 Goal ACTIVE/incomplete. KEEP ANALYSIS VERY SHORT. R=/data/milai-experiments/20261112-reader-utility.

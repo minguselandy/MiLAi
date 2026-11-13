@@ -46,7 +46,8 @@
     "continuous_exact_source_review_binding": "7a9d359e",
     "actual_only_terminal_collection": "6d20579c",
     "preexecution_selection_logging": "365bd8cd",
-    "retained_collection_failure_denominators": "3bda68a6"
+    "retained_collection_failure_denominators": "3bda68a6",
+    "bounded_natural_source_screen": "08468807"
   },
   "formal_U": {
     "protocol": "/data/milai-experiments/20261112-reader-utility/formal-main3k-uq-protocol-v1.json",
@@ -551,6 +552,12 @@
         "original_position": 63,
         "continuation_owner": "/data/milai-experiments/20261112-reader-utility/e2-base-dev-remaining-owner-v1.json",
         "scope": "63closedprefix untouched; failedsource notrerun; onlyunexecutedsourcepositions64..95 collected. No firstterminalaction orReader packet inventedforfailedsource."
+      },
+      "HTTP_queue": {
+        "owner": "/data/milai-experiments/20261112-reader-utility/E2-task-firsts-and-review-owner-v1.json",
+        "pid": 1109746,
+        "status": "WAITING_FOR_E2_COLLECTIONS_AND_NATURAL_FIRSTS",
+        "scope": "PostQfixed/declaredselectedmethods, firstreadout+native+sourceTeacher+primary/secondarysummary. Usesfull96expectedreferenceandretainedbasefailuremanifest;95baseactualReadercalls, notfake96. Native-summarycompileridentitychecked. No confirmation."
       }
     }
   },
@@ -608,13 +615,13 @@
     "synthesis": "Five result layers, clustered paired uncertainty, full measured cost/unknown scopes, mechanism and counterexamples; conditional minimal Product recommendation only."
   },
   "next_actions": [
-    "Monitor currentE2v2, naturalv4, ownstatev2 andnewstoragev2, notstoppedpredecessors; compact monitor --live. Do notrestart adoptedexpandedPID148218.",
-    "E2HTTPqueue mustcompile/read actual95base cases andkeep1collection-stagefailure inall96primarydenominators. Use prepare_trajectory_outcome_review --expected-reference <fixed_context-bound-v1> --collection-failures <e2-base-retained-collection-failure-v1.json>. Summary --native-summaries validatesactualcompilerandaddsdeclaredmissing0, nofakeReadercall.",
-    "Naturalbaseline200firstsclosed. Preparetheir exactsource-reviewpackets; implementbounded117Sourcechunk screening andfinalsource/Host reviews undercoordinatedHTTPownership, withselectionuncertainty andformatfailuresretained. S1/Q1waitE2GPU3.",
-    "OwnstatefitqueuewaitsE2GPU2andthenexecutesboth83+63andDEV. Laterfirsts/reviewsstillneeded.",
-    "Freeze finalnewconfirmation candidates/metrics/budgets/repeat subset beforeexport; finish justifiedseedreplication andallmeasured-cost/unknown-scope/statisticalfinalsynthesis."
+    "Monitor detachedE2v2/ownv2/naturalv5 andstoragejobs usingactualprocess+artifact evidence. Do notrestartliveadoptedexpandedfit.",
+    "ImplementfinalnaturalactualHost/sourcegrader forpreparedpayloads;9baselinepayloads>50ktokens,max97656 before rubric. No silenttruncation/absenceproof; retaincoverage/formatfailures. Completepreselectedauthor80 andViewcosts.",
+    "NaturalS1/Q1firsts waitE2GPU3. E2HTTPqueue waitsallE2collections andallnaturalfirsts; futureofflinegraderHTTPmustnotcompete withtheseowners.",
+    "OwnstatefitqueuewaitsE2GPU2then83+Q63twoarms+DEV; stillneedslaterHTTPfirsts/reviews.",
+    "Freeze finalnewconfirmation methods/metrics/budgets/repeat subset beforeexport. Finishjustifieddecisivereplication anddeduplicatedmeasuredcost/unknownscope/statisticalfinalsynthesis."
   ],
-  "phase": 27,
+  "phase": 28,
   "signal_diagnostic": {
     "canonical110": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-vs-semantic110-diagnostic-v1.json",
     "author_spots": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-semantic-disagreement-spots-v1.json",
@@ -651,11 +658,11 @@
     "outcome_summary_scope": "Offline only, not an application execution. Full declared denominator; separate method labels for same-policy checkpoints; source review bound to exact first answer; future/missing native evidence has no reference-overlap target; equal histories within participant groups, then equal groups. No automatic success inference from text overlap; no training export.",
     "frozen_application_protocol": "/data/milai-experiments/20261112-reader-utility/natural-realtalk-application-plan-v1/protocol.json",
     "finite_application_owner": {
-      "path": "/data/milai-experiments/20261112-reader-utility/natural-realtalk-application-owner-v4.json",
-      "pid": 876750,
+      "path": "/data/milai-experiments/20261112-reader-utility/natural-realtalk-application-owner-v5.json",
+      "pid": 1022802,
       "session": null,
       "child_pid": null,
-      "status_at_snapshot": "WAITING_FOR_E2_GPU3_PRIORITY",
+      "status_at_snapshot": "SOURCE_SCAN_CLOSED_WAITING_E2_GPU3",
       "transport": "json_action",
       "methods": [
         "fixed_context",
@@ -680,7 +687,7 @@
         281
       ],
       "first4_format_valid": 0,
-      "scope": "200JSONactionbaselinefirstsretained; 6JSON_ACTION_MALFORMED and16VLLM_CHAT_TRUNCATED. S1/Q1notstarted. SamefrozenJSONprotocol/configs/outputs, norepeatofcompletedorfailedfirsts.",
+      "scope": "V4wasidlewithnoS1/Q1outputs; replacedbeforeanyremainingcalls toaddexplicitSource-screenHTTPdependency. Baseline200firsts unchanged. FrozenJSONactionprotocol unchanged.",
       "inherited_firsts": 200,
       "baseline_status_counts": {
         "fixed_context": {
@@ -691,7 +698,8 @@
           "COMPLETED": 84,
           "FAILED": 16
         }
-      }
+      },
+      "previous_idle_owner_record": "/data/milai-experiments/20261112-reader-utility/natural-v4-idle-handoff-record-v1.json"
     },
     "native_first_failure": "/data/milai-experiments/20261112-reader-utility/natural-realtalk-application-plan-v2/retained-native-first-failure.json",
     "native_status": "FAILED_FIRST_RETAINED_AUTO_TOOL_CHOICE_NOT_ENABLED_SERVER",
@@ -710,6 +718,42 @@
       "max_source_only_chunk_tokens": 23668,
       "status": "PREPARED_NO_SCREENING_OR_FINAL_JUDGE_CALLS",
       "scope": "FullfinalprefixsourceJSON alone69k-202ktokens; boundedofflinearrivalchunks preservealloriginalvalues/order. Futurequestions onlyoffline; nofutureSourcerow eligibleforearlierquery. Selectionfallible, notabsenceproof; actualHostcontext stillrequired."
+    },
+    "source_screening": {
+      "run": "/data/milai-experiments/20261112-reader-utility/natural-source-screening-v1/run.json",
+      "owner": "/data/milai-experiments/20261112-reader-utility/natural-source-scan-owner-v1.json",
+      "status": "COMPLETED_WITH_UNRESOLVED",
+      "chunks": 117,
+      "unresolved_chunks": 5,
+      "question_chunk_pairs": 673,
+      "validated_query_results": 647,
+      "coverage_counts": {
+        "selected": 189,
+        "none": 457,
+        "unknown": 1
+      },
+      "known_tokens": 1620657,
+      "unknown_usage_delta": 0,
+      "native_compute": {
+        "cpu_seconds": 13.825284828,
+        "wall_seconds": 738.8795654401183
+      },
+      "scope": "Offlineexistingmodel,thinkingoff,oneattempt/index-onlyselection.5invalidchunkoutputs retainedmasked; noneisnotabsenceproof. Noanswers/grades/onlinechanges/sha."
+    },
+    "baseline_review_inputs": {
+      "paths": [
+        "/data/milai-experiments/20261112-reader-utility/natural-json-fixed_context-source-review-v1",
+        "/data/milai-experiments/20261112-reader-utility/natural-json-view_cache_incremental-source-review-v1"
+      ],
+      "screened_payloads": "/data/milai-experiments/20261112-reader-utility/natural-screened-baseline-review-inputs-v1/manifest.json",
+      "positions": 200,
+      "completed_bound_contexts": 178,
+      "execution_failures": 22,
+      "source_neighbor_expansion": 2,
+      "max_payload_only_tokens": 97656,
+      "payloads_above50000tokens": 9,
+      "status": "PREPARED_NOT_SEMANTICALLY_GRADED",
+      "scope": "Originalsource-prefix/allactualfinalcontext retained. SelectedSourcesplus2neighborsclippedatarrivalcut; fullydeliveredexactoriginalbodiesalsoincluded. Unresolvedcoverageexplicit, no sourceabsenceinference. Fullrequestcapacityincludingrubric/outputreserve stilltocheck."
     }
   },
   "phase04_validation": {
@@ -1294,6 +1338,14 @@
     "ruff_pass": true,
     "diff_check_pass": true,
     "actual_tail32_collection_and95endpoint_binding_closed": true,
+    "no_sha_validation": true
+  },
+  "phase28_validation": {
+    "source_screen_and_source_binding_tests_passed": 11,
+    "ruff_pass": true,
+    "diff_check_pass": true,
+    "actual117screen_chunks_closed": true,
+    "actual200baseline_source_bindings_closed": true,
     "no_sha_validation": true
   }
 }
