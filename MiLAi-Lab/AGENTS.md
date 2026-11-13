@@ -1,3 +1,55 @@
+# CURRENT phase26: E1 CLOSED; natural JSON-action actualrun; E2/own queues active
+
+Goal ACTIVE/incomplete. R=/data/milai-experiments/20261112-reader-utility.
+KEEP ANALYSIS VERY SHORT; actonfiles/tools. No SHA/contentfingerprints/subagents/Product/defaultchanges/
+sharedservice restart/push. Currentcode7a9d359e; recentdocs752ef59e/aa811363.
+E1fullteacher CLOSED288groups1unresolved,574records107quote-maskedcandidates. Owner2573961exited.
+formal-task-dev96-all-six-summary-v1/summary.json complete_supported counts fixed40,S131,U030,U134,
+Q031,Q132 over96. Q1-Q0=+.0104167,bootstrap95[-.0833333,.09375]; unknownbounds[-.197917,.260417].
+Notindependent orsuperiority/equivalenceclaim. NativeF1/author72unchanged. Alloriginalfirsts preserved.
+formal-dev96-author-teacher-agreement-v1:9/72binarydifferences,3quote-validation masks6semantic;
+24bothpositive,4authoronly,5teacheronly,39neither. Substitutingonlypreselected12authorpositive
+judgments wouldmakeQ31/31, merelysensitivity, NOlabelsreplaced. E1PNG/PDF/CSVformal-E1-task-results-v1.
+NATURAL NATIVE FAILED firstposition400: serviceerror auto tool_choice requires enable-auto-tool-choice/
+tool-call-parser. Nativefirst/trace retained; charged10539estimatedtokens,known0,unknown_usage+1.
+No completedgeneration orcontrollerfailure inferred. Originalnaturalv2owner148719/session95767failed.
+CURRENTJSONaction protocol natural-realtalk-application-plan-v2/protocol.json, freshall4methods;
+existingclientJSONaction preservesautonomous toolvsanswerchoice; NOTnativeautotool evidence.
+LIVE naturalowner-v3 PID303814/session73477 child303818 baselinefixed/cache200firsts.
+Outputs natural-realtalk-autonomous-json-{baselines,common_s1,q1}-v2. S1/Q1 laterwaitE2GPU3.
+OriginalsameHost/capacity/sourcecuts/methods. Newinneranswer/explanation/evidence formatprompt
+isNOTfollowed infirst4: providerrawJSON hasouteranswerplainstring, nohiddenfields. Keepformatfailures,
+no posthocrepair/extraction; primarysource reviewseesactualwholeanswer, auxiliarystrictfieldscoremissing.
+Actualfirst4 source/finalwirevalidation PASSED:85/177/228/281originals each exactlymatchpre-finalstore;
+1toolattempt/return each,0errors. natural-json-first4-binding-observation-v2.json. V1observationstopped
+onJSONDecodeError,nooutcomeschanged. Do notusewrapper /dev/stdin (runpycanconsumeinputwithoutwork);
+useactualscriptpathorCUDApython heredocwithsite.addsitedir directly.
+Newtools/prepare_continuous_source_review.py bindscloseddriver/profile toactualresponseID/finalwire,
+pre-finaloriginalSourceprefix (identity/role/origin/body), rejects future/missing/changed sources.
+13source/outcome testsPASS,RuffPASS; actual4completedbindings checked. Nativefailedfirst bindingalso
+savednatural-native-failed-first-source-binding-v1, nosemanticgrade orfutureexposureclaim.
+Sourcecatalogue finalprefixalone69k-202ktokens>65kcontext. Preparednatural-source-scan-plan-v1:
+117disjointarrivalchunks8944sources,maxsourceJSON23668tokens,673question-chunkpairs. ALLliteralfields/
+orderroundtrip; onlyquerieswhosecutcontainschunk eligible. Offlinefuturequerytextokay,butnofuture
+Sourceoranswers online. Screening/finaljudging NOTRUN. Selectioncanmissfacts, notabsenceproof.
+Need implementboundedexistingmodelsource-indexscreening+actualHost/sourcegrader, all400positions,
+pluspreselectedauthor80 (requestindices2/7 eachhistory eachmethod). Unresolvedcoverage staysunknown.
+E2owner148212/session82607 unchangedchains: GPU2expandedU+Q+DEV;GPU3baseU+Q+DEV thenrepeatU+Q+DEV.
+LastobservedbaseU148221 CLOSED420/ledgertrue; baseQ562857running; expanded148218running. Revalidate.
+PostQ63/21nominationfixedrules. HTTPfirsts/reviewsNOTinGPUqueue; stillneedcoordinatedqueue.
+OWNSTATE finitefitowner PID478474/session19947 waitingE2GPU2chainindex>=3 andfreeGPU2/disk.
+Protocolownstate-two-chain-fit-protocol-v1; formal-ownstate-{old,own}-seed0-v1-plan.json:
+657main4056replay,83updates,curves14/28/55/83,full28/83,commonfixedQ1,newoptimizers; thenbothsameQ63
+andfixed/nominatedactual96DEV. NoHTTPfirsts, nofitlaunchedyet, noendlessrecollection.
+STORAGE historical59weightdeltas CLOSED, saved32215441408payloadbytes; currentU/Q12closed6.04GiB.
+Restoreentry/immutablebase instructions below remaincritical. Allfixedfinalroots stayraw.
+LIVEnewfitstoragecompanion PID505362/session67544 R/phase26-closed-new-fit-storage-v1:
+6E2+4ownfits onlyAFTERnativechildexit0 ANDsamearmactualDEVclosed. Hardlinkidenticalfinalalias,
+archiveintermediatesbyteverifiedXOR,gentlydeallocate recoveryzeros preservingmtime; keepfinalroots.
+Noactivefit orpendingnominatedDEVweighttouched. RestoreCLI same <run> <update> whenneeded.
+observe_jobs_v1.py --live nowincludesJSONv3,ownfitqueue,newfitstorage. Olderheadershistorical.
+Freshconfirmation/decisivereplication/fullcost/statisticalfinalsynthesis stillincomplete. Do NOTcompletegoal.
+
 # CURRENT phase25: E2 FITS RUNNING; all6 firsts/author72 closed; fullteacher ongoing
 
 Goal ACTIVE/incomplete. R=/data/milai-experiments/20261112-reader-utility.

@@ -42,7 +42,8 @@
     "continuous_declared_answer_field": "107af748",
     "matched_own_state_sampler": "0c9ba3e1",
     "explicit_shared_overlap_exclusion": "06ed4f92",
-    "lossless_weight_deltas": "6b7faae3"
+    "lossless_weight_deltas": "6b7faae3",
+    "continuous_exact_source_review_binding": "7a9d359e"
   },
   "formal_U": {
     "protocol": "/data/milai-experiments/20261112-reader-utility/formal-main3k-uq-protocol-v1.json",
@@ -576,20 +577,20 @@
   "required_remaining": {
     "A": "Original prototype12tests and both I2 native/source checks closed. Preserve K/horizon/long-input diagnostics and failures; synthesize their limits with main task results.",
     "F4_F5": "Scale multi-request actual sources; add h=0 stratum, legal stop diagnostics, actual K and complementary A/B/A+B conditions; do not count duplicate sources independently.",
-    "B_E0_E1": "U/Q fixed fits and full-panel nominations closed; complete six actual DEV firsts, grouped review, planned12source author check and task/cost assessment. No task superiority inferred from reference labels.",
+    "B_E0_E1": "E1U/Q fixed/selected reference points,actual576firsts,officialF1,fullTeacher andauthor72sourcecheck closed. Summarizecosts/mechanism withnoadvantage/equivalenceclaim; laterfinalsynthesis stillneeded.",
     "C_E2": "Fresh E2 base3k3pass, expanded10k3pass and base3k9pass using same new replay/permutation IDs and commonS1, then sameQ; data/plans ready but fitting waitsQ/actualDEVassessment. OldUreplay differs, and checkpoint420 of9pass is not a separate3pass schedule. Oneown-state round and decisive seed replication remain.",
     "D_E4": "Freeze new confirmation sources/candidates/short-answer format/budgets/repeat subset before outcomes; actual full-menu and native task scoring.",
     "applications": "New natural histories initial ~32 if available, autonomous Host and continuous View/update line; distinguish invocation from control; retain failures.",
     "synthesis": "Five result layers, clustered paired uncertainty, full measured cost/unknown scopes, mechanism and counterexamples; conditional minimal Product recommendation only."
   },
   "next_actions": [
-    "Finish existing all-six DEV groupedteacher andsummaries; compare72authorbindings withoutrewritingfirsts. All576nativefirsts andauthorpanel areclosed.",
-    "Monitor E2nativefits andfiniteQ/DEVstages; preservefixedendpoints andfull-panel nomination. Do notduplicate GPU2/3fits; GPU3reservedforE2untilitschaincloses.",
-    "Plan/execute ownstate matched657vs657 continuations fromsameQ1 withsameQ afteravailableGPU andclosedDEVassessment; data/capacityready, nofit yet.",
-    "Naturalv2waiter ownsnextHTTPapplicationfirsts afterformalreview/ownscoreclosure/disk; learnedstageswaitE2GPU3priority. Buildactual400source reviews, planned80authorbindings, View/costs afterfirsts.",
-    "Coordinate E2actualDEVreadout/review queue afterfits/collections andexistingHTTPowner; thenfreeze finalconfirmation methods/metrics/budgets/repeats beforeexport. Decisivereplication andfinalcost/statistics remain."
+    "Monitor E2nativeU/Q/actualDEV queue; baseUclosed420 andbaseQrunning, expandedUcontinues. Preserveallfirsts andfixedfullpanelnomination.",
+    "Ownstate657pairedcontinuationqueue waitsE2GPU2release; sameQafterboth, thenactualDEV. Do notlaunchduplicateGPUjobs.",
+    "NaturalJSONactionv2 firstscontinue withoriginalsources/ownbanks; native400failure retainedandnotrelabelled ascontrollerfailure. First4innerformatfailures arenot repaired.",
+    "Implement/run boundedofflineSource screening+exactactualHost/sourceanswer review aftercoordinatedHTTPavailability; sourcechunks117prepared, final400grades/author80checks/Viewcosts stillpending.",
+    "Coordinate E2/ownactualDEVfirsts+reviews withnaturalHTTPowner; freeze finalnewconfirmation candidates/metrics/budgets/repeat subset beforeexport; justifieddecisivereplication andfinalcost/statistics remain."
   ],
-  "phase": 25,
+  "phase": 26,
   "signal_diagnostic": {
     "canonical110": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-vs-semantic110-diagnostic-v1.json",
     "author_spots": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-semantic-disagreement-spots-v1.json",
@@ -626,10 +627,12 @@
     "outcome_summary_scope": "Offline only, not an application execution. Full declared denominator; separate method labels for same-policy checkpoints; source review bound to exact first answer; future/missing native evidence has no reference-overlap target; equal histories within participant groups, then equal groups. No automatic success inference from text overlap; no training export.",
     "frozen_application_protocol": "/data/milai-experiments/20261112-reader-utility/natural-realtalk-application-plan-v1/protocol.json",
     "finite_application_owner": {
-      "path": "/data/milai-experiments/20261112-reader-utility/natural-realtalk-application-owner-v2.json",
-      "pid": 148719,
-      "session": 95767,
-      "status_at_snapshot": "WAITING_FOR_FORMAL_DEV_HTTP_CLOSURE",
+      "path": "/data/milai-experiments/20261112-reader-utility/natural-realtalk-application-owner-v3.json",
+      "pid": 303814,
+      "session": 73477,
+      "child_pid": 303818,
+      "status_at_snapshot": "RUNNING_JSON_ACTION_BASELINES",
+      "transport": "json_action",
       "methods": [
         "fixed_context",
         "view_cache_incremental",
@@ -643,17 +646,35 @@
       "planned_positions_each": 100,
       "histories": 10,
       "dependency_groups": 3,
-      "answer_format": "answer_separate_v1",
-      "GPU3_reservation": "Only when learned model stage actually running; check owner.gpu3_reserved before E2 GPU3 launch",
-      "waits": [
-        "formalDEVsixmethodHTTPownerCOMPLETED",
-        "ownstatecollection-and-scoreownerCOMPLETED",
-        "16GiBdisk",
-        "GPU3<=8192MiB forlearnedstages"
+      "GPU3_reservation": "Learnedstages waitE2gpu3_reserved=False; noforcedtools orservicechanges.",
+      "source_binding_tool": "tools/prepare_continuous_source_review.py",
+      "first4_observation": "/data/milai-experiments/20261112-reader-utility/natural-json-first4-binding-observation-v2.json",
+      "first4_valid_source_bindings": [
+        85,
+        177,
+        228,
+        281
       ],
-      "not_executed_yet": true,
-      "superseded_waiter": "/data/milai-experiments/20261112-reader-utility/natural-realtalk-application-owner-v1.json",
-      "replacement_scope": "v1waswaiting with0stages/noapplicationoutputdirs; exited143 after deliberateSIGTERM beforeanycalls. v2samefrozenmethods/configs/outputs plus explicitE2gpu3_reserved priority; no service restart orfirstretry."
+      "first4_format_valid": 0,
+      "scope": "Freshdeclaredtransportversion; nativefailedfirst staysseparate. Strictnestedanswerformat failures retained, norepair or favorableextraction. Primaryactualresponse/sourcequality stillrequiresreview."
+    },
+    "native_first_failure": "/data/milai-experiments/20261112-reader-utility/natural-realtalk-application-plan-v2/retained-native-first-failure.json",
+    "native_status": "FAILED_FIRST_RETAINED_AUTO_TOOL_CHOICE_NOT_ENABLED_SERVER",
+    "native_generation_ledger_delta": {
+      "charged_tokens": 10539,
+      "known_tokens": 0,
+      "unknown_usage": 1
+    },
+    "current_protocol": "/data/milai-experiments/20261112-reader-utility/natural-realtalk-application-plan-v2/protocol.json",
+    "source_review_capacity": {
+      "source_size": "/data/milai-experiments/20261112-reader-utility/natural-review-source-size-v1.json",
+      "prepared_chunks": "/data/milai-experiments/20261112-reader-utility/natural-source-scan-plan-v1/manifest.json",
+      "chunks": 117,
+      "original_sources": 8944,
+      "question_chunk_pairs": 673,
+      "max_source_only_chunk_tokens": 23668,
+      "status": "PREPARED_NO_SCREENING_OR_FINAL_JUDGE_CALLS",
+      "scope": "FullfinalprefixsourceJSON alone69k-202ktokens; boundedofflinearrivalchunks preservealloriginalvalues/order. Futurequestions onlyoffline; nofutureSourcerow eligibleforearlierquery. Selectionfallible, notabsenceproof; actualHostcontext stillrequired."
     }
   },
   "phase04_validation": {
@@ -685,7 +706,7 @@
       "status_at_launch": "WAITING_FOR_PRE_Q_FIRSTS_AND_Q_COLLECTIONS"
     },
     "trajectory_status": "ALL_SIX_CLOSED",
-    "readout_status": "ALL_SIX_FIRSTS_NATIVE_AND_AUTHOR72_CLOSED; GROUPED_TEACHER_RUNNING",
+    "readout_status": "ALL_SIX_FIRSTS_NATIVE_AUTHOR72_AND_FULL_TEACHER_CLOSED",
     "closed_native_at_snapshot": {
       "fixed_context": {
         "states": 96,
@@ -760,7 +781,79 @@
       "status": "CLOSED_NONINDEPENDENT_AUTHOR_PANEL"
     },
     "identical_wire_first_variation_diagnostic": "/data/milai-experiments/20261112-reader-utility/formal-task-dev96-identical-wire-first-variation-v1.json",
-    "native_and_author_summary": "/data/milai-experiments/20261112-reader-utility/formal-task-dev96-native-and-author-summary-v1.json"
+    "native_and_author_summary": "/data/milai-experiments/20261112-reader-utility/formal-task-dev96-native-and-author-summary-v1.json",
+    "full_teacher_summary": "/data/milai-experiments/20261112-reader-utility/formal-task-dev96-all-six-summary-v1/summary.json",
+    "author_teacher_comparison": "/data/milai-experiments/20261112-reader-utility/formal-dev96-author-teacher-agreement-v1.json",
+    "result_figure": "/data/milai-experiments/20261112-reader-utility/formal-E1-task-results-v1/summary.json",
+    "closed_source_review": {
+      "counts": {
+        "fixed_context": {
+          "complete_supported": 40,
+          "incomplete": 21,
+          "unknown": 31,
+          "incorrect": 3,
+          "execution_failed": 1
+        },
+        "common_s1": {
+          "complete_supported": 31,
+          "execution_failed": 5,
+          "incomplete": 37,
+          "unknown": 23
+        },
+        "u0": {
+          "complete_supported": 30,
+          "incomplete": 38,
+          "execution_failed": 8,
+          "unknown": 18,
+          "incorrect": 2
+        },
+        "u1": {
+          "complete_supported": 34,
+          "unknown": 20,
+          "incomplete": 37,
+          "execution_failed": 4,
+          "incorrect": 1
+        },
+        "u0q": {
+          "complete_supported": 31,
+          "incomplete": 39,
+          "unknown": 20,
+          "incorrect": 2,
+          "execution_failed": 4
+        },
+        "u1q": {
+          "complete_supported": 32,
+          "unknown": 24,
+          "incomplete": 39,
+          "execution_failed": 1
+        }
+      },
+      "primary": {
+        "left": "u1q",
+        "right": "u0q",
+        "sources": 96,
+        "observed_complete_difference": 0.010416666666666666,
+        "source_bootstrap95": [
+          -0.08333333333333333,
+          0.09375
+        ],
+        "unknown_identification_interval": [
+          -0.19791666666666666,
+          0.2604166666666667
+        ]
+      },
+      "reviewer_independent": false,
+      "review_groups": 288,
+      "unresolved_groups": 1,
+      "validated_records": 574,
+      "masked_candidates": 107,
+      "author_binary_disagreements": 9,
+      "author_difference_classes": {
+        "quote_validation_mask": 3,
+        "semantic_interpretation": 6
+      },
+      "no_labels_replaced": true
+    }
   },
   "I2_public": {
     "prepared": "/data/milai-experiments/20261112-reader-utility/i2-public-dev8-terminal-short-v1/run.json",
@@ -1064,6 +1157,15 @@
       "retained_first_failure": "/data/milai-experiments/20261112-reader-utility/ownstate-matched-data-owner-v1.json",
       "failed_first_child_cpu_seconds": 27.294794,
       "scope": "Same nativeevent/condition quotas, minactive counts, source-balanced loss. Fulloriginalinputs/targets retained; no refill after shared replay exclusion. PriorQ1initializeralready saw originalreplay; notunseen-source/generalizationclaim."
+    },
+    "fit_queue": {
+      "protocol": "/data/milai-experiments/20261112-reader-utility/ownstate-two-chain-fit-protocol-v1.json",
+      "owner": "/data/milai-experiments/20261112-reader-utility/ownstate-two-chains-owner-v1.json",
+      "pid": 478474,
+      "session": 19947,
+      "status": "WAITING_FOR_E2_GPU2_CHAIN",
+      "GPU": 2,
+      "scope": "One old/own matched continuation each83updates fromsameQ1 thencommonQ63 andactual96DEV; atmostoneadditionalpostQfullpanelnomination. No HTTPfirsts inthisqueue. No repeatedrecollectionloop."
     }
   },
   "phase22_UQ_storage": {
@@ -1111,8 +1213,25 @@
     "historical_pid": 107977,
     "historical_session": 90717,
     "planned_historical_weights": 59,
-    "status": "HISTORICAL_FINITE_ARCHIVE_RUNNING",
+    "status": "BOTH_CURRENT_AND_HISTORICAL_WEIGHT_ARCHIVES_COMPLETED",
     "restore": "python3 <appropriate-archive-directory>/restore.py <run-directory-name> <update-directory-name>",
-    "scope": "Each rawintermediateweight removedonlyafter completebyteverification anddurable sidecar. Allfixedterminalweights remainraw andanchored byretainedhardlinks. Keepbases/deltas/sidecars/frozenhelper. Noquantization/SHA; restorebeforefutureintermediateaccess."
+    "scope": "Each rawintermediateweight removedonlyafter completebyteverification anddurable sidecar. Allfixedterminalweights remainraw andanchored byretainedhardlinks. Keepbases/deltas/sidecars/frozenhelper. Noquantization/SHA; restorebeforefutureintermediateaccess.",
+    "historical_closed_weights": 59,
+    "historical_weight_payload_allocated_bytes_saved": 32215441408
+  },
+  "phase26_validation": {
+    "continuous_source_and_outcome_tests_passed": 13,
+    "ruff_pass": true,
+    "actual_first4_closed_context_and_source_prefix_bindings_verified": true,
+    "native_failure_bound_without_semantic_grade": true,
+    "no_sha_validation": true
+  },
+  "phase26_new_fit_storage": {
+    "manifest": "/data/milai-experiments/20261112-reader-utility/phase26-closed-new-fit-storage-v1/manifest.json",
+    "pid": 505362,
+    "session": 67544,
+    "planned_closed_fits": 10,
+    "status": "WAITING_FOR_CLOSED_FITS_AND_THEIR_DEV",
+    "scope": "Finite6E2+4own fits. Requireoriginalnativechildexit0 inownerreceipt andsamearmfixed/selectedDEVclosure beforearchivinganyweight. Finalweights stayraw; recoveryonlyzeroextentdeallocation withmtimepreserved. PreventsremovingnominatedcheckpointbeforeactualDEV."
   }
 }
