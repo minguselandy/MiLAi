@@ -1,5 +1,11 @@
 # CURRENT phase41: ALL1024firsts/native +AUTHOR128 CLOSED; sourcegrade512 RUNNING
 
+FIGUREENTRYprepared: R/plot_confirmation_first_results_v1.py (Python3 stdlib/NumPy/Matplotlib), syntaxPASS.
+Afterall3new-confirmation256-{primary,common_s1_secondary,rules_secondary}-summary-v1close, runonce
+`python3 R/plot_confirmation_first_results_v1.py`; outputsconfirmation-first-results-figure-v1 PNG/PDF/CSV
+for4methodoutcomes/nativeF1 and3pairedcontrasts/unknownranges. No partialinputs, no newmodelcalls.
+NOTYETEXECUTED/visuallychecked; inspectbothPNGsaftergeneration. Thisisfinalpresentation, notnewcomparison.
+
 REPORTCLEANUP:RESULTSreportE4nowonecurrentoverview with4methodfirst/native,controller andauthor tables
 generatedfromclosedartifacts. Removedstale"otherfirsts/authorpending"snapshotparagraphs; historicalexecutionlog
 retained. Naturalall400sourcegradestatus correctedtoclosed. StillINCOMPLETE; sourceprimary/repeats pending.

@@ -1582,7 +1582,14 @@
   },
   "results_report": {
     "path": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/docs/MILAI_READER_UTILITY_RESULTS_20261113.md",
-    "status": "INCOMPLETE_LIVING_SYNTHESIS_NOT_FINAL_ACCEPTANCE"
+    "status": "INCOMPLETE_LIVING_SYNTHESIS_NOT_FINAL_ACCEPTANCE",
+    "confirmation_figure_entry": {
+      "script": "/data/milai-experiments/20261112-reader-utility/plot_confirmation_first_results_v1.py",
+      "status": "PREPARED_SYNTAX_CHECKED_NOT_EXECUTED",
+      "requires": "Allthreeclosedfrozenfirstcomparisons, TESTroles, exact256denominators andoriginalnativeF1/failedcounts",
+      "outputs": "confirmation-first-results-figure-v1: twoPNG/twoPDF/twoCSV plusmanifest",
+      "scope": "Originalfirsts only. Source/native/unknownidentification ranges separate; no newexperiment orpartialresultvisualization. Visualinspectionpending."
+    }
   },
   "phase30_execution": {
     "E2_repeat_U": {
