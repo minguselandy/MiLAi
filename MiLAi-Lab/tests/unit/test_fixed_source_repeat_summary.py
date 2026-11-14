@@ -71,13 +71,17 @@ def test_closed_artifacts_keep_exact_wire_and_do_not_salvage_failed_first(tmp_pa
                 request = save(root / (family + "-request.json"), wire)
                 failed = method == "a" and stage == "first" and family == "f1"
                 record = {"request": request, "answer": None if failed else "Answer"}
-                readout = save(root / (family + "-readout.json"), record)
+                readout = save(root / family / "readout.json", record)
+                fields = {"answer": "Answer", "explanation": stage, "evidence": []}
+                if not failed:
+                    save(root / family / "response.json", {"choices": [
+                        {"message": {"content": json.dumps(fields)}}]})
                 cases.append({"family": family, "event_id": family + "/q/step2", "question": family,
                     "native_control": {"native_question_id": family + "-q", "split": "test"},
                     "branches": [{"action": action, "readout": readout,
                         "readout_status": "FAILED" if failed else "COMPLETED",
                         "answer": record["answer"],
-                        "answer_fields": None if failed else {"answer": "Answer"}}]})
+                        "answer_fields": None if failed else fields}]})
                 scores[family] = 0 if failed else 1
             save(root / "review-inputs.json", cases)
             owner[stage + "_bound"][method] = str(root)
@@ -92,6 +96,8 @@ def test_closed_artifacts_keep_exact_wire_and_do_not_salvage_failed_first(tmp_pa
     assert result["methods"]["a"]["first_native_F1"] == 0
     assert result["methods"]["a"]["second_native_F1"] == 1
     assert result["methods"]["a"]["both_completed"] == 0
+    assert result["methods"]["b"]["both_completed_exact_answer_field"] == 1
+    assert result["methods"]["b"]["both_completed_exact_full_response"] == 0
     assert len(result["positions"]) == 2
     changed = tmp_path / "a/repeat/f1-request.json"
     save(changed, {"messages": ["changed"]})
@@ -99,3 +105,19 @@ def test_closed_artifacts_keep_exact_wire_and_do_not_salvage_failed_first(tmp_pa
                                     str(tmp_path / "invalid")])
     with pytest.raises(ValueError, match="exact first input"):
         main()
+
+
+def test_full_response_requires_the_original_bound_content(tmp_path):
+    import json
+
+    from summarize_fixed_source_repeats import completed_response_content
+
+    branch = {"readout": str(tmp_path / "readout.json"), "answer": "Yes",
+              "answer_fields": {"answer": "Yes", "explanation": "Evidence A", "evidence": []}}
+    with pytest.raises(FileNotFoundError):
+        completed_response_content(branch)
+    response = {"choices": [{"message": {"content": json.dumps(
+        {"answer": "Yes", "explanation": "Different evidence", "evidence": []})}}]}
+    (tmp_path / "response.json").write_text(json.dumps(response))
+    with pytest.raises(ValueError, match="bound answer fields"):
+        completed_response_content(branch)

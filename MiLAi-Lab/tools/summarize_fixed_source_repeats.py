@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import json
 import random
 import statistics
 import time
@@ -11,6 +12,20 @@ from pathlib import Path
 
 from milai_lab.harness.artifact_io import read_json, write_json
 from summarize_trajectory_outcomes import endpoint_status
+
+
+def completed_response_content(branch: dict) -> str:
+    """Read the original final content, excluding provider metadata and reasoning."""
+    response = read_json(Path(branch["readout"]).parent / "response.json")
+    content = response["choices"][0]["message"]["content"]
+    if not isinstance(content, str):
+        raise ValueError("Completed Reader response must have textual final content")
+    parsed = json.loads(content)
+    fields = branch.get("answer_fields")
+    if ((fields is not None and parsed != fields)
+            or parsed.get("answer") != branch["answer"]):
+        raise ValueError("Original final response differs from the bound answer fields")
+    return content
 
 
 def difference(values: list[float], seed: int) -> dict:
@@ -63,7 +78,9 @@ def summarize_pairs(rows: list[dict], primary: tuple[str, str], seed: int) -> di
                  "first or doubling the independent source count. These are the preselected "
                  "subset, not the full primary confirmation. Native score changes describe "
                  "Reader output variation. Source-status changes also include reviewer sampling "
-                 "and grouping effects, not pure Host variance or independent truth."}
+                 "and grouping effects, not pure Host variance or independent truth. Exact full "
+                 "response compares the saved final message.content, including explanation and "
+                 "evidence; it excludes provider IDs, usage, timings and reasoning content."}
 
 
 def main() -> None:
@@ -129,7 +146,8 @@ def main() -> None:
                 "first_native_F1": first_scores[family],
                 "second_native_F1": second_scores[family],
                 "exact_answer_field": bool(both and af and bf and af["answer"] == bf["answer"]),
-                "exact_full_response": bool(both and first["answer"] == second["answer"]),
+                "exact_full_response": bool(both and completed_response_content(first)
+                                            == completed_response_content(second)),
                 "first_source_status": endpoint_status(first["readout_status"],
                                                         first_reviews.get(first["readout"])),
                 "second_source_status": endpoint_status(second["readout_status"],
