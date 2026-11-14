@@ -1,3 +1,32 @@
+# CURRENT phase42: firstsourceprimary/authoragreement/figures CLOSED; secondReader RUNNING
+
+Goal ACTIVE/incomplete. KEEP ANALYSIS VERY SHORT. R=/data/milai-experiments/20261112-reader-utility.
+No SHA/content fingerprints/subagents/Product/default/servicechanges/push. No TESTretuning/firstreplacement.
+HTTP3538727 nowsecondReader:fixed32CLOSED0failed; expandedchild1042071runninglatest19/32,1failed;
+rules/S1followthenrepeat64sourcegroups/native/summaries. Stability3763322waitswholeHTTPclosure.
+ALLFIRSTS/source/native/author128/agreement CLOSED. DO NOTREDO anyfirst/review/author.
+Sourcecompletefixed116/expanded92/rules72/S196;unknown53/60/50/51,failures1/10/12/18of256each.
+Primaryexpanded-fixed=-.09375 CI[-.15625,-.03125];unknownidentification[-.30078125,.140625]notCI.
+Bothcomplete69/expandedonly23/fixedonly47/neither117, eitherunknown73. Native-.031730159
+CI[-.075177713,.011077837]. Validatedlabels favorfixed, notunconditionaltruequality dueunknown/raterbias.
+Secondaryexp-S1=-.015625 CI[-.07421875,.04296875],unknown[-.21484375,.21875];native+.009810824
+CI[-.034360565,.054334311]. Exp-rules+.078125 CI[.01171875,.14453125],unknown[-.1171875,.3125];
+native+.067034569 CI[.021467661,.112174503]. Positivesecondary DOESNOTreplaceprimary orprove+5ppfloor.
+512sourcegroups4unresolved1016returnedrecords177masked;2699023known/chargedtokens,unknownusage0,
+nativeCPU52.05537916/wall7275.41401643 readbackverified. confirmation-first-source-evidence-v1.
+Material sufficientfixed124/expanded102/rules85/S1100; insufficient85/94/120/102;unknown45/58/49/52
+plus2unresolvedeach. AutoS11material-sufficientReaderfailure, notsameasauthor2.
+AUTHORagreement611414 terminalCOMPLETED, absentPIDnormal. new-confirmation-author-teacher-agreement-v1.json
+18/128binarydisagreements:7fixed/5expanded/2rules/4S1.17auto-positiveauthorother,1oppositequote-mask.
+Exactstatusagreement87/128; binaryagreementnotaccuracy, authornotgold/nonindependent/unblinded.
+FIRSTFIGURESfinal confirmation-first-results-figure-v2 contains2PNG/2PDF/2CSV/manifest/visual-check-v1.json.
+BothPNGs viewed. v1retained; v2onlynativeaxis tickdensity +caption3decimalpp, CSVbytesidentical,noSHA.
+Scriptplot_confirmation_first_results_v2.py alreadyRUN, DO NOTrerun(overwriteguard). No source/datachange.
+Reportupdatedmain/secondarycounts+CI+unknownbounds, materiallayer,authorlimits andbothfigures.
+Remaining128secondcalls/source/native/stability, finalcost(overlap/knownunknown), globalmechanism/report/audit.
+216settlement3838848 and123settlement3939766 stillwaitingHTTP/stability; no newcostwriteyet.
+No moreDEVdiagnostics/per-shellaccounting/seedclaims. Do NOTmarkcomplete untilremainingactualclosures.
+
 # CURRENT phase41: ALL1024firsts/native +AUTHOR128 CLOSED; sourcegrade512 RUNNING
 
 FIGUREENTRYprepared: R/plot_confirmation_first_results_v1.py (Python3 stdlib/NumPy/Matplotlib), syntaxPASS.

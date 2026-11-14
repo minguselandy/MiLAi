@@ -1,7 +1,7 @@
 {
   "status": "ACTIVE_INCOMPLETE",
   "goal_turn_classification": "PROGRESS",
-  "previous_turn_classification": "PROGRESS",
+  "previous_turn_classification": "VERIFIED_WAIT",
   "plan": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261112_2XA10040GB_v3.md",
   "artifact_root": "/data/milai-experiments/20261112-reader-utility",
   "prior_progress": "reader-utility-progress-20261112-v2.json",
@@ -704,13 +704,13 @@
     "synthesis": "Five result layers, clustered paired uncertainty, full measured cost/unknown scopes, mechanism and counterexamples; conditional minimal Product recommendation only."
   },
   "next_actions": [
-    "Monitororiginalfullsourcegrade572646 underHTTP3538727, planned512groups. All1024firsts/native andauthor128CLOSED; do notrepeat.",
-    "Afterprimarysourcecomparison closes, authoragreement611414runsautomatically. Inspectdisagreements andlimitations, keepfirstlabels unchanged.",
-    "HTTPthenruns preselected128secondReadercalls/source/native; stability3763322follows, nofirstreplacement/Ndoubling.",
-    "AfterHTTP/stability,216settlement3838848then123settlement3939766; finishremainingconfirmationHTTP/authoranalysis/stabilitycost scope andunknowncost disclosure.",
-    "Writefinalfive-layer report, figures andmechanism/globalconclusions, then plan-basedcompletionaudit; noTESTretune orseedrobustnessclaims."
+    "MonitorHTTP3538727: fixedsecond32CLOSED; expandedsecondchild1042071running, rules/S1follow. Keepfirsts separate.",
+    "Allfirsts/source/native/author128/agreement/firstfigures CLOSED. Do notregrade/retune/switchprimary orredo author.",
+    "Afterall128seconds/source/native, stability3763322runs; inspectexactwire andpairedfirst-second results, notbest-of-two.",
+    "AfterHTTP/stability,216settlement3838848then123settlement3939766. FinishremainingconfirmationHTTP/authoranalysis/stability/figure measuredcosts andunknownscope disclosure.",
+    "Completeglobalmechanism/five-layer synthesis, finalreport andrequirement audit. No primarygain/seedstability claim orProduct migration."
   ],
-  "phase": 41,
+  "phase": 42,
   "signal_diagnostic": {
     "canonical110": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-vs-semantic110-diagnostic-v1.json",
     "author_spots": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-semantic-disagreement-spots-v1.json",
@@ -1584,11 +1584,13 @@
     "path": "/cra/memory/mx_memory/MiLAi-worktrees/a100-development-20261104/MiLAi-Lab/docs/MILAI_READER_UTILITY_RESULTS_20261113.md",
     "status": "INCOMPLETE_LIVING_SYNTHESIS_NOT_FINAL_ACCEPTANCE",
     "confirmation_figure_entry": {
-      "script": "/data/milai-experiments/20261112-reader-utility/plot_confirmation_first_results_v1.py",
-      "status": "PREPARED_SYNTAX_CHECKED_NOT_EXECUTED",
-      "requires": "Allthreeclosedfrozenfirstcomparisons, TESTroles, exact256denominators andoriginalnativeF1/failedcounts",
-      "outputs": "confirmation-first-results-figure-v1: twoPNG/twoPDF/twoCSV plusmanifest",
-      "scope": "Originalfirsts only. Source/native/unknownidentification ranges separate; no newexperiment orpartialresultvisualization. Visualinspectionpending."
+      "script": "/data/milai-experiments/20261112-reader-utility/plot_confirmation_first_results_v2.py",
+      "status": "EXECUTED_BOTH_PNGS_VISUALLY_CHECKED",
+      "output": "/data/milai-experiments/20261112-reader-utility/confirmation-first-results-figure-v2",
+      "visual_check": "/data/milai-experiments/20261112-reader-utility/confirmation-first-results-figure-v2/visual-check-v1.json",
+      "v1_retained": true,
+      "v2_CSV_literal_equal_to_v1": true,
+      "scope": "All256firsts only; source/native/unknownrange separate. v2tickdensity/captionprecision change, no datachange."
     }
   },
   "phase30_execution": {
@@ -1836,7 +1838,7 @@
     "repeat_tool": "tools/prepare_fixed_source_repeat.py",
     "repeat_tool_commit": "6d1ef075",
     "scope": "Actualfullmenus andsingleterminalpacket per256source/method. Firsts andfixedsecondReadercalls separate; fullwireunchanged,no controllerrepeat,no --reuse-readouts. Source/cost/author/stabilityclosure stillrequired.",
-    "HTTP_stage_at_snapshot": "new-confirmation256-source-review-v1",
+    "HTTP_stage_at_snapshot": "new-confirmation-repeat32-expanded10k_final-second-v1",
     "fixed_firsts_closed_at_snapshot": 256,
     "fixed_firsts_failed_at_snapshot": 1,
     "stability_tool": "tools/summarize_fixed_source_repeats.py",
@@ -1979,21 +1981,117 @@
       "crossmethod_response_reuse": false
     },
     "source_review_snapshot": {
-      "status": "RUNNING",
-      "child_pid": 572646,
+      "status": "COMPLETED_WITH_UNRESOLVED",
       "planned_groups": 512,
-      "closed_groups": 48,
-      "unresolved_groups": 0,
-      "evaluation_role": "test",
-      "training_labels_allowed": false
+      "closed_groups": 512,
+      "unresolved_groups": 4,
+      "returned_records": 1016,
+      "masked_candidates": 177,
+      "known_generation_tokens": 2699023,
+      "unknown_usage": 0,
+      "native_compute_readback_verified": true,
+      "artifact": "/data/milai-experiments/20261112-reader-utility/confirmation-first-source-evidence-v1/summary.json"
     },
     "author_agreement": {
       "owner": "/data/milai-experiments/20261112-reader-utility/new-confirmation-author-agreement-owner-v1.json",
       "pid": 611414,
-      "status": "WAITING_FOR_ORIGINAL_FIRST_SOURCE_COMPARISON",
+      "status": "COMPLETED_AUTHOR128_ORIGINAL_SOURCE_AGREEMENT",
       "script": "/data/milai-experiments/20261112-reader-utility/compare_confirmation_author_teacher_v1.py",
       "all128_author_to_original_bindings_validated": true,
-      "scope": "Originalfirstgrades only, failures andmasks retained, nonindependent/notgold. No labelreplacement ornewcalls."
+      "scope": "Originalfirstgrades only, failures andmasks retained, nonindependent/notgold. No labelreplacement ornewcalls.",
+      "output": "/data/milai-experiments/20261112-reader-utility/new-confirmation-author-teacher-agreement-v1.json",
+      "binary_disagreements": 18,
+      "exact_status_agreements": 87,
+      "masked_binary_disagreements": 1,
+      "semantic_scope_binary_disagreements": 17
+    },
+    "closed_first_source_results": {
+      "complete_supported": {
+        "fixed_context": 116,
+        "expanded10k_final": 92,
+        "rules": 72,
+        "common_s1": 96
+      },
+      "unknown": {
+        "fixed_context": 53,
+        "expanded10k_final": 60,
+        "rules": 50,
+        "common_s1": 51
+      },
+      "material_sufficient": {
+        "fixed_context": 124,
+        "expanded10k_final": 102,
+        "rules": 85,
+        "common_s1": 100
+      },
+      "primary": {
+        "difference": -0.09375,
+        "bootstrap95": [
+          -0.15625,
+          -0.03125
+        ],
+        "unknown_identification": [
+          -0.30078125,
+          0.140625
+        ],
+        "both_complete": 69,
+        "left_only": 23,
+        "right_only": 47,
+        "neither": 117,
+        "native_difference": -0.03173015856445353,
+        "native_bootstrap95": [
+          -0.07517771278130679,
+          0.011077836632017555
+        ]
+      },
+      "common_s1_secondary": {
+        "difference": -0.015625,
+        "bootstrap95": [
+          -0.07421875,
+          0.04296875
+        ],
+        "unknown_identification": [
+          -0.21484375,
+          0.21875
+        ],
+        "native_difference": 0.009810824157184853,
+        "native_bootstrap95": [
+          -0.034360565259378376,
+          0.05433431144559364
+        ]
+      },
+      "rules_secondary": {
+        "difference": 0.078125,
+        "bootstrap95": [
+          0.01171875,
+          0.14453125
+        ],
+        "unknown_identification": [
+          -0.1171875,
+          0.3125
+        ],
+        "native_difference": 0.06703456880728266,
+        "native_bootstrap95": [
+          0.02146766059937363,
+          0.11217450346746961
+        ]
+      },
+      "scope": "Validatedlabelprimarylowerthanstrongfixed; unknownbounds crosszero andreviewerbias/seedvariance remain. Positivesecondaryvsrules doesnotreplaceprimary. No winnerselection orProductpromotion."
+    },
+    "repeat_snapshot": {
+      "fixed_context": {
+        "status": "COMPLETED",
+        "closed": 32,
+        "failed": 0
+      },
+      "expanded10k_final": {
+        "status": "RUNNING",
+        "child_pid": 1042071,
+        "closed": 19,
+        "failed": 1
+      },
+      "rules": "QUEUED",
+      "common_s1": "QUEUED"
     }
   },
   "phase34_validation": {
@@ -2137,6 +2235,17 @@
     "author128_actual_event_action_family_question_binding_matches": true,
     "no_native_gold_for_author_grades": true,
     "all_TEST_compilers_no_training_exports": true,
+    "no_sha_validation": true
+  },
+  "phase42_validation": {
+    "three_closed_TEST_comparisons_same256_endpoints": true,
+    "pair_win_loss_counts_reproduce_primary_differences": true,
+    "1016_source_records_exact_bindings_verified": true,
+    "all177_masked_records_accounted": true,
+    "source_native_compute_readback_matches": true,
+    "author128_original_grade_binding_compared": true,
+    "both_confirmation_PNGs_visually_checked": true,
+    "v1_v2_plot_CSV_bytes_identical": true,
     "no_sha_validation": true
   }
 }
