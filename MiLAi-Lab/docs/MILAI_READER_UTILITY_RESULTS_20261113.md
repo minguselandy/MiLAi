@@ -1,8 +1,10 @@
-# MiLAi Reader效用实验：结果报告（持续补全）
+# MiLAi Reader效用实验：最终结果报告
 
-状态：**实验未完成，不是最终验收报告。** 本文把方法效果、执行状态和成本分开；阶段过程见[执行记录](MILAI_READER_UTILITY_EXECUTION_20261112.md)，机器可读状态见[进度清单](../data/manifests/reader-utility-progress-20261112-v3.json)。固定计划为`MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261112_2XA10040GB_v3.md`。
+状态：**规划范围内的执行、证据核对与报告已完成；主要方法增益未确立。** 本文把方法效果、执行状态和成本分开；阶段过程见[执行记录](MILAI_READER_UTILITY_EXECUTION_20261112.md)，机器可读状态见[进度清单](../data/manifests/reader-utility-progress-20261112-v3.json)。固定计划为`MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261112_2XA10040GB_v3.md`。
 
-目前最明确的结论是：真实完整动作、效用蒸馏、结果校正及任务读出链已经运行，但E1、E2和自身状态对照没有确立主要任务增益。新来源确认中，10k＋Q的已验证完整支持首次低于强固定上下文；未知判断和评审偏差仍限制真实质量解释。自然应用暴露了View交付预算与自动评审可靠性的限制。重复读出稳定性及最终成本仍待关闭。
+本文“作者核对”由同一实施助手逐项阅读已保存材料与回答完成，并非外部人工盲评；存在跨方法源文暴露与解释偏差，不能作为独立真值。相关编排消耗与实验模型调用分开说明。
+
+目前最明确的结论是：真实完整动作、效用蒸馏、结果校正及任务读出链已经运行，但E1、E2和自身状态对照没有确立主要任务增益。新来源确认中，10k＋Q的已验证完整支持首次低于强固定上下文；未知判断和评审偏差仍限制真实质量解释。自然应用暴露了View交付预算与自动评审可靠性的限制。重复读出稳定性、有界成本披露和最终计划验收均已关闭。
 
 ## 评分工程与执行模式
 
@@ -12,7 +14,7 @@
 
 另在已暴露TRAIN包中，按输入长度固定9个分位位置、涉及8来源，比较同一4B FP32模型的别名评分与贪心生成。独立公共前缀逐token一致，离线答案字段不进入生成输入。评分累计3.833秒，生成91.753秒；但9次生成全部达到事先固定的256-token上限，均未按直接短答要求结束。因此这不是等价完成输出的效率对照，也不估计无截断生成或“生成＋语义评审”的完整成本。新评分均值与原FP32完整前向最大差7.98e−6，原首生成、截断及成本全部保留，没有挑选或重试。[探针及解释](/data/milai-experiments/20261112-reader-utility/same-teacher-mode-probe-v1/interpretation-v1.json)
 
-原型保留与集成证据已核对：原始ZIP五个文件逐字一致，本机原始12项CPU测试记录通过；两种目标的已保存GPU完整/中断恢复检查点，各35个张量再次在CPU上比较相同。正式14拟合的原始run与更新/输入量一致。实际容量范围也单列：规范教师评分最长参考序列2,434tokens，正式学生最长10,476tokens且无state/head截断；教师配置16,384不是已测通用容量。该核查仍为部分验收，不能替代尚未关闭的重复稳定性和最终成本。[计划证据核查](/data/milai-experiments/20261112-reader-utility/plan-evidence-audit-v1.json)
+原型保留与集成证据已核对：原始ZIP五个文件逐字一致，本机原始12项CPU测试记录通过；两种目标的已保存GPU完整/中断恢复检查点，各35个张量再次在CPU上比较相同。正式14拟合的原始run与更新/输入量一致。实际容量范围也单列：规范教师评分最长参考序列2,434tokens，正式学生最长10,476tokens且无state/head截断；教师配置16,384不是已测通用容量。该文件记录基础实现的部分验收；重复稳定性与成本的关闭证据见后文。[计划证据核查](/data/milai-experiments/20261112-reader-utility/plan-evidence-audit-v1.json)
 
 ## 可用监督的产出与分母
 
@@ -33,7 +35,7 @@
 
 随后两臂均接相同实际331状态的质量池及原replay池，63次更新、993主曝光与993 replay曝光。600个已处理反馈机会不能写成600个有效质量训练样本。训练采用FP32参数/Adam、BF16前向；保存权重实际为FP16，普通保存模型推理再加载为FP32，不能将保存格式写成BF16。
 
-完整DEV保留96个来源、每方法一次原生首答，共576个位置。来源支持评审与Reader使用同一模型，非独立裁判；官方原生答案F1仅作为辅助指标。
+完整DEV保留96个来源、每方法一次原生首答，共576个位置。来源支持评审与Reader使用同一模型，非独立裁判；官方原生答案F1仅作为辅助指标。 自动论文QA评审还会看到离线原生答案标注作为可错参考，引用校验仍只接受候选实际交付材料；它与原生F1并非独立证据。作者展示不含这些原生答案标注，但其非盲化与先前源文暴露仍需保留。
 
 | 方法 | 完整且受来源支持 | 未决 | 执行失败 | 原生答案F1 |
 |---|---:|---:|---:|---:|
@@ -61,9 +63,9 @@
 
 E1来源评审中，固定/S1/U0/U1/Q0/Q1的材料充分计数分别42/32/34/37/35/34，均以96计划来源为范围；这些计数与完整受支持答案40/31/30/34/31/32分开保存。材料充分仍可能伴随Reader失败或使用不足，来源支持的局部答案也可能不完整。[独立的证据层计数](/data/milai-experiments/20261112-reader-utility/closed-DEV-evidence-layer-inventory-v1/summary.json)
 
-预定12来源×6方法的72个人工绑定全部核对。完整受支持二分类有63项一致、9项不同：3项与非逐字引用校验有关，6项是语义解释差异。作者也不是独立真值。仅在该12来源子集替换人工正判断时，Q0/Q1计数会变为31/31；这只是敏感性说明，原主要标签和首次回答均未改写。
+预定12来源×6方法的72个作者核对绑定全部核对。完整受支持二分类有63项一致、9项不同：3项与非逐字引用校验有关，6项是语义解释差异。作者也不是独立真值。仅在该12来源子集替换作者正判断时，Q0/Q1计数会变为31/31；这只是敏感性说明，原主要标签和首次回答均未改写。
 
-证据：[完整来源评审汇总](/data/milai-experiments/20261112-reader-utility/formal-task-dev96-all-six-summary-v1/summary.json)、[原生任务与人工结果](/data/milai-experiments/20261112-reader-utility/formal-task-dev96-native-and-author-summary-v1.json)、[人工一致性检查](/data/milai-experiments/20261112-reader-utility/formal-dev96-author-teacher-agreement-v1.json)、[任务结果图表](/data/milai-experiments/20261112-reader-utility/formal-E1-task-results-v1)。
+证据：[完整来源评审汇总](/data/milai-experiments/20261112-reader-utility/formal-task-dev96-all-six-summary-v1/summary.json)、[原生任务与作者核对](/data/milai-experiments/20261112-reader-utility/formal-task-dev96-native-and-author-summary-v1.json)、[作者一致性检查](/data/milai-experiments/20261112-reader-utility/formal-dev96-author-teacher-agreement-v1.json)、[任务结果图表](/data/milai-experiments/20261112-reader-utility/formal-E1-task-results-v1)。
 
 ## 机制与反例
 
@@ -82,7 +84,9 @@ K诊断有16来源、32实际cold/known状态，7来源共同可评分，其中6
 
 I2公开来源比较保留16个cold/K状态、8来源族。学习策略与全量包在16状态上的实际输入完全相同，因此不能用相同答案的成功证明学习交付具有独特收益。确有一个cold案例需要组合电影身份与银幕数信息；其K版本已由A包足够支持，而A的首次读出失败不能当作互补性的证明。角色、时间与歧义反例一并保留。
 
-证据：[弱信号人工诊断](/data/milai-experiments/20261112-reader-utility/public-weak8-source-panel-v1/unmasked-summary-v1.json)、[I2原生比较](/data/milai-experiments/20261112-reader-utility/i2-public-dev8-native-v2/summary.json)。K、短程价值、停止和参数变化的完整诊断仍需在最终综合时与任务结果逐项关联。
+另一个QASPER同已读池实验覆盖8来源、47个合法交付绑定，保留4个首答失败。作者逐项核对没有发现A+B独有的充分性；学习选择与全量交付在8来源均为同包。它与公开来源的cold/K实验分开报告，不能把相同包的成功当作学习选择的独特收益。[QASPER交付与来源核对](/data/milai-experiments/20261112-reader-utility/i2-complementary-dev8-short-native-v2/author-source-review-v1.json)
+
+证据：[弱信号作者核对](/data/milai-experiments/20261112-reader-utility/public-weak8-source-panel-v1/unmasked-summary-v1.json)、[I2原生比较](/data/milai-experiments/20261112-reader-utility/i2-public-dev8-native-v2/summary.json)。K、短程价值、停止和参数变化的适用范围与任务证据在全局解释中分列。
 
 ## E2与自身状态：原生F1与主要来源指标分离
 
@@ -120,13 +124,13 @@ E2三臂的材料充分计数为40/40/36；3遍基线另有一个无实际包的
 
 现有服务拒绝首次native-auto工具请求，原失败及未知用量保留，服务未重启。另用已有JSON-action协议执行自主工具/答案选择，不强制调用。四方法400个首次位置全部关闭：固定94完成/6失败，增量缓存84完成/16失败，S1为90完成/10失败，Q1为89完成/11失败。合计357个完成、43个失败；357个完成回答全部未遵循内层三字段格式。Q1失败包括6次输出截断和5次JSON-action格式错误。HTTP完成不是语义成功，原文不补字段、不抽取有利短答。
 
-基线200位置的自动来源评审已关闭：22个执行失败不虚构语义标签；178个回答中7个评审未决（6个容量超限、1个输出截断），101个判断被引用/字段规则屏蔽。最终固定方法为71 unknown、13 incorrect、10 incomplete；缓存为48、24、12，没有自动supported判断通过校验。这不是“真实成功为零”：人工已核实至少两条有原文且Host实际可见的回答，被不一致的grounding/resolution字段屏蔽为unknown。筛选未选中也不证明历史中不存在。
+基线200位置的自动来源评审已关闭：22个执行失败不虚构语义标签；178个回答中7个评审未决（6个容量超限、1个输出截断），101个判断被引用/字段规则屏蔽。最终固定方法为71 unknown、13 incorrect、10 incomplete；缓存为48、24、12，没有自动supported判断通过校验。这不是“真实成功为零”：作者已核实至少两条有原文且Host实际可见的回答，被不一致的grounding/resolution字段屏蔽为unknown。筛选未选中也不证明历史中不存在。
 
 178个完成回答的实际最终provider输入中，完整声明的system prompt（含内层三字段格式指令）均逐字存在。因此已排除这些绑定中的提示词未送达问题，但没有由此证明模型为何不遵守格式，四方法的冻结条件均未改变。[实际输入核对](/data/milai-experiments/20261112-reader-utility/natural-answer-format-wire-observation-v1.json)
 
 缓存减固定的已验证supported标签差为0，条件性标签bootstrap也为[0,0]；该退化区间不能解释为等效或精确测得零效果。未决判断的三依赖组加权识别范围为[−71.39,+49.17]个百分点，且作者和自动评审均非独立真值。基线评审使用4,067,025已知tokens、CPU25.085秒、wall3,529.570秒，已原生记账。完整400位置的预定主要比较仍为Q1减S1，不改为此基线次比较。
 
-预定请求位置2/7×10历史的基线人工40绑定已完成：固定2 supported、8 incomplete、1 incorrect、7 unknown、2执行失败；缓存0、9、1、7、3。作者未盲化且非独立，关键词搜索只定位证据，不作为缺失证明。Pachinko读完记录的遗漏、Latte饮料与宠物混淆、提问日期与实际消息日期不符均有原始证据。
+预定请求位置2/7×10历史的基线作者40绑定已完成：固定2 supported、8 incomplete、1 incorrect、7 unknown、2执行失败；缓存0、9、1、7、3。作者未盲化且非独立，关键词搜索只定位证据，不作为缺失证明。Pachinko读完记录的遗漏、Latte饮料与宠物混淆、提问日期与实际消息日期不符均有原始证据。
 
 S1的同位置20个作者绑定也已关闭：2 supported、9 incomplete、1 incorrect、6 unknown、2执行失败。Pachinko与推荐《The Alchemist》的日期回答同时有原文和实际Host输入支持；另一些回答漏掉已存在的兄弟共同兴趣、过去感染Covid的记录，或将“没有检索到”扩大为“没有提及”。此处未知与不完整的边界受题意和覆盖限制影响，作者不是真值；不从20个绑定推断整体方法优势。[S1闭合记录](/data/milai-experiments/20261112-reader-utility/natural-common_s1-closure-v1.json)、[S1作者20](/data/milai-experiments/20261112-reader-utility/natural-author-source-review-v1/common_s1-20.json)
 
@@ -144,7 +148,7 @@ Q1有708次本地模型结果，全部与完整菜单及实际选择相符；5,1
 
 该诊断仍未恢复可用的正判断：357个完成回答中11个评审未决、214个被校验屏蔽，四方法依然没有supported标签通过校验；作者的5个支持例子在两个版本中均为unknown。114个分类发生变化，但不能视作准确率提高。投影版Q1−S1仍为0，未知识别范围[−54.44,+63.61]个百分点；退化bootstrap[0,0]仍不能证明等效。本轮使用7,181,796已知/扣额tokens、CPU47.585秒、wall4,860.799秒，已原生记账。按事前约束不启动第三轮；自然线的自动质量度量存在严重限制，控制/成本证据和作者样本分开报告。[诊断闭合与局限](/data/milai-experiments/20261112-reader-utility/natural-eligible-context-diagnostic-closure-v2.json)
 
-证据：[冻结应用协议](/data/milai-experiments/20261112-reader-utility/natural-realtalk-application-plan-v2/protocol.json)、[基线来源评审闭合及局限](/data/milai-experiments/20261112-reader-utility/natural-baseline-source-review-closure-v1.json)、[人工40绑定](/data/milai-experiments/20261112-reader-utility/natural-author-source-review-v1/baseline40.json)、[实际View工作量](/data/milai-experiments/20261112-reader-utility/natural-baseline-view-work-v1/summary.json)。
+证据：[冻结应用协议](/data/milai-experiments/20261112-reader-utility/natural-realtalk-application-plan-v2/protocol.json)、[基线来源评审闭合及局限](/data/milai-experiments/20261112-reader-utility/natural-baseline-source-review-closure-v1.json)、[作者40绑定](/data/milai-experiments/20261112-reader-utility/natural-author-source-review-v1/baseline40.json)、[实际View工作量](/data/milai-experiments/20261112-reader-utility/natural-baseline-view-work-v1/summary.json)。
 
 ## 已测成本与未测范围
 
@@ -152,13 +156,25 @@ Q1有708次本地模型结果，全部与完整菜单及实际选择相符；5,1
 
 ![14个关闭拟合的实际训练工作量](/data/milai-experiments/20261112-reader-utility/formal-fit-work-figure-v1/fit-work.png)
 
-短Q阶段的评价约占各自账前wall的42.5%–45.0%，10k U约5.4%；不能把所有阶段统称评价开销很小。数据准备、前缀采集、分支、Teacher、Host、来源评审、存储和未测根进程工作仍须另列。已有非原生成本清单尚未最终结算，不能与包含其子过程的父进程时间重复相加。
+短Q阶段的评价约占各自账前wall的42.5%–45.0%，10k U约5.4%；不能把所有阶段统称评价开销很小。数据准备、前缀采集、分支、Teacher、Host、来源评审、存储和未测根进程工作仍须另列。下述明确范围现已结算；包含其子过程的父进程时间不再相加。
 
-已另保存96个`milai_reader_utility_`已付费阶段的逐项清单，并再次核对其中14个拟合阶段。这一前缀不涵盖全部通用运行时、当前/未来Host阶段及未结算CPU工作，因此清单中的账面合计不是完整、去重后的项目总成本。[已记账阶段快照](/data/milai-experiments/20261112-reader-utility/paid-study-phase-inventory-v1/summary.json)
+已关闭的非原生自记账工作通过五次单一阶段结算并读回验证：早期9＋38范围、随后216＋123范围、最终71范围，共457个明确范围、CPU99,277.635秒。最终71范围排除已付范围和10个原生自记账HTTP子作业；包含两次实际执行的稳定性汇总与两个图表版本，父子计时不重复相加。所有结算均未改变generation或embedding计数。下表按产物及生产器作用分类，分类不是新的性能测量。
 
-三个既有待结算清单中的216个关闭范围已重新核对到原始回执，合计CPU53,309.534秒。父子分开计量、单阶段对象和早期按目录名记录的已付范围已按实际格式处理；未发现这些范围彼此、已核对的phase01/02已付范围或其覆盖子计时的重复；原生自记账排除仍依既有清单和owner标记。其记录wall之和44,320.264秒包含一个明确等待范围，不是项目经过时间。结算器等待确认HTTP和稳定性汇总关闭后才按单一阶段记录，并读回核对、防止重复记录。后续工作及未知成本仍另列。[216范围核对](/data/milai-experiments/20261112-reader-utility/reconciled-prior-closed-cost-scopes-v4/summary.json)
+| 已结算非原生自记账范围 | 记录范围数 | CPU秒 |
+|---|---:|---:|
+| 数据编译与容量准备 | 51 | 1,160.767 |
+| 实际到达状态／前缀采集 | 38 | 46,526.347 |
+| 分支执行与读出准备 | 115 | 21,805.343 |
+| 外部评分绑定与复核后处理 | 100 | 367.724 |
+| 存储维护 | 24 | 28,372.991 |
+| 有限工程测量 | 5 | 425.685 |
+| 其他已测分析与准备 | 124 | 618.778 |
 
-后续又核对47个关闭子进程与76项独立计时，合计CPU32,811.744秒，与前述216范围分开。包含失败任务、归档和一个已退出等待器的最后实测前缀；重复的继承计时与父子嵌套计时已排除，未测尾部不填零。记录wall之和69,977.100秒包含等待和重叠，不能解释成经过时间。此批等待确认、稳定性和前批结算后再记账；确认HTTP后处理及未来分析仍另列，服务端GPU与编排的可比实际算力成本未知。[后续123范围核对](/data/milai-experiments/20261112-reader-utility/reconciled-later123-cost-scopes-v1.json)
+相同研究前缀的118个账本阶段也已导出逐项CSV。它包含上述五个结算阶段及14个正式拟合、44个本地Teacher评分/数值检查阶段、16个TRAIN实际质量Reader/评审阶段、DEV和确认Reader/来源评价、功能拟合与I2等。**这些账本分组与其子集不能再次相加，也不是完整物理算力或金额总数。** Teacher评分/数值检查的已记CPU为27,715.418秒、scope wall之和27,593.959秒；TRAIN实际结果校正的CPU211.066秒、scope wall45,793.700秒。正式拟合内部评价wall14,117.382秒已含在拟合总量中，另两个保存策略参考评价阶段CPU78.993秒单列。分支、采集、模型选择、正式Host、外部评价和维护的记录入口均在清单中。[完整范围、逐阶段和逐范围CSV](/data/milai-experiments/20261112-reader-utility/closed-cost-disclosure-v3/summary.json)
+
+确认Reader首次使用3,501,683已知tokens，第二次439,299，首次及第二次来源评审合计3,043,504；这些确认阶段unknown usage增量均0。自然自主任务的通用运行时不全在研究前缀：S1/Q1已记录模型CPU698.702/843.051秒及加载7.019/7.245秒，嵌套在driver时间中，不再相加；四方法JSON-action首次合计7,239,441已知/扣额tokens，原native-auto失败另保留10,539估计扣额及1个unknown usage。View的129构建＋14复用均未成功交付，构建elapsed4.322秒仍须保留，但嵌套的操作/检索wall不能累加为维护总成本。
+
+共同S1起点来自已关闭的前期36k训练（3,390更新、736,843,704训练输入tokens），本轮表为新增工作，既不重跑也不把历史训练或公开预训练成本视为零。服务端GPU活跃时间、能耗、FLOPs和价格未测；部分导入、测试、失败分析、退出等待器尾部及最终报告/核查尾部没有完整测量。编排工具在收尾快照报告8,475,866个不透明tokens计数与156,660秒线程时长，没有输入/输出/cache/价格分解；这些不是实验Host tokens、CPU process time或GPU时间，也未混入上述调用用量。没有据此宣称全成本优势。[编排计数范围](/data/milai-experiments/20261112-reader-utility/closing-orchestration-counter-observation-v1.json)
 
 ## E4：新来源确认，主要比较未支持替换强固定基线
 
@@ -175,7 +191,7 @@ Q1有708次本地模型结果，全部与完整菜单及实际选择相符；5,1
 | 规则 | 72 | 50 | 12 | 0.243335 |
 | 共同S1 | 96 | 51 | 18 | 0.300559 |
 
-主要来源评审512个双方法组已全部关闭，4组未决，返回1,016个候选判断，其中177个被引用/字段校验屏蔽。上述未知与失败均保留；F1仍是辅助指标。全部首次合计3,501,683已知/扣额tokens，来源评审另用2,699,023 tokens，两阶段unknown usage增量均0。评审原生CPU52.055秒、wall7,275.414秒已读回账本核对，不能解释为服务端GPU忙时或重复计费。[首次与格式核对](/data/milai-experiments/20261112-reader-utility/new-confirmation-firsts-all1024-closure-v1.json)、[来源层及计量闭合](/data/milai-experiments/20261112-reader-utility/confirmation-first-source-evidence-v1/summary.json)
+主要来源评审512个双方法组已全部关闭，4组未决，返回1,016个候选判断，其中177个被引用/字段校验屏蔽。上述未知与失败均保留；F1仍是辅助指标。全部首次合计3,501,683已知/扣额tokens，来源评审另用2,699,023 tokens，两阶段unknown usage增量均0。评审原生CPU52.055秒、wall7,275.414秒已读回账本核对，不能解释为服务端GPU忙时或重复计费。[首次与格式核对](/data/milai-experiments/20261112-reader-utility/new-confirmation-firsts-all1024-closure-v1.json)、[来源层及计量闭合](/data/milai-experiments/20261112-reader-utility/confirmation-first-source-evidence-v1/summary.json) 实际保存的1,152个首次/第二次Reader请求均未包含原生答案、reference_proofs或utility等结构化离线标签字段；离线自动评审的原生标注放在候选材料之外，不能作为材料引用。这个检查不声称原文中不自然出现答案词。[在线／离线边界核查](/data/milai-experiments/20261112-reader-utility/confirmation-online-offline-boundary-audit-v1.json)
 
 预定主比较10k＋Q减固定上下文为−9.375个百分点，来源配对bootstrap 95%区间[−15.625, −3.125]个百分点。两者共同完整69来源、仅10k完整23、仅固定完整47、均未达到完整标签117；这不是穷尽真实错误的分类。至少一方未知的来源有73个，未知识别范围[−30.078, +14.063]个百分点，不是另一置信区间。因而当前验证标签下固定方法较高，但未知、同模型评审偏差和单训练seed使该结果不能推广为无条件真实质量差。原生F1差−0.031730，95%区间[−0.075178, +0.011078]，也没有确立候选优势。[冻结主比较](/data/milai-experiments/20261112-reader-utility/new-confirmation256-primary-summary-v1/summary.json)
 
@@ -209,6 +225,35 @@ token数来自原准备器对序列化packet JSON的计数，不是纯证据正�
 
 作者非独立、未盲化且存在跨方法源文暴露；相关工作与直接比较、局部语言筛选与全部实验范围、核心架构与完整细节等判断有解释空间，不将作者当真值或替换主要标签。S1在MDL与GAN两个样本中材料充分但首答失败，材料层与任务层保持分开。作者与原自动判断的对照也已关闭：完整支持二分类18/128项不同，按固定/10k/规则/S1分别7/5/2/4；17项自动为完整而作者未认定完整，1项相反且带引用屏蔽。共同否定和未知也会计入二分类一致，因此不能把一致率当准确率。主要分歧是问题范围、背景与实际变量、局部数据与整体数据、材料完整性的解释，另有语言清单问题被人口/GDP解释替代；作者本身仍有解释局限。原标签未改。[作者128完整记录](/data/milai-experiments/20261112-reader-utility/new-confirmation-all128-author-closure-v1.json)、[作者与自动对照](/data/milai-experiments/20261112-reader-utility/new-confirmation-author-teacher-agreement-v1.json)
 
-预定128次第二次Reader已全部完成：固定/10k/规则/S1分别32/30/32/30个完成，失败0/2/0/2，均各32次新调用，使用同32来源、同终点与完整请求，不重跑控制器、不替换首次、不best-of-two、不把来源N翻倍。准备和稳定性汇总入口已分别通过28项、9项相关测试；第二次来源评审与稳定性汇总仍待关闭，来源标签变化也包括评审分组/采样影响，不能全归因于Host波动。
+## 预定重复读出的稳定性
 
-当前仍需关闭预定第二次读出、相应来源评价及稳定性，并完成去重后的已测成本与未测范围、五层综合和计划验收。没有产品默认、权限、Canonical或服务配置迁移；功能运行及负结果留存均不等同于方法已取得优势。
+预定128次第二次Reader已全部关闭，固定/10k/规则/S1各32次新调用，失败0/2/0/2；对应64组来源评审全部关闭、0未决、26候选被校验屏蔽。汇总逐项验证128对完整请求、实际动作、event和原生任务一致，没有控制器重跑、首次替换、best-of-two或来源N翻倍。重复32与作者32是不同抽样，仅2个来源重合。
+
+| 方法，同32预定来源 | 首次原生F1 | 第二次原生F1 | 完整支持标签首→次 | 两次完成中answer字段逐字相同 |
+|---|---:|---:|---:|---:|
+| 固定上下文 | 0.430116 | 0.340542 | 17→13 | 6/32 |
+| 10k＋Q | 0.343543 | 0.252021 | 11→12 | 4/29 |
+| 规则 | 0.260759 | 0.317002 | 9→9 | 8/29 |
+| 共同S1 | 0.366488 | 0.314726 | 12→14 | 5/28 |
+
+同32来源上的10k减固定原生F1差，首次−0.086573，来源区间[−0.189471,−0.002709]；第二次−0.088521，区间[−0.216367,+0.033142]。两次对比差的变化−0.001948，区间[−0.153137,+0.152823]，不能将跨零解释为差异已稳定或等效。固定方法自身第二次减首次为−0.089575，区间[−0.191357,−0.007431]；其余方法变化及逐来源转移保存在汇总。第二次主要来源标签差为−1/32，区间[−0.21875,+0.15625]，不替换完整256首次的预定主比较。
+
+扩量、规则、S1各有1/3/2个首次失败在第二次完成，原首次失败仍保留。来源标签转移同时包含Reader与评审采样/分组效应，不能全部归为Host波动。118对两次均完成的回答中，23对answer字段相同，完整最终响应文本逐字相同为0；逐字差异不等于语义差异。验收发现旧汇总把提取的answer重复当作完整响应，已由`806c66fd`改为读取保存的最终message.content，6项相关测试及Ruff通过。修正只改变23个完整响应相同标志，原生分数、来源转移和所有比较均不变，0新模型调用；v1原样保留，最终采用v2。[稳定性汇总与逐对CSV](/data/milai-experiments/20261112-reader-utility/new-confirmation-repeat32-stability-v2/summary.json)、[修正范围](/data/milai-experiments/20261112-reader-utility/new-confirmation-repeat32-stability-correction-v1.json)
+
+## 全局解释、机制与采用边界
+
+| 原计划假设 | 本轮证据 | 可支持的范围 |
+|---|---|---|
+| H1 密集Reader辅助有用 | U1活跃监督显著增多，但E1主要任务无优势；10k确认主要标签低于强固定 | 接线与密集监督成立，当前配方没有证明任务增益 |
+| H2 完整绑定优于类型监督 | 同类型参数选择确实改变，固定DEV代理优于同类型首项；确认中交付包大多不同 | 学到了类型以外的选择，不能由此推出平均任务优势 |
+| H3 K改变剩余证据价值 | 7个共同可评分来源中6个教师最佳绑定改变，真实K保留 | 受菜单/候选支持变化限制，未隔离K因果或学生正确停止能力 |
+| H4 互补与短程价值可学习 | h=0/2分数变化、一个公开cold联合证据例子；I2学习与全量包经常完全相同 | 有有限机制现象，没有独特学习交付或稳定Host增益 |
+| H5 View有条件净价值 | 129构建和14复用均因材料预算未交付，学习模型有机会但不选择View | 本配置没有形成可用View交付，不能估计成功维护后的净收益 |
+
+两个事后说明例子保留正反两侧，均来自预定作者来源。AntiScam规模题中，10k选择`read_9`取得“220 dialogs”见证，终点690 packet-JSON tokens并正确回答；固定方法先`context_11`再读0/1/2，终点1,256 tokens却未交付规模段落。文本分类任务题则相反：固定`context_14`取得任务列表，1,037 tokens支持完整回答；10k只读1/0，386 tokens缺少列表且首答length失败。两例step1完整菜单相同、选择不同，但完整before并不逐字相同，因此只作实际轨迹说明，不冒充同状态干预或总体增益。原before、菜单、动作和首答均可沿记录回看。[正反机制链](/data/milai-experiments/20261112-reader-utility/confirmation-mechanism-cases-v1.json)
+
+本轮新增的是通用的真实绑定监督、子集目标与全窗口归一化、实际已知证据和合法交付组合、完整动作到首答的分层评价接线；这些实现不依赖题号规则。有限同任务评分优化成立，但弱分数、参考代理、材料充分、任务成功与成本不能互相替代。当前证据支持保留强简单策略和原文通路，本轮没有迁移学习策略为产品默认。后续研究应先处理来源充分性评审的可用性、弱评分与真实支持的偏差，以及确实产生不同合法交付包的条件；不在本确认集上加样本、改提示或挑seed以追求胜出。
+
+当前核心CPU回归36项通过，2项GPU测试明确未在这次CPU命令中执行；保存的真实GPU完整／恢复产物已另行核对。Ruff和活动包边界通过，活动tools边界仍有6项既有LME动态导入问题，相关两个文件自初始集成前未变、没有新增发现，不能把全仓库检查称为全绿。[最终检查范围](/data/milai-experiments/20261112-reader-utility/final-scoped-validation-v1.json)
+
+原计划范围内的有限实验、稳定性、已测成本和证据核对均已关闭。未执行的更大规模、RL、LoRA、不同Teacher和额外seed属于可选或未触发的后续工作，未计作已完成。结算截点之后的机制说明、边界核查及报告尾部没有递归收费，各自产物保留已测计时，未测部分不填零。[最终计划验收](/data/milai-experiments/20261112-reader-utility/plan-evidence-audit-v2.json)

@@ -1,3 +1,32 @@
+# CURRENT phase44: declared plan execution VERIFIED COMPLETE; no experiment work remains
+
+R=/data/milai-experiments/20261112-reader-utility. Worktree a100-development-20261104/MiLAi-Lab.
+No SHA/content fingerprints/subagents/Product/default/servicechanges/push. No TESTretuning/firstreplacement.
+All14formal fits,DEV, natural400, confirmation1024firsts/source512/author128/agreement,
+128newsecondReader/source64/correctedstability CLOSED. Allfiniteowners terminal; missingPIDsnormal.
+Finalreport docs/MILAI_READER_UTILITY_RESULTS_20261113.md; finalaudit R/plan-evidence-audit-v2.json64checks.
+Progressmanifest statusCOMPLETED_PLAN_EXECUTION_WITH_DOCUMENTED_LIMITS; no requiredremaining/nextactions.
+Primaryexpanded-fixed source-.09375 CI[-.15625,-.03125],unknownbounds[-.30078125,.140625].
+Validatedlabels favorfixed; notunconditionaltruequality/seedrobustness. Positivesecondaryvsrules notprimaryreplacement.
+FINALSTABILITYv2 ONLY: new-confirmation-repeat32-stability-v2/summary.json. v1haswrongfull-response equality,
+retainedhistorically. Code806c66fd comparesactualsavedfinalmessage.content.6targetedtests then36coreCPUtestsPASS;
+2GPUcases explicitlydeselectedinclosingCPUrun, savedGPUrun/resume35tensors perobjectivecheckedexactequal.
+Corrected23flags only; allnative/source/primarymetrics unchanged. Answerfield exact6/4/8/5, fullcontent0each.
+Bothcomplete32/29/29/28; first/secondnativeF1fixed.430116/.340542,expanded.343543/.252021,
+rules.260759/.317002,S1.366488/.314726. Sourcesremain32repeat/256full, no best-of-two.
+FiveCPUsettlements readbackverified:early9+38,prior216,later123,final71 =>457scopesCPU99277.635304509.
+closed-cost-disclosure-v3/summary.json final;118study-prefixedphases partition, notuniquephysicalprojectCPU/money.
+Genericnaturalruntime, nestedtimers andunmeasuredroot/server/tests/import/reporttail explicitlyseparate.
+Finalreport/accountingtail notrecursivelybilled; knownsmalltimers inmechanism/boundaryaudit artifacts retained.
+Sourcegrader seesfalliblenativeannotations OFFLINE;actual1152Readerrequests containno offline-labelkeys.
+confirmation-online-offline-boundary-audit-v1.json. Automatedgrade/nativeF1 notindependent; authornotexternalhuman.
+OriginalZIP5members unchangedliteralbytes,original12CPUtests verifiedcurrent2.7 vsarchival2.10record.
+Teacheractualmax2434,student10476tokens; nouniversal16kTeachercapacityclaim. Natural10histories/3groups,
+View143deliveryfailures andmeasurementfailure retained; no seededwin/Productadoptionclaim.
+Finalscopedvalidation:36CPUtests,Ruff/packagePASS,6preexistingLMEtoolsdynamicimports unchanged; no globallygreenclaim.
+Alloldphaseblocks below arehistorical andmustnotrestartjobs orreopen closedexperiments automatically.
+Atfinalization, only recordthe achievedgoal state afterfinalcommit/clean-statuscheck; newwork requiresnewuserintent.
+
 # CURRENT phase43: all128secondReader calls CLOSED; repeat source64 RUNNING; partialaudit verified
 
 Goal ACTIVE/incomplete. KEEP ANALYSIS VERY SHORT. R=/data/milai-experiments/20261112-reader-utility.
