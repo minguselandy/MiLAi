@@ -1,7 +1,7 @@
 {
   "status": "ACTIVE_INCOMPLETE",
   "goal_turn_classification": "PROGRESS",
-  "previous_turn_classification": "VERIFIED_WAIT",
+  "previous_turn_classification": "PROGRESS",
   "plan": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261112_2XA10040GB_v3.md",
   "artifact_root": "/data/milai-experiments/20261112-reader-utility",
   "prior_progress": "reader-utility-progress-20261112-v2.json",
@@ -695,22 +695,22 @@
     }
   },
   "required_remaining": {
-    "A": "Original prototype12tests and both I2 native/source checks closed. Preserve K/horizon/long-input diagnostics and failures; synthesize their limits with main task results.",
+    "A": "Original12CPUtests/currentenvironment parity, fiveoriginalZIPmembers literal-equality, savedGPUfit/resume tensors andfunctionaltool-to-Reader evidence verified. Actualteachermax2434/studentmax10476 scope disclosed, notuniversal16kcapacity. Finalglobalinterpretation stillneeded.",
     "F4_F5": "Multi-request, actualK and h0/h2/stop diagnostics implemented/scored; synthesize limits with learner/task evidence. Kmenus differ, teacherargmax changes notisolatedKcausality orHostgain. No duplicate-family inflation.",
     "B_E0_E1": "E1U/Q fixed/selected reference points,actual576firsts,officialF1,fullTeacher andauthor72sourcecheck closed. Summarizecosts/mechanism withnoadvantage/equivalenceclaim; laterfinalsynthesis stillneeded.",
     "C_E2": "E1/E2/own seed0fits/task/source/author closure complete. No decisiveprimarysupportedgain established; no additional seedfits launched andno stabilityclaim. PreserveF1/source divergence andrater-context sensitivity; reassess any claim ofseedrobustness onlywithfixedrecipe evidence, neverconfirmationretuning.",
-    "D_E4": "Fourmethods/strongfixedprimary/hostbudgets/fixed32repeat+32author frozen.256TESTsources exported and1024trajectories closed. Executequeued1024firsts,128secondreadouts/source/native/stability andauthor128; no retune orsampleextension.",
+    "D_E4": "Frozen256x4first/source/native,author128/agreement/figures CLOSED; all128newsecondcalls CLOSED124complete4lengthfail. Repeat64sourcegroups/stability stillpending. No retune/firstreplacement/Nextension.",
     "applications": "All400firsts, originalsourcegrade, eligiblecontext diagnostic andauthor80 CLOSED. Neitherautomaticversion recovers anyvalidatedsupportedlabels, including5authorpositives. Reportinstrumentlimitations; no thirdrevision orprimaryreplacement.",
     "synthesis": "Five result layers, clustered paired uncertainty, full measured cost/unknown scopes, mechanism and counterexamples; conditional minimal Product recommendation only."
   },
   "next_actions": [
-    "MonitorHTTP3538727: fixedsecond32CLOSED; expandedsecondchild1042071running, rules/S1follow. Keepfirsts separate.",
-    "Allfirsts/source/native/author128/agreement/firstfigures CLOSED. Do notregrade/retune/switchprimary orredo author.",
-    "Afterall128seconds/source/native, stability3763322runs; inspectexactwire andpairedfirst-second results, notbest-of-two.",
-    "AfterHTTP/stability,216settlement3838848then123settlement3939766. FinishremainingconfirmationHTTP/authoranalysis/stability/figure measuredcosts andunknownscope disclosure.",
-    "Completeglobalmechanism/five-layer synthesis, finalreport andrequirement audit. No primarygain/seedstability claim orProduct migration."
+    "MonitorHTTP3538727 repeat-source child1135109, planned64groups. All128secondcalls CLOSED:fixed32/0fail,expanded30/2,rules32/0,S130/2.",
+    "Afterrepeat3summaries HTTPterminal, inspectstability3763322 output andexactfirst/secondrequest checks; no firstreplacement/Ndoubling.",
+    "Wait216settlement3838848then123settlement3939766; finishremainingconfirmationHTTP/authoranalysis/stability/figure costscopes andcategory/unknowndisclosure.",
+    "Usepartialplan-evidence-audit-v1 tofinish globalmechanism/five-layerreport andfinalrequirementaudit; actualTeachermax2434/studentmax10476, no unmeasured16kcapacityclaim.",
+    "Keepalloriginalfirst/source/authorlabels andnoTESTretuning/seedstabilityclaim/Productmigration."
   ],
-  "phase": 42,
+  "phase": 43,
   "signal_diagnostic": {
     "canonical110": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-vs-semantic110-diagnostic-v1.json",
     "author_spots": "/data/milai-experiments/20261112-reader-utility/canonical-fp32-semantic-disagreement-spots-v1.json",
@@ -1838,7 +1838,7 @@
     "repeat_tool": "tools/prepare_fixed_source_repeat.py",
     "repeat_tool_commit": "6d1ef075",
     "scope": "Actualfullmenus andsingleterminalpacket per256source/method. Firsts andfixedsecondReadercalls separate; fullwireunchanged,no controllerrepeat,no --reuse-readouts. Source/cost/author/stabilityclosure stillrequired.",
-    "HTTP_stage_at_snapshot": "new-confirmation-repeat32-expanded10k_final-second-v1",
+    "HTTP_stage_at_snapshot": "new-confirmation-repeat32-source-review-v1",
     "fixed_firsts_closed_at_snapshot": 256,
     "fixed_firsts_failed_at_snapshot": 1,
     "stability_tool": "tools/summarize_fixed_source_repeats.py",
@@ -2082,16 +2082,38 @@
       "fixed_context": {
         "status": "COMPLETED",
         "closed": 32,
-        "failed": 0
+        "failed": 0,
+        "new_calls": 32,
+        "reused_readouts": 0
       },
       "expanded10k_final": {
-        "status": "RUNNING",
-        "child_pid": 1042071,
-        "closed": 19,
-        "failed": 1
+        "status": "COMPLETED_WITH_FAILURES",
+        "closed": 32,
+        "failed": 2,
+        "new_calls": 32,
+        "reused_readouts": 0
       },
-      "rules": "QUEUED",
-      "common_s1": "QUEUED"
+      "rules": {
+        "status": "COMPLETED",
+        "closed": 32,
+        "failed": 0,
+        "new_calls": 32,
+        "reused_readouts": 0
+      },
+      "common_s1": {
+        "status": "COMPLETED_WITH_FAILURES",
+        "closed": 32,
+        "failed": 2,
+        "new_calls": 32,
+        "reused_readouts": 0
+      }
+    },
+    "repeat_source_snapshot": {
+      "status": "RUNNING",
+      "child_pid": 1135109,
+      "planned_groups": 64,
+      "closed_groups": 30,
+      "unresolved_groups": 0
     }
   },
   "phase34_validation": {
@@ -2247,5 +2269,22 @@
     "both_confirmation_PNGs_visually_checked": true,
     "v1_v2_plot_CSV_bytes_identical": true,
     "no_sha_validation": true
+  },
+  "plan_evidence_audit": {
+    "artifact": "/data/milai-experiments/20261112-reader-utility/plan-evidence-audit-v1.json",
+    "status": "PARTIAL_NOT_GOAL_COMPLETION",
+    "requirements_checked": 10,
+    "original_members_literal_equal": 5,
+    "original_tests_current_environment": 12,
+    "tiny_saved_tensor_equality": {
+      "utility-kl": 35,
+      "pair": 35
+    },
+    "formal_raw_runs_matched": 14,
+    "student_max_recorded_input": 10476,
+    "teacher_max_recorded_reference_input": 2434,
+    "universal_16k_teacher_capacity_tested": false,
+    "tracked_changes_outside_Lab_since_initial_integration": 0,
+    "scope": "Readsavedtestlog, originalfiles, implementation/tests, actualruns andtensors. No freshGPUfit/Teacher/Hostcalls. Actualworkloadcapacity only; incompletecost/repeats/synthesis preventcompletion."
   }
 }

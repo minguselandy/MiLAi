@@ -1,3 +1,25 @@
+# CURRENT phase43: all128secondReader calls CLOSED; repeat source64 RUNNING; partialaudit verified
+
+Goal ACTIVE/incomplete. KEEP ANALYSIS VERY SHORT. R=/data/milai-experiments/20261112-reader-utility.
+No SHA/content fingerprints/subagents/Product/default/servicechanges/push. No TESTretuning/firstreplacement.
+HTTP3538727 nowrepeat-sourcegrade child1135109, planned64groups,last30closed0unresolved.
+All128secondcalls CLOSED:fixed32complete0fail,expanded30/2,rules32/0,S130/2; all32newcalls/no reuseeach.
+Repeatnativeclosed foreach, fullrepeat3comparisons/stability stillpending. Firsts stayunchanged.
+Stability3763322 waitsHTTPterminal;216settlement3838848then123settlement3939766 waitsclosure. Do notmarkcomplete.
+PARTIALplan-evidence-audit-v1.json created, explicitlyNOTcompletion. OriginalZIP5members equalbytes,
+original-tests-current-environment.txt proves12passed,currenttorch2.7 vsarchivehistoricalvalidation2.10.
+GPUresidual-checkpoint tests'run/interrupted/resumed receipts checked:utilityKL/pair final35tensors each
+recheckedexactequal onCPU,savedGPUruns notrerun.14formalrawrunstatus/update/tokencounts matchinventory.
+Readimplementation/testcoverage F1/F2/F3, multi-request/query_once/realK/legalunion andactualfunctional16updates.
+Trackedgitdiff before51724699 integration tocurrentHEAD69paths, allLab. Thisistrackedcode scope, notglobalruntimeproof.
+Capacityaudit28productionblocks:Teacherlongestrecordedscoredref2434tokens; studentformalU9639/10k10476,
+state/headtruncation0. Teacherconfigured16384 isNOTtestedcapacity. Actuallong-endof2048material workload
+only; keepthisboundary explicit. Do NOTaddarbitrarylong-contextnewexperiment fromconfigurationnumber.
+implementation-audit-teacher-sequence-lengths-v1.json recordsperblock lengthscope, no newmodelcalls.
+Firstsourceprimary/authoragreement/figures remainCLOSEDphase42. No regrade ormoreDEVdiagnostics.
+Remainingrepeat64source/nativecomparisons/stability, finalclosedcostcategory/overlap/unknownscopes,
+globalmechanism/five-layer synthesis andfinalplancompletionaudit. No per-shellaccountingproject.
+
 # CURRENT phase42: firstsourceprimary/authoragreement/figures CLOSED; secondReader RUNNING
 
 Goal ACTIVE/incomplete. KEEP ANALYSIS VERY SHORT. R=/data/milai-experiments/20261112-reader-utility.
