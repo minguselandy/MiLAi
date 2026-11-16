@@ -93,3 +93,51 @@ def test_query_prefix_alignment_is_per_binding_with_old_route_unchanged():
                                        else ["", "actual task query"])
         action = json.loads(captured["texts"][1])
         assert ("proposed_delivery" in action) == (representation == "query_delivery_pair_v3")
+
+
+def test_parameter_free_block_normalization_keeps_permutation_and_zero_gradients_finite():
+    torch = pytest.importorskip("torch")
+    from milai_lab.methods.small_control_model import build_action_head
+
+    torch.manual_seed(2)
+    raw = build_action_head(4, 8)
+    torch.manual_seed(2)
+    normalized = build_action_head(4, 8, feature_normalization="block_layernorm_v2")
+    assert raw.state_dict().keys() == normalized.state_dict().keys()
+    assert all(torch.equal(value, normalized.state_dict()[key])
+               for key, value in raw.state_dict().items())
+    state, actions = torch.randn(1, 4), torch.randn(3, 4)
+    owners = torch.zeros(3, dtype=torch.long)
+    order = torch.tensor([2, 0, 1])
+    assert torch.allclose(normalized(state, actions, owners)[order],
+                          normalized(state, actions[order], owners))
+    zeros = torch.zeros(3, 4, requires_grad=True)
+    loss = normalized(torch.zeros(1, 4), zeros, owners).sum()
+    loss.backward()
+    assert torch.isfinite(loss) and torch.isfinite(zeros.grad).all()
+
+
+def test_frozen_and_lora_encoder_start_with_same_head_despite_adapter_rng(monkeypatch):
+    torch = pytest.importorskip("torch")
+    transformers = pytest.importorskip("transformers")
+    pytest.importorskip("peft")
+    from types import SimpleNamespace
+
+    from milai_lab.methods.small_control_model import SmallControlConfig, SmallControlModel
+
+    def tiny_backbone(*args, **kwargs):
+        return transformers.BertModel(transformers.BertConfig(vocab_size=32, hidden_size=16,
+            intermediate_size=32, num_hidden_layers=1, num_attention_heads=2))
+    monkeypatch.setattr(transformers.AutoModel, "from_pretrained", tiny_backbone)
+    monkeypatch.setattr(transformers.AutoTokenizer, "from_pretrained",
+                        lambda *args, **kwargs: SimpleNamespace(pad_token_id=0))
+    torch.manual_seed(11)
+    frozen = SmallControlModel(SmallControlConfig("frozen_mlp", "unused"))
+    torch.manual_seed(11)
+    adapted = SmallControlModel(SmallControlConfig("encoder", "unused", adaptation="lora",
+        lora_target_modules=("query", "value")))
+    assert all(torch.equal(tensor, adapted.head.state_dict()[key])
+               for key, tensor in frozen.head.state_dict().items())
+    assert not any(p.requires_grad for p in adapted.encoder.get_input_embeddings().parameters())
+    assert any("lora_B" in name and p.requires_grad
+               for name, p in adapted.encoder.named_parameters())

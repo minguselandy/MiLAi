@@ -32,6 +32,7 @@ class SmallControlConfig:
     state_representation: str = "whole_v1"
     action_representation: str = "binding_v1"
     lora_target_modules: tuple[str, ...] = ("q_proj", "v_proj")
+    feature_normalization: str = "raw_v1"
 
 
 def conditioned_chunks(body: list[int], context: list[int], limit: int) -> list[list[int]]:
@@ -54,8 +55,12 @@ def conditioned_chunks(body: list[int], context: list[int], limit: int) -> list[
     return result
 
 
-def build_action_head(width: int, hidden: int, *, set_interaction: bool = False) -> Any:
+def build_action_head(width: int, hidden: int, *, set_interaction: bool = False,
+                      feature_normalization: str = "raw_v1") -> Any:
     import torch  # type: ignore[import-not-found]
+
+    if feature_normalization not in {"raw_v1", "block_layernorm_v2"}:
+        raise ValueError("Unknown action-head feature normalization")
 
     class ActionHead(torch.nn.Module):  # type: ignore[misc]
         def __init__(self) -> None:
@@ -71,6 +76,8 @@ def build_action_head(width: int, hidden: int, *, set_interaction: bool = False)
                 pooled = torch.zeros_like(state).index_add(0, owners, actions)
                 counts = torch.bincount(owners, minlength=len(state)).clamp_min(1)
                 features.append((pooled / counts[:, None])[owners])
+            if feature_normalization == "block_layernorm_v2":
+                features = [torch.nn.functional.layer_norm(block, (width,)) for block in features]
             return self.network(torch.cat(features, dim=-1)).squeeze(-1)
 
     return ActionHead()
@@ -114,7 +121,8 @@ class SmallControlModel:
         # and LoRA encoder probes really begin with the same head parameters.
         width = self.encoder.config.hidden_size
         self.head = build_action_head(width, config.hidden_size,
-                                      set_interaction=config.set_interaction).to(self.device)
+            set_interaction=config.set_interaction,
+            feature_normalization=config.feature_normalization).to(self.device)
         if config.adaptation == "lora":
             from peft import LoraConfig, get_peft_model  # type: ignore[import-not-found]
 

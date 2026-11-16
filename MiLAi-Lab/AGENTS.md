@@ -1,4 +1,42 @@
-# CURRENT 2026-11-17: P05 true context-overfit48 RUNNING
+# CURRENT 2026-11-17: P07 Reader firsts RUNNING; R00 metadata preparation CLOSED
+
+Full original small-model control goal ACTIVE/INCOMPLETE. Latest artifacts:
+R=/data/milai-experiments/20261116-small-memory-control/current-state-v2.json.
+No subagents, SHA/checksums/fingerprints, new services/Product defaults, push or merge.
+All P02–P07 fits and16rootDEVtrajectory preparations CLOSED. Only live model job:
+P07-twelve-policy-devfit16-firsts-v1, exec60836, PID3840195 (revalidate actual PID/status).
+576planned policy positions on48tasks/16roots, prior480positions reused only by exact
+declared same-event/wire first identity, including failures; NEVER restart/retry/replace firsts.
+P02/P04/P05/P06 task first scores closed: fixed/rules48/48; M0/M1/M2/CE5/6/5/7;
+query-pair/delivery-pair0/5; encoderLoRA48/normalized-head7/8. No benefit/adoption claim.
+P05 true48state/4root fit: frozen27, encoderLoRA42. All24saved LoRA B tensors nonzero,
+initialheads exactly equal, embeddings frozen. P06 parameter-free blockLayerNorm fit46/48,
+querypairs14/16 bothcorrect; same393729headparams. Raw default preserved. Numeric probe:
+initial hiddenRMS.0255→.516; GELU departure from.5x1.66%→30.05%. Necessary baseline, not novelty.
+P07 normalized4/16/64root curves: TRAIN46/48,135/192,443/768; held16rootDEV complete
+packets8/10/12of48, fixed48/48. Same200updates/3200samples, epochs differ. Per card only
+two new fits; no automatic expansion of poorly generalizing frozen recipe.
+R00 checked native QA as measurement fallback, not by model results. Only Hotpot validation
+id/context.title read; no question/answer/support/sentences inspected for scoring/training.
+All localMuSiQue title IDs96343 conservatively excluded;4538of7405eligible,3288greedy
+all-context-title-disjoint candidates. No confirmation frozen/opened/evaluated. HFParquet
+conversion documented after originalCMUHTTPS failed. Native support-reference metric must
+be labeled an adaptation, not officialjointEM/semantic truth; reuse existing MuSiQue/QASPER
+executor where possible. TRAINshards NOTdownloaded; no Hotpot model job begun.
+PyArrow18.1 isolated R/R00-native-source-preparation-v1/deps (prepend toPYTHONPATH formetadata).
+Lockedtyping deps R/locked-typing-deps; use PYTHONPATH=src:R/locked-typing-deps forCI-mypy,
+NOT MYPYPATH (the latter incorrectly audits third-party stubs as owned code).
+Lab fullRuff, package/tools boundaries, verificationmatrix360sources andCIcore57filemypy PASS.
+Memory/evidence_quotes source registration repaired. Final unified255testsPASS/4oldGPUskip,
+including matched-head actual tinyBERT/LoRA regression. Fullpytest/remoteCI not claimed.
+Current working delta: opt-in feature_normalization raw_v1/block_layernorm_v2, tests,
+Lab source_identity registration and this report. No fullCI/T/M/success/innovation claim.
+Next: close native60836, score with frozenP06source, settle remaining closed scopes once
+in ORIGINAL budget (parents/copies already charged must not rebill). Preserve all negatives;
+advance reliable native-reference natural task protocol/source roles before more toy scale.
+Full E01-E08, strong usablebridge/G1,3seeds,2mechanisms, confirmation/transfer/L remain required.
+
+# CURRENT 2026-11-17: P05 true context-overfit48 checkpoint
 
 Full goal ACTIVE/incomplete; R/current-state-v2.json is latest. R=/data/milai-experiments/
 20261116-small-memory-control. No subagents/SHA/fingerprints/newservices/defaultchanges/push.
