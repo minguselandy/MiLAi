@@ -1,10 +1,11 @@
 """Use the established CUDA SDK first, then append existing HTTP/graph dependencies."""
+
 import runpy
 import sys
 from pathlib import Path
 
-import transformers
 import tokenizers
+import transformers
 
 assert transformers.__version__ == "4.52.3"
 assert tokenizers.__version__ == "0.21.4"

@@ -8,7 +8,7 @@ from __future__ import annotations
 import inspect
 import json
 from dataclasses import dataclass
-from typing import Any
+from typing import Any, cast
 
 TEMPLATE_VERSION = "reader-direct-answer-v1"
 SYSTEM = (
@@ -70,7 +70,7 @@ def encode_answer(tokenizer: Any, messages: list[dict[str, str]], answer: str,
 
 def answer_batch(sequences: list[AnswerSequence], pad_id: int, device: Any) -> dict[str, Any]:
     """Left padding aligns answer ends; project at most max(answer length) positions."""
-    import torch
+    import torch  # type: ignore[import-not-found]
 
     if not sequences or any(s.answer_start < 1 or s.answer_tokens < 1 for s in sequences):
         raise ValueError("Each sequence requires a prefix and a nonempty answer")
@@ -116,11 +116,11 @@ class TransformersReaderTeacher:
         import torch
         from transformers import AutoModelForCausalLM, AutoTokenizer
 
-        self.tokenizer = AutoTokenizer.from_pretrained(model_path, local_files_only=True,
+        self.tokenizer = cast(Any, AutoTokenizer).from_pretrained(model_path, local_files_only=True,
                                                        use_fast=True)
         if not self.tokenizer.is_fast:
             raise ValueError("This backend requires a fast tokenizer with answer offsets")
-        self.model = AutoModelForCausalLM.from_pretrained(
+        self.model = cast(Any, AutoModelForCausalLM).from_pretrained(
             model_path, local_files_only=True, torch_dtype=(torch.bfloat16 if precision == "bf16"
                                                            else torch.float32),
             attn_implementation="sdpa").to(device).eval()

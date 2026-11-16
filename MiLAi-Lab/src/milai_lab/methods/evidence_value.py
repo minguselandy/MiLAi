@@ -12,7 +12,7 @@ import json
 from collections.abc import Callable
 from typing import Any
 
-from jsonschema import Draft202012Validator  # type: ignore[import-untyped]
+from jsonschema import Draft202012Validator
 
 from milai_lab.memory.working_set import plan_delivery
 from milai_lab.methods.edit_maintenance import parse_object

@@ -7,9 +7,9 @@ import uuid
 from contextlib import nullcontext
 from dataclasses import asdict
 from pathlib import Path
-from typing import Any, Literal
+from typing import Any, Literal, cast
 
-from jsonschema import ValidationError, validate  # type: ignore[import-untyped]
+from jsonschema import ValidationError, validate
 from langchain_core.language_models.chat_models import BaseChatModel
 from langchain_core.messages import AIMessage, BaseMessage, convert_to_openai_messages
 from langchain_core.outputs import ChatGeneration, ChatResult
@@ -357,7 +357,7 @@ class VLLMChatModel(BaseChatModel):
                 completion_metadata=completion_metadata,
             )
             try:
-                validate(action, prepared.schema)
+                validate(action, cast(dict[str, Any], prepared.schema))
             except ValidationError as exc:
                 event.schema_error = exc
                 self._notify_response(event)

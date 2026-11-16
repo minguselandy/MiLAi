@@ -312,7 +312,7 @@ class FunctionalMemory:
             material_limit,
             fragment_chars,
         )
-        self.policy = {
+        self.policy: dict[str, Any] = {
             "read_limit": read_limit,
             "material_limit": material_limit,
             "fragment_chars": fragment_chars,

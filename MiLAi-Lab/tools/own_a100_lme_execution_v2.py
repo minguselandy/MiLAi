@@ -1,4 +1,5 @@
 """Reuse frozen LME ownership with one declared bridge for the corrected untouched tail."""
+
 import copy
 import importlib.util
 import json
@@ -24,7 +25,9 @@ def correction_evidence(protocol):
 
 def original_owner(protocol):
     predecessor = read(protocol["execution_wiring_correction"]["predecessor_protocol"])
-    spec = importlib.util.spec_from_file_location("unchanged_lme_owner_v1", predecessor["frozen_owner_entry"])
+    spec = importlib.util.spec_from_file_location(
+        "unchanged_lme_owner_v1", predecessor["frozen_owner_entry"]
+    )
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
@@ -45,25 +48,43 @@ def continuation_plan(protocol, initial_name, previous_owner, serial, reflection
         assert prior_plan == predecessor["initial_stage_plans"][initial_name]
         assert Path(previous_owner).resolve() == Path(failure["actual_owner"]).resolve()
         assert Path(reflection).resolve() == Path(correction["failure_reflection"]).resolve()
-        assert read(Path(prior_plan["output"]) / "driver.json")["cases"][0] == failure["native_first_failed_case"]
+        assert (
+            read(Path(prior_plan["output"]) / "driver.json")["cases"][0]
+            == failure["native_first_failed_case"]
+        )
     driver = read(Path(prior_plan["output"]) / "driver.json")
     assert driver["status"] == "FAILED" and len(driver["cases"]) == 451
-    assert driver["schema"] == ("lme_prediction_cohort_v2" if base["stage_kind"] == "prediction" else "lme_scoring_cohort_v2")
+    assert driver["schema"] == (
+        "lme_prediction_cohort_v2"
+        if base["stage_kind"] == "prediction"
+        else "lme_scoring_cohort_v2"
+    )
     untouched = "NOT_RUN" if base["stage_kind"] == "prediction" else "UNSCORED_COMPLETED"
     positions = [i for i, case in enumerate(driver["cases"]) if case["status"] == untouched]
-    assert positions and Path(reflection).is_file() and serial == prior_plan.get("continuation_serial", 0) + 1
+    assert (
+        positions
+        and Path(reflection).is_file()
+        and serial == prior_plan.get("continuation_serial", 0) + 1
+    )
     if prior_plan["protocol"] != base["protocol"]:
         assert positions == failure["untouched_indices"]
     name = f"{initial_name}-continuation-{serial:03d}"
     stage_root = Path(protocol["stage_directory"])
     plan = copy.deepcopy(base)
-    plan.update(name=name, initial_stage=initial_name, previous_owner=str(Path(previous_owner).resolve()),
-        continued_from=prior_plan["output"], unattempted_indices=positions,
-        reflection=str(Path(reflection).resolve()), continuation_serial=serial,
-        output=str(stage_root / (name + "-output")), owner=str(stage_root / (name + "-owner.json")),
+    plan.update(
+        name=name,
+        initial_stage=initial_name,
+        previous_owner=str(Path(previous_owner).resolve()),
+        continued_from=prior_plan["output"],
+        unattempted_indices=positions,
+        reflection=str(Path(reflection).resolve()),
+        continuation_serial=serial,
+        output=str(stage_root / (name + "-output")),
+        owner=str(stage_root / (name + "-owner.json")),
         log=str(stage_root / (name + ".log")),
         budget_before_snapshot=str(stage_root / (name + "-budget-before.json")),
-        client_compute_phase=base["client_compute_phase"] + f"-continuation-{serial:03d}")
+        client_compute_phase=base["client_compute_phase"] + f"-continuation-{serial:03d}",
+    )
     plan["argv"][plan["argv"].index(base["output"])] = plan["output"]
     if base["stage_kind"] == "prediction":
         plan["inference"] = str(stage_root / (name + "-inference.json"))

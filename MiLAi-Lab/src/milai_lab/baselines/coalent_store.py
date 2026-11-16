@@ -24,7 +24,7 @@ class StoreCognitionStore:
 
     @staticmethod
     def _decode(value: dict[str, Any]) -> Any:
-        from coalent.semantic.serde import cognition_from_json
+        from coalent.semantic.serde import cognition_from_json  # type: ignore[import-not-found]
 
         return cognition_from_json(json.dumps(value, ensure_ascii=False))
 
@@ -128,7 +128,7 @@ class SourceRetriever:
         self.persistence = StoreCognitionStore(service)
 
     def retrieve(self, query: str, *, namespace: str | None = None) -> list[Any]:
-        from coalent.semantic.ports import Chunk
+        from coalent.semantic.ports import Chunk  # type: ignore[import-not-found]
 
         refs = list(dict.fromkeys(self.search(query, namespace)))
         chunks, unavailable, available = [], [], []

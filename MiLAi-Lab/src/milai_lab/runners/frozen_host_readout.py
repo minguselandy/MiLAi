@@ -8,7 +8,7 @@ from dataclasses import asdict
 from pathlib import Path
 from typing import Any
 
-from jsonschema import validate  # type: ignore[import-untyped]
+from jsonschema import validate
 
 from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.harness.contextual_artifacts import RunLimits, Trace, entry_budget, http_budget_scope

@@ -497,7 +497,7 @@ class AdaptiveMemoryHost(ObservationalMemoryHost):
         self, raw: str, *, mode: str, context: dict[str, Any],
         batch: list[int], compact: list[str],
     ) -> dict[str, Any]:
-        from jsonschema import ValidationError, validate  # type: ignore[import-untyped]
+        from jsonschema import ValidationError, validate
 
         value = json.loads(raw)
         try:

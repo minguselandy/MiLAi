@@ -13,7 +13,7 @@ import time
 from collections.abc import Callable
 from typing import Any, Literal
 
-from jsonschema import Draft202012Validator  # type: ignore[import-untyped]
+from jsonschema import Draft202012Validator
 
 from milai_lab.memory.functional_state import FunctionalRejection, body_text
 from milai_lab.memory.service import MemoryService

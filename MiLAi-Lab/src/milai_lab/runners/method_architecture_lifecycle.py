@@ -9,7 +9,7 @@ from dataclasses import asdict
 from pathlib import Path
 from typing import Any
 
-from jsonschema import Draft202012Validator  # type: ignore[import-untyped]
+from jsonschema import Draft202012Validator
 
 from milai_lab.baselines.langmem_sqlite_store import TransactionalSqliteStore as SqliteStore
 from milai_lab.datasets.edit_benchmarks import ObservedSession, halumem_session, halumem_users

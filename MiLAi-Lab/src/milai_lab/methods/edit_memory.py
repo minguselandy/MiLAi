@@ -11,7 +11,7 @@ import json
 from collections.abc import Sequence
 from typing import Any, Literal
 
-from jsonschema import Draft202012Validator  # type: ignore[import-untyped]
+from jsonschema import Draft202012Validator
 
 from milai_lab.contracts.memory import ObservationProfile
 from milai_lab.memory.dependency_groups import apply_support_groups

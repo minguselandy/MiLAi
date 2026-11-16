@@ -11,7 +11,7 @@ from collections.abc import Mapping, Sequence
 from copy import deepcopy
 from typing import Any
 
-from jsonschema import validate  # type: ignore[import-untyped]
+from jsonschema import validate
 
 from milai_lab.application.document_publication import document_schemas
 from milai_lab.application.tools import BUSINESS_SCHEMAS

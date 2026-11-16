@@ -37,8 +37,11 @@ external-mem0 = [
 dev = [
   "build>=1.2,<2",
   "mypy>=1.14,<2",
+  "pillow>=11,<13",
   "pytest>=8.3,<9",
+  "pytrec-eval-terrier>=0.5.6,<0.6",
   "ruff>=0.9,<1",
+  "types-jsonschema>=4,<5",
 ]
 
 [tool.hatch.build.targets.wheel]
@@ -99,6 +102,7 @@ exclude = [
 [tool.pytest.ini_options]
 addopts = "-ra --strict-config --strict-markers"
 testpaths = ["tests"]
+pythonpath = ["src", "tools"]
 markers = [
   "integration: requires a pinned MiLAi product instance",
   "e2e: runs a bounded end-to-end experiment",

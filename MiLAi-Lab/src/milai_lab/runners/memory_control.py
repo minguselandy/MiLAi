@@ -118,7 +118,7 @@ def memory_policy(
         if model is None and models is not None:
             model = models.get(model_key)
         if model is None:
-            import torch
+            import torch  # type: ignore[import-not-found]
 
             torch.set_num_threads(config.get("threads", 4))
             started, cpu = time.perf_counter(), time.process_time()

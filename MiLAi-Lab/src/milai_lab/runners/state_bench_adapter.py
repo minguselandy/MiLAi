@@ -26,7 +26,7 @@ def learning_envelope(packet: dict[str, Any]) -> dict[str, list[str]]:
     return {"learnings": [canonical(packet)]}
 
 
-MEMORY_SCHEMA = {
+MEMORY_SCHEMA: dict[str, Any] = {
     "type": "function", "name": "retrieve_learnings",
     "description": "Retrieve source-bound historical evidence relevant to the current task. "
                    "An interpretation is not an original statement or current business state. "
@@ -51,7 +51,7 @@ RETRIEVAL_INSTRUCTION = (
 def run_with_domain_snapshots(environment: Any, output: Path,
                               operation: Callable[[], Any]) -> Any:
     """Preserve sandbox effects even if a later Host/simulator call fails."""
-    from state_bench.schemas import StateDiff
+    from state_bench.schemas import StateDiff  # type: ignore[import-not-found]
 
     before = environment.get_full_snapshot()
     write_json(output / "state-before.json", before)
@@ -240,7 +240,11 @@ def make_state_agent(model: Any, hook: StateMemoryHook | StateReadOnlyMemoryHook
                      host_instructions: str = "",
                      observe_host: Callable[[dict[str, Any]], None] = lambda _: None) -> Any:
     """Use the public BaseAgent hook without retaining hidden evaluator context."""
-    from state_bench.agents.base import AgentRuntimeContext, AgentTurnResponse, BaseAgent
+    from state_bench.agents.base import (  # type: ignore[import-not-found]
+        AgentRuntimeContext,
+        AgentTurnResponse,
+        BaseAgent,
+    )
 
     if initial_retrieval is not None:
         from jsonschema import validate

@@ -9,7 +9,7 @@ from contextlib import contextmanager
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, Literal, cast
 
-from jsonschema import ValidationError, validate  # type: ignore[import-untyped]
+from jsonschema import ValidationError, validate
 from langchain_core.embeddings import Embeddings
 from langchain_core.messages import AIMessage, BaseMessage, HumanMessage, ToolMessage
 from langchain_core.runnables import RunnableConfig

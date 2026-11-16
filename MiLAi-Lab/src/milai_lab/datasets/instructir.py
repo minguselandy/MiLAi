@@ -84,7 +84,7 @@ def evaluate_rankings(
     zeros in the complete cohort, not silently removed from either denominator.
     No actual prediction or qrel is modified in place.
     """
-    import pytrec_eval  # type: ignore[import-not-found]
+    import pytrec_eval
 
     ids = [row["_id"] for row in queries]
     cohort = set(ids)

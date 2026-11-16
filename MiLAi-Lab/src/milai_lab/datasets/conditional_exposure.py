@@ -101,9 +101,9 @@ def condition_stratified_auxiliary_panel(
                     for side in ("left", "right")}
         stable_neighbors: dict[int, set[int]] = defaultdict(set)
         for group in negative_pairs.values():
-            for left, right in group:
-                stable_neighbors[left].add(right)
-                stable_neighbors[right].add(left)
+            for left_index, right_index in group:
+                stable_neighbors[left_index].add(right_index)
+                stable_neighbors[right_index].add(left_index)
         for strata in conditions.values():
             native = [i for i in strata[False] if any(
                 j["native_field"] == "new_negatives"

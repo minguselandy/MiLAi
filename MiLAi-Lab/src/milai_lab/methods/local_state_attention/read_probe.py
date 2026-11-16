@@ -7,7 +7,7 @@ import json
 import math
 from typing import Any
 
-from jsonschema import validate  # type: ignore[import-untyped]
+from jsonschema import validate
 
 from milai_lab.methods.local_state_attention.integration import _render_view
 from milai_lab.methods.local_state_attention.protocol import (

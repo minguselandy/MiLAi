@@ -11,7 +11,7 @@ from dataclasses import asdict, dataclass, field, replace
 from typing import TYPE_CHECKING, Any, Literal, cast
 from uuid import uuid4
 
-from jsonschema import ValidationError, validate  # type: ignore[import-untyped]
+from jsonschema import ValidationError, validate
 
 from milai_lab.methods.contextual_memory.decision_basis import (
     STATE_DELTA_SCHEMA,

@@ -19,7 +19,7 @@ def xor_bytes(left: bytes, right: bytes) -> bytes:
                          np.frombuffer(right, dtype=np.uint8)).tobytes()
 
 
-def archive_weight(weight: Path, base: Path, destination: Path) -> dict:
+def archive_weight(weight: Path, base: Path, destination: Path) -> dict[str, str | int | bool]:
     """Verify every reconstructed byte, persist restoration metadata, then remove weight.
 
     The caller must ensure the model run is closed and retain the immutable base.
@@ -51,7 +51,8 @@ def archive_weight(weight: Path, base: Path, destination: Path) -> dict:
         if (after.st_ino, after.st_size, after.st_mtime_ns) != (
                 before.st_ino, before.st_size, before.st_mtime_ns):
             raise ValueError("Closed checkpoint changed while being archived")
-    record = {"schema": "closed_weight_xor_gzip_v1", "original_path": str(weight.resolve()),
+    record: dict[str, str | int | bool] = {
+        "schema": "closed_weight_xor_gzip_v1", "original_path": str(weight.resolve()),
         "base": str(base.resolve()), "delta": str(destination.resolve()),
         "logical_bytes": original.st_size, "mode": stat.S_IMODE(original.st_mode),
         "mtime_ns": original.st_mtime_ns, "original_allocated_bytes": original.st_blocks * 512,

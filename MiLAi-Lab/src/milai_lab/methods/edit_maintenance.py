@@ -11,7 +11,7 @@ import json
 from collections.abc import Callable
 from typing import Any, Literal
 
-from jsonschema import Draft202012Validator  # type: ignore[import-untyped]
+from jsonschema import Draft202012Validator
 from jsonschema import ValidationError as SchemaError
 from pydantic import ValidationError
 

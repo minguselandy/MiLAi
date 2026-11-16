@@ -195,8 +195,16 @@ def test_generic_hooks_run_around_one_accounted_transport(fail_http: bool) -> No
 
 def test_manual_order_and_edges_match_whole_frozen_contracts() -> None:
     expected = json.loads((GOLDEN / "provider-manual-golden.json").read_text())["contracts"]
+    # 1541deec fixed the invalid empty oneOf branch; retain the historical fixture.
+    expected["json_zero_tools"] = json.loads(
+        (LAB / "tests/fixtures/provider-zero-tools-contract.json").read_text()
+    )["contract"]
     assert manual_capture(LangMemRecipeChatModel) == expected
     expected = json.loads((GOLDEN / "provider-edges-golden.json").read_text())["contracts"]
+    # Capacity failures now retain the exact attempted request for offline diagnosis.
+    expected["provider"]["capacity_admission"]["ordered_events"][1]["event"]["request"] = (
+        json.loads((LAB / "tests/fixtures/provider-capacity-rejected-request.json").read_text())
+    )
     assert edges_capture(LangMemRecipeChatModel, LAB) == expected
 
 

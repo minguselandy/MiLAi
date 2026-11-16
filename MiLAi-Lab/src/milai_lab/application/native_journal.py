@@ -12,7 +12,7 @@ import uuid
 from collections.abc import Callable
 from typing import Any
 
-from jsonschema import validate  # type: ignore[import-untyped]
+from jsonschema import validate
 from langchain_core.messages import AIMessage, ToolMessage
 
 from milai_lab.application.document_publication import document_recovery_effect, document_schemas

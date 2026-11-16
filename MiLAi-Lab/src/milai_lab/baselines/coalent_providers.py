@@ -37,7 +37,7 @@ class CoalentGenerationProvider:
 
     def generate(self, *, model: str, system: str, user: str, max_tokens: int,
                  temperature: float) -> Any:
-        from coalent.semantic.ports import Generation, Usage
+        from coalent.semantic.ports import Generation, Usage  # type: ignore[import-not-found]
 
         self.admit()
         request: dict[str, Any] = {"model": model, "messages": [

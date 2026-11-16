@@ -1,3 +1,12 @@
+# CURRENT 2026-11-16: GitHub integration authorized
+
+The user requested GitHub submission and completion of the merge. PR125 integrates
+this branch into main. Complete repository CI and merge without starting experiments.
+The completed phase44 results and all frozen evidence below remain unchanged.
+Post-experiment work repairs CI test ownership/dependencies, typing, audit-tool style,
+and finite reviewed LME loaders. Historical validation records retain their original status.
+No model jobs, new scientific scoring, Product/default changes or large artifact uploads.
+
 # CURRENT phase44: declared plan execution VERIFIED COMPLETE; no experiment work remains
 
 R=/data/milai-experiments/20261112-reader-utility. Worktree a100-development-20261104/MiLAi-Lab.

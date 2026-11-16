@@ -14,7 +14,7 @@ from pathlib import Path
 from typing import Any, Literal, cast
 
 import httpx
-from jsonschema import Draft202012Validator  # type: ignore[import-untyped]
+from jsonschema import Draft202012Validator
 from pydantic import ValidationError
 from transformers import AutoTokenizer
 

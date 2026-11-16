@@ -4,6 +4,7 @@ This experiment adapter changes observation/copy wiring only. Native public inpu
 retrieval execution, complete-input guard, image binding, Reader and scoring remain
 in the frozen runtime. It never dispatches a subsequent method or retries an outcome.
 """
+
 from __future__ import annotations
 
 import argparse
@@ -29,12 +30,18 @@ def archive_control_snapshots():
         assert base.is_dir()
         original(root, bank_root, destination)
         details = archive_case(destination, destination.with_name("before.tar.gz"), base)
-        write_json(destination.with_name("before-archive.json"), {
-            "status": "COMPLETE_BEFORE_ARCHIVED_EVERY_RECONSTRUCTED_BYTE_EQUAL",
-            "snapshot": str(destination), **details,
-            "original_snapshot_reconstructible": True,
-            "Source_state_head_menu_or_bindings_shortened": False,
-            "no_sha_validation": True, "ledger_recorded": False})
+        write_json(
+            destination.with_name("before-archive.json"),
+            {
+                "status": "COMPLETE_BEFORE_ARCHIVED_EVERY_RECONSTRUCTED_BYTE_EQUAL",
+                "snapshot": str(destination),
+                **details,
+                "original_snapshot_reconstructible": True,
+                "Source_state_head_menu_or_bindings_shortened": False,
+                "no_sha_validation": True,
+                "ledger_recorded": False,
+            },
+        )
 
     frozen_retrieval.copy_call_root = archived
     try:
@@ -54,9 +61,12 @@ def capture_original_calls(output: Path):
         row = read_json(output / "driver.json")["active_row"]
         assert kwargs["given_retrieval_request"] == {"query": kwargs["content"]}
         assert "retrieval_snapshots" not in kwargs and "retrieval_step_snapshots" not in kwargs
-        return original(root, **kwargs,
+        return original(
+            root,
+            **kwargs,
             retrieval_snapshots=output / "actual-retrieval-captures" / f"{row:04d}",
-            retrieval_step_snapshots=True)
+            retrieval_step_snapshots=True,
+        )
 
     lme_v2.message = captured
     try:
@@ -79,8 +89,11 @@ def replay_original_calls(output: Path, baseline: Path, config: Path):
     assert parent["schema"] == "lme_prediction_cohort_v2"
     assert parent["status"] in {"COMPLETED", "COMPLETED_WITH_RETAINED_FAILURES", "FAILED"}
     assert parent["planned_positions"] == len(parent["cases"]) == 451
-    assert all(case["status"] in {"COMPLETED", "FAILED_PREPARING_INPUT",
-        "FAILED_RETRIEVING", "FAILED_READING"} for case in parent["cases"])
+    assert all(
+        case["status"]
+        in {"COMPLETED", "FAILED_PREPARING_INPUT", "FAILED_RETRIEVING", "FAILED_READING"}
+        for case in parent["cases"]
+    )
     baseline_config = read_json(baseline / "configuration.json")
     current_config = read_json(config)
     before = entrypoint_settings(baseline_config, "functional")
@@ -89,7 +102,9 @@ def replay_original_calls(output: Path, baseline: Path, config: Path):
     assert after["memory_control"]["policy"] == "laya"
     original_control = before["memory_control"]
     adjusted = copy.deepcopy(after)
-    adjusted["memory_control"].update({key: original_control[key] for key in ("policy", "checkpoint")})
+    adjusted["memory_control"].update(
+        {key: original_control[key] for key in ("policy", "checkpoint")}
+    )
     assert adjusted == before
     # functional.message consumes the entire policy config rather than a patch.
     policy = copy.deepcopy(after["memory_control"])
@@ -103,8 +118,10 @@ def replay_original_calls(output: Path, baseline: Path, config: Path):
             row = read_json(output / "driver.json")["active_row"]
             base_case = parent["cases"][row]
             base_owner = Path(base_case["owner_predictions"])
-            candidates = list((base_owner / "actual-retrieval-captures" / f"{row:04d}").glob("*/call.json"))
-            call_path, = candidates
+            candidates = list(
+                (base_owner / "actual-retrieval-captures" / f"{row:04d}").glob("*/call.json")
+            )
+            (call_path,) = candidates
             captured = call_path.parent
             call = read_json(call_path)
             assert call["schema"] == "frozen_retrieval_call_v2"
@@ -114,12 +131,21 @@ def replay_original_calls(output: Path, baseline: Path, config: Path):
             assert not call["host_request_generated"]
             assert "control_checkpoint" not in call
             case_root = self.output / "cases" / f"{local_index:04d}"
-            report = {"status": "RUNNING", "row": row, "query": query, "query_image": query_image,
-                "automatic_retry": False, "baseline_capture": str(captured),
+            report = {
+                "status": "RUNNING",
+                "row": row,
+                "query": query,
+                "query_image": query_image,
+                "automatic_retry": False,
+                "baseline_capture": str(captured),
                 "host_request_regenerated": False,
-                "query_isolation": "Literal baseline pre-retrieval Store/Saver clone; no baseline answer enters.",
-                "policy_override": policy, "source_version": self.source_version,
-                "reader_called": False}
+                ("query_isolation"): (
+                    "Literal baseline pre-retrieval Store/Saver clone; no baseline answer enters."
+                ),
+                "policy_override": policy,
+                "source_version": self.source_version,
+                "reader_called": False,
+            }
             started, cpu = time.perf_counter(), time.process_time()
             try:
                 # Use the existing complete closed-template copier, retaining all history/image
@@ -127,28 +153,45 @@ def replay_original_calls(output: Path, baseline: Path, config: Path):
                 if not self.template.exists():
                     self.reuse_closed_template(Path(base_case["runtime"]).parents[1])
                 saved_before = read_json(captured / "before-archive.json")
-                assert saved_before["status"] == "COMPLETE_BEFORE_ARCHIVED_EVERY_RECONSTRUCTED_BYTE_EQUAL"
+                assert (
+                    saved_before["status"]
+                    == "COMPLETE_BEFORE_ARCHIVED_EVERY_RECONSTRUCTED_BYTE_EQUAL"
+                )
                 restore_case(Path(saved_before["archive"]), Path(saved_before["base"]), case_root)
-                result = message(case_root, bank=call["bank"], **call["public_message"],
-                    replay_retrieval=call, control_policy_override=policy, control_models=self.models,
-                    source_search_cache=self.source_search_cache, resume=True,
+                result = message(
+                    case_root,
+                    bank=call["bank"],
+                    **call["public_message"],
+                    replay_retrieval=call,
+                    control_policy_override=policy,
+                    control_models=self.models,
+                    source_search_cache=self.source_search_cache,
+                    resume=True,
                     retrieval_snapshots=output / "actual-retrieval-captures" / f"{row:04d}",
-                    retrieval_step_snapshots=True)
+                    retrieval_step_snapshots=True,
+                )
                 assert result["frozen_initial_observation_and_actions_equal"]
                 report["first_observation_and_all_legal_bindings_equal"] = True
                 if result["status"] != "COMPLETED":
-                    raise RuntimeError("First failed retrieval retained: " + str(result.get("error")))
-                # Keep the original native delivered-image projection, including every text/error field.
+                    raise RuntimeError(
+                        "First failed retrieval retained: " + str(result.get("error"))
+                    )
+                # Keep the original native delivered-image projection, including every text/error
+                # field.
                 settings = frozen(case_root)
                 bank_id = _bank_reference(case_root, settings["run_id"], self.bank, self.owner)
                 directory = case_root / "banks" / bank_id
                 media = self.media
                 with SqliteStore.from_conn_string(str(directory / "memory.sqlite")) as store:
-                    service = MemoryService(store,
-                        ("functional", settings["run_id"], self.bank, self.owner), self.owner,
-                        directory / "memory.lock", functional_contract="functional_v1",
+                    service = MemoryService(
+                        store,
+                        ("functional", settings["run_id"], self.bank, self.owner),
+                        self.owner,
+                        directory / "memory.lock",
+                        functional_contract="functional_v1",
                         memory_profile=settings["config"]["memory_profile"],
-                        memory_ranking=settings["config"]["memory_ranking"])
+                        memory_ranking=settings["config"]["memory_ranking"],
+                    )
                     context = delivered_image_context(service, result["retrieval_result"], media)
                 write_json(case_root / "memory-context.json", context)
                 report.update(status="COMPLETED", images=sum(c["type"] == "image" for c in context))
@@ -158,8 +201,11 @@ def replay_original_calls(output: Path, baseline: Path, config: Path):
                 report.update(status="FAILED", error_type=type(error).__name__, error=str(error))
                 raise
             finally:
-                report.update(cpu_seconds_nested=time.process_time()-cpu,
-                    wall_seconds=time.perf_counter()-started, ledger_recorded=False)
+                report.update(
+                    cpu_seconds_nested=time.process_time() - cpu,
+                    wall_seconds=time.perf_counter() - started,
+                    ledger_recorded=False,
+                )
                 write_json(case_root / "query.json", report)
 
     lme_evaluation.LmeMemoryBackend = PairedBackend
@@ -202,15 +248,33 @@ def main():
         for source, saved in [
             (args.snapshot / "questions.jsonl", "questions.jsonl"),
             (args.snapshot / "trajectories.jsonl", "trajectories.jsonl"),
-            (args.snapshot / "haystacks/lme_v2_small.json", "haystacks.json")]:
-            assert source.read_bytes() == (args.replay_baseline / "offline-input" / saved).read_bytes()
+            (args.snapshot / "haystacks/lme_v2_small.json", "haystacks.json"),
+        ]:
+            assert (
+                source.read_bytes() == (args.replay_baseline / "offline-input" / saved).read_bytes()
+            )
         observe = replay_original_calls(args.output, args.replay_baseline, args.config)
     with archive_control_snapshots(), observe:
-        result = predict_cohort(args.config, args.snapshot, args.upstream, args.output,
-            source_version=args.source_version, continue_from=args.continue_unattempted)
-    print(json.dumps({"status": result["status"], "positions": result["planned_positions"],
-        "actual_retrieval_capture": True, "paired_baseline": str(args.replay_baseline),
-        "automatic_retry": False}), flush=True)
+        result = predict_cohort(
+            args.config,
+            args.snapshot,
+            args.upstream,
+            args.output,
+            source_version=args.source_version,
+            continue_from=args.continue_unattempted,
+        )
+    print(
+        json.dumps(
+            {
+                "status": result["status"],
+                "positions": result["planned_positions"],
+                "actual_retrieval_capture": True,
+                "paired_baseline": str(args.replay_baseline),
+                "automatic_retry": False,
+            }
+        ),
+        flush=True,
+    )
 
 
 if __name__ == "__main__":

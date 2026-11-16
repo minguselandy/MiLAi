@@ -34,7 +34,12 @@ class NativeDecision:
         Only state/questions are consumed. The caller owns this ordinary in-memory
         cache; no content digest, global registry or cached hidden states are used.
         """
-        from laya.common import build_head, build_sequence, encode_text, serialize_state
+        from laya.common import (  # type: ignore[import-not-found]
+            build_head,
+            build_sequence,
+            encode_text,
+            serialize_state,
+        )
         from laya.train import encode_item, make_item, to_internal
 
         prepared = []
@@ -125,7 +130,7 @@ class NativeDecision:
 
     def predict(self, payload: dict[str, Any]) -> dict[str, Any]:
         import torch
-        from laya.common import (  # type: ignore[import-not-found]
+        from laya.common import (
             build_head,
             build_sequence,
             collate_items,

@@ -24,7 +24,7 @@ class MemPursuitPool:
     def __call__(self, query: str, materials: list[dict[str, Any]]) -> list[dict[str, Any]]:
         if not materials:
             return []
-        from mempursuit import select
+        from mempursuit import select  # type: ignore[import-not-found]
 
         started, cpu = time.perf_counter(), time.process_time()
         texts = [json.dumps({key: value for key, value in project_pack(item, i).items()

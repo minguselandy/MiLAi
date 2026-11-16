@@ -12,7 +12,7 @@ from pathlib import Path
 from typing import TYPE_CHECKING, Any
 
 import httpx
-from jsonschema import ValidationError, validate  # type: ignore[import-untyped]
+from jsonschema import ValidationError, validate
 
 from milai_lab.harness.contextual_artifacts import read_json, write_json
 from milai_lab.methods.local_state_attention.protocol import (

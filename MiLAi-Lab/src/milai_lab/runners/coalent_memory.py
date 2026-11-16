@@ -16,7 +16,7 @@ def coalent_factory(
     record: Callable[[dict[str, Any]], None], *, enable_thinking: bool | None = None,
 ) -> Callable[[SourceRetriever, StoreCognitionStore], Any]:
     """No provider discovery/install; the caller supplies the patched core on PYTHONPATH."""
-    from coalent.semantic import LLMSynthesizer, SemanticCache
+    from coalent.semantic import LLMSynthesizer, SemanticCache  # type: ignore[import-not-found]
 
     provider = CoalentGenerationProvider(model.client,
         admit=lambda: model.reserve_external_request("coalent_synthesis"),
