@@ -2012,8 +2012,9 @@ def test_local_revision_delivers_unlinked_overview_and_keeps_unaffected_scopes(
         else:
             assert actual_input["records"] == request["packet"]["records"]
             assert actual_input["source_table"] == request["packet"]["source_table"]
-            assert list(actual_input).index("evidence") < list(actual_input).index(
-                "change_candidates") < list(actual_input).index("records")
+            # Empty locating hints are omitted; original evidence still precedes records.
+            assert "change_candidates" not in actual_input
+            assert list(actual_input).index("evidence") < list(actual_input).index("records")
         bodies = [*actual_input["evidence"], *actual_input.get("redelivered_support", [])]
         assert [(e["text"], e["delivery_kind"]) for e in bodies] == [
             (correction_text, "current"), (initial_text, "redelivered_support")

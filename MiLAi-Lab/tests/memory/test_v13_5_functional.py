@@ -2669,12 +2669,21 @@ def test_request_targets_exact_history_index_body_pages_and_structured_goal(tmp_
         assert set(current['reading_basis']) == {'current_at_snapshot'}
         tool = next(tool for tool in memory.tools() if tool.name == 'read_memory')
         assert set(tool.tool_call_schema['properties']) == {'target', 'keep_resident', 'read_goal'}
-        for bad in [
-            {'purpose': 'Read', 'evidence': ['unknown_category']},
-            {**goal, 'sufficient': True},
-        ]:
-            with pytest.raises(ValidationError):
-                invoke(memory, 'read_memory', {'target': target, 'read_goal': bad}, 'bad-goal')
+        with pytest.raises(ValidationError):
+            invoke(memory, 'read_memory', {'target': target, 'read_goal': {
+                'purpose': 'Read', 'evidence': ['unknown_category'],
+            }}, 'bad-goal')
+        # 81e7ce48 retains semantic extensions literally, without certifying their claims.
+        from milai_lab.memory.retrieval_request import StructuredReadGoal
+
+        declared = {**goal, 'sufficient': True}
+        assert StructuredReadGoal.model_validate(declared).model_dump(
+            exclude_unset=True) == declared
+        declared_requirement = read_requirement_status(
+            {**memory.view_state(cfg()), 'read_goal': declared}, current['items'],
+            continuations=[continuation])
+        assert declared_requirement['answer_sufficiency'] == 'unchecked'
+        assert declared_requirement == requirement
         history = current['items'][0]['stored_history']
         assert [entry['revision'] for entry in history['revision_targets']] == list(range(1, 7))
         exact_target = history['revision_targets'][0]['target']
